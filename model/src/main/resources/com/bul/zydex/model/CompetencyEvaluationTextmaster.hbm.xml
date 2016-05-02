@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.CompetencyEvaluationTextmaster" table="competency_evaluation_textmaster" catalog="employee_cafe">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="competencyEvaluationMaster" class="com.bul.zydex.model.CompetencyEvaluationMaster" fetch="select">
+            <column name="competency_evaluation_id" not-null="true" />
+        </many-to-one>
+        <property name="infoText" type="string">
+            <column name="info_text" length="65535" />
+        </property>
+        <set name="appraisalPerformanceCompetencyEvaluations" inverse="true">
+            <key>
+                <column name="competency_evaluation_text_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.AppraisalPerformanceCompetencyEvaluation" />
+        </set>
+        <set name="appraisalPerformanceCompetencyEvaluations_1" inverse="true">
+            <key>
+                <column name="competency_evaluation_text_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.AppraisalPerformanceCompetencyEvaluation" />
+        </set>
+    </class>
+</hibernate-mapping>

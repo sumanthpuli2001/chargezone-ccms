@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.UserActivityLog" table="user_activity_log" catalog="employee_cafe">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="userMaster" class="com.bul.zydex.model.UserMaster" fetch="select">
+            <column name="user_id" not-null="true" />
+        </many-to-one>
+        <property name="ipAddress" type="string">
+            <column name="ip_address" length="15" not-null="true" />
+        </property>
+        <property name="dateTime" type="string">
+            <column name="date_time" not-null="true" />
+        </property>
+        <property name="actionType" type="string">
+            <column name="action_type" not-null="true">
+                <comment>create,update,read,delete,download,view,login,logout</comment>
+            </column>
+        </property>
+        <property name="actionDescription" type="string">
+            <column name="action_description" length="65535" not-null="true" />
+        </property>
+        <set name="userLoginLogsForStart" inverse="true">
+            <key>
+                <column name="start" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.UserLoginLog" />
+        </set>
+        <set name="userLoginLogsForEnd" inverse="true">
+            <key>
+                <column name="end" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.UserLoginLog" />
+        </set>
+        <set name="userLoginLogsForStart_1" inverse="true">
+            <key>
+                <column name="start" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.UserLoginLog" />
+        </set>
+        <set name="userLoginLogsForEnd_1" inverse="true">
+            <key>
+                <column name="end" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.UserLoginLog" />
+        </set>
+    </class>
+</hibernate-mapping>

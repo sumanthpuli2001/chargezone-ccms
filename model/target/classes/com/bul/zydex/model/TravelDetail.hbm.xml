@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.TravelDetail" table="travel_detail" catalog="employee_cafe">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="travelRequestMaster" class="com.bul.zydex.model.TravelRequestMaster" fetch="select">
+            <column name="travel_request_id" not-null="true" />
+        </many-to-one>
+        <property name="date" type="string">
+            <column name="date" />
+        </property>
+        <property name="fromLocation" type="string">
+            <column name="from_location" />
+        </property>
+        <property name="toLocation" type="string">
+            <column name="to_location" />
+        </property>
+        <property name="modeOfTravel" type="string">
+            <column name="mode_of_travel" />
+        </property>
+        <property name="policyDeviation" type="string">
+            <column name="policy_deviation" />
+        </property>
+        <property name="comments" type="string">
+            <column name="comments" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

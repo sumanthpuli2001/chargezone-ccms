@@ -1,0 +1,53 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.bul.zydex.service.leave;
+
+import com.bul.zydex.service.GenericsService;
+import java.util.List;
+
+/**
+ *
+ * @author AJAY
+ */
+public interface LeaveEmployeeDetailService<T> extends GenericsService<T> {
+
+    public List<?> readLeaveDays(T object);
+
+    public List<?> readEmpLeaveDetail(T object);
+
+    public List<?> viewEmpLeaveRequest(T object);
+
+    public List<?> empLeaveRequestDetail(T object);
+
+    public List<?> readByEmployeeId(T object);
+
+    public List<?> readEmpLeave(T object);
+
+    public List<?> readOwnLeave(T object);
+
+    public List<?> readEmployeeWiseMaternity(T object);
+
+    public List<?> readApprovedLeaveDays(T object);
+
+    public List<?> readPendingLeaveRequest(T object);
+
+    public List<?> readPendingApproverLeaveRequest(T object);
+
+    public List<?> readPendingApprover2LeaveRequest(T object);
+
+    public List<?> readapproverSearch(T object);
+
+    public List<?> searchLeaveDetailByEmployee(T object);
+
+    public List<?> searchLeaveApproveOfEmployeeByMonthWise(T object);
+
+    public List<?> searchLeaveApproveOfEmployeeByPreviousMonthWise(T object);
+
+    public List<?> dateWiseLeaveSelectionOfEmployee(T object);
+
+    public List<?> viewEmpLeaveRequestForPowerAdmin();
+
+}

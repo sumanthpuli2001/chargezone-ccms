@@ -1,0 +1,63 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.bul.zydex.controller.attendanceRegularization;
+
+import com.bul.zydex.controller.*;
+import com.bul.zydex.model.AttendanceRegularization;
+import com.bul.zydex.model.EmployeeDatetimeData;
+import com.bul.zydex.model.EmployeeShiftData;
+import com.bul.zydex.service.attendanceRegularization.AttendanceRegularizationMasterService;
+import com.bul.zydex.service.shift.EmployeeDatetimeDataService;
+import com.bul.zydex.service.shift.EmployeeShiftDataService;
+import org.apache.commons.lang3.Validate;
+import org.springframework.validation.Validator;
+
+/**
+ *
+ * @author Dhaval Patel
+ */
+public class AttendanceRegularizationMasterAbstract extends CustomAbstract {
+
+protected AttendanceRegularizationMasterService<AttendanceRegularization> attendanceRegularizationMasterService;
+protected EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService;
+protected EmployeeDatetimeDataService<EmployeeDatetimeData>employeeDatetimeDataService;
+protected Validator attendanceRegularizationValidator;
+
+    public Validator getAttendanceRegularizationValidator() {
+        return attendanceRegularizationValidator;
+    }
+
+    public void setAttendanceRegularizationValidator(Validator attendanceRegularizationValidator) {
+        this.attendanceRegularizationValidator = attendanceRegularizationValidator;
+    }
+    public EmployeeShiftDataService<EmployeeShiftData> getEmployeeShiftDataService() {
+        return employeeShiftDataService;
+    }
+
+    public void setEmployeeShiftDataService(EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService) {
+        this.employeeShiftDataService = employeeShiftDataService;
+    }
+
+    public EmployeeDatetimeDataService<EmployeeDatetimeData> getEmployeeDatetimeDataService() {
+        return employeeDatetimeDataService;
+    }
+
+    public void setEmployeeDatetimeDataService(EmployeeDatetimeDataService<EmployeeDatetimeData> employeeDatetimeDataService) {
+        this.employeeDatetimeDataService = employeeDatetimeDataService;
+    }
+
+
+    public AttendanceRegularizationMasterService<AttendanceRegularization> getAttendanceRegularizationMasterService() {
+        return attendanceRegularizationMasterService;
+    }
+
+    public void setAttendanceRegularizationMasterService(AttendanceRegularizationMasterService<AttendanceRegularization> attendanceRegularizationMasterService) {
+        this.attendanceRegularizationMasterService = attendanceRegularizationMasterService;
+    }
+
+
+
+}

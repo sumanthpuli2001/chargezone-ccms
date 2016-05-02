@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.LeaveTypeMaster" table="leave_type_master" catalog="employee_cafe">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="leaveType" type="string">
+            <column name="leave_type" />
+        </property>
+        <property name="noOfLeave" type="string">
+            <column name="no_of_leave" />
+        </property>
+        <property name="maxDayAllowedLeave" type="string">
+            <column name="max_day_allowed_leave" />
+        </property>
+        <property name="carriedForwardStatus" type="boolean">
+            <column name="carried_forward_status" not-null="true" />
+        </property>
+        <property name="noOfCarriedForwardLeave" type="string">
+            <column name="no_of_carried_forward_leave" />
+        </property>
+        <set name="employeeLeaveBalances" inverse="true">
+            <key>
+                <column name="leave_type_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.EmployeeLeaveBalance" />
+        </set>
+        <set name="leaveEncashments" inverse="true">
+            <key>
+                <column name="leave_type_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.LeaveEncashment" />
+        </set>
+        <set name="leaveEncashments_1" inverse="true">
+            <key>
+                <column name="leave_type_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.LeaveEncashment" />
+        </set>
+        <set name="employeeLeaveBalances_1" inverse="true">
+            <key>
+                <column name="leave_type_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.EmployeeLeaveBalance" />
+        </set>
+        <set name="leaveEmployeeDetails" inverse="true">
+            <key>
+                <column name="leave_type_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.LeaveEmployeeDetail" />
+        </set>
+        <set name="leaveEmployeeDetails_1" inverse="true">
+            <key>
+                <column name="leave_type_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.LeaveEmployeeDetail" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.PerformanceImprovementPlanMaster" table="performance_improvement_plan_master" catalog="employee_cafe">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="employeeMasterByPipManagerId" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="pip_manager_id" />
+        </many-to-one>
+        <many-to-one name="employeeMasterByPipEmployeeId" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="pip_employee_id" not-null="true" />
+        </many-to-one>
+        <property name="dateOfSubmit" type="string">
+            <column name="date_of_submit" length="45" />
+        </property>
+        <property name="status" type="int">
+            <column name="status" not-null="true" />
+        </property>
+        <set name="improvementGoals" inverse="true">
+            <key>
+                <column name="pip_master_id" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.ImprovementGoal" />
+        </set>
+        <set name="improvementGoalsHistories" inverse="true">
+            <key>
+                <column name="pip_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.ImprovementGoalsHistory" />
+        </set>
+        <set name="pipMeetings" inverse="true">
+            <key>
+                <column name="pip_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.PipMeeting" />
+        </set>
+        <set name="goalResourceManagements" inverse="true">
+            <key>
+                <column name="pip_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.GoalResourceManagement" />
+        </set>
+        <set name="improvementGoalsHistories_1" inverse="true">
+            <key>
+                <column name="pip_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.ImprovementGoalsHistory" />
+        </set>
+        <set name="activityGoalses" inverse="true">
+            <key>
+                <column name="pip_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.ActivityGoals" />
+        </set>
+        <set name="goalResourceManagements_1" inverse="true">
+            <key>
+                <column name="pip_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.GoalResourceManagement" />
+        </set>
+        <set name="pipNextScheduledDates" inverse="true">
+            <key>
+                <column name="pip_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.PipNextScheduledDate" />
+        </set>
+        <set name="improvementGoals_1" inverse="true">
+            <key>
+                <column name="pip_master_id" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.ImprovementGoal" />
+        </set>
+        <set name="pipMeetings_1" inverse="true">
+            <key>
+                <column name="pip_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.PipMeeting" />
+        </set>
+        <set name="pipNextScheduledDates_1" inverse="true">
+            <key>
+                <column name="pip_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.PipNextScheduledDate" />
+        </set>
+        <set name="activityGoalses_1" inverse="true">
+            <key>
+                <column name="pip_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.ActivityGoals" />
+        </set>
+    </class>
+</hibernate-mapping>

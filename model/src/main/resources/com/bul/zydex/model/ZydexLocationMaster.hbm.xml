@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.ZydexLocationMaster" table="zydex_location_master" catalog="employee_cafe">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="zydexLocation" type="string">
+            <column name="zydex_location" length="45" />
+        </property>
+        <set name="employeeMasters" inverse="true">
+            <key>
+                <column name="zydex_location_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.EmployeeMaster" />
+        </set>
+        <set name="employeeMasters_1" inverse="true">
+            <key>
+                <column name="zydex_location_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.EmployeeMaster" />
+        </set>
+        <set name="deviceMasters" inverse="true">
+            <key>
+                <column name="zydex_location" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.DeviceMaster" />
+        </set>
+        <set name="COffLeaveMasters" inverse="true">
+            <key>
+                <column name="zydex_location_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.COffLeaveMaster" />
+        </set>
+        <set name="shortLeaves" inverse="true">
+            <key>
+                <column name="zydex_location_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.ShortLeave" />
+        </set>
+        <set name="deviceMasters_1" inverse="true">
+            <key>
+                <column name="zydex_location" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.DeviceMaster" />
+        </set>
+        <set name="shortLeaves_1" inverse="true">
+            <key>
+                <column name="zydex_location_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.ShortLeave" />
+        </set>
+        <set name="COffLeaveMasters_1" inverse="true">
+            <key>
+                <column name="zydex_location_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.COffLeaveMaster" />
+        </set>
+    </class>
+</hibernate-mapping>

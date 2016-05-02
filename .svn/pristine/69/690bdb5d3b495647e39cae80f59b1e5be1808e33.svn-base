@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.ExpenseOtherType" table="expense_other_type" catalog="employee_cafe">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="expenseMaster" class="com.bul.zydex.model.ExpenseMaster" fetch="select">
+            <column name="expense_master_id" not-null="true" />
+        </many-to-one>
+        <property name="specify" type="string">
+            <column name="specify" length="45" not-null="true" />
+        </property>
+        <property name="billDate" type="string">
+            <column name="bill_date" length="45" not-null="true" />
+        </property>
+        <property name="bilNo" type="string">
+            <column name="bil_no" length="45" not-null="true" />
+        </property>
+        <property name="amount" type="float">
+            <column name="amount" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="currency" type="string">
+            <column name="currency" length="45" not-null="true" />
+        </property>
+        <property name="status" type="int">
+            <column name="status" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

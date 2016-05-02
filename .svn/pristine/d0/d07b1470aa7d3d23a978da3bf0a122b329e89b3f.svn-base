@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.AppraisalPerformanceIndividualDevelopmentPlan" table="appraisal_performance_individual_development_plan" catalog="employee_cafe">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="appraisalPerformanceMaster" class="com.bul.zydex.model.AppraisalPerformanceMaster" fetch="select">
+            <column name="appraisal_performance_id" not-null="true" />
+        </many-to-one>
+        <property name="text1" type="string">
+            <column name="text1" />
+        </property>
+        <property name="text2" type="string">
+            <column name="text2" />
+        </property>
+        <property name="text3" type="string">
+            <column name="text3" />
+        </property>
+        <property name="remark" type="string">
+            <column name="remark" />
+        </property>
+        <property name="midYearRemark" type="string">
+            <column name="mid_year_remark" />
+        </property>
+        <property name="endYearRemark" type="string">
+            <column name="end_year_remark" />
+        </property>
+        <property name="managerMidYearRemark" type="string">
+            <column name="manager_mid_year_remark" />
+        </property>
+        <property name="managerEndYearRemark" type="string">
+            <column name="manager_end_year_remark" />
+        </property>
+        <property name="managertext1" type="string">
+            <column name="managertext1" />
+        </property>
+        <property name="managertext2" type="string">
+            <column name="managertext2" />
+        </property>
+        <property name="managertext3" type="string">
+            <column name="managertext3" />
+        </property>
+        <property name="managerremark" type="string">
+            <column name="Managerremark" />
+        </property>
+        <property name="managerMidYearRemarkManager" type="string">
+            <column name="manager_mid_year_remark_manager" />
+        </property>
+        <property name="managerEndYearRemarkManager" type="string">
+            <column name="manager_end_year_remark_manager" />
+        </property>
+    </class>
+</hibernate-mapping>

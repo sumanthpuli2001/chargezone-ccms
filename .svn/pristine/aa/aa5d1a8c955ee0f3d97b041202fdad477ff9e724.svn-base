@@ -1,0 +1,288 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.bul.zydex.controller.leave;
+
+import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.COffLeaveMaster;
+import com.bul.zydex.model.EmailTemplate;
+import com.bul.zydex.model.EmployeeLeaveBalance;
+import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.EmployeeShiftData;
+import com.bul.zydex.model.HolidayMaster;
+import com.bul.zydex.model.HoursBasis;
+import com.bul.zydex.model.LeaveEmployeeDetail;
+import com.bul.zydex.model.LeaveTypeMaster;
+import com.bul.zydex.model.ShiftMaster;
+import com.bul.zydex.model.ShiftRotationInfo;
+import com.bul.zydex.model.ShiftRotationMaster;
+import com.bul.zydex.model.ShortLeave;
+import com.bul.zydex.model.UserMaster;
+import com.bul.zydex.service.EmailTemplateService;
+import com.bul.zydex.service.holiday.HolidayMasterService;
+import com.bul.zydex.service.leave.COffLeaveMasterService;
+import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
+import com.bul.zydex.service.leave.LeaveEmployeeDetailService;
+import com.bul.zydex.service.leave.LeaveTypeMasterService;
+import com.bul.zydex.service.leave.ShortLeaveService;
+import com.bul.zydex.service.shift.EmployeeShiftDataService;
+import com.bul.zydex.service.shift.HoursBasisService;
+import com.bul.zydex.service.shift.ShiftMasterService;
+import com.bul.zydex.service.shift.ShiftRotationInfoService;
+import com.bul.zydex.service.shift.ShiftRotationMasterService;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.springframework.validation.Validator;
+
+/**
+ *
+ * @author AJAY
+ */
+public class LeaveEmployeeDetailAbstract extends CustomAbstract {
+
+    protected LeaveEmployeeDetailService<LeaveEmployeeDetail> leaveEmployeeDetailService;
+    protected Validator leaveEmployeeDetailValidator;
+    protected LeaveTypeMasterService<LeaveTypeMaster> leaveTypeMasterService;
+    protected EmployeeLeaveBalanceService<EmployeeLeaveBalance> employeeLeaveBalanceService;
+    protected HolidayMasterService<HolidayMaster> holidayMasterService;
+    protected ShortLeaveService<ShortLeave> shortLeaveService;
+    protected COffLeaveMasterService<COffLeaveMaster> cOffLeaveMasterService;
+    protected ShiftMasterService<ShiftMaster> shiftMasterService;
+    protected HoursBasisService<HoursBasis> hoursBasisService;
+    protected ShiftRotationMasterService<ShiftRotationMaster> shiftRotationMasterService;
+    protected ShiftRotationInfoService<ShiftRotationInfo> shiftRotationInfoService;
+    protected EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService;
+
+    public EmployeeShiftDataService<EmployeeShiftData> getEmployeeShiftDataService() {
+        return employeeShiftDataService;
+    }
+
+    public void setEmployeeShiftDataService(EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService) {
+        this.employeeShiftDataService = employeeShiftDataService;
+    }
+
+    public COffLeaveMasterService<COffLeaveMaster> getcOffLeaveMasterService() {
+        return cOffLeaveMasterService;
+    }
+
+    public void setcOffLeaveMasterService(COffLeaveMasterService<COffLeaveMaster> cOffLeaveMasterService) {
+        this.cOffLeaveMasterService = cOffLeaveMasterService;
+    }
+
+    public HolidayMasterService<HolidayMaster> getHolidayMasterService() {
+        return holidayMasterService;
+    }
+
+    public void setHolidayMasterService(HolidayMasterService<HolidayMaster> holidayMasterService) {
+        this.holidayMasterService = holidayMasterService;
+    }
+
+    public LeaveEmployeeDetailService<LeaveEmployeeDetail> getLeaveEmployeeDetailService() {
+        return leaveEmployeeDetailService;
+    }
+
+    public void setLeaveEmployeeDetailService(LeaveEmployeeDetailService<LeaveEmployeeDetail> leaveEmployeeDetailService) {
+        this.leaveEmployeeDetailService = leaveEmployeeDetailService;
+    }
+
+    public Validator getLeaveEmployeeDetailValidator() {
+        return leaveEmployeeDetailValidator;
+    }
+
+    public void setLeaveEmployeeDetailValidator(Validator leaveEmployeeDetailValidator) {
+        this.leaveEmployeeDetailValidator = leaveEmployeeDetailValidator;
+    }
+
+    public LeaveTypeMasterService<LeaveTypeMaster> getLeaveTypeMasterService() {
+        return leaveTypeMasterService;
+    }
+
+    public void setLeaveTypeMasterService(LeaveTypeMasterService<LeaveTypeMaster> leaveTypeMasterService) {
+        this.leaveTypeMasterService = leaveTypeMasterService;
+    }
+
+    public EmployeeLeaveBalanceService<EmployeeLeaveBalance> getEmployeeLeaveBalanceService() {
+        return employeeLeaveBalanceService;
+    }
+
+    public void setEmployeeLeaveBalanceService(EmployeeLeaveBalanceService<EmployeeLeaveBalance> employeeLeaveBalanceService) {
+        this.employeeLeaveBalanceService = employeeLeaveBalanceService;
+    }
+
+    public ShortLeaveService<ShortLeave> getShortLeaveService() {
+        return shortLeaveService;
+    }
+
+    public void setShortLeaveService(ShortLeaveService<ShortLeave> shortLeaveService) {
+        this.shortLeaveService = shortLeaveService;
+    }
+
+    public ShiftMasterService<ShiftMaster> getShiftMasterService() {
+        return shiftMasterService;
+    }
+
+    public void setShiftMasterService(ShiftMasterService<ShiftMaster> shiftMasterService) {
+        this.shiftMasterService = shiftMasterService;
+    }
+
+    public HoursBasisService<HoursBasis> getHoursBasisService() {
+        return hoursBasisService;
+    }
+
+    public void setHoursBasisService(HoursBasisService<HoursBasis> hoursBasisService) {
+        this.hoursBasisService = hoursBasisService;
+    }
+
+    public ShiftRotationMasterService<ShiftRotationMaster> getShiftRotationMasterService() {
+        return shiftRotationMasterService;
+    }
+
+    public void setShiftRotationMasterService(ShiftRotationMasterService<ShiftRotationMaster> shiftRotationMasterService) {
+        this.shiftRotationMasterService = shiftRotationMasterService;
+    }
+
+    public ShiftRotationInfoService<ShiftRotationInfo> getShiftRotationInfoService() {
+        return shiftRotationInfoService;
+    }
+
+    public void setShiftRotationInfoService(ShiftRotationInfoService<ShiftRotationInfo> shiftRotationInfoService) {
+        this.shiftRotationInfoService = shiftRotationInfoService;
+    }
+
+    protected void addleaveType(HttpServletRequest request) {
+        List list = leaveTypeMasterService.read();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+        employeeMaster.setUserMaster(user);
+        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empId.get(0);
+        }
+        employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+        Map<Integer, String> leaveTypemap = new HashMap();
+        for (Object o : list) {
+            leaveTypeMaster = (LeaveTypeMaster) o;
+            employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+
+            List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+            if (!balanceList.isEmpty()) {
+                employeeLeaveBalance = (EmployeeLeaveBalance) balanceList.get(0);
+            }
+            try {
+                if (null != employeeMaster.getGender() && employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Paternity Leave")) {
+
+                } else if (!employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Maternity Leave")) {
+
+                } else if (employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Maternity Leave")) {
+                    leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(As Per Maternity Act)");
+
+                } else if (!employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Paternity Leave") && employeeMaster.getMaritalStatus().equals("UnMarried")) {
+
+                } else if (leaveTypeMaster.getId().intValue() == employeeLeaveBalance.getLeaveTypeMaster().getId().intValue() && !balanceList.isEmpty()) {
+                    leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(" + employeeLeaveBalance.getNoOfLeaveRemain() + ")");
+                } else {
+                    leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(" + 0 + ")");
+                }
+            } catch (Exception e) {
+
+            }
+
+        }
+        request.setAttribute("leaveTypemap", leaveTypemap);
+    }
+
+    protected void readleaveType(HttpServletRequest request) {
+        List list = leaveTypeMasterService.read();
+        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+        Map<Integer, String> leaveTypemap = new HashMap();
+        for (Object o : list) {
+            leaveTypeMaster = (LeaveTypeMaster) o;
+            leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType());
+        }
+        request.setAttribute("leaveTypemap11", leaveTypemap);
+    }
+
+    public void selectEmployeeForParticularManager(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession();
+        EmployeeMaster employee = (EmployeeMaster) session.getAttribute("employeeInfo");
+        int id = employee.getId();
+        List<?> list = employeeMasterService.readEmployeeForParticularManager(id);
+        String tempStr = "[";
+        Object[] arrayOfObject;
+
+        EmployeeMaster employeeMaster;
+        boolean flag = false;
+        for (Iterator<? extends Object> it = list.iterator(); it.hasNext();) {
+            arrayOfObject = (Object[]) it.next();
+
+            if (flag) {
+                tempStr += ", ";
+            }
+            flag = true;
+            tempStr += "{id: \"" + arrayOfObject[0]
+                    + "\", name: \"" + arrayOfObject[1]
+                    + "  /" + arrayOfObject[2]
+                    + "  /" + arrayOfObject[3]
+                    + "  /" + arrayOfObject[4]
+                    + "  /" + arrayOfObject[5] + "\"}";
+
+        }
+        tempStr += "]";
+
+        request.setAttribute("list", tempStr);
+    }
+
+    protected void addEmployeeLeave(HttpServletRequest request, EmployeeMaster employeeMaster) {
+        List list = leaveTypeMasterService.read();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+        employeeMaster.setUserMaster(employeeMaster.getUserMaster());
+        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empId.get(0);
+        }
+        employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+        Map<Integer, String> leaveTypemap = new HashMap();
+        for (Object o : list) {
+            leaveTypeMaster = (LeaveTypeMaster) o;
+            employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+
+            List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+            if (!balanceList.isEmpty()) {
+                employeeLeaveBalance = (EmployeeLeaveBalance) balanceList.get(0);
+            }
+            try {
+                if (null != employeeMaster.getGender() && employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Paternity Leave")) {
+
+                } else if (!employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Maternity Leave")) {
+
+                } else if (employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Maternity Leave")) {
+                    leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(As Per Maternity Act)");
+
+                } else if (!employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Paternity Leave") && employeeMaster.getMaritalStatus().equals("UnMarried")) {
+
+                } else if (leaveTypeMaster.getId().intValue() == employeeLeaveBalance.getLeaveTypeMaster().getId().intValue() && !balanceList.isEmpty()) {
+                    leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(" + employeeLeaveBalance.getNoOfLeaveRemain() + ")");
+                } else {
+                    leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(" + 0 + ")");
+                }
+            } catch (Exception e) {
+
+            }
+
+        }
+        request.setAttribute("empleaveTypemap", leaveTypemap);
+    }
+
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.CafeteriaRequest" table="cafeteria_request" catalog="employee_cafe">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="employeeMasterByAdminApproverId" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="admin_approver_id" />
+        </many-to-one>
+        <many-to-one name="employeeMasterByEmployeeMasterId" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="employee_master_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="employeeMasterByApproverId" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="approver_id" />
+        </many-to-one>
+        <property name="requestType" type="string">
+            <column name="request_type" not-null="true" />
+        </property>
+        <property name="requestFor" type="int">
+            <column name="request_for" not-null="true" />
+        </property>
+        <property name="venue" type="string">
+            <column name="venue" />
+        </property>
+        <property name="specialMeal" type="string">
+            <column name="special_meal" />
+        </property>
+        <property name="orderDateTime" type="string">
+            <column name="order_date_time" length="45" not-null="true" />
+        </property>
+        <property name="reason" type="string">
+            <column name="reason" length="16777215" />
+        </property>
+        <property name="requestDate" type="string">
+            <column name="request_date" length="45" />
+        </property>
+        <property name="status" type="int">
+            <column name="status" not-null="true" />
+        </property>
+        <property name="approverDate" type="string">
+            <column name="approver_date" length="45" />
+        </property>
+        <property name="rejectRemark" type="string">
+            <column name="reject_remark" length="16777215" />
+        </property>
+        <property name="adminRemark" type="string">
+            <column name="admin_remark" length="16777215" />
+        </property>
+    </class>
+</hibernate-mapping>

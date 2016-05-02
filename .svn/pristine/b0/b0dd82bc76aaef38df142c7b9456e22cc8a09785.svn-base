@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.GatePass" table="gate_pass" catalog="employee_cafe">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="employeeMasterBySecurityApproverId" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="security_approver_id" />
+        </many-to-one>
+        <many-to-one name="employeeMasterByEmployeeMasterId" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="employee_master_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="employeeMasterByApproverId" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="approver_id" />
+        </many-to-one>
+        <property name="gatePassType" type="boolean">
+            <column name="gate_pass_type" not-null="true" />
+        </property>
+        <property name="assetDescription" type="string">
+            <column name="asset_description" not-null="true" />
+        </property>
+        <property name="assetValue" type="double">
+            <column name="asset_value" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="assetIdentityNo" type="string">
+            <column name="asset_identity_no" length="45" not-null="true" />
+        </property>
+        <property name="destination" type="string">
+            <column name="destination" not-null="true" />
+        </property>
+        <property name="materialCarryingPersonName" type="string">
+            <column name="material_carrying_person_name" not-null="true" />
+        </property>
+        <property name="materialCarryingPersonCntctNo" type="string">
+            <column name="material_carrying_person_cntct_no" not-null="true" />
+        </property>
+        <property name="materialTakenToPersonName" type="string">
+            <column name="material_taken_to_person_name" not-null="true" />
+        </property>
+        <property name="materialTakenToPersonLandlineNo" type="string">
+            <column name="material_taken_to_person_landline_no" />
+        </property>
+        <property name="materialTakenToPersonMobileNo" type="string">
+            <column name="material_taken_to_person_mobile_no" />
+        </property>
+        <property name="materialOutDateTime" type="string">
+            <column name="material_out_date_time" length="45" not-null="true" />
+        </property>
+        <property name="expectedReturnDateTime" type="string">
+            <column name="expected_return_date_time" length="45" />
+        </property>
+        <property name="reason" type="string">
+            <column name="reason" />
+        </property>
+        <property name="requestDate" type="string">
+            <column name="request_date" length="45" not-null="true" />
+        </property>
+        <property name="status" type="int">
+            <column name="status" not-null="true" />
+        </property>
+        <property name="approveDate" type="string">
+            <column name="approve_date" length="45" />
+        </property>
+        <property name="rejectRemark" type="string">
+            <column name="reject_remark" length="16777215" />
+        </property>
+        <property name="securityRemark" type="string">
+            <column name="security_remark" length="16777215" />
+        </property>
+        <property name="returnFlag" type="java.lang.Boolean">
+            <column name="return_flag" />
+        </property>
+        <property name="returnDate" type="string">
+            <column name="return_date" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

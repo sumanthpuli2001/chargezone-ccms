@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.ShiftRotationMaster" table="shift_rotation_master" catalog="employee_cafe">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="title" type="string">
+            <column name="title" />
+        </property>
+        <property name="duration" type="string">
+            <column name="duration" />
+        </property>
+        <property name="remark" type="string">
+            <column name="remark" />
+        </property>
+        <set name="shiftGenerateMonthlySchedules" inverse="true">
+            <key>
+                <column name="shift_rotation_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.ShiftGenerateMonthlySchedule" />
+        </set>
+        <set name="shiftGenerateMonthlySchedules_1" inverse="true">
+            <key>
+                <column name="shift_rotation_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.ShiftGenerateMonthlySchedule" />
+        </set>
+        <set name="rotationMasters" inverse="true">
+            <key>
+                <column name="shift_rotation_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.RotationMaster" />
+        </set>
+        <set name="shiftRotationInfos" inverse="true">
+            <key>
+                <column name="shift_rotation_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.ShiftRotationInfo" />
+        </set>
+        <set name="shiftRotationInfos_1" inverse="true">
+            <key>
+                <column name="shift_rotation_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.ShiftRotationInfo" />
+        </set>
+        <set name="rotationMasters_1" inverse="true">
+            <key>
+                <column name="shift_rotation_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.RotationMaster" />
+        </set>
+    </class>
+</hibernate-mapping>

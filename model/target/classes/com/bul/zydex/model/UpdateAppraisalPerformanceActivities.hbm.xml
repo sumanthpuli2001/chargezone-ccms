@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.UpdateAppraisalPerformanceActivities" table="update_appraisal_performance_activities" catalog="employee_cafe">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="appraisalPerformanceActivities" class="com.bul.zydex.model.AppraisalPerformanceActivities" fetch="select">
+            <column name="kra_activity_id" not-null="true" />
+        </many-to-one>
+        <property name="kraActivity" type="string">
+            <column name="kra_activity" />
+        </property>
+        <property name="metricActivity" type="string">
+            <column name="metric_activity" />
+        </property>
+        <property name="updateDate" type="string">
+            <column name="update_date" length="45" />
+        </property>
+        <property name="changedBy" type="string">
+            <column name="changed_by" length="65" />
+        </property>
+    </class>
+</hibernate-mapping>

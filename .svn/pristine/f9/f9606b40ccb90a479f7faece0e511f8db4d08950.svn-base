@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.ImprovementGoalsHistory" table="improvement_goals_history" catalog="employee_cafe">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="employeeMaster" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="employee_master_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="performanceImprovementPlanMaster" class="com.bul.zydex.model.PerformanceImprovementPlanMaster" fetch="select">
+            <column name="pip_master_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="improvementGoal" class="com.bul.zydex.model.ImprovementGoal" fetch="select">
+            <column name="improvement_goal_id" />
+        </many-to-one>
+        <property name="editedGoals" type="string">
+            <column name="edited_goals" length="45" />
+        </property>
+        <property name="historyDate" type="string">
+            <column name="history_date" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,2682 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.bul.zydex.controller.travel;
+
+import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.EmailTemplate;
+import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.ExpenseTravelType;
+import com.bul.zydex.model.HotelAccommodation;
+import com.bul.zydex.model.TravelApproverHistory;
+import com.bul.zydex.model.TravelDetail;
+import com.bul.zydex.model.TravelRequestMaster;
+import com.bul.zydex.model.UserMaster;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.validation.BindException;
+import org.springframework.web.servlet.ModelAndView;
+
+/**
+ *
+ * @author AJAY
+ */
+public class TravelRequestMasterController extends TravelRequestMasterAbstract {
+
+    public ModelAndView applyClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        user.getId();
+        employeeMaster.setUserMaster(user);
+        String empNo = "";
+        String empCompany = "";
+        int reportingId = 0;
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            Object[] obj = (Object[]) empDetailList.get(0);
+            empNo = "" + obj[0];
+            empCompany = "" + obj[7];
+
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
+
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+        }
+
+        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empId.get(0);
+        }
+        travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+        List<?> totalList = travelRequestMasterService.readTotalRequest(travelRequestMaster);
+        if (!totalList.isEmpty()) {
+
+        }
+        int count = totalList.size() + 1;
+        Calendar now = Calendar.getInstance();
+
+        String[] monthName = {"January", "February",
+            "March", "April", "May", "June", "July",
+            "August", "September", "October", "November",
+            "December"};
+        int year = now.get(Calendar.YEAR);
+        readcurrencyList(request);
+//        int month = now.get(Calendar.MONTH) + 1;
+        String name = monthName[now.get(Calendar.MONTH)];
+        if ((empCompany.equals("Zydex Industries") || empCompany.equalsIgnoreCase("ZydexIndustries")) && !empCompany.equals("")) {
+            empCompany = "ZI";
+        } else {
+            empCompany = "ZIPL";
+        }
+
+        String requestNo = empCompany + "/" + year + "/" + name + "/" + empNo + "/" + count + "";
+        request.setAttribute("requestNo", requestNo);
+        mv.getModelMap().put("travelRequestMaster", travelRequestMaster);
+        mv.setViewName("Travel/TravelRequestForm");
+//        mv.setViewName("Travel/DateTimePickerTravel");
+        return mv;
+
+    }
+
+    public ModelAndView applySubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        TravelDetail travelDetail = new TravelDetail();
+        HotelAccommodation hotelAccommodation = new HotelAccommodation();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        EmployeeMaster employeeMaster2 = new EmployeeMaster();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        user.getId();
+        employeeMaster.setUserMaster(user);
+        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empId.get(0);
+        }
+        travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+//        String reportingManager1 = employeeMaster.getReportingManagerLevel1();
+//
+//        String reportingManager2 = employeeMaster.getReportingManagerLevel2();
+//        if (null != reportingManager1) {
+//
+//            employeeMaster1.setId(Integer.parseInt(reportingManager1));
+//        }
+//        if (null != reportingManager2) {
+//            employeeMaster2.setId(Integer.parseInt(reportingManager2));
+//        }
+//        travelRequestMaster.s
+//        travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster1);
+//        travelRequestMaster.setEmployeeMasterByApprover2Id(employeeMaster2);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//        Calendar cal = Calendar.getInstance();
+        Date date11 = new Date();
+//        sdf.format(date11);
+        String dd = sdf.format(date11);
+        travelRequestMaster.setDateOfSubmit(dd);
+
+        BindException errors = new BindException(travelRequestMaster, "travelRequestMaster");
+        bind(request, travelRequestMaster);
+        String cashRequiredId = request.getParameter("cashRequiredId");
+        String interCurrency = request.getParameter("interCurrency");
+        travelRequestMaster.setCashRequired(cashRequiredId);
+        travelRequestMaster.setCurrency(interCurrency);
+        travelRequestMasterValidator.validate(travelRequestMaster, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+//            List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+//            if (!empDetailList.isEmpty()) {
+//
+//                request.setAttribute("employeeMaster", empDetailList.get(0));
+//            }
+            int reportingId = 0;
+            List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+            if (!empDetailList.isEmpty()) {
+                request.setAttribute("employeeMaster", empDetailList.get(0));
+                Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+                String reportmanager = (String) arrayOfObject[6];
+                if (!reportmanager.equals("")) {
+                    reportingId = Integer.parseInt(reportmanager);
+                }
+
+                employeeMaster1.setId(reportingId);
+            }
+            List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+            if (!reportmanager1.isEmpty()) {
+                employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+                request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+            }
+            mv.getModelMap().put("travelRequestMaster", travelRequestMaster);
+            mv.setViewName("Travel/TravelRequestForm");
+
+        } else {
+            if (!travelRequestMaster.getTravelType().contains("Local")) {
+
+                Date startDate = sdf.parse(travelRequestMaster.getStartDateTime());
+                Date endDate = sdf.parse(travelRequestMaster.getEndDateTime());
+                if (!startDate.after(endDate)) {
+                    boolean flag = false;
+                    TravelRequestMaster travelRequestMaster1 = new TravelRequestMaster();
+                    travelRequestMaster1.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+                    List<?> l1 = travelRequestMasterService.readTravelEmployeePastRequest(travelRequestMaster1);
+                    for (Object o1 : l1) {
+                        try {
+
+                            travelRequestMaster1 = (TravelRequestMaster) o1;
+                            Date pastSDate = sdf.parse(travelRequestMaster1.getStartDateTime());
+                            Date pastEDate = sdf.parse(travelRequestMaster1.getEndDateTime());
+                            if (startDate.equals(pastSDate) || (startDate.after(pastSDate) && startDate.before(pastEDate)) || (endDate.after(pastSDate) && endDate.before(pastEDate)) || (endDate.equals(pastEDate))) {
+                                flag = true;
+                                break;
+                            } else {
+                                flag = false;
+                            }
+                        } catch (Exception e) {
+
+                        }
+
+                    }
+                    if (flag) {
+
+                        request.setAttribute("failureMessage",
+                                "Error : You can't Apply Request on Same Day..");
+                        mv = applyClick(request, response);
+
+                    } else {
+//                    travelRequestMaster.setStatus(11); // Go to Travel Admin
+                        travelRequestMasterService.create(travelRequestMaster);
+
+                        // For Emailtemplate
+                        try {
+                            EmailTemplate emailTemplate = new EmailTemplate();
+                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                            DesignationMaster designationMaster = new DesignationMaster();
+                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                            EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                            employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                            // id 24 is apply status
+                            emailTemplate = emailTemplateService.readById(24);
+                            String To = employeeMasterHr.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
+                        } catch (Exception e) {
+                        }
+
+//                        mv.setViewName("redirect:leaveEmployeeDetail.htm?act=searchOwnLeaveDetail");
+                        travelDetail.setTravelRequestMaster(travelRequestMaster);
+                        hotelAccommodation.setTravelRequestMaster(travelRequestMaster);
+                        int countId = Integer.parseInt(request.getParameter("countId"));
+                        int countDetailId = Integer.parseInt(request.getParameter("countDetailId"));
+                        for (int i = 1; i <= countId; i++) {
+
+                            String date = request.getParameter("date" + i);
+                            String fromLocation = request.getParameter("fromLocation" + i);
+                            String toLocation = request.getParameter("toLocation" + i);
+                            String travelModeId = request.getParameter("travelModeId" + i);
+                            String policyDeviation = request.getParameter("deviateId" + i);
+                            String comments = request.getParameter("comments" + i);
+                            if (!"".equals(date) && null != date && !"".equals(fromLocation) && null != fromLocation && !"".equals(toLocation) && null != toLocation && !"".equals(travelModeId) && null != travelModeId) {
+                                travelDetail.setDate(date);
+                                travelDetail.setFromLocation(fromLocation);
+                                travelDetail.setToLocation(toLocation);
+                                travelDetail.setModeOfTravel(travelModeId);
+                                travelDetail.setPolicyDeviation(policyDeviation);
+                                travelDetail.setComments(comments);
+                                travelDetailService.create(travelDetail);
+                            } else {
+                                request.setAttribute("failureMessage",
+                                        "Error : Please Enter the Valid Data.");
+                            }
+
+                        }
+                        for (int j = 1; j <= countDetailId; j++) {
+                            String location = request.getParameter("location" + j);
+                            String checkInDate = request.getParameter("checkInDate" + j);
+//                String pickUpCheckBoxId = request.getParameter("pickUpCheckBoxId" + j);
+                            String pickUpId = request.getParameter("pickUpId" + j);
+                            String preferredHotel = request.getParameter("preferredHotel" + j);
+                            String hotelBookingRequired = request.getParameter("hotelBookingRequired" + j);
+                            String checkOutDate = request.getParameter("checkOutDate" + j);
+//                String dropCheckBoxId = request.getParameter("dropCheckBoxId" + j);
+                            String dropId = request.getParameter("dropId" + j);
+                            String remark = request.getParameter("remark" + j);
+
+                            hotelAccommodation.setLocation(location);
+                            hotelAccommodation.setCheckInDate(checkInDate);
+//                if (pickUpCheckBoxId.equals("on")) {
+//
+//                    hotelAccommodation.setPickUpCheck(true);
+//                } else {
+//                    hotelAccommodation.setPickUpCheck(false);
+//
+//                }
+                            hotelAccommodation.setPickLocation(pickUpId);
+                            hotelAccommodation.setPreferredHotel(preferredHotel);
+                            hotelAccommodation.setHotelBookingRequired(hotelBookingRequired);
+                            hotelAccommodation.setCheckOutDate(checkOutDate);
+//                if (dropCheckBoxId.equals("on")) {
+//
+//                    hotelAccommodation.setDropCheck(true);
+//                } else {
+//                    hotelAccommodation.setDropCheck(false);
+//
+//                }
+                            hotelAccommodation.setDropLocation(dropId);
+                            hotelAccommodation.setComments(remark);
+                            hotelAccommodationService.create(hotelAccommodation);
+
+                        }
+                        request.setAttribute("successMessage",
+                                "Information : The Information is Saved Successfully.");
+                        mv = requestResult(request, response);
+                    }
+
+                } else {
+                    request.setAttribute("failureMessage",
+                            "Error : Please Insert Start Date Before End Date.");
+                    mv = applyClick(request, response);
+                }
+            } else {
+                travelRequestMasterService.create(travelRequestMaster);
+
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                    // id 24 is apply status
+                    emailTemplate = emailTemplateService.readById(24);
+                    String To = employeeMasterHr.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+                }
+
+                request.setAttribute("successMessage",
+                        "Information : The Information is Saved Successfully.");
+                mv = requestResult(request, response);
+
+            }
+        }
+//                mv = applyClick(request, response);
+//        mv.setViewName("Travel/TravelRequestForm");
+        return mv;
+
+    }
+
+    public ModelAndView requestResult(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        TravelRequestMaster travelRequestMaster1 = new TravelRequestMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        user.getId();
+        employeeMaster.setUserMaster(user);
+        List<?> resultList = new ArrayList();
+        List<List<?>> resultList1 = new LinkedList<List<?>>();
+        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empId.get(0);
+        }
+        travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+        List<List<String>> finalList = new LinkedList<List<String>>();
+
+        List<String> approverList = null;
+        //Internationl
+        List<String> approverInternationalList = new ArrayList<String>();
+        if (!approverInternationalList.contains(employeeMaster.getReportingManagerLevel1())) {
+            approverInternationalList.add(employeeMaster.getReportingManagerLevel1());
+        }
+        if (!approverInternationalList.contains(employeeMaster.getReportingManagerLevel2())) {
+            approverInternationalList.add(employeeMaster.getReportingManagerLevel2());
+        }
+        if (!approverInternationalList.contains(employeeMaster.getReportingManagerLevel3())) {
+            approverInternationalList.add(employeeMaster.getReportingManagerLevel3());
+        }
+        if (!approverInternationalList.contains(employeeMaster.getReportingManagerLevel4())) {
+            approverInternationalList.add(employeeMaster.getReportingManagerLevel4());
+        }
+        if (!approverInternationalList.contains(employeeMaster.getReportingManagerLevel5())) {
+            approverInternationalList.add(employeeMaster.getReportingManagerLevel5());
+        }
+        if (!approverInternationalList.contains(employeeMaster.getReportingManagerLevel6())) {
+            approverInternationalList.add(employeeMaster.getReportingManagerLevel6());
+        }
+
+//        Set<String> internationalSet = new HashSet<String>(approverInternationalList);
+//Domestic
+        List<String> approverDomesticList = new ArrayList<String>();
+        if (!approverDomesticList.contains(employeeMaster.getReportingManagerLevel1()) && (!employeeMaster.getReportingManagerLevel1().equals("") || null != employeeMaster.getReportingManagerLevel1())) {
+            approverDomesticList.add(employeeMaster.getReportingManagerLevel1());
+        }
+        if (!approverDomesticList.contains(employeeMaster.getReportingManagerLevel2()) && (!employeeMaster.getReportingManagerLevel2().equals("") || null != employeeMaster.getReportingManagerLevel2())
+                && !employeeMaster.getReportingManagerLevel2().equals(employeeMaster.getReportingManagerLevel6())) {
+            approverDomesticList.add(employeeMaster.getReportingManagerLevel2());
+        }
+        if (!approverDomesticList.contains(employeeMaster.getReportingManagerLevel3()) && (!employeeMaster.getReportingManagerLevel3().equals("") || null != employeeMaster.getReportingManagerLevel3())
+                && !employeeMaster.getReportingManagerLevel3().equals(employeeMaster.getReportingManagerLevel6())) {
+            approverDomesticList.add(employeeMaster.getReportingManagerLevel3());
+        }
+        if (!approverDomesticList.contains(employeeMaster.getReportingManagerLevel4()) && (!employeeMaster.getReportingManagerLevel4().equals("") || null != employeeMaster.getReportingManagerLevel4())
+                && !employeeMaster.getReportingManagerLevel4().equals(employeeMaster.getReportingManagerLevel6())) {
+            approverDomesticList.add(employeeMaster.getReportingManagerLevel4());
+        }
+        if (!approverDomesticList.contains(employeeMaster.getReportingManagerLevel5()) && (!employeeMaster.getReportingManagerLevel5().equals("") || null != employeeMaster.getReportingManagerLevel5())
+                && !employeeMaster.getReportingManagerLevel5().equals(employeeMaster.getReportingManagerLevel6())) {
+            approverDomesticList.add(employeeMaster.getReportingManagerLevel5());
+        }
+//        approverDomesticList.add(employeeMaster.getReportingManagerLevel6());
+//        Set<String> domesticSet = new HashSet<String>(approverDomesticList);
+
+        String flag1 = "";
+        Object flag = request.getAttribute("flag");
+        if (flag != null) {
+            flag1 = flag.toString();
+        }
+        if (flag1.equals("1")) {
+            resultList = (List<?>) request.getAttribute("list");
+        } else {
+            resultList = travelRequestMasterService.requestDetail(travelRequestMaster);
+        }
+        TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+        if (!resultList.isEmpty()) {
+            for (Object empId1 : resultList) {
+                List templist = new LinkedList();
+                String pattern = "";
+                List<List<?>> fialList = new LinkedList<List<?>>();
+                List<Object> actualList = new ArrayList();
+
+                Object[] obj = (Object[]) empId1;
+                String travelId = "" + obj[5];
+                String travelType = "" + obj[0];
+
+                templist.add("" + obj[0]);
+                templist.add("" + obj[1]);
+                templist.add("" + obj[2]);
+                templist.add("" + obj[3]);
+                templist.add("" + obj[4]);
+                templist.add("" + obj[5]);
+                templist.add("" + obj[6]);
+                templist.add("" + obj[7]);
+                templist.add("" + obj[8]);
+                travelRequestMaster1.setId(Integer.parseInt(travelId));
+                travelApproverHistory.setTravelRequestMaster(travelRequestMaster1);
+                if (travelType.equals("Domestic") || travelType.equals("Local")) {
+                    approverList = new ArrayList<String>(approverDomesticList);
+                } else {
+                    approverList = new ArrayList<String>(approverInternationalList);
+
+                }
+
+                int pass = 0;
+                for (String appoverObj : approverList) {
+
+                    EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                    if (!appoverObj.equals("")) {
+
+                        employeeMaster1.setId(Integer.parseInt(appoverObj));
+                        travelApproverHistory.setEmployeeMasterByTravelApproverId(employeeMaster1);
+
+                        List<?> statusList = travelApproverHistoryService.readApproverStatusList(travelApproverHistory);
+
+                        if (!statusList.isEmpty()) {
+                            Object[] oo = (Object[]) statusList.get(0);
+
+                            if (pass == 0) {
+                                pattern += oo[1] + "_" + oo[2] + "_" + oo[3] + "";
+                            } else {
+                                pattern += "~" + oo[1] + "_" + oo[2] + "_" + oo[3] + "";
+                            }
+                        } else {
+                            EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                            employeeMaster2 = employeeMasterService.readById(Integer.parseInt(appoverObj));
+                            if (pass == 0) {
+                                pattern += employeeMaster2.getEmployeeName() + "_Pending_ ";
+                            } else {
+                                pattern += "~ " + employeeMaster2.getEmployeeName() + "_Pending_ ";
+                            }
+                        }
+                    }
+                    pass++;
+                }
+                templist.add(pattern);
+                finalList.add(templist);
+            }
+
+        }
+
+        request.setAttribute("resultList", finalList);
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.getModelMap().put("travelRequestMaster", travelRequestMaster);
+        mv.setViewName("Travel/TravelRequestResult");
+        return mv;
+
+    }
+
+    public ModelAndView viewRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        TravelDetail travelDetail = new TravelDetail();
+        HotelAccommodation hotelAccommodation = new HotelAccommodation();
+        String id = request.getParameter("id");
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        user.getId();
+        employeeMaster.setUserMaster(user);
+        String empNo = "";
+        readcurrencyList(request);
+        int reportingId = 0;
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            Object[] obj = (Object[]) empDetailList.get(0);
+            empNo = "" + obj[0];
+
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
+
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+
+        }
+        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empId.get(0);
+        }
+        travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+        travelRequestMaster = travelRequestMasterService.readById(Integer.parseInt(id));
+
+        travelDetail.setTravelRequestMaster(travelRequestMaster);
+        List<?> travelDetailList = travelDetailService.readTravelDetail(travelDetail);
+
+        hotelAccommodation.setTravelRequestMaster(travelRequestMaster);
+        List<?> accommodationList = hotelAccommodationService.readAccommodationDetail(hotelAccommodation);
+
+        request.setAttribute("accommodationList", accommodationList);
+        request.setAttribute("travelDetailList", travelDetailList);
+        request.setAttribute("travelId", id);
+        mv.getModelMap().put("travelRequestMaster", travelRequestMaster);
+        mv.setViewName("Travel/TravelRequestEdit");
+        return mv;
+
+    }
+
+    public ModelAndView editRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        TravelDetail travelDetail = new TravelDetail();
+        HotelAccommodation hotelAccommodation = new HotelAccommodation();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        EmployeeMaster employeeMaster2 = new EmployeeMaster();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        user.getId();
+        employeeMaster.setUserMaster(user);
+        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empId.get(0);
+        }
+        travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+//        travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+//        String reportingManager1 = employeeMaster.getReportingManagerLevel1();
+//        String reportingManager2 = employeeMaster.getReportingManagerLevel2();
+//        employeeMaster1.setId(Integer.parseInt(reportingManager1));
+//        employeeMaster2.setId(Integer.parseInt(reportingManager2));
+//        travelRequestMaster.s
+//        travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster1);
+//        travelRequestMaster.setEmployeeMasterByApprover2Id(employeeMaster2);
+        String id = request.getParameter("id");
+        travelRequestMaster.setId(Integer.parseInt(id));
+        BindException errors = new BindException(travelRequestMaster, "travelRequestMaster");
+        bind(request, travelRequestMaster);
+        String cashRequiredId = request.getParameter("cashRequiredId");
+        String interCurrency = request.getParameter("interCurrency");
+        travelRequestMaster.setCashRequired(cashRequiredId);
+        travelRequestMaster.setCurrency(interCurrency);
+        String btnSubmit = request.getParameter("btnSubmit");
+        if (btnSubmit.equals("submit")) {
+
+            travelRequestMasterValidator.validate(travelRequestMaster, errors);
+            if (errors.hasErrors()) {
+                request.setAttribute("failureMessage",
+                        "Error : The Entered Information is not valid.");
+                mv.addAllObjects(errors.getModel());
+                mv.getModelMap().put("travelRequestMaster", travelRequestMaster);
+                mv.setViewName("Travel/TravelRequestEdit");
+
+            } else {
+                if (travelRequestMaster.getStatus() == 1) {
+                    // Rework Submit
+                    travelRequestMaster.setStatus(10);
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    String requestdate = sdf.format(new Date());
+                    travelRequestMaster.setDateOfSubmit(requestdate);
+                    TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+                    travelApproverHistory.setTravelRequestMaster(travelRequestMaster);
+                    List list = travelApproverHistoryService.readSameTravelId(travelApproverHistory);
+                    // Set all return flag 1
+                    for (Object o : list) {
+                        travelApproverHistory = (TravelApproverHistory) o;
+                        travelApproverHistory.setReturnFlag(1);
+                        travelApproverHistoryService.update(travelApproverHistory);
+                    }
+                } else {
+                    travelRequestMaster.setStatus(0);
+                }
+                travelRequestMasterService.update(travelRequestMaster);
+                travelDetail.setTravelRequestMaster(travelRequestMaster);
+                hotelAccommodation.setTravelRequestMaster(travelRequestMaster);
+                int countId = Integer.parseInt(request.getParameter("countId"));
+                int countDetailId = Integer.parseInt(request.getParameter("countDetailId"));
+                for (int i = 1; i <= countId; i++) {
+
+                    String travelDetailId = request.getParameter("travelDetailId_" + i);
+                    String date = request.getParameter("date" + i);
+                    String fromLocation = request.getParameter("fromLocation" + i);
+                    String toLocation = request.getParameter("toLocation" + i);
+                    String travelModeId = request.getParameter("travelModeId" + i);
+                    String policyDeviation = request.getParameter("deviateId" + i);
+                    String comments = request.getParameter("comments" + i);
+
+                    travelDetail.setDate(date);
+                    travelDetail.setFromLocation(fromLocation);
+                    travelDetail.setToLocation(toLocation);
+                    travelDetail.setModeOfTravel(travelModeId);
+                    travelDetail.setPolicyDeviation(policyDeviation);
+                    travelDetail.setComments(comments);
+                    if (null != travelDetailId) {
+                        travelDetail.setId(Integer.parseInt(travelDetailId));
+                        travelDetailService.update(travelDetail);
+                    } else {
+                        travelDetailService.create(travelDetail);
+
+                    }
+
+                }
+                for (int j = 1; j <= countDetailId; j++) {
+
+                    String accommodationId = request.getParameter("accommodationId_" + j);
+                    String location = request.getParameter("location" + j);
+                    String checkInDate = request.getParameter("checkInDate" + j);
+//                String pickUpCheckBoxId = request.getParameter("pickUpCheckBoxId_" + j);
+                    String pickUpId = request.getParameter("pickUpId" + j);
+                    String preferredHotel = request.getParameter("preferredHotel" + j);
+                    String hotelBookingRequired = request.getParameter("hotelBookingRequired" + j);
+                    String checkOutDate = request.getParameter("checkOutDate" + j);
+//                String dropCheckBoxId = request.getParameter("dropCheckBoxId_" + j);
+                    String dropId = request.getParameter("dropId" + j);
+                    String remark = request.getParameter("remark" + j);
+
+                    hotelAccommodation.setLocation(location);
+                    hotelAccommodation.setCheckInDate(checkInDate);
+//                if (pickUpCheckBoxId.equals("on")) {
+//
+//                    hotelAccommodation.setPickUpCheck(true);
+//                } else {
+//                    hotelAccommodation.setPickUpCheck(false);
+//
+//                }
+                    hotelAccommodation.setPickLocation(pickUpId);
+                    hotelAccommodation.setPreferredHotel(preferredHotel);
+                    hotelAccommodation.setHotelBookingRequired(hotelBookingRequired);
+                    hotelAccommodation.setCheckOutDate(checkOutDate);
+//                if (dropCheckBoxId.equals("on")) {
+//
+//                    hotelAccommodation.setDropCheck(true);
+//                } else {
+//                    hotelAccommodation.setDropCheck(false);
+//
+//                }
+                    hotelAccommodation.setDropLocation(dropId);
+                    hotelAccommodation.setComments(remark);
+                    if (!accommodationId.equals("null")) {
+                        hotelAccommodation.setId(Integer.parseInt(accommodationId));
+                        hotelAccommodationService.update(hotelAccommodation);
+                    } else {
+                        hotelAccommodationService.create(hotelAccommodation);
+                    }
+
+                }
+                request.setAttribute("successMessage",
+                        "Information : The Information is Updated Successfully.");
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                    // id 122 is for travel request edit click...
+                    emailTemplate = emailTemplateService.readById(122);
+                    String To = employeeMasterHr.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+                }
+                mv = requestResult(request, response);
+            }
+        } else if (btnSubmit.equals("Withdraw")) {
+            if (travelRequestMaster.getStatus() == 0 || travelRequestMaster.getStatus() == 1) {
+
+                if (travelRequestMaster.getStatus() == 1) {
+
+                    TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+                    travelRequestMaster.setId(Integer.parseInt(id));
+                    travelApproverHistory.setTravelRequestMaster(travelRequestMaster);
+                    List travelHistory = travelApproverHistoryService.readSameTravelId(travelApproverHistory);
+
+                    for (Object o : travelHistory) {
+                        travelApproverHistory = (TravelApproverHistory) o;
+                        travelApproverHistoryService.delete(travelApproverHistory.getId());
+                    }
+                }
+                travelRequestMasterService.delete(Integer.parseInt(id));
+                mv = requestResult(request, response);
+            } else if (travelRequestMaster.getStatus() == 3 || travelRequestMaster.getStatus() == 10) {
+                travelRequestMaster.setStatus(4);
+                travelRequestMasterService.update(travelRequestMaster);
+                request.setAttribute("successMessage",
+                        "Information : The Request for Withdraw a Travel is sent Successfully.");
+//                mv = viewRequest(request, response);
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                    // id 28 is for travel request withdraw...
+                    emailTemplate = emailTemplateService.readById(28);
+                    String To = employeeMasterHr.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+                }
+
+                mv = requestResult(request, response);
+            }
+
+        }
+
+        return mv;
+
+    }
+
+    public ModelAndView deleteSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        String checkId[] = request.getParameterValues("checkId");
+        for (String xx : checkId) {
+            try {
+                travelRequestMasterService.delete(Integer.parseInt(xx));
+                request.setAttribute("successMessage",
+                        "Info : One or more records are deleted successfully.");
+            } catch (Exception e) {
+                request.setAttribute("failureMessage",
+                        "Error : One or more records are Already deleted.");
+
+            }
+        }
+        mv = requestResult(request, response);
+        return mv;
+    }
+
+    public ModelAndView viewRequestResultManagerSide(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        user.getId();
+        employeeMaster.setUserMaster(user);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date currentDate = new Date();
+        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empId.get(0);
+        }
+//        EmployeeMaster employeeMaster = new EmployeeMaster();
+        selectEmployee(request, response);
+        departmentList(request);
+        designationList(request);
+        mv.getModelMap().put("employeeMaster", employeeMaster1);
+
+//        int reportingId1 = employeeMaster.getId();
+        String reportingManagerLevel1_id = "" + employeeMaster.getId();
+        String flag1 = "";
+        Object flag = request.getAttribute("flag");
+        if (flag != null) {
+            flag1 = flag.toString();
+        }
+        if (flag1.equals("1")) {
+            List<?> reportingLevelSearchedList = (List<?>) request.getAttribute("reportingLevel");
+            request.setAttribute("reportingLevel", reportingLevelSearchedList);
+        } else {
+
+            List<?> reportingLevelList1 = travelRequestMasterService.readTravelRequestByReportingLevel1(travelRequestMaster, reportingManagerLevel1_id);
+            if (!reportingLevelList1.isEmpty()) {
+                request.setAttribute("reportingLevel", reportingLevelList1);
+            }
+//            List<?> reportingLevelList2 = travelRequestMasterService.readTravelRequestByReportingLevel2(reportingManagerLevel1_id);
+//            if (!reportingLevelList2.isEmpty()) {
+//                request.setAttribute("reportingLevel", reportingLevelList2);
+//            }
+//            List<?> reportingLevelList3 = travelRequestMasterService.readTravelRequestByReportingLevel3(reportingManagerLevel1_id);
+//            if (!reportingLevelList3.isEmpty()) {
+//                request.setAttribute("reportingLevel", reportingLevelList3);
+//            }
+//            List<?> reportingLevelList4 = travelRequestMasterService.readTravelRequestByReportingLevel4(reportingManagerLevel1_id);
+//            if (!reportingLevelList4.isEmpty()) {
+//                request.setAttribute("reportingLevel", reportingLevelList4);
+//            }
+        }
+        //travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+//        List<?> list = travelRequestMasterService.readFromManager(reportingId1);
+//        for (Iterator<? extends Object> iterator = list.iterator(); iterator.hasNext();) {
+//            Object[] next = (Object[]) iterator.next();
+//            String strdate = "" + next[9];
+//            String approver1 = "" + next[10];
+//            String approver2 = "" + next[11];
+//            sdf.parse(strdate);
+//            Calendar cal = Calendar.getInstance();
+//            cal.setTime(sdf.parse(strdate));
+//            Date dd = cal.getTime();
+//            Date addedDate = addDays(dd, 15);
+//            if (currentDate.equals(addedDate) || currentDate.before(addedDate)) {
+//                List<?> approver1List = travelRequestMasterService.readFromApprover1(Integer.parseInt(approver1));
+//                if (reportingId1 == Integer.parseInt(approver1)) {
+//                    request.setAttribute("list", approver1List);
+//                }
+//            } else {
+//                List<?> approver2List = travelRequestMasterService.readFromApprover2(Integer.parseInt(approver2));
+////                iterator.remove();
+//                if (reportingId1 == Integer.parseInt(approver2)) {
+//                    request.setAttribute("list", approver2List);
+//                }
+//            }
+//
+//        }
+        mv.setViewName("Travel/TravelRequestviewByManager");
+        return mv;
+    }
+
+    public ModelAndView approveRequestManagerSide(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        TravelDetail travelDetail = new TravelDetail();
+        HotelAccommodation hotelAccommodation = new HotelAccommodation();
+        UserMaster userMaster = new UserMaster();
+        String id = request.getParameter("id");
+        travelRequestMaster.setId(Integer.parseInt(id));
+        String userId = request.getParameter("empId");
+        employeeMaster = employeeMasterService.readById(Integer.parseInt(userId));
+//        userMaster.setId(Integer.parseInt(userId));
+//        employeeMaster.setUserMaster(userMaster);
+        int reportingId = 0;
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
+
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+        }
+
+        travelRequestMaster = travelRequestMasterService.readById(Integer.parseInt(id));
+        travelDetail.setTravelRequestMaster(travelRequestMaster);
+        List<?> travelDetailList = travelDetailService.readTravelDetail(travelDetail);
+
+        hotelAccommodation.setTravelRequestMaster(travelRequestMaster);
+        List<?> accommodationList = hotelAccommodationService.readAccommodationDetail(hotelAccommodation);
+        readcurrencyList(request);
+        request.setAttribute("accommodationList", accommodationList);
+        request.setAttribute("travelDetailList", travelDetailList);
+
+        mv.getModelMap().put("travelRequestMaster", travelRequestMaster);
+        mv.setViewName("Travel/TravelRequestApprove");
+        return mv;
+    }
+
+    public ModelAndView approveRequestManagerSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        String id = request.getParameter("id");
+
+        String managerRemark = request.getParameter("managerRemark");
+        String btnSubmit = request.getParameter("btnSubmit");
+        travelRequestMaster = travelRequestMasterService.readById(Integer.parseInt(id));
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
+        String loginId = employeeMaster.getId().toString();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        int employeeId = travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId();
+        employeeMaster1 = employeeMasterService.readById(employeeId);
+        String manager5 = employeeMaster1.getReportingManagerLevel5();
+        String manager6 = employeeMaster1.getReportingManagerLevel6();
+        if (btnSubmit.equals("approve")) {
+            if (travelRequestMaster.getStatus() == 0 || travelRequestMaster.getStatus() == 3 || travelRequestMaster.getStatus() == 10) {
+                travelRequestMaster.setManagerRemark(managerRemark);
+//                if (Integer.parseInt(loginId) == Integer.parseInt(manager6)) {
+//                    travelRequestMaster.setStatus(5);
+//                } elsetry
+                try {
+
+                    if (Integer.parseInt(loginId) == Integer.parseInt(manager5)) {
+                        if (travelRequestMaster.getTravelType().equals("Domestic") || travelRequestMaster.getTravelType().equals("Local")) {
+                            travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
+                            travelRequestMaster.setStatus(5);
+                        } else {
+                            travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
+                            travelRequestMaster.setStatus(6);
+                        }
+                    } else {
+                        travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
+                        travelRequestMaster.setStatus(3);
+                    }
+                } catch (Exception e) {
+                    if (Integer.parseInt(loginId) == Integer.parseInt(manager6)) {
+                        if (travelRequestMaster.getTravelType().equals("Domestic") || travelRequestMaster.getTravelType().equals("Local")) {
+
+                            travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
+                            travelRequestMaster.setStatus(5);
+                        } else {
+                            travelRequestMaster.setEmployeeMasterByApprover2Id(employeeMaster);
+                            travelRequestMaster.setStatus(5);
+
+                        }
+//                        } else {
+//                            travelRequestMaster.setStatus(6);
+//                        }
+//                    } else {
+//                        travelRequestMaster.setStatus(3);
+//                    }
+
+                    }
+                }
+                travelRequestMasterService.update(travelRequestMaster);
+                TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+                travelApproverHistory.setTravelRequestMaster(travelRequestMaster);
+                travelApproverHistory.setEmployeeMasterByEmployeeMasterId(employeeMaster1);
+                travelApproverHistory.setEmployeeMasterByTravelApproverId(employeeMaster);
+                travelApproverHistory.setTravelApproveStatus(travelRequestMaster.getStatus());
+                travelApproverHistory.setTravelApproverRemark(managerRemark);
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                String requestdate = sdf.format(new Date());
+                travelApproverHistory.setTravelApproveHistoryDate(requestdate);
+                travelApproverHistory.setReturnFlag(0);
+                travelApproverHistoryService.create(travelApproverHistory);
+                request.setAttribute("successMessage",
+                        "Information : The Travel Request Approved successfully.");
+                if (travelRequestMaster.getStatus() != 5) {
+
+//                    Travel Request Approve
+                    try {
+                        EmailTemplate emailtemplate = new EmailTemplate();
+                        EmployeeMaster employeemastermodel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                        DesignationMaster designationMaster = new DesignationMaster();
+                        designationMaster = designationMasterService.readById(employeemastermodel.getDesignationMaster().getId());
+//                   employeeMaster = employeeMasterService.readById(employeeId);
+                        EmployeeMaster employeemasterhr = new EmployeeMaster();
+                        employeemasterhr = employeeMasterService.readById(Integer.parseInt(employeemastermodel.getReportingManagerLevel1()));
+                        //Id=25 is for travel request approve...
+                        EmployeeMaster employeeMaster2 = new EmployeeMaster();
+
+                        String empIdStr = request.getParameter("empid");
+                        if (null != empIdStr && !"".equals(empIdStr)) {
+
+                            int empID = Integer.parseInt(empIdStr);
+                            List list = employeeMasterService.readByEmployeeNo(empID);
+                            if (!list.isEmpty()) {
+                                employeeMaster2 = (EmployeeMaster) list.get(0);
+                            }
+                        }
+
+                        emailtemplate = emailTemplateService.readById(25);
+                        String from = employeemastermodel.getOfficeEmailId();
+                        String to = employeemasterhr.getOfficeEmailId();
+                        String subject = emailtemplate.getSubject();
+                        subject = subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                        String msg = emailtemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", employeemasterhr.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, to, subject, msg);
+                    } catch (Exception e) {
+                    }
+                }
+
+                try {
+
+                    EmployeeMaster employeemastermodel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeemastermodel.getDesignationMaster().getId());
+//                    EmployeeMaster employeemasterHr = new EmployeeMaster();
+//                    employeemasterHr = employeeMasterService.readById(Integer.parseInt(employeemastermodel.getReportingManagerLevel1()));
+                    EmailTemplate emailTemplate1 = new EmailTemplate();
+                    emailTemplate1 = emailTemplateService.readById(57);
+                    EmployeeMaster employeeMaster2 = new EmployeeMaster();
+
+                    String empIdStr = request.getParameter("empid");
+                    if (null != empIdStr && !"".equals(empIdStr)) {
+
+                        int empID = Integer.parseInt(empIdStr);
+                        List list = employeeMasterService.readByEmployeeNo(empID);
+                        if (!list.isEmpty()) {
+                            employeeMaster2 = (EmployeeMaster) list.get(0);
+                            String To = employeeMaster2.getOfficeEmailId();
+                            String from = employeemastermodel.getOfficeEmailId();
+                            String subject = emailTemplate1.getSubject();
+                            subject = subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                            String msg = emailTemplate1.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, subject, msg);
+                        }
+                    }
+
+                } catch (Exception e) {
+                }
+
+                if (travelRequestMaster.getStatus() == 5) {
+                    //            Send To TravelAdmin
+                    try {
+
+                        EmployeeMaster employeemastermodel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                        DesignationMaster designationMaster = new DesignationMaster();
+                        designationMaster = designationMasterService.readById(employeemastermodel.getDesignationMaster().getId());
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        emailTemplate = emailTemplateService.readById(25);
+                        //id=125 for travel request approve by CEO..
+                        EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                        List travelAdminList = userRightMasterService.readTravelAdmin();
+                        Iterator itr = travelAdminList.iterator();
+                        while (itr.hasNext()) {
+                            Object[] next = (Object[]) itr.next();
+                            String userId = "" + next[0];
+                            String travelId = "" + next[1];
+                            employeeMaster2 = employeeMasterService.readById(Integer.parseInt(travelId));
+                            String To = employeeMaster2.getOfficeEmailId();
+                            String from = employeemastermodel.getOfficeEmailId();
+                            String subject = emailTemplate.getSubject();
+                            subject = subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, subject, msg);
+
+                        }
+
+                    } catch (Exception e) {
+                    }
+                }
+
+            }
+
+        } else if (btnSubmit.equals("reject")) {
+            travelRequestMaster.setStatus(2);
+            travelRequestMaster.setManagerRemark(managerRemark);
+            travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
+            travelRequestMasterService.update(travelRequestMaster);
+            TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+            travelApproverHistory.setTravelRequestMaster(travelRequestMaster);
+            travelApproverHistory.setEmployeeMasterByEmployeeMasterId(employeeMaster1);
+            travelApproverHistory.setEmployeeMasterByTravelApproverId(employeeMaster);
+            travelApproverHistory.setTravelApproveStatus(travelRequestMaster.getStatus());
+            travelApproverHistory.setTravelApproverRemark(managerRemark);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            String requestdate = sdf.format(new Date());
+            travelApproverHistory.setTravelApproveHistoryDate(requestdate);
+            travelApproverHistory.setReturnFlag(0);
+            travelApproverHistoryService.create(travelApproverHistory);
+            request.setAttribute("successMessage",
+                    "Information : The Travel Request Rejected successfully.");
+            try {
+
+                EmployeeMaster employeemastermodel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeemastermodel.getDesignationMaster().getId());
+                EmployeeMaster employeemasterHr = new EmployeeMaster();
+                employeemasterHr = employeeMasterService.readById(Integer.parseInt(employeemastermodel.getReportingManagerLevel1()));
+                EmailTemplate emailTemplate1 = new EmailTemplate();
+
+                //id=27 for travel request reject..
+                emailTemplate1 = emailTemplateService.readById(27);
+                EmployeeMaster employeeMaster2 = new EmployeeMaster();
+
+                String empIdStr = request.getParameter("empid");
+                if (null != empIdStr && !"".equals(empIdStr)) {
+
+                    int empID = Integer.parseInt(empIdStr);
+                    List list = employeeMasterService.readByEmployeeNo(empID);
+                    if (!list.isEmpty()) {
+                        employeeMaster2 = (EmployeeMaster) list.get(0);
+                        String To = employeeMaster2.getOfficeEmailId();
+                        String from = employeemastermodel.getOfficeEmailId();
+                        String subject = emailTemplate1.getSubject();
+                        subject = subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                        String msg = emailTemplate1.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, subject, msg);
+                    }
+                }
+
+            } catch (Exception e) {
+            }
+
+        } else if (btnSubmit.equals("rework")) {
+            travelRequestMaster.setStatus(1);
+            travelRequestMaster.setManagerRemark(managerRemark);
+            travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
+            travelRequestMasterService.update(travelRequestMaster);
+            TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+            travelApproverHistory.setTravelRequestMaster(travelRequestMaster);
+            travelApproverHistory.setEmployeeMasterByEmployeeMasterId(employeeMaster1);
+            travelApproverHistory.setEmployeeMasterByTravelApproverId(employeeMaster);
+            travelApproverHistory.setTravelApproveStatus(travelRequestMaster.getStatus());
+            travelApproverHistory.setTravelApproverRemark(managerRemark);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            String requestdate = sdf.format(new Date());
+            travelApproverHistory.setTravelApproveHistoryDate(requestdate);
+            travelApproverHistory.setReturnFlag(0);
+            travelApproverHistoryService.create(travelApproverHistory);
+            request.setAttribute("successMessage",
+                    "Information : The Travel Request Reworked successfully.");
+            try {
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                EmailTemplate emailTemplate1 = new EmailTemplate();
+
+                //id=26 for Travel request rework...
+                emailTemplate1 = emailTemplateService.readById(26);
+                String empIdStr = request.getParameter("empid");
+                if (null != empIdStr && !"".equals(empIdStr)) {
+                    int empID = Integer.parseInt(empIdStr);
+                    List list = employeeMasterService.readByEmployeeNo(empID);
+                    if (!list.isEmpty()) {
+                        employeeMaster2 = (EmployeeMaster) list.get(0);
+                        String To = employeeMaster2.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String subject = emailTemplate1.getSubject();
+                        subject = subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                        String msg = emailTemplate1.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, subject, msg);
+
+                    }
+
+                }
+
+            } catch (Exception e) {
+            }
+
+        }
+        mv = requestResult1(request, response);
+        return mv;
+    }
+
+    public ModelAndView viewRequestAdminSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        TravelRequestMaster travelRequestMaster1 = new TravelRequestMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        user.getId();
+        employeeMaster.setUserMaster(user);
+        HttpSession session = request.getSession();
+        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empId.get(0);
+        }
+        int reportingId1 = employeeMaster.getId();
+//        travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+        List<List<String>> finalList = new LinkedList<List<String>>();
+        Object flag = request.getAttribute("flag");
+        String flag1 = "";
+        if (flag != null) {
+            flag1 = flag.toString();
+        }
+        List<?> list = null;
+        if (flag1.equals("1")) {
+            list = (List<?>) request.getAttribute("list");
+        } else {
+
+            list = travelRequestMasterService.readFromAdmin(travelRequestMaster);
+        }
+
+        TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+        if (!list.isEmpty()) {
+            for (Object empId1 : list) {
+                List templist = new LinkedList();
+                String pattern = "";
+                List<List<?>> fialList = new LinkedList<List<?>>();
+                List<Object> actualList = new ArrayList();
+
+                Object[] obj = (Object[]) empId1;
+                String travelId = "" + obj[6];
+                String travelType = "" + obj[2];
+                String travelEmpId = "" + obj[7];
+                EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                employeeMaster2 = employeeMasterService.readById(Integer.parseInt(travelEmpId));
+
+                List<String> approverList = null;
+                //Internationl
+                List<String> approverInternationalList = new ArrayList<String>();
+                if (!approverInternationalList.contains(employeeMaster2.getReportingManagerLevel1())) {
+                    approverInternationalList.add(employeeMaster2.getReportingManagerLevel1());
+                }
+                if (!approverInternationalList.contains(employeeMaster2.getReportingManagerLevel2())) {
+                    approverInternationalList.add(employeeMaster2.getReportingManagerLevel2());
+                }
+                if (!approverInternationalList.contains(employeeMaster2.getReportingManagerLevel3())) {
+                    approverInternationalList.add(employeeMaster2.getReportingManagerLevel3());
+                }
+                if (!approverInternationalList.contains(employeeMaster2.getReportingManagerLevel4())) {
+                    approverInternationalList.add(employeeMaster2.getReportingManagerLevel4());
+                }
+                if (!approverInternationalList.contains(employeeMaster2.getReportingManagerLevel5())) {
+                    approverInternationalList.add(employeeMaster2.getReportingManagerLevel5());
+                }
+                if (!approverInternationalList.contains(employeeMaster2.getReportingManagerLevel6())) {
+                    approverInternationalList.add(employeeMaster2.getReportingManagerLevel6());
+                }
+
+//        Set<String> internationalSet = new HashSet<String>(approverInternationalList);
+//Domestic
+                List<String> approverDomesticList = new ArrayList<String>();
+                if (!approverDomesticList.contains(employeeMaster2.getReportingManagerLevel1()) && (!employeeMaster2.getReportingManagerLevel1().equals("") || null != employeeMaster2.getReportingManagerLevel1())) {
+                    approverDomesticList.add(employeeMaster2.getReportingManagerLevel1());
+                }
+                if (!approverDomesticList.contains(employeeMaster2.getReportingManagerLevel2()) && (!employeeMaster2.getReportingManagerLevel2().equals("") || null != employeeMaster2.getReportingManagerLevel2())
+                        && !employeeMaster2.getReportingManagerLevel2().equals(employeeMaster2.getReportingManagerLevel6())) {
+                    approverDomesticList.add(employeeMaster2.getReportingManagerLevel2());
+                }
+                if (!approverDomesticList.contains(employeeMaster2.getReportingManagerLevel3()) && (!employeeMaster2.getReportingManagerLevel3().equals("") || null != employeeMaster2.getReportingManagerLevel3())
+                        && !employeeMaster2.getReportingManagerLevel3().equals(employeeMaster2.getReportingManagerLevel6())) {
+                    approverDomesticList.add(employeeMaster2.getReportingManagerLevel3());
+                }
+                if (!approverDomesticList.contains(employeeMaster2.getReportingManagerLevel4()) && (!employeeMaster2.getReportingManagerLevel4().equals("") || null != employeeMaster2.getReportingManagerLevel4())
+                        && !employeeMaster2.getReportingManagerLevel4().equals(employeeMaster2.getReportingManagerLevel6())) {
+                    approverDomesticList.add(employeeMaster2.getReportingManagerLevel4());
+                }
+                if (!approverDomesticList.contains(employeeMaster2.getReportingManagerLevel5()) && (!employeeMaster2.getReportingManagerLevel5().equals("") || null != employeeMaster2.getReportingManagerLevel5())
+                        && !employeeMaster2.getReportingManagerLevel5().equals(employeeMaster2.getReportingManagerLevel6())) {
+                    approverDomesticList.add(employeeMaster2.getReportingManagerLevel5());
+                }
+
+                templist.add("" + obj[0]);
+                templist.add("" + obj[1]);
+                templist.add("" + obj[2]);
+                templist.add("" + obj[3]);
+                templist.add("" + obj[4]);
+                templist.add("" + obj[5]);
+                templist.add("" + obj[6]);
+                templist.add("" + obj[7]);
+                templist.add("" + obj[8]);
+                templist.add("" + obj[9]);
+                travelRequestMaster1.setId(Integer.parseInt(travelId));
+                travelApproverHistory.setTravelRequestMaster(travelRequestMaster1);
+                if (travelType.equals("Domestic") || travelType.equals("Local")) {
+                    approverList = new ArrayList<String>(approverDomesticList);
+                } else {
+                    approverList = new ArrayList<String>(approverInternationalList);
+
+                }
+
+                int pass = 0;
+                for (String appoverObj : approverList) {
+
+                    EmployeeMaster employeeMaster11 = new EmployeeMaster();
+                    if (!appoverObj.equals("")) {
+
+                        employeeMaster11.setId(Integer.parseInt(appoverObj));
+                        travelApproverHistory.setEmployeeMasterByTravelApproverId(employeeMaster11);
+
+                        List<?> statusList = travelApproverHistoryService.readApproverStatusList(travelApproverHistory);
+
+                        if (!statusList.isEmpty()) {
+                            Object[] oo = (Object[]) statusList.get(0);
+
+                            if (pass == 0) {
+                                pattern += oo[1] + "_" + oo[2] + "_" + oo[3] + "";
+                            } else {
+                                pattern += "~" + oo[1] + "_" + oo[2] + "_" + oo[3] + "";
+                            }
+                        } else {
+                            EmployeeMaster employeeMaster3 = new EmployeeMaster();
+                            employeeMaster3 = employeeMasterService.readById(Integer.parseInt(appoverObj));
+                            if (pass == 0) {
+                                pattern += employeeMaster3.getEmployeeName() + "_Pending_ ";
+                            } else {
+                                pattern += "~ " + employeeMaster3.getEmployeeName() + "_Pending_ ";
+                            }
+                        }
+                    }
+                    pass++;
+                }
+                templist.add(pattern);
+                finalList.add(templist);
+            }
+
+        }
+
+        selectEmployee(request, response);
+        departmentList(request);
+        designationList(request);
+        request.setAttribute("list11", finalList);
+        session.setAttribute("travelRequestList", list);
+        mv.getModelMap().put("employeeMaster", employeeMaster1);
+        mv.setViewName("Travel/TravelRequestviewByAdmin");
+        return mv;
+    }
+
+    public ModelAndView searchOwnTravelRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        employeeMaster.setUserMaster(user);
+        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empId.get(0);
+        }
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.setViewName("Travel/TravelSearchByEmployee");
+        return mv;
+    }
+
+    public ModelAndView searchOwnTravelRequestSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        String travelType = request.getParameter("travelType");
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        employeeMaster.setUserMaster(user);
+        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empId.get(0);
+        }
+        travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+        if (!travelType.equals("")) {
+            travelRequestMaster.setTravelType(travelType);
+        }
+        if (!startDate.equals("")) {
+            travelRequestMaster.setStartDateTime(startDate);
+
+        }
+        if (!endDate.equals("")) {
+            travelRequestMaster.setEndDateTime(endDate);
+
+        }
+        List<?> list = travelRequestMasterService.requestDetail(travelRequestMaster);
+//        List<?> list = travelRequestMasterService.readOwnRequest(travelRequestMaster);
+        request.setAttribute("list", list);
+        request.setAttribute("flag", 1);
+        mv = requestResult(request, response);
+//        mv.setViewName("Travel/TravelSearchByEmployeeResult");
+        return mv;
+    }
+
+    public ModelAndView searchTravelRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        selectEmployee(request, response);
+        departmentList(request);
+        designationList(request);
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.setViewName("Travel/TravelSearchByAdmin");
+        return mv;
+    }
+
+    public ModelAndView searchTravelRequestSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        String empId = request.getParameter("employeeName");
+        String departmentId = request.getParameter("departmentMaster");
+        String designationId = request.getParameter("designationMaster");
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+        String travelType = request.getParameter("travelType");
+
+        if (!empId.equals("")) {
+            employeeMaster.setId(Integer.parseInt(empId));
+        }
+        travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+        if (!travelType.equals("")) {
+            travelRequestMaster.setTravelType(travelType);
+        }
+        if (!departmentId.equals("")) {
+            travelRequestMaster.setCashRequired(departmentId);
+        }
+        if (!designationId.equals("")) {
+            travelRequestMaster.setDateOfSubmit(designationId);
+        }
+        if (!startDate.equals("")) {
+            travelRequestMaster.setStartDateTime(startDate);
+        }
+        if (!endDate.equals("")) {
+            travelRequestMaster.setEndDateTime(endDate);
+        }
+//        List<?> list = travelRequestMasterService.readAllTravelRequest(travelRequestMaster);
+        List<?> list = travelRequestMasterService.readFromAdmin(travelRequestMaster);
+        request.setAttribute("list", list);
+        request.setAttribute("flag", 1);
+        mv = viewRequestAdminSubmit(request, response);
+//        mv.setViewName("Travel/TravelSearchByEmployeeResult");
+        return mv;
+    }
+
+    public ModelAndView userDashboardTravelPendingRequest(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+//        TravelRequestMaster travelRequestMaster1 = new TravelRequestMaster();
+//
+//        EmployeeMaster employeeMaster = new EmployeeMaster();
+//        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+//        user.getId();
+//        employeeMaster.setUserMaster(user);
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//        Date currentDate = new Date();
+//        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+//        if (!empId.isEmpty()) {
+//            employeeMaster = (EmployeeMaster) empId.get(0);
+//        }
+////        int reportingId1 = employeeMaster.getId();
+//        String reportingManagerLevel1_id = "" + employeeMaster.getId();
+//        String reportingManagerLevel2_id = "" + employeeMaster.getId();
+//        String reportingManagerLevel3_id = "" + employeeMaster.getId();
+//        String reportingManagerLevel4_id = "" + employeeMaster.getId();
+////        List<?> reportingLevelList1 = travelRequestMasterService.readTravelRequestByReportingLevel1(travelRequestMaster, reportingManagerLevel1_id);
+////        if (!reportingLevelList1.isEmpty()) {
+//        request.setAttribute("pendingApprover1Travel", 1);
+////        }
+//        List<?> reportingLevelList2 = travelRequestMasterService.readTravelRequestByReportingLevel2(reportingManagerLevel2_id);
+//        if (!reportingLevelList2.isEmpty()) {
+//            request.setAttribute("pendingApprover1Travel", reportingLevelList2.size());
+//        }
+//        List<?> reportingLevelList3 = travelRequestMasterService.readTravelRequestByReportingLevel3(reportingManagerLevel3_id);
+//        if (!reportingLevelList3.isEmpty()) {
+//            request.setAttribute("pendingApprover1Travel", reportingLevelList3.size());
+//        }
+//        List<?> reportingLevelList4 = travelRequestMasterService.readTravelRequestByReportingLevel4(reportingManagerLevel4_id);
+//        if (!reportingLevelList4.isEmpty()) {
+//            request.setAttribute("pendingApprover1Travel", reportingLevelList4.size());
+//        }
+//        EmployeeMaster employeeMaster1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//        travelRequestMaster1.setEmployeeMasterByEmployeeMasterId(employeeMaster1);
+//        List<?> list = travelRequestMasterService.readPendingTravelRequest(travelRequestMaster1);
+//        int pendingTravel = list.size();
+//        request.setAttribute("pendingTravel", pendingTravel);
+
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
+        int loginempId = employeeMaster.getId();
+        String loginId = employeeMaster.getId().toString();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        List<Object> finalList = new ArrayList<>();
+        List<Object> finalList1 = new ArrayList<>();
+        boolean flag = false;
+        List<?> list = travelRequestMasterService.readForRequestResult1(travelRequestMaster);
+        if (!list.isEmpty()) {
+            for (Object obj : list) {
+                Object[] o1 = (Object[]) obj;
+//                travelRequestMaster = (TravelRequestMaster) obj;
+                int employeeId = (int) o1[0];
+                int tabId = (int) o1[1];
+                int status = (int) o1[8];
+                employeeMaster1 = employeeMasterService.readById(employeeId);
+                String manager1 = employeeMaster1.getReportingManagerLevel1();
+                String manager2 = employeeMaster1.getReportingManagerLevel2();
+                String manager3 = employeeMaster1.getReportingManagerLevel3();
+                String manager4 = employeeMaster1.getReportingManagerLevel4();
+                String manager5 = employeeMaster1.getReportingManagerLevel5();
+                String aprroverid = "";
+                int ReturnFlag = 0;
+                int historyappid = 0;
+                int historyappid1 = 0;
+                if (status != 0) {
+                    if (status != 10) {
+//                        int aprroverid1 = (int) o1[10];
+                        aprroverid = "" + o1[10];
+//                        aprroverid = (String) o1[10].toString();
+                    }
+                }
+                List<?> approverList = travelApproverHistoryService.readapproverlist(tabId, loginId);
+                for (Object o : approverList) {
+                    TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+                    travelApproverHistory = (TravelApproverHistory) o;
+                    ReturnFlag = travelApproverHistory.getReturnFlag();
+                    if (ReturnFlag == 0) {
+                        historyappid = travelApproverHistory.getEmployeeMasterByTravelApproverId().getId();
+                    }
+                    if (ReturnFlag == 1) {
+                        historyappid1 = travelApproverHistory.getEmployeeMasterByTravelApproverId().getId();
+                    }
+                }
+                if ((status == 3 && ReturnFlag == 0) || status == 0 || status == 10 || status == 1) {
+                    String dos1 = o1[9].toString();
+                    Date dos = sdf.parse(dos1);
+                    String today = sdf.format(new Date());
+                    Date tDate = sdf.parse(today);
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(dos);
+                    c.add(Calendar.DATE, 7);
+                    Date Date7 = c.getTime();
+                    c.setTime(Date7);
+                    c.add(Calendar.DATE, 7);
+                    Date Date14 = c.getTime();
+                    c.setTime(Date14);
+                    c.add(Calendar.DATE, 7);
+                    Date Date21 = c.getTime();
+                    c.setTime(Date21);
+                    c.add(Calendar.DATE, 7);
+                    Date Date28 = c.getTime();
+                    c.setTime(Date28);
+                    c.add(Calendar.DATE, 7);
+                    Date Date35 = c.getTime();
+
+                    if (Integer.parseInt(manager1) == Integer.parseInt(loginId)) {
+                        if ((DateUtils.isSameDay(dos, tDate) || tDate.after(dos)) && tDate.before(Date7)) {
+                            finalList.add(obj);
+                        }
+                    }
+                    if (!manager2.isEmpty() && !manager1.isEmpty()) {
+                        if (Integer.parseInt(manager2) == Integer.parseInt(loginId)) {
+                            if (historyappid != 0) {
+                                if (Integer.parseInt(loginId) == historyappid) {
+                                    finalList.add(obj);
+                                }
+                            }
+                            if (aprroverid == null || aprroverid == "") {
+                                if ((DateUtils.isSameDay(Date7, tDate) || tDate.after(Date7)) && tDate.before(Date14)) {
+                                    finalList.add(obj);
+                                }
+                            } else {
+                                if (status != 1) {
+                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                        finalList.add(obj);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!manager3.isEmpty() && !manager2.isEmpty() && !manager1.isEmpty()) {
+                        if (Integer.parseInt(manager3) == Integer.parseInt(loginId)) {
+                            if (historyappid != 0) {
+                                if (Integer.parseInt(loginId) == historyappid) {
+                                    finalList.add(obj);
+                                }
+                            }
+                            if (aprroverid == null || aprroverid == "") {
+                                if ((DateUtils.isSameDay(Date14, tDate) || tDate.after(Date14)) && tDate.before(Date21)) {
+                                    finalList.add(obj);
+                                }
+                            } else {
+                                if (status != 1) {
+                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                        finalList.add(obj);
+                                    } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 4, 4);
+                                        if (tDate.before(Date21) && checklastapprovedateflag == true) {
+                                            finalList.add(obj);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!manager4.isEmpty() && !manager3.isEmpty() && !manager2.isEmpty() && !manager1.isEmpty()) {
+                        if (Integer.parseInt(manager4) == Integer.parseInt(loginId)) {
+                            if (historyappid != 0) {
+                                if (Integer.parseInt(loginId) == historyappid) {
+                                    finalList.add(obj);
+                                }
+                            }
+                            if (aprroverid == null || aprroverid == "") {
+                                if ((DateUtils.isSameDay(Date21, tDate) || tDate.after(Date21)) && tDate.before(Date28)) {
+                                    finalList.add(obj);
+                                }
+                            } else {
+                                if (status != 1) {
+                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
+                                        finalList.add(obj);
+                                    } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 4, 4);
+                                        if (tDate.before(Date28) && checklastapprovedateflag == true) {
+                                            finalList.add(obj);
+                                        }
+                                    } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                        boolean checklastapprovedateflag1 = managercheck(tabId, manager1, 8, 4);
+                                        if (tDate.before(Date28) && checklastapprovedateflag1 == true) {
+                                            finalList.add(obj);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!manager5.isEmpty()) {
+                        if (Integer.parseInt(manager5) == Integer.parseInt(loginId)) {
+                            if (historyappid != 0 || status == 8) {
+                                if (Integer.parseInt(loginId) == historyappid) {
+                                    finalList.add(obj);
+                                }
+                            }
+                            if (aprroverid == null || aprroverid == "") {
+                                if ((DateUtils.isSameDay(Date28, tDate) || tDate.after(Date28)) && tDate.before(Date35)) {
+                                    finalList.add(obj);
+                                }
+                            } else {
+                                if (!manager4.isEmpty()) {
+                                    if (status != 1) {
+                                        if (Integer.parseInt(aprroverid) == Integer.parseInt(manager4)) {
+                                            finalList.add(obj);
+                                        }
+                                    }
+                                    if (!manager3.isEmpty()) {
+                                        if (status != 1) {
+                                            if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
+                                                boolean checklastapprovedateflag = managercheck(tabId, manager3, 4, 4);
+                                                if (tDate.before(Date21) && checklastapprovedateflag == true) {
+                                                    finalList.add(obj);
+                                                }
+                                            } else if (!manager2.isEmpty()) {
+                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager2, 8, 4);
+                                                    if (checklastapprovedateflag == true) {
+                                                        finalList.add(obj);
+                                                    }
+                                                }
+                                            } else if (!manager1.isEmpty()) {
+                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager1, 12, 4);
+                                                    if (checklastapprovedateflag == true) {
+                                                        finalList.add(obj);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    if (manager4 == null || manager4 == "") {
+                                        if (!manager3.isEmpty()) {
+                                            if (status != 1) {
+                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager3, 0, 4);
+                                                    if (tDate.before(Date21) && checklastapprovedateflag == true) {
+                                                        finalList.add(obj);
+                                                    }
+                                                } else if (!manager2.isEmpty()) {
+                                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 4, 4);
+                                                        if (checklastapprovedateflag == true) {
+                                                            finalList.add(obj);
+                                                        }
+                                                    }
+                                                } else if (!manager1.isEmpty()) {
+                                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 8, 4);
+                                                        if (checklastapprovedateflag == true) {
+                                                            finalList.add(obj);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        } else if (manager3 == null || manager3 == "") {
+                                            if (!manager2.isEmpty()) {
+                                                if (status != 1) {
+                                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 0, 4);
+                                                        if (checklastapprovedateflag == true) {
+                                                            finalList.add(obj);
+                                                        }
+                                                    } else if (!manager1.isEmpty()) {
+                                                        if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                            boolean checklastapprovedateflag = managercheck(tabId, manager1, 4, 4);
+                                                            if (checklastapprovedateflag == true) {
+                                                                finalList.add(obj);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            } else if (manager2 == null || manager2 == "") {
+                                                if (!manager1.isEmpty()) {
+                                                    if (status != 1) {
+                                                        if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                            if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                                boolean checklastapprovedateflag = managercheck(tabId, manager1, 0, 4);
+                                                                finalList.add(obj);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else if (status == 6 || status == 5) {
+                    try {
+
+                        if (Integer.parseInt(loginId) == Integer.parseInt(manager1)
+                                || Integer.parseInt(loginId) == Integer.parseInt(manager5)) {
+                            finalList.add(obj);
+                        } else if (!manager2.isEmpty()) {
+                            if (Integer.parseInt(loginId) == Integer.parseInt(manager2)) {
+                                finalList.add(obj);
+                            }
+                        } else if (!manager3.isEmpty()) {
+                            if (Integer.parseInt(loginId) == Integer.parseInt(manager3)) {
+                                finalList.add(obj);
+                            }
+                        } else if (!manager4.isEmpty()) {
+                            if (Integer.parseInt(loginId) == Integer.parseInt(manager4)) {
+                                finalList.add(obj);
+                            }
+                        }
+                    } catch (Exception e) {
+
+                    }
+                }
+            }
+            if (!finalList.isEmpty()) {
+                for (Object obj : finalList) {
+                    Object[] o1 = (Object[]) obj;
+                    int employeeId = (int) o1[0];
+                    int tabId = (int) o1[1];
+                    int status = (int) o1[8];
+                    if (status == 3) {
+                        List approverList = travelApproverHistoryService.readapproverlist(tabId, loginId);
+                        for (Object o : approverList) {
+                            TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+                            travelApproverHistory = (TravelApproverHistory) o;
+                            int prevStatus = travelApproverHistory.getTravelApproveStatus();
+                            int prevflag = travelApproverHistory.getReturnFlag();
+                            int tbId = travelApproverHistory.getTravelRequestMaster().getId();
+//                          in both take list[10] as approverid list[11] appname
+                            if (prevflag == 0) {
+                                List<?> newfinallist = travelRequestMasterService.readlastapprove(tbId, loginId);
+                                flag = true;
+                                finalList1.add(newfinallist.get(0));
+                                break;
+                            }
+                        }
+                        if (approverList.size() == 0) {
+//                                    List<Object> l1 = new ArrayList<>();
+//                                    l1.add(obj);
+                            finalList1.add(obj);
+                        }
+                    } else {
+//                                    List<Object> l1 = new ArrayList<>();
+//                                    l1.add(obj);
+                        finalList1.add(obj);
+                    }
+                }
+            }
+        }
+        Set<Object> foo = new HashSet<Object>(finalList1);
+        List<Object> list111 = new ArrayList<Object>(foo);
+        for (Iterator<Object> iterator = list111.iterator(); iterator.hasNext();) {
+            try {
+                Object[] next = (Object[]) iterator.next();
+                String status = "" + next[8];
+                String historystatus = "";
+                if (next.length == 14) {
+
+                    historystatus = "" + next[13];
+                    if (Integer.parseInt(status) == 0 || (Integer.parseInt(status) == 3 && !historystatus.equals("0"))) {
+                    } else {
+                        iterator.remove();
+
+                    }
+                } else {
+                    if (Integer.parseInt(status) == 0 || Integer.parseInt(status) == 3 || Integer.parseInt(status) == 10) {
+                    } else {
+                        iterator.remove();
+                    }
+                }
+            } catch (Exception e) {
+
+            }
+        }
+//        request.setAttribute("pendingApprover1Travel", 0);
+        request.setAttribute("pendingApprover1Travel", list111.size());
+//
+        EmployeeMaster employeeMaster11 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster11);
+        List<?> list11 = travelRequestMasterService.readPendingTravelRequest(travelRequestMaster);
+        int pendingTravel = list11.size();
+        request.setAttribute("pendingTravel", pendingTravel);
+//
+//        int reportingId1 = employeeMaster.getId();
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//        Date currentDate = new Date();
+//        List<?> mainList = travelRequestMasterService.readFromManager(reportingId1);
+//        for (Iterator<? extends Object> iterator = mainList.iterator(); iterator.hasNext();) {
+//            Object[] next = (Object[]) iterator.next();
+//            String strdate = "" + next[9];
+//            String approver1 = "" + next[10];
+//            String approver2 = "" + next[11];
+//            sdf.parse(strdate);
+//            Calendar cal = Calendar.getInstance();
+//            cal.setTime(sdf.parse(strdate));
+//            Date dd = cal.getTime();
+//            Date addedDate = addDays(dd, 15);
+//            if (currentDate.equals(addedDate) || currentDate.before(addedDate)) {
+//                List<?> list1 = travelRequestMasterService.readApproverPendingTravelRequest(travelRequestMaster);
+//                int pendingApproverTravel = list1.size();
+//                request.setAttribute("pendingApproverTravel", pendingApproverTravel);
+//            } else {
+//                List<?> list2 = travelRequestMasterService.readApprover2PendingTravelRequest(travelRequestMaster);
+//                int pendingApprover1Travel = list2.size();
+//                request.setAttribute("pendingApprover1Travel", pendingApprover1Travel);
+//            }
+//        }
+        mv.setViewName("forward:performanceImprovementPlanMaster.htm?act=userDashBoard");
+
+        return mv;
+    }
+
+    public ModelAndView searchOwnTravelPendingRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+
+        List<?> resultList = travelRequestMasterService.readPendingTravelRequest(travelRequestMaster);
+        request.setAttribute("resultList", resultList);
+        mv.getModelMap().put("travelRequestMaster", travelRequestMaster);
+        mv.setViewName("Travel/TravelRequestResult");
+        return mv;
+
+    }
+
+    public ModelAndView searchTravelRequestAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        List<?> list = (List<?>) request.getAttribute("list1");
+        selectEmployee(request, response);
+        departmentList(request);
+        designationList(request);
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        request.setAttribute("list1", list);
+        mv.setViewName("Travel/TravelSearchByReportAdmin");
+        return mv;
+    }
+
+    public ModelAndView searchTravelRequestSubmitAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        String empId = request.getParameter("employeeName");
+        String maangerId = "";
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        employeeMaster.setUserMaster(user);
+        List<?> empId1 = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) empId1.get(0);
+            maangerId = "" + employeeMaster1.getId();
+        }
+        String departmentId = "";
+        String designationId = "";
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+        String travelType = request.getParameter("travelType");
+
+        if (!empId.equals("")) {
+            employeeMaster.setId(Integer.parseInt(empId));
+        }
+        travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+        if (!travelType.equals("")) {
+            travelRequestMaster.setTravelType(travelType);
+        }
+        if (!departmentId.equals("")) {
+            travelRequestMaster.setCashRequired(departmentId);
+        }
+        if (!designationId.equals("")) {
+            travelRequestMaster.setDateOfSubmit(designationId);
+        }
+        if (!startDate.equals("")) {
+            travelRequestMaster.setStartDateTime(startDate);
+        }
+        if (!endDate.equals("")) {
+            travelRequestMaster.setEndDateTime(endDate);
+        }
+
+//        String reportingManagerLevel1_id = "" + employeeMaster.getId();
+//        List<?> reportingLevelList1 = travelRequestMasterService.readTravelRequestByReportingLevel1(travelRequestMaster, maangerId);
+//        if (!reportingLevelList1.isEmpty()) {
+//            request.setAttribute("reportingLevel", reportingLevelList1);
+//        }
+//        List<?> reportingLevelList2 = travelRequestMasterService.readTravelRequestByReportingLevel2(reportingManagerLevel1_id);
+//        if (!reportingLevelList2.isEmpty()) {
+//            request.setAttribute("reportingLevel", reportingLevelList2);
+//        }
+//        List<?> reportingLevelList3 = travelRequestMasterService.readTravelRequestByReportingLevel3(reportingManagerLevel1_id);
+//        if (!reportingLevelList3.isEmpty()) {
+//            request.setAttribute("reportingLevel", reportingLevelList3);
+//        }
+//        List<?> reportingLevelList4 = travelRequestMasterService.readTravelRequestByReportingLevel4(reportingManagerLevel1_id);
+//        if (!reportingLevelList4.isEmpty()) {
+//            request.setAttribute("reportingLevel", reportingLevelList4);
+//        }
+        List<?> list = travelRequestMasterService.readForRequestResult1(travelRequestMaster);
+//        List<?> list = travelRequestMasterService.readAllTravelRequestAdmin(travelRequestMaster, maangerId);
+        request.setAttribute("list11", list);
+        request.setAttribute("flag", 1);
+//        mv.setViewName("Travel/TravelSearchByReportAdmin");
+        mv = requestResult1(request, response);
+//        mv = searchTravelRequestAdmin(request, response);
+//        mv.setViewName("Travel/TravelSearchByEmployeeResultAdmin");
+//        mv = viewRequestResultManagerSide(request, response);
+        return mv;
+    }
+
+    public ModelAndView requestResult1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+
+        EmployeeMaster employeeMaster2 = new EmployeeMaster();
+
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
+        int loginempId = employeeMaster.getId();
+        String loginId = employeeMaster.getId().toString();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        List<Object> finalList = new ArrayList<>();
+        List<Object> finalList1 = new ArrayList<>();
+        boolean flag = false;
+        Object obj11 = request.getAttribute("flag");
+        List<?> list = null;
+        String obj22 = "";
+        if (obj11 != null) {
+            obj22 = obj11.toString();
+        }
+        if (obj22.equals("1")) {
+            list = (List<?>) request.getAttribute("list11");
+        } else {
+            list = travelRequestMasterService.readForRequestResult1(travelRequestMaster);
+        }
+        if (!list.isEmpty()) {
+            for (Object obj : list) {
+                Object[] o1 = (Object[]) obj;
+//                travelRequestMaster = (TravelRequestMaster) obj;
+                int employeeId = (int) o1[0];
+                int tabId = (int) o1[1];
+                int status = (int) o1[8];
+                employeeMaster1 = employeeMasterService.readById(employeeId);
+                String manager1 = employeeMaster1.getReportingManagerLevel1();
+                String manager2 = employeeMaster1.getReportingManagerLevel2();
+                String manager3 = employeeMaster1.getReportingManagerLevel3();
+                String manager4 = employeeMaster1.getReportingManagerLevel4();
+                String manager5 = employeeMaster1.getReportingManagerLevel5();
+                String aprroverid = "";
+                int ReturnFlag = 0;
+                int historyappid = 0;
+                int historyappid1 = 0;
+                if (status != 0) {
+                    if (status != 10) {
+//                        int aprroverid1 = (int) o1[10];
+                        if (o1[10] == null) {
+
+                            aprroverid = "";
+                        } else {
+                            aprroverid = (String) o1[10].toString();
+                        }
+
+//                        System.out.println("Ajay" + aprroverid1);
+                    }
+                }
+                List<?> approverList = travelApproverHistoryService.readapproverlist(tabId, loginId);
+                for (Object o : approverList) {
+                    TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+                    travelApproverHistory = (TravelApproverHistory) o;
+                    ReturnFlag = travelApproverHistory.getReturnFlag();
+                    if (ReturnFlag == 0) {
+                        historyappid = travelApproverHistory.getEmployeeMasterByTravelApproverId().getId();
+                    }
+                    if (ReturnFlag == 1) {
+                        historyappid1 = travelApproverHistory.getEmployeeMasterByTravelApproverId().getId();
+                    }
+                }
+                if ((status == 3 && ReturnFlag == 0) || status == 0 || status == 10 || status == 1) {
+                    String dos1 = o1[9].toString();
+                    Date dos = sdf.parse(dos1);
+                    String today = sdf.format(new Date());
+                    Date tDate = sdf.parse(today);
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(dos);
+                    c.add(Calendar.DATE, 4);
+                    Date Date7 = c.getTime();
+                    c.setTime(Date7);
+                    c.add(Calendar.DATE, 4);
+                    Date Date14 = c.getTime();
+                    c.setTime(Date14);
+                    c.add(Calendar.DATE, 4);
+                    Date Date21 = c.getTime();
+                    c.setTime(Date21);
+                    c.add(Calendar.DATE, 4);
+                    Date Date28 = c.getTime();
+                    c.setTime(Date28);
+                    c.add(Calendar.DATE, 4);
+                    Date Date35 = c.getTime();
+
+                    if (Integer.parseInt(manager1) == Integer.parseInt(loginId)) {
+                        if ((DateUtils.isSameDay(dos, tDate) || tDate.after(dos)) && tDate.before(Date7)) {
+                            finalList.add(obj);
+                        }
+                    }
+                    if (!manager2.isEmpty() && !manager1.isEmpty()) {
+                        if (Integer.parseInt(manager2) == Integer.parseInt(loginId)) {
+                            if (historyappid != 0) {
+                                if (Integer.parseInt(loginId) == historyappid) {
+                                    finalList.add(obj);
+                                }
+                            }
+                            if (aprroverid == null || aprroverid == "") {
+                                if ((DateUtils.isSameDay(Date7, tDate) || tDate.after(Date7)) && tDate.before(Date14)) {
+                                    finalList.add(obj);
+                                }
+                            } else {
+                                if (status != 1) {
+                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                        finalList.add(obj);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!manager3.isEmpty() && !manager2.isEmpty() && !manager1.isEmpty()) {
+                        if (Integer.parseInt(manager3) == Integer.parseInt(loginId)) {
+                            if (historyappid != 0) {
+                                if (Integer.parseInt(loginId) == historyappid) {
+                                    finalList.add(obj);
+                                }
+                            }
+                            if (aprroverid == null || aprroverid == "") {
+                                if ((DateUtils.isSameDay(Date14, tDate) || tDate.after(Date14)) && tDate.before(Date21)) {
+                                    finalList.add(obj);
+                                }
+                            } else {
+                                if (status != 1) {
+                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                        finalList.add(obj);
+                                    } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 4, 4);
+                                        if (tDate.before(Date21) && checklastapprovedateflag == true) {
+                                            finalList.add(obj);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!manager4.isEmpty() && !manager3.isEmpty() && !manager2.isEmpty() && !manager1.isEmpty()) {
+                        if (Integer.parseInt(manager4) == Integer.parseInt(loginId)) {
+                            if (historyappid != 0) {
+                                if (Integer.parseInt(loginId) == historyappid) {
+                                    finalList.add(obj);
+                                }
+                            }
+                            if (aprroverid == null || aprroverid == "") {
+                                if ((DateUtils.isSameDay(Date21, tDate) || tDate.after(Date21)) && tDate.before(Date28)) {
+                                    finalList.add(obj);
+                                }
+                            } else {
+                                if (status != 1) {
+                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
+                                        finalList.add(obj);
+                                    } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 4, 4);
+                                        if (tDate.before(Date28) && checklastapprovedateflag == true) {
+                                            finalList.add(obj);
+                                        }
+                                    } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                        boolean checklastapprovedateflag1 = managercheck(tabId, manager1, 8, 4);
+                                        if (tDate.before(Date28) && checklastapprovedateflag1 == true) {
+                                            finalList.add(obj);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!manager5.isEmpty()) {
+                        if (Integer.parseInt(manager5) == Integer.parseInt(loginId)) {
+                            if (historyappid != 0 || status == 8) {
+                                if (Integer.parseInt(loginId) == historyappid) {
+                                    finalList.add(obj);
+                                }
+                            }
+                            if (aprroverid == null || aprroverid == "") {
+                                if ((DateUtils.isSameDay(Date28, tDate) || tDate.after(Date28)) && tDate.before(Date35)) {
+                                    finalList.add(obj);
+                                }
+                            } else {
+                                if (!manager4.isEmpty()) {
+                                    if (status != 1) {
+                                        if (Integer.parseInt(aprroverid) == Integer.parseInt(manager4)) {
+                                            finalList.add(obj);
+                                        }
+                                    }
+                                    if (!manager3.isEmpty()) {
+                                        if (status != 1) {
+                                            if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
+                                                boolean checklastapprovedateflag = managercheck(tabId, manager3, 4, 4);
+                                                if (tDate.before(Date21) && checklastapprovedateflag == true) {
+                                                    finalList.add(obj);
+                                                }
+                                            } else if (!manager2.isEmpty()) {
+                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager2, 8, 4);
+                                                    if (checklastapprovedateflag == true) {
+                                                        finalList.add(obj);
+                                                    }
+                                                }
+                                            } else if (!manager1.isEmpty()) {
+                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager1, 12, 4);
+                                                    if (checklastapprovedateflag == true) {
+                                                        finalList.add(obj);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    if (manager4 == null || manager4 == "") {
+                                        if (!manager3.isEmpty()) {
+                                            if (status != 1) {
+                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager3, 0, 4);
+                                                    if (tDate.before(Date21) && checklastapprovedateflag == true) {
+                                                        finalList.add(obj);
+                                                    }
+                                                } else if (!manager2.isEmpty()) {
+                                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 4, 4);
+                                                        if (checklastapprovedateflag == true) {
+                                                            finalList.add(obj);
+                                                        }
+                                                    }
+                                                } else if (!manager1.isEmpty()) {
+                                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 8, 4);
+                                                        if (checklastapprovedateflag == true) {
+                                                            finalList.add(obj);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        } else if (manager3 == null || manager3 == "") {
+                                            if (!manager2.isEmpty()) {
+                                                if (status != 1) {
+                                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 0, 4);
+                                                        if (checklastapprovedateflag == true) {
+                                                            finalList.add(obj);
+                                                        }
+                                                    } else if (!manager1.isEmpty()) {
+                                                        if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                            boolean checklastapprovedateflag = managercheck(tabId, manager1, 4, 4);
+                                                            if (checklastapprovedateflag == true) {
+                                                                finalList.add(obj);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            } else if (manager2 == null || manager2 == "") {
+                                                if (!manager1.isEmpty()) {
+                                                    if (status != 1) {
+                                                        if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                            if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                                boolean checklastapprovedateflag = managercheck(tabId, manager1, 0, 4);
+                                                                finalList.add(obj);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else if (status == 6 || status == 5) {
+
+                    if (Integer.parseInt(loginId) == Integer.parseInt(manager1)) {
+                        finalList.add(obj);
+                    } else if (!manager2.isEmpty()) {
+                        if (Integer.parseInt(loginId) == Integer.parseInt(manager2)) {
+                            finalList.add(obj);
+                        }
+                    } else if (!manager3.isEmpty()) {
+                        if (Integer.parseInt(loginId) == Integer.parseInt(manager3)) {
+                            finalList.add(obj);
+                        }
+                    } else if (!manager4.isEmpty()) {
+                        if (Integer.parseInt(loginId) == Integer.parseInt(manager4)) {
+                            finalList.add(obj);
+                        }
+                    } else if (!manager5.isEmpty()) {
+                        if (Integer.parseInt(loginId) == Integer.parseInt(manager5)) {
+                            finalList.add(obj);
+                        }
+                    }
+                }
+            }
+            if (!finalList.isEmpty()) {
+                for (Object obj : finalList) {
+                    Object[] o1 = (Object[]) obj;
+                    int employeeId = (int) o1[0];
+                    int tabId = (int) o1[1];
+                    int status = (int) o1[8];
+                    if (status == 3) {
+                        List approverList = travelApproverHistoryService.readapproverlist(tabId, loginId);
+                        for (Object o : approverList) {
+                            TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+                            travelApproverHistory = (TravelApproverHistory) o;
+                            int prevStatus = travelApproverHistory.getTravelApproveStatus();
+                            int prevflag = travelApproverHistory.getReturnFlag();
+                            int tbId = travelApproverHistory.getTravelRequestMaster().getId();
+//                          in both take list[10] as approverid list[11] appname
+                            if (prevflag == 0) {
+                                List<?> newfinallist = travelRequestMasterService.readlastapprove(tbId, loginId);
+                                flag = true;
+                                finalList1.add(newfinallist.get(0));
+                                break;
+                            }
+                        }
+                        if (approverList.size() == 0) {
+//                                    List<Object> l1 = new ArrayList<>();
+//                                    l1.add(obj);
+                            finalList1.add(obj);
+                        }
+                    } else {
+//                                    List<Object> l1 = new ArrayList<>();
+//                                    l1.add(obj);
+                        finalList1.add(obj);
+                    }
+                }
+            }
+        }
+        Set<Object> foo = new HashSet<Object>(finalList1);
+        List<Object> list111 = new ArrayList<Object>(foo);
+        request.setAttribute("finalList", list111);
+        selectEmployee(request, response);
+        mv.getModelMap().put("travelRequestMaster", travelRequestMaster);
+        request.setAttribute("employeeMaster", employeeMaster2);
+        mv.setViewName("Travel/TravelRequestNewResult");
+        return mv;
+    }
+
+    public boolean managercheck(int tabId, String MangerId, int i, int j) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        boolean flag = false;
+        List l1 = travelApproverHistoryService.readpreviousmanagerdata(tabId, MangerId);
+        String lastApproveDateString = (String) l1.get(0);
+        Date lastApproveDate = sdf.parse(lastApproveDateString);
+        Calendar c1 = Calendar.getInstance();
+        c1.setTime(lastApproveDate);
+        c1.add(Calendar.DATE, i);
+        Date managerapprove1 = c1.getTime();
+
+        c1.setTime(managerapprove1);
+        c1.add(Calendar.DATE, j);
+        Date managerapprove2 = c1.getTime();
+
+        String today = sdf.format(new Date());
+        Date tDate = sdf.parse(today);
+
+        if ((DateUtils.isSameDay(managerapprove1, tDate) || tDate.after(managerapprove1)) && (DateUtils.isSameDay(managerapprove2, tDate) || tDate.before(managerapprove2))) {
+            flag = true;
+        }
+
+        return flag;
+    }
+
+    public ModelAndView requestResultCEO(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        List<?> list = travelRequestMasterService.readForCEO(travelRequestMaster);
+        request.setAttribute("list", list);
+        mv.getModelMap().put("travelRequestMaster", travelRequestMaster);
+        mv.setViewName("Travel/TravelRequestCeoResult");
+        return mv;
+    }
+
+    public ModelAndView viewResultCEOSide(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        TravelDetail travelDetail = new TravelDetail();
+        HotelAccommodation hotelAccommodation = new HotelAccommodation();
+        UserMaster userMaster = new UserMaster();
+        String id = request.getParameter("id");
+        travelRequestMaster.setId(Integer.parseInt(id));
+        String userId = request.getParameter("empId");
+        employeeMaster = employeeMasterService.readById(Integer.parseInt(userId));
+        int reportingId = 0;
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
+
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+        }
+
+        travelRequestMaster = travelRequestMasterService.readById(Integer.parseInt(id));
+        travelDetail.setTravelRequestMaster(travelRequestMaster);
+        List<?> travelDetailList = travelDetailService.readTravelDetail(travelDetail);
+
+        hotelAccommodation.setTravelRequestMaster(travelRequestMaster);
+        List<?> accommodationList = hotelAccommodationService.readAccommodationDetail(hotelAccommodation);
+        readcurrencyList(request);
+        request.setAttribute("accommodationList", accommodationList);
+        request.setAttribute("travelDetailList", travelDetailList);
+        request.setAttribute("empid", userId);
+
+        mv.getModelMap().put("travelRequestMaster", travelRequestMaster);
+        mv.setViewName("Travel/TravelRequestFinalApprove");
+        return mv;
+    }
+
+    public ModelAndView approveCEO(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        String id = request.getParameter("id");
+        String CEORemark = request.getParameter("adminRemark");
+        String btnSubmit = request.getParameter("btnSubmit");
+        travelRequestMaster = travelRequestMasterService.readById(Integer.parseInt(id));
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        employeeMaster1 = employeeMasterService.readById(travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId());
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String requestdate = sdf.format(new Date());
+        TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+        travelApproverHistory.setTravelRequestMaster(travelRequestMaster);
+
+        travelApproverHistory.setEmployeeMasterByEmployeeMasterId(employeeMaster1);
+        travelApproverHistory.setEmployeeMasterByTravelApproverId(employeeMaster);
+        travelApproverHistory.setTravelApproveHistoryDate(requestdate);
+        travelApproverHistory.setTravelApproverRemark(CEORemark);
+        travelApproverHistory.setReturnFlag(0);
+
+        if (btnSubmit.equals("approve")) {
+            travelRequestMaster.setAdminRemark(CEORemark);
+            travelRequestMaster.setEmployeeMasterByApprover2Id(employeeMaster);
+            travelRequestMaster.setStatus(5);
+            travelRequestMasterService.update(travelRequestMaster);
+
+            travelApproverHistory.setTravelApproveStatus(5);
+            travelApproverHistoryService.create(travelApproverHistory);
+
+            request.setAttribute("successMessage",
+                    "Information : The Travel Request Approved successfully.");
+//            Send to Employee
+            try {
+
+                EmployeeMaster employeemastermodel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeemastermodel.getDesignationMaster().getId());
+                EmailTemplate emailTemplate = new EmailTemplate();
+                emailTemplate = emailTemplateService.readById(125);
+                //id=125 for travel request approve by CEO..
+                EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                String empStr = request.getParameter("empid");
+                if (null != empStr && !"".equals(empStr)) {
+                    int empID = Integer.parseInt(empStr);
+//                    List list = employeeMasterService.readByEmployeeNo(empID);
+                    employeeMaster2 = employeeMasterService.readById(empID);
+
+//                    if (list != null) {
+//                        employeeMaster2 = (EmployeeMaster) list.get(0);
+                    String To = employeeMaster2.getOfficeEmailId();
+                    String from = employeemastermodel.getOfficeEmailId();
+                    String subject = emailTemplate.getSubject();
+                    subject = subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, subject, msg);
+
+//                    }
+                }
+
+            } catch (Exception e) {
+            }
+//            Send To TravelAdmin
+            try {
+
+                EmployeeMaster employeemastermodel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeemastermodel.getDesignationMaster().getId());
+                EmailTemplate emailTemplate = new EmailTemplate();
+                emailTemplate = emailTemplateService.readById(25);
+                //id=125 for travel request approve by CEO..
+                EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                List travelAdminList = userRightMasterService.readTravelAdmin();
+                Iterator itr = travelAdminList.iterator();
+                while (itr.hasNext()) {
+                    Object[] next = (Object[]) itr.next();
+                    String userId = "" + next[0];
+                    String travelId = "" + next[1];
+                    employeeMaster2 = employeeMasterService.readById(Integer.parseInt(travelId));
+                    String To = employeeMaster2.getOfficeEmailId();
+                    String from = employeemastermodel.getOfficeEmailId();
+                    String subject = emailTemplate.getSubject();
+                    subject = subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, subject, msg);
+
+                }
+
+            } catch (Exception e) {
+            }
+
+        } else if (btnSubmit.equals("rework")) {
+            travelRequestMaster.setStatus(1);
+            travelRequestMaster.setAdminRemark(CEORemark);
+            travelRequestMaster.setEmployeeMasterByApprover2Id(employeeMaster);
+            travelRequestMasterService.update(travelRequestMaster);
+
+            travelApproverHistory.setTravelApproveStatus(1);
+            travelApproverHistoryService.create(travelApproverHistory);
+            request.setAttribute("successMessage",
+                    "Information : The Travel Request Reworked successfully.");
+
+            try {
+
+                EmployeeMaster employeemastermodel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeemastermodel.getDesignationMaster().getId());
+                EmailTemplate emailTemplate = new EmailTemplate();
+                //id=126 for travel request rework by CEO...
+                emailTemplate = emailTemplateService.readById(126);
+                EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                String empStr = request.getParameter("empid");
+                if (null != empStr && !"".equals(empStr)) {
+                    int empID = Integer.parseInt(empStr);
+//                    List list = employeeMasterService.readByEmployeeNo(empID);
+
+                    employeeMaster2 = employeeMasterService.readById(empID);
+                    String To = employeeMaster2.getOfficeEmailId();
+                    String from = employeemastermodel.getOfficeEmailId();
+                    String subject = emailTemplate.getSubject();
+                    subject = subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, subject, msg);
+
+                }
+
+            } catch (Exception e) {
+            }
+
+        }
+        mv = requestResultCEO(request, response);
+        return mv;
+    }
+
+    public void getTravelDatesAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String travelNo = request.getParameter("travelNo");
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        if (!travelNo.equals("")) {
+
+            travelRequestMaster = travelRequestMasterService.readById(Integer.parseInt(travelNo));
+        }
+        PrintWriter out = response.getWriter();
+        out.print(travelRequestMaster.getStartDateTime() + "~" + travelRequestMaster.getEndDateTime() + "~" + travelRequestMaster.getTravelType());
+
+    }
+
+    public ModelAndView exportToExcelTravel(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        List<?> travelRequestList = (List<?>) request.getSession().getAttribute("travelRequestList");
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-Disposition", "attachment; filename=TravelRequestData.xls");
+        mv.addObject("travelRequestList", travelRequestList);
+        mv.setViewName("Travel/TravelRequestExcelData");
+        return mv;
+    }
+
+    public ModelAndView exportToPdfTravelReport(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        TravelDetail travelDetail = new TravelDetail();
+        HotelAccommodation hotelAccommodation = new HotelAccommodation();
+        String id = request.getParameter("id");
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        user.getId();
+        employeeMaster.setUserMaster(user);
+        String empNo = "";
+        readcurrencyList(request);
+        int reportingId = 0;
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            Object[] obj = (Object[]) empDetailList.get(0);
+            empNo = "" + obj[0];
+
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
+
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+
+        }
+        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empId.get(0);
+        }
+        travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+        travelRequestMaster = travelRequestMasterService.readById(Integer.parseInt(id));
+
+        travelDetail.setTravelRequestMaster(travelRequestMaster);
+        List<?> travelDetailList = travelDetailService.readTravelDetail(travelDetail);
+
+        hotelAccommodation.setTravelRequestMaster(travelRequestMaster);
+        List<?> accommodationList = hotelAccommodationService.readAccommodationDetail(hotelAccommodation);
+
+        request.setAttribute("accommodationList", accommodationList);
+        request.setAttribute("travelDetailList", travelDetailList);
+
+        mv.getModelMap().put("travelRequestMaster", travelRequestMaster);
+        mv.setViewName("Travel/TravelReportExportToPdf");
+        return mv;
+    }
+
+    public ModelAndView viewCashAdvanceSectionByAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+
+        List<?> approvedTravelReqList = travelRequestMasterService.readApprovedTravelRequest();
+        request.setAttribute("approvedTravelReqList", approvedTravelReqList);
+        mv.setViewName("Travel/TravelCashAdvanceResult");
+        return mv;
+    }
+
+    public ModelAndView updateCashAdvanceSectionByAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+
+        String travelId = request.getParameter("travelId");
+        String empId = request.getParameter("empId");
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        readcurrencyList(request);
+
+        employeeMaster = employeeMasterService.readById(Integer.parseInt(empId));
+
+        int reportingId = 0;
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
+
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+        }
+
+        travelRequestMaster = travelRequestMasterService.readById(Integer.parseInt(travelId));
+        mv.getModelMap().put("travelRequestMaster", travelRequestMaster);
+        mv.setViewName("Travel/TravelCashAdvanceUpdate");
+        return mv;
+    }
+
+    public ModelAndView submitCashAdvanceSectionByAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        TravelRequestMaster travelRequestMaster1 = new TravelRequestMaster();
+        bind(request, travelRequestMaster);
+        travelRequestMaster1 = travelRequestMasterService.readById(travelRequestMaster.getId());
+        travelRequestMaster1.setCashRequired(travelRequestMaster.getCashRequired());
+        if (travelRequestMaster.getCashRequired().equals("No")) {
+            travelRequestMaster1.setCashRequired(travelRequestMaster.getCashRequired());
+            travelRequestMaster1.setAmount(Float.parseFloat("0"));
+            travelRequestMaster1.setCurrency("");
+        } else {
+            travelRequestMaster1.setCashRequired(travelRequestMaster.getCashRequired());
+            travelRequestMaster1.setAmount(travelRequestMaster.getAmount());
+            travelRequestMaster1.setCurrency(travelRequestMaster.getCurrency());
+
+        }
+        travelRequestMasterService.update(travelRequestMaster1);
+        request.setAttribute("successMessage",
+                "Information : The Information is Saved Successfully.");
+        mv.setViewName("forward:travelRequestMaster.htm?act=viewCashAdvanceSectionByAdmin");
+        return mv;
+    }
+
+}

@@ -63,6 +63,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 
             employeeMaster1.setId(reportingId);
         }
+
         List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
         if (!reportmanager1.isEmpty()) {
             employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);

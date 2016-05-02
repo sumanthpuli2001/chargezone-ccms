@@ -22,7 +22,7 @@ public class AppraisalFillingDataDAOImpl<T> extends GenericsDAOImpl<T> implement
 
     public boolean isExist(String year) {
         String query = "";
-        query += " FROM AppraisalFillingData a"
+        query += " FROM AppraisalFillingData a"   
                 + " WHERE a.year='" + year + "'";
         List<?> list = getHibernateTemplate().find(query);
         if (!list.isEmpty()) {

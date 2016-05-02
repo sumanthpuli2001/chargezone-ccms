@@ -17,7 +17,7 @@ public class AppraisalFillingDataDAOImpl<T> extends GenericsDAOImpl<T> implement
 
     @Override
     protected Class getDomainClass() {
-        return AppraisalFillingData.class;
+        return AppraisalFillingData.class;  
     }
 
     public boolean isExist(String year) {

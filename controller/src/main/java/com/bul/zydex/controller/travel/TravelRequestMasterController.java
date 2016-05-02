@@ -1287,47 +1287,47 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 //        Set<String> internationalSet = new HashSet<String>(approverInternationalList);
 //Domestic
                 List<String> approverDomesticList = new ArrayList<String>();
-              try {
-            if (!approverDomesticList.contains(employeeMaster2.getReportingManagerLevel1()) && (null != employeeMaster2.getReportingManagerLevel1() || !"".equals(employeeMaster.getReportingManagerLevel1()))) {
-                approverDomesticList.add(employeeMaster2.getReportingManagerLevel1());
-            }
-        } catch (Exception e) {
+                try {
+                    if (!approverDomesticList.contains(employeeMaster2.getReportingManagerLevel1()) && (null != employeeMaster2.getReportingManagerLevel1() || !"".equals(employeeMaster.getReportingManagerLevel1()))) {
+                        approverDomesticList.add(employeeMaster2.getReportingManagerLevel1());
+                    }
+                } catch (Exception e) {
 
-        }
-        try {
+                }
+                try {
 
-            if (!approverDomesticList.contains(employeeMaster2.getReportingManagerLevel2()) && (null != employeeMaster2.getReportingManagerLevel2() || !"".equals(employeeMaster2.getReportingManagerLevel2()))
-                    && !employeeMaster2.getReportingManagerLevel2().equals(employeeMaster2.getReportingManagerLevel6())) {
-                approverDomesticList.add(employeeMaster2.getReportingManagerLevel2());
-            }
-        } catch (Exception e) {
+                    if (!approverDomesticList.contains(employeeMaster2.getReportingManagerLevel2()) && (null != employeeMaster2.getReportingManagerLevel2() || !"".equals(employeeMaster2.getReportingManagerLevel2()))
+                            && !employeeMaster2.getReportingManagerLevel2().equals(employeeMaster2.getReportingManagerLevel6())) {
+                        approverDomesticList.add(employeeMaster2.getReportingManagerLevel2());
+                    }
+                } catch (Exception e) {
 
-        }
-        try {
-            if (!approverDomesticList.contains(employeeMaster2.getReportingManagerLevel3()) && (null != employeeMaster2.getReportingManagerLevel3() || !"".equals(employeeMaster2.getReportingManagerLevel3().equals("")))
-                    && !employeeMaster2.getReportingManagerLevel3().equals(employeeMaster2.getReportingManagerLevel6())) {
-                approverDomesticList.add(employeeMaster2.getReportingManagerLevel3());
-            }
-        } catch (Exception e) {
+                }
+                try {
+                    if (!approverDomesticList.contains(employeeMaster2.getReportingManagerLevel3()) && (null != employeeMaster2.getReportingManagerLevel3() || !"".equals(employeeMaster2.getReportingManagerLevel3().equals("")))
+                            && !employeeMaster2.getReportingManagerLevel3().equals(employeeMaster2.getReportingManagerLevel6())) {
+                        approverDomesticList.add(employeeMaster2.getReportingManagerLevel3());
+                    }
+                } catch (Exception e) {
 
-        }
-        try {
-            if (!approverDomesticList.contains(employeeMaster2.getReportingManagerLevel4()) && (null != employeeMaster2.getReportingManagerLevel4() || !"".equals(employeeMaster2.getReportingManagerLevel4().equals("")))
-                    && !employeeMaster2.getReportingManagerLevel4().equals(employeeMaster2.getReportingManagerLevel6())) {
-                approverDomesticList.add(employeeMaster2.getReportingManagerLevel4());
-            }
-        } catch (Exception e) {
+                }
+                try {
+                    if (!approverDomesticList.contains(employeeMaster2.getReportingManagerLevel4()) && (null != employeeMaster2.getReportingManagerLevel4() || !"".equals(employeeMaster2.getReportingManagerLevel4().equals("")))
+                            && !employeeMaster2.getReportingManagerLevel4().equals(employeeMaster2.getReportingManagerLevel6())) {
+                        approverDomesticList.add(employeeMaster2.getReportingManagerLevel4());
+                    }
+                } catch (Exception e) {
 
-        }
-        try {
+                }
+                try {
 
-            if (!approverDomesticList.contains(employeeMaster2.getReportingManagerLevel5()) && (null != employeeMaster2.getReportingManagerLevel5() || !"".equals(employeeMaster2.getReportingManagerLevel5().equals("")))
-                    && !employeeMaster2.getReportingManagerLevel5().equals(employeeMaster2.getReportingManagerLevel6())) {
-                approverDomesticList.add(employeeMaster2.getReportingManagerLevel5());
-            }
-        } catch (Exception e) {
+                    if (!approverDomesticList.contains(employeeMaster2.getReportingManagerLevel5()) && (null != employeeMaster2.getReportingManagerLevel5() || !"".equals(employeeMaster2.getReportingManagerLevel5().equals("")))
+                            && !employeeMaster2.getReportingManagerLevel5().equals(employeeMaster2.getReportingManagerLevel6())) {
+                        approverDomesticList.add(employeeMaster2.getReportingManagerLevel5());
+                    }
+                } catch (Exception e) {
 
-        }
+                }
 
                 templist.add("" + obj[0]);
                 templist.add("" + obj[1]);

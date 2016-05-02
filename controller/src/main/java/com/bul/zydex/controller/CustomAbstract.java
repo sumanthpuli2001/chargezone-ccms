@@ -67,7 +67,7 @@ public abstract class CustomAbstract extends MultiActionController {
     
 
     public EmailTemplateService<EmailTemplate> getEmailTemplateService() {
-        return emailTemplateService;
+        return emailTemplateService; 
     }
 
     public void setEmailTemplateService(EmailTemplateService<EmailTemplate> emailTemplateService) {

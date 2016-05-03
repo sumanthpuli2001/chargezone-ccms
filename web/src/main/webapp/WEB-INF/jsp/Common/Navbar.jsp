@@ -497,7 +497,7 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-laptop fa-lg"></i>
-                        <span>Other</span>
+                        <span>Employee Referral</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
@@ -515,31 +515,18 @@
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart fa-lg"></i>
-                            <span>Report</span>
+                            <span>Attendance Management</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="shiftRotationMaster.htm?act=employeeDataSearch"><i class="fa fa-circle-o"></i> Employee Master Report  </a></li>
+                            <li><a href="shiftRotationMaster.htm?act=employeeDataSearch"><i class="fa fa-circle-o"></i> Employee Master Report</a></li>
+                            <li><a href="shiftRotationMaster.htm?act=employeeAttandanceDataSearch"><i class="fa fa-circle-o"></i> Monthly Attendance Report  </a></li>
+                            <li><a href="shiftRotationMaster.htm?act=employeePresentSearch"><i class="fa fa-circle-o"></i>Daily Present Report</a></li>
+                            <li><a href="shiftRotationMaster.htm?act=attendanceExcelUpload"><i class="fa fa-circle-o"></i>Attendance Upload</a></li>
                         </ul>
+
                     </li>
 
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-pie-chart fa-lg"></i>
-                            <span>Attendance Report</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="shiftRotationMaster.htm?act=employeeAttandanceDataSearch"><i class="fa fa-circle-o"></i> Monthly Attendance Report  </a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="shiftRotationMaster.htm?act=attendanceExcelUpload">
-                            <i class="fa fa-pie-chart fa-lg"></i>
-                            <span>Attendance Upload</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                    </li>
                 </c:if>
                 <c:if test="${sessionScope.userRight.hr}">
                     <!--                    <li class="treeview">

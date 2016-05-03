@@ -53,5 +53,11 @@
         <property name="managerEndYearRemarkManager" type="string">
             <column name="manager_end_year_remark_manager" />
         </property>
+        <property name="managerMidYearRemarkEmployee" type="string">
+            <column name="manager_mid_year_remark_employee" /> 
+        </property>
+        <property name="managerEndYearRemarkEmployee" type="string">
+            <column name="manager_end_year_remark_employee" /> 
+        </property>
     </class>
 </hibernate-mapping>

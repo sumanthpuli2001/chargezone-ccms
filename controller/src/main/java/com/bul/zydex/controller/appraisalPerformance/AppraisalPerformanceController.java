@@ -403,6 +403,13 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 appraisalPerformanceMaster.setReworkStatus(0);
                 appraisalPerformanceMaster.setWeightageScore(weightageScore);
 
+                if (midhalf.equals("true")) {
+                    appraisalPerformanceMaster.setMidYearEmployeeStatus(1);
+                }
+                if (endhalf.equals("true")) {
+                    appraisalPerformanceMaster.setEndYearEmployeeStatus(1);
+                }
+
                 appraisalPerformanceService.update(appraisalPerformanceMaster);
                 if (!"".equals(flagId) && null != flagId) {
                     if (flagId.equals("true")) {
@@ -646,7 +653,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 if (!"".equals(empMidyearSelfassOtheractivty) && null != empMidyearSelfassOtheractivty) {
 
                     appraisalPerformanceMaster.setEmpMidyearSelfassOtheractivty(empMidyearSelfassOtheractivty);
-                    appraisalPerformanceService.update(appraisalPerformanceMaster);
+                    //appraisalPerformanceService.update(appraisalPerformanceMaster);
                 } else {
                     appraisalPerformanceMaster.setEmpMidyearSelfassOtheractivty(null);
                 }
@@ -817,6 +824,9 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             //String kragoal_id = "";
             for (int i = 1; i <= countActivityId; i++) {
                 String kragoal_activity_id = request.getParameter("kragoal_activity_id" + i);
+                if (null != kragoal_activity_id) {
+                    appraisalPerformanceActivities1 = appraisalPerformanceActivitiesService.readById(Integer.parseInt(kragoal_activity_id));
+                }
                 String kraGoalactivity = request.getParameter("kraGoal_activity" + i);
                 String metricactivity = request.getParameter("metric_activity" + i);
                 String kraCategoryMapOther = request.getParameter("kraCategoryMapOther" + i);
@@ -889,7 +899,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 //=======End year=======================================//
                 if (null != btn2 && btn2.equals("save")) {
                     if (null != kragoal_activity_id) {
-                        appraisalPerformanceActivities1 = appraisalPerformanceActivitiesService.readById(Integer.parseInt(kragoal_activity_id));
+                        //appraisalPerformanceActivities1 = appraisalPerformanceActivitiesService.readById(Integer.parseInt(kragoal_activity_id));
                         appraisalPerformanceActivities.setId(Integer.parseInt(kragoal_activity_id));
                         appraisalPerformanceActivitiesService.update(appraisalPerformanceActivities);
                     } else {
@@ -1012,6 +1022,10 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             int subCompentencyCount = Integer.parseInt(request.getParameter("subCompentencyCount"));
             boolean flag = true;
             for (int i = 1; i <= subCompentencyCount; i++) {
+                String competencyEveId = request.getParameter("competencyEveId" + i);
+                if (competencyEveId != null) {
+                    appraisalPerformanceCompetencyEvaluation = appraisalPerformanceCompetencyEvaluationService.readById(Integer.parseInt(competencyEveId));
+                }
                 String compentencyStartYear = request.getParameter("compentencyStartYear" + i);
                 String compentencyStartRemark = request.getParameter("compentencyStartRemark" + i);
                 String compentencyMidYear = request.getParameter("compentencyMidYear" + i);
@@ -1056,7 +1070,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                competencyEvaluationMaster.setId(competencyEvaluationId);
 //                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
                 appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationTextmaster(competencyEvaluationTextmaster);
-                String competencyEveId = request.getParameter("competencyEveId" + i);
+//                String competencyEveId = request.getParameter("competencyEveId" + i);
                 String btn2 = request.getParameter("save");
 
                 if (null != btn2 && btn2.equals("save")) {
@@ -1382,20 +1396,35 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 } else {
                     appraisalPerformanceIndividualDevelopmentPlan.setText2(null);
                 }
-                if (!"".equals(text2) && null != text2) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(text2);
-                } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(null);
-                }
+//                if (!"".equals(text2) && null != text2) {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(text2);
+//                } else {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(null);
+//                }
                 if (!"".equals(text3) && null != text3) {
                     appraisalPerformanceIndividualDevelopmentPlan.setText3(text3);
                 } else {
                     appraisalPerformanceIndividualDevelopmentPlan.setText3(null);
                 }
-                if (!"".equals(text3) && null != text3) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(text3);
+//                if (!"".equals(text3) && null != text3) {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(text3);
+//                } else {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
+//                }
+                if (!"".equals(remark) && null != remark) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setRemark(remark);
                 } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
+                    appraisalPerformanceIndividualDevelopmentPlan.setRemark(null);
+                }
+                if (!"".equals(midYearRemark) && null != midYearRemark) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setMidYearRemark(midYearRemark);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setMidYearRemark(null);
+                }
+                if (!"".equals(endYearRemark) && null != endYearRemark) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(endYearRemark);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(null);
                 }
 
                 String btn4 = request.getParameter("save");
@@ -1427,8 +1456,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     } else {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
                     }
-                    if (null != midYearRemark && !"".equals(midYearRemark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(midYearRemark);
+                    if (null != managerMidYearRemark && !"".equals(managerMidYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(managerMidYearRemark);
                     } else {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(null);
                     }
@@ -1443,16 +1472,24 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     } else {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
                     }
-//                    if (null != managerMidYearRemark && !"".equals(managerMidYearRemark)) {
-//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(managerMidYearRemark);
-//                    } else {
-//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(null);
-//                    }
+
                     if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(managerEndYearRemark);
                     } else {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
                     }
+//                    Mid year for Manager side //
+                    if (null != midYearRemark && !"".equals(midYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkManager(midYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkManager(null);
+                    }
+                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(managerEndYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(null);
+                    }
+
                     if (individualplan != null) {
                         appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
                         appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
@@ -1649,15 +1686,16 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     if (appraisalPerformanceKra1.getWeightage() != null && ManagerStatus == 1) {
                         goalApproval = "Approved";
                         break;
-                    } else {
-//                        goalApproval = "Pendding";
+                    } else if (appraisalPerformanceMaster.getReworkStatus() == 1) {
+                        goalApproval = "Rework";
+                        break;
                     }
                 }
                 for (Object o3 : list) {
 
                     midSelfApproval = "";
                     AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o3;
-                    if (appraisalPerformanceKra1.getEmpMidyearSelfassessmentGoal() != null && !"".equals(appraisalPerformanceKra1.getEmpMidyearSelfassessmentGoal())) {
+                    if (appraisalPerformanceKra1.getEmpMidyearSelfassessmentGoal() != null && !"".equals(appraisalPerformanceKra1.getEmpMidyearSelfassessmentGoal()) && 0 != appraisalPerformanceMaster.getMidYearEmployeeStatus()) {
                         midSelfApproval = "Approved";
                         break;
                     }
@@ -1665,15 +1703,18 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 for (Object o4 : list) {
                     managerMidSelfApproval = "";
                     AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o4;
-                    if (appraisalPerformanceKra1.getManagerMidyearReviewEvaluation() != null) {
+                    if (appraisalPerformanceKra1.getManagerMidyearReviewEvaluation() != null && 0 != appraisalPerformanceMaster.getMidYearManagerStatus()) {
                         managerMidSelfApproval = "Approved";
+                        break;
+                    } else if (appraisalPerformanceMaster.getReworkStatus() == 1) {
+                        managerMidSelfApproval = "Rework";
                         break;
                     }
                 }
                 for (Object o5 : list) {
                     endSelfApproval = "";
                     AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o5;
-                    if (appraisalPerformanceKra1.getEmpEndyearSelfassessmentGoal() != null) {
+                    if (appraisalPerformanceKra1.getEmpEndyearSelfassessmentGoal() != null && 0 != appraisalPerformanceMaster.getEndYearEmployeeStatus()) {
                         endSelfApproval = "Approved";
                         break;
                     }
@@ -1681,8 +1722,11 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 for (Object o6 : list) {
                     managerEndSelfApproval = "";
                     AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o6;
-                    if (appraisalPerformanceKra1.getManagerEndyearReviewEvaluation() != null) {
+                    if (appraisalPerformanceKra1.getManagerEndyearReviewEvaluation() != null && 0 != appraisalPerformanceMaster.getEndYearManagerStatus()) {
                         managerEndSelfApproval = "Approved";
+                        break;
+                    } else if (appraisalPerformanceMaster.getReworkStatus() == 1) {
+                        managerEndSelfApproval = "Rework";
                         break;
                     }
                 }
@@ -1723,11 +1767,11 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             }
                         } else {
                             if (currentDate.after(ManagerEndDate)) {
-                                if (!goalApproval.equals("Approved")) {
+                                if (!goalApproval.equals("Approved") && !goalApproval.equals("Rework")) {
                                     goalApproval = "Expired";
                                 }
                             } else {
-                                if (!goalApproval.equals("Approved")) {
+                                if (!goalApproval.equals("Approved") && !goalApproval.equals("Rework")) {
                                     goalApproval = "";
                                 }
                             }
@@ -1742,11 +1786,11 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             }
                         } else {
                             if (currentDate.after(ManagerMidDate)) {
-                                if (!managerMidSelfApproval.equals("Approved")) {
+                                if (!managerMidSelfApproval.equals("Approved") && !managerMidSelfApproval.equals("Rework")) {
                                     managerMidSelfApproval = "Expired";
                                 }
                             } else {
-                                if (!managerMidSelfApproval.equals("Approved")) {
+                                if (!managerMidSelfApproval.equals("Approved") && !managerMidSelfApproval.equals("Rework")) {
                                     managerMidSelfApproval = "";
                                 }
                             }
@@ -1780,11 +1824,11 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             }
                         } else {
                             if (currentDate.after(managerYearEndEndDate)) {
-                                if (!managerEndSelfApproval.equals("Approved")) {
+                                if (!managerEndSelfApproval.equals("Approved") && !managerEndSelfApproval.equals("Rework")) {
                                     managerEndSelfApproval = "Expired";
                                 }
                             } else {
-                                if (!managerEndSelfApproval.equals("Approved")) {
+                                if (!managerEndSelfApproval.equals("Approved") && !managerEndSelfApproval.equals("Rework")) {
                                     managerEndSelfApproval = "";
                                 }
                             }
@@ -2615,14 +2659,6 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         updateAppraisalPerformanceKra.setName(employee.getEmployeeName());
                         updateAppraisalPerformanceKra.setWeighted("" + appraisalPerformanceKra1.getWeightage());
 
-                        ////Match the Kra goal and update it////////
-                        if (appraisalPerformanceKra1.getKraGoal().equals(appraisalPerformanceKra.getKraGoal())) {
-
-                        } else {
-                            updateAppraisalPerformanceKraService.create(updateAppraisalPerformanceKra);
-
-                        }
-
                         if (!"".equals(startDate1) && null != startDate1) {
                             appraisalPerformanceKra.setStartDate(startDate1);
                         } else {
@@ -2675,6 +2711,14 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         } else {
                             appraisalPerformanceKra.setManagerEndyearReviewEvaluation(null);
                         }
+                        ////Match the Kra goal and update it////////
+                        if (appraisalPerformanceKra1.getKraGoal().equals(appraisalPerformanceKra.getKraGoal())) {
+
+                        } else {
+                            updateAppraisalPerformanceKraService.create(updateAppraisalPerformanceKra);
+
+                        }
+
                         if (kragoal_id != null) {
                             appraisalPerformanceKra.setId(Integer.parseInt(kragoal_id));
                             appraisalPerformanceKraService.update(appraisalPerformanceKra);
@@ -3002,16 +3046,25 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 String endYearRemark = request.getParameter("endYearRemark" + i);
                 String managerMidYearRemark = request.getParameter("managerMidYearRemark" + i);
                 String managerEndYearRemark = request.getParameter("managerEndYearRemark" + i);
-                if (!"".equals(text1) && null != text1) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setText1(text1);
-                } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setText1(null);
+                String individualplan = request.getParameter("IndividualDevelopmentPlanId" + i);
+                if (null != individualplan) {
+                    appraisalPerformanceIndividualDevelopmentPlan = appraisalPerformanceIndividualDevelopmentPlanService.readById(Integer.parseInt(individualplan));
                 }
+//                if (!"".equals(text1) && null != text1) {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setText1(text1);
+//                } else {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setText1(null);
+//                }
 
-                if (!"".equals(text2) && null != text2) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setText2(text2);
+//                if (!"".equals(text2) && null != text2) {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setText2(text2);
+//                } else {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setText2(null);
+//                }
+                if (!"".equals(text1) && null != text1) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(text1);
                 } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setText2(null);
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(null);
                 }
                 if (!"".equals(text2) && null != text2) {
                     appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(text2);
@@ -3028,34 +3081,20 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 } else {
                     appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
                 }
-                String individualplan = request.getParameter("IndividualDevelopmentPlanId" + i);
+                if (!"".equals(managerMidYearRemark) && null != managerMidYearRemark) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(managerMidYearRemark);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
+                }
+                if (!"".equals(managerEndYearRemark) && null != managerEndYearRemark) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(managerEndYearRemark);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
+                }
 
                 String btn = request.getParameter("save");
                 if (null != btn && btn.equals("save")) {
-                    if (null != individualplan) {
 
-                        appraisalPerformanceIndividualDevelopmentPlan = appraisalPerformanceIndividualDevelopmentPlanService.readById(Integer.parseInt(individualplan));
-                    }
-                    if (null != text1 && !"".equals(text1)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(text1);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(null);
-                    }
-                    if (null != text2 && !"".equals(text2)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(text2);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(null);
-                    }
-                    if (null != text3 && !"".equals(text3)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(text3);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
-                    }
-                    if (null != remark && !"".equals(remark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerremark(remark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerremark(null);
-                    }
                     if (individualplan != null) {
                         appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
                         appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
@@ -3102,10 +3141,21 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     } else {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(null);
                     }
+                    if (null != managerMidYearRemark && !"".equals(managerMidYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkEmployee(managerMidYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkEmployee(null);
+                    }
+
                     if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(managerEndYearRemark);
                     } else {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
+                    }
+                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(managerEndYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(null);
                     }
                     if (individualplan != null) {
                         appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
@@ -3172,6 +3222,10 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             int subCompentencyCount = Integer.parseInt(request.getParameter("subCompentencyCount"));
             boolean flag = true;
             for (int i = 1; i <= subCompentencyCount; i++) {
+                String competencyEveId = request.getParameter("competencyEveId" + i);
+                if (null != competencyEveId) {
+                    appraisalPerformanceCompetencyEvaluation = appraisalPerformanceCompetencyEvaluationService.readById(Integer.parseInt(competencyEveId));
+                }
                 String compentencyStartYear = request.getParameter("compentencyStartYear" + i);
                 String compentencyStartRemark = request.getParameter("compentencyStartRemark" + i);
                 String compentencyMidYear = request.getParameter("compentencyMidYear" + i);
@@ -3216,7 +3270,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                competencyEvaluationMaster.setId(competencyEvaluationId);
 //                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
                 appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationTextmaster(competencyEvaluationTextmaster);
-                String competencyEveId = request.getParameter("competencyEveId" + i);
+                //String competencyEveId = request.getParameter("competencyEveId" + i);
                 String btn2 = request.getParameter("save");
 
                 if (null != btn2 && btn2.equals("save")) {
@@ -3532,6 +3586,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 appraisalPerformanceMaster.setManagerStatus(1);//manager status Kra Approvement
                 appraisalPerformanceMaster.setEmployeeStatus(0);
                 appraisalPerformanceMaster.setManagerkraStatus(1);
+                if (midhalf.equals("true")) {
+                    appraisalPerformanceMaster.setMidYearManagerStatus(1);
+                }
+                if (endhalf.equals("true")) {
+                    appraisalPerformanceMaster.setEndYearManagerStatus(1);
+                }
                 appraisalPerformanceService.update(appraisalPerformanceMaster);
                 if (!"".equals(appraisalId) && null != appraisalId) {
                     //    Email Sent to Employee(Start Year)
@@ -3666,30 +3726,38 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             }
             for (Object o1 : list) {
                 AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o1;
-                if (appraisalPerformanceKra1.getEmpMidyearSelfassessmentGoal() != null && !appraisalPerformanceKra1.getEmpMidyearSelfassessmentGoal().equals("")) {
+                if (appraisalPerformanceKra1.getEmpMidyearSelfassessmentGoal() != null && !appraisalPerformanceKra1.getEmpMidyearSelfassessmentGoal().equals("") && 0 != appraisalPerformanceMaster.getMidYearEmployeeStatus()) {
                     midSelfApproval = "Approved";
                     break;
                 }
             }
             for (Object o1 : list) {
                 AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o1;
-                if (appraisalPerformanceKra1.getManagerMidyearReviewEvaluation() != null && !appraisalPerformanceKra1.getManagerMidyearReviewEvaluation().equals("")) {
+                if (appraisalPerformanceKra1.getManagerMidyearReviewEvaluation() != null && !appraisalPerformanceKra1.getManagerMidyearReviewEvaluation().equals("") && 0 != appraisalPerformanceMaster.getMidYearManagerStatus()) {
                     managerMidSelfApproval = "Approved";
                     break;
+                } else if (appraisalPerformanceMaster.getReworkStatus() == 1) {
+                    managerMidSelfApproval = "Rework";
+                    break;
+
                 }
             }
             for (Object o1 : list) {
                 AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o1;
-                if (appraisalPerformanceKra1.getEmpEndyearSelfassessmentGoal() != null && !appraisalPerformanceKra1.getEmpEndyearSelfassessmentGoal().equals("")) {
+                if (appraisalPerformanceKra1.getEmpEndyearSelfassessmentGoal() != null && !appraisalPerformanceKra1.getEmpEndyearSelfassessmentGoal().equals("") && 0 != appraisalPerformanceMaster.getEndYearEmployeeStatus()) {
                     endSelfApproval = "Approved";
                     break;
                 }
             }
             for (Object o1 : list) {
                 AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o1;
-                if (appraisalPerformanceKra1.getManagerEndyearReviewEvaluation() != null && !appraisalPerformanceKra1.getManagerEndyearReviewEvaluation().equals("")) {
+                if (appraisalPerformanceKra1.getManagerEndyearReviewEvaluation() != null && !appraisalPerformanceKra1.getManagerEndyearReviewEvaluation().equals("") && 0 != appraisalPerformanceMaster.getEndYearManagerStatus()) {
                     managerEndSelfApproval = "Approved";
                     break;
+                } else if (appraisalPerformanceMaster.getReworkStatus() == 1) {
+                    managerEndSelfApproval = "Rework";
+                    break;
+
                 }
             }
 
@@ -3749,7 +3817,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         }
                     } else {
                         if (currentDate.after(ManagerEndDate)) {
-                            if (!goalApproval.equals("Approved")) {
+                            if (!goalApproval.equals("Approved") && !goalApproval.equals("Rework")) {
                                 goalApproval = "Expired";
                             }
                         } else {
@@ -3806,11 +3874,11 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         }
                     } else {
                         if (currentDate.after(managerYearEndEndDate)) {
-                            if (!managerEndSelfApproval.equals("Approved")) {
+                            if (!managerEndSelfApproval.equals("Approved") && !managerEndSelfApproval.equals("Rework")) {
                                 managerEndSelfApproval = "Expired";
                             }
                         } else {
-                            if (!managerEndSelfApproval.equals("Approved")) {
+                            if (!managerEndSelfApproval.equals("Approved") && !managerEndSelfApproval.equals("Rework")) {
                                 managerEndSelfApproval = "";
                             }
                         }
@@ -4611,7 +4679,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         mv.setViewName("Appraisal/AppraisalDeletedActivitiesAjax");
         return mv;
     }
-    
+
     public ModelAndView appraisalPrintToPdfByEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
@@ -4817,5 +4885,4 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         mv.setViewName("Appraisal/AppraisalFormPrintToPdfByEmployee");
         return mv;
     }
-
 }

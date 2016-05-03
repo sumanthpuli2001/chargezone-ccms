@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : EmployeePerformanceAppraisalResult
     Created on : Oct 29, 2015, 11:59:35 AM
     Author     : admin
@@ -16,7 +16,7 @@
     <script>
         function editClick(id, userid, appraisalId) {
 //            window.location = 'employeeMaster.htm?act=viewClick&id=' + id;
-//            window.location = 'appraisalPerformance.htm?act=editClick&id=' + id; 
+//            window.location = 'appraisalPerformance.htm?act=editClick&id=' + id;
 //id=Empid and userid=UserMasterid and= appraisal Id
             window.location = 'appraisalPerformance.htm?act=editClick&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId;
         }
@@ -56,7 +56,7 @@
         </c:if>
         <!-- Main content -->
         <form:form action="appraisalPerformance.htm?act=deleteSubmit" method="post" commandName="AppraisalPerformanceMaster"
-                   name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form"> 
+                   name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
@@ -102,7 +102,7 @@
                                                             <tr>
                                                                 <!--<td align="center"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>-->
                                                                 <!--<td>/</td>-->
-                                                                <td>${list[0][2]}</td> 
+                                                                <td>${list[0][2]}</td>
                                                                 <!--<td>$//{list[2]}</td>-->
                                                                 <td>${list[0][3]}</td>
                                                                 <td>${list[0][4]}</td>
@@ -133,6 +133,9 @@
                                                                                 <c:if test="${list[1][1] eq 'Pendding'}">
                                                                                 <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Pending</span></div>
                                                                             </c:if>
+                                                                            <c:if test="${list[1][1] eq 'Rework'}">
+                                                                                <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Rework</span></div>
+                                                                            </c:if>
                                                                         </li><!-- /.item -->
                                                                         <li class="item">
                                                                             <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">Employee’s Mid Year Self Assessment</span></div>
@@ -156,6 +159,9 @@
                                                                                 </c:if>
                                                                                 <c:if test="${list[1][3] eq 'Pendding'}">
                                                                                 <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Pending</span></div>
+                                                                            </c:if>
+                                                                            <c:if test="${list[1][3] eq 'Rework'}">
+                                                                                <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Rework</span></div>
                                                                             </c:if>
                                                                         </li><!-- /.item -->
                                                                         <li class="item">
@@ -181,6 +187,9 @@
                                                                                 <c:if test="${list[1][5] eq 'Pendding'}">
                                                                                 <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Pending</span></div>
                                                                             </c:if>
+                                                                            <c:if test="${list[1][5] eq 'Rework'}">
+                                                                                <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Rework</span></div>
+                                                                            </c:if>
                                                                         </li>
                                                                     </ul>
                                                                 </td>
@@ -193,11 +202,11 @@
                                                                             <!--<ul class="dropdown-menu">-->
                                                                             <!--<li>-->
                                                                             <span class="fa fa-pencil"></span>
-<!--                                                                            <a href="#"
-                                                                               onclick="">  
-                                                                                onclick="viewClick($//{list[0]},$//{list[1]});">
-                                                                            </a>-->
-                                                                                View &nbsp;&nbsp; 
+                                                                            <!--                                                                            <a href="#"
+                                                                                                                                                           onclick="">
+                                                                                                                                                            onclick="viewClick($//{list[0]},$//{list[1]});">
+                                                                                                                                                        </a>-->
+                                                                            View &nbsp;&nbsp;
                                                                         </button>
                                                                         <!--</li>-->
 

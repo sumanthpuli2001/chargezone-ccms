@@ -25,6 +25,8 @@ public class AppraisalPerformanceIndividualDevelopmentPlan  implements java.io.S
      private String managerremark;
      private String managerMidYearRemarkManager;
      private String managerEndYearRemarkManager;
+     private String managerMidYearRemarkEmployee;
+     private String managerEndYearRemarkEmployee;
 
     public AppraisalPerformanceIndividualDevelopmentPlan() {
     }
@@ -33,7 +35,7 @@ public class AppraisalPerformanceIndividualDevelopmentPlan  implements java.io.S
     public AppraisalPerformanceIndividualDevelopmentPlan(AppraisalPerformanceMaster appraisalPerformanceMaster) {
         this.appraisalPerformanceMaster = appraisalPerformanceMaster;
     }
-    public AppraisalPerformanceIndividualDevelopmentPlan(AppraisalPerformanceMaster appraisalPerformanceMaster, String text1, String text2, String text3, String remark, String midYearRemark, String endYearRemark, String managerMidYearRemark, String managerEndYearRemark, String managertext1, String managertext2, String managertext3, String managerremark, String managerMidYearRemarkManager, String managerEndYearRemarkManager) {
+    public AppraisalPerformanceIndividualDevelopmentPlan(AppraisalPerformanceMaster appraisalPerformanceMaster, String text1, String text2, String text3, String remark, String midYearRemark, String endYearRemark, String managerMidYearRemark, String managerEndYearRemark, String managertext1, String managertext2, String managertext3, String managerremark, String managerMidYearRemarkManager, String managerEndYearRemarkManager , String managerMidYearRemarkEmployee , String managerEndYearRemarkEmployee) {
        this.appraisalPerformanceMaster = appraisalPerformanceMaster;
        this.text1 = text1;
        this.text2 = text2;
@@ -49,6 +51,9 @@ public class AppraisalPerformanceIndividualDevelopmentPlan  implements java.io.S
        this.managerremark = managerremark;
        this.managerMidYearRemarkManager = managerMidYearRemarkManager;
        this.managerEndYearRemarkManager = managerEndYearRemarkManager;
+       this.managerMidYearRemarkEmployee = managerMidYearRemarkEmployee;
+       this.managerEndYearRemarkEmployee = managerEndYearRemarkEmployee;
+       
     }
    
     public Integer getId() {
@@ -162,6 +167,22 @@ public class AppraisalPerformanceIndividualDevelopmentPlan  implements java.io.S
     
     public void setManagerEndYearRemarkManager(String managerEndYearRemarkManager) {
         this.managerEndYearRemarkManager = managerEndYearRemarkManager;
+    }
+
+    public String getManagerMidYearRemarkEmployee() {
+        return managerMidYearRemarkEmployee;
+    }
+
+    public void setManagerMidYearRemarkEmployee(String managerMidYearRemarkEmployee) {
+        this.managerMidYearRemarkEmployee = managerMidYearRemarkEmployee;
+    }
+
+    public String getManagerEndYearRemarkEmployee() {
+        return managerEndYearRemarkEmployee;
+    }
+
+    public void setManagerEndYearRemarkEmployee(String managerEndYearRemarkEmployee) {
+        this.managerEndYearRemarkEmployee = managerEndYearRemarkEmployee;
     }
 
 

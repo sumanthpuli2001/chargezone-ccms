@@ -32,7 +32,7 @@
             </div>
         </body>-->
     <body class="navbar-fixed">
-        <div style="background-color: #ffffff">
+        <div style="background-color: #ffffff; display: none;" id="errorId">
             <div style="width: 100%;">
                 <div class="title24 titleBold" style="margin: 20px;">Sorry, That's an Error.</div>
                 <div style="margin: 20px;">
@@ -67,5 +67,39 @@
             </div>
             <!--<div class="title16" style="clear: both;margin: 20px;">If you want to go back then click <a href="" onclick="window.history.back();">here</a>.</div>-->
         </div>
+        <div style="background-color: #ffffff">
+            <div class="wrapper">
+                <table id="table_1" style="width: 100%">
+                    <tbody>
+                        <tr style="background-color: #3c8dbc"> 
+                            <td colspan="3">
+                                <a href="#" class="logo">
+                                    <span class="logo-lg"><img src="StorageYard/Images/logo.png" style="width: 160px; margin: 20px;" /></span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="titleBold" style="font-size: 50px; margin: 20px;">Something is Wrong</div>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td style="width: 40%; padding-left:20px;font-size: 30px;">
+                                Description about it :<br /><br />
+                                - Your page is not Found Please Contact to IT Department.
+                            </td> 
+                            <td>
+                                <div style="margin: 20px"><img src="StorageYard/Images/disco.jpg" onclick="document.getElementById('errorId').style.display='block';"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+<!--                <div class="title16" style="clear: both;margin: 20px;">If you want to go to login page.
+                    <button type="button" class="btn btn-primary" onclick="location.href = 'logIn.html?act=loginClick';"  style="background-color: #0070c0;border-radius: 6px;width: auto;text-align: center; font-weight: bold; " >Click Here</button>
+
+                    <a href="logIn.html?act=loginClick">Click here</a>.
+                </div>-->
+            </div>
+        </div>                    
     </body>
 </html>

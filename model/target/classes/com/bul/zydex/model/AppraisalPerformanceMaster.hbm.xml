@@ -65,8 +65,20 @@
         <property name="reworkStatus" type="int">
             <column name="rework_status" not-null="true" />
         </property>
-         <property name="reworkComment" type="string">
+        <property name="reworkComment" type="string">
             <column name="rework_comment" />
+        </property>
+        <property name="midYearEmployeeStatus" type="int">
+            <column name="mid_year_employee_status" not-null="true" />
+        </property>
+        <property name="midYearManagerStatus" type="int">
+            <column name="mid_year_manager_status" not-null="true" />
+        </property>
+        <property name="endYearEmployeeStatus" type="int">
+            <column name="end_year_employee_status" not-null="true" />
+        </property>
+        <property name="endYearManagerStatus" type="int">
+            <column name="end_year_manager_status" not-null="true" />
         </property>
         <set name="appraisalPerformanceBehaviorses" inverse="true">
             <key>

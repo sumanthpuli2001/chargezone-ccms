@@ -129,7 +129,7 @@
                                                                             <c:if test="${goalApproval eq 'Pendding'}">
                                                                             <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Pending</span></div>
                                                                         </c:if>
-                                                                            <c:if test="${goalApproval eq 'Rework'}">
+                                                                        <c:if test="${goalApproval eq 'Rework'}">
                                                                             <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Rework</span></div>
                                                                         </c:if>
                                                                     </li><!-- /.item -->
@@ -156,6 +156,9 @@
                                                                             <c:if test="${managerMidSelfApproval eq 'Pendding'}">
                                                                             <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Pending</span></div>
                                                                         </c:if>
+                                                                        <c:if test="${managerMidSelfApproval eq 'Rework'}">
+                                                                            <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Rework</span></div>
+                                                                        </c:if>
                                                                     </li><!-- /.item -->
                                                                     <li class="item">
                                                                         <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">Employee's End Year Self Assessment </span><span ><br>${employeeEndStartDate} To ${employeeEndEndDate}</span></div>
@@ -179,6 +182,9 @@
                                                                             </c:if>
                                                                             <c:if test="${managerEndSelfApproval eq 'Pendding'}">
                                                                             <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Pending</span></div>
+                                                                        </c:if>
+                                                                        <c:if test="${managerEndSelfApproval eq 'Rework'}">
+                                                                            <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Rework</span></div>
                                                                         </c:if>
                                                                     </li>
                                                                 </ul>
@@ -895,11 +901,11 @@
                                                                                                     </li>
                                                                                                 </c:if>
                                                                                                 <%--<c:if test="${pendingApprover2Leave gt 0}">--%>
-                                                                                                    <!--<li class="item">-->
-                                                                                                        <!--<a href="leaveEmployeeDetail.htm?act=viewRequestAdminClick">-->
-                                                                                                            <!--<span class="product-title" href="javascript::;"> Leave Request <span class="badge" style="float: right">${pendingApprover2Leave}</span></span>-->
-                                                                                                        <!--</a>-->
-                                                                                                    <!--</li>-->
+                                                                                                <!--<li class="item">-->
+                                                                                                <!--<a href="leaveEmployeeDetail.htm?act=viewRequestAdminClick">-->
+                                                                                                    <!--<span class="product-title" href="javascript::;"> Leave Request <span class="badge" style="float: right">${pendingApprover2Leave}</span></span>-->
+                                                                                                <!--</a>-->
+                                                                                                <!--</li>-->
                                                                                                 <%--</c:if>--%>
                                                                                                 <%--<c:if test="${coffApproverPending gt 0}">--%>
                                                                                                 <!--<li class="item">-->

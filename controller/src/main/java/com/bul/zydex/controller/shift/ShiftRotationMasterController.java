@@ -36,6 +36,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.DateFormatSymbols;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -1481,14 +1482,15 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         List<List<String>> recordToAdd1 = new ArrayList();
         EmployeeShiftData employeeShiftData = new EmployeeShiftData();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-        Date notflexibleSupportDate = sdf.parse(startDate);
-        String FixedFlexibleDate = "01/04/2016";
-        Date notflexibleSupportDate1 = sdf.parse(FixedFlexibleDate);
         Calendar calForFlexiNotSupport1 = Calendar.getInstance();
         Calendar calForFlexiNotSupport2 = Calendar.getInstance();
-        calForFlexiNotSupport1.setTime(notflexibleSupportDate);
-        calForFlexiNotSupport2.setTime(notflexibleSupportDate1);
+        if (!startDate.equals("")) {
+            Date notflexibleSupportDate = sdf.parse(startDate);
+            String FixedFlexibleDate = "01/04/2016";
+            Date notflexibleSupportDate1 = sdf.parse(FixedFlexibleDate);
+            calForFlexiNotSupport1.setTime(notflexibleSupportDate);
+            calForFlexiNotSupport2.setTime(notflexibleSupportDate1);
+        }
 
         if (null != empId && !empId.equals("")) {
             employeeShiftData.setId(Integer.parseInt(empId));
@@ -1811,7 +1813,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 }
                             }
                         }
-                        if (flexible == true && calForFlexiNotSupport2.get(Calendar.MONTH) != calForFlexiNotSupport1.get(Calendar.MONTH)) {
+//                        if (flexible == true && calForFlexiNotSupport2.get(Calendar.MONTH) != calForFlexiNotSupport1.get(Calendar.MONTH)) {
+                        if (flexible == true) {
                             rownum = rownum + 1;
                             Row row4 = firstSheet.createRow(rownum);
                             Cell cell4 = row4.createCell(0);
@@ -1851,12 +1854,12 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 Cell cellTitle = row3.createCell(0);
                                 cellTitle.setCellValue("Date");
                                 cellTitle.setCellStyle(styleBold);
-
                                 while (itr1.hasNext()) {
                                     Object[] next = (Object[]) itr1.next();
                                     Cell cell3 = row3.createCell(i);
                                     cell3.setCellValue("" + next[0]);
                                     CellUtil.setAlignment(cell3, firstFWorkbook, CellStyle.ALIGN_CENTER);
+
                                     i++;
                                 }
                                 rownum = rownum + 1;
@@ -2119,6 +2122,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 cellTitle5.setCellValue("Second Half");
                                 cellTitle5.setCellStyle(styleBold);
                                 Iterator itr6 = entry.getValue().iterator();
+                                int weekNameCounter = 0;
+                                boolean satWeekOff = false;
                                 while (itr6.hasNext()) {
                                     Object[] next = (Object[]) itr6.next();
                                     Cell cell9 = row9.createCell(o);
@@ -2126,13 +2131,54 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     int firstHalfVal = 0;
                                     int counter = 0;
                                     String shiftName = "";
+//                                    2nd Sat Week Off Codding
+                                    Calendar cal = Calendar.getInstance();
+                                    Date date = sdf.parse("" + next[0]);
+                                    cal.setTime(date);
+                                    SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                                    String dayName = format.format(date);
+                                    EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
+                                    ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
+
+                                    if (dayName.equals("Saturday")) {
+                                        weekNameCounter++;
+                                        if (weekNameCounter == 2) {
+                                            satWeekOff = true;
+                                        } else {
+                                            satWeekOff = false;
+                                        }
+
+                                    } else {
+                                        satWeekOff = false;
+                                    }
+//                                    2nd Sat Week Off Codding
+
+//                                    Lunch Breck Cut Off
+                                    List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
+                                    long lunchTime = 0;
+                                    if (listPunch.size() > 2) {
+                                        Object[] startTimeListStart = (Object[]) listPunch.get(1);
+                                        Object[] startTimeListEnd = (Object[]) listPunch.get(2);
+                                        String startTime = (String) startTimeListStart[0];
+                                        String endTime = (String) startTimeListEnd[0];
+                                        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                        Date launchStrTime = sdf2.parse(startTime);
+                                        Date launchEndTime = sdf2.parse(endTime);
+                                        long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                                        lunchTime = diff / (60 * 60 * 1000);
+                                    }
+
+//                                    Lunch Breck Cut Off
                                     if (secondHalf.contains(" # ")) {
                                         String[] string1 = secondHalf.split("#");
                                         String[] string2 = string1[1].split("\\$");
                                         shiftName = string2[0].trim();
 
                                     }
-                                    if (secondHalf.contains("fullday")) {
+                                    if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
+                                        cell9.setCellValue("WO");
+                                        wo = wo + 0.5;
+                                    } else if (secondHalf.contains("fullday")) {
                                         cell9.setCellValue("PR");
                                         prcounter = prcounter + 0.5;
                                         cell9.setCellStyle(stylegreen);
@@ -2733,6 +2779,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 Cell cellTitle5 = row9.createCell(0);
                                 cellTitle5.setCellValue("Second Half");
                                 cellTitle5.setCellStyle(styleBold);
+                                int weekNameCounter = 0;
+                                boolean satWeekOff = false;
                                 Iterator itr6 = entry.getValue().iterator();
                                 while (itr6.hasNext()) {
                                     Object[] next = (Object[]) itr6.next();
@@ -2747,7 +2795,33 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         shiftName = string2[0].trim();
 
                                     }
-                                    if (secondHalf.contains("fullday")) {
+
+                                    //                                    2nd Sat Week Off Codding
+                                    Calendar cal = Calendar.getInstance();
+                                    Date date = sdf.parse("" + next[0]);
+                                    cal.setTime(date);
+                                    SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                                    String dayName = format.format(date);
+                                    EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
+                                    ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
+
+                                    if (dayName.equals("Saturday")) {
+                                        weekNameCounter++;
+                                        if (weekNameCounter == 2) {
+                                            satWeekOff = true;
+                                        } else {
+                                            satWeekOff = false;
+                                        }
+
+                                    } else {
+                                        satWeekOff = false;
+                                    }
+//                                    2nd Sat Week Off Codding
+
+                                    if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
+                                        cell9.setCellValue("WO");
+                                        wo = wo + 0.5;
+                                    } else if (secondHalf.contains("fullday")) {
                                         cell9.setCellValue("PR");
                                         prcounter = prcounter + 0.5;
                                         cell9.setCellStyle(stylegreen);
@@ -3740,7 +3814,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         return mv;
     }
 
-   public ModelAndView employeePresentSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView employeePresentSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeShiftData employeeShiftData = new EmployeeShiftData();
         EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();

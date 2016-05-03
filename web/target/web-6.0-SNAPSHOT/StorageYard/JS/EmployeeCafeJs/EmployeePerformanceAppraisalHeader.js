@@ -304,80 +304,80 @@ function removeActivityChild(removeRowId_1, removeRowId_2, removeRowId_3, remove
         element4.parentNode.removeChild(element4);
         element5.parentNode.removeChild(element5);
         var counter = 1;
-        try{
+        try {
             for (var m = 1; m <= (val + 1); m++) {
-            try {
-                document.getElementById("removeKRAactivitiesID" + m).value;
-                $("#removeKRAactivitiesID" + m).attr('id', "removeKRAactivitiesID" + counter);
-                //replace id
-                $("#kraGoal_activity" + m).attr('id', "kraGoal_activity" + counter);
-                $("#metric_activity" + m).attr('id', "metric_activity" + counter);
-                $("#kraCategoryMapOther" + m).attr('id', "kraCategoryMapOther" + counter);
-                $("#priority" + m).attr('id', "priority" + counter);
-                $("#midYearDivOther" + m).attr('id', "midYearDivOther" + counter);
-                $("#endYearDivOther" + m).attr('id', "endYearDivOther" + counter);
-                $("#activity" + m).attr('id', "activity" + counter);
-                $("#EditByEmployeeact" + m).attr('id', "EditByEmployeeact" + counter);
-                $("#empMidyearSelfassessmentGoalActivities" + m).attr('id', "empMidyearSelfassessmentGoalActivities" + counter);
-                $("#managerMidYearSelfAssesssmentGoalActivities" + m).attr('id', "managerMidYearSelfAssesssmentGoalActivities" + counter);
-                $("#empEndyearSelfassessmentGoalActivities" + m).attr('id', "empEndyearSelfassessmentGoalActivities" + counter);
-                $("#managerEndYearSelfAssesssmentGoalActivities" + m).attr('id', "managerEndYearSelfAssesssmentGoalActivities" + counter);
-                $("#kragoal_activity_id" + m).attr('id', "kragoal_activity_id" + counter);
-                //name replace
-                $("#kraGoal_activity" + counter).attr('name', "kraGoal_activity" + counter);
-                $("#metric_activity" + counter).attr('name', "metric_activity" + counter);
-                $("#kraCategoryMapOther" + counter).attr('name', "kraCategoryMapOther" + counter);
-                $("#priority" + counter).attr('name', "priority" + counter);
-                $("#midYearDivOther" + counter).attr('name', "midYearDivOther" + counter);
-                $("#endYearDivOther" + counter).attr('name', "endYearDivOther" + counter);
-                $("#activity" + counter).attr('name', "activity" + counter);
-                $("#EditByEmployeeact" + counter).attr('name', "EditByEmployeeact" + counter);
-                $("#empMidyearSelfassessmentGoalActivities" + counter).attr('name', "empMidyearSelfassessmentGoalActivities" + counter);
-                $("#managerMidYearSelfAssesssmentGoalActivities" + counter).attr('name', "managerMidYearSelfAssesssmentGoalActivities" + counter);
-                $("#empEndyearSelfassessmentGoalActivities" + counter).attr('name', "empEndyearSelfassessmentGoalActivities" + counter);
-                $("#managerEndYearSelfAssesssmentGoalActivities" + counter).attr('name', "managerEndYearSelfAssesssmentGoalActivities" + counter);
-                $("#kragoal_activity_id" + counter).attr('name', "kragoal_activity_id" + counter);
-            } catch (err) {
+                try {
+                    document.getElementById("removeKRAactivitiesID" + m).value;
+                    $("#removeKRAactivitiesID" + m).attr('id', "removeKRAactivitiesID" + counter);
+                    //replace id
+                    $("#kraGoal_activity" + m).attr('id', "kraGoal_activity" + counter);
+                    $("#metric_activity" + m).attr('id', "metric_activity" + counter);
+                    $("#kraCategoryMapOther" + m).attr('id', "kraCategoryMapOther" + counter);
+                    $("#priority" + m).attr('id', "priority" + counter);
+                    $("#midYearDivOther" + m).attr('id', "midYearDivOther" + counter);
+                    $("#endYearDivOther" + m).attr('id', "endYearDivOther" + counter);
+                    $("#activity" + m).attr('id', "activity" + counter);
+                    $("#EditByEmployeeact" + m).attr('id', "EditByEmployeeact" + counter);
+                    $("#empMidyearSelfassessmentGoalActivities" + m).attr('id', "empMidyearSelfassessmentGoalActivities" + counter);
+                    $("#managerMidYearSelfAssesssmentGoalActivities" + m).attr('id', "managerMidYearSelfAssesssmentGoalActivities" + counter);
+                    $("#empEndyearSelfassessmentGoalActivities" + m).attr('id', "empEndyearSelfassessmentGoalActivities" + counter);
+                    $("#managerEndYearSelfAssesssmentGoalActivities" + m).attr('id', "managerEndYearSelfAssesssmentGoalActivities" + counter);
+                    $("#kragoal_activity_id" + m).attr('id', "kragoal_activity_id" + counter);
+                    //name replace
+                    $("#kraGoal_activity" + counter).attr('name', "kraGoal_activity" + counter);
+                    $("#metric_activity" + counter).attr('name', "metric_activity" + counter);
+                    $("#kraCategoryMapOther" + counter).attr('name', "kraCategoryMapOther" + counter);
+                    $("#priority" + counter).attr('name', "priority" + counter);
+                    $("#midYearDivOther" + counter).attr('name', "midYearDivOther" + counter);
+                    $("#endYearDivOther" + counter).attr('name', "endYearDivOther" + counter);
+                    $("#activity" + counter).attr('name', "activity" + counter);
+                    $("#EditByEmployeeact" + counter).attr('name', "EditByEmployeeact" + counter);
+                    $("#empMidyearSelfassessmentGoalActivities" + counter).attr('name', "empMidyearSelfassessmentGoalActivities" + counter);
+                    $("#managerMidYearSelfAssesssmentGoalActivities" + counter).attr('name', "managerMidYearSelfAssesssmentGoalActivities" + counter);
+                    $("#empEndyearSelfassessmentGoalActivities" + counter).attr('name', "empEndyearSelfassessmentGoalActivities" + counter);
+                    $("#managerEndYearSelfAssesssmentGoalActivities" + counter).attr('name', "managerEndYearSelfAssesssmentGoalActivities" + counter);
+                    $("#kragoal_activity_id" + counter).attr('name', "kragoal_activity_id" + counter);
+                } catch (err) {
 
-                document.getElementById("removeKRAactivitiesID" + (m + 1)).value;
-                $("#removeKRAactivitiesID" + (m + 1)).attr('id', "removeKRAactivitiesID" + counter);
-                //repalce id
-                $("#kraGoal_activity" + (m + 1)).attr('id', "kraGoal_activity" + counter);
-                $("#metric_activity" + (m + 1)).attr('id', "metric_activity" + counter);
-                $("#kraCategoryMapOther" + (m + 1)).attr('id', "kraCategoryMapOther" + counter);
-                $("#priority" + (m + 1)).attr('id', "priority" + counter);
-                $("#midYearDivOther" + (m + 1)).attr('id', "midYearDivOther" + counter);
-                $("#endYearDivOther" + (m + 1)).attr('id', "endYearDivOther" + counter);
-                $("#activity" + (m + 1)).attr('id', "activity" + counter);
-                $("#EditByEmployeeact" + (m + 1)).attr('id', "EditByEmployeeact" + counter);
-                $("#empMidyearSelfassessmentGoalActivities" + (m + 1)).attr('id', "empMidyearSelfassessmentGoalActivities" + counter);
-                $("#managerMidYearSelfAssesssmentGoalActivities" + (m + 1)).attr('id', "managerMidYearSelfAssesssmentGoalActivities" + counter);
-                $("#empEndyearSelfassessmentGoalActivities" + (m + 1)).attr('id', "empEndyearSelfassessmentGoalActivities" + counter);
-                $("#managerEndYearSelfAssesssmentGoalActivities" + (m + 1)).attr('id', "managerEndYearSelfAssesssmentGoalActivities" + counter);
-                $("#kragoal_activity_id" + (m + 1)).attr('id', "kragoal_activity_id" + counter);
+                    document.getElementById("removeKRAactivitiesID" + (m + 1)).value;
+                    $("#removeKRAactivitiesID" + (m + 1)).attr('id', "removeKRAactivitiesID" + counter);
+                    //repalce id
+                    $("#kraGoal_activity" + (m + 1)).attr('id', "kraGoal_activity" + counter);
+                    $("#metric_activity" + (m + 1)).attr('id', "metric_activity" + counter);
+                    $("#kraCategoryMapOther" + (m + 1)).attr('id', "kraCategoryMapOther" + counter);
+                    $("#priority" + (m + 1)).attr('id', "priority" + counter);
+                    $("#midYearDivOther" + (m + 1)).attr('id', "midYearDivOther" + counter);
+                    $("#endYearDivOther" + (m + 1)).attr('id', "endYearDivOther" + counter);
+                    $("#activity" + (m + 1)).attr('id', "activity" + counter);
+                    $("#EditByEmployeeact" + (m + 1)).attr('id', "EditByEmployeeact" + counter);
+                    $("#empMidyearSelfassessmentGoalActivities" + (m + 1)).attr('id', "empMidyearSelfassessmentGoalActivities" + counter);
+                    $("#managerMidYearSelfAssesssmentGoalActivities" + (m + 1)).attr('id', "managerMidYearSelfAssesssmentGoalActivities" + counter);
+                    $("#empEndyearSelfassessmentGoalActivities" + (m + 1)).attr('id', "empEndyearSelfassessmentGoalActivities" + counter);
+                    $("#managerEndYearSelfAssesssmentGoalActivities" + (m + 1)).attr('id', "managerEndYearSelfAssesssmentGoalActivities" + counter);
+                    $("#kragoal_activity_id" + (m + 1)).attr('id', "kragoal_activity_id" + counter);
 
-                //replace name
-                $("#kraGoal_activity" + counter).attr('name', "kraGoal_activity" + counter);
-                $("#metric_activity" + counter).attr('name', "metric_activity" + counter);
-                $("#kraCategoryMapOther" + counter).attr('name', "kraCategoryMapOther" + counter);
-                $("#priority" + counter).attr('name', "priority" + counter);
-                $("#midYearDivOther" + counter).attr('name', "midYearDivOther" + counter);
-                $("#endYearDivOther" + counter).attr('name', "endYearDivOther" + counter);
-                $("#activity" + counter).attr('name', "activity" + counter);
-                $("#EditByEmployeeact" + counter).attr('name', "EditByEmployeeact" + counter);
-                $("#empMidyearSelfassessmentGoalActivities" + counter).attr('name', "empMidyearSelfassessmentGoalActivities" + counter);
-                $("#managerMidYearSelfAssesssmentGoalActivities" + counter).attr('name', "managerMidYearSelfAssesssmentGoalActivities" + counter);
-                $("#empEndyearSelfassessmentGoalActivities" + counter).attr('name', "empEndyearSelfassessmentGoalActivities" + counter);
-                $("#managerEndYearSelfAssesssmentGoalActivities" + counter).attr('name', "managerEndYearSelfAssesssmentGoalActivities" + counter);
-                $("#kragoal_activity_id" + counter).attr('name', "kragoal_activity_id" + counter);
-                m++;
+                    //replace name
+                    $("#kraGoal_activity" + counter).attr('name', "kraGoal_activity" + counter);
+                    $("#metric_activity" + counter).attr('name', "metric_activity" + counter);
+                    $("#kraCategoryMapOther" + counter).attr('name', "kraCategoryMapOther" + counter);
+                    $("#priority" + counter).attr('name', "priority" + counter);
+                    $("#midYearDivOther" + counter).attr('name', "midYearDivOther" + counter);
+                    $("#endYearDivOther" + counter).attr('name', "endYearDivOther" + counter);
+                    $("#activity" + counter).attr('name', "activity" + counter);
+                    $("#EditByEmployeeact" + counter).attr('name', "EditByEmployeeact" + counter);
+                    $("#empMidyearSelfassessmentGoalActivities" + counter).attr('name', "empMidyearSelfassessmentGoalActivities" + counter);
+                    $("#managerMidYearSelfAssesssmentGoalActivities" + counter).attr('name', "managerMidYearSelfAssesssmentGoalActivities" + counter);
+                    $("#empEndyearSelfassessmentGoalActivities" + counter).attr('name', "empEndyearSelfassessmentGoalActivities" + counter);
+                    $("#managerEndYearSelfAssesssmentGoalActivities" + counter).attr('name', "managerEndYearSelfAssesssmentGoalActivities" + counter);
+                    $("#kragoal_activity_id" + counter).attr('name', "kragoal_activity_id" + counter);
+                    m++;
+                }
+                document.getElementById("removeKRAactivitiesID" + counter).innerHTML = counter;
+                counter++;
             }
-            document.getElementById("removeKRAactivitiesID" + counter).innerHTML = counter;
-            counter++;
-        }
-        
-        }catch(err){
-            
+
+        } catch (err) {
+
         }
         var kraremovedActivitiesIdVal = document.getElementById('kraremovedActivitiesIdVal').value;
         document.getElementById('kraremovedActivitiesIdVal').value = kraremovedActivitiesIdVal + "," + id;
@@ -405,63 +405,63 @@ function removeIndividualChild(removeRowId_1, removeRowId_2, removeRowId_3, remo
         element4.parentNode.removeChild(element4);
         element5.parentNode.removeChild(element5);
         var counter = 1;
-        try{
+        try {
             for (var m = 1; m <= (val + 1); m++) {
-            try {
-                document.getElementById("removeKRAIndividualID" + m).value;
-                $("#removeKRAIndividualID" + m).attr('id', "removeKRAIndividualID" + counter);
-                //replace id
-                $("#text" + m).attr('id', "text" + counter);
-                $("#individualtextDiv" + m).attr('id', "individualtextDiv" + counter);
-                $("#trainingSelectId" + m).attr('id', "trainingSelectId" + counter);
-                $("#trainingSelectTextinput" + m).attr('id', "trainingSelectTextinput" + counter);
-                $("#midYearRetxtId" + m).attr('id', "midYearRetxtId" + counter);
-                $("#endYearRetxtId" + m).attr('id', "endYearRetxtId" + counter);
-                $("#managerMidYearRemark" + m).attr('id', "managerMidYearRemark" + counter);
-                $("#managerEndYearRemark" + m).attr('id', "managerEndYearRemark" + counter);
-                $("#IndividualDevelopmentPlanId" + m).attr('id', "IndividualDevelopmentPlanId" + counter);
-                //name replace
-                $("#text" + counter).attr('name', "text" + counter);
-                $("#individualtextDiv" + counter).attr('name', "individualtextDiv" + counter);
-                $("#trainingSelectId" + counter).attr('name', "trainingSelectId" + counter);
-                $("#trainingSelectTextinput" + counter).attr('name', "trainingSelectTextinput" + counter);
-                $("#midYearRetxtId" + counter).attr('name', "midYearRetxtId" + counter);
-                $("#endYearRetxtId" + counter).attr('name', "endYearRetxtId" + counter);
-                $("#managerMidYearRemark" + counter).attr('name', "managerMidYearRemark" + counter);
-                $("#managerEndYearRemark" + counter).attr('name', "managerEndYearRemark" + counter);
-                $("#IndividualDevelopmentPlanId" + counter).attr('name', "IndividualDevelopmentPlanId" + counter);
-            } catch (err) {
+                try {
+                    document.getElementById("removeKRAIndividualID" + m).value;
+                    $("#removeKRAIndividualID" + m).attr('id', "removeKRAIndividualID" + counter);
+                    //replace id
+                    $("#text" + m).attr('id', "text" + counter);
+                    $("#individualtextDiv" + m).attr('id', "individualtextDiv" + counter);
+                    $("#trainingSelectId" + m).attr('id', "trainingSelectId" + counter);
+                    $("#trainingSelectTextinput" + m).attr('id', "trainingSelectTextinput" + counter);
+                    $("#midYearRetxtId" + m).attr('id', "midYearRetxtId" + counter);
+                    $("#endYearRetxtId" + m).attr('id', "endYearRetxtId" + counter);
+                    $("#managerMidYearRemark" + m).attr('id', "managerMidYearRemark" + counter);
+                    $("#managerEndYearRemark" + m).attr('id', "managerEndYearRemark" + counter);
+                    $("#IndividualDevelopmentPlanId" + m).attr('id', "IndividualDevelopmentPlanId" + counter);
+                    //name replace
+                    $("#text" + counter).attr('name', "text" + counter);
+                    $("#individualtextDiv" + counter).attr('name', "individualtextDiv" + counter);
+                    $("#trainingSelectId" + counter).attr('name', "trainingSelectId" + counter);
+                    $("#trainingSelectTextinput" + counter).attr('name', "trainingSelectTextinput" + counter);
+                    $("#midYearRetxtId" + counter).attr('name', "midYearRetxtId" + counter);
+                    $("#endYearRetxtId" + counter).attr('name', "endYearRetxtId" + counter);
+                    $("#managerMidYearRemark" + counter).attr('name', "managerMidYearRemark" + counter);
+                    $("#managerEndYearRemark" + counter).attr('name', "managerEndYearRemark" + counter);
+                    $("#IndividualDevelopmentPlanId" + counter).attr('name', "IndividualDevelopmentPlanId" + counter);
+                } catch (err) {
 
-                document.getElementById("removeKRAIndividualID" + (m + 1)).value;
-                $("#removeKRAIndividualID" + (m + 1)).attr('id', "removeKRAIndividualID" + counter);
+                    document.getElementById("removeKRAIndividualID" + (m + 1)).value;
+                    $("#removeKRAIndividualID" + (m + 1)).attr('id', "removeKRAIndividualID" + counter);
 
-                //repalce id
-                $("#text" + (m + 1)).attr('id', "text" + counter);
-                $("#individualtextDiv" + (m + 1)).attr('id', "individualtextDiv" + counter);
-                $("#trainingSelectId" + (m + 1)).attr('id', "trainingSelectId" + counter);
-                $("#trainingSelectTextinput" + (m + 1)).attr('id', "trainingSelectTextinput" + counter);
-                $("#midYearRetxtId" + (m + 1)).attr('id', "midYearRetxtId" + counter);
-                $("#endYearRetxtId" + (m + 1)).attr('id', "endYearRetxtId" + counter);
-                $("#managerMidYearRemark" + (m + 1)).attr('id', "managerMidYearRemark" + counter);
-                $("#managerEndYearRemark" + (m + 1)).attr('id', "managerEndYearRemark" + counter);
-                $("#IndividualDevelopmentPlanId" + (m + 1)).attr('id', "IndividualDevelopmentPlanId" + counter);
+                    //repalce id
+                    $("#text" + (m + 1)).attr('id', "text" + counter);
+                    $("#individualtextDiv" + (m + 1)).attr('id', "individualtextDiv" + counter);
+                    $("#trainingSelectId" + (m + 1)).attr('id', "trainingSelectId" + counter);
+                    $("#trainingSelectTextinput" + (m + 1)).attr('id', "trainingSelectTextinput" + counter);
+                    $("#midYearRetxtId" + (m + 1)).attr('id', "midYearRetxtId" + counter);
+                    $("#endYearRetxtId" + (m + 1)).attr('id', "endYearRetxtId" + counter);
+                    $("#managerMidYearRemark" + (m + 1)).attr('id', "managerMidYearRemark" + counter);
+                    $("#managerEndYearRemark" + (m + 1)).attr('id', "managerEndYearRemark" + counter);
+                    $("#IndividualDevelopmentPlanId" + (m + 1)).attr('id', "IndividualDevelopmentPlanId" + counter);
 
-                //replace name
-                $("#text" + counter).attr('name', "text" + counter);
-                $("#individualtextDiv" + counter).attr('name', "individualtextDiv" + counter);
-                $("#trainingSelectId" + counter).attr('name', "trainingSelectId" + counter);
-                $("#trainingSelectTextinput" + counter).attr('name', "trainingSelectTextinput" + counter);
-                $("#midYearRetxtId" + counter).attr('name', "midYearRetxtId" + counter);
-                $("#endYearRetxtId" + counter).attr('name', "endYearRetxtId" + counter);
-                $("#managerMidYearRemark" + counter).attr('name', "managerMidYearRemark" + counter);
-                $("#managerEndYearRemark" + counter).attr('name', "managerEndYearRemark" + counter);
-                $("#IndividualDevelopmentPlanId" + counter).attr('name', "IndividualDevelopmentPlanId" + counter);
-                m++;
+                    //replace name
+                    $("#text" + counter).attr('name', "text" + counter);
+                    $("#individualtextDiv" + counter).attr('name', "individualtextDiv" + counter);
+                    $("#trainingSelectId" + counter).attr('name', "trainingSelectId" + counter);
+                    $("#trainingSelectTextinput" + counter).attr('name', "trainingSelectTextinput" + counter);
+                    $("#midYearRetxtId" + counter).attr('name', "midYearRetxtId" + counter);
+                    $("#endYearRetxtId" + counter).attr('name', "endYearRetxtId" + counter);
+                    $("#managerMidYearRemark" + counter).attr('name', "managerMidYearRemark" + counter);
+                    $("#managerEndYearRemark" + counter).attr('name', "managerEndYearRemark" + counter);
+                    $("#IndividualDevelopmentPlanId" + counter).attr('name', "IndividualDevelopmentPlanId" + counter);
+                    m++;
+                }
+                document.getElementById("removeKRAIndividualID" + counter).innerHTML = counter;
+                counter++;
             }
-            document.getElementById("removeKRAIndividualID" + counter).innerHTML = counter;
-            counter++;
-        }
-        }catch(err){
+        } catch (err) {
         }
         var kraremovedIndividualIdVal = document.getElementById('kraremovedIndividualIdVal').value;
         document.getElementById('kraremovedIndividualIdVal').value = kraremovedIndividualIdVal + "," + id;
@@ -1305,7 +1305,7 @@ $(document).on("click", ":submit", function (e) {
 //        document.getElementById("metric_activity1").required = true;
 //        document.getElementById("priority1").required = true;
             var w1 = document.getElementById("weightageScore").value;
-            if (w1 < 75 || w1 >75 ) {
+            if (w1 < 75 || w1 > 75) {
                 weitageAlert();
                 return false;
             }
@@ -1923,7 +1923,7 @@ $(document).ready(function () {
                 var kra1 = document.getElementById("kraGoal_activity" + i).readOnly = true;
                 document.getElementById("metric_activity" + i).readOnly = true;
             }
-            alert("dsffdgdfgdfgdgddfgddgdgdg");
+            //alert("dsffdgdfgdfgdgddfgddgdgdg");
             document.getElementById("kraCategoryMapOther" + i).readOnly = true;
 
 //            var midYearDiv = document.getElementById("midYearDivOther" + i).value;

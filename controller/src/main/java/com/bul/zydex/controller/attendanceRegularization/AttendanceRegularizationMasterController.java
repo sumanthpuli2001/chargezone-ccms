@@ -11,6 +11,7 @@ import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.TimeAttandanceFlaxibleMaster;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.UserRightMaster;
+import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.model.support.User;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.text.SimpleDateFormat;
@@ -792,7 +793,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     cal1.setTime(firstStartHours);
                     cal.add(Calendar.MINUTE, lateMinute);
                     cal1.add(Calendar.MINUTE, -earlyMinute);
-                    
+
                     String newTime = sdf2.format(cal.getTime());
                     String newTime1 = sdf2.format(cal1.getTime());
                     Date flexibleEndTime = sdf2.parse(newTime);
@@ -809,9 +810,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     long diffMinutes1 = diff1 / (60 * 1000);
 
                     if (userTimeIn != null) {
-                         if (diff1 >= diff) {
-                            secondHalfList.add("PR");
-                        }else if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                        if (diff1 >= diff) {
+                            newList.add("PR");
+                        } else if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             newList.add("PR");
                         } else if (leave1[0] != null && !leave1[0].contains("Short Leave")) {
                             if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
@@ -882,13 +883,106 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 int firstHalfVal = 0;
                 int counter = 0;
                 String shiftName = "";
+                int weekNameCounter = 0;
+                boolean satWeekOff = false;
+                //                                    2nd Sat Week Off Codding
+                Calendar cal = Calendar.getInstance();
+                Date date = sdf.parse("" + next[0]);
+                cal.setTime(date);
+                SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                String dayName = format.format(date);
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
+                ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
+
+                if (dayName.equals("Saturday")) {
+                    weekNameCounter++;
+                    if (weekNameCounter == 2) {
+                        satWeekOff = true;
+                    } else {
+                        satWeekOff = false;
+                    }
+
+                } else {
+                    satWeekOff = false;
+                }
+//                                    2nd Sat Week Off Codding
+
+                //                                    Lunch Breck Cut Off
+                List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
+                long lunchTime = 0;
+                long totalDayTime = 0;
+                long totalTime = 0;
+                long shiftdiffMinutes = 0;
+                boolean checkLunchTime = false;
+                if (listPunch.size() > 2) {
+                    Object[] startLunchTime = (Object[]) listPunch.get(1);
+                    Object[] endLunchTime = (Object[]) listPunch.get(2);
+                    String startTime = (String) startLunchTime[0];
+                    String endTime = (String) endLunchTime[0];
+                    SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    Date launchStrTime = sdf3.parse(startTime);
+                    Date launchEndTime = sdf3.parse(endTime);
+                    long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                    lunchTime = diff / (60 * 1000) % 60;
+
+                    Date startStrTime = sdf3.parse(startTime);
+                    Date endStrTime = sdf3.parse(endTime);
+                    String[] userTimeInStr = secondHalf.split("`");
+                    String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                    String[] userTimeOutStr = secondHalf.split("!");
+                    String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                    Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                    Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                    String[] startHoursStr = secondHalf.split("%");
+                    String[] firstStartHoursStr = startHoursStr[1].split("\\+");
+                    String[] endHoursStr = secondHalf.split("&");
+                    Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
+                    Calendar cal1 = Calendar.getInstance();
+                    cal1.setTime(firstStartHours);
+                    cal1.add(Calendar.MINUTE, -earlyMinute);
+                    String newTime1 = sdf2.format(cal1.getTime());
+                    Date flexibleInTime = sdf2.parse(newTime1);
+                    Date endHours = sdf2.parse(endHoursStr[1]);
+                    long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
+                    shiftdiffMinutes = shiftTotalTime / (60 * 1000);
+                    long diff1 = 0;
+                    if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
+                        diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+
+                    } else {
+                        diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                    }
+
+                    totalDayTime = diff1 / (60 * 1000);
+
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                    if (lunchTime > 60) {
+                        lunchTime = 60;
+                    }
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                    lunchTime = lunchTime - 30;
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+                    if (lunchTime > 0) {
+                        totalTime = totalDayTime - lunchTime;
+                        checkLunchTime = true;
+                    }
+
+                }
+
+//                                    Lunch Breck Cut Off
                 if (secondHalf.contains(" # ")) {
                     String[] string1 = secondHalf.split("#");
                     String[] string2 = string1[1].split("\\$");
                     shiftName = string2[0].trim();
 
                 }
-                if (secondHalf.contains("fullday")) {
+
+                if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
+                    secondHalfList.add("WO");
+                } else if (checkLunchTime == true && totalTime < shiftdiffMinutes) {
+                    secondHalfList.add("AR");
+                } else if (secondHalf.contains("fullday")) {
                     secondHalfList.add("PR");
 
                 } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")

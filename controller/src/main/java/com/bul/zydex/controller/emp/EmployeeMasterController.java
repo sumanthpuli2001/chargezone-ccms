@@ -274,7 +274,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         long PL = (diffDays * y / 365) + 1;
                         employeeLeaveBalance.setNoOfLeaveRemain(PL);
                     }
-                } else if (leave.equals("Paternity Leave") && !gender_Female && marital_status.equals("Married")) {
+                } 
+                else if (leave.equals("Paternity Leave") && !gender_Female && marital_status.equals("Married")) {
                     if (isLeapYear == true) {
 //                        long PAT = (diffDays * y / 366) + 1;
                         long PAT = 6;

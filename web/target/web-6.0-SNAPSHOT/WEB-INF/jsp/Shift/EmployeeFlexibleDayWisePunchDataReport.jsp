@@ -347,6 +347,10 @@
                                                                                 <th style="color: blue;text-align: center;">${secondHalfList}</th>
                                                                                  <c:set var="ar" value="${ar + 0.5}"></c:set>
                                                                                 </c:if>
+                                                                                 <c:if test="${secondHalfList eq 'WO'}">
+                                                                                <th style="text-align: center;">${secondHalfList}</th>
+                                                                                <c:set var="wo" value="${wo + 0.5}"></c:set>
+                                                                                </c:if>
                                                                                 
                                                                             </c:forEach>
 

@@ -20,7 +20,7 @@
     <bean id="cronTrigger1"
           class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="timeAttendanceDetail" />
-        <property name="cronExpression" value="0 55 11 L * ?" />
+        <property name="cronExpression" value="0 0/05 * * * ?" />
         <!--0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying-->
     </bean><!--
 -->

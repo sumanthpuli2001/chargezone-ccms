@@ -529,7 +529,7 @@
 
                 </c:if>
                 <c:if test="${sessionScope.userRight.hr}">
-                    <!--                    <li class="treeview">
+<!--                                        <li class="treeview">
                                             <a href="#" style="">
                                                 <i class="fa fa-wrench fa-lg"></i>
                                                 <span>Employee Approval </span>

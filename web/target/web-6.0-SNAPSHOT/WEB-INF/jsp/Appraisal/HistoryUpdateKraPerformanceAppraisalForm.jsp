@@ -21,25 +21,25 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
                 <h4 class="modal-title" id="myModalLabel">History Detail</h4>-->
 
-                <!--<table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center">-->
-                    <th style="margin: 0px;width: 5px;text-align: center" id="midYearDivid">SR.NO</th>
-                    <th style="margin: 0px;width: 130px;text-align: center" id="midYearDivid">Kra Goal</th>
-                    <th style="margin: 0px;width: 130px;text-align: center" id="endYearDivid1">Matric</th>
-                    <th style="margin: 0px;width: 5px;text-align: center" id="finalScoreid01">Date</th>
-                    <th style="margin: 0px;width: 5px;text-align: center" id="finalScoreid01">Weighted</th>
-                    <th style="margin: 0px;width: 5px;text-align: center" id="finalScoreid01">Changed By</th>
-                        <c:forEach var="updateKraList1" items="${updateKraList}" varStatus="status">
-                        <tr>
-                            <td>${status.count}</td> 
-                            <td><textarea name="" id="" class="form-control" disabled="true">${updateKraList1[1]}</textarea></td>
-                            <td><textarea name="" id="" class="form-control" disabled="true">${updateKraList1[2]}</textarea></td>
-                            <td><input type="text" name="" id="" value="${updateKraList1[3]}" disabled="true" class="form-control"></td>  
-                            <td><input type="text" name="" id="" value="${updateKraList1[5]}" disabled="true" class="form-control"></td>  
-                            <td><input type="text" name="" id="" value="${updateKraList1[4]}" disabled="true" class="form-control"></td>  
-                        </tr>  
-                    </c:forEach>
-                <!--</table>-->  
+<!--<table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center">-->
+<th style="margin: 0px;width: 5px;text-align: center" id="midYearDivid">SR.NO</th>
+<th style="margin: 0px;width: 130px;text-align: center" id="midYearDivid">Kra Goal</th>
+<th style="margin: 0px;width: 130px;text-align: center" id="endYearDivid1">Matric</th>
+<th style="margin: 0px;width: 5px;text-align: center" id="finalScoreid01">Date</th>
+<th style="margin: 0px;width: 5px;text-align: center" id="finalScoreid01">Weighted</th>
+<th style="margin: 0px;width: 5px;text-align: center" id="finalScoreid01">Changed By</th>
+    <c:forEach var="updateKraList1" items="${updateKraList}" varStatus="status">
+    <tr>
+        <td>${status.count}</td>
+        <td>${updateKraList1[1]}</td>
+        <td>${updateKraList1[2]}</td>
+        <td><input type="text" name="" id="" value="${updateKraList1[3]}" disabled="true" class="form-control"></td>
+        <td><input type="text" name="" id="" value="${updateKraList1[5]}" disabled="true" class="form-control"></td>
+        <td><input type="text" name="" id="" value="${updateKraList1[4]}" disabled="true" class="form-control"></td>
+    </tr>
+</c:forEach>
+<!--</table>-->
 <!--            </div>
         </div>-->
-    <!--</div>-->
+<!--</div>-->
 <!--</div>-->

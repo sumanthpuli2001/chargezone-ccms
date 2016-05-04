@@ -313,7 +313,7 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " e.designationName,"
                 + " f.level,"
                 + "" + appraisalFillingData.getYear() + ","
-                + " case when (b.kraGoal is null or b.kraGoal ='') and (b.metric is null or b.metric ='') then 'KRA Setting By Employee' "
+                + " case when (b.kraGoal is null or b.kraGoal ='') or (b.metric is null or b.metric ='') then 'KRA Setting By Employee' "
                 + " when (b.kraGoal is not null and b.kraGoal !='') and (b.metric is not null and b.metric !='') and a.status=0 then 'KRA Setting By Employee' "
                 + " when (b.kraGoal is not null and b.kraGoal !='') and (b.metric is not null and b.metric !='') and a.status=1 and  a.managerStatus=0 then 'KRA Approval By Manager' "
                 + " when (b.kraGoal is not null and b.kraGoal !='') and (b.metric is not null and b.metric !='') and a.status=1 and a.managerStatus=1 and (b.empMidyearSelfassessmentGoal is null or b.empMidyearSelfassessmentGoal ='') then 'Employees Mid Year Self Assessment' "
@@ -354,8 +354,8 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " where a.id = " + id;
         return getHibernateTemplate().find(query);
     }
-    
-      @Override
+
+    @Override
     public List<?> readPendingEmployeePmp(int employeeId, int year) {
 
         String query = "";
@@ -364,11 +364,12 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + "FROM AppraisalPerformanceMaster a "
                 + " WHERE a.behaviorsYear =" + year
                 + " and a.employeeMaster = " + employeeId
-                + "and a.employeeStatus=1" ;
+                + "and a.employeeStatus=1";
 
         return getHibernateTemplate().find(query);
     }
-      @Override
+
+    @Override
     public List<?> readPendingEmployeePmpByManager(String employeeId, int year) {
 
         String query = "";
@@ -378,7 +379,7 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " left join a.employeeMaster b "
                 + " WHERE a.behaviorsYear =" + year
                 + " and b.reportingManagerLevel1 = " + employeeId
-                + " and a.employeeStatus=1" ;
+                + " and a.employeeStatus=1";
 
         return getHibernateTemplate().find(query);
     }

@@ -9,7 +9,7 @@
 <html>
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
-  <script>
+    <script>
         function buttonFun1() {
             var className = $('#minusId1').attr('class');
             if (className == 'fa fa-plus') {
@@ -197,7 +197,7 @@
                                                             <label>Date of Leaving:</label>
                                                         </div>
                                                         <div class="col-sm-4">
-                                                                <input class="form-control" size="16" type="text" value="${list1.dateOfLeaving}" readonly>
+                                                            <input class="form-control" size="16" type="text" value="${list1.dateOfLeaving}" readonly>
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <label>Date of Form Submit:</label>
@@ -205,7 +205,7 @@
                                                         <div class="col-sm-4">
                                                             <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <jsp:useBean id="now" class="java.util.Date" />
-                                                                <fmt:formatDate type="date"  value="${now}" var="today" pattern="dd/MM/yyyy" /> 
+                                                                <fmt:formatDate type="date"  value="${now}" var="today" pattern="dd/MM/yyyy" />
                                                                 <form:input class="form-control" path="dateOfSubmit" value="${today}" readonly="true"/>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
@@ -220,7 +220,7 @@
                                     <div class="box-header">
                                         <h3 class="box-title">1)Please describe the primary reason(s) you are leaving your current position:</h3>
                                         <div class="box-tools pull-right">
-                                             <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
+                                            <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
                                         </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
@@ -230,30 +230,30 @@
                                                     <label class="col-sm-3 control-label"></label>
                                                     <div class="col-sm-12">
                                                         <form:textarea path="reasonLeaving" class="form-control"/>
-                                                         <div style="color: red"><form:errors path="reasonLeaving" cssClass="errorDiv"></form:errors></div>
+                                                        <div style="color: red"><form:errors path="reasonLeaving" cssClass="errorDiv"></form:errors></div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div><!-- /.col -->
+                                                </div><!-- /.col -->
 
-                                        </div><!-- /.row -->
-                                    </div><!-- /.box-body -->
-                                </div>
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
+                                    </div>
 
-                                <div class="box box-info collapsed-box">
-                                    <div class="box-header">
-                                        <h3 class="box-title">2)Which of the below mentioned factors where you dissatisfied with, which triggered your thought to leave us?:</h3>
-                                        <div class="box-tools pull-right">
-                                             <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
-                                        </div>
-                                    </div><!-- /.box-header -->
-                                    <div class="box-body no-padding">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12">
+                                    <div class="box box-info collapsed-box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">2)Which of the below mentioned factors where you dissatisfied with, which triggered your thought to leave us?:</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
 
 
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label">Type of Work or Profile:</label>
-                                                    <div class="col-sm-5">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-5 control-label">Type of Work or Profile:</label>
+                                                        <div class="col-sm-5">
                                                         <form:select path="typeOfWork" id="typeOfWork" class="form-control" >
                                                             <form:options items="${status2}"></form:options>
                                                         </form:select>
@@ -323,7 +323,7 @@
                                     <div class="box-header">
                                         <h3 class="box-title">3)Please provide your candid feedback and rate the following aspects with reference to your job at Zydex.<br/>(Please use the 1 – 5 scale below):</h3>
                                         <div class="box-tools pull-right">
-                                             <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
+                                            <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
                                         </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
@@ -333,7 +333,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-5 control-label">Job / Role Clarity:</label>
                                                 <div class="col-sm-5">
-                                                    <form:select path="rateJob" id="rateJob" class="form-control" >
+                                                    <form:select path="rateJob" id="rateJob" class="form-control">
                                                         <form:option value="Excellent" label="Excellent"/>
                                                         <form:options items="${status}"></form:options>
                                                     </form:select>
@@ -431,7 +431,7 @@
                                     <div class="box-header">
                                         <h3 class="box-title">4)Please rate the following aspects of the organization overall:</h3>
                                         <div class="box-tools pull-right">
-                                             <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
+                                            <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
                                         </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
@@ -527,7 +527,7 @@
                                     <div class="box-header">
                                         <h3 class="box-title">5)Please rate your supervisor on the following factors.:</h3>
                                         <div class="box-tools pull-right">
-                                             <span id="spanId6">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun6();"><i class="fa fa-plus" id="minusId6" ></i></button>
+                                            <span id="spanId6">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun6();"><i class="fa fa-plus" id="minusId6" ></i></button>
                                         </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
@@ -537,8 +537,8 @@
                                                 <label class="col-sm-5 control-label">Provide Candid & Constructive Performance Feedback:</label>
                                                 <div class="col-sm-5">
                                                     <form:select path="performanceFeedback" id="performanceFeedback" class="form-control" >
-                                                        <form:option value="Excellent" label="Excellent"/>
-                                                        <form:options items="${status}"></form:options>
+                                                        <%--<form:option value="Excellent" label="Excellent"/>--%>
+                                                        <form:options items="${status3}"></form:options>
                                                     </form:select>
                                                 </div>
                                             </div>
@@ -546,26 +546,26 @@
                                                 <label class="col-sm-5 control-label">Recognize accomplishments:</label>
                                                 <div class="col-sm-5">
                                                     <form:select path="accomplishments" id="accomplishments" class="form-control" >
-                                                        <form:option value="Excellent" label="Excellent"/>
-                                                        <form:options items="${status}"></form:options>
+                                                        <%--<form:option value="Excellent" label="Excellent"/>--%>
+                                                        <form:options items="${status3}"></form:options>
                                                     </form:select>
                                                 </div>
                                             </div>
                                             <!--<div class="form-group">-->
-                                                <!--<label class="col-sm-5 control-label">Learning Opportunities:</label>-->
-                                                <!--<div class="col-sm-5">-->
-                                                    <%--<form:select path="learningOpportunities" id="learningOpportunities" class="form-control" >--%>
-                                                        <%--<form:option value="Excellent" label="Excellent"/>--%>
-                                                        <%--<form:options items="${status}"></form:options>--%>
-                                                    <%--</form:select>--%>
-                                                <!--</div>-->
+                                            <!--<label class="col-sm-5 control-label">Learning Opportunities:</label>-->
+                                            <!--<div class="col-sm-5">-->
+                                            <%--<form:select path="learningOpportunities" id="learningOpportunities" class="form-control" >--%>
+                                            <%--<form:option value="Excellent" label="Excellent"/>--%>
+                                            <%--<form:options items="${status}"></form:options>--%>
+                                            <%--</form:select>--%>
+                                            <!--</div>-->
                                             <!--</div>-->
                                             <div class="form-group">
                                                 <label class="col-sm-5 control-label">Clearly communicate expectations:</label>
                                                 <div class="col-sm-5">
                                                     <form:select path="cummunicateExpectation" id="cummunicateExpectation" class="form-control" >
-                                                        <form:option value="Excellent" label="Excellent"/>
-                                                        <form:options items="${status}"></form:options>
+                                                        <%--<form:option value="Excellent" label="Excellent"/>--%>
+                                                        <form:options items="${status3}"></form:options>
                                                     </form:select>
                                                 </div>
                                             </div>
@@ -574,8 +574,8 @@
                                                 <label class="col-sm-5 control-label">Fair & Respectful Treatment:</label>
                                                 <div class="col-sm-5">
                                                     <form:select path="respectfullTreatment" id="respectfullTreatment" class="form-control" >
-                                                        <form:option value="Excellent" label="Excellent"/>
-                                                        <form:options items="${status}"></form:options>
+                                                        <%--<form:option value="Excellent" label="Excellent"/>--%>
+                                                        <form:options items="${status3}"></form:options>
                                                     </form:select>
                                                 </div>
                                             </div>
@@ -583,8 +583,8 @@
                                                 <label class="col-sm-5 control-label">Provide Learning Opportunities:</label>
                                                 <div class="col-sm-5">
                                                     <form:select path="provideLearning" id="provideLearning" class="form-control" >
-                                                        <form:option value="Excellent" label="Excellent"/>
-                                                        <form:options items="${status}"></form:options>
+                                                        <%--<form:option value="Excellent" label="Excellent"/>--%>
+                                                        <form:options items="${status3}"></form:options>
                                                     </form:select>
                                                 </div>
                                             </div>
@@ -592,8 +592,8 @@
                                                 <label class="col-sm-5 control-label">Coaching & Mentoring:</label>
                                                 <div class="col-sm-5">
                                                     <form:select path="coaching" id="coaching" class="form-control" >
-                                                        <form:option value="Excellent" label="Excellent"/>
-                                                        <form:options items="${status}"></form:options>
+                                                        <%--<form:option value="Excellent" label="Excellent"/>--%>
+                                                        <form:options items="${status3}"></form:options>
                                                     </form:select>
                                                 </div>
                                             </div>
@@ -601,8 +601,8 @@
                                                 <label class="col-sm-5 control-label">Encourage teamwork & cooperation:</label>
                                                 <div class="col-sm-5">
                                                     <form:select path="teamWork" id="teamWork" class="form-control" >
-                                                        <form:option value="Excellent" label="Excellent"/>
-                                                        <form:options items="${status}"></form:options>
+                                                        <%--<form:option value="Excellent" label="Excellent"/>--%>
+                                                        <form:options items="${status3}"></form:options>
                                                     </form:select>
                                                 </div>
                                             </div>
@@ -610,8 +610,8 @@
                                                 <label class="col-sm-5 control-label">Resolve concerns promptly:</label>
                                                 <div class="col-sm-5">
                                                     <form:select path="resolveConcern" id="resolveConcern" class="form-control" >
-                                                        <form:option value="Excellent" label="Excellent"/>
-                                                        <form:options items="${status}"></form:options>
+                                                        <%--<form:option value="Excellent" label="Excellent"/>--%>
+                                                        <form:options items="${status3}"></form:options>
                                                     </form:select>
                                                 </div>
                                             </div>
@@ -619,8 +619,8 @@
                                                 <label class="col-sm-5 control-label">Listen to suggestions & feedback:</label>
                                                 <div class="col-sm-5">
                                                     <form:select path="listenToFeedback" id="listenToFeedback" class="form-control" >
-                                                        <form:option value="Excellent" label="Excellent"/>
-                                                        <form:options items="${status}"></form:options>
+                                                        <%--<form:option value="Excellent" label="Excellent"/>--%>
+                                                        <form:options items="${status3}"></form:options>
                                                     </form:select>
                                                 </div>
                                             </div>
@@ -628,8 +628,8 @@
                                                 <label class="col-sm-5 control-label">Provide necessary & timely information:</label>
                                                 <div class="col-sm-5">
                                                     <form:select path="provideNecessaryInfo" id="provideNecessaryInfo" class="form-control" >
-                                                        <form:option value="Excellent" label="Excellent"/>
-                                                        <form:options items="${status}"></form:options>
+                                                        <%--<form:option value="Excellent" label="Excellent"/>--%>
+                                                        <form:options items="${status3}"></form:options>
                                                     </form:select>
                                                 </div>
                                             </div>
@@ -638,8 +638,8 @@
                                                 <label class="col-sm-5 control-label">Support Work-Life Balance:</label>
                                                 <div class="col-sm-5">
                                                     <form:select path="sopportWorkLife" id="sopportWorkLife" class="form-control" >
-                                                        <form:option value="Excellent" label="Excellent"/>
-                                                        <form:options items="${status}"></form:options>
+                                                        <%--<form:option value="Excellent" label="Excellent"/>--%>
+                                                        <form:options items="${status3}"></form:options>
                                                     </form:select>
                                                 </div>
                                             </div>
@@ -650,10 +650,10 @@
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
                                         <h3 class="box-title">6)Please rate your next job on the following aspects in priority, which made you take the decision of leaving Zydex.
-                                            </h3>
+                                        </h3>
                                         <h3 class="box-title"> Please rate top three reasons by mentioning 1, 2 & 3 against each of the below items:</h3>
                                         <div class="box-tools pull-right">
-                                             <span id="spanId7">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7" ></i></button>
+                                            <span id="spanId7">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7" ></i></button>
                                         </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
@@ -723,7 +723,7 @@
                                     <div class="box-header">
                                         <h3 class="box-title">7)Since how long were you considering leaving Zydex? What could have been done to retain you? Please mention in brief:</h3>
                                         <div class="box-tools pull-right">
-                                             <span id="spanId8">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun8();"><i class="fa fa-plus" id="minusId8" ></i></button>
+                                            <span id="spanId8">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun8();"><i class="fa fa-plus" id="minusId8" ></i></button>
                                         </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
@@ -735,28 +735,28 @@
                                                     <div class="col-sm-12" id="">
                                                         <form:textarea path="reasonForSustain" class="form-control"/>
                                                         <form:errors path="reasonForSustain" cssClass="errorDiv"></form:errors>
-                                                         <div style="color: red"><form:errors path="reasonForSustain" cssClass="errorDiv"></form:errors></div>
+                                                        <div style="color: red"><form:errors path="reasonForSustain" cssClass="errorDiv"></form:errors></div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div><!-- /.col -->
+                                                </div><!-- /.col -->
 
-                                        </div><!-- /.row -->
-                                    </div><!-- /.box-body -->
-                                </div>
-                                <div class="box box-info collapsed-box">
-                                    <div class="box-header">
-                                        <h3 class="box-title">8)If given a choice or considered at a later date, would you like to re-join us?
-                                            Please tick: Yes / No.  If No, Why?<br/>(Please mention in the space provided here below):</h3>
-                                        <div class="box-tools pull-right">
-                                            <span id="spanId9">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun9();"><i class="fa fa-plus" id="minusId9" ></i></button>
-                                        </div>
-                                    </div><!-- /.box-header -->
-                                    <div class="box-body no-padding">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="col-sm-3 control-label"></label>
-                                                    <div class="col-sm-10">
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                    <div class="box box-info collapsed-box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">8)If given a choice or considered at a later date, would you like to re-join us?
+                                                Please tick: Yes / No.  If No, Why?<br/>(Please mention in the space provided here below):</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId9">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun9();"><i class="fa fa-plus" id="minusId9" ></i></button>
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label"></label>
+                                                        <div class="col-sm-10">
                                                         <form:radiobutton path="againJoin" value="1"/>Yes
                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                         <form:radiobutton path="againJoin" value="0"/>No
@@ -776,7 +776,7 @@
                                     <div class="box-header">
                                         <h3 class="box-title">9)Any other Suggestions or Feedback? Please mention in brief:</h3>
                                         <div class="box-tools pull-right">
-                                             <span id="spanId10">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun10();"><i class="fa fa-plus" id="minusId10" ></i></button>
+                                            <span id="spanId10">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun10();"><i class="fa fa-plus" id="minusId10" ></i></button>
                                         </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">

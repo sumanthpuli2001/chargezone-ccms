@@ -71,6 +71,7 @@ public class ExitInterviewMasterController extends ExitInterviewMasterAbstract {
         setStatus(request);
         setStatus1(request);
         setStatus2(request);
+        setStatus3(request);
         request.setAttribute("list", empList);
         mv.getModelMap().put("exitInterviewMaster", exitInterviewMaster);
         mv.setViewName("ExitInterview/ExitInterviewCreate");
@@ -136,7 +137,7 @@ public class ExitInterviewMasterController extends ExitInterviewMasterAbstract {
 //                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
 //                            sendMail.sendMail(from, To, Subject, msg);
 //                        } catch (Exception e) {
-//                            
+//
 //                        }
 //            Email Sent to ExitInterviewHR
             List<?> ExitInterviewHRList = userRightMasterService.readExitInterviewRightsList();
@@ -170,8 +171,7 @@ public class ExitInterviewMasterController extends ExitInterviewMasterAbstract {
         return mv;
     }
 
-    //Approverresult 
-
+    //Approverresult
     public ModelAndView ExitApproveresult(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         ExitInterviewMaster exitInterviewMaster = new ExitInterviewMaster();
@@ -280,7 +280,7 @@ public class ExitInterviewMasterController extends ExitInterviewMasterAbstract {
         int tabId = Integer.parseInt(request.getParameter("tabId"));
         exitInterviewMaster = exitInterviewMasterService.readById(tabId);
         String btn = (String) request.getParameter("btnType");
-        String empid =request.getParameter("empid");
+        String empid = request.getParameter("empid");
         HttpSession session = request.getSession();
         EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
         String manager = employeeMaster.getReportingManagerLevel1();
@@ -328,7 +328,7 @@ public class ExitInterviewMasterController extends ExitInterviewMasterAbstract {
                     EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                     DesignationMaster designationMaster = new DesignationMaster();
                     designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                    
+
                     EmployeeMaster employeeRequestee = employeeMasterService.readById(Integer.parseInt(empid));
                     EmployeeMaster empReportingManager = employeeMasterService.readById(Integer.parseInt(employeeRequestee.getReportingManagerLevel1()));
                     // id 86 is for status Exit Interview Accepted by Manager (Email to Employee)
@@ -350,29 +350,29 @@ public class ExitInterviewMasterController extends ExitInterviewMasterAbstract {
                     EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                     DesignationMaster designationMaster = new DesignationMaster();
                     designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                    
-                      List itAdminList = userRightMasterService.readITAdminList();
-                     Iterator itr = itAdminList.iterator();
-                while (itr.hasNext()) {
-                    try{
-                        
-                    Object[] next = (Object[]) itr.next();
-                    String itEmpId = "" + next[0];
-                    EmployeeMaster employeeItAdmin = employeeMasterService.readById(Integer.parseInt(itEmpId));
+
+                    List itAdminList = userRightMasterService.readITAdminList();
+                    Iterator itr = itAdminList.iterator();
+                    while (itr.hasNext()) {
+                        try {
+
+                            Object[] next = (Object[]) itr.next();
+                            String itEmpId = "" + next[0];
+                            EmployeeMaster employeeItAdmin = employeeMasterService.readById(Integer.parseInt(itEmpId));
 // id 86 is for status Exit Interview Accepted by Manager (Email to Employee)
-                    emailTemplate = emailTemplateService.readById(129);
-                    String To = employeeItAdmin.getOfficeEmailId();
-                    String from = employeeMasterModel.getOfficeEmailId();
-                    String Subject = emailTemplate.getSubject();
-                    String msg = emailTemplate.getBodytext();
-                    msg = msg.replaceAll("\\{to_user\\}", employeeItAdmin.getEmployeeName());
-                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                    sendMail.sendMail(from, To, Subject, msg);
-                    }catch(Exception e){
-                        
+                            emailTemplate = emailTemplateService.readById(129);
+                            String To = employeeItAdmin.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeItAdmin.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
+                        } catch (Exception e) {
+
+                        }
                     }
-                }
                 } catch (Exception e) {
 
                 }
@@ -382,29 +382,29 @@ public class ExitInterviewMasterController extends ExitInterviewMasterAbstract {
                     EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                     DesignationMaster designationMaster = new DesignationMaster();
                     designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                    
-                      List hrAdminList = userRightMasterService.readEmployeeExitRightsList();
-                     Iterator itr = hrAdminList.iterator();
-                while (itr.hasNext()) {
-                    try{
-                        
-                    Object[] next = (Object[]) itr.next();
-                    String itEmpId = "" + next[0];
-                    EmployeeMaster employeeItAdmin = employeeMasterService.readById(Integer.parseInt(itEmpId));
+
+                    List hrAdminList = userRightMasterService.readEmployeeExitRightsList();
+                    Iterator itr = hrAdminList.iterator();
+                    while (itr.hasNext()) {
+                        try {
+
+                            Object[] next = (Object[]) itr.next();
+                            String itEmpId = "" + next[0];
+                            EmployeeMaster employeeItAdmin = employeeMasterService.readById(Integer.parseInt(itEmpId));
 // id 86 is for status Exit Interview Accepted by Manager (Email to Employee)
-                    emailTemplate = emailTemplateService.readById(129);
-                    String To = employeeItAdmin.getOfficeEmailId();
-                    String from = employeeMasterModel.getOfficeEmailId();
-                    String Subject = emailTemplate.getSubject();
-                    String msg = emailTemplate.getBodytext();
-                    msg = msg.replaceAll("\\{to_user\\}", employeeItAdmin.getEmployeeName());
-                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                    sendMail.sendMail(from, To, Subject, msg);
-                    }catch(Exception e){
-                        
+                            emailTemplate = emailTemplateService.readById(129);
+                            String To = employeeItAdmin.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeItAdmin.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
+                        } catch (Exception e) {
+
+                        }
                     }
-                }
                 } catch (Exception e) {
 
                 }
@@ -414,28 +414,28 @@ public class ExitInterviewMasterController extends ExitInterviewMasterAbstract {
                     EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                     DesignationMaster designationMaster = new DesignationMaster();
                     designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                    
-                      List expenseAdminList = userRightMasterService.readExpenseAdmin();
-                     Iterator itr = expenseAdminList.iterator();
-                while (itr.hasNext()) {
-                    try{
-                        
-                    Object[] next = (Object[]) itr.next();
-                    String itEmpId = "" + next[1];
-                    EmployeeMaster expenseAdmin = employeeMasterService.readById(Integer.parseInt(itEmpId));
-                    emailTemplate = emailTemplateService.readById(129);
-                    String To = expenseAdmin.getOfficeEmailId();
-                    String from = employeeMasterModel.getOfficeEmailId();
-                    String Subject = emailTemplate.getSubject();
-                    String msg = emailTemplate.getBodytext();
-                    msg = msg.replaceAll("\\{to_user\\}", expenseAdmin.getEmployeeName());
-                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                    sendMail.sendMail(from, To, Subject, msg);
-                    }catch(Exception e){
-                        
+
+                    List expenseAdminList = userRightMasterService.readExpenseAdmin();
+                    Iterator itr = expenseAdminList.iterator();
+                    while (itr.hasNext()) {
+                        try {
+
+                            Object[] next = (Object[]) itr.next();
+                            String itEmpId = "" + next[1];
+                            EmployeeMaster expenseAdmin = employeeMasterService.readById(Integer.parseInt(itEmpId));
+                            emailTemplate = emailTemplateService.readById(129);
+                            String To = expenseAdmin.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", expenseAdmin.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
+                        } catch (Exception e) {
+
+                        }
                     }
-                }
                 } catch (Exception e) {
 
                 }
@@ -465,8 +465,7 @@ public class ExitInterviewMasterController extends ExitInterviewMasterAbstract {
 //
 //                    }
 //                }
-                
-                
+
             }
 //            if (btn.equals("Return")) {
 //                exitInterviewMaster.setStatus(1);
@@ -687,18 +686,18 @@ public class ExitInterviewMasterController extends ExitInterviewMasterAbstract {
         return mv;
     }
 
-  public ModelAndView userDashboard(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView userDashboard(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-          HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
         UserRightMaster userRight = (UserRightMaster) session.getAttribute("userRight");
-         int exitcount =0;
-        if((userRight.isExitInterview())){
+        int exitcount = 0;
+        if ((userRight.isExitInterview())) {
             List<?> list = exitInterviewMasterService.readlist();
-             exitcount = list.size();
+            exitcount = list.size();
         }
-            request.setAttribute("exitcount", exitcount);
-             mv.setViewName("forward:userMaster.htm?act=userDashboardShow");
+        request.setAttribute("exitcount", exitcount);
+        mv.setViewName("forward:userMaster.htm?act=userDashboardShow");
         return mv;
-  }
+    }
 }

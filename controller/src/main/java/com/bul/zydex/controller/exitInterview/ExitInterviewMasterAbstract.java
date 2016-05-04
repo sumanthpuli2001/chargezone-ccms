@@ -43,8 +43,7 @@ public abstract class ExitInterviewMasterAbstract extends CustomAbstract {
     public void setUserRightMasterService(UserRightMasterService<UserRightMaster> userRightMasterService) {
         this.userRightMasterService = userRightMasterService;
     }
- 
-    
+
     public Validator getExitInterviewMasterValidator() {
         return exitInterviewMasterValidator;
     }
@@ -84,13 +83,12 @@ public abstract class ExitInterviewMasterAbstract extends CustomAbstract {
     public void setZydexLocationMasterService(ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService) {
         this.zydexLocationMasterService = zydexLocationMasterService;
     }
-    
-    
 
     public void setStatus(HttpServletRequest request) {
         Map<String, String> m1 = new HashMap();
         m1.put("Average", "Average");
         m1.put("Very Good", "Very Good");
+        m1.put("Good", "Good");
         m1.put("Poor", "Poor");
 //        m1.put("Excellent", "Excellent");
         request.setAttribute("status", m1);
@@ -114,5 +112,15 @@ public abstract class ExitInterviewMasterAbstract extends CustomAbstract {
         m1.put("false", "No");
 
         request.setAttribute("status2", m1);
+    }
+
+    public void setStatus3(HttpServletRequest request) {
+        Map<String, String> m1 = new HashMap();
+        m1.put("Never", "Never");
+        m1.put("Seldom", "Seldom");
+        m1.put("Often", "Often");
+        m1.put("Regular", "Regular");
+//        m1.put("Excellent", "Excellent");
+        request.setAttribute("status3", m1);
     }
 }

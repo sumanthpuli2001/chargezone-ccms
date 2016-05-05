@@ -979,7 +979,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
                     secondHalfList.add("WO");
                 } else if (checkLunchTime == true && totalTime < shiftdiffMinutes) {
-                    secondHalfList.add("AR");
+                    secondHalfList.add("AB");
                 } else if (secondHalf.contains("fullday")) {
                     secondHalfList.add("PR");
 
@@ -1027,7 +1027,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     long diffMinutes1 = diff1 / (60 * 1000);
 
                     if (userTimeIn != null) {
-                        if (diff1 >= diff) {
+                       if (diffMinutes1 >= diffMinutes) {
                             secondHalfList.add("PR");
                         } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             secondHalfList.add("PR");

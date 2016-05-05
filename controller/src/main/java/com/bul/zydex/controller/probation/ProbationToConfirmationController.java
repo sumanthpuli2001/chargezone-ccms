@@ -81,7 +81,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         c.add(Calendar.DATE, 15);
                         Date level4Date = c.getTime();
 
-                        if ((DateUtils.isSameDay(tDate, datebefore1) || tDate.after(datebefore1)) && tDate.before(level1Date)) {
+                        if ((DateUtils.isSameDay(tDate, datebefore1) || tDate.after(datebefore1))) {
                             List<?> probationList = employeeMasterService.readForProbationForManager(LoginempId.toString(), employeeId);
                             if (!probationList.isEmpty() || probationList.size() > 0) {
                                 finalprobationList1.add(probationList);
@@ -169,8 +169,8 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
 //                        }
 //                    }
 //                }
+                }
             }
-        }
         }
         List<?> finalprobationList = finalprobationList1;
         request.setAttribute("finalprobationList", finalprobationList);
@@ -204,10 +204,10 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
             if (pt.getStatus().equals(4)) {
                 ptc.setAssessmentFromDate(pt.getAssessmentFromDate());
                 ptc.setAssessmentToDate(pt.getAssessmentToDate());
-            }else if (pt.getStatus().equals(0)) {
-                 String dateOfJoining = employeeMaster.getDateOfJoining();
-                 ptc.setAssessmentFromDate(dateOfJoining);
-                 ptc.setAssessmentToDate(pt.getAssessmentToDate());
+            } else if (pt.getStatus().equals(0)) {
+                String dateOfJoining = employeeMaster.getDateOfJoining();
+                ptc.setAssessmentFromDate(dateOfJoining);
+                ptc.setAssessmentToDate(pt.getAssessmentToDate());
 //                Integer desgnId =employeeMaster.getDesignationMaster().getId();
 //                     List list1 = probationPeriodService.readbyDesignation(desgnId);
 //                     int probationPeriod = 6;
@@ -225,7 +225,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
 //            ptc.setAssessmentToDate(dateafter6month);
             }
         } else {
-           
+
         }
         mv.getModelMap().put("ptc", ptc);
         mv.getModelMap().put("employeeMaster", employeeMaster);
@@ -253,55 +253,53 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 List<?> list = probationToConfirmationService.readForId(ptc);
                 Integer id = (Integer) list.get(0);
                 ptc1 = probationToConfirmationService.readById(id);
-                if(ptc1.getStatus() == 4){
-                ptc1.setStatus(8);
-                probationToConfirmationService.update(ptc1);
-                request.setAttribute("successMessage",
-                        "Information : Successfully Submited to Functional head for Confirmation.");
-                ptc.setStatus(1);
-            String requestdate = sdf.format(new Date());
-            ptc.setReportingManagerSubmitDate(requestdate);
-            HttpSession session = request.getSession();
-            EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
-            String employeeId = employeeMaster.getId().toString();
-            ptc.setReportingManagerId(employeeId);
-            probationToConfirmationService.create(ptc);
-            request.setAttribute("successMessage",
-                    "Information : Successfully Submited to Functional head for Confirmation.");
-            mv = searchSubmit(request, response);
+                if (ptc1.getStatus() == 4) {
+                    ptc1.setStatus(8);
+                    probationToConfirmationService.update(ptc1);
+                    request.setAttribute("successMessage",
+                            "Information : Successfully Submited to Functional head for Confirmation.");
+                    ptc.setStatus(1);
+                    String requestdate = sdf.format(new Date());
+                    ptc.setReportingManagerSubmitDate(requestdate);
+                    HttpSession session = request.getSession();
+                    EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
+                    String employeeId = employeeMaster.getId().toString();
+                    ptc.setReportingManagerId(employeeId);
+                    probationToConfirmationService.create(ptc);
+                    request.setAttribute("successMessage",
+                            "Information : Successfully Submited to Functional head for Confirmation.");
+                    mv = searchSubmit(request, response);
+                } else if (ptc1.getStatus() == 0) {
+                    ptc1.setStatus(1);
+                    String requestdate = sdf.format(new Date());
+                    ptc.setReportingManagerSubmitDate(requestdate);
+                    HttpSession session = request.getSession();
+                    EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
+                    String employeeId = employeeMaster.getId().toString();
+                    ptc1.setReportingManagerId(employeeId);
+                    ptc1.setEmployeeMasterByEmployeeMasterId(ptc.getEmployeeMasterByEmployeeMasterId());
+                    ptc1.setAssessmentFromDate(ptc.getAssessmentFromDate());
+                    ptc1.setAssessmentToDate(ptc.getAssessmentToDate());
+                    ptc1.setJobHandled(ptc.getJobHandled());
+                    ptc1.setPerformanceRating(ptc.getPerformanceRating());
+                    ptc1.setRecommendationSelect(ptc.getRecommendationSelect());
+                    if (ptc.getRecommendationSelect().equals("No")) {
+                        ptc1.setRecommendationRemark(ptc.getRecommendationRemark());
+                    } else if (ptc.getRecommendationSelect().equals("Extend")) {
+                        ptc1.setRecommendationExtendPeriod(ptc.getRecommendationExtendPeriod());
+                        ptc1.setRecommendationRemark(ptc.getRecommendationRemark());
+                    }
+                    probationToConfirmationService.update(ptc1);
+                    request.setAttribute("successMessage",
+                            "Information : Successfully Submited to Functional head for Confirmation.");
+                    mv = searchSubmit(request, response);
+
                 }
-                else if(ptc1.getStatus() == 0){
-                 ptc1.setStatus(1);
-                 String requestdate = sdf.format(new Date());
-                 ptc.setReportingManagerSubmitDate(requestdate);
-                 HttpSession session = request.getSession();
-                 EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
-                 String employeeId = employeeMaster.getId().toString();
-                 ptc1.setReportingManagerId(employeeId);
-                 ptc1.setEmployeeMasterByEmployeeMasterId(ptc.getEmployeeMasterByEmployeeMasterId());
-                 ptc1.setAssessmentFromDate(ptc.getAssessmentFromDate());
-                 ptc1.setAssessmentToDate(ptc.getAssessmentToDate());
-                 ptc1.setJobHandled(ptc.getJobHandled());
-                 ptc1.setPerformanceRating(ptc.getPerformanceRating());
-                 ptc1.setRecommendationSelect(ptc.getRecommendationSelect());
-                  if (ptc.getRecommendationSelect().equals("No")) {
-                      ptc1.setRecommendationRemark(ptc.getRecommendationRemark());
-                  }   else if (ptc.getRecommendationSelect().equals("Extend")) {
-                 ptc1.setRecommendationExtendPeriod(ptc.getRecommendationExtendPeriod());
-                 ptc1.setRecommendationRemark(ptc.getRecommendationRemark());
-                  }
-                 probationToConfirmationService.update(ptc1);
-                 request.setAttribute("successMessage",
-                         "Information : Successfully Submited to Functional head for Confirmation.");
-                 mv = searchSubmit(request, response);
-         
-                }
-            }else{
-            
-         
-        }
+            } else {
+
+            }
             String eId = request.getParameter("employeeMasterByEmployeeMasterId.id");
-               //    Email Sent to Employee
+            //    Email Sent to Employee
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
                 EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
@@ -718,13 +716,18 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         ptc.setHrSelect(ptc1.getHrSelect());
         if (ptc.getHrSelect().equals("Yes")) {
             ptc.setStatus(5);
+
 //// employee type confirm
-//            EmployeeMaster employeeMaster = new EmployeeMaster();
-//            employeeMaster = employeeMasterService.readById(Integer.parseInt(Emid));
-//            employeeMaster.setEmployeeType("Confirmed");
-//            employeeMasterService.update(employeeMaster);
-            request.setAttribute("successMessage",
-                    "Information : Employee Confirmed Successfully");
+            String ConfirmDate = ptc.getAssessmentToDate();
+            Date todayDate = new Date();
+            Date ConfirmDate1 = sdf.parse(ConfirmDate);
+            if (ConfirmDate1.before(todayDate)) {
+                EmployeeMaster employeeMaster = new EmployeeMaster();
+                employeeMaster = employeeMasterService.readById(Integer.parseInt(Emid));
+                employeeMaster.setEmployeeType("Confirmed");
+                employeeMasterService.update(employeeMaster);
+
+            }
             //    Email Sent to Employee
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
@@ -1046,21 +1049,20 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 Object[] o1 = (Object[]) o;
                 int Status = Integer.parseInt("" + o1[5]);
                 request.setAttribute("Status", Status);
-                if(Status ==0){
-                     int id = Integer.parseInt("" + o1[4]);
-                      EmployeeMaster em = new EmployeeMaster();
-                       List<?> list = employeeMasterService.readManagerLevel1(em);
-                        if (!list.isEmpty()) {
-                                request.setAttribute("managerName", list.get(0));
-                         }
-                } else if(Status ==1){
-                    
-                int id = Integer.parseInt("" + o1[8]);
-                EmployeeMaster em = new EmployeeMaster();
-                em = employeeMasterService.readById(id);
-                request.setAttribute("managerName", em.getEmployeeName());
-                }
-                else if (Status == 2) {
+                if (Status == 0) {
+                    int id = Integer.parseInt("" + o1[4]);
+                    EmployeeMaster em = new EmployeeMaster();
+                    List<?> list = employeeMasterService.readManagerLevel1(em);
+                    if (!list.isEmpty()) {
+                        request.setAttribute("managerName", list.get(0));
+                    }
+                } else if (Status == 1) {
+
+                    int id = Integer.parseInt("" + o1[8]);
+                    EmployeeMaster em = new EmployeeMaster();
+                    em = employeeMasterService.readById(id);
+                    request.setAttribute("managerName", em.getEmployeeName());
+                } else if (Status == 2) {
                     int FHid = Integer.parseInt("" + o1[9]);
                     EmployeeMaster em1 = new EmployeeMaster();
                     em1 = employeeMasterService.readById(FHid);
@@ -1263,44 +1265,44 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 ProbationToConfirmation ptc1 = (ProbationToConfirmation) o;
                 int empId = ptc1.getEmployeeMasterByEmployeeMasterId().getId();
                 EmployeeMaster employeeMaster = new EmployeeMaster();
-                employeeMaster=employeeMasterService.readById(empId);
+                employeeMaster = employeeMasterService.readById(empId);
                 employeeMaster.setEmployeeType("Confirmed");
                 employeeMasterService.update(employeeMaster);
             }
         }
 
     }
-    
+
     public synchronized void probationToconfirmationCheck() throws ParseException {
-        
-        List<?> empList=employeeMasterService.readForProbationToConfirmation();
-          List<Object> finalprobationList = new ArrayList<>();
-          List<Object> extendedprobationList = new ArrayList<>();
-          SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-          SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MMM-yyyy");
-          String today = sdf.format(new Date());
-          Date tDate = sdf.parse(today);
+
+        List<?> empList = employeeMasterService.readForProbationToConfirmation();
+        List<Object> finalprobationList = new ArrayList<>();
+        List<Object> extendedprobationList = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MMM-yyyy");
+        String today = sdf.format(new Date());
+        Date tDate = sdf.parse(today);
         if (!empList.isEmpty()) {
             for (Object o : empList) {
                 EmployeeMaster employeeMaster = new EmployeeMaster();
                 employeeMaster = (EmployeeMaster) o;
-                
-                 DesignationMaster designationMaster = new DesignationMaster();
-                 designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
-                 Integer desgnId = designationMaster.getId();
-                 List list = probationPeriodService.readbyDesignation(desgnId);
-                 int probationPeriod = 6;
-                 if (!list.isEmpty()) {
-                        probationPeriod = (int) list.get(0);
-                    }
-                 int pp = probationPeriod - 1; 
-             
+
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+                Integer desgnId = designationMaster.getId();
+                List list = probationPeriodService.readbyDesignation(desgnId);
+                int probationPeriod = 6;
+                if (!list.isEmpty()) {
+                    probationPeriod = (int) list.get(0);
+                }
+                int pp = probationPeriod - 1;
+
                 String dojstring = employeeMaster.getDateOfJoining();
-                Date dojdate=null;
-                try{
-                 dojdate = sdf.parse(dojstring);
-                 } catch(Exception e){
-                 dojdate = sdf1.parse(dojstring);
+                Date dojdate = null;
+                try {
+                    dojdate = sdf.parse(dojstring);
+                } catch (Exception e) {
+                    dojdate = sdf1.parse(dojstring);
                 }
                 Calendar c = Calendar.getInstance();
                 c.setTime(dojdate);
@@ -1308,119 +1310,119 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 Date dateAfterPP = c.getTime();
                 String checkdateString = sdf.format(dateAfterPP);
                 if (DateUtils.isSameDay(tDate, dateAfterPP)) {
-                        finalprobationList.add(employeeMaster);
+                    finalprobationList.add(employeeMaster);
                 }
                 if (tDate.after(dateAfterPP)) {
                     extendedprobationList.add(employeeMaster);
                 }
-                
-            }
-            System.out.println("---------------------"+finalprobationList);
-             if (!finalprobationList.isEmpty()) {
-            for (Object o : finalprobationList) {
-                 EmployeeMaster employeeMaster = new EmployeeMaster();
-                employeeMaster = (EmployeeMaster) o;
-                Integer empTabId = employeeMaster.getId();
-                ProbationToConfirmation ptc = new ProbationToConfirmation();
-                ptc.setEmployeeMasterByEmployeeMasterId(employeeMaster);
-                List<?> listrepeat = probationToConfirmationService.readForRepeatedId(ptc);
-                  if (listrepeat.isEmpty()) {
-                      String doj = employeeMaster.getDateOfJoining();
-                      Date dojdate=null;
-                            try{
-                                    dojdate = sdf.parse(doj);
-                            } catch(Exception e){
-                                    dojdate = sdf1.parse(doj);
-                            }
-                    DesignationMaster designationMaster = new DesignationMaster();
-                    designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
-                    Integer desgnId = designationMaster.getId();
-                    List list = probationPeriodService.readbyDesignation(desgnId);
-                    int probationPeriod = 6;
-                    if (!list.isEmpty()) {
-                        probationPeriod = (int) list.get(0);
-                    }
-                    Calendar c = Calendar.getInstance();
-                    c.setTime(dojdate);
-                    c.add(Calendar.MONTH, probationPeriod);
-                    Date dateAdded = c.getTime();
-                    String dateAddedstring = sdf.format(dateAdded);
-                      
-                     ptc.setEmployeeMasterByEmployeeMasterId(employeeMaster);
-                     ptc.setAssessmentFromDate(doj);
-                     ptc.setAssessmentToDate(dateAddedstring);
-                     ptc.setStatus(0);
-                     probationToConfirmationService.create(ptc);
-   //      Email Sent to ReportingManager1
-                   try {
-                       EmailTemplate emailTemplate = new EmailTemplate();
-                       String rmId = employeeMaster.getReportingManagerLevel1();
-                       EmployeeMaster employeeMasterHr = employeeMasterService.readById(Integer.parseInt(rmId));
-                       // id 130 is status for Probation to confirmation 
-                       emailTemplate = emailTemplateService.readById(130);
-                       String To = employeeMasterHr.getOfficeEmailId();
-                       String from = "";
-                       String Subject = emailTemplate.getSubject();
-                       Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
-                       String msg = emailTemplate.getBodytext();
-                       msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
-                       sendMail.sendMail(from, To, Subject, msg);
-                   } catch (Exception e) {
 
-                   }
-                  }
             }
+            System.out.println("---------------------" + finalprobationList);
+            if (!finalprobationList.isEmpty()) {
+                for (Object o : finalprobationList) {
+                    EmployeeMaster employeeMaster = new EmployeeMaster();
+                    employeeMaster = (EmployeeMaster) o;
+                    Integer empTabId = employeeMaster.getId();
+                    ProbationToConfirmation ptc = new ProbationToConfirmation();
+                    ptc.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+                    List<?> listrepeat = probationToConfirmationService.readForRepeatedId(ptc);
+                    if (listrepeat.isEmpty()) {
+                        String doj = employeeMaster.getDateOfJoining();
+                        Date dojdate = null;
+                        try {
+                            dojdate = sdf.parse(doj);
+                        } catch (Exception e) {
+                            dojdate = sdf1.parse(doj);
+                        }
+                        DesignationMaster designationMaster = new DesignationMaster();
+                        designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+                        Integer desgnId = designationMaster.getId();
+                        List list = probationPeriodService.readbyDesignation(desgnId);
+                        int probationPeriod = 6;
+                        if (!list.isEmpty()) {
+                            probationPeriod = (int) list.get(0);
+                        }
+                        Calendar c = Calendar.getInstance();
+                        c.setTime(dojdate);
+                        c.add(Calendar.MONTH, probationPeriod);
+                        Date dateAdded = c.getTime();
+                        String dateAddedstring = sdf.format(dateAdded);
+
+                        ptc.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+                        ptc.setAssessmentFromDate(doj);
+                        ptc.setAssessmentToDate(dateAddedstring);
+                        ptc.setStatus(0);
+                        probationToConfirmationService.create(ptc);
+                        //      Email Sent to ReportingManager1
+                        try {
+                            EmailTemplate emailTemplate = new EmailTemplate();
+                            String rmId = employeeMaster.getReportingManagerLevel1();
+                            EmployeeMaster employeeMasterHr = employeeMasterService.readById(Integer.parseInt(rmId));
+                            // id 130 is status for Probation to confirmation 
+                            emailTemplate = emailTemplateService.readById(130);
+                            String To = employeeMasterHr.getOfficeEmailId();
+                            String from = "";
+                            String Subject = emailTemplate.getSubject();
+                            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                            sendMail.sendMail(from, To, Subject, msg);
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }
             }
-                  System.out.println("---------------------"+extendedprobationList);
+            System.out.println("---------------------" + extendedprobationList);
             if (!extendedprobationList.isEmpty()) {
-            for (Object o : extendedprobationList) {
-                 EmployeeMaster employeeMaster = new EmployeeMaster();
-                employeeMaster = (EmployeeMaster) o;
-                Integer empTabId = employeeMaster.getId();
-                ProbationToConfirmation ptc = new ProbationToConfirmation();
-                ptc.setEmployeeMasterByEmployeeMasterId(employeeMaster);
-                List<?> listrepeat = probationToConfirmationService.readForRepeatedId(ptc);
+                for (Object o : extendedprobationList) {
+                    EmployeeMaster employeeMaster = new EmployeeMaster();
+                    employeeMaster = (EmployeeMaster) o;
+                    Integer empTabId = employeeMaster.getId();
+                    ProbationToConfirmation ptc = new ProbationToConfirmation();
+                    ptc.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+                    List<?> listrepeat = probationToConfirmationService.readForRepeatedId(ptc);
                     if (!listrepeat.isEmpty()) {
-                         // check assesment to date if sattus 4 i.e extended request 
+                        // check assesment to date if sattus 4 i.e extended request 
                         for (Object listrepeat1 : listrepeat) {
-                                ProbationToConfirmation ptc1 = new ProbationToConfirmation();
-                                ptc1 =(ProbationToConfirmation) listrepeat1;
-                                int Status = ptc1.getStatus();
-                                if(Status == 4){
-                                 
-                                   String assessmentToDatestring = ptc1.getAssessmentToDate();
-                                   Date assessmentToDate = sdf.parse(assessmentToDatestring);
+                            ProbationToConfirmation ptc1 = new ProbationToConfirmation();
+                            ptc1 = (ProbationToConfirmation) listrepeat1;
+                            int Status = ptc1.getStatus();
+                            if (Status == 4) {
 
-                                   Calendar c = Calendar.getInstance();
-                                   c.setTime(assessmentToDate);
-                                   c.add(Calendar.MONTH, -1);
-                                   Date datebefore1 = c.getTime();
-                                 
-                                     if (DateUtils.isSameDay(tDate, datebefore1)) {
-                                //      Email Sent to ReportingManager1
-                                       try {
-                                              EmailTemplate emailTemplate = new EmailTemplate();
-                                              String rmId = employeeMaster.getReportingManagerLevel1();
-                                               EmployeeMaster employeeMasterHr = employeeMasterService.readById(Integer.parseInt(rmId));
-                                              // id 133 is status for Probation to confirmation 
-                                              emailTemplate = emailTemplateService.readById(133);
-                                              String To = employeeMasterHr.getOfficeEmailId();
-                                              String from = "";
-                                              String Subject = emailTemplate.getSubject();
-                                              Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
-                                              String msg = emailTemplate.getBodytext();
-                                              msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                                String assessmentToDatestring = ptc1.getAssessmentToDate();
+                                Date assessmentToDate = sdf.parse(assessmentToDatestring);
 
-                                              sendMail.sendMail(from, To, Subject, msg);
-                                              } catch (Exception e) {
+                                Calendar c = Calendar.getInstance();
+                                c.setTime(assessmentToDate);
+                                c.add(Calendar.MONTH, -1);
+                                Date datebefore1 = c.getTime();
 
-                                               }
-                             }
-                        }
+                                if (DateUtils.isSameDay(tDate, datebefore1)) {
+                                    //      Email Sent to ReportingManager1
+                                    try {
+                                        EmailTemplate emailTemplate = new EmailTemplate();
+                                        String rmId = employeeMaster.getReportingManagerLevel1();
+                                        EmployeeMaster employeeMasterHr = employeeMasterService.readById(Integer.parseInt(rmId));
+                                        // id 133 is status for Probation to confirmation 
+                                        emailTemplate = emailTemplateService.readById(133);
+                                        String To = employeeMasterHr.getOfficeEmailId();
+                                        String from = "";
+                                        String Subject = emailTemplate.getSubject();
+                                        Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                                        String msg = emailTemplate.getBodytext();
+                                        msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+
+                                        sendMail.sendMail(from, To, Subject, msg);
+                                    } catch (Exception e) {
+
+                                    }
+                                }
+                            }
                         }
                     }
+                }
             }
-            } 
         }
     }
 

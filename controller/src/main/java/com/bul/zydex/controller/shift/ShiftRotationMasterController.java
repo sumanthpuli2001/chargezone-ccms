@@ -2016,11 +2016,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         long diffMinutes1 = diff1 / (60 * 1000);
 
                                         if (userTimeIn != null) {
-                                            if (diff1 >= diff) {
-                                                cell8.setCellValue("PR");
-                                                prcounter = prcounter + 0.5;
-                                                cell8.setCellStyle(stylegreen);
-                                            } else if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                             if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                                 cell8.setCellValue("PR");
                                                 prcounter = prcounter + 0.5;
                                                 cell8.setCellStyle(stylegreen);

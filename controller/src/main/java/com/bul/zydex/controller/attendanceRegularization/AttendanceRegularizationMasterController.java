@@ -810,9 +810,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     long diffMinutes1 = diff1 / (60 * 1000);
 
                     if (userTimeIn != null) {
-                        if (diff1 >= diff) {
-                            newList.add("PR");
-                        } else if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                        if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             newList.add("PR");
                         } else if (leave1[0] != null && !leave1[0].contains("Short Leave")) {
                             if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {

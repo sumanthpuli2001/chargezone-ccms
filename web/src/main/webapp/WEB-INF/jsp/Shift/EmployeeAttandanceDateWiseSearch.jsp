@@ -54,6 +54,7 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
+        <%--<form:form action="shiftRotationMaster.htm?act=employeeMonthlyPayrollReport" method="post" commandName="employeeAdvanceSearch"--%>
         <form:form action="shiftRotationMaster.htm?act=employeeAttandanceDataSearchSubmit" method="post" commandName="employeeAdvanceSearch"
                    name='form1' class="form-horizontal" role="form">
             <section class="content">
@@ -127,22 +128,22 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                               
-                                            <div class="form-group">
-                                                <div class=" col-sm-12" style="text-align: center;">
-                                                    <button type="submit" class="btn btn-primary" style="width: 100px;" >EXPORT</button>
+
+                                                <div class="form-group">
+                                                    <div class=" col-sm-12" style="text-align: center;">
+                                                        <button type="submit" class="btn btn-primary" style="width: 100px;" >EXPORT</button>
+                                                    </div>
                                                 </div>
-                                            </div>
 
 
-                                        </div><!-- /.col -->
-                                    </div><!-- /.row -->
-                                </div><!-- /.box-body -->
-                            </div><!-- /.tab-content -->
-                        </div><!-- nav-tabs-custom -->
-                    </div><!-- /.col -->
-                </div>
-            </section>
+                                            </div><!-- /.col -->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.tab-content -->
+                            </div><!-- nav-tabs-custom -->
+                        </div><!-- /.col -->
+                    </div>
+                </section>
         </form:form>
     </div>
     <script type="text/javascript">

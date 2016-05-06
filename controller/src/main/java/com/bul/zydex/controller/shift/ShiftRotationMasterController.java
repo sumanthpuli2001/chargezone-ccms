@@ -4209,4 +4209,200 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         downloadFile.doDownload(request, response);
         return mv;
     }
+
+    public ModelAndView employeeMonthlyPayrollReport(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeShiftData employeeShiftData = new EmployeeShiftData();
+        LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+        EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
+        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        HolidayMaster holidayMaster = new HolidayMaster();
+        String empId = request.getParameter("employeeMasterId");
+        String zydexLocationId = request.getParameter("zydexLocationId");
+        String levelId = request.getParameter("levelId");
+        String departmentId = request.getParameter("departmentId");
+        String startDate = request.getParameter("inDateTime");
+        String endDate = request.getParameter("outDateTime");
+        bind(request, employeeAdvanceSearch);
+        String searchval = request.getParameter("vallist");
+        if (null != searchval && request.getParameter("vallist").toString().equals("other")) {
+            employeeAdvanceSearch.setId(null);
+            employeeAdvanceSearch.setZydexLocationId(zydexLocationId);
+            employeeAdvanceSearch.setLevelID(levelId);
+            employeeAdvanceSearch.setDepartmentId(departmentId);
+        } else {
+            employeeAdvanceSearch.setId(empId);
+            employeeAdvanceSearch.setZydexLocationId(null);
+            employeeAdvanceSearch.setLevelID(null);
+            employeeAdvanceSearch.setDepartmentId(null);
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat tm = new SimpleDateFormat("HH:mm");
+        if (!empId.equals("")) {
+            employeeShiftData.setId(Integer.parseInt(empId));
+        }
+        if (!startDate.equals("")) {
+            Date sDate = sdf.parse(startDate);
+//            "2012-01-01"
+            employeeShiftData.setInDateTime(new SimpleDateFormat("yyyy-MM-dd").format(sDate));
+            leaveEmployeeDetail.setApproveDate(new SimpleDateFormat("yyyy-MM-dd").format(sDate));
+            Calendar c = Calendar.getInstance();
+            c.setTime(sDate);
+            c.add(Calendar.MONTH, -1);
+            Date previousDate = c.getTime();
+            String previouSMonthdate = sdf.format(previousDate);
+
+            leaveEmployeeDetail.setStartDate(new SimpleDateFormat("yyyy-MM-dd").format(previousDate));
+            holidayMaster.setHolidayFromDate(new SimpleDateFormat("yyyy-MM-dd").format(sDate));
+            attendanceRegularization.setApprovedDate(startDate);
+            attendanceRegularization.setEndDateTime(previouSMonthdate);
+
+            travelRequestMaster.setStartDateTime(new SimpleDateFormat("yyyy-MM-dd").format(sDate));
+            travelRequestMaster.setAdminRemark(new SimpleDateFormat("yyyy-MM-dd").format(previousDate));
+
+        }
+        if (!endDate.equals("")) {
+            Date eDate = sdf.parse(endDate);
+            Calendar c = Calendar.getInstance();
+            c.setTime(eDate);
+            c.add(Calendar.MONTH, -1);
+            c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+            Date previousDate = c.getTime();
+            String previouSMonthdate = sdf.format(previousDate);
+
+            employeeShiftData.setOutDateTime(new SimpleDateFormat("yyyy-MM-dd").format(eDate));
+            holidayMaster.setHolidayToDate(new SimpleDateFormat("yyyy-MM-dd").format(eDate));
+
+            leaveEmployeeDetail.setEndDate(new SimpleDateFormat("yyyy-MM-dd").format(eDate));
+            leaveEmployeeDetail.setEndDateStatus(new SimpleDateFormat("yyyy-MM-dd").format(previousDate));
+
+            travelRequestMaster.setEndDateTime(new SimpleDateFormat("yyyy-MM-dd").format(eDate));
+            travelRequestMaster.setEmpRemark(new SimpleDateFormat("yyyy-MM-dd").format(previousDate));
+        }
+
+        int rownum = 0;
+        HSSFWorkbook firstFWorkbook = new HSSFWorkbook();
+        HSSFSheet firstSheet = firstFWorkbook.createSheet("FIRST SHEET");
+        Row headerRow = firstSheet.createRow(rownum);
+        headerRow.setHeightInPoints(40);
+
+        List<?> empDetail = employeeMasterService.empAttendanceDataSearch(employeeAdvanceSearch);
+        Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
+        Map<Integer, List<?>> map1 = new LinkedHashMap<Integer, List<?>>();
+        List<List<String>> recordToAdd = new ArrayList();
+        for (Object o1 : empDetail) {
+            Object[] o = (Object[]) o1;
+//            List<List<?>> li = new LinkedList<List<?>>();
+            List<String> employeeInfoList = new LinkedList();
+//            List<String> holidayList = new LinkedList<String>();
+
+            employeeInfoList.add("" + o[0]);
+            employeeInfoList.add("" + o[1]);
+            employeeInfoList.add("" + o[2]);
+            employeeInfoList.add("" + o[3]);
+            employeeInfoList.add("" + o[4]);
+            recordToAdd.add(employeeInfoList);
+        }
+        for (int j = 0; j < recordToAdd.size(); j++) {
+            Row row = firstSheet.createRow(rownum);
+            List<String> l2 = recordToAdd.get(j);
+
+            boolean myFlage = false;
+            int id = 0;
+            int countK = 1;
+            for (int k = 0; k < l2.size(); k++) {
+                Cell cell = row.createCell(k);
+
+                cell.setCellValue(l2.get(k));
+
+            }
+
+            double ar = 0;
+            double holiday = 0;
+            double prcounter = 0;
+            double abcounter = 0;
+            double wo = 0;
+            double cl = 0;
+            double sl = 0;
+            double pl = 0;
+            double totalDays = 0;
+            double firstStartTime = 0;
+            double firstHalfVal = 0;
+            double counter = 0;
+            double firstCounter = 0;
+            String userId = l2.get(l2.size() - 1);
+            employeeShiftData.setId(Integer.parseInt(userId));
+//            employeeMaster1.setId(id);
+//            attendanceRegularization.setUserMasterId(id);
+//            holidayMaster.setId(id);
+//            travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster1);
+//            leaveEmployeeDetail.setEmployeeMaster(employeeMaster1);
+            List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
+//            int holidayCount = holidayMasterService.searchMonthWiseHoliday(holidayMaster);
+//            List<?> empMonthWiseLeave = leaveEmployeeDetailService.searchLeaveApproveOfEmployeeByMonthWise(leaveEmployeeDetail);
+//            List<?> empLastMonthWiseLeave = leaveEmployeeDetailService.searchLeaveApproveOfEmployeeByPreviousMonthWise(leaveEmployeeDetail);
+//            List<?> attendanceRegularizationCurMonth = attendanceRegularizationMasterService.searchLeaveApproveOfEmployeeByMonthWise(attendanceRegularization);
+//            List<?> attendanceRegularizationPreMonth = attendanceRegularizationMasterService.searchLeaveApproveOfEmployeeByPreviousMonthWise(attendanceRegularization);
+//            List<?> travelCurrentMonthList = travelRequestMasterService.searchTravelApproveOfEmployeeByCurrentMonthWise(travelRequestMaster);
+//            List<?> travelPreviousMonthList = travelRequestMasterService.searchTravelApproveOfEmployeeByPreviousMonthWise(travelRequestMaster);
+//            holidayList.add("" + holidayCount);
+//            li.add(holidayList);
+//            li.add(empMonthWiseLeave);
+//            li.add(empLastMonthWiseLeave);
+//            li.add(attendanceRegularizationCurMonth);
+//            li.add(attendanceRegularizationPreMonth);
+//            li.add(travelPreviousMonthList);
+//            li.add(travelCurrentMonthList);
+            map.put(id, list);
+
+            for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
+
+                Iterator itr1 = entry.getValue().iterator();
+                int i = l2.size();
+//                Cell cellTitle = row3.createCell(0);
+                while (itr1.hasNext()) {
+                    Object[] next = (Object[]) itr1.next();
+                    Cell cell3 = row.createCell(i);
+                    cell3.setCellValue("" + next[0]);
+                    CellUtil.setAlignment(cell3, firstFWorkbook, CellStyle.ALIGN_CENTER);
+
+                    i++;
+                }
+            }
+//            map1.put(id, li);
+            rownum++;
+        }
+        String appPath = request.getServletContext().getRealPath("");
+        try {
+            String filePath = appPath + File.separator + "StorageYard" + File.separator
+                    + "Other" + File.separator + "UserDoc" + File.separator
+                    + "EmployeeShiftData" + File.separator + "EmployeeAdvanceSearch.xls";
+            FileOutputStream fos = new FileOutputStream(new File(filePath));
+            HSSFCellStyle hsfstyle = firstFWorkbook.createCellStyle();
+            hsfstyle.setBorderBottom((short) 1);
+            hsfstyle.setFillBackgroundColor((short) 245);
+            firstFWorkbook.write(fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String filePath = File.separator + "StorageYard" + File.separator
+                + "Other" + File.separator + "UserDoc" + File.separator
+                + "EmployeeShiftData" + File.separator + "EmployeeAdvanceSearch.xls";
+
+        appPath = request.getServletContext().getRealPath("");
+
+        String fullPath = appPath + filePath;
+
+        request.setAttribute("filePath", fullPath);
+
+        DownloadFile downloadFile = new DownloadFile();
+        downloadFile.doDownload(request, response);
+        return mv;
+    }
 }

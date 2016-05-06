@@ -117,6 +117,8 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
     public List<?> empOrDateWiseSearchforInActive(EmployeeAdvanceSearch employeeAdvanceSearch);
 
     public List<?> readProbationByAdmin();
-    
+
     public List<?> readForProbationToConfirmation();
+
+    public List<?> readEmployeeForLeaveBalance(T object);
 }

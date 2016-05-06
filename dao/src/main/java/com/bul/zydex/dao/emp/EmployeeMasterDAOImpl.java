@@ -1432,4 +1432,28 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return list;
     }
 
+    @Override
+    public List<?> readEmployeeForLeaveBalance(T object) {
+        EmployeeMaster employeeMaster = (EmployeeMaster) object;
+        String query = "";
+        String condition = "Where 1=1";
+        if (!"".equals(employeeMaster.getId()) && null != employeeMaster.getId()) {
+            condition += " AND a.id = " + employeeMaster.getId();
+        }
+        if (!"".equals(employeeMaster.getChild1()) && null != employeeMaster.getChild1()) {
+            condition += " AND b.id = " + employeeMaster.getChild1();
+        }
+        if (!"".equals(employeeMaster.getChild2()) && null != employeeMaster.getChild2()) {
+            condition += " AND c.id = " + employeeMaster.getChild2();
+        }
+        query += " Select a.id, a.employeeId, a.employeeName"
+                + " FROM EmployeeMaster a "
+                + " LEFT JOIN a.departmentMaster b "
+                + " LEFT JOIN a.designationMaster c "
+                + condition;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

@@ -286,9 +286,15 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> readProbationByAdmin() {
         return employeeMasterDAO.readProbationByAdmin();
     }
+
     @Override
     public List<?> readForProbationToConfirmation() {
         return employeeMasterDAO.readForProbationToConfirmation();
+    }
+
+    @Override
+    public List<?> readEmployeeForLeaveBalance(T object) {
+        return employeeMasterDAO.readEmployeeForLeaveBalance(object);
     }
 
 }

@@ -193,6 +193,9 @@
         <property name="dateOfBirthOfEmpChild2" type="string">
             <column name="date_of_birth_of_emp_child2" length="45" />
         </property>
+        <property name="dateOfTransferOfEntity" type="string">
+            <column name="date_of_transfer_of_entity" length="45" />
+        </property>
         <set name="employeeDatetimeDatas" inverse="true">
             <key>
                 <column name="employee_master_id" />

@@ -89,6 +89,7 @@
                         </c:if>
                         <c:if test="${sessionScope.userRight.hr or sessionScope.userRight.leaveManagement}">
                             <li><a href="leaveEmployeeDetail.htm?act=searchEmpLeaveDetail"><i class="fa fa-circle-o"></i>Search Employee Leave Detail</a></li>
+                            <li><a href="leaveEmployeeDetail.htm?act=searchEmployeeLeaveBalance"><i class="fa fa-circle-o"></i>Search Employee Leave Balance</a></li>
                             </c:if>
                             <c:if test="${sessionScope.isReportingManagerDataExist}">
                             <li><a href="leaveEmployeeDetail.htm?act=viewRequestAdminClick"><i class="fa fa-circle-o"></i>Leave Request Of Subordinates</a></li>
@@ -529,19 +530,19 @@
 
                 </c:if>
                 <c:if test="${sessionScope.userRight.hr}">
-<!--                                        <li class="treeview">
-                                            <a href="#" style="">
-                                                <i class="fa fa-wrench fa-lg"></i>
-                                                <span>Employee Approval </span>
-                                                <i class="fa fa-angle-left pull-right"></i>
-                                            </a>
-                                            <ul class="treeview-menu">
-                                                <li><a href="leaveEmployeeDetail.htm?act=viewRequestPowerAdminClick"><i class="fa fa-circle-o"></i>Leave</a></li>
-                                                <li><a href="attendanceRegularizationMaster.htm?act=powerAdminApprovalList"><i class="fa fa-circle-o"></i>AT</a></li>
-                                                <li><a href="designationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Travel</a></li>
-                                                <li><a href="levelMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Expense</a></li>
-                                            </ul>
-                                        </li>-->
+                    <!--                                        <li class="treeview">
+                                                                <a href="#" style="">
+                                                                    <i class="fa fa-wrench fa-lg"></i>
+                                                                    <span>Employee Approval </span>
+                                                                    <i class="fa fa-angle-left pull-right"></i>
+                                                                </a>
+                                                                <ul class="treeview-menu">
+                                                                    <li><a href="leaveEmployeeDetail.htm?act=viewRequestPowerAdminClick"><i class="fa fa-circle-o"></i>Leave</a></li>
+                                                                    <li><a href="attendanceRegularizationMaster.htm?act=powerAdminApprovalList"><i class="fa fa-circle-o"></i>AT</a></li>
+                                                                    <li><a href="designationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Travel</a></li>
+                                                                    <li><a href="levelMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Expense</a></li>
+                                                                </ul>
+                                                            </li>-->
                 </c:if>
                 <li class="treeview">
                     <a href="holidayMaster.htm?act=viewHolidaysLocationWise">

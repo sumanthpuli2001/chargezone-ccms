@@ -1593,7 +1593,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     leaveTypeMaster.setId(leaveId);
                     leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster);
                     List leaveWiseCountList = new ArrayList();
-                        if (leaveType.equals("Short Leave")) {
+                    if (leaveType.equals("Short Leave")) {
                         leaveWiseCountList = leaveEmployeeDetailService.readApprovedShortLeaveDays(leaveEmployeeDetail);
                     } else {
 
@@ -2484,6 +2484,120 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             }
         }
 
+        return mv;
+    }
+
+    public ModelAndView searchEmployeeLeaveBalance(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        selectEmployee(request, response);
+        departmentList(request);
+        designationList(request);
+        readleaveType(request);
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.setViewName("Leave/LeaveBalanceEmployeeWise");
+        return mv;
+    }
+
+    public ModelAndView showEmployeeLeaveBalance(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+        LeaveTypeMaster leaveTypeMaster1 = new LeaveTypeMaster();
+        LeaveTypeMaster leaveTypeMaster2 = new LeaveTypeMaster();
+        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+        EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
+        EmployeeLeaveBalance employeeLeaveBalance2 = new EmployeeLeaveBalance();
+        Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
+        String empId = request.getParameter("employeeName");
+        String deptId = request.getParameter("departmentMaster");
+        String desId = request.getParameter("designationMaster");
+        HttpSession session = request.getSession();
+        if (!"".equals(empId)) {
+            employeeMaster.setId(Integer.parseInt(empId));
+        }
+        if (!"".equals(deptId)) {
+            employeeMaster.setChild1(deptId);
+        }
+        if (!"".equals(desId)) {
+            employeeMaster.setChild2(desId);
+        }
+        List<?> empList = employeeMasterService.readEmployeeForLeaveBalance(employeeMaster);
+        Iterator itr = empList.iterator();
+        while (itr.hasNext()) {
+            try {
+
+                Object[] next = (Object[]) itr.next();
+                String employeeId = "" + next[0];
+                employeeMaster = employeeMasterService.readById(Integer.parseInt(employeeId));
+
+                List<String> empInfoList = new ArrayList();
+                empInfoList.add(employeeMaster.getEmployeeId());
+                empInfoList.add(employeeMaster.getEmployeeName());
+//            Casual Leave
+                List leaveTypeList = leaveTypeMasterService.readLeaveType("Casual Leave");
+                if (!leaveTypeList.isEmpty()) {
+                    leaveTypeMaster = (LeaveTypeMaster) leaveTypeList.get(0);
+                }
+                employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+                employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                List balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                if (!balanceList.isEmpty()) {
+                    employeeLeaveBalance = (EmployeeLeaveBalance) balanceList.get(0);
+                    empInfoList.add("" + employeeLeaveBalance.getNoOfLeaveRemain());
+                } else {
+                    empInfoList.add("" + employeeLeaveBalance.getNoOfLeaveRemain());
+                }
+//            Sick Leave
+                List leaveTypeList1 = leaveTypeMasterService.readLeaveType("Sick Leave");
+                if (!leaveTypeList.isEmpty()) {
+                    leaveTypeMaster1 = (LeaveTypeMaster) leaveTypeList1.get(0);
+                }
+                employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+                employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster1);
+                List balanceList1 = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance1);
+                if (!balanceList1.isEmpty()) {
+                    employeeLeaveBalance1 = (EmployeeLeaveBalance) balanceList1.get(0);
+                    empInfoList.add("" + employeeLeaveBalance1.getNoOfLeaveRemain());
+                } else {
+                    empInfoList.add("");
+                }
+//            Privilege Leave
+                List leaveTypeList2 = leaveTypeMasterService.readLeaveType("Privilege Leave");
+                if (!leaveTypeList.isEmpty()) {
+                    leaveTypeMaster2 = (LeaveTypeMaster) leaveTypeList2.get(0);
+                }
+                employeeLeaveBalance2.setEmployeeMaster(employeeMaster);
+                employeeLeaveBalance2.setLeaveTypeMaster(leaveTypeMaster2);
+                List balanceList2 = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance2);
+                if (!balanceList2.isEmpty()) {
+                    employeeLeaveBalance2 = (EmployeeLeaveBalance) balanceList2.get(0);
+                    empInfoList.add("" + employeeLeaveBalance2.getNoOfLeaveRemain());
+                } else {
+                    empInfoList.add("");
+                }
+                map.put(employeeMaster.getId(), empInfoList);
+            } catch (Exception e) {
+
+            }
+        }
+
+        request.setAttribute("employeeBalanceMap", map);
+        session.setAttribute("sessionMapOfLeaveBalance", map);
+        mv = searchEmployeeLeaveBalance(request, response);
+        return mv;
+    }
+
+    public ModelAndView exportToExcelLeaveBalance(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        Map<Integer, List<?>> sessionMapOfLeaveBalance = (Map<Integer, List<?>>) request.getSession().getAttribute("sessionMapOfLeaveBalance");
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-Disposition", "attachment; filename=EmployeeLeaveBalanceData.xls");
+        mv.addObject("sessionMapOfLeaveBalance", sessionMapOfLeaveBalance);
+        mv.setViewName("Leave/LeaveBalanceEmployeeWiseExportToExcel");
         return mv;
     }
 

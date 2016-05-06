@@ -14,6 +14,7 @@ import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.model.support.User;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -756,6 +757,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
         List newList = new ArrayList();
         List secondHalfList = new ArrayList();
+        List workingHour = new ArrayList();
         for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
             Iterator itr5 = entry.getValue().iterator();
             int firstCounter = 0;
@@ -803,14 +805,16 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     long diffMinutes = diff / (60 * 1000);
                     long diff1 = 0;
                     if (userTimeIn.after(flexibleStartTime) || userTimeIn.equals(flexibleStartTime)) {
-                        diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                        diff1 = endHours.getTime() - userTimeIn.getTime();
                     } else {
-                        diff1 = userTimeOut.getTime() - flexibleStartTime.getTime();
+                        diff1 = endHours.getTime() - flexibleStartTime.getTime();
                     }
                     long diffMinutes1 = diff1 / (60 * 1000);
 
                     if (userTimeIn != null) {
-                        if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                        if (diffMinutes1 >= diffMinutes) {
+                            newList.add("PR");
+                        } else if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             newList.add("PR");
                         } else if (leave1[0] != null && !leave1[0].contains("Short Leave")) {
                             if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
@@ -1027,7 +1031,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     long diffMinutes1 = diff1 / (60 * 1000);
 
                     if (userTimeIn != null) {
-                       if (diffMinutes1 >= diffMinutes) {
+                        if (diffMinutes1 >= diffMinutes) {
                             secondHalfList.add("PR");
                         } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             secondHalfList.add("PR");
@@ -1088,6 +1092,87 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 }
             }
 
+            Iterator itr7 = entry.getValue().iterator();
+            while (itr7.hasNext()) {
+                Object[] next = (Object[]) itr7.next();
+                String secondHalf = "" + next[1];
+                int firstHalfVal = 0;
+                int counter = 0;
+                String shiftName = "";
+
+                List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
+                long lunchTime = 0;
+                long totalDayTime = 0;
+                long totalTime = 0;
+                long shiftdiffMinutes = 0;
+                boolean checkLunchTime = false;
+                if (listPunch.size() > 0) {
+                    if (listPunch.size() > 2) {
+                        Object[] startLunchTime = (Object[]) listPunch.get(1);
+                        Object[] endLunchTime = (Object[]) listPunch.get(2);
+                        String startTime = (String) startLunchTime[0];
+                        String endTime = (String) endLunchTime[0];
+                        SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        Date launchStrTime = sdf3.parse(startTime);
+                        Date launchEndTime = sdf3.parse(endTime);
+                        long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                        lunchTime = diff / (60 * 1000) % 60;
+                        Date startStrTime = sdf3.parse(startTime);
+                        Date endStrTime = sdf3.parse(endTime);
+                    }
+
+                    String[] userTimeInStr = secondHalf.split("`");
+                    String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                    String[] userTimeOutStr = secondHalf.split("!");
+                    String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                    Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                    Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                    String[] startHoursStr = secondHalf.split("%");
+                    String[] firstStartHoursStr = startHoursStr[1].split("\\+");
+                    String[] endHoursStr = secondHalf.split("&");
+                    Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
+                    Calendar cal1 = Calendar.getInstance();
+                    cal1.setTime(firstStartHours);
+                    cal1.add(Calendar.MINUTE, -earlyMinute);
+                    String newTime1 = sdf2.format(cal1.getTime());
+                    Date flexibleInTime = sdf2.parse(newTime1);
+                    Date endHours = sdf2.parse(endHoursStr[1]);
+                    long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
+                    shiftdiffMinutes = shiftTotalTime / (60 * 1000);
+                    long diff1 = 0;
+                    if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
+                        diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+
+                    } else {
+                        diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                    }
+
+                    totalDayTime = diff1 / (60 * 1000);
+
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                    if (lunchTime > 60) {
+                        lunchTime = 60;
+                    }
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                    lunchTime = lunchTime - 30;
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+                    if (lunchTime > 0) {
+                        totalTime = totalDayTime - lunchTime;
+                        double empHour = (double) totalTime / 60;
+                        workingHour.add("" + new DecimalFormat("##.##").format(empHour));
+
+                    } else {
+                        double empHour = (double) totalDayTime / 60;
+                        workingHour.add("" + new DecimalFormat("##.##").format(empHour));
+                    }
+
+                } else {
+                    workingHour.add("-");
+                }
+
+            }
+
         }
 
 //        List<?> attendanceDateList = 
@@ -1097,6 +1182,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //        }
         mv.getModelMap().put("firstHalfList", newList);
         mv.getModelMap().put("secondHalfList", secondHalfList);
+        mv.getModelMap().put("workingHour", workingHour);
         mv.getModelMap().put("empDetail", empDetail);
         mv.getModelMap().put("map", map);
         mv.getModelMap().put("employeeAdvanceSearch", employeeAdvanceSearch);

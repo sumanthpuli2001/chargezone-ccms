@@ -277,34 +277,34 @@
                                                                                 </c:if>
                                                                                 <c:if test="${firstHalfList eq 'SHL/P'}">
                                                                                 <th style="color: green;text-align: center;">${firstHalfList}</th>
-                                                                                <c:set var="shl" value="${shl + 1}"></c:set>
+                                                                                    <c:set var="shl" value="${shl + 1}"></c:set>
                                                                                 </c:if>
                                                                                 <c:if test="${firstHalfList eq 'SHL/A'}">
                                                                                 <th style="color: red;text-align: center;">${firstHalfList}</th>
-                                                                                 <c:set var="shlA" value="${shlA + 1}"></c:set>
+                                                                                    <c:set var="shlA" value="${shlA + 1}"></c:set>
                                                                                 </c:if>
                                                                                 <c:if test="${firstHalfList eq 'AB'}">
                                                                                 <th style="color: red;text-align: center;">${firstHalfList}</th>
-                                                                                 <c:set var="absent" value="${absent + 0.5}"></c:set>
+                                                                                    <c:set var="absent" value="${absent + 0.5}"></c:set>
                                                                                 </c:if>
                                                                                 <c:if test="${firstHalfList eq 'Casual Leave'}">
                                                                                 <th style="text-align: center;">${firstHalfList}</th>
-                                                                                  <c:set var="cl" value="${cl + 0.5}"></c:set>
+                                                                                    <c:set var="cl" value="${cl + 0.5}"></c:set>
                                                                                 </c:if>
                                                                                 <c:if test="${firstHalfList eq 'Privilege Leave'}">
                                                                                 <th style="text-align: center;">${firstHalfList}</th>
-                                                                                 <c:set var="pl" value="${pl + 0.5}"></c:set>
+                                                                                    <c:set var="pl" value="${pl + 0.5}"></c:set>
                                                                                 </c:if>
                                                                                 <c:if test="${firstHalfList eq 'Sick Leave'}">
                                                                                 <th style="text-align: center;">${firstHalfList}</th>
-                                                                                 <c:set var="sl" value="${sl + 0.5}"></c:set>
+                                                                                    <c:set var="sl" value="${sl + 0.5}"></c:set>
                                                                                 </c:if>
                                                                                 <c:if test="${firstHalfList eq 'AR/P'}">
                                                                                 <th style="color: blue;text-align: center;">${firstHalfList}</th>
-                                                                                 <c:set var="ar" value="${ar + 0.5}"></c:set>
+                                                                                    <c:set var="ar" value="${ar + 0.5}"></c:set>
                                                                                 </c:if>
-                                                                                
-                                                                            </c:forEach>
+
+                                                                        </c:forEach>
 
 
                                                                     </tr>
@@ -321,39 +321,45 @@
                                                                                 </c:if>
                                                                                 <c:if test="${secondHalfList eq 'SHL/P'}">
                                                                                 <th style="color: green;text-align: center;">${secondHalfList}</th>
-                                                                                <c:set var="shl" value="${shl + 1}"></c:set>
+                                                                                    <c:set var="shl" value="${shl + 1}"></c:set>
                                                                                 </c:if>
                                                                                 <c:if test="${secondHalfList eq 'SHL/A'}">
                                                                                 <th style="color: red;text-align: center;">${secondHalfList}</th>
-                                                                                 <c:set var="shlA" value="${shlA + 1}"></c:set>
+                                                                                    <c:set var="shlA" value="${shlA + 1}"></c:set>
                                                                                 </c:if>
                                                                                 <c:if test="${secondHalfList eq 'AB'}">
                                                                                 <th style="color: red;text-align: center;">${secondHalfList}</th>
-                                                                                 <c:set var="absent" value="${absent + 0.5}"></c:set>
+                                                                                    <c:set var="absent" value="${absent + 0.5}"></c:set>
                                                                                 </c:if>
                                                                                 <c:if test="${secondHalfList eq 'Casual Leave'}">
                                                                                 <th style="text-align: center;">${secondHalfList}</th>
-                                                                                  <c:set var="cl" value="${cl + 0.5}"></c:set>
+                                                                                    <c:set var="cl" value="${cl + 0.5}"></c:set>
                                                                                 </c:if>
                                                                                 <c:if test="${secondHalfList eq 'Privilege Leave'}">
                                                                                 <th style="text-align: center;">${secondHalfList}</th>
-                                                                                 <c:set var="pl" value="${pl + 0.5}"></c:set>
+                                                                                    <c:set var="pl" value="${pl + 0.5}"></c:set>
                                                                                 </c:if>
                                                                                 <c:if test="${secondHalfList eq 'Sick Leave'}">
                                                                                 <th style="text-align: center;">${secondHalfList}</th>
-                                                                                 <c:set var="sl" value="${sl + 0.5}"></c:set>
+                                                                                    <c:set var="sl" value="${sl + 0.5}"></c:set>
                                                                                 </c:if>
                                                                                 <c:if test="${secondHalfList eq 'AR/P'}">
                                                                                 <th style="color: blue;text-align: center;">${secondHalfList}</th>
-                                                                                 <c:set var="ar" value="${ar + 0.5}"></c:set>
+                                                                                    <c:set var="ar" value="${ar + 0.5}"></c:set>
                                                                                 </c:if>
-                                                                                 <c:if test="${secondHalfList eq 'WO'}">
+                                                                                <c:if test="${secondHalfList eq 'WO'}">
                                                                                 <th style="text-align: center;">${secondHalfList}</th>
-                                                                                <c:set var="wo" value="${wo + 0.5}"></c:set>
+                                                                                    <c:set var="wo" value="${wo + 0.5}"></c:set>
                                                                                 </c:if>
-                                                                                
-                                                                            </c:forEach>
 
+                                                                        </c:forEach>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Working Hour</th>
+                                                                            <c:forEach var="workingHour" items="${workingHour}">
+                                                                            <th style="text-align: center;">${workingHour}</th>
+                                                                        </c:forEach>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>View All Punch</th>

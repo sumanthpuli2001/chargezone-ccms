@@ -1850,6 +1850,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 int m = 1;
                                 int n = 1;
                                 int o = 1;
+                                int p = 1;
                                 SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
                                 Cell cellTitle = row3.createCell(0);
                                 cellTitle.setCellValue("Date");
@@ -2009,14 +2010,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         long diffMinutes = diff / (60 * 1000);
                                         long diff1 = 0;
                                         if (userTimeIn.after(flexibleStartTime) || userTimeIn.equals(flexibleStartTime)) {
-                                            diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                                            diff1 = endHours.getTime() - userTimeIn.getTime();
                                         } else {
-                                            diff1 = userTimeOut.getTime() - flexibleStartTime.getTime();
+                                            diff1 = endHours.getTime() - flexibleStartTime.getTime();
                                         }
                                         long diffMinutes1 = diff1 / (60 * 1000);
 
                                         if (userTimeIn != null) {
-                                             if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                            if (diffMinutes1 >= diffMinutes) {
+                                                cell8.setCellValue("PR");
+                                                prcounter = prcounter + 0.5;
+                                                cell8.setCellStyle(stylegreen);
+                                            } else if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                                 cell8.setCellValue("PR");
                                                 prcounter = prcounter + 0.5;
                                                 cell8.setCellStyle(stylegreen);
@@ -2366,6 +2371,97 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     }
                                     CellUtil.setAlignment(cell9, firstFWorkbook, CellStyle.ALIGN_CENTER);
                                     o++;
+                                }
+
+                                rownum = rownum + 1;
+                                Row row10 = firstSheet.createRow(rownum);
+                                Cell cellTitle6 = row10.createCell(0);
+                                cellTitle6.setCellValue("Working Hour");
+                                cellTitle6.setCellStyle(styleBold);
+                                Iterator itr7 = entry.getValue().iterator();
+                                while (itr7.hasNext()) {
+                                    Object[] next = (Object[]) itr7.next();
+                                    Cell cell10 = row10.createCell(p);
+                                    String secondHalf = "" + next[1];
+                                    int firstHalfVal = 0;
+                                    int counter = 0;
+                                    String shiftName = "";
+
+//                                    Lunch Breck Cut Off
+                                    List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
+                                    long lunchTime = 0;
+                                    long totalDayTime = 0;
+                                    long totalTime = 0;
+                                    long shiftdiffMinutes = 0;
+                                    boolean checkLunchTime = false;
+                                    if (listPunch.size() > 0) {
+                                        if (listPunch.size() > 2) {
+                                            Object[] startLunchTime = (Object[]) listPunch.get(1);
+                                            Object[] endLunchTime = (Object[]) listPunch.get(2);
+                                            String startTime = (String) startLunchTime[0];
+                                            String endTime = (String) endLunchTime[0];
+                                            SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                            Date launchStrTime = sdf2.parse(startTime);
+                                            Date launchEndTime = sdf2.parse(endTime);
+                                            long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                                            lunchTime = diff / (60 * 1000) % 60;
+                                            Date startStrTime = sdf2.parse(startTime);
+                                            Date endStrTime = sdf2.parse(endTime);
+                                        }
+
+                                        String[] userTimeInStr = secondHalf.split("`");
+                                        String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                        String[] userTimeOutStr = secondHalf.split("!");
+                                        String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                        Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
+                                        Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
+                                        String[] startHoursStr = secondHalf.split("%");
+                                        String[] firstStartHoursStr = startHoursStr[1].split("\\+");
+                                        String[] endHoursStr = secondHalf.split("&");
+                                        Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
+                                        Calendar cal1 = Calendar.getInstance();
+                                        cal1.setTime(firstStartHours);
+                                        cal1.add(Calendar.MINUTE, -earlyMinute);
+                                        String newTime1 = sdf1.format(cal1.getTime());
+                                        Date flexibleInTime = sdf1.parse(newTime1);
+                                        Date endHours = sdf1.parse(endHoursStr[1]);
+                                        long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
+                                        shiftdiffMinutes = shiftTotalTime / (60 * 1000);
+                                        long diff1 = 0;
+                                        if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
+                                            diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+
+                                        } else {
+                                            diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                                        }
+
+                                        totalDayTime = diff1 / (60 * 1000);
+
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                                        if (lunchTime > 60) {
+                                            lunchTime = 60;
+                                        }
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                                        lunchTime = lunchTime - 30;
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+                                        if (lunchTime > 0) {
+                                            totalTime = totalDayTime - lunchTime;
+                                            double empHour = (double) totalTime / 60;
+                                            cell10.setCellValue("" + new DecimalFormat("##.##").format(empHour));
+
+                                        } else {
+                                            double empHour = (double) totalDayTime / 60;
+                                            cell10.setCellValue("" + new DecimalFormat("##.##").format(empHour));
+                                        }
+
+                                    } else {
+                                        cell10.setCellValue("-");
+                                    }
+
+//                                    Lunch Breck Cut Off
+                                    CellUtil.setAlignment(cell10, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    p++;
                                 }
 
                             }

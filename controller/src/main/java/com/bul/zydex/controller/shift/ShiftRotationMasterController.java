@@ -4083,7 +4083,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         for (int l = 0; l < l2.size(); l++) {
             Cell cell = row.createCell(l);
             cell.setCellValue(l2.get(l));
-             cell.setCellStyle(styleBold);
+            cell.setCellStyle(styleBold);
         }
         String appPath = request.getServletContext().getRealPath("");
         try {
@@ -4111,7 +4111,6 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
         DownloadFile downloadFile = new DownloadFile();
         downloadFile.doDownload(request, response);
-        mv = employeeDataSearch(request, response);
         return mv;
     }
 }

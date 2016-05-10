@@ -812,9 +812,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     long diffMinutes1 = diff1 / (60 * 1000);
 
                     if (userTimeIn != null) {
-                        if (diffMinutes1 >= diffMinutes) {
-                            newList.add("PR");
-                        } else if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                        if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             newList.add("PR");
                         } else if (leave1[0] != null && !leave1[0].contains("Short Leave")) {
                             if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
@@ -1106,7 +1104,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 long totalTime = 0;
                 long shiftdiffMinutes = 0;
                 boolean checkLunchTime = false;
-                if (listPunch.size() > 0) {
+                if (listPunch.size() > 0 && !secondHalf.equals("WO")) {
                     if (listPunch.size() > 2) {
                         Object[] startLunchTime = (Object[]) listPunch.get(1);
                         Object[] endLunchTime = (Object[]) listPunch.get(2);
@@ -1160,11 +1158,22 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     if (lunchTime > 0) {
                         totalTime = totalDayTime - lunchTime;
                         double empHour = (double) totalTime / 60;
-                        workingHour.add("" + new DecimalFormat("##.##").format(empHour));
+                        int hours = (int) empHour;
+                        int minutes = (int) (empHour * 60) % 60;
+                        String hour = "" + hours;
+                        String minute = "" + minutes;
+                        String workingHours = hour + ":" + minute;
+                        workingHour.add(workingHours);
 
                     } else {
                         double empHour = (double) totalDayTime / 60;
-                        workingHour.add("" + new DecimalFormat("##.##").format(empHour));
+                        int hours = (int) empHour;
+                        int minutes = (int) (empHour * 60) % 60;
+                        String hour = "" + hours;
+                        String minute = "" + minutes;
+                        String workingHours = hour + ":" + minute;
+
+                        workingHour.add(workingHours);
                     }
 
                 } else {
@@ -1175,7 +1184,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
         }
 
-//        List<?> attendanceDateList = 
+//        List<?> attendanceDateList =
 //        List<?> l1 = null;
 //        if (("".equals(startDate) || null == startDate) || ("".equals(endDate) || null == endDate)) {
 //            empDetail = l1;

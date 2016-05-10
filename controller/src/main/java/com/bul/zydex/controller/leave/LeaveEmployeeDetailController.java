@@ -2505,12 +2505,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         ModelAndView mv = new ModelAndView();
         LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
         EmployeeMaster employeeMaster = new EmployeeMaster();
-        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
-        LeaveTypeMaster leaveTypeMaster1 = new LeaveTypeMaster();
-        LeaveTypeMaster leaveTypeMaster2 = new LeaveTypeMaster();
-        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
-        EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
-        EmployeeLeaveBalance employeeLeaveBalance2 = new EmployeeLeaveBalance();
+
         Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
         String empId = request.getParameter("employeeName");
         String deptId = request.getParameter("departmentMaster");
@@ -2528,6 +2523,14 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         List<?> empList = employeeMasterService.readEmployeeForLeaveBalance(employeeMaster);
         Iterator itr = empList.iterator();
         while (itr.hasNext()) {
+            LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+            LeaveTypeMaster leaveTypeMaster1 = new LeaveTypeMaster();
+            LeaveTypeMaster leaveTypeMaster2 = new LeaveTypeMaster();
+            LeaveTypeMaster leaveTypeMaster3 = new LeaveTypeMaster();
+            EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+            EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
+            EmployeeLeaveBalance employeeLeaveBalance2 = new EmployeeLeaveBalance();
+            EmployeeLeaveBalance employeeLeaveBalance3 = new EmployeeLeaveBalance();
             try {
 
                 Object[] next = (Object[]) itr.next();
@@ -2535,6 +2538,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 employeeMaster = employeeMasterService.readById(Integer.parseInt(employeeId));
 
                 List<String> empInfoList = new ArrayList();
+                List<String> emplLeaveList = new ArrayList();
                 empInfoList.add(employeeMaster.getEmployeeId());
                 empInfoList.add(employeeMaster.getEmployeeName());
 //            Casual Leave
@@ -2548,8 +2552,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 if (!balanceList.isEmpty()) {
                     employeeLeaveBalance = (EmployeeLeaveBalance) balanceList.get(0);
                     empInfoList.add("" + employeeLeaveBalance.getNoOfLeaveRemain());
+
                 } else {
-                    empInfoList.add("" + employeeLeaveBalance.getNoOfLeaveRemain());
+                    empInfoList.add("");
                 }
 //            Sick Leave
                 List leaveTypeList1 = leaveTypeMasterService.readLeaveType("Sick Leave");
@@ -2579,6 +2584,31 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 } else {
                     empInfoList.add("");
                 }
+//            Privilege Leave
+                List leaveTypeList3 = leaveTypeMasterService.readLeaveType("Paternity Leave");
+                if (!leaveTypeList.isEmpty()) {
+                    leaveTypeMaster3 = (LeaveTypeMaster) leaveTypeList3.get(0);
+                }
+                employeeLeaveBalance3.setEmployeeMaster(employeeMaster);
+                employeeLeaveBalance3.setLeaveTypeMaster(leaveTypeMaster3);
+                List balanceList3 = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance3);
+                if (!balanceList3.isEmpty()) {
+                    employeeLeaveBalance3 = (EmployeeLeaveBalance) balanceList3.get(0);
+                    empInfoList.add("" + employeeLeaveBalance3.getNoOfLeaveRemain());
+                } else {
+                    empInfoList.add("");
+                }
+                String casualLeaveBalId = "" + employeeLeaveBalance.getId();
+                String sickLeaveBalId = "" + employeeLeaveBalance1.getId();
+                String privilegeLeaveBalId = "" + employeeLeaveBalance2.getId();
+                String paternityLeaveBalId = "";
+                if (employeeLeaveBalance3.getId() == null) {
+                    paternityLeaveBalId = "0";
+                } else {
+                    paternityLeaveBalId = "" + employeeLeaveBalance3.getId();
+                }
+                empInfoList.add(casualLeaveBalId + "_" + sickLeaveBalId + "_" + privilegeLeaveBalId + "_" + paternityLeaveBalId);
+
                 map.put(employeeMaster.getId(), empInfoList);
             } catch (Exception e) {
 
@@ -2599,6 +2629,39 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         mv.addObject("sessionMapOfLeaveBalance", sessionMapOfLeaveBalance);
         mv.setViewName("Leave/LeaveBalanceEmployeeWiseExportToExcel");
         return mv;
+    }
+
+    public ModelAndView readLeaveBalAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String leaveBalId = request.getParameter("leaveBalId");
+        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+
+        employeeLeaveBalance = employeeLeaveBalanceService.readById(Integer.parseInt(leaveBalId));
+        leaveTypeMaster = leaveTypeMasterService.readById(employeeLeaveBalance.getLeaveTypeMaster().getId());
+        employeeMaster = employeeMasterService.readById(employeeLeaveBalance.getEmployeeMaster().getId());
+        request.setAttribute("employeeLeaveBalance", employeeLeaveBalance);
+        request.setAttribute("employeeMaster", employeeMaster);
+        request.setAttribute("leaveTypeMaster", leaveTypeMaster);
+        mv.setViewName("Leave/LeaveEmployeeBalanceUpdate");
+
+        return mv;
+    }
+
+    public void leaveBalUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String empLeaveBalId = request.getParameter("empLeaveBalId");
+        String leaveBalance = request.getParameter("leaveBalance");
+
+        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+        employeeLeaveBalance = employeeLeaveBalanceService.readById(Integer.parseInt(empLeaveBalId));
+        employeeLeaveBalance.setNoOfLeaveRemain(Float.parseFloat(leaveBalance));
+        employeeLeaveBalanceService.update(employeeLeaveBalance);
+
+        PrintWriter out = response.getWriter();
+        out.print("Information : The Information is Updated Successfully.");
+
     }
 
 }

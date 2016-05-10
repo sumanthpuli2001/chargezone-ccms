@@ -54,8 +54,8 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <%--<form:form action="shiftRotationMaster.htm?act=employeeMonthlyPayrollReport" method="post" commandName="employeeAdvanceSearch"--%>
-        <form:form action="shiftRotationMaster.htm?act=employeeAttandanceDataSearchSubmit" method="post" commandName="employeeAdvanceSearch"
+        <%--<form:form action="shiftRotationMaster.htm?act=employeeAttandanceDataSearchSubmit" method="post" commandName="employeeAdvanceSearch"--%>
+        <form:form action="shiftRotationMaster.htm?act=employeeMonthlyPayrollReport" method="post" commandName="employeeAdvanceSearch"
                    name='form1' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">

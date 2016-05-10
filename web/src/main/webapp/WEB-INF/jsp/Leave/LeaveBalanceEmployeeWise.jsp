@@ -14,6 +14,21 @@
     </head>
 
     <script>
+        function viewClick(leaveBalId) {
+            document.getElementById('viewLeaveBal_id').innerHTML = "Fetching ......";
+            $.post("leaveEmployeeDetail.htm?act=readLeaveBalAjax",
+                    {
+                        leaveBalId: leaveBalId
+                    }, function (responseTxt, statusTxt, xhr) {
+                if (statusTxt === "success") {
+                    document.getElementById('viewLeaveBal_id').innerHTML = responseTxt;
+                }
+                if (statusTxt === "error")
+                    alert("Error: " + xhr.status + ": " + xhr.statusText);
+            });
+        }
+    </script>
+    <script>
 
         var flag3 = true;
         function saveSubmit11() {
@@ -34,10 +49,10 @@
         <section class="content-header">
             <h1>Search Employee Leave Balance:</h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#"><i class="fa a-dashboard"></i> Home</a></li>
                 <li class="active">Search Leave Balance</li>
             </ol>
-        </section>
+        </section>f
         <c:if test="${!empty successMessage}">
             <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
         </c:if>
@@ -138,6 +153,8 @@
                                                                     <th>Casual Leave</th>
                                                                     <th>Sick Leave</th>
                                                                     <th>Privilege Leave</th>
+                                                                    <th>Paternity Leave</th>
+                                                                    <th>Action</th>
                                                                 </tr>
                                                             </thead>
                                                         </c:otherwise>
@@ -145,9 +162,52 @@
                                                     <tbody>
                                                         <c:forEach var="employeeBalanceMap" items="${employeeBalanceMap}">
                                                             <tr>
-                                                                <c:forEach var="empLeaveBalance" items="${employeeBalanceMap.value}">
-                                                                    <td>${empLeaveBalance}</td>
-                                                                </c:forEach>
+                                                                <%--<c:forEach var="empLeaveBalance" items="${employeeBalanceMap.value}" varStatus="sCount">--%>
+                                                                <td>${employeeBalanceMap.value[0]}</td>
+                                                                <td>${employeeBalanceMap.value[1]}</td>
+                                                                <td>${employeeBalanceMap.value[2]}</td>
+                                                                <td>${employeeBalanceMap.value[3]}</td>
+                                                                <td>${employeeBalanceMap.value[4]}</td>
+                                                                <td>${employeeBalanceMap.value[5]}</td>
+                                                                <%--</c:forEach>--%>
+                                                                <td>
+                                                                    <c:set var="leaveType" value="${fn:split(employeeBalanceMap.value[6], '_')}"></c:set>
+                                                                        <div class="btn-group">
+                                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                Edit <span class="caret"></span>
+                                                                            </button>
+                                                                            <ul class="dropdown-menu">
+                                                                                <li>
+                                                                                    <a href="#" data-toggle="modal" data-target="#myModal"
+                                                                                       onclick="viewClick(${leaveType[0]});">
+                                                                                    &nbsp;&nbsp;CL
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="#" data-toggle="modal" data-target="#myModal"
+                                                                                   onclick="viewClick(${leaveType[1]});">
+                                                                                    &nbsp;&nbsp;SL
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="#" data-toggle="modal" data-target="#myModal"
+                                                                                   onclick="viewClick(${leaveType[2]});">
+                                                                                    &nbsp;&nbsp;PL
+                                                                                </a>
+                                                                            </li>
+                                                                            <c:if test="${leaveType[3] ne '0'}">
+                                                                                <li>
+                                                                                    <a href="#" data-toggle="modal" data-target="#myModal"
+                                                                                       onclick="viewClick(${leaveType[3]});">
+                                                                                        &nbsp;&nbsp;PTL
+                                                                                    </a>
+                                                                                </li>
+                                                                            </c:if>
+
+
+                                                                        </ul>
+                                                                    </div>
+                                                                </td>
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>
@@ -165,6 +225,24 @@
             </section>
 
         </form:form>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <!--<div class="fadeOutEffect alert alert-danger" role="alert" id="alertId"></div>-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Leave Employee Balance</h4>
+                    </div>
+                    <div class="modal-body" id="viewLeaveBal_id">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="reloadFun();">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="submitFormFun();">Submit</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -190,6 +268,30 @@
                 searchingText: "Searching ... .. .",
             });
         });
+
+        function submitFormFun() {
+            var empLeaveBalId = document.getElementById("empLeaveBalId").value;
+            alert("empLeaveBalId" + empLeaveBalId);
+            var leaveBalance = document.getElementById("leaveBalance").value;
+            alert("leaveBalance" + leaveBalance);
+            $.ajax({
+                type: "POST",
+                url: "leaveEmployeeDetail.htm?act=leaveBalUpdate&empLeaveBalId=" + empLeaveBalId,
+                data: {leaveBalance: leaveBalance},
+                dataType: "text",
+                success: function (responseTxt) {
+                    alert(responseTxt);
+                    document.getElementById("alertId").innerHTML = responseTxt;
+                },
+                error: function () {
+//                    alert('Error occured');
+                }
+            });
+        }
+
+        function reloadFun() {
+            window.location.reload();
+        }
 
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

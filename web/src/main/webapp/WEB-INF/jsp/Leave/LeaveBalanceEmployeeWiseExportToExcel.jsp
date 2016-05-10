@@ -41,6 +41,7 @@
                             <th>Casual Leave</th>
                             <th>Sick Leave</th>
                             <th>Privilege Leave</th>
+                            <th>Paternity Leave</th>
                         </tr>
                     </thead>
                 </c:otherwise>
@@ -48,9 +49,12 @@
             <tbody>
                 <c:forEach var="employeeBalanceMap" items="${sessionMapOfLeaveBalance}">
                     <tr>
-                        <c:forEach var="empLeaveBalance" items="${employeeBalanceMap.value}">
-                            <td>${empLeaveBalance}</td>
-                        </c:forEach>
+                        <td>${employeeBalanceMap.value[0]}</td>
+                        <td>${employeeBalanceMap.value[1]}</td>
+                        <td>${employeeBalanceMap.value[2]}</td>
+                        <td>${employeeBalanceMap.value[3]}</td>
+                        <td>${employeeBalanceMap.value[4]}</td>
+                        <td>${employeeBalanceMap.value[5]}</td>
                     </tr>
                 </c:forEach>
             </tbody>

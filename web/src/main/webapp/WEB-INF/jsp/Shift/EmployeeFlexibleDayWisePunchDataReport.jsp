@@ -233,6 +233,9 @@
                                                                                 <c:if test="${fn:contains(list[1], 'AB') && !fn:contains(list[1], '?') && !fn:contains(list[1], '`') && !fn:contains(list[1], 'TR') && !fn:contains(list[1], 'AR')}">
                                                                                 <th style="text-align: center;">-</th>
                                                                                 </c:if>
+                                                                                <c:if test="${list[1] eq 'AR'}">
+                                                                                <th style="text-align: center;">-</th>
+                                                                                </c:if>
 
                                                                         </c:forEach>
                                                                     </tr>
@@ -359,7 +362,7 @@
                                                                         <th>Working Hour</th>
                                                                             <c:forEach var="workingHour" items="${workingHour}">
                                                                             <th style="text-align: center;">${workingHour}</th>
-                                                                        </c:forEach>
+                                                                            </c:forEach>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>View All Punch</th>

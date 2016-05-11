@@ -2510,6 +2510,14 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         String empId = request.getParameter("employeeName");
         String deptId = request.getParameter("departmentMaster");
         String desId = request.getParameter("designationMaster");
+        String active = request.getParameter("active");
+        String inactive = request.getParameter("inactive");
+        if (null == inactive) {
+            inactive = "";
+        }
+        if (null == active) {
+            active = "";
+        }
         HttpSession session = request.getSession();
         if (!"".equals(empId)) {
             employeeMaster.setId(Integer.parseInt(empId));
@@ -2520,7 +2528,17 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         if (!"".equals(desId)) {
             employeeMaster.setChild2(desId);
         }
-        List<?> empList = employeeMasterService.readEmployeeForLeaveBalance(employeeMaster);
+        List<?> empList =  new ArrayList<>();
+          if (active.equals("on") && inactive.equals("on")) {
+            empList =employeeMasterService.readEmployeeForLeaveBalance(employeeMaster);
+        } else if (active.equals("on") && inactive.equals("")) {
+            empList = employeeMasterService.readEmployeeForLeaveBalanceForActiveUser(employeeMaster);
+        } else if (active.equals("") && inactive.equals("on")) {
+            empList = employeeMasterService.readEmployeeForLeaveBalanceForInActiveUser(employeeMaster);
+        }
+        
+        
+        
         Iterator itr = empList.iterator();
         while (itr.hasNext()) {
             LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();

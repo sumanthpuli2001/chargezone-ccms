@@ -102,6 +102,17 @@
                                                         </form:select>
                                                         <form:errors path="designationMaster" cssClass="errorDiv"></form:errors>
                                                     </div>
+                                                    <div class="col-sm-6">
+                                                        
+                                                        <div class="col-sm-3" style="margin-top: 30px;">
+                                                            <input type="checkbox" name="active" checked="true">
+                                                            <label>Active</label>
+                                                        </div>
+                                                        <div class="col-sm-3" style="margin-top: 30px;">
+                                                            <input type="checkbox" name="inactive">
+                                                            <label>Inactive</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                             </div><!-- /.col -->

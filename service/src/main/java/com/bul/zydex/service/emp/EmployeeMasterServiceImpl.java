@@ -296,5 +296,13 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> readEmployeeForLeaveBalance(T object) {
         return employeeMasterDAO.readEmployeeForLeaveBalance(object);
     }
+    @Override
+    public List<?> readEmployeeForLeaveBalanceForActiveUser(T object) {
+        return employeeMasterDAO.readEmployeeForLeaveBalanceForActiveUser(object);
+    }
+    @Override
+    public List<?> readEmployeeForLeaveBalanceForInActiveUser(T object) {
+        return employeeMasterDAO.readEmployeeForLeaveBalanceForInActiveUser(object);
+    }
 
 }

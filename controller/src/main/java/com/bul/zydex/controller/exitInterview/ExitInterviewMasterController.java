@@ -700,4 +700,47 @@ public class ExitInterviewMasterController extends ExitInterviewMasterAbstract {
         mv.setViewName("forward:userMaster.htm?act=userDashboardShow");
         return mv;
     }
+    
+    public ModelAndView printClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        ExitInterviewMaster exitInterviewMaster;
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        int empid = Integer.parseInt(request.getParameter("empId"));
+        DesignationMaster designationMaster;
+        LevelMaster levelMaster;
+        DepartmentMaster departmentMaster;
+        employeeMaster = employeeMasterService.readById(empid);
+//         HttpSession session = request.getSession();
+//        EmployeeMaster employeeMaster1 = (EmployeeMaster) session.getAttribute("employeeInfo");
+        String manager = employeeMaster.getReportingManagerLevel1();
+        List<?> list = employeeMasterService.readManagerLevel1(employeeMaster);
+//        if (!list.isEmpty()) {
+        request.setAttribute("reportingLevel1", list.get(0));
+//        }
+        int levelId = employeeMaster.getLevelMaster().getId();
+        int deptId = employeeMaster.getDepartmentMaster().getId();
+        int desigId = employeeMaster.getDesignationMaster().getId();
+        levelMaster = levelMasterService.readById(levelId);
+        designationMaster = designationMasterService.readById(desigId);
+        departmentMaster = departmentMasterService.readById(deptId);
+        employeeMaster.setLevelMaster(levelMaster);
+        employeeMaster.setDepartmentMaster(departmentMaster);
+        employeeMaster.setDesignationMaster(designationMaster);
+        int locationId = employeeMaster.getLocationMaster().getId();
+        LocationMaster locationmaster = new LocationMaster();
+        locationmaster = locationMasterService.readById(locationId);
+        employeeMaster.setLocationMaster(locationmaster);
+        int id = Integer.parseInt(request.getParameter("id"));
+        setStatus(request);
+        setStatus1(request);
+        setStatus2(request);
+        exitInterviewMaster = exitInterviewMasterService.readById(id);
+
+        request.setAttribute("id", id);
+        request.setAttribute("employeeMaster", employeeMaster);
+        mv.getModelMap().put("exitInterviewMaster", exitInterviewMaster);
+        request.setAttribute("empid", empid);
+        mv.setViewName("ExitInterview/ExitInterviewPrint");
+        return mv;
+    }
 }

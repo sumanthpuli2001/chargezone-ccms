@@ -77,26 +77,26 @@
         }
         ;
     </script>
-     <script>
-            function saveSubmit11() {
-                var flag3 = true;
-                  if (document.getElementById("relievingDate").value == '') {
-                    document.getElementById("RelieveDateError").innerHTML = "- It must be Selected";
-                    alert('Please Select Relieving Date and Time');
-                    flag3 = false;
-                } else {
-                    document.getElementById("RelieveDateError").innerHTML = "";
+    <script>
+        function saveSubmit11() {
+            var flag3 = true;
+            if (document.getElementById("relievingDate").value == '') {
+                document.getElementById("RelieveDateError").innerHTML = "- It must be Selected";
+                alert('Please Select Relieving Date and Time');
+                flag3 = false;
+            } else {
+                document.getElementById("RelieveDateError").innerHTML = "";
 
-                }
-                if (flag3) {
-                    flag3 = false;
-                    document.getElementById('saveSubmit1').innerHTML = 'Processing ... .. .';
-                    document.form1.submit();
-                    return true;
-                } else {
-                    return false;
-                }
             }
+            if (flag3) {
+                flag3 = false;
+                document.getElementById('saveSubmit1').innerHTML = 'Processing ... .. .';
+                document.form1.submit();
+                return true;
+            } else {
+                return false;
+            }
+        }
     </script>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -107,6 +107,12 @@
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Resignation</li>
             </ol>
+            <div class="col-md-12" style="text-align: center;">
+                <!--<input type="button" value="Print" id="printBtn" name="printBtn" style="margin-left: 959px; width: 100px;" class="btn btn-primary" onclick="appraisalSelectedPrint()">-->
+                <a href="resignationMaster.htm?act=printClick&id=${id}&empId=${empid}" target="_blank"  class="btn btn-primary">Print</a>
+                <input type="hidden" id="empId" name="empId" value="${empid}">
+                <input type="hidden" id="id" name="id" value="${id}">
+            </div>
         </section>
 
         <c:if test="${!empty successMessage}">
@@ -127,7 +133,7 @@
                                        name='form1'  class="form-horizontal" role="form">
                                 <input type="hidden" name="id" value="${resignationMaster.id}"/>
                                 <!--Read only entries Starts here-->    
-                                  <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
+                                <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
                                         <h3 class="box-title">Employee Detail:</h3>
@@ -210,7 +216,7 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label">Resignation Effective Date & Time:</label>
                                                     <div class=" col-sm-7">
-                                                        <div class="input-group date"   data-date-format="dd/mm/yyyy - hh:ii " data-link-field="dtp_input1">
+                                                        <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy - hh:ii " data-link-field="dtp_input1">
                                                             <form:input class="form-control" path="effectiveDatetime"  readonly='true'></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
@@ -226,30 +232,30 @@
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                             </div>
-                                                                 <span id="RelieveDateError" style="color: red;"></span>
+                                                            <span id="RelieveDateError" style="color: red;"></span>
                                                         </div>
-                                                                <!--<div style="color: red">
-                                                            <%--<form:errors path="relievingDate" cssClass="errorDiv"></form:errors>--%>
-                                                                </div>-->
-                                                    </div>
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
-                                    <!--Resignation Information completes Here-->
-                                    <div class="box box-info collapsed-box">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Reason Of Resignation:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
-                                            </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label class="col-md-2">Reason:</label>
-                                                        <div class="col-sm-12">
+                                                        <!--<div style="color: red">
+                                                    <%--<form:errors path="relievingDate" cssClass="errorDiv"></form:errors>--%>
+                                                        </div>-->
+                                                </div>
+                                            </div><!-- /.col -->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                </div>
+                                <!--Resignation Information completes Here-->
+                                <div class="box box-info collapsed-box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Reason Of Resignation:</h3>
+                                        <div class="box-tools pull-right">
+                                            <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
+                                        </div>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="col-md-2">Reason:</label>
+                                                    <div class="col-sm-12">
                                                         <c:choose>
                                                             <c:when test="${sessionScope.userRight.hr}">
                                                                 <form:textarea path="reason" class="form-control" rows="6" readonly="true"></form:textarea>
@@ -286,19 +292,19 @@
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div>
-                                <div class="box box-info collapsed-box">
-                                    <div class="box-header">
-                                        <h3 class="box-title">HR Comment:</h3>
-                                        <div class="box-tools pull-right">
-                                            <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
-                                        </div>
-                                    </div><!-- /.box-header -->
-                                    <div class="box-body no-padding">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="col-md-2">Comment:</label>
-                                                    <div class="col-sm-12">
+                                    <div class="box box-info collapsed-box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">HR Comment:</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-2">Comment:</label>
+                                                        <div class="col-sm-12">
                                                         <form:textarea path="hrComment" class="form-control" rows="6" ></form:textarea>  
 
                                                         </div>
@@ -310,28 +316,28 @@
                                     <!--Reason In Detail completes Here-->
                                     <div class="form-group">
                                         <!--<div class="col-sm-offset-1 col-sm-5">-->
-                                        <c:if test="${resignationMaster.status eq 4}">     
-                                           <div class="col-sm-12" style="text-align: center">
-                                               <button type="submit" class="btn btn-success" style="width: 100px;" onclick='return saveSubmit11();' name="btnType" value="APPROVE">ACCEPT</button>
-                                            </div>
-                                        </c:if>
-                                        <c:if test="${resignationMaster.status eq 2}">     
-                                           <div class="col-sm-6" style="text-align: left">
-                                               <button type="submit" class="btn btn-success" style="width: 100px;" onclick='return saveSubmit11();' name="btnType" value="APPROVE">ACCEPT</button>
-                                            </div>
-                                           <div class="col-sm-6" style="text-align: right">
+                                    <c:if test="${resignationMaster.status eq 4}">     
+                                        <div class="col-sm-12" style="text-align: center">
+                                            <button type="submit" class="btn btn-success" style="width: 100px;" onclick='return saveSubmit11();' name="btnType" value="APPROVE">ACCEPT</button>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${resignationMaster.status eq 2}">     
+                                        <div class="col-sm-6" style="text-align: left">
+                                            <button type="submit" class="btn btn-success" style="width: 100px;" onclick='return saveSubmit11();' name="btnType" value="APPROVE">ACCEPT</button>
+                                        </div>
+                                        <div class="col-sm-6" style="text-align: right">
                                             <button type="submit" class="btn btn-warning" style="width: 100px;" name="btnType" value="RETURN">RETURN</button>
-                                                </div>
-                                        </c:if>
-                                        <c:if test="${resignationMaster.status eq 7 || resignationMaster.status eq 10}">        
-                                            <!--<input type="submit" class="btn btn-primary" style="width: 100px;" name="btnType" value="WITHDRAWAPPROVE"/>-->
-                                            <div class="col-sm-6" style="text-align: left">
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${resignationMaster.status eq 7 || resignationMaster.status eq 10}">        
+                                        <!--<input type="submit" class="btn btn-primary" style="width: 100px;" name="btnType" value="WITHDRAWAPPROVE"/>-->
+                                        <div class="col-sm-6" style="text-align: left">
                                             <button type="submit" class="btn btn-success" style="width: 100px;" name="btnType" value="WITHDRAWAPPROVE">APPROVE</button>
-                                            </div>
-                                            <div class="col-sm-6" style="text-align: right">
+                                        </div>
+                                        <div class="col-sm-6" style="text-align: right">
                                             <button type="submit" class="btn btn-danger" style="width: 100px;"  onclick='return saveSubmit11();'  name="btnType" value="WITHDRAWREJECT">REJECT</button>
-                                       </div>
-                                            </c:if>
+                                        </div>
+                                    </c:if>
                                     <!--</div>-->
                                 </div>
                             </form:form>

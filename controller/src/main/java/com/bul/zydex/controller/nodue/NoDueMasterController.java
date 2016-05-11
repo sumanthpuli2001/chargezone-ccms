@@ -158,6 +158,8 @@ public class NoDueMasterController extends NoDueMasterAbstract {
 
         request.setAttribute("employeeMaster", employeeMaster);
         mv.getModelMap().put("noDueMaster", noDueMaster);
+        request.setAttribute("id", tabId);
+        request.setAttribute("empId", empId);
         mv.setViewName("NoDues/NoDuesFormApprovalCreate");
         return mv;
     }
@@ -546,5 +548,21 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         mv.setViewName("forward:exitInterviewMaster.htm?act=userDashboard");
         return mv;
 
+    }
+
+    public ModelAndView printClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        NoDueMaster noDueMaster = new NoDueMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        int tabId = Integer.parseInt(request.getParameter("id"));
+        int empId = Integer.parseInt(request.getParameter("empId"));
+        employeeMaster = employeeMasterService.readById(empId);
+        noDueMaster = noDueMasterService.readById(tabId);
+        setStatus(request);
+
+        request.setAttribute("employeeMaster", employeeMaster);
+        mv.getModelMap().put("noDueMaster", noDueMaster);
+        mv.setViewName("NoDues/NoDuePrint");
+        return mv;
     }
 }

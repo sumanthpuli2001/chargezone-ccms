@@ -97,7 +97,7 @@
                     <!-- Custom Tabs -->
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
-                              <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
+                            <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
                             <!--form horizontal starts here-->
                             <form:form action="resignationMaster.htm?act=submitResignation" method="post" commandName="resignationMaster" name='form1' class="form-horizontal" role="form" >
 
@@ -186,13 +186,9 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label">Resignation Effective Date & Time:<span style="color: red;font-size: 14px;">*</span></label>
                                                     <div class=" col-sm-7">
-                                                        <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy - hh:ii " data-link-field="dtp_input1">
-                                                            <form:input class="form-control" path="effectiveDatetime"  readonly='true'></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                            </div>
-                                                            <div style="color: red"><form:errors path="effectiveDatetime" cssClass="errorDiv"></form:errors></div>
+                                                        <form:input class="form-control" path="effectiveDatetime" value="${currentDate}"  readonly='true'></form:input>
                                                         </div>
+                                                        <div style="color: red"><form:errors path="effectiveDatetime" cssClass="errorDiv"></form:errors></div>
                                                     </div>
                                                 </div><!-- /.col -->
                                             </div><!-- /.row -->
@@ -226,7 +222,7 @@
                                             <button type="submit" class="btn btn-primary" style="width: 100px;">SUBMIT</button>
                                         </div>
                                         <!--<div class="col-sm-5">-->
-                                            <!--<input type="button" class="btn btn-primary" style="width: 100px; float: right;" value="BACK" onclick="window.history.back();" />-->
+                                        <!--<input type="button" class="btn btn-primary" style="width: 100px; float: right;" value="BACK" onclick="window.history.back();" />-->
                                         <!--</div>-->
                                     </div>
                             </form:form>

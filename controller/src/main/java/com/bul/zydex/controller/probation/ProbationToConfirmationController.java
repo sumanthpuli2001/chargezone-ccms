@@ -695,6 +695,8 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         }
         ptc = probationToConfirmationService.readById(Integer.parseInt(id));
         mv.getModelMap().put("ptc", ptc);
+        request.setAttribute("id", id);
+        request.setAttribute("empId", Empid);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Probation/ProbationHrView");
         return mv;
@@ -1424,6 +1426,32 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 }
             }
         }
+    }
+
+    public ModelAndView printClick(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        ProbationToConfirmation ptc = new ProbationToConfirmation();
+        String id = request.getParameter("id");
+        String Empid = request.getParameter("empId");
+        request.setAttribute("id", id);
+        request.setAttribute("empId", Empid);
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        employeeMaster = employeeMasterService.readById(Integer.parseInt(Empid));
+        employeeMaster.setDepartmentMaster(departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId()));
+        employeeMaster.setDesignationMaster(designationMasterService.readById(employeeMaster.getDesignationMaster().getId()));
+        employeeMaster.setLevelMaster(levelMasterService.readById(employeeMaster.getLevelMaster().getId()));
+        employeeMaster.setLocationMaster(locationMasterService.readById(employeeMaster.getLocationMaster().getId()));
+        employeeMaster.getReportingManagerLevel1();
+        List<?> list = employeeMasterService.readManagerLevel1(employeeMaster);
+        if (!list.isEmpty()) {
+            request.setAttribute("reportingLevel1", list.get(0));
+        }
+        ptc = probationToConfirmationService.readById(Integer.parseInt(id));
+        mv.getModelMap().put("ptc", ptc);
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.setViewName("Probation/ProbationPrictView");
+        return mv;
     }
 
 }

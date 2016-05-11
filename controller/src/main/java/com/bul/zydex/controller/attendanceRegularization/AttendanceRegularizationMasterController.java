@@ -873,6 +873,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     newList.add("AR/P");
                 } else if (firstHalf.equals("AB")) {
                     newList.add("AB");
+                } else if (firstHalf.equals("Casual Leave") || firstHalf.equals("Privilege Leave") || firstHalf.equals("Sick Leave")
+                        || firstHalf.equals("Paternity Leave") || firstHalf.equals("Maternity Leave") || firstHalf.equals("Leave Without Pay") || firstHalf.contains("TR")) {
+                    newList.add("-");
                 }
             }
 
@@ -1087,6 +1090,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     secondHalfList.add("AR/P");
                 } else if (secondHalf.equals("AB")) {
                     secondHalfList.add("AB");
+                } else if (secondHalf.equals("Casual Leave") || secondHalf.equals("Privilege Leave") || secondHalf.equals("Sick Leave")
+                        || secondHalf.equals("Paternity Leave") || secondHalf.equals("Maternity Leave") || secondHalf.equals("Leave Without Pay") || secondHalf.contains("TR")) {
+                    secondHalfList.add("-");
                 }
             }
 
@@ -1104,7 +1110,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 long totalTime = 0;
                 long shiftdiffMinutes = 0;
                 boolean checkLunchTime = false;
-                if (listPunch.size() > 0 && !secondHalf.equals("WO")) {
+                if (listPunch.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
                     if (listPunch.size() > 2) {
                         Object[] startLunchTime = (Object[]) listPunch.get(1);
                         Object[] endLunchTime = (Object[]) listPunch.get(2);
@@ -1162,6 +1168,11 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         int minutes = (int) (empHour * 60) % 60;
                         String hour = "" + hours;
                         String minute = "" + minutes;
+                        if (minutes < 10 && minutes > 0) {
+                            minute = "0" + minute;
+                        }else if (minutes < 0) {
+                            minute = "00";
+                        }
                         String workingHours = hour + ":" + minute;
                         workingHour.add(workingHours);
 
@@ -1171,8 +1182,12 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         int minutes = (int) (empHour * 60) % 60;
                         String hour = "" + hours;
                         String minute = "" + minutes;
+                        if (minutes < 10 && minutes > 0) {
+                            minute = "0" + minute;
+                        } else if (minutes < 0) {
+                            minute = "00";
+                        }
                         String workingHours = hour + ":" + minute;
-
                         workingHour.add(workingHours);
                     }
 

@@ -9,7 +9,7 @@
 <html>
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
-<script>
+    <script>
         function buttonFun1() {
             var className = $('#minusId1').attr('class');
             if (className == 'fa fa-plus') {
@@ -62,6 +62,12 @@
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">No Due Form</li>
             </ol>
+            <div class="col-md-12" style="text-align: center;">
+                <!--<input type="button" value="Print" id="printBtn" name="printBtn" style="margin-left: 959px; width: 100px;" class="btn btn-primary" onclick="appraisalSelectedPrint()">-->
+                <a href="noDueMaster.htm?act=printClick&id=${id}&empId=${empId}" target="_blank"  class="btn btn-primary">Print</a>
+                <input type="hidden" id="empId" name="empId" value="${empId}">
+                <input type="hidden" id="id" name="id" value="${id}">
+            </div>
         </section>
         <!-- Main content -->
         <section class="content">
@@ -77,7 +83,7 @@
                                     <div class="box-header">
                                         <h3 class="box-title">Employee Detail:</h3>
                                         <div class="box-tools pull-right">
-                                           <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun1();"><i class="fa fa-plus" id="minusId1" ></i></button>
+                                            <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun1();"><i class="fa fa-plus" id="minusId1" ></i></button>
                                         </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
@@ -129,13 +135,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                               <form:input path="equipments" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="equipments" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="equipmentsRemarks" class="form-control" rows="2" readonly="true"/>                                               </div>
                                                     </div>
                                                 </td>
@@ -146,13 +152,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                              <form:input path="specialTool" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="specialTool" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="specialToolRemark" class="form-control" rows="2" readonly="true"/>                                                   </div>
                                                     </div>
                                                 </td>
@@ -163,13 +169,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                                <form:input path="computerFiles" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="computerFiles" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="computerFilesRemark" class="form-control" rows="2" readonly="true"/>                                                   </div>
                                                     </div>
                                                 </td>
@@ -180,13 +186,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                             <form:input path="advanceAmount" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="advanceAmount" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="advanceAmountRemark" class="form-control" rows="2" readonly="true"/>                                                   </div>
                                                     </div>
                                                 </td>
@@ -200,13 +206,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                             <form:input path="deptOther" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="deptOther" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="deptOtherRemark" class="form-control" rows="2" readonly="true"/>                                                   </div>
                                                     </div>
                                                 </td>
@@ -245,12 +251,12 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
                                                             <form:input path="carProvided" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="carProvidedRemark" class="form-control" rows="2" readonly="true"/>                                                  </div>
                                                     </div>
                                                 </td>
@@ -260,13 +266,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                              <form:input path="stationaryItem" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="stationaryItem" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="stationaryItemRemark" class="form-control" rows="2" readonly="true"/>                                                   </div>
                                                     </div>
                                                 </td>
@@ -277,13 +283,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                             <form:input path="residance" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="residance" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="residanceRemark" class="form-control" rows="2" readonly="true"/>                                                   </div>
                                                     </div>
                                                 </td>
@@ -294,13 +300,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                              <form:input path="identityCard" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="identityCard" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="identityCardRemark" class="form-control" rows="2" readonly="true"/>                                                    </div>
                                                     </div>
                                                 </td>
@@ -311,13 +317,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                              <form:input path="library" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="library" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="libraryRemark" class="form-control" rows="2" readonly="true"/>                                                    </div>
                                                     </div>
                                                 </td>
@@ -328,13 +334,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                              <form:input path="cafeteria" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="cafeteria" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="cafeteriaRemark" class="form-control" rows="2" readonly="true"/>                                                    </div>
                                                     </div>
                                                 </td>
@@ -345,13 +351,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                              <form:input path="exitInterview" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="exitInterview" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="exitInterviewReamrk" class="form-control" rows="2" readonly="true"/>                                                    </div>
                                                     </div>
                                                 </td>
@@ -365,13 +371,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                             <form:input path="hrOther" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="hrOther" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="hrOtherRemark" class="form-control" rows="2" readonly="true"/>                                                    </div>
                                                     </div>
                                                 </td>
@@ -387,7 +393,7 @@
                                     <div class="box-header">
                                         <h3 class="box-title">I.T Department:</h3>
                                         <div class="box-tools pull-right">
-                                             <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
+                                            <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
                                         </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
@@ -404,12 +410,12 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
                                                             <form:input path="companyMobile" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="companyMobileRemark" class="form-control" rows="2" readonly="true"/>                                                    </div>
                                                     </div>
                                                 </td>
@@ -419,13 +425,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                             <form:input path="computerChecked" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="computerChecked" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="computerCheckedRemark" class="form-control" rows="2" readonly="true"/>                                                    </div>
                                                     </div>
                                                 </td>
@@ -436,13 +442,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                              <form:input path="email" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="email" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="emailRemark" class="form-control" rows="2" readonly="true"/>                                                   </div>
                                                     </div>
                                                 </td>
@@ -453,13 +459,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                             <form:input path="computerTransfered" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="computerTransfered" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="computerTransferedRemark" class="form-control" rows="2" readonly="true"/>                                                  </div>
                                                     </div>
                                                 </td>
@@ -474,12 +480,12 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
                                                             <form:input path="itOther" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="itOtherRemark" class="form-control" rows="2" readonly="true"/>                                                    </div>
                                                     </div>
                                                 </td>
@@ -496,7 +502,7 @@
                                     <div class="box-header">
                                         <h3 class="box-title">Finance Department:</h3>
                                         <div class="box-tools pull-right">
-                                             <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
+                                            <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
                                         </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
@@ -517,13 +523,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                             <form:input path="advanceCleared" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="advanceCleared" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="advanceClearedRemark" class="form-control" rows="2" readonly="true"/>                                                    </div>
                                                     </div>
                                                 </td>
@@ -534,13 +540,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                             <form:input path="pendingBills" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="pendingBills" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="pendingBillsRemark" class="form-control" rows="2" readonly="true"/>                                                   </div>
                                                     </div>
                                                 </td>
@@ -552,13 +558,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                             <form:input path="salaryAdvanceOrLoan" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="salaryAdvanceOrLoan" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="salaryAdvanceOrLoanRemark" class="form-control" rows="2" readonly="true"/>                                                   </div>
                                                     </div>
                                                 </td>
@@ -572,13 +578,13 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                              <form:input path="financeOther" class="form-control" value="" readonly="true" ></form:input>
+                                                            <form:input path="financeOther" class="form-control" value="" readonly="true" ></form:input>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
                                                             <form:textarea path="financeOtherRemark" class="form-control" rows="2" readonly="true"/>                                                    </div>
                                                     </div>
                                                 </td>
@@ -593,27 +599,27 @@
 
                                 <div class="form-group">
                                     <!--<div class="col-lg-12 col-sm-offset-2" style="">-->
-                                        <!--<input type="button" class="btn btn-primary" value="Back" onclick="window.history.back();" />-->
-                                        <%--<c:if test="${noDueMaster.status eq 0 || noDueMaster.status eq 3}">--%>
-                                        <!--<input type="submit" class="btn btn-primary" name="btnType" value="Approve"  />-->
-                                        <!--<div class="col-sm-6" style="text-align: left">-->
-                                        <!--<button type="submit" class="btn btn-success" style="width: 100px;" name="btnType" value="Approve" >APPROVE</button>-->
-                                       <!--</div>-->
-                                        <!--<div class="col-sm-6" style="text-align: right">-->
-                                        <!--<button type="submit" class="btn btn-warning" style="width: 100px;" name="btnType" value="Return" >RETURN</button>-->
-                                        <!--</div>-->
-                                        <!--<input type="submit" class="btn btn-primary" name="btnType" value="Return"  />-->
-                                        <%--</c:if>--%>
-                                        <%--<c:if test="${noDueMaster.status eq 4 || noDueMaster.status eq 7}">--%>
-<!--                                             <div class="col-sm-6" style="text-align: left">
-                                        <button type="submit" class="btn btn-success" style="width: 100px;" name="btnType" value="WithdrawApprove" >APPROVE</button>
-                                       </div>
-                                        <div class="col-sm-6" style="text-align: right">
-                                        <button type="submit" class="btn btn-warning" style="width: 100px;" name="btnType" value="WithdrawReturn" >RETURN</button>
-                                        </div>-->
-                                        <!--<input type="submit" class="btn btn-primary" name="btnType" value="WithdrawApprove"  />-->
-                                        <!--<input type="submit" class="btn btn-primary" name="btnType" value="WithdrawReturn"  />-->
-                                        <%--</c:if>--%>
+                                    <!--<input type="button" class="btn btn-primary" value="Back" onclick="window.history.back();" />-->
+                                    <%--<c:if test="${noDueMaster.status eq 0 || noDueMaster.status eq 3}">--%>
+                                    <!--<input type="submit" class="btn btn-primary" name="btnType" value="Approve"  />-->
+                                    <!--<div class="col-sm-6" style="text-align: left">-->
+                                    <!--<button type="submit" class="btn btn-success" style="width: 100px;" name="btnType" value="Approve" >APPROVE</button>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-sm-6" style="text-align: right">-->
+                                    <!--<button type="submit" class="btn btn-warning" style="width: 100px;" name="btnType" value="Return" >RETURN</button>-->
+                                    <!--</div>-->
+                                    <!--<input type="submit" class="btn btn-primary" name="btnType" value="Return"  />-->
+                                    <%--</c:if>--%>
+                                    <%--<c:if test="${noDueMaster.status eq 4 || noDueMaster.status eq 7}">--%>
+                                    <!--                                             <div class="col-sm-6" style="text-align: left">
+                                                                            <button type="submit" class="btn btn-success" style="width: 100px;" name="btnType" value="WithdrawApprove" >APPROVE</button>
+                                                                           </div>
+                                                                            <div class="col-sm-6" style="text-align: right">
+                                                                            <button type="submit" class="btn btn-warning" style="width: 100px;" name="btnType" value="WithdrawReturn" >RETURN</button>
+                                                                            </div>-->
+                                    <!--<input type="submit" class="btn btn-primary" name="btnType" value="WithdrawApprove"  />-->
+                                    <!--<input type="submit" class="btn btn-primary" name="btnType" value="WithdrawReturn"  />-->
+                                    <%--</c:if>--%>
                                     <!--</div>-->
                                 </div>
                             </form:form>

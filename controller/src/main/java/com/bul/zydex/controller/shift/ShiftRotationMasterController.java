@@ -2391,7 +2391,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     long totalTime = 0;
                                     long shiftdiffMinutes = 0;
                                     boolean checkLunchTime = false;
-                                    if (listPunch.size() > 0) {
+                                    if (listPunch.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
                                         if (listPunch.size() > 2) {
                                             Object[] startLunchTime = (Object[]) listPunch.get(1);
                                             Object[] endLunchTime = (Object[]) listPunch.get(2);
@@ -2445,11 +2445,31 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         if (lunchTime > 0) {
                                             totalTime = totalDayTime - lunchTime;
                                             double empHour = (double) totalTime / 60;
-                                            cell10.setCellValue("" + new DecimalFormat("##.##").format(empHour));
+                                            int hours = (int) empHour;
+                                            int minutes = (int) (empHour * 60) % 60;
+                                            String hour = "" + hours;
+                                            String minute = "" + minutes;
+                                            if (minutes < 10 && minutes > 0) {
+                                                minute = "0" + minute;
+                                            } else if (minutes < 0) {
+                                                minute = "00";
+                                            }
+                                            String workingHours = hour + ":" + minute;
+                                            cell10.setCellValue(workingHours);
 
                                         } else {
                                             double empHour = (double) totalDayTime / 60;
-                                            cell10.setCellValue("" + new DecimalFormat("##.##").format(empHour));
+                                            int hours = (int) empHour;
+                                            int minutes = (int) (empHour * 60) % 60;
+                                            String hour = "" + hours;
+                                            String minute = "" + minutes;
+                                            if (minutes < 10 && minutes > 0) {
+                                                minute = "0" + minute;
+                                            } else if (minutes < 0) {
+                                                minute = "00";
+                                            }
+                                            String workingHours = hour + ":" + minute;
+                                            cell10.setCellValue(workingHours);
                                         }
 
                                     } else {

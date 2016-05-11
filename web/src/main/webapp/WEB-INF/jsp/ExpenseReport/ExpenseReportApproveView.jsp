@@ -624,7 +624,7 @@
     </script>
     <script>
         var tempCount3Second = 1;
-        $(function () {
+        $(function () { 
             $("#addButtonFoodCategoryId").on("click", function () {
 //                alert(i1);
                 tempCount3Second = document.getElementById('countSecond').value;

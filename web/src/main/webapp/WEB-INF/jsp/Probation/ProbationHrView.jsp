@@ -101,6 +101,19 @@
             }
         </script>
     </head>
+    <script>
+        function appraisalSelectedPrint() {
+            alert("aaa");
+            var id = document.getElementById("id").value;
+            var empId = document.getElementById("empId").value;
+            var path = 'probationToConfirmation.htm?act=printClick&id= ' + id + '&empId= ' + empId;
+
+            //             window.print(path, 'popUpWindow', 'height=700,width=900,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+            popupWindow = window.open(path, 'popUpWindow', 'height=700,width=900,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes,type=text/css')
+
+        }
+
+    </script>
     <body>
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -110,6 +123,11 @@
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li class="active">Probation To Confirmation</li>
                 </ol>
+                <div class="col-md-12" style="text-align: center;">
+                    <!--<input type="button" value="Print" id="printBtn" name="printBtn" style="margin-left: 959px; width: 100px;" class="btn btn-primary" onclick="appraisalSelectedPrint()">-->
+                    <a href="probationToConfirmation.htm?act=printClick&id=${id}&empId=${empId}" target="_blank"  class="btn btn-primary">Print</a>
+                    <input type="hidden" id="empId" name="empId" value="${empId}">
+                </div>
             </section>
             <c:if test="${!empty successMessage}">
                 <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>

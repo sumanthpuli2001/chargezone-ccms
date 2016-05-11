@@ -1456,4 +1456,56 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return list;
     }
 
+    @Override
+    public List<?> readEmployeeForLeaveBalanceForActiveUser(T object) {
+        EmployeeMaster employeeMaster = (EmployeeMaster) object;
+        String query = "";
+        String condition = " and 1=1";
+        if (!"".equals(employeeMaster.getId()) && null != employeeMaster.getId()) {
+            condition += " AND a.id = " + employeeMaster.getId();
+        }
+        if (!"".equals(employeeMaster.getChild1()) && null != employeeMaster.getChild1()) {
+            condition += " AND b.id = " + employeeMaster.getChild1();
+        }
+        if (!"".equals(employeeMaster.getChild2()) && null != employeeMaster.getChild2()) {
+            condition += " AND c.id = " + employeeMaster.getChild2();
+        }
+        query += " Select a.id, a.employeeId, a.employeeName"
+                + " FROM EmployeeMaster a "
+                + " LEFT JOIN a.departmentMaster b "
+                + " LEFT JOIN a.designationMaster c "
+                + " Where ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) "
+                + condition;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public List<?> readEmployeeForLeaveBalanceForInActiveUser(T object) {
+        EmployeeMaster employeeMaster = (EmployeeMaster) object;
+        String query = "";
+        String condition = " and 1=1";
+        if (!"".equals(employeeMaster.getId()) && null != employeeMaster.getId()) {
+            condition += " AND a.id = " + employeeMaster.getId();
+        }
+        if (!"".equals(employeeMaster.getChild1()) && null != employeeMaster.getChild1()) {
+            condition += " AND b.id = " + employeeMaster.getChild1();
+        }
+        if (!"".equals(employeeMaster.getChild2()) && null != employeeMaster.getChild2()) {
+            condition += " AND c.id = " + employeeMaster.getChild2();
+        }
+        query += " Select a.id, a.employeeId, a.employeeName"
+                + " FROM EmployeeMaster a "
+                + " LEFT JOIN a.departmentMaster b "
+                + " LEFT JOIN a.designationMaster c "
+                + " where (a.dateOfLeaving is not null and a.dateOfLeaving != '') "
+                + " and  STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') < now()"
+                + condition;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

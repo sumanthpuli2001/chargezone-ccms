@@ -20,7 +20,6 @@
 
         function dropDown() {
             var selectedValue = document.getElementById("expenseType").value;
-            //            alert(selectedValue);
             if (selectedValue === "Travel") {
                 $('#applicationDivId').show();
                 $('#travel1').show();
@@ -37,6 +36,10 @@
                 $('#demo7').hide();
                 $('#travelAppDateDiv_id').show();
                 $('#localTravelId').hide();
+                   var countSecond = document.getElementById("countSecond").value; 
+                 for (var i = 1; i <= countSecond; i++) {
+                    travelOtherBox(i);
+                }
 
             }
             else if (selectedValue === "Others") {
@@ -611,6 +614,7 @@
             }
         }
         function travelOtherBox(id) {
+       
             var selectedVal = document.getElementById("RentAndFoodDiv" + id).value;
             if (selectedVal == "Other") {
                 $('#travelotherOptionId' + id).show();
@@ -632,7 +636,7 @@
 //                alert(tempCount3Second);
                 var clone = "<tr id='countSecondFile" + tempCount3Second + "' style='clear:both;'>"
                         + "<td style=\"text-align: center\">" + tempCount3Second + "</td>"
-                        + "<td><input class='form-control' size='16' type='text' id='travelotherExpenseDate" + tempCount3Second + "' name='travelotherExpenseDate" + tempCount3Second + "' value=''>"
+                        + "<td><input class='form-control' size='16' type='text' id='travelotherExpenseDate" + tempCount3Second + "' name='travelotherExpenseDate" + tempCount3Second + "' value='' onclick='travelOtherExpenseDatePic("+tempCount3Second+");'>"
                         + "<span id='travelotherExpenseDateError" + tempCount3Second + "' style='color: red;'></span>"
                         + "</td>"
                         + "<td><div><select id=\"RentAndFoodDiv" + tempCount3Second + "\" name='RentAndFoodDiv" + tempCount3Second + "' class=\"form-control\" onchange=travelOtherBox(" + tempCount3Second + ");>"
@@ -664,6 +668,7 @@
                 $("#demo2").append(clone);
                 document.getElementById('countSecond').value = tempCount3Second;
                 optionsAdd1_2(tempCount3Second);
+                   $("#travelotherExpenseDate" + tempCount3).datepicker({dateFormat: 'dd/mm/yy'});
                 var expenseType = document.getElementById('expenseType').value;
 
                 if (expenseType === "Travel") {
@@ -1822,8 +1827,8 @@
                                                                                         <input class="form-control" size="16" type="text" id="travelotherExpenseDate${countVal.count}" name="travelotherExpenseDate${countVal.count}" value="${otherList.otherExpenseDate}" onclick="travelOtherExpenseDatePic('${countVal.count}');">
                                                                                         <span id="travelotherExpenseDateError${countVal.count}" style="color: red;"></span>
                                                                                     </td>
-                                                                                    <td><div>
-                                                                                            <select id="RentAndFoodDiv" name='RentAndFoodDiv${countVal.count}' class="form-control" onchange="travelOtherBox('${countVal.count}');"  <c:if test="${otherList.status==1}">disabled="true"</c:if>>
+                                                                                    <td><div> 
+                                                                                            <select id="RentAndFoodDiv${countVal.count}" name='RentAndFoodDiv${countVal.count}' class="form-control" onchange="travelOtherBox('${countVal.count}');"  <c:if test="${otherList.status==1}">disabled="true"</c:if>>
                                                                                                     <option value="">--SELECT--</option>
                                                                                                 <c:choose>
                                                                                                     <c:when test="${otherList.otherExpense == 'RoomRent'}">
@@ -1891,7 +1896,7 @@
                                                                                                 </c:choose>
                                                                                             </select>
                                                                                         </div></td>
-                                                                                    <td><input type="text" name="purpose${countVal.count}" class="form-control" id="travelotherOptionId${countVal.count}" style="display: none" placeholder="(Please Specify In case of Other)"></td>
+                                                                                    <td><input type="text" name="purpose${countVal.count}" class="form-control" id="travelotherOptionId${countVal.count}" value="${otherList.expenseOtherSpecify}" style="display: none" placeholder="(Please Specify In case of Other)"></td>
                                                                                     <td><input type="text" name="otherAmount${countVal.count}" id="otherAmount${countVal.count}" class="form-control" value="${otherList.amount}" <c:if test="${otherList.status==1}">readonly="true"</c:if> onchange="calculateAmount();"></td>
                                                                                         <td><div>
                                                                                                 <select id="currencyRelocationDivId${countVal.count}" name="currencyRelocationDiv${countVal.count}" class="form-control" onchange="changeAmount1(this.value);"  <c:if test="${otherList.status==1}">disabled="true"</c:if>>
@@ -2250,7 +2255,7 @@
                                                                                                 </c:choose>
                                                                                             </select>
                                                                                         </div></td>
-                                                                                    <td><input type="text" name="purposeRelo${countVal.count}" class="form-control" id="purposeRelo${countVal.count}" style="display: none" placeholder="(Please Specify In case of Other)"></td>
+                                                                                    <td><input type="text" name="purposeRelo${countVal.count}" class="form-control" id="purposeRelo${countVal.count}" value="${relocationOtherList.expenseOtherSpecify}" style="display: none" placeholder="(Please Specify In case of Other)"></td>
                                                                                     <td><input type="text" name="otherAmountRelo${countVal.count}" id="otherAmountRelo${countVal.count}" class="form-control" value="${relocationOtherList.amount}" <c:if test="${relocationOtherList.status==1}">readonly="true"</c:if> onchange="calculateAmount();"></td>
                                                                                     <td id="currencyRelocationDiv_td${countVal.count}"><div>
                                                                                             <select id="currencyRelocationDivRelo${countVal.count}" name="currencyRelocationDivRelo${countVal.count}" class="form-control" onchange="changeAmount1(this.value);" <c:if test="${relocationOtherList.status==1}">disabled="true"</c:if>>
@@ -2444,7 +2449,7 @@
                                                                                         </c:choose>
                                                                                     </select>
                                                                                 </div></td>
-                                                                            <td><input type="text" name="purposePolicy${countVal.count}" class="form-control" id="purposePolicy${countVal.count}" style="display: none" placeholder="(Please Specify In case of Other)"></td>
+                                                                            <td><input type="text" name="purposePolicy${countVal.count}" class="form-control" id="purposePolicy${countVal.count}" value="${policyOtherList.expenseOtherSpecify}" style="display: none" placeholder="(Please Specify In case of Other)"></td>
                                                                             <td><input type="text" name="otherAmountPolicy${countVal.count}" id="otherAmountPolicy${countVal.count}" class="form-control" value="${policyOtherList.amount}" <c:if test="${policyOtherList.status==1}">readonly="true"</c:if> onchange="calculateAmount();"></td>
                                                                             <td id="policyReimbCurrency_td${countVal.count}"><div>
                                                                                     <select id="currencyRelocationDivPolicy${countVal.count}" name="currencyRelocationDivPolicy${countVal.count}" class="form-control" onchange="currencyClick1(1)" <c:if test="${policyOtherList.status==1}">disabled="true"</c:if> onchange="changeAmount1(this.value);">

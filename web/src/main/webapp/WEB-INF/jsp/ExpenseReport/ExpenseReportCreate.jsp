@@ -444,7 +444,7 @@
                         + "<option value =\"Other\"> Other </option>"
                         + "</select>"
                         + "</div><span id=\"RentAndFoodDivError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
-                        + "<td><input type=\"Text\" name=\"purpose\" class=\"form-control\" id=\"otherOptionId" + tempCount3 + "\" style=\"display: none\" placeholder=\"(Please Specify In case of Other)\" ></td>"
+                        + "<td><input type=\"Text\" name=\"purpose" + tempCount3 + "\" class=\"form-control\" id=\"otherOptionId" + tempCount3 + "\" style=\"display: none\" placeholder=\"(Please Specify In case of Other)\" ></td>"
                         + "<td><input type=\"number\" name='otherAmount" + tempCount3 + "' id='otherAmount" + tempCount3 + "' min=\"0\" class=\"form-control\" onchange=\"calculateAmount();\"><span id=\"otherAmountError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
                         + "<td id=\"otherCurrrency_td_" + tempCount3 + "\"><div><select id='currencyRelocationDivId" + tempCount3 + "' name='currencyRelocationDiv" + tempCount3 + "' class=\"form-control\" onchange=\"changeAmount1(this.value);\" >"
                         + "</select>"
@@ -1398,7 +1398,7 @@
                                                                     <span id="otherExpenseDateError1" style="color: red;"></span>
                                                                 </td>
                                                                 <td><div>
-                                                                        <select id="RentAndFoodDiv1" name='RentAndFoodDiv1' class="form-control" >
+                                                                        <select id="RentAndFoodDiv1" name='RentAndFoodDiv1' class="form-control" onchange="otherEnble(1);">
                                                                             <option value="">--SELECT--</option>
                                                                             <option value="RoomRent">Room Rent </option>
                                                                             <option value="BreakFast">BreakFast</option>
@@ -1413,15 +1413,13 @@
                                                                     </div>
                                                                     <span id="RentAndFoodDivError1" style="color: red;"></span>
                                                                 </td>
-                                                                <td><input type="Text" name="purpose" class="form-control" id="otherOptionId" style="display: none" placeholder="(Please Specify In case of Other)" ></td>
+                                                                <td><input type="Text" name="purpose1" class="form-control" id="otherOptionId1" style="display: none" placeholder="(Please Specify In case of Other)" ></td>
                                                                 <!--<td><input type="Text" name="otherAmount1" id="otherAmount1"  class="form-control" ></td>-->
-                                                                <td><input type="number" name="otherAmount1" id="otherAmount1" min="0" class="form-control" onchange="calculateAmount(
-                                                                                );">
+                                                                <td><input type="number" name="otherAmount1" id="otherAmount1" min="0" class="form-control" onchange="calculateAmount();">
                                                                     <span id="otherAmountError1" style="color: red;"></span>
                                                                 </td>
                                                                 <td  id="otherCurrrency_td_1"><div>
-                                                                        <select id="currencyRelocationDivId1" name="currencyRelocationDiv1" class="form-control" onchange="changeAmount1(this.value
-                                                                                        );" >
+                                                                        <select id="currencyRelocationDivId1" name="currencyRelocationDiv1" class="form-control" onchange="changeAmount1(this.value);" >
                                                                             <option value="">--SELECT--</option>
                                                                             <c:forEach var="currency" items="${currencyMap}">
                                                                                 <option value="${currency.key}">${currency.value}</option>

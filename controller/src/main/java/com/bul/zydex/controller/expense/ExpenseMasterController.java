@@ -330,10 +330,12 @@ public class ExpenseMasterController extends ExpenseMasterAbstract {
                     otherExpense = request.getParameter("RentAndFoodDiv" + i);
                     float amount = Float.parseFloat(request.getParameter("otherAmount" + i));
                     currency = request.getParameter("currencyRelocationDiv" + i);
+                    String purpose = request.getParameter("purpose" + i);
                     if (!"".equals(otherExpense) && !"".equals(request.getParameter("otherAmount" + i)) && !"".equals(currency)) {
                         relocationOrOtherExpense.setOtherExpenseDate(otherExpenseDate);
                         relocationOrOtherExpense.setOtherExpense(otherExpense);
                         relocationOrOtherExpense.setAmount(amount);
+                        relocationOrOtherExpense.setExpenseOtherSpecify(purpose);
                         relocationOrOtherExpense.setCurrency(currency);
                         relocationOrOtherExpense.setExpenseMaster(expenseMaster);
                         relocationOrOtherExpenseService.create(relocationOrOtherExpense);
@@ -351,11 +353,13 @@ public class ExpenseMasterController extends ExpenseMasterAbstract {
                     String otherExpense = request.getParameter("RentAndFoodDiv" + i);
                     float amount = Float.parseFloat(request.getParameter("otherAmount" + i));
                     String currency = request.getParameter("currencyRelocationDiv" + i);
+                     String purpose = request.getParameter("purpose" + i);
                     relocationOrOtherExpense.setOtherExpenseDate(otherExpenseDate);
                     relocationOrOtherExpense.setOtherExpense(otherExpense);
                     relocationOrOtherExpense.setAmount(amount);
                     relocationOrOtherExpense.setCurrency(currency);
                     relocationOrOtherExpense.setExpenseMaster(expenseMaster);
+                    relocationOrOtherExpense.setExpenseOtherSpecify(purpose);
                     relocationOrOtherExpense.setPolicyNo(policyNo);
                     relocationOrOtherExpenseService.create(relocationOrOtherExpense);
                 }

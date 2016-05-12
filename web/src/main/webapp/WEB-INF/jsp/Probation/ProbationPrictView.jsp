@@ -21,6 +21,7 @@
     </script>
     <body>
         <span class="logo-lg"><img src="StorageYard/Images/logo.png" style="width: 160px;float: left;"/></span>
+        <br/>
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">

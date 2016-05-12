@@ -32,10 +32,14 @@
                 $('#demo9').hide();
                 $('#demo7').hide();
                 $('#localTravelId').hide();
-                    var countSecond = document.getElementById("countSecond").value;
-             for (var i = 1; i <= countSecond; i++) {
-                 travelOtherBox(i); 
-             }
+                  var countSecond = document.getElementById("countSecond").value;
+                for (var i = 1; i <= countSecond; i++) {
+                    try{
+                    travelOtherBox(i);
+                    } catch(e){
+                        
+                    }
+                }
             }
             else if (selectedValue === "Others") {
                 $('#otherDivId').show();
@@ -110,6 +114,23 @@
                 $('#purposePolicy' + id).show();
             } else {
                 $('#purposePolicy' + id).hide();
+            }
+
+        }
+         function travelOtherBox(id) {
+            var selectedVal = document.getElementById("RentAndFoodDiv" + id).value;
+            if (selectedVal == "Other") {
+                $('#purpose' + id).show();
+                $('#otherPurposeId').show();
+            } 
+            else {
+                $('#purpose' + id).hide();
+                $('#otherPurposeId').hide();
+            }
+
+            var countSecondOther = document.getElementById("countSecondOther").value;
+            for (var i = 1; i <= countSecondOther; i++) {
+                otherEnble(i);
             }
 
         }
@@ -313,7 +334,7 @@
                                                                 <label class="col-sm-3 control-label">Travel Request Application No.:</label>
                                                                 <div class="col-sm-7">
                                                                     <c:forEach var="travel" items="${travelNo}">
-                                                                        <c:if test="${travelTypeList[0].travelApplicationNo==travel.value}">
+                                                                        <c:if test="${travelTypeList[0].travelApplicationNo==travel.key}">
                                                                             <input type="text" class="form-control" name="travelNo" id="travelNo" value="${travel.value}" readonly="true">
                                                                         </c:if></c:forEach></div>
                                                                 </div>
@@ -599,7 +620,7 @@
                                                                                                 </c:choose>
                                                                                             </select>
                                                                                         </div></td>
-                                                                                    <td><input type="text" name="purpose${countVal.count}" readonly="true" class="form-control" id="purpose${countVal.count}" style="display: none" placeholder="(Please Specify In case of Other)"></td>
+                                                                                    <td><input type="text" name="purpose${countVal.count}" readonly="true" class="form-control" id="purpose${countVal.count}" value="${otherList.expenseOtherSpecify}" readonly="true" style="display: none" placeholder="(Please Specify In case of Other)"></td>
                                                                                     <td><input type="number" name="otherAmount${countVal.count}" class="form-control" value="${otherList.amount}" readonly="true"></td>
                                                                                     <td><div>
                                                                                             <select id="currencyRelocationDivId1" name="currencyRelocationDiv${countVal.count}" class="form-control" disabled="true" onchange="currencyClick1(1)">
@@ -828,7 +849,7 @@
                                                                                                 </c:choose>
                                                                                             </select>
                                                                                         </div></td>
-                                                                                    <td><input type="text" name="purposeRelo${countVal.count}" readonly="true" class="form-control" id="purposeRelo${countVal.count}" style="display: none" placeholder="(Please Specify In case of Other)"></td>
+                                                                                    <td><input type="text" name="purposeRelo${countVal.count}" readonly="true" class="form-control" id="purposeRelo${countVal.count}" value="${relocationOtherList.expenseOtherSpecify}" readonly="true" style="display: none" placeholder="(Please Specify In case of Other)"></td>
                                                                                     <td><input type="number" name="otherAmountRelo${countVal.count}" class="form-control" value="${relocationOtherList.amount}"  readonly="true"></td>
                                                                                     <td><div>
                                                                                             <select id="currencyRelocationDivId1" name="currencyRelocationDivRelo${countVal.count}" class="form-control" disabled="true" onchange="currencyClick1(1)">
@@ -970,7 +991,7 @@
                                                                                         </c:choose>
                                                                                     </select>
                                                                                 </div></td>
-                                                                            <td><input type="text" name="purposePolicy${countVal.count}" readonly="true" class="form-control" id="purposePolicy${countVal.count}" style="display: none" placeholder="(Please Specify In case of Other)"></td>
+                                                                            <td><input type="text" name="purposePolicy${countVal.count}" readonly="true" class="form-control" id="purposePolicy${countVal.count}" value="${policyOtherList.expenseOtherSpecify}" readonly="true" style="display: none" placeholder="(Please Specify In case of Other)"></td>
                                                                             <td><input type="number" name="otherAmountPolicy${countVal.count}" class="form-control" value="${policyOtherList.amount}" readonly="true"></td>
                                                                             <td><div>
                                                                                     <select id="currencyRelocationDivId1" name="currencyRelocationDivPolicy${countVal.count}" class="form-control" disabled="true" onchange="currencyClick1(1)">

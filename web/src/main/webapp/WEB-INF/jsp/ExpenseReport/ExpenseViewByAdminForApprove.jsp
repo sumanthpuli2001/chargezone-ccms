@@ -35,7 +35,11 @@
                 $('#localTravelId').hide();
                 var countSecond = document.getElementById("countSecond").value;
                 for (var i = 1; i <= countSecond; i++) {
+                    try{
                     travelOtherBox(i);
+                    } catch(e){
+                        
+                    }
                 }
             }
             else if (selectedValue === "Others") {
@@ -93,12 +97,13 @@
         function travelOtherBox(id) {
             var selectedVal = document.getElementById("RentAndFoodDiv" + id).value;
             if (selectedVal == "Other") {
-                $('#travelotherOptionId' + id).show();
+                $('#purpose' + id).show();
                 $('#otherPurposeId').show();
-            } else {
-                $('#travelotherOptionId' + id).hide();
-                $('#otherPurposeId').hide();
-            }
+            } 
+//            else {
+//                $('#purpose' + id).hide();
+//                $('#otherPurposeId').hide();
+//            }
 
             var countSecondOther = document.getElementById("countSecondOther").value;
             for (var i = 1; i <= countSecondOther; i++) {
@@ -619,7 +624,7 @@
                                                                                             </c:choose>
                                                                                         </select>
                                                                                     </div></td>
-                                                                                <td><input type="text" name="purpose${countVal.count}" class="form-control" id="purpose${countVal.count}" style="display: none" placeholder="(Please Specify In case of Other)"></td>
+                                                                                    <td><input type="text" name="purpose${countVal.count}" class="form-control" id="purpose${countVal.count}" value="${otherList.expenseOtherSpecify}" readonly="true" style="display: none" placeholder="(Please Specify In case of Other)"></td>
                                                                                 <td><input type="number" name="otherAmount${countVal.count}" class="form-control" value="${otherList.amount}" readonly="true"></td>
                                                                                 <td><div>
                                                                                         <select id="currencyRelocationDivId1" name="currencyRelocationDiv${countVal.count}" class="form-control" disabled="true" onchange="currencyClick1(1)">
@@ -848,7 +853,7 @@
                                                                                             </c:choose>
                                                                                         </select>
                                                                                     </div></td>
-                                                                                <td><input type="text" name="purposeRelo${countVal.count}" class="form-control" id="purposeRelo${countVal.count}" style="display: none" placeholder="(Please Specify In case of Other)"></td>
+                                                                                    <td><input type="text" name="purposeRelo${countVal.count}" class="form-control" id="purposeRelo${countVal.count}" value="${relocationOtherList.expenseOtherSpecify}" readonly="true" style="display: none" placeholder="(Please Specify In case of Other)"></td>
                                                                                 <td><input type="number" name="otherAmountRelo${countVal.count}" class="form-control" value="${relocationOtherList.amount}"  readonly="true"></td>
                                                                                 <td><div>
                                                                                         <select id="currencyRelocationDivId1" name="currencyRelocationDivRelo${countVal.count}" class="form-control" disabled="true" onchange="currencyClick1(1)">
@@ -990,7 +995,7 @@
                                                                                     </c:choose>
                                                                                 </select>
                                                                             </div></td>
-                                                                        <td><input type="text" name="purposePolicy${countVal.count}" class="form-control" id="purposePolicy${countVal.count}" style="display: none" placeholder="(Please Specify In case of Other)"></td>
+                                                                            <td><input type="text" name="purposePolicy${countVal.count}" class="form-control" id="purposePolicy${countVal.count}" value="${policyOtherList.expenseOtherSpecify}" readonly="true" style="display: none" placeholder="(Please Specify In case of Other)"></td>
                                                                         <td><input type="number" name="otherAmountPolicy${countVal.count}" class="form-control" value="${policyOtherList.amount}" readonly="true"></td>
                                                                         <td><div>
                                                                                 <select id="currencyRelocationDivId1" name="currencyRelocationDivPolicy${countVal.count}" class="form-control" disabled="true" onchange="currencyClick1(1)">

@@ -2035,6 +2035,17 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                     cell8.setCellValue("AR/P");
                                                     ar = ar + 0.5;
                                                     cell8.setCellStyle(styleblue);
+                                                } else {
+                                                    if (leave1[0].contains("Casual Leave")) {
+                                                        cl = cl + 0.5;
+                                                    }
+                                                    if (leave1[0].contains("Privilege Leave")) {
+                                                        pl = pl + 0.5;
+                                                    }
+                                                    if (leave1[0].contains("Sick Leave")) {
+                                                        sl = sl + 0.5;
+                                                    }
+                                                    cell8.setCellValue(" " + leave1[0]);
                                                 }
 
                                             } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {

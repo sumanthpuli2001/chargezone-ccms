@@ -120,11 +120,11 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
         String hqlQuery = "select"
                 + " (Select count(*) from EmployeeMaster em where ((em.dateOfLeaving is null or em.dateOfLeaving = '') or STR_TO_DATE(em.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())),"
                 + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and status=1),"
-                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and apm1.weightageScore is not null and status=1),"
+                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and apm1.weightageScore is not null and status=1 and managerStatus=1),"
                 + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and apm1.empMidyearSelfassOtheractivty is not null and status=1),"
-                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and apm1.managerMidyearReviewevalOtheractivity is not null and status=1),"
+                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and apm1.managerMidyearReviewevalOtheractivity is not null and status=1 and managerStatus=1),"
                 + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and apm1.empEndyearSelfassOtheractivty is not null and status=1),"
-                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and apm1.managerEndyearReviewevalOtheractivity is not null and status=1)"
+                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and apm1.managerEndyearReviewevalOtheractivity is not null and status=1 and managerStatus=1)"
                 + " from AppraisalPerformanceMaster";
 
         return (Object[]) getHibernateTemplate().find(hqlQuery).get(0);

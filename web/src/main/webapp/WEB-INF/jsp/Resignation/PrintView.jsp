@@ -42,6 +42,7 @@
         window.print();
     </script>
     <span class="logo-lg"><img src="StorageYard/Images/logo.png" style="width: 160px;float: left;"/></span>
+    <br/>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -64,7 +65,6 @@
                             <!--form horizontal starts here-->
                             <form:form method="post" commandName="resignationMaster"
                                        name='form1'  class="form-horizontal" role="form">
-                                <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
                                 <div class="box-header">
                                     <h3 class="box-title">Employee Detail:</h3>
                                 </div><!-- /.box-header -->

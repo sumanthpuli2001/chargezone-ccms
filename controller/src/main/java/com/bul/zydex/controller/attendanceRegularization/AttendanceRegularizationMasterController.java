@@ -821,6 +821,12 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 newList.add("AB");
                             } else if (leave1[0].contains("AR")) {
                                 newList.add("AR/P");
+                            } else if (leave1[0].contains("Casual Leave")) {
+                                newList.add("Casual Leave");
+                            } else if (leave1[0].contains("Privilege Leave")) {
+                               newList.add("Privilege Leave");
+                            } else if (leave1[0].contains("Sick Leave")) {
+                                newList.add("Sick Leave");
                             }
 
                         } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
@@ -1170,7 +1176,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         String minute = "" + minutes;
                         if (minutes < 10 && minutes > 0) {
                             minute = "0" + minute;
-                        }else if (minutes < 0) {
+                        } else if (minutes < 0) {
                             minute = "00";
                         }
                         String workingHours = hour + ":" + minute;

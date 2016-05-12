@@ -130,7 +130,8 @@ public class AttendanceRegularizationMasterDAOImpl<T> extends GenericsDAOImpl<T>
         String hqlQuery = "SELECT  count(a.status) as total"
                 + "  From AttendanceRegularization a,"
                 + " EmployeeMaster b"
-                + " where b.id=" + attendanceRegularization.getUserMasterId()
+                 + " where a.userMasterId=b.userMaster.id"
+                + " and b.id=" + attendanceRegularization.getUserMasterId()
                 + " and a.status=1"
                 + " and DATE_FORMAT(STR_TO_DATE('" + attendanceRegularization.getEndDateTime() + "','%d/%m/%Y'),'%m') = DATE_FORMAT(STR_TO_DATE(a.startDateTime,'%d/%m/%Y'),'%m')"
                 + " and DATE_FORMAT(STR_TO_DATE(a.approvedDate,'%d/%m/%Y'),'%m')= DATE_FORMAT(STR_TO_DATE('" + attendanceRegularization.getApprovedDate() + "','%d/%m/%Y'),'%m')";

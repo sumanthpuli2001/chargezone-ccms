@@ -2168,20 +2168,27 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     long totalDayTime = 0;
                                     long totalTime = 0;
                                     long shiftdiffMinutes = 0;
+                                    String startTime = "";
+                                    String endTime = "";
+                                    SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                    long outTime = 0;
+                                    int d = 1;
+                                    int s = 2;
                                     boolean checkLunchTime = false;
                                     if (listPunch.size() > 2) {
-                                        Object[] startLunchTime = (Object[]) listPunch.get(1);
-                                        Object[] endLunchTime = (Object[]) listPunch.get(2);
-                                        String startTime = (String) startLunchTime[0];
-                                        String endTime = (String) endLunchTime[0];
-                                        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                                        Date launchStrTime = sdf2.parse(startTime);
-                                        Date launchEndTime = sdf2.parse(endTime);
-                                        long diff = launchEndTime.getTime() - launchStrTime.getTime();
-                                        lunchTime = diff / (60 * 1000) % 60;
-
-                                        Date startStrTime = sdf2.parse(startTime);
-                                        Date endStrTime = sdf2.parse(endTime);
+                                        while (listPunch.size() > d && listPunch.size() > s) {
+                                            Object[] startLunchTime = (Object[]) listPunch.get(d);
+                                            Object[] endLunchTime = (Object[]) listPunch.get(s);
+                                            startTime = (String) startLunchTime[0];
+                                            endTime = (String) endLunchTime[0];
+                                            Date launchStrTime = sdf3.parse(startTime);
+                                            Date launchEndTime = sdf3.parse(endTime);
+                                            long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                                            lunchTime = diff / (60 * 1000);
+                                            outTime = outTime + lunchTime;
+                                            d = d + 2;
+                                            s = s + 2;
+                                        }
                                         String[] userTimeInStr = secondHalf.split("`");
                                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
                                         String[] userTimeOutStr = secondHalf.split("!");
@@ -2212,14 +2219,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                                        if (lunchTime > 60) {
-                                            lunchTime = 60;
-                                        }
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                                        lunchTime = lunchTime - 30;
+                                        outTime = outTime - 30;
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                                        if (lunchTime > 0) {
-                                            totalTime = totalDayTime - lunchTime;
+                                        if (outTime > 0) {
+                                            totalTime = totalDayTime - outTime;
                                             checkLunchTime = true;
                                         }
 
@@ -2398,23 +2402,32 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //                                    Lunch Breck Cut Off
                                     List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
                                     long lunchTime = 0;
+                                    long outTime = 0;
                                     long totalDayTime = 0;
                                     long totalTime = 0;
                                     long shiftdiffMinutes = 0;
+                                    String startTime = "";
+                                    String endTime = "";
+                                    int d = 1;
+                                    int s = 2;
                                     boolean checkLunchTime = false;
+                                    SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                                     if (listPunch.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
                                         if (listPunch.size() > 2) {
-                                            Object[] startLunchTime = (Object[]) listPunch.get(1);
-                                            Object[] endLunchTime = (Object[]) listPunch.get(2);
-                                            String startTime = (String) startLunchTime[0];
-                                            String endTime = (String) endLunchTime[0];
-                                            SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                                            Date launchStrTime = sdf2.parse(startTime);
-                                            Date launchEndTime = sdf2.parse(endTime);
-                                            long diff = launchEndTime.getTime() - launchStrTime.getTime();
-                                            lunchTime = diff / (60 * 1000) % 60;
-                                            Date startStrTime = sdf2.parse(startTime);
-                                            Date endStrTime = sdf2.parse(endTime);
+                                            while (listPunch.size() > d && listPunch.size() > s) {
+
+                                                Object[] startLunchTime = (Object[]) listPunch.get(d);
+                                                Object[] endLunchTime = (Object[]) listPunch.get(s);
+                                                startTime = (String) startLunchTime[0];
+                                                endTime = (String) endLunchTime[0];
+                                                Date launchStrTime = sdf3.parse(startTime);
+                                                Date launchEndTime = sdf3.parse(endTime);
+                                                long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                                                lunchTime = diff / (60 * 1000);
+                                                outTime = outTime + lunchTime;
+                                                d = d + 2;
+                                                s = s + 2;
+                                            }
                                         }
 
                                         String[] userTimeInStr = secondHalf.split("`");
@@ -2447,14 +2460,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                                        if (lunchTime > 60) {
-                                            lunchTime = 60;
-                                        }
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                                        lunchTime = lunchTime - 30;
+                                        outTime = outTime - 30;
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                                        if (lunchTime > 0) {
-                                            totalTime = totalDayTime - lunchTime;
+                                        if (outTime > 0) {
+                                            totalTime = totalDayTime - outTime;
                                             double empHour = (double) totalTime / 60;
                                             int hours = (int) empHour;
                                             int minutes = (int) (empHour * 60) % 60;
@@ -4538,6 +4548,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         secondHeaderCount = secondHeaderCount + 1;
 
         List<List<String>> recordToAdd = new ArrayList();
+        List<List<String>> recordToAdd3 = new ArrayList();
         for (Object o1 : empDetail) {
             Object[] o = (Object[]) o1;
 //            List<List<?>> li = new LinkedList<List<?>>();
@@ -4550,6 +4561,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             employeeInfoList.add("" + o[3]);
             employeeInfoList.add("" + o[4]);
             recordToAdd.add(employeeInfoList);
+            recordToAdd3.add(employeeInfoList);
         }
         for (int j = 0; j < recordToAdd.size(); j++) {
 
@@ -4711,7 +4723,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             cal.setTime(date);
                             SimpleDateFormat format = new SimpleDateFormat("EEEE");
                             String dayName = format.format(date);
-                            EmployeeMaster employeeMaster2 = employeeMasterService.readById(id);
+                            EmployeeMaster employeeMaster2 = employeeMasterService.readById(Integer.parseInt(userId));
                             ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster2.getZydexLocationMaster().getId());
 
                             if (dayName.equals("Saturday")) {
@@ -4728,25 +4740,34 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //                                    2nd Sat Week Off Codding
 
 //                                    Lunch Breck Cut Off
-                            List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
+                            List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], Integer.parseInt(userId));
                             long lunchTime = 0;
                             long totalDayTime = 0;
                             long totalTime = 0;
                             long shiftdiffMinutes = 0;
                             boolean checkLunchTime = false;
+                            int i = 1;
+                            int m = 2;
+                            long outTime = 0;
+                            String startTime = "";
+                            String endTime = "";
+                            SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                             if (listPunch.size() > 2) {
-                                Object[] startLunchTime = (Object[]) listPunch.get(1);
-                                Object[] endLunchTime = (Object[]) listPunch.get(2);
-                                String startTime = (String) startLunchTime[0];
-                                String endTime = (String) endLunchTime[0];
-                                SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                                Date launchStrTime = sdf2.parse(startTime);
-                                Date launchEndTime = sdf2.parse(endTime);
-                                long diff = launchEndTime.getTime() - launchStrTime.getTime();
-                                lunchTime = diff / (60 * 1000) % 60;
+                                while (listPunch.size() > i && listPunch.size() > m) {
 
-                                Date startStrTime = sdf2.parse(startTime);
-                                Date endStrTime = sdf2.parse(endTime);
+                                    Object[] startLunchTime = (Object[]) listPunch.get(i);
+                                    Object[] endLunchTime = (Object[]) listPunch.get(m);
+                                    startTime = (String) startLunchTime[0];
+                                    endTime = (String) endLunchTime[0];
+                                    Date launchStrTime = sdf2.parse(startTime);
+                                    Date launchEndTime = sdf2.parse(endTime);
+                                    long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                                    lunchTime = diff / (60 * 1000);
+                                    outTime = outTime + lunchTime;
+                                    i = i + 2;
+                                    m = m + 2;
+                                }
+
                                 String[] userTimeInStr = secondHalf.split("`");
                                 String[] userTimeInStr1 = userTimeInStr[1].split("!");
                                 String[] userTimeOutStr = secondHalf.split("!");
@@ -4777,14 +4798,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                                if (lunchTime > 60) {
-                                    lunchTime = 60;
-                                }
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                                lunchTime = lunchTime - 30;
+                                outTime = outTime - 30;
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                                if (lunchTime > 0) {
-                                    totalTime = totalDayTime - lunchTime;
+                                if (outTime > 0) {
+                                    totalTime = totalDayTime - outTime;
                                     checkLunchTime = true;
                                 }
 
@@ -4799,6 +4817,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             }
                             if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
                                 wo = wo + 0.5;
+                            } else if (checkLunchTime == true && totalTime < shiftdiffMinutes) {
+                               
                             } else if (secondHalf.contains("fullday")) {
                                 prcounter = prcounter + 0.5;
 

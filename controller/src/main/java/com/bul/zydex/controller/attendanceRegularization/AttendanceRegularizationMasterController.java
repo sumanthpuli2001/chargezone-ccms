@@ -824,7 +824,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             } else if (leave1[0].contains("Casual Leave")) {
                                 newList.add("Casual Leave");
                             } else if (leave1[0].contains("Privilege Leave")) {
-                               newList.add("Privilege Leave");
+                                newList.add("Privilege Leave");
                             } else if (leave1[0].contains("Sick Leave")) {
                                 newList.add("Sick Leave");
                             }
@@ -919,23 +919,32 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 //                                    Lunch Breck Cut Off
                 List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
                 long lunchTime = 0;
+                long outTime = 0;
                 long totalDayTime = 0;
                 long totalTime = 0;
                 long shiftdiffMinutes = 0;
                 boolean checkLunchTime = false;
+                int i = 1;
+                int j = 2;
+                String startTime = "";
+                String endTime = "";
+                SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 if (listPunch.size() > 2) {
-                    Object[] startLunchTime = (Object[]) listPunch.get(1);
-                    Object[] endLunchTime = (Object[]) listPunch.get(2);
-                    String startTime = (String) startLunchTime[0];
-                    String endTime = (String) endLunchTime[0];
-                    SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                    Date launchStrTime = sdf3.parse(startTime);
-                    Date launchEndTime = sdf3.parse(endTime);
-                    long diff = launchEndTime.getTime() - launchStrTime.getTime();
-                    lunchTime = diff / (60 * 1000) % 60;
+                    while (listPunch.size() > i && listPunch.size() > j) {
 
-                    Date startStrTime = sdf3.parse(startTime);
-                    Date endStrTime = sdf3.parse(endTime);
+                        Object[] startLunchTime = (Object[]) listPunch.get(i);
+                        Object[] endLunchTime = (Object[]) listPunch.get(j);
+                        startTime = (String) startLunchTime[0];
+                        endTime = (String) endLunchTime[0];
+                        Date launchStrTime = sdf3.parse(startTime);
+                        Date launchEndTime = sdf3.parse(endTime);
+                        long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                        lunchTime = diff / (60 * 1000);
+                        outTime = outTime + lunchTime;
+                        i = i + 2;
+                        j = j + 2;
+                    }
+
                     String[] userTimeInStr = secondHalf.split("`");
                     String[] userTimeInStr1 = userTimeInStr[1].split("!");
                     String[] userTimeOutStr = secondHalf.split("!");
@@ -966,14 +975,11 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                    if (lunchTime > 60) {
-                        lunchTime = 60;
-                    }
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                    lunchTime = lunchTime - 30;
+                    outTime = outTime - 30;
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                    if (lunchTime > 0) {
-                        totalTime = totalDayTime - lunchTime;
+                    if (outTime > 0) {
+                        totalTime = totalDayTime - outTime;
                         checkLunchTime = true;
                     }
 
@@ -1112,23 +1118,32 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                 List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
                 long lunchTime = 0;
+                long outTime = 0;
                 long totalDayTime = 0;
                 long totalTime = 0;
                 long shiftdiffMinutes = 0;
                 boolean checkLunchTime = false;
+                int i = 1;
+                int j = 2;
+                String startTime = "";
+                String endTime = "";
+                SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 if (listPunch.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
                     if (listPunch.size() > 2) {
-                        Object[] startLunchTime = (Object[]) listPunch.get(1);
-                        Object[] endLunchTime = (Object[]) listPunch.get(2);
-                        String startTime = (String) startLunchTime[0];
-                        String endTime = (String) endLunchTime[0];
-                        SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                        Date launchStrTime = sdf3.parse(startTime);
-                        Date launchEndTime = sdf3.parse(endTime);
-                        long diff = launchEndTime.getTime() - launchStrTime.getTime();
-                        lunchTime = diff / (60 * 1000) % 60;
-                        Date startStrTime = sdf3.parse(startTime);
-                        Date endStrTime = sdf3.parse(endTime);
+                        while (listPunch.size() > i && listPunch.size() > j) {
+
+                            Object[] startLunchTime = (Object[]) listPunch.get(i);
+                            Object[] endLunchTime = (Object[]) listPunch.get(j);
+                            startTime = (String) startLunchTime[0];
+                            endTime = (String) endLunchTime[0];
+                            Date launchStrTime = sdf3.parse(startTime);
+                            Date launchEndTime = sdf3.parse(endTime);
+                            long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                            lunchTime = diff / (60 * 1000);
+                            outTime = outTime + lunchTime;
+                            i = i + 2;
+                            j = j + 2;
+                        }
                     }
 
                     String[] userTimeInStr = secondHalf.split("`");
@@ -1161,14 +1176,11 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                    if (lunchTime > 60) {
-                        lunchTime = 60;
-                    }
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                    lunchTime = lunchTime - 30;
+                    outTime = outTime - 30;
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                    if (lunchTime > 0) {
-                        totalTime = totalDayTime - lunchTime;
+                    if (outTime > 0) {
+                        totalTime = totalDayTime - outTime;
                         double empHour = (double) totalTime / 60;
                         int hours = (int) empHour;
                         int minutes = (int) (empHour * 60) % 60;

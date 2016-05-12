@@ -995,7 +995,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                 if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
                     secondHalfList.add("WO");
-                } else if (checkLunchTime == true && totalTime < shiftdiffMinutes) {
+                } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR")) {
                     secondHalfList.add("AB");
                 } else if (secondHalf.contains("fullday")) {
                     secondHalfList.add("PR");

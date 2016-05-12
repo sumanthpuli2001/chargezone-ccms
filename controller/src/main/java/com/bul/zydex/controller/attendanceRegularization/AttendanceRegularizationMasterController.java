@@ -1044,13 +1044,15 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     long diffMinutes1 = diff1 / (60 * 1000);
 
                     if (userTimeIn != null) {
-                        if (diffMinutes1 >= diffMinutes) {
+                        if (totalTime >= diffMinutes) {
                             secondHalfList.add("PR");
-                        } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                        }
+//                        else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+//                            secondHalfList.add("PR");
+//                        } 
+                        else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             secondHalfList.add("PR");
-                        } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
-                            secondHalfList.add("PR");
-                        } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
+                        }else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
                             if (secondHalf.contains("*")) {
                                 String[] shortArray = secondHalf.split("\\*");
                                 String[] endArray = secondHalf.split("\\^");

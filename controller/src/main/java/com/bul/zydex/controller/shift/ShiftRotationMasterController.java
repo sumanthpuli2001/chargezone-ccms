@@ -2234,11 +2234,15 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         String[] string1 = secondHalf.split("#");
                                         String[] string2 = string1[1].split("\\$");
                                         shiftName = string2[0].trim();
- 
+
                                     }
                                     if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
                                         cell9.setCellValue("WO");
                                         wo = wo + 0.5;
+                                    } else if (secondHalf.contains("AR")) {
+                                        cell9.setCellValue("AR/P");
+                                        ar = ar + 0.5;
+                                        cell9.setCellStyle(styleblue);
                                     } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR")) {
                                         cell9.setCellValue("AB");
                                         abcounter = abcounter + 0.5;
@@ -2372,10 +2376,6 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
                                     } else if (secondHalf.equals("WO")) {
                                         cell9.setCellValue("-");
-                                    } else if (secondHalf.contains("AR")) {
-                                        cell9.setCellValue("AR/P");
-                                        ar = ar + 0.5;
-                                        cell9.setCellStyle(styleblue);
                                     } else if (secondHalf.equals("AB")) {
                                         cell9.setCellValue("AB");
                                         abcounter = abcounter + 0.5;
@@ -4818,7 +4818,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
                                 wo = wo + 0.5;
                             } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR")) {
-                               
+
                             } else if (secondHalf.contains("fullday")) {
                                 prcounter = prcounter + 0.5;
 

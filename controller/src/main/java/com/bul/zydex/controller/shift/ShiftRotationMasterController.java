@@ -2292,17 +2292,15 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         long diffMinutes1 = diff1 / (60 * 1000);
 
                                         if (userTimeIn != null) {
-                                            if (totalTime >= diffMinutes) {
+                                            if (diffMinutes1 >= diffMinutes) {
                                                 cell9.setCellValue("PR");
                                                 prcounter = prcounter + 0.5;
                                                 cell9.setCellStyle(stylegreen);
-                                            }
-//                                            else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
-//                                                cell9.setCellValue("PR");
-//                                                prcounter = prcounter + 0.5;
-//                                                cell9.setCellStyle(stylegreen);
-//                                            }
-                                            else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                            } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                                cell9.setCellValue("PR");
+                                                prcounter = prcounter + 0.5;
+                                                cell9.setCellStyle(stylegreen);
+                                            } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                                 cell9.setCellValue("PR");
                                                 prcounter = prcounter + 0.5;
                                                 cell9.setCellStyle(stylegreen);
@@ -4851,8 +4849,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 String totalDuration2 = getOutHours[0];
                                 Date endHours = sdf1.parse(endHoursStr[1]);
                                 Date secondHalfTimeStr2 = sdf1.parse(secondHalfTimeStr1[0]);
-     
-                                Calendar cal1 = Calendar.getInstance(); 
+
+                                Calendar cal1 = Calendar.getInstance();
                                 cal1.setTime(firstStartHours);
                                 cal1.add(Calendar.MINUTE, -earlyMinute);
                                 String newTime1 = sdf1.format(cal1.getTime());
@@ -4868,13 +4866,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 long diffMinutes1 = diff1 / (60 * 1000);
 
                                 if (userTimeIn != null) {
-                                    if (totalTime >= diffMinutes) {
+                                    if (diffMinutes1 >= diffMinutes) {
                                         prcounter = prcounter + 0.5;
-                                    }
-//                                    else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
-//                                        prcounter = prcounter + 0.5;
-//                                    } 
-                                    else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                    } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                        prcounter = prcounter + 0.5;
+                                    } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                         prcounter = prcounter + 0.5;
                                     }
                                 }

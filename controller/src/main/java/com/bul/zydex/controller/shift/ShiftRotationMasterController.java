@@ -4136,11 +4136,13 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             List listPunch = employeeDatetimeDataService.readPuchDataDateWise(startDate, id);
             Iterator it1 = listPunch.iterator();
             Iterator it2 = listPunch.iterator();
-            while (it1.hasNext()) {
+            int numAttempts = 0;
+            while (it1.hasNext() && numAttempts < 4) {
                 Object[] next1 = (Object[]) it1.next();
                 String str = "" + next1[0];
                 String[] str1 = str.split(" ");
                 employeeInfoList.add("" + str1[1]);
+                numAttempts++;
             }
             if (listPunch.isEmpty()) {
                 employeeInfoList.add("");
@@ -4199,7 +4201,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         headerRow2.add("" + presentCounter);
         recordToAdd1.add(headerRow2);
 
-        for (int j = 0; j < empDetail.size(); j++) {
+        for (int j = 0; j < recordToAdd.size(); j++) {
             List<String> l2 = recordToAdd.get(j);
             Row row = firstSheet.createRow(rownum);
             for (int k = 0; k < l2.size(); k++) {

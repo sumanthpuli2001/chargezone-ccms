@@ -995,6 +995,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                 if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
                     secondHalfList.add("WO");
+                } else if (secondHalf.contains("AR")) {
+                    secondHalfList.add("AR/P");
                 } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR")) {
                     secondHalfList.add("AB");
                 } else if (secondHalf.contains("fullday")) {
@@ -1040,7 +1042,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         diff1 = userTimeOut.getTime() - userTimeIn.getTime();
                     } else {
                         diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
-                    } 
+                    }
                     long diffMinutes1 = diff1 / (60 * 1000);
 
                     if (userTimeIn != null) {
@@ -1098,8 +1100,6 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                 } else if (secondHalf.equals("WO")) {
                     secondHalfList.add("-");
-                } else if (secondHalf.contains("AR")) {
-                    secondHalfList.add("AR/P");
                 } else if (secondHalf.equals("AB")) {
                     secondHalfList.add("AB");
                 } else if (secondHalf.equals("Casual Leave") || secondHalf.equals("Privilege Leave") || secondHalf.equals("Sick Leave")

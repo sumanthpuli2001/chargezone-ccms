@@ -60,9 +60,10 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
         String query = "";
         Date date = new Date();
         Format formatter = new SimpleDateFormat("dd/MM/YYYY");
-        String s = formatter.format(date);
+        Date dateBefore = new Date(date.getTime() - 24 * 60 * 60 * 1000);
+        String s1 = formatter.format(dateBefore);
         query += " From EmployeeShiftData a "
-                + "Where STR_TO_DATE(a.inDateTime,'%d/%m/%Y') = STR_TO_DATE('" + s + "','%d/%m/%Y')";
+                + "Where STR_TO_DATE(a.inDateTime,'%d/%m/%Y') = STR_TO_DATE('" + s1 + "','%d/%m/%Y')";
 
         return getHibernateTemplate().find(query);
     }

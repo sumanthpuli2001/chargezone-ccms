@@ -244,11 +244,17 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
                 Date date1 = sdf.parse(dateOfJoining);
+                Date date3 = new Date();
                 cal1.setTime(date1);
                 Date date2 = sdf.parse(dateOfEnd);
                 cal2.setTime(date2);
                 int y = Integer.parseInt(noOfLeave);
-                long days = date2.getTime() - date1.getTime();
+                long days = 0;
+                if (date1.before(date3)) {
+                    days = date2.getTime() - date3.getTime();
+                } else {
+                    days = date2.getTime() - date1.getTime();
+                }
                 long diffDays = days / (24 * 60 * 60 * 1000) + 1;
                 if (leave.equals("Sick Leave")) {
                     if (isLeapYear == true) {
@@ -266,15 +272,15 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         long CL = (diffDays * y / 365) + 1;
                         employeeLeaveBalance.setNoOfLeaveRemain(CL);
                     }
-                } else if (leave.equals("Privilege Leave")) {
-                    if (isLeapYear == true) {
-                        long PL = (diffDays * y / 366) + 1;
-                        employeeLeaveBalance.setNoOfLeaveRemain(PL);
-                    } else {
-                        long PL = (diffDays * y / 365) + 1;
-                        employeeLeaveBalance.setNoOfLeaveRemain(PL);
-                    }
-                } 
+                } //                else if (leave.equals("Privilege Leave")) {
+                //                    if (isLeapYear == true) {
+                //                        long PL = (diffDays * y / 366) + 1;
+                //                        employeeLeaveBalance.setNoOfLeaveRemain(PL);
+                //                    } else {
+                //                        long PL = (diffDays * y / 365) + 1;
+                //                        employeeLeaveBalance.setNoOfLeaveRemain(PL);
+                //                    }
+                //                } 
                 else if (leave.equals("Paternity Leave") && !gender_Female && marital_status.equals("Married")) {
                     if (isLeapYear == true) {
 //                        long PAT = (diffDays * y / 366) + 1;
@@ -3512,7 +3518,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         UserMaster userMaster = new UserMaster();
-        String userId= request.getParameter("userId");
+        String userId = request.getParameter("userId");
         userMaster = userMasterService.readById(Integer.parseInt(userId));
         String password = request.getParameter("password");
         userMaster.setPassword(password);
@@ -3520,23 +3526,25 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("redirect:employeeMaster.htm?act=searchSubmit");
         return mv;
     }
+
     public ModelAndView inActiveEmployeeClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
-        String empId= request.getParameter("id");
+        String empId = request.getParameter("id");
         employeeMaster = employeeMasterService.readById(Integer.parseInt(empId));
         request.setAttribute("empId", empId);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Employee/EmployeeInActivePage");
-     
+
         return mv;
     }
+
     public ModelAndView inActiveEmployeeSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
-           bind(request, employeeMaster);
-        String empId= request.getParameter("empId");
+        bind(request, employeeMaster);
+        String empId = request.getParameter("empId");
         employeeMaster1 = employeeMasterService.readById(Integer.parseInt(empId));
         employeeMaster1.setDateOfLeaving(employeeMaster.getDateOfLeaving());
         employeeMasterService.update(employeeMaster1);

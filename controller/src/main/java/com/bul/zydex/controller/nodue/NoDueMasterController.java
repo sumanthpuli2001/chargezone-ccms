@@ -68,7 +68,8 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         BindException errors = new BindException(noDueMaster, "noDueMaster");
 //        if(noDueMaster.get)
         int empid = Integer.parseInt(request.getParameter("empId"));
-        employeeMaster.setId(empid);
+//        employeeMaster.setId(empid);
+        employeeMaster = employeeMasterService.readById(empid);
 //        employeeMaster1.setId(1);
         noDueMaster.setEmployeeMasterByEmpId(employeeMaster);
 //        noDueMaster.setEmployeeMasterByApproverId(employeeMaster1);
@@ -119,6 +120,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                     String Subject = emailTemplate.getSubject();
                     Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
                     String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{emp_name\\}", employeeMaster.getEmployeeName());
                     msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
                     msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());

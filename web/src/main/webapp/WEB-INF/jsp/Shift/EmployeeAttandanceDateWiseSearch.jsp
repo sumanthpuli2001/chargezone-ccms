@@ -73,40 +73,7 @@
 
                                     <div class="row">
                                         <!--<div class="col-md-6 col-sm-6">-->
-                                        <div class="col-sm-6">
-                                            <label>Searching Criteria:</label>
-                                            <select name="vallist" name="vallist" class="form-control" onchange="selectDropsDown11(this.value);">
-                                                <option value="emp">Employee wise Search</option>
-                                                <option value="other">Other</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <br/>
-                                    <div class="row">
                                         <div class="col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <div class="col-sm-6" id="employeeName">
-                                                    <label>Employee Name:</label>
-                                                    <input type="text" id="employeeMasterId" name="employeeMasterId" class="form-control">
-                                                </div>
-
-                                                <div class="col-sm-6" id="zydexLocationIdDiv" style="display: none;">
-                                                    <label>Zydex Location:</label>
-                                                    <input type="text" id="zydexLocationId" name="zydexLocationId" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6" id="levelIdDiv" style="display: none;">
-                                                    <label>Level Name:</label>
-                                                    <input type="text" id="levelId" name="levelId" class="form-control">
-                                                </div>
-
-                                                <div class="col-sm-6" id="departmentIdDiv" style="display: none;">
-                                                    <label>Department Name:</label>
-                                                    <input type="text" id="departmentId" name="departmentId" class="form-control">
-                                                </div>
-                                            </div>
                                             <div class="form-group">
 
                                                 <div class="col-sm-6">
@@ -128,6 +95,46 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>Searching Criteria:</label>
+                                                        <select name="vallist" name="vallist" class="form-control" onchange="selectDropsDown11(this.value);">
+                                                            <option value="emp">Employee wise Search</option>
+                                                            <option value="other">Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <br/>
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-6" id="employeeName">
+                                                        <label>Employee Name:</label>
+                                                        <input type="text" id="employeeMasterId" name="employeeMasterId" class="form-control">
+                                                    </div>
+                                                    <div class="col-sm-6" id="zydexLocationIdDiv" style="display: none;">
+                                                        <label>Zydex Location:</label>
+                                                        <input type="text" id="zydexLocationId" name="zydexLocationId" class="form-control">
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-6" id="levelIdDiv" style="display: none;">
+                                                        <label>Level Name:</label>
+                                                        <input type="text" id="levelId" name="levelId" class="form-control">
+                                                    </div>
+
+                                                    <div class="col-sm-6" id="departmentIdDiv" style="display: none;">
+                                                        <label>Department Name:</label>
+                                                        <input type="text" id="departmentId" name="departmentId" class="form-control">
+                                                    </div>
+                                                </div>
+
 
                                                 <div class="form-group">
                                                     <div class=" col-sm-12" style="text-align: center;">

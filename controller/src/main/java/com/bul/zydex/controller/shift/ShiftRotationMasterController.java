@@ -852,7 +852,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         ModelAndView mv = new ModelAndView();
         EmployeeShiftData employeeShiftData = new EmployeeShiftData();
         EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
-        selectEmployee(request, response);
+        selectEmployee1(request, response);
         selectZydexLocation(request, response);
         selectLevel(request, response);
         department(request, response);
@@ -946,7 +946,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         ModelAndView mv = new ModelAndView();
         EmployeeShiftData employeeShiftData = new EmployeeShiftData();
         EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
-        selectEmployee(request, response);
+        selectEmployee1(request, response);
         selectZydexLocation(request, response);
         selectLevel(request, response);
         department(request, response);

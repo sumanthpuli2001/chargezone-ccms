@@ -55,6 +55,18 @@
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
+
+                                                <div class="col-sm-6">
+                                                    <label>Date<span style="color : red;font-size:12px;"></span></label>
+                                                    <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
+                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                        <form:input path="inDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Zydex Location:</label>
                                                     <input type="text" id="zydexLocationId" name="zydexLocationId" class="form-control">
@@ -71,25 +83,11 @@
                                                     <input type="text" id="departmentId" name="departmentId" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-
-                                                <div class="col-sm-6">
-                                                    <label>Date<span style="color : red;font-size:12px;"></span></label>
-                                                    <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
-                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="inDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
                                                 <div class="form-group">
                                                     <div class=" col-sm-12" style="text-align: center;">
                                                         <button type="submit" class="btn btn-primary" style="width: 100px;" >EXPORT</button>
                                                     </div>
                                                 </div>
-
 
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->

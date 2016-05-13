@@ -1164,8 +1164,8 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " LEFT JOIN a.designationMaster c "
                 + " LEFT JOIN a.levelMaster d "
                 + " LEFT JOIN a.zydexLocationMaster e "
-                + " LEFT JOIN a.locationMaster f ";
-        query += " Where ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
+                + " LEFT JOIN a.locationMaster f "
+                + " Where ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
                 + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) ";
         if (null != condition && !"".equals(condition)) {
             query += " and" + condition;
@@ -1396,10 +1396,9 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " LEFT JOIN a.designationMaster c "
                 + " LEFT JOIN a.levelMaster d "
                 + " LEFT JOIN a.zydexLocationMaster e "
-                + " LEFT JOIN a.locationMaster f ";
-//            query += " Where 1=1 AND " + condition;
-        query += " Where ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
-                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') < now()) ";
+                + " LEFT JOIN a.locationMaster f "
+                + " where (a.dateOfLeaving is not null and a.dateOfLeaving != '') "
+                + " and  STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') < now()";
         if (null != condition && !"".equals(condition)) {
             query += " and" + condition;
         }

@@ -2202,6 +2202,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         Calendar cal1 = Calendar.getInstance();
                                         cal1.setTime(firstStartHours);
                                         cal1.add(Calendar.MINUTE, -earlyMinute);
+
                                         String newTime1 = sdf1.format(cal1.getTime());
                                         Date flexibleInTime = sdf1.parse(newTime1);
                                         Date endHours = sdf1.parse(endHoursStr[1]);
@@ -2281,8 +2282,14 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         Date secondHalfTimeStr2 = sdf1.parse(secondHalfTimeStr1[0]);
 
                                         Calendar cal1 = Calendar.getInstance();
+                                        Calendar cal2 = Calendar.getInstance();
                                         cal1.setTime(firstStartHours);
                                         cal1.add(Calendar.MINUTE, -earlyMinute);
+                                        cal2.setTime(firstStartHours);
+                                        cal2.add(Calendar.MINUTE, lateMinute);
+                                        String newTime = sdf1.format(cal2.getTime());
+                                        Date flexibleEndTime = sdf1.parse(newTime);
+
                                         String newTime1 = sdf1.format(cal1.getTime());
                                         Date flexibleInTime = sdf1.parse(newTime1);
                                         long diff = endHours.getTime() - firstStartHours.getTime();
@@ -2296,16 +2303,15 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         long diffMinutes1 = diff1 / (60 * 1000);
 
                                         if (userTimeIn != null) {
-                                            if (diffMinutes1 >= diffMinutes) {
+                                            if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
                                                 cell9.setCellValue("PR");
                                                 prcounter = prcounter + 0.5;
                                                 cell9.setCellStyle(stylegreen);
-                                            } else if (diffMinutes1 <= diffMinutes) {
+                                            } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime)) {
                                                 cell9.setCellValue("AB");
                                                 abcounter = abcounter + 0.5;
                                                 cell9.setCellStyle(stylered);
-                                            } 
-                                            else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                            } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                                 cell9.setCellValue("PR");
                                                 prcounter = prcounter + 0.5;
                                                 cell9.setCellStyle(stylegreen);
@@ -4862,6 +4868,13 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 cal1.add(Calendar.MINUTE, -earlyMinute);
                                 String newTime1 = sdf1.format(cal1.getTime());
                                 Date flexibleInTime = sdf1.parse(newTime1);
+
+                                Calendar cal2 = Calendar.getInstance();
+                                cal2.setTime(firstStartHours);
+                                cal2.add(Calendar.MINUTE, lateMinute);
+                                String newTime = sdf1.format(cal2.getTime());
+                                Date flexibleEndTime = sdf1.parse(newTime);
+
                                 long diff = endHours.getTime() - firstStartHours.getTime();
                                 long diffMinutes = diff / (60 * 1000);
                                 long diff1 = 0;
@@ -4873,10 +4886,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 long diffMinutes1 = diff1 / (60 * 1000);
 
                                 if (userTimeIn != null) {
-                                    if (diffMinutes1 >= diffMinutes) {
+                                    if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
                                         prcounter = prcounter + 0.5;
-                                    }else if (diffMinutes1 <= diffMinutes) {
-                                        
+                                    } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime)) {
+
                                     } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                         prcounter = prcounter + 0.5;
                                     } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {

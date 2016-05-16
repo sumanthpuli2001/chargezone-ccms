@@ -886,13 +886,14 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             }
 
             Iterator itr6 = entry.getValue().iterator();
+            int weekNameCounter = 0;
             while (itr6.hasNext()) {
                 Object[] next = (Object[]) itr6.next();
                 String secondHalf = "" + next[1];
                 int firstHalfVal = 0;
                 int counter = 0;
                 String shiftName = "";
-                int weekNameCounter = 0;
+
                 boolean satWeekOff = false;
                 //                                    2nd Sat Week Off Codding
                 Calendar cal = Calendar.getInstance();
@@ -1048,6 +1049,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     if (userTimeIn != null) {
                         if (diffMinutes1 >= diffMinutes) {
                             secondHalfList.add("PR");
+                        } else if (diffMinutes1 <= diffMinutes) {
+                            secondHalfList.add("AB");
                         } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             secondHalfList.add("PR");
                         } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {

@@ -118,10 +118,11 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         if (null != leaveEmployeeDetail.getEmployeeMaster().getId()) {
             condition += " AND  b.id = " + leaveEmployeeDetail.getEmployeeMaster().getId();
         }
-        if (!"".equals(leaveEmployeeDetail.getStartDate())
-                && null != leaveEmployeeDetail.getStartDate()
-                && !"".equals(leaveEmployeeDetail.getEndDate()) && null != leaveEmployeeDetail.getEndDate()) {
-            condition += " AND a.startDate BETWEEN '" + leaveEmployeeDetail.getStartDate() + "' AND '" + leaveEmployeeDetail.getEndDate() + "' ";
+        if (null != leaveEmployeeDetail.getStartDate() && !"".equals(leaveEmployeeDetail.getStartDate())) {
+            condition += " AND STR_TO_DATE(a.startDate,'%d/%m/%Y') >= STR_TO_DATE('" + leaveEmployeeDetail.getStartDate() + "','%d/%m/%Y')";
+        }
+        if (null != leaveEmployeeDetail.getEndDate() && !"".equals(leaveEmployeeDetail.getEndDate())) {
+            condition += " AND STR_TO_DATE(a.endDate,'%d/%m/%Y') <= STR_TO_DATE('" + leaveEmployeeDetail.getEndDate() + "','%d/%m/%Y')";
         }
         if (!"".equals(leaveEmployeeDetail.getLeaveTypeMaster().getId()) && null != leaveEmployeeDetail.getLeaveTypeMaster().getId()) {
             condition += " AND e.id = " + leaveEmployeeDetail.getLeaveTypeMaster().getId();
@@ -151,9 +152,11 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         String query = "";
         String condition = "";
 
-        if (!"".equals(leaveEmployeeDetail.getStartDate()) && null != leaveEmployeeDetail.getStartDate()
-                && !"".equals(leaveEmployeeDetail.getEndDate()) && null != leaveEmployeeDetail.getEndDate()) {
-            condition += " AND a.startDate BETWEEN '" + leaveEmployeeDetail.getStartDate() + "' AND '" + leaveEmployeeDetail.getEndDate() + "' ";
+        if (null != leaveEmployeeDetail.getStartDate() && !"".equals(leaveEmployeeDetail.getStartDate())) {
+            condition += " AND STR_TO_DATE(a.startDate,'%d/%m/%Y') >= STR_TO_DATE('" + leaveEmployeeDetail.getStartDate() + "','%d/%m/%Y')";
+        }
+        if (null != leaveEmployeeDetail.getEndDate() && !"".equals(leaveEmployeeDetail.getEndDate())) {
+            condition += " AND STR_TO_DATE(a.endDate,'%d/%m/%Y') <= STR_TO_DATE('" + leaveEmployeeDetail.getEndDate() + "','%d/%m/%Y')";
         }
         if (null != leaveEmployeeDetail.getLeaveTypeMaster() && !"".equals(leaveEmployeeDetail.getLeaveTypeMaster())) {
             condition += " AND b.id = '" + leaveEmployeeDetail.getLeaveTypeMaster().getId() + "'";

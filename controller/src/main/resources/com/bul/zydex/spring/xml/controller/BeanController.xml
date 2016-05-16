@@ -306,6 +306,7 @@
         <property name="travelApproverHistoryService" ref="travelApproverHistoryService1"/>
         <property name="emailTemplateService" ref="emailTemplateService1" />
         <property name="userRightMasterService" ref="userRightMasterService1" />
+        <property name="levelMasterService" ref="levelMasterService1" />
         <property name="sendMail" ref="sendMail1" />
     </bean>
     <bean id="travelDetailController1" class="com.bul.zydex.controller.travel.TravelDetailController" parent="controllerConfig" >

@@ -2300,7 +2300,12 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 cell9.setCellValue("PR");
                                                 prcounter = prcounter + 0.5;
                                                 cell9.setCellStyle(stylegreen);
-                                            } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                            } else if (diffMinutes1 <= diffMinutes) {
+                                                cell9.setCellValue("AB");
+                                                abcounter = abcounter + 0.5;
+                                                cell9.setCellStyle(stylered);
+                                            } 
+                                            else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                                 cell9.setCellValue("PR");
                                                 prcounter = prcounter + 0.5;
                                                 cell9.setCellStyle(stylegreen);
@@ -4870,6 +4875,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 if (userTimeIn != null) {
                                     if (diffMinutes1 >= diffMinutes) {
                                         prcounter = prcounter + 0.5;
+                                    }else if (diffMinutes1 <= diffMinutes) {
+                                        
                                     } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                         prcounter = prcounter + 0.5;
                                     } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {

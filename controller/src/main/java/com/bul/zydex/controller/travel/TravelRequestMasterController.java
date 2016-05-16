@@ -10,6 +10,7 @@ import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.ExpenseTravelType;
 import com.bul.zydex.model.HotelAccommodation;
+import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.TravelApproverHistory;
 import com.bul.zydex.model.TravelDetail;
 import com.bul.zydex.model.TravelRequestMaster;
@@ -944,6 +945,12 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
         HttpSession session = request.getSession();
         EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
         String loginId = employeeMaster.getId().toString();
+        LevelMaster levelMaster = new LevelMaster();
+        levelMaster = levelMasterService.readById(employeeMaster.getLevelMaster().getId());
+        
+        DesignationMaster designationMaster1 = new DesignationMaster();
+        designationMaster1 = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+        
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         int employeeId = travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId();
         employeeMaster1 = employeeMasterService.readById(employeeId);
@@ -957,7 +964,10 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 //                } elsetry
                 try {
 
-                    if (Integer.parseInt(loginId) == Integer.parseInt(manager5)) {
+//                    if (Integer.parseInt(loginId) == Integer.parseInt(manager5)) {
+                    if (levelMaster.getLevel().equals("3A") || levelMaster.getLevel().equals("3B") || levelMaster.getLevel().equals("2D")
+                            || levelMaster.getLevel().equals("2C") || levelMaster.getLevel().equals("2B") || levelMaster.getLevel().equals("2A")
+                            || (levelMaster.getLevel().equals("0") && (designationMaster1.getDesignationName().equals("Proprietor") || designationMaster1.getDesignationName().equals("Project Cordinator")))) {
                         if (travelRequestMaster.getTravelType().equals("Domestic") || travelRequestMaster.getTravelType().equals("Local")) {
                             travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
                             travelRequestMaster.setStatus(5);
@@ -965,12 +975,8 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                             travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
                             travelRequestMaster.setStatus(6);
                         }
-                    } else {
-                        travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
-                        travelRequestMaster.setStatus(3);
-                    }
-                } catch (Exception e) {
-                    if (Integer.parseInt(loginId) == Integer.parseInt(manager6)) {
+                    } 
+                    else if (Integer.parseInt(loginId) == Integer.parseInt(manager6)) {
                         if (travelRequestMaster.getTravelType().equals("Domestic") || travelRequestMaster.getTravelType().equals("Local")) {
 
                             travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
@@ -978,16 +984,14 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                         } else {
                             travelRequestMaster.setEmployeeMasterByApprover2Id(employeeMaster);
                             travelRequestMaster.setStatus(5);
-
                         }
-//                        } else {
-//                            travelRequestMaster.setStatus(6);
-//                        }
-//                    } else {
-//                        travelRequestMaster.setStatus(3);
-//                    }
 
+                    }else {
+                        travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
+                        travelRequestMaster.setStatus(3);
                     }
+                } catch (Exception e) {
+                    
                 }
                 travelRequestMasterService.update(travelRequestMaster);
                 TravelApproverHistory travelApproverHistory = new TravelApproverHistory();

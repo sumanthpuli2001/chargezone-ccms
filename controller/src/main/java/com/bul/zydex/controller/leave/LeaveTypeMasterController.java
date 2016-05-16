@@ -206,21 +206,12 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
 
                         if (!casualLeave.equals("")) {
                             cLeave = Float.parseFloat(casualLeave);
-                        } else {
-                            casualLeave = "0";
-                            cLeave = 0;
                         }
                         if (!sickLeave.equals("")) {
                             sLeave = Float.parseFloat(sickLeave);
-                        } else {
-                            sickLeave = "0";
-                            sLeave = 0;
                         }
                         if (!privilegeLeave.equals("")) {
                             pLeave = Float.parseFloat(privilegeLeave);
-                        } else {
-                            privilegeLeave = "0";
-                            pLeave = 0;
                         }
                         if (!paternityLeave.equals("")) {
                             ptLeave = Float.parseFloat(paternityLeave);
@@ -235,74 +226,83 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
                             EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
                             EmployeeLeaveBalance employeeLeaveBalance2 = new EmployeeLeaveBalance();
                             EmployeeLeaveBalance employeeLeaveBalance4 = new EmployeeLeaveBalance();
+                            if (!casualLeave.equals("")) {
+                                employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+                                employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                                employeeLeaveBalance.setNoOfLeaveRemain(Float.parseFloat(casualLeave));
+                            }
+                            if (!sickLeave.equals("")) {
+                                employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+                                employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster1);
+                                employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(sickLeave));
+                            }
+                            if (!privilegeLeave.equals("")) {
+                                employeeLeaveBalance2.setEmployeeMaster(employeeMaster);
+                                employeeLeaveBalance2.setLeaveTypeMaster(leaveTypeMaster2);
+                                employeeLeaveBalance2.setNoOfLeaveRemain(Float.parseFloat(privilegeLeave));
+                            }
 
-                            employeeLeaveBalance.setEmployeeMaster(employeeMaster);
-                            employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
-                            employeeLeaveBalance.setNoOfLeaveRemain(Float.parseFloat(casualLeave));
-
-                            employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
-                            employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster1);
-                            employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(sickLeave));
-
-                            employeeLeaveBalance2.setEmployeeMaster(employeeMaster);
-                            employeeLeaveBalance2.setLeaveTypeMaster(leaveTypeMaster2);
-                            employeeLeaveBalance2.setNoOfLeaveRemain(Float.parseFloat(privilegeLeave));
-                            
                             if (!paternityLeave.equals("")) {
                                 employeeLeaveBalance4.setEmployeeMaster(employeeMaster);
                                 employeeLeaveBalance4.setLeaveTypeMaster(leaveTypeMaster3);
                                 employeeLeaveBalance4.setNoOfLeaveRemain(Float.parseFloat(paternityLeave));
                             }
-
-                            if (cLeave <= 7) {
-                                List<?> list1 = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
-                                if (!list1.isEmpty()) {
-                                    EmployeeLeaveBalance employeeLeaveBalance3 = (EmployeeLeaveBalance) list1.get(0);
-                                    employeeLeaveBalance.setId(employeeLeaveBalance3.getId());
-                                    employeeLeaveBalanceService.update(employeeLeaveBalance);
-                                    employeeLeaveBalance3 = null;
-                                } else {
-                                    employeeLeaveBalanceService.create(employeeLeaveBalance);
+                            if (!casualLeave.equals("")) {
+                                if (cLeave <= 7) {
+                                    List<?> list1 = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                                    if (!list1.isEmpty()) {
+                                        EmployeeLeaveBalance employeeLeaveBalance3 = (EmployeeLeaveBalance) list1.get(0);
+                                        employeeLeaveBalance.setId(employeeLeaveBalance3.getId());
+                                        employeeLeaveBalanceService.update(employeeLeaveBalance);
+                                        employeeLeaveBalance3 = null;
+                                    } else {
+                                        employeeLeaveBalanceService.create(employeeLeaveBalance);
+                                    }
                                 }
                             }
-                            if (sLeave <= 7) {
+                            if (!sickLeave.equals("")) {
+                                if (sLeave <= 7) {
 
-                                List<?> list2 = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance1);
-                                if (!list2.isEmpty()) {
-                                    EmployeeLeaveBalance employeeLeaveBalance3 = (EmployeeLeaveBalance) list2.get(0);
-                                    employeeLeaveBalance1.setId(employeeLeaveBalance3.getId());
-                                    employeeLeaveBalanceService.update(employeeLeaveBalance1);
-                                    employeeLeaveBalance3 = null;
-                                } else {
-                                    employeeLeaveBalanceService.create(employeeLeaveBalance1);
+                                    List<?> list2 = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance1);
+                                    if (!list2.isEmpty()) {
+                                        EmployeeLeaveBalance employeeLeaveBalance3 = (EmployeeLeaveBalance) list2.get(0);
+                                        employeeLeaveBalance1.setId(employeeLeaveBalance3.getId());
+                                        employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                                        employeeLeaveBalance3 = null;
+                                    } else {
+                                        employeeLeaveBalanceService.create(employeeLeaveBalance1);
+                                    }
                                 }
                             }
-                            if (pLeave <= 60) {
+                            if (!privilegeLeave.equals("")) {
+                                if (pLeave <= 60) {
 
-                                List<?> list3 = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance2);
-                                if (!list3.isEmpty()) {
-                                    EmployeeLeaveBalance employeeLeaveBalance3 = (EmployeeLeaveBalance) list3.get(0);
-                                    employeeLeaveBalance2.setId(employeeLeaveBalance3.getId());
-                                    employeeLeaveBalanceService.update(employeeLeaveBalance2);
-                                    employeeLeaveBalance3 = null;
-                                } else {
-                                    employeeLeaveBalanceService.create(employeeLeaveBalance2);
+                                    List<?> list3 = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance2);
+                                    if (!list3.isEmpty()) {
+                                        EmployeeLeaveBalance employeeLeaveBalance3 = (EmployeeLeaveBalance) list3.get(0);
+                                        employeeLeaveBalance2.setId(employeeLeaveBalance3.getId());
+                                        employeeLeaveBalanceService.update(employeeLeaveBalance2);
+                                        employeeLeaveBalance3 = null;
+                                    } else {
+                                        employeeLeaveBalanceService.create(employeeLeaveBalance2);
+                                    }
                                 }
                             }
-                             if (!paternityLeave.equals("")) {
-                                 if (ptLeave <= 6) {
 
-                                     List<?> list4 = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance4);
-                                     if (!list4.isEmpty()) {
-                                         EmployeeLeaveBalance employeeLeaveBalance3 = (EmployeeLeaveBalance) list4.get(0);
-                                         employeeLeaveBalance4.setId(employeeLeaveBalance3.getId());
-                                         employeeLeaveBalanceService.update(employeeLeaveBalance4);
-                                         employeeLeaveBalance3 = null;
-                                     } else {
-                                         employeeLeaveBalanceService.create(employeeLeaveBalance4);
-                                     }
-                                 }
-                             }
+                            if (!paternityLeave.equals("")) {
+                                if (ptLeave <= 6) {
+
+                                    List<?> list4 = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance4);
+                                    if (!list4.isEmpty()) {
+                                        EmployeeLeaveBalance employeeLeaveBalance3 = (EmployeeLeaveBalance) list4.get(0);
+                                        employeeLeaveBalance4.setId(employeeLeaveBalance3.getId());
+                                        employeeLeaveBalanceService.update(employeeLeaveBalance4);
+                                        employeeLeaveBalance3 = null;
+                                    } else {
+                                        employeeLeaveBalanceService.create(employeeLeaveBalance4);
+                                    }
+                                }
+                            }
 
                         } else {
                             count++;
@@ -313,12 +313,14 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
                 }
             }
             request.setAttribute("successMessage", "Information : The Excel Uploaded Successfully.");
-            request.setAttribute("failureMessage", "Information : " + countEmpId + " Rcecords Not Inserted Due To Employe No Is Not Correct");
+            if (count > 0) {
+                request.setAttribute("failureMessage", "Information : " + countEmpId + " Rcecords Not Inserted Due To Employe No Is Not Correct");
+            }
             mv = searchSubmit(request, response);
         } catch (Exception e) {
             request.setAttribute("failureMessage", "Information : The Excel Not Upload Successfully. Please Check Excel Data.");
             mv = leaveExcelUpload(request, response);
-         }
+        }
         return mv;
     }
 }

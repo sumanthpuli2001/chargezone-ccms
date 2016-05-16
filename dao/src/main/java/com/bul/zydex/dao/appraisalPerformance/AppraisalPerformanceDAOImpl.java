@@ -324,7 +324,7 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " and (b.empEndyearSelfassessmentGoal is not null and b.empEndyearSelfassessmentGoal !='') and (b.managerEndyearReviewEvaluation is null or b.managerEndyearReviewEvaluation ='') and a.managerStatus=1 then 'Managers End Year Review' "
                 + " when a.status=1 and (b.empMidyearSelfassessmentGoal is not null and b.empMidyearSelfassessmentGoal !='') and (b.managerMidyearReviewEvaluation is not null and b.managerMidyearReviewEvaluation !='') "
                 + " and (b.empEndyearSelfassessmentGoal is not null and b.empEndyearSelfassessmentGoal !='') and (b.managerEndyearReviewEvaluation is not null and b.managerEndyearReviewEvaluation !='') and a.managerStatus=1 then 'All stages are Completed' "
-                + " end as result"
+                + " end as result "
                 + " FROM "
                 + " EmployeeMaster c "
                 + "  LEFT JOIN "
@@ -339,8 +339,10 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " c.levelMaster f"
                 + " where (STR_TO_DATE(b.startDate,'%d/%m/%Y') BETWEEN STR_TO_DATE('" + appraisalFillingData.getStartDate() + "','%d/%m/%Y') AND STR_TO_DATE('"
                 + appraisalFillingData.getManagerYearEndEndDate() + "','%d/%m/%Y') or b.startDate is null)" + condition
-                + " and (c.dateOfLeaving is null or c.dateOfLeaving = '' or STR_TO_DATE(c.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) "
+                + " and (c.dateOfLeaving is null or c.dateOfLeaving = '' ) "
+                
                 + " group by c.id ";
+                
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

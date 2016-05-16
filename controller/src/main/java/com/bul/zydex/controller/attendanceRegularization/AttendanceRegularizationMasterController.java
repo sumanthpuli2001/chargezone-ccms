@@ -1032,10 +1032,17 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     Date secondHalfTimeStr2 = sdf2.parse(secondHalfTimeStr1[0]);
 
                     Calendar cal1 = Calendar.getInstance();
+                    Calendar cal2 = Calendar.getInstance();
                     cal1.setTime(firstStartHours);
                     cal1.add(Calendar.MINUTE, -earlyMinute);
                     String newTime1 = sdf2.format(cal1.getTime());
                     Date flexibleInTime = sdf2.parse(newTime1);
+
+                    cal2.setTime(firstStartHours);
+                    cal2.add(Calendar.MINUTE, lateMinute);
+                    String newTime = sdf1.format(cal2.getTime());
+                    Date flexibleEndTime = sdf1.parse(newTime);
+
                     long diff = endHours.getTime() - firstStartHours.getTime();
                     long diffMinutes = diff / (60 * 1000);
                     long diff1 = 0;
@@ -1047,9 +1054,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     long diffMinutes1 = diff1 / (60 * 1000);
 
                     if (userTimeIn != null) {
-                        if (diffMinutes1 >= diffMinutes) {
+                        if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
                             secondHalfList.add("PR");
-                        } else if (diffMinutes1 <= diffMinutes) {
+                        } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime)) {
                             secondHalfList.add("AB");
                         } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             secondHalfList.add("PR");

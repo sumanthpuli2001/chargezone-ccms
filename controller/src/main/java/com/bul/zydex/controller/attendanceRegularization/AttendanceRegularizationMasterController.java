@@ -996,7 +996,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                 if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
                     secondHalfList.add("WO");
-                } else if (secondHalf.contains("AR")) {
+                } else if (secondHalf.equals("AR") ) {
                     secondHalfList.add("AR/P");
                 } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR")) {
                     secondHalfList.add("AB");
@@ -1036,12 +1036,12 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     cal1.setTime(firstStartHours);
                     cal1.add(Calendar.MINUTE, -earlyMinute);
                     String newTime1 = sdf2.format(cal1.getTime());
+                    
                     Date flexibleInTime = sdf2.parse(newTime1);
-
                     cal2.setTime(firstStartHours);
                     cal2.add(Calendar.MINUTE, lateMinute);
-                    String newTime = sdf1.format(cal2.getTime());
-                    Date flexibleEndTime = sdf1.parse(newTime);
+                    String newTime = sdf2.format(cal2.getTime());
+                    Date flexibleEndTime = sdf2.parse(newTime);
 
                     long diff = endHours.getTime() - firstStartHours.getTime();
                     long diffMinutes = diff / (60 * 1000);

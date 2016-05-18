@@ -2653,9 +2653,15 @@ public class ExpenseMasterController extends ExpenseMasterAbstract {
     public ModelAndView searchExpenseRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
+        ExpenseMaster expenseMaster = new ExpenseMaster();
+         HttpSession session = request.getSession();
         selectEmployee(request, response);
         departmentList(request);
         designationList(request);
+        expenseMaster.setStatus(999);
+         List<?> expenseList = expenseMasterService.readExpenseRequestListForAdmin(expenseMaster);
+         request.setAttribute("expenseList", expenseList);
+        session.setAttribute("expenseRequestList", expenseList);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("ExpenseReport/ExpenseReportSearchByAdmin");
         return mv;

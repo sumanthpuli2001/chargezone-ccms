@@ -181,11 +181,13 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
         if (expenseMaster.getStatus() != 999) {
             condition += " AND a.status = " + expenseMaster.getStatus() + "";
         }
-        if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getId()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getId()) {
-            condition += " AND b.id = " + expenseMaster.getEmployeeMasterByEmployeeId().getId() + "";
-        }
         if (!"".equals(expenseMaster.getExpenseType()) && null != expenseMaster.getExpenseType()) {
             condition += " AND a.expenseType = '" + expenseMaster.getExpenseType() + "'";
+        }
+        if(null !=expenseMaster.getEmployeeMasterByEmployeeId()){
+            
+        if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getId()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getId()) {
+            condition += " AND b.id = " + expenseMaster.getEmployeeMasterByEmployeeId().getId() + "";
         }
         if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getChild1()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getChild1()) {
             condition += " AND c.id = " + expenseMaster.getEmployeeMasterByEmployeeId().getChild1() + "";
@@ -202,6 +204,7 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
         if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getCompany()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getCompany()
                 && !"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getContactNo1()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getContactNo1()) {
             condition += " AND STR_TO_DATE(a.dateOfSubmit,'%d/%m/%Y') BETWEEN STR_TO_DATE('" + expenseMaster.getEmployeeMasterByEmployeeId().getCompany() + "','%d/%m/%Y') AND STR_TO_DATE('" + expenseMaster.getEmployeeMasterByEmployeeId().getContactNo1() + "','%d/%m/%Y') ";
+        }
         }
 
         String hqlQuery = "Select b.employeeId, b.employeeName, c.departmentName, d.designationName,a.expenseType,a.status,a.dateOfSubmit,a.id,b.id,"

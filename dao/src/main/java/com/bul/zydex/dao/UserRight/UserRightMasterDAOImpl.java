@@ -225,5 +225,19 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+    @Override
+    public List<?> readCashAdvanceViewAdmin() {
+
+        String query = "";
+        query += " "
+                + " select um.id, em.id"
+                + " from UserRightMaster urm "
+                + " left join urm.userMaster um "
+                + " left join um.employeeMasters em "
+                + " where urm.cashAdvanceView=1";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
 
 }

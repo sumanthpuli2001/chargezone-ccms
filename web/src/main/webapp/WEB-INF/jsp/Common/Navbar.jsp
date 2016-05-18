@@ -198,6 +198,8 @@
                             <li><a href="expenseMaster.htm?act=viewExpenseAdminSide"><i class="fa fa-circle-o"></i>Final Expense Approve</a></li>
                             <li><a href="expenseMaster.htm?act=searchExpenseRequest"><i class="fa fa-circle-o"></i>Search Expense Request</a></li>
                             <li><a href="expenseMaster.htm?act=pendingExpenseRequestList"><i class="fa fa-circle-o"></i>View Pending Expense Request</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.userRight.travelExpenseAdmin or sessionScope.userRight.cashAdvanceView}">
                             <li><a href="travelRequestMaster.htm?act=viewCashAdvanceSectionByAdmin"><i class="fa fa-circle-o"></i>Cash Advance Request</a></li>
                             </c:if>
                             <c:if test="${sessionScope.userRight.employee}">

@@ -340,7 +340,6 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " where (STR_TO_DATE(b.startDate,'%d/%m/%Y') BETWEEN STR_TO_DATE('" + appraisalFillingData.getStartDate() + "','%d/%m/%Y') AND STR_TO_DATE('"
                 + appraisalFillingData.getManagerYearEndEndDate() + "','%d/%m/%Y') or b.startDate is null)" + condition
                 + " and (c.dateOfLeaving is null or c.dateOfLeaving = '' ) "
-                
                 + " group by c.id ";
                 
 

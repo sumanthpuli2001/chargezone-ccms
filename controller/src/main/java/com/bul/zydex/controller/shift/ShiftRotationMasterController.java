@@ -2240,7 +2240,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
                                         cell9.setCellValue("WO");
                                         wo = wo + 0.5;
-                                    } else if (secondHalf.contains("AR")) {
+                                    } else if (secondHalf.equals("AR")) {
                                         cell9.setCellValue("AR/P");
                                         ar = ar + 0.5;
                                         cell9.setCellStyle(styleblue);

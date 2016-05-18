@@ -218,7 +218,7 @@
                                 </div>
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
-                                        <h3 class="box-title">1)Please describe the primary reason(s) you are leaving your current position with Zydex:</h3>
+                                        <h3 class="box-title">1)Please describe the primary reason(s) for leaving your current position with Zydex.</h3>
                                         <div class="box-tools pull-right">
                                             <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
                                         </div>
@@ -241,7 +241,7 @@
 
                                     <div class="box box-info collapsed-box">
                                         <div class="box-header">
-                                            <h3 class="box-title">2)Which of the below mentioned factors where you dissatisfied with, which triggered your thought to of leaving Zydex?:</h3>
+                                            <h3 class="box-title">2)Which of the below mentioned factors were you dissatisfied with, which triggered your thought of leaving Zydex?</h3>
                                             <div class="box-tools pull-right">
                                                 <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
                                             </div>
@@ -321,7 +321,7 @@
                                 </div><!-- /.box-body -->
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
-                                        <h3 class="box-title">3)Please provide your candid feedback and rate the following aspects with reference to your job at Zydex. (Please use the 1 – 5 scale below):</h3>
+                                        <h3 class="box-title">3)Please provide your candid feedback and rate the following aspects with reference to your job at Zydex. (Please use the 1 – 5 scale below)</h3>
                                         <div class="box-tools pull-right">
                                             <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
                                         </div>
@@ -429,7 +429,7 @@
 
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
-                                        <h3 class="box-title">4)Please rate the following aspects of the organization overall. Use the 1 – 5 scale below.:</h3>
+                                        <h3 class="box-title">4)Please rate the following aspects of the organization overall. Use the 1 – 5 scale below.</h3>
                                         <div class="box-tools pull-right">
                                             <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
                                         </div>
@@ -525,7 +525,7 @@
                                 </div><!-- /.box-body -->
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
-                                        <h3 class="box-title">5)Please rate your supervisor on the following factors. Use the 1-4 Rating scale below:</h3>
+                                        <h3 class="box-title">5)Please rate your supervisor on the following factors. Use the 1-4 Rating scale below.</h3>
                                         <div class="box-tools pull-right">
                                             <span id="spanId6">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun6();"><i class="fa fa-plus" id="minusId6" ></i></button>
                                         </div>
@@ -649,9 +649,8 @@
                                 </div><!-- /.box-body -->
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
-                                        <h3 class="box-title">6)Which reason made you take decision to leave Zydex?  
+                                        <h3 class="box-title">6)Which reason made you take decision to leave Zydex?  Rate top 3 reasons from the following: (Rate 1,2 &3 only) 
                                         </h3>
-                                        <h3 class="box-title"> Rate top 3 reasons from the following: (Rate 1,2 &3 only) </h3>
                                         <div class="box-tools pull-right">
                                             <span id="spanId7">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7" ></i></button>
                                         </div>
@@ -721,7 +720,7 @@
                                 </div><!-- /.box-body -->
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
-                                        <h3 class="box-title">7)Since when were you considering leaving Zydex? What can be done to retain you? Please mention in brief:</h3>
+                                        <h3 class="box-title">7)Since when were you considering leaving Zydex? What can be done to retain you? Please mention in brief.</h3>
                                         <div class="box-tools pull-right">
                                             <span id="spanId8">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun8();"><i class="fa fa-plus" id="minusId8" ></i></button>
                                         </div>
@@ -746,7 +745,7 @@
                                     <div class="box box-info collapsed-box">
                                         <div class="box-header">
                                             <h3 class="box-title">8)If given a choice or considered at a later date, would you like to re-join us?  
-                                                Please tick: Yes | No.   If No, Why? (Please mention in the space provided here below):
+                                                <br>Please tick: Yes | No.If No, Why? (Please mention in the space provided here below)
                                             </h3>
                                             <div class="box-tools pull-right">
                                                 <span id="spanId9">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun9();"><i class="fa fa-plus" id="minusId9" ></i></button>
@@ -775,7 +774,7 @@
                                 </div>
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
-                                        <h3 class="box-title">9)Any other Suggestions or Feedback? Please mention in brief.:</h3>
+                                        <h3 class="box-title">9)Any other Suggestions or Feedback? Please mention in brief.</h3>
                                         <div class="box-tools pull-right">
                                             <span id="spanId10">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun10();"><i class="fa fa-plus" id="minusId10" ></i></button>
                                         </div>

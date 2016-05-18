@@ -62,6 +62,9 @@
         <property name="dateOfSubmit" type="string">
             <column name="date_of_submit" />
         </property>
+        <property name="cashAdvanceStatus" type="int">
+            <column name="cash_advance_status" not-null="true" />
+        </property>
         <set name="travelDetails" inverse="true">
             <key>
                 <column name="travel_request_id" not-null="true" />

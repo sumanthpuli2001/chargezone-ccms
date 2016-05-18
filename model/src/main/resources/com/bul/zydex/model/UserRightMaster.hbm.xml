@@ -71,5 +71,8 @@
         <property name="attendanceReport" type="boolean">
             <column name="attendance_report" not-null="true" />
         </property>
+        <property name="cashAdvanceView" type="boolean">
+            <column name="cash_advance_view" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

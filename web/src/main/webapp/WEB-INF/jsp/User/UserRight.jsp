@@ -200,6 +200,15 @@
                                                         <label  style="font-weight: normal">Attendance Mgt.</label>
                                                     </div>
                                                 </div><!-- /.col -->
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="cashAdvanceView"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Cash Advance View</label>
+
+                                                    </div>
+                                                    </div>
+                                                        
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div><!-- /.tab-content -->

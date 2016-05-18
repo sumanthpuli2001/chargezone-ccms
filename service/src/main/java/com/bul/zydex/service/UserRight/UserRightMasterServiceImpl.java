@@ -100,5 +100,9 @@ public class UserRightMasterServiceImpl<T> extends GenericsServiceImpl<T> implem
     public List<?> readExpenseAdmin() {
         return userRightMasterDAO.readExpenseAdmin();
     }
+    @Override
+    public List<?> readCashAdvanceViewAdmin() {
+        return userRightMasterDAO.readCashAdvanceViewAdmin();
+    }
 
 }

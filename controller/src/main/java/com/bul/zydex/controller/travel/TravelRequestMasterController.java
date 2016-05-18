@@ -8,13 +8,13 @@ package com.bul.zydex.controller.travel;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
-import com.bul.zydex.model.ExpenseTravelType;
 import com.bul.zydex.model.HotelAccommodation;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.TravelApproverHistory;
 import com.bul.zydex.model.TravelDetail;
 import com.bul.zydex.model.TravelRequestMaster;
 import com.bul.zydex.model.UserMaster;
+import com.bul.zydex.model.UserRightMaster;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -947,10 +947,10 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
         String loginId = employeeMaster.getId().toString();
         LevelMaster levelMaster = new LevelMaster();
         levelMaster = levelMasterService.readById(employeeMaster.getLevelMaster().getId());
-        
+
         DesignationMaster designationMaster1 = new DesignationMaster();
         designationMaster1 = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
-        
+
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         int employeeId = travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId();
         employeeMaster1 = employeeMasterService.readById(employeeId);
@@ -975,8 +975,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                             travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
                             travelRequestMaster.setStatus(6);
                         }
-                    } 
-                    else if (Integer.parseInt(loginId) == Integer.parseInt(manager6)) {
+                    } else if (Integer.parseInt(loginId) == Integer.parseInt(manager6)) {
                         if (travelRequestMaster.getTravelType().equals("Domestic") || travelRequestMaster.getTravelType().equals("Local")) {
 
                             travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
@@ -986,12 +985,12 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                             travelRequestMaster.setStatus(5);
                         }
 
-                    }else {
+                    } else {
                         travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
                         travelRequestMaster.setStatus(3);
                     }
                 } catch (Exception e) {
-                    
+
                 }
                 travelRequestMasterService.update(travelRequestMaster);
                 TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
@@ -2661,8 +2660,26 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
         ModelAndView mv = new ModelAndView();
         TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
 
+        UserRightMaster userRightMaster = (UserRightMaster) request.getSession().getAttribute("userRight");
+
         List<?> approvedTravelReqList = travelRequestMasterService.readApprovedTravelRequest();
-        request.setAttribute("approvedTravelReqList", approvedTravelReqList);
+
+        List<?> approvedTravelReqListForRight = travelRequestMasterService.readApprovedTravelRequest();
+
+        Iterator itr = approvedTravelReqListForRight.iterator();
+        while (itr.hasNext()) {
+            Object[] next = (Object[]) itr.next();
+            int cashAdvanceStatus = (Integer) next[8];
+            if (cashAdvanceStatus == 0) {
+                itr.remove();
+            }
+        }
+        if (userRightMaster.isCashAdvanceView()) {
+            request.setAttribute("approvedTravelReqList", approvedTravelReqListForRight);
+        } else {
+            request.setAttribute("approvedTravelReqList", approvedTravelReqList);
+        }
+
         mv.setViewName("Travel/TravelCashAdvanceResult");
         return mv;
     }
@@ -2719,11 +2736,60 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
             travelRequestMaster1.setCashRequired(travelRequestMaster.getCashRequired());
             travelRequestMaster1.setAmount(travelRequestMaster.getAmount());
             travelRequestMaster1.setCurrency(travelRequestMaster.getCurrency());
+            travelRequestMaster1.setCashAdvanceStatus(1);
 
         }
         travelRequestMasterService.update(travelRequestMaster1);
         request.setAttribute("successMessage",
                 "Information : The Information is Saved Successfully.");
+
+        try {
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            DesignationMaster designationMaster = new DesignationMaster();
+            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            // id=135 for Send to Cash Advance Admin...
+            List expenseAdminList = userRightMasterService.readCashAdvanceViewAdmin();
+            Iterator itr = expenseAdminList.iterator();
+            while (itr.hasNext()) {
+                Object[] next = (Object[]) itr.next();
+                String userId = "" + next[0];
+                String expenseId = "" + next[1];
+                EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                employeeMasterHr = employeeMasterService.readById(Integer.parseInt(expenseId));
+
+                EmployeeMaster employeeMaster = employeeMasterService.readById(travelRequestMaster1.getEmployeeMasterByEmployeeMasterId().getId());
+                emailTemplate = emailTemplateService.readById(135);
+                String To = employeeMasterHr.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                sendMail.sendMail(from, To, Subject, msg);
+            }
+        } catch (Exception e) {
+        }
+        try {
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            DesignationMaster designationMaster = new DesignationMaster();
+            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            // id=136 for Send to Employee For Cash Advance Approve...
+            EmployeeMaster employeeMaster = employeeMasterService.readById(travelRequestMaster1.getEmployeeMasterByEmployeeMasterId().getId());
+            emailTemplate = emailTemplateService.readById(136);
+            String To = employeeMaster.getOfficeEmailId();
+            String from = employeeMasterModel.getOfficeEmailId();
+            String Subject = emailTemplate.getSubject();
+            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+            String msg = emailTemplate.getBodytext();
+            msg = msg.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+            sendMail.sendMail(from, To, Subject, msg);
+
+        } catch (Exception e) {
+        }
         mv.setViewName("forward:travelRequestMaster.htm?act=viewCashAdvanceSectionByAdmin");
         return mv;
     }

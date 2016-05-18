@@ -72,6 +72,7 @@
                                                                     <th>Designation</th>
                                                                     <th>Travel Type</th>
                                                                     <th>Travel Request No.</th>
+                                                                    <th>Status</th>
                                                                     <th>Action</th>
                                                                 </tr>
                                                             </thead>
@@ -86,6 +87,12 @@
                                                             <td>${approvedTravelReqList[3]}</td>
                                                             <td>${approvedTravelReqList[4]}</td>
                                                             <td>${approvedTravelReqList[5]}</td>
+                                                            <c:if test="${approvedTravelReqList[8] eq 0}">
+                                                            <td><span class="badge">Pending</span></td>
+                                                            </c:if>
+                                                            <c:if test="${approvedTravelReqList[8] eq 1}">
+                                                                <td><span class="label label-success">Approved By Expense Admin</span></td>
+                                                            </c:if>
                                                             <td>
                                                                 <div class="btn-group">
                                                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="viewClick('${approvedTravelReqList[6]}', '${approvedTravelReqList[7]}');">

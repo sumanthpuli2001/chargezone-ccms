@@ -170,7 +170,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                     <div class="col-sm-2">
+                                                    <div class="col-sm-2">
                                                         <label>Contact No:</label>
                                                     </div>
                                                     <div class="col-sm-4">
@@ -194,7 +194,7 @@
                                                                                     <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5()"><i class="fa fa-plus" id="minusId5"></i></button>
                                                                                 </div>-->
                                     </div><!-- /.box-header -->
-                                    <div class="box-body no-padding">
+                                    <div class="box-body no-padding" <c:if test="${sessionScope.userRight.cashAdvanceView}">style="pointer-events: none;"</c:if>>
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group">
@@ -237,12 +237,13 @@
                                     </div><!-- /.box-body -->
                                 </div>
                                 <!--cash advanced required completes here-->
-                                <div class="form-group">
-                                    <div class="col-sm-12" style="text-align: center">
-                                        <button type="submit" class="btn btn-primary" data-original-title="" title="" style="width: 100px">SUBMIT</button>
+                                <c:if test="${!sessionScope.userRight.cashAdvanceView}">
+                                    <div class="form-group">
+                                        <div class="col-sm-12" style="text-align: center">
+                                            <button type="submit" class="btn btn-success" data-original-title="" title="" style="width: 100px">Approve</button>
+                                        </div>
                                     </div>
-
-                                </div>
+                                </c:if>
                             </form:form>
                             <!--form horizontal ends here-->
                             <div class="tab-pane" id="tab_3"></div><!-- /.tab-pane -->

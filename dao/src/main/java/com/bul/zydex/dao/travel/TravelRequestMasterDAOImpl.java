@@ -750,12 +750,12 @@ public class TravelRequestMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
     public List<?> readApprovedTravelRequest() {
         String query = "";
 
-        query += " Select b.employeeId, b.employeeName, c.departmentName, d.designationName, a.travelType, a.travelRequestNo, a.id, b.id "
+        query += " Select b.employeeId, b.employeeName, c.departmentName, d.designationName, a.travelType, a.travelRequestNo, a.id, b.id, a.cashAdvanceStatus"
                 + " FROM TravelRequestMaster a"
                 + " LEFT JOIN a.employeeMasterByEmployeeMasterId b"
                 + " LEFT JOIN b.departmentMaster c "
                 + " LEFT JOIN b.designationMaster d "
-                + " Where a.status=5";
+                + " Where a.status=5 and a.cashRequired='Yes'";
 
         return getHibernateTemplate().find(query);
     }

@@ -31,188 +31,221 @@ public class UserRightMaster  implements java.io.Serializable {
      private boolean exitInterview;
      private boolean noDue;
      private boolean attendanceReport;
+     private boolean cashAdvanceView;
 
     public UserRightMaster() {
     }
 
-    public UserRightMaster(UserMaster userMaster, boolean hr, boolean employee, boolean travelAdmin, boolean travelExpenseAdmin, boolean poolCarAdmin, boolean security, boolean cafeteriaAdmin, boolean itAdmin, boolean employeeManagement, boolean leaveManagement, boolean shiftManagement, boolean appraisalPmp, boolean appraisal360, boolean probationToConfirmation, boolean employeeExit, boolean employeeReferral, boolean temporaryShiftAssign, boolean exitInterview, boolean noDue, boolean attendanceReport) {
-       this.userMaster = userMaster;
-       this.hr = hr;
-       this.employee = employee;
-       this.travelAdmin = travelAdmin;
-       this.travelExpenseAdmin = travelExpenseAdmin;
-       this.poolCarAdmin = poolCarAdmin;
-       this.security = security;
-       this.cafeteriaAdmin = cafeteriaAdmin;
-       this.itAdmin = itAdmin;
-       this.employeeManagement = employeeManagement;
-       this.leaveManagement = leaveManagement;
-       this.shiftManagement = shiftManagement;
-       this.appraisalPmp = appraisalPmp;
-       this.appraisal360 = appraisal360;
-       this.probationToConfirmation = probationToConfirmation;
-       this.employeeExit = employeeExit;
-       this.employeeReferral = employeeReferral;
-       this.temporaryShiftAssign = temporaryShiftAssign;
-       this.exitInterview = exitInterview;
-       this.noDue = noDue;
-       this.attendanceReport = attendanceReport;
+    public UserRightMaster(UserMaster userMaster, boolean hr, boolean employee, boolean travelAdmin, boolean travelExpenseAdmin, boolean poolCarAdmin, boolean security, boolean cafeteriaAdmin, boolean itAdmin, boolean employeeManagement, boolean leaveManagement, boolean shiftManagement, boolean appraisalPmp, boolean appraisal360, boolean probationToConfirmation, boolean employeeExit, boolean employeeReferral, boolean temporaryShiftAssign, boolean exitInterview, boolean noDue, boolean attendanceReport, boolean cashAdvanceView) {
+        this.userMaster = userMaster;
+        this.hr = hr;
+        this.employee = employee;
+        this.travelAdmin = travelAdmin;
+        this.travelExpenseAdmin = travelExpenseAdmin;
+        this.poolCarAdmin = poolCarAdmin;
+        this.security = security;
+        this.cafeteriaAdmin = cafeteriaAdmin;
+        this.itAdmin = itAdmin;
+        this.employeeManagement = employeeManagement;
+        this.leaveManagement = leaveManagement;
+        this.shiftManagement = shiftManagement;
+        this.appraisalPmp = appraisalPmp;
+        this.appraisal360 = appraisal360;
+        this.probationToConfirmation = probationToConfirmation;
+        this.employeeExit = employeeExit;
+        this.employeeReferral = employeeReferral;
+        this.temporaryShiftAssign = temporaryShiftAssign;
+        this.exitInterview = exitInterview;
+        this.noDue = noDue;
+        this.attendanceReport = attendanceReport;
+        this.cashAdvanceView = cashAdvanceView;
     }
-   
+
     public Integer getId() {
-        return this.id;
+        return id;
     }
-    
+
     public void setId(Integer id) {
         this.id = id;
     }
+
     public UserMaster getUserMaster() {
-        return this.userMaster;
+        return userMaster;
     }
-    
+
     public void setUserMaster(UserMaster userMaster) {
         this.userMaster = userMaster;
     }
+
     public boolean isHr() {
-        return this.hr;
+        return hr;
     }
-    
+
     public void setHr(boolean hr) {
         this.hr = hr;
     }
+
     public boolean isEmployee() {
-        return this.employee;
+        return employee;
     }
-    
+
     public void setEmployee(boolean employee) {
         this.employee = employee;
     }
+
     public boolean isTravelAdmin() {
-        return this.travelAdmin;
+        return travelAdmin;
     }
-    
+
     public void setTravelAdmin(boolean travelAdmin) {
         this.travelAdmin = travelAdmin;
     }
+
     public boolean isTravelExpenseAdmin() {
-        return this.travelExpenseAdmin;
+        return travelExpenseAdmin;
     }
-    
+
     public void setTravelExpenseAdmin(boolean travelExpenseAdmin) {
         this.travelExpenseAdmin = travelExpenseAdmin;
     }
+
     public boolean isPoolCarAdmin() {
-        return this.poolCarAdmin;
+        return poolCarAdmin;
     }
-    
+
     public void setPoolCarAdmin(boolean poolCarAdmin) {
         this.poolCarAdmin = poolCarAdmin;
     }
+
     public boolean isSecurity() {
-        return this.security;
+        return security;
     }
-    
+
     public void setSecurity(boolean security) {
         this.security = security;
     }
+
     public boolean isCafeteriaAdmin() {
-        return this.cafeteriaAdmin;
+        return cafeteriaAdmin;
     }
-    
+
     public void setCafeteriaAdmin(boolean cafeteriaAdmin) {
         this.cafeteriaAdmin = cafeteriaAdmin;
     }
+
     public boolean isItAdmin() {
-        return this.itAdmin;
+        return itAdmin;
     }
-    
+
     public void setItAdmin(boolean itAdmin) {
         this.itAdmin = itAdmin;
     }
+
     public boolean isEmployeeManagement() {
-        return this.employeeManagement;
+        return employeeManagement;
     }
-    
+
     public void setEmployeeManagement(boolean employeeManagement) {
         this.employeeManagement = employeeManagement;
     }
+
     public boolean isLeaveManagement() {
-        return this.leaveManagement;
+        return leaveManagement;
     }
-    
+
     public void setLeaveManagement(boolean leaveManagement) {
         this.leaveManagement = leaveManagement;
     }
+
     public boolean isShiftManagement() {
-        return this.shiftManagement;
+        return shiftManagement;
     }
-    
+
     public void setShiftManagement(boolean shiftManagement) {
         this.shiftManagement = shiftManagement;
     }
+
     public boolean isAppraisalPmp() {
-        return this.appraisalPmp;
+        return appraisalPmp;
     }
-    
+
     public void setAppraisalPmp(boolean appraisalPmp) {
         this.appraisalPmp = appraisalPmp;
     }
+
     public boolean isAppraisal360() {
-        return this.appraisal360;
+        return appraisal360;
     }
-    
+
     public void setAppraisal360(boolean appraisal360) {
         this.appraisal360 = appraisal360;
     }
+
     public boolean isProbationToConfirmation() {
-        return this.probationToConfirmation;
+        return probationToConfirmation;
     }
-    
+
     public void setProbationToConfirmation(boolean probationToConfirmation) {
         this.probationToConfirmation = probationToConfirmation;
     }
+
     public boolean isEmployeeExit() {
-        return this.employeeExit;
+        return employeeExit;
     }
-    
+
     public void setEmployeeExit(boolean employeeExit) {
         this.employeeExit = employeeExit;
     }
+
     public boolean isEmployeeReferral() {
-        return this.employeeReferral;
+        return employeeReferral;
     }
-    
+
     public void setEmployeeReferral(boolean employeeReferral) {
         this.employeeReferral = employeeReferral;
     }
+
     public boolean isTemporaryShiftAssign() {
-        return this.temporaryShiftAssign;
+        return temporaryShiftAssign;
     }
-    
+
     public void setTemporaryShiftAssign(boolean temporaryShiftAssign) {
         this.temporaryShiftAssign = temporaryShiftAssign;
     }
+
     public boolean isExitInterview() {
-        return this.exitInterview;
+        return exitInterview;
     }
-    
+
     public void setExitInterview(boolean exitInterview) {
         this.exitInterview = exitInterview;
     }
+
     public boolean isNoDue() {
-        return this.noDue;
+        return noDue;
     }
-    
+
     public void setNoDue(boolean noDue) {
         this.noDue = noDue;
     }
+
     public boolean isAttendanceReport() {
-        return this.attendanceReport;
+        return attendanceReport;
     }
-    
+
     public void setAttendanceReport(boolean attendanceReport) {
         this.attendanceReport = attendanceReport;
     }
+
+    public boolean isCashAdvanceView() {
+        return cashAdvanceView;
+    }
+
+    public void setCashAdvanceView(boolean cashAdvanceView) {
+        this.cashAdvanceView = cashAdvanceView;
+    }
+
+   
 
 
 

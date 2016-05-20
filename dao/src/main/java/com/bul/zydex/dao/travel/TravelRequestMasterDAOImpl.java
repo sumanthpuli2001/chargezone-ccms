@@ -759,5 +759,15 @@ public class TravelRequestMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         return getHibernateTemplate().find(query);
     }
+    @Override
+    public List<?> readTravelRequestForEscalation() {
+        String query = "";
+
+        query += " "
+                + " FROM TravelRequestMaster a"
+                + " Where a.status=0";
+
+        return getHibernateTemplate().find(query);
+    }
 
 }

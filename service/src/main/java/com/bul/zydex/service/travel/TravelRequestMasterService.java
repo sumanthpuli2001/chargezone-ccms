@@ -62,4 +62,5 @@ public interface TravelRequestMasterService<T> extends GenericsService<T> {
     public List<?> searchTravelApproveOfEmployeeByPreviousMonthWise(T object);
 
     public List<?> readApprovedTravelRequest();
+    public List<?> readTravelRequestForEscalation();
 }

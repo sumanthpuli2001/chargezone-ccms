@@ -44,8 +44,8 @@
     <bean id="cronTrigger3"
           class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="overTimeEntryId" />
-        <property name="cronExpression" value="0 0/3 * * * ?" />
-        <!--<property name="cronExpression" value="0 0 12 * * ?" />-->
+        <!--<property name="cronExpression" value="0 0/3 * * * ?" />-->
+        <property name="cronExpression" value="0 0 12 * * ?" />
     </bean><!--
 
 --> <bean id="carryForwardLeave"
@@ -114,6 +114,17 @@
         <!--<property name="cronExpression" value="0 0/1 * * * ?" />0 0 10 * * ?	-->
         <property name="cronExpression" value="0 0 10 * * ?" />
     </bean>
+    
+    <bean id="travelEscalationId"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="travelRequestMasterController1" />
+        <property name="targetMethod" value="travelEscalationRequest" />
+    </bean>
+    <bean id="cronTrigger10"
+          class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="travelEscalationId" />
+        <property name="cronExpression" value="0 5 0 1/1 * ? *" />
+    </bean>
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="jobDetails">
             <list>
@@ -126,6 +137,7 @@
                 <ref bean="shortLeveId" />
                 <ref bean="probationToConfirmation" />
                 <ref bean="probationToConfirmationCreateCheck" />
+                <ref bean="travelEscalationId" />
             </list>
         </property>
         <property name="triggers">
@@ -139,6 +151,7 @@
                 <ref bean="cronTrigger7" />
                 <ref bean="cronTrigger8" />
                 <ref bean="cronTrigger9" />
+                <ref bean="cronTrigger10" />
             </list>
         </property>
     </bean>

@@ -17,11 +17,27 @@
                 background-color: white !important;
                 background:linear-gradient(to bottom,#fffff 0,#111 100%) !important;
             }
+
+            #approveId,#rejectId{
+                width: 50px !important;
+            }
         </style>
     </head>
     <script>
         function editClick(id) {
             window.location = 'attendanceRegularizationMaster.htm?act=approvalEditClickByAdmin&id=' + id;
+        }
+
+        function approveClick(arId) {
+            window.location = 'attendanceRegularizationMaster.htm?act=approvalEditSubmitByAdmin&id=' + arId;
+        }
+
+        function rejectClick(arId) {
+            window.location = 'attendanceRegularizationMaster.htm?act=rejectSubmitByAdmin&id=' + arId;
+        }
+
+        function reworkClick(arId) {
+            window.location = 'attendanceRegularizationMaster.htm?act=reworkSubmitByAdmin&id=' + arId;
         }
     </script>
 
@@ -73,18 +89,18 @@
                                                                     <th>End Date & Time</th>
                                                                     <th>Reason</th>
                                                                     <th>Status</th>
-                                                                    <th>Action</th>
+                                                                    <th style="text-align: center;">Action</th>
                                                                 </tr>
                                                             </thead>
                                                         </c:otherwise>
                                                     </c:choose>
                                                     <tbody>
                                                         <c:forEach var="list" items="${list}">
-                                                            <tr style="width: 100%;">
-                                                                <td style="width:20%;">${list[1]}</td>
-                                                                <td style="width:15%;">${list[2]}</td>
-                                                                <td style="width:15%;">${list[3]}</td>
-                                                                <td style="width:25%;">${list[4]}</td>
+                                                            <tr>
+                                                                <td >${list[1]}</td>
+                                                                <td >${list[2]}</td>
+                                                                <td>${list[3]}</td>
+                                                                <td style="width:40%;">${list[4]}</td>
                                                                 <c:if test="${list[5] eq 0}">
                                                                     <td><span  class="label label-primary" >Pending</span></td>
                                                                 </c:if>
@@ -103,9 +119,26 @@
                                                                 <c:if test="${list[5] eq 7}">
                                                                     <td><span class="label label-info">Rework</span></td>
                                                                 </c:if>
-                                                                <c:if test="${list[5] ne 5}">
-                                                                    <td style="width:10%;"><button type="button" class="btn btn-default center-block" style="vertical-align: central;align-self: center;" onclick="editClick(${list[0]});">View</button></td>
-                                                                </c:if>
+                                                                <td>
+                                                                    <div class="col-sm-12">
+                                                                        <c:if test="${list[5] eq 0}"> 
+                                                                            <div class="col-sm-3">
+                                                                                <button type="button" class="label label-success" style="font-size: 8px;" id="approveId"  onclick="approveClick(${list[0]});" title="Approve">APPROVE</button>
+                                                                            </div>
+                                                                            <div class="col-sm-3">
+                                                                                <button type="button" class="label label-warning" style="font-size: 8px;" id="rejectId" onclick="reworkClick(${list[0]});" title="Rework">REWORK</button>
+                                                                            </div>
+                                                                            <div class="col-sm-3">
+                                                                                <button type="button" class="label label-danger" style="font-size: 8px;" id="rejectId" onclick="rejectClick(${list[0]});" title="Reject">REJECT</button>
+                                                                            </div>
+                                                                        </c:if>
+                                                                        <c:if test="${list[5] ne 5}">
+                                                                            <div class="col-sm-3">
+                                                                                <button type="button" class="label label-default" style="font-size: 8px;" id="approveId" onclick="editClick(${list[0]});" title="View">VIEW</button>
+                                                                            </div>
+                                                                        </c:if>
+                                                                    </div>
+                                                                </td>
                                                                 <c:if test="${list[5] eq 5}">
                                                                     <td></td>
                                                                 </c:if>

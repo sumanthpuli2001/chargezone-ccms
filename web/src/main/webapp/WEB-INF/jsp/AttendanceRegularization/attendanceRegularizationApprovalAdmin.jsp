@@ -237,14 +237,14 @@
                                         </div>
                                     </c:if>
                                     <!--Reason In Detail completes Here-->
-                                    <c:if test="${status eq 0}">
-                                        <div class="box box-info collapsed-box">
+                                    <%--<c:if test="${status eq 0}">--%>
+<!--                                        <div class="box box-info collapsed-box">
                                             <div class="box-header">
                                                 <h3 class="box-title">Manager Remarks:</h3>
                                                 <div class="box-tools pull-right">
                                                     <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4()"><i class="fa fa-plus" id="minusId4"></i></button>
                                                 </div>
-                                            </div><!-- /.box-header -->
+                                            </div> /.box-header 
                                             <div class="box-body no-padding">
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12">
@@ -254,23 +254,23 @@
                                                                 <textarea class="form-control" rows="6" id="remark" name="remark" placeholder="Enter Remark" ></textarea>
                                                             </div>
                                                         </div>
-                                                    </div><!-- /.col -->
-                                                </div><!-- /.row -->
-                                            </div><!-- /.box-body -->
-                                        </div>
-                                        <div class="form-group" id="sub_btn">
-                                            <div class="col-sm-5  ">
-                                                <button type="submit" class="btn btn-success" style="width: 100px;" data-original-title="" title="">APPROVE</button>
-                                            </div>
-                                            <div class="col-sm-3 ">
-                                                <button type="button" class="btn btn-danger" style="width: 100px;" onclick="rejectClick();" data-original-title="">REJECT</button>
-                                            </div>
-                                            <div class="col-sm-4 ">
-                                                <button type="button" class="btn btn-warning" style="width: 100px;float: right;" onclick="reworkClick();" data-original-title="">REWORK</button>
-                                            </div>
-                                        </div>
-                                    </c:if>
-                                    <c:if test="${status eq 1}">
+                                                    </div> /.col 
+                                                </div> /.row 
+                                            </div> /.box-body 
+                                        </div>-->
+                                        <!--<div class="form-group" id="sub_btn">-->
+                                            <!--<div class="col-sm-5  ">-->
+                                                <!--<button type="submit" class="btn btn-success" style="width: 100px;" data-original-title="" title="">APPROVE</button>-->
+                                            <!--</div>-->
+                                            <!--<div class="col-sm-3 ">-->
+                                                <!--<button type="button" class="btn btn-danger" style="width: 100px;" onclick="rejectClick();" data-original-title="">REJECT</button>-->
+                                            <!--</div>-->
+                                            <!--<div class="col-sm-4 ">-->
+                                                <!--<button type="button" class="btn btn-warning" style="width: 100px;float: right;" onclick="reworkClick();" data-original-title="">REWORK</button>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <%--</c:if>--%>
+                                    <%--<c:if test="${status eq 1}">--%>
                                         <!--                                        <div class="form-group" id="sub_btn">
                                                                                     <div class="col-sm-5  ">
                                                                                         <button type="submit" class="btn btn-primary" style="width: 100px;background-color: #00b050;border-radius: 6px;font-weight: bold;  " data-original-title="" title="">APPROVE</button>
@@ -282,7 +282,7 @@
                                                                                         <button type="button" class="btn btn-warning" style="width: 100px;border-radius: 6px;font-weight: bold;float: right;" onclick="reworkClick();" data-original-title="">REWORK</button>
                                                                                     </div>
                                                                                 </div>-->
-                                    </c:if>
+                                    <%--</c:if>--%>
                                 </form>
                                 <!--form horizontal ends here-->
                                 <div class="tab-pane" id="tab_3"></div><!-- /.tab-pane -->

@@ -1406,7 +1406,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
         String id = "" + request.getParameter("id");
-        String remark = "" + request.getParameter("remark");
+//        String remark = "" + request.getParameter("remark");
+        String remark = "";
         attendanceRegularization = attendanceRegularizationMasterService.readById(Integer.parseInt(id));
         attendanceRegularization.setStatus(1);
         attendanceRegularization.setManagerRemark(remark);
@@ -1493,7 +1494,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
         String id = request.getParameter("id");
-        String remark = "" + request.getParameter("remark");
+        String remark = "";
         attendanceRegularization = attendanceRegularizationMasterService.readById(Integer.parseInt(id));
         attendanceRegularization.setStatus(3);
         attendanceRegularization.setManagerRemark(remark);
@@ -1538,7 +1539,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         } catch (Exception e) {
         }
 
-        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
+        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=approvalSubmit");
+//        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
         return mv;
     }
 
@@ -1546,7 +1548,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
         String id = request.getParameter("id");
-        String remark = "" + request.getParameter("remark");
+        String remark = "";
         attendanceRegularization = attendanceRegularizationMasterService.readById(Integer.parseInt(id));
         attendanceRegularization.setStatus(7);
         attendanceRegularization.setManagerRemark(remark);
@@ -1589,7 +1591,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         } catch (Exception e) {
         }
 
-        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
+         mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=approvalSubmit");
+//        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
         return mv;
     }
 

@@ -618,6 +618,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String reportingManagerBeforeUpdate = "" + employeeMasterForReportingManagerUpdateWherRequired.getReportingManagerLevel1();
         String reportingManagerForChange = employeeMaster.getReportingManagerLevel1();
         UserMaster userMaster = new UserMaster();
+        UserMaster userMaster1 = new UserMaster();
         bind(request, employeeMaster);
         selectEmployee(request, response);
         departmentList(request);
@@ -703,7 +704,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         }
 
         employeeMaster.setPanCard(String.valueOf(employeeMaster.getPanCard()).toUpperCase());//this is for store pan card in uppercase in database.
+        userMaster1 = userMasterService.readById(employeeMaster.getUserMaster().getId());
+        userMaster1.setUserName(employeeMaster.getEmployeeId());
+        userMasterService.update(userMaster1);
         employeeMasterService.update(employeeMaster);
+
         if (!reportingManagerBeforeUpdate.equals(reportingManagerForChange)) {
             //code will execute only if reporting manager changed then it will reflect in all sub-ordinate.
             List employeeContainsOldReportingManagerList = employeeMasterService.readByReportingManager("" + employeeMaster.getId());
@@ -746,6 +751,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     }
                 }
                 try {
+                    userMaster1 = userMasterService.readById(employeeMaster.getUserMaster().getId());
+                    userMaster1.setUserName(employeeMaster.getEmployeeId());
+                    userMasterService.update(userMaster1);
                     employeeMasterService.update(employeeContainsOldReportingManager);
                 } catch (Exception e) {
                 }

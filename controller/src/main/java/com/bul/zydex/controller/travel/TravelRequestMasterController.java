@@ -1652,7 +1652,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                     if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
                                         finalList.add(obj);
                                     } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 4, 4);
+                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 7, 7);
                                         if (tDate.before(Date21) && checklastapprovedateflag == true) {
                                             finalList.add(obj);
                                         }
@@ -1677,12 +1677,12 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                     if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
                                         finalList.add(obj);
                                     } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
-                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 4, 4);
+                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 7, 7);
                                         if (tDate.before(Date28) && checklastapprovedateflag == true) {
                                             finalList.add(obj);
                                         }
                                     } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                        boolean checklastapprovedateflag1 = managercheck(tabId, manager1, 8, 4);
+                                        boolean checklastapprovedateflag1 = managercheck(tabId, manager1, 14, 7);
                                         if (tDate.before(Date28) && checklastapprovedateflag1 == true) {
                                             finalList.add(obj);
                                         }
@@ -1712,20 +1712,20 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                     if (!manager3.isEmpty()) {
                                         if (status != 1) {
                                             if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
-                                                boolean checklastapprovedateflag = managercheck(tabId, manager3, 4, 4);
+                                                boolean checklastapprovedateflag = managercheck(tabId, manager3, 7, 7);
                                                 if (tDate.before(Date21) && checklastapprovedateflag == true) {
                                                     finalList.add(obj);
                                                 }
                                             } else if (!manager2.isEmpty()) {
                                                 if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
-                                                    boolean checklastapprovedateflag = managercheck(tabId, manager2, 8, 4);
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager2, 14, 7);
                                                     if (checklastapprovedateflag == true) {
                                                         finalList.add(obj);
                                                     }
                                                 }
                                             } else if (!manager1.isEmpty()) {
                                                 if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                                    boolean checklastapprovedateflag = managercheck(tabId, manager1, 12, 4);
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager1, 21, 7);
                                                     if (checklastapprovedateflag == true) {
                                                         finalList.add(obj);
                                                     }
@@ -1738,20 +1738,20 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                         if (!manager3.isEmpty()) {
                                             if (status != 1) {
                                                 if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
-                                                    boolean checklastapprovedateflag = managercheck(tabId, manager3, 0, 4);
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager3, 0, 7);
                                                     if (tDate.before(Date21) && checklastapprovedateflag == true) {
                                                         finalList.add(obj);
                                                     }
                                                 } else if (!manager2.isEmpty()) {
                                                     if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
-                                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 4, 4);
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 7, 7);
                                                         if (checklastapprovedateflag == true) {
                                                             finalList.add(obj);
                                                         }
                                                     }
                                                 } else if (!manager1.isEmpty()) {
                                                     if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 8, 4);
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 14, 7);
                                                         if (checklastapprovedateflag == true) {
                                                             finalList.add(obj);
                                                         }
@@ -1762,13 +1762,13 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                             if (!manager2.isEmpty()) {
                                                 if (status != 1) {
                                                     if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
-                                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 0, 4);
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 0, 7);
                                                         if (checklastapprovedateflag == true) {
                                                             finalList.add(obj);
                                                         }
                                                     } else if (!manager1.isEmpty()) {
                                                         if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                                            boolean checklastapprovedateflag = managercheck(tabId, manager1, 4, 4);
+                                                            boolean checklastapprovedateflag = managercheck(tabId, manager1, 7, 7);
                                                             if (checklastapprovedateflag == true) {
                                                                 finalList.add(obj);
                                                             }
@@ -1780,7 +1780,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                                     if (status != 1) {
                                                         if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
                                                             if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                                                boolean checklastapprovedateflag = managercheck(tabId, manager1, 0, 4);
+                                                                boolean checklastapprovedateflag = managercheck(tabId, manager1, 0, 7);
                                                                 finalList.add(obj);
                                                             }
                                                         }
@@ -2087,19 +2087,19 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                     Date tDate = sdf.parse(today);
                     Calendar c = Calendar.getInstance();
                     c.setTime(dos);
-                    c.add(Calendar.DATE, 4);
+                    c.add(Calendar.DATE, 7);
                     Date Date7 = c.getTime();
                     c.setTime(Date7);
-                    c.add(Calendar.DATE, 4);
+                    c.add(Calendar.DATE, 7);
                     Date Date14 = c.getTime();
                     c.setTime(Date14);
-                    c.add(Calendar.DATE, 4);
+                    c.add(Calendar.DATE, 7);
                     Date Date21 = c.getTime();
                     c.setTime(Date21);
-                    c.add(Calendar.DATE, 4);
+                    c.add(Calendar.DATE, 7);
                     Date Date28 = c.getTime();
                     c.setTime(Date28);
-                    c.add(Calendar.DATE, 4);
+                    c.add(Calendar.DATE, 7);
                     Date Date35 = c.getTime();
 
                     if (Integer.parseInt(manager1) == Integer.parseInt(loginId)) {
@@ -2143,7 +2143,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                     if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
                                         finalList.add(obj);
                                     } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 4, 4);
+                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 7, 7);
                                         if (tDate.before(Date21) && checklastapprovedateflag == true) {
                                             finalList.add(obj);
                                         }
@@ -2168,12 +2168,12 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                     if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
                                         finalList.add(obj);
                                     } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
-                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 4, 4);
+                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 7, 7);
                                         if (tDate.before(Date28) && checklastapprovedateflag == true) {
                                             finalList.add(obj);
                                         }
                                     } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                        boolean checklastapprovedateflag1 = managercheck(tabId, manager1, 8, 4);
+                                        boolean checklastapprovedateflag1 = managercheck(tabId, manager1, 14, 7);
                                         if (tDate.before(Date28) && checklastapprovedateflag1 == true) {
                                             finalList.add(obj);
                                         }
@@ -2203,20 +2203,20 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                     if (!manager3.isEmpty()) {
                                         if (status != 1) {
                                             if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
-                                                boolean checklastapprovedateflag = managercheck(tabId, manager3, 4, 4);
+                                                boolean checklastapprovedateflag = managercheck(tabId, manager3, 7, 7);
                                                 if (tDate.before(Date21) && checklastapprovedateflag == true) {
                                                     finalList.add(obj);
                                                 }
                                             } else if (!manager2.isEmpty()) {
                                                 if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
-                                                    boolean checklastapprovedateflag = managercheck(tabId, manager2, 8, 4);
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager2, 14, 7);
                                                     if (checklastapprovedateflag == true) {
                                                         finalList.add(obj);
                                                     }
                                                 }
                                             } else if (!manager1.isEmpty()) {
                                                 if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                                    boolean checklastapprovedateflag = managercheck(tabId, manager1, 12, 4);
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager1, 21, 7);
                                                     if (checklastapprovedateflag == true) {
                                                         finalList.add(obj);
                                                     }
@@ -2229,20 +2229,20 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                         if (!manager3.isEmpty()) {
                                             if (status != 1) {
                                                 if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
-                                                    boolean checklastapprovedateflag = managercheck(tabId, manager3, 0, 4);
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager3, 0, 7);
                                                     if (tDate.before(Date21) && checklastapprovedateflag == true) {
                                                         finalList.add(obj);
                                                     }
                                                 } else if (!manager2.isEmpty()) {
                                                     if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
-                                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 4, 4);
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 7, 7);
                                                         if (checklastapprovedateflag == true) {
                                                             finalList.add(obj);
                                                         }
                                                     }
                                                 } else if (!manager1.isEmpty()) {
                                                     if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 8, 4);
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 14, 7);
                                                         if (checklastapprovedateflag == true) {
                                                             finalList.add(obj);
                                                         }
@@ -2253,13 +2253,13 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                             if (!manager2.isEmpty()) {
                                                 if (status != 1) {
                                                     if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
-                                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 0, 4);
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 0, 7);
                                                         if (checklastapprovedateflag == true) {
                                                             finalList.add(obj);
                                                         }
                                                     } else if (!manager1.isEmpty()) {
                                                         if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                                            boolean checklastapprovedateflag = managercheck(tabId, manager1, 4, 4);
+                                                            boolean checklastapprovedateflag = managercheck(tabId, manager1, 7, 7);
                                                             if (checklastapprovedateflag == true) {
                                                                 finalList.add(obj);
                                                             }
@@ -2271,7 +2271,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                                     if (status != 1) {
                                                         if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
                                                             if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                                                boolean checklastapprovedateflag = managercheck(tabId, manager1, 0, 4);
+                                                                boolean checklastapprovedateflag = managercheck(tabId, manager1, 0, 7);
                                                                 finalList.add(obj);
                                                             }
                                                         }
@@ -2792,6 +2792,212 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
         }
         mv.setViewName("forward:travelRequestMaster.htm?act=viewCashAdvanceSectionByAdmin");
         return mv;
+    }
+
+    public synchronized void travelEscalationRequest() {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        List<?> travelList = travelRequestMasterService.readTravelRequestForEscalation();
+        for (Object oo : travelList) {
+            try {
+                travelRequestMaster = (TravelRequestMaster) oo;
+                EmployeeMaster employeeMaster = new EmployeeMaster();
+                employeeMaster = employeeMasterService.readById(travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId());
+                String manager1 = employeeMaster.getReportingManagerLevel1();
+                String manager2 = employeeMaster.getReportingManagerLevel2();
+                String manager3 = employeeMaster.getReportingManagerLevel3();
+                String manager4 = employeeMaster.getReportingManagerLevel4();
+                String manager5 = employeeMaster.getReportingManagerLevel5();
+                String manager6 = employeeMaster.getReportingManagerLevel6();
+
+                String requestedDate = travelRequestMaster.getDateOfSubmit();
+                Date rDate = sdf.parse(requestedDate);
+
+                String today = sdf.format(new Date());
+                Date tDate = sdf.parse(today);
+                Calendar c = Calendar.getInstance();
+                c.setTime(rDate);
+                c.add(Calendar.DATE, 7);
+                Date manager2Date = c.getTime();
+
+                c.setTime(manager2Date);
+                c.add(Calendar.DATE, 7);
+                Date manager3Date = c.getTime();
+
+                c.setTime(manager3Date);
+                c.add(Calendar.DATE, 7);
+                Date manager4Date = c.getTime();
+
+                c.setTime(manager4Date);
+                c.add(Calendar.DATE, 7);
+                Date manager5Date = c.getTime();
+
+                c.setTime(manager5Date);
+                c.add(Calendar.DATE, 7);
+                Date manager6Date = c.getTime();
+
+                if (tDate.equals(manager2Date)) {
+
+                    if (null != manager2 && !"".equals(manager2)) {
+                        checkForEscalation(manager1, manager2);
+                    } else if (null == manager2 || "".equals(manager2)) {
+                        checkForEscalation(manager1, manager3);
+                    } else if (null == manager3 || "".equals(manager3)) {
+                        checkForEscalation(manager1, manager4);
+                    } else if (null == manager4 || "".equals(manager4)) {
+                        checkForEscalation(manager1, manager5);
+                    } else if (null == manager5 || "".equals(manager5)) {
+                        checkForEscalation(manager1, manager6);
+                    }
+
+                } else if (tDate.equals(manager3Date)) {
+                    if (null != manager3 && !"".equals(manager3)) {
+                        if (null == manager2 || "".equals(manager2)) {
+                            checkForEscalation(manager1, manager3);
+                        } else {
+                            checkForEscalation(manager2, manager3);
+                        }
+                    } else if (null == manager3 || "".equals(manager3)) {
+
+                        if (null != manager2 && !"".equals(manager2)) {
+
+                            if (null != manager4 && !"".equals(manager4)) {
+                                checkForEscalation(manager2, manager4);
+
+                            } else if (null == manager4 || "".equals(manager4)) {
+
+                                if (null != manager5 && !"".equals(manager5)) {
+                                    checkForEscalation(manager2, manager5);
+
+                                } else {
+                                    checkForEscalation(manager2, manager6);
+                                }
+                            }
+
+                        } else {
+                            if (null != manager4 && !"".equals(manager4)) {
+                                checkForEscalation(manager1, manager4);
+
+                            } else if (null == manager4 || "".equals(manager4)) {
+
+                                if (null != manager5 && !"".equals(manager5)) {
+                                    checkForEscalation(manager1, manager5);
+
+                                } else {
+                                    checkForEscalation(manager1, manager6);
+                                }
+                            }
+                        }
+
+                    }
+
+                } else if (tDate.equals(manager4Date)) {
+
+                    if (null != manager4 && !"".equals(manager4)) {
+                        if (null != manager3 || !"".equals(manager3)) {
+                            checkForEscalation(manager3, manager4);
+                        } else if (null != manager2 || !"".equals(manager2)) {
+                            checkForEscalation(manager2, manager4);
+                        } else {
+                            checkForEscalation(manager1, manager4);
+                        }
+                    } else if (null == manager4 || "".equals(manager4)) {
+
+                        if (null != manager3 && !"".equals(manager3)) {
+
+                            if (null != manager5 && !"".equals(manager5)) {
+                                checkForEscalation(manager3, manager5);
+                            } else {
+                                checkForEscalation(manager3, manager6);
+                            }
+
+                        }
+                        if (null != manager2 && !"".equals(manager2)) {
+
+                            if (null != manager5 && !"".equals(manager5)) {
+                                checkForEscalation(manager2, manager5);
+                            } else {
+                                checkForEscalation(manager2, manager6);
+                            }
+
+                        } else {
+                            if (null != manager5 && !"".equals(manager5)) {
+                                checkForEscalation(manager1, manager5);
+                            } else {
+                                checkForEscalation(manager1, manager6);
+                            }
+                        }
+
+                    }
+
+                } else if (tDate.equals(manager5Date)) {
+
+                    if (null != manager5 && !"".equals(manager5)) {
+                        if (null != manager4 && !"".equals(manager4)) {
+                            checkForEscalation(manager4, manager5);
+                        } else if (null != manager3 && !"".equals(manager3)) {
+                            checkForEscalation(manager3, manager5);
+                        } else if (null != manager2 && !"".equals(manager2)) {
+                            checkForEscalation(manager2, manager5);
+                        } else {
+                            checkForEscalation(manager1, manager5);
+                        }
+                    } else if (null == manager5 || "".equals(manager5)) {
+                         if (null != manager5 && !"".equals(manager5)) {
+                            checkForEscalation(manager5, manager6);
+                         } else if(null != manager4 && !"".equals(manager4)) {
+                            checkForEscalation(manager4, manager6);
+                         } else if(null != manager3 && !"".equals(manager3)) {
+                            checkForEscalation(manager3, manager6);
+                         } else if(null != manager2 && !"".equals(manager2)) {
+                            checkForEscalation(manager2, manager6);
+                         } else{
+                            checkForEscalation(manager1, manager6);
+                         }
+                    }
+
+                } else if (tDate.equals(manager6Date)) {
+                    
+                       if (null != manager5 && !"".equals(manager5)) {
+                            checkForEscalation(manager5, manager6);
+                         } else if(null != manager4 && !"".equals(manager4)) {
+                            checkForEscalation(manager4, manager6);
+                         } else if(null != manager3 && !"".equals(manager3)) {
+                            checkForEscalation(manager3, manager6);
+                         } else if(null != manager2 && !"".equals(manager2)) {
+                            checkForEscalation(manager2, manager6);
+                         }  else{
+                            checkForEscalation(manager1, manager6);
+                         }
+
+                }
+
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
+
+    public void checkForEscalation(String notApprovedApproverId, String pendingApprover) {
+        try {
+            EmailTemplate emailTemplate = new EmailTemplate();
+            // id=137 for Send to Approver For Travel Req. Approve...
+            EmployeeMaster nameOfEmpWhoHasNotApprove = employeeMasterService.readById(Integer.parseInt(notApprovedApproverId));
+            EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(pendingApprover));
+            emailTemplate = emailTemplateService.readById(137);
+            String To = employeeMaster1.getOfficeEmailId();
+            String from = "";
+            String Subject = emailTemplate.getSubject();
+            String msg = emailTemplate.getBodytext();
+            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+            msg = msg.replaceAll("\\{not_Approved_By_user\\}", nameOfEmpWhoHasNotApprove.getEmployeeName());
+            sendMail.sendMail(from, To, Subject, msg);
+
+        } catch (Exception e) {
+        }
+
     }
 
 }

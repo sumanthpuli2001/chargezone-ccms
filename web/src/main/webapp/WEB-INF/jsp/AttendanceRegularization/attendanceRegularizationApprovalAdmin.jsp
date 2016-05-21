@@ -237,7 +237,7 @@
                                         </div>
                                     </c:if>
                                     <!--Reason In Detail completes Here-->
-                                    <%--<c:if test="${status eq 0}">--%>
+                                    <c:if test="${status eq 0}">
 <!--                                        <div class="box box-info collapsed-box">
                                             <div class="box-header">
                                                 <h3 class="box-title">Manager Remarks:</h3>
@@ -258,18 +258,18 @@
                                                 </div> /.row 
                                             </div> /.box-body 
                                         </div>-->
-                                        <!--<div class="form-group" id="sub_btn">-->
-                                            <!--<div class="col-sm-5  ">-->
-                                                <!--<button type="submit" class="btn btn-success" style="width: 100px;" data-original-title="" title="">APPROVE</button>-->
-                                            <!--</div>-->
-                                            <!--<div class="col-sm-3 ">-->
-                                                <!--<button type="button" class="btn btn-danger" style="width: 100px;" onclick="rejectClick();" data-original-title="">REJECT</button>-->
-                                            <!--</div>-->
-                                            <!--<div class="col-sm-4 ">-->
-                                                <!--<button type="button" class="btn btn-warning" style="width: 100px;float: right;" onclick="reworkClick();" data-original-title="">REWORK</button>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <%--</c:if>--%>
+                                        <div class="form-group" id="sub_btn">
+                                            <div class="col-sm-5  ">
+                                                <button type="submit" class="btn btn-success" style="width: 100px;" data-original-title="" title="">APPROVE</button>
+                                            </div>
+                                            <div class="col-sm-3 ">
+                                                <button type="button" class="btn btn-danger" style="width: 100px;" onclick="rejectClick();" data-original-title="">REJECT</button>
+                                            </div>
+                                            <div class="col-sm-4 ">
+                                                <button type="button" class="btn btn-warning" style="width: 100px;float: right;" onclick="reworkClick();" data-original-title="">REWORK</button>
+                                            </div>
+                                        </div>
+                                    </c:if>
                                     <%--<c:if test="${status eq 1}">--%>
                                         <!--                                        <div class="form-group" id="sub_btn">
                                                                                     <div class="col-sm-5  ">

@@ -20,6 +20,7 @@
 
             #approveId,#rejectId{
                 width: 50px !important;
+                height: 25px !important;
             }
         </style>
     </head>
@@ -123,18 +124,18 @@
                                                                     <div class="col-sm-12">
                                                                         <c:if test="${list[5] eq 0}"> 
                                                                             <div class="col-sm-3">
-                                                                                <button type="button" class="label label-success" style="font-size: 8px;" id="approveId"  onclick="approveClick(${list[0]});" title="Approve">APPROVE</button>
+                                                                                <button type="button" class="label label-success" style="font-size: 10px;" id="approveId"  onclick="approveClick(${list[0]});" title="Approve">APPROVE</button>
                                                                             </div>
                                                                             <div class="col-sm-3">
-                                                                                <button type="button" class="label label-warning" style="font-size: 8px;" id="rejectId" onclick="reworkClick(${list[0]});" title="Rework">REWORK</button>
+                                                                                <button type="button" class="label label-warning" style="font-size: 10px;" id="rejectId" onclick="reworkClick(${list[0]});" title="Rework">REWORK</button>
                                                                             </div>
                                                                             <div class="col-sm-3">
-                                                                                <button type="button" class="label label-danger" style="font-size: 8px;" id="rejectId" onclick="rejectClick(${list[0]});" title="Reject">REJECT</button>
+                                                                                <button type="button" class="label label-danger" style="font-size: 10px;" id="rejectId" onclick="rejectClick(${list[0]});" title="Reject">REJECT</button>
                                                                             </div>
                                                                         </c:if>
                                                                         <c:if test="${list[5] ne 5}">
                                                                             <div class="col-sm-3">
-                                                                                <button type="button" class="label label-default" style="font-size: 8px;" id="approveId" onclick="editClick(${list[0]});" title="View">VIEW</button>
+                                                                                <button type="button" class="label label-default" style="font-size: 10px;" id="approveId" onclick="editClick(${list[0]});" title="View">VIEW</button>
                                                                             </div>
                                                                         </c:if>
                                                                     </div>

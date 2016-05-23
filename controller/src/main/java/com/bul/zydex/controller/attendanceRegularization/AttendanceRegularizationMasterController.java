@@ -996,7 +996,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                 if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
                     secondHalfList.add("WO");
-                } else if (secondHalf.equals("AR") ) {
+                } else if (secondHalf.equals("AR")) {
                     secondHalfList.add("AR/P");
                 } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR")) {
                     secondHalfList.add("AB");
@@ -1036,7 +1036,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     cal1.setTime(firstStartHours);
                     cal1.add(Calendar.MINUTE, -earlyMinute);
                     String newTime1 = sdf2.format(cal1.getTime());
-                    
+
                     Date flexibleInTime = sdf2.parse(newTime1);
                     cal2.setTime(firstStartHours);
                     cal2.add(Calendar.MINUTE, lateMinute);
@@ -1056,7 +1056,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     if (userTimeIn != null) {
                         if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
                             secondHalfList.add("PR");
-                        } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime)) {
+                        } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR")  && !secondHalf.contains("?")
+                                && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
                             secondHalfList.add("AB");
                         } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             secondHalfList.add("PR");
@@ -1091,7 +1093,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             }
                             if (leave1[0].contains("Sick Leave")) {
                             }
-                            secondHalfList.add(" " + leave1[0]);
+                            secondHalfList.add(" " + leave1[0].trim());
 
                         } else if (leave1[0].contains("AR")) {
                             secondHalfList.add("AR/P");
@@ -1591,7 +1593,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         } catch (Exception e) {
         }
 
-         mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=approvalSubmit");
+        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=approvalSubmit");
 //        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
         return mv;
     }

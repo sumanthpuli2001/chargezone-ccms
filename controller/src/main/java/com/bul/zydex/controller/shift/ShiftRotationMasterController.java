@@ -2307,7 +2307,9 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 cell9.setCellValue("PR");
                                                 prcounter = prcounter + 0.5;
                                                 cell9.setCellStyle(stylegreen);
-                                            } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime)) {
+                                            } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR")  && !secondHalf.contains("?")
+                                && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
                                                 cell9.setCellValue("AB");
                                                 abcounter = abcounter + 0.5;
                                                 cell9.setCellStyle(stylered);

@@ -334,15 +334,15 @@
                                                                                 <th style="color: red;text-align: center;">${secondHalfList}</th>
                                                                                     <c:set var="absent" value="${absent + 0.5}"></c:set>
                                                                                 </c:if>
-                                                                                <c:if test="${secondHalfList eq 'Casual Leave'}">
+                                                                                <c:if test="${secondHalfList.contains('Casual Leave')}">
                                                                                 <th style="text-align: center;">${secondHalfList}</th>
                                                                                     <c:set var="cl" value="${cl + 0.5}"></c:set>
                                                                                 </c:if>
-                                                                                <c:if test="${secondHalfList eq 'Privilege Leave'}">
+                                                                                <c:if test="${secondHalfList.contains('Privilege Leave')}">
                                                                                 <th style="text-align: center;">${secondHalfList}</th>
                                                                                     <c:set var="pl" value="${pl + 0.5}"></c:set>
                                                                                 </c:if>
-                                                                                <c:if test="${secondHalfList eq 'Sick Leave'}">
+                                                                                <c:if test="${secondHalfList.contains('Sick Leave')}">
                                                                                 <th style="text-align: center;">${secondHalfList}</th>
                                                                                     <c:set var="sl" value="${sl + 0.5}"></c:set>
                                                                                 </c:if>

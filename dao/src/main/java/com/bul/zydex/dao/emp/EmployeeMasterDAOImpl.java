@@ -925,7 +925,8 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " case When (ndm.equipments IS NULL OR ndm.equipments = '')  THEN  'false' ELSE 'true' END AS isReportingManagerFilled,"
                 + " case When (ndm.carProvided IS NULL OR ndm.carProvided = '')  THEN  'false' ELSE 'true' END AS isNoDueAdminFilled,"
                 + " case When (ndm.computerChecked IS NULL OR ndm.computerChecked = '')  THEN  'false' ELSE 'true' END AS isTravelAdminFilled,"
-                + " case When (ndm.salaryAdvanceOrLoan IS NULL OR ndm.salaryAdvanceOrLoan = '')  THEN  'false' ELSE 'true' END AS istravelExpenseAdminFilled"
+                + " case When (ndm.salaryAdvanceOrLoan IS NULL OR ndm.salaryAdvanceOrLoan = '')  THEN  'false' ELSE 'true' END AS istravelExpenseAdminFilled,"
+                + " res.relievingDate"
                 //                + " case When (ndm.equipments IS NULL OR ndm.equipments = '')  THEN  'pendingAtReportingManager' ELSE 'Completed' END AS isReportingManagerFilled,"
                 //                + " case When (ndm.carProvided IS NULL OR ndm.carProvided = '')  THEN  'pendingAtNoDueAdmin' ELSE 'Completed' END AS isNoDueAdminFilled,"
                 //                + " case When (ndm.computerChecked IS NULL OR ndm.computerChecked = '')  THEN  'pendingAtTravelAdmin' ELSE 'Completed' END AS isTravelAdminFilled,"
@@ -936,6 +937,7 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " LEFT JOIN a.levelMaster d"
                 + " LEFT JOIN a.locationMaster lm"
                 + " LEFT JOIN a.noDueMastersForEmpId ndm"
+                + " LEFT JOIN a.resignationMasters res"
                 + " WHERE a.id = " + id;
 
         return getHibernateTemplate().find(query);
@@ -1415,7 +1417,9 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " left join a.probationToConfirmationsForEmployeeMasterId b "
                 + " left join a.designationMaster d "
                 + " WHERE a.employeeType like '%Probation%'"
-                + " and (b.id is null or b.status !=8)";
+                + " and (b.id is null or b.status !=8)"
+                + " and ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) ";
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }

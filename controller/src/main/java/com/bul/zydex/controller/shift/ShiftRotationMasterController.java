@@ -2303,16 +2303,24 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         long diffMinutes1 = diff1 / (60 * 1000);
 
                                         if (userTimeIn != null) {
-                                            if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
+                                             if (leave1[0].contains("AR")) {
+                                                cell9.setCellValue("AR/P");
+                                                ar = ar + 0.5;
+                                                cell9.setCellStyle(styleblue);
+                                            }else if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
                                                 cell9.setCellValue("PR");
                                                 prcounter = prcounter + 0.5;
                                                 cell9.setCellStyle(stylegreen);
-                                            } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR")  && !secondHalf.contains("?")
-                                && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
-                                && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
+                                            } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
+                                                    && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                                    && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
                                                 cell9.setCellValue("AB");
                                                 abcounter = abcounter + 0.5;
                                                 cell9.setCellStyle(stylered);
+                                            } else if (diffMinutes1 >= 240 && userTimeIn.after(secondHalfTimeStr2)) {
+                                                cell9.setCellValue("PR");
+                                                prcounter = prcounter + 0.5;
+                                                cell9.setCellStyle(stylegreen);
                                             } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                                 cell9.setCellValue("PR");
                                                 prcounter = prcounter + 0.5;
@@ -2365,10 +2373,6 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 }
                                                 cell9.setCellValue(" " + leave1[0]);
 
-                                            } else if (leave1[0].contains("AR")) {
-                                                cell9.setCellValue("AR/P");
-                                                ar = ar + 0.5;
-                                                cell9.setCellStyle(styleblue);
                                             } else if (leave1[0].contains("AB")) {
                                                 cell9.setCellValue("AB");
                                                 abcounter = abcounter + 0.5;
@@ -4893,6 +4897,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime)) {
 
                                     } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                        prcounter = prcounter + 0.5;
+                                    } else if (diffMinutes1 >= 240 && userTimeIn.after(secondHalfTimeStr2)) {
                                         prcounter = prcounter + 0.5;
                                     } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                         prcounter = prcounter + 0.5;

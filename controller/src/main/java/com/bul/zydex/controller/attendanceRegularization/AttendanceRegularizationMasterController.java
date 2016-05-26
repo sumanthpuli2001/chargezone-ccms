@@ -1054,13 +1054,18 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     long diffMinutes1 = diff1 / (60 * 1000);
 
                     if (userTimeIn != null) {
-                        if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
+                        if (leave1[0].contains("AR")) {
+                            secondHalfList.add("AR/P");
+
+                        }else if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
                             secondHalfList.add("PR");
                         } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR")  && !secondHalf.contains("?")
                                 && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
                                 && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
                             secondHalfList.add("AB");
-                        } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                        }else if(diffMinutes1 >= 240 && userTimeIn.after(secondHalfTimeStr2)){
+                          secondHalfList.add("PR");  
+                        }else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             secondHalfList.add("PR");
                         } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             secondHalfList.add("PR");
@@ -1094,9 +1099,6 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             if (leave1[0].contains("Sick Leave")) {
                             }
                             secondHalfList.add(" " + leave1[0].trim());
-
-                        } else if (leave1[0].contains("AR")) {
-                            secondHalfList.add("AR/P");
 
                         } else if (leave1[0].contains("AB")) {
                             secondHalfList.add("AB");

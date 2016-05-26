@@ -84,6 +84,7 @@
                                                                 <th style="width: 50px;">Employee Name</th>
                                                                 <th style="width: 50px;">Department</th>
                                                                 <th style="width: 50px;">Designation</th>
+                                                                <th style="width: 50px;">Date of Relieving</th>
                                                                 <th style="width: 50px;">Status</th>
                                                                     <%--<c:if test="${sessionScope.userRight.hr}">--%>
                                                                 <th style="width: 50px;">Action</th>
@@ -109,6 +110,7 @@
                                                                         <td>${list[2]}</td>
                                                                         <td>${list[3]}</td>
                                                                         <td>${list[4]}</td>
+                                                                        <td>${list[12]}</td>
                                                                         <td>
                                                                             <c:set var="count" value="0" scope="page"/>
                                                                             <c:choose>

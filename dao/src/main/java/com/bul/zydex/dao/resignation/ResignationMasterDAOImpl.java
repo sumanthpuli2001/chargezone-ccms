@@ -96,7 +96,8 @@ public class ResignationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements R
                 + " left join a.employeeMaster b"
                 + " WHERE a.status in (2,7,10,4)"
                 + " and  (b.dateOfLeaving is null or b.dateOfLeaving = '') "
-                + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()";
+                + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()"
+                + " GROUP BY a.id";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

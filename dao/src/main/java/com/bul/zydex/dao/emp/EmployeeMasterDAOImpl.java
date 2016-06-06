@@ -1510,5 +1510,16 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+    
+    @Override
+    public List<?> listOfCEO(){
+        String query="";
+        query = " "
+                + " From EmployeeMaster "
+                + " where reportingManagerLevel1=''";
+        
+         List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
 
 }

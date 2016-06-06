@@ -360,14 +360,56 @@
                                                                                                             <table cellpadding="0" cellspacing="0" border="0" width="315px">
                                                                                                             </c:if>
                                                                                                             <tbody>
+                                                                                                                <tr>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                </tr>
                                                                                                                 <tr class="node-cells">
                                                                                                                     <!--<td class="node-cell" colspan="8" onclick="viewEmployeeDetail();">-->
-                                                                                                                    <td class="node-cell" colspan="8">
-                                                                                                                        <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${employeeMasterManager.employeeName} &#13; Department: ${employeeMasterManager.departmentMaster.departmentName} &#13; Designation: ${employeeMasterManager.designationMaster.designationName}">
-                                                                                                                            <img src="${imageManager}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
-                                                                                                                            <span class="box-title" style="font-size: 105%;color: black">${employeeMasterManager.employeeName}</span>
-                                                                                                                        </div>
-                                                                                                                    </td>
+                                                                                                                    <c:forEach var="ceoMap" items="${ceoMap}">
+                                                                                                                        <td class="node-container" colspan="2">
+                                                                                                                            <table cellpadding="0" cellspacing="0" border="0">
+                                                                                                                                <tbody>
+                                                                                                                                    <tr class="node-cells">
+                                                                                                                                        <td class="node-cell" style="width: 100px"  colspan="2" >
+                                                                                                                                        <td class="node-cell" style="width: 100px"  colspan="2">
+                                                                                                                                            <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${ceoMap.value[1]} &#13; Department: ${ceoMap.value[2]} &#13; Designation: ${ceoMap.value[3]}">
+                                                                                                                                                <img src="${ceoMap.value[4]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                                                                                                                <span class="box-title" style="font-size: 105%;color: black">${ceoMap.value[1]}</span>
+
+                                                                                                                                            </div>
+                                                                                                                                        </td>
+                                                                                                                                    </tr>
+                                                                                                                                </tbody>
+                                                                                                                            </table>
+                                                                                                                        </td>
+
+                                                                                                                    </c:forEach>
+
                                                                                                                 </tr>
                                                                                                             </tbody>
                                                                                                         </table>
@@ -379,11 +421,20 @@
 
 
                                                                                                     <tr>
-                                                                                                        <!--<td class="line left">&nbsp;</td>-->
-                                                                                                        <!--<td class="line ">&nbsp;</td>-->
-                                                                                                        <!--<td class="line ">&nbsp;</td>-->
-                                                                                                        <!--<td class="line ">&nbsp;</td>-->
-                                                                                                        <!--<td class="line ">&nbsp;</td>-->
+                                                                                                        <td>&nbsp;</td>
+                                                                                                        <td>&nbsp;</td>
+                                                                                                        <td>&nbsp;</td>
+                                                                                                        <td>&nbsp;</td>
+                                                                                                        <td>&nbsp;</td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td>&nbsp;</td>
+                                                                                                        <td>&nbsp;</td>
+                                                                                                        <td>&nbsp;</td>
+                                                                                                        <td>&nbsp;</td>
+                                                                                                        <td>&nbsp;</td>
+                                                                                                    </tr>
+                                                                                                    <tr>
                                                                                                         <td>&nbsp;</td>
                                                                                                         <td>&nbsp;</td>
                                                                                                         <td>&nbsp;</td>
@@ -392,136 +443,136 @@
                                                                                                     </tr>
                                                                                                     <tr>
 
-                                                                                                        <td class="node-container" colspan="2">
-                                                                                                            <table cellpadding="0" cellspacing="0" border="0" style="margin: auto;">
-                                                                                                                <tbody>
-                                                                                                                    <tr class="node-cells">
-                                                                                                                        <!--<td class="node-cell"  colspan="8" onclick="viewEmployeeDetail(${employeeMaster.id},${employeeMaster.userMaster.id});">-->
-                                                                                                                        <td class="node-cell"  colspan="8">
-                                                                                                                            <div class="node ui-draggable ui-droppable" style="cursor: pointer;"  title=" Name: ${employeeMaster.employeeName} &#13; Department: ${employeeMaster.departmentMaster.departmentName} &#13; Designation: ${employeeMaster.designationMaster.designationName}">
-                                                                                                                                <img src="${imageUser}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
-                                                                                                                                <span class="box-title" style="font-size: 105%;color: black">${employeeMaster.employeeName}</span>
-                                                                                                                            </div>
-                                                                                                                        </td>
-                                                                                                                    </tr>
-                                                                                                                    <c:if test="${subordinateCount > 0}">
+                                                                                                        <!--                                                                                                        <td class="node-container" colspan="2">
+                                                                                                                                                                                                        <table cellpadding="0" cellspacing="0" border="0" style="margin: auto;">
+                                                                                                                                                                                                        <tbody>
+                                                                                                                                                                                                        <tr class="node-cells">
+                                                                                                                                                                                                        <td class="node-cell"  colspan="8" onclick="viewEmployeeDetail(${employeeMaster.id},${employeeMaster.userMaster.id});">
+                                                                                                                                                                                                        <td class="node-cell"  colspan="8">
+                                                                                                                                                                                                        <div class="node ui-draggable ui-droppable" style="cursor: pointer;"  title=" Name: ${employeeMaster.employeeName} &#13; Department: ${employeeMaster.departmentMaster.departmentName} &#13; Designation: ${employeeMaster.designationMaster.designationName}">
+                                                                                                                                                                                                        <img src="${imageUser}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                                                                                                                                                                        <span class="box-title" style="font-size: 105%;color: black">${employeeMaster.employeeName}</span>
+                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                        </td>
+                                                                                                                                                                                                        </tr>
+                                                                                                        <c:if test="${subordinateCount > 0}">
 
-                                                                                                                        <tr>
-                                                                                                                            <td colspan="8">
-                                                                                                                                <!--<div class="line down"></div>-->
-                                                                                                                                <c:if test="${subordinateCount eq 1}">
-                                                                                                                                    <div>&nbsp;</div>
+                                                                                                            <tr>
+                                                                                                                <td colspan="8">
+                                                                                                                    <div class="line down"></div>
+                                                                                                            <c:if test="${subordinateCount eq 1}">
+                                                                                                                <div>&nbsp;</div>
 
-                                                                                                                                </c:if>
+                                                                                                            </c:if>
 
-                                                                                                                            </td>
-                                                                                                                        </tr>
-                                                                                                                        <tr>
-                                                                                                                            <c:if test="${subordinateCount >= 1}">
-                                                                                                                                <c:if test="${subordinateCount >= 2}">
-                                                                                                                                    <!--<td class="line left">&nbsp;</td>-->
-                                                                                                                                    <!--<td class="line right top">&nbsp;</td>-->
-                                                                                                                                    <td>&nbsp;</td>
-                                                                                                                                    <td>&nbsp;</td>
-                                                                                                                                </c:if>
-                                                                                                                                <c:if test="${subordinateCount >= 3 }">
-                                                                                                                                    <!--                                                                                                                                <td class="line left top">&nbsp;</td>
-                                                                                                                                                                                                        <td class="line right top">&nbsp;</td>-->
-                                                                                                                                    <td>&nbsp;</td>
-                                                                                                                                    <td>&nbsp;</td>
-                                                                                                                                </c:if>
-
-                                                                                                                                <c:if test="${subordinateCount >= 4}">
-                                                                                                                                    <!--<td class="line left top">&nbsp;</td>-->
-                                                                                                                                    <!--<td class="line right top">&nbsp;</td>-->
-                                                                                                                                    <td>&nbsp;</td>
-                                                                                                                                    <td>&nbsp;</td>
-                                                                                                                                </c:if>
-                                                                                                                                <c:if test="${subordinateCount >= 2}">
-                                                                                                                                    <!--<td class="line left top">&nbsp;</td>-->
-                                                                                                                                    <!--<td class="line right">&nbsp;</td>-->
-                                                                                                                                    <td>&nbsp;</td>
-                                                                                                                                    <td>&nbsp;</td>
-                                                                                                                                </c:if>
-                                                                                                                            </c:if>
-                                                                                                                        </tr>
-                                                                                                                        <tr>
-                                                                                                                            <c:if test="${subordinateCount >= 1}">
-                                                                                                                                <td class="node-container" colspan="2">
-                                                                                                                                    <table cellpadding="0" cellspacing="0" border="0">
-                                                                                                                                        <tbody>
-                                                                                                                                            <tr class="node-cells">
-                                                                                                                                                <!--<td class="node-cell" style="width: 100px"  colspan="2" onclick="viewEmployeeDetail(${subordinateList[0][0]},${subordinateList[0][6]});">-->
-                                                                                                                                                <td class="node-cell" style="width: 100px"  colspan="2">
-                                                                                                                                                    <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${subordinateList[0][2]} &#13; Department: ${subordinateList[0][3]} &#13; Designation: ${subordinateList[0][4]}">
-                                                                                                                                                        <img src="${subordinateList[0][5]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
-                                                                                                                                                        <span class="box-title" style="font-size: 105%;color: black">${subordinateList[0][2]}</span>
-
-                                                                                                                                                    </div>
-                                                                                                                                                </td></tr>
-                                                                                                                                        </tbody>
-                                                                                                                                    </table>
-                                                                                                                                </td>
-                                                                                                                            </c:if>
-                                                                                                                            <c:if test="${subordinateCount >= 2}">
-                                                                                                                                <td class="node-container" colspan="2">
-                                                                                                                                    <table cellpadding="0" cellspacing="0" border="0">
-                                                                                                                                        <tbody>
-                                                                                                                                            <tr class="node-cells">
-                                                                                                                                                <!--<td class="node-cell" style="width: 100px"  colspan="2" onclick="viewEmployeeDetail(${subordinateList[1][0]},${subordinateList[1][6]});">-->
-                                                                                                                                                <td class="node-cell" style="width: 100px"  colspan="2">
-                                                                                                                                                    <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${subordinateList[1][2]} &#13; Department: ${subordinateList[1][3]} &#13; Designation: ${subordinateList[1][4]}">
-                                                                                                                                                        <img src="${subordinateList[1][5]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
-                                                                                                                                                        <span class="box-title" style="font-size: 105%;color: black">${subordinateList[1][2]}</span>
-
-                                                                                                                                                    </div>
-                                                                                                                                                </td>
-                                                                                                                                            </tr>
-                                                                                                                                        </tbody>
-                                                                                                                                    </table>
-                                                                                                                                </td>
-                                                                                                                            </c:if>
-                                                                                                                            <c:if test="${subordinateCount >= 3}">
-                                                                                                                                <td class="node-container" colspan="2">
-                                                                                                                                    <table cellpadding="0" cellspacing="0" border="0">
-                                                                                                                                        <tbody>
-                                                                                                                                            <tr class="node-cells">
-                                                                                                                                                <!--<td class="node-cell" style="width: 100px"  colspan="2" onclick="viewEmployeeDetail(${subordinateList[2][0]},${subordinateList[2][6]});">-->
-                                                                                                                                                <td class="node-cell" style="width: 100px"  colspan="2">
-                                                                                                                                                    <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${subordinateList[2][2]} &#13; Department: ${subordinateList[2][3]} &#13; Designation: ${subordinateList[2][4]}">
-                                                                                                                                                        <img src="${subordinateList[2][5]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
-                                                                                                                                                        <span class="box-title" style="font-size: 105%;color: black">${subordinateList[2][2]}</span>
-
-                                                                                                                                                    </div>
-                                                                                                                                                </td>
-                                                                                                                                            </tr>
-                                                                                                                                        </tbody>
-                                                                                                                                    </table>
-                                                                                                                                </td>
-                                                                                                                            </c:if>
-                                                                                                                            <c:if test="${subordinateCount >= 4}">
-                                                                                                                                <td class="node-container" colspan="2">
-                                                                                                                                    <table cellpadding="0" cellspacing="0" border="0">
-                                                                                                                                        <tbody>
-                                                                                                                                            <tr class="node-cells">
-                                                                                                                                                <!--<td class="node-cell" style="width: 100px"  colspan="2" onclick="viewEmployeeDetail(${subordinateList[3][0]},${subordinateList[3][6]});">-->
-                                                                                                                                                <td class="node-cell" style="width: 100px"  colspan="2">
-                                                                                                                                                    <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${subordinateList[3][2]} &#13; Department: ${subordinateList[3][3]} &#13; Designation: ${subordinateList[3][4]}">
-                                                                                                                                                        <img src="${subordinateList[3][5]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
-                                                                                                                                                        <span class="box-title" style="font-size: 105%;color: black">${subordinateList[3][2]}</span>
-                                                                                                                                                    </div>
-                                                                                                                                                </td>
-                                                                                                                                            </tr>
-                                                                                                                                        </tbody>
-                                                                                                                                    </table>
-                                                                                                                                </td>
-                                                                                                                            </c:if>
-                                                                                                                        </tr>
-                                                                                                                    </c:if>
-
-                                                                                                                </tbody>
-                                                                                                            </table>
                                                                                                         </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                            <c:if test="${subordinateCount >= 1}">
+                                                                                                                <c:if test="${subordinateCount >= 2}">
+                                                                                                                    <td class="line left">&nbsp;</td>
+                                                                                                                    <td class="line right top">&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                </c:if>
+                                                                                                                <c:if test="${subordinateCount >= 3 }">
+                                                                                                                                                                                                        <td class="line left top">&nbsp;</td>
+                                                                                                                                                                                        <td class="line right top">&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                </c:if>
+
+                                                                                                                <c:if test="${subordinateCount >= 4}">
+                                                                                                                    <td class="line left top">&nbsp;</td>
+                                                                                                                    <td class="line right top">&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                </c:if>
+                                                                                                                <c:if test="${subordinateCount >= 2}">
+                                                                                                                    <td class="line left top">&nbsp;</td>
+                                                                                                                    <td class="line right">&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                    <td>&nbsp;</td>
+                                                                                                                </c:if>
+                                                                                                            </c:if>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <c:if test="${subordinateCount >= 1}">
+                                                                                                                <td class="node-container" colspan="2">
+                                                                                                                    <table cellpadding="0" cellspacing="0" border="0">
+                                                                                                                        <tbody>
+                                                                                                                            <tr class="node-cells">
+                                                                                                                                <td class="node-cell" style="width: 100px"  colspan="2" onclick="viewEmployeeDetail(${subordinateList[0][0]},${subordinateList[0][6]});">
+                                                                                                                                <td class="node-cell" style="width: 100px"  colspan="2">
+                                                                                                                                    <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${subordinateList[0][2]} &#13; Department: ${subordinateList[0][3]} &#13; Designation: ${subordinateList[0][4]}">
+                                                                                                                                        <img src="${subordinateList[0][5]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                                                                                                        <span class="box-title" style="font-size: 105%;color: black">${subordinateList[0][2]}</span>
+
+                                                                                                                                    </div>
+                                                                                                                                </td></tr>
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                                                                                                                </td>
+                                                                                                            </c:if>
+                                                                                                            <c:if test="${subordinateCount >= 2}">
+                                                                                                                <td class="node-container" colspan="2">
+                                                                                                                    <table cellpadding="0" cellspacing="0" border="0">
+                                                                                                                        <tbody>
+                                                                                                                            <tr class="node-cells">
+                                                                                                                                <td class="node-cell" style="width: 100px"  colspan="2" onclick="viewEmployeeDetail(${subordinateList[1][0]},${subordinateList[1][6]});">
+                                                                                                                                <td class="node-cell" style="width: 100px"  colspan="2">
+                                                                                                                                    <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${subordinateList[1][2]} &#13; Department: ${subordinateList[1][3]} &#13; Designation: ${subordinateList[1][4]}">
+                                                                                                                                        <img src="${subordinateList[1][5]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                                                                                                        <span class="box-title" style="font-size: 105%;color: black">${subordinateList[1][2]}</span>
+
+                                                                                                                                    </div>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                                                                                                                </td>
+                                                                                                            </c:if>
+                                                                                                            <c:if test="${subordinateCount >= 3}">
+                                                                                                                <td class="node-container" colspan="2">
+                                                                                                                    <table cellpadding="0" cellspacing="0" border="0">
+                                                                                                                        <tbody>
+                                                                                                                            <tr class="node-cells">
+                                                                                                                                <td class="node-cell" style="width: 100px"  colspan="2" onclick="viewEmployeeDetail(${subordinateList[2][0]},${subordinateList[2][6]});">
+                                                                                                                                <td class="node-cell" style="width: 100px"  colspan="2">
+                                                                                                                                    <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${subordinateList[2][2]} &#13; Department: ${subordinateList[2][3]} &#13; Designation: ${subordinateList[2][4]}">
+                                                                                                                                        <img src="${subordinateList[2][5]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                                                                                                        <span class="box-title" style="font-size: 105%;color: black">${subordinateList[2][2]}</span>
+
+                                                                                                                                    </div>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                                                                                                                </td>
+                                                                                                            </c:if>
+                                                                                                            <c:if test="${subordinateCount >= 4}">
+                                                                                                                <td class="node-container" colspan="2">
+                                                                                                                    <table cellpadding="0" cellspacing="0" border="0">
+                                                                                                                        <tbody>
+                                                                                                                            <tr class="node-cells">
+                                                                                                                                <td class="node-cell" style="width: 100px"  colspan="2" onclick="viewEmployeeDetail(${subordinateList[3][0]},${subordinateList[3][6]});">
+                                                                                                                                <td class="node-cell" style="width: 100px"  colspan="2">
+                                                                                                                                    <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${subordinateList[3][2]} &#13; Department: ${subordinateList[3][3]} &#13; Designation: ${subordinateList[3][4]}">
+                                                                                                                                        <img src="${subordinateList[3][5]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                                                                                                        <span class="box-title" style="font-size: 105%;color: black">${subordinateList[3][2]}</span>
+                                                                                                                                    </div>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                                                                                                                </td>
+                                                                                                            </c:if>
+                                                                                                        </tr>
+                                                                                                        </c:if>
+
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </td>-->
                                                                                                     </tr>
                                                                                                     <c:if test="${employeeMasterManager ne null}">
 

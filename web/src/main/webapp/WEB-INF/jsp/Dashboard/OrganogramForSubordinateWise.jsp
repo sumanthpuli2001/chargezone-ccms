@@ -52,14 +52,14 @@
                             </div>
                         </td>
                     </tr>
-                    <tr class="node-cells">
+<!--                    <tr class="node-cells">
                         <td class="node-cell" colspan="20">
                             <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${employeeMaster.employeeName} &#13; Department: ${employeeMaster.departmentMaster.departmentName} &#13; Designation: ${employeeMaster.designationMaster.designationName}">
                                 <img src="${employeeImage}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
                                 <span class="box-title" style="font-size: 105%;color: black">${employeeMaster.employeeName}</span>
                             </div>
                         </td>
-                    </tr>
+                    </tr>-->
 
                     <c:if test="${!empty subordinateValListofList}">
                         <tr>

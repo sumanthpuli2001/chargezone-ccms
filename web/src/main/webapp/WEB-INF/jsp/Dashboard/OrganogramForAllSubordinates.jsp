@@ -45,13 +45,21 @@
                     <tbody>
 
                         <tr class="node-cells">
-                            <td class="node-cell" colspan="20">
-                                <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${mdValList[2]} &#13; Department: ${mdValList[3]} &#13; Designation: ${mdValList[4]} &#13; id: ${mdValList[0]} &#13; userId: ${mdValList[6]}">
-                                    <img src="${mdValList[5]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
-                                    <span class="box-title" style="font-size: 105%;color: black">${mdValList[2]}</span>
-
-                                </div>
-                            </td>
+                            <c:forEach var="ceoList" items="${mdValList}">
+                                <td class="node-container" colspan="2">
+                                        <table cellpadding="0" cellspacing="0" border="0">
+                                            <tbody>
+                                                <tr class="node-cells">
+                                                    <td class="node-cell" style="width: 100px" colspan="2" onclick="window.location.href = 'employeeMaster.htm?act=viewEmployeeSubordinate&id=' +${ceoList[0]}">
+                                                        <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${ceoList[2]} &#13; Department: ${ceoList[3]} &#13; Designation: ${ceoList[4]} &#13;">
+                                                            <img src="${ceoList[5]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                            <span class="box-title" style="font-size: 105%;color: black">${ceoList[2]}</span>
+                                                        </div>
+                                                    </td></tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                            </c:forEach>
                         </tr>
 
                         <c:if test="${!empty subordinateValListofList}">

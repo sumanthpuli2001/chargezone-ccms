@@ -104,7 +104,8 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         String query = "";
         query += ""
                 + " From LeaveEmployeeDetail a "
-                + " WHERE a.employeeMaster.id = " + leaveEmployeeDetail.getEmployeeMaster().getId();
+                + " WHERE a.employeeMaster.id = " + leaveEmployeeDetail.getEmployeeMaster().getId()
+                + " and a.status !=2";
         return getHibernateTemplate().find(query);
     }
 

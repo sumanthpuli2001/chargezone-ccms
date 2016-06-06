@@ -44,7 +44,7 @@
 //                }
 //            });
 
-        }
+//        }
     </script>
 
     <script>
@@ -619,23 +619,23 @@
                                                             <label>Company:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select id="companyId" name="companyId" class="form-control ">
                                                             <c:choose>
-                                                                <c:when test="${company.contains('ZydexIndustries')}">
+                                                                <c:when test="${company.contains('Zydex Industries')}">
 
-                                                                    <option value="ZydexIndustries" selected="">Zydex Industries</option>
+                                                                    <option value="Zydex Industries" selected="">Zydex Industries</option>
                                                                 </c:when>
                                                                 <c:otherwise>
 
-                                                                    <option value="ZydexIndustries">Zydex Industries</option>
+                                                                    <option value="Zydex Industries">Zydex Industries</option>
                                                                 </c:otherwise>
                                                             </c:choose>
                                                             <c:choose>
-                                                                <c:when test="${company.contains('ZydexIndustriesPvt.Ltd')}">
+                                                                <c:when test="${company.contains('Zydex Industries Pvt. Ltd.')}">
 
-                                                                    <option value="ZydexIndustriesPvt.Ltd" selected="">Zydex Industries Pvt Ltd</option>
+                                                                    <option value="Zydex Industries Pvt. Ltd." selected="">Zydex Industries Pvt. Ltd.</option>
                                                                 </c:when>
                                                                 <c:otherwise>
 
-                                                                    <option value="ZydexIndustriesPvt.Ltd">Zydex Industries Pvt Ltd</option>
+                                                                    <option value="Zydex Industries Pvt. Ltd.">Zydex Industries Pvt. Ltd.</option>
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </select>

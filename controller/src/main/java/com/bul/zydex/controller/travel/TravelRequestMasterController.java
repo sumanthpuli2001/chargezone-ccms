@@ -7,9 +7,12 @@ package com.bul.zydex.controller.travel;
 
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
+import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.HotelAccommodation;
+import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
+import com.bul.zydex.model.OverTimeMaster;
 import com.bul.zydex.model.TravelApproverHistory;
 import com.bul.zydex.model.TravelDetail;
 import com.bul.zydex.model.TravelRequestMaster;
@@ -24,7 +27,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -502,8 +507,19 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                 pattern += "~ " + employeeMaster2.getEmployeeName() + "_Pending_ ";
                             }
                         }
+                        pass++;
+                        EmployeeMaster employeeMaster3 = new EmployeeMaster();
+                        employeeMaster3 = employeeMasterService.readById(Integer.parseInt(appoverObj));
+                        DesignationMaster designationMaster1 = new DesignationMaster();
+                        designationMaster1 = designationMasterService.readById(employeeMaster3.getDesignationMaster().getId());
+                        LevelMaster levelMaster = new LevelMaster();
+                        levelMaster = levelMasterService.readById(employeeMaster3.getLevelMaster().getId());
+                        if ((levelMaster.getLevel().equals("3A") || levelMaster.getLevel().equals("3B") || levelMaster.getLevel().equals("2D")
+                                || levelMaster.getLevel().equals("2C") || levelMaster.getLevel().equals("2E") || levelMaster.getLevel().equals("2B") || levelMaster.getLevel().equals("2A")
+                                || (levelMaster.getLevel().equals("0") && (designationMaster1.getDesignationName().equals("Proprietor") || designationMaster1.getDesignationName().equals("Project Cordinator")))) && !designationMaster1.getDesignationName().equals("CEO")) {
+                            break;
+                        }
                     }
-                    pass++;
                 }
                 templist.add(pattern);
                 finalList.add(templist);
@@ -956,6 +972,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
         employeeMaster1 = employeeMasterService.readById(employeeId);
         String manager5 = employeeMaster1.getReportingManagerLevel5();
         String manager6 = employeeMaster1.getReportingManagerLevel6();
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
         if (btnSubmit.equals("approve")) {
             if (travelRequestMaster.getStatus() == 0 || travelRequestMaster.getStatus() == 3 || travelRequestMaster.getStatus() == 10) {
                 travelRequestMaster.setManagerRemark(managerRemark);
@@ -966,11 +983,66 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 
 //                    if (Integer.parseInt(loginId) == Integer.parseInt(manager5)) {
                     if (levelMaster.getLevel().equals("3A") || levelMaster.getLevel().equals("3B") || levelMaster.getLevel().equals("2D")
-                            || levelMaster.getLevel().equals("2C") || levelMaster.getLevel().equals("2B") || levelMaster.getLevel().equals("2A")
+                            || levelMaster.getLevel().equals("2C") || levelMaster.getLevel().equals("2E") || levelMaster.getLevel().equals("2B") || levelMaster.getLevel().equals("2A")
                             || (levelMaster.getLevel().equals("0") && (designationMaster1.getDesignationName().equals("Proprietor") || designationMaster1.getDesignationName().equals("Project Cordinator")))) {
                         if (travelRequestMaster.getTravelType().equals("Domestic") || travelRequestMaster.getTravelType().equals("Local")) {
                             travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
                             travelRequestMaster.setStatus(5);
+
+                            // add c-off balance in employee leave balance when day is sunday
+                            String startDate = travelRequestMaster.getStartDateTime();
+                            String endDate = travelRequestMaster.getEndDateTime();
+                            Date startDate1 = sdf1.parse(startDate);
+                            Date endDate1 = sdf1.parse(endDate);
+                            long diff = endDate1.getTime() - startDate1.getTime();
+                            int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                            for (int i = 0; i <= days + 1; i++) {
+                                String dayOfWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(startDate1);
+                                if (dayOfWeek.equals("Sunday")) {
+                                    String time = "0.8";
+
+                                    OverTimeMaster overTimeMaster = new OverTimeMaster();
+                                    String overTimeDate = sdf1.format(startDate1);
+                                    overTimeMaster.setDate(overTimeDate);
+                                    overTimeMaster.setTime(time);
+                                    overTimeMaster.setEmployeeMaster(travelRequestMaster.getEmployeeMasterByEmployeeMasterId());
+
+                                    EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+                                    EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
+                                    LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+                                    leaveTypeMaster.setId(11);
+                                    employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                                    employeeLeaveBalance.setEmployeeMaster(travelRequestMaster.getEmployeeMasterByEmployeeMasterId());
+                                    EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                                    employeeMaster2 = employeeMasterService.readById(travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId());
+                                    int levelId = employeeMaster.getLevelMaster().getId();
+                                    LevelMaster levelMaster1 = new LevelMaster();
+                                    levelMaster1 = levelMasterService.readById(levelId);
+                                    if (levelMaster.getLevel().contains("Level 4") || levelMaster.getLevel().contains("Level 5")) {
+                                        List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                                        if (!empBalList.isEmpty()) {
+                                            employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
+                                            float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
+                                            time1 = time1 + Float.parseFloat(time);
+                                            employeeLeaveBalance1.setNoOfLeaveRemain(time1);
+                                            employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                                        } else {
+                                            employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
+                                            employeeLeaveBalance1.setEmployeeMaster(travelRequestMaster.getEmployeeMasterByEmployeeMasterId());
+                                            employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time));
+                                            employeeLeaveBalanceService.create(employeeLeaveBalance1);
+                                        }
+                                        overTimeMasterService.create(overTimeMaster);
+                                    }
+
+                                }
+                                Calendar c = Calendar.getInstance();
+                                c.setTime(startDate1);
+                                c.add(Calendar.DATE, 1);
+                                startDate1 = c.getTime();
+                            }
+                            // add c-off balance in employee leave balance when day is sunday
+
                         } else {
                             travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
                             travelRequestMaster.setStatus(6);
@@ -980,9 +1052,117 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 
                             travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster);
                             travelRequestMaster.setStatus(5);
+                            // add c-off balance in employee leave balance when day is sunday
+                            String startDate = travelRequestMaster.getStartDateTime();
+                            String endDate = travelRequestMaster.getEndDateTime();
+                            Date startDate1 = sdf1.parse(startDate);
+                            Date endDate1 = sdf1.parse(endDate);
+                            long diff = endDate1.getTime() - startDate1.getTime();
+                            int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                            for (int i = 0; i <= days + 1; i++) {
+                                String dayOfWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(startDate1);
+                                if (dayOfWeek.equals("Sunday")) {
+                                    String time = "0.8";
+
+                                    OverTimeMaster overTimeMaster = new OverTimeMaster();
+                                    String overTimeDate = sdf1.format(startDate1);
+                                    overTimeMaster.setDate(overTimeDate);
+                                    overTimeMaster.setTime(time);
+                                    overTimeMaster.setEmployeeMaster(travelRequestMaster.getEmployeeMasterByEmployeeMasterId());
+
+                                    EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+                                    EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
+                                    LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+                                    leaveTypeMaster.setId(11);
+                                    employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                                    employeeLeaveBalance.setEmployeeMaster(travelRequestMaster.getEmployeeMasterByEmployeeMasterId());
+                                    EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                                    employeeMaster2 = employeeMasterService.readById(travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId());
+                                    int levelId = employeeMaster.getLevelMaster().getId();
+                                    LevelMaster levelMaster1 = new LevelMaster();
+                                    levelMaster1 = levelMasterService.readById(levelId);
+                                    if (levelMaster.getLevel().contains("Level 4") || levelMaster.getLevel().contains("Level 5")) {
+                                        List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                                        if (!empBalList.isEmpty()) {
+                                            employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
+                                            float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
+                                            time1 = time1 + Float.parseFloat(time);
+                                            employeeLeaveBalance1.setNoOfLeaveRemain(time1);
+                                            employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                                        } else {
+                                            employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
+                                            employeeLeaveBalance1.setEmployeeMaster(travelRequestMaster.getEmployeeMasterByEmployeeMasterId());
+                                            employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time));
+                                            employeeLeaveBalanceService.create(employeeLeaveBalance1);
+                                        }
+                                        overTimeMasterService.create(overTimeMaster);
+                                    }
+
+                                }
+                                Calendar c = Calendar.getInstance();
+                                c.setTime(startDate1);
+                                c.add(Calendar.DATE, 1);
+                                startDate1 = c.getTime();
+                            }
+                            // add c-off balance in employee leave balance when day is sunday
+
                         } else {
                             travelRequestMaster.setEmployeeMasterByApprover2Id(employeeMaster);
                             travelRequestMaster.setStatus(5);
+                            // add c-off balance in employee leave balance when day is sunday
+                            String startDate = travelRequestMaster.getStartDateTime();
+                            String endDate = travelRequestMaster.getEndDateTime();
+                            Date startDate1 = sdf1.parse(startDate);
+                            Date endDate1 = sdf1.parse(endDate);
+                            long diff = endDate1.getTime() - startDate1.getTime();
+                            int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                            for (int i = 0; i <= days + 1; i++) {
+                                String dayOfWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(startDate1);
+                                if (dayOfWeek.equals("Sunday")) {
+                                    String time = "0.8";
+
+                                    OverTimeMaster overTimeMaster = new OverTimeMaster();
+                                    String overTimeDate = sdf1.format(startDate1);
+                                    overTimeMaster.setDate(overTimeDate);
+                                    overTimeMaster.setTime(time);
+                                    overTimeMaster.setEmployeeMaster(travelRequestMaster.getEmployeeMasterByEmployeeMasterId());
+
+                                    EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+                                    EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
+                                    LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+                                    leaveTypeMaster.setId(11);
+                                    employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                                    employeeLeaveBalance.setEmployeeMaster(travelRequestMaster.getEmployeeMasterByEmployeeMasterId());
+                                    EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                                    employeeMaster2 = employeeMasterService.readById(travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId());
+                                    int levelId = employeeMaster.getLevelMaster().getId();
+                                    LevelMaster levelMaster1 = new LevelMaster();
+                                    levelMaster1 = levelMasterService.readById(levelId);
+                                    if (levelMaster.getLevel().contains("Level 4") || levelMaster.getLevel().contains("Level 5")) {
+                                        List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                                        if (!empBalList.isEmpty()) {
+                                            employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
+                                            float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
+                                            time1 = time1 + Float.parseFloat(time);
+                                            employeeLeaveBalance1.setNoOfLeaveRemain(time1);
+                                            employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                                        } else {
+                                            employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
+                                            employeeLeaveBalance1.setEmployeeMaster(travelRequestMaster.getEmployeeMasterByEmployeeMasterId());
+                                            employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time));
+                                            employeeLeaveBalanceService.create(employeeLeaveBalance1);
+                                        }
+                                        overTimeMasterService.create(overTimeMaster);
+                                    }
+
+                                }
+                                Calendar c = Calendar.getInstance();
+                                c.setTime(startDate1);
+                                c.add(Calendar.DATE, 1);
+                                startDate1 = c.getTime();
+                            }
+                            // add c-off balance in employee leave balance when day is sunday
+
                         }
 
                     } else {
@@ -1380,8 +1560,20 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                 pattern += "~ " + employeeMaster3.getEmployeeName() + "_Pending_ ";
                             }
                         }
+                        pass++;
+                        EmployeeMaster employeeMaster4 = new EmployeeMaster();
+                        employeeMaster4 = employeeMasterService.readById(Integer.parseInt(appoverObj));
+                        DesignationMaster designationMaster1 = new DesignationMaster();
+                        designationMaster1 = designationMasterService.readById(employeeMaster4.getDesignationMaster().getId());
+                        LevelMaster levelMaster = new LevelMaster();
+                        levelMaster = levelMasterService.readById(employeeMaster4.getLevelMaster().getId());
+                        if ((levelMaster.getLevel().equals("3A") || levelMaster.getLevel().equals("3B") || levelMaster.getLevel().equals("2D")
+                                || levelMaster.getLevel().equals("2C") || levelMaster.getLevel().equals("2E") || levelMaster.getLevel().equals("2B") || levelMaster.getLevel().equals("2A")
+                                || (levelMaster.getLevel().equals("0") && (designationMaster1.getDesignationName().equals("Proprietor") || designationMaster1.getDesignationName().equals("Project Cordinator")))) && !designationMaster1.getDesignationName().equals("CEO")) {
+                            break;
+                        }
                     }
-                    pass++;
+
                 }
                 templist.add(pattern);
                 finalList.add(templist);
@@ -1390,6 +1582,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
         }
 
         selectEmployee(request, response);
+
         departmentList(request);
         designationList(request);
         request.setAttribute("list11", finalList);
@@ -2456,7 +2649,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
         travelApproverHistory.setTravelApproveHistoryDate(requestdate);
         travelApproverHistory.setTravelApproverRemark(CEORemark);
         travelApproverHistory.setReturnFlag(0);
-
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
         if (btnSubmit.equals("approve")) {
             travelRequestMaster.setAdminRemark(CEORemark);
             travelRequestMaster.setEmployeeMasterByApprover2Id(employeeMaster);
@@ -2465,6 +2658,60 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 
             travelApproverHistory.setTravelApproveStatus(5);
             travelApproverHistoryService.create(travelApproverHistory);
+
+            // add c-off balance in employee leave balance when day is sunday
+            String startDate = travelRequestMaster.getStartDateTime();
+            String endDate = travelRequestMaster.getEndDateTime();
+            Date startDate1 = sdf1.parse(startDate);
+            Date endDate1 = sdf1.parse(endDate);
+            long diff = endDate1.getTime() - startDate1.getTime();
+            int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+            for (int i = 0; i <= days + 1; i++) {
+                String dayOfWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(startDate1);
+                if (dayOfWeek.equals("Sunday")) {
+                    String time = "0.8";
+
+                    OverTimeMaster overTimeMaster = new OverTimeMaster();
+                    String overTimeDate = sdf1.format(startDate1);
+                    overTimeMaster.setDate(overTimeDate);
+                    overTimeMaster.setTime(time);
+                    overTimeMaster.setEmployeeMaster(travelRequestMaster.getEmployeeMasterByEmployeeMasterId());
+
+                    EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+                    EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
+                    LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+                    leaveTypeMaster.setId(11);
+                    employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                    employeeLeaveBalance.setEmployeeMaster(travelRequestMaster.getEmployeeMasterByEmployeeMasterId());
+                    EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                    employeeMaster2 = employeeMasterService.readById(travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId());
+                    int levelId = employeeMaster.getLevelMaster().getId();
+                    LevelMaster levelMaster1 = new LevelMaster();
+                    levelMaster1 = levelMasterService.readById(levelId);
+                    if (levelMaster1.getLevel().contains("Level 4") || levelMaster1.getLevel().contains("Level 5")) {
+                        List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                        if (!empBalList.isEmpty()) {
+                            employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
+                            float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
+                            time1 = time1 + Float.parseFloat(time);
+                            employeeLeaveBalance1.setNoOfLeaveRemain(time1);
+                            employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                        } else {
+                            employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
+                            employeeLeaveBalance1.setEmployeeMaster(travelRequestMaster.getEmployeeMasterByEmployeeMasterId());
+                            employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time));
+                            employeeLeaveBalanceService.create(employeeLeaveBalance1);
+                        }
+                        overTimeMasterService.create(overTimeMaster);
+                    }
+
+                }
+                Calendar c = Calendar.getInstance();
+                c.setTime(startDate1);
+                c.add(Calendar.DATE, 1);
+                startDate1 = c.getTime();
+            }
+            // add c-off balance in employee leave balance when day is sunday
 
             request.setAttribute("successMessage",
                     "Information : The Travel Request Approved successfully.");
@@ -2839,53 +3086,64 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 
                 if (tDate.equals(manager2Date)) {
 
-                    if (null != manager2 && !"".equals(manager2)) {
-                        checkForEscalation(manager1, manager2);
-                    } else if (null == manager2 || "".equals(manager2)) {
-                        checkForEscalation(manager1, manager3);
-                    } else if (null == manager3 || "".equals(manager3)) {
-                        checkForEscalation(manager1, manager4);
-                    } else if (null == manager4 || "".equals(manager4)) {
-                        checkForEscalation(manager1, manager5);
-                    } else if (null == manager5 || "".equals(manager5)) {
-                        checkForEscalation(manager1, manager6);
+                    if (null != manager2 && !"".equals(manager2) && !manager1.equals(manager6)) {
+                        checkForEscalation(manager1, manager2, employeeMaster.getEmployeeName());
+                    } else if ((null == manager2 || "".equals(manager2)) && !manager1.equals(manager6)) {
+                        if(!manager1.equals(manager3)){
+                            checkForEscalation(manager1, manager3, employeeMaster.getEmployeeName());
+                        }
+                    } else if ((null == manager3 || "".equals(manager3)) && !manager1.equals(manager6)) {
+                        if(!manager1.equals(manager4)){
+                            checkForEscalation(manager1, manager4, employeeMaster.getEmployeeName());
+                        }
+                    } else if ((null == manager4 || "".equals(manager4)) && !manager1.equals(manager6)) {
+                        if(!manager1.equals(manager5)){
+                            checkForEscalation(manager1, manager5, employeeMaster.getEmployeeName());
+                        }
+                    } else if ((null == manager5 || "".equals(manager5)) && !manager1.equals(manager6)) {
+                        checkForEscalation(manager1, manager6, employeeMaster.getEmployeeName());
                     }
 
                 } else if (tDate.equals(manager3Date)) {
                     if (null != manager3 && !"".equals(manager3)) {
-                        if (null == manager2 || "".equals(manager2)) {
-                            checkForEscalation(manager1, manager3);
+                        if ((null == manager2 || "".equals(manager2)) && !manager1.equals(manager6)) {
+                            checkForEscalation(manager1, manager3, employeeMaster.getEmployeeName());
                         } else {
-                            checkForEscalation(manager2, manager3);
+                            if (!manager2.equals(manager6)) {
+                                checkForEscalation(manager2, manager3, employeeMaster.getEmployeeName());
+                            }
                         }
                     } else if (null == manager3 || "".equals(manager3)) {
 
                         if (null != manager2 && !"".equals(manager2)) {
 
-                            if (null != manager4 && !"".equals(manager4)) {
-                                checkForEscalation(manager2, manager4);
+                            if ((null != manager4 && !"".equals(manager4)) && !manager2.equals(manager6)) {
+                                checkForEscalation(manager2, manager4, employeeMaster.getEmployeeName());
 
-                            } else if (null == manager4 || "".equals(manager4)) {
+                            } else if ((null == manager4 || "".equals(manager4)) && !manager2.equals(manager6)) {
 
-                                if (null != manager5 && !"".equals(manager5)) {
-                                    checkForEscalation(manager2, manager5);
-
+                                if ((null != manager5 && !"".equals(manager5)) && !manager2.equals(manager6)) {
+                                    checkForEscalation(manager2, manager5, employeeMaster.getEmployeeName());
                                 } else {
-                                    checkForEscalation(manager2, manager6);
+                                    if (!manager2.equals(manager6)) {
+                                        checkForEscalation(manager2, manager6, employeeMaster.getEmployeeName());
+                                    }
                                 }
                             }
 
                         } else {
-                            if (null != manager4 && !"".equals(manager4)) {
-                                checkForEscalation(manager1, manager4);
+                            if (null != manager4 && !"".equals(manager4) && !manager1.equals(manager6)) {
+                                checkForEscalation(manager1, manager4, employeeMaster.getEmployeeName());
 
-                            } else if (null == manager4 || "".equals(manager4)) {
+                            } else if ((null == manager4 || "".equals(manager4)) && !manager1.equals(manager6)) {
 
-                                if (null != manager5 && !"".equals(manager5)) {
-                                    checkForEscalation(manager1, manager5);
+                                if (null != manager5 && !"".equals(manager5) && !manager1.equals(manager6)) {
+                                    checkForEscalation(manager1, manager5, employeeMaster.getEmployeeName());
 
                                 } else {
-                                    checkForEscalation(manager1, manager6);
+                                    if (!manager1.equals(manager6)) {
+                                        checkForEscalation(manager1, manager6, employeeMaster.getEmployeeName());
+                                    }
                                 }
                             }
                         }
@@ -2895,37 +3153,47 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                 } else if (tDate.equals(manager4Date)) {
 
                     if (null != manager4 && !"".equals(manager4)) {
-                        if (null != manager3 || !"".equals(manager3)) {
-                            checkForEscalation(manager3, manager4);
-                        } else if (null != manager2 || !"".equals(manager2)) {
-                            checkForEscalation(manager2, manager4);
+                        if ((null != manager3 || !"".equals(manager3)) && !manager3.equals(manager6)) {
+                            checkForEscalation(manager3, manager4, employeeMaster.getEmployeeName());
+                        } else if ((null != manager2 || !"".equals(manager2)) && !manager2.equals(manager6)) {
+                            checkForEscalation(manager2, manager4, employeeMaster.getEmployeeName());
                         } else {
-                            checkForEscalation(manager1, manager4);
+                            if (!manager1.equals(manager6)) {
+                            if (!manager1.equals(manager4)) {
+                                checkForEscalation(manager1, manager4, employeeMaster.getEmployeeName());
+                            }
+                            }
                         }
                     } else if (null == manager4 || "".equals(manager4)) {
 
                         if (null != manager3 && !"".equals(manager3)) {
 
-                            if (null != manager5 && !"".equals(manager5)) {
-                                checkForEscalation(manager3, manager5);
+                            if (null != manager5 && !"".equals(manager5) && !manager3.equals(manager6)) {
+                                checkForEscalation(manager3, manager5, employeeMaster.getEmployeeName());
                             } else {
-                                checkForEscalation(manager3, manager6);
+                                if (!manager3.equals(manager6)) {
+                                    checkForEscalation(manager3, manager6, employeeMaster.getEmployeeName());
+                                }
                             }
 
                         }
                         if (null != manager2 && !"".equals(manager2)) {
 
-                            if (null != manager5 && !"".equals(manager5)) {
-                                checkForEscalation(manager2, manager5);
+                            if (null != manager5 && !"".equals(manager5) && !manager2.equals(manager6)) {
+                                checkForEscalation(manager2, manager5, employeeMaster.getEmployeeName());
                             } else {
-                                checkForEscalation(manager2, manager6);
+                                if (!manager2.equals(manager6)) {
+                                    checkForEscalation(manager2, manager6, employeeMaster.getEmployeeName());
+                                }
                             }
 
                         } else {
-                            if (null != manager5 && !"".equals(manager5)) {
-                                checkForEscalation(manager1, manager5);
+                            if (null != manager5 && !"".equals(manager5) && !manager1.equals(manager6)) {
+                                checkForEscalation(manager1, manager5, employeeMaster.getEmployeeName());
                             } else {
-                                checkForEscalation(manager1, manager6);
+                                if (!manager2.equals(manager6)) {
+                                    checkForEscalation(manager2, manager6, employeeMaster.getEmployeeName());
+                                }
                             }
                         }
 
@@ -2934,42 +3202,50 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                 } else if (tDate.equals(manager5Date)) {
 
                     if (null != manager5 && !"".equals(manager5)) {
-                        if (null != manager4 && !"".equals(manager4)) {
-                            checkForEscalation(manager4, manager5);
-                        } else if (null != manager3 && !"".equals(manager3)) {
-                            checkForEscalation(manager3, manager5);
-                        } else if (null != manager2 && !"".equals(manager2)) {
-                            checkForEscalation(manager2, manager5);
+                        if (null != manager4 && !"".equals(manager4) && !manager4.equals(manager6)) {
+                            checkForEscalation(manager4, manager5, employeeMaster.getEmployeeName());
+                        } else if (null != manager3 && !"".equals(manager3) && !manager3.equals(manager6)) {
+                            checkForEscalation(manager3, manager5, employeeMaster.getEmployeeName());
+                        } else if (null != manager2 && !"".equals(manager2) && !manager2.equals(manager6)) {
+                            checkForEscalation(manager2, manager5, employeeMaster.getEmployeeName());
                         } else {
-                            checkForEscalation(manager1, manager5);
+                            if (!manager1.equals(manager6)) {
+                            if (!manager1.equals(manager5)) {
+                                checkForEscalation(manager1, manager5, employeeMaster.getEmployeeName());
+                            }
+                            }
                         }
                     } else if (null == manager5 || "".equals(manager5)) {
-                         if (null != manager5 && !"".equals(manager5)) {
-                            checkForEscalation(manager5, manager6);
-                         } else if(null != manager4 && !"".equals(manager4)) {
-                            checkForEscalation(manager4, manager6);
-                         } else if(null != manager3 && !"".equals(manager3)) {
-                            checkForEscalation(manager3, manager6);
-                         } else if(null != manager2 && !"".equals(manager2)) {
-                            checkForEscalation(manager2, manager6);
-                         } else{
-                            checkForEscalation(manager1, manager6);
-                         }
+                        if (null != manager5 && !"".equals(manager5) && !manager5.equals(manager6)) {
+                            checkForEscalation(manager5, manager6, employeeMaster.getEmployeeName());
+                        } else if (null != manager4 && !"".equals(manager4) && !manager4.equals(manager6)) {
+                            checkForEscalation(manager4, manager6, employeeMaster.getEmployeeName());
+                        } else if (null != manager3 && !"".equals(manager3) && !manager3.equals(manager6)) {
+                            checkForEscalation(manager3, manager6, employeeMaster.getEmployeeName());
+                        } else if (null != manager2 && !"".equals(manager2) && !manager2.equals(manager6)) {
+                            checkForEscalation(manager2, manager6, employeeMaster.getEmployeeName());
+                        } else {
+                            if (!manager1.equals(manager6)) {
+                                checkForEscalation(manager1, manager6, employeeMaster.getEmployeeName());
+                            }
+                        }
                     }
 
                 } else if (tDate.equals(manager6Date)) {
-                    
-                       if (null != manager5 && !"".equals(manager5)) {
-                            checkForEscalation(manager5, manager6);
-                         } else if(null != manager4 && !"".equals(manager4)) {
-                            checkForEscalation(manager4, manager6);
-                         } else if(null != manager3 && !"".equals(manager3)) {
-                            checkForEscalation(manager3, manager6);
-                         } else if(null != manager2 && !"".equals(manager2)) {
-                            checkForEscalation(manager2, manager6);
-                         }  else{
-                            checkForEscalation(manager1, manager6);
-                         }
+
+                    if (null != manager5 && !"".equals(manager5) && !manager5.equals(manager6)) {
+                        checkForEscalation(manager5, manager6, employeeMaster.getEmployeeName());
+                    } else if (null != manager4 && !"".equals(manager4) && !manager4.equals(manager6)) {
+                        checkForEscalation(manager4, manager6, employeeMaster.getEmployeeName());
+                    } else if (null != manager3 && !"".equals(manager3) && !manager3.equals(manager6)) {
+                        checkForEscalation(manager3, manager6, employeeMaster.getEmployeeName());
+                    } else if (null != manager2 && !"".equals(manager2) && !manager2.equals(manager6)) {
+                        checkForEscalation(manager2, manager6, employeeMaster.getEmployeeName());
+                    } else {
+                        if (!manager1.equals(manager6)) {
+                            checkForEscalation(manager1, manager6, employeeMaster.getEmployeeName());
+                        }
+                    }
 
                 }
 
@@ -2980,7 +3256,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 
     }
 
-    public void checkForEscalation(String notApprovedApproverId, String pendingApprover) {
+    public void checkForEscalation(String notApprovedApproverId, String pendingApprover, String empName) {
         try {
             EmailTemplate emailTemplate = new EmailTemplate();
             // id=137 for Send to Approver For Travel Req. Approve...
@@ -2993,6 +3269,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
             String msg = emailTemplate.getBodytext();
             msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
             msg = msg.replaceAll("\\{not_Approved_By_user\\}", nameOfEmpWhoHasNotApprove.getEmployeeName());
+            msg = msg.replaceAll("\\{employee_name\\}", empName);
             sendMail.sendMail(from, To, Subject, msg);
 
         } catch (Exception e) {

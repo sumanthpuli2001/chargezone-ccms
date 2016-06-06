@@ -353,7 +353,7 @@ public class ExpenseMasterController extends ExpenseMasterAbstract {
                     String otherExpense = request.getParameter("RentAndFoodDiv" + i);
                     float amount = Float.parseFloat(request.getParameter("otherAmount" + i));
                     String currency = request.getParameter("currencyRelocationDiv" + i);
-                     String purpose = request.getParameter("purpose" + i);
+                    String purpose = request.getParameter("purpose" + i);
                     relocationOrOtherExpense.setOtherExpenseDate(otherExpenseDate);
                     relocationOrOtherExpense.setOtherExpense(otherExpense);
                     relocationOrOtherExpense.setAmount(amount);
@@ -1929,12 +1929,18 @@ public class ExpenseMasterController extends ExpenseMasterAbstract {
         Object[] expenseReport;
         String pending = "";
         String completed = "";
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
         try {
             List<?> travelExpenseReportList = expenseMasterService.readTravelExpenseReportList();
+            List<?> list = travelRequestMasterService.readExpensePendingList(travelRequestMaster);
             if (!travelExpenseReportList.isEmpty()) {
                 expenseReport = (Object[]) travelExpenseReportList.get(0);
-                pending = "" + expenseReport[0];
-                completed = "" + expenseReport[1];
+                String expenseReport1 = "" + expenseReport[1];
+                String expenseReport2 = "" + expenseReport[0];
+                int totalExpenseRequest = Integer.parseInt(expenseReport1) + Integer.parseInt(expenseReport2);
+                completed = expenseReport2;
+                int travelRequest = list.size() - totalExpenseRequest;
+                pending = "" + travelRequest;
             }
             if ("null".equals(pending) || "".equals(pending)) {
                 pending = "0";
@@ -2654,13 +2660,13 @@ public class ExpenseMasterController extends ExpenseMasterAbstract {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         ExpenseMaster expenseMaster = new ExpenseMaster();
-         HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         selectEmployee(request, response);
         departmentList(request);
         designationList(request);
         expenseMaster.setStatus(999);
-         List<?> expenseList = expenseMasterService.readExpenseRequestListForAdmin(expenseMaster);
-         request.setAttribute("expenseList", expenseList);
+        List<?> expenseList = expenseMasterService.readExpenseRequestListForAdmin(expenseMaster);
+        request.setAttribute("expenseList", expenseList);
         session.setAttribute("expenseRequestList", expenseList);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("ExpenseReport/ExpenseReportSearchByAdmin");
@@ -2947,6 +2953,7 @@ public class ExpenseMasterController extends ExpenseMasterAbstract {
             String travelType = "" + ob[4];
             String startDateTime = "" + ob[5];
             String endDateTime = "" + ob[6];
+            String empMasterId = "" + ob[7];
 
             List<String> l1 = new LinkedList<String>();
 
@@ -2960,6 +2967,8 @@ public class ExpenseMasterController extends ExpenseMasterAbstract {
 
             l1.add("Pending");
             l1.add("0");
+            l1.add(empMasterId);
+            l1.add("Pending");
             List<?> expenseTypeList = expenseTravelTypeService.read();
             boolean flag = true;
 
@@ -2972,11 +2981,14 @@ public class ExpenseMasterController extends ExpenseMasterAbstract {
                     l1.add(7, "Submited");
                     l1.remove(8);
                     l1.add(8, "" + expenseMaster.getStatus());
+                    l1.remove(10);
+                    l1.add("" + expenseMaster.getId());
                     flag = false;
                     break;
                 }
 
             }
+           
             finalList.add(l1);
 
         }

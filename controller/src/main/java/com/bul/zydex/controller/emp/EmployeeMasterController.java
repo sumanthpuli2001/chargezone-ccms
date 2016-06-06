@@ -24,6 +24,7 @@ import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.util.DownloadFile;
 import com.bul.zydex.validator.PasswordValidator;
 import com.google.gson.Gson;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.io.File;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -709,7 +710,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         userMasterService.update(userMaster1);
         employeeMasterService.update(employeeMaster);
 
-        if (!reportingManagerBeforeUpdate.equals(reportingManagerForChange)) {
+//        if (!reportingManagerBeforeUpdate.equals(reportingManagerForChange)) {
             //code will execute only if reporting manager changed then it will reflect in all sub-ordinate.
             List employeeContainsOldReportingManagerList = employeeMasterService.readByReportingManager("" + employeeMaster.getId());
             for (Object object : employeeContainsOldReportingManagerList) {
@@ -758,7 +759,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 } catch (Exception e) {
                 }
             }
-        }
+//        }
         request.setAttribute("successMessage",
                 "Information : The Information is saved Successfully.");
         selectEmployee(request, response);
@@ -885,6 +886,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         }
         request.setAttribute("employeeMaster", employeeMaster1);
         empChart(request, response);
+        empOwnChart(request, response);
         mv.setViewName("forward:appraisalPerformance.htm?act=userDashboard");
         return mv;
     }
@@ -1041,6 +1043,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         int subordinateAddiCount = 0;
         String imageManager = "";
         String imageUser = "";
+                List<?> ceoList = employeeMasterService.listOfCEO();
+                Map<Integer,List> map = new HashMap();
         try {
             employeeMaster.setReportingManagerLevel1("" + employeeMasterId.getId());
             List subordinateList = employeeMasterService.readByEmployeeLevelId(employeeMaster);
@@ -1071,7 +1075,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             request.setAttribute("subordinateAddiCount", subordinateAddiCount);
             request.setAttribute("logedInEmpId", employeeMasterId.getId());
             if (null != employeeMasterId.getReportingManagerLevel1() && !employeeMasterId.getReportingManagerLevel1().equals("")) {
-                employeeMasterManager = employeeMasterService.readById(Integer.parseInt(employeeMasterId.getReportingManagerLevel1()));
+                for (Object obj : ceoList) {
+                    employeeMasterManager = (EmployeeMaster)obj;
+                    List innerList = new ArrayList();
+//                employeeMasterManager = employeeMasterService.readById(Integer.parseInt(employeeMasterId.getReportingManagerLevel1()));
                 DepartmentMaster departmentMaster = new DepartmentMaster();
                 DesignationMaster designationMaster = new DesignationMaster();
 
@@ -1092,7 +1099,101 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 } else {
                     imageManager = "StorageYard" + File.separator + "UserProfile" + File.separator + "User" + File.separator + "default.png";
                 }
+                
+                innerList.add(employeeMasterManager.getEmployeeId());
+                innerList.add(employeeMasterManager.getEmployeeName());
+                innerList.add(employeeMasterManager.getDepartmentMaster().getDepartmentName());
+                innerList.add(employeeMasterManager.getDesignationMaster().getDesignationName());
+                innerList.add(imageManager);
+                map.put(employeeMasterManager.getId(), innerList);
+                
             }
+                }
+            imageUser = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMaster.getEmployeeId();
+
+            if (new File(imageUser).exists()) {
+                for (File imgFilePath : new File(imageUser).listFiles()) {
+                    imageUser = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMaster.getEmployeeId() + File.separator + imgFilePath.getName();
+                    break;
+                }
+            } else {
+                imageUser = "StorageYard" + File.separator + "UserProfile" + File.separator + "User" + File.separator + "default.png";
+            }
+        } catch (Exception e) {
+        }
+
+        request.setAttribute("ceoMap", map);
+        request.setAttribute("imageManager", imageManager);
+        request.setAttribute("imageUser", imageUser);
+        request.setAttribute("employeeMasterManager", employeeMasterManager);
+        return mv;
+    }
+    public ModelAndView empOwnChart(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMasterId = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getAttribute("employeeMaster");
+        EmployeeMaster employeeMasterManager1 = null;
+        EmployeeMaster employeeMasterSubordinate = new EmployeeMaster();
+        int subordinateCount = 0;
+        int subordinateAddiCount = 0;
+        String imageManager = "";
+        String imageUser = "";
+        try {
+            employeeMaster.setReportingManagerLevel1("" + employeeMasterId.getId());
+            List subordinateList = employeeMasterService.readByEmployeeLevelId(employeeMaster);
+            for (Object o : subordinateList) {
+                Object[] o1 = (Object[]) o;
+                String employeeId = (String) o1[1];
+
+                o1[5] = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
+//                o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
+
+                if (new File((String) o1[5]).exists()) {
+                    for (File imgFilePath : new File((String) o1[5]).listFiles()) {
+                        o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId + File.separator + imgFilePath.getName();
+                        break;
+                    }
+                } else {
+                    o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + "User" + File.separator + "default.png";
+                }
+            }
+            subordinateCount = subordinateList.size();
+            if (subordinateCount >= 4) {
+                subordinateAddiCount = subordinateCount - 4;
+                subordinateCount = 4;
+            }
+            request.setAttribute("subordinateList", subordinateList);
+            request.setAttribute("subordinateCount", subordinateCount);
+            request.setAttribute("totalSubordinates", subordinateList.size());
+            request.setAttribute("subordinateAddiCount", subordinateAddiCount);
+            request.setAttribute("logedInEmpId", employeeMasterId.getId());
+            if (null != employeeMasterId.getReportingManagerLevel1() && !employeeMasterId.getReportingManagerLevel1().equals("")) {
+              
+                employeeMasterManager1 = employeeMasterService.readById(Integer.parseInt(employeeMasterId.getReportingManagerLevel1()));
+                DepartmentMaster departmentMaster = new DepartmentMaster();
+                DesignationMaster designationMaster = new DesignationMaster();
+
+                departmentMaster = departmentMasterService.readById(employeeMasterManager1.getDepartmentMaster().getId());
+                designationMaster = designationMasterService.readById(employeeMasterManager1.getDesignationMaster().getId());
+
+                employeeMasterManager1.setDepartmentMaster(departmentMaster);
+                employeeMasterManager1.setDesignationMaster(designationMaster);
+
+                imageManager = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMasterManager1.getEmployeeId();
+
+                if (new File(imageManager).exists()) {
+                    for (File imgFilePath : new File(imageManager).listFiles()) {
+                        imageManager = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMasterManager1.getEmployeeId() + File.separator + imgFilePath.getName();
+                        break;
+
+                    }
+                } else {
+                    imageManager = "StorageYard" + File.separator + "UserProfile" + File.separator + "User" + File.separator + "default.png";
+                }
+            
+                }
             imageUser = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMaster.getEmployeeId();
 
             if (new File(imageUser).exists()) {
@@ -1108,7 +1209,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
         request.setAttribute("imageManager", imageManager);
         request.setAttribute("imageUser", imageUser);
-        request.setAttribute("employeeMasterManager", employeeMasterManager);
+        request.setAttribute("employeeMasterManager1", employeeMasterManager1);
         return mv;
     }
 
@@ -1189,92 +1290,93 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 } else {
                     o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + "User" + File.separator + "default.png";
                 }
-                break;
+//                break;
             }
             employeeMasterSubordinate.setReportingManagerLevel1("" + id);
             List subordinateValList = employeeMasterService.readByEmployeeLevelId(employeeMasterSubordinate);
-            for (Object o : subordinateValList) {
-                Object[] o1 = (Object[]) o;
-                id = (int) o1[0];
-                String employeeId = (String) o1[1];
+//            for (Object o : subordinateValList) {
+//                Object[] o1 = (Object[]) o;
+//                id = (int) o1[0];
+//                String employeeId = (String) o1[1];
+//
+//                o1[5] = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
+////                o1[5] = "StorageYard" + File.separator + "UserProfileselectEmployee" + File.separator + employeeId;
+//
+//                if (new File((String) o1[5]).exists()) {
+//                    for (File imgFilePath : new File((String) o1[5]).listFiles()) {
+//                        o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId + File.separator + imgFilePath.getName();
+//                        break;
+//                    }
+//                } else {
+//                    o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + "User" + File.separator + "default.png";
+//                }
+//            }
+//            if (!mdValList.isEmpty() && mdValList.size() != 0) {
+//                request.setAttribute("mdValList", mdValList.get(0));
+//            }
 
-                o1[5] = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
-//                o1[5] = "StorageYard" + File.separator + "UserProfileselectEmployee" + File.separator + employeeId;
-
-                if (new File((String) o1[5]).exists()) {
-                    for (File imgFilePath : new File((String) o1[5]).listFiles()) {
-                        o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId + File.separator + imgFilePath.getName();
-                        break;
-                    }
-                } else {
-                    o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + "User" + File.separator + "default.png";
-                }
-            }
-            if (!mdValList.isEmpty() && mdValList.size() != 0) {
-                request.setAttribute("mdValList", mdValList.get(0));
-            }
-
-            double count = subordinateValList.size();
-            count = count / 10;
-            if ((count - (int) count) != 0) {
-                count++;
-            }
-            List<List<Object>> list = new ArrayList<List<Object>>();
-            for (int i = 1; i <= ((int) count); i++) {
-                List<Object> list1 = new ArrayList<Object>();
-                if (i == 1) {
-                    list1 = new ArrayList<Object>();
-                    int coun = 0;
-                    boolean flag = false;
-                    try {
-                        list1.add("0");
-                        list1.add("10");
-                        list1.add(subordinateValList.subList(0, i * 10));
-                        list1.add("10");
-                    } catch (Exception e) {
-                        flag = true;
-                    }
-                    if (flag) {
-
-                        list1 = new ArrayList<Object>();
-                        coun = subordinateValList.size();
-                        list1.add("0");
-//                            if (coun >= 2) {
-//                                list1.add(coun - 2);
-//                            } else {
-                        list1.add(coun);
-//                            }
-
-                        list1.add(subordinateValList.subList(0, coun));
-                        list1.add(coun - 0);
-                    }
-                } else {
-                    list1 = new ArrayList<Object>();
-                    boolean flag = false;
-                    try {
-                        list1.add("" + ((i * 10) - 10));
-                        list1.add(i * 10);
-                        list1.add(subordinateValList.subList((i * 10) - 10, i * 10));
-                        list1.add((i * 10) - ((i * 10) - 10));
-                    } catch (Exception e) {
-                        flag = true;
-                    }
-                    if (flag) {
-                        list1 = new ArrayList<Object>();
-                        int coun = subordinateValList.size() - ((i * 10) - 10);
-                        list1.add("" + ((i * 10) - 10));
-                        list1.add(subordinateValList.size());
-                        list1.add(subordinateValList.subList((i * 10) - 10, subordinateValList.size()));
-                        list1.add(subordinateValList.size() - ((i * 10) - 10));
-                    }
-                }
-                list.add(list1);
-
-            }
+//            double count = subordinateValList.size();
+//            count = count / 10;
+//            if ((count - (int) count) != 0) {
+//                count++;
+//            }
+//            List<List<Object>> list = new ArrayList<List<Object>>();
+//            for (int i = 1; i <= ((int) count); i++) {
+//                List<Object> list1 = new ArrayList<Object>();
+//                if (i == 1) {
+//                    list1 = new ArrayList<Object>();
+//                    int coun = 0;
+//                    boolean flag = false;
+//                    try {
+//                        list1.add("0");
+//                        list1.add("10");
+//                        list1.add(subordinateValList.subList(0, i * 10));
+//                        list1.add("10");
+//                    } catch (Exception e) {
+//                        flag = true;
+//                    }
+//                    if (flag) {
+//
+//                        list1 = new ArrayList<Object>();
+//                        coun = subordinateValList.size();
+//                        list1.add("0");
+////                            if (coun >= 2) {
+////                                list1.add(coun - 2);
+////                            } else {
+//                        list1.add(coun);
+////                            }
+//
+//                        list1.add(subordinateValList.subList(0, coun));
+//                        list1.add(coun - 0);
+//                    }
+//                } else {
+//                    list1 = new ArrayList<Object>();
+//                    boolean flag = false;
+//                    try {
+//                        list1.add("" + ((i * 10) - 10));
+//                        list1.add(i * 10);
+//                        list1.add(subordinateValList.subList((i * 10) - 10, i * 10));
+//                        list1.add((i * 10) - ((i * 10) - 10));
+//                    } catch (Exception e) {
+//                        flag = true;
+//                    }
+//                    if (flag) {
+//                        list1 = new ArrayList<Object>();
+//                        int coun = subordinateValList.size() - ((i * 10) - 10);
+//                        list1.add("" + ((i * 10) - 10));
+//                        list1.add(subordinateValList.size());
+//                        list1.add(subordinateValList.subList((i * 10) - 10, subordinateValList.size()));
+//                        list1.add(subordinateValList.size() - ((i * 10) - 10));
+//                    }
+//                }
+//                list.add(list1);
+//
+//            }
 
 //            request.setAttribute("subordinateValList", subordinateValList);
-            request.setAttribute("subordinateValListofList", list);
-            request.setAttribute("mdValList", mdValList.get(0));
+//            request.setAttribute("subordinateValListofList", list);
+//            request.setAttribute("mdValList", mdValList.get(0));
+            request.setAttribute("mdValList", mdValList);
 //            request.setAttribute("subordinateValcount", subordinateValList.size() - 2);
 
         } catch (Exception e) {
@@ -1304,7 +1406,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 DepartmentMaster departmentMaster1 = new DepartmentMaster();
                 DesignationMaster designationMaster1 = new DesignationMaster();
 
-                employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                employeeMaster1 = employeeMasterService.readById(Integer.parseInt(idStr));
+//                employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
                 departmentMaster = departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId());
                 designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
 

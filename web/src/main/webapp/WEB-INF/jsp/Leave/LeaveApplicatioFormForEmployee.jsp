@@ -1223,7 +1223,8 @@
             var newstrDate = leaveTypes.options[leaveTypes.selectedIndex].text;
             strUser1 = newstrDate.split('(');
             strUser = strUser1[1].split(')');
-            if (parseFloat(strUser[0]) >= 1) {
+           
+            if (parseFloat(strUser[0]) >= 0) {
                 var now = new Date();
                 var Enddate1 = Enddate.split(' - ');
                 var n_date = Enddate1[0];
@@ -1490,7 +1491,7 @@
                                     <div class="box-header">
                                         <h3 class="box-title">Employee Detail:</h3>
                                         <div class="box-tools pull-right">
-                                            <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun1()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                            <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun1()"><i class="fa fa-plus" id="minusId1"></i></button>
                                         </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
@@ -1559,7 +1560,7 @@
                                     <div class="box-header" >
                                         <h3 class="box-title">Leave Detail:</h3>
                                         <div class="box-tools pull-right">
-                                            <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2()"><i class="fa fa-plus" id="minusId2"></i></button>
+                                            <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun2()"><i class="fa fa-plus" id="minusId2"></i></button>
                                         </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
@@ -1594,7 +1595,7 @@
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <label></label>
-                                                            <select id="leaveStartDate_SelectFullOrHalfId" name="leaveStartDate_SelectFullOrHalfId" style="margin-top:5px" class="form-control" onchange="leaveTypecheck();
+                                                            <select id="leaveStartDate_SelectFullOrHalfId" name="leaveStartDate_SelectFullOrHalfId" style="margin-top:5px" class="form-control" onChange="leaveTypecheck();
                                                                     checkPresentAjax();
                                                                     daysCount();">
                                                                 <option value="">--SELECT--</option>
@@ -1645,7 +1646,7 @@
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <label></label>
-                                                            <select id="leaveEndDate_SelectFullOrHalfId" name="leaveEndDate_SelectFullOrHalfId" style="margin-top:5px" class="form-control" onchange="leaveTypecheck();
+                                                            <select id="leaveEndDate_SelectFullOrHalfId" name="leaveEndDate_SelectFullOrHalfId" style="margin-top:5px" class="form-control" onChange="leaveTypecheck();
                                                                     checkPresentAjax();
                                                                     daysCount();">
                                                                 <option value="">--SELECT--</option>
@@ -1731,7 +1732,7 @@
                                     <div class="box-header">
                                         <h3 class="box-title">Reason In Detail:</h3>
                                         <div class="box-tools pull-right">
-                                            <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
+                                            <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
                                         </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
@@ -1753,7 +1754,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Leave Balance Sheet In Detail:</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4()"><i class="fa fa-plus" id="minusId4"></i></button>
+                                                <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId4"></i></button>
                                             </div>
                                         </div><!-- /.box-header -->
                                         <div class="box-body no-padding">

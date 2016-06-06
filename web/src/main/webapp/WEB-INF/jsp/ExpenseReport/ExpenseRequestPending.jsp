@@ -15,7 +15,7 @@
     </head>
     <script>
         function viewClick(id, empId) {
-            window.location = 'travelRequestMaster.htm?act=approveRequestManagerSide&id=' + id + "&empId=" + empId;
+            window.location = 'expenseMaster.htm?act=viewExpenseRequestByAdmin&id=' + id + '&empId=' + empId;
         }
 
     </script>
@@ -74,6 +74,7 @@
                                                                 <th>End Date Time</th>
                                                                 <th>Status</th>
                                                                 <th>Expense Requested Status</th>
+                                                                <th></th>
 
                                                             </tr>
                                                         </thead>
@@ -96,10 +97,21 @@
                                                             <c:if test="${list[8] == 2}"><td><span class="label label-success">Approved By Manager </span></td></c:if>
                                                             <c:if test="${list[8] == 3}"><td><span class="label label-default">Saved As Draft</span></td></c:if>
                                                             <c:if test="${list[8] == 4}"><td><span class="label label-success">Final Approved By Expense Admin </span></td></c:if>
+                                                            <c:if test="${list[10] ne 'Pending'}">
+                                                                <td><div class="btn-group">
+                                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="viewClick('${list[10]}', '${list[9]}');">
+                                                                            &nbsp;&nbsp;View</button>
+
+                                                                    </div></td>    
+                                                                </c:if>  
+                                                            <c:if test="${list[10] eq 'Pending'}">
+                                                                <td>
+                                                                    
+                                                                </td>
+                                                            </c:if>
 
 
-
-                                                            </tr>
+                                                        </tr>
                                                     </c:forEach>
                                                 </tbody>
                                             </table>

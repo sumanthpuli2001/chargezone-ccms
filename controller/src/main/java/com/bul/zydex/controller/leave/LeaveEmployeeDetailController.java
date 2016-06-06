@@ -139,7 +139,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     noOfDay = (float) 0;
                 }
                 totalMap = days + noOfDay;
-                if ("Short Leave".equals(name) || "Paternity Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
+                if ("C Off Leave".equals(name) || "Short Leave".equals(name) || "Paternity Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
                     continue;
                 } else {
                     listRemain.put(name, days);
@@ -210,7 +210,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             if (!"".equals(leaveTypeMasterId)) {
                 leaveTypeMaster.setId(Integer.parseInt(leaveTypeMasterId));
                 leaveTypeMaster = leaveTypeMasterService.readById(leaveTypeMaster.getId());
-                if (leaveTypeMaster.getLeaveType().contains("Short Leave")) {
+                if (leaveTypeMaster.getLeaveType().contains("Short Leave") || leaveTypeMaster.getLeaveType().contains("C Off Leave")) {
                     leaveEmployeeDetail.setStartDate(request.getParameter("startDateShort"));
                     leaveEmployeeDetail.setEndDate(request.getParameter("endDateShort"));
                 }
@@ -278,6 +278,59 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
                             noOfDay = leaveEmployeeDetail.getNoOfDays();
                             balanceDay = balanceDay - noOfDay;
+                            employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
+                            employeeLeaveBalanceService.update(employeeLeaveBalance1);
+
+                            request.setAttribute("successMessage",
+                                    "Information : The Information is saved Successfully.");
+                            mv = searchOwnLeaveDetail(request, response);
+                            //Emailtemplate for submit click .....
+                            try {
+                                EmailTemplate emailTemplate = new EmailTemplate();
+                                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                                DesignationMaster designationMaster = new DesignationMaster();
+                                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                                EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                                employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                                // id six is apply status
+                                emailTemplate = emailTemplateService.readById(6);
+                                String To = employeeMasterHr.getOfficeEmailId();
+                                String from = employeeMasterModel.getOfficeEmailId();
+                                String Subject = emailTemplate.getSubject();
+                                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                                String msg = emailTemplate.getBodytext();
+                                msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                sendMail.sendMail(from, To, Subject, msg);
+                            } catch (Exception e) {
+
+                            }
+                        }
+//                        mv.setViewName("redirect:leaveEmployeeDetail.htm?act=searchOwnLeaveDetail");
+                    } else if (leaveTypeMaster.getLeaveType().contains("C Off Leave")) {
+                        String noOfHour = "";
+                        EmployeeMaster employeeMasterModel1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                        COffLeaveMaster cOffLeaveMaster = new COffLeaveMaster();
+                        cOffLeaveMaster.setZydexLocationMaster(employeeMasterModel1.getZydexLocationMaster());
+                        List list1 = cOffLeaveMasterService.readByDept(cOffLeaveMaster);
+                        try {
+                            cOffLeaveMaster = (COffLeaveMaster) list1.get(0);
+                            noOfHour = "0." + cOffLeaveMaster.getHoursNo();
+                        } catch (Exception e) {
+                        }
+
+                        if (flag) {
+                            request.setAttribute("failureMessage",
+                                    "Error :You Have Already apply Leave On that Day...");
+                            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                            mv = applyClick(request, response);
+                        } else {
+                            leaveEmployeeDetail.setNoOfDays(Float.parseFloat("1"));
+                            leaveEmployeeDetailService.create(leaveEmployeeDetail);
+                            balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
+                            noOfDay = leaveEmployeeDetail.getNoOfDays();
+                            balanceDay = balanceDay - Float.parseFloat(noOfHour);
                             employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
                             employeeLeaveBalanceService.update(employeeLeaveBalance1);
 
@@ -759,7 +812,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         if (btnSubmit.equals("submit")) {
             try {
                 leaveTypeMaster = leaveTypeMasterService.readById(Integer.parseInt(leaveTypeMasterId));
-                if (leaveTypeMaster.getLeaveType().contains("Short Leave")) {
+                if (leaveTypeMaster.getLeaveType().contains("Short Leave") || leaveTypeMaster.getLeaveType().contains("C Off Leave")) {
                     leaveEmployeeDetail.setStartDate(request.getParameter("startDateShort"));
                     leaveEmployeeDetail.setEndDate(request.getParameter("endDateShort"));
                     leaveEmployeeDetail.setHrRemark(null);
@@ -798,23 +851,49 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         leaveEmployeeDetail.setNoOfDays(Float.parseFloat("1"));
                         leaveEmployeeDetail.setStatus(0);
                     }
+                    if (leaveTypeMaster.getLeaveType().contains("C Off Leave")) {
 
-                    if (null != leaveEmployeeDetail.getNoOfDays() && leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave())) {
-                        System.out.println("aa");
-                        request.setAttribute("failureMessage",
-                                "Error :No Of Days is Grater than maximum allowed Days...");
-                        mv = viewLeaveRequest(request, response);
-                    } else if (startDate.after(endDate)) {
-                        request.setAttribute("failureMessage",
-                                "Error : Please Insert start date before end date.");
-                        mv = viewLeaveRequest(request, response);
+                        leaveEmployeeDetail.setStartDate(request.getParameter("startDateShort"));
+                        leaveEmployeeDetail.setEndDate(request.getParameter("endDateShort"));
+                        leaveEmployeeDetail.setHrRemark(null);
+                        leaveEmployeeDetail.setStartDateStatus("");
+                        leaveEmployeeDetail.setEndDateStatus("");
+                        leaveEmployeeDetail.setNoOfDays(Float.parseFloat("1"));
+                        leaveEmployeeDetail.setStatus(0);
+                    }
+                    if (!leaveTypeMaster.getLeaveType().contains("Short Leave") && !leaveTypeMaster.getLeaveType().contains("C Off Leave")) {
+                        if (null != leaveEmployeeDetail.getNoOfDays() && leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave())) {
+                            System.out.println("aa");
+                            request.setAttribute("failureMessage",
+                                    "Error :No Of Days is Grater than maximum allowed Days...");
+                            mv = viewLeaveRequest(request, response);
+                        } else if (startDate.after(endDate)) {
+                            request.setAttribute("failureMessage",
+                                    "Error : Please Insert start date before end date.");
+                            mv = viewLeaveRequest(request, response);
 
+                        }
                     } else {
                         leaveEmployeeDetail.setStatus(0);
                         leaveEmployeeDetailService.update(leaveEmployeeDetail);
 
                         balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
                         noOfDay = leaveEmployeeDetail.getNoOfDays();
+                        String noOfHour = "";
+                        EmployeeMaster employeeMasterModel1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                        COffLeaveMaster cOffLeaveMaster = new COffLeaveMaster();
+                        cOffLeaveMaster.setZydexLocationMaster(employeeMasterModel1.getZydexLocationMaster());
+                        List list1 = cOffLeaveMasterService.readByDept(cOffLeaveMaster);
+                        try {
+                            cOffLeaveMaster = (COffLeaveMaster) list1.get(0);
+                            noOfHour = "0." + cOffLeaveMaster.getHoursNo();
+                        } catch (Exception e) {
+                        }
+                        // 11 No Id Is C-Off Id*****************
+                        if (leaveEmployeeDetail.getLeaveTypeMaster().getId().equals(11)) {
+                            noOfDay = Float.parseFloat(noOfHour);
+                        }
+                        // 11 No Id Is C-Off Id*****************
                         balanceDay = balanceDay - noOfDay;
                         employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
                         employeeLeaveBalanceService.update(employeeLeaveBalance1);
@@ -862,6 +941,21 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
                 balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
                 noOfDay = leaveEmployeeDetail.getNoOfDays();
+                String noOfHour = "";
+                EmployeeMaster employeeMasterModel1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                COffLeaveMaster cOffLeaveMaster = new COffLeaveMaster();
+                cOffLeaveMaster.setZydexLocationMaster(employeeMasterModel1.getZydexLocationMaster());
+                List list1 = cOffLeaveMasterService.readByDept(cOffLeaveMaster);
+                try {
+                    cOffLeaveMaster = (COffLeaveMaster) list1.get(0);
+                    noOfHour = "0." + cOffLeaveMaster.getHoursNo();
+                } catch (Exception e) {
+                }
+                // 11 No Id Is C-Off Id*****************
+                if (leaveEmployeeDetail.getLeaveTypeMaster().getId().equals(11)) {
+                    noOfDay = Float.parseFloat(noOfHour);
+                }
+                // 11 No Id Is C-Off Id*****************
                 balanceDay = balanceDay + noOfDay;
                 employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
                 employeeLeaveBalanceService.update(employeeLeaveBalance1);
@@ -1106,7 +1200,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     noOfDay = (float) 0;
                 }
                 totalMap = days + noOfDay;
-                if ("Short Leave".equals(name) || "Paternity Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
+                if ("C Off Leave".equals(name) || "Short Leave".equals(name) || "Paternity Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
                     continue;
                 } else {
                     listRemain.put(name, days);
@@ -1286,6 +1380,22 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             } else {
                 balanceDay = employeeLeaveBalance.getNoOfLeaveRemain();
                 noOfDay = leaveEmployeeDetail.getNoOfDays();
+                String noOfHour = "";
+                EmployeeMaster employeeMasterModel1 = new EmployeeMaster();
+                employeeMasterModel1 = employeeMasterService.readById(leaveEmployeeDetail.getEmployeeMaster().getId());
+                COffLeaveMaster cOffLeaveMaster = new COffLeaveMaster();
+                cOffLeaveMaster.setZydexLocationMaster(employeeMasterModel1.getZydexLocationMaster());
+                List list1 = cOffLeaveMasterService.readByDept(cOffLeaveMaster);
+                try {
+                    cOffLeaveMaster = (COffLeaveMaster) list1.get(0);
+                    noOfHour = "0." + cOffLeaveMaster.getHoursNo();
+                } catch (Exception e) {
+                }
+                // 11 No Id Is C-Off Id*****************
+                if (leaveEmployeeDetail.getLeaveTypeMaster().getId().equals(11)) {
+                    noOfDay = Float.parseFloat(noOfHour);
+                }
+                // 11 No Id Is C-Off Id*****************
                 balanceDay = balanceDay + noOfDay;
                 employeeLeaveBalance.setNoOfLeaveRemain(balanceDay);
                 employeeLeaveBalanceService.update(employeeLeaveBalance);
@@ -1335,6 +1445,23 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             } else {
                 balanceDay = employeeLeaveBalance.getNoOfLeaveRemain();
                 noOfDay = leaveEmployeeDetail.getNoOfDays();
+                noOfDay = leaveEmployeeDetail.getNoOfDays();
+                String noOfHour = "";
+                EmployeeMaster employeeMasterModel1 = new EmployeeMaster();
+                employeeMasterModel1 = employeeMasterService.readById(leaveEmployeeDetail.getEmployeeMaster().getId());
+                COffLeaveMaster cOffLeaveMaster = new COffLeaveMaster();
+                cOffLeaveMaster.setZydexLocationMaster(employeeMasterModel1.getZydexLocationMaster());
+                List list1 = cOffLeaveMasterService.readByDept(cOffLeaveMaster);
+                try {
+                    cOffLeaveMaster = (COffLeaveMaster) list1.get(0);
+                    noOfHour = "0." + cOffLeaveMaster.getHoursNo();
+                } catch (Exception e) {
+                }
+                // 11 No Id Is C-Off Id*****************
+                if (leaveEmployeeDetail.getLeaveTypeMaster().getId().equals(11)) {
+                    noOfDay = Float.parseFloat(noOfHour);
+                }
+                // 11 No Id Is C-Off Id*****************
                 balanceDay = balanceDay + noOfDay;
                 employeeLeaveBalance.setNoOfLeaveRemain(balanceDay);
                 employeeLeaveBalanceService.update(employeeLeaveBalance);
@@ -2528,17 +2655,15 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         if (!"".equals(desId)) {
             employeeMaster.setChild2(desId);
         }
-        List<?> empList =  new ArrayList<>();
-          if (active.equals("on") && inactive.equals("on")) {
-            empList =employeeMasterService.readEmployeeForLeaveBalance(employeeMaster);
+        List<?> empList = new ArrayList<>();
+        if (active.equals("on") && inactive.equals("on")) {
+            empList = employeeMasterService.readEmployeeForLeaveBalance(employeeMaster);
         } else if (active.equals("on") && inactive.equals("")) {
             empList = employeeMasterService.readEmployeeForLeaveBalanceForActiveUser(employeeMaster);
         } else if (active.equals("") && inactive.equals("on")) {
             empList = employeeMasterService.readEmployeeForLeaveBalanceForInActiveUser(employeeMaster);
         }
-        
-        
-        
+
         Iterator itr = empList.iterator();
         while (itr.hasNext()) {
             LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();

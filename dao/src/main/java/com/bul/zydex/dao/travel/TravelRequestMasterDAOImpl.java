@@ -546,7 +546,7 @@ public class TravelRequestMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         TravelRequestMaster travelRequestMaster = (TravelRequestMaster) object;
         String query = "";
 
-        query += " Select a.id,b.employeeId, b.employeeName, a.travelRequestNo, a.travelType, a.startDateTime, a.endDateTime"
+        query += " Select a.id,b.employeeId, b.employeeName, a.travelRequestNo, a.travelType, a.startDateTime, a.endDateTime,b.id"
                 + " FROM TravelRequestMaster a"
                 + " LEFT JOIN a.employeeMasterByEmployeeMasterId b"
                 + " where a.status=5 ";

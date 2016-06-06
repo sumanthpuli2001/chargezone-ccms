@@ -6,8 +6,12 @@ import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeAdvanceSearch;
 import com.bul.zydex.model.EmployeeDatetimeData;
+import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeShiftData;
+import com.bul.zydex.model.LeaveTypeMaster;
+import com.bul.zydex.model.LevelMaster;
+import com.bul.zydex.model.OverTimeMaster;
 import com.bul.zydex.model.TimeAttandanceFlaxibleMaster;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.UserRightMaster;
@@ -22,7 +26,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static org.apache.commons.lang3.time.DateUtils.addDays;
@@ -1057,15 +1063,15 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         if (leave1[0].contains("AR")) {
                             secondHalfList.add("AR/P");
 
-                        }else if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
+                        } else if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
                             secondHalfList.add("PR");
-                        } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR")  && !secondHalf.contains("?")
+                        } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
                                 && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
                                 && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
                             secondHalfList.add("AB");
-                        }else if(diffMinutes1 >= 240 && userTimeIn.after(secondHalfTimeStr2)){
-                          secondHalfList.add("PR");  
-                        }else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                        } else if (diffMinutes1 >= 240 && userTimeIn.after(secondHalfTimeStr2)) {
+                            secondHalfList.add("PR");
+                        } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             secondHalfList.add("PR");
                         } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             secondHalfList.add("PR");
@@ -1422,8 +1428,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         String requestdate = sdf.format(new Date());
         attendanceRegularization.setApprovedDate(requestdate);
         attendanceRegularization.setEmployeeMaster(approverName);
-
         attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
+
 //        Employee Date Time Data
         if (attendanceRegularization.getStatus() == 1) {
             int userId = attendanceRegularization.getUserMasterId();
@@ -1457,6 +1463,61 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 employeeShiftData1.setShiftMaster(employeeShiftData1.getShiftMaster());
 //                employeeShiftDataService.update(employeeShiftData1);
             }
+
+                            // add c-off balance in employee leave balance when day is sunday
+            SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+            Date startDate1 = sdf1.parse(startDate);
+            Date endDate1 = sdf1.parse(endDate);
+            long diff = endDate1.getTime() - startDate1.getTime();
+            int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+            for (int i = 0; i <= days + 1; i++) {
+                String dayOfWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(startDate1);
+                if (dayOfWeek.equals("Sunday")) {
+                    String time = "0.8";
+
+                    OverTimeMaster overTimeMaster = new OverTimeMaster();
+                    String overTimeDate = sdf1.format(startDate1);
+                    overTimeMaster.setDate(overTimeDate);
+                    overTimeMaster.setTime(time);
+                  
+                    
+                    overTimeMaster.setEmployeeMaster(employeeMaster);
+
+                    EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+                    EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
+                    LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+                    leaveTypeMaster.setId(11);
+                    employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                    employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+                    EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                    employeeMaster2 = employeeMasterService.readById(employeeMaster.getId());
+                    int levelId = employeeMaster.getLevelMaster().getId();
+                    LevelMaster levelMaster1 = new LevelMaster();
+                    levelMaster1 = levelMasterService.readById(levelId);
+                    if (employeeMaster.getZydexLocationMaster().getId().equals(5) && levelMaster1.getLevel().contains("Level 4") || levelMaster1.getLevel().contains("Level 5")) {
+                        List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                        if (!empBalList.isEmpty()) {
+                            employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
+                            float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
+                            time1 = time1 + Float.parseFloat(time);
+                            employeeLeaveBalance1.setNoOfLeaveRemain(time1);
+                            employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                        } else {
+                            employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
+                            employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+                            employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time));
+                            employeeLeaveBalanceService.create(employeeLeaveBalance1);
+                        }
+                        overTimeMasterService.create(overTimeMaster);
+                    }
+
+                }
+                Calendar c = Calendar.getInstance();
+                c.setTime(startDate1);
+                c.add(Calendar.DATE, 1);
+                startDate1 = c.getTime();
+            }
+            // add c-off balance in employee leave balance when day is sunday
 
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();

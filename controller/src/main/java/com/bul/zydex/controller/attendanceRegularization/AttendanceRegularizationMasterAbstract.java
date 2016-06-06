@@ -8,13 +8,18 @@ package com.bul.zydex.controller.attendanceRegularization;
 import com.bul.zydex.controller.*;
 import com.bul.zydex.model.AttendanceRegularization;
 import com.bul.zydex.model.EmployeeDatetimeData;
+import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeShiftData;
+import com.bul.zydex.model.LevelMaster;
+import com.bul.zydex.model.OverTimeMaster;
 import com.bul.zydex.model.TimeAttandanceFlaxibleMaster;
 import com.bul.zydex.service.attendanceRegularization.AttendanceRegularizationMasterService;
 import com.bul.zydex.service.attendanceRegularization.TimeAttandanceFlaxibleMasterService;
+import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
+import com.bul.zydex.service.level.LevelMasterService;
+import com.bul.zydex.service.overTime.OverTimeMasterService;
 import com.bul.zydex.service.shift.EmployeeDatetimeDataService;
 import com.bul.zydex.service.shift.EmployeeShiftDataService;
-import org.apache.commons.lang3.Validate;
 import org.springframework.validation.Validator;
 
 /**
@@ -23,11 +28,14 @@ import org.springframework.validation.Validator;
  */
 public class AttendanceRegularizationMasterAbstract extends CustomAbstract {
 
-protected AttendanceRegularizationMasterService<AttendanceRegularization> attendanceRegularizationMasterService;
-protected EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService;
-protected EmployeeDatetimeDataService<EmployeeDatetimeData>employeeDatetimeDataService;
-protected TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> timeAttandanceFlaxibleMasterService;
-protected Validator attendanceRegularizationValidator;
+    protected AttendanceRegularizationMasterService<AttendanceRegularization> attendanceRegularizationMasterService;
+    protected EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService;
+    protected EmployeeDatetimeDataService<EmployeeDatetimeData> employeeDatetimeDataService;
+    protected TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> timeAttandanceFlaxibleMasterService;
+    protected LevelMasterService<LevelMaster> levelMasterService;
+    protected EmployeeLeaveBalanceService<EmployeeLeaveBalance> employeeLeaveBalanceService;
+    protected OverTimeMasterService<OverTimeMaster> overTimeMasterService;
+    protected Validator attendanceRegularizationValidator;
 
     public TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> getTimeAttandanceFlaxibleMasterService() {
         return timeAttandanceFlaxibleMasterService;
@@ -44,6 +52,7 @@ protected Validator attendanceRegularizationValidator;
     public void setAttendanceRegularizationValidator(Validator attendanceRegularizationValidator) {
         this.attendanceRegularizationValidator = attendanceRegularizationValidator;
     }
+
     public EmployeeShiftDataService<EmployeeShiftData> getEmployeeShiftDataService() {
         return employeeShiftDataService;
     }
@@ -60,7 +69,6 @@ protected Validator attendanceRegularizationValidator;
         this.employeeDatetimeDataService = employeeDatetimeDataService;
     }
 
-
     public AttendanceRegularizationMasterService<AttendanceRegularization> getAttendanceRegularizationMasterService() {
         return attendanceRegularizationMasterService;
     }
@@ -69,6 +77,29 @@ protected Validator attendanceRegularizationValidator;
         this.attendanceRegularizationMasterService = attendanceRegularizationMasterService;
     }
 
+    public LevelMasterService<LevelMaster> getLevelMasterService() {
+        return levelMasterService;
+    }
 
+    public void setLevelMasterService(LevelMasterService<LevelMaster> levelMasterService) {
+        this.levelMasterService = levelMasterService;
+    }
 
+    public EmployeeLeaveBalanceService<EmployeeLeaveBalance> getEmployeeLeaveBalanceService() {
+        return employeeLeaveBalanceService;
+    }
+
+    public void setEmployeeLeaveBalanceService(EmployeeLeaveBalanceService<EmployeeLeaveBalance> employeeLeaveBalanceService) {
+        this.employeeLeaveBalanceService = employeeLeaveBalanceService;
+    }
+
+    public OverTimeMasterService<OverTimeMaster> getOverTimeMasterService() {
+        return overTimeMasterService;
+    }
+
+    public void setOverTimeMasterService(OverTimeMasterService<OverTimeMaster> overTimeMasterService) {
+        this.overTimeMasterService = overTimeMasterService;
+    }
+
+    
 }

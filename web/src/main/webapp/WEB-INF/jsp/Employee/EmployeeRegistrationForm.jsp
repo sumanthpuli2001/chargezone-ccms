@@ -571,11 +571,11 @@
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label>Child1's Date Of Birth:</label>
-                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                  <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                     <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                                                 <form:input path="dateOfBirthOfEmpChilld1" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                    <span class="input-group-addon"><span clas  s="glyphicon glyphicon-th"></span></span>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -761,8 +761,8 @@
                                                             <label>Company:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="company" id="company" class="form-control ">
                                                             <form:option value="">--SELECT--</form:option>
-                                                            <form:option value="ZydexIndustries">Zydex Industries</form:option>
-                                                            <form:option value="ZydexIndustriesPvt.Ltd">Zydex Industries Pvt Ltd</form:option>
+                                                            <form:option value="Zydex Industries">Zydex Industries</form:option>
+                                                            <form:option value="Zydex Industries Pvt. Ltd.">Zydex Industries Pvt. Ltd.</form:option>
                                                         </form:select>
                                                         <form:errors path="company" cssClass="errorDiv"></form:errors>
                                                         </div>

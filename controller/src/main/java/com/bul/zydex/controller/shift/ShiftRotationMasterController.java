@@ -4333,7 +4333,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 employeeInfoList.add("");
                 employeeInfoList.add("PR");
                 employeeInfoList.add("PR");
-                presentCounter++;
+                presentCounter++; 
             }
             if (listPunch.size() == 2) {
                 employeeInfoList.add("");

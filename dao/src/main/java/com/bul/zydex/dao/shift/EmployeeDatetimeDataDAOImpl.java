@@ -37,8 +37,8 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
 //          String s1 = "03/04/2016";
         String s1 = formatter.format(dateBefore);
         query += " From EmployeeDatetimeData a "
-                + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') BETWEEN STR_TO_DATE('" + s1 + " "+endShiftTime+":00','%d/%m/%Y %H:%i:%s') AND (STR_TO_DATE('" + s + " 23:59:00','%d/%m/%Y %H:%i:%s'))"
-                + " And a.employeeMaster.id="+empId
+                + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') BETWEEN STR_TO_DATE('" + s1 + " " + endShiftTime + ":00','%d/%m/%Y %H:%i:%s') AND (STR_TO_DATE('" + s + " 23:59:00','%d/%m/%Y %H:%i:%s'))"
+                + " And a.employeeMaster.id=" + empId
                 + " GROUP BY a.dateTime"
                 + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
 
@@ -64,12 +64,12 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
         String query = "";
         query += " "
                 + " From EmployeeDatetimeData a "
-                + " where a.employeeMaster.id = " + empId +" order by STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') asc"
+                + " where a.employeeMaster.id = " + empId + " order by STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') asc"
                 + " GROUP BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i')";
         return getHibernateTemplate().find(query);
     }
-    
-          @Override
+
+    @Override
     public List<?> readTodaysEmployeeData(String empId) {
         String query = "";
         Date date = new Date();
@@ -80,15 +80,15 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
 //        String s1 = formatter.format(dateBefore);
         query += " From EmployeeDatetimeData a "
                 + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y') IN (STR_TO_DATE('" + s + "','%d/%m/%Y'),STR_TO_DATE('" + s + "','%d/%m/%Y'))"
-                + " And a.employeeMaster.id="+empId
+                + " And a.employeeMaster.id=" + empId
                 + " GROUP BY a.dateTime"
                 + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
 
         return getHibernateTemplate().find(query);
     }
-    
+
 //    Ajay Start
-          @Override
+    @Override
     public List<?> readEmployeeByCurrentDate() {
         String query = "";
         Date date = new Date();
@@ -97,9 +97,23 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
 //        String s = "04/04/2016";
         query += " From EmployeeDatetimeData a "
                 + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y') IN (STR_TO_DATE('" + s + "','%d/%m/%Y'))"
-                + " GROUP BY a.employeeMaster.id" ;
+                + " GROUP BY a.employeeMaster.id";
 
         return getHibernateTemplate().find(query);
     }
 //    Ajay End
+
+    @Override
+    public List<?> todaysData(int id) {
+        String query = "";
+        Date date = new Date();
+        Format formatter = new SimpleDateFormat("dd/MM/YYYY");
+        Date dateBefore = new Date(date.getTime() - 24 * 60 * 60 * 1000);
+        String s1 = formatter.format(dateBefore);
+        query += " From EmployeeDatetimeData a "
+                + "Where STR_TO_DATE(a.dateTime,'%d/%m/%Y') = STR_TO_DATE('" + s1 + "','%d/%m/%Y')"
+                + " And a.employeeMaster.id=" + id;
+
+        return getHibernateTemplate().find(query);
+    }
 }

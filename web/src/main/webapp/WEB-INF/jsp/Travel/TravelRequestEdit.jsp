@@ -12,7 +12,7 @@
 
     <head>
         <title>Travel Request Edit</title>
- 
+
         <script>
             //        $(function () {
             //            $("#WorkTypeSelectId").on("change", function () {
@@ -216,8 +216,7 @@
                     if (aa == 'dropCheckBoxId') {
 //                        alert('xxxxx');
                         $('#dropId' + cc).show(500);
-                    }
-                    else if (aa == 'pickUpCheckBoxId') {
+                    } else if (aa == 'pickUpCheckBoxId') {
 //                        alert('azzzzzz');
                         $('#pickUpId' + cc).show(500);
 
@@ -309,8 +308,7 @@
                     } else {
                         $("#cashRequiredYesCurrency").hide();
                     }
-                }
-                else {
+                } else {
                     $("#cashRequiredYes").hide();
                 }
             }
@@ -555,8 +553,7 @@
                                 document.getElementById("hotelBookingRequiredError" + i).innerHTML = "- It must not be empty or whitespace";
                                 flag3 = false;
 //                        return  false;
-                            }
-                            else if (hotelBookingRequired === 'Yes') {
+                            } else if (hotelBookingRequired === 'Yes') {
                                 document.getElementById("hotelBookingRequiredError" + i).innerHTML = "";
                                 var checkInDate = document.getElementById("datepickerr" + i).value;
                                 var checkOutDate = document.getElementById("datepickerrr" + i).value;
@@ -1331,6 +1328,28 @@
                                                         <label class="col-sm-3 control-label">remark:</label>
                                                         <div class="col-sm-7">
                                                             <form:textarea path="empRemark" class="form-control" rows="6"></form:textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- /.col -->
+                                                </div><!-- /.row -->
+                                            </div><!-- /.box-body -->
+                                        </div>
+                                </c:if>
+                                <c:if test="${travelRequestMaster.cashAdvanceComment ne '' && travelRequestMaster.cashAdvanceComment ne null}">
+                                    <div class="box box-info collapsed-box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Approver Comment:</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId8">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun8()"><i class="fa fa-plus" id="minusId8"></i></button>
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">Comment:</label>
+                                                        <div class="col-sm-7">
+                                                            <form:textarea path="cashAdvanceComment" class="form-control" readonly="true" rows="6" ></form:textarea>
                                                             </div>
                                                         </div>
                                                     </div><!-- /.col -->

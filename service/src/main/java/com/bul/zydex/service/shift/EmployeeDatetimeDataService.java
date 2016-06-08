@@ -5,13 +5,16 @@ import java.util.List;
 
 public interface EmployeeDatetimeDataService<T> extends GenericsService<T> {
 
-   public List<?> readTodaysAndPreviousData(String empId,String endShiftTime);
+    public List<?> readTodaysAndPreviousData(String empId, String endShiftTime);
 
     public List<?> readPuchDataDateWise(String date, int empId);
 
     public List<?> readPuchDataEmpIdWise(int empId);
-    
+
     public List<?> readTodaysEmployeeData(String empId);
+
     public List<?> readEmployeeByCurrentDate();
+    
+    public List<?> todaysData(int id); 
 
 }

@@ -44,7 +44,7 @@ public class DepartmentMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " or STR_TO_DATE(em.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()"
                 + " group by dm.departmentName"
                 + " order by dm.departmentName";
-                
+
         List departmentWiseEmpCountList = getHibernateTemplate().find(hqryString);
         return departmentWiseEmpCountList;
     }
@@ -53,12 +53,18 @@ public class DepartmentMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
     //this method is for count number of employees in each department who has resigned. 
     public List<?> countResignedEmpOfDept() {
 
-        String sqlString = "select concat(dm.department_name), count(concat(rm.emp_master_id)) from department_master dm"
-                + " left join employee_master em on dm.id = em.department_id "
-                + " left join resignation_master rm on rm.emp_master_id = em.id "
-                + " where STR_TO_DATE(em.date_of_leaving,'%d/%m/%Y') <= CURDATE() AND rm.status = 2"
-                + " group by dm.department_name"
-                + " order by dm.department_name";
+//        String sqlString = "select concat(dm.department_name), count(concat(rm.emp_master_id)) from department_master dm"
+//                + " left join employee_master em on dm.id = em.department_id "
+//                + " left join resignation_master rm on rm.emp_master_id = em.id "
+//                + " where STR_TO_DATE(em.date_of_leaving,'%d/%m/%Y') <= CURDATE() AND rm.status = 2"
+//                + " group by dm.department_name"
+//                + " order by dm.department_name";
+        String strQuery = "select concat(c.department_name), count(concat(a.emp_master_id))"
+                + " from resignation_master a "
+                + " left join employee_master b on b.id=a.emp_master_id"
+                + " left join department_master c on c.id=b.department_id"
+                + " where STR_TO_DATE(a.relieving_date, '%d/%m/%Y') <= CURDATE() AND a.status = 4"
+                + " group by c.department_name";
 //        String hqryString = "select dm.departmentName, count(rm.employeeMaster.id) from DepartmentMaster dm"
 //                + " left join dm.employeeMasters em "
 //                + " left join em.resignationMasters rm"
@@ -66,7 +72,7 @@ public class DepartmentMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 //                + " group by dm.departmentName"
 //                + " order by dm.departmentName";
 //        return getHibernateTemplate().find(hqryString);
-        Query query = getSession().createSQLQuery(sqlString);
+        Query query = getSession().createSQLQuery(strQuery);
         List<?> probationToconfirmationRequestDataList = query.list();
         return probationToconfirmationRequestDataList;
 
@@ -90,7 +96,7 @@ public class DepartmentMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
     public List<?> readByName(String departmentName) {
         String query = "";
         query += "From DepartmentMaster a "
-//                + " Where a.departmentName like '%" + departmentName + "'";
+                //                + " Where a.departmentName like '%" + departmentName + "'";
                 + " Where lower(trim(a.departmentName)) ='" + departmentName + "'";
         return getHibernateTemplate().find(query);
     }

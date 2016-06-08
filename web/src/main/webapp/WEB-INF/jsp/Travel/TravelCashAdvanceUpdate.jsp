@@ -73,8 +73,7 @@
                 if (selectedValue == 'Yes') {
                     $("#cashRequiredYes").show();
                     $("#cashRequiredYesCurrency").show();
-                }
-                else {
+                } else {
                     $("#cashRequiredYes").hide();
                 }
             }
@@ -109,17 +108,17 @@
                 <div class="col-md-12">
                     <!-- Custom Tabs -->
                     <div class="nav-tabs-custom">
-                        <div class="tab-content">
-                            <!--<span style="color: red;font-size: 14px;">* indicates mandatory field.</span>-->
+                        <div class="tab-content"> 
+                           <!--<span style="color: red;font-size: 14px;">* indicates mandatory field.</span>-->
                             <form:form action="travelRequestMaster.htm?act=submitCashAdvanceSectionByAdmin" method="post" commandName="travelRequestMaster"
                                        name='form1' onsubmit='return saveSubmit11();' class="form-horizontal" role="form">
                                 <form:hidden path="id"></form:hidden>
-                                    <div class="box box-info">
+                                    <div class="box box-info collapsed-box">
                                         <div class="box-header">
                                             <h3 class="box-title">Employee Detail:</h3>
-                                            <!--                                            <div class="box-tools pull-right">
-                                                                                            <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun1()"><i class="fa fa-plus" id="minusId1"></i></button>
-                                                                                        </div>-->
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun1()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                            </div>
                                         </div><!-- /.box-header -->
                                         <input type="hidden" name="empAjaxId" id="empAjaxId" value="${employeeMaster[6]}">
                                     <div class="box-body no-padding">
@@ -187,19 +186,19 @@
                                         </div><!-- /.row -->
                                     </div><!-- /.box-body -->
                                 </div>
-                                <div class="box box-info">
+                                <div class="box box-info collapsed-box">
                                     <div class="box-header">
                                         <h3 class="box-title">Cash Advance Required:</h3>
-                                        <!--                                        <div class="box-tools pull-right">
-                                                                                    <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5()"><i class="fa fa-plus" id="minusId5"></i></button>
-                                                                                </div>-->
+                                        <div class="box-tools pull-right">
+                                            <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5()"><i class="fa fa-plus" id="minusId5"></i></button>
+                                        </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding" <c:if test="${sessionScope.userRight.cashAdvanceView}">style="pointer-events: none;"</c:if>>
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <div class="col-sm-3" style="width: 17%">
-                                                        <label>Cash Advance Required </label>
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-3" style="width: 17%">
+                                                            <label>Cash Advance Required </label>
                                                         <form:select path="cashRequired" class="form-control" onchange="cashRequiredId()" style="text-align: center">
                                                             <form:option value="" label="--SELECT--"></form:option>
                                                             <form:option value="Yes" label="Yes"></form:option>
@@ -214,6 +213,7 @@
                                                             <form:input path="amount" class="form-control"  type="number" min="0"></form:input>
                                                                 <span id="amountError" style="color: red;"></span>
                                                             </div>
+                                                               
                                                             <div class="col-sm-2">
                                                                 <div id="cashRequiredYesCurrency">
                                                                     <label>Currency</label>
@@ -230,13 +230,37 @@
                                                                 </form:select>
                                                             </div>
                                                         </div>
+                                                                 <div class="col-sm-5">
+                                                                <label>Reason Of Advance</label>
+                                                                 <form:textarea path="reasonForAdvance" class="form-control" readonly="true"></form:textarea>
+                                                            </div>
                                                     </div>
                                                 </div>
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
                                     </div><!-- /.box-body -->
                                 </div>
-                                <!--cash advanced required completes here-->
+                                <div class="box box-info collapsed-box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Approver Comment:</h3>
+                                        <div class="box-tools pull-right">
+                                            <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
+                                        </div>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding" <c:if test="${sessionScope.userRight.cashAdvanceView}">style="pointer-events: none;"</c:if>>
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Comment:</label>
+                                                    <div class="col-sm-7">
+                                                    <form:textarea path="cashAdvanceComment" class="form-control" rows="6" ></form:textarea>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.col -->
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                    <!--cash advanced required completes here-->
                                 <c:if test="${!sessionScope.userRight.cashAdvanceView}">
                                     <div class="form-group">
                                         <div class="col-sm-12" style="text-align: center">

@@ -31,6 +31,7 @@ public class TravelRequestMaster  implements java.io.Serializable {
      private int expenseRequired;
      private String dateOfSubmit;
      private int cashAdvanceStatus;
+     private String cashAdvanceComment;
      private Set travelDetails = new HashSet(0);
      private Set travelDetails_1 = new HashSet(0);
      private Set hotelAccommodations = new HashSet(0);
@@ -48,7 +49,7 @@ public class TravelRequestMaster  implements java.io.Serializable {
         this.expenseRequired = expenseRequired;
         this.cashAdvanceStatus = cashAdvanceStatus;
     }
-    public TravelRequestMaster(EmployeeMaster employeeMasterByApprover2Id, EmployeeMaster employeeMasterByApprover1Id, EmployeeMaster employeeMasterByEmployeeMasterId, String travelRequestNo, String travelType, String startDateTime, String endDateTime, String cashRequired, Float amount, String reasonForAdvance, String currency, String purpose, String empRemark, String managerRemark, String adminRemark, int status, int expenseRequired, String dateOfSubmit, int cashAdvanceStatus, Set travelDetails, Set travelDetails_1, Set hotelAccommodations, Set hotelAccommodations_1, Set travelApproverHistories, Set travelApproverHistories_1) {
+    public TravelRequestMaster(EmployeeMaster employeeMasterByApprover2Id, EmployeeMaster employeeMasterByApprover1Id, EmployeeMaster employeeMasterByEmployeeMasterId, String travelRequestNo, String travelType, String startDateTime, String endDateTime, String cashRequired, Float amount, String reasonForAdvance, String currency, String purpose, String empRemark, String managerRemark, String adminRemark, int status, int expenseRequired, String dateOfSubmit, int cashAdvanceStatus, String cashAdvanceComment, Set travelDetails, Set travelDetails_1, Set hotelAccommodations, Set hotelAccommodations_1, Set travelApproverHistories, Set travelApproverHistories_1) {
        this.employeeMasterByApprover2Id = employeeMasterByApprover2Id;
        this.employeeMasterByApprover1Id = employeeMasterByApprover1Id;
        this.employeeMasterByEmployeeMasterId = employeeMasterByEmployeeMasterId;
@@ -68,6 +69,7 @@ public class TravelRequestMaster  implements java.io.Serializable {
        this.expenseRequired = expenseRequired;
        this.dateOfSubmit = dateOfSubmit;
        this.cashAdvanceStatus = cashAdvanceStatus;
+       this.cashAdvanceComment = cashAdvanceComment;
        this.travelDetails = travelDetails;
        this.travelDetails_1 = travelDetails_1;
        this.hotelAccommodations = hotelAccommodations;
@@ -216,6 +218,14 @@ public class TravelRequestMaster  implements java.io.Serializable {
 
     public void setCashAdvanceStatus(int cashAdvanceStatus) {
         this.cashAdvanceStatus = cashAdvanceStatus;
+    }
+
+    public String getCashAdvanceComment() {
+        return cashAdvanceComment;
+    }
+
+    public void setCashAdvanceComment(String cashAdvanceComment) {
+        this.cashAdvanceComment = cashAdvanceComment;
     }
     
     public Set getTravelDetails() {

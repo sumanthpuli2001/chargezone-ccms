@@ -44,8 +44,8 @@
     <bean id="cronTrigger3"
           class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="overTimeEntryId" />
-        <!--<property name="cronExpression" value="0 0/3 * * * ?" />-->
-        <property name="cronExpression" value="0 0 12 * * ?" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
+        <!--<property name="cronExpression" value="0 0 12 * * ?" />-->
     </bean><!--
 
 --> <bean id="carryForwardLeave"

@@ -2979,11 +2979,13 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
             travelRequestMaster1.setCashRequired(travelRequestMaster.getCashRequired());
             travelRequestMaster1.setAmount(Float.parseFloat("0"));
             travelRequestMaster1.setCurrency("");
+            travelRequestMaster1.setCashAdvanceComment(travelRequestMaster.getCashAdvanceComment());
         } else {
             travelRequestMaster1.setCashRequired(travelRequestMaster.getCashRequired());
             travelRequestMaster1.setAmount(travelRequestMaster.getAmount());
             travelRequestMaster1.setCurrency(travelRequestMaster.getCurrency());
             travelRequestMaster1.setCashAdvanceStatus(1);
+            travelRequestMaster1.setCashAdvanceComment(travelRequestMaster.getCashAdvanceComment());
 
         }
         travelRequestMasterService.update(travelRequestMaster1);

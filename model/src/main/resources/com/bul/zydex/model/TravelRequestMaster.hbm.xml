@@ -65,6 +65,9 @@
         <property name="cashAdvanceStatus" type="int">
             <column name="cash_advance_status" not-null="true" />
         </property>
+        <property name="cashAdvanceComment" type="string">
+            <column name="cash_advance_comment" length="16777215" />
+        </property>
         <set name="travelDetails" inverse="true">
             <key>
                 <column name="travel_request_id" not-null="true" />

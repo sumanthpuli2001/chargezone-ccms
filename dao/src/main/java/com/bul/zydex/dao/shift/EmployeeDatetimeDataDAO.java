@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -14,13 +14,16 @@ import java.util.List;
  */
 public interface EmployeeDatetimeDataDAO<T> extends GenericsDAO<T> {
 
-    public List<?> readTodaysAndPreviousData(String empId,String endShiftTime);
+    public List<?> readTodaysAndPreviousData(String empId, String endShiftTime);
 
     public List<?> readPuchDataDateWise(String date, int empId);
 
     public List<?> readPuchDataEmpIdWise(int empId);
+
+    public List<?> readTodaysEmployeeData(String empId);
+
+    public List<?> readEmployeeByCurrentDate();
     
-     public List<?> readTodaysEmployeeData(String empId);
-     public List<?> readEmployeeByCurrentDate();
+    public List<?> todaysData(int id); 
 
 }

@@ -654,7 +654,7 @@
                                             <c:choose>
                                                 <c:when test="${sessionScope.employeeInfo.id eq reportingManager}">
                                                     <%--<c:if test="${(noDueByEmployeeIdList.equipments eq null or noDueByEmployeeIdList.equipments eq '') or (sessionScope.userRight.noDue && sessionScope.userRight.itAdmin && sessionScope.userRight.travelExpenseAdmin)}">--%>
-                                                    <c:if test="${(noDueByEmployeeIdList.equipments eq null or noDueByEmployeeIdList.equipments eq '') or (sessionScope.userRight.employeeExit)}">
+                                                    <c:if test="${(noDueByEmployeeIdList.equipments eq null or noDueByEmployeeIdList.equipments eq '' or (noDueByEmployeeIdList.equipments eq 'na' and noDueByEmployeeIdList.equipmentsRemarks eq '') ) or (sessionScope.userRight.employeeExit)}">
                                                         <c:set var="count" scope="page" value="${count + 1}" />
                                                         <c:if test="${count eq 1}">
                                                             <button type="submit" class="btn btn-primary" data-original-title="" title="" style="width: 100px">Submit</button>

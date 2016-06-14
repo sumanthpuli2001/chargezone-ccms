@@ -39,7 +39,7 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
         query += " From EmployeeDatetimeData a "
                 + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') BETWEEN STR_TO_DATE('" + s1 + " " + endShiftTime + ":00','%d/%m/%Y %H:%i:%s') AND (STR_TO_DATE('" + s + " 23:59:00','%d/%m/%Y %H:%i:%s'))"
                 + " And a.employeeMaster.id=" + empId
-                + " GROUP BY a.dateTime"
+                + " GROUP BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i')"
                 + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
 
         return getHibernateTemplate().find(query);
@@ -54,7 +54,7 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " left join b.zydexLocationMaster c"
                 + " where a.employeeMaster.id = " + empId
                 + " and DATE_FORMAT(STR_TO_DATE(a.dateTime,'%d/%m/%Y'),'%d/%m/%Y') = DATE_FORMAT(STR_TO_DATE('" + date + "','%d/%m/%Y'),'%d/%m/%Y') "
-                + " GROUP BY a.dateTime "
+                + " GROUP BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i')"
                 + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
         return getHibernateTemplate().find(query);
     }

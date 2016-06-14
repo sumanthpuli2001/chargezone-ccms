@@ -2199,24 +2199,36 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             employeeShiftData.setOutDateTime(strDate);
             employeeShiftData.setEmployeeMaster(employeeMaster1);
             List<?> list = employeeShiftDataService.checkTodayPresent(employeeShiftData);
-            if (list.size() > 0) {
-                message = "On This Day You Are Present";
+            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+            if (!list.isEmpty()) {
+                employeeShiftData1 = (EmployeeShiftData) list.get(0);
+                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+                    message = "On This Day You Are Present";
+                }
             }
         }
         if (sDateStatus.equals("FirstHalf")) {
             employeeShiftData.setOutDateTime(strDate);
             employeeShiftData.setEmployeeMaster(employeeMaster1);
             List<?> list = employeeShiftDataService.checkTodayFirstHalfDayPresent(employeeShiftData);
-            if (list.size() > 0) {
-                message = "On This Day You Are Present";
+            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+            if (!list.isEmpty()) {
+                employeeShiftData1 = (EmployeeShiftData) list.get(0);
+                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+                    message = "On This Day You Are Present";
+                }
             }
         }
         if (sDateStatus.equals("SecondHalf")) {
             employeeShiftData.setOutDateTime(strDate);
             employeeShiftData.setEmployeeMaster(employeeMaster1);
             List<?> list = employeeShiftDataService.checkTodaySecondHalfDayPresent(employeeShiftData);
-            if (list.size() > 0) {
-                message = "On This Day You Are Present";
+            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+            if (!list.isEmpty()) {
+                employeeShiftData1 = (EmployeeShiftData) list.get(0);
+                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+                    message = "On This Day You Are Present";
+                }
             }
         }
 
@@ -2237,24 +2249,36 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             employeeShiftData.setOutDateTime(enDate);
             employeeShiftData.setEmployeeMaster(employeeMaster1);
             List<?> list = employeeShiftDataService.checkTodayPresent(employeeShiftData);
-            if (list.size() > 0) {
-                message = "On This Day You Are Present";
+            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+            if (!list.isEmpty()) {
+                employeeShiftData1 = (EmployeeShiftData) list.get(0);
+                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+                    message = "On This Day You Are Present";
+                }
             }
         }
         if (eDateStatus.equals("FirstHalf")) {
             employeeShiftData.setOutDateTime(enDate);
             employeeShiftData.setEmployeeMaster(employeeMaster1);
             List<?> list = employeeShiftDataService.checkTodayFirstHalfDayPresent(employeeShiftData);
-            if (list.size() > 0) {
-                message = "On This Day You Are Present";
+            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+            if (!list.isEmpty()) {
+                employeeShiftData1 = (EmployeeShiftData) list.get(0);
+                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+                    message = "On This Day You Are Present";
+                }
             }
         }
         if (eDateStatus.equals("SecondHalf")) {
             employeeShiftData.setOutDateTime(enDate);
             employeeShiftData.setEmployeeMaster(employeeMaster1);
             List<?> list = employeeShiftDataService.checkTodaySecondHalfDayPresent(employeeShiftData);
-            if (list.size() > 0) {
-                message = "On This Day You Are Present";
+            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+            if (!list.isEmpty()) {
+                employeeShiftData1 = (EmployeeShiftData) list.get(0);
+                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+                    message = "On This Day You Are Present";
+                }
             }
         }
 

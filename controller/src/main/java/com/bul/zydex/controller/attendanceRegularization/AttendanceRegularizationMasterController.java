@@ -820,6 +820,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     if (userTimeIn != null) {
                         if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             newList.add("PR");
+                        } else if (userTimeOut.before(userTimeIn)) {
+                            newList.add("PR");
                         } else if (leave1[0] != null && !leave1[0].contains("Short Leave")) {
                             if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                 newList.add("PR");
@@ -928,6 +930,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 long lunchTime = 0;
                 long outTime = 0;
                 long totalDayTime = 0;
+                long totalDayTime1 = 0;
                 long totalTime = 0;
                 long shiftdiffMinutes = 0;
                 boolean checkLunchTime = false;
@@ -971,21 +974,28 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
                     shiftdiffMinutes = shiftTotalTime / (60 * 1000);
                     long diff1 = 0;
+                    long diff2 = 0;
                     if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
                         diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                        
 
                     } else {
                         diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                     }
-
                     totalDayTime = diff1 / (60 * 1000);
+                    
+                    diff2 = userTimeOut.getTime() - userTimeIn.getTime();
+                    totalDayTime1 = diff2 / (60 * 1000);
 
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                    long outTime1 = outTime;
                     outTime = outTime - 30;
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                    if (outTime > 0) {
+                    if (outTime1 == totalDayTime1) {
+                        totalTime = totalDayTime;
+                    } else if (outTime > 0) {
                         totalTime = totalDayTime - outTime;
                         checkLunchTime = true;
                     }
@@ -1026,6 +1036,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                     Date userTimeIn = sdf2.parse(userTimeInStr1[0].trim());
                     Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                    Date userTimeOut1 = sdf2.parse("23:59");
                     Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
                     String[] getInHours = userTimeInStr1[0].split(":");
                     String[] getOutHours = userTimeOutStr1[0].split(":");
@@ -1053,9 +1064,18 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     long diffMinutes = diff / (60 * 1000);
                     long diff1 = 0;
                     if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
-                        diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                        if (userTimeOut.before(userTimeIn)) {
+                            diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
+                        } else {
+                            diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                        }
                     } else {
-                        diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                        if (userTimeOut.before(userTimeIn)) {
+                            diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
+                        } else {
+                            diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                        }
+
                     }
                     long diffMinutes1 = diff1 / (60 * 1000);
 
@@ -1140,6 +1160,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 long lunchTime = 0;
                 long outTime = 0;
                 long totalDayTime = 0;
+                long totalDayTime1 = 0;
                 long totalTime = 0;
                 long shiftdiffMinutes = 0;
                 boolean checkLunchTime = false;
@@ -1172,6 +1193,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
                     Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
                     Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                    Date userTimeOut1 = sdf2.parse("23:59");
                     String[] startHoursStr = secondHalf.split("%");
                     String[] firstStartHoursStr = startHoursStr[1].split("\\+");
                     String[] endHoursStr = secondHalf.split("&");
@@ -1185,21 +1207,40 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
                     shiftdiffMinutes = shiftTotalTime / (60 * 1000);
                     long diff1 = 0;
+                    long diff2 = 0;
                     if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
-                        diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                        if (userTimeOut.before(userTimeIn)) {
+                            diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
+                        } else {
+                            diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                        }
 
                     } else {
-                        diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                        if (userTimeOut.before(userTimeIn)) {
+                            diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
+                        } else {
+                            diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                        }
+
                     }
 
                     totalDayTime = diff1 / (60 * 1000);
+                    
+                     if (userTimeOut.before(userTimeIn)) {
+                            diff2 = userTimeOut1.getTime() - userTimeIn.getTime();
+                        } else {
+                            diff2 = userTimeOut.getTime() - userTimeIn.getTime();
+                        }
+                     
+                      totalDayTime1 = diff2 / (60 * 1000);
 
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                    long outTime1 = outTime;
                     outTime = outTime - 30;
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                    if (outTime > 0) {
+                    if (outTime > 0 && outTime1 != totalDayTime1) {
                         totalTime = totalDayTime - outTime;
                         double empHour = (double) totalTime / 60;
                         int hours = (int) empHour;
@@ -1464,7 +1505,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //                employeeShiftDataService.update(employeeShiftData1);
             }
 
-                            // add c-off balance in employee leave balance when day is sunday
+            // add c-off balance in employee leave balance when day is sunday
             SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
             Date startDate1 = sdf1.parse(startDate);
             Date endDate1 = sdf1.parse(endDate);
@@ -1479,8 +1520,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     String overTimeDate = sdf1.format(startDate1);
                     overTimeMaster.setDate(overTimeDate);
                     overTimeMaster.setTime(time);
-                  
-                    
+
                     overTimeMaster.setEmployeeMaster(employeeMaster);
 
                     EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();

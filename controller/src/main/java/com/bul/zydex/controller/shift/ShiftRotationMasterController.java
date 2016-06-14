@@ -2028,6 +2028,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 Cell cellTitle2 = row6.createCell(0);
                                 cellTitle2.setCellValue("First In");
                                 cellTitle2.setCellStyle(styleBold);
+                                int weekNameCounter1 = 0;
                                 while (itr3.hasNext()) {
                                     Object[] next = (Object[]) itr3.next();
                                     Cell cell6 = row6.createCell(k);
@@ -2062,6 +2063,31 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell6.setCellStyle(styleblue);
                                     }
                                     CellUtil.setAlignment(cell6, firstFWorkbook, CellStyle.ALIGN_CENTER);
+//                                    2nd Sat Week Off Codding
+                                    Calendar cal = Calendar.getInstance();
+                                    Date date = sdf.parse("" + next[0]);
+                                    cal.setTime(date);
+                                    SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                                    String dayName = format.format(date);
+                                    EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
+                                    ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
+
+                                    if (dayName.equals("Saturday")) {
+                                        weekNameCounter1++;
+                                        if (weekNameCounter1 == 2) {
+                                            if (firstIn.contains("Casual Leave")) {
+                                                cl = cl - 0.5;
+                                            }
+                                            if (firstIn.contains("Privilege Leave")) {
+                                                pl = pl - 0.5;
+                                            }
+                                            if (firstIn.contains("Sick Leave")) {
+                                                sl = sl - 0.5;
+                                            }
+                                        }
+
+                                    }
+//                                    2nd Sat Week Off Codding
                                     k++;
                                 }
 
@@ -2155,6 +2181,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
                                         if (userTimeIn != null) {
                                             if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                                cell8.setCellValue("PR");
+                                                prcounter = prcounter + 0.5;
+                                                cell8.setCellStyle(stylegreen);
+                                            } else if (userTimeOut.before(userTimeIn)) {
                                                 cell8.setCellValue("PR");
                                                 prcounter = prcounter + 0.5;
                                                 cell8.setCellStyle(stylegreen);
@@ -2302,6 +2332,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
                                     long lunchTime = 0;
                                     long totalDayTime = 0;
+                                    long totalDayTime1 = 0;
                                     long totalTime = 0;
                                     long shiftdiffMinutes = 0;
                                     String startTime = "";
@@ -2346,21 +2377,27 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                             long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
                                             shiftdiffMinutes = shiftTotalTime / (60 * 1000);
                                             long diff1 = 0;
+                                            long diff2 = 0;
                                             if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
                                                 diff1 = userTimeOut.getTime() - userTimeIn.getTime();
 
                                             } else {
                                                 diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                                             }
-
                                             totalDayTime = diff1 / (60 * 1000);
 
+                                            diff2 = userTimeOut.getTime() - userTimeIn.getTime();
+                                            totalDayTime1 = diff2 / (60 * 1000);
+
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                                            long outTime1 = outTime;
                                             outTime = outTime - 30;
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                                            if (outTime > 0) {
+                                            if (outTime1 == totalDayTime1) {
+                                                totalTime = totalDayTime;
+                                            } else if (outTime > 0) {
                                                 totalTime = totalDayTime - outTime;
                                                 checkLunchTime = true;
                                             }
@@ -2410,6 +2447,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
                                         Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
                                         Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
+                                        Date userTimeOut1 = sdf1.parse("23:59");
                                         Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
                                         String[] getInHours = userTimeInStr1[0].split(":");
                                         String[] getOutHours = userTimeOutStr1[0].split(":");
@@ -2436,9 +2474,19 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         long diffMinutes = diff / (60 * 1000);
                                         long diff1 = 0;
                                         if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
-                                            diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                                            if (userTimeOut.before(userTimeIn)) {
+                                                diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
+                                            } else {
+                                                diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                                            }
+
                                         } else {
-                                            diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                                            if (userTimeOut.before(userTimeIn)) {
+                                                diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
+                                            } else {
+                                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                                            }
+
                                         }
                                         long diffMinutes1 = diff1 / (60 * 1000);
 
@@ -2561,6 +2609,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     long lunchTime = 0;
                                     long outTime = 0;
                                     long totalDayTime = 0;
+                                    long totalDayTime1 = 0;
                                     long totalTime = 0;
                                     long shiftdiffMinutes = 0;
                                     String startTime = "";
@@ -2593,6 +2642,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
                                         Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
                                         Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
+                                        Date userTimeOut1 = sdf1.parse("23:59");
                                         String[] startHoursStr = secondHalf.split("%");
                                         String[] firstStartHoursStr = startHoursStr[1].split("\\+");
                                         String[] endHoursStr = secondHalf.split("&");
@@ -2606,21 +2656,38 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
                                         shiftdiffMinutes = shiftTotalTime / (60 * 1000);
                                         long diff1 = 0;
+                                        long diff2 = 0;
                                         if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
-                                            diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                                            if (userTimeOut.before(userTimeIn)) {
+                                                diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
+                                            } else {
+                                                diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                                            }
 
                                         } else {
-                                            diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
-                                        }
+                                            if (userTimeOut.before(userTimeIn)) {
+                                                diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
+                                            } else {
+                                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                                            }
 
+                                        }
                                         totalDayTime = diff1 / (60 * 1000);
 
+                                        if (userTimeOut.before(userTimeIn)) {
+                                            diff2 = userTimeOut1.getTime() - userTimeIn.getTime();
+                                        } else {
+                                            diff2 = userTimeOut.getTime() - userTimeIn.getTime();
+                                        }
+
+                                        totalDayTime1 = diff2 / (60 * 1000);
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                                        long outTime1 = outTime;
                                         outTime = outTime - 30;
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                                        if (outTime > 0) {
+                                        if (outTime > 0 && outTime1 != totalDayTime1) {
                                             totalTime = totalDayTime - outTime;
                                             double empHour = (double) totalTime / 60;
                                             int hours = (int) empHour;
@@ -4333,7 +4400,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 employeeInfoList.add("");
                 employeeInfoList.add("PR");
                 employeeInfoList.add("PR");
-                presentCounter++; 
+                presentCounter++;
             }
             if (listPunch.size() == 2) {
                 employeeInfoList.add("");
@@ -4894,6 +4961,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                         prcounter = prcounter + 0.5;
 
+                                    } else if (userTimeOut.before(userTimeIn)) {
+                                        prcounter = prcounter + 0.5;
                                     } else if (leave1[0] != null && !leave1[0].contains("Short Leave")) {
                                         if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                             prcounter = prcounter + 0.5;
@@ -4938,6 +5007,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], Integer.parseInt(userId));
                             long lunchTime = 0;
                             long totalDayTime = 0;
+                            long totalDayTime1 = 0;
                             long totalTime = 0;
                             long shiftdiffMinutes = 0;
                             boolean checkLunchTime = false;
@@ -4982,6 +5052,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
                                 shiftdiffMinutes = shiftTotalTime / (60 * 1000);
                                 long diff1 = 0;
+                                long diff2 = 0;
                                 if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
                                     diff1 = userTimeOut.getTime() - userTimeIn.getTime();
 
@@ -4991,12 +5062,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
                                 totalDayTime = diff1 / (60 * 1000);
 
+                                diff2 = userTimeOut.getTime() - userTimeIn.getTime();
+                                totalDayTime1 = diff2 / (60 * 1000);
+
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                                long outTime1 = outTime;
                                 outTime = outTime - 30;
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                                if (outTime > 0) {
+                                if (outTime1 == totalDayTime1) {
+                                    totalTime = totalDayTime;
+                                } else if (outTime > 0) {
                                     totalTime = totalDayTime - outTime;
                                     checkLunchTime = true;
                                 }
@@ -5034,6 +5111,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
                                 Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
                                 Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
+                                Date userTimeOut1 = sdf1.parse("23:59");
                                 Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
                                 String[] getInHours = userTimeInStr1[0].split(":");
                                 String[] getOutHours = userTimeOutStr1[0].split(":");
@@ -5061,9 +5139,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 long diffMinutes = diff / (60 * 1000);
                                 long diff1 = 0;
                                 if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
-                                    diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                                    if (userTimeOut.before(userTimeIn)) {
+                                        diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
+                                    } else {
+                                        diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                                    }
                                 } else {
-                                    diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                                    if (userTimeOut.before(userTimeIn)) {
+                                        diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
+                                    } else {
+                                        diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                                    }
+
                                 }
                                 long diffMinutes1 = diff1 / (60 * 1000);
 

@@ -81,7 +81,7 @@
             } else {
                 document.getElementById("empRemarkError").innerHTML = "";
             }
-            if (selectedText !== 'Short Leave') {
+            if (selectedText !== 'Short Leave' && selectedText !== 'C Off Leave') {
                 if (document.getElementById("startDate").value == '') {
                     document.getElementById("startDateError").innerHTML = "- It must be Selected";
                     flag3 = false;
@@ -121,7 +121,7 @@
                     }
                 }
             }
-            if (selectedText == 'Short Leave') {
+            if (selectedText == 'Short Leave' || selectedText == 'C Off Leave') {
                 if (document.getElementById("endDateShort").value == '') {
                     document.getElementById("shortleaveendDateError").innerHTML = "- It must be Selected";
                     flag3 = false;

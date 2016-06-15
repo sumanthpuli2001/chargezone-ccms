@@ -86,3 +86,10 @@
                     }
                 });
             </script>
+            <script>
+                $(document).ready(function () {
+                    $('#table_1').DataTable({
+                        "ordering": false
+                    });
+                });
+            </script>

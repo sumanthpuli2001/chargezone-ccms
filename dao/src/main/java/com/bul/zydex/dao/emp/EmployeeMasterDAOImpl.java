@@ -387,7 +387,7 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " count(em.id) as total"
                 + " from EmployeeMaster em"
                 + " where (em.dateOfLeaving is null or em.dateOfLeaving = '') "
-                + " or STR_TO_DATE(em.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()";;
+                + " or STR_TO_DATE(em.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()";
 
         return getHibernateTemplate().find(hqryString);
     }

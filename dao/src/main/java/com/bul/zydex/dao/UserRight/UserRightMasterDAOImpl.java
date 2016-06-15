@@ -52,7 +52,9 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
                 + " from EmployeeMaster d "
                 + " left join d.userMaster e "
                 + " left join e.userRightMasters f "
-                + " where f.hr=true";
+                + " where f.hr=true"
+                + " and (d.dateOfLeaving is null or d.dateOfLeaving = ''"
+                + " or STR_TO_DATE(d.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
@@ -66,7 +68,9 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
                 + " from EmployeeMaster d "
                 + " left join d.userMaster e "
                 + " left join e.userRightMasters f "
-                + " where f.poolCarAdmin=true";
+                + " where f.poolCarAdmin=true"
+                + " and (d.dateOfLeaving is null or d.dateOfLeaving = ''"
+                + " or STR_TO_DATE(d.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
@@ -80,7 +84,9 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
                 + " from EmployeeMaster d "
                 + " left join d.userMaster e "
                 + " left join e.userRightMasters f "
-                + " where f.security=true";
+                + " where f.security=true"
+                + " and (d.dateOfLeaving is null or d.dateOfLeaving = ''"
+                + " or STR_TO_DATE(d.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
@@ -94,7 +100,9 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
                 + " from EmployeeMaster d "
                 + " left join d.userMaster e "
                 + " left join e.userRightMasters f "
-                + " where f.cafeteriaAdmin=true";
+                + " where f.cafeteriaAdmin=true"
+                + " and (d.dateOfLeaving is null or d.dateOfLeaving = ''"
+                + " or STR_TO_DATE(d.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
@@ -108,7 +116,9 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
                 + " from EmployeeMaster d "
                 + " left join d.userMaster e "
                 + " left join e.userRightMasters f "
-                + " where f.itAdmin=true";
+                + " where f.itAdmin=true"
+                + " and (d.dateOfLeaving is null or d.dateOfLeaving = ''"
+                + " or STR_TO_DATE(d.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
@@ -122,7 +132,9 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
                 + " from EmployeeMaster d "
                 + " left join d.userMaster e "
                 + " left join e.userRightMasters f "
-                + " where f.employeeExit=true";
+                + " where f.employeeExit=true"
+                + " and (d.dateOfLeaving is null or d.dateOfLeaving = ''"
+                + " or STR_TO_DATE(d.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
@@ -136,7 +148,10 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
                 + " from EmployeeMaster d "
                 + " left join d.userMaster e "
                 + " left join e.userRightMasters f "
-                + " where f.exitInterview=true";
+                + " where f.exitInterview=true"
+                + " and (d.dateOfLeaving is null or d.dateOfLeaving = ''"
+                + " or STR_TO_DATE(d.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
+
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
@@ -150,7 +165,9 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
                 + " from EmployeeMaster d "
                 + " left join d.userMaster e "
                 + " left join e.userRightMasters f "
-                + " where f.noDue=true";
+                + " where f.noDue=true"
+                + " and (d.dateOfLeaving is null or d.dateOfLeaving = ''"
+                + " or STR_TO_DATE(d.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
@@ -163,7 +180,9 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
                 + " from EmployeeMaster d "
                 + " left join d.userMaster e "
                 + " left join e.userRightMasters f "
-                + " where f.probationToConfirmation=true";
+                + " where f.probationToConfirmation=true"
+                + " and (d.dateOfLeaving is null or d.dateOfLeaving = ''"
+                + " or STR_TO_DATE(d.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
@@ -176,7 +195,9 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
                 + " from UserRightMaster urm "
                 + " left join urm.userMaster um "
                 + " left join um.employeeMasters em "
-                + " where urm.employeeReferral=1";
+                + " where urm.employeeReferral=1"
+                + " and (em.dateOfLeaving is null or em.dateOfLeaving = ''"
+                + " or STR_TO_DATE(em.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
@@ -190,7 +211,9 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
                 + " from UserRightMaster urm "
                 + " left join urm.userMaster um "
                 + " left join um.employeeMasters em "
-                + " where urm.appraisal360=1";
+                + " where urm.appraisal360=1"
+                + " and (em.dateOfLeaving is null or em.dateOfLeaving = ''"
+                + " or STR_TO_DATE(em.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
@@ -205,7 +228,9 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
                 + " from UserRightMaster urm "
                 + " left join urm.userMaster um "
                 + " left join um.employeeMasters em "
-                + " where urm.travelAdmin=1";
+                + " where urm.travelAdmin=1"
+                + " and (em.dateOfLeaving is null or em.dateOfLeaving = ''"
+                + " or STR_TO_DATE(em.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
@@ -220,11 +245,14 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
                 + " from UserRightMaster urm "
                 + " left join urm.userMaster um "
                 + " left join um.employeeMasters em "
-                + " where urm.travelExpenseAdmin=1";
+                + " where urm.travelExpenseAdmin=1"
+                + " and (em.dateOfLeaving is null or em.dateOfLeaving = ''"
+                + " or STR_TO_DATE(em.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+
     @Override
     public List<?> readCashAdvanceViewAdmin() {
 
@@ -234,7 +262,9 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
                 + " from UserRightMaster urm "
                 + " left join urm.userMaster um "
                 + " left join um.employeeMasters em "
-                + " where urm.cashAdvanceView=1";
+                + " where urm.cashAdvanceView=1"
+                + " and (em.dateOfLeaving is null or em.dateOfLeaving = ''"
+                + " or STR_TO_DATE(em.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

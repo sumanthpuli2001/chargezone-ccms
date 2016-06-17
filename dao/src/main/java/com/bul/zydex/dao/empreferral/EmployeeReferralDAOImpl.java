@@ -33,7 +33,7 @@ public class EmployeeReferralDAOImpl<T> extends GenericsDAOImpl<T> implements Em
         } else {
             sb.append(" where er.status IN (0,1,2,3,4,5)");
         }
-        sb.append(" and (er.candidatePositionReferredFor=prm.id)");
+        sb.append(" and (er.candidatePositionReferredFor=prm.id) order By er.id desc");
 
         String hqlQryString = sb.toString();
 //        String qryString = getSessionFactory().getCurrentSession().createQuery(hqlQryString).getQueryString();
@@ -72,11 +72,11 @@ public class EmployeeReferralDAOImpl<T> extends GenericsDAOImpl<T> implements Em
 
     @Override
     public List<?> getReportingManagerOfEmpRefAdmin() {
-        
+
         StringBuilder sb = new StringBuilder();
         sb.append("select em.reportingManagerLevel1")
                 .append(" from  EmployeeMaster AS em left join em.employeeReferrals AS er")
-                .append(" left join em.userMaster as um left join um.userRightMasters as urm")  
+                .append(" left join em.userMaster as um left join um.userRightMasters as urm")
                 .append(" where urm.employeeReferral is true")
                 .append(" and urm.travelExpenseAdmin is not true")//this is for trick work for get only single useer of employeeReferral
                 .append(" and urm.employeeManagement is not true");//this is for trick work for get only single useer of employeeReferral

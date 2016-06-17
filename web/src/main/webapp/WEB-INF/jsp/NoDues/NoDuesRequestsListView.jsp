@@ -101,23 +101,45 @@
                                                             <%--<c:if test="${(sessionScope.employeeInfo.id eq list[7]) or (sessionScope.userRight.noDue) or (sessionScope.userRight.itAdmin) or (sessionScope.userRight.travelExpenseAdmin)}">--%>
                                                             <c:if test="${(sessionScope.employeeInfo.id eq list[7]) or (sessionScope.userRight.employeeExit) or (sessionScope.userRight.itAdmin) or (sessionScope.userRight.travelExpenseAdmin)}">
                                                                 <%--<c:if test="${(!list[8]) or(!list[9]) or (!list[10]) or (!list[11]) or (sessionScope.userRight.noDue && sessionScope.userRight.itAdmin && sessionScope.userRight.travelExpenseAdmin)}">--%>
-                                                                <c:if test="${(!list[8]) or(!list[9]) or (!list[10]) or (!list[11]) or (sessionScope.userRight.employeeExit)}">
+                                                                <%--<c:if test="${(!list[8]) or(!list[9]) or (!list[10]) or (!list[11]) or (sessionScope.userRight.employeeExit)}">--%>
 
-                                                                    <tr>
+                                                                <tr>
 
-                                                                        <!--<td>/</td>-->
-                                                                        <td>${list[1]}</td>
-                                                                        <td>${list[2]}</td>
-                                                                        <td>${list[3]}</td>
-                                                                        <td>${list[4]}</td>
-                                                                        <td>${list[12]}</td>
-                                                                        <td>
-                                                                            <c:set var="count" value="0" scope="page"/>
-                                                                            <c:choose>
-                                                                                <c:when test="${sessionScope.employeeInfo.id eq list[7]}">
-                                                                                    <!--check it that reporting manager or not-->
+                                                                    <!--<td>/</td>-->
+                                                                    <td>${list[1]}</td>
+                                                                    <td>${list[2]}</td>
+                                                                    <td>${list[3]}</td>
+                                                                    <td>${list[4]}</td>
+                                                                    <td>${list[12]}</td>
+                                                                    <td>
+                                                                        <c:set var="count" value="0" scope="page"/>
+                                                                        <c:choose>
+                                                                            <c:when test="${sessionScope.employeeInfo.id eq list[7]}">
+                                                                                <!--check it that reporting manager or not-->
+                                                                                <c:choose>
+                                                                                    <c:when test="${list[8]}">
+                                                                                        <c:set var="count" scope="page" value="${count + 1}" />
+                                                                                        <c:if test="${count eq 1}">
+                                                                                            <span class="label label-success label-as-badge">
+                                                                                                Completed
+                                                                                            </span>
+                                                                                        </c:if>
+                                                                                    </c:when>
+                                                                                    <c:otherwise>
+                                                                                        <c:set var="count" scope="page" value="${count + 1}" />
+                                                                                        <c:if test="${count eq 1}">
+                                                                                            <span class="label label-default label-as-badge">
+                                                                                                Pending
+                                                                                            </span>
+                                                                                        </c:if>
+                                                                                    </c:otherwise>
+                                                                                </c:choose>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <%--<c:if test="${sessionScope.userRight.noDue}">--%>
+                                                                                <c:if test="${sessionScope.userRight.employeeExit}">
                                                                                     <c:choose>
-                                                                                        <c:when test="${list[8]}">
+                                                                                        <c:when test="${list[9]}">
                                                                                             <c:set var="count" scope="page" value="${count + 1}" />
                                                                                             <c:if test="${count eq 1}">
                                                                                                 <span class="label label-success label-as-badge">
@@ -134,85 +156,63 @@
                                                                                             </c:if>
                                                                                         </c:otherwise>
                                                                                     </c:choose>
-                                                                                </c:when>
-                                                                                <c:otherwise>
-                                                                                    <%--<c:if test="${sessionScope.userRight.noDue}">--%>
-                                                                                    <c:if test="${sessionScope.userRight.employeeExit}">
-                                                                                        <c:choose>
-                                                                                            <c:when test="${list[9]}">
-                                                                                                <c:set var="count" scope="page" value="${count + 1}" />
-                                                                                                <c:if test="${count eq 1}">
-                                                                                                    <span class="label label-success label-as-badge">
-                                                                                                        Completed
-                                                                                                    </span>
-                                                                                                </c:if>
-                                                                                            </c:when>
-                                                                                            <c:otherwise>
-                                                                                                <c:set var="count" scope="page" value="${count + 1}" />
-                                                                                                <c:if test="${count eq 1}">
-                                                                                                    <span class="label label-default label-as-badge">
-                                                                                                        Pending
-                                                                                                    </span>
-                                                                                                </c:if>
-                                                                                            </c:otherwise>
-                                                                                        </c:choose>
-                                                                                    </c:if>
-                                                                                    <c:if test="${sessionScope.userRight.itAdmin}">
-                                                                                        <c:choose>
-                                                                                            <c:when test="${list[10]}">
-                                                                                                <c:set var="count" scope="page" value="${count + 1}" />
-                                                                                                <c:if test="${count eq 1}">
-                                                                                                    <span class="label label-success label-as-badge">
-                                                                                                        Completed
-                                                                                                    </span>
-                                                                                                </c:if>
-                                                                                            </c:when>
-                                                                                            <c:otherwise>
-                                                                                                <c:set var="count" scope="page" value="${count + 1}" />
-                                                                                                <c:if test="${count eq 1}">
-                                                                                                    <span class="label label-default label-as-badge">
-                                                                                                        Pending
-                                                                                                    </span>
-                                                                                                </c:if>
-                                                                                            </c:otherwise>
-                                                                                        </c:choose>
-                                                                                    </c:if>
-                                                                                    <c:if test="${sessionScope.userRight.travelExpenseAdmin}">
-                                                                                        <c:choose>
-                                                                                            <c:when test="${list[11]}">
-                                                                                                <c:set var="count" scope="page" value="${count + 1}" />
-                                                                                                <c:if test="${count eq 1}">
-                                                                                                    <span class="label label-success label-as-badge">
-                                                                                                        Completed
-                                                                                                    </span>
-                                                                                                </c:if>
-                                                                                            </c:when>
-                                                                                            <c:otherwise>
-                                                                                                <c:set var="count" scope="page" value="${count + 1}" />
-                                                                                                <c:if test="${count eq 1}">
-                                                                                                    <span class="label label-default label-as-badge">
-                                                                                                        Pending
-                                                                                                    </span>
-                                                                                                </c:if>
-                                                                                            </c:otherwise>
-                                                                                        </c:choose>
-                                                                                    </c:if>
-                                                                                </c:otherwise>
+                                                                                </c:if>
+                                                                                <c:if test="${sessionScope.userRight.itAdmin}">
+                                                                                    <c:choose>
+                                                                                        <c:when test="${list[10]}">
+                                                                                            <c:set var="count" scope="page" value="${count + 1}" />
+                                                                                            <c:if test="${count eq 1}">
+                                                                                                <span class="label label-success label-as-badge">
+                                                                                                    Completed
+                                                                                                </span>
+                                                                                            </c:if>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
+                                                                                            <c:set var="count" scope="page" value="${count + 1}" />
+                                                                                            <c:if test="${count eq 1}">
+                                                                                                <span class="label label-default label-as-badge">
+                                                                                                    Pending
+                                                                                                </span>
+                                                                                            </c:if>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                </c:if>
+                                                                                <c:if test="${sessionScope.userRight.travelExpenseAdmin}">
+                                                                                    <c:choose>
+                                                                                        <c:when test="${list[11]}">
+                                                                                            <c:set var="count" scope="page" value="${count + 1}" />
+                                                                                            <c:if test="${count eq 1}">
+                                                                                                <span class="label label-success label-as-badge">
+                                                                                                    Completed
+                                                                                                </span>
+                                                                                            </c:if>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
+                                                                                            <c:set var="count" scope="page" value="${count + 1}" />
+                                                                                            <c:if test="${count eq 1}">
+                                                                                                <span class="label label-default label-as-badge">
+                                                                                                    Pending
+                                                                                                </span>
+                                                                                            </c:if>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                </c:if>
+                                                                            </c:otherwise>
 
-                                                                            </c:choose>
-                                                                        </td>
-                                                                    <!--<td>${list[8]},${list[9]},${list[10]},${list[11]}</td>-->
-                                                                        <%--<c:if test="${sessionScope.userRight.hr}">--%>
-                                                                        <td>
-                                                                            <div class="btn-group">
-                                                                                <button type="button" class="btn btn-default dropdown-toggle" onclick="viewClick(${list[0]},${list[1]},${list[7]});" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                    View
-                                                                                </button>
-                                                                            </div>
-                                                                        </td>
-                                                                        <%--</c:if>--%>
-                                                                    </tr>
-                                                                </c:if>
+                                                                        </c:choose>
+                                                                    </td>
+                                                                <!--<td>${list[8]},${list[9]},${list[10]},${list[11]}</td>-->
+                                                                    <%--<c:if test="${sessionScope.userRight.hr}">--%>
+                                                                    <td>
+                                                                        <div class="btn-group">
+                                                                            <button type="button" class="btn btn-default dropdown-toggle" onclick="viewClick(${list[0]},${list[1]},${list[7]});" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                View
+                                                                            </button>
+                                                                        </div>
+                                                                    </td>
+                                                                    <%--</c:if>--%>
+                                                                </tr>
+                                                                <%--</c:if>--%>
                                                             </c:if>
                                                         </c:forEach>
                                                     </c:forEach>

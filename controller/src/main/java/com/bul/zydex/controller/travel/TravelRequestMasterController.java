@@ -141,7 +141,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 //        travelRequestMaster.setEmployeeMasterByApprover1Id(employeeMaster1);
 //        travelRequestMaster.setEmployeeMasterByApprover2Id(employeeMaster2);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - hh:mm");
 //        Calendar cal = Calendar.getInstance();
         Date date11 = new Date();
 //        sdf.format(date11);
@@ -3091,15 +3091,15 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                     if (null != manager2 && !"".equals(manager2) && !manager1.equals(manager6)) {
                         checkForEscalation(manager1, manager2, employeeMaster.getEmployeeName());
                     } else if ((null == manager2 || "".equals(manager2)) && !manager1.equals(manager6)) {
-                        if(!manager1.equals(manager3)){
+                        if (!manager1.equals(manager3)) {
                             checkForEscalation(manager1, manager3, employeeMaster.getEmployeeName());
                         }
                     } else if ((null == manager3 || "".equals(manager3)) && !manager1.equals(manager6)) {
-                        if(!manager1.equals(manager4)){
+                        if (!manager1.equals(manager4)) {
                             checkForEscalation(manager1, manager4, employeeMaster.getEmployeeName());
                         }
                     } else if ((null == manager4 || "".equals(manager4)) && !manager1.equals(manager6)) {
-                        if(!manager1.equals(manager5)){
+                        if (!manager1.equals(manager5)) {
                             checkForEscalation(manager1, manager5, employeeMaster.getEmployeeName());
                         }
                     } else if ((null == manager5 || "".equals(manager5)) && !manager1.equals(manager6)) {
@@ -3161,9 +3161,9 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                             checkForEscalation(manager2, manager4, employeeMaster.getEmployeeName());
                         } else {
                             if (!manager1.equals(manager6)) {
-                            if (!manager1.equals(manager4)) {
-                                checkForEscalation(manager1, manager4, employeeMaster.getEmployeeName());
-                            }
+                                if (!manager1.equals(manager4)) {
+                                    checkForEscalation(manager1, manager4, employeeMaster.getEmployeeName());
+                                }
                             }
                         }
                     } else if (null == manager4 || "".equals(manager4)) {
@@ -3212,9 +3212,9 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                             checkForEscalation(manager2, manager5, employeeMaster.getEmployeeName());
                         } else {
                             if (!manager1.equals(manager6)) {
-                            if (!manager1.equals(manager5)) {
-                                checkForEscalation(manager1, manager5, employeeMaster.getEmployeeName());
-                            }
+                                if (!manager1.equals(manager5)) {
+                                    checkForEscalation(manager1, manager5, employeeMaster.getEmployeeName());
+                                }
                             }
                         }
                     } else if (null == manager5 || "".equals(manager5)) {

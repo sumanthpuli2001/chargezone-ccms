@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : returnableNonReturnableGatePass
     Created on : Oct 5, 2015, 11:02:24 AM
     Author     : admin dhaval
@@ -95,7 +95,7 @@
                                                         <div class="col-sm-6">
                                                             <label>Name Of The Employee:</label>
                                                             <input type="text" class="form-control" value="${list.employeeName}" readonly/>
-                                                            <input type="hidden"  name="empId" value="${list.id}"/>
+                                                            <input type="hidden"  name="empId" id="empId" value="${list.id}"/>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label>Date Of Relieving:</label>
@@ -106,6 +106,16 @@
                                                         </div>
                                                     </div>
                                                 </c:forEach>
+                                                <c:if test="${sessionScope.userRight.employeeExit}">
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <input type="checkbox" id="conDeptID" name="conDeptID" value="checked"/> Concerned Department
+                                                            <input type="checkbox" id="itDept" name="itDept" value="checked"/> I.T Department
+                                                            <input type="checkbox" id="fDept" name="fDept" value="checked"/> Finance Department
+                                                        </div>
+                                                    </div>
+                                                </c:if>
                                             </div>
                                         </div><!-- /.col -->
 
@@ -115,31 +125,31 @@
                                 <%--<c:if test="${sessionScope.employeeInfo.id eq reportingManager}">--%>
                                 <%--<c:if test="${(sessionScope.employeeInfo.id eq reportingManager) or (sessionScope.userRight.noDue && sessionScope.userRight.itAdmin && sessionScope.userRight.travelExpenseAdmin)}">--%>
                                 <c:if test="${(sessionScope.employeeInfo.id eq reportingManager) or (sessionScope.userRight.employeeExit)}">
-                                    <div class="box box-info collapsed-box">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Concerned Department:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
-                                            </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                    <div class="box box-info collapsed-box" id="concernedDeptId" <c:if test="${sessionScope.userRight.employeeExit}">style="display: none"</c:if>>
+                                            <div class="box-header">
+                                                <h3 class="box-title">Concerned Department:</h3>
+                                                <div class="box-tools pull-right">
+                                                    <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
+                                                </div>
+                                            </div><!-- /.box-header -->
+                                            <div class="box-body no-padding">
+                                                <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center"  >
 
 
 
-                                                <tr style="background-color: darkgrey">
-                                                    <th style="text-align: center" width="50%"><b>Concerned Department</b></th>
-                                                    <th style="text-align: center" width="25%">Status</th>
-                                                    <th style="text-align: center" width="25%">Remark</th>
+                                                    <tr style="background-color: darkgrey">
+                                                        <th style="text-align: center" width="50%"><b>Concerned Department</b></th>
+                                                        <th style="text-align: center" width="25%">Status</th>
+                                                        <th style="text-align: center" width="25%">Remark</th>
 
-                                                </tr>
+                                                    </tr>
 
 
-                                                <tr>
-                                                    <td style="background-color: lightgrey;vertical-align: middle"><b>Equipments / Manuals / Files </b></td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-10">
+                                                    <tr>
+                                                        <td style="background-color: lightgrey;vertical-align: middle"><b>Equipments / Manuals / Files </b></td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-10">
                                                                 <form:select path="equipments" id="equipments" class="form-control" >
                                                                     <form:options items="${status2}"></form:options>
                                                                 </form:select>
@@ -425,26 +435,26 @@
                                     </div>
                                 </c:if>
                                 <c:if test="${(sessionScope.userRight.itAdmin) or (sessionScope.userRight.employeeExit)}">
-                                    <div class="box box-info collapsed-box">
-                                        <div class="box-header">
-                                            <h3 class="box-title">I.T Department:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
-                                            </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                    <div class="box box-info collapsed-box" id="itDeptId" <c:if test="${sessionScope.userRight.employeeExit}">style="display: none"</c:if>>
+                                            <div class="box-header">
+                                                <h3 class="box-title">I.T Department:</h3>
+                                                <div class="box-tools pull-right">
+                                                    <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
+                                                </div>
+                                            </div><!-- /.box-header -->
+                                            <div class="box-body no-padding">
+                                                <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center"  >
 
-                                                <tr style="background-color: darkgrey">
-                                                    <th style="text-align: center" width="50%"><b>Concerned Department</b></th>
-                                                    <th style="text-align: center" width="25%">Status</th>
-                                                    <th style="text-align: center" width="25%">Remark</th>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background-color: lightgrey;vertical-align: middle"><b>Company mobile phone </b></td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-10">
+                                                    <tr style="background-color: darkgrey">
+                                                        <th style="text-align: center" width="50%"><b>Concerned Department</b></th>
+                                                        <th style="text-align: center" width="25%">Status</th>
+                                                        <th style="text-align: center" width="25%">Remark</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="background-color: lightgrey;vertical-align: middle"><b>Company mobile phone </b></td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-10">
                                                                 <form:select path="companyMobile" id="companyMobile" class="form-control" >
                                                                     <form:options items="${status2}"></form:options>
                                                                 </form:select>
@@ -547,25 +557,25 @@
                                 </c:if>
                                 <%--<c:if test="${(sessionScope.userRight.travelExpenseAdmin)}">--%>
                                 <c:if test="${(sessionScope.userRight.travelExpenseAdmin) or (sessionScope.userRight.employeeExit) }">
-                                    <div class="box box-info collapsed-box">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Finance Department:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
-                                            </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                <tr style="background-color: darkgrey">
-                                                    <th style="text-align: center" width="50%"><b>Concerned Department</b></th>
-                                                    <th style="text-align: center" width="25%">Status</th>
-                                                    <th style="text-align: center" width="25%">Remark</th>
-                                                </tr>
-                                                <tr>
-                                                    <td style="background-color: lightgrey;vertical-align: middle"><b>Advance Cleared</b></td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-10">
+                                    <div class="box box-info collapsed-box" id="financeDeptId" <c:if test="${sessionScope.userRight.employeeExit}">style="display: none"</c:if>>
+                                            <div class="box-header">
+                                                <h3 class="box-title">Finance Department:</h3>
+                                                <div class="box-tools pull-right">
+                                                    <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
+                                                </div>
+                                            </div><!-- /.box-header -->
+                                            <div class="box-body no-padding">
+                                                <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                    <tr style="background-color: darkgrey">
+                                                        <th style="text-align: center" width="50%"><b>Concerned Department</b></th>
+                                                        <th style="text-align: center" width="25%">Status</th>
+                                                        <th style="text-align: center" width="25%">Remark</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="background-color: lightgrey;vertical-align: middle"><b>Advance Cleared</b></td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-10">
                                                                 <form:select path="advanceCleared" id="advanceCleared" class="form-control" >
                                                                     <form:options items="${status2}"></form:options>
                                                                 </form:select>
@@ -743,6 +753,33 @@
                 textareas[i].disabled = true;
             }
         }
+        document.getElementById("conDeptID").disabled = false;
+        document.getElementById("itDept").disabled = false;
+        document.getElementById("fDept").disabled = false;
+        document.getElementById("empId").disabled = false;
+
+
+// COnserned Dept
+        $('#conDeptID').on('ifChecked', function (event) {
+            $('#concernedDeptId').show(500);
+        });
+        $('#conDeptID').on('ifUnchecked', function (event) {
+            $('#concernedDeptId').hide(500);
+        });
+// IT Dept
+        $('#itDept').on('ifChecked', function (event) {
+            $('#itDeptId').show(500);
+        });
+        $('#itDept').on('ifUnchecked', function (event) {
+            $('#itDeptId').hide(500);
+        });
+// Finance Dept
+        $('#fDept').on('ifChecked', function (event) {
+            $('#financeDeptId').show(500);
+        });
+        $('#fDept').on('ifUnchecked', function (event) {
+            $('#financeDeptId').hide(500);
+        });
 
     </script>
 </html>

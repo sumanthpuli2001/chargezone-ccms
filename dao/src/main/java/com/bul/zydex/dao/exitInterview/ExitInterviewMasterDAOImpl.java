@@ -97,7 +97,7 @@ public class ExitInterviewMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         query += " "
                 + " FROM ExitInterviewMaster a "
                 + " left join a.employeeMasterByEmpId b "
-                + " WHERE b.id=" + empId 
+                + " WHERE b.id=" + empId
                 + " and a.status in (2,4) ";
 
         List<?> list = getHibernateTemplate().find(query);
@@ -105,7 +105,7 @@ public class ExitInterviewMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
     }
 
     @Override
-      public List<?> readApproveList(T object) {
+    public List<?> readApproveList(T object) {
         ExitInterviewMaster exitInterviewMaster = (ExitInterviewMaster) object;
         String query = "";
         query += " "
@@ -118,55 +118,56 @@ public class ExitInterviewMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
-      
+
     @Override
-       public List<?> readforHR(T object) {
-             ExitInterviewMaster exitInterviewMaster = (ExitInterviewMaster) object;
+    public List<?> readforHR(T object) {
+        ExitInterviewMaster exitInterviewMaster = (ExitInterviewMaster) object;
         String query = "";
         query += " Select a.id,b.id,b.employeeName,a.status,b.employeeId "
                 + " FROM ExitInterviewMaster a "
                 + " left join a.employeeMasterByEmpId b "
-                + " WHERE a.status in (1)";
+                + " WHERE a.status in (1)"
+                + " Order By a.id desc";
         List<?> list = getHibernateTemplate().find(query);
         return list;
-       }
-       
+    }
+
     @Override
     public List<?> readExistingEmp(int empId) {
         String query = "";
         query += " Select a.id"
                 + " FROM ExitInterviewMaster a "
-                + " WHERE a.employeeMasterByEmpId =" + empId ;
+                + " WHERE a.employeeMasterByEmpId =" + empId;
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
-      
+
     @Override
     public List<?> reademp(T object) {
-             ExitInterviewMaster exitInterviewMaster = (ExitInterviewMaster) object;
+        ExitInterviewMaster exitInterviewMaster = (ExitInterviewMaster) object;
         String query = "";
         query += " Select a.id,a.employeeMasterByEmpId.employeeId,a.employeeMasterByEmpId.employeeName,a.status,a.employeeMasterByEmpId.id "
                 + " FROM ExitInterviewMaster a "
-                + " WHERE a.employeeMasterByEmpId = " +exitInterviewMaster.getEmployeeMasterByEmpId().getId()
+                + " WHERE a.employeeMasterByEmpId = " + exitInterviewMaster.getEmployeeMasterByEmpId().getId()
                 + " and a.status in (0,1,2,3,4)";
         List<?> list = getHibernateTemplate().find(query);
         return list;
-       }
-    
+    }
+
     @Override
-     public List<?> readEmpIdFromTabId(int id){
-     String query = "";
-     query +=" select a.employeeMasterByEmpId"
-        + " From ExitInterviewMaster a"
-        + " where a.id = " +id ;
-      return getHibernateTemplate().find(query);
-}
-     
-       public List<?> readlist() {
+    public List<?> readEmpIdFromTabId(int id) {
+        String query = "";
+        query += " select a.employeeMasterByEmpId"
+                + " From ExitInterviewMaster a"
+                + " where a.id = " + id;
+        return getHibernateTemplate().find(query);
+    }
+
+    public List<?> readlist() {
         String query = "";
         query += " "
-                 + " Select a.id,b.id,b.employeeName as EmpName,a.status,b.employeeId"
+                + " Select a.id,b.id,b.employeeName as EmpName,a.status,b.employeeId"
                 + " FROM ExitInterviewMaster a "
                 + " LEFT JOIN a.employeeMasterByEmpId b"
                 + " WHERE a.status in (1) ";

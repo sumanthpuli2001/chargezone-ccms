@@ -922,10 +922,10 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         String query = "";
 
         query += " Select a.id,a.employeeId, a.employeeName, c.departmentName, b.designationName, d.level,  lm.location, a.reportingManagerLevel1,"
-                + " case When (ndm.equipments IS NULL OR ndm.equipments = '' OR (ndm.equipments='na' and ndm.equipmentsRemarks = ''))  THEN  'false' ELSE 'true' END AS isReportingManagerFilled,"
-                + " case When (ndm.carProvided IS NULL OR ndm.carProvided = '' OR (ndm.carProvided = 'na' and ndm.carProvidedRemark = ''))  THEN  'false' ELSE 'true' END AS isNoDueAdminFilled,"
-                + " case When (ndm.computerChecked IS NULL OR ndm.computerChecked = '' OR (ndm.computerChecked = 'na' and ndm.computerCheckedRemark = ''))  THEN  'false' ELSE 'true' END AS isTravelAdminFilled,"
-                + " case When (ndm.salaryAdvanceOrLoan IS NULL OR ndm.salaryAdvanceOrLoan = '' OR (ndm.salaryAdvanceOrLoan = 'na' and ndm.salaryAdvanceOrLoanRemark=''))  THEN  'false' ELSE 'true' END AS istravelExpenseAdminFilled,"
+                + " case When (ndm.equipments IS NULL OR ndm.equipments = '' )  THEN  'false' ELSE 'true' END AS isReportingManagerFilled,"
+                + " case When (ndm.carProvided IS NULL OR ndm.carProvided = '' )  THEN  'false' ELSE 'true' END AS isNoDueAdminFilled,"
+                + " case When (ndm.computerChecked IS NULL OR ndm.computerChecked = '' )  THEN  'false' ELSE 'true' END AS isTravelAdminFilled,"
+                + " case When (ndm.salaryAdvanceOrLoan IS NULL OR ndm.salaryAdvanceOrLoan = '')  THEN  'false' ELSE 'true' END AS istravelExpenseAdminFilled,"
                 + " res.relievingDate"
                 //                + " case When (ndm.equipments IS NULL OR ndm.equipments = '')  THEN  'pendingAtReportingManager' ELSE 'Completed' END AS isReportingManagerFilled,"
                 //                + " case When (ndm.carProvided IS NULL OR ndm.carProvided = '')  THEN  'pendingAtNoDueAdmin' ELSE 'Completed' END AS isNoDueAdminFilled,"
@@ -1419,7 +1419,8 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " WHERE a.employeeType like '%Probation%'"
                 + " and (b.id is null or b.status !=8)"
                 + " and ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
-                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) ";
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) "
+                + " order By b.id desc";
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
@@ -1510,15 +1511,15 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
-    
+
     @Override
-    public List<?> listOfCEO(){
-        String query="";
+    public List<?> listOfCEO() {
+        String query = "";
         query = " "
                 + " From EmployeeMaster "
                 + " where reportingManagerLevel1=''";
-        
-         List<?> list = getHibernateTemplate().find(query);
+
+        List<?> list = getHibernateTemplate().find(query);
         return list;
     }
 

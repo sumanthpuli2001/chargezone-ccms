@@ -15,6 +15,7 @@ import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.util.CallingCounter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,6 +63,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         HttpSession session = request.getSession(false);
         //this is toggle of isExistingNoDueDataExist setted on dashboard page @ first time login.
 //         = new NoDueMaster();
+        UserRightMaster userRightMaster = (UserRightMaster) request.getSession().getAttribute("userRight");
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         bind(request, noDueMaster);
@@ -85,8 +87,116 @@ public class NoDueMasterController extends NoDueMasterAbstract {
 //                NonoDueMasterService.readById(noDueId);
 //                noDueMaster.setId(noDueId);
                 bind(request, noDueMasterForUpdate);
+
+                if (userRightMaster.isEmployeeExit()) {
+                    if (null != request.getParameter("conDeptID") && request.getParameter("conDeptID").equals("checked")) {
+
+                    } else {
+                        if (null == noDueMasterForUpdate.getEquipments() || noDueMasterForUpdate.getEquipments().equals("")) {
+
+                            noDueMasterForUpdate.setEquipments("");
+                            noDueMasterForUpdate.setEquipmentsRemarks("");
+                            noDueMasterForUpdate.setSpecialTool("");
+                            noDueMasterForUpdate.setSpecialToolRemark("");
+                            noDueMasterForUpdate.setComputerFiles("");
+                            noDueMasterForUpdate.setComputerFilesRemark("");
+                            noDueMasterForUpdate.setAdvanceAmount("");
+                            noDueMasterForUpdate.setAdvanceAmountRemark("");
+                            noDueMasterForUpdate.setDeptOtherText("");
+                            noDueMasterForUpdate.setDeptOther("");
+                            noDueMasterForUpdate.setDeptOtherRemark("");
+                        }
+
+                    }
+                    if (null != request.getParameter("itDept") && request.getParameter("itDept").equals("checked")) {
+
+                    } else {
+                        if (null == noDueMasterForUpdate.getCompanyMobile() || noDueMasterForUpdate.getCompanyMobile().equals("")) {
+
+                            noDueMasterForUpdate.setCompanyMobile("");
+                            noDueMasterForUpdate.setCompanyMobileRemark("");
+                            noDueMasterForUpdate.setComputerChecked("");
+                            noDueMasterForUpdate.setComputerCheckedRemark("");
+                            noDueMasterForUpdate.setEmail("");
+                            noDueMasterForUpdate.setEmailRemark("");
+                            noDueMasterForUpdate.setComputerTransfered("");
+                            noDueMasterForUpdate.setComputerTransferedRemark("");
+                            noDueMasterForUpdate.setItOtherText("");
+                            noDueMasterForUpdate.setItOtherRemark("");
+                            noDueMasterForUpdate.setItOther("");
+                        }
+
+                    }
+                    if (null != request.getParameter("fDept") && request.getParameter("fDept").equals("checked")) {
+
+                    } else {
+                        if (null == noDueMasterForUpdate.getAdvanceCleared() || noDueMasterForUpdate.getAdvanceCleared().equals("")) {
+                            noDueMasterForUpdate.setAdvanceCleared("");
+                            noDueMasterForUpdate.setAdvanceClearedRemark("");
+                            noDueMasterForUpdate.setPendingBills("");
+                            noDueMasterForUpdate.setPendingBillsRemark("");
+                            noDueMasterForUpdate.setSalaryAdvanceOrLoan("");
+                            noDueMasterForUpdate.setSalaryAdvanceOrLoanRemark("");
+                            noDueMasterForUpdate.setFinanceOther("");
+                            noDueMasterForUpdate.setFinanceOtherRemark("");
+                            noDueMasterForUpdate.setFinanceOtherText("");
+                        }
+
+                    }
+
+                }
                 noDueMasterService.update(noDueMasterForUpdate);
             } else {
+
+                if (userRightMaster.isEmployeeExit()) {
+                    if (null != request.getParameter("conDeptID") && request.getParameter("conDeptID").equals("checked")) {
+
+                    } else {
+                        noDueMaster.setEquipments("");
+                        noDueMaster.setEquipmentsRemarks("");
+                        noDueMaster.setSpecialTool("");
+                        noDueMaster.setSpecialToolRemark("");
+                        noDueMaster.setComputerFiles("");
+                        noDueMaster.setComputerFilesRemark("");
+                        noDueMaster.setAdvanceAmount("");
+                        noDueMaster.setAdvanceAmountRemark("");
+                        noDueMaster.setDeptOtherText("");
+                        noDueMaster.setDeptOther("");
+                        noDueMaster.setDeptOtherRemark("");
+
+                    }
+                    if (null != request.getParameter("itDept") && request.getParameter("itDept").equals("checked")) {
+
+                    } else {
+                        noDueMaster.setCompanyMobile("");
+                        noDueMaster.setCompanyMobileRemark("");
+                        noDueMaster.setComputerChecked("");
+                        noDueMaster.setComputerCheckedRemark("");
+                        noDueMaster.setEmail("");
+                        noDueMaster.setEmailRemark("");
+                        noDueMaster.setComputerTransfered("");
+                        noDueMaster.setComputerTransferedRemark("");
+                        noDueMaster.setItOtherText("");
+                        noDueMaster.setItOtherRemark("");
+                        noDueMaster.setItOther("");
+
+                    }
+                    if (null != request.getParameter("fDept") && request.getParameter("fDept").equals("checked")) {
+
+                    } else {
+                        noDueMaster.setAdvanceCleared("");
+                        noDueMaster.setAdvanceClearedRemark("");
+                        noDueMaster.setPendingBills("");
+                        noDueMaster.setPendingBillsRemark("");
+                        noDueMaster.setSalaryAdvanceOrLoan("");
+                        noDueMaster.setSalaryAdvanceOrLoanRemark("");
+                        noDueMaster.setFinanceOther("");
+                        noDueMaster.setFinanceOtherRemark("");
+                        noDueMaster.setFinanceOtherText("");
+
+                    }
+
+                }
                 noDueMasterService.create(noDueMaster);
 
             }
@@ -133,7 +243,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         return mv;
     }
 
-// emp result
+    // emp result
     public ModelAndView EmpResult(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         NoDueMaster noDueMaster = new NoDueMaster();
@@ -380,6 +490,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
             employeeMaster = employeeMasterService.readById(noDueMaster.getEmployeeMasterByEmpId().getId());
             noDueMaster.setEmployeeMasterByEmpId(employeeMaster);
         }
+        Collections.reverse(list);
         request.setAttribute("list", list);
         mv.setViewName("NoDues/NoDuesFormApprovalList");
         return mv;

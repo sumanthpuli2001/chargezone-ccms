@@ -42,7 +42,8 @@ public class PerformanceImprovementPlanMasterDAOImpl<T> extends GenericsDAOImpl<
                 + " left join b.levelMaster c"
                 + " left join b.departmentMaster d "
                 + " left join b.designationMaster e"
-                + " where b.reportingManagerLevel1=" + managerId;
+                + " where b.reportingManagerLevel1=" + managerId
+                + " order By a.id desc";
 
         return getHibernateTemplate().find(query);
     }
@@ -57,7 +58,7 @@ public class PerformanceImprovementPlanMasterDAOImpl<T> extends GenericsDAOImpl<
                 + " left join b.levelMaster c"
                 + " left join b.departmentMaster d "
                 + " left join b.designationMaster e"
-                + " group by a.employeeMasterByPipEmployeeId";
+                + " order by a.id desc group by a.employeeMasterByPipEmployeeId";
 
         return getHibernateTemplate().find(query);
     }

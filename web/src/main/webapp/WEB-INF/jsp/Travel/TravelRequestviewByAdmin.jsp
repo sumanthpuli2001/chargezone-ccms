@@ -162,6 +162,16 @@
                                                         </c:when>
                                                         <c:otherwise>
                                                             <thead>
+                                                                <!--                                                                <tr>
+                                                                                                                                    <th><input type="text" id="text_empId" class="form-control"/></th>
+                                                                                                                                    <th><input type="text" id="text_empName" class="form-control"/></th>
+                                                                                                                                    <th><input type="text" id="text_travelType" class="form-control"/></th>
+                                                                                                                                    <th><input type="text" id="text_travelNo" class="form-control"/></th>
+                                                                                                                                    <th><input type="text" id="text_sDate" class="form-control"/></th>
+                                                                                                                                    <th><input type="text" id="text_eDate" class="form-control"/></th>
+                                                                                                                                    <th><input type="text" id="text_status" class="form-control"/></th>
+                                                                                                                                    <th><input type="text" id="" class="form-control"/></th>
+                                                                                                                                </tr>-->
                                                                 <tr>
                                                                     <th>Employee Id</th>
                                                                     <th>Employee Name</th>
@@ -581,15 +591,30 @@
         });
     </script>
 
+    <!--    <script>
+            $(document).ready(function () {
+    //                    $('#table_1').DataTable({
+    //                        "ordering": false
+    //                    });
+                var otable = $('#table_1').DataTable();
+                $("#table_1 #text_empName").on('keyup change', function () {
+                    otable
+                            .column($(this).parent().index() + ':visible')
+                            .search(this.value)
+                            .draw();
+
+                });
+            });
+        </script>-->
     <script>
         jQuery.noConflict();
-        jQuery(document).ready(function () {
+            jQuery(document).ready(function () {
             jQuery("#employeeName").tokenInput(${list}, {
-                preventDuplicates: true,
-                noResultsText: "No Result",
-                tokenLimit: "1",
-                searchingText: "Searching ... .. .",
-            });
+                        preventDuplicates: true,
+                        noResultsText: "No Result",
+                        tokenLimit: "1",
+                    searchingText: "Searching ... .. .",
+                });
         });
 
     </script>

@@ -97,7 +97,7 @@ public class ResignationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements R
                 + " WHERE a.status in (2,7,10,4)"
                 + " and  (b.dateOfLeaving is null or b.dateOfLeaving = '') "
                 + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()"
-                + " GROUP BY b.id";
+                + " order by a.id desc GROUP BY b.id";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
@@ -155,7 +155,8 @@ public class ResignationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements R
                 + " Where (d.status in (0,1,2,3,4,5,6,7)"
                 + " or c.status in (0,1,2) "
                 + " or b.status in (0,1,2,3,4,5,6,7,9,10,11))" + condition
-                + " group by a.id " ;
+                + " order By b.id desc"
+                + " group by d.id ";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
@@ -220,10 +221,10 @@ public class ResignationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements R
         String query = "";
         query += " "
                 + " From ResignationMaster R"
-                + " where R.status = '4' ";
+                + " where R.status = '4'"
+                + " Order by R.id desc ";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
 }
- 

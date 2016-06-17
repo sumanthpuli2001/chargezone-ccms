@@ -52,10 +52,11 @@ public class VisitorManagementDAOImpl<T> extends GenericsDAOImpl<T> implements V
                 + "  From VisitorManagement a "
                 + " left join a.employeeMasterByEmployeeMasterId b"
                 + " left join a.employeeMasterBySecurityApproveId c"
-//                + " left join a.employeeMasterByApproverId c "
-                   + " where a.status in (1,2,8)" ;
+                //                + " left join a.employeeMasterByApproverId c "
+                + " where a.status in (1,2,8)"
+                + "Order by a.id desc";
 //                   + " where a.status in (1,5,6,10)" ;
-        List list =getHibernateTemplate().find(query);
+        List list = getHibernateTemplate().find(query);
         return list;
     }
 
@@ -76,12 +77,12 @@ public class VisitorManagementDAOImpl<T> extends GenericsDAOImpl<T> implements V
             condition += " AND STR_TO_DATE(a.incomingDateTime,'%d/%m/%Y %H:%i') BETWEEN STR_TO_DATE('" + visitorManagement.getApproverDate() + " 00:00','%d/%m/%Y %H:%i') AND STR_TO_DATE('" + visitorManagement.getRequestDate() + " 00:00','%d/%m/%Y %H:%i') ";
         }
         query += " Select a.visitorName,a.visitorOrganization, a.incomingDateTime, a.status ,a.id ,c.employeeName"
-//                + "a.visitorName,a.visitorOrganization, a.incomingDateTime, a.status "
+                //                + "a.visitorName,a.visitorOrganization, a.incomingDateTime, a.status "
                 + " From VisitorManagement a"
                 + " LEFT JOIN a.employeeMasterByEmployeeMasterId b"
                 + " left join a.employeeMasterBySecurityApproveId c"
                 + " Where 1=1 " + condition;
-        List list =getHibernateTemplate().find(query);
+        List list = getHibernateTemplate().find(query);
         return list;
     }
 
@@ -109,14 +110,14 @@ public class VisitorManagementDAOImpl<T> extends GenericsDAOImpl<T> implements V
         }
 
         query += " Select a.id, b.employeeId, b.employeeName, a.visitorName, a.incomingDateTime, b.id ,a.status,e.employeeName  "
-//                + "b.employeeId, b.employeeName ,a.visitorName,a.visitorOrganization, a.incomingDateTime, a.status "
+                //                + "b.employeeId, b.employeeName ,a.visitorName,a.visitorOrganization, a.incomingDateTime, a.status "
                 + " From VisitorManagement a"
                 + " LEFT JOIN a.employeeMasterByEmployeeMasterId b "
                 + " left join a.employeeMasterBySecurityApproveId e"
                 + " LEFT JOIN b.departmentMaster c "
                 + " LEFT JOIN b.designationMaster d "
                 + " Where 1=1" + condition;
-        List list=getHibernateTemplate().find(query);
+        List list = getHibernateTemplate().find(query);
         return list;
     }
 
@@ -125,10 +126,11 @@ public class VisitorManagementDAOImpl<T> extends GenericsDAOImpl<T> implements V
         VisitorManagement visitorManagement = (VisitorManagement) object;
         String query = "";
         query += " From VisitorManagement a "
-                + " where a.employeeMasterByEmployeeMasterId="+visitorManagement.getEmployeeMasterByEmployeeMasterId().getId()
+                + " where a.employeeMasterByEmployeeMasterId=" + visitorManagement.getEmployeeMasterByEmployeeMasterId().getId()
                 + " and a.status in (1,4,5,6,9,10)";
         return getHibernateTemplate().find(query);
     }
+
     @Override
     public List<?> readVisitorManagementApproverPendingRequest(T object) {
         VisitorManagement visitorManagement = (VisitorManagement) object;
@@ -137,17 +139,17 @@ public class VisitorManagementDAOImpl<T> extends GenericsDAOImpl<T> implements V
                 + " From VisitorManagement a,"
                 + " EmployeeMaster b"
                 + " where a.employeeMasterByEmployeeMasterId=b.id"
-                + " and b.reportingManagerLevel1="+visitorManagement.getEmployeeMasterByEmployeeMasterId().getId()
+                + " and b.reportingManagerLevel1=" + visitorManagement.getEmployeeMasterByEmployeeMasterId().getId()
                 + " and a.status in (1,5,6,10)";
         return getHibernateTemplate().find(query);
     }
-    
+
     @Override
-    public List<?> readEmpIdFromTabId(int id){
-     String query = "";
-     query +=" select a.employeeMasterByEmployeeMasterId"
-       + " From VisitorManagement a"
-        + " where a.id = " +id ;
-      return getHibernateTemplate().find(query);
-}
+    public List<?> readEmpIdFromTabId(int id) {
+        String query = "";
+        query += " select a.employeeMasterByEmployeeMasterId"
+                + " From VisitorManagement a"
+                + " where a.id = " + id;
+        return getHibernateTemplate().find(query);
+    }
 }

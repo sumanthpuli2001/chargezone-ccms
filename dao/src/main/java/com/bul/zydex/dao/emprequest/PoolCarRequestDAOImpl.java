@@ -44,7 +44,7 @@ public class PoolCarRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Pool
                 + "From PoolCarRequest a"
                 + " left join a.employeeMasterByEmployeeMasterId b"
                 + " where a.status in (1,8,10,17,18) "
-                + " And b.reportingManagerLevel1 = "+poolCarRequest.getEmployeeMasterByApproverId().getId()
+                + " And b.reportingManagerLevel1 = " + poolCarRequest.getEmployeeMasterByApproverId().getId()
                 + " Order by a.id desc";
 //                + " and a.employeeMasterByEmployeeMasterId = " + poolCarRequest.getEmployeeMasterByApproverId().getId() ;
 
@@ -80,7 +80,7 @@ public class PoolCarRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Pool
                 + " left join a.employeeMasterByAdminApproverId e "
                 + " LEFT JOIN b.departmentMaster c "
                 + " LEFT JOIN b.designationMaster d "
-                + " where 1=1"  + condition
+                + " where 1=1" + condition
                 + " Order by a.id desc";
 //                + " and a.employeeMasterByEmployeeMasterId = " + poolCarRequest.getEmployeeMasterByApproverId().getId() ;
 
@@ -106,11 +106,11 @@ public class PoolCarRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Pool
         query += " Select a.startDateTime, a.endDateTime, a.status, a.id , c.employeeName, d.employeeName"
                 + " From PoolCarRequest a"
                 + " LEFT JOIN a.employeeMasterByEmployeeMasterId b"
-                     + " left join a.employeeMasterByApproverId c "
-                     + " left join a.employeeMasterByAdminApproverId d "
+                + " left join a.employeeMasterByApproverId c "
+                + " left join a.employeeMasterByAdminApproverId d "
                 + " where a.employeeMasterByEmployeeMasterId = " + poolCarRequest.getEmployeeMasterByAdminApproverId().getId()
                 + condition
-                  + " Order by a.id desc";
+                + " Order by a.id desc";
         return getHibernateTemplate().find(query);
     }
 
@@ -143,7 +143,8 @@ public class PoolCarRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Pool
                 + " LEFT JOIN a.employeeMasterByEmployeeMasterId b "
                 + " LEFT JOIN b.departmentMaster c "
                 + " LEFT JOIN b.designationMaster d "
-                + " Where 1=1" + condition;
+                + " Where 1=1" + condition
+                + " Order by a.id desc";
 
         return getHibernateTemplate().find(query);
     }
@@ -174,7 +175,7 @@ public class PoolCarRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Pool
         query += " Select a.startDateTime, a.endDateTime, a.status"
                 + " From PoolCarRequest a"
                 + " LEFT JOIN a.employeeMasterByEmployeeMasterId b"
-                 + " Order by a.id desc"
+                + " Order by a.id desc"
                 + " Where 1=1 " + condition;
         return getHibernateTemplate().find(query);
     }
@@ -186,7 +187,7 @@ public class PoolCarRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Pool
         query += " From PoolCarRequest a"
                 + " where a.employeeMasterByEmployeeMasterId=" + poolCarRequest.getEmployeeMasterByEmployeeMasterId().getId()
                 + " and a.status in (1,6,7,8,9,10,16,17,18,19)"
-                  + " Order by a.id desc";
+                + " Order by a.id desc";
 
         return getHibernateTemplate().find(query);
     }
@@ -201,17 +202,17 @@ public class PoolCarRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Pool
                 + " Where a.employeeMasterByEmployeeMasterId=b.id"
                 + " and b.reportingManagerLevel1=" + poolCarRequest.getEmployeeMasterByEmployeeMasterId().getId()
                 + " and a.status in (1,8,10,17,18)"
-                  + " Order by a.id desc";
+                + " Order by a.id desc";
 
         return getHibernateTemplate().find(query);
     }
-    
+
     @Override
-     public List<?> readEmpIdFromTabId(int id){
-     String query = "";
-     query +=" select a.employeeMasterByEmployeeMasterId"
-        + " From PoolCarRequest a"
-        + " where a.id = " +id ;
-      return getHibernateTemplate().find(query);
-}
+    public List<?> readEmpIdFromTabId(int id) {
+        String query = "";
+        query += " select a.employeeMasterByEmployeeMasterId"
+                + " From PoolCarRequest a"
+                + " where a.id = " + id;
+        return getHibernateTemplate().find(query);
+    }
 }

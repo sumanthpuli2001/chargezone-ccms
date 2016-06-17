@@ -61,7 +61,8 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " FROM LeaveEmployeeDetail a"
                 + " LEFT JOIN a.leaveTypeMaster b"
                 + " WHERE a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
-                + " AND a.status !=5" + condition;
+                + " AND a.status !=5" + condition
+                + " ORDER BY a.id desc";
 
         return getHibernateTemplate().find(query);
     }
@@ -76,7 +77,8 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " LEFT JOIN a.leaveTypeMaster b"
                 + " LEFT JOIN a.employeeMaster c"
                 + " LEFT JOIN c.userMaster d"
-                + " WHERE c.reportingManagerLevel1='" + leaveEmployeeDetail.getEmployeeMaster().getId() + "'";
+                + " WHERE c.reportingManagerLevel1='" + leaveEmployeeDetail.getEmployeeMaster().getId() + "'"
+                + " ORDER BY a.id desc";
 
         return getHibernateTemplate().find(query);
     }
@@ -542,7 +544,8 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " LEFT JOIN a.leaveTypeMaster b"
                 + " LEFT JOIN a.employeeMaster c"
                 + " LEFT JOIN c.userMaster d"
-                + " WHERE a.status In (0,4)";
+                + " WHERE a.status In (0,4)"
+                + "Order by a.id Desc";
 
         return getHibernateTemplate().find(query);
     }

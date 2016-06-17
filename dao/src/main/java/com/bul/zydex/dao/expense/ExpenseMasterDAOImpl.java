@@ -52,7 +52,8 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
                 + "FROM ExpenseMaster a"
                 + " left join a.employeeMasterByApprover1Id b"
                 + " left join a.employeeMasterByApprover2Id c"
-                + " WHERE a.employeeMasterByEmployeeId.id = " + expenseMaster.getEmployeeMasterByEmployeeId().getId() + "" + condition;
+                + " WHERE a.employeeMasterByEmployeeId.id = " + expenseMaster.getEmployeeMasterByEmployeeId().getId() + "" + condition
+                + " ORDER BY a.id desc";
 
         return getHibernateTemplate().find(query);
     }
@@ -170,7 +171,9 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
 
         String hqlQuery = ""
                 + "  FROM ExpenseMaster a"
-                + " where a.status IN (2,0)";
+                + " where a.status IN (2,0)"
+                + " ORDER BY a.id desc";
+
         return getHibernateTemplate().find(hqlQuery);
     }
 
@@ -184,27 +187,28 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
         if (!"".equals(expenseMaster.getExpenseType()) && null != expenseMaster.getExpenseType()) {
             condition += " AND a.expenseType = '" + expenseMaster.getExpenseType() + "'";
         }
-        if(null !=expenseMaster.getEmployeeMasterByEmployeeId()){
-            
-        if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getId()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getId()) {
-            condition += " AND b.id = " + expenseMaster.getEmployeeMasterByEmployeeId().getId() + "";
-        }
-        if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getChild1()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getChild1()) {
-            condition += " AND c.id = " + expenseMaster.getEmployeeMasterByEmployeeId().getChild1() + "";
-        }
-        if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getChild2()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getChild2()) {
-            condition += " AND d.id = " + expenseMaster.getEmployeeMasterByEmployeeId().getChild2() + "";
-        }
-        if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getCompany()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getCompany()) {
-            condition += " AND STR_TO_DATE(a.dateOfSubmit,'%d/%m/%Y') >= STR_TO_DATE('" + expenseMaster.getEmployeeMasterByEmployeeId().getCompany() + "','%d/%m/%Y')";
-        }
-        if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getContactNo1()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getContactNo1()) {
-            condition += " AND STR_TO_DATE(a.dateOfSubmit,'%d/%m/%Y') <= STR_TO_DATE('" + expenseMaster.getEmployeeMasterByEmployeeId().getContactNo1() + "','%d/%m/%Y')";
-        }
-        if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getCompany()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getCompany()
-                && !"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getContactNo1()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getContactNo1()) {
-            condition += " AND STR_TO_DATE(a.dateOfSubmit,'%d/%m/%Y') BETWEEN STR_TO_DATE('" + expenseMaster.getEmployeeMasterByEmployeeId().getCompany() + "','%d/%m/%Y') AND STR_TO_DATE('" + expenseMaster.getEmployeeMasterByEmployeeId().getContactNo1() + "','%d/%m/%Y') ";
-        }
+        if (null != expenseMaster.getEmployeeMasterByEmployeeId()) {
+
+            if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getId()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getId()) {
+                condition += " AND b.id = " + expenseMaster.getEmployeeMasterByEmployeeId().getId() + "";
+            }
+            if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getChild1()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getChild1()) {
+                condition += " AND c.id = " + expenseMaster.getEmployeeMasterByEmployeeId().getChild1() + "";
+            }
+            if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getChild2()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getChild2()) {
+                condition += " AND d.id = " + expenseMaster.getEmployeeMasterByEmployeeId().getChild2() + "";
+            }
+            if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getCompany()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getCompany()) {
+                condition += " AND STR_TO_DATE(a.dateOfSubmit,'%d/%m/%Y') >= STR_TO_DATE('" + expenseMaster.getEmployeeMasterByEmployeeId().getCompany() + "','%d/%m/%Y')";
+            }
+            if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getContactNo1()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getContactNo1()) {
+                condition += " AND STR_TO_DATE(a.dateOfSubmit,'%d/%m/%Y') <= STR_TO_DATE('" + expenseMaster.getEmployeeMasterByEmployeeId().getContactNo1() + "','%d/%m/%Y')";
+            }
+            if (!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getCompany()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getCompany()
+                    && !"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getContactNo1()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getContactNo1()) {
+                condition += " AND STR_TO_DATE(a.dateOfSubmit,'%d/%m/%Y') BETWEEN STR_TO_DATE('" + expenseMaster.getEmployeeMasterByEmployeeId().getCompany() + "','%d/%m/%Y') AND STR_TO_DATE('" + expenseMaster.getEmployeeMasterByEmployeeId().getContactNo1() + "','%d/%m/%Y') ";
+
+            }
         }
 
         String hqlQuery = "Select b.employeeId, b.employeeName, c.departmentName, d.designationName,a.expenseType,a.status,a.dateOfSubmit,a.id,b.id,"
@@ -215,7 +219,8 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
                 + " left join a.employeeMasterByApprover2Id z"
                 + " LEFT JOIN b.departmentMaster c "
                 + " LEFT JOIN b.designationMaster d "
-                + " where 1=1" + condition;
+                + " where 1=1" + condition
+                + " ORDER BY a.id desc";
         return getHibernateTemplate().find(hqlQuery);
     }
 

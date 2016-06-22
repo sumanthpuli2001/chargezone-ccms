@@ -42,7 +42,13 @@ public class PerformanceImprovementPlanMasterDAOImpl<T> extends GenericsDAOImpl<
                 + " left join b.levelMaster c"
                 + " left join b.departmentMaster d "
                 + " left join b.designationMaster e"
-                + " where b.reportingManagerLevel1=" + managerId
+                + " where (b.reportingManagerLevel1=" + managerId
+                + " or b.reportingManagerLevel2=" + managerId
+                + " or b.reportingManagerLevel3=" + managerId
+                + " or b.reportingManagerLevel4=" + managerId
+                + " or b.reportingManagerLevel5=" + managerId + ")"
+                + " and (b.dateOfLeaving is null or b.dateOfLeaving = '') "
+                + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()"
                 + " order By a.id desc";
 
         return getHibernateTemplate().find(query);
@@ -58,6 +64,8 @@ public class PerformanceImprovementPlanMasterDAOImpl<T> extends GenericsDAOImpl<
                 + " left join b.levelMaster c"
                 + " left join b.departmentMaster d "
                 + " left join b.designationMaster e"
+                + " Where (b.dateOfLeaving is null or b.dateOfLeaving = '') "
+                + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()"
                 + " order by a.id desc group by a.employeeMasterByPipEmployeeId";
 
         return getHibernateTemplate().find(query);
@@ -86,7 +94,13 @@ public class PerformanceImprovementPlanMasterDAOImpl<T> extends GenericsDAOImpl<
                 + " left join b.levelMaster c"
                 + " left join b.departmentMaster d "
                 + " left join b.designationMaster e"
-                + " where b.reportingManagerLevel1=" + managerId;
+                + " where (b.reportingManagerLevel1=" + managerId
+                + " or b.reportingManagerLevel2=" + managerId
+                + " or b.reportingManagerLevel3=" + managerId
+                + " or b.reportingManagerLevel4=" + managerId
+                + " or b.reportingManagerLevel5=" + managerId + ")"
+                + " and (b.dateOfLeaving is null or b.dateOfLeaving = '') "
+                + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()";
 
         return getHibernateTemplate().find(query);
     }

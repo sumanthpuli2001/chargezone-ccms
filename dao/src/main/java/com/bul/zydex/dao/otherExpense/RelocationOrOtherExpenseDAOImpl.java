@@ -25,7 +25,8 @@ public class RelocationOrOtherExpenseDAOImpl<T> extends GenericsDAOImpl<T> imple
         String query = "";
         query += " "
                 + " FROM RelocationOrOtherExpense a "
-                + " WHERE a.expenseMaster.id=" + id;
+                + " WHERE a.expenseMaster.id=" + id
+                + " ORDER BY a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

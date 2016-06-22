@@ -1615,6 +1615,30 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         if (employeeAdvanceSearch.getReportingManager() == true) {
             headerRow1.add("Reporting Manager");
         }
+        if (employeeAdvanceSearch.getCityOfEmployee() == true) {
+            headerRow1.add("City");
+        }
+        if (employeeAdvanceSearch.getChild1() == true) {
+            headerRow1.add("Child1");
+        }
+        if (employeeAdvanceSearch.getChild2() == true) {
+            headerRow1.add("Child2");
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpFather() == true) {
+            headerRow1.add("Father's Date Of Birth");
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpMother() == true) {
+            headerRow1.add("Mother's Date Of Birth");
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpSpous() == true) {
+            headerRow1.add("Spouse's Date Of Birth");
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpChilld1() == true) {
+            headerRow1.add("Child1's Date Of Birth");
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpChild2() == true) {
+            headerRow1.add("Date Of Transfer Of Entity");
+        }
 
         List<List<String>> recordToAdd = new ArrayList();
         List<List<String>> recordToAdd1 = new ArrayList();
@@ -1668,7 +1692,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             List<String> employeeInfoList = new ArrayList();
             List<String> employeeInfoList1 = new ArrayList();
             Object[] next = (Object[]) it.next();
-            employeeInfoList1.add("" + next[38]);
+            employeeInfoList1.add("" + next[47]);
             if (employeeAdvanceSearch.getEmployeeId() == true) {
                 employeeInfoList.add("" + next[0]);
             }
@@ -1784,6 +1808,36 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             if (null == next[37]) {
                 next[37] = "";
             }
+            if (null == next[38]) {
+                next[38] = "";
+            }
+            if (null == next[39]) {
+                next[39] = "";
+            }
+            if (null == next[40]) {
+                next[40] = "";
+            }
+            if (null == next[41]) {
+                next[41] = "";
+            }
+            if (null == next[42]) {
+                next[42] = "";
+            }
+            if (null == next[43]) {
+                next[43] = "";
+            }
+            if (null == next[44]) {
+                next[44] = "";
+            }
+            if (null == next[45]) {
+                next[45] = "";
+            }
+            if (null == next[46]) {
+                next[46] = "";
+            }
+            if (null == next[47]) {
+                next[47] = "";
+            }
             if (employeeAdvanceSearch.getFatherName() == true) {
                 employeeInfoList.add("" + next[2]);
             }
@@ -1888,6 +1942,33 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             }
             if (employeeAdvanceSearch.getReportingManager() == true) {
                 employeeInfoList.add("" + next[36]);
+            }
+            if (employeeAdvanceSearch.getCityOfEmployee() == true) {
+                employeeInfoList.add("" + next[37]);
+            }
+            if (employeeAdvanceSearch.getChild1() == true) {
+                employeeInfoList.add("" + next[38]);
+            }
+            if (employeeAdvanceSearch.getChild2() == true) {
+                employeeInfoList.add("" + next[39]);
+            }
+            if (employeeAdvanceSearch.getDateOfBirthOfEmpFather() == true) {
+                employeeInfoList.add("" + next[40]);
+            }
+            if (employeeAdvanceSearch.getDateOfBirthOfEmpMother() == true) {
+                employeeInfoList.add("" + next[41]);
+            }
+            if (employeeAdvanceSearch.getDateOfBirthOfEmpSpous() == true) {
+                employeeInfoList.add("" + next[42]);
+            }
+            if (employeeAdvanceSearch.getDateOfBirthOfEmpChilld1() == true) {
+                employeeInfoList.add("" + next[43]);
+            }
+            if (employeeAdvanceSearch.getDateOfBirthOfEmpChild2() == true) {
+                employeeInfoList.add("" + next[44]);
+            }
+            if (employeeAdvanceSearch.getDateOfTransferOfEntity() == true) {
+                employeeInfoList.add("" + next[45]);
             }
 
             recordToAdd.add(employeeInfoList);

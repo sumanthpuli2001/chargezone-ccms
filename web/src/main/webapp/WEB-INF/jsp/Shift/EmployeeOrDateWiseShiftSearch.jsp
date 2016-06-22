@@ -135,7 +135,7 @@
 
                                                 <div class="form-group">
                                                     <div class=" col-sm-6">
-                                                        <label>Employee Information:</label> 
+                                                        <label>Employee Information:</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -151,7 +151,7 @@
                                                         <input type="checkbox" name="inactive">
                                                         <label>Inactive</label>
                                                     </div>
-                                                </div>           
+                                                </div>
 
 
                                                 <div class="form-group">
@@ -308,6 +308,42 @@
                                                     <li>
                                                         <form:checkbox  class="checkbox1" value="reportingManager" path="reportingManager" />
                                                         <label>Reporting Manager</label>
+                                                    </li>
+                                                    <li>
+                                                        <form:checkbox  class="checkbox1" value="cityOfEmployee" path="cityOfEmployee" />
+                                                        <label>City </label>
+                                                    </li>
+                                                    <li>
+                                                        <form:checkbox  class="checkbox1" value="child1" path="child1" />
+                                                        <label>Child 1 </label>
+                                                    </li>
+                                                    <li>
+                                                        <form:checkbox  class="checkbox1" value="child2" path="child2" />
+                                                        <label>Child 2 </label>
+                                                    </li>
+                                                    <li>
+                                                        <form:checkbox  class="checkbox1" value="dateOfBirthOfEmpFather" path="dateOfBirthOfEmpFather" />
+                                                        <label>Father's Date Of Birth </label>
+                                                    </li>
+                                                    <li>
+                                                        <form:checkbox  class="checkbox1" value="dateOfBirthOfEmpMother" path="dateOfBirthOfEmpMother" />
+                                                        <label>Mother's Date Of Birth </label>
+                                                    </li>
+                                                    <li>
+                                                        <form:checkbox  class="checkbox1" value="dateOfBirthOfEmpSpous" path="dateOfBirthOfEmpSpous" />
+                                                        <label>Spouse's Date Of Birth</label>
+                                                    </li>
+                                                    <li>
+                                                        <form:checkbox  class="checkbox1" value="dateOfBirthOfEmpChilld1" path="dateOfBirthOfEmpChilld1" />
+                                                        <label>Child1's Date Of Birth</label>
+                                                    </li>
+                                                    <li>
+                                                        <form:checkbox  class="checkbox1" value="dateOfBirthOfEmpChild2" path="dateOfBirthOfEmpChild2" />
+                                                        <label>Child2's Date Of Birth</label>
+                                                    </li>
+                                                    <li>
+                                                        <form:checkbox  class="checkbox1" value="dateOfTransferOfEntity" path="dateOfTransferOfEntity" />
+                                                        <label>Date Of Transfer Of Entity</label>
                                                     </li>
                                                 </ul>
                                             </div>

@@ -25,7 +25,8 @@ public class AttendanceRegularizationMasterDAOImpl<T> extends GenericsDAOImpl<T>
     public List<?> userWiseAttendanceRegularizationList(int id) {
         String query = "";
         query += " FROM AttendanceRegularization a"
-                + " Where a.userMasterId=" + id;
+                + " Where a.userMasterId=" + id
+                + " ORDER BY a.id desc";
 
         return getHibernateTemplate().find(query);
     }
@@ -56,7 +57,8 @@ public class AttendanceRegularizationMasterDAOImpl<T> extends GenericsDAOImpl<T>
                 + " FROM AttendanceRegularization a,"
                 + " EmployeeMaster b"
                 + " Where a.userMasterId=b.userMaster.id"
-                + " and b.reportingManagerLevel1=" + id;
+                + " and b.reportingManagerLevel1=" + id
+                + "Order by a.id Desc";
 
         return getHibernateTemplate().find(query);
     }
@@ -130,7 +132,7 @@ public class AttendanceRegularizationMasterDAOImpl<T> extends GenericsDAOImpl<T>
         String hqlQuery = "SELECT  count(a.status) as total"
                 + "  From AttendanceRegularization a,"
                 + " EmployeeMaster b"
-                 + " where a.userMasterId=b.userMaster.id"
+                + " where a.userMasterId=b.userMaster.id"
                 + " and b.id=" + attendanceRegularization.getUserMasterId()
                 + " and a.status=1"
                 + " and DATE_FORMAT(STR_TO_DATE('" + attendanceRegularization.getEndDateTime() + "','%d/%m/%Y'),'%m') = DATE_FORMAT(STR_TO_DATE(a.startDateTime,'%d/%m/%Y'),'%m')"

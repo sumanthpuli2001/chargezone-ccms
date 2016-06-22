@@ -790,6 +790,52 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
             query += " '' as nonval ,";
         }
 
+        if (employeeAdvanceSearch.getCityOfEmployee()) {
+            query += " a.cityOfEmployee,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getChild1()) {
+            query += " a.child1,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getChild2()) {
+            query += " a.child2,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpFather()) {
+            query += " a.dateOfBirthOfEmpFather,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpMother()) {
+            query += " a.dateOfBirthOfEmpMother,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpSpous()) {
+            query += " a.dateOfBirthOfEmpSpous,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpChilld1()) {
+            query += " a.dateOfBirthOfEmpChilld1,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpChild2()) {
+            query += " a.dateOfBirthOfEmpChild2,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfTransferOfEntity()) {
+            query += " a.dateOfTransferOfEntity,";
+        } else {
+            query += " '' as nonval ,";
+        }
+
         query += " '' as nonval1,a.id From  EmployeeMaster  a "
                 + " LEFT JOIN a.departmentMaster b "
                 + " LEFT JOIN a.designationMaster c "
@@ -1161,6 +1207,52 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
             query += " '' as nonval ,";
         }
 
+        if (employeeAdvanceSearch.getCityOfEmployee()) {
+            query += " a.cityOfEmployee,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getChild1()) {
+            query += " a.child1,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getChild2()) {
+            query += " a.child2,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpFather()) {
+            query += " a.dateOfBirthOfEmpFather,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpMother()) {
+            query += " a.dateOfBirthOfEmpMother,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpSpous()) {
+            query += " a.dateOfBirthOfEmpSpous,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpChilld1()) {
+            query += " a.dateOfBirthOfEmpChilld1,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpChild2()) {
+            query += " a.dateOfBirthOfEmpChild2,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfTransferOfEntity()) {
+            query += " a.dateOfTransferOfEntity,";
+        } else {
+            query += " '' as nonval ,";
+        }
+
         query += " '' as nonval1,a.id From  EmployeeMaster  a "
                 + " LEFT JOIN a.departmentMaster b "
                 + " LEFT JOIN a.designationMaster c "
@@ -1389,6 +1481,52 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         }
         if (employeeAdvanceSearch.getReportingManager()) {
             query += " (Select g.employeeName From  EmployeeMaster g where g.id=a.reportingManagerLevel1) as reportingManagerLevel ,";
+        } else {
+            query += " '' as nonval ,";
+        }
+
+        if (employeeAdvanceSearch.getCityOfEmployee()) {
+            query += " a.cityOfEmployee,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getChild1()) {
+            query += " a.child1,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getChild2()) {
+            query += " a.child2,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpFather()) {
+            query += " a.dateOfBirthOfEmpFather,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpMother()) {
+            query += " a.dateOfBirthOfEmpMother,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpSpous()) {
+            query += " a.dateOfBirthOfEmpSpous,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpChilld1()) {
+            query += " a.dateOfBirthOfEmpChilld1,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpChild2()) {
+            query += " a.dateOfBirthOfEmpChild2,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfTransferOfEntity()) {
+            query += " a.dateOfTransferOfEntity,";
         } else {
             query += " '' as nonval ,";
         }

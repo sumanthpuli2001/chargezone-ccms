@@ -52,7 +52,13 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                     + " LEFT JOIN b.userMaster e "
                     + " WHERE status=1 and "
                     //                + condition
-                    + " b.reportingManagerLevel1='" + employeeMaster.getId() + "'"
+                    + "(b.reportingManagerLevel1='" + employeeMaster.getId() + "'"
+                    + " or b.reportingManagerLevel2='" + employeeMaster.getId() + "'"
+                    + " or b.reportingManagerLevel3='" + employeeMaster.getId() + "'"
+                    + " or b.reportingManagerLevel4='" + employeeMaster.getId() + "'"
+                    + " or b.reportingManagerLevel5='" + employeeMaster.getId() + "')"
+                    + " and (b.dateOfLeaving is null or b.dateOfLeaving = '') "
+                    + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()"
                     + " order by a.behaviorsYear desc";
 //            condition += " b.reportingManagerLevel1='" + employeeMaster.getId() + "'";
 
@@ -341,7 +347,6 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + appraisalFillingData.getManagerYearEndEndDate() + "','%d/%m/%Y') or b.startDate is null)" + condition
                 + " and (c.dateOfLeaving is null or c.dateOfLeaving = '' ) "
                 + " group by c.id ";
-                
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

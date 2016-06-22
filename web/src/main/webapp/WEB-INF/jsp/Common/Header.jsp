@@ -88,8 +88,13 @@
             </script>
             <script>
                 $(document).ready(function () {
-                    $('#table_1').DataTable({
-                        "ordering": false
-                    });
+                    try {
+
+                        $('#table_1').DataTable({
+                            "ordering": false
+                        });
+                    } catch (ex) {
+
+                    }
                 });
             </script>

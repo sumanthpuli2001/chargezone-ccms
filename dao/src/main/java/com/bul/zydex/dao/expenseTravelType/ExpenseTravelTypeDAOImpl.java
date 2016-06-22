@@ -25,7 +25,8 @@ public class ExpenseTravelTypeDAOImpl<T> extends GenericsDAOImpl<T> implements E
         String query = "";
         query += " "
                 + " FROM ExpenseTravelType a "
-                + " WHERE a.expenseMaster.id=" + id;
+                + " WHERE a.expenseMaster.id=" + id
+                + " ORDER BY a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

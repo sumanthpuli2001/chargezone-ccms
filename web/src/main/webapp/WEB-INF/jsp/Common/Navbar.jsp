@@ -265,6 +265,7 @@
 
                     </ul>
                 </li>
+
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-question-circle fa-lg"></i>
@@ -274,8 +275,12 @@
                     <ul class="treeview-menu">
                         <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                         <c:if test="${!sessionScope.userRight.poolCarAdmin}">
-                            <li><a href="poolCarRequest.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Pool Car Request </a></li>
-                            <!--<li><a href="poolCarRequest.htm?act=searchEmpClick"><i class="fa fa-circle-o"></i>Search Pool Car Request </a></li>-->
+                            <c:if test="${sessionScope.checkReportingManager}">
+
+                                <li><a href="poolCarRequest.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Pool Car Request </a></li>
+                                <!--<li><a href="poolCarRequest.htm?act=searchEmpClick"><i class="fa fa-circle-o"></i>Search Pool Car Request </a></li>-->
+
+                            </c:if>
                         </c:if>
                         <%--<c:if test="${fn:length(reportingManagerList) > 0}">--%>
                         <c:if test="${sessionScope.isReportingManagerDataExist}">
@@ -348,6 +353,7 @@
 
                     </ul>
                 </li>
+
                 <%--<c:if test="${fn:length(finalprobationList) > 0 || fn:length(FunctionalheadList) > 0 || sessionScope.userRight.hr}">--%>
                 <%--<c:if test="${sessionScope.isFinalprobationDataExist || sessionScope.isFunctionalheadDataExist || sessionScope.userRight.hr}">--%>
                 <%--<c:if test="${sessionScope.userRight.hr or sessionScope.userRight.probationToConfirmation}">--%>

@@ -55,11 +55,20 @@ public class EmployeeAdvanceSearch implements java.io.Serializable {
     private String departmentId;
     private String inDateTime;
     private String outDateTime;
+    private Boolean cityOfEmployee;
+    private Boolean child1;
+    private Boolean child2;
+    private Boolean dateOfBirthOfEmpFather;
+    private Boolean dateOfBirthOfEmpMother;
+    private Boolean dateOfBirthOfEmpSpous;
+    private Boolean dateOfBirthOfEmpChilld1;
+    private Boolean dateOfBirthOfEmpChild2;
+    private Boolean dateOfTransferOfEntity;
 
     public EmployeeAdvanceSearch() {
     }
 
-    public EmployeeAdvanceSearch(String id, Boolean employeeId, Boolean employeeName, Boolean dateOfJoining, Boolean role, Boolean company, Boolean emailAddress, Boolean contactNo1, Boolean contactNo2, Boolean fatherName, Boolean motherName, Boolean dateOfBirth, Boolean gender, Boolean maritalStatus, Boolean spouseName, Boolean emergencyContactPerson, Boolean emergencyContactNo, Boolean panCard, Boolean passportNo, Boolean passportIssueDate, Boolean passportExpiryDate, Boolean employeeType, Boolean officeEmailId, Boolean experienceYearOnDoj, Boolean permanentAddress, Boolean presentAddress, Boolean adharCard, Boolean bloodGroups, Boolean maritalStatusOthers, Boolean experienceMonthOnDoj, Boolean bankName, Boolean bankAccountNo, Boolean bankIfscCode, Boolean zydexLocation, Boolean workLocation, Boolean level, Boolean department, Boolean designation, Boolean workType, Boolean reportingManager, Boolean highestEducationDetails, String zydexLocationId, String levelID, String departmentId, String inDateTime, String outDateTime) {
+    public EmployeeAdvanceSearch(String id, Boolean employeeId, Boolean employeeName, Boolean dateOfJoining, Boolean role, Boolean company, Boolean emailAddress, Boolean contactNo1, Boolean contactNo2, Boolean fatherName, Boolean motherName, Boolean dateOfBirth, Boolean gender, Boolean maritalStatus, Boolean spouseName, Boolean emergencyContactPerson, Boolean emergencyContactNo, Boolean panCard, Boolean passportNo, Boolean passportIssueDate, Boolean passportExpiryDate, Boolean employeeType, Boolean officeEmailId, Boolean experienceYearOnDoj, Boolean permanentAddress, Boolean presentAddress, Boolean adharCard, Boolean bloodGroups, Boolean maritalStatusOthers, Boolean experienceMonthOnDoj, Boolean bankName, Boolean bankAccountNo, Boolean bankIfscCode, Boolean zydexLocation, Boolean workLocation, Boolean level, Boolean department, Boolean designation, Boolean workType, Boolean reportingManager, Boolean highestEducationDetails, String zydexLocationId, String levelID, String departmentId, String inDateTime, String outDateTime, Boolean cityOfEmployee, Boolean child1, Boolean child2, Boolean dateOfBirthOfEmpFather, Boolean dateOfBirthOfEmpMother, Boolean dateOfBirthOfEmpSpous, Boolean dateOfBirthOfEmpChilld1, Boolean dateOfBirthOfEmpChild2, Boolean dateOfTransferOfEntity) {
         this.id = id;
         this.employeeId = employeeId;
         this.employeeName = employeeName;
@@ -106,6 +115,15 @@ public class EmployeeAdvanceSearch implements java.io.Serializable {
         this.departmentId = departmentId;
         this.inDateTime = inDateTime;
         this.outDateTime = outDateTime;
+        this.cityOfEmployee = cityOfEmployee;
+        this.child1 = child1;
+        this.child2 = child2;
+        this.dateOfBirthOfEmpFather = dateOfBirthOfEmpFather;
+        this.dateOfBirthOfEmpMother = dateOfBirthOfEmpMother;
+        this.dateOfBirthOfEmpSpous = dateOfBirthOfEmpSpous;
+        this.dateOfBirthOfEmpChilld1 = dateOfBirthOfEmpChilld1;
+        this.dateOfBirthOfEmpChild2 = dateOfBirthOfEmpChild2;
+        this.dateOfTransferOfEntity = dateOfTransferOfEntity;
     }
 
     public String getId() {
@@ -474,6 +492,78 @@ public class EmployeeAdvanceSearch implements java.io.Serializable {
 
     public void setOutDateTime(String outDateTime) {
         this.outDateTime = outDateTime;
+    }
+
+    public Boolean getCityOfEmployee() {
+        return cityOfEmployee;
+    }
+
+    public void setCityOfEmployee(Boolean cityOfEmployee) {
+        this.cityOfEmployee = cityOfEmployee;
+    }
+
+    public Boolean getChild1() {
+        return child1;
+    }
+
+    public void setChild1(Boolean child1) {
+        this.child1 = child1;
+    }
+
+    public Boolean getChild2() {
+        return child2;
+    }
+
+    public void setChild2(Boolean child2) {
+        this.child2 = child2;
+    }
+
+    public Boolean getDateOfBirthOfEmpFather() {
+        return dateOfBirthOfEmpFather;
+    }
+
+    public void setDateOfBirthOfEmpFather(Boolean dateOfBirthOfEmpFather) {
+        this.dateOfBirthOfEmpFather = dateOfBirthOfEmpFather;
+    }
+
+    public Boolean getDateOfBirthOfEmpMother() {
+        return dateOfBirthOfEmpMother;
+    }
+
+    public void setDateOfBirthOfEmpMother(Boolean dateOfBirthOfEmpMother) {
+        this.dateOfBirthOfEmpMother = dateOfBirthOfEmpMother;
+    }
+
+    public Boolean getDateOfBirthOfEmpSpous() {
+        return dateOfBirthOfEmpSpous;
+    }
+
+    public void setDateOfBirthOfEmpSpous(Boolean dateOfBirthOfEmpSpous) {
+        this.dateOfBirthOfEmpSpous = dateOfBirthOfEmpSpous;
+    }
+
+    public Boolean getDateOfBirthOfEmpChilld1() {
+        return dateOfBirthOfEmpChilld1;
+    }
+
+    public void setDateOfBirthOfEmpChilld1(Boolean dateOfBirthOfEmpChilld1) {
+        this.dateOfBirthOfEmpChilld1 = dateOfBirthOfEmpChilld1;
+    }
+
+    public Boolean getDateOfBirthOfEmpChild2() {
+        return dateOfBirthOfEmpChild2;
+    }
+
+    public void setDateOfBirthOfEmpChild2(Boolean dateOfBirthOfEmpChild2) {
+        this.dateOfBirthOfEmpChild2 = dateOfBirthOfEmpChild2;
+    }
+
+    public Boolean getDateOfTransferOfEntity() {
+        return dateOfTransferOfEntity;
+    }
+
+    public void setDateOfTransferOfEntity(Boolean dateOfTransferOfEntity) {
+        this.dateOfTransferOfEntity = dateOfTransferOfEntity;
     }
 
 }

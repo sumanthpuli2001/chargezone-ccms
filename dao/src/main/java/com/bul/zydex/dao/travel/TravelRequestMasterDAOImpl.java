@@ -457,7 +457,8 @@ public class TravelRequestMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         String query = "";
         query += " "
                 + " FROM TravelRequestMaster a "
-                + "where a.employeeMasterByEmployeeMasterId=" + travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId();
+                + "where a.employeeMasterByEmployeeMasterId=" + travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId()
+                + " ORDER BY a.id desc";
 
         return getHibernateTemplate().find(query);
     }
@@ -479,7 +480,8 @@ public class TravelRequestMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " LEFT JOIN a.employeeMasterByApprover2Id e"
                 + " where b.travelRequestMaster = " + TabId
                 + " and b.employeeMasterByTravelApproverId = " + loginId
-                + " Order by b.travelApproveHistoryDate desc";
+                + " Order by b.travelApproveHistoryDate desc"
+                + " ORDER BY a.id desc";
         return getHibernateTemplate().find(query);
     }
 
@@ -757,7 +759,8 @@ public class TravelRequestMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " LEFT JOIN a.employeeMasterByEmployeeMasterId b"
                 + " LEFT JOIN b.departmentMaster c "
                 + " LEFT JOIN b.designationMaster d "
-                + " Where a.status=5 and a.cashRequired='Yes'";
+                + " Where a.status=5 and a.cashRequired='Yes'"
+                + " ORDER BY a.id desc";
 
         return getHibernateTemplate().find(query);
     }

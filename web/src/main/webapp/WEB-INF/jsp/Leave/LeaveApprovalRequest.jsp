@@ -136,15 +136,7 @@
                                                     </c:when>
                                                     <c:otherwise>
                                                         <thead>
-                                                            <tr>
-                                                                <th><input type="text" id="text_empId" class="form-control"/></th>
-                                                                <th><input type="text" id="text_empName" class="form-control"/></th>
-                                                                <th><input type="text" id="text_travelType" class="form-control"/></th>
-                                                                <th><input type="text" id="text_travelNo" class="form-control"/></th>
-                                                                <th><input type="text" id="text_sDate" class="form-control"/></th>
-                                                                <th><input type="text" id="text_eDate" class="form-control"/></th>
-                                                                <th><input type="text" id="text_status" class="form-control"/></th>
-                                                            </tr>
+                                                           
                                                             <tr>
                                                                 <th>Employee Name</th>
                                                                 <th>Leave Type</th>
@@ -211,21 +203,7 @@
         <div class="tab-pane" id="tab_3"></div><!-- /.tab-pane -->
         <!-- /.content -->
     </div>
-    <script>
-        $(document).ready(function () {
-//                    $('#table_1').DataTable({
-//                        "ordering": false
-//                    });
-            var otable = $('#table_1').DataTable();
-            $("#table_1 #text_empName").on('keyup change', function () {
-                otable
-                        .column($(this).parent().index() + ':visible')
-                        .search(this.value)
-                        .draw();
 
-            });
-        });
-    </script>
     <script type="text/javascript">
         $('.form_datetime').datetimepicker({
             //language:  'fr',

@@ -18,7 +18,8 @@
             var noOfDay = document.getElementById("noOfDays").value;
             var leaveType1 = document.getElementById("leaveType").value;
             var leaveType = document.getElementById(leaveType1).innerHTML = noOfDay;
-            document.getElementById(leaveType1 + "2").innerHTML = document.getElementById(leaveType1 + "1").innerHTML - document.getElementById(leaveType1).innerHTML;
+//            document.getElementById(leaveType1 + "2").innerHTML = document.getElementById(leaveType1 + "1").innerHTML - document.getElementById(leaveType1).innerHTML;
+            document.getElementById(leaveType1 + "2").innerHTML = document.getElementById(leaveType1 + "1").innerHTML;
         });
 
 

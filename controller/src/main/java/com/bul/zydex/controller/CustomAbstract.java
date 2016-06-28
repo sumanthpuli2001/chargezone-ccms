@@ -374,4 +374,62 @@ public void selectedEmployeeFor360Feedback1(HttpServletRequest request,
     
 }
 
+ public void selectEmployeeForLuna(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        List<?> list = employeeMasterService.readEmployeeForPlant();
+        String tempStr = "[";
+        Object[] arrayOfObject;
+
+        EmployeeMaster employeeMaster;
+        boolean flag = false;
+        for (Iterator<? extends Object> it = list.iterator(); it.hasNext();) {
+            arrayOfObject = (Object[]) it.next();
+
+            if (flag) {
+                tempStr += ", ";
+            }
+            if(arrayOfObject[3].equals("Luna Plant")){
+            flag = true;
+             tempStr += "{id: \"" + arrayOfObject[0]
+                    + "\", name: \"" + arrayOfObject[1]
+                    + "  /" + arrayOfObject[2]
+                    + "  /" + arrayOfObject[3]+ "\"}";   
+            }else{
+                flag = false;  
+            }
+        }
+        tempStr += "]";
+
+        request.setAttribute("lunaList", tempStr);
+    }
+ 
+  public void selectEmployeeForGavasat(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+       List<?> list = employeeMasterService.readEmployeeForPlant();
+        String tempStr = "[";
+        Object[] arrayOfObject;
+
+        EmployeeMaster employeeMaster;
+        boolean flag = false;
+        for (Iterator<? extends Object> it = list.iterator(); it.hasNext();) {
+            arrayOfObject = (Object[]) it.next();
+
+            if (flag) {
+                tempStr += ", ";
+            }
+            if(arrayOfObject[3].equals("Gavasad Plant")){
+            flag = true;
+             tempStr += "{id: \"" + arrayOfObject[0]
+                    + "\", name: \"" + arrayOfObject[1]
+                    + "  /" + arrayOfObject[2]
+                    + "  /" + arrayOfObject[3]+ "\"}";   
+            }else{
+                flag = false;  
+            }
+        }
+        tempStr += "]";
+
+        request.setAttribute("gavasatList", tempStr);
+    }
+
 }

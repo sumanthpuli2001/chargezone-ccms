@@ -127,4 +127,6 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
     public List<?> readEmployeeForLeaveBalanceForInActiveUser(T object);
     
     public List<?> listOfCEO();
+    
+    public List<?> readEmployeeForPlant();
 }

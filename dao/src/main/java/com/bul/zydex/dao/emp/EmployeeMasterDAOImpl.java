@@ -1660,5 +1660,17 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+    
+      @Override
+    public List<?> readEmployeeForPlant() {
+        String query = "";
+        query += " "
+                + " SELECT a.id,a.employeeId,a.employeeName,b.zydexLocation "
+                + " FROM EmployeeMaster a "
+                + " LEFT JOIN a.zydexLocationMaster b ";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
 
 }

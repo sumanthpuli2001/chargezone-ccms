@@ -207,6 +207,18 @@
                                                         <label  style="font-weight: normal">Cash Advance View</label>
 
                                                     </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="lunaPlantAttendanceMgnt"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Luna Plant Attendance Mgt.</label>
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="gavasatPlantAttendanceMgnt"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Gavasad Plant Attendance Mgt.</label>
+
+                                                    </div>
                                                     </div>
                                                         
                                             </div><!-- /.row -->

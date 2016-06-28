@@ -32,11 +32,13 @@ public class UserRightMaster  implements java.io.Serializable {
      private boolean noDue;
      private boolean attendanceReport;
      private boolean cashAdvanceView;
+     private boolean lunaPlantAttendanceMgnt;
+     private boolean gavasatPlantAttendanceMgnt;
 
     public UserRightMaster() {
     }
 
-    public UserRightMaster(UserMaster userMaster, boolean hr, boolean employee, boolean travelAdmin, boolean travelExpenseAdmin, boolean poolCarAdmin, boolean security, boolean cafeteriaAdmin, boolean itAdmin, boolean employeeManagement, boolean leaveManagement, boolean shiftManagement, boolean appraisalPmp, boolean appraisal360, boolean probationToConfirmation, boolean employeeExit, boolean employeeReferral, boolean temporaryShiftAssign, boolean exitInterview, boolean noDue, boolean attendanceReport, boolean cashAdvanceView) {
+    public UserRightMaster(UserMaster userMaster, boolean hr, boolean employee, boolean travelAdmin, boolean travelExpenseAdmin, boolean poolCarAdmin, boolean security, boolean cafeteriaAdmin, boolean itAdmin, boolean employeeManagement, boolean leaveManagement, boolean shiftManagement, boolean appraisalPmp, boolean appraisal360, boolean probationToConfirmation, boolean employeeExit, boolean employeeReferral, boolean temporaryShiftAssign, boolean exitInterview, boolean noDue, boolean attendanceReport, boolean cashAdvanceView, boolean lunaPlantAttendanceMgnt, boolean gavasatPlantAttendanceMgnt) {
         this.userMaster = userMaster;
         this.hr = hr;
         this.employee = employee;
@@ -59,6 +61,8 @@ public class UserRightMaster  implements java.io.Serializable {
         this.noDue = noDue;
         this.attendanceReport = attendanceReport;
         this.cashAdvanceView = cashAdvanceView;
+        this.lunaPlantAttendanceMgnt = lunaPlantAttendanceMgnt;
+        this.gavasatPlantAttendanceMgnt = gavasatPlantAttendanceMgnt;
     }
 
     public Integer getId() {
@@ -245,11 +249,23 @@ public class UserRightMaster  implements java.io.Serializable {
         this.cashAdvanceView = cashAdvanceView;
     }
 
-   
+    public boolean isLunaPlantAttendanceMgnt() {
+        return lunaPlantAttendanceMgnt;
+    }
 
+    public void setLunaPlantAttendanceMgnt(boolean lunaPlantAttendanceMgnt) {
+        this.lunaPlantAttendanceMgnt = lunaPlantAttendanceMgnt;
+    }
 
+    public boolean isGavasatPlantAttendanceMgnt() {
+        return gavasatPlantAttendanceMgnt;
+    }
 
+    public void setGavasatPlantAttendanceMgnt(boolean gavasatPlantAttendanceMgnt) {
+        this.gavasatPlantAttendanceMgnt = gavasatPlantAttendanceMgnt;
+    }
 
+  
 }
 
 

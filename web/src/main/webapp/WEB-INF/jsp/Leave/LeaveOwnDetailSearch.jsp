@@ -199,10 +199,13 @@
                                                                                     </a>
                                                                                 </li>
                                                                                 <li>
-                                                                                    <a href="#"
+                                                                                    <c:if test="${list[5] ne 1}">
+                                                                                        <a href="#"
                                                                                        onclick="viewWithDrawClick(${list[4]});">
                                                                                         &nbsp;&nbsp;Withdraw
-                                                                                    </a>
+                                                                                    </a> 
+                                                                                    </c:if>
+                                                                                   
                                                                                 </li>
                                                                             </c:if>
                                                                             <c:if test="${list[5] eq 2}">

@@ -74,5 +74,11 @@
         <property name="cashAdvanceView" type="boolean">
             <column name="cash_advance_view" not-null="true" />
         </property>
+        <property name="lunaPlantAttendanceMgnt" type="boolean">
+            <column name="luna_plant_Attendance_mgnt" not-null="true" />
+        </property>
+        <property name="gavasatPlantAttendanceMgnt" type="boolean">
+            <column name="gavasat_plant_Attendance_mgnt" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

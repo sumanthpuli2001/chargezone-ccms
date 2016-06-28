@@ -673,6 +673,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setEmployeeName(Boolean.FALSE);
         employeeAdvanceSearch.setFatherName(Boolean.FALSE);
         employeeAdvanceSearch.setMotherName(Boolean.FALSE);
+
         employeeAdvanceSearch.setGender(Boolean.FALSE);
         employeeAdvanceSearch.setMaritalStatus(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfBirth(Boolean.FALSE);
@@ -706,6 +707,16 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setBankAccountNo(Boolean.FALSE);
         employeeAdvanceSearch.setBankIfscCode(Boolean.FALSE);
         employeeAdvanceSearch.setReportingManager(Boolean.FALSE);
+        employeeAdvanceSearch.setCityOfEmployee(Boolean.FALSE);
+        employeeAdvanceSearch.setChild1(Boolean.FALSE);
+        employeeAdvanceSearch.setChild2(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpFather(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpMother(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpSpous(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpChilld1(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpChild2(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfTransferOfEntity(Boolean.FALSE);
+
         if ((!"".equals(startDate) && null != startDate) && (!"".equals(endDate) && null != endDate)) {
             if (!"".equals(startDate) && null != startDate) {
                 Date sDate = sdf.parse(startDate);
@@ -735,7 +746,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
         for (Object o1 : empDetail) {
             Object[] o = (Object[]) o1;
-            int id1 = (Integer) o[38];
+            int id1 = (Integer) o[47];
             employeeShiftData.setId(id1);
             List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
             map.put(id, list);
@@ -977,13 +988,12 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     long diff2 = 0;
                     if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
                         diff1 = userTimeOut.getTime() - userTimeIn.getTime();
-                        
 
                     } else {
                         diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                     }
                     totalDayTime = diff1 / (60 * 1000);
-                    
+
                     diff2 = userTimeOut.getTime() - userTimeIn.getTime();
                     totalDayTime1 = diff2 / (60 * 1000);
 
@@ -1225,14 +1235,14 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     }
 
                     totalDayTime = diff1 / (60 * 1000);
-                    
-                     if (userTimeOut.before(userTimeIn)) {
-                            diff2 = userTimeOut1.getTime() - userTimeIn.getTime();
-                        } else {
-                            diff2 = userTimeOut.getTime() - userTimeIn.getTime();
-                        }
-                     
-                      totalDayTime1 = diff2 / (60 * 1000);
+
+                    if (userTimeOut.before(userTimeIn)) {
+                        diff2 = userTimeOut1.getTime() - userTimeIn.getTime();
+                    } else {
+                        diff2 = userTimeOut.getTime() - userTimeIn.getTime();
+                    }
+
+                    totalDayTime1 = diff2 / (60 * 1000);
 
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
@@ -1367,6 +1377,15 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setBankAccountNo(Boolean.FALSE);
         employeeAdvanceSearch.setBankIfscCode(Boolean.FALSE);
         employeeAdvanceSearch.setReportingManager(Boolean.FALSE);
+        employeeAdvanceSearch.setCityOfEmployee(Boolean.FALSE);
+        employeeAdvanceSearch.setChild1(Boolean.FALSE);
+        employeeAdvanceSearch.setChild2(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpFather(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpMother(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpSpous(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpChilld1(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpChild2(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfTransferOfEntity(Boolean.FALSE);
 
         if (!startDate.equals("")) {
             Date sDate = sdf.parse(startDate);

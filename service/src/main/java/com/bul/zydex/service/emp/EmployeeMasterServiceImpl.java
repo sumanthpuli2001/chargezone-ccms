@@ -309,5 +309,9 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> listOfCEO(){
         return employeeMasterDAO.listOfCEO();
     }
+    @Override
+public List<?> readEmployeeForPlant(){
+        return employeeMasterDAO.readEmployeeForPlant();
+    }
 
 }

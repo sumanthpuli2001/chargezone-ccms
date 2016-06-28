@@ -129,5 +129,7 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readEmployeeForLeaveBalanceForInActiveUser(T object);
     
      public List<?> listOfCEO();
+     
+     public List<?> readEmployeeForPlant();
 
 }

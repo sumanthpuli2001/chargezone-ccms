@@ -242,9 +242,9 @@
                         <c:if test="${sessionScope.checkReportingManager}">
                             <li><a href="appraisalPerformance.htm?act=searchOwnappraisalPerformanceSubmit"><i class="fa fa-circle-o"></i>PMP Form</a></li>
                             <li><a href="performanceImprovementPlanMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>PIP Form</a></li>
-                            <li><a href="appraisalPerformance.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Subordinates PMP</a></li>
-                            <li><a href="performanceImprovementPlanMaster.htm?act=viewPipListByManager"><i class="fa fa-circle-o"></i>Subordinates PIP</a></li>
                             </c:if>
+                        <li><a href="appraisalPerformance.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Subordinates PMP</a></li>
+                        <li><a href="performanceImprovementPlanMaster.htm?act=viewPipListByManager"><i class="fa fa-circle-o"></i>Subordinates PIP</a></li>
                             <c:if test="${sessionScope.userRight.appraisalPmp}">
                             <li><a href="appraisalPerformance.htm?act=searchAppraisalPerformanceReoprtStageWise"><i class="fa fa-circle-o"></i>PMP-Report</a></li>
                             <li><a href="performanceImprovementPlanMaster.htm?act=viewPipListByAdmin"><i class="fa fa-circle-o"></i>View All PIP </a></li>
@@ -329,7 +329,7 @@
                                 <li><a href="cafeteriaRequest.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Cafeteria Request</a></li>
                                 <!--<li><a href="cafeteriaRequest.htm?act=searchEmpClick"><i class="fa fa-circle-o"></i>Search Cafeteria Request</a></li>-->
                             </c:if>
-                        </c:if> 
+                        </c:if>
                         <%--<c:if test="${fn:length(reportingManagerList) > 0}">--%>
                         <%--<c:if test="${sessionScope.isReportingManagerDataExist}">--%>
                         <!--<li><a href="cafeteriaRequest.htm?act=searchApproverSubmit"><i class="fa fa-circle-o"></i>Cafeteria Request Approve</a></li>-->
@@ -388,6 +388,7 @@
                             <c:if test="${sessionScope.userRight.probationToConfirmation}">
                             <li><a href="probationPeriod.htm?act=showResult"><i class="fa fa-circle-o"></i>Probation Period</a></li>
                             <li><a href="probationToConfirmation.htm?act=hrResultClick"><i class="fa fa-circle-o"></i>HR Approve Confirmation</a></li>
+                            <li><a href="probationToConfirmation.htm?act=probationconfirmedEmployee"><i class="fa fa-circle-o"></i>Probation Confirmed</a></li>
                             </c:if>
                             <c:if test="${sessionScope.isProbationEmployee}">
                             <li><a href="probationToConfirmation.htm?act=empClick"><i class="fa fa-circle-o"></i>Own Confirmation Status</a></li>

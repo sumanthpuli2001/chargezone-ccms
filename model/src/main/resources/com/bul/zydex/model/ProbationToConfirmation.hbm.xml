@@ -21,7 +21,7 @@
             <column name="assessment_to_date" length="45" />
         </property>
         <property name="jobHandled" type="string">
-            <column name="job_handled" length="16777215" />
+            <column name="job_handled" />
         </property>
         <property name="performanceRating" type="string">
             <column name="performance_rating" length="16777215" />
@@ -33,7 +33,7 @@
             <column name="recommendation_extend_period" />
         </property>
         <property name="recommendationRemark" type="string">
-            <column name="recommendation_remark" length="16777215" />
+            <column name="recommendation_remark" />
         </property>
         <property name="approvalSelect" type="string">
             <column name="approval_select" />
@@ -42,10 +42,10 @@
             <column name="approval_extend_period" />
         </property>
         <property name="approvalRemark" type="string">
-            <column name="approval_remark" length="16777215" />
+            <column name="approval_remark" />
         </property>
         <property name="improvementComment" type="string">
-            <column name="improvement_comment" length="16777215" />
+            <column name="improvement_comment" />
         </property>
         <property name="recomendationByHr" type="string">
             <column name="recomendation_by_hr" />
@@ -53,7 +53,7 @@
         <property name="status" type="java.lang.Integer">
             <column name="status">
                 <comment>1= reporting manager submited 2 = functional head approved and employeetype in employeemaster changed to confirmation 3= functional head rejected
-                (selected no) 4= functional head extended the request 5= hr submited 6= hr Submited the extended request 8=</comment>
+                    (selected no) 4= functional head extended the request 5= hr submited 6= hr Submited the extended request 8=</comment>
             </column>
         </property>
         <property name="reportingManagerId" type="string">
@@ -78,7 +78,7 @@
             <column name="hr_extend_period" length="16777215" />
         </property>
         <property name="hrApprovalRemark" type="string">
-            <column name="hr_approval_remark" length="16777215" />
+            <column name="hr_approval_remark"  />
         </property>
     </class>
 </hibernate-mapping>

@@ -1007,6 +1007,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         String zydexLocationId = request.getParameter("zydexLocationId");
         String levelId = request.getParameter("levelId");
         String departmentId = request.getParameter("departmentId");
+
+        String dojStartDate = request.getParameter("dojStartDate");
+        String dojEndDate = request.getParameter("dojEndDate");
+
         String startDate = request.getParameter("inDateTime");
         String endDate = request.getParameter("outDateTime");
         bind(request, employeeAdvanceSearch);

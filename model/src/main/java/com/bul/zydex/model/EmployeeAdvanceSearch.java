@@ -64,11 +64,13 @@ public class EmployeeAdvanceSearch implements java.io.Serializable {
     private Boolean dateOfBirthOfEmpChilld1;
     private Boolean dateOfBirthOfEmpChild2;
     private Boolean dateOfTransferOfEntity;
+    private String dojStartDate;
+    private String dojEndDate;
 
     public EmployeeAdvanceSearch() {
     }
 
-    public EmployeeAdvanceSearch(String id, Boolean employeeId, Boolean employeeName, Boolean dateOfJoining, Boolean role, Boolean company, Boolean emailAddress, Boolean contactNo1, Boolean contactNo2, Boolean fatherName, Boolean motherName, Boolean dateOfBirth, Boolean gender, Boolean maritalStatus, Boolean spouseName, Boolean emergencyContactPerson, Boolean emergencyContactNo, Boolean panCard, Boolean passportNo, Boolean passportIssueDate, Boolean passportExpiryDate, Boolean employeeType, Boolean officeEmailId, Boolean experienceYearOnDoj, Boolean permanentAddress, Boolean presentAddress, Boolean adharCard, Boolean bloodGroups, Boolean maritalStatusOthers, Boolean experienceMonthOnDoj, Boolean bankName, Boolean bankAccountNo, Boolean bankIfscCode, Boolean zydexLocation, Boolean workLocation, Boolean level, Boolean department, Boolean designation, Boolean workType, Boolean reportingManager, Boolean highestEducationDetails, String zydexLocationId, String levelID, String departmentId, String inDateTime, String outDateTime, Boolean cityOfEmployee, Boolean child1, Boolean child2, Boolean dateOfBirthOfEmpFather, Boolean dateOfBirthOfEmpMother, Boolean dateOfBirthOfEmpSpous, Boolean dateOfBirthOfEmpChilld1, Boolean dateOfBirthOfEmpChild2, Boolean dateOfTransferOfEntity) {
+    public EmployeeAdvanceSearch(String id, Boolean employeeId, Boolean employeeName, Boolean dateOfJoining, Boolean role, Boolean company, Boolean emailAddress, Boolean contactNo1, Boolean contactNo2, Boolean fatherName, Boolean motherName, Boolean dateOfBirth, Boolean gender, Boolean maritalStatus, Boolean spouseName, Boolean emergencyContactPerson, Boolean emergencyContactNo, Boolean panCard, Boolean passportNo, Boolean passportIssueDate, Boolean passportExpiryDate, Boolean employeeType, Boolean officeEmailId, Boolean experienceYearOnDoj, Boolean permanentAddress, Boolean presentAddress, Boolean adharCard, Boolean bloodGroups, Boolean maritalStatusOthers, Boolean experienceMonthOnDoj, Boolean bankName, Boolean bankAccountNo, Boolean bankIfscCode, Boolean zydexLocation, Boolean workLocation, Boolean level, Boolean department, Boolean designation, Boolean workType, Boolean reportingManager, Boolean highestEducationDetails, String zydexLocationId, String levelID, String departmentId, String inDateTime, String outDateTime, Boolean cityOfEmployee, Boolean child1, Boolean child2, Boolean dateOfBirthOfEmpFather, Boolean dateOfBirthOfEmpMother, Boolean dateOfBirthOfEmpSpous, Boolean dateOfBirthOfEmpChilld1, Boolean dateOfBirthOfEmpChild2, Boolean dateOfTransferOfEntity, String dojStartDate, String dojEndDate) {
         this.id = id;
         this.employeeId = employeeId;
         this.employeeName = employeeName;
@@ -124,6 +126,8 @@ public class EmployeeAdvanceSearch implements java.io.Serializable {
         this.dateOfBirthOfEmpChilld1 = dateOfBirthOfEmpChilld1;
         this.dateOfBirthOfEmpChild2 = dateOfBirthOfEmpChild2;
         this.dateOfTransferOfEntity = dateOfTransferOfEntity;
+        this.dojStartDate = dojStartDate;
+        this.dojEndDate = dojEndDate;
     }
 
     public String getId() {
@@ -564,6 +568,22 @@ public class EmployeeAdvanceSearch implements java.io.Serializable {
 
     public void setDateOfTransferOfEntity(Boolean dateOfTransferOfEntity) {
         this.dateOfTransferOfEntity = dateOfTransferOfEntity;
+    }
+
+    public String getDojStartDate() {
+        return dojStartDate;
+    }
+
+    public void setDojStartDate(String dojStartDate) {
+        this.dojStartDate = dojStartDate;
+    }
+
+    public String getDojEndDate() {
+        return dojEndDate;
+    }
+
+    public void setDojEndDate(String dojEndDate) {
+        this.dojEndDate = dojEndDate;
     }
 
 }

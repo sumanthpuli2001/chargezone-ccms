@@ -103,7 +103,6 @@
     </head>
     <script>
         function appraisalSelectedPrint() {
-            alert("aaa");
             var id = document.getElementById("id").value;
             var empId = document.getElementById("empId").value;
             var path = 'probationToConfirmation.htm?act=printClick&id= ' + id + '&empId= ' + empId;

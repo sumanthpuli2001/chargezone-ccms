@@ -26,6 +26,7 @@ import com.bul.zydex.model.UserRightMaster;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -3744,18 +3745,18 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     break;
                 }
             }
-                for (Object o1 : list) {
-                    AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o1;
-                    if (appraisalPerformanceKra1.getManagerMidyearReviewEvaluation() != null && !appraisalPerformanceKra1.getManagerMidyearReviewEvaluation().equals("") && 0 != appraisalPerformanceMaster.getMidYearManagerStatus()) {
-                        managerMidSelfApproval = "Approved";
-                        break;
-                    } else if (appraisalPerformanceMaster.getReworkStatus() == 1 && 0 != appraisalPerformanceMaster.getMidYearManagerStatus()) {
-                        managerMidSelfApproval = "Rework";
-                        break;
-                    } else {
-                        managerMidSelfApproval = "Pendding";
-                    }
+            for (Object o1 : list) {
+                AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o1;
+                if (appraisalPerformanceKra1.getManagerMidyearReviewEvaluation() != null && !appraisalPerformanceKra1.getManagerMidyearReviewEvaluation().equals("") && 0 != appraisalPerformanceMaster.getMidYearManagerStatus()) {
+                    managerMidSelfApproval = "Approved";
+                    break;
+                } else if (appraisalPerformanceMaster.getReworkStatus() == 1 && 0 != appraisalPerformanceMaster.getMidYearManagerStatus()) {
+                    managerMidSelfApproval = "Rework";
+                    break;
+                } else {
+                    managerMidSelfApproval = "Pendding";
                 }
+            }
             for (Object o1 : list) {
                 AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o1;
                 if (appraisalPerformanceKra1.getEmpEndyearSelfassessmentGoal() != null && !appraisalPerformanceKra1.getEmpEndyearSelfassessmentGoal().equals("") && 0 != appraisalPerformanceMaster.getEndYearEmployeeStatus()) {
@@ -3764,19 +3765,19 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 }
             }
 
-                for (Object o1 : list) {
-                    AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o1;
-                    if (appraisalPerformanceKra1.getManagerEndyearReviewEvaluation() != null && !appraisalPerformanceKra1.getManagerEndyearReviewEvaluation().equals("") && 0 != appraisalPerformanceMaster.getEndYearManagerStatus()) {
-                        managerEndSelfApproval = "Approved";
-                        break;
-                    } else if (appraisalPerformanceMaster.getReworkStatus() == 1 && 0 != appraisalPerformanceMaster.getEndYearManagerStatus()) {
-                        managerEndSelfApproval = "Rework";
-                        break;
+            for (Object o1 : list) {
+                AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o1;
+                if (appraisalPerformanceKra1.getManagerEndyearReviewEvaluation() != null && !appraisalPerformanceKra1.getManagerEndyearReviewEvaluation().equals("") && 0 != appraisalPerformanceMaster.getEndYearManagerStatus()) {
+                    managerEndSelfApproval = "Approved";
+                    break;
+                } else if (appraisalPerformanceMaster.getReworkStatus() == 1 && 0 != appraisalPerformanceMaster.getEndYearManagerStatus()) {
+                    managerEndSelfApproval = "Rework";
+                    break;
 
-                    } else {
-                        managerEndSelfApproval = "Pendding";
-                    }
+                } else {
+                    managerEndSelfApproval = "Pendding";
                 }
+            }
 
             if (!list.isEmpty()) {
 
@@ -4575,16 +4576,22 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
                 mv.setViewName("Appraisal/CompetencyReport");
             } else if (searchvalue.equals("idp")) {
+
                 List<?> empIdpDetail = appraisalPerformanceService.readIDPSearchByEmployee(appraisalPerformanceMaster);
                 mv.getModelMap().put("list", empIdpDetail);
-
+                List<?> idpDetail = new ArrayList<Object>();
+//                List<Object> idpDetail1 = new ArrayList<Object>();
                 if (!empIdpDetail.isEmpty()) {
-                    Object[] ss = (Object[]) empIdpDetail.get(0);
-                    int idpID = (Integer) ss[0];
-                    appraisalPerformanceMaster.setId(idpID);
-                    List<?> idpDetail = appraisalPerformanceService.readIDPSearchByEmployeeWise(appraisalPerformanceMaster);
-                    mv.getModelMap().put("list1", idpDetail);
+                    for (int i = 0; i < empIdpDetail.size(); i++) {
+                        Object[] ss = (Object[]) empIdpDetail.get(i);
+                        int idpID = (Integer) ss[0];
+                        appraisalPerformanceMaster.setId(idpID);
+
+                        idpDetail = appraisalPerformanceService.readIDPSearchByEmployeeWise(appraisalPerformanceMaster);
+//                        idpDetail1.add(idpDetail);
+                    }
                 }
+                mv.getModelMap().put("list1", idpDetail);
                 response.setContentType("application/vnd.ms-excel");
                 response.setHeader("Content-Disposition", "attachment; filename=EmployeeIDPReport.xls");
                 mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);

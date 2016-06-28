@@ -599,6 +599,15 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 condition += " and 1 = 1";
             }
         }
+        if (null != employeeAdvanceSearch.getDojStartDate() && !employeeAdvanceSearch.getDojStartDate().equals("")
+                && null != employeeAdvanceSearch.getDojEndDate() && !employeeAdvanceSearch.getDojEndDate().equals("")) {
+            condition += " and STR_TO_DATE(a.dateOfJoining,'%d/%m/%Y') BETWEEN "
+                    + "STR_TO_DATE('" + employeeAdvanceSearch.getDojStartDate() + "','%d/%m/%Y') "
+                    + "AND STR_TO_DATE('" + employeeAdvanceSearch.getDojEndDate() + "','%d/%m/%Y')";
+        } else {
+            condition += " and 1 = 1";
+        }
+
         ///// Create Employee Advance search Query
         query += " Select ";
         if (employeeAdvanceSearch.getEmployeeId()) {
@@ -1016,6 +1025,15 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 condition += " and 1 = 1";
             }
         }
+
+        if (null != employeeAdvanceSearch.getDojStartDate() && !employeeAdvanceSearch.getDojStartDate().equals("")
+                && null != employeeAdvanceSearch.getDojEndDate() && !employeeAdvanceSearch.getDojEndDate().equals("")) {
+            condition += " and STR_TO_DATE(a.dateOfJoining,'%d/%m/%Y') BETWEEN "
+                    + "STR_TO_DATE('" + employeeAdvanceSearch.getDojStartDate() + "','%d/%m/%Y') "
+                    + "AND STR_TO_DATE('" + employeeAdvanceSearch.getDojEndDate() + "','%d/%m/%Y')";
+        } else {
+            condition += " and 1 = 1";
+        }
         ///// Create Employee Advance search Query
         query += " Select ";
         if (employeeAdvanceSearch.getEmployeeId()) {
@@ -1293,6 +1311,14 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
             } else {
                 condition += " and 1 = 1";
             }
+        }
+        if (null != employeeAdvanceSearch.getDojStartDate() && !employeeAdvanceSearch.getDojStartDate().equals("")
+                && null != employeeAdvanceSearch.getDojEndDate() && !employeeAdvanceSearch.getDojEndDate().equals("")) {
+            condition += " and STR_TO_DATE(a.dateOfJoining,'%d/%m/%Y') BETWEEN "
+                    + "STR_TO_DATE('" + employeeAdvanceSearch.getDojStartDate() + "','%d/%m/%Y') "
+                    + "AND STR_TO_DATE('" + employeeAdvanceSearch.getDojEndDate() + "','%d/%m/%Y')";
+        } else {
+            condition += " and 1 = 1";
         }
         ///// Create Employee Advance search Query
         query += " Select ";

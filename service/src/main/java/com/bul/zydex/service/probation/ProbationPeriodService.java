@@ -17,7 +17,7 @@ public interface ProbationPeriodService<T> extends GenericsService<T> {
     public List<?> readprobationPeriod();
 
     public boolean isExist(T object);
-    
+
     public List<?> readbyDesignation(int id);
 
 }

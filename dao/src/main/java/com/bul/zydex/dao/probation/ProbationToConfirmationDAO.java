@@ -1,5 +1,5 @@
 /*
- * 
+ *
  * Author Vinita
  */
 package com.bul.zydex.dao.probation;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface ProbationToConfirmationDAO<T> extends GenericsDAO<T> {
 
-//    public List<?> readExistingEmployee(T object); 
+//    public List<?> readExistingEmployee(T object);
     public List<?> readForFunctionalHead(T object);
 
     public List<?> readForHr(T object);
@@ -29,5 +29,7 @@ public interface ProbationToConfirmationDAO<T> extends GenericsDAO<T> {
     public List<?> readloginEmployeeData(int id);
 
     public List<?> readConfimationDateByTodayDateWise(T object);
+
+    public List<?> readConfirmedEmployee();
 
 }

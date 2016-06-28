@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -117,7 +118,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
 //                    if (!list.isEmpty()) {
 //                        probationPeriod = (int) list.get(0);
 //                    }
-//                    int pp = probationPeriod - 1; 
+//                    int pp = probationPeriod - 1;
 //                    String today = sdf.format(new Date());
 //                    Date tDate = sdf.parse(today);
 //                    Date dojdate = sdf.parse(dateOfJoining);
@@ -214,7 +215,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
 //                    if (!list1.isEmpty()) {
 //                        probationPeriod = (int) list1.get(0);
 //                    }
-//            
+//
 //            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 //            Date dojdate = sdf.parse(dateOfJoining);
 //            Calendar c = Calendar.getInstance();
@@ -1360,7 +1361,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                             EmailTemplate emailTemplate = new EmailTemplate();
                             String rmId = employeeMaster.getReportingManagerLevel1();
                             EmployeeMaster employeeMasterHr = employeeMasterService.readById(Integer.parseInt(rmId));
-                            // id 130 is status for Probation to confirmation 
+                            // id 130 is status for Probation to confirmation
                             emailTemplate = emailTemplateService.readById(130);
                             String To = employeeMasterHr.getOfficeEmailId();
                             String from = "";
@@ -1385,7 +1386,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     ptc.setEmployeeMasterByEmployeeMasterId(employeeMaster);
                     List<?> listrepeat = probationToConfirmationService.readForRepeatedId(ptc);
                     if (!listrepeat.isEmpty()) {
-                        // check assesment to date if sattus 4 i.e extended request 
+                        // check assesment to date if sattus 4 i.e extended request
                         for (Object listrepeat1 : listrepeat) {
                             ProbationToConfirmation ptc1 = new ProbationToConfirmation();
                             ptc1 = (ProbationToConfirmation) listrepeat1;
@@ -1406,7 +1407,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                                         EmailTemplate emailTemplate = new EmailTemplate();
                                         String rmId = employeeMaster.getReportingManagerLevel1();
                                         EmployeeMaster employeeMasterHr = employeeMasterService.readById(Integer.parseInt(rmId));
-                                        // id 133 is status for Probation to confirmation 
+                                        // id 133 is status for Probation to confirmation
                                         emailTemplate = emailTemplateService.readById(133);
                                         String To = employeeMasterHr.getOfficeEmailId();
                                         String from = "";
@@ -1454,4 +1455,51 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         return mv;
     }
 
+    public ModelAndView probationconfirmedEmployee(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        List probatonConfirmedList = probationToConfirmationService.readConfirmedEmployee();
+
+        request.setAttribute("probatonConfirmedList", probatonConfirmedList);
+        session.setAttribute("probatonConfirmedSessionList", probatonConfirmedList);
+        mv.setViewName("Probation/ProbatonConfirmedEmployeeList");
+        return mv;
+    }
+
+    public ModelAndView viewProbationconfirmedEmployee(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        ProbationToConfirmation ptc = new ProbationToConfirmation();
+        String probationId = request.getParameter("id");
+        String empId = request.getParameter("empId");
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        employeeMaster = employeeMasterService.readById(Integer.parseInt(empId));
+        employeeMaster.setDepartmentMaster(departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId()));
+        employeeMaster.setDesignationMaster(designationMasterService.readById(employeeMaster.getDesignationMaster().getId()));
+        employeeMaster.setLevelMaster(levelMasterService.readById(employeeMaster.getLevelMaster().getId()));
+        employeeMaster.setLocationMaster(locationMasterService.readById(employeeMaster.getLocationMaster().getId()));
+        employeeMaster.getReportingManagerLevel1();
+        List<?> list = employeeMasterService.readManagerLevel1(employeeMaster);
+        if (!list.isEmpty()) {
+            request.setAttribute("reportingLevel1", list.get(0));
+        }
+        ptc = probationToConfirmationService.readById(Integer.parseInt(probationId));
+        mv.getModelMap().put("ptc", ptc);
+        request.setAttribute("id", probationId);
+        request.setAttribute("empId", empId);
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.setViewName("Probation/ProbationConfirmedView");
+        return mv;
+    }
+
+    public ModelAndView exportToExcelProbationconfirmedEmployee(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        List<?> probatonConfirmedSessionList = (List<?>) request.getSession().getAttribute("probatonConfirmedSessionList");
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-Disposition", "attachment; filename=ExpenseRequestData.xls");
+        request.setAttribute("probatonConfirmedSessionList", probatonConfirmedSessionList);
+        mv.setViewName("Probation/ProbationConfirmedExcel");
+        return mv;
+    }
 }

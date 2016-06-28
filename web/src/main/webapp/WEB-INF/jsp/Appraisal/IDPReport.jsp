@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : PMP Report
     Created on : Feb 4, 2016, 3:35:29 PM
     Author     : Dhaval parmar
@@ -27,14 +27,14 @@
 
     <table id="table_1" class="table table-bordered table-striped" style="" cellpadding="3" align="Center"  >
         <c:choose>
-            <c:when test="${empty list}"> 
+            <c:when test="${empty list}">
                 <tr>
                     <td align="center">
                         <c:out value="There is no record found."></c:out>
                         </td>
                     </tr>
             </c:when>
-            <c:otherwise> 
+            <c:otherwise>
                 <thead>
                     <tr>
                         <th>Employee ID</th>
@@ -43,15 +43,25 @@
                         <th>Designation</th>
                         <th>Year</th>
                         <th>level</th>
-                            <c:forEach var="list1" items="${list1}" varStatus="status">
-                            <th><table><tr><th colspan="8">IDP${status.count}</th></tr><tr><th>IDP Name & Details</th>
-                            <th>IDP Type</th>
-                            <th>How to achieve this IDP</th>
-                            <th>Other</th>
-                            <th>Employee Mid-Year Remark</th>
-                            <th>Employee End-Year Remark</th>
-                            <th>Manager Mid-Year Remark</th>
-                            <th>Manager End-Year Remark</th></tr></table></th>
+                            <%--<c:forEach var="list1" items="${list1}" varStatus="status">--%>
+                            <%--<c:forEach var="list12" items="${list1}">--%>
+                            <%--<c:forEach var="listItem" items="${list12}">--%>
+                            <%--<c:if test="${list[0] eq listItem[0]}">--%>
+                            <c:forEach var="list" items="${list}">
+                                <c:forEach var="list12" items="${list1}">
+                                    <c:forEach var="listItem" items="${list12}">
+                                        <c:if test="${list[0] eq listItem[0]}">
+                                        <th><table><tr><th colspan="8">IDP${status.count}</th></tr><tr><th>IDP Name & Details</th>
+                                        <th>IDP Type</th>
+                                        <th>How to achieve this IDP</th>
+                                        <th>Other</th>
+                                        <th>Employee Mid-Year Remark</th>
+                                        <th>Employee End-Year Remark</th>
+                                        <th>Manager Mid-Year Remark</th>
+                                        <th>Manager End-Year Remark</th></tr></table></th>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
                             </c:forEach>
             <!--            <th><table><tr><th colspan="8">IDP</th></tr><tr><th>IDP Name & Details</th>
                                 <th>IDP Type</th>
@@ -69,24 +79,28 @@
 <tbody>
     <c:forEach var="list" items="${list}">
         <tr>
-            <td>${list[2]}</td> 
+            <td>${list[2]}</td>
             <td>${list[3]}</td>
             <td>${list[4]}</td>
             <td>${list[5]}</td>
             <td>${list[6]}-${list[6]+1}</td>
             <td>${list[7]}</td>
-            <c:forEach var="list1" items="${list1}">
+            <c:forEach var="list12" items="${list1}">
+                <c:forEach var="listItem" items="${list12}">
+                    <c:if test="${list[0] eq listItem[0]}">
 
 
-                <td><table><td>${list1[1]}</td>
-                        <td>${list1[2]}</td>
-                        <td>${list1[3]}</td>
-                        <td>${list1[4]}</td>
-                        <td>${list1[5]}</td>
-                        <td>${list1[6]}</td>
-                        <td>${list1[7]}</td>
-                        <td>${list1[8]}</td></table></td>
-                    </c:forEach>
+                        <td><table><tr><td>${listItem[1]}</td></tr>
+                                <tr> <td>${listItem[2]}</td>
+                                    <td>${listItem[3]}</td>
+                                    <td>${listItem[4]}</td>
+                                    <td>${listItem[5]}</td>
+                                    <td>${listItem[6]}</td>
+                                    <td>${listItem[7]}</td>
+                                    <td>${listItem[8]}</td></tr></table></td>
+                                </c:if>
+                            </c:forEach>
+                        </c:forEach>
         </tr>
     </c:forEach>
     </html>

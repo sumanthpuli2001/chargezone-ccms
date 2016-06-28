@@ -598,4 +598,21 @@ public class PerformanceImprovementPlanMasterController extends PerformanceImpro
         mv.setViewName("forward:poolCarRequest.htm?act=userDashboardPoolCarPendingRequest");
         return mv;
     }
+
+    public ModelAndView deleteSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String pipId[] = request.getParameterValues("checkId");
+        for (String z : pipId) {
+            try {
+                performanceImprovementPlanMasterService.delete(Integer.parseInt(z));
+                request.setAttribute("successMessage",
+                        "Info : One or more records are deleted successfully.");
+            } catch (Exception e) {
+
+            }
+        }
+        mv.setViewName("forward:performanceImprovementPlanMaster.htm?act=viewPipListByAdmin");
+//        mv = viewPipListByAdmin(request, response);
+        return mv;
+    }
 }

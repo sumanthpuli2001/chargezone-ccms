@@ -127,4 +127,20 @@ public class ProbationToConfirmationDAOImpl<T> extends GenericsDAOImpl<T> implem
                 + " and STR_TO_DATE(a.assessmentToDate,'%d/%m/%Y') = STR_TO_DATE('" + ptc.getAssessmentFromDate() + "','%d/%m/%Y')";
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> readConfirmedEmployee() {
+        String query = "";
+        query += "Select b.employeeId, b.employeeName,"
+                + " c.departmentName,"
+                + " d.designationName,"
+                + " a.assessmentFromDate, a.assessmentToDate,a.status,"
+                + " a.id, b.id"
+                + " From ProbationToConfirmation a "
+                + " Left Join a.employeeMasterByEmployeeMasterId b"
+                + " Left Join b.departmentMaster c"
+                + " Left Join b.designationMaster d"
+                + " Where a.status=5";
+        return getHibernateTemplate().find(query);
+    }
 }

@@ -17,7 +17,7 @@ public interface ProbationPeriodDAO<T> extends GenericsDAO<T> {
     public List<?> readprobationPeriod();
 
     public boolean isExist(T object);
-    
+
     public List<?> readbyDesignation(int id);
 
 }

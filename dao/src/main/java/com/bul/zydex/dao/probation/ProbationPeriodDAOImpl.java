@@ -44,7 +44,7 @@ public class ProbationPeriodDAOImpl<T> extends GenericsDAOImpl<T> implements Pro
     }
 
     @Override
-     public List<?> readbyDesignation(int id) {
+    public List<?> readbyDesignation(int id) {
 
         String query = "";
         query += " Select a.period"

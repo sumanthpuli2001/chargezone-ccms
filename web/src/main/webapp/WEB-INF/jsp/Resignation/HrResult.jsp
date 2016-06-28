@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : HrResult
     Author     : Vinita
 --%>
@@ -64,7 +64,8 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
-                                <div class="box-header">
+                                <div class="box-header" style="text-align: right;">
+                                    <button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="window.location = 'resignationMaster.htm?act=exportToExcelResignation'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>
                                 </div>
                                 <div class="box-body no-padding">
                                     <div class="row">
@@ -108,19 +109,19 @@
                                                                 <%--<c:if test="${list[2] == 11}"><td><span class="badge">Withdraw Pending(Rejected by Manager)</span></td></c:if>--%>
                                                                 <%--<c:if test="${list[2] == 6}"><td><span class="badge">Returned Pending</span></td></c:if>--%>
                                                                 <%--<c:if test="${list[2] == 8}"><td><span class="badge">Withdraw Pending</span></td></c:if>--%>
-                                                              
 
-                                                                    <td>
-                                                                        <div class="btn-group">
-                                                                            <button type="button" class="btn btn-default dropdown-toggle"   onclick="viewClick('${list[0]}', '${list[3]}');" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                              &nbsp;&nbsp;View
-                                                                            </button>
-<!--                                                                            <ul class="dropdown-menu">
-                                                                                <li>
-                                                                                    <a href="#"
-                                                                                </a>
-                                                                            </li>
-                                                                        </ul>-->
+
+                                                                <td>
+                                                                    <div class="btn-group">
+                                                                        <button type="button" class="btn btn-default dropdown-toggle"   onclick="viewClick('${list[0]}', '${list[3]}');" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                            &nbsp;&nbsp;View
+                                                                        </button>
+                                                                        <!--                                                                            <ul class="dropdown-menu">
+                                                                                                                                                        <li>
+                                                                                                                                                            <a href="#"
+                                                                                                                                                        </a>
+                                                                                                                                                    </li>
+                                                                                                                                                </ul>-->
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -133,10 +134,10 @@
                                         </div><!-- /.col -->
                                         <br/>
                                         <br/>
-                                             <div class="col-lg-offset-1 col-sm-3">
-                                        <!--<input type="button" class="btn btn-primary" value="Back" onclick="window.history.back();" />-->
-                                             </div>
-                                             </div><!-- /.row -->
+                                        <div class="col-lg-offset-1 col-sm-3">
+                                            <!--<input type="button" class="btn btn-primary" value="Back" onclick="window.history.back();" />-->
+                                        </div>
+                                    </div><!-- /.row -->
                                 </div><!-- /.box-body -->
                             </div><!-- /.tab-content -->
                         </div><!-- nav-tabs-custom -->

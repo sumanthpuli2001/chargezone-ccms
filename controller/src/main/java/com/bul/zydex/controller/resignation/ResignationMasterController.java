@@ -127,7 +127,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
                 EmployeeMaster employeeMasterHr = new EmployeeMaster();
                 employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
-                // id 59 is status for Resignnation apply 
+                // id 59 is status for Resignnation apply
                 emailTemplate = emailTemplateService.readById(59);
                 String To = employeeMasterHr.getOfficeEmailId();
                 String from = employeeMasterModel.getOfficeEmailId();
@@ -229,7 +229,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
                 EmployeeMaster employeeMasterHr = new EmployeeMaster();
                 employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
-                // id 68 is status for Withdraw Resignnation 
+                // id 68 is status for Withdraw Resignnation
                 emailTemplate = emailTemplateService.readById(68);
                 String To = employeeMasterHr.getOfficeEmailId();
                 String from = employeeMasterModel.getOfficeEmailId();
@@ -259,7 +259,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
                 EmployeeMaster employeeMasterHr = new EmployeeMaster();
                 employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
-                // id 67 is status for Resignnation Rework Submitted 
+                // id 67 is status for Resignnation Rework Submitted
                 emailTemplate = emailTemplateService.readById(67);
                 String To = employeeMasterHr.getOfficeEmailId();
                 String from = employeeMasterModel.getOfficeEmailId();
@@ -638,9 +638,11 @@ public class ResignationMasterController extends ResignationMasterAbstract {
 
     public ModelAndView HRResult(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
         ResignationMaster resignationMaster = new ResignationMaster();
         List<?> list = resignationMasterService.readforHR(resignationMaster);
         request.setAttribute("list", list);
+        session.setAttribute("resignationResultSessionList", list);
         mv.setViewName("Resignation/HrResult");
         return mv;
     }
@@ -1030,8 +1032,8 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.setViewName("Resignation/managerSearchResult");
         return mv;
     }
-    
-     public ModelAndView printClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    public ModelAndView printClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         ResignationMaster resignationMaster = new ResignationMaster();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -1049,6 +1051,16 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         request.setAttribute("id", id);
         request.setAttribute("empid", empid);
         mv.setViewName("Resignation/PrintView");
+        return mv;
+    }
+
+    public ModelAndView exportToExcelResignation(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        List<?> resignationResultSessionList = (List<?>) request.getSession().getAttribute("resignationResultSessionList");
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-Disposition", "attachment; filename=ExpenseRequestData.xls");
+        request.setAttribute("resignationResultSessionList", resignationResultSessionList);
+        mv.setViewName("Resignation/ResignationHrResultExcel");
         return mv;
     }
 }

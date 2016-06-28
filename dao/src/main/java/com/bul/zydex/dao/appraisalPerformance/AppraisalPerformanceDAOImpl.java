@@ -57,8 +57,8 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                     + " or b.reportingManagerLevel3='" + employeeMaster.getId() + "'"
                     + " or b.reportingManagerLevel4='" + employeeMaster.getId() + "'"
                     + " or b.reportingManagerLevel5='" + employeeMaster.getId() + "')"
-                    + " and (b.dateOfLeaving is null or b.dateOfLeaving = '') "
-                    + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()"
+                    + " and ((b.dateOfLeaving is null or b.dateOfLeaving = '') "
+                    + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())"
                     + " order by a.behaviorsYear desc";
 //            condition += " b.reportingManagerLevel1='" + employeeMaster.getId() + "'";
 
@@ -250,11 +250,12 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
         query += " SELECT a.id, e.text1,e.text2,e.text3,e.remark,e.midYearRemark,e.endYearRemark,e.managerMidYearRemark,e.managerEndYearRemark "
                 + " FROM AppraisalPerformanceMaster a "
                 + " LEFT JOIN a.appraisalPerformanceIndividualDevelopmentPlans e "
-                //                + " LEFT JOIN a.employeeMaster b "
+                + " LEFT JOIN a.employeeMaster b "
                 //                + " LEFT JOIN b.departmentMaster d "
                 //                + " LEFT JOIN b.designationMaster c "
                 //                + " LEFT JOIN b.levelMaster f "
-                + " WHERE status=1 and e.appraisalPerformanceMaster=" + appraisalPerformanceMaster.getId();
+                + " WHERE status=1 and e.appraisalPerformanceMaster=" + appraisalPerformanceMaster.getId()
+                + " and (b.dateOfLeaving is null or b.dateOfLeaving = '' ) ";
 //                + " order by a.behaviorsYear desc";
 
         List<?> list = getHibernateTemplate().find(query);
@@ -287,6 +288,7 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " LEFT JOIN b.departmentMaster d "
                 + " LEFT JOIN b.designationMaster c "
                 + " WHERE status=1 " + condition
+                + " and (b.dateOfLeaving is null or b.dateOfLeaving = '' ) "
                 + " order by a.behaviorsYear desc";
 
         List<?> list = getHibernateTemplate().find(query);

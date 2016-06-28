@@ -77,7 +77,7 @@
                                             <div class="form-group">
 
                                                 <div class="col-sm-6">
-                                                    <label>Start Date<span style="color : red;font-size:12px;"></span></label>
+                                                    <label>For Attendance: <br>Start Date<span style="color : red;font-size:12px;"></span></label>
                                                     <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
                                                         <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                                         <form:input path="inDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
@@ -86,7 +86,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>End Date<span style="color:red;font-size:12px;"></span></label>
+                                                        <label><br>End Date<span style="color:red;font-size:12px;"></span></label>
                                                         <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
                                                             <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                                         <form:input path="outDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
@@ -110,6 +110,27 @@
                                         <br/>
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12">
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>Start Date<span style="color : red;font-size:12px;"></span></label>
+                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
+                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                        <form:input path="dojStartDate" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" ></form:input>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>End Date<span style="color:red;font-size:12px;"></span></label>
+                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
+                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                        <form:input path="dojEndDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" ></form:input>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6" id="employeeName">
                                                         <label>Employee Name:</label>

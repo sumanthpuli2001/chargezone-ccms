@@ -35,5 +35,8 @@
         <property name="hrApproveDate" type="string">
             <column name="hr_approve_date" length="45" />
         </property>
+        <property name="attrition" type="string">
+            <column name="attrition" length="65" />
+        </property>
     </class>
 </hibernate-mapping>

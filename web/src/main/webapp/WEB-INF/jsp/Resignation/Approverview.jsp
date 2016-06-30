@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : Approverview
     Created on : Jan 5, 2016, 2:24:28 PM
     Author     : Vinita
@@ -13,6 +13,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Resignation Form</title>
+
+        <style>
+            .tooltip-inner{
+                max-width: 70% !important; /* Max Width of the popover (depending on the container!) */
+            }
+        </style>
     </head>
     <script>
         function buttonFun1() {
@@ -78,6 +84,42 @@
             })
         }
         ;
+        function deleteCheck11() {
+            var flag = true;
+            if (relivingDateRadioValue == "" || relivingDateRadioValue == null) {
+//                alert("null");
+                document.getElementById("relivingDateRadioError").innerHTML = 'It must be Selected.';
+                flag = false;
+            }
+            else {
+//                alert(relivingDateRadioValue);
+                document.getElementById("relivingDateRadioError").innerHTML = '';
+                if (relivingDateRadioValue == 'relivingDateShow') {
+                    if (document.getElementById("relievingDate").value == '') {
+                        document.getElementById("RelieveDateError").innerHTML = 'It must be Selected.'
+                        flag = false;
+                    } else {
+                        document.getElementById("RelieveDateError").innerHTML = '';
+                    }
+                } else {
+                    document.getElementById("relievingDate").value == '';
+                }
+
+            }
+            if (attritionvalue == "" || attritionvalue == null) {
+                document.getElementById("attritionError").innerHTML = 'It must be Selected.';
+                flag = false;
+            } else {
+                document.getElementById("attritionError").innerHTML = '';
+            }
+//            alert("in");
+//            alert(flag);
+            if (flag) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     </script>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -104,9 +146,10 @@
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <!--form horizontal starts here-->
-                            <form:form action="resignationMaster.htm?act=submitApproveOrRejectResignation" method="post" commandName="resignationMaster" name='form1' class="form-horizontal" role="form">
+                            <form:form action="resignationMaster.htm?act=submitApproveOrRejectResignation" method="post" commandName="resignationMaster" name='form1' class="form-horizontal" role="form" onsubmit='return deleteCheck11();'>
                                 <input type="hidden" name="id" value="${resignationMaster.id}"/>
-                                <!--Read only entries Starts here-->    
+                                <!--Read only entries Starts here-->
+                                <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
                                         <h3 class="box-title">Employee Detail:</h3>
@@ -197,62 +240,88 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                             <%--<c:if test="${resignationMaster.status gt 4}">--%>
-                                                 <%--<c:if test="${resignationMaster.relievingDate ne null && not empty resignationMaster.relievingDate}">--%>
+                                                <%--<c:if test="${resignationMaster.status gt 4}">--%>
+                                                <%--<c:if test="${resignationMaster.relievingDate ne null && not empty resignationMaster.relievingDate}">--%>
 
-                                                    <!--if HR Approved Then Only Shows final Relieving Date.-->
+                                                <!--if HR Approved Then Only Shows final Relieving Date.-->
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Reliving Date:</label>
+                                                    <div class="col-sm-1">
+                                                        <input type="radio" name="relivingDateRadio" id="relivingDateShow_id" value="relivingDateShow">
+                                                    </div>
+                                                    <label class="col-sm-3 control-label">As Per Employment Rule:</label>
+                                                    <div class="col-sm-1">
+                                                        <input type="radio" name="relivingDateRadio" id="relivingDateHide_id" value="relivingDateHide">
+                                                    </div>
+                                                    <span id="relivingDateRadioError" style="color: red;"></span>
+                                                </div>
+                                                <div class="form-group" style="display: none;" id="reliving_date_id">
+                                                    <label class="col-sm-3 control-label">Relieving Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <div class=" col-sm-7">
+                                                        <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy - hh:ii " data-link-field="dtp_input1">
+                                                            <form:input class="form-control" path="relievingDate" readonly='true'></form:input>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                            </div>
+                                                            <span id="RelieveDateError" style="color: red;"></span>
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group">
-                                                        <label class="col-sm-3 control-label">Relieving Date & Time:</label>
-                                                        <div class=" col-sm-7">
-                                                            <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy - hh:ii " data-link-field="dtp_input1">
-                                                            <form:input class="form-control" path="relievingDate"  readonly='true'></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                            </div>
-                                                                 <span id="RelieveDateError" style="color: red;"></span>
+                                                        <label class="col-sm-3 control-label" rel="tooltip" data-html="true" data-toggle="tooltip"  data-placement="right"
+                                                               data-title="<div style='text-align: left;'>1) Termination Letter given by the Company<br>2) Company demanding Resignation to avoid giving termination letter to save his/her career<br>3) Employee Absconding from duties
+                                                               <br>4) Resignation of an employee undergoing PIP (Performance Improvement Plan)<br>5) Resignation of a non performing employee (Who has been already informed about his/her non-performance formally through email)</div>">Good Attrition:</label>
+                                                        <div class="col-sm-1">
+                                                            <input type="radio" name="attrition" id="goodAttrition_id" value="Good Attrition">
                                                         </div>
+                                                        <label class="col-sm-3 control-label" rel="tooltip" data-html="true" data-toggle="tooltip"  data-placement="right"
+                                                               data-title="<div style='text-align: left;'>1) Employee Resigning on his own (Not undergoing through PIP)<br>
+                                                               2) Employee Resigning on his own (Not given any negative Performance feedback formally through email till now)</div>">Bad Attrition:</label>
+                                                        <div class="col-sm-1">
+                                                            <input type="radio" name="attrition" id="badAttrition_id" value="Bad Attrition">
                                                         </div>
+                                                        <span id="attritionError" style="color: red;"></span>
+                                                    </div>
                                                 <%--</c:if>--%>
                                                 <%--</c:if>--%>
-                                                            <%--<c:if test="${resignationMaster.status eq 6}">--%>
-<!--                                                             <div class="form-group">
-                                                        <label class="col-sm-3 control-label">Relieving Date & Time:</label>
-                                                        <div class=" col-sm-7">
-                                                            <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy - hh:ii " data-link-field="dtp_input1">
-                                                            <%--<form:input class="form-control" path="relievingDate"  readonly='true'></form:input>--%>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <div style="color: red"><form:errors path="relievingDate" cssClass="errorDiv"></form:errors></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
-                                                            <%--</c:if>--%>   
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
-                                    <!--Resignation Information completes Here-->
-                                    <div class="box box-info collapsed-box">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Reason Of Resignation:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
+                                                <%--<c:if test="${resignationMaster.status eq 6}">--%>
+                                                <!--                                                             <div class="form-group">
+                                                                                                        <label class="col-sm-3 control-label">Relieving Date & Time:</label>
+                                                                                                        <div class=" col-sm-7">
+                                                                                                            <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy - hh:ii " data-link-field="dtp_input1">
+                                                <%--<form:input class="form-control" path="relievingDate"  readonly='true'></form:input>--%>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                    <div style="color: red"><form:errors path="relievingDate" cssClass="errorDiv"></form:errors></div>
+                                                </div>
                                             </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label class="col-md-2">Reason:</label>
-                                                        <div class="col-sm-12">
+                                        </div>-->
+                                                <%--</c:if>--%>
+                                            </div><!-- /.col -->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                </div>
+                                <!--Resignation Information completes Here-->
+                                <div class="box box-info collapsed-box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Reason Of Resignation:</h3>
+                                        <div class="box-tools pull-right">
+                                            <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
+                                        </div>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="col-md-2">Reason:</label>
+                                                    <div class="col-sm-12">
                                                         <c:choose>
                                                             <c:when test="${sessionScope.userRight.hr}">
                                                                 <form:textarea path="reason" class="form-control" rows="6" readonly="true"></form:textarea>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <form:textarea path="reason" class="form-control" rows="6" readonly="true"></form:textarea>  
+                                                                <form:textarea path="reason" class="form-control" rows="6" readonly="true"></form:textarea>
                                                                 <div style="color: red"><form:errors path="reason" cssClass="errorDiv"></form:errors></div>
-                                                            </c:otherwise> 
+                                                            </c:otherwise>
                                                         </c:choose>
                                                     </div>
                                                 </div>
@@ -273,40 +342,40 @@
                                                 <div class="form-group">
                                                     <label class="col-md-2">Comment:</label>
                                                     <div class="col-sm-12">
-                                                        <form:textarea path="managerComment" class="form-control" rows="6" ></form:textarea>  
+                                                        <form:textarea path="managerComment" class="form-control" rows="6" ></form:textarea>
 
                                                         </div>
                                                     </div>
                                                 </div><!-- /.col -->
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
-                                    </div> 
-                                                        <c:if test="${resignationMaster.status eq 3}">
-                                                        <c:if test="${resignationMaster.hrComment ne null && not empty resignationMaster.hrComment}">
-                                                          <div class="box box-info collapsed-box">
-                                    <div class="box-header">
-                                        <h3 class="box-title">HR Comment:</h3>
-                                        <div class="box-tools pull-right">
-                                            <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
-                                        </div>
-                                    </div><!-- /.box-header -->
-                                    <div class="box-body no-padding">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="col-md-2">Comment:</label>
-                                                    <div class="col-sm-12">
-                                                        <form:textarea path="hrComment" class="form-control" rows="6" readonly="true"></form:textarea>  
+                                    </div>
+                                <c:if test="${resignationMaster.status eq 3}">
+                                    <c:if test="${resignationMaster.hrComment ne null && not empty resignationMaster.hrComment}">
+                                        <div class="box box-info collapsed-box">
+                                            <div class="box-header">
+                                                <h3 class="box-title">HR Comment:</h3>
+                                                <div class="box-tools pull-right">
+                                                    <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
+                                                </div>
+                                            </div><!-- /.box-header -->
+                                            <div class="box-body no-padding">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="col-md-2">Comment:</label>
+                                                            <div class="col-sm-12">
+                                                                <form:textarea path="hrComment" class="form-control" rows="6" readonly="true"></form:textarea>
 
-                                                        </div>
-                                                    </div>
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div></c:if>  </c:if>  
-                                    <!--Reason In Detail completes Here-->
-                                    <div class="form-group">
-                                    <c:if test="${resignationMaster.status eq 0 || resignationMaster.status eq 3}">        
+                                                                </div>
+                                                            </div>
+                                                        </div><!-- /.col -->
+                                                    </div><!-- /.row -->
+                                                </div><!-- /.box-body -->
+                                            </div></c:if>  </c:if>
+                                        <!--Reason In Detail completes Here-->
+                                        <div class="form-group">
+                                    <c:if test="${resignationMaster.status eq 0 || resignationMaster.status eq 3}">
                                         <div class="col-sm-6" style="text-align: left">
                                             <button type="submit" class="btn btn-success" style="width: 100px;" name="btnType" value="APPROVE">ACCEPT</button>
                                             <!--<input type="submit" class="btn btn-primary" style="width: 100px;margin-left: 30px" name="btnType" value="APPROVE"/>-->
@@ -316,10 +385,10 @@
                                             <!--<input type="submit" class="btn btn-warning" style="width: 100px;" name="btnType" value="RETURN"/>-->
                                         </div>
                                     </c:if>
-                                    <%--<c:if test="${resignationMaster.status eq 5 || resignationMaster.status eq 8}">--%>        
-                                    <c:if test="${resignationMaster.status eq 5}">        
-                                       
-                                       <div class="col-sm-6" style="text-align: left">
+                                    <%--<c:if test="${resignationMaster.status eq 5 || resignationMaster.status eq 8}">--%>
+                                    <c:if test="${resignationMaster.status eq 5}">
+
+                                        <div class="col-sm-6" style="text-align: left">
                                             <button type="submit" class="btn btn-success" style="width: 100px;" name="btnType" value="APPROVEWITHDRAW">APPROVE</button>
                                             <!--<input type="submit" class="btn btn-primary" style="width: 100px;" name="btnType" value="APPROVEWITHDRAW"/>-->
                                         </div>
@@ -338,7 +407,8 @@
             </div>
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
-    
+
+
     <script type="text/javascript">
         $('.form_datetime').datetimepicker({
             //language:  'fr',
@@ -352,5 +422,23 @@
             startDate: new Date()
         });
     </script>
+
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+
+    <script>
+        var relivingDateRadioValue = "";
+        $('input[name=relivingDateRadio]').on('ifChecked', function (event) {
+            relivingDateRadioValue = this.value;
+            if (this.value == 'relivingDateShow') {
+                $("#reliving_date_id").show();
+            } else {
+                $("#reliving_date_id").hide();
+            }
+        });
+        var attritionvalue = "";
+        $('input[name=attrition]').on('ifChecked', function (event) {
+            attritionvalue = this.value;
+
+        });
+    </script>
 </html>

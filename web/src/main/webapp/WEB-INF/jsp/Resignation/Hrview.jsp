@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : Hrview
     Author     : Vinita
 --%>
@@ -11,6 +11,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Resignation Form</title>
+        <style>
+            .tooltip-inner{
+                max-width: 70% !important; /* Max Width of the popover (depending on the container!) */
+            }
+        </style>
     </head>
     <script>
         function buttonFun1() {
@@ -132,7 +137,7 @@
                             <form:form action="resignationMaster.htm?act=HRApprove" method="post" commandName="resignationMaster"
                                        name='form1'  class="form-horizontal" role="form">
                                 <input type="hidden" name="id" value="${resignationMaster.id}"/>
-                                <!--Read only entries Starts here-->    
+                                <!--Read only entries Starts here-->
                                 <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
@@ -238,6 +243,30 @@
                                                     <%--<form:errors path="relievingDate" cssClass="errorDiv"></form:errors>--%>
                                                         </div>-->
                                                 </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label" rel="tooltip" data-html="true" data-toggle="tooltip"  data-placement="right"
+                                                           data-title="<div style='text-align: left;'>1) Termination Letter given by the Company<br>2) Company demanding Resignation to avoid giving termination letter to save his/her career<br>3) Employee Absconding from duties
+                                                           <br>4) Resignation of an employee undergoing PIP (Performance Improvement Plan)<br>5) Resignation of a non performing employee (Who has been already informed about his/her non-performance formally through email)</div>">Good Attrition:</label>
+                                                    <div class="col-sm-1" style="pointer-events: none;">
+                                                        <c:if test="${resignationMaster.attrition eq 'Good Attrition'}">
+                                                            <input type="radio" name="attrition" checked="true" id="goodAttrition_id" value="Good Attrition">
+                                                        </c:if>
+                                                        <c:if test="${resignationMaster.attrition ne 'Good Attrition'}">
+                                                            <input type="radio" name="attrition"  id="goodAttrition_id" value="Good Attrition">
+                                                        </c:if>
+                                                    </div>
+                                                    <label class="col-sm-2 control-label" rel="tooltip" data-html="true" data-toggle="tooltip"  data-placement="right"
+                                                           data-title="<div style='text-align: left;'>1) Employee Resigning on his own (Not undergoing through PIP)<br>
+                                                           2) Employee Resigning on his own (Not given any negative Performance feedback formally through email till now)</div>">Bad Attrition:</label>
+                                                    <div class="col-sm-1" style="pointer-events: none;">
+                                                        <c:if test="${resignationMaster.attrition eq 'Bad Attrition'}">
+                                                            <input type="radio" name="attrition" checked="true"  id="badAttrition_id" value="Bad Attrition">
+                                                        </c:if>
+                                                        <c:if test="${resignationMaster.attrition ne 'Bad Attrition'}">
+                                                            <input type="radio" name="attrition"  id="badAttrition_id" value="Bad Attrition">
+                                                        </c:if>
+                                                    </div>
+                                                </div>
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
                                     </div><!-- /.box-body -->
@@ -261,9 +290,9 @@
                                                                 <form:textarea path="reason" class="form-control" rows="6" readonly="true"></form:textarea>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <form:textarea path="reason" class="form-control" rows="6" readonly="true"></form:textarea>  
+                                                                <form:textarea path="reason" class="form-control" rows="6" readonly="true"></form:textarea>
                                                                 <div style="color: red"><form:errors path="reason" cssClass="errorDiv"></form:errors></div>
-                                                            </c:otherwise> 
+                                                            </c:otherwise>
                                                         </c:choose>
                                                     </div>
                                                 </div>
@@ -284,7 +313,7 @@
                                                 <div class="form-group">
                                                     <label class="col-md-2">Comment:</label>
                                                     <div class="col-sm-12">
-                                                        <form:textarea path="managerComment" class="form-control" rows="6" readonly="true"></form:textarea>  
+                                                        <form:textarea path="managerComment" class="form-control" rows="6" readonly="true"></form:textarea>
 
                                                         </div>
                                                     </div>
@@ -305,7 +334,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-2">Comment:</label>
                                                         <div class="col-sm-12">
-                                                        <form:textarea path="hrComment" class="form-control" rows="6" ></form:textarea>  
+                                                        <form:textarea path="hrComment" class="form-control" rows="6" ></form:textarea>
 
                                                         </div>
                                                     </div>
@@ -316,12 +345,12 @@
                                     <!--Reason In Detail completes Here-->
                                     <div class="form-group">
                                         <!--<div class="col-sm-offset-1 col-sm-5">-->
-                                    <c:if test="${resignationMaster.status eq 4}">     
+                                    <c:if test="${resignationMaster.status eq 4}">
                                         <div class="col-sm-12" style="text-align: center">
                                             <button type="submit" class="btn btn-success" style="width: 100px;" onclick='return saveSubmit11();' name="btnType" value="APPROVE">ACCEPT</button>
                                         </div>
                                     </c:if>
-                                    <c:if test="${resignationMaster.status eq 2}">     
+                                    <c:if test="${resignationMaster.status eq 2}">
                                         <div class="col-sm-6" style="text-align: left">
                                             <button type="submit" class="btn btn-success" style="width: 100px;" onclick='return saveSubmit11();' name="btnType" value="APPROVE">ACCEPT</button>
                                         </div>
@@ -329,7 +358,7 @@
                                             <button type="submit" class="btn btn-warning" style="width: 100px;" name="btnType" value="RETURN">RETURN</button>
                                         </div>
                                     </c:if>
-                                    <c:if test="${resignationMaster.status eq 7 || resignationMaster.status eq 10}">        
+                                    <c:if test="${resignationMaster.status eq 7 || resignationMaster.status eq 10}">
                                         <!--<input type="submit" class="btn btn-primary" style="width: 100px;" name="btnType" value="WITHDRAWAPPROVE"/>-->
                                         <div class="col-sm-6" style="text-align: left">
                                             <button type="submit" class="btn btn-success" style="width: 100px;" name="btnType" value="WITHDRAWAPPROVE">APPROVE</button>
@@ -370,7 +399,7 @@
 //            startView: 2,
 //            forceParse: 0,
 //            showMeridian: 1
-//            
+//
 //        });
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

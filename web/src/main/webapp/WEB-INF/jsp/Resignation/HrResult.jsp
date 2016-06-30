@@ -87,7 +87,7 @@
                                                                     <th>Employee id</th>
                                                                     <th>Employee Name</th>
                                                                     <th>Effective Date</th>
-                                                                    <!--<th>Reason</th>-->
+                                                                    <th>Good/Bad Attrition</th>
                                                                     <th>Status</th>
                                                                     <th>Action</th>
                                                                 </tr>
@@ -101,6 +101,7 @@
                                                                 <td>${list[4]}</td>
                                                                 <td>${list[5]}</td>
                                                                 <td>${list[1]}</td>
+                                                                <td>${list[6]}</td>
                                                                 <c:if test="${list[2] == 2}"><td><span class="badge">Pending</span></td></c:if>
                                                                 <c:if test="${list[2] == 8}"><td><span class="badge">Returned Pending</span></td></c:if>
                                                                 <c:if test="${list[2] == 7}"><td><span class="badge">Withdraw Pending</span></td></c:if>

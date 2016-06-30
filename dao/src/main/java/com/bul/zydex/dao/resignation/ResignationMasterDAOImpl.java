@@ -91,7 +91,7 @@ public class ResignationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements R
     public List<?> readforHR(T object) {
         ResignationMaster resignationMaster = (ResignationMaster) object;
         String query = "";
-        query += " Select a.id,a.effectiveDatetime,a.status, b.id, b.employeeId,b.employeeName"
+        query += " Select a.id,a.effectiveDatetime,a.status, b.id, b.employeeId,b.employeeName, a.attrition"
                 + " FROM ResignationMaster a"
                 + " left join a.employeeMaster b"
                 + " WHERE a.status in (2,7,10,4)"

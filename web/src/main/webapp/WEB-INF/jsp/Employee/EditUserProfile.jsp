@@ -1044,9 +1044,9 @@
         }
     }); //when document loaded it loads based on erlier reporting manager
     function reportingLevelSet() {
-        alert("Hi");
+    
         var level = document.getElementById("reportingManagerLevel1").value;
-        alert("level" + level);
+     
         if (level != null && level != '') {
             $.ajax({
                 url: 'employeeMaster.htm?act=readReportingHierarchy&id=' + level,

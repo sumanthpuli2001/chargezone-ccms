@@ -542,7 +542,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 String s = formatter.format(date);
                 String[] s1 = s.split("/");
                 String currentDays = s1[0];
-//                String currentDays = "";
+//                String currentDays = "27";
                 String currentMonth = s1[1];
                 String currentyear = s1[2];
                 shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster);
@@ -614,7 +614,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             String[] splited1 = employeeDatetimeData.getDateTime().split(" ");
                             String spDate = splited[0];
                             Date currentDate = new Date();
-//                            String punDate = "04/04/2016";
+//                            String punDate = "27/06/2016";
                             String punDate = sdf111.format(currentDate);
                             Date inDate = sdf111.parse(spDate);
                             Date pDate = sdf111.parse(punDate);
@@ -2226,7 +2226,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell8.setCellStyle(stylegreen);
 
                                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
-                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave")  && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
                                         String[] userTimeInStr = firstHalf.split("`");
                                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
@@ -2516,7 +2516,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell9.setCellStyle(stylegreen);
 
                                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
-                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
+                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave")  && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
                                             && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
                                         String[] leave = secondHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -2585,7 +2585,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 prcounter = prcounter + 0.5;
                                                 cell9.setCellStyle(stylegreen);
                                             } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
-                                                    && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                                    && !secondHalf.contains("Casual Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
                                                     && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
                                                 cell9.setCellValue("AB");
                                                 abcounter = abcounter + 0.5;
@@ -3148,7 +3148,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell8.setCellStyle(stylegreen);
 
                                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
-                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave")  && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
                                         String[] leave = firstHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -3172,7 +3172,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 prcounter = prcounter + 0.5;
                                                 cell8.setCellStyle(stylegreen);
                                             } else if (leave1[0] != null && !leave1[0].contains("Short Leave")) {
-                                                if ((userTimeIn.before(LateHours) || userTimeIn.equals(LateHours)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours)) && firstCounter <= 2) {
+                                                if ((userTimeIn.before(LateHours) || userTimeIn.equals(LateHours)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours)) && firstCounter <= 31) {
                                                     cell8.setCellValue("PR");
                                                     prcounter = prcounter + 0.5;
                                                     firstCounter = firstCounter + 1;
@@ -3207,7 +3207,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                         cell8.setCellValue("SHL/A");
                                                         shla = shla + 1;
                                                         cell8.setCellStyle(stylered);
-                                                    } else if ((userTimeIn.before(LateHours) || userTimeIn.equals(LateHours)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours)) && firstCounter <= 2) {
+                                                    } else if ((userTimeIn.before(LateHours) || userTimeIn.equals(LateHours)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours)) && firstCounter <= 31) {
                                                         cell8.setCellValue("PR");
                                                         prcounter = prcounter + 0.5;
                                                         firstCounter = firstCounter + 1;
@@ -3318,7 +3318,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell9.setCellStyle(stylegreen);
 
                                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
-                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
+                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave")  && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
                                             && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
                                         String[] leave = secondHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -5317,7 +5317,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
                                         if ((userTimeIn.before(LateHours) || userTimeIn.equals(LateHours))
                                                 && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))
-                                                && firstCounter <= 2) {
+                                                && firstCounter <= 31) {
                                             if (leave1[0].contains("AB")) {
                                                 prcounter = prcounter + 0.5;
                                             }
@@ -5738,6 +5738,52 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         boldFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
         HSSFCellStyle styleBold = firstFWorkbook.createCellStyle();
         styleBold.setFont(boldFont);
+        employeeAdvanceSearch.setEmployeeId(Boolean.TRUE);
+        employeeAdvanceSearch.setEmployeeName(Boolean.TRUE);
+        employeeAdvanceSearch.setFatherName(Boolean.FALSE);
+        employeeAdvanceSearch.setMotherName(Boolean.FALSE);
+        employeeAdvanceSearch.setGender(Boolean.FALSE);
+        employeeAdvanceSearch.setMaritalStatus(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirth(Boolean.FALSE);
+        employeeAdvanceSearch.setPresentAddress(Boolean.FALSE);
+        employeeAdvanceSearch.setPermanentAddress(Boolean.FALSE);
+        employeeAdvanceSearch.setBloodGroups(Boolean.FALSE);
+        employeeAdvanceSearch.setEmailAddress(Boolean.FALSE);
+        employeeAdvanceSearch.setContactNo1(Boolean.FALSE);
+        employeeAdvanceSearch.setContactNo2(Boolean.FALSE);
+        employeeAdvanceSearch.setEmergencyContactPerson(Boolean.FALSE);
+        employeeAdvanceSearch.setEmergencyContactNo(Boolean.FALSE);
+        employeeAdvanceSearch.setPanCard(Boolean.FALSE);
+        employeeAdvanceSearch.setPassportNo(Boolean.FALSE);
+        employeeAdvanceSearch.setPassportIssueDate(Boolean.FALSE);
+        employeeAdvanceSearch.setPassportExpiryDate(Boolean.FALSE);
+        employeeAdvanceSearch.setAdharCard(Boolean.FALSE);
+        employeeAdvanceSearch.setOfficeEmailId(Boolean.FALSE);
+        employeeAdvanceSearch.setHighestEducationDetails(Boolean.FALSE);
+        employeeAdvanceSearch.setExperienceYearOnDoj(Boolean.FALSE);
+        employeeAdvanceSearch.setExperienceMonthOnDoj(Boolean.FALSE);
+        employeeAdvanceSearch.setCompany(Boolean.FALSE);
+        employeeAdvanceSearch.setZydexLocation(Boolean.FALSE);
+        employeeAdvanceSearch.setWorkLocation(Boolean.FALSE);
+        employeeAdvanceSearch.setLevel(Boolean.FALSE);
+        employeeAdvanceSearch.setDepartment(Boolean.FALSE);
+        employeeAdvanceSearch.setDesignation(Boolean.FALSE);
+        employeeAdvanceSearch.setRole(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfJoining(Boolean.FALSE);
+        employeeAdvanceSearch.setEmployeeType(Boolean.FALSE);
+        employeeAdvanceSearch.setBankName(Boolean.FALSE);
+        employeeAdvanceSearch.setBankAccountNo(Boolean.FALSE);
+        employeeAdvanceSearch.setBankIfscCode(Boolean.FALSE);
+        employeeAdvanceSearch.setReportingManager(Boolean.FALSE);
+        employeeAdvanceSearch.setCityOfEmployee(Boolean.FALSE);
+        employeeAdvanceSearch.setChild1(Boolean.FALSE);
+        employeeAdvanceSearch.setChild2(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpFather(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpMother(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpSpous(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpChilld1(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpChild2(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfTransferOfEntity(Boolean.FALSE);
 
         List<String> headerRow1 = new ArrayList();
         if (employeeAdvanceSearch.getEmployeeId() == true) {
@@ -5746,135 +5792,6 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         }
         if (employeeAdvanceSearch.getEmployeeName() == true) {
             headerRow1.add("Employee Name");
-        }
-        if (employeeAdvanceSearch.getFatherName() == true) {
-            headerRow1.add("Father Name");
-        }
-        if (employeeAdvanceSearch.getMotherName() == true) {
-            headerRow1.add("Mother Name");
-        }
-        if (employeeAdvanceSearch.getGender() == true) {
-            headerRow1.add("Gender");
-        }
-        if (employeeAdvanceSearch.getMaritalStatus() == true) {
-            headerRow1.add("MaritalStatus");
-        }
-        if (employeeAdvanceSearch.getDateOfBirth() == true) {
-            headerRow1.add("DateOfBirth");
-        }
-        if (employeeAdvanceSearch.getPresentAddress() == true) {
-            headerRow1.add("PresentAddress");
-        }
-        if (employeeAdvanceSearch.getPermanentAddress() == true) {
-            headerRow1.add("PermanentAddress");
-        }
-        if (employeeAdvanceSearch.getBloodGroups() == true) {
-            headerRow1.add("BloodGroup");
-        }
-        if (employeeAdvanceSearch.getEmailAddress() == true) {
-            headerRow1.add("EmailAddress");
-        }
-        if (employeeAdvanceSearch.getContactNo1() == true) {
-            headerRow1.add("ContactNo1");
-        }
-        if (employeeAdvanceSearch.getContactNo2() == true) {
-            headerRow1.add("ContactNo2");
-        }
-        if (employeeAdvanceSearch.getEmergencyContactPerson() == true) {
-            headerRow1.add("Emergency Contact Person");
-        }
-        if (employeeAdvanceSearch.getEmergencyContactNo() == true) {
-            headerRow1.add("Emergency Contact No");
-        }
-        if (employeeAdvanceSearch.getPanCard() == true) {
-            headerRow1.add("PAN Card No");
-        }
-        if (employeeAdvanceSearch.getPassportNo() == true) {
-            headerRow1.add("PassportNo");
-        }
-        if (employeeAdvanceSearch.getPassportIssueDate() == true) {
-            headerRow1.add("PassportIssueDate");
-        }
-        if (employeeAdvanceSearch.getPassportExpiryDate() == true) {
-            headerRow1.add("PassportExpiryDate");
-        }
-        if (employeeAdvanceSearch.getAdharCard() == true) {
-            headerRow1.add("AdharCard");
-        }
-        if (employeeAdvanceSearch.getOfficeEmailId() == true) {
-            headerRow1.add("Official E-Mail ID");
-        }
-        if (employeeAdvanceSearch.getHighestEducationDetails() == true) {
-            headerRow1.add("Highest Education Details");
-        }
-        if (employeeAdvanceSearch.getExperienceYearOnDoj() == true) {
-            headerRow1.add("Exp. On Date Of Joining Year");
-        }
-        if (employeeAdvanceSearch.getExperienceMonthOnDoj() == true) {
-            headerRow1.add("Exp. On Date Of Joining Month");
-        }
-        if (employeeAdvanceSearch.getCompany() == true) {
-            headerRow1.add("Company");
-        }
-        if (employeeAdvanceSearch.getZydexLocation() == true) {
-            headerRow1.add("Zydex Location");
-        }
-        if (employeeAdvanceSearch.getWorkLocation() == true) {
-            headerRow1.add("Work Location");
-        }
-        if (employeeAdvanceSearch.getLevel() == true) {
-            headerRow1.add("Level");
-        }
-        if (employeeAdvanceSearch.getDepartment() == true) {
-            headerRow1.add("Department");
-        }
-        if (employeeAdvanceSearch.getDesignation() == true) {
-            headerRow1.add("Designation");
-        }
-        if (employeeAdvanceSearch.getRole() == true) {
-            headerRow1.add("Role");
-        }
-        if (employeeAdvanceSearch.getDateOfJoining() == true) {
-            headerRow1.add("DateOfJoining");
-        }
-        if (employeeAdvanceSearch.getEmployeeType() == true) {
-            headerRow1.add("EmployeeType");
-        }
-        if (employeeAdvanceSearch.getBankName() == true) {
-            headerRow1.add("BankName");
-        }
-        if (employeeAdvanceSearch.getBankAccountNo() == true) {
-            headerRow1.add("BankAccountNo");
-        }
-        if (employeeAdvanceSearch.getBankIfscCode() == true) {
-            headerRow1.add("IFSC Code");
-        }
-        if (employeeAdvanceSearch.getReportingManager() == true) {
-            headerRow1.add("Reporting Manager");
-        }
-        if (employeeAdvanceSearch.getCityOfEmployee() == true) {
-            headerRow1.add("City");
-        }
-        if (employeeAdvanceSearch.getChild1() == true) {
-            headerRow1.add("Child1");
-        }
-        if (employeeAdvanceSearch.getChild2() == true) {
-            headerRow1.add("Child2");
-        }
-        if (employeeAdvanceSearch.getDateOfBirthOfEmpFather() == true) {
-            headerRow1.add("Father's Date Of Birth");
-        }
-        if (employeeAdvanceSearch.getDateOfBirthOfEmpMother() == true) {
-            headerRow1.add("Mother's Date Of Birth");
-        }
-        if (employeeAdvanceSearch.getDateOfBirthOfEmpSpous() == true) {
-            headerRow1.add("Spouse's Date Of Birth");
-        }
-        if (employeeAdvanceSearch.getDateOfBirthOfEmpChilld1() == true) {
-            headerRow1.add("Child1's Date Of Birth");
-        }
-        if (employeeAdvanceSearch.getDateOfBirthOfEmpChild2() == true) {
-            headerRow1.add("Date Of Transfer Of Entity");
         }
 
         List<List<String>> recordToAdd = new ArrayList();
@@ -5905,8 +5822,6 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
         recordToAdd.add(headerRow1);
 
-        employeeAdvanceSearch.setEmployeeId(Boolean.TRUE);
-        employeeAdvanceSearch.setEmployeeName(Boolean.TRUE);
         List<?> empDetail = new ArrayList<>();
 
         empDetail = employeeMasterService.empOrDateWiseSearchforActive(employeeAdvanceSearch);
@@ -6448,7 +6363,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell8.setCellStyle(stylegreen);
 
                                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
-                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
                                         String[] userTimeInStr = firstHalf.split("`");
                                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
@@ -6738,7 +6653,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell9.setCellStyle(stylegreen);
 
                                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
-                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
+                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave")  && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
                                             && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
                                         String[] leave = secondHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -6807,7 +6722,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 prcounter = prcounter + 0.5;
                                                 cell9.setCellStyle(stylegreen);
                                             } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
-                                                    && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                                    && !secondHalf.contains("Casual Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
                                                     && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
                                                 cell9.setCellValue("AB");
                                                 abcounter = abcounter + 0.5;
@@ -7370,7 +7285,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell8.setCellStyle(stylegreen);
 
                                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
-                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave")  && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
                                         String[] leave = firstHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -7394,7 +7309,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 prcounter = prcounter + 0.5;
                                                 cell8.setCellStyle(stylegreen);
                                             } else if (leave1[0] != null && !leave1[0].contains("Short Leave")) {
-                                                if ((userTimeIn.before(LateHours) || userTimeIn.equals(LateHours)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours)) && firstCounter <= 2) {
+                                                if ((userTimeIn.before(LateHours) || userTimeIn.equals(LateHours)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours)) && firstCounter <= 31) {
                                                     cell8.setCellValue("PR");
                                                     prcounter = prcounter + 0.5;
                                                     firstCounter = firstCounter + 1;
@@ -7429,7 +7344,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                         cell8.setCellValue("SHL/A");
                                                         shla = shla + 1;
                                                         cell8.setCellStyle(stylered);
-                                                    } else if ((userTimeIn.before(LateHours) || userTimeIn.equals(LateHours)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours)) && firstCounter <= 2) {
+                                                    } else if ((userTimeIn.before(LateHours) || userTimeIn.equals(LateHours)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours)) && firstCounter <= 31) {
                                                         cell8.setCellValue("PR");
                                                         prcounter = prcounter + 0.5;
                                                         firstCounter = firstCounter + 1;
@@ -7481,6 +7396,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     } else if (firstHalf.equals("AB")) {
                                         cell8.setCellValue("AB");
                                         abcounter = abcounter + 0.5;
+                                        cell8.setCellStyle(stylered);
+                                    } else if (firstHalf.equals("Short Leave")) {
+                                        cell8.setCellValue("SHL/A");
+                                        shla = shla + 1;
                                         cell8.setCellStyle(stylered);
                                     }
                                     CellUtil.setAlignment(cell8, firstFWorkbook, CellStyle.ALIGN_CENTER);
@@ -7540,7 +7459,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell9.setCellStyle(stylegreen);
 
                                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
-                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
+                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave")  && !secondHalf.equals("C Off Leave")  && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
                                             && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
                                         String[] leave = secondHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -7888,25 +7807,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         EmployeeMaster employeeMaster = new EmployeeMaster();
 
         String empId = request.getParameter("employeeMasterId");
-        String zydexLocationId = request.getParameter("zydexLocationId");
-        String levelId = request.getParameter("levelId");
-        String departmentId = request.getParameter("departmentId");
         String startDate = request.getParameter("inDateTime");
         String endDate = request.getParameter("outDateTime");
-        String searchval = request.getParameter("vallist");
-
+//         == == == == == == == == == == = Luna Plant Id Is 8==============================
+        String zydexLocationId = "8";
+//        =====================Luna Plant Id Is 8==============================
         EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
         bind(request, employeeAdvanceSearch);
-        if (null != searchval && request.getParameter("vallist").toString().equals("other")) {
-            employeeAdvanceSearch.setId(null);
-            employeeAdvanceSearch.setZydexLocationId(zydexLocationId);
-            employeeAdvanceSearch.setLevelID(levelId);
-            employeeAdvanceSearch.setDepartmentId(departmentId);
-        } else {
+        if (null != empId && !empId.equals("")) {
             employeeAdvanceSearch.setId(empId);
-            employeeAdvanceSearch.setZydexLocationId(null);
-            employeeAdvanceSearch.setLevelID(null);
-            employeeAdvanceSearch.setDepartmentId(null);
+        } else {
+            employeeAdvanceSearch.setZydexLocationId(zydexLocationId);
+
         }
 
         int rownum = 0;
@@ -7933,6 +7845,52 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         boldFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
         HSSFCellStyle styleBold = firstFWorkbook.createCellStyle();
         styleBold.setFont(boldFont);
+        employeeAdvanceSearch.setEmployeeId(Boolean.TRUE);
+        employeeAdvanceSearch.setEmployeeName(Boolean.TRUE);
+        employeeAdvanceSearch.setFatherName(Boolean.FALSE);
+        employeeAdvanceSearch.setMotherName(Boolean.FALSE);
+        employeeAdvanceSearch.setGender(Boolean.FALSE);
+        employeeAdvanceSearch.setMaritalStatus(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirth(Boolean.FALSE);
+        employeeAdvanceSearch.setPresentAddress(Boolean.FALSE);
+        employeeAdvanceSearch.setPermanentAddress(Boolean.FALSE);
+        employeeAdvanceSearch.setBloodGroups(Boolean.FALSE);
+        employeeAdvanceSearch.setEmailAddress(Boolean.FALSE);
+        employeeAdvanceSearch.setContactNo1(Boolean.FALSE);
+        employeeAdvanceSearch.setContactNo2(Boolean.FALSE);
+        employeeAdvanceSearch.setEmergencyContactPerson(Boolean.FALSE);
+        employeeAdvanceSearch.setEmergencyContactNo(Boolean.FALSE);
+        employeeAdvanceSearch.setPanCard(Boolean.FALSE);
+        employeeAdvanceSearch.setPassportNo(Boolean.FALSE);
+        employeeAdvanceSearch.setPassportIssueDate(Boolean.FALSE);
+        employeeAdvanceSearch.setPassportExpiryDate(Boolean.FALSE);
+        employeeAdvanceSearch.setAdharCard(Boolean.FALSE);
+        employeeAdvanceSearch.setOfficeEmailId(Boolean.FALSE);
+        employeeAdvanceSearch.setHighestEducationDetails(Boolean.FALSE);
+        employeeAdvanceSearch.setExperienceYearOnDoj(Boolean.FALSE);
+        employeeAdvanceSearch.setExperienceMonthOnDoj(Boolean.FALSE);
+        employeeAdvanceSearch.setCompany(Boolean.FALSE);
+        employeeAdvanceSearch.setZydexLocation(Boolean.FALSE);
+        employeeAdvanceSearch.setWorkLocation(Boolean.FALSE);
+        employeeAdvanceSearch.setLevel(Boolean.FALSE);
+        employeeAdvanceSearch.setDepartment(Boolean.FALSE);
+        employeeAdvanceSearch.setDesignation(Boolean.FALSE);
+        employeeAdvanceSearch.setRole(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfJoining(Boolean.FALSE);
+        employeeAdvanceSearch.setEmployeeType(Boolean.FALSE);
+        employeeAdvanceSearch.setBankName(Boolean.FALSE);
+        employeeAdvanceSearch.setBankAccountNo(Boolean.FALSE);
+        employeeAdvanceSearch.setBankIfscCode(Boolean.FALSE);
+        employeeAdvanceSearch.setReportingManager(Boolean.FALSE);
+        employeeAdvanceSearch.setCityOfEmployee(Boolean.FALSE);
+        employeeAdvanceSearch.setChild1(Boolean.FALSE);
+        employeeAdvanceSearch.setChild2(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpFather(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpMother(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpSpous(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpChilld1(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfBirthOfEmpChild2(Boolean.FALSE);
+        employeeAdvanceSearch.setDateOfTransferOfEntity(Boolean.FALSE);
 
         List<String> headerRow1 = new ArrayList();
         if (employeeAdvanceSearch.getEmployeeId() == true) {
@@ -7941,135 +7899,6 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         }
         if (employeeAdvanceSearch.getEmployeeName() == true) {
             headerRow1.add("Employee Name");
-        }
-        if (employeeAdvanceSearch.getFatherName() == true) {
-            headerRow1.add("Father Name");
-        }
-        if (employeeAdvanceSearch.getMotherName() == true) {
-            headerRow1.add("Mother Name");
-        }
-        if (employeeAdvanceSearch.getGender() == true) {
-            headerRow1.add("Gender");
-        }
-        if (employeeAdvanceSearch.getMaritalStatus() == true) {
-            headerRow1.add("MaritalStatus");
-        }
-        if (employeeAdvanceSearch.getDateOfBirth() == true) {
-            headerRow1.add("DateOfBirth");
-        }
-        if (employeeAdvanceSearch.getPresentAddress() == true) {
-            headerRow1.add("PresentAddress");
-        }
-        if (employeeAdvanceSearch.getPermanentAddress() == true) {
-            headerRow1.add("PermanentAddress");
-        }
-        if (employeeAdvanceSearch.getBloodGroups() == true) {
-            headerRow1.add("BloodGroup");
-        }
-        if (employeeAdvanceSearch.getEmailAddress() == true) {
-            headerRow1.add("EmailAddress");
-        }
-        if (employeeAdvanceSearch.getContactNo1() == true) {
-            headerRow1.add("ContactNo1");
-        }
-        if (employeeAdvanceSearch.getContactNo2() == true) {
-            headerRow1.add("ContactNo2");
-        }
-        if (employeeAdvanceSearch.getEmergencyContactPerson() == true) {
-            headerRow1.add("Emergency Contact Person");
-        }
-        if (employeeAdvanceSearch.getEmergencyContactNo() == true) {
-            headerRow1.add("Emergency Contact No");
-        }
-        if (employeeAdvanceSearch.getPanCard() == true) {
-            headerRow1.add("PAN Card No");
-        }
-        if (employeeAdvanceSearch.getPassportNo() == true) {
-            headerRow1.add("PassportNo");
-        }
-        if (employeeAdvanceSearch.getPassportIssueDate() == true) {
-            headerRow1.add("PassportIssueDate");
-        }
-        if (employeeAdvanceSearch.getPassportExpiryDate() == true) {
-            headerRow1.add("PassportExpiryDate");
-        }
-        if (employeeAdvanceSearch.getAdharCard() == true) {
-            headerRow1.add("AdharCard");
-        }
-        if (employeeAdvanceSearch.getOfficeEmailId() == true) {
-            headerRow1.add("Official E-Mail ID");
-        }
-        if (employeeAdvanceSearch.getHighestEducationDetails() == true) {
-            headerRow1.add("Highest Education Details");
-        }
-        if (employeeAdvanceSearch.getExperienceYearOnDoj() == true) {
-            headerRow1.add("Exp. On Date Of Joining Year");
-        }
-        if (employeeAdvanceSearch.getExperienceMonthOnDoj() == true) {
-            headerRow1.add("Exp. On Date Of Joining Month");
-        }
-        if (employeeAdvanceSearch.getCompany() == true) {
-            headerRow1.add("Company");
-        }
-        if (employeeAdvanceSearch.getZydexLocation() == true) {
-            headerRow1.add("Zydex Location");
-        }
-        if (employeeAdvanceSearch.getWorkLocation() == true) {
-            headerRow1.add("Work Location");
-        }
-        if (employeeAdvanceSearch.getLevel() == true) {
-            headerRow1.add("Level");
-        }
-        if (employeeAdvanceSearch.getDepartment() == true) {
-            headerRow1.add("Department");
-        }
-        if (employeeAdvanceSearch.getDesignation() == true) {
-            headerRow1.add("Designation");
-        }
-        if (employeeAdvanceSearch.getRole() == true) {
-            headerRow1.add("Role");
-        }
-        if (employeeAdvanceSearch.getDateOfJoining() == true) {
-            headerRow1.add("DateOfJoining");
-        }
-        if (employeeAdvanceSearch.getEmployeeType() == true) {
-            headerRow1.add("EmployeeType");
-        }
-        if (employeeAdvanceSearch.getBankName() == true) {
-            headerRow1.add("BankName");
-        }
-        if (employeeAdvanceSearch.getBankAccountNo() == true) {
-            headerRow1.add("BankAccountNo");
-        }
-        if (employeeAdvanceSearch.getBankIfscCode() == true) {
-            headerRow1.add("IFSC Code");
-        }
-        if (employeeAdvanceSearch.getReportingManager() == true) {
-            headerRow1.add("Reporting Manager");
-        }
-        if (employeeAdvanceSearch.getCityOfEmployee() == true) {
-            headerRow1.add("City");
-        }
-        if (employeeAdvanceSearch.getChild1() == true) {
-            headerRow1.add("Child1");
-        }
-        if (employeeAdvanceSearch.getChild2() == true) {
-            headerRow1.add("Child2");
-        }
-        if (employeeAdvanceSearch.getDateOfBirthOfEmpFather() == true) {
-            headerRow1.add("Father's Date Of Birth");
-        }
-        if (employeeAdvanceSearch.getDateOfBirthOfEmpMother() == true) {
-            headerRow1.add("Mother's Date Of Birth");
-        }
-        if (employeeAdvanceSearch.getDateOfBirthOfEmpSpous() == true) {
-            headerRow1.add("Spouse's Date Of Birth");
-        }
-        if (employeeAdvanceSearch.getDateOfBirthOfEmpChilld1() == true) {
-            headerRow1.add("Child1's Date Of Birth");
-        }
-        if (employeeAdvanceSearch.getDateOfBirthOfEmpChild2() == true) {
-            headerRow1.add("Date Of Transfer Of Entity");
         }
 
         List<List<String>> recordToAdd = new ArrayList();
@@ -8100,22 +7929,9 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
         recordToAdd.add(headerRow1);
 
-        String active = request.getParameter("active");
-        String inactive = request.getParameter("inactive");
-        if (null == inactive) {
-            inactive = "";
-        }
-        if (null == active) {
-            active = "";
-        }
         List<?> empDetail = new ArrayList<>();
-        if (active.equals("on") && inactive.equals("on")) {
-            empDetail = employeeMasterService.empOrDateWiseSearch(employeeAdvanceSearch);
-        } else if (active.equals("on") && inactive.equals("")) {
-            empDetail = employeeMasterService.empOrDateWiseSearchforActive(employeeAdvanceSearch);
-        } else if (active.equals("") && inactive.equals("on")) {
-            empDetail = employeeMasterService.empOrDateWiseSearchforInActive(employeeAdvanceSearch);
-        }
+
+        empDetail = employeeMasterService.empOrDateWiseSearchforActive(employeeAdvanceSearch);
 
         Iterator it = empDetail.iterator();
         while (it.hasNext()) {
@@ -8654,7 +8470,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell8.setCellStyle(stylegreen);
 
                                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
-                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave")  && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
                                         String[] userTimeInStr = firstHalf.split("`");
                                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
@@ -8944,7 +8760,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell9.setCellStyle(stylegreen);
 
                                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
-                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
+                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave")  && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
                                             && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
                                         String[] leave = secondHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -9013,7 +8829,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 prcounter = prcounter + 0.5;
                                                 cell9.setCellStyle(stylegreen);
                                             } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
-                                                    && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                                    && !secondHalf.contains("Casual Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
                                                     && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
                                                 cell9.setCellValue("AB");
                                                 abcounter = abcounter + 0.5;
@@ -9576,7 +9392,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell8.setCellStyle(stylegreen);
 
                                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
-                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave")  && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
                                         String[] leave = firstHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -9600,7 +9416,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 prcounter = prcounter + 0.5;
                                                 cell8.setCellStyle(stylegreen);
                                             } else if (leave1[0] != null && !leave1[0].contains("Short Leave")) {
-                                                if ((userTimeIn.before(LateHours) || userTimeIn.equals(LateHours)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours)) && firstCounter <= 2) {
+                                                if ((userTimeIn.before(LateHours) || userTimeIn.equals(LateHours)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours)) && firstCounter <= 31) {
                                                     cell8.setCellValue("PR");
                                                     prcounter = prcounter + 0.5;
                                                     firstCounter = firstCounter + 1;
@@ -9635,7 +9451,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                         cell8.setCellValue("SHL/A");
                                                         shla = shla + 1;
                                                         cell8.setCellStyle(stylered);
-                                                    } else if ((userTimeIn.before(LateHours) || userTimeIn.equals(LateHours)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours)) && firstCounter <= 2) {
+                                                    } else if ((userTimeIn.before(LateHours) || userTimeIn.equals(LateHours)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours)) && firstCounter <= 31) {
                                                         cell8.setCellValue("PR");
                                                         prcounter = prcounter + 0.5;
                                                         firstCounter = firstCounter + 1;
@@ -9746,7 +9562,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell9.setCellStyle(stylegreen);
 
                                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
-                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
+                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave")   && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
                                             && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
                                         String[] leave = secondHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -10077,4 +9893,5 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         mv = employeeDataSearch(request, response);
         return mv;
     }
+
 }

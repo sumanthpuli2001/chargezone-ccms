@@ -81,31 +81,31 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         c.setTime(level3Date);
                         c.add(Calendar.DATE, 15);
                         Date level4Date = c.getTime();
-
-                        if ((DateUtils.isSameDay(tDate, datebefore1) || tDate.after(datebefore1))) {
+                        
+//                        if ((DateUtils.isSameDay(tDate, datebefore1) || tDate.after(datebefore1))) {
                             List<?> probationList = employeeMasterService.readForProbationForManager(LoginempId.toString(), employeeId);
                             if (!probationList.isEmpty() || probationList.size() > 0) {
                                 finalprobationList1.add(probationList);
                             }
-                        } else if ((DateUtils.isSameDay(tDate, level2Date) || tDate.after(level1Date)) && tDate.before(level2Date)) {
-                            List<?> probationList = employeeMasterService.readForProbationlevel2(LoginempId.toString(), employeeId);
-
-                            if (!probationList.isEmpty() || probationList.size() > 0) {
-                                finalprobationList1.add(probationList);
-                            }
-                        } else if ((DateUtils.isSameDay(tDate, level3Date) || tDate.after(level2Date)) && tDate.before(level3Date)) {
-                            List<?> probationList = employeeMasterService.readForProbationlevel3(LoginempId.toString(), employeeId);
-
-                            if (!probationList.isEmpty() || probationList.size() > 0) {
-                                finalprobationList1.add(probationList);
-                            }
-                        } else if ((DateUtils.isSameDay(tDate, level4Date) || tDate.after(level3Date)) && tDate.before(level4Date)) {
-                            List<?> probationList = employeeMasterService.readForProbationlevel3(LoginempId.toString(), employeeId);
-
-                            if (!probationList.isEmpty() || probationList.size() > 0) {
-                                finalprobationList1.add(probationList);
-                            }
-                        }
+//                        } else if ((DateUtils.isSameDay(tDate, level2Date) || tDate.after(level1Date)) && tDate.before(level2Date)) {
+//                            List<?> probationList = employeeMasterService.readForProbationlevel2(LoginempId.toString(), employeeId);
+//
+//                            if (!probationList.isEmpty() || probationList.size() > 0) {
+//                                finalprobationList1.add(probationList);
+//                            }
+//                        } else if ((DateUtils.isSameDay(tDate, level3Date) || tDate.after(level2Date)) && tDate.before(level3Date)) {
+//                            List<?> probationList = employeeMasterService.readForProbationlevel3(LoginempId.toString(), employeeId);
+//
+//                            if (!probationList.isEmpty() || probationList.size() > 0) {
+//                                finalprobationList1.add(probationList);
+//                            }
+//                        } else if ((DateUtils.isSameDay(tDate, level4Date) || tDate.after(level3Date)) && tDate.before(level4Date)) {
+//                            List<?> probationList = employeeMasterService.readForProbationlevel3(LoginempId.toString(), employeeId);
+//
+//                            if (!probationList.isEmpty() || probationList.size() > 0) {
+//                                finalprobationList1.add(probationList);
+//                            }
+//                        }
                     }
 //                      else if (status == 0) {
 //

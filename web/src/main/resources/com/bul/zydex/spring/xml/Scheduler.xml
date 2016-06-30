@@ -34,7 +34,7 @@
     <bean id="cronTrigger2"
           class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="dailyTimeEntryId" />
-        <property name="cronExpression" value="0 0/15 * * * ?" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
         0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying
     </bean>-->
     <!--
@@ -136,9 +136,9 @@
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="jobDetails">
             <list>
-                <!--                <ref bean="timeAttendanceDetail" />
-                <ref bean="dailyTimeEntryId" />
-                <ref bean="overTimeEntryId" />
+                                <!--<ref bean="timeAttendanceDetail" />-->
+                <!--<ref bean="dailyTimeEntryId" />-->
+<!--                <ref bean="overTimeEntryId" />
                 <ref bean="carryForwardLeave" />
                 <ref bean="deviceId" />
                 <ref bean="coffDeleteId" />
@@ -150,9 +150,9 @@
         </property>
         <property name="triggers">
             <list>
-                <!--                <ref bean="cronTrigger1" />
-                <ref bean="cronTrigger2" />
-                <ref bean="cronTrigger3" />
+                                <!--<ref bean="cronTrigger1" />-->
+                <!--<ref bean="cronTrigger2" />-->
+<!--                <ref bean="cronTrigger3" />
                 <ref bean="cronTrigger4" />
                 <ref bean="cronTrigger5" />
                 <ref bean="cronTrigger6" />

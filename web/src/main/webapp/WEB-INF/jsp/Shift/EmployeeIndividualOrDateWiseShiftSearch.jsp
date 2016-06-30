@@ -177,7 +177,7 @@
                                                                     <div><h3>Employee Daily Attendance Information</h3></div>
                                                                     <tr>
                                                                         <td></td>
-                                                                        <c:forEach var="list" items="${map[employeeMasterList[38]]}">
+                                                                        <c:forEach var="list" items="${map[employeeMasterList[47]]}">
                                                                             <th style="text-align: center;">${list[0]}</th>
                                                                             </c:forEach>
                                                                     </tr>
@@ -308,7 +308,7 @@
                                                                                             <c:when test="${leave1[0] ne null and !fn:contains(leave1[0], 'Short Leave')}">
                                                                                                 <c:choose>
 
-                                                                                                <c:when test="${userTimeIn le LateHours and userTimeOut ge endHours and firstCounter le 2}">
+                                                                                                <c:when test="${userTimeIn le LateHours and userTimeOut ge endHours and firstCounter le 31}">
 
                                                                                                     <c:set var="firstCounter" value="${firstCounter +1}"></c:set>
                                                                                                     <c:set var="present" value="${present + 0.5}"></c:set>
@@ -352,7 +352,7 @@
                                                                                                                 </c:otherwise>
                                                                                                             </c:choose>
                                                                                                         </c:when>
-                                                                                                        <c:when test="${userTimeIn le LateHours and userTimeOut ge endHours and firstCounter le 2}">
+                                                                                                        <c:when test="${userTimeIn le LateHours and userTimeOut ge endHours and firstCounter le 31}">
                                                                                                             <c:set var="present" value="${present + 0.5}"></c:set>
                                                                                                             <c:set var="firstCounter" value="${firstCounter +1}"></c:set>
                                                                                                             <th style="color: green;text-align: center;">PR</th>

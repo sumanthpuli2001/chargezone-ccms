@@ -673,7 +673,6 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setEmployeeName(Boolean.FALSE);
         employeeAdvanceSearch.setFatherName(Boolean.FALSE);
         employeeAdvanceSearch.setMotherName(Boolean.FALSE);
-
         employeeAdvanceSearch.setGender(Boolean.FALSE);
         employeeAdvanceSearch.setMaritalStatus(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfBirth(Boolean.FALSE);
@@ -789,7 +788,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     newList.add("PR");
 
                 } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
-                        && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                        && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave")  && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                         && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
                     String[] userTimeInStr = firstHalf.split("`");
                     String[] userTimeInStr1 = userTimeInStr[1].split("!");
@@ -898,7 +897,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     newList.add("AR/P");
                 } else if (firstHalf.equals("AB")) {
                     newList.add("AB");
-                } else if (firstHalf.equals("Casual Leave") || firstHalf.equals("Privilege Leave") || firstHalf.equals("Sick Leave")
+                } else if (firstHalf.equals("Casual Leave") || firstHalf.equals("C Off Leave") || firstHalf.equals("Privilege Leave") || firstHalf.equals("Sick Leave")
                         || firstHalf.equals("Paternity Leave") || firstHalf.equals("Maternity Leave") || firstHalf.equals("Leave Without Pay") || firstHalf.contains("TR")) {
                     newList.add("-");
                 }
@@ -1030,7 +1029,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     secondHalfList.add("PR");
 
                 } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
-                        && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
+                        && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
                         && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
                     String[] leave = secondHalf.split("@");
                     String[] leave1 = leave[1].split("#");
@@ -1096,7 +1095,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         } else if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
                             secondHalfList.add("PR");
                         } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
-                                && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                && !secondHalf.contains("Casual Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
                                 && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
                             secondHalfList.add("AB");
                         } else if (diffMinutes1 >= 240 && userTimeIn.after(secondHalfTimeStr2)) {
@@ -1152,8 +1151,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     secondHalfList.add("-");
                 } else if (secondHalf.equals("AB")) {
                     secondHalfList.add("AB");
-                } else if (secondHalf.equals("Casual Leave") || secondHalf.equals("Privilege Leave") || secondHalf.equals("Sick Leave")
-                        || secondHalf.equals("Paternity Leave") || secondHalf.equals("Maternity Leave") || secondHalf.equals("Leave Without Pay") || secondHalf.contains("TR")) {
+                } else if (secondHalf.equals("Casual Leave") || secondHalf.equals("Short Leave") || secondHalf.equals("Privilege Leave") || secondHalf.equals("Sick Leave")
+                        || secondHalf.equals("Paternity Leave") || !secondHalf.equals("C Off Leave") || secondHalf.equals("Maternity Leave") || secondHalf.equals("Leave Without Pay") || secondHalf.contains("TR")) {
                     secondHalfList.add("-");
                 }
             }

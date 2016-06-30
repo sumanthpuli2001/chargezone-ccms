@@ -32,7 +32,7 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
         Date dateBefore = new Date(date.getTime() - 24 * 60 * 60 * 1000);
         Format formatter = new SimpleDateFormat("dd/MM/YYYY");
         String s = formatter.format(date);
-//        String s = "04/04/2016";
+//        String s = "27/06/2016";
 
         String s1 = formatter.format(dateBefore);
 
@@ -994,8 +994,8 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
         Date dateBefore = new Date(date.getTime() - 24 * 60 * 60 * 1000);
         Format formatter = new SimpleDateFormat("dd/MM/YYYY");
         String s = formatter.format(date);
-//        String s = "04/04/2016";
-//        String s1 = "03/04/2016";
+//        String s = "27/06/2016";
+//        String s1 = "26/06/2016";
         String s1 = formatter.format(dateBefore);
 
         query += " From EmployeeShiftData a "

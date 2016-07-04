@@ -81,12 +81,12 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         c.setTime(level3Date);
                         c.add(Calendar.DATE, 15);
                         Date level4Date = c.getTime();
-                        
+
 //                        if ((DateUtils.isSameDay(tDate, datebefore1) || tDate.after(datebefore1))) {
-                            List<?> probationList = employeeMasterService.readForProbationForManager(LoginempId.toString(), employeeId);
-                            if (!probationList.isEmpty() || probationList.size() > 0) {
-                                finalprobationList1.add(probationList);
-                            }
+                        List<?> probationList = employeeMasterService.readForProbationForManager(LoginempId.toString(), employeeId);
+                        if (!probationList.isEmpty() || probationList.size() > 0) {
+                            finalprobationList1.add(probationList);
+                        }
 //                        } else if ((DateUtils.isSameDay(tDate, level2Date) || tDate.after(level1Date)) && tDate.before(level2Date)) {
 //                            List<?> probationList = employeeMasterService.readForProbationlevel2(LoginempId.toString(), employeeId);
 //
@@ -301,26 +301,26 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
             }
             String eId = request.getParameter("employeeMasterByEmployeeMasterId.id");
             //    Email Sent to Employee
-            try {
-                EmailTemplate emailTemplate = new EmailTemplate();
-                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                DesignationMaster designationMaster = new DesignationMaster();
-                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                EmployeeMaster employeeRequestee = employeeMasterService.readById(Integer.parseInt(eId));
-                // id 96 is status for Probation to confirmation Submitted by Manager(Email for Employee)
-                emailTemplate = emailTemplateService.readById(96);
-                String To = employeeRequestee.getOfficeEmailId();
-                String from = employeeMasterModel.getOfficeEmailId();
-                String Subject = emailTemplate.getSubject();
-                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
-                String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
-                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                sendMail.sendMail(from, To, Subject, msg);
-            } catch (Exception e) {
-
-            }
+//            try {
+//                EmailTemplate emailTemplate = new EmailTemplate();
+//                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//                DesignationMaster designationMaster = new DesignationMaster();
+//                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+//                EmployeeMaster employeeRequestee = employeeMasterService.readById(Integer.parseInt(eId));
+//                // id 96 is status for Probation to confirmation Submitted by Manager(Email for Employee)
+//                emailTemplate = emailTemplateService.readById(96);
+//                String To = employeeRequestee.getOfficeEmailId();
+//                String from = employeeMasterModel.getOfficeEmailId();
+//                String Subject = emailTemplate.getSubject();
+//                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+//                String msg = emailTemplate.getBodytext();
+//                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+//                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//                sendMail.sendMail(from, To, Subject, msg);
+//            } catch (Exception e) {
+//
+//            }
             //    Email Sent to FH
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
@@ -451,26 +451,26 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         mv.getModelMap().put("ptc", ptc);
         mv = functionalheadResultClick(request, response);
         //    Email Sent to Employee
-        try {
-            EmailTemplate emailTemplate = new EmailTemplate();
-            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-            DesignationMaster designationMaster = new DesignationMaster();
-            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-            EmployeeMaster employeeRequestee = employeeMasterService.readById(Integer.parseInt(Emid));
-            // id 99 is status for Probation to confirmation Submitted by FH(Email for Employee)
-            emailTemplate = emailTemplateService.readById(99);
-            String To = employeeRequestee.getOfficeEmailId();
-            String from = employeeMasterModel.getOfficeEmailId();
-            String Subject = emailTemplate.getSubject();
-            Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
-            String msg = emailTemplate.getBodytext();
-            msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
-            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-            sendMail.sendMail(from, To, Subject, msg);
-        } catch (Exception e) {
-
-        }
+//        try {
+//            EmailTemplate emailTemplate = new EmailTemplate();
+//            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//            DesignationMaster designationMaster = new DesignationMaster();
+//            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+//            EmployeeMaster employeeRequestee = employeeMasterService.readById(Integer.parseInt(Emid));
+//            // id 99 is status for Probation to confirmation Submitted by FH(Email for Employee)
+//            emailTemplate = emailTemplateService.readById(99);
+//            String To = employeeRequestee.getOfficeEmailId();
+//            String from = employeeMasterModel.getOfficeEmailId();
+//            String Subject = emailTemplate.getSubject();
+//            Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+//            String msg = emailTemplate.getBodytext();
+//            msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+//            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//            sendMail.sendMail(from, To, Subject, msg);
+//        } catch (Exception e) {
+//
+//        }
         //      Email Sent to ReportingManager1
         try {
             EmailTemplate emailTemplate = new EmailTemplate();
@@ -732,26 +732,26 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
 
             }
             //    Email Sent to Employee
-            try {
-                EmailTemplate emailTemplate = new EmailTemplate();
-                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                DesignationMaster designationMaster = new DesignationMaster();
-                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                EmployeeMaster employeeRequestee = employeeMasterService.readById(Integer.parseInt(Emid));
-                // id 102 is status for Probation to confirmation Approved by HR(Email for Employee)
-                emailTemplate = emailTemplateService.readById(102);
-                String To = employeeRequestee.getOfficeEmailId();
-                String from = employeeMasterModel.getOfficeEmailId();
-                String Subject = emailTemplate.getSubject();
-                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
-                String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
-                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                sendMail.sendMail(from, To, Subject, msg);
-            } catch (Exception e) {
-
-            }
+//            try {
+//                EmailTemplate emailTemplate = new EmailTemplate();
+//                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//                DesignationMaster designationMaster = new DesignationMaster();
+//                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+//                EmployeeMaster employeeRequestee = employeeMasterService.readById(Integer.parseInt(Emid));
+//                // id 102 is status for Probation to confirmation Approved by HR(Email for Employee)
+//                emailTemplate = emailTemplateService.readById(102);
+//                String To = employeeRequestee.getOfficeEmailId();
+//                String from = employeeMasterModel.getOfficeEmailId();
+//                String Subject = emailTemplate.getSubject();
+//                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+//                String msg = emailTemplate.getBodytext();
+//                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+//                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//                sendMail.sendMail(from, To, Subject, msg);
+//            } catch (Exception e) {
+//
+//            }
             //      Email Sent to ReportingManager1
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
@@ -804,26 +804,26 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
             request.setAttribute("successMessage",
                     "Information : Submited Sucessfully");
             //    Email Sent to Employee
-            try {
-                EmailTemplate emailTemplate = new EmailTemplate();
-                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                DesignationMaster designationMaster = new DesignationMaster();
-                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                EmployeeMaster employeeRequestee = employeeMasterService.readById(Integer.parseInt(Emid));
-                // id 109 is status for Probation to confirmation Rejected by HR(Email for Employee)
-                emailTemplate = emailTemplateService.readById(109);
-                String To = employeeRequestee.getOfficeEmailId();
-                String from = employeeMasterModel.getOfficeEmailId();
-                String Subject = emailTemplate.getSubject();
-                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
-                String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
-                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                sendMail.sendMail(from, To, Subject, msg);
-            } catch (Exception e) {
-
-            }
+//            try {
+//                EmailTemplate emailTemplate = new EmailTemplate();
+//                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//                DesignationMaster designationMaster = new DesignationMaster();
+//                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+//                EmployeeMaster employeeRequestee = employeeMasterService.readById(Integer.parseInt(Emid));
+//                // id 109 is status for Probation to confirmation Rejected by HR(Email for Employee)
+//                emailTemplate = emailTemplateService.readById(109);
+//                String To = employeeRequestee.getOfficeEmailId();
+//                String from = employeeMasterModel.getOfficeEmailId();
+//                String Subject = emailTemplate.getSubject();
+//                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+//                String msg = emailTemplate.getBodytext();
+//                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+//                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//                sendMail.sendMail(from, To, Subject, msg);
+//            } catch (Exception e) {
+//
+//            }
             //      Email Sent to ReportingManager1
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
@@ -954,26 +954,26 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
             request.setAttribute("successMessage",
                     "Information : Probation Period Extended Sucessfully.");
             //    Email Sent to Employee
-            try {
-                EmailTemplate emailTemplate = new EmailTemplate();
-                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                DesignationMaster designationMaster = new DesignationMaster();
-                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                EmployeeMaster employeeRequestee = employeeMasterService.readById(Integer.parseInt(Emid));
-                // id 105 is status for Probation to confirmation Extended by HR(Email for Employee)
-                emailTemplate = emailTemplateService.readById(105);
-                String To = employeeRequestee.getOfficeEmailId();
-                String from = employeeMasterModel.getOfficeEmailId();
-                String Subject = emailTemplate.getSubject();
-                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
-                String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
-                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                sendMail.sendMail(from, To, Subject, msg);
-            } catch (Exception e) {
-
-            }
+//            try {
+//                EmailTemplate emailTemplate = new EmailTemplate();
+//                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//                DesignationMaster designationMaster = new DesignationMaster();
+//                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+//                EmployeeMaster employeeRequestee = employeeMasterService.readById(Integer.parseInt(Emid));
+//                // id 105 is status for Probation to confirmation Extended by HR(Email for Employee)
+//                emailTemplate = emailTemplateService.readById(105);
+//                String To = employeeRequestee.getOfficeEmailId();
+//                String from = employeeMasterModel.getOfficeEmailId();
+//                String Subject = emailTemplate.getSubject();
+//                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+//                String msg = emailTemplate.getBodytext();
+//                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+//                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//                sendMail.sendMail(from, To, Subject, msg);
+//            } catch (Exception e) {
+//
+//            }
             //      Email Sent to ReportingManager1
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();

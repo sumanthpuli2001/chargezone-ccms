@@ -23,7 +23,7 @@ public class VisitorManagementDAOImpl<T> extends GenericsDAOImpl<T> implements V
     public List<?> readByEmpId(T object) {
         VisitorManagement visitorManagement = (VisitorManagement) object;
         String query = "";
-        query += " Select  a.visitorName,a.visitorOrganization, a.incomingDateTime, a.status ,a.id ,b.employeeName"
+        query += " Select  a.visitorName,a.visitorOrganization, a.incomingDateTime, a.status ,a.id ,b.employeeName, a.requestDate"
                 + " From VisitorManagement a "
                 + " left join a.employeeMasterBySecurityApproveId b"
                 + " where a.employeeMasterByEmployeeMasterId = " + visitorManagement.getEmployeeMasterByEmployeeMasterId().getId()
@@ -48,7 +48,7 @@ public class VisitorManagementDAOImpl<T> extends GenericsDAOImpl<T> implements V
     public List<?> readByapproverId(T object) {
         VisitorManagement visitorManagement = (VisitorManagement) object;
         String query = "";
-        query += "Select a.id, b.employeeId, b.employeeName, a.visitorName, a.incomingDateTime, b.id ,a.status,c.employeeName"
+        query += "Select a.id, b.employeeId, b.employeeName, a.visitorName, a.incomingDateTime, b.id ,a.status,c.employeeName, a.requestDate"
                 + "  From VisitorManagement a "
                 + " left join a.employeeMasterByEmployeeMasterId b"
                 + " left join a.employeeMasterBySecurityApproveId c"
@@ -109,14 +109,15 @@ public class VisitorManagementDAOImpl<T> extends GenericsDAOImpl<T> implements V
             condition += " AND d.id = " + visitorManagement.getRejectRemark();
         }
 
-        query += " Select a.id, b.employeeId, b.employeeName, a.visitorName, a.incomingDateTime, b.id ,a.status,e.employeeName  "
+        query += " Select a.id, b.employeeId, b.employeeName, a.visitorName, a.incomingDateTime, b.id ,a.status,e.employeeName, a.requestDate  "
                 //                + "b.employeeId, b.employeeName ,a.visitorName,a.visitorOrganization, a.incomingDateTime, a.status "
                 + " From VisitorManagement a"
                 + " LEFT JOIN a.employeeMasterByEmployeeMasterId b "
                 + " left join a.employeeMasterBySecurityApproveId e"
                 + " LEFT JOIN b.departmentMaster c "
                 + " LEFT JOIN b.designationMaster d "
-                + " Where 1=1" + condition;
+                + " Where 1=1" + condition
+                 + "Order by a.id desc";
         List list = getHibernateTemplate().find(query);
         return list;
     }

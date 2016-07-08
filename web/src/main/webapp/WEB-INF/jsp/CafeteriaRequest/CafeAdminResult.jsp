@@ -161,6 +161,7 @@
                                                                         <th>Employee Name</th>
                                                                         <th>Request</th>
                                                                         <th>No.of Employees/Visitors</th>
+                                                                        <th>Requested Date</th>
                                                                         <th>Status</th>
                                                                         <th>Action</th>
                                                                     </tr>
@@ -174,6 +175,7 @@
                                                                     <td>${list[2]}</td>
                                                                     <td>${list[4]}</td>
                                                                     <td>${list[5]}</td>
+                                                                    <td>${list[9]}</td>
                                                                     <td>
                                                                         <c:if test="${list[7] eq 1}"><span class="badge">Pending</span>
                                                                         </c:if>

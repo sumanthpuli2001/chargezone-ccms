@@ -100,7 +100,7 @@ public class GatePassDAOImpl<T> extends GenericsDAOImpl<T> implements GatePassDA
         query += "Select a.id, b.employeeId, b.employeeName,a.assetDescription, a.gatePassType,a.materialOutDateTime,"
                 + " b.id ,a.status,f.employeeName ,e.employeeName,"
                 + " case when (a.status in(2,9))"
-                + " then f.employeeName ELSE e.employeeName END as approver"
+                + " then f.employeeName ELSE e.employeeName END as approver, a.requestDate"
                 + " From GatePass a "
                 + " left join a.employeeMasterByEmployeeMasterId b"
                 + " LEFT JOIN b.departmentMaster c "

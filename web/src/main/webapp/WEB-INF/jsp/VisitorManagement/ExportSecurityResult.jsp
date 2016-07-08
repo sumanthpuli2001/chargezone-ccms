@@ -38,6 +38,7 @@
                         <th>Employee Name</th>
                         <th>Visitor Name</th>
                         <th>Visiting Date And Time</th>
+                        <th>Requested Date</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -52,6 +53,7 @@
                     <td>${list[2]}</td>
                     <td>${list[3]}</td>
                     <td>${list[4]}</td>
+                    <td>${list[8]}</td>
                     <td>
                 <c:if test="${list[6] eq 1}"><span class="badge">Pending</span> 
                 </c:if>

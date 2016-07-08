@@ -45,10 +45,10 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 
     public ModelAndView applyClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        
+
         TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
-        if(null != request.getAttribute("travelRequestMaster1")){
-        travelRequestMaster = (TravelRequestMaster) request.getAttribute("travelRequestMaster1");
+        if (null != request.getAttribute("travelRequestMaster1")) {
+            travelRequestMaster = (TravelRequestMaster) request.getAttribute("travelRequestMaster1");
         }
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
@@ -1582,6 +1582,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 
                 }
                 templist.add(pattern);
+                templist.add("" + obj[10]);
                 finalList.add(templist);
             }
 

@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 
-
 /**
  *
  * @author Dhaval Parmar<dhaval@bulwarks.com>
@@ -140,8 +139,8 @@ public class DeviceMasterController extends DeviceMasterAbstract {
             String deviceip = deviceMaster.getIpAddress();
             int deviceport = deviceMaster.getPortNo();
             int seq_number = deviceMaster.getSeqNumber();
-            if(seq_number==50000){
-                seq_number=1;
+            if (seq_number == 50000) {
+                seq_number = 1;
                 deviceMaster.setSeqNumber(seq_number);
                 deviceMasterService.update(deviceMaster);
             }
@@ -179,8 +178,8 @@ public class DeviceMasterController extends DeviceMasterAbstract {
             myURLConnection1.connect();
             reader1 = new BufferedReader(new InputStreamReader(myURLConnection1.getInputStream()));
             String response;
-            String rollOverCount="";
-            String urlSeqNo="";
+            String rollOverCount = "";
+            String urlSeqNo = "";
 //            String cc="";
             while ((response = reader1.readLine()) != null) {
                 System.out.println(response);
@@ -189,7 +188,7 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                     String[] aa = urlSeqNo.split(">");
                     String zz = aa[1];
                     String[] xx = zz.split("<");
-                    urlSeqNo = xx[0].trim();    
+                    urlSeqNo = xx[0].trim();
                 }
                 if (response1LineCounter == 2) {
                     rollOverCount = response;
@@ -200,8 +199,8 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                 }
                 response1LineCounter++;
             }
-            int curSeqNo=Integer.parseInt(urlSeqNo);
-            int rollOverCountInUrl=Integer.parseInt(rollOverCount);
+            int curSeqNo = Integer.parseInt(urlSeqNo);
+            int rollOverCountInUrl = Integer.parseInt(rollOverCount);
 //encoding message
             String encoded_message = URLEncoder.encode(message);
             while (seq_number <= curSeqNo) //-1 is for make this condition alwayts true. and we will termi9nate thisa loop while we get the null response from server using the sequence no.
@@ -209,7 +208,7 @@ public class DeviceMasterController extends DeviceMasterAbstract {
 
 //Send SMS API
 //            String mainUrl = "http://deviceip:deviceport/device.cgi/events?action=getevent&roll-over-count=1&seq-number=1&no-of-event=1";
-                String mainUrl = "http://" + deviceip + ":" + deviceport + "/device.cgi/events?action=getevent&roll-over-count="+rollOverCountInUrl+"&seq-number=" + seq_number + "&no-of-events=1";
+                String mainUrl = "http://" + deviceip + ":" + deviceport + "/device.cgi/events?action=getevent&roll-over-count=" + rollOverCountInUrl + "&seq-number=" + seq_number + "&no-of-events=1";
 
 //Prepare parameter string
                 StringBuilder sbPostData = new StringBuilder(mainUrl);
@@ -254,7 +253,6 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                             }
                             responseLineCounter++;
                         }
-                        
 
                         DeviceMaster deviceMaster1 = new DeviceMaster();
                         deviceMaster1 = deviceMasterService.readById(deviceId);
@@ -270,7 +268,10 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                         }
                         //deviceMaster1.setSeqNumber(Integer.parseInt(sequenceNoUrl));
                         deviceMasterService.update(deviceMaster1);
-                            seq_number++;
+                        seq_number++;
+                        if (seq_number == 50000) {
+                            seq_number = 1;
+                        }
                     }
                     //finally close connection`
                     reader.close();

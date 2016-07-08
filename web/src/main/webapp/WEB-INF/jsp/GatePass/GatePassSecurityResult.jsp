@@ -161,6 +161,7 @@
                                                                         <th >Assets</th>
                                                                         <th >Return Type</th>
                                                                         <th >Date And Time</th>
+                                                                        <th >Requested Date</th>
                                                                         <th>Status</th>
                                                                         <th style="width: 10%">Action</th>
                                                                     </tr>
@@ -174,11 +175,13 @@
                                                                     <td style="width: 10%">${Securitylist[1]}</td>
                                                                     <td style="width: 10%">${Securitylist[2]}</td>
                                                                     <td style="width: 10%">${Securitylist[3]}</td>
+                                                                  
                                                                     <td style="width: 10%">
                                                                        <c:if test="${Securitylist[4] eq true}">Returnable Gate Pass</c:if>
                                                                        <c:if test="${Securitylist[4] eq false}">Non-Returnable Gate Pass</c:if>
                                                                         </td>
                                                                     <td>${Securitylist[5]}</td>
+                                                                      <td>${Securitylist[11]}</td>
                                                                     <td style="width: 10%">
                                                                         <c:if test="${Securitylist[7] eq 1}">
                                                                            <span class="badge">Requested</span>

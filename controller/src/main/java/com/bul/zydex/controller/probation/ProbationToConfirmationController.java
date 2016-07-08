@@ -274,7 +274,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     request.setAttribute("successMessage",
                             "Information : Successfully Submited to Functional head for Confirmation.");
                     mv = searchSubmit(request, response);
-                } else if (ptc1.getStatus() == 0) {
+                } else if (ptc1.getStatus() == 0 || ptc1.getStatus() == 10) {
                     ptc1.setStatus(1);
                     String requestdate = sdf.format(new Date());
                     ptc.setReportingManagerSubmitDate(requestdate);
@@ -1040,6 +1040,31 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
 //        }
         }else if(submitType.equals("rework")){
             ptc.setStatus(10);   // status 10 for Rework
+             request.setAttribute("successMessage",
+                    "Information : Reworked Sucessfully");
+            
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                EmployeeMaster employeeRequestee = employeeMasterService.readById(Integer.parseInt(Emid));
+                String rmId = employeeRequestee.getReportingManagerLevel1();
+                EmployeeMaster employeeMasterHr = employeeMasterService.readById(Integer.parseInt(rmId));
+                // id 1390 is status for Probation to confirmation Reworked by HR(Email for Manager)
+                emailTemplate = emailTemplateService.readById(139);
+                String To = employeeMasterHr.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+
+            }
         }
         String hrdate = sdf.format(new Date());
         ptc.setHrSubmitDate(hrdate);

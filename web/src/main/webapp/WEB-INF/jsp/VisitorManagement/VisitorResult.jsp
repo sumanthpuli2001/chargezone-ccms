@@ -135,6 +135,7 @@
                                                                     <th style="width: 20%">Visitor's Name</th>
                                                                     <th style="width: 20%">Visitor's Organization</th>
                                                                     <th style="width: 20%">Date</th>
+                                                                    <th style="width: 20%">Requested Date</th>
                                                                     <th style="width: 20%">Status</th>
                                                                     <th style="width: 10%">Action</th>
                                                                 </tr>
@@ -148,6 +149,7 @@
                                                                 <td>${visitorlist[0]}</td>
                                                                 <td>${visitorlist[1]}</td>
                                                                 <td>${visitorlist[2]}</td>
+                                                                <td>${visitorlist[6]}</td>
 
                                                                 <td>
                                                                     <c:if test="${visitorlist[3] eq 1}"><span class="badge">Pending</span></c:if> 

@@ -114,7 +114,7 @@ public class TravelRequestMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         query += " Select b.employeeId, b.employeeName, a.travelType, a.travelRequestNo, a.startDateTime, a.endDateTime, a.id, b.id, a.status, "
                 + " case when (a.status=5 and a.travelType ='International')"
-                + " then e.employeeName ELSE d.employeeName END as approver"
+                + " then e.employeeName ELSE d.employeeName END as approver, a.dateOfSubmit"
                 + " FROM TravelRequestMaster a"
                 + " LEFT JOIN a.employeeMasterByEmployeeMasterId b"
                 + " LEFT JOIN a.employeeMasterByApprover1Id d"

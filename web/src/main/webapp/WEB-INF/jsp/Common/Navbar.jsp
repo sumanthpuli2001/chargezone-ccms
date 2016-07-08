@@ -117,11 +117,15 @@
                             <c:if test="${sessionScope.checkReportingManager}">
                                 <li><a href="attendanceRegularizationMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>AR Application</a></li>
                                 </c:if>
+
                             <!--<li><a href="attendanceRegularizationMaster.htm?act=employyeAttendanceApproeList"><i class="fa fa-circle-o"></i>Approved</a></li>-->
                             <li><a href="attendanceRegularizationMaster.htm?act=showOwnAttandance"><i class="fa fa-circle-o"></i>Show Attendance</a></li>
 
                         </c:if>
-                        <c:if test="${sessionScope.isReportingManagerDataExist}">
+                        <c:if test="${sessionScope.userRight.attendanceReport}">
+                            <li><a href="attendanceRegularizationMaster.htm?act=powerAdminApprovalList"><i class="fa fa-circle-o"></i>View All AR</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.isReportingManagerDataExist}">
 
                             <li><a href="attendanceRegularizationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i>Subordinates Request</a></li>
                             <!--<li><a href="attendanceRegularizationMaster.htm?act=approvedList"><i class="fa fa-circle-o"></i>Approved Request</a></li>-->
@@ -544,10 +548,10 @@
                             <li><a href="shiftRotationMaster.htm?act=attendanceExcelUpload"><i class="fa fa-circle-o"></i>Attendance Upload</a></li>
                             </c:if>
                             <c:if test="${sessionScope.userRight.lunaPlantAttendanceMgnt}">
-                                    <li><a href="shiftRotationMaster.htm?act=employeeAttendanceForLuna"><i class="fa fa-circle-o"></i>Luna Attendance Download</a></li>
+                            <li><a href="shiftRotationMaster.htm?act=employeeAttendanceForLuna"><i class="fa fa-circle-o"></i>Luna Attendance Download</a></li>
                             </c:if>
                             <c:if test="${sessionScope.userRight.gavasatPlantAttendanceMgnt}">
-                                  <li><a href="shiftRotationMaster.htm?act=employeeAttendanceForGavasat"><i class="fa fa-circle-o"></i>Gavasat Attendance Download</a></li>
+                            <li><a href="shiftRotationMaster.htm?act=employeeAttendanceForGavasat"><i class="fa fa-circle-o"></i>Gavasat Attendance Download</a></li>
                             </c:if>
                     </ul>
 

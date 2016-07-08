@@ -207,6 +207,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //            mv = applyClick(request, response);
         } else {
             String leaveTypeMasterId = request.getParameter("leaveTypeMaster.id");
+
             if (!"".equals(leaveTypeMasterId)) {
                 leaveTypeMaster.setId(Integer.parseInt(leaveTypeMasterId));
                 leaveTypeMaster = leaveTypeMasterService.readById(leaveTypeMaster.getId());
@@ -267,7 +268,21 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         }
                     }
                     if (leaveTypeMaster.getLeaveType().contains("Short Leave")) {
-                        if (flag) {
+                        String yourDate = leaveEmployeeDetail.getStartDate();
+                        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+                        Date date1 = sdf1.parse(yourDate);
+                        Calendar c = Calendar.getInstance();
+                        c.setTime(date1);
+                        int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
+                        SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                        String dayName = format.format(date1);
+                        int locationId = employeeMaster.getZydexLocationMaster().getId();
+                        if (dayName.equals("Saturday") && dayOfWeek == 2 && (locationId == 1 || locationId == 6)) {
+                            request.setAttribute("failureMessage",
+                                    "Error :On Second Saturday You can Not Apply Short Leave");
+                            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                            mv = applyClick(request, response);
+                        } else if (flag) {
                             request.setAttribute("failureMessage",
                                     "Error :You Have Already apply Leave On that Day...");
                             request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
@@ -1702,50 +1717,50 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 double totalAppliedLeave = 0;
                 Object[] o = (Object[]) iterator.next();
                 String leaveType = (String) o[0];
-
-                if ((zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D")) && leaveType.equals("Short Leave")) {
-                } else {
-                    if (leaveType.equals("Paternity Leave") && !employeeMaster.getGender()) {
-                        iterator.remove();
-                        continue;
-                    } else if (leaveType.equals("Maternity Leave") && employeeMaster.getGender()) {
-                        iterator.remove();
-                        continue;
-                    }
-                    totalAppliedLeave = (Float) o[1];
-                    int leaveId = (Integer) o[2];
-                    LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
-                    leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
-                    LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
-                    leaveTypeMaster.setId(leaveId);
-                    leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster);
-                    List leaveWiseCountList = new ArrayList();
-                    if (leaveType.equals("Short Leave")) {
-                        leaveWiseCountList = leaveEmployeeDetailService.readApprovedShortLeaveDays(leaveEmployeeDetail);
-                    } else {
-
-                        leaveWiseCountList = leaveEmployeeDetailService.readApprovedLeaveDays(leaveEmployeeDetail);
-                    }
-                    double leaveCount = 0;
-                    if (null != leaveWiseCountList.get(0)) {
-                        leaveCount = (Double) leaveWiseCountList.get(0);
-                    }
-//                totalLeave = totalAppliedLeave;
-                    totalLeave1 = leaveCount + totalAppliedLeave;
-                    finalList.add(o[0]);
-                    finalList.add(leaveCount);
-                    finalList.add(totalLeave1);
-                    percantage = (leaveCount * 100) / totalLeave1;
-                    if (String.valueOf(percantage).equalsIgnoreCase("NaN")) {
-                        percantage = 0;
-                    }
-                    finalList.add(percantage);
-                    finalList.add(colorStr[count]);
-                    finalLeaveList.add(finalList);
-                    if (count > 8) {
-                        count = 0;
-                    }
+//
+//                if ((zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D")) && leaveType.equals("Short Leave")) {
+//                } else {
+                if (leaveType.equals("Paternity Leave") && !employeeMaster.getGender()) {
+                    iterator.remove();
+                    continue;
+                } else if (leaveType.equals("Maternity Leave") && employeeMaster.getGender()) {
+                    iterator.remove();
+                    continue;
                 }
+                totalAppliedLeave = (Float) o[1];
+                int leaveId = (Integer) o[2];
+                LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+                leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
+                LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+                leaveTypeMaster.setId(leaveId);
+                leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster);
+                List leaveWiseCountList = new ArrayList();
+                if (leaveType.equals("Short Leave")) {
+                    leaveWiseCountList = leaveEmployeeDetailService.readApprovedShortLeaveDays(leaveEmployeeDetail);
+                } else {
+
+                    leaveWiseCountList = leaveEmployeeDetailService.readApprovedLeaveDays(leaveEmployeeDetail);
+                }
+                double leaveCount = 0;
+                if (null != leaveWiseCountList.get(0)) {
+                    leaveCount = (Double) leaveWiseCountList.get(0);
+                }
+//                totalLeave = totalAppliedLeave;
+                totalLeave1 = leaveCount + totalAppliedLeave;
+                finalList.add(o[0]);
+                finalList.add(leaveCount);
+                finalList.add(totalLeave1);
+                percantage = (leaveCount * 100) / totalLeave1;
+                if (String.valueOf(percantage).equalsIgnoreCase("NaN")) {
+                    percantage = 0;
+                }
+                finalList.add(percantage);
+                finalList.add(colorStr[count]);
+                finalLeaveList.add(finalList);
+                if (count > 8) {
+                    count = 0;
+                }
+//                }
             } catch (Exception e) {
 
             }
@@ -2029,7 +2044,14 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
             for (Object zz : empBalancelist) {
                 employeeLeaveBalance = (EmployeeLeaveBalance) zz;
-                employeeLeaveBalance.setNoOfLeaveRemain(2);
+                int empId = employeeLeaveBalance.getEmployeeMaster().getId();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(empId);
+                int locationId = employeeMaster1.getZydexLocationMaster().getId();
+                if (locationId == 1 || locationId == 6) {
+                    employeeLeaveBalance.setNoOfLeaveRemain(1);
+                } else {
+                    employeeLeaveBalance.setNoOfLeaveRemain(2);
+                }
                 employeeLeaveBalanceService.update(employeeLeaveBalance);
 //            System.out.println("Ajay");
             }
@@ -2038,9 +2060,14 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             List<?> empList = employeeMasterService.read();
             for (Object oo : empList) {
                 employeeMaster1 = (EmployeeMaster) oo;
+                int locationId = employeeMaster1.getZydexLocationMaster().getId();
+                if (locationId == 1 || locationId == 6) {
+                    employeeLeaveBalance.setNoOfLeaveRemain(1);
+                } else {
+                    employeeLeaveBalance.setNoOfLeaveRemain(2);
+                }
                 employeeLeaveBalance.setEmployeeMaster(employeeMaster1);
                 employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
-                employeeLeaveBalance.setNoOfLeaveRemain(2);
                 employeeLeaveBalanceService.create(employeeLeaveBalance);
             }
         }

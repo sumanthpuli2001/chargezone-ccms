@@ -23,6 +23,9 @@ import com.bul.zydex.model.UpdateAppraisalPerformanceActivities;
 import com.bul.zydex.model.UpdateAppraisalPerformanceKra;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.UserRightMaster;
+import com.bul.zydex.util.DownloadFile;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Year;
@@ -34,6 +37,13 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Row;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -4576,26 +4586,207 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
                 mv.setViewName("Appraisal/CompetencyReport");
             } else if (searchvalue.equals("idp")) {
+                int rownum = 0;
+                int rownum1 = 2;
+                HSSFWorkbook firstFWorkbook = new HSSFWorkbook();
+                HSSFSheet firstSheet = firstFWorkbook.createSheet("FIRST SHEET");
+                Row headerRow = firstSheet.createRow(rownum);
+                headerRow.setHeightInPoints(40);
+                HSSFFont boldFont = firstFWorkbook.createFont();
+                boldFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+                HSSFCellStyle styleBold = firstFWorkbook.createCellStyle();
+                styleBold.setFont(boldFont);
+                List<List<String>> recordToAdd = new ArrayList();
+                List<List<String>> recordToAdd1 = new ArrayList();
+                List<String> headerRow1 = new ArrayList();
+                List<String> headerRow2 = new ArrayList();
+                headerRow1.add("Employee ID");
+                headerRow1.add("Employee Name");
+                headerRow1.add("Department");
+                headerRow1.add("Designation");
+                headerRow1.add("Year");
+                headerRow1.add("level");
+//                headerRow1.add("IDP1");
+                headerRow1.add("IDP1 Name & Details");
+                headerRow1.add("IDP Type");
+                headerRow1.add("How to achieve this IDP");
+                headerRow1.add("Other");
+                headerRow1.add("Employee Mid-Year Remark");
+                headerRow1.add("Employee End-Year Remark");
+                headerRow1.add("Manager Mid-Year Remark");
+                headerRow1.add("Manager End-Year Remark");
+//                headerRow1.add("IDP2");
+                headerRow1.add("IDP2 Name & Details");
+                headerRow1.add("IDP Type");
+                headerRow1.add("How to achieve this IDP");
+                headerRow1.add("Other");
+                headerRow1.add("Employee Mid-Year Remark");
+                headerRow1.add("Employee End-Year Remark");
+                headerRow1.add("Manager Mid-Year Remark");
+                headerRow1.add("Manager End-Year Remark");
+//                headerRow1.add("IDP3");
+                headerRow1.add("IDP3 Name & Details");
+                headerRow1.add("IDP Type");
+                headerRow1.add("How to achieve this IDP");
+                headerRow1.add("Other");
+                headerRow1.add("Employee Mid-Year Remark");
+                headerRow1.add("Employee End-Year Remark");
+                headerRow1.add("Manager Mid-Year Remark");
+                headerRow1.add("Manager End-Year Remark");
+//                headerRow1.add("IDP4");
+                headerRow1.add("IDP4 Name & Details");
+                headerRow1.add("IDP Type");
+                headerRow1.add("How to achieve this IDP");
+                headerRow1.add("Other");
+                headerRow1.add("Employee Mid-Year Remark");
+                headerRow1.add("Employee End-Year Remark");
+                headerRow1.add("Manager Mid-Year Remark");
+                headerRow1.add("Manager End-Year Remark");
+//                headerRow1.add("IDP5");
+                headerRow1.add("IDP5 Name & Details");
+                headerRow1.add("IDP Type");
+                headerRow1.add("How to achieve this IDP");
+                headerRow1.add("Other");
+                headerRow1.add("Employee Mid-Year Remark");
+                headerRow1.add("Employee End-Year Remark");
+                headerRow1.add("Manager Mid-Year Remark");
+                headerRow1.add("Manager End-Year Remark");
+
+                recordToAdd.add(headerRow1);
+                for (int j = 0; j < recordToAdd.size(); j++) {
+                    List<String> l2 = recordToAdd.get(j);
+                    Row row = firstSheet.createRow((short) rownum);
+                    Row row1 = firstSheet.createRow(rownum);
+                    for (int k = 0; k < l2.size(); k++) {
+                        Cell cell = row.createCell((short) k);
+
+                        if (j == 0) {
+                            cell.setCellStyle(styleBold);
+                        }
+
+                    }
+                    rownum++;
+                }
+
+                for (int j = 0; j < recordToAdd.size(); j++) {
+                    List<String> l2 = recordToAdd.get(j);
+                    Row row = firstSheet.createRow(rownum);
+                    for (int k = 0; k < l2.size(); k++) {
+                        Cell cel2 = row.createCell(k);
+                        cel2.setCellValue(l2.get(k));
+
+                        if (j == 0) {
+                            cel2.setCellStyle(styleBold);
+
+                        }
+                        rownum++;
+                    }
+
+                }
 
                 List<?> empIdpDetail = appraisalPerformanceService.readIDPSearchByEmployee(appraisalPerformanceMaster);
-                mv.getModelMap().put("list", empIdpDetail);
-                List<?> idpDetail = new ArrayList<Object>();
-//                List<Object> idpDetail1 = new ArrayList<Object>();
-                if (!empIdpDetail.isEmpty()) {
-                    for (int i = 0; i < empIdpDetail.size(); i++) {
-                        Object[] ss = (Object[]) empIdpDetail.get(i);
-                        int idpID = (Integer) ss[0];
-                        appraisalPerformanceMaster.setId(idpID);
-
-                        idpDetail = appraisalPerformanceService.readIDPSearchByEmployeeWise(appraisalPerformanceMaster);
-//                        idpDetail1.add(idpDetail);
+                for (int j = 0; j < empIdpDetail.size(); j++) {
+                    Object[] l2 = (Object[]) empIdpDetail.get(j);
+                    Row row = firstSheet.createRow(rownum1);
+                    int l = 0;
+                    for (int k = 2; k < l2.length; k++) {
+                        Cell cell = row.createCell(l);
+                        cell.setCellValue("" + l2[k]);
+                        l++;
                     }
+                    int idpID = (Integer) l2[0];
+                    appraisalPerformanceMaster.setId(idpID);
+
+                    List idpDetail = appraisalPerformanceService.readIDPSearchByEmployeeWise(appraisalPerformanceMaster);
+//                    l = l + 1;
+                    for (int z = 0; z < idpDetail.size(); z++) {
+                        Object[] idpObj = (Object[]) idpDetail.get(z);
+                        for (int k = 1; k < idpObj.length; k++) {
+                            Cell cell = row.createCell(l);
+                            if (null != idpObj[k]) {
+
+                                cell.setCellValue("" + idpObj[k]);
+                            } else {
+                                cell.setCellValue("");
+
+                            }
+
+                            l++;
+                        }
+
+                    }
+
+                    rownum1++;
                 }
-                mv.getModelMap().put("list1", idpDetail);
-                response.setContentType("application/vnd.ms-excel");
-                response.setHeader("Content-Disposition", "attachment; filename=EmployeeIDPReport.xls");
-                mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
-                mv.setViewName("Appraisal/IDPReport");
+//                int colToRemove = 5;
+//                Iterator rowIter = firstSheet.iterator();
+//                while (rowIter.hasNext()) {
+//                    HSSFRow row = (HSSFRow) rowIter.next();
+//                    HSSFCell cell = row.getCell(colToRemove);
+//                    row.removeCell(cell);
+//                }
+
+//                mv.getModelMap().put("list", empIdpDetail);
+//                List<?> idpDetail = new ArrayList<Object>();
+//                List<Object> idpDetail1 = new ArrayList<Object>();
+//                if (!empIdpDetail.isEmpty()) {
+////                    for (int i = 0; i < empIdpDetail.size(); i++) {
+////                        Object[] ss = (Object[]) empIdpDetail.get(i);
+////                        int idpID = (Integer) ss[0];
+////                        appraisalPerformanceMaster.setId(idpID);
+////
+////                        idpDetail = appraisalPerformanceService.readIDPSearchByEmployeeWise(appraisalPerformanceMaster);
+//////                        idpDetail1.add(idpDetail);
+//////                        for (int j = 0; j < idpDetail1.size(); j++) {
+//////                            Object[] l23 = (Object[]) idpDetail1.get(j);
+////                        if (!idpDetail.isEmpty()) {
+////
+////                            Object[] l23 = (Object[]) idpDetail.get(0);
+////                            Row row = firstSheet.createRow(rownum1);
+////                            
+////                            //int l = 2;
+////                            for (int k = 0; k < l23.length; k++) {
+////                                Cell cell = row.createCell(k);
+////                                cell.setCellValue("" + l23[k]);
+////                                //l++;
+////                            }
+////                            rownum1++;
+////                        }
+//////                        }
+////                    }
+//                }
+//                mv.getModelMap().put("list1", idpDetail);
+//                response.setContentType("application/vnd.ms-excel");
+//                response.setHeader("Content-Disposition", "attachment; filename=EmployeeIDPReport.xls");
+//                mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
+//                mv.setViewName("Appraisal/IDPReport");
+                String appPath = request.getServletContext().getRealPath("");
+                try {
+                    String filePath = appPath + File.separator + "StorageYard" + File.separator
+                            + "Other" + File.separator + "UserDoc" + File.separator
+                            + "EmployeeDailyPunch" + File.separator + "EmployeeDailyPunch.xls";
+                    FileOutputStream fos = new FileOutputStream(new File(filePath));
+                    HSSFCellStyle hsfstyle = firstFWorkbook.createCellStyle();
+                    hsfstyle.setBorderBottom((short) 1);
+                    hsfstyle.setFillBackgroundColor((short) 245);
+                    firstFWorkbook.write(fos);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                String filePath = File.separator + "StorageYard" + File.separator
+                        + "Other" + File.separator + "UserDoc" + File.separator
+                        + "EmployeeDailyPunch" + File.separator + "EmployeeDailyPunch.xls";
+
+                appPath = request.getServletContext().getRealPath("");
+
+                String fullPath = appPath + filePath;
+
+                request.setAttribute("filePath", fullPath);
+
+                DownloadFile downloadFile = new DownloadFile();
+                downloadFile.doDownload(request, response);
+                return mv;
 
             }
         }

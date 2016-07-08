@@ -80,5 +80,11 @@
         <property name="hrApprovalRemark" type="string">
             <column name="hr_approval_remark"  />
         </property>
+        <property name="managerJustification" type="string">
+            <column name="manager_justification"  />
+        </property>
+        <property name="hrAdditionalRemark" type="string">
+            <column name="hr_additional_remark"  />
+        </property>
     </class>
 </hibernate-mapping>

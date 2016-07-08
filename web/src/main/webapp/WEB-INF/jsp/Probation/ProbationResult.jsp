@@ -8,13 +8,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
-         <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
+        <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
+        <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Probation To Confirmation Result</title>
     </head>
     <body>
-         <div class="content-wrapper">
+        <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>Probation To Confirmation Result </h1>
@@ -61,6 +61,7 @@
                                                                         <th>Employee Id</th>
                                                                         <th>Employee Name</th>
                                                                         <th>Date of Joining(DD/MM/YYYY)</th>
+                                                                        <th>status</th>
                                                                         <th>Action</th>
                                                                     </tr>
                                                                 </thead>
@@ -70,22 +71,24 @@
                                                             <c:forEach var="list" items="${finalprobationList}" varStatus="status">
                                                                 <tr>
                                                                     <!--<td></td>--> 
-                                                            <td>${list[0].employeeId}</td>
-                                                            <td>${list[0].employeeName}</td>
-                                                            <td>${list[0].dateOfJoining}</td>
-                                                                    <td>
+                                                                    <td>${list[0][0].employeeId}</td>
+                                                                    <td>${list[0][0].employeeName}</td>
+                                                                    <td>${list[0][0].dateOfJoining}</td>
+
+                                                                    <td><c:if test="${list[0][1].status eq 10}">Reworked</c:if></td>
+                                                                        <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-default dropdown-toggle"  onclick="viewClick(${list[0].id});" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                            View
-                                                                                </button>
-<!--                                                                                <ul class="dropdown-menu">
-                                                                                    <li>
-                                                                                    </li>
-                                                                                </ul>-->
-                                                                            </div>
-                                                                        </td>
+                                                                                <button type="button" class="btn btn-default dropdown-toggle"  onclick="viewClick(${list[0][0].id});" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                View
+                                                                            </button>
+                                                                            <!--                                                                                <ul class="dropdown-menu">
+                                                                                                                                                                <li>
+                                                                                                                                                                </li>
+                                                                                                                                                            </ul>-->
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
-                                                         
+
                                                             </c:forEach>
                                                         </tbody>
                                                     </table>

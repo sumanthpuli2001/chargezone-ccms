@@ -56,7 +56,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     Integer status = ptc2.getStatus();
                     if (status == 1 || status == 2) {
 
-                    } else if (status == 4 || status == 0) {
+                    } else if (status == 4 || status == 0 || status == 10) {
                         String assessmentToDatestring = ptc2.getAssessmentToDate();
                         String today = sdf.format(new Date());
                         Date tDate = sdf.parse(today);
@@ -224,6 +224,10 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
 //            Date newDate = c.getTime();
 //            String dateafter6month = sdf.format(newDate);
 //            ptc.setAssessmentToDate(dateafter6month);
+            } else if(pt.getStatus().equals(10)){
+                ptc = (ProbationToConfirmation)pt;
+                 ptc.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+                
             }
         } else {
 
@@ -290,6 +294,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         ptc1.setRecommendationExtendPeriod(ptc.getRecommendationExtendPeriod());
                         ptc1.setRecommendationRemark(ptc.getRecommendationRemark());
                     }
+                    ptc1.setManagerJustification(ptc.getManagerJustification());
                     probationToConfirmationService.update(ptc1);
                     request.setAttribute("successMessage",
                             "Information : Successfully Submited to Functional head for Confirmation.");
@@ -373,6 +378,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
 
                 }
             }
+            mv = searchSubmit(request, response);
         }
         return mv;
     }
@@ -445,6 +451,8 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
             ptc.setApprovalRemark(ptc1.getApprovalRemark());
         }
         ptc.setStatus(2);
+        ptc.setManagerJustification(ptc1.getManagerJustification());
+        ptc.setHrAdditionalRemark(ptc1.getHrAdditionalRemark());
         probationToConfirmationService.update(ptc);
         request.setAttribute("successMessage",
                 "Information : Submitted Sucessfully");
@@ -710,10 +718,14 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         ProbationToConfirmation ptc1 = new ProbationToConfirmation();
         String id = request.getParameter("id");
         String Emid = request.getParameter("Emid");
+        String submitType = request.getParameter("submit");
         BindException errors = new BindException(ptc, "ptc");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         bind(request, ptc1);
         ptc = probationToConfirmationService.readById(Integer.parseInt(id));
+        if(submitType.equals("approve")){
+            
+        
         ptc.setRecomendationByHr(ptc1.getRecomendationByHr());
         ptc.setImprovementComment(ptc1.getImprovementComment());
         ptc.setHrSelect(ptc1.getHrSelect());
@@ -1026,6 +1038,9 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
 //        } else {
 //            ptc.setStatus(5);
 //        }
+        }else if(submitType.equals("rework")){
+            ptc.setStatus(10);   // status 10 for Rework
+        }
         String hrdate = sdf.format(new Date());
         ptc.setHrSubmitDate(hrdate);
         HttpSession session = request.getSession();

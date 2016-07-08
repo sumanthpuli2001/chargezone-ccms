@@ -33,8 +33,8 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
         Date dateBefore = new Date(date.getTime() - 24 * 60 * 60 * 1000);
         Format formatter = new SimpleDateFormat("dd/MM/YYYY");
         String s = formatter.format(date);
-//          String s = "27/06/2016";
-//          String s1 = "26/06/2016";
+//          String s = "01/07/2016";
+//          String s1 = "30/06/2016";
         String s1 = formatter.format(dateBefore);
         query += " From EmployeeDatetimeData a "
                 + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') BETWEEN STR_TO_DATE('" + s1 + " " + endShiftTime + ":00','%d/%m/%Y %H:%i:%s') AND (STR_TO_DATE('" + s + " 23:59:00','%d/%m/%Y %H:%i:%s'))"
@@ -76,7 +76,7 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
         Date dateBefore = new Date(date.getTime() - 24 * 60 * 60 * 1000);
         Format formatter = new SimpleDateFormat("dd/MM/YYYY");
         String s = formatter.format(date);
-//        String s = "27/06/2016";
+//        String s = "02/07/2016";
 //        String s1 = formatter.format(dateBefore);
         query += " From EmployeeDatetimeData a "
                 + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y') IN (STR_TO_DATE('" + s + "','%d/%m/%Y'),STR_TO_DATE('" + s + "','%d/%m/%Y'))"
@@ -93,8 +93,8 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
         String query = "";
         Date date = new Date();
         Format formatter = new SimpleDateFormat("dd/MM/YYYY");
-//        String s = formatter.format(date);
-        String s = "27/06/2016";
+        String s = formatter.format(date);
+//        String s = "02/07/2016";
         query += " From EmployeeDatetimeData a "
                 + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y') IN (STR_TO_DATE('" + s + "','%d/%m/%Y'))"
                 + " GROUP BY a.employeeMaster.id";
@@ -116,4 +116,22 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
 
         return getHibernateTemplate().find(query);
     }
+    
+    @Override
+    public List<?> readYesterdayEmployeeData(String empId) {
+        String query = "";
+        Date date = new Date();
+        Date dateBefore = new Date(date.getTime() - 24 * 60 * 60 * 1000);
+        Format formatter = new SimpleDateFormat("dd/MM/YYYY");
+        String s1 = formatter.format(dateBefore);
+//        String s1 = "01/07/2016";
+        query += " From EmployeeDatetimeData a "
+                + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y') IN (STR_TO_DATE('" + s1 + "','%d/%m/%Y'),STR_TO_DATE('" + s1 + "','%d/%m/%Y'))"
+                + " And a.employeeMaster.id=" + empId
+                + " GROUP BY a.dateTime"
+                + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

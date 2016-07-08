@@ -53,4 +53,8 @@ public class EmployeeDatetimeDataServiceImpl<T> extends GenericsServiceImpl<T> i
     public List<?> todaysData(int id) {
         return employeeDatetimeDataDAO.todaysData(id);
     }
+    @Override
+    public List<?> readYesterdayEmployeeData(String empId) {
+        return employeeDatetimeDataDAO.readYesterdayEmployeeData(empId);
+    }
 }

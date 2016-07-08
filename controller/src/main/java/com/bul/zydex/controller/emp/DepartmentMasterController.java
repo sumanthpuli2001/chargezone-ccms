@@ -32,6 +32,9 @@ public class DepartmentMasterController extends DepartmentMasterAbstract {
             mv.addAllObjects(errors.getModel());
             mv.setViewName("Department/DepartmentCreate");
         } else {
+            String abc= departmentMaster.getDepartmentName().replaceAll("'", "");
+            departmentMaster.setDepartmentName(abc);
+            
             if (departmentMasterService.isExist(departmentMaster)) {
                 departmentMasterService.createOrUpdate(departmentMaster);
                 mv.addObject("successMessage", "Information : Information Saved Successfully.");

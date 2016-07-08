@@ -23,7 +23,9 @@ public interface EmployeeDatetimeDataDAO<T> extends GenericsDAO<T> {
     public List<?> readTodaysEmployeeData(String empId);
 
     public List<?> readEmployeeByCurrentDate();
-    
-    public List<?> todaysData(int id); 
+
+    public List<?> todaysData(int id);
+
+    public List<?> readYesterdayEmployeeData(String empId);
 
 }

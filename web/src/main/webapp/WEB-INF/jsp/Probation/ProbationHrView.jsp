@@ -61,6 +61,8 @@
 //            alert("called");
                 var selectedValue = document.getElementById("hrSelectId").value;
 //                alert(selectedValue);
+if(document.getElementById('saveSubmit1').value=='approve'){
+    
                 if (document.getElementById("hrSelectId").value == '') {
                     document.getElementById("hrSelectError").innerHTML = "- It must be Selected";
                     flag3 = false;
@@ -88,6 +90,7 @@
                         }
                     }
                 }
+}
 
                 if (flag3) {
 
@@ -369,6 +372,12 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
+                                                                <td colspan="9"><b>Please provide your detailed justification for Confirmation / Extension of Probation / Termination of Services. Kindly Note, the same is mandatory for further process.</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="9"> <form:textarea path="managerJustification" rows="3" class="form-control" type="text" readonly="true" value=""></form:textarea></td>
+                                                                </tr>
+                                                            <tr>
                                                                 <td >FUNCTIONAL HEAD (RECOMMENDATION)</td>
                                                                 <td>
                                                                     <form:input path="approvalSelect"  class="form-control" size="16" type="text" value="" readonly="true"></form:input>
@@ -386,6 +395,12 @@
                                                                     </c:if>
                                                                 </td>
                                                             </tr>
+                                                            <tr>
+                                                                <td colspan="9"><b>Additional Remarks:</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="9"> <form:textarea path="hrAdditionalRemark" rows="3" readonly="true" class="form-control" type="text" value=""></form:textarea></td>
+                                                                </tr>
                                                             <c:if test="${sessionScope.userRight.probationToConfirmation}">
                                                                 <c:if test="${ptc.status ne 4 && ptc.status ne 5}">
                                                                     <tr>
@@ -470,22 +485,7 @@
                                                                     </c:if>
                                                                 </tr>
                                                             </c:if>
-                                                            <tr>
-                                                                <td colspan="9"><b>In case your answer is in negative, please comment. What are the areas identified for improvement & please communicate the same to appraisee. Also write the strategy / steps to overcome the areas of improvement.</b></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <c:if test="${sessionScope.userRight.probationToConfirmation}">
-                                                                    <c:if test="${ptc.status eq 4 || ptc.status eq 5}">
-                                                                        <td colspan="9"> <form:textarea path="improvementComment" rows="3" class="form-control" type="text" readonly="true" value="" ></form:textarea></td>
-                                                                    </c:if>
-                                                                    <c:if test="${ptc.status ne 4 && ptc.status ne 5}">
-                                                                        <td colspan="9"> <form:textarea path="improvementComment" rows="3" class="form-control" type="text" value="" ></form:textarea></td>
-                                                                    </c:if>
-                                                                </c:if>
-                                                                <c:if test="${!sessionScope.userRight.probationToConfirmation}">
-                                                                    <td colspan="9"> <form:textarea path="improvementComment" rows="3" class="form-control" type="text"  cssStyle="p" readonly="true" value=""></form:textarea></td>
-                                                                </c:if>
-                                                            </tr>
+                                                            
                                                             <tr>
                                                                 <td>RECOMMENDATION BY HR (IF ANY):</td>
                                                                 <td colspan="5" >
@@ -511,8 +511,13 @@
                                     <div class="form-group">
                                         <c:if test="${sessionScope.userRight.probationToConfirmation}">
                                             <c:if test="${ptc.status ne 5 && ptc.status ne 4}">
-                                                <div class="col-sm-offset-5 col-sm-4">
-                                                    &nbsp;&nbsp;<button type="submit" style="width: 100px;"class="btn btn-primary" id="saveSubmit1" >Submit</button>
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-6" style="text-align: left;">
+                                                        &nbsp;&nbsp;<button type="submit" style="width: 100px;"class="btn btn-warning" id="saveSubmit1" name="submit" value="rework" >Rework</button>
+                                                </div>
+                                                <div class="col-sm-6" style="text-align: right;">
+                                                    &nbsp;&nbsp;<button type="submit" style="width: 100px;"class="btn btn-primary" id="saveSubmit1" name="submit" value="approve">Submit</button>
+                                                </div>
                                                 </div>
                                             </c:if>
                                         </c:if>

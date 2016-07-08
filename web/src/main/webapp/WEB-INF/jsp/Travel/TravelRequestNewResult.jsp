@@ -128,7 +128,7 @@
                                         <div class="col-md-12 col-sm-12">
                                             <div class="table table-bordered">
                                                 <c:set var="Status" value="0"></c:set>
-                                                    <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                    <table id="table_2" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                     <c:choose>
                                                         <c:when test="${empty finalList}">
                                                             <tr>
@@ -140,6 +140,7 @@
                                                         <c:otherwise>
                                                             <thead>
                                                                 <tr>
+                                                                    <th style="display: none;"></th>
                                                                     <th>Employee ID</th>
                                                                     <th>Employee Name</th>
                                                                     <th>Travel Type</th>
@@ -156,6 +157,7 @@
                                                         <c:forEach var="list" items="${finalList}">
 
                                                             <tr>
+                                                                <td style="display: none;">${list[1]}</td>
                                                                 <td>${list[2]}</td>
                                                                 <td>${list[3]}</td>
                                                                 <td>${list[4]}</td>
@@ -275,6 +277,15 @@
 
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    <script>
+        $(document).ready(function ()
+        {
+             $('#table_2').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+        });
+    </script>
+
 
 </html>
 

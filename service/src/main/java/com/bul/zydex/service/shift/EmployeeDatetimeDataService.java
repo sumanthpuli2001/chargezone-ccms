@@ -16,5 +16,7 @@ public interface EmployeeDatetimeDataService<T> extends GenericsService<T> {
     public List<?> readEmployeeByCurrentDate();
     
     public List<?> todaysData(int id); 
+    
+    public List<?> readYesterdayEmployeeData(String empId);
 
 }

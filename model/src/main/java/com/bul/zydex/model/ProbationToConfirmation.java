@@ -33,6 +33,8 @@ public class ProbationToConfirmation  implements java.io.Serializable {
      private String hrSelect;
      private String hrExtendPeriod;
      private String hrApprovalRemark;
+     private String managerJustification;
+     private String hrAdditionalRemark;
 
     public ProbationToConfirmation() {
     }
@@ -41,204 +43,243 @@ public class ProbationToConfirmation  implements java.io.Serializable {
     public ProbationToConfirmation(EmployeeMaster employeeMasterByEmployeeMasterId) {
         this.employeeMasterByEmployeeMasterId = employeeMasterByEmployeeMasterId;
     }
-    public ProbationToConfirmation(EmployeeMaster employeeMasterByEmployeeMasterId, EmployeeMaster employeeMasterByHrId, String assessmentFromDate, String assessmentToDate, String jobHandled, String performanceRating, String recommendationSelect, String recommendationExtendPeriod, String recommendationRemark, String approvalSelect, String approvalExtendPeriod, String approvalRemark, String improvementComment, String recomendationByHr, Integer status, String reportingManagerId, String reportingManagerSubmitDate, String functionalHeadId, String functionalHeadSubmitDate, String hrSubmitDate, String hrSelect, String hrExtendPeriod, String hrApprovalRemark) {
-       this.employeeMasterByEmployeeMasterId = employeeMasterByEmployeeMasterId;
-       this.employeeMasterByHrId = employeeMasterByHrId;
-       this.assessmentFromDate = assessmentFromDate;
-       this.assessmentToDate = assessmentToDate;
-       this.jobHandled = jobHandled;
-       this.performanceRating = performanceRating;
-       this.recommendationSelect = recommendationSelect;
-       this.recommendationExtendPeriod = recommendationExtendPeriod;
-       this.recommendationRemark = recommendationRemark;
-       this.approvalSelect = approvalSelect;
-       this.approvalExtendPeriod = approvalExtendPeriod;
-       this.approvalRemark = approvalRemark;
-       this.improvementComment = improvementComment;
-       this.recomendationByHr = recomendationByHr;
-       this.status = status;
-       this.reportingManagerId = reportingManagerId;
-       this.reportingManagerSubmitDate = reportingManagerSubmitDate;
-       this.functionalHeadId = functionalHeadId;
-       this.functionalHeadSubmitDate = functionalHeadSubmitDate;
-       this.hrSubmitDate = hrSubmitDate;
-       this.hrSelect = hrSelect;
-       this.hrExtendPeriod = hrExtendPeriod;
-       this.hrApprovalRemark = hrApprovalRemark;
+
+    public ProbationToConfirmation(EmployeeMaster employeeMasterByEmployeeMasterId, EmployeeMaster employeeMasterByHrId, String assessmentFromDate, String assessmentToDate, String jobHandled, String performanceRating, String recommendationSelect, String recommendationExtendPeriod, String recommendationRemark, String approvalSelect, String approvalExtendPeriod, String approvalRemark, String improvementComment, String recomendationByHr, Integer status, String reportingManagerId, String reportingManagerSubmitDate, String functionalHeadId, String functionalHeadSubmitDate, String hrSubmitDate, String hrSelect, String hrExtendPeriod, String hrApprovalRemark, String managerJustification, String hrAdditionalRemark) {
+        this.employeeMasterByEmployeeMasterId = employeeMasterByEmployeeMasterId;
+        this.employeeMasterByHrId = employeeMasterByHrId;
+        this.assessmentFromDate = assessmentFromDate;
+        this.assessmentToDate = assessmentToDate;
+        this.jobHandled = jobHandled;
+        this.performanceRating = performanceRating;
+        this.recommendationSelect = recommendationSelect;
+        this.recommendationExtendPeriod = recommendationExtendPeriod;
+        this.recommendationRemark = recommendationRemark;
+        this.approvalSelect = approvalSelect;
+        this.approvalExtendPeriod = approvalExtendPeriod;
+        this.approvalRemark = approvalRemark;
+        this.improvementComment = improvementComment;
+        this.recomendationByHr = recomendationByHr;
+        this.status = status;
+        this.reportingManagerId = reportingManagerId;
+        this.reportingManagerSubmitDate = reportingManagerSubmitDate;
+        this.functionalHeadId = functionalHeadId;
+        this.functionalHeadSubmitDate = functionalHeadSubmitDate;
+        this.hrSubmitDate = hrSubmitDate;
+        this.hrSelect = hrSelect;
+        this.hrExtendPeriod = hrExtendPeriod;
+        this.hrApprovalRemark = hrApprovalRemark;
+        this.managerJustification = managerJustification;
+        this.hrAdditionalRemark = hrAdditionalRemark;
     }
-   
+
     public Integer getId() {
-        return this.id;
+        return id;
     }
-    
+
     public void setId(Integer id) {
         this.id = id;
     }
+
     public EmployeeMaster getEmployeeMasterByEmployeeMasterId() {
-        return this.employeeMasterByEmployeeMasterId;
+        return employeeMasterByEmployeeMasterId;
     }
-    
+
     public void setEmployeeMasterByEmployeeMasterId(EmployeeMaster employeeMasterByEmployeeMasterId) {
         this.employeeMasterByEmployeeMasterId = employeeMasterByEmployeeMasterId;
     }
+
     public EmployeeMaster getEmployeeMasterByHrId() {
-        return this.employeeMasterByHrId;
+        return employeeMasterByHrId;
     }
-    
+
     public void setEmployeeMasterByHrId(EmployeeMaster employeeMasterByHrId) {
         this.employeeMasterByHrId = employeeMasterByHrId;
     }
+
     public String getAssessmentFromDate() {
-        return this.assessmentFromDate;
+        return assessmentFromDate;
     }
-    
+
     public void setAssessmentFromDate(String assessmentFromDate) {
         this.assessmentFromDate = assessmentFromDate;
     }
+
     public String getAssessmentToDate() {
-        return this.assessmentToDate;
+        return assessmentToDate;
     }
-    
+
     public void setAssessmentToDate(String assessmentToDate) {
         this.assessmentToDate = assessmentToDate;
     }
+
     public String getJobHandled() {
-        return this.jobHandled;
+        return jobHandled;
     }
-    
+
     public void setJobHandled(String jobHandled) {
         this.jobHandled = jobHandled;
     }
+
     public String getPerformanceRating() {
-        return this.performanceRating;
+        return performanceRating;
     }
-    
+
     public void setPerformanceRating(String performanceRating) {
         this.performanceRating = performanceRating;
     }
+
     public String getRecommendationSelect() {
-        return this.recommendationSelect;
+        return recommendationSelect;
     }
-    
+
     public void setRecommendationSelect(String recommendationSelect) {
         this.recommendationSelect = recommendationSelect;
     }
+
     public String getRecommendationExtendPeriod() {
-        return this.recommendationExtendPeriod;
+        return recommendationExtendPeriod;
     }
-    
+
     public void setRecommendationExtendPeriod(String recommendationExtendPeriod) {
         this.recommendationExtendPeriod = recommendationExtendPeriod;
     }
+
     public String getRecommendationRemark() {
-        return this.recommendationRemark;
+        return recommendationRemark;
     }
-    
+
     public void setRecommendationRemark(String recommendationRemark) {
         this.recommendationRemark = recommendationRemark;
     }
+
     public String getApprovalSelect() {
-        return this.approvalSelect;
+        return approvalSelect;
     }
-    
+
     public void setApprovalSelect(String approvalSelect) {
         this.approvalSelect = approvalSelect;
     }
+
     public String getApprovalExtendPeriod() {
-        return this.approvalExtendPeriod;
+        return approvalExtendPeriod;
     }
-    
+
     public void setApprovalExtendPeriod(String approvalExtendPeriod) {
         this.approvalExtendPeriod = approvalExtendPeriod;
     }
+
     public String getApprovalRemark() {
-        return this.approvalRemark;
+        return approvalRemark;
     }
-    
+
     public void setApprovalRemark(String approvalRemark) {
         this.approvalRemark = approvalRemark;
     }
+
     public String getImprovementComment() {
-        return this.improvementComment;
+        return improvementComment;
     }
-    
+
     public void setImprovementComment(String improvementComment) {
         this.improvementComment = improvementComment;
     }
+
     public String getRecomendationByHr() {
-        return this.recomendationByHr;
+        return recomendationByHr;
     }
-    
+
     public void setRecomendationByHr(String recomendationByHr) {
         this.recomendationByHr = recomendationByHr;
     }
+
     public Integer getStatus() {
-        return this.status;
+        return status;
     }
-    
+
     public void setStatus(Integer status) {
         this.status = status;
     }
+
     public String getReportingManagerId() {
-        return this.reportingManagerId;
+        return reportingManagerId;
     }
-    
+
     public void setReportingManagerId(String reportingManagerId) {
         this.reportingManagerId = reportingManagerId;
     }
+
     public String getReportingManagerSubmitDate() {
-        return this.reportingManagerSubmitDate;
+        return reportingManagerSubmitDate;
     }
-    
+
     public void setReportingManagerSubmitDate(String reportingManagerSubmitDate) {
         this.reportingManagerSubmitDate = reportingManagerSubmitDate;
     }
+
     public String getFunctionalHeadId() {
-        return this.functionalHeadId;
+        return functionalHeadId;
     }
-    
+
     public void setFunctionalHeadId(String functionalHeadId) {
         this.functionalHeadId = functionalHeadId;
     }
+
     public String getFunctionalHeadSubmitDate() {
-        return this.functionalHeadSubmitDate;
+        return functionalHeadSubmitDate;
     }
-    
+
     public void setFunctionalHeadSubmitDate(String functionalHeadSubmitDate) {
         this.functionalHeadSubmitDate = functionalHeadSubmitDate;
     }
+
     public String getHrSubmitDate() {
-        return this.hrSubmitDate;
+        return hrSubmitDate;
     }
-    
+
     public void setHrSubmitDate(String hrSubmitDate) {
         this.hrSubmitDate = hrSubmitDate;
     }
+
     public String getHrSelect() {
-        return this.hrSelect;
+        return hrSelect;
     }
-    
+
     public void setHrSelect(String hrSelect) {
         this.hrSelect = hrSelect;
     }
+
     public String getHrExtendPeriod() {
-        return this.hrExtendPeriod;
+        return hrExtendPeriod;
     }
-    
+
     public void setHrExtendPeriod(String hrExtendPeriod) {
         this.hrExtendPeriod = hrExtendPeriod;
     }
+
     public String getHrApprovalRemark() {
-        return this.hrApprovalRemark;
+        return hrApprovalRemark;
     }
-    
+
     public void setHrApprovalRemark(String hrApprovalRemark) {
         this.hrApprovalRemark = hrApprovalRemark;
     }
 
+    public String getManagerJustification() {
+        return managerJustification;
+    }
 
+    public void setManagerJustification(String managerJustification) {
+        this.managerJustification = managerJustification;
+    }
 
+    public String getHrAdditionalRemark() {
+        return hrAdditionalRemark;
+    }
 
+    public void setHrAdditionalRemark(String hrAdditionalRemark) {
+        this.hrAdditionalRemark = hrAdditionalRemark;
+    }
+   
 }
 
 

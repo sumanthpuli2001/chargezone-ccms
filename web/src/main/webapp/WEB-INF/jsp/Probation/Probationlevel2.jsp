@@ -340,8 +340,14 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td >FUNCTIONAL HEAD (APPROVAL)</td>
-                                                                <td>
+                                                                <td colspan="9"><b>Please provide your detailed justification for Confirmation / Extension of Probation / Termination of Services. Kindly Note, the same is mandatory for further process.</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="9"> <form:textarea path="managerJustification" rows="3" class="form-control" type="text" readonly="true" value=""></form:textarea></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td >FUNCTIONAL HEAD (APPROVAL)</td>
+                                                                    <td>
                                                                     <form:select path="approvalSelect" id="ApprovalTypeSelectId" class="form-control ">
                                                                         <form:option value="">--SELECT--</form:option>
                                                                         <form:option value="Yes">Yes</form:option>
@@ -373,11 +379,12 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td colspan="9"><b>In case your answer is in negative, please comment. What are the areas identified for improvement & please communicate the same to appraisee. Also write the strategy / steps to overcome the areas of improvement.</b></td>
+                                                                <td colspan="9"><b>Additional Remarks:</b></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="9"> <form:textarea path="hrAdditionalRemark" rows="3" class="form-control" type="text" value=""></form:textarea></td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td colspan="9"> <form:textarea path="improvementComment" rows="3" class="form-control" type="text" value=""></form:textarea></td>
-                                                                </tr>
+
                                                             </table>
                                                         </div><!-- /.col -->
                                                     </div><!-- /.col -->

@@ -319,6 +319,7 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         String query = "";
         query += ""
                 + " FROM EmployeeMaster a "
+                + " left join a.probationToConfirmationsForEmployeeMasterId b"
                 + " WHERE a.id = " + employeeId
                 + " and a.employeeType like '%Probation%'"
                 + " and a.reportingManagerLevel1 =" + reportingManagerId;
@@ -981,7 +982,7 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " case When (ndm.carProvided IS NULL OR ndm.carProvided = '' )  THEN  'false' ELSE 'true' END AS isNoDueAdminFilled,"
                 + " case When (ndm.computerChecked IS NULL OR ndm.computerChecked = '' )  THEN  'false' ELSE 'true' END AS isTravelAdminFilled,"
                 + " case When (ndm.salaryAdvanceOrLoan IS NULL OR ndm.salaryAdvanceOrLoan = '')  THEN  'false' ELSE 'true' END AS istravelExpenseAdminFilled,"
-                + " res.relievingDate"
+                + " res.relievingDate,res.effectiveDatetime,res.attrition"
                 //                + " case When (ndm.equipments IS NULL OR ndm.equipments = '')  THEN  'pendingAtReportingManager' ELSE 'Completed' END AS isReportingManagerFilled,"
                 //                + " case When (ndm.carProvided IS NULL OR ndm.carProvided = '')  THEN  'pendingAtNoDueAdmin' ELSE 'Completed' END AS isNoDueAdminFilled,"
                 //                + " case When (ndm.computerChecked IS NULL OR ndm.computerChecked = '')  THEN  'pendingAtTravelAdmin' ELSE 'Completed' END AS isTravelAdminFilled,"

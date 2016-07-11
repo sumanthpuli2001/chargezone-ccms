@@ -769,8 +769,8 @@
             startView: 2,
             minView: 2,
             forceParse: 0,
-            showMeridian: 1,
-            startDate: new Date()
+            showMeridian: 1
+          
         }
         );
     </script>

@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        ---------------------        <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
+         <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
         <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Probation To Confirmation</title>
@@ -298,7 +298,7 @@
                                                                     <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px">Average
                                                                     <input type="radio" name="performanceRating" id="NeedsImprovement" checked value="NeedsImprovement" style="width: 15px;height: 15px">Needs Improvement
                                                                 </c:if>
-                                                                <c:if test="${ptc.performanceRating eq ''}">
+                                                                <c:if test="${ptc.performanceRating eq null || ptc.performanceRating eq ''}">
                                                                     <label class="radio-inline">
                                                                         <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px"> Excellent
                                                                     </label>

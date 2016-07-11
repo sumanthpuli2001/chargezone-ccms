@@ -575,8 +575,9 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
                 }
 //                =========================== Auto Capture Shift========================
-//                EmployeeMaster employeeMaster1 = employeeMasterService.readById(employeeMaster.getId());
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(employeeMaster.getId());
 //                if (!employeeMaster1.getShiftHoursId().equals(46)) {
+
                 SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 SimpleDateFormat timeFormat1 = new SimpleDateFormat("HH:mm");
                 String dynamicShiftDateTime = employeeDatetimeData1.getDateTime();
@@ -585,8 +586,12 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 Date date1 = new Date();
                 Date dateBefore = new Date(date1.getTime() - 24 * 60 * 60 * 1000);
                 String yesterdayDate = formatter.format(dateBefore);
-
-                ShiftMaster generalShift = shiftMasterService.readById(1);
+                ShiftMaster generalShift = new ShiftMaster();
+                if (employeeMaster1.getZydexLocationMaster().getId().equals(1) || employeeMaster1.getZydexLocationMaster().getId().equals(6)) {
+                    generalShift = shiftMasterService.readById(1);
+                } else {
+                    generalShift = shiftMasterService.readById(6);
+                }
                 ShiftMaster firstShift = shiftMasterService.readById(3);
                 ShiftMaster secondShift = shiftMasterService.readById(4);
                 ShiftMaster nightShift = shiftMasterService.readById(5);
@@ -652,7 +657,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 if ((dynamicTime.after(calGeneralShiftBefore.getTime()) || dynamicTime.equals(calGeneralShiftBefore.getTime()))
                         && (dynamicTime.before(calGeneralShiftAfter.getTime()) || dynamicTime.equals(calGeneralShiftAfter.getTime()))) {
                     daynamicShiftName = generalShift.getShiftName();
-                    shiftMaster1 = shiftMasterService.readById(1);
+                    if (daynamicShiftName.equals("General")) {
+                        shiftMaster1 = shiftMasterService.readById(1);
+                    } else {
+                        shiftMaster1 = shiftMasterService.readById(6);
+                    }
                 } else if ((dynamicTime.after(calFirstShiftBefore.getTime()) || dynamicTime.equals(calFirstShiftBefore.getTime()))
                         && (dynamicTime.before(calFirstShiftAfter.getTime()) || dynamicTime.equals(calFirstShiftAfter.getTime()))) {
                     List<?> employeeYesterdayPunchData = employeeDatetimeDataService.readYesterdayEmployeeData("" + employeeMaster.getId());
@@ -695,6 +704,13 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     shiftMaster.setId(Integer.parseInt(shiftId));
                     shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
                     daynamicShiftName = shiftMaster1.getShiftName();
+                    if (daynamicShiftName.equals("General")) {
+                        if (employeeMaster1.getZydexLocationMaster().getId().equals(1) || employeeMaster1.getZydexLocationMaster().getId().equals(6)) {
+                            shiftMaster1 = shiftMasterService.readById(1);
+                        } else {
+                            shiftMaster1 = shiftMasterService.readById(6);
+                        }
+                    }
                     shiftTime = shiftMaster1.getEndTime();
 
                 }

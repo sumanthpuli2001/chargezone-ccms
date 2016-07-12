@@ -146,7 +146,8 @@ public class AttendanceRegularizationMasterDAOImpl<T> extends GenericsDAOImpl<T>
         query += " SELECT a.id,b.employeeName,a.startDateTime,a.endDateTime,a.reason,a.status,b.employeeId"
                 + " FROM AttendanceRegularization a,"
                 + " EmployeeMaster b"
-                + " Where a.userMasterId=b.userMaster.id";
+                + " Where a.userMasterId=b.userMaster.id"
+                + " order by a.id desc";
         return getHibernateTemplate().find(query);
     }
 }

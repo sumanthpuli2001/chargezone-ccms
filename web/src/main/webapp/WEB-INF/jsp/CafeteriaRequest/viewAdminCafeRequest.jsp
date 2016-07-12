@@ -269,6 +269,8 @@
                <!--<div class="col-sm-offset-3 col-sm-4">-->
             <c:if test="${cafeteriaRequest.status ne 6}">
             <c:if test="${cafeteriaRequest.status ne 10}">
+                <c:if test="${cafeteriaRequest.status eq 1 || cafeteriaRequest.status eq 5}">
+                    
                 <div class="col-sm-4" style="text-align: left">
                    <button type="button" class="btn btn-success" style="width: 100px;" onclick="approve(${cafeteriaRequest.id},2);">APPROVE</button>
                 </div>
@@ -278,6 +280,7 @@
                  <div class="col-sm-4" style="text-align: right">
                    <button type="button" class="btn btn-warning" style="width: 100px;" data-toggle="modal" data-target="#returnRemark" onclick="remarkClick('returnRemark')">RETURN</button>
                 </div>
+                </c:if>
                </c:if>
                </c:if>
                 <c:if test="${cafeteriaRequest.status eq 6 || cafeteriaRequest.status eq 10}">

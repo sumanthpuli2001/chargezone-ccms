@@ -192,13 +192,13 @@
 
                                                                         </td>
                                                                         <td>
-                                                                        <c:if test="${list[7] eq 1 || list[7] eq 5}">
+                                                                        <%--<c:if test="${list[7] eq 1 || list[7] eq 5}">--%>
                                                                             <div class="btn-group">
                                                                                 <button type="button" class="btn btn-default dropdown-toggle" onclick="viewClick(${list[0]},${list[6]});" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                     &nbsp;&nbsp;View
                                                                                 </button>
                                                                             </div>
-                                                                        </c:if>
+                                                                        <%--</c:if>--%>
                                                                     </td>
                                                                 </tr>
                                                             </c:forEach>

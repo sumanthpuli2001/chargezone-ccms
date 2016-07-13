@@ -116,7 +116,7 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
 
         return getHibernateTemplate().find(query);
     }
-    
+
     @Override
     public List<?> readYesterdayEmployeeData(String empId) {
         String query = "";
@@ -127,6 +127,49 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
 //        String s1 = "01/07/2016";
         query += " From EmployeeDatetimeData a "
                 + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y') IN (STR_TO_DATE('" + s1 + "','%d/%m/%Y'),STR_TO_DATE('" + s1 + "','%d/%m/%Y'))"
+                + " And a.employeeMaster.id=" + empId
+                + " GROUP BY a.dateTime"
+                + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readEmployeeBySelectedDate(String date) {
+        String query = "";
+        query += " From EmployeeDatetimeData a "
+                + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y') IN (STR_TO_DATE('" + date + "','%d/%m/%Y'))"
+                + " GROUP BY a.employeeMaster.id";
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readYesterdayEmployeeDataBySelectedDate(String empId, String date) {
+        String query = " From EmployeeDatetimeData a "
+                + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y') IN (STR_TO_DATE('" + date + "','%d/%m/%Y'),STR_TO_DATE('" + date + "','%d/%m/%Y'))"
+                + " And a.employeeMaster.id=" + empId
+                + " GROUP BY a.dateTime"
+                + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readTodaysAndPreviousDataOnSelectedDate(String empId, String endShiftTime, String selectDate, String PreviousDate) {
+        String query = " From EmployeeDatetimeData a "
+                + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') BETWEEN STR_TO_DATE('" + PreviousDate + " " + endShiftTime + ":00','%d/%m/%Y %H:%i:%s') AND (STR_TO_DATE('" + selectDate + " 23:59:00','%d/%m/%Y %H:%i:%s'))"
+                + " And a.employeeMaster.id=" + empId
+                + " GROUP BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i')"
+                + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readSelectedDateEmployeeData(String empId, String date) {
+        String query = " From EmployeeDatetimeData a "
+                + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y') IN (STR_TO_DATE('" + date + "','%d/%m/%Y'),STR_TO_DATE('" + date + "','%d/%m/%Y'))"
                 + " And a.employeeMaster.id=" + empId
                 + " GROUP BY a.dateTime"
                 + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";

@@ -28,8 +28,8 @@ public class EmployeeDatetimeDataServiceImpl<T> extends GenericsServiceImpl<T> i
     }
 
     @Override
-    public List<?> readTodaysAndPreviousData(String empId,String endShiftTime) {
-        return employeeDatetimeDataDAO.readTodaysAndPreviousData(empId,endShiftTime);
+    public List<?> readTodaysAndPreviousData(String empId, String endShiftTime) {
+        return employeeDatetimeDataDAO.readTodaysAndPreviousData(empId, endShiftTime);
     }
 
     @Override
@@ -41,20 +41,42 @@ public class EmployeeDatetimeDataServiceImpl<T> extends GenericsServiceImpl<T> i
     public List<?> readPuchDataEmpIdWise(int empId) {
         return employeeDatetimeDataDAO.readPuchDataEmpIdWise(empId);
     }
+
     @Override
-   public List<?> readTodaysEmployeeData(String empId) {
+    public List<?> readTodaysEmployeeData(String empId) {
         return employeeDatetimeDataDAO.readTodaysEmployeeData(empId);
     }
+
     @Override
-   public List<?> readEmployeeByCurrentDate() {
+    public List<?> readEmployeeByCurrentDate() {
         return employeeDatetimeDataDAO.readEmployeeByCurrentDate();
     }
+
     @Override
     public List<?> todaysData(int id) {
         return employeeDatetimeDataDAO.todaysData(id);
     }
+
     @Override
     public List<?> readYesterdayEmployeeData(String empId) {
         return employeeDatetimeDataDAO.readYesterdayEmployeeData(empId);
+    }
+
+    @Override
+    public List<?> readEmployeeBySelectedDate(String date) {
+        return employeeDatetimeDataDAO.readEmployeeBySelectedDate(date);
+    }
+
+    @Override
+    public List<?> readYesterdayEmployeeDataBySelectedDate(String empId, String date) {
+        return employeeDatetimeDataDAO.readYesterdayEmployeeDataBySelectedDate(empId, date);
+    }
+    @Override
+    public List<?> readTodaysAndPreviousDataOnSelectedDate(String empId, String endShiftTime,String selectDate,String PreviousDate){
+        return employeeDatetimeDataDAO.readTodaysAndPreviousDataOnSelectedDate(empId,endShiftTime,selectDate,PreviousDate);
+    }
+    @Override
+     public List<?> readSelectedDateEmployeeData(String empId,String date){
+        return employeeDatetimeDataDAO.readSelectedDateEmployeeData(empId,date);
     }
 }

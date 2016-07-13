@@ -14,9 +14,16 @@ public interface EmployeeDatetimeDataService<T> extends GenericsService<T> {
     public List<?> readTodaysEmployeeData(String empId);
 
     public List<?> readEmployeeByCurrentDate();
-    
-    public List<?> todaysData(int id); 
-    
+
+    public List<?> todaysData(int id);
+
     public List<?> readYesterdayEmployeeData(String empId);
 
+    public List<?> readEmployeeBySelectedDate(String date);
+
+    public List<?> readYesterdayEmployeeDataBySelectedDate(String empId, String date);
+    
+    public List<?> readTodaysAndPreviousDataOnSelectedDate(String empId, String endShiftTime,String selectDate,String PreviousDate);
+
+     public List<?> readSelectedDateEmployeeData(String empId,String date);
 }

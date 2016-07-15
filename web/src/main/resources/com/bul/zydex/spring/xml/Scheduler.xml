@@ -137,6 +137,19 @@
         <property name="jobDetail" ref="travelEscalationId" />
         <property name="cronExpression" value="0 5 0 1/1 * ? *" />
     </bean>-->
+    
+        <bean id="reportingManagerChangeId"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="resignationMasterController1" />
+        <property name="targetMethod" value="reportingManagerChangeCheck" />
+    </bean>
+    <bean id="cronTrigger11"
+          class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="reportingManagerChangeId" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
+        <!--0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying-->
+    </bean>
+    
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="jobDetails">
             <list>
@@ -151,6 +164,7 @@
 <!--                <ref bean="probationToConfirmation" />
                 <ref bean="probationToConfirmationCreateCheck" />
                 <ref bean="travelEscalationId" />-->
+                <ref bean="reportingManagerChangeId" />
             </list>
         </property>
         <property name="triggers">
@@ -165,6 +179,7 @@
 <!--                <ref bean="cronTrigger8" />
                 <ref bean="cronTrigger9" />
                 <ref bean="cronTrigger10" />-->
+                <ref bean="cronTrigger11" />
             </list>
         </property>
     </bean>

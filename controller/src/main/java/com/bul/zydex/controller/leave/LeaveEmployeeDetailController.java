@@ -247,6 +247,14 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //                if (leaveTypeMaster.getLeaveType().equals("Casual Leave")) {
 //                    getNoOfDays(leaveEmployeeDetail, startDate, endDate);
 //                }
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
+                Calendar cal5 = Calendar.getInstance();
+                Date satdate = sdf.parse(leaveEmployeeDetail.getStartDate());
+                cal5.setTime(satdate);
+                SimpleDateFormat format2 = new SimpleDateFormat("EEEE");
+                String dayName = format2.format(satdate);
+                int dayOfWeek = cal5.get(Calendar.WEEK_OF_MONTH);
+                int locationId = employeeMaster.getZydexLocationMaster().getId();
 
                 if (!startDate.after(endDate)) {
                     LeaveEmployeeDetail leaveEmployeeDetail1 = new LeaveEmployeeDetail();
@@ -268,15 +276,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         }
                     }
                     if (leaveTypeMaster.getLeaveType().contains("Short Leave")) {
-                        String yourDate = leaveEmployeeDetail.getStartDate();
-                        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
-                        Date date1 = sdf1.parse(yourDate);
-                        Calendar c = Calendar.getInstance();
-                        c.setTime(date1);
-                        int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
-                        SimpleDateFormat format = new SimpleDateFormat("EEEE");
-                        String dayName = format.format(date1);
-                        int locationId = employeeMaster.getZydexLocationMaster().getId();
+
                         if (dayName.equals("Saturday") && dayOfWeek == 2 && (locationId == 1 || locationId == 6)) {
                             request.setAttribute("failureMessage",
                                     "Error :On Second Saturday You can Not Apply Short Leave");
@@ -376,6 +376,11 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             }
                         }
 //                        mv.setViewName("redirect:leaveEmployeeDetail.htm?act=searchOwnLeaveDetail");
+                    } else if (dayName.equals("Saturday") && dayOfWeek == 2 && (locationId == 1 || locationId == 6) && leaveEmployeeDetail.getStartDateStatus().equals("Fullday")) {
+                        request.setAttribute("failureMessage",
+                                "Error :On Second Saturday You can Not Apply Full Day Of Leave");
+                        request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                        mv = applyClick(request, response);
                     } else if (leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave()) && !leaveTypeMaster.getLeaveType().contains("Maternity Leave") && !leaveTypeMaster.getLeaveType().contains("C Off Leave")
                             && !leaveTypeMaster.getLeaveType().contains("Sick Leave")) {
                         request.setAttribute("failureMessage",

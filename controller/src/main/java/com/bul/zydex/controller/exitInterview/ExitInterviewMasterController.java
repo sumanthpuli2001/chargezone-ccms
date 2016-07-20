@@ -697,7 +697,7 @@ public class ExitInterviewMasterController extends ExitInterviewMasterAbstract {
             exitcount = list.size();
         }
         request.setAttribute("exitcount", exitcount);
-        mv.setViewName("forward:userMaster.htm?act=userDashboardShow");
+        mv.setViewName("forward:probationToConfirmation.htm?act=probationDashBoard");
         return mv;
     }
     

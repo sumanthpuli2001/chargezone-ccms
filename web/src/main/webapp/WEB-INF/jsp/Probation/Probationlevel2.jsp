@@ -269,37 +269,37 @@
                                                                 <div class="col-sm-10 " >
                                                                 <c:if test="${ptc.performanceRating eq 'Excellent'}">
                                                                     <input type="radio" name="performanceRating" id="Excellent" value="Excellent" checked style="width: 15px;height: 15px" > Excellent
-                                                                    <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" disabled="true"> Very Good
-                                                                    <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" disabled="true">Good
-                                                                    <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px" disabled="true">Average
-                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px" disabled="true">Needs Improvement
+                                                                    <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" > Very Good
+                                                                    <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" >Good
+                                                                    <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px" >Average
+                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px" >Needs Improvement
                                                                 </c:if>
                                                                 <c:if test="${ptc.performanceRating eq 'Very Good'}">
-                                                                    <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" disabled="true"> Excellent
+                                                                    <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" > Excellent
                                                                     <input type="radio" name="performanceRating" id="Very Good" value="Very Good" checked style="width: 15px;height: 15px"> Very Good
-                                                                    <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" disabled="true">Good
-                                                                    <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px" disabled="true">Average
-                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px" disabled="true">Needs Improvement
+                                                                    <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" >Good
+                                                                    <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px" >Average
+                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px" >Needs Improvement
                                                                 </c:if>
                                                                 <c:if test="${ptc.performanceRating eq 'Good'}">
-                                                                    <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" disabled="true"> Excellent
-                                                                    <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" disabled="true"> Very Good
+                                                                    <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" > Excellent
+                                                                    <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" > Very Good
                                                                     <input type="radio" name="performanceRating" id="Good"  value="Good" checked style="width: 15px;height: 15px">Good
-                                                                    <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px" disabled="true">Average
-                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px"disabled="true">Needs Improvement
+                                                                    <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px" >Average
+                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px">Needs Improvement
                                                                 </c:if>
                                                                 <c:if test="${ptc.performanceRating eq 'Average'}">
-                                                                    <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" disabled="true"> Excellent
-                                                                    <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" disabled="true"> Very Good
-                                                                    <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" disabled="true">Good
+                                                                    <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" > Excellent
+                                                                    <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" > Very Good
+                                                                    <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" >Good
                                                                     <input type="radio" name="performanceRating" id="Average" value="Average" checked style="width: 15px;height: 15px">Average
-                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px" disabled="true">Needs Improvement
+                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px" >Needs Improvement
                                                                 </c:if>
                                                                 <c:if test="${ptc.performanceRating eq 'NeedsImprovement'}">
-                                                                    <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" disabled="true"> Excellent
-                                                                    <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" disabled="true"> Very Good
-                                                                    <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" disabled="true">Good
-                                                                    <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px"disabled="true">Average
+                                                                    <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" > Excellent
+                                                                    <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" > Very Good
+                                                                    <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" >Good
+                                                                    <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px">Average
                                                                     <input type="radio" name="performanceRating" id="NeedsImprovement" checked value="NeedsImprovement" style="width: 15px;height: 15px">Needs Improvement
                                                                 </c:if>
                                                             </div>
@@ -379,7 +379,7 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                <td colspan="9"><b>Additional Remarks:</b></td>
+                                                                <td colspan="9"><b>Functional Head's Remarks:</b></td>
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="9"> <form:textarea path="hrAdditionalRemark" rows="3" class="form-control" type="text" value=""></form:textarea></td>

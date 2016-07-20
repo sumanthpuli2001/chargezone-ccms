@@ -24,6 +24,9 @@ public class ZydexLocationMasterController extends ZydexLocationMasterAbstract {
     }
 
     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response, ZydexLocationMaster zydexLocationMaster) throws Exception {
+         if (zydexLocationMaster.getId() != null) {
+            zydexLocationMaster = zydexLocationMasterService.readById(zydexLocationMaster.getId());
+        }
         return new ModelAndView("ZydexLocation/ZydexLocationCreate", "zydexLocationMaster", zydexLocationMaster);
 
     }

@@ -875,7 +875,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 cal5.setTime(satdate);
                 SimpleDateFormat format2 = new SimpleDateFormat("EEEE");
                 String dayName = format2.format(date);
-                int dayOfWeek = cal5.get(Calendar.DAY_OF_WEEK);
+                int dayOfWeek = cal5.get(Calendar.WEEK_OF_MONTH);
 
                 EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
                 EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();

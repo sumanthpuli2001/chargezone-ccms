@@ -293,6 +293,8 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         query += " "
                 + " FROM EmployeeMaster a "
                 + " WHERE a.employeeType like '%Probation%'"
+                + " and ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) "
                 + " AND (a.reportingManagerLevel1= " + id
                 + " Or a.reportingManagerLevel2= " + id
                 + " Or a.reportingManagerLevel3= " + id
@@ -1687,8 +1689,8 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
-    
-      @Override
+
+    @Override
     public List<?> readEmployeeForPlant() {
         String query = "";
         query += " "

@@ -28,6 +28,8 @@ public class ProbationToConfirmationDAOImpl<T> extends GenericsDAOImpl<T> implem
                 + " from ProbationToConfirmation a "
                 + " left join a.employeeMasterByEmployeeMasterId b "
                 + " where b.reportingManagerLevel5 = " + ptc.getFunctionalHeadId()
+                + " and ((b.dateOfLeaving is null or b.dateOfLeaving = '')"
+                + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) "
                 + " and a.status in (1)";
         return getHibernateTemplate().find(query);
     }

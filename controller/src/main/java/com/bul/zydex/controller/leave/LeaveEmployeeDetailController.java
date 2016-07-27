@@ -165,6 +165,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         BindException errors = new BindException(leaveEmployeeDetail, "leaveEmployeeDetail");
         bind(request, leaveEmployeeDetail);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         UserMaster user = (UserMaster) request.getSession().getAttribute("user");
         EmployeeMaster employeeMaster = new EmployeeMaster();
         employeeMaster.setUserMaster(user);
@@ -440,6 +441,52 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                         mv = applyClick(request, response);
 
+                    } else if (leaveTypeMaster.getLeaveType().contains("Sick Leave")) {
+                        String leaveDate = leaveEmployeeDetail.getStartDate();
+                        Date checkLeaveDate = sdf.parse(leaveDate);
+                        Date checkLeaveDate2 = new Date();
+                        if (checkLeaveDate.after(checkLeaveDate2)) {
+                            request.setAttribute("failureMessage",
+                                    "Error : Sick Leave Can Not Be Apply In Advance");
+                            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                            mv = applyClick(request, response);
+                        } else {
+                            leaveEmployeeDetailService.create(leaveEmployeeDetail);
+                            balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
+                            noOfDay = leaveEmployeeDetail.getNoOfDays();
+                            balanceDay = balanceDay - noOfDay;
+                            employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
+                            employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                            request.setAttribute("successMessage",
+                                    "Information : The Information is saved Successfully.");
+
+                            //Emailtemplate for submit click .....
+                            try {
+                                EmailTemplate emailTemplate = new EmailTemplate();
+                                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                                DesignationMaster designationMaster = new DesignationMaster();
+                                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                                EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                                employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                                // id six is apply status
+                                emailTemplate = emailTemplateService.readById(6);
+                                String To = employeeMasterHr.getOfficeEmailId();
+                                String from = employeeMasterModel.getOfficeEmailId();
+                                String Subject = emailTemplate.getSubject();
+                                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                                String msg = emailTemplate.getBodytext();
+                                msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                sendMail.sendMail(from, To, Subject, msg);
+                            } catch (Exception e) {
+
+                            }
+
+                            request.setAttribute("successMessage",
+                                    "Information : The Information is saved Successfully.");
+                            mv = searchOwnLeaveDetail(request, response);
+                        }
                     } else {
                         leaveEmployeeDetailService.create(leaveEmployeeDetail);
                         balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();

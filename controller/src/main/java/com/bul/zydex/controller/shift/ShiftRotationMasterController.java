@@ -871,7 +871,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 cal4.setTime(date4);
 
                 Calendar cal5 = Calendar.getInstance();
-                Date satdate = formatter.parse(empStartTime);
+                Date satdate = format.parse(empStartTime);
                 cal5.setTime(satdate);
                 SimpleDateFormat format2 = new SimpleDateFormat("EEEE");
                 String dayName = format2.format(date);
@@ -919,7 +919,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         time = "0.8";
                     }
                 } else {
-                    if (diffMin1 >= 3.6 && diffMin1 <= 5.5) {
+                    if (diffMin1 >= 3.6 && diffMin1 <= 7.9) {
                         time2 = "0.4";
                     } else if (diffMin1 >= 8) {
                         time2 = "0.8";
@@ -1062,7 +1062,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
     private synchronized void coffDelete() throws Exception {
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
         Date currentDate = new Date();
         String s = formatter.format(currentDate);
@@ -1084,7 +1084,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 c.setTime(date1);
                 c.add(Calendar.DATE, 30);
                 Date coffAddDate = c.getTime();
-                if (coffAddDate.after(curDate)) {
+                if (curDate.after(coffAddDate)) {
                     EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
                     EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
                     String time = overTimeMaster.getTime();
@@ -1114,7 +1114,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 c.setTime(date1);
                 c.add(Calendar.DATE, 90);
                 Date coffAddDate = c.getTime();
-                if (coffAddDate.after(curDate)) {
+                if (curDate.after(coffAddDate)) {
                     EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
                     EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
                     String time = overTimeMaster.getTime();
@@ -1133,6 +1133,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         time1 = time1 - Float.parseFloat(time);
                         employeeLeaveBalance1.setNoOfLeaveRemain(time1);
                         employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                        overTimeMasterService.delete(overTimeMaster.getId());
                     }
 
                 }
@@ -2431,6 +2432,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                             cell8.setCellValue("PR");
                                             prcounter = prcounter + 0.5;
                                             cell8.setCellStyle(stylegreen);
+                                        } else if (diffMinutes1 >= diffMinutes) {
+                                            cell8.setCellValue("PR");
+                                            prcounter = prcounter + 0.5;
+                                            cell8.setCellStyle(stylegreen);
+
                                         } else if (userTimeIn != null) {
                                             if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                                 cell8.setCellValue("PR");
@@ -2752,7 +2758,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 prcounter = prcounter + 0.5;
                                                 cell9.setCellStyle(stylegreen);
                                             } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
-                                                    && !secondHalf.contains("Casual Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                                    && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
                                                     && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
                                                 cell9.setCellValue("AB");
                                                 abcounter = abcounter + 0.5;

@@ -930,7 +930,6 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     }
                     if (!leaveTypeMaster.getLeaveType().contains("Short Leave") && !leaveTypeMaster.getLeaveType().contains("C Off Leave")) {
                         if (null != leaveEmployeeDetail.getNoOfDays() && leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave())) {
-                            System.out.println("aa");
                             request.setAttribute("failureMessage",
                                     "Error :No Of Days is Grater than maximum allowed Days...");
                             mv = viewLeaveRequest(request, response);

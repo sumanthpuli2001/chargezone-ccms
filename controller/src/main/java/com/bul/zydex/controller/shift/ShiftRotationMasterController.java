@@ -2679,7 +2679,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell9.setCellValue("AR/P");
                                         ar = ar + 0.5;
                                         cell9.setCellStyle(styleblue);
-                                    } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR")) {
+                                    } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR") && !secondHalf.contains("Short Leave")) {
                                         cell9.setCellValue("AB");
                                         abcounter = abcounter + 0.5;
                                         cell9.setCellStyle(stylered);
@@ -2753,28 +2753,6 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 cell9.setCellValue("AR/P");
                                                 ar = ar + 0.5;
                                                 cell9.setCellStyle(styleblue);
-                                            } else if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
-                                                cell9.setCellValue("PR");
-                                                prcounter = prcounter + 0.5;
-                                                cell9.setCellStyle(stylegreen);
-                                            } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
-                                                    && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
-                                                    && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
-                                                cell9.setCellValue("AB");
-                                                abcounter = abcounter + 0.5;
-                                                cell9.setCellStyle(stylered);
-                                            } else if (diffMinutes1 >= 240 && userTimeIn.after(secondHalfTimeStr2)) {
-                                                cell9.setCellValue("PR");
-                                                prcounter = prcounter + 0.5;
-                                                cell9.setCellStyle(stylegreen);
-                                            } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
-                                                cell9.setCellValue("PR");
-                                                prcounter = prcounter + 0.5;
-                                                cell9.setCellStyle(stylegreen);
-                                            } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
-                                                cell9.setCellValue("PR");
-                                                prcounter = prcounter + 0.5;
-                                                cell9.setCellStyle(stylegreen);
                                             } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
                                                 if (secondHalf.contains("*")) {
                                                     String[] shortArray = secondHalf.split("\\*");
@@ -2801,12 +2779,42 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                             abcounter = abcounter + 0.5;
                                                             cell9.setCellStyle(stylered);
                                                         }
+                                                    } else if (diffMinutes1 >= 240 && userTimeIn.before(secondHalfTimeStr2)) {
+                                                        cell9.setCellValue("PR");
+                                                        prcounter = prcounter + 0.5;
+                                                        cell9.setCellStyle(stylegreen);
                                                     }
+                                                } else if (diffMinutes1 >= 240 && userTimeIn.before(secondHalfTimeStr2)) {
+                                                    cell9.setCellValue("PR");
+                                                    prcounter = prcounter + 0.5;
+                                                    cell9.setCellStyle(stylegreen);
                                                 } else {
                                                     cell9.setCellValue("AB");
                                                     abcounter = abcounter + 0.5;
                                                     cell9.setCellStyle(stylered);
                                                 }
+                                            } else if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
+                                                cell9.setCellValue("PR");
+                                                prcounter = prcounter + 0.5;
+                                                cell9.setCellStyle(stylegreen);
+                                            } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
+                                                    && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                                    && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
+                                                cell9.setCellValue("AB");
+                                                abcounter = abcounter + 0.5;
+                                                cell9.setCellStyle(stylered);
+                                            } else if (diffMinutes1 >= 240 && userTimeIn.after(secondHalfTimeStr2)) {
+                                                cell9.setCellValue("PR");
+                                                prcounter = prcounter + 0.5;
+                                                cell9.setCellStyle(stylegreen);
+                                            } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                                cell9.setCellValue("PR");
+                                                prcounter = prcounter + 0.5;
+                                                cell9.setCellStyle(stylegreen);
+                                            } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                                cell9.setCellValue("PR");
+                                                prcounter = prcounter + 0.5;
+                                                cell9.setCellStyle(stylegreen);
                                             } else if (null != leave1[0] && !leave1[0].contains("AB") && !leave1[0].contains("AR")) {
                                                 if (leave1[0].contains("Casual Leave")) {
                                                     cl = cl + 0.5;

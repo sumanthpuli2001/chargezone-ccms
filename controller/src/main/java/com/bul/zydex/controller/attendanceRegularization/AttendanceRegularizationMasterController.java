@@ -1033,7 +1033,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     secondHalfList.add("WO");
                 } else if (secondHalf.equals("AR")) {
                     secondHalfList.add("AR/P");
-                } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR")) {
+                } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR") && !secondHalf.contains("Short Leave")) {
                     secondHalfList.add("AB");
                 } else if (secondHalf.contains("fullday")) {
                     secondHalfList.add("PR");
@@ -1102,18 +1102,6 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         if (leave1[0].contains("AR")) {
                             secondHalfList.add("AR/P");
 
-                        } else if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
-                            secondHalfList.add("PR");
-                        } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
-                                && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
-                                && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
-                            secondHalfList.add("AB");
-                        } else if (diffMinutes1 >= 240 && userTimeIn.after(secondHalfTimeStr2)) {
-                            secondHalfList.add("PR");
-                        } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
-                            secondHalfList.add("PR");
-                        } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
-                            secondHalfList.add("PR");
                         } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
                             if (secondHalf.contains("*")) {
                                 String[] shortArray = secondHalf.split("\\*");
@@ -1132,10 +1120,24 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     } else {
                                         secondHalfList.add("AB");
                                     }
+                                } else if (diffMinutes1 >= 240 && userTimeIn.before(secondHalfTimeStr2)) {
+                                    secondHalfList.add("PR");
                                 }
                             } else {
                                 secondHalfList.add("AB");
                             }
+                        } else if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
+                            secondHalfList.add("PR");
+                        } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
+                                && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
+                            secondHalfList.add("AB");
+                        } else if (diffMinutes1 >= 240 && userTimeIn.after(secondHalfTimeStr2)) {
+                            secondHalfList.add("PR");
+                        } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                            secondHalfList.add("PR");
+                        } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                            secondHalfList.add("PR");
                         } else if (null != leave1[0] && !leave1[0].contains("AB") && !leave1[0].contains("AR")) {
                             if (leave1[0].contains("Casual Leave")) {
                             }

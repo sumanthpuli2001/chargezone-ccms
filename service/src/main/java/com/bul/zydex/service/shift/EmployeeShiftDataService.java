@@ -18,10 +18,14 @@ public interface EmployeeShiftDataService<T> extends GenericsService<T> {
     public List<?> empOrMonthlySearch(T object);
 
     public List<?> getPastAndCurrentPunch(T object, String endShiftTime);
-    
-     public List<?> checkTodayPresent(T object);
-     
-     public List<?> checkTodayFirstHalfDayPresent(T object);
-     
-     public List<?> checkTodaySecondHalfDayPresent(T object);
+
+    public List<?> checkTodayPresent(T object);
+
+    public List<?> checkTodayFirstHalfDayPresent(T object);
+
+    public List<?> checkTodaySecondHalfDayPresent(T object);
+
+    public List<?> getPastAndCurrentPunchForSelectedDate(T object, String endShiftTime, String selectDate, String PreviousDate);
+
+      public List<?> dailyTimeEntryForSelectedDate(T object,String date);
 }

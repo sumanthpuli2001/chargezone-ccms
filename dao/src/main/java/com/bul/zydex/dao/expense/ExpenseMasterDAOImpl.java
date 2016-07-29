@@ -68,7 +68,8 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
                 + " FROM ExpenseMaster a"
                 + " left join a.employeeMasterByApprover1Id b"
                 + " left join a.employeeMasterByApprover2Id c"
-                + " WHERE b.id = " + expenseMaster.getEmployeeMasterByEmployeeId().getId() + " or c.id=" + expenseMaster.getEmployeeMasterByEmployeeId().getId();
+                + " WHERE b.id = " + expenseMaster.getEmployeeMasterByEmployeeId().getId() + " or c.id=" + expenseMaster.getEmployeeMasterByEmployeeId().getId()
+                + " ORDER BY a.id desc";
 
         return getHibernateTemplate().find(query);
     }
@@ -93,7 +94,8 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
                 + " FROM ExpenseMaster a "
                 + " LEFT JOIN a.employeeMasterByApprover2Id b"
                 + " LEFT JOIN a.employeeMasterByEmployeeId c"
-                + " WHERE b.id='" + appId + "' and  a.id='" + tabId + "' and (a.status=0) ";
+                + " WHERE b.id='" + appId + "' and  a.id='" + tabId + "' and (a.status=0) "
+                + " ORDER BY a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
@@ -108,7 +110,8 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
                 + " left join a.employeeMasterByApprover1Id b"
                 + " left join a.employeeMasterByApprover2Id c"
                 + " WHERE a.employeeMasterByEmployeeId=" + expenseMaster.getEmployeeMasterByEmployeeId().getId()
-                + " and a.status=0";
+                + " and a.status=0"
+                + " ORDER BY a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
@@ -123,7 +126,8 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
                 + " EmployeeMaster b"
                 + " WHERE a.employeeMasterByEmployeeId=b.id"
                 + " and b.reportingManagerLevel1=" + expenseMaster.getEmployeeMasterByEmployeeId().getId()
-                + " and a.status=0";
+                + " and a.status=0"
+                + " ORDER BY a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
@@ -138,7 +142,8 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
                 + " EmployeeMaster b"
                 + " WHERE a.employeeMasterByEmployeeId=b.id"
                 + " and b.reportingManagerLevel2=" + expenseMaster.getEmployeeMasterByEmployeeId().getId()
-                + " and a.status=0";
+                + " and a.status=0"
+                + " ORDER BY a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
@@ -266,7 +271,8 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
                 + " left join a.employeeMasterByApprover2Id z"
                 + " where 1=1"
                 + " and a.status !=3"
-                + " and b.reportingManagerLevel1='" + reportingManagerLevel1_id + "'" + condition;
+                + " and b.reportingManagerLevel1='" + reportingManagerLevel1_id + "'" + condition
+                + " ORDER BY a.id desc";
         List<?> list = getHibernateTemplate().find(hqlQuery);
         for (Iterator<? extends Object> iterator = list.iterator(); iterator.hasNext();) {
             Object[] next = (Object[]) iterator.next();
@@ -327,7 +333,8 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
                 + " left join a.employeeMasterByApprover2Id z"
                 + " where 1=1"
                 + " and a.status !=3"
-                + " and b.reportingManagerLevel2='" + reportingManagerLevel2_id + "'" + condition;
+                + " and b.reportingManagerLevel2='" + reportingManagerLevel2_id + "'" + condition
+                + " ORDER BY a.id desc";
         List<?> list = getHibernateTemplate().find(hqlQuery);
         for (Iterator<? extends Object> iterator = list.iterator(); iterator.hasNext();) {
             Object[] next = (Object[]) iterator.next();
@@ -390,7 +397,8 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
                 + " left join a.employeeMasterByApprover2Id z"
                 + " where 1=1"
                 + " and a.status !=3"
-                + " and b.reportingManagerLevel3='" + reportingManagerLevel3_id + "'" + condition;
+                + " and b.reportingManagerLevel3='" + reportingManagerLevel3_id + "'" + condition
+                + " ORDER BY a.id desc";
         List<?> list = getHibernateTemplate().find(hqlQuery);
         for (Iterator<? extends Object> iterator = list.iterator(); iterator.hasNext();) {
             Object[] next = (Object[]) iterator.next();
@@ -454,7 +462,8 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
                 + " left join a.employeeMasterByApprover2Id z"
                 + " where 1=1"
                 + " and a.status !=3"
-                + " and b.reportingManagerLevel4='" + reportingManagerLevel4_id + "'" + condition;
+                + " and b.reportingManagerLevel4='" + reportingManagerLevel4_id + "'" + condition
+                + " ORDER BY a.id desc";
         List<?> list = getHibernateTemplate().find(hqlQuery);
         for (Iterator<? extends Object> iterator = list.iterator(); iterator.hasNext();) {
             Object[] next = (Object[]) iterator.next();
@@ -503,7 +512,8 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
                 + " Left Join a.employeeMasterByEmployeeId b"
                 + " LEFT JOIN b.departmentMaster c "
                 + " LEFT JOIN b.designationMaster d "
-                + " where 1=1" + condition;
+                + " where 1=1" + condition
+                + " ORDER BY a.id desc";
         return getHibernateTemplate().find(hqlQuery);
     }
 
@@ -545,7 +555,8 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
                 + " left join a.employeeMasterByApprover2Id z"
                 + " LEFT JOIN b.departmentMaster c "
                 + " LEFT JOIN b.designationMaster d "
-                + " where b.reportingManagerLevel1='" + reportingLevel_Id + "' " + condition;
+                + " where b.reportingManagerLevel1='" + reportingLevel_Id + "' " + condition
+                + " ORDER BY a.id desc";
         return getHibernateTemplate().find(hqlQuery);
     }
 

@@ -3,6 +3,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       
+       
+       
+       
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
@@ -26,7 +30,7 @@
     </bean>-->
     <!--
 -->
-<!--    <bean id="dailyTimeEntryId"
+    <bean id="dailyTimeEntryId"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="shiftRotationMasterController1" />
         <property name="targetMethod" value="timeEntryDaily" />
@@ -35,8 +39,8 @@
           class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="dailyTimeEntryId" />
         <property name="cronExpression" value="0 0/3 * * * ?" />
-        0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying
-    </bean>-->
+        <!--0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying-->
+    </bean>
     <!--
 -->
 <!--    <bean id="overTimeEntryId"
@@ -87,7 +91,7 @@
             <property name="cronExpression" value="0 15 10 * * ?" />
         </bean>
     -->
-    <!--    <bean id="shortLeveId"
+<!--        <bean id="shortLeveId"
               class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
             <property name="targetObject" ref="leaveEmployeeDetailController1" />
             <property name="targetMethod" value="shortLeaveMonthWiseScheduler" />
@@ -95,11 +99,11 @@
         <bean id="cronTrigger7"
               class="org.springframework.scheduling.quartz.CronTriggerBean">
             <property name="jobDetail" ref="shortLeveId" />
-            <property name="cronExpression" value="0 0/5 * * * ?" />
-            <property name="cronExpression" value="0 45 23 L * ?" />
-            <property name="cronExpression" value="0 15 10 * * ? />
-        </bean>
-    -->
+            <property name="cronExpression" value="0 0/3 * * * ?" />-->
+            <!--<property name="cronExpression" value="0 45 23 L * ?" />-->
+            <!--<property name="cronExpression" value="0 15 10 * * ? />-->
+        <!--</bean>-->
+    
     <!--     <bean id="probationToConfirmation"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="probationToConfirmationController1" />
@@ -133,33 +137,49 @@
         <property name="jobDetail" ref="travelEscalationId" />
         <property name="cronExpression" value="0 5 0 1/1 * ? *" />
     </bean>-->
+    
+        <bean id="reportingManagerChangeId"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="resignationMasterController1" />
+        <property name="targetMethod" value="reportingManagerChangeCheck" />
+    </bean>
+    <bean id="cronTrigger11"
+          class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="reportingManagerChangeId" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
+        <!--0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying-->
+    </bean>
+    
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="jobDetails">
             <list>
                                 <!--<ref bean="timeAttendanceDetail" />-->
-                <!--<ref bean="dailyTimeEntryId" />-->
-<!--                <ref bean="overTimeEntryId" />
-                <ref bean="carryForwardLeave" />
+                <ref bean="dailyTimeEntryId" />
+                <!--<ref bean="overTimeEntryId" />-->
+<!--                <ref bean="carryForwardLeave" />
                 <ref bean="deviceId" />
-                <ref bean="coffDeleteId" />
-                <ref bean="shortLeveId" />
-                <ref bean="probationToConfirmation" />
+                <ref bean="coffDeleteId" />-->
+                <!--<ref bean="shortLeveId" />-->
+             
+<!--                <ref bean="probationToConfirmation" />
                 <ref bean="probationToConfirmationCreateCheck" />
                 <ref bean="travelEscalationId" />-->
+                <ref bean="reportingManagerChangeId" />
             </list>
         </property>
         <property name="triggers">
             <list>
                                 <!--<ref bean="cronTrigger1" />-->
-                <!--<ref bean="cronTrigger2" />-->
-<!--                <ref bean="cronTrigger3" />
-                <ref bean="cronTrigger4" />
+                <ref bean="cronTrigger2" />
+                <!--<ref bean="cronTrigger3" />-->
+<!--                <ref bean="cronTrigger4" />
                 <ref bean="cronTrigger5" />
-                <ref bean="cronTrigger6" />
-                <ref bean="cronTrigger7" />
-                <ref bean="cronTrigger8" />
+                <ref bean="cronTrigger6" />-->
+                <!--<ref bean="cronTrigger7" />-->
+<!--                <ref bean="cronTrigger8" />
                 <ref bean="cronTrigger9" />
                 <ref bean="cronTrigger10" />-->
+                <ref bean="cronTrigger11" />
             </list>
         </property>
     </bean>

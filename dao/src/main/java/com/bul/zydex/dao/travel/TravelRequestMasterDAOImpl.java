@@ -114,7 +114,7 @@ public class TravelRequestMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         query += " Select b.employeeId, b.employeeName, a.travelType, a.travelRequestNo, a.startDateTime, a.endDateTime, a.id, b.id, a.status, "
                 + " case when (a.status=5 and a.travelType ='International')"
-                + " then e.employeeName ELSE d.employeeName END as approver"
+                + " then e.employeeName ELSE d.employeeName END as approver, a.dateOfSubmit"
                 + " FROM TravelRequestMaster a"
                 + " LEFT JOIN a.employeeMasterByEmployeeMasterId b"
                 + " LEFT JOIN a.employeeMasterByApprover1Id d"
@@ -493,14 +493,15 @@ public class TravelRequestMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         query += " Select b.employeeId, b.employeeName, a.travelType, a.travelRequestNo,"
                 + " a.startDateTime, a.endDateTime, a.id, b.id, a.status,"
                 + " case when (a.status=5 and a.travelType ='International')"
-                + " then e.employeeName ELSE d.employeeName END as approver "
+                + " then e.employeeName ELSE d.employeeName END as approver,a.dateOfSubmit"
                 + " FROM TravelRequestMaster a"
                 + " LEFT JOIN a.employeeMasterByEmployeeMasterId b"
                 + " LEFT JOIN a.employeeMasterByApprover1Id d"
                 + " LEFT JOIN a.employeeMasterByApprover2Id e"
                 + " LEFT JOIN b.userMaster c"
                 + " Where a.travelType like '%International%'"
-                + " and a.status IN(6,5)";
+                + " and a.status IN(6,5)"
+                + " ORDER BY a.id desc";
 
         return getHibernateTemplate().find(query);
     }

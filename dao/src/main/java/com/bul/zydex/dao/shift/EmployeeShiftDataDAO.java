@@ -34,4 +34,7 @@ public interface EmployeeShiftDataDAO<T> extends GenericsDAO<T> {
 
     public List<?> checkTodaySecondHalfDayPresent(T object);
 
+    public List<?> getPastAndCurrentPunchForSelectedDate(T object, String endShiftTime, String selectDate, String PreviousDate);
+
+    public List<?> dailyTimeEntryForSelectedDate(T object,String date);
 }

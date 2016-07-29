@@ -81,7 +81,7 @@ public class CafeteriaRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Ca
             condition += " AND d.id = " + cafeteriaRequest.getRejectRemark();
         }
 //         Select  b.employeeId, b.employeeName ,a.orderDateTime , a.requestType ,a.requestFor, a.status
-        query += "Select a.id, b.employeeId, b.employeeName,a.orderDateTime , a.requestType, a.requestFor, b.id ,a.status, e.employeeName "
+        query += "Select a.id, b.employeeId, b.employeeName,a.orderDateTime , a.requestType, a.requestFor, b.id ,a.status, e.employeeName, a.requestDate "
                 + " From CafeteriaRequest a "
                 + " LEFT JOIN a.employeeMasterByEmployeeMasterId b "
                 + " LEFT JOIN a.employeeMasterByAdminApproverId e "

@@ -73,7 +73,7 @@ public class PoolCarRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Pool
         if (!"".equals(poolCarRequest.getRejectRemark()) && null != poolCarRequest.getRejectRemark()) {
             condition += " AND d.id = " + poolCarRequest.getRejectRemark();
         }
-        query += " SELECT a.id, b.employeeId, b.employeeName, a.startDateTime, a.endDateTime, b.id ,a.status ,e.employeeId, e.employeeName,f.employeeName "
+        query += " SELECT a.id, b.employeeId, b.employeeName, a.startDateTime, a.endDateTime, b.id ,a.status ,e.employeeId, e.employeeName,f.employeeName, a.requestDate "
                 + " From PoolCarRequest a"
                 + " left join a.employeeMasterByEmployeeMasterId b"
                 + " left join a.employeeMasterByApproverId f "

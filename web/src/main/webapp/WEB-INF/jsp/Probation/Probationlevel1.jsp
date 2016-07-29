@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
+         <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
         <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Probation To Confirmation</title>
@@ -227,7 +227,7 @@
                                         </div>
                                         <div class="box box-info collapsed-box">
                                             <div class="box-header">
-                                                <h3 class="box-title">What are the jobs being handled by the employee?</h3>
+                                                <h3 class="box-title">What are the jobs being handled by the employee?</h3><span style="color: red;font-size: 12px;">*</span>
                                                 <div class="box-tools pull-right">
                                                     <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                                     <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
@@ -249,7 +249,7 @@
                                         </div>
                                         <div class="box box-info collapsed-box">
                                             <div class="box-header">
-                                                <h3 class="box-title">Performance Rating:</h3>
+                                                <h3 class="box-title">Performance Rating:</h3><span style="color: red;font-size: 12px;">*</span>
                                                 <div class="box-tools pull-right">
                                                     <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                                     <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
@@ -263,6 +263,42 @@
                                                             <fieldset id="performanceRating">
                                                                 <!--<label class="col-sm-3 control-label">Name of the Joiner:</label>-->
                                                                 <div class="col-sm-10 " >
+                                                                <c:if test="${ptc.performanceRating eq 'Excellent'}">
+                                                                    <input type="radio" name="performanceRating" id="Excellent" value="Excellent" checked style="width: 15px;height: 15px" > Excellent
+                                                                    <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" > Very Good
+                                                                    <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" >Good
+                                                                    <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px" >Average
+                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px" >Needs Improvement
+                                                                </c:if>
+                                                                <c:if test="${ptc.performanceRating eq 'Very Good'}">
+                                                                    <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" > Excellent
+                                                                    <input type="radio" name="performanceRating" id="Very Good" value="Very Good" checked style="width: 15px;height: 15px"> Very Good
+                                                                    <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" >Good
+                                                                    <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px" >Average
+                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px" >Needs Improvement
+                                                                </c:if>
+                                                                <c:if test="${ptc.performanceRating eq 'Good'}">
+                                                                    <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" > Excellent
+                                                                    <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" > Very Good
+                                                                    <input type="radio" name="performanceRating" id="Good"  value="Good" checked style="width: 15px;height: 15px">Good
+                                                                    <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px" >Average
+                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px">Needs Improvement
+                                                                </c:if>
+                                                                <c:if test="${ptc.performanceRating eq 'Average'}">
+                                                                    <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" > Excellent
+                                                                    <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" > Very Good
+                                                                    <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" >Good
+                                                                    <input type="radio" name="performanceRating" id="Average" value="Average" checked style="width: 15px;height: 15px">Average
+                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px" >Needs Improvement
+                                                                </c:if>
+                                                                <c:if test="${ptc.performanceRating eq 'NeedsImprovement'}">
+                                                                    <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" > Excellent
+                                                                    <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" > Very Good
+                                                                    <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" >Good
+                                                                    <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px">Average
+                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" checked value="NeedsImprovement" style="width: 15px;height: 15px">Needs Improvement
+                                                                </c:if>
+                                                                <c:if test="${ptc.performanceRating eq null || ptc.performanceRating eq ''}">
                                                                     <label class="radio-inline">
                                                                         <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px"> Excellent
                                                                     </label>
@@ -278,12 +314,13 @@
                                                                     <label class="radio-inline">
                                                                         <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px">Needs Improvement
                                                                     </label>
-                                                                </div>
-                                                            </fieldset>
-                                                            <!--<div class="col-md-3 col-sm-3">-->
-                                                            <!--</div>-->
-                                                        </div>
-                                                        <div class="col-sm-offset-5 col-sm-4">
+                                                                </c:if>
+                                                            </div>
+                                                        </fieldset>
+                                                        <!--<div class="col-md-3 col-sm-3">-->
+                                                        <!--</div>-->
+                                                    </div>
+                                                    <div class="col-sm-offset-5 col-sm-4">
                                                         <form:errors path="performanceRating" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div><!-- /.col -->
@@ -303,7 +340,7 @@
                                                         <div class="table-responsive">
                                                             <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                                 <tr>
-                                                                    <td >REPORTING MANAGER (RECOMMENDATION)</td>
+                                                                    <td >REPORTING MANAGER (RECOMMENDATION)<span style="color: red;font-size: 12px;">*</span></td>
                                                                     <td>
                                                                     <form:select path="recommendationSelect" id="RecomendationTypeSelectId" class="form-control ">
                                                                         <form:option value="">--SELECT--</form:option>
@@ -313,7 +350,7 @@
                                                                     </form:select>
                                                                     <form:errors path="recommendationSelect" cssClass="errorDiv"></form:errors>
                                                                     </td>
-                                                                    <td id="RecomendationExtPeriodId" style="display: none">Extention Period</td>
+                                                                    <td id="RecomendationExtPeriodId" style="display: none">Extention Period<span style="color: red;font-size: 12px;">*</span></td>
                                                                     <td id="RecomendationExtSelectId" style="display: none">
                                                                     <form:select path="recommendationExtendPeriod" id="extendedmonth" name ="extendedmonth" class="form-control ">
                                                                         <form:option value="">--SELECT--</form:option>
@@ -329,22 +366,37 @@
                                                                     </form:select>
                                                                     <span id="recommendationExtendPeriodError" style="color: red;"></span>
                                                                 </td>
-                                                                <td id="RecomendationRemarkId" style="display: none">Remark</td>
+                                                                <td id="RecomendationRemarkId" style="display: none">Remark<span style="color: red;font-size: 12px;">*</span></td>
                                                                 <td id="RecomendationRemarkTxtId" style="display: none">
                                                                     <form:textarea path="recommendationRemark" id="remarkid" name = "remarkid" class="form-control" type="text" value=""></form:textarea>
                                                                         <span id="recommendationRemarkError" style="color: red;"></span>
                                                                 </tr>
                                                             </table>
                                                         </div><!-- /.col -->
-                                                    </div><!-- /.col -->
-                                                </div><!-- /.row -->
-                                            </div><!-- /.box-body -->
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <label>Please provide your detailed justification for Confirmation / Extension of Probation / Termination of Services. Kindly Note, the same is mandatory for further process.</label><span style="color: red;font-size: 12px;">*</span>
+                                                            <form:textarea path="managerJustification" id="remarkid" name = "remarkid" class="form-control" type="text" value=""></form:textarea>
+                                                            <form:errors path="managerJustification" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                        </div>
+                                                    <c:if test="${ptc.recomendationByHr ne '' && ptc.recomendationByHr ne null}">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <label>HR Remarks:</label>
+                                                                <form:textarea path="recomendationByHr" class="form-control" type="text" value="" readonly="true" ></form:textarea>
+                                                                </div>
+                                                            </div>
+                                                    </c:if>
+                                                </div><!-- /.col -->
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-5 col-sm-4">
+                                            &nbsp;&nbsp;<button type="submit" style="width: 100px" class="btn btn-primary" id="saveSubmit1" >Submit</button>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-offset-5 col-sm-4">
-                                                &nbsp;&nbsp;<button type="submit" style="width: 100px" class="btn btn-primary" id="saveSubmit1" >Submit</button>
-                                            </div>
-                                        </div>
+                                    </div>
                                 </form:form>
                             </div>
                         </div>

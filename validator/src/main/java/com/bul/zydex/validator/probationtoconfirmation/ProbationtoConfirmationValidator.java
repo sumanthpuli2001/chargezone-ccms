@@ -26,6 +26,7 @@ public class ProbationtoConfirmationValidator implements Validator{
          ValidationUtils.rejectIfEmptyOrWhitespace(errors, "jobHandled","field.error1", "None"); 
          ValidationUtils.rejectIfEmptyOrWhitespace(errors, "performanceRating","field.error13", "None"); 
          ValidationUtils.rejectIfEmptyOrWhitespace(errors, "recommendationSelect","field.error13", "None"); 
+         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "managerJustification","field.error1", "None"); 
         ProbationToConfirmation probationToConfirmation = (ProbationToConfirmation) o;
     }
 

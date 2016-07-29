@@ -179,6 +179,7 @@
                                                                     <th>Travel Request No.</th>
                                                                     <th>Start Date Time</th>
                                                                     <th>End Date Time</th>
+                                                                    <th>Requested Date</th>
                                                                     <th>Status</th>
                                                                     <th>Action</th>
                                                                 </tr>
@@ -195,6 +196,7 @@
                                                                 <td>${list[3]}</td>
                                                                 <td>${list[4]}</td>
                                                                 <td>${list[5]}</td>
+                                                                <td>${list[11]}</td>
                                                                 <%--<c:if test="${list[8] eq 3}"><td>Travel Request</td></c:if>--%>
                                                                 <%--<c:if test="${list[8] eq 6}"><td>Withdraw Request</td></c:if>--%>
                                                                 <!--<td>-->

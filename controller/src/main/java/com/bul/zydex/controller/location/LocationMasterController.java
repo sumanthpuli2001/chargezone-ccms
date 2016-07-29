@@ -25,6 +25,9 @@ public class LocationMasterController extends LocationMasterAbstract {
     }
 
     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response, LocationMaster locationMaster) throws Exception {
+         if (locationMaster.getId() != null) {
+            locationMaster = locationMasterService.readById(locationMaster.getId());
+        }
         return new ModelAndView("Location/LocationCreate", "locationMaster", locationMaster);
 
     }

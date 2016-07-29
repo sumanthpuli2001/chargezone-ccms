@@ -143,7 +143,8 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " LEFT JOIN b.departmentMaster c "
                 + " LEFT JOIN b.designationMaster d "
                 + " LEFT JOIN a.leaveTypeMaster e "
-                + " Where 1=1" + condition;
+                + " Where 1=1" + condition
+                 + " Order By a.id desc";
 
         return getHibernateTemplate().find(query);
     }

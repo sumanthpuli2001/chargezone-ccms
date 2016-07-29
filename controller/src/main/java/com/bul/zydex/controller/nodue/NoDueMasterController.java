@@ -558,6 +558,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
     public ModelAndView getNoDueRequests(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         ResignationMaster resignationMaster = new ResignationMaster();
+        HttpSession session = request.getSession();
         List<?> resignedEmployeesList = resignationMasterService.getFinallyResignedEmployees();
         List<List<?>> employeeList = new ArrayList<List<?>>();
         if (!resignedEmployeesList.isEmpty()) {
@@ -568,6 +569,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
             }
         }
         mv.addObject("employeesListOfList", employeeList);
+        session.setAttribute("employeeList", employeeList);
         mv.setViewName("NoDues/NoDuesRequestsListView");
 
 //        resignedEmployeesList.stream().filter(resignationMaster.);
@@ -676,6 +678,16 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         request.setAttribute("employeeMaster", employeeMaster);
         mv.getModelMap().put("noDueMaster", noDueMaster);
         mv.setViewName("NoDues/NoDuePrint");
+        return mv;
+    }
+
+    public ModelAndView exportToExcelResignation(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        List<?> employeeList = (List<?>) request.getSession().getAttribute("employeeList");
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-Disposition", "attachment; filename=ExpenseRequestData.xls");
+        request.setAttribute("employeesListOfList", employeeList);
+        mv.setViewName("NoDues/NoDuesRequestsListViewExport");
         return mv;
     }
 }

@@ -143,11 +143,11 @@ public class AttendanceRegularizationMasterDAOImpl<T> extends GenericsDAOImpl<T>
     @Override
     public List<?> powerAdminAttendanceRegularizationList() {
         String query = "";
-        query += " SELECT a.id,b.employeeName,a.startDateTime,a.endDateTime,a.reason,a.status"
+        query += " SELECT a.id,b.employeeName,a.startDateTime,a.endDateTime,a.reason,a.status,b.employeeId"
                 + " FROM AttendanceRegularization a,"
                 + " EmployeeMaster b"
                 + " Where a.userMasterId=b.userMaster.id"
-                + " and a.status=0";
+                + " order by a.id desc";
         return getHibernateTemplate().find(query);
     }
 }

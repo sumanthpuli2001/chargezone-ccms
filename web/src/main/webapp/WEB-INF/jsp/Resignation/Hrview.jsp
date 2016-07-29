@@ -229,10 +229,39 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label">Relieving Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <div class=" col-sm-7">
-                                                            <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy - hh:ii " data-link-field="dtp_input1">
+                                                <c:choose>
+                                                    <c:when test="${resignationMaster.relievingDate eq '' || resignationMaster.relievingDate eq null}">
+                                                        <div class="form-group" style="pointer-events: none;">
+                                                            <label class="col-sm-3 control-label">Reliving Date:</label>
+                                                            <div class="col-sm-1">
+                                                                <input type="radio" name="relivingDateRadio" id="relivingDateShow_id" value="relivingDateShow">
+                                                            </div>
+                                                            <label class="col-sm-3 control-label">As Per Employment Rule:</label>
+                                                            <div class="col-sm-1">
+                                                                <input type="radio" name="relivingDateRadio" checked="true" id="relivingDateHide_id" value="relivingDateHide">
+                                                            </div>
+                                                            <span id="relivingDateRadioError" style="color: red;"></span>
+                                                        </div>
+                                                    </c:when>
+                                                    <c:otherwise>
+
+                                                        <div class="form-group" style="pointer-events: none;">
+                                                            <label class="col-sm-3 control-label">Reliving Date:</label>
+                                                            <div class="col-sm-1">
+                                                                <input type="radio" name="relivingDateRadio" checked="true" id="relivingDateShow_id" value="relivingDateShow">
+                                                            </div>
+                                                            <label class="col-sm-3 control-label">As Per Employment Rule:</label>
+                                                            <div class="col-sm-1">
+                                                                <input type="radio" name="relivingDateRadio" id="relivingDateHide_id" value="relivingDateHide">
+                                                            </div>
+                                                            <span id="relivingDateRadioError" style="color: red;"></span>
+                                                        </div>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <div class="form-group" >
+                                                    <label class="col-sm-3 control-label">Relieving Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <div class=" col-sm-7">
+                                                        <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy - hh:ii " data-link-field="dtp_input1">
                                                             <form:input class="form-control" path="relievingDate"  readonly='true'></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>

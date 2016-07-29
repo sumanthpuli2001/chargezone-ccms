@@ -72,4 +72,12 @@ public class EmployeeShiftDataServiceImpl<T> extends GenericsServiceImpl<T> impl
      public List<?> checkTodaySecondHalfDayPresent(T object) {
         return employeeShiftDataDAO.checkTodaySecondHalfDayPresent(object);
     }
+    @Override
+      public List<?> getPastAndCurrentPunchForSelectedDate(T object,String endShiftTime,String selectDate,String PreviousDate){
+        return employeeShiftDataDAO.getPastAndCurrentPunchForSelectedDate(object,endShiftTime,selectDate,PreviousDate);
+    }
+    @Override
+       public List<?> dailyTimeEntryForSelectedDate(T object,String date){
+        return employeeShiftDataDAO.dailyTimeEntryForSelectedDate(object,date);
+    }
 }

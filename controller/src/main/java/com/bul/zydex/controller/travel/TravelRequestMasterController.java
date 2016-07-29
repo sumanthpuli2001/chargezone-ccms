@@ -45,7 +45,11 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 
     public ModelAndView applyClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
+
         TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        if (null != request.getAttribute("travelRequestMaster1")) {
+            travelRequestMaster = (TravelRequestMaster) request.getAttribute("travelRequestMaster1");
+        }
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         UserMaster user = (UserMaster) request.getSession().getAttribute("user");
@@ -215,6 +219,8 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 
                         request.setAttribute("failureMessage",
                                 "Error : You can't Apply Request on Same Day..");
+                        mv.getModelMap().put("travelRequestMaster", travelRequestMaster);
+                        request.setAttribute("travelRequestMaster1", travelRequestMaster);
                         mv = applyClick(request, response);
 
                     } else {
@@ -1018,7 +1024,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                     int levelId = employeeMaster.getLevelMaster().getId();
                                     LevelMaster levelMaster1 = new LevelMaster();
                                     levelMaster1 = levelMasterService.readById(levelId);
-                                    if (levelMaster.getLevel().contains("Level 4") || levelMaster.getLevel().contains("Level 5")) {
+                                    if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
                                         List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
                                         if (!empBalList.isEmpty()) {
                                             employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
@@ -1081,7 +1087,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                     int levelId = employeeMaster.getLevelMaster().getId();
                                     LevelMaster levelMaster1 = new LevelMaster();
                                     levelMaster1 = levelMasterService.readById(levelId);
-                                    if (levelMaster.getLevel().contains("Level 4") || levelMaster.getLevel().contains("Level 5")) {
+                                    if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
                                         List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
                                         if (!empBalList.isEmpty()) {
                                             employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
@@ -1138,7 +1144,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                     int levelId = employeeMaster.getLevelMaster().getId();
                                     LevelMaster levelMaster1 = new LevelMaster();
                                     levelMaster1 = levelMasterService.readById(levelId);
-                                    if (levelMaster.getLevel().contains("Level 4") || levelMaster.getLevel().contains("Level 5")) {
+                                    if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
                                         List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
                                         if (!empBalList.isEmpty()) {
                                             employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
@@ -1576,6 +1582,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 
                 }
                 templist.add(pattern);
+                templist.add("" + obj[10]);
                 finalList.add(templist);
             }
 

@@ -783,6 +783,12 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 String firstHalf = "" + next[1];
                 int firstHalfVal = 0;
                 int counter = 0;
+                Date date = sdf.parse("" + next[0]);
+                Calendar c = Calendar.getInstance();
+                c.setTime(date);
+                int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
+                SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                String dayName = format.format(date);
 
                 if (firstHalf.contains("fullday")) {
                     newList.add("PR");
@@ -827,7 +833,11 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     }
                     long diffMinutes1 = diff1 / (60 * 1000);
 
-                    if (userTimeIn != null) {
+                    if (dayName.equals("Saturday") && dayOfWeek == 2 && diffMinutes1 >= 240) {
+                        newList.add("PR");
+                    } else if (diffMinutes1 >= diffMinutes) {
+                        newList.add("PR");
+                    } else if (userTimeIn != null) {
                         if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                             newList.add("PR");
                         } else if (userTimeOut.before(userTimeIn)) {
@@ -1095,7 +1105,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         } else if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
                             secondHalfList.add("PR");
                         } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
-                                && !secondHalf.contains("Casual Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
                                 && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
                             secondHalfList.add("AB");
                         } else if (diffMinutes1 >= 240 && userTimeIn.after(secondHalfTimeStr2)) {
@@ -1439,7 +1449,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         List<?> list = attendanceRegularizationMasterService.powerAdminAttendanceRegularizationList();
         mv.getModelMap().put("list", list);
         mv.getModelMap().put("attendanceRegularization", attendanceRegularization);
-        mv.setViewName("AttendanceRegularization/attendanceRegularizationApprovalResult");
+        mv.setViewName("AttendanceRegularization/attendanceRegularizationViewResult");
         return mv;
     }
 
@@ -1719,4 +1729,15 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         return mv;
     }
 
+    public ModelAndView exportToExcelAttendenceRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        List<?> list = attendanceRegularizationMasterService.powerAdminAttendanceRegularizationList();
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-Disposition", "attachment; filename=ARList.xls");
+        mv.getModelMap().put("list", list);
+        mv.getModelMap().put("attendanceRegularization", attendanceRegularization);
+        mv.setViewName("AttendanceRegularization/attendanceRegularizationViewResultExport");
+        return mv;
+    }
 }

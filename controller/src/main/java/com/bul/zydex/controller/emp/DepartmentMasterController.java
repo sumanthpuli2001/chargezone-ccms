@@ -19,6 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class DepartmentMasterController extends DepartmentMasterAbstract {
 
     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response, DepartmentMaster departmentMaster) throws Exception {
+        if (departmentMaster.getId() != null) {
+            departmentMaster = departmentMasterService.readById(departmentMaster.getId());
+        }
         return new ModelAndView("Department/DepartmentCreate", "departmentMaster", departmentMaster);
     }
 
@@ -32,6 +35,9 @@ public class DepartmentMasterController extends DepartmentMasterAbstract {
             mv.addAllObjects(errors.getModel());
             mv.setViewName("Department/DepartmentCreate");
         } else {
+            String abc = departmentMaster.getDepartmentName().replaceAll("'", "");
+            departmentMaster.setDepartmentName(abc);
+
             if (departmentMasterService.isExist(departmentMaster)) {
                 departmentMasterService.createOrUpdate(departmentMaster);
                 mv.addObject("successMessage", "Information : Information Saved Successfully.");

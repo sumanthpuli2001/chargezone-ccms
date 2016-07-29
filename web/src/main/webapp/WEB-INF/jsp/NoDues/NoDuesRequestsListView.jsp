@@ -60,8 +60,9 @@
                     <!-- Custom Tabs -->
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
-                            <div class="box-header">
-                            </div>
+                             <div class="box-header" style="text-align: right;">
+                                    <button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="window.location = 'noDueMaster.htm?act=exportToExcelResignation'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>
+                                </div>
                             <div class="box-body no-padding">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12">

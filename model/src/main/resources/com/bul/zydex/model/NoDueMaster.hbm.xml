@@ -108,37 +108,37 @@
             <column name="dept_other" />
         </property>
         <property name="deptOtherRemark" type="string">
-            <column name="dept_other_remark" length="16777215" />
+            <column name="dept_other_remark" />
         </property>
         <property name="hrOther" type="string">
             <column name="HR_other" />
         </property>
         <property name="hrOtherRemark" type="string">
-            <column name="HR_other_remark" length="16777215" />
+            <column name="HR_other_remark" />
         </property>
         <property name="itOther" type="string">
             <column name="IT_other" />
         </property>
         <property name="itOtherRemark" type="string">
-            <column name="IT_other_remark" length="16777215" />
+            <column name="IT_other_remark" />
         </property>
         <property name="financeOther" type="string">
             <column name="finance_other" />
         </property>
         <property name="financeOtherRemark" type="string">
-            <column name="finance_other_remark" length="16777215" />
+            <column name="finance_other_remark" />
         </property>
         <property name="deptOtherText" type="string">
-            <column name="dept_other_text" length="16777215" />
+            <column name="dept_other_text" />
         </property>
         <property name="hrOtherText" type="string">
-            <column name="HR_other_text" length="16777215" />
+            <column name="HR_other_text" />
         </property>
         <property name="itOtherText" type="string">
-            <column name="IT_other_text" length="16777215" />
+            <column name="IT_other_text" />
         </property>
         <property name="financeOtherText" type="string">
-            <column name="finance_other_text" length="16777215" />
+            <column name="finance_other_text" />
         </property>
         <property name="status" type="int">
             <column name="status" not-null="true" />
@@ -153,13 +153,13 @@
             <column name="cafeteria" length="45" />
         </property>
         <property name="cafeteriaRemark" type="string">
-            <column name="cafeteria_remark" length="16777215" />
+            <column name="cafeteria_remark" />
         </property>
         <property name="exitInterview" type="string">
             <column name="exit_interview" length="45" />
         </property>
         <property name="exitInterviewReamrk" type="string">
-            <column name="exit_interview_reamrk" length="16777215" />
+            <column name="exit_interview_reamrk" />
         </property>
     </class>
 </hibernate-mapping>

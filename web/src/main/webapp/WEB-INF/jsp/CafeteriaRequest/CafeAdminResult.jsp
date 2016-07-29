@@ -161,6 +161,7 @@
                                                                         <th>Employee Name</th>
                                                                         <th>Request</th>
                                                                         <th>No.of Employees/Visitors</th>
+                                                                        <th>Requested Date</th>
                                                                         <th>Status</th>
                                                                         <th>Action</th>
                                                                     </tr>
@@ -174,6 +175,7 @@
                                                                     <td>${list[2]}</td>
                                                                     <td>${list[4]}</td>
                                                                     <td>${list[5]}</td>
+                                                                    <td>${list[9]}</td>
                                                                     <td>
                                                                         <c:if test="${list[7] eq 1}"><span class="badge">Pending</span>
                                                                         </c:if>
@@ -190,13 +192,13 @@
 
                                                                         </td>
                                                                         <td>
-                                                                        <c:if test="${list[7] eq 1 || list[7] eq 5}">
+                                                                        <%--<c:if test="${list[7] eq 1 || list[7] eq 5}">--%>
                                                                             <div class="btn-group">
                                                                                 <button type="button" class="btn btn-default dropdown-toggle" onclick="viewClick(${list[0]},${list[6]});" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                     &nbsp;&nbsp;View
                                                                                 </button>
                                                                             </div>
-                                                                        </c:if>
+                                                                        <%--</c:if>--%>
                                                                     </td>
                                                                 </tr>
                                                             </c:forEach>

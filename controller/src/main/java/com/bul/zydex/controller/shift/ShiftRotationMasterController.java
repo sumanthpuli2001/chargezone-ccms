@@ -76,7 +76,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
- * @author AJAY
+ * @author Dhaval
  */
 public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
@@ -542,7 +542,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 String s = formatter.format(date);
                 String[] s1 = s.split("/");
                 String currentDays = s1[0];
-//                String currentDays = "27";
+//                String currentDays = "02";
                 String currentMonth = s1[1];
                 String currentyear = s1[2];
                 shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster);
@@ -560,6 +560,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 ShiftMaster shiftMaster = new ShiftMaster();
                 ShiftMaster shiftMaster1 = new ShiftMaster();
                 String shiftName = "";
+                String daynamicShiftName = "";
                 String shiftTime = "";
                 if (null != tempShiftAssignMaster1) {
                     shiftMaster.setId(tempShiftAssignMaster1.getShiftMaster().getId());
@@ -573,9 +574,154 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     shiftTime = shiftMaster1.getEndTime();
 
                 }
-                List<?> employeeShiftPunchList = new ArrayList<Object>();
+//                =========================== Auto Capture Shift========================
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(employeeMaster.getId());
+                if (!employeeMaster1.getZydexLocationMaster().getId().equals(1) && !employeeMaster1.getZydexLocationMaster().getId().equals(6)) {
+
+                    SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    SimpleDateFormat timeFormat1 = new SimpleDateFormat("HH:mm");
+                    String dynamicShiftDateTime = employeeDatetimeData1.getDateTime();
+                    Date dynamicTime = sdf3.parse(dynamicShiftDateTime);
+
+                    Date date1 = new Date();
+                    Date dateBefore = new Date(date1.getTime() - 24 * 60 * 60 * 1000);
+                    String yesterdayDate = formatter.format(dateBefore);
+                    ShiftMaster generalShift = new ShiftMaster();
+                    if (employeeMaster1.getZydexLocationMaster().getId().equals(1) && employeeMaster1.getZydexLocationMaster().getId().equals(6)) {
+                        generalShift = shiftMasterService.readById(1);
+                    } else {
+                        generalShift = shiftMasterService.readById(6);
+                    }
+                    ShiftMaster firstShift = shiftMasterService.readById(3);
+                    ShiftMaster secondShift = shiftMasterService.readById(4);
+                    ShiftMaster nightShift = shiftMasterService.readById(5);
+
+//                String generalShiftStartTime = "02/07/2016" + " " + generalShift.getStartTime();
+//                String firstShiftStartTime = "02/07/2016" + " " + firstShift.getStartTime();
+//                String secondShiftStartTime = "02/07/2016" + " " + secondShift.getStartTime();
+//                String nightShiftStartTime = "02/07/2016" + " " + nightShift.getStartTime();
+//                String yesterdatSecondShiftStartTime = "01/07/2016" + " " + secondShift.getStartTime();
+                    String generalShiftStartTime = s + " " + generalShift.getStartTime();
+                    String firstShiftStartTime = s + " " + firstShift.getStartTime();
+                    String secondShiftStartTime = s + " " + secondShift.getStartTime();
+                    String nightShiftStartTime = s + " " + nightShift.getStartTime();
+                    String yesterdatSecondShiftStartTime = yesterdayDate + " " + secondShift.getStartTime();
+
+                    Date dategeneralShiftStartTime = sdf3.parse(generalShiftStartTime);
+                    Date dateFirstShiftStartTime = sdf3.parse(firstShiftStartTime);
+                    Date dateSecondShiftStartTime = sdf3.parse(secondShiftStartTime);
+                    Date dateNightShiftStartTime = sdf3.parse(nightShiftStartTime);
+                    Date dateyesterdatSecondShiftStartTime = sdf3.parse(yesterdatSecondShiftStartTime);
+
+                    Calendar calGeneralShiftBefore = Calendar.getInstance();
+                    Calendar calGeneralShiftAfter = Calendar.getInstance();
+                    Calendar calFirstShiftBefore = Calendar.getInstance();
+                    Calendar calFirstShiftAfter = Calendar.getInstance();
+                    Calendar calSecondShiftBefore = Calendar.getInstance();
+                    Calendar calSecondShiftAfter = Calendar.getInstance();
+                    Calendar calNightShiftBefore = Calendar.getInstance();
+                    Calendar calNightShiftAfter = Calendar.getInstance();
+                    Calendar calYesterSecondShiftBefore = Calendar.getInstance();
+                    Calendar calYesterSecondShiftAfter = Calendar.getInstance();
+
+                    calGeneralShiftBefore.setTime(dategeneralShiftStartTime);
+                    calGeneralShiftBefore.add(Calendar.MINUTE, -90);
+
+                    calGeneralShiftAfter.setTime(dategeneralShiftStartTime);
+                    calGeneralShiftAfter.add(Calendar.HOUR, 2);
+
+                    calFirstShiftBefore.setTime(dateFirstShiftStartTime);
+                    calFirstShiftBefore.add(Calendar.HOUR, -2);
+
+                    calFirstShiftAfter.setTime(dateFirstShiftStartTime);
+                    calFirstShiftAfter.add(Calendar.HOUR, 2);
+
+                    calSecondShiftBefore.setTime(dateSecondShiftStartTime);
+                    calSecondShiftBefore.add(Calendar.HOUR, -2);
+
+                    calSecondShiftAfter.setTime(dateSecondShiftStartTime);
+                    calSecondShiftAfter.add(Calendar.HOUR, 2);
+
+                    calNightShiftBefore.setTime(dateNightShiftStartTime);
+                    calNightShiftBefore.add(Calendar.HOUR, -2);
+
+                    calNightShiftAfter.setTime(dateNightShiftStartTime);
+                    calNightShiftAfter.add(Calendar.HOUR, 2);
+
+                    calYesterSecondShiftBefore.setTime(dateyesterdatSecondShiftStartTime);
+                    calYesterSecondShiftBefore.add(Calendar.HOUR, -2);
+
+                    calYesterSecondShiftAfter.setTime(dateyesterdatSecondShiftStartTime);
+                    calYesterSecondShiftAfter.add(Calendar.HOUR, 2);
+
+                    if ((dynamicTime.after(calGeneralShiftBefore.getTime()) || dynamicTime.equals(calGeneralShiftBefore.getTime()))
+                            && (dynamicTime.before(calGeneralShiftAfter.getTime()) || dynamicTime.equals(calGeneralShiftAfter.getTime()))) {
+                        daynamicShiftName = generalShift.getShiftName();
+                        if (daynamicShiftName.equals("General")) {
+                            shiftMaster1 = shiftMasterService.readById(1);
+                        } else {
+                            shiftMaster1 = shiftMasterService.readById(6);
+                        }
+                    } else if ((dynamicTime.after(calFirstShiftBefore.getTime()) || dynamicTime.equals(calFirstShiftBefore.getTime()))
+                            && (dynamicTime.before(calFirstShiftAfter.getTime()) || dynamicTime.equals(calFirstShiftAfter.getTime()))) {
+                        List<?> employeeYesterdayPunchData = employeeDatetimeDataService.readYesterdayEmployeeData("" + employeeMaster.getId());
+
+                        if (!employeeYesterdayPunchData.isEmpty()) {
+                            EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) employeeYesterdayPunchData.get(0);
+                            EmployeeDatetimeData employeeDatetimeData2 = (EmployeeDatetimeData) employeeYesterdayPunchData.get(employeeYesterdayPunchData.size() - 1);
+                            String startPunchTime = employeeDatetimeData.getDateTime();
+                            String endPunchTime = employeeDatetimeData2.getDateTime();
+                            Date punchTime1 = sdf3.parse(startPunchTime);
+                            Date punchTime2 = sdf3.parse(endPunchTime);
+                            if ((punchTime1.after(calYesterSecondShiftBefore.getTime()) || punchTime1.equals(calYesterSecondShiftBefore.getTime()))
+                                    && (punchTime1.before(calYesterSecondShiftAfter.getTime()) || punchTime1.equals(calYesterSecondShiftAfter.getTime()))) {
+                                daynamicShiftName = firstShift.getShiftName();
+                                shiftMaster1 = shiftMasterService.readById(3);
+                            } else if ((punchTime2.after(calYesterSecondShiftBefore.getTime()) || punchTime2.equals(calYesterSecondShiftBefore.getTime()))
+                                    && (punchTime2.before(calYesterSecondShiftAfter.getTime()) || punchTime2.equals(calYesterSecondShiftAfter.getTime()))) {
+                                daynamicShiftName = firstShift.getShiftName();
+                                shiftMaster1 = shiftMasterService.readById(3);
+                            } else {
+                                daynamicShiftName = nightShift.getShiftName();
+                                shiftMaster1 = shiftMasterService.readById(5);
+                                shiftTime = shiftMaster1.getEndTime();
+                            }
+                        } else {
+                            daynamicShiftName = firstShift.getShiftName();
+                            shiftMaster1 = shiftMasterService.readById(3);
+                        }
+
+                    } else if ((dynamicTime.after(calSecondShiftBefore.getTime()) || dynamicTime.equals(calSecondShiftBefore.getTime()))
+                            && (dynamicTime.before(calSecondShiftAfter.getTime()) || dynamicTime.equals(calSecondShiftAfter.getTime()))) {
+                        daynamicShiftName = secondShift.getShiftName();
+                        shiftMaster1 = shiftMasterService.readById(4);
+                    } else if ((dynamicTime.after(calNightShiftBefore.getTime()) || dynamicTime.equals(calNightShiftBefore.getTime()))
+                            && (dynamicTime.before(calNightShiftAfter.getTime()) || dynamicTime.equals(calNightShiftAfter.getTime()))) {
+                        daynamicShiftName = nightShift.getShiftName();
+                        shiftMaster1 = shiftMasterService.readById(5);
+                        shiftTime = shiftMaster1.getEndTime();
+                    } else if (empShiftList.size() > 0) {
+                        shiftMaster.setId(Integer.parseInt(shiftId));
+                        shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
+                        daynamicShiftName = shiftMaster1.getShiftName();
+                        if (daynamicShiftName.equals("General")) {
+                            if (employeeMaster1.getZydexLocationMaster().getId().equals(1) || employeeMaster1.getZydexLocationMaster().getId().equals(6)) {
+                                shiftMaster1 = shiftMasterService.readById(1);
+                            } else {
+                                shiftMaster1 = shiftMasterService.readById(6);
+                            }
+                        }
+                        shiftTime = shiftMaster1.getEndTime();
+
+                    }
+
+                } else {
+                    shiftMaster1 = shiftMasterService.readById(1);
+                }
+//                =========================== Auto Capture Shift========================
+                List< ?> employeeShiftPunchList = new ArrayList<Object>();
                 String newShiftTime = "";
-                if (shiftName.contains("Night")) {
+                if (daynamicShiftName.contains("Night")) {
                     SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
                     Date time = timeFormat.parse(shiftTime);
@@ -614,7 +760,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             String[] splited1 = employeeDatetimeData.getDateTime().split(" ");
                             String spDate = splited[0];
                             Date currentDate = new Date();
-//                            String punDate = "27/06/2016";
+//                            String punDate = "01/07/2016";
                             String punDate = sdf111.format(currentDate);
                             Date inDate = sdf111.parse(spDate);
                             Date pDate = sdf111.parse(punDate);
@@ -725,11 +871,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 cal4.setTime(date4);
 
                 Calendar cal5 = Calendar.getInstance();
-                Date satdate = formatter.parse(empStartTime);
+                Date satdate = format.parse(empStartTime);
                 cal5.setTime(satdate);
                 SimpleDateFormat format2 = new SimpleDateFormat("EEEE");
                 String dayName = format2.format(date);
-                int dayOfWeek = cal5.get(Calendar.DAY_OF_WEEK);
+                int dayOfWeek = cal5.get(Calendar.WEEK_OF_MONTH);
 
                 EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
                 EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
@@ -764,32 +910,61 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 long diffMin1 = ((mainDiff / 1000) / 60) / 60;
                 String time = "";
                 String time2 = "";
-                if (diffMin1 >= 3 && diffMin1 <= 5.9) {
-                    time = "0.3";
-                } else if (diffMin1 >= 6 && diffMin1 <= 8.9) {
-                    time = "0.5";
-                } else if (diffMin1 >= 9) {
-                    time = "0.8";
-                }
-                if (diffMin1 >= 3.6 && diffMin1 <= 5.5) {
-                    time2 = "0.4";
-                } else if (diffMin1 >= 8) {
-                    time2 = "0.8";
+                if (!zydexLocationName.equals("HO") && !zydexLocationName.equals("R&D")) {
+                    if (diffMin1 >= 3 && diffMin1 <= 5.9) {
+                        time = "0.3";
+                    } else if (diffMin1 >= 6 && diffMin1 <= 8.9) {
+                        time = "0.5";
+                    } else if (diffMin1 >= 9) {
+                        time = "0.8";
+                    }
+                } else {
+                    if (diffMin1 >= 3.6 && diffMin1 <= 7.9) {
+                        time2 = "0.4";
+                    } else if (diffMin1 >= 8) {
+                        time2 = "0.8";
+                    }
                 }
 
                 if (!zydexLocationName.equals("HO") && !zydexLocationName.equals("R&D")) {
-                    if (levelMaster.getLevel().contains("Level 4") || levelMaster.getLevel().contains("Level 5")) {
+                    if (!time.equals("")) {
+                        if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
+                            List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                            if (!empBalList.isEmpty()) {
+                                employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
+                                float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
+                                time1 = time1 + Float.parseFloat(time);
+                                employeeLeaveBalance1.setNoOfLeaveRemain(time1);
+                                employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                            } else {
+                                employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
+                                employeeLeaveBalance1.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
+                                employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time));
+                                employeeLeaveBalanceService.create(employeeLeaveBalance1);
+                            }
+                            Date date5 = new Date();
+                            String todayDate = formatter.format(date5);
+                            OverTimeMaster overTimeMaster = new OverTimeMaster();
+                            overTimeMaster.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
+                            overTimeMaster.setDate(todayDate);
+                            overTimeMaster.setTime(time);
+                            overTimeMasterService.create(overTimeMaster);
+                        }
+
+                    }
+                } else if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
+                    if (!time2.equals("")) {
                         List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
                         if (!empBalList.isEmpty()) {
                             employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
                             float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
-                            time1 = time1 + Float.parseFloat(time);
+                            time1 = time1 + Float.parseFloat(time2);
                             employeeLeaveBalance1.setNoOfLeaveRemain(time1);
                             employeeLeaveBalanceService.update(employeeLeaveBalance1);
                         } else {
                             employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
                             employeeLeaveBalance1.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-                            employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time));
+                            employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time2));
                             employeeLeaveBalanceService.create(employeeLeaveBalance1);
                         }
 
@@ -798,31 +973,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         OverTimeMaster overTimeMaster = new OverTimeMaster();
                         overTimeMaster.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
                         overTimeMaster.setDate(todayDate);
-                        overTimeMaster.setTime(time);
+                        overTimeMaster.setTime(time2);
                         overTimeMasterService.create(overTimeMaster);
                     }
-                } else if (levelMaster.getLevel().contains("Level 4") || levelMaster.getLevel().contains("Level 5")) {
-                    List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
-                    if (!empBalList.isEmpty()) {
-                        employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
-                        float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
-                        time1 = time1 + Float.parseFloat(time2);
-                        employeeLeaveBalance1.setNoOfLeaveRemain(time1);
-                        employeeLeaveBalanceService.update(employeeLeaveBalance1);
-                    } else {
-                        employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
-                        employeeLeaveBalance1.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-                        employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time2));
-                        employeeLeaveBalanceService.create(employeeLeaveBalance1);
-                    }
 
-                    Date date5 = new Date();
-                    String todayDate = formatter.format(date5);
-                    OverTimeMaster overTimeMaster = new OverTimeMaster();
-                    overTimeMaster.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-                    overTimeMaster.setDate(todayDate);
-                    overTimeMaster.setTime(time2);
-                    overTimeMasterService.create(overTimeMaster);
                 }
 
             }
@@ -871,28 +1025,31 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     String zydexLocationName = zydexLocationMaster.getZydexLocation();
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
                     if (zydexLocationName.equals("HO") || zydexLocationName.equals("R&D")) {
-                        if (levelMaster.getLevel().contains("Level 4") || levelMaster.getLevel().contains("Level 5")) {
-                            List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
-                            if (!empBalList.isEmpty()) {
-                                employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
-                                float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
-                                time1 = time1 + Float.parseFloat(time2);
-                                employeeLeaveBalance1.setNoOfLeaveRemain(time1);
-                                employeeLeaveBalanceService.update(employeeLeaveBalance1);
-                            } else {
-                                employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
-                                employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
-                                employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time2));
-                                employeeLeaveBalanceService.create(employeeLeaveBalance1);
+                        if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
+                            if (!time2.equals("")) {
+                                List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                                if (!empBalList.isEmpty()) {
+                                    employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
+                                    float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
+                                    time1 = time1 + Float.parseFloat(time2);
+                                    employeeLeaveBalance1.setNoOfLeaveRemain(time1);
+                                    employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                                } else {
+                                    employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
+                                    employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+                                    employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time2));
+                                    employeeLeaveBalanceService.create(employeeLeaveBalance1);
+                                }
+
+                                Date date5 = new Date();
+                                String todayDate = formatter.format(date5);
+                                OverTimeMaster overTimeMaster = new OverTimeMaster();
+                                overTimeMaster.setEmployeeMaster(employeeMaster);
+                                overTimeMaster.setDate(todayDate);
+                                overTimeMaster.setTime(time2);
+                                overTimeMasterService.create(overTimeMaster);
                             }
 
-                            Date date5 = new Date();
-                            String todayDate = formatter.format(date5);
-                            OverTimeMaster overTimeMaster = new OverTimeMaster();
-                            overTimeMaster.setEmployeeMaster(employeeMaster);
-                            overTimeMaster.setDate(todayDate);
-                            overTimeMaster.setTime(time2);
-                            overTimeMasterService.create(overTimeMaster);
                         }
                     }
 
@@ -905,7 +1062,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
     private synchronized void coffDelete() throws Exception {
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
         Date currentDate = new Date();
         String s = formatter.format(currentDate);
@@ -927,7 +1084,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 c.setTime(date1);
                 c.add(Calendar.DATE, 30);
                 Date coffAddDate = c.getTime();
-                if (coffAddDate.after(curDate)) {
+                if (curDate.after(coffAddDate)) {
                     EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
                     EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
                     String time = overTimeMaster.getTime();
@@ -957,7 +1114,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 c.setTime(date1);
                 c.add(Calendar.DATE, 90);
                 Date coffAddDate = c.getTime();
-                if (coffAddDate.after(curDate)) {
+                if (curDate.after(coffAddDate)) {
                     EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
                     EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
                     String time = overTimeMaster.getTime();
@@ -976,6 +1133,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         time1 = time1 - Float.parseFloat(time);
                         employeeLeaveBalance1.setNoOfLeaveRemain(time1);
                         employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                        overTimeMasterService.delete(overTimeMaster.getId());
                     }
 
                 }
@@ -2220,13 +2378,20 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     int firstHalfVal = 0;
                                     int counter = 0;
 
+                                    Date date = sdf.parse("" + next[0]);
+                                    Calendar c = Calendar.getInstance();
+                                    c.setTime(date);
+                                    int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
+                                    SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                                    String dayName = format.format(date);
+
                                     if (firstHalf.contains("fullday")) {
                                         cell8.setCellValue("PR");
                                         prcounter = prcounter + 0.5;
                                         cell8.setCellStyle(stylegreen);
 
                                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
-                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave")  && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
                                         String[] userTimeInStr = firstHalf.split("`");
                                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
@@ -2263,8 +2428,16 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                             diff1 = endHours.getTime() - flexibleStartTime.getTime();
                                         }
                                         long diffMinutes1 = diff1 / (60 * 1000);
+                                        if (dayName.equals("Saturday") && dayOfWeek == 2 && diffMinutes1 >= 240) {
+                                            cell8.setCellValue("PR");
+                                            prcounter = prcounter + 0.5;
+                                            cell8.setCellStyle(stylegreen);
+                                        } else if (diffMinutes1 >= diffMinutes) {
+                                            cell8.setCellValue("PR");
+                                            prcounter = prcounter + 0.5;
+                                            cell8.setCellStyle(stylegreen);
 
-                                        if (userTimeIn != null) {
+                                        } else if (userTimeIn != null) {
                                             if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                                 cell8.setCellValue("PR");
                                                 prcounter = prcounter + 0.5;
@@ -2516,7 +2689,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell9.setCellStyle(stylegreen);
 
                                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
-                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave")  && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
+                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
                                             && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
                                         String[] leave = secondHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -2585,7 +2758,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 prcounter = prcounter + 0.5;
                                                 cell9.setCellStyle(stylegreen);
                                             } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
-                                                    && !secondHalf.contains("Casual Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                                    && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
                                                     && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
                                                 cell9.setCellValue("AB");
                                                 abcounter = abcounter + 0.5;
@@ -3148,7 +3321,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell8.setCellStyle(stylegreen);
 
                                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
-                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave")  && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
                                         String[] leave = firstHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -3318,7 +3491,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell9.setCellStyle(stylegreen);
 
                                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
-                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave")  && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
+                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
                                             && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
                                         String[] leave = secondHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -6653,7 +6826,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell9.setCellStyle(stylegreen);
 
                                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
-                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave")  && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
+                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
                                             && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
                                         String[] leave = secondHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -7285,7 +7458,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell8.setCellStyle(stylegreen);
 
                                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
-                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave")  && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
                                         String[] leave = firstHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -7459,7 +7632,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell9.setCellStyle(stylegreen);
 
                                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
-                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave")  && !secondHalf.equals("C Off Leave")  && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
+                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
                                             && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
                                         String[] leave = secondHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -8470,7 +8643,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell8.setCellStyle(stylegreen);
 
                                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
-                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave")  && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
                                         String[] userTimeInStr = firstHalf.split("`");
                                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
@@ -8760,7 +8933,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell9.setCellStyle(stylegreen);
 
                                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
-                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave")  && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
+                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
                                             && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
                                         String[] leave = secondHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -9392,7 +9565,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell8.setCellStyle(stylegreen);
 
                                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
-                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave")  && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
                                         String[] leave = firstHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -9562,7 +9735,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         cell9.setCellStyle(stylegreen);
 
                                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
-                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave")   && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
+                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
                                             && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
                                         String[] leave = secondHalf.split("@");
                                         String[] leave1 = leave[1].split("#");
@@ -9891,6 +10064,306 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         DownloadFile downloadFile = new DownloadFile();
         downloadFile.doDownload(request, response);
         mv = employeeDataSearch(request, response);
+        return mv;
+    }
+
+    public ModelAndView employeeManualPunch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("Shift/EmployeeManualPunch");
+        return mv;
+    }
+
+    public ModelAndView employeeManualPunchSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeShiftData employeeShiftData = new EmployeeShiftData();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeDatetimeData employeeDatetimeData1 = new EmployeeDatetimeData();
+
+        String selectedDate = request.getParameter("punchDate");
+        SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat sdf4 = new SimpleDateFormat("dd/MM/yyyy");
+        Format formatter = new SimpleDateFormat("dd/MM/YYYY");
+        Date date1 = sdf4.parse(selectedDate);
+        Date dateBefore = new Date(date1.getTime() - 24 * 60 * 60 * 1000);
+        String yesterdayDate = formatter.format(dateBefore);
+
+        List<?> empList = employeeDatetimeDataService.readEmployeeBySelectedDate(selectedDate);
+        for (Object zz : empList) {
+            try {
+
+                employeeDatetimeData1 = (EmployeeDatetimeData) zz;
+                employeeMaster.setId(employeeDatetimeData1.getEmployeeMaster().getId());
+
+                ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
+
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+
+                String[] s1 = selectedDate.split("/");
+                String currentDays = s1[0];
+                String currentMonth = s1[1];
+                String currentyear = s1[2];
+                shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster);
+                shiftGenerateMonthlySchedule.setShiftMonth(currentMonth);
+                shiftGenerateMonthlySchedule.setShiftYear(currentyear);
+                String shiftId = "";
+                List<?> empShiftList = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftData(shiftGenerateMonthlySchedule, Integer.parseInt(currentDays));
+                if (!empShiftList.isEmpty()) {
+                    shiftId = "" + empShiftList.get(0);
+                }
+                TempShiftAssignMaster tempShiftAssignMaster = new TempShiftAssignMaster();
+                TempShiftAssignMaster tempShiftAssignMaster1 = new TempShiftAssignMaster();
+                tempShiftAssignMaster.setEmployeeMaster(employeeMaster);
+                tempShiftAssignMaster1 = temporaryShiftAssignService.temporaryShiftAssignResultByDaysWise(tempShiftAssignMaster);
+                ShiftMaster shiftMaster = new ShiftMaster();
+                ShiftMaster shiftMaster1 = new ShiftMaster();
+                String shiftName = "";
+                String daynamicShiftName = "";
+                String shiftTime = "";
+                if (null != tempShiftAssignMaster1) {
+                    shiftMaster.setId(tempShiftAssignMaster1.getShiftMaster().getId());
+                    shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
+                    shiftName = shiftMaster1.getShiftName();
+                    shiftTime = shiftMaster1.getEndTime();
+                } else if (empShiftList.size() > 0) {
+                    shiftMaster.setId(Integer.parseInt(shiftId));
+                    shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
+                    shiftName = shiftMaster1.getShiftName();
+                    shiftTime = shiftMaster1.getEndTime();
+
+                }
+//                =========================== Auto Capture Shift========================
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(employeeMaster.getId());
+                if (!employeeMaster1.getZydexLocationMaster().getId().equals(1) && !employeeMaster1.getZydexLocationMaster().getId().equals(6)) {
+
+                    String dynamicShiftDateTime = employeeDatetimeData1.getDateTime();
+                    Date dynamicTime = sdf3.parse(dynamicShiftDateTime);
+
+                    ShiftMaster generalShift = new ShiftMaster();
+                    if (employeeMaster1.getZydexLocationMaster().getId().equals(1) && employeeMaster1.getZydexLocationMaster().getId().equals(6)) {
+                        generalShift = shiftMasterService.readById(1);
+                    } else {
+                        generalShift = shiftMasterService.readById(6);
+                    }
+                    ShiftMaster firstShift = shiftMasterService.readById(3);
+                    ShiftMaster secondShift = shiftMasterService.readById(4);
+                    ShiftMaster nightShift = shiftMasterService.readById(5);
+
+                    String generalShiftStartTime = selectedDate + " " + generalShift.getStartTime();
+                    String firstShiftStartTime = selectedDate + " " + firstShift.getStartTime();
+                    String secondShiftStartTime = selectedDate + " " + secondShift.getStartTime();
+                    String nightShiftStartTime = selectedDate + " " + nightShift.getStartTime();
+                    String yesterdatSecondShiftStartTime = yesterdayDate + " " + secondShift.getStartTime();
+
+                    Date dategeneralShiftStartTime = sdf3.parse(generalShiftStartTime);
+                    Date dateFirstShiftStartTime = sdf3.parse(firstShiftStartTime);
+                    Date dateSecondShiftStartTime = sdf3.parse(secondShiftStartTime);
+                    Date dateNightShiftStartTime = sdf3.parse(nightShiftStartTime);
+                    Date dateyesterdatSecondShiftStartTime = sdf3.parse(yesterdatSecondShiftStartTime);
+
+                    Calendar calGeneralShiftBefore = Calendar.getInstance();
+                    Calendar calGeneralShiftAfter = Calendar.getInstance();
+                    Calendar calFirstShiftBefore = Calendar.getInstance();
+                    Calendar calFirstShiftAfter = Calendar.getInstance();
+                    Calendar calSecondShiftBefore = Calendar.getInstance();
+                    Calendar calSecondShiftAfter = Calendar.getInstance();
+                    Calendar calNightShiftBefore = Calendar.getInstance();
+                    Calendar calNightShiftAfter = Calendar.getInstance();
+                    Calendar calYesterSecondShiftBefore = Calendar.getInstance();
+                    Calendar calYesterSecondShiftAfter = Calendar.getInstance();
+
+                    calGeneralShiftBefore.setTime(dategeneralShiftStartTime);
+                    calGeneralShiftBefore.add(Calendar.MINUTE, -90);
+
+                    calGeneralShiftAfter.setTime(dategeneralShiftStartTime);
+                    calGeneralShiftAfter.add(Calendar.HOUR, 2);
+
+                    calFirstShiftBefore.setTime(dateFirstShiftStartTime);
+                    calFirstShiftBefore.add(Calendar.HOUR, -2);
+
+                    calFirstShiftAfter.setTime(dateFirstShiftStartTime);
+                    calFirstShiftAfter.add(Calendar.HOUR, 2);
+
+                    calSecondShiftBefore.setTime(dateSecondShiftStartTime);
+                    calSecondShiftBefore.add(Calendar.HOUR, -2);
+
+                    calSecondShiftAfter.setTime(dateSecondShiftStartTime);
+                    calSecondShiftAfter.add(Calendar.HOUR, 2);
+
+                    calNightShiftBefore.setTime(dateNightShiftStartTime);
+                    calNightShiftBefore.add(Calendar.HOUR, -2);
+
+                    calNightShiftAfter.setTime(dateNightShiftStartTime);
+                    calNightShiftAfter.add(Calendar.HOUR, 2);
+
+                    calYesterSecondShiftBefore.setTime(dateyesterdatSecondShiftStartTime);
+                    calYesterSecondShiftBefore.add(Calendar.HOUR, -2);
+
+                    calYesterSecondShiftAfter.setTime(dateyesterdatSecondShiftStartTime);
+                    calYesterSecondShiftAfter.add(Calendar.HOUR, 2);
+
+                    if ((dynamicTime.after(calGeneralShiftBefore.getTime()) || dynamicTime.equals(calGeneralShiftBefore.getTime()))
+                            && (dynamicTime.before(calGeneralShiftAfter.getTime()) || dynamicTime.equals(calGeneralShiftAfter.getTime()))) {
+                        daynamicShiftName = generalShift.getShiftName();
+                        if (daynamicShiftName.equals("General")) {
+                            shiftMaster1 = shiftMasterService.readById(1);
+                        } else {
+                            shiftMaster1 = shiftMasterService.readById(6);
+                        }
+                    } else if ((dynamicTime.after(calFirstShiftBefore.getTime()) || dynamicTime.equals(calFirstShiftBefore.getTime()))
+                            && (dynamicTime.before(calFirstShiftAfter.getTime()) || dynamicTime.equals(calFirstShiftAfter.getTime()))) {
+                        List<?> employeeYesterdayPunchData = employeeDatetimeDataService.readYesterdayEmployeeDataBySelectedDate("" + employeeMaster.getId(), yesterdayDate);
+
+                        if (!employeeYesterdayPunchData.isEmpty()) {
+                            EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) employeeYesterdayPunchData.get(0);
+                            EmployeeDatetimeData employeeDatetimeData2 = (EmployeeDatetimeData) employeeYesterdayPunchData.get(employeeYesterdayPunchData.size() - 1);
+                            String startPunchTime = employeeDatetimeData.getDateTime();
+                            String endPunchTime = employeeDatetimeData2.getDateTime();
+                            Date punchTime1 = sdf3.parse(startPunchTime);
+                            Date punchTime2 = sdf3.parse(endPunchTime);
+                            if ((punchTime1.after(calYesterSecondShiftBefore.getTime()) || punchTime1.equals(calYesterSecondShiftBefore.getTime()))
+                                    && (punchTime1.before(calYesterSecondShiftAfter.getTime()) || punchTime1.equals(calYesterSecondShiftAfter.getTime()))) {
+                                daynamicShiftName = firstShift.getShiftName();
+                                shiftMaster1 = shiftMasterService.readById(3);
+                            } else if ((punchTime2.after(calYesterSecondShiftBefore.getTime()) || punchTime2.equals(calYesterSecondShiftBefore.getTime()))
+                                    && (punchTime2.before(calYesterSecondShiftAfter.getTime()) || punchTime2.equals(calYesterSecondShiftAfter.getTime()))) {
+                                daynamicShiftName = firstShift.getShiftName();
+                                shiftMaster1 = shiftMasterService.readById(3);
+                            } else {
+                                daynamicShiftName = nightShift.getShiftName();
+                                shiftMaster1 = shiftMasterService.readById(5);
+                                shiftTime = shiftMaster1.getEndTime();
+                            }
+                        } else {
+                            daynamicShiftName = firstShift.getShiftName();
+                            shiftMaster1 = shiftMasterService.readById(3);
+                        }
+
+                    } else if ((dynamicTime.after(calSecondShiftBefore.getTime()) || dynamicTime.equals(calSecondShiftBefore.getTime()))
+                            && (dynamicTime.before(calSecondShiftAfter.getTime()) || dynamicTime.equals(calSecondShiftAfter.getTime()))) {
+                        daynamicShiftName = secondShift.getShiftName();
+                        shiftMaster1 = shiftMasterService.readById(4);
+                    } else if ((dynamicTime.after(calNightShiftBefore.getTime()) || dynamicTime.equals(calNightShiftBefore.getTime()))
+                            && (dynamicTime.before(calNightShiftAfter.getTime()) || dynamicTime.equals(calNightShiftAfter.getTime()))) {
+                        daynamicShiftName = nightShift.getShiftName();
+                        shiftMaster1 = shiftMasterService.readById(5);
+                        shiftTime = shiftMaster1.getEndTime();
+                    } else if (empShiftList.size() > 0) {
+                        shiftMaster.setId(Integer.parseInt(shiftId));
+                        shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
+                        daynamicShiftName = shiftMaster1.getShiftName();
+                        if (daynamicShiftName.equals("General")) {
+                            if (employeeMaster1.getZydexLocationMaster().getId().equals(1) && employeeMaster1.getZydexLocationMaster().getId().equals(6)) {
+                                shiftMaster1 = shiftMasterService.readById(1);
+                            } else {
+                                shiftMaster1 = shiftMasterService.readById(6);
+                            }
+                        }
+                        shiftTime = shiftMaster1.getEndTime();
+
+                    }
+
+                } else {
+                    shiftMaster1 = shiftMasterService.readById(1);
+                }
+//                =========================== Auto Capture Shift========================
+                List< ?> employeeShiftPunchList = new ArrayList<Object>();
+                String newShiftTime = "";
+                if (daynamicShiftName.contains("Night")) {
+                    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+
+                    Date time = timeFormat.parse(shiftTime);
+//            Date
+                    Calendar cal22 = Calendar.getInstance();
+                    cal22.setTime(time);
+                    cal22.add(Calendar.HOUR_OF_DAY, 8);
+                    time = cal22.getTime();
+                    newShiftTime = timeFormat.format(time);
+
+                    employeeShiftPunchList = employeeDatetimeDataService.readTodaysAndPreviousDataOnSelectedDate("" + employeeMaster.getId(), newShiftTime, selectedDate, yesterdayDate);
+
+                    for (Object o : employeeShiftPunchList) {
+                        EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
+                        EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                        List dayWiseShiftList = new ArrayList();
+                        employeeShiftData.setEmployeeMaster(employeeMaster);
+                        employeeShiftData1.setEmployeeMaster(employeeMaster);
+                        employeeShiftData1.setShiftMaster(shiftMaster1);
+
+                        String newShiftTimeSplit = "";
+
+                        cal22.setTime(time);
+                        cal22.add(Calendar.HOUR_OF_DAY, 8);
+                        time = cal22.getTime();
+                        newShiftTime = timeFormat.format(time);
+                        newShiftTimeSplit = newShiftTime.split(":")[0];
+                        dayWiseShiftList = employeeShiftDataService.getPastAndCurrentPunchForSelectedDate(employeeShiftData, newShiftTime, selectedDate, yesterdayDate);
+
+                        if (!dayWiseShiftList.isEmpty()) {
+
+                            SimpleDateFormat sdf111 = new SimpleDateFormat("dd/MM/yyyy");
+                            employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
+                            employeeShiftData.setInDateTime(employeeShiftData1.getInDateTime());
+                            String[] splited = employeeShiftData1.getOutDateTime().split(" ");
+                            String[] splited1 = employeeDatetimeData.getDateTime().split(" ");
+                            String spDate = splited[0];
+                            Date inDate = sdf111.parse(spDate);
+                            Date pDate = sdf111.parse(selectedDate);
+                            String timeSplit = splited1[1].split(":")[0];
+
+                            if (inDate.equals(pDate) && Integer.parseInt(timeSplit) > Integer.parseInt(newShiftTimeSplit)) {
+                                if (dayWiseShiftList.size() > 1) {
+                                    employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(1);
+                                    employeeShiftData1.setInDateTime(employeeShiftData1.getInDateTime());
+                                    employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
+                                    employeeShiftDataService.createOrUpdate(employeeShiftData1);
+                                } else {
+                                    employeeShiftData1.setInDateTime(employeeDatetimeData.getDateTime());
+                                    employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
+                                    employeeShiftDataService.create(employeeShiftData1);
+                                }
+                            } else {
+                                employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
+                                employeeShiftDataService.createOrUpdate(employeeShiftData1);
+                            }
+                        } else {
+                            employeeShiftData1.setInDateTime(employeeDatetimeData.getDateTime());
+                            employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
+                            employeeShiftDataService.createOrUpdate(employeeShiftData1);
+                        }
+
+                    }
+
+                } else {
+                    employeeShiftPunchList = employeeDatetimeDataService.readSelectedDateEmployeeData("" + employeeMaster.getId(), selectedDate);
+                    for (Object o : employeeShiftPunchList) {
+                        EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
+                        EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                        List dayWiseShiftList = new ArrayList();
+                        employeeShiftData.setEmployeeMaster(employeeMaster);
+                        employeeShiftData1.setEmployeeMaster(employeeMaster);
+                        employeeShiftData1.setShiftMaster(shiftMaster1);
+                        dayWiseShiftList = employeeShiftDataService.dailyTimeEntryForSelectedDate(employeeShiftData, selectedDate);
+                        if (!dayWiseShiftList.isEmpty()) {
+                            employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
+                            employeeShiftData.setInDateTime(employeeShiftData1.getInDateTime());
+                            employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
+                            employeeShiftDataService.createOrUpdate(employeeShiftData1);
+                        } else {
+                            employeeShiftData1.setInDateTime(employeeDatetimeData.getDateTime());
+                            employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
+                            employeeShiftDataService.createOrUpdate(employeeShiftData1);
+                        }
+
+                    }
+
+                }
+            } catch (Exception e) {
+                System.out.println("Exception" + e.getMessage());
+            }
+        }
+        request.setAttribute("successMessage",
+                "Information : The Selected Date Punch is Updated Successfully.");
+        mv.setViewName("Shift/EmployeeManualPunch");
         return mv;
     }
 

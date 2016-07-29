@@ -26,7 +26,9 @@ public class LevelMasterController extends LevelMasterAbstract {
     }
 
     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response, LevelMaster levelMaster) throws Exception {
-
+         if (levelMaster.getId() != null) {
+            levelMaster = levelMasterService.readById(levelMaster.getId());
+        }
         return new ModelAndView("Level/LevelCreate", "levelMaster", levelMaster);
     }
 

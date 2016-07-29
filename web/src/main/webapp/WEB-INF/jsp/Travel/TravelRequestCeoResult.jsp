@@ -68,6 +68,7 @@
                                                                         <th>Travel Request No.</th>
                                                                         <th>Start Date Time</th>
                                                                         <th>End Date Time</th>
+                                                                        <th>Requested Date</th>
                                                                         <th>Status</th>
                                                                         <th>Action</th>
                                                                     </tr>
@@ -83,12 +84,14 @@
                                                                     <td><b>${list[3]}</b></td>
                                                                     <td>${list[4]}</td>
                                                                     <td>${list[5]}</td>
+                                                                    <td>${list[10]}</td> 
                                                                     <c:if test="${list[8] eq 6}">
                                                                         <td><span class="badge">Pending</span></td>
                                                                     </c:if>
                                                                     <c:if test="${list[8] eq 5}">
                                                                         <td><span class="label label-success">Approved by ${list[9]} </span></td>
                                                                     </c:if>
+                                                                          
                                                                     <td>
                                                                         <div class="btn-group">
                                                                             <button type="button" class="btn btn-default" onclick="viewClick(${list[6]}, ${list[7]});">

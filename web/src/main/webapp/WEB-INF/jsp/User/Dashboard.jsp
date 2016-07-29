@@ -960,6 +960,33 @@
                                                                                                         </a>
                                                                                                     </li>
                                                                                                 </c:if>
+                                                                                                <c:if test="${finalprobationDashboardList gt 0}">
+                                                                                                    <li class="item">
+                                                                                                        <a href="probationToConfirmation.htm?act=searchSubmit">
+                                                                                                            <span class="product-title" href="javascript::;">Probation To Confirmation<span class="badge" style="float: right">${finalprobationDashboardList}</span></span>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                </c:if>
+                                                                                                <c:if test="${sessionScope.isFunctionalheadDataExist}">
+                                                                                                    <c:if test="${fHeadCuonter gt 0}">
+                                                                                                        <li class="item">
+                                                                                                            <a href="probationToConfirmation.htm?act=functionalheadResultClick">
+                                                                                                                <span class="product-title" href="javascript::;">Probation To Confirmation For Head<span class="badge" style="float: right">${fHeadCuonter}</span></span>
+                                                                                                            </a>
+                                                                                                        </li>
+                                                                                                    </c:if>
+                                                                                                </c:if>
+
+                                                                                                <c:if test="${sessionScope.userRight.probationToConfirmation}">
+                                                                                                    <c:if test="${hrCuonter gt 0}">
+                                                                                                        <li class="item">
+                                                                                                            <a href="probationToConfirmation.htm?act=hrResultClick">
+                                                                                                                <span class="product-title" href="javascript::;">Probation To Confirmation For HR<span class="badge" style="float: right">${hrCuonter}</span></span>
+                                                                                                            </a>
+                                                                                                        </li>
+                                                                                                    </c:if> 
+                                                                                                </c:if>
+
 
                                                                                         </div>
                                                                                     </div>
@@ -967,130 +994,7 @@
                                                                                 </div><!-- /.row -->
                                                                                 </div><!-- /.tab-pane -->
                                                                                 <div class="tab-pane" id="tab_2">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-7">
-                                                                                            <div class="box box-warning">
-                                                                                                <div class="box-header">
-                                                                                                    <h3 class="box-title">Audit Summary</h3>
-                                                                                                    <div class="box-tools pull-right">
-                                                                                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                                                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                                                                                    </div>
-                                                                                                </div><!-- /.box-header -->
-                                                                                                <div class="box-body">
-                                                                                                    <div class="row">
-                                                                                                        <div class="col-md-9">
-                                                                                                            <div class="chart">
-                                                                                                                <canvas id="scorebarchart"></canvas>
-                                                                                                            </div><!-- /.chart-responsive -->
-                                                                                                        </div><!-- /.col -->
-                                                                                                        <div class="col-md-3">
-                                                                                                            <ul class="chart-legend clearfix">
-                                                                                                                <li><i class="fa fa-square text-green"></i> Score: 76 - 100</li>
-                                                                                                                <li><i class="fa fa-square text-yellow"></i> Score: 51 - 75</li>
-                                                                                                                <li><i class="fa fa-square text-red"></i> Score: 0 - 50</li>
-                                                                                                            </ul>
-                                                                                                            <div class="description-block margin-top">
-                                                                                                                <h5 class="description-header">03</h5>
-                                                                                                                <span class="description-text">Auditors</span>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div><!-- /.row -->
-                                                                                                </div><!-- ./box-body -->
-                                                                                                <div class="box-footer">
-                                                                                                    <div class="row">
-                                                                                                        <div class="col-sm-6 col-xs-6">
-                                                                                                            <div class="description-block border-right">
-                                                                                                                <h5 class="description-header">10</h5>
-                                                                                                                <span class="description-text">Completed</span>
-                                                                                                            </div><!-- /.description-block -->
-                                                                                                        </div><!-- /.col -->
-                                                                                                        <div class="col-sm-6 col-xs-6">
-                                                                                                            <div class="description-block">
-                                                                                                                <h5 class="description-header">12</h5>
-                                                                                                                <span class="description-text">Inprocess</span>
-                                                                                                            </div><!-- /.description-block -->
-                                                                                                        </div><!-- /.col -->
-                                                                                                    </div><!-- /.row -->
-                                                                                                </div><!-- /.box-footer -->
-                                                                                            </div><!-- /.box -->
-                                                                                        </div><!-- /.col -->
-                                                                                        <div class="col-md-5">
-                                                                                            <div class="box box-danger">
-                                                                                                <div class="box-header">
-                                                                                                    <h3 class="box-title">Audits Performed</h3>
-                                                                                                    <div class="box-tools pull-right">
-                                                                                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                                                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                                                                                    </div>
-                                                                                                </div><!-- /.box-header -->
-                                                                                                <div class="box-body">
-                                                                                                    <div class="row">
-                                                                                                        <div class="col-md-8">
-                                                                                                            <div class="chart" id="canvasouter">
-                                                                                                                <canvas id="chart-area1"></canvas>
-                                                                                                            </div><!-- /.chart-responsive -->
-                                                                                                            <div id="pie-tooltip"></div>
-                                                                                                        </div><!-- /.col -->
-                                                                                                        <div class="col-md-4">
-                                                                                                            <ul class="chart-legend clearfix">
-                                                                                                                <li><i class="fa fa-circle text-red"></i> Jan</li>
-                                                                                                                <li><i class="fa fa-circle text-yellow"></i> Feb</li>
-                                                                                                                <li><i class="fa fa-circle text-aqua"></i> Mar</li>
-                                                                                                                <li><i class="fa fa-circle text-blue"></i> Apr</li>
-                                                                                                                <li><i class="fa fa-circle text-black"></i> May</li>
-                                                                                                                <li><i class="fa fa-circle text-green"></i> Jun</li>
-                                                                                                                <li><i class="fa fa-circle text-gray"></i> Jul</li>
-                                                                                                                <li><i class="fa fa-circle text-maroon"></i> Aug</li>
-                                                                                                                <li><i class="fa fa-circle text-teal"></i> Sep</li>
-                                                                                                                <li><i class="fa fa-circle text-purple"></i> Oct</li>
-                                                                                                                <li><i class="fa fa-circle text-lime"></i> Nov</li>
-                                                                                                                <li><i class="fa fa-circle text-orange"></i> Dec</li>
-                                                                                                            </ul>
-                                                                                                        </div>
-                                                                                                    </div><!-- /.row -->
-                                                                                                </div><!-- ./box-body -->
-                                                                                                <div class="box-footer">
-                                                                                                    <div class="row">
-                                                                                                        <div class="col-sm-6 col-xs-6">
-                                                                                                            <div class="description-block border-right">
-                                                                                                                <h5 class="description-header">02</h5>
-                                                                                                                <span class="description-text">Pending</span>
-                                                                                                            </div><!-- /.description-block -->
-                                                                                                        </div><!-- /.col -->
-                                                                                                        <div class="col-sm-6 col-xs-6">
-                                                                                                            <div class="description-block">
-                                                                                                                <h5 class="description-header">05</h5>
-                                                                                                                <span class="description-text">Scheduled</span>
-                                                                                                            </div><!-- /.description-block -->
-                                                                                                        </div>
-                                                                                                    </div><!-- /.row -->
-                                                                                                </div><!-- /.box-footer -->
-                                                                                            </div><!-- /.box -->
-                                                                                        </div><!-- /.col -->
-                                                                                    </div><!-- /.row -->
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-2">
-                                                                                            <div class="box box-solid">
-                                                                                                <div class="">
-                                                                                                    <!-- the events -->
-                                                                                                    <div id="external-events">
-                                                                                                        <div class="external-event bg-orange">Auditor 1</div>
-                                                                                                        <div class="external-event bg-blue">Auditor 2</div>
-                                                                                                        <div class="external-event bg-green">Auditor 3</div>
-                                                                                                    </div>
-                                                                                                </div><!-- /.box-body -->
-                                                                                            </div><!-- /. box -->
-                                                                                        </div><!-- /.col -->
-                                                                                        <div class="col-md-10">
-                                                                                            <div class="box box-primary">
-                                                                                                <div class="box-body no-padding">
-                                                                                                    <!-- THE CALENDAR -->
-                                                                                                    <div id="calendar"></div>
-                                                                                                </div><!-- /.box-body -->
-                                                                                            </div><!-- /. box -->
-                                                                                        </div><!-- /.col -->
-                                                                                    </div><!-- /.row -->
+
                                                                                 </div><!-- /.tab-pane -->
                                                                                 <div class="tab-pane" id="tab_3"></div><!-- /.tab-pane -->
                                                                                 </div><!-- /.tab-content -->

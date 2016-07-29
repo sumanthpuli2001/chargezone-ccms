@@ -1063,4 +1063,30 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.setViewName("Resignation/ResignationHrResultExcel");
         return mv;
     }
+
+    private synchronized void reportingManagerChangeCheck() throws Exception {
+
+        List<?> list = resignationMasterService.read();
+        for (Object o : list) {
+            ResignationMaster resignationMaster = (ResignationMaster) o;
+            String relevingDate = resignationMaster.getRelievingDate();
+            if (null != relevingDate && !relevingDate.equals("")) {
+                SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
+                Date relevingDate1 = sdf3.parse(relevingDate);
+                Date date = new Date();
+                if (relevingDate1.before(date)) {
+                    int empId = resignationMaster.getEmployeeMaster().getId();
+                    List<?> list1 = employeeMasterService.readForAprove(empId);
+                    for (Object o1 : list1) {
+                        EmployeeMaster employeeMaster = (EmployeeMaster) o1;
+                        employeeMaster.setReportingManagerLevel1(employeeMaster.getReportingManagerLevel2());
+                        employeeMasterService.update(employeeMaster);
+                    }
+                }
+            }
+
+        }
+
+    }
+
 }

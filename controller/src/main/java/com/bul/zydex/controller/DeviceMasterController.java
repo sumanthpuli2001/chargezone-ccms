@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 
-
 /**
  *
  * @author Dhaval Parmar<dhaval@bulwarks.com>
@@ -135,149 +134,157 @@ public class DeviceMasterController extends DeviceMasterAbstract {
         EmployeeMaster employeeMaster = new EmployeeMaster();
         List<?> l1 = deviceMasterService.read();
         for (Object o : l1) {
-            DeviceMaster deviceMaster = (DeviceMaster) o;
-            int deviceId = deviceMaster.getId();
-            String deviceip = deviceMaster.getIpAddress();
-            int deviceport = deviceMaster.getPortNo();
-            int seq_number = deviceMaster.getSeqNumber();
-            if(seq_number==50000){
-                seq_number=1;
-                deviceMaster.setSeqNumber(seq_number);
-                deviceMasterService.update(deviceMaster);
-            }
-            int seqNoCounter = seq_number;
-            String authkey = "96791AmDFaeasE15635c0b7";
+            try {
+
+                DeviceMaster deviceMaster = (DeviceMaster) o;
+                int deviceId = deviceMaster.getId();
+                String deviceip = deviceMaster.getIpAddress();
+                int deviceport = deviceMaster.getPortNo();
+                int seq_number = deviceMaster.getSeqNumber();
+                if (seq_number == 50000) {
+                    seq_number = 1;
+                    deviceMaster.setSeqNumber(seq_number);
+                    deviceMasterService.update(deviceMaster);
+                }
+                int seqNoCounter = seq_number;
+                String authkey = "96791AmDFaeasE15635c0b7";
 //Multiple mobiles numbers separated by comma
-            String vendor_mob_no = "";
-            String p_message = "";
-            String mobiles = "91" + vendor_mob_no;
-            System.out.println(mobiles);
+                String vendor_mob_no = "";
+                String p_message = "";
+                String mobiles = "91" + vendor_mob_no;
+                System.out.println(mobiles);
 //Sender ID,While using route4 sender id should be 6 characters long.
-            String senderId = "102234";
+                String senderId = "102234";
 //Your message to send, Add URL encoding here.
-            String message = p_message;
+                String message = p_message;
 //define route
-            String route = "1";
+                String route = "1";
 
 //Prepare Url
-            URLConnection myURLConnection = null;
-            URLConnection myURLConnection1 = null;
-            URL myURL = null;
-            URL myURL1 = null;
-            BufferedReader reader = null;
-            BufferedReader reader1 = null;
+                URLConnection myURLConnection = null;
+                URLConnection myURLConnection1 = null;
+                URL myURL = null;
+                URL myURL1 = null;
+                BufferedReader reader = null;
+                BufferedReader reader1 = null;
 
-            String sequenceNoUrl = "http://" + deviceip + ":" + deviceport + "/device.cgi/command?action=geteventcount&format=xml";
-            StringBuilder sbPostData1 = new StringBuilder(sequenceNoUrl);
-            sequenceNoUrl = sbPostData1.toString();
-            myURL1 = new URL(sequenceNoUrl);
-            int response1LineCounter = 0;
-            String loginPassword1 = "admin" + ":" + "1234";
-            String encoded1 = new sun.misc.BASE64Encoder().encode(loginPassword1.getBytes());
-            myURLConnection1 = myURL1.openConnection();
-            myURLConnection1.setRequestProperty("Authorization", "Basic " + encoded1);
-            myURLConnection1.connect();
-            reader1 = new BufferedReader(new InputStreamReader(myURLConnection1.getInputStream()));
-            String response;
-            String rollOverCount="";
-            String urlSeqNo="";
+                String sequenceNoUrl = "http://" + deviceip + ":" + deviceport + "/device.cgi/command?action=geteventcount&format=xml";
+                StringBuilder sbPostData1 = new StringBuilder(sequenceNoUrl);
+                sequenceNoUrl = sbPostData1.toString();
+                myURL1 = new URL(sequenceNoUrl);
+                int response1LineCounter = 0;
+                String loginPassword1 = "admin" + ":" + "1234";
+                String encoded1 = new sun.misc.BASE64Encoder().encode(loginPassword1.getBytes());
+                myURLConnection1 = myURL1.openConnection();
+                myURLConnection1.setRequestProperty("Authorization", "Basic " + encoded1);
+                myURLConnection1.connect();
+                reader1 = new BufferedReader(new InputStreamReader(myURLConnection1.getInputStream()));
+                String response;
+                String rollOverCount = "";
+                String urlSeqNo = "";
 //            String cc="";
-            while ((response = reader1.readLine()) != null) {
-                System.out.println(response);
-                if (response1LineCounter == 3) {
-                    urlSeqNo = response;
-                    String[] aa = urlSeqNo.split(">");
-                    String zz = aa[1];
-                    String[] xx = zz.split("<");
-                    urlSeqNo = xx[0].trim();    
+                while ((response = reader1.readLine()) != null) {
+                    System.out.println(response);
+                    if (response1LineCounter == 3) {
+                        urlSeqNo = response;
+                        String[] aa = urlSeqNo.split(">");
+                        String zz = aa[1];
+                        String[] xx = zz.split("<");
+                        urlSeqNo = xx[0].trim();
+                    }
+                    if (response1LineCounter == 2) {
+                        rollOverCount = response;
+                        String[] aa = rollOverCount.split(">");
+                        String zz = aa[1];
+                        String[] xx = zz.split("<");
+                        rollOverCount = xx[0].trim();
+                    }
+                    response1LineCounter++;
                 }
-                if (response1LineCounter == 2) {
-                    rollOverCount = response;
-                    String[] aa = rollOverCount.split(">");
-                    String zz = aa[1];
-                    String[] xx = zz.split("<");
-                    rollOverCount = xx[0].trim();
-                }
-                response1LineCounter++;
-            }
-            int curSeqNo=Integer.parseInt(urlSeqNo);
-            int rollOverCountInUrl=Integer.parseInt(rollOverCount);
+                int curSeqNo = Integer.parseInt(urlSeqNo);
+                int rollOverCountInUrl = Integer.parseInt(rollOverCount);
 //encoding message
-            String encoded_message = URLEncoder.encode(message);
-            while (seq_number <= curSeqNo) //-1 is for make this condition alwayts true. and we will termi9nate thisa loop while we get the null response from server using the sequence no.
-            {
+                String encoded_message = URLEncoder.encode(message);
+                while (seq_number <= curSeqNo) //-1 is for make this condition alwayts true. and we will termi9nate thisa loop while we get the null response from server using the sequence no.
+                {
 
 //Send SMS API
 //            String mainUrl = "http://deviceip:deviceport/device.cgi/events?action=getevent&roll-over-count=1&seq-number=1&no-of-event=1";
-                String mainUrl = "http://" + deviceip + ":" + deviceport + "/device.cgi/events?action=getevent&roll-over-count="+rollOverCountInUrl+"&seq-number=" + seq_number + "&no-of-events=1";
+                    String mainUrl = "http://" + deviceip + ":" + deviceport + "/device.cgi/events?action=getevent&roll-over-count=" + rollOverCountInUrl + "&seq-number=" + seq_number + "&no-of-events=1";
 
 //Prepare parameter string
-                StringBuilder sbPostData = new StringBuilder(mainUrl);
+                    StringBuilder sbPostData = new StringBuilder(mainUrl);
 //            StringBuilder sbPostData = new StringBuilder(mainUrl);
 //            StringBuffer sbPostData = new StringBuffer(mainUrl);
 //                   sbPostData.append("&action=" + authkey);
-                //       sbPostData.append("&mobiles=" + mobiles);
-                //       sbPostData.append("&message=" + encoded_message);
-                //       sbPostData.append("&route=" + route);
-                //       sbPostData.append("&sender=" + senderId);
+                    //       sbPostData.append("&mobiles=" + mobiles);
+                    //       sbPostData.append("&message=" + encoded_message);
+                    //       sbPostData.append("&route=" + route);
+                    //       sbPostData.append("&sender=" + senderId);
 
 //final string
-                mainUrl = sbPostData.toString();
-                try {
-                    myURL = new URL(mainUrl);
-                    String loginPassword = "admin" + ":" + "1234";
-                    String encoded = new sun.misc.BASE64Encoder().encode(loginPassword.getBytes());
-                    myURLConnection = myURL.openConnection();
-                    myURLConnection.setRequestProperty("Authorization", "Basic " + encoded);
-                    myURLConnection.connect();
-                    reader = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
-                    //reading response
-                    String response1;
-                    int responseLineCounter = 1;
-                    String punchInDate = "";
-                    String punchInTime = "";
-                    String punchInEmployeeId = "";
-                    if (reader.readLine() == null) {
-                        break;
-                    } else {
-                        while ((response1 = reader.readLine()) != null) //print response
-                        {
-                            System.out.println(response1);
-                            if (responseLineCounter == 2) {
-                                punchInDate = response1.replace("date=", "").trim();
+                    mainUrl = sbPostData.toString();
+                    try {
+                        myURL = new URL(mainUrl);
+                        String loginPassword = "admin" + ":" + "1234";
+                        String encoded = new sun.misc.BASE64Encoder().encode(loginPassword.getBytes());
+                        myURLConnection = myURL.openConnection();
+                        myURLConnection.setRequestProperty("Authorization", "Basic " + encoded);
+                        myURLConnection.connect();
+                        reader = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
+                        //reading response
+                        String response1;
+                        int responseLineCounter = 1;
+                        String punchInDate = "";
+                        String punchInTime = "";
+                        String punchInEmployeeId = "";
+                        if (reader.readLine() == null) {
+                            break;
+                        } else {
+                            while ((response1 = reader.readLine()) != null) //print response
+                            {
+                                System.out.println(response1);
+                                if (responseLineCounter == 2) {
+                                    punchInDate = response1.replace("date=", "").trim();
+                                }
+                                if (responseLineCounter == 3) {
+                                    punchInTime = response1.replace("time=", "").trim();
+                                }
+                                if (responseLineCounter == 5) {
+                                    punchInEmployeeId = response1.replace("detail-1=", "").trim();
+                                }
+                                responseLineCounter++;
                             }
-                            if (responseLineCounter == 3) {
-                                punchInTime = response1.replace("time=", "").trim();
-                            }
-                            if (responseLineCounter == 5) {
-                                punchInEmployeeId = response1.replace("detail-1=", "").trim();
-                            }
-                            responseLineCounter++;
-                        }
-                        
 
-                        DeviceMaster deviceMaster1 = new DeviceMaster();
-                        deviceMaster1 = deviceMasterService.readById(deviceId);
-                        deviceMaster1.setSeqNumber(seq_number);
-                        employeeMaster.setEmployeeId(punchInEmployeeId);
-                        List<?> empDataList = employeeMasterService.readEmployeeId(punchInEmployeeId);
-                        if (!empDataList.isEmpty()) {
-                            employeeMaster = (EmployeeMaster) empDataList.get(0);
-                            employeeDatetimeData.setEmployeeMaster(employeeMaster);
-                            employeeDatetimeData.setDateTime(punchInDate + " " + punchInTime);
-                            employeeDatetimeData.setDeviceMaster(deviceMaster1);
-                            employeeDatetimeDataService.create(employeeDatetimeData);
-                        }
-                        //deviceMaster1.setSeqNumber(Integer.parseInt(sequenceNoUrl));
-                        deviceMasterService.update(deviceMaster1);
+                            DeviceMaster deviceMaster1 = new DeviceMaster();
+                            deviceMaster1 = deviceMasterService.readById(deviceId);
+                            deviceMaster1.setSeqNumber(seq_number);
+                            employeeMaster.setEmployeeId(punchInEmployeeId);
+                            List<?> empDataList = employeeMasterService.readEmployeeId(punchInEmployeeId);
+                            if (!empDataList.isEmpty()) {
+                                employeeMaster = (EmployeeMaster) empDataList.get(0);
+                                employeeDatetimeData.setEmployeeMaster(employeeMaster);
+                                employeeDatetimeData.setDateTime(punchInDate + " " + punchInTime);
+                                employeeDatetimeData.setDeviceMaster(deviceMaster1);
+                                employeeDatetimeDataService.create(employeeDatetimeData);
+                            }
+                            //deviceMaster1.setSeqNumber(Integer.parseInt(sequenceNoUrl));
+                            deviceMasterService.update(deviceMaster1);
                             seq_number++;
+                            if (seq_number == 50000) {
+                                seq_number = 1;
+                            }
+                        }
+                        //finally close connection`
+                        reader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                    //finally close connection`
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+            } catch (Exception ex) {
+                System.out.println("Deveice Exception" + ex);
             }
+
         }
     }
 }

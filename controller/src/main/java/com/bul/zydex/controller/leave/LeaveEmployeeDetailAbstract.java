@@ -177,9 +177,9 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
         for (Object o : list) {
             leaveTypeMaster = (LeaveTypeMaster) o;
             employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
-          if((zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D")) && leaveTypeMaster.getLeaveType().equals("Short Leave")){
-              
-          }else{
+//          if((zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D")) && leaveTypeMaster.getLeaveType().equals("Short Leave")){
+//              
+//          }else{
               
             List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
             if (!balanceList.isEmpty()) {
@@ -203,7 +203,7 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
             } catch (Exception e) {
 
             }
-          }
+//          }
 
         }
         request.setAttribute("leaveTypemap", leaveTypemap);

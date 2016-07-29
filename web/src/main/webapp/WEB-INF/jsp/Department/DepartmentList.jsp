@@ -37,6 +37,9 @@
             alert("Please, Select one or more record(s).");
             return false;
         }
+        function viewClick(id) {
+            window.location = 'departmentMaster.htm?act=createClick&id=' + id;
+        }
     </script>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -87,6 +90,7 @@
                                                                     <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
                                                                     <th>Sr.No.</th>
                                                                     <th>Department Name</th>
+                                                                    <th>Edit</th>
                                                                 </tr>
                                                             </thead>
                                                             <c:set var="count" value="0" scope="page" />
@@ -102,6 +106,14 @@
                                                                         </td>
                                                                         <td>
                                                                             ${departmentList.departmentName}
+                                                                        </td>
+                                                                        <td>
+                                                                             <div class="btn-group">
+                                                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="viewClick(${departmentList.id});">
+                                                                                    &nbsp;Edit
+                                                                                </button>
+
+                                                                            </div>
                                                                         </td>
                                                                     </tr>
                                                                 </c:forEach>

@@ -32,10 +32,9 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
         Date dateBefore = new Date(date.getTime() - 24 * 60 * 60 * 1000);
         Format formatter = new SimpleDateFormat("dd/MM/YYYY");
         String s = formatter.format(date);
-//        String s = "27/06/2016";
+//        String s = "02/07/2016";
 
-        String s1 = formatter.format(dateBefore);
-
+//        String s1 = formatter.format(dateBefore);
         query += " From EmployeeShiftData a "
                 + " Where a.employeeMaster.id = '" + employeeShiftData.getEmployeeMaster().getId() + "'"
                 + "and STR_TO_DATE(a.inDateTime,'%d/%m/%Y') = STR_TO_DATE('" + s + "','%d/%m/%Y')";
@@ -62,8 +61,11 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
         Format formatter = new SimpleDateFormat("dd/MM/YYYY");
         Date dateBefore = new Date(date.getTime() - 24 * 60 * 60 * 1000);
         String s1 = formatter.format(dateBefore);
+//        String s1 = "22/07/2016";
+
         query += " From EmployeeShiftData a "
-                + "Where STR_TO_DATE(a.inDateTime,'%d/%m/%Y') = STR_TO_DATE('" + s1 + "','%d/%m/%Y')";
+                + "Where STR_TO_DATE(a.inDateTime,'%d/%m/%Y') = STR_TO_DATE('" + s1 + "','%d/%m/%Y')"
+                + " Group By a.employeeMaster.id";
 
         return getHibernateTemplate().find(query);
     }
@@ -994,8 +996,8 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
         Date dateBefore = new Date(date.getTime() - 24 * 60 * 60 * 1000);
         Format formatter = new SimpleDateFormat("dd/MM/YYYY");
         String s = formatter.format(date);
-//        String s = "27/06/2016";
-//        String s1 = "26/06/2016";
+//        String s = "01/07/2016";
+//        String s1 = "30/06/2016";
         String s1 = formatter.format(dateBefore);
 
         query += " From EmployeeShiftData a "
@@ -1041,4 +1043,25 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
                 + " and DATE_FORMAT(STR_TO_DATE(a.outDateTime, '%d/%m/%Y %H:%i'),'%H:%i') > DATE_FORMAT(STR_TO_DATE(b.endTime, '%H:%i'),'%H:%i')";
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> getPastAndCurrentPunchForSelectedDate(T object, String endShiftTime, String selectDate, String PreviousDate) {
+        EmployeeShiftData employeeShiftData = (EmployeeShiftData) object;
+        String query = "";
+        query += " From EmployeeShiftData a "
+                + " Where a.employeeMaster.id = '" + employeeShiftData.getEmployeeMaster().getId() + "'"
+                + "and STR_TO_DATE(a.inDateTime,'%d/%m/%Y %H:%i:%s') BETWEEN STR_TO_DATE('" + PreviousDate + " " + endShiftTime + ":00','%d/%m/%Y %H:%i:%s') AND (STR_TO_DATE('" + selectDate + " 23:59:00','%d/%m/%Y %H:%i:%s'))";
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> dailyTimeEntryForSelectedDate(T object, String date) {
+        EmployeeShiftData employeeShiftData = (EmployeeShiftData) object;
+        String query = " From EmployeeShiftData a "
+                + " Where a.employeeMaster.id = '" + employeeShiftData.getEmployeeMaster().getId() + "'"
+                + "and STR_TO_DATE(a.inDateTime,'%d/%m/%Y') = STR_TO_DATE('" + date + "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
 }

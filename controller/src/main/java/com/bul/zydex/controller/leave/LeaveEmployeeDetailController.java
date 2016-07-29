@@ -2280,7 +2280,19 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
             if (!list.isEmpty()) {
                 employeeShiftData1 = (EmployeeShiftData) list.get(0);
-                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+
+                String sDate = employeeShiftData1.getInDateTime();
+                String eDate = employeeShiftData1.getOutDateTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+                Date iDate = sdf.parse(sDate);
+                Date oDate = sdf.parse(eDate);
+                long diff = oDate.getTime() - iDate.getTime();
+
+                long diffHours = diff / (60 * 60 * 1000) % 24;
+
+//                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+                if (diffHours > 4 && employeeShiftData1.getShiftMaster().getId() != 5) {
                     message = "On This Day You Are Present";
                 }
             }
@@ -2330,7 +2342,19 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
             if (!list.isEmpty()) {
                 employeeShiftData1 = (EmployeeShiftData) list.get(0);
-                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+
+                String sDate = employeeShiftData1.getInDateTime();
+                String eDate = employeeShiftData1.getOutDateTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+                Date iDate = sdf.parse(sDate);
+                Date oDate = sdf.parse(eDate);
+                long diff = oDate.getTime() - iDate.getTime();
+
+                long diffHours = diff / (60 * 60 * 1000) % 24;
+
+//                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+                if (diffHours > 4 && employeeShiftData1.getShiftMaster().getId() != 5) {
                     message = "On This Day You Are Present";
                 }
             }

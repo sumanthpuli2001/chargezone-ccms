@@ -788,7 +788,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     newList.add("PR");
 
                 } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
-                        && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave")  && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                        && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                         && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
                     String[] userTimeInStr = firstHalf.split("`");
                     String[] userTimeInStr1 = userTimeInStr[1].split("!");

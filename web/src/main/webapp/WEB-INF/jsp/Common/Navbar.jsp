@@ -391,8 +391,8 @@
                             <li><a href="probationToConfirmation.htm?act=probationconfirmedEmployee"><i class="fa fa-circle-o"></i>Probation Confirmed</a></li>
                             </c:if>
                             <c:if test="${sessionScope.isProbationEmployee}">
-                            <li><a href="probationToConfirmation.htm?act=empClick"><i class="fa fa-circle-o"></i>Own Confirmation Status</a></li>
-                            </c:if>
+                            <!--<li><a href="probationToConfirmation.htm?act=empClick"><i class="fa fa-circle-o"></i>Own Confirmation Status</a></li>-->
+                        </c:if>
                     </ul>
                 </li>
                 <%--</c:if>--%>
@@ -544,10 +544,10 @@
                             <li><a href="shiftRotationMaster.htm?act=attendanceExcelUpload"><i class="fa fa-circle-o"></i>Attendance Upload</a></li>
                             </c:if>
                             <c:if test="${sessionScope.userRight.lunaPlantAttendanceMgnt}">
-                                    <li><a href="shiftRotationMaster.htm?act=employeeAttendanceForLuna"><i class="fa fa-circle-o"></i>Luna Attendance Download</a></li>
+                            <li><a href="shiftRotationMaster.htm?act=employeeAttendanceForLuna"><i class="fa fa-circle-o"></i>Luna Attendance Download</a></li>
                             </c:if>
                             <c:if test="${sessionScope.userRight.gavasatPlantAttendanceMgnt}">
-                                  <li><a href="shiftRotationMaster.htm?act=employeeAttendanceForGavasat"><i class="fa fa-circle-o"></i>Gavasat Attendance Download</a></li>
+                            <li><a href="shiftRotationMaster.htm?act=employeeAttendanceForGavasat"><i class="fa fa-circle-o"></i>Gavasat Attendance Download</a></li>
                             </c:if>
                     </ul>
 

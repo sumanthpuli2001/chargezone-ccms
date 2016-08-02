@@ -938,6 +938,58 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                     "Error : Please Insert start date before end date.");
                             mv = viewLeaveRequest(request, response);
 
+                        } else {
+                            leaveEmployeeDetail.setStatus(0);
+                            leaveEmployeeDetailService.update(leaveEmployeeDetail);
+
+                            balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
+                            noOfDay = leaveEmployeeDetail.getNoOfDays();
+                            String noOfHour = "";
+                            EmployeeMaster employeeMasterModel1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                            COffLeaveMaster cOffLeaveMaster = new COffLeaveMaster();
+                            cOffLeaveMaster.setZydexLocationMaster(employeeMasterModel1.getZydexLocationMaster());
+                            List list1 = cOffLeaveMasterService.readByDept(cOffLeaveMaster);
+                            try {
+                                cOffLeaveMaster = (COffLeaveMaster) list1.get(0);
+                                noOfHour = "0." + cOffLeaveMaster.getHoursNo();
+                            } catch (Exception e) {
+                            }
+                            // 11 No Id Is C-Off Id*****************
+                            if (leaveEmployeeDetail.getLeaveTypeMaster().getId().equals(11)) {
+                                noOfDay = Float.parseFloat(noOfHour);
+                            }
+                            // 11 No Id Is C-Off Id*****************
+                            balanceDay = balanceDay - noOfDay;
+                            employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
+                            employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                            request.setAttribute("successMessage",
+                                    "Information : The Information is Updated Successfully.");
+                            //emailtemplate for leave request edit click
+                            try {
+                                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                                DesignationMaster designationMaster = new DesignationMaster();
+                                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                                EmailTemplate emailTemplate = new EmailTemplate();
+                                EmployeeMaster EmployeeHR = new EmployeeMaster();
+                                EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+
+                                //id=58 for apply leave request edited...
+                                emailTemplate = emailTemplateService.readById(58);
+                                String To = EmployeeHR.getOfficeEmailId();
+                                String from = employeeMasterModel.getOfficeEmailId();
+                                String Subject = emailTemplate.getSubject();
+                                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                                String msg = emailTemplate.getBodytext();
+                                msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                sendMail.sendMail(from, To, Subject, msg);
+
+                            } catch (Exception e) {
+                            }
+
+                            mv = searchOwnLeaveDetail(request, response);
+
                         }
                     } else {
                         leaveEmployeeDetail.setStatus(0);

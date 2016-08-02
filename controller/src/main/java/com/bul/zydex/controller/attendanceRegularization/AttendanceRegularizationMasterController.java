@@ -779,418 +779,190 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             int firstCounter = 0;
 
             while (itr5.hasNext()) {
-                Object[] next = (Object[]) itr5.next();
-                String firstHalf = "" + next[1];
-                int firstHalfVal = 0;
-                int counter = 0;
-                Date date = sdf.parse("" + next[0]);
-                Calendar c = Calendar.getInstance();
-                c.setTime(date);
-                int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
-                SimpleDateFormat format = new SimpleDateFormat("EEEE");
-                String dayName = format.format(date);
+                try {
+                    Object[] next = (Object[]) itr5.next();
+                    String firstHalf = "" + next[1];
+                    int firstHalfVal = 0;
+                    int counter = 0;
+                    Date date = sdf.parse("" + next[0]);
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(date);
+                    int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
+                    SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                    String dayName = format.format(date);
 
-                if (firstHalf.contains("fullday")) {
-                    newList.add("PR");
-
-                } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
-                        && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
-                        && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
-                    String[] userTimeInStr = firstHalf.split("`");
-                    String[] userTimeInStr1 = userTimeInStr[1].split("!");
-                    String[] userTimeOutStr = firstHalf.split("!");
-                    String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
-                    String[] leave = firstHalf.split("@");
-                    String[] leave1 = leave[1].split("#");
-                    String[] LateHoursStr = firstHalf.split("\\$");
-                    String[] LateHoursStr1 = LateHoursStr[1].split("%");
-                    String[] endHoursStr = firstHalf.split("%");
-                    String[] endHoursStr1 = endHoursStr[1].split("\\^");
-                    String[] firstStartHoursStr = endHoursStr[1].split("\\+");
-                    Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
-                    Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
-                    Date endHours = sdf2.parse(endHoursStr1[0]);
-                    Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
-                    Calendar cal = Calendar.getInstance();
-                    Calendar cal1 = Calendar.getInstance();
-                    cal.setTime(firstStartHours);
-                    cal1.setTime(firstStartHours);
-                    cal.add(Calendar.MINUTE, lateMinute);
-                    cal1.add(Calendar.MINUTE, -earlyMinute);
-
-                    String newTime = sdf2.format(cal.getTime());
-                    String newTime1 = sdf2.format(cal1.getTime());
-                    Date flexibleEndTime = sdf2.parse(newTime);
-                    Date flexibleStartTime = sdf2.parse(newTime1);
-                    Date LateHours = sdf2.parse(LateHoursStr1[0]);
-                    long diff = endHours.getTime() - firstStartHours.getTime();
-                    long diffMinutes = diff / (60 * 1000);
-                    long diff1 = 0;
-                    if (userTimeIn.after(flexibleStartTime) || userTimeIn.equals(flexibleStartTime)) {
-                        diff1 = endHours.getTime() - userTimeIn.getTime();
-                    } else {
-                        diff1 = endHours.getTime() - flexibleStartTime.getTime();
-                    }
-                    long diffMinutes1 = diff1 / (60 * 1000);
-
-                    if (dayName.equals("Saturday") && dayOfWeek == 2 && diffMinutes1 >= 240) {
+                    if (firstHalf.contains("fullday")) {
                         newList.add("PR");
-                    } else if (diffMinutes1 >= diffMinutes) {
-                        newList.add("PR");
-                    } else if (userTimeIn != null) {
-                        if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+
+                    } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
+                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                        String[] userTimeInStr = firstHalf.split("`");
+                        String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                        String[] userTimeOutStr = firstHalf.split("!");
+                        String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                        String[] leave = firstHalf.split("@");
+                        String[] leave1 = leave[1].split("#");
+                        String[] LateHoursStr = firstHalf.split("\\$");
+                        String[] LateHoursStr1 = LateHoursStr[1].split("%");
+                        String[] endHoursStr = firstHalf.split("%");
+                        String[] endHoursStr1 = endHoursStr[1].split("\\^");
+                        String[] firstStartHoursStr = endHoursStr[1].split("\\+");
+                        Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                        Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                        Date endHours = sdf2.parse(endHoursStr1[0]);
+                        Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
+                        Calendar cal = Calendar.getInstance();
+                        Calendar cal1 = Calendar.getInstance();
+                        cal.setTime(firstStartHours);
+                        cal1.setTime(firstStartHours);
+                        cal.add(Calendar.MINUTE, lateMinute);
+                        cal1.add(Calendar.MINUTE, -earlyMinute);
+
+                        String newTime = sdf2.format(cal.getTime());
+                        String newTime1 = sdf2.format(cal1.getTime());
+                        Date flexibleEndTime = sdf2.parse(newTime);
+                        Date flexibleStartTime = sdf2.parse(newTime1);
+                        Date LateHours = sdf2.parse(LateHoursStr1[0]);
+                        long diff = endHours.getTime() - firstStartHours.getTime();
+                        long diffMinutes = diff / (60 * 1000);
+                        long diff1 = 0;
+                        if (userTimeIn.after(flexibleStartTime) || userTimeIn.equals(flexibleStartTime)) {
+                            diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                        } else {
+                            diff1 = userTimeOut.getTime() - flexibleStartTime.getTime();
+                        }
+                        long diffMinutes1 = diff1 / (60 * 1000);
+
+                        if (dayName.equals("Saturday") && dayOfWeek == 2 && diffMinutes1 >= 240) {
                             newList.add("PR");
-                        } else if (userTimeOut.before(userTimeIn)) {
+                        } else if (diffMinutes1 >= diffMinutes) {
                             newList.add("PR");
-                        } else if (leave1[0] != null && !leave1[0].contains("Short Leave")) {
+                        } else if (userTimeIn != null) {
                             if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                 newList.add("PR");
-                            } else if (leave1[0].contains("AB")) {
-                                newList.add("AB");
-                            } else if (leave1[0].contains("AR")) {
-                                newList.add("AR/P");
-                            } else if (leave1[0].contains("Casual Leave")) {
-                                newList.add("Casual Leave");
-                            } else if (leave1[0].contains("Privilege Leave")) {
-                                newList.add("Privilege Leave");
-                            } else if (leave1[0].contains("Sick Leave")) {
-                                newList.add("Sick Leave");
-                            }
-
-                        } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
-                            if (firstHalf.contains("*")) {
-                                String[] shortArray = firstHalf.split("\\*");
-                                String[] endArray = shortArray[1].split("\\-");
-                                String[] startTime = endArray[1].split("\\+");
-                                Date shortIn = sdf2.parse(shortArray[1]);
-                                Date shortend = sdf2.parse(endArray[1]);
-                                Date startTime1 = sdf2.parse(startTime[1]);
-                                if (shortIn.before(endHours)) {
-                                    newList.add("SHL/P");
-                                } else if (leave1[0].contains("~ AR")) {
-                                    secondHalfList.add("AR/P");
-                                } else if (userTimeIn.after(endHours)) {
-                                    newList.add("SHL/A");
-                                } else if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                            } else if (userTimeOut.before(userTimeIn)) {
+                                newList.add("PR");
+                            } else if (leave1[0] != null && !leave1[0].contains("Short Leave")) {
+                                if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                     newList.add("PR");
+                                } else if (leave1[0].contains("AB")) {
+                                    newList.add("AB");
+                                } else if (leave1[0].contains("AR")) {
+                                    newList.add("AR/P");
+                                } else if (leave1[0].contains("Casual Leave")) {
+                                    newList.add("Casual Leave");
+                                } else if (leave1[0].contains("Privilege Leave")) {
+                                    newList.add("Privilege Leave");
+                                } else if (leave1[0].contains("Sick Leave")) {
+                                    newList.add("Sick Leave");
+                                }
+
+                            } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
+                                if (firstHalf.contains("*")) {
+                                    String[] shortArray = firstHalf.split("\\*");
+                                    String[] endArray = shortArray[1].split("\\-");
+                                    String[] startTime = endArray[1].split("\\+");
+                                    Date shortIn = sdf2.parse(shortArray[1]);
+                                    Date shortend = sdf2.parse(endArray[1]);
+                                    Date startTime1 = sdf2.parse(startTime[1]);
+                                    if (shortIn.before(endHours)) {
+                                        newList.add("SHL/P");
+                                    } else if (leave1[0].contains("~ AR")) {
+                                        secondHalfList.add("AR/P");
+                                    } else if (userTimeIn.after(endHours)) {
+                                        newList.add("SHL/A");
+                                    } else if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                        newList.add("PR");
+                                    } else {
+                                        newList.add("AB");
+                                    }
                                 } else {
                                     newList.add("AB");
                                 }
+                            } else if (null != leave1[0] && !leave1[0].contains("AB")) {
+                                if (leave1[0].contains("Casual Leave")) {
+                                }
+                                if (leave1[0].contains("Privilege Leave")) {
+                                }
+                                if (leave1[0].contains("Sick Leave")) {
+                                    newList.add(" " + leave1[0]);
+
+                                } else if (leave1[0].contains("AB")) {
+                                    newList.add(" " + leave1[0]);
+                                }
+                                newList.add("-");
                             } else {
                                 newList.add("AB");
                             }
-                        } else if (null != leave1[0] && !leave1[0].contains("AB")) {
-                            if (leave1[0].contains("Casual Leave")) {
-                            }
-                            if (leave1[0].contains("Privilege Leave")) {
-                            }
-                            if (leave1[0].contains("Sick Leave")) {
-                                newList.add(" " + leave1[0]);
 
-                            } else if (leave1[0].contains("AB")) {
-                                newList.add(" " + leave1[0]);
-                            }
-                            newList.add("-");
-                        } else {
+                        } else if (userTimeIn != null && !firstHalf.contains("WO") && !firstHalf.contains("?")) {
                             newList.add("AB");
+                        } else if (firstHalf.contains("WO") || firstHalf.contains("?")) {
+                            newList.add("-");
                         }
 
-                    } else if (userTimeIn != null && !firstHalf.contains("WO") && !firstHalf.contains("?")) {
+                    } else if (firstHalf.equals("WO")) {
+                        newList.add("-");
+                    } else if (firstHalf.contains("AR")) {
+                        newList.add("AR/P");
+                    } else if (firstHalf.equals("AB")) {
                         newList.add("AB");
-                    } else if (firstHalf.contains("WO") || firstHalf.contains("?")) {
+                    } else if (firstHalf.equals("Casual Leave") || firstHalf.equals("C Off Leave") || firstHalf.equals("Privilege Leave") || firstHalf.equals("Sick Leave")
+                            || firstHalf.equals("Paternity Leave") || firstHalf.equals("Maternity Leave") || firstHalf.equals("Leave Without Pay") || firstHalf.contains("TR")) {
                         newList.add("-");
                     }
-
-                } else if (firstHalf.equals("WO")) {
-                    newList.add("-");
-                } else if (firstHalf.contains("AR")) {
-                    newList.add("AR/P");
-                } else if (firstHalf.equals("AB")) {
-                    newList.add("AB");
-                } else if (firstHalf.equals("Casual Leave") || firstHalf.equals("C Off Leave") || firstHalf.equals("Privilege Leave") || firstHalf.equals("Sick Leave")
-                        || firstHalf.equals("Paternity Leave") || firstHalf.equals("Maternity Leave") || firstHalf.equals("Leave Without Pay") || firstHalf.contains("TR")) {
-                    newList.add("-");
+                } catch (Exception e) {
                 }
             }
 
             Iterator itr6 = entry.getValue().iterator();
             int weekNameCounter = 0;
             while (itr6.hasNext()) {
-                Object[] next = (Object[]) itr6.next();
-                String secondHalf = "" + next[1];
-                int firstHalfVal = 0;
-                int counter = 0;
-                String shiftName = "";
+                try {
+                    Object[] next = (Object[]) itr6.next();
+                    String secondHalf = "" + next[1];
+                    int firstHalfVal = 0;
+                    int counter = 0;
+                    String shiftName = "";
 
-                boolean satWeekOff = false;
-                //                                    2nd Sat Week Off Codding
-                Calendar cal = Calendar.getInstance();
-                Date date = sdf.parse("" + next[0]);
-                cal.setTime(date);
-                SimpleDateFormat format = new SimpleDateFormat("EEEE");
-                String dayName = format.format(date);
-                EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
-                ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
+                    boolean satWeekOff = false;
+                    //                                    2nd Sat Week Off Codding
+                    Calendar cal = Calendar.getInstance();
+                    Date date = sdf.parse("" + next[0]);
+                    cal.setTime(date);
+                    SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                    String dayName = format.format(date);
+                    EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
+                    ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
 
-                if (dayName.equals("Saturday")) {
-                    weekNameCounter++;
-                    if (weekNameCounter == 2) {
-                        satWeekOff = true;
+                    if (dayName.equals("Saturday")) {
+                        weekNameCounter++;
+                        if (weekNameCounter == 2) {
+                            satWeekOff = true;
+                        } else {
+                            satWeekOff = false;
+                        }
+
                     } else {
                         satWeekOff = false;
                     }
-
-                } else {
-                    satWeekOff = false;
-                }
 //                                    2nd Sat Week Off Codding
 
-                //                                    Lunch Breck Cut Off
-                List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
-                long lunchTime = 0;
-                long outTime = 0;
-                long totalDayTime = 0;
-                long totalDayTime1 = 0;
-                long totalTime = 0;
-                long shiftdiffMinutes = 0;
-                boolean checkLunchTime = false;
-                int i = 1;
-                int j = 2;
-                String startTime = "";
-                String endTime = "";
-                SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                if (listPunch.size() > 2) {
-                    while (listPunch.size() > i && listPunch.size() > j) {
-
-                        Object[] startLunchTime = (Object[]) listPunch.get(i);
-                        Object[] endLunchTime = (Object[]) listPunch.get(j);
-                        startTime = (String) startLunchTime[0];
-                        endTime = (String) endLunchTime[0];
-                        Date launchStrTime = sdf3.parse(startTime);
-                        Date launchEndTime = sdf3.parse(endTime);
-                        long diff = launchEndTime.getTime() - launchStrTime.getTime();
-                        lunchTime = diff / (60 * 1000);
-                        outTime = outTime + lunchTime;
-                        i = i + 2;
-                        j = j + 2;
-                    }
-
-                    String[] userTimeInStr = secondHalf.split("`");
-                    String[] userTimeInStr1 = userTimeInStr[1].split("!");
-                    String[] userTimeOutStr = secondHalf.split("!");
-                    String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
-                    Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
-                    Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
-                    String[] startHoursStr = secondHalf.split("%");
-                    String[] firstStartHoursStr = startHoursStr[1].split("\\+");
-                    String[] endHoursStr = secondHalf.split("&");
-                    Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
-                    Calendar cal1 = Calendar.getInstance();
-                    cal1.setTime(firstStartHours);
-                    cal1.add(Calendar.MINUTE, -earlyMinute);
-                    String newTime1 = sdf2.format(cal1.getTime());
-                    Date flexibleInTime = sdf2.parse(newTime1);
-                    Date endHours = sdf2.parse(endHoursStr[1]);
-                    long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
-                    shiftdiffMinutes = shiftTotalTime / (60 * 1000);
-                    long diff1 = 0;
-                    long diff2 = 0;
-                    if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
-                        diff1 = userTimeOut.getTime() - userTimeIn.getTime();
-
-                    } else {
-                        diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
-                    }
-                    totalDayTime = diff1 / (60 * 1000);
-
-                    diff2 = userTimeOut.getTime() - userTimeIn.getTime();
-                    totalDayTime1 = diff2 / (60 * 1000);
-
-//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                    long outTime1 = outTime;
-                    outTime = outTime - 30;
-//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                    if (outTime1 == totalDayTime1) {
-                        totalTime = totalDayTime;
-                    } else if (outTime > 0) {
-                        totalTime = totalDayTime - outTime;
-                        checkLunchTime = true;
-                    }
-
-                }
-
-//                                    Lunch Breck Cut Off
-                if (secondHalf.contains(" # ")) {
-                    String[] string1 = secondHalf.split("#");
-                    String[] string2 = string1[1].split("\\$");
-                    shiftName = string2[0].trim();
-
-                }
-
-                if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
-                    secondHalfList.add("WO");
-                } else if (secondHalf.equals("AR")) {
-                    secondHalfList.add("AR/P");
-                } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR") && !secondHalf.contains("Short Leave")) {
-                    secondHalfList.add("AB");
-                } else if (secondHalf.contains("fullday")) {
-                    secondHalfList.add("PR");
-
-                } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
-                        && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
-                        && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
-                    String[] leave = secondHalf.split("@");
-                    String[] leave1 = leave[1].split("#");
-                    String[] userTimeInStr = secondHalf.split("`");
-                    String[] userTimeInStr1 = userTimeInStr[1].split("!");
-                    String[] userTimeOutStr = secondHalf.split("!");
-                    String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
-                    String[] secondHalfTimeStr = secondHalf.split("\\^");
-                    String[] secondHalfTimeStr1 = secondHalfTimeStr[1].split("&");
-                    String[] endHoursStr = secondHalf.split("&");
-                    String[] startHoursStr = secondHalf.split("%");
-                    String[] firstStartHoursStr = startHoursStr[1].split("\\+");
-
-                    Date userTimeIn = sdf2.parse(userTimeInStr1[0].trim());
-                    Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
-                    Date userTimeOut1 = sdf2.parse("23:59");
-                    Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
-                    String[] getInHours = userTimeInStr1[0].split(":");
-                    String[] getOutHours = userTimeOutStr1[0].split(":");
-                    String abc = getInHours[0].trim();
-                    String xyz = getOutHours[0].trim();
-                    int i11 = Integer.parseInt(abc) - Integer.parseInt(xyz);
-                    int totalDuration = 24 - i11;
-                    String totalDuration2 = getOutHours[0];
-                    Date endHours = sdf2.parse(endHoursStr[1]);
-                    Date secondHalfTimeStr2 = sdf2.parse(secondHalfTimeStr1[0]);
-
-                    Calendar cal1 = Calendar.getInstance();
-                    Calendar cal2 = Calendar.getInstance();
-                    cal1.setTime(firstStartHours);
-                    cal1.add(Calendar.MINUTE, -earlyMinute);
-                    String newTime1 = sdf2.format(cal1.getTime());
-
-                    Date flexibleInTime = sdf2.parse(newTime1);
-                    cal2.setTime(firstStartHours);
-                    cal2.add(Calendar.MINUTE, lateMinute);
-                    String newTime = sdf2.format(cal2.getTime());
-                    Date flexibleEndTime = sdf2.parse(newTime);
-
-                    long diff = endHours.getTime() - firstStartHours.getTime();
-                    long diffMinutes = diff / (60 * 1000);
-                    long diff1 = 0;
-                    if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
-                        if (userTimeOut.before(userTimeIn)) {
-                            diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
-                        } else {
-                            diff1 = userTimeOut.getTime() - userTimeIn.getTime();
-                        }
-                    } else {
-                        if (userTimeOut.before(userTimeIn)) {
-                            diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
-                        } else {
-                            diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
-                        }
-
-                    }
-                    long diffMinutes1 = diff1 / (60 * 1000);
-
-                    if (userTimeIn != null) {
-                        if (leave1[0].contains("AR")) {
-                            secondHalfList.add("AR/P");
-
-                        } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
-                            if (secondHalf.contains("*")) {
-                                String[] shortArray = secondHalf.split("\\*");
-                                String[] endArray = secondHalf.split("\\^");
-                                String[] secondhalfstartTime = endArray[1].split("&");
-                                Date shortIn = sdf2.parse(shortArray[1]);
-                                Date shortend = sdf2.parse(endArray[1]);
-                                Date secondhalfstartTime1 = sdf2.parse(secondhalfstartTime[0]);
-                                if ((secondhalfstartTime1.before(shortIn) || secondhalfstartTime1.equals(shortIn)) && (shortIn.before(endHours) || shortIn.equals(endHours))) {
-                                    if (userTimeOut.after(secondHalfTimeStr2)) {
-                                        secondHalfList.add("SHL/P");
-                                    } else if (leave1[0].contains("~ AR")) {
-                                        secondHalfList.add("AR/P");
-                                    } else if (userTimeOut.before(secondHalfTimeStr2) || userTimeOut.equals(secondHalfTimeStr2)) {
-                                        secondHalfList.add("SHL/A");
-                                    } else {
-                                        secondHalfList.add("AB");
-                                    }
-                                } else if (diffMinutes1 >= 240 && userTimeIn.before(secondHalfTimeStr2)) {
-                                    secondHalfList.add("PR");
-                                }
-                            } else {
-                                secondHalfList.add("AB");
-                            }
-                        } else if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
-                            secondHalfList.add("PR");
-                        } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
-                                && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
-                                && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
-                            secondHalfList.add("AB");
-                        } else if (diffMinutes1 >= 240 && userTimeIn.after(secondHalfTimeStr2)) {
-                            secondHalfList.add("PR");
-                        } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
-                            secondHalfList.add("PR");
-                        } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
-                            secondHalfList.add("PR");
-                        } else if (null != leave1[0] && !leave1[0].contains("AB") && !leave1[0].contains("AR")) {
-                            if (leave1[0].contains("Casual Leave")) {
-                            }
-                            if (leave1[0].contains("Privilege Leave")) {
-                            }
-                            if (leave1[0].contains("Sick Leave")) {
-                            }
-                            secondHalfList.add(" " + leave1[0].trim());
-
-                        } else if (leave1[0].contains("AB")) {
-                            secondHalfList.add("AB");
-                        } else {
-                            secondHalfList.add("AB");
-                        }
-
-                    } else if (userTimeIn != null && !secondHalf.contains("WO") && !secondHalf.contains("?")) {
-                        secondHalfList.add("AB");
-                    } else if (secondHalf.contains("WO") || secondHalf.contains("?")) {
-                        secondHalfList.add("-");
-                    }
-
-                } else if (secondHalf.equals("WO")) {
-                    secondHalfList.add("-");
-                } else if (secondHalf.equals("AB")) {
-                    secondHalfList.add("AB");
-                } else if (secondHalf.equals("Casual Leave") || secondHalf.equals("Short Leave") || secondHalf.equals("Privilege Leave") || secondHalf.equals("Sick Leave")
-                        || secondHalf.equals("Paternity Leave") || !secondHalf.equals("C Off Leave") || secondHalf.equals("Maternity Leave") || secondHalf.equals("Leave Without Pay") || secondHalf.contains("TR")) {
-                    secondHalfList.add("-");
-                }
-            }
-
-            Iterator itr7 = entry.getValue().iterator();
-            while (itr7.hasNext()) {
-                Object[] next = (Object[]) itr7.next();
-                String secondHalf = "" + next[1];
-                int firstHalfVal = 0;
-                int counter = 0;
-                String shiftName = "";
-
-                List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
-                long lunchTime = 0;
-                long outTime = 0;
-                long totalDayTime = 0;
-                long totalDayTime1 = 0;
-                long totalTime = 0;
-                long shiftdiffMinutes = 0;
-                boolean checkLunchTime = false;
-                int i = 1;
-                int j = 2;
-                String startTime = "";
-                String endTime = "";
-                SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                if (listPunch.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
+                    //                                    Lunch Breck Cut Off
+                    List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
+                    long lunchTime = 0;
+                    long outTime = 0;
+                    long totalDayTime = 0;
+                    long totalDayTime1 = 0;
+                    long totalTime = 0;
+                    long shiftdiffMinutes = 0;
+                    boolean checkLunchTime = false;
+                    int i = 1;
+                    int j = 2;
+                    String startTime = "";
+                    String endTime = "";
+                    SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     if (listPunch.size() > 2) {
                         while (listPunch.size() > i && listPunch.size() > j) {
 
@@ -1206,93 +978,332 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             i = i + 2;
                             j = j + 2;
                         }
-                    }
 
-                    String[] userTimeInStr = secondHalf.split("`");
-                    String[] userTimeInStr1 = userTimeInStr[1].split("!");
-                    String[] userTimeOutStr = secondHalf.split("!");
-                    String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
-                    Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
-                    Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
-                    Date userTimeOut1 = sdf2.parse("23:59");
-                    String[] startHoursStr = secondHalf.split("%");
-                    String[] firstStartHoursStr = startHoursStr[1].split("\\+");
-                    String[] endHoursStr = secondHalf.split("&");
-                    Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
-                    Calendar cal1 = Calendar.getInstance();
-                    cal1.setTime(firstStartHours);
-                    cal1.add(Calendar.MINUTE, -earlyMinute);
-                    String newTime1 = sdf2.format(cal1.getTime());
-                    Date flexibleInTime = sdf2.parse(newTime1);
-                    Date endHours = sdf2.parse(endHoursStr[1]);
-                    long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
-                    shiftdiffMinutes = shiftTotalTime / (60 * 1000);
-                    long diff1 = 0;
-                    long diff2 = 0;
-                    if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
-                        if (userTimeOut.before(userTimeIn)) {
-                            diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
-                        } else {
+                        String[] userTimeInStr = secondHalf.split("`");
+                        String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                        String[] userTimeOutStr = secondHalf.split("!");
+                        String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                        Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                        Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                        String[] startHoursStr = secondHalf.split("%");
+                        String[] firstStartHoursStr = startHoursStr[1].split("\\+");
+                        String[] endHoursStr = secondHalf.split("&");
+                        Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
+                        Calendar cal1 = Calendar.getInstance();
+                        cal1.setTime(firstStartHours);
+                        cal1.add(Calendar.MINUTE, -earlyMinute);
+                        String newTime1 = sdf2.format(cal1.getTime());
+                        Date flexibleInTime = sdf2.parse(newTime1);
+                        Date endHours = sdf2.parse(endHoursStr[1]);
+                        long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
+                        shiftdiffMinutes = shiftTotalTime / (60 * 1000);
+                        long diff1 = 0;
+                        long diff2 = 0;
+                        if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
                             diff1 = userTimeOut.getTime() - userTimeIn.getTime();
-                        }
 
-                    } else {
-                        if (userTimeOut.before(userTimeIn)) {
-                            diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
                         } else {
                             diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                         }
+                        totalDayTime = diff1 / (60 * 1000);
 
-                    }
-
-                    totalDayTime = diff1 / (60 * 1000);
-
-                    if (userTimeOut.before(userTimeIn)) {
-                        diff2 = userTimeOut1.getTime() - userTimeIn.getTime();
-                    } else {
                         diff2 = userTimeOut.getTime() - userTimeIn.getTime();
+                        totalDayTime1 = diff2 / (60 * 1000);
+
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                        long outTime1 = outTime;
+                        outTime = outTime - 30;
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+                        if (outTime1 == totalDayTime1) {
+                            totalTime = totalDayTime;
+                        } else if (outTime > 0) {
+                            totalTime = totalDayTime - outTime;
+                            checkLunchTime = true;
+                        }
+
                     }
 
-                    totalDayTime1 = diff2 / (60 * 1000);
+//                                    Lunch Breck Cut Off
+                    if (secondHalf.contains(" # ")) {
+                        String[] string1 = secondHalf.split("#");
+                        String[] string2 = string1[1].split("\\$");
+                        shiftName = string2[0].trim();
+
+                    }
+
+                    if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
+                        secondHalfList.add("WO");
+                    } else if (secondHalf.equals("AR")) {
+                        secondHalfList.add("AR/P");
+                    } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR") && !secondHalf.contains("Short Leave")) {
+                        secondHalfList.add("AB");
+                    } else if (secondHalf.contains("fullday")) {
+                        secondHalfList.add("PR");
+
+                    } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
+                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
+                            && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
+                        String[] leave = secondHalf.split("@");
+                        String[] leave1 = leave[1].split("#");
+                        String[] userTimeInStr = secondHalf.split("`");
+                        String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                        String[] userTimeOutStr = secondHalf.split("!");
+                        String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                        String[] secondHalfTimeStr = secondHalf.split("\\^");
+                        String[] secondHalfTimeStr1 = secondHalfTimeStr[1].split("&");
+                        String[] endHoursStr = secondHalf.split("&");
+                        String[] startHoursStr = secondHalf.split("%");
+                        String[] firstStartHoursStr = startHoursStr[1].split("\\+");
+
+                        Date userTimeIn = sdf2.parse(userTimeInStr1[0].trim());
+                        Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                        Date userTimeOut1 = sdf2.parse("23:59");
+                        Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
+                        String[] getInHours = userTimeInStr1[0].split(":");
+                        String[] getOutHours = userTimeOutStr1[0].split(":");
+                        String abc = getInHours[0].trim();
+                        String xyz = getOutHours[0].trim();
+                        int i11 = Integer.parseInt(abc) - Integer.parseInt(xyz);
+                        int totalDuration = 24 - i11;
+                        String totalDuration2 = getOutHours[0];
+                        Date endHours = sdf2.parse(endHoursStr[1]);
+                        Date secondHalfTimeStr2 = sdf2.parse(secondHalfTimeStr1[0]);
+
+                        Calendar cal1 = Calendar.getInstance();
+                        Calendar cal2 = Calendar.getInstance();
+                        cal1.setTime(firstStartHours);
+                        cal1.add(Calendar.MINUTE, -earlyMinute);
+                        String newTime1 = sdf2.format(cal1.getTime());
+
+                        Date flexibleInTime = sdf2.parse(newTime1);
+                        cal2.setTime(firstStartHours);
+                        cal2.add(Calendar.MINUTE, lateMinute);
+                        String newTime = sdf2.format(cal2.getTime());
+                        Date flexibleEndTime = sdf2.parse(newTime);
+
+                        long diff = endHours.getTime() - firstStartHours.getTime();
+                        long diffMinutes = diff / (60 * 1000);
+                        long diff1 = 0;
+                        if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
+                            if (userTimeOut.before(userTimeIn)) {
+                                diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
+                            } else {
+                                diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                            }
+                        } else {
+                            if (userTimeOut.before(userTimeIn)) {
+                                diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
+                            } else {
+                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                            }
+
+                        }
+                        long diffMinutes1 = diff1 / (60 * 1000);
+
+                        if (userTimeIn != null) {
+                            if (leave1[0].contains("AR")) {
+                                secondHalfList.add("AR/P");
+
+                            } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
+                                if (secondHalf.contains("*")) {
+                                    String[] shortArray = secondHalf.split("\\*");
+                                    String[] endArray = secondHalf.split("\\^");
+                                    String[] secondhalfstartTime = endArray[1].split("&");
+                                    Date shortIn = sdf2.parse(shortArray[1]);
+                                    Date shortend = sdf2.parse(endArray[1]);
+                                    Date secondhalfstartTime1 = sdf2.parse(secondhalfstartTime[0]);
+                                    if ((secondhalfstartTime1.before(shortIn) || secondhalfstartTime1.equals(shortIn)) && (shortIn.before(endHours) || shortIn.equals(endHours))) {
+                                        if (userTimeOut.after(secondHalfTimeStr2)) {
+                                            secondHalfList.add("SHL/P");
+                                        } else if (leave1[0].contains("~ AR")) {
+                                            secondHalfList.add("AR/P");
+                                        } else if (userTimeOut.before(secondHalfTimeStr2) || userTimeOut.equals(secondHalfTimeStr2)) {
+                                            secondHalfList.add("SHL/A");
+                                        } else {
+                                            secondHalfList.add("AB");
+                                        }
+                                    } else if (diffMinutes1 >= 240 && userTimeIn.before(secondHalfTimeStr2)) {
+                                        secondHalfList.add("PR");
+                                    }
+                                } else {
+                                    secondHalfList.add("AB");
+                                }
+                            } else if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
+                                secondHalfList.add("PR");
+                            } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
+                                    && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                    && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
+                                secondHalfList.add("AB");
+                            } else if (diffMinutes1 >= 240 && userTimeIn.after(secondHalfTimeStr2)) {
+                                secondHalfList.add("PR");
+                            } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                secondHalfList.add("PR");
+                            } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                secondHalfList.add("PR");
+                            } else if (null != leave1[0] && !leave1[0].contains("AB") && !leave1[0].contains("AR")) {
+                                if (leave1[0].contains("Casual Leave")) {
+                                }
+                                if (leave1[0].contains("Privilege Leave")) {
+                                }
+                                if (leave1[0].contains("Sick Leave")) {
+                                }
+                                secondHalfList.add(" " + leave1[0].trim());
+
+                            } else if (leave1[0].contains("AB")) {
+                                secondHalfList.add("AB");
+                            } else {
+                                secondHalfList.add("AB");
+                            }
+
+                        } else if (userTimeIn != null && !secondHalf.contains("WO") && !secondHalf.contains("?")) {
+                            secondHalfList.add("AB");
+                        } else if (secondHalf.contains("WO") || secondHalf.contains("?")) {
+                            secondHalfList.add("-");
+                        }
+
+                    } else if (secondHalf.equals("WO")) {
+                        secondHalfList.add("-");
+                    } else if (secondHalf.equals("AB")) {
+                        secondHalfList.add("AB");
+                    } else if (secondHalf.equals("Casual Leave") || secondHalf.equals("Short Leave") || secondHalf.equals("Privilege Leave") || secondHalf.equals("Sick Leave")
+                            || secondHalf.equals("Paternity Leave") || !secondHalf.equals("C Off Leave") || secondHalf.equals("Maternity Leave") || secondHalf.equals("Leave Without Pay") || secondHalf.contains("TR")) {
+                        secondHalfList.add("-");
+                    }
+                } catch (Exception e) {
+                }
+            }
+
+            Iterator itr7 = entry.getValue().iterator();
+            while (itr7.hasNext()) {
+                try {
+                    Object[] next = (Object[]) itr7.next();
+                    String secondHalf = "" + next[1];
+                    int firstHalfVal = 0;
+                    int counter = 0;
+                    String shiftName = "";
+
+                    List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
+                    long lunchTime = 0;
+                    long outTime = 0;
+                    long totalDayTime = 0;
+                    long totalDayTime1 = 0;
+                    long totalTime = 0;
+                    long shiftdiffMinutes = 0;
+                    boolean checkLunchTime = false;
+                    int i = 1;
+                    int j = 2;
+                    String startTime = "";
+                    String endTime = "";
+                    SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    if (listPunch.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
+                        if (listPunch.size() > 2) {
+                            while (listPunch.size() > i && listPunch.size() > j) {
+
+                                Object[] startLunchTime = (Object[]) listPunch.get(i);
+                                Object[] endLunchTime = (Object[]) listPunch.get(j);
+                                startTime = (String) startLunchTime[0];
+                                endTime = (String) endLunchTime[0];
+                                Date launchStrTime = sdf3.parse(startTime);
+                                Date launchEndTime = sdf3.parse(endTime);
+                                long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                                lunchTime = diff / (60 * 1000);
+                                outTime = outTime + lunchTime;
+                                i = i + 2;
+                                j = j + 2;
+                            }
+                        }
+
+                        String[] userTimeInStr = secondHalf.split("`");
+                        String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                        String[] userTimeOutStr = secondHalf.split("!");
+                        String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                        Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                        Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                        Date userTimeOut1 = sdf2.parse("23:59");
+                        String[] startHoursStr = secondHalf.split("%");
+                        String[] firstStartHoursStr = startHoursStr[1].split("\\+");
+                        String[] endHoursStr = secondHalf.split("&");
+                        Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
+                        Calendar cal1 = Calendar.getInstance();
+                        cal1.setTime(firstStartHours);
+                        cal1.add(Calendar.MINUTE, -earlyMinute);
+                        String newTime1 = sdf2.format(cal1.getTime());
+                        Date flexibleInTime = sdf2.parse(newTime1);
+                        Date endHours = sdf2.parse(endHoursStr[1]);
+                        long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
+                        shiftdiffMinutes = shiftTotalTime / (60 * 1000);
+                        long diff1 = 0;
+                        long diff2 = 0;
+                        if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
+                            if (userTimeOut.before(userTimeIn)) {
+                                diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
+                            } else {
+                                diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                            }
+
+                        } else {
+                            if (userTimeOut.before(userTimeIn)) {
+                                diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
+                            } else {
+                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                            }
+
+                        }
+
+                        totalDayTime = diff1 / (60 * 1000);
+
+                        if (userTimeOut.before(userTimeIn)) {
+                            diff2 = userTimeOut1.getTime() - userTimeIn.getTime();
+                        } else {
+                            diff2 = userTimeOut.getTime() - userTimeIn.getTime();
+                        }
+
+                        totalDayTime1 = diff2 / (60 * 1000);
 
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                    long outTime1 = outTime;
-                    outTime = outTime - 30;
+                        long outTime1 = outTime;
+                        outTime = outTime - 30;
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                    if (outTime > 0 && outTime1 != totalDayTime1) {
-                        totalTime = totalDayTime - outTime;
-                        double empHour = (double) totalTime / 60;
-                        int hours = (int) empHour;
-                        int minutes = (int) (empHour * 60) % 60;
-                        String hour = "" + hours;
-                        String minute = "" + minutes;
-                        if (minutes < 10 && minutes > 0) {
-                            minute = "0" + minute;
-                        } else if (minutes < 0) {
-                            minute = "00";
+                        if (outTime > 0 && outTime1 != totalDayTime1) {
+                            totalTime = totalDayTime - outTime;
+                            double empHour = (double) totalTime / 60;
+                            int hours = (int) empHour;
+                            int minutes = (int) (empHour * 60) % 60;
+                            String hour = "" + hours;
+                            String minute = "" + minutes;
+                            if (minutes < 10 && minutes > 0) {
+                                minute = "0" + minute;
+                            } else if (minutes < 0) {
+                                minute = "00";
+                            }
+                            String workingHours = hour + ":" + minute;
+                            workingHour.add(workingHours);
+
+                        } else {
+                            double empHour = (double) totalDayTime / 60;
+                            int hours = (int) empHour;
+                            int minutes = (int) (empHour * 60) % 60;
+                            String hour = "" + hours;
+                            String minute = "" + minutes;
+                            if (minutes < 10 && minutes > 0) {
+                                minute = "0" + minute;
+                            } else if (minutes < 0) {
+                                minute = "00";
+                            }
+                            String workingHours = hour + ":" + minute;
+                            workingHour.add(workingHours);
                         }
-                        String workingHours = hour + ":" + minute;
-                        workingHour.add(workingHours);
 
                     } else {
-                        double empHour = (double) totalDayTime / 60;
-                        int hours = (int) empHour;
-                        int minutes = (int) (empHour * 60) % 60;
-                        String hour = "" + hours;
-                        String minute = "" + minutes;
-                        if (minutes < 10 && minutes > 0) {
-                            minute = "0" + minute;
-                        } else if (minutes < 0) {
-                            minute = "00";
-                        }
-                        String workingHours = hour + ":" + minute;
-                        workingHour.add(workingHours);
+                        workingHour.add("-");
                     }
-
-                } else {
+                } catch (Exception e) {
                     workingHour.add("-");
+
                 }
 
             }
@@ -1304,14 +1315,22 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //        if (("".equals(startDate) || null == startDate) || ("".equals(endDate) || null == endDate)) {
 //            empDetail = l1;
 //        }
-        mv.getModelMap().put("firstHalfList", newList);
-        mv.getModelMap().put("secondHalfList", secondHalfList);
-        mv.getModelMap().put("workingHour", workingHour);
-        mv.getModelMap().put("empDetail", empDetail);
-        mv.getModelMap().put("map", map);
-        mv.getModelMap().put("employeeAdvanceSearch", employeeAdvanceSearch);
+        mv.getModelMap()
+                .put("firstHalfList", newList);
+        mv.getModelMap()
+                .put("secondHalfList", secondHalfList);
+        mv.getModelMap()
+                .put("workingHour", workingHour);
+        mv.getModelMap()
+                .put("empDetail", empDetail);
+        mv.getModelMap()
+                .put("map", map);
+        mv.getModelMap()
+                .put("employeeAdvanceSearch", employeeAdvanceSearch);
         Date notflexibleSupportDate;
-        if (startDate.contains("-")) {
+
+        if (startDate.contains(
+                "-")) {
             notflexibleSupportDate = sdf1.parse(startDate);
         } else {
             notflexibleSupportDate = sdf.parse(startDate);
@@ -1320,10 +1339,14 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         Date notflexibleSupportDate1 = sdf.parse(FixedFlexibleDate);
         Calendar calForFlexiNotSupport1 = Calendar.getInstance();
         Calendar calForFlexiNotSupport2 = Calendar.getInstance();
+
         calForFlexiNotSupport1.setTime(notflexibleSupportDate);
+
         calForFlexiNotSupport2.setTime(notflexibleSupportDate1);
 
-        if (flexible == true && calForFlexiNotSupport2.get(Calendar.MONTH) != calForFlexiNotSupport1.get(Calendar.MONTH)) {
+        if (flexible
+                == true && calForFlexiNotSupport2.get(Calendar.MONTH)
+                != calForFlexiNotSupport1.get(Calendar.MONTH)) {
 //        if (flexible == true) {
             mv.setViewName("Shift/EmployeeFlexibleDayWisePunchDataReport");
         } else {

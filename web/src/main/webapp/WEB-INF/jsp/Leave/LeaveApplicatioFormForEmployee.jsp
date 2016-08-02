@@ -22,7 +22,7 @@
                     <br>If you avail less than 3 leaves, one slot of 3 leaves will be deducted from your PT Leave Balance\
                     <br><br><br><div><input type="checkbox" style="width: 20px;height: 20px;" id="Public_Web" onclick="pat1(this);">&nbsp;<font size="4">I have read and understood the Important Policy Notes pertaining to Paternity Leave and I agree to follow the same.</font></div></b>\
                      <div id="accept_button_id" style="display: none;"> <p align="center"><button type="button" onclick="abClick();"  class="btn btn-primary" style="width: 100px;" data-original-title="" title="">Accept</button></p></div>',
-                callback: function () { /* your callback code */
+                callback: function() { /* your callback code */
                 }
             })
 //            bootbox.alert("Hello world!", function () {
@@ -68,7 +68,7 @@
 //            alert(selectedText);
             if (document.getElementById("leaveTypeMaster.id").value == '') {
                 document.getElementById("leaveTypeMasterError").innerHTML = "- It must not be empty or whitespace";
-                setTimeout(function () {
+                setTimeout(function() {
                     $("#leaveTypeMasterError").fadeOut();
                 }, 10000);
                 flag3 = false;
@@ -199,10 +199,10 @@
             }
         }
 
-        $(function () {
+        $(function() {
             var previous;
             var strUser;
-            $('#leaveTypeMaster.id').focus(function () {
+            $('#leaveTypeMaster.id').focus(function() {
                 previous = $("#leaveTypeMaster.id option:selected").text();
                 var strUser1 = previous.split('(');
                 strUser = strUser1[0]
@@ -211,7 +211,7 @@
 //                alert('xxxxxxxxxxxx' + document.getElementById(strUser).innerHTML);
                 document.getElementById(strUser).innerHTML = 0;
                 document.getElementById(strUser + "2").innerHTML = 0;
-            }).change(function () {
+            }).change(function() {
 
             })
         })();
@@ -253,7 +253,9 @@
             var selectedText = leaveType.options[leaveType.selectedIndex].text;
             var selectedTextArray = selectedText.split('(');
             selectedText = selectedTextArray[0];
-            if (selectedText == "Privilege Leave" || selectedText == "Paternity Leave") {
+            document.getElementById('Sick Leave1').innerHTML;
+            document.getElementById('Casual Leave1').innerHTML;
+            if (selectedText == "Paternity Leave") {
                 if (leaveEndDate == leaveStartDate) {
                     $("#leaveStartDate_SelectFullOrHalfId option[value='Fullday']").show();
                     $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
@@ -274,6 +276,55 @@
                     $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
                     $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
                 }
+            } else if (selectedText == "Privilege Leave") {
+                if (leaveEndDate == leaveStartDate) {
+                    if (document.getElementById('Sick Leave1').innerHTML <= 0 && document.getElementById('Casual Leave1').innerHTML <= 0) {
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='Fullday']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").show();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").show();
+                    } else {
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='Fullday']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                    }
+
+                } else if (leaveEndDate == "") {
+                    if (document.getElementById('Sick Leave1').innerHTML <= 0 && document.getElementById('Casual Leave1').innerHTML <= 0) {
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='Fullday']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").show();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").show();
+                    } else {
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='Fullday']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                    }
+
+                }
+                else {
+                    if (document.getElementById('Sick Leave1').innerHTML <= 0 && document.getElementById('Casual Leave1').innerHTML <= 0) {
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='Fullday']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").show();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").show();
+                    } else {
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='Fullday']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                    }
+
+                }
+
             } else {
                 if (leaveEndDate == leaveStartDate) {
                     $("#leaveStartDate_SelectFullOrHalfId option[value='Fullday']").show();
@@ -357,7 +408,7 @@
                 if (days > 60) {
                     $("#leaveWithoutPayLeaveDiv").show();
                     document.getElementById("endDate").value = '';
-                    setTimeout(function () {
+                    setTimeout(function() {
                         $("#leaveWithoutPayLeaveDiv").fadeOut();
                     }, 5000);
                 }
@@ -433,7 +484,7 @@
 
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#sickLeaveDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#sickLeaveDiv").fadeOut();
                                     }, 5000);
                                 }
@@ -447,7 +498,7 @@
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#calsualLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#calsualLeaveDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -462,7 +513,7 @@
                                 if (document.getElementById('Sick Leave1').innerHTML > 0) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
                                         $("#plDiv").show();
-                                        setTimeout(function () {
+                                        setTimeout(function() {
                                             $("#plDiv").fadeOut();
                                         }, 5000);
                                         document.getElementById("noOfDays").value = "";
@@ -484,13 +535,13 @@
                                     $("#leaveWithoutPayLeaveDiv").show();
                                     document.getElementById("endDate").value = '';
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#leaveWithoutPayLeaveDiv").fadeOut();
                                     }, 5000);
                                 }
                                 if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -505,14 +556,14 @@
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#paternityLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#paternityLeaveDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
                                 }
                                 if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -525,7 +576,7 @@
 
                                 if (parseFloat(document.getElementById(strUser).innerHTML) > parseFloat(document.getElementById(strUser + "1").innerHTML)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById(strUser).innerHTML = 0;
@@ -550,7 +601,7 @@
 
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#sickLeaveDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#sickLeaveDiv").fadeOut();
                                     }, 5000);
                                 }
@@ -565,7 +616,7 @@
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#calsualLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#calsualLeaveDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -589,13 +640,13 @@
                                     $("#leaveWithoutPayLeaveDiv").show();
                                     document.getElementById("endDate").value = '';
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#leaveWithoutPayLeaveDiv").fadeOut();
                                     }, 5000);
                                 }
                                 if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -611,14 +662,14 @@
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#paternityLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#paternityLeaveDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
                                 }
                                 if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -631,7 +682,7 @@
                                 document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                                 if (parseFloat(document.getElementById(strUser).innerHTML) > parseFloat(document.getElementById(strUser + "1").innerHTML)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 10000);
                                     document.getElementById(strUser).innerHTML = 0;
@@ -658,7 +709,7 @@
                             if (strUser == "Sick Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#sickLeaveDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#sickLeaveDiv").fadeOut();
                                     }, 5000);
                                 }
@@ -671,7 +722,7 @@
                             if (strUser == "Casual Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#calsualLeaveDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -694,13 +745,13 @@
                                     $("#leaveWithoutPayLeaveDiv").show();
                                     document.getElementById("endDate").value = '';
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#leaveWithoutPayLeaveDiv").fadeOut();
                                     }, 5000);
                                 }
                                 if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -715,14 +766,14 @@
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#paternityLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#paternityLeaveDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
                                 }
                                 if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -736,7 +787,7 @@
                                 if (parseFloat(document.getElementById(strUser).innerHTML) > parseFloat(document.getElementById(strUser + "1").innerHTML)) {
 
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 10000);
                                     document.getElementById(strUser).innerHTML = 0;
@@ -778,7 +829,7 @@
                             if (strUser == "Sick Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#sickLeaveDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#sickLeaveDiv").fadeOut();
                                     }, 5000);
                                 }
@@ -792,7 +843,7 @@
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#calsualLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#calsualLeaveDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -804,10 +855,10 @@
                                 document.getElementById('Privilege Leave2').innerHTML = document.getElementById('Privilege Leave1').innerHTML;
                             }
                             if (strUser == "Privilege Leave") {
-                                 if (document.getElementById('Sick Leave1').innerHTML > 0) {
+                                if (document.getElementById('Sick Leave1').innerHTML > 0) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
                                         $("#plDiv").show();
-                                        setTimeout(function () {
+                                        setTimeout(function() {
                                             $("#plDiv").fadeOut();
                                         }, 5000);
                                         document.getElementById("noOfDays").value = "";
@@ -829,13 +880,13 @@
                                     $("#leaveWithoutPayLeaveDiv").show();
                                     document.getElementById("endDate").value = '';
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#leaveWithoutPayLeaveDiv").fadeOut();
                                     }, 5000);
                                 }
                                 if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -850,14 +901,14 @@
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#paternityLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#paternityLeaveDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
                                 }
                                 if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -871,7 +922,7 @@
                                 document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                                 if (parseFloat(document.getElementById(strUser).innerHTML) > parseFloat(document.getElementById(strUser + "1").innerHTML)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 10000);
 //                            }
@@ -896,7 +947,7 @@
                             if (strUser == "Sick Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#sickLeaveDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#sickLeaveDiv").fadeOut();
                                     }, 5000);
                                 }
@@ -910,7 +961,7 @@
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#calsualLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#calsualLeaveDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -934,13 +985,13 @@
                                     $("#leaveWithoutPayLeaveDiv").show();
                                     document.getElementById("endDate").value = '';
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#leaveWithoutPayLeaveDiv").fadeOut();
                                     }, 5000);
                                 }
                                 if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -955,14 +1006,14 @@
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#paternityLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#paternityLeaveDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
                                 }
                                 if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -975,7 +1026,7 @@
 //
                                 if (parseFloat(document.getElementById(strUser).innerHTML) > parseFloat(document.getElementById(strUser + "1").innerHTML)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 10000);
 //                            }
@@ -1002,7 +1053,7 @@
                             if (strUser == "Sick Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#sickLeaveDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#sickLeaveDiv").fadeOut();
                                     }, 5000);
                                 }
@@ -1017,7 +1068,7 @@
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#calsualLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#calsualLeaveDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -1042,13 +1093,13 @@
                                     $("#leaveWithoutPayLeaveDiv").show();
                                     document.getElementById("endDate").value = '';
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#leaveWithoutPayLeaveDiv").fadeOut();
                                     }, 5000);
                                 }
                                 if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -1063,14 +1114,14 @@
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#paternityLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#paternityLeaveDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
                                 }
                                 if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -1082,7 +1133,7 @@
                             } else {
                                 if (parseFloat(document.getElementById(strUser).innerHTML) > parseFloat(document.getElementById(strUser + "1").innerHTML)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById(strUser).innerHTML = 0;
@@ -1108,7 +1159,7 @@
                             if (strUser == "Sick Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#sickLeaveDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#sickLeaveDiv").fadeOut();
                                     }, 5000);
                                 }
@@ -1122,7 +1173,7 @@
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#calsualLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#calsualLeaveDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -1146,13 +1197,13 @@
                                     $("#leaveWithoutPayLeaveDiv").show();
                                     document.getElementById("endDate").value = '';
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#leaveWithoutPayLeaveDiv").fadeOut();
                                     }, 5000);
                                 }
                                 if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -1166,14 +1217,14 @@
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#paternityLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#paternityLeaveDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
                                 }
                                 if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById("noOfDays").value = "";
@@ -1185,7 +1236,7 @@
                             } else {
                                 if (parseFloat(document.getElementById(strUser).innerHTML) > parseFloat(document.getElementById(strUser + "1").innerHTML)) {
                                     $("#balanceDiv").show();
-                                    setTimeout(function () {
+                                    setTimeout(function() {
                                         $("#balanceDiv").fadeOut();
                                     }, 5000);
                                     document.getElementById(strUser).innerHTML = 0;
@@ -1223,7 +1274,7 @@
             var newstrDate = leaveTypes.options[leaveTypes.selectedIndex].text;
             strUser1 = newstrDate.split('(');
             strUser = strUser1[1].split(')');
-           
+
             if (parseFloat(strUser[0]) >= 0) {
                 var now = new Date();
                 var Enddate1 = Enddate.split(' - ');
@@ -1260,7 +1311,7 @@
                 document.getElementById('endDateShort').value = aDate + "/" + aMonth + "/" + d2.getFullYear() + " - " + aHours + ":" + aMinutes;
             } else {
                 $("#balanceDiv").show();
-                setTimeout(function () {
+                setTimeout(function() {
                     $("#balanceDiv").fadeOut();
                 }, 10000);
                 document.getElementById('startDateShort').value = '';
@@ -1319,14 +1370,14 @@
                         url: "leaveEmployeeDetail.htm?act=checkWeekOffOrHolidayForSDate&strDate=" + strDate,
                         data: {},
                         dataType: "text",
-                        success: function (responseTxt) {
+                        success: function(responseTxt) {
                             document.getElementById("sDateHolidayError").innerHTML = responseTxt;
                             if (responseTxt != '') {
                                 document.getElementById("startDate").value = "";
                             }
 
                         },
-                        error: function () {
+                        error: function() {
 
                         }
                     });
@@ -1337,13 +1388,13 @@
                         url: "leaveEmployeeDetail.htm?act=checkWeekOffOrHolidayForEDate&enDate=" + enDate,
                         data: {},
                         dataType: "text",
-                        success: function (responseTxt) {
+                        success: function(responseTxt) {
                             document.getElementById("eDateHolidayError").innerHTML = responseTxt;
                             if (responseTxt != '') {
                                 document.getElementById("endDate").value = "";
                             }
                         },
-                        error: function () {
+                        error: function() {
                             //                            alert('Error occured');
                         }
                     });
@@ -1358,11 +1409,11 @@
                         url: "leaveEmployeeDetail.htm?act=getActualDayByAjax&strDate=" + strDate + "&enDate=" + enDate + "&sDateStatus=" + sDateStatus + "&eDateStatus=" + eDateStatus,
                         data: {},
                         dataType: "text",
-                        success: function (responseTxt) {
+                        success: function(responseTxt) {
                             document.getElementById("hiddenDays").value = responseTxt;
                             daysCount();
                         },
-                        error: function () {
+                        error: function() {
                         }
                     });
                 }
@@ -1381,7 +1432,7 @@
             document.getElementById("endDateSelectFullOrHalfError").innerHTML = "";
         }
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             var skillsSelect = document.getElementById("leaveTypeMaster.id");
             var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
             var selectedTextArray = selectedText.split('(');
@@ -1415,7 +1466,7 @@
                         url: "leaveEmployeeDetail.htm?act=checkPresentOnSDate&strDate=" + strDate + "&sDateStatus=" + sDateStatus,
                         data: {},
                         dataType: "text",
-                        success: function (responseTxt) {
+                        success: function(responseTxt) {
                             document.getElementById("presetErrorDiv").innerHTML = responseTxt;
                             if (responseTxt != '') {
                                 document.getElementById("startDate").value = "";
@@ -1426,7 +1477,7 @@
                             }
 
                         },
-                        error: function () {
+                        error: function() {
 
                         }
                     });
@@ -1437,7 +1488,7 @@
                         url: "leaveEmployeeDetail.htm?act=checkPresentOneDate&enDate=" + enDate + "&eDateStatus=" + eDateStatus,
                         data: {},
                         dataType: "text",
-                        success: function (responseTxt) {
+                        success: function(responseTxt) {
                             document.getElementById("endpresetErrorDiv").innerHTML = responseTxt;
                             if (responseTxt != '') {
                                 document.getElementById("endDate").value = "";
@@ -1445,7 +1496,7 @@
                                 document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
                             }
                         },
-                        error: function () {
+                        error: function() {
 //                            alert('Error occured');
                         }
                     });
@@ -1596,8 +1647,8 @@
                                                         <div class="col-sm-2">
                                                             <label></label>
                                                             <select id="leaveStartDate_SelectFullOrHalfId" name="leaveStartDate_SelectFullOrHalfId" style="margin-top:5px" class="form-control" onChange="leaveTypecheck();
-                                                                    checkPresentAjax();
-                                                                    daysCount();">
+            checkPresentAjax();
+            daysCount();">
                                                                 <option value="">--SELECT--</option>
                                                                 <!--<option value="Fullday">Full Day</option>-->
                                                                 <!--<option value="FirstHalf">First Half</option>-->
@@ -1647,8 +1698,8 @@
                                                         <div class="col-sm-2">
                                                             <label></label>
                                                             <select id="leaveEndDate_SelectFullOrHalfId" name="leaveEndDate_SelectFullOrHalfId" style="margin-top:5px" class="form-control" onChange="leaveTypecheck();
-                                                                    checkPresentAjax();
-                                                                    daysCount();">
+            checkPresentAjax();
+            daysCount();">
                                                                 <option value="">--SELECT--</option>
                                                                 <c:choose>
                                                                     <c:when test="${(leaveEmployeeDetail.endDateStatus).contains('Fullday')}">

@@ -34,27 +34,29 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
 
         return getHibernateTemplate().find(query);
     }
+
     @Override
     public List<?> readByCurrentDateWiseEmployeeShift(T object) {
         ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = (ShiftGenerateMonthlySchedule) object;
-         String query = "";
-       
+        String query = "";
+
         query += " FROM ShiftGenerateMonthlySchedule a"
                 + " Where a.employeeMaster=" + shiftGenerateMonthlySchedule.getEmployeeMaster().getId()
-                + " and a.shiftMonth="+shiftGenerateMonthlySchedule.getShiftMonth()
-                + " and a.shiftYear="+shiftGenerateMonthlySchedule.getShiftYear();
+                + " and a.shiftMonth=" + shiftGenerateMonthlySchedule.getShiftMonth()
+                + " and a.shiftYear=" + shiftGenerateMonthlySchedule.getShiftYear();
 
-            return getHibernateTemplate().find(query);
+        return getHibernateTemplate().find(query);
     }
+
     @Override
-    public List<?> readByDayWiseEmployeeShiftData(T object,int day) {
+    public List<?> readByDayWiseEmployeeShiftData(T object, int day) {
         ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = (ShiftGenerateMonthlySchedule) object;
-         String query = "";
-       
-        query += "SELECT day"+day+" FROM ShiftGenerateMonthlySchedule a"
+        String query = "";
+
+        query += "SELECT concat(day_" + day + ") FROM ShiftGenerateMonthlySchedule a"
                 + " Where a.employeeMaster=" + shiftGenerateMonthlySchedule.getEmployeeMaster().getId()
-                + " and a.shiftMonth="+shiftGenerateMonthlySchedule.getShiftMonth()
-                + " and a.shiftYear="+shiftGenerateMonthlySchedule.getShiftYear();
+                + " and a.shiftMonth=" + Integer.parseInt(shiftGenerateMonthlySchedule.getShiftMonth())
+                + " and a.shiftYear=" + Integer.parseInt(shiftGenerateMonthlySchedule.getShiftYear());
 
         return getHibernateTemplate().find(query);
     }

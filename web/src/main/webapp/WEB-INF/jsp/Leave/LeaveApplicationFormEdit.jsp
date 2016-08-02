@@ -251,7 +251,9 @@
             var selectedText = leaveType.options[leaveType.selectedIndex].text;
             var selectedTextArray = selectedText.split('(');
             selectedText = selectedTextArray[0];
-            if (selectedText == "Privilege Leave" || selectedText == "Paternity Leave") {
+            document.getElementById('Sick Leave1').innerHTML;
+            document.getElementById('Casual Leave1').innerHTML;
+            if (selectedText == "Paternity Leave") {
                 if (leaveEndDate == leaveStartDate) {
                     $("#leaveStartDate_SelectFullOrHalfId option[value='Fullday']").show();
                     $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
@@ -272,6 +274,55 @@
                     $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
                     $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
                 }
+            } else if (selectedText == "Privilege Leave") {
+                if (leaveEndDate == leaveStartDate) {
+                    if (document.getElementById('Sick Leave1').innerHTML <= 0 && document.getElementById('Casual Leave1').innerHTML <= 0) {
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='Fullday']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").show();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").show();
+                    } else {
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='Fullday']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                    }
+
+                } else if (leaveEndDate == "") {
+                    if (document.getElementById('Sick Leave1').innerHTML <= 0 && document.getElementById('Casual Leave1').innerHTML <= 0) {
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='Fullday']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").show();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").show();
+                    } else {
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='Fullday']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                    }
+
+                }
+                else {
+                    if (document.getElementById('Sick Leave1').innerHTML <= 0 && document.getElementById('Casual Leave1').innerHTML <= 0) {
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='Fullday']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").show();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").show();
+                    } else {
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='Fullday']").show();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                    }
+
+                }
+
             } else {
                 if (leaveEndDate == leaveStartDate) {
                     $("#leaveStartDate_SelectFullOrHalfId option[value='Fullday']").show();

@@ -69,6 +69,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellUtil;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.validation.BindException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -821,190 +822,63 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
     }
 
     private synchronized void overTimeEntry() throws Exception {
+
         List<?> list = employeeShiftDataService.todaysData();
         if (!list.isEmpty()) {
             for (Object o : list) {
+                try {
+                    EmployeeShiftData employeeShiftData = (EmployeeShiftData) o;
+                    ShiftMaster shiftMaster = new ShiftMaster();
+                    employeeShiftData.getEmployeeMaster();
+                    int id = employeeShiftData.getShiftMaster().getId();
+                    shiftMaster = shiftMasterService.readById(id);
+                    String shiftStartDate = shiftMaster.getStartTime().trim();
+                    String shiftEndDate = shiftMaster.getEndTime().trim();
+                    String firstHalfEndDate = shiftMaster.getHalfEndTime1().trim();
+                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
+                    Calendar cal1 = Calendar.getInstance();
+                    Calendar cal2 = Calendar.getInstance();
+                    Calendar cal7 = Calendar.getInstance();
+                    Date date1 = new Date();
+                    String s = formatter.format(date1);
+                    Date date = formatter.parse(s);
+                    int hour = Integer.parseInt(shiftStartDate.split(":")[0]);
+                    int minute = Integer.parseInt(shiftStartDate.split(":")[1]);
+                    int hour1 = Integer.parseInt(shiftEndDate.split(":")[0]);
+                    int minute1 = Integer.parseInt(shiftEndDate.split(":")[1]);
+                    int hour2 = Integer.parseInt(firstHalfEndDate.split(":")[0]);
+                    int minute2 = Integer.parseInt(firstHalfEndDate.split(":")[1]);
+                    cal1.setTime(date);
+                    cal2.setTime(date);
+                    cal7.setTime(date);
 
-                EmployeeShiftData employeeShiftData = (EmployeeShiftData) o;
-                ShiftMaster shiftMaster = new ShiftMaster();
-                employeeShiftData.getEmployeeMaster();
-                int id = employeeShiftData.getShiftMaster().getId();
-                shiftMaster = shiftMasterService.readById(id);
-                String shiftStartDate = shiftMaster.getStartTime().trim();
-                String shiftEndDate = shiftMaster.getEndTime().trim();
-                String firstHalfEndDate = shiftMaster.getHalfEndTime1().trim();
-                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
-                Calendar cal1 = Calendar.getInstance();
-                Calendar cal2 = Calendar.getInstance();
-                Calendar cal7 = Calendar.getInstance();
-                Date date1 = new Date();
-                String s = formatter.format(date1);
-                Date date = formatter.parse(s);
-                int hour = Integer.parseInt(shiftStartDate.split(":")[0]);
-                int minute = Integer.parseInt(shiftStartDate.split(":")[1]);
-                int hour1 = Integer.parseInt(shiftEndDate.split(":")[0]);
-                int minute1 = Integer.parseInt(shiftEndDate.split(":")[1]);
-                int hour2 = Integer.parseInt(firstHalfEndDate.split(":")[0]);
-                int minute2 = Integer.parseInt(firstHalfEndDate.split(":")[1]);
-                cal1.setTime(date);
-                cal2.setTime(date);
-                cal7.setTime(date);
+                    cal1.set(Calendar.HOUR, hour);
+                    cal1.set(Calendar.MINUTE, minute);
+                    cal2.set(Calendar.HOUR, hour1);
+                    cal2.set(Calendar.MINUTE, minute1);
 
-                cal1.set(Calendar.HOUR, hour);
-                cal1.set(Calendar.MINUTE, minute);
-                cal2.set(Calendar.HOUR, hour1);
-                cal2.set(Calendar.MINUTE, minute1);
+                    cal7.set(Calendar.HOUR, hour2);
+                    cal7.set(Calendar.MINUTE, minute2);
 
-                cal7.set(Calendar.HOUR, hour2);
-                cal7.set(Calendar.MINUTE, minute2);
+                    long difference = cal2.getTime().getTime() - cal1.getTime().getTime();
+                    String empStartTime = employeeShiftData.getInDateTime();
+                    String empEndTime = employeeShiftData.getOutDateTime();
 
-                long difference = cal2.getTime().getTime() - cal1.getTime().getTime();
-                String empStartTime = employeeShiftData.getInDateTime();
-                String empEndTime = employeeShiftData.getOutDateTime();
+                    Date date3 = format.parse(empStartTime);
+                    Date date4 = format.parse(empEndTime);
+                    Calendar cal3 = Calendar.getInstance();
+                    Calendar cal4 = Calendar.getInstance();
+                    cal3.setTime(date3);
+                    cal4.setTime(date4);
 
-                Date date3 = format.parse(empStartTime);
-                Date date4 = format.parse(empEndTime);
-                Calendar cal3 = Calendar.getInstance();
-                Calendar cal4 = Calendar.getInstance();
-                cal3.setTime(date3);
-                cal4.setTime(date4);
+                    Calendar cal5 = Calendar.getInstance();
+                    Date satdate = format.parse(empStartTime);
+                    cal5.setTime(satdate);
+                    SimpleDateFormat format2 = new SimpleDateFormat("EEEE");
+                    String dayName = format2.format(date);
+                    int dayOfWeek = cal5.get(Calendar.WEEK_OF_MONTH);
 
-                Calendar cal5 = Calendar.getInstance();
-                Date satdate = format.parse(empStartTime);
-                cal5.setTime(satdate);
-                SimpleDateFormat format2 = new SimpleDateFormat("EEEE");
-                String dayName = format2.format(date);
-                int dayOfWeek = cal5.get(Calendar.WEEK_OF_MONTH);
-
-                EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
-                EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
-                String coff = "C Off Leave";
-                LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
-                List<?> coffList = leaveTypeMasterService.readLeaveType(coff);
-                if (!coffList.isEmpty()) {
-                    leaveTypeMaster = (LeaveTypeMaster) coffList.get(0);
-                }
-
-                employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
-                employeeLeaveBalance.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-                EmployeeMaster employeeMaster = new EmployeeMaster();
-                employeeMaster = employeeMasterService.readById(employeeShiftData.getEmployeeMaster().getId());
-                int levelId = employeeMaster.getLevelMaster().getId();
-                LevelMaster levelMaster = new LevelMaster();
-                levelMaster = levelMasterService.readById(levelId);
-
-                int zydexLocationId = employeeMaster.getZydexLocationMaster().getId();
-                ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
-                zydexLocationMaster = zydexLocationMasterService.readById(zydexLocationId);
-                String zydexLocationName = zydexLocationMaster.getZydexLocation();
-
-                if (zydexLocationName.equals("HO") || zydexLocationName.equals("R&D")) {
-                    if (dayName.equals("Saturday") && dayOfWeek == 2) {
-                        difference = cal2.getTime().getTime() - cal7.getTime().getTime();
-                    }
-                }
-
-                long difference2 = cal4.getTime().getTime() - cal3.getTime().getTime();
-                long mainDiff = difference2 - difference;
-                long diffMin1 = ((mainDiff / 1000) / 60) / 60;
-                String time = "";
-                String time2 = "";
-                if (!zydexLocationName.equals("HO") && !zydexLocationName.equals("R&D")) {
-                    if (diffMin1 >= 3 && diffMin1 <= 5.9) {
-                        time = "0.3";
-                    } else if (diffMin1 >= 6 && diffMin1 <= 8.9) {
-                        time = "0.5";
-                    } else if (diffMin1 >= 9) {
-                        time = "0.8";
-                    }
-                } else {
-                    if (diffMin1 >= 3.6 && diffMin1 <= 7.9) {
-                        time2 = "0.4";
-                    } else if (diffMin1 >= 8) {
-                        time2 = "0.8";
-                    }
-                }
-
-                if (!zydexLocationName.equals("HO") && !zydexLocationName.equals("R&D")) {
-                    if (!time.equals("")) {
-                        if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
-                            List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
-                            if (!empBalList.isEmpty()) {
-                                employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
-                                float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
-                                time1 = time1 + Float.parseFloat(time);
-                                employeeLeaveBalance1.setNoOfLeaveRemain(time1);
-                                employeeLeaveBalanceService.update(employeeLeaveBalance1);
-                            } else {
-                                employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
-                                employeeLeaveBalance1.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-                                employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time));
-                                employeeLeaveBalanceService.create(employeeLeaveBalance1);
-                            }
-                            Date date5 = new Date();
-                            String todayDate = formatter.format(date5);
-                            OverTimeMaster overTimeMaster = new OverTimeMaster();
-                            overTimeMaster.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-                            overTimeMaster.setDate(todayDate);
-                            overTimeMaster.setTime(time);
-                            overTimeMasterService.create(overTimeMaster);
-                        }
-
-                    }
-                } else if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
-                    if (!time2.equals("")) {
-                        List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
-                        if (!empBalList.isEmpty()) {
-                            employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
-                            float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
-                            time1 = time1 + Float.parseFloat(time2);
-                            employeeLeaveBalance1.setNoOfLeaveRemain(time1);
-                            employeeLeaveBalanceService.update(employeeLeaveBalance1);
-                        } else {
-                            employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
-                            employeeLeaveBalance1.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-                            employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time2));
-                            employeeLeaveBalanceService.create(employeeLeaveBalance1);
-                        }
-
-                        Date date5 = new Date();
-                        String todayDate = formatter.format(date5);
-                        OverTimeMaster overTimeMaster = new OverTimeMaster();
-                        overTimeMaster.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-                        overTimeMaster.setDate(todayDate);
-                        overTimeMaster.setTime(time2);
-                        overTimeMasterService.create(overTimeMaster);
-                    }
-
-                }
-
-            }
-        } else {
-            List<?> empList = employeeMasterService.read();
-            EmployeeMaster employeeMaster = new EmployeeMaster();
-            for (Object zz : empList) {
-                employeeMaster = (EmployeeMaster) zz;
-                List<?> list1 = employeeDatetimeDataService.todaysData(employeeMaster.getId());
-                SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                String startTime1 = "";
-                String endTime1 = "";
-                if (list1.size() > 2) {
-                    Object[] startTime = (Object[]) list1.get(0);
-                    Object[] endTime = (Object[]) list1.get(list1.size() - 1);
-                    startTime1 = (String) startTime[0];
-                    endTime1 = (String) endTime[0];
-                    Date dateStrTime = sdf3.parse(startTime1);
-                    Date dateEndTime = sdf3.parse(endTime1);
-                    long diff = dateEndTime.getTime() - dateStrTime.getTime();
-                    long mainDiff = diff / (60 * 1000);
-                    long diffMin1 = ((mainDiff / 1000) / 60) / 60;
-                    String time2 = "";
-                    if (diffMin1 >= 3.6 && diffMin1 <= 5.5) {
-                        time2 = "0.4";
-                    } else if (diffMin1 >= 8) {
-                        time2 = "0.8";
-                    }
                     EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
                     EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
                     String coff = "C Off Leave";
@@ -1013,8 +887,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     if (!coffList.isEmpty()) {
                         leaveTypeMaster = (LeaveTypeMaster) coffList.get(0);
                     }
+
                     employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
-                    employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+                    employeeLeaveBalance.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
+                    EmployeeMaster employeeMaster = new EmployeeMaster();
+                    employeeMaster = employeeMasterService.readById(employeeShiftData.getEmployeeMaster().getId());
                     int levelId = employeeMaster.getLevelMaster().getId();
                     LevelMaster levelMaster = new LevelMaster();
                     levelMaster = levelMasterService.readById(levelId);
@@ -1023,41 +900,173 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
                     zydexLocationMaster = zydexLocationMasterService.readById(zydexLocationId);
                     String zydexLocationName = zydexLocationMaster.getZydexLocation();
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
+
                     if (zydexLocationName.equals("HO") || zydexLocationName.equals("R&D")) {
-                        if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
-                            if (!time2.equals("")) {
+                        if (dayName.equals("Saturday") && dayOfWeek == 2) {
+                            difference = cal2.getTime().getTime() - cal7.getTime().getTime();
+                        }
+                    }
+
+                    long difference2 = cal4.getTime().getTime() - cal3.getTime().getTime();
+                    long mainDiff = difference2 - difference;
+                    long diffMin1 = ((mainDiff / 1000) / 60) / 60;
+                    String time = "";
+                    String time2 = "";
+                    if (!zydexLocationName.equals("HO") && !zydexLocationName.equals("R&D")) {
+                        if (diffMin1 >= 3 && diffMin1 <= 5.9) {
+                            time = "0.3";
+                        } else if (diffMin1 >= 6 && diffMin1 <= 8.9) {
+                            time = "0.5";
+                        } else if (diffMin1 >= 9) {
+                            time = "0.8";
+                        }
+                    } else {
+                        if (diffMin1 >= 3.6 && diffMin1 <= 7.9) {
+                            time2 = "0.4";
+                        } else if (diffMin1 >= 8) {
+                            time2 = "0.8";
+                        }
+                    }
+
+                    if (!zydexLocationName.equals("HO") && !zydexLocationName.equals("R&D")) {
+                        if (!time.equals("")) {
+                            if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
                                 List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
                                 if (!empBalList.isEmpty()) {
                                     employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
                                     float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
-                                    time1 = time1 + Float.parseFloat(time2);
+                                    time1 = time1 + Float.parseFloat(time);
                                     employeeLeaveBalance1.setNoOfLeaveRemain(time1);
                                     employeeLeaveBalanceService.update(employeeLeaveBalance1);
                                 } else {
                                     employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
-                                    employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
-                                    employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time2));
+                                    employeeLeaveBalance1.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
+                                    employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time));
                                     employeeLeaveBalanceService.create(employeeLeaveBalance1);
                                 }
-
                                 Date date5 = new Date();
                                 String todayDate = formatter.format(date5);
                                 OverTimeMaster overTimeMaster = new OverTimeMaster();
-                                overTimeMaster.setEmployeeMaster(employeeMaster);
+                                overTimeMaster.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
                                 overTimeMaster.setDate(todayDate);
-                                overTimeMaster.setTime(time2);
+                                overTimeMaster.setTime(time);
                                 overTimeMasterService.create(overTimeMaster);
                             }
 
                         }
+                    } else if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
+                        if (!time2.equals("")) {
+                            List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                            if (!empBalList.isEmpty()) {
+                                employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
+                                float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
+                                time1 = time1 + Float.parseFloat(time2);
+                                employeeLeaveBalance1.setNoOfLeaveRemain(time1);
+                                employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                            } else {
+                                employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
+                                employeeLeaveBalance1.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
+                                employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time2));
+                                employeeLeaveBalanceService.create(employeeLeaveBalance1);
+                            }
+
+                            Date date5 = new Date();
+                            String todayDate = formatter.format(date5);
+                            OverTimeMaster overTimeMaster = new OverTimeMaster();
+                            overTimeMaster.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
+                            overTimeMaster.setDate(todayDate);
+                            overTimeMaster.setTime(time2);
+                            overTimeMasterService.create(overTimeMaster);
+                        }
+
                     }
+
+                } catch (Exception e) {
 
                 }
             }
+        } else {
+            List<?> empList = employeeMasterService.read();
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            for (Object zz : empList) {
+                try {
+                    employeeMaster = (EmployeeMaster) zz;
+                    List<?> list1 = employeeDatetimeDataService.todaysData(employeeMaster.getId());
+                    SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    String startTime1 = "";
+                    String endTime1 = "";
+                    if (list1.size() > 2) {
+                        Object[] startTime = (Object[]) list1.get(0);
+                        Object[] endTime = (Object[]) list1.get(list1.size() - 1);
+                        startTime1 = (String) startTime[0];
+                        endTime1 = (String) endTime[0];
+                        Date dateStrTime = sdf3.parse(startTime1);
+                        Date dateEndTime = sdf3.parse(endTime1);
+                        long diff = dateEndTime.getTime() - dateStrTime.getTime();
+                        long mainDiff = diff / (60 * 1000);
+                        long diffMin1 = ((mainDiff / 1000) / 60) / 60;
+                        String time2 = "";
+                        if (diffMin1 >= 3.6 && diffMin1 <= 5.5) {
+                            time2 = "0.4";
+                        } else if (diffMin1 >= 8) {
+                            time2 = "0.8";
+                        }
+                        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+                        EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
+                        String coff = "C Off Leave";
+                        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+                        List<?> coffList = leaveTypeMasterService.readLeaveType(coff);
+                        if (!coffList.isEmpty()) {
+                            leaveTypeMaster = (LeaveTypeMaster) coffList.get(0);
+                        }
+                        employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                        employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+                        int levelId = employeeMaster.getLevelMaster().getId();
+                        LevelMaster levelMaster = new LevelMaster();
+                        levelMaster = levelMasterService.readById(levelId);
+
+                        int zydexLocationId = employeeMaster.getZydexLocationMaster().getId();
+                        ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
+                        zydexLocationMaster = zydexLocationMasterService.readById(zydexLocationId);
+                        String zydexLocationName = zydexLocationMaster.getZydexLocation();
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
+                        if (zydexLocationName.equals("HO") || zydexLocationName.equals("R&D")) {
+                            if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
+                                if (!time2.equals("")) {
+                                    List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                                    if (!empBalList.isEmpty()) {
+                                        employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
+                                        float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
+                                        time1 = time1 + Float.parseFloat(time2);
+                                        employeeLeaveBalance1.setNoOfLeaveRemain(time1);
+                                        employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                                    } else {
+                                        employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
+                                        employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+                                        employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time2));
+                                        employeeLeaveBalanceService.create(employeeLeaveBalance1);
+                                    }
+
+                                    Date date5 = new Date();
+                                    String todayDate = formatter.format(date5);
+                                    OverTimeMaster overTimeMaster = new OverTimeMaster();
+                                    overTimeMaster.setEmployeeMaster(employeeMaster);
+                                    overTimeMaster.setDate(todayDate);
+                                    overTimeMaster.setTime(time2);
+                                    overTimeMasterService.create(overTimeMaster);
+                                }
+
+                            }
+                        }
+
+                    }
+                } catch (Exception e) {
+
+                }
+
+            }
 
         }
-
     }
 
     private synchronized void coffDelete() throws Exception {
@@ -1070,76 +1079,81 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
         List<?> coffDeleteList = overTimeMasterService.read();
         for (Object o : coffDeleteList) {
-            OverTimeMaster overTimeMaster = (OverTimeMaster) o;
-            int empId = overTimeMaster.getEmployeeMaster().getId();
-            EmployeeMaster employeeMaster = new EmployeeMaster();
-            employeeMaster = employeeMasterService.readById(empId);
-            int zydexLocationId = employeeMaster.getZydexLocationMaster().getId();
-            ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
-            zydexLocationMaster = zydexLocationMasterService.readById(zydexLocationId);
-            String zydexLocationName = zydexLocationMaster.getZydexLocation();
-            if (zydexLocationName.equals("HO") || zydexLocationName.equals("R&D")) {
-                String coffDate = overTimeMaster.getDate();
-                Date date1 = formatter.parse(coffDate);
-                c.setTime(date1);
-                c.add(Calendar.DATE, 30);
-                Date coffAddDate = c.getTime();
-                if (curDate.after(coffAddDate)) {
-                    EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
-                    EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
-                    String time = overTimeMaster.getTime();
-                    String coff = "C Off Leave";
-                    LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
-                    List<?> coffList = leaveTypeMasterService.readLeaveType(coff);
-                    if (!coffList.isEmpty()) {
-                        leaveTypeMaster = (LeaveTypeMaster) coffList.get(0);
+            try {
+                OverTimeMaster overTimeMaster = (OverTimeMaster) o;
+                int empId = overTimeMaster.getEmployeeMaster().getId();
+                EmployeeMaster employeeMaster = new EmployeeMaster();
+                employeeMaster = employeeMasterService.readById(empId);
+                int zydexLocationId = employeeMaster.getZydexLocationMaster().getId();
+                ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
+                zydexLocationMaster = zydexLocationMasterService.readById(zydexLocationId);
+                String zydexLocationName = zydexLocationMaster.getZydexLocation();
+                if (zydexLocationName.equals("HO") || zydexLocationName.equals("R&D")) {
+                    String coffDate = overTimeMaster.getDate();
+                    Date date1 = formatter.parse(coffDate);
+                    c.setTime(date1);
+                    c.add(Calendar.DATE, 30);
+                    Date coffAddDate = c.getTime();
+                    if (curDate.after(coffAddDate)) {
+                        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+                        EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
+                        String time = overTimeMaster.getTime();
+                        String coff = "C Off Leave";
+                        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+                        List<?> coffList = leaveTypeMasterService.readLeaveType(coff);
+                        if (!coffList.isEmpty()) {
+                            leaveTypeMaster = (LeaveTypeMaster) coffList.get(0);
+                        }
+                        employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                        employeeLeaveBalance.setEmployeeMaster(overTimeMaster.getEmployeeMaster());
+                        List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                        if (!empBalList.isEmpty()) {
+                            employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
+                            float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
+                            float time2 = time1 - Float.parseFloat(time);
+                            employeeLeaveBalance1.setNoOfLeaveRemain(time2);
+                            employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                            overTimeMasterService.delete(overTimeMaster.getId());
+                        }
+
                     }
-                    employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
-                    employeeLeaveBalance.setEmployeeMaster(overTimeMaster.getEmployeeMaster());
-                    List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
-                    if (!empBalList.isEmpty()) {
-                        employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
-                        float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
-                        float time2 = time1 - Float.parseFloat(time);
-                        employeeLeaveBalance1.setNoOfLeaveRemain(time2);
-                        employeeLeaveBalanceService.update(employeeLeaveBalance1);
-                        overTimeMasterService.delete(overTimeMaster.getId());
+                }
+                if (!zydexLocationName.equals("HO") && !zydexLocationName.equals("R&D")) {
+                    String coffDate = overTimeMaster.getDate();
+                    Date date1 = formatter.parse(coffDate);
+                    c.setTime(date1);
+                    c.add(Calendar.DATE, 90);
+                    Date coffAddDate = c.getTime();
+                    if (curDate.after(coffAddDate)) {
+                        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+                        EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
+                        String time = overTimeMaster.getTime();
+                        String coff = "C Off Leave";
+                        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+                        List<?> coffList = leaveTypeMasterService.readLeaveType(coff);
+                        if (!coffList.isEmpty()) {
+                            leaveTypeMaster = (LeaveTypeMaster) coffList.get(0);
+                        }
+                        employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                        employeeLeaveBalance.setEmployeeMaster(overTimeMaster.getEmployeeMaster());
+                        List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                        if (!empBalList.isEmpty()) {
+                            employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
+                            float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
+                            time1 = time1 - Float.parseFloat(time);
+                            employeeLeaveBalance1.setNoOfLeaveRemain(time1);
+                            employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                            overTimeMasterService.delete(overTimeMaster.getId());
+                        }
+
                     }
 
                 }
-            }
-            if (!zydexLocationName.equals("HO") && !zydexLocationName.equals("R&D")) {
-                String coffDate = overTimeMaster.getDate();
-                Date date1 = formatter.parse(coffDate);
-                c.setTime(date1);
-                c.add(Calendar.DATE, 90);
-                Date coffAddDate = c.getTime();
-                if (curDate.after(coffAddDate)) {
-                    EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
-                    EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
-                    String time = overTimeMaster.getTime();
-                    String coff = "C Off Leave";
-                    LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
-                    List<?> coffList = leaveTypeMasterService.readLeaveType(coff);
-                    if (!coffList.isEmpty()) {
-                        leaveTypeMaster = (LeaveTypeMaster) coffList.get(0);
-                    }
-                    employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
-                    employeeLeaveBalance.setEmployeeMaster(overTimeMaster.getEmployeeMaster());
-                    List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
-                    if (!empBalList.isEmpty()) {
-                        employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
-                        float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
-                        time1 = time1 - Float.parseFloat(time);
-                        employeeLeaveBalance1.setNoOfLeaveRemain(time1);
-                        employeeLeaveBalanceService.update(employeeLeaveBalance1);
-                        overTimeMasterService.delete(overTimeMaster.getId());
-                    }
-
-                }
+            } catch (Exception e) {
 
             }
         }
+
     }
 
     public ModelAndView employeeDataSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -564,6 +564,12 @@
 
                                                                     </tr>
                                                                     <tr>
+                                                                        <th>Working Hour</th>
+                                                                            <c:forEach var="workingHour" items="${workingHour}">
+                                                                            <th style="text-align: center;">${workingHour}</th>
+                                                                            </c:forEach>
+                                                                    </tr>
+                                                                    <tr>
                                                                         <th>View All Punch</th>
                                                                             <c:forEach var="list" items="${map[employeeMasterList[47]]}">
                                                                             <th style="text-align: center;"><a onclick="showPunchData('${list[0]}');">View</a>
@@ -704,45 +710,44 @@
     </div>
     <script type="text/javascript">
         $('.form_datetime').datetimepicker({
-            //language:  'fr',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
+        //language:  'fr',         weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
             todayHighlight: 1,
             startView: 2,
             minView: 2,
-            forceParse: 0,
-            endDate: new Date()
+                forceParse: 0,
+                endDate: new Date()
         });</script>
 
     <script>
-        jQuery.noConflict();
-        jQuery(document).ready(function () {
-            jQuery("#employeeMasterId").tokenInput(${list}, {
-                preventDuplicates: true,
+                jQuery.noConflict();
+                jQuery(document).ready(function () {
+        jQuery("#employeeMasterId").tokenInput(${list}, {
+            preventDuplicates: true,
+            noResultsText: "No Result",
+                tokenLimit: "1",
+                    searchingText: "Searching ... .. .",
+                    });
+        });
+    </script>
+    <script>
+                jQuery.noConflict();
+                jQuery(document).ready(function () {
+        jQuery("#zydexLocationId").tokenInput(${zydexLocationList}, {
+            preventDuplicates: true,
                 noResultsText: "No Result",
                 tokenLimit: "1",
-                searchingText: "Searching ... .. .",
-            });
+                    searchingText: "Searching ... .. .",
+                    });
         });
     </script>
     <script>
         jQuery.noConflict();
-        jQuery(document).ready(function () {
-            jQuery("#zydexLocationId").tokenInput(${zydexLocationList}, {
+                jQuery(document).ready(function () {
+        jQuery("#levelId").tokenInput(${levelList}, {
                 preventDuplicates: true,
-                noResultsText: "No Result",
-                tokenLimit: "1",
-                searchingText: "Searching ... .. .",
-            });
-        });
-    </script>
-    <script>
-        jQuery.noConflict();
-        jQuery(document).ready(function () {
-            jQuery("#levelId").tokenInput(${levelList}, {
-                preventDuplicates: true,
-                noResultsText: "No Result",
+            noResultsText: "No Result",
                 tokenLimit: "1",
                 searchingText: "Searching ... .. .",
             });

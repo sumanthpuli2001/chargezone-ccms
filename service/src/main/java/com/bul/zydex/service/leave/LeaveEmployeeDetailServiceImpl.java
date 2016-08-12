@@ -119,5 +119,17 @@ public class LeaveEmployeeDetailServiceImpl<T> extends GenericsServiceImpl<T> im
     public List<?> readApprovedShortLeaveDays(T object) {
         return leaveEmployeeDetailDAO.readApprovedShortLeaveDays(object);
     }
+    @Override
+    public int readPendingLeaveRequestForDashboard(T object) {
+        return leaveEmployeeDetailDAO.readPendingLeaveRequestForDashboard(object);
+    }
+    @Override
+     public int readPendingApproverLeaveRequestForDashboard(T object) {
+        return leaveEmployeeDetailDAO.readPendingApproverLeaveRequestForDashboard(object);
+    }
+    @Override
+     public int readWithdrawPendingApproverLeaveRequestForDashboard(T object) {
+        return leaveEmployeeDetailDAO.readWithdrawPendingApproverLeaveRequestForDashboard(object);
+    }
 
 }

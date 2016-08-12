@@ -2238,7 +2238,7 @@ public class ExpenseMasterController extends ExpenseMasterAbstract {
         List<?> list = expenseMasterService.readByExpensePendingRequest(expenseMaster1);
         int expensePending = list.size();
         request.setAttribute("expensePending", expensePending);
-        mv.setViewName("forward:cOffLeaveRequest.htm?act=userDashboardcOffPendingRequest");
+        mv.setViewName("forward:noDueMaster.htm?act=userDashboard");
         return mv;
     }
 

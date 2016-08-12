@@ -144,7 +144,7 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " LEFT JOIN b.designationMaster d "
                 + " LEFT JOIN a.leaveTypeMaster e "
                 + " Where 1=1" + condition
-                 + " Order By a.id desc";
+                + " Order By a.id desc";
 
         return getHibernateTemplate().find(query);
     }
@@ -568,6 +568,51 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " AND a.status in (0,3)";
 
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public int readPendingLeaveRequestForDashboard(T object) {
+        LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
+        String query = "";
+        query += " Select count(a.id)"
+                + " FROM LeaveEmployeeDetail a"
+                + " LEFT JOIN a.leaveTypeMaster b"
+                + " WHERE a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
+                + " AND a.status =0";
+
+        List<?> finalList = getHibernateTemplate().find(query);
+        return Integer.parseInt("" + finalList.get(0));
+    }
+
+    @Override
+    public int readPendingApproverLeaveRequestForDashboard(T object) {
+        LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
+        String query = "";
+
+        query += " Select count(a.id)"
+                + " FROM LeaveEmployeeDetail a,"
+                + " EmployeeMaster b"
+                + " WHERE a.employeeMaster=b.id"
+                + " and b.reportingManagerLevel1=" + leaveEmployeeDetail.getEmployeeMaster().getId()
+                + " AND a.status =0";
+
+        List<?> finalList = getHibernateTemplate().find(query);
+        return Integer.parseInt("" + finalList.get(0));
+    }
+
+    @Override
+    public int readWithdrawPendingApproverLeaveRequestForDashboard(T object) {
+        LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
+        String query = "";
+        query += " Select count(a.id)"
+                + " FROM LeaveEmployeeDetail a,"
+                + " EmployeeMaster b"
+                + " WHERE a.employeeMaster=b.id"
+                + " and b.reportingManagerLevel1=" + leaveEmployeeDetail.getEmployeeMaster().getId()
+                + " AND a.status = 4";
+
+        List<?> finalList = getHibernateTemplate().find(query);
+        return Integer.parseInt("" + finalList.get(0));
     }
 
 }

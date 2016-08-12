@@ -52,4 +52,10 @@ public interface LeaveEmployeeDetailDAO<T> extends GenericsDAO<T> {
 
     public List<?> readApprovedShortLeaveDays(T object);
 
+    public int readPendingLeaveRequestForDashboard(T object);
+
+    public int readPendingApproverLeaveRequestForDashboard(T object);
+
+    public int readWithdrawPendingApproverLeaveRequestForDashboard(T object);
+
 }

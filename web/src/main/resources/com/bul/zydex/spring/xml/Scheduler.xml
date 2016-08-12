@@ -71,7 +71,7 @@
     <!--    <bean id="deviceId"
               class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
             <property name="targetObject" ref="deviceMasterController1" />
-            <property name="targetMethod" value="deviceManagement" />
+            <property name="targetMethod" value="deviceManagementUsingThread" />
         </bean>
         <bean id="cronTrigger5"
               class="org.springframework.scheduling.quartz.CronTriggerBean">
@@ -79,7 +79,7 @@
             <property name="cronExpression" value="0 0/15 * * * ?" />
         </bean>
     -->
-<!--    <bean id="coffDeleteId"
+    <bean id="coffDeleteId"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="shiftRotationMasterController1" />
         <property name="targetMethod" value="coffDelete" />
@@ -88,8 +88,8 @@
           class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="coffDeleteId" />
         <property name="cronExpression" value="0 0/3 * * * ?" />
-        <property name="cronExpression" value="0 15 10 * * ?" />
-    </bean>-->
+        <!--<property name="cronExpression" value="0 15 10 * * ?" />-->
+    </bean>
     
     <!--        <bean id="shortLeveId"
       class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -158,7 +158,7 @@
                 <!--<ref bean="overTimeEntryId" />-->
                 <!--                <ref bean="carryForwardLeave" />
                 <ref bean="deviceId" />-->
-                <!--<ref bean="coffDeleteId" />-->
+                <ref bean="coffDeleteId" />
                 <!--<ref bean="shortLeveId" />-->
              
 <!--                                <ref bean="probationToConfirmation" />
@@ -174,7 +174,7 @@
                 <!--<ref bean="cronTrigger3" />-->
                 <!--                <ref bean="cronTrigger4" />
                 <ref bean="cronTrigger5" /> -->
-                <!--<ref bean="cronTrigger6" />-->
+                <ref bean="cronTrigger6" />
                 <!--<ref bean="cronTrigger7" />-->
                 <!--                <ref bean="cronTrigger8" />
                 <ref bean="cronTrigger9" />

@@ -150,5 +150,9 @@ public class TravelRequestMasterServiceImpl<T> extends GenericsServiceImpl<T> im
     public List<?> readTravelRequestForEscalation() {
         return travelRequestMasterDAO.readTravelRequestForEscalation();
     }
+    @Override
+     public List<?> readForRequestResultForDashboard(T object) {
+        return travelRequestMasterDAO.readForRequestResultForDashboard(object);
+    }
 
 }

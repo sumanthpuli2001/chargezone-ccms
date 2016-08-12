@@ -177,6 +177,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         mv.getModelMap().put("ptc", ptc);
         mv.setViewName("Probation/ProbationResult");
         return mv;
+        
     }
 
     public ModelAndView viewClick(HttpServletRequest request,
@@ -245,8 +246,14 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         BindException errors = new BindException(ptc, "ptc");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         bind(request, ptc);
+
         probationtoConfirmationValidator.validate(ptc, errors);
         if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : Mandatory Fields should not be blank.");
+            mv.addAllObjects(errors.getModel());
+            mv.setViewName("Probation/Probationlevel1");
+        } else if (ptc.getManagerJustification().equals("")) {
             request.setAttribute("failureMessage",
                     "Error : Mandatory Fields should not be blank.");
             mv.addAllObjects(errors.getModel());
@@ -728,6 +735,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
 
             ptc.setRecomendationByHr(ptc1.getRecomendationByHr());
             ptc.setImprovementComment(ptc1.getImprovementComment());
+
             ptc.setHrSelect(ptc1.getHrSelect());
             if (ptc.getHrSelect().equals("Yes")) {
                 ptc.setStatus(5);
@@ -743,7 +751,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     employeeMasterService.update(employeeMaster);
 
                 }
-            //    Email Sent to Employee
+                //    Email Sent to Employee
 //            try {
 //                EmailTemplate emailTemplate = new EmailTemplate();
 //                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
@@ -815,7 +823,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 ptc.setHrApprovalRemark(ptc1.getHrApprovalRemark());
                 request.setAttribute("successMessage",
                         "Information : Submited Sucessfully");
-            //    Email Sent to Employee
+                //    Email Sent to Employee
 //            try {
 //                EmailTemplate emailTemplate = new EmailTemplate();
 //                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
@@ -965,7 +973,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 }
                 request.setAttribute("successMessage",
                         "Information : Probation Period Extended Sucessfully.");
-            //    Email Sent to Employee
+                //    Email Sent to Employee
 //            try {
 //                EmailTemplate emailTemplate = new EmailTemplate();
 //                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
@@ -1071,6 +1079,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         HttpSession session = request.getSession();
         EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
         ptc.setEmployeeMasterByHrId(employeeMaster);
+        ptc.setPerformanceRating(request.getParameter("performanceRating"));
         probationToConfirmationService.update(ptc);
 //        request.setAttribute("successMessage", "Information : Successfully Submited.");
         mv.getModelMap().put("ptc", ptc);
@@ -1608,69 +1617,14 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
             }
         }
         List<?> finalprobationList = finalprobationList1;
-        int fHeadCuonter = functionalheadDashBoardResult(request, response);
-        int hrCuonter = hrDashboardResult(request, response);
+
         request.setAttribute("finalprobationDashboardList", finalprobationList.size());
-        request.setAttribute("fHeadCuonter", fHeadCuonter);
-        request.setAttribute("hrCuonter", hrCuonter);
+        List headlist = probationToConfirmationService.readForFunctionalHead(ptc);
+        request.setAttribute("fHeadCuonter", headlist.size());
+        List<?> pendingProbationList = employeeMasterService.readProbationByAdmin();
+        request.setAttribute("hrCuonter", pendingProbationList.size());
         mv.setViewName("forward:userMaster.htm?act=userDashboardShow");
         return mv;
     }
-    
-     public int functionalheadDashBoardResult(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        ModelAndView mv = new ModelAndView();
-        ProbationToConfirmation ptc = new ProbationToConfirmation();
-        HttpSession session = request.getSession();
-        EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
-        String employeeId = employeeMaster.getId().toString();
-        ptc.setFunctionalHeadId(employeeId);
-        List headlist = probationToConfirmationService.readForFunctionalHead(ptc);
-        return headlist.size();
-}
-     
-      public int hrDashboardResult(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        ModelAndView mv = new ModelAndView();
-        ProbationToConfirmation ptc = new ProbationToConfirmation();
-        EmployeeMaster employeeMaster = new EmployeeMaster();
 
-        List<?> pendingProbationList = employeeMasterService.readProbationByAdmin();
-        Map<Integer, String> map = new HashMap<Integer, String>();
-        if (!pendingProbationList.isEmpty()) {
-            for (Object o : pendingProbationList) {
-                Object[] o1 = (Object[]) o;
-                Integer emptabid = (Integer) o1[0];
-                String empid = "" + o1[1];
-                String empname = "" + o1[2];
-
-                String ptcid = "" + o1[5];
-                String status = "" + o1[6];
-
-                if (!"null".equals(ptcid)) {
-                    String assesmentdate = "" + o1[7];
-                    map.put(emptabid, assesmentdate);
-                } else {
-                    Integer designationid = (Integer) o1[4];
-                    List list = probationPeriodService.readbyDesignation(designationid);
-                    int probationPeriod = 6;
-                    if (!list.isEmpty()) {
-                        probationPeriod = (int) list.get(0);
-                    }
-                    String date = "" + o1[3];
-                    Calendar c = Calendar.getInstance();
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    Date d = sdf.parse(date);
-                    c.setTime(d);
-
-                    c.add(Calendar.MONTH, probationPeriod);
-//                    c.add(Calendar.MONTH, 6);
-                    date = sdf.format(c.getTime());
-                    map.put(emptabid, date);
-                }
-            }
-        }
-
-        return pendingProbationList.size();
-    }
 }

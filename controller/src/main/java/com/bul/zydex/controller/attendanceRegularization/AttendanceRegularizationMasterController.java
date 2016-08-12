@@ -836,7 +836,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                         if (dayName.equals("Saturday") && dayOfWeek == 2 && diffMinutes1 >= 240) {
                             newList.add("PR");
-                        } else if (diffMinutes1 >= diffMinutes) {
+                        } else if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
                             newList.add("PR");
                         } else if (userTimeIn != null) {
                             if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
@@ -933,12 +933,12 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     cal.setTime(date);
                     SimpleDateFormat format = new SimpleDateFormat("EEEE");
                     String dayName = format.format(date);
+                    int dayOfWeek = cal.get(Calendar.WEEK_OF_MONTH);
                     EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
                     ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
 
                     if (dayName.equals("Saturday")) {
-                        weekNameCounter++;
-                        if (weekNameCounter == 2) {
+                        if (dayOfWeek == 2) {
                             satWeekOff = true;
                         } else {
                             satWeekOff = false;
@@ -1619,23 +1619,22 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 EmployeeMaster employeeMaster1 = new EmployeeMaster();
                 //id=69 is for attandence regularization approve to employee...
                 emailTemplate = emailTemplateService.readById(69);
-                String EmpStr = request.getParameter("empid");
-                if (null != EmpStr && !"".equals(EmpStr)) {
-                    int Empid = Integer.parseInt(EmpStr);
-                    List list = employeeMasterService.readByEmployeeNo(Empid);
-                    if (!list.isEmpty()) {
-                        employeeMaster1 = (EmployeeMaster) list.get(0);
-                        String To = employeeMaster1.getOfficeEmailId();
-                        String from = employeeMasterModel.getOfficeEmailId();
-                        String Subject = emailTemplate.getSubject();
-                        Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
-                        String msg = emailTemplate.getBodytext();
-                        msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                        sendMail.sendMail(from, To, Subject, msg);
-
-                    }
+                EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                UserMaster userMaster1 = new UserMaster();
+                userMaster1.setId(attendanceRegularization.getUserMasterId());
+                employeeMaster2.setUserMaster(userMaster1);
+                List list1 = employeeMasterService.readByUserName(employeeMaster2);
+                if (!list1.isEmpty()) {
+                    employeeMaster1 = (EmployeeMaster) list1.get(0);
+                    String To = employeeMaster1.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
 
                 }
 

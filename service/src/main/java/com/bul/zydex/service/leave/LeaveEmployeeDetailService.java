@@ -49,7 +49,13 @@ public interface LeaveEmployeeDetailService<T> extends GenericsService<T> {
     public List<?> dateWiseLeaveSelectionOfEmployee(T object);
 
     public List<?> viewEmpLeaveRequestForPowerAdmin();
-    
+
     public List<?> readApprovedShortLeaveDays(T object);
+
+    public int readPendingLeaveRequestForDashboard(T object);
+
+    public int readPendingApproverLeaveRequestForDashboard(T object);
+
+    public int readWithdrawPendingApproverLeaveRequestForDashboard(T object);
 
 }

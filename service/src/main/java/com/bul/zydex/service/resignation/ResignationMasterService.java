@@ -42,4 +42,6 @@ public interface ResignationMasterService<T> extends GenericsService<T> {
 
     public List<?> getFinallyResignedEmployees();
 
+    public List<?> getFinallyResignedEmployeesForDashBoard(String employeeId,boolean  employeeExit,boolean  itAdmin,boolean  travelAdmin);
+
 }

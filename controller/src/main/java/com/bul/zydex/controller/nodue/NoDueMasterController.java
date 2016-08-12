@@ -28,7 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author dhruv
  */
 public class NoDueMasterController extends NoDueMasterAbstract {
-
+    
     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         try {
@@ -45,20 +45,20 @@ public class NoDueMasterController extends NoDueMasterAbstract {
             employeeMaster.setUserMaster(user);
             List<?> empList = employeeMasterService.readByUserName(employeeMaster);
             setStatus(request);
-
+            
             request.setAttribute("list", empList);
             mv.getModelMap().put("noDueMaster", noDueMaster);
         } catch (Exception e) {
-
+            
         }
         mv.setViewName("NoDues/NoDuesFormCreate");
         return mv;
-
+        
     }
-
+    
     public ModelAndView submitNoDueForm(HttpServletRequest request, HttpServletResponse response, NoDueMaster noDueMaster) throws Exception {
         final Boolean existingNoDueDataToggle = true;
-
+        
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession(false);
         //this is toggle of isExistingNoDueDataExist setted on dashboard page @ first time login.
@@ -87,13 +87,13 @@ public class NoDueMasterController extends NoDueMasterAbstract {
 //                NonoDueMasterService.readById(noDueId);
 //                noDueMaster.setId(noDueId);
                 bind(request, noDueMasterForUpdate);
-
+                
                 if (userRightMaster.isEmployeeExit()) {
                     if (null != request.getParameter("conDeptID") && request.getParameter("conDeptID").equals("checked")) {
-
+                        
                     } else {
                         if (null == noDueMasterForUpdate.getEquipments() || noDueMasterForUpdate.getEquipments().equals("")) {
-
+                            
                             noDueMasterForUpdate.setEquipments("");
                             noDueMasterForUpdate.setEquipmentsRemarks("");
                             noDueMasterForUpdate.setSpecialTool("");
@@ -106,13 +106,13 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                             noDueMasterForUpdate.setDeptOther("");
                             noDueMasterForUpdate.setDeptOtherRemark("");
                         }
-
+                        
                     }
                     if (null != request.getParameter("itDept") && request.getParameter("itDept").equals("checked")) {
-
+                        
                     } else {
                         if (null == noDueMasterForUpdate.getCompanyMobile() || noDueMasterForUpdate.getCompanyMobile().equals("")) {
-
+                            
                             noDueMasterForUpdate.setCompanyMobile("");
                             noDueMasterForUpdate.setCompanyMobileRemark("");
                             noDueMasterForUpdate.setComputerChecked("");
@@ -125,10 +125,10 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                             noDueMasterForUpdate.setItOtherRemark("");
                             noDueMasterForUpdate.setItOther("");
                         }
-
+                        
                     }
                     if (null != request.getParameter("fDept") && request.getParameter("fDept").equals("checked")) {
-
+                        
                     } else {
                         if (null == noDueMasterForUpdate.getAdvanceCleared() || noDueMasterForUpdate.getAdvanceCleared().equals("")) {
                             noDueMasterForUpdate.setAdvanceCleared("");
@@ -141,16 +141,16 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                             noDueMasterForUpdate.setFinanceOtherRemark("");
                             noDueMasterForUpdate.setFinanceOtherText("");
                         }
-
+                        
                     }
-
+                    
                 }
                 noDueMasterService.update(noDueMasterForUpdate);
             } else {
-
+                
                 if (userRightMaster.isEmployeeExit()) {
                     if (null != request.getParameter("conDeptID") && request.getParameter("conDeptID").equals("checked")) {
-
+                        
                     } else {
                         noDueMaster.setEquipments("");
                         noDueMaster.setEquipmentsRemarks("");
@@ -163,10 +163,10 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                         noDueMaster.setDeptOtherText("");
                         noDueMaster.setDeptOther("");
                         noDueMaster.setDeptOtherRemark("");
-
+                        
                     }
                     if (null != request.getParameter("itDept") && request.getParameter("itDept").equals("checked")) {
-
+                        
                     } else {
                         noDueMaster.setCompanyMobile("");
                         noDueMaster.setCompanyMobileRemark("");
@@ -179,10 +179,10 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                         noDueMaster.setItOtherText("");
                         noDueMaster.setItOtherRemark("");
                         noDueMaster.setItOther("");
-
+                        
                     }
                     if (null != request.getParameter("fDept") && request.getParameter("fDept").equals("checked")) {
-
+                        
                     } else {
                         noDueMaster.setAdvanceCleared("");
                         noDueMaster.setAdvanceClearedRemark("");
@@ -193,12 +193,12 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                         noDueMaster.setFinanceOther("");
                         noDueMaster.setFinanceOtherRemark("");
                         noDueMaster.setFinanceOtherText("");
-
+                        
                     }
-
+                    
                 }
                 noDueMasterService.create(noDueMaster);
-
+                
             }
             session.setAttribute("isExistingNoDueDataExist", existingNoDueDataToggle);
             request.setAttribute("successMessage",
@@ -236,7 +236,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
                 } catch (Exception e) {
-
+                    
                 }
             }
         }
@@ -257,7 +257,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         mv.setViewName("NoDues/EmpResult");
         return mv;
     }
-
+    
     public ModelAndView createNoDueApproval(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         NoDueMaster noDueMaster = new NoDueMaster();
@@ -267,7 +267,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         employeeMaster = employeeMasterService.readById(empId);
         noDueMaster = noDueMasterService.readById(tabId);
         setStatus(request);
-
+        
         request.setAttribute("employeeMaster", employeeMaster);
         mv.getModelMap().put("noDueMaster", noDueMaster);
         request.setAttribute("id", tabId);
@@ -275,7 +275,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         mv.setViewName("NoDues/NoDuesFormApprovalCreate");
         return mv;
     }
-
+    
     public ModelAndView createNoDueReturn(HttpServletRequest request, HttpServletResponse response) throws Exception {
 //        NoDueMaster noDueMasterModel = new NoDueMaster();
 //        EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -319,9 +319,9 @@ public class NoDueMasterController extends NoDueMasterAbstract {
 //        request.setAttribute("reportingManager", reportingManager);
         mv.setViewName("NoDues/createNoDueReturn");
         return mv;
-
+        
     }
-
+    
     public ModelAndView submitNoDueReturn(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         NoDueMaster noDueMaster = new NoDueMaster();
@@ -369,7 +369,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
                 } catch (Exception e) {
-
+                    
                 }
             }
         }
@@ -382,7 +382,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         mv.setViewName("forward:userMaster.htm?act=goToDashboard");//method name changed from userDashboard.
         return mv;
     }
-
+    
     public ModelAndView submitNoDueApproval(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         NoDueMaster noDueMaster = new NoDueMaster();
@@ -394,7 +394,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         noDueMaster.setId(tabid);
         employeeMaster.setId(empid);
         noDueMaster.setEmployeeMasterByEmpId(employeeMaster);
-
+        
         UserMaster user = (UserMaster) request.getSession().getAttribute("user");
         user.getId();
         employeeMaster.setUserMaster(user);
@@ -431,7 +431,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
-
+                
             }
         }
         if (btn.equals("Return")) {
@@ -460,7 +460,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
-
+                
             }
         }
         if (btn.equals("WithdrawApprove")) {
@@ -479,7 +479,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         }
         return mv;
     }
-
+    
     public ModelAndView createNoDueApproveList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         NoDueMaster noDueMaster = new NoDueMaster();
@@ -495,7 +495,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         mv.setViewName("NoDues/NoDuesFormApprovalList");
         return mv;
     }
-
+    
     public ModelAndView createEmployeeWiseSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         NoDueMaster noDueMaster = new NoDueMaster();
@@ -503,12 +503,12 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         selectEmployee(request, response);
         departmentList(request);
         designationList(request);
-
+        
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("NoDues/EmployeeWiseExitSearch");
         return mv;
     }
-
+    
     public ModelAndView submitEmployeeWiseSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         NoDueMaster noDueMaster = new NoDueMaster();
@@ -518,11 +518,11 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         bind(request, employeeMaster);
         int empId = Integer.parseInt(employeeMaster.getEmployeeName());
         List<?> list = employeeMasterService.readEmployeeAjax(empId);
-
+        
         List<?> resgList = resignationMasterService.readApprovedList(empId);
         List<?> exitList = exitInterviewMasterService.readApprovedList(empId);
         List<?> noDueList = noDueMasterService.readApprovedList(empId);
-
+        
         request.setAttribute("list", list);
         request.setAttribute("resgList", resgList);
         request.setAttribute("exitList", exitList);
@@ -531,7 +531,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         mv.setViewName("NoDues/EmployeeWiseExitResult");
         return mv;
     }
-
+    
     public ModelAndView searchresult(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         NoDueMaster noDueMaster = new NoDueMaster();
@@ -554,7 +554,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         mv.setViewName("NoDues/EmployeeWiseExitSearchResult");
         return mv;
     }
-
+    
     public ModelAndView getNoDueRequests(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         ResignationMaster resignationMaster = new ResignationMaster();
@@ -575,7 +575,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
 //        resignedEmployeesList.stream().filter(resignationMaster.);
         return mv;
     }
-
+    
     public ModelAndView viewNoDueRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String employeeNoString = request.getParameter("employeeNo");
@@ -607,64 +607,25 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         request.setAttribute("reportingManager", reportingManager);
         mv.setViewName("NoDues/NoDuesFormCreate");
         return mv;
-
+        
     }
-
+    
     public ModelAndView userDashboard(HttpServletRequest request, HttpServletResponse response) throws Exception {
 //        this is method which shows  pending requests for noDue Form FillUp on user Dashbord
         ModelAndView mv = new ModelAndView();
-        ResignationMaster resignationMaster = new ResignationMaster();
         HttpSession session = request.getSession(false);
         EmployeeMaster employeeInfo = (EmployeeMaster) session.getAttribute("employeeInfo");
         UserRightMaster userRight = (UserRightMaster) session.getAttribute("userRight");
-        CallingCounter counter = new CallingCounter(0);
         String employeeId = "" + employeeInfo.getId();
-        try {
-            List<?> resignedEmployeesList = resignationMasterService.getFinallyResignedEmployees();
-
-            List<List<?>> employeeList = new ArrayList<List<?>>();
-            if (!resignedEmployeesList.isEmpty()) {
-                for (Object o : resignedEmployeesList) {
-                    ResignationMaster rm = (ResignationMaster) o;
-                    int empId = rm.getEmployeeMaster().getId();
-                    employeeList.add(employeeMasterService.getEmployeeDetatilByEmp_Id(empId));
-                }
-            }
-            for (List<?> employeesListOfListOuter : employeeList) {
-                for (Object o : employeesListOfListOuter) {
-                    Object[] o1 = (Object[]) o;
-                    String reportingManager = (String) o1[7];
-                    Boolean isReportingManagerFilled = new Boolean((String) o1[8]);
-                    Boolean isNoDueAdminFilled = new Boolean((String) o1[9]);
-                    Boolean isItAdminFilled = new Boolean((String) o1[10]);
-                    Boolean isTravelExpenseAdminFilled = new Boolean((String) o1[11]);
-
-                    if ((employeeId.equals(reportingManager)) && !isReportingManagerFilled) {
-                        counter.increment();
-                    } else {
-                        if ((userRight.isEmployeeExit()) && !isNoDueAdminFilled) {
-                            counter.increment();
-                        }
-                        if ((userRight.isItAdmin()) && !isItAdminFilled) {
-                            counter.increment();
-                        }
-                        if ((userRight.isTravelExpenseAdmin()) && !isTravelExpenseAdminFilled) {
-                            counter.increment();
-                        }
-                    }
-
-                }
-            }
-        } catch (Exception e) {
-        }
-        int pendingNoDuerequests = counter.getCounter();
-        request.setAttribute("pendingNoDuerequests", pendingNoDuerequests);
-//        mv.setViewName("forward:userMaster.htm?act=userDashboardShow");
+        List<?> resignedEmployeesList1 = resignationMasterService.getFinallyResignedEmployeesForDashBoard(employeeId, userRight.isEmployeeExit(), userRight.isItAdmin(), userRight.isTravelExpenseAdmin());
+        
+        request.setAttribute("pendingNoDuerequests", resignedEmployeesList1.get(0));
+       
         mv.setViewName("forward:exitInterviewMaster.htm?act=userDashboard");
         return mv;
-
+        
     }
-
+    
     public ModelAndView printClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         NoDueMaster noDueMaster = new NoDueMaster();
@@ -674,13 +635,13 @@ public class NoDueMasterController extends NoDueMasterAbstract {
         employeeMaster = employeeMasterService.readById(empId);
         noDueMaster = noDueMasterService.readById(tabId);
         setStatus(request);
-
+        
         request.setAttribute("employeeMaster", employeeMaster);
         mv.getModelMap().put("noDueMaster", noDueMaster);
         mv.setViewName("NoDues/NoDuePrint");
         return mv;
     }
-
+    
     public ModelAndView exportToExcelResignation(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         List<?> employeeList = (List<?>) request.getSession().getAttribute("employeeList");

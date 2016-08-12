@@ -62,5 +62,8 @@ public interface TravelRequestMasterDAO<T> extends GenericsDAO<T> {
     public List<?> searchTravelApproveOfEmployeeByPreviousMonthWise(T object);
 
     public List<?> readApprovedTravelRequest();
+
     public List<?> readTravelRequestForEscalation();
+
+    public List<?> readForRequestResultForDashboard(T object);
 }

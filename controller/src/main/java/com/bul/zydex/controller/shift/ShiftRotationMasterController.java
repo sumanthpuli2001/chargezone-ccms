@@ -2584,12 +2584,12 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     cal.setTime(date);
                                     SimpleDateFormat format = new SimpleDateFormat("EEEE");
                                     String dayName = format.format(date);
+                                    int dayOfWeek = cal.get(Calendar.WEEK_OF_MONTH);
                                     EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
                                     ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
 
                                     if (dayName.equals("Saturday")) {
-                                        weekNameCounter++;
-                                        if (weekNameCounter == 2) {
+                                        if (dayOfWeek == 2) {
                                             satWeekOff = true;
                                         } else {
                                             satWeekOff = false;

@@ -382,7 +382,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                 "Error :On Second Saturday You can Not Apply Full Day Of Leave");
                         request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                         mv = applyClick(request, response);
-                    } else if (leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave()) && !leaveTypeMaster.getLeaveType().contains("Maternity Leave") && !leaveTypeMaster.getLeaveType().contains("C Off Leave")
+                    } else if (leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave()) && !leaveTypeMaster.getLeaveType().contains("Privilege Leave") && !leaveTypeMaster.getLeaveType().contains("Maternity Leave") && !leaveTypeMaster.getLeaveType().contains("C Off Leave")
                             && !leaveTypeMaster.getLeaveType().contains("Sick Leave")) {
                         request.setAttribute("failureMessage",
                                 "Error :No Of Days is Greater than maximum allowed Days...");
@@ -707,6 +707,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             leaveEmployeeDetail.setStartDate("");
             leaveEmployeeDetail.setEndDate("");
         }
+        request.setAttribute("oldLeaveId", leaveEmployeeDetail.getLeaveTypeMaster().getId());
+        request.setAttribute("oldLeaveDays", leaveEmployeeDetail.getNoOfDays());
         request.setAttribute("flag", leaveEmployeeDetail.getStatus());
         mv.getModelMap().put("leaveEmployeeDetail", leaveEmployeeDetail);
         mv.setViewName("Leave/LeaveApplicationFormEdit");
@@ -823,6 +825,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             leaveEmployeeDetail.setEndDate("");
         }
         request.setAttribute("flag", leaveEmployeeDetail.getStatus());
+         request.setAttribute("oldLeaveId", leaveEmployeeDetail.getLeaveTypeMaster().getId());
         mv.getModelMap().put("leaveEmployeeDetail", leaveEmployeeDetail);
         mv.setViewName("Leave/LeaveApplicationFormWithDraw");
         return mv;
@@ -929,7 +932,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         leaveEmployeeDetail.setStatus(0);
                     }
                     if (!leaveTypeMaster.getLeaveType().contains("Short Leave") && !leaveTypeMaster.getLeaveType().contains("C Off Leave")) {
-                        if (null != leaveEmployeeDetail.getNoOfDays() && leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave())) {
+                        if (null != leaveEmployeeDetail.getNoOfDays() && leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave()) && !leaveTypeMaster.getLeaveType().contains("Maternity Leave")) {
                             request.setAttribute("failureMessage",
                                     "Error :No Of Days is Grater than maximum allowed Days...");
                             mv = viewLeaveRequest(request, response);
@@ -941,24 +944,29 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         } else {
                             leaveEmployeeDetail.setStatus(0);
                             leaveEmployeeDetailService.update(leaveEmployeeDetail);
-
+                            String oldLeaveId = request.getParameter("oldLeaveId");
+                            String oldLeaveDays = request.getParameter("oldLeaveDays");
+                            float editBalance = 0;
+                            EmployeeLeaveBalance employeeLeaveBalance2 = new EmployeeLeaveBalance();
+                            employeeLeaveBalance2.setEmployeeMaster(employeeMaster);
+                            employeeLeaveBalance2.setLeaveTypeMaster(leaveTypeMaster);
+                            List<?> changeBalanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance2);
+                            if (!changeBalanceList.isEmpty()) {
+                                employeeLeaveBalance2 = (EmployeeLeaveBalance) balanceList.get(0);
+                            }
+                            editBalance = employeeLeaveBalance2.getNoOfLeaveRemain();
+                            editBalance = editBalance + Float.parseFloat(oldLeaveDays);
+                            employeeLeaveBalance2.setNoOfLeaveRemain(editBalance);
+                            if (employeeLeaveBalance2.getLeaveTypeMaster().getId() != 9) {
+                                employeeLeaveBalanceService.update(employeeLeaveBalance2);
+                            }
+                            int leaveTypeId = leaveEmployeeDetail.getLeaveTypeMaster().getId();
+                            LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(leaveTypeId);
+                            if (leaveTypeMaster1.getLeaveType().equals("Paternity Leave")) {
+                                noOfDay = (float) 3.0;
+                            }
                             balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
                             noOfDay = leaveEmployeeDetail.getNoOfDays();
-                            String noOfHour = "";
-                            EmployeeMaster employeeMasterModel1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                            COffLeaveMaster cOffLeaveMaster = new COffLeaveMaster();
-                            cOffLeaveMaster.setZydexLocationMaster(employeeMasterModel1.getZydexLocationMaster());
-                            List list1 = cOffLeaveMasterService.readByDept(cOffLeaveMaster);
-                            try {
-                                cOffLeaveMaster = (COffLeaveMaster) list1.get(0);
-                                noOfHour = "0." + cOffLeaveMaster.getHoursNo();
-                            } catch (Exception e) {
-                            }
-                            // 11 No Id Is C-Off Id*****************
-                            if (leaveEmployeeDetail.getLeaveTypeMaster().getId().equals(11)) {
-                                noOfDay = Float.parseFloat(noOfHour);
-                            }
-                            // 11 No Id Is C-Off Id*****************
                             balanceDay = balanceDay - noOfDay;
                             employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
                             employeeLeaveBalanceService.update(employeeLeaveBalance1);
@@ -1075,8 +1083,11 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 }
                 // 11 No Id Is C-Off Id*****************
                 balanceDay = balanceDay + noOfDay;
+                String oldLeaveId = request.getParameter("oldLeaveId");
+                if (Integer.parseInt(oldLeaveId) != 9) {
                 employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
-                employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                    employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                }
                 leaveEmployeeDetailService.delete(Integer.parseInt(id));
                 request.setAttribute("successMessage",
                         "Information : Leave Withdrawn Successfully.");
@@ -1882,86 +1893,14 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
         employeeLeaveBalance.setEmployeeMaster(employeeMaster);
         leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
-        List<?> list = leaveEmployeeDetailService.readPendingLeaveRequest(leaveEmployeeDetail);
-        int pendingLeave = list.size();
+        int pendingLeave = leaveEmployeeDetailService.readPendingLeaveRequestForDashboard(leaveEmployeeDetail);
         request.setAttribute("pendingLeave", pendingLeave);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date currentDate = new Date();
-        int pendingApproverLeave = 0;
-        List<?> list1 = leaveEmployeeDetailService.readPendingApproverLeaveRequest(leaveEmployeeDetail);
-        for (Iterator<? extends Object> iterator = list1.iterator(); iterator.hasNext();) {
-            Object[] next = (Object[]) iterator.next();
-            try {
 
-                String strdate = "" + next[2];
-                String status = "" + next[3];
-                sdf.parse(strdate);
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(sdf.parse(strdate));
-                Date dd = cal.getTime();
-                Date addedDate = addDays(dd, 15);
-                if (currentDate.equals(addedDate) || currentDate.before(addedDate)) {
-                    if (Integer.parseInt(status) == 4) {
-                        iterator.remove();
-                    } else {
-                        pendingApproverLeave = list1.size();
-                    }
-                    request.setAttribute("pendingApproverLeave", pendingApproverLeave);
-                } else {
-                    List<?> list2 = leaveEmployeeDetailService.readPendingApprover2LeaveRequest(leaveEmployeeDetail);
-                    int pendingApprover2Leave = list2.size();
-//                request.setAttribute("pendingApprover2Leave", pendingApprover2Leave);
-                }
-            } catch (Exception e) {
+        int pendingApproverLeave = leaveEmployeeDetailService.readPendingApproverLeaveRequestForDashboard(leaveEmployeeDetail);
+        request.setAttribute("pendingApproverLeave", pendingApproverLeave);
 
-            }
-        }
-        List<?> withdrawlist = leaveEmployeeDetailService.readPendingLeaveRequest(leaveEmployeeDetail);
-//        int pendingLeave = withdrawlist.size();
-        request.setAttribute("pendingLeave", pendingLeave);
-        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
-        Date currentDate1 = new Date();
-        List<?> withdrawlist1 = leaveEmployeeDetailService.readPendingApproverLeaveRequest(leaveEmployeeDetail);
-
-        for (Iterator<? extends Object> iterator = withdrawlist1.iterator(); iterator.hasNext();) {
-            int withdrawPendingList = 0;
-            try {
-
-                Object[] next = (Object[]) iterator.next();
-                String strdate = "" + next[2];
-                String status = "" + next[3];
-                sdf.parse(strdate);
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(sdf1.parse(strdate));
-                Date dd = cal.getTime();
-                Date addedDate = addDays(dd, 15);
-                if (currentDate1.equals(addedDate) || currentDate.before(addedDate)) {
-                    if (Integer.parseInt(status) == 0) {
-                        iterator.remove();
-                        withdrawPendingList = withdrawlist1.size();
-                    } else {
-
-                        withdrawPendingList = withdrawlist1.size();
-                    }
-                    request.setAttribute("withdrawPendingList", withdrawPendingList);
-                }
-            } catch (Exception e) {
-
-            }
-//            else {
-//                int withdrawPendingList1 = 0;
-//                List<?> withdrawlist2 = leaveEmployeeDetailService.readPendingApprover2LeaveRequest(leaveEmployeeDetail);
-//                if (currentDate1.equals(addedDate) || currentDate.before(addedDate)) {
-//                    if (Integer.parseInt(status) == 0) {
-//                        iterator.remove();
-//                    } else {
-//
-//                        withdrawPendingList1 = withdrawlist2.size();
-//                    }
-//                    request.setAttribute("withdrawPendingList", withdrawPendingList1);
-//                }
-//            }
-        }
+        int withdrawPendingList = leaveEmployeeDetailService.readWithdrawPendingApproverLeaveRequestForDashboard(leaveEmployeeDetail);
+        request.setAttribute("withdrawPendingList", withdrawPendingList);
 
         mv.setViewName("forward:travelRequestMaster.htm?act=userDashboardTravelPendingRequest");
         return mv;

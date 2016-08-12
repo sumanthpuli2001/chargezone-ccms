@@ -1,7 +1,9 @@
 package com.bul.zydex.dao.resignation;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
+import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.ResignationMaster;
+import com.bul.zydex.model.UserRightMaster;
 import java.util.List;
 
 /*
@@ -223,6 +225,38 @@ public class ResignationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements R
                 + " From ResignationMaster R"
                 + " where R.status = '4'"
                 + " Order by R.id desc ";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public List<?> getFinallyResignedEmployeesForDashBoard(String employeeId, boolean employeeExit, boolean itAdmin, boolean travelAdmin) {
+
+        String query = "";
+        query += " Select ";
+        if (employeeExit) {
+            query += " count(*)";
+        } else if (itAdmin) {
+            query += " count(*)";
+        } else if (travelAdmin) {
+            query += " count(*)";
+        } else {
+            query += " count(*)";
+        }
+        query += " From ResignationMaster r"
+                + " left join r.employeeMaster e"
+                + " left join e.noDueMastersForEmpId ndm"
+                + " where r.status = '4'";
+        if (employeeExit) {
+            query += " and ndm.carProvided IS NULL OR ndm.carProvided = ''";
+        } else if (itAdmin) {
+            query += " and ndm.computerChecked IS NULL OR ndm.computerChecked = ''";
+        } else if (travelAdmin) {
+            query += " and ndm.salaryAdvanceOrLoan IS NULL OR ndm.salaryAdvanceOrLoan = ''";
+        } else {
+            query += " and e.reportingManagerLevel1=" + employeeId + " and ndm.equipments IS NULL OR ndm.equipments = '' ";
+        }
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

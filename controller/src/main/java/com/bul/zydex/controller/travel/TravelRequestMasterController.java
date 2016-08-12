@@ -1702,45 +1702,6 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
     public ModelAndView userDashboardTravelPendingRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-//        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
-//        TravelRequestMaster travelRequestMaster1 = new TravelRequestMaster();
-//
-//        EmployeeMaster employeeMaster = new EmployeeMaster();
-//        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
-//        user.getId();
-//        employeeMaster.setUserMaster(user);
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//        Date currentDate = new Date();
-//        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
-//        if (!empId.isEmpty()) {
-//            employeeMaster = (EmployeeMaster) empId.get(0);
-//        }
-////        int reportingId1 = employeeMaster.getId();
-//        String reportingManagerLevel1_id = "" + employeeMaster.getId();
-//        String reportingManagerLevel2_id = "" + employeeMaster.getId();
-//        String reportingManagerLevel3_id = "" + employeeMaster.getId();
-//        String reportingManagerLevel4_id = "" + employeeMaster.getId();
-////        List<?> reportingLevelList1 = travelRequestMasterService.readTravelRequestByReportingLevel1(travelRequestMaster, reportingManagerLevel1_id);
-////        if (!reportingLevelList1.isEmpty()) {
-//        request.setAttribute("pendingApprover1Travel", 1);
-////        }
-//        List<?> reportingLevelList2 = travelRequestMasterService.readTravelRequestByReportingLevel2(reportingManagerLevel2_id);
-//        if (!reportingLevelList2.isEmpty()) {
-//            request.setAttribute("pendingApprover1Travel", reportingLevelList2.size());
-//        }
-//        List<?> reportingLevelList3 = travelRequestMasterService.readTravelRequestByReportingLevel3(reportingManagerLevel3_id);
-//        if (!reportingLevelList3.isEmpty()) {
-//            request.setAttribute("pendingApprover1Travel", reportingLevelList3.size());
-//        }
-//        List<?> reportingLevelList4 = travelRequestMasterService.readTravelRequestByReportingLevel4(reportingManagerLevel4_id);
-//        if (!reportingLevelList4.isEmpty()) {
-//            request.setAttribute("pendingApprover1Travel", reportingLevelList4.size());
-//        }
-//        EmployeeMaster employeeMaster1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-//        travelRequestMaster1.setEmployeeMasterByEmployeeMasterId(employeeMaster1);
-//        List<?> list = travelRequestMasterService.readPendingTravelRequest(travelRequestMaster1);
-//        int pendingTravel = list.size();
-//        request.setAttribute("pendingTravel", pendingTravel);
 
         TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
         HttpSession session = request.getSession();
@@ -1752,11 +1713,10 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
         List<Object> finalList = new ArrayList<>();
         List<Object> finalList1 = new ArrayList<>();
         boolean flag = false;
-        List<?> list = travelRequestMasterService.readForRequestResult1(travelRequestMaster);
+        List<?> list = travelRequestMasterService.readForRequestResultForDashboard(travelRequestMaster);
         if (!list.isEmpty()) {
             for (Object obj : list) {
                 Object[] o1 = (Object[]) obj;
-//                travelRequestMaster = (TravelRequestMaster) obj;
                 int employeeId = (int) o1[0];
                 int tabId = (int) o1[1];
                 int status = (int) o1[8];
@@ -1772,9 +1732,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                 int historyappid1 = 0;
                 if (status != 0) {
                     if (status != 10) {
-//                        int aprroverid1 = (int) o1[10];
                         aprroverid = "" + o1[10];
-//                        aprroverid = (String) o1[10].toString();
                     }
                 }
                 List<?> approverList = travelApproverHistoryService.readapproverlist(tabId, loginId);
@@ -2077,39 +2035,13 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 
             }
         }
-//        request.setAttribute("pendingApprover1Travel", 0);
         request.setAttribute("pendingApprover1Travel", list111.size());
-//
         EmployeeMaster employeeMaster11 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster11);
         List<?> list11 = travelRequestMasterService.readPendingTravelRequest(travelRequestMaster);
         int pendingTravel = list11.size();
         request.setAttribute("pendingTravel", pendingTravel);
-//
-//        int reportingId1 = employeeMaster.getId();
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//        Date currentDate = new Date();
-//        List<?> mainList = travelRequestMasterService.readFromManager(reportingId1);
-//        for (Iterator<? extends Object> iterator = mainList.iterator(); iterator.hasNext();) {
-//            Object[] next = (Object[]) iterator.next();
-//            String strdate = "" + next[9];
-//            String approver1 = "" + next[10];
-//            String approver2 = "" + next[11];
-//            sdf.parse(strdate);
-//            Calendar cal = Calendar.getInstance();
-//            cal.setTime(sdf.parse(strdate));
-//            Date dd = cal.getTime();
-//            Date addedDate = addDays(dd, 15);
-//            if (currentDate.equals(addedDate) || currentDate.before(addedDate)) {
-//                List<?> list1 = travelRequestMasterService.readApproverPendingTravelRequest(travelRequestMaster);
-//                int pendingApproverTravel = list1.size();
-//                request.setAttribute("pendingApproverTravel", pendingApproverTravel);
-//            } else {
-//                List<?> list2 = travelRequestMasterService.readApprover2PendingTravelRequest(travelRequestMaster);
-//                int pendingApprover1Travel = list2.size();
-//                request.setAttribute("pendingApprover1Travel", pendingApprover1Travel);
-//            }
-//        }
+
         mv.setViewName("forward:performanceImprovementPlanMaster.htm?act=userDashBoard");
 
         return mv;

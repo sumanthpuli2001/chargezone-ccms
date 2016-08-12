@@ -777,4 +777,22 @@ public class TravelRequestMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readForRequestResultForDashboard(T object) {
+        String query = "";
+        query += " Select b.id,a.id,b.employeeId, b.employeeName, a.travelType,a.travelRequestNo,"
+                + " a.startDateTime,a.endDateTime,a.status, a.dateOfSubmit,"
+                + " case when (a.status=5 and a.travelType ='International')"
+                + " then d.id ELSE c.id END as approverId ,"
+                + " case when (a.status=5 and a.travelType ='International')"
+                + " then d.employeeName ELSE c.employeeName END as approver "
+                + " FROM TravelRequestMaster a"
+                + " LEFT JOIN a.employeeMasterByEmployeeMasterId b"
+                + " LEFT JOIN a.employeeMasterByApprover1Id c"
+                + " LEFT JOIN a.employeeMasterByApprover2Id d "
+                + " WHERE a.status!=5";
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

@@ -1539,6 +1539,8 @@
                                        name='form1' onsubmit='return saveSubmit11();' class="form-horizontal" role="form">
                                 <form:hidden path="id"></form:hidden>
                                 <form:hidden path="status"></form:hidden>
+                                <input type="hidden" id="oldLeaveId" name="oldLeaveId" value="${oldLeaveId}"/>
+                                <input type="hidden" id="oldLeaveDays" name="oldLeaveDays" value="${oldLeaveDays}"/>
                                     <!--Read only entries Starts here-->
                                     <div class="box box-info collapsed-box ">
                                         <div class="box-header">

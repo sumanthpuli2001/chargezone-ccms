@@ -95,4 +95,9 @@ public class ResignationMasterServiceImpl<T> extends GenericsServiceImpl<T> impl
     public List<?> getFinallyResignedEmployees() {
         return resignationMasterDAO.getFinallyResignedEmployees();
     }
+
+    @Override
+     public List<?> getFinallyResignedEmployeesForDashBoard(String employeeId,boolean  employeeExit,boolean  itAdmin,boolean  travelAdmin) {
+        return resignationMasterDAO.getFinallyResignedEmployeesForDashBoard(employeeId,employeeExit,itAdmin,travelAdmin);
+    }
 }

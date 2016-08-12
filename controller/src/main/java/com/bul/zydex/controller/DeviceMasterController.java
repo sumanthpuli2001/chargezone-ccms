@@ -16,6 +16,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.validation.BindException;
@@ -178,11 +179,16 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                 myURLConnection1 = myURL1.openConnection();
                 myURLConnection1.setRequestProperty("Authorization", "Basic " + encoded1);
                 myURLConnection1.connect();
-                reader1 = new BufferedReader(new InputStreamReader(myURLConnection1.getInputStream()));
+                myURLConnection1.setConnectTimeout(15000);
+                if (myURLConnection1.getInputStream().available() > 0) {
+                    reader1 = new BufferedReader(new InputStreamReader(myURLConnection1.getInputStream()));
+                } else {
+                    break;
+                }
                 String response;
                 String rollOverCount = "";
                 String urlSeqNo = "";
-//            String cc="";
+
                 while ((response = reader1.readLine()) != null) {
                     System.out.println(response);
                     if (response1LineCounter == 3) {
@@ -231,7 +237,12 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                         myURLConnection = myURL.openConnection();
                         myURLConnection.setRequestProperty("Authorization", "Basic " + encoded);
                         myURLConnection.connect();
-                        reader = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
+                        myURLConnection.setConnectTimeout(15000);
+                        if (myURLConnection.getInputStream().available() > 0) {
+                            reader = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
+                        } else {
+                            break;
+                        }
                         //reading response
                         String response1;
                         int responseLineCounter = 1;
@@ -275,8 +286,10 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                                 seq_number = 1;
                             }
                         }
+
                         //finally close connection`
                         reader.close();
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -286,5 +299,31 @@ public class DeviceMasterController extends DeviceMasterAbstract {
             }
 
         }
+    }
+
+    public void deviceManagementUsingThread() {
+        class myThread extends Thread {
+
+            @Override
+            public void run() {
+                try {
+                    deviceManagement();
+                } catch (Exception e) {
+
+                }
+            }
+        }
+
+        Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
+        Thread[] threadArray = threadSet.toArray(new Thread[threadSet.size()]);
+        for (Thread t : threadArray) {
+            if (t.getName().contains("deviceManagement")) {
+                t.interrupt();
+            }
+        }
+        myThread m = new myThread();
+        m.setName("deviceManagement");
+        m.start();
+
     }
 }

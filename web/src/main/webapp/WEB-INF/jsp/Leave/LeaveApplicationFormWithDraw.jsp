@@ -836,6 +836,7 @@
                                        name='form1' onsubmit='return saveSubmit11();' class="form-horizontal" role="form">
                                 <form:hidden path="id"></form:hidden>
                                 <form:hidden path="status"></form:hidden>
+                                 <input type="hidden" id="oldLeaveId" name="oldLeaveId" value="${oldLeaveId}"/>
                                     <!--Read only entries Starts here-->
                                     <div class="box box-info collapsed-box ">
                                         <div class="box-header">

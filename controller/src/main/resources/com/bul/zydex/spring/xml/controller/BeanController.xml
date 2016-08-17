@@ -506,4 +506,12 @@
         <property name="probationPeriodService" ref="probationPeriodService1" />
         <property name="probationPeriodValidator" ref="probationPeriodValidator1" />
     </bean>
+    <bean id="webService1" class="com.bul.zydex.webservice.WebService" parent="controllerConfig" >
+        <property name="employeeLeaveBalanceService" ref="employeeLeaveBalanceService1" />
+        <property name="leaveTypeMasterService" ref="leaveTypeMasterService1" />
+        <property name="leaveEmployeeDetailService" ref="leaveEmployeeDetailService1" />
+        <property name="userRightMasterService" ref="userRightMasterService1" />
+        <property name="holidayMasterService" ref="holidayMasterService1"/>
+        <property name="cOffLeaveMasterService" ref="cOffLeaveMasterService1"/>
+    </bean>
 </beans>

@@ -10,6 +10,7 @@ import com.bul.zydex.model.EmployeeAdvanceSearch;
 import com.bul.zydex.model.EmployeeMaster;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 
 /**
  *
@@ -1700,6 +1701,16 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
+    }
+
+    @Override
+    public List<?> readEmpUserIdWise(T object) {
+        EmployeeMaster employeeMaster = (EmployeeMaster) object;
+        String query = "";
+        query += " Select a.locationMaster.id "
+                + " FROM EmployeeMaster a "
+                + " WHERE a.userMaster.id= " + employeeMaster.getUserMaster().getId();
+        return getHibernateTemplate().find(query);
     }
 
 }

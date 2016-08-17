@@ -580,7 +580,6 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                 </li>
-
             </ul>
         </section>
         <!-- /.sidebar -->

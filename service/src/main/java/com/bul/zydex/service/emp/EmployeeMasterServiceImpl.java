@@ -314,4 +314,8 @@ public List<?> readEmployeeForPlant(){
         return employeeMasterDAO.readEmployeeForPlant();
     }
 
+    @Override
+    public List<?> readEmpUserIdWise(T object) {
+          return employeeMasterDAO.readEmpUserIdWise(object);
+    }
 }

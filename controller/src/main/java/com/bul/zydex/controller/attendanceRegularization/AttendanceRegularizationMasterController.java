@@ -909,7 +909,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     } else if (firstHalf.equals("AB")) {
                         newList.add("AB");
                     } else if (firstHalf.equals("Casual Leave") || firstHalf.equals("C Off Leave") || firstHalf.equals("Privilege Leave") || firstHalf.equals("Sick Leave")
-                            || firstHalf.equals("Paternity Leave") || firstHalf.equals("Maternity Leave") || firstHalf.equals("Leave Without Pay") || firstHalf.contains("TR")) {
+                            || firstHalf.equals("Paternity Leave") || firstHalf.equals("Maternity Leave") || firstHalf.equals("Leave Without Pay") || firstHalf.contains("TR") || firstHalf.contains("?")) {
                         newList.add("-");
                     }
                 } catch (Exception e) {

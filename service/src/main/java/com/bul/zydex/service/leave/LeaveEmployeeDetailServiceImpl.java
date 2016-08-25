@@ -132,4 +132,9 @@ public class LeaveEmployeeDetailServiceImpl<T> extends GenericsServiceImpl<T> im
         return leaveEmployeeDetailDAO.readWithdrawPendingApproverLeaveRequestForDashboard(object);
     }
 
+    @Override
+    public List<?> readEmpLeaveListDetail(T object) {
+        return leaveEmployeeDetailDAO.readEmpLeaveListDetail(object);
+    }
+
 }

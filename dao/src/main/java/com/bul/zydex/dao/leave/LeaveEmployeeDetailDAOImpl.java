@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -613,6 +613,30 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         List<?> finalList = getHibernateTemplate().find(query);
         return Integer.parseInt("" + finalList.get(0));
+    }
+
+    @Override
+    public List<?> readEmpLeaveListDetail(T object) {
+        LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
+        String query = "";
+        String condition = "";
+
+        if (!"".equals(leaveEmployeeDetail.getStartDate()) && null != leaveEmployeeDetail.getStartDate()
+                && !"".equals(leaveEmployeeDetail.getEndDate()) && null != leaveEmployeeDetail.getEndDate()) {
+            condition += " AND a.startDate BETWEEN '" + leaveEmployeeDetail.getStartDate() + "' AND '" + leaveEmployeeDetail.getEndDate() + "' ";
+        }
+        if (null != leaveEmployeeDetail.getLeaveTypeMaster() && !"".equals(leaveEmployeeDetail.getLeaveTypeMaster())) {
+            condition += " AND b.id = '" + leaveEmployeeDetail.getLeaveTypeMaster().getId() + "'";
+        }
+
+        query += " Select b.leaveType, a.startDate, a.endDate, a.noOfDays, a.id, a.status, a.empRemark, (Select c.employeeName from EmployeeMaster c where c.id=a.approverId) as ApproveName  "
+                + " FROM LeaveEmployeeDetail a"
+                + " LEFT JOIN a.leaveTypeMaster b"
+                + " WHERE a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
+                + " AND a.status !=5" + condition
+                + " ORDER BY a.id desc";
+        
+        return getHibernateTemplate().find(query);
     }
 
 }

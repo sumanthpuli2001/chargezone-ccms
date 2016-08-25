@@ -31,9 +31,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -81,9 +81,6 @@ public class WebService extends WebServiceAbstract {
             message = "Login Fail";
 
         } else {
-//            resmessage = "OK";
-            rcode = "1";
-            message = "Login Successful";
             for (UserMaster userDetail : userList) {
                 userid = userDetail.getId().toString();
                 username = userDetail.getUserName().toString();
@@ -101,6 +98,8 @@ public class WebService extends WebServiceAbstract {
             } else {
                 userpic = url1 + "StorageYard/UserProfile/User/default.png";
             }
+            rcode = "1";
+            message = "Login Successful";
 
         }
         data.put("userPic", userpic);
@@ -148,8 +147,7 @@ public class WebService extends WebServiceAbstract {
                 employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
                 managername = employeeMaster1.getEmployeeName();
             }
-            rcode = "1";
-            message = "Success";
+
             Data.put("ReportingManager", managername);
             Data.put("WorkLocation", worklocation);
             Data.put("Department", department);
@@ -157,6 +155,8 @@ public class WebService extends WebServiceAbstract {
             Data.put("Designation", designation);
             Data.put("EmployeeName", ename);
             Data.put("EmployeeNo", empno);
+            rcode = "1";
+            message = "Success";
         } else {
             rcode = "0";
             message = "Error";
@@ -190,8 +190,7 @@ public class WebService extends WebServiceAbstract {
             employeeLeaveBalance.setEmployeeMaster(employeeMaster1);
             List<?> leaveBalance = employeeLeaveBalanceService.readByEmpId(employeeLeaveBalance);
             if (!leaveBalance.isEmpty()) {
-                rcode = "1";
-                message = "Success";
+
                 for (int i = 0; i < leaveBalance.size(); i++) {
                     Object[] arrayOfObject = (Object[]) leaveBalance.get(i);
                     JSONObject obj = new JSONObject();
@@ -203,7 +202,10 @@ public class WebService extends WebServiceAbstract {
                     obj.put("allowedleavedays", allowedleave);
                     jSONArray.put(obj);
                 }
+                rcode = "1";
+                message = "Success";
                 data.put("leavedetail", jSONArray);
+
             } else {
                 rcode = "0";
                 message = "Error";
@@ -242,8 +244,7 @@ public class WebService extends WebServiceAbstract {
             locationid = userList.get(0).toString();
             List<?> HolidayList = (List<HolidayMaster>) holidayMasterService.readHolidaysLocationWise(locationid);
             if (!HolidayList.isEmpty()) {
-                rcode = "1";
-                message = "Success";
+
                 for (int i = 0; i < HolidayList.size(); i++) {
                     Object[] arrayOfObject = (Object[]) HolidayList.get(i);
                     JSONObject obj = new JSONObject();
@@ -255,6 +256,8 @@ public class WebService extends WebServiceAbstract {
                     obj.put("enddate", Enddate);
                     jSONArray.put(obj);
                 }
+                rcode = "1";
+                message = "Success";
                 data.put("holidaysList", jSONArray);
             } else {
                 rcode = "0";
@@ -457,10 +460,10 @@ public class WebService extends WebServiceAbstract {
         } else if (leaveTypeMaster.getLeaveType().equals("Paternity Leave")) {
 
             List list = leaveEmployeeDetailService.readEmployeeWiseMaternity(leaveEmployeeDetail);
-            if (employeeMaster.getMaritalStatus().equals("UnMarried")) {
+            if (employeeMaster1.getMaritalStatus().equals("UnMarried")) {
                 rcode = "6";
                 message = "UnMarried Employee Should Not Apply Paternity Leave...";
-            } else if (employeeMaster.getGender()) {
+            } else if (employeeMaster1.getGender()) {
                 rcode = "7";
                 message = "Female Employee Should Not Apply Paternity Leave...";
 
@@ -568,4 +571,273 @@ public class WebService extends WebServiceAbstract {
 
     }
 
+    public void userleaveList(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
+        PrintWriter out = null;
+        out = response.getWriter();
+        String rcode = "";
+        String message = "";
+        String empid = "";
+        UserMaster user = new UserMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        JSONObject userData = new JSONObject();
+        JSONObject data = new JSONObject();
+        JSONArray jSONArray = new JSONArray();
+        String id = request.getParameter("id");
+        int userid = Integer.parseInt(id);
+        user.setId(userid);
+        employeeMaster.setUserMaster(user);
+        LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empId.get(0);
+
+            leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
+            List<?> empLeaveList = leaveEmployeeDetailService.readEmpLeaveListDetail(leaveEmployeeDetail);
+            for (int i = 0; i < empLeaveList.size(); i++) {
+                Object[] arrayOfObject = (Object[]) empLeaveList.get(i);
+                JSONObject obj = new JSONObject();
+                String leavetype = arrayOfObject[0].toString();
+                String Startdate = arrayOfObject[1].toString();
+                String Enddate = arrayOfObject[2].toString();
+                String Noofdays = arrayOfObject[3].toString();
+                String leaveid = arrayOfObject[4].toString();
+                String Status = arrayOfObject[5].toString();
+                String empreason = arrayOfObject[6].toString();
+                String ApproveName;
+                if (null == arrayOfObject[7]) {
+                    ApproveName = "";
+                } else {
+                    ApproveName = arrayOfObject[7].toString();
+                }
+                String statusmsg = "";
+
+                if (Status.equals("0")) {
+                    statusmsg = "Pending";
+                }
+                if (Status.equals("1")) {
+                    statusmsg = "Reworked By " + ApproveName;
+                }
+                if (Status.equals("2")) {
+                    statusmsg = "Rejected By " + ApproveName;
+                }
+                if (Status.equals("3")) {
+                    statusmsg = "Approve By " + ApproveName;
+
+                }
+                if (Status.equals("4")) {
+                    statusmsg = "WithDraw Request";
+                }
+                if (Status.equals("5")) {
+                    statusmsg = "WithDrawn By " + ApproveName;
+                }
+                leaveEmployeeDetail = leaveEmployeeDetailService.readById(Integer.parseInt(leaveid));
+                String startdatestatus = "";
+                String enddatestatus = "";
+                if (!leaveEmployeeDetail.equals("")) {
+                    startdatestatus = leaveEmployeeDetail.getStartDateStatus().toString();
+                    enddatestatus = leaveEmployeeDetail.getEndDateStatus().toString();
+                }
+
+                obj.put("leavereason", empreason);
+                obj.put("startdatestatus", startdatestatus);
+                obj.put("enddatestatus", enddatestatus);
+                obj.put("leavetype", leavetype);
+                obj.put("startdate", Startdate);
+                obj.put("enddate", Enddate);
+                obj.put("noofdays", Noofdays);
+                obj.put("leaveid", leaveid);
+                obj.put("status", Status);
+                obj.put("statusmsg", statusmsg);
+                obj.put("approveName", ApproveName);
+                jSONArray.put(obj);
+                rcode = "1";
+                message = "Success";
+            }
+            data.put("UserLeaveList", jSONArray);
+        } else {
+            rcode = "0";
+            message = "Error";
+        }
+        userData.put("data", data);
+        userData.put("responseMessage", message);
+        userData.put("responseCode", rcode);
+        out.print(userData);
+    }
+
+    public void WithDrawLeaveRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
+        PrintWriter out = null;
+        out = response.getWriter();
+        String rcode = "";
+        String message = "";
+        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+        JSONObject userData = new JSONObject();
+        JSONObject data = new JSONObject();
+        Float balanceDay;
+        Float noOfDay;
+        String leaveid = request.getParameter("leaveid");
+        LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+        if (null != leaveid && !leaveid.equals("")) {
+            leaveEmployeeDetail = leaveEmployeeDetailService.readById(Integer.parseInt(leaveid));
+            int empId = leaveEmployeeDetail.getEmployeeMaster().getId();
+            EmployeeMaster employeeMaster = employeeMasterService.readById(empId);
+            leaveTypeMaster = leaveTypeMasterService.readById(leaveEmployeeDetail.getLeaveTypeMaster().getId());
+            leaveEmployeeDetail.getLeaveTypeMaster().getId();
+            int status = leaveEmployeeDetail.getStatus();
+            if (status == 0) {
+                employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+                employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                if (!balanceList.isEmpty()) {
+                    employeeLeaveBalance = (EmployeeLeaveBalance) balanceList.get(0);
+                }
+                balanceDay = employeeLeaveBalance.getNoOfLeaveRemain();
+                noOfDay = leaveEmployeeDetail.getNoOfDays();
+                balanceDay = balanceDay + noOfDay;
+                employeeLeaveBalance.setNoOfLeaveRemain(balanceDay);
+                employeeLeaveBalanceService.update(employeeLeaveBalance);
+                leaveEmployeeDetail.setStatus(5);
+                Date date = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String approveDate = sdf.format(date);
+                leaveEmployeeDetail.setApproveDate(approveDate);
+                leaveEmployeeDetailService.update(leaveEmployeeDetail);
+                rcode = "1";
+                message = "Success";
+            } else if (status == 3) {
+                leaveEmployeeDetail.setStatus(4);
+                leaveEmployeeDetailService.update(leaveEmployeeDetail);
+                rcode = "1";
+                message = "Success";
+            }
+        } else {
+            rcode = "0";
+            message = "Error";
+        }
+        userData.put("data", data);
+        userData.put("responseMessage", message);
+        userData.put("responseCode", rcode);
+        out.print(userData);
+    }
+
+    public void EditLeaveDetail(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException, ServletException, ParseException {
+        PrintWriter out = null;
+        out = response.getWriter();
+        String rcode = "";
+        String message = "";
+        JSONObject userData = new JSONObject();
+        JSONObject data = doPost(request);
+        JSONObject obj = new JSONObject();
+        JSONArray jSONArray = new JSONArray();
+        String leaveid = request.getParameter("leaveid");
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+        leaveEmployeeDetail = leaveEmployeeDetailService.readById(Integer.parseInt(leaveid));
+        employeeMaster = employeeMasterService.readById(leaveEmployeeDetail.getEmployeeMaster().getId());
+        leaveTypeMaster = leaveTypeMasterService.readById(leaveEmployeeDetail.getLeaveTypeMaster().getId());
+        Float balanceDay;
+        Float TotalbalanceDay;
+        Date startDate = new Date();
+        Date endDate = new Date();
+        
+        
+        employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+        employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+        List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+        if (!balanceList.isEmpty()) {
+            employeeLeaveBalance = (EmployeeLeaveBalance) balanceList.get(0);
+        }
+        balanceDay = employeeLeaveBalance.getNoOfLeaveRemain();
+        Float noOfDays = leaveEmployeeDetail.getNoOfDays();
+        TotalbalanceDay = balanceDay + noOfDays;
+        employeeLeaveBalance.setNoOfLeaveRemain(TotalbalanceDay);
+      
+        employeeLeaveBalanceService.update(employeeLeaveBalance);
+
+        String leavetypeid = data.get("leavetypeId").toString();
+        leaveTypeMaster = leaveTypeMasterService.readById(Integer.parseInt(leavetypeid));
+        leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
+        leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster);
+        leaveEmployeeDetail.setStartDate(data.get("startDate").toString());
+        leaveEmployeeDetail.setEndDate(data.get("endDate").toString());
+        leaveEmployeeDetail.setNoOfDays(Float.parseFloat(data.get("noOfDay").toString()));
+        leaveEmployeeDetail.setEmpRemark(data.get("remark").toString());
+        leaveEmployeeDetail.setStartDateStatus(data.get("startDayType").toString());
+        leaveEmployeeDetail.setEndDateStatus(data.get("endDayType").toString());
+        Float noOfDay = Float.parseFloat(data.get("noOfDay").toString());
+        startDate = sdf.parse(leaveEmployeeDetail.getStartDate());
+        endDate = sdf.parse(leaveEmployeeDetail.getEndDate());
+
+        if (!leaveTypeMaster.getLeaveType().contains("Short Leave") && !leaveTypeMaster.getLeaveType().contains("C Off Leave")) {
+            if (null != leaveEmployeeDetail.getNoOfDays() && leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave()) && !leaveTypeMaster.getLeaveType().contains("Maternity Leave")) {
+                rcode = "4";
+                message = "No Of Days is Greater than maximum allowed Days...";
+
+            } else if (startDate.after(endDate)) {
+                rcode = "11";
+                message = " Please Insert start date before end date.";
+
+            } else {
+                leaveEmployeeDetail.setStatus(1);
+                leaveEmployeeDetailService.update(leaveEmployeeDetail);
+//                            String oldLeaveId = request.getParameter("oldLeaveId");
+//                            String oldLeaveDays = request.getParameter("oldLeaveDays");
+//                            float editBalance = 0;
+//                            EmployeeLeaveBalance employeeLeaveBalance2 = new EmployeeLeaveBalance();
+//                            employeeLeaveBalance2.setEmployeeMaster(employeeMaster);
+//                            employeeLeaveBalance2.setLeaveTypeMaster(leaveTypeMaster);
+//                            List<?> changeBalanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance2);
+//                            if (!changeBalanceList.isEmpty()) {
+//                                employeeLeaveBalance2 = (EmployeeLeaveBalance) balanceList.get(0);
+//                            }
+//                            editBalance = employeeLeaveBalance2.getNoOfLeaveRemain();
+//                            editBalance = editBalance + Float.parseFloat(oldLeaveDays);
+//                            employeeLeaveBalance2.setNoOfLeaveRemain(editBalance);
+//                            if (employeeLeaveBalance2.getLeaveTypeMaster().getId() != 9) {
+//                                employeeLeaveBalanceService.update(employeeLeaveBalance2);
+//                            }
+
+                LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(Integer.parseInt(leavetypeid));
+                if (leaveTypeMaster1.getLeaveType().equals("Paternity Leave")) {
+                    noOfDay = (float) 3.0;
+                }
+                balanceDay = employeeLeaveBalance.getNoOfLeaveRemain();
+                noOfDay = leaveEmployeeDetail.getNoOfDays();
+                balanceDay = balanceDay - noOfDay;
+                employeeLeaveBalance.setNoOfLeaveRemain(balanceDay);
+                employeeLeaveBalanceService.update(employeeLeaveBalance);
+                rcode = "1";
+                message = "Success";
+                //emailtemplate for leave request edit click
+                try {
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster EmployeeHR = new EmployeeMaster();
+                    EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+
+                    //id=58 for apply leave request edited...
+                    emailTemplate = emailTemplateService.readById(58);
+                    String To = EmployeeHR.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+
+                } catch (Exception e) {
+                }
+
+            }
+        }
+
+    }
 }

@@ -733,30 +733,31 @@ public class WebService extends WebServiceAbstract {
         String leaveid = request.getParameter("leaveid");
         EmployeeMaster employeeMaster = new EmployeeMaster();
         LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+        LeaveTypeMaster leaveTypeMaster2 = new LeaveTypeMaster();
         EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+        EmployeeLeaveBalance employeeLeaveBalance3 = new EmployeeLeaveBalance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
         leaveEmployeeDetail = leaveEmployeeDetailService.readById(Integer.parseInt(leaveid));
         employeeMaster = employeeMasterService.readById(leaveEmployeeDetail.getEmployeeMaster().getId());
-        leaveTypeMaster = leaveTypeMasterService.readById(leaveEmployeeDetail.getLeaveTypeMaster().getId());
+        leaveTypeMaster2 = leaveTypeMasterService.readById(leaveEmployeeDetail.getLeaveTypeMaster().getId());
         Float balanceDay;
         Float TotalbalanceDay;
         Date startDate = new Date();
         Date endDate = new Date();
-        
-        
+
         employeeLeaveBalance.setEmployeeMaster(employeeMaster);
-        employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+        employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster2);
         List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
         if (!balanceList.isEmpty()) {
-            employeeLeaveBalance = (EmployeeLeaveBalance) balanceList.get(0);
+            employeeLeaveBalance3 = (EmployeeLeaveBalance) balanceList.get(0);
         }
-        balanceDay = employeeLeaveBalance.getNoOfLeaveRemain();
+        balanceDay = employeeLeaveBalance3.getNoOfLeaveRemain();
         Float noOfDays = leaveEmployeeDetail.getNoOfDays();
         TotalbalanceDay = balanceDay + noOfDays;
-        employeeLeaveBalance.setNoOfLeaveRemain(TotalbalanceDay);
-      
-        employeeLeaveBalanceService.update(employeeLeaveBalance);
+        employeeLeaveBalance3.setNoOfLeaveRemain(TotalbalanceDay);
+
+        employeeLeaveBalanceService.update(employeeLeaveBalance3);
 
         String leavetypeid = data.get("leavetypeId").toString();
         leaveTypeMaster = leaveTypeMasterService.readById(Integer.parseInt(leavetypeid));
@@ -805,11 +806,19 @@ public class WebService extends WebServiceAbstract {
                 if (leaveTypeMaster1.getLeaveType().equals("Paternity Leave")) {
                     noOfDay = (float) 3.0;
                 }
-                balanceDay = employeeLeaveBalance.getNoOfLeaveRemain();
+                EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
+                EmployeeLeaveBalance employeeLeaveBalance2 = new EmployeeLeaveBalance();
+                employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+                employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
+                List<?> balanceCutList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance1);
+                if (!balanceCutList.isEmpty()) {
+                    employeeLeaveBalance2 = (EmployeeLeaveBalance) balanceCutList.get(0);
+                }
+                balanceDay = employeeLeaveBalance2.getNoOfLeaveRemain();
                 noOfDay = leaveEmployeeDetail.getNoOfDays();
                 balanceDay = balanceDay - noOfDay;
-                employeeLeaveBalance.setNoOfLeaveRemain(balanceDay);
-                employeeLeaveBalanceService.update(employeeLeaveBalance);
+                employeeLeaveBalance2.setNoOfLeaveRemain(balanceDay);
+                employeeLeaveBalanceService.update(employeeLeaveBalance2);
                 rcode = "1";
                 message = "Success";
                 //emailtemplate for leave request edit click

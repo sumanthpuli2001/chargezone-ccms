@@ -514,4 +514,7 @@
         <property name="holidayMasterService" ref="holidayMasterService1"/>
         <property name="cOffLeaveMasterService" ref="cOffLeaveMasterService1"/>
     </bean>
+    <bean id="emailAddMasterController1" class="com.bul.zydex.controller.EmailAddMasterController" parent="controllerConfig" >
+        <property name="emailAddMasterService" ref="emailAddMasterService1" />
+    </bean>
 </beans>

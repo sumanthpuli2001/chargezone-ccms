@@ -318,4 +318,8 @@ public List<?> readEmployeeForPlant(){
     public List<?> readEmpUserIdWise(T object) {
           return employeeMasterDAO.readEmpUserIdWise(object);
     }
+    @Override
+     public List<?> readAllSubordinate(T object){
+          return employeeMasterDAO.readAllSubordinate(object);
+    }
 }

@@ -298,6 +298,7 @@
     <mapping resource="com/bul/zydex/model/EmployeeFingerprint.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/AppraisalkraActivity.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/TimeAttandanceFlaxibleMaster.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/EmailAddMaster.hbm.xml"/>
     <mapping/>
   </session-factory>
 </hibernate-configuration>

@@ -91,4 +91,5 @@
   <table-filter match-name="improvement_goals_history"/>
   <table-filter match-name="rotation_master"/>
   <table-filter match-name="time_attandance_flaxible_master"/>
+  <table-filter match-name="email_add_master"/>
 </hibernate-reverse-engineering>

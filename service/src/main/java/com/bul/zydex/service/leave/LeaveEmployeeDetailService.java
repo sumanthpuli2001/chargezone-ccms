@@ -57,7 +57,9 @@ public interface LeaveEmployeeDetailService<T> extends GenericsService<T> {
     public int readPendingApproverLeaveRequestForDashboard(T object);
 
     public int readWithdrawPendingApproverLeaveRequestForDashboard(T object);
-    
+
     public List<?> readEmpLeaveListDetail(T object);
+
+    public List<?> readDate(T object);
 
 }

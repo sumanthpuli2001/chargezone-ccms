@@ -137,4 +137,9 @@ public class LeaveEmployeeDetailServiceImpl<T> extends GenericsServiceImpl<T> im
         return leaveEmployeeDetailDAO.readEmpLeaveListDetail(object);
     }
 
+    @Override
+    public List<?> readDate(T object) {
+         return leaveEmployeeDetailDAO.readDate(object);
+    }
+
 }

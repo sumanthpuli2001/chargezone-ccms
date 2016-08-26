@@ -635,8 +635,21 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " WHERE a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
                 + " AND a.status !=5" + condition
                 + " ORDER BY a.id desc";
-        
+
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readDate(T object) {
+         LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
+        String hqlString = "from LeaveEmployeeDetail a"
+                + " WHERE a.status !=5"
+                + " AND a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
+                + " AND STR_TO_DATE(a.startDate,'%d/%m/%Y')>=STR_TO_DATE('" + leaveEmployeeDetail.getStartDate() + "','%d/%m/%Y')"
+                + " AND STR_TO_DATE(a.startDate,'%d/%m/%Y')<=STR_TO_DATE('" + leaveEmployeeDetail.getEndDate() + "','%d/%m/%Y')"
+                + " AND STR_TO_DATE(a.endDate,'%d/%m/%Y')>=STR_TO_DATE('" + leaveEmployeeDetail.getStartDate() + "','%d/%m/%Y')"
+                + " AND STR_TO_DATE(a.endDate,'%d/%m/%Y')<=STR_TO_DATE('" + leaveEmployeeDetail.getEndDate() + "','%d/%m/%Y')";
+        return getHibernateTemplate().find(hqlString);
     }
 
 }

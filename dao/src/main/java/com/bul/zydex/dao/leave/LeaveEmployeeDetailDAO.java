@@ -59,5 +59,7 @@ public interface LeaveEmployeeDetailDAO<T> extends GenericsDAO<T> {
     public int readWithdrawPendingApproverLeaveRequestForDashboard(T object);
     
     public List<?> readEmpLeaveListDetail(T object);
+    
+    public List<?> readDate(T object);
 
 }

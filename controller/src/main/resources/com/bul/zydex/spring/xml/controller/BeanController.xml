@@ -514,4 +514,11 @@
         <property name="holidayMasterService" ref="holidayMasterService1"/>
         <property name="cOffLeaveMasterService" ref="cOffLeaveMasterService1"/>
     </bean>
+    <bean id="employeePunch1" class="com.bul.zydex.webservice.EmployeePunch" parent="controllerConfig" >
+        <property name="employeePunchForMobileAppService" ref="employeePunchForMobileAppService1" />
+    </bean>
+    <bean id="expenseReport1" class="com.bul.zydex.webservice.ExpenseReport" parent="controllerConfig" >
+        <property name="travelRequestMasterService" ref="travelRequestMasterService1" />
+    </bean>
 </beans>
+ 

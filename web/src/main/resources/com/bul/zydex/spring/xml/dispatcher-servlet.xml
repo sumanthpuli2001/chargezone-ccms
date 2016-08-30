@@ -143,6 +143,8 @@
                 <!--probation Period-->
                 <prop key="probationPeriod.htm">probationPeriodController1</prop>
                 <prop key="webService.html">webService1</prop>
+                <prop key="employeePunch.html">employeePunch1</prop>
+                <prop key="expenseReport.html">expenseReport1</prop>
            
             </props>
         </property>

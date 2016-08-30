@@ -35,8 +35,8 @@ public class TravelRequestMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         query += ""
                 + " FROM TravelRequestMaster a"
-                + " Where a.employeeMasterByEmployeeMasterId=" + travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId();
-//                + " and a.status=5";
+                + " Where a.employeeMasterByEmployeeMasterId=" + travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId()
+                + " and a.status=5"; 
 
         return getHibernateTemplate().find(query);
     }

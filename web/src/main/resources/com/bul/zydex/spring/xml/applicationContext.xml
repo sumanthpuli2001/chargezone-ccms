@@ -21,7 +21,7 @@
     <import resource="util/BeanUtil.xml" />
 
     <!-- Transaction Declaration -->
-    <import resource="Transaction.xml" />
+<!--    <import resource="Transaction.xml" />-->
 
     <!-- Database Configuration -->
     <import resource="DataSource.xml" />

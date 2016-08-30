@@ -705,15 +705,54 @@ public class WebService extends WebServiceAbstract {
                 leaveEmployeeDetailService.update(leaveEmployeeDetail);
                 rcode = "1";
                 message = "Success";
+                try {
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) employeeMaster;
+                    DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    //id= 10 for leave withdraw request......
+                    emailTemplate = emailTemplateService.readById(10);
+                    String To = EmployeeHR.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+
+                } catch (Exception e) {
+                }
             } else if (status == 3) {
                 leaveEmployeeDetail.setStatus(4);
                 leaveEmployeeDetailService.update(leaveEmployeeDetail);
                 rcode = "1";
                 message = "Success";
+                try {
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) employeeMaster;
+                    DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    //id= 10 for leave withdraw request......
+                    emailTemplate = emailTemplateService.readById(10);
+                    String To = EmployeeHR.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+
+                } catch (Exception e) {
+                }
             }
         } else {
             rcode = "0";
             message = "Error";
+
         }
         userData.put("data", data);
         userData.put("responseMessage", message);
@@ -750,6 +789,7 @@ public class WebService extends WebServiceAbstract {
         employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster2);
 
         LeaveEmployeeDetail leaveEmployeeDetail2 = new LeaveEmployeeDetail();
+        leaveEmployeeDetail2.setId(Integer.parseInt(leaveid));
         leaveEmployeeDetail2.setStartDate(data.get("startDate").toString());
         leaveEmployeeDetail2.setEndDate(data.get("endDate").toString());
         leaveEmployeeDetail2.setEmployeeMaster(employeeMaster);
@@ -801,20 +841,6 @@ public class WebService extends WebServiceAbstract {
                 }
             }
 
-//        boolean flag = false;
-//        for (Object leave1 : l1) {
-//            leaveEmployeeDetail1 = (LeaveEmployeeDetail) leave1;
-//            Date strDate1 = sdf.parse(leaveEmployeeDetail1.getStartDate());
-//            Date endDate1 = sdf.parse(leaveEmployeeDetail1.getEndDate());
-//            Integer id1 = leaveEmployeeDetail1.getLeaveTypeMaster().getId();
-//
-//            if (leaveEmployeeDetail1.getStatus() != 5 && (startDate.equals(strDate1) || startDate.after(strDate1) && startDate.before(endDate1) || (endDate.after(strDate1) && endDate.before(endDate1)))) {
-//                flag = true;
-//                break;
-//            } else {
-//                flag = false;
-//            }
-//        }
             if (leaveTypeMaster.getLeaveType().contains("Short Leave")) {
                 if (dayName.equals("Saturday") && dayOfWeek == 2 && (locationId == 1 || locationId == 6)) {
                     rcode = "2";
@@ -853,6 +879,29 @@ public class WebService extends WebServiceAbstract {
                     employeeLeaveBalanceService.update(employeeLeaveBalance2);
                     rcode = "1";
                     message = "Success";
+
+                    try {
+                        EmployeeMaster employeeMasterModel = (EmployeeMaster) employeeMaster;
+                        DesignationMaster designationMaster = new DesignationMaster();
+                        designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        EmployeeMaster EmployeeHR = new EmployeeMaster();
+                        EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+
+                        //id=58 for apply leave request edited...
+                        emailTemplate = emailTemplateService.readById(58);
+                        String To = EmployeeHR.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, Subject, msg);
+
+                    } catch (Exception e) {
+                    }
 
                 }
             } else if (leaveTypeMaster.getLeaveType().contains("C Off Leave")) {
@@ -898,6 +947,30 @@ public class WebService extends WebServiceAbstract {
                     employeeLeaveBalanceService.update(employeeLeaveBalance2);
                     rcode = "1";
                     message = "Success";
+
+                    try {
+                        EmployeeMaster employeeMasterModel = (EmployeeMaster) employeeMaster;
+                        DesignationMaster designationMaster = new DesignationMaster();
+                        designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        EmployeeMaster EmployeeHR = new EmployeeMaster();
+                        EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+
+                        //id=58 for apply leave request edited...
+                        emailTemplate = emailTemplateService.readById(58);
+                        String To = EmployeeHR.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, Subject, msg);
+
+                    } catch (Exception e) {
+                    }
+
                 }
             } else if (dayName.equals("Saturday") && dayOfWeek == 2 && (locationId == 1 || locationId == 6) && leaveEmployeeDetail.getStartDateStatus().equals("Fullday")) {
                 rcode = "3";
@@ -957,6 +1030,30 @@ public class WebService extends WebServiceAbstract {
                     employeeLeaveBalanceService.update(employeeLeaveBalance2);
                     rcode = "1";
                     message = "Success";
+
+                    try {
+                        EmployeeMaster employeeMasterModel = (EmployeeMaster) employeeMaster;
+                        DesignationMaster designationMaster = new DesignationMaster();
+                        designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        EmployeeMaster EmployeeHR = new EmployeeMaster();
+                        EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+
+                        //id=58 for apply leave request edited...
+                        emailTemplate = emailTemplateService.readById(58);
+                        String To = EmployeeHR.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, Subject, msg);
+
+                    } catch (Exception e) {
+                    }
+
                 }
             } else if (!leaveTypeMaster.getLeaveType().contains("Maternity Leave") && !leaveTypeMaster.getLeaveType().contains("Leave Without Pay") && leaveEmployeeDetail.getNoOfDays() > employeeLeaveBalance3.getNoOfLeaveRemain()) {
                 rcode = "9";
@@ -996,21 +1093,94 @@ public class WebService extends WebServiceAbstract {
                     employeeLeaveBalanceService.update(employeeLeaveBalance2);
                     rcode = "1";
                     message = "Success";
+                    try {
+                        EmployeeMaster employeeMasterModel = (EmployeeMaster) employeeMaster;
+                        DesignationMaster designationMaster = new DesignationMaster();
+                        designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        EmployeeMaster EmployeeHR = new EmployeeMaster();
+                        EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+
+                        //id=58 for apply leave request edited...
+                        emailTemplate = emailTemplateService.readById(58);
+                        String To = EmployeeHR.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, Subject, msg);
+
+                    } catch (Exception e) {
+                    }
 
                 }
+            } else {
+                balanceDay = employeeLeaveBalance3.getNoOfLeaveRemain();
+                Float noOfDays = leaveEmployeeDetail.getNoOfDays();
+                TotalbalanceDay = balanceDay + noOfDays;
+                employeeLeaveBalance3.setNoOfLeaveRemain(TotalbalanceDay);
+                employeeLeaveBalanceService.update(employeeLeaveBalance3);
+
+                leaveEmployeeDetail.setStatus(0);
+                leaveEmployeeDetailService.update(leaveEmployeeDetail);
+                LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(Integer.parseInt(leavetypeid));
+                if (leaveTypeMaster1.getLeaveType().equals("Paternity Leave")) {
+                    noOfDay = (float) 3.0;
+                }
+                EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
+                EmployeeLeaveBalance employeeLeaveBalance2 = new EmployeeLeaveBalance();
+                employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+                employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
+                List<?> balanceCutList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance1);
+                if (!balanceCutList.isEmpty()) {
+                    employeeLeaveBalance2 = (EmployeeLeaveBalance) balanceCutList.get(0);
+                }
+                balanceDay = employeeLeaveBalance2.getNoOfLeaveRemain();
+                noOfDay = leaveEmployeeDetail.getNoOfDays();
+                balanceDay = balanceDay - noOfDay;
+                employeeLeaveBalance2.setNoOfLeaveRemain(balanceDay);
+                employeeLeaveBalanceService.update(employeeLeaveBalance2);
+                rcode = "1";
+                message = "Success";
+
+                try {
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) employeeMaster;
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster EmployeeHR = new EmployeeMaster();
+                    EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+
+                    //id=58 for apply leave request edited...
+                    emailTemplate = emailTemplateService.readById(58);
+                    String To = EmployeeHR.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+
+                } catch (Exception e) {
+                }
+
             }
+
             userData.put("responseMessage", message);
             userData.put("responseCode", rcode);
             out.print(userData);
         } else {
-            message = "Already Leave Apply On That Day";
             rcode = "5";
+            message = "You Have Already apply Leave On that Day...";
             userData.put("responseMessage", message);
             userData.put("responseCode", rcode);
             out.print(userData);
         }
-
-//     
     }
 
 }

@@ -23,30 +23,19 @@ public class EmailAddMasterController extends EmailAddMasterAbstract{
       public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
        EmailAddMaster emailAddMaster=new EmailAddMaster();
-        mv.getModelMap().put("emailTemplate", emailAddMaster);
+        mv.getModelMap().put("emailAddMaster", emailAddMaster);
         mv.setViewName("EmailTemplate/EmailAddCreate");
         return mv;
     }
 
     public ModelAndView createSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        EmailTemplate emailTemplate = new EmailTemplate();
-        BindException errors = new BindException(emailTemplate, "emailTemplate");
-        bind(request, emailTemplate);
-        if (errors.hasErrors()) {
-            request.setAttribute("failureMessage",
-                    "Error : The Entered Information is not valid.");
-            mv.addAllObjects(errors.getModel());
-//            mv = createClick(request, response);
-            mv.setViewName("EmailTemplate/EmailTemplateCreate");
-        } else {
-            emailTemplateService.create(emailTemplate);
-            request.setAttribute("successMessage",
-                    "Information : The Information is saved Successfully.");
-
-            mv.setViewName("redirect:emailTemplate.htm?act=searchSubmit");
-//            mv.setViewName("EmailTemplate/EmailTemplateCreate");
+       EmailAddMaster emailAddMaster=new EmailAddMaster();
+       int countId = Integer.parseInt(request.getParameter("countId"));
+        for (int i = 1; i <= countId; i++) {
+             String emailId = request.getParameter("emailId" + i);
         }
+        
         return mv;
     }
 

@@ -121,7 +121,7 @@
                     }
                 }
             }
-            if (selectedText == 'Short Leave' || selectedText == 'C Off Leave') {
+            if (selectedText == 'Short Leave') {
                 if (document.getElementById("endDateShort").value == '') {
                     document.getElementById("shortleaveendDateError").innerHTML = "- It must be Selected";
                     flag3 = false;
@@ -421,7 +421,7 @@
             var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
             var selectedTextArray = selectedText.split('(');
             selectedText = selectedTextArray[0];
-            if (selectedText == 'Short Leave' || selectedText == 'C Off Leave') {
+            if (selectedText == 'Short Leave') {
 
                 $("#NoshortLeave").hide();
                 $("#shortLeave").show();

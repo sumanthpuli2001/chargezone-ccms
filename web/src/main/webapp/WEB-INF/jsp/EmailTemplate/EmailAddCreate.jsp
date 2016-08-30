@@ -1,7 +1,7 @@
 <%-- 
-    Document   : LevelCreate
+    Document   :
     Created on : Oct 19, 2015, 5:34:20 PM
-    Author     : Irfan
+    Author     : 
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,8 +11,42 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Level Create</title>
+
     </head>
+    <script>
+        $(function () {
+            var i = 1
+            $("#addRowButtonId_table_1").on("click", function () {
+                i++;
+                var clone = "<div id = \"email_Id" + i + "\" class=\"form-group col-sm-12\" style=\"margin-left: 0px !important;margin-right:  0px !important;padding-left: 0px !important;padding-right: 0px !important;\" ><div class=\"col-sm-3\"></div><div class=\"col-sm-6\" >"
+                        + "<input name =\"emailId" + i + "\" id =\"emailId" + i + "\" class =\"form-control\" style=\"margin-top: 10px\">"
+                        + "</input>"
+                        + "</div>"
+                        + "<div class=\"col-sm-3\" style=\"margin - top: 5px\">"
+                        + "<span>"
+                        + "<input type =\"button\" value=\"-\" onclick=\"removeIt('email_Id" + i + "');\"/>"
+                        + "</span></div></div>";
+                $("#id").append(clone);
+                document.getElementById("countId").value = i;
+                optionAdd(i);
+            });
+        });
+        function optionAdd(id) {
+            var element2 = document.getElementById('email_Id1');
+            var obj2 = document.getElementById("emailId" + id);
+            for (var i2 = 0; i2 < element2.options.length; i2++) {
+                var opt2 = document.createElement("option");
+                opt2.value = element2.options[i2].value;
+                opt2.text = element2.options[i2].text;
+                obj2.appendChild(opt2);
+            }
+        }
+        function removeIt(ii) {
+            var element1 = document.getElementById(ii);
+            element1.parentNode.removeChild(element1);
+        }
+
+    </script>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -41,29 +75,33 @@
                                 </c:if>
                                 <form:form class="form-horizontal" method="post" 
                                            commandName="emailAddMaster" action="emailAddMaster.htm?act=createSubmit">
-                                    <form:hidden path="id"></form:hidden>
 
-                                        <div class="form-group">
-                                            <div class="col-sm-3">
-                                                <label class="control-label">Enter Module Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                            </div>
-                                            <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Enter Module Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                        </div>
+                                        <div class="col-sm-6">
                                             <form:input path="moduleName" class="form-control"/>
                                         </div>
                                     </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-3">
-                                                <label class="control-label">Email Id:<span style="color: red;font-size: 12px;">*</span></label>
-                                            </div>
-                                            <div class="col-sm-7">
-                                            <form:input path="emailId" class="form-control"/>
+                                    <div class="form-group" id="id">
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Email Id:</label>
                                         </div>
+                                        <input type="hidden" name="countId" id="countId" value="1">
+                                        <div class="col-sm-6" id="email_Id1">
+                                            <input id="emailId" name="emailId" class="form-control"  style="margin-bottom: 10px"/>
+                                        </div>
+                                        <div class="col-sm-3" style="margin-top: 5px">
+                                            <span >
+                                                <input type="button" value="+" id="addRowButtonId_table_1" />
+                                            </span></div><br/>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-6 col-sm-offset-5">
                                             <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
                                         </div>
-                                      
+
                                     </div>
                                 </form:form>
                             </div><!-- /.tab-pane -->

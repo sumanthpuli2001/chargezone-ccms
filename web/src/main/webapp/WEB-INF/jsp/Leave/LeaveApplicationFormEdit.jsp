@@ -419,7 +419,7 @@
             var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
             var selectedTextArray = selectedText.split('(');
             selectedText = selectedTextArray[0];
-            if (selectedText == 'Short Leave' || selectedText == 'C Off Leave') {
+            if (selectedText == 'Short Leave') {
 
                 $("#NoshortLeave").hide();
                 $("#shortLeave").show();
@@ -459,7 +459,7 @@
                 var strUser2 = strUser1[1];
                 strUser2 = strUser2.split(')');
                 var leaveBalance = strUser2[0];
-                if (strUser == 'Short Leave' || strUser == 'Paternity Leave' || strUser == 'C Off Leave' || strUser == 'Leave Without Pay' || strUser == 'Maternity Leave') {
+                if (strUser == 'Short Leave' || strUser == 'Paternity Leave' || strUser == 'Leave Without Pay' || strUser == 'Maternity Leave') {
                     document.getElementById('Sick Leave').innerHTML = "0";
                     document.getElementById('Sick Leave2').innerHTML = document.getElementById('Sick Leave1').innerHTML;
                     document.getElementById('Casual Leave').innerHTML = "0";
@@ -1287,9 +1287,7 @@
                 if (selectedText == 'Short Leave') {
                     d2.setTime(d2.getTime() + ('${shortLeaveHoursNo}' * 60 * 60 * 1000));
                 }
-                if (selectedText == 'C Off Leave') {
-                    d2.setTime(d2.getTime() + ('${coffLeaveHoursNo}' * 60 * 60 * 1000));
-                }
+              
                 var aDate = d2.getDate();
                 var aMonth = d2.getMonth();
                 var aHours = d2.getHours();

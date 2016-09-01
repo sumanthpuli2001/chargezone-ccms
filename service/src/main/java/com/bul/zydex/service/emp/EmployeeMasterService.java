@@ -132,4 +132,6 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
 
     public List<?> readEmpUserIdWise(T object);
 
+    public List<?> readAllSubordinate(T object);
+
 }

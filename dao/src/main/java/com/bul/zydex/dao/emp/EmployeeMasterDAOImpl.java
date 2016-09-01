@@ -1712,5 +1712,22 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " WHERE a.userMaster.id= " + employeeMaster.getUserMaster().getId();
         return getHibernateTemplate().find(query);
     }
+    @Override
+    public List<?> readAllSubordinate(T object) {
+        EmployeeMaster employeeMaster = (EmployeeMaster) object;
+        String query = "";
+        query += " "
+                + " FROM EmployeeMaster a "
+                + " Where ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) "
+                + " AND (a.reportingManagerLevel1= " + employeeMaster.getId()
+                + " Or a.reportingManagerLevel2= " + employeeMaster.getId()
+                + " Or a.reportingManagerLevel3= " + employeeMaster.getId()
+                + " Or a.reportingManagerLevel4= " + employeeMaster.getId() 
+                + " Or a.reportingManagerLevel5= " + employeeMaster.getId() 
+                + " Or a.reportingManagerLevel6= " + employeeMaster.getId() 
+                + ")";
+        return getHibernateTemplate().find(query);
+    }
 
 }

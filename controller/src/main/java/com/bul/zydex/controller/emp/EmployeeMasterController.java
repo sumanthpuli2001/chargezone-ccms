@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+ * To change this license header, choose License Headers in Project Properties.changePassWordClick
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -2880,18 +2880,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         userMaster = userMasterService.readById(userMaster.getId());
 
         List list = employeeMasterService.pswdExist(curPas, userMaster.getId().toString());
-        if (!list.isEmpty() && passwordValidator.validate(newPas)) {
+        if (!list.isEmpty()) {
             userMaster.setPassword(newPas);
             userMasterService.createOrUpdate(userMaster);
             request.setAttribute("successmessage", "Password Changed Successfully");
             mv.getModelMap().put("userMaster", userMaster);
             mv.setViewName("User/NewPassword");
             mv = userDashboard(request, response);
-        } else if (!passwordValidator.validate(newPas)) {
-            request.setAttribute("failuremessage", "Alphanumeric Password Required");
-            mv.getModelMap().put("userMaster", userMaster);
-            mv.setViewName("User/NewPassword");
-//            mv = changePassWordClick(request, response);
         } else {
             request.setAttribute("failuremessage", "Password Does Not Exist ");
             mv.getModelMap().put("userMaster", userMaster);

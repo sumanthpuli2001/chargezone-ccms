@@ -559,12 +559,18 @@ public class PoolCarRequestController extends PoolCarRequestAbstract {
                 List empShiftList = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftData(shiftGenerateMonthlySchedule, day);
                 employeeShiftData1.setInDateTime(startDate);
                 employeeShiftData1.setOutDateTime(endDate);
-                if (!empShiftList.isEmpty()) {
-                    employeeShiftData1.setShiftMaster(shiftMasterService.readById((int) empShiftList.get(0)));
-                    employeeShiftData1.setEmployeeMaster(poolCarRequest.getEmployeeMasterByEmployeeMasterId());
-                    employeeShiftData1.setShiftMaster(employeeShiftData1.getShiftMaster());
-                    employeeShiftDataService.create(employeeShiftData1);
+                try {
+                    if (!empShiftList.isEmpty()) {
+                        String shiftId = "" + empShiftList.get(0);
+                        employeeShiftData1.setShiftMaster(shiftMasterService.readById(Integer.parseInt(shiftId)));
+                        employeeShiftData1.setEmployeeMaster(poolCarRequest.getEmployeeMasterByEmployeeMasterId());
+                        employeeShiftData1.setShiftMaster(employeeShiftData1.getShiftMaster());
+                        employeeShiftDataService.create(employeeShiftData1);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+
             }
 
             poolCarRequest.setStatus(4);

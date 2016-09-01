@@ -39,11 +39,7 @@ public class EmailAddMasterController extends EmailAddMasterAbstract {
         BindException errors = new BindException(emailAddMaster, "emailAddMaster");
         bind(request, emailAddMaster);
         int countId = Integer.parseInt(request.getParameter("countId"));
-        String [] email=request.getParameterValue
-                
-                
-                
-                s("emailId");
+        String [] email=request.getParameterValues("emailId");
         String emailId= "";
         for(String email1:email)
         {

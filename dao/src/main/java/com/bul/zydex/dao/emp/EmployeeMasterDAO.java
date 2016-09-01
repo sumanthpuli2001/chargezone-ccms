@@ -133,5 +133,7 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
      public List<?> readEmployeeForPlant();
      
      public List<?> readEmpUserIdWise(T object);
+     
+     public List<?> readAllSubordinate(T object);
 
 }

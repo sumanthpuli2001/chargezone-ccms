@@ -121,7 +121,7 @@
                     }
                 }
             }
-            if (selectedText == 'Short Leave' || selectedText == 'C Off Leave') {
+            if (selectedText == 'Short Leave') {
                 if (document.getElementById("endDateShort").value == '') {
                     document.getElementById("shortleaveendDateError").innerHTML = "- It must be Selected";
                     flag3 = false;
@@ -421,7 +421,7 @@
             var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
             var selectedTextArray = selectedText.split('(');
             selectedText = selectedTextArray[0];
-            if (selectedText == 'Short Leave' || selectedText == 'C Off Leave') {
+            if (selectedText == 'Short Leave') {
 
                 $("#NoshortLeave").hide();
                 $("#shortLeave").show();
@@ -1289,7 +1289,9 @@
                 if (selectedText == 'Short Leave') {
                     d2.setTime(d2.getTime() + ('${shortLeaveHoursNo}' * 60 * 60 * 1000));
                 }
+               
                 if (selectedText == 'C Off Leave') {
+                  
                     d2.setTime(d2.getTime() + ('${coffLeaveHoursNo}' * 60 * 60 * 1000));
                 }
                 var aDate = d2.getDate();

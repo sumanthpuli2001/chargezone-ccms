@@ -104,11 +104,6 @@ public abstract class WebServiceAbstract extends CustomAbstract {
         } catch (Exception e) { /*report an error*/ }
          JSONObject jsonObject = new JSONObject(jb.toString());
 
-//        try {
-//            JSONObject jsonObject = new JSONObject(jb.toString());
-//        } catch (Exception e) {
-//            throw new IOException("Error parsing JSON request string");
-//        }
         return jsonObject;
   
     }

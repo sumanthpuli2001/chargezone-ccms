@@ -128,6 +128,7 @@
                             <c:if test="${sessionScope.isReportingManagerDataExist}">
 
                             <li><a href="attendanceRegularizationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i>Subordinates Request</a></li>
+                            <li><a href="attendanceRegularizationMaster.htm?act=subOrdinateAttendanceView"><i class="fa fa-circle-o"></i>Subordinates Attendance View</a></li>
                             <!--<li><a href="attendanceRegularizationMaster.htm?act=approvedList"><i class="fa fa-circle-o"></i>Approved Request</a></li>-->
                         </c:if>
 
@@ -514,6 +515,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="emailTemplate.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Email Template Result</a></li>
+                            <li><a href="emailAddMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Email Add Master</a></li>
                         </ul>
                     </li>
                 </c:if>

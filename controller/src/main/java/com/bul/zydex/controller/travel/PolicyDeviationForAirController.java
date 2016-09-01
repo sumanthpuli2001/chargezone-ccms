@@ -53,7 +53,6 @@ public class PolicyDeviationForAirController extends PolicyDeviationForAirAbstra
             policyDeviationForAirService.create(policyDeviationForAir);
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
-
             mv = searchSubmit(request, response);
         }
 

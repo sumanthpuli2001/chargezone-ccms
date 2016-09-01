@@ -1,0 +1,658 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.bul.zydex.webservice.Travel;
+
+import com.bul.zydex.model.CurrencyMaster;
+import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.HotelAccommodation;
+import com.bul.zydex.model.LevelMaster;
+import com.bul.zydex.model.TravelApproverHistory;
+import com.bul.zydex.model.TravelDetail;
+import com.bul.zydex.model.TravelRequestMaster;
+import com.bul.zydex.model.UserMaster;
+import com.google.gson.JsonArray;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+/**
+ *
+ * @author Jay
+ */
+public class TravelWebService extends TravelWebServiceAbstract {
+
+    public void newRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
+        PrintWriter out = null;
+        out = response.getWriter();
+        String rcode = "";
+        String message = "";
+        UserMaster user = new UserMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        JSONObject userData = new JSONObject();
+        JSONObject data = new JSONObject();
+//        JSONArray jSONArray = new JSONArray();
+        String id = request.getParameter("id");
+        int userid = Integer.parseInt(id);
+        user.setId(userid);
+        employeeMaster.setUserMaster(user);
+        String empCompany = "";
+        String empNo = "";
+        String empLevel = "";
+        List<?> empDetailIst = employeeMasterService.readByUserName(employeeMaster);
+        if (!empDetailIst.isEmpty()) {
+
+            employeeMaster1 = (EmployeeMaster) empDetailIst.get(0);
+        }
+        int idemp = employeeMaster1.getId();
+        List<?> userList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster1);
+        if (!userList.isEmpty()) {
+
+            Object[] obj = (Object[]) userList.get(0);
+            empNo = "" + obj[0];
+            empCompany = "" + obj[7];
+            empLevel = "" + obj[3];
+            TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+            employeeMaster1.setId(idemp);
+            travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster1);
+            List<?> totalList = travelRequestMasterService.readTotalRequest(travelRequestMaster);
+            if (!totalList.isEmpty()) {
+            }
+            rcode = "1";
+            message = "Success";
+            int count = totalList.size() + 1;
+            Calendar now = Calendar.getInstance();
+
+            String[] monthName = {"January", "February",
+                "March", "April", "May", "June", "July",
+                "August", "September", "October", "November",
+                "December"};
+            int year = now.get(Calendar.YEAR);
+            String name = monthName[now.get(Calendar.MONTH)];
+            if ((empCompany.equals("Zydex Industries") || empCompany.equalsIgnoreCase("ZydexIndustries")) && !empCompany.equals("")) {
+                empCompany = "ZI";
+            } else {
+                empCompany = "ZIPL";
+            }
+            String requestNo = empCompany + "/" + year + "/" + name + "/" + empNo + "/" + count + "";
+            data.put("requestNo", requestNo);
+            List<?> list = policyDeviationForAirService.readlevelWise(empLevel);
+            String deviation = "";
+            if (!list.isEmpty()) {
+                list.get(0);
+                deviation = "" + list.get(0);
+            }
+            if (deviation.equals("No")) {
+                deviation = "Yes";
+                data.put("deviation", deviation);
+            } else {
+                deviation = "No";
+                data.put("deviation", deviation);
+            }
+
+        } else {
+            rcode = "0";
+            message = "Error";
+        }
+        userData.put("data", data);
+        userData.put("responseMessage", message);
+        userData.put("responseCode", rcode);
+        out.print(userData);
+    }
+
+    public void travelRequestList(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
+        PrintWriter out = null;
+        out = response.getWriter();
+        UserMaster user = new UserMaster();
+        String rcode = "";
+        String empid = "";
+        String message = "";
+        String id = request.getParameter("id");
+        int userid = Integer.parseInt(id);
+        user.setId(userid);
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        employeeMaster.setUserMaster(user);
+        JSONObject userData = new JSONObject();
+        JSONObject data = new JSONObject();
+        JSONArray jSONArray = new JSONArray();
+        List<EmployeeMaster> empDetailList = (List<EmployeeMaster>) employeeMasterService.readByEmployeeUserId(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            EmployeeMaster employeeMaster1 = (EmployeeMaster) empDetailList.get(0);
+            TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+            travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster1);
+            List<?> showRequest = travelRequestMasterService.requestDetail(travelRequestMaster);
+            if (!showRequest.isEmpty()) {
+                rcode = "1";
+                message = "Success";
+                for (int i = 0; i < showRequest.size(); i++) {
+                    Object[] arrayObj = (Object[]) showRequest.get(i);
+                    JSONObject obj = new JSONObject();
+                    String statusMessage = "";
+                    if (arrayObj[4].equals(0)) {
+                        statusMessage = "Pending";
+                    }
+                    if (arrayObj[4].equals(1)) {
+                        statusMessage = "Reworked";
+                    }
+                    if (arrayObj[4].equals(2)) {
+                        statusMessage = "Rejected";
+                    }
+                    if (arrayObj[4].equals(3)) {
+                        statusMessage = "Approved";
+                    }
+                    if (arrayObj[4].equals(4)) {
+                        statusMessage = "WithDraw";
+                    }
+                    if (arrayObj[4].equals(5)) {
+                        statusMessage = "Final Approved";
+                    }
+                    if (arrayObj[4].equals(6)) {
+                        statusMessage = "Approved";
+                    }
+                    if (arrayObj[4].equals(8)) {
+                        statusMessage = "Approved";
+                    }
+                    obj.put("employeeId", arrayObj[7].toString());
+                    obj.put("employeeName", arrayObj[8].toString());
+                    obj.put("travelId", arrayObj[5].toString());
+                    obj.put("travelType", arrayObj[0].toString());
+                    obj.put("travelRequestNo", arrayObj[1].toString());
+                    obj.put("startDate", arrayObj[2].toString());
+                    obj.put("endDate", arrayObj[3].toString());
+                    obj.put("statusId", arrayObj[4].toString());
+                    obj.put("statusMessage", statusMessage);
+                    jSONArray.put(obj);
+                }
+                data.put("travelRequestList", jSONArray);
+            } else {
+                rcode = "1";
+                message = "Success";
+            }
+
+        } else {
+            rcode = "0";
+            message = "Error";
+        }
+        userData.put("data", data);
+        userData.put("responseMessage", message);
+        userData.put("responseCode", rcode);
+        out.print(userData);
+    }
+
+    public void viewTravelRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
+        PrintWriter out = null;
+        out = response.getWriter();
+        UserMaster user = new UserMaster();
+        String rcode = "";
+        String empid = "";
+        String message = "";
+        String id = request.getParameter("id");
+        int userid = Integer.parseInt(id);
+        user.setId(userid);
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        employeeMaster.setUserMaster(user);
+        JSONObject userData = new JSONObject();
+        JSONObject data = new JSONObject();
+        JSONArray jSONArray = new JSONArray();
+        List<EmployeeMaster> empDetailList = (List<EmployeeMaster>) employeeMasterService.readByEmployeeUserId(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            EmployeeMaster employeeMaster1 = (EmployeeMaster) empDetailList.get(0);
+            TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+            travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster1);
+            List<?> viewRequest = travelRequestMasterService.requestDetail(travelRequestMaster);
+            if (!viewRequest.isEmpty()) {
+                rcode = "1";
+                message = "Success";
+                for (int i = 0; i < viewRequest.size(); i++) {
+                    Object[] arrayObj = (Object[]) viewRequest.get(i);
+                    JSONObject obj = new JSONObject();
+                    String travelID = arrayObj[5].toString();
+                    TravelDetail travelDetail = new TravelDetail();
+                    travelRequestMaster = travelRequestMasterService.readById(Integer.parseInt(travelID));
+                    travelDetail.setTravelRequestMaster(travelRequestMaster);
+                    List<?> travelDetails = travelDetailService.readTravelDetail(travelDetail);
+                    if (!travelDetails.isEmpty()) {
+                        rcode = "1";
+                        message = "Success";
+                        for (Object o : travelDetails) {
+                            JSONArray travelDe = new JSONArray();
+                            JSONObject travel = new JSONObject();
+                            TravelDetail travelDetail1 = (TravelDetail) o;
+                            travel.put("date", travelDetail1.getDate());
+                            travel.put("fromLocation", travelDetail1.getFromLocation());
+                            travel.put("toLocation", travelDetail1.getToLocation());
+                            travel.put("modeofTravel", travelDetail1.getModeOfTravel());
+                            travel.put("policyDeviation", travelDetail1.getPolicyDeviation());
+                            travel.put("comments", travelDetail1.getComments());
+                            travelDe.put(travel);
+                            data.put("travelDetails", travelDe);
+                        }
+                    } else {
+                        rcode = "0";
+                        message = "Error";
+                    }
+                    HotelAccommodation hotelAccommodation = new HotelAccommodation();
+                    hotelAccommodation.setTravelRequestMaster(travelRequestMaster);
+                    List<?> hotelDetail = hotelAccommodationService.readAccommodationDetail(hotelAccommodation);
+                    if (!hotelDetail.isEmpty()) {
+                        rcode = "1";
+                        message = "Success";
+                        for (Object hotel : hotelDetail) {
+                            JSONArray hotelDe = new JSONArray();
+                            JSONObject hotels = new JSONObject();
+                            HotelAccommodation hotelAccommodation1 = (HotelAccommodation) hotel;
+                            hotels.put("bookingRequired", hotelAccommodation1.getHotelBookingRequired());
+                            hotels.put("location", hotelAccommodation1.getLocation());
+                            hotels.put("preferedHotels", hotelAccommodation1.getPreferredHotel());
+                            hotels.put("chekInDate", hotelAccommodation1.getCheckInDate());
+                            hotels.put("checkOutDate", hotelAccommodation1.getCheckOutDate());
+                            hotels.put("comments", hotelAccommodation1.getComments());
+                            hotelDe.put(hotels);
+                            data.put("hotelDetails", hotelDe);
+                        }
+                    } else {
+                        rcode = "0";
+                        message = "Error";
+                    }
+                    CurrencyMaster currencyMaster = new CurrencyMaster();
+                    if (arrayObj[0].toString().contains("International")) {
+                        String currencyId = travelRequestMaster.getCurrency();
+                        currencyMaster = currencyMasterService.readById(Integer.parseInt(currencyId));
+                        String currency = currencyMaster.getCurrencyName();
+                        String currencyCode = currencyMaster.getCurrencyCode();
+                        String currencyName = currency + "(" + currencyCode + ")";
+                        obj.put("currencyId", currencyId);
+                        obj.put("currencyName", currencyName);
+                        jSONArray.put(obj);
+                    }
+                    obj.put("cashAdvance", travelDetail.getTravelRequestMaster().getCashRequired());
+                    obj.put("amount", travelDetail.getTravelRequestMaster().getAmount());
+                    obj.put("reasonOfAdvance", travelDetail.getTravelRequestMaster().getReasonForAdvance());
+                    obj.put("reasonForRequest", travelDetail.getTravelRequestMaster().getPurpose());
+                    obj.put("remark", travelDetail.getTravelRequestMaster().getEmpRemark());
+                    obj.put("employeeId", arrayObj[7].toString());
+                    obj.put("employeeName", arrayObj[8].toString());
+                    obj.put("travelType", arrayObj[0].toString());
+                    obj.put("travelRequestNo", arrayObj[1].toString());
+                    obj.put("startDate", arrayObj[2].toString());
+                    obj.put("endDate", arrayObj[3].toString());
+                    obj.put("status", arrayObj[4].toString());
+                    jSONArray.put(obj);
+                }
+                data.put("travelRequest", jSONArray);
+            } else {
+                rcode = "0";
+                message = "Error";
+            }
+
+        } else {
+            rcode = "0";
+            message = "Error";
+        }
+        userData.put("data", data);
+        userData.put("responseMessage", message);
+        userData.put("responseCode", rcode);
+        out.print(userData);
+    }
+
+    public void CreateTravelRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException, ServletException, ParseException {
+        PrintWriter out = null;
+        out = response.getWriter();
+        String rcode = "";
+        String message = "";
+        String empid = "";
+        UserMaster user = new UserMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        JSONObject userData = new JSONObject();
+        JSONObject data = doPost(request);
+        String id = request.getParameter("id");
+        int userid = Integer.parseInt(id);
+        user.setId(userid);
+        employeeMaster.setUserMaster(user);
+        List<?> empDetailList = employeeMasterService.readByEmployeeUserId(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) empDetailList.get(0);
+        }
+        SimpleDateFormat ddd = new SimpleDateFormat("dd/MM/yyyy - hh:mm");
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster1);
+        Date date1 = new Date();
+        String dateOfSubmit = ddd.format(date1);
+        travelRequestMaster.setTravelRequestNo(data.get("travelRequestApplicationNo").toString());
+        travelRequestMaster.setTravelType(data.get("travelType").toString());
+        travelRequestMaster.setStartDateTime(data.get("startDateTime").toString());
+        travelRequestMaster.setEndDateTime(data.get("endDateTime").toString());
+        travelRequestMaster.setDateOfSubmit(dateOfSubmit);
+        travelRequestMaster.setCashRequired(data.get("advancedRequired").toString());
+        travelRequestMaster.setAmount(Float.parseFloat(data.get("amount").toString()));
+        travelRequestMaster.setReasonForAdvance(data.get("reasonOfAdvanced").toString());
+        travelRequestMaster.setPurpose(data.get("reasonForTravel").toString());
+//        travelRequestMaster.setCurrency(data.get("currencyId").toString());
+        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+        if (!travelRequestMaster.getTravelType().contains("Local")) {
+            Date startDate = sd.parse(travelRequestMaster.getStartDateTime());
+            Date endDate = sd.parse(travelRequestMaster.getEndDateTime());
+            if (!startDate.after(endDate)) {
+                boolean flag = false;
+                TravelRequestMaster travelRequestMaster1 = new TravelRequestMaster();
+                travelRequestMaster1.setEmployeeMasterByEmployeeMasterId(employeeMaster1);
+                List<?> travelEmployeePast = travelRequestMasterService.readTravelEmployeePastRequest(travelRequestMaster1);
+                for (Object o : travelEmployeePast) {
+                    try {
+                        travelRequestMaster1 = (TravelRequestMaster) o;
+                        Date pastSDate = sd.parse(travelRequestMaster1.getStartDateTime());
+                        Date pastEDate = sd.parse(travelRequestMaster1.getEndDateTime());
+                        if (startDate.equals(pastSDate) || (startDate.after(pastSDate) && startDate.before(pastEDate)) || (endDate.after(pastSDate) && endDate.before(pastEDate)) || (endDate.equals(pastEDate))) {
+                            flag = true;
+                            break;
+                        } else {
+                            flag = false;
+                        }
+                    } catch (Exception e) {
+
+                    }
+                }
+                if (flag) {
+                    rcode = "2";
+                    message = "Error : You can't Apply Request on Same Day..";
+                } else {
+                    travelRequestMasterService.create(travelRequestMaster);
+                    rcode = "1";
+                    message = "Success";
+                    JSONArray jaTravelDeatails = data.getJSONArray("travelDetails");
+                    JSONArray jaHotelDetails = data.getJSONArray("hotelDetails");
+                    for (int i = 0; i < jaTravelDeatails.length(); i++) {
+                        TravelDetail travelDetail = new TravelDetail();
+                        travelDetail.setTravelRequestMaster(travelRequestMaster);
+                        JSONObject joTravelDetail = jaTravelDeatails.getJSONObject(i);
+                        String date = joTravelDetail.getString("date");
+                        String fromLocation = joTravelDetail.get("fromLocation").toString();
+                        String toLocation = joTravelDetail.get("toLocation").toString();
+                        String travelMode = joTravelDetail.get("modeOfTravel").toString();
+                        String policyDeviation = joTravelDetail.get("policyDeviation").toString();
+                        String comments = joTravelDetail.get("remarks").toString();
+                        if (!"".equals(date) && null != date && !"".equals(fromLocation) && null != fromLocation && !"".equals(toLocation) && null != toLocation && !"".equals(travelMode) && null != travelMode) {
+                            travelDetail.setDate(date);
+                            travelDetail.setFromLocation(fromLocation);
+                            travelDetail.setToLocation(toLocation);
+                            travelDetail.setModeOfTravel(travelMode);
+                            travelDetail.setPolicyDeviation(policyDeviation);
+                            travelDetail.setComments(comments);
+                            travelDetailService.create(travelDetail);
+                            rcode = "1";
+                            message = "Success";
+                        } else {
+                            rcode = "4";
+                            message = "Error : Please Enter the valid data.";
+                        }
+                    }
+                    for (int j = 0; j < jaHotelDetails.length(); j++) {
+                        HotelAccommodation hotelAccommodation = new HotelAccommodation();
+                        hotelAccommodation.setTravelRequestMaster(travelRequestMaster);
+                        JSONObject joHotelDetails = jaHotelDetails.getJSONObject(j);
+                        hotelAccommodation.setLocation(joHotelDetails.get("location").toString());
+                        hotelAccommodation.setCheckInDate(joHotelDetails.get("checkInDate").toString());
+                        hotelAccommodation.setCheckOutDate(joHotelDetails.getString("checkOutDate").toString());
+                        hotelAccommodation.setHotelBookingRequired(joHotelDetails.getString("bookingRequired").toString());
+                        hotelAccommodation.setPreferredHotel(joHotelDetails.getString("preferredHotels").toString());
+                        hotelAccommodation.setComments(joHotelDetails.get("remarks").toString());
+                        hotelAccommodationService.create(hotelAccommodation);
+                        rcode = "1";
+                        message = "Success";
+                    }
+                }
+            } else {
+                rcode = "8";
+                message = "Error : Please Insert Start Date Before End Date.";
+            }
+        } else {
+            travelRequestMasterService.create(travelRequestMaster);
+            rcode = "1";
+            message = "Success";
+        }
+        userData.put("responseMessage", message);
+        userData.put("responseCode", rcode);
+        out.print(userData);
+    }
+
+    public void withDraw(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
+        PrintWriter out = null;
+        out = response.getWriter();
+        String rcode = "";
+        String message = "";
+        String empid = "";
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        JSONObject userData = new JSONObject();
+        String travelRequestId = request.getParameter("travelId");
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        travelRequestMaster = travelRequestMasterService.readById(Integer.parseInt(travelRequestId));
+        int employeeId = travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId();
+        employeeMaster = employeeMasterService.readById(employeeId);
+        if (travelRequestMaster.getStatus() == 0 || travelRequestMaster.getStatus() == 1) {
+            if (travelRequestMaster.getStatus() == 1) {
+                TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+                travelApproverHistory.setTravelRequestMaster(travelRequestMaster);
+                List travelHistory = travelApproverHistoryService.readSameTravelId(travelApproverHistory);
+                for (Object o : travelHistory) {
+                    travelApproverHistory = (TravelApproverHistory) o;
+                    travelApproverHistoryService.delete(travelApproverHistory.getId());
+                    rcode = "3";
+                    message = "request deleted successFully";
+                }
+            }
+            travelRequestMasterService.delete(travelRequestMaster.getId());
+            rcode = "1";
+            message = "Request deleted Successfully in travel RequestMaster";
+        } else if (travelRequestMaster.getStatus() == 3 || travelRequestMaster.getStatus() == 10) {
+            travelRequestMaster.setStatus(4);
+            travelRequestMasterService.update(travelRequestMaster);
+            rcode = "5";
+            message = "request Updated SuccessFully";
+        }
+        userData.put("responseMessage", message);
+        userData.put("responseCode", rcode);
+        out.print(userData);
+    }
+
+    public void editRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, JSONException {
+        PrintWriter out = null;
+        out = response.getWriter();
+        String rcode = "";
+        String message = "";
+        String empid = "";
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        JSONObject userData = new JSONObject();
+        JSONObject data = new JSONObject();
+        String travelRequestId = request.getParameter("travelId");
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        travelRequestMaster = travelRequestMasterService.readById(Integer.parseInt(travelRequestId));
+        int employeeId = travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId();
+        employeeMaster = employeeMasterService.readById(employeeId);
+        JSONArray jSONArray = new JSONArray();
+        JSONObject obj = new JSONObject();
+        obj.put("travelReqestApplicationNo", travelRequestMaster.getTravelRequestNo());
+        obj.put("travelType", travelRequestMaster.getTravelType());
+        obj.put("startDateTime", travelRequestMaster.getStartDateTime());
+        obj.put("endDateTime", travelRequestMaster.getEndDateTime());
+        obj.put("dateOfSubmit", travelRequestMaster.getDateOfSubmit());
+        obj.put("advancedRequired", travelRequestMaster.getCashRequired());
+        obj.put("amount", travelRequestMaster.getAmount());
+        obj.put("reasonOfAdvanced", travelRequestMaster.getReasonForAdvance());
+        obj.put("reasonForTravel", travelRequestMaster.getPurpose());
+        CurrencyMaster currencyMaster = new CurrencyMaster();
+        if (travelRequestMaster.getTravelType().toString().contains("International")) {
+            String currencyId = travelRequestMaster.getCurrency();
+            currencyMaster = currencyMasterService.readById(Integer.parseInt(currencyId));
+            String currency = currencyMaster.getCurrencyName();
+            String currencyCode = currencyMaster.getCurrencyCode();
+            String currencyName = currency + "(" + currencyCode + ")";
+            obj.put("currencyId", currencyId);
+            obj.put("currencyName", currencyName);
+            jSONArray.put(obj);
+        }
+        jSONArray.put(obj);
+        data.put("travelRequest", jSONArray);
+        TravelDetail travelDetail = new TravelDetail();
+        travelDetail.setTravelRequestMaster(travelRequestMaster);
+        List<?> travelDetail1 = travelDetailService.readTravelDetail(travelDetail);
+        if (!travelDetail1.isEmpty()) {
+            for (Object o : travelDetail1) {
+                JSONArray travelDetails = new JSONArray();
+                JSONObject travel = new JSONObject();
+                TravelDetail travelDetail2 = (TravelDetail) o;
+                travel.put("date", travelDetail2.getDate());
+                travel.put("fromLocation", travelDetail2.getFromLocation());
+                travel.put("toLocation", travelDetail2.getToLocation());
+                travel.put("modeOfTravel", travelDetail2.getModeOfTravel());
+                travel.put("policyDeviation", travelDetail2.getPolicyDeviation());
+                travel.put("remarks", travelDetail2.getComments());
+                travelDetails.put(travel);
+                data.put("travelDetails", travelDetails);
+                rcode = "1";
+                message = "Success";
+            }
+        } else {
+            rcode = "2";
+            message = "travelDetails not found.";
+        }
+        HotelAccommodation hotelAccommodation = new HotelAccommodation();
+        hotelAccommodation.setTravelRequestMaster(travelRequestMaster);
+        List<?> hotel1 = hotelAccommodationService.readAccommodationDetail(hotelAccommodation);
+        if (!hotel1.isEmpty()) {
+            for (Object hotels : hotel1) {
+                JSONArray hotelDetails = new JSONArray();
+                JSONObject hotel = new JSONObject();
+                HotelAccommodation hotelAccommodation1 = (HotelAccommodation) hotels;
+                hotel.put("hotelBookingRequired", hotelAccommodation1.getHotelBookingRequired());
+                hotel.put("location", hotelAccommodation1.getLocation());
+                hotel.put("preferredHotels", hotelAccommodation1.getPreferredHotel());
+                hotel.put("checkInDate", hotelAccommodation1.getCheckInDate());
+                hotel.put("checkOutDate", hotelAccommodation1.getCheckOutDate());
+                hotel.put("remarks", hotelAccommodation1.getComments());
+                hotelDetails.put(hotel);
+                data.put("hotelDetails", hotelDetails);
+                rcode = "3";
+                message = "Success";
+            }
+        } else {
+            rcode = "4";
+            message = "hotelDetails not found";
+        }
+        userData.put("data", data);
+        userData.put("responseMessage", message);
+        userData.put("responseCode", rcode);
+        out.print(userData);
+    }
+
+    public void updateRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, JSONException {
+        PrintWriter out = null;
+        out = response.getWriter();
+        String rcode = "";
+        String message = "";
+        String empid = "";
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        JSONObject userData = new JSONObject();
+        JSONObject data = doPost(request);
+        String travelRequestId = data.getString("travelId");
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        travelRequestMaster = travelRequestMasterService.readById(Integer.parseInt(travelRequestId));
+        int employeeId = travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId();
+        employeeMaster = employeeMasterService.readById(employeeId);
+        if (data.getString("statusId") == "1") {
+            rcode = "1";
+            message = "Sucess";
+            travelRequestMaster.setStatus(10);
+            travelRequestMaster.setDateOfSubmit(data.getString("dateOfSubmit"));
+            TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+            travelApproverHistory.setTravelRequestMaster(travelRequestMaster);
+            List list = travelApproverHistoryService.readSameTravelId(travelApproverHistory);
+            for (Object o : list) {
+                travelApproverHistory = (TravelApproverHistory) o;
+                travelApproverHistory.setReturnFlag(1);
+                travelApproverHistoryService.update(travelApproverHistory);
+            }
+        } else {
+            travelRequestMaster.setStatus(0);
+        }
+        travelRequestMaster.setTravelRequestNo(data.getString("travelReqestApplicationNo"));
+        travelRequestMaster.setTravelType(data.getString("travelType"));
+        travelRequestMaster.setStartDateTime(data.getString("startDateTime"));
+        travelRequestMaster.setEndDateTime(data.getString("endDateTime"));
+        travelRequestMaster.setDateOfSubmit(data.getString("dateOfSubmit"));
+        travelRequestMaster.setCashRequired(data.getString("advancedRequired"));
+        travelRequestMaster.setAmount(Float.parseFloat(data.getString("amount")));
+        travelRequestMaster.setReasonForAdvance(data.getString("reasonOfAdvanced"));
+        travelRequestMaster.setPurpose(data.getString("reasonForTravel"));
+        CurrencyMaster currencyMaster = new CurrencyMaster();
+        if (travelRequestMaster.getTravelType().toString().contains("International")) {
+            travelRequestMaster.setCurrency(data.getString("currencyName"));
+        }
+        travelRequestMasterService.update(travelRequestMaster);
+        rcode = "1";
+        message = "Sucess";
+        JSONArray travelDetails1 = data.getJSONArray("travelDetail");
+        JSONArray hotelDetails1 = data.getJSONArray("hotelDetail");
+        for (int i = 0; i < travelDetails1.length(); i++) {
+            TravelDetail travelDetail = new TravelDetail();
+            travelDetail.setTravelRequestMaster(travelRequestMaster);
+            JSONObject travelDetailobj = travelDetails1.getJSONObject(i);
+            travelDetail.setDate(travelDetailobj.getString("date"));
+            travelDetail.setFromLocation(travelDetailobj.getString("fromLocation"));
+            travelDetail.setToLocation(travelDetailobj.getString("toLocation"));
+            travelDetail.setModeOfTravel(travelDetailobj.getString("modeOfTravel"));
+            travelDetail.setPolicyDeviation(travelDetailobj.getString("policyDeviation"));
+            travelDetail.setComments(travelDetailobj.getString("remarks"));
+            String travelDetailID = travelDetailobj.getString("travelDetailId");
+            if (!travelDetailID.equals("null")) {
+                travelDetail.setId(Integer.parseInt(travelDetailobj.getString("travelDetailId")));
+                travelDetailService.update(travelDetail);
+            } else {
+                travelDetailService.create(travelDetail);
+            }
+        }
+        for (int j = 0; j < hotelDetails1.length(); j++) {
+            HotelAccommodation hotelAccommodation = new HotelAccommodation();
+            hotelAccommodation.setTravelRequestMaster(travelRequestMaster);
+            JSONObject hotelDetailObj = hotelDetails1.getJSONObject(j);
+            hotelAccommodation.setHotelBookingRequired(hotelDetailObj.getString("hotelBookingRequired"));
+            hotelAccommodation.setLocation(hotelDetailObj.getString("location"));
+            hotelAccommodation.setPreferredHotel(hotelDetailObj.getString("preferredHotels"));
+            hotelAccommodation.setCheckInDate(hotelDetailObj.getString("checkInDate"));
+            hotelAccommodation.setCheckOutDate(hotelDetailObj.getString("checkOutDate"));
+            hotelAccommodation.setComments(hotelDetailObj.getString("remarks"));
+            String hotelId = hotelDetailObj.getString("hotelDetailId");
+            if (!hotelId.equals("null")) {
+                hotelAccommodation.setId(Integer.parseInt(hotelDetailObj.getString("hotelDetailId")));
+                hotelAccommodationService.update(hotelAccommodation);
+                rcode = "1";
+                message = "Sucess";
+            } else {
+                hotelAccommodationService.create(hotelAccommodation);
+                rcode = "1";
+                message = "Sucess";
+            }
+        }
+        userData.put("responseMessage", message);
+        userData.put("responseCode", rcode);
+        out.print(userData);
+    }
+}

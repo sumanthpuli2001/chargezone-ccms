@@ -13,8 +13,8 @@ import java.util.List;
  * @author Dhaval Patel <dhaval217@gmail.com>
  */
 public interface COffLeaveMasterService<T> extends GenericsService<T> {
-    
-      public boolean isExist(T object);
+
+    public boolean isExist(T object);
 
     public List<?> readByDept(T object);
 

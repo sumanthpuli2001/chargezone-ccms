@@ -331,21 +331,23 @@
     <bean id="appraisalkraActivityService1" class="com.bul.zydex.service.appraisalPerformance.AppraisalkraActivityServiceImpl">
         <property name="appraisalkraActivityDAO" ref="appraisalkraActivityDAO1"/>
     </bean>
+    <bean id="employeePunchForMobileAppService1" class="com.bul.zydex.service.mobileapp.EmployeePunchForMobileAppServiceImpl">
+        <property name="employeePunchForMobileAppDAO" ref="employeePunchForMobileAppDAO1"/>
+    </bean>  
     <bean id="emailAddMasterService1" class="com.bul.zydex.service.EmailAddMasterServiceImpl">
         <property name="emailAddMasterDAO" ref="emailAddMasterDAO1"/>
     </bean>
-
     <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
         <property name="beanNames">
             <list>
                 <value>*Service1*</value>
             </list>
         </property>
-        <property name="interceptorNames">
+        <!--        <property name="interceptorNames">
             <list>
                 <value>transactionInterceptor</value>
             </list>
-        </property>
+        </property>-->
     </bean>
 
 </beans>

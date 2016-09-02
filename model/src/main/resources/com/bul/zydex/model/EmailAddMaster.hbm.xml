@@ -14,5 +14,8 @@
         <property name="emailId" type="string">
             <column name="email_id" length="65535" />
         </property>
+        <many-to-one name="departmentMaster" class="com.bul.zydex.model.DepartmentMaster" fetch="select">
+            <column name="department_id" not-null="true" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

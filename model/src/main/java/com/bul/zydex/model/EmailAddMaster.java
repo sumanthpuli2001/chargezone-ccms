@@ -11,6 +11,7 @@ public class EmailAddMaster  implements java.io.Serializable {
 
      private int id;
      private String moduleName;
+     private DepartmentMaster departmentMaster;
      private String emailId;
     
 
@@ -21,7 +22,7 @@ public class EmailAddMaster  implements java.io.Serializable {
     public EmailAddMaster(int id) {
         this.id = id;
     }
-    public EmailAddMaster(int id, String moduleName,String emailId) {
+    public EmailAddMaster(int id, String moduleName,String emailId,DepartmentMaster departmentMaster) {
        this.id = id;
        this.moduleName = moduleName;
        this.emailId = emailId;
@@ -50,6 +51,15 @@ public class EmailAddMaster  implements java.io.Serializable {
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
+
+    public DepartmentMaster getDepartmentMaster() {
+        return departmentMaster;
+    }
+
+    public void setDepartmentMaster(DepartmentMaster departmentMaster) {
+        this.departmentMaster = departmentMaster;
+    }
+    
    
 
 

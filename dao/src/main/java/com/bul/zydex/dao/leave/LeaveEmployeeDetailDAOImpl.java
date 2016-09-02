@@ -642,14 +642,15 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
     @Override
     public List<?> readDate(T object) {
          LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
-        String hqlString = "from LeaveEmployeeDetail a"
+        String query = "from LeaveEmployeeDetail a"
                 + " WHERE a.status !=5"
+                + " AND a.id !=" +leaveEmployeeDetail.getId()
                 + " AND a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
                 + " AND STR_TO_DATE(a.startDate,'%d/%m/%Y')>=STR_TO_DATE('" + leaveEmployeeDetail.getStartDate() + "','%d/%m/%Y')"
                 + " AND STR_TO_DATE(a.startDate,'%d/%m/%Y')<=STR_TO_DATE('" + leaveEmployeeDetail.getEndDate() + "','%d/%m/%Y')"
                 + " AND STR_TO_DATE(a.endDate,'%d/%m/%Y')>=STR_TO_DATE('" + leaveEmployeeDetail.getStartDate() + "','%d/%m/%Y')"
                 + " AND STR_TO_DATE(a.endDate,'%d/%m/%Y')<=STR_TO_DATE('" + leaveEmployeeDetail.getEndDate() + "','%d/%m/%Y')";
-        return getHibernateTemplate().find(hqlString);
+        return getHibernateTemplate().find(query);
     }
 
 }

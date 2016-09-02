@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller;
 
+import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import java.util.List;
@@ -17,12 +18,14 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author Khurshid Khokhar <khokharkhurshid123@gmail.com>
  */
-public class EmailAddMasterController extends EmailAddMasterAbstract{
-    
-    
-      public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+public class EmailAddMasterController extends EmailAddMasterAbstract {
+
+    public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-       EmailAddMaster emailAddMaster=new EmailAddMaster();
+        EmailAddMaster emailAddMaster = new EmailAddMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        departmentList(request);
+        emailAddMaster.setDepartmentMaster(departmentMaster);
         mv.getModelMap().put("emailAddMaster", emailAddMaster);
         mv.setViewName("EmailTemplate/EmailAddCreate");
         return mv;
@@ -30,18 +33,34 @@ public class EmailAddMasterController extends EmailAddMasterAbstract{
 
     public ModelAndView createSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-       EmailAddMaster emailAddMaster=new EmailAddMaster();
-       int countId = Integer.parseInt(request.getParameter("countId"));
-        for (int i = 1; i <= countId; i++) {
-             String emailId = request.getParameter("emailId" + i);
+        EmailAddMaster emailAddMaster = new EmailAddMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        emailAddMaster.setDepartmentMaster(departmentMaster);
+        BindException errors = new BindException(emailAddMaster, "emailAddMaster");
+        bind(request, emailAddMaster);
+        int countId = Integer.parseInt(request.getParameter("countId"));
+        String [] email=request.getParameterValues("emailId");
+        String emailId= "";
+        for(String email1:email)
+        {
+            emailId+=email1+",";
         }
-        
+//        for (int i = 1; i <= countId; i++) {
+//            emailId = (request.getParameter("emailId")+",");
+//           
+//        }
+        emailAddMaster.setEmailId(emailId);
+        emailAddMasterService.create(emailAddMaster);
+        request.setAttribute("successMessage",
+                "Information : The Information is saved Successfully.");
+        mv.setViewName("redirect:emailAddMaster.htm?act=searchSubmit");
+
         return mv;
     }
 
     public ModelAndView searchSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        EmailAddMaster emailAddMaster=new EmailAddMaster();
+        EmailAddMaster emailAddMaster = new EmailAddMaster();
         List<?> emailaddList = emailAddMasterService.read();
 
         mv.getModelMap().put("list", emailaddList);
@@ -62,7 +81,6 @@ public class EmailAddMasterController extends EmailAddMasterAbstract{
         return mv;
     }
 
- 
     public ModelAndView deleteSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String emailId[] = request.getParameterValues("checkId");

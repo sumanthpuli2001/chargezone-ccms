@@ -5,8 +5,13 @@
  */
 package com.bul.zydex.controller;
 
+import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.service.EmailAddMasterService;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -23,6 +28,17 @@ public class EmailAddMasterAbstract extends CustomAbstract {
 
     public void setEmailAddMasterService(EmailAddMasterService<EmailAddMaster> emailAddMasterService) {
         this.emailAddMasterService = emailAddMasterService;
+    }
+     protected void departmentList(HttpServletRequest request) {
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        List<?> depttList = departmentMasterService.read();
+        Map<Integer, String> dm = new HashMap<>();
+        for (Object o : depttList) {
+            departmentMaster = (DepartmentMaster) o;
+            dm.put(departmentMaster.getId(), departmentMaster.getDepartmentName());
+        }
+
+        request.setAttribute("deptMap", dm);
     }
     
 

@@ -19,7 +19,7 @@
             $("#addRowButtonId_table_1").on("click", function () {
                 i++;
                 var clone = "<div id = \"email_Id" + i + "\" class=\"form-group col-sm-12\" style=\"margin-left: 0px !important;margin-right:  0px !important;padding-left: 0px !important;padding-right: 0px !important;\" ><div class=\"col-sm-3\"></div><div class=\"col-sm-6\" >"
-                        + "<input name =\"emailId" + i + "\" id =\"emailId" + i + "\" class =\"form-control\" style=\"margin-top: 10px\">"
+                        + "<input name ='emailId' id =\"emailId" + i + "\" class =\"form-control\" style=\"margin-top: 10px\">"
                         + "</input>"
                         + "</div>"
                         + "<div class=\"col-sm-3\" style=\"margin - top: 5px\">"
@@ -81,28 +81,57 @@
                                             <label class="control-label">Enter Module Name:<span style="color: red;font-size: 12px;">*</span></label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <form:input path="moduleName" class="form-control"/>
+                                            <form:select path="moduleName" class="form-control">
+                                                <form:option value="" label="-- Select --" ></form:option>
+                                                <form:option value="LEAVE" label="LEAVE" ></form:option>
+                                                <form:option value="ATTENDENCE" label="ATTENDENCE" ></form:option>
+                                                <form:option value="TRAVEL" label="TRAVEL" ></form:option>
+                                                <form:option value="EXPENSE" label="EXPENSE" ></form:option>
+                                                <form:option value="PMP" label="PMP" ></form:option>
+                                                <form:option value="PIP" label="PIP" ></form:option>
+                                                <form:option value="POOL CAR" label="POOL CAR" ></form:option>
+                                                <form:option value="GATE PASS" label="GATE PASS" ></form:option>
+                                                <form:option value="CAFETERIA" label="CAFETERIA" ></form:option>
+                                                <form:option value="IT SERVICE" label="IT SERVICE" ></form:option>
+                                                <form:option value="HR SERVICE" label="HR SERVICE" ></form:option>
+                                                <form:option value="PROBATION TO CONFORMATION" label="PROBATION TO CONFORMATION" ></form:option>
+                                                <form:option value="RESIGNATION" label="RESIGNATION" ></form:option>
+                                                <form:option value="NO DUE" label="NO DUE " ></form:option>
+                                                <form:option value="15" label="EXIT EMPLOYEE" ></form:option>
+                                            </form:select>
                                         </div>
-                                    </div>
-                                    <div class="form-group" id="id">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Email Id:</label>
-                                        </div>
-                                        <input type="hidden" name="countId" id="countId" value="1">
-                                        <div class="col-sm-6" id="email_Id1">
-                                            <input id="emailId" name="emailId" class="form-control"  style="margin-bottom: 10px"/>
-                                        </div>
-                                        <div class="col-sm-3" style="margin-top: 5px">
-                                            <span >
-                                                <input type="button" value="+" id="addRowButtonId_table_1" />
-                                            </span></div><br/>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-sm-6 col-sm-offset-5">
-                                            <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Department :<span style="color: red;font-size: 12px;">*</span></label>
                                         </div>
+                                        <div class="col-sm-6">
+                                            <form:select path="departmentMaster.id" class="form-control">
+                                                <form:option value="" label="-- Select --" ></form:option>
+                                                <form:options items="${deptMap}"></form:options>
+                                            </form:select>
+                                            <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="id">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Email Id:</label>
+                                            </div>
+                                            <input type="hidden" name="countId" id="countId" value="1">
+                                            <div class="col-sm-6" id="email_Id1">
+                                                <input id="emailId" name="emailId" class="form-control"  style="margin-bottom: 10px"/>
+                                            </div>
+                                            <div class="col-sm-3" style="margin-top: 5px">
+                                                <span >
+                                                    <input type="button" value="+" id="addRowButtonId_table_1" />
+                                                </span></div><br/>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6 col-sm-offset-5">
+                                                <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                            </div>
 
-                                    </div>
+                                        </div>
                                 </form:form>
                             </div><!-- /.tab-pane -->
                         </div><!-- /.tab-content -->

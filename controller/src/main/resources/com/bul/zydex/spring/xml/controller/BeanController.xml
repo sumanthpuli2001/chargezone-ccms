@@ -517,4 +517,11 @@
     <bean id="emailAddMasterController1" class="com.bul.zydex.controller.EmailAddMasterController" parent="controllerConfig" >
         <property name="emailAddMasterService" ref="emailAddMasterService1" />
     </bean>
+    <bean id="employeePunch1" class="com.bul.zydex.webservice.EmployeePunch" parent="controllerConfig" >
+        <property name="employeePunchForMobileAppService" ref="employeePunchForMobileAppService1" />
+    </bean>
+    <bean id="expenseReport1" class="com.bul.zydex.webservice.ExpenseReport" parent="controllerConfig" >
+        <property name="travelRequestMasterService" ref="travelRequestMasterService1" />
+    </bean>
 </beans>
+ 

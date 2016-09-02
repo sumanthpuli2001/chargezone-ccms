@@ -6,6 +6,7 @@
 package com.bul.zydex.dao;
 
 import com.bul.zydex.model.EmailAddMaster;
+import java.util.List;
 
 
 
@@ -18,4 +19,11 @@ public class EmailAddMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Emai
     public Class getDomainClass() {
         return EmailAddMaster.class;
     }
+
+    @Override
+    public List<?> readByName(String name) {
+        return null;
+//        String quString=""
+    }
+    
 }

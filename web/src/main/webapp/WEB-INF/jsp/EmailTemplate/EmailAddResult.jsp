@@ -76,6 +76,7 @@
                                                                 <tr>
                                                                     <th align="center" style="width: 1px;"><input type="checkbox" id="toggleId"/></th>
                                                                     <th>Module Name</th>
+                                                                    <th>Department</th>
                                                                     <th>Email Id</th>
                                                                     <th>Action</th>
                                                                 </tr>
@@ -87,6 +88,7 @@
                                                             <tr>
                                                                 <td align="center"><input type="checkbox" name="checkId" id="emailTypeId" value="${list.id}"/></td>
                                                                 <td>${list.moduleName}</td>
+                                                                <td>${list.departmentMaster.id}</td>
                                                                 <td>${list.emailId}</td>
                                                                 <td>
                                                                     <div class="btn-group">

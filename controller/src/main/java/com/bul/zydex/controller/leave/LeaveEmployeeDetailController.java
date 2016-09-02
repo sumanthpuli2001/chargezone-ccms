@@ -443,6 +443,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         employeeLeaveBalanceService.update(employeeLeaveBalance1);
                         request.setAttribute("successMessage",
                                 "Information : The Information is saved Successfully.");
+                        emailAddMasterService.read();
 
                         //Emailtemplate for submit click .....
                         try {
@@ -1389,6 +1390,10 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     }
                 } catch (Exception e) {
                 }
+                
+                
+                
+                
 //                } else {
 //                    request.setAttribute("failureMessage",
 //                            "Error : Employee Leave Balance is Less Than Applied Days. So Please Reject/Rework a Leave Request");

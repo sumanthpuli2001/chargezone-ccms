@@ -7,6 +7,7 @@ package com.bul.zydex.service;
 
 import com.bul.zydex.dao.EmailAddMasterDAO;
 import com.bul.zydex.dao.EmailTemplateDAO;
+import java.util.List;
 
 /**
  *
@@ -24,6 +25,8 @@ public class EmailAddMasterServiceImpl<T> extends GenericsServiceImpl<T> impleme
         this.emailAddMasterDAO = emailAddMasterDAO;
                  setGenericsDAO(emailAddMasterDAO);
     }
-    
+     public List<?> readByName(String name){
+         return emailAddMasterDAO.readByName(name);
+     }
     
 }

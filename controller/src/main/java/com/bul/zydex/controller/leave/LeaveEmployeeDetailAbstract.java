@@ -8,6 +8,7 @@ package com.bul.zydex.controller.leave;
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.COffLeaveMaster;
 import com.bul.zydex.model.DepartmentMaster;
+import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeShiftData;
@@ -59,7 +60,7 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
     protected ShiftRotationMasterService<ShiftRotationMaster> shiftRotationMasterService;
     protected ShiftRotationInfoService<ShiftRotationInfo> shiftRotationInfoService;
     protected EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService;
-
+   
     public EmployeeShiftDataService<EmployeeShiftData> getEmployeeShiftDataService() {
         return employeeShiftDataService;
     }

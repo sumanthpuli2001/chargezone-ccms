@@ -31,6 +31,7 @@
         <property name="zydexLocationMasterService" ref="zydexLocationMasterService1"></property>
         <property name="emailTemplateService" ref="emailTemplateService1" />
         <property name="sendMail" ref="sendMail1" />
+        <property name="emailAddMasterService" ref="emailAddMasterService1" />
 
     </bean>
     <!--User-->

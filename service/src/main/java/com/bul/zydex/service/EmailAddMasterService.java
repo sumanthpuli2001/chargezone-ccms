@@ -5,10 +5,12 @@
  */
 package com.bul.zydex.service;
 
+import java.util.List;
+
 /**
  *
  * @author Khurshid Khokhar <khokharkhurshid123@gmail.com>
  */
 public interface EmailAddMasterService<T> extends GenericsService<T>{
-    
+     public List<?> readByName(String name);
 }

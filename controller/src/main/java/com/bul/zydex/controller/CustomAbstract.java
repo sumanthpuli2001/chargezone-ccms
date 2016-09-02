@@ -8,6 +8,7 @@ package com.bul.zydex.controller;
 import com.bul.zydex.model.CurrencyMaster;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.MailMaster;
@@ -18,6 +19,7 @@ import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.service.CurrencyMasterService;
+import com.bul.zydex.service.EmailAddMasterService;
 import com.bul.zydex.service.EmailTemplateService;
 import com.bul.zydex.service.MailMasterService;
 import com.bul.zydex.service.SmsMasterService;
@@ -44,6 +46,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
+
 /**
  *
  * @author Administrator
@@ -64,7 +67,7 @@ public abstract class CustomAbstract extends MultiActionController {
     protected  ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService;
      protected EmailTemplateService<EmailTemplate> emailTemplateService;
     protected SendMail sendMail;
-    
+    protected  EmailAddMasterService<EmailAddMaster> emailAddMasterService;
 
     public EmailTemplateService<EmailTemplate> getEmailTemplateService() {
         return emailTemplateService; 
@@ -430,6 +433,14 @@ public void selectedEmployeeFor360Feedback1(HttpServletRequest request,
         tempStr += "]";
 
         request.setAttribute("gavasatList", tempStr);
+    }
+
+    public EmailAddMasterService<EmailAddMaster> getEmailAddMasterService() {
+        return emailAddMasterService;
+    }
+
+    public void setEmailAddMasterService(EmailAddMasterService<EmailAddMaster> emailAddMasterService) {
+        this.emailAddMasterService = emailAddMasterService;
     }
 
 }

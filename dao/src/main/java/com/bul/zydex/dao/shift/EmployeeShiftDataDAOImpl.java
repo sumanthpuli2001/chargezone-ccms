@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.shift;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
+import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeShiftData;
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -1062,6 +1063,20 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
                 + " Where a.employeeMaster.id = '" + employeeShiftData.getEmployeeMaster().getId() + "'"
                 + "and STR_TO_DATE(a.inDateTime,'%d/%m/%Y') = STR_TO_DATE('" + date + "','%d/%m/%Y')";
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readByEmployeeId(T object, String date) {
+
+        EmployeeShiftData employeeShiftData = (EmployeeShiftData) object;
+        String query = "";
+
+        query += " FROM EmployeeShiftData a"
+                + " WHERE a.employeeMaster.id = " + employeeShiftData.getEmployeeMaster().getId() + ""
+                + " and STR_TO_DATE(a.inDateTime,'%d/%m/%Y %H:%i') >= STR_TO_DATE('" + date + "','%d/%m/%Y %H:%i')";
+
+        return getHibernateTemplate().find(query);
+
     }
 
 }

@@ -87,7 +87,7 @@
                                                 <form:option value="Attendance" label="Attendance" ></form:option>
                                                 <form:option value="Travel" label="Travel" ></form:option>
                                                 <form:option value="Expense" label="Expense" ></form:option>
-                                                <form:option value="PMp" label="PMP" ></form:option>
+                                                <form:option value="PMP" label="PMP" ></form:option>
                                                 <form:option value="PIP" label="PIP" ></form:option>
                                                 <form:option value="Pool Car" label="Pool Car" ></form:option>
                                                 <form:option value="Gate Pass" label="Gate Pass" ></form:option>

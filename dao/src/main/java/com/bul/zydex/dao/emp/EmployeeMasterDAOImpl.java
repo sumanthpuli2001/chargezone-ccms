@@ -1712,6 +1712,7 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " WHERE a.userMaster.id= " + employeeMaster.getUserMaster().getId();
         return getHibernateTemplate().find(query);
     }
+
     @Override
     public List<?> readAllSubordinate(T object) {
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
@@ -1723,10 +1724,52 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " AND (a.reportingManagerLevel1= " + employeeMaster.getId()
                 + " Or a.reportingManagerLevel2= " + employeeMaster.getId()
                 + " Or a.reportingManagerLevel3= " + employeeMaster.getId()
-                + " Or a.reportingManagerLevel4= " + employeeMaster.getId() 
-                + " Or a.reportingManagerLevel5= " + employeeMaster.getId() 
-                + " Or a.reportingManagerLevel6= " + employeeMaster.getId() 
+                + " Or a.reportingManagerLevel4= " + employeeMaster.getId()
+                + " Or a.reportingManagerLevel5= " + employeeMaster.getId()
+                + " Or a.reportingManagerLevel6= " + employeeMaster.getId()
                 + ")";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readForSendMailToAll(T object) {
+        EmployeeMaster employeeMaster = (EmployeeMaster) object;
+        String query = "";
+        query += " SELECT "
+                + " (Select a1.emailAddress "
+                + " From  EmployeeMaster a1 "
+                + " left join a1.levelMaster b1 "
+                + " where a1.id=a.reportingManagerLevel2"
+                + " and a.reportingManagerLevel2 != a.reportingManagerLevel3"
+                + " and a.reportingManagerLevel2 != a.reportingManagerLevel4"
+                + " and a.reportingManagerLevel2 != a.reportingManagerLevel5"
+                + " and b1.level in ('2D','3A','3B','3C','4A','4B','4C','5A','5B','5C','5D')),"
+                + " (Select a2.emailAddress "
+                + " From  EmployeeMaster a2 "
+                + " left join a2.levelMaster b2 "
+                + " where a2.id=a.reportingManagerLevel3"
+                + " and a.reportingManagerLevel3 != a.reportingManagerLevel4"
+                + " and a.reportingManagerLevel3 != a.reportingManagerLevel5"
+                + " and b2.level in ('2D','3A','3B','3C','4A','4B','4C','5A','5B','5C','5D')),"
+                + " (Select a3.emailAddress "
+                + " From  EmployeeMaster a3 "
+                + " left join a3.levelMaster b3 "
+                + " where a3.id=a.reportingManagerLevel4"
+                + " and a.reportingManagerLevel4 != a.reportingManagerLevel5"
+                + " and b3.level in ('2D','3A','3B','3C','4A','4B','4C','5A','5B','5C','5D')),"
+                + " (Select a4.emailAddress "
+                + " From  EmployeeMaster a4 "
+                + " left join a4.levelMaster b4 "
+                + " where a4.id=a.reportingManagerLevel5"
+                + " and b4.level in ('2D','3A','3B','3C','4A','4B','4C','5A','5B','5C','5D'))"
+//                + " (Select a5.emailAddress "
+//                + " From  EmployeeMaster a5 "
+//                + " left join a5.levelMaster b5 "
+//                + " where a5.id=a.reportingManagerLevel2"
+//                + " and b5.level in ('2D','3A','3B','3C','4A','4B','4C','5A','5B','5C','5D'))"
+////               
+                + " FROM EmployeeMaster a "
+                + " Where a.id=" + employeeMaster.getId();
         return getHibernateTemplate().find(query);
     }
 

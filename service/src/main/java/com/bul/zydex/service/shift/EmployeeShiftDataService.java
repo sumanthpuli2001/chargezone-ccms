@@ -27,5 +27,7 @@ public interface EmployeeShiftDataService<T> extends GenericsService<T> {
 
     public List<?> getPastAndCurrentPunchForSelectedDate(T object, String endShiftTime, String selectDate, String PreviousDate);
 
-      public List<?> dailyTimeEntryForSelectedDate(T object,String date);
+    public List<?> dailyTimeEntryForSelectedDate(T object, String date);
+
+    public List<?> readByEmployeeId(T object, String date);
 }

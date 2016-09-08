@@ -88,7 +88,7 @@
                                                             <tr>
                                                                 <td align="center"><input type="checkbox" name="checkId" id="emailTypeId" value="${list.id}"/></td>
                                                                 <td>${list.moduleName}</td>
-                                                                <td>${list.departmentMaster.id}</td>
+                                                                <td>${list.departmentMaster.departmentName}</td>
                                                                 <td>${list.emailId}</td>
                                                                 <td>
                                                                     <div class="btn-group">

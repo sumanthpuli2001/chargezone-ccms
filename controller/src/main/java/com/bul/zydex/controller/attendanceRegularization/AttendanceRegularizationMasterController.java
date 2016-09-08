@@ -3,6 +3,7 @@ package com.bul.zydex.controller.attendanceRegularization;
 import com.bul.zydex.model.AttendanceRegularization;
 import com.bul.zydex.model.AttendanceRegularizationMaster;
 import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeAdvanceSearch;
 import com.bul.zydex.model.EmployeeDatetimeData;
@@ -18,7 +19,10 @@ import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.model.support.User;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,6 +35,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import static org.apache.commons.lang3.time.DateUtils.addDays;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -255,6 +260,30 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                         msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                         sendMail.sendMail(from, To, Subject, msg);
+
+                        String name = "No Due";
+                        EmailAddMaster emailAddMaster = new EmailAddMaster();
+                        emailAddMaster.setModuleName(name);
+                        emailAddMaster.setDepartmentMaster(employeeMasterModel.getDepartmentMaster());
+                        List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                        if (!emailSendList.isEmpty()) {
+                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                            String emailId = emailAddMaster1.getEmailId();
+                            for (String emailId1 : emailId.split(",")) {
+                                if (!emailId1.equals("")) {
+                                    String To1 = emailId1;
+                                    String from1 = employeeMasterModel.getOfficeEmailId();
+                                    String subject1 = emailTemplate.getSubject();
+                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                                    String msg1 = emailTemplate.getBodytext();
+                                    msg1 = msg1.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                    sendMail.sendMail(from1, To1, subject1, msg1);
+
+                                }
+                            }
+                        }
 
                     }
 
@@ -1636,8 +1665,30 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
 
-                }
+                    String name = "Attendance";
+                    EmailAddMaster emailAddMaster = new EmailAddMaster();
+                    emailAddMaster.setModuleName(name);
+                    emailAddMaster.setDepartmentMaster(employeeMaster1.getDepartmentMaster());
+                    List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                    if (!emailSendList.isEmpty()) {
+                        EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                        String emailId = emailAddMaster1.getEmailId();
+                        for (String emailId1 : emailId.split(",")) {
+                            if (!emailId1.equals("")) {
+                                String To1 = emailId1;
+                                String from1 = employeeMasterModel.getOfficeEmailId();
+                                String subject1 = emailTemplate.getSubject();
+                                subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                                String msg1 = emailTemplate.getBodytext();
+                                msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                                msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                sendMail.sendMail(from1, To1, subject1, msg1);
 
+                            }
+                        }
+                    }
+                }
             } catch (Exception e) {
             }
 
@@ -1764,6 +1815,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("AttendanceRegularization/attendanceRegularizationViewResultExport");
         return mv;
     }
+
     public ModelAndView subOrdinateAttendanceView(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
@@ -1772,22 +1824,23 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("AttendanceRegularization/SubOrdinateAttendanceView");
         return mv;
     }
-     public ModelAndView showOwnAttandanceOfSubordinate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    public ModelAndView showOwnAttandanceOfSubordinate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
         EmployeeShiftData employeeShiftData = new EmployeeShiftData();
         String startDate = request.getParameter("inDateTime");
         String endDate = request.getParameter("outDateTime");
         bind(request, employeeAdvanceSearch);
-     
-        String id =  request.getParameter("id");
+
+        String id = request.getParameter("id");
         employeeAdvanceSearch.setId(id);
         employeeAdvanceSearch.setZydexLocationId(null);
         employeeAdvanceSearch.setLevelID(null);
         employeeAdvanceSearch.setDepartmentId(null);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-        if (null !=id && !id.equals("")) {
+        if (null != id && !id.equals("")) {
             employeeShiftData.setId(Integer.parseInt(id));
         }
         employeeAdvanceSearch.setEmployeeId(Boolean.FALSE);
@@ -2475,5 +2528,23 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         }
 
         return mv;
+    }
+
+    public void checkPunchtime(HttpServletRequest request, HttpServletResponse response) throws ParseException, IOException {
+        String strDate = request.getParameter("strDate");
+        String message = "";
+        strDate = strDate.replaceAll(",", "/");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Date sDate = sdf.parse(strDate);
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
+        EmployeeShiftData employeeShiftData = new EmployeeShiftData();
+        employeeShiftData.setEmployeeMaster(employeeMaster);
+        List<?> timecheck = employeeShiftDataService.readByEmployeeId(employeeShiftData,strDate);
+        if (!timecheck.isEmpty()) {
+            message = "Selected Date and Time is not valid.So You can't Apply AR";
+        }
+        PrintWriter out = response.getWriter();
+        out.print(message);
     }
 }

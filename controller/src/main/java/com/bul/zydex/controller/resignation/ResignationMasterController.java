@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.resignation;
 
 import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.NoDueMaster;
@@ -367,6 +368,51 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
+
+                String name = "Resignation";
+                EmailAddMaster emailAddMaster = new EmailAddMaster();
+                emailAddMaster.setModuleName(name);
+                emailAddMaster.setDepartmentMaster(employeeRequestee.getDepartmentMaster());
+                List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                if (!emailSendList.isEmpty()) {
+                    EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                    String emailId = emailAddMaster1.getEmailId();
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMasterModel.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                            msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+
+                            List<?> gmOrStateHeadMailSend = employeeMasterService.readForSendMailToAll(employeeRequestee);
+                            if (!gmOrStateHeadMailSend.isEmpty()) {
+                                Object[] emaillist = (Object[]) gmOrStateHeadMailSend.get(0);
+                                for (int i = 0; i <= emaillist.length; i++) {
+                                    if (null != emaillist[i] && "" != emaillist[i]) {
+                                        String emailid = emaillist[i].toString();
+
+                                        String To3 = emailid;
+                                        String from3 = employeeMasterModel.getOfficeEmailId();
+                                        String subject3 = emailTemplate.getSubject();
+
+                                        subject3 = subject3.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                                        String msg3 = emailTemplate.getBodytext();
+                                        msg3 = msg3.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                                        msg3 = msg3.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg3 = msg3.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from3, To3, subject3, msg3);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
             } catch (Exception e) {
 
             }
@@ -724,6 +770,51 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
+
+                String name = "Resignation";
+                EmailAddMaster emailAddMaster = new EmailAddMaster();
+                emailAddMaster.setModuleName(name);
+                emailAddMaster.setDepartmentMaster(employeeRequestee.getDepartmentMaster());
+                List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                if (!emailSendList.isEmpty()) {
+                    EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                    String emailId = emailAddMaster1.getEmailId();
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMasterModel.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                            msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+
+                            List<?> gmOrStateHeadMailSend = employeeMasterService.readForSendMailToAll(employeeRequestee);
+                            if (!gmOrStateHeadMailSend.isEmpty()) {
+                                Object[] emaillist = (Object[]) gmOrStateHeadMailSend.get(0);
+                                for (int i = 0; i <= emaillist.length; i++) {
+                                    if (null != emaillist[i] && "" != emaillist[i]) {
+                                        String emailid = emaillist[i].toString();
+
+                                        String To3 = emailid;
+                                        String from3 = employeeMasterModel.getOfficeEmailId();
+                                        String subject3 = emailTemplate.getSubject();
+
+                                        subject3 = subject3.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                                        String msg3 = emailTemplate.getBodytext();
+                                        msg3 = msg3.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                                        msg3 = msg3.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg3 = msg3.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from3, To3, subject3, msg3);
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
             } catch (Exception e) {
 
             }

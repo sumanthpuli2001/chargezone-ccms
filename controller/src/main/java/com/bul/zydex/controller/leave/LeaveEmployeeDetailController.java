@@ -7,6 +7,7 @@ package com.bul.zydex.controller.leave;
 
 import com.bul.zydex.model.COffLeaveMaster;
 import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
@@ -184,7 +185,6 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         leaveEmployeeDetail.setStartDateStatus(strDateStatus);
         leaveEmployeeDetail.setEndDateStatus(endDateStatus);
         leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
-      
 
         leaveEmployeeDetailValidator.validate(mv, errors);
         if (leaveEmployeeDetail.getLeaveTypeMaster().getId() == (11)) {
@@ -442,7 +442,6 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         employeeLeaveBalanceService.update(employeeLeaveBalance1);
                         request.setAttribute("successMessage",
                                 "Information : The Information is saved Successfully.");
-                        emailAddMasterService.read();
 
                         //Emailtemplate for submit click .....
                         try {
@@ -1385,14 +1384,54 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                             sendMail.sendMail(from, To, subject, msg);
 
+                            String name = "Leave";
+                            EmailAddMaster emailAddMaster = new EmailAddMaster();
+                            emailAddMaster.setModuleName(name);
+                            emailAddMaster.setDepartmentMaster(employeeMaster2.getDepartmentMaster());
+                            List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                            if (!emailSendList.isEmpty()) {
+                                EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                                String emailId = emailAddMaster1.getEmailId();
+                                for (String emailId1 : emailId.split(",")) {
+                                    if (!emailId1.equals("")) {
+                                        String To1 = emailId1;
+                                        String from1 = employeeMasterModel.getOfficeEmailId();
+                                        String subject1 = emailTemplate1.getSubject();
+                                        subject1 = subject1.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                                        String msg1 = emailTemplate1.getBodytext();
+                                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from1, To1, subject1, msg1);
+                                    }
+                                }
+                            }
+                            List<?> gmOrStateHeadMailSend = employeeMasterService.readForSendMailToAll(employeeMaster2);
+                            if (!gmOrStateHeadMailSend.isEmpty()) {
+
+                                Object[] emaillist = (Object[]) gmOrStateHeadMailSend.get(0);
+                                for (int i = 0; i <= emaillist.length; i++) {
+                                    if (null != emaillist[i] && "" != emaillist[i]) {
+                                        String emailid = emaillist[i].toString();
+                                    
+                                        String To3 = emailid;
+                                        String from3 = employeeMasterModel.getOfficeEmailId();
+                                        String subject3 = emailTemplate1.getSubject();
+
+                                        subject3 = subject3.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                                        String msg3 = emailTemplate1.getBodytext();
+                                        msg3 = msg3.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                                        msg3 = msg3.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg3 = msg3.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from3, To3, subject3, msg3);
+                                    }
+                                }
+                            }
                         }
                     }
                 } catch (Exception e) {
                 }
-                
-                
-                
-                
+
 //                } else {
 //                    request.setAttribute("failureMessage",
 //                            "Error : Employee Leave Balance is Less Than Applied Days. So Please Reject/Rework a Leave Request");

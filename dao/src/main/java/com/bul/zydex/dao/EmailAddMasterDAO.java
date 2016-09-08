@@ -13,6 +13,6 @@ import java.util.List;
  */
 public interface EmailAddMasterDAO<T> extends GenericsDAO<T>{
     
-   public List<?> readByName(String name);
+   public List<?> readByName(T object);
     
 }

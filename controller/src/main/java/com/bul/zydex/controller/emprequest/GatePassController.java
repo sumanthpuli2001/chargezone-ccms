@@ -5,6 +5,7 @@
 package com.bul.zydex.controller.emprequest;
 
 import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.GatePass;
@@ -109,29 +110,29 @@ public class GatePassController extends GatePassAbstract {
             if (!gatePassService.isExist(gatePass)) {
                 gatePassService.create(gatePass);
                 //       Email Sent to ReportingManager1
-                      try {
-                            EmailTemplate emailTemplate = new EmailTemplate();
-                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                            DesignationMaster designationMaster = new DesignationMaster();
-                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                            EmployeeMaster employeeMasterHr = new EmployeeMaster();
-                            employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
-                            // id 36 is for GatePass apply status
-                            emailTemplate = emailTemplateService.readById(36);
-                            String To = employeeMasterHr.getOfficeEmailId();
-                            String from = employeeMasterModel.getOfficeEmailId();
-                            String Subject = emailTemplate.getSubject();
-                            
-                            Subject=Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-                            
-                            String msg = emailTemplate.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from, To, Subject, msg);
-                        } catch (Exception e) {
-                            
-                        }
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                    // id 36 is for GatePass apply status
+                    emailTemplate = emailTemplateService.readById(36);
+                    String To = employeeMasterHr.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+
+                }
                 request.setAttribute("successMessage",
                         "Information : Request Sent Successfully.");
                 request.setAttribute("gatePass", gatePass);
@@ -217,26 +218,26 @@ public class GatePassController extends GatePassAbstract {
                         "Information : Request Rejected Successfully.");
                 //    Email Sent to Employee
                 try {
-                            EmailTemplate emailTemplate = new EmailTemplate();
-                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                            DesignationMaster designationMaster = new DesignationMaster();
-                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                            List l1 = gatePassService.readEmpIdFromTabId(Integer.parseInt(id));
-                           EmployeeMaster employeeRequestee =  (EmployeeMaster) l1.get(0);
-                   // id 39 is for status GatePass Reject
-                            emailTemplate = emailTemplateService.readById(39);
-                            String To = employeeRequestee.getOfficeEmailId();
-                            String from = employeeMasterModel.getOfficeEmailId();
-                            String Subject = emailTemplate.getSubject();
-                            Subject=Subject.replaceAll("\\{user\\}",  employeeRequestee.getEmployeeName());
-                            String msg = emailTemplate.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from, To, Subject, msg);
-                        } catch (Exception e) {
-                            
-                        }
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    List l1 = gatePassService.readEmpIdFromTabId(Integer.parseInt(id));
+                    EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                    // id 39 is for status GatePass Reject
+                    emailTemplate = emailTemplateService.readById(39);
+                    String To = employeeRequestee.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+
+                }
             } else if (statusType.equals("6")) {
                 gatePass.setStatus(6);
                 gatePass.setRejectRemark(remark);
@@ -245,26 +246,26 @@ public class GatePassController extends GatePassAbstract {
                         "Information : Request Returned Successfully.");
                 //    Email Sent to Employee
                 try {
-                            EmailTemplate emailTemplate = new EmailTemplate();
-                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                            DesignationMaster designationMaster = new DesignationMaster();
-                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                            List l1 = gatePassService.readEmpIdFromTabId(Integer.parseInt(id));
-                           EmployeeMaster employeeRequestee =  (EmployeeMaster) l1.get(0);
-                   // id 38 is for status GatePass Rework
-                            emailTemplate = emailTemplateService.readById(38);
-                            String To = employeeRequestee.getOfficeEmailId();
-                            String from = employeeMasterModel.getOfficeEmailId();
-                            String Subject = emailTemplate.getSubject();
-                            Subject=Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
-                            String msg = emailTemplate.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from, To, Subject, msg);
-                        } catch (Exception e) {
-                            
-                        }
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    List l1 = gatePassService.readEmpIdFromTabId(Integer.parseInt(id));
+                    EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                    // id 38 is for status GatePass Rework
+                    emailTemplate = emailTemplateService.readById(38);
+                    String To = employeeRequestee.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+
+                }
             }
         } else {
             gatePass.setStatus(2);
@@ -272,56 +273,56 @@ public class GatePassController extends GatePassAbstract {
             request.setAttribute("successMessage",
                     "Information : Request Approved Successfully.");
             //    Email Sent to Security
-                                List<?> SecurityList = userRightMasterService.readSecurityList();
-                                 for (Object o : SecurityList) {
-                                        Object[] o1 = (Object[]) o;
-                                        int SecurityId = (int) o1[0];
-                             try {
-                            EmailTemplate emailTemplate = new EmailTemplate();
-                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                            DesignationMaster designationMaster = new DesignationMaster();
-                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                            EmployeeMaster employeeMasterHr = new EmployeeMaster();
-                            employeeMasterHr = employeeMasterService.readById(SecurityId);
-                             List l1 = gatePassService.readEmpIdFromTabId(Integer.parseInt(id));
-                           EmployeeMaster employeeRequestee =  (EmployeeMaster) l1.get(0);
-                   // id 37 is for status GatePass Approve (Security Notification)
-                            emailTemplate = emailTemplateService.readById(37);
-                            String To = employeeMasterHr.getOfficeEmailId();
-                            String from = employeeMasterModel.getOfficeEmailId();
-                            String Subject = emailTemplate.getSubject();
-                            Subject=Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
-                            String msg = emailTemplate.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from, To, Subject, msg);
-                             } catch (Exception e) {
-                            
-                         }
-                        }
-              //    Email Sent to Employee
+            List<?> SecurityList = userRightMasterService.readSecurityList();
+            for (Object o : SecurityList) {
+                Object[] o1 = (Object[]) o;
+                int SecurityId = (int) o1[0];
                 try {
-                            EmailTemplate emailTemplate = new EmailTemplate();
-                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                            DesignationMaster designationMaster = new DesignationMaster();
-                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                            List l1 = gatePassService.readEmpIdFromTabId(Integer.parseInt(id));
-                           EmployeeMaster employeeRequestee =  (EmployeeMaster) l1.get(0);
-                   // id 52 is for status GatePass Approve (Employee Notification)
-                            emailTemplate = emailTemplateService.readById(52);
-                            String To = employeeRequestee.getOfficeEmailId();
-                            String from = employeeMasterModel.getOfficeEmailId();
-                            String Subject = emailTemplate.getSubject();
-                            Subject=Subject.replaceAll("\\{user\\}",  employeeRequestee.getEmployeeName());
-                            String msg = emailTemplate.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from, To, Subject, msg);
-                        } catch (Exception e) {
-                            
-                        }
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                    employeeMasterHr = employeeMasterService.readById(SecurityId);
+                    List l1 = gatePassService.readEmpIdFromTabId(Integer.parseInt(id));
+                    EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                    // id 37 is for status GatePass Approve (Security Notification)
+                    emailTemplate = emailTemplateService.readById(37);
+                    String To = employeeMasterHr.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+
+                }
+            }
+            //    Email Sent to Employee
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                List l1 = gatePassService.readEmpIdFromTabId(Integer.parseInt(id));
+                EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                // id 52 is for status GatePass Approve (Employee Notification)
+                emailTemplate = emailTemplateService.readById(52);
+                String To = employeeRequestee.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+
+            }
         }
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("gatePass", gatePass);
@@ -329,7 +330,7 @@ public class GatePassController extends GatePassAbstract {
         return mv;
     }
 
-        public ModelAndView securityApproveSubmit(HttpServletRequest request,
+    public ModelAndView securityApproveSubmit(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
@@ -370,7 +371,7 @@ public class GatePassController extends GatePassAbstract {
         mv.getModelMap().put("Securitylist", Securitylist);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("gatePass", gatePass);
-        session.setAttribute("Securitylist11", Securitylist); 
+        session.setAttribute("Securitylist11", Securitylist);
         mv.setViewName("GatePass/GatePassSecurityResult");
         return mv;
     }
@@ -438,28 +439,52 @@ public class GatePassController extends GatePassAbstract {
             gatePassService.update(gatePass);
             request.setAttribute("successMessage",
                     "Information : Request Approved Successfully.");
-             //    Email Sent to Employee
-                try {
-                            EmailTemplate emailTemplate = new EmailTemplate();
-                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                            DesignationMaster designationMaster = new DesignationMaster();
-                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                            List l1 = gatePassService.readEmpIdFromTabId(Integer.parseInt(id));
-                           EmployeeMaster employeeRequestee =  (EmployeeMaster) l1.get(0);
-                   // id 41 is for status GatePass Exit Confirmed
-                            emailTemplate = emailTemplateService.readById(41);
-                            String To = employeeRequestee.getOfficeEmailId();
-                            String from = employeeMasterModel.getOfficeEmailId();
-                            String Subject = emailTemplate.getSubject();
-                            Subject=Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
-                            String msg = emailTemplate.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from, To, Subject, msg);
-                        } catch (Exception e) {
-                            
+            //    Email Sent to Employee
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                List l1 = gatePassService.readEmpIdFromTabId(Integer.parseInt(id));
+                EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                // id 41 is for status GatePass Exit Confirmed
+                emailTemplate = emailTemplateService.readById(41);
+                String To = employeeRequestee.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+
+                String name = "Gate Pass";
+                EmailAddMaster emailAddMaster = new EmailAddMaster();
+                emailAddMaster.setModuleName(name);
+                emailAddMaster.setDepartmentMaster(employeeRequestee.getDepartmentMaster());
+                List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                if (!emailSendList.isEmpty()) {
+                    EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                    String emailId = emailAddMaster1.getEmailId();
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMasterModel.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                            msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+
                         }
+                    }
+                }
+            } catch (Exception e) {
+
+            }
         }
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("gatePass", gatePass);
@@ -512,72 +537,13 @@ public class GatePassController extends GatePassAbstract {
             if (gatePass1.getId() == null) {
                 gatePass = gatePassService.readById(Integer.parseInt(id));
             }
-             String btn = (String) request.getParameter("btnType");
-             if (btn.equals("Submit")) {
-            if (gatePass.getStatus() == 6) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                String requestdate = sdf.format(new Date());
-                gatePass.setRequestDate(requestdate);
-                gatePass.setStatus(8);
-                gatePass.setReason(gatePass1.getReason());
-                gatePass.setMaterialTakenToPersonName(gatePass1.getMaterialTakenToPersonName());
-                gatePass.setMaterialTakenToPersonMobileNo(gatePass1.getMaterialTakenToPersonMobileNo());
-                gatePass.setMaterialTakenToPersonLandlineNo(gatePass1.getMaterialTakenToPersonLandlineNo());
-                gatePass.setMaterialOutDateTime(gatePass1.getMaterialOutDateTime());
-                gatePass.setMaterialCarryingPersonName(gatePass1.getMaterialCarryingPersonName());
-                gatePass.setMaterialCarryingPersonCntctNo(gatePass1.getMaterialCarryingPersonCntctNo());
-                gatePass.setDestination(gatePass1.getDestination());
-                gatePass.setAssetValue(gatePass1.getAssetValue());
-                gatePass.setAssetIdentityNo(gatePass1.getAssetIdentityNo());
-                gatePass.setAssetDescription(gatePass1.getAssetDescription());
-                if (gatePass1.isGatePassType()) {
-                    gatePass.setGatePassType(true);
-                    gatePass.setExpectedReturnDateTime(gatePass1.getExpectedReturnDateTime());
-                } else {
-                    gatePass.setGatePassType(false);
-                }
-                if (gatePass.isGatePassType()) {
-                    gatePass.setReturnFlag(Boolean.FALSE);
-                }
-                gatePassService.update(gatePass);
-                request.setAttribute("successMessage",
-                        "Information :Return Request Sent Successfully.");
-                //       Email Sent to ReportingManager1
-                      try {
-                            EmailTemplate emailTemplate = new EmailTemplate();
-                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                            DesignationMaster designationMaster = new DesignationMaster();
-                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                            EmployeeMaster employeeMasterHr = new EmployeeMaster();
-                            employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
-                            // id 53 is for GatePass Rework Submitted
-                            emailTemplate = emailTemplateService.readById(53);
-                            String To = employeeMasterHr.getOfficeEmailId();
-                            String from = employeeMasterModel.getOfficeEmailId();
-                            String Subject = emailTemplate.getSubject();
-                            Subject=Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-                            String msg = emailTemplate.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from, To, Subject, msg);
-                        } catch (Exception e) {
-                            
-                        }
-                mv.getModelMap().put("gatePass", gatePass);
-                mv = searchSubmit(request, response);
-            }
-            }
-//   empwithdraw    
-              if (btn.equals("Withdraw")) {
-            if (gatePass.getStatus() == 1 || gatePass.getStatus() == 4|| gatePass.getStatus() == 2|| gatePass.getStatus() == 6|| gatePass.getStatus() == 8) {
-                if (gatePass.getStatus() == 1) {
-                    gatePassService.delete(Integer.parseInt(id));
-                    request.setAttribute("successMessage",
-                            "Information : Request Withdrawed Successfully.");
-                    mv = searchSubmit(request, response);
-                } else if (gatePass.getStatus() == 4|| gatePass.getStatus() == 2|| gatePass.getStatus() == 6|| gatePass.getStatus() == 8) {
-                    gatePass.setStatus(14);
+            String btn = (String) request.getParameter("btnType");
+            if (btn.equals("Submit")) {
+                if (gatePass.getStatus() == 6) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    String requestdate = sdf.format(new Date());
+                    gatePass.setRequestDate(requestdate);
+                    gatePass.setStatus(8);
                     gatePass.setReason(gatePass1.getReason());
                     gatePass.setMaterialTakenToPersonName(gatePass1.getMaterialTakenToPersonName());
                     gatePass.setMaterialTakenToPersonMobileNo(gatePass1.getMaterialTakenToPersonMobileNo());
@@ -614,6 +580,7 @@ public class GatePassController extends GatePassAbstract {
                         String To = employeeMasterHr.getOfficeEmailId();
                         String from = employeeMasterModel.getOfficeEmailId();
                         String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
                         String msg = emailTemplate.getBodytext();
                         msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
                         msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
@@ -624,57 +591,116 @@ public class GatePassController extends GatePassAbstract {
                     }
                     mv.getModelMap().put("gatePass", gatePass);
                     mv = searchSubmit(request, response);
-                }}
-      //       Email Sent to ReportingManager1
-                      try {
+                }
+            }
+//   empwithdraw    
+            if (btn.equals("Withdraw")) {
+                if (gatePass.getStatus() == 1 || gatePass.getStatus() == 4 || gatePass.getStatus() == 2 || gatePass.getStatus() == 6 || gatePass.getStatus() == 8) {
+                    if (gatePass.getStatus() == 1) {
+                        gatePassService.delete(Integer.parseInt(id));
+                        request.setAttribute("successMessage",
+                                "Information : Request Withdrawed Successfully.");
+                        mv = searchSubmit(request, response);
+                    } else if (gatePass.getStatus() == 4 || gatePass.getStatus() == 2 || gatePass.getStatus() == 6 || gatePass.getStatus() == 8) {
+                        gatePass.setStatus(14);
+                        gatePass.setReason(gatePass1.getReason());
+                        gatePass.setMaterialTakenToPersonName(gatePass1.getMaterialTakenToPersonName());
+                        gatePass.setMaterialTakenToPersonMobileNo(gatePass1.getMaterialTakenToPersonMobileNo());
+                        gatePass.setMaterialTakenToPersonLandlineNo(gatePass1.getMaterialTakenToPersonLandlineNo());
+                        gatePass.setMaterialOutDateTime(gatePass1.getMaterialOutDateTime());
+                        gatePass.setMaterialCarryingPersonName(gatePass1.getMaterialCarryingPersonName());
+                        gatePass.setMaterialCarryingPersonCntctNo(gatePass1.getMaterialCarryingPersonCntctNo());
+                        gatePass.setDestination(gatePass1.getDestination());
+                        gatePass.setAssetValue(gatePass1.getAssetValue());
+                        gatePass.setAssetIdentityNo(gatePass1.getAssetIdentityNo());
+                        gatePass.setAssetDescription(gatePass1.getAssetDescription());
+                        if (gatePass1.isGatePassType()) {
+                            gatePass.setGatePassType(true);
+                            gatePass.setExpectedReturnDateTime(gatePass1.getExpectedReturnDateTime());
+                        } else {
+                            gatePass.setGatePassType(false);
+                        }
+                        if (gatePass.isGatePassType()) {
+                            gatePass.setReturnFlag(Boolean.FALSE);
+                        }
+                        gatePassService.update(gatePass);
+                        request.setAttribute("successMessage",
+                                "Information :Return Request Sent Successfully.");
+                        //       Email Sent to ReportingManager1
+                        try {
                             EmailTemplate emailTemplate = new EmailTemplate();
                             EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                             DesignationMaster designationMaster = new DesignationMaster();
                             designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
                             EmployeeMaster employeeMasterHr = new EmployeeMaster();
                             employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
-                            // id 40 is for GatePass Withdraw
-                            emailTemplate = emailTemplateService.readById(40);
+                            // id 53 is for GatePass Rework Submitted
+                            emailTemplate = emailTemplateService.readById(53);
                             String To = employeeMasterHr.getOfficeEmailId();
                             String from = employeeMasterModel.getOfficeEmailId();
                             String Subject = emailTemplate.getSubject();
-                            Subject=Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
                             String msg = emailTemplate.getBodytext();
                             msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
                             msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                             msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                             sendMail.sendMail(from, To, Subject, msg);
                         } catch (Exception e) {
-                            
+
                         }
- //    Email Sent to Security
-                                List<?> SecurityList = userRightMasterService.readSecurityList();
-                                 for (Object o : SecurityList) {
-                                        Object[] o1 = (Object[]) o;
-                                        int SecurityId = (int) o1[0];
-                             try {
-                            EmailTemplate emailTemplate = new EmailTemplate();
-                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                            DesignationMaster designationMaster = new DesignationMaster();
-                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                            EmployeeMaster employeeMasterHr = new EmployeeMaster();
-                            employeeMasterHr = employeeMasterService.readById(SecurityId);
+                        mv.getModelMap().put("gatePass", gatePass);
+                        mv = searchSubmit(request, response);
+                    }
+                }
+                //       Email Sent to ReportingManager1
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
                     // id 40 is for GatePass Withdraw
-                            emailTemplate = emailTemplateService.readById(40);
-                            String To = employeeMasterHr.getOfficeEmailId();
-                            String from = employeeMasterModel.getOfficeEmailId();
-                            String Subject = emailTemplate.getSubject();
-                            Subject=Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-                            String msg = emailTemplate.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from, To, Subject, msg);
-                             } catch (Exception e) {
-                            
-                         }
-                        }
-                      
+                    emailTemplate = emailTemplateService.readById(40);
+                    String To = employeeMasterHr.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+
+                }
+                //    Email Sent to Security
+                List<?> SecurityList = userRightMasterService.readSecurityList();
+                for (Object o : SecurityList) {
+                    Object[] o1 = (Object[]) o;
+                    int SecurityId = (int) o1[0];
+                    try {
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                        DesignationMaster designationMaster = new DesignationMaster();
+                        designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                        EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                        employeeMasterHr = employeeMasterService.readById(SecurityId);
+                        // id 40 is for GatePass Withdraw
+                        emailTemplate = emailTemplateService.readById(40);
+                        String To = employeeMasterHr.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, Subject, msg);
+                    } catch (Exception e) {
+
+                    }
+                }
+
 //                }
 //            }
             }
@@ -770,28 +796,28 @@ public class GatePassController extends GatePassAbstract {
         gatePassService.update(gatePass);
         request.setAttribute("successMessage",
                 "Information : Returnable Gatepass Inward Confirmed.");
-          //    Email Sent to Employee
-                try {
-                            EmailTemplate emailTemplate = new EmailTemplate();
-                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                            DesignationMaster designationMaster = new DesignationMaster();
-                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                            List l1 = gatePassService.readEmpIdFromTabId(Integer.parseInt(id));
-                           EmployeeMaster employeeRequestee =  (EmployeeMaster) l1.get(0);
-                   // id 42 is for status GatePass Inward Confirm
-                            emailTemplate = emailTemplateService.readById(42);
-                            String To = employeeRequestee.getOfficeEmailId();
-                            String from = employeeMasterModel.getOfficeEmailId();
-                            String Subject = emailTemplate.getSubject();
-                            Subject=Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
-                            String msg = emailTemplate.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from, To, Subject, msg);
-                        } catch (Exception e) {
-                            
-                        }
+        //    Email Sent to Employee
+        try {
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            DesignationMaster designationMaster = new DesignationMaster();
+            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            List l1 = gatePassService.readEmpIdFromTabId(Integer.parseInt(id));
+            EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+            // id 42 is for status GatePass Inward Confirm
+            emailTemplate = emailTemplateService.readById(42);
+            String To = employeeRequestee.getOfficeEmailId();
+            String from = employeeMasterModel.getOfficeEmailId();
+            String Subject = emailTemplate.getSubject();
+            Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+            String msg = emailTemplate.getBodytext();
+            msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+            sendMail.sendMail(from, To, Subject, msg);
+        } catch (Exception e) {
+
+        }
         mv.getModelMap().put("gatePass", gatePass);
         mv = rgpresult(request, response);
         return mv;
@@ -1007,7 +1033,7 @@ public class GatePassController extends GatePassAbstract {
     }
 
     public ModelAndView exportToExcel(HttpServletRequest request,
-            HttpServletResponse response) throws Exception { 
+            HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         List<?> Securitylist = (List<?>) request.getSession().getAttribute("Securitylist11");
         response.setContentType("application/vnd.ms-excel");
@@ -1015,5 +1041,5 @@ public class GatePassController extends GatePassAbstract {
         mv.addObject("Securitylist", Securitylist);
         mv.setViewName("GatePass/ExportGatePassSecurityResult");
         return mv;
-    }   
+    }
 }

@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.travel;
 
 import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
@@ -1226,6 +1227,51 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                         msg = msg.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
                         msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                         sendMail.sendMail(from, to, subject, msg);
+
+                        String name = "Travel";
+                        EmailAddMaster emailAddMaster = new EmailAddMaster();
+                        emailAddMaster.setModuleName(name);
+                        emailAddMaster.setDepartmentMaster(employeeMaster1.getDepartmentMaster());
+                        List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                        if (!emailSendList.isEmpty()) {
+                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                            String emailId = emailAddMaster1.getEmailId();
+                            for (String emailId1 : emailId.split(",")) {
+                                if (!emailId1.equals("")) {
+                                    String To1 = emailId1;
+                                    String from1 = employeemastermodel.getOfficeEmailId();
+                                    String subject1 = emailtemplate.getSubject();
+                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                                    String msg1 = emailtemplate.getBodytext();
+                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                    sendMail.sendMail(from1, To1, subject1, msg1);
+
+                                    List<?> gmOrStateHeadMailSend = employeeMasterService.readForSendMailToAll(employeeMaster2);
+                                    if (!gmOrStateHeadMailSend.isEmpty()) {
+                                        Object[] emaillist = (Object[]) gmOrStateHeadMailSend.get(0);
+                                        for (int i = 0; i <= emaillist.length; i++) {
+                                            if (null != emaillist[i] && "" != emaillist[i]) {
+                                                String emailid = emaillist[i].toString();
+
+                                                String To3 = emailid;
+                                                String from3 = employeemastermodel.getOfficeEmailId();
+                                                String subject3 = emailtemplate.getSubject();
+
+                                                subject3 = subject3.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                                                String msg3 = emailtemplate.getBodytext();
+                                                msg3 = msg3.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                                                msg3 = msg3.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
+                                                msg3 = msg3.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                                sendMail.sendMail(from3, To3, subject3, msg3);
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
                     } catch (Exception e) {
                     }
                 }

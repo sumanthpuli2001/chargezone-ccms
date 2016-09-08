@@ -6,6 +6,7 @@ package com.bul.zydex.controller.emprequest;
 
 import com.bul.zydex.model.CafeteriaRequest;
 import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import java.text.SimpleDateFormat;
@@ -308,6 +309,30 @@ public class CafeteriaRequestController extends CafeteriaRequestAbstract {
                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
+
+                String name = "Cafeteria";
+                EmailAddMaster emailAddMaster = new EmailAddMaster();
+                emailAddMaster.setModuleName(name);
+                emailAddMaster.setDepartmentMaster(employeeRequestee.getDepartmentMaster());
+                List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                if (!emailSendList.isEmpty()) {
+                    EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                    String emailId = emailAddMaster1.getEmailId();
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMasterModel.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                            msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+
+                        }
+                    }
+                }
             } catch (Exception e) {
 
             }
@@ -470,7 +495,7 @@ public class CafeteriaRequestController extends CafeteriaRequestAbstract {
         return mv;
     }
 
-           //    <---------Withdraw Cycle---------->
+    //    <---------Withdraw Cycle---------->
     public ModelAndView adminAprrovewithdrawClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -595,7 +620,7 @@ public class CafeteriaRequestController extends CafeteriaRequestAbstract {
         request.setAttribute("flag", 1);
         request.setAttribute("cafeteriaRequest", cafeteriaRequest);
 //        mv.setViewName("CafeteriaRequest/CafeAdminSearchResult");
-        mv=adminApproveSubmit(request, response);
+        mv = adminApproveSubmit(request, response);
         return mv;
     }
 

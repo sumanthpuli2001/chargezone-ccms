@@ -536,5 +536,17 @@
         <property name="userRightMasterService" ref="userRightMasterService1" />
         <property name="sendMail" ref="sendMail1" />
     </bean>
+    
+    <bean id="travelWebService1" class="com.bul.zydex.webservice.Travel.TravelWebService" parent="controllerConfig" >
+        <property name="travelRequestMasterService" ref="travelRequestMasterService1" />
+        <property name="policyDeviationForAirService" ref="policyDeviationForAirService1" />
+        <property name="travelDetailService" ref="travelDetailService1" />
+        <property name="hotelAccommodationService" ref="hotelAccommodationService1" />
+        <property name="currencyMasterService" ref="currencyMasterService1" />
+        <property name="travelApproverHistoryService" ref="travelApproverHistoryService1" />
+    </bean>
+    <bean id="expenseWebService1" class="com.bul.zydex.webservice.Expense.ExpenseWebService" parent="controllerConfig">
+        
+    </bean>
 </beans>
  

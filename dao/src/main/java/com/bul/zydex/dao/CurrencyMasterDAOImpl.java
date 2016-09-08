@@ -6,6 +6,9 @@
 package com.bul.zydex.dao;
 
 import com.bul.zydex.model.CurrencyMaster;
+import com.bul.zydex.model.TravelRequestMaster;
+import java.util.List;
+import org.springframework.orm.hibernate4.HibernateTemplate;
 
 /**
  *
@@ -17,5 +20,4 @@ public class CurrencyMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Curr
     protected Class getDomainClass() {
         return CurrencyMaster.class;
     }
-
 }

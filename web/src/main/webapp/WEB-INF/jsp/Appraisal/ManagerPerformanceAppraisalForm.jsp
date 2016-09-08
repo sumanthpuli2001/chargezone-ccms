@@ -102,7 +102,7 @@
         }
         .btns {
             display: inline-block;
-            //padding: 6px 12px;
+            /*//padding: 6px 12px;*/
             padding: 1px 7px;
             margin-bottom: 0;
             font-size: 14px;

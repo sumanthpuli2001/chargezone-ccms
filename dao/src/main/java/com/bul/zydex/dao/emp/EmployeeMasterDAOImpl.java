@@ -54,8 +54,8 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         query += " Select a.employeeId, a.employeeName, b.designationName, d.level, c.departmentName, lm.location ,a.reportingManagerLevel1, a.company, a.contactNo2 "
                 + "FROM EmployeeMaster a"
-                + " LEFT JOIN a.designationMaster b"
-                + " LEFT JOIN a.departmentMaster c"
+                + " LEFT JOIN a.designationMaster b" 
+               + " LEFT JOIN a.departmentMaster c"
                 + " LEFT JOIN a.levelMaster d"
                 + " LEFT JOIN a.locationMaster lm"
                 + " WHERE a.userMaster.id = " + employeeMaster.getUserMaster().getId();

@@ -5,16 +5,11 @@
  */
 package com.bul.zydex.controller;
 
-import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.UserMaster;
-import com.bul.zydex.model.support.ForgotPwd;
 import com.bul.zydex.model.support.User;
 import com.bul.zydex.util.ActionType;
-import com.bul.zydex.util.SendMail;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

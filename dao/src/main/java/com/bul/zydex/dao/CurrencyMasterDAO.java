@@ -5,10 +5,12 @@
  */
 package com.bul.zydex.dao;
 
+import java.util.List;
+
 /**
  *
  * @author AJAY
  */
 public interface CurrencyMasterDAO<T> extends GenericsDAO<T> {
 
-} 
+}

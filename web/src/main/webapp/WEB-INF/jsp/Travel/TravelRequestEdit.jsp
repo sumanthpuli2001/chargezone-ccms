@@ -966,7 +966,7 @@
                                                                 <!--<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>-->
                                                                 <!--</div>-->
                                                             </td>
-                                                            <td><input type="Text" name="fromLocation${status.count}" id="fromLocation${status.count}" class="form-control" value="${travelDetailList.fromLocation}">
+                                                                <td><input type="Text" name="fromLocation${status.count}" id="fromLocation${status.count}" class="form-control" value="${travelDetailList.fromLocation}">
                                                                 <span id="fromLocationError${status.count}" style="color: red;"></span>
                                                             </td>
                                                             <td><input type="Text" name="toLocation${status.count}" id="toLocation${status.count}" class="form-control" value="${travelDetailList.toLocation}">

@@ -146,6 +146,8 @@
                 <prop key="emailAddMaster.htm">emailAddMasterController1</prop>
                 <prop key="employeePunch.html">employeePunch1</prop>
                 <prop key="expenseReport.html">expenseReport1</prop>
+                <prop key="travelWebService.html">travelWebService1</prop>
+                <prop key="expenseWebService.html">expenseWebService1</prop>
            
             </props>
         </property>

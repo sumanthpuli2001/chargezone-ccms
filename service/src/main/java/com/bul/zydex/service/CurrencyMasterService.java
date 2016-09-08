@@ -5,6 +5,8 @@
  */
 package com.bul.zydex.service;
 
+import java.util.List;
+
 /**
  *
  * @author AJAY

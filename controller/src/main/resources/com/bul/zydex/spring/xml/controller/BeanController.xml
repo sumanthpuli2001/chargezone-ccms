@@ -531,5 +531,9 @@
         <property name="currencyMasterService" ref="currencyMasterService1" />
         <property name="travelApproverHistoryService" ref="travelApproverHistoryService1" />
     </bean>
+    <bean id="expenseWebService1" class="com.bul.zydex.webservice.Expense.ExpenseWebService" parent="controllerConfig">
+        
+        
+    </bean>
 </beans>
  

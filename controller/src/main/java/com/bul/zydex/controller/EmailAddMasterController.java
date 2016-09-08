@@ -39,11 +39,10 @@ public class EmailAddMasterController extends EmailAddMasterAbstract {
         BindException errors = new BindException(emailAddMaster, "emailAddMaster");
         bind(request, emailAddMaster);
         int countId = Integer.parseInt(request.getParameter("countId"));
-        String [] email=request.getParameterValues("emailId");
-        String emailId= "";
-        for(String email1:email)
-        {
-            emailId+=email1+",";
+        String[] email = request.getParameterValues("emailId");
+        String emailId = "";
+        for (String email1 : email) {
+            emailId += email1 + ",";
         }
 //        for (int i = 1; i <= countId; i++) {
 //            emailId = (request.getParameter("emailId")+",");
@@ -72,12 +71,28 @@ public class EmailAddMasterController extends EmailAddMasterAbstract {
 
     public ModelAndView editClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        EmailTemplate emailTemplate = new EmailTemplate();
+        EmailAddMaster emailAddMaster = new EmailAddMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        departmentList(request);
         String id = request.getParameter("id");
-        emailTemplate = emailTemplateService.readById(Integer.parseInt(id));
-        emailTemplate.setId(Integer.parseInt(id));
-        mv.getModelMap().put("emailTemplate", emailTemplate);
-        mv.setViewName("EmailTemplate/EmailTemplateEdit");
+        emailAddMaster = emailAddMasterService.readById(Integer.parseInt(id));
+        DepartmentMaster departmentMaster1 = departmentMasterService.readById(emailAddMaster.getDepartmentMaster().getId());
+        emailAddMaster.setDepartmentMaster(departmentMaster1);
+        mv.getModelMap().put("emailAddMaster", emailAddMaster);
+        mv.setViewName("EmailTemplate/EmailAddEdit");
+        return mv;
+    }
+
+    public ModelAndView updateClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmailAddMaster emailAddMaster = new EmailAddMaster();
+        BindException errors = new BindException(emailAddMaster, "emailAddMaster");
+        emailAddMaster.setId(Integer.parseInt(request.getParameter("id")));
+        bind(request, emailAddMaster);
+        emailAddMasterService.update(emailAddMaster);
+        request.setAttribute("successMessage",
+                "Information : The Information is Updated Successfully.");
+        mv = searchSubmit(request, response);
         return mv;
     }
 

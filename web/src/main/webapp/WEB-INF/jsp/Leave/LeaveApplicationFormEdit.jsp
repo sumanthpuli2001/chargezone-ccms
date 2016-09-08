@@ -401,6 +401,7 @@
             leaveStartDate = new Date(leaveStartDate[2], leaveStartDate[1], leaveStartDate[0]);
             leaveEndDate = new Date(leaveEndDate[2], leaveEndDate[1], leaveEndDate[0]);
             var leaveDays = document.getElementById("hiddenDays").value;
+           
             var days = document.getElementById("noOfDays").value = leaveDays;
             if (selectedText == 'Leave Without Pay') {
                 if (days > 60) {
@@ -459,6 +460,9 @@
                 var strUser2 = strUser1[1];
                 strUser2 = strUser2.split(')');
                 var leaveBalance = strUser2[0];
+                if(leaveBalance !=0){
+                    
+                
                 if (strUser == 'Short Leave' || strUser == 'Paternity Leave' || strUser == 'Leave Without Pay' || strUser == 'Maternity Leave') {
                     document.getElementById('Sick Leave').innerHTML = "0";
                     document.getElementById('Sick Leave2').innerHTML = document.getElementById('Sick Leave1').innerHTML;
@@ -1260,6 +1264,10 @@
                 } else {
                     document.getElementById("noOfDays").value = "";
                 }
+            }else{
+                    document.getElementById("noOfDays").value = leaveDays1;
+                
+            }
             }
         }
         function fillEnddate(Enddate) {
@@ -1283,13 +1291,13 @@
                 var parts1 = parts[2].split(' - ');
                 var parts2 = parts1[1].split(':');
                 // new Date(year, month [, day [, hours[, minutes[, seconds[, ms]]]]])
-                var d2 = new Date(parts1[0], parts[1], parts[0], parts2[0], parts2[1]);
+                var d2 = new Date(parts1[0], (parts[1] - 1), parts[0], parts2[0], parts2[1]);
                 if (selectedText == 'Short Leave') {
                     d2.setTime(d2.getTime() + ('${shortLeaveHoursNo}' * 60 * 60 * 1000));
                 }
               
                 var aDate = d2.getDate();
-                var aMonth = d2.getMonth();
+                var aMonth = d2.getMonth()+1;
                 var aHours = d2.getHours();
                 var aMinutes = d2.getMinutes();
                 if (aDate.toString().length === 1) {
@@ -1428,7 +1436,7 @@
             document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
             document.getElementById("endDateSelectFullOrHalfError").innerHTML = "";
         }
-
+//
         $(document).ready(function () {
             var skillsSelect = document.getElementById("leaveTypeMaster.id");
             var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
@@ -1447,7 +1455,9 @@
             leaveSetting();
             daysCount();
             fillEnddate();
-        });</script>
+        });
+        
+    </script>
 
     <script>
         function checkPresentAjax() {

@@ -143,44 +143,43 @@
         var count = 0;
         var count1 = 0;
         function daysCount() {
-            var skillsSelect = document.getElementById("leaveTypeMaster.id");
-            var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
-            var selectedTextArray = selectedText.split('(');
-            selectedText = selectedTextArray[0];
-            if (selectedText == 'Short Leave') {
+        var skillsSelect = document.getElementById("leaveTypeMaster.id");
+                var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
+                var selectedTextArray = selectedText.split('(');
+                selectedText = selectedTextArray[0];
+                if (selectedText == 'Short Leave') {
 
-                $("#NoshortLeave").hide();
+        $("#NoshortLeave").hide();
                 $("#shortLeave").show();
+        } else {
+        if ('${leaveType}' == 'Short Leave' && count == 0) {
+        count = count + 1;
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1; //January is 0!
+                var yyyy = today.getFullYear();
+                if (dd < 10) {
+        dd = '0' + dd
+        }
+        if (mm < 10) {
+        mm = '0' + mm
+        }
+        today = dd + '/' + mm + '/' + yyyy;
+                document.getElementById("startDate").value = '';
+                document.getElementById("endDate").value = '';
+                var leaveStartDate_Copy = '';
+                var leaveEndDate_Copy = '';
+        }
+        if (count1 == 1) {
+        document.getElementById('leaveStartDate_SelectFullOrHalfId').value = "";
+                document.getElementById('leaveEndDate_SelectFullOrHalfId').value = "";
+                count1 = count1 + 1;
+        } else if (count1 == 0) {
+        count1 = count1 + 1;
+        }
 
-            } else {
-                if ('${leaveType}' == 'Short Leave' && count == 0) {
-                    count = count + 1;
-                    var today = new Date();
-                    var dd = today.getDate();
-                    var mm = today.getMonth() + 1; //January is 0!
-                    var yyyy = today.getFullYear();
-                    if (dd < 10) {
-                        dd = '0' + dd
-                    }
-                    if (mm < 10) {
-                        mm = '0' + mm
-                    }
-                    today = dd + '/' + mm + '/' + yyyy;
-                    document.getElementById("startDate").value = '';
-                    document.getElementById("endDate").value = '';
-                    var leaveStartDate_Copy = '';
-                    var leaveEndDate_Copy = '';
-                }
-                if (count1 == 1) {
-                    document.getElementById('leaveStartDate_SelectFullOrHalfId').value = "";
-                    document.getElementById('leaveEndDate_SelectFullOrHalfId').value = "";
-                    count1 = count1 + 1;
-                } else if (count1 == 0) {
-                    count1 = count1 + 1;
-                }
 
-
-                $("#NoshortLeave").show();
+        $("#NoshortLeave").show();
                 $("#shortLeave").hide();
                 var leaveStartDate = document.getElementById("startDate").value;
                 var leaveStartDate_Copy = document.getElementById("startDate").value;
@@ -215,243 +214,245 @@
                 var newstrDate = leaveTypes.options[leaveTypes.selectedIndex].text;
                 strUser1 = newstrDate.split('(');
                 strUser = strUser1[0];
+                var strUser2 = strUser1[1];
+                strUser2 = strUser2.split(')');
+                var leaveBalance = strUser2[0];
+                if (leaveBalance != 0){
 //            document.getElementById(strUser).innerHTML = 0;
 //            alert('ajay' + strUser);
 //            alert(document.getElementById(strUser + "1").innerHTML);
 //document.getElementById(strUser).value
 //            if ((leaveStartDate[2] == leaveEndDate[2]) && (leaveStartDate[0] == leaveEndDate[0]) && (leaveStartDate[1] == leaveEndDate[1])) {
-                if (leaveEndDate_Copy == leaveStartDate_Copy) {
-                    if (leaveStartDate_SelectFullOrHalf == "Fullday") {
-                        document.getElementById("noOfDays").value = leaveDays;
-                        document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
+        if (leaveEndDate_Copy == leaveStartDate_Copy) {
+        if (leaveStartDate_SelectFullOrHalf == "Fullday") {
+        document.getElementById("noOfDays").value = leaveDays;
+                document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
 //                    alert('xyzzzzzzzz' + document.getElementById("noOfDays").value);
 //                    alert(document.getElementById(strUser).innerHTML);
-                        if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
+                if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
 //                            alert("Please enter days less or equal current available Balance");
-                            $("#balanceDiv").show();
-                            setTimeout(function () {
-                                $("#balanceDiv").fadeOut();
-                            }, 10000);
-                            document.getElementById(strUser).innerHTML = 0;
-                            document.getElementById("noOfDays").value = "";
-                            document.getElementById(strUser + "2").innerHTML = 0;
-                            document.getElementById("startDate").value = "";
-                            document.getElementById("endDate").value = "";
-                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                        } else {
-                            document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
-                        }
+        $("#balanceDiv").show();
+                setTimeout(function () {
+                $("#balanceDiv").fadeOut();
+                }, 10000);
+                document.getElementById(strUser).innerHTML = 0;
+                document.getElementById("noOfDays").value = "";
+                document.getElementById(strUser + "2").innerHTML = 0;
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+        } else {
+        document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
+        }
 
-                    }
-                    if (leaveStartDate_SelectFullOrHalf == "FirstHalf") {
-                        document.getElementById("noOfDays").value = leaveDays - 0.5;
-                        document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
-                        if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
+        }
+        if (leaveStartDate_SelectFullOrHalf == "FirstHalf") {
+        document.getElementById("noOfDays").value = leaveDays - 0.5;
+                document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
+                if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
 //                            alert("Please enter days less or equal current available Balance");
-                            $("#balanceDiv").show();
-                            setTimeout(function () {
-                                $("#balanceDiv").fadeOut();
-                            }, 10000);
-                            document.getElementById(strUser).innerHTML = 0;
-                            document.getElementById("noOfDays").value = "";
-                            document.getElementById(strUser + "2").innerHTML = 0;
-                            document.getElementById("startDate").value = "";
-                            document.getElementById("endDate").value = "";
-                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                        } else {
-                            document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
-                        }
+        $("#balanceDiv").show();
+                setTimeout(function () {
+                $("#balanceDiv").fadeOut();
+                }, 10000);
+                document.getElementById(strUser).innerHTML = 0;
+                document.getElementById("noOfDays").value = "";
+                document.getElementById(strUser + "2").innerHTML = 0;
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+        } else {
+        document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
+        }
 
-                    }
-                    if (leaveStartDate_SelectFullOrHalf == "SecondHalf") {
-                        document.getElementById("noOfDays").value = leaveDays - 0.5;
-                        document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
-                        if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
+        }
+        if (leaveStartDate_SelectFullOrHalf == "SecondHalf") {
+        document.getElementById("noOfDays").value = leaveDays - 0.5;
+                document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
+                if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
 //                            alert("Please enter days less or equal current available Balance");
-                            $("#balanceDiv").show();
-                            setTimeout(function () {
-                                $("#balanceDiv").fadeOut();
-                            }, 10000);
-                            document.getElementById(strUser).innerHTML = 0;
-                            document.getElementById("noOfDays").value = "";
-                            document.getElementById(strUser + "2").innerHTML = 0;
-                            document.getElementById("startDate").value = "";
-                            document.getElementById("endDate").value = "";
-                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                        } else {
-                            document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
-                        }
+        $("#balanceDiv").show();
+                setTimeout(function () {
+                $("#balanceDiv").fadeOut();
+                }, 10000);
+                document.getElementById(strUser).innerHTML = 0;
+                document.getElementById("noOfDays").value = "";
+                document.getElementById(strUser + "2").innerHTML = 0;
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+        } else {
+        document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
+        }
 
 
-                    }
-                } else if (leaveEndDate_Copy != '' && leaveEndDate_Copy < leaveStartDate_Copy) {
-                    alert("A"+leaveStartDate_Copy);
-                    alert("b"+leaveEndDate_Copy);
+        }
+        } else if (leaveEndDate_Copy != '' && leaveEndDate_Copy < leaveStartDate_Copy) {
 
-                    alert('please select Start Date After End Date.');
-                    document.getElementById(strUser).innerHTML = 0;
-                    document.getElementById("noOfDays").value = "";
-                    document.getElementById(strUser + "2").innerHTML = 0;
-                    document.getElementById("startDate").value = "";
-                    document.getElementById("endDate").value = "";
 
-                }
-                else {
-                    if (leaveStartDate_SelectFullOrHalf == "Fullday" && leaveEndDate_SelectFullOrHalf == "Fullday" && selectedText != 'Privilege Leave') {
-                        document.getElementById("noOfDays").value = leaveDays;
-                        document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
+        alert('please select Start Date After End Date.');
+                document.getElementById(strUser).innerHTML = 0;
+                document.getElementById("noOfDays").value = "";
+                document.getElementById(strUser + "2").innerHTML = 0;
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+        }
+        else {
+        if (leaveStartDate_SelectFullOrHalf == "Fullday" && leaveEndDate_SelectFullOrHalf == "Fullday" && selectedText != 'Privilege Leave') {
+        document.getElementById("noOfDays").value = leaveDays;
+                document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
 //                    alert('ajay1234');
-                        if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
+                if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
 //                            alert("Please enter days less or equal current available Balance");
-                            $("#balanceDiv").show();
-                            setTimeout(function () {
-                                $("#balanceDiv").fadeOut();
-                            }, 10000);
-                            document.getElementById(strUser).innerHTML = 0;
-                            document.getElementById("noOfDays").value = "";
-                            document.getElementById(strUser + "2").innerHTML = 0;
-                            document.getElementById("startDate").value = "";
-                            document.getElementById("endDate").value = "";
-                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                        } else {
-                            document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
-                        }
-                    }
-                    if (leaveStartDate_SelectFullOrHalf == "Fullday" && leaveEndDate_SelectFullOrHalf == "FirstHalf") {
-                        //                    alert('ajay' + (leaveDays - 0.5));
-                        document.getElementById("noOfDays").value = leaveDays - 0.5;
-                        document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
-                        if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
+        $("#balanceDiv").show();
+                setTimeout(function () {
+                $("#balanceDiv").fadeOut();
+                }, 10000);
+                document.getElementById(strUser).innerHTML = 0;
+                document.getElementById("noOfDays").value = "";
+                document.getElementById(strUser + "2").innerHTML = 0;
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+        } else {
+        document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
+        }
+        }
+        if (leaveStartDate_SelectFullOrHalf == "Fullday" && leaveEndDate_SelectFullOrHalf == "FirstHalf") {
+        //                    alert('ajay' + (leaveDays - 0.5));
+        document.getElementById("noOfDays").value = leaveDays - 0.5;
+                document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
+                if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
 //                            alert("Please enter days less or equal current available Balance");
-                            $("#balanceDiv").show();
-                            setTimeout(function () {
-                                $("#balanceDiv").fadeOut();
-                            }, 10000);
-                            document.getElementById(strUser).innerHTML = 0;
-                            document.getElementById("noOfDays").value = "";
-                            document.getElementById(strUser + "2").innerHTML = 0;
-                            document.getElementById("startDate").value = "";
-                            document.getElementById("endDate").value = "";
-                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                        } else {
-                            document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
-                        }
-                    }
-                    //                if (leaveStartDate_SelectFullOrHalf == "FirstHalf" && leaveEndDate_SelectFullOrHalf == "Fullday") {
-                    //                    document.getElementById("noOfDays").value = leaveDays - 0.5;
+        $("#balanceDiv").show();
+                setTimeout(function () {
+                $("#balanceDiv").fadeOut();
+                }, 10000);
+                document.getElementById(strUser).innerHTML = 0;
+                document.getElementById("noOfDays").value = "";
+                document.getElementById(strUser + "2").innerHTML = 0;
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+        } else {
+        document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
+        }
+        }
+        //                if (leaveStartDate_SelectFullOrHalf == "FirstHalf" && leaveEndDate_SelectFullOrHalf == "Fullday") {
+        //                    document.getElementById("noOfDays").value = leaveDays - 0.5;
 //                }
-                    if (leaveStartDate_SelectFullOrHalf == "SecondHalf" && leaveEndDate_SelectFullOrHalf == "FirstHalf") {
-                        document.getElementById("noOfDays").value = leaveDays - 1;
-                        document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
-                        if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
+        if (leaveStartDate_SelectFullOrHalf == "SecondHalf" && leaveEndDate_SelectFullOrHalf == "FirstHalf") {
+        document.getElementById("noOfDays").value = leaveDays - 1;
+                document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
+                if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
 //                            alert("Please enter days less or equal current available Balance");
-                            $("#balanceDiv").show();
-                            setTimeout(function () {
-                                $("#balanceDiv").fadeOut();
-                            }, 10000);
-                            document.getElementById(strUser).innerHTML = 0;
-                            document.getElementById("noOfDays").value = "";
-                            document.getElementById(strUser + "2").innerHTML = 0;
-                            document.getElementById("startDate").value = "";
-                            document.getElementById("endDate").value = "";
-                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                        } else {
-                            document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
-                        }
-                    }
-                    if (leaveStartDate_SelectFullOrHalf == "SecondHalf" && leaveEndDate_SelectFullOrHalf == "Fullday") {
+        $("#balanceDiv").show();
+                setTimeout(function () {
+                $("#balanceDiv").fadeOut();
+                }, 10000);
+                document.getElementById(strUser).innerHTML = 0;
+                document.getElementById("noOfDays").value = "";
+                document.getElementById(strUser + "2").innerHTML = 0;
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+        } else {
+        document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
+        }
+        }
+        if (leaveStartDate_SelectFullOrHalf == "SecondHalf" && leaveEndDate_SelectFullOrHalf == "Fullday") {
 //                        alert("Mike" + leaveDays);
 //                        alert("Ajay" + strUser);
-                        document.getElementById("noOfDays").value = leaveDays - 0.5;
-                        document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
-                        if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
+        document.getElementById("noOfDays").value = leaveDays - 0.5;
+                document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
+                if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
 //                            alert("Please enter days less or equal current available Balance");
-                            $("#balanceDiv").show();
-                            setTimeout(function () {
-                                $("#balanceDiv").fadeOut();
-                            }, 10000);
-                            document.getElementById(strUser).innerHTML = 0;
-                            document.getElementById("noOfDays").value = "";
-                            document.getElementById(strUser + "2").innerHTML = 0;
-                            document.getElementById("startDate").value = "";
-                            document.getElementById("endDate").value = "";
-                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                        } else {
-                            document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
-                        }
-                    }
-                }
-            }
+        $("#balanceDiv").show();
+                setTimeout(function () {
+                $("#balanceDiv").fadeOut();
+                }, 10000);
+                document.getElementById(strUser).innerHTML = 0;
+                document.getElementById("noOfDays").value = "";
+                document.getElementById(strUser + "2").innerHTML = 0;
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+        } else {
+        document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
+        }
+        }
+        }
+        } else{
+        document.getElementById("noOfDays").value = leaveDays;
+        }
         }
 
 
 
         function fillEnddate(Enddate) {
-            var strUser;
-            var strUser1;
-            var leaveTypes = document.getElementById("leaveTypeMaster.id");
-            var newstrDate = leaveTypes.options[leaveTypes.selectedIndex].text;
-            strUser1 = newstrDate.split('(');
-            strUser = strUser1[1].split(')');
-            if (parseFloat(strUser[0]) >= 1) {
-                var now = new Date();
+        var strUser;
+                var strUser1;
+                var leaveTypes = document.getElementById("leaveTypeMaster.id");
+                var newstrDate = leaveTypes.options[leaveTypes.selectedIndex].text;
+                strUser1 = newstrDate.split('(');
+                strUser = strUser1[1].split(')');
+                if (parseFloat(strUser[0]) >= 1) {
+        var now = new Date();
                 var Enddate1 = Enddate.split(' - ');
                 var n_date = Enddate1[0];
                 n_date = n_date.split("/");
                 n_date = n_date[1] + "/" + n_date[0] + "/" + n_date[2];
                 if (new Date(n_date) < now) {
-                    document.getElementById("startDateShort").value = '';
-                    document.getElementById("endDateShort").value = '';
-                    // selected date is in the past
-                } else {
-                    var parts = Enddate.split('/');
-                    var parts1 = parts[2].split(' - ');
-                    var parts2 = parts1[1].split(':');
-                    // new Date(year, month [, day [, hours[, minutes[, seconds[, ms]]]]])
-                    var d2 = new Date(parts1[0], parts[1], parts[0], parts2[0], parts2[1]);
+        document.getElementById("startDateShort").value = '';
+                document.getElementById("endDateShort").value = '';
+                // selected date is in the past
+        } else {
+        var parts = Enddate.split('/');
+                var parts1 = parts[2].split(' - ');
+                var parts2 = parts1[1].split(':');
+                // new Date(year, month [, day [, hours[, minutes[, seconds[, ms]]]]])
+                var d2 = new Date(parts1[0], (parts[1] - 1), parts[0], parts2[0], parts2[1]);
 //            alert('hii' + d2.getHours());
 //            alert('aaaaa' + '${shortLeaveHoursNo}');
-                    d2.setTime(d2.getTime() + ('${shortLeaveHoursNo}' * 60 * 60 * 1000));
-
+                d2.setTime(d2.getTime() + ('${shortLeaveHoursNo}' * 60 * 60 * 1000));
 //            alert('khurhz' +);
-                    var aDate = d2.getDate();
-                    var aMonth = d2.getMonth();
-                    var aHours = d2.getHours();
-                    var aMinutes = d2.getMinutes();
-                    if (aDate.toString().length === 1) {
-                        aDate = "0" + aDate;
-                    }
-                    if (aMonth.toString().length === 1) {
-                        aMonth = "0" + aMonth;
-                    }
-                    if (aHours.toString().length === 1) {
-                        aHours = "0" + aHours;
-                    }
-                    if (aMinutes.toString().length === 1) {
-                        aMinutes = "0" + aMinutes;
-                    }
+                var aDate = d2.getDate();
+                var aMonth = d2.getMonth() + 1;
+                var aHours = d2.getHours();
+                var aMinutes = d2.getMinutes();
+                if (aDate.toString().length === 1) {
+        aDate = "0" + aDate;
+        }
+        if (aMonth.toString().length === 1) {
+        aMonth = "0" + aMonth;
+        }
+        if (aHours.toString().length === 1) {
+        aHours = "0" + aHours;
+        }
+        if (aMinutes.toString().length === 1) {
+        aMinutes = "0" + aMinutes;
+        }
 //    alert("aaaaaaaaaaaaaaaaajay"+aaaaa);
-                    document.getElementById('endDateShort').value = aDate + "/" + aMonth + "/" + d2.getFullYear() + " - " + aHours + ":" + aMinutes;
-
-                }
-            } else {
+        document.getElementById('endDateShort').value = aDate + "/" + aMonth + "/" + d2.getFullYear() + " - " + aHours + ":" + aMinutes;
+        }
+        } else {
 //                alert('Please enter days less or equal current available Balance');
-                $("#balanceDiv").show();
+        $("#balanceDiv").show();
                 setTimeout(function () {
-                    $("#balanceDiv").fadeOut();
+                $("#balanceDiv").fadeOut();
                 }, 10000);
                 document.getElementById('startDateShort').value = '';
                 document.getElementById('endDateShort').value = '';
                 document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
                 document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-            }
+        }
 
 
         }
@@ -460,76 +461,75 @@
 
     <script>
         function buttonFun1() {
-            var className = $('#minusId1').attr('class');
-            if (className == 'fa fa-plus') {
-                document.getElementById('spanId1').innerHTML = 'Minimize';
-            } else {
-                document.getElementById('spanId1').innerHTML = 'Expand';
-            }
+        var className = $('#minusId1').attr('class');
+                if (className == 'fa fa-plus') {
+        document.getElementById('spanId1').innerHTML = 'Minimize';
+        } else {
+        document.getElementById('spanId1').innerHTML = 'Expand';
+        }
         }
         function buttonFun2() {
-            var className = $('#minusId2').attr('class');
-            if (className == 'fa fa-plus') {
-                document.getElementById('spanId2').innerHTML = 'Minimize';
-            } else {
-                document.getElementById('spanId2').innerHTML = 'Expand';
-            }
+        var className = $('#minusId2').attr('class');
+                if (className == 'fa fa-plus') {
+        document.getElementById('spanId2').innerHTML = 'Minimize';
+        } else {
+        document.getElementById('spanId2').innerHTML = 'Expand';
+        }
         }
         function buttonFun3() {
-            var className = $('#minusId3').attr('class');
-            if (className == 'fa fa-plus') {
-                document.getElementById('spanId3').innerHTML = 'Minimize';
-            } else {
-                document.getElementById('spanId3').innerHTML = 'Expand';
-            }
+        var className = $('#minusId3').attr('class');
+                if (className == 'fa fa-plus') {
+        document.getElementById('spanId3').innerHTML = 'Minimize';
+        } else {
+        document.getElementById('spanId3').innerHTML = 'Expand';
+        }
         }
         function buttonFun4() {
-            var className = $('#minusId4').attr('class');
-            if (className == 'fa fa-plus') {
-                document.getElementById('spanId4').innerHTML = 'Minimize';
-            } else {
-                document.getElementById('spanId4').innerHTML = 'Expand';
-            }
+        var className = $('#minusId4').attr('class');
+                if (className == 'fa fa-plus') {
+        document.getElementById('spanId4').innerHTML = 'Minimize';
+        } else {
+        document.getElementById('spanId4').innerHTML = 'Expand';
+        }
         }
         function ajaxdaysCount() {
-            var skillsSelect = document.getElementById("leaveTypeMaster.id");
-            var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
-            var selectedTextArray = selectedText.split('(');
-            selectedText = selectedTextArray[0];
-            if (selectedText == 'Short Leave') {
+        var skillsSelect = document.getElementById("leaveTypeMaster.id");
+                var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
+                var selectedTextArray = selectedText.split('(');
+                selectedText = selectedTextArray[0];
+                if (selectedText == 'Short Leave') {
 
-                $("#NoshortLeave").hide();
+        $("#NoshortLeave").hide();
                 $("#shortLeave").show();
+        } else {
+        if ('${leaveType}' == 'Short Leave' && count == 0) {
+        count = count + 1;
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1; //January is 0!
+                var yyyy = today.getFullYear();
+                if (dd < 10) {
+        dd = '0' + dd
+        }
+        if (mm < 10) {
+        mm = '0' + mm
+        }
+        today = dd + '/' + mm + '/' + yyyy;
+                document.getElementById("startDate").value = '';
+                document.getElementById("endDate").value = '';
+                var leaveStartDate_Copy = '';
+                var leaveEndDate_Copy = '';
+        }
+        if (count1 == 1) {
+        document.getElementById('leaveStartDate_SelectFullOrHalfId').value = "";
+                document.getElementById('leaveEndDate_SelectFullOrHalfId').value = "";
+                count1 = count1 + 1;
+        } else if (count1 == 0) {
+        count1 = count1 + 1;
+        }
 
-            } else {
-                if ('${leaveType}' == 'Short Leave' && count == 0) {
-                    count = count + 1;
-                    var today = new Date();
-                    var dd = today.getDate();
-                    var mm = today.getMonth() + 1; //January is 0!
-                    var yyyy = today.getFullYear();
-                    if (dd < 10) {
-                        dd = '0' + dd
-                    }
-                    if (mm < 10) {
-                        mm = '0' + mm
-                    }
-                    today = dd + '/' + mm + '/' + yyyy;
-                    document.getElementById("startDate").value = '';
-                    document.getElementById("endDate").value = '';
-                    var leaveStartDate_Copy = '';
-                    var leaveEndDate_Copy = '';
-                }
-                if (count1 == 1) {
-                    document.getElementById('leaveStartDate_SelectFullOrHalfId').value = "";
-                    document.getElementById('leaveEndDate_SelectFullOrHalfId').value = "";
-                    count1 = count1 + 1;
-                } else if (count1 == 0) {
-                    count1 = count1 + 1;
-                }
 
-
-                $("#NoshortLeave").show();
+        $("#NoshortLeave").show();
                 $("#shortLeave").hide();
                 var leaveStartDate = document.getElementById("startDate").value;
                 var leaveStartDate_Copy = document.getElementById("startDate").value;
@@ -572,73 +572,73 @@
 //            if ((leaveStartDate[2] == leaveEndDate[2]) && (leaveStartDate[0] == leaveEndDate[0]) && (leaveStartDate[1] == leaveEndDate[1])) {
                 if (leaveEndDate_Copy == leaveStartDate_Copy) {
 
-                    if (leaveStartDate_SelectFullOrHalf == "Fullday") {
-                        document.getElementById("noOfDays").value = leaveDays;
-                        document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
+        if (leaveStartDate_SelectFullOrHalf == "Fullday") {
+        document.getElementById("noOfDays").value = leaveDays;
+                document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
 //                    alert('xyzzzzzzzz' + document.getElementById("noOfDays").value);
 //                    alert(document.getElementById(strUser).innerHTML);
-                        if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
+                if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
 //                            alert("Please enter days less or equal current available Balance");
-                            $("#balanceDiv").show();
-                            setTimeout(function () {
-                                $("#balanceDiv").fadeOut();
-                            }, 10000);
-                            document.getElementById(strUser).innerHTML = 0;
-                            document.getElementById("noOfDays").value = "";
-                            document.getElementById(strUser + "2").innerHTML = 0;
-                            document.getElementById("startDate").value = "";
-                            document.getElementById("endDate").value = "";
-                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                        } else {
-                            document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
-                        }
+        $("#balanceDiv").show();
+                setTimeout(function () {
+                $("#balanceDiv").fadeOut();
+                }, 10000);
+                document.getElementById(strUser).innerHTML = 0;
+                document.getElementById("noOfDays").value = "";
+                document.getElementById(strUser + "2").innerHTML = 0;
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+        } else {
+        document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
+        }
 
-                    }
-                    if (leaveStartDate_SelectFullOrHalf == "FirstHalf") {
-                        document.getElementById("noOfDays").value = leaveDays - 0.5;
-                        document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
-                        if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
+        }
+        if (leaveStartDate_SelectFullOrHalf == "FirstHalf") {
+        document.getElementById("noOfDays").value = leaveDays - 0.5;
+                document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
+                if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
 //                            alert("Please enter days less or equal current available Balance");
-                            $("#balanceDiv").show();
-                            setTimeout(function () {
-                                $("#balanceDiv").fadeOut();
-                            }, 10000);
-                            document.getElementById(strUser).innerHTML = 0;
-                            document.getElementById("noOfDays").value = "";
-                            document.getElementById(strUser + "2").innerHTML = 0;
-                            document.getElementById("startDate").value = "";
-                            document.getElementById("endDate").value = "";
-                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                        } else {
-                            document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
-                        }
+        $("#balanceDiv").show();
+                setTimeout(function () {
+                $("#balanceDiv").fadeOut();
+                }, 10000);
+                document.getElementById(strUser).innerHTML = 0;
+                document.getElementById("noOfDays").value = "";
+                document.getElementById(strUser + "2").innerHTML = 0;
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+        } else {
+        document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
+        }
 
-                    }
-                    if (leaveStartDate_SelectFullOrHalf == "SecondHalf") {
-                        document.getElementById("noOfDays").value = leaveDays - 0.5;
-                        document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
-                        if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
+        }
+        if (leaveStartDate_SelectFullOrHalf == "SecondHalf") {
+        document.getElementById("noOfDays").value = leaveDays - 0.5;
+                document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
+                if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
 //                            alert("Please enter days less or equal current available Balance");
-                            $("#balanceDiv").show();
-                            setTimeout(function () {
-                                $("#balanceDiv").fadeOut();
-                            }, 10000);
-                            document.getElementById(strUser).innerHTML = 0;
-                            document.getElementById("noOfDays").value = "";
-                            document.getElementById(strUser + "2").innerHTML = 0;
-                            document.getElementById("startDate").value = "";
-                            document.getElementById("endDate").value = "";
-                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                        } else {
-                            document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
-                        }
+        $("#balanceDiv").show();
+                setTimeout(function () {
+                $("#balanceDiv").fadeOut();
+                }, 10000);
+                document.getElementById(strUser).innerHTML = 0;
+                document.getElementById("noOfDays").value = "";
+                document.getElementById(strUser + "2").innerHTML = 0;
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+        } else {
+        document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
+        }
 
 
-                    }
-                } 
+        }
+        }
 //                else if (leaveEndDate_Copy != '' && leaveEndDate_Copy < leaveStartDate_Copy) {
 //               alert("A"+leaveEndDate_Copy < leaveStartDate_Copy);
 //                    alert("b"+leaveEndDate_Copy != '');
@@ -650,160 +650,157 @@
 //                    document.getElementById("endDate").value = "";
 //
 //                }
-                else {
+        else {
 //                    alert("leaveStartDate_SelectFullOrHalf" + leaveStartDate_SelectFullOrHalf);
 //                    alert("leaveEndDate_SelectFullOrHalf" + leaveEndDate_SelectFullOrHalf);
-                    if (leaveStartDate_SelectFullOrHalf == "Fullday" && leaveEndDate_SelectFullOrHalf == "Fullday") {
+        if (leaveStartDate_SelectFullOrHalf == "Fullday" && leaveEndDate_SelectFullOrHalf == "Fullday") {
 //                        alert("FullDay" + leaveDays);
-                        document.getElementById("noOfDays").value = leaveDays;
-                        document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
+        document.getElementById("noOfDays").value = leaveDays;
+                document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
 //                    alert('ajay1234');
-                        if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
+                if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
 //                            alert("Please enter days less or equal current available Balance");
-                            $("#balanceDiv").show();
-                            setTimeout(function () {
-                                $("#balanceDiv").fadeOut();
-                            }, 10000);
-                            document.getElementById(strUser).innerHTML = 0;
-                            document.getElementById("noOfDays").value = "";
-                            document.getElementById(strUser + "2").innerHTML = 0;
-                            document.getElementById("startDate").value = "";
-                            document.getElementById("endDate").value = "";
-                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                        } else {
-                            document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
-                        }
-                    }
-                    if (leaveStartDate_SelectFullOrHalf == "Fullday" && leaveEndDate_SelectFullOrHalf == "FirstHalf") {
-                        //                    alert('ajay' + (leaveDays - 0.5));
-                        document.getElementById("noOfDays").value = leaveDays - 0.5;
-                        document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
-                        if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
+        $("#balanceDiv").show();
+                setTimeout(function () {
+                $("#balanceDiv").fadeOut();
+                }, 10000);
+                document.getElementById(strUser).innerHTML = 0;
+                document.getElementById("noOfDays").value = "";
+                document.getElementById(strUser + "2").innerHTML = 0;
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+        } else {
+        document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
+        }
+        }
+        if (leaveStartDate_SelectFullOrHalf == "Fullday" && leaveEndDate_SelectFullOrHalf == "FirstHalf") {
+        //                    alert('ajay' + (leaveDays - 0.5));
+        document.getElementById("noOfDays").value = leaveDays - 0.5;
+                document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
+                if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
 //                            alert("Please enter days less or equal current available Balance");
-                            $("#balanceDiv").show();
-                            setTimeout(function () {
-                                $("#balanceDiv").fadeOut();
-                            }, 10000);
-                            document.getElementById(strUser).innerHTML = 0;
-                            document.getElementById("noOfDays").value = "";
-                            document.getElementById(strUser + "2").innerHTML = 0;
-                            document.getElementById("startDate").value = "";
-                            document.getElementById("endDate").value = "";
-                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                        } else {
-                            document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
-                        }
-                    }
-                    //                if (leaveStartDate_SelectFullOrHalf == "FirstHalf" && leaveEndDate_SelectFullOrHalf == "Fullday") {
-                    //                    document.getElementById("noOfDays").value = leaveDays - 0.5;
+        $("#balanceDiv").show();
+                setTimeout(function () {
+                $("#balanceDiv").fadeOut();
+                }, 10000);
+                document.getElementById(strUser).innerHTML = 0;
+                document.getElementById("noOfDays").value = "";
+                document.getElementById(strUser + "2").innerHTML = 0;
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+        } else {
+        document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
+        }
+        }
+        //                if (leaveStartDate_SelectFullOrHalf == "FirstHalf" && leaveEndDate_SelectFullOrHalf == "Fullday") {
+        //                    document.getElementById("noOfDays").value = leaveDays - 0.5;
 //                }
-                    if (leaveStartDate_SelectFullOrHalf == "SecondHalf" && leaveEndDate_SelectFullOrHalf == "FirstHalf") {
-                        document.getElementById("noOfDays").value = leaveDays - 1;
-                        document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
-                        if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
+        if (leaveStartDate_SelectFullOrHalf == "SecondHalf" && leaveEndDate_SelectFullOrHalf == "FirstHalf") {
+        document.getElementById("noOfDays").value = leaveDays - 1;
+                document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
+                if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
 //                            alert("Please enter days less or equal current available Balance");
-                            $("#balanceDiv").show();
-                            setTimeout(function () {
-                                $("#balanceDiv").fadeOut();
-                            }, 10000);
-                            document.getElementById(strUser).innerHTML = 0;
-                            document.getElementById("noOfDays").value = "";
-                            document.getElementById(strUser + "2").innerHTML = 0;
-                            document.getElementById("startDate").value = "";
-                            document.getElementById("endDate").value = "";
-                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                        } else {
-                            document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
-                        }
-                    }
-                    if (leaveStartDate_SelectFullOrHalf == "SecondHalf" && leaveEndDate_SelectFullOrHalf == "Fullday") {
+        $("#balanceDiv").show();
+                setTimeout(function () {
+                $("#balanceDiv").fadeOut();
+                }, 10000);
+                document.getElementById(strUser).innerHTML = 0;
+                document.getElementById("noOfDays").value = "";
+                document.getElementById(strUser + "2").innerHTML = 0;
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+        } else {
+        document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
+        }
+        }
+        if (leaveStartDate_SelectFullOrHalf == "SecondHalf" && leaveEndDate_SelectFullOrHalf == "Fullday") {
 //                        alert("Mike" + leaveDays);
 //                        alert("Ajay" + strUser);
-                        document.getElementById("noOfDays").value = leaveDays - 0.5;
-                        document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
-                        if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
+        document.getElementById("noOfDays").value = leaveDays - 0.5;
+                document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
+                if (document.getElementById(strUser).innerHTML > document.getElementById(strUser + "1").innerHTML) {
 //                            alert("Please enter days less or equal current available Balance");
-                            $("#balanceDiv").show();
-                            setTimeout(function () {
-                                $("#balanceDiv").fadeOut();
-                            }, 10000);
-                            document.getElementById(strUser).innerHTML = 0;
-                            document.getElementById("noOfDays").value = "";
-                            document.getElementById(strUser + "2").innerHTML = 0;
-                            document.getElementById("startDate").value = "";
-                            document.getElementById("endDate").value = "";
-                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                        } else {
-                            document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
-                        }
-                    }
-                }
-            }
+        $("#balanceDiv").show();
+                setTimeout(function () {
+                $("#balanceDiv").fadeOut();
+                }, 10000);
+                document.getElementById(strUser).innerHTML = 0;
+                document.getElementById("noOfDays").value = "";
+                document.getElementById(strUser + "2").innerHTML = 0;
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+                document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+        } else {
+        document.getElementById(strUser + "2").innerHTML = document.getElementById(strUser + "1").innerHTML - document.getElementById(strUser).innerHTML;
+        }
+        }
+        }
+        }
         }
     </script>
     <script>
         function calculateDayByAjax() {
-            try {
-                var strDate = document.getElementById("startDate").value;
+        try {
+        var strDate = document.getElementById("startDate").value;
                 var enDate = document.getElementById("endDate").value;
 //                alert("enDate" + enDate);
                 var sDateStatus = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
                 var eDateStatus = document.getElementById("leaveEndDate_SelectFullOrHalfId").value;
-
 //                && sDateStatus != '' && eDateStatus != ''
 
                 if (strDate != '' && enDate != '') {
 //                    alert("wwww" + strDate);
 //                    alert("sDateStatus" + sDateStatus);
-                    $.ajax({
-                        type: "POST",
-                        url: "leaveEmployeeDetail.htm?act=getActualDayByAjax&strDate=" + strDate + "&enDate=" + enDate + "&sDateStatus=" + sDateStatus + "&eDateStatus=" + eDateStatus,
-                        data: {},
-                        dataType: "text",
-                        success: function (responseTxt) {
+        $.ajax({
+        type: "POST",
+                url: "leaveEmployeeDetail.htm?act=getActualDayByAjax&strDate=" + strDate + "&enDate=" + enDate + "&sDateStatus=" + sDateStatus + "&eDateStatus=" + eDateStatus,
+                data: {},
+                dataType: "text",
+                success: function (responseTxt) {
 //                            document.getElementById("noOfDays").value = responseTxt;
 //                            alert("responseTxt" + responseTxt);
-                            document.getElementById("hiddenDays").value = responseTxt;
-                            ajaxdaysCount();
-
-                        },
-                        error: function () {
-                            alert('Error occured');
-                        }
-                    });
-
+                document.getElementById("hiddenDays").value = responseTxt;
+                        ajaxdaysCount();
+                },
+                error: function () {
+                alert('Error occured');
                 }
-            } catch (e) {
+        });
+        }
+        } catch (e) {
 
-            }
+        }
         }
 
     </script>
     <script>
 // A $( document ).ready() block.
-        $(document).ready(function () {
-            var skillsSelect = document.getElementById("leaveTypeMaster.id");
-            var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
-            var selectedTextArray = selectedText.split('(');
-            selectedText = selectedTextArray[0];
-            if (selectedText == 'Short Leave') {
-                $("#NoshortLeave").hide();
-                $("#shortLeave").show();
-
-            } else {
-                $("#NoshortLeave").show();
-                $("#shortLeave").hide();
-            }
-            calculateDayByAjax();
-//            leaveSetting();
-//            leaveTypecheck();
-//            daysCount();
-//            fillEnddate();
-        });
+//        $(document).ready(function () {
+//            var skillsSelect = document.getElementById("leaveTypeMaster.id");
+//            var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
+//            var selectedTextArray = selectedText.split('(');
+//            selectedText = selectedTextArray[0];
+//            if (selectedText == 'Short Leave') {
+//                $("#NoshortLeave").hide();
+//                $("#shortLeave").show();
+//
+//            } else {
+//                $("#NoshortLeave").show();
+//                $("#shortLeave").hide();
+//            }
+//            calculateDayByAjax();
+////            leaveSetting();
+////            leaveTypecheck();
+////            daysCount();
+////            fillEnddate();
+//        });
 
     </script>
 
@@ -836,24 +833,24 @@
                                        name='form1' onsubmit='return saveSubmit11();' class="form-horizontal" role="form">
                                 <form:hidden path="id"></form:hidden>
                                 <form:hidden path="status"></form:hidden>
-                                 <input type="hidden" id="oldLeaveId" name="oldLeaveId" value="${oldLeaveId}"/>
-                                    <!--Read only entries Starts here-->
-                                    <div class="box box-info collapsed-box ">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Employee Detail:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun1()"><i class="fa fa-plus" id="minusId1"></i></button>
-                                            </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <div class="col-sm-2">
-                                                            <label>Employee No.:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Text" class="form-control" value="${employeeMaster[0]}" readonly>
+                                <input type="hidden" id="oldLeaveId" name="oldLeaveId" value="${oldLeaveId}"/>
+                                <!--Read only entries Starts here-->
+                                <div class="box box-info collapsed-box ">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Employee Detail:</h3>
+                                        <div class="box-tools pull-right">
+                                            <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun1()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                        </div>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="col-sm-2">
+                                                        <label>Employee No.:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control" value="${employeeMaster[0]}" readonly>
                                                     </div>
                                                     <div class="col-sm-2">
                                                         <label>Employee Name:</label>
@@ -943,7 +940,7 @@
                                                             <div class="col-sm-2">
                                                                 <label></label>
                                                                 <select id="leaveStartDate_SelectFullOrHalfId" name="leaveStartDate_SelectFullOrHalfId" style="margin-top:5px;pointer-events: none;cursor: default;" class="form-control" onchange="leaveSetting();
-                                                                        daysCount();">
+                                                                                    daysCount();">
                                                                     <option value="">--SELECT--</option>
                                                                 <c:choose>
                                                                     <c:when test="${strDateStatus.contains('Fullday')}">
@@ -983,7 +980,7 @@
                                                             <div class="col-sm-2">
                                                                 <label></label>
                                                                 <select id="leaveEndDate_SelectFullOrHalfId" name="leaveEndDate_SelectFullOrHalfId" style="margin-top:5px;pointer-events: none;cursor: default;" class="form-control" onchange="daysCount();
-                                                                        leaveTypecheck()">
+                                                                                    leaveTypecheck()">
                                                                     <option value="">--SELECT--</option>
                                                                 <c:choose>
                                                                     <c:when test="${endDateStatus.contains('Fullday')}">
@@ -1156,28 +1153,27 @@
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
     <script type="text/javascript">
-        $('.form_datetime').datetimepicker({
-            //language:  'fr',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 0,
-            showMeridian: 1
-        });
-    </script>
+                $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                minView: 2,
+                forceParse: 0,
+                showMeridian: 1
+        });    </script>
     <script type="text/javascript">
-        $('#shortLeaveStartDate').datetimepicker({
-            //        language:  'fr',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            forceParse: 0,
-            showMeridian: 1
+                $('#shortLeaveStartDate').datetimepicker({
+        //        language:  'fr',
+        weekStart: 1,
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                forceParse: 0,
+                showMeridian: 1
         });
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

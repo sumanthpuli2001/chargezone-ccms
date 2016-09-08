@@ -184,9 +184,15 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         leaveEmployeeDetail.setStartDateStatus(strDateStatus);
         leaveEmployeeDetail.setEndDateStatus(endDateStatus);
         leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
-        leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster);
+      
 
         leaveEmployeeDetailValidator.validate(mv, errors);
+        if (leaveEmployeeDetail.getLeaveTypeMaster().getId() == (11)) {
+            if (leaveEmployeeDetail.getNoOfDays() == 0.8) {
+                leaveEmployeeDetail.setNoOfDays(Float.parseFloat("" + 1));
+            }
+        }
+
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid.");
@@ -198,14 +204,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
             mv.addAllObjects(errors.getModel());
             mv = applyClick(request, response);
-//            mv.setViewName("Leave/LeaveApplicatioFormForEmployee");
-//        }
-//        else if (leaveEmployeeDetail.getNoOfDays() == 0) {             // Condition Added By Vinita (To validate Zero Days Leave)
-//            request.setAttribute("failureMessage",
-//                    "Error :You Cannot Apply Leave on Holiday or Week Off");
-//            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-//            mv.addAllObjects(errors.getModel());
-//            mv = applyClick(request, response);
+
         } else {
             String leaveTypeMasterId = request.getParameter("leaveTypeMaster.id");
 
@@ -630,7 +629,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     noOfDay = (float) 0;
                 }
                 totalMap = days + noOfDay;
-                if ("Short Leave".equals(name) || "Paternity Leave".equals(name) || "C Off Leave".equals(name)|| "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
+                if ("Short Leave".equals(name) || "Paternity Leave".equals(name) || "C Off Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
                     continue;
                 } else {
                     listRemain.put(name, days);
@@ -772,7 +771,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             leaveEmployeeDetail.setEndDate("");
         }
         request.setAttribute("flag", leaveEmployeeDetail.getStatus());
-         request.setAttribute("oldLeaveId", leaveEmployeeDetail.getLeaveTypeMaster().getId());
+        request.setAttribute("oldLeaveId", leaveEmployeeDetail.getLeaveTypeMaster().getId());
         mv.getModelMap().put("leaveEmployeeDetail", leaveEmployeeDetail);
         mv.setViewName("Leave/LeaveApplicationFormWithDraw");
         return mv;
@@ -868,7 +867,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         leaveEmployeeDetail.setNoOfDays(Float.parseFloat("1"));
                         leaveEmployeeDetail.setStatus(0);
                     }
-                  
+
                     if (!leaveTypeMaster.getLeaveType().contains("Short Leave")) {
                         if (null != leaveEmployeeDetail.getNoOfDays() && leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave()) && !leaveTypeMaster.getLeaveType().contains("Maternity Leave")) {
                             request.setAttribute("failureMessage",
@@ -1005,11 +1004,11 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
                 balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
                 noOfDay = leaveEmployeeDetail.getNoOfDays();
-           
+
                 balanceDay = balanceDay + noOfDay;
                 String oldLeaveId = request.getParameter("oldLeaveId");
                 if (Integer.parseInt(oldLeaveId) != 9) {
-                employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
+                    employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
                     employeeLeaveBalanceService.update(employeeLeaveBalance1);
                 }
                 leaveEmployeeDetailService.delete(Integer.parseInt(id));
@@ -2212,30 +2211,30 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 }
             }
         }
-        if (sDateStatus.equals("FirstHalf")) {
-            employeeShiftData.setOutDateTime(strDate);
-            employeeShiftData.setEmployeeMaster(employeeMaster1);
-            List<?> list = employeeShiftDataService.checkTodayFirstHalfDayPresent(employeeShiftData);
-            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
-            if (!list.isEmpty()) {
-                employeeShiftData1 = (EmployeeShiftData) list.get(0);
-                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
-                    message = "On This Day You Are Present";
-                }
-            }
-        }
-        if (sDateStatus.equals("SecondHalf")) {
-            employeeShiftData.setOutDateTime(strDate);
-            employeeShiftData.setEmployeeMaster(employeeMaster1);
-            List<?> list = employeeShiftDataService.checkTodaySecondHalfDayPresent(employeeShiftData);
-            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
-            if (!list.isEmpty()) {
-                employeeShiftData1 = (EmployeeShiftData) list.get(0);
-                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
-                    message = "On This Day You Are Present";
-                }
-            }
-        }
+//        if (sDateStatus.equals("FirstHalf")) {
+//            employeeShiftData.setOutDateTime(strDate);
+//            employeeShiftData.setEmployeeMaster(employeeMaster1);
+//            List<?> list = employeeShiftDataService.checkTodayFirstHalfDayPresent(employeeShiftData);
+//            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+//            if (!list.isEmpty()) {
+//                employeeShiftData1 = (EmployeeShiftData) list.get(0);
+//                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+//                    message = "On This Day You Are Present";
+//                }
+//            }
+//        }
+//        if (sDateStatus.equals("SecondHalf")) {
+//            employeeShiftData.setOutDateTime(strDate);
+//            employeeShiftData.setEmployeeMaster(employeeMaster1);
+//            List<?> list = employeeShiftDataService.checkTodaySecondHalfDayPresent(employeeShiftData);
+//            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+//            if (!list.isEmpty()) {
+//                employeeShiftData1 = (EmployeeShiftData) list.get(0);
+//                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+//                    message = "On This Day You Are Present";
+//                }
+//            }
+//        }
 
         PrintWriter out = response.getWriter();
         out.print(message);
@@ -2274,30 +2273,30 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 }
             }
         }
-        if (eDateStatus.equals("FirstHalf")) {
-            employeeShiftData.setOutDateTime(enDate);
-            employeeShiftData.setEmployeeMaster(employeeMaster1);
-            List<?> list = employeeShiftDataService.checkTodayFirstHalfDayPresent(employeeShiftData);
-            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
-            if (!list.isEmpty()) {
-                employeeShiftData1 = (EmployeeShiftData) list.get(0);
-                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
-                    message = "On This Day You Are Present";
-                }
-            }
-        }
-        if (eDateStatus.equals("SecondHalf")) {
-            employeeShiftData.setOutDateTime(enDate);
-            employeeShiftData.setEmployeeMaster(employeeMaster1);
-            List<?> list = employeeShiftDataService.checkTodaySecondHalfDayPresent(employeeShiftData);
-            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
-            if (!list.isEmpty()) {
-                employeeShiftData1 = (EmployeeShiftData) list.get(0);
-                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
-                    message = "On This Day You Are Present";
-                }
-            }
-        }
+//        if (eDateStatus.equals("FirstHalf")) {
+//            employeeShiftData.setOutDateTime(enDate);
+//            employeeShiftData.setEmployeeMaster(employeeMaster1);
+//            List<?> list = employeeShiftDataService.checkTodayFirstHalfDayPresent(employeeShiftData);
+//            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+//            if (!list.isEmpty()) {
+//                employeeShiftData1 = (EmployeeShiftData) list.get(0);
+//                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+//                    message = "On This Day You Are Present";
+//                }
+//            }
+//        }
+//        if (eDateStatus.equals("SecondHalf")) {
+//            employeeShiftData.setOutDateTime(enDate);
+//            employeeShiftData.setEmployeeMaster(employeeMaster1);
+//            List<?> list = employeeShiftDataService.checkTodaySecondHalfDayPresent(employeeShiftData);
+//            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+//            if (!list.isEmpty()) {
+//                employeeShiftData1 = (EmployeeShiftData) list.get(0);
+//                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+//                    message = "On This Day You Are Present";
+//                }
+//            }
+//        }
 
         PrintWriter out = response.getWriter();
         out.print(message);

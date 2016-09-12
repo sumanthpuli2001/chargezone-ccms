@@ -5,10 +5,14 @@
  */
 package com.bul.zydex.dao;
 
+import java.util.List;
+
 /**
  *
  * @author Khurshid Khokhar <khokharkhurshid123@gmail.com>
  */
 public interface EmailAddMasterDAO<T> extends GenericsDAO<T>{
+    
+   public List<?> readByName(T object);
     
 }

@@ -83,21 +83,21 @@
                                         <div class="col-sm-6">
                                             <form:select path="moduleName" class="form-control">
                                                 <form:option value="" label="-- Select --" ></form:option>
-                                                <form:option value="LEAVE" label="LEAVE" ></form:option>
-                                                <form:option value="ATTENDENCE" label="ATTENDENCE" ></form:option>
-                                                <form:option value="TRAVEL" label="TRAVEL" ></form:option>
-                                                <form:option value="EXPENSE" label="EXPENSE" ></form:option>
+                                                <form:option value="Leave" label="Leave" ></form:option>
+                                                <form:option value="Attendance" label="Attendance" ></form:option>
+                                                <form:option value="Travel" label="Travel" ></form:option>
+                                                <form:option value="Expense" label="Expense" ></form:option>
                                                 <form:option value="PMP" label="PMP" ></form:option>
                                                 <form:option value="PIP" label="PIP" ></form:option>
-                                                <form:option value="POOL CAR" label="POOL CAR" ></form:option>
-                                                <form:option value="GATE PASS" label="GATE PASS" ></form:option>
-                                                <form:option value="CAFETERIA" label="CAFETERIA" ></form:option>
-                                                <form:option value="IT SERVICE" label="IT SERVICE" ></form:option>
-                                                <form:option value="HR SERVICE" label="HR SERVICE" ></form:option>
-                                                <form:option value="PROBATION TO CONFORMATION" label="PROBATION TO CONFORMATION" ></form:option>
-                                                <form:option value="RESIGNATION" label="RESIGNATION" ></form:option>
-                                                <form:option value="NO DUE" label="NO DUE " ></form:option>
-                                                <form:option value="15" label="EXIT EMPLOYEE" ></form:option>
+                                                <form:option value="Pool Car" label="Pool Car" ></form:option>
+                                                <form:option value="Gate Pass" label="Gate Pass" ></form:option>
+                                                <form:option value="Cafeteria" label="Cafeteria" ></form:option>
+                                                <form:option value="IT Service" label="IT Service" ></form:option>
+                                                <form:option value="HR Service" label="HR Service" ></form:option>
+                                                <form:option value="Probation To Conformation" label="Probation To Conformation" ></form:option>
+                                                <form:option value="Resignation" label="Resignation" ></form:option>
+                                                <form:option value="No Due" label="No Due" ></form:option>
+                                                <form:option value="Exit Employee" label="Exit Employee" ></form:option>
                                             </form:select>
                                         </div>
                                     </div>

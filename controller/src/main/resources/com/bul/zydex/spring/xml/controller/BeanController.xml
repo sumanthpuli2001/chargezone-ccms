@@ -31,6 +31,7 @@
         <property name="zydexLocationMasterService" ref="zydexLocationMasterService1"></property>
         <property name="emailTemplateService" ref="emailTemplateService1" />
         <property name="sendMail" ref="sendMail1" />
+        <property name="emailAddMasterService" ref="emailAddMasterService1" />
 
     </bean>
     <!--User-->
@@ -191,6 +192,7 @@
         <property name="shiftRotationInfoService" ref="shiftRotationInfoService1" />
         <property name="shiftRotationMasterService" ref="shiftRotationMasterService1" />
         <property name="employeeShiftDataService" ref="employeeShiftDataService1" />
+        <property name="userRightMasterService" ref="userRightMasterService1" />
     </bean>
     <bean id="employeeLeaveBalanceController1" class="com.bul.zydex.controller.leave.EmployeeLeaveBalanceController" parent="controllerConfig" >
         <property name="employeeLeaveBalanceService" ref="employeeLeaveBalanceService1" />
@@ -521,8 +523,21 @@
         <property name="employeePunchForMobileAppService" ref="employeePunchForMobileAppService1" />
     </bean>
     <bean id="expenseReport1" class="com.bul.zydex.webservice.ExpenseReport" parent="controllerConfig" >
+        <property name="expenseMasterService" ref="expenseMasterService1" />
+        <property name="expenseMasterValidator" ref="expenseMasterValidator1" />
+        <property name="levelMasterService" ref="levelMasterService1" />
         <property name="travelRequestMasterService" ref="travelRequestMasterService1" />
+        <property name="policyMasterService" ref="policyMasterService1" />
+        <property name="expenseTravelTypeService" ref="expenseTravelTypeService1" />
+        <property name="expenseOtherTypeService" ref="expenseOtherTypeService1" />
+        <property name="relocationOrOtherExpenseService" ref="relocationOrOtherExpenseService1" />
+        <property name="expenseReconsilationService" ref="expenseReconsilationService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
+        <property name="emailTemplateService" ref="emailTemplateService1" />
+        <property name="userRightMasterService" ref="userRightMasterService1" />
+        <property name="sendMail" ref="sendMail1" />
     </bean>
+    
     <bean id="travelWebService1" class="com.bul.zydex.webservice.Travel.TravelWebService" parent="controllerConfig" >
         <property name="travelRequestMasterService" ref="travelRequestMasterService1" />
         <property name="policyDeviationForAirService" ref="policyDeviationForAirService1" />
@@ -532,7 +547,6 @@
         <property name="travelApproverHistoryService" ref="travelApproverHistoryService1" />
     </bean>
     <bean id="expenseWebService1" class="com.bul.zydex.webservice.Expense.ExpenseWebService" parent="controllerConfig">
-        
         
     </bean>
 </beans>

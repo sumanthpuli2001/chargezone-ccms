@@ -56,28 +56,39 @@ public class EmployeeShiftDataServiceImpl<T> extends GenericsServiceImpl<T> impl
     public List<?> empOrMonthlySearch(T object) {
         return employeeShiftDataDAO.empOrMonthlySearch(object);
     }
+
     @Override
-    public List<?> getPastAndCurrentPunch(T object,String endShiftTime) {
-        return employeeShiftDataDAO.getPastAndCurrentPunch(object,endShiftTime);
+    public List<?> getPastAndCurrentPunch(T object, String endShiftTime) {
+        return employeeShiftDataDAO.getPastAndCurrentPunch(object, endShiftTime);
     }
+
     @Override
-     public List<?> checkTodayPresent(T object) {
+    public List<?> checkTodayPresent(T object) {
         return employeeShiftDataDAO.checkTodayPresent(object);
     }
+
     @Override
-     public List<?> checkTodayFirstHalfDayPresent(T object) {
+    public List<?> checkTodayFirstHalfDayPresent(T object) {
         return employeeShiftDataDAO.checkTodayFirstHalfDayPresent(object);
     }
+
     @Override
-     public List<?> checkTodaySecondHalfDayPresent(T object) {
+    public List<?> checkTodaySecondHalfDayPresent(T object) {
         return employeeShiftDataDAO.checkTodaySecondHalfDayPresent(object);
     }
+
     @Override
-      public List<?> getPastAndCurrentPunchForSelectedDate(T object,String endShiftTime,String selectDate,String PreviousDate){
-        return employeeShiftDataDAO.getPastAndCurrentPunchForSelectedDate(object,endShiftTime,selectDate,PreviousDate);
+    public List<?> getPastAndCurrentPunchForSelectedDate(T object, String endShiftTime, String selectDate, String PreviousDate) {
+        return employeeShiftDataDAO.getPastAndCurrentPunchForSelectedDate(object, endShiftTime, selectDate, PreviousDate);
     }
+
     @Override
-       public List<?> dailyTimeEntryForSelectedDate(T object,String date){
-        return employeeShiftDataDAO.dailyTimeEntryForSelectedDate(object,date);
+    public List<?> dailyTimeEntryForSelectedDate(T object, String date) {
+        return employeeShiftDataDAO.dailyTimeEntryForSelectedDate(object, date);
+    }
+
+    @Override
+    public List<?> readByEmployeeId(T object, String date) {
+        return employeeShiftDataDAO.readByEmployeeId(object,date);
     }
 }

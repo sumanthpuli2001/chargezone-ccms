@@ -45,5 +45,6 @@ public interface UserRightMasterService<T> extends GenericsService<T> {
     public List<?> readExpenseAdmin();
 
     public List<?> readCashAdvanceViewAdmin();
-
+    
+    public List<?> readByleaveRight();
 }

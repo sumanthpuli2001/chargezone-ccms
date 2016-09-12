@@ -8,6 +8,7 @@ package com.bul.zydex.controller.leave;
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.COffLeaveMaster;
 import com.bul.zydex.model.DepartmentMaster;
+import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeShiftData;
@@ -20,7 +21,9 @@ import com.bul.zydex.model.ShiftRotationInfo;
 import com.bul.zydex.model.ShiftRotationMaster;
 import com.bul.zydex.model.ShortLeave;
 import com.bul.zydex.model.UserMaster;
+import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
+import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.holiday.HolidayMasterService;
 import com.bul.zydex.service.leave.COffLeaveMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
@@ -59,7 +62,17 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
     protected ShiftRotationMasterService<ShiftRotationMaster> shiftRotationMasterService;
     protected ShiftRotationInfoService<ShiftRotationInfo> shiftRotationInfoService;
     protected EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService;
+    protected UserRightMasterService<UserRightMaster> userRightMasterService;
 
+    public UserRightMasterService<UserRightMaster> getUserRightMasterService() {
+        return userRightMasterService;
+    }
+
+    public void setUserRightMasterService(UserRightMasterService<UserRightMaster> userRightMasterService) {
+        this.userRightMasterService = userRightMasterService;
+    }
+    
+   
     public EmployeeShiftDataService<EmployeeShiftData> getEmployeeShiftDataService() {
         return employeeShiftDataService;
     }

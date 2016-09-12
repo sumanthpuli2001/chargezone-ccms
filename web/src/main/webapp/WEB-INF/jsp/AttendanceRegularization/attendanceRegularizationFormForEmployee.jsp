@@ -100,6 +100,33 @@
             }
         }
     </script>
+    
+    <script>
+        function checkDateByAjax() {
+            try {
+                var strDate = document.getElementById("startDateTime").value;
+                if (strDate != '') {
+                    $.ajax({
+                        type: "POST",
+                        url: "attendanceRegularizationMaster.htm?act=checkPunchtime&strDate=" + strDate,
+                        data: {},
+                        dataType: "text",
+                        success: function (responseTxt) {
+                            document.getElementById("woandHlerrorDiv1").innerHTML = responseTxt;
+                            if (responseTxt != '') {
+                                document.getElementById("startDateTime").value = "";
+                            }
+                        },
+                        error: function () {
+
+                        }
+                    });
+                }
+            } catch (e) {
+
+            }
+        }
+    </script>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -213,12 +240,13 @@
                                                             <label>Start Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
                                                                 <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="startDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
+                                                                <form:input path="startDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="checkDateByAjax(); calculateDayByAjax();"></form:input>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
                                                             <form:errors path="startDateTime" cssClass="errorDiv"></form:errors>
                                                                 <span id="woandHlerrorDiv" style="color: red;"></span>
+                                                                <span id="woandHlerrorDiv1" style="color: red;"></span>
 
                                                             </div>
                                                             <div class="col-sm-6">

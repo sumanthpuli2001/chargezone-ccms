@@ -61,5 +61,7 @@ public interface LeaveEmployeeDetailService<T> extends GenericsService<T> {
     public List<?> readEmpLeaveListDetail(T object);
 
     public List<?> readDate(T object);
+    
+     public List<?> leaveCheck(T object);
 
 }

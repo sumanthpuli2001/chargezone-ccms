@@ -184,7 +184,6 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         leaveEmployeeDetail.setStartDateStatus(strDateStatus);
         leaveEmployeeDetail.setEndDateStatus(endDateStatus);
         leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
-      
 
         leaveEmployeeDetailValidator.validate(mv, errors);
         if (leaveEmployeeDetail.getLeaveTypeMaster().getId() == (11)) {
@@ -206,8 +205,79 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             mv = applyClick(request, response);
 
         } else {
-            String leaveTypeMasterId = request.getParameter("leaveTypeMaster.id");
+            boolean leaveCkeck = false;
+            Calendar cal6 = Calendar.getInstance();
+            Date satdateOfLeave = sdf.parse(leaveEmployeeDetail.getStartDate());
+            cal6.setTime(satdateOfLeave);
+            SimpleDateFormat format2 = new SimpleDateFormat("EEEE");
+            String dayNameOfLeave = format2.format(satdateOfLeave);
+            if (dayNameOfLeave.equals("Monday")) {
+                LeaveEmployeeDetail leaveEmployeeDetail1 = new LeaveEmployeeDetail();
+                leaveEmployeeDetail1.setEmployeeMaster(employeeMaster);
+                cal6.add(Calendar.DAY_OF_MONTH, -2);
+                Date dateSet = cal6.getTime();
+                String finalDateSet = sdf.format(dateSet);
+                leaveEmployeeDetail1.setStartDate(finalDateSet);
+                List<?> satLeaveListCheck = leaveEmployeeDetailService.leaveCheck(leaveEmployeeDetail1);
+                if (!satLeaveListCheck.isEmpty()) {
+                    LeaveEmployeeDetail leaveEmployeeDetail2 = (LeaveEmployeeDetail) satLeaveListCheck.get(0);
+                    LeaveTypeMaster leaveTypeMaster1 = new LeaveTypeMaster();
+                    leaveTypeMaster1.setId(leaveEmployeeDetail2.getLeaveTypeMaster().getId());
+                    leaveTypeMaster1 = leaveTypeMasterService.readById(leaveTypeMaster1.getId());
+                    if (leaveTypeMaster1.getLeaveType().contains("Casual Leave")) {
+                        leaveTypeMaster1.setId(7);
+                        leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster1);
+                        float noOfDays = leaveEmployeeDetail.getNoOfDays();
+                        employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+                        employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster1);
+                        List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance1);
+                        if (!balanceList.isEmpty()) {
+                            employeeLeaveBalance1 = (EmployeeLeaveBalance) balanceList.get(0);
+                        }
+                        noOfDays = noOfDays + 1 + leaveEmployeeDetail2.getNoOfDays();
+                        if (employeeLeaveBalance1.getNoOfLeaveRemain() > noOfDays) {
+                            leaveCkeck = true;
+                            leaveTypeMaster1.setId(6);
+                             employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+                        employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster1);
+                        
+                        } else {
+                            leaveCkeck = false;
+                        }
+                        leaveEmployeeDetail.setNoOfDays(noOfDays);
+                    } else {
+                        leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster1);
+                        float noOfDays = leaveEmployeeDetail.getNoOfDays();
+                        noOfDays = noOfDays + 1 + leaveEmployeeDetail2.getNoOfDays();
+                        employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+                        employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster1);
+                        List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance1);
+                        if (!balanceList.isEmpty()) {
+                            employeeLeaveBalance1 = (EmployeeLeaveBalance) balanceList.get(0);
+                        }
+                        if (employeeLeaveBalance1.getNoOfLeaveRemain() > noOfDays) {
+                            leaveCkeck = true;
+                        } else {
+                            employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+                            LeaveTypeMaster leaveTypeMaster2 = new LeaveTypeMaster();
+                            leaveTypeMaster2.setId(leaveEmployeeDetail2.getLeaveTypeMaster().getId());
+                            employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster2);
+                            if (!balanceList.isEmpty()) {
+                                employeeLeaveBalance1 = (EmployeeLeaveBalance) balanceList.get(0);
+                            }
+                            if (employeeLeaveBalance1.getNoOfLeaveRemain() > noOfDays) {
+                                leaveCkeck = true;
+                            } else {
+                                leaveCkeck = false;
+                            }
+                        }
+                        leaveEmployeeDetail.setNoOfDays(noOfDays);
+                    }
+                }
 
+            }
+
+            String leaveTypeMasterId = request.getParameter("leaveTypeMaster.id");
             if (!"".equals(leaveTypeMasterId)) {
                 leaveTypeMaster.setId(Integer.parseInt(leaveTypeMasterId));
                 leaveTypeMaster = leaveTypeMasterService.readById(leaveTypeMaster.getId());
@@ -251,7 +321,6 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 Calendar cal5 = Calendar.getInstance();
                 Date satdate = sdf.parse(leaveEmployeeDetail.getStartDate());
                 cal5.setTime(satdate);
-                SimpleDateFormat format2 = new SimpleDateFormat("EEEE");
                 String dayName = format2.format(satdate);
                 int dayOfWeek = cal5.get(Calendar.WEEK_OF_MONTH);
                 int locationId = employeeMaster.getZydexLocationMaster().getId();
@@ -334,13 +403,21 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                 "Error :No Of Days is Greater than maximum allowed Days...");
                         request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                         mv = applyClick(request, response);
-                    } else if (flag) {
+                    } 
+                    else if (flag) {
                         request.setAttribute("failureMessage",
                                 "Error :You Have Already apply Leave On that Day...");
                         request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                         mv = applyClick(request, response);
-
-                    } else if (leaveTypeMaster.getLeaveType().equals("Paternity Leave")) {
+                    }
+//                    else if (leaveCkeck) {
+//                        request.setAttribute("failureMessage",
+//                                "Error :Your Balance Is Less then Your apply Leave Days.");
+//                        request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+//                        mv = applyClick(request, response);
+//
+//                    } 
+                    else if (leaveTypeMaster.getLeaveType().equals("Paternity Leave")) {
 
                         list = leaveEmployeeDetailService.readEmployeeWiseMaternity(leaveEmployeeDetail);
                         if (employeeMaster.getMaritalStatus().equals("UnMarried")) {
@@ -1952,38 +2029,38 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         List<String> list1 = new ArrayList<String>();
         float days = 0;
         while (c.getTime().before(eDate) || c.getTime().equals(eDate)) {
-            for (String z : weekOffDay.split(",")) {
-                int weekOff = 0;
-                if (!z.equals("")) {
-                    if (z.equals("sunday")) {
-                        weekOff = 1;
-                    } else if (z.equals("monday")) {
-                        weekOff = 2;
-                    } else if (z.equals("tuesday")) {
-                        weekOff = 3;
-                    } else if (z.equals("wednesday")) {
-                        weekOff = 4;
-                    } else if (z.equals("thursday")) {
-                        weekOff = 5;
-                    } else if (z.equals("friday")) {
-                        weekOff = 6;
-                    } else if (z.equals("saturdady")) {
-                        weekOff = 7;
-                    }
+//            for (String z : weekOffDay.split(",")) {
+//                int weekOff = 0;
+//                if (!z.equals("")) {
+//                    if (z.equals("sunday")) {
+//                        weekOff = 1;
+//                    } else if (z.equals("monday")) {
+//                        weekOff = 2;
+//                    } else if (z.equals("tuesday")) {
+//                        weekOff = 3;
+//                    } else if (z.equals("wednesday")) {
+//                        weekOff = 4;
+//                    } else if (z.equals("thursday")) {
+//                        weekOff = 5;
+//                    } else if (z.equals("friday")) {
+//                        weekOff = 6;
+//                    } else if (z.equals("saturdady")) {
+//                        weekOff = 7;
+//                    }
 
-                    if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                        Date nDate = c.getTime();
-                        String daString = sdf.format(nDate);
-                        HolidayMaster holidayMaster = new HolidayMaster();
-                        holidayMaster.setHolidayFromDate(daString);
-                        List list = holidayMasterService.checkHoliday(daString, "" + employeeMaster1.getLocationMaster().getId());
-                        if (list.size() == 0) {
-                            days++;
-                        }
-                    }
-                }
-
+//                    if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+            Date nDate = c.getTime();
+            String daString = sdf.format(nDate);
+            HolidayMaster holidayMaster = new HolidayMaster();
+            holidayMaster.setHolidayFromDate(daString);
+            List list = holidayMasterService.checkHoliday(daString, "" + employeeMaster1.getLocationMaster().getId());
+            if (list.size() == 0) {
+                days++;
             }
+//                    }
+//                }
+
+//            }
             c.add(Calendar.DATE, 1);
 
         }

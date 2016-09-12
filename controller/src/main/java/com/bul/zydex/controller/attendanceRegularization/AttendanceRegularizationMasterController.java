@@ -1764,6 +1764,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("AttendanceRegularization/attendanceRegularizationViewResultExport");
         return mv;
     }
+
     public ModelAndView subOrdinateAttendanceView(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
@@ -1772,22 +1773,23 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("AttendanceRegularization/SubOrdinateAttendanceView");
         return mv;
     }
-     public ModelAndView showOwnAttandanceOfSubordinate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    public ModelAndView showOwnAttandanceOfSubordinate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
         EmployeeShiftData employeeShiftData = new EmployeeShiftData();
         String startDate = request.getParameter("inDateTime");
         String endDate = request.getParameter("outDateTime");
         bind(request, employeeAdvanceSearch);
-     
-        String id =  request.getParameter("id");
+
+        String id = request.getParameter("id");
         employeeAdvanceSearch.setId(id);
         employeeAdvanceSearch.setZydexLocationId(null);
         employeeAdvanceSearch.setLevelID(null);
         employeeAdvanceSearch.setDepartmentId(null);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-        if (null !=id && !id.equals("")) {
+        if (null != id && !id.equals("")) {
             employeeShiftData.setId(Integer.parseInt(id));
         }
         employeeAdvanceSearch.setEmployeeId(Boolean.FALSE);

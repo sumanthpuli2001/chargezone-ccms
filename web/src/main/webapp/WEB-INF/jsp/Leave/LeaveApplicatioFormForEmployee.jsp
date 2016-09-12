@@ -495,7 +495,7 @@
                                 document.getElementById('Privilege Leave2').innerHTML = document.getElementById('Privilege Leave1').innerHTML;
                             }
                             if (strUser == "Casual Leave") {
-                                if (parseFloat(document.getElementById("noOfDays").value) > 3) {
+                                if (parseFloat(document.getElementById("noOfDays").value) > 2) {
                                     $("#calsualLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
                                     setTimeout(function () {
@@ -613,7 +613,7 @@
                             }
                             if (strUser == "Casual Leave") {
 
-                                if (parseFloat(document.getElementById("noOfDays").value) > 3) {
+                                if (parseFloat(document.getElementById("noOfDays").value) > 2) {
                                     $("#calsualLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
                                     setTimeout(function () {
@@ -720,7 +720,7 @@
                                 document.getElementById('Privilege Leave2').innerHTML = document.getElementById('Privilege Leave1').innerHTML;
                             }
                             if (strUser == "Casual Leave") {
-                                if (parseFloat(document.getElementById("noOfDays").value) > 3) {
+                                if (parseFloat(document.getElementById("noOfDays").value) > 2) {
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
                                     setTimeout(function () {
                                         $("#calsualLeaveDiv").fadeOut();
@@ -840,7 +840,7 @@
                                 document.getElementById('Privilege Leave2').innerHTML = document.getElementById('Privilege Leave1').innerHTML;
                             }
                             if (strUser == "Casual Leave") {
-                                if (parseFloat(document.getElementById("noOfDays").value) > 3) {
+                                if (parseFloat(document.getElementById("noOfDays").value) > 2) {
                                     $("#calsualLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
                                     setTimeout(function () {
@@ -958,7 +958,7 @@
                                 document.getElementById('Privilege Leave2').innerHTML = document.getElementById('Privilege Leave1').innerHTML;
                             }
                             if (strUser == "Casual Leave") {
-                                if (parseFloat(document.getElementById("noOfDays").value) > 3) {
+                                if (parseFloat(document.getElementById("noOfDays").value) > 2) {
                                     $("#calsualLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
                                     setTimeout(function () {
@@ -1065,7 +1065,7 @@
                             }
                             if (strUser == "Casual Leave") {
 
-                                if (parseFloat(document.getElementById("noOfDays").value) > 3) {
+                                if (parseFloat(document.getElementById("noOfDays").value) > 2) {
                                     $("#calsualLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
                                     setTimeout(function () {
@@ -1170,7 +1170,7 @@
                                 document.getElementById('Privilege Leave2').innerHTML = document.getElementById('Privilege Leave1').innerHTML;
                             }
                             if (strUser == "Casual Leave") {
-                                if (parseFloat(document.getElementById("noOfDays").value) > 3) {
+                                if (parseFloat(document.getElementById("noOfDays").value) > 2) {
                                     $("#calsualLeaveDiv").show();
                                     document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
                                     setTimeout(function () {
@@ -1740,7 +1740,7 @@
                                                                 <input type="hidden" name="hiddenDays" id="hiddenDays" value="">
                                                                 <span id="noOfDaysError" style="color: red;"></span>
                                                             </div>
-                                                            <div  id="calsualLeaveDiv" name="calsualLeaveDiv" style="color: red; display: none; margin-left: 20px;">In Case If You want to Apply Leave For More than 3 Days for Casual/Personal/Any Other except for Sickness.Please Apply PL.</div>
+                                                            <div  id="calsualLeaveDiv" name="calsualLeaveDiv" style="color: red; display: none; margin-left: 20px;">In Case If You want to Apply Leave For More than 2 Days for Casual/Personal/Any Other except for Sickness.Please Apply PL.</div>
                                                             <!--<div  id="calsualLeaveDiv" name="calsualLeaveDiv" style="color: red; display: none; margin-left: 20px;">In Casual Leave You Apply Max. 3 days.If you wan't to apply More Days of leave Then Apply For PL.</div>-->
                                                             <div  id="sickLeaveDiv" name="sickLeaveDiv" style="color: red; display: none; margin-left: 20px;">You taken More than 3 of days sick leave. So for that doctor's authorize certificate submit when come at office. </div>
                                                             <div  id="paternityLeaveDiv" name="paternityLeaveDiv" style="color: red; display: none; margin-left: 20px;">In Paternity Leave You can Apply Max. 3 days.</div>

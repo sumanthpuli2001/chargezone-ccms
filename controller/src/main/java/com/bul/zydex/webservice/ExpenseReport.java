@@ -16,9 +16,11 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.json.JsonArray;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,7 +36,8 @@ public class ExpenseReport extends ExpenseReportAbstarct {
         String rcode = "";
         String message = "";
         JSONObject userData = new JSONObject();
-        JSONObject data = new JSONObject();
+        JSONArray jsonArray=new JSONArray(); 
+
         UserMaster user = new UserMaster();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
@@ -49,8 +52,8 @@ public class ExpenseReport extends ExpenseReportAbstarct {
         }
         String expenseType = "";
         String dateOfSubmit = "";
-        int status;
-        int expenseid;
+        int status = 0;
+        int expenseid = 0;
         ExpenseMaster expenseMaster = new ExpenseMaster();
         expenseMaster.setEmployeeMasterByEmployeeId(employeeMaster1);
         List<ExpenseMaster> list = (List<ExpenseMaster>) expenseMasterService.readByEmpId(expenseMaster);
@@ -61,7 +64,17 @@ public class ExpenseReport extends ExpenseReportAbstarct {
                 dateOfSubmit = expenselist.getDateOfSubmit();
                 status = expenselist.getStatus();
                 expenseid = expenselist.getId();
+
+                JSONObject data = new JSONObject();
+                data.put("expenseType", expenseType);
+                data.put("dateOfSubmit", dateOfSubmit);
+                data.put("expenseid", expenseid);
+                data.put("status", status);
+                jsonArray.put(data);
             }
+            userData.put("data", jsonArray);
+            userData.put("responseMessage", message);
+            userData.put("responseCode", rcode);
 
         }
 

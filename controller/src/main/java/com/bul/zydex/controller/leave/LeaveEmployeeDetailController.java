@@ -21,6 +21,7 @@ import com.bul.zydex.model.ShiftRotationInfo;
 import com.bul.zydex.model.ShiftRotationMaster;
 import com.bul.zydex.model.ShortLeave;
 import com.bul.zydex.model.UserMaster;
+import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.service.shift.EmployeeShiftDataService;
 import java.io.PrintWriter;
@@ -425,6 +426,28 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                 sendMail.sendMail(from, To, Subject, msg);
+
+                                if (noOfDay > 3) {
+                                    List<UserRightMaster> userlist = (List<UserRightMaster>) userRightMasterService.readByleaveRight();
+                                    for (UserRightMaster emplist : userlist) {
+                                        EmailTemplate emailTemplate1 = new EmailTemplate();
+                                        int id = emplist.getUserMaster().getId();
+                                        EmployeeMaster employeeMail = employeeMasterService.readById(id);
+                                        emailTemplate1 = emailTemplateService.readById(140);
+
+                                        String To1 = employeeMail.getEmailAddress();
+                                        String from1 = employeeMasterModel.getOfficeEmailId();
+                                        String Subject1 = emailTemplate1.getSubject();
+                                        Subject1 = Subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                                        String msg1 = emailTemplate1.getBodytext();
+                                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from1, To1, Subject1, msg1);
+
+                                    }
+
+                                }
                             } catch (Exception e) {
 
                             }
@@ -1413,7 +1436,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                 for (int i = 0; i <= emaillist.length; i++) {
                                     if (null != emaillist[i] && "" != emaillist[i]) {
                                         String emailid = emaillist[i].toString();
-                                    
+
                                         String To3 = emailid;
                                         String from3 = employeeMasterModel.getOfficeEmailId();
                                         String subject3 = emailTemplate1.getSubject();

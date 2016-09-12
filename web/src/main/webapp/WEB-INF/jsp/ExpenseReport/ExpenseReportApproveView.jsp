@@ -3278,4 +3278,3 @@
                 document.getElementById("variance" + key).value = parseFloat(totalAmount) - parseFloat(paidByCompany) - parseFloat(advanceCash) + parseFloat(cashReturned);
             }</script>
 </html>
-Hello

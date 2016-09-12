@@ -192,6 +192,7 @@
         <property name="shiftRotationInfoService" ref="shiftRotationInfoService1" />
         <property name="shiftRotationMasterService" ref="shiftRotationMasterService1" />
         <property name="employeeShiftDataService" ref="employeeShiftDataService1" />
+        <property name="userRightMasterService" ref="userRightMasterService1" />
     </bean>
     <bean id="employeeLeaveBalanceController1" class="com.bul.zydex.controller.leave.EmployeeLeaveBalanceController" parent="controllerConfig" >
         <property name="employeeLeaveBalanceService" ref="employeeLeaveBalanceService1" />

@@ -270,4 +270,16 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
         return list;
     }
 
+    @Override
+    public List<?> readByleaveRight() {
+         String query = "";
+
+        query += ""
+                + "FROM UserRightMaster a "
+                + " WHERE a.leaveManagement = true" ;
+
+        return getHibernateTemplate().find(query);
+   
+    }
+
 }

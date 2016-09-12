@@ -40,7 +40,7 @@ public class ExpenseMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Expen
         if (!"".equals(expenseMaster.getDateOfSubmit()) && null != expenseMaster.getDateOfSubmit()) {
             condition += " AND STR_TO_DATE(a.dateOfSubmit,'%d/%m/%Y') >= STR_TO_DATE('" + expenseMaster.getDateOfSubmit() + "','%d/%m/%Y')";
         }
-        if ((!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getAdharCard()) && expenseMaster.getEmployeeMasterByEmployeeId().getAdharCard().contains("/")) && null != expenseMaster.getEmployeeMasterByEmployeeId().getAdharCard()) {
+        if ((!"".equals(expenseMaster.getEmployeeMasterByEmployeeId().getAdharCard()) && null != expenseMaster.getEmployeeMasterByEmployeeId().getAdharCard() && expenseMaster.getEmployeeMasterByEmployeeId().getAdharCard().contains("/")) ) {
             condition += " AND STR_TO_DATE(a.dateOfSubmit,'%d/%m/%Y') <= STR_TO_DATE('" + expenseMaster.getEmployeeMasterByEmployeeId().getAdharCard() + "','%d/%m/%Y')";
         }
         if (!"".equals(expenseMaster.getDateOfSubmit()) && null != expenseMaster.getDateOfSubmit()

@@ -7,7 +7,6 @@ package com.bul.zydex.controller.expense;
 
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
-import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.ExpenseMaster;
@@ -2551,29 +2550,6 @@ public class ExpenseMasterController extends ExpenseMasterAbstract {
                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
-                String name = "Expense";
-                EmailAddMaster emailAddMaster = new EmailAddMaster();
-                emailAddMaster.setModuleName(name);
-                emailAddMaster.setDepartmentMaster(employeeMaster.getDepartmentMaster());
-                List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
-                if (!emailSendList.isEmpty()) {
-                    EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
-                    String emailId = emailAddMaster1.getEmailId();
-                    for (String emailId1 : emailId.split(",")) {
-                        if (!emailId1.equals("")) {
-                            String To1 = emailId1;
-                            String from1 = employeeMasterModel.getOfficeEmailId();
-                            String subject1 = emailTemplate.getSubject();
-                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
-                            String msg1 = emailTemplate.getBodytext();
-                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
-                            msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                            msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from1, To1, subject1, msg1);
-
-                        }
-                    }
-                }
             } catch (Exception e) {
             }
 
@@ -3012,7 +2988,7 @@ public class ExpenseMasterController extends ExpenseMasterAbstract {
                 }
 
             }
-
+           
             finalList.add(l1);
 
         }

@@ -34,6 +34,7 @@ public class EmailAddMasterController extends EmailAddMasterAbstract {
 
     public ModelAndView createSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
+
         EmailAddMaster emailAddMaster = new EmailAddMaster();
         DepartmentMaster departmentMaster = new DepartmentMaster();
         emailAddMaster.setDepartmentMaster(departmentMaster);
@@ -57,11 +58,11 @@ public class EmailAddMasterController extends EmailAddMasterAbstract {
         List<?> emailaddList = emailAddMasterService.read();
         EmailAddMaster emailAddMaster = new EmailAddMaster();
         for (Object obj : emailaddList) {
-          emailAddMaster = (EmailAddMaster)obj;
-        DepartmentMaster departmentMaster = new DepartmentMaster();
-        departmentMaster= departmentMasterService.readById(emailAddMaster.getDepartmentMaster().getId());
-        emailAddMaster.setDepartmentMaster(departmentMaster);
-            
+            emailAddMaster = (EmailAddMaster) obj;
+            DepartmentMaster departmentMaster = new DepartmentMaster();
+            departmentMaster = departmentMasterService.readById(emailAddMaster.getDepartmentMaster().getId());
+            emailAddMaster.setDepartmentMaster(departmentMaster);
+
         }
         departmentList(request);
         mv.getModelMap().put("list", emailaddList);

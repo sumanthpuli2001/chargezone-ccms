@@ -208,74 +208,78 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
         } else {
             boolean leaveCkeck = false;
-            Calendar cal6 = Calendar.getInstance();
-            Date satdateOfLeave = sdf.parse(leaveEmployeeDetail.getStartDate());
-            cal6.setTime(satdateOfLeave);
             SimpleDateFormat format2 = new SimpleDateFormat("EEEE");
-            String dayNameOfLeave = format2.format(satdateOfLeave);
-            if (dayNameOfLeave.equals("Monday")) {
-                LeaveEmployeeDetail leaveEmployeeDetail1 = new LeaveEmployeeDetail();
-                leaveEmployeeDetail1.setEmployeeMaster(employeeMaster);
-                cal6.add(Calendar.DAY_OF_MONTH, -2);
-                Date dateSet = cal6.getTime();
-                String finalDateSet = sdf.format(dateSet);
-                leaveEmployeeDetail1.setStartDate(finalDateSet);
-                List<?> satLeaveListCheck = leaveEmployeeDetailService.leaveCheck(leaveEmployeeDetail1);
-                if (!satLeaveListCheck.isEmpty()) {
-                    LeaveEmployeeDetail leaveEmployeeDetail2 = (LeaveEmployeeDetail) satLeaveListCheck.get(0);
-                    LeaveTypeMaster leaveTypeMaster1 = new LeaveTypeMaster();
-                    leaveTypeMaster1.setId(leaveEmployeeDetail2.getLeaveTypeMaster().getId());
-                    leaveTypeMaster1 = leaveTypeMasterService.readById(leaveTypeMaster1.getId());
-                    if (leaveTypeMaster1.getLeaveType().contains("Casual Leave")) {
-                        leaveTypeMaster1.setId(7);
-                        leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster1);
-                        float noOfDays = leaveEmployeeDetail.getNoOfDays();
-                        employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
-                        employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster1);
-                        List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance1);
-                        if (!balanceList.isEmpty()) {
-                            employeeLeaveBalance1 = (EmployeeLeaveBalance) balanceList.get(0);
-                        }
-                        noOfDays = noOfDays + 1 + leaveEmployeeDetail2.getNoOfDays();
-                        if (employeeLeaveBalance1.getNoOfLeaveRemain() > noOfDays) {
-                            leaveCkeck = true;
-                            leaveTypeMaster1.setId(6);
-                             employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
-                        employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster1);
-                        
-                        } else {
-                            leaveCkeck = false;
-                        }
-                        leaveEmployeeDetail.setNoOfDays(noOfDays);
-                    } else {
-                        leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster1);
-                        float noOfDays = leaveEmployeeDetail.getNoOfDays();
-                        noOfDays = noOfDays + 1 + leaveEmployeeDetail2.getNoOfDays();
-                        employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
-                        employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster1);
-                        List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance1);
-                        if (!balanceList.isEmpty()) {
-                            employeeLeaveBalance1 = (EmployeeLeaveBalance) balanceList.get(0);
-                        }
-                        if (employeeLeaveBalance1.getNoOfLeaveRemain() > noOfDays) {
-                            leaveCkeck = true;
-                        } else {
+            try {
+                Calendar cal6 = Calendar.getInstance();
+                Date satdateOfLeave = sdf.parse(leaveEmployeeDetail.getStartDate());
+                cal6.setTime(satdateOfLeave);
+                String dayNameOfLeave = format2.format(satdateOfLeave);
+                if (dayNameOfLeave.equals("Monday")) {
+                    LeaveEmployeeDetail leaveEmployeeDetail1 = new LeaveEmployeeDetail();
+                    leaveEmployeeDetail1.setEmployeeMaster(employeeMaster);
+                    cal6.add(Calendar.DAY_OF_MONTH, -2);
+                    Date dateSet = cal6.getTime();
+                    String finalDateSet = sdf.format(dateSet);
+                    leaveEmployeeDetail1.setStartDate(finalDateSet);
+                    List<?> satLeaveListCheck = leaveEmployeeDetailService.leaveCheck(leaveEmployeeDetail1);
+                    if (!satLeaveListCheck.isEmpty()) {
+                        LeaveEmployeeDetail leaveEmployeeDetail2 = (LeaveEmployeeDetail) satLeaveListCheck.get(0);
+                        LeaveTypeMaster leaveTypeMaster1 = new LeaveTypeMaster();
+                        leaveTypeMaster1.setId(leaveEmployeeDetail2.getLeaveTypeMaster().getId());
+                        leaveTypeMaster1 = leaveTypeMasterService.readById(leaveTypeMaster1.getId());
+                        if (leaveTypeMaster1.getLeaveType().contains("Casual Leave")) {
+                            leaveTypeMaster1.setId(7);
+                            leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster1);
+                            float noOfDays = leaveEmployeeDetail.getNoOfDays();
                             employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
-                            LeaveTypeMaster leaveTypeMaster2 = new LeaveTypeMaster();
-                            leaveTypeMaster2.setId(leaveEmployeeDetail2.getLeaveTypeMaster().getId());
-                            employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster2);
+                            employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster1);
+                            List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance1);
+                            if (!balanceList.isEmpty()) {
+                                employeeLeaveBalance1 = (EmployeeLeaveBalance) balanceList.get(0);
+                            }
+                            noOfDays = noOfDays + 1 + leaveEmployeeDetail2.getNoOfDays();
+                            if (employeeLeaveBalance1.getNoOfLeaveRemain() > noOfDays) {
+                                leaveCkeck = true;
+                                leaveTypeMaster1.setId(6);
+                                employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+                                employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster1);
+
+                            } else {
+                                leaveCkeck = false;
+                            }
+                            leaveEmployeeDetail.setNoOfDays(noOfDays);
+                        } else {
+                            leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster1);
+                            float noOfDays = leaveEmployeeDetail.getNoOfDays();
+                            noOfDays = noOfDays + 1 + leaveEmployeeDetail2.getNoOfDays();
+                            employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+                            employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster1);
+                            List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance1);
                             if (!balanceList.isEmpty()) {
                                 employeeLeaveBalance1 = (EmployeeLeaveBalance) balanceList.get(0);
                             }
                             if (employeeLeaveBalance1.getNoOfLeaveRemain() > noOfDays) {
                                 leaveCkeck = true;
                             } else {
-                                leaveCkeck = false;
+                                employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+                                LeaveTypeMaster leaveTypeMaster2 = new LeaveTypeMaster();
+                                leaveTypeMaster2.setId(leaveEmployeeDetail2.getLeaveTypeMaster().getId());
+                                employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster2);
+                                if (!balanceList.isEmpty()) {
+                                    employeeLeaveBalance1 = (EmployeeLeaveBalance) balanceList.get(0);
+                                }
+                                if (employeeLeaveBalance1.getNoOfLeaveRemain() > noOfDays) {
+                                    leaveCkeck = true;
+                                } else {
+                                    leaveCkeck = false;
+                                }
                             }
+                            leaveEmployeeDetail.setNoOfDays(noOfDays);
                         }
-                        leaveEmployeeDetail.setNoOfDays(noOfDays);
                     }
+
                 }
+            } catch (Exception e) {
 
             }
 
@@ -405,20 +409,18 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                 "Error :No Of Days is Greater than maximum allowed Days...");
                         request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                         mv = applyClick(request, response);
-                    } 
-                    else if (flag) {
+                    } else if (flag) {
                         request.setAttribute("failureMessage",
                                 "Error :You Have Already apply Leave On that Day...");
                         request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                         mv = applyClick(request, response);
-                    }
-//                    else if (leaveCkeck) {
-//                        request.setAttribute("failureMessage",
-//                                "Error :Your Balance Is Less then Your apply Leave Days.");
-//                        request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-//                        mv = applyClick(request, response);
-//
-//                    } 
+                    } //                    else if (leaveCkeck) {
+                    //                        request.setAttribute("failureMessage",
+                    //                                "Error :Your Balance Is Less then Your apply Leave Days.");
+                    //                        request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                    //                        mv = applyClick(request, response);
+                    //
+                    //                    } 
                     else if (leaveTypeMaster.getLeaveType().equals("Paternity Leave")) {
 
                         list = leaveEmployeeDetailService.readEmployeeWiseMaternity(leaveEmployeeDetail);

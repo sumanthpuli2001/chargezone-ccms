@@ -1073,7 +1073,8 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
 
         query += " FROM EmployeeShiftData a"
                 + " WHERE a.employeeMaster.id = " + employeeShiftData.getEmployeeMaster().getId() + ""
-                + " and STR_TO_DATE(a.inDateTime,'%d/%m/%Y %H:%i') >= STR_TO_DATE('" + date + "','%d/%m/%Y %H:%i')";
+                + " and STR_TO_DATE(a.inDateTime,'%d/%m/%Y') = STR_TO_DATE('" + date + "','%d/%m/%Y')"
+                + " and STR_TO_DATE(a.inDateTime,'%d/%m/%Y %H:%i') <= STR_TO_DATE('" + date + "','%d/%m/%Y %H:%i')";
 
         return getHibernateTemplate().find(query);
 

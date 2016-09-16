@@ -240,7 +240,7 @@
                                                             <label>Start Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
                                                                 <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="startDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="checkDateByAjax(); calculateDayByAjax();"></form:input>
+                                                                <form:input path="startDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>

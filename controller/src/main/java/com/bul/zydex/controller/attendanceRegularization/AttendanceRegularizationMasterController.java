@@ -2541,7 +2541,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         EmployeeShiftData employeeShiftData = new EmployeeShiftData();
         employeeShiftData.setEmployeeMaster(employeeMaster);
         List<?> timecheck = employeeShiftDataService.readByEmployeeId(employeeShiftData,strDate);
-        if (!timecheck.isEmpty()) {
+        if (timecheck.isEmpty()) {
             message = "Selected Date and Time is not valid.So You can't Apply AR";
         }
         PrintWriter out = response.getWriter();

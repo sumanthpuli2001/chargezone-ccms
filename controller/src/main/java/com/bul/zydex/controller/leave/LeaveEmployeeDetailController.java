@@ -332,9 +332,13 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             if (!addBalanceList.isEmpty()) {
                                 employeeLeaveBalance2 = (EmployeeLeaveBalance) addBalanceList.get(0);
                             }
-                            float noOfDays = 1 + leaveEmployeeDetail2.getNoOfDays();
+                            float noOfDays = 1;
                             float noOfDays1 = 1 + leaveEmployeeDetail.getNoOfDays();
-                            if (employeeLeaveBalance2.getNoOfLeaveRemain() >= noOfDays) {
+                            if (employeeLeaveBalance1.getNoOfLeaveRemain() >= noOfDays1) {
+                                leaveCkeck = true;
+                                leaveEmployeeDetail.setNoOfDays(noOfDays1);
+
+                            } else if (employeeLeaveBalance2.getNoOfLeaveRemain() >= noOfDays) {
                                 leaveCkeck = true;
                                 float days = employeeLeaveBalance2.getNoOfLeaveRemain() - 1.0f;
                                 employeeLeaveBalance2.setNoOfLeaveRemain(days);
@@ -343,11 +347,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                 leaveEmployeeDetail2.setNoOfDays(addDays);
                                 leaveEmployeeDetailService.update(leaveEmployeeDetail2);
 
-                            } else if (employeeLeaveBalance1.getNoOfLeaveRemain() >= noOfDays1) {
-                                leaveCkeck = true;
-                                leaveEmployeeDetail.setNoOfDays(noOfDays1);
-
-                            }  else {
+                            } else {
                                 leaveCkeck = true;
                                 LeaveEmployeeDetail leaveEmployeeDetail3 = new LeaveEmployeeDetail();
                                 cal7.add(Calendar.DAY_OF_MONTH, -1);
@@ -1086,18 +1086,21 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             String oldLeaveDays = request.getParameter("oldLeaveDays");
                             float editBalance = 0;
                             EmployeeLeaveBalance employeeLeaveBalance2 = new EmployeeLeaveBalance();
+                            LeaveTypeMaster leaveTypeMaster2 = new LeaveTypeMaster();
+                            leaveTypeMaster2.setId(Integer.parseInt(oldLeaveId));
                             employeeLeaveBalance2.setEmployeeMaster(employeeMaster);
-                            employeeLeaveBalance2.setLeaveTypeMaster(leaveTypeMaster);
+                            employeeLeaveBalance2.setLeaveTypeMaster(leaveTypeMaster2);
                             List<?> changeBalanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance2);
                             if (!changeBalanceList.isEmpty()) {
                                 employeeLeaveBalance2 = (EmployeeLeaveBalance) balanceList.get(0);
+                                editBalance = employeeLeaveBalance2.getNoOfLeaveRemain();
+                                editBalance = editBalance + Float.parseFloat(oldLeaveDays);
+                                employeeLeaveBalance2.setNoOfLeaveRemain(editBalance);
+                                if (employeeLeaveBalance2.getLeaveTypeMaster().getId() != 9) {
+                                    employeeLeaveBalanceService.update(employeeLeaveBalance2);
+                                }
                             }
-                            editBalance = employeeLeaveBalance2.getNoOfLeaveRemain();
-                            editBalance = editBalance + Float.parseFloat(oldLeaveDays);
-                            employeeLeaveBalance2.setNoOfLeaveRemain(editBalance);
-                            if (employeeLeaveBalance2.getLeaveTypeMaster().getId() != 9) {
-                                employeeLeaveBalanceService.update(employeeLeaveBalance2);
-                            }
+
                             int leaveTypeId = leaveEmployeeDetail.getLeaveTypeMaster().getId();
                             LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(leaveTypeId);
                             if (leaveTypeMaster1.getLeaveType().equals("Paternity Leave")) {
@@ -1233,8 +1236,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
                 } catch (Exception e) {
                 }
-                  mv.setViewName("forward:leaveEmployeeDetail.htm?act=searchOwnLeaveDetail");
-                
+                mv.setViewName("forward:leaveEmployeeDetail.htm?act=searchOwnLeaveDetail");
+
 //                mv = searchSubmit(request, response);
             } else if (leaveEmployeeDetail.getStatus() == 3) {
                 if (leaveTypeMaster.getLeaveType().contains("Short Leave")) {
@@ -1255,7 +1258,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 leaveEmployeeDetailService.update(leaveEmployeeDetail);
                 request.setAttribute("successMessage",
                         "Information : Withdraw Leave Request sent Successfully.");
-                
+
                 try {
                     EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                     DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
@@ -1275,11 +1278,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
                 } catch (Exception e) {
                 }
-                
 
                 mv = viewLeaveRequest(request, response);
-                
-                
+
             }
         }
 

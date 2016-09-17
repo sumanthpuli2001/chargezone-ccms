@@ -525,7 +525,7 @@
                                         document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
                                     }
 
-                                }
+//                                }
                                 document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                                 document.getElementById('Casual Leave').innerHTML = "0";
                                 document.getElementById('Casual Leave2').innerHTML = document.getElementById('Casual Leave1').innerHTML;
@@ -857,7 +857,7 @@
                                 document.getElementById('Privilege Leave2').innerHTML = document.getElementById('Privilege Leave1').innerHTML;
                             }
                             if (strUser == "Privilege Leave") {
-                                 if (document.getElementById('Sick Leave1').innerHTML > 0) {
+//                                 if (document.getElementById('Sick Leave1').innerHTML > 0) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
                                         $("#plDiv").show();
                                         setTimeout(function () {
@@ -870,7 +870,7 @@
                                         document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
                                     }
 
-                                }
+//                                }
                                 document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                                 document.getElementById('Casual Leave').innerHTML = "0";
                                 document.getElementById('Casual Leave2').innerHTML = document.getElementById('Casual Leave1').innerHTML;

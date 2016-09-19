@@ -2517,12 +2517,13 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         calForFlexiNotSupport1.setTime(notflexibleSupportDate);
 
         calForFlexiNotSupport2.setTime(notflexibleSupportDate1);
-
+        request.setAttribute("id", id);
         if (flexible
                 == true && calForFlexiNotSupport2.get(Calendar.MONTH)
                 != calForFlexiNotSupport1.get(Calendar.MONTH)) {
 //        if (flexible == true) {
             mv.setViewName("Shift/EmployeeFlexibleDayWisePunchDataReportOfSubordinate");
+
         } else {
             mv.setViewName("Shift/EmployeeIndividualOrDateWiseShiftSearchForSubordinate");
         }
@@ -2540,11 +2541,22 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
         EmployeeShiftData employeeShiftData = new EmployeeShiftData();
         employeeShiftData.setEmployeeMaster(employeeMaster);
-        List<?> timecheck = employeeShiftDataService.readByEmployeeId(employeeShiftData,strDate);
+        List<?> timecheck = employeeShiftDataService.readByEmployeeId(employeeShiftData, strDate);
         if (timecheck.isEmpty()) {
             message = "Selected Date and Time is not valid.So You can't Apply AR";
         }
         PrintWriter out = response.getWriter();
         out.print(message);
+    }
+
+    public ModelAndView showDateWisePunchDataOfSubordinate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String date = request.getParameter("date");
+        String empId = request.getParameter("id");
+        List<?> punchList = employeeDatetimeDataService.readPuchDataDateWise(date, Integer.parseInt(empId));
+        mv.getModelMap().put("punchList", punchList);
+        mv.setViewName("Shift/ShowIndividualPuchData");
+
+        return mv;
     }
 }

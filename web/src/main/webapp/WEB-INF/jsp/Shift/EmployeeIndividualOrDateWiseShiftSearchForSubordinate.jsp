@@ -32,8 +32,8 @@
         }
     </script>
     <script>
-        function showPunchData(date) {
-            var path = 'attendanceRegularizationMaster.htm?act=showDateWisePunchData&date=' + date;
+       function showPunchData(date, id) {
+            var path = 'attendanceRegularizationMaster.htm?act=showDateWisePunchDataOfSubordinate&date=' + date+'&id=' + id;
             popupWindow = window.open(path, 'popUpWindow', 'height=300,width=500,left=500%,top=100%,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no')
 
 //             window.location = 'attendanceRegularizationMaster.htm?act=showDateWisePunchData&date=' + date;
@@ -62,8 +62,9 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form action="attendanceRegularizationMaster.htm?act=showOwnAttandance" method="post" commandName="employeeAdvanceSearch"
+        <form:form action="attendanceRegularizationMaster.htm?act=showOwnAttandanceOfSubordinate" method="post" commandName="employeeAdvanceSearch"
                    name='form1' class="form-horizontal" role="form">
+              <input type="hidden" name="id" id="id" value="${id}">
 
             <section class="content">
                 <div class="row">
@@ -76,6 +77,32 @@
                                                 <div><button type="button" class="btn-primary"  onclick="window.history.back();" title="View">Back</button></div>
                                             </div>
                                         </div>
+                                 <div class="form-group">
+
+                                    <div class="col-sm-6">
+                                        <label>Start Date<span style="color: red;font-size: 12px;">*</span></label>
+                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
+                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                            <form:input path="inDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>End Date<span style="color: red;font-size: 12px;">*</span></label>
+                                            <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
+                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                            <form:input path="outDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class=" col-sm-12" >
+                                            <button type="submit" class="btn btn-primary" style="width: 100px;" >SEARCH</button>
+                                        </div>
+                                    </div>
                                 <!--<button type="submit" class="btn btn-danger" ><i class="fa fa-trash-o"></i>&nbsp;&nbsp;Delete</button>-->
                                 <div class="box-body no-padding">
                                     <div class="row">
@@ -510,7 +537,7 @@
                                                                     <tr>
                                                                         <th>View All Punch</th>
                                                                             <c:forEach var="list" items="${map[employeeMasterList[47]]}">
-                                                                            <th style="text-align: center;"><a onclick="showPunchData('${list[0]}');">View</a>
+                                                                            <th style="text-align: center;"><a onclick="showPunchData('${list[0]}','${employeeMasterList[47]}');">View</a>
                                                                             </th>
 
                                                                         </c:forEach>

@@ -582,6 +582,13 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="UrlMaster.htm?act=viewUrlResult">
+                        <i class="fa fa-pie-chart fa-lg"></i>
+                        <span>Web Service URL</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->

@@ -337,6 +337,10 @@
     <bean id="emailAddMasterService1" class="com.bul.zydex.service.EmailAddMasterServiceImpl">
         <property name="emailAddMasterDAO" ref="emailAddMasterDAO1"/>
     </bean>
+    
+    <bean id="urlMasterService1" class="com.bul.zydex.service.url.UrlMasterServiceImpl">
+        <property name="urlMasterDAO" ref="urlMasterDAO1"/>
+    </bean>  
     <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
         <property name="beanNames">
             <list>

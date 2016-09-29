@@ -266,10 +266,11 @@ public class ExpenseMasterController extends ExpenseMasterAbstract {
             expenseMaster.setTravelStartDate(request.getParameter("travelStartDate"));
             expenseMaster.setTravelEndDate(request.getParameter("travelEndDate"));
             expenseMasterService.create(expenseMaster);
+          
             if (btnType.equals("Submit")) {
 
-                try {
-
+                try { 
+                    mailSendExpenseApply(request);
                     EmailTemplate emailTemplate = new EmailTemplate();
                     EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                     DesignationMaster designationMaster1 = new DesignationMaster();

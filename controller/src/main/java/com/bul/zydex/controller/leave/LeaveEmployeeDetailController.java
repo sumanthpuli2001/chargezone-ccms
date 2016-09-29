@@ -227,7 +227,13 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     String finalDateSet = sdf.format(dateSet);
                     leaveEmployeeDetail1.setStartDate(finalDateSet);
                     int dayOfWeek = cal6.get(Calendar.WEEK_OF_MONTH);
-                    if (dayOfWeek != 2) {
+                    boolean secondSatCheck = false;
+                    if (employeeMaster.getZydexLocationMaster().getId() == 1 || employeeMaster.getZydexLocationMaster().getId() == 6) {
+                        if (dayOfWeek == 2) {
+                            secondSatCheck = true;
+                        }
+                    }
+                    if (!secondSatCheck) {
                         List<?> satLeaveListCheck = leaveEmployeeDetailService.leaveCheck(leaveEmployeeDetail1);
                         if (!satLeaveListCheck.isEmpty()) {
                             LeaveEmployeeDetail leaveEmployeeDetail2 = (LeaveEmployeeDetail) satLeaveListCheck.get(0);
@@ -338,7 +344,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                 }
                                 float noOfDays = 1;
                                 float noOfDays1 = 1 + leaveEmployeeDetail.getNoOfDays();
-                                if (employeeLeaveBalance1.getNoOfLeaveRemain() >= noOfDays1) {
+                                if (employeeLeaveBalance1.getNoOfLeaveRemain() >= noOfDays1 && leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster1.getMaxDayAllowedLeave())) {
                                     leaveCkeck = true;
                                     leaveEmployeeDetail.setNoOfDays(noOfDays1);
 
@@ -469,6 +475,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         } else {
                             leaveEmployeeDetail.setNoOfDays(Float.parseFloat("1"));
                             leaveEmployeeDetailService.create(leaveEmployeeDetail);
+
                             balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
                             noOfDay = leaveEmployeeDetail.getNoOfDays();
                             balanceDay = balanceDay - noOfDay;
@@ -480,6 +487,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             mv = searchOwnLeaveDetail(request, response);
                             //Emailtemplate for submit click .....
                             try {
+                                Mailsend(request);
+                                String startdate = leaveEmployeeDetail.getStartDate();
+                                String enddate = leaveEmployeeDetail.getEndDate();
                                 EmailTemplate emailTemplate = new EmailTemplate();
                                 EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                                 DesignationMaster designationMaster = new DesignationMaster();
@@ -494,6 +504,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                 Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
                                 String msg = emailTemplate.getBodytext();
                                 msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                                msg = msg.replaceAll("\\{start_date\\}", startdate);
+                                msg = msg.replaceAll("\\{end_date\\}", enddate);
                                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                 sendMail.sendMail(from, To, Subject, msg);
@@ -551,6 +563,10 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
                         } else {
                             leaveEmployeeDetailService.create(leaveEmployeeDetail);
+                            try {
+                                Mailsend(request);
+                            } catch (Exception e) {
+                            }
                             int leaveTypeId = leaveEmployeeDetail.getLeaveTypeMaster().getId();
                             LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(leaveTypeId);
                             if (leaveTypeMaster1.getLeaveType().equals("Paternity Leave")) {
@@ -592,6 +608,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
                             //Emailtemplate for submit click .....
                             try {
+                                Mailsend(request);
+                                String startdate = leaveEmployeeDetail.getStartDate();
+                                String enddate = leaveEmployeeDetail.getEndDate();
                                 EmailTemplate emailTemplate = new EmailTemplate();
                                 EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                                 DesignationMaster designationMaster = new DesignationMaster();
@@ -606,6 +625,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                 Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
                                 String msg = emailTemplate.getBodytext();
                                 msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                                msg = msg.replaceAll("\\{start_date\\}", startdate);
+                                msg = msg.replaceAll("\\{end_date\\}", enddate);
                                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                 sendMail.sendMail(from, To, Subject, msg);
@@ -651,6 +672,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
                         //Emailtemplate for submit click .....
                         try {
+                            Mailsend(request);
+                            String startdate = leaveEmployeeDetail.getStartDate();
+                            String enddate = leaveEmployeeDetail.getEndDate();
                             EmailTemplate emailTemplate = new EmailTemplate();
                             EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                             DesignationMaster designationMaster = new DesignationMaster();
@@ -665,6 +689,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
                             String msg = emailTemplate.getBodytext();
                             msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                            msg = msg.replaceAll("\\{start_date\\}", startdate);
+                            msg = msg.replaceAll("\\{end_date\\}", enddate);
                             msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                             msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                             sendMail.sendMail(from, To, Subject, msg);
@@ -1206,8 +1232,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
             }
         } else if (btnSubmit.equals("Withdraw")) {
-            leaveTypeMaster=leaveEmployeeDetail.getLeaveTypeMaster();
-            int leaveid=leaveTypeMaster.getId();
+            leaveTypeMaster = leaveEmployeeDetail.getLeaveTypeMaster();
+            int leaveid = leaveTypeMaster.getId();
             
 
             if (leaveid != 10) {
@@ -1290,7 +1316,23 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         Date startdate = sdf1.parse(startday);
                         Date enddate = sdf1.parse(endday);
                         float noOfdays = leaveEmployeeDetail2.getNoOfDays();
-                        float diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)) + 1.0);
+                        String startStatus = leaveEmployeeDetail2.getStartDateStatus();
+                        String endStatus = leaveEmployeeDetail2.getEndDateStatus();
+                        float diffInDays = 0;
+                        if (startday.equals(endday)) {
+                            if (startStatus.equals("Fullday")) {
+                                diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)) + 1.0);
+                            } else {
+                                diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)) + 0.5);
+                            }
+                        } else if (startStatus.equals("Fullday") && endStatus.equals("Fullday")) {
+                            diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)) + 1.0);
+                        } else if(!startStatus.equals("Fullday") && !endStatus.equals("Fullday")){
+                            diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)));
+                        }else{
+                             diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)) + 0.5);
+                        }
+
                         if (diffInDays != noOfdays) {
                             balanceDay = employeeLeaveBalance2.getNoOfLeaveRemain();
                             balanceDay = balanceDay + 1;
@@ -1669,6 +1711,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 request.setAttribute("successMessage",
                         "Information : The Leave Approved successfully.");
                 try {
+                    String startdate = leaveEmployeeDetail.getStartDate();
+                    String enddate = leaveEmployeeDetail.getEndDate();
                     EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                     DesignationMaster designationMaster = new DesignationMaster();
                     designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
@@ -1688,6 +1732,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             subject = subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
                             String msg = emailTemplate1.getBodytext();
                             msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                            msg = msg.replaceAll("\\{start_date\\}", startdate);
+                            msg = msg.replaceAll("\\{end_date\\}", enddate);
                             msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                             msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                             sendMail.sendMail(from, To, subject, msg);
@@ -1708,12 +1754,35 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                         subject1 = subject1.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
                                         String msg1 = emailTemplate1.getBodytext();
                                         msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{start_date\\}", startdate);
+                                        msg1 = msg1.replaceAll("\\{end_date\\}", enddate);
                                         msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                         msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                         sendMail.sendMail(from1, To1, subject1, msg1);
                                     }
                                 }
                             }
+                            List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
+                            if (!allDeptmailList.isEmpty()) {
+                                EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
+                                String emailId = emailAddMaster1.getEmailId();
+                                for (String emailId1 : emailId.split(",")) {
+                                    if (!emailId1.equals("")) {
+                                        String To1 = emailId1;
+                                        String from1 = employeeMasterModel.getOfficeEmailId();
+                                        String subject1 = emailTemplate1.getSubject();
+                                        subject1 = subject1.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                                        String msg1 = emailTemplate1.getBodytext();
+                                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{start_date\\}", startdate);
+                                        msg1 = msg1.replaceAll("\\{end_date\\}", enddate);
+                                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from1, To1, subject1, msg1);
+                                    }
+                                }
+                            }
+
                             List<?> gmOrStateHeadMailSend = employeeMasterService.readForSendMailToAll(employeeMaster2);
                             if (!gmOrStateHeadMailSend.isEmpty()) {
 
@@ -1729,6 +1798,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                         subject3 = subject3.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
                                         String msg3 = emailTemplate1.getBodytext();
                                         msg3 = msg3.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                                        msg3 = msg3.replaceAll("\\{start_date\\}", startdate);
+                                        msg3 = msg3.replaceAll("\\{end_date\\}", enddate);
                                         msg3 = msg3.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                         msg3 = msg3.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                         sendMail.sendMail(from3, To3, subject3, msg3);

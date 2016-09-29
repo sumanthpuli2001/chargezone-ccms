@@ -164,5 +164,6 @@
     <bean id="appraisalkraActivityDAO1" class="com.bul.zydex.dao.appraisalPerformance.AppraisalkraActivityDAOImpl" parent="sessionFactoryConfig" />
     <bean id="emailAddMasterDAO1" class="com.bul.zydex.dao.EmailAddMasterDAOImpl" parent="sessionFactoryConfig" />
     <bean id="employeePunchForMobileAppDAO1" class="com.bul.zydex.dao.mobileapp.EmployeePunchForMobileAppDAOImpl" parent="sessionFactoryConfig" />
-
+    
+    <bean id="urlMasterDAO1" class="com.bul.zydex.dao.url.UrlMasterDAOImpl" parent="sessionFactoryConfig"/>
 </beans>

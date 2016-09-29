@@ -30,4 +30,15 @@ public class EmailAddMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Emai
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readAllDept(String modulename) {
+        String query = "";
+
+        query += " FROM EmailAddMaster a"
+                + " WHERE a.moduleName = '"+modulename+"'"
+                + " and a.departmentMaster.id=70";
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

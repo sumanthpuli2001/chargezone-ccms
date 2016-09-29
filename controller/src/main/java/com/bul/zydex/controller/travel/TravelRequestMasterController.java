@@ -224,11 +224,12 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                     mv = applyClick(request, response);
 
                 } else {
-//                    travelRequestMaster.setStatus(11); // Go to Travel Admin
+//                    travelRequestMaster.setStatus(11); // Go to Travel Adm
                     travelRequestMasterService.create(travelRequestMaster);
 
                     // For Emailtemplate
                     try {
+                        mailSendtTravelapply(request);
                         EmailTemplate emailTemplate = new EmailTemplate();
                         EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                         DesignationMaster designationMaster = new DesignationMaster();
@@ -270,6 +271,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                             travelDetail.setPolicyDeviation(policyDeviation);
                             travelDetail.setComments(comments);
                             travelDetailService.create(travelDetail);
+
                         } else {
                             request.setAttribute("failureMessage",
                                     "Error : Please Enter the Valid Data.");
@@ -325,6 +327,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
             }
         } else {
             travelRequestMasterService.create(travelRequestMaster);
+            mailSendtTravelapply(request);
 
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
@@ -1267,6 +1270,25 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                                         }
                                     }
 
+                                }
+
+                            }
+                        }
+                        List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
+                        if (!allDeptmailList.isEmpty()) {
+                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
+                            String emailId = emailAddMaster1.getEmailId();
+                            for (String emailId1 : emailId.split(",")) {
+                                if (!emailId1.equals("")) {
+                                    String To1 = emailId1;
+                                    String from1 = employeemastermodel.getOfficeEmailId();
+                                    String subject1 = emailtemplate.getSubject();
+                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                                    String msg1 = emailtemplate.getBodytext();
+                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                    sendMail.sendMail(from1, To1, subject1, msg1);
                                 }
                             }
                         }

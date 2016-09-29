@@ -108,6 +108,7 @@
                                         <div class="col-sm-6">
                                             <form:select path="departmentMaster.id" class="form-control">
                                                 <form:option value="" label="-- Select --" ></form:option>
+                                                <%--<form:option value="ALL" label="ALL" ></form:option>--%>
                                                 <form:options items="${deptMap}"></form:options>
                                             </form:select>
                                             <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>

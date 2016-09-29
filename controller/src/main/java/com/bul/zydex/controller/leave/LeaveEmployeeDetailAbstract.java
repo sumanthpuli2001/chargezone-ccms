@@ -8,7 +8,9 @@ package com.bul.zydex.controller.leave;
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.COffLeaveMaster;
 import com.bul.zydex.model.DepartmentMaster;
+import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailAddMaster;
+import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeShiftData;
@@ -42,6 +44,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.springframework.validation.BindException;
 import org.springframework.validation.Validator;
 
 /**
@@ -71,8 +74,7 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
     public void setUserRightMasterService(UserRightMasterService<UserRightMaster> userRightMasterService) {
         this.userRightMasterService = userRightMasterService;
     }
-    
-   
+
     public EmployeeShiftDataService<EmployeeShiftData> getEmployeeShiftDataService() {
         return employeeShiftDataService;
     }
@@ -172,11 +174,11 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
     protected void addleaveType(HttpServletRequest request) {
         List list = leaveTypeMasterService.read();
         UserMaster user = (UserMaster) request.getSession().getAttribute("user");
-        
+
         EmployeeMaster employeeSession = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
         zydexLocationMaster = zydexLocationMasterService.readById(employeeSession.getZydexLocationMaster().getId());
-        
+
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
         employeeMaster.setUserMaster(user);
@@ -193,7 +195,7 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
 //          if((zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D")) && leaveTypeMaster.getLeaveType().equals("Short Leave")){
 //              
 //          }else{
-              
+
             List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
             if (!balanceList.isEmpty()) {
                 employeeLeaveBalance = (EmployeeLeaveBalance) balanceList.get(0);
@@ -305,6 +307,74 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
 
         }
         request.setAttribute("empleaveTypemap", leaveTypemap);
+    }
+
+    public void Mailsend(HttpServletRequest request) throws Exception {
+
+        try {
+            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            EmployeeMaster employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+            DesignationMaster designationMaster = new DesignationMaster();
+            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            EmployeeMaster employeeMaster2 = new EmployeeMaster();
+            EmailTemplate emailTemplate1 = new EmailTemplate();
+            // id =7 for approve leave request...
+            emailTemplate1 = emailTemplateService.readById(6);
+            int empID = employeeMasterModel.getId();
+            String leaveid = request.getParameter("id");
+            employeeMaster2 = employeeMasterService.readById(empID);
+            LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+            BindException errors = new BindException(leaveEmployeeDetail, "leaveEmployeeDetail");
+            bind(request, leaveEmployeeDetail);
+            String startdate = leaveEmployeeDetail.getStartDate();
+            String enddate = leaveEmployeeDetail.getEndDate();
+
+            String name = "Leave";
+            EmailAddMaster emailAddMaster = new EmailAddMaster();
+            emailAddMaster.setModuleName(name);
+            emailAddMaster.setDepartmentMaster(employeeMaster2.getDepartmentMaster());
+            List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+            if (!emailSendList.isEmpty()) {
+                EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                String emailId = emailAddMaster1.getEmailId();
+                for (String emailId1 : emailId.split(",")) {
+                    if (!emailId1.equals("")) {
+                        String To1 = emailId1;
+                        String from1 = employeeMasterModel.getOfficeEmailId();
+                        String subject1 = emailTemplate1.getSubject();
+                        subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg1 = emailTemplate1.getBodytext();
+                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{start_date\\}", startdate);
+                        msg1 = msg1.replaceAll("\\{end_date\\}", enddate);
+                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from1, To1, subject1, msg1);
+                    }
+                }
+            }
+            List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
+            if (!allDeptmailList.isEmpty()) {
+                EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
+                String emailId = emailAddMaster1.getEmailId();
+                for (String emailId1 : emailId.split(",")) {
+                    if (!emailId1.equals("")) {
+                        String To1 = emailId1;
+                        String from1 = employeeMasterModel.getOfficeEmailId();
+                        String subject1 = emailTemplate1.getSubject();
+                        subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg1 = emailTemplate1.getBodytext();
+                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{start_date\\}", startdate);
+                        msg1 = msg1.replaceAll("\\{end_date\\}", enddate);
+                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from1, To1, subject1, msg1);
+                    }
+                }
+            }
+        } catch (Exception e) {
+        }
     }
 
 }

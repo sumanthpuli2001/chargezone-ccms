@@ -326,4 +326,8 @@ public List<?> readEmployeeForPlant(){
       public List<?> readForSendMailToAll(T object){
           return employeeMasterDAO.readForSendMailToAll(object);
     }
+    @Override
+     public List<?> readDepartmentWiseEmployee(T object){
+          return employeeMasterDAO.readDepartmentWiseEmployee(object);
+    }
 }

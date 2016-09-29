@@ -63,5 +63,7 @@ public interface LeaveEmployeeDetailDAO<T> extends GenericsDAO<T> {
     public List<?> readDate(T object);
 
     public List<?> leaveCheck(T object);
+    
+    public List<?> leaveCheckStartDate(T object);
 
 }

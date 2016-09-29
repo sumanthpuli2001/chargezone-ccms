@@ -6,6 +6,8 @@
 package com.bul.zydex.webservice;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.CurrencyMaster;
+import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.ExpenseMaster;
@@ -22,6 +24,7 @@ import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.service.EmailTemplateService;
 import com.bul.zydex.service.UserMasterService;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
+import com.bul.zydex.service.emp.DesignationMasterService;
 import com.bul.zydex.service.emp.EmployeeMasterService;
 import com.bul.zydex.service.expense.ExpenseMasterService;
 import com.bul.zydex.service.expense.ExpenseReconsilationService;
@@ -35,6 +38,9 @@ import com.bul.zydex.service.travel.TravelRequestMasterService;
 import com.bul.zydex.util.SendMail;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import org.json.JSONException;
@@ -45,10 +51,9 @@ import org.springframework.validation.Validator;
  *
  * @author admin
  */
-public abstract class ExpenseReportAbstarct extends CustomAbstract{
+public abstract class ExpenseReportAbstarct extends CustomAbstract {
 
-    
-    
+    protected DesignationMasterService<DesignationMaster> designationMasterService;
     protected ExpenseMasterService<ExpenseMaster> expenseMasterService;
     protected Validator expenseMasterValidator;
     protected LevelMasterService<LevelMaster> levelMasterService;
@@ -62,6 +67,31 @@ public abstract class ExpenseReportAbstarct extends CustomAbstract{
     protected EmailTemplateService<EmailTemplate> emailTemplateService;
     protected UserRightMasterService<UserRightMaster> userRightMasterService;
     protected SendMail sendMail;
+
+    public DesignationMasterService<DesignationMaster> getDesignationMasterService() {
+        return designationMasterService;
+    }
+
+    public void setDesignationMasterService(DesignationMasterService<DesignationMaster> designationMasterService) {
+        this.designationMasterService = designationMasterService;
+    }
+
+    public EmailTemplateService<EmailTemplate> getEmailTemplateService() {
+        return emailTemplateService;
+    }
+
+    public void setEmailTemplateService(EmailTemplateService<EmailTemplate> emailTemplateService) {
+        this.emailTemplateService = emailTemplateService;
+    }
+
+    public SendMail getSendMail() {
+        return sendMail;
+    }
+
+    public void setSendMail(SendMail sendMail) {
+        this.sendMail = sendMail;
+    }
+    
 
     public TravelRequestMasterService<TravelRequestMaster> getTravelRequestMasterService() {
         return travelRequestMasterService;
@@ -150,7 +180,8 @@ public abstract class ExpenseReportAbstarct extends CustomAbstract{
     public void setUserRightMasterService(UserRightMasterService<UserRightMaster> userRightMasterService) {
         this.userRightMasterService = userRightMasterService;
     }
-     public JSONObject doPost(HttpServletRequest request)
+
+    public JSONObject doPost(HttpServletRequest request)
             throws ServletException, IOException, JSONException {
         StringBuffer jb = new StringBuffer();
         String line = null;
@@ -159,11 +190,55 @@ public abstract class ExpenseReportAbstarct extends CustomAbstract{
             while ((line = reader.readLine()) != null) {
                 jb.append(line);
             }
-        } catch (Exception e) { /*report an error*/ }
-         JSONObject jsonObject = new JSONObject(jb.toString());
+        } catch (Exception e) {
+            /*report an error*/ }
+        JSONObject jsonObject = new JSONObject(jb.toString());
 
         return jsonObject;
-  
+
     }
 
+    protected void readcurrencyList(HttpServletRequest request) {
+        CurrencyMaster currencyMaster = new CurrencyMaster();
+        List<?> currencyList = currencyMasterService.read();
+        Map<Integer, String> currencyMap = new HashMap<>();
+        for (Object o : currencyList) {
+            currencyMaster = (CurrencyMaster) o;
+            currencyMap.put(currencyMaster.getId(), currencyMaster.getCurrencyName() + "(" + currencyMaster.getCurrencyCode() + ")");
+        }
+
+        request.setAttribute("currencyMap", currencyMap);
+    }
+
+    protected void selectTravelNo(HttpServletRequest request, UserMaster user) {
+        TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        employeeMaster.setUserMaster(user);
+        List<?> empList = employeeMasterService.readByUserName(employeeMaster);
+        if (!empList.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empList.get(0);
+        }
+        travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+        List<?> travelList = travelRequestMasterService.readTotalRequest(travelRequestMaster);
+        Map<Integer, String> travelNo = new HashMap<>();
+        for (Object o : travelList) {
+            travelRequestMaster = (TravelRequestMaster) o;
+            if (!travelRequestMaster.getTravelType().equals("Local")) {
+                travelNo.put(travelRequestMaster.getId(), travelRequestMaster.getTravelRequestNo());
+            }
+        }
+        request.setAttribute("travelNo", travelNo);
+    }
+
+    protected void policyList(HttpServletRequest request) {
+        PolicyMaster policyMaster = new PolicyMaster();
+        List<?> policyList = policyMasterService.read();
+        Map<Integer, String> dm = new HashMap<>();
+        for (Object o : policyList) {
+            policyMaster = (PolicyMaster) o;
+            dm.put(policyMaster.getId(), policyMaster.getPolicyName());
+        }
+
+        request.setAttribute("policyMap", dm);
+    }
 }

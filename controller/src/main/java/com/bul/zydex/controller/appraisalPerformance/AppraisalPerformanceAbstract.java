@@ -17,6 +17,9 @@ import com.bul.zydex.model.AppraisalkraActivity;
 import com.bul.zydex.model.CompetencyEvaluationMaster;
 import com.bul.zydex.model.CompetencyEvaluationTextmaster;
 import com.bul.zydex.model.DepartmentMaster;
+import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.EmailAddMaster;
+import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.KraCategory;
 import com.bul.zydex.model.UpdateAppraisalPerformanceActivities;
@@ -170,7 +173,7 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 
     public void setUpdateAppraisalPerformanceActivitiesService(UpdateAppraisalPerformanceActivitiesService<UpdateAppraisalPerformanceActivities> updateAppraisalPerformanceActivitiesService) {
         this.updateAppraisalPerformanceActivitiesService = updateAppraisalPerformanceActivitiesService;
-    } 
+    }
 
     public AppraisalkraActivityService<AppraisalkraActivity> getAppraisalkraActivityService() {
         return appraisalkraActivityService;
@@ -179,7 +182,6 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
     public void setAppraisalkraActivityService(AppraisalkraActivityService<AppraisalkraActivity> appraisalkraActivityService) {
         this.appraisalkraActivityService = appraisalkraActivityService;
     }
-
 
     public void selectedEmployeeDate(HttpServletRequest request,
             HttpServletResponse response, String userid) throws Exception {
@@ -629,13 +631,13 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
            // Date eDate = sdf.parse(EndDate);
             //Date midDate = sdf.parse(MidDate);
             //Date midEndDate = sdf.parse(MidEndDate);
-           // Date yearEndStartDate = sdf.parse(YearEndStartDate);
+            // Date yearEndStartDate = sdf.parse(YearEndStartDate);
             Date yearEndDate = sdf.parse(YearEndDate);
             boolean Tflag = false;
             boolean flag1 = false;
             boolean flag2 = false;
-            if((now.after(strDate) && now.before(yearEndDate) || now.equals(strDate) || now.equals(yearEndDate))){
-                Tflag=true;
+            if ((now.after(strDate) && now.before(yearEndDate) || now.equals(strDate) || now.equals(yearEndDate))) {
+                Tflag = true;
             }
 //            if ((now.after(strDate) && now.before(eDate)) || now.equals(strDate) || now.equals(eDate)) {
 //                flag = true;
@@ -651,7 +653,8 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 
         }
     }
-     public void managerDateStartToEnd(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    public void managerDateStartToEnd(HttpServletRequest request, HttpServletResponse response) throws Exception {
         AppraisalFillingData appraisalFillingData = new AppraisalFillingData();
 
         Calendar cal = Calendar.getInstance();
@@ -668,11 +671,9 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
         if (!appraisalFilling.isEmpty()) {
             appraisalFillingData = (AppraisalFillingData) appraisalFilling.get(0);
 
-            
             boolean Tflag = false;
             boolean flag1 = false;
             boolean flag2 = false;
-
 
             //////////////////////Manager Time Line//////////////////////////////////////////
             String ManagerStartDate = appraisalFillingData.getManagerStartDate();
@@ -694,12 +695,182 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 //            boolean flag2 = false;
             if ((now.after(managerstrDate) && now.before(manageryearEndDate)) || now.equals(managerstrDate) || now.equals(manageryearEndDate)) {
                 Tflag = true;
-            } 
+            }
 
             request.setAttribute("Tflag", Tflag);
-            
 
         }
-}
-}
+    }
 
+    public void mailSendPmpStartHalfapply(HttpServletRequest request) throws Exception {
+
+        try {
+            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            EmployeeMaster employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+            DesignationMaster designationMaster = new DesignationMaster();
+            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            EmployeeMaster employeeMaster2 = new EmployeeMaster();
+            EmailTemplate emailTemplate1 = new EmailTemplate();
+            // id =7 for approve leave request...
+            emailTemplate1 = emailTemplateService.readById(113);
+            int empID = employeeMasterModel.getId();
+            employeeMaster2 = employeeMasterService.readById(empID);
+
+            String name = "PMP";
+            EmailAddMaster emailAddMaster = new EmailAddMaster();
+            emailAddMaster.setModuleName(name);
+            emailAddMaster.setDepartmentMaster(employeeMaster2.getDepartmentMaster());
+            List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+            if (!emailSendList.isEmpty()) {
+                EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                String emailId = emailAddMaster1.getEmailId();
+                for (String emailId1 : emailId.split(",")) {
+                    if (!emailId1.equals("")) {
+                        String To1 = emailId1;
+                        String from1 = employeeMasterModel.getOfficeEmailId();
+                        String subject1 = emailTemplate1.getSubject();
+                        subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg1 = emailTemplate1.getBodytext();
+                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from1, To1, subject1, msg1);
+                    }
+                }
+            }
+            List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
+            if (!allDeptmailList.isEmpty()) {
+                EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
+                String emailId = emailAddMaster1.getEmailId();
+                for (String emailId1 : emailId.split(",")) {
+                    if (!emailId1.equals("")) {
+                        String To1 = emailId1;
+                        String from1 = employeeMasterModel.getOfficeEmailId();
+                        String subject1 = emailTemplate1.getSubject();
+                        subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg1 = emailTemplate1.getBodytext();
+                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from1, To1, subject1, msg1);
+                    }
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
+    public void mailSendPmpMidHalfapply(HttpServletRequest request) throws Exception {
+
+        try {
+            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            EmployeeMaster employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+            DesignationMaster designationMaster = new DesignationMaster();
+            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            EmployeeMaster employeeMaster2 = new EmployeeMaster();
+            EmailTemplate emailTemplate1 = new EmailTemplate();
+            // id =7 for approve leave request...
+            emailTemplate1 = emailTemplateService.readById(114);
+            int empID = employeeMasterModel.getId();
+            employeeMaster2 = employeeMasterService.readById(empID);
+
+            String name = "PMP";
+            EmailAddMaster emailAddMaster = new EmailAddMaster();
+            emailAddMaster.setModuleName(name);
+            emailAddMaster.setDepartmentMaster(employeeMaster2.getDepartmentMaster());
+            List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+            if (!emailSendList.isEmpty()) {
+                EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                String emailId = emailAddMaster1.getEmailId();
+                for (String emailId1 : emailId.split(",")) {
+                    if (!emailId1.equals("")) {
+                        String To1 = emailId1;
+                        String from1 = employeeMasterModel.getOfficeEmailId();
+                        String subject1 = emailTemplate1.getSubject();
+                        subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg1 = emailTemplate1.getBodytext();
+                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from1, To1, subject1, msg1);
+                    }
+                }
+            }
+            List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
+            if (!allDeptmailList.isEmpty()) {
+                EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
+                String emailId = emailAddMaster1.getEmailId();
+                for (String emailId1 : emailId.split(",")) {
+                    if (!emailId1.equals("")) {
+                        String To1 = emailId1;
+                        String from1 = employeeMasterModel.getOfficeEmailId();
+                        String subject1 = emailTemplate1.getSubject();
+                        subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg1 = emailTemplate1.getBodytext();
+                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from1, To1, subject1, msg1);
+                    }
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
+    public void mailSendPmpEndHalfapply(HttpServletRequest request) throws Exception {
+
+        try {
+            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            EmployeeMaster employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+            DesignationMaster designationMaster = new DesignationMaster();
+            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            EmployeeMaster employeeMaster2 = new EmployeeMaster();
+            EmailTemplate emailTemplate1 = new EmailTemplate();
+            // id =7 for approve leave request...
+            emailTemplate1 = emailTemplateService.readById(115);
+            int empID = employeeMasterModel.getId();
+            employeeMaster2 = employeeMasterService.readById(empID);
+
+            String name = "PMP";
+            EmailAddMaster emailAddMaster = new EmailAddMaster();
+            emailAddMaster.setModuleName(name);
+            emailAddMaster.setDepartmentMaster(employeeMaster2.getDepartmentMaster());
+            List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+            if (!emailSendList.isEmpty()) {
+                EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                String emailId = emailAddMaster1.getEmailId();
+                for (String emailId1 : emailId.split(",")) {
+                    if (!emailId1.equals("")) {
+                        String To1 = emailId1;
+                        String from1 = employeeMasterModel.getOfficeEmailId();
+                        String subject1 = emailTemplate1.getSubject();
+                        subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg1 = emailTemplate1.getBodytext();
+                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from1, To1, subject1, msg1);
+                    }
+                }
+            }
+            List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
+            if (!allDeptmailList.isEmpty()) {
+                EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
+                String emailId = emailAddMaster1.getEmailId();
+                for (String emailId1 : emailId.split(",")) {
+                    if (!emailId1.equals("")) {
+                        String To1 = emailId1;
+                        String from1 = employeeMasterModel.getOfficeEmailId();
+                        String subject1 = emailTemplate1.getSubject();
+                        subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg1 = emailTemplate1.getBodytext();
+                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from1, To1, subject1, msg1);
+                    }
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
+}

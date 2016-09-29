@@ -28,7 +28,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Attendance Regularization Approve List: </h1>
+            <h1>Attendance List: </h1>
             <div style="float: right"></div>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>

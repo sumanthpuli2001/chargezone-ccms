@@ -279,7 +279,8 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
             }
         }
         tempStr += "]";
-        request.setAttribute("preList1", tempStr);
+        request
+                .setAttribute("preList1", tempStr);
     }
 
     public void selectedEmployeeLevel1(HttpServletRequest request,

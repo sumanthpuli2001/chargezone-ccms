@@ -224,6 +224,7 @@ public class PerformanceImprovementPlanMasterController extends PerformanceImpro
 
         // For Emailtemplate
         try {
+            mailSendPipApply(request);
             EmailTemplate emailTemplate = new EmailTemplate();
             EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
             DesignationMaster designationMaster = new DesignationMaster();

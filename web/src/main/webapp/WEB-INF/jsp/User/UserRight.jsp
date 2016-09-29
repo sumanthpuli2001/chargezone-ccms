@@ -219,8 +219,15 @@
                                                         <label  style="font-weight: normal">Gavasad Plant Attendance Mgt.</label>
 
                                                     </div>
+
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="departmentWiseAttendance"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Department Wise Attendance</label>
+
                                                     </div>
-                                                        
+                                                </div>
+
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div><!-- /.tab-content -->

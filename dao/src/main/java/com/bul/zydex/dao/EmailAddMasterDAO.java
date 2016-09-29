@@ -15,4 +15,5 @@ public interface EmailAddMasterDAO<T> extends GenericsDAO<T>{
     
    public List<?> readByName(T object);
     
+   public List<?> readAllDept(String modulename);
 }

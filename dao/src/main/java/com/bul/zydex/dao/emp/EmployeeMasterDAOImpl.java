@@ -54,8 +54,8 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         query += " Select a.employeeId, a.employeeName, b.designationName, d.level, c.departmentName, lm.location ,a.reportingManagerLevel1, a.company, a.contactNo2 "
                 + "FROM EmployeeMaster a"
-                + " LEFT JOIN a.designationMaster b" 
-               + " LEFT JOIN a.departmentMaster c"
+                + " LEFT JOIN a.designationMaster b"
+                + " LEFT JOIN a.departmentMaster c"
                 + " LEFT JOIN a.levelMaster d"
                 + " LEFT JOIN a.locationMaster lm"
                 + " WHERE a.userMaster.id = " + employeeMaster.getUserMaster().getId();
@@ -1762,14 +1762,27 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " left join a4.levelMaster b4 "
                 + " where a4.id=a.reportingManagerLevel5"
                 + " and b4.level in ('2D','3A','3B','3C','4A','4B','4C','5A','5B','5C','5D'))"
-//                + " (Select a5.emailAddress "
-//                + " From  EmployeeMaster a5 "
-//                + " left join a5.levelMaster b5 "
-//                + " where a5.id=a.reportingManagerLevel2"
-//                + " and b5.level in ('2D','3A','3B','3C','4A','4B','4C','5A','5B','5C','5D'))"
-////               
+                //                + " (Select a5.emailAddress "
+                //                + " From  EmployeeMaster a5 "
+                //                + " left join a5.levelMaster b5 "
+                //                + " where a5.id=a.reportingManagerLevel2"
+                //                + " and b5.level in ('2D','3A','3B','3C','4A','4B','4C','5A','5B','5C','5D'))"
+                ////               
                 + " FROM EmployeeMaster a "
                 + " Where a.id=" + employeeMaster.getId();
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readDepartmentWiseEmployee(T object) {
+        EmployeeMaster employeeMaster = (EmployeeMaster) object;
+        String query = "";
+        query += " SELECT a"
+                + " FROM EmployeeMaster a "
+                + " left join a.departmentMaster b"
+                + " Where ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) "
+                + " AND b.id=" + employeeMaster.getDepartmentMaster().getId();
         return getHibernateTemplate().find(query);
     }
 

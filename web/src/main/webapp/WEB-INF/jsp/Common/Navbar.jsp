@@ -75,9 +75,10 @@
                             <li><a href="leaveTypeMaster.htm?act=leaveExcelUpload"><i class="fa fa-circle-o"></i>Leave Excel Upload</a></li>
                             <li><a href="leaveEncashment.htm?act=approveNRejectResult"><i class="fa fa-circle-o"></i>Leave Encashment Request</a></li>
                             <li><a href="leaveEmployeeDetail.htm?act=employeeLeaveApplication"><i class="fa fa-circle-o"></i>Employee Leave Application</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.userRight.employee}">
-                                <c:if test="${sessionScope.checkReportingManager}">
+
+                        </c:if>
+                        <c:if test="${sessionScope.userRight.employee}">
+                            <c:if test="${sessionScope.checkReportingManager}">
                                 <li><a href="leaveEmployeeDetail.htm?act=searchOwnLeaveDetail"><i class="fa fa-circle-o"></i>Leave Application</a></li>
                                     <c:if test="${fn:contains(level,'4')}">
                                     <!--<li><a href="cOffLeaveRequest.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>C-Off Leave Request</a></li>-->
@@ -131,6 +132,10 @@
                             <li><a href="attendanceRegularizationMaster.htm?act=subOrdinateAttendanceView"><i class="fa fa-circle-o"></i>Subordinates Attendance View</a></li>
                             <!--<li><a href="attendanceRegularizationMaster.htm?act=approvedList"><i class="fa fa-circle-o"></i>Approved Request</a></li>-->
                         </c:if>
+                        <c:if test="${sessionScope.userRight.departmentWiseAttendance}">
+                            <li><a href="attendanceRegularizationMaster.htm?act=departmentWiseAttendanceView"><i class="fa fa-circle-o"></i>Department Wise Attendance</a></li>
+
+                        </c:if>  
 
                     </ul>
                 </li>
@@ -583,7 +588,7 @@
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="UrlMaster.htm?act=viewUrlResult">
+                    <a href="urlMaster.htm?act=viewUrlResult">
                         <i class="fa fa-pie-chart fa-lg"></i>
                         <span>Web Service URL</span>
                         <i class="fa fa-angle-left pull-right"></i>

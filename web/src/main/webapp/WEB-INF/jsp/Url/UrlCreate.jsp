@@ -36,7 +36,7 @@
             <h1>Web Service URL: </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Leave Type Create</li>
+                <li class="active">Url Create</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">

@@ -444,6 +444,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                             msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                             sendMail.sendMail(from, To, Subject, msg);
+                            mailSendPmpStartHalfapply(request);
                         } catch (Exception e) {
 
                         }
@@ -470,6 +471,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                             msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                             sendMail.sendMail(from, To, Subject, msg);
+                            mailSendPmpMidHalfapply(request);
                         } catch (Exception e) {
 
                         }
@@ -496,6 +498,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                             msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                             sendMail.sendMail(from, To, Subject, msg);
+                            mailSendPmpEndHalfapply(request);
                         } catch (Exception e) {
 
                         }

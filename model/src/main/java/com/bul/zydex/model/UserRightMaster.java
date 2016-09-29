@@ -34,11 +34,11 @@ public class UserRightMaster  implements java.io.Serializable {
      private boolean cashAdvanceView;
      private boolean lunaPlantAttendanceMgnt;
      private boolean gavasatPlantAttendanceMgnt;
-
+     private boolean departmentWiseAttendance;
     public UserRightMaster() {
     }
 
-    public UserRightMaster(UserMaster userMaster, boolean hr, boolean employee, boolean travelAdmin, boolean travelExpenseAdmin, boolean poolCarAdmin, boolean security, boolean cafeteriaAdmin, boolean itAdmin, boolean employeeManagement, boolean leaveManagement, boolean shiftManagement, boolean appraisalPmp, boolean appraisal360, boolean probationToConfirmation, boolean employeeExit, boolean employeeReferral, boolean temporaryShiftAssign, boolean exitInterview, boolean noDue, boolean attendanceReport, boolean cashAdvanceView, boolean lunaPlantAttendanceMgnt, boolean gavasatPlantAttendanceMgnt) {
+    public UserRightMaster(UserMaster userMaster, boolean hr, boolean employee, boolean travelAdmin, boolean travelExpenseAdmin, boolean poolCarAdmin, boolean security, boolean cafeteriaAdmin, boolean itAdmin, boolean employeeManagement, boolean leaveManagement, boolean shiftManagement, boolean appraisalPmp, boolean appraisal360, boolean probationToConfirmation, boolean employeeExit, boolean employeeReferral, boolean temporaryShiftAssign, boolean exitInterview, boolean noDue, boolean attendanceReport, boolean cashAdvanceView, boolean lunaPlantAttendanceMgnt, boolean gavasatPlantAttendanceMgnt, boolean departmentWiseAttendance) {
         this.userMaster = userMaster;
         this.hr = hr;
         this.employee = employee;
@@ -63,6 +63,7 @@ public class UserRightMaster  implements java.io.Serializable {
         this.cashAdvanceView = cashAdvanceView;
         this.lunaPlantAttendanceMgnt = lunaPlantAttendanceMgnt;
         this.gavasatPlantAttendanceMgnt = gavasatPlantAttendanceMgnt;
+        this.departmentWiseAttendance = departmentWiseAttendance;
     }
 
     public Integer getId() {
@@ -264,8 +265,14 @@ public class UserRightMaster  implements java.io.Serializable {
     public void setGavasatPlantAttendanceMgnt(boolean gavasatPlantAttendanceMgnt) {
         this.gavasatPlantAttendanceMgnt = gavasatPlantAttendanceMgnt;
     }
+    
+    public boolean isDepartmentWiseAttendance(){
+        return departmentWiseAttendance;
+    }
 
-  
+    public void setDepartmentWiseAttendance(boolean departmentWiseAttendance){
+        this.departmentWiseAttendance = departmentWiseAttendance;
+    }
 }
 
 

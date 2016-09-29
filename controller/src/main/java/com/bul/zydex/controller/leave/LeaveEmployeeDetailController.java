@@ -227,7 +227,13 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     String finalDateSet = sdf.format(dateSet);
                     leaveEmployeeDetail1.setStartDate(finalDateSet);
                     int dayOfWeek = cal6.get(Calendar.WEEK_OF_MONTH);
-                    if (dayOfWeek != 2) {
+                    boolean secondSatCheck = false;
+                    if (employeeMaster.getZydexLocationMaster().getId() == 1 || employeeMaster.getZydexLocationMaster().getId() == 6) {
+                        if (dayOfWeek == 2) {
+                            secondSatCheck = true;
+                        }
+                    }
+                    if (!secondSatCheck) {
                         List<?> satLeaveListCheck = leaveEmployeeDetailService.leaveCheck(leaveEmployeeDetail1);
                         if (!satLeaveListCheck.isEmpty()) {
                             LeaveEmployeeDetail leaveEmployeeDetail2 = (LeaveEmployeeDetail) satLeaveListCheck.get(0);
@@ -338,7 +344,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                 }
                                 float noOfDays = 1;
                                 float noOfDays1 = 1 + leaveEmployeeDetail.getNoOfDays();
-                                if (employeeLeaveBalance1.getNoOfLeaveRemain() >= noOfDays1) {
+                                if (employeeLeaveBalance1.getNoOfLeaveRemain() >= noOfDays1 && leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster1.getMaxDayAllowedLeave())) {
                                     leaveCkeck = true;
                                     leaveEmployeeDetail.setNoOfDays(noOfDays1);
 
@@ -1206,9 +1212,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
             }
         } else if (btnSubmit.equals("Withdraw")) {
-            leaveTypeMaster=leaveEmployeeDetail.getLeaveTypeMaster();
-            int leaveid=leaveTypeMaster.getId();
-            
+            leaveTypeMaster = leaveEmployeeDetail.getLeaveTypeMaster();
+            int leaveid = leaveTypeMaster.getId();
 
             if (leaveid != 10) {
                 SimpleDateFormat format2 = new SimpleDateFormat("EEEE");
@@ -1290,7 +1295,23 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         Date startdate = sdf1.parse(startday);
                         Date enddate = sdf1.parse(endday);
                         float noOfdays = leaveEmployeeDetail2.getNoOfDays();
-                        float diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)) + 1.0);
+                        String startStatus = leaveEmployeeDetail2.getStartDateStatus();
+                        String endStatus = leaveEmployeeDetail2.getEndDateStatus();
+                        float diffInDays = 0;
+                        if (startday.equals(endday)) {
+                            if (startStatus.equals("Fullday")) {
+                                diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)) + 1.0);
+                            } else {
+                                diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)) + 0.5);
+                            }
+                        } else if (startStatus.equals("Fullday") && endStatus.equals("Fullday")) {
+                            diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)) + 1.0);
+                        } else if(!startStatus.equals("Fullday") && !endStatus.equals("Fullday")){
+                            diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)));
+                        }else{
+                             diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)) + 0.5);
+                        }
+
                         if (diffInDays != noOfdays) {
                             balanceDay = employeeLeaveBalance2.getNoOfLeaveRemain();
                             balanceDay = balanceDay + 1;

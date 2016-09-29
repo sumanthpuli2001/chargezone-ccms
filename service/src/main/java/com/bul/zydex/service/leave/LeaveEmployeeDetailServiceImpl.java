@@ -115,20 +115,24 @@ public class LeaveEmployeeDetailServiceImpl<T> extends GenericsServiceImpl<T> im
     public List<?> viewEmpLeaveRequestForPowerAdmin() {
         return leaveEmployeeDetailDAO.viewEmpLeaveRequestForPowerAdmin();
     }
+
     @Override
     public List<?> readApprovedShortLeaveDays(T object) {
         return leaveEmployeeDetailDAO.readApprovedShortLeaveDays(object);
     }
+
     @Override
     public int readPendingLeaveRequestForDashboard(T object) {
         return leaveEmployeeDetailDAO.readPendingLeaveRequestForDashboard(object);
     }
+
     @Override
-     public int readPendingApproverLeaveRequestForDashboard(T object) {
+    public int readPendingApproverLeaveRequestForDashboard(T object) {
         return leaveEmployeeDetailDAO.readPendingApproverLeaveRequestForDashboard(object);
     }
+
     @Override
-     public int readWithdrawPendingApproverLeaveRequestForDashboard(T object) {
+    public int readWithdrawPendingApproverLeaveRequestForDashboard(T object) {
         return leaveEmployeeDetailDAO.readWithdrawPendingApproverLeaveRequestForDashboard(object);
     }
 
@@ -139,11 +143,17 @@ public class LeaveEmployeeDetailServiceImpl<T> extends GenericsServiceImpl<T> im
 
     @Override
     public List<?> readDate(T object) {
-         return leaveEmployeeDetailDAO.readDate(object);
+        return leaveEmployeeDetailDAO.readDate(object);
     }
+
     @Override
-     public List<?> leaveCheck(T object) {
-         return leaveEmployeeDetailDAO.leaveCheck(object);
+    public List<?> leaveCheck(T object) {
+        return leaveEmployeeDetailDAO.leaveCheck(object);
+    }
+
+    @Override
+    public List<?> leaveCheckStartDate(T object) {
+        return leaveEmployeeDetailDAO.leaveCheckStartDate(object);
     }
 
 }

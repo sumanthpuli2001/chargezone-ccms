@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -660,6 +660,16 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " WHERE a.status !=5"
                 + " AND a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
                 + " AND STR_TO_DATE(a.endDate,'%d/%m/%Y')=STR_TO_DATE('" + leaveEmployeeDetail.getStartDate() + "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> leaveCheckStartDate(T object) {
+        LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
+        String query = "from LeaveEmployeeDetail a"
+                + " WHERE a.status !=5"
+                + " AND a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
+                + " AND STR_TO_DATE(a.startDate,'%d/%m/%Y')=STR_TO_DATE('" + leaveEmployeeDetail.getStartDate() + "','%d/%m/%Y')";
         return getHibernateTemplate().find(query);
     }
 

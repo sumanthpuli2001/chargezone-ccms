@@ -205,6 +205,10 @@
                                                         <label>Marital Status</label>
                                                     </li>
                                                     <li>
+                                                        <form:checkbox  class="checkbox1" value="spouseName" path="spouseName" />
+                                                        <label>Spouse Name</label>
+                                                    </li>
+                                                    <li>
                                                         <form:checkbox  class="checkbox1" value="dateOfBirth" path="dateOfBirth" />
                                                         <label>Date Of Birth</label>
                                                     </li>

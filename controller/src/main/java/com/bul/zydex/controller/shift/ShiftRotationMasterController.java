@@ -1158,7 +1158,6 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
     public ModelAndView employeeDataSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        EmployeeShiftData employeeShiftData = new EmployeeShiftData();
         EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
         selectEmployee1(request, response);
         selectZydexLocation(request, response);
@@ -1218,7 +1217,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         Map<Integer, List<?>> map1 = new LinkedHashMap<Integer, List<?>>();
         for (Object o1 : empDetail) {
             Object[] o = (Object[]) o1;
-            int id = (Integer) o[38];
+            int id = (Integer) o[48];
             employeeShiftData.setId(id);
             List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
 //            List listPunch = employeeDatetimeDataService.readPuchDataEmpIdWise(id);
@@ -1698,6 +1697,9 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         if (employeeAdvanceSearch.getMaritalStatus() == true) {
             headerRow1.add("MaritalStatus");
         }
+        if (employeeAdvanceSearch.getSpouseName() == true) {
+            headerRow1.add("Spouse Name");
+        }
         if (employeeAdvanceSearch.getDateOfBirth() == true) {
             headerRow1.add("DateOfBirth");
         }
@@ -1868,7 +1870,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             List<String> employeeInfoList = new ArrayList();
             List<String> employeeInfoList1 = new ArrayList();
             Object[] next = (Object[]) it.next();
-            employeeInfoList1.add("" + next[47]);
+            employeeInfoList1.add("" + next[48]);
             if (employeeAdvanceSearch.getEmployeeId() == true) {
                 employeeInfoList.add("" + next[0]);
             }
@@ -2014,6 +2016,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             if (null == next[47]) {
                 next[47] = "";
             }
+           
             if (employeeAdvanceSearch.getFatherName() == true) {
                 employeeInfoList.add("" + next[2]);
             }
@@ -2026,125 +2029,128 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             if (employeeAdvanceSearch.getMaritalStatus() == true) {
                 employeeInfoList.add("" + next[5]);
             }
-            if (employeeAdvanceSearch.getDateOfBirth() == true) {
+            if (employeeAdvanceSearch.getSpouseName() == true) {
                 employeeInfoList.add("" + next[6]);
             }
-            if (employeeAdvanceSearch.getPresentAddress() == true) {
+            if (employeeAdvanceSearch.getDateOfBirth() == true) {
                 employeeInfoList.add("" + next[7]);
             }
-            if (employeeAdvanceSearch.getPermanentAddress() == true) {
+            if (employeeAdvanceSearch.getPresentAddress() == true) {
                 employeeInfoList.add("" + next[8]);
             }
-            if (employeeAdvanceSearch.getBloodGroups() == true) {
+            if (employeeAdvanceSearch.getPermanentAddress() == true) {
                 employeeInfoList.add("" + next[9]);
             }
-            if (employeeAdvanceSearch.getEmailAddress() == true) {
+            if (employeeAdvanceSearch.getBloodGroups() == true) {
                 employeeInfoList.add("" + next[10]);
             }
-            if (employeeAdvanceSearch.getContactNo1() == true) {
+            if (employeeAdvanceSearch.getEmailAddress() == true) {
                 employeeInfoList.add("" + next[11]);
             }
-            if (employeeAdvanceSearch.getContactNo2() == true) {
+            if (employeeAdvanceSearch.getContactNo1() == true) {
                 employeeInfoList.add("" + next[12]);
             }
-            if (employeeAdvanceSearch.getEmergencyContactPerson() == true) {
+            if (employeeAdvanceSearch.getContactNo2() == true) {
                 employeeInfoList.add("" + next[13]);
             }
-            if (employeeAdvanceSearch.getEmergencyContactNo() == true) {
+            if (employeeAdvanceSearch.getEmergencyContactPerson() == true) {
                 employeeInfoList.add("" + next[14]);
             }
-            if (employeeAdvanceSearch.getPanCard() == true) {
+            if (employeeAdvanceSearch.getEmergencyContactNo() == true) {
                 employeeInfoList.add("" + next[15]);
             }
-            if (employeeAdvanceSearch.getPassportNo() == true) {
+            if (employeeAdvanceSearch.getPanCard() == true) {
                 employeeInfoList.add("" + next[16]);
             }
-            if (employeeAdvanceSearch.getPassportIssueDate() == true) {
+            if (employeeAdvanceSearch.getPassportNo() == true) {
                 employeeInfoList.add("" + next[17]);
             }
-            if (employeeAdvanceSearch.getPassportExpiryDate() == true) {
+            if (employeeAdvanceSearch.getPassportIssueDate() == true) {
                 employeeInfoList.add("" + next[18]);
             }
-            if (employeeAdvanceSearch.getAdharCard() == true) {
+            if (employeeAdvanceSearch.getPassportExpiryDate() == true) {
                 employeeInfoList.add("" + next[19]);
             }
-            if (employeeAdvanceSearch.getOfficeEmailId() == true) {
+            if (employeeAdvanceSearch.getAdharCard() == true) {
                 employeeInfoList.add("" + next[20]);
             }
-            if (employeeAdvanceSearch.getHighestEducationDetails() == true) {
+            if (employeeAdvanceSearch.getOfficeEmailId() == true) {
                 employeeInfoList.add("" + next[21]);
             }
-            if (employeeAdvanceSearch.getExperienceYearOnDoj() == true) {
+            if (employeeAdvanceSearch.getHighestEducationDetails() == true) {
                 employeeInfoList.add("" + next[22]);
             }
-            if (employeeAdvanceSearch.getExperienceMonthOnDoj() == true) {
+            if (employeeAdvanceSearch.getExperienceYearOnDoj() == true) {
                 employeeInfoList.add("" + next[23]);
             }
-            if (employeeAdvanceSearch.getCompany() == true) {
+            if (employeeAdvanceSearch.getExperienceMonthOnDoj() == true) {
                 employeeInfoList.add("" + next[24]);
             }
-            if (employeeAdvanceSearch.getZydexLocation() == true) {
+            if (employeeAdvanceSearch.getCompany() == true) {
                 employeeInfoList.add("" + next[25]);
             }
-            if (employeeAdvanceSearch.getWorkLocation() == true) {
+            if (employeeAdvanceSearch.getZydexLocation() == true) {
                 employeeInfoList.add("" + next[26]);
             }
-            if (employeeAdvanceSearch.getLevel() == true) {
+            if (employeeAdvanceSearch.getWorkLocation() == true) {
                 employeeInfoList.add("" + next[27]);
             }
-            if (employeeAdvanceSearch.getDepartment() == true) {
+            if (employeeAdvanceSearch.getLevel() == true) {
                 employeeInfoList.add("" + next[28]);
             }
-            if (employeeAdvanceSearch.getDesignation() == true) {
+            if (employeeAdvanceSearch.getDepartment() == true) {
                 employeeInfoList.add("" + next[29]);
             }
-            if (employeeAdvanceSearch.getRole() == true) {
+            if (employeeAdvanceSearch.getDesignation() == true) {
                 employeeInfoList.add("" + next[30]);
             }
-            if (employeeAdvanceSearch.getDateOfJoining() == true) {
+            if (employeeAdvanceSearch.getRole() == true) {
                 employeeInfoList.add("" + next[31]);
             }
-            if (employeeAdvanceSearch.getEmployeeType() == true) {
+            if (employeeAdvanceSearch.getDateOfJoining() == true) {
                 employeeInfoList.add("" + next[32]);
             }
-            if (employeeAdvanceSearch.getBankName() == true) {
+            if (employeeAdvanceSearch.getEmployeeType() == true) {
                 employeeInfoList.add("" + next[33]);
             }
-            if (employeeAdvanceSearch.getBankAccountNo() == true) {
+            if (employeeAdvanceSearch.getBankName() == true) {
                 employeeInfoList.add("" + next[34]);
             }
-            if (employeeAdvanceSearch.getBankIfscCode() == true) {
+            if (employeeAdvanceSearch.getBankAccountNo() == true) {
                 employeeInfoList.add("" + next[35]);
             }
-            if (employeeAdvanceSearch.getReportingManager() == true) {
+            if (employeeAdvanceSearch.getBankIfscCode() == true) {
                 employeeInfoList.add("" + next[36]);
             }
-            if (employeeAdvanceSearch.getCityOfEmployee() == true) {
+            if (employeeAdvanceSearch.getReportingManager() == true) {
                 employeeInfoList.add("" + next[37]);
             }
-            if (employeeAdvanceSearch.getChild1() == true) {
+            if (employeeAdvanceSearch.getCityOfEmployee() == true) {
                 employeeInfoList.add("" + next[38]);
             }
-            if (employeeAdvanceSearch.getChild2() == true) {
+            if (employeeAdvanceSearch.getChild1() == true) {
                 employeeInfoList.add("" + next[39]);
             }
-            if (employeeAdvanceSearch.getDateOfBirthOfEmpFather() == true) {
+            if (employeeAdvanceSearch.getChild2() == true) {
                 employeeInfoList.add("" + next[40]);
             }
-            if (employeeAdvanceSearch.getDateOfBirthOfEmpMother() == true) {
+            if (employeeAdvanceSearch.getDateOfBirthOfEmpFather() == true) {
                 employeeInfoList.add("" + next[41]);
             }
-            if (employeeAdvanceSearch.getDateOfBirthOfEmpSpous() == true) {
+            if (employeeAdvanceSearch.getDateOfBirthOfEmpMother() == true) {
                 employeeInfoList.add("" + next[42]);
             }
-            if (employeeAdvanceSearch.getDateOfBirthOfEmpChilld1() == true) {
+            if (employeeAdvanceSearch.getDateOfBirthOfEmpSpous() == true) {
                 employeeInfoList.add("" + next[43]);
             }
-            if (employeeAdvanceSearch.getDateOfBirthOfEmpChild2() == true) {
+            if (employeeAdvanceSearch.getDateOfBirthOfEmpChilld1() == true) {
                 employeeInfoList.add("" + next[44]);
             }
-            if (employeeAdvanceSearch.getDateOfTransferOfEntity() == true) {
+            if (employeeAdvanceSearch.getDateOfBirthOfEmpChild2() == true) {
                 employeeInfoList.add("" + next[45]);
+            }
+            if (employeeAdvanceSearch.getDateOfTransferOfEntity() == true) {
+                employeeInfoList.add("" + next[46]);
             }
 
             recordToAdd.add(employeeInfoList);
@@ -4525,13 +4531,13 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         employeeAdvanceSearch.setZydexLocationId(zydexLocationId);
         employeeAdvanceSearch.setLevelID(levelId);
         employeeAdvanceSearch.setDepartmentId(departmentId);
-
         employeeAdvanceSearch.setEmployeeId(Boolean.TRUE);
         employeeAdvanceSearch.setEmployeeName(Boolean.TRUE);
         employeeAdvanceSearch.setFatherName(Boolean.FALSE);
         employeeAdvanceSearch.setMotherName(Boolean.FALSE);
         employeeAdvanceSearch.setGender(Boolean.FALSE);
         employeeAdvanceSearch.setMaritalStatus(Boolean.FALSE);
+        employeeAdvanceSearch.setSpouseName(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfBirth(Boolean.FALSE);
         employeeAdvanceSearch.setPresentAddress(Boolean.FALSE);
         employeeAdvanceSearch.setPermanentAddress(Boolean.FALSE);
@@ -4619,7 +4625,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
             List<String> employeeInfoList = new ArrayList();
             Object[] next = (Object[]) it.next();
-            int id = (int) next[47];
+            int id = (int) next[48];
             EmployeeMaster employeeMaster1 = new EmployeeMaster();
             employeeMaster1.setId(id);
             ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
@@ -5939,6 +5945,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         employeeAdvanceSearch.setMotherName(Boolean.FALSE);
         employeeAdvanceSearch.setGender(Boolean.FALSE);
         employeeAdvanceSearch.setMaritalStatus(Boolean.FALSE);
+        employeeAdvanceSearch.setSpouseName(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfBirth(Boolean.FALSE);
         employeeAdvanceSearch.setPresentAddress(Boolean.FALSE);
         employeeAdvanceSearch.setPermanentAddress(Boolean.FALSE);
@@ -6028,7 +6035,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             List<String> employeeInfoList = new ArrayList();
             List<String> employeeInfoList1 = new ArrayList();
             Object[] next = (Object[]) it.next();
-            employeeInfoList1.add("" + next[47]);
+            employeeInfoList1.add("" + next[48]);
             if (employeeAdvanceSearch.getEmployeeId() == true) {
                 employeeInfoList.add("" + next[0]);
             }
@@ -8046,6 +8053,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         employeeAdvanceSearch.setMotherName(Boolean.FALSE);
         employeeAdvanceSearch.setGender(Boolean.FALSE);
         employeeAdvanceSearch.setMaritalStatus(Boolean.FALSE);
+        employeeAdvanceSearch.setSpouseName(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfBirth(Boolean.FALSE);
         employeeAdvanceSearch.setPresentAddress(Boolean.FALSE);
         employeeAdvanceSearch.setPermanentAddress(Boolean.FALSE);
@@ -8135,7 +8143,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             List<String> employeeInfoList = new ArrayList();
             List<String> employeeInfoList1 = new ArrayList();
             Object[] next = (Object[]) it.next();
-            employeeInfoList1.add("" + next[47]);
+            employeeInfoList1.add("" + next[48]);
             if (employeeAdvanceSearch.getEmployeeId() == true) {
                 employeeInfoList.add("" + next[0]);
             }

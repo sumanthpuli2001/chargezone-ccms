@@ -645,6 +645,11 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         } else {
             query += " '' as nonval ,";
         }
+        if (employeeAdvanceSearch.getSpouseName()) {
+            query += " a.spouseName,";
+        } else {
+            query += " '' as nonval ,";
+        }
         if (employeeAdvanceSearch.getDateOfBirth()) {
             query += " a.dateOfBirth,";
         } else {
@@ -1071,6 +1076,11 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         } else {
             query += " '' as nonval ,";
         }
+        if (employeeAdvanceSearch.getSpouseName()) {
+            query += " a.spouseName,";
+        } else {
+            query += " '' as nonval ,";
+        }
         if (employeeAdvanceSearch.getDateOfBirth()) {
             query += " a.dateOfBirth,";
         } else {
@@ -1354,6 +1364,11 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         }
         if (employeeAdvanceSearch.getMaritalStatus()) {
             query += " a.maritalStatus,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getSpouseName()) {
+            query += " a.spouseName,";
         } else {
             query += " '' as nonval ,";
         }

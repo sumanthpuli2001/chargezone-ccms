@@ -704,6 +704,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setMotherName(Boolean.FALSE);
         employeeAdvanceSearch.setGender(Boolean.FALSE);
         employeeAdvanceSearch.setMaritalStatus(Boolean.FALSE);
+        employeeAdvanceSearch.setSpouseName(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfBirth(Boolean.FALSE);
         employeeAdvanceSearch.setPresentAddress(Boolean.FALSE);
         employeeAdvanceSearch.setPermanentAddress(Boolean.FALSE);
@@ -774,7 +775,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
         for (Object o1 : empDetail) {
             Object[] o = (Object[]) o1;
-            int id1 = (Integer) o[47];
+            int id1 = (Integer) o[48];
             employeeShiftData.setId(id1);
             List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
             map.put(id, list);
@@ -1409,6 +1410,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setMotherName(Boolean.FALSE);
         employeeAdvanceSearch.setGender(Boolean.FALSE);
         employeeAdvanceSearch.setMaritalStatus(Boolean.FALSE);
+        employeeAdvanceSearch.setSpouseName(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfBirth(Boolean.FALSE);
         employeeAdvanceSearch.setPresentAddress(Boolean.FALSE);
         employeeAdvanceSearch.setPermanentAddress(Boolean.FALSE);
@@ -1465,7 +1467,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
         for (Object o1 : empDetail) {
             Object[] o = (Object[]) o1;
-            int id = (Integer) o[38];
+            int id = (Integer) o[48];
             employeeShiftData.setId(id);
             List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
             map.put(id, list);
@@ -1849,6 +1851,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setMotherName(Boolean.FALSE);
         employeeAdvanceSearch.setGender(Boolean.FALSE);
         employeeAdvanceSearch.setMaritalStatus(Boolean.FALSE);
+        employeeAdvanceSearch.setSpouseName(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfBirth(Boolean.FALSE);
         employeeAdvanceSearch.setPresentAddress(Boolean.FALSE);
         employeeAdvanceSearch.setPermanentAddress(Boolean.FALSE);
@@ -1919,7 +1922,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
         for (Object o1 : empDetail) {
             Object[] o = (Object[]) o1;
-            int id1 = (Integer) o[47];
+            int id1 = (Integer) o[48];
             employeeShiftData.setId(id1);
             List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
             map.put(Integer.parseInt(id), list);

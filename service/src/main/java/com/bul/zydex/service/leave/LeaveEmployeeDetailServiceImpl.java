@@ -155,5 +155,9 @@ public class LeaveEmployeeDetailServiceImpl<T> extends GenericsServiceImpl<T> im
     public List<?> leaveCheckStartDate(T object) {
         return leaveEmployeeDetailDAO.leaveCheckStartDate(object);
     }
+    @Override
+    public List<?> plLeaveCheck(int empId) {
+        return leaveEmployeeDetailDAO.plLeaveCheck(empId);
+    }
 
 }

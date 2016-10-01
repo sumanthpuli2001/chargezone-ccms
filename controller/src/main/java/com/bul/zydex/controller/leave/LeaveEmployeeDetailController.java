@@ -65,6 +65,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         ShortLeave shortLeave = new ShortLeave();
         shortLeave.setZydexLocationMaster(employeeSession.getZydexLocationMaster());
         List list = shortLeaveService.readByDept(shortLeave);
+        float clBal = 0;
         try {
             shortLeave = (ShortLeave) list.get(0);
             request.setAttribute("shortLeaveHoursNo", shortLeave.getHoursNo());
@@ -124,6 +125,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 if (!employeeSession.getGender() && name.equals("Maternity Leave")) {
                     continue;
                 }
+
                 String leave1 = "" + next[2];
                 leaveTypeMaster.setId(Integer.parseInt(leave1));
                 leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster);
@@ -134,6 +136,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         zz = (double) xx;
                         noOfDay = (float) zz.floatValue();
                     }
+                }
+                if (name.equals("Casual Leave")) {
+                    clBal = days;
                 }
                 //                Iterator it1 = listFirst.iterator();
                 //                if (it1.hasNext()) {
@@ -153,6 +158,15 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             }
 
         }
+        boolean plBalCheck = false;
+        if (clBal == 0) {
+            List<?> plCheck = leaveEmployeeDetailService.plLeaveCheck(employeeMaster.getId());
+            if (plCheck.size() <= 3) {
+                plBalCheck = true;
+            }
+        }
+
+        request.setAttribute("plBalCheck", plBalCheck);
         request.setAttribute("listRemain", listRemain);
         request.setAttribute("empReqMap", empReqMap);
         request.setAttribute("totalDaysMap", totalDaysMap);
@@ -1234,7 +1248,6 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         } else if (btnSubmit.equals("Withdraw")) {
             leaveTypeMaster = leaveEmployeeDetail.getLeaveTypeMaster();
             int leaveid = leaveTypeMaster.getId();
-            
 
             if (leaveid != 10) {
                 SimpleDateFormat format2 = new SimpleDateFormat("EEEE");
@@ -1327,10 +1340,10 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             }
                         } else if (startStatus.equals("Fullday") && endStatus.equals("Fullday")) {
                             diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)) + 1.0);
-                        } else if(!startStatus.equals("Fullday") && !endStatus.equals("Fullday")){
+                        } else if (!startStatus.equals("Fullday") && !endStatus.equals("Fullday")) {
                             diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)));
-                        }else{
-                             diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)) + 0.5);
+                        } else {
+                            diffInDays = (float) (((enddate.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)) + 0.5);
                         }
 
                         if (diffInDays != noOfdays) {

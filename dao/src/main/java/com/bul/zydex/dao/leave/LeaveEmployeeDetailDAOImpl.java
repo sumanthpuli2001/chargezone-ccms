@@ -673,4 +673,18 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> plLeaveCheck(int empId) {
+        Date date1 = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
+        String s = formatter.format(date1);
+        String query = "from LeaveEmployeeDetail a"
+                + " WHERE a.status !=5"
+                + " AND a.employeeMaster.id = " + empId
+                + " AND DATE_FORMAT(STR_TO_DATE(a.startDate,'%d/%m/%Y'),'%Y')= DATE_FORMAT(STR_TO_DATE('" + s + "','%d/%m/%Y'),'%Y')"
+                + "AND a.leaveTypeMaster.id=" + 7
+                + " AND a.noOfDays<1";
+        return getHibernateTemplate().find(query);
+    }
+
 }

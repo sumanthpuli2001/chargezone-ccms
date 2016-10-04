@@ -244,10 +244,10 @@
                     </a>
                     <ul class="treeview-menu">
                         <!--<li><a href="appraisalPerformance.htm?act=createClick"><i class="fa fa-circle-o"></i>Performance Appraisal </a></li>-->
-                        <c:if test="${sessionScope.checkReportingManager}">
+                        <%--<c:if test="${sessionScope.checkReportingManager}">--%>
                             <li><a href="appraisalPerformance.htm?act=searchOwnappraisalPerformanceSubmit"><i class="fa fa-circle-o"></i>PMP Form</a></li>
                             <li><a href="performanceImprovementPlanMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>PIP Form</a></li>
-                            </c:if>
+                            <%--</c:if>--%>
                         <li><a href="appraisalPerformance.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Subordinates PMP</a></li>
                         <li><a href="performanceImprovementPlanMaster.htm?act=viewPipListByManager"><i class="fa fa-circle-o"></i>Subordinates PIP</a></li>
                             <c:if test="${sessionScope.userRight.appraisalPmp}">

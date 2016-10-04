@@ -1334,7 +1334,12 @@ $(document).on("click", ":submit", function (e) {
 //        document.getElementById("empMidyearSelfassessmentGoalActivities1").required = true;
 
             for (i = 1; i <= kragoalLengthactivity; i++) {
-//            document.getElementById("empMidyearSelfassessmentGoalActivities" + i).required = true;
+                var kraGoalactivity = document.getElementById("kraGoal_activity" + i).value;
+                if (kraGoalactivity !== '') {
+                    document.getElementById("empMidyearSelfassessmentGoalActivities" + i).required = true;
+                } else {
+                    document.getElementById("empMidyearSelfassessmentGoalActivities" + i).required = false;
+                }
             }
 
         } else if (flagEndId === "true") {
@@ -1482,9 +1487,14 @@ $(document).ready(function () {
 //        if (managerStatus === '0') {
 //            document.getElementById("EditByEmployee").disabled = true;
 //        }
-//        document.getElementById("kraGoal1").required = true;
+        var kra = document.getElementById("kraGoal1").value;
 //        document.getElementById("metric1").required = true;
-        document.getElementById("weightage1").readOnly = true;
+           /////change by mid
+        if (kra !== '') {
+            document.getElementById("weightage1").readOnly = true;
+        } else {
+            document.getElementById("weightage1").readOnly = false;
+        }
 //        document.getElementById("midYearDiv1").style.pointerEvents = "none";
 //        document.getElementById("midYearDiv1").style.cursor = "default";
         document.getElementById("endYearDiv1").style.pointerEvents = "none";
@@ -1506,7 +1516,7 @@ $(document).ready(function () {
         for (i = 1; i <= kragoalLength; i++) {
 
             if (managerStatus === '0') {
-                document.getElementById("EditByEmployee" + i).disabled = true;
+                document.getElementById("EditByEmployee" + i).disabled = false;
             } else {
                 document.getElementById("EditByEmployee" + i).disabled = false;
             }
@@ -1860,8 +1870,7 @@ $(document).ready(function () {
 
                     document.getElementById("kraGoal_activity" + i).readOnly = true;
                     document.getElementById("metric_activity" + i).readOnly = true;
-                }
-                catch (err) {
+                } catch (err) {
                 }
 
             }
@@ -2027,14 +2036,12 @@ function performancefinalScoreRatingsEmployee() {
     {
 //        alert("81 to 90");
         $('#score2').show();
-    }
-    else if ((behaviorsFinalscore12 >= 80) && (behaviorsFinalscore12 <= 100))
+    } else if ((behaviorsFinalscore12 >= 80) && (behaviorsFinalscore12 <= 100))
     {
         //        alert("score1" + behaviorsFinalscore12);
 //        alert("71 to 80");
         $('#score3').show();
-    }
-    else if ((behaviorsFinalscore12 >= 51) && (behaviorsFinalscore12 <= 79))
+    } else if ((behaviorsFinalscore12 >= 51) && (behaviorsFinalscore12 <= 79))
     {
         //        alert("51 to 70");
         $('#score4').show();

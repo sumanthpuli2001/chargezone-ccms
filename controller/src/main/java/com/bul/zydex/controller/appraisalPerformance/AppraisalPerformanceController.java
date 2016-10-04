@@ -4938,7 +4938,14 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 
         List pendingAtEmployeeListForManager = appraisalPerformanceService.readPendingEmployeePmpByManager("" + employeeMaster.getId(), year);
         request.setAttribute("pendingAtEmployeeList", pendingAtEmployeeList.size());
+        List<String> empIdList = new ArrayList();
+        for(Object obj:pendingAtEmployeeListForManager){
+            Object[] oo = (Object[])obj;
+            EmployeeMaster employeeMaster1 = (EmployeeMaster)oo[1];
+            empIdList.add(employeeMaster1.getEmployeeId());
+        }
         request.setAttribute("pendingAtEmployeeListForManager", pendingAtEmployeeListForManager.size());
+        request.setAttribute("empIdList", empIdList);
     }
 
     public ModelAndView kraGoalAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {

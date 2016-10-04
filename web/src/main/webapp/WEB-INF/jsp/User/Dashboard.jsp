@@ -959,7 +959,11 @@
                                                                                                             <span class="product-title" href="javascript::;">PMP<span class="badge" style="float: right">${pendingAtEmployeeListForManager}</span></span>
                                                                                                         </a>
                                                                                                     </li>
+                                                                                                    <c:forEach var="empIdList" items="${empIdList}">
+                                                                                                        <label style="font-size: 11px;">${empIdList}</label>
+                                                                                                    </c:forEach>
                                                                                                 </c:if>
+
                                                                                                 <c:if test="${finalprobationDashboardList gt 0}">
                                                                                                     <li class="item">
                                                                                                         <a href="probationToConfirmation.htm?act=searchSubmit">

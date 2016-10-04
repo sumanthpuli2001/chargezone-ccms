@@ -549,5 +549,9 @@
     <bean id="expenseWebService1" class="com.bul.zydex.webservice.Expense.ExpenseWebService" parent="controllerConfig">
         
     </bean>
+    
+    <bean id="urlMasterController1" class="com.bul.zydex.controller.url.UrlMasterController" parent="controllerConfig" >
+        <property name="urlMasterService" ref="urlMasterService1"/>
+    </bean>
 </beans>
  

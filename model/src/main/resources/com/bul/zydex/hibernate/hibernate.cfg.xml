@@ -142,6 +142,8 @@
     <mapping resource="com/bul/zydex/model/TimeAttandanceFlaxibleMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/EmployeePunchForMobileApp.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/EmailAddMaster.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/UrlMaster.hbm.xml"/>
+    <mapping/>
     <mapping/>
   </session-factory>
 </hibernate-configuration>

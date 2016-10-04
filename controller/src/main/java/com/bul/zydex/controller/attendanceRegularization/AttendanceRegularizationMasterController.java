@@ -118,11 +118,13 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             attendanceRegularization.setUserMasterId(userMasterId);
             attendanceRegularization.setStatus(0);
             attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
+
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
 
             mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=searchSubmit");
             try {
+                mailSendArApply(request);
                 EmailTemplate emailTemplate = new EmailTemplate();
                 EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                 DesignationMaster designationMaster = new DesignationMaster();
@@ -261,7 +263,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                         sendMail.sendMail(from, To, Subject, msg);
 
-                        String name = "No Due";
+                        String name = "Attendance";
                         EmailAddMaster emailAddMaster = new EmailAddMaster();
                         emailAddMaster.setModuleName(name);
                         emailAddMaster.setDepartmentMaster(employeeMasterModel.getDepartmentMaster());
@@ -281,6 +283,25 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                     sendMail.sendMail(from1, To1, subject1, msg1);
 
+                                }
+
+                            }
+                        }
+                        List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
+                        if (!allDeptmailList.isEmpty()) {
+                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
+                            String emailId = emailAddMaster1.getEmailId();
+                            for (String emailId1 : emailId.split(",")) {
+                                if (!emailId1.equals("")) {
+                                    String To1 = emailId1;
+                                    String from1 = employeeMasterModel.getOfficeEmailId();
+                                    String subject1 = emailTemplate.getSubject();
+                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                                    String msg1 = emailTemplate.getBodytext();
+                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                    sendMail.sendMail(from1, To1, subject1, msg1);
                                 }
                             }
                         }
@@ -704,6 +725,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setMotherName(Boolean.FALSE);
         employeeAdvanceSearch.setGender(Boolean.FALSE);
         employeeAdvanceSearch.setMaritalStatus(Boolean.FALSE);
+        employeeAdvanceSearch.setSpouseName(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfBirth(Boolean.FALSE);
         employeeAdvanceSearch.setPresentAddress(Boolean.FALSE);
         employeeAdvanceSearch.setPermanentAddress(Boolean.FALSE);
@@ -774,7 +796,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
         for (Object o1 : empDetail) {
             Object[] o = (Object[]) o1;
-            int id1 = (Integer) o[47];
+            int id1 = (Integer) o[48];
             employeeShiftData.setId(id1);
             List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
             map.put(id, list);
@@ -1409,6 +1431,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setMotherName(Boolean.FALSE);
         employeeAdvanceSearch.setGender(Boolean.FALSE);
         employeeAdvanceSearch.setMaritalStatus(Boolean.FALSE);
+        employeeAdvanceSearch.setSpouseName(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfBirth(Boolean.FALSE);
         employeeAdvanceSearch.setPresentAddress(Boolean.FALSE);
         employeeAdvanceSearch.setPermanentAddress(Boolean.FALSE);
@@ -1465,7 +1488,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
         for (Object o1 : empDetail) {
             Object[] o = (Object[]) o1;
-            int id = (Integer) o[38];
+            int id = (Integer) o[48];
             employeeShiftData.setId(id);
             List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
             map.put(id, list);
@@ -1849,6 +1872,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setMotherName(Boolean.FALSE);
         employeeAdvanceSearch.setGender(Boolean.FALSE);
         employeeAdvanceSearch.setMaritalStatus(Boolean.FALSE);
+        employeeAdvanceSearch.setSpouseName(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfBirth(Boolean.FALSE);
         employeeAdvanceSearch.setPresentAddress(Boolean.FALSE);
         employeeAdvanceSearch.setPermanentAddress(Boolean.FALSE);
@@ -1919,7 +1943,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
         for (Object o1 : empDetail) {
             Object[] o = (Object[]) o1;
-            int id1 = (Integer) o[47];
+            int id1 = (Integer) o[48];
             employeeShiftData.setId(id1);
             List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
             map.put(Integer.parseInt(id), list);
@@ -2557,6 +2581,14 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.getModelMap().put("punchList", punchList);
         mv.setViewName("Shift/ShowIndividualPuchData");
 
+        return mv;
+    }
+      public ModelAndView departmentWiseAttendanceView(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        List<?> list = employeeMasterService.readDepartmentWiseEmployee(employeeMaster);
+        mv.getModelMap().put("list", list);
+        mv.setViewName("AttendanceRegularization/SubOrdinateAttendanceView");
         return mv;
     }
 }

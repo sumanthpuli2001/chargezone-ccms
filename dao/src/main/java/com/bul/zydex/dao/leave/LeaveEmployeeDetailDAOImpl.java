@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -660,6 +660,30 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " WHERE a.status !=5"
                 + " AND a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
                 + " AND STR_TO_DATE(a.endDate,'%d/%m/%Y')=STR_TO_DATE('" + leaveEmployeeDetail.getStartDate() + "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> leaveCheckStartDate(T object) {
+        LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
+        String query = "from LeaveEmployeeDetail a"
+                + " WHERE a.status !=5"
+                + " AND a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
+                + " AND STR_TO_DATE(a.startDate,'%d/%m/%Y')=STR_TO_DATE('" + leaveEmployeeDetail.getStartDate() + "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> plLeaveCheck(int empId) {
+        Date date1 = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
+        String s = formatter.format(date1);
+        String query = "from LeaveEmployeeDetail a"
+                + " WHERE a.status !=5"
+                + " AND a.employeeMaster.id = " + empId
+                + " AND DATE_FORMAT(STR_TO_DATE(a.startDate,'%d/%m/%Y'),'%Y')= DATE_FORMAT(STR_TO_DATE('" + s + "','%d/%m/%Y'),'%Y')"
+                + "AND a.leaveTypeMaster.id=" + 7
+                + " AND a.noOfDays<1";
         return getHibernateTemplate().find(query);
     }
 

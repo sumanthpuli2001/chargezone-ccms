@@ -80,5 +80,8 @@
         <property name="gavasatPlantAttendanceMgnt" type="boolean">
             <column name="gavasat_plant_Attendance_mgnt" not-null="true" />
         </property>
+        <property name="departmentWiseAttendance" type="boolean">
+            <column name="department_Wise_Attendance" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

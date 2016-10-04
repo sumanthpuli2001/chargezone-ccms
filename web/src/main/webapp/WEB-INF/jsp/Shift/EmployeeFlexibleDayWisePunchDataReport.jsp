@@ -181,13 +181,13 @@
                                                                     <div><h3>Employee Daily Attendance Information</h3></div>
                                                                     <tr>
                                                                         <td></td>
-                                                                        <c:forEach var="list" items="${map[employeeMasterList[47]]}">
+                                                                        <c:forEach var="list" items="${map[employeeMasterList[48]]}">
                                                                             <th style="text-align: center;">${list[0]}</th>
                                                                             </c:forEach>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Shift Name</th>
-                                                                            <c:forEach var="list" items="${map[employeeMasterList[47]]}">
+                                                                            <c:forEach var="list" items="${map[employeeMasterList[48]]}">
                                                                                 <c:if test="${fn:contains(list[1], ' # ')}">
                                                                                     <c:set var="string1" value="${fn:split(list[1], '#')}"/>
                                                                                     <c:set var="string1" value="${fn:split(string1[1], '$')}"/>
@@ -202,7 +202,7 @@
                                                                     <tr>
                                                                         <th>First In</th>
 
-                                                                        <c:forEach var="list" items="${map[employeeMasterList[47]]}">
+                                                                        <c:forEach var="list" items="${map[employeeMasterList[48]]}">
                                                                             <c:if test="${fn:contains(list[1], '`') && !fn:contains(list[1], '?')}">
                                                                                 <c:set var="string2" value="${fn:split(list[1], '`')}"/>
                                                                                 <c:set var="string2" value="${fn:split(string2[1], '!')}"/>
@@ -241,7 +241,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Last Out</th>
-                                                                            <c:forEach var="list" items="${map[employeeMasterList[47]]}">
+                                                                            <c:forEach var="list" items="${map[employeeMasterList[48]]}">
 
                                                                             <%--<c:set var="string5" value="${fn:join(list[1], 'To ')}"/>--%>
 
@@ -366,13 +366,13 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <th>View All Punch</th>
-                                                                            <c:forEach var="list" items="${map[employeeMasterList[47]]}">
+                                                                            <c:forEach var="list" items="${map[employeeMasterList[48]]}">
                                                                             <th style="text-align: center;"><a onclick="showPunchData('${list[0]}');">View</a>
                                                                             </th>
 
                                                                         </c:forEach>
                                                                     </tr>
-                                                                    <c:forEach var="list" items="${map[employeeMasterList[47]]}">
+                                                                    <c:forEach var="list" items="${map[employeeMasterList[48]]}">
                                                                         <c:if test="${fn:contains(list[1], 'WO')}">
                                                                             <c:set var="wo" value="${wo + 1}"></c:set>
                                                                         </c:if>

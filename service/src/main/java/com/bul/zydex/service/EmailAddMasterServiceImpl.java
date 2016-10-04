@@ -28,5 +28,10 @@ public class EmailAddMasterServiceImpl<T> extends GenericsServiceImpl<T> impleme
      public List<?> readByName(T object){
          return emailAddMasterDAO.readByName(object);
      }
+
+    @Override
+    public List<?> readAllDept(String modulename) {
+         return emailAddMasterDAO. readAllDept(modulename); 
+    }
     
 }

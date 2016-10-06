@@ -37,11 +37,14 @@ window.setTimeout(function () {
 }, 8000);
 //==============================================================//
 function changeReadonly(id) {
+//    alert("hellouuuuu"+id);
     var kra = document.getElementById('kraGoal' + id);
     var metric = document.getElementById('metric' + id);
     var midYear = document.getElementById('midYearDiv' + id);
     var endYear = document.getElementById('endYearDiv' + id);
+    var weightages = document.getElementById('weightage' + id);
     kra.readOnly = false;
+    weightages.readOnly = false;
     metric.readOnly = false;
     if (midYear !== null) {
         midYear.readOnly = false;

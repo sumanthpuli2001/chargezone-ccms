@@ -26,7 +26,7 @@ public class AppraisalPerformanceCompetencyEvaluationDAOImpl<T> extends Generics
         AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = (AppraisalPerformanceCompetencyEvaluation) object;
         String query = "";
         query += " "
-                + " SELECT a.id, a.appraisalPerformanceMaster,a.competencyEvaluationMaster, a.competencyEvaluationTextmaster, b.infoText,a.competencyStartYear,a.startyearRemark,a.competencyMidYear,a.midyearRemark,a.competencyEndYear,a.endyearRemark,a.competencyStartYearManager,a.startyearRemarkManager "
+                + " SELECT a.id, a.appraisalPerformanceMaster,a.competencyEvaluationMaster, a.competencyEvaluationTextmaster, b.infoText,a.competencyStartYear,a.startyearRemark,a.competencyMidYear,a.midyearRemark,a.competencyEndYear,a.endyearRemark,a.competencyStartYearManager,a.startyearRemarkManager,a.midyearRemarkManager,a.endyearRemarkManager "
                 + " FROM AppraisalPerformanceCompetencyEvaluation a "
                 + " LEFT JOIN a.competencyEvaluationTextmaster b "
                 + " LEFT JOIN a.competencyEvaluationMaster c "

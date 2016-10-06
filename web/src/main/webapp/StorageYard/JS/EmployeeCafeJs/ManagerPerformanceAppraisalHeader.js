@@ -869,7 +869,7 @@ $(function () {
             var selectedValue1 = document.getElementById("trainingSelectId" + j).value;
             if (selectedValue1 == "Other") {
                 document.getElementById("trainingSelectTextinput" + j).style.display = "block";
-                document.getElementById("trainingSelectTextinput" + j).required = true;
+//                document.getElementById("trainingSelectTextinput" + j).required = true;
             } else {
                 document.getElementById("trainingSelectTextinput" + j).style.display = "none";
             }
@@ -1424,27 +1424,27 @@ $(document).on("click", ":submit", function (e) {
             document.getElementById("kraGoal1").required = true;
             document.getElementById("metric1").required = true;
             for (i = 1; i <= count; i++) {
-                document.getElementById("compentencyMidYear" + i).required = true;
+//                document.getElementById("compentencyMidYear" + i).required = true; change 4/10/2016
 //            document.getElementById("compentencyMidRemark" + i).required = true;
 
             }
             var indivisul = document.getElementById("text1").value;
             if (indivisul !== '') {
 
-                document.getElementById("text1").required = true;
-                document.getElementById("individualtextDiv1").required = true;
-                document.getElementById("trainingSelectId1").required = true;
+//                document.getElementById("text1").required = true; change 4/10/2016
+//                document.getElementById("individualtextDiv1").required = true; change 4/10/2016
+//                document.getElementById("trainingSelectId1").required = true; change 4/10/2016
                 if (selectedValue1 == "Other") {
-                    document.getElementById("trainingSelectTextinput" + i).required = true;
+//                    document.getElementById("trainingSelectTextinput" + i).required = true; change 4/10/2016
                 }
             }
             for (i = 1; i <= countId; i++) {
                 if (indivisul !== '') {
-                    document.getElementById("individualtextDiv" + i).required = true;
-                    document.getElementById("trainingSelectId" + i).required = true;
-                    var selectedValue1 = document.getElementById("trainingSelectId" + i).value;
+//                    document.getElementById("individualtextDiv" + i).required = true; change 4/10/2016
+//                    document.getElementById("trainingSelectId" + i).required = true; change 4/10/2016
+//                    var selectedValue1 = document.getElementById("trainingSelectId" + i).value; change 4/10/2016
                     if (selectedValue1 == "Other") {
-                        document.getElementById("trainingSelectTextinput" + i).required = true;
+//                        document.getElementById("trainingSelectTextinput" + i).required = true; change 4/10/2016
                     }
                 }
 
@@ -1463,15 +1463,14 @@ $(document).on("click", ":submit", function (e) {
             document.getElementById("kraGoal1").required = true;
             document.getElementById("metric1").required = true;
             for (i = 1; i <= count; i++) {
-                document.getElementById("compentencyEndYear" + i).required = true;
+//                document.getElementById("compentencyEndYear" + i).required = true; change 4/10/2016
 //            document.getElementById("compentencyEndRemark" + i).required = true;
             }
             for (i = 1; i <= countId; i++) {
-                document.getElementById("individualtextDiv" + i).required = true;
-                document.getElementById("trainingSelectId" + i).required = true;
-                var selectedValue1 = document.getElementById("trainingSelectId" + i).value;
+//                document.getElementById("trainingSelectId" + i).required = true; change 4/10/2016
+//                var selectedValue1 = document.getElementById("trainingSelectId" + i).value; change 4/10/2016
                 if (selectedValue1 == "Other") {
-                    document.getElementById("trainingSelectTextinput" + i).required = true;
+//                    document.getElementById("trainingSelectTextinput" + i).required = true; change 4/10/2016
                 }
 
             }

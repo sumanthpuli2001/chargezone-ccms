@@ -1202,7 +1202,7 @@
                                                                         </select>
                                                                     </td>
                                                                     <td id="subCompentencyMidRemarkId${status.count}" >
-                                                                        <textarea type="Text" id="compentencyMidRemark${status.count}" name="compentencyMidRemark${status.count}" class="form-control" rows="4">${competencyEvaluationList[8]}</textarea>
+                                                                        <textarea type="Text" id="compentencyMidRemark${status.count}" name="compentencyMidRemark${status.count}" class="form-control" rows="4">${competencyEvaluationList[13]}</textarea>
                                                                     </td>
                                                                     <td id="subCompentencyEndId${status.count}">
                                                                         <select id="compentencyEndYear${status.count}" name="compentencyEndYear${status.count}" value="${competencyEvaluationList[9]}" class="form-control">
@@ -1240,7 +1240,7 @@
                                                                         </select>
                                                                     </td>
                                                                     <td id="subCompentencyEndRemarkId${status.count}">
-                                                                        <textarea type="Text" id="compentencyEndRemark${status.count}" name="compentencyEndRemark${status.count}" class="form-control" rows="4">${competencyEvaluationList[10]}</textarea>
+                                                                        <textarea type="Text" id="compentencyEndRemark${status.count}" name="compentencyEndRemark${status.count}" class="form-control" rows="4">${competencyEvaluationList[14]}</textarea>
                                                                     </td>
 
                                                                 </tr>
@@ -1680,7 +1680,7 @@
                                                                     <td><select id="midYearScore1" name="midYearScore1" value="${behaviorsList[0].midYearScoreManager}" onchange="behaviorsCount(this);" class="form-control">
                                                                             <option value="">--SELECT--</option>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[0].midYearScoreManager eq '1'}">
+                                                                                <c:when test="${behaviorsList[0].midYearScoreManager eq '5.0'}">
 
                                                                                     <option value="5" selected="">Far Exceeds Expectations</option>
                                                                                 </c:when>
@@ -1690,7 +1690,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[0].midYearScoreManager eq '2'}">
+                                                                                <c:when test="${behaviorsList[0].midYearScoreManager eq '4.0'}">
 
                                                                                     <option value="4" selected="">Exceeds Expectations</option>
                                                                                 </c:when>
@@ -1710,7 +1710,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[0].midYearScoreManager eq '4'}">
+                                                                                <c:when test="${behaviorsList[0].midYearScoreManager eq '2.0'}">
 
                                                                                     <option value="2" selected="">Partially Meets Expectations</option>
                                                                                 </c:when>
@@ -1720,7 +1720,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[0].midYearScoreManager eq '1'}">
+                                                                                <c:when test="${behaviorsList[0].midYearScoreManager eq '1.0'}">
 
                                                                                     <option value="1" selected="">Does Not Meet Expectations</option>
                                                                                 </c:when>
@@ -1734,7 +1734,7 @@
                                                                     <td id="endYearId1"><select id="endYearScore1" name="endYearScore1" value="${behaviorsList[0].endYearScoreManager}" onchange="behaviorsCountEndYear(this)" class="form-control">
                                                                             <option value="">--SELECT--</option>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[0].endYearScoreManager eq '5'}">
+                                                                                <c:when test="${behaviorsList[0].endYearScoreManager eq '5.0'}">
 
                                                                                     <option value="5" selected="">Far Exceeds Expectations</option>
                                                                                 </c:when>
@@ -1744,7 +1744,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[0].endYearScoreManager eq '4'}">
+                                                                                <c:when test="${behaviorsList[0].endYearScoreManager eq '4.0'}">
 
                                                                                     <option value="4" selected="">Exceeds Expectations</option>
                                                                                 </c:when>
@@ -1754,7 +1754,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[0].endYearScoreManager eq '3'}">
+                                                                                <c:when test="${behaviorsList[0].endYearScoreManager eq '3.0'}">
 
                                                                                     <option value="3" selected="">Meets Expectations</option>
                                                                                 </c:when>
@@ -1764,7 +1764,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[0].endYearScoreManager eq '2'}">
+                                                                                <c:when test="${behaviorsList[0].endYearScoreManager eq '2.0'}">
 
                                                                                     <option value="2" selected="">Partially Meets Expectations</option>
                                                                                 </c:when>
@@ -1774,7 +1774,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[0].endYearScoreManager eq '1'}">
+                                                                                <c:when test="${behaviorsList[0].endYearScoreManager eq '1.0'}">
 
                                                                                     <option value="1" selected="">Does Not Meet Expectations</option>
                                                                                 </c:when>
@@ -1800,7 +1800,7 @@
                                                                     <td><select id="midYearScore2" name="midYearScore2" value="${behaviorsList[1].midYearScoreManager}" onchange="behaviorsCount(this);" class="form-control ">
                                                                             <option value="">--SELECT--</option>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[1].midYearScoreManager eq '5'}">
+                                                                                <c:when test="${behaviorsList[1].midYearScoreManager eq '5.0'}">
 
                                                                                     <option value="5" selected="">Far Exceeds Expectations</option>
                                                                                 </c:when>
@@ -1810,7 +1810,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[1].midYearScoreManager eq '4'}">
+                                                                                <c:when test="${behaviorsList[1].midYearScoreManager eq '4.0'}">
 
                                                                                     <option value="4" selected="">Exceeds Expectations</option>
                                                                                 </c:when>
@@ -1820,7 +1820,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[1].midYearScoreManager eq '3'}">
+                                                                                <c:when test="${behaviorsList[1].midYearScoreManager eq '3.0'}">
 
                                                                                     <option value="3" selected="">Meets Expectations</option>
                                                                                 </c:when>
@@ -1830,7 +1830,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[1].midYearScoreManager eq '2'}">
+                                                                                <c:when test="${behaviorsList[1].midYearScoreManager eq '2.0'}">
 
                                                                                     <option value="2" selected="">Partially Meets Expectations</option>
                                                                                 </c:when>
@@ -1840,7 +1840,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[1].midYearScoreManager eq '1'}">
+                                                                                <c:when test="${behaviorsList[1].midYearScoreManager eq '1.0'}">
 
                                                                                     <option value="1" selected="">Does Not Meet Expectations</option>
                                                                                 </c:when>
@@ -1853,7 +1853,7 @@
                                                                     <td id="endYearId2"><select id="endYearScore2" name="endYearScore2" value="${behaviorsList[1].endYearScoreManager}" class="form-control ">
                                                                             <option value="">--SELECT--</option>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[1].endYearScoreManager eq '5'}">
+                                                                                <c:when test="${behaviorsList[1].endYearScoreManager eq '5.0'}">
 
                                                                                     <option value="5" selected="">Far Exceeds Expectations</option>
                                                                                 </c:when>
@@ -1863,7 +1863,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[1].endYearScoreManager eq '4'}">
+                                                                                <c:when test="${behaviorsList[1].endYearScoreManager eq '4.0'}">
 
                                                                                     <option value="4" selected="">Exceeds Expectations</option>
                                                                                 </c:when>
@@ -1873,7 +1873,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[1].endYearScoreManager eq '3'}">
+                                                                                <c:when test="${behaviorsList[1].endYearScoreManager eq '3.0'}">
 
                                                                                     <option value="3" selected="">Meets Expectations</option>
                                                                                 </c:when>
@@ -1883,7 +1883,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[1].endYearScoreManager eq '2'}">
+                                                                                <c:when test="${behaviorsList[1].endYearScoreManager eq '2.0'}">
 
                                                                                     <option value="2" selected="">Partially Meets Expectations</option>
                                                                                 </c:when>
@@ -1893,7 +1893,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[1].endYearScoreManager eq '1'}">
+                                                                                <c:when test="${behaviorsList[1].endYearScoreManager eq '1.0'}">
 
                                                                                     <option value="1" selected="">Does Not Meet Expectations</option>
                                                                                 </c:when>
@@ -1919,7 +1919,7 @@
                                                                     <td><select id="midYearScore3" name="midYearScore3" value="${behaviorsList[2].midYearScoreManager}" onchange="behaviorsCount(this);" class="form-control ">
                                                                             <option value="">--SELECT--</option>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[2].midYearScoreManager eq '5'}">
+                                                                                <c:when test="${behaviorsList[2].midYearScoreManager eq '5.0'}">
 
                                                                                     <option value="5" selected="">Far Exceeds Expectations</option>
                                                                                 </c:when>
@@ -1929,7 +1929,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[2].midYearScoreManager eq '4'}">
+                                                                                <c:when test="${behaviorsList[2].midYearScoreManager eq '4.0'}">
 
                                                                                     <option value="4" selected="">Exceeds Expectations</option>
                                                                                 </c:when>
@@ -1939,7 +1939,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[2].midYearScoreManager eq '3'}">
+                                                                                <c:when test="${behaviorsList[2].midYearScoreManager eq '3.0'}">
 
                                                                                     <option value="3" selected="">Meets Expectations</option>
                                                                                 </c:when>
@@ -1949,7 +1949,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[2].midYearScoreManager eq '2'}">
+                                                                                <c:when test="${behaviorsList[2].midYearScoreManager eq '2.0'}">
 
                                                                                     <option value="2" selected="">Partially Meets Expectations</option>
                                                                                 </c:when>
@@ -1959,7 +1959,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[2].midYearScoreManager eq '1'}">
+                                                                                <c:when test="${behaviorsList[2].midYearScoreManager eq '1.0'}">
 
                                                                                     <option value="1" selected="">Does Not Meet Expectations</option>
                                                                                 </c:when>
@@ -1972,7 +1972,7 @@
                                                                     <td  id="endYearId3"><select id="endYearScore3" name="endYearScore3" value="${behaviorsList[2].endYearScoreManager}" onchange="behaviorsCountEndYear(this);" class="form-control ">
                                                                             <option value="">--SELECT--</option>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[2].endYearScoreManager eq '5'}">
+                                                                                <c:when test="${behaviorsList[2].endYearScoreManager eq '5.0'}">
 
                                                                                     <option value="5" selected="">Far Exceeds Expectations</option>
                                                                                 </c:when>
@@ -1982,7 +1982,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[2].endYearScoreManager eq '4'}">
+                                                                                <c:when test="${behaviorsList[2].endYearScoreManager eq '4.0'}">
 
                                                                                     <option value="4" selected="">Exceeds Expectations</option>
                                                                                 </c:when>
@@ -1992,7 +1992,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[2].endYearScoreManager eq '3'}">
+                                                                                <c:when test="${behaviorsList[2].endYearScoreManager eq '3.0'}">
 
                                                                                     <option value="3" selected="">Meets Expectations</option>
                                                                                 </c:when>
@@ -2002,7 +2002,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[2].endYearScoreManager eq '2'}">
+                                                                                <c:when test="${behaviorsList[2].endYearScoreManager eq '2.0'}">
 
                                                                                     <option value="2" selected="">Partially Meets Expectations</option>
                                                                                 </c:when>
@@ -2012,7 +2012,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[2].endYearScoreManager eq '1'}">
+                                                                                <c:when test="${behaviorsList[2].endYearScoreManager eq '1.0'}">
 
                                                                                     <option value="1" selected="">Does Not Meet Expectations</option>
                                                                                 </c:when>
@@ -2038,7 +2038,7 @@
                                                                     <td><select id="midYearScore4" name="midYearScore4" value="${behaviorsList[3].midYearScoreManager}" onchange="behaviorsCount(this);" class="form-control ">
                                                                             <option value="">--SELECT--</option>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[3].midYearScoreManager eq '5'}">
+                                                                                <c:when test="${behaviorsList[3].midYearScoreManager eq '5.0'}">
 
                                                                                     <option value="5" selected="">Far Exceeds Expectations</option>
                                                                                 </c:when>
@@ -2048,7 +2048,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[3].midYearScoreManager eq '4'}">
+                                                                                <c:when test="${behaviorsList[3].midYearScoreManager eq '4.0'}">
 
                                                                                     <option value="4" selected="">Exceeds Expectations</option>
                                                                                 </c:when>
@@ -2058,7 +2058,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[3].midYearScoreManager eq '3'}">
+                                                                                <c:when test="${behaviorsList[3].midYearScoreManager eq '3.0'}">
 
                                                                                     <option value="3" selected="">Meets Expectations</option>
                                                                                 </c:when>
@@ -2068,7 +2068,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[3].midYearScoreManager eq '2'}">
+                                                                                <c:when test="${behaviorsList[3].midYearScoreManager eq '2.0'}">
 
                                                                                     <option value="2" selected="">Partially Meets Expectations</option>
                                                                                 </c:when>
@@ -2078,7 +2078,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[3].midYearScoreManager eq '1'}">
+                                                                                <c:when test="${behaviorsList[3].midYearScoreManager eq '1.0'}">
 
                                                                                     <option value="1" selected="">Does Not Meet Expectations</option>
                                                                                 </c:when>
@@ -2091,7 +2091,7 @@
                                                                     <td id="endYearId4"><select id="endYearScore4" name="endYearScore4" value="${behaviorsList[3].endYearScoreManager}" onchange="behaviorsCountEndYear(this);" class="form-control ">
                                                                             <option value="">--SELECT--</option>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[3].endYearScoreManager eq '5'}">
+                                                                                <c:when test="${behaviorsList[3].endYearScoreManager eq '5.0'}">
 
                                                                                     <option value="5" selected="">Far Exceeds Expectations</option>
                                                                                 </c:when>
@@ -2101,7 +2101,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[3].endYearScoreManager eq '4'}">
+                                                                                <c:when test="${behaviorsList[3].endYearScoreManager eq '4.0'}">
 
                                                                                     <option value="4" selected="">Exceeds Expectations</option>
                                                                                 </c:when>
@@ -2111,7 +2111,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[3].endYearScoreManager eq '3'}">
+                                                                                <c:when test="${behaviorsList[3].endYearScoreManager eq '3.0'}">
 
                                                                                     <option value="3" selected="">Meets Expectations</option>
                                                                                 </c:when>
@@ -2121,7 +2121,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[3].endYearScoreManager eq '2'}">
+                                                                                <c:when test="${behaviorsList[3].endYearScoreManager eq '2.0'}">
 
                                                                                     <option value="2" selected="">Partially Meets Expectations</option>
                                                                                 </c:when>
@@ -2131,7 +2131,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[3].endYearScoreManager eq '1'}">
+                                                                                <c:when test="${behaviorsList[3].endYearScoreManager eq '1.0'}">
 
                                                                                     <option value="1" selected="">Does Not Meet Expectations</option>
                                                                                 </c:when>
@@ -2157,7 +2157,7 @@
                                                                     <td><select id="midYearScore5" name="midYearScore5" value="${behaviorsList[4].midYearScoreManager}" onchange="behaviorsCount(this);" class="form-control ">
                                                                             <option value="">--SELECT--</option>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[4].midYearScoreManager eq '5'}">
+                                                                                <c:when test="${behaviorsList[4].midYearScoreManager eq '5.0'}">
 
                                                                                     <option value="5" selected="">Far Exceeds Expectations</option>
                                                                                 </c:when>
@@ -2167,7 +2167,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[4].midYearScoreManager eq '4'}">
+                                                                                <c:when test="${behaviorsList[4].midYearScoreManager eq '4.0'}">
 
                                                                                     <option value="4" selected="">Exceeds Expectations</option>
                                                                                 </c:when>
@@ -2177,7 +2177,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[4].midYearScoreManager eq '3'}">
+                                                                                <c:when test="${behaviorsList[4].midYearScoreManager eq '3.0'}">
 
                                                                                     <option value="3" selected="">Meets Expectations</option>
                                                                                 </c:when>
@@ -2187,7 +2187,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[4].midYearScoreManager eq '2'}">
+                                                                                <c:when test="${behaviorsList[4].midYearScoreManager eq '2.0'}">
 
                                                                                     <option value="2" selected="">Partially Meets Expectations</option>
                                                                                 </c:when>
@@ -2197,7 +2197,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[4].midYearScoreManager eq '1'}">
+                                                                                <c:when test="${behaviorsList[4].midYearScoreManager eq '1.0'}">
 
                                                                                     <option value="1" selected="">Does Not Meet Expectations</option>
                                                                                 </c:when>
@@ -2210,7 +2210,7 @@
                                                                     <td id="endYearId5"><select id="endYearScore5" name="endYearScore5" value="${behaviorsList[4].endYearScoreManager}" onchange="behaviorsCountEndYear(this);" class="form-control">
                                                                             <option value="">--SELECT--</option>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[4].endYearScoreManager eq '5'}">
+                                                                                <c:when test="${behaviorsList[4].endYearScoreManager eq '5.0'}">
 
                                                                                     <option value="5" selected="">Far Exceeds Expectations</option>
                                                                                 </c:when>
@@ -2220,7 +2220,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[4].endYearScoreManager eq '4'}">
+                                                                                <c:when test="${behaviorsList[4].endYearScoreManager eq '4.0'}">
 
                                                                                     <option value="4" selected="">Exceeds Expectations</option>
                                                                                 </c:when>
@@ -2230,7 +2230,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[4].endYearScoreManager eq '3'}">
+                                                                                <c:when test="${behaviorsList[4].endYearScoreManager eq '3.0'}">
 
                                                                                     <option value="3" selected="">Meets Expectations</option>
                                                                                 </c:when>
@@ -2240,7 +2240,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[4].endYearScoreManager eq '2'}">
+                                                                                <c:when test="${behaviorsList[4].endYearScoreManager eq '2.0'}">
 
                                                                                     <option value="2" selected="">Partially Meets Expectations</option>
                                                                                 </c:when>
@@ -2250,7 +2250,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${behaviorsList[4].endYearScoreManager eq '1'}">
+                                                                                <c:when test="${behaviorsList[4].endYearScoreManager eq '1.0'}">
 
                                                                                     <option value="1" selected="">Does Not Meet Expectations</option>
                                                                                 </c:when>

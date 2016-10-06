@@ -105,7 +105,7 @@ public class ProbationToConfirmationDAOImpl<T> extends GenericsDAOImpl<T> implem
                 + " else YEAR(STR_TO_DATE(ptc2.hr_submit_date,'%d/%m/%Y'))-1"
                 + " end as startYear"
                 + " from probation_to_confirmation as ptc2"
-                + " where ptc2.status = 5) as financial";
+                + " where ptc2.status = 5 GROUP By ptc2.status) as financial";
         Query query = getSession().createSQLQuery(sqlString);
         List<?> probationToconfirmationRequestDataList = query.list();
         return probationToconfirmationRequestDataList;

@@ -1010,6 +1010,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         request.setAttribute("endDateStatus", leaveEmployeeDetail.getEndDateStatus());
         leaveTypeMaster = leaveTypeMasterService.readById(leaveEmployeeDetail.getLeaveTypeMaster().getId());
         request.setAttribute("leaveType", leaveTypeMaster.getLeaveType());
+        
         if (leaveTypeMaster.getLeaveType().equals("Short Leave")) {
             request.setAttribute("startDateStr", leaveEmployeeDetail.getStartDate());
             request.setAttribute("endDateStr", leaveEmployeeDetail.getEndDate());
@@ -1067,7 +1068,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
         employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
         List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance1);
-        if (!balanceList.isEmpty()) {
+         if (!balanceList.isEmpty()) {
             employeeLeaveBalance1 = (EmployeeLeaveBalance) balanceList.get(0);
         }
 
@@ -1397,7 +1398,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
 //                mv = searchSubmit(request, response);
             } else if (leaveEmployeeDetail.getStatus() == 3) {
-                if (leaveTypeMaster.getLeaveType().contains("Short Leave")) {
+               int leaveTypeid=leaveEmployeeDetail.getLeaveTypeMaster().getId();
+               LeaveTypeMaster leaveTypeMaster1=leaveTypeMasterService.readById(leaveTypeid);
+                if (leaveTypeMaster1.getLeaveType().contains("Short Leave")) {
                     leaveEmployeeDetail.setStartDate(request.getParameter("startDateShort"));
                     leaveEmployeeDetail.setEndDate(request.getParameter("endDateShort"));
                     leaveEmployeeDetail.setHrRemark(null);

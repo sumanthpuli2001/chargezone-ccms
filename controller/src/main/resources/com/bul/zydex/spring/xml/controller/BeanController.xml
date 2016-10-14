@@ -515,6 +515,13 @@
         <property name="userRightMasterService" ref="userRightMasterService1" />
         <property name="holidayMasterService" ref="holidayMasterService1"/>
         <property name="cOffLeaveMasterService" ref="cOffLeaveMasterService1"/>
+        <property name="levelMasterService" ref="levelMasterService1"/>
+        <property name="locationMasterService" ref="locationMasterService1"/>
+        <property name="travelRequestMasterService" ref="travelRequestMasterService1"/>
+        <property name="expenseMasterService" ref="expenseMasterService1"/>
+        <property name="itServiceRequestService" ref="itServiceRequestService1"/>
+        <property name="hrServiceRequestService" ref="hrServiceRequestService1"/>
+        
     </bean>
     <bean id="emailAddMasterController1" class="com.bul.zydex.controller.EmailAddMasterController" parent="controllerConfig" >
         <property name="emailAddMasterService" ref="emailAddMasterService1" />
@@ -547,6 +554,15 @@
         <property name="travelApproverHistoryService" ref="travelApproverHistoryService1" />
     </bean>
     <bean id="expenseWebService1" class="com.bul.zydex.webservice.Expense.ExpenseWebService" parent="controllerConfig">
+        
+    </bean>
+    <bean id="itWebService1" class="com.bul.zydex.webservice.ItWebService" parent="controllerConfig">
+        <property name="itRequestTypeService" ref="itRequestTypeService1" />
+        <property name="itServiceRequestService" ref="itServiceRequestService1" />
+    </bean>
+    <bean id="hrWebService1" class="com.bul.zydex.webservice.HrWebService" parent="controllerConfig">
+        <property name="hrServiceRequestService" ref="hrServiceRequestService1" />
+        <property name="queryTypeService" ref="queryTypeService1" />
         
     </bean>
     

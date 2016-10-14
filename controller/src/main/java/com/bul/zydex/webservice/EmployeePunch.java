@@ -36,30 +36,36 @@ public class EmployeePunch extends EmployeePunchAbstract {
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         JSONObject userData = new JSONObject();
-        JSONObject data = doPost(request);
-        String id = request.getParameter("id");
-        int userid = Integer.parseInt(id);
-        user.setId(userid);
-        employeeMaster.setUserMaster(user);
-        List<?> empDetailList = employeeMasterService.readByEmployeeUserId(employeeMaster);
-        if (!empDetailList.isEmpty()) {
-            employeeMaster1 = (EmployeeMaster) empDetailList.get(0);
-            String date=data.get("punchTime").toString();
+        try {
+            JSONObject data = doPost(request);
+            String id = request.getParameter("id");
+            int userid = Integer.parseInt(id);
+            user.setId(userid);
+            employeeMaster.setUserMaster(user);
+            List<?> empDetailList = employeeMasterService.readByEmployeeUserId(employeeMaster);
+            if (!empDetailList.isEmpty()) {
+                employeeMaster1 = (EmployeeMaster) empDetailList.get(0);
+                String date = data.get("punchTime").toString();
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-            Date punchTime = sdf.parse(date);
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                Date punchTime = sdf.parse(date);
 
-            EmployeePunchForMobileApp employeePunchForMobileApp = new EmployeePunchForMobileApp();
-            employeePunchForMobileApp.setEmployeeMaster(employeeMaster1);
-            employeePunchForMobileApp.setPunchTime(punchTime.toString());
-            employeePunchForMobileApp.setPunchLocation(data.get("punchLocation").toString());
-            employeePunchForMobileAppService.create(employeePunchForMobileApp);
-            rcode = "1";
-            message = "Success";
-        } else {
+                EmployeePunchForMobileApp employeePunchForMobileApp = new EmployeePunchForMobileApp();
+                employeePunchForMobileApp.setEmployeeMaster(employeeMaster1);
+                employeePunchForMobileApp.setPunchTime(punchTime.toString());
+                employeePunchForMobileApp.setPunchLocation(data.get("punchLocation").toString());
+                employeePunchForMobileAppService.create(employeePunchForMobileApp);
+                rcode = "1";
+                message = "Success";
+            } else {
+                rcode = "0";
+                message = "Error";
+            }
+        } catch (Exception exception) {
             rcode = "0";
-            message = "Error";
+            message = "Something Wrong";
         }
+
         userData.put("responseMessage", message);
         userData.put("responseCode", rcode);
         out.print(userData);

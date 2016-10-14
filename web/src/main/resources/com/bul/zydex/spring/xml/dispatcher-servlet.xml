@@ -149,6 +149,8 @@
                 <prop key="travelWebService.html">travelWebService1</prop>
                 <prop key="expenseWebService.html">expenseWebService1</prop>
                 <prop key="urlMaster.htm">urlMasterController1</prop>
+                <prop key="hrWebService.html">hrWebService1</prop>
+                <prop key="itWebService.html">itWebService1</prop>
                 
            
             </props>

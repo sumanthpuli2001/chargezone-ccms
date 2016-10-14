@@ -682,8 +682,8 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " WHERE a.status !=5"
                 + " AND a.employeeMaster.id = " + empId
                 + " AND DATE_FORMAT(STR_TO_DATE(a.startDate,'%d/%m/%Y'),'%Y')= DATE_FORMAT(STR_TO_DATE('" + s + "','%d/%m/%Y'),'%Y')"
-                + "AND a.leaveTypeMaster.id=" + 7
-                + " AND a.noOfDays<1";
+                + " AND a.leaveTypeMaster.id=" + 7
+                + " AND a.noOfDays<3";
         return getHibernateTemplate().find(query);
     }
 

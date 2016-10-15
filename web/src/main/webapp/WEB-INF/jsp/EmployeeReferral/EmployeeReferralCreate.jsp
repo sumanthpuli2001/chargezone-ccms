@@ -39,6 +39,7 @@
             }
 
         </script>
+
         <c:if test="${((sessionScope.employeeInfo.id eq finalApprover) or sessionScope.userRight.employeeReferral) && employeeReferral.status ne 0}">
             <script>
                 $(document).ready(function () {
@@ -57,14 +58,22 @@
                 <li class="active">Employee Referral</li>
             </ol>
         </section>
+        <div class="col-md-12" style="text-align: center;">
+            <span style="alignment-adjust: middle;">
+                <button type="button" id="mycmd" class="btn btn-primary" style="width: 100px;text-align: center;alignment-adjust: central;">PRINT</button>
+            </span>
+        </div>
 
         <!-- Main content -->
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
+
                     <!-- Custom Tabs -->
                     <div class="nav-tabs-custom">
+
                         <div class="tab-content">
+
                             <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
                             <c:if test="${!empty successMessage}">
                                 <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
@@ -80,7 +89,7 @@
                                 <%--<spring:bind path="streetName.value">--%>
                                 <!--<input type="hidden" name="" value="" />-->
                                 <%--</spring:bind>--%>
-                                <div class="box box-info collapsed-box ">
+                                <div class="box box-info collapsed-box " id="printArea1">
                                     <div class="box-header">
                                         <h3 class="box-title">Referring Employee Details:</h3>
                                         <div class="box-tools pull-right">
@@ -206,7 +215,7 @@
                                     </div><!-- /.box-body -->
                                 </div>
                                 <!--Employee detail completes here-->
-                                <div class="box box-info collapsed-box">
+                                <div class="box box-info collapsed-box" id="printArea2">
                                     <div class="box-header">
                                         <h3 class="box-title">Referred Candidate Details:</h3>
                                         <div class="box-tools pull-right">
@@ -400,7 +409,7 @@
                                 <!--Travel request and type detail completes here-->
                                 <%--<c:if test="${sessionScope.userRight.hr or sessionScope.userRight.employeeReferral}">--%>
                                 <c:if test="${((sessionScope.employeeInfo.id eq finalApprover) or sessionScope.userRight.employeeReferral) && ((employeeReferral.status eq 1) or (employeeReferral.status eq 2) or (employeeReferral.status eq 3))}">
-                                    <div class="box box-info collapsed-box">
+                                    <div class="box box-info collapsed-box" id="printArea3">
                                         <div class="box-header">
                                             <h3 class="box-title">Joiner Detail:</h3>
                                             <div class="box-tools pull-right">
@@ -601,7 +610,8 @@
                                                                                                     <button type="submit" value="return" id="buttonPressed" class="btn btn-warning" data-original-title="" onclick="cickToSubmit(this.value);" style="width: 100px;" title="">RETURN</button>
                                                                                                 </div>-->
                                             </c:if>
-                                            <c:if test="${ (employeeReferral.status eq 2) && (sessionScope.employeeInfo.id eq finalApprover)}">
+                                               
+                                            <c:if test="${ (employeeReferral.status eq 2) && (sessionScope.employeeInfo.id eq finalApproverByHeHead)}">
                                                 <div class="col-sm-12" style="text-align: center;">
                                                     <button type="Submit" value="ApproveFinalByHr" id="buttonPressed" class="btn btn-success" data-original-title="" onclick="cickToSubmit(this.value);" style="width: 100px">APPROVE</button>
                                                 </div>
@@ -770,9 +780,28 @@
             minView: 2,
             forceParse: 0,
             showMeridian: 1
-          
+
         }
         );
+    </script>
+    <script type="text/javascript">
+        $('#mycmd').click(function () {
+
+            var printContents = $("#printArea1").html();
+            var printContents1 = $("#printArea2").html();
+            var printContents2 = $("#printArea3").html();
+            var popupWin = window.open('', '_blank');
+            var allLinks = $("#printCss").html();
+            popupWin.document.open();
+            var keepColors = '<style>body {-webkit-print-color-adjust: exact !important; }</style>';
+
+            popupWin.document.write('<html><head><title></title>' + keepColors + allLinks + '</head><body onload="setTimeout(function(){window.print();},3000);">' + printContents + printContents1 + printContents2 + '</body></html>');
+            popupWin.document.close();
+
+        });
+
+
+
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

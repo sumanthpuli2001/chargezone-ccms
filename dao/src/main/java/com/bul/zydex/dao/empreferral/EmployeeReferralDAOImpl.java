@@ -85,4 +85,50 @@ public class EmployeeReferralDAOImpl<T> extends GenericsDAOImpl<T> implements Em
         List<?> list = getHibernateTemplate().find(hqlQryString);
         return list;
     }
+
+    @Override
+    public List<?> checkPositionReferd(final T object) {
+        EmployeeReferral employeeReferral = (EmployeeReferral) object;
+        String query = "";
+
+        query += " FROM EmployeeReferral a"
+                + " WHERE a.candidatePositionReferredFor='" + employeeReferral.getCandidatePositionReferredFor() + "'";
+
+        return getHibernateTemplate().find(query);
+    }
+    @Override
+    public List<?> finalApproveByHrHead() {
+        String query = "";
+
+        query += " SELECT a FROM EmployeeMaster a"
+                + " WHERE a.departmentMaster.id="+ 59
+                + " and a.designationMaster.id="+ 114;
+
+        return getHibernateTemplate().find(query);
+    }
+     public List<?> finalApproveList(T object) {
+        EmployeeReferral employeeReferral = (EmployeeReferral) object;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("select er, em.id, em.employeeId, em.employeeName, dgm.id,"
+                + " dgm.designationName, lev.level, dm.id, dm.departmentName, lm.id, zlm.zydexLocation,"
+                + " (Select a.employeeName From EmployeeMaster a where cast(a.id as string) = em.reportingManagerLevel1) As reportingManager, lm.location,")
+                .append(" prm.positionName, prm.positionCode")
+                .append(" from  EmployeeReferral AS er ,PositionReferMaster as prm  left join er.employeeMaster AS em")
+                .append(" left join em.departmentMaster as dm left join em.designationMaster as dgm")
+                .append(" left join em.levelMaster lev")
+                .append(" left join em.locationMaster as lm")
+                .append(" left join em.zydexLocationMaster as zlm");
+  
+            sb.append(" where er.status=2");
+    
+        sb.append(" and (er.candidatePositionReferredFor=prm.id) order By er.id desc");
+
+        String hqlQryString = sb.toString();
+//        String qryString = getSessionFactory().getCurrentSession().createQuery(hqlQryString).getQueryString();
+        List<?> employeeRefList = getHibernateTemplate().find(hqlQryString);
+//        List<?> employeeRefList = ;
+
+        return employeeRefList;
+    }
 }

@@ -109,7 +109,7 @@ public class EmployeeReferralAbstract extends CustomAbstract {
 
     protected Map<Integer, String> getPositionReferalMap() {
         PositionReferMaster positionReferMaster = new PositionReferMaster();
-        List positionList = positionReferMasterService.read();
+        List positionList = positionReferMasterService.readPositionData();
         Map<Integer, String> positionReferMasterMap = new HashMap<Integer, String>();
         for (Object o : positionList) {
             positionReferMaster = (PositionReferMaster) o;

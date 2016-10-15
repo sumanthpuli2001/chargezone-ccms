@@ -12,40 +12,50 @@ public class PositionReferMaster  implements java.io.Serializable {
      private Integer id;
      private String positionName;
      private String positionCode;
+     private boolean status;
 
     public PositionReferMaster() {
     }
 
-    public PositionReferMaster(String positionName, String positionCode) {
-       this.positionName = positionName;
-       this.positionCode = positionCode;
+    public PositionReferMaster(String positionName, String positionCode, boolean status) {
+        this.positionName = positionName;
+        this.positionCode = positionCode;
+        this.status = status;
     }
-   
+
     public Integer getId() {
-        return this.id;
+        return id;
     }
-    
+
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getPositionName() {
-        return this.positionName;
+        return positionName;
     }
-    
+
     public void setPositionName(String positionName) {
         this.positionName = positionName;
     }
+
     public String getPositionCode() {
-        return this.positionCode;
+        return positionCode;
     }
-    
+
     public void setPositionCode(String positionCode) {
         this.positionCode = positionCode;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
 
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
-
+   
 }
 
 

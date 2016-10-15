@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.Position;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,5 @@ import com.bul.zydex.dao.GenericsDAO;
 public interface PositionReferMasterDAO<T> extends GenericsDAO<T> {
 
     public boolean isExist(T object);
+    public List<?> readPositionData();
 }

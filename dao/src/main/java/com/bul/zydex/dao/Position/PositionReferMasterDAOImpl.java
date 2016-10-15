@@ -21,14 +21,20 @@ public class PositionReferMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
     }
 
     @Override
-   public boolean isExist(T object) {
+    public boolean isExist(T object) {
         boolean flag = false;
         PositionReferMaster positionReferMaster = (PositionReferMaster) object;
-        List<?> list = getHibernateTemplate().find("from PositionReferMaster  where positionName ='" + positionReferMaster.getPositionName()+ "' AND positionCode ='" + positionReferMaster.getPositionCode()+ "'");
+        List<?> list = getHibernateTemplate().find("from PositionReferMaster  where positionName ='" + positionReferMaster.getPositionName() + "' AND positionCode ='" + positionReferMaster.getPositionCode() + "'");
         if (list.isEmpty()) {
             flag = true;
         }
         return flag;
+    }
+
+    @Override
+    public List<?> readPositionData() {
+        String Query = " from PositionReferMaster  where status =0";
+        return getHibernateTemplate().find(Query);
     }
 
 }

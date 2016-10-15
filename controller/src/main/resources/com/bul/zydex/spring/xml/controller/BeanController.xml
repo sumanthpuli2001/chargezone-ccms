@@ -115,6 +115,7 @@
     <bean id="positionReferMasterController1" class="com.bul.zydex.controller.Position.PositionReferMasterController" parent="controllerConfig" >
         <property name="positionReferMasterService" ref="positionReferMasterService1" />
         <property name="positionReferMasterValidator" ref="positionReferMasterValidator1" />
+        <property name="employeeReferralService" ref="employeeReferralService1" />
     </bean>
 
     <!--Shift Management-->

@@ -612,7 +612,7 @@ public class EmployeeReferralController extends EmployeeReferralAbstract {
             mv.addObject("employeeRefList", employeeRefList.get(0));// list is used because from session we can ge logged in user as Hr Not Employee.
         }
         mv.getModelMap().put("employeeReferral", employeeReferral);
-        mv.getModelMap().put("positionReferMap", getPositionReferalMap());
+        mv.getModelMap().put("positionReferMap", getPosition());
 //        String id = request.getParameter("id");
         List reportingManagerOfEmpRefAdminList = employeeReferralService.getReportingManagerOfEmpRefAdmin();
         if (!reportingManagerOfEmpRefAdminList.isEmpty()) {

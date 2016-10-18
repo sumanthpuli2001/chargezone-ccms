@@ -277,10 +277,10 @@
         }
         function checkCertificateFileSize(id) {
             if (typeof FileReader !== "undefined") {
-                var fileSize = document.getElementById('certificateId'+id).files[0].size;
+                var fileSize = document.getElementById('certificateId' + id).files[0].size;
 //                alert("my File size is   " + fileSize);
                 if (fileSize > 1048576) {
-                    document.getElementById('certificateId'+id).value = '';
+                    document.getElementById('certificateId' + id).value = '';
                     document.getElementById('certificateError').innerHTML = "- It must not more than 1mb";
                 } else {
                     document.getElementById('certificateError').innerHTML = '';
@@ -571,7 +571,7 @@
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label>Child1's Date Of Birth:</label>
-                                                                  <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                     <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                                                 <form:input path="dateOfBirthOfEmpChilld1" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
@@ -911,6 +911,17 @@
                                                                 </select>
                                                                 <span style="font-size: 14px; color: #dd4b39;" id="shiftMasterIdError"></span>
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Competency Evaluation:<span style="color: red;font-size: 12px;">*</span></label>
+                                                              <select name="competencyEvaluationId" id="competencyEvaluationId" class="form-control">
+                                                             <option value="">--SELECT--</option>
+                                                                <c:forEach var="competencyMap" items="${competencyMap}">
+                                                                    <option value="${competencyMap.key}">${competencyMap.value}</option>
+                                                                </c:forEach>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div><!-- /.col -->

@@ -72,6 +72,7 @@ public class EmployeeMaster implements java.io.Serializable {
     private String dateOfBirthOfEmpChilld1;
     private String dateOfBirthOfEmpChild2;
     private String dateOfTransferOfEntity;
+    private Integer competencyEvaluationId;
     private Set employeeDatetimeDatas = new HashSet(0);
     private Set visitorManagementsForApproverId = new HashSet(0);
     private Set travelRequestMastersForApprover2Id = new HashSet(0);
@@ -190,7 +191,7 @@ public class EmployeeMaster implements java.io.Serializable {
         this.shiftType = shiftType;
     }
 
-    public EmployeeMaster(LevelMaster levelMaster, DesignationMaster designationMaster, ZydexLocationMaster zydexLocationMaster, DepartmentMaster departmentMaster, LocationMaster locationMaster, UserMaster userMaster, String employeeId, String employeeName, String dateOfJoining, String role, String company, String emailAddress, String contactNo1, String contactNo2, String fatherName, String motherName, String dateOfBirth, Boolean gender, String maritalStatus, String spouseName, String emergencyContactPerson, String emergencyContactNo, String panCard, String passportNo, String passportIssueDate, String passportExpiryDate, String dateOfLeaving, String reasonForLeaving, String reportingManagerLevel1, String reportingManagerLevel2, String reportingManagerLevel3, String reportingManagerLevel4, String reportingManagerLevel5, String reportingManagerLevel6, String employeeType, String shiftType, Integer shiftHoursId, String officeEmailId, String child1, String child2, String highestEducationDetails, String experienceYearOnDoj, String permanentAddress, String presentAddress, String adharCard, String drivingLicence, String lastYearPerformanceRating, String bloodGroups, String shiftRotationDate, String govLicenceName, String maritalStatusOthers, String experienceMonthOnDoj, String bankName, String bankAccountNo, String bankIfscCode, String cityOfEmployee, String dateOfBirthOfEmpFather, String dateOfBirthOfEmpMother, String dateOfBirthOfEmpSpous, String dateOfBirthOfEmpChilld1, String dateOfBirthOfEmpChild2, String dateOfTransferOfEntity, Set employeeDatetimeDatas, Set visitorManagementsForApproverId, Set travelRequestMastersForApprover2Id, Set visitorManagementsForSecurityApproveId, Set travelRequestMastersForEmployeeMasterId, Set visitorManagementsForApproverId_1, Set travelRequestMastersForApprover1Id, Set visitorManagementsForEmployeeMasterId, Set cafeteriaRequestsForAdminApproverId, Set employeeReferrals, Set cafeteriaRequestsForEmployeeMasterId, Set cafeteriaRequestsForApproverId, Set employeeLeaveBalances, Set cafeteriaRequestsForApproverId_1, Set itServiceRequestsForEmployeeMasterId, Set attendanceRegularizations, Set expenseMastersForApprover2Id, Set exitInterviewMastersForApproverId, Set gatePassesForApproverId, Set gatePassesForSecurityApproverId, Set gatePassesForEmployeeMasterId, Set resignationMasters, Set travelRequestMastersForApprover1Id_1, Set exitInterviewMastersForApproverId2, Set shiftGenerateMonthlySchedules, Set appraisalPerformanceMasters, Set probationToConfirmationsForEmployeeMasterId, Set probationToConfirmationsForHrId, Set visitorManagementsForEmployeeMasterId_1, Set exitInterviewMastersForEmpId, Set probationToConfirmationsForEmployeeMasterId_1, Set gatePassesForEmployeeMasterId_1, Set expenseMastersForEmployeeId, Set gatePassesForApproverId_1, Set leaveEmployeeDetails, Set probationToConfirmationsForHrId_1, Set performanceImprovementPlanMastersForPipManagerId, Set exitInterviewMastersForApproverId2_1, Set appraisalFeedback360sForRefForEmpId, Set cafeteriaRequestsForEmployeeMasterId_1, Set travelApproverHistoriesForEmployeeMasterId, Set noDueMastersForApproverId, Set poolCarRequestsForEmployeeMasterId, Set overTimeMasters, Set poolCarRequestsForAdminApproverId, Set hrServiceRequestsForHrApproveId, Set cafeteriaRequestsForAdminApproverId_1, Set employeeShiftDatas, Set performanceImprovementPlanMastersForPipEmployeeId, Set performanceImprovementPlanMastersForPipManagerId_1, Set poolCarRequestsForEmployeeMasterId_1, Set poolCarRequestsForAdminApproverId_1, Set poolCarRequestsForApproverId, Set leaveEmployeeDetails_1, Set leaveEncashmentsForCreatorEmpId, Set resignationMasters_1, Set exitInterviewMastersForApproverId_1, Set tempShiftAssignMasters, Set employeeLeaveBalances_1, Set expenseMastersForApprover2Id_1, Set leaveEncashmentsForApproverEmpId, Set poolCarRequestsForApproverId_1, Set noDueMastersForEmpId, Set shiftGenerateMonthlySchedules_1, Set travelApproverHistoriesForTravelApproverId, Set expenseMastersForApprover1Id, Set itServiceRequestsForItApproverId, Set itServiceRequestsForEmployeeMasterId_1, Set travelApproverHistoriesForTravelApproverId_1, Set travelApproverHistoriesForEmployeeMasterId_1, Set appraisalFeedback360sForHrCreatorId, Set appraisalFeedback360sForRefDoneEmpId, Set appraisalFeedback360sForRefForEmpId_1, Set travelRequestMastersForEmployeeMasterId_1, Set appraisalFeedback360sForHrCreatorId_1, Set noDueMastersForEmpId_1, Set visitorManagementsForSecurityApproveId_1, Set exitInterviewMastersForEmpId_1, Set attendanceRegularizations_1, Set improvementGoalsHistories, Set expenseMastersForApprover1Id_1, Set leaveEncashmentsForCreatorEmpId_1, Set leaveEncashmentsForApproverEmpId_1, Set employeeDatetimeDatas_1, Set appraisalFeedback360sForRefDoneEmpId_1, Set performanceImprovementPlanMastersForPipEmployeeId_1, Set overTimeMasters_1, Set employeeShiftDatas_1, Set hrServiceRequestsForEmployeeMasterId, Set appraisalPerformanceMasters_1, Set expenseMastersForEmployeeId_1, Set itServiceRequestsForItApproverId_1, Set travelRequestMastersForApprover2Id_1, Set improvementGoalsHistories_1, Set employeeReferrals_1, Set noDueMastersForApproverId_1, Set gatePassesForSecurityApproverId_1, Set tempShiftAssignMasters_1, Set hrServiceRequestsForEmployeeMasterId_1, Set hrServiceRequestsForHrApproveId_1,Set employeePunchForMobileApps) {
+    public EmployeeMaster(LevelMaster levelMaster, DesignationMaster designationMaster, ZydexLocationMaster zydexLocationMaster, DepartmentMaster departmentMaster, LocationMaster locationMaster, UserMaster userMaster, String employeeId, String employeeName, String dateOfJoining, String role, String company, String emailAddress, String contactNo1, String contactNo2, String fatherName, String motherName, String dateOfBirth, Boolean gender, String maritalStatus, String spouseName, String emergencyContactPerson, String emergencyContactNo, String panCard, String passportNo, String passportIssueDate, String passportExpiryDate, String dateOfLeaving, String reasonForLeaving, String reportingManagerLevel1, String reportingManagerLevel2, String reportingManagerLevel3, String reportingManagerLevel4, String reportingManagerLevel5, String reportingManagerLevel6, String employeeType, String shiftType, Integer shiftHoursId, String officeEmailId, String child1, String child2, String highestEducationDetails, String experienceYearOnDoj, String permanentAddress, String presentAddress, String adharCard, String drivingLicence, String lastYearPerformanceRating, String bloodGroups, String shiftRotationDate, String govLicenceName, String maritalStatusOthers, String experienceMonthOnDoj, String bankName, String bankAccountNo, String bankIfscCode, String cityOfEmployee, String dateOfBirthOfEmpFather, String dateOfBirthOfEmpMother, String dateOfBirthOfEmpSpous, String dateOfBirthOfEmpChilld1, String dateOfBirthOfEmpChild2, String dateOfTransferOfEntity, Integer competencyEvaluationId) {
         this.levelMaster = levelMaster;
         this.designationMaster = designationMaster;
         this.zydexLocationMaster = zydexLocationMaster;
@@ -253,111 +254,11 @@ public class EmployeeMaster implements java.io.Serializable {
         this.dateOfBirthOfEmpChilld1 = dateOfBirthOfEmpChilld1;
         this.dateOfBirthOfEmpChild2 = dateOfBirthOfEmpChild2;
         this.dateOfTransferOfEntity = dateOfTransferOfEntity;
-        this.employeeDatetimeDatas = employeeDatetimeDatas;
-        this.visitorManagementsForApproverId = visitorManagementsForApproverId;
-        this.travelRequestMastersForApprover2Id = travelRequestMastersForApprover2Id;
-        this.visitorManagementsForSecurityApproveId = visitorManagementsForSecurityApproveId;
-        this.travelRequestMastersForEmployeeMasterId = travelRequestMastersForEmployeeMasterId;
-        this.visitorManagementsForApproverId_1 = visitorManagementsForApproverId_1;
-        this.travelRequestMastersForApprover1Id = travelRequestMastersForApprover1Id;
-        this.visitorManagementsForEmployeeMasterId = visitorManagementsForEmployeeMasterId;
-        this.cafeteriaRequestsForAdminApproverId = cafeteriaRequestsForAdminApproverId;
-        this.employeeReferrals = employeeReferrals;
-        this.cafeteriaRequestsForEmployeeMasterId = cafeteriaRequestsForEmployeeMasterId;
-        this.cafeteriaRequestsForApproverId = cafeteriaRequestsForApproverId;
-        this.employeeLeaveBalances = employeeLeaveBalances;
-        this.cafeteriaRequestsForApproverId_1 = cafeteriaRequestsForApproverId_1;
-        this.itServiceRequestsForEmployeeMasterId = itServiceRequestsForEmployeeMasterId;
-        this.attendanceRegularizations = attendanceRegularizations;
-        this.expenseMastersForApprover2Id = expenseMastersForApprover2Id;
-        this.exitInterviewMastersForApproverId = exitInterviewMastersForApproverId;
-        this.gatePassesForApproverId = gatePassesForApproverId;
-        this.gatePassesForSecurityApproverId = gatePassesForSecurityApproverId;
-        this.gatePassesForEmployeeMasterId = gatePassesForEmployeeMasterId;
-        this.resignationMasters = resignationMasters;
-        this.travelRequestMastersForApprover1Id_1 = travelRequestMastersForApprover1Id_1;
-        this.exitInterviewMastersForApproverId2 = exitInterviewMastersForApproverId2;
-        this.shiftGenerateMonthlySchedules = shiftGenerateMonthlySchedules;
-        this.appraisalPerformanceMasters = appraisalPerformanceMasters;
-        this.probationToConfirmationsForEmployeeMasterId = probationToConfirmationsForEmployeeMasterId;
-        this.probationToConfirmationsForHrId = probationToConfirmationsForHrId;
-        this.visitorManagementsForEmployeeMasterId_1 = visitorManagementsForEmployeeMasterId_1;
-        this.exitInterviewMastersForEmpId = exitInterviewMastersForEmpId;
-        this.probationToConfirmationsForEmployeeMasterId_1 = probationToConfirmationsForEmployeeMasterId_1;
-        this.gatePassesForEmployeeMasterId_1 = gatePassesForEmployeeMasterId_1;
-        this.expenseMastersForEmployeeId = expenseMastersForEmployeeId;
-        this.gatePassesForApproverId_1 = gatePassesForApproverId_1;
-        this.leaveEmployeeDetails = leaveEmployeeDetails;
-        this.probationToConfirmationsForHrId_1 = probationToConfirmationsForHrId_1;
-        this.performanceImprovementPlanMastersForPipManagerId = performanceImprovementPlanMastersForPipManagerId;
-        this.exitInterviewMastersForApproverId2_1 = exitInterviewMastersForApproverId2_1;
-        this.appraisalFeedback360sForRefForEmpId = appraisalFeedback360sForRefForEmpId;
-        this.cafeteriaRequestsForEmployeeMasterId_1 = cafeteriaRequestsForEmployeeMasterId_1;
-        this.travelApproverHistoriesForEmployeeMasterId = travelApproverHistoriesForEmployeeMasterId;
-        this.noDueMastersForApproverId = noDueMastersForApproverId;
-        this.poolCarRequestsForEmployeeMasterId = poolCarRequestsForEmployeeMasterId;
-        this.overTimeMasters = overTimeMasters;
-        this.poolCarRequestsForAdminApproverId = poolCarRequestsForAdminApproverId;
-        this.hrServiceRequestsForHrApproveId = hrServiceRequestsForHrApproveId;
-        this.cafeteriaRequestsForAdminApproverId_1 = cafeteriaRequestsForAdminApproverId_1;
-        this.employeeShiftDatas = employeeShiftDatas;
-        this.performanceImprovementPlanMastersForPipEmployeeId = performanceImprovementPlanMastersForPipEmployeeId;
-        this.performanceImprovementPlanMastersForPipManagerId_1 = performanceImprovementPlanMastersForPipManagerId_1;
-        this.poolCarRequestsForEmployeeMasterId_1 = poolCarRequestsForEmployeeMasterId_1;
-        this.poolCarRequestsForAdminApproverId_1 = poolCarRequestsForAdminApproverId_1;
-        this.poolCarRequestsForApproverId = poolCarRequestsForApproverId;
-        this.leaveEmployeeDetails_1 = leaveEmployeeDetails_1;
-        this.leaveEncashmentsForCreatorEmpId = leaveEncashmentsForCreatorEmpId;
-        this.resignationMasters_1 = resignationMasters_1;
-        this.exitInterviewMastersForApproverId_1 = exitInterviewMastersForApproverId_1;
-        this.tempShiftAssignMasters = tempShiftAssignMasters;
-        this.employeeLeaveBalances_1 = employeeLeaveBalances_1;
-        this.expenseMastersForApprover2Id_1 = expenseMastersForApprover2Id_1;
-        this.leaveEncashmentsForApproverEmpId = leaveEncashmentsForApproverEmpId;
-        this.poolCarRequestsForApproverId_1 = poolCarRequestsForApproverId_1;
-        this.noDueMastersForEmpId = noDueMastersForEmpId;
-        this.shiftGenerateMonthlySchedules_1 = shiftGenerateMonthlySchedules_1;
-        this.travelApproverHistoriesForTravelApproverId = travelApproverHistoriesForTravelApproverId;
-        this.expenseMastersForApprover1Id = expenseMastersForApprover1Id;
-        this.itServiceRequestsForItApproverId = itServiceRequestsForItApproverId;
-        this.itServiceRequestsForEmployeeMasterId_1 = itServiceRequestsForEmployeeMasterId_1;
-        this.travelApproverHistoriesForTravelApproverId_1 = travelApproverHistoriesForTravelApproverId_1;
-        this.travelApproverHistoriesForEmployeeMasterId_1 = travelApproverHistoriesForEmployeeMasterId_1;
-        this.appraisalFeedback360sForHrCreatorId = appraisalFeedback360sForHrCreatorId;
-        this.appraisalFeedback360sForRefDoneEmpId = appraisalFeedback360sForRefDoneEmpId;
-        this.appraisalFeedback360sForRefForEmpId_1 = appraisalFeedback360sForRefForEmpId_1;
-        this.travelRequestMastersForEmployeeMasterId_1 = travelRequestMastersForEmployeeMasterId_1;
-        this.appraisalFeedback360sForHrCreatorId_1 = appraisalFeedback360sForHrCreatorId_1;
-        this.noDueMastersForEmpId_1 = noDueMastersForEmpId_1;
-        this.visitorManagementsForSecurityApproveId_1 = visitorManagementsForSecurityApproveId_1;
-        this.exitInterviewMastersForEmpId_1 = exitInterviewMastersForEmpId_1;
-        this.attendanceRegularizations_1 = attendanceRegularizations_1;
-        this.improvementGoalsHistories = improvementGoalsHistories;
-        this.expenseMastersForApprover1Id_1 = expenseMastersForApprover1Id_1;
-        this.leaveEncashmentsForCreatorEmpId_1 = leaveEncashmentsForCreatorEmpId_1;
-        this.leaveEncashmentsForApproverEmpId_1 = leaveEncashmentsForApproverEmpId_1;
-        this.employeeDatetimeDatas_1 = employeeDatetimeDatas_1;
-        this.appraisalFeedback360sForRefDoneEmpId_1 = appraisalFeedback360sForRefDoneEmpId_1;
-        this.performanceImprovementPlanMastersForPipEmployeeId_1 = performanceImprovementPlanMastersForPipEmployeeId_1;
-        this.overTimeMasters_1 = overTimeMasters_1;
-        this.employeeShiftDatas_1 = employeeShiftDatas_1;
-        this.hrServiceRequestsForEmployeeMasterId = hrServiceRequestsForEmployeeMasterId;
-        this.appraisalPerformanceMasters_1 = appraisalPerformanceMasters_1;
-        this.expenseMastersForEmployeeId_1 = expenseMastersForEmployeeId_1;
-        this.itServiceRequestsForItApproverId_1 = itServiceRequestsForItApproverId_1;
-        this.travelRequestMastersForApprover2Id_1 = travelRequestMastersForApprover2Id_1;
-        this.improvementGoalsHistories_1 = improvementGoalsHistories_1;
-        this.employeeReferrals_1 = employeeReferrals_1;
-        this.noDueMastersForApproverId_1 = noDueMastersForApproverId_1;
-        this.gatePassesForSecurityApproverId_1 = gatePassesForSecurityApproverId_1;
-        this.tempShiftAssignMasters_1 = tempShiftAssignMasters_1;
-        this.hrServiceRequestsForEmployeeMasterId_1 = hrServiceRequestsForEmployeeMasterId_1;
-        this.hrServiceRequestsForHrApproveId_1 = hrServiceRequestsForHrApproveId_1;
-        this.employeePunchForMobileApps = employeePunchForMobileApps;
+        this.competencyEvaluationId = competencyEvaluationId;
     }
 
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Integer id) {
@@ -365,7 +266,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public LevelMaster getLevelMaster() {
-        return this.levelMaster;
+        return levelMaster;
     }
 
     public void setLevelMaster(LevelMaster levelMaster) {
@@ -373,7 +274,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public DesignationMaster getDesignationMaster() {
-        return this.designationMaster;
+        return designationMaster;
     }
 
     public void setDesignationMaster(DesignationMaster designationMaster) {
@@ -381,7 +282,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public ZydexLocationMaster getZydexLocationMaster() {
-        return this.zydexLocationMaster;
+        return zydexLocationMaster;
     }
 
     public void setZydexLocationMaster(ZydexLocationMaster zydexLocationMaster) {
@@ -389,7 +290,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public DepartmentMaster getDepartmentMaster() {
-        return this.departmentMaster;
+        return departmentMaster;
     }
 
     public void setDepartmentMaster(DepartmentMaster departmentMaster) {
@@ -397,7 +298,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public LocationMaster getLocationMaster() {
-        return this.locationMaster;
+        return locationMaster;
     }
 
     public void setLocationMaster(LocationMaster locationMaster) {
@@ -405,7 +306,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public UserMaster getUserMaster() {
-        return this.userMaster;
+        return userMaster;
     }
 
     public void setUserMaster(UserMaster userMaster) {
@@ -413,7 +314,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getEmployeeId() {
-        return this.employeeId;
+        return employeeId;
     }
 
     public void setEmployeeId(String employeeId) {
@@ -421,7 +322,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getEmployeeName() {
-        return this.employeeName;
+        return employeeName;
     }
 
     public void setEmployeeName(String employeeName) {
@@ -429,7 +330,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getDateOfJoining() {
-        return this.dateOfJoining;
+        return dateOfJoining;
     }
 
     public void setDateOfJoining(String dateOfJoining) {
@@ -437,7 +338,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getRole() {
-        return this.role;
+        return role;
     }
 
     public void setRole(String role) {
@@ -445,7 +346,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getCompany() {
-        return this.company;
+        return company;
     }
 
     public void setCompany(String company) {
@@ -453,7 +354,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getEmailAddress() {
-        return this.emailAddress;
+        return emailAddress;
     }
 
     public void setEmailAddress(String emailAddress) {
@@ -461,7 +362,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getContactNo1() {
-        return this.contactNo1;
+        return contactNo1;
     }
 
     public void setContactNo1(String contactNo1) {
@@ -469,7 +370,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getContactNo2() {
-        return this.contactNo2;
+        return contactNo2;
     }
 
     public void setContactNo2(String contactNo2) {
@@ -477,7 +378,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getFatherName() {
-        return this.fatherName;
+        return fatherName;
     }
 
     public void setFatherName(String fatherName) {
@@ -485,7 +386,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getMotherName() {
-        return this.motherName;
+        return motherName;
     }
 
     public void setMotherName(String motherName) {
@@ -493,7 +394,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getDateOfBirth() {
-        return this.dateOfBirth;
+        return dateOfBirth;
     }
 
     public void setDateOfBirth(String dateOfBirth) {
@@ -501,7 +402,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Boolean getGender() {
-        return this.gender;
+        return gender;
     }
 
     public void setGender(Boolean gender) {
@@ -509,7 +410,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getMaritalStatus() {
-        return this.maritalStatus;
+        return maritalStatus;
     }
 
     public void setMaritalStatus(String maritalStatus) {
@@ -517,7 +418,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getSpouseName() {
-        return this.spouseName;
+        return spouseName;
     }
 
     public void setSpouseName(String spouseName) {
@@ -525,7 +426,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getEmergencyContactPerson() {
-        return this.emergencyContactPerson;
+        return emergencyContactPerson;
     }
 
     public void setEmergencyContactPerson(String emergencyContactPerson) {
@@ -533,7 +434,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getEmergencyContactNo() {
-        return this.emergencyContactNo;
+        return emergencyContactNo;
     }
 
     public void setEmergencyContactNo(String emergencyContactNo) {
@@ -541,7 +442,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getPanCard() {
-        return this.panCard;
+        return panCard;
     }
 
     public void setPanCard(String panCard) {
@@ -549,7 +450,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getPassportNo() {
-        return this.passportNo;
+        return passportNo;
     }
 
     public void setPassportNo(String passportNo) {
@@ -557,7 +458,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getPassportIssueDate() {
-        return this.passportIssueDate;
+        return passportIssueDate;
     }
 
     public void setPassportIssueDate(String passportIssueDate) {
@@ -565,7 +466,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getPassportExpiryDate() {
-        return this.passportExpiryDate;
+        return passportExpiryDate;
     }
 
     public void setPassportExpiryDate(String passportExpiryDate) {
@@ -573,7 +474,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getDateOfLeaving() {
-        return this.dateOfLeaving;
+        return dateOfLeaving;
     }
 
     public void setDateOfLeaving(String dateOfLeaving) {
@@ -581,7 +482,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getReasonForLeaving() {
-        return this.reasonForLeaving;
+        return reasonForLeaving;
     }
 
     public void setReasonForLeaving(String reasonForLeaving) {
@@ -589,7 +490,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getReportingManagerLevel1() {
-        return this.reportingManagerLevel1;
+        return reportingManagerLevel1;
     }
 
     public void setReportingManagerLevel1(String reportingManagerLevel1) {
@@ -597,7 +498,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getReportingManagerLevel2() {
-        return this.reportingManagerLevel2;
+        return reportingManagerLevel2;
     }
 
     public void setReportingManagerLevel2(String reportingManagerLevel2) {
@@ -605,7 +506,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getReportingManagerLevel3() {
-        return this.reportingManagerLevel3;
+        return reportingManagerLevel3;
     }
 
     public void setReportingManagerLevel3(String reportingManagerLevel3) {
@@ -613,7 +514,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getReportingManagerLevel4() {
-        return this.reportingManagerLevel4;
+        return reportingManagerLevel4;
     }
 
     public void setReportingManagerLevel4(String reportingManagerLevel4) {
@@ -621,7 +522,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getReportingManagerLevel5() {
-        return this.reportingManagerLevel5;
+        return reportingManagerLevel5;
     }
 
     public void setReportingManagerLevel5(String reportingManagerLevel5) {
@@ -629,7 +530,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getReportingManagerLevel6() {
-        return this.reportingManagerLevel6;
+        return reportingManagerLevel6;
     }
 
     public void setReportingManagerLevel6(String reportingManagerLevel6) {
@@ -637,7 +538,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getEmployeeType() {
-        return this.employeeType;
+        return employeeType;
     }
 
     public void setEmployeeType(String employeeType) {
@@ -645,7 +546,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getShiftType() {
-        return this.shiftType;
+        return shiftType;
     }
 
     public void setShiftType(String shiftType) {
@@ -653,7 +554,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Integer getShiftHoursId() {
-        return this.shiftHoursId;
+        return shiftHoursId;
     }
 
     public void setShiftHoursId(Integer shiftHoursId) {
@@ -661,7 +562,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getOfficeEmailId() {
-        return this.officeEmailId;
+        return officeEmailId;
     }
 
     public void setOfficeEmailId(String officeEmailId) {
@@ -669,7 +570,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getChild1() {
-        return this.child1;
+        return child1;
     }
 
     public void setChild1(String child1) {
@@ -677,7 +578,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getChild2() {
-        return this.child2;
+        return child2;
     }
 
     public void setChild2(String child2) {
@@ -685,7 +586,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getHighestEducationDetails() {
-        return this.highestEducationDetails;
+        return highestEducationDetails;
     }
 
     public void setHighestEducationDetails(String highestEducationDetails) {
@@ -693,7 +594,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getExperienceYearOnDoj() {
-        return this.experienceYearOnDoj;
+        return experienceYearOnDoj;
     }
 
     public void setExperienceYearOnDoj(String experienceYearOnDoj) {
@@ -701,7 +602,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getPermanentAddress() {
-        return this.permanentAddress;
+        return permanentAddress;
     }
 
     public void setPermanentAddress(String permanentAddress) {
@@ -709,7 +610,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getPresentAddress() {
-        return this.presentAddress;
+        return presentAddress;
     }
 
     public void setPresentAddress(String presentAddress) {
@@ -717,7 +618,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getAdharCard() {
-        return this.adharCard;
+        return adharCard;
     }
 
     public void setAdharCard(String adharCard) {
@@ -725,7 +626,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getDrivingLicence() {
-        return this.drivingLicence;
+        return drivingLicence;
     }
 
     public void setDrivingLicence(String drivingLicence) {
@@ -733,7 +634,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getLastYearPerformanceRating() {
-        return this.lastYearPerformanceRating;
+        return lastYearPerformanceRating;
     }
 
     public void setLastYearPerformanceRating(String lastYearPerformanceRating) {
@@ -741,7 +642,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getBloodGroups() {
-        return this.bloodGroups;
+        return bloodGroups;
     }
 
     public void setBloodGroups(String bloodGroups) {
@@ -749,7 +650,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getShiftRotationDate() {
-        return this.shiftRotationDate;
+        return shiftRotationDate;
     }
 
     public void setShiftRotationDate(String shiftRotationDate) {
@@ -757,7 +658,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getGovLicenceName() {
-        return this.govLicenceName;
+        return govLicenceName;
     }
 
     public void setGovLicenceName(String govLicenceName) {
@@ -765,7 +666,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getMaritalStatusOthers() {
-        return this.maritalStatusOthers;
+        return maritalStatusOthers;
     }
 
     public void setMaritalStatusOthers(String maritalStatusOthers) {
@@ -773,7 +674,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getExperienceMonthOnDoj() {
-        return this.experienceMonthOnDoj;
+        return experienceMonthOnDoj;
     }
 
     public void setExperienceMonthOnDoj(String experienceMonthOnDoj) {
@@ -781,7 +682,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getBankName() {
-        return this.bankName;
+        return bankName;
     }
 
     public void setBankName(String bankName) {
@@ -789,7 +690,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getBankAccountNo() {
-        return this.bankAccountNo;
+        return bankAccountNo;
     }
 
     public void setBankAccountNo(String bankAccountNo) {
@@ -797,7 +698,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getBankIfscCode() {
-        return this.bankIfscCode;
+        return bankIfscCode;
     }
 
     public void setBankIfscCode(String bankIfscCode) {
@@ -805,7 +706,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getCityOfEmployee() {
-        return this.cityOfEmployee;
+        return cityOfEmployee;
     }
 
     public void setCityOfEmployee(String cityOfEmployee) {
@@ -813,7 +714,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getDateOfBirthOfEmpFather() {
-        return this.dateOfBirthOfEmpFather;
+        return dateOfBirthOfEmpFather;
     }
 
     public void setDateOfBirthOfEmpFather(String dateOfBirthOfEmpFather) {
@@ -821,7 +722,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getDateOfBirthOfEmpMother() {
-        return this.dateOfBirthOfEmpMother;
+        return dateOfBirthOfEmpMother;
     }
 
     public void setDateOfBirthOfEmpMother(String dateOfBirthOfEmpMother) {
@@ -829,7 +730,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getDateOfBirthOfEmpSpous() {
-        return this.dateOfBirthOfEmpSpous;
+        return dateOfBirthOfEmpSpous;
     }
 
     public void setDateOfBirthOfEmpSpous(String dateOfBirthOfEmpSpous) {
@@ -837,7 +738,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getDateOfBirthOfEmpChilld1() {
-        return this.dateOfBirthOfEmpChilld1;
+        return dateOfBirthOfEmpChilld1;
     }
 
     public void setDateOfBirthOfEmpChilld1(String dateOfBirthOfEmpChilld1) {
@@ -845,7 +746,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public String getDateOfBirthOfEmpChild2() {
-        return this.dateOfBirthOfEmpChild2;
+        return dateOfBirthOfEmpChild2;
     }
 
     public void setDateOfBirthOfEmpChild2(String dateOfBirthOfEmpChild2) {
@@ -860,8 +761,10 @@ public class EmployeeMaster implements java.io.Serializable {
         this.dateOfTransferOfEntity = dateOfTransferOfEntity;
     }
 
+   
+
     public Set getEmployeeDatetimeDatas() {
-        return this.employeeDatetimeDatas;
+        return employeeDatetimeDatas;
     }
 
     public void setEmployeeDatetimeDatas(Set employeeDatetimeDatas) {
@@ -869,7 +772,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getVisitorManagementsForApproverId() {
-        return this.visitorManagementsForApproverId;
+        return visitorManagementsForApproverId;
     }
 
     public void setVisitorManagementsForApproverId(Set visitorManagementsForApproverId) {
@@ -877,7 +780,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getTravelRequestMastersForApprover2Id() {
-        return this.travelRequestMastersForApprover2Id;
+        return travelRequestMastersForApprover2Id;
     }
 
     public void setTravelRequestMastersForApprover2Id(Set travelRequestMastersForApprover2Id) {
@@ -885,7 +788,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getVisitorManagementsForSecurityApproveId() {
-        return this.visitorManagementsForSecurityApproveId;
+        return visitorManagementsForSecurityApproveId;
     }
 
     public void setVisitorManagementsForSecurityApproveId(Set visitorManagementsForSecurityApproveId) {
@@ -893,7 +796,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getTravelRequestMastersForEmployeeMasterId() {
-        return this.travelRequestMastersForEmployeeMasterId;
+        return travelRequestMastersForEmployeeMasterId;
     }
 
     public void setTravelRequestMastersForEmployeeMasterId(Set travelRequestMastersForEmployeeMasterId) {
@@ -901,7 +804,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getVisitorManagementsForApproverId_1() {
-        return this.visitorManagementsForApproverId_1;
+        return visitorManagementsForApproverId_1;
     }
 
     public void setVisitorManagementsForApproverId_1(Set visitorManagementsForApproverId_1) {
@@ -909,7 +812,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getTravelRequestMastersForApprover1Id() {
-        return this.travelRequestMastersForApprover1Id;
+        return travelRequestMastersForApprover1Id;
     }
 
     public void setTravelRequestMastersForApprover1Id(Set travelRequestMastersForApprover1Id) {
@@ -917,7 +820,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getVisitorManagementsForEmployeeMasterId() {
-        return this.visitorManagementsForEmployeeMasterId;
+        return visitorManagementsForEmployeeMasterId;
     }
 
     public void setVisitorManagementsForEmployeeMasterId(Set visitorManagementsForEmployeeMasterId) {
@@ -925,7 +828,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getCafeteriaRequestsForAdminApproverId() {
-        return this.cafeteriaRequestsForAdminApproverId;
+        return cafeteriaRequestsForAdminApproverId;
     }
 
     public void setCafeteriaRequestsForAdminApproverId(Set cafeteriaRequestsForAdminApproverId) {
@@ -933,7 +836,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getEmployeeReferrals() {
-        return this.employeeReferrals;
+        return employeeReferrals;
     }
 
     public void setEmployeeReferrals(Set employeeReferrals) {
@@ -941,7 +844,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getCafeteriaRequestsForEmployeeMasterId() {
-        return this.cafeteriaRequestsForEmployeeMasterId;
+        return cafeteriaRequestsForEmployeeMasterId;
     }
 
     public void setCafeteriaRequestsForEmployeeMasterId(Set cafeteriaRequestsForEmployeeMasterId) {
@@ -949,7 +852,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getCafeteriaRequestsForApproverId() {
-        return this.cafeteriaRequestsForApproverId;
+        return cafeteriaRequestsForApproverId;
     }
 
     public void setCafeteriaRequestsForApproverId(Set cafeteriaRequestsForApproverId) {
@@ -957,7 +860,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getEmployeeLeaveBalances() {
-        return this.employeeLeaveBalances;
+        return employeeLeaveBalances;
     }
 
     public void setEmployeeLeaveBalances(Set employeeLeaveBalances) {
@@ -965,7 +868,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getCafeteriaRequestsForApproverId_1() {
-        return this.cafeteriaRequestsForApproverId_1;
+        return cafeteriaRequestsForApproverId_1;
     }
 
     public void setCafeteriaRequestsForApproverId_1(Set cafeteriaRequestsForApproverId_1) {
@@ -973,7 +876,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getItServiceRequestsForEmployeeMasterId() {
-        return this.itServiceRequestsForEmployeeMasterId;
+        return itServiceRequestsForEmployeeMasterId;
     }
 
     public void setItServiceRequestsForEmployeeMasterId(Set itServiceRequestsForEmployeeMasterId) {
@@ -981,7 +884,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getAttendanceRegularizations() {
-        return this.attendanceRegularizations;
+        return attendanceRegularizations;
     }
 
     public void setAttendanceRegularizations(Set attendanceRegularizations) {
@@ -989,7 +892,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getExpenseMastersForApprover2Id() {
-        return this.expenseMastersForApprover2Id;
+        return expenseMastersForApprover2Id;
     }
 
     public void setExpenseMastersForApprover2Id(Set expenseMastersForApprover2Id) {
@@ -997,7 +900,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getExitInterviewMastersForApproverId() {
-        return this.exitInterviewMastersForApproverId;
+        return exitInterviewMastersForApproverId;
     }
 
     public void setExitInterviewMastersForApproverId(Set exitInterviewMastersForApproverId) {
@@ -1005,7 +908,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getGatePassesForApproverId() {
-        return this.gatePassesForApproverId;
+        return gatePassesForApproverId;
     }
 
     public void setGatePassesForApproverId(Set gatePassesForApproverId) {
@@ -1013,7 +916,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getGatePassesForSecurityApproverId() {
-        return this.gatePassesForSecurityApproverId;
+        return gatePassesForSecurityApproverId;
     }
 
     public void setGatePassesForSecurityApproverId(Set gatePassesForSecurityApproverId) {
@@ -1021,7 +924,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getGatePassesForEmployeeMasterId() {
-        return this.gatePassesForEmployeeMasterId;
+        return gatePassesForEmployeeMasterId;
     }
 
     public void setGatePassesForEmployeeMasterId(Set gatePassesForEmployeeMasterId) {
@@ -1029,7 +932,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getResignationMasters() {
-        return this.resignationMasters;
+        return resignationMasters;
     }
 
     public void setResignationMasters(Set resignationMasters) {
@@ -1037,7 +940,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getTravelRequestMastersForApprover1Id_1() {
-        return this.travelRequestMastersForApprover1Id_1;
+        return travelRequestMastersForApprover1Id_1;
     }
 
     public void setTravelRequestMastersForApprover1Id_1(Set travelRequestMastersForApprover1Id_1) {
@@ -1045,7 +948,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getExitInterviewMastersForApproverId2() {
-        return this.exitInterviewMastersForApproverId2;
+        return exitInterviewMastersForApproverId2;
     }
 
     public void setExitInterviewMastersForApproverId2(Set exitInterviewMastersForApproverId2) {
@@ -1053,7 +956,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getShiftGenerateMonthlySchedules() {
-        return this.shiftGenerateMonthlySchedules;
+        return shiftGenerateMonthlySchedules;
     }
 
     public void setShiftGenerateMonthlySchedules(Set shiftGenerateMonthlySchedules) {
@@ -1061,7 +964,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getAppraisalPerformanceMasters() {
-        return this.appraisalPerformanceMasters;
+        return appraisalPerformanceMasters;
     }
 
     public void setAppraisalPerformanceMasters(Set appraisalPerformanceMasters) {
@@ -1069,7 +972,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getProbationToConfirmationsForEmployeeMasterId() {
-        return this.probationToConfirmationsForEmployeeMasterId;
+        return probationToConfirmationsForEmployeeMasterId;
     }
 
     public void setProbationToConfirmationsForEmployeeMasterId(Set probationToConfirmationsForEmployeeMasterId) {
@@ -1077,7 +980,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getProbationToConfirmationsForHrId() {
-        return this.probationToConfirmationsForHrId;
+        return probationToConfirmationsForHrId;
     }
 
     public void setProbationToConfirmationsForHrId(Set probationToConfirmationsForHrId) {
@@ -1085,7 +988,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getVisitorManagementsForEmployeeMasterId_1() {
-        return this.visitorManagementsForEmployeeMasterId_1;
+        return visitorManagementsForEmployeeMasterId_1;
     }
 
     public void setVisitorManagementsForEmployeeMasterId_1(Set visitorManagementsForEmployeeMasterId_1) {
@@ -1093,7 +996,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getExitInterviewMastersForEmpId() {
-        return this.exitInterviewMastersForEmpId;
+        return exitInterviewMastersForEmpId;
     }
 
     public void setExitInterviewMastersForEmpId(Set exitInterviewMastersForEmpId) {
@@ -1101,7 +1004,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getProbationToConfirmationsForEmployeeMasterId_1() {
-        return this.probationToConfirmationsForEmployeeMasterId_1;
+        return probationToConfirmationsForEmployeeMasterId_1;
     }
 
     public void setProbationToConfirmationsForEmployeeMasterId_1(Set probationToConfirmationsForEmployeeMasterId_1) {
@@ -1109,7 +1012,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getGatePassesForEmployeeMasterId_1() {
-        return this.gatePassesForEmployeeMasterId_1;
+        return gatePassesForEmployeeMasterId_1;
     }
 
     public void setGatePassesForEmployeeMasterId_1(Set gatePassesForEmployeeMasterId_1) {
@@ -1117,7 +1020,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getExpenseMastersForEmployeeId() {
-        return this.expenseMastersForEmployeeId;
+        return expenseMastersForEmployeeId;
     }
 
     public void setExpenseMastersForEmployeeId(Set expenseMastersForEmployeeId) {
@@ -1125,7 +1028,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getGatePassesForApproverId_1() {
-        return this.gatePassesForApproverId_1;
+        return gatePassesForApproverId_1;
     }
 
     public void setGatePassesForApproverId_1(Set gatePassesForApproverId_1) {
@@ -1133,7 +1036,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getLeaveEmployeeDetails() {
-        return this.leaveEmployeeDetails;
+        return leaveEmployeeDetails;
     }
 
     public void setLeaveEmployeeDetails(Set leaveEmployeeDetails) {
@@ -1141,7 +1044,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getProbationToConfirmationsForHrId_1() {
-        return this.probationToConfirmationsForHrId_1;
+        return probationToConfirmationsForHrId_1;
     }
 
     public void setProbationToConfirmationsForHrId_1(Set probationToConfirmationsForHrId_1) {
@@ -1149,7 +1052,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getPerformanceImprovementPlanMastersForPipManagerId() {
-        return this.performanceImprovementPlanMastersForPipManagerId;
+        return performanceImprovementPlanMastersForPipManagerId;
     }
 
     public void setPerformanceImprovementPlanMastersForPipManagerId(Set performanceImprovementPlanMastersForPipManagerId) {
@@ -1157,7 +1060,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getExitInterviewMastersForApproverId2_1() {
-        return this.exitInterviewMastersForApproverId2_1;
+        return exitInterviewMastersForApproverId2_1;
     }
 
     public void setExitInterviewMastersForApproverId2_1(Set exitInterviewMastersForApproverId2_1) {
@@ -1165,7 +1068,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getAppraisalFeedback360sForRefForEmpId() {
-        return this.appraisalFeedback360sForRefForEmpId;
+        return appraisalFeedback360sForRefForEmpId;
     }
 
     public void setAppraisalFeedback360sForRefForEmpId(Set appraisalFeedback360sForRefForEmpId) {
@@ -1173,7 +1076,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getCafeteriaRequestsForEmployeeMasterId_1() {
-        return this.cafeteriaRequestsForEmployeeMasterId_1;
+        return cafeteriaRequestsForEmployeeMasterId_1;
     }
 
     public void setCafeteriaRequestsForEmployeeMasterId_1(Set cafeteriaRequestsForEmployeeMasterId_1) {
@@ -1181,7 +1084,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getTravelApproverHistoriesForEmployeeMasterId() {
-        return this.travelApproverHistoriesForEmployeeMasterId;
+        return travelApproverHistoriesForEmployeeMasterId;
     }
 
     public void setTravelApproverHistoriesForEmployeeMasterId(Set travelApproverHistoriesForEmployeeMasterId) {
@@ -1189,7 +1092,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getNoDueMastersForApproverId() {
-        return this.noDueMastersForApproverId;
+        return noDueMastersForApproverId;
     }
 
     public void setNoDueMastersForApproverId(Set noDueMastersForApproverId) {
@@ -1197,7 +1100,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getPoolCarRequestsForEmployeeMasterId() {
-        return this.poolCarRequestsForEmployeeMasterId;
+        return poolCarRequestsForEmployeeMasterId;
     }
 
     public void setPoolCarRequestsForEmployeeMasterId(Set poolCarRequestsForEmployeeMasterId) {
@@ -1205,7 +1108,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getOverTimeMasters() {
-        return this.overTimeMasters;
+        return overTimeMasters;
     }
 
     public void setOverTimeMasters(Set overTimeMasters) {
@@ -1213,7 +1116,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getPoolCarRequestsForAdminApproverId() {
-        return this.poolCarRequestsForAdminApproverId;
+        return poolCarRequestsForAdminApproverId;
     }
 
     public void setPoolCarRequestsForAdminApproverId(Set poolCarRequestsForAdminApproverId) {
@@ -1221,7 +1124,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getHrServiceRequestsForHrApproveId() {
-        return this.hrServiceRequestsForHrApproveId;
+        return hrServiceRequestsForHrApproveId;
     }
 
     public void setHrServiceRequestsForHrApproveId(Set hrServiceRequestsForHrApproveId) {
@@ -1229,7 +1132,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getCafeteriaRequestsForAdminApproverId_1() {
-        return this.cafeteriaRequestsForAdminApproverId_1;
+        return cafeteriaRequestsForAdminApproverId_1;
     }
 
     public void setCafeteriaRequestsForAdminApproverId_1(Set cafeteriaRequestsForAdminApproverId_1) {
@@ -1237,7 +1140,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getEmployeeShiftDatas() {
-        return this.employeeShiftDatas;
+        return employeeShiftDatas;
     }
 
     public void setEmployeeShiftDatas(Set employeeShiftDatas) {
@@ -1245,7 +1148,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getPerformanceImprovementPlanMastersForPipEmployeeId() {
-        return this.performanceImprovementPlanMastersForPipEmployeeId;
+        return performanceImprovementPlanMastersForPipEmployeeId;
     }
 
     public void setPerformanceImprovementPlanMastersForPipEmployeeId(Set performanceImprovementPlanMastersForPipEmployeeId) {
@@ -1253,7 +1156,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getPerformanceImprovementPlanMastersForPipManagerId_1() {
-        return this.performanceImprovementPlanMastersForPipManagerId_1;
+        return performanceImprovementPlanMastersForPipManagerId_1;
     }
 
     public void setPerformanceImprovementPlanMastersForPipManagerId_1(Set performanceImprovementPlanMastersForPipManagerId_1) {
@@ -1261,7 +1164,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getPoolCarRequestsForEmployeeMasterId_1() {
-        return this.poolCarRequestsForEmployeeMasterId_1;
+        return poolCarRequestsForEmployeeMasterId_1;
     }
 
     public void setPoolCarRequestsForEmployeeMasterId_1(Set poolCarRequestsForEmployeeMasterId_1) {
@@ -1269,7 +1172,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getPoolCarRequestsForAdminApproverId_1() {
-        return this.poolCarRequestsForAdminApproverId_1;
+        return poolCarRequestsForAdminApproverId_1;
     }
 
     public void setPoolCarRequestsForAdminApproverId_1(Set poolCarRequestsForAdminApproverId_1) {
@@ -1277,7 +1180,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getPoolCarRequestsForApproverId() {
-        return this.poolCarRequestsForApproverId;
+        return poolCarRequestsForApproverId;
     }
 
     public void setPoolCarRequestsForApproverId(Set poolCarRequestsForApproverId) {
@@ -1285,7 +1188,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getLeaveEmployeeDetails_1() {
-        return this.leaveEmployeeDetails_1;
+        return leaveEmployeeDetails_1;
     }
 
     public void setLeaveEmployeeDetails_1(Set leaveEmployeeDetails_1) {
@@ -1293,7 +1196,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getLeaveEncashmentsForCreatorEmpId() {
-        return this.leaveEncashmentsForCreatorEmpId;
+        return leaveEncashmentsForCreatorEmpId;
     }
 
     public void setLeaveEncashmentsForCreatorEmpId(Set leaveEncashmentsForCreatorEmpId) {
@@ -1301,7 +1204,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getResignationMasters_1() {
-        return this.resignationMasters_1;
+        return resignationMasters_1;
     }
 
     public void setResignationMasters_1(Set resignationMasters_1) {
@@ -1309,7 +1212,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getExitInterviewMastersForApproverId_1() {
-        return this.exitInterviewMastersForApproverId_1;
+        return exitInterviewMastersForApproverId_1;
     }
 
     public void setExitInterviewMastersForApproverId_1(Set exitInterviewMastersForApproverId_1) {
@@ -1317,7 +1220,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getTempShiftAssignMasters() {
-        return this.tempShiftAssignMasters;
+        return tempShiftAssignMasters;
     }
 
     public void setTempShiftAssignMasters(Set tempShiftAssignMasters) {
@@ -1325,7 +1228,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getEmployeeLeaveBalances_1() {
-        return this.employeeLeaveBalances_1;
+        return employeeLeaveBalances_1;
     }
 
     public void setEmployeeLeaveBalances_1(Set employeeLeaveBalances_1) {
@@ -1333,7 +1236,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getExpenseMastersForApprover2Id_1() {
-        return this.expenseMastersForApprover2Id_1;
+        return expenseMastersForApprover2Id_1;
     }
 
     public void setExpenseMastersForApprover2Id_1(Set expenseMastersForApprover2Id_1) {
@@ -1341,7 +1244,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getLeaveEncashmentsForApproverEmpId() {
-        return this.leaveEncashmentsForApproverEmpId;
+        return leaveEncashmentsForApproverEmpId;
     }
 
     public void setLeaveEncashmentsForApproverEmpId(Set leaveEncashmentsForApproverEmpId) {
@@ -1349,7 +1252,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getPoolCarRequestsForApproverId_1() {
-        return this.poolCarRequestsForApproverId_1;
+        return poolCarRequestsForApproverId_1;
     }
 
     public void setPoolCarRequestsForApproverId_1(Set poolCarRequestsForApproverId_1) {
@@ -1357,7 +1260,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getNoDueMastersForEmpId() {
-        return this.noDueMastersForEmpId;
+        return noDueMastersForEmpId;
     }
 
     public void setNoDueMastersForEmpId(Set noDueMastersForEmpId) {
@@ -1365,7 +1268,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getShiftGenerateMonthlySchedules_1() {
-        return this.shiftGenerateMonthlySchedules_1;
+        return shiftGenerateMonthlySchedules_1;
     }
 
     public void setShiftGenerateMonthlySchedules_1(Set shiftGenerateMonthlySchedules_1) {
@@ -1373,7 +1276,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getTravelApproverHistoriesForTravelApproverId() {
-        return this.travelApproverHistoriesForTravelApproverId;
+        return travelApproverHistoriesForTravelApproverId;
     }
 
     public void setTravelApproverHistoriesForTravelApproverId(Set travelApproverHistoriesForTravelApproverId) {
@@ -1381,7 +1284,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getExpenseMastersForApprover1Id() {
-        return this.expenseMastersForApprover1Id;
+        return expenseMastersForApprover1Id;
     }
 
     public void setExpenseMastersForApprover1Id(Set expenseMastersForApprover1Id) {
@@ -1389,7 +1292,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getItServiceRequestsForItApproverId() {
-        return this.itServiceRequestsForItApproverId;
+        return itServiceRequestsForItApproverId;
     }
 
     public void setItServiceRequestsForItApproverId(Set itServiceRequestsForItApproverId) {
@@ -1397,7 +1300,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getItServiceRequestsForEmployeeMasterId_1() {
-        return this.itServiceRequestsForEmployeeMasterId_1;
+        return itServiceRequestsForEmployeeMasterId_1;
     }
 
     public void setItServiceRequestsForEmployeeMasterId_1(Set itServiceRequestsForEmployeeMasterId_1) {
@@ -1405,7 +1308,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getTravelApproverHistoriesForTravelApproverId_1() {
-        return this.travelApproverHistoriesForTravelApproverId_1;
+        return travelApproverHistoriesForTravelApproverId_1;
     }
 
     public void setTravelApproverHistoriesForTravelApproverId_1(Set travelApproverHistoriesForTravelApproverId_1) {
@@ -1413,7 +1316,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getTravelApproverHistoriesForEmployeeMasterId_1() {
-        return this.travelApproverHistoriesForEmployeeMasterId_1;
+        return travelApproverHistoriesForEmployeeMasterId_1;
     }
 
     public void setTravelApproverHistoriesForEmployeeMasterId_1(Set travelApproverHistoriesForEmployeeMasterId_1) {
@@ -1421,7 +1324,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getAppraisalFeedback360sForHrCreatorId() {
-        return this.appraisalFeedback360sForHrCreatorId;
+        return appraisalFeedback360sForHrCreatorId;
     }
 
     public void setAppraisalFeedback360sForHrCreatorId(Set appraisalFeedback360sForHrCreatorId) {
@@ -1429,7 +1332,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getAppraisalFeedback360sForRefDoneEmpId() {
-        return this.appraisalFeedback360sForRefDoneEmpId;
+        return appraisalFeedback360sForRefDoneEmpId;
     }
 
     public void setAppraisalFeedback360sForRefDoneEmpId(Set appraisalFeedback360sForRefDoneEmpId) {
@@ -1437,7 +1340,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getAppraisalFeedback360sForRefForEmpId_1() {
-        return this.appraisalFeedback360sForRefForEmpId_1;
+        return appraisalFeedback360sForRefForEmpId_1;
     }
 
     public void setAppraisalFeedback360sForRefForEmpId_1(Set appraisalFeedback360sForRefForEmpId_1) {
@@ -1445,7 +1348,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getTravelRequestMastersForEmployeeMasterId_1() {
-        return this.travelRequestMastersForEmployeeMasterId_1;
+        return travelRequestMastersForEmployeeMasterId_1;
     }
 
     public void setTravelRequestMastersForEmployeeMasterId_1(Set travelRequestMastersForEmployeeMasterId_1) {
@@ -1453,7 +1356,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getAppraisalFeedback360sForHrCreatorId_1() {
-        return this.appraisalFeedback360sForHrCreatorId_1;
+        return appraisalFeedback360sForHrCreatorId_1;
     }
 
     public void setAppraisalFeedback360sForHrCreatorId_1(Set appraisalFeedback360sForHrCreatorId_1) {
@@ -1461,7 +1364,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getNoDueMastersForEmpId_1() {
-        return this.noDueMastersForEmpId_1;
+        return noDueMastersForEmpId_1;
     }
 
     public void setNoDueMastersForEmpId_1(Set noDueMastersForEmpId_1) {
@@ -1469,7 +1372,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getVisitorManagementsForSecurityApproveId_1() {
-        return this.visitorManagementsForSecurityApproveId_1;
+        return visitorManagementsForSecurityApproveId_1;
     }
 
     public void setVisitorManagementsForSecurityApproveId_1(Set visitorManagementsForSecurityApproveId_1) {
@@ -1477,7 +1380,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getExitInterviewMastersForEmpId_1() {
-        return this.exitInterviewMastersForEmpId_1;
+        return exitInterviewMastersForEmpId_1;
     }
 
     public void setExitInterviewMastersForEmpId_1(Set exitInterviewMastersForEmpId_1) {
@@ -1485,7 +1388,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getAttendanceRegularizations_1() {
-        return this.attendanceRegularizations_1;
+        return attendanceRegularizations_1;
     }
 
     public void setAttendanceRegularizations_1(Set attendanceRegularizations_1) {
@@ -1493,7 +1396,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getImprovementGoalsHistories() {
-        return this.improvementGoalsHistories;
+        return improvementGoalsHistories;
     }
 
     public void setImprovementGoalsHistories(Set improvementGoalsHistories) {
@@ -1501,7 +1404,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getExpenseMastersForApprover1Id_1() {
-        return this.expenseMastersForApprover1Id_1;
+        return expenseMastersForApprover1Id_1;
     }
 
     public void setExpenseMastersForApprover1Id_1(Set expenseMastersForApprover1Id_1) {
@@ -1509,7 +1412,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getLeaveEncashmentsForCreatorEmpId_1() {
-        return this.leaveEncashmentsForCreatorEmpId_1;
+        return leaveEncashmentsForCreatorEmpId_1;
     }
 
     public void setLeaveEncashmentsForCreatorEmpId_1(Set leaveEncashmentsForCreatorEmpId_1) {
@@ -1517,7 +1420,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getLeaveEncashmentsForApproverEmpId_1() {
-        return this.leaveEncashmentsForApproverEmpId_1;
+        return leaveEncashmentsForApproverEmpId_1;
     }
 
     public void setLeaveEncashmentsForApproverEmpId_1(Set leaveEncashmentsForApproverEmpId_1) {
@@ -1525,7 +1428,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getEmployeeDatetimeDatas_1() {
-        return this.employeeDatetimeDatas_1;
+        return employeeDatetimeDatas_1;
     }
 
     public void setEmployeeDatetimeDatas_1(Set employeeDatetimeDatas_1) {
@@ -1533,7 +1436,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getAppraisalFeedback360sForRefDoneEmpId_1() {
-        return this.appraisalFeedback360sForRefDoneEmpId_1;
+        return appraisalFeedback360sForRefDoneEmpId_1;
     }
 
     public void setAppraisalFeedback360sForRefDoneEmpId_1(Set appraisalFeedback360sForRefDoneEmpId_1) {
@@ -1541,7 +1444,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getPerformanceImprovementPlanMastersForPipEmployeeId_1() {
-        return this.performanceImprovementPlanMastersForPipEmployeeId_1;
+        return performanceImprovementPlanMastersForPipEmployeeId_1;
     }
 
     public void setPerformanceImprovementPlanMastersForPipEmployeeId_1(Set performanceImprovementPlanMastersForPipEmployeeId_1) {
@@ -1549,7 +1452,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getOverTimeMasters_1() {
-        return this.overTimeMasters_1;
+        return overTimeMasters_1;
     }
 
     public void setOverTimeMasters_1(Set overTimeMasters_1) {
@@ -1557,7 +1460,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getEmployeeShiftDatas_1() {
-        return this.employeeShiftDatas_1;
+        return employeeShiftDatas_1;
     }
 
     public void setEmployeeShiftDatas_1(Set employeeShiftDatas_1) {
@@ -1565,7 +1468,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getHrServiceRequestsForEmployeeMasterId() {
-        return this.hrServiceRequestsForEmployeeMasterId;
+        return hrServiceRequestsForEmployeeMasterId;
     }
 
     public void setHrServiceRequestsForEmployeeMasterId(Set hrServiceRequestsForEmployeeMasterId) {
@@ -1573,7 +1476,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getAppraisalPerformanceMasters_1() {
-        return this.appraisalPerformanceMasters_1;
+        return appraisalPerformanceMasters_1;
     }
 
     public void setAppraisalPerformanceMasters_1(Set appraisalPerformanceMasters_1) {
@@ -1581,7 +1484,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getExpenseMastersForEmployeeId_1() {
-        return this.expenseMastersForEmployeeId_1;
+        return expenseMastersForEmployeeId_1;
     }
 
     public void setExpenseMastersForEmployeeId_1(Set expenseMastersForEmployeeId_1) {
@@ -1589,7 +1492,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getItServiceRequestsForItApproverId_1() {
-        return this.itServiceRequestsForItApproverId_1;
+        return itServiceRequestsForItApproverId_1;
     }
 
     public void setItServiceRequestsForItApproverId_1(Set itServiceRequestsForItApproverId_1) {
@@ -1597,7 +1500,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getTravelRequestMastersForApprover2Id_1() {
-        return this.travelRequestMastersForApprover2Id_1;
+        return travelRequestMastersForApprover2Id_1;
     }
 
     public void setTravelRequestMastersForApprover2Id_1(Set travelRequestMastersForApprover2Id_1) {
@@ -1605,7 +1508,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getImprovementGoalsHistories_1() {
-        return this.improvementGoalsHistories_1;
+        return improvementGoalsHistories_1;
     }
 
     public void setImprovementGoalsHistories_1(Set improvementGoalsHistories_1) {
@@ -1613,7 +1516,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getEmployeeReferrals_1() {
-        return this.employeeReferrals_1;
+        return employeeReferrals_1;
     }
 
     public void setEmployeeReferrals_1(Set employeeReferrals_1) {
@@ -1621,7 +1524,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getNoDueMastersForApproverId_1() {
-        return this.noDueMastersForApproverId_1;
+        return noDueMastersForApproverId_1;
     }
 
     public void setNoDueMastersForApproverId_1(Set noDueMastersForApproverId_1) {
@@ -1629,7 +1532,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getGatePassesForSecurityApproverId_1() {
-        return this.gatePassesForSecurityApproverId_1;
+        return gatePassesForSecurityApproverId_1;
     }
 
     public void setGatePassesForSecurityApproverId_1(Set gatePassesForSecurityApproverId_1) {
@@ -1637,7 +1540,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getTempShiftAssignMasters_1() {
-        return this.tempShiftAssignMasters_1;
+        return tempShiftAssignMasters_1;
     }
 
     public void setTempShiftAssignMasters_1(Set tempShiftAssignMasters_1) {
@@ -1645,7 +1548,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getHrServiceRequestsForEmployeeMasterId_1() {
-        return this.hrServiceRequestsForEmployeeMasterId_1;
+        return hrServiceRequestsForEmployeeMasterId_1;
     }
 
     public void setHrServiceRequestsForEmployeeMasterId_1(Set hrServiceRequestsForEmployeeMasterId_1) {
@@ -1653,7 +1556,7 @@ public class EmployeeMaster implements java.io.Serializable {
     }
 
     public Set getHrServiceRequestsForHrApproveId_1() {
-        return this.hrServiceRequestsForHrApproveId_1;
+        return hrServiceRequestsForHrApproveId_1;
     }
 
     public void setHrServiceRequestsForHrApproveId_1(Set hrServiceRequestsForHrApproveId_1) {
@@ -1667,6 +1570,15 @@ public class EmployeeMaster implements java.io.Serializable {
     public void setEmployeePunchForMobileApps(Set employeePunchForMobileApps) {
         this.employeePunchForMobileApps = employeePunchForMobileApps;
     }
-    
+
+    public Integer getCompetencyEvaluationId() {
+        return competencyEvaluationId;
+    }
+
+    public void setCompetencyEvaluationId(Integer competencyEvaluationId) {
+        this.competencyEvaluationId = competencyEvaluationId;
+    }
+
+
 
 }

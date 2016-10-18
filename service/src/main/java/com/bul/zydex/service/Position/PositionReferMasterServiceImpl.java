@@ -7,6 +7,7 @@ package com.bul.zydex.service.Position;
 
 import com.bul.zydex.dao.Position.PositionReferMasterDAO;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.List;
 
 /**
  *
@@ -28,6 +29,11 @@ public class PositionReferMasterServiceImpl<T> extends GenericsServiceImpl<T> im
     @Override
     public boolean isExist(T object) {
      return positionReferMasterDAO.isExist(object);   
+    }
+    
+    @Override
+    public List<?> readPositionData(){
+     return positionReferMasterDAO.readPositionData();   
     }
 
 }

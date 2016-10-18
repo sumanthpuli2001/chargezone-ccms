@@ -4942,9 +4942,9 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         List pendingAtEmployeeListForManager = appraisalPerformanceService.readPendingEmployeePmpByManager("" + employeeMaster.getId(), year);
         request.setAttribute("pendingAtEmployeeList", pendingAtEmployeeList.size());
         List<String> empIdList = new ArrayList();
-        for(Object obj:pendingAtEmployeeListForManager){
-            Object[] oo = (Object[])obj;
-            EmployeeMaster employeeMaster1 = (EmployeeMaster)oo[1];
+        for (Object obj : pendingAtEmployeeListForManager) {
+            Object[] oo = (Object[]) obj;
+            EmployeeMaster employeeMaster1 = (EmployeeMaster) oo[1];
             empIdList.add(employeeMaster1.getEmployeeId());
         }
         request.setAttribute("pendingAtEmployeeListForManager", pendingAtEmployeeListForManager.size());
@@ -5181,6 +5181,19 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 
         mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
         mv.setViewName("Appraisal/AppraisalFormPrintToPdfByEmployee");
+        return mv;
+    }
+
+    public ModelAndView trasferCompatencyEvaluationInEmployeeMaster(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        List<?> list = appraisalPerformanceService.readEmpIdByAppraisalPerformanceId();
+        for (Object o : list) {
+            Object[] s = (Object[]) o;
+            EmployeeMaster employeeMaster = employeeMasterService.readById(Integer.parseInt("" + s[0]));
+            employeeMaster.setCompetencyEvaluationId(Integer.parseInt("" + s[1]));
+            employeeMasterService.update(employeeMaster);
+        }
+        mv.setViewName("redirect:logIn.html?act=dashboard");
         return mv;
     }
 }

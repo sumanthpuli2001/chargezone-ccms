@@ -177,6 +177,7 @@ public class EmployeeReferralController extends EmployeeReferralAbstract {
             request.setAttribute("finalApprover", reportingManagerOfEmpRefAdminList.get(0));
 
         }
+
         employeeReferral.setEmployeeMaster(employeeMaster);
         mv.getModelMap().put("employeeReferral", employeeReferral);
         mv.getModelMap().put("positionReferMap", getPositionReferalMap());
@@ -304,6 +305,7 @@ public class EmployeeReferralController extends EmployeeReferralAbstract {
             request.setAttribute("finalApprover", reportingManagerOfEmpRefAdminList.get(0));
 
         }
+
 //        String id = request.getParameter("id");
         mv.setViewName("EmployeeReferral/EmployeeReferralCreate");
         return mv;
@@ -382,6 +384,19 @@ public class EmployeeReferralController extends EmployeeReferralAbstract {
                     sendMail.sendMail(from, To, subject, msg);
 //                        }
 //                    }
+                    List finalHrApprovallId = employeeReferralService.finalApproveByHrHead();
+                    EmployeeMaster em = new EmployeeMaster();
+                    if (!finalHrApprovallId.isEmpty()) {
+                        em = (EmployeeMaster) finalHrApprovallId.get(0);
+                    }
+                    String To1 = em.getOfficeEmailId();
+                    String subject1 = emailTemplate1.getSubject();
+                    subject1 = subject1.replaceAll("\\{user\\}", em.getEmployeeName());
+                    String msg1 = emailTemplate1.getBodytext();
+                    msg1 = msg1.replaceAll("\\{to_user\\}", em.getEmployeeName());
+                    msg1 = msg1.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
+                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To1, subject1, msg1);
 
                 } catch (Exception e) {
                 }
@@ -597,11 +612,21 @@ public class EmployeeReferralController extends EmployeeReferralAbstract {
             mv.addObject("employeeRefList", employeeRefList.get(0));// list is used because from session we can ge logged in user as Hr Not Employee.
         }
         mv.getModelMap().put("employeeReferral", employeeReferral);
-        mv.getModelMap().put("positionReferMap", getPositionReferalMap());
+        mv.getModelMap().put("positionReferMap", getPosition());
 //        String id = request.getParameter("id");
         List reportingManagerOfEmpRefAdminList = employeeReferralService.getReportingManagerOfEmpRefAdmin();
         if (!reportingManagerOfEmpRefAdminList.isEmpty()) {
             request.setAttribute("finalApprover", reportingManagerOfEmpRefAdminList.get(0));
+
+        }
+        List finalHrApprovallId = employeeReferralService.finalApproveByHrHead();
+        if (!finalHrApprovallId.isEmpty()) {
+            if (!finalHrApprovallId.isEmpty()) {
+                EmployeeMaster em = new EmployeeMaster();
+                em = (EmployeeMaster) finalHrApprovallId.get(0);
+                request.setAttribute("finalApproverByHeHead", em.getId());
+
+            }
 
         }
         mv.setViewName("EmployeeReferral/EmployeeReferralCreate");
@@ -1214,5 +1239,21 @@ public class EmployeeReferralController extends EmployeeReferralAbstract {
 
             }
         }
+    }
+
+    public ModelAndView finalApproveList(HttpServletRequest request, HttpServletResponse response, EmployeeReferral employeeReferral) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        List<?> employeeRefList = employeeReferralService.finalApproveList(employeeReferral);
+        mv.addObject("employeeRefList", employeeRefList);
+        List finalHrApprovallId = employeeReferralService.finalApproveByHrHead();
+        if (!finalHrApprovallId.isEmpty()) {
+            EmployeeMaster em = new EmployeeMaster();
+            em = (EmployeeMaster) finalHrApprovallId.get(0);
+            request.setAttribute("finalApproverByHeHead", em.getId());
+
+        }
+        mv.setViewName("EmployeeReferral/EmployeeReferralListForHR");
+        return mv;
     }
 }

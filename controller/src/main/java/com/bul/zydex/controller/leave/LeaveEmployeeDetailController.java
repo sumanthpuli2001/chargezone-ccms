@@ -478,7 +478,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     }
                     boolean plBalCheck = false;
                     List<?> plCheck = leaveEmployeeDetailService.plLeaveCheck(employeeMaster.getId());
-                    if (plCheck.size() <= 3) {
+                    if (plCheck.size() >= 3) {
                         plBalCheck = true;
                     }
 

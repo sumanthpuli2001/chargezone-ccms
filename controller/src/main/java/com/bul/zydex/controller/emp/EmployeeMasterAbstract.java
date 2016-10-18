@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.emp;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.CompetencyEvaluationMaster;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmployeeLeaveBalance;
@@ -22,6 +23,7 @@ import com.bul.zydex.model.ShiftRotationMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
+import com.bul.zydex.service.appraisalPerformance.CompetencyEvaluationMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
 import com.bul.zydex.service.leave.LeaveTypeMasterService;
 import com.bul.zydex.service.level.LevelMasterService;
@@ -58,7 +60,18 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     protected ShiftGenerateMonthlyScheduleService<ShiftGenerateMonthlySchedule> shiftGenerateMonthlyScheduleService;
     protected RotationMasterService<RotationMaster> rotationMasterService;
     protected ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService;
+    protected CompetencyEvaluationMasterService<CompetencyEvaluationMaster> competencyEvaluationMasterService;
 
+    public CompetencyEvaluationMasterService<CompetencyEvaluationMaster> getCompetencyEvaluationMasterService() {
+        return competencyEvaluationMasterService;
+    }
+
+    public void setCompetencyEvaluationMasterService(CompetencyEvaluationMasterService<CompetencyEvaluationMaster> competencyEvaluationMasterService) {
+        this.competencyEvaluationMasterService = competencyEvaluationMasterService;
+    }
+
+    
+    
     public ZydexLocationMasterService<ZydexLocationMaster> getZydexLocationMasterService() {
         return zydexLocationMasterService;
     }
@@ -500,6 +513,18 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
             userRightMasterService.create(userRightMaster);
         }
 
+    }
+    
+      protected void competencyList(HttpServletRequest request) {
+        CompetencyEvaluationMaster competencyEvaluationMaster = new CompetencyEvaluationMaster();
+        List<?> competencyList = competencyEvaluationMasterService.read();
+        Map<Integer, String> dm = new HashMap<>();
+        for (Object o : competencyList) {
+            competencyEvaluationMaster = (CompetencyEvaluationMaster) o;
+            dm.put(competencyEvaluationMaster.getId(), competencyEvaluationMaster.getTitle());
+        }
+
+        request.setAttribute("competencyMap", dm);
     }
 
 }

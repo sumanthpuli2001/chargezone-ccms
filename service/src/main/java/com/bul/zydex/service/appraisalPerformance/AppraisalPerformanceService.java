@@ -44,4 +44,6 @@ public interface AppraisalPerformanceService<T> extends GenericsService<T> {
     public List<?> readPendingEmployeePmp(int employeeId, int year); 
     
     public List<?> readPendingEmployeePmpByManager(String employeeId, int year); 
+    
+    public List<?> readEmpIdByAppraisalPerformanceId(); 
 }

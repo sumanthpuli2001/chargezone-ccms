@@ -88,13 +88,20 @@ public class AppraisalPerformanceServiceImpl<T> extends GenericsServiceImpl<T> i
     public List<?> readIDPSearchByEmployeeWise(T object) {
         return appraisalPerformanceDAO.readIDPSearchByEmployeeWise(object);
     }
+
     @Override
-   public List<?> readPendingEmployeePmp(int employeeId, int year) {
+    public List<?> readPendingEmployeePmp(int employeeId, int year) {
         return appraisalPerformanceDAO.readPendingEmployeePmp(employeeId, year);
     }
+
     @Override
-   public List<?> readPendingEmployeePmpByManager(String employeeId, int year)  {
+    public List<?> readPendingEmployeePmpByManager(String employeeId, int year) {
         return appraisalPerformanceDAO.readPendingEmployeePmpByManager(employeeId, year);
+    }
+
+    @Override
+    public List<?> readEmpIdByAppraisalPerformanceId() {
+        return appraisalPerformanceDAO.readEmpIdByAppraisalPerformanceId();
     }
 
 }

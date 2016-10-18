@@ -53,7 +53,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author admin
  */
 public class AppraisalPerformanceController extends AppraisalPerformanceAbstract {
-
+    
     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -74,7 +74,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             if (!reportmanager.equals("")) {
                 reportingId = Integer.parseInt(reportmanager);
             }
-
+            
             employeeMaster1.setId(reportingId);
         }
         List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
@@ -82,28 +82,28 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
             request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
         }
-
+        
         List<?> empId = employeeMasterService.readByUserName(employeeMaster);
         if (!empId.isEmpty()) {
             employeeMaster = (EmployeeMaster) empId.get(0);
         }
         appraisalPerformanceMaster.setEmployeeMaster(employeeMaster);
         AppraisalFillingData appraisalFillingData = new AppraisalFillingData();
-
+        
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String today = sdf.format(cal.getTime());
-
+        
         Date now = sdf.parse(today);
         Calendar gc = new GregorianCalendar();
-
+        
         int year = gc.get(Calendar.YEAR);
         String cyear = "" + year;
         List<?> appraisalFilling = appraisalFillingDataService.readByCurrentYear(cyear);
-
+        
         if (!appraisalFilling.isEmpty()) {
             appraisalFillingData = (AppraisalFillingData) appraisalFilling.get(0);
-
+            
             String StartDate = appraisalFillingData.getStartDate();
             String EndDate = appraisalFillingData.getEndDate();
             String MidDate = appraisalFillingData.getMidYearStartDate();
@@ -126,14 +126,14 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             } else if ((now.after(yearEndStartDate) && now.before(yearEndDate)) || now.equals(yearEndStartDate) || now.equals(yearEndDate)) {
                 flag2 = true;
             }
-
+            
             request.setAttribute("flag", flag);
             request.setAttribute("flag1", flag1);
             request.setAttribute("flag2", flag2);
         }
         EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         String employeeId = "" + employee.getId();
-
+        
         List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
         if (!list.isEmpty()) {
             //AppraisalPerformanceMaster appraisalPerformanceMaster =new AppraisalPerformanceMaster();
@@ -144,7 +144,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             appraisalPerformanceKra.setId(appraisalId);
             //=======Admin insert weightscore==== after set value==//
             if (0 != appraisalPerformanceMaster.getManagerStatus()) {
-
+                
                 if (null != appraisalPerformanceMaster.getWeightageScore()) {
                     String weightageScore = appraisalPerformanceMaster.getWeightageScore();
                     request.setAttribute("weightageScore", weightageScore);
@@ -240,9 +240,9 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                }
 
             } catch (Exception e) {
-
+                
             }
-
+            
             String kragoal = "";
             String updateList = "";
             //int kragoalId;
@@ -252,7 +252,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 
                 //appraisalPerformanceKra.setId(kragoalId);
                 kragoal = appraisalPerformanceKra.getKraGoal();
-
+                
             }
             request.setAttribute("kragoal", kraList);
             request.setAttribute("empMidyearSelfassessmentGoal", kraList);
@@ -263,7 +263,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             request.setAttribute("managerEndyearReviewEvaluation", kraList);
             request.setAttribute("startDate", kraList);
             request.setAttribute("editDate", kraList);
-
+            
             UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra = new UpdateAppraisalPerformanceKra();
             updateAppraisalPerformanceKra.setAppraisalPerformanceKra(appraisalPerformanceKra);
             List<?> updateKraList = updateAppraisalPerformanceKraService.readByUpdateKragoal(updateAppraisalPerformanceKra);
@@ -275,14 +275,14 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 
         ////////////////////////////////////KRA OTHER Activity///////////////////////////////////////////////////////////
         if (null != appraisalPerformanceMaster.getId()) {
-
+            
             AppraisalPerformanceActivities appraisalPerformanceActivities = new AppraisalPerformanceActivities();
             appraisalPerformanceActivities.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
             String kragoal_activity = "";
             List<?> kraOtherList = appraisalPerformanceActivitiesService.readByAppraisalKraGoalActivities(appraisalPerformanceActivities);
             if (!kraOtherList.isEmpty()) {
                 appraisalPerformanceActivities = (AppraisalPerformanceActivities) kraOtherList.get(0);
-
+                
             }
         }
         ////////////////////////////////////KRA OTHER Activity//////////////////////////////////////////////////////////
@@ -354,7 +354,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         BindException errors = new BindException(appraisalPerformanceMaster, "appraisalPerformanceMaster");
-
+        
         kraCategoryList(request);
         KraCategory kraCategory = new KraCategory();
         String appraisalId = "";
@@ -386,7 +386,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 appraisalPerformanceKra.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
             }
             if (null == appraisalPerformanceMaster.getId()) {
-
+                
                 int behaviosyear = Calendar.getInstance().get(Calendar.YEAR);
                 appraisalPerformanceMaster.setEmployeeMaster(employee);
                 appraisalPerformanceMaster.setStatus(0);
@@ -397,7 +397,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 appraisalPerformanceMaster.setWeightageScore(weightageScore);
                 appraisalPerformanceService.create(appraisalPerformanceMaster);
             }
-
+            
             String flagId = request.getParameter("flagId");
             String midhalf = request.getParameter("flagMidId");
             String endhalf = request.getParameter("flagEndId");
@@ -414,14 +414,14 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 appraisalPerformanceMaster.setEmployeeStatus(1);
                 appraisalPerformanceMaster.setReworkStatus(0);
                 appraisalPerformanceMaster.setWeightageScore(weightageScore);
-
+                
                 if (midhalf.equals("true")) {
                     appraisalPerformanceMaster.setMidYearEmployeeStatus(1);
                 }
                 if (endhalf.equals("true")) {
                     appraisalPerformanceMaster.setEndYearEmployeeStatus(1);
                 }
-
+                
                 appraisalPerformanceService.update(appraisalPerformanceMaster);
                 if (!"".equals(flagId) && null != flagId) {
                     if (flagId.equals("true")) {
@@ -446,7 +446,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             sendMail.sendMail(from, To, Subject, msg);
                             mailSendPmpStartHalfapply(request);
                         } catch (Exception e) {
-
+                            
                         }
                     }
                 }
@@ -473,7 +473,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             sendMail.sendMail(from, To, Subject, msg);
                             mailSendPmpMidHalfapply(request);
                         } catch (Exception e) {
-
+                            
                         }
                     }
                 }
@@ -500,12 +500,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             sendMail.sendMail(from, To, Subject, msg);
                             mailSendPmpEndHalfapply(request);
                         } catch (Exception e) {
-
+                            
                         }
                     }
                 }
             } else {
-
+                
                 appraisalPerformanceMaster.setWeightageScore(weightageScore);
                 appraisalPerformanceService.update(appraisalPerformanceMaster);
             }
@@ -517,7 +517,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             //String employeeName = request.getParameter("employeeName");
             int countId = Integer.parseInt(request.getParameter("countId"));
             if (null != btn && btn.equals("submit")) {
-
+                
                 String kraremovedIdVal = request.getParameter("kraremovedIdVal");
                 if (!kraremovedIdVal.isEmpty()) {
                     for (String id : kraremovedIdVal.split(",")) {
@@ -526,10 +526,10 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                                 AppraisalPerformanceKra appraisalPerformanceKra2 = new AppraisalPerformanceKra();
                                 UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra1 = new UpdateAppraisalPerformanceKra();
                                 AppraisalkraActivity appraisalkraActivity = new AppraisalkraActivity();
-
+                                
                                 appraisalPerformanceKra2.setId(Integer.parseInt(id));
                                 appraisalPerformanceKra2 = appraisalPerformanceKraService.readById(appraisalPerformanceKra2.getId());
-
+                                
                                 appraisalkraActivity.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
                                 appraisalkraActivity.setDeletedKra(appraisalPerformanceKra2.getKraGoal());
                                 appraisalkraActivity.setDeletedMetric(appraisalPerformanceKra2.getMetric());
@@ -538,7 +538,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                                 appraisalkraActivity.setStatus("KRAGOAL");
                                 appraisalkraActivity.setKraDeletedDate(today);
                                 appraisalkraActivityService.create(appraisalkraActivity);
-
+                                
                                 updateAppraisalPerformanceKra1.setAppraisalPerformanceKra(appraisalPerformanceKra2);
                                 List updatedKraList = updateAppraisalPerformanceKraService.readByKraIdForDelete(updateAppraisalPerformanceKra1);
                                 for (Object obj : updatedKraList) {
@@ -546,7 +546,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                                     updateAppraisalPerformanceKraService.delete(updateAppraisalPerformanceKra1.getId());
                                 }
                                 appraisalPerformanceKraService.delete1(appraisalPerformanceKra2);
-
+                                
                             } catch (Exception e) {
                             }
                         }
@@ -554,7 +554,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 }
             }
             if (null != btn && btn.equals("submit")) {
-
+                
                 String kraremovedActivitiesIdVal = request.getParameter("kraremovedActivitiesIdVal");
                 if (!kraremovedActivitiesIdVal.isEmpty()) {
                     for (String id : kraremovedActivitiesIdVal.split(",")) {
@@ -563,10 +563,10 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                                 AppraisalPerformanceActivities appraisalPerformanceActivities2 = new AppraisalPerformanceActivities();
                                 UpdateAppraisalPerformanceActivities updateAppraisalPerformanceActivities1 = new UpdateAppraisalPerformanceActivities();
                                 AppraisalkraActivity appraisalkraActivity = new AppraisalkraActivity();
-
+                                
                                 appraisalPerformanceActivities2.setId(Integer.parseInt(id));
                                 appraisalPerformanceActivities2 = appraisalPerformanceActivitiesService.readById(appraisalPerformanceActivities2.getId());
-
+                                
                                 appraisalkraActivity.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
                                 appraisalkraActivity.setDeletedKra(appraisalPerformanceActivities2.getKraGoalActivities());
                                 appraisalkraActivity.setDeletedMetric(appraisalPerformanceActivities2.getMetricActivities());
@@ -575,7 +575,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                                 appraisalkraActivity.setStatus("ACTIVITIES");
                                 appraisalkraActivity.setKraDeletedDate(today);
                                 appraisalkraActivityService.create(appraisalkraActivity);
-
+                                
                                 updateAppraisalPerformanceActivities1.setAppraisalPerformanceActivities(appraisalPerformanceActivities2);
                                 List updatedActivitiesList = updateAppraisalPerformanceActivitiesService.readByKraIdForDeleteActivity(updateAppraisalPerformanceActivities1);
                                 for (Object activityObj : updatedActivitiesList) {
@@ -600,7 +600,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 String kraCategoryMap = request.getParameter("kraCategoryMap" + i);
                 String weightage1 = request.getParameter("weightage" + i);
                 String finalScore = request.getParameter("finalScore" + i);
-
+                
                 if (!"".equals(finalScore) && null != finalScore) {
                     appraisalPerformanceKra.setFinalScore(finalScore);
                 } else {
@@ -625,7 +625,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 } else {
                     appraisalPerformanceKra.setStartDate(null);
                 }
-
+                
                 appraisalPerformanceKra.setKraGoal(kraGoal1);
                 appraisalPerformanceKra.setMetric(metric1);
                 if (null != weightage1 && !weightage1.equals("") && !weightage1.equals("null")) {
@@ -637,7 +637,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                        KraCategory kraCategory = new KraCategory();
                     kraCategory.setId(Integer.parseInt(kraCategoryMap));
                     appraisalPerformanceKra.setKraCategoryByKraCategoryByEmployee(kraCategory);
-
+                    
                 }
 
                 //=======Mid year========================================//
@@ -658,22 +658,22 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 } else {
                     appraisalPerformanceKra.setEmpMidyearSelfassessmentGoal(null);
                 }
-
+                
                 if (!"".equals(managerMidYearSelfAssesssmentGoal) && null != managerMidYearSelfAssesssmentGoal && flagId.equals("false")) {
                     appraisalPerformanceKra.setManagerMidyearReviewEvaluation(managerMidYearSelfAssesssmentGoal);
                 } else {
                     appraisalPerformanceKra.setManagerMidyearReviewEvaluation(null);
                 }
-
+                
                 if (!"".equals(empMidyearSelfassOtheractivty) && null != empMidyearSelfassOtheractivty) {
-
+                    
                     appraisalPerformanceMaster.setEmpMidyearSelfassOtheractivty(empMidyearSelfassOtheractivty);
                     //appraisalPerformanceService.update(appraisalPerformanceMaster);
                 } else {
                     appraisalPerformanceMaster.setEmpMidyearSelfassOtheractivty(null);
                 }
                 if (!"".equals(managerMidyearReviewevalOtheractivity) && null != managerMidyearReviewevalOtheractivity) {
-
+                    
                     appraisalPerformanceMaster.setManagerMidyearReviewevalOtheractivity(managerMidyearReviewevalOtheractivity);
 //                        appraisalPerformanceService.update(appraisalPerformanceMaster);
                 } else {
@@ -697,7 +697,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     appraisalPerformanceKra.setEmpEndyearSelfassessmentGoal(null);
                 }
                 if (!"".equals(empEndyearSelfassOtheractivty) && null != empEndyearSelfassOtheractivty) {
-
+                    
                     appraisalPerformanceMaster.setEmpEndyearSelfassOtheractivty(empEndyearSelfassOtheractivty);
 //                        appraisalPerformanceService.update(appraisalPerformanceMaster);
                 } else {
@@ -716,7 +716,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     }
                     request.setAttribute("successMessage",
                             "Information : The Information is Saved Successfully.");
-
+                    
                 } else {
                     ////////////////Submit code////////////////////////////////
                     appraisalPerformanceKra.setKraGoalByManager(kraGoal1);
@@ -731,7 +731,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         kraCategory.setId(Integer.parseInt(kraCategoryMap));
                         appraisalPerformanceKra.setKraCategoryByKraCategoryByManager(kraCategory);
                     }
-
+                    
                     if (!"".equals(employeeMidYearSelfAssesssmentGoal) && null != employeeMidYearSelfAssesssmentGoal && flagId.equals("false")) {
                         appraisalPerformanceKra.setEmpMidyearSelfassessmentGoalManager(employeeMidYearSelfAssesssmentGoal);
                     } else {
@@ -752,7 +752,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     } else {
                         appraisalPerformanceKra.setEndyearStatusManager(null);
                     }
-
+                    
                     if (!"".equals(finalScore) && null != finalScore) {
                         appraisalPerformanceKra.setFinalScoreManager(finalScore);
                     } else {
@@ -765,7 +765,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     } else {
                         appraisalPerformanceKra.setEmpMidyearSelfassessmentGoalManager(null);
                     }
-
+                    
                     if (!"".equals(managerMidYearSelfAssesssmentGoal) && null != managerMidYearSelfAssesssmentGoal && flagId.equals("false")) {
                         appraisalPerformanceKra.setManagerMidyearReviewEvaluationManager(managerMidYearSelfAssesssmentGoal);
                     } else {
@@ -782,16 +782,16 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         appraisalPerformanceKra.setManagerEndyearReviewEvaluationManager(null);
                     }
                     try {
-
+                        
                         if (kragoal_id != null) {
-
+                            
                             appraisalPerformanceKra1 = appraisalPerformanceKraService.readById(Integer.parseInt(kragoal_id));
                             if (null != appraisalPerformanceKra1.getWeightage() && appraisalPerformanceKra1.getKraGoal().equals(appraisalPerformanceKra.getKraGoal())
                                     && appraisalPerformanceKra1.getMetric().equals(appraisalPerformanceKra.getMetric())
                                     && appraisalPerformanceKra1.getWeightage().equals(appraisalPerformanceKra.getWeightage())) {
-
+                                
                             } else {
-
+                                
                                 updateAppraisalPerformanceKra.setAppraisalPerformanceKra(appraisalPerformanceKra1);
                                 updateAppraisalPerformanceKra.setUpdateDate(startdate);
                                 updateAppraisalPerformanceKra.setUpdateKra(appraisalPerformanceKra1.getKraGoal());
@@ -802,7 +802,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             }
                         }
                     } catch (Exception e) {
-
+                        
                     }
 
                     ////Match the Kra goal and update it////////
@@ -868,13 +868,13 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 } else {
                     appraisalPerformanceActivities.setKraCategoryByEmployeeActivities(null);
                 }
-
+                
                 if (null != priority && !priority.equals("")) {
                     appraisalPerformanceActivities.setPriority(priority);
                 } else {
                     appraisalPerformanceActivities.setPriority(priority);
                 }
-
+                
                 if (null != midYearDivOther && !midYearDivOther.equals("")) {
                     appraisalPerformanceActivities.setMidyearStatusActivities(midYearDivOther);
                 } else {
@@ -921,7 +921,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         appraisalPerformanceActivitiesService.create(appraisalPerformanceActivities);
                     }
                 } else {
-
+                    
                     if (null != kraGoalactivity && !kraGoalactivity.equals("")) {
                         appraisalPerformanceActivities.setKraGoalActivitiesManager(kraGoalactivity);
                     } else {
@@ -968,15 +968,15 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         appraisalPerformanceActivities.setManagerEndyearSelfassesssmentGoalActivitiesManager(null);
                     }
                     try {
-
+                        
                         if (null != kragoal_activity_id) {
-
+                            
                             appraisalPerformanceActivities1 = appraisalPerformanceActivitiesService.readById(Integer.parseInt(kragoal_activity_id));
                             if (null != appraisalPerformanceActivities1.getKraGoalActivities()) {
-
+                                
                                 if (appraisalPerformanceActivities1.getKraGoalActivities().equals(appraisalPerformanceActivities.getKraGoalActivities())
                                         && appraisalPerformanceActivities1.getMetricActivities().equals(appraisalPerformanceActivities1.getMetricActivities())) {
-
+                                    
                                 } else {
                                     updateAppraisalPerformanceActivities.setAppraisalPerformanceActivities(appraisalPerformanceActivities1);
                                     updateAppraisalPerformanceActivities.setKraActivity(appraisalPerformanceActivities1.getKraGoalActivities());
@@ -988,16 +988,16 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             }
                         }
                     } catch (Exception e) {
-
+                        
                     }
-
+                    
                     if (null != kragoal_activity_id) {
                         appraisalPerformanceActivities.setId(Integer.parseInt(kragoal_activity_id));
                         appraisalPerformanceActivitiesService.update(appraisalPerformanceActivities);
                     } else {
                         appraisalPerformanceActivitiesService.create(appraisalPerformanceActivities);
                     }
-
+                    
                 }
             }
 //                if (!"".equals(kraGoalactivity) && null != kraGoalactivity) {
@@ -1087,7 +1087,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationTextmaster(competencyEvaluationTextmaster);
 //                String competencyEveId = request.getParameter("competencyEveId" + i);
                 String btn2 = request.getParameter("save");
-
+                
                 if (null != btn2 && btn2.equals("save")) {
                     if (!"".equals(competencyEveId) && null != competencyEveId) {
                         int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
@@ -1095,7 +1095,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
                         appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
                         appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
-
+                        
                     } else {
                         if (!appraisalId.isEmpty()) {
                             if (flag) {
@@ -1156,7 +1156,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
                         appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
                         appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
-
+                        
                     } else {
                         if (!appraisalId.isEmpty()) {
                             if (flag) {
@@ -1389,7 +1389,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             for (int i = 1; i <= individualcount; i++) {
                 String individualplan = request.getParameter("IndividualDevelopmentPlanId" + i);
                 if (null != individualplan) {
-
+                    
                     appraisalPerformanceIndividualDevelopmentPlan = appraisalPerformanceIndividualDevelopmentPlanService.readById(Integer.parseInt(individualplan));
                 }
                 String text1 = request.getParameter("text" + i);
@@ -1405,7 +1405,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 } else {
                     appraisalPerformanceIndividualDevelopmentPlan.setText1(null);
                 }
-
+                
                 if (!"".equals(text2) && null != text2) {
                     appraisalPerformanceIndividualDevelopmentPlan.setText2(text2);
                 } else {
@@ -1441,10 +1441,10 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 } else {
                     appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(null);
                 }
-
+                
                 String btn4 = request.getParameter("save");
                 if (null != btn4 && btn4.equals("save")) {
-
+                    
                     if (individualplan != null) {
                         appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
                         appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
@@ -1455,7 +1455,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     request.setAttribute("successMessage",
                             "Information : The Information is Saved Successfully.");
                 } else {
-
+                    
                     if (null != text1 && !"".equals(text1)) {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(text1);
                     } else {
@@ -1476,7 +1476,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     } else {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(null);
                     }
-
+                    
                     if (null != remark && !"".equals(remark)) {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagerremark(remark);
                     } else {
@@ -1487,7 +1487,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     } else {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
                     }
-
+                    
                     if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(managerEndYearRemark);
                     } else {
@@ -1504,7 +1504,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     } else {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(null);
                     }
-
+                    
                     if (individualplan != null) {
                         appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
                         appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
@@ -1648,16 +1648,16 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        mv.setViewName("Appraisal/PerformanceAppraisalForm");
         return mv;
     }
-
+    
     public ModelAndView searchSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
 //        List<?> employeeMasterList = employeeMasterService.read();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-
+        
         UserMaster user = (UserMaster) request.getSession().getAttribute("user");
         UserRightMaster user1 = (UserRightMaster) request.getSession().getAttribute("userRight");
-
+        
         List<List<?>> finalAppraisalPerformanceList1 = new LinkedList<List<?>>();
         boolean hr = user1.isHr();
 //        List<?> appraisalPerformanceList = appraisalPerformanceService.readEmployeesAppraisalPerformance(employeeMaster, hr);
@@ -1674,9 +1674,9 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         int i = 0;
         if (null != appraisalPerformanceList && !appraisalPerformanceList.isEmpty()) {
             for (Object o1 : appraisalPerformanceList) {
-
+                
                 Object o11[] = (Object[]) o1;
-
+                
                 String aa = o11[0].toString();
                 appraisalPerformanceMaster = appraisalPerformanceService.readById(Integer.parseInt(aa));
                 if (!appraisalPerformanceMaster.equals("")) {
@@ -1687,9 +1687,9 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 List list = appraisalPerformanceKraService.readByAppraisalPerformancekraId(appraisalPerformanceKra);
                 for (Object o : list) {
                     goalSetting = "Pendding";
-
+                    
                     AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o;
-
+                    
                     if (appraisalPerformanceKra1.getKraGoal() != null && appraisalPerformanceKra1.getMetric() != null) {
                         goalSetting = "Approved";
                         break;
@@ -1707,7 +1707,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     }
                 }
                 for (Object o3 : list) {
-
+                    
                     midSelfApproval = "";
                     AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o3;
                     if (appraisalPerformanceKra1.getEmpMidyearSelfassessmentGoal() != null && !"".equals(appraisalPerformanceKra1.getEmpMidyearSelfassessmentGoal()) && 0 != appraisalPerformanceMaster.getMidYearEmployeeStatus()) {
@@ -1745,7 +1745,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         break;
                     }
                 }
-
+                
                 if (!list.isEmpty()) {
                     List appraisalFillingDataList = appraisalFillingDataService.readByCurrentYear("" + year);
                     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -1848,9 +1848,9 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                                 }
                             }
                         }
-
+                        
                     }
-
+                    
                 } else {
                     List appraisalFillingDataList = appraisalFillingDataService.readByCurrentYear("" + year);
                     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -1910,7 +1910,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                                 managerEndSelfApproval = "Pendding";
                             }
                         }
-
+                        
                     }
                 }
 
@@ -1934,9 +1934,9 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        request.setAttribute("endSelfApproval", endSelfApproval);
 //        request.setAttribute("managerEndSelfApproval", managerEndSelfApproval);
             }
-
+            
         }
-
+        
         mv.getModelMap().put("list", finalAppraisalPerformanceList1);
 //        mv.getModelMap().put("list", appraisalPerformanceList1);
         mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
@@ -2052,7 +2052,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId);
         List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
         if (!list.isEmpty()) {
-
+            
             appraisalPerformanceMaster = (AppraisalPerformanceMaster) list.get(0);
             int appraisalId = appraisalPerformanceMaster.getId();
             //AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
@@ -2072,12 +2072,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                KraCategory kraCategory1 = new KraCategory();
 //                kraCategory1 = kraCategoryService.readById(appraisalPerformanceKra.getKraCategoryByKraCategoryByEmployee().getId());
                 if (null != kragoal && !"".equals(kragoal)) {
-
+                    
                     UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra1 = new UpdateAppraisalPerformanceKra();
                     updateAppraisalPerformanceKra.setId(Integer.parseInt("" + kragoalId));
                     List<?> updateAppraisalPerformanceKra1List = updateAppraisalPerformanceKraService.readByUserUpdateKra(updateAppraisalPerformanceKra);
                     if (!updateAppraisalPerformanceKra1List.isEmpty()) {
-
+                        
                         updateAppraisalPerformanceKra1 = (UpdateAppraisalPerformanceKra) updateAppraisalPerformanceKra1List.get(0);
                         if (!kragoal.equals(updateAppraisalPerformanceKra1.getUpdateKra()) || !metric.equals(updateAppraisalPerformanceKra1.getUpdateMetric())) {
                             updateStatus = true;
@@ -2097,7 +2097,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             request.setAttribute("editDate", kraList);
             request.setAttribute("startDate", kraList);
             request.setAttribute("year", request.getParameter("year"));
-
+            
         }
 
         ////////////////////////////////////KRA OTHER Activity///////////////////////////////////////////////////////////
@@ -2106,23 +2106,23 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         boolean kraOtherupdateStatus = false;
         int kragoalactivityId;
         if (null != appraisalPerformanceMaster.getId()) {
-
+            
             AppraisalPerformanceActivities appraisalPerformanceActivities = new AppraisalPerformanceActivities();
             appraisalPerformanceActivities.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-
+            
             List<?> kraOtherList = appraisalPerformanceActivitiesService.readByAppraisalKraGoalActivities(appraisalPerformanceActivities);
             if (!kraOtherList.isEmpty()) {
                 appraisalPerformanceActivities = (AppraisalPerformanceActivities) kraOtherList.get(0);
                 kragoal_activity = appraisalPerformanceActivities.getKraGoalActivities();
                 kragoalactivityId = appraisalPerformanceActivities.getId();
                 metric_activity = appraisalPerformanceActivities.getMetricActivities();
-
+                
                 if (null != kragoal_activity && !"".equals(kragoal_activity)) {
                     UpdateAppraisalPerformanceActivities updateAppraisalPerformanceActivities = new UpdateAppraisalPerformanceActivities();
                     updateAppraisalPerformanceActivities.setId(Integer.parseInt("" + kragoalactivityId));
                     List<?> updateKraOtherList = updateAppraisalPerformanceActivitiesService.readByUserUpdateKraOther(updateAppraisalPerformanceActivities);
                     if (!updateKraOtherList.isEmpty()) {
-
+                        
                         updateAppraisalPerformanceActivities = (UpdateAppraisalPerformanceActivities) updateKraOtherList.get(0);
                         if (!kragoal_activity.equals(updateAppraisalPerformanceActivities.getKraActivity()) || !metric_activity.equals(updateAppraisalPerformanceActivities.getMetricActivity())) {
                             kraOtherupdateStatus = true;
@@ -2142,7 +2142,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
         CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
         List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
-
+        
         request.setAttribute("competencyEvaluationList", competencyEvaluationList);
 
         //Individual Development Plan//
@@ -2173,14 +2173,14 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         }
         request.setAttribute("behaviors", behaviorsList);
         request.setAttribute("behaviorsList", behaviorsList);
-
+        
         mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
         mv.setViewName("Appraisal/PerformanceAppraisalForm");
 //        mv.setViewName("Appraisal/ManagerPerformanceAppraisalForm");
 //        mv.setViewName("forward:userMaster.htm?act=userDashboard");
         return mv;
     }
-
+    
     public ModelAndView editClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ////////////Manager
         ModelAndView mv = new ModelAndView();
@@ -2196,7 +2196,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         request.setAttribute("empId", empId);
         request.setAttribute("userid", userid);
         request.setAttribute("appraisalId1", appraisalId1);
-
+        
         request.setAttribute("empId", empId);
         request.setAttribute("userid", userid);
         request.setAttribute("appraisalId1", appraisalId1);
@@ -2276,7 +2276,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         } else {
             String behaviorsFinalscore = "";
             request.setAttribute("behaviorsFinalscore", behaviorsFinalscore);
-
+            
         }
 //        } else {
 //            String behaviorsFinalscore = "";
@@ -2286,7 +2286,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId);
         List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
         if (!list.isEmpty()) {
-
+            
             appraisalPerformanceMaster = (AppraisalPerformanceMaster) list.get(0);
             int appraisalId = appraisalPerformanceMaster.getId();
             //AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
@@ -2303,12 +2303,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 kragoalId = appraisalPerformanceKra.getId();
                 metric = appraisalPerformanceKra.getMetric();
                 if (null != kragoal && !"".equals(kragoal)) {
-
+                    
                     UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra1 = new UpdateAppraisalPerformanceKra();
                     updateAppraisalPerformanceKra.setId(Integer.parseInt("" + kragoalId));
                     List<?> updateAppraisalPerformanceKra1List = updateAppraisalPerformanceKraService.readByUserUpdateKra(updateAppraisalPerformanceKra);
                     if (!updateAppraisalPerformanceKra1List.isEmpty()) {
-
+                        
                         updateAppraisalPerformanceKra1 = (UpdateAppraisalPerformanceKra) updateAppraisalPerformanceKra1List.get(0);
                         if (!kragoal.equals(updateAppraisalPerformanceKra1.getUpdateKra()) || !metric.equals(updateAppraisalPerformanceKra1.getUpdateMetric())) {
                             updateStatus = true;
@@ -2328,7 +2328,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             request.setAttribute("empEndyearSelfassessmentGoal", kraList);
             request.setAttribute("editDate", kraList);
             request.setAttribute("startDate", kraList);
-
+            
         }
 
         ////////////////////////////////////KRA OTHER Activity///////////////////////////////////////////////////////////
@@ -2337,23 +2337,23 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         boolean kraOtherupdateStatus = false;
         int kragoalactivityId;
         if (null != appraisalPerformanceMaster.getId()) {
-
+            
             AppraisalPerformanceActivities appraisalPerformanceActivities = new AppraisalPerformanceActivities();
             appraisalPerformanceActivities.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-
+            
             List<?> kraOtherList = appraisalPerformanceActivitiesService.readByAppraisalKraGoalActivities(appraisalPerformanceActivities);
             if (!kraOtherList.isEmpty()) {
                 appraisalPerformanceActivities = (AppraisalPerformanceActivities) kraOtherList.get(0);
                 kragoal_activity = appraisalPerformanceActivities.getKraGoalActivities();
                 kragoalactivityId = appraisalPerformanceActivities.getId();
                 metric_activity = appraisalPerformanceActivities.getMetricActivities();
-
+                
                 if (null != kragoal_activity && !"".equals(kragoal_activity)) {
                     UpdateAppraisalPerformanceActivities updateAppraisalPerformanceActivities = new UpdateAppraisalPerformanceActivities();
                     updateAppraisalPerformanceActivities.setId(Integer.parseInt("" + kragoalactivityId));
                     List<?> updateKraOtherList = updateAppraisalPerformanceActivitiesService.readByUserUpdateKraOther(updateAppraisalPerformanceActivities);
                     if (!updateKraOtherList.isEmpty()) {
-
+                        
                         updateAppraisalPerformanceActivities = (UpdateAppraisalPerformanceActivities) updateKraOtherList.get(0);
                         if (!kragoal_activity.equals(updateAppraisalPerformanceActivities.getKraActivity()) || !metric_activity.equals(updateAppraisalPerformanceActivities.getMetricActivity())) {
                             kraOtherupdateStatus = true;
@@ -2373,7 +2373,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
         CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
         List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
-
+        
         request.setAttribute("competencyEvaluationList", competencyEvaluationList);
 
         //Individual Development Plan//
@@ -2404,14 +2404,14 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         }
         request.setAttribute("behaviors", behaviorsList);
         request.setAttribute("behaviorsList", behaviorsList);
-
+        
         mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
 //        mv.setViewName("Appraisal/PerformanceAppraisalForm");
         mv.setViewName("Appraisal/ManagerPerformanceAppraisalForm");
 //        mv.setViewName("forward:userMaster.htm?act=userDashboard");
         return mv;
     }
-
+    
     public ModelAndView deleteSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String empId[] = request.getParameterValues("checkId");
@@ -2423,13 +2423,13 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 request.setAttribute("successMessage",
                         "Info : One or more records are deleted successfully.");
             } catch (Exception e) {
-
+                
             }
         }
         mv = searchSubmit(request, response);
         return mv;
     }
-
+    
     public ModelAndView createSubmitManager(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
@@ -2505,7 +2505,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             int countId = Integer.parseInt(request.getParameter("countId"));
             String btn5 = request.getParameter("submit");
             if (null != btn5 && btn5.equals("submit")) {
-
+                
                 String kraremovedIdVal = request.getParameter("kraremovedIdVal");
                 if (!kraremovedIdVal.isEmpty()) {
                     for (String id : kraremovedIdVal.split(",")) {
@@ -2514,7 +2514,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra1 = new UpdateAppraisalPerformanceKra();
                             AppraisalkraActivity appraisalkraActivity = new AppraisalkraActivity();
                             appraisalkraActivity.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-
+                            
                             appraisalPerformanceKra2.setId(Integer.parseInt(id));
                             appraisalPerformanceKra2 = appraisalPerformanceKraService.readById(appraisalPerformanceKra2.getId());
                             appraisalkraActivity.setDeletedKra(appraisalPerformanceKra2.getKraGoal());
@@ -2524,20 +2524,20 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             appraisalkraActivity.setStatus("KRAGOAL");
                             appraisalkraActivity.setKraDeletedDate(today);
                             appraisalkraActivityService.create(appraisalkraActivity);
-
+                            
                             updateAppraisalPerformanceKra1.setAppraisalPerformanceKra(appraisalPerformanceKra2);
                             List updatedKraList = updateAppraisalPerformanceKraService.readByKraIdForDelete(updateAppraisalPerformanceKra1);
                             for (Object obj : updatedKraList) {
                                 updateAppraisalPerformanceKra1 = (UpdateAppraisalPerformanceKra) obj;
                                 updateAppraisalPerformanceKraService.delete(updateAppraisalPerformanceKra1.getId());
                             }
-
+                            
                             appraisalPerformanceKraService.delete1(appraisalPerformanceKra2);
                         }
                     }
                 }
             }
-
+            
             for (int i = 1; i <= countId; i++) {
                 String kragoal_id = request.getParameter("kragoal_id" + i);
                 String kraGoal1 = request.getParameter("kraGoal" + i);
@@ -2608,7 +2608,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 } else {
                     appraisalPerformanceKra.setEndyearStatus(null);
                 }
-
+                
                 if (!"".equals(employeeEndYearSelfAssesssmentGoal) && null != employeeEndYearSelfAssesssmentGoal && firsthalf.equals("false") && midhalf.equals("false")) {
                     appraisalPerformanceKra.setEmpEndyearSelfassessmentGoalManager(employeeEndYearSelfAssesssmentGoal);
                 } else {
@@ -2639,7 +2639,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         //KraCategory kraCategory = new KraCategory();
                         kraCategory.setId(Integer.parseInt(kraCategoryMap));
                         appraisalPerformanceKra.setKraCategoryByKraCategoryByManager(kraCategory);
-
+                        
                     }
                     if (kragoal_id != null) {
                         appraisalPerformanceKra.setId(Integer.parseInt(kragoal_id));
@@ -2657,7 +2657,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     appraisalPerformanceKra.setKraGoalByManager(kraGoal1);
                     appraisalPerformanceKra.setMatrixByManager(metric1);
                     appraisalPerformanceKra.setEditDate(startdate);
-
+                    
                     if (!"".equals(kraCategoryMap) && null != kraCategoryMap) {
                         //KraCategory kraCategory = new KraCategory();
                         kraCategory.setId(Integer.parseInt(kraCategoryMap));
@@ -2673,7 +2673,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         updateAppraisalPerformanceKra.setUpdateMetric(appraisalPerformanceKra1.getMetric());
                         updateAppraisalPerformanceKra.setName(employee.getEmployeeName());
                         updateAppraisalPerformanceKra.setWeighted("" + appraisalPerformanceKra1.getWeightage());
-
+                        
                         if (!"".equals(startDate1) && null != startDate1) {
                             appraisalPerformanceKra.setStartDate(startDate1);
                         } else {
@@ -2696,7 +2696,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         } else {
                             appraisalPerformanceKra.setManagerMidyearReviewEvaluation(null);
                         }
-
+                        
                         if (!"".equals(midYearDiv1) && null != midYearDiv1) {
                             appraisalPerformanceKra.setMidyearStatus(midYearDiv1);
                         } else {
@@ -2715,7 +2715,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         } else {
                             appraisalPerformanceKra.setEndyearStatus(null);
                         }
-
+                        
                         if (!"".equals(employeeEndYearSelfAssesssmentGoal) && null != employeeEndYearSelfAssesssmentGoal && firsthalf.equals("false") && midhalf.equals("false")) {
                             appraisalPerformanceKra.setEmpEndyearSelfassessmentGoal(employeeEndYearSelfAssesssmentGoal);
                         } else {
@@ -2728,12 +2728,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         }
                         ////Match the Kra goal and update it////////
                         if (appraisalPerformanceKra1.getKraGoal().equals(appraisalPerformanceKra.getKraGoal())) {
-
+                            
                         } else {
                             updateAppraisalPerformanceKraService.create(updateAppraisalPerformanceKra);
-
+                            
                         }
-
+                        
                         if (kragoal_id != null) {
                             appraisalPerformanceKra.setId(Integer.parseInt(kragoal_id));
                             appraisalPerformanceKraService.update(appraisalPerformanceKra);
@@ -2809,10 +2809,10 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             AppraisalPerformanceActivities appraisalPerformanceActivities2 = new AppraisalPerformanceActivities();
                             UpdateAppraisalPerformanceActivities updateAppraisalPerformanceActivities1 = new UpdateAppraisalPerformanceActivities();
                             AppraisalkraActivity appraisalkraActivity = new AppraisalkraActivity();
-
+                            
                             appraisalPerformanceActivities2.setId(Integer.parseInt(id));
                             appraisalPerformanceActivities2 = appraisalPerformanceActivitiesService.readById(appraisalPerformanceActivities2.getId());
-
+                            
                             appraisalkraActivity.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
                             appraisalkraActivity.setDeletedKra(appraisalPerformanceActivities2.getKraGoalActivities());
                             appraisalkraActivity.setDeletedMetric(appraisalPerformanceActivities2.getMetricActivities());
@@ -2821,14 +2821,14 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             appraisalkraActivity.setStatus("ACTIVITIES");
                             appraisalkraActivity.setKraDeletedDate(today);
                             appraisalkraActivityService.create(appraisalkraActivity);
-
+                            
                             updateAppraisalPerformanceActivities1.setAppraisalPerformanceActivities(appraisalPerformanceActivities2);
                             List updatedActivitiesList = updateAppraisalPerformanceActivitiesService.readByKraIdForDeleteActivity(updateAppraisalPerformanceActivities1);
                             for (Object activityObj : updatedActivitiesList) {
                                 updateAppraisalPerformanceActivities1 = (UpdateAppraisalPerformanceActivities) activityObj;
                                 updateAppraisalPerformanceActivitiesService.delete(updateAppraisalPerformanceActivities1.getId());
                             }
-
+                            
                             appraisalPerformanceActivitiesService.delete1(appraisalPerformanceActivities2);
                         }
                     }
@@ -2840,7 +2840,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             //String kragoal_id = "";
             for (int i = 1; i <= countActivityId; i++) {
                 String kragoal_activity_id = request.getParameter("kragoal_activity_id" + i);
-
+                
                 String kraGoalactivity = request.getParameter("kraGoal_activity" + i);
                 String metricactivity = request.getParameter("metric_activity" + i);
                 String kraCategoryMapOther = request.getParameter("kraCategoryMapOther" + i);
@@ -2852,7 +2852,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 String managerMidYearSelfAssesssmentGoalActivities = request.getParameter("managerMidYearSelfAssesssmentGoalActivities" + i);
                 String empEndyearSelfassessmentGoalActivities = request.getParameter("empEndyearSelfassessmentGoalActivities" + i);
                 String managerEndYearSelfAssesssmentGoalActivities = request.getParameter("managerEndYearSelfAssesssmentGoalActivities" + i);
-
+                
                 if (null != kragoal_activity_id) {
                     appraisalPerformanceActivities = appraisalPerformanceActivitiesService.readById(Integer.parseInt(kragoal_activity_id));
                 }
@@ -2861,7 +2861,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 } else {
                     appraisalPerformanceActivities.setKraGoalActivitiesManager(null);
                 }
-
+                
                 if (null != metricactivity && !metricactivity.equals("") && !metricactivity.equals("null")) {
                     appraisalPerformanceActivities.setMetricActivitiesManager(metricactivity);
                 } else {
@@ -2923,31 +2923,31 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     }
                     request.setAttribute("successMessage",
                             "Information : The Information is Saved Successfully.");
-
+                    
                 } else {
                     if (null != kraGoalactivity && !kraGoalactivity.equals("")) {
                         appraisalPerformanceActivities.setKraGoalActivities(kraGoalactivity);
                     } else {
                         appraisalPerformanceActivities.setKraGoalActivities(null);
                     }
-
+                    
                     if (null != metricactivity && !metricactivity.equals("")) {
                         appraisalPerformanceActivities.setMetricActivities(metricactivity);
                     } else {
                         appraisalPerformanceActivities.setMetricActivities(null);
                     }
-
+                    
                     if (null != kraCategoryMapOther && !"".equals(kraCategoryMapOther)) {
                         appraisalPerformanceActivities.setKraCategoryByEmployeeActivities(Integer.parseInt(kraCategoryMapOther));
                         appraisalPerformanceActivities.setKraCategoryByManagerActivities(Integer.parseInt(kraCategoryMapOther));
                     }
-
+                    
                     if (null != priority && !priority.equals("")) {
                         appraisalPerformanceActivities.setPriority(priority);
                     } else {
                         appraisalPerformanceActivities.setPriority(priority);
                     }
-
+                    
                     if (null != midYearDivOther && !midYearDivOther.equals("")) {
                         appraisalPerformanceActivities.setMidyearStatusActivities(midYearDivOther);
                     } else {
@@ -2997,13 +2997,13 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     updateAppraisalPerformanceActivities.setKraActivity(kraGoalactivity);
                     updateAppraisalPerformanceActivities.setMetricActivity(metricactivity);
                     updateAppraisalPerformanceActivities.setUpdateDate(startdate);
-
+                    
                     if (null == appraisalPerformanceActivities1.getKraGoalActivities() || appraisalPerformanceActivities1.getKraGoalActivities().equals(appraisalPerformanceActivities.getKraGoalActivities())) {
-
+                        
                     } else {
                         updateAppraisalPerformanceActivitiesService.create(updateAppraisalPerformanceActivities);
                     }
-
+                    
                 }
 
 //                if (!"".equals(kraGoalactivity) && null != kraGoalactivity) {
@@ -3052,7 +3052,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
             int individualcount = Integer.parseInt(request.getParameter("IndividualId"));
             for (int i = 1; i <= individualcount; i++) {
-
+                
                 String text1 = request.getParameter("text" + i);
                 String text2 = request.getParameter("individualtextDiv" + i);
                 String text3 = request.getParameter("trainingSelectId" + i);
@@ -3106,10 +3106,10 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 } else {
                     appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
                 }
-
+                
                 String btn = request.getParameter("save");
                 if (null != btn && btn.equals("save")) {
-
+                    
                     if (individualplan != null) {
                         appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
                         appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
@@ -3119,7 +3119,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     request.setAttribute("successMessage",
                             "Information : The Information is Saved Successfully.");
                 } else {
-
+                    
                     if (null != text1 && !"".equals(text1)) {
                         appraisalPerformanceIndividualDevelopmentPlan.setText1(text1);
                     } else {
@@ -3140,7 +3140,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     } else {
                         appraisalPerformanceIndividualDevelopmentPlan.setMidYearRemark(null);
                     }
-
+                    
                     if (null != remark && !"".equals(remark)) {
                         appraisalPerformanceIndividualDevelopmentPlan.setRemark(remark);
                     } else {
@@ -3161,7 +3161,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     } else {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkEmployee(null);
                     }
-
+                    
                     if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
                         appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(managerEndYearRemark);
                     } else {
@@ -3287,7 +3287,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationTextmaster(competencyEvaluationTextmaster);
                 //String competencyEveId = request.getParameter("competencyEveId" + i);
                 String btn2 = request.getParameter("save");
-
+                
                 if (null != btn2 && btn2.equals("save")) {
                     if (!"".equals(competencyEveId) && null != competencyEveId) {
                         int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
@@ -3295,7 +3295,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
                         appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
                         appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
-
+                        
                     } else {
                         if (!appraisalId.isEmpty()) {
                             if (flag) {
@@ -3348,14 +3348,14 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     } else {
                         appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
                     }
-
+                    
                     if (!"".equals(competencyEveId) && null != competencyEveId) {
                         int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
                         competencyEvaluationMaster.setId(competencyEvaluationId);
                         appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
                         appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
                         appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
-
+                        
                     } else {
                         if (!appraisalId.isEmpty()) {
                             if (flag) {
@@ -3468,9 +3468,9 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 
             //////////Behaviors///////////////
             if (firsthalf.equals("false")) {
-
+                
                 AppraisalPerformanceBehaviors appraisalPerformanceBehaviors = new AppraisalPerformanceBehaviors();
-
+                
                 for (int i = 1; i <= 5; i++) {
                     String id = request.getParameter("id" + i);
                     String behaviors = request.getParameter("w" + i);
@@ -3503,7 +3503,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     } else {
                         appraisalPerformanceBehaviors.setManagerEndYearReviewManager(null);
                     }
-
+                    
                     appraisalPerformanceBehaviors.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
                     String btn2 = request.getParameter("save");
                     if (null != btn2 && btn2.equals("save")) {
@@ -3575,13 +3575,13 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             } else {
                 appraisalPerformanceMaster.setBehaviorsEndyearOtherremark(null);
             }
-
+            
             if (!"".equals(startdate) && null != startdate) {
                 appraisalPerformanceMaster.setBehaviorsDate(startdate);
             } else {
                 appraisalPerformanceMaster.setBehaviorsDate(null);
             }
-
+            
             String behaviorsYear = "" + Calendar.getInstance().get(Calendar.YEAR);
             if (!"".equals(behaviorsYear) && null != behaviorsYear) {
                 appraisalPerformanceMaster.setBehaviorsYear(behaviorsYear);
@@ -3630,7 +3630,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                 sendMail.sendMail(from, To, Subject, msg);
-
+                                
                                 String name = "PMP";
                                 EmailAddMaster emailAddMaster = new EmailAddMaster();
                                 emailAddMaster.setModuleName(name);
@@ -3650,12 +3650,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                                             msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                             msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                             sendMail.sendMail(from1, To1, subject1, msg1);
-
+                                            
                                         }
                                     }
                                 }
                             } catch (Exception e) {
-
+                                
                             }
                         }
                     }
@@ -3680,7 +3680,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                 sendMail.sendMail(from, To, Subject, msg);
-
+                                
                                 String name = "PMP";
                                 EmailAddMaster emailAddMaster = new EmailAddMaster();
                                 emailAddMaster.setModuleName(name);
@@ -3700,7 +3700,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                                             msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                             msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                             sendMail.sendMail(from1, To1, subject1, msg1);
-
+                                            
                                         }
                                     }
                                 }
@@ -3729,7 +3729,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                 sendMail.sendMail(from, To, Subject, msg);
-
+                                
                                 String name = "PMP";
                                 EmailAddMaster emailAddMaster = new EmailAddMaster();
                                 emailAddMaster.setModuleName(name);
@@ -3749,7 +3749,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                                             msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                             msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                             sendMail.sendMail(from1, To1, subject1, msg1);
-
+                                            
                                         }
                                     }
                                 }
@@ -3769,7 +3769,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        mv.setViewName("forward:userMaster.htm?act=userDashboard");
         return mv;
     }
-
+    
     public ModelAndView userDashboard(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -3801,7 +3801,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         if (null != appraisalPerformanceList && !appraisalPerformanceList.isEmpty()) {
             appraisalPerformanceMaster = (AppraisalPerformanceMaster) appraisalPerformanceList.get(0);
             appraisalPerformanceKra.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-
+            
             List list = appraisalPerformanceKraService.readByAppraisalPerformancekraId(appraisalPerformanceKra);
             for (Object o : list) {
                 AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o;
@@ -3810,7 +3810,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     break;
                 }
             }
-
+            
             for (Object o1 : list) {
                 AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o1;
                 if (appraisalPerformanceKra1.getWeightage() != null && 0 != appraisalPerformanceMaster.getManagerStatus() && appraisalPerformanceMaster.getReworkStatus() == 0) {
@@ -3821,7 +3821,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     break;
                 } else {
                     goalApproval = "Pendding";
-
+                    
                 }
             }
             for (Object o1 : list) {
@@ -3850,7 +3850,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     break;
                 }
             }
-
+            
             for (Object o1 : list) {
                 AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o1;
                 if (appraisalPerformanceKra1.getManagerEndyearReviewEvaluation() != null && !appraisalPerformanceKra1.getManagerEndyearReviewEvaluation().equals("") && 0 != appraisalPerformanceMaster.getEndYearManagerStatus()) {
@@ -3859,14 +3859,14 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 } else if (appraisalPerformanceMaster.getReworkStatus() == 1 && 0 != appraisalPerformanceMaster.getEndYearManagerStatus()) {
                     managerEndSelfApproval = "Rework";
                     break;
-
+                    
                 } else {
                     managerEndSelfApproval = "Pendding";
                 }
             }
-
+            
             if (!list.isEmpty()) {
-
+                
                 List appraisalFillingDataList = appraisalFillingDataService.readByCurrentYear("" + year);
                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 if (!appraisalFillingDataList.isEmpty()) {
@@ -3990,7 +3990,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 }
             }
         } else {
-
+            
             List appraisalFillingDataList = appraisalFillingDataService.readByCurrentYear("" + year);
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             if (!appraisalFillingDataList.isEmpty()) {
@@ -3998,7 +3998,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 appraisalFillingData = (AppraisalFillingData) appraisalFillingDataList.get(0);
 //
                 Date currentDate = dateFormat.parse(dateFormat.format(new Date()));
-
+                
                 Date startendDate = dateFormat.parse(appraisalFillingData.getEndDate());
                 Date startDate = dateFormat.parse(appraisalFillingData.getStartDate());
                 if ((currentDate.after(startDate) && currentDate.before(startendDate)) || currentDate.equals(startendDate) || currentDate.equals(startDate)) {
@@ -4110,7 +4110,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         }
                     }
                 }
-
+                
             }
 //            goalApproval = "Expired";
 //            goalSetting = "Expired";
@@ -4130,7 +4130,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         if (!timeLineData.isEmpty()) {
             appraisalFillingData1 = (AppraisalFillingData) timeLineData.get(0);
         }
-
+        
         request.setAttribute("employeeStartDate", appraisalFillingData1.getStartDate());
         request.setAttribute("employeeEndDate", appraisalFillingData1.getEndDate());
         request.setAttribute("employeeMidStartDate", appraisalFillingData1.getMidYearStartDate());
@@ -4145,7 +4145,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         request.setAttribute("ManagerMidEndDate", appraisalFillingData1.getManagerMidYearEndDate());
         request.setAttribute("ManagerEndStartDate", appraisalFillingData1.getManagerYearEndStartDate());
         request.setAttribute("ManagerEndEndDate", appraisalFillingData1.getManagerYearEndEndDate());
-
+        
         readPendingPmpStatus(request, response);
 //        appraisalPerformanceKraService.
 //        mv.setViewName("forward:userMaster.htm?act=userDashboardShow");
@@ -4160,7 +4160,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         Year year = Year.now();
         int currentYear = Integer.parseInt(year.toString());
         try {
-
+            
             Object[] performanceManagementArray = appraisalPerformanceService.readperformanceByHr(currentYear);
             mv.addObject("performanceManagementStage", performanceManagementArray);
         } catch (Exception e) {
@@ -4176,7 +4176,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         mv.setViewName("forward:appraisalPerformanceBehaviors.htm?act=hrDashboard");
         return mv;
     }
-
+    
     public ModelAndView appraisalPerformancePrint(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 //        ModelAndView mv = new ModelAndView();
@@ -4390,7 +4390,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         } else {
             String behaviorsFinalscore = "";
             request.setAttribute("behaviorsFinalscore", behaviorsFinalscore);
-
+            
         }
 //        } else {
 //            String behaviorsFinalscore = "";
@@ -4400,7 +4400,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId);
         List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
         if (!list.isEmpty()) {
-
+            
             appraisalPerformanceMaster = (AppraisalPerformanceMaster) list.get(0);
             int appraisalId = appraisalPerformanceMaster.getId();
             //AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
@@ -4417,12 +4417,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 kragoalId = appraisalPerformanceKra.getId();
                 metric = appraisalPerformanceKra.getMetric();
                 if (null != kragoal && !"".equals(kragoal)) {
-
+                    
                     UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra1 = new UpdateAppraisalPerformanceKra();
                     updateAppraisalPerformanceKra.setId(Integer.parseInt("" + kragoalId));
                     List<?> updateAppraisalPerformanceKra1List = updateAppraisalPerformanceKraService.readByUserUpdateKra(updateAppraisalPerformanceKra);
                     if (!updateAppraisalPerformanceKra1List.isEmpty()) {
-
+                        
                         updateAppraisalPerformanceKra1 = (UpdateAppraisalPerformanceKra) updateAppraisalPerformanceKra1List.get(0);
                         if (!kragoal.equals(updateAppraisalPerformanceKra1.getUpdateKra()) || !metric.equals(updateAppraisalPerformanceKra1.getUpdateMetric())) {
                             updateStatus = true;
@@ -4442,7 +4442,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             request.setAttribute("empEndyearSelfassessmentGoal", kraList);
             request.setAttribute("editDate", kraList);
             request.setAttribute("startDate", kraList);
-
+            
         }
 
         ////////////////////////////////////KRA OTHER Activity///////////////////////////////////////////////////////////
@@ -4451,23 +4451,23 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         boolean kraOtherupdateStatus = false;
         int kragoalactivityId;
         if (null != appraisalPerformanceMaster.getId()) {
-
+            
             AppraisalPerformanceActivities appraisalPerformanceActivities = new AppraisalPerformanceActivities();
             appraisalPerformanceActivities.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-
+            
             List<?> kraOtherList = appraisalPerformanceActivitiesService.readByAppraisalKraGoalActivities(appraisalPerformanceActivities);
             if (!kraOtherList.isEmpty()) {
                 appraisalPerformanceActivities = (AppraisalPerformanceActivities) kraOtherList.get(0);
                 kragoal_activity = appraisalPerformanceActivities.getKraGoalActivities();
                 kragoalactivityId = appraisalPerformanceActivities.getId();
                 metric_activity = appraisalPerformanceActivities.getMetricActivities();
-
+                
                 if (null != kragoal_activity && !"".equals(kragoal_activity)) {
                     UpdateAppraisalPerformanceActivities updateAppraisalPerformanceActivities = new UpdateAppraisalPerformanceActivities();
                     updateAppraisalPerformanceActivities.setId(Integer.parseInt("" + kragoalactivityId));
                     List<?> updateKraOtherList = updateAppraisalPerformanceActivitiesService.readByUserUpdateKraOther(updateAppraisalPerformanceActivities);
                     if (!updateKraOtherList.isEmpty()) {
-
+                        
                         updateAppraisalPerformanceActivities = (UpdateAppraisalPerformanceActivities) updateKraOtherList.get(0);
                         if (!kragoal_activity.equals(updateAppraisalPerformanceActivities.getKraActivity()) || !metric_activity.equals(updateAppraisalPerformanceActivities.getMetricActivity())) {
                             kraOtherupdateStatus = true;
@@ -4487,7 +4487,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
         CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
         List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
-
+        
         request.setAttribute("competencyEvaluationList", competencyEvaluationList);
 
         //Individual Development Plan//
@@ -4518,14 +4518,14 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         }
         request.setAttribute("behaviors", behaviorsList);
         request.setAttribute("behaviorsList", behaviorsList);
-
+        
         mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
         mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
-
+        
         mv.setViewName("Appraisal/PerformanceAppraisalFormPrintReport");
         return mv;
     }
-
+    
     public ModelAndView searchOwnappraisalPerformanceSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
@@ -4536,14 +4536,14 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        UserRightMaster user1 = (UserRightMaster) request.getSession().getAttribute("userRight");
         int cyear = Calendar.getInstance().get(Calendar.YEAR);
         List<?> appraisalPerformanceList = appraisalPerformanceService.readOwnAppraisalPerformance(employeeMaster, cyear);
-
+        
         mv.getModelMap().put("list", appraisalPerformanceList);
         mv.getModelMap().put("currentYearRequest", appraisalPerformanceList.size());
         mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
         mv.setViewName("Appraisal/PastEmployeePerformanceAppraisalResult");
         return mv;
     }
-
+    
     public ModelAndView searchAppraisalPerformanceReoprtStageWise(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
@@ -4562,12 +4562,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         mv.setViewName("Appraisal/AppraisalPerformanceStageWiseReoprt");
         return mv;
     }
-
+    
     public ModelAndView searchAppraisalPerformanceReoprtSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
         AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
-
+        
         String employeeMasterId = request.getParameter("employeeMasterId");
         String departmentId = request.getParameter("departmentId");
         String competencyEvaluation_Id = request.getParameter("competencyEvaluation_Id");
@@ -4618,7 +4618,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         String searchvalue = request.getParameter("valDetail");
 //        String chque[] = request.getParameterValues("checkedRows");
         EmployeeMaster employeeMaster = new EmployeeMaster();
-
+        
         if (null != employeeMasterId && !"".equals(employeeMasterId)) {
             employeeMaster.setId(Integer.parseInt(employeeMasterId));
         }
@@ -4626,13 +4626,13 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         appraisalPerformanceMaster.setEmployeeMaster(employeeMaster);
         appraisalPerformanceMaster.setBehaviorsMidyearOtherremark(departmentId);
         appraisalPerformanceMaster.setBehaviorsEndyearOtherremark(competencyEvaluation_Id);
-
+        
         List timeLineList = appraisalFillingDataService.read();
         AppraisalFillingData appraisalFillingData = new AppraisalFillingData();
         if (!timeLineList.isEmpty()) {
             appraisalFillingData = (AppraisalFillingData) timeLineList.get(timeLineList.size() - 1);
         }
-
+        
         if (null != searchvalue) {
             if (searchvalue.equals("rating")) {
                 List<?> empDetail = appraisalPerformanceService.readPMPSearchByEmployee(appraisalPerformanceMaster);
@@ -4727,7 +4727,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 headerRow1.add("Employee End-Year Remark");
                 headerRow1.add("Manager Mid-Year Remark");
                 headerRow1.add("Manager End-Year Remark");
-
+                
                 recordToAdd.add(headerRow1);
                 for (int j = 0; j < recordToAdd.size(); j++) {
                     List<String> l2 = recordToAdd.get(j);
@@ -4735,31 +4735,31 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     Row row1 = firstSheet.createRow(rownum);
                     for (int k = 0; k < l2.size(); k++) {
                         Cell cell = row.createCell((short) k);
-
+                        
                         if (j == 0) {
                             cell.setCellStyle(styleBold);
                         }
-
+                        
                     }
                     rownum++;
                 }
-
+                
                 for (int j = 0; j < recordToAdd.size(); j++) {
                     List<String> l2 = recordToAdd.get(j);
                     Row row = firstSheet.createRow(rownum);
                     for (int k = 0; k < l2.size(); k++) {
                         Cell cel2 = row.createCell(k);
                         cel2.setCellValue(l2.get(k));
-
+                        
                         if (j == 0) {
                             cel2.setCellStyle(styleBold);
-
+                            
                         }
                         rownum++;
                     }
-
+                    
                 }
-
+                
                 List<?> empIdpDetail = appraisalPerformanceService.readIDPSearchByEmployee(appraisalPerformanceMaster);
                 for (int j = 0; j < empIdpDetail.size(); j++) {
                     Object[] l2 = (Object[]) empIdpDetail.get(j);
@@ -4772,7 +4772,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     }
                     int idpID = (Integer) l2[0];
                     appraisalPerformanceMaster.setId(idpID);
-
+                    
                     List idpDetail = appraisalPerformanceService.readIDPSearchByEmployeeWise(appraisalPerformanceMaster);
 //                    l = l + 1;
                     for (int z = 0; z < idpDetail.size(); z++) {
@@ -4780,18 +4780,18 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         for (int k = 1; k < idpObj.length; k++) {
                             Cell cell = row.createCell(l);
                             if (null != idpObj[k]) {
-
+                                
                                 cell.setCellValue("" + idpObj[k]);
                             } else {
                                 cell.setCellValue("");
-
+                                
                             }
-
+                            
                             l++;
                         }
-
+                        
                     }
-
+                    
                     rownum1++;
                 }
 //                int colToRemove = 5;
@@ -4849,21 +4849,21 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
+                
                 String filePath = File.separator + "StorageYard" + File.separator
                         + "Other" + File.separator + "UserDoc" + File.separator
                         + "EmployeeDailyPunch" + File.separator + "EmployeeDailyPunch.xls";
-
+                
                 appPath = request.getServletContext().getRealPath("");
-
+                
                 String fullPath = appPath + filePath;
-
+                
                 request.setAttribute("filePath", fullPath);
-
+                
                 DownloadFile downloadFile = new DownloadFile();
                 downloadFile.doDownload(request, response);
                 return mv;
-
+                
             }
         }
 
@@ -4873,7 +4873,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        mv.setViewName("Appraisal/AppraisalPerformanceStageWiseReoprt");
         return mv;
     }
-
+    
     public ModelAndView historyAjaxCallOtherActivity(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
 //        String kraId = request.getParameter("kraId");
@@ -4891,21 +4891,21 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         mv.setViewName("Appraisal/HistoryUpdateKraPerformanceAppraisalOtherActivity");
         return mv;
     }
-
+    
     public ModelAndView reworkByManager(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String pmpIdForRework = request.getParameter("pmpIdForRework");
         String reworkComment = request.getParameter("reworkComment");
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
-
+        
         appraisalPerformanceMaster = appraisalPerformanceService.readById(Integer.parseInt(pmpIdForRework));
-
+        
         appraisalPerformanceMaster.setReworkComment(reworkComment);
         appraisalPerformanceMaster.setManagerkraStatus(1);
         appraisalPerformanceMaster.setEmployeeStatus(0);
         appraisalPerformanceMaster.setReworkStatus(1);
         appraisalPerformanceService.update(appraisalPerformanceMaster);
-
+        
         try {
             EmailTemplate emailTemplate = new EmailTemplate();
             EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
@@ -4925,32 +4925,32 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
             sendMail.sendMail(from, To, Subject, msg);
         } catch (Exception e) {
-
+            
         }
         mv = searchSubmit(request, response);
-
+        
         return mv;
     }
-
+    
     public void readPendingPmpStatus(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+        
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         int year = Calendar.getInstance().get(Calendar.YEAR);
-
+        
         List pendingAtEmployeeList = appraisalPerformanceService.readPendingEmployeePmp(employeeMaster.getId(), year);
-
+        
         List pendingAtEmployeeListForManager = appraisalPerformanceService.readPendingEmployeePmpByManager("" + employeeMaster.getId(), year);
         request.setAttribute("pendingAtEmployeeList", pendingAtEmployeeList.size());
         List<String> empIdList = new ArrayList();
-        for(Object obj:pendingAtEmployeeListForManager){
-            Object[] oo = (Object[])obj;
-            EmployeeMaster employeeMaster1 = (EmployeeMaster)oo[1];
+        for (Object obj : pendingAtEmployeeListForManager) {
+            Object[] oo = (Object[]) obj;
+            EmployeeMaster employeeMaster1 = (EmployeeMaster) oo[1];
             empIdList.add(employeeMaster1.getEmployeeId());
         }
         request.setAttribute("pendingAtEmployeeListForManager", pendingAtEmployeeListForManager.size());
         request.setAttribute("empIdList", empIdList);
     }
-
+    
     public ModelAndView kraGoalAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
 //        String kraId = request.getParameter("kraId");
@@ -4964,7 +4964,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         mv.setViewName("Appraisal/AppraisalDeletedKraGoalAjax");
         return mv;
     }
-
+    
     public ModelAndView activitiesAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String pmpId = request.getParameter("appraisalId");
@@ -4977,7 +4977,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         mv.setViewName("Appraisal/AppraisalDeletedActivitiesAjax");
         return mv;
     }
-
+    
     public ModelAndView appraisalPrintToPdfByEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
@@ -5053,16 +5053,16 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         request.setAttribute("statusFlag", statusFlag);
         int employeeStatus = appraisalPerformanceMaster.getEmployeeStatus();
         request.setAttribute("employeeStatus", employeeStatus);
-
+        
         if (null != appraisalPerformanceMaster.getBehaviorsFinalscore() && !"".equals(appraisalPerformanceMaster.getBehaviorsFinalscore())) {
             String behaviorsFinalscore = appraisalPerformanceMaster.getBehaviorsFinalscore();
             request.setAttribute("behaviorsFinalscore", behaviorsFinalscore);
         }
-
+        
         int year = Integer.parseInt(request.getParameter("year"));
         List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
         if (!list.isEmpty()) {
-
+            
             appraisalPerformanceMaster = (AppraisalPerformanceMaster) list.get(0);
             int appraisalId = appraisalPerformanceMaster.getId();
             appraisalPerformanceKra.setId(appraisalId);
@@ -5070,7 +5070,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             String metric = "";
             boolean updateStatus = false;
             int kragoalId;
-
+            
             List<?> kraList = appraisalPerformanceKraService.readByAppraisalKraGoal(appraisalPerformanceKra);
             if (!kraList.isEmpty()) {
                 appraisalPerformanceKra = (AppraisalPerformanceKra) kraList.get(0);
@@ -5078,12 +5078,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 kragoalId = appraisalPerformanceKra.getId();
                 metric = appraisalPerformanceKra.getMetric();
                 if (null != kragoal && !"".equals(kragoal)) {
-
+                    
                     UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra1 = new UpdateAppraisalPerformanceKra();
                     updateAppraisalPerformanceKra.setId(Integer.parseInt("" + kragoalId));
                     List<?> updateAppraisalPerformanceKra1List = updateAppraisalPerformanceKraService.readByUserUpdateKra(updateAppraisalPerformanceKra);
                     if (!updateAppraisalPerformanceKra1List.isEmpty()) {
-
+                        
                         updateAppraisalPerformanceKra1 = (UpdateAppraisalPerformanceKra) updateAppraisalPerformanceKra1List.get(0);
                         if (!kragoal.equals(updateAppraisalPerformanceKra1.getUpdateKra()) || !metric.equals(updateAppraisalPerformanceKra1.getUpdateMetric())) {
                             updateStatus = true;
@@ -5102,7 +5102,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             request.setAttribute("empEndyearSelfassessmentGoal", kraList);
             request.setAttribute("editDate", kraList);
             request.setAttribute("startDate", kraList);
-
+            
         }
 
         ////////////////////////////////////KRA OTHER Activity///////////////////////////////////////////////////////////
@@ -5111,23 +5111,23 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         boolean kraOtherupdateStatus = false;
         int kragoalactivityId;
         if (null != appraisalPerformanceMaster.getId()) {
-
+            
             AppraisalPerformanceActivities appraisalPerformanceActivities = new AppraisalPerformanceActivities();
             appraisalPerformanceActivities.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-
+            
             List<?> kraOtherList = appraisalPerformanceActivitiesService.readByAppraisalKraGoalActivities(appraisalPerformanceActivities);
             if (!kraOtherList.isEmpty()) {
                 appraisalPerformanceActivities = (AppraisalPerformanceActivities) kraOtherList.get(0);
                 kragoal_activity = appraisalPerformanceActivities.getKraGoalActivities();
                 kragoalactivityId = appraisalPerformanceActivities.getId();
                 metric_activity = appraisalPerformanceActivities.getMetricActivities();
-
+                
                 if (null != kragoal_activity && !"".equals(kragoal_activity)) {
                     UpdateAppraisalPerformanceActivities updateAppraisalPerformanceActivities = new UpdateAppraisalPerformanceActivities();
                     updateAppraisalPerformanceActivities.setId(Integer.parseInt("" + kragoalactivityId));
                     List<?> updateKraOtherList = updateAppraisalPerformanceActivitiesService.readByUserUpdateKraOther(updateAppraisalPerformanceActivities);
                     if (!updateKraOtherList.isEmpty()) {
-
+                        
                         updateAppraisalPerformanceActivities = (UpdateAppraisalPerformanceActivities) updateKraOtherList.get(0);
                         if (!kragoal_activity.equals(updateAppraisalPerformanceActivities.getKraActivity()) || !metric_activity.equals(updateAppraisalPerformanceActivities.getMetricActivity())) {
                             kraOtherupdateStatus = true;
@@ -5147,7 +5147,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
         CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
         List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
-
+        
         request.setAttribute("competencyEvaluationList", competencyEvaluationList);
 
         //Individual Development Plan//
@@ -5178,9 +5178,19 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         }
         request.setAttribute("behaviors", behaviorsList);
         request.setAttribute("behaviorsList", behaviorsList);
-
+        
         mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
         mv.setViewName("Appraisal/AppraisalFormPrintToPdfByEmployee");
         return mv;
+    }
+    
+    public void trasferCompatencyEvaluationInEmployeeMaster(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        List<?> list = appraisalPerformanceService.readEmpIdByAppraisalPerformanceId();
+        for (Object o : list) {
+            Object[] s = (Object[]) o;
+            EmployeeMaster employeeMaster = employeeMasterService.readById(Integer.parseInt("" + s[0]));
+            employeeMaster.setCompetencyEvaluationId(Integer.parseInt("" + s[1]));
+            employeeMasterService.update(employeeMaster);
+        }
     }
 }

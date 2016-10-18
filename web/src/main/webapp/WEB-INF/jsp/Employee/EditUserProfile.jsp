@@ -769,26 +769,41 @@
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                         </div>
-                                                    </div><!-- /.col -->
-                                                </div><!-- /.row -->
-                                            </div><!-- /.box-body -->
+                                                        <div class="col-sm-6">
+                                                            <label>Competency Evaluation:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <select name="competencyEvaluationId" id="competencyEvaluationId" class="form-control">
+                                                                 <option value="">--SELECT--</option>
+                                                               <c:forEach var="competencyMap" items="${competencyMap}">
+                                                                     <c:if test="${competencyMap.key eq employeeMaster.competencyEvaluationId}">
+                                                                    <option value="${competencyMap.key}" selected="">${competencyMap.value}</option>
+                                                                </c:if>
+                                                                <c:if test="${competencyMap.key ne employeeMaster.competencyEvaluationId}">
+                                                                    <option value="${competencyMap.key}" >${competencyMap.value}</option>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                </div><!-- /.col -->
+
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                </div>
+                                <!--organization detail completes here-->
+                                <div class="box box-info collapsed-box" id="empInfo_id">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Employee's Bank Account Detail:</h3>
+                                        <div class="box-tools pull-right">
+                                            <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                            <span id="spanId7">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7"></i></button>
                                         </div>
                                     </div>
-                                    <!--organization detail completes here-->
-                                    <div class="box box-info collapsed-box" id="empInfo_id">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Employee's Bank Account Detail:</h3>
-                                            <div class="box-tools pull-right">
-                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
-                                                <span id="spanId7">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Bank Name:</label>
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>Bank Name:</label>
                                                         <form:input path="bankName" class="form-control"></form:input>
                                                         <form:errors path="bankName" cssClass="errorDiv"></form:errors>
                                                         </div>
@@ -1044,9 +1059,9 @@
         }
     }); //when document loaded it loads based on erlier reporting manager
     function reportingLevelSet() {
-    
+
         var level = document.getElementById("reportingManagerLevel1").value;
-     
+
         if (level != null && level != '') {
             $.ajax({
                 url: 'employeeMaster.htm?act=readReportingHierarchy&id=' + level,

@@ -5193,7 +5193,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             employeeMaster.setCompetencyEvaluationId(Integer.parseInt("" + s[1]));
             employeeMasterService.update(employeeMaster);
         }
-        mv.setViewName("forward:logIn.htm?act=dashboard");
+        mv.setViewName("redirect:logIn.html?act=dashboard");
         return mv;
     }
 }

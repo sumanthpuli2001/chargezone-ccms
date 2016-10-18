@@ -569,5 +569,8 @@
     <bean id="urlMasterController1" class="com.bul.zydex.controller.url.UrlMasterController" parent="controllerConfig" >
         <property name="urlMasterService" ref="urlMasterService1"/>
     </bean>
+    <bean id="pmpFormStatusMasterController1" class="com.bul.zydex.controller.PmpFormStatusMaster.PmpFormStatusMasterController" parent="controllerConfig" >
+        <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1"/>
+    </bean>
 </beans>
  

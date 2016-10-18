@@ -143,9 +143,10 @@
     <mapping resource="com/bul/zydex/model/EmployeePunchForMobileApp.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/EmailAddMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/UrlMaster.hbm.xml"/>
-    <mapping resource="com/bul/zydex/model/RegisterMobForPunch.hbm.xml"/>
     <mapping/>
     <mapping/>
     <mapping/>
+    <mapping resource="com/bul/zydex/model/RegisterMobForPunch.xml"/>
+    <mapping resource="com.bul.zydex.model/PmpFormStatusMaster.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

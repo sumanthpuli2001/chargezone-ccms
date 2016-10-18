@@ -14,23 +14,21 @@ import java.util.List;
  *
  * @author BlackBull
  */
-public class RegisterMobForPunchDAOImpl<T> extends GenericsDAOImpl<T> implements RegisterMobForPunchDAO<T> {
+public class RegisterMobForPunchDAOImpl<T> extends GenericsDAOImpl<T> implements RegisterMobForPunchDAO<T>{
 
     @Override
     protected Class getDomainClass() {
-        return RegisterMobForPunch.class;
+          return RegisterMobForPunch.class;
     }
 
     @Override
-    public List<?> readByEmpId(T object) {
-        RegisterMobForPunch registerMobForPunch = (RegisterMobForPunch) object;
+    public List<?> readByEmpid(T object) {
+          RegisterMobForPunch registerMobForPunch = (RegisterMobForPunch) object;
         String query = "";
-
         query += " FROM RegisterMobForPunch a"
-                + " WHERE a.employeeMasterid = '" + registerMobForPunch.getEmployeeMaster().getId() + "'";
+                + " WHERE a.employeeMaster = '" + registerMobForPunch.getEmployeeMaster().getId()+ "'";
         List<?> list = getHibernateTemplate().find(query);
         return list;
-
     }
-
+    
 }

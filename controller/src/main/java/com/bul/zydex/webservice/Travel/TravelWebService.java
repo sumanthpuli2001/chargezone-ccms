@@ -35,7 +35,7 @@ import org.json.JSONObject;
  * @author Jay
  */
 public class TravelWebService extends TravelWebServiceAbstract {
-    
+
     public void newRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
         PrintWriter out = null;
         out = response.getWriter();
@@ -55,7 +55,7 @@ public class TravelWebService extends TravelWebServiceAbstract {
         String empLevel = "";
         List<?> userList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
         if (!userList.isEmpty()) {
-            
+
             Object[] obj = (Object[]) userList.get(0);
             empNo = "" + obj[0];
             empCompany = "" + obj[7];
@@ -73,7 +73,7 @@ public class TravelWebService extends TravelWebServiceAbstract {
             message = "Success";
             int count = totalList.size() + 1;
             Calendar now = Calendar.getInstance();
-            
+
             String[] monthName = {"January", "February",
                 "March", "April", "May", "June", "July",
                 "August", "September", "October", "November",
@@ -124,7 +124,7 @@ public class TravelWebService extends TravelWebServiceAbstract {
         userData.put("responseCode", rcode);
         out.print(userData);
     }
-    
+
     public void travelRequestList(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
         PrintWriter out = null;
         out = response.getWriter();
@@ -146,6 +146,7 @@ public class TravelWebService extends TravelWebServiceAbstract {
             TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
             travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster1);
             List<?> showRequest = travelRequestMasterService.requestDetail(travelRequestMaster);
+
             if (!showRequest.isEmpty()) {
                 rcode = "1";
                 message = "Success";
@@ -153,29 +154,35 @@ public class TravelWebService extends TravelWebServiceAbstract {
                     Object[] arrayObj = (Object[]) showRequest.get(i);
                     JSONObject obj = new JSONObject();
                     String statusMessage = "";
+                    String ApproveName;
+                    if (null == arrayObj[6]) {
+                        ApproveName = "";
+                    } else {
+                        ApproveName = arrayObj[6].toString();
+                    }
                     if (arrayObj[4].equals(0)) {
                         statusMessage = "Pending";
                     }
                     if (arrayObj[4].equals(1)) {
-                        statusMessage = "Reworked";
+                        statusMessage = "Reworked By " + ApproveName;
                     }
                     if (arrayObj[4].equals(2)) {
-                        statusMessage = "Rejected";
+                        statusMessage = "Rejected By " + ApproveName;
                     }
                     if (arrayObj[4].equals(3)) {
-                        statusMessage = "Approved";
+                        statusMessage = "Approved By " + ApproveName;
                     }
                     if (arrayObj[4].equals(4)) {
                         statusMessage = "WithDraw";
                     }
                     if (arrayObj[4].equals(5)) {
-                        statusMessage = "Final Approved";
+                        statusMessage = "Final Approved By " + ApproveName;
                     }
                     if (arrayObj[4].equals(6)) {
-                        statusMessage = "Approved";
+                        statusMessage = "Approved By " + ApproveName;
                     }
                     if (arrayObj[4].equals(8)) {
-                        statusMessage = "Approved";
+                        statusMessage = "Approved By " + ApproveName;
                     }
                     if (arrayObj[4].equals(10)) {
                         statusMessage = "Pending";
@@ -199,7 +206,7 @@ public class TravelWebService extends TravelWebServiceAbstract {
                 rcode = "1";
                 message = "Success";
             }
-            
+
         } else {
             rcode = "0";
             message = "Error";
@@ -209,7 +216,7 @@ public class TravelWebService extends TravelWebServiceAbstract {
         userData.put("responseCode", rcode);
         out.print(userData);
     }
-    
+
     public void viewTravelRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
         PrintWriter out = null;
         out = response.getWriter();
@@ -240,7 +247,7 @@ public class TravelWebService extends TravelWebServiceAbstract {
             data.put("dateOfSubmit", travelRequestMaster.getDateOfSubmit());
             data.put("advancedRequired", travelRequestMaster.getCashRequired());
             if (travelRequestMaster.getCashRequired().contains("Yes")) {
-                
+
                 data.put("amount", travelRequestMaster.getAmount());
                 data.put("reasonOfAdvanced", travelRequestMaster.getReasonForAdvance());
             }
@@ -259,8 +266,8 @@ public class TravelWebService extends TravelWebServiceAbstract {
             travelDetail.setTravelRequestMaster(travelRequestMaster);
             List<?> travelDetail1 = travelDetailService.readTravelDetail(travelDetail);
             if (!travelDetail1.isEmpty()) {
+                JSONArray travelDetails = new JSONArray();
                 for (Object o : travelDetail1) {
-                    JSONArray travelDetails = new JSONArray();
                     JSONObject travel = new JSONObject();
                     TravelDetail travelDetail2 = (TravelDetail) o;
                     travel.put("travelDetailId", travelDetail2.getId().toString());
@@ -271,10 +278,10 @@ public class TravelWebService extends TravelWebServiceAbstract {
                     travel.put("policyDeviation", travelDetail2.getPolicyDeviation());
                     travel.put("remarks", travelDetail2.getComments());
                     travelDetails.put(travel);
-                    data.put("travelDetails", travelDetails);
                     rcode = "1";
                     message = "Success";
                 }
+                data.put("travelDetails", travelDetails);
             }
             HotelAccommodation hotelAccommodation = new HotelAccommodation();
             hotelAccommodation.setTravelRequestMaster(travelRequestMaster);
@@ -303,7 +310,7 @@ public class TravelWebService extends TravelWebServiceAbstract {
         userData.put("responseCode", rcode);
         out.print(userData);
     }
-    
+
     public void CreateTravelRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException, ServletException, ParseException {
         PrintWriter out = null;
         out = response.getWriter();
@@ -363,7 +370,7 @@ public class TravelWebService extends TravelWebServiceAbstract {
                             flag = false;
                         }
                     } catch (Exception e) {
-                        
+
                     }
                 }
                 if (flag) {
@@ -371,8 +378,6 @@ public class TravelWebService extends TravelWebServiceAbstract {
                     message = "Error : You can't Apply Request on Same Day..";
                 } else {
                     travelRequestMasterService.create(travelRequestMaster);
-                    rcode = "1";
-                    message = "Success";
                     JSONArray jaTravelDeatails = data.getJSONArray("travelDetails");
                     JSONArray jaHotelDetails = data.getJSONArray("hotelDetails");
                     for (int i = 0; i < jaTravelDeatails.length(); i++) {
@@ -396,8 +401,6 @@ public class TravelWebService extends TravelWebServiceAbstract {
                             travelDetail.setPolicyDeviation(policyDeviation);
                             travelDetail.setComments(comments);
                             travelDetailService.create(travelDetail);
-                            rcode = "1";
-                            message = "Success";
                         } else {
                             rcode = "0";
                             message = "Error : Please Enter the valid data.";
@@ -412,15 +415,16 @@ public class TravelWebService extends TravelWebServiceAbstract {
                             hotelAccommodation.setCheckInDate(joHotelDetails.get("checkInDate").toString());
                             hotelAccommodation.setCheckOutDate(joHotelDetails.getString("checkOutDate").toString());
                             hotelAccommodation.setPreferredHotel(joHotelDetails.getString("preferredHotels").toString());
-                            
+
                         }
                         hotelAccommodation.setLocation(joHotelDetails.get("location").toString());
                         hotelAccommodation.setComments(joHotelDetails.get("remarks").toString());
                         hotelAccommodationService.create(hotelAccommodation);
-                        rcode = "1";
-                        message = "Success";
                     }
+
                 }
+                rcode = "1";
+                message = "Success";
             } else {
                 rcode = "0";
                 message = "Error : Please Insert Start Date Before End Date.";
@@ -434,7 +438,7 @@ public class TravelWebService extends TravelWebServiceAbstract {
         userData.put("responseCode", rcode);
         out.print(userData);
     }
-    
+
     public void withDraw(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException, ServletException {
         PrintWriter out = null;
         out = response.getWriter();
@@ -482,7 +486,7 @@ public class TravelWebService extends TravelWebServiceAbstract {
         userData.put("responseCode", rcode);
         out.print(userData);
     }
-    
+
     public void updateRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, JSONException {
         PrintWriter out = null;
         out = response.getWriter();

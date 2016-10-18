@@ -1034,7 +1034,7 @@ public class WebService extends WebServiceAbstract {
                             statusmsg = "Rejected By " + ApproveName;
                         }
                         if (Status.equals("3")) {
-                            statusmsg = "Approve By " + ApproveName;
+                            statusmsg = "Approved By " + ApproveName;
 
                         }
                         if (Status.equals("4")) {

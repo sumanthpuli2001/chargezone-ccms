@@ -594,6 +594,13 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="pmpFormStatusMaster.htm?act=showpmpStatusMaster">
+                        <i class="fa fa-pie-chart fa-lg"></i>
+                        <span>PMP Status</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->

@@ -12,7 +12,6 @@ import java.util.List;
  *
  * @author BlackBull
  */
-public interface RegisterMobForPunchDAO<T> extends GenericsDAO<T>{
-     public List<?> readByEmpId(T object);
-    
+public interface RegisterMobForPunchDAO<T> extends GenericsDAO<T> {
+    public List<?> readByEmpid(T object); 
 }

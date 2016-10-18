@@ -802,5 +802,6 @@
             </key>
             <one-to-many class="com.bul.zydex.model.EmployeePunchForMobileApp" />
         </set>
+      
     </class>
 </hibernate-mapping>

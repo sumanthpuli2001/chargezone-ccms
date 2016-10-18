@@ -15,7 +15,6 @@ public class RegisterMobForPunch {
     private EmployeeMaster employeeMaster;
     private Integer imeiNo;
 
-
     public Integer getId() {
         return id;
     }
@@ -39,4 +38,7 @@ public class RegisterMobForPunch {
     public void setImeiNo(Integer imeiNo) {
         this.imeiNo = imeiNo;
     }
+    
+    
+
 }

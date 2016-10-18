@@ -93,5 +93,4 @@
   <table-filter match-name="time_attandance_flaxible_master"/>
   <table-filter match-name="email_add_master"/>
   <table-filter match-name="employee_punch_data_for_mobile_app"/>
-  <table-filter match-name="appraisal_performance_competency_evaluation_history"/>
 </hibernate-reverse-engineering>

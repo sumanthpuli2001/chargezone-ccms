@@ -143,7 +143,7 @@
     <mapping resource="com/bul/zydex/model/EmployeePunchForMobileApp.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/EmailAddMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/UrlMaster.hbm.xml"/>
-    <mapping resource="appraisal_performance_competency_evaluation_history"/>
+   
     <mapping/>
   </session-factory>
 </hibernate-configuration>

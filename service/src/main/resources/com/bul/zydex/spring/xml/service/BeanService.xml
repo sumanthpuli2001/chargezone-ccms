@@ -290,6 +290,7 @@
     <bean id="appraisalPerformanceActivitiesService1" class="com.bul.zydex.service.appraisalPerformance.AppraisalPerformanceActivitiesServiceImpl">
         <property name="appraisalPerformanceActivitiesDAO" ref="appraisalPerformanceActivitiesDAO1"/>
     </bean>
+  
     <!--ExpenseReconsilation-->
     <bean id="expenseReconsilationService1" class="com.bul.zydex.service.expense.ExpenseReconsilationServiceImpl">
         <property name="expenseReconsilationDAO" ref="expenseReconsilationDAO1"/>

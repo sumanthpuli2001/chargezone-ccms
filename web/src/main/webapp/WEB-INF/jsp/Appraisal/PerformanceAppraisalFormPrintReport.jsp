@@ -25,6 +25,9 @@
         <!--<link rel="stylesheet" href="StorageYard/CSS/bootstrap/bootstrap.min.css">-->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <title>Performance Appraisal Form</title>
+         <style>
+            td { word-break: break-all;}
+        </style>
     </head>
     <style type="text/css">
         @media print {
@@ -1174,8 +1177,8 @@
 
                 </div>
 
+        </div>
         </section>
-        <!--</div>-->
     </form:form>
 </body>
 

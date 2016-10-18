@@ -70,6 +70,7 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
     protected AppraisalPerformanceActivitiesService<AppraisalPerformanceActivities> appraisalPerformanceActivitiesService;
     protected UpdateAppraisalPerformanceActivitiesService<UpdateAppraisalPerformanceActivities> updateAppraisalPerformanceActivitiesService;
     protected AppraisalkraActivityService<AppraisalkraActivity> appraisalkraActivityService;
+    
 
     public UpdateAppraisalPerformanceKraService<UpdateAppraisalPerformanceKra> getUpdateAppraisalPerformanceKraService() {
         return updateAppraisalPerformanceKraService;
@@ -290,7 +291,7 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
     }
 
     public void managerTimeLineDate(HttpServletRequest request,
-            HttpServletResponse response, String userid) throws Exception {
+            HttpServletResponse response, String userid) throws Exception { 
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();

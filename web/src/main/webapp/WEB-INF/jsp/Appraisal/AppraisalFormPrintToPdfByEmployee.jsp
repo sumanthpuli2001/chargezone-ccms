@@ -13,7 +13,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Performance Appraisal Form</title>
-
+        <style>
+            td { word-break: break-all;}
+        </style>
     </head>
      <style type="text/css">
         @media print {

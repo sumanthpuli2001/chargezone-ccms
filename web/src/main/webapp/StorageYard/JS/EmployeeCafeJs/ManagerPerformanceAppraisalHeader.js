@@ -338,8 +338,7 @@ function weightageCountEmp() {
                 document.getElementById("weightage" + total).value = "";
 
                 break;
-            }
-            else if (total + '' == countId + '' && weightage < 75 && !flag1) {
+            } else if (total + '' == countId + '' && weightage < 75 && !flag1) {
                 weitageAlert();
                 weightage -= parseFloat(val);
                 document.getElementById("weightage" + total).value = "";
@@ -1238,13 +1237,14 @@ function behaviorsCountEndYear() {
 //    var selectedString = value11.value;
     for (i = 1; i <= 5; i++) {
         var endYearScore = document.getElementById("endYearScore" + i).value;
-//        alert('aaaaaa' + midYearScore);
+
         if (endYearScore !== "") {
             behaviorsEnd += parseFloat(endYearScore);
         }
     }
-    //    alert(midYearScore);
-//    alert("behaviorsMidyearTotalscore" + behaviors);     document.getElementById("behaviorsEndyearTotalscore").value = behaviorsEnd;
+//        alert(behaviorsEnd);
+//    alert("behaviorsMidyearTotalscore" + behaviors);    
+    document.getElementById("behaviorsEndyearTotalscore").value = behaviorsEnd;
     performancefinalScoreRatings();
 
 }
@@ -1428,6 +1428,17 @@ $(document).on("click", ":submit", function (e) {
 //            document.getElementById("compentencyMidRemark" + i).required = true;
 
             }
+            for (i = 1; i <= kragoalLength; i++) {
+
+                document.getElementById("managerMidYearSelfAssesssmentGoal" + i).required = true;
+            }
+
+            for (i = 1; i <= 5; i++) {
+                document.getElementById("midYearScore" + i).required = true;
+                document.getElementById("managerMidYearReview" + i).required = true;
+            }
+            document.getElementById("behaviorsMidyearOtherremark").required = true;
+
             var indivisul = document.getElementById("text1").value;
             if (indivisul !== '') {
 
@@ -1454,7 +1465,11 @@ $(document).on("click", ":submit", function (e) {
             //        document.getElementById("priority1").required = true;
             //        document.getElementById("kraCategoryMapOther1").required = true;
             //        document.getElementById("empMidyearSelfassessmentGoalActivities1").required = true;
-
+            var w1 = document.getElementById("weightageScore").value;
+            if (w1 < 75) {
+                weitageAlert();
+                return false;
+            }
             for (i = 1; i <= kragoalLengthactivity; i++) {
                 //            document.getElementById("empMidyearSelfassessmentGoalActivities" + i).required = true;
             }
@@ -1466,6 +1481,12 @@ $(document).on("click", ":submit", function (e) {
 //                document.getElementById("compentencyEndYear" + i).required = true; change 4/10/2016
 //            document.getElementById("compentencyEndRemark" + i).required = true;
             }
+
+            var w1 = document.getElementById("weightageScore").value;
+            if (w1 < 75) {
+                weitageAlert();
+                return false;
+            }
             for (i = 1; i <= countId; i++) {
 //                document.getElementById("trainingSelectId" + i).required = true; change 4/10/2016
 //                var selectedValue1 = document.getElementById("trainingSelectId" + i).value; change 4/10/2016
@@ -1474,6 +1495,17 @@ $(document).on("click", ":submit", function (e) {
                 }
 
             }
+            for (i = 1; i <= kragoalLength; i++) {
+
+                document.getElementById("managerEndYearSelfAssesssmentGoal" + i).required = true;
+            }
+            for (i = 1; i <= 5; i++) {
+                document.getElementById("endYearScore" + i).required = true;
+                document.getElementById("managerEndYearReview" + i).required = true;
+            }
+            document.getElementById("behaviorsEndyearOtherremark").required = true;
+
+
         }
 
     } else if ($(this).val() !== "" && $(this).val() === "save") {
@@ -1626,8 +1658,8 @@ $(document).ready(function () {
         document.getElementById("midYearDivOther1").style.pointerEvents = "none";
         document.getElementById("midYearDivOther1").style.cursor = "default";
 
-        //        document.getElementById("activity1").style.pointerEvents = "none";
-        //        document.getElementById("activity1").style.cursor = "default";
+        document.getElementById("activity1").style.pointerEvents = "none";
+        document.getElementById("activity1").style.cursor = "default";
 
         //        document.getElementById("empMidyearSelfassessmentGoalActivities1").required = true;
         var empMidyearSelfassessmentGoalActivities = document.getElementById("empMidyearSelfassessmentGoalActivities1").value;
@@ -1997,7 +2029,7 @@ $(document).ready(function () {
 function performancefinalScoreRatings() {
     var totalScore = parseInt(document.getElementById("totalScore").value);
     var behaviorsEndyearTotalscore = parseInt(document.getElementById("behaviorsEndyearTotalscore").value);
-    //    alert("DODODOD" + behaviorsEndyearTotalscore);
+//        alert("DODODOD" + behaviorsEndyearTotalscore);
     //    alert("POPOPOPO" + totalScore);
     var behaviorsFinalscore12 = totalScore + behaviorsEndyearTotalscore;
 
@@ -2016,17 +2048,14 @@ function performancefinalScoreRatings() {
     if ((behaviorsFinalscore12 >= 101) && (behaviorsFinalscore12 <= 105))
     {
         $('#score2').show();
-    }
-    else if ((behaviorsFinalscore12 >= 80) && (behaviorsFinalscore12 <= 100))
+    } else if ((behaviorsFinalscore12 >= 80) && (behaviorsFinalscore12 <= 100))
     {
         //        alert("score1" + behaviorsFinalscore12);
         $('#score3').show();
-    }
-    else if ((behaviorsFinalscore12 >= 51) && (behaviorsFinalscore12 <= 79))
+    } else if ((behaviorsFinalscore12 >= 51) && (behaviorsFinalscore12 <= 79))
     {
         $('#score4').show();
-    }
-    else if ((behaviorsFinalscore12 >= 0) && (behaviorsFinalscore12 <= 50)) {
+    } else if ((behaviorsFinalscore12 >= 0) && (behaviorsFinalscore12 <= 50)) {
         $('#score5').show();
     }
 

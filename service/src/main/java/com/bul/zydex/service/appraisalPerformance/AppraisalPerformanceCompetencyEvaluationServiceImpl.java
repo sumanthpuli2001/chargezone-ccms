@@ -37,4 +37,26 @@ public class AppraisalPerformanceCompetencyEvaluationServiceImpl<T> extends Gene
         appraisalPerformanceCompetencyEvaluationDAO.delete1(object);
     }
 
+    @Override
+    public List<?> readByEmployeeWiseAppraisalPerformanceCompetencyEvaluationDetail(T object) {
+        return appraisalPerformanceCompetencyEvaluationDAO.readByEmployeeWiseAppraisalPerformanceCompetencyEvaluationDetail(object);
+    }
+
+    @Override
+    public List<?> readByAppraisalPerformanceId(T object) {
+        return appraisalPerformanceCompetencyEvaluationDAO.readByAppraisalPerformanceId(object);
+    }
+
+    @Override
+    public void deleteByManager(T object) {
+        appraisalPerformanceCompetencyEvaluationDAO.deleteByManager(object);
+    }
+
+    @Override
+    public void finaldeletebyManager(T object) {
+        appraisalPerformanceCompetencyEvaluationDAO.finaldeletebyManager(object);
+    }
+    
+    
+
 }

@@ -1,5 +1,5 @@
 package com.bul.zydex.model;
-// Generated Apr 21, 2016 3:33:08 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 14, 2016 5:31:51 PM by Hibernate Tools 3.2.1.GA
 
 
 
@@ -25,6 +25,7 @@ public class AppraisalPerformanceCompetencyEvaluation  implements java.io.Serial
      private String midyearRemarkManager;
      private String competencyEndYearManager;
      private String endyearRemarkManager;
+     
 
     public AppraisalPerformanceCompetencyEvaluation() {
     }
@@ -34,6 +35,7 @@ public class AppraisalPerformanceCompetencyEvaluation  implements java.io.Serial
         this.competencyEvaluationTextmaster = competencyEvaluationTextmaster;
         this.competencyEvaluationMaster = competencyEvaluationMaster;
         this.appraisalPerformanceMaster = appraisalPerformanceMaster;
+       
     }
     public AppraisalPerformanceCompetencyEvaluation(CompetencyEvaluationTextmaster competencyEvaluationTextmaster, CompetencyEvaluationMaster competencyEvaluationMaster, AppraisalPerformanceMaster appraisalPerformanceMaster, String competencyStartYear, String startyearRemark, String competencyMidYear, String midyearRemark, String competencyEndYear, String endyearRemark, String competencyStartYearManager, String startyearRemarkManager, String competencyMidYearManager, String midyearRemarkManager, String competencyEndYearManager, String endyearRemarkManager) {
        this.competencyEvaluationTextmaster = competencyEvaluationTextmaster;
@@ -51,6 +53,7 @@ public class AppraisalPerformanceCompetencyEvaluation  implements java.io.Serial
        this.midyearRemarkManager = midyearRemarkManager;
        this.competencyEndYearManager = competencyEndYearManager;
        this.endyearRemarkManager = endyearRemarkManager;
+       
     }
    
     public Integer getId() {
@@ -165,10 +168,6 @@ public class AppraisalPerformanceCompetencyEvaluation  implements java.io.Serial
     public void setEndyearRemarkManager(String endyearRemarkManager) {
         this.endyearRemarkManager = endyearRemarkManager;
     }
-
-
-
-
 }
 
 

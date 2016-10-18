@@ -18,4 +18,10 @@ public interface AppraisalPerformanceCompetencyEvaluationDAO<T> extends Generics
 
     public void delete1(T object);
 
+    public List<?> readByEmployeeWiseAppraisalPerformanceCompetencyEvaluationDetail(T object);
+
+    public List<?> readByAppraisalPerformanceId(T object);
+
+    public void deleteByManager(T object);
+    public void finaldeletebyManager(T object);
 }

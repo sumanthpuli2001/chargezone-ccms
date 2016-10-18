@@ -464,7 +464,7 @@
                                                                         </tr>
                                                                         <tr id="textemployeesMid${status.count}">
                                                                             <td colspan="5"><textarea id="employeeMidYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="employeeMidYearSelfAssesssmentGoal${status.count}"type="Text" class="form-control">${kragoallist.empMidyearSelfassessmentGoalManager}</textarea></td>
-                                                                            <td colspan="5"><textarea id="managerMidYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="managerMidYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control"><c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${kragoallist.managerMidyearReviewEvaluationManager}</c:if></textarea></td>
+                                                                            <td colspan="5"><textarea id="managerMidYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="managerMidYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control">${kragoallist.managerMidyearReviewEvaluationManager}</textarea></td>
                                                                             </tr>
 
                                                                             <tr id="employeesEnd${status.count}">
@@ -473,7 +473,7 @@
                                                                         </tr>
                                                                         <tr id="textemployeesEnd${status.count}">
                                                                             <td colspan="5"><textarea id="employeeEndYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="employeeEndYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control">${kragoallist.empEndyearSelfassessmentGoalManager}</textarea></td>
-                                                                            <td colspan="5"><textarea id="managerEndYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="managerEndYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control"><c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${kragoallist.managerEndyearReviewEvaluationManager}</c:if></textarea></td>
+                                                                            <td colspan="5"><textarea id="managerEndYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="managerEndYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control">${kragoallist.managerEndyearReviewEvaluationManager}</textarea></td>
                                                                             </tr>
                                                                     </c:forEach>
                                                                 </c:when>
@@ -1166,11 +1166,12 @@
                                                                     <td id="subCompentencyStartRemarkId${status.count}">
                                                                         <textarea type="Text" id="compentencyStartRemark${status.count}" name="compentencyStartRemark${status.count}" class="form-control" rows="4">${competencyEvaluationList[12]}</textarea>
                                                                     </td>
+                                                                 
                                                                     <td id="subCompentencyMidId${status.count}">
-                                                                        <select id="compentencyMidYear${status.count}" name="compentencyMidYear${status.count}" value="${competencyEvaluationList[7]}" class="form-control">
+                                                                        <select id="compentencyMidYear${status.count}" name="compentencyMidYear${status.count}" value="${competencyEvaluationList[15]}" class="form-control">
                                                                             <option value="">--SELECT--</option>
                                                                             <c:choose>
-                                                                                <c:when test="${competencyEvaluationList[7] eq 'Exceed Expectations'}">
+                                                                                <c:when test="${competencyEvaluationList[15] eq 'Exceed Expectations'}">
 
                                                                                     <option value="Exceed Expectations" selected="">Exceed Expectations</option>
                                                                                 </c:when>
@@ -1180,7 +1181,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${competencyEvaluationList[7] eq 'Meet Expectations'}">
+                                                                                <c:when test="${competencyEvaluationList[15] eq 'Meet Expectations'}">
 
                                                                                     <option value="Meet Expectations" selected="">Meet Expectations</option>
                                                                                 </c:when>
@@ -1190,7 +1191,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${competencyEvaluationList[7] eq 'Need Improvement'}">
+                                                                                <c:when test="${competencyEvaluationList[15] eq 'Need Improvement'}">
 
                                                                                     <option value="Need Improvement" selected="">Need Improvement</option>
                                                                                 </c:when>
@@ -1205,10 +1206,10 @@
                                                                         <textarea type="Text" id="compentencyMidRemark${status.count}" name="compentencyMidRemark${status.count}" class="form-control" rows="4">${competencyEvaluationList[13]}</textarea>
                                                                     </td>
                                                                     <td id="subCompentencyEndId${status.count}">
-                                                                        <select id="compentencyEndYear${status.count}" name="compentencyEndYear${status.count}" value="${competencyEvaluationList[9]}" class="form-control">
+                                                                        <select id="compentencyEndYear${status.count}" name="compentencyEndYear${status.count}" value="${competencyEvaluationList[16]}" class="form-control">
                                                                             <option value="">--SELECT--</option>
                                                                             <c:choose>
-                                                                                <c:when test="${competencyEvaluationList[9] eq 'Exceed Expectations'}">
+                                                                                <c:when test="${competencyEvaluationList[16] eq 'Exceed Expectations'}">
 
                                                                                     <option value="Exceed Expectations" selected="">Exceed Expectations</option>
                                                                                 </c:when>
@@ -1218,7 +1219,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${competencyEvaluationList[9] eq 'Meet Expectations'}">
+                                                                                <c:when test="${competencyEvaluationList[16] eq 'Meet Expectations'}">
 
                                                                                     <option value="Meet Expectations" selected="">Meet Expectations</option>
                                                                                 </c:when>
@@ -1228,7 +1229,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                             <c:choose>
-                                                                                <c:when test="${competencyEvaluationList[9] eq 'Need Improvement'}">
+                                                                                <c:when test="${competencyEvaluationList[16] eq 'Need Improvement'}">
 
                                                                                     <option value="Need Improvement" selected="">Need Improvement</option>
                                                                                 </c:when>
@@ -1390,8 +1391,8 @@
                                                                         </tr>
                                                                         <tr id="individualEmpMid1TrId${status.count}">
 
-                                                                            <td colspan="3" id="midYearRetxtId${status.count}"><textarea rows="3" style="width: 451px;" id="midYearRemark${status.count}" name="midYearRemark${status.count}" class="form-control saveRequried">${individualDevelopmentPlan.midYearRemark}</textarea></td>
-                                                                            <td colspan="3" id="endYearRetxtId${status.count}"><textarea rows="3" style="width: 451px;" id="endYearRemark${status.count}" name="endYearRemark${status.count}" class="form-control saveRequried">${individualDevelopmentPlan.endYearRemark}</textarea></td>
+                                                                            <td colspan="3" id="midYearRetxtId${status.count}"><textarea rows="3" style="width: 451px;" id="midYearRemark${status.count}" name="midYearRemark${status.count}" class="form-control saveRequried">${individualDevelopmentPlan.managerMidYearRemarkManager}</textarea></td>
+                                                                            <td colspan="3" id="endYearRetxtId${status.count}"><textarea rows="3" style="width: 451px;" id="endYearRemark${status.count}" name="endYearRemark${status.count}" class="form-control saveRequried">${individualDevelopmentPlan.managerEndYearRemarkEmployee}</textarea></td>
                                                                         </tr>
                                                                         <tr id="individualEmpMidLabel2TrId${status.count}">
                                                                             <td colspan="3" id="endYearReId"><b>Manager Mid-Year Remark</b></td>
@@ -1850,7 +1851,7 @@
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                         </select></td>
-                                                                    <td id="endYearId2"><select id="endYearScore2" name="endYearScore2" value="${behaviorsList[1].endYearScoreManager}" class="form-control ">
+                                                                    <td id="endYearId2"><select id="endYearScore2" name="endYearScore2" value="${behaviorsList[1].endYearScoreManager}" onchange="behaviorsCountEndYear(this);" class="form-control">
                                                                             <option value="">--SELECT--</option>
                                                                             <c:choose>
                                                                                 <c:when test="${behaviorsList[1].endYearScoreManager eq '5.0'}">

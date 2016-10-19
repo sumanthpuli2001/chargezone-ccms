@@ -5112,7 +5112,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         String pmpIdForRework = request.getParameter("pmpIdForRework");
         String reworkComment = request.getParameter("reworkComment");
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
-        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
+//        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
         appraisalPerformanceMaster = appraisalPerformanceService.readById(Integer.parseInt(pmpIdForRework));
 
         appraisalPerformanceMaster.setReworkComment(reworkComment);
@@ -5120,8 +5120,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         appraisalPerformanceMaster.setEmployeeStatus(0);
         appraisalPerformanceMaster.setReworkStatus(1);
         appraisalPerformanceService.update(appraisalPerformanceMaster);
-        appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-        appraisalPerformanceCompetencyEvaluationService.deleteByManager(appraisalPerformanceCompetencyEvaluation);
+//        appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+//        appraisalPerformanceCompetencyEvaluationService.deleteByManager(appraisalPerformanceCompetencyEvaluation);
         try {
             EmailTemplate emailTemplate = new EmailTemplate();
             EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");

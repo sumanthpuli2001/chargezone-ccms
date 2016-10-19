@@ -50,7 +50,7 @@ public class HrServiceRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Hr
                 && !"".equals(hrServiceRequest.getHrApproveDate()) && null != hrServiceRequest.getHrApproveDate()) {
             condition += " AND STR_TO_DATE(a.requestDate,'%d/%m/%Y %H:%i') BETWEEN STR_TO_DATE('" + hrServiceRequest.getRequestDate() + " 00:00','%d/%m/%Y %H:%i') AND STR_TO_DATE('" + hrServiceRequest.getHrApproveDate() + " 00:00','%d/%m/%Y %H:%i') ";
         }
-        query += " SELECT a.id, a.queryType ,b.id "
+        query += " SELECT a.id, a.queryType ,b.id,a.details "
                 + " From HrServiceRequest a "
                 + " LEFT JOIN a.employeeMasterByEmployeeMasterId b"
                 //                + " where a.employeeMasterByEmployeeMasterId = " +  hrServiceRequest.getEmployeeMasterByEmployeeMasterId().getId()

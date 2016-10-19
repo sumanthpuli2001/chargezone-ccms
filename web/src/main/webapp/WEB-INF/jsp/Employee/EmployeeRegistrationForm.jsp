@@ -914,7 +914,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <div class="col-sm-6" id="shiftMasterDivId" >
+                                                        <div class="col-sm-6">
                                                             <label>Competency Evaluation:<span style="color: red;font-size: 12px;">*</span></label>
                                                               <select name="competencyEvaluationId" id="competencyEvaluationId" class="form-control">
                                                              <option value="">--SELECT--</option>

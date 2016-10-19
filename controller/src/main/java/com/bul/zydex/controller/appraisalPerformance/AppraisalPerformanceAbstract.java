@@ -22,9 +22,11 @@ import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.KraCategory;
+import com.bul.zydex.model.PmpFormStatusMaster;
 import com.bul.zydex.model.UpdateAppraisalPerformanceActivities;
 import com.bul.zydex.model.UpdateAppraisalPerformanceKra;
 import com.bul.zydex.model.UserMaster;
+import com.bul.zydex.service.PmpFormStatusMaster.PmpFormStatusMasterService;
 import com.bul.zydex.service.appraisalPerformance.AppraisalFillingDataService;
 import com.bul.zydex.service.appraisalPerformance.AppraisalPerformanceActivitiesService;
 import com.bul.zydex.service.appraisalPerformance.AppraisalPerformanceBehaviorsService;
@@ -70,6 +72,7 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
     protected AppraisalPerformanceActivitiesService<AppraisalPerformanceActivities> appraisalPerformanceActivitiesService;
     protected UpdateAppraisalPerformanceActivitiesService<UpdateAppraisalPerformanceActivities> updateAppraisalPerformanceActivitiesService;
     protected AppraisalkraActivityService<AppraisalkraActivity> appraisalkraActivityService;
+    protected PmpFormStatusMasterService<PmpFormStatusMaster> pmpFormStatusMasterService;
     
 
     public UpdateAppraisalPerformanceKraService<UpdateAppraisalPerformanceKra> getUpdateAppraisalPerformanceKraService() {
@@ -183,6 +186,15 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
     public void setAppraisalkraActivityService(AppraisalkraActivityService<AppraisalkraActivity> appraisalkraActivityService) {
         this.appraisalkraActivityService = appraisalkraActivityService;
     }
+
+    public PmpFormStatusMasterService<PmpFormStatusMaster> getPmpFormStatusMasterService() {
+        return pmpFormStatusMasterService;
+    }
+
+    public void setPmpFormStatusMasterService(PmpFormStatusMasterService<PmpFormStatusMaster> pmpFormStatusMasterService) {
+        this.pmpFormStatusMasterService = pmpFormStatusMasterService;
+    }
+    
 
     public void selectedEmployeeDate(HttpServletRequest request,
             HttpServletResponse response, String userid) throws Exception {

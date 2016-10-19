@@ -987,7 +987,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             }
         } else {
             List<?> empList = employeeMasterService.read();
-            EmployeeMaster employeeMaster = new EmployeeMaster();
+             EmployeeMaster employeeMaster = new EmployeeMaster();
             for (Object zz : empList) {
                 try {
                     employeeMaster = (EmployeeMaster) zz;

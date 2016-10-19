@@ -13,9 +13,9 @@
         <many-to-one name="employeeMaster" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
             <column name="emp_id" not-null="true" />
         </many-to-one>
-        <property name="startYearStatus" type="boolean">
+<!--        <property name="startYearStatus" type="boolean">
             <column name="start_year_status" not-null="true" />
-        </property>
+        </property>-->
         <property name="midYearStatus" type="boolean">
             <column name="mid_year_status" not-null="true" />
         </property>

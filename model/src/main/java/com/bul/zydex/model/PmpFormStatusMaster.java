@@ -17,7 +17,7 @@ public class PmpFormStatusMaster  implements java.io.Serializable {
     
      private Integer id;
      private EmployeeMaster employeeMaster;
-     private Boolean startYearStatus;
+//     private Boolean startYearStatus;
      private Boolean midYearStatus;
      private Boolean endYearStatus;
      private Boolean managerSide;
@@ -37,14 +37,14 @@ public class PmpFormStatusMaster  implements java.io.Serializable {
     public void setEmployeeMaster(EmployeeMaster employeeMaster) {
         this.employeeMaster = employeeMaster;
     }
-
-    public Boolean getStartYearStatus() {
-        return startYearStatus;
-    }
-
-    public void setStartYearStatus(Boolean startYearStatus) {
-        this.startYearStatus = startYearStatus;
-    }
+//
+//    public Boolean getStartYearStatus() {
+//        return startYearStatus;
+//    }
+//
+//    public void setStartYearStatus(Boolean startYearStatus) {
+//        this.startYearStatus = startYearStatus;
+//    }
 
     public Boolean getMidYearStatus() {
         return midYearStatus;

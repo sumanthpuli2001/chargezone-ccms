@@ -294,8 +294,9 @@
                                                             <th style="margin: 0px;width: 50px;text-align: center" id="finalScoreid">Final Score</th>
                                                                 <%--</c:if>--%>
                                                             <th style="text-align: center;width: 50px">Edit<br><a href="#" title="Deleted KRA" data-toggle="modal" data-target="#deletedKraModel" onclick="deletedKraajaxfun('${appraisalId}');">KRA</a></th>
-                                                            <th style="text-align: center;width: 50px"><span style='margin-top: 5px;'>
-                                                                    <input type="button" value="+" id="addRowButtonId" title="Add New"/>
+                                                            <th style="text-align: center;width: 50px">
+                                                                <span style='margin-top: 5px;'>
+                                                                    <input style='display: none;' type="button" value="+" id="addRowButtonId" title="Add New"/>
                                                                 </span></th>
                                                             </tr>
                                                             <input type="hidden" name="kragoalLength" id="kragoalLength" value="${fn:length(kragoal)}">
@@ -421,10 +422,11 @@
                                                                                 </select>
                                                                             </div>
                                                                         </td>
-                                                                        <td id="finalScoreid${status.count}"><input type="number" id="finalScore${status.count}" name="finalScore${status.count}" value="${kragoallist.finalScoreManager}" min="1" class="form-control" style="margin: 0px;width: 67px;"  onchange="finalScoreCount(${status.count});"></td>
+                                                                        <td id="finalScoreid${status.count}"><input type="number" id="finalScore${status.count}" name="finalScore${status.count}" value="${kragoallist.finalScoreManager}" min="1" class="form-control" onkeypress="return allowOnlyNumber(event);" style="margin: 0px;width: 67px;"  onchange="finalScoreCount(${status.count});"></td>
                                                                             <%--</c:if>--%>
 
-                                                                        <td style="text-align: center"><span style='margin-top: 5px;'><button type="button" class="btns btn-warnings" onclick="changeReadonly('${status.count}')">Edit</button></span><br/>
+                                                                        <td style="text-align: center"><span style='margin-top: 5px;'>
+                                                                                <button type="button" class="btns btn-warnings" style='display: none;' onclick="changeReadonly('${status.count}')">Edit</button></span><br/>
                                                                             <span>${kragoallist.editDate}</span><input type="hidden" id="startDate${status.count}" name="startDate${status.count}" value="${kragoallist.startDate}">
                                                                                <!--<a href="" data-toggle="modal" data-target="#History" onclick="managerhistoryajaxfun('${kragoallist.id}');">History</a>-->
                                                                             <c:if test="${appraisalPerformanceMaster.managerStatus ne 0 and updateStatus}">
@@ -442,7 +444,7 @@
                                                                         <td id="" style="text-align: center">
                                                                             <span style="margin-top: 5px;">
                                                                                 <c:if test="${(flag eq 'true' || flag1 eq 'true' || flag2 eq 'true') && resultkraGoalByManager > 1}">
-                                                                                    <input type="button" value="-" id="removeRowButtonId" onclick="removeChild4('removeTr${status.count}', 'employeesMid${status.count}', 'textemployeesMid${status.count}', 'employeesEnd${status.count}', 'textemployeesEnd${status.count}', '${kragoallist.id}');">
+                                                                                    <input type="button" style='display: none;' value="-" id="removeRowButtonId" onclick="removeChild4('removeTr${status.count}', 'employeesMid${status.count}', 'textemployeesMid${status.count}', 'employeesEnd${status.count}', 'textemployeesEnd${status.count}', '${kragoallist.id}');">
                                                                                 </c:if>
                                                                             </span>
                                                                         </td>
@@ -510,10 +512,11 @@
                                                                             </select>
                                                                         </div>
                                                                     </td>
-                                                                    <td id="finalScoreid"><input type="Text" id="finalScore" name="finalScore" class="form-control" style="margin: 0px;width: 100px;"></td>
+                                                                    <td id="finalScoreid"><input type="number" id="finalScore1" name="finalScore1" onkeypress="return allowOnlyNumber(event);" class="form-control"  style="margin: 0px;width: 100px;" onchange="finalScoreCount(${status.count});"></td>
                                                                         <%--</c:if>--%>
 
-                                                                    <td style="text-align: center"><span style='margin-top: 5px;'><button type="button" class="btns btn-warnings">Edit</button></span><br/>
+                                                                    <td style="text-align: center">
+                                                                        <span style='margin-top: 5px; display: none;'><button type="button" class="btns btn-warnings">Edit</button></span><br/>
                                                                     </td>
                                                                     <td style="text-align: center">
 
@@ -664,13 +667,14 @@
                                                             <th style="margin: 0px;width: 70px;text-align: center" id="midYearDivid">Mid Year Status</th>
                                                             <th style="margin: 0px;width: 70px;text-align: center" id="endYearDivid1">End Year Status</th>
                                                             <th style="margin: 0px;width: 25px;text-align: center" id="finalScoreid01">Activity/Project Performance</th>
-                                                            <th style="text-align: center;width: 50px" id="editT">Edit<br><a href="#" title="Deleted Activities" data-toggle="modal" data-target="#deletedActivityModel" onclick="deletedActivitiesajaxfun('${appraisalId}');">Activities</a></th>
+                                                            <th style="text-align: center;width: 50px" id="editT"><br>
+                                                                <a href="#" title="Deleted Activities" data-toggle="modal" data-target="#deletedActivityModel" onclick="deletedActivitiesajaxfun('${appraisalId}');">Activities</a></th>
                                                             <th style="text-align: center;width: 50px"><span style='margin-top: 5px;'>
                                                                     <c:if test="${flag ne 'true' && flag1 ne 'true' && flag2 ne 'true'}">
-                                                                        <input type="button" value="+" id="addactivityRowButtonId" disabled="true" title="Add New" />
+                                                                        <input type="button" style='display: none;' value="+" id="addactivityRowButtonId" disabled="true" title="Add New" />
                                                                     </c:if>
                                                                     <c:if test="${flag eq 'true' || flag1 eq 'true' || flag2 eq 'true'}">
-                                                                        <input type="button" value="+" id="addactivityRowButtonId" title="Add New" />
+                                                                        <input type="button" style='display: none;' value="+" id="addactivityRowButtonId" title="Add New" />
                                                                     </c:if>
                                                                 </span></th>
 
@@ -890,7 +894,7 @@
                                                                         </td>
                                                                         <td style="text-align: center" id="edit${status.count}"><span style='margin-top: 5px;' id="editC${status.count}">
 
-                                                                                <button type="button" class="btns btn-warnings" id="EditByEmployeeact${status.count}" name="EditByEmployeeact" onclick="changeReadonlyOther('${status.count}')" style="width: 50px;" disabled="true">Edit</button>
+                                                                                <button type="button" style='display: none;' class="btns btn-warnings" id="EditByEmployeeact${status.count}" name="EditByEmployeeact" onclick="changeReadonlyOther('${status.count}')" style="width: 50px;" disabled="true">Edit</button>
 
                                                                             </span><br/>
 
@@ -998,7 +1002,7 @@
                                                                         </select>
                                                                     </td>
 
-                                                                    <td style="text-align: center" id="edit"><span style='margin-top: 5px;'><button type="button" class="btns btn-warnings" style="width: 50px;">Edit</button></span><br/>
+                                                                    <td style="text-align: center" id="edit"><span style='margin-top: 5px; display: none;'><button type="button" class="btns btn-warnings" style="width: 50px;">Edit</button></span><br/>
                                                                     </td>
                                                                     <input type="hidden" id="startDate1" name="startDate1" value="${kragoal[0].startDate}">
                                                                     <td style="text-align: center">
@@ -1078,24 +1082,24 @@
                                                 <div class="col-md-12 col-sm-12">
                                                     <%--<c:if test="${empty competencyEvaluationList[0][2].title && managerStatus eq '0'}">--%>
                                                     <%--<c:if test="${managerStatus eq '0' || sessionScope.user.userName eq 'admin' || empty competencyEvaluationList[0][2].title}">--%>
-                                                        <div>
-                                                            <select name="competencyEvaluationId" id="competencyEvaluationId" value="${competencyMap.key}" class="form-control" onchange="managerajaxfun();"/>
-                                                            <option value="">--SELECT--</option>
-                                                            <c:forEach var="competencyMap" items="${competencyMap}">
-                                                                <c:if test="${competencyEvaluationList[0][2].title eq competencyMap.value}">
-                                                                    <option value="${competencyMap.key}" selected="">${competencyMap.value}</option>
-                                                                </c:if>
-                                                                <c:if test="${competencyEvaluationList[0][2].title ne competencyMap.value}">
-                                                                    <option value="${competencyMap.key}">${competencyMap.value}</option>
-                                                                </c:if>
+                                                        <!--<div>-->
+                                                            <!--<select name="competencyEvaluationId" id="competencyEvaluationId" value="$/{competencyMap.key}" class="form-control" onchange="managerajaxfun();"/>-->
+                                                            <!--<option value="">--SELECT--</option>-->
+                                                            <%--<c:forEach var="competencyMap" items="${competencyMap}">--%>
+                                                                <%--<c:if test="${competencyEvaluationList[0][2].title eq competencyMap.value}">--%>
+                                                                    <!--<option value="$/{competencyMap.key}" selected="">$/{competencyMap.value}</option>-->
+                                                                <%--</c:if>--%>
+                                                                <%--<c:if test="${competencyEvaluationList[0][2].title ne competencyMap.value}">--%>
+                                                                    <!--<option value="$/{competencyMap.key}">$/{competencyMap.value}</option>-->
+                                                                <%--</c:if>--%>
 
-                                                            </c:forEach>
-                                                            </select>
-                                                        </div>
+                                                            <%--</c:forEach>--%>
+                                                            <!--</select>-->
+                                                        <!--</div>-->
                                                     <%--</c:if>--%>
-                                                    <%--<c:if test="${!empty competencyEvaluationList[0][2].title && managerStatus eq '1' && sessionScope.user.userName ne 'admin' && !empty competencyEvaluationList[0][2].title}">--%>
-                                                        <!--<div><input type="text" id="competencyEvaluationId" class="form-control" name="competencyEvaluationId" value="${competencyEvaluationList[0][2].title}" readonly="true"></div>-->
-                                                        <%--</c:if>--%>
+                                                    <c:if test="${!empty competencyEvaluationList[0][2].title && managerStatus eq '1' && sessionScope.user.userName ne 'admin' && !empty competencyEvaluationList[0][2].title}">
+                                                        <div><input type="text" id="competencyEvaluationId" class="form-control" name="competencyEvaluationId" value="${competencyEvaluationList[0][2].title}" readonly="true"></div>
+                                                        </c:if>
                                                 </div>
 
 
@@ -1277,7 +1281,7 @@
                                                                 <th style="text-align: center">IDP Type</th>
                                                                 <th style="text-align: center">How to achieve this IDP</th>
                                                                 <th style="text-align: center"></th>
-                                                                <th style="text-align: center">Add New</th>
+                                                                <th style="text-align: center"></th><!--Add New-->
                                                             </tr>
                                                             <tr>
                                                             <input type="hidden" name="IndividualId" id="IndividualId" value="${fn:length(individualDevelopmentPlanList)}">
@@ -1289,7 +1293,7 @@
                                                                         <tr id="individualTrId${status.count}">
                                                                             <td id="removeKRAIndividualID${status.count}" name="removeKRAIndividualID${status.count}" style="text-align: center">${status.count}</td>
                                                                         <input type="hidden" name="IndividualDevelopmentPlanId${status.count}" id="IndividualDevelopmentPlanId${status.count}" value="${individualDevelopmentPlan.id}">
-                                                                        <td id="indDevId"><textarea type="Text" id="text${status.count}" name="text${status.count}" class="form-control saveRequried">${individualDevelopmentPlan.managertext1}</textarea></td>
+                                                                        <td id="indDevId"><textarea type="Text" id="text${status.count}" name="text${status.count}" class="form-control saveRequried" readonly>${individualDevelopmentPlan.managertext1}</textarea></td>
                                                                         <td><div>
                                                                                 <select id="individualtextDiv${status.count}" name="individualtextDiv${status.count}" value="${individualDevelopmentPlan.managertext2}" class="form-control saveRequried">
                                                                                     <option value="">--SELECT--</option>
@@ -1371,7 +1375,7 @@
 
                                                                             <td style="text-align: center">
                                                                                 <span style='margin-top: 5px;'>
-                                                                                    <input type="button" value="+" id="addIndividualId" />
+                                                                                    <input style='display: none;' type="button" value="+" id="addIndividualId" />
                                                                                 </span>
                                                                             </td>
                                                                         </c:if>
@@ -1379,7 +1383,7 @@
                                                                             <td id="" style="text-align: center">
                                                                                 <span style="margin-top: 5px;">
                                                                                     <c:if test="${flag eq 'true' || flag1 eq 'true' || flag2 eq 'true'}">
-                                                                                        <input type="button" value="-" id="removeRowButtonId" onclick="removeIndividualChild('individualTrId${status.count}', 'individualEmpMidLabel1TrId${status.count}', 'individualEmpMid1TrId${status.count}', 'individualEmpMidLabel2TrId${status.count}', 'individualEmpMid2TrId${status.count}', '${individualDevelopmentPlan.id}');">
+                                                                                        <input style='display: none;' type="button" value="-" id="removeRowButtonId" onclick="removeIndividualChild('individualTrId${status.count}', 'individualEmpMidLabel1TrId${status.count}', 'individualEmpMid1TrId${status.count}', 'individualEmpMidLabel2TrId${status.count}', 'individualEmpMid2TrId${status.count}', '${individualDevelopmentPlan.id}');">
                                                                                     </c:if>
                                                                                 </span>
                                                                             </td>
@@ -1408,7 +1412,7 @@
                                                                 <c:otherwise>
                                                                     <tr>
                                                                         <td style="text-align: center">1</td>
-                                                                        <td><textarea type="Text" class="form-control saveRequried"></textarea></td>
+                                                                        <td><textarea type="Text" id="text" name="text" class="form-control saveRequried" readonly></textarea></td>
                                                                         <td><div>
                                                                                 <select id="individualtextDiv" name="individualtextDiv" class="form-control saveRequried">
                                                                                     <option value="">--SELECT--</option>
@@ -1434,7 +1438,7 @@
                                                                         </td>
                                                                         <td style="text-align: center">
                                                                             <span style='margin-top: 5px;'>
-                                                                                <input type="button" value="+" id="addIndividualId" />
+                                                                                <input type="button" style="display: none;" value="+" id="addIndividualId" />
                                                                             </span>
                                                                         </td>
                                                                     </tr>
@@ -2677,7 +2681,16 @@
             if (objEvent.keyCode == 9) {  //tab pressed
                 objEvent.preventDefault(); // stops its action
             }
-        })
+        });
+        
+        $(document).ready(function () {
+//            alert('${sessionScope.employeeInfo.competencyEvaluationId}');
+
+            var subCompentencyCountId = document.getElementById("subCompentencyCount").value;
+            if (subCompentencyCountId == 0) {
+                myajaxfunManager1('${sessionScope.employeeInfo.competencyEvaluationId}');
+            }
+        });
     </script>
     <style>
         .class-with-width { width: 150px !important; }

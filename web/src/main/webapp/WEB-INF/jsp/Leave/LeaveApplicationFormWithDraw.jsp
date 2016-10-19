@@ -782,25 +782,25 @@
     </script>
     <script>
 // A $( document ).ready() block.
-//        $(document).ready(function () {
-//            var skillsSelect = document.getElementById("leaveTypeMaster.id");
-//            var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
-//            var selectedTextArray = selectedText.split('(');
-//            selectedText = selectedTextArray[0];
-//            if (selectedText == 'Short Leave') {
-//                $("#NoshortLeave").hide();
-//                $("#shortLeave").show();
-//
-//            } else {
-//                $("#NoshortLeave").show();
-//                $("#shortLeave").hide();
-//            }
+        $(document).ready(function () {
+            var skillsSelect = document.getElementById("leaveTypeMaster.id");
+            var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
+            var selectedTextArray = selectedText.split('(');
+            selectedText = selectedTextArray[0];
+            if (selectedText == 'Short Leave') {
+                $("#NoshortLeave").hide();
+                $("#shortLeave").show();
+
+            } else {
+                $("#NoshortLeave").show();
+                $("#shortLeave").hide();
+            }
 //            calculateDayByAjax();
-////            leaveSetting();
-////            leaveTypecheck();
-////            daysCount();
-////            fillEnddate();
-//        });
+//            leaveSetting();
+//            leaveTypecheck();
+//            daysCount();
+//            fillEnddate();
+        });
 
     </script>
 

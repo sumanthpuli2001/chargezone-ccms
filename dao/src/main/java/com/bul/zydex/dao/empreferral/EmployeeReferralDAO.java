@@ -21,4 +21,10 @@ public interface EmployeeReferralDAO<T> extends GenericsDAO<T> {
     public int updateEmployeeReferralById(final T object);
     
     public List<?> getReportingManagerOfEmpRefAdmin();
+    
+    public List<?> checkPositionReferd(final T object);
+    
+     public List<?> finalApproveByHrHead();
+     
+      public List<?> finalApproveList(T object);
 }

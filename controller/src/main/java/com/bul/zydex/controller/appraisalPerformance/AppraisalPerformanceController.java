@@ -5399,4 +5399,17 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         mv.setViewName("Appraisal/AppraisalFormPrintToPdfByEmployee");
         return mv;
     }
+
+    public ModelAndView trasferCompatencyEvaluationInEmployeeMaster(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        List<?> list = appraisalPerformanceService.readEmpIdByAppraisalPerformanceId();
+        for (Object o : list) {
+            Object[] s = (Object[]) o;
+            EmployeeMaster employeeMaster = employeeMasterService.readById(Integer.parseInt("" + s[0]));
+            employeeMaster.setCompetencyEvaluationId(Integer.parseInt("" + s[1]));
+            employeeMasterService.update(employeeMaster);
+        }
+        mv.setViewName("forward:logIn.htm?act=dashboard");
+        return mv;
+    }
 }

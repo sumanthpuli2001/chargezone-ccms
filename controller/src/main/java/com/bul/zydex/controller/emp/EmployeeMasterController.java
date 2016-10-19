@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller.emp;
 
+import com.bul.zydex.model.CompetencyEvaluationMaster;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
@@ -79,6 +80,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         locationList(request);
         shiftRotaionList(request);
         setZydexLocationList(request);
+        competencyList(request);
         //master's data setting completed on request
 //        shiftList(request);
         hoursBasisList(request);
@@ -110,6 +112,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         shiftRotaionList(request);
         hoursBasisList(request);
         setZydexLocationList(request);
+        competencyList(request);
         //DeowpDown list//
 //        String reasonForLeaving = request.getParameter("password");
         String userName = request.getParameter("userName");
@@ -125,6 +128,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String dateOfJoining = request.getParameter("dateOfJoining");
         String dateOfBirth = request.getParameter("dateOfBirth");
         String shiftMasterId = request.getParameter("shiftMasterId");
+        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
         userMaster.setUserName(userName);
         if (employeeMaster.getUserMaster() != null) {
             if (employeeMaster.getUserMaster().getPassword() != null) {
@@ -132,6 +136,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 //if we directly gettting 'employeeMaster.getUserMaster().getPassword()' its possibility for nullpointer exception.
             }
         }
+     
         userMaster.setPassword(password);
         SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
         Date DOB = new Date();
@@ -174,6 +179,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //            By Irfan
 //            **********************************************************************************
             request.setAttribute("shiftName", shiftMasterId1);
+            request.setAttribute("competencyEvaluationId", competencyEvaluationId);
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid.");
             mv.addAllObjects(errors.getModel());
@@ -207,6 +213,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     employeeMaster.setShiftHoursId(Integer.parseInt(shfitId));
                 }
             }
+            employeeMaster.setCompetencyEvaluationId(Integer.parseInt(competencyEvaluationId));
             // employeeMaster.setId(userMaster.getId());
             employeeMaster.setUserMaster(userMaster);
 //                employeeMaster.setReportingManagerLevel1(reportingManagerLevel1);
@@ -576,6 +583,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         locationList(request);
         shiftRotaionList(request);
         setZydexLocationList(request);
+        
 //        shiftList(request);
         hoursBasisList(request);
         //getLastYearPerformance Ratings Of Employee For ReadOnly.s

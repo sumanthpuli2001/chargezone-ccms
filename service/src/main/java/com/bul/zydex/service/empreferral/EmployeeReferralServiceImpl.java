@@ -46,5 +46,20 @@ public class EmployeeReferralServiceImpl<T> extends GenericsServiceImpl<T> imple
 
         return employeeReferralDAO.getReportingManagerOfEmpRefAdmin();
     }
+    @Override
+     public List<?> checkPositionReferd(final T object){
+
+        return employeeReferralDAO.checkPositionReferd(object);
+    }
+    @Override
+      public List<?> finalApproveByHrHead(){
+
+        return employeeReferralDAO.finalApproveByHrHead();
+    }
+    @Override
+      public List<?> finalApproveList(T object){
+
+        return employeeReferralDAO.finalApproveList(object);
+    }
 
 }

@@ -1193,22 +1193,22 @@
                                                     <!--</div>-->
                                                     <%--</c:if>--%>
 
-                                                    <c:if test="${empty competencyEvaluationList[0][2].title || appraisalPerformanceMaster.managerStatus ne 1 }">
+                                                    <%--<c:if test="${empty competencyEvaluationList[0][2].title || appraisalPerformanceMaster.managerStatus ne 1 }">--%>
 
-                                                        <div>
-                                                            <select name="competencyEvaluation_Id" id="competencyEvaluation_Id" class="form-control" onchange="ajaxfun();"/>
-                                                            <option value="">--SELECT--</option>
-                                                            <c:forEach var="competencyMap" items="${competencyMap}">
-                                                                <c:if test="${competencyEvaluationList[0][2].title  eq competencyMap.value}">
-                                                                    <option value="${competencyMap.key}" selected="true">${competencyMap.value}</option>
-                                                                </c:if>
-                                                                <c:if test="${competencyEvaluationList[0][2].title  ne competencyMap.value}">
-                                                                    <option value="${competencyMap.key}">${competencyMap.value}</option>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                            </select>
-                                                        </div>
-                                                    </c:if>
+                                                    <!--<div>-->
+                                                    <!--<select name="competencyEvaluation_Id" id="competencyEvaluation_Id" class="form-control" onchange="ajaxfun();"/>-->
+                                                    <!--<option value="">--SELECT--</option>-->
+                                                    <%--<c:forEach var="competencyMap" items="${competencyMap}">--%>
+                                                    <%--<c:if test="${competencyEvaluationList[0][2].title  eq competencyMap.value}">--%>
+                                                    <!--<option value="$/{competencyMap.key}" selected="true">$/{competencyMap.value}</option>-->
+                                                    <%--</c:if>--%>
+                                                    <%--<c:if test="${competencyEvaluationList[0][2].title  ne competencyMap.value}">--%>
+                                                    <!--<option value="$/{competencyMap.key}">$/{competencyMap.value}</option>-->
+                                                    <%--</c:if>--%>
+                                                    <%--</c:forEach>--%>
+                                                    <!--</select>-->
+                                                    <!--</div>-->
+                                                    <%--</c:if>--%>
 
                                                     <c:if test="${appraisalPerformanceMaster.managerStatus eq 1 && !empty competencyEvaluationList[0][2].title}">
                                                         <div><input type="text" id="competencyEvaluation_Id" class="form-control" name="competencyEvaluation_Id" value="${competencyEvaluationList[0][2].title}" readonly="true"></div>
@@ -2292,6 +2292,8 @@
             }
 //
         } else if (flag11 !== 'true' && flagmid === 'true' && flagEndId !== 'true') {
+//            $(".displayAction :input").attr("readOnly", true);
+//            $(".displayAction1 :input").attr("readOnly", true);
 //            alert("NO2 flage Found");
             if (employeeStatusVar === '1') {
                 $("#form1 :input").attr("disabled", true);
@@ -2303,23 +2305,23 @@
                 $("#btn6").attr("disabled", false);
                 $("#btn7").attr("disabled", false);
                 $(".close").attr("disabled", false);
-
+//
             }
 //
         } else if (flag11 !== 'true' && flagmid !== 'true' && flagEndId === 'true') {
 //            alert("NO3 flage Found");
-            if (employeeStatusVar === '1') {
-                $("#form1 :input").attr("disabled", true);
-                $("#btn1").attr("disabled", false);
-                $("#btn2").attr("disabled", false);
-                $("#btn3").attr("disabled", false);
-                $("#btn4").attr("disabled", false);
-                $("#btn5").attr("disabled", false);
-                $("#btn6").attr("disabled", false);
-                $("#btn7").attr("disabled", false);
-                $(".close").attr("disabled", false);
-
-            }
+//            if (employeeStatusVar === '1') {
+//                $("#form1 :input").attr("disabled", true);
+//                $("#btn1").attr("disabled", false);
+//                $("#btn2").attr("disabled", false);
+//                $("#btn3").attr("disabled", false);
+//                $("#btn4").attr("disabled", false);
+//                $("#btn5").attr("disabled", false);
+//                $("#btn6").attr("disabled", false);
+//                $("#btn7").attr("disabled", false);
+//                $(".close").attr("disabled", false);
+//
+//            }
 
         } else {
             $(".displayAction :input").attr("readOnly", true);
@@ -2358,12 +2360,31 @@
             if (objEvent.keyCode == 9) {  //tab pressed
                 objEvent.preventDefault(); // stops its action
             }
-        })
+        });
+
+        var w1 = document.getElementById("weightageScore").value;
+        if (w1 < 75 || w1 > 75) {
+            weitageAlert();
+            return false;
+        }
+        $(document).ready(function () {
+//            alert('${sessionScope.employeeInfo.competencyEvaluationId}');
+
+            var subCompentencyCountId = document.getElementById("subCompentencyCount").value;
+            if (subCompentencyCountId == 0) {
+                myajaxfun1('${sessionScope.employeeInfo.competencyEvaluationId}');
+            }
+        });
 //        $(".btn-warnings").click(function () {
 //            //alert("The paragraph was clicked.");
 //            event.preventDefault();
 //            $(".btn-warnings').removeAttr("disabled")
 //        });
+//        $("form").submit(function(event) {
+//        if ($("input:first").val() === "75") {
+//        $("span").text("Validated...").show();
+//                return;
+//        }
 
     </script>
     <style>

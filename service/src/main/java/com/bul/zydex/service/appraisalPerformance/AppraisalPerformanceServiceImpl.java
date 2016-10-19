@@ -126,4 +126,9 @@ public class AppraisalPerformanceServiceImpl<T> extends GenericsServiceImpl<T> i
         return appraisalPerformanceDAO.readPendingEmployeePmpByManager(employeeId, year);
     }
 
+    @Override
+    public List<?> readEmpIdByAppraisalPerformanceId() {
+        return appraisalPerformanceDAO.readEmpIdByAppraisalPerformanceId();
+    }
+
 }

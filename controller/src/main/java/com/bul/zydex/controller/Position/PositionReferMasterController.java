@@ -5,7 +5,9 @@
  */
 package com.bul.zydex.controller.Position;
 
+import com.bul.zydex.model.EmployeeReferral;
 import com.bul.zydex.model.PositionReferMaster;
+import com.bul.zydex.service.empreferral.EmployeeReferralService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,10 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author Irfan
  */
-public class PositionReferMasterController extends PositionReferMasterAbstract{
+public class PositionReferMasterController extends PositionReferMasterAbstract {
 
     public ModelAndView showList(HttpServletRequest request, HttpServletResponse response, PositionReferMaster positionReferMaster) throws Exception {
-        List<?> positionList = positionReferMasterService.read();
+        List<?> positionList = positionReferMasterService.readPositionData();
         return new ModelAndView("Position/PositionList", "positionList", positionList);
     }
 
@@ -57,54 +59,19 @@ public class PositionReferMasterController extends PositionReferMasterAbstract{
 
     public ModelAndView deleteClick(HttpServletRequest request, HttpServletResponse response, PositionReferMaster positionReferMaster) throws Exception {
         String[] checkId = request.getParameterValues("checkId");
-        String checkStr = "";
         ModelAndView mv = new ModelAndView();
-        int count = 0;
-//        List<String> checkIdList = Arrays.asList(checkId);
-//            checkIdList.forEach((checkedValues) -> departmentMasterService.delete(Integer.parseInt(checkedValues)));
-        boolean flag = false;
         for (String checkedValues : checkId) {
             try {
-                positionReferMasterService.delete(Integer.parseInt(checkedValues));
+                positionReferMaster = positionReferMasterService.readById(Integer.parseInt(checkedValues));
+                positionReferMaster.setStatus(true);
+                positionReferMasterService.update(positionReferMaster);
             } catch (Exception e) {
-                try {
-                    positionReferMaster = positionReferMasterService.readById(Integer.parseInt(checkedValues));
-                    if (count == 0) {
-                        checkStr += positionReferMaster.getPositionName();
-                    } else {
-                        checkStr += "," + positionReferMaster.getPositionName();
-                    }
-                    count++;
-                    flag = true;
-                } catch (Exception ee) {
 
-                }
             }
         }
-        if (flag) {
-            mv.addObject("failureMessage", "Error : In Use, Can't Be Deleted.....  " + "<b>" + checkStr + "</b>");
-        } else {
-            mv.addObject("successMessage", "Information Is Deleted Successfully.");
-        }
+        mv.addObject("successMessage", "Information Is Deleted Successfully.");
         mv.setViewName("forward:positionReferMaster.htm?act=showList");
         return mv;
     }
-
-//    public ModelAndView hrDashboard(HttpServletRequest request, HttpServletResponse response, PositionReferMaster positionReferMaster) throws Exception {
-//        ModelAndView mv = new ModelAndView();
-//        List iterateEmployee = locationMasterService.readEmpByLocation();
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("");
-//        for (Object o : iterateEmployee) {
-//            Object[] temparray = (Object[]) o;
-//            sb.append("['").append(temparray[0]).append("', ").append(temparray[1]).append("],");
-//        }
-//        String locationWiseEmployeeString= sb.toString();
-//        if (locationWiseEmployeeString.length()>1) {
-//        mv.addObject("locationWiseEmployee", sb.toString().substring(0, sb.toString().length() - 1));
-//        }
-//        mv.setViewName("forward:departmentMaster.htm?act=hrDashboardResignation");
-//        return mv;
-//    }
 
 }

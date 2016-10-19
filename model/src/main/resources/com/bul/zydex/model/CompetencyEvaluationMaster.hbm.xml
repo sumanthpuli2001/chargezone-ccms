@@ -35,5 +35,11 @@
             </key>
             <one-to-many class="com.bul.zydex.model.CompetencyEvaluationTextmaster" />
         </set>
+        <set name="employeeMasters" inverse="true">
+            <key>
+                <column name="competency_evaluation_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.EmployeeMaster" />
+        </set>
     </class>
 </hibernate-mapping>

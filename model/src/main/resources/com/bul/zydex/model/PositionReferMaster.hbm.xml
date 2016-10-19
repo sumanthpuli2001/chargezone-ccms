@@ -14,5 +14,8 @@
         <property name="positionCode" type="string">
             <column name="position_code" length="45" not-null="true" />
         </property>
+        <property name="status" type="boolean">
+            <column name="status" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

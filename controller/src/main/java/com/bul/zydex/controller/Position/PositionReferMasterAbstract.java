@@ -6,8 +6,10 @@
 package com.bul.zydex.controller.Position;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.EmployeeReferral;
 import com.bul.zydex.model.PositionReferMaster;
 import com.bul.zydex.service.Position.PositionReferMasterService;
+import com.bul.zydex.service.empreferral.EmployeeReferralService;
 import org.springframework.validation.Validator;
 
 /**
@@ -18,6 +20,15 @@ public class PositionReferMasterAbstract extends CustomAbstract{
     
     protected Validator positionReferMasterValidator;
     protected PositionReferMasterService<PositionReferMaster> positionReferMasterService;
+    protected EmployeeReferralService<EmployeeReferral> employeeReferralService;
+
+    public EmployeeReferralService<EmployeeReferral> getEmployeeReferralService() {
+        return employeeReferralService;
+    }
+
+    public void setEmployeeReferralService(EmployeeReferralService<EmployeeReferral> employeeReferralService) {
+        this.employeeReferralService = employeeReferralService;
+    }
 
     public Validator getPositionReferMasterValidator() {
         return positionReferMasterValidator;

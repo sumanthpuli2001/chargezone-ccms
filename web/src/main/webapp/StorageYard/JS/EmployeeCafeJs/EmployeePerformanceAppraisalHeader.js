@@ -1360,7 +1360,7 @@ $(document).on("click", ":submit", function (e) {
                     document.getElementById("kraCategoryMapOther" + i).required = true;
                     document.getElementById("priority" + i).required = true;
                     document.getElementById("midYearDivOther" + i).required = true;
-                    document.getElementById("endYearDivOther" + i).required = true;
+//                    document.getElementById("endYearDivOther" + i).required = true;
                     document.getElementById("empMidyearSelfassessmentGoalActivities" + i).required = true;
                 }
             }
@@ -1699,7 +1699,7 @@ $(document).ready(function () {
     } else {
 
 //        offTimeline
-       
+
         for (i = 1; i <= kragoalLength; i++) {
             document.getElementById('kraGoal' + i).readOnly = true;
             document.getElementById("metric" + i).readOnly = true;
@@ -2280,3 +2280,85 @@ function optionsofKraCategoryOther(id) {
         obj2.appendChild(opt2);
     }
 }
+
+
+
+    function myajaxfun1(competencyEvaluationId) {
+
+//
+//        alert('Dhaval Parmar' + competencyEvaluationId);
+        $.ajax({
+            type: "POST",
+            url: "competencyEvaluationTextmaster.htm?act=ajaxCall&competencyEvaluationId=" + competencyEvaluationId,
+//                    data: "selectedvalue=" + selectedVal,
+            data: {"selectedvalue": competencyEvaluationId},
+            dataType: "text",
+            success: function (responseTxt) {
+//                        alert(responseTxt);
+                var subCompentency = document.getElementById("demo9").innerHTML = responseTxt;
+                var flag11 = document.getElementById("flagId").value;
+                var flagMidId = document.getElementById("flagMidId").value;
+                var flagEndId = document.getElementById("flagEndId").value;
+                var count = document.getElementById("subCompentencyCount").value;
+//            alert('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' + count);
+//            alert('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' + flag11);
+                if (flag11 == 'true') {
+                    for (i = 1; i <= count; i++) {
+
+                        var compentencyMidYear = document.getElementById("compentencyMidYear" + i).value;
+//                    document.getElementById("compentencyMidYear" + i).disabled = true;
+                        document.getElementById("compentencyMidYear" + i).style.pointerEvents = "none";
+                        document.getElementById("compentencyMidYear" + i).style.cursor = "default";
+                        document.getElementById("compentencyMidRemark" + i).readOnly = true;
+                        document.getElementById("compentencyEndYear" + i).style.pointerEvents = "none";
+                        document.getElementById("compentencyEndYear" + i).style.cursor = "default";
+                        document.getElementById("compentencyEndRemark" + i).readOnly = true;
+                    }
+                }
+                if (flagMidId == 'true') {
+//                alert("fdfddffhdf");
+                    for (i = 1; i <= count; i++) {
+
+                        var compentencyMidYear = document.getElementById("compentencyStartYear" + i).value;
+//                    document.getElementById("compentencyMidYear" + i).disabled = true;
+                        document.getElementById("compentencyStartYear" + i).style.pointerEvents = "none";
+                        document.getElementById("compentencyStartYear" + i).style.cursor = "default";
+                        document.getElementById("compentencyStartRemark" + i).readOnly = true;
+                        document.getElementById("compentencyEndYear" + i).style.pointerEvents = "none";
+                        document.getElementById("compentencyEndYear" + i).style.cursor = "default";
+                        document.getElementById("compentencyEndRemark" + i).readOnly = true;
+                    }
+                }
+                if (flagEndId == 'true') {
+//                alert("fdfddffhdf");
+                    for (i = 1; i <= count; i++) {
+
+                        var compentencyMidYear = document.getElementById("compentencyStartYear" + i).value;
+//                    document.getElementById("compentencyMidYear" + i).disabled = true;
+                        document.getElementById("compentencyStartYear" + i).style.pointerEvents = "none";
+                        document.getElementById("compentencyStartYear" + i).style.cursor = "default";
+                        document.getElementById("compentencyStartRemark" + i).readOnly = true;
+                        document.getElementById("compentencyMidYear" + i).style.pointerEvents = "none";
+                        document.getElementById("compentencyMidYear" + i).style.cursor = "default";
+                        document.getElementById("compentencyMidRemark" + i).readOnly = true;
+                    }
+                }
+
+                //var arr=new Array();
+
+                //arr=responseTxt;
+
+                //if (selectedVal == 'Air') {
+//                            document.getElementById("deviateId1").value = responseTxt;
+//                        } else {
+//
+//                            document.getElementById("deviateId1").value = "";
+//                        }
+//                        data = response;
+//                        return response;
+            },
+            error: function () {
+                alert('Please Select Only One Competency Evaluation');
+            }
+        });
+    }

@@ -6,7 +6,7 @@
     <head>
         <!--        <script>
                     jQuery(document).ready(function () {
-                        localStorage.setItem("reportingCheck",${fn:length(reportingManagerList)>0});
+                        lSocalStorage.setItem("reportingCheck",${fn:length(reportingManagerList)>0});
                         alert("from storage     " + localStorage.getItem("reportingCheck"));
 
                     });
@@ -250,8 +250,8 @@
                     <ul class="treeview-menu">
                         <!--<li><a href="appraisalPerformance.htm?act=createClick"><i class="fa fa-circle-o"></i>Performance Appraisal </a></li>-->
                         <%--<c:if test="${sessionScope.checkReportingManager}">--%>
-                            <li><a href="appraisalPerformance.htm?act=searchOwnappraisalPerformanceSubmit"><i class="fa fa-circle-o"></i>PMP Form</a></li>
-                            <li><a href="performanceImprovementPlanMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>PIP Form</a></li>
+                        <li><a href="appraisalPerformance.htm?act=searchOwnappraisalPerformanceSubmit"><i class="fa fa-circle-o"></i>PMP Form</a></li>
+                        <li><a href="performanceImprovementPlanMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>PIP Form</a></li>
                             <%--</c:if>--%>
                         <li><a href="appraisalPerformance.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Subordinates PMP</a></li>
                         <li><a href="performanceImprovementPlanMaster.htm?act=viewPipListByManager"><i class="fa fa-circle-o"></i>Subordinates PIP</a></li>
@@ -507,7 +507,8 @@
                             <li><a href="policyDeviationForAir.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Policy Deviation Master</a></li>
                             <li><a href="visitorVisitedLocation.htm?act=createClick"><i class="fa fa-circle-o"></i>Visitor Visited Location</a></li>
                             <li><a href="timeAttandanceFlaxibleMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Time Attendance Flexible</a></li>
-
+                            <li><a href="urlMaster.htm?act=viewUrlResult"><i class="fa fa-pie-chart fa-lg"></i>Web Service URL</a></li>
+                            <li><a href="appraisalPerformance.htm?act=trasferCompatencyEvaluationInEmployeeMaster"><i class="fa fa-pie-chart fa-lg"></i>Competency Evaluation Transfer</a></li>
                         </ul>
                     </li>
                 </c:if>
@@ -536,6 +537,9 @@
                             <li><a href="employeeReferral.htm?act=currentOpeningUploadClick"><i class="fa fa-circle-o"></i>Upload Current Opening</a></li>
                             <li><a href="employeeReferral.htm?act=showList"><i class="fa fa-circle-o"></i>Employee Referral List</a></li>
                             </c:if>
+                            <c:if test="${sessionScope.employeeInfo.designationMaster.id eq 114 && sessionScope.employeeInfo.departmentMaster.id  eq 59}">
+                            <li><a href="employeeReferral.htm?act=finalApproveList"><i class="fa fa-circle-o"></i>Final Approve List</a></li>
+                            </c:if>   
                         <li><a href="employeeReferral.htm?act=createReferral"><i class="fa fa-circle-o"></i>Employee Referral</a></li>
                         <li><a href="employeeReferral.htm?act=showCurrentOpening"><i class="fa fa-circle-o"></i>Current Opening</a></li>
 
@@ -587,13 +591,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                 </li>
-                <li class="treeview">
-                    <a href="urlMaster.htm?act=viewUrlResult">
-                        <i class="fa fa-pie-chart fa-lg"></i>
-                        <span>Web Service URL</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                </li>
+
             </ul>
         </section>
         <!-- /.sidebar -->

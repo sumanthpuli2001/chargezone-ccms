@@ -493,6 +493,19 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
 
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> readEmpIdByAppraisalPerformanceId() {
+
+        String query = "";
+
+        query += "  SELECT b.employeeMaster.id,a.competencyEvaluationMaster.id"
+                + " FROM AppraisalPerformanceCompetencyEvaluation a "
+                + " left join a.appraisalPerformanceMaster b "
+                + " GROUP BY b.id";
+
+        return getHibernateTemplate().find(query);
+    }
 }
 //                *******************************************Main Queary**************************************************
 //                + " (select concat(start_date,'-',end_date) "

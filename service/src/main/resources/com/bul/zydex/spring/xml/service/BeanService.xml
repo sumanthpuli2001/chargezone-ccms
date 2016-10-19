@@ -342,9 +342,6 @@
         <property name="urlMasterDAO" ref="urlMasterDAO1"/>
     </bean>  
    
-    <bean id="registerMobForPunchService1" class="com.bul.zydex.service.RegisterMobForPunch.RegisterMobForPunchServiceImpl">
-        <property name="registerMobForPunchDAO" ref="registerMobForPunchDAO1"/>
-    </bean>  
     <bean id="pmpFormStatusMasterService1" class="com.bul.zydex.service.PmpFormStatusMaster.PmpFormStatusMasterServiceImpl">
         <property name="pmpFormStatusMasterDAO" ref="pmpFormStatusMasterDAO1"/>
     </bean>  

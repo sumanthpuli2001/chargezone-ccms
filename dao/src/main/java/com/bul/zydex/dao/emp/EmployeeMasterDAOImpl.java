@@ -1801,4 +1801,14 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readByJoinDate(String date) {
+        String query = "";
+        query += " "
+                + " FROM EmployeeMaster a "
+                + " Where STR_TO_DATE(a.dateOfJoining,'%d/%m/%Y')= STR_TO_DATE('" + date + "','%d/%m/%Y')";
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

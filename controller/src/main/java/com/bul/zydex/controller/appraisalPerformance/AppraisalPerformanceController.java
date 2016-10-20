@@ -45,6 +45,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
+import org.bouncycastle.util.Strings;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -1762,16 +1763,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             if (!midSelfApproval.equals("Approved")) {
                                 midSelfApproval = "Pendding";
                             }
-                        } else {
-                            if (currentDate.after(MidendDate)) {
-                                if (!midSelfApproval.equals("Approved")) {
-                                    midSelfApproval = "Expired";
-                                }
-                            } else {
-                                if (!midSelfApproval.equals("Approved")) {
-                                    midSelfApproval = "";
-                                }
+                        } else if (currentDate.after(MidendDate)) {
+                            if (!midSelfApproval.equals("Approved")) {
+                                midSelfApproval = "Expired";
                             }
+                        } else if (!midSelfApproval.equals("Approved")) {
+                            midSelfApproval = "";
                         }
                         /// Manager side Weight==>Time Line First////
                         Date ManagerEndDate = dateFormat.parse(appraisalFillingData.getManagerEndDate());
@@ -1780,16 +1777,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             if (!goalApproval.equals("Approved")) {
                                 goalApproval = "Pendding";
                             }
-                        } else {
-                            if (currentDate.after(ManagerEndDate)) {
-                                if (!goalApproval.equals("Approved") && !goalApproval.equals("Rework")) {
-                                    goalApproval = "Expired";
-                                }
-                            } else {
-                                if (!goalApproval.equals("Approved") && !goalApproval.equals("Rework")) {
-                                    goalApproval = "";
-                                }
+                        } else if (currentDate.after(ManagerEndDate)) {
+                            if (!goalApproval.equals("Approved") && !goalApproval.equals("Rework")) {
+                                goalApproval = "Expired";
                             }
+                        } else if (!goalApproval.equals("Approved") && !goalApproval.equals("Rework")) {
+                            goalApproval = "";
                         }
 
                         /// Manager side self assements==>Time Line Mid-Time////
@@ -1799,16 +1792,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             if (!managerMidSelfApproval.equals("Approved")) {
                                 managerMidSelfApproval = "Pendding";
                             }
-                        } else {
-                            if (currentDate.after(ManagerMidDate)) {
-                                if (!managerMidSelfApproval.equals("Approved") && !managerMidSelfApproval.equals("Rework")) {
-                                    managerMidSelfApproval = "Expired";
-                                }
-                            } else {
-                                if (!managerMidSelfApproval.equals("Approved") && !managerMidSelfApproval.equals("Rework")) {
-                                    managerMidSelfApproval = "";
-                                }
+                        } else if (currentDate.after(ManagerMidDate)) {
+                            if (!managerMidSelfApproval.equals("Approved") && !managerMidSelfApproval.equals("Rework")) {
+                                managerMidSelfApproval = "Expired";
                             }
+                        } else if (!managerMidSelfApproval.equals("Approved") && !managerMidSelfApproval.equals("Rework")) {
+                            managerMidSelfApproval = "";
                         }
 
                         //////// End year for employee///////
@@ -1818,16 +1807,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             if (!endSelfApproval.equals("Approved")) {
                                 endSelfApproval = "Pendding";
                             }
-                        } else {
-                            if (currentDate.after(endEndDate)) {
-                                if (!endSelfApproval.equals("Approved")) {
-                                    endSelfApproval = "Expired";
-                                }
-                            } else {
-                                if (!endSelfApproval.equals("Approved")) {
-                                    endSelfApproval = "";
-                                }
+                        } else if (currentDate.after(endEndDate)) {
+                            if (!endSelfApproval.equals("Approved")) {
+                                endSelfApproval = "Expired";
                             }
+                        } else if (!endSelfApproval.equals("Approved")) {
+                            endSelfApproval = "";
                         }
 
                         /////////////////////////Manager End year////////////////////////////////////
@@ -1837,16 +1822,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             if (!managerEndSelfApproval.equals("Approved")) {
                                 managerEndSelfApproval = "Pendding";
                             }
-                        } else {
-                            if (currentDate.after(managerYearEndEndDate)) {
-                                if (!managerEndSelfApproval.equals("Approved") && !managerEndSelfApproval.equals("Rework")) {
-                                    managerEndSelfApproval = "Expired";
-                                }
-                            } else {
-                                if (!managerEndSelfApproval.equals("Approved") && !managerEndSelfApproval.equals("Rework")) {
-                                    managerEndSelfApproval = "";
-                                }
+                        } else if (currentDate.after(managerYearEndEndDate)) {
+                            if (!managerEndSelfApproval.equals("Approved") && !managerEndSelfApproval.equals("Rework")) {
+                                managerEndSelfApproval = "Expired";
                             }
+                        } else if (!managerEndSelfApproval.equals("Approved") && !managerEndSelfApproval.equals("Rework")) {
+                            managerEndSelfApproval = "";
                         }
 
                     }
@@ -3882,16 +3863,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         if (!goalSetting.equals("Approved")) {
                             goalSetting = "Pendding";
                         }
-                    } else {
-                        if (currentDate.after(EndDate)) {
-                            if (!goalSetting.equals("Approved")) {
-                                goalSetting = "Expired";
-                            }
-                        } else {
-                            if (!goalSetting.equals("Approved")) {
-                                goalSetting = "";
-                            }
+                    } else if (currentDate.after(EndDate)) {
+                        if (!goalSetting.equals("Approved")) {
+                            goalSetting = "Expired";
                         }
+                    } else if (!goalSetting.equals("Approved")) {
+                        goalSetting = "";
                     }
 
                     // Middel year employee
@@ -3901,16 +3878,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         if (!midSelfApproval.equals("Approved")) {
                             midSelfApproval = "Pendding";
                         }
-                    } else {
-                        if (currentDate.after(MidendDate)) {
-                            if (!midSelfApproval.equals("Approved")) {
-                                midSelfApproval = "Expired";
-                            }
-                        } else {
-                            if (!midSelfApproval.equals("Approved")) {
-                                midSelfApproval = "";
-                            }
+                    } else if (currentDate.after(MidendDate)) {
+                        if (!midSelfApproval.equals("Approved")) {
+                            midSelfApproval = "Expired";
                         }
+                    } else if (!midSelfApproval.equals("Approved")) {
+                        midSelfApproval = "";
                     }
                     /// Manager side Weight==>Time Line First////
                     Date ManagerEndDate = dateFormat.parse(appraisalFillingData.getManagerEndDate());
@@ -3919,16 +3892,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         if (!goalApproval.equals("Approved")) {
                             goalApproval = "Pendding";
                         }
-                    } else {
-                        if (currentDate.after(ManagerEndDate)) {
-                            if (!goalApproval.equals("Approved") && !goalApproval.equals("Rework")) {
-                                goalApproval = "Expired";
-                            }
-                        } else {
-                            if (!goalApproval.equals("Approved") && !goalApproval.equals("Rework")) {
-                                goalApproval = "Pendding";
-                            }
+                    } else if (currentDate.after(ManagerEndDate)) {
+                        if (!goalApproval.equals("Approved") && !goalApproval.equals("Rework")) {
+                            goalApproval = "Expired";
                         }
+                    } else if (!goalApproval.equals("Approved") && !goalApproval.equals("Rework")) {
+                        goalApproval = "Pendding";
                     }
 
                     /// Manager side self assements==>Time Line Mid-Time////
@@ -3938,16 +3907,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         if (!managerMidSelfApproval.equals("Approved")) {
                             managerMidSelfApproval = "Pendding";
                         }
-                    } else {
-                        if (currentDate.after(ManagerMidDate)) {
-                            if (!managerMidSelfApproval.equals("Approved")) {
-                                managerMidSelfApproval = "Expired";
-                            }
-                        } else {
-                            if (!managerMidSelfApproval.equals("Approved")) {
-                                managerMidSelfApproval = "";
-                            }
+                    } else if (currentDate.after(ManagerMidDate)) {
+                        if (!managerMidSelfApproval.equals("Approved")) {
+                            managerMidSelfApproval = "Expired";
                         }
+                    } else if (!managerMidSelfApproval.equals("Approved")) {
+                        managerMidSelfApproval = "";
                     }
 
                     //////// End year for employee///////
@@ -3957,16 +3922,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         if (!endSelfApproval.equals("Approved")) {
                             endSelfApproval = "Pendding";
                         }
-                    } else {
-                        if (currentDate.after(endEndDate)) {
-                            if (!endSelfApproval.equals("Approved")) {
-                                endSelfApproval = "Expired";
-                            }
-                        } else {
-                            if (!endSelfApproval.equals("Approved")) {
-                                endSelfApproval = "";
-                            }
+                    } else if (currentDate.after(endEndDate)) {
+                        if (!endSelfApproval.equals("Approved")) {
+                            endSelfApproval = "Expired";
                         }
+                    } else if (!endSelfApproval.equals("Approved")) {
+                        endSelfApproval = "";
                     }
 
                     /////////////////////////Manager End year////////////////////////////////////
@@ -3976,16 +3937,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         if (!managerEndSelfApproval.equals("Approved")) {
                             managerEndSelfApproval = "Pendding";
                         }
-                    } else {
-                        if (currentDate.after(managerYearEndEndDate)) {
-                            if (!managerEndSelfApproval.equals("Approved") && !managerEndSelfApproval.equals("Rework")) {
-                                managerEndSelfApproval = "Expired";
-                            }
-                        } else {
-                            if (!managerEndSelfApproval.equals("Approved") && !managerEndSelfApproval.equals("Rework")) {
-                                managerEndSelfApproval = "";
-                            }
+                    } else if (currentDate.after(managerYearEndEndDate)) {
+                        if (!managerEndSelfApproval.equals("Approved") && !managerEndSelfApproval.equals("Rework")) {
+                            managerEndSelfApproval = "Expired";
                         }
+                    } else if (!managerEndSelfApproval.equals("Approved") && !managerEndSelfApproval.equals("Rework")) {
+                        managerEndSelfApproval = "";
                     }
                 }
             }
@@ -4005,16 +3962,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     if (!goalSetting.equals("Approved")) {
                         goalSetting = "Pendding";
                     }
-                } else {
-                    if (currentDate.after(startendDate)) {
-                        if (!goalSetting.equals("Approved")) {
-                            goalSetting = "Expired";
-                        }
-                    } else {
-                        if (!goalSetting.equals("Approved")) {
-                            goalSetting = "";
-                        }
+                } else if (currentDate.after(startendDate)) {
+                    if (!goalSetting.equals("Approved")) {
+                        goalSetting = "Expired";
                     }
+                } else if (!goalSetting.equals("Approved")) {
+                    goalSetting = "";
                 }
 
                 /// Manager side Weight==>Time Line First////
@@ -4024,16 +3977,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     if (!goalApproval.equals("Approved")) {
                         goalApproval = "Pendding";
                     }
-                } else {
-                    if (currentDate.after(ManagerEndDate)) {
-                        if (!goalApproval.equals("Approved")) {
-                            goalApproval = "Expired";
-                        }
-                    } else {
-                        if (!goalApproval.equals("Approved")) {
-                            goalApproval = "";
-                        }
+                } else if (currentDate.after(ManagerEndDate)) {
+                    if (!goalApproval.equals("Approved")) {
+                        goalApproval = "Expired";
                     }
+                } else if (!goalApproval.equals("Approved")) {
+                    goalApproval = "";
                 }
 
                 /////////////////////mid year Employee//////////////////////
@@ -4043,16 +3992,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     if (!midSelfApproval.equals("Approved")) {
                         midSelfApproval = "Pendding";
                     }
-                } else {
-                    if (currentDate.after(MidendDate)) {
-                        if (!midSelfApproval.equals("Approved")) {
-                            midSelfApproval = "Expired";
-                        }
-                    } else {
-                        if (!midSelfApproval.equals("Approved")) {
-                            midSelfApproval = "";
-                        }
+                } else if (currentDate.after(MidendDate)) {
+                    if (!midSelfApproval.equals("Approved")) {
+                        midSelfApproval = "Expired";
                     }
+                } else if (!midSelfApproval.equals("Approved")) {
+                    midSelfApproval = "";
                 }
 
                 /// Manager side self assements==>Time Line Mid-Time////
@@ -4062,16 +4007,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     if (!managerMidSelfApproval.equals("Approved")) {
                         managerMidSelfApproval = "Pendding";
                     }
-                } else {
-                    if (currentDate.after(ManagerMidDate)) {
-                        if (!managerMidSelfApproval.equals("Approved")) {
-                            managerMidSelfApproval = "Expired";
-                        }
-                    } else {
-                        if (!managerMidSelfApproval.equals("Approved")) {
-                            managerMidSelfApproval = "";
-                        }
+                } else if (currentDate.after(ManagerMidDate)) {
+                    if (!managerMidSelfApproval.equals("Approved")) {
+                        managerMidSelfApproval = "Expired";
                     }
+                } else if (!managerMidSelfApproval.equals("Approved")) {
+                    managerMidSelfApproval = "";
                 }
                 //////// End year for employee///////
                 Date endEndDate = dateFormat.parse(appraisalFillingData.getYearEndEndDate());
@@ -4080,16 +4021,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     if (!endSelfApproval.equals("Approved")) {
                         endSelfApproval = "Pendding";
                     }
-                } else {
-                    if (currentDate.after(endEndDate)) {
-                        if (!endSelfApproval.equals("Approved")) {
-                            endSelfApproval = "Expired";
-                        }
-                    } else {
-                        if (!endSelfApproval.equals("Approved")) {
-                            endSelfApproval = "";
-                        }
+                } else if (currentDate.after(endEndDate)) {
+                    if (!endSelfApproval.equals("Approved")) {
+                        endSelfApproval = "Expired";
                     }
+                } else if (!endSelfApproval.equals("Approved")) {
+                    endSelfApproval = "";
                 }
 
                 /////////////////////////Manager End year////////////////////////////////////
@@ -4099,16 +4036,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     if (!managerEndSelfApproval.equals("Approved")) {
                         managerEndSelfApproval = "Pendding";
                     }
-                } else {
-                    if (currentDate.after(managerYearEndEndDate)) {
-                        if (!managerEndSelfApproval.equals("Approved")) {
-                            managerEndSelfApproval = "Expired";
-                        }
-                    } else {
-                        if (!managerEndSelfApproval.equals("Approved")) {
-                            managerEndSelfApproval = "";
-                        }
+                } else if (currentDate.after(managerYearEndEndDate)) {
+                    if (!managerEndSelfApproval.equals("Approved")) {
+                        managerEndSelfApproval = "Expired";
                     }
+                } else if (!managerEndSelfApproval.equals("Approved")) {
+                    managerEndSelfApproval = "";
                 }
 
             }
@@ -5195,5 +5128,95 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         }
         mv.setViewName("redirect:logIn.html?act=dashboard");
         return mv;
+    }
+
+    private synchronized void mailSendPmp() throws Exception {
+
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        Date date = cal.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String doj = sdf.format(date);
+        List<?> empList = employeeMasterService.readByJoinDate(doj);
+        if (!empList.isEmpty()) {
+            for (Object o : empList) {
+                employeeMaster = (EmployeeMaster) o;
+                int eid = employeeMaster.getId();
+                List<?> pmpList = appraisalPerformanceService.readByEmpID(eid);
+                if (pmpList.isEmpty()) {
+                    EmailTemplate emailTemplate = emailTemplateService.readById(141);
+                    String emailId = employeeMaster.getEmailAddress();
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMaster.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+                        }
+                    }
+                }
+            }
+        }
+
+        Calendar cal1 = Calendar.getInstance();
+        cal1.add(Calendar.MONTH, -1);
+        cal1.add(Calendar.DAY_OF_MONTH, -10);
+        Date date1 = cal1.getTime();
+        String doj1 = sdf.format(date1);
+        List<?> empList1 = employeeMasterService.readByJoinDate(doj1);
+        if (!empList1.isEmpty()) {
+            for (Object o : empList1) {
+                employeeMaster = (EmployeeMaster) o;
+                int eid = employeeMaster.getId();
+                List<?> pmpList = appraisalPerformanceService.readByEmpID(eid);
+                if (pmpList.isEmpty()) {
+                    EmailTemplate emailTemplate = emailTemplateService.readById(141);
+                    String emailId = employeeMaster.getEmailAddress();
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMaster.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+                        }
+                    }
+                }
+            }
+        }
+        Calendar cal2 = Calendar.getInstance();
+        cal2.add(Calendar.MONTH, -1);
+        cal2.add(Calendar.DAY_OF_MONTH, -20);
+        Date date2 = cal2.getTime();
+        String doj2 = sdf.format(date2);
+        List<?> empList2 = employeeMasterService.readByJoinDate(doj2);
+        if (!empList2.isEmpty()) {
+            for (Object o : empList2) {
+                employeeMaster = (EmployeeMaster) o;
+                int eid = employeeMaster.getId();
+                List<?> pmpList = appraisalPerformanceService.readByEmpID(eid);
+                if (pmpList.isEmpty()) {
+                    EmailTemplate emailTemplate = emailTemplateService.readById(141);
+                    String emailId = employeeMaster.getEmailAddress();
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMaster.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

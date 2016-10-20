@@ -45,6 +45,8 @@ public interface AppraisalPerformanceDAO<T> extends GenericsDAO<T> {
     
     public List<?> readPendingEmployeePmpByManager(String employeeId, int year);
     
-     public List<?> readEmpIdByAppraisalPerformanceId(); 
+    public List<?> readEmpIdByAppraisalPerformanceId(); 
+    
+    public List<?> readByEmpID(int id);
 
 }

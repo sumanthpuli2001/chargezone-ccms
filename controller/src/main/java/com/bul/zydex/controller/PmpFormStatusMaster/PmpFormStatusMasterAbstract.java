@@ -6,8 +6,10 @@
 package com.bul.zydex.controller.PmpFormStatusMaster;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.AppraisalPerformanceMaster;
 import com.bul.zydex.model.PmpFormStatusMaster;
 import com.bul.zydex.service.PmpFormStatusMaster.PmpFormStatusMasterService;
+import com.bul.zydex.service.appraisalPerformance.AppraisalPerformanceService;
 
 /**
  *
@@ -15,6 +17,7 @@ import com.bul.zydex.service.PmpFormStatusMaster.PmpFormStatusMasterService;
  */
 public class PmpFormStatusMasterAbstract  extends CustomAbstract{
      protected PmpFormStatusMasterService<PmpFormStatusMaster> pmpFormStatusMasterService;
+     protected AppraisalPerformanceService<AppraisalPerformanceMaster> appraisalPerformanceService;
 
     public PmpFormStatusMasterService<PmpFormStatusMaster> getPmpFormStatusMasterService() {
         return pmpFormStatusMasterService;
@@ -23,6 +26,12 @@ public class PmpFormStatusMasterAbstract  extends CustomAbstract{
     public void setPmpFormStatusMasterService(PmpFormStatusMasterService<PmpFormStatusMaster> pmpFormStatusMasterService) {
         this.pmpFormStatusMasterService = pmpFormStatusMasterService;
     }
-      
-    
+
+    public AppraisalPerformanceService<AppraisalPerformanceMaster> getAppraisalPerformanceService() {
+        return appraisalPerformanceService;
+    }
+
+    public void setAppraisalPerformanceService(AppraisalPerformanceService<AppraisalPerformanceMaster> appraisalPerformanceService) {
+        this.appraisalPerformanceService = appraisalPerformanceService;
+    }
 }

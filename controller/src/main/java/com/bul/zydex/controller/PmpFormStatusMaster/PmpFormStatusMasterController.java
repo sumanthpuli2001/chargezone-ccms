@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller.PmpFormStatusMaster;
 
+import com.bul.zydex.model.AppraisalPerformanceMaster;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.PmpFormStatusMaster;
 import java.util.ArrayList;
@@ -51,13 +52,43 @@ public class PmpFormStatusMasterController extends PmpFormStatusMasterAbstract {
     public ModelAndView editSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
+        AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
+
         String id = request.getParameter("id");
         pmpFormStatusMaster = pmpFormStatusMasterService.readById(Integer.parseInt(id));
         bind(request, pmpFormStatusMaster);
-        pmpFormStatusMasterService.update(pmpFormStatusMaster);
-        request.setAttribute("successMessage",
-                "Information : The Information is saved Successfully.");
-        mv = showpmpStatusMaster(request, response);
+        int empid = pmpFormStatusMaster.getEmployeeMaster().getId();
+        List<?>empList = appraisalPerformanceService.readByEmpID(empid);
+        if (!empList.isEmpty()) {
+            for (Object o : empList) {
+                appraisalPerformanceMaster = (AppraisalPerformanceMaster) o;
+            }
+        }
+        boolean manside = pmpFormStatusMaster.getManagerSide();
+        boolean empside = pmpFormStatusMaster.getEmployeeSide();
+        int empstatus = 0;
+        int manstatus = 0;
+        if (empside == true) {
+            empstatus = 1;
+        }
+        if (manside == true) {
+            manstatus = 1;
+        }
+        if (!manside && !empside) {
+            request.setAttribute("failureMessage",
+                    "Information : At a Time Only Manager Or Employee Side Unlock The Form.");
+            mv = viewClick(request, response);
+
+        } else {
+            pmpFormStatusMasterService.update(pmpFormStatusMaster);
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
+            appraisalPerformanceMaster.setEmployeeStatus(empstatus);
+            appraisalPerformanceMaster.setManagerkraStatus(manstatus);
+            appraisalPerformanceService.update(appraisalPerformanceMaster);
+            mv = showpmpStatusMaster(request, response);
+
+        }
         return mv;
 
     }

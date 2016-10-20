@@ -133,9 +133,11 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
     public List<?> readEmpUserIdWise(T object);
 
     public List<?> readAllSubordinate(T object);
-    
+
     public List<?> readForSendMailToAll(T object);
-    
+
     public List<?> readDepartmentWiseEmployee(T object);
+
+    public List<?> readByJoinDate(String date);
 
 }

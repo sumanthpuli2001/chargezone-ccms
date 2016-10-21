@@ -84,16 +84,11 @@
     <mapping resource="com/bul/zydex/model/QueryType.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/EmployeeReferral.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/COffLeaveRequest.hbm.xml"/>
-    
     <mapping resource="com/bul/zydex/model/PerformanceImprovementPlanMaster.hbm.xml"/>
-   
     <mapping resource="com/bul/zydex/model/ImprovementGoal.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/ActivityGoals.hbm.xml"/>
-   
     <mapping resource="com/bul/zydex/model/GoalResourceManagement.hbm.xml"/>
-   
     <mapping resource="com/bul/zydex/model/PipNextScheduledDate.hbm.xml"/>
-    
     <mapping resource="com/bul/zydex/model/AppraisalPerformanceActivities.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/PipMeeting.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/ImprovementGoalsHistory.hbm.xml"/>
@@ -106,7 +101,7 @@
     <mapping resource="com/bul/zydex/model/EmployeePunchForMobileApp.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/EmailAddMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/UrlMaster.hbm.xml"/>
-   
     <mapping resource="com.bul.zydex.model/PmpFormStatusMaster.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/RegisterMobForPunch.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

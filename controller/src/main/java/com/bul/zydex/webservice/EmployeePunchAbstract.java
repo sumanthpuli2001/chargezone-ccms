@@ -3,7 +3,9 @@ package com.bul.zydex.webservice;
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeePunchForMobileApp;
+import com.bul.zydex.model.RegisterMobForPunch;
 import com.bul.zydex.model.UserRightMaster;
+import com.bul.zydex.service.RegisterMobForPunch.RegisterMobForPunchService;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
 import com.bul.zydex.service.mobileapp.EmployeePunchForMobileAppService;
@@ -26,6 +28,7 @@ import org.json.JSONObject;
 public abstract class EmployeePunchAbstract extends CustomAbstract {
 
     protected EmployeePunchForMobileAppService<EmployeePunchForMobileApp> employeePunchForMobileAppService;
+    protected RegisterMobForPunchService<RegisterMobForPunch> registerMobForPunchService;
 
     public EmployeePunchForMobileAppService<EmployeePunchForMobileApp> getEmployeePunchForMobileAppService() {
         return employeePunchForMobileAppService;
@@ -35,6 +38,15 @@ public abstract class EmployeePunchAbstract extends CustomAbstract {
         this.employeePunchForMobileAppService = employeePunchForMobileAppService;
         
     }
+
+    public RegisterMobForPunchService<RegisterMobForPunch> getRegisterMobForPunchService() {
+        return registerMobForPunchService;
+    }
+
+    public void setRegisterMobForPunchService(RegisterMobForPunchService<RegisterMobForPunch> registerMobForPunchService) {
+        this.registerMobForPunchService = registerMobForPunchService;
+    }
+    
 
      public JSONObject doPost(HttpServletRequest request)
             throws ServletException, IOException, JSONException {

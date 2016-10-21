@@ -575,6 +575,8 @@
     </bean>
     <bean id="pmpFormStatusMasterController1" class="com.bul.zydex.controller.PmpFormStatusMaster.PmpFormStatusMasterController" parent="controllerConfig" >
         <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1"/>
+        <property name="appraisalPerformanceService" ref="appraisalPerformanceService1"/>
+        
     </bean>
 </beans>
  

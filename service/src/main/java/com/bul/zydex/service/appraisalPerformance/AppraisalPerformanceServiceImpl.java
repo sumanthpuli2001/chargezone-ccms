@@ -131,4 +131,9 @@ public class AppraisalPerformanceServiceImpl<T> extends GenericsServiceImpl<T> i
         return appraisalPerformanceDAO.readEmpIdByAppraisalPerformanceId();
     }
 
+    @Override
+    public List<?> readByEmpID(int id) {
+        return appraisalPerformanceDAO.readByEmpID(id);
+    }
+
 }

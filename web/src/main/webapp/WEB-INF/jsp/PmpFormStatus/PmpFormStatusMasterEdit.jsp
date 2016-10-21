@@ -40,7 +40,7 @@
                                 <c:if test="${!empty failureMessage}">
                                     <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
                                 </c:if>
-                                <form:form class="form-horizontal" method="post"   commandName="pmpFormStatusMaster" action="pmpFormStatusMaster.htm?act=editSubmit">
+                                <form:form class="form-horizontal" method="post"  commandName="pmpFormStatusMaster" enctype="multipart/form-data" action="pmpFormStatusMaster.htm?act=editSubmit">
                                     <form:hidden path="id"></form:hidden>
 
                                         <div class="form-group">
@@ -86,7 +86,7 @@
                                         <div class="col-sm-4">
                                             <label>Manager Side</label>&nbsp;&nbsp;
                                             <fieldset id="group1">
-                                                <form:radiobutton path="managerSide" value="true" />Lock
+                                                <form:radiobutton path="managerSide" value="true" onclick="alert('aaaaaaa');"/>Lock
                                                 <form:radiobutton path="managerSide" value="false" />Unlock
                                             </fieldset>
                                         </div>

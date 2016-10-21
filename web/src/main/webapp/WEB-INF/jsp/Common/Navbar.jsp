@@ -265,7 +265,7 @@
                             <li><a href="competencyEvaluationMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Competency Evaluation Search</a></li>
                             <!--<li><a href="competencyEvaluationTextmaster.htm?act=createClick"><i class="fa fa-circle-o"></i>Competency Evaluation Text</a></li>-->
                             <li><a href="competencyEvaluationTextmaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Competency Evaluation <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Text Result</a></li>
-                            <li class="treeview"><a href="pmpFormStatusMaster.htm?act=showpmpStatusMaster"> <i class="fa fa-pie-chart fa-lg"></i>PMP Status</span></a></li>
+                            <li class="treeview"><a href="pmpFormStatusMaster.htm?act=showpmpStatusMaster"> <i class="fa fa-circle-o"></i>Unlock PMP Form</span></a></li>
                         </c:if>
                         <li><a href="appraisal360.htm?act=dashboardResult"><i class="fa fa-circle-o"></i>360 FeedBack Form</a></li>
                             <c:if test="${sessionScope.userRight.appraisal360}">

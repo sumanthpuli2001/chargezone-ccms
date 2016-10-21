@@ -1174,7 +1174,7 @@
 
                                     <div class="box box-info collapsed-box displayAction">
                                         <div class="box-header">
-                                            <h3 class="box-title">Competency Evaluation (As Per Zydex Competency Framework) :</h3>
+                                            <h3 class="box-title">Competency Evaluation (As Per Zydex Competency Framework) :<b>${cpmname}</b></h3>
                                             <div class="box-tools pull-right">
                                                 <span id="spanId3">Expand</span><span class="btn btn-box-tool" id="btn4" data-widget="collapse" onclick="
                                                         buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></span>
@@ -1214,6 +1214,10 @@
                                                     <%--</c:if>--%>
 
                                                     <c:if test="${appraisalPerformanceMaster.managerStatus eq 1 && !empty competencyEvaluationList[0][2].title}">
+                                                        <div><input type="text" id="competencyEvaluation_Id" class="form-control" name="competencyEvaluation_Id" value="${competencyEvaluationList[0][2].title}" readonly="true"></div>
+                                                        </c:if>
+                                                        
+                                                        <c:if test="${appraisalPerformanceMaster.managerStatus ne 1}">
                                                         <div><input type="text" id="competencyEvaluation_Id" class="form-control" name="competencyEvaluation_Id" value="${competencyEvaluationList[0][2].title}" readonly="true"></div>
                                                         </c:if>
 
@@ -2365,12 +2369,10 @@
             }
         });
 
-        var w1 = document.getElementById("weightageScore").value;
-        if (w1 < 75 || w1 > 75) {
-            weitageAlert();
-            return false;
-        }
+
+//        alert('${sessionScope.employeeInfo.competencyEvaluationId}');
         $(document).ready(function () {
+
 //            alert('${sessionScope.employeeInfo.competencyEvaluationId}');
 
             var subCompentencyCountId = document.getElementById("subCompentencyCount").value;
@@ -2378,6 +2380,11 @@
                 myajaxfun1('${sessionScope.employeeInfo.competencyEvaluationId}');
             }
         });
+        //        var w1 = document.getElementById("weightageScore").value;
+//        if (w1 < 75 || w1 > 75) {
+//            weitageAlert();
+//            return false;
+//        }
 //        $(".btn-warnings").click(function () {
 //            //alert("The paragraph was clicked.");
 //            event.preventDefault();

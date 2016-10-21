@@ -506,6 +506,18 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
 
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> readByEmpID(int id) {
+        String query = "";
+
+        query += "  "
+                + "FROM AppraisalPerformanceMaster a "
+                + " WHERE a.employeeMaster = " + id;
+
+        return getHibernateTemplate().find(query);
+    }
+
 }
 //                *******************************************Main Queary**************************************************
 //                + " (select concat(start_date,'-',end_date) "

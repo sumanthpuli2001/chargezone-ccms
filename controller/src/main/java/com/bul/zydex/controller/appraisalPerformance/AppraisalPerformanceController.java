@@ -62,6 +62,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
         PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
+        CompetencyEvaluationMaster competencyEvaluationMaster=new CompetencyEvaluationMaster();
         UserMaster user = (UserMaster) request.getSession().getAttribute("user");
         UserRightMaster user1 = (UserRightMaster) request.getSession().getAttribute("userRight");
         int reportingId = 0;
@@ -149,6 +150,11 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             request.setAttribute("pmpendyearstatus", pmpendyearstatus);
             request.setAttribute("pmpasEmployee", pmpasEmployee);
 
+        }
+        competencyEvaluationMaster = competencyEvaluationMasterService.readById(employee.getCompetencyEvaluationId());
+        if (null != competencyEvaluationMaster) {
+            String cpmname = competencyEvaluationMaster.getTitle();
+            request.setAttribute("cpmname", cpmname);
         }
 
         List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
@@ -1783,7 +1789,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                         if (appraisalPerformanceMaster.getReworkStatus() == 1) {
                             goalApproval = "Rework";
                             //goalApproval = "pending";
-                            goalSetting="pending";
+                            goalSetting = "pending";
                             break;
                         }
                     }
@@ -2036,6 +2042,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
         EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
+        CompetencyEvaluationMaster competencyEvaluationMaster = new CompetencyEvaluationMaster();
         String employeeName = "" + employee.getEmployeeName();
         String empId = request.getParameter("id");
         String userid = request.getParameter("userid");
@@ -2057,6 +2064,11 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         if (null != appraisalPerformanceMaster.getTotalScore()) {
             String totalScore = appraisalPerformanceMaster.getTotalScore();
             request.setAttribute("totalScore", totalScore);
+        }
+        competencyEvaluationMaster = competencyEvaluationMasterService.readById(employee.getCompetencyEvaluationId());
+        if (null != competencyEvaluationMaster) {
+            String cpmname = competencyEvaluationMaster.getTitle();
+            request.setAttribute("cpmname", cpmname);
         }
         String pmpstatusId = "";
         List<?> pmplist = pmpFormStatusMasterService.readByPmpformstatusStatus(employeeId);
@@ -5179,15 +5191,16 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         appraisalPerformanceMaster.setManagerkraStatus(1);
         appraisalPerformanceMaster.setEmployeeStatus(0);
         appraisalPerformanceMaster.setReworkStatus(1);
-        String flagId = request.getParameter("flagId");
-        String midhalf = request.getParameter("flagMidId");
-        String endhalf = request.getParameter("flagEndId");
-     
-        if (midhalf.equals("true")) {
+
+        String flagId = request.getParameter("flagId1");
+        String midhalf = request.getParameter("flagMidId1");
+        String endhalf = request.getParameter("flagEndId1");
+
+        if (null != midhalf && midhalf.equals("true")) {
 //            appraisalPerformanceMaster.setMidYearEmployeeStatus(0);
             appraisalPerformanceMaster.setMidYearManagerStatus(0);
         }
-        if (endhalf.equals("true")) {
+        if (null != endhalf && endhalf.equals("true")) {
 //            appraisalPerformanceMaster.setEndYearEmployeeStatus(0);
             appraisalPerformanceMaster.setEndYearManagerStatus(0);
         }
@@ -5483,5 +5496,95 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         }
         mv.setViewName("redirect:logIn.html?act=dashboard");
         return mv;
+    }
+
+    private synchronized void mailSendPmp() throws Exception {
+
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        Date date = cal.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String doj = sdf.format(date);
+        List<?> empList = employeeMasterService.readByJoinDate(doj);
+        if (!empList.isEmpty()) {
+            for (Object o : empList) {
+                employeeMaster = (EmployeeMaster) o;
+                int eid = employeeMaster.getId();
+                List<?> pmpList = appraisalPerformanceService.readByEmpID(eid);
+                if (pmpList.isEmpty()) {
+                    EmailTemplate emailTemplate = emailTemplateService.readById(141);
+                    String emailId = employeeMaster.getEmailAddress();
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMaster.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+                        }
+                    }
+                }
+            }
+        }
+
+        Calendar cal1 = Calendar.getInstance();
+        cal1.add(Calendar.MONTH, -1);
+        cal1.add(Calendar.DAY_OF_MONTH, -10);
+        Date date1 = cal1.getTime();
+        String doj1 = sdf.format(date1);
+        List<?> empList1 = employeeMasterService.readByJoinDate(doj1);
+        if (!empList1.isEmpty()) {
+            for (Object o : empList1) {
+                employeeMaster = (EmployeeMaster) o;
+                int eid = employeeMaster.getId();
+                List<?> pmpList = appraisalPerformanceService.readByEmpID(eid);
+                if (pmpList.isEmpty()) {
+                    EmailTemplate emailTemplate = emailTemplateService.readById(141);
+                    String emailId = employeeMaster.getEmailAddress();
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMaster.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+                        }
+                    }
+                }
+            }
+        }
+        Calendar cal2 = Calendar.getInstance();
+        cal2.add(Calendar.MONTH, -1);
+        cal2.add(Calendar.DAY_OF_MONTH, -20);
+        Date date2 = cal2.getTime();
+        String doj2 = sdf.format(date2);
+        List<?> empList2 = employeeMasterService.readByJoinDate(doj2);
+        if (!empList2.isEmpty()) {
+            for (Object o : empList2) {
+                employeeMaster = (EmployeeMaster) o;
+                int eid = employeeMaster.getId();
+                List<?> pmpList = appraisalPerformanceService.readByEmpID(eid);
+                if (pmpList.isEmpty()) {
+                    EmailTemplate emailTemplate = emailTemplateService.readById(141);
+                    String emailId = employeeMaster.getEmailAddress();
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMaster.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

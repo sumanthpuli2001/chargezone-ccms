@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -139,5 +139,7 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readForSendMailToAll(T object);
 
     public List<?> readDepartmentWiseEmployee(T object);
+
+    public List<?> readByJoinDate(String date);
 
 }

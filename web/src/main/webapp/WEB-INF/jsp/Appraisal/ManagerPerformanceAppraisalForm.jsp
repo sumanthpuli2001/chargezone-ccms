@@ -144,7 +144,7 @@
         textarea {
             resize: none;
         }
-      
+
     </style>
     <body>
         <div class="content-wrapper">
@@ -470,16 +470,16 @@
                                                                         <tr id="textemployeesMid${status.count}">
                                                                             <td colspan="5"><textarea id="employeeMidYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="employeeMidYearSelfAssesssmentGoal${status.count}"type="Text" class="form-control">${kragoallist.empMidyearSelfassessmentGoalManager}</textarea></td>
                                                                             <td colspan="5"><textarea id="managerMidYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="managerMidYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control">${kragoallist.managerMidyearReviewEvaluationManager}</textarea></td>
-                                                                            </tr>
+                                                                        </tr>
 
-                                                                            <tr id="employeesEnd${status.count}">
+                                                                        <tr id="employeesEnd${status.count}">
                                                                             <td colspan="5"><b>Employee’s End - Year Self – Assessment KRA:</b></td>
                                                                             <td colspan="5"><b>Manager’s End - Year Review / Evaluation KRA:</b></td>
                                                                         </tr>
                                                                         <tr id="textemployeesEnd${status.count}">
                                                                             <td colspan="5"><textarea id="employeeEndYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="employeeEndYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control">${kragoallist.empEndyearSelfassessmentGoalManager}</textarea></td>
                                                                             <td colspan="5"><textarea id="managerEndYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="managerEndYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control">${kragoallist.managerEndyearReviewEvaluationManager}</textarea></td>
-                                                                            </tr>
+                                                                        </tr>
                                                                     </c:forEach>
                                                                 </c:when>
                                                                 <c:otherwise>
@@ -1085,20 +1085,20 @@
                                                 <div class="col-md-12 col-sm-12">
                                                     <%--<c:if test="${empty competencyEvaluationList[0][2].title && managerStatus eq '0'}">--%>
                                                     <%--<c:if test="${managerStatus eq '0' || sessionScope.user.userName eq 'admin' || empty competencyEvaluationList[0][2].title}">--%>
-                                                        <!--<div>-->
-                                                            <!--<select name="competencyEvaluationId" id="competencyEvaluationId" value="$/{competencyMap.key}" class="form-control" onchange="managerajaxfun();"/>-->
-                                                            <!--<option value="">--SELECT--</option>-->
-                                                            <%--<c:forEach var="competencyMap" items="${competencyMap}">--%>
-                                                                <%--<c:if test="${competencyEvaluationList[0][2].title eq competencyMap.value}">--%>
-                                                                    <!--<option value="$/{competencyMap.key}" selected="">$/{competencyMap.value}</option>-->
-                                                                <%--</c:if>--%>
-                                                                <%--<c:if test="${competencyEvaluationList[0][2].title ne competencyMap.value}">--%>
-                                                                    <!--<option value="$/{competencyMap.key}">$/{competencyMap.value}</option>-->
-                                                                <%--</c:if>--%>
+                                                    <!--<div>-->
+                                                    <!--<select name="competencyEvaluationId" id="competencyEvaluationId" value="$/{competencyMap.key}" class="form-control" onchange="managerajaxfun();"/>-->
+                                                    <!--<option value="">--SELECT--</option>-->
+                                                    <%--<c:forEach var="competencyMap" items="${competencyMap}">--%>
+                                                    <%--<c:if test="${competencyEvaluationList[0][2].title eq competencyMap.value}">--%>
+                                                    <!--<option value="$/{competencyMap.key}" selected="">$/{competencyMap.value}</option>-->
+                                                    <%--</c:if>--%>
+                                                    <%--<c:if test="${competencyEvaluationList[0][2].title ne competencyMap.value}">--%>
+                                                    <!--<option value="$/{competencyMap.key}">$/{competencyMap.value}</option>-->
+                                                    <%--</c:if>--%>
 
-                                                            <%--</c:forEach>--%>
-                                                            <!--</select>-->
-                                                        <!--</div>-->
+                                                    <%--</c:forEach>--%>
+                                                    <!--</select>-->
+                                                    <!--</div>-->
                                                     <%--</c:if>--%>
                                                     <c:if test="${!empty competencyEvaluationList[0][2].title && managerStatus eq '1' && sessionScope.user.userName ne 'admin' && !empty competencyEvaluationList[0][2].title}">
                                                         <div><input type="text" id="competencyEvaluationId" class="form-control" name="competencyEvaluationId" value="${competencyEvaluationList[0][2].title}" readonly="true"></div>
@@ -1173,7 +1173,7 @@
                                                                     <td id="subCompentencyStartRemarkId${status.count}">
                                                                         <textarea type="Text" id="compentencyStartRemark${status.count}" name="compentencyStartRemark${status.count}" class="form-control" rows="4">${competencyEvaluationList[12]}</textarea>
                                                                     </td>
-                                                                 
+
                                                                     <td id="subCompentencyMidId${status.count}">
                                                                         <select id="compentencyMidYear${status.count}" name="compentencyMidYear${status.count}" value="${competencyEvaluationList[15]}" class="form-control">
                                                                             <option value="">--SELECT--</option>
@@ -2576,6 +2576,9 @@
                                               action="appraisalPerformance.htm?act=reworkByManager" commandName=""
                                               method="post"  name='form11' id ="form11" class="form-horizontal" role="form"> 
                                             <input type="hidden" id="pmpIdForRework" name="pmpIdForRework" value="${appraisalId}">
+                                            <input type="hidden" name="flagId1" id="flagId" value="${flag}">
+                                            <input type="hidden" name="flagMidId1" id="flagMidId" value="${flag1}">
+                                            <input type="hidden" name="flagEndId1" id="flagEndId" value="${flag2}">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
@@ -2685,7 +2688,7 @@
                 objEvent.preventDefault(); // stops its action
             }
         });
-        
+
         $(document).ready(function () {
 //            alert('${sessionScope.employeeInfo.competencyEvaluationId}');
 

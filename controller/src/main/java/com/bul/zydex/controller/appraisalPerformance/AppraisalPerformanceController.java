@@ -20,6 +20,7 @@ import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.KraCategory;
+import com.bul.zydex.model.PmpFormStatusMaster;
 import com.bul.zydex.model.UpdateAppraisalPerformanceActivities;
 import com.bul.zydex.model.UpdateAppraisalPerformanceKra;
 import com.bul.zydex.model.UserMaster;
@@ -60,6 +61,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
+        PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
         UserMaster user = (UserMaster) request.getSession().getAttribute("user");
         UserRightMaster user1 = (UserRightMaster) request.getSession().getAttribute("userRight");
         int reportingId = 0;
@@ -134,6 +136,20 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         }
         EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         String employeeId = "" + employee.getId();
+
+        String pmpstatusId = "";
+        List<?> pmplist = pmpFormStatusMasterService.readByPmpformstatusStatus(employeeId);
+        if (!pmplist.isEmpty()) {
+            pmpFormStatusMaster = (PmpFormStatusMaster) pmplist.get(0);
+            pmpstatusId = "" + pmpFormStatusMaster.getId();
+            boolean pmpmidyearstatus = pmpFormStatusMaster.getMidYearStatus();
+            boolean pmpendyearstatus = pmpFormStatusMaster.getEndYearStatus();
+            boolean pmpasEmployee = pmpFormStatusMaster.getEmployeeSide();
+            request.setAttribute("pmpmidyearstatus", pmpmidyearstatus);
+            request.setAttribute("pmpendyearstatus", pmpendyearstatus);
+            request.setAttribute("pmpasEmployee", pmpasEmployee);
+
+        }
 
         List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
         if (!list.isEmpty()) {
@@ -354,8 +370,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         AppraisalPerformanceActivities appraisalPerformanceActivities1 = new AppraisalPerformanceActivities();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
         BindException errors = new BindException(appraisalPerformanceMaster, "appraisalPerformanceMaster");
-
         kraCategoryList(request);
         KraCategory kraCategory = new KraCategory();
         String appraisalId = "";
@@ -1766,7 +1782,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             || (currentDate.after(ManagerStartDate1) && currentDate.before(ManagerEndDate1))) {
                         if (appraisalPerformanceMaster.getReworkStatus() == 1) {
                             goalApproval = "Rework";
-                            goalApproval = "pending";
+                            //goalApproval = "pending";
+                            goalSetting="pending";
                             break;
                         }
                     }
@@ -2018,6 +2035,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra = new UpdateAppraisalPerformanceKra();
         AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
         EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
         String employeeName = "" + employee.getEmployeeName();
         String empId = request.getParameter("id");
         String userid = request.getParameter("userid");
@@ -2039,6 +2057,19 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         if (null != appraisalPerformanceMaster.getTotalScore()) {
             String totalScore = appraisalPerformanceMaster.getTotalScore();
             request.setAttribute("totalScore", totalScore);
+        }
+        String pmpstatusId = "";
+        List<?> pmplist = pmpFormStatusMasterService.readByPmpformstatusStatus(employeeId);
+        if (!pmplist.isEmpty()) {
+            pmpFormStatusMaster = (PmpFormStatusMaster) pmplist.get(0);
+            pmpstatusId = "" + pmpFormStatusMaster.getId();
+            boolean pmpmidyearstatus = pmpFormStatusMaster.getMidYearStatus();
+            boolean pmpendyearstatus = pmpFormStatusMaster.getEndYearStatus();
+            boolean pmpasEmployee = pmpFormStatusMaster.getEmployeeSide();
+            request.setAttribute("pmpmidyearstatus", pmpmidyearstatus);
+            request.setAttribute("pmpendyearstatus", pmpendyearstatus);
+            request.setAttribute("pmpasEmployee", pmpasEmployee);
+
         }
         // ==========================Mid Year=======================================================//
         if (null != appraisalPerformanceMaster.getEmpMidyearSelfassOtheractivty()) {
@@ -2283,6 +2314,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         String empId = request.getParameter("id");
         String userid = request.getParameter("userid");
         String appraisalId1 = request.getParameter("appraisalId");
+        PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
         //////Print/////By dhaval
         request.setAttribute("empId", empId);
         request.setAttribute("userid", userid);
@@ -2302,6 +2334,20 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //            String weightageScore = appraisalPerformanceMaster.getWeightageScore();
 //            request.setAttribute("weightageScore", weightageScore);
 //        }
+
+        String pmpstatusId = "";
+        List<?> pmplist = pmpFormStatusMasterService.readByPmpformstatusStatus(employeeId);
+        if (!pmplist.isEmpty()) {
+            pmpFormStatusMaster = (PmpFormStatusMaster) pmplist.get(0);
+            pmpstatusId = "" + pmpFormStatusMaster.getId();
+            boolean pmpmidyearstatus = pmpFormStatusMaster.getMidYearStatus();
+            boolean pmpendyearstatus = pmpFormStatusMaster.getEndYearStatus();
+            boolean pmpasManager = pmpFormStatusMaster.getManagerSide();
+            request.setAttribute("pmpmidyearstatus", pmpmidyearstatus);
+            request.setAttribute("pmpendyearstatus", pmpendyearstatus);
+            request.setAttribute("pmpasManager", pmpasManager);
+
+        }
         if (null != appraisalPerformanceMaster.getWeightageScoreManager()) {
             String weightageScore = appraisalPerformanceMaster.getWeightageScoreManager();
             request.setAttribute("weightageScore", weightageScore);
@@ -2538,6 +2584,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");//====edit by Admin=======//
         String appraisalId = request.getParameter("appraisalId");
         BindException errors = new BindException(appraisalPerformanceMaster, "appraisalPerformanceMaster");
+        PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
         KraCategory kraCategory = new KraCategory();
 //        selectedDateflage(request,response);
         appraisalPerformanceValidator.validate(appraisalPerformanceMaster, errors);
@@ -3508,7 +3555,6 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                                }
 //                            }
 //                        }
-
                         int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
                         competencyEvaluationMaster.setId(competencyEvaluationId);
                         appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
@@ -3752,8 +3798,16 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             }
 
 //            appraisalPerformanceService.update(appraisalPerformanceMaster);
+            String pmpstatusId = "";
             String btn1 = request.getParameter("submit");
             if (null != btn1 && btn1.equals("submit")) {
+                List<?> pmplist = pmpFormStatusMasterService.readByPmpformstatusStatus("" + appraisalPerformanceMaster.getEmployeeMaster().getId());
+                if (!pmplist.isEmpty()) {
+                    pmpFormStatusMaster = (PmpFormStatusMaster) pmplist.get(0);
+                    pmpstatusId = "" + pmpFormStatusMaster.getId();
+
+                }
+
                 String weightageScore = request.getParameter("weightageScore");
                 if (null == weightageScore) {
                     weightageScore = "";
@@ -3786,10 +3840,15 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 
                 if (midhalf.equals("true")) {
                     appraisalPerformanceMaster.setMidYearManagerStatus(1);
+                    pmpFormStatusMaster.setMidYearStatus(Boolean.TRUE);
                 }
                 if (endhalf.equals("true")) {
                     appraisalPerformanceMaster.setEndYearManagerStatus(1);
+                    pmpFormStatusMaster.setEndYearStatus(Boolean.TRUE);
                 }
+                pmpFormStatusMaster.setEmployeeSide(Boolean.TRUE);
+                pmpFormStatusMaster.setManagerSide(Boolean.TRUE);
+                pmpFormStatusMasterService.update(pmpFormStatusMaster);
                 appraisalPerformanceService.update(appraisalPerformanceMaster);
                 if (!"".equals(appraisalId) && null != appraisalId) {
                     //    Email Sent to Employee(Start Year)
@@ -4022,7 +4081,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             || (currentDate.after(ManagerStartDate1) && currentDate.before(ManagerEndDate1))) {
                         if (appraisalPerformanceMaster.getReworkStatus() == 1) {
                             goalApproval = "Rework";
-                            goalApproval = "pending";
+                            goalSetting = "pending";
                             break;
                         }
 
@@ -4047,7 +4106,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             || (currentDate.after(ManagerMidStartDate1) && currentDate.before(ManagerMidDate1))) {
                         if (appraisalPerformanceMaster.getReworkStatus() == 1 && 0 != appraisalPerformanceMaster.getMidYearManagerStatus()) {
                             managerMidSelfApproval = "Rework";
-                            managerMidSelfApproval = "pending";
+                            midSelfApproval = "pending"; //change by10/20/2016
+//                            managerMidSelfApproval = "pending";
                             break;
                         }
                     }
@@ -5119,6 +5179,18 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         appraisalPerformanceMaster.setManagerkraStatus(1);
         appraisalPerformanceMaster.setEmployeeStatus(0);
         appraisalPerformanceMaster.setReworkStatus(1);
+        String flagId = request.getParameter("flagId");
+        String midhalf = request.getParameter("flagMidId");
+        String endhalf = request.getParameter("flagEndId");
+     
+        if (midhalf.equals("true")) {
+//            appraisalPerformanceMaster.setMidYearEmployeeStatus(0);
+            appraisalPerformanceMaster.setMidYearManagerStatus(0);
+        }
+        if (endhalf.equals("true")) {
+//            appraisalPerformanceMaster.setEndYearEmployeeStatus(0);
+            appraisalPerformanceMaster.setEndYearManagerStatus(0);
+        }
         appraisalPerformanceService.update(appraisalPerformanceMaster);
 //        appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
 //        appraisalPerformanceCompetencyEvaluationService.deleteByManager(appraisalPerformanceCompetencyEvaluation);
@@ -5409,7 +5481,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             employeeMaster.setCompetencyEvaluationId(Integer.parseInt("" + s[1]));
             employeeMasterService.update(employeeMaster);
         }
-        mv.setViewName("forward:logIn.htm?act=dashboard");
+        mv.setViewName("redirect:logIn.html?act=dashboard");
         return mv;
     }
 }

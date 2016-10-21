@@ -163,7 +163,7 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " where b.behaviorsYear=" + currentYear + " and b.status=1 and ((c.dateOfLeaving is null or c.dateOfLeaving = '')"
                 + "or STR_TO_DATE(c.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
 
-        return (int)(long)getHibernateTemplate().find(hqlQuery).get(0);
+        return (int) (long) getHibernateTemplate().find(hqlQuery).get(0);
     }
 
     @Override
@@ -174,14 +174,14 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " where b.behaviorsYear=" + currentYear + " and b.status=1 and b.managerStatus=1 and ((c.dateOfLeaving is null or c.dateOfLeaving = '')"
                 + "or STR_TO_DATE(c.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
 
-        return (int)(long)getHibernateTemplate().find(hqlQuery).get(0);
+        return (int) (long) getHibernateTemplate().find(hqlQuery).get(0);
     }
 
     @Override
     public int readperformanceByHr3(final int currentYear) {
-       //Employee’s Mid Year Self Assessment
-       
-         String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceKra a"
+        //Employee’s Mid Year Self Assessment
+
+        String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceKra a"
                 + " LEFT JOIN a.appraisalPerformanceMaster b"
                 + " LEFT JOIN b.employeeMaster c"
                 + " where b.behaviorsYear=" + currentYear + " and b.status=1 and (a.empMidyearSelfassessmentGoal is not null or"
@@ -189,14 +189,14 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " and (c.dateOfLeaving is null or c.dateOfLeaving = ''"
                 + " or STR_TO_DATE(c.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
 
-        return (int)(long) getHibernateTemplate().find(hqlQuery).get(0);
+        return (int) (long) getHibernateTemplate().find(hqlQuery).get(0);
     }
-    
+
     @Override
     public int readperformanceByHr4(final int currentYear) {
-       //Manager’s Mid Year Review 
-       
-         String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceKra a"
+        //Manager’s Mid Year Review 
+
+        String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceKra a"
                 + " LEFT JOIN a.appraisalPerformanceMaster b"
                 + " LEFT JOIN b.employeeMaster c"
                 + " where b.behaviorsYear=" + currentYear + " and b.status=1 and (a.managerMidyearReviewEvaluation is not null or"
@@ -204,14 +204,14 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " and (c.dateOfLeaving is null or c.dateOfLeaving = ''"
                 + " or STR_TO_DATE(c.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
 
-        return (int)(long) getHibernateTemplate().find(hqlQuery).get(0);
+        return (int) (long) getHibernateTemplate().find(hqlQuery).get(0);
     }
-    
+
     @Override
     public int readperformanceByHr5(final int currentYear) {
 //       Employee’s End Year Self Assessment
-       
-         String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceKra a"
+
+        String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceKra a"
                 + " LEFT JOIN a.appraisalPerformanceMaster b"
                 + " LEFT JOIN b.employeeMaster c"
                 + " where b.behaviorsYear=" + currentYear + " and b.status=1 and (a.empEndyearSelfassessmentGoal is not null or"
@@ -219,14 +219,14 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " and (c.dateOfLeaving is null or c.dateOfLeaving = ''"
                 + " or STR_TO_DATE(c.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
 
-        return (int)(long) getHibernateTemplate().find(hqlQuery).get(0);
+        return (int) (long) getHibernateTemplate().find(hqlQuery).get(0);
     }
-    
+
     @Override
     public int readperformanceByHr6(final int currentYear) {
 //       Manager’s End Year Review
-       
-         String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceKra a"
+
+        String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceKra a"
                 + " LEFT JOIN a.appraisalPerformanceMaster b"
                 + " LEFT JOIN b.employeeMaster c"
                 + " where b.behaviorsYear=" + currentYear + " and b.status=1 and (a.managerEndyearReviewEvaluation is not null or"
@@ -234,7 +234,7 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " and (c.dateOfLeaving is null or c.dateOfLeaving = ''"
                 + " or STR_TO_DATE(c.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
 
-        return (int)(long) getHibernateTemplate().find(hqlQuery).get(0);
+        return (int) (long) getHibernateTemplate().find(hqlQuery).get(0);
     }
 
     @Override
@@ -660,4 +660,4 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
 //                + " left join level_master f on f.id = c.level_master_id where 1=1 "
 //                + condition;
 
-                //   + " Select c.employee_id "
+//   + " Select c.employee_id "

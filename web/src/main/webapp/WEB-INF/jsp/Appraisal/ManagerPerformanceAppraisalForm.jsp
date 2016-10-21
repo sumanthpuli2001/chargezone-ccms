@@ -164,6 +164,9 @@
                     <input type="hidden" id="appraisalId" name="appraisalId" value="${appraisalId}">
                     <input type="hidden" id="managerStatus" name="managerStatus" value="${managerStatus}">
                     <input type="hidden" id="managerKraStatus" name="managerKraStatus" value="${managerKraStatus}">
+                    <input type="hidden" id="pmpmidyearstatus" name="pmpmidyearstatus" value="${pmpmidyearstatus}">
+                    <input type="hidden" id="pmpendyearstatus" name="pmpendyearstatus" value="${pmpendyearstatus}">
+                    <input type="hidden" id="pmpasManager" name="pmpasManager" value="${pmpasManager}">
                 </div>
             </section>
             <!-- Main content -->
@@ -182,7 +185,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Employee Detail:</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId1">Expand</span><button class="btn btn-box-tool" id="btn1" data-widget="collapse" onclick="buttonFun1();"><i class="fa fa-plus" id="minusId1" ></i></button>
+                                                <span id="spanId1">Expand</span><span class="btn btn-box-tool" id="btn1" data-widget="collapse" onclick="buttonFun1();"><i class="fa fa-plus" id="minusId1" ></i></span>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
                                         </div><!-- /.box-header -->
@@ -262,7 +265,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Results:</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId2">Expand</span><button class="btn btn-box-tool" id="btn2" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
+                                                <span id="spanId2">Expand</span><span class="btn btn-box-tool" id="btn2" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></span>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
                                         </div><!-- /.box-header -->
@@ -635,7 +638,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Additional Activities / Projects:</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId7">Expand</span><button class="btn btn-box-tool" id="btn3" data-widget="collapse" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7" ></i></button>
+                                                <span id="spanId7">Expand</span><span class="btn btn-box-tool" id="btn3" data-widget="collapse" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7" ></i></span>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
                                         </div><!-- /.box-header -->
@@ -1073,7 +1076,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Competency Evaluation (As Per Zydex Competency Framework) : ${competencyEvaluationList[0][2].title}</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId3">Expand</span><button class="btn btn-box-tool" id="btn4" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
+                                                <span id="spanId3">Expand</span><span class="btn btn-box-tool" id="btn4" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></span>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
                                         </div><!-- /.box-header -->
@@ -1264,7 +1267,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Individual Development Plan(Training Need Identification):</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId4">Expand</span><button class="btn btn-box-tool" id="btn5" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
+                                                <span id="spanId4">Expand</span><span class="btn btn-box-tool" id="btn5" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></span>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
                                         </div><!-- /.box-header -->
@@ -1656,7 +1659,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Behaviors:</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId5">Expand</span><button class="btn btn-box-tool" id="btn6" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
+                                                <span id="spanId5">Expand</span><span class="btn btn-box-tool" id="btn6" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></span>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
                                         </div><!-- /.box-header -->
@@ -2457,7 +2460,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Performance Ratings:</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId6">Expand</span><button class="btn btn-box-tool" id="btn7" data-widget="collapse" onclick="buttonFun6();"><i class="fa fa-plus" id="minusId6" ></i></button>
+                                                <span id="spanId6">Expand</span><span class="btn btn-box-tool" id="btn7" data-widget="collapse" onclick="buttonFun6();"><i class="fa fa-plus" id="minusId6" ></i></span>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
                                         </div><!-- /.box-header -->

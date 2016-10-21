@@ -65,14 +65,6 @@
 
 
                                         <div class="form-group">
-                                            <div class="col-sm-4">
-                                                <label>Start Year Status</label>&nbsp;&nbsp;
-                                                <fieldset id="group1">
-                                                <form:radiobutton path="startYearStatus" value="true"/>Lock
-                                                <form:radiobutton path="startYearStatus" value="false"/>Unlock
-                                            </fieldset>
-
-                                        </div>
 
                                         <div class="col-sm-4">
                                             <label>Mid Year Status</label>&nbsp;&nbsp;

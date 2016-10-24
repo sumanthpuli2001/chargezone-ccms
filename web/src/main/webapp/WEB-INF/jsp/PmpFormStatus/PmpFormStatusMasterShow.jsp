@@ -83,7 +83,7 @@
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
                                                                 <td align="center"><input type="checkbox" name="checkId" id="checkId" value="${list.id}"/></td>
-                                                                <td>${list.employeeMaster.id}</td>
+                                                                <td>${list.employeeMaster.employeeId}</td>
                                                                 <td>${list.employeeMaster.employeeName}</td>
                                                                 <!--<td></td>-->
                                                                 <td>

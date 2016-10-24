@@ -6,9 +6,13 @@
 package com.bul.zydex.controller.PmpFormStatusMaster;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.AppraisalPerformanceActivities;
+import com.bul.zydex.model.AppraisalPerformanceKra;
 import com.bul.zydex.model.AppraisalPerformanceMaster;
 import com.bul.zydex.model.PmpFormStatusMaster;
 import com.bul.zydex.service.PmpFormStatusMaster.PmpFormStatusMasterService;
+import com.bul.zydex.service.appraisalPerformance.AppraisalPerformanceActivitiesService;
+import com.bul.zydex.service.appraisalPerformance.AppraisalPerformanceKraService;
 import com.bul.zydex.service.appraisalPerformance.AppraisalPerformanceService;
 
 /**
@@ -18,6 +22,8 @@ import com.bul.zydex.service.appraisalPerformance.AppraisalPerformanceService;
 public class PmpFormStatusMasterAbstract  extends CustomAbstract{
      protected PmpFormStatusMasterService<PmpFormStatusMaster> pmpFormStatusMasterService;
      protected AppraisalPerformanceService<AppraisalPerformanceMaster> appraisalPerformanceService;
+     protected AppraisalPerformanceKraService<AppraisalPerformanceKra> appraisalPerformanceKraService;
+     protected AppraisalPerformanceActivitiesService<AppraisalPerformanceActivities> appraisalPerformanceActivitiesService;
 
     public PmpFormStatusMasterService<PmpFormStatusMaster> getPmpFormStatusMasterService() {
         return pmpFormStatusMasterService;
@@ -34,4 +40,21 @@ public class PmpFormStatusMasterAbstract  extends CustomAbstract{
     public void setAppraisalPerformanceService(AppraisalPerformanceService<AppraisalPerformanceMaster> appraisalPerformanceService) {
         this.appraisalPerformanceService = appraisalPerformanceService;
     }
+
+    public AppraisalPerformanceKraService<AppraisalPerformanceKra> getAppraisalPerformanceKraService() {
+        return appraisalPerformanceKraService;
+    }
+
+    public void setAppraisalPerformanceKraService(AppraisalPerformanceKraService<AppraisalPerformanceKra> appraisalPerformanceKraService) {
+        this.appraisalPerformanceKraService = appraisalPerformanceKraService;
+    }
+
+    public AppraisalPerformanceActivitiesService<AppraisalPerformanceActivities> getAppraisalPerformanceActivitiesService() {
+        return appraisalPerformanceActivitiesService;
+    }
+
+    public void setAppraisalPerformanceActivitiesService(AppraisalPerformanceActivitiesService<AppraisalPerformanceActivities> appraisalPerformanceActivitiesService) {
+        this.appraisalPerformanceActivitiesService = appraisalPerformanceActivitiesService;
+    }
+    
 }

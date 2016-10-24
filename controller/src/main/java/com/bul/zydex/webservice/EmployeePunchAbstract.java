@@ -42,8 +42,22 @@ public abstract class EmployeePunchAbstract extends CustomAbstract {
     protected ShiftGenerateMonthlyScheduleService<ShiftGenerateMonthlySchedule> shiftGenerateMonthlyScheduleService;
     protected TemporaryShiftAssignService<TempShiftAssignMaster> temporaryShiftAssignService;
     protected ShiftMasterService<ShiftMaster> shiftMasterService;
-    
 
+    public TemporaryShiftAssignService<TempShiftAssignMaster> getTemporaryShiftAssignService() {
+        return temporaryShiftAssignService;
+    }
+
+    public void setTemporaryShiftAssignService(TemporaryShiftAssignService<TempShiftAssignMaster> temporaryShiftAssignService) {
+        this.temporaryShiftAssignService = temporaryShiftAssignService;
+    }
+
+    public ShiftMasterService<ShiftMaster> getShiftMasterService() {
+        return shiftMasterService;
+    }
+
+    public void setShiftMasterService(ShiftMasterService<ShiftMaster> shiftMasterService) {
+        this.shiftMasterService = shiftMasterService;
+    }
     public EmployeeShiftDataService<EmployeeShiftData> getEmployeeShiftDataService() {
         return employeeShiftDataService;
     }

@@ -411,6 +411,8 @@
         <property name="appraisalPerformanceActivitiesService" ref="appraisalPerformanceActivitiesService1" />
         <property name="updateAppraisalPerformanceActivitiesService" ref="updateAppraisalPerformanceActivitiesService1" />
         <property name="appraisalkraActivityService" ref="appraisalkraActivityService1" />
+        <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1" />
+        
     </bean>
     <!--Appraisal Filling Data-->
     <bean id="appraisalFillingDataController1" class="com.bul.zydex.controller.appraisalPerformance.AppraisalFillingDataController" parent="controllerConfig" >

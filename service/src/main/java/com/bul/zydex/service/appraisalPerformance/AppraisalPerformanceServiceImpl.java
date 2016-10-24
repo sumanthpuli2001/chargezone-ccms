@@ -45,8 +45,35 @@ public class AppraisalPerformanceServiceImpl<T> extends GenericsServiceImpl<T> i
     }
 
     @Override
-    public Object[] readperformanceByHr(final int currentYear) {
+    public int readperformanceByHr(final int currentYear) {
         return appraisalPerformanceDAO.readperformanceByHr(currentYear);
+    }
+
+    @Override
+    public int readperformanceByHr1(final int currentYear) {
+        return appraisalPerformanceDAO.readperformanceByHr1(currentYear);
+    }
+
+    @Override
+    public int readperformanceByHr2(final int currentYear) {
+        return appraisalPerformanceDAO.readperformanceByHr2(currentYear);
+    }
+
+    @Override
+    public int readperformanceByHr3(final int currentYear) {
+        return appraisalPerformanceDAO.readperformanceByHr3(currentYear);
+    }
+    @Override
+    public int readperformanceByHr4(final int currentYear) {
+        return appraisalPerformanceDAO.readperformanceByHr4(currentYear);
+    }
+    @Override
+    public int readperformanceByHr5(final int currentYear) {
+        return appraisalPerformanceDAO.readperformanceByHr5(currentYear);
+    }
+    @Override
+    public int readperformanceByHr6(final int currentYear) {
+        return appraisalPerformanceDAO.readperformanceByHr6(currentYear);
     }
 
     @Override

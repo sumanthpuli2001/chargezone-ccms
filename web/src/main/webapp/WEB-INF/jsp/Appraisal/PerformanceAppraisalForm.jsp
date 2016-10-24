@@ -14,6 +14,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Performance Appraisal Form</title>
+        <style>
+            form { position: relative;}
+        </style>
 
     </head>
     <script>
@@ -171,6 +174,10 @@
                     <input type="hidden" id="userid" name="userid" value="${userid}">
                     <input type="hidden" id="appraisalId" name="appraisalId" value="${appraisalId}">
                     <input type="hidden" id="managerStatus" name="managerStatus" value="${managerStatus}">
+                    <input type="hidden" id="pmpstartyearstatus" name="pmpstartyearstatus" value="${pmpstartyearstatus}">
+                    <input type="hidden" id="pmpmidyearstatus" name="pmpmidyearstatus" value="${pmpmidyearstatus}">
+                    <input type="hidden" id="pmpendyearstatus" name="pmpendyearstatus" value="${pmpendyearstatus}">
+                    <input type="hidden" id="pmpasEmployee" name="pmpasEmployee" value="${pmpasEmployee}">
                 </div>
             </section>
             <c:if test="${!empty successMessage}">
@@ -191,11 +198,11 @@
                                 <form:form class="form-horizontal" id="form1" role="form1" action="appraisalPerformance.htm?act=createSubmit" commandName="appraisalPerformanceMaster" enctype="multipart/form-data" method="post" name='form' onsubmit='return saveSubmit11();'>
                                     <!--form horizontal starts here-->
                                     <!--<form class="form-horizontal" role="form" commandName="AppraisalPerformanceMaster">-->
-                                    <div class="box box-info collapsed-box ">
+                                    <div class="box box-info collapsed-box displayAction">
                                         <div class="box-header">
                                             <h3 class="box-title">Employee Detail:</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId1">Expand</span><button class="btn btn-box-tool" id="btn1" data-widget="collapse" onclick="buttonFun1();"><i class="fa fa-plus" id="minusId1" ></i></button>
+                                                <span id="spanId1">Expand</span><span class="btn btn-box-tool" id="btn1" data-widget="collapse" onclick="buttonFun1();"><i class="fa fa-plus" id="minusId1" ></i></span>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
                                         </div><!-- /.box-header -->
@@ -275,7 +282,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Results:</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId2">Expand</span><button class="btn btn-box-tool" id="btn2" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
+                                                <span id="spanId2">Expand</span><span class="btn btn-box-tool" id="btn2" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></span>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
                                         </div><!-- /.box-header -->
@@ -331,209 +338,207 @@
                                                                         <%--  <c:if test="${(kragoallist.kraGoal ne '' || kragoallist.metric ne '') ||
                                                                                       ((kragoallist.kraGoal eq '' || kragoallist.metric eq '')&&
 (kragoallist.kraGoalByManager ne '' || kragoallist.matrixByManager ne ''))}"> --%>
-                                                                              <tr id="removeTr${status.count}">
-                                                                              <input type="hidden" name="kragoal_id${status.count}" id="kragoal_id${status.count}" value="${kragoallist.id}">
-                                                                              <td id="removeKRAID${status.count}" class="removeClass" style="margin: 0px;width: 45px;"><span>${status.count} </span></td>
+                                                                         <!--Lock Assecement-->
+                                                                        <input type="hidden" name="midyearEmpSelfassStatus${status.count}" id="midyearEmpSelfassStatus${status.count}" value="${kragoallist.midyearEmpSelfassStatus}">
+                                                                        <input type="hidden" name="midyearManagerSelfassStatus${status.count}" id="midyearManagerSelfassStatus${status.count}" value="${kragoallist.midyearManagerSelfassStatus}">
+                                                                        <input type="hidden" name="endyearEmpSelfassStatus${status.count}" id="endyearEmpSelfassStatus${status.count}" value="${kragoallist.endyearEmpSelfassStatus}">
+                                                                        <input type="hidden" name="endyearManagerSelfassStatus${status.count}" id="endyearManagerSelfassStatus${status.count}" value="${kragoallist.endyearManagerSelfassStatus}">
+
+                                                                        <tr id="removeTr${status.count}">
+                                                                        <input type="hidden" name="kragoal_id${status.count}" id="kragoal_id${status.count}" value="${kragoallist.id}">
+                                                                        <td id="removeKRAID${status.count}" class="removeClass" style="margin: 0px;width: 45px;"><span>${status.count} </span></td>
 
 
-                                                                              <td id="kraGoalid1${status.count}"><textarea type="Text" name="kraGoal${status.count}" id="kraGoal${status.count}"  class="form-control">${kragoallist.kraGoal}</textarea></td>
-                                                                              <td id="metricid1${status.count}"><textarea type="Text" name="metric${status.count}" id="metric${status.count}" class="form-control">${kragoallist.metric}</textarea></td>
+                                                                        <td id="kraGoalid1${status.count}"><textarea type="Text" name="kraGoal${status.count}" id="kraGoal${status.count}"  class="form-control">${kragoallist.kraGoal}</textarea></td>
+                                                                        <td id="metricid1${status.count}"><textarea type="Text" name="metric${status.count}" id="metric${status.count}" class="form-control">${kragoallist.metric}</textarea></td>
 
-                                                                              <!--By Ajay Start-->
-                                                                              <td id="kraCategoryId${status.count}">
-                                                                                  <select id="kraCategoryMap${status.count}" name="kraCategoryMap${status.count}" class="form-control" >
-                                                                                      <option value="">--SELECT--</option>
-                                                                                      <c:forEach var="kraCategory" items="${kraCategoryMap}">
-                                                                                          <c:if test="${kragoallist.kraCategoryByKraCategoryByEmployee.id eq kraCategory.key}">
-                                                                                              <option value="${kraCategory.key}" selected="">${kraCategory.value}</option>
-                                                                                          </c:if>
-                                                                                          <c:if test="${kragoallist.kraCategoryByKraCategoryByEmployee.id ne kraCategory.key}">
-                                                                                              <option value="${kraCategory.key}">${kraCategory.value}</option>
-                                                                                          </c:if>
-                                                                                      </c:forEach>
-                                                                                  </select>
-                                                                              </td>
-                                                                              <!--By Ajay  End-->
-                                                                              <td id="weightageidT1${status.count}">
-                                                                                  <c:choose>
-                                                                                      <c:when test="${appraisalPerformanceMaster.getEmployeeStatus() eq 0}">
-                                                                                          <input type="Text" name="weightage${status.count}" id="weightage${status.count}" class="form-control" value="${kragoallist.weightage}" onkeypress="return allowOnlyNumber1(event);" onchange="weightageCountEmp()" style="margin: 0px;width: 67px;">
-                                                                                      </c:when>
-                                                                                      <c:otherwise>
-                                                                                          <input type="Text" name="weightage${status.count}" id="weightage${status.count}" class="form-control" value="${kragoallist.weightage}" onkeypress="return allowOnlyNumber1(event);" onchange="weightageCountEmp()" style="margin: 0px;width: 67px;">
-                                                                                      </c:otherwise>
-                                                                                  </c:choose>
-                                                                              </td>
-                                                                              <td id="midYearDivid1${status.count}"><div>
-                                                                                      <select id="midYearDiv${status.count}" name="midYearDiv${status.count}" value="${kragoallist.midyearStatus}" style="margin: 0px;width: 115px;" class="form-control">
-                                                                                          <option value="">SELECT</option>
-                                                                                          <c:choose>
-                                                                                              <c:when test="${kragoallist.midyearStatus eq 'Yet to Start'}">
+                                                                        <!--By Ajay Start-->
+                                                                        <td id="kraCategoryId${status.count}">
+                                                                            <select id="kraCategoryMap${status.count}" name="kraCategoryMap${status.count}" class="form-control" >
+                                                                                <option value="">--SELECT--</option>
+                                                                                <c:forEach var="kraCategory" items="${kraCategoryMap}">
+                                                                                    <c:if test="${kragoallist.kraCategoryByKraCategoryByEmployee.id eq kraCategory.key}">
+                                                                                        <option value="${kraCategory.key}" selected="">${kraCategory.value}</option>
+                                                                                    </c:if>
+                                                                                    <c:if test="${kragoallist.kraCategoryByKraCategoryByEmployee.id ne kraCategory.key}">
+                                                                                        <option value="${kraCategory.key}">${kraCategory.value}</option>
+                                                                                    </c:if>
+                                                                                </c:forEach>
+                                                                            </select>
+                                                                        </td>
+                                                                        <!--By Ajay  End-->
+                                                                        <td id="weightageidT1${status.count}">
+                                                                            <c:choose>
+                                                                                <c:when test="${appraisalPerformanceMaster.getEmployeeStatus() eq 0}">
+                                                                                    <input type="Text" name="weightage${status.count}" id="weightage${status.count}" class="form-control" value="${kragoallist.weightage}" onkeypress="return allowOnlyNumber1(event);" onchange="weightageCountEmp()" style="margin: 0px;width: 67px;">
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                    <input type="Text" name="weightage${status.count}" id="weightage${status.count}" class="form-control" value="${kragoallist.weightage}" onkeypress="return allowOnlyNumber1(event);" onchange="weightageCountEmp()" style="margin: 0px;width: 67px;">
+                                                                                </c:otherwise>
+                                                                            </c:choose>
+                                                                        </td>
+                                                                        <td id="midYearDivid1${status.count}" class="displayAction"><div>
+                                                                                <select id="midYearDiv${status.count}" name="midYearDiv${status.count}" value="${kragoallist.midyearStatus}" style="margin: 0px;width: 115px;" class="form-control">
+                                                                                    <option value="">SELECT</option>
+                                                                                    <c:choose>
+                                                                                        <c:when test="${kragoallist.midyearStatus eq 'Yet to Start'}">
 
-                                                                                                  <option value="Yet to Start" selected="">Yet to Start</option>
-                                                                                              </c:when>
-                                                                                              <c:otherwise>
+                                                                                            <option value="Yet to Start" selected="">Yet to Start</option>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
 
-                                                                                                  <option value="Yet to Start">Yet to Start</option>
-                                                                                              </c:otherwise>
-                                                                                          </c:choose>
-                                                                                          <c:choose>
-                                                                                              <c:when test="${kragoallist.midyearStatus eq 'In Progress'}">
+                                                                                            <option value="Yet to Start">Yet to Start</option>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                    <c:choose>
+                                                                                        <c:when test="${kragoallist.midyearStatus eq 'In Progress'}">
 
-                                                                                                  <option value="In Progress" selected="">In Progress</option>
-                                                                                              </c:when>
-                                                                                              <c:otherwise>
+                                                                                            <option value="In Progress" selected="">In Progress</option>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
 
-                                                                                                  <option value="In Progress">In Progress</option>
-                                                                                              </c:otherwise>
-                                                                                          </c:choose>
-                                                                                          <c:choose>
-                                                                                              <c:when test="${kragoallist.midyearStatus eq 'Completed'}">
+                                                                                            <option value="In Progress">In Progress</option>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                    <c:choose>
+                                                                                        <c:when test="${kragoallist.midyearStatus eq 'Completed'}">
 
-                                                                                                  <option value="Completed" selected="">Completed</option>
-                                                                                              </c:when>
-                                                                                              <c:otherwise>
+                                                                                            <option value="Completed" selected="">Completed</option>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
 
-                                                                                                  <option value="Completed">Completed</option>
-                                                                                              </c:otherwise>
-                                                                                          </c:choose>
-                                                                                          <c:choose>
-                                                                                              <c:when test="${kragoallist.midyearStatus eq 'Canceled'}">
+                                                                                            <option value="Completed">Completed</option>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                    <c:choose>
+                                                                                        <c:when test="${kragoallist.midyearStatus eq 'Canceled'}">
 
-                                                                                                  <option value="Canceled" selected="">Canceled</option>
-                                                                                              </c:when>
-                                                                                              <c:otherwise>
+                                                                                            <option value="Canceled" selected="">Canceled</option>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
 
-                                                                                                  <option value="Canceled">Canceled</option>
-                                                                                              </c:otherwise>
-                                                                                          </c:choose>
+                                                                                            <option value="Canceled">Canceled</option>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
 
-                                                                                      </select>
-                                                                                  </div>
-                                                                              </td>
-                                                                              <td id="endYearDivid1${status.count}"><div>
-                                                                                      <select id="endYearDiv${status.count}" name="endYearDiv${status.count}" value="${kragoallist.endyearStatus}" style="margin: 0px;width: 96px;" class="form-control">
+                                                                                </select>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td id="endYearDivid1${status.count}" class="displayAction"><div>
+                                                                                <select id="endYearDiv${status.count}" name="endYearDiv${status.count}" value="${kragoallist.endyearStatus}" style="margin: 0px;width: 96px;" class="form-control">
 
-                                                                                          <option value="">SELECT</option>
-                                                                                          <c:choose>
-                                                                                              <c:when test="${kragoallist.endyearStatus eq 'Yet to Start'}">
+                                                                                    <option value="">SELECT</option>
+                                                                                    <c:choose>
+                                                                                        <c:when test="${kragoallist.endyearStatus eq 'Yet to Start'}">
 
-                                                                                                  <option value="Yet to Start" selected="">Yet to Start</option>
-                                                                                              </c:when>
-                                                                                              <c:otherwise>
+                                                                                            <option value="Yet to Start" selected="">Yet to Start</option>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
 
-                                                                                                  <option value="Yet to Start">Yet to Start</option>
-                                                                                              </c:otherwise>
-                                                                                          </c:choose>
-                                                                                          <c:choose>
-                                                                                              <c:when test="${kragoallist.endyearStatus eq 'In Progress'}">
+                                                                                            <option value="Yet to Start">Yet to Start</option>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                    <c:choose>
+                                                                                        <c:when test="${kragoallist.endyearStatus eq 'In Progress'}">
 
-                                                                                                  <option value="In Progress" selected="">In Progress</option>
-                                                                                              </c:when>
-                                                                                              <c:otherwise>
+                                                                                            <option value="In Progress" selected="">In Progress</option>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
 
-                                                                                                  <option value="In Progress">In Progress</option>
-                                                                                              </c:otherwise>
-                                                                                          </c:choose>
-                                                                                          <c:choose>
-                                                                                              <c:when test="${kragoallist.endyearStatus eq 'Completed'}">
+                                                                                            <option value="In Progress">In Progress</option>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                    <c:choose>
+                                                                                        <c:when test="${kragoallist.endyearStatus eq 'Completed'}">
 
-                                                                                                  <option value="Completed" selected="">Completed</option>
-                                                                                              </c:when>
-                                                                                              <c:otherwise>
+                                                                                            <option value="Completed" selected="">Completed</option>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
 
-                                                                                                  <option value="Completed">Completed</option>
-                                                                                              </c:otherwise>
-                                                                                          </c:choose>
-                                                                                          <c:choose>
-                                                                                              <c:when test="${kragoallist.endyearStatus eq 'Canceled'}">
+                                                                                            <option value="Completed">Completed</option>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                    <c:choose>
+                                                                                        <c:when test="${kragoallist.endyearStatus eq 'Canceled'}">
 
-                                                                                                  <option value="Canceled" selected="">Canceled</option>
-                                                                                              </c:when>
-                                                                                              <c:otherwise>
+                                                                                            <option value="Canceled" selected="">Canceled</option>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
 
-                                                                                                  <option value="Canceled">Canceled</option>
-                                                                                              </c:otherwise>
-                                                                                          </c:choose>
-                                                                                      </select>
-                                                                                  </div>
-                                                                              </td>
-                                                                              <td id="finalScoreid${status.count}"><input type="Text" id="finalScore${status.count}" name="finalScore${status.count}" value="${kragoallist.finalScore}" class="form-control" style="margin: 0px;width: 50px;" readonly="true"></td>
+                                                                                            <option value="Canceled">Canceled</option>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                </select>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td id="finalScoreid${status.count}"><input type="Text" id="finalScore${status.count}" name="finalScore${status.count}" value="${kragoallist.finalScore}" class="form-control" style="margin: 0px;width: 50px;" readonly="true"></td>
 
 
-                                                                              <td style="text-align: center" id="edit${status.count}"><span style='margin-top: 5px;' id="editC${status.count}">
-                                                                                      <%--<c:if test="${flag ne 'true' && flag1 ne 'true' && flag2 ne 'true'}">--%>
-                                                                                      <button type="button" class="btns btn-warnings" id="EditByEmployee${status.count}" name="EditByEmployee" onclick="changeReadonly('${status.count}')" style="width: 50px;" disabled="true">Edit</button>
-                                                                                      <%--</c:if>--%>
-                                                                                      <%--<c:if test="${flag eq 'true' || flag1 eq 'true' || flag2 eq 'true'}">--%>
-                                                                                          <!--<button type="button" class="btn btn-warning" id="EditByEmployee" name="EditByEmployee" onclick="changeReadonly('${status.count}')" style="width: 50px;">Edit</button>-->
-                                                                                      <%--</c:if>--%>
-                                                                                  </span><br/>
-                                                                                  <span>${kragoallist.editDate}</span>
-                                                                                  <input type="hidden" id="startDate${status.count}" name="startDate${status.count}" value="${kragoallist.startDate}">
-                                                                                  <!--<a href="#" data-toggle="modal" data-target="#History" id="d1" name="dhaval1" onclick="historyajaxfun();">History</a>-->
-                                                                                  <c:if test="${appraisalPerformanceMaster.managerStatus ne 0 and updateStatus}">
-                                                                                      <!--<a href="" data-toggle="modal" data-target="#modal-fullscreen" onclick="historyajaxfun('${kragoallist.id}');">History</a>-->
-                                                                                      <!--<a href="" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="historyajaxfun('${kragoallist.id}');">History</a>-->
-                                                                                      <a href="" data-toggle="modal" data-target="#kraModel" onclick="historyajaxfun('${kragoallist.id}');">History</a>
-                                                                                  </c:if>
-                                                                              </td>
-                                                                              <%--<c:if test="${status.last}">--%>
-                                                                              <!--<td style="text-align: center">-->
-                                                                              <!--<span style='margin-top: 5px;'>-->
-                                                                              <%--<c:if test="${flag ne 'true' && flag1 ne 'true' && flag2 ne 'true'}">--%>
-                                                                              <!--<input type="button" value="+" id="addRowButtonId" disabled="true" />-->
-                                                                              <%--</c:if>--%>
-                                                                              <%--<c:if test="${flag eq 'true' || flag1 eq 'true' || flag2 eq 'true'}">--%>
-                                                                              <!--<input type="button" value="+" id="addRowButtonId" />-->
-                                                                              <%--</c:if>--%>
-                                                                              <!--</span>-->
-                                                                              <!--</td>-->
-                                                                              <%--</c:if>--%>
-                                                                              <%--<c:if test="${!status.last}">--%>
-                                                                              <td id="" style="text-align: center">
-                                                                                  <span style="margin-top: 5px;">
+                                                                        <td style="text-align: center" id="edit${status.count}"><span style='margin-top: 5px;' id="editC${status.count}">
+                                                                                <%--<c:if test="${flag ne 'true' && flag1 ne 'true' && flag2 ne 'true'}">--%>
+                                                                                <button type="button" class="btns btn-warnings" id="EditByEmployee${status.count}" name="EditByEmployee" onclick="changeReadonly('${status.count}')" style="width: 50px;" >Edit</button>
+                                                                                <%--</c:if>--%>
+                                                                                <%--<c:if test="${flag eq 'true' || flag1 eq 'true' || flag2 eq 'true'}">--%>
+                                                                                    <!--<button type="button" class="btn btn-warning" id="EditByEmployee" name="EditByEmployee" onclick="changeReadonly('${status.count}')" style="width: 50px;">Edit</button>-->
+                                                                                <%--</c:if>--%>
+                                                                            </span><br/>
+                                                                            <span>${kragoallist.editDate}</span>
+                                                                            <input type="hidden" id="startDate${status.count}" name="startDate${status.count}" value="${kragoallist.startDate}">
+                                                                            <!--<a href="#" data-toggle="modal" data-target="#History" id="d1" name="dhaval1" onclick="historyajaxfun();">History</a>-->
+                                                                            <c:if test="${appraisalPerformanceMaster.managerStatus ne 0 and updateStatus}">
+                                                                                <!--<a href="" data-toggle="modal" data-target="#modal-fullscreen" onclick="historyajaxfun('${kragoallist.id}');">History</a>-->
+                                                                                <!--<a href="" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="historyajaxfun('${kragoallist.id}');">History</a>-->
+                                                                                <a href="" data-toggle="modal" data-target="#kraModel" onclick="historyajaxfun('${kragoallist.id}');">History</a>
+                                                                            </c:if>
+                                                                        </td>
+                                                                        <%--<c:if test="${status.last}">--%>
+                                                                        <!--<td style="text-align: center">-->
+                                                                        <!--<span style='margin-top: 5px;'>-->
+                                                                        <%--<c:if test="${flag ne 'true' && flag1 ne 'true' && flag2 ne 'true'}">--%>
+                                                                        <!--<input type="button" value="+" id="addRowButtonId" disabled="true" />-->
+                                                                        <%--</c:if>--%>
+                                                                        <%--<c:if test="${flag eq 'true' || flag1 eq 'true' || flag2 eq 'true'}">--%>
+                                                                        <!--<input type="button" value="+" id="addRowButtonId" />-->
+                                                                        <%--</c:if>--%>
+                                                                        <!--</span>-->
+                                                                        <!--</td>-->
+                                                                        <%--</c:if>--%>
+                                                                        <%--<c:if test="${!status.last}">--%>
+                                                                        <td id="" style="text-align: center">
+                                                                            <span style="margin-top: 5px;">
 
-                                                                                      <c:if test="${(flag eq 'true' || flag1 eq 'true' || flag2 eq 'true') && resultCount > 1 }">
-                                                                                          <input type="button" value="-" id="removeRowButtonId" onclick="removeChild3('removeTr${status.count}', 'employeesMid${status.count}', 'textemployeesMid${status.count}', 'employeesEnd${status.count}', 'textemployeesEnd${status.count}', '${kragoallist.id}');" <c:if test="${employeeStatus eq 1}">disabled="true"</c:if>>
-                                                                                      </c:if>
-                                                                                  </span>
-                                                                              </td>
-                                                                              <%--</c:if>--%>
+                                                                                <c:if test="${(flag eq 'true' || flag1 eq 'true' || flag2 eq 'true') && resultCount > 1 }">
+                                                                                    <input type="button" value="-" id="removeRowButtonId" onclick="removeChild3('removeTr${status.count}', 'employeesMid${status.count}', 'textemployeesMid${status.count}', 'employeesEnd${status.count}', 'textemployeesEnd${status.count}', '${kragoallist.id}');" <c:if test="${employeeStatus eq 1}">disabled="true"</c:if>>
+                                                                                </c:if>
+                                                                            </span>
+                                                                        </td>
+                                                                        <%--</c:if>--%>
 
-                                                                              </tr>
+                                                                        </tr>
+                                                                        <tr id="employeesMid${status.count}">
+                                                                            <td colspan="4"><b>Employee’s Mid - Year Self – Assessment KRA:</b></td>
+                                                                            <td colspan="4"><b>Manager’s Mid - Year Review / Evaluation KRA:</b></td>
+                                                                        </tr>
+                                                                        <tr id="textemployeesMid${status.count}" class="displayAction">
+                                                                            <td colspan="4"><textarea id="employeeMidYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="employeeMidYearSelfAssesssmentGoal${status.count}"type="Text" class="form-control">${kragoallist.empMidyearSelfassessmentGoal}</textarea></td>
+                                                                            <td colspan="4"><textarea id="managerMidYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="managerMidYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control">${kragoallist.managerMidyearReviewEvaluation}</textarea></td>
+                                                                        </tr>
 
-<!--                                                                        <tr id="employeesMid${status.count}"><td></td><td colspan="6"><b>Employee’s Mid - Year Self – Assessment Goal:</b></td><td></td><td></td></tr>
-                                                                        <tr id="textemployeesMid${status.count}"><td></td><td colspan="6" ><textarea id="employeeMidYearSelfAssesssmentGoal${status.count}" name="employeeMidYearSelfAssesssmentGoal${status.count}"type="Text" class="form-control">${kragoallist.empMidyearSelfassessmentGoal}</textarea></td><td></td><td></td></tr>
-                                                                        <tr id="managersMid${status.count}"><td></td><td colspan="6" ><b>Manager’s Mid - Year Review / Evaluation Goal:</b></td><td></td><td></td></tr>
-                                                                        <tr id="textmanagersMid${status.count}"><td></td><td colspan="6" ><textarea id="managerMidYearSelfAssesssmentGoal${status.count}" name="managerMidYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control"><c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${kragoallist.managerMidyearReviewEvaluation}</c:if></textarea></td><td></td></tr>
-                                                                        <tr id="employeesEnd${status.count}"><td></td><td colspan="6" ><b>Employee’s End - Year Self – Assessment Goal:</b></td><td></td><td></td></tr>
-                                                                        <tr id="textemployeesEnd${status.count}"><td></td><td colspan="6" ><textarea id="employeeEndYearSelfAssesssmentGoal${status.count}" name="employeeEndYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control">${kragoallist.empEndyearSelfassessmentGoal}</textarea></td><td></td><td></td></tr>
-                                                                        <tr id="managersEnd${status.count}"><td></td><td colspan="6" ><b>Manager’s End - Year Review / Evaluation Goal:</b></td><td></td><td></td></tr>
-                                                                        <tr id="textmanagersEnd${status.count}"><td></td><td colspan="6" ><textarea id="managerEndYearSelfAssesssmentGoal${status.count}" name="managerEndYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control"><c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${kragoallist.managerEndyearReviewEvaluation}</c:if></textarea></td><td></td><td></td></tr>-->
-
-                                                                                  <tr id="employeesMid${status.count}">
-                                                                                  <td colspan="4"><b>Employee’s Mid - Year Self – Assessment KRA:</b></td>
-                                                                                  <td colspan="4"><b>Manager’s Mid - Year Review / Evaluation KRA:</b></td>
-                                                                              </tr>
-                                                                              <tr id="textemployeesMid${status.count}">
-                                                                                  <td colspan="4"><textarea id="employeeMidYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="employeeMidYearSelfAssesssmentGoal${status.count}"type="Text" class="form-control">${kragoallist.empMidyearSelfassessmentGoal}</textarea></td>
-                                                                                  <td colspan="4"><textarea id="managerMidYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="managerMidYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control"><c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${kragoallist.managerMidyearReviewEvaluation}</c:if></textarea></td>
-                                                                                  </tr>
-
-                                                                                  <tr id="employeesEnd${status.count}">
-                                                                                  <td colspan="4"><b>Employee’s End - Year Self – Assessment KRA:</b></td>
-                                                                                  <td colspan="4"><b>Manager’s End - Year Review / Evaluation KRA:</b></td>
-                                                                              </tr>
-                                                                              <tr id="textemployeesEnd${status.count}">
-                                                                                  <td colspan="4"><textarea id="employeeEndYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="employeeEndYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control">${kragoallist.empEndyearSelfassessmentGoal}</textarea></td>
-                                                                                  <td colspan="4"><textarea id="managerEndYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="managerEndYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control"><c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${kragoallist.managerEndyearReviewEvaluation}</c:if></textarea></td>
-                                                                                  </tr>
+                                                                        <tr id="employeesEnd${status.count}">
+                                                                            <td colspan="4"><b>Employee’s End - Year Self – Assessment KRA:</b></td>
+                                                                            <td colspan="4"><b>Manager’s End - Year Review / Evaluation KRA:</b></td>
+                                                                        </tr>
+                                                                        <tr id="textemployeesEnd${status.count}" class="displayAction">
+                                                                            <td colspan="4"><textarea id="employeeEndYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="employeeEndYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control">${kragoallist.empEndyearSelfassessmentGoal}</textarea></td>
+                                                                            <td colspan="4"><textarea id="managerEndYearSelfAssesssmentGoal${status.count}" style="width: 474px;" name="managerEndYearSelfAssesssmentGoal${status.count}" type="Text" class="form-control">${kragoallist.managerEndyearReviewEvaluation}</textarea></td>
+                                                                        </tr>
                                                                         <%--</c:if>--%>
                                                                     </c:forEach>
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                     <input type="hidden" name="countId" id="countId" value="1">
+                                                                    <input type="hidden" name="midyearEmpSelfassStatus1" id="midyearEmpSelfassStatus1" value="0">
+                                                                    <input type="hidden" name="endyearEmpSelfassStatus1" id="endyearEmpSelfassStatus1" value="0">
                                                                     <tr id="row_1_1">
                                                                         <td style="margin: 0px;width: 45px;">1</td>
                                                                         <%--<c:if test="${flag eq true}">--%>
@@ -686,11 +691,11 @@
 
                                     </div>
 
-                                    <div class="box box-info collapsed-box">
+                                    <div class="box box-info collapsed-box displayAction">
                                         <div class="box-header">
                                             <h3 class="box-title">Additional Activities / Projects:</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId7">Expand</span><button class="btn btn-box-tool" data-widget="collapse" id="btn3" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7" ></i></button>
+                                                <span id="spanId7">Expand</span><span class="btn btn-box-tool" data-widget="collapse" id="btn3" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7" ></i></span>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
                                         </div><!-- /.box-header -->
@@ -737,7 +742,14 @@
                                                                 <c:when test="${fn:length(kragoalOtherActivity) > 0}">
                                                                     <input type="hidden" name="countactivityId" id="countactivityId" value="${fn:length(kragoalOtherActivity)}">
                                                                     <c:set var="kragoalOtherActivityValManager" value="${fn:length(kragoalOtherActivity)}"></c:set>
+                                                                    <!--Lock Assement Activity-->
+                                                                    
                                                                     <c:forEach var="kragoalOtherActivity" items="${kragoalOtherActivity}" varStatus="status">
+                                                                    <input type="hidden" name="midyearEmpSelfassActivityStatus${status.count}" id="midyearEmpSelfassActivityStatus${status.count}" value="${kragoalOtherActivity.midyearEmpSelfassActivityStatus}">
+                                                                    <!--<input type="hidden" name="midyearManagerSelfassActivityStatus${status.count}" id="midyearManagerSelfassActivityStatus${status.count}" value="$/{kragoalOtherActivity.midyearManagerSelfassActivityStatus}">-->
+                                                                    <input type="hidden" name="endyearEmpSelfassActivityStatus${status.count}" id="endyearEmpSelfassActivityStatus${status.count}" value="${kragoalOtherActivity.endyearEmpSelfassActivityStatus}">
+                                                                    <!--<input type="hidden" name="endyearManagerSelfassActivityStatus${status.count}" id="endyearManagerSelfassActivityStatus${status.count}" value="$/{kragoalOtherActivity.endyearManagerSelfassActivityStatus}">-->
+                                                                        
                                                                         <c:if test="${kragoalOtherActivity.kraGoalActivities ne '' && kragoalOtherActivity.metricActivities ne ''}">
                                                                             <tr id="activitiesTrId${status.count}">
                                                                             <input type="hidden" name="kragoal_activity_id${status.count}" id="kragoal_activity_id${status.count}" value="${kragoalOtherActivity.id}">
@@ -1017,6 +1029,8 @@
                                                                         <td style="margin: 0px;width: 45px;">1</td>
                                                                         <%--<c:if test="${flag eq true}">--%>
                                                                     <input type="hidden" name="countactivityId" id="countactivityId" value="1">
+                                                                    <input type="hidden" name="midyearEmpSelfassActivityStatus1" id="midyearEmpSelfassActivityStatus1" value="0">
+                                                                    <input type="hidden" name="endyearEmpSelfassActivityStatus1" id="endyearEmpSelfassActivityStatus1" value="0">
                                                                     <!--<td id="kraGoalid"><textarea type="Text" name="kraGoal1" id="kraGoal1" class="form-control"></textarea></td>-->
                                                                     <td id=""><textarea  name="kraGoal_activity1" id="kraGoal_activity1"  class="form-control saveRequried"></textarea></td>
                                                                     <td id=""><textarea name="metric_activity1" id="metric_activity1" class="form-control saveRequried"></textarea></td>
@@ -1176,12 +1190,12 @@
 
 
 
-                                    <div class="box box-info collapsed-box">
+                                    <div class="box box-info collapsed-box displayAction">
                                         <div class="box-header">
-                                            <h3 class="box-title">Competency Evaluation (As Per Zydex Competency Framework) :</h3>
+                                            <h3 class="box-title">Competency Evaluation (As Per Zydex Competency Framework) :${cpmname}</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId3">Expand</span><button class="btn btn-box-tool" id="btn4" data-widget="collapse" onclick="
-                                                        buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
+                                                <span id="spanId3">Expand</span><span class="btn btn-box-tool" id="btn4" data-widget="collapse" onclick="
+                                                        buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></span>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
                                         </div><!-- /.box-header -->
@@ -1200,24 +1214,28 @@
                                                     <!--</div>-->
                                                     <%--</c:if>--%>
 
-                                                    <c:if test="${empty competencyEvaluationList[0][2].title || appraisalPerformanceMaster.managerStatus ne 1}">
+                                                    <%--<c:if test="${empty competencyEvaluationList[0][2].title || appraisalPerformanceMaster.managerStatus ne 1 }">--%>
 
-                                                        <div>
-                                                            <select name="competencyEvaluation_Id" id="competencyEvaluation_Id" class="form-control" onchange="ajaxfun();"/>
-                                                            <option value="">--SELECT--</option>
-                                                            <c:forEach var="competencyMap" items="${competencyMap}">
-                                                                <c:if test="${competencyEvaluationList[0][2].title  eq competencyMap.value}">
-                                                                    <option value="${competencyMap.key}" selected="true">${competencyMap.value}</option>
-                                                                </c:if>
-                                                                <c:if test="${competencyEvaluationList[0][2].title  ne competencyMap.value}">
-                                                                    <option value="${competencyMap.key}">${competencyMap.value}</option>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                            </select>
-                                                        </div>
-                                                    </c:if>
+                                                    <!--<div>-->
+                                                    <!--<select name="competencyEvaluation_Id" id="competencyEvaluation_Id" class="form-control" onchange="ajaxfun();"/>-->
+                                                    <!--<option value="">--SELECT--</option>-->
+                                                    <%--<c:forEach var="competencyMap" items="${competencyMap}">--%>
+                                                    <%--<c:if test="${competencyEvaluationList[0][2].title  eq competencyMap.value}">--%>
+                                                    <!--<option value="$/{competencyMap.key}" selected="true">$/{competencyMap.value}</option>-->
+                                                    <%--</c:if>--%>
+                                                    <%--<c:if test="${competencyEvaluationList[0][2].title  ne competencyMap.value}">--%>
+                                                    <!--<option value="$/{competencyMap.key}">$/{competencyMap.value}</option>-->
+                                                    <%--</c:if>--%>
+                                                    <%--</c:forEach>--%>
+                                                    <!--</select>-->
+                                                    <!--</div>-->
+                                                    <%--</c:if>--%>
 
                                                     <c:if test="${appraisalPerformanceMaster.managerStatus eq 1 && !empty competencyEvaluationList[0][2].title}">
+                                                        <div><input type="text" id="competencyEvaluation_Id" class="form-control" name="competencyEvaluation_Id" value="${competencyEvaluationList[0][2].title}" readonly="true"></div>
+                                                        </c:if>
+
+                                                    <c:if test="${appraisalPerformanceMaster.managerStatus ne 1}">
                                                         <div><input type="text" id="competencyEvaluation_Id" class="form-control" name="competencyEvaluation_Id" value="${competencyEvaluationList[0][2].title}" readonly="true"></div>
                                                         </c:if>
 
@@ -1379,11 +1397,11 @@
                                             </div>
                                         </div><!-- /.box-body -->
                                     </div>
-                                    <div class="box box-info collapsed-box">
+                                    <div class="box box-info collapsed-box displayAction">
                                         <div class="box-header">
                                             <h3 class="box-title">Individual Development Plan(Training Need Identification):</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" id="btn5" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
+                                                <span id="spanId4">Expand</span><span class="btn btn-box-tool" data-widget="collapse" id="btn5" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></span>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
                                         </div><!-- /.box-header -->
@@ -1495,7 +1513,9 @@
 
                                                                                 <td style="text-align: center">
                                                                                     <span style='margin-top: 5px;'>
-                                                                                        <input type="button" value="+" id="addIndividualId" />
+                                                                                        <c:if test="${flag eq 'true' || flag1 eq 'true' || flag2 eq 'true'}">
+                                                                                            <input type="button" value="+" id="addIndividualId" />
+                                                                                        </c:if>
                                                                                     </span>
                                                                                 </td>
                                                                             </c:if>
@@ -1551,8 +1571,8 @@
                                                                                 <td colspan="3" id="endYearReId"><b>Manager End-Year Remark</b></td>
                                                                             </tr>
                                                                             <tr id="individualEmpMid2TrId${status.count}">
-                                                                                <td colspan="3"><textarea rows="3" id="managerMidYearRemark${status.count}" style="width: 451px;" name="managerMidYearRemark${status.count}" class="form-control saveRequried">${individualDevelopmentPlan.managerMidYearRemark}</textarea></td>
-                                                                                <td colspan="3"><textarea rows="3" id="managerEndYearRemark${status.count}" style="width: 451px;" name="managerEndYearRemark${status.count}" class="form-control saveRequried">${individualDevelopmentPlan.managerEndYearRemark}</textarea></td>
+                                                                                <td colspan="3"><textarea rows="3" id="managerMidYearRemark${status.count}" style="width: 451px;" name="managerMidYearRemark${status.count}" class="form-control saveRequried">${individualDevelopmentPlan.managerMidYearRemarkEmployee}</textarea></td>
+                                                                                <td colspan="3"><textarea rows="3" id="managerEndYearRemark${status.count}" style="width: 451px;" name="managerEndYearRemark${status.count}" class="form-control saveRequried">${individualDevelopmentPlan.managerEndYearRemarkManager}</textarea></td>
                                                                             </tr>
                                                                         </c:if>
                                                                     </c:forEach>
@@ -1648,11 +1668,11 @@
                                     </div>
 
 
-                                    <div class="box box-info collapsed-box" id="behaviorsTabId">
+                                    <div class="box box-info collapsed-box displayAction" id="behaviorsTabId">
                                         <div class="box-header">
                                             <h3 class="box-title">Behaviors:</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId5">Expand</span><button class="btn btn-box-tool" id="btn6" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
+                                                <span id="spanId5">Expand</span><span class="btn btn-box-tool" id="btn6" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></span>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
                                         </div><!-- /.box-header -->
@@ -1966,12 +1986,12 @@
                                                                         </tr>
                                                                         <tr style="background-color: lightgrey">
                                                                             <td><b>Other Comment/Remark (Mid Year)</b></td>
-                                                                            <td colspan="2"><textarea type="Text" id="behaviorsMidyearOtherremark" name="behaviorsMidyearOtherremark" class="form-control" readonly="true"><c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${behaviorsMidyearOtherremark}</c:if></textarea></td>
-                                                                        </tr>
-                                                                        <tr style="background-color: lightgrey">
-                                                                            <td id="behaviorsEndyearOtherremarkId"><b>Other Comment/Remark (End Year)</b></td>
-                                                                            <td colspan="2"><textarea type="Text" id="behaviorsEndyearOtherremark" name="behaviorsEndyearOtherremark" class="form-control" readonly="true"><c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${behaviorsEndyearOtherremark}</c:if></textarea></td>
-                                                                        </tr>
+                                                                            <td colspan="2"><textarea type="Text" id="behaviorsMidyearOtherremark" name="behaviorsMidyearOtherremark" class="form-control" readonly="true">${behaviorsMidyearOtherremarkForemployee}</textarea></td>
+                                                                    </tr>
+                                                                    <tr style="background-color: lightgrey">
+                                                                        <td id="behaviorsEndyearOtherremarkId"><b>Other Comment/Remark (End Year)</b></td>
+                                                                        <td colspan="2"><textarea type="Text" id="behaviorsEndyearOtherremark" name="behaviorsEndyearOtherremark" class="form-control" readonly="true">${behaviorsEndyearOtherremarkForemployee}</textarea></td>
+                                                                    </tr>
 
                                                                     <%--</c:forEach>--%>
                                                                 </c:when>
@@ -2148,7 +2168,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Performance Ratings:</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId6">Expand</span><button id="btn7" class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun6();"><i class="fa fa-plus" id="minusId6" ></i></button>
+                                                <span id="spanId6">Expand</span><span id="btn7" class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun6();"><i class="fa fa-plus" id="minusId6" ></i></span>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
                                         </div><!-- /.box-header -->
@@ -2216,7 +2236,7 @@
                                             <div class="box-header">
                                                 <h3 class="box-title">Reworked Comment:</h3>
                                                 <div class="box-tools pull-right">
-                                                    <span id="spanId7">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun7()"><i class="fa fa-plus" id="minusId7"></i></button>
+                                                    <span id="spanId7">Expand</span><span class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun7()"><i class="fa fa-plus" id="minusId7"></i></span>
                                                     <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                                 </div>
 
@@ -2252,7 +2272,7 @@
                                                     </c:when>
                                                     <c:otherwise>
                                                         <div class="col-sm-6 " style="text-align: left;">
-                                                            <button type="submit" class="btn btn-warning" data-original-title="" id="save" name="save" disabled="true" title="" >SAVE</button>
+                                                            <button type="submit" class="btn btn-warning" data-original-title="" id="save" name="save" disabled="true"  title="" >SAVE</button>
                                                         </div>
                                                         <div class="col-sm-6 " style="text-align: right;">
                                                             <button type="submit" class="btn btn-primary" data-original-title=""  id="submit" name="submit" disabled="true" value="submit" title="" >SUBMIT</button>
@@ -2297,6 +2317,8 @@
             }
 //
         } else if (flag11 !== 'true' && flagmid === 'true' && flagEndId !== 'true') {
+//            $(".displayAction :input").attr("readOnly", true);
+//            $(".displayAction1 :input").attr("readOnly", true);
 //            alert("NO2 flage Found");
             if (employeeStatusVar === '1') {
                 $("#form1 :input").attr("disabled", true);
@@ -2308,26 +2330,30 @@
                 $("#btn6").attr("disabled", false);
                 $("#btn7").attr("disabled", false);
                 $(".close").attr("disabled", false);
-
+//
             }
 //
         } else if (flag11 !== 'true' && flagmid !== 'true' && flagEndId === 'true') {
 //            alert("NO3 flage Found");
-            if (employeeStatusVar === '1') {
-                $("#form1 :input").attr("disabled", true);
-                $("#btn1").attr("disabled", false);
-                $("#btn2").attr("disabled", false);
-                $("#btn3").attr("disabled", false);
-                $("#btn4").attr("disabled", false);
-                $("#btn5").attr("disabled", false);
-                $("#btn6").attr("disabled", false);
-                $("#btn7").attr("disabled", false);
-                $(".close").attr("disabled", false);
-
-            }
+//            if (employeeStatusVar === '1') {
+//                $("#form1 :input").attr("disabled", true);
+//                $("#btn1").attr("disabled", false);
+//                $("#btn2").attr("disabled", false);
+//                $("#btn3").attr("disabled", false);
+//                $("#btn4").attr("disabled", false);
+//                $("#btn5").attr("disabled", false);
+//                $("#btn6").attr("disabled", false);
+//                $("#btn7").attr("disabled", false);
+//                $(".close").attr("disabled", false);
+//
+//            }
 
         } else {
-            $("#form1 :input").attr("disabled", true);
+            $(".displayAction :input").attr("readOnly", true);
+            $(".displayAction1 :input").attr("readOnly", true);
+            if (employeeStatusVar === '1') {
+                $("#form1 :input").attr("disabled", true);
+            }
             $("#btn1").attr("disabled", false);
             $("#btn2").attr("disabled", false);
             $("#btn3").attr("disabled", false);
@@ -2335,11 +2361,21 @@
             $("#btn5").attr("disabled", false);
             $("#btn6").attr("disabled", false);
             $("#btn7").attr("disabled", false);
-            $(".close").attr("disabled", false);
+            $(".close").attr("disabled", true);
 
         }
-//        if (tflag11 === 'true' ) {
-//
+//        $(document).on("click", ":submit", function (e) {
+//            if ($(this).val() !== "" && $(this).val() === "submit") {
+//                var w1 = document.getElementById("weightageScore").value;
+//                if (w1 < 75 || w1 > 75) {
+//                    weitageAlert();
+//                    return false;
+//                }
+//            }
+//        });
+//        if (tflag11 === 'true') {
+//            $kraGoal1 = $('#kraGoal1');
+//            $kraGoal1.attr('disabled', true);
 //        } else {
 //            $("#form1 :input").attr("readonly", true);
 //        }
@@ -2349,8 +2385,47 @@
             if (objEvent.keyCode == 9) {  //tab pressed
                 objEvent.preventDefault(); // stops its action
             }
-        })
+        });
+
+
+//        alert('${sessionScope.employeeInfo.competencyEvaluationId}');
+        $(document).ready(function () {
+
+//            alert('${sessionScope.employeeInfo.competencyEvaluationId}');
+
+            var subCompentencyCountId = document.getElementById("subCompentencyCount").value;
+            if (subCompentencyCountId == 0) {
+                myajaxfun1('${sessionScope.employeeInfo.competencyEvaluationId}');
+            }
+        });
+        //        var w1 = document.getElementById("weightageScore").value;
+//        if (w1 < 75 || w1 > 75) {
+//            weitageAlert();
+//            return false;
+//        }
+//        $(".btn-warnings").click(function () {
+//            //alert("The paragraph was clicked.");
+//            event.preventDefault();
+//            $(".btn-warnings').removeAttr("disabled")
+//        });
+//        $("form").submit(function(event) {
+//        if ($("input:first").val() === "75") {
+//        $("span").text("Validated...").show();
+//                return;
+//        }
+//        function myFunctionSubmit() {
+//            var txt;
+//            var r = confirm("Are You Sure ! You want to submit!");
+//            if (r == true) {
+//                txt = "true";
+//            } else {
+//                txt = "You pressed Cancel!";
+//            }
+////            document.getElementById("demo").innerHTML = txt;
+//        }
+
     </script>
+
     <style>
         .class-with-width { width: 150px !important; }
     </style>

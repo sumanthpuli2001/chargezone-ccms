@@ -14,6 +14,9 @@
         <property name="weightageScore" type="string">
             <column name="weightage_score" />
         </property>
+        <property name="weightageScoreManager" type="string">
+            <column name="weightage_score_manager" />
+        </property>
         <property name="totalScore" type="string">
             <column name="total_score" />
         </property>
@@ -79,6 +82,15 @@
         </property>
         <property name="endYearManagerStatus" type="int">
             <column name="end_year_manager_status" not-null="true" />
+        </property>
+        <property name="behaviorsMidyearOtherremarkForemployee" type="string">
+            <column name="behaviors_midyear_otherremark_foremployee" />
+        </property>
+        <property name="behaviorsEndyearOtherremarkForemployee" type="string">
+            <column name="behaviors_endyear_otherremark_foremployee" />
+        </property>
+        <property name="behaviorsFinalscoreForemployee" type="string">
+            <column name="behaviors_finalscore_foremployee" length="45" />
         </property>
         <set name="appraisalPerformanceBehaviorses" inverse="true">
             <key>

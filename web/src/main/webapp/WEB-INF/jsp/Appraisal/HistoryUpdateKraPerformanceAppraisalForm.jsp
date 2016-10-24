@@ -33,9 +33,10 @@
         <td>${status.count}</td>
         <td>${updateKraList1[1]}</td>
         <td>${updateKraList1[2]}</td>
-        <td><input type="text" name="" id="" value="${updateKraList1[3]}" disabled="true" class="form-control"></td>
-        <td><input type="text" name="" id="" value="${updateKraList1[5]}" disabled="true" class="form-control"></td>
-        <td><input type="text" name="" id="" value="${updateKraList1[4]}" disabled="true" class="form-control"></td>
+        <!--<td><input type="text" name="" id="" value="/$//{updateKraList1[3]}" disabled="true" class="form-control"></td>-->
+        <td>${updateKraList1[3]}</td>
+        <td>${updateKraList1[5]}</td>
+        <td>${updateKraList1[4]}</td>
     </tr>
 </c:forEach>
 <!--</table>-->

@@ -14,5 +14,5 @@ import java.util.List;
  */
 public interface PmpFormStatusMasterDAO<T> extends GenericsDAO<T> {
 
-
+    public List<?> readByPmpformstatusStatus(String employeeId);
 }

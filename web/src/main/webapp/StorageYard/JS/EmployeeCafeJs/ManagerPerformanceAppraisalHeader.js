@@ -338,8 +338,7 @@ function weightageCountEmp() {
                 document.getElementById("weightage" + total).value = "";
 
                 break;
-            }
-            else if (total + '' == countId + '' && weightage < 75 && !flag1) {
+            } else if (total + '' == countId + '' && weightage < 75 && !flag1) {
                 weitageAlert();
                 weightage -= parseFloat(val);
                 document.getElementById("weightage" + total).value = "";
@@ -852,6 +851,7 @@ $(function () {
 
         } else if (flagMidId == 'true') {
             //                alert("djjdjdjdjdjdjdjdjdjdjdjdjd" + selectedValue1);
+//            document.getElementById("text" + j).readonly = true;
             var selectedValue1 = document.getElementById("trainingSelectId" + j).value;
             if (selectedValue1 == "Other") {
                 document.getElementById("trainingSelectTextinput" + j).style.display = "block";
@@ -1238,13 +1238,14 @@ function behaviorsCountEndYear() {
 //    var selectedString = value11.value;
     for (i = 1; i <= 5; i++) {
         var endYearScore = document.getElementById("endYearScore" + i).value;
-//        alert('aaaaaa' + midYearScore);
+
         if (endYearScore !== "") {
             behaviorsEnd += parseFloat(endYearScore);
         }
     }
-    //    alert(midYearScore);
-//    alert("behaviorsMidyearTotalscore" + behaviors);     document.getElementById("behaviorsEndyearTotalscore").value = behaviorsEnd;
+//        alert(behaviorsEnd);
+//    alert("behaviorsMidyearTotalscore" + behaviors);    
+    document.getElementById("behaviorsEndyearTotalscore").value = behaviorsEnd;
     performancefinalScoreRatings();
 
 }
@@ -1359,130 +1360,172 @@ function approveSubmit11() {
 ////////////////////////////////////footer side Java Scripts///////////////////////////////////////////////////////////////
 
 $(document).on("click", ":submit", function (e) {
-    if ($(this).val() !== "" && $(this).val() === "submit") {
-        var flag11 = document.getElementById("flagId").value;
-        var flagmid = document.getElementById("flagMidId").value;
-        var flagEndId = document.getElementById("flagEndId").value;
-        var count = document.getElementById("subCompentencyCount").value;
-        var countId = document.getElementById("IndividualId").value;
-        var kragoalLength = document.getElementById("kragoalLength").value;
-        var kragoalLengthactivity = document.getElementById("kragoalLengthactivity").value;
+    if (confirm("Are you sure you want to Submit")) {
+        if ($(this).val() !== "" && $(this).val() === "submit") {
 
 
-        if (flag11 === 'true') {
-            document.getElementById("kraGoal1").required = true;
-            document.getElementById("metric1").required = true;
-            for (i = 1; i <= kragoalLength; i++) {
-                document.getElementById("kraGoal" + i).required = true;
-                document.getElementById("metric" + i).required = true;
-                document.getElementById("kraCategoryMap" + i).required = true;
-            }
-            var activityid = document.getElementById("kraGoal_activity1").value;
-            if (activityid !== '') {
-                document.getElementById("kraGoal_activity1").required = true;
-                document.getElementById("metric_activity1").required = true;
-                document.getElementById("priority1").required = true;
-            }
-            for (i = 1; i <= kragoalLengthactivity; i++) {
-                var activityidOther = document.getElementById("kraGoal_activity" + i).value;
-                if (activityidOther !== '') {
-                    document.getElementById("kraGoal_activity" + i).required = true;
-                    document.getElementById("metric_activity" + i).required = true;
-                    document.getElementById("priority" + i).required = true;
+            var flag11 = document.getElementById("flagId").value;
+            var flagmid = document.getElementById("flagMidId").value;
+            var flagEndId = document.getElementById("flagEndId").value;
+            var count = document.getElementById("subCompentencyCount").value;
+            var countId = document.getElementById("IndividualId").value;
+            var kragoalLength = document.getElementById("kragoalLength").value;
+            var kragoalLengthactivity = document.getElementById("kragoalLengthactivity").value;
+
+
+            if (flag11 === 'true') {
+                document.getElementById("kraGoal1").required = true;
+                document.getElementById("metric1").required = true;
+                for (i = 1; i <= kragoalLength; i++) {
+                    document.getElementById("kraGoal" + i).required = true;
+                    document.getElementById("metric" + i).required = true;
+                    document.getElementById("kraCategoryMap" + i).required = true;
                 }
-            }
+                var activityid = document.getElementById("kraGoal_activity1").value;
+                if (activityid !== '') {
+                    document.getElementById("kraGoal_activity1").required = true;
+                    document.getElementById("metric_activity1").required = true;
+                    document.getElementById("priority1").required = true;
+                }
+                for (i = 1; i <= kragoalLengthactivity; i++) {
+                    var activityidOther = document.getElementById("kraGoal_activity" + i).value;
+                    if (activityidOther !== '') {
+                        document.getElementById("kraGoal_activity" + i).required = true;
+                        document.getElementById("metric_activity" + i).required = true;
+                        document.getElementById("priority" + i).required = true;
+                    }
+                }
 
-            for (i = 1; i <= count; i++) {
+                for (i = 1; i <= count; i++) {
 //                document.getElementById("competencyStartYear" + i).required = true;
 //            document.getElementById("compentencyStartRemark" + i).required = true;
 
-            }
-            for (i = 1; i <= countId; i++) {
-
-                var selectedValue1 = document.getElementById("trainingSelectId" + i).value;
-                if (selectedValue1 == "Other") {
-                    //                document.getElementById("trainingSelectTextinput" + i).required = true;
                 }
-                //            document.getElementById("text" + i).required = true;
+                for (i = 1; i <= countId; i++) {
+
+                    var selectedValue1 = document.getElementById("trainingSelectId" + i).value;
+                    if (selectedValue1 == "Other") {
+                        //                document.getElementById("trainingSelectTextinput" + i).required = true;
+                    }
+                    //            document.getElementById("text" + i).required = true;
 //            document.getElementById("individualtextDiv" + i).required = true;
-                //            document.getElementById("trainingSelectId" + i).required = true;
+                    //            document.getElementById("trainingSelectId" + i).required = true;
 
-            }
+                }
 
-            document.getElementById("midYearRemark1").readOnly = true;
-            document.getElementById("endYearRemark1").readOnly = true;
+                document.getElementById("midYearRemark1").readOnly = true;
+                document.getElementById("endYearRemark1").readOnly = true;
 //        document.getElementById("kraGoal_activity1").required = true;
 //        document.getElementById("metric_activity1").required = true;
 //        document.getElementById("priority1").required = true;
-            var w1 = document.getElementById("weightageScore").value;
-            if (w1 < 75) {
-                weitageAlert();
-                return false;
-            }
+                var w1 = document.getElementById("weightageScore").value;
+                if (w1 < 75) {
+                    weitageAlert();
+                    return false;
+                }
 
-        } else if (flagmid === 'true') {
-            document.getElementById("kraGoal1").required = true;
-            document.getElementById("metric1").required = true;
-            for (i = 1; i <= count; i++) {
+            } else if (flagmid === 'true') {
+                document.getElementById("kraGoal1").required = true;
+                document.getElementById("metric1").required = true;
+                for (i = 1; i <= count; i++) {
 //                document.getElementById("compentencyMidYear" + i).required = true; change 4/10/2016
 //            document.getElementById("compentencyMidRemark" + i).required = true;
 
-            }
-            var indivisul = document.getElementById("text1").value;
-            if (indivisul !== '') {
+                }
+                for (i = 1; i <= kragoalLength; i++) {
+
+                    document.getElementById("managerMidYearSelfAssesssmentGoal" + i).required = true;
+                }
+
+                for (i = 1; i <= 5; i++) {
+                    document.getElementById("midYearScore" + i).required = true;
+                    document.getElementById("managerMidYearReview" + i).required = true;
+                }
+                document.getElementById("behaviorsMidyearOtherremark").required = true;
+
+                var indivisul = document.getElementById("text1").value;
+                if (indivisul !== '') {
 
 //                document.getElementById("text1").required = true; change 4/10/2016
 //                document.getElementById("individualtextDiv1").required = true; change 4/10/2016
 //                document.getElementById("trainingSelectId1").required = true; change 4/10/2016
-                if (selectedValue1 == "Other") {
+                    if (selectedValue1 == "Other") {
 //                    document.getElementById("trainingSelectTextinput" + i).required = true; change 4/10/2016
+                    }
                 }
-            }
-            for (i = 1; i <= countId; i++) {
-                if (indivisul !== '') {
+                for (i = 1; i <= countId; i++) {
+                    if (indivisul !== '') {
 //                    document.getElementById("individualtextDiv" + i).required = true; change 4/10/2016
 //                    document.getElementById("trainingSelectId" + i).required = true; change 4/10/2016
 //                    var selectedValue1 = document.getElementById("trainingSelectId" + i).value; change 4/10/2016
-                    if (selectedValue1 == "Other") {
+                        if (selectedValue1 == "Other") {
 //                        document.getElementById("trainingSelectTextinput" + i).required = true; change 4/10/2016
+                        }
                     }
+
+                }
+                //        document.getElementById("kraGoal_activity1").required = true;
+                //        document.getElementById("metric_activity1").required = true;
+                //        document.getElementById("priority1").required = true;
+                //        document.getElementById("kraCategoryMapOther1").required = true;
+                //        document.getElementById("empMidyearSelfassessmentGoalActivities1").required = true;
+                var w1 = document.getElementById("weightageScore").value;
+                if (w1 < 75) {
+                    weitageAlert();
+                    return false;
+                }
+                for (i = 1; i <= kragoalLengthactivity; i++) {
+                    //            document.getElementById("empMidyearSelfassessmentGoalActivities" + i).required = true;
                 }
 
-            }
-            //        document.getElementById("kraGoal_activity1").required = true;
-            //        document.getElementById("metric_activity1").required = true;
-            //        document.getElementById("priority1").required = true;
-            //        document.getElementById("kraCategoryMapOther1").required = true;
-            //        document.getElementById("empMidyearSelfassessmentGoalActivities1").required = true;
+            } else if (flagEndId === "true") {
+//            document.getElementById("kraGoal1").required = true;
+//            document.getElementById("metric1").required = true;
+                document.getElementById("finalScore1").required = true;
 
-            for (i = 1; i <= kragoalLengthactivity; i++) {
-                //            document.getElementById("empMidyearSelfassessmentGoalActivities" + i).required = true;
-            }
-
-        } else if (flagEndId === "true") {
-            document.getElementById("kraGoal1").required = true;
-            document.getElementById("metric1").required = true;
-            for (i = 1; i <= count; i++) {
+                for (i = 1; i <= kragoalLength; i++) {
+                    document.getElementById("finalScore" + i).required = true;
+                }
+                for (i = 1; i <= count; i++) {
 //                document.getElementById("compentencyEndYear" + i).required = true; change 4/10/2016
 //            document.getElementById("compentencyEndRemark" + i).required = true;
-            }
-            for (i = 1; i <= countId; i++) {
-//                document.getElementById("trainingSelectId" + i).required = true; change 4/10/2016
-//                var selectedValue1 = document.getElementById("trainingSelectId" + i).value; change 4/10/2016
-                if (selectedValue1 == "Other") {
-//                    document.getElementById("trainingSelectTextinput" + i).required = true; change 4/10/2016
                 }
 
-            }
-        }
+                var w1 = document.getElementById("weightageScore").value;
+                if (w1 < 75) {
+                    weitageAlert();
+                    return false;
+                }
+                for (i = 1; i <= countId; i++) {
+//                document.getElementById("trainingSelectId" + i).required = true; change 4/10/2016
+//                var selectedValue1 = document.getElementById("trainingSelectId" + i).value; change 4/10/2016
+                    if (selectedValue1 == "Other") {
+//                    document.getElementById("trainingSelectTextinput" + i).required = true; change 4/10/2016
+                    }
 
-    } else if ($(this).val() !== "" && $(this).val() === "save") {
-        var flag11 = document.getElementById("flagId").value;
+                }
+                for (i = 1; i <= kragoalLength; i++) {
+
+                    document.getElementById("managerEndYearSelfAssesssmentGoal" + i).required = true;
+                }
+                for (i = 1; i <= 5; i++) {
+                    document.getElementById("endYearScore" + i).required = true;
+                    document.getElementById("managerEndYearReview" + i).required = true;
+                }
+                document.getElementById("behaviorsEndyearOtherremark").required = true;
+            }
+
+        } else if ($(this).val() !== "" && $(this).val() === "save") {
+            var flag11 = document.getElementById("flagId").value;
 //        if (flag11 === 'true') {
 //        alert($(this).val());
 //            document.getElementsByClassName("saveRequried").required = false;
-        $('.saveRequried').removeAttr('required');
+            $('.saveRequried').removeAttr('required');
 //        }
+        }
+
+    } else {
+        return false;
     }
 });
 
@@ -1496,14 +1539,19 @@ $(document).ready(function () {
     var kragoalLength = document.getElementById("kragoalLength").value;
     var weightageScore = document.getElementById("weightageScore").value;
     var managerStatus = document.getElementById("managerStatus").value;
-//    $("body").attr("readonly", "readonly");
-    //    $('body').attr('unselectable', 'on')
-//            .css('user-select', 'none')
-    //            .on('selectstart', false);
+//    alert("hello");
+    var pmpmidyearstatus = document.getElementById("pmpmidyearstatus").value;
+    var pmpendyearstatus = document.getElementById("pmpendyearstatus").value;
+    var pmpasManager = document.getElementById("pmpasManager").value;
     if (flag11a === 'true') {
-        //        document.getElementById("kraGoal_activity1").required = true;
-        //        document.getElementById("metric_activity1").required = true;
-//        document.getElementById("priority1").required = true;
+        document.getElementById("kraGoal_activity1").readOnly = true;
+        document.getElementById("metric_activity1").readOnly = true;
+
+        document.getElementById("kraCategoryMapOther1").style.pointerEvents = "none";
+        document.getElementById("kraCategoryMapOther1").style.cursor = "default";
+
+        document.getElementById("priority1").style.pointerEvents = "none";
+        document.getElementById("priority1").style.cursor = "default";
 
 
         document.getElementById("midYearDivOther1").style.pointerEvents = "none";
@@ -1523,21 +1571,34 @@ $(document).ready(function () {
 
         for (i = 1; i <= kragoalLengthactivity; i++) {
 
+            document.getElementById("kraGoal_activity" + i).readOnly = true;
+            document.getElementById("metric_activity" + i).readOnly = true;
 
-            if (managerStatus === '0') {
-                document.getElementById("EditByEmployeeact" + i).disabled = true;
-            } else {
-                document.getElementById("EditByEmployeeact" + i).disabled = false;
-            }
+            document.getElementById("kraCategoryMapOther" + i).style.pointerEvents = "none";
+            document.getElementById("kraCategoryMapOther" + i).style.cursor = "default";
 
-            if (managerStatus == '0') {
-                //                alert("managerStatus" + managerStatus);
-                var kra1 = document.getElementById('kraGoal_activity' + i).readOnly = false;
-                document.getElementById("metric_activity" + i).readOnly = false;
-            } else {
-                var kra1 = document.getElementById('kraGoal_activity' + i).readOnly = true;
-                document.getElementById("metric_activity" + i).readOnly = true;
-            }
+            document.getElementById("priority" + i).style.pointerEvents = "none";
+            document.getElementById("priority" + i).style.cursor = "default";
+
+
+            document.getElementById("midYearDivOther" + i).readOnly = true;
+            document.getElementById("endYearDivOther" + i).readOnly = true;
+            document.getElementById("activity" + i).readOnly = true;
+
+//            if (managerStatus === '0') {
+//                document.getElementById("EditByEmployeeact" + i).disabled = true;
+//            } else {
+//                document.getElementById("EditByEmployeeact" + i).disabled = false;
+//            }
+
+//            if (managerStatus == '0') {
+//                //                alert("managerStatus" + managerStatus);
+//                var kra1 = document.getElementById('kraGoal_activity' + i).readOnly = false;
+//                document.getElementById("metric_activity" + i).readOnly = false;
+//            } else {
+//                var kra1 = document.getElementById('kraGoal_activity' + i).readOnly = true;
+//                document.getElementById("metric_activity" + i).readOnly = true;
+//            }
 
             var midYearDivOther = document.getElementById("midYearDivOther" + i).value;
             document.getElementById("midYearDivOther" + i).style.pointerEvents = "none";
@@ -1563,8 +1624,17 @@ $(document).ready(function () {
         //        document.getElementById("kraGoal_activity1").required = true;
         //        document.getElementById("metric_activity1").required = true;
         //        document.getElementById("priority1").required = true;
+        document.getElementById("kraGoal_activity1").readOnly = true;
+        document.getElementById("metric_activity1").readOnly = true;
+        document.getElementById("kraCategoryMapOther1").style.pointerEvents = "none";
+        document.getElementById("kraCategoryMapOther1").style.cursor = "default";
 
-//        alert("dsf");
+        document.getElementById("priority1").style.pointerEvents = "none";
+        document.getElementById("priority1").style.cursor = "default";
+
+        document.getElementById("midYearDivOther1").style.pointerEvents = "none";
+        document.getElementById("midYearDivOther1").style.cursor = "default";
+
         document.getElementById("endYearDivOther1").style.pointerEvents = "none";
         document.getElementById("endYearDivOther1").style.cursor = "default";
         document.getElementById("activity1").style.pointerEvents = "none";
@@ -1573,28 +1643,65 @@ $(document).ready(function () {
         //        document.getElementById("empMidyearSelfassessmentGoalActivities1").required = true;
         var empMidyearSelfassessmentGoalActivities1 = document.getElementById("empMidyearSelfassessmentGoalActivities1").value;
         document.getElementById("empMidyearSelfassessmentGoalActivities1").readOnly = true;
+
+
+//        alert("djf");
+        alert(document.getElementById("midyearManagerSelfassActivityStatus1").value);
+        var managerMidselfassStatus = document.getElementById("midyearManagerSelfassActivityStatus1").value;
+        alert(managerMidselfassStatus);
+        if (managerMidselfassStatus === '0') {
+            document.getElementById("managerMidYearSelfAssesssmentGoalActivities1").readOnly = false;
+        } else {
+            document.getElementById("managerMidYearSelfAssesssmentGoalActivities1").readOnly = true;
+        }
+
+//        if (pmpmidyearstatus === 'false' && pmpasManager === 'false') {
+////                alert("Mid year Div==" + pmpmidyearstatus);
+//            document.getElementById("managerMidYearSelfAssesssmentGoalActivities1").readOnly = false;
+//        } else {
+////                alert("Mid year Div True");
+//            document.getElementById("managerMidYearSelfAssesssmentGoalActivities1").readOnly = true;
+//        }
 //        var managerMidYearSelfAssesssmentGoalActivities = document.getElementById("managerMidYearSelfAssesssmentGoalActivities1").value;
         //        document.getElementById("managerMidYearSelfAssesssmentGoalActivities1").readOnly = true;
         var empEndyearSelfassessmentGoalActivities = document.getElementById("empEndyearSelfassessmentGoalActivities1").value;
         document.getElementById("empEndyearSelfassessmentGoalActivities1").readOnly = true;
         document.getElementById("managerEndYearSelfAssesssmentGoalActivities1").readOnly = true;
         for (i = 1; i <= kragoalLengthactivity; i++) {
+            document.getElementById("kraGoal_activity" + i).readOnly = true;
+            document.getElementById("metric_activity" + i).readOnly = true;
+
+            document.getElementById("kraCategoryMapOther" + i).style.pointerEvents = "none";
+            document.getElementById("kraCategoryMapOther" + i).style.cursor = "default";
+
+            document.getElementById("priority" + i).style.pointerEvents = "none";
+            document.getElementById("priority" + i).style.cursor = "default";
 
 
-            if (managerStatus === '0') {
-                document.getElementById("EditByEmployeeact" + i).disabled = true;
-            } else {
-                document.getElementById("EditByEmployeeact" + i).disabled = false;
-            }
+            document.getElementById("midYearDivOther" + i).style.pointerEvents = "none";
+            document.getElementById("midYearDivOther" + i).style.cursor = "default";
 
-            if (managerStatus == '0') {
-//                alert("managerStatus" + managerStatus);
-                var kra1 = document.getElementById('kraGoal_activity' + i).readOnly = false;
-                document.getElementById("metric_activity" + i).readOnly = false;
-            } else {
-                var kra1 = document.getElementById('kraGoal_activity' + i).readOnly = true;
-                document.getElementById("metric_activity" + i).readOnly = true;
-            }
+            document.getElementById("endYearDivOther" + i).style.pointerEvents = "none";
+            document.getElementById("endYearDivOther" + i).style.cursor = "default";
+            document.getElementById("activity" + i).style.pointerEvents = "none";
+            document.getElementById("activity" + i).style.cursor = "default";
+
+
+
+//            if (managerStatus === '0') {
+//                document.getElementById("EditByEmployeeact" + i).disabled = true;
+//            } else {
+//                document.getElementById("EditByEmployeeact" + i).disabled = false;
+//            }
+
+//            if (managerStatus == '0') {
+////                alert("managerStatus" + managerStatus);
+//                var kra1 = document.getElementById('kraGoal_activity' + i).readOnly = false;
+//                document.getElementById("metric_activity" + i).readOnly = false;
+//            } else {
+//                var kra1 = document.getElementById('kraGoal_activity' + i).readOnly = true;
+//                document.getElementById("metric_activity" + i).readOnly = true;
+//            }
 
 //            var midYearDiv = document.getElementById("midYearDivOther" + i).value;
             //            document.getElementById("midYearDivOther" + i).style.pointerEvents = "none";
@@ -1606,6 +1713,22 @@ $(document).ready(function () {
 //            alert("a1");
             var empMidyearSelfassessmentGoalActivities = document.getElementById("empMidyearSelfassessmentGoalActivities" + i).value;
             document.getElementById("empMidyearSelfassessmentGoalActivities" + i).readOnly = true;
+
+            var managerMidselfassStatus = document.getElementById("midyearManagerSelfassActivityStatus" + i).value;
+            if (managerMidselfassStatus === '0') {
+                document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + i).readOnly = false;
+            } else {
+                document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + i).readOnly = true;
+            }
+
+
+//            if (pmpmidyearstatus === 'false' && pmpasManager === 'false') {
+////                alert("Mid year Div==" + pmpmidyearstatus);
+//                document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + i).readOnly = false;
+//            } else {
+////                alert("Mid year Div True");
+//                document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + i).readOnly = true;
+//            }
 
             //            var managerMidYearSelfAssesssmentGoalActivities = document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + i).value;
 //            alert("a4");
@@ -1620,18 +1743,43 @@ $(document).ready(function () {
 
     } else if (flagEndId === 'true') {
 
-//        document.getElementById("kraGoal_activity1").required = true;
-//        document.getElementById("metric_activity1").required = true;
-//        document.getElementById("priority1").required = true;
+        document.getElementById("kraGoal_activity1").readOnly = true;
+        document.getElementById("metric_activity1").readOnly = true;
+
+        document.getElementById("kraCategoryMapOther1").style.pointerEvents = "none";
+        document.getElementById("kraCategoryMapOther1").style.cursor = "default";
+
+        document.getElementById("priority1").style.pointerEvents = "none";
+        document.getElementById("priority1").style.cursor = "default";
+
+
         document.getElementById("midYearDivOther1").style.pointerEvents = "none";
         document.getElementById("midYearDivOther1").style.cursor = "default";
 
-        //        document.getElementById("activity1").style.pointerEvents = "none";
-        //        document.getElementById("activity1").style.cursor = "default";
+        document.getElementById("endYearDivOther1").style.pointerEvents = "none";
+        document.getElementById("endYearDivOther1").style.cursor = "default";
+
+        document.getElementById("midYearDivOther1").style.pointerEvents = "none";
+        document.getElementById("midYearDivOther1").style.cursor = "default";
+
+//        document.getElementById("activity1").style.pointerEvents = "none";
+//        document.getElementById("activity1").style.cursor = "default";
 
         //        document.getElementById("empMidyearSelfassessmentGoalActivities1").required = true;
         var empMidyearSelfassessmentGoalActivities = document.getElementById("empMidyearSelfassessmentGoalActivities1").value;
         document.getElementById("empMidyearSelfassessmentGoalActivities1").readOnly = true;
+
+        var managerEndselfassStatus = document.getElementById("endyearManagerSelfassActivityStatus1").value;
+        if (managerEndselfassStatus === '0') {
+            document.getElementById("managerEndYearSelfAssesssmentGoalActivities1").readOnly = false;
+        } else {
+            document.getElementById("managerEndYearSelfAssesssmentGoalActivities1").readOnly = true;
+        }
+//        if (pmpendyearstatus === 'false' && pmpasManager === 'false') {
+//            document.getElementById("managerEndYearSelfAssesssmentGoalActivities1").readOnly = false;
+//        } else {
+//            document.getElementById("managerEndYearSelfAssesssmentGoalActivities1").readOnly = true;
+//        }
         var managerMidYearSelfAssesssmentGoalActivities = document.getElementById("managerMidYearSelfAssesssmentGoalActivities1").value;
         document.getElementById("managerMidYearSelfAssesssmentGoalActivities1").readOnly = true;
         var empEndyearSelfassessmentGoalActivities = document.getElementById("empEndyearSelfassessmentGoalActivities1").value;
@@ -1642,26 +1790,55 @@ $(document).ready(function () {
         for (i = 1; i <= kragoalLengthactivity; i++) {
 
 
-            if (managerStatus === '0') {
-                document.getElementById("EditByEmployeeact" + i).disabled = true;
-            } else {
-                document.getElementById("EditByEmployeeact" + i).disabled = false;
-            }
-            if (managerStatus == '0') {
-//                alert("managerStatus" + managerStatus);
-                var kra1 = document.getElementById('kraGoal_activity' + i).readOnly = false;
-                document.getElementById("metric_activity" + i).readOnly = false;
-            } else {
-                var kra1 = document.getElementById('kraGoal_activity' + i).readOnly = true;
-                document.getElementById("metric_activity" + i).readOnly = true;
-            }
-//            alert("hi");
-            var midYearDiv = document.getElementById("midYearDivOther" + i).value;
+            document.getElementById("kraGoal_activity" + i).readOnly = true;
+            document.getElementById("metric_activity" + i).readOnly = true;
+
+            document.getElementById("kraCategoryMapOther" + i).style.pointerEvents = "none";
+            document.getElementById("kraCategoryMapOther" + i).style.cursor = "default";
+
+            document.getElementById("priority" + i).style.pointerEvents = "none";
+            document.getElementById("priority" + i).style.cursor = "default";
+
             document.getElementById("midYearDivOther" + i).style.pointerEvents = "none";
             document.getElementById("midYearDivOther" + i).style.cursor = "default";
+
+            document.getElementById("endYearDivOther" + i).style.pointerEvents = "none";
+            document.getElementById("endYearDivOther" + i).style.cursor = "default";
+
+//            if (managerStatus === '0') {
+//                document.getElementById("EditByEmployeeact" + i).disabled = true;
+//            } else {
+//                document.getElementById("EditByEmployeeact" + i).disabled = false;
+//            }
+
+//            if (managerStatus == '0') {
+////                alert("managerStatus" + managerStatus);
+//                var kra1 = document.getElementById('kraGoal_activity' + i).readOnly = false;
+//                document.getElementById("metric_activity" + i).readOnly = false;
+//            } else {
+//                var kra1 = document.getElementById('kraGoal_activity' + i).readOnly = true;
+//                document.getElementById("metric_activity" + i).readOnly = true;
+//            }
+//            alert("hi");
+//            var midYearDiv = document.getElementById("midYearDivOther" + i).value;
+//            document.getElementById("midYearDivOther" + i).style.pointerEvents = "none";
+//            document.getElementById("midYearDivOther" + i).style.cursor = "default";
             //            var endYearDiv = document.getElementById("endYearDivOther" + i).value; //            document.getElementById("endYearDivOther" + i).style.pointerEvents = "none"; //            document.getElementById("endYearDivOther" + i).style.cursor = "default";
             //            document.getElementById("empMidyearSelfassessmentGoalActivities" + i).required = true;
             //            alert("a1");
+
+            var managerEndselfassStatus = document.getElementById("endyearManagerSelfassActivityStatus" + i).value;
+            if (managerEndselfassStatus === '0') {
+                document.getElementById("managerEndYearSelfAssesssmentGoalActivities" + i).readOnly = false;
+            } else {
+                document.getElementById("managerEndYearSelfAssesssmentGoalActivities" + i).readOnly = true;
+            }
+
+//            if (pmpendyearstatus === 'false' && pmpasManager === 'false') {
+//                document.getElementById("managerEndYearSelfAssesssmentGoalActivities" + i).readOnly = false;
+//            } else {
+//                document.getElementById("managerEndYearSelfAssesssmentGoalActivities" + i).readOnly = true;
+//            }
             var empMidyearSelfassessmentGoalActivities = document.getElementById("empMidyearSelfassessmentGoalActivities" + i).value;
             document.getElementById("empMidyearSelfassessmentGoalActivities" + i).readOnly = true;
             var managerMidYearSelfAssesssmentGoalActivities = document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + i).value;
@@ -1674,16 +1851,30 @@ $(document).ready(function () {
     }
     ////////////////////////kra Goal/////////////////////////////
     if (flag11 === 'true') {
-        for (i = 1; i <= kragoalLength; i++) { //            alert("managerStatus" + managerStatus);
-            if (managerStatus == 0) {
-                var kra = document.getElementById('kraGoal' + i).readOnly = false;
-                document.getElementById("metric" + i).readOnly = false;
-            } else {
+        document.getElementById("kraGoal1").readOnly = true;
+        document.getElementById("metric1").readOnly = true;
+        document.getElementById("kraCategoryMap1").style.pointerEvents = "none";
+        document.getElementById("kraCategoryMap1").style.cursor = "default";
+        document.getElementById("weightage1").readOnly = true;
 
-                var kra = document.getElementById('kraGoal' + i).readOnly = true;
-                document.getElementById("metric" + i).readOnly = true;
-//                document.getElementById("save").disabled = true;
-            }
+        document.getElementById("midYearDiv1").style.pointerEvents = "none";
+        document.getElementById("midYearDiv1").style.cursor = "default";
+        document.getElementById("endYearDiv1").style.pointerEvents = "none";
+        document.getElementById("endYearDiv1").style.cursor = "default";
+
+
+        for (i = 1; i <= kragoalLength; i++) { //            alert("managerStatus" + managerStatus);
+//            if (managerStatus == 0) {
+//                var kra = document.getElementById('kraGoal' + i).readOnly = false;
+//                document.getElementById("metric" + i).readOnly = false;
+//            } else {
+//
+//                var kra = document.getElementById('kraGoal' + i).readOnly = true;
+//                document.getElementById("metric" + i).readOnly = true;
+////                document.getElementById("save").disabled = true;
+//            }
+
+
 //            document.getElementById("kraGoal" + i).required = true;
 //            document.getElementById("metric" + i).required = true;
 //            $('#errorId' + i).hide();
@@ -1693,6 +1884,12 @@ $(document).ready(function () {
 
             //            document.getElementById("weightage" + i).Math.round(i);
 //            alert(abc);
+            document.getElementById("kraGoal" + i).readOnly = true;
+            document.getElementById("metric" + i).readOnly = true;
+            document.getElementById("weightage" + i).readOnly = true;
+            document.getElementById("kraCategoryMap" + i).style.pointerEvents = "none";
+            document.getElementById("kraCategoryMap" + i).style.cursor = "default";
+
             document.getElementById("midYearDiv" + i).style.pointerEvents = "none";
             document.getElementById("midYearDiv" + i).style.cursor = "default";
 
@@ -1735,17 +1932,54 @@ $(document).ready(function () {
 //        if (managerStatus == 1) {
 //            document.getElementById("save").disabled = true;
 //        }
+        document.getElementById("kraGoal1").readOnly = true;
+        document.getElementById("metric1").readOnly = true;
+
+        document.getElementById("kraCategoryMap1").style.pointerEvents = "none";
+        document.getElementById("kraCategoryMap1").style.cursor = "default";
+        document.getElementById("weightage1").readOnly = true;
+        document.getElementById("midYearDiv1").style.pointerEvents = "none";
+        document.getElementById("midYearDiv1").style.cursor = "default";
+        document.getElementById("endYearDiv1").style.pointerEvents = "none";
+        document.getElementById("endYearDiv1").style.cursor = "default";
+        document.getElementById("finalScore1").readOnly = true;
+
+//        if (pmpmidyearstatus === 'false' && pmpasManager === 'false') {
+//            document.getElementById("managerMidYearSelfAssesssmentGoal1").readOnly = false;
+//        } else {
+//            document.getElementById("managerMidYearSelfAssesssmentGoal1").readOnly = true;
+//        }
+
+        var managerMidselfassStatus = document.getElementById("midyearManagerSelfassStatus1").value;
+        if (managerMidselfassStatus === '0') {
+            document.getElementById("managerMidYearSelfAssesssmentGoal1").readOnly = false;
+        } else {
+            document.getElementById("managerMidYearSelfAssesssmentGoal1").readOnly = true;
+        }
         for (i = 1; i <= kragoalLength; i++) {
-            var kra = document.getElementById('kraGoal' + i).readOnly = true;
-            document.getElementById("metric" + i).readOnly = true; //            var weightage11 = document.getElementById("weightage" + i).value;
+//            var kra = document.getElementById('kraGoal' + i).readOnly = true;
+//            document.getElementById("metric" + i).readOnly = true; //            var weightage11 = document.getElementById("weightage" + i).value;
             //            document.getElementById("weightage" + i).readOnly = true;
             //            var w1 = document.getElementById("weightage" + i).value;
 //            var abc = Math.round(w1);
             //            document.getElementById("weightage" + i).value = abc;
 
-            var endYearDiv = document.getElementById("endYearDiv" + i).value;
+            document.getElementById("kraGoal" + i).readOnly = true;
+            document.getElementById("metric" + i).readOnly = true;
+            document.getElementById("kraCategoryMap" + i).style.pointerEvents = "none";
+            document.getElementById("kraCategoryMap" + i).style.cursor = "default";
+            document.getElementById("weightage" + i).readOnly = true;
+
+            document.getElementById("midYearDiv" + i).style.pointerEvents = "none";
+            document.getElementById("midYearDiv" + i).style.cursor = "default";
             document.getElementById("endYearDiv" + i).style.pointerEvents = "none";
             document.getElementById("endYearDiv" + i).style.cursor = "default";
+
+
+
+//            var endYearDiv = document.getElementById("endYearDiv" + i).value;
+//            document.getElementById("endYearDiv" + i).style.pointerEvents = "none";
+//            document.getElementById("endYearDiv" + i).style.cursor = "default";
 
             var finalScore = document.getElementById("finalScore" + i).value;
             document.getElementById("finalScore" + i).readOnly = true; //            var finalScore = document.getElementById("finalScore" + i).value;
@@ -1754,8 +1988,20 @@ $(document).ready(function () {
             //            document.getElementById("finalScore" + i).disabled = true;
             var employeeMidYearSelfAssesssmentGoal = document.getElementById("employeeMidYearSelfAssesssmentGoal" + i).value;
             document.getElementById("employeeMidYearSelfAssesssmentGoal" + i).readOnly = true;
-            var managerMidYearSelfAssesssmentGoal = document.getElementById("managerMidYearSelfAssesssmentGoal" + i).value;
-            document.getElementById("managerMidYearSelfAssesssmentGoal" + i).readOnly = false;
+
+            var managerMidselfassStatus = document.getElementById("midyearManagerSelfassStatus" + i).value;
+            if (managerMidselfassStatus === '0') {
+                document.getElementById("managerMidYearSelfAssesssmentGoal" + i).readOnly = false;
+            } else {
+                document.getElementById("managerMidYearSelfAssesssmentGoal" + i).readOnly = true;
+            }
+//            if (pmpmidyearstatus === 'false' && pmpasManager === 'false') {
+//                document.getElementById("managerMidYearSelfAssesssmentGoal" + i).readOnly = false;
+//            } else {
+//                document.getElementById("managerMidYearSelfAssesssmentGoal" + i).readOnly = true;
+//            }
+//            var managerMidYearSelfAssesssmentGoal = document.getElementById("managerMidYearSelfAssesssmentGoal" + i).value;
+//            document.getElementById("managerMidYearSelfAssesssmentGoal" + i).readOnly = false;
             var employeeEndYearSelfAssesssmentGoal = document.getElementById("employeeEndYearSelfAssesssmentGoal" + i).value;
             document.getElementById("employeeEndYearSelfAssesssmentGoal" + i).readOnly = true;
             var managerEndYearSelfAssesssmentGoal = document.getElementById("managerEndYearSelfAssesssmentGoal" + i).value;
@@ -1771,19 +2017,57 @@ $(document).ready(function () {
 ////            alert("Save is disable"+flagEndId);
 //            document.getElementById("save").disabled = true;
 //        }
-        for (i = 1; i <= kragoalLength; i++) { //            alert(flagEndId + "managerStatus");
-            var kra = document.getElementById('kraGoal' + i).readOnly = true;
-            document.getElementById("metric" + i).readOnly = true;
-            //            var w1 = document.getElementById("weightage" + i).value;
-//            var abc = Math.round(w1);
-            //            document.getElementById("weightage" + i).value = abc;
+        document.getElementById("kraGoal1").readOnly = true;
+        document.getElementById("metric1").readOnly = true;
 
-            var weightage11 = document.getElementById("weightage" + i).value;
-            document.getElementById("weightage" + i).readOnly = false;
-            var midYearDiv = document.getElementById("midYearDiv" + i).value;
-//            document.getElementById("midYearDiv" + i).disabled = true;
+        document.getElementById("kraCategoryMap1").style.pointerEvents = "none";
+        document.getElementById("kraCategoryMap1").style.cursor = "default";
+        document.getElementById("weightage1").readOnly = true;
+        document.getElementById("midYearDiv1").style.pointerEvents = "none";
+        document.getElementById("midYearDiv1").style.cursor = "default";
+        document.getElementById("endYearDiv1").style.pointerEvents = "none";
+        document.getElementById("endYearDiv1").style.cursor = "default";
+
+
+        var manaagerEndselfassStatus = document.getElementById("endyearManagerSelfassStatus1").value;
+        if (manaagerEndselfassStatus === '0') {
+            document.getElementById("managerEndYearSelfAssesssmentGoal1").readOnly = false;
+        } else {
+            document.getElementById("managerEndYearSelfAssesssmentGoal1").readOnly = true;
+        }
+
+//        if (pmpendyearstatus === 'false' && pmpasManager === 'false') {
+//            document.getElementById("managerEndYearSelfAssesssmentGoal1").readOnly = false;
+//        } else {
+//            document.getElementById("managerEndYearSelfAssesssmentGoal1").readOnly = true;
+//        }
+
+        for (i = 1; i <= kragoalLength; i++) {
+//            var kra = document.getElementById('kraGoal' + i).readOnly = true;
+//            document.getElementById("metric" + i).readOnly = true;
+
+
+//            var weightage11 = document.getElementById("weightage" + i).value;
+//            document.getElementById("weightage" + i).readOnly = false;
+//            var midYearDiv = document.getElementById("midYearDiv" + i).value;
+////            document.getElementById("midYearDiv" + i).disabled = true;
+//            document.getElementById("midYearDiv" + i).style.pointerEvents = "none";
+//            document.getElementById("midYearDiv" + i).style.cursor = "default";
+
+
+
+
+
+            document.getElementById("kraGoal" + i).readOnly = true;
+            document.getElementById("metric" + i).readOnly = true;
+
+            document.getElementById("kraCategoryMap" + i).style.pointerEvents = "none";
+            document.getElementById("kraCategoryMap" + i).style.cursor = "default";
+            document.getElementById("weightage" + i).readOnly = true;
             document.getElementById("midYearDiv" + i).style.pointerEvents = "none";
             document.getElementById("midYearDiv" + i).style.cursor = "default";
+            document.getElementById("endYearDiv" + i).style.pointerEvents = "none";
+            document.getElementById("endYearDiv" + i).style.cursor = "default";
 
 
             var finalScore = document.getElementById("finalScore" + i).value;
@@ -1794,8 +2078,20 @@ $(document).ready(function () {
             document.getElementById("managerMidYearSelfAssesssmentGoal" + i).readOnly = true;
             var employeeEndYearSelfAssesssmentGoal = document.getElementById("employeeEndYearSelfAssesssmentGoal" + i).value;
             document.getElementById("employeeEndYearSelfAssesssmentGoal" + i).readOnly = true;
-            var managerEndYearSelfAssesssmentGoal = document.getElementById("managerEndYearSelfAssesssmentGoal" + i).value;
-            document.getElementById("managerEndYearSelfAssesssmentGoal" + i).readOnly = false;
+
+            var manaagerEndselfassStatus = document.getElementById("endyearManagerSelfassStatus" + i).value;
+            if (manaagerEndselfassStatus === '0') {
+                document.getElementById("managerEndYearSelfAssesssmentGoal" + i).readOnly = false;
+            } else {
+                document.getElementById("managerEndYearSelfAssesssmentGoal" + i).readOnly = true;
+            }
+//            if (pmpendyearstatus === 'false' && pmpasManager === 'false') {
+//                document.getElementById("managerEndYearSelfAssesssmentGoal" + i).readOnly = false;
+//            } else {
+//                document.getElementById("managerEndYearSelfAssesssmentGoal" + i).readOnly = true;
+//            }
+//            var managerEndYearSelfAssesssmentGoal = document.getElementById("managerEndYearSelfAssesssmentGoal" + i).value;
+//            document.getElementById("managerEndYearSelfAssesssmentGoal" + i).readOnly = false;
         }
 
         //        document.getElementById("managerMidyearReviewevalOtheractivity").readOnly = true;
@@ -1814,6 +2110,8 @@ $(document).ready(function () {
     if (flag11 == 'true') {
         for (i = 1; i <= count; i++) {
             var compentencyMidYear = document.getElementById("compentencyMidYear" + i).value;
+            document.getElementById("competencyStartYear" + i).style.pointerEvents = "none";
+            document.getElementById("competencyStartYear" + i).style.cursor = "default";
             document.getElementById("compentencyMidYear" + i).style.pointerEvents = "none";
             document.getElementById("compentencyMidYear" + i).style.cursor = "default";
             document.getElementById("compentencyMidRemark" + i).readOnly = true;
@@ -1823,9 +2121,12 @@ $(document).ready(function () {
         }
     } else if (flagmid === 'true') {
         for (i = 1; i <= count; i++) {
+
             document.getElementById("compentencyStartRemark" + i).readOnly = true;
             document.getElementById("competencyStartYear" + i).style.pointerEvents = "none";
             document.getElementById("competencyStartYear" + i).style.cursor = "default";
+            document.getElementById("compentencyMidYear" + i).style.pointerEvents = "none";
+            document.getElementById("compentencyMidYear" + i).style.cursor = "default";
             document.getElementById("compentencyEndYear" + i).style.pointerEvents = "none";
             document.getElementById("compentencyEndYear" + i).style.cursor = "default"
             document.getElementById("compentencyEndRemark" + i).readOnly = true;
@@ -1837,7 +2138,9 @@ $(document).ready(function () {
             document.getElementById("compentencyStartRemark" + i).readOnly = true;
             document.getElementById("compentencyMidYear" + i).style.pointerEvents = "none";
             document.getElementById("compentencyMidYear" + i).style.cursor = "default";
-            document.getElementById("compentencyMidRemark" + i).readOnly = true; //            var compentencyMidYear = document.getElementById("competencyStartYear" + i).value;
+            document.getElementById("compentencyMidRemark" + i).readOnly = true;
+            document.getElementById("compentencyEndYear" + i).style.pointerEvents = "none";
+            document.getElementById("compentencyEndYear" + i).style.cursor = "default"
         }
     }
     //////////////////////////////////////////////////////////////
@@ -1875,17 +2178,31 @@ $(document).ready(function () {
     var countId = document.getElementById("IndividualId").value;
     ///////////////////Other wise filed show hide/////////////////////////
     //    alert("c1" + countId);
-    for (i = 1; i <= countId; i++) {
-        var selectedValue1 = document.getElementById("trainingSelectId" + i).value;
-        if (selectedValue1 == "Other") {
-            document.getElementById("trainingSelectTextinput" + i).style.display = "block";
-        } else {
-            document.getElementById("trainingSelectTextinput" + i).style.display = "none";
-        }
-    }
+//    for (i = 1; i <= countId; i++) {
+//        var selectedValue1 = document.getElementById("trainingSelectId" + i).value;
+//        if (selectedValue1 == "Other") {
+//            document.getElementById("trainingSelectTextinput" + i).style.display = "block";
+//        } else {
+//            document.getElementById("trainingSelectTextinput" + i).style.display = "none";
+//        }
+//    }
     if (flag11 === 'true') {
+
+
+
+        document.getElementById("text1").readOnly = true;
+        document.getElementById("individualtextDiv1").style.pointerEvents = "none";
+        document.getElementById("individualtextDiv1").style.cursor = "default";
+        document.getElementById("trainingSelectId1").style.pointerEvents = "none";
+        document.getElementById("trainingSelectId1").style.cursor = "default";
+
         for (i = 1; i <= countId; i++) {
             //            alert("Prem Ratan");
+            document.getElementById("text" + i).readOnly = true;
+            document.getElementById("individualtextDiv" + i).style.pointerEvents = "none";
+            document.getElementById("individualtextDiv" + i).style.cursor = "default";
+            document.getElementById("trainingSelectId" + i).style.pointerEvents = "none";
+            document.getElementById("trainingSelectId" + i).style.cursor = "default";
             var selectedValue1 = document.getElementById("trainingSelectId" + i).value;
             if (selectedValue1 == "Other") {
                 //                alert("djjdjdjdjdjdjdjdjdjdjdjdjd" + selectedValue1);
@@ -1904,9 +2221,20 @@ $(document).ready(function () {
         //        document.getElementById("endYearRemark1").readOnly = true;
         //$('#printBtn').hide();
     } else if (flagmid === 'true') {
+        document.getElementById("text1").readonly = true;
 
+        document.getElementById("individualtextDiv1").style.pointerEvents = "none";
+        document.getElementById("individualtextDiv1").style.cursor = "default";
+        document.getElementById("trainingSelectId1").style.pointerEvents = "none";
+        document.getElementById("trainingSelectId1").style.cursor = "default";
         for (i = 1; i <= countId; i++) {
-//            alert("countId====>"+countId);
+//            alert("countId====>" + countId);
+            document.getElementById("text" + i).readonly = true;
+            document.getElementById("individualtextDiv" + i).style.pointerEvents = "none";
+            document.getElementById("individualtextDiv" + i).style.cursor = "default";
+            document.getElementById("trainingSelectId" + i).style.pointerEvents = "none";
+            document.getElementById("trainingSelectId" + i).style.cursor = "default";
+
             var selectedValue1 = document.getElementById("trainingSelectId" + i).value;
             if (selectedValue1 == "Other") {
                 document.getElementById("trainingSelectTextinput" + i).style.display = "block";
@@ -1918,7 +2246,17 @@ $(document).ready(function () {
             document.getElementById("managerEndYearRemark" + i).readOnly = true;
         }
     } else if (flagEndId === 'true') {
+        document.getElementById("text1").readonly = true;
+        document.getElementById("individualtextDiv1").style.pointerEvents = "none";
+        document.getElementById("individualtextDiv1").style.cursor = "default";
+        document.getElementById("trainingSelectId1").style.pointerEvents = "none";
+        document.getElementById("trainingSelectId1").style.cursor = "default";
         for (i = 1; i <= countId; i++) {
+            document.getElementById("text" + i).readonly = true;
+            document.getElementById("individualtextDiv" + i).style.pointerEvents = "none";
+            document.getElementById("individualtextDiv" + i).style.cursor = "default";
+            document.getElementById("trainingSelectId" + i).style.pointerEvents = "none";
+            document.getElementById("trainingSelectId" + i).style.cursor = "default";
             var selectedValue1 = document.getElementById("trainingSelectId" + i).value;
             if (selectedValue1 == "Other") {
                 document.getElementById("trainingSelectTextinput" + i).style.display = "block";
@@ -1997,7 +2335,7 @@ $(document).ready(function () {
 function performancefinalScoreRatings() {
     var totalScore = parseInt(document.getElementById("totalScore").value);
     var behaviorsEndyearTotalscore = parseInt(document.getElementById("behaviorsEndyearTotalscore").value);
-    //    alert("DODODOD" + behaviorsEndyearTotalscore);
+//        alert("DODODOD" + behaviorsEndyearTotalscore);
     //    alert("POPOPOPO" + totalScore);
     var behaviorsFinalscore12 = totalScore + behaviorsEndyearTotalscore;
 
@@ -2016,17 +2354,14 @@ function performancefinalScoreRatings() {
     if ((behaviorsFinalscore12 >= 101) && (behaviorsFinalscore12 <= 105))
     {
         $('#score2').show();
-    }
-    else if ((behaviorsFinalscore12 >= 80) && (behaviorsFinalscore12 <= 100))
+    } else if ((behaviorsFinalscore12 >= 80) && (behaviorsFinalscore12 <= 100))
     {
         //        alert("score1" + behaviorsFinalscore12);
         $('#score3').show();
-    }
-    else if ((behaviorsFinalscore12 >= 51) && (behaviorsFinalscore12 <= 79))
+    } else if ((behaviorsFinalscore12 >= 51) && (behaviorsFinalscore12 <= 79))
     {
         $('#score4').show();
-    }
-    else if ((behaviorsFinalscore12 >= 0) && (behaviorsFinalscore12 <= 50)) {
+    } else if ((behaviorsFinalscore12 >= 0) && (behaviorsFinalscore12 <= 50)) {
         $('#score5').show();
     }
 
@@ -2062,6 +2397,79 @@ function weitageAlert() {
     bootbox.dialog({
         size: 'small',
         message: "<h1>Oh ! Your Weightage Score is Not Valid…</h1>",
+    });
+}
+function myajaxfunManager1(competencyEvaluationId) {
+
+//
+//    var competencyEvaluationId = document.getElementById("competencyEvaluationId").value;
+    //    alert('Dhaval Parmar' + competencyEvaluationId);
+    $.ajax({
+        type: "POST",
+        url: "competencyEvaluationTextmaster.htm?act=ajaxCall&competencyEvaluationId=" + competencyEvaluationId,
+        //                    data: "selectedvalue=" + selectedVal,
+        data: {"selectedvalue": competencyEvaluationId},
+        dataType: "text",
+        success: function (responseTxt) {
+//            alert(responseTxt);
+            var subCompentency = document.getElementById("demo9").innerHTML = responseTxt;
+            var flag11 = document.getElementById("flagId").value;
+            var flagMidId = document.getElementById("flagMidId").value;
+            var flagEndId = document.getElementById("flagEndId").value;
+            var count = document.getElementById("subCompentencyCount").value;
+            //            alert('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' + count);
+            //            alert('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' + flag11);
+            if (flag11 == 'true') {
+                for (i = 1; i <= count; i++) {
+
+                    var compentencyMidYear = document.getElementById("compentencyMidYear" + i).value;
+//                    document.getElementById("compentencyMidYear" + i).disabled = true;
+                    document.getElementById("compentencyStartYear" + i).style.pointerEvents = "none";
+                    document.getElementById("compentencyStartYear" + i).style.cursor = "default";
+                    document.getElementById("compentencyMidYear" + i).style.pointerEvents = "none";
+                    document.getElementById("compentencyMidYear" + i).style.cursor = "default";
+                    document.getElementById("compentencyMidRemark" + i).readOnly = true;
+                    document.getElementById("compentencyEndYear" + i).style.pointerEvents = "none";
+                    document.getElementById("compentencyEndYear" + i).style.cursor = "default";
+                    document.getElementById("compentencyEndRemark" + i).readOnly = true;
+                }
+            }
+            if (flagMidId == 'true') {
+                //                alert("fdfddffhdf");
+                for (i = 1; i <= count; i++) {
+                    var compentencyMidYear = document.getElementById("compentencyStartYear" + i).value;
+                    //                    document.getElementById("compentencyMidYear" + i).disabled = true;
+                    document.getElementById("compentencyStartYear" + i).style.pointerEvents = "none";
+                    document.getElementById("compentencyStartYear" + i).style.cursor = "default";
+                    document.getElementById("compentencyStartRemark" + i).readOnly = true;
+
+                    document.getElementById("compentencyMidYear" + i).style.pointerEvents = "none";
+                    document.getElementById("compentencyMidYear" + i).style.cursor = "default";
+
+                    document.getElementById("compentencyEndYear" + i).style.pointerEvents = "none";
+                    document.getElementById("compentencyEndYear" + i).style.cursor = "default";
+                    document.getElementById("compentencyEndRemark" + i).readOnly = true;
+                }
+            }
+            if (flagEndId == 'true') { //                alert("fdfddffhdf");
+                for (i = 1; i <= count; i++) {
+
+                    var compentencyMidYear = document.getElementById("compentencyStartYear" + i).value;
+//                    document.getElementById("compentencyMidYear" + i).disabled = true;
+                    document.getElementById("compentencyStartYear" + i).style.pointerEvents = "none";
+                    document.getElementById("compentencyStartYear" + i).style.cursor = "default";
+                    document.getElementById("compentencyStartRemark" + i).readOnly = true;
+                    document.getElementById("compentencyMidYear" + i).style.pointerEvents = "none";
+                    document.getElementById("compentencyMidYear" + i).style.cursor = "default";
+                    document.getElementById("compentencyMidRemark" + i).readOnly = true;
+                    document.getElementById("compentencyEndYear" + i).style.pointerEvents = "none";
+                    document.getElementById("compentencyEndYear" + i).style.cursor = "default";
+                }
+            }
+        },
+        error: function () {
+            alert('Please Select Only One Competency Evaluation');
+        }
     });
 }
 ////////////Competency Evaluation (As Per Zydex Competency Framework) ://////////////////

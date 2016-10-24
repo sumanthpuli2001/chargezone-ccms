@@ -1,5 +1,5 @@
 package com.bul.zydex.model;
-// Generated Apr 21, 2016 3:33:08 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 22, 2016 1:37:14 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -38,17 +38,24 @@ public class AppraisalPerformanceKra  implements java.io.Serializable {
      private String managerMidyearReviewEvaluationManager;
      private String managerEndyearReviewEvaluationManager;
      private String finalScoreManager;
+     private int midyearEmpSelfassStatus;
+     private int midyearManagerSelfassStatus;
+     private int endyearEmpSelfassStatus;
+     private int endyearManagerSelfassStatus;
      private Set updateAppraisalPerformanceKras = new HashSet(0);
-     private Set updateAppraisalPerformanceKras_1 = new HashSet(0);
 
     public AppraisalPerformanceKra() {
     }
 
 	
-    public AppraisalPerformanceKra(AppraisalPerformanceMaster appraisalPerformanceMaster) {
+    public AppraisalPerformanceKra(AppraisalPerformanceMaster appraisalPerformanceMaster, int midyearEmpSelfassStatus, int midyearManagerSelfassStatus, int endyearEmpSelfassStatus, int endyearManagerSelfassStatus) {
         this.appraisalPerformanceMaster = appraisalPerformanceMaster;
+        this.midyearEmpSelfassStatus = midyearEmpSelfassStatus;
+        this.midyearManagerSelfassStatus = midyearManagerSelfassStatus;
+        this.endyearEmpSelfassStatus = endyearEmpSelfassStatus;
+        this.endyearManagerSelfassStatus = endyearManagerSelfassStatus;
     }
-    public AppraisalPerformanceKra(KraCategory kraCategoryByKraCategoryByManager, AppraisalPerformanceMaster appraisalPerformanceMaster, KraCategory kraCategoryByKraCategoryByEmployee, String kraGoal, String metric, Float weightage, String midyearStatus, String endyearStatus, String finalScore, String editDate, String empMidyearSelfassessmentGoal, String empEndyearSelfassessmentGoal, String managerMidyearReviewEvaluation, String managerEndyearReviewEvaluation, String editedBy, String startDate, String kraGoalByManager, String matrixByManager, Float weightageManager, String midyearStatusManager, String endyearStatusManager, String empMidyearSelfassessmentGoalManager, String empEndyearSelfassessmentGoalManager, String managerMidyearReviewEvaluationManager, String managerEndyearReviewEvaluationManager, String finalScoreManager, Set updateAppraisalPerformanceKras, Set updateAppraisalPerformanceKras_1) {
+    public AppraisalPerformanceKra(KraCategory kraCategoryByKraCategoryByManager, AppraisalPerformanceMaster appraisalPerformanceMaster, KraCategory kraCategoryByKraCategoryByEmployee, String kraGoal, String metric, Float weightage, String midyearStatus, String endyearStatus, String finalScore, String editDate, String empMidyearSelfassessmentGoal, String empEndyearSelfassessmentGoal, String managerMidyearReviewEvaluation, String managerEndyearReviewEvaluation, String editedBy, String startDate, String kraGoalByManager, String matrixByManager, Float weightageManager, String midyearStatusManager, String endyearStatusManager, String empMidyearSelfassessmentGoalManager, String empEndyearSelfassessmentGoalManager, String managerMidyearReviewEvaluationManager, String managerEndyearReviewEvaluationManager, String finalScoreManager, int midyearEmpSelfassStatus, int midyearManagerSelfassStatus, int endyearEmpSelfassStatus, int endyearManagerSelfassStatus, Set updateAppraisalPerformanceKras) {
        this.kraCategoryByKraCategoryByManager = kraCategoryByKraCategoryByManager;
        this.appraisalPerformanceMaster = appraisalPerformanceMaster;
        this.kraCategoryByKraCategoryByEmployee = kraCategoryByKraCategoryByEmployee;
@@ -75,8 +82,11 @@ public class AppraisalPerformanceKra  implements java.io.Serializable {
        this.managerMidyearReviewEvaluationManager = managerMidyearReviewEvaluationManager;
        this.managerEndyearReviewEvaluationManager = managerEndyearReviewEvaluationManager;
        this.finalScoreManager = finalScoreManager;
+       this.midyearEmpSelfassStatus = midyearEmpSelfassStatus;
+       this.midyearManagerSelfassStatus = midyearManagerSelfassStatus;
+       this.endyearEmpSelfassStatus = endyearEmpSelfassStatus;
+       this.endyearManagerSelfassStatus = endyearManagerSelfassStatus;
        this.updateAppraisalPerformanceKras = updateAppraisalPerformanceKras;
-       this.updateAppraisalPerformanceKras_1 = updateAppraisalPerformanceKras_1;
     }
    
     public Integer getId() {
@@ -268,19 +278,40 @@ public class AppraisalPerformanceKra  implements java.io.Serializable {
     public void setFinalScoreManager(String finalScoreManager) {
         this.finalScoreManager = finalScoreManager;
     }
+    public int getMidyearEmpSelfassStatus() {
+        return this.midyearEmpSelfassStatus;
+    }
+    
+    public void setMidyearEmpSelfassStatus(int midyearEmpSelfassStatus) {
+        this.midyearEmpSelfassStatus = midyearEmpSelfassStatus;
+    }
+    public int getMidyearManagerSelfassStatus() {
+        return this.midyearManagerSelfassStatus;
+    }
+    
+    public void setMidyearManagerSelfassStatus(int midyearManagerSelfassStatus) {
+        this.midyearManagerSelfassStatus = midyearManagerSelfassStatus;
+    }
+    public int getEndyearEmpSelfassStatus() {
+        return this.endyearEmpSelfassStatus;
+    }
+    
+    public void setEndyearEmpSelfassStatus(int endyearEmpSelfassStatus) {
+        this.endyearEmpSelfassStatus = endyearEmpSelfassStatus;
+    }
+    public int getEndyearManagerSelfassStatus() {
+        return this.endyearManagerSelfassStatus;
+    }
+    
+    public void setEndyearManagerSelfassStatus(int endyearManagerSelfassStatus) {
+        this.endyearManagerSelfassStatus = endyearManagerSelfassStatus;
+    }
     public Set getUpdateAppraisalPerformanceKras() {
         return this.updateAppraisalPerformanceKras;
     }
     
     public void setUpdateAppraisalPerformanceKras(Set updateAppraisalPerformanceKras) {
         this.updateAppraisalPerformanceKras = updateAppraisalPerformanceKras;
-    }
-    public Set getUpdateAppraisalPerformanceKras_1() {
-        return this.updateAppraisalPerformanceKras_1;
-    }
-    
-    public void setUpdateAppraisalPerformanceKras_1(Set updateAppraisalPerformanceKras_1) {
-        this.updateAppraisalPerformanceKras_1 = updateAppraisalPerformanceKras_1;
     }
 
 

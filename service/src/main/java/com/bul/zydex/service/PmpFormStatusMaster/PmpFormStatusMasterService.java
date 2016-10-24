@@ -6,11 +6,12 @@
 package com.bul.zydex.service.PmpFormStatusMaster;
 
 import com.bul.zydex.service.GenericsService;
+import java.util.List;
 
 /**
  *
  * @author BlackBull
  */
 public interface PmpFormStatusMasterService<T> extends GenericsService<T> {
-    
+    public List<?> readByPmpformstatusStatus(String employeeId);
 }

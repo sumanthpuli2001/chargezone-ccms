@@ -7,6 +7,7 @@ package com.bul.zydex.service.PmpFormStatusMaster;
 
 import com.bul.zydex.dao.PmpFormStatusMaster.PmpFormStatusMasterDAO;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.List;
 
 /**
  *
@@ -23,5 +24,11 @@ public class PmpFormStatusMasterServiceImpl<T> extends GenericsServiceImpl<T> im
         this.pmpFormStatusMasterDAO = pmpFormStatusMasterDAO;
        setGenericsDAO(pmpFormStatusMasterDAO);
     }
+
+    @Override
+    public List<?> readByPmpformstatusStatus(String employeeId) {
+         return pmpFormStatusMasterDAO.readByPmpformstatusStatus(employeeId);
+    }
+    
      
 }

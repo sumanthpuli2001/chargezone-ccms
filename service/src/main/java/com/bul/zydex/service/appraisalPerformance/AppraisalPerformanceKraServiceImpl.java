@@ -40,4 +40,10 @@ public class AppraisalPerformanceKraServiceImpl<T> extends GenericsServiceImpl<T
     public void delete1(T object) {
         appraisalPerformanceKraDAO.delete1(object);
     }
+
+    @Override
+    public List<?> readByAppraisalKraGoal1(T object) {
+       return appraisalPerformanceKraDAO.readByAppraisalKraGoal1(object);
+    }
+    
 }

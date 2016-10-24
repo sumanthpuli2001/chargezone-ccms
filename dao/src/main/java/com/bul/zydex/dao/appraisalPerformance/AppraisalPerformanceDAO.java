@@ -23,7 +23,20 @@ public interface AppraisalPerformanceDAO<T> extends GenericsDAO<T> {
 
     public List<?> readByAppraisalPerformanceIdAndYearWise(String employeeId, int year);
 
-    public Object[] readperformanceByHr(final int currentYear);
+//    public Object[] readperformanceByHr(final int currentYear);
+    public int readperformanceByHr(final int currentYear);
+
+    public int readperformanceByHr1(final int currentYear);
+
+    public int readperformanceByHr2(final int currentYear);
+
+    public int readperformanceByHr3(final int currentYear);
+
+    public int readperformanceByHr4(final int currentYear);
+
+    public int readperformanceByHr5(final int currentYear);
+
+    public int readperformanceByHr6(final int currentYear);
 
     public List<?> readperformanceByHr();
 
@@ -47,6 +60,5 @@ public interface AppraisalPerformanceDAO<T> extends GenericsDAO<T> {
     
     public List<?> readEmpIdByAppraisalPerformanceId(); 
     
-    public List<?> readByEmpID(int id);
-
+    public List<?> readByEmpID(int id);  
 }

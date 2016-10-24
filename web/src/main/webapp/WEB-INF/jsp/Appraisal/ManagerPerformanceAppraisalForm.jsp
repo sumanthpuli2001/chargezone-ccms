@@ -308,6 +308,8 @@
                                                                 <c:when test="${fn:length(kragoal) > 0}">
                                                                     <c:set var="resultkraGoalByManager" value="${fn:length(kragoal)}"></c:set>
                                                                     <c:forEach var="kragoallist" items="${kragoal}" varStatus="status">
+                                                                        <input type="hidden" name="midyearManagerSelfassStatus${status.count}" id="midyearManagerSelfassStatus${status.count}" value="${kragoallist.midyearManagerSelfassStatus}">
+                                                                        <input type="hidden" name="endyearManagerSelfassStatus${status.count}" id="endyearManagerSelfassStatus${status.count}" value="${kragoallist.endyearManagerSelfassStatus}">
                                                                         <tr id="removeTr${status.count}">
                                                                         <input type="hidden" name="kragoal_id${status.count}" id="kragoal_id${status.count}" value="${kragoallist.id}">
                                                                         <td id="removeKRAID${status.count}" class="removeClass" style="margin: 0px;width: 45px;">${status.count}</td>
@@ -690,6 +692,8 @@
                                                                     <c:set var="kragoalOtherActivitySize" value="${fn:length(kragoalOtherActivity)}"></c:set>
                                                                     <c:forEach var="kragoalOtherActivity" items="${kragoalOtherActivity}" varStatus="status">
                                                                         <%--<c:if test="${kragoallist.kragoal_activity ne '' && kragoallist.metric_activity ne ''}">--%>
+                                                                       <input type="hidden" name="midyearManagerSelfassActivityStatus${status.count}" id="midyearManagerSelfassActivityStatus${status.count}" value="${kragoalOtherActivity.midyearManagerSelfassActivityStatus}">
+                                                                        <input type="hidden" name="endyearManagerSelfassActivityStatus${status.count}" id="endyearManagerSelfassActivityStatus${status.count}" value="${kragoalOtherActivity.endyearManagerSelfassActivityStatus}">
                                                                         <tr id="activitiesTrId${status.count}">
                                                                         <input type="hidden" name="kragoal_activity_id${status.count}" id="kragoal_activity_id${status.count}" value="${kragoalOtherActivity.id}">
                                                                         <td id="removeKRAactivitiesID${status.count}" class="removeactivitiesClass" style="margin: 0px;width: 45px;">${status.count} </td>

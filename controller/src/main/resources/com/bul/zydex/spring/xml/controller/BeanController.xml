@@ -532,6 +532,7 @@
     </bean>
     <bean id="employeePunch1" class="com.bul.zydex.webservice.EmployeePunch" parent="controllerConfig" >
         <property name="employeePunchForMobileAppService" ref="employeePunchForMobileAppService1" />
+        <property name="registerMobForPunchService" ref="registerMobForPunchService1" />
     </bean>
     <bean id="expenseReport1" class="com.bul.zydex.webservice.ExpenseReport" parent="controllerConfig" >
         <property name="expenseMasterService" ref="expenseMasterService1" />

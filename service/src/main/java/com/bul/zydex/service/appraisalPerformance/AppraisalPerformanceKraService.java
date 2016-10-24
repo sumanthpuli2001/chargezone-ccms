@@ -19,4 +19,5 @@ public interface AppraisalPerformanceKraService<T> extends GenericsService<T> {
     public List<?> readByAppraisalPerformancekraId(T object);
 
     public void delete1(T object);
+    public List<?> readByAppraisalKraGoal1(T object);
 }

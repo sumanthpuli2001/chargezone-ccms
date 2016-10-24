@@ -7,6 +7,7 @@ package com.bul.zydex.webservice;
 
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeePunchForMobileApp;
+import com.bul.zydex.model.RegisterMobForPunch;
 import com.bul.zydex.model.UserMaster;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,6 +36,7 @@ public class EmployeePunch extends EmployeePunchAbstract {
         UserMaster user = new UserMaster();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        RegisterMobForPunch registerMobForPunch = new RegisterMobForPunch();
         JSONObject userData = new JSONObject();
         try {
             JSONObject data = doPost(request);
@@ -54,12 +56,32 @@ public class EmployeePunch extends EmployeePunchAbstract {
                 employeePunchForMobileApp.setEmployeeMaster(employeeMaster1);
                 employeePunchForMobileApp.setPunchTime(punchTime.toString());
                 employeePunchForMobileApp.setPunchLocation(data.get("punchLocation").toString());
-                employeePunchForMobileAppService.create(employeePunchForMobileApp);
-                rcode = "1";
-                message = "Success";
+
+                String imeiNO = data.get("imeiNo").toString();
+
+                List<?> empMobRegList = registerMobForPunchService.readByEmpId(employeeMaster1.getId());
+                if (empMobRegList.isEmpty()) {
+                    registerMobForPunch.setEmployeeMaster(employeeMaster1);
+                    registerMobForPunch.setImeiNo(imeiNO);
+                    registerMobForPunchService.create(registerMobForPunch);
+                    employeePunchForMobileAppService.create(employeePunchForMobileApp);
+                    rcode = "1";
+                    message = "Success";
+                } else {
+                    registerMobForPunch = (RegisterMobForPunch) empMobRegList.get(0);
+                    String imeiNum = registerMobForPunch.getImeiNo();
+                    if (imeiNum.equals(imeiNO)) {
+                        employeePunchForMobileAppService.create(employeePunchForMobileApp);
+                        rcode = "1";
+                        message = "Success";
+                    } else {
+                        rcode = "2";
+                        message = "Your device Not Register";
+                    }
+                }
             } else {
                 rcode = "0";
-                message = "Error";
+                message = "No Record Found";
             }
         } catch (Exception exception) {
             rcode = "0";

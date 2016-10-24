@@ -757,6 +757,11 @@ public class WebService extends WebServiceAbstract {
             } else {
                 leaveTypeMaster = leaveTypeMasterService.readById(leaveTypeMaster.getId());
             }
+            boolean plBalCheck = false;
+            List<?> plCheck = leaveEmployeeDetailService.plLeaveCheck(employeeMaster.getId());
+            if (plCheck.size() >= 3) {
+                plBalCheck = true;
+            }
 
             if (leaveTypeMaster.getLeaveType().contains("Short Leave")) {
                 if (dayName.equals("Saturday") && dayOfWeek == 2 && (locationId == 1 || locationId == 6)) {
@@ -850,6 +855,9 @@ public class WebService extends WebServiceAbstract {
             } else if (dayName.equals("Saturday") && dayOfWeek == 2 && (locationId == 1 || locationId == 6) && leaveEmployeeDetail.getStartDateStatus().equals("Fullday")) {
                 rcode = "3";
                 message = "On Second Saturday You can Not Apply Full Day Of Leave";
+            } else if (plBalCheck && leaveTypeMaster.getLeaveType().contains("Privilege Leave") && leaveEmployeeDetail.getNoOfDays() < 3) {
+                rcode = "11";
+                message = "Your Pl Limit for less dhen 3 is over so you can't apply less than 3 days pl leave.";
             } else if (leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave()) && !leaveTypeMaster.getLeaveType().contains("Privilege Leave") && !leaveTypeMaster.getLeaveType().contains("Maternity Leave") && !leaveTypeMaster.getLeaveType().contains("C Off Leave")
                     && !leaveTypeMaster.getLeaveType().contains("Sick Leave")) {
                 rcode = "4";
@@ -1809,8 +1817,7 @@ public class WebService extends WebServiceAbstract {
                 count++;
             }
             data1.put("leavedetail", jSONArray);
-            
-            
+
             LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
             leaveEmployeeDetail.setEmployeeMaster(employeeMaster1);
             List<?> leavelist = leaveEmployeeDetailService.readPendingLeaveRequest(leaveEmployeeDetail);

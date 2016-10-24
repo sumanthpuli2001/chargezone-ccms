@@ -174,6 +174,7 @@
                     <input type="hidden" id="userid" name="userid" value="${userid}">
                     <input type="hidden" id="appraisalId" name="appraisalId" value="${appraisalId}">
                     <input type="hidden" id="managerStatus" name="managerStatus" value="${managerStatus}">
+                    <input type="hidden" id="pmpstartyearstatus" name="pmpstartyearstatus" value="${pmpstartyearstatus}">
                     <input type="hidden" id="pmpmidyearstatus" name="pmpmidyearstatus" value="${pmpmidyearstatus}">
                     <input type="hidden" id="pmpendyearstatus" name="pmpendyearstatus" value="${pmpendyearstatus}">
                     <input type="hidden" id="pmpasEmployee" name="pmpasEmployee" value="${pmpasEmployee}">
@@ -337,6 +338,12 @@
                                                                         <%--  <c:if test="${(kragoallist.kraGoal ne '' || kragoallist.metric ne '') ||
                                                                                       ((kragoallist.kraGoal eq '' || kragoallist.metric eq '')&&
 (kragoallist.kraGoalByManager ne '' || kragoallist.matrixByManager ne ''))}"> --%>
+                                                                         <!--Lock Assecement-->
+                                                                        <input type="hidden" name="midyearEmpSelfassStatus${status.count}" id="midyearEmpSelfassStatus${status.count}" value="${kragoallist.midyearEmpSelfassStatus}">
+                                                                        <input type="hidden" name="midyearManagerSelfassStatus${status.count}" id="midyearManagerSelfassStatus${status.count}" value="${kragoallist.midyearManagerSelfassStatus}">
+                                                                        <input type="hidden" name="endyearEmpSelfassStatus${status.count}" id="endyearEmpSelfassStatus${status.count}" value="${kragoallist.endyearEmpSelfassStatus}">
+                                                                        <input type="hidden" name="endyearManagerSelfassStatus${status.count}" id="endyearManagerSelfassStatus${status.count}" value="${kragoallist.endyearManagerSelfassStatus}">
+
                                                                         <tr id="removeTr${status.count}">
                                                                         <input type="hidden" name="kragoal_id${status.count}" id="kragoal_id${status.count}" value="${kragoallist.id}">
                                                                         <td id="removeKRAID${status.count}" class="removeClass" style="margin: 0px;width: 45px;"><span>${status.count} </span></td>
@@ -530,6 +537,8 @@
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                     <input type="hidden" name="countId" id="countId" value="1">
+                                                                    <input type="hidden" name="midyearEmpSelfassStatus1" id="midyearEmpSelfassStatus1" value="0">
+                                                                    <input type="hidden" name="endyearEmpSelfassStatus1" id="endyearEmpSelfassStatus1" value="0">
                                                                     <tr id="row_1_1">
                                                                         <td style="margin: 0px;width: 45px;">1</td>
                                                                         <%--<c:if test="${flag eq true}">--%>
@@ -733,7 +742,14 @@
                                                                 <c:when test="${fn:length(kragoalOtherActivity) > 0}">
                                                                     <input type="hidden" name="countactivityId" id="countactivityId" value="${fn:length(kragoalOtherActivity)}">
                                                                     <c:set var="kragoalOtherActivityValManager" value="${fn:length(kragoalOtherActivity)}"></c:set>
+                                                                    <!--Lock Assement Activity-->
+                                                                    
                                                                     <c:forEach var="kragoalOtherActivity" items="${kragoalOtherActivity}" varStatus="status">
+                                                                    <input type="hidden" name="midyearEmpSelfassActivityStatus${status.count}" id="midyearEmpSelfassActivityStatus${status.count}" value="${kragoalOtherActivity.midyearEmpSelfassActivityStatus}">
+                                                                    <!--<input type="hidden" name="midyearManagerSelfassActivityStatus${status.count}" id="midyearManagerSelfassActivityStatus${status.count}" value="$/{kragoalOtherActivity.midyearManagerSelfassActivityStatus}">-->
+                                                                    <input type="hidden" name="endyearEmpSelfassActivityStatus${status.count}" id="endyearEmpSelfassActivityStatus${status.count}" value="${kragoalOtherActivity.endyearEmpSelfassActivityStatus}">
+                                                                    <!--<input type="hidden" name="endyearManagerSelfassActivityStatus${status.count}" id="endyearManagerSelfassActivityStatus${status.count}" value="$/{kragoalOtherActivity.endyearManagerSelfassActivityStatus}">-->
+                                                                        
                                                                         <c:if test="${kragoalOtherActivity.kraGoalActivities ne '' && kragoalOtherActivity.metricActivities ne ''}">
                                                                             <tr id="activitiesTrId${status.count}">
                                                                             <input type="hidden" name="kragoal_activity_id${status.count}" id="kragoal_activity_id${status.count}" value="${kragoalOtherActivity.id}">
@@ -1013,6 +1029,8 @@
                                                                         <td style="margin: 0px;width: 45px;">1</td>
                                                                         <%--<c:if test="${flag eq true}">--%>
                                                                     <input type="hidden" name="countactivityId" id="countactivityId" value="1">
+                                                                    <input type="hidden" name="midyearEmpSelfassActivityStatus1" id="midyearEmpSelfassActivityStatus1" value="0">
+                                                                    <input type="hidden" name="endyearEmpSelfassActivityStatus1" id="endyearEmpSelfassActivityStatus1" value="0">
                                                                     <!--<td id="kraGoalid"><textarea type="Text" name="kraGoal1" id="kraGoal1" class="form-control"></textarea></td>-->
                                                                     <td id=""><textarea  name="kraGoal_activity1" id="kraGoal_activity1"  class="form-control saveRequried"></textarea></td>
                                                                     <td id=""><textarea name="metric_activity1" id="metric_activity1" class="form-control saveRequried"></textarea></td>
@@ -1174,7 +1192,7 @@
 
                                     <div class="box box-info collapsed-box displayAction">
                                         <div class="box-header">
-                                            <h3 class="box-title">Competency Evaluation (As Per Zydex Competency Framework) :<b>${cpmname}</b></h3>
+                                            <h3 class="box-title">Competency Evaluation (As Per Zydex Competency Framework) :${cpmname}</h3>
                                             <div class="box-tools pull-right">
                                                 <span id="spanId3">Expand</span><span class="btn btn-box-tool" id="btn4" data-widget="collapse" onclick="
                                                         buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></span>
@@ -1216,8 +1234,8 @@
                                                     <c:if test="${appraisalPerformanceMaster.managerStatus eq 1 && !empty competencyEvaluationList[0][2].title}">
                                                         <div><input type="text" id="competencyEvaluation_Id" class="form-control" name="competencyEvaluation_Id" value="${competencyEvaluationList[0][2].title}" readonly="true"></div>
                                                         </c:if>
-                                                        
-                                                        <c:if test="${appraisalPerformanceMaster.managerStatus ne 1}">
+
+                                                    <c:if test="${appraisalPerformanceMaster.managerStatus ne 1}">
                                                         <div><input type="text" id="competencyEvaluation_Id" class="form-control" name="competencyEvaluation_Id" value="${competencyEvaluationList[0][2].title}" readonly="true"></div>
                                                         </c:if>
 

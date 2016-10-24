@@ -15,9 +15,15 @@
         <title>Performance Appraisal Form</title>
         <style>
             td { word-break: break-all;}
+            select {
+                /*for firefox*/
+                -moz-appearance: none;
+                /*for chrome*/
+                -webkit-appearance:none;
+            }
         </style>
     </head>
-     <style type="text/css">
+    <style type="text/css">
         @media print {
             #demo234 tr th  {
                 background-color: darkgrey !important;
@@ -216,389 +222,394 @@
                                 <!--<span style="color: red;font-size: 14px;">* indicates mandatory field.</span>-->
                                 <!--<span style="color: red;font-size: 14px;">All the editable fields are mandatory.</span>-->
                                 <%--<form:form class="form-horizontal" id="form1" role="form1" action="appraisalPerformance.htm?act=createSubmit" commandName="appraisalPerformanceMaster" enctype="multipart/form-data" method="post" name='form' onsubmit='return saveSubmit11();'>--%>
-                                    <!--form horizontal starts here-->
-                                    <!--<form class="form-horizontal" role="form" commandName="AppraisalPerformanceMaster">-->
-                                    <div class="box box-info  ">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Employee Detail:</h3>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
+                                <!--form horizontal starts here-->
+                                <!--<form class="form-horizontal" role="form" commandName="AppraisalPerformanceMaster">-->
+                                <div class="box box-info  ">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Employee Detail:</h3>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
 
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <div class="col-sm-2">
-                                                            <label>Employee No.:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Text" class="form-control" readonly value="${employeeMaster[0]}">
-                                                        </div>
-                                                        <div class="col-sm-2">
-                                                            <label>Employee Name:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Text" id="employeeName" name="employeeName"  class="form-control" readonly value="${employeeMaster[1]}">
-                                                        </div>
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="col-sm-2">
+                                                        <label>Employee No.:</label>
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-2">
-                                                            <label>Designation:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Text" class="form-control" readonly value="${employeeMaster[2]}">
-                                                        </div>
-                                                        <div class="col-sm-2">
-                                                            <label>Level:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Text" class="form-control" readonly value="${employeeMaster[3]}">
-                                                        </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control" readonly value="${employeeMaster[0]}">
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-2">
-                                                            <label>Department:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Text" class="form-control" readonly value="${employeeMaster[4]}">
-                                                        </div>
-                                                        <div class="col-sm-2">
-                                                            <label>Work Location:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Text" class="form-control" readonly value="${employeeMaster[5]}">
-                                                        </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Employee Name:</label>
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-2">
-                                                            <label>Reporting Manager:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Text" class="form-control" readonly value="${reportingManager}">
-                                                            <select id="kraCategoryMapHiddenMap" name="kraCategoryMapHiddenMap" class="form-control" style="display: none;" >
-                                                                <option value="">--SELECT--</option>
-                                                                <c:forEach var="kraCategory" items="${kraCategoryMap}">
-                                                                    <option value="${kraCategory.key}">${kraCategory.value}</option>
-                                                                </c:forEach>
-                                                            </select>
-                                                        </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" id="employeeName" name="employeeName"  class="form-control" readonly value="${employeeMaster[1]}">
                                                     </div>
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
+                                                </div>
 
-                                    <div class="box box-info ">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Results:</h3>
-                                          
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
+                                                <div class="form-group">
+                                                    <div class="col-sm-2">
+                                                        <label>Designation:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control" readonly value="${employeeMaster[2]}">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Level:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control" readonly value="${employeeMaster[3]}">
+                                                    </div>
+                                                </div>
 
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="table-responsive">
-                                                        <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center">
-                                                            <tr>
-                                                            <input type="hidden" name="tflagId" id="tflagId" value="${Tflag}">
-                                                            <input type="hidden" name="flagId" id="flagId" value="${flag}">
-                                                            <input type="hidden" name="flagMidId" id="flagMidId" value="${flag1}">
-                                                            <input type="hidden" name="flagEndId" id="flagEndId" value="${flag2}">
-                                                            <input type="hidden" name="status1" id="status1" value="${status}">
-                                                            <input type="hidden" name="kraremovedIdVal" id="kraremovedIdVal" value="">
-                                                            <input type="hidden" id="managerStatus" name="managerStatus" value="${managerStatus}">
-                                                            <input type="hidden" id="employeeStatus" name="employeeStatus" value="${employeeStatus}">
-                                                            <input type="hidden" name="weightage" id="weightage" value="${weightage}">
+                                                <div class="form-group">
+                                                    <div class="col-sm-2">
+                                                        <label>Department:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control" readonly value="${employeeMaster[4]}">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Work Location:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control" readonly value="${employeeMaster[5]}">
+                                                    </div>
+                                                </div>
 
-                                                            <th style="text-align: center">Sr. No.</th>
+                                                <div class="form-group">
+                                                    <div class="col-sm-2">
+                                                        <label>Reporting Manager:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control" readonly value="${reportingManager}">
+                                                        <select id="kraCategoryMapHiddenMap" name="kraCategoryMapHiddenMap" class="form-control" style="display: none;" >
+                                                            <option value="">--SELECT--</option>
+                                                            <c:forEach var="kraCategory" items="${kraCategoryMap}">
+                                                                <option value="${kraCategory.key}">${kraCategory.value}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.col -->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                </div>
+
+                                <div class="box box-info ">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Results:</h3>
+
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding">
+
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="table-responsive">
+                                                    <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center">
+                                                        <tr>
+                                                        <input type="hidden" name="tflagId" id="tflagId" value="${Tflag}">
+                                                        <input type="hidden" name="flagId" id="flagId" value="${flag}">
+                                                        <input type="hidden" name="flagMidId" id="flagMidId" value="${flag1}">
+                                                        <input type="hidden" name="flagEndId" id="flagEndId" value="${flag2}">
+                                                        <input type="hidden" name="status1" id="status1" value="${status}">
+                                                        <input type="hidden" name="kraremovedIdVal" id="kraremovedIdVal" value="">
+                                                        <input type="hidden" id="managerStatus" name="managerStatus" value="${managerStatus}">
+                                                        <input type="hidden" id="employeeStatus" name="employeeStatus" value="${employeeStatus}">
+                                                        <input type="hidden" name="weightage" id="weightage" value="${weightage}">
+
+                                                        <th style="text-align: center">Sr. No.</th>
 
 
-                                                            <th style="text-align: center" id="kraGoalid1">High Impact Goal / KRA</th>
-                                                            <th style="text-align: center" id="metricid1">Metric</th>
-                                                            <th style="text-align: center" id="metricid1">KRA Category</th>
+                                                        <th style="text-align: center" id="kraGoalid1">High Impact Goal / KRA</th>
+                                                        <th style="text-align: center" id="metricid1">Metric</th>
+                                                        <th style="text-align: center" id="metricid1">KRA Category</th>
 
-                                                            <th style="margin: 0px;width: 25px;text-align: center;" id="weightageid12">Weightage Out Of 75</th>
-                                                            <!--<th style="display: none;" id='weightageOut'></th>-->
-
-
-                                                            <th style="margin: 0px;width: 70px;text-align: center" id="midYearDivid">Mid Year Status</th>
-                                                            <th style="margin: 0px;width: 70px;text-align: center" id="endYearDivid1">End Year Status</th>
-                                                            <th style="margin: 0px;width: 25px;text-align: center" id="finalScoreid01">Final Score</th>
-                                                            </tr>
-                                                            <input type="hidden" name="kragoalLength" id="kragoalLength" value="${fn:length(kragoal)}">
-                                                            <c:choose>
-                                                                <c:when test="${fn:length(kragoal) > 0}">
-                                                                    <input type="hidden" name="countId" id="countId" value="${fn:length(kragoal)}">
-                                                                    <c:set var="resultCount" value="${fn:length(kragoal)}"></c:set>
-                                                                    <c:forEach var="kragoallist" items="${kragoal}" varStatus="status">
-                                                                              <tr id="removeTr${status.count}">
-                                                                              <input type="hidden" name="kragoal_id${status.count}" id="kragoal_id${status.count}" value="${kragoallist.id}">
-                                                                              <td id="removeKRAID${status.count}" class="removeClass" style="margin: 0px;width: 45px;"><span>${status.count} </span></td>
+                                                        <th style="margin: 0px;width: 25px;text-align: center;" id="weightageid12">Weightage Out Of 75</th>
+                                                        <!--<th style="display: none;" id='weightageOut'></th>-->
 
 
-                                                                              <td id="kraGoalid1${status.count}">${kragoallist.kraGoal}</td>
-                                                                              <td id="metricid1${status.count}">${kragoallist.metric}</td>
-                                                                              <td id="kraCategoryId${status.count}">
-                                                                                      <c:forEach var="kraCategory" items="${kraCategoryMap}">
-                                                                                          <c:if test="${kragoallist.kraCategoryByKraCategoryByEmployee.id eq kraCategory.key}">
-                                                                                              ${kraCategory.value}
-                                                                                          </c:if>
-                                                                                          <c:if test="${kragoallist.kraCategoryByKraCategoryByEmployee.id ne kraCategory.key}">
-                                                                                              ${kraCategory.value}
-                                                                                          </c:if>
-                                                                                      </c:forEach>
-                                                                              </td>
-                                                                              <!--By Ajay  End-->
-                                                                              <td id="weightageidT1${status.count}">
-                                                                                  <c:choose>
-                                                                                      <c:when test="${appraisalPerformanceMaster.getEmployeeStatus() eq 0}">
-                                                                                          ${kragoallist.weightage}
-                                                                                      </c:when>
-                                                                                      <c:otherwise>
-                                                                                          ${kragoallist.weightage}
-                                                                                      </c:otherwise>
-                                                                                  </c:choose>
-                                                                              </td>
-                                                                              <td id="midYearDivid1${status.count}">
-                                                                                  ${kragoallist.midyearStatus}
-                                                                              </td>
-                                                                              <td id="endYearDivid1${status.count}">
-                                                                                  ${kragoallist.endyearStatus}
-                                                                              </td>
-                                                                              <td id="finalScoreid${status.count}">
-                                                                                  ${kragoallist.finalScore}
-                                                                              </td>
-                                                                              </tr>
-                                                                                  <tr id="employeesMid${status.count}">
-                                                                                  <td colspan="4"><b>Employee’s Mid - Year Self – Assessment KRA:</b></td>
-                                                                                  <td colspan="4"><b>Manager’s Mid - Year Review / Evaluation KRA:</b></td>
-                                                                              </tr>
-                                                                              <tr id="textemployeesMid${status.count}">
-                                                                                  <td colspan="4">${kragoallist.empMidyearSelfassessmentGoal}</td>
-                                                                                  <td colspan="4">${kragoallist.managerMidyearReviewEvaluation}</td>
-                                                                                  </tr>
+                                                        <th style="margin: 0px;width: 70px;text-align: center" id="midYearDivid">Mid Year Status</th>
+                                                        <th style="margin: 0px;width: 70px;text-align: center" id="endYearDivid1">End Year Status</th>
+                                                        <th style="margin: 0px;width: 25px;text-align: center" id="finalScoreid01">Final Score</th>
+                                                        </tr>
+                                                        <input type="hidden" name="kragoalLength" id="kragoalLength" value="${fn:length(kragoal)}">
+                                                        <c:choose>
+                                                            <c:when test="${fn:length(kragoal) > 0}">
+                                                                <input type="hidden" name="countId" id="countId" value="${fn:length(kragoal)}">
+                                                                <c:set var="resultCount" value="${fn:length(kragoal)}"></c:set>
+                                                                <c:forEach var="kragoallist" items="${kragoal}" varStatus="status">
+                                                                    <tr id="removeTr${status.count}">
+                                                                    <input type="hidden" name="kragoal_id${status.count}" id="kragoal_id${status.count}" value="${kragoallist.id}">
+                                                                    <td id="removeKRAID${status.count}" class="removeClass" style="margin: 0px;width: 45px;"><span>${status.count} </span></td>
 
-                                                                                  <tr id="employeesEnd${status.count}">
-                                                                                  <td colspan="4"><b>Employee’s End - Year Self – Assessment KRA:</b></td>
-                                                                                  <td colspan="4"><b>Manager’s End - Year Review / Evaluation KRA:</b></td>
-                                                                              </tr>
-                                                                              <tr id="textemployeesEnd${status.count}">
-                                                                                  <td colspan="4">${kragoallist.empEndyearSelfassessmentGoal}</td>
-                                                                                  <td colspan="4">${kragoallist.managerEndyearReviewEvaluation}</td>
-                                                                                  </tr>
+
+                                                                    <td id="kraGoalid1${status.count}">${kragoallist.kraGoal}</td>
+                                                                    <td id="metricid1${status.count}">${kragoallist.metric}</td>
+                                                                    <td id="kraCategoryId${status.count}">
+                                                                        <%--<c:forEach var="kraCategory" items="${kraCategoryMap}">--%>
+                                                                        <%--<c:if test="${kragoallist.kraCategoryByKraCategoryByEmployee.id eq kraCategory.key}">--%>
+                                                                            <!--<option value="${kraCategory.key}" selected="">${kraCategory.value}</option>-->
                                                                         <%--</c:if>--%>
-                                                                    </c:forEach>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <input type="hidden" name="countId" id="countId" value="1">
-                                                                    <tr id="row_1_1">
-                                                                        <td style="margin: 0px;width: 45px;">1</td>
-                                                                        <td id="kraGoalid"></td>
-                                                                        <td id="metricid"></td>
-                                                                        <td id="kraCategoryId"></td>
-                                                                        <td id="weightageid"></td>
-                                                                        <td id="midYearDivid1"></td>
-                                                                        <td id="endYearDivid"></td>
-                                                                        <td id="finalScoreid"></td>
-                                                                    <input type="hidden" id="startDate1" name="startDate1" value="${kragoal[0].startDate}">
-                                                                    <tr id="employeesMid">
+                                                                        <%--<c:if test="${kragoallist.kraCategoryByKraCategoryByEmployee.id ne kraCategory.key}">--%>
+                                                                            <!--<option value="${kraCategory.key}">${kraCategory.value}</option>-->
+                                                                        <%--</c:if>--%>
+                                                                        <%--</c:forEach>--%>
+                                                                       
+
+                                                                            <c:forEach var="kraCategory" items="${kraCategoryMap}">
+                                                                                <c:if test="${kragoallist.kraCategoryByKraCategoryByEmployee.id eq kraCategory.key}">
+                                                                                    <option value="${kraCategory.key}" selected="">${kraCategory.value}</option>
+                                                                                </c:if>
+                                                                            </c:forEach>
+                                                                             
+                                                                    </td>
+                                                                    <!--By Ajay  End-->
+                                                                    <td id="weightageidT1${status.count}">
+                                                                        <c:choose>
+                                                                            <c:when test="${appraisalPerformanceMaster.getEmployeeStatus() eq 0}">
+                                                                                ${kragoallist.weightage}
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                ${kragoallist.weightage}
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                    </td>
+                                                                    <td id="midYearDivid1${status.count}">
+                                                                        ${kragoallist.midyearStatus}
+                                                                    </td>
+                                                                    <td id="endYearDivid1${status.count}">
+                                                                        ${kragoallist.endyearStatus}
+                                                                    </td>
+                                                                    <td id="finalScoreid${status.count}">
+                                                                        ${kragoallist.finalScore}
+                                                                    </td>
+                                                                    </tr>
+                                                                    <tr id="employeesMid${status.count}">
                                                                         <td colspan="4"><b>Employee’s Mid - Year Self – Assessment KRA:</b></td>
                                                                         <td colspan="4"><b>Manager’s Mid - Year Review / Evaluation KRA:</b></td>
                                                                     </tr>
-                                                                    <tr id="textemployeesMid">
-                                                                        <td colspan="4"></td>
-                                                                        <td colspan="4"></td>
+                                                                    <tr id="textemployeesMid${status.count}">
+                                                                        <td colspan="4">${kragoallist.empMidyearSelfassessmentGoal}</td>
+                                                                        <td colspan="4">${kragoallist.managerMidyearReviewEvaluation}</td>
                                                                     </tr>
 
-                                                                    <tr id="employeesEnd">
+                                                                    <tr id="employeesEnd${status.count}">
                                                                         <td colspan="4"><b>Employee’s End - Year Self – Assessment KRA:</b></td>
                                                                         <td colspan="4"><b>Manager’s End - Year Review / Evaluation KRA:</b></td>
                                                                     </tr>
-                                                                    <tr id="textemployeesEnd">
-                                                                        <td colspan="4"></td>
-                                                                        <td colspan="4"></td>
+                                                                    <tr id="textemployeesEnd${status.count}">
+                                                                        <td colspan="4">${kragoallist.empEndyearSelfassessmentGoal}</td>
+                                                                        <td colspan="4">${kragoallist.managerEndyearReviewEvaluation}</td>
                                                                     </tr>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </table>
-                                                    </div>
-                                                    <div class="table-responsive">
-                                                        <table id="demo1" class="table table-bordered table-striped table-hover" style="" align="Center">
-                                                            <tr id="weightage">
-                                                                <td style="margin: 0px;width: 100px;"></td>
-                                                                <td style="margin: 0px;width: 100px;"></td>
-                                                                <td style="margin: 0px;width: 285px;" id="weightageScoreId" align="right"><b>Weightage</b></td>
-                                                                <td style="margin: 0px;width: 100px;" id="dhaval">
-                                                                    <input type="text" id="weightageScore" name="weightageScore" class="form-control"  value="${weightageScore}" style="margin: 0px;width: 100px;" readonly="true">
+                                                                    <%--</c:if>--%>
+                                                                </c:forEach>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <input type="hidden" name="countId" id="countId" value="1">
+                                                                <tr id="row_1_1">
+                                                                    <td style="margin: 0px;width: 45px;">1</td>
+                                                                    <td id="kraGoalid"></td>
+                                                                    <td id="metricid"></td>
+                                                                    <td id="kraCategoryId"></td>
+                                                                    <td id="weightageid"></td>
+                                                                    <td id="midYearDivid1"></td>
+                                                                    <td id="endYearDivid"></td>
+                                                                    <td id="finalScoreid"></td>
+                                                                <input type="hidden" id="startDate1" name="startDate1" value="${kragoal[0].startDate}">
+                                                                <tr id="employeesMid">
+                                                                    <td colspan="4"><b>Employee’s Mid - Year Self – Assessment KRA:</b></td>
+                                                                    <td colspan="4"><b>Manager’s Mid - Year Review / Evaluation KRA:</b></td>
+                                                                </tr>
+                                                                <tr id="textemployeesMid">
+                                                                    <td colspan="4"></td>
+                                                                    <td colspan="4"></td>
+                                                                </tr>
+
+                                                                <tr id="employeesEnd">
+                                                                    <td colspan="4"><b>Employee’s End - Year Self – Assessment KRA:</b></td>
+                                                                    <td colspan="4"><b>Manager’s End - Year Review / Evaluation KRA:</b></td>
+                                                                </tr>
+                                                                <tr id="textemployeesEnd">
+                                                                    <td colspan="4"></td>
+                                                                    <td colspan="4"></td>
+                                                                </tr>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </table>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table id="demo1" class="table table-bordered table-striped table-hover" style="" align="Center">
+                                                        <tr id="weightage">
+                                                            <td style="margin: 0px;width: 100px;"></td>
+                                                            <td style="margin: 0px;width: 100px;"></td>
+                                                            <td style="margin: 0px;width: 285px;" id="weightageScoreId" align="right"><b>Weightage</b></td>
+                                                            <td style="margin: 0px;width: 100px;" id="dhaval">
+                                                                <input type="text" id="weightageScore" name="weightageScore" class="form-control"  value="${weightageScore}" style="margin: 0px;width: 100px;" readonly="true">
+                                                            </td>
+                                                            <td style="margin: 0px;width: 170px;">
+                                                            </td>
+                                                            <td style="margin: 0px;width: 90px;" id="totalScoreId" align="right"><b>Total Score</b>
+                                                            </td>
+                                                            <td><input id="totalScore" name="totalScore" value="${totalScore}" class="form-control" value="${totalScore}" style="margin: 0px;width: 100px;" readonly="true"></input></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div><!-- /.col -->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+
+                                </div>
+
+                                <div class="box box-info ">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Additional Activities / Projects:</h3>
+
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="table-responsive">
+                                                    <table id="demo10" class="table table-bordered table-striped table-hover" style="" align="Center">
+                                                        <tr>
+
+                                                        <input type="hidden" name="status1" id="status1" value="${status}">
+                                                        <input type="hidden" name="kraremovedActivitiesIdVal" id="kraremovedActivitiesIdVal" value="">
+
+                                                        <input type="hidden" id="managerStatus" name="managerStatus" value="${managerStatus}">
+                                                        <input type="hidden" id="employeeStatus" name="employeeStatus" value="${employeeStatus}">
+                                                        <input type="hidden" name="weightage" id="weightage" value="${weightage}">
+
+                                                        <th style="text-align: center">Sr. No.</th>
+
+
+                                                        <th style="text-align: center" id="kraGoalid1">Additional Activities / Projects</th>
+                                                        <th style="text-align: center" id="metricid1">Metric</th>
+                                                        <th style="text-align: center" id="metricid1">Project Category</th>
+
+                                                        <th style="margin: 0px;width: 25px;text-align: center;" id="">Priority</th>
+
+                                                        <th style="margin: 0px;width: 70px;text-align: center" id="midYearDivid">Mid Year Status</th>
+                                                        <th style="margin: 0px;width: 70px;text-align: center" id="endYearDivid1">End Year Status</th>
+                                                        <th style="margin: 0px;width: 25px;text-align: center" id="finalScoreid01">Activity/Project Performance</th>
+                                                        </tr>
+                                                        <input type="hidden" name="kragoalLengthactivity" id="kragoalLengthactivity" value="${fn:length(kragoalOtherActivity)}">
+
+                                                        <c:choose>
+                                                            <c:when test="${fn:length(kragoalOtherActivity) > 0}">
+                                                                <input type="hidden" name="countactivityId" id="countactivityId" value="${fn:length(kragoalOtherActivity)}">
+                                                                <c:set var="kragoalOtherActivityValManager" value="${fn:length(kragoalOtherActivity)}"></c:set>
+                                                                <c:forEach var="kragoalOtherActivity" items="${kragoalOtherActivity}" varStatus="status">
+                                                                    <c:if test="${kragoalOtherActivity.kraGoalActivities ne '' && kragoalOtherActivity.metricActivities ne ''}">
+                                                                        <tr id="activitiesTrId${status.count}">
+                                                                        <input type="hidden" name="kragoal_activity_id${status.count}" id="kragoal_activity_id${status.count}" value="${kragoalOtherActivity.id}">
+                                                                        <td id="removeKRAactivitiesID${status.count}" class="removeactivitiesClass" style="margin: 0px;width: 45px;">${status.count} </td>
+                                                                        <td id="">${kragoalOtherActivity.kraGoalActivities}</td>
+                                                                        <td id="">${kragoalOtherActivity.metricActivities}</td>
+                                                                        <td id="kraCategoryId${status.count}">
+                                                                            <c:forEach var="kraCategory" items="${kraCategoryMap}">
+                                                                                <c:if test="${kragoalOtherActivity.kraCategoryByEmployeeActivities eq kraCategory.key}">
+                                                                                   <option value="${kraCategory.key}" selected="">${kraCategory.value}</option>
+                                                                                </c:if>
+                                                                            </c:forEach>                                                                      
+                                                                        <td id="priorityid${status.count}">
+                                                                            ${kragoalOtherActivity.priority}
+                                                                        </td>
+                                                                        <td id="midYearDivid1${status.count}">
+                                                                            ${kragoalOtherActivity.midyearStatusActivities}
+                                                                        </td>
+                                                                        <td id="endYearDivid1${status.count}">
+                                                                            ${kragoalOtherActivity.endyearStatusActivities}
+                                                                        </td>
+                                                                        <td id="activityDivid1${status.count}">
+                                                                            ${kragoalOtherActivity.activity}
+                                                                        </td>
+                                                                        </tr>
+                                                                        <tr id="activitiesEmpMidLabel1TrId${status.count}">
+                                                                            <td colspan="4"><b>Employee’s Mid - Year Self – Assessment For Other Projects:</b></td>
+                                                                            <td colspan="4"><b>Manager’s Mid - Year Review / Evaluation For Other Projects:</b></td>
+                                                                        </tr>
+                                                                        <tr id="activitiesEmpMid1TrId${status.count}">
+                                                                            <td colspan="4">${kragoalOtherActivity.empMidyearSelfassessmentGoalActivities}</td>
+                                                                            <td colspan="4">${kragoalOtherActivity.managerMidyearSelfassesssmentGoalActivities}</td>
+                                                                        </tr>
+
+                                                                        <tr id="activitiesEmpMidLabel2TrId${status.count}">
+                                                                            <td colspan="4"><b>Employee’s End - Year Self – Assessment For Other Projects:</b></td>
+                                                                            <td colspan="4"><b>Manager’s End - Year Review / Evaluation For Other Projects:</b></td>
+                                                                        </tr>
+                                                                        <tr id="activitiesEmpMid2TrId${status.count}">
+                                                                            <td colspan="4">${kragoalOtherActivity.empEndyearSelfassessmentGoalActivities}</td>
+                                                                            <td colspan="4">${kragoalOtherActivity.managerEndyearSelfassesssmentGoalActivities}</td>
+                                                                        </tr>
+                                                                    </c:if>
+
+                                                                </c:forEach>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <tr>
+                                                                    <td style="margin: 0px;width: 45px;">1</td>
+                                                                <input type="hidden" name="countactivityId" id="countactivityId" value="1">
+                                                                <td id=""></td>
+                                                                <td id=""></td>
+                                                                <td id="kraCategoryId">
                                                                 </td>
-                                                                <td style="margin: 0px;width: 170px;">
+                                                                <td id="priorityid">
                                                                 </td>
-                                                                <td style="margin: 0px;width: 90px;" id="totalScoreId" align="right"><b>Total Score</b>
+                                                                <td id="midYearDividact1">
                                                                 </td>
-                                                                <td><input id="totalScore" name="totalScore" value="${totalScore}" class="form-control" value="${totalScore}" style="margin: 0px;width: 100px;" readonly="true"></input></td>
-                                                                <td></td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                  </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
+                                                                <td id="endYearDividact">
+                                                                </td>
+                                                                <td id="">
+                                                                </td>
+                                                                <input type="hidden" id="startDate1" name="startDate1" value="${kragoal[0].startDate}">
+                                                                <tr id="employeesMid">
+                                                                    <td colspan="4"><b>Employee’s Mid - Year Self – Assessment Project:</b></td>
+                                                                    <td colspan="4"><b>Manager’s Mid - Year Review / Evaluation Project:</b></td>
+                                                                </tr>
+                                                                <tr id="textemployeesMid">
+                                                                    <td colspan="4"></td>
+                                                                    <td colspan="4"></td>
+                                                                </tr>
 
-                                    </div>
+                                                                <tr id="employeesEnd">
+                                                                    <td colspan="4"><b>Employee’s End - Year Self – Assessment Project:</b></td>
+                                                                    <td colspan="4"><b>Manager’s End - Year Review / Evaluation Project:</b></td>
+                                                                </tr>
+                                                                <tr id="textemployeesEnd">
+                                                                    <td colspan="4"></td>
+                                                                    <td colspan="4"></td>
+                                                                </tr>
 
-                                    <div class="box box-info ">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Additional Activities / Projects:</h3>
-                                            
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="table-responsive">
-                                                        <table id="demo10" class="table table-bordered table-striped table-hover" style="" align="Center">
-                                                            <tr>
-
-                                                            <input type="hidden" name="status1" id="status1" value="${status}">
-                                                            <input type="hidden" name="kraremovedActivitiesIdVal" id="kraremovedActivitiesIdVal" value="">
-
-                                                            <input type="hidden" id="managerStatus" name="managerStatus" value="${managerStatus}">
-                                                            <input type="hidden" id="employeeStatus" name="employeeStatus" value="${employeeStatus}">
-                                                            <input type="hidden" name="weightage" id="weightage" value="${weightage}">
-
-                                                            <th style="text-align: center">Sr. No.</th>
-
-
-                                                            <th style="text-align: center" id="kraGoalid1">Additional Activities / Projects</th>
-                                                            <th style="text-align: center" id="metricid1">Metric</th>
-                                                            <th style="text-align: center" id="metricid1">Project Category</th>
-
-                                                            <th style="margin: 0px;width: 25px;text-align: center;" id="">Priority</th>
-
-                                                            <th style="margin: 0px;width: 70px;text-align: center" id="midYearDivid">Mid Year Status</th>
-                                                            <th style="margin: 0px;width: 70px;text-align: center" id="endYearDivid1">End Year Status</th>
-                                                            <th style="margin: 0px;width: 25px;text-align: center" id="finalScoreid01">Activity/Project Performance</th>
-                                                            </tr>
-                                                            <input type="hidden" name="kragoalLengthactivity" id="kragoalLengthactivity" value="${fn:length(kragoalOtherActivity)}">
-
-                                                            <c:choose>
-                                                                <c:when test="${fn:length(kragoalOtherActivity) > 0}">
-                                                                    <input type="hidden" name="countactivityId" id="countactivityId" value="${fn:length(kragoalOtherActivity)}">
-                                                                    <c:set var="kragoalOtherActivityValManager" value="${fn:length(kragoalOtherActivity)}"></c:set>
-                                                                    <c:forEach var="kragoalOtherActivity" items="${kragoalOtherActivity}" varStatus="status">
-                                                                        <c:if test="${kragoalOtherActivity.kraGoalActivities ne '' && kragoalOtherActivity.metricActivities ne ''}">
-                                                                            <tr id="activitiesTrId${status.count}">
-                                                                            <input type="hidden" name="kragoal_activity_id${status.count}" id="kragoal_activity_id${status.count}" value="${kragoalOtherActivity.id}">
-                                                                            <td id="removeKRAactivitiesID${status.count}" class="removeactivitiesClass" style="margin: 0px;width: 45px;">${status.count} </td>
-                                                                            <td id="">${kragoalOtherActivity.kraGoalActivities}</td>
-                                                                            <td id="">${kragoalOtherActivity.metricActivities}</td>
-                                                                            <td id="kraCategoryId${status.count}">
-                                                                                    <c:forEach var="kraCategory" items="${kraCategoryMap}">
-                                                                                        <c:if test="${kragoalOtherActivity.kraCategoryByEmployeeActivities eq kraCategory.key}">
-                                                                                            ${kraCategory.value}
-                                                                                        </c:if>
-                                                                                        <c:if test="${kragoalOtherActivity.kraCategoryByEmployeeActivities ne kraCategory.key}">
-                                                                                            ${kraCategory.value}
-                                                                                        </c:if>
-                                                                                    </c:forEach>
-                                                                            <td id="priorityid${status.count}">
-                                                                                    ${kragoalOtherActivity.priority}
-                                                                            </td>
-                                                                            <td id="midYearDivid1${status.count}">
-                                                                                ${kragoalOtherActivity.midyearStatusActivities}
-                                                                            </td>
-                                                                            <td id="endYearDivid1${status.count}">
-                                                                                ${kragoalOtherActivity.endyearStatusActivities}
-                                                                            </td>
-                                                                            <td id="activityDivid1${status.count}">
-                                                                                ${kragoalOtherActivity.activity}
-                                                                            </td>
-                                                                            </tr>
-                                                                            <tr id="activitiesEmpMidLabel1TrId${status.count}">
-                                                                                <td colspan="4"><b>Employee’s Mid - Year Self – Assessment For Other Projects:</b></td>
-                                                                                <td colspan="4"><b>Manager’s Mid - Year Review / Evaluation For Other Projects:</b></td>
-                                                                            </tr>
-                                                                            <tr id="activitiesEmpMid1TrId${status.count}">
-                                                                                <td colspan="4">${kragoalOtherActivity.empMidyearSelfassessmentGoalActivities}</td>
-                                                                                <td colspan="4">${kragoalOtherActivity.managerMidyearSelfassesssmentGoalActivities}</td>
-                                                                            </tr>
-
-                                                                            <tr id="activitiesEmpMidLabel2TrId${status.count}">
-                                                                                <td colspan="4"><b>Employee’s End - Year Self – Assessment For Other Projects:</b></td>
-                                                                                <td colspan="4"><b>Manager’s End - Year Review / Evaluation For Other Projects:</b></td>
-                                                                            </tr>
-                                                                            <tr id="activitiesEmpMid2TrId${status.count}">
-                                                                                <td colspan="4">${kragoalOtherActivity.empEndyearSelfassessmentGoalActivities}</td>
-                                                                                <td colspan="4">${kragoalOtherActivity.managerEndyearSelfassesssmentGoalActivities}</td>
-                                                                            </tr>
-                                                                        </c:if>
-                                                                       
-                                                                    </c:forEach>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <tr>
-                                                                        <td style="margin: 0px;width: 45px;">1</td>
-                                                                    <input type="hidden" name="countactivityId" id="countactivityId" value="1">
-                                                                    <td id=""></td>
-                                                                    <td id=""></td>
-                                                                    <td id="kraCategoryId">
-                                                                    </td>
-                                                                    <td id="priorityid">
-                                                                    </td>
-                                                                    <td id="midYearDividact1">
-                                                                    </td>
-                                                                    <td id="endYearDividact">
-                                                                    </td>
-                                                                    <td id="">
-                                                                    </td>
-                                                                    <input type="hidden" id="startDate1" name="startDate1" value="${kragoal[0].startDate}">
-                                                                    <tr id="employeesMid">
-                                                                        <td colspan="4"><b>Employee’s Mid - Year Self – Assessment Project:</b></td>
-                                                                        <td colspan="4"><b>Manager’s Mid - Year Review / Evaluation Project:</b></td>
-                                                                    </tr>
-                                                                    <tr id="textemployeesMid">
-                                                                        <td colspan="4"></td>
-                                                                        <td colspan="4"></td>
-                                                                    </tr>
-
-                                                                    <tr id="employeesEnd">
-                                                                        <td colspan="4"><b>Employee’s End - Year Self – Assessment Project:</b></td>
-                                                                        <td colspan="4"><b>Manager’s End - Year Review / Evaluation Project:</b></td>
-                                                                    </tr>
-                                                                    <tr id="textemployeesEnd">
-                                                                        <td colspan="4"></td>
-                                                                        <td colspan="4"></td>
-                                                                    </tr>
-                                                                    
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </table>
-                                                    </div>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                     <div class="box box-info ">
                                         <div class="box-header">
                                             <h3 class="box-title">Competency Evaluation (As Per Zydex Competency Framework) :</h3>
-                                            
+
                                         </div><!-- /.box-header -->
                                         <div class="box-body no-padding">
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
                                                     <c:if test="${empty competencyEvaluationList[0][2].title || appraisalPerformanceMaster.managerStatus ne 1}">
-                                                            <c:forEach var="competencyMap" items="${competencyMap}">
-                                                                <c:if test="${competencyEvaluationList[0][2].title  eq competencyMap.value}">
-                                                                    ${competencyMap.value}
-                                                                </c:if>
-                                                                <c:if test="${competencyEvaluationList[0][2].title  ne competencyMap.value}">
-                                                                    ${competencyMap.value}
-                                                                </c:if>
-                                                            </c:forEach>
+                                                        <c:forEach var="competencyMap" items="${competencyMap}">
+                                                            <c:if test="${competencyEvaluationList[0][2].title  eq competencyMap.value}">
+                                                                ${competencyMap.value}
+                                                            </c:if>
+                                                            <c:if test="${competencyEvaluationList[0][2].title  ne competencyMap.value}">
+                                                                ${competencyMap.value}
+                                                            </c:if>
+                                                        </c:forEach>
                                                     </c:if>
                                                     <c:if test="${appraisalPerformanceMaster.managerStatus eq 1 && !empty competencyEvaluationList[0][2].title}">
                                                         ${competencyEvaluationList[0][2].title}
-                                                        </c:if>
+                                                    </c:if>
                                                 </div>
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="table-responsive">
@@ -638,7 +649,7 @@
                                                                         ${competencyEvaluationList[9]}
                                                                     </td>
                                                                     <td id="subCompentencyEndRemarkId${status.count}">
-                                                                       ${competencyEvaluationList[10]}
+                                                                        ${competencyEvaluationList[10]}
                                                                     </td>
                                                                 </tr>
                                                             </c:forEach>
@@ -651,7 +662,7 @@
                                     <div class="box box-info ">
                                         <div class="box-header">
                                             <h3 class="box-title">Individual Development Plan(Training Need Identification):</h3>
-                                          
+
                                         </div><!-- /.box-header -->
                                         <div class="box-body no-padding">
                                             <div class="row">
@@ -690,7 +701,7 @@
                                                                                 ${individualDevelopmentPlan.remark}
                                                                             </td>
                                                                             </tr>
-                                                                                <tr id="individualEmpMidLabel1TrId${status.count}">
+                                                                            <tr id="individualEmpMidLabel1TrId${status.count}">
                                                                                 <td colspan="3" id="midYearReId${status.count}"><b>Employee Mid-Year Remark</b></td>
                                                                                 <td colspan="3" id="endYearReId${status.count}"><b>Employee End-Year Remark</b></td>
                                                                             </tr>
@@ -705,7 +716,7 @@
                                                                             <tr id="individualEmpMid2TrId${status.count}">
                                                                                 <td colspan="3">${individualDevelopmentPlan.managerMidYearRemark}</td>
                                                                                 <td colspan="3">
-                                                                                   ${individualDevelopmentPlan.managerEndYearRemark}</td>
+                                                                                    ${individualDevelopmentPlan.managerEndYearRemark}</td>
                                                                             </tr>
                                                                         </c:if>
                                                                     </c:forEach>
@@ -721,7 +732,7 @@
                                                                         </td>
                                                                         <td>
                                                                         </td>
-                                                                        
+
                                                                     </tr>
 
                                                                     <tr>
@@ -755,7 +766,7 @@
                                     <div class="box box-info " id="behaviorsTabId">
                                         <div class="box-header">
                                             <h3 class="box-title">Behaviors:</h3>
-                                            
+
                                         </div><!-- /.box-header -->
                                         <div class="box-body no-padding">
                                             <div class="row">
@@ -767,7 +778,7 @@
                                                                 <th style="text-align: center"><b>Behaviors</b></th>
                                                                 <th style="text-align: center">Mid'Year Score</th>
                                                                 <th style="text-align: center">End'Year Score</th>
-                                                                
+
                                                             </tr>
                                                             <input type="hidden" name="BehaviorsId" id="BehaviorsId" value="${fn:length(behaviorsList)}">
                                                             <tr style="background-color: lightgrey">
@@ -820,15 +831,15 @@
                                                                     <tr style="background-color: lightgrey">
                                                                         <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
                                                                         <td colspan="2">${behaviorsList[0].managerMidYearReview}</td>
-                                                                        </tr>
-                                                                        <tr style="background-color: lightgrey" >
-                                                                            <td id="managerEndYearReviewId1"><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                            <td colspan="2"></td>
-                                                                        </tr>
-                                                                        <tr style="background-color: lightgrey">
-                                                                        <input type="hidden" id="w2" name="w2" value="WLB 2"/>
-                                                                        <td><b>WLB 2: Deliver Results</b><br>&nbsp;&nbsp;- Master the art of execution & Establish a track record of results<br>&nbsp;&nbsp;- Practice Accountability – Hold self & others accountable<br>&nbsp;&nbsp;- Get the best out of you and your team<br>&nbsp;&nbsp;- Be on time and within budget<br>&nbsp;&nbsp;- Don’t find excuses for not delivering<br>&nbsp;&nbsp;- Celebrate success with the team</td>
-                                                                        <td>
+                                                                    </tr>
+                                                                    <tr style="background-color: lightgrey" >
+                                                                        <td id="managerEndYearReviewId1"><b>Manager’s End - Year Review / Evaluation</b></td>
+                                                                        <td colspan="2"></td>
+                                                                    </tr>
+                                                                    <tr style="background-color: lightgrey">
+                                                                    <input type="hidden" id="w2" name="w2" value="WLB 2"/>
+                                                                    <td><b>WLB 2: Deliver Results</b><br>&nbsp;&nbsp;- Master the art of execution & Establish a track record of results<br>&nbsp;&nbsp;- Practice Accountability – Hold self & others accountable<br>&nbsp;&nbsp;- Get the best out of you and your team<br>&nbsp;&nbsp;- Be on time and within budget<br>&nbsp;&nbsp;- Don’t find excuses for not delivering<br>&nbsp;&nbsp;- Celebrate success with the team</td>
+                                                                    <td>
 
                                                                         <c:if test="${behaviorsList[0].midYearScore eq '5.0'}">
                                                                             <input type="Text" id="midYearScore2" name="midYearScore2" value="Far Exceeds Expectations" class="form-control" readonly="true">
@@ -877,15 +888,15 @@
                                                                     <tr style="background-color: lightgrey">
                                                                         <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
                                                                         <td colspan="2">${behaviorsList[1].managerMidYearReview}</td>
-                                                                        </tr>
-                                                                        <tr style="background-color: lightgrey" id="managerEndYearReviewId">
-                                                                            <td id="managerEndYearReviewId2"><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                            <td colspan="2">${behaviorsList[1].managerEndYearReview}</td>
-                                                                        </tr>
-                                                                        <tr style="background-color: lightgrey">
-                                                                        <input type="hidden" id="w3" name="w3" value="WLB 3"/>
-                                                                        <td><b>WLB 3: Build Relationships & Develop Others</b><br>&nbsp;&nbsp;- Be grounded at all times & approachable<br>&nbsp;&nbsp;- Treat people with utmost respect & care<br>&nbsp;- Understand other’s perspective & concern<br>&nbsp;&nbsp;- Invest in developing the talent<br>&nbsp;&nbsp;- Give your team the right opportunities to learn and grow<br>&nbsp;&nbsp;- Create a learning environment & help others to learn from success stories & failures<br>&nbsp;&nbsp; </td>
-                                                                        <td>
+                                                                    </tr>
+                                                                    <tr style="background-color: lightgrey" id="managerEndYearReviewId">
+                                                                        <td id="managerEndYearReviewId2"><b>Manager’s End - Year Review / Evaluation</b></td>
+                                                                        <td colspan="2">${behaviorsList[1].managerEndYearReview}</td>
+                                                                    </tr>
+                                                                    <tr style="background-color: lightgrey">
+                                                                    <input type="hidden" id="w3" name="w3" value="WLB 3"/>
+                                                                    <td><b>WLB 3: Build Relationships & Develop Others</b><br>&nbsp;&nbsp;- Be grounded at all times & approachable<br>&nbsp;&nbsp;- Treat people with utmost respect & care<br>&nbsp;- Understand other’s perspective & concern<br>&nbsp;&nbsp;- Invest in developing the talent<br>&nbsp;&nbsp;- Give your team the right opportunities to learn and grow<br>&nbsp;&nbsp;- Create a learning environment & help others to learn from success stories & failures<br>&nbsp;&nbsp; </td>
+                                                                    <td>
                                                                         <c:if test="${behaviorsList[2].midYearScore eq '5.0'}">
                                                                             <input type="Text" id="midYearScore3" name="midYearScore3" value="Far Exceeds Expectations" class="form-control" readonly="true">
                                                                         </c:if>
@@ -983,15 +994,15 @@
                                                                     <tr style="background-color: lightgrey">
                                                                         <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
                                                                         <td colspan="2">${behaviorsList[3].managerMidYearReview}</td>
-                                                                        </tr>
-                                                                        <tr style="background-color: lightgrey" id="managerEndYearReviewId">
-                                                                            <td id="managerEndYearReviewId4"><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                            <td colspan="2">${behaviorsList[3].managerEndYearReview}</td>
-                                                                        </tr>
-                                                                        <tr style="background-color: lightgrey">
-                                                                        <input type="hidden" id="w5" name="w5" value="WLB 5"/>
-                                                                        <td><b>WLB 5: Believe in Vision & Purpose</b><br>&nbsp;&nbsp;- Be Far-sighted & Look beyond the obvious<br>&nbsp;&nbsp;- Be Strategic – Have a macro & micro perspective, Innovate<br>&nbsp;&nbsp;- Be Entrepreneurial <br>&nbsp;&nbsp;- Communicate your Vision to your team<br>&nbsp;&nbsp;- Make sure everyone on board under stand's the purpose<br>&nbsp;&nbsp;- Communicate ‘What’ , Why and When to align people to your Vision & Purpose </td>
-                                                                        <td>
+                                                                    </tr>
+                                                                    <tr style="background-color: lightgrey" id="managerEndYearReviewId">
+                                                                        <td id="managerEndYearReviewId4"><b>Manager’s End - Year Review / Evaluation</b></td>
+                                                                        <td colspan="2">${behaviorsList[3].managerEndYearReview}</td>
+                                                                    </tr>
+                                                                    <tr style="background-color: lightgrey">
+                                                                    <input type="hidden" id="w5" name="w5" value="WLB 5"/>
+                                                                    <td><b>WLB 5: Believe in Vision & Purpose</b><br>&nbsp;&nbsp;- Be Far-sighted & Look beyond the obvious<br>&nbsp;&nbsp;- Be Strategic – Have a macro & micro perspective, Innovate<br>&nbsp;&nbsp;- Be Entrepreneurial <br>&nbsp;&nbsp;- Communicate your Vision to your team<br>&nbsp;&nbsp;- Make sure everyone on board under stand's the purpose<br>&nbsp;&nbsp;- Communicate ‘What’ , Why and When to align people to your Vision & Purpose </td>
+                                                                    <td>
                                                                         <c:if test="${behaviorsList[4].midYearScore eq '5.0'}">
                                                                             <input type="Text" id="midYearScore5" name="midYearScore5" value="Far Exceeds Expectations" class="form-control" readonly="true">
                                                                         </c:if>
@@ -1036,24 +1047,24 @@
                                                                     <tr style="background-color: lightgrey">
                                                                         <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
                                                                         <td colspan="2">${behaviorsList[4].managerMidYearReview}</td>
-                                                                        </tr>
-                                                                        <tr style="background-color: lightgrey" id="managerEndYearReviewId">
-                                                                            <td id="managerEndYearReviewId5"><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                            <td colspan="2">${behaviorsList[4].managerEndYearReview}</td>
-                                                                        </tr>
-                                                                        <tr style="background-color: lightgrey">
-                                                                            <td><b style="font-size: 16px">TOTAL SCORE</b></td>
-                                                                            <td id="scoreMid">${behaviorsMidyearTotalscore}</td>
+                                                                    </tr>
+                                                                    <tr style="background-color: lightgrey" id="managerEndYearReviewId">
+                                                                        <td id="managerEndYearReviewId5"><b>Manager’s End - Year Review / Evaluation</b></td>
+                                                                        <td colspan="2">${behaviorsList[4].managerEndYearReview}</td>
+                                                                    </tr>
+                                                                    <tr style="background-color: lightgrey">
+                                                                        <td><b style="font-size: 16px">TOTAL SCORE</b></td>
+                                                                        <td id="scoreMid">${behaviorsMidyearTotalscore}</td>
                                                                         <td id="scoreEnd">${behaviorsEndyearTotalscore}</td>
-                                                                        </tr>
-                                                                        <tr style="background-color: lightgrey">
-                                                                            <td><b>Other Comment/Remark (Mid Year)</b></td>
-                                                                            <td colspan="2">${behaviorsMidyearOtherremark}</td>
-                                                                        </tr>
-                                                                        <tr style="background-color: lightgrey">
-                                                                            <td id="behaviorsEndyearOtherremarkId"><b>Other Comment/Remark (End Year)</b></td>
-                                                                            <td colspan="2">${behaviorsEndyearOtherremark}</td>
-                                                                        </tr>
+                                                                    </tr>
+                                                                    <tr style="background-color: lightgrey">
+                                                                        <td><b>Other Comment/Remark (Mid Year)</b></td>
+                                                                        <td colspan="2">${behaviorsMidyearOtherremark}</td>
+                                                                    </tr>
+                                                                    <tr style="background-color: lightgrey">
+                                                                        <td id="behaviorsEndyearOtherremarkId"><b>Other Comment/Remark (End Year)</b></td>
+                                                                        <td colspan="2">${behaviorsEndyearOtherremark}</td>
+                                                                    </tr>
                                                                 </c:when>
                                                                 <c:otherwise>
 
@@ -1148,69 +1159,69 @@
                                     <div class="box box-info " id="RatingsTabId">
                                         <div class="box-header">
                                             <h3 class="box-title">Performance Ratings:</h3>
-                                           
+
                                         </div><!-- /.box-header -->
                                         <div class="box-body no-padding">
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="col-sm-5 control-label"><b>Final Score</b></label>
-                                                       <div class="col-sm-2">
+                                                        <div class="col-sm-2">
 
-                                                <input type="number" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" onload="printfinalScoreRatings();"class="form-control" readonly="true">
+                                                            <input type="number" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" onload="printfinalScoreRatings();"class="form-control" readonly="true">
 
-                                            </div>
+                                                        </div>
                                                     </div>
-                                                    </div>
+                                                </div>
 
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="table-responsive">
                                                         <table id="demo234" class="table table-bordered table-striped table-hover" style="" align="Center">
-                                                    <tr>
-                                                        <th style="text-align: center">Performance Ratings</th>
-                                                        <th style="text-align: center">Score</th>
-                                                        <th style="text-align: center">Score Achieved</th>
-                                                    </tr>
-                                                    <tr class="d1" id="tbl111" >
-                                                        <td style="vertical-align: middle"><b>Far Exceeds Expectations</b></td>
-                                                        <td style="text-align: center"><h4 style="background-color: #337AB7;"><b>106 to 110</b></h4></td>
-                                                        <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '116' && behaviorsFinalscore le '110' || behaviorsFinalscore eq '116' || behaviorsFinalscore eq '116'}"><i class="fa fa-check"></i></c:if></td>
-                                                    </tr>
-                                                    <tr class="" id="tbl112" >
-                                                        <td style="vertical-align: middle"><b>Exceeds Expectations</b></td>
-                                                        <td style="text-align: center"><h4><b>101 to 105</b></h4></td>
-                                                        <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '101' && behaviorsFinalscore le '105' || behaviorsFinalscore eq '101' || behaviorsFinalscore eq '105'}"><i class="fa fa-check"></i></c:if></td>
+                                                            <tr>
+                                                                <th style="text-align: center">Performance Ratings</th>
+                                                                <th style="text-align: center">Score</th>
+                                                                <th style="text-align: center">Score Achieved</th>
+                                                            </tr>
+                                                            <tr class="d1" id="tbl111" >
+                                                                <td style="vertical-align: middle"><b>Far Exceeds Expectations</b></td>
+                                                                <td style="text-align: center"><h4 style="background-color: #337AB7;"><b>106 to 110</b></h4></td>
+                                                                <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '116' && behaviorsFinalscore le '110' || behaviorsFinalscore eq '116' || behaviorsFinalscore eq '116'}"><i class="fa fa-check"></i></c:if></td>
+                                                                </tr>
+                                                                <tr class="" id="tbl112" >
+                                                                    <td style="vertical-align: middle"><b>Exceeds Expectations</b></td>
+                                                                    <td style="text-align: center"><h4><b>101 to 105</b></h4></td>
+                                                                    <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '101' && behaviorsFinalscore le '105' || behaviorsFinalscore eq '101' || behaviorsFinalscore eq '105'}"><i class="fa fa-check"></i></c:if></td>
 
-                                                    </tr>
-                                                    <tr class="" id="tbl113" >
-                                                        <td style="vertical-align: middle"><b>Meets Expectations</b></td>
-                                                        <td style="text-align: center"><h4><b>80 to 100</b></h4></td>
-                                                        <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '80'  && behaviorsFinalscore le '100' || behaviorsFinalscore eq '80' || behaviorsFinalscore eq '100'}"><i class="fa fa-check"></i></c:if></td>
+                                                                </tr>
+                                                                <tr class="" id="tbl113" >
+                                                                    <td style="vertical-align: middle"><b>Meets Expectations</b></td>
+                                                                    <td style="text-align: center"><h4><b>80 to 100</b></h4></td>
+                                                                    <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '80'  && behaviorsFinalscore le '100' || behaviorsFinalscore eq '80' || behaviorsFinalscore eq '100'}"><i class="fa fa-check"></i></c:if></td>
 
-                                                    </tr>
-                                                    <tr class="" id="tbl114" >
-                                                        <td style="vertical-align: middle"><b>Partially Meets Expectations</td>
-                                                        <td style="text-align: center"><h4><b>51 to 79</b></h4></td>
-                                                        <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '51'  && behaviorsFinalscore le '79' || behaviorsFinalscore eq '51' || behaviorsFinalscore eq '79'}"><i class="fa fa-check"></i></c:if></td>
+                                                                </tr>
+                                                                <tr class="" id="tbl114" >
+                                                                    <td style="vertical-align: middle"><b>Partially Meets Expectations</td>
+                                                                    <td style="text-align: center"><h4><b>51 to 79</b></h4></td>
+                                                                    <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '51'  && behaviorsFinalscore le '79' || behaviorsFinalscore eq '51' || behaviorsFinalscore eq '79'}"><i class="fa fa-check"></i></c:if></td>
 
-                                                    </tr>
-                                                    <tr class="" id="tbl115">
-                                                        <td style="vertical-align: middle"><b>Does Not Meet Expectations</b></td>
-                                                        <td style="text-align: center"><h4><b>50 & Below</b></h4></td>
-                                                        <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '1' && behaviorsFinalscore le '50' || behaviorsFinalscore eq '1' || behaviorsFinalscore eq '50'}"> <i class="fa fa-check"></i></c:if></td>
-                                                </tr>
-                                            </table>
-                                                    </div>
+                                                                </tr>
+                                                                <tr class="" id="tbl115">
+                                                                    <td style="vertical-align: middle"><b>Does Not Meet Expectations</b></td>
+                                                                    <td style="text-align: center"><h4><b>50 & Below</b></h4></td>
+                                                                    <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '1' && behaviorsFinalscore le '50' || behaviorsFinalscore eq '1' || behaviorsFinalscore eq '50'}"> <i class="fa fa-check"></i></c:if></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
 
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
-                                <%--</form:form>--%>
-                            </div><!-- /.tab-content -->
-                        </div><!-- nav-tabs-custom -->
-                    </div><!-- /.col -->
-                </div>
+                                                    </div><!-- /.col -->
+                                                </div><!-- /.row -->
+                                            </div><!-- /.box-body -->
+                                        </div>
+                                    <%--</form:form>--%>
+                                </div><!-- /.tab-content -->
+                            </div><!-- nav-tabs-custom -->
+                        </div><!-- /.col -->
+                    </div>
             </section><!-- /.content -->
         </div>
     </body>

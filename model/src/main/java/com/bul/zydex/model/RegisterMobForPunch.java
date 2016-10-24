@@ -10,10 +10,9 @@ package com.bul.zydex.model;
  * @author BlackBull
  */
 public class RegisterMobForPunch {
-
-    private Integer id;
-    private EmployeeMaster employeeMaster;
-    private Integer imeiNo;
+     private Integer id;
+     private EmployeeMaster employeeMaster;
+     private String imeiNo;
 
     public Integer getId() {
         return id;
@@ -31,14 +30,13 @@ public class RegisterMobForPunch {
         this.employeeMaster = employeeMaster;
     }
 
-    public Integer getImeiNo() {
+    public String getImeiNo() {
         return imeiNo;
     }
 
-    public void setImeiNo(Integer imeiNo) {
+    public void setImeiNo(String imeiNo) {
         this.imeiNo = imeiNo;
     }
-    
-    
 
+    
 }

@@ -6,6 +6,7 @@
 package com.bul.zydex.service.mobileapp;
 
 import com.bul.zydex.service.GenericsService;
+import java.util.List;
 
 /**
  *
@@ -13,4 +14,11 @@ import com.bul.zydex.service.GenericsService;
  */
 public interface EmployeePunchForMobileAppService<T> extends GenericsService<T> {
 
+    List<?> readEmpByCurrentDate();
+
+    List<?> readYesterdayEmployeeData(String empId);
+
+    List<?> readTodaysAndPreviousData(String empId, String endShiftTime);
+    
+    List<?> readTodaysEmployeeData(String empId);
 }

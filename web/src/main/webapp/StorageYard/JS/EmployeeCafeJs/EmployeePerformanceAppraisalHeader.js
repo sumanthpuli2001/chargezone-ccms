@@ -1398,7 +1398,9 @@ $(document).on("click", ":submit", function (e) {
             } else if (flagEndId === "true") {
                 document.getElementById("kraGoal1").required = true;
                 document.getElementById("metric1").required = true;
-                document.getElementById("weightage" + i).required = true;
+                document.getElementById("weightage1").required = true;
+                document.getElementById("endYearDiv1").required = true;
+
                 for (i = 1; i <= count; i++) {
 //                document.getElementById("compentencyEndYear" + i).required = true;
 //            document.getElementById("compentencyEndRemark" + i).required = true;
@@ -1406,6 +1408,7 @@ $(document).on("click", ":submit", function (e) {
                 for (i = 1; i <= kragoalLength; i++) {
 
                     document.getElementById("weightage" + i).required = true;
+                    document.getElementById("endYearDiv" + i).required = true;
                     document.getElementById("employeeEndYearSelfAssesssmentGoal" + i).required = true;
                 }
                 for (i = 1; i <= countId; i++) {

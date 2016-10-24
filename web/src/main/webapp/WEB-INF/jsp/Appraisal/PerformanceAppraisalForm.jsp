@@ -338,7 +338,7 @@
                                                                         <%--  <c:if test="${(kragoallist.kraGoal ne '' || kragoallist.metric ne '') ||
                                                                                       ((kragoallist.kraGoal eq '' || kragoallist.metric eq '')&&
 (kragoallist.kraGoalByManager ne '' || kragoallist.matrixByManager ne ''))}"> --%>
-                                                                         <!--Lock Assecement-->
+                                                                        <!--Lock Assecement-->
                                                                         <input type="hidden" name="midyearEmpSelfassStatus${status.count}" id="midyearEmpSelfassStatus${status.count}" value="${kragoallist.midyearEmpSelfassStatus}">
                                                                         <input type="hidden" name="midyearManagerSelfassStatus${status.count}" id="midyearManagerSelfassStatus${status.count}" value="${kragoallist.midyearManagerSelfassStatus}">
                                                                         <input type="hidden" name="endyearEmpSelfassStatus${status.count}" id="endyearEmpSelfassStatus${status.count}" value="${kragoallist.endyearEmpSelfassStatus}">
@@ -742,14 +742,14 @@
                                                                 <c:when test="${fn:length(kragoalOtherActivity) > 0}">
                                                                     <input type="hidden" name="countactivityId" id="countactivityId" value="${fn:length(kragoalOtherActivity)}">
                                                                     <c:set var="kragoalOtherActivityValManager" value="${fn:length(kragoalOtherActivity)}"></c:set>
-                                                                    <!--Lock Assement Activity-->
-                                                                    
+                                                                        <!--Lock Assement Activity-->
+
                                                                     <c:forEach var="kragoalOtherActivity" items="${kragoalOtherActivity}" varStatus="status">
-                                                                    <input type="hidden" name="midyearEmpSelfassActivityStatus${status.count}" id="midyearEmpSelfassActivityStatus${status.count}" value="${kragoalOtherActivity.midyearEmpSelfassActivityStatus}">
-                                                                    <!--<input type="hidden" name="midyearManagerSelfassActivityStatus${status.count}" id="midyearManagerSelfassActivityStatus${status.count}" value="$/{kragoalOtherActivity.midyearManagerSelfassActivityStatus}">-->
-                                                                    <input type="hidden" name="endyearEmpSelfassActivityStatus${status.count}" id="endyearEmpSelfassActivityStatus${status.count}" value="${kragoalOtherActivity.endyearEmpSelfassActivityStatus}">
-                                                                    <!--<input type="hidden" name="endyearManagerSelfassActivityStatus${status.count}" id="endyearManagerSelfassActivityStatus${status.count}" value="$/{kragoalOtherActivity.endyearManagerSelfassActivityStatus}">-->
-                                                                        
+                                                                        <input type="hidden" name="midyearEmpSelfassActivityStatus${status.count}" id="midyearEmpSelfassActivityStatus${status.count}" value="${kragoalOtherActivity.midyearEmpSelfassActivityStatus}">
+                                                                        <!--<input type="hidden" name="midyearManagerSelfassActivityStatus${status.count}" id="midyearManagerSelfassActivityStatus${status.count}" value="$/{kragoalOtherActivity.midyearManagerSelfassActivityStatus}">-->
+                                                                        <input type="hidden" name="endyearEmpSelfassActivityStatus${status.count}" id="endyearEmpSelfassActivityStatus${status.count}" value="${kragoalOtherActivity.endyearEmpSelfassActivityStatus}">
+                                                                        <!--<input type="hidden" name="endyearManagerSelfassActivityStatus${status.count}" id="endyearManagerSelfassActivityStatus${status.count}" value="$/{kragoalOtherActivity.endyearManagerSelfassActivityStatus}">-->
+
                                                                         <c:if test="${kragoalOtherActivity.kraGoalActivities ne '' && kragoalOtherActivity.metricActivities ne ''}">
                                                                             <tr id="activitiesTrId${status.count}">
                                                                             <input type="hidden" name="kragoal_activity_id${status.count}" id="kragoal_activity_id${status.count}" value="${kragoalOtherActivity.id}">
@@ -2335,18 +2335,18 @@
 //
         } else if (flag11 !== 'true' && flagmid !== 'true' && flagEndId === 'true') {
 //            alert("NO3 flage Found");
-//            if (employeeStatusVar === '1') {
-//                $("#form1 :input").attr("disabled", true);
-//                $("#btn1").attr("disabled", false);
-//                $("#btn2").attr("disabled", false);
-//                $("#btn3").attr("disabled", false);
-//                $("#btn4").attr("disabled", false);
-//                $("#btn5").attr("disabled", false);
-//                $("#btn6").attr("disabled", false);
-//                $("#btn7").attr("disabled", false);
-//                $(".close").attr("disabled", false);
-//
-//            }
+            if (employeeStatusVar === '1') {
+                $("#form1 :input").attr("disabled", true);
+                $("#btn1").attr("disabled", false);
+                $("#btn2").attr("disabled", false);
+                $("#btn3").attr("disabled", false);
+                $("#btn4").attr("disabled", false);
+                $("#btn5").attr("disabled", false);
+                $("#btn6").attr("disabled", false);
+                $("#btn7").attr("disabled", false);
+                $(".close").attr("disabled", false);
+
+            }
 
         } else {
             $(".displayAction :input").attr("readOnly", true);

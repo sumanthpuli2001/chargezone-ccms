@@ -628,7 +628,8 @@
                                                                 </td>
                                                                 <td style="margin: 0px;width: 90px;" id="totalScoreId" align="right"><b>Total Score</b>
                                                                 </td>
-                                                                <td><input id="totalScore" name="totalScore" value="${totalScore}" class="form-control" value="${totalScore}" style="margin: 0px;width: 100px;" readonly="true"></input></td>
+                                                                <!--<td><input id="totalScore" name="totalScore" value="${totalScore}" class="form-control" value="${totalScore}" style="margin: 0px;width: 100px;" readonly="true"></input></td>-->
+                                                                <td><input id="totalScore" name="totalScore"  class="form-control" value="${totalScoreForemployee}" style="margin: 0px;width: 100px;" readonly="true"></input></td>
                                                                 <td></td>
                                                             </tr>
                                                         </table>
@@ -1050,7 +1051,7 @@
                                                                             <option value="Low Priority">Low Priority</option>
                                                                         </select>
                                                                     </td>
-                                                                    <td id="midYearDividact1"><div>
+                                                                    <td id="midYearDividact1">
                                                                             <select id="midYearDivOther1" name="midYearDivOther1" class="form-control saveRequried" style="margin: 0px;width: 115px;">
                                                                                 <option value="">--SELECT--</option>
                                                                                 <option value="Yet to Start">Yet to Start</option>
@@ -1058,9 +1059,9 @@
                                                                                 <option value="Completed">Completed</option>
                                                                                 <option value="Canceled">Canceled</option>
                                                                             </select>
-                                                                        </div>
+                                                                        
                                                                     </td>
-                                                                    <td id="endYearDividact"><div>
+                                                                    <td id="endYearDividact">
                                                                             <select id="endYearDivOther1" name="endYearDivOther1" class="form-control saveRequried" style="margin: 0px;width: 115px;">
                                                                                 <option value="">--SELECT--</option>
                                                                                 <option value="Yet to Start">Yet to Start</option>
@@ -1068,7 +1069,7 @@
                                                                                 <option value="Completed">Completed</option>
                                                                                 <option value="Canceled">Canceled</option>
                                                                             </select>
-                                                                        </div>
+                                                                        
                                                                     </td>
                                                                     <td id="">
                                                                         <select id="activity1" name="activity1" class="form-control saveRequried" style="margin: 0px;width: 115px;">
@@ -1235,9 +1236,9 @@
                                                         <div><input type="text" id="competencyEvaluation_Id" class="form-control" name="competencyEvaluation_Id" value="${competencyEvaluationList[0][2].title}" readonly="true"></div>
                                                         </c:if>
 
-                                                    <c:if test="${appraisalPerformanceMaster.managerStatus ne 1}">
-                                                        <div><input type="text" id="competencyEvaluation_Id" class="form-control" name="competencyEvaluation_Id" value="${competencyEvaluationList[0][2].title}" readonly="true"></div>
-                                                        </c:if>
+                                                    <%--<c:if test="${appraisalPerformanceMaster.managerStatus ne 1}">--%>
+                                                        <!--<div><input type="text" id="competencyEvaluation_Id" class="form-control" name="competencyEvaluation_Id" value="${competencyEvaluationList[0][2].title}" readonly="true"></div>-->
+                                                        <%--</c:if>--%>
 
                                                 </div>
 
@@ -1981,8 +1982,8 @@
                                                                         </tr>
                                                                         <tr style="background-color: lightgrey">
                                                                             <td><b style="font-size: 16px">TOTAL SCORE</b></td>
-                                                                            <td id="scoreMid"><input type="Text" class="form-control" value="<c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${behaviorsMidyearTotalscore}</c:if>" readonly="true"></td>
-                                                                        <td id="scoreEnd"><input type="Text" class="form-control" value="<c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${behaviorsEndyearTotalscore}</c:if>" readonly="true"></td>
+                                                                            <td id="scoreMid"><input type="Text" class="form-control" value="<c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${behaviorsMidyearTotalscoreForemp}</c:if>" readonly="true"></td>
+                                                                        <td id="scoreEnd"><input type="Text" class="form-control" value="<c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${behaviorsEndyearTotalscoreForemp}</c:if>" readonly="true"></td>
                                                                         </tr>
                                                                         <tr style="background-color: lightgrey">
                                                                             <td><b>Other Comment/Remark (Mid Year)</b></td>
@@ -2178,7 +2179,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-5 control-label"><b>Final Score</b></label>
                                                         <div class="col-sm-2">
-                                                            <input type="Text" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" onchange="performancefinalScoreRatingsEmployee();" class="form-control" readonly>
+                                                            <input type="Text" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscoreForemployee}" onchange="performancefinalScoreRatingsEmployee();" class="form-control" readonly>
                                                         </div>
                                                     </div>
 

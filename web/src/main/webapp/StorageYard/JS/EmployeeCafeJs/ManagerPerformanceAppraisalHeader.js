@@ -1390,9 +1390,11 @@ $(document).on("click", ":submit", function (e) {
                 for (i = 1; i <= kragoalLengthactivity; i++) {
                     var activityidOther = document.getElementById("kraGoal_activity" + i).value;
                     if (activityidOther !== '') {
-                        document.getElementById("kraGoal_activity" + i).required = true;
-                        document.getElementById("metric_activity" + i).required = true;
-                        document.getElementById("priority" + i).required = true;
+//                        document.getElementById("kraGoal_activity" + i).required = true;
+//                        document.getElementById("metric_activity" + i).required = true;
+//                        document.getElementById("priority" + i).required = true;
+
+
                     }
                 }
 
@@ -1501,6 +1503,19 @@ $(document).on("click", ":submit", function (e) {
 //                var selectedValue1 = document.getElementById("trainingSelectId" + i).value; change 4/10/2016
                     if (selectedValue1 == "Other") {
 //                    document.getElementById("trainingSelectTextinput" + i).required = true; change 4/10/2016
+                    }
+
+                }
+               
+                for (i = 1; i <= kragoalLengthactivity; i++) {
+                    var activityidOther = document.getElementById("kraGoal_activity" + i).value;
+                    if (activityidOther !== '') {
+//                        document.getElementById("kraGoal_activity" + i).required = true;
+//                        document.getElementById("metric_activity" + i).required = true;
+//                        document.getElementById("priority" + i).required = true;
+                        document.getElementById("activity" + i).required = true;
+
+
                     }
 
                 }
@@ -1646,9 +1661,9 @@ $(document).ready(function () {
 
 
 //        alert("djf");
-        alert(document.getElementById("midyearManagerSelfassActivityStatus1").value);
+//        alert(document.getElementById("midyearManagerSelfassActivityStatus1").value);
         var managerMidselfassStatus = document.getElementById("midyearManagerSelfassActivityStatus1").value;
-        alert(managerMidselfassStatus);
+//        alert(managerMidselfassStatus);
         if (managerMidselfassStatus === '0') {
             document.getElementById("managerMidYearSelfAssesssmentGoalActivities1").readOnly = false;
         } else {

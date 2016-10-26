@@ -92,6 +92,15 @@
         <property name="behaviorsFinalscoreForemployee" type="string">
             <column name="behaviors_finalscore_foremployee" length="45" />
         </property>
+        <property name="totalScoreForemployee" type="string">
+            <column name="total_score_foremployee" />
+        </property>
+        <property name="behaviorsMidyearTotalscoreForemp" type="string">
+            <column name="behaviors_midyear_totalscore_foremp" />
+        </property>
+        <property name="behaviorsEndyearTotalscoreForemp" type="string">
+            <column name="behaviors_endyear_totalscore_foremp" />
+        </property>
         <set name="appraisalPerformanceBehaviorses" inverse="true">
             <key>
                 <column name="appraisal_performance_id" not-null="true" />

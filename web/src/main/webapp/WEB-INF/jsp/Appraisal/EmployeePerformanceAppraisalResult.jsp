@@ -121,6 +121,7 @@
                                                                                 <c:if test="${list[1][0] eq 'Pendding'}">
                                                                                 <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Pending</span></div>
                                                                             </c:if>
+                                                                            
                                                                         </li><!-- /.item -->
                                                                         <li class="item">
                                                                             <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">KRA Approval By Manager</span></div>

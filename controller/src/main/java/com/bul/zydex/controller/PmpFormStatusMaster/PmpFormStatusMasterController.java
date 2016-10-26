@@ -69,6 +69,7 @@ public class PmpFormStatusMasterController extends PmpFormStatusMasterAbstract {
         boolean manside = pmpFormStatusMaster.getManagerSide();
         boolean empside = pmpFormStatusMaster.getEmployeeSide();
         boolean midstatus = pmpFormStatusMaster.getMidYearStatus();
+        boolean endstatus = pmpFormStatusMaster.getEndYearStatus();
         int empstatus = 0;
         int manstatus = 0;
         if (empside == true) {
@@ -113,6 +114,17 @@ public class PmpFormStatusMasterController extends PmpFormStatusMasterAbstract {
                             
                         }
                     }
+                    if (!endstatus) {
+                        if (!manside) {
+                            appraisalPerformanceKra.setEndyearManagerSelfassStatus(0);
+                            appraisalPerformanceKraService.update(appraisalPerformanceKra);
+                        }
+                        if (!empside) {
+                            appraisalPerformanceKra.setEndyearEmpSelfassStatus(0);
+                            appraisalPerformanceKraService.update(appraisalPerformanceKra);
+                            
+                        }
+                    }
                     
                 }
             }
@@ -126,6 +138,17 @@ public class PmpFormStatusMasterController extends PmpFormStatusMasterAbstract {
                         }
                         if (!empside) {
                             appraisalPerformanceActivities.setMidyearEmpSelfassActivityStatus(0);
+                            appraisalPerformanceActivitiesService.update(appraisalPerformanceActivities);
+                            
+                        }
+                    }
+                    if (!endstatus) {
+                        if (!manside) {
+                            appraisalPerformanceActivities.setEndyearManagerSelfassActivityStatus(0);
+                            appraisalPerformanceActivitiesService.update(appraisalPerformanceActivities);
+                        }
+                        if (!empside) {
+                            appraisalPerformanceActivities.setEndyearEmpSelfassActivityStatus(0);
                             appraisalPerformanceActivitiesService.update(appraisalPerformanceActivities);
                             
                         }

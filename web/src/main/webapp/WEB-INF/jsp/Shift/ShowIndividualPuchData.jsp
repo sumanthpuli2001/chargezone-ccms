@@ -38,7 +38,7 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <th >Date and time</th>
-                                                                        <th >Zydex Location</th>
+                                                                        <th>Location</th>
                                                                        
                                                                     </tr>
                                                                 </thead>

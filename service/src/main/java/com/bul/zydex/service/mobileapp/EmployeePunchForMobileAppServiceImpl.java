@@ -47,4 +47,9 @@ public class EmployeePunchForMobileAppServiceImpl<T> extends GenericsServiceImpl
           return employeePunchForMobileAppDAO.readTodaysEmployeeData(empId);
     }
 
+    @Override
+    public List<?> readPuchDataDateWise(String date, int empId) {
+       return employeePunchForMobileAppDAO.readPuchDataDateWise(date, empId);
+    }
+
 }

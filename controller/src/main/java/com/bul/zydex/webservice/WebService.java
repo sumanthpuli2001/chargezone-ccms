@@ -758,7 +758,7 @@ public class WebService extends WebServiceAbstract {
                 leaveTypeMaster = leaveTypeMasterService.readById(leaveTypeMaster.getId());
             }
             boolean plBalCheck = false;
-            List<?> plCheck = leaveEmployeeDetailService.plLeaveCheck(employeeMaster.getId());
+            List<?> plCheck = leaveEmployeeDetailService.plLeaveCheck(employeeMaster1.getId());
             if (plCheck.size() >= 3) {
                 plBalCheck = true;
             }

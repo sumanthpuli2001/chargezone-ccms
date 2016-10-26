@@ -94,4 +94,17 @@ public class EmployeePunchForMobileAppDAOImpl<T> extends GenericsDAOImpl<T> impl
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readPuchDataDateWise(String date, int empId) {
+         String query = "";
+        query += " select a.punchTime,a.punchLocation"
+                + " From EmployeePunchForMobileApp a "
+                + " where a.employeeMaster.id = " + empId
+                + " and DATE_FORMAT(STR_TO_DATE(a.punchTime,'%d/%m/%Y'),'%d/%m/%Y') = DATE_FORMAT(STR_TO_DATE('" + date + "','%d/%m/%Y'),'%d/%m/%Y') "
+                + " GROUP BY STR_TO_DATE(a.punchTime,'%d/%m/%Y %H:%i')"
+                + " ORDER BY STR_TO_DATE(a.punchTime,'%d/%m/%Y %H:%i:%s') ASC";
+        return getHibernateTemplate().find(query);
+        
+    }
+
 }

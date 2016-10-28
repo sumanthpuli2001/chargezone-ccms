@@ -507,7 +507,7 @@ $(function () {
                 + "<td colspan=\"4\"><b>Employees Mid - Year Self / Assessment For Other Project:</b></td>" + "<td colspan=\"4\"><b\>Managers Mid - Year Review / Evaluation For Other Project:</b\></td>"
                 + "</tr>"
                 + "<tr id=\"row_3_a" + a1 + "\">"
-                + "<td colspan=\"4\"><textarea id=\"employeeMidYearSelfAssesssmentGoalActivities" + a1 + "\" name=\"employeeMidYearSelfAssesssmentGoalActivities" + a1 + "\" type=\"Text\" class=\"form-control\"></textarea></td>"
+                + "<td colspan=\"4\"><textarea id=\"empMidyearSelfassessmentGoalActivities" + a1 + "\" name=\"empMidyearSelfassessmentGoalActivities" + a1 + "\" type=\"Text\" class=\"form-control\"></textarea></td>"
                 + "<td colspan=\"4\"><textarea id=\"managerMidYearSelfAssesssmentGoalActivities" + a1 + "\" name=\"managerMidYearSelfAssesssmentGoalActivities" + a1 + "\" type=\"Text\" class=\"form-control\"></textarea></td>"
                 + "</tr>"
 
@@ -516,7 +516,7 @@ $(function () {
                 + "<td colspan=\"4\"><b>Managers End - Year Review / Evaluation For Other Project:</b></td>"
                 + "</tr>"
                 + "<tr id=\"row_5_a" + a1 + "\">"
-                + "<td colspan=\"4\"><textarea id=\"employeeEndYearSelfAssesssmentGoalActivities" + a1 + "\" name=\"employeeEndYearSelfAssesssmentGoalActivities" + a1 + "\" type=\"Text\" class=\"form-control\"></textarea></td>"
+                + "<td colspan=\"4\"><textarea id=\"empEndyearSelfassessmentGoalActivities" + a1 + "\" name=\"empEndyearSelfassessmentGoalActivities" + a1 + "\" type=\"Text\" class=\"form-control\"></textarea></td>"
                 + "<td colspan=\"4\"><textarea id=\"managerEndYearSelfAssesssmentGoalActivities" + a1 + "\" name=\"managerEndYearSelfAssesssmentGoalActivities" + a1 + "\" type=\"Text\" class=\"form-control\"></textarea></td>"
                 + "</tr>";//]]>
         $("#demo10").append(clone);
@@ -538,12 +538,12 @@ $(function () {
             document.getElementById("activity" + a1).style.pointerEvents = "none";
 
 
-            var employeeMidYearSelfAssesssmentGoalActivities = document.getElementById("employeeMidYearSelfAssesssmentGoalActivities" + a1).value;
-            document.getElementById("employeeMidYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
+            var employeeMidYearSelfAssesssmentGoalActivities = document.getElementById("empMidyearSelfassessmentGoalActivities" + a1).value;
+            document.getElementById("empMidyearSelfassessmentGoalActivities" + a1).readOnly = true;
             var managerMidYearSelfAssesssmentGoalActivities = document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + a1).value;
             document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
-            var employeeEndYearSelfAssesssmentGoalActivities = document.getElementById("employeeEndYearSelfAssesssmentGoalActivities" + a1).value;
-            document.getElementById("employeeEndYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
+            var employeeEndYearSelfAssesssmentGoalActivities = document.getElementById("empEndyearSelfassessmentGoalActivities" + a1).value;
+            document.getElementById("empEndyearSelfassessmentGoalActivities" + a1).readOnly = true;
             var managerEndYearSelfAssesssmentGoalActivities = document.getElementById("managerEndYearSelfAssesssmentGoalActivities" + a1).value;
             document.getElementById("managerEndYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
         } else if (flagMidId == 'true') {
@@ -560,10 +560,10 @@ $(function () {
 //            document.getElementById("finalScore" + i).readOnly = true;
 //            var managerMidYearSelfAssesssmentGoal = document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + a1).value;
 //            document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
-            var employeeMidYearSelfAssesssmentGoalActivities = document.getElementById("employeeMidYearSelfAssesssmentGoalActivities" + a1).value;
-            document.getElementById("employeeMidYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
-            var employeeEndYearSelfAssesssmentGoal = document.getElementById("employeeEndYearSelfAssesssmentGoalActivities" + a1).value;
-            document.getElementById("employeeEndYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
+            var employeeMidYearSelfAssesssmentGoalActivities = document.getElementById("empMidyearSelfassessmentGoalActivities" + a1).value;
+            document.getElementById("empMidyearSelfassessmentGoalActivities" + a1).readOnly = true;
+            var employeeEndYearSelfAssesssmentGoal = document.getElementById("empEndyearSelfassessmentGoalActivities" + a1).value;
+            document.getElementById("empEndyearSelfassessmentGoalActivities" + a1).readOnly = true;
             var managerEndYearSelfAssesssmentGoal = document.getElementById("managerEndYearSelfAssesssmentGoalActivities" + a1).value;
             document.getElementById("managerEndYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
             ////validation
@@ -588,10 +588,10 @@ $(function () {
             //            document.getElementById("employeeEndYearSelfAssesssmentGoal" + i).readOnly = true;
             //            var managerEndYearSelfAssesssmentGoalActivities = document.getElementById("managerEndYearSelfAssesssmentGoalActivities" + a1).value;
             //            document.getElementById("managerEndYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
-            var employeeEndYearSelfAssesssmentGoalActivities = document.getElementById("employeeEndYearSelfAssesssmentGoalActivities" + a1).value;
-            document.getElementById("employeeEndYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
+            var employeeEndYearSelfAssesssmentGoalActivities = document.getElementById("empEndyearSelfassessmentGoalActivities" + a1).value;
+            document.getElementById("empEndyearSelfassessmentGoalActivities" + a1).readOnly = true;
             ///validation////
-            document.getElementById("employeeEndYearSelfAssesssmentGoalActivities" + a1).required = true;
+            document.getElementById("empEndyearSelfassessmentGoalActivities" + a1).required = true;
             document.getElementById("empEndyearSelfassOtheractivty").required = true;
 
         }

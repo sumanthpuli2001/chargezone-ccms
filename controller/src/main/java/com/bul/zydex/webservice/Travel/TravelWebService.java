@@ -418,16 +418,16 @@ public class TravelWebService extends TravelWebServiceAbstract {
                         hotelAccommodation.setComments(joHotelDetails.get("remarks").toString());
                         hotelAccommodationService.create(hotelAccommodation);
                     }
-                     travelRequestMasterService.create(travelRequestMaster);
+                    rcode = "1";
+                    message = "Success";
                 }
-                rcode = "1";
-                message = "Success";
             } else {
                 rcode = "0";
                 message = "Error : Please Insert Start Date Before End Date.";
             }
         } else {
-          
+
+            travelRequestMasterService.create(travelRequestMaster);
             rcode = "1";
             message = "Success";
         }
@@ -450,7 +450,7 @@ public class TravelWebService extends TravelWebServiceAbstract {
         TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
         TravelDetail travelDetail = new TravelDetail();
         HotelAccommodation hotelAccommodation = new HotelAccommodation();
-        TravelApproverHistory travelApproverHistory1=new TravelApproverHistory();
+        TravelApproverHistory travelApproverHistory1 = new TravelApproverHistory();
         travelRequestMaster = travelRequestMasterService.readById(Integer.parseInt(travelRequestId));
         if (null == travelRequestMaster) {
             rcode = "0";
@@ -471,7 +471,7 @@ public class TravelWebService extends TravelWebServiceAbstract {
 
                     }
                 }
-                
+
                 travelDetail.setTravelRequestMaster(travelRequestMaster);
                 hotelAccommodation.setTravelRequestMaster(travelRequestMaster);
                 travelApproverHistory1.setTravelRequestMaster(travelRequestMaster);
@@ -482,21 +482,21 @@ public class TravelWebService extends TravelWebServiceAbstract {
                         travelDetailService.delete(travelDetail.getId());
                     }
                 }
-                List<?>Hotellist=hotelAccommodationService.readAccommodationDetail(hotelAccommodation);
+                List<?> Hotellist = hotelAccommodationService.readAccommodationDetail(hotelAccommodation);
                 if (!Hotellist.isEmpty()) {
                     for (Object o : Hotellist) {
                         hotelAccommodation = (HotelAccommodation) o;
                         hotelAccommodationService.delete(hotelAccommodation.getId());
                     }
                 }
-                List<?>TravelApproverlist=travelApproverHistoryService.readSameTravelId(travelApproverHistory1);
+                List<?> TravelApproverlist = travelApproverHistoryService.readSameTravelId(travelApproverHistory1);
                 if (!TravelApproverlist.isEmpty()) {
                     for (Object o : TravelApproverlist) {
                         travelApproverHistory1 = (TravelApproverHistory) o;
                         travelApproverHistoryService.delete(travelApproverHistory1.getId());
                     }
                 }
-               
+
                 travelRequestMasterService.delete(travelRequestMaster.getId());
                 rcode = "1";
                 message = "Sucess";

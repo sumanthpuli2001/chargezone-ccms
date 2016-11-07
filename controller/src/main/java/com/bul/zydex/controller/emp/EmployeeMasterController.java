@@ -61,7 +61,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Administrator
  */
 public class EmployeeMasterController extends EmployeeMasterAbstract {
-    
+
     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
 //        EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -94,7 +94,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("Employee/EmployeeRegistrationForm");
         return mv;
     }
-    
+
     public ModelAndView createSubmit(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
 //        EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -136,7 +136,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 //if we directly gettting 'employeeMaster.getUserMaster().getPassword()' its possibility for nullpointer exception.
             }
         }
-        
+
         userMaster.setPassword(password);
         SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
         Date DOB = new Date();
@@ -144,7 +144,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         Date DOB1 = new Date();
         if (!"".equals(dateOfJoining)) {
             DOJ = sd.parse(dateOfJoining);
-            
+
         }
         if (!"".equals(dateOfBirth)) {
             DOB = sd.parse(dateOfBirth);
@@ -164,7 +164,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        }
         employeeMasterValidator.validate(employeeMaster, errors);
         if (errors.hasErrors()) {
-            
+
             String shiftId = request.getParameter("shiftId");
             String shiftMasterId1 = request.getParameter("shiftMasterId");
             String HoursTitle = request.getParameter("shiftHoursId");
@@ -191,7 +191,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         } else if (DOJ.before(DOB1)) {
             request.setAttribute("failureMessage",
                     "Error : Enter Valid Date of Joining");
-            
+
             selectEmployee(request, response);
             selectedEmployeeLevel1(request, employeeMaster);
             request.setAttribute("employeeMaster", employeeMaster);
@@ -251,7 +251,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     isLeapYear = true;
                 }
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                
+
                 Date date1 = sdf.parse(dateOfJoining);
                 Date date3 = new Date();
                 cal1.setTime(date1);
@@ -321,9 +321,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         employeeLeaveBalance.setNoOfLeaveRemain(LWP);
                     }
                 }
-                
+
                 employeeLeaveBalanceService.create(employeeLeaveBalance);
-                
+
             }
             ShiftRotationInfo shiftRotationInfo = new ShiftRotationInfo();
             ShiftRotationInfo shiftRotationInfo1 = new ShiftRotationInfo();
@@ -332,23 +332,23 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                UserMaster userMaster = (UserMaster) request.getAttribute("userMaster");
 //                String shiftMasterId = request.getAttribute("shiftMasterId").toString();
             if (null != shiftMasterId && !"".equals(shiftMasterId)) {
-                
+
                 shiftRotationInfo.setFirstShiftId(Integer.parseInt(shiftMasterId));
                 shiftRotationInfo.setUserMaster(userMaster);
-                
+
                 List<?> list = shiftRotationInfoService.readRotaionDetail(shiftRotationInfo);
                 if (!list.isEmpty()) {
-                    
+
                     shiftRotationInfo = (ShiftRotationInfo) list.get(0);
                 }
                 if (shiftRotationInfo.getId() == null) {
                     shiftRotationMaster.setId(employeeMaster.getShiftHoursId());
                     shiftRotationInfo.setShiftRotationMaster(shiftRotationMaster);
                     shiftRotationInfo.setRotationDate(employeeMaster.getShiftRotationDate());
-                    
+
                     shiftRotationInfoService.create(shiftRotationInfo);
                 }
-                
+
             }
 //        Code for Shift generate monthly Schedule(Start)
 //                if (employeeMaster.getShiftType().equals("ShiftBase")) {
@@ -377,7 +377,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 int day = c.getActualMaximum(Calendar.DAY_OF_MONTH);
                 RotationMaster rotationMaster = new RotationMaster();
                 rotationMaster.setShiftRotationMaster(shiftRotationMaster);
-                
+
                 if ("monthly".equals(duration) && day == 30) {
                     weeklyGenerate(rotationMaster, rd, shiftRotationMaster, 30, employeeMaster, shiftMasterId);
                 } else if ("weekly".equals(duration)) {
@@ -412,7 +412,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 File[] profilePictureArray = profilePictureFile.listFiles();
                 profilePictureArray[0].delete();//if file exist then delete it.
             }
-            
+
             if (!profilePictureFile.exists()) {
                 profilePictureFile.mkdir();//make directory for first time user creation.
             }
@@ -435,11 +435,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 //null if there is no photograph in form.
                 //this condition checking not required if photograph field is compulsary in form.
                 try {
-                    
+
                     File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", ""));
                     multipartFile.transferTo(file2);
                 } catch (Exception e) {
-                    
+
                 }
             }
 
@@ -468,16 +468,16 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         File file3 = new File(certificateFileLocationURL + multipartFile1.getOriginalFilename().replaceAll(" ", ""));
                         multipartFile1.transferTo(file3);
                     } catch (Exception e) {
-                        
+
                     }
                 }
-                
+
             }
 
 //            Certificate attach code
             //now setting default right as employee.
             setDefaultUserRights(request, employeeMaster);
-            
+
             request.setAttribute("successMessage",
                     "Information : The Information Is Saved Successfully."
                     + "<br/>"
@@ -514,7 +514,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     "Error : User isExist.");
             mv.addAllObjects(errors.getModel());
             mv.setViewName("Employee/EmployeeRegistrationForm");
-            
+
         }
 //            mv.getModelMap().put("userMaster", userMaster);
 //            mv.getModelMap().put("shiftMasterId", shiftMasterId);
@@ -527,9 +527,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //            }
         mv.getModelMap().put("employeeMaster", employeeMaster);
         return mv;
-        
+
     }
-    
+
     public ModelAndView searchSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -539,10 +539,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         //dont rename "list" because same used on getEmployeeDetailsBySearchString method and employeeRegistrationResult.jsp
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Employee/EmployeeRegistrationResult");
-        
+
         return mv;
     }
-    
+
     public ModelAndView viewClick(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         String lastYearPerformanceRatingsOfEmployee = "";
@@ -589,7 +589,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         hoursBasisList(request);
         //getLastYearPerformance Ratings Of Employee For ReadOnly.s
         List<?> lastYearPerformanceRatingsOfEmployeeList = employeeMasterService.getLastYearPerformanceRatingOfEmployee(id);
-        
+
         lastYearPerformanceRatingsOfEmployee = (lastYearPerformanceRatingsOfEmployeeList.isEmpty()) ? lastYearPerformanceRatingsOfEmployee : String.valueOf(lastYearPerformanceRatingsOfEmployeeList.get(0));
         //set user master id//
         String userid = request.getParameter("userid");
@@ -605,11 +605,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 + File.separator + userMaster1.getUserName() + File.separator;
         File certificateListFile = new File(certificateFileLocationURL);
         if (certificateListFile.listFiles() != null) {
-            
+
             for (File sss : certificateListFile.listFiles()) {
                 String aa = sss.getName();
                 certificatesList.add(aa);
-                
+
             }
             if (certificateListFile.exists() && certificateListFile.listFiles().length > 0) {
                 File[] certificateListFileArray = certificateListFile.listFiles();
@@ -630,14 +630,14 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         request.setAttribute("employeeType", employeeMaster.getEmployeeType());
         request.setAttribute("shiftType", employeeMaster.getShiftType());
         request.setAttribute("certificatesList", certificatesList);
-        
+
         mv.getModelMap().put("employeeMaster", employeeMaster);
         request.setAttribute("mriStatus", employeeMaster.getMaritalStatus());
         mv.setViewName("Employee/EditUserProfile");
         return mv;
-        
+
     }
-    
+
     public ModelAndView editSubmit(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         String lastYearPerformanceRatingsOfEmployee = "";
@@ -668,7 +668,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
         //getLastYearPerformance Ratings Of Employee For ReadOnly.s
         List<?> lastYearPerformanceRatingsOfEmployeeList = employeeMasterService.getLastYearPerformanceRatingOfEmployee(employeeMaster.getId());
-        
+
         lastYearPerformanceRatingsOfEmployee = (lastYearPerformanceRatingsOfEmployeeList.isEmpty()) ? lastYearPerformanceRatingsOfEmployee : String.valueOf(lastYearPerformanceRatingsOfEmployeeList.get(0));
         request.setAttribute("lastYearPerformanceRatingsOfEmployee", lastYearPerformanceRatingsOfEmployee);
         String companyId = request.getParameter("companyId");
@@ -722,7 +722,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             employeeLeaveBalance.setEmployeeMaster(employeeMaster);
             List<?> empLeaveBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
             if (empLeaveBalList.size() > 0) {
-                
+
             } else {
                 employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
                 employeeLeaveBalance1.setNoOfLeaveRemain(6);
@@ -730,13 +730,15 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 employeeLeaveBalanceService.create(employeeLeaveBalance1);
             }
         }
-        
+
         employeeMaster.setPanCard(String.valueOf(employeeMaster.getPanCard()).toUpperCase());//this is for store pan card in uppercase in database.
         userMaster1 = userMasterService.readById(employeeMaster.getUserMaster().getId());
         userMaster1.setUserName(employeeMaster.getEmployeeId());
         userMasterService.update(userMaster1);
         String competencyEvaluationId = request.getParameter("competencyEvaluationId");
-        employeeMaster.setCompetencyEvaluationId(Integer.parseInt(competencyEvaluationId));
+        if (!competencyEvaluationId.equals("")) {
+            employeeMaster.setCompetencyEvaluationId(Integer.parseInt(competencyEvaluationId));
+        }
         employeeMasterService.update(employeeMaster);
 
 //        if (!reportingManagerBeforeUpdate.equals(reportingManagerForChange)) {
@@ -863,7 +865,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        mv.setViewName("Employee/EditUserProfile");
         return mv;
     }
-    
+
     public ModelAndView deleteSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String empId[] = request.getParameterValues("checkId");
@@ -875,14 +877,14 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 request.setAttribute("successMessage",
                         "Info : One or more records are deleted successfully.");
             } catch (Exception e) {
-                
+
             }
         }
         mv = searchSubmit(request, response);
-        
+
         return mv;
     }
-    
+
     public ModelAndView userDashboard(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -892,7 +894,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         DesignationMaster designationMaster = new DesignationMaster();
         LevelMaster levelMaster = new LevelMaster();
         LocationMaster locationMaster = new LocationMaster();
-        
+
         departmentMaster = departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId());
         designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
         levelMaster = levelMasterService.readById(employeeMaster.getLevelMaster().getId());
@@ -901,7 +903,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         try {
             employeeMasterReportManager = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
         } catch (Exception e) {
-            
+
         }
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         employeeMaster1 = employeeMasterService.readById(employeeMaster.getId());
@@ -919,18 +921,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("forward:appraisalPerformance.htm?act=userDashboard");
         return mv;
     }
-    
+
     private void weeklyGenerate(RotationMaster rotationMaster, Date rd, ShiftRotationMaster shiftRotationMaster, int days, EmployeeMaster employeeMaster, String shiftMasterId) throws Exception {
         ShiftMaster shiftMaster = new ShiftMaster();
         ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
-        
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
         Calendar c1 = Calendar.getInstance();
         c.setTime(rd);
         int day = c.getActualMaximum(Calendar.DAY_OF_MONTH);
         List<Integer> rotationArray = new ArrayList<Integer>(day);
-        
+
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
         LocalDate localDate = rd.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         int year = localDate.getYear();
@@ -971,7 +973,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 }
                 if (flag1 == 1) {
                     for (i = currentDay; i <= day; i++) {
-                        
+
                         shiftMaster = shiftMasterService.readById(rotationMaster.getShiftMaster().getId());
                         try {
                             if (rotationArray.size() != day) {
@@ -993,12 +995,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         }
                         noOfDay = count;
                         count++;
-                        
+
                     }
                 }
-                
+
             }
-            
+
         }
         int totalNoOfDay = days - noOfDay;
         shiftGenerateMonthlySchedule.setNoOfDays(totalNoOfDay);
@@ -1007,7 +1009,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         shiftGenerateMonthlySchedule.setNextShiftId(shiftMaster.getId());
         shiftGenerateMonthlySchedule.setShiftRotationMaster(shiftRotationMaster);
         shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster);
-        
+
         try {
             shiftGenerateMonthlySchedule.setDay1(rotationArray.get(0));
             shiftGenerateMonthlySchedule.setDay2(rotationArray.get(1));
@@ -1049,9 +1051,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 shiftGenerateMonthlySchedule.setDay30(rotationArray.get(29));
                 shiftGenerateMonthlySchedule.setDay31(rotationArray.get(30));
             }
-            
+
             shiftGenerateMonthlyScheduleService.create(shiftGenerateMonthlySchedule);
-            
+
         } catch (Exception e) {
             System.out.println("Exception" + e);
         }
@@ -1059,12 +1061,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        System.out.println("lol");
 //    }
     }
-    
+
     public ModelAndView empChart(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMasterId = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-        
+
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getAttribute("employeeMaster");
         EmployeeMaster employeeMasterManager = null;
         EmployeeMaster employeeMasterSubordinate = new EmployeeMaster();
@@ -1080,7 +1082,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             for (Object o : subordinateList) {
                 Object[] o1 = (Object[]) o;
                 String employeeId = (String) o1[1];
-                
+
                 o1[5] = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 //                o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 
@@ -1110,36 +1112,36 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                employeeMasterManager = employeeMasterService.readById(Integer.parseInt(employeeMasterId.getReportingManagerLevel1()));
                     DepartmentMaster departmentMaster = new DepartmentMaster();
                     DesignationMaster designationMaster = new DesignationMaster();
-                    
+
                     departmentMaster = departmentMasterService.readById(employeeMasterManager.getDepartmentMaster().getId());
                     designationMaster = designationMasterService.readById(employeeMasterManager.getDesignationMaster().getId());
-                    
+
                     employeeMasterManager.setDepartmentMaster(departmentMaster);
                     employeeMasterManager.setDesignationMaster(designationMaster);
-                    
+
                     imageManager = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMasterManager.getEmployeeId();
-                    
+
                     if (new File(imageManager).exists()) {
                         for (File imgFilePath : new File(imageManager).listFiles()) {
                             imageManager = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMasterManager.getEmployeeId() + File.separator + imgFilePath.getName();
                             break;
-                            
+
                         }
                     } else {
                         imageManager = "StorageYard" + File.separator + "UserProfile" + File.separator + "User" + File.separator + "default.png";
                     }
-                    
+
                     innerList.add(employeeMasterManager.getEmployeeId());
                     innerList.add(employeeMasterManager.getEmployeeName());
                     innerList.add(employeeMasterManager.getDepartmentMaster().getDepartmentName());
                     innerList.add(employeeMasterManager.getDesignationMaster().getDesignationName());
                     innerList.add(imageManager);
                     map.put(employeeMasterManager.getId(), innerList);
-                    
+
                 }
             }
             imageUser = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMaster.getEmployeeId();
-            
+
             if (new File(imageUser).exists()) {
                 for (File imgFilePath : new File(imageUser).listFiles()) {
                     imageUser = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMaster.getEmployeeId() + File.separator + imgFilePath.getName();
@@ -1150,19 +1152,19 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             }
         } catch (Exception e) {
         }
-        
+
         request.setAttribute("ceoMap", map);
         request.setAttribute("imageManager", imageManager);
         request.setAttribute("imageUser", imageUser);
         request.setAttribute("employeeMasterManager", employeeMasterManager);
         return mv;
     }
-    
+
     public ModelAndView empOwnChart(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMasterId = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-        
+
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getAttribute("employeeMaster");
         EmployeeMaster employeeMasterManager1 = null;
         EmployeeMaster employeeMasterSubordinate = new EmployeeMaster();
@@ -1176,7 +1178,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             for (Object o : subordinateList) {
                 Object[] o1 = (Object[]) o;
                 String employeeId = (String) o1[1];
-                
+
                 o1[5] = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 //                o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 
@@ -1200,32 +1202,32 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             request.setAttribute("subordinateAddiCount", subordinateAddiCount);
             request.setAttribute("logedInEmpId", employeeMasterId.getId());
             if (null != employeeMasterId.getReportingManagerLevel1() && !employeeMasterId.getReportingManagerLevel1().equals("")) {
-                
+
                 employeeMasterManager1 = employeeMasterService.readById(Integer.parseInt(employeeMasterId.getReportingManagerLevel1()));
                 DepartmentMaster departmentMaster = new DepartmentMaster();
                 DesignationMaster designationMaster = new DesignationMaster();
-                
+
                 departmentMaster = departmentMasterService.readById(employeeMasterManager1.getDepartmentMaster().getId());
                 designationMaster = designationMasterService.readById(employeeMasterManager1.getDesignationMaster().getId());
-                
+
                 employeeMasterManager1.setDepartmentMaster(departmentMaster);
                 employeeMasterManager1.setDesignationMaster(designationMaster);
-                
+
                 imageManager = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMasterManager1.getEmployeeId();
-                
+
                 if (new File(imageManager).exists()) {
                     for (File imgFilePath : new File(imageManager).listFiles()) {
                         imageManager = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMasterManager1.getEmployeeId() + File.separator + imgFilePath.getName();
                         break;
-                        
+
                     }
                 } else {
                     imageManager = "StorageYard" + File.separator + "UserProfile" + File.separator + "User" + File.separator + "default.png";
                 }
-                
+
             }
             imageUser = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMaster.getEmployeeId();
-            
+
             if (new File(imageUser).exists()) {
                 for (File imgFilePath : new File(imageUser).listFiles()) {
                     imageUser = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMaster.getEmployeeId() + File.separator + imgFilePath.getName();
@@ -1236,18 +1238,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             }
         } catch (Exception e) {
         }
-        
+
         request.setAttribute("imageManager", imageManager);
         request.setAttribute("imageUser", imageUser);
         request.setAttribute("employeeMasterManager1", employeeMasterManager1);
         return mv;
     }
-    
+
     public ModelAndView hrDashboard(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         Date today = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YY");
-        
+
         List attendanceList = employeeMasterService.readAttendanceData(sdf.format(today));
         Object[] attendanceData;
         StringBuilder sb = new StringBuilder();
@@ -1275,7 +1277,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 levelMaster = levelMasterService.readById(employeeMaster.getLevelMaster().getId());
                 employeeMasterReportManager = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
             } catch (Exception e) {
-                
+
             }
         }
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
@@ -1293,11 +1295,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("forward:locationMaster.htm?act=hrDashboard");
         return mv;
     }
-    
+
     public ModelAndView viewAllSubordinate(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        
+
         EmployeeMaster employeeMasterMd = new EmployeeMaster();
         EmployeeMaster employeeMasterSubordinate = new EmployeeMaster();
         try {
@@ -1308,7 +1310,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 Object[] o1 = (Object[]) o;
                 id = (int) o1[0];
                 String employeeId = (String) o1[1];
-                
+
                 o1[5] = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 //                o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 
@@ -1410,15 +1412,15 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
         } catch (Exception e) {
         }
-        
+
         mv.setViewName("Dashboard/OrganogramForAllSubordinates");
         return mv;
     }
-    
+
     public ModelAndView viewEmployeeSubordinate(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        
+
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMasterSubordinate = new EmployeeMaster();
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
@@ -1428,24 +1430,24 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 employeeMaster.setId(Integer.parseInt(idStr));
                 employeeMaster = employeeMasterService.readById(employeeMaster.getId());
                 int id = 0;
-                
+
                 DepartmentMaster departmentMaster = new DepartmentMaster();
                 DesignationMaster designationMaster = new DesignationMaster();
-                
+
                 DepartmentMaster departmentMaster1 = new DepartmentMaster();
                 DesignationMaster designationMaster1 = new DesignationMaster();
-                
+
                 employeeMaster1 = employeeMasterService.readById(Integer.parseInt(idStr));
 //                employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
                 departmentMaster = departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId());
                 designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
-                
+
                 departmentMaster1 = departmentMasterService.readById(employeeMaster1.getDepartmentMaster().getId());
                 designationMaster1 = designationMasterService.readById(employeeMaster1.getDesignationMaster().getId());
-                
+
                 employeeMaster.setDepartmentMaster(departmentMaster);
                 employeeMaster.setDesignationMaster(designationMaster);
-                
+
                 employeeMaster1.setDepartmentMaster(departmentMaster1);
                 employeeMaster1.setDesignationMaster(designationMaster1);
                 String employeeStr = "";
@@ -1478,7 +1480,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     Object[] o1 = (Object[]) o;
                     id = (int) o1[0];
                     String employeeId = (String) o1[1];
-                    
+
                     o1[5] = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 //                o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 
@@ -1491,7 +1493,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + "User" + File.separator + "default.png";
                     }
                 }
-                
+
                 double count = subordinateValList.size();
                 count = count / 10;
                 if ((count - (int) count) != 0) {
@@ -1547,7 +1549,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         }
                     }
                     list.add(list1);
-                    
+
                 }
 
 //            request.setAttribute("subordinateValList", subordinateValList);
@@ -1562,10 +1564,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         } catch (Exception e) {
             mv = viewAllSubordinate(request, response);
         }
-        
+
         return mv;
     }
-    
+
     public String displayPicture(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String imgFile = "";
         String userName = request.getParameter("userName");
@@ -1591,10 +1593,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
         MultipartFile multipartFile = multipartHttpServletRequest.getFile("photographUpdate");
         try {
-            
+
             File updatedPicture = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", ""));
             multipartFile.transferTo(updatedPicture);
-            
+
             if (photoFile.exists() && photoFile.listFiles().length > 0) {
                 File[] updatedPictureFiles = photoFile.listFiles();
                 imgFile = "StorageYard" + File.separator + "UserProfile" + File.separator + userMaster.getUserName() + File.separator + updatedPictureFiles[0].getName().replaceAll(" ", "");
@@ -1613,14 +1615,14 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             if (employeeMaster.getEmployeeId().equals(userMaster.getUserName())) {
                 session.setAttribute("profilePicturePath", imgFile);
             }
-            
+
         } catch (Exception e) {
-            
+
         }
-        
+
         return imgFile;
     }
-    
+
     public void readReportingHierarchy(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String reportingManagerId = request.getParameter("id");
         PrintWriter out = null;
@@ -1632,7 +1634,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             for (int i = 0; i < reportingHierarchyArray.length; i++) {
                 reportingHierarchyString = reportingHierarchyString + ((reportingHierarchyArray[i] == null) ? "" : reportingHierarchyArray[i]) + "~";
             }
-            
+
             try {
                 out = response.getWriter();
                 out.print(reportingHierarchyString.substring(0, reportingHierarchyString.length() - 1));
@@ -1647,9 +1649,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 out.close();
             }
         }
-        
+
     }
-    
+
     public ModelAndView changeEmployeeShift(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -1669,7 +1671,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("Employee/EmployeeShiftChange");
         return mv;
     }
-    
+
     public ModelAndView changeEmployeeShiftSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -1680,7 +1682,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         UserMaster userMaster = new UserMaster();
         bind(request, employeeMaster);
         int id = employeeMaster.getId();
-        
+
         employeeMaster1 = employeeMasterService.readById(id);
         userMaster.setId(employeeMaster1.getUserMaster().getId());
         shiftRotationInfo.setUserMaster(userMaster);
@@ -1702,7 +1704,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 mv.getModelMap().put("employeeMaster", employeeMaster);
                 mv = changeEmployeeShift(request, response);
             } else {
-                
+
                 employeeMaster1.setShiftHoursId(Integer.parseInt(shfitId));
                 shiftRotationMaster.setId(Integer.parseInt(shfitId));
                 List<?> list = shiftRotationInfoService.readRotaionDetail(shiftRotationInfo);
@@ -1721,7 +1723,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     shiftRotationInfo1.setRotationDate(employeeMaster.getShiftRotationDate());
                     shiftRotationInfoService.create(shiftRotationInfo1);
                 }
-                
+
                 ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
                 shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster);
                 String shiftRotationDate = request.getParameter("shiftRotationDate");
@@ -1757,11 +1759,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 mv.setViewName("redirect:employeeMaster.htm?act=searchSubmit");
             }
         }
-        
+
         return mv;
-        
+
     }
-    
+
     private void shiftGenerateEdit(RotationMaster rotationMaster, Date rd, ShiftRotationMaster shiftRotationMaster, int days, EmployeeMaster employeeMaster, String firstShiftId) throws Exception {
         ShiftMaster shiftMaster = new ShiftMaster();
         ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
@@ -1784,7 +1786,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster);
         shiftGenerateMonthlySchedule.setShiftMonth(cmonth);
         shiftGenerateMonthlySchedule.setShiftYear(cyear);
-        
+
         List<?> list = shiftGenerateMonthlyScheduleService.readByCurrentDateWiseEmployeeShift(shiftGenerateMonthlySchedule);
         if (!list.isEmpty()) {
             shiftGenerateMonthlySchedule = (ShiftGenerateMonthlySchedule) list.get(0);
@@ -1793,7 +1795,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         for (int i1 = 1; i1 < currentDay; i1++) {
             rotationArray.add(0);
         }
-        
+
         int count1 = 0;
         List sunday = new ArrayList();
         for (int day1 = 1; day1 <= day; day1++) {
@@ -1806,7 +1808,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         int count = 1;
         int noOfDay = 0;
         int i = 1;
-        
+
         int flag = 0;
         for (int j = 1; j <= 5; j++) {
             List<?> rotationList = rotationMasterService.readFromRotation(rotationMaster);
@@ -1821,10 +1823,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         flag = 1;
                     }
                 }
-                
+
                 if (flag == 1) {
                     for (i = currentDay; i <= day; i++) {
-                        
+
                         shiftMaster = shiftMasterService.readById(rotationMaster.getShiftMaster().getId());
                         try {
                             if (rotationArray.size() != day) {
@@ -1834,7 +1836,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                     rotationArray.add(-1);
                                 }
                             }
-                            
+
                         } catch (Exception ex) {
                             System.out.println("Array Size Exception" + ex);
                         }
@@ -1847,11 +1849,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         }
                         noOfDay = count;
                         count++;
-                        
+
                     }
                 }
             }
-            
+
         }
         int totalNoOfDay = days - noOfDay;
         if (null != shiftGenerateMonthlySchedule.getId()) {
@@ -1862,7 +1864,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         shiftGenerateMonthlySchedule1.setShiftYear(cyear);
         shiftGenerateMonthlySchedule1.setShiftRotationMaster(shiftRotationMaster);
         shiftGenerateMonthlySchedule1.setEmployeeMaster(employeeMaster);
-        
+
         try {
             int i1 = 1;
             if (i1 >= dayofmonth) {
@@ -2054,12 +2056,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         } catch (Exception e) {
             System.out.println("Exception" + e);
         }
-        
+
         System.out.println("lol");
 
 //    }
     }
-    
+
     public ModelAndView getUserDetail(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
 //        EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -2123,7 +2125,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Employee/UserDetail");
         return mv;
-        
+
     }
 
     //this method is created for search employee from searchbox given in header bar and shows result same as searchSubmit method of this controller.
@@ -2137,34 +2139,34 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         //dont rename "list" because same used on searchSubmit method and employeeRegistrationResult.jsp
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Employee/EmployeeRegistrationResult");
-        
+
         return mv;
     }
-    
+
     public ModelAndView excelUploadRegistration(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("Employee/EmployeeRegistrationThroughUpload");
         return mv;
     }
-    
+
     public void readEmployeeFile(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         String fileName = request.getParameter("fileName");
-        
+
         String filePath = File.separator + "StorageYard" + File.separator
                 + "Other" + File.separator + "UserDoc" + File.separator
                 + "EmployeeRegistration" + File.separator + fileName;
-        
+
         String appPath = request.getServletContext().getRealPath("");
-        
+
         String fullPath = appPath + filePath;
-        
+
         request.setAttribute("filePath", fullPath);
-        
+
         DownloadFile downloadFile = new DownloadFile();
         downloadFile.doDownload(request, response);
     }
-    
+
     public ModelAndView excelUploadRegistrationSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -2229,7 +2231,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         boolean isShiftMasterCreated = false;//if new created RotationMaster table with ShiftRotationMaster.
         ShiftMaster shiftMasteDefault = new ShiftMaster();
         String employeeType = "";
-        
+
         boolean gender = false;
         StringBuffer stringBuffer = new StringBuffer();
         StringBuffer stringBufferOfExceptions = new StringBuffer();
@@ -2268,7 +2270,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             workLocation = "" + (null == row.getCell((short) 7) ? "" : row.getCell((short) 7));
                             company = "" + (null == row.getCell((short) 8) ? "" : row.getCell((short) 8));
                             officialEmailId = "" + (null == row.getCell((short) 9) ? "" : row.getCell((short) 9));
-                            
+
                             contactNoExpo = "" + (null == row.getCell((short) 10) ? "" : row.getCell((short) 10));
                             if (!contactNoExpo.equals("")) {
                                 BigDecimal bdContactNo = new BigDecimal(contactNoExpo);
@@ -2276,11 +2278,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 contactNo = "";
                             }
-                            
+
                             reportingManager = "" + (null == row.getCell((short) 11) ? "" : row.getCell((short) 11));
                             fatherName = "" + (null == row.getCell((short) 12) ? "" : row.getCell((short) 12));
                             motherName = "" + (null == row.getCell((short) 13) ? "" : row.getCell((short) 13));
-                            
+
                             dobNonFormated = "" + (null == row.getCell((short) 14) ? "" : row.getCell((short) 14));
 //DOB formatting before employee creation.
 //                        Date dateDOB = sdfDOJ.parse(dobNonFormated);
@@ -2294,31 +2296,31 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             bloodGroup = "" + (null == row.getCell((short) 20) ? "" : row.getCell((short) 20));
                             personalEmailId = "" + (null == row.getCell((short) 21) ? "" : row.getCell((short) 21));
                             emergencyContactPerson = "" + (null == row.getCell((short) 22) ? "" : row.getCell((short) 22));
-                            
+
                             emergencyContactNoExpo = "" + (null == row.getCell((short) 23) ? "" : row.getCell((short) 23));
                             if (!emergencyContactNoExpo.equals("")) {
-                                
+
                                 BigDecimal bdEmergencyContactNo = new BigDecimal(emergencyContactNoExpo);
                                 emergencyContactNo = "" + bdEmergencyContactNo.longValue();
                             } else {
                                 emergencyContactNo = "";
                             }
-                            
+
                             aadharCardExpo = "" + (null == row.getCell((short) 24) ? "" : row.getCell((short) 24));
                             if (!aadharCardExpo.equals("")) {
-                                
+
                                 BigDecimal bdAadharCard = new BigDecimal(aadharCardExpo);
                                 aadharCard = "" + bdAadharCard.longValue();
                             } else {
                                 aadharCard = "";
                             }
-                            
+
                             highestEducation = "" + (null == row.getCell((short) 25) ? "" : row.getCell((short) 25));
                             experienceOnDateOfJoiningYear = "" + (null == row.getCell((short) 26) ? "" : row.getCell((short) 26));
                             experienceOnDateOfJoiningMonth = "" + (null == row.getCell((short) 27) ? "" : row.getCell((short) 27));
                             role = "" + (null == row.getCell((short) 28) ? "" : row.getCell((short) 28));
                             bankName = "" + (null == row.getCell((short) 29) ? "" : row.getCell((short) 29));
-                            
+
                             bankAccountNoExpo = "" + (null == row.getCell((short) 30) ? "" : row.getCell((short) 30));
                             if (!bankAccountNoExpo.equals("")) {
                                 BigDecimal bdBankAccountNo = new BigDecimal(bankAccountNoExpo);
@@ -2326,18 +2328,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 bankAccountNo = "";
                             }
-                            
+
                             ifscCode = "" + (null == row.getCell((short) 31) ? "" : row.getCell((short) 31));
                             workType = "" + (null == row.getCell((short) 32) ? "" : row.getCell((short) 32));
                             hours = "" + (null == row.getCell((short) 33) ? "" : row.getCell((short) 33));
                             shiftRotation = "" + (null == row.getCell((short) 34) ? "" : row.getCell((short) 34));
                             shift = "" + (null == row.getCell((short) 35) ? "" : row.getCell((short) 35));
                             employeeType = "" + (null == row.getCell((short) 36) ? "" : row.getCell((short) 36));
-                            
+
                             employeeMaster.setEmployeeId(employeeNo);
                             employeeMaster.setEmployeeName(employeeName);
                             employeeMaster.setDateOfJoining(dateOfJoiningNonFormated);
-                            
+
                             if (!level.equals("")) {
                                 List<?> levelList = levelMasterService.readByName(level.trim().toLowerCase());
                                 if (!levelList.isEmpty()) {
@@ -2347,12 +2349,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                     levelMaster.setLevel(level);
                                     levelMasterService.create(levelMaster);
                                     employeeMaster.setLevelMaster(levelMaster);
-                                    
+
                                 }
                             } else {
                                 employeeMaster.setLevelMaster(null);
                             }
-                            
+
                             if (!designation.equals("")) {
                                 List<?> departmentList = designationMasterService.readByName(designation.trim().toLowerCase());
                                 if (!departmentList.isEmpty()) {
@@ -2367,7 +2369,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 employeeMaster.setDesignationMaster(null);
                             }
-                            
+
                             if (!department.equals("")) {
                                 List<?> departmentList = departmentMasterService.readByName(department.trim().toLowerCase());
                                 if (!departmentList.isEmpty()) {
@@ -2381,7 +2383,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 employeeMaster.setDepartmentMaster(null);
                             }
-                            
+
                             if (!zydexLocation.equals("")) {
                                 List<?> zydexLocationList = zydexLocationMasterService.readByName(zydexLocation.trim().toLowerCase());
                                 if (!zydexLocationList.isEmpty()) {
@@ -2395,7 +2397,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 employeeMaster.setZydexLocationMaster(null);
                             }
-                            
+
                             if (!workLocation.equals("")) {
                                 List<?> workLocationList = locationMasterService.readByName(workLocation.trim().toLowerCase());
                                 if (!workLocationList.isEmpty()) {
@@ -2409,7 +2411,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 employeeMaster.setLocationMaster(null);
                             }
-                            
+
                             employeeMaster.setCompany(company);
                             employeeMaster.setOfficeEmailId(officialEmailId);
                             employeeMaster.setContactNo1(contactNo);
@@ -2439,13 +2441,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             employeeMaster.setBankAccountNo(bankAccountNo);
                             employeeMaster.setBankIfscCode(ifscCode);
                             employeeMaster.setEmployeeType(employeeType);
-                            
+
                             if (!reportingManager.equals("")) {
                                 List<?> reportingManagerList = employeeMasterService.readByName(reportingManager);
                                 EmployeeMaster employeeMaster1 = new EmployeeMaster();
                                 if (!reportingManagerList.isEmpty()) {
                                     employeeMaster1 = (EmployeeMaster) reportingManagerList.get(0);
-                                    
+
                                 }
                                 int reportingManagerLevel1 = employeeMaster1.getId();
                                 employeeMaster.setReportingManagerLevel1("" + reportingManagerLevel1);
@@ -2484,7 +2486,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                             employeeMaster.setReportingManagerLevel6(reportingHierarchyStringSplitArray[5]);
                                         }
                                     }
-                                    
+
                                 }
                             }
                             UserMaster userMaster = new UserMaster();
@@ -2493,7 +2495,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             String workTypeTemp = "";
                             String shiftRotationTemp = "";
                             String shiftTemp = "";
-                            
+
                             if (!userMasterService.isExist(employeeNo)) {
                                 userMaster.setFirstTime(true);//this is for change password forcibly when user first time logsIn.
                                 userMasterService.create(userMaster);
@@ -2800,7 +2802,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 stringBuffer.append(" , ");
                                 counter++;
                             }
-                            
+
                         }
 //                        System.out.println("this is an error in excel upload......................................................................" + employeeNo);
 //                        System.out.println("this is an error in excel upload......................................................................" + employeeNo);
@@ -2827,9 +2829,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         }
         return mv;
     }
-    
+
     public void getDesignationByLevel(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        
+
         int levelMasterId = Integer.valueOf(request.getParameter("levelMasterId"));
         Map<Integer, String> desigNationByLevelMap = new HashMap<Integer, String>();
         List designationsAtLevelList = designationMasterService.readDesignationsOfLevel(levelMasterId);
@@ -2845,12 +2847,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         try {
             out = response.getWriter();
             out.write(jsonOfdesigNationByLevelMap);
-            
+
         } finally {
             out.close();
         }
     }
-    
+
     public ModelAndView exportToExcel(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         String searchEmployeeString = "";
@@ -2864,7 +2866,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("DocumentView/EmployeeDataToExcel");
         return mv;
     }
-    
+
     public ModelAndView changePassWordClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         UserMaster userMaster = new UserMaster();
@@ -2876,7 +2878,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("User/NewPassword");
         return mv;
     }
-    
+
     public ModelAndView changePassWordSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         UserMaster userMaster = new UserMaster();
@@ -2889,7 +2891,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String newPas = request.getParameter("new_password");
         curPas = userMaster.getPassword();
         userMaster = userMasterService.readById(userMaster.getId());
-        
+
         List list = employeeMasterService.pswdExist(curPas, userMaster.getId().toString());
         if (!list.isEmpty()) {
             userMaster.setPassword(newPas);
@@ -2904,16 +2906,16 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             mv.setViewName("User/NewPassword");
 //            mv = changePassWordClick(request, response);
         }
-        
+
         return mv;
     }
-    
+
     private void weeklyGenerateShift(RotationMaster rotationMaster, Date rd, ShiftRotationMaster shiftRotationMaster, int days, EmployeeMaster employeeMaster, String shiftMasterId) throws Exception {
         ShiftMaster shiftMaster = new ShiftMaster();
         ShiftMaster shiftMasterForLastDayOfMonth = new ShiftMaster();
-        
+
         ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
-        
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
         Calendar c1 = Calendar.getInstance();
@@ -2921,13 +2923,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         c.setTime(rd);
         int day = c.getActualMaximum(Calendar.DAY_OF_MONTH);
         List<Integer> rotationArray = new ArrayList<Integer>(day);
-        
+
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
         LocalDate localDate = rd.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         int year = localDate.getYear();
         int month = localDate.getMonthValue();
         int dayofmonth = localDate.getDayOfMonth();
-        
+
         Date today = new Date();
         String newDate = sdf.format(today);
         Date ss = sdf.parse(newDate);
@@ -2971,12 +2973,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 }
                 shiftMasterIdCheckTemp++;
             }
-            
+
             for (i = 1; i <= daysOfCuurentMOnth; i++) {
                 shiftMaster = shiftMasterService.readById(shiftMasterIdList.get(shiftMasterIdCheckCounter));
                 try {
                     if (rotationArray.size() != daysOfCuurentMOnth) {
-                        
+
                         Calendar cal = Calendar.getInstance();
                         SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
                         String newdate = i + "/" + currentMonth + "/" + currentYear;
@@ -3022,7 +3024,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 isLastDayOfMonthIsWeekOff = true;
                                 shiftMasterForLastDayOfMonth = shiftMasterService.readById(shiftMasterIdList.get(shiftMasterIdCheckCounter));
                             }
-                            
+
                         } else {
                             rotationArray.add(shiftMaster.getId());
                         }
@@ -3047,7 +3049,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                count++;
 
             }
-            
+
         }
 
 //        int totalNoOfDay = days - noOfDay;
@@ -3061,7 +3063,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         }
         shiftGenerateMonthlySchedule.setShiftRotationMaster(shiftRotationMaster);
         shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster);
-        
+
         try {
             shiftGenerateMonthlySchedule.setDay1(rotationArray.get(0));
             shiftGenerateMonthlySchedule.setDay2(rotationArray.get(1));
@@ -3103,9 +3105,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 shiftGenerateMonthlySchedule.setDay30(rotationArray.get(29));
                 shiftGenerateMonthlySchedule.setDay31(rotationArray.get(30));
             }
-            
+
             shiftGenerateMonthlyScheduleService.create(shiftGenerateMonthlySchedule);
-            
+
         } catch (Exception e) {
             System.out.println("Exception" + e);
         }
@@ -3113,7 +3115,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        System.out.println("lol");
 //    }
     }
-    
+
     private void shiftGenerateEditWeekly(RotationMaster rotationMaster, Date rd, ShiftRotationMaster shiftRotationMaster, int days, EmployeeMaster employeeMaster, String firstShiftId) throws Exception {
         ShiftMaster shiftMaster = new ShiftMaster();
         ShiftMaster shiftMasterForLastDayOfMonth = new ShiftMaster();
@@ -3134,7 +3136,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String cdayofmonth = "";
         String cmonth = "";
         String cyear = "";
-        
+
         cdayofmonth = "" + c.get(Calendar.DAY_OF_MONTH);
         cmonth = "" + (c.get(Calendar.MONTH) + 1);
         cyear = "" + c.get(Calendar.YEAR);
@@ -3148,7 +3150,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         List<?> list = shiftGenerateMonthlyScheduleService.readByCurrentDateWiseEmployeeShift(shiftGenerateMonthlySchedule);
         if (!list.isEmpty()) {
             shiftGenerateMonthlySchedule = (ShiftGenerateMonthlySchedule) list.get(0);
-            
+
         }
         int currentDay = Integer.parseInt(cdayofmonth);
         for (int i1 = 1; i1 < currentDay; i1++) {
@@ -3184,13 +3186,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 }
                 shiftMasterIdCheckTemp++;
             }
-            
+
             for (int i = currentDay; i <= day; i++) {
-                
+
                 shiftMaster = shiftMasterService.readById(shiftMasterIdList.get(shiftMasterIdCheckCounter));
                 try {
                     if (rotationArray.size() != day) {
-                        
+
                         Calendar cal = Calendar.getInstance();
                         SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
                         String newdate = i + "/" + cmonth + "/" + cyear;
@@ -3236,7 +3238,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 isLastDayOfMonthIsWeekOff = true;
                                 shiftMasterForLastDayOfMonth = shiftMasterService.readById(shiftMasterIdList.get(shiftMasterIdCheckCounter));
                             }
-                            
+
                         } else {
                             rotationArray.add(shiftMaster.getId());
                         }
@@ -3279,10 +3281,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             }
             shiftGenerateMonthlySchedule1.setShiftRotationMaster(shiftRotationMaster);
             shiftGenerateMonthlySchedule1.setEmployeeMaster(employeeMaster);
-            
+
             try {
                 int i1 = 1;
-                
+
                 if (i1 >= dayofmonth) {
                     shiftGenerateMonthlySchedule1.setDay1(rotationArray.get(0));
                 } else {
@@ -3458,7 +3460,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         shiftGenerateMonthlySchedule1.setDay29(shiftGenerateMonthlySchedule.getDay29());
                     }
                 }
-                
+
                 if (day == 30) {
                     i1++;
                     if (i1 >= dayofmonth) {
@@ -3493,19 +3495,19 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         shiftGenerateMonthlySchedule1.setDay31(shiftGenerateMonthlySchedule.getDay31());
                     }
                 }
-                
+
                 shiftGenerateMonthlyScheduleService.createOrUpdate(shiftGenerateMonthlySchedule1);
             } catch (Exception e) {
                 System.out.println("Exception" + e);
             }
-            
+
             System.out.println("lol");
 
 //    }
         }
-        
+
     }
-    
+
     public ModelAndView formerEmployeeRecords(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -3514,10 +3516,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.getModelMap().put("list", employeeMasterList);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Employee/PastEmployeeRecords");
-        
+
         return mv;
     }
-    
+
     public ModelAndView formalEmployeeExportToExcel(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         List<?> employeeMasterList = employeeMasterService.readFormerEmployeeDataForexportToExcel();
@@ -3527,7 +3529,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("DocumentView/FormerEmployeeDataToExcel");
         return mv;
     }
-    
+
     public ModelAndView viewOwnProfile(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         String lastYearPerformanceRatingsOfEmployee = "";
@@ -3573,7 +3575,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         hoursBasisList(request);
         //getLastYearPerformance Ratings Of Employee For ReadOnly.s
         List<?> lastYearPerformanceRatingsOfEmployeeList = employeeMasterService.getLastYearPerformanceRatingOfEmployee(id);
-        
+
         lastYearPerformanceRatingsOfEmployee = (lastYearPerformanceRatingsOfEmployeeList.isEmpty()) ? lastYearPerformanceRatingsOfEmployee : String.valueOf(lastYearPerformanceRatingsOfEmployeeList.get(0));
         //set user master id//
         String userid = request.getParameter("userid");
@@ -3595,11 +3597,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 + File.separator + userMaster1.getUserName() + File.separator;
         File certificateListFile = new File(certificateFileLocationURL);
         if (certificateListFile.listFiles() != null) {
-            
+
             for (File sss : certificateListFile.listFiles()) {
                 String aa = sss.getName();
                 certificatesList.add(aa);
-                
+
             }
             if (certificateListFile.exists() && certificateListFile.listFiles().length > 0) {
                 File[] certificateListFileArray = certificateListFile.listFiles();
@@ -3615,30 +3617,30 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         request.setAttribute("employeeType", employeeMaster.getEmployeeType());
         request.setAttribute("shiftType", employeeMaster.getShiftType());
         request.setAttribute("certificatesList", certificatesList);
-        
+
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Employee/EmployeesOwnProfile");
         return mv;
-        
+
     }
-    
+
     public void downloadEmployeeCertificates(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         String fileName = request.getParameter("fileName");
         String userId = request.getParameter("userId");
-        
+
         UserMaster userMaster = userMasterService.readById(Integer.parseInt(userId));
-        
+
         String certificateFileLocationURL = getServletContext().getRealPath("/")
                 + File.separator + "StorageYard" + File.separator + "UserCertificate"
                 + File.separator + userMaster.getUserName() + File.separator + fileName;
-        
+
         request.setAttribute("filePath", certificateFileLocationURL);
-        
+
         DownloadFile downloadFile = new DownloadFile();
         downloadFile.doDownload(request, response);
     }
-    
+
     public ModelAndView adminChangePassWordClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -3648,7 +3650,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("Employee/EmployeePasswordChange");
         return mv;
     }
-    
+
     public ModelAndView adminChangePassWordSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -3661,7 +3663,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("redirect:employeeMaster.htm?act=searchSubmit");
         return mv;
     }
-    
+
     public ModelAndView inActiveEmployeeClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -3670,10 +3672,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         request.setAttribute("empId", empId);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Employee/EmployeeInActivePage");
-        
+
         return mv;
     }
-    
+
     public ModelAndView inActiveEmployeeSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();

@@ -333,6 +333,7 @@
                                                             <c:choose>
                                                                 <c:when test="${fn:length(kragoal) > 0}">
                                                                     <input type="hidden" name="countId" id="countId" value="${fn:length(kragoal)}">
+                                                                    <!--<input type="button" value="CountId" onclick="alert(document.getElementById('countId').value);"/>-->
                                                                     <c:set var="resultCount" value="${fn:length(kragoal)}"></c:set>
                                                                     <c:forEach var="kragoallist" items="${kragoal}" varStatus="status">
                                                                         <%--  <c:if test="${(kragoallist.kraGoal ne '' || kragoallist.metric ne '') ||
@@ -476,7 +477,7 @@
 
                                                                         <td style="text-align: center" id="edit${status.count}"><span style='margin-top: 5px;' id="editC${status.count}">
                                                                                 <%--<c:if test="${flag ne 'true' && flag1 ne 'true' && flag2 ne 'true'}">--%>
-                                                                                <button type="button" class="btns btn-warnings" id="EditByEmployee${status.count}" name="EditByEmployee" onclick="changeReadonly('${status.count}')" style="width: 50px;" >Edit</button>
+                                                                                <button type="button" class="btns btn-warnings" id="EditByEmployee${status.count}" name="EditByEmployee${status.count}" onclick="changeReadonly('${status.count}')" style="width: 50px;" >Edit</button>
                                                                                 <%--</c:if>--%>
                                                                                 <%--<c:if test="${flag eq 'true' || flag1 eq 'true' || flag2 eq 'true'}">--%>
                                                                                     <!--<button type="button" class="btn btn-warning" id="EditByEmployee" name="EditByEmployee" onclick="changeReadonly('${status.count}')" style="width: 50px;">Edit</button>-->
@@ -1052,24 +1053,24 @@
                                                                         </select>
                                                                     </td>
                                                                     <td id="midYearDividact1">
-                                                                            <select id="midYearDivOther1" name="midYearDivOther1" class="form-control saveRequried" style="margin: 0px;width: 115px;">
-                                                                                <option value="">--SELECT--</option>
-                                                                                <option value="Yet to Start">Yet to Start</option>
-                                                                                <option value="In Progress">In Progress</option>
-                                                                                <option value="Completed">Completed</option>
-                                                                                <option value="Canceled">Canceled</option>
-                                                                            </select>
-                                                                        
+                                                                        <select id="midYearDivOther1" name="midYearDivOther1" class="form-control saveRequried" style="margin: 0px;width: 115px;">
+                                                                            <option value="">--SELECT--</option>
+                                                                            <option value="Yet to Start">Yet to Start</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                            <option value="Canceled">Canceled</option>
+                                                                        </select>
+
                                                                     </td>
                                                                     <td id="endYearDividact">
-                                                                            <select id="endYearDivOther1" name="endYearDivOther1" class="form-control saveRequried" style="margin: 0px;width: 115px;">
-                                                                                <option value="">--SELECT--</option>
-                                                                                <option value="Yet to Start">Yet to Start</option>
-                                                                                <option value="In Progress">In Progress</option>
-                                                                                <option value="Completed">Completed</option>
-                                                                                <option value="Canceled">Canceled</option>
-                                                                            </select>
-                                                                        
+                                                                        <select id="endYearDivOther1" name="endYearDivOther1" class="form-control saveRequried" style="margin: 0px;width: 115px;">
+                                                                            <option value="">--SELECT--</option>
+                                                                            <option value="Yet to Start">Yet to Start</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                            <option value="Canceled">Canceled</option>
+                                                                        </select>
+
                                                                     </td>
                                                                     <td id="">
                                                                         <select id="activity1" name="activity1" class="form-control saveRequried" style="margin: 0px;width: 115px;">
@@ -1238,7 +1239,7 @@
 
                                                     <%--<c:if test="${appraisalPerformanceMaster.managerStatus ne 1}">--%>
                                                         <!--<div><input type="text" id="competencyEvaluation_Id" class="form-control" name="competencyEvaluation_Id" value="${competencyEvaluationList[0][2].title}" readonly="true"></div>-->
-                                                        <%--</c:if>--%>
+                                                    <%--</c:if>--%>
 
                                                 </div>
 
@@ -2391,6 +2392,7 @@
 
 //        alert('${sessionScope.employeeInfo.competencyEvaluationId}');
         $(document).ready(function () {
+//            document.getElementById('countId').value = '${fn:length(kragoal)}';
 
 //            alert('${sessionScope.employeeInfo.competencyEvaluationId}');
 

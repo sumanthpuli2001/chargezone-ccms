@@ -153,10 +153,17 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             request.setAttribute("pmpasEmployee", pmpasEmployee);
 
         }
-        competencyEvaluationMaster = competencyEvaluationMasterService.readById(employee.getCompetencyEvaluationId());
-        if (null != competencyEvaluationMaster) {
-            String cpmname = competencyEvaluationMaster.getTitle();
-            request.setAttribute("cpmname", cpmname);
+
+        try {
+            if (null != employee.getCompetencyEvaluationId()) {
+                competencyEvaluationMaster = competencyEvaluationMasterService.readById(employee.getCompetencyEvaluationId());
+                if (null != competencyEvaluationMaster) {
+                    String cpmname = competencyEvaluationMaster.getTitle();
+                    request.setAttribute("cpmname", cpmname);
+                }
+            }
+        } catch (Exception e) {
+
         }
 
         List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
@@ -1027,6 +1034,13 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     } else {
                         appraisalPerformanceActivities.setManagerPriority(priority);
                     }
+
+                    if (null != endYearDivOther && !endYearDivOther.equals("")) {
+                        appraisalPerformanceActivities.setEndyearStatusActivitiesManager(endYearDivOther);
+                    } else {
+                        appraisalPerformanceActivities.setEndyearStatusActivitiesManager(null);
+                    }
+
                     if (null != activity && !activity.equals("")) {
                         appraisalPerformanceActivities.setManagerActivity(activity);
                     } else {
@@ -1762,7 +1776,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
 //        mv.setViewName("forward:userMaster.htm?act=userDashboard");
 //        mv = createClick(request, response);
-        mv = searchOwnappraisalPerformanceSubmit(request, response);
+        mv.setViewName("redirect:appraisalPerformance.htm?act=searchOwnappraisalPerformanceSubmit");
+//        mv = searchOwnappraisalPerformanceSubmit(request, response);
 //        mv.setViewName("Appraisal/PerformanceAppraisalForm");
         return mv;
     }
@@ -1870,7 +1885,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o4;
                     if (currentDate.equals(ManagerMidStartDate1) || currentDate.equals(ManagerMidDate1)
                             || (currentDate.after(ManagerMidStartDate1) && currentDate.before(ManagerMidDate1))) {
-                        if (appraisalPerformanceMaster.getReworkStatus() == 1 && 0 != appraisalPerformanceMaster.getMidYearManagerStatus()) {
+//                        if (appraisalPerformanceMaster.getReworkStatus() == 1 && 0 != appraisalPerformanceMaster.getMidYearManagerStatus()) {
+                        if (appraisalPerformanceMaster.getReworkStatus() == 1) {
                             managerMidSelfApproval = "Rework";
                             midSelfApproval = "Pendding";
                             break;
@@ -1897,7 +1913,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o6;
                     if (currentDate.equals(managerYearEndStartDate1) || currentDate.equals(managerYearEndEndDate1)
                             || (currentDate.after(managerYearEndStartDate1) && currentDate.before(managerYearEndEndDate1))) {
-                        if (appraisalPerformanceMaster.getReworkStatus() == 1 && 0 != appraisalPerformanceMaster.getEndYearManagerStatus()) {
+//                        if (appraisalPerformanceMaster.getReworkStatus() == 1 && 0 != appraisalPerformanceMaster.getEndYearManagerStatus()) {
+                        if (appraisalPerformanceMaster.getReworkStatus() == 1) {
                             managerEndSelfApproval = "Rework";
                             endSelfApproval = "Pendding";
                             break;
@@ -2124,11 +2141,19 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             String totalScoreForemployee = appraisalPerformanceMaster.getTotalScoreForemployee();
             request.setAttribute("totalScoreForemployee", totalScoreForemployee);
         }
-        competencyEvaluationMaster = competencyEvaluationMasterService.readById(employee.getCompetencyEvaluationId());
-        if (null != competencyEvaluationMaster) {
-            String cpmname = competencyEvaluationMaster.getTitle();
-            request.setAttribute("cpmname", cpmname);
+        try {
+            if (null != employee.getCompetencyEvaluationId()) {
+
+                competencyEvaluationMaster = competencyEvaluationMasterService.readById(employee.getCompetencyEvaluationId());
+                if (null != competencyEvaluationMaster) {
+                    String cpmname = competencyEvaluationMaster.getTitle();
+                    request.setAttribute("cpmname", cpmname);
+                }
+            }
+        } catch (Exception e) {
+
         }
+
         String pmpstatusId = "";
         List<?> pmplist = pmpFormStatusMasterService.readByPmpformstatusStatus(employeeId);
         if (!pmplist.isEmpty()) {
@@ -4132,7 +4157,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         }
         mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
 //        mv.setViewName("Appraisal/ManagerPerformanceAppraisalForm");
-        mv = searchSubmit(request, response);
+        mv.setViewName("redirect:appraisalPerformance.htm?act=searchSubmit");
+//        mv = searchSubmit(request, response);
 //        mv.setViewName("forward:userMaster.htm?act=userDashboard");
         return mv;
     }
@@ -4229,7 +4255,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o1;
                     if (currentDate.equals(ManagerMidStartDate1) || currentDate.equals(ManagerMidDate1)
                             || (currentDate.after(ManagerMidStartDate1) && currentDate.before(ManagerMidDate1))) {
-                        if (appraisalPerformanceMaster.getReworkStatus() == 1 && 0 != appraisalPerformanceMaster.getMidYearManagerStatus()) {
+//                        if (appraisalPerformanceMaster.getReworkStatus() == 1 && 0 == appraisalPerformanceMaster.getMidYearManagerStatus()) {
+                        if (appraisalPerformanceMaster.getReworkStatus() == 1) {
                             managerMidSelfApproval = "Rework";
                             midSelfApproval = "pending"; //change by10/20/2016
 //                            managerMidSelfApproval = "pending";
@@ -4255,7 +4282,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     AppraisalPerformanceKra appraisalPerformanceKra1 = (AppraisalPerformanceKra) o1;
                     if (currentDate.equals(managerYearEndStartDate1) || currentDate.equals(managerYearEndEndDate1)
                             || (currentDate.after(managerYearEndStartDate1) && currentDate.before(managerYearEndEndDate1))) {
-                        if (appraisalPerformanceMaster.getReworkStatus() == 1 && 0 != appraisalPerformanceMaster.getEndYearManagerStatus()) {
+//                        if (appraisalPerformanceMaster.getReworkStatus() == 1 && 0 != appraisalPerformanceMaster.getEndYearManagerStatus()) {
+                        if (appraisalPerformanceMaster.getReworkStatus() == 1) {
                             managerEndSelfApproval = "Rework";
                             endSelfApproval = "pending";
                             break;
@@ -5308,7 +5336,6 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        String flagId = request.getParameter("flagId1");
 //        String midhalf = request.getParameter("flagMidId1");
 //        String endhalf = request.getParameter("flagEndId1");
-
 //        if (null != midhalf && midhalf.equals("true")) {
 ////            appraisalPerformanceMaster.setMidYearEmployeeStatus(0);
 ////            appraisalPerformanceMaster.setMidYearManagerStatus(0);
@@ -5341,7 +5368,9 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         } catch (Exception e) {
 
         }
-        mv = searchSubmit(request, response);
+
+//        mv = searchSubmit(request, response);
+        mv.setViewName("redirect:appraisalPerformance.htm?act=searchSubmit");
 
         return mv;
     }
@@ -5399,6 +5428,9 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
         EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         String employeeName = "" + employee.getEmployeeName();
+        try{
+            
+        
         String empId = request.getParameter("id");
         String userid = request.getParameter("userid");
         String appraisalId1 = request.getParameter("appraisalId");
@@ -5594,6 +5626,9 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         }
         request.setAttribute("behaviors", behaviorsList);
         request.setAttribute("behaviorsList", behaviorsList);
+        }catch(Exception e){
+            
+        }
 
         mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
         mv.setViewName("Appraisal/AppraisalFormPrintToPdfByEmployee");

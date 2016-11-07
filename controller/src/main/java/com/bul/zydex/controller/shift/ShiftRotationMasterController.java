@@ -920,12 +920,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         } else if (diffMin1 >= 9) {
                             time = "0.8";
                         }
-                    } else {
-                        if (diffMin1 >= 3.6 && diffMin1 <= 7.9) {
-                            time2 = "0.4";
-                        } else if (diffMin1 >= 8) {
-                            time2 = "0.8";
-                        }
+                    } else if (diffMin1 >= 3.6 && diffMin1 <= 7.9) {
+                        time2 = "0.4";
+                    } else if (diffMin1 >= 8) {
+                        time2 = "0.8";
                     }
 
                     if (!zydexLocationName.equals("HO") && !zydexLocationName.equals("R&D")) {
@@ -987,7 +985,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             }
         } else {
             List<?> empList = employeeMasterService.read();
-             EmployeeMaster employeeMaster = new EmployeeMaster();
+            EmployeeMaster employeeMaster = new EmployeeMaster();
             for (Object zz : empList) {
                 try {
                     employeeMaster = (EmployeeMaster) zz;
@@ -2016,7 +2014,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             if (null == next[47]) {
                 next[47] = "";
             }
-           
+
             if (employeeAdvanceSearch.getFatherName() == true) {
                 employeeInfoList.add("" + next[2]);
             }
@@ -2236,6 +2234,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             double holiday = 0;
                             double tr = 0;
                             double ar = 0;
+                            double mtl = 0;
+                            double ptl = 0;
+                            double coff = 0;
+                            double lwp = 0;
                             //                int zz = 0;
                             for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
                                 rownum = rownum + 1;
@@ -2310,6 +2312,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         if (firstIn.contains("Sick Leave")) {
                                             sl = sl + 1;
                                         }
+                                        if (firstIn.contains("Maternity Leave")) {
+                                            mtl = mtl + 1;
+                                        }
+                                        if (firstIn.contains("Paternity Leave")) {
+                                            ptl = ptl + 1;
+                                        }
+                                        if (firstIn.contains("C Off Leave")) {
+                                            coff = coff + 1;
+                                        }
+                                        if (firstIn.contains("Leave Without Pay")) {
+                                            lwp = lwp + 1;
+                                        }
                                         cell6.setCellValue("" + next[1]);
                                     } else if (!firstIn.contains("`") && firstIn.contains("?") && !firstIn.contains("AB") && !firstIn.equals("WO") && !firstIn.contains("TR") && !firstIn.contains("AR")) {
                                         String[] hostring = firstIn.split("\\?");
@@ -2346,6 +2360,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                             }
                                             if (firstIn.contains("Sick Leave")) {
                                                 sl = sl - 0.5;
+                                            }
+                                            if (firstIn.contains("Maternity Leave")) {
+                                                mtl = mtl - 0.5;
+                                            }
+                                            if (firstIn.contains("Paternity Leave")) {
+                                                ptl = ptl - 0.5;
+                                            }
+                                            if (firstIn.contains("C Off Leave")) {
+                                                coff = coff - 0.5;
+                                            }
+                                            if (firstIn.contains("Leave Without Pay")) {
+                                                lwp = lwp - 0.5;
                                             }
                                         }
 
@@ -2489,6 +2515,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                     if (leave1[0].contains("Sick Leave")) {
                                                         sl = sl + 0.5;
                                                     }
+                                                    if (leave1[0].contains("Maternity Leave")) {
+                                                        mtl = mtl + 0.5;
+                                                    }
+                                                    if (leave1[0].contains("Paternity Leave")) {
+                                                        ptl = ptl + 0.5;
+                                                    }
+                                                    if (leave1[0].contains("C Off Leave")) {
+                                                        coff = coff + 0.5;
+                                                    }
+                                                    if (leave1[0].contains("Leave Without Pay")) {
+                                                        lwp = lwp + 0.5;
+                                                    }
                                                     cell8.setCellValue(" " + leave1[0]);
                                                 }
 
@@ -2535,6 +2573,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 }
                                                 if (leave1[0].contains("Sick Leave")) {
                                                     sl = sl + 0.5;
+                                                }
+                                                if (leave1[0].contains("Maternity Leave")) {
+                                                    mtl = mtl + 0.5;
+                                                }
+                                                if (leave1[0].contains("Paternity Leave")) {
+                                                    ptl = ptl + 0.5;
+                                                }
+                                                if (leave1[0].contains("C Off Leave")) {
+                                                    coff = coff + 0.5;
+                                                }
+                                                if (leave1[0].contains("Leave Without Pay")) {
+                                                    lwp = lwp + 0.5;
                                                 }
                                                 cell8.setCellValue(" " + leave1[0]);
 
@@ -2758,13 +2808,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 diff1 = userTimeOut.getTime() - userTimeIn.getTime();
                                             }
 
+                                        } else if (userTimeOut.before(userTimeIn)) {
+                                            diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
                                         } else {
-                                            if (userTimeOut.before(userTimeIn)) {
-                                                diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
-                                            } else {
-                                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
-                                            }
-
+                                            diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                                         }
                                         long diffMinutes1 = diff1 / (60 * 1000);
 
@@ -2773,6 +2820,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 cell9.setCellValue("AR/P");
                                                 ar = ar + 0.5;
                                                 cell9.setCellStyle(styleblue);
+
                                             } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
                                                 if (secondHalf.contains("*")) {
                                                     String[] shortArray = secondHalf.split("\\*");
@@ -2844,6 +2892,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 }
                                                 if (leave1[0].contains("Sick Leave")) {
                                                     sl = sl + 0.5;
+                                                }
+                                                if (leave1[0].contains("Maternity Leave")) {
+                                                    mtl = mtl + 0.5;
+                                                }
+                                                if (leave1[0].contains("Paternity Leave")) {
+                                                    ptl = ptl + 0.5;
+                                                }
+                                                if (leave1[0].contains("C Off Leave")) {
+                                                    coff = coff + 0.5;
+                                                }
+                                                if (leave1[0].contains("Leave Without Pay")) {
+                                                    lwp = lwp + 0.5;
                                                 }
                                                 cell9.setCellValue(" " + leave1[0]);
 
@@ -2950,13 +3010,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 diff1 = userTimeOut.getTime() - userTimeIn.getTime();
                                             }
 
+                                        } else if (userTimeOut.before(userTimeIn)) {
+                                            diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
                                         } else {
-                                            if (userTimeOut.before(userTimeIn)) {
-                                                diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
-                                            } else {
-                                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
-                                            }
-
+                                            diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                                         }
                                         totalDayTime = diff1 / (60 * 1000);
 
@@ -3100,6 +3157,30 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     cell22.setCellStyle(styleblue);
                                     CellUtil.setAlignment(cell22, firstFWorkbook, CellStyle.ALIGN_CENTER);
                                 }
+                                if (coff != 0) {
+                                    Cell cell23 = row13.createCell(y);
+                                    cell23.setCellValue("COFF");
+                                    cell23.setCellStyle(styleblue);
+                                    CellUtil.setAlignment(cell23, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (mtl != 0) {
+                                    Cell cell24 = row13.createCell(y);
+                                    cell24.setCellValue("MTL");
+                                    cell24.setCellStyle(styleblue);
+                                    CellUtil.setAlignment(cell24, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (ptl != 0) {
+                                    Cell cell25 = row13.createCell(y);
+                                    cell25.setCellValue("PTL");
+                                    cell25.setCellStyle(styleblue);
+                                    CellUtil.setAlignment(cell25, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (lwp != 0) {
+                                    Cell cell26 = row13.createCell(y);
+                                    cell26.setCellValue("LWP");
+                                    cell26.setCellStyle(styleblue);
+                                    CellUtil.setAlignment(cell26, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
                                 break;
                             }
 
@@ -3184,6 +3265,30 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     cell22.setCellValue(tr);
                                     CellUtil.setAlignment(cell22, firstFWorkbook, CellStyle.ALIGN_CENTER);
                                 }
+                                if (coff != 0) {
+                                    Cell cell23 = row12.createCell(x);
+                                    cell23.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell23.setCellValue(coff);
+                                    CellUtil.setAlignment(cell23, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (mtl != 0) {
+                                    Cell cell24 = row12.createCell(x);
+                                    cell24.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell24.setCellValue(mtl);
+                                    CellUtil.setAlignment(cell24, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (ptl != 0) {
+                                    Cell cell25 = row12.createCell(x);
+                                    cell25.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell25.setCellValue(ptl);
+                                    CellUtil.setAlignment(cell25, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (lwp != 0) {
+                                    Cell cell26 = row12.createCell(x);
+                                    cell26.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell26.setCellValue(lwp);
+                                    CellUtil.setAlignment(cell26, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
                                 break;
                             }
 
@@ -3209,6 +3314,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             double holiday = 0;
                             double tr = 0;
                             double ar = 0;
+                            double coff = 0;
+                            double mtl = 0;
+                            double ptl = 0;
+                            double lwp = 0;
                             //                int zz = 0;
                             for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
                                 rownum = rownum + 1;
@@ -3280,6 +3389,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         }
                                         if (firstIn.contains("Sick Leave")) {
                                             sl = sl + 1;
+                                        }
+                                        if (firstIn.contains("Maternity Leave")) {
+                                            mtl = mtl + 1;
+                                        }
+                                        if (firstIn.contains("Paternity Leave")) {
+                                            ptl = ptl + 1;
+                                        }
+                                        if (firstIn.contains("C Off Leave")) {
+                                            coff = coff + 1;
+                                        }
+                                        if (firstIn.contains("Leave Without Pay")) {
+                                            lwp = lwp + 1;
                                         }
                                         cell6.setCellValue("" + next[1]);
                                     } else if (!firstIn.contains("`") && firstIn.contains("?") && !firstIn.contains("AB") && !firstIn.equals("WO") && !firstIn.contains("TR") && !firstIn.contains("AR")) {
@@ -3432,6 +3553,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 }
                                                 if (leave1[0].contains("Sick Leave")) {
                                                     sl = sl + 0.5;
+                                                }
+                                                if (leave1[0].contains("Maternity Leave")) {
+                                                    mtl = mtl + 0.5;
+                                                }
+                                                if (leave1[0].contains("Paternity Leave")) {
+                                                    ptl = ptl + 0.5;
+                                                }
+                                                if (leave1[0].contains("C Off Leave")) {
+                                                    coff = coff + 0.5;
+                                                }
+                                                if (leave1[0].contains("Leave Without Pay")) {
+                                                    lwp = lwp + 0.5;
                                                 }
                                                 cell8.setCellValue(" " + leave1[0]);
 
@@ -3595,6 +3728,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 if (leave1[0].contains("Sick Leave")) {
                                                     sl = sl + 0.5;
                                                 }
+                                                if (leave1[0].contains("Maternity Leave")) {
+                                                    mtl = mtl + 0.5;
+                                                }
+                                                if (leave1[0].contains("Paternity Leave")) {
+                                                    ptl = ptl + 0.5;
+                                                }
+                                                if (leave1[0].contains("C Off Leave")) {
+                                                    coff = coff + 0.5;
+                                                }
+                                                if (leave1[0].contains("Leave Without Pay")) {
+                                                    lwp = lwp + 0.5;
+                                                }
                                                 cell9.setCellValue(" " + leave1[0]);
 
                                             } else if (leave1[0].contains("AR")) {
@@ -3722,6 +3867,30 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     cell22.setCellStyle(styleblue);
                                     CellUtil.setAlignment(cell22, firstFWorkbook, CellStyle.ALIGN_CENTER);
                                 }
+                                if (coff != 0) {
+                                    Cell cell23 = row13.createCell(y);
+                                    cell23.setCellValue("COFF");
+                                    cell23.setCellStyle(styleblue);
+                                    CellUtil.setAlignment(cell23, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (mtl != 0) {
+                                    Cell cell24 = row13.createCell(y);
+                                    cell24.setCellValue("MTL");
+                                    cell24.setCellStyle(styleblue);
+                                    CellUtil.setAlignment(cell24, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (ptl != 0) {
+                                    Cell cell25 = row13.createCell(y);
+                                    cell25.setCellValue("PTL");
+                                    cell25.setCellStyle(styleblue);
+                                    CellUtil.setAlignment(cell25, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (lwp != 0) {
+                                    Cell cell26 = row13.createCell(y);
+                                    cell26.setCellValue("LWP");
+                                    cell26.setCellStyle(styleblue);
+                                    CellUtil.setAlignment(cell26, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
                                 break;
                             }
 
@@ -3806,6 +3975,30 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     cell22.setCellValue(tr);
                                     CellUtil.setAlignment(cell22, firstFWorkbook, CellStyle.ALIGN_CENTER);
                                 }
+                                if (coff != 0) {
+                                    Cell cell23 = row12.createCell(x);
+                                    cell23.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell23.setCellValue(coff);
+                                    CellUtil.setAlignment(cell23, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (mtl != 0) {
+                                    Cell cell24 = row12.createCell(x);
+                                    cell24.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell24.setCellValue(mtl);
+                                    CellUtil.setAlignment(cell24, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (ptl != 0) {
+                                    Cell cell25 = row12.createCell(x);
+                                    cell25.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell25.setCellValue(ptl);
+                                    CellUtil.setAlignment(cell25, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (lwp != 0) {
+                                    Cell cell26 = row12.createCell(x);
+                                    cell26.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell26.setCellValue(lwp);
+                                    CellUtil.setAlignment(cell26, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
                                 break;
                             }
                         }
@@ -3822,6 +4015,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         }
 
         String appPath = request.getServletContext().getRealPath("");
+
         try {
             String filePath = appPath + File.separator + "StorageYard" + File.separator
                     + "Other" + File.separator + "UserDoc" + File.separator
@@ -3843,9 +4037,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
         String fullPath = appPath + filePath;
 
-        request.setAttribute("filePath", fullPath);
+        request.setAttribute(
+                "filePath", fullPath);
 
         DownloadFile downloadFile = new DownloadFile();
+
         downloadFile.doDownload(request, response);
         mv = employeeDataSearch(request, response);
         return mv;
@@ -5439,13 +5635,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     } else {
                                         diff1 = userTimeOut.getTime() - userTimeIn.getTime();
                                     }
+                                } else if (userTimeOut.before(userTimeIn)) {
+                                    diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
                                 } else {
-                                    if (userTimeOut.before(userTimeIn)) {
-                                        diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
-                                    } else {
-                                        diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
-                                    }
-
+                                    diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                                 }
                                 long diffMinutes1 = diff1 / (60 * 1000);
 
@@ -6904,13 +7097,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 diff1 = userTimeOut.getTime() - userTimeIn.getTime();
                                             }
 
+                                        } else if (userTimeOut.before(userTimeIn)) {
+                                            diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
                                         } else {
-                                            if (userTimeOut.before(userTimeIn)) {
-                                                diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
-                                            } else {
-                                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
-                                            }
-
+                                            diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                                         }
                                         long diffMinutes1 = diff1 / (60 * 1000);
 
@@ -7088,13 +7278,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 diff1 = userTimeOut.getTime() - userTimeIn.getTime();
                                             }
 
+                                        } else if (userTimeOut.before(userTimeIn)) {
+                                            diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
                                         } else {
-                                            if (userTimeOut.before(userTimeIn)) {
-                                                diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
-                                            } else {
-                                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
-                                            }
-
+                                            diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                                         }
                                         totalDayTime = diff1 / (60 * 1000);
 
@@ -9012,13 +9199,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 diff1 = userTimeOut.getTime() - userTimeIn.getTime();
                                             }
 
+                                        } else if (userTimeOut.before(userTimeIn)) {
+                                            diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
                                         } else {
-                                            if (userTimeOut.before(userTimeIn)) {
-                                                diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
-                                            } else {
-                                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
-                                            }
-
+                                            diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                                         }
                                         long diffMinutes1 = diff1 / (60 * 1000);
 
@@ -9196,13 +9380,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                                 diff1 = userTimeOut.getTime() - userTimeIn.getTime();
                                             }
 
+                                        } else if (userTimeOut.before(userTimeIn)) {
+                                            diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
                                         } else {
-                                            if (userTimeOut.before(userTimeIn)) {
-                                                diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
-                                            } else {
-                                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
-                                            }
-
+                                            diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                                         }
                                         totalDayTime = diff1 / (60 * 1000);
 

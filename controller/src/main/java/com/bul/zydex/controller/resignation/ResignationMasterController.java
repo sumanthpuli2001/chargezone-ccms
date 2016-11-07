@@ -115,36 +115,44 @@ public class ResignationMasterController extends ResignationMasterAbstract {
 //            if (resignationMaster.getManagerComment() == null) {
 //                resignationMaster.setManagerComment(" ");
 //            }
-            resignationMasterService.create(resignationMaster);
-            if (session != null) {
-                session.setAttribute("isExistingResignationDataExist", RESIGNATION_GENERATED_FLAG);
-                //this is for showing resignation result link on navbar without terminating session.
-            }
-            //    Email Sent to ReportingManager1
-            try {
-                EmailTemplate emailTemplate = new EmailTemplate();
-                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                DesignationMaster designationMaster = new DesignationMaster();
-                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                EmployeeMaster employeeMasterHr = new EmployeeMaster();
-                employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
-                // id 59 is status for Resignnation apply
-                emailTemplate = emailTemplateService.readById(59);
-                String To = employeeMasterHr.getOfficeEmailId();
-                String from = employeeMasterModel.getOfficeEmailId();
-                String Subject = emailTemplate.getSubject();
-                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-                String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
-                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                sendMail.sendMail(from, To, Subject, msg);
-            } catch (Exception e) {
 
+            List<?> resList = resignationMasterService.readExistingList(id);
+            if (resList.isEmpty()) {
+                resignationMasterService.create(resignationMaster);
+                if (session != null) {
+                    session.setAttribute("isExistingResignationDataExist", RESIGNATION_GENERATED_FLAG);
+                    //this is for showing resignation result link on navbar without terminating session.
+                }
+                //    Email Sent to ReportingManager1
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                    // id 59 is status for Resignnation apply
+                    emailTemplate = emailTemplateService.readById(59);
+                    String To = employeeMasterHr.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+
+                }
+                request.setAttribute("successMessage",
+                        "Information : The Information is saved Successfully.");
+                mv.setViewName("forward:userMaster.htm?act=goToDashboard");
+            } else {
+                request.setAttribute("failureMessage",
+                        "Error :You Have Already Submit Your Resignation...");
+                mv.setViewName("forward:userMaster.htm?act=goToDashboard");
             }
-            request.setAttribute("successMessage",
-                    "Information : The Information is saved Successfully.");
-            mv.setViewName("forward:userMaster.htm?act=goToDashboard");
         }
         request.setAttribute("list", list);
         request.setAttribute("employeeMaster", employeeMaster1);

@@ -20,18 +20,23 @@ $(function () {
         xx = document.getElementById("kragoalLength").value;
         if (i == 0) {
             i = 1;
+//            alert(i);
         }
         if (i == 5) {
             alert("Your Can Enter Only 5 KRA");
         }
         if (i <= 4) {
-
-            i++;
+//            if (i == 0) {
+//                i = 1;
+//            } else {
+//                i++;
+//            }
             xx++;
+            i++;
 
 //<![CDATA[
             var clone = "<tr id='row_1_" + i + "' style='clear:both;'>"
-                    + "<td valign=\"middle\">" + i + "</td>"
+                    + "<td id='removeKRAID" + i + "' class='removeClass' style='margin: 0px;width: 45px;' valign=\"middle\">" + i + "</td>"
                     + "<td id=\"\"><textarea name=\"kraGoal" + i + "\" id=\"kraGoal" + i + "\" class=\"form-control\"></textarea><span id=\"kraGoalErr" + i + "\" style=\"color:red;\"></td>"
                     + "<td id=\"\"><textarea name=\"metric" + i + "\" id=\"metric" + i + "\" class=\"form-control\"></textarea></td>"
 
@@ -87,6 +92,7 @@ $(function () {
         }
         //]]>
         document.getElementById("countId").value = i;
+//        alert(i);
         optionsofKraCategory(i);
 //        alert("Limt" + document.getElementById("countId").value);
         document.getElementById("kragoalLength").value = xx;
@@ -214,7 +220,13 @@ function removeChild3(removeRowId_1, removeRowId_2, removeRowId_3, removeRowId_4
             for (var m = 1; m <= (val + 1); m++) {
                 try {
                     document.getElementById("removeKRAID" + m).value;
-                    $("#removeKRAID" + m).attr('id', "removeKRAID" + counter);
+                    try {
+
+                        $("#removeKRAID" + m).attr('id', "removeKRAID" + counter);
+
+                    } catch (err) {
+
+                    }
                     //replace id
                     $("#kraGoal" + m).attr('id', "kraGoal" + counter);
                     $("#metric" + m).attr('id', "metric" + counter);
@@ -243,9 +255,17 @@ function removeChild3(removeRowId_1, removeRowId_2, removeRowId_3, removeRowId_4
                     $("#employeeEndYearSelfAssesssmentGoal" + counter).attr('name', "employeeEndYearSelfAssesssmentGoal" + counter);
                     $("#managerEndYearSelfAssesssmentGoal" + counter).attr('name', "managerEndYearSelfAssesssmentGoal" + counter);
                     $("#kragoal_id" + counter).attr('name', "kragoal_id" + counter);
+//                    $("#EditByEmployee" + m).attr('onclick', "changeReadonly('" + counter + "')");
                 } catch (err) {
-                    document.getElementById("removeKRAID" + (m + 1)).value;
-                    $("#removeKRAID" + (m + 1)).attr('id', "removeKRAID" + counter);
+//                    alert('Old ' + (m + 1) + ' New ' + counter);
+//                    alert("dhaval");
+                    try {
+
+                        document.getElementById("removeKRAID" + (m + 1)).value;
+                        $("#removeKRAID" + (m + 1)).attr('id', "removeKRAID" + counter);
+                    } catch (err) {
+
+                    }
                     //repalce id
                     $("#kraGoal" + (m + 1)).attr('id', "kraGoal" + counter);
                     $("#metric" + (m + 1)).attr('id', "metric" + counter);
@@ -274,9 +294,12 @@ function removeChild3(removeRowId_1, removeRowId_2, removeRowId_3, removeRowId_4
                     $("#employeeEndYearSelfAssesssmentGoal" + counter).attr('name', "employeeEndYearSelfAssesssmentGoal" + counter);
                     $("#managerEndYearSelfAssesssmentGoal" + counter).attr('name', "managerEndYearSelfAssesssmentGoal" + counter);
                     $("#kragoal_id" + counter).attr('name', "kragoal_id" + counter);
+
                     m++;
                 }
                 document.getElementById("removeKRAID" + counter).innerHTML = counter;
+                $("#EditByEmployee" + counter).attr('onclick', "changeReadonly('" + counter + "')");
+
                 counter++;
             }
         } catch (err) {
@@ -377,6 +400,7 @@ function removeActivityChild(removeRowId_1, removeRowId_2, removeRowId_3, remove
                     m++;
                 }
                 document.getElementById("removeKRAactivitiesID" + counter).innerHTML = counter;
+                $("#EditByEmployeeact" + counter).attr('onclick', "changeReadonlyOther('" + counter + "')");
                 counter++;
             }
 
@@ -492,14 +516,17 @@ $(function () {
 //        alert("xx" + xx);
         if (a1 == 0) {
             a1 = 1;
+        } else {
+            a1++;
         }
 //        if (a1 <= 2) {
 
-        a1++;
+//        a1++;
         xx++;
 //            alert(a1);
         var clone = "<tr id='row_1_a" + a1 + "' style='clear:both;'>"
-                + "<td valign=\"middle\">" + a1 + "</td>"
+//                + "<td valign=\"middle\">" + a1 + "</td>"
+                + "<td id='removeKRAactivitiesID" + a1 + "' class='removeactivitiesClass' style='margin: 0px;width: 45px;' valign=\"middle\">" + a1 + "</td>"
                 + "<td id=\"\"><textarea name=\"kraGoal_activity" + a1 + "\" id=\"kraGoal_activity" + a1 + "\" class=\"form-control saveRequried\"></textarea><span id=\"kraGoalErr" + a1 + "\" style=\"color:red;\"></td>"
                 + "<td id=\"\"><textarea name=\"metric_activity" + a1 + "\" id=\"metric_activity" + a1 + "\" class=\"form-control saveRequried\"></textarea></td>"
 
@@ -558,7 +585,7 @@ $(function () {
                 + "<td colspan=\"4\"><b\>Managers Mid - Year Review / Evaluation For Other Projects:</b\></td>"
                 + "</tr>"
                 + "<tr id=\"row_3_a" + a1 + "\">"
-                + "<td colspan=\"4\"><textarea id=\"employeeMidYearSelfAssesssmentGoalActivities" + a1 + "\" name=\"employeeMidYearSelfAssesssmentGoalActivities" + a1 + "\" type=\"Text\" class=\"form-control saveRequried\"></textarea></td>"
+                + "<td colspan=\"4\"><textarea id=\"empMidyearSelfassessmentGoalActivities" + a1 + "\" name=\"empMidyearSelfassessmentGoalActivities" + a1 + "\" type=\"Text\" class=\"form-control saveRequried\"></textarea></td>"
                 + "<td colspan=\"4\"><textarea id=\"managerMidYearSelfAssesssmentGoalActivities" + a1 + "\" name=\"managerMidYearSelfAssesssmentGoalActivities" + a1 + "\" type=\"Text\" class=\"form-control saveRequried\"></textarea></td>"
                 + "</tr>"
 
@@ -567,7 +594,7 @@ $(function () {
                 + "<td colspan=\"4\"><b>Managers End - Year Review / Evaluation For Other Project:</b></td>"
                 + "</tr>"
                 + "<tr id=\"row_5_a" + a1 + "\">"
-                + "<td colspan=\"4\"><textarea id=\"employeeEndYearSelfAssesssmentGoalActivities" + a1 + "\" name=\"employeeEndYearSelfAssesssmentGoalActivities" + a1 + "\" type=\"Text\" class=\"form-control saveRequried\"></textarea></td>"
+                + "<td colspan=\"4\"><textarea id=\"empEndyearSelfassessmentGoalActivities" + a1 + "\" name=\"empEndyearSelfassessmentGoalActivities" + a1 + "\" type=\"Text\" class=\"form-control saveRequried\"></textarea></td>"
                 + "<td colspan=\"4\"><textarea id=\"managerEndYearSelfAssesssmentGoalActivities" + a1 + "\" name=\"managerEndYearSelfAssesssmentGoalActivities" + a1 + "\" type=\"Text\" class=\"form-control saveRequried\"></textarea></td>"
                 + "</tr>";//]]>
         $("#demo10").append(clone);
@@ -590,12 +617,12 @@ $(function () {
             document.getElementById("activity" + a1).style.pointerEvents = "none";
             document.getElementById("activity" + a1).style.cursor = "default";
 
-            var employeeMidYearSelfAssesssmentGoalActivities = document.getElementById("employeeMidYearSelfAssesssmentGoalActivities" + a1).value;
-            document.getElementById("employeeMidYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
+//            var employeeMidYearSelfAssesssmentGoalActivities = document.getElementById("empMidyearSelfassessmentGoalActivities" + a1).value;
+            document.getElementById("empMidyearSelfassessmentGoalActivities" + a1).readOnly = true;
             var managerMidYearSelfAssesssmentGoalActivities = document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + a1).value;
             document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
-            var employeeEndYearSelfAssesssmentGoalActivities = document.getElementById("employeeEndYearSelfAssesssmentGoalActivities" + a1).value;
-            document.getElementById("employeeEndYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
+            var employeeEndYearSelfAssesssmentGoalActivities = document.getElementById("empEndyearSelfassessmentGoalActivities" + a1).value;
+            document.getElementById("empEndyearSelfassessmentGoalActivities" + a1).readOnly = true;
             var managerEndYearSelfAssesssmentGoalActivities = document.getElementById("managerEndYearSelfAssesssmentGoalActivities" + a1).value;
             document.getElementById("managerEndYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
         } else if (flagMidId == 'true') {
@@ -612,13 +639,13 @@ $(function () {
 //            document.getElementById("finalScore" + i).readOnly = true;
             var managerMidYearSelfAssesssmentGoal = document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + a1).value;
             document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
-            var employeeEndYearSelfAssesssmentGoal = document.getElementById("employeeEndYearSelfAssesssmentGoalActivities" + a1).value;
-            document.getElementById("employeeEndYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
+            var employeeEndYearSelfAssesssmentGoal = document.getElementById("empEndyearSelfassessmentGoalActivities" + a1).value;
+            document.getElementById("empEndyearSelfassessmentGoalActivities" + a1).readOnly = true;
             var managerEndYearSelfAssesssmentGoal = document.getElementById("managerEndYearSelfAssesssmentGoalActivities" + a1).value;
             document.getElementById("managerEndYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
 ////validation
             document.getElementById("midYearDivOther" + a1).required = true;
-            document.getElementById("employeeMidYearSelfAssesssmentGoalActivities" + a1).required = true;
+            document.getElementById("empMidyearSelfassessmentGoalActivities" + a1).required = true;
 //            document.getElementById("empMidyearSelfassOtheractivty").required = true;
         } else if (flagEndId == 'true') {
 //            alert("Thired YEAR" + flagEndId);
@@ -628,11 +655,13 @@ $(function () {
 //            document.getElementById("weightage" + i).readOnly = true;
             document.getElementById("midYearDivOther" + a1).style.pointerEvents = "none";
             document.getElementById("midYearDivOther" + a1).style.cursor = "default";
+            document.getElementById("activity" + a1).style.pointerEvents = "none";
+            document.getElementById("activity" + a1).style.cursor = "default";
 //            var finalScore = document.getElementById("finalScore" + i).value;
 //            document.getElementById("finalScore" + i).readOnly = true;
-            var employeeMidYearSelfAssesssmentGoalActivities = document.getElementById("employeeMidYearSelfAssesssmentGoalActivities" + a1).value;
-            document.getElementById("employeeMidYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
-            var managerMidYearSelfAssesssmentGoalActivities = document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + a1).value;
+//            var employeeMidYearSelfAssesssmentGoalActivities = document.getElementById("empMidyearSelfassessmentGoalActivities" + a1).value;
+            document.getElementById("empMidyearSelfassessmentGoalActivities" + a1).readOnly = true;
+//            var managerMidYearSelfAssesssmentGoalActivities = document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + a1).value;
             document.getElementById("managerMidYearSelfAssesssmentGoalActivities" + a1).readOnly = true;
 //            var employeeEndYearSelfAssesssmentGoal = document.getElementById("employeeEndYearSelfAssesssmentGoal" + i).value;
 //            document.getElementById("employeeEndYearSelfAssesssmentGoal" + i).readOnly = true;
@@ -1188,6 +1217,7 @@ function weightageCountEmp() {
 //    alert('aaaaaa' + id);
     var total = 1;
     var countId = document.getElementById("countId").value;
+//    alert('aaaaaa'+countId);
     var weightage = 0;
     var flag1 = false;
     while (total <= countId) {
@@ -1199,6 +1229,7 @@ function weightageCountEmp() {
             flag1 = true;
         }
         if (weightage > 75) {
+           
             weightage -= parseFloat(val);
             weitageAlert();
             document.getElementById("weightage" + total).value = "";
@@ -1222,6 +1253,7 @@ function weightageCountEmp() {
 
         total++;
     }
+//    alert("Dhabal" + weightage);
     document.getElementById("weightageScore").value = weightage;
     if (countId === '1' && weightage < 75) {
         document.getElementById("weightageScore").value = "";
@@ -2429,8 +2461,9 @@ function performancefinalScoreRatingsEmployee() {
     }
 
 }
-function changeReadonly(id) {
-//    alert("hello");
+function changeReadonly1(id) {
+    alert("hello" + id);
+
     var kra = document.getElementById('kraGoal' + id);
     var metric = document.getElementById('metric' + id);
     var midYear = document.getElementById('midYearDiv' + id);

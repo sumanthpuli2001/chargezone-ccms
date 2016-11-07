@@ -1129,7 +1129,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     }
 
                     if (!leaveTypeMaster.getLeaveType().contains("Short Leave")) {
-                        if (null != leaveEmployeeDetail.getNoOfDays() && leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave()) && !leaveTypeMaster.getLeaveType().contains("Maternity Leave")) {
+                        if (null != leaveEmployeeDetail.getNoOfDays() && leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave()) 
+                                && !leaveTypeMaster.getLeaveType().contains("Maternity Leave") && !leaveTypeMaster.getLeaveType().contains("C Off Leave")) {
                             request.setAttribute("failureMessage",
                                     "Error :No Of Days is Grater than maximum allowed Days...");
                             mv = viewLeaveRequest(request, response);
@@ -1949,23 +1950,6 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             } else {
                 balanceDay = employeeLeaveBalance.getNoOfLeaveRemain();
                 noOfDay = leaveEmployeeDetail.getNoOfDays();
-                noOfDay = leaveEmployeeDetail.getNoOfDays();
-                String noOfHour = "";
-                EmployeeMaster employeeMasterModel1 = new EmployeeMaster();
-                employeeMasterModel1 = employeeMasterService.readById(leaveEmployeeDetail.getEmployeeMaster().getId());
-                COffLeaveMaster cOffLeaveMaster = new COffLeaveMaster();
-                cOffLeaveMaster.setZydexLocationMaster(employeeMasterModel1.getZydexLocationMaster());
-                List list1 = cOffLeaveMasterService.readByDept(cOffLeaveMaster);
-                try {
-                    cOffLeaveMaster = (COffLeaveMaster) list1.get(0);
-                    noOfHour = "0." + cOffLeaveMaster.getHoursNo();
-                } catch (Exception e) {
-                }
-                // 11 No Id Is C-Off Id*****************
-                if (leaveEmployeeDetail.getLeaveTypeMaster().getId().equals(11)) {
-                    noOfDay = Float.parseFloat(noOfHour);
-                }
-                // 11 No Id Is C-Off Id*****************
                 balanceDay = balanceDay + noOfDay;
                 employeeLeaveBalance.setNoOfLeaveRemain(balanceDay);
                 employeeLeaveBalanceService.update(employeeLeaveBalance);

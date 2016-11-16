@@ -21,23 +21,23 @@ import org.springframework.web.servlet.ModelAndView;
  * @author BlackBull
  */
 public class PmpFormStatusMasterController extends PmpFormStatusMasterAbstract {
-    
+
     public ModelAndView showpmpStatusMaster(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mv = new ModelAndView();
-        
+
         List<?> pmpFormList = pmpFormStatusMasterService.read();
         for (Object o : pmpFormList) {
             PmpFormStatusMaster pfsm = (PmpFormStatusMaster) o;
             EmployeeMaster employeeMaster = employeeMasterService.readById(pfsm.getEmployeeMaster().getId());
             pfsm.setEmployeeMaster(employeeMaster);
         }
-        
+
         mv.getModelMap().put("list", pmpFormList);
         mv.setViewName("PmpFormStatus/PmpFormStatusMasterShow");
         return mv;
-        
+
     }
-    
+
     public ModelAndView viewClick(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mv = new ModelAndView();
         PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
@@ -48,14 +48,14 @@ public class PmpFormStatusMasterController extends PmpFormStatusMasterAbstract {
         mv.getModelMap().put("pmpFormStatusMaster", pmpFormStatusMaster);
         mv.setViewName("PmpFormStatus/PmpFormStatusMasterEdit");
         return mv;
-        
+
     }
-    
+
     public ModelAndView editSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
-        
+
         String id = request.getParameter("id");
         pmpFormStatusMaster = pmpFormStatusMasterService.readById(Integer.parseInt(id));
         bind(request, pmpFormStatusMaster);
@@ -78,28 +78,49 @@ public class PmpFormStatusMasterController extends PmpFormStatusMasterAbstract {
         if (manside == true) {
             manstatus = 1;
         }
-        
+        boolean compmanside = pmpFormStatusMaster.getCompentencyManagerSide();
+        boolean compempside = pmpFormStatusMaster.getCompentencyEmployeeSide();
+        boolean compstartstatus = pmpFormStatusMaster.getCompentencyStartYearStatus();
+        boolean compmidstatus = pmpFormStatusMaster.getCompentencyMidYearStatus();
+        boolean compendstatus = pmpFormStatusMaster.getCompentencyEndYearStatus();
+        int compempstatus = 0;
+        int compmanstatus = 0;
+
+        if (compempside == true) {
+            compempstatus = 1;
+        }
+        if (compmanside == true) {
+            compmanstatus = 1;
+        }
+
         AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
         appraisalPerformanceKra.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
         List<?> empKraList = appraisalPerformanceKraService.readByAppraisalPerformancekraId(appraisalPerformanceKra);
-        
+
         AppraisalPerformanceActivities appraisalPerformanceActivities = new AppraisalPerformanceActivities();
         appraisalPerformanceActivities.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
         List<?> empActivityList = appraisalPerformanceActivitiesService.readByAppraisalKraGoalActivities(appraisalPerformanceActivities);
-        
+
         if (!manside && !empside) {
             request.setAttribute("failureMessage",
                     "Information : At a Time Only Manager Or Employee Side Unlock The Form.");
             mv = viewClick(request, response);
-            
+
+        } else if (!compmanside && !compempside) {
+            request.setAttribute("failureMessage",
+                    "Information : At a Time Only Manager Or Employee Side Unlock The Form.");
+            mv = viewClick(request, response);
         } else {
             pmpFormStatusMasterService.update(pmpFormStatusMaster);
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
             appraisalPerformanceMaster.setEmployeeStatus(empstatus);
             appraisalPerformanceMaster.setManagerkraStatus(manstatus);
+            appraisalPerformanceMaster.setEmployeeCompetencyStatus(compempstatus);
+            appraisalPerformanceMaster.setManagerCompetencyStatus(compmanstatus);
+
             appraisalPerformanceService.update(appraisalPerformanceMaster);
-            
+
             if (!empKraList.isEmpty()) {
                 for (Object o : empKraList) {
                     appraisalPerformanceKra = (AppraisalPerformanceKra) o;
@@ -111,7 +132,7 @@ public class PmpFormStatusMasterController extends PmpFormStatusMasterAbstract {
                         if (!empside) {
                             appraisalPerformanceKra.setMidyearEmpSelfassStatus(0);
                             appraisalPerformanceKraService.update(appraisalPerformanceKra);
-                            
+
                         }
                     }
                     if (!endstatus) {
@@ -122,10 +143,10 @@ public class PmpFormStatusMasterController extends PmpFormStatusMasterAbstract {
                         if (!empside) {
                             appraisalPerformanceKra.setEndyearEmpSelfassStatus(0);
                             appraisalPerformanceKraService.update(appraisalPerformanceKra);
-                            
+
                         }
                     }
-                    
+
                 }
             }
             if (!empActivityList.isEmpty()) {
@@ -139,7 +160,7 @@ public class PmpFormStatusMasterController extends PmpFormStatusMasterAbstract {
                         if (!empside) {
                             appraisalPerformanceActivities.setMidyearEmpSelfassActivityStatus(0);
                             appraisalPerformanceActivitiesService.update(appraisalPerformanceActivities);
-                            
+
                         }
                     }
                     if (!endstatus) {
@@ -150,17 +171,17 @@ public class PmpFormStatusMasterController extends PmpFormStatusMasterAbstract {
                         if (!empside) {
                             appraisalPerformanceActivities.setEndyearEmpSelfassActivityStatus(0);
                             appraisalPerformanceActivitiesService.update(appraisalPerformanceActivities);
-                            
+
                         }
                     }
-                    
+
                 }
             }
-            
+
             mv = showpmpStatusMaster(request, response);
-            
+
         }
         return mv;
-        
+
     }
 }

@@ -15,5 +15,7 @@ import java.util.List;
 public interface TravelDetailDAO<T> extends GenericsDAO<T> {
 
     public List<?> readTravelDetail(T object);
+  
+    public List<?> readByTravelId(int id);
 
 }

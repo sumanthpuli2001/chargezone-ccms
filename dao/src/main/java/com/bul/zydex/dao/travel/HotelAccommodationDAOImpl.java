@@ -31,4 +31,16 @@ public class HotelAccommodationDAOImpl<T> extends GenericsDAOImpl<T> implements 
 
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> readByTravelId(int id) {
+
+        String query = "";
+
+        query += ""
+                + " FROM HotelAccommodation a"
+                + " WHERE a.travelRequestMaster.id=" + id;
+
+        return getHibernateTemplate().find(query);
+    }
 }

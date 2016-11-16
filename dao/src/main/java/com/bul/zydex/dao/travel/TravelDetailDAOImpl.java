@@ -33,4 +33,15 @@ public class TravelDetailDAOImpl<T> extends GenericsDAOImpl<T> implements Travel
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readByTravelId(int id) {
+         String query = "";
+
+        query += ""
+                + " FROM TravelDetail a"
+                + " WHERE a.travelRequestMaster.id=" + id; //                + " Where a.employeeMaster=" + travelRequestMaster.getEmployeeMaster().getId();
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

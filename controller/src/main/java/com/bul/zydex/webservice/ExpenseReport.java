@@ -841,6 +841,7 @@ public class ExpenseReport extends ExpenseReportAbstarct {
             String dateOfsub = expenseMaster.getDateOfSubmit();
             List<?> travelTypeList = new ArrayList<Object>();
             List<?> relocationOtherTypeList = new ArrayList<Object>();
+            
             List<?> othersList = new ArrayList<Object>();
             List<?> expreconsilationList = new ArrayList<Object>();
 
@@ -849,7 +850,7 @@ public class ExpenseReport extends ExpenseReportAbstarct {
                 for (Object o : travelTypeList) {
                     ExpenseTravelType expenseTravelType1 = (ExpenseTravelType) o;
                     int expTravelId = expenseTravelType1.getId();
-                    int status = expenseTravelType1.getStatus();
+                    int status = expenseTravelType1.getStatus();                                                                                                                                                   
                     if (status != 1) {
                         expenseTravelTypeService.delete(expTravelId);
                     }

@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -250,7 +251,8 @@ public class TravelWebService extends TravelWebServiceAbstract {
             }
             data.put("reasonForTravel", travelRequestMaster.getPurpose());
             CurrencyMaster currencyMaster = new CurrencyMaster();
-            if (travelRequestMaster.getTravelType().toString().contains("International")) {
+            if (travelRequestMaster.getTravelType().toString().contains("International") 
+                    && travelRequestMaster.getCashRequired().contains("Yes")) {
                 String currencyId = travelRequestMaster.getCurrency();
                 currencyMaster = currencyMasterService.readById(Integer.parseInt(currencyId));
                 String currency = currencyMaster.getCurrencyName();
@@ -526,6 +528,26 @@ public class TravelWebService extends TravelWebServiceAbstract {
             JSONObject data = doPost(request);
             String travelRequestId = request.getParameter("travelId");
             TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+            List<?> travelDetailList = new ArrayList<Object>();
+            List<?> hotelAccommodationList = new ArrayList<Object>();
+
+            travelDetailList = travelDetailService.readByTravelId(Integer.parseInt(travelRequestId));
+            if (!travelDetailList.isEmpty()) {
+                for (Object o : travelDetailList) {
+                    TravelDetail td = (TravelDetail) o;
+                    int travelDetailId = td.getId();
+                    travelDetailService.delete(travelDetailId);
+                }
+            }
+            
+            hotelAccommodationList = hotelAccommodationService.readByTravelId(Integer.parseInt(travelRequestId));
+            if (!hotelAccommodationList.isEmpty()) {
+                for (Object o : hotelAccommodationList) {
+                    HotelAccommodation ha=(HotelAccommodation) o;
+                    int hotelAccId = ha.getId();
+                    hotelAccommodationService.delete(hotelAccId);
+                }
+            }
             travelRequestMaster = travelRequestMasterService.readById(Integer.parseInt(travelRequestId));
             int employeeId = travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId();
             employeeMaster = employeeMasterService.readById(employeeId);
@@ -577,8 +599,7 @@ public class TravelWebService extends TravelWebServiceAbstract {
                     travelDetail.setComments(travelDetailobj.getString("remarks"));
                     String travelDetailID = travelDetailobj.getString("travelDetailId");
                     if (!travelDetailID.equals("")) {
-                        travelDetail.setId(Integer.parseInt(travelDetailID));
-                        travelDetailService.update(travelDetail);
+                        travelDetailService.create(travelDetail);
                     } else {
                         travelDetailService.create(travelDetail);
                     }
@@ -597,8 +618,7 @@ public class TravelWebService extends TravelWebServiceAbstract {
                     hotelAccommodation.setComments(hotelDetailObj.getString("remarks"));
                     String hotelDetailId = hotelDetailObj.getString("hotelDetailId");
                     if (!hotelDetailId.equals("")) {
-                        hotelAccommodation.setId(Integer.parseInt(hotelDetailObj.getString("hotelDetailId")));
-                        hotelAccommodationService.update(hotelAccommodation);
+                        hotelAccommodationService.create(hotelAccommodation);
                     } else {
                         hotelAccommodationService.create(hotelAccommodation);
                     }

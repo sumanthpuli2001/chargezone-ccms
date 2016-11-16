@@ -31,4 +31,9 @@ public class TravelDetailServiceImpl<T> extends GenericsServiceImpl<T> implement
         return travelDetailDAO.readTravelDetail(object);
     }
 
+    @Override
+    public List<?> readByTravelId(int id) {
+        return travelDetailDAO.readByTravelId(id);
+    }
+
 }

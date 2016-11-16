@@ -66,9 +66,9 @@
 
                                         <div class="form-group">
 
-                                        <div class="col-sm-4">
-                                            <label>Start Year Status</label>&nbsp;&nbsp;
-                                            <fieldset id="group1">
+                                            <div class="col-sm-4">
+                                                <label>Start Year Status</label>&nbsp;&nbsp;
+                                                <fieldset id="group1">
                                                 <form:radiobutton path="startYearStatus" value="true"/>Lock
                                                 <form:radiobutton path="startYearStatus" value="false"/>Unlock
                                             </fieldset>
@@ -103,6 +103,60 @@
                                             <fieldset id="group1">
                                                 <form:radiobutton path="employeeSide" value="true"/>Lock
                                                 <form:radiobutton path="employeeSide" value="false"/>Unlock
+                                            </fieldset>
+                                        </div>
+
+                                    </div>
+
+                                    <section class="content-header">
+                                        <h1>Compentency Status</h1>
+                                    </section>
+                                    &nbsp;
+                                    &nbsp;
+                                    &nbsp;
+                                    &nbsp;
+                                    &nbsp;
+                                    &nbsp;
+
+                                    <div class="form-group">
+
+                                        <div class="col-sm-4">
+                                            <label>Compentency Start Year Status</label>&nbsp;&nbsp;
+                                            <fieldset id="group1">
+                                                <form:radiobutton path="compentencyStartYearStatus" value="true"/>Lock
+                                                <form:radiobutton path="compentencyStartYearStatus" value="false"/>Unlock
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label>Compentency Mid Year Status</label>&nbsp;&nbsp;
+                                            <fieldset id="group1">
+                                                <form:radiobutton path="compentencyMidYearStatus" value="true"/>Lock
+                                                <form:radiobutton path="compentencyMidYearStatus" value="false"/>Unlock
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <label>Compentency End Year Status</label>&nbsp;&nbsp;
+                                            <fieldset id="group1">
+                                                <form:radiobutton path="compentencyEndYearStatus" value="true"/>Lock
+                                                <form:radiobutton path="compentencyEndYearStatus" value="false"/>Unlock
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4">
+                                            <label>Compentency Manager Side</label>&nbsp;&nbsp;
+                                            <fieldset id="group1">
+                                                <form:radiobutton path="compentencyManagerSide" value="true" onclick="alert('aaaaaaa');"/>Lock
+                                                <form:radiobutton path="compentencyManagerSide" value="false" />Unlock
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <label>Compentency Employee Side</label>&nbsp;&nbsp;
+                                            <fieldset id="group1">
+                                                <form:radiobutton path="compentencyEmployeeSide" value="true"/>Lock
+                                                <form:radiobutton path="compentencyEmployeeSide" value="false"/>Unlock
                                             </fieldset>
                                         </div>
 

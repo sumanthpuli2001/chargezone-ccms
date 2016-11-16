@@ -31,4 +31,9 @@ public class HotelAccommodationServiceImpl<T> extends GenericsServiceImpl<T> imp
         return hotelAccommodationDAO.readAccommodationDetail(object);
     }
 
+    @Override
+    public List<?> readByTravelId(int id) {
+        return hotelAccommodationDAO.readByTravelId(id);
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.bul.zydex.model;
 
-
 import com.bul.zydex.model.EmployeeMaster;
 
 /*
@@ -8,20 +7,25 @@ import com.bul.zydex.model.EmployeeMaster;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author BlackBull
  */
-public class PmpFormStatusMaster  implements java.io.Serializable {
-    
-     private Integer id;
-     private EmployeeMaster employeeMaster;
-     private Boolean startYearStatus;
-     private Boolean midYearStatus;
-     private Boolean endYearStatus;
-     private Boolean managerSide;
-     private Boolean employeeSide;
+public class PmpFormStatusMaster implements java.io.Serializable {
+
+    private Integer id;
+    private EmployeeMaster employeeMaster;
+    private Boolean startYearStatus;
+    private Boolean midYearStatus;
+    private Boolean endYearStatus;
+    private Boolean managerSide;
+    private Boolean employeeSide;
+    private Boolean compentencyStartYearStatus;
+    private Boolean compentencyMidYearStatus;
+    private Boolean compentencyEndYearStatus;
+    private Boolean compentencyManagerSide;
+    private Boolean compentencyEmployeeSide;
+
     public Integer getId() {
         return id;
     }
@@ -77,9 +81,45 @@ public class PmpFormStatusMaster  implements java.io.Serializable {
     public void setEmployeeSide(Boolean employeeSide) {
         this.employeeSide = employeeSide;
     }
-    
-    
-     
-     
-    
+
+    public Boolean getCompentencyStartYearStatus() {
+        return compentencyStartYearStatus;
+    }
+
+    public void setCompentencyStartYearStatus(Boolean compentencyStartYearStatus) {
+        this.compentencyStartYearStatus = compentencyStartYearStatus;
+    }
+
+    public Boolean getCompentencyMidYearStatus() {
+        return compentencyMidYearStatus;
+    }
+
+    public void setCompentencyMidYearStatus(Boolean compentencyMidYearStatus) {
+        this.compentencyMidYearStatus = compentencyMidYearStatus;
+    }
+
+    public Boolean getCompentencyEndYearStatus() {
+        return compentencyEndYearStatus;
+    }
+
+    public void setCompentencyEndYearStatus(Boolean compentencyEndYearStatus) {
+        this.compentencyEndYearStatus = compentencyEndYearStatus;
+    }
+
+    public Boolean getCompentencyManagerSide() {
+        return compentencyManagerSide;
+    }
+
+    public void setCompentencyManagerSide(Boolean compentencyManagerSide) {
+        this.compentencyManagerSide = compentencyManagerSide;
+    }
+
+    public Boolean getCompentencyEmployeeSide() {
+        return compentencyEmployeeSide;
+    }
+
+    public void setCompentencyEmployeeSide(Boolean compentencyEmployeeSide) {
+        this.compentencyEmployeeSide = compentencyEmployeeSide;
+    }
+
 }

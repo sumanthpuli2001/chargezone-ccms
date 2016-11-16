@@ -28,6 +28,21 @@
         <property name="employeeSide" type="boolean">
             <column name="employee_side" not-null="true" />
         </property>
+        <property name="compentencyStartYearStatus" type="boolean">
+            <column name="compentency_start_year_status" not-null="true" />
+        </property>
+        <property name="compentencyMidYearStatus" type="boolean">
+            <column name="compentency_mid_year_status" not-null="true" />
+        </property>
+        <property name="compentencyEndYearStatus" type="boolean">
+            <column name="compentency_end_year_status" not-null="true" />
+        </property>
+        <property name="compentencyManagerSide" type="boolean">
+            <column name="compentency_manager_side" not-null="true" />
+        </property>
+        <property name="compentencyEmployeeSide" type="boolean">
+            <column name="compentency_employee_side" not-null="true" />
+        </property>
        
     </class>
 

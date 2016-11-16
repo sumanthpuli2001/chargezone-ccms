@@ -41,6 +41,16 @@ public class AppraisalPerformanceMaster implements java.io.Serializable {
     private String totalScoreForemployee;
     private String behaviorsMidyearTotalscoreForemp;
     private String behaviorsEndyearTotalscoreForemp;
+    private int employeeCompetencyStatus;
+    private int managerCompetencyStatus;
+    private int competencyReworkStatus;
+    private String competencyReworkComment;
+    private int employeeIdpStatus;
+    private int managerIdpStatus;
+    private int idpReworkStatus;
+    private String idpReworkComment;
+    private String empActivityScore;
+    private String managerActivityScore;
     private Set appraisalPerformanceBehaviorses = new HashSet(0);
     private Set appraisalPerformanceIndividualDevelopmentPlans = new HashSet(0);
     private Set appraisalPerformanceBehaviorses_1 = new HashSet(0);
@@ -55,7 +65,7 @@ public class AppraisalPerformanceMaster implements java.io.Serializable {
     public AppraisalPerformanceMaster() {
     }
 
-    public AppraisalPerformanceMaster(int status, int managerStatus, int employeeStatus, int managerkraStatus, int reworkStatus, int midYearEmployeeStatus, int midYearManagerStatus, int endYearEmployeeStatus, int endYearManagerStatus) {
+    public AppraisalPerformanceMaster(int status, int managerStatus, int employeeStatus, int managerkraStatus, int reworkStatus, int midYearEmployeeStatus, int midYearManagerStatus, int endYearEmployeeStatus, int endYearManagerStatus, int employeeCompetencyStatus, int managerCompetencyStatus, int competencyReworkStatus, int employeeIdpStatus, int managerIdpStatus, int idpReworkStatus, String empActivityScore, String managerActivityScore) {
         this.status = status;
         this.managerStatus = managerStatus;
         this.employeeStatus = employeeStatus;
@@ -65,9 +75,17 @@ public class AppraisalPerformanceMaster implements java.io.Serializable {
         this.midYearManagerStatus = midYearManagerStatus;
         this.endYearEmployeeStatus = endYearEmployeeStatus;
         this.endYearManagerStatus = endYearManagerStatus;
+        this.employeeCompetencyStatus = employeeCompetencyStatus;
+        this.managerCompetencyStatus = managerCompetencyStatus;
+        this.competencyReworkStatus = competencyReworkStatus;
+        this.employeeIdpStatus = employeeIdpStatus;
+        this.managerIdpStatus = managerIdpStatus;
+        this.idpReworkStatus = idpReworkStatus;
+        this.empActivityScore = empActivityScore;
+        this.managerActivityScore = managerActivityScore;
     }
 
-    public AppraisalPerformanceMaster(EmployeeMaster employeeMaster, String weightageScore, String weightageScoreManager, String totalScore, String empMidyearSelfassOtheractivty, String empEndyearSelfassOtheractivty, String managerMidyearReviewevalOtheractivity, String managerEndyearReviewevalOtheractivity, String behaviorsMidyearTotalscore, String behaviorsMidyearOtherremark, String behaviorsFinalscore, String behaviorsDate, String behaviorsYear, String behaviorsEndyearOtherremark, String behaviorsEndyearTotalscore, int status, int managerStatus, int employeeStatus, int managerkraStatus, int reworkStatus, String reworkComment, int midYearEmployeeStatus, int midYearManagerStatus, int endYearEmployeeStatus, int endYearManagerStatus, String behaviorsMidyearOtherremarkForemployee, String behaviorsEndyearOtherremarkForemployee, String behaviorsFinalscoreForemployee, String totalScoreForemployee, String behaviorsMidyearTotalscoreForemp, String behaviorsEndyearTotalscoreForemp) {
+    public AppraisalPerformanceMaster(EmployeeMaster employeeMaster, String weightageScore, String weightageScoreManager, String totalScore, String empMidyearSelfassOtheractivty, String empEndyearSelfassOtheractivty, String managerMidyearReviewevalOtheractivity, String managerEndyearReviewevalOtheractivity, String behaviorsMidyearTotalscore, String behaviorsMidyearOtherremark, String behaviorsFinalscore, String behaviorsDate, String behaviorsYear, String behaviorsEndyearOtherremark, String behaviorsEndyearTotalscore, int status, int managerStatus, int employeeStatus, int managerkraStatus, int reworkStatus, String reworkComment, int midYearEmployeeStatus, int midYearManagerStatus, int endYearEmployeeStatus, int endYearManagerStatus, String behaviorsMidyearOtherremarkForemployee, String behaviorsEndyearOtherremarkForemployee, String behaviorsFinalscoreForemployee, String totalScoreForemployee, String behaviorsMidyearTotalscoreForemp, String behaviorsEndyearTotalscoreForemp, int employeeCompetencyStatus, int managerCompetencyStatus, int competencyReworkStatus, String competencyReworkComment, int employeeIdpStatus, int managerIdpStatus, int idpReworkStatus, String idpReworkComment) {
         this.employeeMaster = employeeMaster;
         this.weightageScore = weightageScore;
         this.weightageScoreManager = weightageScoreManager;
@@ -99,7 +117,15 @@ public class AppraisalPerformanceMaster implements java.io.Serializable {
         this.totalScoreForemployee = totalScoreForemployee;
         this.behaviorsMidyearTotalscoreForemp = behaviorsMidyearTotalscoreForemp;
         this.behaviorsEndyearTotalscoreForemp = behaviorsEndyearTotalscoreForemp;
-        
+        this.employeeCompetencyStatus = employeeCompetencyStatus;
+        this.managerCompetencyStatus = managerCompetencyStatus;
+        this.competencyReworkStatus = competencyReworkStatus;
+        this.competencyReworkComment = competencyReworkComment;
+        this.employeeIdpStatus = employeeIdpStatus;
+        this.managerIdpStatus = managerIdpStatus;
+        this.idpReworkStatus = idpReworkStatus;
+        this.idpReworkComment = idpReworkComment;
+
     }
 
     public Integer getId() {
@@ -437,7 +463,84 @@ public class AppraisalPerformanceMaster implements java.io.Serializable {
     public void setBehaviorsEndyearTotalscoreForemp(String behaviorsEndyearTotalscoreForemp) {
         this.behaviorsEndyearTotalscoreForemp = behaviorsEndyearTotalscoreForemp;
     }
-    
-    
 
+    public int getEmployeeCompetencyStatus() {
+        return employeeCompetencyStatus;
+    }
+
+    public void setEmployeeCompetencyStatus(int employeeCompetencyStatus) {
+        this.employeeCompetencyStatus = employeeCompetencyStatus;
+    }
+
+    public int getManagerCompetencyStatus() {
+        return managerCompetencyStatus;
+    }
+
+    public void setManagerCompetencyStatus(int managerCompetencyStatus) {
+        this.managerCompetencyStatus = managerCompetencyStatus;
+    }
+
+    public int getCompetencyReworkStatus() {
+        return competencyReworkStatus;
+    }
+
+    public void setCompetencyReworkStatus(int competencyReworkStatus) {
+        this.competencyReworkStatus = competencyReworkStatus;
+    }
+
+    public String getCompetencyReworkComment() {
+        return competencyReworkComment;
+    }
+
+    public void setCompetencyReworkComment(String competencyReworkComment) {
+        this.competencyReworkComment = competencyReworkComment;
+    }
+
+    public int getEmployeeIdpStatus() {
+        return employeeIdpStatus;
+    }
+
+    public void setEmployeeIdpStatus(int employeeIdpStatus) {
+        this.employeeIdpStatus = employeeIdpStatus;
+    }
+
+    public int getManagerIdpStatus() {
+        return managerIdpStatus;
+    }
+
+    public void setManagerIdpStatus(int managerIdpStatus) {
+        this.managerIdpStatus = managerIdpStatus;
+    }
+
+    public int getIdpReworkStatus() {
+        return idpReworkStatus;
+    }
+
+    public void setIdpReworkStatus(int idpReworkStatus) {
+        this.idpReworkStatus = idpReworkStatus;
+    }
+
+    public String getIdpReworkComment() {
+        return idpReworkComment;
+    }
+
+    public void setIdpReworkComment(String idpReworkComment) {
+        this.idpReworkComment = idpReworkComment;
+    }
+
+    public String getEmpActivityScore() {
+        return this.empActivityScore;
+    }
+
+    public void setEmpActivityScore(String empActivityScore) {
+        this.empActivityScore = empActivityScore;
+    }
+
+    public String getManagerActivityScore() {
+        return this.managerActivityScore;
+    }
+
+    public void setManagerActivityScore(String managerActivityScore) {
+        this.managerActivityScore = managerActivityScore;
+    }
 }

@@ -101,6 +101,36 @@
         <property name="behaviorsEndyearTotalscoreForemp" type="string">
             <column name="behaviors_endyear_totalscore_foremp" />
         </property>
+        <property name="employeeCompetencyStatus" type="int">
+            <column name="employee_competency_status" not-null="true" />
+        </property>
+        <property name="managerCompetencyStatus" type="int">
+            <column name="manager_competency_status" not-null="true" />
+        </property>
+        <property name="competencyReworkStatus" type="int">
+            <column name="competency_rework_status" not-null="true" />
+        </property>
+        <property name="competencyReworkComment" type="string">
+            <column name="competency_rework_comment" length="16777215" />
+        </property>
+        <property name="employeeIdpStatus" type="int">
+            <column name="employee_idp_status" not-null="true" />
+        </property>
+        <property name="managerIdpStatus" type="int">
+            <column name="manager_idp_status" not-null="true" />
+        </property>
+        <property name="idpReworkStatus" type="int">
+            <column name="idp_rework_status" not-null="true" />
+        </property>
+        <property name="idpReworkComment" type="string">
+            <column name="idp_rework_comment" length="16777215" />
+        </property>
+        <property name="empActivityScore" type="string">
+            <column name="emp_activity_score" length="45" />
+        </property>
+        <property name="managerActivityScore" type="string">
+            <column name="manager_activity_score" length="45" />
+        </property>
         <set name="appraisalPerformanceBehaviorses" inverse="true">
             <key>
                 <column name="appraisal_performance_id" not-null="true" />

@@ -579,80 +579,60 @@
                                                             </table>
 
                                                         </div>
-                                                        <!--                                                        <div class="table-responsive">
-                                                                                                                    <table id="demo1" class="table table-bordered table-striped table-hover" style="" align="Center">
-                                                                                                                        <tr>
-                                                                                                                            <td id="employeesMidOtherActivity"><b>Employee’s Mid - Year Self – Assessment For Other Activities:</b></td>
-                                                                                                                            <td id="managersMidOtherActivity"><b>Manager’s Mid - Year Review / Evaluation For Other Activities:</b></td>
-                                                                                                                        </tr>
-                                                                                                                        <tr>
-                                                                                                                            <td id="employeesMidOtherActivity1"><textarea id="empMidyearSelfassOtheractivty" name="empMidyearSelfassOtheractivty" class="form-control">${empMidyearSelfassOtheractivty}</textarea></td>
-                                                                                                                        <td id="managersMidOtherActivity1"><textarea id="managerMidyearReviewevalOtheractivity" name="managerMidyearReviewevalOtheractivity" class="form-control">${managerMidyearReviewevalOtheractivity}</textarea></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td id="employeesEndOtherActivity"><b>Employee’s End - Year Self – Assessment For Other Activities:</b></td>
-                                                                                                                        <td id="managersEndOtherActivity"><b>Manager’s End - Year Review / Evaluation For Other Activities:</b></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td id="employeesEndOtherActivity1"><textarea name="empEndyearSelfassOtheractivty" id="empEndyearSelfassOtheractivty" class="form-control">${empEndyearSelfassOtheractivty}</textarea></td>
-                                                                                                                        <td id="managersEndOtherActivity1"><textarea name="managerEndyearReviewevalOtheractivity" id="managerEndyearReviewevalOtheractivity" class="form-control">${managerEndyearReviewevalOtheractivity}</textarea></td>
-                                                                                                                    </tr>
-                                                                                                                </table>
 
-                                                                                                            </div>-->
 
-                                                </div>
+                                                    </div>
 
-                                                <div class="modal fade bs-example-modal-lg" id="kraModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                                                    <div class="modal-dialog modal-lg">
-                                                        <div class="modal-content">
-                                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
-                                                            <h4 class="modal-title" id="myModalLabel">History Detail</h4>
-                                                            <div class="table-responsive">
-                                                                <table id="modeldemo" class="table table-bordered table-striped table-hover" style="" align="Center">
+                                                    <div class="modal fade bs-example-modal-lg" id="kraModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                                                                <h4 class="modal-title" id="myModalLabel">History Detail</h4>
+                                                                <div class="table-responsive">
+                                                                    <table id="modeldemo" class="table table-bordered table-striped table-hover" style="" align="Center">
 
-                                                                </table>
+                                                                    </table>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="modal fade bs-example-modal-lg" id="deletedKraModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                                                    <div class="modal-dialog modal-lg">
-                                                        <div class="modal-content">
-                                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
-                                                            <h4 class="modal-title" id="myModalLabel">History Detail</h4>
-                                                            <div class="table-responsive">
-                                                                <table id="deletedKraDemo" class="table table-bordered table-striped table-hover" style="" align="Center">
+                                                    <div class="modal fade bs-example-modal-lg" id="deletedKraModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                                                                <h4 class="modal-title" id="myModalLabel">History Detail</h4>
+                                                                <div class="table-responsive">
+                                                                    <table id="deletedKraDemo" class="table table-bordered table-striped table-hover" style="" align="Center">
 
-                                                                </table>
+                                                                    </table>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div><!-- /.box-body -->
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="box box-info collapsed-box">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Additional Activities / Projects:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId7">Expand</span><span class="btn btn-box-tool" id="btn3" data-widget="collapse" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7" ></i></span>
-                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                </div><!-- /.box-body -->
                                             </div>
-                                        </div><!-- /.box-header -->
+                                        </div>
 
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="table-responsive">
-                                                        <table id="demo10" class="table table-bordered table-striped table-hover" style="" align="Center">
-                                                            <tr>
 
-                                                            <input type="hidden" name="status1" id="status1" value="${status}">
+
+                                        <div class="box box-info collapsed-box">
+                                            <div class="box-header">
+                                                <h3 class="box-title">Additional Activities / Projects:</h3>
+                                                <div class="box-tools pull-right">
+                                                    <span id="spanId7">Expand</span><span class="btn btn-box-tool" id="btn3" data-widget="collapse" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7" ></i></span>
+                                                    <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                </div>
+                                            </div><!-- /.box-header -->
+
+                                            <div class="box-body no-padding">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <div class="table-responsive">
+                                                            <table id="demo10" class="table table-bordered table-striped table-hover" style="" align="Center">
+                                                                <tr>
+
+                                                                <input type="hidden" name="status1" id="status1" value="${status}">
 
                                                             <input type="hidden" id="managerStatus" name="managerStatus" value="${managerStatus}">
                                                             <input type="hidden" id="employeeStatus" name="employeeStatus" value="${employeeStatus}">
@@ -692,7 +672,7 @@
                                                                     <c:set var="kragoalOtherActivitySize" value="${fn:length(kragoalOtherActivity)}"></c:set>
                                                                     <c:forEach var="kragoalOtherActivity" items="${kragoalOtherActivity}" varStatus="status">
                                                                         <%--<c:if test="${kragoallist.kragoal_activity ne '' && kragoallist.metric_activity ne ''}">--%>
-                                                                       <input type="hidden" name="midyearManagerSelfassActivityStatus${status.count}" id="midyearManagerSelfassActivityStatus${status.count}" value="${kragoalOtherActivity.midyearManagerSelfassActivityStatus}">
+                                                                        <input type="hidden" name="midyearManagerSelfassActivityStatus${status.count}" id="midyearManagerSelfassActivityStatus${status.count}" value="${kragoalOtherActivity.midyearManagerSelfassActivityStatus}">
                                                                         <input type="hidden" name="endyearManagerSelfassActivityStatus${status.count}" id="endyearManagerSelfassActivityStatus${status.count}" value="${kragoalOtherActivity.endyearManagerSelfassActivityStatus}">
                                                                         <tr id="activitiesTrId${status.count}">
                                                                         <input type="hidden" name="kragoal_activity_id${status.count}" id="kragoal_activity_id${status.count}" value="${kragoalOtherActivity.id}">
@@ -844,56 +824,56 @@
 
 
                                                                         <td id="activityDivid1${status.count}"><div>
-                                                                                <select id="activity${status.count}" name="activity${status.count}" value="${kragoalOtherActivity.managerActivity}" style="margin: 0px;width: 115px;" class="form-control saveRequried">
+                                                                                <select id="activity${status.count}" name="activity${status.count}" value="${kragoalOtherActivity.managerActivity}" style="margin: 0px;width: 115px;" onchange="activityScoreCount(${status.count});" class="form-control saveRequried">
                                                                                     <option value="">SELECT</option>
                                                                                     <c:choose>
-                                                                                        <c:when test="${kragoalOtherActivity.managerActivity eq 'Excellent'}">
+                                                                                        <c:when test="${kragoalOtherActivity.managerActivity eq '5'}">
 
-                                                                                            <option value="Excellent" selected="">Excellent</option>
+                                                                                            <option value="5" selected="">Far Exceeds Expectations</option>
                                                                                         </c:when>
                                                                                         <c:otherwise>
 
-                                                                                            <option value="Excellent">Excellent</option>
+                                                                                            <option value="5">Far Exceeds Expectations</option>
                                                                                         </c:otherwise>
                                                                                     </c:choose>
                                                                                     <c:choose>
-                                                                                        <c:when test="${kragoalOtherActivity.managerActivity eq 'Very Good'}">
+                                                                                        <c:when test="${kragoalOtherActivity.managerActivity eq '4'}">
 
-                                                                                            <option value="Very Good" selected="">Very Good</option>
+                                                                                            <option value="4" selected="">Exceeds Expectations</option>
                                                                                         </c:when>
                                                                                         <c:otherwise>
 
-                                                                                            <option value="Very Good">Very Good</option>
+                                                                                            <option value="4">Exceeds Expectations</option>
                                                                                         </c:otherwise>
                                                                                     </c:choose>
                                                                                     <c:choose>
-                                                                                        <c:when test="${kragoalOtherActivity.managerActivity eq 'Good'}">
+                                                                                        <c:when test="${kragoalOtherActivity.managerActivity eq '3'}">
 
-                                                                                            <option value="Good" selected="">Good</option>
+                                                                                            <option value="3" selected="">Meets Expectations</option>
                                                                                         </c:when>
                                                                                         <c:otherwise>
 
-                                                                                            <option value="Good">Good</option>
+                                                                                            <option value="3">Meets Expectations</option>
                                                                                         </c:otherwise>
                                                                                     </c:choose>
                                                                                     <c:choose>
-                                                                                        <c:when test="${kragoalOtherActivity.managerActivity eq 'Average'}">
+                                                                                        <c:when test="${kragoalOtherActivity.managerActivity eq '2'}">
 
-                                                                                            <option value="Average" selected="">Average</option>
+                                                                                            <option value="2" selected="">Partially Meets Expectations</option>
                                                                                         </c:when>
                                                                                         <c:otherwise>
 
-                                                                                            <option value="Average">Average</option>
+                                                                                            <option value="2">Partially Meets Expectations</option>
                                                                                         </c:otherwise>
                                                                                     </c:choose>
                                                                                     <c:choose>
-                                                                                        <c:when test="${kragoalOtherActivity.managerActivity eq 'Needs Improvement'}">
+                                                                                        <c:when test="${kragoalOtherActivity.managerActivity eq '1'}">
 
-                                                                                            <option value="Needs Improvement" selected="">Needs Improvement</option>
+                                                                                            <option value="1" selected="">Does Not Meet Expectations</option>
                                                                                         </c:when>
                                                                                         <c:otherwise>
 
-                                                                                            <option value="Needs Improvement">Needs Improvement</option>
+                                                                                            <option value="1">Does Not Meet Expectations</option>
                                                                                         </c:otherwise>
                                                                                     </c:choose>
                                                                                 </select>
@@ -999,13 +979,13 @@
                                                                         </div>
                                                                     </td>
                                                                     <td id="">
-                                                                        <select id="activity1" name="activity1" class="form-control saveRequried" style="margin: 0px;width: 115px;">
+                                                                        <select id="activity1" name="activity1" class="form-control saveRequried" onchange="activityScoreCount(1);" style="margin: 0px;width: 115px;">
                                                                             <option value="">--SELECT--</option>
-                                                                            <option value="Excellent">Excellent</option>
-                                                                            <option value="Very Good">Very Good</option>
-                                                                            <option value="Good">Good</option>
-                                                                            <option value="Average">Average</option>
-                                                                            <option value="Needs Improvement">Needs Improvement</option>
+                                                                            <option value="5">Far Exceeds Expectations</option>
+                                                                            <option value="4">Exceeds Expectations</option>
+                                                                            <option value="3">Meets Expectations</option>
+                                                                            <option value="2">Partially Meets Expectations</option>
+                                                                            <option value="1">Does Not Meet Expectations</option>
                                                                         </select>
                                                                     </td>
 
@@ -1076,588 +1056,406 @@
 
 
 
-                                    <div class="box box-info collapsed-box">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Competency Evaluation (As Per Zydex Competency Framework) : ${competencyEvaluationList[0][2].title}</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId3">Expand</span><span class="btn btn-box-tool" id="btn4" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></span>
-                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
-                                            </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <%--<c:if test="${empty competencyEvaluationList[0][2].title && managerStatus eq '0'}">--%>
-                                                    <%--<c:if test="${managerStatus eq '0' || sessionScope.user.userName eq 'admin' || empty competencyEvaluationList[0][2].title}">--%>
-                                                    <!--<div>-->
-                                                    <!--<select name="competencyEvaluationId" id="competencyEvaluationId" value="$/{competencyMap.key}" class="form-control" onchange="managerajaxfun();"/>-->
-                                                    <!--<option value="">--SELECT--</option>-->
-                                                    <%--<c:forEach var="competencyMap" items="${competencyMap}">--%>
-                                                    <%--<c:if test="${competencyEvaluationList[0][2].title eq competencyMap.value}">--%>
-                                                    <!--<option value="$/{competencyMap.key}" selected="">$/{competencyMap.value}</option>-->
-                                                    <%--</c:if>--%>
-                                                    <%--<c:if test="${competencyEvaluationList[0][2].title ne competencyMap.value}">--%>
-                                                    <!--<option value="$/{competencyMap.key}">$/{competencyMap.value}</option>-->
-                                                    <%--</c:if>--%>
+                                    <!--                                    <div class="box box-info collapsed-box">
+                                                                            <div class="box-header">
+                                                                                <h3 class="box-title">Competency Evaluation (As Per Zydex Competency Framework) : ${competencyEvaluationList[0][2].title}</h3>
+                                                                                <div class="box-tools pull-right">
+                                                                                    <span id="spanId3">Expand</span><span class="btn btn-box-tool" id="btn4" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></span>
+                                                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                                                                                </div>
+                                                                            </div> /.box-header 
+                                                                            <div class="box-body no-padding">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 col-sm-12">
+                                    <%--<c:if test="${empty competencyEvaluationList[0][2].title && managerStatus eq '0'}">--%>
+                                    <%--<c:if test="${managerStatus eq '0' || sessionScope.user.userName eq 'admin' || empty competencyEvaluationList[0][2].title}">--%>
+                                    <div>
+                                    <select name="competencyEvaluationId" id="competencyEvaluationId" value="$/{competencyMap.key}" class="form-control" onchange="managerajaxfun();"/>
+                                    <option value="">--SELECT--</option>
+                                    <%--<c:forEach var="competencyMap" items="${competencyMap}">--%>
+                                    <%--<c:if test="${competencyEvaluationList[0][2].title eq competencyMap.value}">--%>
+                                    <option value="$/{competencyMap.key}" selected="">$/{competencyMap.value}</option>
+                                    <%--</c:if>--%>
+                                    <%--<c:if test="${competencyEvaluationList[0][2].title ne competencyMap.value}">--%>
+                                    <option value="$/{competencyMap.key}">$/{competencyMap.value}</option>
+                                    <%--</c:if>--%>
 
-                                                    <%--</c:forEach>--%>
-                                                    <!--</select>-->
-                                                    <!--</div>-->
-                                                    <%--</c:if>--%>
-                                                    <c:if test="${!empty competencyEvaluationList[0][2].title && managerStatus eq '1' && sessionScope.user.userName ne 'admin' && !empty competencyEvaluationList[0][2].title}">
-                                                        <div><input type="text" id="competencyEvaluationId" class="form-control" name="competencyEvaluationId" value="${competencyEvaluationList[0][2].title}" readonly="true"></div>
-                                                        </c:if>
-                                                </div>
-
-
-
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="table-responsive">
-                                                        <table id="demo9" class="table table-bordered table-striped table-hover" style="" align="Center">
-                                                            <tr>
-                                                                <th style="text-align: center">No</th>
-                                                                <th style="text-align: center">Title</th>
-                                                                <th style="text-align: center">Start Year</th>
-                                                                <th style="text-align: center">Remark</th>
-                                                                <th style="text-align: center" id="midYearText">Mid Year</th>
-                                                                <th style="text-align: center" id="midYearRemarkText">Remark</th>
-                                                                <th style="text-align: center" id="endYearText">End Year</th>
-                                                                <th style="text-align: center" id="endYearRemarkText">Remark</th>
-                                                            </tr>
-                                                            <input type="hidden" name="subCompentencyCount" id="subCompentencyCount" value="${fn:length(competencyEvaluationList)}">
-                                                            <%--<c:choose>--%>
-                                                            <%--<c:when test="${fn:length(competencyEvaluationList) > 0}">--%>
-                                                            <c:forEach var="competencyEvaluationList" items="${competencyEvaluationList}" varStatus="status">
-
-                                                                <input type="hidden" name="competencyEveId${status.count}" id="competencyEveId${status.count}" value="${competencyEvaluationList[0]}">
-                                                                <!--<input type="hidden" name="compentencyTextMasterId${status.count}" id="compentencyTextMasterId${status.count}" value="${competencyEvaluationList[1].id}">-->
-                                                                <input type="hidden" name="competencyEvaluationId${status.count}" id="competencyEvaluationId${status.count}" value="${competencyEvaluationList[2].id}">
-                                                                <input type="hidden" name="compentencyTextMasterId${status.count}" id="compentencyTextMasterId${status.count}" value="${competencyEvaluationList[3].id}">
-                                                                <tr class="">
-                                                                    <td id="subCompentencySrId${status.count}">${status.count}</td>
-                                                                    <!--<td><input type="text" id="demo" name="demo"></td>-->
-                                                                    <!--<td>$/{competencyEvaluationList[0][4].infoText}</td>-->
-                                                                    <td id="subCompentencyTitleId${status.count}">${competencyEvaluationList[4]}</td>
-                                                                    <td id="subCompentencyStartId${status.count}" >
-
-                                                                        <select id="competencyStartYear${status.count}" name="compentencyStartYear${status.count}" value="${competencyEvaluationList[11]}" class="form-control" >
-                                                                            <option value="">--SELECT--</option>
-                                                                            <c:choose>
-                                                                                <c:when test="${competencyEvaluationList[11] eq 'Exceed Expectations'}">
-
-                                                                                    <option value="Exceed Expectations" selected="">Exceed Expectations</option>
-                                                                                </c:when>
-                                                                                <c:otherwise>
-
-                                                                                    <option value="Exceed Expectations">Exceed Expectations</option>
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                            <c:choose>
-                                                                                <c:when test="${competencyEvaluationList[11] eq 'Meet Expectations'}">
-
-                                                                                    <option value="Meet Expectations" selected="">Meet Expectations</option>
-                                                                                </c:when>
-                                                                                <c:otherwise>
-
-                                                                                    <option value="Meet Expectations">Meet Expectations</option>
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                            <c:choose>
-                                                                                <c:when test="${competencyEvaluationList[11] eq 'Need Improvement'}">
-
-                                                                                    <option value="Need Improvement" selected="">Need Improvement</option>
-                                                                                </c:when>
-                                                                                <c:otherwise>
-
-                                                                                    <option value="Need Improvement">Need Improvement</option>
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                        </select>
-                                                                    </td>
-                                                                    <td id="subCompentencyStartRemarkId${status.count}">
-                                                                        <textarea type="Text" id="compentencyStartRemark${status.count}" name="compentencyStartRemark${status.count}" class="form-control" rows="4">${competencyEvaluationList[12]}</textarea>
-                                                                    </td>
-
-                                                                    <td id="subCompentencyMidId${status.count}">
-                                                                        <select id="compentencyMidYear${status.count}" name="compentencyMidYear${status.count}" value="${competencyEvaluationList[15]}" class="form-control">
-                                                                            <option value="">--SELECT--</option>
-                                                                            <c:choose>
-                                                                                <c:when test="${competencyEvaluationList[15] eq 'Exceed Expectations'}">
-
-                                                                                    <option value="Exceed Expectations" selected="">Exceed Expectations</option>
-                                                                                </c:when>
-                                                                                <c:otherwise>
-
-                                                                                    <option value="Exceed Expectations">Exceed Expectations</option>
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                            <c:choose>
-                                                                                <c:when test="${competencyEvaluationList[15] eq 'Meet Expectations'}">
-
-                                                                                    <option value="Meet Expectations" selected="">Meet Expectations</option>
-                                                                                </c:when>
-                                                                                <c:otherwise>
-
-                                                                                    <option value="Meet Expectations">Meet Expectations</option>
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                            <c:choose>
-                                                                                <c:when test="${competencyEvaluationList[15] eq 'Need Improvement'}">
-
-                                                                                    <option value="Need Improvement" selected="">Need Improvement</option>
-                                                                                </c:when>
-                                                                                <c:otherwise>
-
-                                                                                    <option value="Need Improvement">Need Improvement</option>
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                        </select>
-                                                                    </td>
-                                                                    <td id="subCompentencyMidRemarkId${status.count}" >
-                                                                        <textarea type="Text" id="compentencyMidRemark${status.count}" name="compentencyMidRemark${status.count}" class="form-control" rows="4">${competencyEvaluationList[13]}</textarea>
-                                                                    </td>
-                                                                    <td id="subCompentencyEndId${status.count}">
-                                                                        <select id="compentencyEndYear${status.count}" name="compentencyEndYear${status.count}" value="${competencyEvaluationList[16]}" class="form-control">
-                                                                            <option value="">--SELECT--</option>
-                                                                            <c:choose>
-                                                                                <c:when test="${competencyEvaluationList[16] eq 'Exceed Expectations'}">
-
-                                                                                    <option value="Exceed Expectations" selected="">Exceed Expectations</option>
-                                                                                </c:when>
-                                                                                <c:otherwise>
-
-                                                                                    <option value="Exceed Expectations">Exceed Expectations</option>
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                            <c:choose>
-                                                                                <c:when test="${competencyEvaluationList[16] eq 'Meet Expectations'}">
-
-                                                                                    <option value="Meet Expectations" selected="">Meet Expectations</option>
-                                                                                </c:when>
-                                                                                <c:otherwise>
-
-                                                                                    <option value="Meet Expectations">Meet Expectations</option>
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                            <c:choose>
-                                                                                <c:when test="${competencyEvaluationList[16] eq 'Need Improvement'}">
-
-                                                                                    <option value="Need Improvement" selected="">Need Improvement</option>
-                                                                                </c:when>
-                                                                                <c:otherwise>
-
-                                                                                    <option value="Need Improvement">Need Improvement</option>
-                                                                                </c:otherwise>
-                                                                            </c:choose>
-                                                                        </select>
-                                                                    </td>
-                                                                    <td id="subCompentencyEndRemarkId${status.count}">
-                                                                        <textarea type="Text" id="compentencyEndRemark${status.count}" name="compentencyEndRemark${status.count}" class="form-control" rows="4">${competencyEvaluationList[14]}</textarea>
-                                                                    </td>
-
-                                                                </tr>
-
-                                                            </c:forEach>
-
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- /.box-body -->
+                                    <%--</c:forEach>--%>
+                                    </select>
                                     </div>
+                                    <%--</c:if>--%>
+                                    <%--<c:if test="${!empty competencyEvaluationList[0][2].title && managerStatus eq '1' && sessionScope.user.userName ne 'admin' && !empty competencyEvaluationList[0][2].title}">--%>
+                                        <div><input type="text" id="competencyEvaluationId" class="form-control" name="competencyEvaluationId" value="$/{competencyEvaluationList[0][2].title}" readonly="true"></div>
+                                    <%--</c:if>--%>
+                            </div>
 
 
-                                    <div class="box box-info collapsed-box">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Individual Development Plan(Training Need Identification):</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId4">Expand</span><span class="btn btn-box-tool" id="btn5" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></span>
-                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
-                                            </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
 
-                                                    <div class="table-responsive">
-                                                        <table id="demo5" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                            <div class="col-md-12 col-sm-12">
+                                <div class="table-responsive">
+                                    <table id="demo9" class="table table-bordered table-striped table-hover" style="" align="Center">
+                                        <tr>
+                                            <th style="text-align: center">No</th>
+                                            <th style="text-align: center">Title</th>
+                                            <th style="text-align: center">Start Year</th>
+                                            <th style="text-align: center">Remark</th>
+                                            <th style="text-align: center" id="midYearText">Mid Year</th>
+                                            <th style="text-align: center" id="midYearRemarkText">Remark</th>
+                                            <th style="text-align: center" id="endYearText">End Year</th>
+                                            <th style="text-align: center" id="endYearRemarkText">Remark</th>
+                                        </tr>
+                                        <input type="hidden" name="subCompentencyCount" id="subCompentencyCount" value="${fn:length(competencyEvaluationList)}">
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${fn:length(competencyEvaluationList) > 0}">--%>
+                                    <%--<c:forEach var="competencyEvaluationList" items="${competencyEvaluationList}" varStatus="status">--%>
 
-                                                            <tr>
-                                                                <th style="text-align: center">Sr.No.</th>
-                                                                <th style="text-align: center">IDP Name & Details</th>
-                                                                <th style="text-align: center">IDP Type</th>
-                                                                <th style="text-align: center">How to achieve this IDP</th>
-                                                                <th style="text-align: center"></th>
-                                                                <th style="text-align: center"></th><!--Add New-->
-                                                            </tr>
-                                                            <tr>
-                                                            <input type="hidden" name="IndividualId" id="IndividualId" value="${fn:length(individualDevelopmentPlanList)}">
-                                                            <input type="hidden" name="kraremovedIndividualIdVal" id="kraremovedIndividualIdVal" value="">
-                                                            <c:choose>
-                                                                <c:when test="${not empty individualDevelopmentPlanList}">
+                                        <input type="hidden" name="competencyEveId$/{status.count}" id="competencyEveId$/{status.count}" value="$/{competencyEvaluationList[0]}">
+                                        <input type="hidden" name="compentencyTextMasterId$/{status.count}" id="compentencyTextMasterId$/{status.count}" value="$/{competencyEvaluationList[1].id}">
+                                        <input type="hidden" name="competencyEvaluationId$/{status.count}" id="competencyEvaluationId$/{status.count}" value="$/{competencyEvaluationList[2].id}">
+                                        <input type="hidden" name="compentencyTextMasterId$/{status.count}" id="compentencyTextMasterId$/{status.count}" value="$/{competencyEvaluationList[3].id}">
+                                        <tr class="">
+                                            <td id="subCompentencySrId$/{status.count}">$/{status.count}</td>
+                                            <td><input type="text" id="demo" name="demo"></td>
+                                            <td>$/{competencyEvaluationList[0][4].infoText}</td>
+                                            <td id="subCompentencyTitleId$/{status.count}">$/{competencyEvaluationList[4]}</td>
+                                            <td id="subCompentencyStartId$/{status.count}" >
 
-                                                                    <c:forEach var="individualDevelopmentPlan" items="${individualDevelopmentPlanList}" varStatus="status">
-                                                                        <tr id="individualTrId${status.count}">
-                                                                            <td id="removeKRAIndividualID${status.count}" name="removeKRAIndividualID${status.count}" style="text-align: center">${status.count}</td>
-                                                                        <input type="hidden" name="IndividualDevelopmentPlanId${status.count}" id="IndividualDevelopmentPlanId${status.count}" value="${individualDevelopmentPlan.id}">
-                                                                        <td id="indDevId"><textarea type="Text" id="text${status.count}" name="text${status.count}" class="form-control saveRequried" readonly>${individualDevelopmentPlan.managertext1}</textarea></td>
-                                                                        <td><div>
-                                                                                <select id="individualtextDiv${status.count}" name="individualtextDiv${status.count}" value="${individualDevelopmentPlan.managertext2}" class="form-control saveRequried">
-                                                                                    <option value="">--SELECT--</option>
-                                                                                    <c:choose>
-                                                                                        <c:when test="${individualDevelopmentPlan.managertext2 eq 'Technical'}">
+                                                <select id="competencyStartYear$/{status.count}" name="compentencyStartYear$/{status.count}" value="$/{competencyEvaluationList[11]}" class="form-control" >
+                                                    <option value="">--SELECT--</option>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${competencyEvaluationList[11] eq 'Exceed Expectations'}">--%>
 
-                                                                                            <option value="Technical" selected="">Technical</option>
-                                                                                        </c:when>
-                                                                                        <c:otherwise>
+                                        <option value="Exceed Expectations" selected="">Exceed Expectations</option>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
 
-                                                                                            <option value="Technical">Technical</option>
-                                                                                        </c:otherwise>
-                                                                                    </c:choose>
-                                                                                    <c:choose>
-                                                                                        <c:when test="${individualDevelopmentPlan.managertext2 eq 'Other'}">
+                                        <option value="Exceed Expectations">Exceed Expectations</option>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${competencyEvaluationList[11] eq 'Meet Expectations'}">--%>
 
-                                                                                            <option value="Other" selected="">Other</option>
-                                                                                        </c:when>
-                                                                                        <c:otherwise>
+                                        <option value="Meet Expectations" selected="">Meet Expectations</option>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
 
-                                                                                            <option value="Other">Other</option>
-                                                                                        </c:otherwise>
-                                                                                    </c:choose>
-                                                                                    <c:choose>
-                                                                                        <c:when test="${individualDevelopmentPlan.managertext2 eq 'Soft Skill'}">
+                                        <option value="Meet Expectations">Meet Expectations</option>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${competencyEvaluationList[11] eq 'Need Improvement'}">--%>
 
-                                                                                            <option value="Soft Skill" selected="">Soft Skill</option>
-                                                                                        </c:when>
-                                                                                        <c:otherwise>
-                                                                                            <option value="Soft Skill">Soft Skill</option>
-                                                                                        </c:otherwise>
-                                                                                    </c:choose>
+                                        <option value="Need Improvement" selected="">Need Improvement</option>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
 
-                                                                                </select>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td><div>
-                                                                                <select id="trainingSelectId${status.count}" name="trainingSelectId${status.count}" value="${individualDevelopmentPlan.managertext3}" class="form-control saveRequried" onchange="trainingSelect(${status.count});">
-                                                                                    <option value="">--SELECT--</option>
-                                                                                    <c:choose>
-                                                                                        <c:when test="${individualDevelopmentPlan.managertext3 eq 'On The Job Training'}">
+                                        <option value="Need Improvement">Need Improvement</option>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                </select>
+                            </td>
+                            <td id="subCompentencyStartRemarkId$/{status.count}">
+                                <textarea type="Text" id="compentencyStartRemark$/{status.count}" name="compentencyStartRemark$/{status.count}" class="form-control" rows="4">$/{competencyEvaluationList[12]}</textarea>
+                            </td>
 
-                                                                                            <option value="On The Job Training" selected="">On The Job Training</option>
-                                                                                        </c:when>
-                                                                                        <c:otherwise>
+                            <td id="subCompentencyMidId$/{status.count}">
+                                <select id="compentencyMidYear$/{status.count}" name="compentencyMidYear$/{status.count}" value="$/{competencyEvaluationList[15]}" class="form-control">
+                                    <option value="">--SELECT--</option>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${competencyEvaluationList[15] eq 'Exceed Expectations'}">--%>
 
-                                                                                            <option value="On The Job Training">On The Job Training</option>
-                                                                                        </c:otherwise>
-                                                                                    </c:choose>
-                                                                                    <c:choose>
-                                                                                        <c:when test="${individualDevelopmentPlan.managertext3 eq 'Classroom Training'}">
+                                        <option value="Exceed Expectations" selected="">Exceed Expectations</option>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
 
-                                                                                            <option value="Classroom Training" selected="">Classroom Training</option>
-                                                                                        </c:when>
-                                                                                        <c:otherwise>
+                                        <option value="Exceed Expectations">Exceed Expectations</option>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${competencyEvaluationList[15] eq 'Meet Expectations'}">--%>
 
-                                                                                            <option value="Classroom Training">Classroom Training</option>
-                                                                                        </c:otherwise>
-                                                                                    </c:choose>
-                                                                                    <c:choose>
-                                                                                        <c:when test="${individualDevelopmentPlan.managertext3 eq 'Other'}">
+                                        <option value="Meet Expectations" selected="">Meet Expectations</option>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
 
-                                                                                            <option value="Other" selected="">Other</option>
-                                                                                        </c:when>
-                                                                                        <c:otherwise>
+                                        <option value="Meet Expectations">Meet Expectations</option>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${competencyEvaluationList[15] eq 'Need Improvement'}">--%>
 
-                                                                                            <option value="Other">Other</option>
-                                                                                        </c:otherwise>
-                                                                                    </c:choose>
+                                        <option value="Need Improvement" selected="">Need Improvement</option>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
 
-                                                                                </select>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td><div>
-                                                                                <textarea class="form-control saveRequried" id="trainingSelectTextinput${status.count}" name="trainingSelectTextinput${status.count}" style="display: none">${individualDevelopmentPlan.managerremark}</textarea>
-                                                                            </div>
-                                                                        </td>
-                                                                        <c:if test="${status.last}">
+                                        <option value="Need Improvement">Need Improvement</option>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                </select>
+                            </td>
+                            <td id="subCompentencyMidRemarkId$/{status.count}" >
+                                <textarea type="Text" id="compentencyMidRemark$/{status.count}" name="compentencyMidRemark$/{status.count}" class="form-control" rows="4">$/{competencyEvaluationList[13]}</textarea>
+                            </td>
+                            <td id="subCompentencyEndId$/{status.count}">
+                                <select id="compentencyEndYear$/{status.count}" name="compentencyEndYear$/{status.count}" value="$/{competencyEvaluationList[16]}" class="form-control">
+                                    <option value="">--SELECT--</option>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${competencyEvaluationList[16] eq 'Exceed Expectations'}">--%>
 
-                                                                            <td style="text-align: center">
-                                                                                <span style='margin-top: 5px;'>
-                                                                                    <input style='display: none;' type="button" value="+" id="addIndividualId" />
-                                                                                </span>
-                                                                            </td>
-                                                                        </c:if>
-                                                                        <c:if test="${!status.last}">
-                                                                            <td id="" style="text-align: center">
-                                                                                <span style="margin-top: 5px;">
-                                                                                    <c:if test="${flag eq 'true' || flag1 eq 'true' || flag2 eq 'true'}">
-                                                                                        <input style='display: none;' type="button" value="-" id="removeRowButtonId" onclick="removeIndividualChild('individualTrId${status.count}', 'individualEmpMidLabel1TrId${status.count}', 'individualEmpMid1TrId${status.count}', 'individualEmpMidLabel2TrId${status.count}', 'individualEmpMid2TrId${status.count}', '${individualDevelopmentPlan.id}');">
-                                                                                    </c:if>
-                                                                                </span>
-                                                                            </td>
-                                                                        </c:if>
-                                                                        </tr>
-                                                                        <tr id="individualEmpMidLabel1TrId${status.count}">
-                                                                            <td colspan="3" id="midYearReId${status.count}"><b>Employee Mid-Year Remark</b></td>
-                                                                            <td colspan="3" id="endYearReId${status.count}"><b>Employee End-Year Remark</b></td>
-                                                                        </tr>
-                                                                        <tr id="individualEmpMid1TrId${status.count}">
+                                        <option value="Exceed Expectations" selected="">Exceed Expectations</option>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
 
-                                                                            <td colspan="3" id="midYearRetxtId${status.count}"><textarea rows="3" style="width: 451px;" id="midYearRemark${status.count}" name="midYearRemark${status.count}" class="form-control saveRequried">${individualDevelopmentPlan.managerMidYearRemarkManager}</textarea></td>
-                                                                            <td colspan="3" id="endYearRetxtId${status.count}"><textarea rows="3" style="width: 451px;" id="endYearRemark${status.count}" name="endYearRemark${status.count}" class="form-control saveRequried">${individualDevelopmentPlan.managerEndYearRemarkEmployee}</textarea></td>
-                                                                        </tr>
-                                                                        <tr id="individualEmpMidLabel2TrId${status.count}">
-                                                                            <td colspan="3" id="endYearReId"><b>Manager Mid-Year Remark</b></td>
-                                                                            <td colspan="3" id="endYearReId"><b>Manager End-Year Remark</b></td>
-                                                                        </tr>
-                                                                        <tr id="individualEmpMid2TrId${status.count}">
+                                        <option value="Exceed Expectations">Exceed Expectations</option>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${competencyEvaluationList[16] eq 'Meet Expectations'}">--%>
 
-                                                                            <td colspan="3"><textarea rows="3" style="width: 451px;" id="managerMidYearRemark${status.count}" name="managerMidYearRemark${status.count}" class="form-control saveRequried">${individualDevelopmentPlan.managerMidYearRemark}</textarea></td>
-                                                                            <td colspan="3"><textarea rows="3" style="width: 451px;" id="managerEndYearRemark${status.count}" name="managerEndYearRemark${status.count}" class="form-control saveRequried">${individualDevelopmentPlan.managerEndYearRemark}</textarea></td>
-                                                                        </tr>
-                                                                    </c:forEach>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <tr>
-                                                                        <td style="text-align: center">1</td>
-                                                                        <td><textarea type="Text" id="text" name="text" class="form-control saveRequried" readonly></textarea></td>
-                                                                        <td><div>
-                                                                                <select id="individualtextDiv" name="individualtextDiv" class="form-control saveRequried">
-                                                                                    <option value="">--SELECT--</option>
-                                                                                    <option value="Technical">Technical</option>
-                                                                                    <option value="Other">Other</option>
-                                                                                    <option value="Soft Skill">Soft Skill</option>
+                                        <option value="Meet Expectations" selected="">Meet Expectations</option>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
 
-                                                                                </select>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td><div>
-                                                                                <select id="trainingSelectId1" name="trainingSelectId1" class="form-control saveRequried" onchange="trainingSelect(1)">
-                                                                                    <option value="">--SELECT--</option>
-                                                                                    <option value="On The Job Training">On The Job Training</option>
-                                                                                    <option value="Classroom Training">Classroom Training</option>
-                                                                                    <option value="Other">Other</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td><div>
-                                                                                <textarea class="form-control saveRequried" id="trainingSelectTextinput1" name="trainingSelectTextinput1" style="display: none"></textarea>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: center">
-                                                                            <span style='margin-top: 5px;'>
-                                                                                <input type="button" style="display: none;" value="+" id="addIndividualId" />
-                                                                            </span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="3" id="midYearReId"><b>Employee Mid-Year Remark</b></td>
-                                                                        <td colspan="3" id="endYearReId"><b>Employee End-Year Remark</b></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="3"><textarea rows="3" id="midYearRemark" style="width: 451px;" name="midYearRemark" class="form-control saveRequried"></textarea></td>
-                                                                        <td colspan="3"><textarea rows="3" id="endYearRemark" style="width: 451px;" name="endYearRemark" class="form-control saveRequried"></textarea></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="3" id="endYearReId"><b>Manager Mid-Year Remark</b></td>
-                                                                        <td colspan="3" id="endYearReId"><b>Manager End-Year Remark</b></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="3"><textarea rows="3" id="managerMidYearRemark" style="width: 451px;" name="managerMidYearRemark" class="form-control saveRequried"></textarea></td>
-                                                                        <td colspan="3"><textarea rows="3" id="managerEndYearRemark" style="width: 451px;" name="managerEndYearRemark" class="form-control saveRequried"></textarea></td>
-                                                                    </tr>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </table>
+                                        <option value="Meet Expectations">Meet Expectations</option>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${competencyEvaluationList[16] eq 'Need Improvement'}">--%>
 
-                                                    </div>
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
+                                        <option value="Need Improvement" selected="">Need Improvement</option>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
+
+                                        <option value="Need Improvement">Need Improvement</option>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                </select>
+                            </td>
+                            <td id="subCompentencyEndRemarkId$/{status.count}">
+                                <textarea type="Text" id="compentencyEndRemark$/{status.count}" name="compentencyEndRemark$/{status.count}" class="form-control" rows="4">$/{competencyEvaluationList[14]}</textarea>
+                            </td>
+
+                        </tr>
+
+                                    <%--</c:forEach>--%>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> /.box-body 
+            </div>-->
 
 
                                     <!--                                    <div class="box box-info collapsed-box">
                                                                             <div class="box-header">
-                                                                                <h3 class="box-title">Behaviors:</h3>
+                                                                                <h3 class="box-title">Individual Development Plan(Training Need Identification):</h3>
                                                                                 <div class="box-tools pull-right">
+                                                                                    <span id="spanId4">Expand</span><span class="btn btn-box-tool" id="btn5" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></span>
                                                                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                                                                                 </div>
-                                                                            </div> /.box-header
+                                                                            </div> /.box-header 
                                                                             <div class="box-body no-padding">
                                                                                 <div class="row">
                                                                                     <div class="col-md-12 col-sm-12">
+                                    
                                                                                         <div class="table-responsive">
-                                                                                            <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                                                            <table id="demo5" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                    
+                                                                                                <tr>
+                                                                                                    <th style="text-align: center">Sr.No.</th>
+                                                                                                    <th style="text-align: center">IDP Name & Details</th>
+                                                                                                    <th style="text-align: center">IDP Type</th>
+                                                                                                    <th style="text-align: center">How to achieve this IDP</th>
+                                                                                                    <th style="text-align: center"></th>
+                                                                                                    <th style="text-align: center"></th>Add New
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                <input type="hidden" name="IndividualId" id="IndividualId" value="$/{fn:length(individualDevelopmentPlanList)}">
+                                                                                                <input type="hidden" name="kraremovedIndividualIdVal" id="kraremovedIndividualIdVal" value="">
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${not empty individualDevelopmentPlanList}">--%>
 
-                                                                                                <tr style="background-color: darkgrey">
-                                                                                                    <th style="text-align: center"><b>Behaviors</b></th>
-                                                                                                    <th style="text-align: center">Mid'Year Score</th>
-                                                                                                    <th style="text-align: center">End'Year Score</th>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>WLB 1: Walk the Talk </b><br>&nbsp;&nbsp;- Do & Act What you Preach<br>&nbsp;&nbsp;- Keep commitments<br>&nbsp;&nbsp;- Talk Straight – Be Honest & Tell the Truth<br>&nbsp;&nbsp;- Use simple language and call things what they are<br>&nbsp;&nbsp;- Don’t manipulate people nor distort facts</td>
-                                                                                                    <td><select id="" class="form-control ">
-                                                                                                            <option value="">--SELECT--</option>
-                                                                                                            <option value="1">1</option>
-                                                                                                            <option value="2">2</option>
-                                                                                                            <option value="3">3</option>
-                                                                                                            <option value="4">4</option>
-                                                                                                            <option value="5">5</option>
-                                                                                                        </select></td>
-                                                                                                    <td><select id="" class="form-control ">
-                                                                                                            <option value="">--SELECT--</option>
-                                                                                                            <option value="1">1</option>
-                                                                                                            <option value="2">2</option>
-                                                                                                            <option value="3">3</option>
-                                                                                                            <option value="4">4</option>
-                                                                                                            <option value="5">5</option>
-                                                                                                        </select></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
-                                                                                                    <td colspan="2"><textarea type="Text" class="form-control"></textarea></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                                                    <td colspan="2"><textarea type="Text" class="form-control"></textarea></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>WLB 2: Deliver Results</b><br>&nbsp;&nbsp;- Master the art of execution & Establish a track record of results<br>&nbsp;&nbsp;- Practice Accountability – Hold self & others accountable<br>&nbsp;&nbsp;- Get the best out of you and your team<br>&nbsp;&nbsp;- Be on time and within budget<br>&nbsp;&nbsp;- Don’t find excuses for not delivering<br>&nbsp;&nbsp;- Celebrate success with the team</td>
-                                                                                                    <td><select id="" class="form-control ">
-                                                                                                            <option value="">--SELECT--</option>
-                                                                                                            <option value="1">1</option>
-                                                                                                            <option value="2">2</option>
-                                                                                                            <option value="3">3</option>
-                                                                                                            <option value="4">4</option>
-                                                                                                            <option value="5">5</option>
-                                                                                                        </select></td>
-                                                                                                    <td><select id="" class="form-control ">
-                                                                                                            <option value="">--SELECT--</option>
-                                                                                                            <option value="1">1</option>
-                                                                                                            <option value="2">2</option>
-                                                                                                            <option value="3">3</option>
-                                                                                                            <option value="4">4</option>
-                                                                                                            <option value="5">5</option>
-                                                                                                        </select></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
-                                                                                                    <td colspan="2"><textarea type="Text" class="form-control"></textarea></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                                                    <td colspan="2"><textarea type="Text" class="form-control"></textarea></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>WLB 3: Build Relationships & Develop Others</b><br>&nbsp;&nbsp;- Be grounded at all times & approachable<br>&nbsp;&nbsp;- Treat people with utmost respect & care<br>&nbsp;- Understand other’s perspective & concern<br>&nbsp;&nbsp;- Invest in developing the talent<br>&nbsp;&nbsp;- Give your team the right opportunities to learn and grow<br>&nbsp;&nbsp;- Create a learning environment & help others to learn from success stories & failures<br>&nbsp;&nbsp; </td>
-                                                                                                    <td><select id="" class="form-control ">
-                                                                                                            <option value="">--SELECT--</option>
-                                                                                                            <option value="1">1</option>
-                                                                                                            <option value="2">2</option>
-                                                                                                            <option value="3">3</option>
-                                                                                                            <option value="4">4</option>
-                                                                                                            <option value="5">5</option>
-                                                                                                        </select></td>
-                                                                                                    <td><select id="" class="form-control ">
-                                                                                                            <option value="">--SELECT--</option>
-                                                                                                            <option value="1">1</option>
-                                                                                                            <option value="2">2</option>
-                                                                                                            <option value="3">3</option>
-                                                                                                            <option value="4">4</option>
-                                                                                                            <option value="5">5</option>
-                                                                                                        </select></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
-                                                                                                    <td colspan="2"><textarea type="Text" class="form-control"></textarea></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                                                    <td colspan="2"><textarea type="Text" class="form-control"></textarea></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>WLB 4: Act with Courage</b><br>&nbsp;&nbsp;- Take a stand – have your individual opinion & stand by it<br>&nbsp;&nbsp;- Don’t shy away from conflicts<br>&nbsp;&nbsp;- Deal with the issues head on – never procrastinate<br>&nbsp;&nbsp;- Never bury your head in the sand<br>&nbsp;&nbsp;- Be direct & candid</td>
-                                                                                                    <td><select id="" class="form-control ">
-                                                                                                            <option value="">--SELECT--</option>
-                                                                                                            <option value="1">1</option>
-                                                                                                            <option value="2">2</option>
-                                                                                                            <option value="3">3</option>
-                                                                                                            <option value="4">4</option>
-                                                                                                            <option value="5">5</option>
-                                                                                                        </select></td>
-                                                                                                    <td><select id="" class="form-control ">
-                                                                                                            <option value="">--SELECT--</option>
-                                                                                                            <option value="1">1</option>
-                                                                                                            <option value="2">2</option>
-                                                                                                            <option value="3">3</option>
-                                                                                                            <option value="4">4</option>
-                                                                                                            <option value="5">5</option>
-                                                                                                        </select></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
-                                                                                                    <td colspan="2"><textarea type="Text" class="form-control"></textarea></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                                                    <td colspan="2"><textarea type="Text" class="form-control"></textarea></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>WLB 5: Believe in Vision & Purpose</b><br>&nbsp;&nbsp;- Be Far-sighted & Look beyond the obvious<br>&nbsp;&nbsp;- Be Strategic – Have a macro & micro perspective, Innovate<br>&nbsp;&nbsp;- Be Entrepreneurial <br>&nbsp;&nbsp;- Communicate your Vision to your team<br>&nbsp;&nbsp;- Make sure everyone on board under stand's the purpose<br>&nbsp;&nbsp;- Communicate ‘What’ , Why and When to align people to your Vision & Purpose </td>
-                                                                                                    <td><select id="" class="form-control ">
-                                                                                                            <option value="">--SELECT--</option>
-                                                                                                            <option value="1">1</option>
-                                                                                                            <option value="2">2</option>
-                                                                                                            <option value="3">3</option>
-                                                                                                            <option value="4">4</option>
-                                                                                                            <option value="5">5</option>
-                                                                                                        </select></td>
-                                                                                                    <td><select id="" class="form-control ">
-                                                                                                            <option value="">--SELECT--</option>
-                                                                                                            <option value="1">1</option>
-                                                                                                            <option value="2">2</option>
-                                                                                                            <option value="3">3</option>
-                                                                                                            <option value="4">4</option>
-                                                                                                            <option value="5">5</option>
-                                                                                                        </select></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
-                                                                                                    <td colspan="2"><textarea type="Text" class="form-control"></textarea></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                                                    <td colspan="2"><textarea type="Text" class="form-control"></textarea></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b style="font-size: 16px">TOTAL SCORE</b></td>
-                                                                                                    <td><input type="Text" class="form-control"></td>
-                                                                                                    <td><input type="Text" class="form-control"></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>Other Comment/Remark (Mid Year)</b></td>
-                                                                                                    <td colspan="2"><textarea type="Text" class="form-control"></textarea></td>
-                                                                                                </tr>
-                                                                                                <tr style="background-color: lightgrey">
-                                                                                                    <td><b>Other Comment/Remark (End Year)</b></td>
-                                                                                                    <td colspan="2"><textarea type="Text" class="form-control"></textarea></td>
-                                                                                                </tr>
-                                                                                            </table>
+                                    <%--<c:forEach var="individualDevelopmentPlan" items="${individualDevelopmentPlanList}" varStatus="status">--%>
+                                        <tr id="individualTrId$/{status.count}">
+                                            <td id="removeKRAIndividualID$/{status.count}" name="removeKRAIndividualID$/{status.count}" style="text-align: center">$/{status.count}</td>
+                                        <input type="hidden" name="IndividualDevelopmentPlanId$/{status.count}" id="IndividualDevelopmentPlanId$/{status.count}" value="$/{individualDevelopmentPlan.id}">
+                                        <td id="indDevId"><textarea type="Text" id="text$/{status.count}" name="text$/{status.count}" class="form-control saveRequried" readonly>$/{individualDevelopmentPlan.managertext1}</textarea></td>
+                                        <td><div>
+                                                <select id="individualtextDiv$/{status.count}" name="individualtextDiv$/{status.count}" value="$/{individualDevelopmentPlan.managertext2}" class="form-control saveRequried">
+                                                    <option value="">--SELECT--</option>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${individualDevelopmentPlan.managertext2 eq 'Technical'}">--%>
 
-                                                                                        </div>
+                                        <option value="Technical" selected="">Technical</option>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
+
+                                        <option value="Technical">Technical</option>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${individualDevelopmentPlan.managertext2 eq 'Other'}">--%>
+
+                                        <option value="Other" selected="">Other</option>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
+
+                                        <option value="Other">Other</option>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${individualDevelopmentPlan.managertext2 eq 'Soft Skill'}">--%>
+
+                                        <option value="Soft Skill" selected="">Soft Skill</option>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
+                                        <option value="Soft Skill">Soft Skill</option>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+
+                                </select>
+                            </div>
+                        </td>
+                        <td><div>
+                                <select id="trainingSelectId$/{status.count}" name="trainingSelectId$/{status.count}" value="$/{individualDevelopmentPlan.managertext3}" class="form-control saveRequried" onchange="trainingSelect($/{status.count});">
+                                    <option value="">--SELECT--</option>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${individualDevelopmentPlan.managertext3 eq 'On The Job Training'}">--%>
+
+                                        <option value="On The Job Training" selected="">On The Job Training</option>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
+
+                                        <option value="On The Job Training">On The Job Training</option>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${individualDevelopmentPlan.managertext3 eq 'Classroom Training'}">--%>
+
+                                        <option value="Classroom Training" selected="">Classroom Training</option>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
+
+                                        <option value="Classroom Training">Classroom Training</option>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${individualDevelopmentPlan.managertext3 eq 'Other'}">--%>
+
+                                        <option value="Other" selected="">Other</option>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
+
+                                        <option value="Other">Other</option>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+
+                                </select>
+                            </div>
+                        </td>
+                        <td><div>
+                                <textarea class="form-control saveRequried" id="trainingSelectTextinput$/{status.count}" name="trainingSelectTextinput$/{status.count}" style="display: none">$/{individualDevelopmentPlan.managerremark}</textarea>
+                            </div>
+                        </td>
+                                    <%--<c:if test="${status.last}">--%>
+
+                                        <td style="text-align: center">
+                                            <span style='margin-top: 5px;'>
+                                                <input style='display: none;' type="button" value="+" id="addIndividualId" />
+                                            </span>
+                                        </td>
+                                    <%--</c:if>--%>
+                                    <%--<c:if test="${!status.last}">--%>
+                                        <td id="" style="text-align: center">
+                                            <span style="margin-top: 5px;">
+                                    <%--<c:if test="${flag eq 'true' || flag1 eq 'true' || flag2 eq 'true'}">--%>
+                                        <input style='display: none;' type="button" value="-" id="removeRowButtonId" onclick="removeIndividualChild('individualTrId$/{status.count}', 'individualEmpMidLabel1TrId$/{status.count}', 'individualEmpMid1TrId$/{status.count}', 'individualEmpMidLabel2TrId$/{status.count}', 'individualEmpMid2TrId$/{status.count}', '$/{individualDevelopmentPlan.id}');">
+                                    <%--</c:if>--%>
+                                </span>
+                            </td>
+                                    <%--</c:if>--%>
+                                    </tr>
+                                    <tr id="individualEmpMidLabel1TrId$/{status.count}">
+                                        <td colspan="3" id="midYearReId$/{status.count}"><b>Employee Mid-Year Remark</b></td>
+                                        <td colspan="3" id="endYearReId$/{status.count}"><b>Employee End-Year Remark</b></td>
+                                    </tr>
+                                    <tr id="individualEmpMid1TrId$/{status.count}">
+
+                                        <td colspan="3" id="midYearRetxtId$/{status.count}"><textarea rows="3" style="width: 451px;" id="midYearRemark$/{status.count}" name="midYearRemark$/{status.count}" class="form-control saveRequried">$/{individualDevelopmentPlan.managerMidYearRemarkManager}</textarea></td>
+                                        <td colspan="3" id="endYearRetxtId$/{status.count}"><textarea rows="3" style="width: 451px;" id="endYearRemark$/{status.count}" name="endYearRemark$/{status.count}" class="form-control saveRequried">$/{individualDevelopmentPlan.managerEndYearRemarkEmployee}</textarea></td>
+                                    </tr>
+                                    <tr id="individualEmpMidLabel2TrId$/{status.count}">
+                                        <td colspan="3" id="endYearReId"><b>Manager Mid-Year Remark</b></td>
+                                        <td colspan="3" id="endYearReId"><b>Manager End-Year Remark</b></td>
+                                    </tr>
+                                    <tr id="individualEmpMid2TrId$/{status.count}">
+
+                                        <td colspan="3"><textarea rows="3" style="width: 451px;" id="managerMidYearRemark$/{status.count}" name="managerMidYearRemark$/{status.count}" class="form-control saveRequried">$/{individualDevelopmentPlan.managerMidYearRemark}</textarea></td>
+                                        <td colspan="3"><textarea rows="3" style="width: 451px;" id="managerEndYearRemark$/{status.count}" name="managerEndYearRemark$/{status.count}" class="form-control saveRequried">$/{individualDevelopmentPlan.managerEndYearRemark}</textarea></td>
+                                    </tr>
+                                    <%--</c:forEach>--%>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
+                                        <tr>
+                                            <td style="text-align: center">1</td>
+                                            <td><textarea type="Text" id="text" name="text" class="form-control saveRequried" readonly></textarea></td>
+                                            <td><div>
+                                                    <select id="individualtextDiv" name="individualtextDiv" class="form-control saveRequried">
+                                                        <option value="">--SELECT--</option>
+                                                        <option value="Technical">Technical</option>
+                                                        <option value="Other">Other</option>
+                                                        <option value="Soft Skill">Soft Skill</option>
+
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td><div>
+                                                    <select id="trainingSelectId1" name="trainingSelectId1" class="form-control saveRequried" onchange="trainingSelect(1)">
+                                                        <option value="">--SELECT--</option>
+                                                        <option value="On The Job Training">On The Job Training</option>
+                                                        <option value="Classroom Training">Classroom Training</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td><div>
+                                                    <textarea class="form-control saveRequried" id="trainingSelectTextinput1" name="trainingSelectTextinput1" style="display: none"></textarea>
+                                                </div>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <span style='margin-top: 5px;'>
+                                                    <input type="button" style="display: none;" value="+" id="addIndividualId" />
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" id="midYearReId"><b>Employee Mid-Year Remark</b></td>
+                                            <td colspan="3" id="endYearReId"><b>Employee End-Year Remark</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3"><textarea rows="3" id="midYearRemark" style="width: 451px;" name="midYearRemark" class="form-control saveRequried"></textarea></td>
+                                            <td colspan="3"><textarea rows="3" id="endYearRemark" style="width: 451px;" name="endYearRemark" class="form-control saveRequried"></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" id="endYearReId"><b>Manager Mid-Year Remark</b></td>
+                                            <td colspan="3" id="endYearReId"><b>Manager End-Year Remark</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3"><textarea rows="3" id="managerMidYearRemark" style="width: 451px;" name="managerMidYearRemark" class="form-control saveRequried"></textarea></td>
+                                            <td colspan="3"><textarea rows="3" id="managerEndYearRemark" style="width: 451px;" name="managerEndYearRemark" class="form-control saveRequried"></textarea></td>
+                                        </tr>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                </table>
+
+                            </div>
+                        </div> /.col 
+                    </div> /.row 
+                </div> /.box-body 
+            </div>-->
 
 
-
-                                                                                    </div> /.col
-                                                                                    <div class="col-md-12 col-sm-12">
-
-
-
-                                                                                    </div>
-                                                                                     /.col
-                                                                                </div> /.row
-                                                                            </div> /.box-body
-                                                                        </div>-->
 
                                     <div class="box box-info collapsed-box" id="behaviorsTabId">
                                         <div class="box-header">
@@ -2471,12 +2269,24 @@
                                         <div class="box-body no-padding">
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label class="col-sm-5 control-label"><b>Final Score</b></label>
-                                                        <div class="col-sm-2">
-
-                                                            <input type="number" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" class="form-control" readonly="true">
-
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group text-center">
+                                                                <label class="control-label"><b>KRA Score</b></label>&nbsp;&nbsp;
+                                                                <input type="number" id="totalScore" name="totalScore" value="${totalScore}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 form-group text-center">
+                                                            <div class="form-group">
+                                                                <label class="control-label"><b>WLB Score</b></label>&nbsp;&nbsp;
+                                                                <input type="number" id="behaviorsEndyearTotalscore" name="behaviorsEndyearTotalscore" value="${behaviorsEndyearTotalscore}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 form-group text-center">
+                                                            <div class="form-group">
+                                                                <label class="control-label"><b>Final Score</b></label>&nbsp;&nbsp;
+                                                                <input type="number" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -2520,8 +2330,14 @@
 
                                                         </table>
 
-                                                    </div>
 
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-5 control-label"><b>Activity/Project Performance</b></label>
+                                                        <div class="col-sm-2">
+                                                            <input type="Text" id="managerActivityScore" name="managerActivityScore" value="${managerActivityScore}" class="form-control" readonly>
+                                                        </div>
+                                                    </div>
                                                 </div><!-- /.col -->
 
                                                 <!-- /.col -->

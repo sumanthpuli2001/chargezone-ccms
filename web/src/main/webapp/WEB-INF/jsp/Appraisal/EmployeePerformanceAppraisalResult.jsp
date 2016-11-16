@@ -20,6 +20,14 @@
 //id=Empid and userid=UserMasterid and= appraisal Id
             window.location = 'appraisalPerformance.htm?act=editClick&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId;
         }
+        
+        function editClickCompetencyForManager(id, userid, appraisalId) {
+            window.location = 'appraisalPerformance.htm?act=editClickCompetencyForManager&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId;
+        }
+        function editClickForIdpManager(id, userid, appraisalId) {
+            window.location = 'appraisalPerformance.htm?act=editClickForIdpManager&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId;
+        }
+        
         function createClick(id) {
             window.location = 'userRightMaster.htm?act=createClick&id=' + id;
         }
@@ -121,7 +129,7 @@
                                                                                 <c:if test="${list[1][0] eq 'Pendding'}">
                                                                                 <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Pending</span></div>
                                                                             </c:if>
-                                                                            
+
                                                                         </li><!-- /.item -->
                                                                         <li class="item">
                                                                             <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">KRA Approval By Manager</span></div>
@@ -198,20 +206,39 @@
 
                                                                 <td>
                                                                     <div class="btn-group">
-                                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" onclick="editClick(${list[0][1]},${list[0][7]},${list[0][0]});" aria-expanded="false">
-                                                                            <!--Action <span class="caret"></span>-->
-                                                                            <!--<ul class="dropdown-menu">-->
-                                                                            <!--<li>-->
-                                                                            <span class="fa fa-pencil"></span>
-                                                                            <!--                                                                            <a href="#"
-                                                                                                                                                           onclick="">
-                                                                                                                                                            onclick="viewClick($//{list[0]},$//{list[1]});">
-                                                                                                                                                        </a>-->
-                                                                            View &nbsp;&nbsp;
-                                                                        </button>
-                                                                        <!--</li>-->
+<!--                                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" onclick="editClick(${list[0][1]},${list[0][7]},${list[0][0]});" aria-expanded="false">
 
-                                                                        <!--</ul>-->
+                                                                            <span class="fa fa-pencil"></span>
+                                                                            
+                                                                            Action &nbsp;&nbsp;
+                                                                        </button>-->
+                                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"  aria-expanded="false">
+                                                                            <span class="fa fa-pencil"></span>
+                                                                            Action &nbsp;&nbsp;
+                                                                        </button>
+                                                                        <ul class="dropdown-menu">
+                                                                            <li style="width: 100px;">
+                                                                                <a href="#"
+                                                                                   onclick="editClick(${list[0][1]},${list[0][7]},${list[0][0]});">
+
+                                                                                    View PMP
+                                                                                </a>
+                                                                            </li>
+
+                                                                            <li style="width: 100px;">
+                                                                                <a href="#"
+                                                                                   onclick="editClickCompetencyForManager(${list[0][1]},${list[0][7]},${list[0][0]});">
+                                                                                    View Competency
+                                                                                </a>
+                                                                            </li>
+                                                                            <li style="width: 100px;">
+                                                                                <a href="#"
+                                                                                   onclick="editClickForIdpManager(${list[0][1]},${list[0][7]},${list[0][0]});">
+                                                                                    View IDP
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+
                                                                     </div>
                                                                 </td>
                                                             </tr>

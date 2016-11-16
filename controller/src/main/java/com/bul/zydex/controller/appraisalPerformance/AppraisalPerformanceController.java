@@ -1131,196 +1131,23 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             ///////////////////Competency Evaluation (As Per Zydex Competency Framework)////////////////////////////
 
             ////////////////////////////////////KRA OTHER Activity  Closed//////////////////////////////////////////////////////////
-            ///////////////////Competency Evaluation (As Per Zydex Competency Framework)////////////////////////////
-            AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
-            CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
-            CompetencyEvaluationMaster competencyEvaluationMaster = new CompetencyEvaluationMaster();
-            int subCompentencyCount = Integer.parseInt(request.getParameter("subCompentencyCount"));
-            boolean flag = true;
-            for (int i = 1; i <= subCompentencyCount; i++) {
-                String competencyEveId = request.getParameter("competencyEveId" + i);
-                if (competencyEveId != null) {
-                    appraisalPerformanceCompetencyEvaluation = appraisalPerformanceCompetencyEvaluationService.readById(Integer.parseInt(competencyEveId));
-                }
-                String compentencyStartYear = request.getParameter("compentencyStartYear" + i);
-                String compentencyStartRemark = request.getParameter("compentencyStartRemark" + i);
-                String compentencyMidYear = request.getParameter("compentencyMidYear" + i);
-                String compentencyMidRemark = request.getParameter("compentencyMidRemark" + i);
-                String compentencyEndYear = request.getParameter("compentencyEndYear" + i);
-                String compentencyEndRemark = request.getParameter("compentencyEndRemark" + i);
-                if (!"".equals(compentencyStartYear) && null != compentencyStartYear) {
-                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(compentencyStartYear);
-                } else {
-                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(null);
-                }
-                if (!"".equals(compentencyStartRemark) && null != compentencyStartRemark) {
-                    appraisalPerformanceCompetencyEvaluation.setStartyearRemark(compentencyStartRemark);
-                } else {
-                    appraisalPerformanceCompetencyEvaluation.setStartyearRemark(null);
-                }
-                if (!"".equals(compentencyMidYear) && null != compentencyMidYear) {
-                    appraisalPerformanceCompetencyEvaluation.setCompetencyMidYear(compentencyMidYear);
-                } else {
-                    appraisalPerformanceCompetencyEvaluation.setCompetencyMidYear(null);
-                }
-                if (!"".equals(compentencyMidRemark) && null != compentencyMidRemark) {
-                    appraisalPerformanceCompetencyEvaluation.setMidyearRemark(compentencyMidRemark);
-                } else {
-                    appraisalPerformanceCompetencyEvaluation.setMidyearRemark(null);
-                }
-                if (!"".equals(compentencyEndYear) && null != compentencyEndYear) {
-                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(compentencyEndYear);
-                } else {
-                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
-                }
-                if (!"".equals(compentencyEndRemark) && null != compentencyEndRemark) {
-                    appraisalPerformanceCompetencyEvaluation.setEndyearRemark(compentencyEndRemark);
-                } else {
-                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
-                }
-
-//
-                appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-                int compentencyTextMasterId = Integer.parseInt(request.getParameter("compentencyTextMasterId" + i));
-                competencyEvaluationTextmaster.setId(compentencyTextMasterId);
-//                competencyEvaluationMaster.setId(competencyEvaluationId);
-//                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
-                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationTextmaster(competencyEvaluationTextmaster);
-//                String competencyEveId = request.getParameter("competencyEveId" + i);
-                String btn2 = request.getParameter("save");
-
-                if (null != btn2 && btn2.equals("save")) {
-                    if (!"".equals(competencyEveId) && null != competencyEveId) {
-                        int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
-                        competencyEvaluationMaster.setId(competencyEvaluationId);
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
-                        appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
-//                        appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
-                        appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
-
-                    } else {
-//                        if (!appraisalId.isEmpty()) {
-//                            if (flag) {
-//                                for (String id : appraisalId.split(",")) {
-//                                    if (!id.equals("")) {
-//                                        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation2 = new AppraisalPerformanceCompetencyEvaluation();
-//                                        AppraisalPerformanceCompetencyEvaluationHistory appraisalPerformanceCompetencyEvaluationHistory = new AppraisalPerformanceCompetencyEvaluationHistory();
-//                                        appraisalPerformanceCompetencyEvaluation2.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-//
-//                                        try {
-//
-//                                            List<AppraisalPerformanceCompetencyEvaluation> competencyList = (List<AppraisalPerformanceCompetencyEvaluation>) appraisalPerformanceCompetencyEvaluationService.readByAppraisalPerformanceId(appraisalPerformanceCompetencyEvaluation2);
-//
-//                                            for (AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation1 : competencyList) {
-//
-//                                                BeanUtils.copyProperties(appraisalPerformanceCompetencyEvaluation1, appraisalPerformanceCompetencyEvaluationHistory);
-//                                                appraisalPerformanceCompetencyEvaluationHistory.setAppraisalPerformanceId(appraisalPerformanceCompetencyEvaluation1.getAppraisalPerformanceMaster().getId());
-//                                                appraisalPerformanceCompetencyEvaluationHistory.setCompetencyEvaluationId(appraisalPerformanceCompetencyEvaluation1.getCompetencyEvaluationMaster().getId());
-//                                                appraisalPerformanceCompetencyEvaluationHistory.setCompetencyEvaluationTextId(appraisalPerformanceCompetencyEvaluation1.getCompetencyEvaluationTextmaster().getId());
-////                                            appraisalPerformanceCompetencyEvaluationHistory.setDateStr(startdate);
-//                                                appraisalPerformanceCompetencyEvaluationHistory.setDateStr(strDate);
-//                                                appraisalPerformanceCompetencyEvaluationHistory.setDeletedBy("Employee Side");
-//                                                appraisalPerformanceCompetencyEvaluationHistory.setId(0);
-//                                                appraisalPerformanceCompetencyEvaluationHistoryService.create(appraisalPerformanceCompetencyEvaluationHistory);
-//                                            }
-//                                        } catch (Exception e) {
-//                                            e.printStackTrace();
-//                                        }
-//
-//                                        appraisalPerformanceCompetencyEvaluationService.delete1(appraisalPerformanceCompetencyEvaluation2);
-//                                        flag = false;
-//                                    }
-//                                }
-//                            }
-//                        }
-                        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
-                        if (!"".equals(competencyEvaluationId) && null != competencyEvaluationId) {
-                            int competencyEvaluation_Id = Integer.parseInt(competencyEvaluationId);
-                            competencyEvaluationMaster.setId(competencyEvaluation_Id);
-                            appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
-//                            appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
-                            appraisalPerformanceCompetencyEvaluationService.create(appraisalPerformanceCompetencyEvaluation);
-                        }
-                    }
-                } else {
-
-                    /////////manager StartYearManager///////////////////////////////
-                    if (!"".equals(compentencyStartYear) && null != compentencyStartYear) {
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyStartYearManager(compentencyStartYear);
-                    } else {
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyStartYearManager(null);
-                    }
-                    if (!"".equals(compentencyStartRemark) && null != compentencyStartRemark) {
-                        appraisalPerformanceCompetencyEvaluation.setStartyearRemarkManager(compentencyStartRemark);
-                    } else {
-                        appraisalPerformanceCompetencyEvaluation.setStartyearRemarkManager(null);
-                    }
-                    if (!"".equals(compentencyMidYear) && null != compentencyMidYear) {
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyMidYearManager(compentencyMidYear);
-                    } else {
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyMidYearManager(null);
-                    }
-                    if (!"".equals(compentencyMidRemark) && null != compentencyMidRemark) {
-                        appraisalPerformanceCompetencyEvaluation.setMidyearRemarkManager(compentencyMidRemark);
-                    } else {
-                        appraisalPerformanceCompetencyEvaluation.setMidyearRemarkManager(null);
-                    }
-                    if (!"".equals(compentencyEndYear) && null != compentencyEndYear) {
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(compentencyEndYear);
-                    } else {
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(null);
-                    }
-                    if (!"".equals(compentencyEndRemark) && null != compentencyEndRemark) {
-                        appraisalPerformanceCompetencyEvaluation.setEndyearRemarkManager(compentencyEndRemark);
-                    } else {
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(null);
-                    }
-                    if (!"".equals(competencyEveId) && null != competencyEveId) {
-                        int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
-                        competencyEvaluationMaster.setId(competencyEvaluationId);
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
-                        appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
-//                        appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
-                        appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
-
-                    } else {
-//                        if (!appraisalId.isEmpty()) {
-//                            if (flag) {
-//                                for (String id : appraisalId.split(",")) {
-//                                    if (!id.equals("")) {
-//                                        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation2 = new AppraisalPerformanceCompetencyEvaluation();
-//                                        appraisalPerformanceCompetencyEvaluation2.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-//                                        appraisalPerformanceCompetencyEvaluationService.delete1(appraisalPerformanceCompetencyEvaluation2);
-//                                        flag = false;
-//                                    }
-//                                }
-//                            }
-//                        }
-                        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
-                        if (!"".equals(competencyEvaluationId) && null != competencyEvaluationId) {
-                            int competencyEvaluation_Id = Integer.parseInt(competencyEvaluationId);
-                            competencyEvaluationMaster.setId(competencyEvaluation_Id);
-                            appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
-//                            appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
-                            appraisalPerformanceCompetencyEvaluationService.create(appraisalPerformanceCompetencyEvaluation);
-                        }
-                    }
-                }
-            }
-
+            ///////////////////Competency Evaluation (As Per Zydex Competency Framework) change by date 11/11/2016////////////////////////////
 //            AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
 //            CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
 //            CompetencyEvaluationMaster competencyEvaluationMaster = new CompetencyEvaluationMaster();
 //            int subCompentencyCount = Integer.parseInt(request.getParameter("subCompentencyCount"));
+//            boolean flag = true;
 //            for (int i = 1; i <= subCompentencyCount; i++) {
+//                String competencyEveId = request.getParameter("competencyEveId" + i);
+//                if (competencyEveId != null) {
+//                    appraisalPerformanceCompetencyEvaluation = appraisalPerformanceCompetencyEvaluationService.readById(Integer.parseInt(competencyEveId));
+//                }
 //                String compentencyStartYear = request.getParameter("compentencyStartYear" + i);
 //                String compentencyStartRemark = request.getParameter("compentencyStartRemark" + i);
 //                String compentencyMidYear = request.getParameter("compentencyMidYear" + i);
 //                String compentencyMidRemark = request.getParameter("compentencyMidRemark" + i);
 //                String compentencyEndYear = request.getParameter("compentencyEndYear" + i);
 //                String compentencyEndRemark = request.getParameter("compentencyEndRemark" + i);
-//
-//                ///////////employee StartYearManager//////////
 //                if (!"".equals(compentencyStartYear) && null != compentencyStartYear) {
 //                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(compentencyStartYear);
 //                } else {
@@ -1352,14 +1179,14 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
 //                }
 //
-////                ///////////////////////////////////////////////
+////
 //                appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
 //                int compentencyTextMasterId = Integer.parseInt(request.getParameter("compentencyTextMasterId" + i));
 //                competencyEvaluationTextmaster.setId(compentencyTextMasterId);
 ////                competencyEvaluationMaster.setId(competencyEvaluationId);
 ////                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
 //                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationTextmaster(competencyEvaluationTextmaster);
-//                String competencyEveId = request.getParameter("competencyEveId" + i);
+////                String competencyEveId = request.getParameter("competencyEveId" + i);
 //                String btn2 = request.getParameter("save");
 //
 //                if (null != btn2 && btn2.equals("save")) {
@@ -1368,17 +1195,56 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                        competencyEvaluationMaster.setId(competencyEvaluationId);
 //                        appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
 //                        appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
+////                        appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
 //                        appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
+//
 //                    } else {
-//                        String competencyEvaluationId = request.getParameter("competencyEvaluation_Id");
+////                        if (!appraisalId.isEmpty()) {
+////                            if (flag) {
+////                                for (String id : appraisalId.split(",")) {
+////                                    if (!id.equals("")) {
+////                                        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation2 = new AppraisalPerformanceCompetencyEvaluation();
+////                                        AppraisalPerformanceCompetencyEvaluationHistory appraisalPerformanceCompetencyEvaluationHistory = new AppraisalPerformanceCompetencyEvaluationHistory();
+////                                        appraisalPerformanceCompetencyEvaluation2.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+////
+////                                        try {
+////
+////                                            List<AppraisalPerformanceCompetencyEvaluation> competencyList = (List<AppraisalPerformanceCompetencyEvaluation>) appraisalPerformanceCompetencyEvaluationService.readByAppraisalPerformanceId(appraisalPerformanceCompetencyEvaluation2);
+////
+////                                            for (AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation1 : competencyList) {
+////
+////                                                BeanUtils.copyProperties(appraisalPerformanceCompetencyEvaluation1, appraisalPerformanceCompetencyEvaluationHistory);
+////                                                appraisalPerformanceCompetencyEvaluationHistory.setAppraisalPerformanceId(appraisalPerformanceCompetencyEvaluation1.getAppraisalPerformanceMaster().getId());
+////                                                appraisalPerformanceCompetencyEvaluationHistory.setCompetencyEvaluationId(appraisalPerformanceCompetencyEvaluation1.getCompetencyEvaluationMaster().getId());
+////                                                appraisalPerformanceCompetencyEvaluationHistory.setCompetencyEvaluationTextId(appraisalPerformanceCompetencyEvaluation1.getCompetencyEvaluationTextmaster().getId());
+//////                                            appraisalPerformanceCompetencyEvaluationHistory.setDateStr(startdate);
+////                                                appraisalPerformanceCompetencyEvaluationHistory.setDateStr(strDate);
+////                                                appraisalPerformanceCompetencyEvaluationHistory.setDeletedBy("Employee Side");
+////                                                appraisalPerformanceCompetencyEvaluationHistory.setId(0);
+////                                                appraisalPerformanceCompetencyEvaluationHistoryService.create(appraisalPerformanceCompetencyEvaluationHistory);
+////                                            }
+////                                        } catch (Exception e) {
+////                                            e.printStackTrace();
+////                                        }
+////
+////                                        appraisalPerformanceCompetencyEvaluationService.delete1(appraisalPerformanceCompetencyEvaluation2);
+////                                        flag = false;
+////                                    }
+////                                }
+////                            }
+////                        }
+//                        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
 //                        if (!"".equals(competencyEvaluationId) && null != competencyEvaluationId) {
 //                            int competencyEvaluation_Id = Integer.parseInt(competencyEvaluationId);
 //                            competencyEvaluationMaster.setId(competencyEvaluation_Id);
 //                            appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
+////                            appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
 //                            appraisalPerformanceCompetencyEvaluationService.create(appraisalPerformanceCompetencyEvaluation);
 //                        }
 //                    }
 //                } else {
+//
+//                    /////////manager StartYearManager///////////////////////////////
 //                    if (!"".equals(compentencyStartYear) && null != compentencyStartYear) {
 //                        appraisalPerformanceCompetencyEvaluation.setCompetencyStartYearManager(compentencyStartYear);
 //                    } else {
@@ -1409,250 +1275,49 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                    } else {
 //                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(null);
 //                    }
-//
 //                    if (!"".equals(competencyEveId) && null != competencyEveId) {
 //                        int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
 //                        competencyEvaluationMaster.setId(competencyEvaluationId);
 //                        appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
 //                        appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
+////                        appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
 //                        appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
+//
 //                    } else {
-//                        String competencyEvaluationId = request.getParameter("competencyEvaluation_Id");
+////                        if (!appraisalId.isEmpty()) {
+////                            if (flag) {
+////                                for (String id : appraisalId.split(",")) {
+////                                    if (!id.equals("")) {
+////                                        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation2 = new AppraisalPerformanceCompetencyEvaluation();
+////                                        appraisalPerformanceCompetencyEvaluation2.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+////                                        appraisalPerformanceCompetencyEvaluationService.delete1(appraisalPerformanceCompetencyEvaluation2);
+////                                        flag = false;
+////                                    }
+////                                }
+////                            }
+////                        }
+//                        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
 //                        if (!"".equals(competencyEvaluationId) && null != competencyEvaluationId) {
 //                            int competencyEvaluation_Id = Integer.parseInt(competencyEvaluationId);
 //                            competencyEvaluationMaster.setId(competencyEvaluation_Id);
 //                            appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
+////                            appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
 //                            appraisalPerformanceCompetencyEvaluationService.create(appraisalPerformanceCompetencyEvaluation);
 //                        }
 //                    }
-//
 //                }
 //            }
-//            AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
-//            CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
-//            CompetencyEvaluationMaster competencyEvaluationMaster = new CompetencyEvaluationMaster();
-//            int subCompentencyCount = Integer.parseInt(request.getParameter("subCompentencyCount"));
-//            for (int i = 1; i <= subCompentencyCount; i++) {
-//                String compentencyStartYear = request.getParameter("compentencyStartYear" + i);
-//                String compentencyStartRemark = request.getParameter("compentencyStartRemark" + i);
-//                String compentencyMidYear = request.getParameter("compentencyMidYear" + i);
-//                String compentencyMidRemark = request.getParameter("compentencyMidRemark" + i);
-//                String compentencyEndYear = request.getParameter("compentencyEndYear" + i);
-//                String compentencyEndRemark = request.getParameter("compentencyEndRemark" + i);
-//                if (!"".equals(compentencyStartYear) && null != compentencyStartYear) {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(compentencyStartYear);
-//                } else {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(null);
-//                }
-//                ///////////manager StartYearManager
-//                if (!"".equals(compentencyStartYear) && null != compentencyStartYear) {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYearManager(compentencyStartYear);
-//                } else {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYearManager(null);
-//                }
-//
-//                if (!"".equals(compentencyStartRemark) && null != compentencyStartRemark) {
-//                    appraisalPerformanceCompetencyEvaluation.setStartyearRemark(compentencyStartRemark);
-//                } else {
-//                    appraisalPerformanceCompetencyEvaluation.setStartyearRemark(null);
-//                }
-//                ///////////manager StartyearRemarkManager
-//                if (!"".equals(compentencyStartRemark) && null != compentencyStartRemark) {
-//                    appraisalPerformanceCompetencyEvaluation.setStartyearRemarkManager(compentencyStartRemark);
-//                } else {
-//                    appraisalPerformanceCompetencyEvaluation.setStartyearRemarkManager(null);
-//                }
-//                if (!"".equals(compentencyMidYear) && null != compentencyMidYear) {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyMidYear(compentencyMidYear);
-//                } else {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyMidYear(null);
-//                }
-//                if (!"".equals(compentencyMidRemark) && null != compentencyMidRemark) {
-//                    appraisalPerformanceCompetencyEvaluation.setMidyearRemark(compentencyMidRemark);
-//                } else {
-//                    appraisalPerformanceCompetencyEvaluation.setMidyearRemark(null);
-//                }
-//                if (!"".equals(compentencyEndYear) && null != compentencyEndYear) {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(compentencyEndYear);
-//                } else {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
-//                }
-//                if (!"".equals(compentencyEndRemark) && null != compentencyEndRemark) {
-//                    appraisalPerformanceCompetencyEvaluation.setEndyearRemark(compentencyEndRemark);
-//                } else {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
-//                }
-//                appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-//                int compentencyTextMasterId = Integer.parseInt(request.getParameter("compentencyTextMasterId" + i));
-//                competencyEvaluationTextmaster.setId(compentencyTextMasterId);
-////                competencyEvaluationMaster.setId(competencyEvaluationId);
-////                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
-//                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationTextmaster(competencyEvaluationTextmaster);
-//                String competencyEveId = request.getParameter("competencyEveId" + i);
-//                if (!"".equals(competencyEveId) && null != competencyEveId) {
-//                    int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
-//                    competencyEvaluationMaster.setId(competencyEvaluationId);
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
-//                    appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
-//                    appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
-//                } else {
-//                    String competencyEvaluationId = request.getParameter("competencyEvaluation_Id");
-//                    if (!"".equals(competencyEvaluationId) && null != competencyEvaluationId) {
-////                    int competencyEvaluation_Id = Integer.parseInt(request.getParameter("competencyEvaluation_Id"));
-//                        int competencyEvaluation_Id = Integer.parseInt(competencyEvaluationId);
-//                        competencyEvaluationMaster.setId(competencyEvaluation_Id);
-//                        appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
-//                        appraisalPerformanceCompetencyEvaluationService.create(appraisalPerformanceCompetencyEvaluation);
-//                    } else {
-//
-//                    }
-//
-//                }
-//            }
+//            
             ///////////////////////////Individual Development Plan//////////////////////////////////
-///////////////////////////Individual Development Plan//////////////////////////////////
-            AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
-            int individualcount = Integer.parseInt(request.getParameter("IndividualId"));
-            for (int i = 1; i <= individualcount; i++) {
-                String individualplan = request.getParameter("IndividualDevelopmentPlanId" + i);
-                if (null != individualplan) {
-
-                    appraisalPerformanceIndividualDevelopmentPlan = appraisalPerformanceIndividualDevelopmentPlanService.readById(Integer.parseInt(individualplan));
-                }
-                String text1 = request.getParameter("text" + i);
-                String text2 = request.getParameter("individualtextDiv" + i);
-                String text3 = request.getParameter("trainingSelectId" + i);
-                String remark = request.getParameter("trainingSelectTextinput" + i);
-                String midYearRemark = request.getParameter("midYearRemark" + i);
-                String endYearRemark = request.getParameter("endYearRemark" + i);
-                String managerMidYearRemark = request.getParameter("managerMidYearRemark" + i);
-                String managerEndYearRemark = request.getParameter("managerEndYearRemark" + i);
-                if (!"".equals(text1) && null != text1) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setText1(text1);
-                } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setText1(null);
-                }
-
-                if (!"".equals(text2) && null != text2) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setText2(text2);
-                } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setText2(null);
-                }
-//                if (!"".equals(text2) && null != text2) {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(text2);
-//                } else {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(null);
-//                }
-                if (!"".equals(text3) && null != text3) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setText3(text3);
-                } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setText3(null);
-                }
-//                if (!"".equals(text3) && null != text3) {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(text3);
-//                } else {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
-//                }
-                if (!"".equals(remark) && null != remark) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setRemark(remark);
-                } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setRemark(null);
-                }
-                if (!"".equals(midYearRemark) && null != midYearRemark) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setMidYearRemark(midYearRemark);
-                } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setMidYearRemark(null);
-                }
-                if (!"".equals(endYearRemark) && null != endYearRemark) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(endYearRemark);
-                } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(null);
-                }
-
-                String btn4 = request.getParameter("save");
-                if (null != btn4 && btn4.equals("save")) {
-
-                    if (individualplan != null) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
-                        appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-                        appraisalPerformanceIndividualDevelopmentPlanService.create(appraisalPerformanceIndividualDevelopmentPlan);
-                    }
-                    request.setAttribute("successMessage",
-                            "Information : The Information is Saved Successfully.");
-                } else {
-
-                    if (null != text1 && !"".equals(text1)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(text1);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(null);
-                    }
-                    if (null != text2 && !"".equals(text2)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(text2);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(null);
-                    }
-                    if (null != text3 && !"".equals(text3)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(text3);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
-                    }
-                    if (null != managerMidYearRemark && !"".equals(managerMidYearRemark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(managerMidYearRemark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(null);
-                    }
-
-                    if (null != remark && !"".equals(remark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerremark(remark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerremark(null);
-                    }
-                    if (null != endYearRemark && !"".equals(endYearRemark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(endYearRemark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(null);
-                    }
-
-                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(managerEndYearRemark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
-                    }
-                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(managerEndYearRemark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(null);
-                    }
-//                    Mid year for Manager side //
-                    if (null != midYearRemark && !"".equals(midYearRemark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkManager(midYearRemark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkManager(null);
-                    }
-                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(managerEndYearRemark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(null);
-                    }
-
-                    if (individualplan != null) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
-                        appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-                        appraisalPerformanceIndividualDevelopmentPlanService.create(appraisalPerformanceIndividualDevelopmentPlan);
-                    }
-                    request.setAttribute("successMessage",
-                            "Information : The Information is Submit Successfully.");
-                }
-            }
-
+///////////////////////////Individual Development Plan change date 11/11/2016//////////////////////////////////
 //            AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
 //            int individualcount = Integer.parseInt(request.getParameter("IndividualId"));
 //            for (int i = 1; i <= individualcount; i++) {
+//                String individualplan = request.getParameter("IndividualDevelopmentPlanId" + i);
+//                if (null != individualplan) {
 //
+//                    appraisalPerformanceIndividualDevelopmentPlan = appraisalPerformanceIndividualDevelopmentPlanService.readById(Integer.parseInt(individualplan));
+//                }
 //                String text1 = request.getParameter("text" + i);
 //                String text2 = request.getParameter("individualtextDiv" + i);
 //                String text3 = request.getParameter("trainingSelectId" + i);
@@ -1666,74 +1331,123 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                } else {
 //                    appraisalPerformanceIndividualDevelopmentPlan.setText1(null);
 //                }
-//                if (!"".equals(text1) && null != text1) {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(text1);
-//                } else {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(null);
-//                }
+//
 //                if (!"".equals(text2) && null != text2) {
 //                    appraisalPerformanceIndividualDevelopmentPlan.setText2(text2);
 //                } else {
 //                    appraisalPerformanceIndividualDevelopmentPlan.setText2(null);
 //                }
-//                /////////////////Manager//////////////
-//                if (!"".equals(text2) && null != text2) {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(text2);
-//                } else {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(null);
-//                }
+////                if (!"".equals(text2) && null != text2) {
+////                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(text2);
+////                } else {
+////                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(null);
+////                }
 //                if (!"".equals(text3) && null != text3) {
 //                    appraisalPerformanceIndividualDevelopmentPlan.setText3(text3);
 //                } else {
 //                    appraisalPerformanceIndividualDevelopmentPlan.setText3(null);
 //                }
-//                /////////////////Manager//////////////
-//                if (!"".equals(text3) && null != text3) {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(text3);
+////                if (!"".equals(text3) && null != text3) {
+////                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(text3);
+////                } else {
+////                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
+////                }
+//                if (!"".equals(remark) && null != remark) {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setRemark(remark);
 //                } else {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
+//                    appraisalPerformanceIndividualDevelopmentPlan.setRemark(null);
 //                }
 //                if (!"".equals(midYearRemark) && null != midYearRemark) {
 //                    appraisalPerformanceIndividualDevelopmentPlan.setMidYearRemark(midYearRemark);
 //                } else {
 //                    appraisalPerformanceIndividualDevelopmentPlan.setMidYearRemark(null);
 //                }
-//                if (!"".equals(remark) && null != remark) {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setRemark(remark);
-//                } else {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setRemark(null);
-//                }
-//                /////////////////Manager//////////////
-//                if (!"".equals(remark) && null != remark) {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagerremark(remark);
-//                } else {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagerremark(null);
-//                }
 //                if (!"".equals(endYearRemark) && null != endYearRemark) {
 //                    appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(endYearRemark);
 //                } else {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(endYearRemark);
+//                    appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(null);
 //                }
-//                if (!"".equals(managerMidYearRemark) && null != managerMidYearRemark) {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(managerMidYearRemark);
-//                } else {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(null);
-//                }
-//                if (!"".equals(managerEndYearRemark) && null != managerEndYearRemark) {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(managerEndYearRemark);
-//                } else {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
-//                }
-//                appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
 //
-//                String individualplanId = request.getParameter("IndividualDevelopmentPlanId" + i);
-//                if (!"".equals(individualplanId) && null != individualplanId) {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplanId));
-//                    appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
+//                String btn4 = request.getParameter("save");
+//                if (null != btn4 && btn4.equals("save")) {
+//
+//                    if (individualplan != null) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
+//                        appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+//                        appraisalPerformanceIndividualDevelopmentPlanService.create(appraisalPerformanceIndividualDevelopmentPlan);
+//                    }
+//                    request.setAttribute("successMessage",
+//                            "Information : The Information is Saved Successfully.");
 //                } else {
-//                    appraisalPerformanceIndividualDevelopmentPlanService.create(appraisalPerformanceIndividualDevelopmentPlan);
+//
+//                    if (null != text1 && !"".equals(text1)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(text1);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(null);
+//                    }
+//                    if (null != text2 && !"".equals(text2)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(text2);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(null);
+//                    }
+//                    if (null != text3 && !"".equals(text3)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(text3);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
+//                    }
+//                    if (null != managerMidYearRemark && !"".equals(managerMidYearRemark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(managerMidYearRemark);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(null);
+//                    }
+//
+//                    if (null != remark && !"".equals(remark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerremark(remark);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerremark(null);
+//                    }
+//                    if (null != endYearRemark && !"".equals(endYearRemark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(endYearRemark);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(null);
+//                    }
+//
+//                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(managerEndYearRemark);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
+//                    }
+//                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(managerEndYearRemark);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(null);
+//                    }
+////                    Mid year for Manager side //
+//                    if (null != midYearRemark && !"".equals(midYearRemark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkManager(midYearRemark);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkManager(null);
+//                    }
+//                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(managerEndYearRemark);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(null);
+//                    }
+//
+//                    if (individualplan != null) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
+//                        appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+//                        appraisalPerformanceIndividualDevelopmentPlanService.create(appraisalPerformanceIndividualDevelopmentPlan);
+//                    }
+//                    request.setAttribute("successMessage",
+//                            "Information : The Information is Submit Successfully.");
 //                }
 //            }
+//            
             //////////Behaviors///////////////
 //            AppraisalPerformanceBehaviors appraisalPerformanceBehaviors = new AppraisalPerformanceBehaviors();
 //
@@ -2236,6 +1950,11 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             request.setAttribute("behaviorsEndyearTotalscore", behaviorsEndyearTotalscore);
         }
 
+        if (null != appraisalPerformanceMaster.getEmpActivityScore()) {
+            String empActivityScore = appraisalPerformanceMaster.getEmpActivityScore();
+            request.setAttribute("empActivityScore", empActivityScore);
+        }
+
 //        if (null != appraisalPerformanceMaster.getManagerStatus()) {
         int managerStatus = appraisalPerformanceMaster.getManagerStatus();
         request.setAttribute("managerStatus", managerStatus);
@@ -2362,34 +2081,35 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         }
         ////////////////////////////////////KRA OTHER Activity//////////////////////////////////////////////////////////
 
-        // =======================competency Evaluation==========================================================//
-        competencyList(request);
-        int competencyId = 0;
-        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
-        appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-        CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
-//        List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
-        List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readByEmployeeWiseAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
-
-        request.setAttribute("competencyEvaluationList", competencyEvaluationList);
-
-        //Individual Development Plan//
-        AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
-        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-        String text1 = "";
-        List<?> individualDevelopmentPlanList = appraisalPerformanceIndividualDevelopmentPlanService.readIndividualDevelopmentPlanDetail(appraisalPerformanceIndividualDevelopmentPlan);
-        if (!individualDevelopmentPlanList.isEmpty()) {
-            appraisalPerformanceIndividualDevelopmentPlan = (AppraisalPerformanceIndividualDevelopmentPlan) individualDevelopmentPlanList.get(0);
-            text1 = appraisalPerformanceIndividualDevelopmentPlan.getText1();
-        }
-        request.setAttribute("text1", individualDevelopmentPlanList);
-        request.setAttribute("text2", individualDevelopmentPlanList);
-        request.setAttribute("text3", individualDevelopmentPlanList);
-        request.setAttribute("remark", individualDevelopmentPlanList);
-        request.setAttribute("midYearRemark", individualDevelopmentPlanList);
-        request.setAttribute("endYearRemark", individualDevelopmentPlanList);
-        request.setAttribute("individualDevelopmentPlanList", individualDevelopmentPlanList);
-
+//        // =======================competency Evaluation==========================================================//
+//        // =======================competency Evaluation Chsanage by date 11/11/2016==========================================================//
+//        competencyList(request);
+//        int competencyId = 0;
+//        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
+//        appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+//        CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
+////        List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
+//        List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readByEmployeeWiseAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
+//
+//        request.setAttribute("competencyEvaluationList", competencyEvaluationList);
+//
+//        // =======================competency Evaluation Chsanage by date 11/11/2016==========================================================//
+//        //Individual Development Plan//
+//        AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
+//        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+//        String text1 = "";
+//        List<?> individualDevelopmentPlanList = appraisalPerformanceIndividualDevelopmentPlanService.readIndividualDevelopmentPlanDetail(appraisalPerformanceIndividualDevelopmentPlan);
+//        if (!individualDevelopmentPlanList.isEmpty()) {
+//            appraisalPerformanceIndividualDevelopmentPlan = (AppraisalPerformanceIndividualDevelopmentPlan) individualDevelopmentPlanList.get(0);
+//            text1 = appraisalPerformanceIndividualDevelopmentPlan.getText1();
+//        }
+//        request.setAttribute("text1", individualDevelopmentPlanList);
+//        request.setAttribute("text2", individualDevelopmentPlanList);
+//        request.setAttribute("text3", individualDevelopmentPlanList);
+//        request.setAttribute("remark", individualDevelopmentPlanList);
+//        request.setAttribute("midYearRemark", individualDevelopmentPlanList);
+//        request.setAttribute("endYearRemark", individualDevelopmentPlanList);
+//        request.setAttribute("individualDevelopmentPlanList", individualDevelopmentPlanList);
         //////////Behaviors///////////////
         AppraisalPerformanceBehaviors appraisalPerformanceBehaviors = new AppraisalPerformanceBehaviors();
         String behaviors = "";
@@ -2502,6 +2222,10 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             String behaviorsEndyearTotalscore = appraisalPerformanceMaster.getBehaviorsEndyearTotalscore();
             request.setAttribute("behaviorsEndyearTotalscore", behaviorsEndyearTotalscore);
         }
+        if (null != appraisalPerformanceMaster.getManagerActivityScore()) {
+            String managerActivityScore = appraisalPerformanceMaster.getManagerActivityScore();
+            request.setAttribute("managerActivityScore", managerActivityScore);
+        }
 //        if (null != appraisalPerformanceMaster.getManagerStatus()) {
         int managerStatus = appraisalPerformanceMaster.getManagerStatus();
         request.setAttribute("managerStatus", managerStatus);
@@ -2613,33 +2337,31 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         }
         ////////////////////////////////////KRA OTHER Activity//////////////////////////////////////////////////////////
 
-        // =======================competency Evaluation==========================================================//
-        competencyList(request);
-        int competencyId = 0;
-        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
-        appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-        CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
-        List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
-
-        request.setAttribute("competencyEvaluationList", competencyEvaluationList);
-
-        //Individual Development Plan//
-        AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
-        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-        String text1 = "";
-        List<?> individualDevelopmentPlanList = appraisalPerformanceIndividualDevelopmentPlanService.readIndividualDevelopmentPlanDetail(appraisalPerformanceIndividualDevelopmentPlan);
-        if (!individualDevelopmentPlanList.isEmpty()) {
-            appraisalPerformanceIndividualDevelopmentPlan = (AppraisalPerformanceIndividualDevelopmentPlan) individualDevelopmentPlanList.get(0);
-            text1 = appraisalPerformanceIndividualDevelopmentPlan.getText1();
-        }
-        request.setAttribute("text1", individualDevelopmentPlanList);
-        request.setAttribute("text2", individualDevelopmentPlanList);
-        request.setAttribute("text3", individualDevelopmentPlanList);
-        request.setAttribute("remark", individualDevelopmentPlanList);
-        request.setAttribute("midYearRemark", individualDevelopmentPlanList);
-        request.setAttribute("endYearRemark", individualDevelopmentPlanList);
-        request.setAttribute("individualDevelopmentPlanList", individualDevelopmentPlanList);
-
+//        // =======================competency Evaluation=change by date 11/11/2016=========================================================//
+//        competencyList(request);
+//        int competencyId = 0;
+//        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
+//        appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+//        CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
+//        List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
+//
+//        request.setAttribute("competencyEvaluationList", competencyEvaluationList);
+//        //Individual Development Plan change by date 11/11/2016//
+//        AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
+//        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+//        String text1 = "";
+//        List<?> individualDevelopmentPlanList = appraisalPerformanceIndividualDevelopmentPlanService.readIndividualDevelopmentPlanDetail(appraisalPerformanceIndividualDevelopmentPlan);
+//        if (!individualDevelopmentPlanList.isEmpty()) {
+//            appraisalPerformanceIndividualDevelopmentPlan = (AppraisalPerformanceIndividualDevelopmentPlan) individualDevelopmentPlanList.get(0);
+//            text1 = appraisalPerformanceIndividualDevelopmentPlan.getText1();
+//        }
+//        request.setAttribute("text1", individualDevelopmentPlanList);
+//        request.setAttribute("text2", individualDevelopmentPlanList);
+//        request.setAttribute("text3", individualDevelopmentPlanList);
+//        request.setAttribute("remark", individualDevelopmentPlanList);
+//        request.setAttribute("midYearRemark", individualDevelopmentPlanList);
+//        request.setAttribute("endYearRemark", individualDevelopmentPlanList);
+//        request.setAttribute("individualDevelopmentPlanList", individualDevelopmentPlanList);
         //////////Behaviors///////////////
         AppraisalPerformanceBehaviors appraisalPerformanceBehaviors = new AppraisalPerformanceBehaviors();
         String behaviors = "";
@@ -3332,381 +3054,176 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                    }
 //                }
             }
-            String kraremovedIndividualIdVal = request.getParameter("kraremovedIndividualIdVal");
-            if (!kraremovedIndividualIdVal.isEmpty()) {
-                for (String id : kraremovedIndividualIdVal.split(",")) {
-                    if (!id.equals("")) {
-                        AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan2 = new AppraisalPerformanceIndividualDevelopmentPlan();
-                        appraisalPerformanceIndividualDevelopmentPlan2.setId(Integer.parseInt(id));
-                        appraisalPerformanceIndividualDevelopmentPlanService.delete1(appraisalPerformanceIndividualDevelopmentPlan2);
-                    }
-                }
-            }
-            ///////////////////////////Individual Development Plan//////////////////////////////////
-            AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
-            int individualcount = Integer.parseInt(request.getParameter("IndividualId"));
-            for (int i = 1; i <= individualcount; i++) {
-
-                String text1 = request.getParameter("text" + i);
-                String text2 = request.getParameter("individualtextDiv" + i);
-                String text3 = request.getParameter("trainingSelectId" + i);
-                String remark = request.getParameter("trainingSelectTextinput" + i);
-                String midYearRemark = request.getParameter("midYearRemark" + i);
-                String endYearRemark = request.getParameter("endYearRemark" + i);
-                String managerMidYearRemark = request.getParameter("managerMidYearRemark" + i);
-                String managerEndYearRemark = request.getParameter("managerEndYearRemark" + i);
-                String individualplan = request.getParameter("IndividualDevelopmentPlanId" + i);
-                if (null != individualplan) {
-                    appraisalPerformanceIndividualDevelopmentPlan = appraisalPerformanceIndividualDevelopmentPlanService.readById(Integer.parseInt(individualplan));
-                }
+//            String kraremovedIndividualIdVal = request.getParameter("kraremovedIndividualIdVal");
+//            if (!kraremovedIndividualIdVal.isEmpty()) {
+//                for (String id : kraremovedIndividualIdVal.split(",")) {
+//                    if (!id.equals("")) {
+//                        AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan2 = new AppraisalPerformanceIndividualDevelopmentPlan();
+//                        appraisalPerformanceIndividualDevelopmentPlan2.setId(Integer.parseInt(id));
+//                        appraisalPerformanceIndividualDevelopmentPlanService.delete1(appraisalPerformanceIndividualDevelopmentPlan2);
+//                    }
+//                }
+//            }
+//            ///////////////////////////Individual Development Plan//////////////////////////////////
+//            AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
+//            int individualcount = Integer.parseInt(request.getParameter("IndividualId"));
+//            for (int i = 1; i <= individualcount; i++) {
+//
+//                String text1 = request.getParameter("text" + i);
+//                String text2 = request.getParameter("individualtextDiv" + i);
+//                String text3 = request.getParameter("trainingSelectId" + i);
+//                String remark = request.getParameter("trainingSelectTextinput" + i);
+//                String midYearRemark = request.getParameter("midYearRemark" + i);
+//                String endYearRemark = request.getParameter("endYearRemark" + i);
+//                String managerMidYearRemark = request.getParameter("managerMidYearRemark" + i);
+//                String managerEndYearRemark = request.getParameter("managerEndYearRemark" + i);
+//                String individualplan = request.getParameter("IndividualDevelopmentPlanId" + i);
+//                if (null != individualplan) {
+//                    appraisalPerformanceIndividualDevelopmentPlan = appraisalPerformanceIndividualDevelopmentPlanService.readById(Integer.parseInt(individualplan));
+//                }
 //                if (!"".equals(text1) && null != text1) {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setText1(text1);
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(text1);
 //                } else {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setText1(null);
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(null);
 //                }
-
 //                if (!"".equals(text2) && null != text2) {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setText2(text2);
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(text2);
 //                } else {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setText2(null);
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(null);
 //                }
-                if (!"".equals(text1) && null != text1) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(text1);
-                } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(null);
-                }
-                if (!"".equals(text2) && null != text2) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(text2);
-                } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(null);
-                }
-                if (!"".equals(text3) && null != text3) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setText3(text3);
-                } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setText3(null);
-                }
-                if (!"".equals(text3) && null != text3) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(text3);
-                } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
-                }
-                if (!"".equals(managerMidYearRemark) && null != managerMidYearRemark) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(managerMidYearRemark);
-                } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
-                }
-//                Endyear
-                if (null != endYearRemark && !"".equals(endYearRemark)) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(endYearRemark);
-                } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(null);
-                }
-                if (!"".equals(managerEndYearRemark) && null != managerEndYearRemark) {
-                    appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(managerEndYearRemark);
-                } else {
-                    appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
-                }
-
-                String btn = request.getParameter("save");
-                if (null != btn && btn.equals("save")) {
-
-                    if (individualplan != null) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
-                        appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlanService.create(appraisalPerformanceIndividualDevelopmentPlan);
-                    }
-                    request.setAttribute("successMessage",
-                            "Information : The Information is Saved Successfully.");
-                } else {
-
-                    if (null != text1 && !"".equals(text1)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setText1(text1);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setText1(null);
-                    }
-                    if (null != text2 && !"".equals(text2)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setText2(text2);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setText2(null);
-                    }
-                    if (null != text3 && !"".equals(text3)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setText3(text3);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setText3(null);
-                    }
-                    if (null != midYearRemark && !"".equals(midYearRemark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setMidYearRemark(midYearRemark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setMidYearRemark(null);
-                    }
-
-                    if (null != remark && !"".equals(remark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setRemark(remark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setRemark(null);
-                    }
-                    if (null != endYearRemark && !"".equals(endYearRemark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(endYearRemark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(null);
-                    }
-
-                    if (null != endYearRemark && !"".equals(endYearRemark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(endYearRemark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(null);
-                    }
-
-                    if (null != managerMidYearRemark && !"".equals(managerMidYearRemark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(managerMidYearRemark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(null);
-                    }
-                    if (null != managerMidYearRemark && !"".equals(managerMidYearRemark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkEmployee(managerMidYearRemark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkEmployee(null);
-                    }
-
-                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(managerEndYearRemark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
-                    }
-
-                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(managerEndYearRemark);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(null);
-                    }
-//                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
-//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(managerEndYearRemark);
+//                if (!"".equals(text3) && null != text3) {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setText3(text3);
+//                } else {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setText3(null);
+//                }
+//                if (!"".equals(text3) && null != text3) {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(text3);
+//                } else {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
+//                }
+//                if (!"".equals(managerMidYearRemark) && null != managerMidYearRemark) {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(managerMidYearRemark);
+//                } else {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
+//                }
+////                Endyear
+//                if (null != endYearRemark && !"".equals(endYearRemark)) {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(endYearRemark);
+//                } else {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(null);
+//                }
+//                if (!"".equals(managerEndYearRemark) && null != managerEndYearRemark) {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(managerEndYearRemark);
+//                } else {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
+//                }
+//
+//                String btn = request.getParameter("save");
+//                if (null != btn && btn.equals("save")) {
+//
+//                    if (individualplan != null) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
+//                        appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlanService.create(appraisalPerformanceIndividualDevelopmentPlan);
+//                    }
+//                    request.setAttribute("successMessage",
+//                            "Information : The Information is Saved Successfully.");
+//                } else {
+//
+//                    if (null != text1 && !"".equals(text1)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setText1(text1);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setText1(null);
+//                    }
+//                    if (null != text2 && !"".equals(text2)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setText2(text2);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setText2(null);
+//                    }
+//                    if (null != text3 && !"".equals(text3)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setText3(text3);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setText3(null);
+//                    }
+//                    if (null != midYearRemark && !"".equals(midYearRemark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setMidYearRemark(midYearRemark);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setMidYearRemark(null);
+//                    }
+//
+//                    if (null != remark && !"".equals(remark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setRemark(remark);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setRemark(null);
+//                    }
+//                    if (null != endYearRemark && !"".equals(endYearRemark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(endYearRemark);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(null);
+//                    }
+//
+//                    if (null != endYearRemark && !"".equals(endYearRemark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(endYearRemark);
 //                    } else {
 //                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(null);
 //                    }
-
-                    //////////////////////////////////////
-                    if (individualplan != null) {
-                        appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
-                        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-                        appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
-                    } else {
-                        appraisalPerformanceIndividualDevelopmentPlanService.create(appraisalPerformanceIndividualDevelopmentPlan);
-                    }
-                    request.setAttribute("successMessage",
-                            "Information : The Information is Approved Successfully.");
-                }
-            }
-
-//                    ////////////////////////Manager Side Indivisul plan///////////////////////////////
-//                    if (!"".equals(text1) && null != text1) {
-//                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(text1);
+//
+//                    if (null != managerMidYearRemark && !"".equals(managerMidYearRemark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(managerMidYearRemark);
 //                    } else {
-//                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(null);
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(null);
 //                    }
-//                    if (!"".equals(text2) && null != text2) {
-//                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(text2);
+//                    if (null != managerMidYearRemark && !"".equals(managerMidYearRemark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkEmployee(managerMidYearRemark);
 //                    } else {
-//                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(null);
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkEmployee(null);
 //                    }
-//                    if (!"".equals(text3) && null != text3) {
-//                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(text3);
+//
+//                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(managerEndYearRemark);
 //                    } else {
-//                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
 //                    }
-//                    if (!"".equals(remark) && null != remark) {
-//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerremark(remark);
+//
+//                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(managerEndYearRemark);
 //                    } else {
-//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerremark(null);
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(null);
 //                    }
-//                String individualplanId = request.getParameter("IndividualDevelopmentPlanId" + i);
-//                appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-//                if (!"".equals(individualplanId) && null != individualplanId) {
-//                    appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplanId));
-//                    appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
-//                } else {
-//                    btn = request.getParameter("save");
-//                    if (null != btn && btn.equals("save")) {
-//                        if (!"".equals(text1) && null != text1) {
-//                            appraisalPerformanceIndividualDevelopmentPlan.setText1("");
-//                        }
-//                        if (!"".equals(text2) && null != text2) {
-//                            appraisalPerformanceIndividualDevelopmentPlan.setText2("");
-//                        }
-//                        if (!"".equals(text3) && null != text3) {
-//                            appraisalPerformanceIndividualDevelopmentPlan.setText3("");
-//                        }
-//                        if (!"".equals(remark) && null != remark) {
-//                            appraisalPerformanceIndividualDevelopmentPlan.setRemark("");
-//                        }
+////                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
+////                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(managerEndYearRemark);
+////                    } else {
+////                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(null);
+////                    }
+//
+//                    //////////////////////////////////////
+//                    if (individualplan != null) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
+//                        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+//                        appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlanService.create(appraisalPerformanceIndividualDevelopmentPlan);
 //                    }
-//                    appraisalPerformanceIndividualDevelopmentPlanService.create(appraisalPerformanceIndividualDevelopmentPlan);
+//                    request.setAttribute("successMessage",
+//                            "Information : The Information is Approved Successfully.");
 //                }
-            ////////////////////closed Indivisual plan////////
+//            }
+//
+//
+//            ////////////////////closed Indivisual plan////////
+            ///////////////////Competency Evaluation (As Per Zydex Competency Framework)//change by date 11/11/2016//////////////////////////
             ///////////////////Competency Evaluation (As Per Zydex Competency Framework)////////////////////////////
-            ///////////////////Competency Evaluation (As Per Zydex Competency Framework)////////////////////////////
-            AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
-            CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
-            CompetencyEvaluationMaster competencyEvaluationMaster = new CompetencyEvaluationMaster();
-            int subCompentencyCount = Integer.parseInt(request.getParameter("subCompentencyCount"));
-            boolean flag = true;
-            for (int i = 1; i <= subCompentencyCount; i++) {
-                String competencyEveId = request.getParameter("competencyEveId" + i);
-                if (null != competencyEveId) {
-                    appraisalPerformanceCompetencyEvaluation = appraisalPerformanceCompetencyEvaluationService.readById(Integer.parseInt(competencyEveId));
-                }
-                String compentencyStartYear = request.getParameter("compentencyStartYear" + i);
-                String compentencyStartRemark = request.getParameter("compentencyStartRemark" + i);
-                String compentencyMidYear = request.getParameter("compentencyMidYear" + i);
-                String compentencyMidRemark = request.getParameter("compentencyMidRemark" + i);
-                String compentencyEndYear = request.getParameter("compentencyEndYear" + i);
-                String compentencyEndRemark = request.getParameter("compentencyEndRemark" + i);
-
-                ///////////manager StartYearManager
-                if (!"".equals(compentencyStartYear) && null != compentencyStartYear) {
-                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYearManager(compentencyStartYear);
-                } else {
-                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYearManager(null);
-                }
-                if (!"".equals(compentencyStartRemark) && null != compentencyStartRemark) {
-                    appraisalPerformanceCompetencyEvaluation.setStartyearRemarkManager(compentencyStartRemark);
-                } else {
-                    appraisalPerformanceCompetencyEvaluation.setStartyearRemarkManager(null);
-                }
-                if (!"".equals(compentencyMidYear) && null != compentencyMidYear) {
-                    appraisalPerformanceCompetencyEvaluation.setCompetencyMidYearManager(compentencyMidYear);
-                } else {
-                    appraisalPerformanceCompetencyEvaluation.setCompetencyMidYearManager(null);
-                }
-                if (!"".equals(compentencyMidRemark) && null != compentencyMidRemark) {
-                    appraisalPerformanceCompetencyEvaluation.setMidyearRemarkManager(compentencyMidRemark);
-                } else {
-                    appraisalPerformanceCompetencyEvaluation.setMidyearRemarkManager(null);
-                }
-                if (!"".equals(compentencyEndYear) && null != compentencyEndYear) {
-                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(compentencyEndYear);
-                } else {
-                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(null);
-                }
-                if (!"".equals(compentencyEndRemark) && null != compentencyEndRemark) {
-                    appraisalPerformanceCompetencyEvaluation.setEndyearRemarkManager(compentencyEndRemark);
-                } else {
-                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(null);
-                }
-                appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-                int compentencyTextMasterId = Integer.parseInt(request.getParameter("compentencyTextMasterId" + i));
-                competencyEvaluationTextmaster.setId(compentencyTextMasterId);
-//                competencyEvaluationMaster.setId(competencyEvaluationId);
-//                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
-                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationTextmaster(competencyEvaluationTextmaster);
-                //String competencyEveId = request.getParameter("competencyEveId" + i);
-                String btn2 = request.getParameter("save");
-
-                if (null != btn2 && btn2.equals("save")) {
-                    if (!"".equals(competencyEveId) && null != competencyEveId) {
-                        int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
-                        competencyEvaluationMaster.setId(competencyEvaluationId);
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
-                        appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
-//                        appraisalPerformanceCompetencyEvaluation.setManagerStatus(1);
-                        appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
-
-                    } else {
-
-//                        if (!appraisalId.isEmpty()) {
-//                            if (flag) {
-//                                for (String id : appraisalId.split(",")) {
-//                                    if (!id.equals("")) {
-//                                        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation2 = new AppraisalPerformanceCompetencyEvaluation();
-//                                        appraisalPerformanceCompetencyEvaluation2.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-//                                        appraisalPerformanceCompetencyEvaluationService.deleteByManager(appraisalPerformanceCompetencyEvaluation2);
-//                                        flag = false;
-//                                    }
-//                                }
-//                            }
-//                        }
-                        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
-                        if (!"".equals(competencyEvaluationId) && null != competencyEvaluationId) {
-                            int competencyEvaluation_Id = Integer.parseInt(competencyEvaluationId);
-                            competencyEvaluationMaster.setId(competencyEvaluation_Id);
-                            appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
-//                            appraisalPerformanceCompetencyEvaluation.setManagerStatus(1);
-                            appraisalPerformanceCompetencyEvaluationService.create(appraisalPerformanceCompetencyEvaluation);
-                        }
-                    }
-                } else {
-                    if (!"".equals(compentencyStartYear) && null != compentencyStartYear) {
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(compentencyStartYear);
-                    } else {
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(null);
-                    }
-                    if (!"".equals(compentencyStartRemark) && null != compentencyStartRemark) {
-                        appraisalPerformanceCompetencyEvaluation.setStartyearRemark(compentencyStartRemark);
-                    } else {
-                        appraisalPerformanceCompetencyEvaluation.setStartyearRemark(null);
-                    }
-                    if (!"".equals(compentencyMidYear) && null != compentencyMidYear) {
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyMidYear(compentencyMidYear);
-                    } else {
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyMidYear(null);
-                    }
-                    if (!"".equals(compentencyMidRemark) && null != compentencyMidRemark) {
-                        appraisalPerformanceCompetencyEvaluation.setMidyearRemark(compentencyMidRemark);
-                    } else {
-                        appraisalPerformanceCompetencyEvaluation.setMidyearRemark(null);
-                    }
-                    if (!"".equals(compentencyEndYear) && null != compentencyEndYear) {
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(compentencyEndYear);
-                    } else {
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
-                    }
-                    if (!"".equals(compentencyEndRemark) && null != compentencyEndRemark) {
-                        appraisalPerformanceCompetencyEvaluation.setEndyearRemark(compentencyEndRemark);
-                    } else {
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
-                    }
-
-                    if (!"".equals(competencyEveId) && null != competencyEveId) {
-
-//                        if (!appraisalId.isEmpty()) {
-//                            if (flag) {
-//                                for (String id : appraisalId.split(",")) {
-//                                    if (!id.equals("")) {
-//                                        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation2 = new AppraisalPerformanceCompetencyEvaluation();
-//                                        appraisalPerformanceCompetencyEvaluation2.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-//                                        appraisalPerformanceCompetencyEvaluationService.finaldeletebyManager(appraisalPerformanceCompetencyEvaluation2);
-//                                        flag = false;
-//                                    }
-//                                }
-//                            }
-//                        }
-                        int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
-                        competencyEvaluationMaster.setId(competencyEvaluationId);
-                        appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
-                        appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
-//                        appraisalPerformanceCompetencyEvaluation.setManagerStatus(1);
-//                        appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
-                        appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
-
-                    } else {
-                        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
-                        if (!"".equals(competencyEvaluationId) && null != competencyEvaluationId) {
-                            int competencyEvaluation_Id = Integer.parseInt(competencyEvaluationId);
-                            competencyEvaluationMaster.setId(competencyEvaluation_Id);
-//                            appraisalPerformanceCompetencyEvaluation.setManagerStatus(1);
-                            appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
-//                            appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
-                            appraisalPerformanceCompetencyEvaluationService.create(appraisalPerformanceCompetencyEvaluation);
-                        }
-                    }
-                }
-            }
 //            AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
 //            CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
 //            CompetencyEvaluationMaster competencyEvaluationMaster = new CompetencyEvaluationMaster();
 //            int subCompentencyCount = Integer.parseInt(request.getParameter("subCompentencyCount"));
+//            boolean flag = true;
 //            for (int i = 1; i <= subCompentencyCount; i++) {
+//                String competencyEveId = request.getParameter("competencyEveId" + i);
+//                if (null != competencyEveId) {
+//                    appraisalPerformanceCompetencyEvaluation = appraisalPerformanceCompetencyEvaluationService.readById(Integer.parseInt(competencyEveId));
+//                }
 //                String compentencyStartYear = request.getParameter("compentencyStartYear" + i);
 //                String compentencyStartRemark = request.getParameter("compentencyStartRemark" + i);
 //                String compentencyMidYear = request.getParameter("compentencyMidYear" + i);
@@ -3714,78 +3231,143 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                String compentencyEndYear = request.getParameter("compentencyEndYear" + i);
 //                String compentencyEndRemark = request.getParameter("compentencyEndRemark" + i);
 //
+//                ///////////manager StartYearManager
 //                if (!"".equals(compentencyStartYear) && null != compentencyStartYear) {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(compentencyStartYear);
+//                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYearManager(compentencyStartYear);
 //                } else {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(null);
+//                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYearManager(null);
 //                }
-//
 //                if (!"".equals(compentencyStartRemark) && null != compentencyStartRemark) {
-//                    appraisalPerformanceCompetencyEvaluation.setStartyearRemark(compentencyStartRemark);
+//                    appraisalPerformanceCompetencyEvaluation.setStartyearRemarkManager(compentencyStartRemark);
 //                } else {
-//                    appraisalPerformanceCompetencyEvaluation.setStartyearRemark(null);
+//                    appraisalPerformanceCompetencyEvaluation.setStartyearRemarkManager(null);
 //                }
 //                if (!"".equals(compentencyMidYear) && null != compentencyMidYear) {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyMidYear(compentencyMidYear);
+//                    appraisalPerformanceCompetencyEvaluation.setCompetencyMidYearManager(compentencyMidYear);
 //                } else {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyMidYear(null);
+//                    appraisalPerformanceCompetencyEvaluation.setCompetencyMidYearManager(null);
 //                }
 //                if (!"".equals(compentencyMidRemark) && null != compentencyMidRemark) {
-//                    appraisalPerformanceCompetencyEvaluation.setMidyearRemark(compentencyMidRemark);
+//                    appraisalPerformanceCompetencyEvaluation.setMidyearRemarkManager(compentencyMidRemark);
 //                } else {
-//                    appraisalPerformanceCompetencyEvaluation.setMidyearRemark(null);
+//                    appraisalPerformanceCompetencyEvaluation.setMidyearRemarkManager(null);
 //                }
 //                if (!"".equals(compentencyEndYear) && null != compentencyEndYear) {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(compentencyEndYear);
+//                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(compentencyEndYear);
 //                } else {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
+//                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(null);
 //                }
 //                if (!"".equals(compentencyEndRemark) && null != compentencyEndRemark) {
-//                    appraisalPerformanceCompetencyEvaluation.setEndyearRemark(compentencyEndRemark);
+//                    appraisalPerformanceCompetencyEvaluation.setEndyearRemarkManager(compentencyEndRemark);
 //                } else {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
+//                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(null);
 //                }
 //                appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
 //                int compentencyTextMasterId = Integer.parseInt(request.getParameter("compentencyTextMasterId" + i));
 //                competencyEvaluationTextmaster.setId(compentencyTextMasterId);
-//
 ////                competencyEvaluationMaster.setId(competencyEvaluationId);
 ////                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
 //                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationTextmaster(competencyEvaluationTextmaster);
-//                String competencyEveId = request.getParameter("competencyEveId" + i);
+//                //String competencyEveId = request.getParameter("competencyEveId" + i);
+//                String btn2 = request.getParameter("save");
 //
-//                String btn = request.getParameter("save");
-//                if (null != btn && btn.equals("save")) {
-//                    int fooId = Integer.parseInt(request.getParameter("competencyEveId" + i));
-//                    ////kra goal and matric set by first time save////
-////                    int appraisalcompetencyId = appraisalPerformanceMaster;
-//                    appraisalPerformanceCompetencyEvaluation = appraisalPerformanceCompetencyEvaluationService.readById(fooId);
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYearManager(compentencyStartYear);
-//                    appraisalPerformanceCompetencyEvaluation.setStartyearRemarkManager(compentencyStartRemark);
-//                } else {
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(compentencyStartYear);
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYearManager(compentencyStartYear);
-//                    appraisalPerformanceCompetencyEvaluation.setStartyearRemarkManager(compentencyStartRemark);
-//                    appraisalPerformanceCompetencyEvaluation.setStartyearRemark(compentencyStartRemark);
-//                }
-//                if (!"".equals(competencyEveId) && null != competencyEveId) {
-//                    int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
-//                    competencyEvaluationMaster.setId(competencyEvaluationId);
-//                    appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
-//                    appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
-//                    appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
-//                } else {
-//                    String competencyEvaluationId = request.getParameter("competencyEvaluation_Id");
-//                    if (!"".equals(competencyEvaluationId) && null != competencyEvaluationId) {
-////                    int competencyEvaluation_Id = Integer.parseInt(request.getParameter("competencyEvaluation_Id"));
-//                        int competencyEvaluation_Id = Integer.parseInt(competencyEvaluationId);
-//                        competencyEvaluationMaster.setId(competencyEvaluation_Id);
+//                if (null != btn2 && btn2.equals("save")) {
+//                    if (!"".equals(competencyEveId) && null != competencyEveId) {
+//                        int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
+//                        competencyEvaluationMaster.setId(competencyEvaluationId);
 //                        appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
-//                        appraisalPerformanceCompetencyEvaluationService.create(appraisalPerformanceCompetencyEvaluation);
+//                        appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
+////                        appraisalPerformanceCompetencyEvaluation.setManagerStatus(1);
+//                        appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
+//
 //                    } else {
 //
+////                        if (!appraisalId.isEmpty()) {
+////                            if (flag) {
+////                                for (String id : appraisalId.split(",")) {
+////                                    if (!id.equals("")) {
+////                                        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation2 = new AppraisalPerformanceCompetencyEvaluation();
+////                                        appraisalPerformanceCompetencyEvaluation2.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+////                                        appraisalPerformanceCompetencyEvaluationService.deleteByManager(appraisalPerformanceCompetencyEvaluation2);
+////                                        flag = false;
+////                                    }
+////                                }
+////                            }
+////                        }
+//                        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
+//                        if (!"".equals(competencyEvaluationId) && null != competencyEvaluationId) {
+//                            int competencyEvaluation_Id = Integer.parseInt(competencyEvaluationId);
+//                            competencyEvaluationMaster.setId(competencyEvaluation_Id);
+//                            appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
+////                            appraisalPerformanceCompetencyEvaluation.setManagerStatus(1);
+//                            appraisalPerformanceCompetencyEvaluationService.create(appraisalPerformanceCompetencyEvaluation);
+//                        }
+//                    }
+//                } else {
+//                    if (!"".equals(compentencyStartYear) && null != compentencyStartYear) {
+//                        appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(compentencyStartYear);
+//                    } else {
+//                        appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(null);
+//                    }
+//                    if (!"".equals(compentencyStartRemark) && null != compentencyStartRemark) {
+//                        appraisalPerformanceCompetencyEvaluation.setStartyearRemark(compentencyStartRemark);
+//                    } else {
+//                        appraisalPerformanceCompetencyEvaluation.setStartyearRemark(null);
+//                    }
+//                    if (!"".equals(compentencyMidYear) && null != compentencyMidYear) {
+//                        appraisalPerformanceCompetencyEvaluation.setCompetencyMidYear(compentencyMidYear);
+//                    } else {
+//                        appraisalPerformanceCompetencyEvaluation.setCompetencyMidYear(null);
+//                    }
+//                    if (!"".equals(compentencyMidRemark) && null != compentencyMidRemark) {
+//                        appraisalPerformanceCompetencyEvaluation.setMidyearRemark(compentencyMidRemark);
+//                    } else {
+//                        appraisalPerformanceCompetencyEvaluation.setMidyearRemark(null);
+//                    }
+//                    if (!"".equals(compentencyEndYear) && null != compentencyEndYear) {
+//                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(compentencyEndYear);
+//                    } else {
+//                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
+//                    }
+//                    if (!"".equals(compentencyEndRemark) && null != compentencyEndRemark) {
+//                        appraisalPerformanceCompetencyEvaluation.setEndyearRemark(compentencyEndRemark);
+//                    } else {
+//                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
 //                    }
 //
+//                    if (!"".equals(competencyEveId) && null != competencyEveId) {
+//
+////                        if (!appraisalId.isEmpty()) {
+////                            if (flag) {
+////                                for (String id : appraisalId.split(",")) {
+////                                    if (!id.equals("")) {
+////                                        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation2 = new AppraisalPerformanceCompetencyEvaluation();
+////                                        appraisalPerformanceCompetencyEvaluation2.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+////                                        appraisalPerformanceCompetencyEvaluationService.finaldeletebyManager(appraisalPerformanceCompetencyEvaluation2);
+////                                        flag = false;
+////                                    }
+////                                }
+////                            }
+////                        }
+//                        int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
+//                        competencyEvaluationMaster.setId(competencyEvaluationId);
+//                        appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
+//                        appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
+////                        appraisalPerformanceCompetencyEvaluation.setManagerStatus(1);
+////                        appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
+//                        appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
+//
+//                    } else {
+//                        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
+//                        if (!"".equals(competencyEvaluationId) && null != competencyEvaluationId) {
+//                            int competencyEvaluation_Id = Integer.parseInt(competencyEvaluationId);
+//                            competencyEvaluationMaster.setId(competencyEvaluation_Id);
+////                            appraisalPerformanceCompetencyEvaluation.setManagerStatus(1);
+//                            appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
+////                            appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
+//                            appraisalPerformanceCompetencyEvaluationService.create(appraisalPerformanceCompetencyEvaluation);
+//                        }
+//                    }
 //                }
 //            }
 
@@ -3923,6 +3505,13 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 appraisalPerformanceMaster.setBehaviorsFinalscore(null);
             }
 
+            String managerActivityScore = request.getParameter("managerActivityScore");
+            if (!"".equals(managerActivityScore) && null != managerActivityScore) {
+                appraisalPerformanceMaster.setManagerActivityScore(managerActivityScore);
+            } else {
+                appraisalPerformanceMaster.setManagerActivityScore(null);
+            }
+
 //            appraisalPerformanceService.update(appraisalPerformanceMaster);
             String pmpstatusId = "";
             String btn1 = request.getParameter("submit");
@@ -3984,6 +3573,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     appraisalPerformanceMaster.setBehaviorsFinalscoreForemployee(behaviorsFinalscore);
                 } else {
                     appraisalPerformanceMaster.setBehaviorsFinalscoreForemployee(null);
+                }
+//                Activity Score
+                if (!"".equals(managerActivityScore) && null != managerActivityScore) {
+                    appraisalPerformanceMaster.setEmpActivityScore(managerActivityScore);
+                } else {
+                    appraisalPerformanceMaster.setEmpActivityScore(null);
                 }
                 if (firsthalf.equals("true")) {
                     pmpFormStatusMaster.setStartYearStatus(Boolean.TRUE);
@@ -5428,206 +5023,205 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
         EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         String employeeName = "" + employee.getEmployeeName();
-        try{
-            
-        
-        String empId = request.getParameter("id");
-        String userid = request.getParameter("userid");
-        String appraisalId1 = request.getParameter("appraisalId");
-        //////Print/////By dhaval
-        request.setAttribute("empId", empId);
-        request.setAttribute("userid", userid);
-        request.setAttribute("appraisalId1", appraisalId1);
-        ///////////
-        empDateStartToEnd(request, response);
-        selectedEmployeeDate(request, response, userid);
-        kraCategoryList(request);
-        String employeeId = "" + empId;//set the value in employee id
-        appraisalPerformanceMaster = appraisalPerformanceService.readById(Integer.parseInt(appraisalId1));
-        if (null != appraisalPerformanceMaster.getWeightageScore()) {
-            String weightageScore = appraisalPerformanceMaster.getWeightageScore();
-            request.setAttribute("weightageScore", weightageScore);
-        }
-        if (null != appraisalPerformanceMaster.getTotalScore()) {
-            String totalScore = appraisalPerformanceMaster.getTotalScore();
-            request.setAttribute("totalScore", totalScore);
-        }
-        // ==========================Mid Year=======================================================//
-        if (null != appraisalPerformanceMaster.getEmpMidyearSelfassOtheractivty()) {
-            String empMidyearSelfassOtheractivty = appraisalPerformanceMaster.getEmpMidyearSelfassOtheractivty();
-            request.setAttribute("empMidyearSelfassOtheractivty", empMidyearSelfassOtheractivty);
-        }
-        if (null != appraisalPerformanceMaster.getManagerMidyearReviewevalOtheractivity()) {
-            String managerMidyearReviewevalOtheractivity = appraisalPerformanceMaster.getManagerMidyearReviewevalOtheractivity();
-            request.setAttribute("managerMidyearReviewevalOtheractivity", managerMidyearReviewevalOtheractivity);
-        }
-        // ==========================Mid Year=======================================================//
-        //=======End Year=============//
-        if (null != appraisalPerformanceMaster.getEmpEndyearSelfassOtheractivty()) {
-            String empEndyearSelfassOtheractivty = appraisalPerformanceMaster.getEmpEndyearSelfassOtheractivty();
-            request.setAttribute("empEndyearSelfassOtheractivty", empEndyearSelfassOtheractivty);
-        }
-        if (null != appraisalPerformanceMaster.getManagerEndyearReviewevalOtheractivity()) {
-            String managerEndyearReviewevalOtheractivity = appraisalPerformanceMaster.getManagerEndyearReviewevalOtheractivity();
-            request.setAttribute("managerEndyearReviewevalOtheractivity", managerEndyearReviewevalOtheractivity);
-        }
-        /////////////////behaviors/////////////////
-        if (null != appraisalPerformanceMaster.getBehaviorsMidyearTotalscore()) {
-            String behaviorsMidyearTotalscore = appraisalPerformanceMaster.getBehaviorsMidyearTotalscore();
-            request.setAttribute("behaviorsMidyearTotalscore", behaviorsMidyearTotalscore);
-        }
-        if (null != appraisalPerformanceMaster.getBehaviorsMidyearOtherremark()) {
-            String behaviorsMidyearOtherremark = appraisalPerformanceMaster.getBehaviorsMidyearOtherremark();
-            request.setAttribute("behaviorsMidyearOtherremark", behaviorsMidyearOtherremark);
-        }
-        if (null != appraisalPerformanceMaster.getBehaviorsEndyearOtherremark()) {
-            String behaviorsEndyearOtherremark = appraisalPerformanceMaster.getBehaviorsEndyearOtherremark();
-            request.setAttribute("behaviorsEndyearOtherremark", behaviorsEndyearOtherremark);
-        }
-        if (null != appraisalPerformanceMaster.getBehaviorsEndyearOtherremark()) {
-            String behaviorsEndyearTotalscore = appraisalPerformanceMaster.getBehaviorsEndyearTotalscore();
-            request.setAttribute("behaviorsEndyearTotalscore", behaviorsEndyearTotalscore);
-        }
-        if (null != appraisalPerformanceMaster.getBehaviorsEndyearTotalscore()) {
-            String behaviorsEndyearTotalscore = appraisalPerformanceMaster.getBehaviorsEndyearTotalscore();
-            request.setAttribute("behaviorsEndyearTotalscore", behaviorsEndyearTotalscore);
-        }
+        try {
+
+            String empId = request.getParameter("id");
+            String userid = request.getParameter("userid");
+            String appraisalId1 = request.getParameter("appraisalId");
+            //////Print/////By dhaval
+            request.setAttribute("empId", empId);
+            request.setAttribute("userid", userid);
+            request.setAttribute("appraisalId1", appraisalId1);
+            ///////////
+            empDateStartToEnd(request, response);
+            selectedEmployeeDate(request, response, userid);
+            kraCategoryList(request);
+            String employeeId = "" + empId;//set the value in employee id
+            appraisalPerformanceMaster = appraisalPerformanceService.readById(Integer.parseInt(appraisalId1));
+            if (null != appraisalPerformanceMaster.getWeightageScore()) {
+                String weightageScore = appraisalPerformanceMaster.getWeightageScore();
+                request.setAttribute("weightageScore", weightageScore);
+            }
+            if (null != appraisalPerformanceMaster.getTotalScore()) {
+                String totalScore = appraisalPerformanceMaster.getTotalScore();
+                request.setAttribute("totalScore", totalScore);
+            }
+            // ==========================Mid Year=======================================================//
+            if (null != appraisalPerformanceMaster.getEmpMidyearSelfassOtheractivty()) {
+                String empMidyearSelfassOtheractivty = appraisalPerformanceMaster.getEmpMidyearSelfassOtheractivty();
+                request.setAttribute("empMidyearSelfassOtheractivty", empMidyearSelfassOtheractivty);
+            }
+            if (null != appraisalPerformanceMaster.getManagerMidyearReviewevalOtheractivity()) {
+                String managerMidyearReviewevalOtheractivity = appraisalPerformanceMaster.getManagerMidyearReviewevalOtheractivity();
+                request.setAttribute("managerMidyearReviewevalOtheractivity", managerMidyearReviewevalOtheractivity);
+            }
+            // ==========================Mid Year=======================================================//
+            //=======End Year=============//
+            if (null != appraisalPerformanceMaster.getEmpEndyearSelfassOtheractivty()) {
+                String empEndyearSelfassOtheractivty = appraisalPerformanceMaster.getEmpEndyearSelfassOtheractivty();
+                request.setAttribute("empEndyearSelfassOtheractivty", empEndyearSelfassOtheractivty);
+            }
+            if (null != appraisalPerformanceMaster.getManagerEndyearReviewevalOtheractivity()) {
+                String managerEndyearReviewevalOtheractivity = appraisalPerformanceMaster.getManagerEndyearReviewevalOtheractivity();
+                request.setAttribute("managerEndyearReviewevalOtheractivity", managerEndyearReviewevalOtheractivity);
+            }
+            /////////////////behaviors/////////////////
+            if (null != appraisalPerformanceMaster.getBehaviorsMidyearTotalscore()) {
+                String behaviorsMidyearTotalscore = appraisalPerformanceMaster.getBehaviorsMidyearTotalscore();
+                request.setAttribute("behaviorsMidyearTotalscore", behaviorsMidyearTotalscore);
+            }
+            if (null != appraisalPerformanceMaster.getBehaviorsMidyearOtherremark()) {
+                String behaviorsMidyearOtherremark = appraisalPerformanceMaster.getBehaviorsMidyearOtherremark();
+                request.setAttribute("behaviorsMidyearOtherremark", behaviorsMidyearOtherremark);
+            }
+            if (null != appraisalPerformanceMaster.getBehaviorsEndyearOtherremark()) {
+                String behaviorsEndyearOtherremark = appraisalPerformanceMaster.getBehaviorsEndyearOtherremark();
+                request.setAttribute("behaviorsEndyearOtherremark", behaviorsEndyearOtherremark);
+            }
+            if (null != appraisalPerformanceMaster.getBehaviorsEndyearOtherremark()) {
+                String behaviorsEndyearTotalscore = appraisalPerformanceMaster.getBehaviorsEndyearTotalscore();
+                request.setAttribute("behaviorsEndyearTotalscore", behaviorsEndyearTotalscore);
+            }
+            if (null != appraisalPerformanceMaster.getBehaviorsEndyearTotalscore()) {
+                String behaviorsEndyearTotalscore = appraisalPerformanceMaster.getBehaviorsEndyearTotalscore();
+                request.setAttribute("behaviorsEndyearTotalscore", behaviorsEndyearTotalscore);
+            }
 //        if (null != appraisalPerformanceMaster.getManagerStatus()) {
-        int managerStatus = appraisalPerformanceMaster.getManagerStatus();
-        request.setAttribute("managerStatus", managerStatus);
-        int statusFlag = appraisalPerformanceMaster.getStatus();
-        request.setAttribute("statusFlag", statusFlag);
-        int employeeStatus = appraisalPerformanceMaster.getEmployeeStatus();
-        request.setAttribute("employeeStatus", employeeStatus);
+            int managerStatus = appraisalPerformanceMaster.getManagerStatus();
+            request.setAttribute("managerStatus", managerStatus);
+            int statusFlag = appraisalPerformanceMaster.getStatus();
+            request.setAttribute("statusFlag", statusFlag);
+            int employeeStatus = appraisalPerformanceMaster.getEmployeeStatus();
+            request.setAttribute("employeeStatus", employeeStatus);
 
-        if (null != appraisalPerformanceMaster.getBehaviorsFinalscore() && !"".equals(appraisalPerformanceMaster.getBehaviorsFinalscore())) {
-            String behaviorsFinalscore = appraisalPerformanceMaster.getBehaviorsFinalscore();
-            request.setAttribute("behaviorsFinalscore", behaviorsFinalscore);
-        }
+            if (null != appraisalPerformanceMaster.getBehaviorsFinalscore() && !"".equals(appraisalPerformanceMaster.getBehaviorsFinalscore())) {
+                String behaviorsFinalscore = appraisalPerformanceMaster.getBehaviorsFinalscore();
+                request.setAttribute("behaviorsFinalscore", behaviorsFinalscore);
+            }
 
-        int year = Integer.parseInt(request.getParameter("year"));
-        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
-        if (!list.isEmpty()) {
+            int year = Integer.parseInt(request.getParameter("year"));
+            List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
+            if (!list.isEmpty()) {
 
-            appraisalPerformanceMaster = (AppraisalPerformanceMaster) list.get(0);
-            int appraisalId = appraisalPerformanceMaster.getId();
-            appraisalPerformanceKra.setId(appraisalId);
-            String kragoal = "";
-            String metric = "";
-            int kraCategoryId;
-            boolean updateStatus = false;
-            int kragoalId;
+                appraisalPerformanceMaster = (AppraisalPerformanceMaster) list.get(0);
+                int appraisalId = appraisalPerformanceMaster.getId();
+                appraisalPerformanceKra.setId(appraisalId);
+                String kragoal = "";
+                String metric = "";
+                int kraCategoryId;
+                boolean updateStatus = false;
+                int kragoalId;
 
-            List<?> kraList = appraisalPerformanceKraService.readByAppraisalKraGoal(appraisalPerformanceKra);
-            if (!kraList.isEmpty()) {
-                appraisalPerformanceKra = (AppraisalPerformanceKra) kraList.get(0);
-                kragoal = appraisalPerformanceKra.getKraGoal();
-                kragoalId = appraisalPerformanceKra.getId();
-                metric = appraisalPerformanceKra.getMetric();
+                List<?> kraList = appraisalPerformanceKraService.readByAppraisalKraGoal(appraisalPerformanceKra);
+                if (!kraList.isEmpty()) {
+                    appraisalPerformanceKra = (AppraisalPerformanceKra) kraList.get(0);
+                    kragoal = appraisalPerformanceKra.getKraGoal();
+                    kragoalId = appraisalPerformanceKra.getId();
+                    metric = appraisalPerformanceKra.getMetric();
 
-                if (null != kragoal && !"".equals(kragoal)) {
+                    if (null != kragoal && !"".equals(kragoal)) {
 
-                    UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra1 = new UpdateAppraisalPerformanceKra();
-                    updateAppraisalPerformanceKra.setId(Integer.parseInt("" + kragoalId));
-                    List<?> updateAppraisalPerformanceKra1List = updateAppraisalPerformanceKraService.readByUserUpdateKra(updateAppraisalPerformanceKra);
-                    if (!updateAppraisalPerformanceKra1List.isEmpty()) {
+                        UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra1 = new UpdateAppraisalPerformanceKra();
+                        updateAppraisalPerformanceKra.setId(Integer.parseInt("" + kragoalId));
+                        List<?> updateAppraisalPerformanceKra1List = updateAppraisalPerformanceKraService.readByUserUpdateKra(updateAppraisalPerformanceKra);
+                        if (!updateAppraisalPerformanceKra1List.isEmpty()) {
 
-                        updateAppraisalPerformanceKra1 = (UpdateAppraisalPerformanceKra) updateAppraisalPerformanceKra1List.get(0);
-                        if (!kragoal.equals(updateAppraisalPerformanceKra1.getUpdateKra()) || !metric.equals(updateAppraisalPerformanceKra1.getUpdateMetric())) {
-                            updateStatus = true;
+                            updateAppraisalPerformanceKra1 = (UpdateAppraisalPerformanceKra) updateAppraisalPerformanceKra1List.get(0);
+                            if (!kragoal.equals(updateAppraisalPerformanceKra1.getUpdateKra()) || !metric.equals(updateAppraisalPerformanceKra1.getUpdateMetric())) {
+                                updateStatus = true;
+                            }
                         }
                     }
                 }
+                request.setAttribute("updateStatus", updateStatus);
+                request.setAttribute("kragoal", kraList);
+                request.setAttribute("weightage", kraList);
+                request.setAttribute("appraisalId", appraisalId);
+                request.setAttribute("empMidyearSelfassessmentGoal", kraList);
+                request.setAttribute("managerMidyearReviewEvaluation", kraList);
+                request.setAttribute("midyearStatus", kraList);
+                request.setAttribute("endyearStatus", kraList);
+                request.setAttribute("empEndyearSelfassessmentGoal", kraList);
+                request.setAttribute("editDate", kraList);
+                request.setAttribute("startDate", kraList);
+
             }
-            request.setAttribute("updateStatus", updateStatus);
-            request.setAttribute("kragoal", kraList);
-            request.setAttribute("weightage", kraList);
-            request.setAttribute("appraisalId", appraisalId);
-            request.setAttribute("empMidyearSelfassessmentGoal", kraList);
-            request.setAttribute("managerMidyearReviewEvaluation", kraList);
-            request.setAttribute("midyearStatus", kraList);
-            request.setAttribute("endyearStatus", kraList);
-            request.setAttribute("empEndyearSelfassessmentGoal", kraList);
-            request.setAttribute("editDate", kraList);
-            request.setAttribute("startDate", kraList);
 
-        }
+            ////////////////////////////////////KRA OTHER Activity///////////////////////////////////////////////////////////
+            String kragoal_activity = "";
+            String metric_activity = "";
+            boolean kraOtherupdateStatus = false;
+            int kragoalactivityId;
+            if (null != appraisalPerformanceMaster.getId()) {
 
-        ////////////////////////////////////KRA OTHER Activity///////////////////////////////////////////////////////////
-        String kragoal_activity = "";
-        String metric_activity = "";
-        boolean kraOtherupdateStatus = false;
-        int kragoalactivityId;
-        if (null != appraisalPerformanceMaster.getId()) {
+                AppraisalPerformanceActivities appraisalPerformanceActivities = new AppraisalPerformanceActivities();
+                appraisalPerformanceActivities.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
 
-            AppraisalPerformanceActivities appraisalPerformanceActivities = new AppraisalPerformanceActivities();
-            appraisalPerformanceActivities.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+                List<?> kraOtherList = appraisalPerformanceActivitiesService.readByAppraisalKraGoalActivities(appraisalPerformanceActivities);
+                if (!kraOtherList.isEmpty()) {
+                    appraisalPerformanceActivities = (AppraisalPerformanceActivities) kraOtherList.get(0);
+                    kragoal_activity = appraisalPerformanceActivities.getKraGoalActivities();
+                    kragoalactivityId = appraisalPerformanceActivities.getId();
+                    metric_activity = appraisalPerformanceActivities.getMetricActivities();
 
-            List<?> kraOtherList = appraisalPerformanceActivitiesService.readByAppraisalKraGoalActivities(appraisalPerformanceActivities);
-            if (!kraOtherList.isEmpty()) {
-                appraisalPerformanceActivities = (AppraisalPerformanceActivities) kraOtherList.get(0);
-                kragoal_activity = appraisalPerformanceActivities.getKraGoalActivities();
-                kragoalactivityId = appraisalPerformanceActivities.getId();
-                metric_activity = appraisalPerformanceActivities.getMetricActivities();
+                    if (null != kragoal_activity && !"".equals(kragoal_activity)) {
+                        UpdateAppraisalPerformanceActivities updateAppraisalPerformanceActivities = new UpdateAppraisalPerformanceActivities();
+                        updateAppraisalPerformanceActivities.setId(Integer.parseInt("" + kragoalactivityId));
+                        List<?> updateKraOtherList = updateAppraisalPerformanceActivitiesService.readByUserUpdateKraOther(updateAppraisalPerformanceActivities);
+                        if (!updateKraOtherList.isEmpty()) {
 
-                if (null != kragoal_activity && !"".equals(kragoal_activity)) {
-                    UpdateAppraisalPerformanceActivities updateAppraisalPerformanceActivities = new UpdateAppraisalPerformanceActivities();
-                    updateAppraisalPerformanceActivities.setId(Integer.parseInt("" + kragoalactivityId));
-                    List<?> updateKraOtherList = updateAppraisalPerformanceActivitiesService.readByUserUpdateKraOther(updateAppraisalPerformanceActivities);
-                    if (!updateKraOtherList.isEmpty()) {
-
-                        updateAppraisalPerformanceActivities = (UpdateAppraisalPerformanceActivities) updateKraOtherList.get(0);
-                        if (!kragoal_activity.equals(updateAppraisalPerformanceActivities.getKraActivity()) || !metric_activity.equals(updateAppraisalPerformanceActivities.getMetricActivity())) {
-                            kraOtherupdateStatus = true;
+                            updateAppraisalPerformanceActivities = (UpdateAppraisalPerformanceActivities) updateKraOtherList.get(0);
+                            if (!kragoal_activity.equals(updateAppraisalPerformanceActivities.getKraActivity()) || !metric_activity.equals(updateAppraisalPerformanceActivities.getMetricActivity())) {
+                                kraOtherupdateStatus = true;
+                            }
                         }
                     }
                 }
+                request.setAttribute("kraOtherupdateStatus", kraOtherupdateStatus);
+                request.setAttribute("kragoalOtherActivity", kraOtherList);
             }
-            request.setAttribute("kraOtherupdateStatus", kraOtherupdateStatus);
-            request.setAttribute("kragoalOtherActivity", kraOtherList);
-        }
-        ////////////////////////////////////KRA OTHER Activity//////////////////////////////////////////////////////////
+            ////////////////////////////////////KRA OTHER Activity//////////////////////////////////////////////////////////
 
-        // =======================competency Evaluation==========================================================//
-        competencyList(request);
-        int competencyId = 0;
-        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
-        appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-        CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
-        List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
+            // =======================competency Evaluation==========================================================//
+            competencyList(request);
+            int competencyId = 0;
+            AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
+            appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+            CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
+            List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
 
-        request.setAttribute("competencyEvaluationList", competencyEvaluationList);
+            request.setAttribute("competencyEvaluationList", competencyEvaluationList);
 
-        //Individual Development Plan//
-        AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
-        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-        String text1 = "";
-        List<?> individualDevelopmentPlanList = appraisalPerformanceIndividualDevelopmentPlanService.readIndividualDevelopmentPlanDetail(appraisalPerformanceIndividualDevelopmentPlan);
-        if (!individualDevelopmentPlanList.isEmpty()) {
-            appraisalPerformanceIndividualDevelopmentPlan = (AppraisalPerformanceIndividualDevelopmentPlan) individualDevelopmentPlanList.get(0);
-            text1 = appraisalPerformanceIndividualDevelopmentPlan.getText1();
-        }
-        request.setAttribute("text1", individualDevelopmentPlanList);
-        request.setAttribute("text2", individualDevelopmentPlanList);
-        request.setAttribute("text3", individualDevelopmentPlanList);
-        request.setAttribute("remark", individualDevelopmentPlanList);
-        request.setAttribute("midYearRemark", individualDevelopmentPlanList);
-        request.setAttribute("endYearRemark", individualDevelopmentPlanList);
-        request.setAttribute("individualDevelopmentPlanList", individualDevelopmentPlanList);
+            //Individual Development Plan//
+            AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
+            appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+            String text1 = "";
+            List<?> individualDevelopmentPlanList = appraisalPerformanceIndividualDevelopmentPlanService.readIndividualDevelopmentPlanDetail(appraisalPerformanceIndividualDevelopmentPlan);
+            if (!individualDevelopmentPlanList.isEmpty()) {
+                appraisalPerformanceIndividualDevelopmentPlan = (AppraisalPerformanceIndividualDevelopmentPlan) individualDevelopmentPlanList.get(0);
+                text1 = appraisalPerformanceIndividualDevelopmentPlan.getText1();
+            }
+            request.setAttribute("text1", individualDevelopmentPlanList);
+            request.setAttribute("text2", individualDevelopmentPlanList);
+            request.setAttribute("text3", individualDevelopmentPlanList);
+            request.setAttribute("remark", individualDevelopmentPlanList);
+            request.setAttribute("midYearRemark", individualDevelopmentPlanList);
+            request.setAttribute("endYearRemark", individualDevelopmentPlanList);
+            request.setAttribute("individualDevelopmentPlanList", individualDevelopmentPlanList);
 
-        //////////Behaviors///////////////
-        AppraisalPerformanceBehaviors appraisalPerformanceBehaviors = new AppraisalPerformanceBehaviors();
-        String behaviors = "";
-        appraisalPerformanceBehaviors.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
-        List<?> behaviorsList = appraisalPerformanceBehaviorsService.readBehaviorsDetail(appraisalPerformanceBehaviors);
-        if (!behaviorsList.isEmpty()) {
-            appraisalPerformanceBehaviors = (AppraisalPerformanceBehaviors) behaviorsList.get(0);
-            behaviors = appraisalPerformanceBehaviors.getBehaviors();
-        }
-        request.setAttribute("behaviors", behaviorsList);
-        request.setAttribute("behaviorsList", behaviorsList);
-        }catch(Exception e){
-            
+            //////////Behaviors///////////////
+            AppraisalPerformanceBehaviors appraisalPerformanceBehaviors = new AppraisalPerformanceBehaviors();
+            String behaviors = "";
+            appraisalPerformanceBehaviors.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+            List<?> behaviorsList = appraisalPerformanceBehaviorsService.readBehaviorsDetail(appraisalPerformanceBehaviors);
+            if (!behaviorsList.isEmpty()) {
+                appraisalPerformanceBehaviors = (AppraisalPerformanceBehaviors) behaviorsList.get(0);
+                behaviors = appraisalPerformanceBehaviors.getBehaviors();
+            }
+            request.setAttribute("behaviors", behaviorsList);
+            request.setAttribute("behaviorsList", behaviorsList);
+        } catch (Exception e) {
+
         }
 
         mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
@@ -5736,5 +5330,1982 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 }
             }
         }
+    }
+
+    public ModelAndView editClickCompetencyIdp(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
+        UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra = new UpdateAppraisalPerformanceKra();
+        AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
+        EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
+        CompetencyEvaluationMaster competencyEvaluationMaster = new CompetencyEvaluationMaster();
+        String employeeName = "" + employee.getEmployeeName();
+        String empId = request.getParameter("id");
+        String userid = request.getParameter("userid");
+        String appraisalId1 = request.getParameter("appraisalId");
+        //////Print/////By dhaval
+        request.setAttribute("empId", empId);
+        request.setAttribute("userid", userid);
+        request.setAttribute("appraisalId1", appraisalId1);
+        ///////////
+        empDateStartToEnd(request, response);
+        selectedEmployeeDate(request, response, userid);
+        kraCategoryList(request);
+        String employeeId = "" + empId;//set the value in employee id
+        appraisalPerformanceMaster = appraisalPerformanceService.readById(Integer.parseInt(appraisalId1));
+
+        try {
+            if (null != employee.getCompetencyEvaluationId()) {
+
+                competencyEvaluationMaster = competencyEvaluationMasterService.readById(employee.getCompetencyEvaluationId());
+                if (null != competencyEvaluationMaster) {
+                    String cpmname = competencyEvaluationMaster.getTitle();
+                    request.setAttribute("cpmname", cpmname);
+                }
+            }
+        } catch (Exception e) {
+
+        }
+
+        String pmpstatusId = "";
+        List<?> pmplist = pmpFormStatusMasterService.readByPmpformstatusStatus(employeeId);
+        if (!pmplist.isEmpty()) {
+            pmpFormStatusMaster = (PmpFormStatusMaster) pmplist.get(0);
+            pmpstatusId = "" + pmpFormStatusMaster.getId();
+            boolean pmpstartyearstatus = pmpFormStatusMaster.getStartYearStatus();
+            boolean pmpmidyearstatus = pmpFormStatusMaster.getMidYearStatus();
+            boolean pmpendyearstatus = pmpFormStatusMaster.getEndYearStatus();
+            boolean pmpasEmployee = pmpFormStatusMaster.getEmployeeSide();
+
+            boolean compentencyStartYearStatus = pmpFormStatusMaster.getCompentencyStartYearStatus();
+            boolean compentencyMidYearStatus = pmpFormStatusMaster.getCompentencyMidYearStatus();
+            boolean compentencyEndYearStatus = pmpFormStatusMaster.getCompentencyEndYearStatus();
+
+            request.setAttribute("pmpstartyearstatus", pmpstartyearstatus);
+            request.setAttribute("pmpmidyearstatus", pmpmidyearstatus);
+            request.setAttribute("pmpendyearstatus", pmpendyearstatus);
+            request.setAttribute("pmpasEmployee", pmpasEmployee);
+
+            request.setAttribute("compentencyStartYearStatus", compentencyStartYearStatus);
+            request.setAttribute("compentencyMidYearStatus", compentencyMidYearStatus);
+            request.setAttribute("compentencyEndYearStatus", compentencyEndYearStatus);
+
+        }
+
+        int managerStatus = appraisalPerformanceMaster.getManagerStatus();
+        request.setAttribute("managerStatus", managerStatus);
+        int statusFlag = appraisalPerformanceMaster.getStatus();
+        request.setAttribute("statusFlag", statusFlag);
+
+        int employeeStatus = appraisalPerformanceMaster.getEmployeeStatus();
+        request.setAttribute("employeeStatus", employeeStatus);
+
+        int empCompetencyStatus = appraisalPerformanceMaster.getEmployeeCompetencyStatus();
+        request.setAttribute("empCompetencyStatus", empCompetencyStatus);
+
+        int managerCompetencyStatus = appraisalPerformanceMaster.getManagerCompetencyStatus();
+        request.setAttribute("managerCompetencyStatus", managerCompetencyStatus);
+
+        int year = Integer.parseInt(request.getParameter("year"));
+
+        // =======================competency Evaluation==========================================================//
+        competencyList(request);
+        int competencyId = 0;
+        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
+        appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+        CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
+//        List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
+        List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readByEmployeeWiseAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
+
+        request.setAttribute("competencyEvaluationList", competencyEvaluationList);
+
+        mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
+        mv.setViewName("Appraisal/PMPCompetencyIdpForm");
+//        mv.setViewName("Appraisal/ManagerPerformanceAppraisalForm");
+//        mv.setViewName("forward:userMaster.htm?act=userDashboard");
+        return mv;
+    }
+
+    public ModelAndView editClickIdp(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
+        UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra = new UpdateAppraisalPerformanceKra();
+        AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
+        EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
+        CompetencyEvaluationMaster competencyEvaluationMaster = new CompetencyEvaluationMaster();
+        String employeeName = "" + employee.getEmployeeName();
+        String empId = request.getParameter("id");
+        String userid = request.getParameter("userid");
+        String appraisalId1 = request.getParameter("appraisalId");
+        //////Print/////By dhaval
+        request.setAttribute("empId", empId);
+        request.setAttribute("userid", userid);
+        request.setAttribute("appraisalId1", appraisalId1);
+        ///////////
+        empDateStartToEnd(request, response);
+        selectedEmployeeDate(request, response, userid);
+        kraCategoryList(request);
+        String employeeId = "" + empId;//set the value in employee id
+        appraisalPerformanceMaster = appraisalPerformanceService.readById(Integer.parseInt(appraisalId1));
+
+//        if (null != appraisalPerformanceMaster.getManagerStatus()) {
+        int managerStatus = appraisalPerformanceMaster.getManagerStatus();
+        request.setAttribute("managerStatus", managerStatus);
+        int statusFlag = appraisalPerformanceMaster.getStatus();
+        request.setAttribute("statusFlag", statusFlag);
+
+        int employeeStatus = appraisalPerformanceMaster.getEmployeeStatus();
+        request.setAttribute("employeeStatus", employeeStatus);
+
+        int employeeIdpStatus = appraisalPerformanceMaster.getEmployeeIdpStatus();
+        request.setAttribute("employeeIdpStatus", employeeIdpStatus);
+
+        int managerIdpStatus = appraisalPerformanceMaster.getManagerIdpStatus();
+        request.setAttribute("managerIdpStatus", managerIdpStatus);
+
+        int year = Integer.parseInt(request.getParameter("year"));
+
+        //Individual Development Plan//
+        AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
+        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+        String text1 = "";
+        List<?> individualDevelopmentPlanList = appraisalPerformanceIndividualDevelopmentPlanService.readIndividualDevelopmentPlanDetail(appraisalPerformanceIndividualDevelopmentPlan);
+        if (!individualDevelopmentPlanList.isEmpty()) {
+            appraisalPerformanceIndividualDevelopmentPlan = (AppraisalPerformanceIndividualDevelopmentPlan) individualDevelopmentPlanList.get(0);
+            text1 = appraisalPerformanceIndividualDevelopmentPlan.getText1();
+        }
+        request.setAttribute("text1", individualDevelopmentPlanList);
+        request.setAttribute("text2", individualDevelopmentPlanList);
+        request.setAttribute("text3", individualDevelopmentPlanList);
+        request.setAttribute("remark", individualDevelopmentPlanList);
+        request.setAttribute("midYearRemark", individualDevelopmentPlanList);
+        request.setAttribute("endYearRemark", individualDevelopmentPlanList);
+        request.setAttribute("individualDevelopmentPlanList", individualDevelopmentPlanList);
+
+        mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
+        mv.setViewName("Appraisal/PMPForIDP");
+//        mv.setViewName("Appraisal/ManagerPerformanceAppraisalForm");
+//        mv.setViewName("forward:userMaster.htm?act=userDashboard");
+        return mv;
+    }
+
+    public ModelAndView createSubmitCompetency(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
+        AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
+        AppraisalPerformanceKra appraisalPerformanceKra1 = new AppraisalPerformanceKra();
+        UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra = new UpdateAppraisalPerformanceKra();
+        UpdateAppraisalPerformanceActivities updateAppraisalPerformanceActivities = new UpdateAppraisalPerformanceActivities();
+        AppraisalPerformanceActivities appraisalPerformanceActivities = new AppraisalPerformanceActivities();
+        AppraisalPerformanceActivities appraisalPerformanceActivities1 = new AppraisalPerformanceActivities();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
+        BindException errors = new BindException(appraisalPerformanceMaster, "appraisalPerformanceMaster");
+
+        String appraisalId = "";
+        //selectedDateflage(request,response);
+        String btn = request.getParameter("submit");
+        appraisalPerformanceValidator.validate(appraisalPerformanceMaster, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+        } else {
+
+//            float weightageCount = 0;
+//            int countId = Integer.parseInt(request.getParameter("countId"));
+//            for (int i = 1; i <= countId; i++) {
+//                String weightage1 = request.getParameter("weightage" + i);
+//                weightageCount += Float.parseFloat(weightage1);
+//            }
+//            if (null != btn && btn.equals("submit")) {
+//                if (weightageCount == 75) {
+//
+//                } else {
+//
+//                    request.setAttribute("failureMessage", "Information : Your Weightege is not equal to 75");
+//                    mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
+//                    mv = searchOwnappraisalPerformanceSubmit(request, response);
+//                    return mv;
+//                }
+//            }
+            String employeeId = "" + employee.getId();
+            String employeeName = "" + employee.getEmployeeName();
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            //StartDate To create FirstTime//
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date now = new Date();
+            String strDate = sdf1.format(now);
+            String today = sdf.format(cal.getTime());
+            String startdate = "" + today;
+
+            List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
+            if (!list.isEmpty()) {
+                //AppraisalPerformanceMaster appraisalPerformanceMaster =new AppraisalPerformanceMaster();
+                appraisalPerformanceMaster = (AppraisalPerformanceMaster) list.get(0);
+                appraisalId = "" + appraisalPerformanceMaster.getId();
+                appraisalPerformanceMaster.setId(Integer.parseInt(appraisalId));
+//                appraisalPerformanceKra.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+            }
+//            if (null == appraisalPerformanceMaster.getId()) {
+//
+//                int behaviosyear = Calendar.getInstance().get(Calendar.YEAR);
+//                appraisalPerformanceMaster.setEmployeeMaster(employee);
+//                appraisalPerformanceMaster.setStatus(0);
+//                appraisalPerformanceMaster.setManagerStatus(0);
+//                appraisalPerformanceMaster.setEmployeeStatus(0);
+//                appraisalPerformanceMaster.setBehaviorsYear("" + behaviosyear);
+//                appraisalPerformanceKra.setStartDate(startdate);
+//                
+//                appraisalPerformanceService.create(appraisalPerformanceMaster);
+//            }
+
+            String flagId = request.getParameter("flagId");
+            String midhalf = request.getParameter("flagMidId");
+            String endhalf = request.getParameter("flagEndId");
+
+            if (null != btn && btn.equals("submit")) {
+
+//                appraisalPerformanceMaster.setStatus(1);
+//                appraisalPerformanceMaster.setManagerkraStatus(0);
+//                appraisalPerformanceMaster.setEmployeeStatus(1);
+//                appraisalPerformanceMaster.setReworkStatus(0);
+                appraisalPerformanceMaster.setEmployeeCompetencyStatus(1);
+                appraisalPerformanceMaster.setManagerCompetencyStatus(0);
+                appraisalPerformanceMaster.setCompetencyReworkStatus(0);
+
+//                if (midhalf.equals("true")) {
+//                    appraisalPerformanceMaster.setMidYearEmployeeStatus(1);
+//                }
+//                if (endhalf.equals("true")) {
+//                    appraisalPerformanceMaster.setEndYearEmployeeStatus(1);
+//                }
+                appraisalPerformanceService.update(appraisalPerformanceMaster);
+                if (!"".equals(flagId) && null != flagId) {
+                    if (flagId.equals("true")) {
+//   Email Sent to ReportingManager1 at Start Year
+                        try {
+                            EmailTemplate emailTemplate = new EmailTemplate();
+                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                            DesignationMaster designationMaster = new DesignationMaster();
+                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                            EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                            employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                            // id 113 is for Appraisal Submitted by employee(Start year)
+                            emailTemplate = emailTemplateService.readById(113);
+                            String To = employeeMasterHr.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
+                            mailSendPmpStartHalfapply(request);
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }
+                if (!"".equals(midhalf) && null != midhalf) {
+                    if (midhalf.equals("true")) {
+//   Email Sent to ReportingManager1 at Mid Year
+                        try {
+                            EmailTemplate emailTemplate = new EmailTemplate();
+                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                            DesignationMaster designationMaster = new DesignationMaster();
+                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                            EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                            employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                            // id 114 is for Appraisal Submitted by employee(Mid year)
+                            emailTemplate = emailTemplateService.readById(114);
+                            String To = employeeMasterHr.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
+                            mailSendPmpMidHalfapply(request);
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }
+                if (!"".equals(endhalf) && null != endhalf) {
+                    if (endhalf.equals("true")) {
+//   Email Sent to ReportingManager1 at  Year End
+                        try {
+                            EmailTemplate emailTemplate = new EmailTemplate();
+                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                            DesignationMaster designationMaster = new DesignationMaster();
+                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                            EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                            employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                            // id 115 is for Appraisal Submitted by employee(year End)
+                            emailTemplate = emailTemplateService.readById(115);
+                            String To = employeeMasterHr.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
+                            mailSendPmpEndHalfapply(request);
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }
+            } else {
+
+                appraisalPerformanceService.update(appraisalPerformanceMaster);
+            }
+
+//            StartDate To create FirstTime//
+//            =========if appraisalPerformance is create and after get id=======//
+//            appraisalPerformanceKra.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+            appraisalPerformanceMaster.getId();//get Appraisal id
+//            String employeeName = request.getParameter("employeeName");
+
+            ///////////////////Competency Evaluation (As Per Zydex Competency Framework)////////////////////////////
+            AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
+            CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
+            CompetencyEvaluationMaster competencyEvaluationMaster = new CompetencyEvaluationMaster();
+            int subCompentencyCount = Integer.parseInt(request.getParameter("subCompentencyCount"));
+            boolean flag = true;
+            for (int i = 1; i <= subCompentencyCount; i++) {
+                String competencyEveId = request.getParameter("competencyEveId" + i);
+                if (competencyEveId != null) {
+                    appraisalPerformanceCompetencyEvaluation = appraisalPerformanceCompetencyEvaluationService.readById(Integer.parseInt(competencyEveId));
+                }
+                String compentencyStartYear = request.getParameter("compentencyStartYear" + i);
+                String compentencyStartRemark = request.getParameter("compentencyStartRemark" + i);
+                String compentencyMidYear = request.getParameter("compentencyMidYear" + i);
+                String compentencyMidRemark = request.getParameter("compentencyMidRemark" + i);
+                String compentencyEndYear = request.getParameter("compentencyEndYear" + i);
+                String compentencyEndRemark = request.getParameter("compentencyEndRemark" + i);
+                if (!"".equals(compentencyStartYear) && null != compentencyStartYear) {
+                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(compentencyStartYear);
+                } else {
+                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(null);
+                }
+                if (!"".equals(compentencyStartRemark) && null != compentencyStartRemark) {
+                    appraisalPerformanceCompetencyEvaluation.setStartyearRemark(compentencyStartRemark);
+                } else {
+                    appraisalPerformanceCompetencyEvaluation.setStartyearRemark(null);
+                }
+                if (!"".equals(compentencyMidYear) && null != compentencyMidYear) {
+                    appraisalPerformanceCompetencyEvaluation.setCompetencyMidYear(compentencyMidYear);
+                } else {
+                    appraisalPerformanceCompetencyEvaluation.setCompetencyMidYear(null);
+                }
+                if (!"".equals(compentencyMidRemark) && null != compentencyMidRemark) {
+                    appraisalPerformanceCompetencyEvaluation.setMidyearRemark(compentencyMidRemark);
+                } else {
+                    appraisalPerformanceCompetencyEvaluation.setMidyearRemark(null);
+                }
+                if (!"".equals(compentencyEndYear) && null != compentencyEndYear) {
+                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(compentencyEndYear);
+                } else {
+                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
+                }
+                if (!"".equals(compentencyEndRemark) && null != compentencyEndRemark) {
+                    appraisalPerformanceCompetencyEvaluation.setEndyearRemark(compentencyEndRemark);
+                } else {
+                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
+                }
+
+//
+                appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+                int compentencyTextMasterId = Integer.parseInt(request.getParameter("compentencyTextMasterId" + i));
+                competencyEvaluationTextmaster.setId(compentencyTextMasterId);
+//                competencyEvaluationMaster.setId(competencyEvaluationId);
+//                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
+                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationTextmaster(competencyEvaluationTextmaster);
+//                String competencyEveId = request.getParameter("competencyEveId" + i);
+                String btn2 = request.getParameter("save");
+
+                if (null != btn2 && btn2.equals("save")) {
+                    if (!"".equals(competencyEveId) && null != competencyEveId) {
+                        int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
+                        competencyEvaluationMaster.setId(competencyEvaluationId);
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
+                        appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
+//                        appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
+                        appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
+
+                    } else {
+//                        if (!appraisalId.isEmpty()) {
+//                            if (flag) {
+//                                for (String id : appraisalId.split(",")) {
+//                                    if (!id.equals("")) {
+//                                        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation2 = new AppraisalPerformanceCompetencyEvaluation();
+//                                        AppraisalPerformanceCompetencyEvaluationHistory appraisalPerformanceCompetencyEvaluationHistory = new AppraisalPerformanceCompetencyEvaluationHistory();
+//                                        appraisalPerformanceCompetencyEvaluation2.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+//
+//                                        try {
+//
+//                                            List<AppraisalPerformanceCompetencyEvaluation> competencyList = (List<AppraisalPerformanceCompetencyEvaluation>) appraisalPerformanceCompetencyEvaluationService.readByAppraisalPerformanceId(appraisalPerformanceCompetencyEvaluation2);
+//
+//                                            for (AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation1 : competencyList) {
+//
+//                                                BeanUtils.copyProperties(appraisalPerformanceCompetencyEvaluation1, appraisalPerformanceCompetencyEvaluationHistory);
+//                                                appraisalPerformanceCompetencyEvaluationHistory.setAppraisalPerformanceId(appraisalPerformanceCompetencyEvaluation1.getAppraisalPerformanceMaster().getId());
+//                                                appraisalPerformanceCompetencyEvaluationHistory.setCompetencyEvaluationId(appraisalPerformanceCompetencyEvaluation1.getCompetencyEvaluationMaster().getId());
+//                                                appraisalPerformanceCompetencyEvaluationHistory.setCompetencyEvaluationTextId(appraisalPerformanceCompetencyEvaluation1.getCompetencyEvaluationTextmaster().getId());
+////                                            appraisalPerformanceCompetencyEvaluationHistory.setDateStr(startdate);
+//                                                appraisalPerformanceCompetencyEvaluationHistory.setDateStr(strDate);
+//                                                appraisalPerformanceCompetencyEvaluationHistory.setDeletedBy("Employee Side");
+//                                                appraisalPerformanceCompetencyEvaluationHistory.setId(0);
+//                                                appraisalPerformanceCompetencyEvaluationHistoryService.create(appraisalPerformanceCompetencyEvaluationHistory);
+//                                            }
+//                                        } catch (Exception e) {
+//                                            e.printStackTrace();
+//                                        }
+//
+//                                        appraisalPerformanceCompetencyEvaluationService.delete1(appraisalPerformanceCompetencyEvaluation2);
+//                                        flag = false;
+//                                    }
+//                                }
+//                            }
+//                        }
+                        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
+                        if (!"".equals(competencyEvaluationId) && null != competencyEvaluationId) {
+                            int competencyEvaluation_Id = Integer.parseInt(competencyEvaluationId);
+                            competencyEvaluationMaster.setId(competencyEvaluation_Id);
+                            appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
+//                            appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
+                            appraisalPerformanceCompetencyEvaluationService.create(appraisalPerformanceCompetencyEvaluation);
+                        }
+                    }
+                } else {
+
+                    /////////manager StartYearManager///////////////////////////////
+                    if (!"".equals(compentencyStartYear) && null != compentencyStartYear) {
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyStartYearManager(compentencyStartYear);
+                    } else {
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyStartYearManager(null);
+                    }
+                    if (!"".equals(compentencyStartRemark) && null != compentencyStartRemark) {
+                        appraisalPerformanceCompetencyEvaluation.setStartyearRemarkManager(compentencyStartRemark);
+                    } else {
+                        appraisalPerformanceCompetencyEvaluation.setStartyearRemarkManager(null);
+                    }
+                    if (!"".equals(compentencyMidYear) && null != compentencyMidYear) {
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyMidYearManager(compentencyMidYear);
+                    } else {
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyMidYearManager(null);
+                    }
+                    if (!"".equals(compentencyMidRemark) && null != compentencyMidRemark) {
+                        appraisalPerformanceCompetencyEvaluation.setMidyearRemarkManager(compentencyMidRemark);
+                    } else {
+                        appraisalPerformanceCompetencyEvaluation.setMidyearRemarkManager(null);
+                    }
+                    if (!"".equals(compentencyEndYear) && null != compentencyEndYear) {
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(compentencyEndYear);
+                    } else {
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(null);
+                    }
+                    if (!"".equals(compentencyEndRemark) && null != compentencyEndRemark) {
+                        appraisalPerformanceCompetencyEvaluation.setEndyearRemarkManager(compentencyEndRemark);
+                    } else {
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(null);
+                    }
+                    if (!"".equals(competencyEveId) && null != competencyEveId) {
+                        int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
+                        competencyEvaluationMaster.setId(competencyEvaluationId);
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
+                        appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
+//                        appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
+                        appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
+
+                    } else {
+//                        if (!appraisalId.isEmpty()) {
+//                            if (flag) {
+//                                for (String id : appraisalId.split(",")) {
+//                                    if (!id.equals("")) {
+//                                        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation2 = new AppraisalPerformanceCompetencyEvaluation();
+//                                        appraisalPerformanceCompetencyEvaluation2.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+//                                        appraisalPerformanceCompetencyEvaluationService.delete1(appraisalPerformanceCompetencyEvaluation2);
+//                                        flag = false;
+//                                    }
+//                                }
+//                            }
+//                        }
+                        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
+                        if (!"".equals(competencyEvaluationId) && null != competencyEvaluationId) {
+                            int competencyEvaluation_Id = Integer.parseInt(competencyEvaluationId);
+                            competencyEvaluationMaster.setId(competencyEvaluation_Id);
+                            appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
+//                            appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
+                            appraisalPerformanceCompetencyEvaluationService.create(appraisalPerformanceCompetencyEvaluation);
+                        }
+                    }
+                }
+            }
+
+        }
+        mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
+//        mv.setViewName("forward:userMaster.htm?act=userDashboard");
+//        mv = createClick(request, response);
+        mv.setViewName("redirect:appraisalPerformance.htm?act=searchOwnappraisalPerformanceSubmit");
+//        mv = searchOwnappraisalPerformanceSubmit(request, response);
+//        mv.setViewName("Appraisal/PerformanceAppraisalForm");
+        return mv;
+    }
+
+    public ModelAndView createSubmitIDP(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
+        BindException errors = new BindException(appraisalPerformanceMaster, "appraisalPerformanceMaster");
+        String appraisalId = "";
+        //selectedDateflage(request,response);
+        String btn = request.getParameter("submit");
+        appraisalPerformanceValidator.validate(appraisalPerformanceMaster, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+        } else {
+
+//            float weightageCount = 0;
+//            int countId = Integer.parseInt(request.getParameter("countId"));
+//            for (int i = 1; i <= countId; i++) {
+//                String weightage1 = request.getParameter("weightage" + i);
+//                weightageCount += Float.parseFloat(weightage1);
+//            }
+//            if (null != btn && btn.equals("submit")) {
+//                if (weightageCount == 75) {
+//
+//                } else {
+//
+//                    request.setAttribute("failureMessage", "Information : Your Weightege is not equal to 75");
+//                    mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
+//                    mv = searchOwnappraisalPerformanceSubmit(request, response);
+//                    return mv;
+//                }
+//            }
+            String employeeId = "" + employee.getId();
+            String employeeName = "" + employee.getEmployeeName();
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            //StartDate To create FirstTime//
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date now = new Date();
+            String strDate = sdf1.format(now);
+            String today = sdf.format(cal.getTime());
+            String startdate = "" + today;
+//            String weightageScore = request.getParameter("weightageScore");
+//            if (null == weightageScore) {
+//                weightageScore = "";
+//            }
+            List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
+            if (!list.isEmpty()) {
+                //AppraisalPerformanceMaster appraisalPerformanceMaster =new AppraisalPerformanceMaster();
+                appraisalPerformanceMaster = (AppraisalPerformanceMaster) list.get(0);
+                appraisalId = "" + appraisalPerformanceMaster.getId();
+                appraisalPerformanceMaster.setId(Integer.parseInt(appraisalId));
+//                appraisalPerformanceKra.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+            }
+//            if (null == appraisalPerformanceMaster.getId()) {
+//
+//                int behaviosyear = Calendar.getInstance().get(Calendar.YEAR);
+//                appraisalPerformanceMaster.setEmployeeMaster(employee);
+//                appraisalPerformanceMaster.setStatus(0);
+//                appraisalPerformanceMaster.setManagerStatus(0);
+//                appraisalPerformanceMaster.setEmployeeStatus(0);
+//                appraisalPerformanceMaster.setBehaviorsYear("" + behaviosyear);
+//                appraisalPerformanceKra.setStartDate(startdate);
+//                appraisalPerformanceMaster.setWeightageScore(weightageScore);
+//                appraisalPerformanceService.create(appraisalPerformanceMaster);
+//            }
+
+            String flagId = request.getParameter("flagId");
+            String midhalf = request.getParameter("flagMidId");
+            String endhalf = request.getParameter("flagEndId");
+//            List<?> kraList = appraisalPerformanceKraService.readByAppraisalPerformancekraId(appraisalPerformanceKra);
+//            if (!kraList.isEmpty()) {
+//                appraisalPerformanceKra = (AppraisalPerformanceKra) kraList;
+//                appraisalPerformanceKra.getId();
+//            }
+
+            if (null != btn && btn.equals("submit")) {
+
+//                appraisalPerformanceMaster.setStatus(1);
+//                appraisalPerformanceMaster.setManagerkraStatus(0);
+//                appraisalPerformanceMaster.setEmployeeStatus(1);
+//                appraisalPerformanceMaster.setReworkStatus(0);
+                appraisalPerformanceMaster.setEmployeeIdpStatus(1);
+                appraisalPerformanceMaster.setManagerIdpStatus(0);
+                appraisalPerformanceMaster.setIdpReworkStatus(0);
+
+                appraisalPerformanceService.update(appraisalPerformanceMaster);
+                if (!"".equals(flagId) && null != flagId) {
+                    if (flagId.equals("true")) {
+//   Email Sent to ReportingManager1 at Start Year
+                        try {
+                            EmailTemplate emailTemplate = new EmailTemplate();
+                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                            DesignationMaster designationMaster = new DesignationMaster();
+                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                            EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                            employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                            // id 113 is for Appraisal Submitted by employee(Start year)
+                            emailTemplate = emailTemplateService.readById(113);
+                            String To = employeeMasterHr.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
+                            mailSendPmpStartHalfapply(request);
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }
+                if (!"".equals(midhalf) && null != midhalf) {
+                    if (midhalf.equals("true")) {
+//   Email Sent to ReportingManager1 at Mid Year
+                        try {
+                            EmailTemplate emailTemplate = new EmailTemplate();
+                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                            DesignationMaster designationMaster = new DesignationMaster();
+                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                            EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                            employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                            // id 114 is for Appraisal Submitted by employee(Mid year)
+                            emailTemplate = emailTemplateService.readById(114);
+                            String To = employeeMasterHr.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
+                            mailSendPmpMidHalfapply(request);
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }
+                if (!"".equals(endhalf) && null != endhalf) {
+                    if (endhalf.equals("true")) {
+//   Email Sent to ReportingManager1 at  Year End
+                        try {
+                            EmailTemplate emailTemplate = new EmailTemplate();
+                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                            DesignationMaster designationMaster = new DesignationMaster();
+                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                            EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                            employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                            // id 115 is for Appraisal Submitted by employee(year End)
+                            emailTemplate = emailTemplateService.readById(115);
+                            String To = employeeMasterHr.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
+                            mailSendPmpEndHalfapply(request);
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }
+            } else {
+
+//                appraisalPerformanceMaster.setWeightageScore(weightageScore);
+                appraisalPerformanceService.update(appraisalPerformanceMaster);
+            }
+
+//            StartDate To create FirstTime//
+//            =========if appraisalPerformance is create and after get id=======//
+            appraisalPerformanceMaster.getId();//get Appraisal id
+            //String employeeName = request.getParameter("employeeName");
+
+///////////////////////////Individual Development Plan//////////////////////////////////
+            AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
+            int individualcount = Integer.parseInt(request.getParameter("IndividualId"));
+            for (int i = 1; i <= individualcount; i++) {
+                String individualplan = request.getParameter("IndividualDevelopmentPlanId" + i);
+                if (null != individualplan) {
+
+                    appraisalPerformanceIndividualDevelopmentPlan = appraisalPerformanceIndividualDevelopmentPlanService.readById(Integer.parseInt(individualplan));
+                }
+                String text1 = request.getParameter("text" + i);
+                String text2 = request.getParameter("individualtextDiv" + i);
+                String text3 = request.getParameter("trainingSelectId" + i);
+                String remark = request.getParameter("trainingSelectTextinput" + i);
+                String midYearRemark = request.getParameter("midYearRemark" + i);
+                String endYearRemark = request.getParameter("endYearRemark" + i);
+                String managerMidYearRemark = request.getParameter("managerMidYearRemark" + i);
+                String managerEndYearRemark = request.getParameter("managerEndYearRemark" + i);
+                if (!"".equals(text1) && null != text1) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setText1(text1);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setText1(null);
+                }
+
+                if (!"".equals(text2) && null != text2) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setText2(text2);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setText2(null);
+                }
+//                if (!"".equals(text2) && null != text2) {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(text2);
+//                } else {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(null);
+//                }
+                if (!"".equals(text3) && null != text3) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setText3(text3);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setText3(null);
+                }
+//                if (!"".equals(text3) && null != text3) {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(text3);
+//                } else {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
+//                }
+                if (!"".equals(remark) && null != remark) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setRemark(remark);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setRemark(null);
+                }
+                if (!"".equals(midYearRemark) && null != midYearRemark) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setMidYearRemark(midYearRemark);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setMidYearRemark(null);
+                }
+                if (!"".equals(endYearRemark) && null != endYearRemark) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(endYearRemark);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(null);
+                }
+
+                String btn4 = request.getParameter("save");
+                if (null != btn4 && btn4.equals("save")) {
+
+                    if (individualplan != null) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
+                        appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+                        appraisalPerformanceIndividualDevelopmentPlanService.create(appraisalPerformanceIndividualDevelopmentPlan);
+                    }
+                    request.setAttribute("successMessage",
+                            "Information : The Information is Saved Successfully.");
+                } else {
+
+                    if (null != text1 && !"".equals(text1)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(text1);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(null);
+                    }
+                    if (null != text2 && !"".equals(text2)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(text2);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(null);
+                    }
+                    if (null != text3 && !"".equals(text3)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(text3);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
+                    }
+                    if (null != managerMidYearRemark && !"".equals(managerMidYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(managerMidYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(null);
+                    }
+
+                    if (null != remark && !"".equals(remark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerremark(remark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerremark(null);
+                    }
+                    if (null != endYearRemark && !"".equals(endYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(endYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(null);
+                    }
+
+                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(managerEndYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
+                    }
+                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(managerEndYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(null);
+                    }
+//                    Mid year for Manager side //
+                    if (null != midYearRemark && !"".equals(midYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkManager(midYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkManager(null);
+                    }
+                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(managerEndYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(null);
+                    }
+
+                    if (individualplan != null) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
+                        appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+                        appraisalPerformanceIndividualDevelopmentPlanService.create(appraisalPerformanceIndividualDevelopmentPlan);
+                    }
+                    request.setAttribute("successMessage",
+                            "Information : The Information is Submit Successfully.");
+                }
+            }
+        }
+        mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
+//        mv.setViewName("forward:userMaster.htm?act=userDashboard");
+//        mv = createClick(request, response);
+        mv.setViewName("redirect:appraisalPerformance.htm?act=searchOwnappraisalPerformanceSubmit");
+//        mv = searchOwnappraisalPerformanceSubmit(request, response);
+//        mv.setViewName("Appraisal/PerformanceAppraisalForm");
+        return mv;
+    }
+
+    public ModelAndView editClickCompetencyForManager(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ////////////Manager
+        ModelAndView mv = new ModelAndView();
+        AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
+        UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra = new UpdateAppraisalPerformanceKra();
+        AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
+        EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        String employeeName = "" + employee.getEmployeeName();
+        String empId = request.getParameter("id");
+        String userid = request.getParameter("userid");
+        String appraisalId1 = request.getParameter("appraisalId");
+        PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
+        //////Print/////By dhaval
+        request.setAttribute("empId", empId);
+        request.setAttribute("userid", userid);
+        request.setAttribute("appraisalId", appraisalId1);
+
+//        request.setAttribute("empId", empId);
+//        request.setAttribute("userid", userid);
+//        request.setAttribute("appraisalId1", appraisalId1);
+        ///////////
+//        selectedEmployeeDate(request, response, userid);
+        managerDateStartToEnd(request, response);
+        managerTimeLineDate(request, response, userid);
+        kraCategoryList(request);
+        String employeeId = "" + empId;//set the value in employee id
+        appraisalPerformanceMaster = appraisalPerformanceService.readById(Integer.parseInt(appraisalId1));
+//        if (null != appraisalPerformanceMaster.getWeightageScore()) {
+//            String weightageScore = appraisalPerformanceMaster.getWeightageScore();
+//            request.setAttribute("weightageScore", weightageScore);
+//        }
+
+        String pmpstatusId = "";
+        List<?> pmplist = pmpFormStatusMasterService.readByPmpformstatusStatus(employeeId);
+        if (!pmplist.isEmpty()) {
+            pmpFormStatusMaster = (PmpFormStatusMaster) pmplist.get(0);
+            pmpstatusId = "" + pmpFormStatusMaster.getId();
+            boolean pmpstartyearstatus = pmpFormStatusMaster.getStartYearStatus();
+            boolean pmpmidyearstatus = pmpFormStatusMaster.getMidYearStatus();
+            boolean pmpendyearstatus = pmpFormStatusMaster.getEndYearStatus();
+            boolean pmpasManager = pmpFormStatusMaster.getManagerSide();
+
+            boolean compentencyStartYearStatus = pmpFormStatusMaster.getCompentencyStartYearStatus();
+            boolean compentencyMidYearStatus = pmpFormStatusMaster.getCompentencyMidYearStatus();
+            boolean compentencyEndYearStatus = pmpFormStatusMaster.getCompentencyEndYearStatus();
+
+            request.setAttribute("pmpstartyearstatus", pmpstartyearstatus);
+            request.setAttribute("pmpmidyearstatus", pmpmidyearstatus);
+            request.setAttribute("pmpendyearstatus", pmpendyearstatus);
+            request.setAttribute("pmpasManager", pmpasManager);
+
+            request.setAttribute("compentencyStartYearStatus", compentencyStartYearStatus);
+            request.setAttribute("compentencyMidYearStatus", compentencyMidYearStatus);
+            request.setAttribute("compentencyEndYearStatus", compentencyEndYearStatus);
+
+        }
+
+        int managerStatus = appraisalPerformanceMaster.getManagerStatus();
+        request.setAttribute("managerStatus", managerStatus);
+
+        int managerKraStatus = appraisalPerformanceMaster.getManagerkraStatus();
+        request.setAttribute("managerKraStatus", managerKraStatus);
+        int Finalstatus = appraisalPerformanceMaster.getManagerStatus();
+        request.setAttribute("Finalstatus", Finalstatus);
+
+        int empCompetencyStatus = appraisalPerformanceMaster.getEmployeeCompetencyStatus();
+        request.setAttribute("empCompetencyStatus", empCompetencyStatus);
+
+        int managerCompetencyStatus = appraisalPerformanceMaster.getManagerCompetencyStatus();
+        request.setAttribute("managerCompetencyStatus", managerCompetencyStatus);
+
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+
+        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
+        if (!list.isEmpty()) {
+            appraisalPerformanceMaster = (AppraisalPerformanceMaster) list.get(0);
+            int appraisalId = appraisalPerformanceMaster.getId();
+        }
+
+        // =======================competency Evaluation==========================================================//
+        competencyList(request);
+        int competencyId = 0;
+        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
+        appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+        CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
+        List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
+
+        request.setAttribute("competencyEvaluationList", competencyEvaluationList);
+
+        mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
+//        mv.setViewName("Appraisal/PerformanceAppraisalForm");
+        mv.setViewName("Appraisal/ManagerPMPCompetencyForm");
+//        mv.setViewName("forward:userMaster.htm?act=userDashboard");
+        return mv;
+    }
+
+    public ModelAndView editClickForIdpManager(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ////////////Manager
+        ModelAndView mv = new ModelAndView();
+        AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
+        UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra = new UpdateAppraisalPerformanceKra();
+        AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
+        EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        String employeeName = "" + employee.getEmployeeName();
+        String empId = request.getParameter("id");
+        String userid = request.getParameter("userid");
+        String appraisalId1 = request.getParameter("appraisalId");
+        PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
+        //////Print/////By dhaval
+        request.setAttribute("empId", empId);
+        request.setAttribute("userid", userid);
+        request.setAttribute("appraisalId1", appraisalId1);
+
+        request.setAttribute("empId", empId);
+        request.setAttribute("userid", userid);
+        request.setAttribute("appraisalId", appraisalId1);
+        ///////////
+//        selectedEmployeeDate(request, response, userid);
+        managerDateStartToEnd(request, response);
+        managerTimeLineDate(request, response, userid);
+        kraCategoryList(request);
+        String employeeId = "" + empId;//set the value in employee id
+        appraisalPerformanceMaster = appraisalPerformanceService.readById(Integer.parseInt(appraisalId1));
+
+        int managerStatus = appraisalPerformanceMaster.getManagerStatus();
+        request.setAttribute("managerStatus", managerStatus);
+
+        int managerKraStatus = appraisalPerformanceMaster.getManagerkraStatus();
+        request.setAttribute("managerKraStatus", managerKraStatus);
+        int Finalstatus = appraisalPerformanceMaster.getManagerStatus();
+        request.setAttribute("Finalstatus", Finalstatus);
+
+        int employeeIdpStatus = appraisalPerformanceMaster.getEmployeeIdpStatus();
+        request.setAttribute("employeeIdpStatus", employeeIdpStatus);
+
+        int managerIdpStatus = appraisalPerformanceMaster.getManagerIdpStatus();
+        request.setAttribute("managerIdpStatus", managerIdpStatus);
+
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+
+        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
+        if (!list.isEmpty()) {
+            appraisalPerformanceMaster = (AppraisalPerformanceMaster) list.get(0);
+            int appraisalId = appraisalPerformanceMaster.getId();
+        }
+
+        //Individual Development Plan//
+        AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
+        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+        String text1 = "";
+        List<?> individualDevelopmentPlanList = appraisalPerformanceIndividualDevelopmentPlanService.readIndividualDevelopmentPlanDetail(appraisalPerformanceIndividualDevelopmentPlan);
+        if (!individualDevelopmentPlanList.isEmpty()) {
+            appraisalPerformanceIndividualDevelopmentPlan = (AppraisalPerformanceIndividualDevelopmentPlan) individualDevelopmentPlanList.get(0);
+            text1 = appraisalPerformanceIndividualDevelopmentPlan.getText1();
+        }
+        request.setAttribute("text1", individualDevelopmentPlanList);
+        request.setAttribute("text2", individualDevelopmentPlanList);
+        request.setAttribute("text3", individualDevelopmentPlanList);
+        request.setAttribute("remark", individualDevelopmentPlanList);
+        request.setAttribute("midYearRemark", individualDevelopmentPlanList);
+        request.setAttribute("endYearRemark", individualDevelopmentPlanList);
+        request.setAttribute("individualDevelopmentPlanList", individualDevelopmentPlanList);
+
+        mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
+//        mv.setViewName("Appraisal/PerformanceAppraisalForm");
+        mv.setViewName("Appraisal/ManagerPMPIdpFom");
+//        mv.setViewName("forward:userMaster.htm?act=userDashboard");
+        return mv;
+    }
+
+    public ModelAndView createSubmitCompetencyForManager(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
+        AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
+        AppraisalPerformanceKra appraisalPerformanceKra1 = new AppraisalPerformanceKra();
+        UpdateAppraisalPerformanceActivities updateAppraisalPerformanceActivities = new UpdateAppraisalPerformanceActivities();
+        AppraisalPerformanceActivities appraisalPerformanceActivities = new AppraisalPerformanceActivities();
+        AppraisalPerformanceActivities appraisalPerformanceActivities1 = new AppraisalPerformanceActivities();
+        UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra = new UpdateAppraisalPerformanceKra();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");//====edit by Admin=======//
+        String appraisalId = request.getParameter("appraisalId");
+        String userid = request.getParameter("userid");
+        BindException errors = new BindException(appraisalPerformanceMaster, "appraisalPerformanceMaster");
+        PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
+        KraCategory kraCategory = new KraCategory();
+//        selectedDateflage(request,response);
+        appraisalPerformanceValidator.validate(appraisalPerformanceMaster, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+        } else {
+            // String employeeId = "" + employee.getId();
+            String employeeName = "" + employee.getEmployeeName();//====edit by Admin=======//
+
+            String firsthalf = request.getParameter("flagId");
+            String midhalf = request.getParameter("flagMidId");
+            String endhalf = request.getParameter("flagEndId");
+
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date now = new Date();
+            String strDate = sdf1.format(now);
+            String today = sdf.format(cal.getTime());
+            String startdate = "" + today;
+
+//            =========if appraisalPerformance is create and after get id=======//
+            appraisalPerformanceMaster = appraisalPerformanceService.readById(Integer.parseInt(appraisalId));
+            appraisalPerformanceKra.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+            String btn5 = request.getParameter("submit");
+
+            ///////////////////Competency Evaluation (As Per Zydex Competency Framework)////////////////////////////
+            AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
+            CompetencyEvaluationTextmaster competencyEvaluationTextmaster = new CompetencyEvaluationTextmaster();
+            CompetencyEvaluationMaster competencyEvaluationMaster = new CompetencyEvaluationMaster();
+            int subCompentencyCount = Integer.parseInt(request.getParameter("subCompentencyCount"));
+            boolean flag = true;
+            for (int i = 1; i <= subCompentencyCount; i++) {
+                String competencyEveId = request.getParameter("competencyEveId" + i);
+                if (null != competencyEveId) {
+                    appraisalPerformanceCompetencyEvaluation = appraisalPerformanceCompetencyEvaluationService.readById(Integer.parseInt(competencyEveId));
+                }
+                String compentencyStartYear = request.getParameter("compentencyStartYear" + i);
+                String compentencyStartRemark = request.getParameter("compentencyStartRemark" + i);
+                String compentencyMidYear = request.getParameter("compentencyMidYear" + i);
+                String compentencyMidRemark = request.getParameter("compentencyMidRemark" + i);
+                String compentencyEndYear = request.getParameter("compentencyEndYear" + i);
+                String compentencyEndRemark = request.getParameter("compentencyEndRemark" + i);
+
+                ///////////manager StartYearManager
+                if (!"".equals(compentencyStartYear) && null != compentencyStartYear) {
+                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYearManager(compentencyStartYear);
+                } else {
+                    appraisalPerformanceCompetencyEvaluation.setCompetencyStartYearManager(null);
+                }
+                if (!"".equals(compentencyStartRemark) && null != compentencyStartRemark) {
+                    appraisalPerformanceCompetencyEvaluation.setStartyearRemarkManager(compentencyStartRemark);
+                } else {
+                    appraisalPerformanceCompetencyEvaluation.setStartyearRemarkManager(null);
+                }
+                if (!"".equals(compentencyMidYear) && null != compentencyMidYear) {
+                    appraisalPerformanceCompetencyEvaluation.setCompetencyMidYearManager(compentencyMidYear);
+                } else {
+                    appraisalPerformanceCompetencyEvaluation.setCompetencyMidYearManager(null);
+                }
+                if (!"".equals(compentencyMidRemark) && null != compentencyMidRemark) {
+                    appraisalPerformanceCompetencyEvaluation.setMidyearRemarkManager(compentencyMidRemark);
+                } else {
+                    appraisalPerformanceCompetencyEvaluation.setMidyearRemarkManager(null);
+                }
+                if (!"".equals(compentencyEndYear) && null != compentencyEndYear) {
+                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(compentencyEndYear);
+                } else {
+                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(null);
+                }
+                if (!"".equals(compentencyEndRemark) && null != compentencyEndRemark) {
+                    appraisalPerformanceCompetencyEvaluation.setEndyearRemarkManager(compentencyEndRemark);
+                } else {
+                    appraisalPerformanceCompetencyEvaluation.setCompetencyEndYearManager(null);
+                }
+                appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+                int compentencyTextMasterId = Integer.parseInt(request.getParameter("compentencyTextMasterId" + i));
+                competencyEvaluationTextmaster.setId(compentencyTextMasterId);
+//                competencyEvaluationMaster.setId(competencyEvaluationId);
+//                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
+                appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationTextmaster(competencyEvaluationTextmaster);
+                //String competencyEveId = request.getParameter("competencyEveId" + i);
+                String btn2 = request.getParameter("save");
+
+                if (null != btn2 && btn2.equals("save")) {
+                    if (!"".equals(competencyEveId) && null != competencyEveId) {
+                        int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
+                        competencyEvaluationMaster.setId(competencyEvaluationId);
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
+                        appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
+//                        appraisalPerformanceCompetencyEvaluation.setManagerStatus(1);
+                        appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
+
+                    } else {
+
+//                        if (!appraisalId.isEmpty()) {
+//                            if (flag) {
+//                                for (String id : appraisalId.split(",")) {
+//                                    if (!id.equals("")) {
+//                                        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation2 = new AppraisalPerformanceCompetencyEvaluation();
+//                                        appraisalPerformanceCompetencyEvaluation2.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+//                                        appraisalPerformanceCompetencyEvaluationService.deleteByManager(appraisalPerformanceCompetencyEvaluation2);
+//                                        flag = false;
+//                                    }
+//                                }
+//                            }
+//                        }
+                        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
+                        if (!"".equals(competencyEvaluationId) && null != competencyEvaluationId) {
+                            int competencyEvaluation_Id = Integer.parseInt(competencyEvaluationId);
+                            competencyEvaluationMaster.setId(competencyEvaluation_Id);
+                            appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
+//                            appraisalPerformanceCompetencyEvaluation.setManagerStatus(1);
+                            appraisalPerformanceCompetencyEvaluationService.create(appraisalPerformanceCompetencyEvaluation);
+                        }
+                    }
+                } else {
+                    if (!"".equals(compentencyStartYear) && null != compentencyStartYear) {
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(compentencyStartYear);
+                    } else {
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyStartYear(null);
+                    }
+                    if (!"".equals(compentencyStartRemark) && null != compentencyStartRemark) {
+                        appraisalPerformanceCompetencyEvaluation.setStartyearRemark(compentencyStartRemark);
+                    } else {
+                        appraisalPerformanceCompetencyEvaluation.setStartyearRemark(null);
+                    }
+                    if (!"".equals(compentencyMidYear) && null != compentencyMidYear) {
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyMidYear(compentencyMidYear);
+                    } else {
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyMidYear(null);
+                    }
+                    if (!"".equals(compentencyMidRemark) && null != compentencyMidRemark) {
+                        appraisalPerformanceCompetencyEvaluation.setMidyearRemark(compentencyMidRemark);
+                    } else {
+                        appraisalPerformanceCompetencyEvaluation.setMidyearRemark(null);
+                    }
+                    if (!"".equals(compentencyEndYear) && null != compentencyEndYear) {
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(compentencyEndYear);
+                    } else {
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
+                    }
+                    if (!"".equals(compentencyEndRemark) && null != compentencyEndRemark) {
+                        appraisalPerformanceCompetencyEvaluation.setEndyearRemark(compentencyEndRemark);
+                    } else {
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyEndYear(null);
+                    }
+
+                    if (!"".equals(competencyEveId) && null != competencyEveId) {
+
+//                        if (!appraisalId.isEmpty()) {
+//                            if (flag) {
+//                                for (String id : appraisalId.split(",")) {
+//                                    if (!id.equals("")) {
+//                                        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation2 = new AppraisalPerformanceCompetencyEvaluation();
+//                                        appraisalPerformanceCompetencyEvaluation2.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+//                                        appraisalPerformanceCompetencyEvaluationService.finaldeletebyManager(appraisalPerformanceCompetencyEvaluation2);
+//                                        flag = false;
+//                                    }
+//                                }
+//                            }
+//                        }
+                        int competencyEvaluationId = Integer.parseInt(request.getParameter("competencyEvaluationId" + i));
+                        competencyEvaluationMaster.setId(competencyEvaluationId);
+                        appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
+                        appraisalPerformanceCompetencyEvaluation.setId(Integer.parseInt(competencyEveId));
+//                        appraisalPerformanceCompetencyEvaluation.setManagerStatus(1);
+//                        appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
+                        appraisalPerformanceCompetencyEvaluationService.update(appraisalPerformanceCompetencyEvaluation);
+
+                    } else {
+                        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
+                        if (!"".equals(competencyEvaluationId) && null != competencyEvaluationId) {
+                            int competencyEvaluation_Id = Integer.parseInt(competencyEvaluationId);
+                            competencyEvaluationMaster.setId(competencyEvaluation_Id);
+//                            appraisalPerformanceCompetencyEvaluation.setManagerStatus(1);
+                            appraisalPerformanceCompetencyEvaluation.setCompetencyEvaluationMaster(competencyEvaluationMaster);
+//                            appraisalPerformanceCompetencyEvaluation.setEmployeeStatus(1);
+                            appraisalPerformanceCompetencyEvaluationService.create(appraisalPerformanceCompetencyEvaluation);
+                        }
+                    }
+//                    boolean pmpFormStatusStart = false;
+//                    boolean pmpFormStatusMid = false;
+//                    boolean pmpFormStatusEnd = false;
+
+                    boolean compentencyStartYearStatus = false;
+                    boolean compentencyMidYearStatus = false;
+                    boolean compentencyEndYearStatus = false;
+
+                    for (int d = 1; d <= subCompentencyCount; d++) {
+
+                        ///////////////////PMP Status Master Start////////////////////////////
+                        if ((!"".equals(compentencyStartYear) && null != compentencyStartYear) || (!"".equals(compentencyStartRemark) && null != compentencyStartRemark)) {
+
+                            compentencyStartYearStatus = true;
+                        }
+                        if ((!"".equals(compentencyMidYear) && null != compentencyMidYear) || (!"".equals(compentencyMidRemark) && null != compentencyMidRemark)) {
+
+                            compentencyMidYearStatus = true;
+                        }
+                        if ((!"".equals(compentencyEndYear) && null != compentencyEndYear) || (!"".equals(compentencyEndRemark) && null != compentencyEndRemark)) {
+
+                            compentencyEndYearStatus = true;
+                        }
+
+                    }
+
+                    String pmpstatusId = "";
+//                    List<?> pmplist = pmpFormStatusMasterService.readByPmpformstatusStatus(userid);
+                    List<?> pmplist = pmpFormStatusMasterService.readByPmpformstatusStatus("" + appraisalPerformanceMaster.getEmployeeMaster().getId());
+                    if (!pmplist.isEmpty()) {
+                        pmpFormStatusMaster = (PmpFormStatusMaster) pmplist.get(0);
+                        pmpstatusId = "" + pmpFormStatusMaster.getId();
+                    }
+                    appraisalPerformanceMaster.setEmployeeCompetencyStatus(0);
+                    appraisalPerformanceMaster.setManagerCompetencyStatus(1);
+                    if (compentencyStartYearStatus == true) {
+                        pmpFormStatusMaster.setCompentencyStartYearStatus(Boolean.TRUE);
+                    }
+                    if (compentencyMidYearStatus == true) {
+                        pmpFormStatusMaster.setCompentencyMidYearStatus(Boolean.TRUE);
+                    }
+                    if (compentencyEndYearStatus == true) {
+                        pmpFormStatusMaster.setCompentencyEndYearStatus(Boolean.TRUE);
+                    }
+
+//                    pmpFormStatusMaster.setEmployeeSide(Boolean.TRUE);
+//                    pmpFormStatusMaster.setManagerSide(Boolean.TRUE);
+                    pmpFormStatusMaster.setCompentencyEmployeeSide(Boolean.TRUE);
+                    pmpFormStatusMaster.setCompentencyManagerSide(Boolean.TRUE);
+                    pmpFormStatusMasterService.update(pmpFormStatusMaster);
+
+                    ///////////////////PMP Status Master End//////////////////////////////
+                }
+            }
+
+//            appraisalPerformanceService.update(appraisalPerformanceMaster);
+            String pmpstatusId = "";
+            String btn1 = request.getParameter("submit");
+            if (null != btn1 && btn1.equals("submit")) {
+//                List<?> pmplist = pmpFormStatusMasterService.readByPmpformstatusStatus(userid);
+//                List<?> pmplist = pmpFormStatusMasterService.readByPmpformstatusStatus("" + appraisalPerformanceMaster.getEmployeeMaster().getId());
+//                if (!pmplist.isEmpty()) {
+//                    pmpFormStatusMaster = (PmpFormStatusMaster) pmplist.get(0);
+//                    pmpstatusId = "" + pmpFormStatusMaster.getId();
+//
+//                }
+
+//                appraisalPerformanceMaster.setManagerStatus(1);
+//                appraisalPerformanceMaster.setEmployeeStatus(0);
+//                appraisalPerformanceMaster.setManagerkraStatus(1);
+//                appraisalPerformanceMaster.setEmployeeCompetencyStatus(0);
+//                appraisalPerformanceMaster.setManagerCompetencyStatus(1);
+//                pmpFormStatusMaster.setEmployeeSide(Boolean.TRUE);
+//                pmpFormStatusMaster.setManagerSide(Boolean.TRUE);
+//                pmpFormStatusMasterService.update(pmpFormStatusMaster);
+                appraisalPerformanceService.update(appraisalPerformanceMaster);
+                if (!"".equals(appraisalId) && null != appraisalId) {
+                    //    Email Sent to Employee(Start Year)
+                    if (!"".equals(firsthalf) && null != firsthalf) {
+                        if (firsthalf.equals("true")) {
+                            try {
+                                EmailTemplate emailTemplate = new EmailTemplate();
+                                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                                DesignationMaster designationMaster = new DesignationMaster();
+                                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                                List l1 = appraisalPerformanceService.readEmpIdFromTabId(Integer.parseInt(appraisalId));
+                                EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                                // id 116 is for status Appraisal Approved (Start Year)
+                                emailTemplate = emailTemplateService.readById(116);
+                                String To = employeeRequestee.getOfficeEmailId();
+                                String from = employeeMasterModel.getOfficeEmailId();
+                                String Subject = emailTemplate.getSubject();
+                                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                                String msg = emailTemplate.getBodytext();
+                                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                sendMail.sendMail(from, To, Subject, msg);
+
+                                String name = "PMP";
+                                EmailAddMaster emailAddMaster = new EmailAddMaster();
+                                emailAddMaster.setModuleName(name);
+                                emailAddMaster.setDepartmentMaster(employeeRequestee.getDepartmentMaster());
+                                List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                                if (!emailSendList.isEmpty()) {
+                                    EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                                    String emailId = emailAddMaster1.getEmailId();
+                                    for (String emailId1 : emailId.split(",")) {
+                                        if (!emailId1.equals("")) {
+                                            String To1 = emailId1;
+                                            String from1 = employeeMasterModel.getOfficeEmailId();
+                                            String subject1 = emailTemplate.getSubject();
+                                            subject1 = subject1.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                                            String msg1 = emailTemplate.getBodytext();
+                                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                                            msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                            msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                            sendMail.sendMail(from1, To1, subject1, msg1);
+
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+
+                            }
+                        }
+                    }
+                    //    Email Sent to Employee(Mid Year)
+                    if (!"".equals(midhalf) && null != midhalf) {
+                        if (midhalf.equals("true")) {
+                            try {
+                                EmailTemplate emailTemplate = new EmailTemplate();
+                                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                                DesignationMaster designationMaster = new DesignationMaster();
+                                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                                List l1 = appraisalPerformanceService.readEmpIdFromTabId(Integer.parseInt(appraisalId));
+                                EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                                // id 117 is for status Appraisal Approved (Mid Year)
+                                emailTemplate = emailTemplateService.readById(117);
+                                String To = employeeRequestee.getOfficeEmailId();
+                                String from = employeeMasterModel.getOfficeEmailId();
+                                String Subject = emailTemplate.getSubject();
+                                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                                String msg = emailTemplate.getBodytext();
+                                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                sendMail.sendMail(from, To, Subject, msg);
+
+                                String name = "PMP";
+                                EmailAddMaster emailAddMaster = new EmailAddMaster();
+                                emailAddMaster.setModuleName(name);
+                                emailAddMaster.setDepartmentMaster(employeeRequestee.getDepartmentMaster());
+                                List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                                if (!emailSendList.isEmpty()) {
+                                    EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                                    String emailId = emailAddMaster1.getEmailId();
+                                    for (String emailId1 : emailId.split(",")) {
+                                        if (!emailId1.equals("")) {
+                                            String To1 = emailId1;
+                                            String from1 = employeeMasterModel.getOfficeEmailId();
+                                            String subject1 = emailTemplate.getSubject();
+                                            subject1 = subject1.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                                            String msg1 = emailTemplate.getBodytext();
+                                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                                            msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                            msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                            sendMail.sendMail(from1, To1, subject1, msg1);
+
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+                    //    Email Sent to Employee(Year End)
+                    if (!"".equals(endhalf) && null != endhalf) {
+                        if (endhalf.equals("true")) {
+                            try {
+                                EmailTemplate emailTemplate = new EmailTemplate();
+                                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                                DesignationMaster designationMaster = new DesignationMaster();
+                                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                                List l1 = appraisalPerformanceService.readEmpIdFromTabId(Integer.parseInt(appraisalId));
+                                EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                                // id 118 is for status Appraisal Approved (Year End)
+                                emailTemplate = emailTemplateService.readById(118);
+                                String To = employeeRequestee.getOfficeEmailId();
+                                String from = employeeMasterModel.getOfficeEmailId();
+                                String Subject = emailTemplate.getSubject();
+                                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                                String msg = emailTemplate.getBodytext();
+                                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                sendMail.sendMail(from, To, Subject, msg);
+
+                                String name = "PMP";
+                                EmailAddMaster emailAddMaster = new EmailAddMaster();
+                                emailAddMaster.setModuleName(name);
+                                emailAddMaster.setDepartmentMaster(employeeRequestee.getDepartmentMaster());
+                                List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                                if (!emailSendList.isEmpty()) {
+                                    EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                                    String emailId = emailAddMaster1.getEmailId();
+                                    for (String emailId1 : emailId.split(",")) {
+                                        if (!emailId1.equals("")) {
+                                            String To1 = emailId1;
+                                            String from1 = employeeMasterModel.getOfficeEmailId();
+                                            String subject1 = emailTemplate.getSubject();
+                                            subject1 = subject1.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                                            String msg1 = emailTemplate.getBodytext();
+                                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                                            msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                            msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                            sendMail.sendMail(from1, To1, subject1, msg1);
+
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+                }
+            } else {
+
+                appraisalPerformanceService.update(appraisalPerformanceMaster);
+            }
+        }
+        mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
+//        mv.setViewName("Appraisal/ManagerPerformanceAppraisalForm");
+        mv.setViewName("redirect:appraisalPerformance.htm?act=searchSubmit");
+//        mv = searchSubmit(request, response);
+//        mv.setViewName("forward:userMaster.htm?act=userDashboard");
+        return mv;
+    }
+
+    public ModelAndView createSubmitIdpManagerForManager(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
+        AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
+        AppraisalPerformanceKra appraisalPerformanceKra1 = new AppraisalPerformanceKra();
+        UpdateAppraisalPerformanceActivities updateAppraisalPerformanceActivities = new UpdateAppraisalPerformanceActivities();
+        AppraisalPerformanceActivities appraisalPerformanceActivities = new AppraisalPerformanceActivities();
+        AppraisalPerformanceActivities appraisalPerformanceActivities1 = new AppraisalPerformanceActivities();
+        UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra = new UpdateAppraisalPerformanceKra();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employee = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");//====edit by Admin=======//
+        String appraisalId = request.getParameter("appraisalId");
+        BindException errors = new BindException(appraisalPerformanceMaster, "appraisalPerformanceMaster");
+        PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
+        KraCategory kraCategory = new KraCategory();
+//        selectedDateflage(request,response);
+        appraisalPerformanceValidator.validate(appraisalPerformanceMaster, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+        } else {
+            // String employeeId = "" + employee.getId();
+            String employeeName = "" + employee.getEmployeeName();//====edit by Admin=======//
+            // List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId);
+            // if (!list.isEmpty()) {
+
+            String firsthalf = request.getParameter("flagId");
+            String midhalf = request.getParameter("flagMidId");
+            String endhalf = request.getParameter("flagEndId");
+
+//            String btn = request.getParameter("submit");
+//            if (null != btn && btn.equals("submit")) {
+//                appraisalPerformanceMaster.setStatus(1);
+//                appraisalPerformanceService.update(appraisalPerformanceMaster);
+//            } else {
+//                appraisalPerformanceMaster.setStatus(0);
+//                appraisalPerformanceService.update(appraisalPerformanceMaster);
+//            }
+            //appraisalPerformanceMaster = (AppraisalPerformanceMaster) list.get(0);
+            //String appraisalId = "" + appraisalPerformanceMaster.getId();
+            //appraisalPerformanceMaster.setId(Integer.parseInt(appraisalId));
+            //appraisalPerformanceKra.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+            //}
+            // if (null == appraisalPerformanceMaster.getId()) {
+            //  appraisalPerformanceMaster.setEmployeeMaster(employee);
+            //  appraisalPerformanceService.create(appraisalPerformanceMaster);
+            //  }
+            //StartDate To create FirstTime//
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date now = new Date();
+            String strDate = sdf1.format(now);
+            String today = sdf.format(cal.getTime());
+            String startdate = "" + today;
+
+//            =========if appraisalPerformance is create and after get id=======//
+            appraisalPerformanceMaster = appraisalPerformanceService.readById(Integer.parseInt(appraisalId));
+//            appraisalPerformanceKra.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+            String btn5 = request.getParameter("submit");
+            if (null != btn5 && btn5.equals("submit")) {
+
+            } else {
+
+            }
+
+            String kraremovedIndividualIdVal = request.getParameter("kraremovedIndividualIdVal");
+            if (!kraremovedIndividualIdVal.isEmpty()) {
+                for (String id : kraremovedIndividualIdVal.split(",")) {
+                    if (!id.equals("")) {
+                        AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan2 = new AppraisalPerformanceIndividualDevelopmentPlan();
+                        appraisalPerformanceIndividualDevelopmentPlan2.setId(Integer.parseInt(id));
+                        appraisalPerformanceIndividualDevelopmentPlanService.delete1(appraisalPerformanceIndividualDevelopmentPlan2);
+                    }
+                }
+            }
+            ///////////////////////////Individual Development Plan//////////////////////////////////
+            AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
+            int individualcount = Integer.parseInt(request.getParameter("IndividualId"));
+            for (int i = 1; i <= individualcount; i++) {
+
+                String text1 = request.getParameter("text" + i);
+                String text2 = request.getParameter("individualtextDiv" + i);
+                String text3 = request.getParameter("trainingSelectId" + i);
+                String remark = request.getParameter("trainingSelectTextinput" + i);
+                String midYearRemark = request.getParameter("midYearRemark" + i);
+                String endYearRemark = request.getParameter("endYearRemark" + i);
+                String managerMidYearRemark = request.getParameter("managerMidYearRemark" + i);
+                String managerEndYearRemark = request.getParameter("managerEndYearRemark" + i);
+                String individualplan = request.getParameter("IndividualDevelopmentPlanId" + i);
+                if (null != individualplan) {
+                    appraisalPerformanceIndividualDevelopmentPlan = appraisalPerformanceIndividualDevelopmentPlanService.readById(Integer.parseInt(individualplan));
+                }
+//                if (!"".equals(text1) && null != text1) {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setText1(text1);
+//                } else {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setText1(null);
+//                }
+
+//                if (!"".equals(text2) && null != text2) {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setText2(text2);
+//                } else {
+//                    appraisalPerformanceIndividualDevelopmentPlan.setText2(null);
+//                }
+                if (!"".equals(text1) && null != text1) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(text1);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext1(null);
+                }
+                if (!"".equals(text2) && null != text2) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(text2);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext2(null);
+                }
+                if (!"".equals(text3) && null != text3) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setText3(text3);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setText3(null);
+                }
+                if (!"".equals(text3) && null != text3) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(text3);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagertext3(null);
+                }
+                if (!"".equals(managerMidYearRemark) && null != managerMidYearRemark) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(managerMidYearRemark);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
+                }
+//                Endyear
+                if (null != endYearRemark && !"".equals(endYearRemark)) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(endYearRemark);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(null);
+                }
+                if (!"".equals(managerEndYearRemark) && null != managerEndYearRemark) {
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(managerEndYearRemark);
+                } else {
+                    appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
+                }
+
+                String btn = request.getParameter("save");
+                if (null != btn && btn.equals("save")) {
+
+                    if (individualplan != null) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
+                        appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlanService.create(appraisalPerformanceIndividualDevelopmentPlan);
+                    }
+                    request.setAttribute("successMessage",
+                            "Information : The Information is Saved Successfully.");
+                } else {
+
+                    if (null != text1 && !"".equals(text1)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setText1(text1);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setText1(null);
+                    }
+                    if (null != text2 && !"".equals(text2)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setText2(text2);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setText2(null);
+                    }
+                    if (null != text3 && !"".equals(text3)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setText3(text3);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setText3(null);
+                    }
+                    if (null != midYearRemark && !"".equals(midYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setMidYearRemark(midYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setMidYearRemark(null);
+                    }
+
+                    if (null != remark && !"".equals(remark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setRemark(remark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setRemark(null);
+                    }
+                    if (null != endYearRemark && !"".equals(endYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(endYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setEndYearRemark(null);
+                    }
+
+                    if (null != endYearRemark && !"".equals(endYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(endYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(null);
+                    }
+
+                    if (null != managerMidYearRemark && !"".equals(managerMidYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(managerMidYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemark(null);
+                    }
+                    if (null != managerMidYearRemark && !"".equals(managerMidYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkEmployee(managerMidYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerMidYearRemarkEmployee(null);
+                    }
+
+                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(managerEndYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemark(null);
+                    }
+
+                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(managerEndYearRemark);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkManager(null);
+                    }
+//                    if (null != managerEndYearRemark && !"".equals(managerEndYearRemark)) {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(managerEndYearRemark);
+//                    } else {
+//                        appraisalPerformanceIndividualDevelopmentPlan.setManagerEndYearRemarkEmployee(null);
+//                    }
+
+                    //////////////////////////////////////
+                    if (individualplan != null) {
+                        appraisalPerformanceIndividualDevelopmentPlan.setId(Integer.parseInt(individualplan));
+                        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+                        appraisalPerformanceIndividualDevelopmentPlanService.update(appraisalPerformanceIndividualDevelopmentPlan);
+                    } else {
+                        appraisalPerformanceIndividualDevelopmentPlanService.create(appraisalPerformanceIndividualDevelopmentPlan);
+                    }
+                    request.setAttribute("successMessage",
+                            "Information : The Information is Approved Successfully.");
+                }
+            }
+
+            ////////////////////closed Indivisual plan////////
+//            String pmpstatusId = "";
+            String btn1 = request.getParameter("submit");
+            if (null != btn1 && btn1.equals("submit")) {
+
+//                appraisalPerformanceMaster.setManagerStatus(1);//manager status Kra Approvement
+//                appraisalPerformanceMaster.setEmployeeStatus(0);
+//                appraisalPerformanceMaster.setManagerkraStatus(1);
+                appraisalPerformanceMaster.setEmployeeIdpStatus(0);
+                appraisalPerformanceMaster.setManagerIdpStatus(1);
+
+                appraisalPerformanceService.update(appraisalPerformanceMaster);
+                if (!"".equals(appraisalId) && null != appraisalId) {
+                    //    Email Sent to Employee(Start Year)
+                    if (!"".equals(firsthalf) && null != firsthalf) {
+                        if (firsthalf.equals("true")) {
+                            try {
+                                EmailTemplate emailTemplate = new EmailTemplate();
+                                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                                DesignationMaster designationMaster = new DesignationMaster();
+                                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                                List l1 = appraisalPerformanceService.readEmpIdFromTabId(Integer.parseInt(appraisalId));
+                                EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                                // id 116 is for status Appraisal Approved (Start Year)
+                                emailTemplate = emailTemplateService.readById(116);
+                                String To = employeeRequestee.getOfficeEmailId();
+                                String from = employeeMasterModel.getOfficeEmailId();
+                                String Subject = emailTemplate.getSubject();
+                                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                                String msg = emailTemplate.getBodytext();
+                                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                sendMail.sendMail(from, To, Subject, msg);
+
+                                String name = "PMP";
+                                EmailAddMaster emailAddMaster = new EmailAddMaster();
+                                emailAddMaster.setModuleName(name);
+                                emailAddMaster.setDepartmentMaster(employeeRequestee.getDepartmentMaster());
+                                List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                                if (!emailSendList.isEmpty()) {
+                                    EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                                    String emailId = emailAddMaster1.getEmailId();
+                                    for (String emailId1 : emailId.split(",")) {
+                                        if (!emailId1.equals("")) {
+                                            String To1 = emailId1;
+                                            String from1 = employeeMasterModel.getOfficeEmailId();
+                                            String subject1 = emailTemplate.getSubject();
+                                            subject1 = subject1.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                                            String msg1 = emailTemplate.getBodytext();
+                                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                                            msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                            msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                            sendMail.sendMail(from1, To1, subject1, msg1);
+
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+
+                            }
+                        }
+                    }
+                    //    Email Sent to Employee(Mid Year)
+                    if (!"".equals(midhalf) && null != midhalf) {
+                        if (midhalf.equals("true")) {
+                            try {
+                                EmailTemplate emailTemplate = new EmailTemplate();
+                                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                                DesignationMaster designationMaster = new DesignationMaster();
+                                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                                List l1 = appraisalPerformanceService.readEmpIdFromTabId(Integer.parseInt(appraisalId));
+                                EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                                // id 117 is for status Appraisal Approved (Mid Year)
+                                emailTemplate = emailTemplateService.readById(117);
+                                String To = employeeRequestee.getOfficeEmailId();
+                                String from = employeeMasterModel.getOfficeEmailId();
+                                String Subject = emailTemplate.getSubject();
+                                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                                String msg = emailTemplate.getBodytext();
+                                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                sendMail.sendMail(from, To, Subject, msg);
+
+                                String name = "PMP";
+                                EmailAddMaster emailAddMaster = new EmailAddMaster();
+                                emailAddMaster.setModuleName(name);
+                                emailAddMaster.setDepartmentMaster(employeeRequestee.getDepartmentMaster());
+                                List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                                if (!emailSendList.isEmpty()) {
+                                    EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                                    String emailId = emailAddMaster1.getEmailId();
+                                    for (String emailId1 : emailId.split(",")) {
+                                        if (!emailId1.equals("")) {
+                                            String To1 = emailId1;
+                                            String from1 = employeeMasterModel.getOfficeEmailId();
+                                            String subject1 = emailTemplate.getSubject();
+                                            subject1 = subject1.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                                            String msg1 = emailTemplate.getBodytext();
+                                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                                            msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                            msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                            sendMail.sendMail(from1, To1, subject1, msg1);
+
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+                    //    Email Sent to Employee(Year End)
+                    if (!"".equals(endhalf) && null != endhalf) {
+                        if (endhalf.equals("true")) {
+                            try {
+                                EmailTemplate emailTemplate = new EmailTemplate();
+                                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                                DesignationMaster designationMaster = new DesignationMaster();
+                                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                                List l1 = appraisalPerformanceService.readEmpIdFromTabId(Integer.parseInt(appraisalId));
+                                EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                                // id 118 is for status Appraisal Approved (Year End)
+                                emailTemplate = emailTemplateService.readById(118);
+                                String To = employeeRequestee.getOfficeEmailId();
+                                String from = employeeMasterModel.getOfficeEmailId();
+                                String Subject = emailTemplate.getSubject();
+                                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                                String msg = emailTemplate.getBodytext();
+                                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                sendMail.sendMail(from, To, Subject, msg);
+
+                                String name = "PMP";
+                                EmailAddMaster emailAddMaster = new EmailAddMaster();
+                                emailAddMaster.setModuleName(name);
+                                emailAddMaster.setDepartmentMaster(employeeRequestee.getDepartmentMaster());
+                                List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                                if (!emailSendList.isEmpty()) {
+                                    EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                                    String emailId = emailAddMaster1.getEmailId();
+                                    for (String emailId1 : emailId.split(",")) {
+                                        if (!emailId1.equals("")) {
+                                            String To1 = emailId1;
+                                            String from1 = employeeMasterModel.getOfficeEmailId();
+                                            String subject1 = emailTemplate.getSubject();
+                                            subject1 = subject1.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                                            String msg1 = emailTemplate.getBodytext();
+                                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                                            msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                            msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                            sendMail.sendMail(from1, To1, subject1, msg1);
+
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+                }
+            } else {
+                //appraisalPerformanceMaster.setManagerStatus(0);
+                appraisalPerformanceService.update(appraisalPerformanceMaster);
+            }
+        }
+        mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
+//        mv.setViewName("Appraisal/ManagerPerformanceAppraisalForm");
+        mv.setViewName("redirect:appraisalPerformance.htm?act=searchSubmit");
+//        mv = searchSubmit(request, response);
+//        mv.setViewName("forward:userMaster.htm?act=userDashboard");
+        return mv;
+    }
+
+    public ModelAndView reworkByManagerForCompetency(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String pmpIdForRework = request.getParameter("pmpIdForRework");
+        String reworkComment = request.getParameter("reworkComment");
+        AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
+//        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
+        appraisalPerformanceMaster = appraisalPerformanceService.readById(Integer.parseInt(pmpIdForRework));
+
+        appraisalPerformanceMaster.setCompetencyReworkComment(reworkComment);
+//        appraisalPerformanceMaster.setManagerkraStatus(1);
+//        appraisalPerformanceMaster.setEmployeeStatus(0);
+//        appraisalPerformanceMaster.setReworkStatus(1);
+
+        appraisalPerformanceMaster.setEmployeeCompetencyStatus(0);
+        appraisalPerformanceMaster.setManagerCompetencyStatus(1);
+        appraisalPerformanceMaster.setCompetencyReworkStatus(1);
+        appraisalPerformanceMaster.setCompetencyReworkComment(reworkComment);
+
+        appraisalPerformanceService.update(appraisalPerformanceMaster);
+//      
+        try {
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            DesignationMaster designationMaster = new DesignationMaster();
+            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            List l1 = appraisalPerformanceService.readEmpIdFromTabId(Integer.parseInt(pmpIdForRework));
+            EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+            // id 116 is for status Appraisal Approved (Start Year)
+            emailTemplate = emailTemplateService.readById(134);
+            String To = employeeRequestee.getOfficeEmailId();
+            String from = employeeMasterModel.getOfficeEmailId();
+            String Subject = emailTemplate.getSubject();
+            Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+            String msg = emailTemplate.getBodytext();
+            msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+            sendMail.sendMail(from, To, Subject, msg);
+        } catch (Exception e) {
+
+        }
+
+//        mv = searchSubmit(request, response);
+        mv.setViewName("redirect:appraisalPerformance.htm?act=searchSubmit");
+
+        return mv;
+    }
+
+    public ModelAndView reworkByManagerForIdp(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String pmpIdForRework = request.getParameter("pmpIdForRework");
+        String reworkComment = request.getParameter("reworkComment");
+        AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
+//        AppraisalPerformanceCompetencyEvaluation appraisalPerformanceCompetencyEvaluation = new AppraisalPerformanceCompetencyEvaluation();
+        appraisalPerformanceMaster = appraisalPerformanceService.readById(Integer.parseInt(pmpIdForRework));
+
+//        appraisalPerformanceMaster.setReworkComment(reworkComment);
+//        appraisalPerformanceMaster.setManagerkraStatus(1);
+//        appraisalPerformanceMaster.setEmployeeStatus(0);
+//        appraisalPerformanceMaster.setReworkStatus(1);
+        appraisalPerformanceMaster.setEmployeeIdpStatus(0);
+        appraisalPerformanceMaster.setManagerIdpStatus(1);
+        appraisalPerformanceMaster.setIdpReworkStatus(1);
+        appraisalPerformanceMaster.setIdpReworkComment(reworkComment);
+
+        appraisalPerformanceService.update(appraisalPerformanceMaster);
+//        appraisalPerformanceCompetencyEvaluation.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
+//        appraisalPerformanceCompetencyEvaluationService.deleteByManager(appraisalPerformanceCompetencyEvaluation);
+        try {
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            DesignationMaster designationMaster = new DesignationMaster();
+            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            List l1 = appraisalPerformanceService.readEmpIdFromTabId(Integer.parseInt(pmpIdForRework));
+            EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+            // id 116 is for status Appraisal Approved (Start Year)
+            emailTemplate = emailTemplateService.readById(134);
+            String To = employeeRequestee.getOfficeEmailId();
+            String from = employeeMasterModel.getOfficeEmailId();
+            String Subject = emailTemplate.getSubject();
+            Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+            String msg = emailTemplate.getBodytext();
+            msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+            sendMail.sendMail(from, To, Subject, msg);
+        } catch (Exception e) {
+
+        }
+
+//        mv = searchSubmit(request, response);
+        mv.setViewName("redirect:appraisalPerformance.htm?act=searchSubmit");
+
+        return mv;
     }
 }

@@ -440,6 +440,7 @@
         <property name="attendanceRegularizationValidator" ref="attendanceRegularizationValidator1" />
         <property name="timeAttandanceFlaxibleMasterService" ref="timeAttandanceFlaxibleMasterService1" />
         <property name="levelMasterService" ref="levelMasterService1" />
+        <property name="employeePunchForMobileAppService" ref="employeePunchForMobileAppService1" />
     </bean>
     <bean id="timeAttandanceFlaxibleMasterController1" class="com.bul.zydex.controller.attendanceRegularization.TimeAttandanceFlaxibleMasterController" parent="controllerConfig" >
         <property name="timeAttandanceFlaxibleMasterService" ref="timeAttandanceFlaxibleMasterService1" />

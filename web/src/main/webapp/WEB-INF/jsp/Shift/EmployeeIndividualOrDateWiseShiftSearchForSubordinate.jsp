@@ -32,8 +32,8 @@
         }
     </script>
     <script>
-       function showPunchData(date, id) {
-            var path = 'attendanceRegularizationMaster.htm?act=showDateWisePunchDataOfSubordinate&date=' + date+'&id=' + id;
+        function showPunchData(date, id) {
+            var path = 'attendanceRegularizationMaster.htm?act=showDateWisePunchDataOfSubordinate&date=' + date + '&id=' + id;
             popupWindow = window.open(path, 'popUpWindow', 'height=300,width=500,left=500%,top=100%,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no')
 
 //             window.location = 'attendanceRegularizationMaster.htm?act=showDateWisePunchData&date=' + date;
@@ -64,7 +64,7 @@
         <!-- Main content -->
         <form:form action="attendanceRegularizationMaster.htm?act=showOwnAttandanceOfSubordinate" method="post" commandName="employeeAdvanceSearch"
                    name='form1' class="form-horizontal" role="form">
-              <input type="hidden" name="id" id="id" value="${id}">
+            <input type="hidden" name="id" id="id" value="${id}">
 
             <section class="content">
                 <div class="row">
@@ -72,12 +72,12 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
-                                  <div class="form-group">
-                                            <div class="col-md-12">
-                                                <div><button type="button" class="btn-primary"  onclick="window.history.back();" title="View">Back</button></div>
-                                            </div>
-                                        </div>
-                                 <div class="form-group">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div><button type="button" class="btn-primary"  onclick="window.history.back();" title="View">Back</button></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
 
                                     <div class="col-sm-6">
                                         <label>Start Date<span style="color: red;font-size: 12px;">*</span></label>
@@ -103,10 +103,10 @@
                                             <button type="submit" class="btn btn-primary" style="width: 100px;" >SEARCH</button>
                                         </div>
                                     </div>
-                                <!--<button type="submit" class="btn btn-danger" ><i class="fa fa-trash-o"></i>&nbsp;&nbsp;Delete</button>-->
-                                <div class="box-body no-padding">
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12">
+                                    <!--<button type="submit" class="btn btn-danger" ><i class="fa fa-trash-o"></i>&nbsp;&nbsp;Delete</button>-->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
                                             <c:choose>
                                                 <c:when test="${empty empDetail}">
                                                     <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
@@ -131,6 +131,10 @@
                                                         <c:set var="pl" value="0"></c:set>
                                                         <c:set var="ar" value="0"></c:set>
                                                         <c:set var="tr" value="0"></c:set>
+                                                        <c:set var="ptl" value="0"></c:set>
+                                                        <c:set var="mtl" value="0"></c:set>
+                                                        <c:set var="coff" value="0"></c:set>
+                                                        <c:set var="lwp" value="0"></c:set>
                                                         <c:forEach var="employeeMasterList" items="${empDetail}">
                                                             <%--<c:choose>--%>
                                                             <%--<c:when test="${empty map[employeeMasterList[38]]}">--%>
@@ -178,6 +182,18 @@
                                                                                     </c:if>
                                                                                     <c:if test="${fn:contains(list[1], 'Sick Leave')}">
                                                                                         <c:set var="sl" value="${sl + 1}"></c:set>
+                                                                                    </c:if>
+                                                                                    <c:if test="${fn:contains(list[1], 'Maternity Leave')}">
+                                                                                        <c:set var="mtl" value="${mtl + 1}"></c:set>
+                                                                                    </c:if>
+                                                                                    <c:if test="${fn:contains(list[1], 'Paternity Leave')}">
+                                                                                        <c:set var="ptl" value="${ptl + 1}"></c:set>
+                                                                                    </c:if>
+                                                                                    <c:if test="${fn:contains(list[1], 'C Off Leave')}">
+                                                                                        <c:set var="coff" value="${coff + 1}"></c:set>
+                                                                                    </c:if>
+                                                                                    <c:if test="${fn:contains(list[1], 'Leave Without Pay')}">
+                                                                                        <c:set var="lwp" value="${lwp + 1}"></c:set>
                                                                                     </c:if>
 
                                                                                 <th style="text-align: center;">${list[1]}</th>
@@ -343,6 +359,18 @@
                                                                                                 <c:if test="${fn:contains(leave1[0], 'Sick Leave')}">
                                                                                                     <c:set var="sl" value="${sl + 0.5}"></c:set>
                                                                                                 </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'Maternity Leave')}">
+                                                                                                    <c:set var="mtl" value="${mtl + 0.5}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'Paternity Leave')}">
+                                                                                                    <c:set var="ptl" value="${ptl + 0.5}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'C Off Leave')}">
+                                                                                                    <c:set var="coff" value="${coff + 0.5}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'Leave Without Pay')}">
+                                                                                                    <c:set var="lwp" value="${lwp + 0.5}"></c:set>
+                                                                                                </c:if>
                                                                                             <th style="text-align: center;">${leave1[0]}</th>
                                                                                             </c:when>
                                                                                             <c:when test="${fn:contains(leave1[0], 'AB')}">
@@ -485,6 +513,18 @@
                                                                                                 <c:if test="${fn:contains(leave1[0], 'Sick Leave')}">
                                                                                                     <c:set var="sl" value="${sl + 0.5}"></c:set>
                                                                                                 </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'Maternity Leave')}">
+                                                                                                    <c:set var="mtl" value="${mtl + 0.5}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'Paternity Leave')}">
+                                                                                                    <c:set var="ptl" value="${ptl + 0.5}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'C Off Leave')}">
+                                                                                                    <c:set var="coff" value="${coff + 0.5}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'Leave Without Pay')}">
+                                                                                                    <c:set var="lwp" value="${lwp + 0.5}"></c:set>
+                                                                                                </c:if>
                                                                                             <th style="text-align: center;">${leave1[0]}</th>
                                                                                             </c:when>
                                                                                             <c:when test="${fn:contains(leave1[0], 'AR')}">
@@ -537,7 +577,7 @@
                                                                     <tr>
                                                                         <th>View All Punch</th>
                                                                             <c:forEach var="list" items="${map[employeeMasterList[48]]}">
-                                                                            <th style="text-align: center;"><a onclick="showPunchData('${list[0]}','${employeeMasterList[48]}');">View</a>
+                                                                            <th style="text-align: center;"><a onclick="showPunchData('${list[0]}', '${employeeMasterList[48]}');">View</a>
                                                                             </th>
 
                                                                         </c:forEach>
@@ -591,6 +631,18 @@
                                                                             <c:if test="${tr ne 0}">
                                                                             <th style="color: blue;text-align: center;">TR</th>
                                                                             </c:if>
+                                                                            <c:if test="${coff ne 0}">
+                                                                            <th style="color: blue;text-align: center;">C-OFF</th>
+                                                                            </c:if>
+                                                                            <c:if test="${ptl ne 0}">
+                                                                            <th style="color: blue;text-align: center;">PTL</th>
+                                                                            </c:if>
+                                                                            <c:if test="${mtl ne 0}">
+                                                                            <th style="color: blue;text-align: center;">MTL</th>
+                                                                            </c:if>
+                                                                            <c:if test="${lwp ne 0}">
+                                                                            <th style="color: blue;text-align: center;">LWP</th>
+                                                                            </c:if>
                                                                     </tr>
                                                                     <tr>
                                                                         <c:set var="shortL" value="${shl/2}"/>
@@ -627,6 +679,18 @@
                                                                         <c:if test="${tr ne 0}">
                                                                             <td style="text-align: center;">${tr}</td>
                                                                         </c:if>
+                                                                        <c:if test="${coff ne 0}">
+                                                                            <th style="color: blue;text-align: center;">${coff}</th>
+                                                                            </c:if>
+                                                                            <c:if test="${ptl ne 0}">
+                                                                            <th style="color: blue;text-align: center;">${ptl}</th>
+                                                                            </c:if>
+                                                                            <c:if test="${mtl ne 0}">
+                                                                            <th style="color: blue;text-align: center;">${mtl}</th>
+                                                                            </c:if>
+                                                                            <c:if test="${lwp ne 0}">
+                                                                            <th style="color: blue;text-align: center;">${lwp}</th>
+                                                                            </c:if>
 
                                                                     </tr>
                                                                     <tr  >

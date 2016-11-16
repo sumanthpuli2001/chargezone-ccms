@@ -244,11 +244,11 @@ public class ExpenseReport extends ExpenseReportAbstarct {
                     JSONObject travelobj = new JSONObject();
                     TravelRequestMaster travelRequestMaster1 = (TravelRequestMaster) travelList.get(i);
                     int status = travelRequestMaster1.getStatus();
-                    if (status == 5) {
+                    String traveltype = travelRequestMaster1.getTravelType();
+                    if (status == 5 && !traveltype.contains("Local")) {
                         String trn = travelRequestMaster1.getTravelRequestNo();
                         String sdt = travelRequestMaster1.getStartDateTime();
                         String edt = travelRequestMaster1.getEndDateTime();
-                        String traveltype = travelRequestMaster1.getTravelType();
                         String travelid = (travelRequestMaster1.getId()).toString();
                         travelobj.put("TravelRequestNo", trn);
                         travelobj.put("StartDateTime", sdt);
@@ -933,17 +933,20 @@ public class ExpenseReport extends ExpenseReportAbstarct {
                         String travelBy = (travelDetailObj.get("modeOfTravel")).toString();
                         String amount = (travelDetailObj.get("amount")).toString();
                         String currency = (travelDetailObj.get("currency")).toString();
+                        int travelstatus = Integer.parseInt((travelDetailObj.get("status")).toString());
 
-                        if (!"".equals(fromCity) && !"".equals(toCity) && !"".equals(date) && !"".equals(travelBy) && !"".equals(amount) && !"".equals(currency)) {
-                            expenseTravelType.setFromCity(fromCity);
-                            expenseTravelType.setToCity(toCity);
-                            expenseTravelType.setDate(date);
-                            expenseTravelType.setTravelBy(travelBy);
-                            expenseTravelType.setAmount(amount);
-                            expenseTravelType.setCurrency(currency);
-                            expenseTravelType.setExpenseMaster(expenseMaster);
-                            expenseTravelTypeService.create(expenseTravelType);
+                        if (travelstatus != 3) {
+                            if (!"".equals(fromCity) && !"".equals(toCity) && !"".equals(date) && !"".equals(travelBy) && !"".equals(amount) && !"".equals(currency)) {
+                                expenseTravelType.setFromCity(fromCity);
+                                expenseTravelType.setToCity(toCity);
+                                expenseTravelType.setDate(date);
+                                expenseTravelType.setTravelBy(travelBy);
+                                expenseTravelType.setAmount(amount);
+                                expenseTravelType.setCurrency(currency);
+                                expenseTravelType.setExpenseMaster(expenseMaster);
+                                expenseTravelTypeService.create(expenseTravelType);
 
+                            }
                         }
                     }
                     JSONArray otherDetailCount = data.getJSONArray("otherExpenseDetails");
@@ -952,18 +955,21 @@ public class ExpenseReport extends ExpenseReportAbstarct {
                         String otherExpense = (otherDetailObj.get("otherExpense").toString());
                         String currency = (otherDetailObj.get("currency").toString());
                         String otherExpenseDate = (otherDetailObj.get("date").toString());
+                        int otherExpensestatus = Integer.parseInt(otherDetailObj.get("status").toString());
                         float amount = Float.parseFloat(otherDetailObj.get("amount").toString());
                         if (otherExpense.contains("Other")) {
                             String purpose = (otherDetailObj.get("purpose").toString());
                             relocationOrOtherExpense.setExpenseOtherSpecify(purpose);
                         }
-                        if (!"".equals(otherExpense) && !"".equals((otherDetailObj.get("amount").toString())) && !"".equals(currency)) {
-                            relocationOrOtherExpense.setOtherExpenseDate(otherExpenseDate);
-                            relocationOrOtherExpense.setOtherExpense(otherExpense);
-                            relocationOrOtherExpense.setAmount(amount);
-                            relocationOrOtherExpense.setCurrency(currency);
-                            relocationOrOtherExpense.setExpenseMaster(expenseMaster);
-                            relocationOrOtherExpenseService.create(relocationOrOtherExpense);
+                        if (otherExpensestatus != 3) {
+                            if (!"".equals(otherExpense) && !"".equals((otherDetailObj.get("amount").toString())) && !"".equals(currency)) {
+                                relocationOrOtherExpense.setOtherExpenseDate(otherExpenseDate);
+                                relocationOrOtherExpense.setOtherExpense(otherExpense);
+                                relocationOrOtherExpense.setAmount(amount);
+                                relocationOrOtherExpense.setCurrency(currency);
+                                relocationOrOtherExpense.setExpenseMaster(expenseMaster);
+                                relocationOrOtherExpenseService.create(relocationOrOtherExpense);
+                            }
                         }
                     }
 
@@ -979,17 +985,20 @@ public class ExpenseReport extends ExpenseReportAbstarct {
 //                        String currency = (otherDetailObj.get("currency").toString());
                         String otherExpenseDate = (otherDetailObj.get("date").toString());
                         float amount = Float.parseFloat(otherDetailObj.get("amount").toString());
+                        int otherExpensestatus = Integer.parseInt(otherDetailObj.get("status").toString());
                         if (otherExpense.equals("Other")) {
                             String purpose = (otherDetailObj.get("purpose").toString());
                             relocationOrOtherExpense.setExpenseOtherSpecify(purpose);
                         }
-                        relocationOrOtherExpense.setPolicyNo(pleaseSpecify);
-                        relocationOrOtherExpense.setOtherExpenseDate(otherExpenseDate);
-                        relocationOrOtherExpense.setOtherExpense(otherExpense);
-                        relocationOrOtherExpense.setAmount(amount);
-                        relocationOrOtherExpense.setCurrency("5");
-                        relocationOrOtherExpense.setExpenseMaster(expenseMaster);
-                        relocationOrOtherExpenseService.create(relocationOrOtherExpense);
+                        if (otherExpensestatus != 3) {
+                            relocationOrOtherExpense.setPolicyNo(pleaseSpecify);
+                            relocationOrOtherExpense.setOtherExpenseDate(otherExpenseDate);
+                            relocationOrOtherExpense.setOtherExpense(otherExpense);
+                            relocationOrOtherExpense.setAmount(amount);
+                            relocationOrOtherExpense.setCurrency("5");
+                            relocationOrOtherExpense.setExpenseMaster(expenseMaster);
+                            relocationOrOtherExpenseService.create(relocationOrOtherExpense);
+                        }
                     }
                 }
                 if (expenseMaster.getExpenseType().equals("Others")) {
@@ -1001,17 +1010,20 @@ public class ExpenseReport extends ExpenseReportAbstarct {
                         JSONObject otherDetailObj = othertype.getJSONObject(i);
                         String date = (otherDetailObj.get("date").toString());
                         String billNo = (otherDetailObj.get("invoiceNo").toString());
+                        int otherstatus = Integer.parseInt(otherDetailObj.get("otherstatus").toString());
 //                        String currency = (otherDetailObj.get("currency").toString());
                         float amount = Float.parseFloat(otherDetailObj.get("amount").toString());
-                        if (!"".equals(date) && !"".equals(billNo) && !"".equals(request.getParameter("amount"))) {
+                        if (otherstatus != 3) {
+                            if (!"".equals(date) && !"".equals(billNo) && !"".equals(request.getParameter("amount"))) {
 
-                            expenseOtherType.setBillDate(date);
-                            expenseOtherType.setBilNo(billNo);
-                            expenseOtherType.setAmount(amount);
-                            expenseOtherType.setSpecify(specify);
-                            expenseOtherType.setCurrency("5");
-                            expenseOtherType.setExpenseMaster(expenseMaster);
-                            expenseOtherTypeService.create(expenseOtherType);
+                                expenseOtherType.setBillDate(date);
+                                expenseOtherType.setBilNo(billNo);
+                                expenseOtherType.setAmount(amount);
+                                expenseOtherType.setSpecify(specify);
+                                expenseOtherType.setCurrency("5");
+                                expenseOtherType.setExpenseMaster(expenseMaster);
+                                expenseOtherTypeService.create(expenseOtherType);
+                            }
                         }
 
                     }
@@ -1044,10 +1056,10 @@ public class ExpenseReport extends ExpenseReportAbstarct {
                         expenseReconsilation.setVarianceOwed(variance);
                         expenseReconsilationService.create(expenseReconsilation);
 
-                        message = "Success";
-                        rcode = "1";
                     }
                 }
+                message = "Success";
+                rcode = "1";
 
             }
 

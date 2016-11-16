@@ -19,6 +19,8 @@ public interface EmployeePunchForMobileAppService<T> extends GenericsService<T> 
     List<?> readYesterdayEmployeeData(String empId);
 
     List<?> readTodaysAndPreviousData(String empId, String endShiftTime);
-    
+
     List<?> readTodaysEmployeeData(String empId);
+
+    List<?> readPuchDataDateWise(String date, int empId);
 }

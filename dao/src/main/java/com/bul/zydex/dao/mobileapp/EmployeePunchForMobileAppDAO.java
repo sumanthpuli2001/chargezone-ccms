@@ -20,4 +20,6 @@ public interface EmployeePunchForMobileAppDAO<T> extends GenericsDAO<T> {
   List<?> readTodaysAndPreviousData(String empId, String endShiftTime);
   
   List<?> readTodaysEmployeeData(String empId);
+  
+  List<?> readPuchDataDateWise(String date, int empId);
 }

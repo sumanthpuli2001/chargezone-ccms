@@ -403,7 +403,7 @@
             var leaveDays = document.getElementById("hiddenDays").value;
            
             var days = document.getElementById("noOfDays").value = leaveDays;
-//            if (selectedText == 'Leave Without Pay') {
+            if (selectedText == 'Leave Without Pay') {
 //                if (days > 60) {
 //                    $("#leaveWithoutPayLeaveDiv").show();
 //                    document.getElementById("endDate").value = '';
@@ -411,8 +411,8 @@
 //                        $("#leaveWithoutPayLeaveDiv").fadeOut();
 //                    }, 5000);
 //                }
-//
-//            }
+
+            }
         }
 
         function daysCount() {
@@ -525,14 +525,14 @@
                                         document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
                                     }
 
-//                                }
+                                }
                                 document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                                 document.getElementById('Casual Leave').innerHTML = "0";
                                 document.getElementById('Casual Leave2').innerHTML = document.getElementById('Casual Leave1').innerHTML;
                                 document.getElementById('Sick Leave').innerHTML = "0";
                                 document.getElementById('Sick Leave2').innerHTML = document.getElementById('Sick Leave1').innerHTML;
                             }
-//                            if (strUser == "Leave Without Pay") {
+                            if (strUser == "Leave Without Pay") {
 //                                if (parseFloat(document.getElementById("noOfDays").value) > 60) {
 //                                    $("#leaveWithoutPayLeaveDiv").show();
 //                                    document.getElementById("endDate").value = '';
@@ -552,7 +552,7 @@
 //                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
 //                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
 //                                }
-//                            }
+                            }
 
                             if (strUser == "Paternity Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -637,7 +637,7 @@
                                 document.getElementById('Sick Leave2').innerHTML = document.getElementById('Sick Leave1').innerHTML;
                             }
 
-//                            if (strUser == "Leave Without Pay") {
+                            if (strUser == "Leave Without Pay") {
 //                                if (parseFloat(document.getElementById("noOfDays").value) > 60) {
 //                                    $("#leaveWithoutPayLeaveDiv").show();
 //                                    document.getElementById("endDate").value = '';
@@ -657,7 +657,7 @@
 //                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
 //                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
 //                                }
-//                            }
+                            }
 
 
                             if (strUser == "Paternity Leave") {
@@ -742,7 +742,7 @@
                                 document.getElementById('Sick Leave').innerHTML = "0";
                                 document.getElementById('Sick Leave2').innerHTML = document.getElementById('Sick Leave1').innerHTML;
                             }
-//                            if (strUser == "Leave Without Pay") {
+                            if (strUser == "Leave Without Pay") {
 //                                if (parseFloat(document.getElementById("noOfDays").value) > 60) {
 //                                    $("#leaveWithoutPayLeaveDiv").show();
 //                                    document.getElementById("endDate").value = '';
@@ -762,7 +762,7 @@
 //                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
 //                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
 //                                }
-//                            }
+                            }
 
                             if (strUser == "Paternity Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -857,7 +857,7 @@
                                 document.getElementById('Privilege Leave2').innerHTML = document.getElementById('Privilege Leave1').innerHTML;
                             }
                             if (strUser == "Privilege Leave") {
-//                                 if (document.getElementById('Sick Leave1').innerHTML > 0) {
+                                 if (document.getElementById('Sick Leave1').innerHTML > 0) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
                                         $("#plDiv").show();
                                         setTimeout(function () {
@@ -870,14 +870,14 @@
                                         document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
                                     }
 
-//                                }
+                                }
                                 document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                                 document.getElementById('Casual Leave').innerHTML = "0";
                                 document.getElementById('Casual Leave2').innerHTML = document.getElementById('Casual Leave1').innerHTML;
                                 document.getElementById('Sick Leave').innerHTML = "0";
                                 document.getElementById('Sick Leave2').innerHTML = document.getElementById('Sick Leave1').innerHTML;
                             }
-//                            if (strUser == "Leave Without Pay") {
+                            if (strUser == "Leave Without Pay") {
 //                                if (parseFloat(document.getElementById("noOfDays").value) > 60) {
 //                                    $("#leaveWithoutPayLeaveDiv").show();
 //                                    document.getElementById("endDate").value = '';
@@ -897,7 +897,7 @@
 //                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
 //                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
 //                                }
-//                            }
+                            }
 
                             if (strUser == "Paternity Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -982,7 +982,7 @@
                                 document.getElementById('Sick Leave2').innerHTML = document.getElementById('Sick Leave1').innerHTML;
                             }
 
-//                            if (strUser == "Leave Without Pay") {
+                            if (strUser == "Leave Without Pay") {
 //                                if (parseFloat(document.getElementById("noOfDays").value) > 60) {
 //                                    $("#leaveWithoutPayLeaveDiv").show();
 //                                    document.getElementById("endDate").value = '';
@@ -1002,7 +1002,7 @@
 //                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
 //                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
 //                                }
-//                            }
+                            }
 
                             if (strUser == "Paternity Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -1090,7 +1090,7 @@
                                 document.getElementById('Sick Leave2').innerHTML = document.getElementById('Sick Leave1').innerHTML;
                             }
 
-//                            if (strUser == "Leave Without Pay") {
+                            if (strUser == "Leave Without Pay") {
 //                                if (parseFloat(document.getElementById("noOfDays").value) > 60) {
 //                                    $("#leaveWithoutPayLeaveDiv").show();
 //                                    document.getElementById("endDate").value = '';
@@ -1110,7 +1110,7 @@
 //                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
 //                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
 //                                }
-//                            }
+                            }
 
                             if (strUser == "Paternity Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -1194,7 +1194,7 @@
                                 document.getElementById('Sick Leave2').innerHTML = document.getElementById('Sick Leave1').innerHTML;
                             }
 
-//                            if (strUser == "Leave Without Pay") {
+                            if (strUser == "Leave Without Pay") {
 //                                if (parseFloat(document.getElementById("noOfDays").value) > 60) {
 //                                    $("#leaveWithoutPayLeaveDiv").show();
 //                                    document.getElementById("endDate").value = '';
@@ -1214,7 +1214,7 @@
 //                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
 //                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
 //                                }
-//                            }
+                            }
                             if (strUser == "Paternity Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#paternityLeaveDiv").show();

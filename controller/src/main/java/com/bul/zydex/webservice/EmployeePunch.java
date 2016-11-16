@@ -101,7 +101,7 @@ public class EmployeePunch extends EmployeePunchAbstract {
     }
 
     
-    private synchronized void timeEntryDaily() throws Exception {
+    private synchronized void mobPunchEntryDaily() throws Exception {
 
         EmployeeShiftData employeeShiftData = new EmployeeShiftData();
         EmployeeMaster employeeMaster = new EmployeeMaster();

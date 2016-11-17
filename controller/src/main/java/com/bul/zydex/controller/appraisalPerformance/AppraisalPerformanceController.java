@@ -4398,6 +4398,10 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             String behaviorsEndyearTotalscore = appraisalPerformanceMaster.getBehaviorsEndyearTotalscore();
             request.setAttribute("behaviorsEndyearTotalscore", behaviorsEndyearTotalscore);
         }
+        if (null != appraisalPerformanceMaster.getManagerActivityScore()) {
+            String managerActivityScore = appraisalPerformanceMaster.getManagerActivityScore();
+            request.setAttribute("managerActivityScore", managerActivityScore);
+        }
 //        if (null != appraisalPerformanceMaster.getManagerStatus()) {
         int managerStatus = appraisalPerformanceMaster.getManagerStatus();
         request.setAttribute("managerStatus", managerStatus);
@@ -5046,6 +5050,10 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 String totalScore = appraisalPerformanceMaster.getTotalScore();
                 request.setAttribute("totalScore", totalScore);
             }
+            if (null != appraisalPerformanceMaster.getTotalScoreForemployee()) {
+                String totalScoreForemployee = appraisalPerformanceMaster.getTotalScoreForemployee();
+                request.setAttribute("totalScoreForemployee", totalScoreForemployee);
+            }
             // ==========================Mid Year=======================================================//
             if (null != appraisalPerformanceMaster.getEmpMidyearSelfassOtheractivty()) {
                 String empMidyearSelfassOtheractivty = appraisalPerformanceMaster.getEmpMidyearSelfassOtheractivty();
@@ -5086,6 +5094,10 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 String behaviorsEndyearTotalscore = appraisalPerformanceMaster.getBehaviorsEndyearTotalscore();
                 request.setAttribute("behaviorsEndyearTotalscore", behaviorsEndyearTotalscore);
             }
+            if (null != appraisalPerformanceMaster.getBehaviorsEndyearTotalscoreForemp()) {
+                String behaviorsEndyearTotalscoreForemp = appraisalPerformanceMaster.getBehaviorsEndyearTotalscoreForemp();
+                request.setAttribute("behaviorsEndyearTotalscoreForemp", behaviorsEndyearTotalscoreForemp);
+            }
 //        if (null != appraisalPerformanceMaster.getManagerStatus()) {
             int managerStatus = appraisalPerformanceMaster.getManagerStatus();
             request.setAttribute("managerStatus", managerStatus);
@@ -5097,6 +5109,15 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             if (null != appraisalPerformanceMaster.getBehaviorsFinalscore() && !"".equals(appraisalPerformanceMaster.getBehaviorsFinalscore())) {
                 String behaviorsFinalscore = appraisalPerformanceMaster.getBehaviorsFinalscore();
                 request.setAttribute("behaviorsFinalscore", behaviorsFinalscore);
+            }
+            if (null != appraisalPerformanceMaster.getBehaviorsFinalscoreForemployee() && !"".equals(appraisalPerformanceMaster.getBehaviorsFinalscoreForemployee())) {
+                String behaviorsFinalscoreForemployee = appraisalPerformanceMaster.getBehaviorsFinalscoreForemployee();
+                request.setAttribute("behaviorsFinalscoreForemployee", behaviorsFinalscoreForemployee);
+            }
+
+            if (null != appraisalPerformanceMaster.getEmpActivityScore()) {
+                String empActivityScore = appraisalPerformanceMaster.getEmpActivityScore();
+                request.setAttribute("empActivityScore", empActivityScore);
             }
 
             int year = Integer.parseInt(request.getParameter("year"));

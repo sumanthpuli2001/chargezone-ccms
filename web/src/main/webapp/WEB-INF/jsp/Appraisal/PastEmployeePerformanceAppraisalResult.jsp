@@ -22,6 +22,12 @@
         function createClick(id) {
             window.location = 'userRightMaster.htm?act=createClick&id=' + id;
         }
+        function editClickCompetency(id, userid, appraisalId, year) {
+            window.location = 'appraisalPerformance.htm?act=editClickCompetencyIdp&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId + '&year=' + year;
+        }
+        function editClickIdp(id, userid, appraisalId, year) {
+            window.location = 'appraisalPerformance.htm?act=editClickIdp&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId + '&year=' + year;
+        }
 
         function deleteCheck11() {
             var checkboxes = "";
@@ -63,15 +69,15 @@
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
                                 <!--<button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp&nbsp;Delete</button>-->
-                                
+
                                 <div class="box-header" <c:if test="${currentYearRequest  gt 0}">style="display: none;"</c:if>>
-                                    <button type="button" class="btn btn-primary" style="float: right" onclick="window.location = 'appraisalPerformance.htm?act=createClick'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
-                                </div>
-                                <div class="box-body no-padding">
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12">
-                                            <div class="table table-bordered">
-                                                <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                        <button type="button" class="btn btn-primary" style="float: right" onclick="window.location = 'appraisalPerformance.htm?act=createClick'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
+                                    </div>
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="table table-bordered">
+                                                    <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                     <c:choose>
                                                         <c:when test="${empty list}">
                                                             <tr>
@@ -110,13 +116,38 @@
                                                                 <!--<td>${list[6]}</td>-->
 
                                                                 <td>
+                                                                    <!--                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                                                            Action <span class="caret"></span>
+                                                                                                                                        </button>-->
                                                                     <div class="btn-group">
-                                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="editClick1(${list[1]},${list[7]},${list[0]},${list[8]});">
-                                                                            <span class="fa fa-pencil"></span>&nbsp;&nbsp;Edit
+<!--                                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="editClick1(${list[1]},${list[7]},${list[0]},${list[8]});">
+                                                                            <span class="fa fa-pencil"></span>&nbsp;&nbsp;Action
+                                                                        </button>-->
+                                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                            <span class="fa fa-pencil"></span>&nbsp;&nbsp;Action
                                                                         </button>
-                                                                        <!--</li>-->
+                                                                        <ul class="dropdown-menu">
+                                                                            <li style="width: 100px;">
+                                                                                <a href="#"
+                                                                                   onclick="editClick1(${list[1]},${list[7]},${list[0]},${list[8]});">
 
-                                                                        <!--</ul>-->
+                                                                                    &nbsp;&nbsp;Edit PMP
+                                                                                </a>
+                                                                            </li>
+
+                                                                            <li style="width: 100px;">
+                                                                                <a href="#"
+                                                                                   onclick="editClickCompetency(${list[1]},${list[7]},${list[0]},${list[8]});">
+                                                                                    &nbsp;&nbsp;Competency
+                                                                                </a>
+                                                                            </li>
+                                                                            <li style="width: 100px;">
+                                                                                <a href="#"
+                                                                                   onclick="editClickIdp(${list[1]},${list[7]},${list[0]},${list[8]});">
+                                                                                    &nbsp;&nbsp;IDP
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
                                                                     </div>
                                                                 </td>
                                                             </tr>

@@ -14,6 +14,9 @@
         <property name="weightageScore" type="string">
             <column name="weightage_score" />
         </property>
+        <property name="weightageScoreManager" type="string">
+            <column name="weightage_score_manager" />
+        </property>
         <property name="totalScore" type="string">
             <column name="total_score" />
         </property>
@@ -79,6 +82,48 @@
         </property>
         <property name="endYearManagerStatus" type="int">
             <column name="end_year_manager_status" not-null="true" />
+        </property>
+        <property name="behaviorsMidyearOtherremarkForemployee" type="string">
+            <column name="behaviors_midyear_otherremark_foremployee" />
+        </property>
+        <property name="behaviorsEndyearOtherremarkForemployee" type="string">
+            <column name="behaviors_endyear_otherremark_foremployee" />
+        </property>
+        <property name="behaviorsFinalscoreForemployee" type="string">
+            <column name="behaviors_finalscore_foremployee" length="45" />
+        </property>
+        <property name="totalScoreForemployee" type="string">
+            <column name="total_score_foremployee" />
+        </property>
+        <property name="behaviorsMidyearTotalscoreForemp" type="string">
+            <column name="behaviors_midyear_totalscore_foremp" />
+        </property>
+        <property name="behaviorsEndyearTotalscoreForemp" type="string">
+            <column name="behaviors_endyear_totalscore_foremp" />
+        </property>
+        <property name="employeeCompetencyStatus" type="int">
+            <column name="employee_competency_status" not-null="true" />
+        </property>
+        <property name="managerCompetencyStatus" type="int">
+            <column name="manager_competency_status" not-null="true" />
+        </property>
+        <property name="competencyReworkStatus" type="int">
+            <column name="competency_rework_status" not-null="true" />
+        </property>
+        <property name="competencyReworkComment" type="string">
+            <column name="competency_rework_comment" length="16777215" />
+        </property>
+        <property name="employeeIdpStatus" type="int">
+            <column name="employee_idp_status" not-null="true" />
+        </property>
+        <property name="managerIdpStatus" type="int">
+            <column name="manager_idp_status" not-null="true" />
+        </property>
+        <property name="idpReworkStatus" type="int">
+            <column name="idp_rework_status" not-null="true" />
+        </property>
+        <property name="idpReworkComment" type="string">
+            <column name="idp_rework_comment" length="16777215" />
         </property>
         <set name="appraisalPerformanceBehaviorses" inverse="true">
             <key>

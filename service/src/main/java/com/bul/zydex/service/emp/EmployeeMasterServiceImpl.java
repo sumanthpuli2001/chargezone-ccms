@@ -330,4 +330,8 @@ public List<?> readEmployeeForPlant(){
      public List<?> readDepartmentWiseEmployee(T object){
           return employeeMasterDAO.readDepartmentWiseEmployee(object);
     }
+    @Override
+     public List<?> readByJoinDate(String date){
+          return employeeMasterDAO.readByJoinDate(date);
+    }
 }

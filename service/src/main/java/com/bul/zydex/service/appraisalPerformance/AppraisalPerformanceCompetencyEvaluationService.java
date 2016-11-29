@@ -17,4 +17,11 @@ public interface AppraisalPerformanceCompetencyEvaluationService<T> extends Gene
     public List<?> readAppraisalPerformanceCompetencyEvaluationDetail(T object);
 
     public void delete1(T object);
+
+    public List<?> readByEmployeeWiseAppraisalPerformanceCompetencyEvaluationDetail(T object);
+
+    public List<?> readByAppraisalPerformanceId(T object);
+
+    public void deleteByManager(T object);
+    public void finaldeletebyManager(T object);
 }

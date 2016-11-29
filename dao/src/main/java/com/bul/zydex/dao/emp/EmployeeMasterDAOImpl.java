@@ -52,12 +52,13 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
         String query = "";
 
-        query += " Select a.employeeId, a.employeeName, b.designationName, d.level, c.departmentName, lm.location ,a.reportingManagerLevel1, a.company, a.contactNo2 "
+        query += " Select a.employeeId, a.employeeName, b.designationName, d.level, c.departmentName, lm.location ,a.reportingManagerLevel1, a.company, a.contactNo2,zl.zydexLocation "
                 + "FROM EmployeeMaster a"
                 + " LEFT JOIN a.designationMaster b"
                 + " LEFT JOIN a.departmentMaster c"
                 + " LEFT JOIN a.levelMaster d"
                 + " LEFT JOIN a.locationMaster lm"
+                + " LEFT JOIN a.zydexLocationMaster zl"
                 + " WHERE a.userMaster.id = " + employeeMaster.getUserMaster().getId();
 
         return getHibernateTemplate().find(query);
@@ -1799,6 +1800,16 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) "
                 + " AND b.id=" + employeeMaster.getDepartmentMaster().getId();
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readByJoinDate(String date) {
+        String query = "";
+        query += " "
+                + " FROM EmployeeMaster a "
+                + " Where STR_TO_DATE(a.dateOfJoining,'%d/%m/%Y')= STR_TO_DATE('" + date + "','%d/%m/%Y')";
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
     }
 
 }

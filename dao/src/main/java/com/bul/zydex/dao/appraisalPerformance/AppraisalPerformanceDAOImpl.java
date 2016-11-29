@@ -121,8 +121,7 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
     }
 
     @Override
-    public Object[] readperformanceByHr(final int currentYear) {
-
+    public int readperformanceByHr(final int currentYear) {
 //        String hqlQuery = "select"
 //                + " (Select count(*) from EmployeeMaster em where ((em.dateOfLeaving is null or em.dateOfLeaving = '') or STR_TO_DATE(em.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())),"
 //                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and status=1),"
@@ -132,24 +131,117 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
 //                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and apm1.empEndyearSelfassOtheractivty is not null and status=1),"
 //                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and apm1.managerEndyearReviewevalOtheractivity is not null and status=1 and managerStatus=1)"
 //                + " from AppraisalPerformanceMaster";
-        String hqlQuery = "select"
-                + " (Select count(*) from EmployeeMaster em where ((em.dateOfLeaving is null or em.dateOfLeaving = '') or STR_TO_DATE(em.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())),"
-                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and status=1),"
-                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and apm1.weightageScore is not null and status=1 and managerStatus=1),"
-                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and status=1 and midYearEmployeeStatus=1),"
-                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and status=1 and managerStatus=1 and midYearManagerStatus=1),"
-                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and status=1 and endYearEmployeeStatus=1),"
-                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and status=1 and managerStatus=1 and endYearManagerStatus=1)"
-                + " from AppraisalPerformanceMaster";
-//                + " LEFT JOIN apm1.appraisalPerformanceKras b";
+//test queary///
+//        String hqlQuery = "select"
+//                + " (Select count(*) from EmployeeMaster em where ((em.dateOfLeaving is null or em.dateOfLeaving = '') or STR_TO_DATE(em.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())),"
+//                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and status=1),"
+//                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and apm1.weightageScore is not null and status=1 and managerStatus=1),"
+//                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and status=1 and midYearEmployeeStatus=1),"
+//                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and status=1 and managerStatus=1 and midYearManagerStatus=1),"
+//                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and status=1 and endYearEmployeeStatus=1),"
+//                + " (select count(Distinct apm1.employeeMaster.id) from AppraisalPerformanceMaster apm1 where apm1.behaviorsYear=" + currentYear + " and status=1 and managerStatus=1 and endYearManagerStatus=1)"
+//                + " from AppraisalPerformanceMaster";
+////                + " LEFT JOIN apm1.appraisalPerformanceKras b";
 
-        return (Object[]) getHibernateTemplate().find(hqlQuery).get(0);
+        //Employee’s Mid Year Self Assessment/////
+        String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceKra a"
+                + " LEFT JOIN a.appraisalPerformanceMaster b"
+                + " LEFT JOIN b.employeeMaster c"
+                + " where b.behaviorsYear=" + currentYear + " and b.status=1 and (a.empMidyearSelfassessmentGoal is not null or"
+                + " a.empMidyearSelfassessmentGoal !='') and b.managerStatus=1 "
+                + " and (c.dateOfLeaving is null or c.dateOfLeaving = ''"
+                + " or STR_TO_DATE(c.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
+
+        return (Integer) getHibernateTemplate().find(hqlQuery).get(0);
+    }
+
+    @Override
+    public int readperformanceByHr1(final int currentYear) {
+//KRA Setting By Employee
+        String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceMaster b"
+                + " LEFT JOIN b.employeeMaster c"
+                + " where b.behaviorsYear=" + currentYear + " and b.status=1 and ((c.dateOfLeaving is null or c.dateOfLeaving = '')"
+                + "or STR_TO_DATE(c.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
+
+        return (int) (long) getHibernateTemplate().find(hqlQuery).get(0);
+    }
+
+    @Override
+    public int readperformanceByHr2(final int currentYear) {
+        //KRA Approval By Manager
+        String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceMaster b"
+                + " LEFT JOIN b.employeeMaster c"
+                + " where b.behaviorsYear=" + currentYear + " and b.status=1 and b.managerStatus=1 and ((c.dateOfLeaving is null or c.dateOfLeaving = '')"
+                + "or STR_TO_DATE(c.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
+
+        return (int) (long) getHibernateTemplate().find(hqlQuery).get(0);
+    }
+
+    @Override
+    public int readperformanceByHr3(final int currentYear) {
+        //Employee’s Mid Year Self Assessment
+
+        String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceKra a"
+                + " LEFT JOIN a.appraisalPerformanceMaster b"
+                + " LEFT JOIN b.employeeMaster c"
+                + " where b.behaviorsYear=" + currentYear + " and b.status=1 and (a.empMidyearSelfassessmentGoal is not null or"
+                + " a.empMidyearSelfassessmentGoal !='') and b.managerStatus=1 "
+                + " and (c.dateOfLeaving is null or c.dateOfLeaving = ''"
+                + " or STR_TO_DATE(c.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
+
+        return (int) (long) getHibernateTemplate().find(hqlQuery).get(0);
+    }
+
+    @Override
+    public int readperformanceByHr4(final int currentYear) {
+        //Manager’s Mid Year Review 
+
+        String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceKra a"
+                + " LEFT JOIN a.appraisalPerformanceMaster b"
+                + " LEFT JOIN b.employeeMaster c"
+                + " where b.behaviorsYear=" + currentYear + " and b.status=1 and (a.managerMidyearReviewEvaluation is not null or"
+                + " a.managerMidyearReviewEvaluation !='') and b.managerStatus=1 "
+                + " and (c.dateOfLeaving is null or c.dateOfLeaving = ''"
+                + " or STR_TO_DATE(c.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
+
+        return (int) (long) getHibernateTemplate().find(hqlQuery).get(0);
+    }
+
+    @Override
+    public int readperformanceByHr5(final int currentYear) {
+//       Employee’s End Year Self Assessment
+
+        String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceKra a"
+                + " LEFT JOIN a.appraisalPerformanceMaster b"
+                + " LEFT JOIN b.employeeMaster c"
+                + " where b.behaviorsYear=" + currentYear + " and b.status=1 and (a.empEndyearSelfassessmentGoal is not null or"
+                + " a.empEndyearSelfassessmentGoal !='') and b.managerStatus=1 "
+                + " and (c.dateOfLeaving is null or c.dateOfLeaving = ''"
+                + " or STR_TO_DATE(c.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
+
+        return (int) (long) getHibernateTemplate().find(hqlQuery).get(0);
+    }
+
+    @Override
+    public int readperformanceByHr6(final int currentYear) {
+//       Manager’s End Year Review
+
+        String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceKra a"
+                + " LEFT JOIN a.appraisalPerformanceMaster b"
+                + " LEFT JOIN b.employeeMaster c"
+                + " where b.behaviorsYear=" + currentYear + " and b.status=1 and (a.managerEndyearReviewEvaluation is not null or"
+                + " a.managerEndyearReviewEvaluation !='') and b.managerStatus=1 "
+                + " and (c.dateOfLeaving is null or c.dateOfLeaving = ''"
+                + " or STR_TO_DATE(c.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
+
+        return (int) (long) getHibernateTemplate().find(hqlQuery).get(0);
     }
 
     @Override
     public List<?> readperformanceByHr() {
 
-        String hqlQuery = "select count(Distinct em1.id) from EmployeeMaster em1 where em1.dateOfLeaving is null or em1.dateOfLeaving > DATE_FORMAT(now(),'%d/%m/%Y - %h:%m')";
+        String hqlQuery = "Select count(*) from EmployeeMaster em where ((em.dateOfLeaving is null or em.dateOfLeaving = '') or STR_TO_DATE(em.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
+//        String hqlQuery = "select count(Distinct em1.id) from EmployeeMaster em1 where em1.dateOfLeaving is null or em1.dateOfLeaving is ''  or em1.dateOfLeaving > DATE_FORMAT(now(),'%d/%m/%Y - %h:%m')";
 
         return getHibernateTemplate().find(hqlQuery);
     }
@@ -414,6 +506,18 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
 
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> readByEmpID(int id) {
+        String query = "";
+
+        query += "  "
+                + "FROM AppraisalPerformanceMaster a "
+                + " WHERE a.employeeMaster = " + id;
+
+        return getHibernateTemplate().find(query);
+    }
+
 }
 //                *******************************************Main Queary**************************************************
 //                + " (select concat(start_date,'-',end_date) "
@@ -568,4 +672,4 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
 //                + " left join level_master f on f.id = c.level_master_id where 1=1 "
 //                + condition;
 
-                //   + " Select c.employee_id "
+//   + " Select c.employee_id "

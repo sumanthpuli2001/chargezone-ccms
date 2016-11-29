@@ -1,5 +1,5 @@
 package com.bul.zydex.model;
-// Generated Apr 21, 2016 3:33:08 PM by Hibernate Tools 3.2.1.GA
+// Generated Oct 22, 2016 1:37:14 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -35,17 +35,24 @@ public class AppraisalPerformanceActivities  implements java.io.Serializable {
      private String empEndyearSelfassessmentGoalActivitiesManager;
      private String managerMidyearSelfassesssmentGoalActivitiesManager;
      private String managerEndyearSelfassesssmentGoalActivitiesManager;
+     private int midyearEmpSelfassActivityStatus;
+     private int midyearManagerSelfassActivityStatus;
+     private int endyearEmpSelfassActivityStatus;
+     private int endyearManagerSelfassActivityStatus;
      private Set updateAppraisalPerformanceActivitieses = new HashSet(0);
-     private Set updateAppraisalPerformanceActivitieses_1 = new HashSet(0);
 
     public AppraisalPerformanceActivities() {
     }
 
 	
-    public AppraisalPerformanceActivities(AppraisalPerformanceMaster appraisalPerformanceMaster) {
+    public AppraisalPerformanceActivities(AppraisalPerformanceMaster appraisalPerformanceMaster, int midyearEmpSelfassActivityStatus, int midyearManagerSelfassActivityStatus, int endyearEmpSelfassActivityStatus, int endyearManagerSelfassActivityStatus) {
         this.appraisalPerformanceMaster = appraisalPerformanceMaster;
+        this.midyearEmpSelfassActivityStatus = midyearEmpSelfassActivityStatus;
+        this.midyearManagerSelfassActivityStatus = midyearManagerSelfassActivityStatus;
+        this.endyearEmpSelfassActivityStatus = endyearEmpSelfassActivityStatus;
+        this.endyearManagerSelfassActivityStatus = endyearManagerSelfassActivityStatus;
     }
-    public AppraisalPerformanceActivities(AppraisalPerformanceMaster appraisalPerformanceMaster, String kraGoalActivities, String metricActivities, String priority, String activity, String midyearStatusActivities, String endyearStatusActivities, Integer kraCategoryByEmployeeActivities, Integer kraCategoryByManagerActivities, String kraGoalActivitiesManager, String metricActivitiesManager, String empMidyearSelfassessmentGoalActivities, String empEndyearSelfassessmentGoalActivities, String managerMidyearSelfassesssmentGoalActivities, String managerEndyearSelfassesssmentGoalActivities, String managerPriority, String managerActivity, String midyearStatusActivitiesManager, String endyearStatusActivitiesManager, String empMidyearSelfassessmentGoalActivitiesManager, String empEndyearSelfassessmentGoalActivitiesManager, String managerMidyearSelfassesssmentGoalActivitiesManager, String managerEndyearSelfassesssmentGoalActivitiesManager, Set updateAppraisalPerformanceActivitieses, Set updateAppraisalPerformanceActivitieses_1) {
+    public AppraisalPerformanceActivities(AppraisalPerformanceMaster appraisalPerformanceMaster, String kraGoalActivities, String metricActivities, String priority, String activity, String midyearStatusActivities, String endyearStatusActivities, Integer kraCategoryByEmployeeActivities, Integer kraCategoryByManagerActivities, String kraGoalActivitiesManager, String metricActivitiesManager, String empMidyearSelfassessmentGoalActivities, String empEndyearSelfassessmentGoalActivities, String managerMidyearSelfassesssmentGoalActivities, String managerEndyearSelfassesssmentGoalActivities, String managerPriority, String managerActivity, String midyearStatusActivitiesManager, String endyearStatusActivitiesManager, String empMidyearSelfassessmentGoalActivitiesManager, String empEndyearSelfassessmentGoalActivitiesManager, String managerMidyearSelfassesssmentGoalActivitiesManager, String managerEndyearSelfassesssmentGoalActivitiesManager, int midyearEmpSelfassActivityStatus, int midyearManagerSelfassActivityStatus, int endyearEmpSelfassActivityStatus, int endyearManagerSelfassActivityStatus, Set updateAppraisalPerformanceActivitieses) {
        this.appraisalPerformanceMaster = appraisalPerformanceMaster;
        this.kraGoalActivities = kraGoalActivities;
        this.metricActivities = metricActivities;
@@ -69,8 +76,11 @@ public class AppraisalPerformanceActivities  implements java.io.Serializable {
        this.empEndyearSelfassessmentGoalActivitiesManager = empEndyearSelfassessmentGoalActivitiesManager;
        this.managerMidyearSelfassesssmentGoalActivitiesManager = managerMidyearSelfassesssmentGoalActivitiesManager;
        this.managerEndyearSelfassesssmentGoalActivitiesManager = managerEndyearSelfassesssmentGoalActivitiesManager;
+       this.midyearEmpSelfassActivityStatus = midyearEmpSelfassActivityStatus;
+       this.midyearManagerSelfassActivityStatus = midyearManagerSelfassActivityStatus;
+       this.endyearEmpSelfassActivityStatus = endyearEmpSelfassActivityStatus;
+       this.endyearManagerSelfassActivityStatus = endyearManagerSelfassActivityStatus;
        this.updateAppraisalPerformanceActivitieses = updateAppraisalPerformanceActivitieses;
-       this.updateAppraisalPerformanceActivitieses_1 = updateAppraisalPerformanceActivitieses_1;
     }
    
     public Integer getId() {
@@ -241,19 +251,40 @@ public class AppraisalPerformanceActivities  implements java.io.Serializable {
     public void setManagerEndyearSelfassesssmentGoalActivitiesManager(String managerEndyearSelfassesssmentGoalActivitiesManager) {
         this.managerEndyearSelfassesssmentGoalActivitiesManager = managerEndyearSelfassesssmentGoalActivitiesManager;
     }
+    public int getMidyearEmpSelfassActivityStatus() {
+        return this.midyearEmpSelfassActivityStatus;
+    }
+    
+    public void setMidyearEmpSelfassActivityStatus(int midyearEmpSelfassActivityStatus) {
+        this.midyearEmpSelfassActivityStatus = midyearEmpSelfassActivityStatus;
+    }
+    public int getMidyearManagerSelfassActivityStatus() {
+        return this.midyearManagerSelfassActivityStatus;
+    }
+    
+    public void setMidyearManagerSelfassActivityStatus(int midyearManagerSelfassActivityStatus) {
+        this.midyearManagerSelfassActivityStatus = midyearManagerSelfassActivityStatus;
+    }
+    public int getEndyearEmpSelfassActivityStatus() {
+        return this.endyearEmpSelfassActivityStatus;
+    }
+    
+    public void setEndyearEmpSelfassActivityStatus(int endyearEmpSelfassActivityStatus) {
+        this.endyearEmpSelfassActivityStatus = endyearEmpSelfassActivityStatus;
+    }
+    public int getEndyearManagerSelfassActivityStatus() {
+        return this.endyearManagerSelfassActivityStatus;
+    }
+    
+    public void setEndyearManagerSelfassActivityStatus(int endyearManagerSelfassActivityStatus) {
+        this.endyearManagerSelfassActivityStatus = endyearManagerSelfassActivityStatus;
+    }
     public Set getUpdateAppraisalPerformanceActivitieses() {
         return this.updateAppraisalPerformanceActivitieses;
     }
     
     public void setUpdateAppraisalPerformanceActivitieses(Set updateAppraisalPerformanceActivitieses) {
         this.updateAppraisalPerformanceActivitieses = updateAppraisalPerformanceActivitieses;
-    }
-    public Set getUpdateAppraisalPerformanceActivitieses_1() {
-        return this.updateAppraisalPerformanceActivitieses_1;
-    }
-    
-    public void setUpdateAppraisalPerformanceActivitieses_1(Set updateAppraisalPerformanceActivitieses_1) {
-        this.updateAppraisalPerformanceActivitieses_1 = updateAppraisalPerformanceActivitieses_1;
     }
 
 

@@ -25,6 +25,19 @@
         <!--<link rel="stylesheet" href="StorageYard/CSS/bootstrap/bootstrap.min.css">-->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <title>Performance Appraisal Form</title>
+         <style>
+            td { word-break: break-all;}
+            select {
+                /*for firefox*/
+                -moz-appearance: none;
+                /*for chrome*/
+                -webkit-appearance:none;
+                
+/*                select::-ms-expand {
+    display: none;
+}*/
+            }
+        </style>
     </head>
     <style type="text/css">
         @media print {
@@ -185,7 +198,7 @@
                                                             <td id="kraCategoryId${status.count}">
                                                                 <c:forEach var="kraCategory" items="${kraCategoryMap}">
                                                                     <c:if test="${kragoallist.kraCategoryByKraCategoryByManager.id eq kraCategory.key}">
-                                                                        ${kraCategory.value}
+                                                                        <option value="${kraCategory.key}" selected="">${kraCategory.value}</option>
                                                                     </c:if>
                                                                 </c:forEach>
                                                             </td>
@@ -1174,8 +1187,8 @@
 
                 </div>
 
+        </div>
         </section>
-        <!--</div>-->
     </form:form>
 </body>
 

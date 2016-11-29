@@ -56,4 +56,17 @@ public class AppraisalPerformanceKraDAOImpl<T> extends GenericsDAOImpl<T> implem
 
         getHibernateTemplate().bulkUpdate(query);
     }
+    @Override
+    public List<?> readByAppraisalKraGoal1(T object) {
+        AppraisalPerformanceKra appraisalPerformanceKra = (AppraisalPerformanceKra) object;
+
+        String query = "";
+
+        query += "  "
+                + "FROM AppraisalPerformanceKra a "
+                + " LEFT JOIN a.kraCategoryByKraCategoryByEmployee b "
+                + " WHERE a.appraisalPerformanceMaster = " + appraisalPerformanceKra.getId();
+
+        return getHibernateTemplate().find(query);
+    }
 }

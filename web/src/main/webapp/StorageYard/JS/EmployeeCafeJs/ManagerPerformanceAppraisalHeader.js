@@ -1224,6 +1224,28 @@ function behaviorsCountEndYear() {
 
 }
 
+function activityScoreCount(id) {
+//        alert('aaaaaabbbbbccc');
+//        alert('aaaaaa' + id);
+
+    //    alert("weightage" + weightage);
+    var total = 1;
+    var countId = document.getElementById("countactivityId").value;
+    var activityScore = 0;
+    while (total <= countId) {
+        var val = document.getElementById("activity" + total).value;
+        if (val !== "") {
+            activityScore += parseFloat(val);
+        }
+        total++;
+    }
+        alert(activityScore);
+//    alert("dhavl" + finalScore);
+    document.getElementById("managerActivityScore").value = activityScore;
+//    performancefinalScoreRatings();
+//    newFunction(id);
+}
+
 //function managerajaxfun() {
 //
 ////

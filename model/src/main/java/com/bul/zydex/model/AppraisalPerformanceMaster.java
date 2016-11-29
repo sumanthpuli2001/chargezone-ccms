@@ -49,6 +49,8 @@ public class AppraisalPerformanceMaster implements java.io.Serializable {
     private int managerIdpStatus;
     private int idpReworkStatus;
     private String idpReworkComment;
+    private String empActivityScore;
+    private String managerActivityScore;
     private Set appraisalPerformanceBehaviorses = new HashSet(0);
     private Set appraisalPerformanceIndividualDevelopmentPlans = new HashSet(0);
     private Set appraisalPerformanceBehaviorses_1 = new HashSet(0);
@@ -63,7 +65,7 @@ public class AppraisalPerformanceMaster implements java.io.Serializable {
     public AppraisalPerformanceMaster() {
     }
 
-    public AppraisalPerformanceMaster(int status, int managerStatus, int employeeStatus, int managerkraStatus, int reworkStatus, int midYearEmployeeStatus, int midYearManagerStatus, int endYearEmployeeStatus, int endYearManagerStatus, int employeeCompetencyStatus, int managerCompetencyStatus, int competencyReworkStatus, int employeeIdpStatus, int managerIdpStatus, int idpReworkStatus) {
+    public AppraisalPerformanceMaster(int status, int managerStatus, int employeeStatus, int managerkraStatus, int reworkStatus, int midYearEmployeeStatus, int midYearManagerStatus, int endYearEmployeeStatus, int endYearManagerStatus, int employeeCompetencyStatus, int managerCompetencyStatus, int competencyReworkStatus, int employeeIdpStatus, int managerIdpStatus, int idpReworkStatus, String empActivityScore, String managerActivityScore) {
         this.status = status;
         this.managerStatus = managerStatus;
         this.employeeStatus = employeeStatus;
@@ -79,6 +81,8 @@ public class AppraisalPerformanceMaster implements java.io.Serializable {
         this.employeeIdpStatus = employeeIdpStatus;
         this.managerIdpStatus = managerIdpStatus;
         this.idpReworkStatus = idpReworkStatus;
+        this.empActivityScore = empActivityScore;
+        this.managerActivityScore = managerActivityScore;
     }
 
     public AppraisalPerformanceMaster(EmployeeMaster employeeMaster, String weightageScore, String weightageScoreManager, String totalScore, String empMidyearSelfassOtheractivty, String empEndyearSelfassOtheractivty, String managerMidyearReviewevalOtheractivity, String managerEndyearReviewevalOtheractivity, String behaviorsMidyearTotalscore, String behaviorsMidyearOtherremark, String behaviorsFinalscore, String behaviorsDate, String behaviorsYear, String behaviorsEndyearOtherremark, String behaviorsEndyearTotalscore, int status, int managerStatus, int employeeStatus, int managerkraStatus, int reworkStatus, String reworkComment, int midYearEmployeeStatus, int midYearManagerStatus, int endYearEmployeeStatus, int endYearManagerStatus, String behaviorsMidyearOtherremarkForemployee, String behaviorsEndyearOtherremarkForemployee, String behaviorsFinalscoreForemployee, String totalScoreForemployee, String behaviorsMidyearTotalscoreForemp, String behaviorsEndyearTotalscoreForemp, int employeeCompetencyStatus, int managerCompetencyStatus, int competencyReworkStatus, String competencyReworkComment, int employeeIdpStatus, int managerIdpStatus, int idpReworkStatus, String idpReworkComment) {
@@ -523,6 +527,20 @@ public class AppraisalPerformanceMaster implements java.io.Serializable {
     public void setIdpReworkComment(String idpReworkComment) {
         this.idpReworkComment = idpReworkComment;
     }
-    
 
+    public String getEmpActivityScore() {
+        return this.empActivityScore;
+    }
+
+    public void setEmpActivityScore(String empActivityScore) {
+        this.empActivityScore = empActivityScore;
+    }
+
+    public String getManagerActivityScore() {
+        return this.managerActivityScore;
+    }
+
+    public void setManagerActivityScore(String managerActivityScore) {
+        this.managerActivityScore = managerActivityScore;
+    }
 }

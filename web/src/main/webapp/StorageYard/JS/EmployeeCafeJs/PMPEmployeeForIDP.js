@@ -481,10 +481,10 @@ function allowOnlyNumber1(evt)
 
 /////////////////////////////////////footer///////////////////////////////////////////////////////////////
 
-//$(document).on("click", ":submit", function (e) {
-//    if (confirm("Are you sure you want to Submit")) {
-//
-//        if ($(this).val() !== "" && $(this).val() === "submit") {
+$(document).on("click", ":submit", function (e) {
+    if (confirm("Are you sure you want to Submit")) {
+
+        if ($(this).val() !== "" && $(this).val() === "submit") {
 //
 //            var flag11 = document.getElementById("flagId").value;
 //            var flagmid = document.getElementById("flagMidId").value;
@@ -700,17 +700,17 @@ function allowOnlyNumber1(evt)
 //                }
 //            }
 //
-//        } else if ($(this).val() !== "" && $(this).val() === "save") {
-//
-////        alert($(this).val());   
-//            $('.saveRequried').removeAttr('required');
-//
-//        }
-//    } else {
-//
-//    }
-//
-//});
+        } else if ($(this).val() !== "" && $(this).val() === "save") {
+
+//        alert($(this).val());   
+            $('.saveRequried').removeAttr('required');
+
+        }
+    } else {
+
+    }
+
+});
 
 $(document).ready(function () {
    
@@ -776,7 +776,7 @@ $(document).ready(function () {
 
         }
     } else if (flagEndId === 'true') {
-        alert(flagEndId + "flagEndId");
+//        alert(flagEndId + "flagEndId");
         for (i = 1; i <= countId; i++) {
             var induvisul = document.getElementById("text" + i).value;
             if (induvisul !== '') {

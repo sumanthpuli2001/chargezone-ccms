@@ -21,12 +21,12 @@
                 box-shadow: 0  0 3px rgba(255,0,0,0.5); 
             }
         </style>
-<!--        <script>
-            document.querySelector("form")
-                    .addEventListener("invalid", function (event) {
-                        event.preventDefault();
-                    }, true);
-        </script>-->
+        <!--        <script>
+                    document.querySelector("form")
+                            .addEventListener("invalid", function (event) {
+                                event.preventDefault();
+                            }, true);
+                </script>-->
 
     </head>
     <script>
@@ -895,53 +895,53 @@
                                                                                     <select id="activity${status.count}" name="activity${status.count}" value="${kragoalOtherActivity.activity}" style="margin: 0px;width: 115px;" class="form-control saveRequried">
                                                                                         <option value="">SELECT</option>
                                                                                         <c:choose>
-                                                                                            <c:when test="${kragoalOtherActivity.activity eq 'Excellent'}">
+                                                                                            <c:when test="${kragoalOtherActivity.activity eq '5'}">
 
-                                                                                                <option value="Excellent" selected="">Excellent</option>
+                                                                                                <option value="5" selected="">Far Exceeds Expectations</option>
                                                                                             </c:when>
                                                                                             <c:otherwise>
 
-                                                                                                <option value="Excellent">Excellent</option>
+                                                                                                <option value="5">Far Exceeds Expectations</option>
                                                                                             </c:otherwise>
                                                                                         </c:choose>
                                                                                         <c:choose>
-                                                                                            <c:when test="${kragoalOtherActivity.activity eq 'Very Good'}">
+                                                                                            <c:when test="${kragoalOtherActivity.activity eq '4'}">
 
-                                                                                                <option value="Very Good" selected="">Very Good</option>
+                                                                                                <option value="4" selected="">Exceeds Expectations</option>
                                                                                             </c:when>
                                                                                             <c:otherwise>
 
-                                                                                                <option value="Very Good">Very Good</option>
+                                                                                                <option value="4">Exceeds Expectations</option>
                                                                                             </c:otherwise>
                                                                                         </c:choose>
                                                                                         <c:choose>
-                                                                                            <c:when test="${kragoalOtherActivity.activity eq 'Good'}">
+                                                                                            <c:when test="${kragoalOtherActivity.activity eq '3'}">
 
-                                                                                                <option value="Good" selected="">Good</option>
+                                                                                                <option value="3" selected="">Meets Expectations</option>
                                                                                             </c:when>
                                                                                             <c:otherwise>
 
-                                                                                                <option value="Good">Good</option>
+                                                                                                <option value="3">Meets Expectations</option>
                                                                                             </c:otherwise>
                                                                                         </c:choose>
                                                                                         <c:choose>
-                                                                                            <c:when test="${kragoalOtherActivity.activity eq 'Average'}">
+                                                                                            <c:when test="${kragoalOtherActivity.activity eq '2'}">
 
-                                                                                                <option value="Average" selected="">Average</option>
+                                                                                                <option value="2" selected="">Partially Meets Expectations</option>
                                                                                             </c:when>
                                                                                             <c:otherwise>
 
-                                                                                                <option value="Average">Average</option>
+                                                                                                <option value="2">Partially Meets Expectations</option>
                                                                                             </c:otherwise>
                                                                                         </c:choose>
                                                                                         <c:choose>
-                                                                                            <c:when test="${kragoalOtherActivity.activity eq 'Needs Improvement'}">
+                                                                                            <c:when test="${kragoalOtherActivity.activity eq '1'}">
 
-                                                                                                <option value="Needs Improvement" selected="">Needs Improvement</option>
+                                                                                                <option value="1" selected="">Does Not Meet Expectations</option>
                                                                                             </c:when>
                                                                                             <c:otherwise>
 
-                                                                                                <option value="Needs Improvement">Needs Improvement</option>
+                                                                                                <option value="1">Does Not Meet Expectations</option>
                                                                                             </c:otherwise>
                                                                                         </c:choose>
                                                                                     </select>
@@ -1046,11 +1046,11 @@
                                                                     <td id="">
                                                                         <select id="activity1" name="activity1" class="form-control saveRequried" style="margin: 0px;width: 115px;">
                                                                             <option value="">--SELECT--</option>
-                                                                            <option value="Excellent">Excellent</option>
-                                                                            <option value="Very Good">Very Good</option>
-                                                                            <option value="Good">Good</option>
-                                                                            <option value="Average">Average</option>
-                                                                            <option value="Needs Improvement">Needs Improvement</option>
+                                                                            <option value="5">Far Exceeds Expectations</option>
+                                                                            <option value="4">Exceeds Expectations</option>
+                                                                            <option value="3">Meets Expectations</option>
+                                                                            <option value="2">Partially Meets Expectations</option>
+                                                                            <option value="1">Does Not Meet Expectations</option>
                                                                         </select>
                                                                     </td>
 
@@ -2057,12 +2057,34 @@
                                         <div class="box-body no-padding">
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label class="col-sm-5 control-label"><b>Final Score</b></label>
-                                                        <div class="col-sm-2">
-                                                            <input type="Text" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscoreForemployee}" onchange="performancefinalScoreRatingsEmployee();" class="form-control" readonly>
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group text-center">
+                                                                <label class="control-label"><b>KRA Score</b></label>&nbsp;&nbsp;
+                                                                <input type="number" id="totalScore" name="totalScore" value="${totalScoreForemployee}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 form-group text-center">
+                                                            <div class="form-group">
+                                                                <label class="control-label"><b>WLB Score</b></label>&nbsp;&nbsp;
+                                                                <input type="number" id="behaviorsEndyearTotalscore" name="behaviorsEndyearTotalscore" value="${behaviorsEndyearTotalscoreForemp}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 form-group text-center">
+                                                            <div class="form-group">
+                                                                <label class="control-label"><b>Final Score</b></label>&nbsp;&nbsp;
+                                                                <input type="Text" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscoreForemployee}" onchange="performancefinalScoreRatingsEmployee();" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
+                                                                <!--<input type="number" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">-->
+                                                            </div>
                                                         </div>
                                                     </div>
+
+                                                    <!--                                                    <div class="form-group">
+                                                                                                            <label class="col-sm-5 control-label"><b>Final Score</b></label>
+                                                                                                            <div class="col-sm-2">
+                                                                                                                <input type="Text" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscoreForemployee}" onchange="performancefinalScoreRatingsEmployee();" class="form-control" readonly>
+                                                                                                            </div>
+                                                                                                        </div>-->
 
                                                     <div class="table-responsive">
                                                         <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center">
@@ -2107,7 +2129,12 @@
                                                     </div>
 
                                                 </div><!-- /.col -->
-
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label"><b>Activity/Project Performance</b></label>
+                                                    <div class="col-sm-2">
+                                                        <input type="Text" id="" name="" value="${empActivityScore}"  class="form-control" readonly>
+                                                    </div>
+                                                </div>
                                                 <!-- /.col -->
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->

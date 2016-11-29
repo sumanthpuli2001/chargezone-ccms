@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.bul.zydex.service;
+ package com.bul.zydex.service;
 
 import java.util.List;
 

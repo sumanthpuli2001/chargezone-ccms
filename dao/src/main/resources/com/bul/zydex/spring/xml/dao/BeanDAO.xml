@@ -136,7 +136,7 @@
     <bean id="appraisalPerformanceIndividualDevelopmentPlanDAO1" class="com.bul.zydex.dao.appraisalPerformance.AppraisalPerformanceIndividualDevelopmentPlanDAOImpl" parent="sessionFactoryConfig" />
     <!--AppraisalPerformanceBehaviors-->
     <bean id="appraisalPerformanceBehaviorsDAO1" class="com.bul.zydex.dao.appraisalPerformance.AppraisalPerformanceBehaviorsDAOImpl" parent="sessionFactoryConfig" />
-
+    
     <!--expenseReconsilation-->
     <bean id="expenseReconsilationDAO1" class="com.bul.zydex.dao.expense.ExpenseReconsilationDAOImpl" parent="sessionFactoryConfig" />
 
@@ -166,4 +166,7 @@
     <bean id="employeePunchForMobileAppDAO1" class="com.bul.zydex.dao.mobileapp.EmployeePunchForMobileAppDAOImpl" parent="sessionFactoryConfig" />
     
     <bean id="urlMasterDAO1" class="com.bul.zydex.dao.url.UrlMasterDAOImpl" parent="sessionFactoryConfig"/>
+    <bean id="pmpFormStatusMasterDAO1" class="com.bul.zydex.dao.PmpFormStatusMaster.PmpFormStatusMasterDAOImpl" parent="sessionFactoryConfig"/>
+    <bean id="registerMobForPunchDAO1" class="com.bul.zydex.dao.RegisterMobForPunch.RegisterMobForPunchDAOImpl" parent="sessionFactoryConfig"/>
+   
 </beans>

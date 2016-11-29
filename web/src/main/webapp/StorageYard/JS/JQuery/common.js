@@ -37,7 +37,12 @@ window.setTimeout(function () {
 }, 8000);
 //==============================================================//
 function changeReadonly(id) {
-//    alert("hellouuuuu"+id);
+//    alert("hellouuuuu" + id);
+//    var str = id;
+//    alert("str" + str);
+//    var res = str.split("EditByEmployee"+14);
+////    var abc = id;
+//    alert("res==" + res);
     var kra = document.getElementById('kraGoal' + id);
     var metric = document.getElementById('metric' + id);
     var midYear = document.getElementById('midYearDiv' + id);

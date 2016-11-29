@@ -290,6 +290,7 @@
     <bean id="appraisalPerformanceActivitiesService1" class="com.bul.zydex.service.appraisalPerformance.AppraisalPerformanceActivitiesServiceImpl">
         <property name="appraisalPerformanceActivitiesDAO" ref="appraisalPerformanceActivitiesDAO1"/>
     </bean>
+  
     <!--ExpenseReconsilation-->
     <bean id="expenseReconsilationService1" class="com.bul.zydex.service.expense.ExpenseReconsilationServiceImpl">
         <property name="expenseReconsilationDAO" ref="expenseReconsilationDAO1"/>
@@ -340,6 +341,13 @@
     
     <bean id="urlMasterService1" class="com.bul.zydex.service.url.UrlMasterServiceImpl">
         <property name="urlMasterDAO" ref="urlMasterDAO1"/>
+    </bean>  
+   
+    <bean id="pmpFormStatusMasterService1" class="com.bul.zydex.service.PmpFormStatusMaster.PmpFormStatusMasterServiceImpl">
+        <property name="pmpFormStatusMasterDAO" ref="pmpFormStatusMasterDAO1"/>
+    </bean>  
+    <bean id="registerMobForPunchService1" class="com.bul.zydex.service.RegisterMobForPunch.RegisterMobForPunchServiceImpl">
+        <property name="registerMobForPunchDAO" ref="registerMobForPunchDAO1"/>
     </bean>  
     <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
         <property name="beanNames">

@@ -72,6 +72,7 @@
   <table-filter match-name="improvement_goal"/>
   <table-filter match-name="probation_to_confirmation"/>
   <table-filter match-name="goal_resource_management"/>
+  <!--<table-filter match-name="appraisal_kra_activity"/>-->
   <table-filter match-name="query_type"/>
   <table-filter match-name="travel_detail"/>
   <table-filter match-name="zydex_location_master"/>

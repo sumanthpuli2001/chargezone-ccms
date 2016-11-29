@@ -125,6 +125,12 @@
         <property name="idpReworkComment" type="string">
             <column name="idp_rework_comment" length="16777215" />
         </property>
+        <property name="empActivityScore" type="string">
+            <column name="emp_activity_score" length="45" />
+        </property>
+        <property name="managerActivityScore" type="string">
+            <column name="manager_activity_score" length="45" />
+        </property>
         <set name="appraisalPerformanceBehaviorses" inverse="true">
             <key>
                 <column name="appraisal_performance_id" not-null="true" />

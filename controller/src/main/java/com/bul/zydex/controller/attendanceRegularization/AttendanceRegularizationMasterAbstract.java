@@ -13,6 +13,7 @@ import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeDatetimeData;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.EmployeePunchForMobileApp;
 import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.OverTimeMaster;
@@ -21,6 +22,7 @@ import com.bul.zydex.service.attendanceRegularization.AttendanceRegularizationMa
 import com.bul.zydex.service.attendanceRegularization.TimeAttandanceFlaxibleMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
 import com.bul.zydex.service.level.LevelMasterService;
+import com.bul.zydex.service.mobileapp.EmployeePunchForMobileAppService;
 import com.bul.zydex.service.overTime.OverTimeMasterService;
 import com.bul.zydex.service.shift.EmployeeDatetimeDataService;
 import com.bul.zydex.service.shift.EmployeeShiftDataService;
@@ -42,6 +44,7 @@ public class AttendanceRegularizationMasterAbstract extends CustomAbstract {
     protected EmployeeLeaveBalanceService<EmployeeLeaveBalance> employeeLeaveBalanceService;
     protected OverTimeMasterService<OverTimeMaster> overTimeMasterService;
     protected Validator attendanceRegularizationValidator;
+    protected EmployeePunchForMobileAppService<EmployeePunchForMobileApp> employeePunchForMobileAppService;
 
     public TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> getTimeAttandanceFlaxibleMasterService() {
         return timeAttandanceFlaxibleMasterService;
@@ -106,6 +109,15 @@ public class AttendanceRegularizationMasterAbstract extends CustomAbstract {
     public void setOverTimeMasterService(OverTimeMasterService<OverTimeMaster> overTimeMasterService) {
         this.overTimeMasterService = overTimeMasterService;
     }
+
+    public EmployeePunchForMobileAppService<EmployeePunchForMobileApp> getEmployeePunchForMobileAppService() {
+        return employeePunchForMobileAppService;
+    }
+
+    public void setEmployeePunchForMobileAppService(EmployeePunchForMobileAppService<EmployeePunchForMobileApp> employeePunchForMobileAppService) {
+        this.employeePunchForMobileAppService = employeePunchForMobileAppService;
+    }
+    
 
     public void mailSendArApply(HttpServletRequest request) throws Exception {
 

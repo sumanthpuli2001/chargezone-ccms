@@ -166,6 +166,11 @@
                     <input type="hidden" id="pmpmidyearstatus" name="pmpmidyearstatus" value="${pmpmidyearstatus}">
                     <input type="hidden" id="pmpendyearstatus" name="pmpendyearstatus" value="${pmpendyearstatus}">
                     <input type="hidden" id="pmpasManager" name="pmpasManager" value="${pmpasManager}">
+                    
+                    <!--compentency Status Manager-->
+                    <input type="hidden" id="compentencyStartYearStatus" name="compentencyStartYearStatus" value="${compentencyStartYearStatus}">
+                    <input type="hidden" id="compentencyMidYearStatus" name="compentencyMidYearStatus" value="${compentencyMidYearStatus}">
+                    <input type="hidden" id="compentencyEndYearStatus" name="compentencyEndYearStatus" value="${compentencyEndYearStatus}">
 
 
                     <input type="hidden" name="tflagId" id="tflagId" value="${Tflag}">

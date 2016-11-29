@@ -3,10 +3,20 @@ package com.bul.zydex.webservice;
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeePunchForMobileApp;
+import com.bul.zydex.model.EmployeeShiftData;
+import com.bul.zydex.model.RegisterMobForPunch;
+import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
+import com.bul.zydex.model.ShiftMaster;
+import com.bul.zydex.model.TempShiftAssignMaster;
 import com.bul.zydex.model.UserRightMaster;
+import com.bul.zydex.service.RegisterMobForPunch.RegisterMobForPunchService;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
 import com.bul.zydex.service.mobileapp.EmployeePunchForMobileAppService;
+import com.bul.zydex.service.shift.EmployeeShiftDataService;
+import com.bul.zydex.service.shift.ShiftGenerateMonthlyScheduleService;
+import com.bul.zydex.service.shift.ShiftMasterService;
+import com.bul.zydex.service.shift.TemporaryShiftAssignService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -26,6 +36,45 @@ import org.json.JSONObject;
 public abstract class EmployeePunchAbstract extends CustomAbstract {
 
     protected EmployeePunchForMobileAppService<EmployeePunchForMobileApp> employeePunchForMobileAppService;
+    protected RegisterMobForPunchService<RegisterMobForPunch> registerMobForPunchService;
+    
+    protected EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService;
+    protected ShiftGenerateMonthlyScheduleService<ShiftGenerateMonthlySchedule> shiftGenerateMonthlyScheduleService;
+    protected TemporaryShiftAssignService<TempShiftAssignMaster> temporaryShiftAssignService;
+    protected ShiftMasterService<ShiftMaster> shiftMasterService;
+
+    public TemporaryShiftAssignService<TempShiftAssignMaster> getTemporaryShiftAssignService() {
+        return temporaryShiftAssignService;
+    }
+
+    public void setTemporaryShiftAssignService(TemporaryShiftAssignService<TempShiftAssignMaster> temporaryShiftAssignService) {
+        this.temporaryShiftAssignService = temporaryShiftAssignService;
+    }
+
+    public ShiftMasterService<ShiftMaster> getShiftMasterService() {
+        return shiftMasterService;
+    }
+
+    public void setShiftMasterService(ShiftMasterService<ShiftMaster> shiftMasterService) {
+        this.shiftMasterService = shiftMasterService;
+    }
+    public EmployeeShiftDataService<EmployeeShiftData> getEmployeeShiftDataService() {
+        return employeeShiftDataService;
+    }
+
+    public void setEmployeeShiftDataService(EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService) {
+        this.employeeShiftDataService = employeeShiftDataService;
+    }
+
+    public ShiftGenerateMonthlyScheduleService<ShiftGenerateMonthlySchedule> getShiftGenerateMonthlyScheduleService() {
+        return shiftGenerateMonthlyScheduleService;
+    }
+
+    public void setShiftGenerateMonthlyScheduleService(ShiftGenerateMonthlyScheduleService<ShiftGenerateMonthlySchedule> shiftGenerateMonthlyScheduleService) {
+        this.shiftGenerateMonthlyScheduleService = shiftGenerateMonthlyScheduleService;
+    }
+    
+    
 
     public EmployeePunchForMobileAppService<EmployeePunchForMobileApp> getEmployeePunchForMobileAppService() {
         return employeePunchForMobileAppService;
@@ -35,6 +84,15 @@ public abstract class EmployeePunchAbstract extends CustomAbstract {
         this.employeePunchForMobileAppService = employeePunchForMobileAppService;
         
     }
+
+    public RegisterMobForPunchService<RegisterMobForPunch> getRegisterMobForPunchService() {
+        return registerMobForPunchService;
+    }
+
+    public void setRegisterMobForPunchService(RegisterMobForPunchService<RegisterMobForPunch> registerMobForPunchService) {
+        this.registerMobForPunchService = registerMobForPunchService;
+    }
+    
 
      public JSONObject doPost(HttpServletRequest request)
             throws ServletException, IOException, JSONException {

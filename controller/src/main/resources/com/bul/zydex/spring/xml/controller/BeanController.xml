@@ -411,6 +411,8 @@
         <property name="appraisalPerformanceActivitiesService" ref="appraisalPerformanceActivitiesService1" />
         <property name="updateAppraisalPerformanceActivitiesService" ref="updateAppraisalPerformanceActivitiesService1" />
         <property name="appraisalkraActivityService" ref="appraisalkraActivityService1" />
+        <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1" />
+        
     </bean>
     <!--Appraisal Filling Data-->
     <bean id="appraisalFillingDataController1" class="com.bul.zydex.controller.appraisalPerformance.AppraisalFillingDataController" parent="controllerConfig" >
@@ -438,6 +440,7 @@
         <property name="attendanceRegularizationValidator" ref="attendanceRegularizationValidator1" />
         <property name="timeAttandanceFlaxibleMasterService" ref="timeAttandanceFlaxibleMasterService1" />
         <property name="levelMasterService" ref="levelMasterService1" />
+        <property name="employeePunchForMobileAppService" ref="employeePunchForMobileAppService1" />
     </bean>
     <bean id="timeAttandanceFlaxibleMasterController1" class="com.bul.zydex.controller.attendanceRegularization.TimeAttandanceFlaxibleMasterController" parent="controllerConfig" >
         <property name="timeAttandanceFlaxibleMasterService" ref="timeAttandanceFlaxibleMasterService1" />
@@ -517,12 +520,24 @@
         <property name="userRightMasterService" ref="userRightMasterService1" />
         <property name="holidayMasterService" ref="holidayMasterService1"/>
         <property name="cOffLeaveMasterService" ref="cOffLeaveMasterService1"/>
+        <property name="levelMasterService" ref="levelMasterService1"/>
+        <property name="locationMasterService" ref="locationMasterService1"/>
+        <property name="travelRequestMasterService" ref="travelRequestMasterService1"/>
+        <property name="expenseMasterService" ref="expenseMasterService1"/>
+        <property name="itServiceRequestService" ref="itServiceRequestService1"/>
+        <property name="hrServiceRequestService" ref="hrServiceRequestService1"/>
+        
     </bean>
     <bean id="emailAddMasterController1" class="com.bul.zydex.controller.EmailAddMasterController" parent="controllerConfig" >
         <property name="emailAddMasterService" ref="emailAddMasterService1" />
     </bean>
     <bean id="employeePunch1" class="com.bul.zydex.webservice.EmployeePunch" parent="controllerConfig" >
         <property name="employeePunchForMobileAppService" ref="employeePunchForMobileAppService1" />
+        <property name="registerMobForPunchService" ref="registerMobForPunchService1" />
+        <property name="employeeShiftDataService" ref="employeeShiftDataService1" />
+        <property name="shiftGenerateMonthlyScheduleService" ref="shiftGenerateMonthlyScheduleService1" />
+        <property name="temporaryShiftAssignService" ref="temporaryShiftAssignService1" />
+        <property name="shiftMasterService" ref="shiftMasterService1" />
     </bean>
     <bean id="expenseReport1" class="com.bul.zydex.webservice.ExpenseReport" parent="controllerConfig" >
         <property name="expenseMasterService" ref="expenseMasterService1" />
@@ -551,9 +566,25 @@
     <bean id="expenseWebService1" class="com.bul.zydex.webservice.Expense.ExpenseWebService" parent="controllerConfig">
         
     </bean>
+    <bean id="itWebService1" class="com.bul.zydex.webservice.ItWebService" parent="controllerConfig">
+        <property name="itRequestTypeService" ref="itRequestTypeService1" />
+        <property name="itServiceRequestService" ref="itServiceRequestService1" />
+    </bean>
+    <bean id="hrWebService1" class="com.bul.zydex.webservice.HrWebService" parent="controllerConfig">
+        <property name="hrServiceRequestService" ref="hrServiceRequestService1" />
+        <property name="queryTypeService" ref="queryTypeService1" />
+        
+    </bean>
     
     <bean id="urlMasterController1" class="com.bul.zydex.controller.url.UrlMasterController" parent="controllerConfig" >
         <property name="urlMasterService" ref="urlMasterService1"/>
+    </bean>
+    <bean id="pmpFormStatusMasterController1" class="com.bul.zydex.controller.PmpFormStatusMaster.PmpFormStatusMasterController" parent="controllerConfig" >
+        <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1"/>
+        <property name="appraisalPerformanceService" ref="appraisalPerformanceService1"/>
+        <property name="appraisalPerformanceKraService" ref="appraisalPerformanceKraService1"/>
+        <property name="appraisalPerformanceActivitiesService" ref="appraisalPerformanceActivitiesService1"/>
+        
     </bean>
 </beans>
  

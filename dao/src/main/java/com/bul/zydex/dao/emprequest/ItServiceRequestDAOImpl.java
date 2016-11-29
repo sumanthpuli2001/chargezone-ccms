@@ -41,7 +41,7 @@ public class ItServiceRequestDAOImpl<T> extends GenericsDAOImpl<T> implements It
     public List<?> readByEmpId(T object) {
         ItServiceRequest itServiceRequest = (ItServiceRequest) object;
         String query = "";
-        query += " SELECT a.id, a.itRequestType ,a.status "
+        query += " SELECT a.id, a.itRequestType ,a.status,a.problemDetail"
                 + " From ItServiceRequest a "
                 + " where a.employeeMasterByEmployeeMasterId = " + itServiceRequest.getEmployeeMasterByEmployeeMasterId().getId()
                 //                + " And a.status in (1,2,4,9) "

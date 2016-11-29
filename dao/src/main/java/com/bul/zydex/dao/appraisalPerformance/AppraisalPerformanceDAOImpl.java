@@ -282,7 +282,8 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
         if (null != appraisalPerformanceMaster.getBehaviorsMidyearOtherremark() && !"".equals(appraisalPerformanceMaster.getBehaviorsMidyearOtherremark())) {
             condition += " AND  d.id = " + appraisalPerformanceMaster.getBehaviorsMidyearOtherremark();
         }
-        query += " SELECT a.id,b.id, b.employeeId, b.employeeName, d.departmentName,c.designationName,a.behaviorsYear,a.behaviorsFinalscore,f.level,a.totalScore,a.behaviorsEndyearTotalscore"
+        query += " SELECT a.id,b.id, b.employeeId, b.employeeName, d.departmentName,c.designationName,a.behaviorsYear,a.behaviorsFinalscore,f.level,a.totalScore,"
+                + "a.behaviorsEndyearTotalscore,(SELECT employeeName from EmployeeMaster Where id=b.reportingManagerLevel1),a.empActivityScore"
                 + " FROM AppraisalPerformanceMaster a "
                 + " LEFT JOIN a.employeeMaster b "
                 + " LEFT JOIN b.departmentMaster d "

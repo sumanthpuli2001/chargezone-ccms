@@ -166,6 +166,10 @@
                                                         <c:set var="pl" value="0"></c:set>
                                                         <c:set var="ar" value="0"></c:set>
                                                         <c:set var="tr" value="0"></c:set>
+                                                        <c:set var="ptl" value="0"></c:set>
+                                                        <c:set var="mtl" value="0"></c:set>
+                                                        <c:set var="coff" value="0"></c:set>
+                                                        <c:set var="lwp" value="0"></c:set>
                                                         <c:forEach var="employeeMasterList" items="${empDetail}">
                                                             <%--<c:choose>--%>
                                                             <%--<c:when test="${empty map[employeeMasterList[38]]}">--%>
@@ -213,6 +217,18 @@
                                                                                     </c:if>
                                                                                     <c:if test="${fn:contains(list[1], 'Sick Leave')}">
                                                                                         <c:set var="sl" value="${sl + 1}"></c:set>
+                                                                                    </c:if>
+                                                                                    <c:if test="${fn:contains(list[1], 'Maternity Leave')}">
+                                                                                        <c:set var="mtl" value="${mtl + 1}"></c:set>
+                                                                                    </c:if>
+                                                                                    <c:if test="${fn:contains(list[1], 'Paternity Leave')}">
+                                                                                        <c:set var="ptl" value="${ptl + 1}"></c:set>
+                                                                                    </c:if>
+                                                                                    <c:if test="${fn:contains(list[1], 'C Off Leave')}">
+                                                                                        <c:set var="coff" value="${coff + 1}"></c:set>
+                                                                                    </c:if>
+                                                                                    <c:if test="${fn:contains(list[1], 'Leave Without Pay')}">
+                                                                                        <c:set var="lwp" value="${lwp + 1}"></c:set>
                                                                                     </c:if>
 
                                                                                 <th style="text-align: center;">${list[1]}</th>
@@ -378,6 +394,18 @@
                                                                                                 <c:if test="${fn:contains(leave1[0], 'Sick Leave')}">
                                                                                                     <c:set var="sl" value="${sl + 0.5}"></c:set>
                                                                                                 </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'Maternity Leave')}">
+                                                                                                    <c:set var="mtl" value="${mtl + 0.5}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'Paternity Leave')}">
+                                                                                                    <c:set var="ptl" value="${ptl + 0.5}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'C Off Leave')}">
+                                                                                                    <c:set var="coff" value="${coff + 0.5}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'Leave Without Pay')}">
+                                                                                                    <c:set var="lwp" value="${lwp + 0.5}"></c:set>
+                                                                                                </c:if>
                                                                                             <th style="text-align: center;">${leave1[0]}</th>
                                                                                             </c:when>
                                                                                             <c:when test="${fn:contains(leave1[0], 'AB')}">
@@ -520,6 +548,18 @@
                                                                                                 <c:if test="${fn:contains(leave1[0], 'Sick Leave')}">
                                                                                                     <c:set var="sl" value="${sl + 0.5}"></c:set>
                                                                                                 </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'Maternity Leave')}">
+                                                                                                    <c:set var="mtl" value="${mtl + 0.5}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'Paternity Leave')}">
+                                                                                                    <c:set var="ptl" value="${ptl + 0.5}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'C Off Leave')}">
+                                                                                                    <c:set var="coff" value="${coff + 0.5}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(list[1], 'Leave Without Pay')}">
+                                                                                                    <c:set var="lwp" value="${lwp + 0.5}"></c:set>
+                                                                                                </c:if>
                                                                                             <th style="text-align: center;">${leave1[0]}</th>
                                                                                             </c:when>
                                                                                             <c:when test="${fn:contains(leave1[0], 'AR')}">
@@ -626,6 +666,18 @@
                                                                             <c:if test="${tr ne 0}">
                                                                             <th style="color: blue;text-align: center;">TR</th>
                                                                             </c:if>
+                                                                            <c:if test="${coff ne 0}">
+                                                                            <th style="color: blue;text-align: center;">C-OFF</th>
+                                                                            </c:if>
+                                                                            <c:if test="${ptl ne 0}">
+                                                                            <th style="color: blue;text-align: center;">PTL</th>
+                                                                            </c:if>
+                                                                            <c:if test="${mtl ne 0}">
+                                                                            <th style="color: blue;text-align: center;">MTL</th>
+                                                                            </c:if>
+                                                                            <c:if test="${lwp ne 0}">
+                                                                            <th style="color: blue;text-align: center;">LWP</th>
+                                                                            </c:if>
                                                                     </tr>
                                                                     <tr>
                                                                         <c:set var="shortL" value="${shl/2}"/>
@@ -661,6 +713,18 @@
                                                                         </c:if>
                                                                         <c:if test="${tr ne 0}">
                                                                             <td style="text-align: center;">${tr}</td>
+                                                                        </c:if>
+                                                                        <c:if test="${coff ne 0}">
+                                                                            <th style="color: blue;text-align: center;">${coff}</th>
+                                                                        </c:if>
+                                                                        <c:if test="${ptl ne 0}">
+                                                                            <th style="color: blue;text-align: center;">${ptl}</th>
+                                                                        </c:if>
+                                                                        <c:if test="${mtl ne 0}">
+                                                                            <th style="color: blue;text-align: center;">${mtl}</th>
+                                                                        </c:if>
+                                                                        <c:if test="${lwp ne 0}">
+                                                                            <th style="color: blue;text-align: center;">${lwp}</th>
                                                                         </c:if>
 
                                                                     </tr>
@@ -710,44 +774,44 @@
     </div>
     <script type="text/javascript">
         $('.form_datetime').datetimepicker({
-        //language:  'fr',         weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
+            //language:  'fr',         weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
             todayHighlight: 1,
             startView: 2,
             minView: 2,
-                forceParse: 0,
-                endDate: new Date()
+            forceParse: 0,
+            endDate: new Date()
         });</script>
 
     <script>
-                jQuery.noConflict();
-                jQuery(document).ready(function () {
-        jQuery("#employeeMasterId").tokenInput(${list}, {
-            preventDuplicates: true,
-            noResultsText: "No Result",
-                tokenLimit: "1",
-                    searchingText: "Searching ... .. .",
-                    });
-        });
-    </script>
-    <script>
-                jQuery.noConflict();
-                jQuery(document).ready(function () {
-        jQuery("#zydexLocationId").tokenInput(${zydexLocationList}, {
-            preventDuplicates: true,
+        jQuery.noConflict();
+        jQuery(document).ready(function () {
+            jQuery("#employeeMasterId").tokenInput(${list}, {
+                preventDuplicates: true,
                 noResultsText: "No Result",
                 tokenLimit: "1",
-                    searchingText: "Searching ... .. .",
-                    });
+                searchingText: "Searching ... .. .",
+            });
         });
     </script>
     <script>
         jQuery.noConflict();
-                jQuery(document).ready(function () {
-        jQuery("#levelId").tokenInput(${levelList}, {
+        jQuery(document).ready(function () {
+            jQuery("#zydexLocationId").tokenInput(${zydexLocationList}, {
                 preventDuplicates: true,
-            noResultsText: "No Result",
+                noResultsText: "No Result",
+                tokenLimit: "1",
+                searchingText: "Searching ... .. .",
+            });
+        });
+    </script>
+    <script>
+        jQuery.noConflict();
+        jQuery(document).ready(function () {
+            jQuery("#levelId").tokenInput(${levelList}, {
+                preventDuplicates: true,
+                noResultsText: "No Result",
                 tokenLimit: "1",
                 searchingText: "Searching ... .. .",
             });

@@ -15,5 +15,7 @@ import java.util.List;
 public interface HotelAccommodationService<T> extends GenericsService<T> {
 
     public List<?> readAccommodationDetail(T object);
+    
+    public List<?> readByTravelId(int id);
 
 }

@@ -13,7 +13,7 @@ import java.util.List;
  * @author AJAY
  */
 public interface TravelDetailService<T> extends GenericsService<T> {
-
     public List<?> readTravelDetail(T object);
-
+    
+    public List<?> readByTravelId(int id);
 }

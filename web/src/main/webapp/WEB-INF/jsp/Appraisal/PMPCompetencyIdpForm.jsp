@@ -187,6 +187,10 @@
                     <input type="hidden" id="pmpmidyearstatus" name="pmpmidyearstatus" value="${pmpmidyearstatus}">
                     <input type="hidden" id="pmpendyearstatus" name="pmpendyearstatus" value="${pmpendyearstatus}">
                     <input type="hidden" id="pmpasEmployee" name="pmpasEmployee" value="${pmpasEmployee}">
+                    <!--compentency Status-->
+                    <input type="hidden" id="compentencyStartYearStatus" name="compentencyStartYearStatus" value="${compentencyStartYearStatus}">
+                    <input type="hidden" id="compentencyMidYearStatus" name="compentencyMidYearStatus" value="${compentencyMidYearStatus}">
+                    <input type="hidden" id="compentencyEndYearStatus" name="compentencyEndYearStatus" value="${compentencyEndYearStatus}">
 
                 </div>
             </section>
@@ -562,11 +566,11 @@
 //        var flag11 = document.getElementById("flagId").value;
 //        var employeeStatusVar = document.getElementById("employeeStatus").value;
         var employeeStatusVar = document.getElementById("empCompetencyStatus").value;
-        alert("DhDDjDD"+employeeStatusVar);
+//        alert("DhDDjDD"+employeeStatusVar);
 //        var flagmid = document.getElementById("flagMidId").value;
 //        var flagEndId = document.getElementById("flagEndId").value;
         if (employeeStatusVar === '1') {
-            alert("alal");
+//            alert("alal");
             $("#form1 :input").attr("disabled", true);
 
             $("#btn4").attr("disabled", false);

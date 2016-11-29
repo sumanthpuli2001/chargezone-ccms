@@ -1307,7 +1307,6 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                    }
 //                }
 //            }
-
 //            
             ///////////////////////////Individual Development Plan//////////////////////////////////
 ///////////////////////////Individual Development Plan change date 11/11/2016//////////////////////////////////
@@ -1448,7 +1447,6 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                            "Information : The Information is Submit Successfully.");
 //                }
 //            }
-
 //            
             //////////Behaviors///////////////
 //            AppraisalPerformanceBehaviors appraisalPerformanceBehaviors = new AppraisalPerformanceBehaviors();
@@ -1952,6 +1950,11 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             request.setAttribute("behaviorsEndyearTotalscore", behaviorsEndyearTotalscore);
         }
 
+        if (null != appraisalPerformanceMaster.getEmpActivityScore()) {
+            String empActivityScore = appraisalPerformanceMaster.getEmpActivityScore();
+            request.setAttribute("empActivityScore", empActivityScore);
+        }
+
 //        if (null != appraisalPerformanceMaster.getManagerStatus()) {
         int managerStatus = appraisalPerformanceMaster.getManagerStatus();
         request.setAttribute("managerStatus", managerStatus);
@@ -2107,7 +2110,6 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        request.setAttribute("midYearRemark", individualDevelopmentPlanList);
 //        request.setAttribute("endYearRemark", individualDevelopmentPlanList);
 //        request.setAttribute("individualDevelopmentPlanList", individualDevelopmentPlanList);
-
         //////////Behaviors///////////////
         AppraisalPerformanceBehaviors appraisalPerformanceBehaviors = new AppraisalPerformanceBehaviors();
         String behaviors = "";
@@ -2219,6 +2221,10 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         if (null != appraisalPerformanceMaster.getBehaviorsEndyearTotalscore()) {
             String behaviorsEndyearTotalscore = appraisalPerformanceMaster.getBehaviorsEndyearTotalscore();
             request.setAttribute("behaviorsEndyearTotalscore", behaviorsEndyearTotalscore);
+        }
+        if (null != appraisalPerformanceMaster.getManagerActivityScore()) {
+            String managerActivityScore = appraisalPerformanceMaster.getManagerActivityScore();
+            request.setAttribute("managerActivityScore", managerActivityScore);
         }
 //        if (null != appraisalPerformanceMaster.getManagerStatus()) {
         int managerStatus = appraisalPerformanceMaster.getManagerStatus();
@@ -2340,7 +2346,6 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        List<?> competencyEvaluationList = appraisalPerformanceCompetencyEvaluationService.readAppraisalPerformanceCompetencyEvaluationDetail(appraisalPerformanceCompetencyEvaluation);
 //
 //        request.setAttribute("competencyEvaluationList", competencyEvaluationList);
-
 //        //Individual Development Plan change by date 11/11/2016//
 //        AppraisalPerformanceIndividualDevelopmentPlan appraisalPerformanceIndividualDevelopmentPlan = new AppraisalPerformanceIndividualDevelopmentPlan();
 //        appraisalPerformanceIndividualDevelopmentPlan.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
@@ -2357,7 +2362,6 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        request.setAttribute("midYearRemark", individualDevelopmentPlanList);
 //        request.setAttribute("endYearRemark", individualDevelopmentPlanList);
 //        request.setAttribute("individualDevelopmentPlanList", individualDevelopmentPlanList);
-
         //////////Behaviors///////////////
         AppraisalPerformanceBehaviors appraisalPerformanceBehaviors = new AppraisalPerformanceBehaviors();
         String behaviors = "";
@@ -3501,6 +3505,13 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 appraisalPerformanceMaster.setBehaviorsFinalscore(null);
             }
 
+            String managerActivityScore = request.getParameter("managerActivityScore");
+            if (!"".equals(managerActivityScore) && null != managerActivityScore) {
+                appraisalPerformanceMaster.setManagerActivityScore(managerActivityScore);
+            } else {
+                appraisalPerformanceMaster.setManagerActivityScore(null);
+            }
+
 //            appraisalPerformanceService.update(appraisalPerformanceMaster);
             String pmpstatusId = "";
             String btn1 = request.getParameter("submit");
@@ -3562,6 +3573,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     appraisalPerformanceMaster.setBehaviorsFinalscoreForemployee(behaviorsFinalscore);
                 } else {
                     appraisalPerformanceMaster.setBehaviorsFinalscoreForemployee(null);
+                }
+//                Activity Score
+                if (!"".equals(managerActivityScore) && null != managerActivityScore) {
+                    appraisalPerformanceMaster.setEmpActivityScore(managerActivityScore);
+                } else {
+                    appraisalPerformanceMaster.setEmpActivityScore(null);
                 }
                 if (firsthalf.equals("true")) {
                     pmpFormStatusMaster.setStartYearStatus(Boolean.TRUE);
@@ -4381,6 +4398,10 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             String behaviorsEndyearTotalscore = appraisalPerformanceMaster.getBehaviorsEndyearTotalscore();
             request.setAttribute("behaviorsEndyearTotalscore", behaviorsEndyearTotalscore);
         }
+        if (null != appraisalPerformanceMaster.getManagerActivityScore()) {
+            String managerActivityScore = appraisalPerformanceMaster.getManagerActivityScore();
+            request.setAttribute("managerActivityScore", managerActivityScore);
+        }
 //        if (null != appraisalPerformanceMaster.getManagerStatus()) {
         int managerStatus = appraisalPerformanceMaster.getManagerStatus();
         request.setAttribute("managerStatus", managerStatus);
@@ -5029,6 +5050,10 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 String totalScore = appraisalPerformanceMaster.getTotalScore();
                 request.setAttribute("totalScore", totalScore);
             }
+            if (null != appraisalPerformanceMaster.getTotalScoreForemployee()) {
+                String totalScoreForemployee = appraisalPerformanceMaster.getTotalScoreForemployee();
+                request.setAttribute("totalScoreForemployee", totalScoreForemployee);
+            }
             // ==========================Mid Year=======================================================//
             if (null != appraisalPerformanceMaster.getEmpMidyearSelfassOtheractivty()) {
                 String empMidyearSelfassOtheractivty = appraisalPerformanceMaster.getEmpMidyearSelfassOtheractivty();
@@ -5069,6 +5094,10 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 String behaviorsEndyearTotalscore = appraisalPerformanceMaster.getBehaviorsEndyearTotalscore();
                 request.setAttribute("behaviorsEndyearTotalscore", behaviorsEndyearTotalscore);
             }
+            if (null != appraisalPerformanceMaster.getBehaviorsEndyearTotalscoreForemp()) {
+                String behaviorsEndyearTotalscoreForemp = appraisalPerformanceMaster.getBehaviorsEndyearTotalscoreForemp();
+                request.setAttribute("behaviorsEndyearTotalscoreForemp", behaviorsEndyearTotalscoreForemp);
+            }
 //        if (null != appraisalPerformanceMaster.getManagerStatus()) {
             int managerStatus = appraisalPerformanceMaster.getManagerStatus();
             request.setAttribute("managerStatus", managerStatus);
@@ -5080,6 +5109,15 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             if (null != appraisalPerformanceMaster.getBehaviorsFinalscore() && !"".equals(appraisalPerformanceMaster.getBehaviorsFinalscore())) {
                 String behaviorsFinalscore = appraisalPerformanceMaster.getBehaviorsFinalscore();
                 request.setAttribute("behaviorsFinalscore", behaviorsFinalscore);
+            }
+            if (null != appraisalPerformanceMaster.getBehaviorsFinalscoreForemployee() && !"".equals(appraisalPerformanceMaster.getBehaviorsFinalscoreForemployee())) {
+                String behaviorsFinalscoreForemployee = appraisalPerformanceMaster.getBehaviorsFinalscoreForemployee();
+                request.setAttribute("behaviorsFinalscoreForemployee", behaviorsFinalscoreForemployee);
+            }
+
+            if (null != appraisalPerformanceMaster.getEmpActivityScore()) {
+                String empActivityScore = appraisalPerformanceMaster.getEmpActivityScore();
+                request.setAttribute("empActivityScore", empActivityScore);
             }
 
             int year = Integer.parseInt(request.getParameter("year"));
@@ -5360,10 +5398,19 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             boolean pmpmidyearstatus = pmpFormStatusMaster.getMidYearStatus();
             boolean pmpendyearstatus = pmpFormStatusMaster.getEndYearStatus();
             boolean pmpasEmployee = pmpFormStatusMaster.getEmployeeSide();
+
+            boolean compentencyStartYearStatus = pmpFormStatusMaster.getCompentencyStartYearStatus();
+            boolean compentencyMidYearStatus = pmpFormStatusMaster.getCompentencyMidYearStatus();
+            boolean compentencyEndYearStatus = pmpFormStatusMaster.getCompentencyEndYearStatus();
+
             request.setAttribute("pmpstartyearstatus", pmpstartyearstatus);
             request.setAttribute("pmpmidyearstatus", pmpmidyearstatus);
             request.setAttribute("pmpendyearstatus", pmpendyearstatus);
             request.setAttribute("pmpasEmployee", pmpasEmployee);
+
+            request.setAttribute("compentencyStartYearStatus", compentencyStartYearStatus);
+            request.setAttribute("compentencyMidYearStatus", compentencyMidYearStatus);
+            request.setAttribute("compentencyEndYearStatus", compentencyEndYearStatus);
 
         }
 
@@ -6212,10 +6259,19 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             boolean pmpmidyearstatus = pmpFormStatusMaster.getMidYearStatus();
             boolean pmpendyearstatus = pmpFormStatusMaster.getEndYearStatus();
             boolean pmpasManager = pmpFormStatusMaster.getManagerSide();
+
+            boolean compentencyStartYearStatus = pmpFormStatusMaster.getCompentencyStartYearStatus();
+            boolean compentencyMidYearStatus = pmpFormStatusMaster.getCompentencyMidYearStatus();
+            boolean compentencyEndYearStatus = pmpFormStatusMaster.getCompentencyEndYearStatus();
+
             request.setAttribute("pmpstartyearstatus", pmpstartyearstatus);
             request.setAttribute("pmpmidyearstatus", pmpmidyearstatus);
             request.setAttribute("pmpendyearstatus", pmpendyearstatus);
             request.setAttribute("pmpasManager", pmpasManager);
+
+            request.setAttribute("compentencyStartYearStatus", compentencyStartYearStatus);
+            request.setAttribute("compentencyMidYearStatus", compentencyMidYearStatus);
+            request.setAttribute("compentencyEndYearStatus", compentencyEndYearStatus);
 
         }
 
@@ -6530,47 +6586,55 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             appraisalPerformanceCompetencyEvaluationService.create(appraisalPerformanceCompetencyEvaluation);
                         }
                     }
-                    boolean pmpFormStatusStart = false;
-                    boolean pmpFormStatusMid = false;
-                    boolean pmpFormStatusEnd = false;
+//                    boolean pmpFormStatusStart = false;
+//                    boolean pmpFormStatusMid = false;
+//                    boolean pmpFormStatusEnd = false;
+
+                    boolean compentencyStartYearStatus = false;
+                    boolean compentencyMidYearStatus = false;
+                    boolean compentencyEndYearStatus = false;
+
                     for (int d = 1; d <= subCompentencyCount; d++) {
 
                         ///////////////////PMP Status Master Start////////////////////////////
                         if ((!"".equals(compentencyStartYear) && null != compentencyStartYear) || (!"".equals(compentencyStartRemark) && null != compentencyStartRemark)) {
 
-                            pmpFormStatusStart = true;
+                            compentencyStartYearStatus = true;
                         }
                         if ((!"".equals(compentencyMidYear) && null != compentencyMidYear) || (!"".equals(compentencyMidRemark) && null != compentencyMidRemark)) {
 
-                            pmpFormStatusMid = true;
+                            compentencyMidYearStatus = true;
                         }
                         if ((!"".equals(compentencyEndYear) && null != compentencyEndYear) || (!"".equals(compentencyEndRemark) && null != compentencyEndRemark)) {
 
-                            pmpFormStatusEnd = true;
+                            compentencyEndYearStatus = true;
                         }
 
                     }
 
                     String pmpstatusId = "";
 //                    List<?> pmplist = pmpFormStatusMasterService.readByPmpformstatusStatus(userid);
-                List<?> pmplist = pmpFormStatusMasterService.readByPmpformstatusStatus("" + appraisalPerformanceMaster.getEmployeeMaster().getId());
+                    List<?> pmplist = pmpFormStatusMasterService.readByPmpformstatusStatus("" + appraisalPerformanceMaster.getEmployeeMaster().getId());
                     if (!pmplist.isEmpty()) {
                         pmpFormStatusMaster = (PmpFormStatusMaster) pmplist.get(0);
                         pmpstatusId = "" + pmpFormStatusMaster.getId();
                     }
                     appraisalPerformanceMaster.setEmployeeCompetencyStatus(0);
                     appraisalPerformanceMaster.setManagerCompetencyStatus(1);
-                    if (pmpFormStatusStart == true) {
-                        pmpFormStatusMaster.setStartYearStatus(Boolean.TRUE);
+                    if (compentencyStartYearStatus == true) {
+                        pmpFormStatusMaster.setCompentencyStartYearStatus(Boolean.TRUE);
                     }
-                    if (pmpFormStatusMid == true) {
-                        pmpFormStatusMaster.setMidYearStatus(Boolean.TRUE);
+                    if (compentencyMidYearStatus == true) {
+                        pmpFormStatusMaster.setCompentencyMidYearStatus(Boolean.TRUE);
                     }
-                    if (pmpFormStatusEnd == true) {
-                        pmpFormStatusMaster.setEndYearStatus(Boolean.TRUE);
+                    if (compentencyEndYearStatus == true) {
+                        pmpFormStatusMaster.setCompentencyEndYearStatus(Boolean.TRUE);
                     }
-                    pmpFormStatusMaster.setEmployeeSide(Boolean.TRUE);
-                    pmpFormStatusMaster.setManagerSide(Boolean.TRUE);
+
+//                    pmpFormStatusMaster.setEmployeeSide(Boolean.TRUE);
+//                    pmpFormStatusMaster.setManagerSide(Boolean.TRUE);
+                    pmpFormStatusMaster.setCompentencyEmployeeSide(Boolean.TRUE);
+                    pmpFormStatusMaster.setCompentencyManagerSide(Boolean.TRUE);
                     pmpFormStatusMasterService.update(pmpFormStatusMaster);
 
                     ///////////////////PMP Status Master End//////////////////////////////
@@ -7000,7 +7064,6 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             String btn1 = request.getParameter("submit");
             if (null != btn1 && btn1.equals("submit")) {
 
-
 //                appraisalPerformanceMaster.setManagerStatus(1);//manager status Kra Approvement
 //                appraisalPerformanceMaster.setEmployeeStatus(0);
 //                appraisalPerformanceMaster.setManagerkraStatus(1);
@@ -7170,7 +7233,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        mv.setViewName("forward:userMaster.htm?act=userDashboard");
         return mv;
     }
-    
+
     public ModelAndView reworkByManagerForCompetency(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String pmpIdForRework = request.getParameter("pmpIdForRework");
@@ -7183,7 +7246,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        appraisalPerformanceMaster.setManagerkraStatus(1);
 //        appraisalPerformanceMaster.setEmployeeStatus(0);
 //        appraisalPerformanceMaster.setReworkStatus(1);
-        
+
         appraisalPerformanceMaster.setEmployeeCompetencyStatus(0);
         appraisalPerformanceMaster.setManagerCompetencyStatus(1);
         appraisalPerformanceMaster.setCompetencyReworkStatus(1);
@@ -7218,8 +7281,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 
         return mv;
     }
-    
-     public ModelAndView reworkByManagerForIdp(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    public ModelAndView reworkByManagerForIdp(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String pmpIdForRework = request.getParameter("pmpIdForRework");
         String reworkComment = request.getParameter("reworkComment");
@@ -7231,7 +7294,6 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        appraisalPerformanceMaster.setManagerkraStatus(1);
 //        appraisalPerformanceMaster.setEmployeeStatus(0);
 //        appraisalPerformanceMaster.setReworkStatus(1);
-        
         appraisalPerformanceMaster.setEmployeeIdpStatus(0);
         appraisalPerformanceMaster.setManagerIdpStatus(1);
         appraisalPerformanceMaster.setIdpReworkStatus(1);

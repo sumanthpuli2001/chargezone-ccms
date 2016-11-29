@@ -355,14 +355,14 @@
                                                                             <!--<option value="${kraCategory.key}">${kraCategory.value}</option>-->
                                                                         <%--</c:if>--%>
                                                                         <%--</c:forEach>--%>
-                                                                       
 
-                                                                            <c:forEach var="kraCategory" items="${kraCategoryMap}">
-                                                                                <c:if test="${kragoallist.kraCategoryByKraCategoryByEmployee.id eq kraCategory.key}">
-                                                                                    <option value="${kraCategory.key}" selected="">${kraCategory.value}</option>
-                                                                                </c:if>
-                                                                            </c:forEach>
-                                                                             
+
+                                                                        <c:forEach var="kraCategory" items="${kraCategoryMap}">
+                                                                            <c:if test="${kragoallist.kraCategoryByKraCategoryByEmployee.id eq kraCategory.key}">
+                                                                            <option value="${kraCategory.key}" selected="">${kraCategory.value}</option>
+                                                                        </c:if>
+                                                                    </c:forEach>
+
                                                                     </td>
                                                                     <!--By Ajay  End-->
                                                                     <td id="weightageidT1${status.count}">
@@ -510,9 +510,9 @@
                                                                         <td id="kraCategoryId${status.count}">
                                                                             <c:forEach var="kraCategory" items="${kraCategoryMap}">
                                                                                 <c:if test="${kragoalOtherActivity.kraCategoryByEmployeeActivities eq kraCategory.key}">
-                                                                                   <option value="${kraCategory.key}" selected="">${kraCategory.value}</option>
-                                                                                </c:if>
-                                                                            </c:forEach>                                                                      
+                                                                                <option value="${kraCategory.key}" selected="">${kraCategory.value}</option>
+                                                                            </c:if>
+                                                                        </c:forEach>                                                                      
                                                                         <td id="priorityid${status.count}">
                                                                             ${kragoalOtherActivity.priority}
                                                                         </td>
@@ -1055,7 +1055,8 @@
                                                                     <tr style="background-color: lightgrey">
                                                                         <td><b style="font-size: 16px">TOTAL SCORE</b></td>
                                                                         <td id="scoreMid">${behaviorsMidyearTotalscore}</td>
-                                                                        <td id="scoreEnd">${behaviorsEndyearTotalscore}</td>
+                                                                        <!--<td id="scoreEnd">${behaviorsEndyearTotalscore}</td>-->
+                                                                        <td id="scoreEnd">${behaviorsEndyearTotalscoreForemp}</td>
                                                                     </tr>
                                                                     <tr style="background-color: lightgrey">
                                                                         <td><b>Other Comment/Remark (Mid Year)</b></td>
@@ -1164,14 +1165,37 @@
                                         <div class="box-body no-padding">
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label class="col-sm-5 control-label"><b>Final Score</b></label>
-                                                        <div class="col-sm-2">
+                                                    <!--                                                    <div class="form-group">
+                                                                                                            <label class="col-sm-5 control-label"><b>Final Score</b></label>
+                                                                                                            <div class="col-sm-2">
+                                                    
+                                                                                                                <input type="number" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" onload="printfinalScoreRatings();"class="form-control" readonly="true">
+                                                    
+                                                                                                            </div>
+                                                                                                        </div>-->
 
-                                                            <input type="number" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" onload="printfinalScoreRatings();"class="form-control" readonly="true">
-
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group text-center">
+                                                                <label class="control-label"><b>KRA Score</b></label>&nbsp;&nbsp;
+                                                                <input type="number" id="totalScore" name="totalScore" value="${totalScoreForemployee}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 form-group text-center">
+                                                            <div class="form-group">
+                                                                <label class="control-label"><b>WLB Score</b></label>&nbsp;&nbsp;
+                                                                <input type="number" id="behaviorsEndyearTotalscore" name="behaviorsEndyearTotalscore" value="${behaviorsEndyearTotalscoreForemp}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 form-group text-center">
+                                                            <div class="form-group">
+                                                                <label class="control-label"><b>Final Score</b></label>&nbsp;&nbsp;
+                                                                <input type="Text" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscoreForemployee}" onchange="performancefinalScoreRatingsEmployee();" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
+                                                                <!--<input type="number" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">-->
+                                                            </div>
                                                         </div>
                                                     </div>
+
                                                 </div>
 
                                                 <div class="col-md-12 col-sm-12">
@@ -1212,11 +1236,16 @@
                                                                 </tr>
                                                             </table>
                                                         </div>
-
                                                     </div><!-- /.col -->
-                                                </div><!-- /.row -->
-                                            </div><!-- /.box-body -->
-                                        </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-5 control-label"><b>Activity/Project Performance</b></label>
+                                                        <div class="col-sm-2">
+                                                            <input type="Text" id="" name="" value="${empActivityScore}"  class="form-control" readonly>
+                                                         </div>
+                                                    </div> 
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
+                                    </div>
                                     <%--</form:form>--%>
                                 </div><!-- /.tab-content -->
                             </div><!-- nav-tabs-custom -->

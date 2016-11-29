@@ -41,12 +41,14 @@
                         <th>Employee Name</th>
                         <th>Department</th>
                         <th>Designation</th>
+                        <th>Reporting Manager</th>
                         <th>level</th>
                         <th>Year</th>
                         <th>Kra Score</th>
                         <th>WLB Score</th>
                         <th>Total Score</th>
-                        <th>Performance Ratings</th>
+                        <th>Final/Performance Ratings</th>
+                        <th>Additional Projects/Activity Score</th>
                     </tr>
                 </thead>
             </c:otherwise>
@@ -58,6 +60,7 @@
                     <td>${list[3]}</td>
                     <td>${list[4]}</td>
                     <td>${list[5]}</td>
+                    <td>${list[11]}</td>
                     <td>${list[8]}</td>
                     <td>${list[6]}-${list[6]+1}</td>
                     <td>${list[9]}</td><!--//Kra Score-->
@@ -71,6 +74,7 @@
                         <c:if test="${(list[7] ge 51  && list[7] le 79) }">Partially Meets Expectations</c:if>
                         <c:if test="${(list[7] ge 1   && list[7] le 50)}">Does Not Meet Expectations</c:if>   
                         </td>
+                         <td>${list[12]}</td>
                     </tr> 
             </c:forEach>
     </table>

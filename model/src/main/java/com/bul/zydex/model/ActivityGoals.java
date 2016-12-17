@@ -1,3 +1,4 @@
+
 package com.bul.zydex.model;
 // Generated Apr 21, 2016 3:33:08 PM by Hibernate Tools 3.2.1.GA
 

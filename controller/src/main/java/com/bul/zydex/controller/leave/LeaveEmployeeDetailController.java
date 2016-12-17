@@ -253,7 +253,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         List<?> satLeaveListCheck = leaveEmployeeDetailService.leaveCheck(leaveEmployeeDetail1);
                         if (!satLeaveListCheck.isEmpty()) {
                             LeaveEmployeeDetail leaveEmployeeDetail2 = (LeaveEmployeeDetail) satLeaveListCheck.get(0);
-                            if (!leaveEmployeeDetail2.getStartDateStatus().contains("SecondHalf") && !leaveEmployeeDetail2.getStartDateStatus().contains("FirstHalf")) {
+                            if (!leaveEmployeeDetail2.getStartDateStatus().contains("FirstHalf") && !leaveEmployeeDetail2.getStartDateStatus().contains("SecondHalf")) {
                                 LeaveTypeMaster leaveTypeMaster1 = new LeaveTypeMaster();
                                 leaveTypeMaster1.setId(leaveEmployeeDetail2.getLeaveTypeMaster().getId());
                                 leaveTypeMaster1 = leaveTypeMasterService.readById(leaveTypeMaster1.getId());
@@ -2384,32 +2384,15 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             weekOffDay = hoursBasis.getWeekof();
 
         }
-
+        int coutnter = 0;
         Calendar c = Calendar.getInstance();
         c.setTime(sDate);
         List<String> list1 = new ArrayList<String>();
         float days = 0;
         while (c.getTime().before(eDate) || c.getTime().equals(eDate)) {
-//            for (String z : weekOffDay.split(",")) {
-//                int weekOff = 0;
-//                if (!z.equals("")) {
-//                    if (z.equals("sunday")) {
-//                        weekOff = 1;
-//                    } else if (z.equals("monday")) {
-//                        weekOff = 2;
-//                    } else if (z.equals("tuesday")) {
-//                        weekOff = 3;
-//                    } else if (z.equals("wednesday")) {
-//                        weekOff = 4;
-//                    } else if (z.equals("thursday")) {
-//                        weekOff = 5;
-//                    } else if (z.equals("friday")) {
-//                        weekOff = 6;
-//                    } else if (z.equals("saturdady")) {
-//                        weekOff = 7;
-//                    }
 
-//                    if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//
+////                    if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
             Date nDate = c.getTime();
             String daString = sdf.format(nDate);
             HolidayMaster holidayMaster = new HolidayMaster();
@@ -2418,10 +2401,32 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             if (list.size() == 0) {
                 days++;
             }
-//                    }
-//                }
-
-//            }
+            for (String z : weekOffDay.split(",")) {
+                int weekOff = 0;
+                if (!z.equals("")) {
+                    if (z.equals("sunday")) {
+                        weekOff = 1;
+                    } else if (z.equals("monday")) {
+                        weekOff = 2;
+                    } else if (z.equals("tuesday")) {
+                        weekOff = 3;
+                    } else if (z.equals("wednesday")) {
+                        weekOff = 4;
+                    } else if (z.equals("thursday")) {
+                        weekOff = 5;
+                    } else if (z.equals("friday")) {
+                        weekOff = 6;
+                    } else if (z.equals("saturdady")) {
+                        weekOff = 7;
+                    }
+                }
+                if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+                    if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("SecondHalf") && coutnter == 0) {
+                        days--;
+                    }
+                }
+                coutnter++;
+            }
             c.add(Calendar.DATE, 1);
 
         }

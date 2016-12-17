@@ -25,17 +25,17 @@
         <!--<link rel="stylesheet" href="StorageYard/CSS/bootstrap/bootstrap.min.css">-->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <title>Performance Appraisal Form</title>
-         <style>
+        <style>
             td { word-break: break-all;}
             select {
                 /*for firefox*/
                 -moz-appearance: none;
                 /*for chrome*/
                 -webkit-appearance:none;
-                
-/*                select::-ms-expand {
-    display: none;
-}*/
+
+                /*                select::-ms-expand {
+                    display: none;
+                }*/
             }
         </style>
     </head>
@@ -198,9 +198,9 @@
                                                             <td id="kraCategoryId${status.count}">
                                                                 <c:forEach var="kraCategory" items="${kraCategoryMap}">
                                                                     <c:if test="${kragoallist.kraCategoryByKraCategoryByManager.id eq kraCategory.key}">
-                                                                        <option value="${kraCategory.key}" selected="">${kraCategory.value}</option>
-                                                                    </c:if>
-                                                                </c:forEach>
+                                                                    <option value="${kraCategory.key}" selected="">${kraCategory.value}</option>
+                                                                </c:if>
+                                                            </c:forEach>
                                                             </td>
                                                             <td id="weightageid1${status.count}">${kragoallist.weightage}</td>
                                                             <td id="midYearDivid1${status.count}">${kragoallist.midyearStatus}</td>
@@ -343,29 +343,29 @@
 
 
                                                             </tr>
-                                                            
-                                                                <!--<table id="demo1" class="table table-bordered table-striped table-hover" style="" align="Center">-->
+
+                                                            <!--<table id="demo1" class="table table-bordered table-striped table-hover" style="" align="Center">-->
 
 
-                                                                    <tr id="">
-                                                                        <td colspan="3"><b>Employee’s Mid - Year Self – Assessment For Other Activities:</b></td>
-                                                                        <td colspan="5"><b>Manager’s Mid - Year Review / Evaluation For Other Activities:</b></td>
-                                                                    </tr>
-                                                                    <tr id="">
-                                                                        <td colspan="3">${kragoalOtherActivity.empMidyearSelfassessmentGoalActivities}</td>
-                                                                        <td colspan="5">${kragoalOtherActivity.managerMidyearSelfassesssmentGoalActivities}</td>
-                                                                    </tr>
+                                                            <tr id="">
+                                                                <td colspan="3"><b>Employee’s Mid - Year Self – Assessment For Other Activities:</b></td>
+                                                                <td colspan="5"><b>Manager’s Mid - Year Review / Evaluation For Other Activities:</b></td>
+                                                            </tr>
+                                                            <tr id="">
+                                                                <td colspan="3">${kragoalOtherActivity.empMidyearSelfassessmentGoalActivities}</td>
+                                                                <td colspan="5">${kragoalOtherActivity.managerMidyearSelfassesssmentGoalActivities}</td>
+                                                            </tr>
 
-                                                                    <tr id="">
-                                                                        <td colspan="3"><b>Employee’s End - Year Self – Assessment For Other Activities:</b></td>
-                                                                        <td colspan="5"><b>Manager’s End - Year Review / Evaluation For Other Activities:</b></td>
-                                                                    </tr>
-                                                                    <tr id="">
-                                                                        <td colspan="3">${kragoalOtherActivity.empEndyearSelfassessmentGoalActivities}</td>
-                                                                        <td colspan="5">${kragoalOtherActivity.managerEndyearSelfassesssmentGoalActivities}</td>
-                                                                    </tr>
-                                                                <!--</table>-->
-                                                            
+                                                            <tr id="">
+                                                                <td colspan="3"><b>Employee’s End - Year Self – Assessment For Other Activities:</b></td>
+                                                                <td colspan="5"><b>Manager’s End - Year Review / Evaluation For Other Activities:</b></td>
+                                                            </tr>
+                                                            <tr id="">
+                                                                <td colspan="3">${kragoalOtherActivity.empEndyearSelfassessmentGoalActivities}</td>
+                                                                <td colspan="5">${kragoalOtherActivity.managerEndyearSelfassesssmentGoalActivities}</td>
+                                                            </tr>
+                                                            <!--</table>-->
+
 
                                                         </c:forEach>
                                                     </c:when>
@@ -1048,103 +1048,46 @@
                             <div class="box-body no-padding">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="col-sm-5 control-label"><b>Final Score</b></label>
-                                            <div class="col-sm-2">
-
-                                                <input type="number" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" onload="printfinalScoreRatings();"class="form-control" readonly="true">
-
+                                        <!--                                        <div class="form-group">
+                                                                                    <label class="col-sm-5 control-label"><b>Final Score</b></label>
+                                                                                    <div class="col-sm-2">
+                                        
+                                                                                        <input type="number" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" onload="printfinalScoreRatings();"class="form-control" readonly="true">
+                                        
+                                                                                    </div>
+                                                                                </div>-->
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group text-center">
+                                                    <label class="control-label"><b>KRA Score</b></label>&nbsp;&nbsp;
+                                                    <input type="number" id="totalScore" name="totalScore" value="${totalScore}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 form-group text-center">
+                                                <div class="form-group">
+                                                    <label class="control-label"><b>WLB Score</b></label>&nbsp;&nbsp;
+                                                    <input type="number" id="behaviorsEndyearTotalscore" name="behaviorsEndyearTotalscore" value="${behaviorsEndyearTotalscore}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 form-group text-center">
+                                                <div class="form-group">
+                                                    <label class="control-label"><b>Final Score</b></label>&nbsp;&nbsp;
+                                                    <input type="Text" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" onload="printfinalScoreRatings();" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
+                                                    <!--<input type="number" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">-->
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <!--                                            <div class="table-responsive">
-                                                                                        <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center">
-                                                                                            <tr style="background-color: darkgrey;">
-                                                                                                <th style="text-align: center">Performance Ratings</th>
-                                                                                                <th style="text-align: center">Score</th>
-                                                                                                <th style="text-align: center">Score Achieved</th>
-                                                                                            </tr>
-                                                                                            <tr class="d1" id="tbl1" style="background-color: #337AB7;">
-                                                                                                <td style="vertical-align: middle"><b>Far Exceeds Expectations</b></td>
-                                                                                                <td style="text-align: center"><h4 style="background-color: #337AB7"><b>106 to 110</b></h4></td>
-                                                                                                <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '116' && behaviorsFinalscore le '110' || behaviorsFinalscore eq '116' || behaviorsFinalscore eq '116'}"><i class="fa fa-check"></i></c:if></td>
-                                                                                                </tr>
-                                                                                                <tr class="" id="tbl2" style="background-color: #5CB85C;">
-                                                                                                    <td style="vertical-align: middle"><b>Exceeds Expectations</b></td>
-                                                                                                    <td style="text-align: center"><h4><b>101 to 105</b></h4></td>
-                                                                                                    <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '101' && behaviorsFinalscore le '105' || behaviorsFinalscore eq '101' || behaviorsFinalscore eq '105'}"><i class="fa fa-check"></i></c:if></td>
-                                        
-                                                                                                </tr>
-                                                                                                <tr class="" id="tbl3" style="background-color: #F0AD4E;">
-                                                                                                    <td style="vertical-align: middle"><b>Meets Expectations</b></td>
-                                                                                                    <td style="text-align: center"><h4><b>80 to 100</b></h4></td>
-                                                                                                    <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '80'  && behaviorsFinalscore le '100' || behaviorsFinalscore eq '80' || behaviorsFinalscore eq '100'}"><i class="fa fa-check"></i></c:if></td>
-                                        
-                                                                                                </tr>
-                                                                                                <tr class="" id="tbl4" style="background-color: #FFA375;">
-                                                                                                    <td style="vertical-align: middle"><b>Partially Meets Expectations</td>
-                                                                                                    <td style="text-align: center"><h4><b>51 to 79</b></h4></td>
-                                                                                                    <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '51'  && behaviorsFinalscore le '79' || behaviorsFinalscore eq '51' || behaviorsFinalscore eq '79'}"><i class="fa fa-check"></i></c:if></td>
-                                        
-                                                                                                </tr>
-                                                                                                <tr class="" id="tb5" style="background-color: #D9534F;">
-                                                                                                    <td style="vertical-align: middle"><b>Does Not Meet Expectations</b></td>
-                                                                                                    <td style="text-align: center"><h4><b>50 & Below</b></h4></td>
-                                                                                                    <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '1' && behaviorsFinalscore le '50' || behaviorsFinalscore eq '1' || behaviorsFinalscore eq '50'}"> <i class="fa fa-check"></i></c:if></td>
-                                        
-                                                                                            </tr>
-                                        
-                                        
-                                                                                        </table>-->
-                                            <!--                                                <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center">
-                                                                                                <tr style="background-color: darkgrey;">
-                                                                                                    <th style="text-align: center">Performance Ratings</th>
-                                                                                                    <th style="text-align: center">Score</th>
-                                                                                                    <th style="text-align: center">Score Achieved</th>
-                                                                                                </tr>
-                                                                                                <tr class="d1" id="tbl1" style="background-color: #337AB7;">
-                                                                                                    <td style="vertical-align: middle"><b>Far Exceeds Expectations</b></td>
-                                                                                                    <td style="text-align: center"><h4 style="background-color: #337AB7"><b>106 to 110</b></h4></td>
-                                                                                                    <td style="text-align: center"><span id="score1" class="glyphicon glyphicon-ok" style="font-size: 30px"></span></td>
-                                                                                                </tr>
-                                                                                                <tr class="" id="tbl2" style="background-color: #5CB85C;">
-                                                                                                    <td style="vertical-align: middle"><b>Exceeds Expectations</b></td>
-                                                                                                    <td style="text-align: center"><h4><b>101 to 105</b></h4></td>
-                                                                                                    <td style="text-align: center"><span id="score2" class="glyphicon glyphicon-ok" style="font-size: 30px"></span></td>
-                                            
-                                                                                                </tr>
-                                                                                                <tr class="" id="tbl3" style="background-color: #F0AD4E;">
-                                                                                                    <td style="vertical-align: middle"><b>Meets Expectations</b></td>
-                                                                                                    <td style="text-align: center"><h4><b>80 to 100</b></h4></td>
-                                                                                                    <td style="text-align: center"><span id="score3" class="glyphicon glyphicon-ok" style="font-size: 30px"></span></td>
-                                            
-                                                                                                </tr>
-                                                                                                <tr class="" id="tbl4" style="background-color: #FFA375;">
-                                                                                                    <td style="vertical-align: middle"><b>Partially Meets Expectations</td>
-                                                                                                    <td style="text-align: center"><h4><b>51 to 79</b></h4></td>
-                                                                                                    <td style="text-align: center"><span id="score4" class="glyphicon glyphicon-ok" style="font-size: 30px"></span></td>
-                                            
-                                                                                                </tr>
-                                                                                                <tr class="" id="tb5" style="background-color: #D9534F;">
-                                                                                                    <td style="vertical-align: middle"><b>Does Not Meet Expectations</b></td>
-                                                                                                    <td style="text-align: center"><h4><b>50 & Below</b></h4></td>
-                                                                                                    <td style="text-align: center"><span id="score5" class="glyphicon glyphicon-ok" style="font-size: 30px"></span></td>
-                                            
-                                                                                                </tr>
-                                            
-                                            
-                                                                                            </table>-->
-                                            <div class="table-responsive">
-                                                <table id="demo234" class="table table-bordered table-striped table-hover" style="" align="Center">
-                                                    <tr >
-                                                        <th style="text-align: center">Performance Ratings</th>
-                                                        <th style="text-align: center">Score</th>
-                                                        <th style="text-align: center">Score Achieved</th>
-                                                    </tr>
-                                                    <tr class="d1" id="tbl111" >
-                                                        <td style="vertical-align: middle"><b>Far Exceeds Expectations</b></td>
-                                                        <td style="text-align: center"><h4 style="background-color: #337AB7;"><b>106 to 110</b></h4></td>
-                                                        <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '116' && behaviorsFinalscore le '110' || behaviorsFinalscore eq '116' || behaviorsFinalscore eq '116'}"><i class="fa fa-check"></i></c:if></td>
+                                        <div class="table-responsive">
+                                            <table id="demo234" class="table table-bordered table-striped table-hover" style="" align="Center">
+                                                <tr >
+                                                    <th style="text-align: center">Performance Ratings</th>
+                                                    <th style="text-align: center">Score</th>
+                                                    <th style="text-align: center">Score Achieved</th>
+                                                </tr>
+                                                <tr class="d1" id="tbl111" >
+                                                    <td style="vertical-align: middle"><b>Far Exceeds Expectations</b></td>
+                                                    <td style="text-align: center"><h4 style="background-color: #337AB7;"><b>106 to 110</b></h4></td>
+                                                    <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '116' && behaviorsFinalscore le '110' || behaviorsFinalscore eq '116' || behaviorsFinalscore eq '116'}"><i class="fa fa-check"></i></c:if></td>
                                                     </tr>
                                                     <tr class="" id="tbl112" >
                                                         <td style="vertical-align: middle"><b>Exceeds Expectations</b></td>
@@ -1169,10 +1112,16 @@
                                                         <td style="text-align: center"><h4><b>50 & Below</b></h4></td>
                                                         <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '1' && behaviorsFinalscore le '50' || behaviorsFinalscore eq '1' || behaviorsFinalscore eq '50'}"> <i class="fa fa-check"></i></c:if></td>
 
-                                                </tr>
+                                                    </tr>
 
 
-                                            </table>
+                                                </table>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label"><b>Activity/Project Performance</b></label>
+                                                <div class="col-sm-2">
+                                                    <input type="Text" id="managerActivityScore" name="managerActivityScore" value="${managerActivityScore}" class="form-control" readonly>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -1187,7 +1136,7 @@
 
                 </div>
 
-        </div>
+            </div>
         </section>
     </form:form>
 </body>

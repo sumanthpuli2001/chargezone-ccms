@@ -56,34 +56,39 @@ public class EmployeePunch extends EmployeePunchAbstract {
                 employeeMaster1 = (EmployeeMaster) empDetailList.get(0);
                 String date = data.get("punchTime").toString();
                 String punchTime = date;
-                
+                String punchLoc = data.get("punchLocation").toString();
+                if (punchLoc != null && punchLoc != "") {
 
-                EmployeePunchForMobileApp employeePunchForMobileApp = new EmployeePunchForMobileApp();
-                employeePunchForMobileApp.setEmployeeMaster(employeeMaster1);
-                employeePunchForMobileApp.setPunchTime(punchTime);
-                employeePunchForMobileApp.setPunchLocation(data.get("punchLocation").toString());
+                    EmployeePunchForMobileApp employeePunchForMobileApp = new EmployeePunchForMobileApp();
+                    employeePunchForMobileApp.setEmployeeMaster(employeeMaster1);
+                    employeePunchForMobileApp.setPunchTime(punchTime);
+                    employeePunchForMobileApp.setPunchLocation(punchLoc);
 
-                String imeiNO = data.get("imeiNo").toString();
+                    String imeiNO = data.get("imeiNo").toString();
 
-                List<?> empMobRegList = registerMobForPunchService.readByEmpId(employeeMaster1.getId());
-                if (empMobRegList.isEmpty()) {
-                    registerMobForPunch.setEmployeeMaster(employeeMaster1);
-                    registerMobForPunch.setImeiNo(imeiNO);
-                    registerMobForPunchService.create(registerMobForPunch);
-                    employeePunchForMobileAppService.create(employeePunchForMobileApp);
-                    rcode = "1";
-                    message = "Success";
-                } else {
-                    registerMobForPunch = (RegisterMobForPunch) empMobRegList.get(0);
-                    String imeiNum = registerMobForPunch.getImeiNo();
-                    if (imeiNum.equals(imeiNO)) {
+                    List<?> empMobRegList = registerMobForPunchService.readByEmpId(employeeMaster1.getId());
+                    if (empMobRegList.isEmpty()) {
+                        registerMobForPunch.setEmployeeMaster(employeeMaster1);
+                        registerMobForPunch.setImeiNo(imeiNO);
+                        registerMobForPunchService.create(registerMobForPunch);
                         employeePunchForMobileAppService.create(employeePunchForMobileApp);
                         rcode = "1";
                         message = "Success";
                     } else {
-                        rcode = "2";
-                        message = "Your device Not Register";
+                        registerMobForPunch = (RegisterMobForPunch) empMobRegList.get(0);
+                        String imeiNum = registerMobForPunch.getImeiNo();
+                        if (imeiNum.equals(imeiNO)) {
+                            employeePunchForMobileAppService.create(employeePunchForMobileApp);
+                            rcode = "1";
+                            message = "Success";
+                        } else {
+                            rcode = "2";
+                            message = "Your device Not Register";
+                        }
                     }
+                } else {
+                    rcode = "0";
+                    message = "Location Not Found";
                 }
             } else {
                 rcode = "0";
@@ -100,20 +105,19 @@ public class EmployeePunch extends EmployeePunchAbstract {
 
     }
 
-    
     private synchronized void mobPunchEntryDaily() throws Exception {
 
         EmployeeShiftData employeeShiftData = new EmployeeShiftData();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         UserMaster userMaster = new UserMaster();
 //        EmployeeDatetimeData employeeDatetimeData1 = new EmployeeDatetimeData();
-        EmployeePunchForMobileApp employeePunchForMobileApp=new EmployeePunchForMobileApp();
+        EmployeePunchForMobileApp employeePunchForMobileApp = new EmployeePunchForMobileApp();
 //        userMaster.setId(1614);
 //        employeeMaster.setUserMaster(userMaster);
 //        List<?> empList = employeeMasterService.readByEmployeeUserId(employeeMaster);
 
 //        List<?> empList = employeeMasterService.read();
-        List<?> empList =employeePunchForMobileAppService.readEmpByCurrentDate();
+        List<?> empList = employeePunchForMobileAppService.readEmpByCurrentDate();
         for (Object zz : empList) {
             try {
 //                employeeMaster = (EmployeeMaster) zz;
@@ -378,7 +382,7 @@ public class EmployeePunch extends EmployeePunchAbstract {
                 } else {
                     employeeShiftPunchList = employeePunchForMobileAppService.readTodaysEmployeeData("" + employeeMaster.getId());
                     for (Object o : employeeShiftPunchList) {
-                      EmployeePunchForMobileApp employeePunchForMobileApp4 = (EmployeePunchForMobileApp) o;
+                        EmployeePunchForMobileApp employeePunchForMobileApp4 = (EmployeePunchForMobileApp) o;
                         EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
                         List dayWiseShiftList = new ArrayList();
                         employeeShiftData.setEmployeeMaster(employeeMaster);

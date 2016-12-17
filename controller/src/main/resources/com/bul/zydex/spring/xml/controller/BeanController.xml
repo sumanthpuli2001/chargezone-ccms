@@ -526,6 +526,7 @@
         <property name="expenseMasterService" ref="expenseMasterService1"/>
         <property name="itServiceRequestService" ref="itServiceRequestService1"/>
         <property name="hrServiceRequestService" ref="hrServiceRequestService1"/>
+        <property name="employeeShiftDataService" ref="employeeShiftDataService1"/>
         
     </bean>
     <bean id="emailAddMasterController1" class="com.bul.zydex.controller.EmailAddMasterController" parent="controllerConfig" >

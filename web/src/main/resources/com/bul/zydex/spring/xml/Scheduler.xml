@@ -150,7 +150,7 @@
         0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying
     </bean>
     -->
-        <bean id="pmpIntimation"
+<!--        <bean id="pmpIntimation"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="appraisalPerformanceController1" />
         <property name="targetMethod" value="mailSendPmp" />
@@ -159,21 +159,21 @@
           class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="pmpIntimation" />
         <property name="cronExpression" value="0 0/3 * * * ?" />
-    </bean>
-        <bean id="mobilePunchDailyEntry"
+    </bean>-->
+<!--        <bean id="mobilePunchDailyEntry"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="employeePunch1" />
         <property name="targetMethod" value="mobPunchEntryDaily" />
-    </bean>
-    <bean id="cronTrigger13"
+    </bean>-->
+<!--    <bean id="cronTrigger13"
           class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="mobilePunchDailyEntry" />
         <property name="cronExpression" value="0 0/3 * * * ?" />
-        <!--0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying-->
-    </bean>
+        0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying
+    </bean>-->
     
-    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="jobDetails">
+<!--    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobDetails">-->
             <list>
                 <!--<ref bean="timeAttendanceDetail" />-->
                 <!--<ref bean="dailyTimeEntryId" />-->
@@ -188,7 +188,7 @@
                 <ref bean="travelEscalationId" />
                 <ref bean="reportingManagerChangeId" />-->
                 <!--<ref bean="pmpIntimation" />-->
-                <ref bean="mobilePunchDailyEntry" />
+                <!--<ref bean="mobilePunchDailyEntry" />-->
             </list>
         </property>
         <property name="triggers">
@@ -205,7 +205,7 @@
                 <ref bean="cronTrigger10" />-->
                 <!--<ref bean="cronTrigger11" />-->
                 <!--<ref bean="cronTrigger12" />-->
-                <ref bean="cronTrigger13" />
+                <!--<ref bean="cronTrigger13" />-->
             </list>
         </property>
     </bean>

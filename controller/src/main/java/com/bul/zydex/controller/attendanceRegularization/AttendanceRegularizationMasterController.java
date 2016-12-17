@@ -986,7 +986,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         newList.add("AR/P");
                     } else if (firstHalf.equals("AB")) {
                         newList.add("AB");
-                    } else if (firstHalf.contains("?")) {
+                    }else if (firstHalf.equals("TR")) {
+                        newList.add("-");
+                    }else if (firstHalf.contains("?")) {
                         newList.add("-");
                     } else if (firstHalf.equals("Casual Leave") || firstHalf.equals("Privilege Leave") || firstHalf.equals("Sick Leave")
                             || firstHalf.equals("Maternity Leave") || firstHalf.equals("Paternity Leave") || firstHalf.equals("C Off Leave")
@@ -1264,7 +1266,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         secondHalfList.add("-");
                     } else if (secondHalf.equals("AB")) {
                         secondHalfList.add("AB");
-                    } else if (secondHalf.contains("?")) {
+                    }else if (secondHalf.equals("TR")) {
+                        secondHalfList.add("-");
+                    }else if (secondHalf.contains("?")) {
                         secondHalfList.add("-");
                     }else if (secondHalf.equals("Casual Leave") || secondHalf.equals("Privilege Leave") || secondHalf.equals("Sick Leave")
                             || secondHalf.equals("Maternity Leave") || secondHalf.equals("Paternity Leave") || secondHalf.equals("C Off Leave")

@@ -172,8 +172,8 @@
         0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying
     </bean>-->
     
-<!--    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="jobDetails">-->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobDetails">
             <list>
                 <!--<ref bean="timeAttendanceDetail" />-->
                 <!--<ref bean="dailyTimeEntryId" />-->

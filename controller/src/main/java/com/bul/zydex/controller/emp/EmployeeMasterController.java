@@ -15,6 +15,7 @@ import com.bul.zydex.model.HoursBasis;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.PmpFormStatusMaster;
 import com.bul.zydex.model.RotationMaster;
 import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
 import com.bul.zydex.model.ShiftMaster;
@@ -227,6 +228,22 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //set firstTime is true for compulsory password change on first time login
             userMasterService.create(userMaster);
             employeeMasterService.create(employeeMaster);
+            PmpFormStatusMaster pmpFormStatusMaster=new PmpFormStatusMaster();
+            pmpFormStatusMaster.setEmployeeMaster(employeeMaster);
+            pmpFormStatusMaster.setStartYearStatus(false);
+            pmpFormStatusMaster.setMidYearStatus(false);
+            pmpFormStatusMaster.setEndYearStatus(false);
+            pmpFormStatusMaster.setManagerSide(false);
+            pmpFormStatusMaster.setEmployeeSide(false);
+            pmpFormStatusMaster.setCompentencyEmployeeSide(false);
+            pmpFormStatusMaster.setCompentencyEndYearStatus(false);
+            pmpFormStatusMaster.setCompentencyManagerSide(false);
+            pmpFormStatusMaster.setCompentencyMidYearStatus(false);
+            pmpFormStatusMaster.setCompentencyStartYearStatus(false);
+            pmpFormStatusMasterService.create(pmpFormStatusMaster);
+            
+            
+            
             //employeeMaster.setEmployeeId("" + employeeMaster1);
             boolean isLeapYear = false;
             LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();

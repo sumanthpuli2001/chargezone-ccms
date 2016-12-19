@@ -78,6 +78,7 @@
         <property name="shiftGenerateMonthlyScheduleService" ref="shiftGenerateMonthlyScheduleService1" />
         <property name="zydexLocationMasterService" ref="zydexLocationMasterService1" />
         <property name="competencyEvaluationMasterService" ref="competencyEvaluationMasterService1" />
+         <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1" />
     </bean>
     <!--Department Master-->
     <bean id="departmentMasterController1" class="com.bul.zydex.controller.emp.DepartmentMasterController" parent="controllerConfig" >

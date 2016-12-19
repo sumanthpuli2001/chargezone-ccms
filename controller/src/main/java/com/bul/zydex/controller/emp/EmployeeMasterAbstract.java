@@ -15,6 +15,7 @@ import com.bul.zydex.model.HoursBasis;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.PmpFormStatusMaster;
 import com.bul.zydex.model.RotationMaster;
 import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
 import com.bul.zydex.model.ShiftMaster;
@@ -22,6 +23,7 @@ import com.bul.zydex.model.ShiftRotationInfo;
 import com.bul.zydex.model.ShiftRotationMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
+import com.bul.zydex.service.PmpFormStatusMaster.PmpFormStatusMasterService;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.appraisalPerformance.CompetencyEvaluationMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
@@ -61,6 +63,7 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     protected RotationMasterService<RotationMaster> rotationMasterService;
     protected ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService;
     protected CompetencyEvaluationMasterService<CompetencyEvaluationMaster> competencyEvaluationMasterService;
+    protected PmpFormStatusMasterService<PmpFormStatusMaster> pmpFormStatusMasterService;
 
     public CompetencyEvaluationMasterService<CompetencyEvaluationMaster> getCompetencyEvaluationMasterService() {
         return competencyEvaluationMasterService;
@@ -70,8 +73,6 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
         this.competencyEvaluationMasterService = competencyEvaluationMasterService;
     }
 
-    
-    
     public ZydexLocationMasterService<ZydexLocationMaster> getZydexLocationMasterService() {
         return zydexLocationMasterService;
     }
@@ -514,8 +515,8 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
         }
 
     }
-    
-      protected void competencyList(HttpServletRequest request) {
+
+    protected void competencyList(HttpServletRequest request) {
         CompetencyEvaluationMaster competencyEvaluationMaster = new CompetencyEvaluationMaster();
         List<?> competencyList = competencyEvaluationMasterService.read();
         Map<Integer, String> dm = new HashMap<>();
@@ -526,5 +527,15 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
 
         request.setAttribute("competencyMap", dm);
     }
+
+    public PmpFormStatusMasterService<PmpFormStatusMaster> getPmpFormStatusMasterService() {
+        return pmpFormStatusMasterService;
+    }
+
+    public void setPmpFormStatusMasterService(PmpFormStatusMasterService<PmpFormStatusMaster> pmpFormStatusMasterService) {
+        this.pmpFormStatusMasterService = pmpFormStatusMasterService;
+    }
+    
+    
 
 }

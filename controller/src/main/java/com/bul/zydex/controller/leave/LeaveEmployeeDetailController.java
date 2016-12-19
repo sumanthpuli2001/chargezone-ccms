@@ -2421,7 +2421,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     }
                 }
                 if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                    if (c.get(Calendar.WEEK_OF_MONTH)==2 && c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("SecondHalf") && coutnter == 0) {
+                    if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("SecondHalf") && coutnter == 0) {
                         days--;
                     }
                 }

@@ -387,7 +387,7 @@ public class ExpenseReport extends ExpenseReportAbstarct {
                     }
 
                 }
-                if (expenseMaster.getExpenseType().equals("Policy Reimbursements")) {
+                if (expenseMaster.getExpenseType().equals("PolicyReimbursements")) {
                     expenseMasterService.create(expenseMaster);
                     JSONArray otherDetailCount = data.getJSONArray("otherExpenseDetails");
                     for (int i = 0; i < otherDetailCount.length(); i++) {
@@ -615,6 +615,11 @@ public class ExpenseReport extends ExpenseReportAbstarct {
 
                     JSONObject travelObject = new JSONObject();
                     travelObject.put("otherExpense", otherExpense);
+                    if (otherExpense.equals("Other")) {
+                        String purpose = relocationOrOtherExpense.getExpenseOtherSpecify();
+                        travelObject.put("purpose", purpose);
+                    }
+
                     travelObject.put("amount", amount);
                     travelObject.put("currency", currency);
                     travelObject.put("status", status);
@@ -684,6 +689,11 @@ public class ExpenseReport extends ExpenseReportAbstarct {
 
                     JSONObject travelObject = new JSONObject();
                     travelObject.put("otherExpense", otherExpense);
+                    if (otherExpense.equals("Other")) {
+                        String purpose = relocationOrOtherExpense.getExpenseOtherSpecify();
+                        travelObject.put("purpose", purpose);
+                    }
+
                     travelObject.put("amount", amount);
                     travelObject.put("currency", currency);
                     travelObject.put("status", status);
@@ -697,7 +707,7 @@ public class ExpenseReport extends ExpenseReportAbstarct {
                 data.put("otherExpenseDetails", otherTypeArray);
 
             }
-            if (expenseMaster1.getExpenseType().equals("Policy Reimbursements")) {
+            if (expenseMaster1.getExpenseType().equals("PolicyReimbursements")) {
                 policyOtherTypeList = relocationOrOtherExpenseService.readByExpenseMasterId(Integer.parseInt(expenseId));
                 JSONArray policyReimbursementsArray = new JSONArray();
                 for (Object policyReimb : policyOtherTypeList) {
@@ -720,6 +730,10 @@ public class ExpenseReport extends ExpenseReportAbstarct {
                     }
                     JSONObject policyReimbursementsObj = new JSONObject();
                     policyReimbursementsObj.put("otherExpense", otherExpense);
+                    if (otherExpense.equals("Other")) {
+                        String purpose = relocationOrOtherExpense.getExpenseOtherSpecify();
+                        policyReimbursementsObj.put("purpose", purpose);
+                    }
                     policyReimbursementsObj.put("amount", amount);
                     policyReimbursementsObj.put("currency", currency);
                     policyReimbursementsObj.put("status", status);
@@ -841,7 +855,7 @@ public class ExpenseReport extends ExpenseReportAbstarct {
             String dateOfsub = expenseMaster.getDateOfSubmit();
             List<?> travelTypeList = new ArrayList<Object>();
             List<?> relocationOtherTypeList = new ArrayList<Object>();
-            
+
             List<?> othersList = new ArrayList<Object>();
             List<?> expreconsilationList = new ArrayList<Object>();
 
@@ -850,7 +864,7 @@ public class ExpenseReport extends ExpenseReportAbstarct {
                 for (Object o : travelTypeList) {
                     ExpenseTravelType expenseTravelType1 = (ExpenseTravelType) o;
                     int expTravelId = expenseTravelType1.getId();
-                    int status = expenseTravelType1.getStatus();                                                                                                                                                   
+                    int status = expenseTravelType1.getStatus();
                     if (status != 1) {
                         expenseTravelTypeService.delete(expTravelId);
                     }
@@ -975,7 +989,7 @@ public class ExpenseReport extends ExpenseReportAbstarct {
                     }
 
                 }
-                if (expenseMaster.getExpenseType().equals("Policy Reimbursements")) {
+                if (expenseMaster.getExpenseType().equals("PolicyReimbursements")) {
                     expenseMasterService.update(expenseMaster);
                     JSONArray otherDetailCount = data.getJSONArray("otherExpenseDetails");
                     for (int i = 0; i < otherDetailCount.length(); i++) {

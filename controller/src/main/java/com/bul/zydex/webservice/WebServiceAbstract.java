@@ -9,6 +9,7 @@ import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.COffLeaveMaster;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.ExpenseMaster;
 import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.HrServiceRequest;
@@ -32,6 +33,7 @@ import com.bul.zydex.service.leave.LeaveEmployeeDetailService;
 import com.bul.zydex.service.leave.LeaveTypeMasterService;
 import com.bul.zydex.service.level.LevelMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
+import com.bul.zydex.service.shift.EmployeeShiftDataService;
 import com.bul.zydex.service.travel.TravelRequestMasterService;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -61,6 +63,16 @@ public abstract class WebServiceAbstract extends CustomAbstract {
     protected ExpenseMasterService<ExpenseMaster> expenseMasterService;
     protected ItServiceRequestService<ItServiceRequest> itServiceRequestService;
     protected HrServiceRequestService<HrServiceRequest> hrServiceRequestService;
+    protected EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService;
+
+    public EmployeeShiftDataService<EmployeeShiftData> getEmployeeShiftDataService() {
+        return employeeShiftDataService;
+    }
+
+    public void setEmployeeShiftDataService(EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService) {
+        this.employeeShiftDataService = employeeShiftDataService;
+    }
+    
 
     public ItServiceRequestService<ItServiceRequest> getItServiceRequestService() {
         return itServiceRequestService;

@@ -139,7 +139,7 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readForSendMailToAll(T object);
 
     public List<?> readDepartmentWiseEmployee(T object);
-
+    
     public List<?> readByJoinDate(String date);
 
 }

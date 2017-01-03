@@ -7,4 +7,3 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <script type="text/javascript" src="StorageYard/JS/EmployeeCafeJs/PMPManagerForCompetency.js?n=1" charset="UTF-8"></script>
-

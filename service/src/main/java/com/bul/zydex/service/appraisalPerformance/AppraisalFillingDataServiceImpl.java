@@ -34,4 +34,14 @@ public class AppraisalFillingDataServiceImpl<T> extends GenericsServiceImpl<T> i
     public List<?> readByCurrentYear(String cyear) {
        return appraisalFillingDataDAO.readByCurrentYear(cyear);
     }
+
+    @Override
+    public List<?> getCurrentAndPreviousYear() {
+        return appraisalFillingDataDAO.getCurrentAndPreviousYear();
+    }
+
+    @Override
+    public List<?> getappraisalDate() {
+        return appraisalFillingDataDAO.getappraisalDate();
+    }
 }

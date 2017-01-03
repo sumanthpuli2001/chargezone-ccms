@@ -45,4 +45,21 @@ public class AppraisalFillingDataDAOImpl<T> extends GenericsDAOImpl<T> implement
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> getCurrentAndPreviousYear() {
+        String query="";
+        query = " Select Date_format(str_to_date(startDate,'%d/%m/%Y'),'%Y'),Date_format(str_to_date(managerYearEndEndDate,'%d/%m/%Y'),'%Y') "
+                + " from AppraisalFillingData where str_to_date(Date_format(now(),'%d/%m/%Y'),'%d/%m/%Y') between str_to_date(startDate,'%d/%m/%Y') "
+                + " and str_to_date(managerYearEndEndDate,'%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+    @Override
+    public List<?> getappraisalDate() {
+        String query="";
+        query = " "
+                + " from AppraisalFillingData where str_to_date(Date_format(now(),'%d/%m/%Y'),'%d/%m/%Y') between str_to_date(startDate,'%d/%m/%Y') "
+                + " and str_to_date(managerYearEndEndDate,'%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
 }

@@ -17,5 +17,6 @@ public interface AppraisalFillingDataDAO<T> extends GenericsDAO<T>{
     public boolean isExist(String year);
     public List<?> readByCurrentYear(String cyear);
          
-    
+    public List<?> getCurrentAndPreviousYear();
+    public List<?> getappraisalDate();
 }

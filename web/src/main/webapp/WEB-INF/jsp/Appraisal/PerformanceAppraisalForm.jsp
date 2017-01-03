@@ -331,7 +331,7 @@
                                                             <th style="text-align: center;width: 50px" id="editT">Edit <br><a href="#" title="Deleted KRA" data-toggle="modal" data-target="#deletedKraModel" onclick="deletedKraajaxfun('${appraisalId}');" style="color: red;">KRA</a> </th>
                                                             <th style="text-align: center;width: 50px"><span style='margin-top: 5px;'>
                                                                     <c:if test="${flag ne 'true' && flag1 ne 'true' && flag2 ne 'true'}">
-                                                                        <input type="button" value="+" id="addRowButtonId" disabled="true" title="Add New" />
+                                                                        <input type="button" value="+" id="addRowButtonId" title="Add New" />
                                                                     </c:if>
                                                                     <c:if test="${flag eq 'true' || flag1 eq 'true' || flag2 eq 'true'}">
                                                                         <input type="button" value="+" id="addRowButtonId" title="Add New" />
@@ -720,7 +720,7 @@
                                                             <th style="text-align: center;width: 50px" id="editT">Edit<br><a href="#" style="color: red;" title="Deleted Activities" data-toggle="modal" data-target="#deletedActivityModel" onclick="deletedActivitiesajaxfun('${appraisalId}');">Activities</a></th>
                                                             <th style="text-align: center;width: 50px"><span style='margin-top: 5px;'>
                                                                     <c:if test="${flag ne 'true' && flag1 ne 'true' && flag2 ne 'true'}">
-                                                                        <input type="button" value="+" id="addactivityRowButtonId" disabled="true" title="Add New" />
+                                                                        <input type="button" value="+" id="addactivityRowButtonId" title="Add New" />
                                                                     </c:if>
                                                                     <c:if test="${flag eq 'true' || flag1 eq 'true' || flag2 eq 'true'}">
                                                                         <input type="button" value="+" id="addactivityRowButtonId" title="Add New" />

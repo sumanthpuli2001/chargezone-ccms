@@ -241,7 +241,8 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 
         int year = gc.get(Calendar.YEAR);
         String cyear = "" + year;
-        List<?> appraisalFilling = appraisalFillingDataService.readByCurrentYear(cyear);
+//        List<?> appraisalFilling = appraisalFillingDataService.readByCurrentYear(cyear);
+        List<?> appraisalFilling = appraisalFillingDataService.getappraisalDate();
 
         if (!appraisalFilling.isEmpty()) {
             appraisalFillingData = (AppraisalFillingData) appraisalFilling.get(0);
@@ -347,7 +348,8 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 
         int year = gc.get(Calendar.YEAR);
         String cyear = "" + year;
-        List<?> appraisalFilling = appraisalFillingDataService.readByCurrentYear(cyear);
+//        List<?> appraisalFilling = appraisalFillingDataService.readByCurrentYear(cyear);
+        List<?> appraisalFilling = appraisalFillingDataService.getappraisalDate();
 
         if (!appraisalFilling.isEmpty()) {
             appraisalFillingData = (AppraisalFillingData) appraisalFilling.get(0);
@@ -466,7 +468,8 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 
         int year = gc.get(Calendar.YEAR);
         String cyear = "" + year;
-        List<?> appraisalFilling = appraisalFillingDataService.readByCurrentYear(cyear);
+//        List<?> appraisalFilling = appraisalFillingDataService.readByCurrentYear(cyear);
+        List<?> appraisalFilling = appraisalFillingDataService.getappraisalDate();
 
         if (!appraisalFilling.isEmpty()) {
             appraisalFillingData = (AppraisalFillingData) appraisalFilling.get(0);
@@ -550,7 +553,8 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 
         int year = gc.get(Calendar.YEAR);
         String cyear = "" + year;
-        List<?> appraisalFilling = appraisalFillingDataService.readByCurrentYear(cyear);
+//        List<?> appraisalFilling = appraisalFillingDataService.readByCurrentYear(cyear);
+        List<?> appraisalFilling = appraisalFillingDataService.getappraisalDate();
 
         if (!appraisalFilling.isEmpty()) {
             appraisalFillingData = (AppraisalFillingData) appraisalFilling.get(0);
@@ -629,7 +633,8 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 
         int year = gc.get(Calendar.YEAR);
         String cyear = "" + year;
-        List<?> appraisalFilling = appraisalFillingDataService.readByCurrentYear(cyear);
+//        List<?> appraisalFilling = appraisalFillingDataService.readByCurrentYear(cyear);
+        List<?> appraisalFilling = appraisalFillingDataService.getappraisalDate();
 
         if (!appraisalFilling.isEmpty()) {
             appraisalFillingData = (AppraisalFillingData) appraisalFilling.get(0);
@@ -679,7 +684,8 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 
         int year = gc.get(Calendar.YEAR);
         String cyear = "" + year;
-        List<?> appraisalFilling = appraisalFillingDataService.readByCurrentYear(cyear);
+//        List<?> appraisalFilling = appraisalFillingDataService.readByCurrentYear(cyear);
+        List<?> appraisalFilling = appraisalFillingDataService.getappraisalDate();
 
         if (!appraisalFilling.isEmpty()) {
             appraisalFillingData = (AppraisalFillingData) appraisalFilling.get(0);

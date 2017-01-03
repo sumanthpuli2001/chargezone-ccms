@@ -46,6 +46,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
+import org.exolab.castor.types.DateTime;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
@@ -103,7 +104,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 
         int year = gc.get(Calendar.YEAR);
         String cyear = "" + year;
-        List<?> appraisalFilling = appraisalFillingDataService.readByCurrentYear(cyear);
+//        List<?> appraisalFilling = appraisalFillingDataService.readByCurrentYear(cyear);
+        List<?> appraisalFilling = appraisalFillingDataService.getappraisalDate();
 
         if (!appraisalFilling.isEmpty()) {
             appraisalFillingData = (AppraisalFillingData) appraisalFilling.get(0);
@@ -1523,7 +1525,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         Date currentDate = dateFormat.parse(dateFormat.format(new Date()));
 
         if (null != appraisalPerformanceList && !appraisalPerformanceList.isEmpty()) {
-            List appraisalFillingDataList1 = appraisalFillingDataService.readByCurrentYear("" + year);
+//            List appraisalFillingDataList1 = appraisalFillingDataService.readByCurrentYear("" + year);
+            List appraisalFillingDataList1 = appraisalFillingDataService.getappraisalDate();
 //            if (!appraisalFillingDataList1.isEmpty()) {
 
             AppraisalFillingData appraisalFillingData1 = (AppraisalFillingData) appraisalFillingDataList1.get(0);
@@ -1644,7 +1647,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 }
 
                 if (!list.isEmpty()) {
-                    List appraisalFillingDataList = appraisalFillingDataService.readByCurrentYear("" + year);
+//                    List appraisalFillingDataList = appraisalFillingDataService.readByCurrentYear("" + year);
+                    List appraisalFillingDataList = appraisalFillingDataService.getappraisalDate();
 
                     if (!appraisalFillingDataList.isEmpty()) {
                         AppraisalFillingData appraisalFillingData = (AppraisalFillingData) appraisalFillingDataList.get(0);
@@ -1730,7 +1734,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     }
 
                 } else {
-                    List appraisalFillingDataList = appraisalFillingDataService.readByCurrentYear("" + year);
+//                    List appraisalFillingDataList = appraisalFillingDataService.readByCurrentYear("" + year);
+                    List appraisalFillingDataList = appraisalFillingDataService.getappraisalDate();
                     if (!appraisalFillingDataList.isEmpty()) {
                         AppraisalFillingData appraisalFillingData = (AppraisalFillingData) appraisalFillingDataList.get(0);
 
@@ -1991,12 +1996,25 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //            request.setAttribute("behaviorsFinalscore", behaviorsFinalscore);
 //        }
         int year = Integer.parseInt(request.getParameter("year"));
+        List<?> l1 = appraisalFillingDataService.getCurrentAndPreviousYear();
+        String previousYear = "";
+        int currentYear = 0;
+        if (!l1.isEmpty()) {
+            Object[] obj = (Object[]) l1.get(0);
+//            previousYear = (Integer) obj[0];
+            previousYear = "" + obj[0];
+//            currentYear = (Integer) obj[1];
+        }
         //if (!"".equals(year)) {
 //
 //        }
 //        int year = Calendar.getInstance().get(Calendar.YEAR);
 //        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId);
-        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
+
+//2017//
+
+//        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
+        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, Integer.parseInt(previousYear));
         if (!list.isEmpty()) {
 
             appraisalPerformanceMaster = (AppraisalPerformanceMaster) list.get(0);
@@ -2254,8 +2272,18 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //            request.setAttribute("behaviorsFinalscore", behaviorsFinalscore);
 //        }
         int year = Calendar.getInstance().get(Calendar.YEAR);
+        List<?> l1 = appraisalFillingDataService.getCurrentAndPreviousYear();
+        String previousYear = "";
+        int currentYear = 0;
+        if (!l1.isEmpty()) {
+            Object[] obj = (Object[]) l1.get(0);
+//            previousYear = (Integer) obj[0];
+            previousYear = "" + obj[0];
+//            currentYear = (Integer) obj[1];
+        }
 //        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId);
-        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
+//        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
+        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, Integer.parseInt(previousYear));
         if (!list.isEmpty()) {
 
             appraisalPerformanceMaster = (AppraisalPerformanceMaster) list.get(0);
@@ -3763,7 +3791,18 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         int year = Calendar.getInstance().get(Calendar.YEAR);
-        List appraisalPerformanceList = appraisalPerformanceService.readByAppraisalPerformanceIdAndYearWise("" + employeeMaster.getId(), year);
+
+        List<?> l1 = appraisalFillingDataService.getCurrentAndPreviousYear();
+        String previousYear = "";
+        int currentYear = 0;
+        if (!l1.isEmpty()) {
+            Object[] obj = (Object[]) l1.get(0);
+//            previousYear = (Integer) obj[0];
+            previousYear = "" + obj[0];
+//            currentYear = (Integer) obj[1];
+        }
+
+        List appraisalPerformanceList = appraisalPerformanceService.readByAppraisalPerformanceIdAndYearWise("" + employeeMaster.getId(), Integer.parseInt(previousYear));
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
         AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
         AppraisalFillingData appraisalFillingData = new AppraisalFillingData();
@@ -3792,7 +3831,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 
             List list = appraisalPerformanceKraService.readByAppraisalPerformancekraId(appraisalPerformanceKra);
 
-            List appraisalFillingDataList1 = appraisalFillingDataService.readByCurrentYear("" + year);
+//            List appraisalFillingDataList1 = appraisalFillingDataService.readByCurrentYear("2016");
+            List appraisalFillingDataList1 = appraisalFillingDataService.getappraisalDate();
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date currentDate = dateFormat.parse(dateFormat.format(new Date()));
             if (!appraisalFillingDataList1.isEmpty()) {
@@ -3895,7 +3935,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 
             if (!list.isEmpty()) {
 
-                List appraisalFillingDataList = appraisalFillingDataService.readByCurrentYear("" + year);
+//                List appraisalFillingDataList = appraisalFillingDataService.readByCurrentYear("" + year);
+                List appraisalFillingDataList = appraisalFillingDataService.getappraisalDate();
 
                 if (!appraisalFillingDataList.isEmpty()) {
                     appraisalFillingData = (AppraisalFillingData) appraisalFillingDataList.get(0);
@@ -3998,7 +4039,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             }
         } else {
 
-            List appraisalFillingDataList = appraisalFillingDataService.readByCurrentYear("" + year);
+//            List appraisalFillingDataList = appraisalFillingDataService.readByCurrentYear("" + year);
+            List appraisalFillingDataList = appraisalFillingDataService.getappraisalDate();
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             if (!appraisalFillingDataList.isEmpty()) {
                 /////////////////////////Employee start///////////////////////////////////////
@@ -4109,7 +4151,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         request.setAttribute("endSelfApproval", endSelfApproval);
         request.setAttribute("managerEndSelfApproval", managerEndSelfApproval);
 //        Employee
-        List timeLineData = appraisalFillingDataService.readByCurrentYear("" + year);
+//        List timeLineData = appraisalFillingDataService.readByCurrentYear("" + year);
+        List timeLineData = appraisalFillingDataService.getappraisalDate();
         if (!timeLineData.isEmpty()) {
             appraisalFillingData1 = (AppraisalFillingData) timeLineData.get(0);
         }
@@ -4562,7 +4605,17 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
 //        UserRightMaster user1 = (UserRightMaster) request.getSession().getAttribute("userRight");
         int cyear = Calendar.getInstance().get(Calendar.YEAR);
-        List<?> appraisalPerformanceList = appraisalPerformanceService.readOwnAppraisalPerformance(employeeMaster, cyear);
+        List<?> l1 = appraisalFillingDataService.getCurrentAndPreviousYear();
+        String previousYear = "";
+        int currentYear = 0;
+        if (!l1.isEmpty()) {
+            Object[] obj = (Object[]) l1.get(0);
+//            previousYear = (Integer) obj[0];
+            previousYear = "" + obj[0];
+//            currentYear = (Integer) obj[1];
+        }
+//        List<?> appraisalPerformanceList = appraisalPerformanceService.readOwnAppraisalPerformance(employeeMaster, cyear);
+        List<?> appraisalPerformanceList = appraisalPerformanceService.readOwnAppraisalPerformance(employeeMaster, Integer.parseInt(previousYear));
 
         mv.getModelMap().put("list", appraisalPerformanceList);
         mv.getModelMap().put("currentYearRequest", appraisalPerformanceList.size());

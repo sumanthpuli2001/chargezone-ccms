@@ -927,31 +927,31 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     }
 
                     if (!zydexLocationName.equals("HO") && !zydexLocationName.equals("R&D")) {
-                        if (!time.equals("")) {
-                            if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
-                                List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
-                                if (!empBalList.isEmpty()) {
-                                    employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
-                                    float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
-                                    time1 = time1 + Float.parseFloat(time);
-                                    employeeLeaveBalance1.setNoOfLeaveRemain(time1);
-                                    employeeLeaveBalanceService.update(employeeLeaveBalance1);
-                                } else {
-                                    employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
-                                    employeeLeaveBalance1.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-                                    employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time));
-                                    employeeLeaveBalanceService.create(employeeLeaveBalance1);
-                                }
-                                Date date5 = new Date();
-                                String todayDate = formatter.format(date5);
-                                OverTimeMaster overTimeMaster = new OverTimeMaster();
-                                overTimeMaster.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-                                overTimeMaster.setDate(todayDate);
-                                overTimeMaster.setTime(time);
-                                overTimeMasterService.create(overTimeMaster);
-                            }
-
-                        }
+//                        if (!time.equals("")) {
+//                            if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
+//                                List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+//                                if (!empBalList.isEmpty()) {
+//                                    employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
+//                                    float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
+//                                    time1 = time1 + Float.parseFloat(time);
+//                                    employeeLeaveBalance1.setNoOfLeaveRemain(time1);
+//                                    employeeLeaveBalanceService.update(employeeLeaveBalance1);
+//                                } else {
+//                                    employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
+//                                    employeeLeaveBalance1.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
+//                                    employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time));
+//                                    employeeLeaveBalanceService.create(employeeLeaveBalance1);
+//                                }
+//                                Date date5 = new Date();
+//                                String todayDate = formatter.format(date5);
+//                                OverTimeMaster overTimeMaster = new OverTimeMaster();
+//                                overTimeMaster.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
+//                                overTimeMaster.setDate(todayDate);
+//                                overTimeMaster.setTime(time);
+//                                overTimeMasterService.create(overTimeMaster);
+//                            }
+//
+//                        }
                     } else if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
                         if (!time2.equals("")) {
                             List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);

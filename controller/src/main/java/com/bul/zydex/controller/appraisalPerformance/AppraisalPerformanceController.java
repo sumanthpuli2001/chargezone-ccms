@@ -423,6 +423,15 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             String employeeId = "" + employee.getId();
             String employeeName = "" + employee.getEmployeeName();
             int year = Calendar.getInstance().get(Calendar.YEAR);
+            List<?> l1 = appraisalFillingDataService.getCurrentAndPreviousYear();
+            String previousYear = "";
+//        int currentYear = 0;
+            if (!l1.isEmpty()) {
+                Object[] obj = (Object[]) l1.get(0);
+//            previousYear = (Integer) obj[0];
+                previousYear = "" + obj[0];
+//            currentYear = (Integer) obj[1];
+            }
             //StartDate To create FirstTime//
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -435,7 +444,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             if (null == weightageScore) {
                 weightageScore = "";
             }
-            List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
+//            List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
+            List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, Integer.parseInt(previousYear));
             if (!list.isEmpty()) {
                 //AppraisalPerformanceMaster appraisalPerformanceMaster =new AppraisalPerformanceMaster();
                 appraisalPerformanceMaster = (AppraisalPerformanceMaster) list.get(0);
@@ -2012,7 +2022,6 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId);
 
 //2017//
-
 //        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
         List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, Integer.parseInt(previousYear));
         if (!list.isEmpty()) {
@@ -4185,6 +4194,15 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         ModelAndView mv = new ModelAndView();
         Year year = Year.now();
         int currentYear = Integer.parseInt(year.toString());
+        List<?> l1 = appraisalFillingDataService.getCurrentAndPreviousYear();
+        String previousYear = "";
+//        int currentYear = 0;
+        if (!l1.isEmpty()) {
+            Object[] obj = (Object[]) l1.get(0);
+//            previousYear = (Integer) obj[0];
+            previousYear = "" + obj[0];
+//            currentYear = (Integer) obj[1];
+        }
         try {
 
 //            Object[] performanceManagementArray = appraisalPerformanceService.readperformanceByHr(currentYear);
@@ -4192,39 +4210,45 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             List performanceManagementArray = appraisalPerformanceService.readperformanceByHr();
             finalArray.add(performanceManagementArray.get(0));
             try {
-                int performanceManagementArray1 = appraisalPerformanceService.readperformanceByHr1(currentYear);
+//                int performanceManagementArray1 = appraisalPerformanceService.readperformanceByHr1(currentYear);
+                int performanceManagementArray1 = appraisalPerformanceService.readperformanceByHr1(Integer.parseInt(previousYear));
                 finalArray.add(performanceManagementArray1);
             } catch (Exception ex) {
                 finalArray.add(0);
 
             }
             try {
-                int performanceManagementArray2 = appraisalPerformanceService.readperformanceByHr2(currentYear);
+//                int performanceManagementArray2 = appraisalPerformanceService.readperformanceByHr2(currentYear);
+                int performanceManagementArray2 = appraisalPerformanceService.readperformanceByHr2(Integer.parseInt(previousYear));
                 finalArray.add(performanceManagementArray2);
             } catch (Exception e) {
                 finalArray.add(0);
             }
 
             try {
-                int performanceManagementArray3 = appraisalPerformanceService.readperformanceByHr3(currentYear);
+//                int performanceManagementArray3 = appraisalPerformanceService.readperformanceByHr3(currentYear);
+                int performanceManagementArray3 = appraisalPerformanceService.readperformanceByHr3(Integer.parseInt(previousYear));
                 finalArray.add(performanceManagementArray3);
             } catch (Exception e) {
                 finalArray.add(0);
             }
             try {
-                int performanceManagementArray4 = appraisalPerformanceService.readperformanceByHr4(currentYear);
+//                int performanceManagementArray4 = appraisalPerformanceService.readperformanceByHr4(currentYear);
+                int performanceManagementArray4 = appraisalPerformanceService.readperformanceByHr4(Integer.parseInt(previousYear));
                 finalArray.add(performanceManagementArray4);
             } catch (Exception e) {
                 finalArray.add(0);
             }
             try {
-                int performanceManagementArray5 = appraisalPerformanceService.readperformanceByHr5(currentYear);
+//                int performanceManagementArray5 = appraisalPerformanceService.readperformanceByHr5(currentYear);
+                int performanceManagementArray5 = appraisalPerformanceService.readperformanceByHr5(Integer.parseInt(previousYear));
                 finalArray.add(performanceManagementArray5);
             } catch (Exception e) {
                 finalArray.add(0);
             }
             try {
-                int performanceManagementArray6 = appraisalPerformanceService.readperformanceByHr6(currentYear);
+//                int performanceManagementArray6 = appraisalPerformanceService.readperformanceByHr6(currentYear);
+                int performanceManagementArray6 = appraisalPerformanceService.readperformanceByHr6(Integer.parseInt(previousYear));
                 finalArray.add(performanceManagementArray6);
             } catch (Exception e) {
                 finalArray.add(0);
@@ -5031,10 +5055,21 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         int year = Calendar.getInstance().get(Calendar.YEAR);
+        List<?> l1 = appraisalFillingDataService.getCurrentAndPreviousYear();
+        String previousYear = "";
+//        int currentYear = 0;
+        if (!l1.isEmpty()) {
+            Object[] obj = (Object[]) l1.get(0);
+//            previousYear = (Integer) obj[0];
+            previousYear = "" + obj[0];
+//            currentYear = (Integer) obj[1];
+        }
 
-        List pendingAtEmployeeList = appraisalPerformanceService.readPendingEmployeePmp(employeeMaster.getId(), year);
+//        List pendingAtEmployeeList = appraisalPerformanceService.readPendingEmployeePmp(employeeMaster.getId(), year);
+        List pendingAtEmployeeList = appraisalPerformanceService.readPendingEmployeePmp(employeeMaster.getId(), Integer.parseInt(previousYear));
 
-        List pendingAtEmployeeListForManager = appraisalPerformanceService.readPendingEmployeePmpByManager("" + employeeMaster.getId(), year);
+//        List pendingAtEmployeeListForManager = appraisalPerformanceService.readPendingEmployeePmpByManager("" + employeeMaster.getId(), year);
+        List pendingAtEmployeeListForManager = appraisalPerformanceService.readPendingEmployeePmpByManager("" + employeeMaster.getId(), Integer.parseInt(previousYear));
         request.setAttribute("pendingAtEmployeeList", pendingAtEmployeeList.size());
         List<String> empIdList = new ArrayList();
         for (Object obj : pendingAtEmployeeListForManager) {

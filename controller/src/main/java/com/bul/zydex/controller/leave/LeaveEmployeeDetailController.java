@@ -2356,7 +2356,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
     public void getActualDayByAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String strDate = request.getParameter("strDate");
         String enDate = request.getParameter("enDate");
-         String sDateStatus = request.getParameter("sDateStatus");
+        String sDateStatus = request.getParameter("sDateStatus");
         String eDateStatus = request.getParameter("eDateStatus");
         strDate = strDate.replaceAll(",", "/");
         enDate = enDate.replaceAll(",", "/");
@@ -2422,7 +2422,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 }
                 if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
                     if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("SecondHalf") && coutnter == 0) {
-                        days--;
+                        if (!strDate.equals(enDate)) {
+                            days--;
+                        }
                     }
                 }
                 coutnter++;

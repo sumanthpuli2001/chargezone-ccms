@@ -2485,7 +2485,8 @@
             }
 
         } else {
-            $("#form1 :input").attr("disabled", true);
+            $("#form1 :input").attr("readonly", true);
+            //$("#form1 :input").attr("disabled", true);
             $("#btn1").attr("disabled", false);
             $("#btn2").attr("disabled", false);
             $("#btn3").attr("disabled", false);

@@ -401,13 +401,20 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     "Error : The Entered Information is not valid.");
             mv.addAllObjects(errors.getModel());
         } else {
-
             float weightageCount = 0;
             int countId = Integer.parseInt(request.getParameter("countId"));
-            for (int i = 1; i <= countId; i++) {
-                String weightage1 = request.getParameter("weightage" + i);
-                weightageCount += Float.parseFloat(weightage1);
+            try {
+                for (int i = 1; i <= countId; i++) {
+                    String weightage1 = request.getParameter("weightage" + i);
+                    if (!"".equals(weightage1)) {
+
+                        weightageCount += Float.parseFloat(weightage1);
+                    }
+                }
+            } catch (Exception e) {
+
             }
+
             if (null != btn && btn.equals("submit")) {
                 if (weightageCount == 75) {
 

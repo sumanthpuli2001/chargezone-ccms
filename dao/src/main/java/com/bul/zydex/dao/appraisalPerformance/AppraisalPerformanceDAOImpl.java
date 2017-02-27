@@ -11,6 +11,7 @@ import com.bul.zydex.model.AppraisalPerformanceKra;
 import com.bul.zydex.model.AppraisalPerformanceMaster;
 import com.bul.zydex.model.EmployeeMaster;
 import java.sql.SQLException;
+import java.util.Calendar;
 import static java.util.Collections.list;
 import java.util.List;
 import jdk.nashorn.internal.runtime.regexp.joni.constants.StringType;
@@ -96,10 +97,11 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
     public List<?> readByAppraisalPerformanceId(String employeeId, int year) {
 
         String query = "";
-
+        int cyear = Calendar.getInstance().get(Calendar.YEAR);
         query += "  "
                 + "FROM AppraisalPerformanceMaster a "
-                + " WHERE a.behaviorsYear =" + year
+                + " WHERE (a.behaviorsYear =" + year + " or a.behaviorsYear =" + cyear + ")"
+               // + " or a.behaviorsYear =" + year + 1
                 + " and a.employeeMaster = " + employeeId;
 //                + "FROM AppraisalPerformanceMaster a "
 //                + " WHERE a.employeeMaster = " + employeeId;

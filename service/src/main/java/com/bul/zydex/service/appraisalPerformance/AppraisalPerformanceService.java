@@ -61,4 +61,5 @@ public interface AppraisalPerformanceService<T> extends GenericsService<T> {
     public List<?> readEmpIdByAppraisalPerformanceId();
 
     public List<?> readByEmpID(int id);
+    public List<?> readOwnAppraisalPerformanceTimeLine(EmployeeMaster employeeMaster, int cyear);
 }

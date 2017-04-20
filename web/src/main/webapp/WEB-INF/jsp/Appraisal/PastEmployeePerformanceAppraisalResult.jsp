@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate var="year" value="${now}" pattern="yyyy" />
 <!DOCTYPE html>
 <html>
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
@@ -27,6 +30,11 @@
         }
         function editClickIdp(id, userid, appraisalId, year) {
             window.location = 'appraisalPerformance.htm?act=editClickIdp&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId + '&year=' + year;
+        }
+        function pastAppraisalClick(id, userid, appraisalId, pyear) {
+//            window.location = 'employeeMaster.htm?act=viewClick&id=' + id;
+//            window.location = 'appraisalPerformance.htm?act=editClick&id=' + id; 
+            window.location = 'appraisalPerformance.htm?act=pastAppraisalClick&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId + '&pyear=' + pyear;
         }
 
         function deleteCheck11() {
@@ -127,13 +135,26 @@
                                                                             <span class="fa fa-pencil"></span>&nbsp;&nbsp;Action
                                                                         </button>
                                                                         <ul class="dropdown-menu">
-                                                                            <li style="width: 100px;">
-                                                                                <a href="#"
-                                                                                   onclick="editClick1(${list[1]},${list[7]},${list[0]},${list[8]});">
 
-                                                                                    &nbsp;&nbsp;Edit PMP
-                                                                                </a>
-                                                                            </li>
+                                                                            <%--<c:if test="${list[8] eq year}">--%>
+                                                                                <li style="width: 100px;">
+                                                                                    <a href="#"
+                                                                                       onclick="editClick1(${list[1]},${list[7]},${list[0]},${list[8]});">
+
+                                                                                        &nbsp;&nbsp;Edit PMP
+                                                                                    </a>
+                                                                                </li>
+                                                                            <%--</c:if>--%>
+                                                                            <%--<c:if test="${list[8] ne year}">--%>
+                                                                                <li style="width: 100px;">
+                                                                                    <a href="#"
+                                                                                       onclick="pastAppraisalClick(${list[1]},${list[7]},${list[0]},${list[8]});">
+
+                                                                                        &nbsp;&nbsp;Past PMP
+                                                                                    </a>
+                                                                                </li>
+                                                                            <%--</c:if>--%>
+
 
                                                                             <li style="width: 100px;">
                                                                                 <a href="#"

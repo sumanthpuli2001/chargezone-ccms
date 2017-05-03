@@ -1543,10 +1543,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         
         calForFlexiNotSupport2.setTime(notflexibleSupportDate1);
         
-        if (flexible
-                == true && calForFlexiNotSupport2.get(Calendar.MONTH)
-                != calForFlexiNotSupport1.get(Calendar.MONTH)) {
-//        if (flexible == true) {
+        
+        if (flexible == true) {
             mv.setViewName("Shift/EmployeeFlexibleDayWisePunchDataReport");
         } else {
             mv.setViewName("Shift/EmployeeIndividualOrDateWiseShiftSearch");
@@ -2841,9 +2839,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         
         calForFlexiNotSupport2.setTime(notflexibleSupportDate1);
         request.setAttribute("id", id);
-        if (flexible
-                == true && calForFlexiNotSupport2.get(Calendar.MONTH)
-                != calForFlexiNotSupport1.get(Calendar.MONTH)) {
+        if (flexible == true ) {
 //        if (flexible == true) {
             mv.setViewName("Shift/EmployeeFlexibleDayWisePunchDataReportOfSubordinate");
             

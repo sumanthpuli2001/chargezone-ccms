@@ -2212,7 +2212,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 }
                             }
                         }
-                        if (flexible == true && calForFlexiNotSupport2.get(Calendar.MONTH) != calForFlexiNotSupport1.get(Calendar.MONTH)) {
+                        if (flexible == true ) {
                             rownum = rownum + 1;
                             Row row4 = firstSheet.createRow(rownum);
                             Cell cell4 = row4.createCell(0);

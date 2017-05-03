@@ -27,6 +27,7 @@ public class PoolCarRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Pool
         query += ""
                 + " From PoolCarRequest a "
                 + " where a.employeeMasterByEmployeeMasterId = " + poolCarRequest.getEmployeeMasterByEmployeeMasterId().getId()
+                + " AND a.status != 14"
                 + " AND STR_TO_DATE(a.startDateTime,'%d/%m/%Y %H:%i') BETWEEN STR_TO_DATE('" + poolCarRequest.getStartDateTime() + " 00:00','%d/%m/%Y %H:%i') AND STR_TO_DATE('" + poolCarRequest.getEndDateTime() + " 00:00','%d/%m/%Y %H:%i')";
         List list = getHibernateTemplate().find(query);
         if (!list.isEmpty()) {

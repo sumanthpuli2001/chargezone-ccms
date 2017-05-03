@@ -234,7 +234,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 cal7.setTime(satdateOfLeave);
 
                 String dayNameOfLeave = format2.format(satdateOfLeave);
-                if (dayNameOfLeave.equals("Monday")) {
+                if (dayNameOfLeave.equals("Monday") && leaveEmployeeDetail.getStartDateStatus().equals("Fullday")) {
                     LeaveEmployeeDetail leaveEmployeeDetail1 = new LeaveEmployeeDetail();
                     leaveEmployeeDetail1.setEmployeeMaster(employeeMaster);
                     cal6.add(Calendar.DAY_OF_MONTH, -2);
@@ -2356,8 +2356,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
     public void getActualDayByAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String strDate = request.getParameter("strDate");
         String enDate = request.getParameter("enDate");
-         String sDateStatus = request.getParameter("sDateStatus");
+        String sDateStatus = request.getParameter("sDateStatus");
         String eDateStatus = request.getParameter("eDateStatus");
+        String leavetype = request.getParameter("leaveType");
         strDate = strDate.replaceAll(",", "/");
         enDate = enDate.replaceAll(",", "/");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -2422,9 +2423,18 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 }
                 if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
                     if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("SecondHalf") && coutnter == 0) {
-                        days--;
+                        if (!strDate.equals(enDate)) {
+                            days--;
+                        }
                     }
                 }
+//                if (leavetype.equals("8")) {
+//                    if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                        if (!strDate.equals(enDate)) {
+//                            days--;
+//                        }
+//                    }
+//                }
                 coutnter++;
             }
             c.add(Calendar.DATE, 1);
@@ -3153,10 +3163,12 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             LeaveTypeMaster leaveTypeMaster1 = new LeaveTypeMaster();
             LeaveTypeMaster leaveTypeMaster2 = new LeaveTypeMaster();
             LeaveTypeMaster leaveTypeMaster3 = new LeaveTypeMaster();
+            LeaveTypeMaster leaveTypeMaster4 = new LeaveTypeMaster();
             EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
             EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
             EmployeeLeaveBalance employeeLeaveBalance2 = new EmployeeLeaveBalance();
             EmployeeLeaveBalance employeeLeaveBalance3 = new EmployeeLeaveBalance();
+            EmployeeLeaveBalance employeeLeaveBalance4 = new EmployeeLeaveBalance();
             try {
 
                 Object[] next = (Object[]) itr.next();
@@ -3184,7 +3196,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 }
 //            Sick Leave
                 List leaveTypeList1 = leaveTypeMasterService.readLeaveType("Sick Leave");
-                if (!leaveTypeList.isEmpty()) {
+                if (!leaveTypeList1.isEmpty()) {
                     leaveTypeMaster1 = (LeaveTypeMaster) leaveTypeList1.get(0);
                 }
                 employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
@@ -3198,7 +3210,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 }
 //            Privilege Leave
                 List leaveTypeList2 = leaveTypeMasterService.readLeaveType("Privilege Leave");
-                if (!leaveTypeList.isEmpty()) {
+                if (!leaveTypeList2.isEmpty()) {
                     leaveTypeMaster2 = (LeaveTypeMaster) leaveTypeList2.get(0);
                 }
                 employeeLeaveBalance2.setEmployeeMaster(employeeMaster);
@@ -3212,7 +3224,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 }
 //            Privilege Leave
                 List leaveTypeList3 = leaveTypeMasterService.readLeaveType("Paternity Leave");
-                if (!leaveTypeList.isEmpty()) {
+                if (!leaveTypeList3.isEmpty()) {
                     leaveTypeMaster3 = (LeaveTypeMaster) leaveTypeList3.get(0);
                 }
                 employeeLeaveBalance3.setEmployeeMaster(employeeMaster);
@@ -3224,16 +3236,37 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 } else {
                     empInfoList.add("");
                 }
+//                Short Leave
+                List leaveTypeList4 = leaveTypeMasterService.readLeaveType("Short Leave");
+                if (!leaveTypeList4.isEmpty()) {
+                    leaveTypeMaster4 = (LeaveTypeMaster) leaveTypeList4.get(0);
+                }
+                employeeLeaveBalance4.setEmployeeMaster(employeeMaster);
+                employeeLeaveBalance4.setLeaveTypeMaster(leaveTypeMaster4);
+                List balanceList4 = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance4);
+                if (!balanceList4.isEmpty()) {
+                    employeeLeaveBalance4 = (EmployeeLeaveBalance) balanceList4.get(0);
+                    empInfoList.add("" + employeeLeaveBalance4.getNoOfLeaveRemain());
+                } else {
+                    empInfoList.add("");
+                }
                 String casualLeaveBalId = "" + employeeLeaveBalance.getId();
                 String sickLeaveBalId = "" + employeeLeaveBalance1.getId();
                 String privilegeLeaveBalId = "" + employeeLeaveBalance2.getId();
                 String paternityLeaveBalId = "";
+                String shortLeaveBalId = "";
                 if (employeeLeaveBalance3.getId() == null) {
                     paternityLeaveBalId = "0";
                 } else {
                     paternityLeaveBalId = "" + employeeLeaveBalance3.getId();
                 }
-                empInfoList.add(casualLeaveBalId + "_" + sickLeaveBalId + "_" + privilegeLeaveBalId + "_" + paternityLeaveBalId);
+
+                if (employeeLeaveBalance4.getId() == null) {
+                    shortLeaveBalId = "0";
+                } else {
+                    shortLeaveBalId = "" + employeeLeaveBalance4.getId();
+                }
+                empInfoList.add(casualLeaveBalId + "_" + sickLeaveBalId + "_" + privilegeLeaveBalId + "_" + paternityLeaveBalId + "_" + shortLeaveBalId);
 
                 map.put(employeeMaster.getId(), empInfoList);
             } catch (Exception e) {

@@ -1494,7 +1494,8 @@
             try {
                 var strDate = document.getElementById("startDate").value;
                 var enDate = document.getElementById("endDate").value;
-//                alert("enDate" + enDate);
+                var leaveTypeMaster = document.getElementById("leaveTypeMaster.id").value;
+              
                 var sDateStatus = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
                 var eDateStatus = document.getElementById("leaveEndDate_SelectFullOrHalfId").value;
                 if (strDate != '') {
@@ -1534,12 +1535,12 @@
                 }
                 //                && sDateStatus != '' && eDateStatus != ''
 
-                if (strDate != '' && enDate != '') {
+                if (strDate != '' && enDate != '' && leaveTypeMaster != "") {
                     //                    alert("wwww" + strDate);
                     //                    alert("sDateStatus" + sDateStatus);
                     $.ajax({
                         type: "POST",
-                        url: "leaveEmployeeDetail.htm?act=getActualDayByAjax&strDate=" + strDate + "&enDate=" + enDate + "&sDateStatus=" + sDateStatus + "&eDateStatus=" + eDateStatus,
+                        url: "leaveEmployeeDetail.htm?act=getActualDayByAjax&strDate=" + strDate + "&enDate=" + enDate + "&sDateStatus=" + sDateStatus + "&eDateStatus=" + eDateStatus +"&leaveType="+leaveTypeMaster, 
                         data: {},
                         dataType: "text",
                         success: function (responseTxt) {
@@ -1753,7 +1754,7 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-12">
                                                         <label>Leave Type:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="leaveTypeMaster.id" class="form-control" onchange="modelopenpopup();leaveSetting(); daysCount();">
+                                                        <form:select path="leaveTypeMaster.id" class="form-control" onchange="modelopenpopup();leaveSetting(); daysCount();  calculateDayByAjax();">
                                                             <form:option value="" label="-- Select --"/>
                                                             <form:options items="${leaveTypemap}" />
                                                         </form:select>

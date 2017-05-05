@@ -101,7 +101,7 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
         query += "  "
                 + "FROM AppraisalPerformanceMaster a "
                 + " WHERE (a.behaviorsYear =" + year + " or a.behaviorsYear =" + cyear + ")"
-               // + " or a.behaviorsYear =" + year + 1
+                // + " or a.behaviorsYear =" + year + 1
                 + " and a.employeeMaster = " + employeeId;
 //                + "FROM AppraisalPerformanceMaster a "
 //                + " WHERE a.employeeMaster = " + employeeId;
@@ -113,10 +113,10 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
     public List<?> readByAppraisalPerformanceIdAndYearWise(String employeeId, int year) {
 
         String query = "";
-
+        int cyear = Calendar.getInstance().get(Calendar.YEAR);
         query += "  "
                 + "FROM AppraisalPerformanceMaster a "
-                + " WHERE a.behaviorsYear =" + year
+                + " WHERE (a.behaviorsYear =" + year + " or a.behaviorsYear =" + cyear + ")"
                 + " and a.employeeMaster = " + employeeId;
 
         return getHibernateTemplate().find(query);
@@ -266,6 +266,36 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " WHERE a.employeeMaster=" + employeeMaster.getId() + ""
                 // + " b.reportingManagerLevel1='" + employeeMaster.getId() + "'"
                 + " order by a.behaviorsYear desc";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public List<?> readOwnAppraisalPerformanceTimeLine(EmployeeMaster employeeMaster, int cyear) {
+        String query = "";
+        String condition = "";
+
+//        query += " "
+//                + " SELECT a.id,b.id, b.employeeId, b.employeeName, d.departmentName, c.designationName, b.role,e.id,a.behaviorsYear"
+//                + " FROM AppraisalPerformanceMaster a "
+//                //+ " FROM EmployeeMaster a "
+//                + " LEFT JOIN a.employeeMaster b "
+//                + " LEFT JOIN b.designationMaster c "
+//                + " LEFT JOIN b.departmentMaster d "
+//                + " LEFT JOIN b.userMaster e "
+//                //+ " WHERE status=1 "
+//                + " a.behaviorsYear =" + cyear
+//                + " WHERE a.employeeMaster=" + employeeMaster.getId() + ""
+//                + " order by a.behaviorsYear desc";
+//                
+        // + " b.reportingManagerLevel1='" + employeeMaster.getId() + "'"
+//                + " order by a.behaviorsYear desc";
+        query += "  "
+                + "FROM AppraisalPerformanceMaster a "
+                + " WHERE a.behaviorsYear =" + cyear
+                + " and a.employeeMaster = " + employeeMaster.getId();
+//                + "and a.employeeStatus=1";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

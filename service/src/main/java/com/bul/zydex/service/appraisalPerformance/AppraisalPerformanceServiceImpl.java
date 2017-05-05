@@ -63,14 +63,17 @@ public class AppraisalPerformanceServiceImpl<T> extends GenericsServiceImpl<T> i
     public int readperformanceByHr3(final int currentYear) {
         return appraisalPerformanceDAO.readperformanceByHr3(currentYear);
     }
+
     @Override
     public int readperformanceByHr4(final int currentYear) {
         return appraisalPerformanceDAO.readperformanceByHr4(currentYear);
     }
+
     @Override
     public int readperformanceByHr5(final int currentYear) {
         return appraisalPerformanceDAO.readperformanceByHr5(currentYear);
     }
+
     @Override
     public int readperformanceByHr6(final int currentYear) {
         return appraisalPerformanceDAO.readperformanceByHr6(currentYear);
@@ -134,6 +137,11 @@ public class AppraisalPerformanceServiceImpl<T> extends GenericsServiceImpl<T> i
     @Override
     public List<?> readByEmpID(int id) {
         return appraisalPerformanceDAO.readByEmpID(id);
+    }
+
+    @Override
+    public List<?> readOwnAppraisalPerformanceTimeLine(EmployeeMaster employeeMaster, int cyear) {
+        return appraisalPerformanceDAO.readOwnAppraisalPerformanceTimeLine(employeeMaster, cyear);
     }
 
 }

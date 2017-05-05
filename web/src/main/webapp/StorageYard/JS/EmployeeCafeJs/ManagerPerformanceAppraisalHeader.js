@@ -1175,16 +1175,47 @@ function finalScoreCount(id) {
 }
 function newFunction(id) {
     //    alert("sdgkjh " + id);
-    var weightage = document.getElementById("weightage" + id).value;
+//    var weightage = document.getElementById("weightage" + id).value;
     //    alert("weightage"+weightage);
-    var val = document.getElementById("finalScore" + id).value;
+//    var val = document.getElementById("finalScore" + id).value;
 //    alert("val"+val);
-    weightage = (weightage * 113.4) / 100;
-    if (parseFloat(weightage) <= parseFloat(val)) {
-        document.getElementById("finalScore" + id).value = "";
-        alert("Your Final Score Above Weightage Score");
-//        prompt("Your Final Score Above Weightage Score");
+    //weightage = (weightage * 113.4) / 100;
+//    if (parseFloat(weightage) <= parseFloat(val)) {
+
+    // Changes
+    var total = 1;
+    var countId = document.getElementById("countId").value;
+
+    var finalScore = 0;
+    while (total <= countId) {
+//        alert('countId'+countId);
+//        alert('index'+total);
+        var val = document.getElementById("finalScore" + total).value;
+//        alert(val);
+        
+        if (val !== "") {
+            finalScore += parseFloat(val);
+        }
+        if (finalScore > 85)
+        {
+            document.getElementById("finalScore" + id).value = "";
+            document.getElementById("totalScore").value = "";
+            alert("Your Final Score Above 85");
+            return false;
+        }
+        total++;
     }
+    // Changes
+
+
+
+
+
+//    if (parseFloat(val) < 85 || parseFloat(val) > 85) {
+//        document.getElementById("finalScore" + id).value = "";
+//        alert("Your Final Score Above 85");
+////        prompt("Your Final Score Above Weightage Score");
+//    }
 
 }
 
@@ -1239,7 +1270,7 @@ function activityScoreCount(id) {
         }
         total++;
     }
-        alert(activityScore);
+    //alert(activityScore);
 //    alert("dhavl" + finalScore);
     document.getElementById("managerActivityScore").value = activityScore;
 //    performancefinalScoreRatings();
@@ -1451,7 +1482,7 @@ $(document).on("click", ":submit", function (e) {
 //                    document.getElementById("trainingSelectTextinput" + i).required = true; change 4/10/2016
 //                    }
 //                }
-                
+
 //                for (i = 1; i <= countId; i++) {
 //                    if (indivisul !== '') {
 ////                    document.getElementById("individualtextDiv" + i).required = true; change 4/10/2016
@@ -1463,7 +1494,7 @@ $(document).on("click", ":submit", function (e) {
 //                    }
 //
 //                }
-                
+
                 //        document.getElementById("kraGoal_activity1").required = true;
                 //        document.getElementById("metric_activity1").required = true;
                 //        document.getElementById("priority1").required = true;
@@ -1475,7 +1506,7 @@ $(document).on("click", ":submit", function (e) {
 //                    return false;
 //                }
 //                for (i = 1; i <= kragoalLengthactivity; i++) {
-                    //            document.getElementById("empMidyearSelfassessmentGoalActivities" + i).required = true;
+                //            document.getElementById("empMidyearSelfassessmentGoalActivities" + i).required = true;
 //                }
 
             } else if (flagEndId === "true") {
@@ -1486,6 +1517,15 @@ $(document).on("click", ":submit", function (e) {
                 for (i = 1; i <= kragoalLength; i++) {
                     document.getElementById("finalScore" + i).required = true;
                 }
+                // changes
+                var val = document.getElementById("totalScore").value;
+                if (val > 85)
+                {
+                    alert("Your Final Score Above 85");
+                    return false;
+                }
+                // changes 
+
 //                for (i = 1; i <= count; i++) {
 //                document.getElementById("compentencyEndYear" + i).required = true; change 4/10/2016
 //            document.getElementById("compentencyEndRemark" + i).required = true;
@@ -1504,7 +1544,7 @@ $(document).on("click", ":submit", function (e) {
 //                    }
 
 //                }
-               
+
                 for (i = 1; i <= kragoalLengthactivity; i++) {
                     var activityidOther = document.getElementById("kraGoal_activity" + i).value;
                     if (activityidOther !== '') {
@@ -2157,7 +2197,7 @@ $(document).ready(function () {
 //        }
 //    }
     //////////////////////////////////////////////////////////////
-    
+
 //    /////////////Individual Development Plan///////////////////////
 //    var countId = document.getElementById("IndividualId").value;
 //    ///////////////////Other wise filed show hide/////////////////////////

@@ -716,7 +716,7 @@
 
                                                             <th style="margin: 0px;width: 70px;text-align: center" id="midYearDivid">Mid Year Status</th>
                                                             <th style="margin: 0px;width: 70px;text-align: center" id="endYearDivid1">End Year Status</th>
-                                                            <th style="margin: 0px;width: 25px;text-align: center" id="finalScoreid01">Activity/Project Performance</th>
+                                                            <th style="margin: 0px;width: 25px;text-align: center" id="finalScoreid01">Performance Score (Out of 5)</th>
                                                             <th style="text-align: center;width: 50px" id="editT">Edit<br><a href="#" style="color: red;" title="Deleted Activities" data-toggle="modal" data-target="#deletedActivityModel" onclick="deletedActivitiesajaxfun('${appraisalId}');">Activities</a></th>
                                                             <th style="text-align: center;width: 50px"><span style='margin-top: 5px;'>
                                                                     <c:if test="${flag ne 'true' && flag1 ne 'true' && flag2 ne 'true'}">
@@ -897,51 +897,51 @@
                                                                                         <c:choose>
                                                                                             <c:when test="${kragoalOtherActivity.activity eq '5'}">
 
-                                                                                                <option value="5" selected="">Far Exceeds Expectations</option>
+                                                                                                <option value="5" selected="">5</option>
                                                                                             </c:when>
                                                                                             <c:otherwise>
 
-                                                                                                <option value="5">Far Exceeds Expectations</option>
+                                                                                                <option value="5">5</option>
                                                                                             </c:otherwise>
                                                                                         </c:choose>
                                                                                         <c:choose>
                                                                                             <c:when test="${kragoalOtherActivity.activity eq '4'}">
 
-                                                                                                <option value="4" selected="">Exceeds Expectations</option>
+                                                                                                <option value="4" selected="">4</option>
                                                                                             </c:when>
                                                                                             <c:otherwise>
 
-                                                                                                <option value="4">Exceeds Expectations</option>
+                                                                                                <option value="4">4</option>
                                                                                             </c:otherwise>
                                                                                         </c:choose>
                                                                                         <c:choose>
                                                                                             <c:when test="${kragoalOtherActivity.activity eq '3'}">
 
-                                                                                                <option value="3" selected="">Meets Expectations</option>
+                                                                                                <option value="3" selected="">3</option>
                                                                                             </c:when>
                                                                                             <c:otherwise>
 
-                                                                                                <option value="3">Meets Expectations</option>
+                                                                                                <option value="3">3</option>
                                                                                             </c:otherwise>
                                                                                         </c:choose>
                                                                                         <c:choose>
                                                                                             <c:when test="${kragoalOtherActivity.activity eq '2'}">
 
-                                                                                                <option value="2" selected="">Partially Meets Expectations</option>
+                                                                                                <option value="2" selected="">2</option>
                                                                                             </c:when>
                                                                                             <c:otherwise>
 
-                                                                                                <option value="2">Partially Meets Expectations</option>
+                                                                                                <option value="2">2</option>
                                                                                             </c:otherwise>
                                                                                         </c:choose>
                                                                                         <c:choose>
                                                                                             <c:when test="${kragoalOtherActivity.activity eq '1'}">
 
-                                                                                                <option value="1" selected="">Does Not Meet Expectations</option>
+                                                                                                <option value="1" selected="">1</option>
                                                                                             </c:when>
                                                                                             <c:otherwise>
 
-                                                                                                <option value="1">Does Not Meet Expectations</option>
+                                                                                                <option value="1">1</option>
                                                                                             </c:otherwise>
                                                                                         </c:choose>
                                                                                     </select>
@@ -1046,11 +1046,11 @@
                                                                     <td id="">
                                                                         <select id="activity1" name="activity1" class="form-control saveRequried" style="margin: 0px;width: 115px;">
                                                                             <option value="">--SELECT--</option>
-                                                                            <option value="5">Far Exceeds Expectations</option>
-                                                                            <option value="4">Exceeds Expectations</option>
-                                                                            <option value="3">Meets Expectations</option>
-                                                                            <option value="2">Partially Meets Expectations</option>
-                                                                            <option value="1">Does Not Meet Expectations</option>
+                                                                            <option value="5">5</option>
+                                                                            <option value="4">4</option>
+                                                                            <option value="3">3</option>
+                                                                            <option value="2">2</option>
+                                                                            <option value="1">1</option>
                                                                         </select>
                                                                     </td>
 

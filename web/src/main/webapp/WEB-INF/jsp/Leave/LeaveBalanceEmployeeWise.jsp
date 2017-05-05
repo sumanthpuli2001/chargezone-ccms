@@ -52,7 +52,7 @@
                 <li><a href="#"><i class="fa a-dashboard"></i> Home</a></li>
                 <li class="active">Search Leave Balance</li>
             </ol>
-        </section>f
+        </section>
         <c:if test="${!empty successMessage}">
             <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
         </c:if>
@@ -103,7 +103,7 @@
                                                         <form:errors path="designationMaster" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        
+
                                                         <div class="col-sm-3" style="margin-top: 30px;">
                                                             <input type="checkbox" name="active" checked="true">
                                                             <label>Active</label>
@@ -165,6 +165,7 @@
                                                                     <th>Sick Leave</th>
                                                                     <th>Privilege Leave</th>
                                                                     <th>Paternity Leave</th>
+                                                                    <th>Short Leave</th>
                                                                     <th>Action</th>
                                                                 </tr>
                                                             </thead>
@@ -180,9 +181,10 @@
                                                                 <td>${employeeBalanceMap.value[3]}</td>
                                                                 <td>${employeeBalanceMap.value[4]}</td>
                                                                 <td>${employeeBalanceMap.value[5]}</td>
+                                                                <td>${employeeBalanceMap.value[6]}</td>
                                                                 <%--</c:forEach>--%>
                                                                 <td>
-                                                                    <c:set var="leaveType" value="${fn:split(employeeBalanceMap.value[6], '_')}"></c:set>
+                                                                    <c:set var="leaveType" value="${fn:split(employeeBalanceMap.value[7], '_')}"></c:set>
                                                                         <div class="btn-group">
                                                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                 Edit <span class="caret"></span>
@@ -206,6 +208,12 @@
                                                                                     &nbsp;&nbsp;PL
                                                                                 </a>
                                                                             </li>
+                                                                            <li>
+                                                                                <a href="#" data-toggle="modal" data-target="#myModal"
+                                                                                   onclick="viewClick(${leaveType[4]});">
+                                                                                    &nbsp;&nbsp;Short Leave
+                                                                                </a>
+                                                                            </li>
                                                                             <c:if test="${leaveType[3] ne '0'}">
                                                                                 <li>
                                                                                     <a href="#" data-toggle="modal" data-target="#myModal"
@@ -214,8 +222,6 @@
                                                                                     </a>
                                                                                 </li>
                                                                             </c:if>
-
-
                                                                         </ul>
                                                                     </div>
                                                                 </td>
@@ -282,9 +288,9 @@
 
         function submitFormFun() {
             var empLeaveBalId = document.getElementById("empLeaveBalId").value;
-            alert("empLeaveBalId" + empLeaveBalId);
+//            alert("empLeaveBalId" + empLeaveBalId);
             var leaveBalance = document.getElementById("leaveBalance").value;
-            alert("leaveBalance" + leaveBalance);
+//            alert("leaveBalance" + leaveBalance);
             $.ajax({
                 type: "POST",
                 url: "leaveEmployeeDetail.htm?act=leaveBalUpdate&empLeaveBalId=" + empLeaveBalId,

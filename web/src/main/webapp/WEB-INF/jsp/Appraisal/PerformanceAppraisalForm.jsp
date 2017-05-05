@@ -18,7 +18,7 @@
             form { position: relative;}
 
             :required:focus {
-                box-shadow: 0  0 3px rgba(255,0,0,0.5); 
+                box-shadow: 0  0 3px rgba(255,0,0,0.5);
             }
         </style>
         <!--        <script>
@@ -206,6 +206,7 @@
                                 <!--<span style="color: red;font-size: 14px;">* indicates mandatory field.</span>-->
                                 <!--<span style="color: red;font-size: 14px;">All the editable fields are mandatory.</span>-->
                                 <form:form class="form-horizontal" id="form1" role="form1" action="appraisalPerformance.htm?act=createSubmit" commandName="appraisalPerformanceMaster" enctype="multipart/form-data" method="post" name='form'>
+                                    <input type="hidden" id="yearparmStr" name="yearparmStr" value="${year}">
                                     <!--form horizontal starts here-->
                                     <!--<form class="form-horizontal" role="form" commandName="AppraisalPerformanceMaster">-->
                                     <div class="box box-info collapsed-box displayAction">
@@ -1051,6 +1052,7 @@
                                                                             <option value="3">3</option>
                                                                             <option value="2">2</option>
                                                                             <option value="1">1</option>
+                                                                            <option value="0">0</option>
                                                                         </select>
                                                                     </td>
 
@@ -1132,7 +1134,7 @@
                                                                                             buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></span>
                                                                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                                                                                 </div>
-                                                                            </div> /.box-header 
+                                                                            </div> /.box-header
                                                                             <div class="box-body no-padding">
                                                                                 <div class="row">
                                                                                     <div class="col-md-12 col-sm-12">
@@ -1344,7 +1346,7 @@
                                                                             <div class="box-body no-padding">
                                                                                 <div class="row">
                                                                                     <div class="col-md-12 col-sm-12">
-                                    
+
                                                                                         <div class="table-responsive">
                                                                                             <table id="demo5" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                                                                 <tr>
@@ -1357,7 +1359,7 @@
                                                                                                 <th style="text-align: center">Add New</th>
                                                                                                 </tr>
                                                                                                 <tr>
-                                    
+
                                     <%--<c:choose>--%>
                                     <%--<c:when test="${not empty individualDevelopmentPlanList}">--%>
                                     <input type="hidden" name="IndividualId" id="IndividualId" value="$/{fn:length(individualDevelopmentPlanList)}">
@@ -1465,7 +1467,7 @@
                             </td>
                                     <%--</c:if>--%>
                                     </tr>
-                                    
+
 
                                         <tr id="individualEmpMidLabel1TrId$/{status.count}">
                                         <td colspan="3" id="midYearReId$/{status.count}"><b>Employee Mid-Year Remark</b></td>
@@ -1520,7 +1522,7 @@
                                                 </span>
                                             </td>
                                         </tr>
-                                        
+
 
                                         <tr>
                                             <td colspan="3" id="midYearReId"><b>Employee Mid-Year Remark</b></td>

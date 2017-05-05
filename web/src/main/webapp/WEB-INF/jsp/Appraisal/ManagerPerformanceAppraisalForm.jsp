@@ -178,7 +178,7 @@
                             <div class="tab-content">
                                 <!--<span style="color: red;font-size: 14px;">All the editable fields are mandatory.</span>-->
                                 <form:form class="form-horizontal" id="form1" role="form1" action="appraisalPerformance.htm?act=createSubmitManager" commandName="appraisalPerformanceMaster" enctype="multipart/form-data" method="post" name='form' >
-
+                                    <input type="hidden" id="yearparmStr" name="yearparmStr" value="${year}">
                                     <!--form horizontal starts here-->
                                     <!--<form class="form-horizontal" role="form" commandName="AppraisalPerformanceMaster">-->
                                     <div class="box box-info collapsed-box ">
@@ -876,6 +876,16 @@
                                                                                             <option value="1">1</option>
                                                                                         </c:otherwise>
                                                                                     </c:choose>
+                                                                                    <c:choose>
+                                                                                        <c:when test="${kragoalOtherActivity.managerActivity eq '0'}">
+
+                                                                                            <option value="0" selected="">1</option>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
+
+                                                                                            <option value="0">0</option>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
                                                                                 </select>
                                                                             </div>
                                                                         </td>
@@ -986,6 +996,7 @@
                                                                             <option value="3">3</option>
                                                                             <option value="2">2</option>
                                                                             <option value="1">1</option>
+                                                                            <option value="0">0</option>
                                                                         </select>
                                                                     </td>
 
@@ -1063,7 +1074,7 @@
                                                                                     <span id="spanId3">Expand</span><span class="btn btn-box-tool" id="btn4" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></span>
                                                                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                                                                                 </div>
-                                                                            </div> /.box-header 
+                                                                            </div> /.box-header
                                                                             <div class="box-body no-padding">
                                                                                 <div class="row">
                                                                                     <div class="col-md-12 col-sm-12">
@@ -1243,7 +1254,7 @@
                             </div>
                         </div>
                     </div>
-                </div> /.box-body 
+                </div> /.box-body
             </div>-->
 
 
@@ -1254,14 +1265,14 @@
                                                                                     <span id="spanId4">Expand</span><span class="btn btn-box-tool" id="btn5" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></span>
                                                                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                                                                                 </div>
-                                                                            </div> /.box-header 
+                                                                            </div> /.box-header
                                                                             <div class="box-body no-padding">
                                                                                 <div class="row">
                                                                                     <div class="col-md-12 col-sm-12">
-                                    
+
                                                                                         <div class="table-responsive">
                                                                                             <table id="demo5" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                    
+
                                                                                                 <tr>
                                                                                                     <th style="text-align: center">Sr.No.</th>
                                                                                                     <th style="text-align: center">IDP Name & Details</th>
@@ -1450,9 +1461,9 @@
                                 </table>
 
                             </div>
-                        </div> /.col 
-                    </div> /.row 
-                </div> /.box-body 
+                        </div> /.col
+                    </div> /.row
+                </div> /.box-body
             </div>-->
 
 
@@ -2394,7 +2405,7 @@
                                     <div class="modal-dialog modal-lg">
                                         <form onsubmit="return returnSubmit();"
                                               action="appraisalPerformance.htm?act=reworkByManager" commandName=""
-                                              method="post"  name='form11' id ="form11" class="form-horizontal" role="form"> 
+                                              method="post"  name='form11' id ="form11" class="form-horizontal" role="form">
                                             <input type="hidden" id="pmpIdForRework" name="pmpIdForRework" value="${appraisalId}">
                                             <input type="hidden" name="flagId1" id="flagId" value="${flag}">
                                             <input type="hidden" name="flagMidId1" id="flagMidId" value="${flag1}">

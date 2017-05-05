@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface AppraisalPerformanceService<T> extends GenericsService<T> {
 
-    public List<?> readEmployeesAppraisalPerformance(EmployeeMaster employeeMaster, boolean hr);
+    public List<?> readEmployeesAppraisalPerformance(EmployeeMaster employeeMaster, boolean hr, int year);
 
     public List<?> readByAppraisalPerformanceId(String employee, int year);
 
@@ -61,5 +61,6 @@ public interface AppraisalPerformanceService<T> extends GenericsService<T> {
     public List<?> readEmpIdByAppraisalPerformanceId();
 
     public List<?> readByEmpID(int id);
+
     public List<?> readOwnAppraisalPerformanceTimeLine(EmployeeMaster employeeMaster, int cyear);
 }

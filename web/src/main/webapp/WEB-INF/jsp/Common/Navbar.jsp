@@ -135,7 +135,7 @@
                         <c:if test="${sessionScope.userRight.departmentWiseAttendance}">
                             <li><a href="attendanceRegularizationMaster.htm?act=departmentWiseAttendanceView"><i class="fa fa-circle-o"></i>Department Wise Attendance</a></li>
 
-                        </c:if>  
+                        </c:if>
 
                     </ul>
                 </li>
@@ -253,7 +253,8 @@
                         <li><a href="appraisalPerformance.htm?act=searchOwnappraisalPerformanceSubmit"><i class="fa fa-circle-o"></i>PMP Form</a></li>
                         <li><a href="performanceImprovementPlanMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>PIP Form</a></li>
                             <%--</c:if>--%>
-                        <li><a href="appraisalPerformance.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Subordinates PMP</a></li>
+                        <li><a href="appraisalPerformance.htm?act=searchClick"><i class="fa fa-circle-o"></i>Subordinates PMP</a></li>
+                        <!--<li><a href="appraisalPerformance.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Subordinates PMP</a></li>-->
                         <li><a href="performanceImprovementPlanMaster.htm?act=viewPipListByManager"><i class="fa fa-circle-o"></i>Subordinates PIP</a></li>
                             <c:if test="${sessionScope.userRight.appraisalPmp}">
                             <li><a href="appraisalPerformance.htm?act=searchAppraisalPerformanceReoprtStageWise"><i class="fa fa-circle-o"></i>PMP-Report</a></li>
@@ -266,7 +267,7 @@
                             <!--<li><a href="competencyEvaluationTextmaster.htm?act=createClick"><i class="fa fa-circle-o"></i>Competency Evaluation Text</a></li>-->
                             <li><a href="competencyEvaluationTextmaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Competency Evaluation <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Text Result</a></li>
                             <li class="treeview"><a href="pmpFormStatusMaster.htm?act=showpmpStatusMaster"> <i class="fa fa-circle-o"></i>Unlock PMP Form</span></a></li>
-                        </c:if>
+                            </c:if>
                         <li><a href="appraisal360.htm?act=dashboardResult"><i class="fa fa-circle-o"></i>360 FeedBack Form</a></li>
                             <c:if test="${sessionScope.userRight.appraisal360}">
                             <li><a href="appraisal360.htm?act=createAppraisalResult"><i class="fa fa-circle-o"></i>360 Appraisal</a></li>
@@ -540,7 +541,7 @@
                             </c:if>
                             <c:if test="${sessionScope.employeeInfo.designationMaster.id eq 114 && sessionScope.employeeInfo.departmentMaster.id  eq 59}">
                             <li><a href="employeeReferral.htm?act=finalApproveList"><i class="fa fa-circle-o"></i>Final Approve List</a></li>
-                            </c:if>   
+                            </c:if>
                         <li><a href="employeeReferral.htm?act=createReferral"><i class="fa fa-circle-o"></i>Employee Referral</a></li>
                         <li><a href="employeeReferral.htm?act=showCurrentOpening"><i class="fa fa-circle-o"></i>Current Opening</a></li>
 

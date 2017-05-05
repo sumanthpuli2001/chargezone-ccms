@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface AppraisalPerformanceDAO<T> extends GenericsDAO<T> {
 
-    public List<?> readEmployeesAppraisalPerformance(EmployeeMaster employeeMaster, boolean hr);
+    public List<?> readEmployeesAppraisalPerformance(EmployeeMaster employeeMaster, boolean hr, int year);
 
     public List<?> readByAppraisalPerformanceId(String employeeId, int year);
 
@@ -53,13 +53,14 @@ public interface AppraisalPerformanceDAO<T> extends GenericsDAO<T> {
     public List<?> readEmpIdFromTabId(int id);
 
     public List<?> readIDPSearchByEmployeeWise(T object);
-    
-    public List<?> readPendingEmployeePmp(int employeeId, int year); 
-    
+
+    public List<?> readPendingEmployeePmp(int employeeId, int year);
+
     public List<?> readPendingEmployeePmpByManager(String employeeId, int year);
-    
-    public List<?> readEmpIdByAppraisalPerformanceId(); 
-    
-    public List<?> readByEmpID(int id);  
+
+    public List<?> readEmpIdByAppraisalPerformanceId();
+
+    public List<?> readByEmpID(int id);
+
     public List<?> readOwnAppraisalPerformanceTimeLine(EmployeeMaster employeeMaster, int cyear);
 }

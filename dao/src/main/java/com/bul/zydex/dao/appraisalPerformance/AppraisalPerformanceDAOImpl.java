@@ -39,7 +39,7 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
     }
 
     @Override
-    public List<?> readEmployeesAppraisalPerformance(EmployeeMaster employeeMaster, boolean hr) {
+    public List<?> readEmployeesAppraisalPerformance(EmployeeMaster employeeMaster, boolean hr, int year) {
         String query = "";
         String condition = "";
         if (!hr) {
@@ -58,6 +58,7 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                     + " or b.reportingManagerLevel3='" + employeeMaster.getId() + "'"
                     + " or b.reportingManagerLevel4='" + employeeMaster.getId() + "'"
                     + " or b.reportingManagerLevel5='" + employeeMaster.getId() + "')"
+                    + " and a.behaviorsYear='" + year + "'"
                     + " and ((b.dateOfLeaving is null or b.dateOfLeaving = '') "
                     + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())"
                     + " order by a.behaviorsYear desc";
@@ -72,7 +73,9 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                     + " LEFT JOIN b.designationMaster c "
                     + " LEFT JOIN b.departmentMaster d "
                     + " LEFT JOIN b.userMaster e "
-                    + " WHERE status=1 group By a.id order by a.behaviorsYear desc";
+                    + " WHERE status=1 "
+                    + " and a.behaviorsYear='" + year + "'"
+                    + " group By a.id order by a.behaviorsYear desc";
 
         }
 //        query += " "
@@ -100,7 +103,8 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
         int cyear = Calendar.getInstance().get(Calendar.YEAR);
         query += "  "
                 + "FROM AppraisalPerformanceMaster a "
-                + " WHERE (a.behaviorsYear =" + year + " or a.behaviorsYear =" + cyear + ")"
+                + " WHERE a.behaviorsYear =" + year
+                //                + " WHERE (a.behaviorsYear =" + year + " or a.behaviorsYear =" + cyear + ")"
                 // + " or a.behaviorsYear =" + year + 1
                 + " and a.employeeMaster = " + employeeId;
 //                + "FROM AppraisalPerformanceMaster a "
@@ -196,7 +200,7 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
 
     @Override
     public int readperformanceByHr4(final int currentYear) {
-        //Manager’s Mid Year Review 
+        //Manager’s Mid Year Review
 
         String hqlQuery = "SELECT count(Distinct b.employeeMaster.id) from AppraisalPerformanceKra a"
                 + " LEFT JOIN a.appraisalPerformanceMaster b"
@@ -288,7 +292,7 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
 //                + " a.behaviorsYear =" + cyear
 //                + " WHERE a.employeeMaster=" + employeeMaster.getId() + ""
 //                + " order by a.behaviorsYear desc";
-//                
+//
         // + " b.reportingManagerLevel1='" + employeeMaster.getId() + "'"
 //                + " order by a.behaviorsYear desc";
         query += "  "

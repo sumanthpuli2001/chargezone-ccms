@@ -17,12 +17,12 @@ public class AppraisalFillingDataDAOImpl<T> extends GenericsDAOImpl<T> implement
 
     @Override
     protected Class getDomainClass() {
-        return AppraisalFillingData.class;  
+        return AppraisalFillingData.class;
     }
 
     public boolean isExist(String year) {
         String query = "";
-        query += " FROM AppraisalFillingData a"   
+        query += " FROM AppraisalFillingData a"
                 + " WHERE a.year='" + year + "'";
         List<?> list = getHibernateTemplate().find(query);
         if (!list.isEmpty()) {
@@ -33,29 +33,30 @@ public class AppraisalFillingDataDAOImpl<T> extends GenericsDAOImpl<T> implement
 
     @Override
     public List<?> readByCurrentYear(String cyear) {
-         //EmployeeMaster employeeMaster = (EmployeeMaster) object;
-//        AppraisalFillingData appraisalFillingData=(AppraisalFillingData) 
+        //EmployeeMaster employeeMaster = (EmployeeMaster) object;
+//        AppraisalFillingData appraisalFillingData=(AppraisalFillingData)
         String query = "";
 
         query += ""
                 + "FROM AppraisalFillingData a"
                 + " WHERE a.year =" + cyear;
-                //+ " a.userMaster.id = " + employeeMaster.getUserMaster().getId();
+        //+ " a.userMaster.id = " + employeeMaster.getUserMaster().getId();
 
         return getHibernateTemplate().find(query);
     }
 
     @Override
     public List<?> getCurrentAndPreviousYear() {
-        String query="";
+        String query = "";
         query = " Select Date_format(str_to_date(startDate,'%d/%m/%Y'),'%Y'),Date_format(str_to_date(managerYearEndEndDate,'%d/%m/%Y'),'%Y') "
                 + " from AppraisalFillingData where str_to_date(Date_format(now(),'%d/%m/%Y'),'%d/%m/%Y') between str_to_date(startDate,'%d/%m/%Y') "
                 + " and str_to_date(managerYearEndEndDate,'%d/%m/%Y')";
         return getHibernateTemplate().find(query);
     }
+
     @Override
     public List<?> getappraisalDate() {
-        String query="";
+        String query = "";
         query = " "
                 + " from AppraisalFillingData where str_to_date(Date_format(now(),'%d/%m/%Y'),'%d/%m/%Y') between str_to_date(startDate,'%d/%m/%Y') "
                 + " and str_to_date(managerYearEndEndDate,'%d/%m/%Y')";

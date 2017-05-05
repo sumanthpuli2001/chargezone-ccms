@@ -73,7 +73,6 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
     protected UpdateAppraisalPerformanceActivitiesService<UpdateAppraisalPerformanceActivities> updateAppraisalPerformanceActivitiesService;
     protected AppraisalkraActivityService<AppraisalkraActivity> appraisalkraActivityService;
     protected PmpFormStatusMasterService<PmpFormStatusMaster> pmpFormStatusMasterService;
-    
 
     public UpdateAppraisalPerformanceKraService<UpdateAppraisalPerformanceKra> getUpdateAppraisalPerformanceKraService() {
         return updateAppraisalPerformanceKraService;
@@ -194,7 +193,6 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
     public void setPmpFormStatusMasterService(PmpFormStatusMasterService<PmpFormStatusMaster> pmpFormStatusMasterService) {
         this.pmpFormStatusMasterService = pmpFormStatusMasterService;
     }
-    
 
     public void selectedEmployeeDate(HttpServletRequest request,
             HttpServletResponse response, String userid) throws Exception {
@@ -304,7 +302,7 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
     }
 
     public void managerTimeLineDate(HttpServletRequest request,
-            HttpServletResponse response, String userid) throws Exception { 
+            HttpServletResponse response, String userid) throws Exception {
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
@@ -646,7 +644,7 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
             //String YearEndStartDate = appraisalFillingData.getYearEndStartDate();
             String YearEndDate = appraisalFillingData.getYearEndEndDate();
             Date strDate = sdf.parse(StartDate);
-           // Date eDate = sdf.parse(EndDate);
+            // Date eDate = sdf.parse(EndDate);
             //Date midDate = sdf.parse(MidDate);
             //Date midEndDate = sdf.parse(MidEndDate);
             // Date yearEndStartDate = sdf.parse(YearEndStartDate);
@@ -778,6 +776,7 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
         } catch (Exception e) {
         }
     }
+
     public void mailSendPmpMidHalfapply(HttpServletRequest request) throws Exception {
 
         try {
@@ -835,6 +834,7 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
         } catch (Exception e) {
         }
     }
+
     public void mailSendPmpEndHalfapply(HttpServletRequest request) throws Exception {
 
         try {
@@ -891,5 +891,18 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
             }
         } catch (Exception e) {
         }
+    }
+
+    protected void pmpyearList(HttpServletRequest request) {
+        AppraisalFillingData appraisalFillingData = new AppraisalFillingData();
+//        List<?> pmpyearList = appraisalFillingDataService.getCurrentAndPreviousYear();
+        List<?> pmpyearList = appraisalFillingDataService.read();
+        Map<Integer, String> dm = new HashMap<>();
+        for (Object o : pmpyearList) {
+            appraisalFillingData = (AppraisalFillingData) o;
+            dm.put(appraisalFillingData.getId(), appraisalFillingData.getYear());
+        }
+
+        request.setAttribute("pmpyearList", dm);
     }
 }

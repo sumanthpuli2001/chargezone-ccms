@@ -48,7 +48,8 @@
                                                 <label class="control-label">Employee ID:</label>
                                             </div>
                                             <div class="col-sm-6">
-                                            <form:input path="employeeMaster.id" class="form-control" readonly="true"></form:input>
+                                            <form:input path="employeeMaster.employeeId" class="form-control" readonly="true"></form:input>
+                                            <!--<//form:input path="employeeMaster.id" class="form-control" readonly="true"><//form:input>-->
                                             </div>
                                         </div>
                                         <div class="form-group">

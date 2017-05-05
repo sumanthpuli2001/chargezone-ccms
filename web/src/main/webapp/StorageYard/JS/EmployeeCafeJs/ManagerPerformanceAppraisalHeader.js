@@ -1192,7 +1192,7 @@ function newFunction(id) {
 //        alert('index'+total);
         var val = document.getElementById("finalScore" + total).value;
 //        alert(val);
-        
+
         if (val !== "") {
             finalScore += parseFloat(val);
         }
@@ -1216,7 +1216,7 @@ function newFunction(id) {
 //        alert("Your Final Score Above 85");
 ////        prompt("Your Final Score Above Weightage Score");
 //    }
-
+    performancefinalScoreRatings();
 }
 
 
@@ -1273,7 +1273,7 @@ function activityScoreCount(id) {
     //alert(activityScore);
 //    alert("dhavl" + finalScore);
     document.getElementById("managerActivityScore").value = activityScore;
-//    performancefinalScoreRatings();
+    performancefinalScoreRatings();
 //    newFunction(id);
 }
 
@@ -1387,6 +1387,7 @@ function approveSubmit11() {
 ////////////////////////////////////footer side Java Scripts///////////////////////////////////////////////////////////////
 
 $(document).on("click", ":submit", function (e) {
+    //alert(e);
     if (confirm("Are you sure you want to Submit")) {
         if ($(this).val() !== "" && $(this).val() === "submit") {
 
@@ -1519,11 +1520,20 @@ $(document).on("click", ":submit", function (e) {
                 }
                 // changes
                 var val = document.getElementById("totalScore").value;
-                if (val > 85)
+                var val1 = document.getElementById("managerActivityScore").value;
+                var fval = parseInt(val) + parseInt(val1);
+//                alert(fval);
+                if (fval > 85)
                 {
-                    alert("Your Final Score Above 85");
+//                    alert("Your Final Score Above 85");
+                    FinalAlert();
                     return false;
                 }
+//                if (val > 85)
+//                {
+//                    alert("Your Final Score Above 85");
+//                    return false;
+//                }
                 // changes 
 
 //                for (i = 1; i <= count; i++) {
@@ -2357,13 +2367,29 @@ $(document).ready(function () {
 
 });
 function performancefinalScoreRatings() {
+    var managerActivityScore = 0;
     var totalScore = parseInt(document.getElementById("totalScore").value);
+    var managerActivityScore = parseInt(document.getElementById("managerActivityScore").value);
+
     var behaviorsEndyearTotalscore = parseInt(document.getElementById("behaviorsEndyearTotalscore").value);
 //        alert("DODODOD" + behaviorsEndyearTotalscore);
-    //    alert("POPOPOPO" + totalScore);
-    var behaviorsFinalscore12 = totalScore + behaviorsEndyearTotalscore;
+//    alert("POPOPOPO" + parseFloat('managerActivityScore'));
+    if (isNaN(managerActivityScore)) {
+//        alert("ssss");
+        var behaviorsFinalscore12 = totalScore + behaviorsEndyearTotalscore;
+        document.getElementById("behaviorsFinalscore").value = behaviorsFinalscore12;
+    } else {
 
-    document.getElementById("behaviorsFinalscore").value = behaviorsFinalscore12;
+//        alert("yyyy");
+        var behaviorsFinalscore12 = totalScore + behaviorsEndyearTotalscore + managerActivityScore;
+        document.getElementById("behaviorsFinalscore").value = behaviorsFinalscore12;
+    }
+//    if (managerActivityScore !== managerActivityScore || managerActivityScore !== " ") {
+//        alert(managerActivityScore);
+//    }
+//    var behaviorsFinalscore12 = totalScore + behaviorsEndyearTotalscore + managerActivityScore;
+//    alert(behaviorsFinalscore12);
+
     $('#score1').hide();
     $('#score2').hide();
     $('#score3').hide();
@@ -2421,6 +2447,17 @@ function weitageAlert() {
     bootbox.dialog({
         size: 'small',
         message: "<h1>Oh ! Your Weightage Score is Not Valid…</h1>",
+    });
+}
+
+function FinalAlert() {
+    var booID = setInterval(function () {
+        document.getElementById('bootCloseBtnId').onclick = '';
+        clearInterval(booID);
+    }, 500);
+    bootbox.dialog({
+        size: 'small',
+        message: "<h1>If score is going above 85 - Your Total score should not exceed 85.</h1>",
     });
 }
 //function myajaxfunManager1(competencyEvaluationId) {

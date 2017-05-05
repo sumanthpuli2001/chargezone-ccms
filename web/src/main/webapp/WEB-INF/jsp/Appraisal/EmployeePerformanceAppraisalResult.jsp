@@ -14,22 +14,25 @@
         <title>Appraisal Performance Result</title>
     </head>
     <script>
-        function editClick(id, userid, appraisalId) {
+        function editClick(id, userid, appraisalId, year) {
 //            window.location = 'employeeMaster.htm?act=viewClick&id=' + id;
 //            window.location = 'appraisalPerformance.htm?act=editClick&id=' + id;
 //id=Empid and userid=UserMasterid and= appraisal Id
-            window.location = 'appraisalPerformance.htm?act=editClick&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId;
+            window.location = 'appraisalPerformance.htm?act=editClick&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId + '&year=' + year;
         }
-        
-        function editClickCompetencyForManager(id, userid, appraisalId) {
-            window.location = 'appraisalPerformance.htm?act=editClickCompetencyForManager&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId;
+
+        function editClickCompetencyForManager(id, userid, appraisalId, year) {
+            window.location = 'appraisalPerformance.htm?act=editClickCompetencyForManager&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId + '&year=' + year;
         }
-        function editClickForIdpManager(id, userid, appraisalId) {
-            window.location = 'appraisalPerformance.htm?act=editClickForIdpManager&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId;
+        function editClickForIdpManager(id, userid, appraisalId, year) {
+            window.location = 'appraisalPerformance.htm?act=editClickForIdpManager&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId + '&year=' + year;
         }
-        
+
         function createClick(id) {
             window.location = 'userRightMaster.htm?act=createClick&id=' + id;
+        }
+        function changeRequestPMP(id, userid, appraisalId, year) {
+            window.location = 'appraisalPerformance.htm?act=changeRequestPMP&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId + '&year=' + year;
         }
 
         function deleteCheck11() {
@@ -209,7 +212,7 @@
 <!--                                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" onclick="editClick(${list[0][1]},${list[0][7]},${list[0][0]});" aria-expanded="false">
 
                                                                             <span class="fa fa-pencil"></span>
-                                                                            
+
                                                                             Action &nbsp;&nbsp;
                                                                         </button>-->
                                                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"  aria-expanded="false">
@@ -219,7 +222,7 @@
                                                                         <ul class="dropdown-menu">
                                                                             <li style="width: 100px;">
                                                                                 <a href="#"
-                                                                                   onclick="editClick(${list[0][1]},${list[0][7]},${list[0][0]});">
+                                                                                   onclick="editClick(${list[0][1]},${list[0][7]},${list[0][0]},${list[0][8]});">
 
                                                                                     View PMP
                                                                                 </a>
@@ -227,16 +230,24 @@
 
                                                                             <li style="width: 100px;">
                                                                                 <a href="#"
-                                                                                   onclick="editClickCompetencyForManager(${list[0][1]},${list[0][7]},${list[0][0]});">
+                                                                                   onclick="editClickCompetencyForManager(${list[0][1]},${list[0][7]},${list[0][0]},${list[0][8]});">
                                                                                     View Competency
                                                                                 </a>
                                                                             </li>
                                                                             <li style="width: 100px;">
                                                                                 <a href="#"
-                                                                                   onclick="editClickForIdpManager(${list[0][1]},${list[0][7]},${list[0][0]});">
+                                                                                   onclick="editClickForIdpManager(${list[0][1]},${list[0][7]},${list[0][0]},${list[0][8]});">
                                                                                     View IDP
                                                                                 </a>
                                                                             </li>
+                                                                            <c:if test="${sessionScope.userRight.hr == true}" >
+                                                                                <li style="width: 100px;">
+                                                                                    <a href="#"
+                                                                                       onclick="changeRequestPMP(${list[0][1]},${list[0][7]},${list[0][0]},${list[0][8]});">
+                                                                                        Change Request
+                                                                                    </a>
+                                                                                </li>
+                                                                            </c:if>
                                                                         </ul>
 
                                                                     </div>

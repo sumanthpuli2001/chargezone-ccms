@@ -210,6 +210,7 @@
                                 <!--<span style="color: red;font-size: 14px;">* indicates mandatory field.</span>-->
                                 <!--<span style="color: red;font-size: 14px;">All the editable fields are mandatory.</span>-->
                                 <form:form class="form-horizontal" id="form1" role="form1" action="appraisalPerformance.htm?act=createSubmitCompetency" commandName="appraisalPerformanceMaster" enctype="multipart/form-data" method="post" name='form' onsubmit='return saveSubmit11();'>
+                                    <input type="hidden" id="year" name="year" value="${year}">
                                     <!--form horizontal starts here-->
                                     <!--<form class="form-horizontal" role="form" commandName="AppraisalPerformanceMaster">-->
                                     <div class="box box-info collapsed-box displayAction">

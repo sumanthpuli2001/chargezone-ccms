@@ -209,6 +209,7 @@
                                 <!--<span style="color: red;font-size: 14px;">All the editable fields are mandatory.</span>-->
                                 <form:form class="form-horizontal" id="form1" role="form1" action="appraisalPerformance.htm?act=createSubmitIDP" commandName="appraisalPerformanceMaster" enctype="multipart/form-data" method="post" name='form' onsubmit='return saveSubmit11();'>
                                     <!--form horizontal starts here-->
+                                    <input type="hidden" id="year" name="year" value="${year}">
                                     <!--<form class="form-horizontal" role="form" commandName="AppraisalPerformanceMaster">-->
                                     <div class="box box-info collapsed-box displayAction">
                                         <div class="box-header">
@@ -573,9 +574,9 @@
 //        var flagEndId = document.getElementById("flagEndId").value;
 
         if (employeeStatusVar === '1') {
-            $("#form1 :input").attr("disabled", true);         
+            $("#form1 :input").attr("disabled", true);
             $("#btn5").attr("disabled", false);
-           
+
         }
     </script>
     <script>

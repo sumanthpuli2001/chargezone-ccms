@@ -30,8 +30,8 @@ public class AppraisalPerformanceServiceImpl<T> extends GenericsServiceImpl<T> i
     }
 
     @Override
-    public List<?> readEmployeesAppraisalPerformance(EmployeeMaster employeeMaster, boolean hr) {
-        return appraisalPerformanceDAO.readEmployeesAppraisalPerformance(employeeMaster, hr);
+    public List<?> readEmployeesAppraisalPerformance(EmployeeMaster employeeMaster, boolean hr, int year) {
+        return appraisalPerformanceDAO.readEmployeesAppraisalPerformance(employeeMaster, hr, year);
     }
 
     @Override

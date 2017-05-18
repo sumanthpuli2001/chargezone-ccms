@@ -83,10 +83,11 @@
             var empId = document.getElementById("empId").value;
             var userid = document.getElementById("userid").value;
             var appraisalId = document.getElementById("appraisalId").value;
-//            alert(empId);
+            var year = document.getElementById("yearparmStr").value;
+            //alert(year);
 //            alert(appraisalId);
 //            alert(userid);
-            var path = 'appraisalPerformance.htm?act=appraisalPerformancePrint&id=' + empId + '&userid=' + userid + '&appraisalId=' + appraisalId;
+            var path = 'appraisalPerformance.htm?act=appraisalPerformancePrint&id=' + empId + '&userid=' + userid + '&appraisalId=' + appraisalId + '&year=' + year;
 //            ;
 //             window.print(path, 'popUpWindow', 'height=700,width=900,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
             popupWindow = window.open(path, 'popUpWindow', 'height=700,width=900,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes,type=text/css')
@@ -157,7 +158,7 @@
                 </ol>
                 <div class="col-md-12" style="text-align: center;">
                     <!--<input type="button" value="Print" id="printBtn" name="printBtn" style="margin-left: 959px; width: 100px;" class="btn btn-primary" onclick="appraisalSelectedPrint()">-->
-                    <a href="appraisalPerformance.htm?act=appraisalPerformancePrint&id=${empId}&userid=${userid}&appraisalId=${appraisalId}" target="_blank"  class="btn btn-primary">Print</a>
+                    <a href="appraisalPerformance.htm?act=appraisalPerformancePrint&id=${empId}&userid=${userid}&appraisalId=${appraisalId}&year=${year}" target="_blank"  class="btn btn-primary">Print</a>
 
                     <input type="hidden" id="empId" name="empId" value="${empId}">
                     <input type="hidden" id="userid" name="userid" value="${userid}">

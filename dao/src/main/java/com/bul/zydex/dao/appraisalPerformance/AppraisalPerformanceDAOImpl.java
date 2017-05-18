@@ -13,9 +13,11 @@ import com.bul.zydex.model.EmployeeMaster;
 import java.sql.SQLException;
 import java.util.Calendar;
 import static java.util.Collections.list;
+import java.util.LinkedList;
 import java.util.List;
 import jdk.nashorn.internal.runtime.regexp.joni.constants.StringType;
 import static net.sf.dynamicreports.report.builder.DynamicReports.template;
+import org.apache.commons.collections.ListUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
@@ -306,7 +308,7 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
     }
 
     @Override
-    public List<?> readPMPSearchByEmployee(T object) {
+    public List<?> readPMPSearchByEmployee(T object, int pyear) {
         AppraisalPerformanceMaster appraisalPerformanceMaster = (AppraisalPerformanceMaster) object;
         String query = "";
         String condition = "";
@@ -326,7 +328,8 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " LEFT JOIN b.designationMaster c "
                 + " LEFT JOIN b.userMaster e "
                 + " LEFT JOIN b.levelMaster f "
-                + " WHERE status=1 " + condition
+                + " WHERE a.behaviorsYear='" + pyear + "' and a.status=1 " + condition
+                +" and (b.dateOfLeaving is null or b.dateOfLeaving = '' ) "
                 // + " a.behaviorsYear !="+ cyear
                 //                + " WHERE a.employeeMaster=" + employeeMaster.getId() + ""
                 // + " b.reportingManagerLevel1='" + employeeMaster.getId() + "'"
@@ -435,10 +438,11 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
     }
 
     @Override
-    public List<?> readstageWiseSearchByEmployee(T object, AppraisalFillingData appraisalFillingData) {
+    public List<?> readstageWiseSearchByEmployee(T object, AppraisalFillingData appraisalFillingData, int pyear) {
         AppraisalPerformanceMaster appraisalPerformanceMaster = (AppraisalPerformanceMaster) object;
 
         String query = "";
+        String query1 = "";
         String condition = "";
 
 //        if (null != appraisalPerformanceMaster.getEmployeeMaster().getId()) {
@@ -459,7 +463,10 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " d.departmentName,"
                 + " e.designationName,"
                 + " f.level,"
-                + "" + appraisalFillingData.getYear() + ","
+                //+" (select employeeId from EmployeeMaster where id=c.employeeId) as abc,"
+                //+ " c.id NOT IN (select employeeId from EmployeeMaster),"
+                //+ "" + appraisalFillingData.getYear() + ","
+                + "" + pyear + ","
                 + " case when (b.kraGoal is null or b.kraGoal ='') or (b.metric is null or b.metric ='') then 'KRA Setting By Employee' "
                 + " when (b.kraGoal is not null and b.kraGoal !='') and (b.metric is not null and b.metric !='') and a.status=0 then 'KRA Setting By Employee' "
                 + " when (b.kraGoal is not null and b.kraGoal !='') and (b.metric is not null and b.metric !='') and a.status=1 and  a.managerStatus=0 then 'KRA Approval By Manager' "
@@ -486,11 +493,63 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " c.levelMaster f"
                 + " where (STR_TO_DATE(b.startDate,'%d/%m/%Y') BETWEEN STR_TO_DATE('" + appraisalFillingData.getStartDate() + "','%d/%m/%Y') AND STR_TO_DATE('"
                 + appraisalFillingData.getManagerYearEndEndDate() + "','%d/%m/%Y') or b.startDate is null)" + condition
-                + " and (c.dateOfLeaving is null or c.dateOfLeaving = '' ) "
+                + " and (c.dateOfLeaving is null or c.dateOfLeaving = '') "
+                + " and a.behaviorsYear='" + pyear + "'"
+                //+ " and c.id NOT IN (select employeeId from EmployeeMaster) "
                 + " group by c.id ";
 
+        query1 += ""
+                + " select "
+                + " c.employeeId,"
+                + " c.employeeName,"
+                + " d.departmentName,"
+                + " e.designationName,"
+                + " f.level,"
+                //+" (select employeeId from EmployeeMaster where id=c.employeeId) as abc,"
+                //+ " c.id NOT IN (select employeeId from EmployeeMaster),"
+                + "" + pyear + ","
+                + " case when (b.kraGoal is null or b.kraGoal ='') or (b.metric is null or b.metric ='') then 'KRA Setting By Employee' "
+                + " when (b.kraGoal is not null and b.kraGoal !='') and (b.metric is not null and b.metric !='') and a.status=0 then 'KRA Setting By Employee' "
+                //+ " when (b.kraGoal is not null and b.kraGoal !='') and (b.metric is not null and b.metric !='') and a.status=1 and  a.managerStatus=0 then 'KRA Approval By Manager' "
+                // + " when (b.kraGoal is not null and b.kraGoal !='') and (b.metric is not null and b.metric !='') and a.status=1 and a.managerStatus=1 and (b.empMidyearSelfassessmentGoal is null or b.empMidyearSelfassessmentGoal ='') then 'Employees Mid Year Self Assessment' "
+                // + " when (b.kraGoal is not null and b.kraGoal !='') and (b.metric is not null and b.metric !='') and a.status=1 and (b.empMidyearSelfassessmentGoal is not null and b.empMidyearSelfassessmentGoal != '') and a.managerStatus=1 and (b.managerMidyearReviewEvaluation is null or b.managerMidyearReviewEvaluation ='') then 'Managers Mid Year Review' "
+                // + " when (b.kraGoal is not null and b.kraGoal !='') and (b.metric is not null and b.metric !='') and a.status=1 and (b.empMidyearSelfassessmentGoal is not null and b.empMidyearSelfassessmentGoal !='') and (b.managerMidyearReviewEvaluation is not null and b.managerMidyearReviewEvaluation !='') "
+                // + " and (b.empEndyearSelfassessmentGoal is null or b.empEndyearSelfassessmentGoal ='') and a.managerStatus=1 then 'Employees End Year Self Assessment' "
+                // + " when (b.kraGoal is not null and b.kraGoal !='') and (b.metric is not null and b.metric !='') and a.status=1 and b.empMidyearSelfassessmentGoal is not null and b.managerMidyearReviewEvaluation is not null "
+                //+ " and (b.empEndyearSelfassessmentGoal is not null and b.empEndyearSelfassessmentGoal !='') and (b.managerEndyearReviewEvaluation is null or b.managerEndyearReviewEvaluation ='') and a.managerStatus=1 then 'Managers End Year Review' "
+                // + " when a.status=1 and (b.empMidyearSelfassessmentGoal is not null and b.empMidyearSelfassessmentGoal !='') and (b.managerMidyearReviewEvaluation is not null and b.managerMidyearReviewEvaluation !='') "
+                // + " and (b.empEndyearSelfassessmentGoal is not null and b.empEndyearSelfassessmentGoal !='') and (b.managerEndyearReviewEvaluation is not null and b.managerEndyearReviewEvaluation !='') and a.managerStatus=1 then 'All stages are Completed' "
+                + " end as result "
+                + " FROM "
+                + " EmployeeMaster c "
+                + "  LEFT JOIN "
+                + "  c.appraisalPerformanceMasters a "
+                + " LEFT JOIN "
+                + " a.appraisalPerformanceKras b"
+                + " LEFT JOIN "
+                + " c.departmentMaster d "
+                + " LEFT JOIN "
+                + " c.designationMaster e"
+                + " LEFT JOIN "
+                + " c.levelMaster f"
+                + " where  c.id NOT IN (select employeeMaster FROM AppraisalPerformanceMaster  WHERE behaviorsYear = '" + pyear + "' ) "
+                //+ "and (STR_TO_DATE(b.startDate,'%d/%m/%Y') BETWEEN STR_TO_DATE('" + appraisalFillingData.getStartDate() + "','%d/%m/%Y') AND STR_TO_DATE('"
+                //+ appraisalFillingData.getManagerYearEndEndDate() + "','%d/%m/%Y') or b.startDate is null)" + condition
+                + " and (c.dateOfLeaving is null or c.dateOfLeaving = '')" + condition
+                //+ " and a.behaviorsYear=2017"
+                //+ " "
+                + " group by c.id ";
+
+        //List finalAppraisalPerformanceList1 = new LinkedList<List<?>>();
         List<?> list = getHibernateTemplate().find(query);
-        return list;
+
+        List<?> list1 = getHibernateTemplate().find(query1);
+        //List<?> nonUnique = list.add(list1);
+        List<?> newList = ListUtils.union(list, list1);
+        //finalAppraisalPerformanceList1.add(list);
+        //finalAppraisalPerformanceList1.add(list1);
+
+        return newList;
 
     }
 

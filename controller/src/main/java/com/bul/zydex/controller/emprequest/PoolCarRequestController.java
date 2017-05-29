@@ -740,17 +740,7 @@ public class PoolCarRequestController extends PoolCarRequestAbstract {
             }
             //               empwithdraw Method
             if (btn.equals("Withdraw")) {
-                if (poolCarRequest.getStatus() == 1 || poolCarRequest.getStatus() == 2 || poolCarRequest.getStatus() == 4
-                        || poolCarRequest.getStatus() == 8 || poolCarRequest.getStatus() == 9
-                        || poolCarRequest.getStatus() == 6 || poolCarRequest.getStatus() == 7) {
-                    if (poolCarRequest.getStatus() == 1) {
-                        poolCarRequestService.delete(Integer.parseInt(id));
-                        request.setAttribute("successMessage",
-                                "Information : Request Sent Successfully.");
-                        mv.getModelMap().put("poolCarRequest", poolCarRequest);
-                        mv = searchSubmit(request, response);
-                    }
-                }
+               
                 //               empwithdraw Method
                 if (btn.equals("Withdraw")) {
                     if (poolCarRequest.getStatus() == 1 || poolCarRequest.getStatus() == 2 || poolCarRequest.getStatus() == 4

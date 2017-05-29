@@ -1676,5 +1676,95 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         mv.setViewName("forward:userMaster.htm?act=userDashboardShow");
         return mv;
     }
+    
+//    private synchronized void mailSendForProbationToConfirmationLeft() throws Exception {
+//
+//        EmployeeMaster employeeMaster = new EmployeeMaster();
+//        Calendar cal = Calendar.getInstance();
+//        cal.add(Calendar.MONTH, -5);
+//        Date date = cal.getTime();
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//        String doj = sdf.format(date);
+//        List<?> empList = employeeMasterService.readByJoinDate(doj);
+//        if (!empList.isEmpty()) {
+//            for (Object o : empList) {
+//                employeeMaster = (EmployeeMaster) o;
+//                int eid = employeeMaster.getId();
+//                List<?> pmpList = appraisalPerformanceService.readByEmpID(eid);
+//                if (pmpList.isEmpty()) {
+//                    EmailTemplate emailTemplate = emailTemplateService.readById(141);
+//                    String emailId = employeeMaster.getEmailAddress();
+//                    for (String emailId1 : emailId.split(",")) {
+//                        if (!emailId1.equals("")) {
+//                            String To1 = emailId1;
+//                            String from1 = employeeMaster.getOfficeEmailId();
+//                            String subject1 = emailTemplate.getSubject();
+//                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+//                            String msg1 = emailTemplate.getBodytext();
+//                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+//                            sendMail.sendMail(from1, To1, subject1, msg1);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        Calendar cal1 = Calendar.getInstance();
+//        cal1.add(Calendar.MONTH, -5);
+//        cal1.add(Calendar.DAY_OF_MONTH, -15);
+//        Date date1 = cal1.getTime();
+//        String doj1 = sdf.format(date1);
+//        List<?> empList1 = employeeMasterService.readByJoinDate(doj1);
+//        if (!empList1.isEmpty()) {
+//            for (Object o : empList1) {
+//                employeeMaster = (EmployeeMaster) o;
+//                int eid = employeeMaster.getId();
+//                List<?> pmpList = appraisalPerformanceService.readByEmpID(eid);
+//                if (pmpList.isEmpty()) {
+//                    EmailTemplate emailTemplate = emailTemplateService.readById(141);
+//                    String emailId = employeeMaster.getEmailAddress();
+//                    for (String emailId1 : emailId.split(",")) {
+//                        if (!emailId1.equals("")) {
+//                            String To1 = emailId1;
+//                            String from1 = employeeMaster.getOfficeEmailId();
+//                            String subject1 = emailTemplate.getSubject();
+//                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+//                            String msg1 = emailTemplate.getBodytext();
+//                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+//                            sendMail.sendMail(from1, To1, subject1, msg1);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        Calendar cal2 = Calendar.getInstance();
+//        cal2.add(Calendar.MONTH, -5);
+//        cal2.add(Calendar.DAY_OF_MONTH, -23);
+//        Date date2 = cal2.getTime();
+//        String doj2 = sdf.format(date2);
+//        List<?> empList2 = employeeMasterService.readByJoinDate(doj2);
+//        if (!empList2.isEmpty()) {
+//            for (Object o : empList2) {
+//                employeeMaster = (EmployeeMaster) o;
+//                int eid = employeeMaster.getId();
+//                List<?> pmpList = appraisalPerformanceService.readByEmpID(eid);
+//                if (pmpList.isEmpty()) {
+//                    EmailTemplate emailTemplate = emailTemplateService.readById(141);
+//                    String emailId = employeeMaster.getEmailAddress();
+//                    for (String emailId1 : emailId.split(",")) {
+//                        if (!emailId1.equals("")) {
+//                            String To1 = emailId1;
+//                            String from1 = employeeMaster.getOfficeEmailId();
+//                            String subject1 = emailTemplate.getSubject();
+//                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+//                            String msg1 = emailTemplate.getBodytext();
+//                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+//                            sendMail.sendMail(from1, To1, subject1, msg1);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 }

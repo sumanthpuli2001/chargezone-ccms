@@ -104,7 +104,7 @@
     <!--<property name="cronExpression" value="0 15 10 * * ? />-->
     <!--</bean>-->
     
-    <!--     <bean id="probationToConfirmation"
+<!--         <bean id="probationToConfirmation"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="probationToConfirmationController1" />
         <property name="targetMethod" value="probationToconfirmationAddInEmployeeMaster" />
@@ -143,13 +143,14 @@
         <property name="targetObject" ref="resignationMasterController1" />
         <property name="targetMethod" value="reportingManagerChangeCheck" />
     </bean>
-    <bean id="cronTrigger11"
-          class="org.springframework.scheduling.quartz.CronTriggerBean">
-        <property name="jobDetail" ref="reportingManagerChangeId" />
-        <property name="cronExpression" value="0 0/3 * * * ?" />
-        0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying
-    </bean>
-    -->
+-->   
+ <!--<bean id="cronTrigger11"-->
+          <!--class="org.springframework.scheduling.quartz.CronTriggerBean">-->
+        <!--<property name="jobDetail" ref="reportingManagerChangeId" />-->
+        <!--<property name="cronExpression" value="0 0/3 * * * ?" />-->
+        <!--0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying-->
+    <!--</bean>-->
+    
 <!--        <bean id="pmpIntimation"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="appraisalPerformanceController1" />
@@ -170,15 +171,26 @@
         <property name="jobDetail" ref="mobilePunchDailyEntry" />
         <property name="cronExpression" value="0 0/3 * * * ?" />
         0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying
+    </bean>-->
+<!--        <bean id="daysLeftProbationToConfirmation"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="probationToConfirmationController1" />
+        <property name="targetMethod" value="mailSendForProbationToConfirmationLeft" />
     </bean>
-    -->
+    <bean id="cronTrigger14"
+          class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="daysLeftProbationToConfirmation" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
+       
+    </bean>-->
+    
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="jobDetails">
             <list>
-                <!--<ref bean="timeAttendanceDetail" />-->
-                <!--<ref bean="dailyTimeEntryId" />-->
-                <!--<ref bean="overTimeEntryId" />-->
-                <!--                <ref bean="carryForwardLeave" />
+                <!--<ref bean="timeAttendanceDetail" />
+                <ref bean="dailyTimeEntryId" />
+                <ref bean="overTimeEntryId" />
+                          <ref bean="carryForwardLeave" />
                 <ref bean="deviceId" />-->
                 <!--<ref bean="coffDeleteId" />-->
                 <!--<ref bean="shortLeveId" />-->
@@ -187,8 +199,9 @@
                 <ref bean="probationToConfirmationCreateCheck" />
                 <ref bean="travelEscalationId" />
                 <ref bean="reportingManagerChangeId" />-->
-                <!--<ref bean="pmpIntimation" />-->
-                <!--<ref bean="mobilePunchDailyEntry" />-->
+<!--                <ref bean="pmpIntimation" />
+                <ref bean="mobilePunchDailyEntry" />
+                <ref bean="daysLeftProbationToConfirmation" />-->
             </list>
         </property>
         <property name="triggers">
@@ -204,8 +217,9 @@
                 <ref bean="cronTrigger9" />
                 <ref bean="cronTrigger10" />-->
                 <!--<ref bean="cronTrigger11" />-->
-                <!--<ref bean="cronTrigger12" />-->
-                <!--<ref bean="cronTrigger13" />-->
+<!--                <ref bean="cronTrigger12" />
+                <ref bean="cronTrigger13" />
+                <ref bean="cronTrigger14" />-->
             </list>
         </property>
     </bean>

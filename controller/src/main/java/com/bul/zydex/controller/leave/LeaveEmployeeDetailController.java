@@ -2568,7 +2568,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 }
                 if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
                     if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                        if (sDateStatus.contains("SecondHalf") || sDateStatus.contains("FirstHalf")) {
+                        if (sDateStatus.contains("SecondHalf")) {
                             if (!strDate.equals(enDate)) {
                                 days--;
                             }
@@ -3475,6 +3475,62 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         PrintWriter out = response.getWriter();
         out.print("Information : The Information is Updated Successfully.");
 
+    }
+
+    public void getSecondSatDayByAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String strDate = request.getParameter("strDate");
+        String enDate = request.getParameter("enDate");
+        String sDateStatus = request.getParameter("sDateStatus");
+        String eDateStatus = request.getParameter("eDateStatus");
+//        String leavetype = request.getParameter("leaveType");
+        strDate = strDate.replaceAll(",", "/");
+        enDate = enDate.replaceAll(",", "/");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date sDate = sdf.parse(strDate);
+        Date eDate = sdf.parse(enDate);
+
+        SimpleDateFormat format2 = new SimpleDateFormat("EEEE");
+        Calendar calStartLeave = Calendar.getInstance();
+        Calendar calEndLeave = Calendar.getInstance();
+        Date startDateOfLeave = sdf.parse(strDate);
+        Date endDateOfLeave = sdf.parse(enDate);
+        calStartLeave.setTime(startDateOfLeave);
+        calEndLeave.setTime(endDateOfLeave);
+
+        String startDayNameOfLeave = format2.format(startDateOfLeave);
+        String endDayNameOfLeave = format2.format(endDateOfLeave);
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster1 = (EmployeeMaster) session.getAttribute("employeeInfo");
+        int zydexLocId = employeeMaster1.getZydexLocationMaster().getId();
+        String message = "";
+
+        if (startDayNameOfLeave.equals("Saturday") && sDate.equals(eDate) && zydexLocId == 1) {
+            int dayOfWeek = calStartLeave.get(Calendar.WEEK_OF_MONTH);
+            if (dayOfWeek == 2) {
+                message = "0";
+                //////////// message 0 for set start date status fullday and secondhalf disabled
+            }
+
+        } else if (startDayNameOfLeave.equals("Saturday") && !sDate.equals(eDate) && zydexLocId == 1) {
+            int dayOfWeek = calStartLeave.get(Calendar.WEEK_OF_MONTH);
+            if (dayOfWeek == 2) {
+                message = "0";
+                //////////// message 0 for set start date status fullday and secondhalf disabled
+            }
+
+        } else if (endDayNameOfLeave.equals("Saturday") && !sDate.equals(eDate) && zydexLocId == 1) {
+            int dayOfWeek = calEndLeave.get(Calendar.WEEK_OF_MONTH);
+            if (dayOfWeek == 2) {
+                message = "1";
+                //////////// message 1 for set end date status fullday and secondhalf disabled
+            }
+        } else {
+            message = "2";
+            //////////// message 2 for set end date status fullday and secondhalf disabled
+        }
+
+        PrintWriter out = response.getWriter();
+        out.print(message);
     }
 
 }

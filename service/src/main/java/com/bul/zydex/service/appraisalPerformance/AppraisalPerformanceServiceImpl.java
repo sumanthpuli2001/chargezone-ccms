@@ -90,8 +90,8 @@ public class AppraisalPerformanceServiceImpl<T> extends GenericsServiceImpl<T> i
     }
 
     @Override
-    public List<?> readPMPSearchByEmployee(T object) {
-        return appraisalPerformanceDAO.readPMPSearchByEmployee(object);
+    public List<?> readPMPSearchByEmployee(T object,int pyear) {
+        return appraisalPerformanceDAO.readPMPSearchByEmployee(object,pyear);
     }
 
     @Override
@@ -105,8 +105,8 @@ public class AppraisalPerformanceServiceImpl<T> extends GenericsServiceImpl<T> i
     }
 
     @Override
-    public List<?> readstageWiseSearchByEmployee(T object, AppraisalFillingData appraisalFillingData) {
-        return appraisalPerformanceDAO.readstageWiseSearchByEmployee(object, appraisalFillingData);
+    public List<?> readstageWiseSearchByEmployee(T object, AppraisalFillingData appraisalFillingData,int pyear) {
+        return appraisalPerformanceDAO.readstageWiseSearchByEmployee(object, appraisalFillingData,pyear);
     }
 
     @Override

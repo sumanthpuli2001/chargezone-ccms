@@ -204,6 +204,7 @@
                     <input type="hidden" id="userid" name="userid" value="${userid}">
                     <input type="hidden" id="appraisalId" name="appraisalId" value="${appraisalId}">
                     <input type="hidden" id="managerStatus" name="managerStatus" value="${managerStatus}">
+                    <input type="hidden" id="year" name="year" value="${year}">
                 </div>
             </section>
             <c:if test="${!empty successMessage}">
@@ -461,12 +462,13 @@
                                     </div><!-- /.box-body -->
 
                                 </div>
+                                <c:if test="${year==2016}">
+                                    <div class="box box-info ">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Additional Activities / Projects:</h3>
 
-                                <div class="box box-info ">
-                                    <div class="box-header">
-                                        <h3 class="box-title">Additional Activities / Projects:</h3>
-
-                                    </div><!-- /.box-header -->
+                                        </div><!-- /.box-header -->
+                                    </div>
                                     <div class="box-body no-padding">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12">
@@ -589,668 +591,673 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="box box-info ">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Competency Evaluation (As Per Zydex Competency Framework) :</h3>
+                                </c:if>                   
+                                <div class="box box-info ">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Competency Evaluation (As Per Zydex Competency Framework) :</h3>
 
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <c:if test="${empty competencyEvaluationList[0][2].title || appraisalPerformanceMaster.managerStatus ne 1}">
-                                                        <c:forEach var="competencyMap" items="${competencyMap}">
-                                                            <c:if test="${competencyEvaluationList[0][2].title  eq competencyMap.value}">
-                                                                ${competencyMap.value}
-                                                            </c:if>
-                                                            <c:if test="${competencyEvaluationList[0][2].title  ne competencyMap.value}">
-                                                                ${competencyMap.value}
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </c:if>
-                                                    <c:if test="${appraisalPerformanceMaster.managerStatus eq 1 && !empty competencyEvaluationList[0][2].title}">
-                                                        ${competencyEvaluationList[0][2].title}
-                                                    </c:if>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="table-responsive">
-                                                        <table id="demo9" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                            <tr>
-                                                                <th style="text-align: center">No</th>
-                                                                <th style="text-align: center">Title</th>
-                                                                <th style="text-align: center">Start Year</th>
-                                                                <th style="text-align: center">Remark</th>
-                                                                <th style="text-align: center" id="midYearText">Mid Year</th>
-                                                                <th style="text-align: center" id="midYearRemarkText">Remark</th>
-                                                                <th style="text-align: center" id="endYearText">End Year</th>
-                                                                <th style="text-align: center" id="endYearRemarkText">Remark</th>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <c:if test="${empty competencyEvaluationList[0][2].title || appraisalPerformanceMaster.managerStatus ne 1}">
+                                                    <c:forEach var="competencyMap" items="${competencyMap}">
+                                                        <c:if test="${competencyEvaluationList[0][2].title  eq competencyMap.value}">
+                                                            ${competencyMap.value}
+                                                        </c:if>
+                                                        <c:if test="${competencyEvaluationList[0][2].title  ne competencyMap.value}">
+                                                            ${competencyMap.value}
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </c:if>
+                                                <c:if test="${appraisalPerformanceMaster.managerStatus eq 1 && !empty competencyEvaluationList[0][2].title}">
+                                                    ${competencyEvaluationList[0][2].title}
+                                                </c:if>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="table-responsive">
+                                                    <table id="demo9" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                        <tr>
+                                                            <th style="text-align: center">No</th>
+                                                            <th style="text-align: center">Title</th>
+                                                            <th style="text-align: center">Start Year</th>
+                                                            <th style="text-align: center">Remark</th>
+                                                            <th style="text-align: center" id="midYearText">Mid Year</th>
+                                                            <th style="text-align: center" id="midYearRemarkText">Remark</th>
+                                                            <th style="text-align: center" id="endYearText">End Year</th>
+                                                            <th style="text-align: center" id="endYearRemarkText">Remark</th>
+                                                        </tr>
+                                                        <input type="hidden" name="subCompentencyCount" id="subCompentencyCount" value="${fn:length(competencyEvaluationList)}">
+                                                        <c:forEach var="competencyEvaluationList" items="${competencyEvaluationList}" varStatus="status">
+
+                                                            <input type="hidden" name="competencyEveId${status.count}" id="competencyEveId${status.count}" value="${competencyEvaluationList[0]}">
+                                                            <input type="hidden" name="competencyEvaluationId${status.count}" id="competencyEvaluationId${status.count}" value="${competencyEvaluationList[2].id}">
+                                                            <input type="hidden" name="compentencyTextMasterId${status.count}" id="compentencyTextMasterId${status.count}" value="${competencyEvaluationList[3].id}">
+                                                            <tr class="">
+                                                                <td id="subCompentencySrId${status.count}">${status.count}</td>
+                                                                <td id="subCompentencyTitleId${status.count}" >${competencyEvaluationList[4]}</td>
+                                                                <td id="subCompentencyStartId${status.count}" >
+                                                                    ${competencyEvaluationList[5]}
+                                                                </td>
+                                                                <td id="subCompentencyStartRemarkId${status.count}" >
+                                                                    ${competencyEvaluationList[6]}
+                                                                </td>
+                                                                <td id="subCompentencyMidId${status.count}">
+                                                                    ${competencyEvaluationList[7]}
+                                                                </td>
+                                                                <td id="subCompentencyMidRemarkId${status.count}">
+                                                                    ${competencyEvaluationList[8]}
+                                                                </td>
+                                                                <td id="subCompentencyEndId${status.count}">
+                                                                    ${competencyEvaluationList[9]}
+                                                                </td>
+                                                                <td id="subCompentencyEndRemarkId${status.count}">
+                                                                    ${competencyEvaluationList[10]}
+                                                                </td>
                                                             </tr>
-                                                            <input type="hidden" name="subCompentencyCount" id="subCompentencyCount" value="${fn:length(competencyEvaluationList)}">
-                                                            <c:forEach var="competencyEvaluationList" items="${competencyEvaluationList}" varStatus="status">
-
-                                                                <input type="hidden" name="competencyEveId${status.count}" id="competencyEveId${status.count}" value="${competencyEvaluationList[0]}">
-                                                                <input type="hidden" name="competencyEvaluationId${status.count}" id="competencyEvaluationId${status.count}" value="${competencyEvaluationList[2].id}">
-                                                                <input type="hidden" name="compentencyTextMasterId${status.count}" id="compentencyTextMasterId${status.count}" value="${competencyEvaluationList[3].id}">
-                                                                <tr class="">
-                                                                    <td id="subCompentencySrId${status.count}">${status.count}</td>
-                                                                    <td id="subCompentencyTitleId${status.count}" >${competencyEvaluationList[4]}</td>
-                                                                    <td id="subCompentencyStartId${status.count}" >
-                                                                        ${competencyEvaluationList[5]}
-                                                                    </td>
-                                                                    <td id="subCompentencyStartRemarkId${status.count}" >
-                                                                        ${competencyEvaluationList[6]}
-                                                                    </td>
-                                                                    <td id="subCompentencyMidId${status.count}">
-                                                                        ${competencyEvaluationList[7]}
-                                                                    </td>
-                                                                    <td id="subCompentencyMidRemarkId${status.count}">
-                                                                        ${competencyEvaluationList[8]}
-                                                                    </td>
-                                                                    <td id="subCompentencyEndId${status.count}">
-                                                                        ${competencyEvaluationList[9]}
-                                                                    </td>
-                                                                    <td id="subCompentencyEndRemarkId${status.count}">
-                                                                        ${competencyEvaluationList[10]}
-                                                                    </td>
-                                                                </tr>
-                                                            </c:forEach>
-                                                        </table>
-                                                    </div>
+                                                        </c:forEach>
+                                                    </table>
                                                 </div>
                                             </div>
-                                        </div><!-- /.box-body -->
-                                    </div>
-                                    <div class="box box-info ">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Individual Development Plan(Training Need Identification):</h3>
+                                        </div>
+                                    </div><!-- /.box-body -->
+                                </div>
+                                <div class="box box-info ">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Individual Development Plan(Training Need Identification):</h3>
 
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
 
-                                                    <div class="table-responsive">
-                                                        <table id="demo5" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                            <tr>
-                                                            <input type="hidden" name="kraremovedIndividualIdVal" id="kraremovedIndividualIdVal" value="">
-                                                            <th style="text-align: center">Sr.No.</th>
-                                                            <th style="text-align: center">IDP Name & Details</th>
-                                                            <th style="text-align: center">IDP Type</th>
-                                                            <th style="text-align: center">How to achieve this IDP</th>
-                                                            <th style="text-align: center"></th>
-                                                            <th style="text-align: center">Add New</th>
-                                                            </tr>
-                                                            <tr>
+                                                <div class="table-responsive">
+                                                    <table id="demo5" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                        <tr>
+                                                        <input type="hidden" name="kraremovedIndividualIdVal" id="kraremovedIndividualIdVal" value="">
+                                                        <th style="text-align: center">Sr.No.</th>
+                                                        <th style="text-align: center">IDP Name & Details</th>
+                                                        <th style="text-align: center">IDP Type</th>
+                                                        <th style="text-align: center">How to achieve this IDP</th>
+                                                        <th style="text-align: center"></th>
+                                                        <th style="text-align: center">Add New</th>
+                                                        </tr>
+                                                        <tr>
 
-                                                                <c:choose>
-                                                                    <c:when test="${not empty individualDevelopmentPlanList}">
-                                                                    <input type="hidden" name="IndividualId" id="IndividualId" value="${fn:length(individualDevelopmentPlanList)}">
+                                                            <c:choose>
+                                                                <c:when test="${not empty individualDevelopmentPlanList}">
+                                                                <input type="hidden" name="IndividualId" id="IndividualId" value="${fn:length(individualDevelopmentPlanList)}">
 
-                                                                    <c:forEach var="individualDevelopmentPlan" items="${individualDevelopmentPlanList}" varStatus="status">
-                                                                        <c:if test="${individualDevelopmentPlan.text1 ne '' && individualDevelopmentPlan.text2 ne '' && individualDevelopmentPlan.text3 ne ''}">
-                                                                            <tr id="individualTrId${status.count}">
-                                                                                <td id="removeKRAIndividualID${status.count}" name="removeKRAIndividualID${status.count}" style="text-align: center">${status.count}</td>
-                                                                            <input type="hidden" name="IndividualDevelopmentPlanId${status.count}" id="IndividualDevelopmentPlanId${status.count}" value="${individualDevelopmentPlan.id}">
-                                                                            <td id="indDevId">${individualDevelopmentPlan.text1}</td>
-                                                                            <td>
-                                                                                ${individualDevelopmentPlan.text2}
-                                                                            </td>
-                                                                            <td>
-                                                                                ${individualDevelopmentPlan.text3}
-                                                                            </td>
-                                                                            <td>
-                                                                                ${individualDevelopmentPlan.remark}
-                                                                            </td>
-                                                                            </tr>
-                                                                            <tr id="individualEmpMidLabel1TrId${status.count}">
-                                                                                <td colspan="3" id="midYearReId${status.count}"><b>Employee Mid-Year Remark</b></td>
-                                                                                <td colspan="3" id="endYearReId${status.count}"><b>Employee End-Year Remark</b></td>
-                                                                            </tr>
-                                                                            <tr id="individualEmpMid1TrId${status.count}">
-                                                                                <td colspan="3" id="midYearRetxtId${status.count}">${individualDevelopmentPlan.midYearRemark}</td>
-                                                                                <td colspan="3" id="endYearRetxtId${status.count}">${individualDevelopmentPlan.endYearRemark}</td>
-                                                                            </tr>
-                                                                            <tr id="individualEmpMidLabel2TrId${status.count}">
-                                                                                <td colspan="3" id="endYearReId"><b>Manager Mid-Year Remark</b></td>
-                                                                                <td colspan="3" id="endYearReId"><b>Manager End-Year Remark</b></td>
-                                                                            </tr>
-                                                                            <tr id="individualEmpMid2TrId${status.count}">
-                                                                                <td colspan="3">${individualDevelopmentPlan.managerMidYearRemark}</td>
-                                                                                <td colspan="3">
-                                                                                    ${individualDevelopmentPlan.managerEndYearRemark}</td>
-                                                                            </tr>
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <input type="hidden" name="IndividualId" id="IndividualId" value="1">
-                                                                    <tr>
-                                                                        <td style="text-align: center">1</td>
-                                                                        <td></td>
+                                                                <c:forEach var="individualDevelopmentPlan" items="${individualDevelopmentPlanList}" varStatus="status">
+                                                                    <c:if test="${individualDevelopmentPlan.text1 ne '' && individualDevelopmentPlan.text2 ne '' && individualDevelopmentPlan.text3 ne ''}">
+                                                                        <tr id="individualTrId${status.count}">
+                                                                            <td id="removeKRAIndividualID${status.count}" name="removeKRAIndividualID${status.count}" style="text-align: center">${status.count}</td>
+                                                                        <input type="hidden" name="IndividualDevelopmentPlanId${status.count}" id="IndividualDevelopmentPlanId${status.count}" value="${individualDevelopmentPlan.id}">
+                                                                        <td id="indDevId">${individualDevelopmentPlan.text1}</td>
                                                                         <td>
+                                                                            ${individualDevelopmentPlan.text2}
                                                                         </td>
                                                                         <td>
+                                                                            ${individualDevelopmentPlan.text3}
                                                                         </td>
                                                                         <td>
+                                                                            ${individualDevelopmentPlan.remark}
                                                                         </td>
-
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td colspan="3" id="midYearReId"><b>Employee Mid-Year Remark</b></td>
-                                                                        <td colspan="3" id="endYearReId"><b>Employee End-Year Remark</b></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="3"></td>
-                                                                        <td colspan="3"></td>
-                                                                    </tr>
-                                                                    <tr></tr>
-                                                                    <tr>
-                                                                        <td colspan="3" id="endYearReId"><b>Manager Mid-Year Remark</b></td>
-                                                                        <td colspan="3" id="endYearReId"><b>Manager End-Year Remark</b></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="3"></td>
-                                                                        <td colspan="3"></td>
-                                                                    </tr>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </table>
-
-                                                    </div>
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
-
-
-                                    <div class="box box-info " id="behaviorsTabId">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Behaviors:</h3>
-
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="table-responsive">
-                                                        <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center">
-
-                                                            <tr style="background-color: darkgrey">
-                                                                <th style="text-align: center"><b>Behaviors</b></th>
-                                                                <th style="text-align: center">Mid'Year Score</th>
-                                                                <th style="text-align: center">End'Year Score</th>
-
-                                                            </tr>
-                                                            <input type="hidden" name="BehaviorsId" id="BehaviorsId" value="${fn:length(behaviorsList)}">
-                                                            <tr style="background-color: lightgrey">
-                                                                <c:choose>
-                                                                    <c:when test="${not empty behaviorsList}">
-                                                                    <input type="hidden" id="w1" name="w1" value="WLB 1"/>
-                                                                    <td><b>WLB 1: Walk the Talk </b><br>&nbsp;&nbsp;- Do & Act What you Preach<br>&nbsp;&nbsp;- Keep commitments<br>&nbsp;&nbsp;- Talk Straight – Be Honest & Tell the Truth<br>&nbsp;&nbsp;- Use simple language and call things what they are<br>&nbsp;&nbsp;- Don’t manipulate people nor distort facts</td>
-                                                                    <td>
-                                                                        <c:if test="${behaviorsList[0].midYearScore eq '5.0'}">
-                                                                            <input type="Text" id="midYearScore1" name="midYearScore1" value="Far Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[0].midYearScore eq '4.0'}">
-                                                                            <input type="Text" id="midYearScore1" name="midYearScore1" value="Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[0].midYearScore eq '3.0'}">
-                                                                            <input type="Text" id="midYearScore1" name="midYearScore1" value="Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[0].midYearScore eq '2.0'}">
-                                                                            <input type="Text" id="midYearScore1" name="midYearScore1" value="Partially Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[0].midYearScore eq '1.0'}">
-                                                                            <input type="Text" id="midYearScore1" name="midYearScore1" value="Does Not Meet Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[0].midYearScore eq null}">
-                                                                            <input type="Text" id="midYearScore1" name="midYearScore1" value="" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                    </td>
-                                                                    <td id="endYearId1">
-                                                                        <c:if test="${behaviorsList[0].endYearScore eq '5.0'}">
-                                                                            <input type="Text" id="endYearScore1" name="endYearScore1" value="Far Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[0].endYearScore eq '4.0'}">
-                                                                            <input type="Text" id="endYearScore1" name="endYearScore1" value="Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[0].endYearScore eq '3.0'}">
-                                                                            <input type="Text" id="endYearScore1" name="endYearScore1" value="Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[0].endYearScore eq '2.0'}">
-                                                                            <input type="Text" id="endYearScore1" name="endYearScore1" value="Partially Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[0].endYearScore eq '1.0'}">
-                                                                            <input type="Text" id="endYearScore1" name="endYearScore1" value="Does Not Meet Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[0].endYearScore eq null}">
-                                                                            <input type="Text" id="endYearScore1" name="endYearScore1" value="" class="form-control" readonly="true">
-                                                                        </c:if>
-
-                                                                    </td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2">${behaviorsList[0].managerMidYearReview}</td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey" >
-                                                                        <td id="managerEndYearReviewId1"><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2"></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                    <input type="hidden" id="w2" name="w2" value="WLB 2"/>
-                                                                    <td><b>WLB 2: Deliver Results</b><br>&nbsp;&nbsp;- Master the art of execution & Establish a track record of results<br>&nbsp;&nbsp;- Practice Accountability – Hold self & others accountable<br>&nbsp;&nbsp;- Get the best out of you and your team<br>&nbsp;&nbsp;- Be on time and within budget<br>&nbsp;&nbsp;- Don’t find excuses for not delivering<br>&nbsp;&nbsp;- Celebrate success with the team</td>
-                                                                    <td>
-
-                                                                        <c:if test="${behaviorsList[0].midYearScore eq '5.0'}">
-                                                                            <input type="Text" id="midYearScore2" name="midYearScore2" value="Far Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[0].midYearScore eq '4.0'}">
-                                                                            <input type="Text" id="midYearScore2" name="midYearScore2" value="Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[0].midYearScore eq '3.0'}">
-                                                                            <input type="Text" id="midYearScore2" name="midYearScore2" value="Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[0].midYearScore eq '2.0'}">
-                                                                            <input type="Text" id="midYearScore2" name="midYearScore2" value="Partially Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[0].midYearScore eq '1.0'}">
-                                                                            <input type="Text" id="midYearScore2" name="midYearScore2" value="Does Not Meet Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[0].midYearScore eq null}">
-                                                                            <input type="Text" id="midYearScore2" name="midYearScore2" value="" class="form-control" readonly="true">
-                                                                        </c:if>
-
-                                                                    </td>
-
-                                                                    <td id="endYearId2">
-                                                                        <!--<input type="Text" id="endYearScore2" name="endYearScore2" value="${behaviorsList[1].endYearScore}" class="form-control" readonly="true">-->
-                                                                        <c:if test="${behaviorsList[1].endYearScore eq '5.0'}">
-                                                                            <input type="Text" id="endYearScore2" name="endYearScore2" value="Far Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[1].endYearScore eq '4.0'}">
-                                                                            <input type="Text" id="endYearScore2" name="endYearScore2" value="Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[1].endYearScore eq '3.0'}">
-                                                                            <input type="Text" id="endYearScore2" name="endYearScore2" value="Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[1].endYearScore eq '2.0'}">
-                                                                            <input type="Text" id="endYearScore2" name="endYearScore2" value="Partially Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[1].endYearScore eq '1.0'}">
-                                                                            <input type="Text" id="endYearScore2" name="endYearScore2" value="Does Not Meet Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[1].endYearScore eq null}">
-                                                                            <input type="Text" id="endYearScore2" name="endYearScore2" value="" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                    </td>
-
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2">${behaviorsList[1].managerMidYearReview}</td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey" id="managerEndYearReviewId">
-                                                                        <td id="managerEndYearReviewId2"><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2">${behaviorsList[1].managerEndYearReview}</td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                    <input type="hidden" id="w3" name="w3" value="WLB 3"/>
-                                                                    <td><b>WLB 3: Build Relationships & Develop Others</b><br>&nbsp;&nbsp;- Be grounded at all times & approachable<br>&nbsp;&nbsp;- Treat people with utmost respect & care<br>&nbsp;- Understand other’s perspective & concern<br>&nbsp;&nbsp;- Invest in developing the talent<br>&nbsp;&nbsp;- Give your team the right opportunities to learn and grow<br>&nbsp;&nbsp;- Create a learning environment & help others to learn from success stories & failures<br>&nbsp;&nbsp; </td>
-                                                                    <td>
-                                                                        <c:if test="${behaviorsList[2].midYearScore eq '5.0'}">
-                                                                            <input type="Text" id="midYearScore3" name="midYearScore3" value="Far Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[2].midYearScore eq '4.0'}">
-                                                                            <input type="Text" id="midYearScore3" name="midYearScore3" value="Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[2].midYearScore eq '3.0'}">
-                                                                            <input type="Text" id="midYearScore3" name="midYearScore3" value="Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[2].midYearScore eq '2.0'}">
-                                                                            <input type="Text" id="midYearScore3" name="midYearScore3" value="Partially Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[2].midYearScore eq '1.0'}">
-                                                                            <input type="Text" id="midYearScore3" name="midYearScore3" value="Does Not Meet Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[2].midYearScore eq null}">
-                                                                            <input type="Text" id="midYearScore3" name="midYearScore3" value="" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                    </td>
-
-                                                                    <td  id="endYearId3">
-                                                                        <c:if test="${behaviorsList[2].endYearScore eq '5.0'}">
-                                                                            <input type="Text" id="endYearScore3" name="endYearScore3" value="Far Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[2].endYearScore eq '4.0'}">
-                                                                            <input type="Text" id="endYearScore3" name="endYearScore3" value="Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[2].endYearScore eq '3.0'}">
-                                                                            <input type="Text" id="endYearScore3" name="endYearScore3" value="Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[2].endYearScore eq '2.0'}">
-                                                                            <input type="Text" id="endYearScore3" name="endYearScore3" value="Partially Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[2].endYearScore eq '1.0'}">
-                                                                            <input type="Text" id="endYearScore3" name="endYearScore3" value="Does Not Meet Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[2].endYearScore eq null}">
-                                                                            <input type="Text" id="endYearScore3" name="endYearScore3" value="" class="form-control" readonly="true">
-                                                                        </c:if>
-
                                                                         </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2"><textarea type="Text" id="managerMidYearReview3" name="managerMidYearReview3" class="form-control" readonly="true"><c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${behaviorsList[2].managerMidYearReview}</c:if></textarea></td>
+                                                                        <tr id="individualEmpMidLabel1TrId${status.count}">
+                                                                            <td colspan="3" id="midYearReId${status.count}"><b>Employee Mid-Year Remark</b></td>
+                                                                            <td colspan="3" id="endYearReId${status.count}"><b>Employee End-Year Remark</b></td>
                                                                         </tr>
-                                                                        <tr style="background-color: lightgrey" id="managerEndYearReviewId">
-                                                                            <td id="managerEndYearReviewId3"><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                            <td colspan="2"><textarea type="Text" id="managerEndYearReview3" name="managerEndYearReview3" class="form-control" readonly="true"><c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${behaviorsList[2].managerEndYearReview}</c:if></textarea></td>
+                                                                        <tr id="individualEmpMid1TrId${status.count}">
+                                                                            <td colspan="3" id="midYearRetxtId${status.count}">${individualDevelopmentPlan.midYearRemark}</td>
+                                                                            <td colspan="3" id="endYearRetxtId${status.count}">${individualDevelopmentPlan.endYearRemark}</td>
                                                                         </tr>
-                                                                        <tr style="background-color: lightgrey">
-                                                                        <input type="hidden" id="w4" name="w4" value="WLB 4"/>
-                                                                        <td><b>WLB 4: Act with Courage</b><br>&nbsp;&nbsp;- Take a stand – have your individual opinion & stand by it<br>&nbsp;&nbsp;- Don’t shy away from conflicts<br>&nbsp;&nbsp;- Deal with the issues head on – never procrastinate<br>&nbsp;&nbsp;- Never bury your head in the sand<br>&nbsp;&nbsp;- Be direct & candid</td>
-                                                                        <td>
-                                                                        <c:if test="${behaviorsList[3].midYearScore eq '5.0'}">
-                                                                            <input type="Text" id="midYearScore4" name="midYearScore4" value="Far Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[3].midYearScore eq '4.0'}">
-                                                                            <input type="Text" id="midYearScore4" name="midYearScore4" value="Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[3].midYearScore eq '3.0'}">
-                                                                            <input type="Text" id="midYearScore4" name="midYearScore4" value="Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[3].midYearScore eq '2.0'}">
-                                                                            <input type="Text" id="midYearScore4" name="midYearScore4" value="Partially Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[3].midYearScore eq '1.0'}">
-                                                                            <input type="Text" id="midYearScore4" name="midYearScore4" value="Does Not Meet Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[3].midYearScore eq null}">
-                                                                            <input type="Text" id="midYearScore4" name="midYearScore4" value="" class="form-control" readonly="true">
-                                                                        </c:if>
-
-                                                                    <td id="endYearId4">
-                                                                        <c:if test="${behaviorsList[3].endYearScore eq '5.0'}">
-                                                                            <input type="Text" id="endYearScore4" name="endYearScore4" value="Far Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[3].endYearScore eq '4.0'}">
-                                                                            <input type="Text" id="endYearScore4" name="endYearScore4" value="Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[3].endYearScore eq '3.0'}">
-                                                                            <input type="Text" id="endYearScore4" name="endYearScore4" value="Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[3].endYearScore eq '2.0'}">
-                                                                            <input type="Text" id="endYearScore4" name="endYearScore4" value="Partially Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[3].endYearScore eq '1.0'}">
-                                                                            <input type="Text" id="endYearScore4" name="endYearScore4" value="Does Not Meet Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[3].endYearScore eq null}">
-                                                                            <input type="Text" id="endYearScore4" name="endYearScore4" value="" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                    </td>
-
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2">${behaviorsList[3].managerMidYearReview}</td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey" id="managerEndYearReviewId">
-                                                                        <td id="managerEndYearReviewId4"><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2">${behaviorsList[3].managerEndYearReview}</td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                    <input type="hidden" id="w5" name="w5" value="WLB 5"/>
-                                                                    <td><b>WLB 5: Believe in Vision & Purpose</b><br>&nbsp;&nbsp;- Be Far-sighted & Look beyond the obvious<br>&nbsp;&nbsp;- Be Strategic – Have a macro & micro perspective, Innovate<br>&nbsp;&nbsp;- Be Entrepreneurial <br>&nbsp;&nbsp;- Communicate your Vision to your team<br>&nbsp;&nbsp;- Make sure everyone on board under stand's the purpose<br>&nbsp;&nbsp;- Communicate ‘What’ , Why and When to align people to your Vision & Purpose </td>
+                                                                        <tr id="individualEmpMidLabel2TrId${status.count}">
+                                                                            <td colspan="3" id="endYearReId"><b>Manager Mid-Year Remark</b></td>
+                                                                            <td colspan="3" id="endYearReId"><b>Manager End-Year Remark</b></td>
+                                                                        </tr>
+                                                                        <tr id="individualEmpMid2TrId${status.count}">
+                                                                            <td colspan="3">${individualDevelopmentPlan.managerMidYearRemark}</td>
+                                                                            <td colspan="3">
+                                                                                ${individualDevelopmentPlan.managerEndYearRemark}</td>
+                                                                        </tr>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <input type="hidden" name="IndividualId" id="IndividualId" value="1">
+                                                                <tr>
+                                                                    <td style="text-align: center">1</td>
+                                                                    <td></td>
                                                                     <td>
-                                                                        <c:if test="${behaviorsList[4].midYearScore eq '5.0'}">
-                                                                            <input type="Text" id="midYearScore5" name="midYearScore5" value="Far Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[4].midYearScore eq '4.0'}">
-                                                                            <input type="Text" id="midYearScore5" name="midYearScore5" value="Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[4].midYearScore eq '3.0'}">
-                                                                            <input type="Text" id="midYearScore5" name="midYearScore5" value="Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[4].midYearScore eq '2.0'}">
-                                                                            <input type="Text" id="midYearScore5" name="midYearScore5" value="Partially Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[4].midYearScore eq '1.0'}">
-                                                                            <input type="Text" id="midYearScore5" name="midYearScore5" value="Does Not Meet Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[4].midYearScore eq null}">
-                                                                            <input type="Text" id="midYearScore5" name="midYearScore5" value="" class="form-control" readonly="true">
-                                                                        </c:if>
                                                                     </td>
-                                                                    <td id="endYearId5">
-                                                                        <c:if test="${behaviorsList[4].endYearScore eq '5.0'}">
-                                                                            <input type="Text" id="endYearScore5" name="endYearScore5" value="Far Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[4].endYearScore eq '4.0'}">
-                                                                            <input type="Text" id="endYearScore5" name="endYearScore5" value="Exceeds Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[4].endYearScore eq '3.0'}">
-                                                                            <input type="Text" id="endYearScore5" name="endYearScore5" value="Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[4].endYearScore eq '2.0'}">
-                                                                            <input type="Text" id="endYearScore5" name="endYearScore5" value="Partially Meets Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[4].endYearScore eq '1.0'}">
-                                                                            <input type="Text" id="endYearScore5" name="endYearScore5" value="Does Not Meet Expectations" class="form-control" readonly="true">
-                                                                        </c:if>
-                                                                        <c:if test="${behaviorsList[4].endYearScore eq null}">
-                                                                            <input type="Text" id="endYearScore5" name="endYearScore5" value="" class="form-control" readonly="true">
-                                                                        </c:if>
+                                                                    <td>
+                                                                    </td>
+                                                                    <td>
                                                                     </td>
 
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2">${behaviorsList[4].managerMidYearReview}</td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey" id="managerEndYearReviewId">
-                                                                        <td id="managerEndYearReviewId5"><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2">${behaviorsList[4].managerEndYearReview}</td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b style="font-size: 16px">TOTAL SCORE</b></td>
-                                                                        <td id="scoreMid">${behaviorsMidyearTotalscore}</td>
-                                                                        <!--<td id="scoreEnd">${behaviorsEndyearTotalscore}</td>-->
-                                                                        <td id="scoreEnd">${behaviorsEndyearTotalscoreForemp}</td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Other Comment/Remark (Mid Year)</b></td>
-                                                                        <td colspan="2">${behaviorsMidyearOtherremark}</td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td id="behaviorsEndyearOtherremarkId"><b>Other Comment/Remark (End Year)</b></td>
-                                                                        <td colspan="2">${behaviorsEndyearOtherremark}</td>
-                                                                    </tr>
-                                                                </c:when>
-                                                                <c:otherwise>
+                                                                </tr>
 
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>WLB 1: Walk the Talk </b><br>&nbsp;&nbsp;- Do & Act What you Preach<br>&nbsp;&nbsp;- Keep commitments<br>&nbsp;&nbsp;- Talk Straight – Be Honest & Tell the Truth<br>&nbsp;&nbsp;- Use simple language and call things what they are<br>&nbsp;&nbsp;- Don’t manipulate people nor distort facts</td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2"></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2"></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>WLB 2: Deliver Results</b><br>&nbsp;&nbsp;- Master the art of execution & Establish a track record of results<br>&nbsp;&nbsp;- Practice Accountability – Hold self & others accountable<br>&nbsp;&nbsp;- Get the best out of you and your team<br>&nbsp;&nbsp;- Be on time and within budget<br>&nbsp;&nbsp;- Don’t find excuses for not delivering<br>&nbsp;&nbsp;- Celebrate success with the team</td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2"></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2"></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>WLB 3: Build Relationships & Develop Others</b><br>&nbsp;&nbsp;- Be grounded at all times & approachable<br>&nbsp;&nbsp;- Treat people with utmost respect & care<br>&nbsp;- Understand other’s perspective & concern<br>&nbsp;&nbsp;- Invest in developing the talent<br>&nbsp;&nbsp;- Give your team the right opportunities to learn and grow<br>&nbsp;&nbsp;- Create a learning environment & help others to learn from success stories & failures<br>&nbsp;&nbsp; </td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2"></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2"></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>WLB 4: Act with Courage</b><br>&nbsp;&nbsp;- Take a stand – have your individual opinion & stand by it<br>&nbsp;&nbsp;- Don’t shy away from conflicts<br>&nbsp;&nbsp;- Deal with the issues head on – never procrastinate<br>&nbsp;&nbsp;- Never bury your head in the sand<br>&nbsp;&nbsp;- Be direct & candid</td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2"></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2"></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>WLB 5: Believe in Vision & Purpose</b><br>&nbsp;&nbsp;- Be Far-sighted & Look beyond the obvious<br>&nbsp;&nbsp;- Be Strategic – Have a macro & micro perspective, Innovate<br>&nbsp;&nbsp;- Be Entrepreneurial <br>&nbsp;&nbsp;- Communicate your Vision to your team<br>&nbsp;&nbsp;- Make sure everyone on board under stand's the purpose<br>&nbsp;&nbsp;- Communicate ‘What’ , Why and When to align people to your Vision & Purpose </td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2"></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Manager’s End - Year Review / Evaluation</b></td>
-                                                                        <td colspan="2"></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b style="font-size: 16px">TOTAL SCORE</b></td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Other Comment/Remark (Mid Year)</b></td>
-                                                                        <td colspan="2"></td>
-                                                                    </tr>
-                                                                    <tr style="background-color: lightgrey">
-                                                                        <td><b>Other Comment/Remark (End Year)</b></td>
-                                                                        <td colspan="2"></td>
-                                                                    </tr>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </table>
-                                                        <p><b>Note</b>: Please note that the score in Mid-Year Review/Evaluation of Behavior is just an indicator of an individual’s behavior during the first half of the year and the same is not considered in any rating calculation.
-                                                            It is the score in End-Year Review/Evaluation which is considered in the final rating of an employee.</p>
-                                                    </div>
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
-                                    <div class="box box-info " id="RatingsTabId">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Performance Ratings:</h3>
-
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <!--                                                    <div class="form-group">
-                                                                                                            <label class="col-sm-5 control-label"><b>Final Score</b></label>
-                                                                                                            <div class="col-sm-2">
-                                                    
-                                                                                                                <input type="number" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" onload="printfinalScoreRatings();"class="form-control" readonly="true">
-                                                    
-                                                                                                            </div>
-                                                                                                        </div>-->
-
-                                                    <div class="row">
-                                                        <div class="col-sm-4">
-                                                            <div class="form-group text-center">
-                                                                <label class="control-label"><b>KRA Score</b></label>&nbsp;&nbsp;
-                                                                <input type="number" id="totalScore" name="totalScore" value="${totalScoreForemployee}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-4 form-group text-center">
-                                                            <div class="form-group">
-                                                                <label class="control-label"><b>WLB Score</b></label>&nbsp;&nbsp;
-                                                                <input type="number" id="behaviorsEndyearTotalscore" name="behaviorsEndyearTotalscore" value="${behaviorsEndyearTotalscoreForemp}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-4 form-group text-center">
-                                                            <div class="form-group">
-                                                                <label class="control-label"><b>Final Score</b></label>&nbsp;&nbsp;
-                                                                <input type="Text" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscoreForemployee}" onchange="performancefinalScoreRatingsEmployee();" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
-                                                                <!--<input type="number" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">-->
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                                <tr>
+                                                                    <td colspan="3" id="midYearReId"><b>Employee Mid-Year Remark</b></td>
+                                                                    <td colspan="3" id="endYearReId"><b>Employee End-Year Remark</b></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="3"></td>
+                                                                    <td colspan="3"></td>
+                                                                </tr>
+                                                                <tr></tr>
+                                                                <tr>
+                                                                    <td colspan="3" id="endYearReId"><b>Manager Mid-Year Remark</b></td>
+                                                                    <td colspan="3" id="endYearReId"><b>Manager End-Year Remark</b></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="3"></td>
+                                                                    <td colspan="3"></td>
+                                                                </tr>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </table>
 
                                                 </div>
+                                            </div><!-- /.col -->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                </div>
 
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="table-responsive">
-                                                        <table id="demo234" class="table table-bordered table-striped table-hover" style="" align="Center">
-                                                            <tr>
-                                                                <th style="text-align: center">Performance Ratings</th>
-                                                                <th style="text-align: center">Score</th>
-                                                                <th style="text-align: center">Score Achieved</th>
-                                                            </tr>
-                                                            <tr class="d1" id="tbl111" >
-                                                                <td style="vertical-align: middle"><b>Far Exceeds Expectations</b></td>
-                                                                <td style="text-align: center"><h4 style="background-color: #337AB7;"><b>106 to 110</b></h4></td>
-                                                                <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '116' && behaviorsFinalscore le '110' || behaviorsFinalscore eq '116' || behaviorsFinalscore eq '116'}"><i class="fa fa-check"></i></c:if></td>
+
+                                <div class="box box-info " id="behaviorsTabId">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Behaviors:</h3>
+
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="table-responsive">
+                                                    <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center">
+
+                                                        <tr style="background-color: darkgrey">
+                                                            <th style="text-align: center"><b>Behaviors</b></th>
+                                                            <th style="text-align: center">Mid'Year Score</th>
+                                                            <th style="text-align: center">End'Year Score</th>
+
+                                                        </tr>
+                                                        <input type="hidden" name="BehaviorsId" id="BehaviorsId" value="${fn:length(behaviorsList)}">
+                                                        <tr style="background-color: lightgrey">
+                                                            <c:choose>
+                                                                <c:when test="${not empty behaviorsList}">
+                                                                <input type="hidden" id="w1" name="w1" value="WLB 1"/>
+                                                                <td><b>WLB 1: Walk the Talk </b><br>&nbsp;&nbsp;- Do & Act What you Preach<br>&nbsp;&nbsp;- Keep commitments<br>&nbsp;&nbsp;- Talk Straight – Be Honest & Tell the Truth<br>&nbsp;&nbsp;- Use simple language and call things what they are<br>&nbsp;&nbsp;- Don’t manipulate people nor distort facts</td>
+                                                                <td>
+                                                                    <c:if test="${behaviorsList[0].midYearScore eq '5.0'}">
+                                                                        <input type="Text" id="midYearScore1" name="midYearScore1" value="Far Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[0].midYearScore eq '4.0'}">
+                                                                        <input type="Text" id="midYearScore1" name="midYearScore1" value="Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[0].midYearScore eq '3.0'}">
+                                                                        <input type="Text" id="midYearScore1" name="midYearScore1" value="Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[0].midYearScore eq '2.0'}">
+                                                                        <input type="Text" id="midYearScore1" name="midYearScore1" value="Partially Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[0].midYearScore eq '1.0'}">
+                                                                        <input type="Text" id="midYearScore1" name="midYearScore1" value="Does Not Meet Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[0].midYearScore eq null}">
+                                                                        <input type="Text" id="midYearScore1" name="midYearScore1" value="" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                </td>
+                                                                <td id="endYearId1">
+                                                                    <c:if test="${behaviorsList[0].endYearScore eq '5.0'}">
+                                                                        <input type="Text" id="endYearScore1" name="endYearScore1" value="Far Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[0].endYearScore eq '4.0'}">
+                                                                        <input type="Text" id="endYearScore1" name="endYearScore1" value="Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[0].endYearScore eq '3.0'}">
+                                                                        <input type="Text" id="endYearScore1" name="endYearScore1" value="Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[0].endYearScore eq '2.0'}">
+                                                                        <input type="Text" id="endYearScore1" name="endYearScore1" value="Partially Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[0].endYearScore eq '1.0'}">
+                                                                        <input type="Text" id="endYearScore1" name="endYearScore1" value="Does Not Meet Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[0].endYearScore eq null}">
+                                                                        <input type="Text" id="endYearScore1" name="endYearScore1" value="" class="form-control" readonly="true">
+                                                                    </c:if>
+
+                                                                </td>
                                                                 </tr>
-                                                                <tr class="" id="tbl112" >
-                                                                    <td style="vertical-align: middle"><b>Exceeds Expectations</b></td>
-                                                                    <td style="text-align: center"><h4><b>101 to 105</b></h4></td>
-                                                                    <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '101' && behaviorsFinalscore le '105' || behaviorsFinalscore eq '101' || behaviorsFinalscore eq '105'}"><i class="fa fa-check"></i></c:if></td>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2">${behaviorsList[0].managerMidYearReview}</td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey" >
+                                                                    <td id="managerEndYearReviewId1"><b>Manager’s End - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2"></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                <input type="hidden" id="w2" name="w2" value="WLB 2"/>
+                                                                <td><b>WLB 2: Deliver Results</b><br>&nbsp;&nbsp;- Master the art of execution & Establish a track record of results<br>&nbsp;&nbsp;- Practice Accountability – Hold self & others accountable<br>&nbsp;&nbsp;- Get the best out of you and your team<br>&nbsp;&nbsp;- Be on time and within budget<br>&nbsp;&nbsp;- Don’t find excuses for not delivering<br>&nbsp;&nbsp;- Celebrate success with the team</td>
+                                                                <td>
+
+                                                                    <c:if test="${behaviorsList[0].midYearScore eq '5.0'}">
+                                                                        <input type="Text" id="midYearScore2" name="midYearScore2" value="Far Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[0].midYearScore eq '4.0'}">
+                                                                        <input type="Text" id="midYearScore2" name="midYearScore2" value="Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[0].midYearScore eq '3.0'}">
+                                                                        <input type="Text" id="midYearScore2" name="midYearScore2" value="Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[0].midYearScore eq '2.0'}">
+                                                                        <input type="Text" id="midYearScore2" name="midYearScore2" value="Partially Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[0].midYearScore eq '1.0'}">
+                                                                        <input type="Text" id="midYearScore2" name="midYearScore2" value="Does Not Meet Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[0].midYearScore eq null}">
+                                                                        <input type="Text" id="midYearScore2" name="midYearScore2" value="" class="form-control" readonly="true">
+                                                                    </c:if>
+
+                                                                </td>
+
+                                                                <td id="endYearId2">
+                                                                    <!--<input type="Text" id="endYearScore2" name="endYearScore2" value="${behaviorsList[1].endYearScore}" class="form-control" readonly="true">-->
+                                                                    <c:if test="${behaviorsList[1].endYearScore eq '5.0'}">
+                                                                        <input type="Text" id="endYearScore2" name="endYearScore2" value="Far Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[1].endYearScore eq '4.0'}">
+                                                                        <input type="Text" id="endYearScore2" name="endYearScore2" value="Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[1].endYearScore eq '3.0'}">
+                                                                        <input type="Text" id="endYearScore2" name="endYearScore2" value="Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[1].endYearScore eq '2.0'}">
+                                                                        <input type="Text" id="endYearScore2" name="endYearScore2" value="Partially Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[1].endYearScore eq '1.0'}">
+                                                                        <input type="Text" id="endYearScore2" name="endYearScore2" value="Does Not Meet Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[1].endYearScore eq null}">
+                                                                        <input type="Text" id="endYearScore2" name="endYearScore2" value="" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                </td>
 
                                                                 </tr>
-                                                                <tr class="" id="tbl113" >
-                                                                    <td style="vertical-align: middle"><b>Meets Expectations</b></td>
-                                                                    <td style="text-align: center"><h4><b>80 to 100</b></h4></td>
-                                                                    <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '80'  && behaviorsFinalscore le '100' || behaviorsFinalscore eq '80' || behaviorsFinalscore eq '100'}"><i class="fa fa-check"></i></c:if></td>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2">${behaviorsList[1].managerMidYearReview}</td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey" id="managerEndYearReviewId">
+                                                                    <td id="managerEndYearReviewId2"><b>Manager’s End - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2">${behaviorsList[1].managerEndYearReview}</td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                <input type="hidden" id="w3" name="w3" value="WLB 3"/>
+                                                                <td><b>WLB 3: Build Relationships & Develop Others</b><br>&nbsp;&nbsp;- Be grounded at all times & approachable<br>&nbsp;&nbsp;- Treat people with utmost respect & care<br>&nbsp;- Understand other’s perspective & concern<br>&nbsp;&nbsp;- Invest in developing the talent<br>&nbsp;&nbsp;- Give your team the right opportunities to learn and grow<br>&nbsp;&nbsp;- Create a learning environment & help others to learn from success stories & failures<br>&nbsp;&nbsp; </td>
+                                                                <td>
+                                                                    <c:if test="${behaviorsList[2].midYearScore eq '5.0'}">
+                                                                        <input type="Text" id="midYearScore3" name="midYearScore3" value="Far Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[2].midYearScore eq '4.0'}">
+                                                                        <input type="Text" id="midYearScore3" name="midYearScore3" value="Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[2].midYearScore eq '3.0'}">
+                                                                        <input type="Text" id="midYearScore3" name="midYearScore3" value="Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[2].midYearScore eq '2.0'}">
+                                                                        <input type="Text" id="midYearScore3" name="midYearScore3" value="Partially Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[2].midYearScore eq '1.0'}">
+                                                                        <input type="Text" id="midYearScore3" name="midYearScore3" value="Does Not Meet Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[2].midYearScore eq null}">
+                                                                        <input type="Text" id="midYearScore3" name="midYearScore3" value="" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                </td>
+
+                                                                <td  id="endYearId3">
+                                                                    <c:if test="${behaviorsList[2].endYearScore eq '5.0'}">
+                                                                        <input type="Text" id="endYearScore3" name="endYearScore3" value="Far Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[2].endYearScore eq '4.0'}">
+                                                                        <input type="Text" id="endYearScore3" name="endYearScore3" value="Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[2].endYearScore eq '3.0'}">
+                                                                        <input type="Text" id="endYearScore3" name="endYearScore3" value="Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[2].endYearScore eq '2.0'}">
+                                                                        <input type="Text" id="endYearScore3" name="endYearScore3" value="Partially Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[2].endYearScore eq '1.0'}">
+                                                                        <input type="Text" id="endYearScore3" name="endYearScore3" value="Does Not Meet Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[2].endYearScore eq null}">
+                                                                        <input type="Text" id="endYearScore3" name="endYearScore3" value="" class="form-control" readonly="true">
+                                                                    </c:if>
+
+                                                                    </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2"><textarea type="Text" id="managerMidYearReview3" name="managerMidYearReview3" class="form-control" readonly="true"><c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${behaviorsList[2].managerMidYearReview}</c:if></textarea></td>
+                                                                    </tr>
+                                                                    <tr style="background-color: lightgrey" id="managerEndYearReviewId">
+                                                                        <td id="managerEndYearReviewId3"><b>Manager’s End - Year Review / Evaluation</b></td>
+                                                                        <td colspan="2"><textarea type="Text" id="managerEndYearReview3" name="managerEndYearReview3" class="form-control" readonly="true"><c:if test="${appraisalPerformanceMaster.getManagerStatus() ne 0}">${behaviorsList[2].managerEndYearReview}</c:if></textarea></td>
+                                                                    </tr>
+                                                                    <tr style="background-color: lightgrey">
+                                                                    <input type="hidden" id="w4" name="w4" value="WLB 4"/>
+                                                                    <td><b>WLB 4: Act with Courage</b><br>&nbsp;&nbsp;- Take a stand – have your individual opinion & stand by it<br>&nbsp;&nbsp;- Don’t shy away from conflicts<br>&nbsp;&nbsp;- Deal with the issues head on – never procrastinate<br>&nbsp;&nbsp;- Never bury your head in the sand<br>&nbsp;&nbsp;- Be direct & candid</td>
+                                                                    <td>
+                                                                    <c:if test="${behaviorsList[3].midYearScore eq '5.0'}">
+                                                                        <input type="Text" id="midYearScore4" name="midYearScore4" value="Far Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[3].midYearScore eq '4.0'}">
+                                                                        <input type="Text" id="midYearScore4" name="midYearScore4" value="Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[3].midYearScore eq '3.0'}">
+                                                                        <input type="Text" id="midYearScore4" name="midYearScore4" value="Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[3].midYearScore eq '2.0'}">
+                                                                        <input type="Text" id="midYearScore4" name="midYearScore4" value="Partially Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[3].midYearScore eq '1.0'}">
+                                                                        <input type="Text" id="midYearScore4" name="midYearScore4" value="Does Not Meet Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[3].midYearScore eq null}">
+                                                                        <input type="Text" id="midYearScore4" name="midYearScore4" value="" class="form-control" readonly="true">
+                                                                    </c:if>
+
+                                                                <td id="endYearId4">
+                                                                    <c:if test="${behaviorsList[3].endYearScore eq '5.0'}">
+                                                                        <input type="Text" id="endYearScore4" name="endYearScore4" value="Far Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[3].endYearScore eq '4.0'}">
+                                                                        <input type="Text" id="endYearScore4" name="endYearScore4" value="Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[3].endYearScore eq '3.0'}">
+                                                                        <input type="Text" id="endYearScore4" name="endYearScore4" value="Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[3].endYearScore eq '2.0'}">
+                                                                        <input type="Text" id="endYearScore4" name="endYearScore4" value="Partially Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[3].endYearScore eq '1.0'}">
+                                                                        <input type="Text" id="endYearScore4" name="endYearScore4" value="Does Not Meet Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[3].endYearScore eq null}">
+                                                                        <input type="Text" id="endYearScore4" name="endYearScore4" value="" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                </td>
 
                                                                 </tr>
-                                                                <tr class="" id="tbl114" >
-                                                                    <td style="vertical-align: middle"><b>Partially Meets Expectations</td>
-                                                                    <td style="text-align: center"><h4><b>51 to 79</b></h4></td>
-                                                                    <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '51'  && behaviorsFinalscore le '79' || behaviorsFinalscore eq '51' || behaviorsFinalscore eq '79'}"><i class="fa fa-check"></i></c:if></td>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2">${behaviorsList[3].managerMidYearReview}</td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey" id="managerEndYearReviewId">
+                                                                    <td id="managerEndYearReviewId4"><b>Manager’s End - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2">${behaviorsList[3].managerEndYearReview}</td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                <input type="hidden" id="w5" name="w5" value="WLB 5"/>
+                                                                <td><b>WLB 5: Believe in Vision & Purpose</b><br>&nbsp;&nbsp;- Be Far-sighted & Look beyond the obvious<br>&nbsp;&nbsp;- Be Strategic – Have a macro & micro perspective, Innovate<br>&nbsp;&nbsp;- Be Entrepreneurial <br>&nbsp;&nbsp;- Communicate your Vision to your team<br>&nbsp;&nbsp;- Make sure everyone on board under stand's the purpose<br>&nbsp;&nbsp;- Communicate ‘What’ , Why and When to align people to your Vision & Purpose </td>
+                                                                <td>
+                                                                    <c:if test="${behaviorsList[4].midYearScore eq '5.0'}">
+                                                                        <input type="Text" id="midYearScore5" name="midYearScore5" value="Far Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[4].midYearScore eq '4.0'}">
+                                                                        <input type="Text" id="midYearScore5" name="midYearScore5" value="Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[4].midYearScore eq '3.0'}">
+                                                                        <input type="Text" id="midYearScore5" name="midYearScore5" value="Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[4].midYearScore eq '2.0'}">
+                                                                        <input type="Text" id="midYearScore5" name="midYearScore5" value="Partially Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[4].midYearScore eq '1.0'}">
+                                                                        <input type="Text" id="midYearScore5" name="midYearScore5" value="Does Not Meet Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[4].midYearScore eq null}">
+                                                                        <input type="Text" id="midYearScore5" name="midYearScore5" value="" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                </td>
+                                                                <td id="endYearId5">
+                                                                    <c:if test="${behaviorsList[4].endYearScore eq '5.0'}">
+                                                                        <input type="Text" id="endYearScore5" name="endYearScore5" value="Far Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[4].endYearScore eq '4.0'}">
+                                                                        <input type="Text" id="endYearScore5" name="endYearScore5" value="Exceeds Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[4].endYearScore eq '3.0'}">
+                                                                        <input type="Text" id="endYearScore5" name="endYearScore5" value="Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[4].endYearScore eq '2.0'}">
+                                                                        <input type="Text" id="endYearScore5" name="endYearScore5" value="Partially Meets Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[4].endYearScore eq '1.0'}">
+                                                                        <input type="Text" id="endYearScore5" name="endYearScore5" value="Does Not Meet Expectations" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                    <c:if test="${behaviorsList[4].endYearScore eq null}">
+                                                                        <input type="Text" id="endYearScore5" name="endYearScore5" value="" class="form-control" readonly="true">
+                                                                    </c:if>
+                                                                </td>
 
                                                                 </tr>
-                                                                <tr class="" id="tbl115">
-                                                                    <td style="vertical-align: middle"><b>Does Not Meet Expectations</b></td>
-                                                                    <td style="text-align: center"><h4><b>50 & Below</b></h4></td>
-                                                                    <td style="text-align: center"><c:if test="${behaviorsFinalscore ge '1' && behaviorsFinalscore le '50' || behaviorsFinalscore eq '1' || behaviorsFinalscore eq '50'}"> <i class="fa fa-check"></i></c:if></td>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2">${behaviorsList[4].managerMidYearReview}</td>
                                                                 </tr>
-                                                            </table>
+                                                                <tr style="background-color: lightgrey" id="managerEndYearReviewId">
+                                                                    <td id="managerEndYearReviewId5"><b>Manager’s End - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2">${behaviorsList[4].managerEndYearReview}</td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b style="font-size: 16px">TOTAL SCORE</b></td>
+                                                                    <td id="scoreMid">${behaviorsMidyearTotalscore}</td>
+                                                                    <!--<td id="scoreEnd">${behaviorsEndyearTotalscore}</td>-->
+                                                                    <td id="scoreEnd">${behaviorsEndyearTotalscoreForemp}</td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Other Comment/Remark (Mid Year)</b></td>
+                                                                    <td colspan="2">${behaviorsMidyearOtherremark}</td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td id="behaviorsEndyearOtherremarkId"><b>Other Comment/Remark (End Year)</b></td>
+                                                                    <td colspan="2">${behaviorsEndyearOtherremark}</td>
+                                                                </tr>
+                                                            </c:when>
+                                                            <c:otherwise>
+
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>WLB 1: Walk the Talk </b><br>&nbsp;&nbsp;- Do & Act What you Preach<br>&nbsp;&nbsp;- Keep commitments<br>&nbsp;&nbsp;- Talk Straight – Be Honest & Tell the Truth<br>&nbsp;&nbsp;- Use simple language and call things what they are<br>&nbsp;&nbsp;- Don’t manipulate people nor distort facts</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2"></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Manager’s End - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2"></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>WLB 2: Deliver Results</b><br>&nbsp;&nbsp;- Master the art of execution & Establish a track record of results<br>&nbsp;&nbsp;- Practice Accountability – Hold self & others accountable<br>&nbsp;&nbsp;- Get the best out of you and your team<br>&nbsp;&nbsp;- Be on time and within budget<br>&nbsp;&nbsp;- Don’t find excuses for not delivering<br>&nbsp;&nbsp;- Celebrate success with the team</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2"></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Manager’s End - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2"></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>WLB 3: Build Relationships & Develop Others</b><br>&nbsp;&nbsp;- Be grounded at all times & approachable<br>&nbsp;&nbsp;- Treat people with utmost respect & care<br>&nbsp;- Understand other’s perspective & concern<br>&nbsp;&nbsp;- Invest in developing the talent<br>&nbsp;&nbsp;- Give your team the right opportunities to learn and grow<br>&nbsp;&nbsp;- Create a learning environment & help others to learn from success stories & failures<br>&nbsp;&nbsp; </td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2"></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Manager’s End - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2"></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>WLB 4: Act with Courage</b><br>&nbsp;&nbsp;- Take a stand – have your individual opinion & stand by it<br>&nbsp;&nbsp;- Don’t shy away from conflicts<br>&nbsp;&nbsp;- Deal with the issues head on – never procrastinate<br>&nbsp;&nbsp;- Never bury your head in the sand<br>&nbsp;&nbsp;- Be direct & candid</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2"></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Manager’s End - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2"></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>WLB 5: Believe in Vision & Purpose</b><br>&nbsp;&nbsp;- Be Far-sighted & Look beyond the obvious<br>&nbsp;&nbsp;- Be Strategic – Have a macro & micro perspective, Innovate<br>&nbsp;&nbsp;- Be Entrepreneurial <br>&nbsp;&nbsp;- Communicate your Vision to your team<br>&nbsp;&nbsp;- Make sure everyone on board under stand's the purpose<br>&nbsp;&nbsp;- Communicate ‘What’ , Why and When to align people to your Vision & Purpose </td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Manager’s Mid - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2"></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Manager’s End - Year Review / Evaluation</b></td>
+                                                                    <td colspan="2"></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b style="font-size: 16px">TOTAL SCORE</b></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Other Comment/Remark (Mid Year)</b></td>
+                                                                    <td colspan="2"></td>
+                                                                </tr>
+                                                                <tr style="background-color: lightgrey">
+                                                                    <td><b>Other Comment/Remark (End Year)</b></td>
+                                                                    <td colspan="2"></td>
+                                                                </tr>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </table>
+                                                    <p><b>Note</b>: Please note that the score in Mid-Year Review/Evaluation of Behavior is just an indicator of an individual’s behavior during the first half of the year and the same is not considered in any rating calculation.
+                                                        It is the score in End-Year Review/Evaluation which is considered in the final rating of an employee.</p>
+                                                </div>
+                                            </div><!-- /.col -->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                </div>
+                                <div class="box box-info " id="RatingsTabId">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Performance Ratings:</h3>
+
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <!--                                                    <div class="form-group">
+                                                                                                        <label class="col-sm-5 control-label"><b>Final Score</b></label>
+                                                                                                        <div class="col-sm-2">
+                                                
+                                                                                                            <input type="number" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" onload="printfinalScoreRatings();"class="form-control" readonly="true">
+                                                
+                                                                                                        </div>
+                                                                                                    </div>-->
+
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group text-center">
+                                                            <label class="control-label"><b>KRA Score</b></label>&nbsp;&nbsp;
+                                                            <input type="number" id="totalScore" name="totalScore" value="${totalScoreForemployee}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
                                                         </div>
-                                                    </div><!-- /.col -->
-                                                    <div class="form-group">
-                                                        <label class="col-sm-5 control-label"><b>Activity/Project Performance</b></label>
-                                                        <div class="col-sm-2">
-                                                            <input type="Text" id="" name="" value="${empActivityScore}"  class="form-control" readonly>
-                                                         </div>
-                                                    </div> 
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
-                                    <%--</form:form>--%>
-                                </div><!-- /.tab-content -->
-                            </div><!-- nav-tabs-custom -->
-                        </div><!-- /.col -->
-                    </div>
+                                                    </div>
+                                                    <div class="col-sm-4 form-group text-center">
+                                                        <div class="form-group">
+                                                            <label class="control-label"><b>WLB Score</b></label>&nbsp;&nbsp;
+                                                            <input type="number" id="behaviorsEndyearTotalscore" name="behaviorsEndyearTotalscore" value="${behaviorsEndyearTotalscoreForemp}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 form-group text-center">
+                                                        <div class="form-group">
+                                                            <label class="control-label"><b>Final Score</b></label>&nbsp;&nbsp;
+                                                            <input type="Text" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscoreForemployee}" onchange="performancefinalScoreRatingsEmployee();" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">
+                                                            <!--<input type="number" id="behaviorsFinalscore" name="behaviorsFinalscore" value="${behaviorsFinalscore}" disabled="disabled" style="border-radius: 4px; border: 1px solid #ccc; padding: 6px 12px;" readonly="true">-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="table-responsive">
+                                                    <table id="demo234" class="table table-bordered table-striped table-hover" style="" align="Center">
+                                                        <tr>
+                                                            <th style="text-align: center">Performance Ratings</th>
+                                                            <th style="text-align: center">Score</th>
+                                                            <th style="text-align: center">Score Achieved</th>
+                                                        </tr>
+                                                        <tr class="d1" id="tbl111" >
+                                                            <td style="vertical-align: middle"><b>Far Exceeds Expectations</b></td>
+                                                            <td style="text-align: center"><h4 style="background-color: #337AB7;"><b>106 to 110</b></h4></td>
+                                                            <td style="text-align: center"><c:if test="${behaviorsFinalscoreForemployee ge '116' && behaviorsFinalscoreForemployee le '110' || behaviorsFinalscoreForemployee eq '116' || behaviorsFinalscoreForemployee eq '116'}"><i class="fa fa-check"></i></c:if></td>
+                                                            </tr>
+                                                            <tr class="" id="tbl112" >
+                                                                <td style="vertical-align: middle"><b>Exceeds Expectations</b></td>
+                                                                <td style="text-align: center"><h4><b>101 to 105</b></h4></td>
+                                                                <td style="text-align: center"><c:if test="${behaviorsFinalscoreForemployee ge '101' && behaviorsFinalscoreForemployee le '105' || behaviorsFinalscoreForemployee eq '101' || behaviorsFinalscoreForemployee eq '105'}"><i class="fa fa-check"></i></c:if></td>
+
+                                                            </tr>
+                                                            <tr class="" id="tbl113" >
+                                                                <td style="vertical-align: middle"><b>Meets Expectations</b></td>
+                                                                <td style="text-align: center"><h4><b>80 to 100</b></h4></td>
+                                                                <td style="text-align: center"><c:if test="${behaviorsFinalscoreForemployee ge '80'  && behaviorsFinalscoreForemployee le '100' || behaviorsFinalscoreForemployee eq '80' || behaviorsFinalscoreForemployee eq '100'}"><i class="fa fa-check"></i></c:if></td>
+
+                                                            </tr>
+                                                            <tr class="" id="tbl114" >
+                                                                <td style="vertical-align: middle"><b>Partially Meets Expectations</td>
+                                                                <td style="text-align: center"><h4><b>51 to 79</b></h4></td>
+                                                                <td style="text-align: center"><c:if test="${behaviorsFinalscoreForemployee ge '51'  && behaviorsFinalscoreForemployee le '79' || behaviorsFinalscoreForemployee eq '51' || behaviorsFinalscoreForemployee eq '79'}"><i class="fa fa-check"></i></c:if></td>
+
+                                                            </tr>
+                                                            <tr class="" id="tbl115">
+                                                                <td style="vertical-align: middle"><b>Does Not Meet Expectations</b></td>
+                                                                <td style="text-align: center"><h4><b>50 & Below</b></h4></td>
+                                                                <td style="text-align: center">
+                                                                <c:if test="behaviorsFinalscoreForemployee le '50' || behaviorsFinalscoreForemployee eq '50'}"> 
+                                                                    <i class="fa fa-check"></i>
+                                                                </c:if>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div><!-- /.col -->
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label"><b>Activity/Project Performance${behaviorsFinalscoreForemployee ge '0' && behaviorsFinalscoreForemployee le '50' || behaviorsFinalscoreForemployee eq '0' || behaviorsFinalscoreForemployee eq '50'}</b></label>
+                                                    <div class="col-sm-2">
+                                                        <input type="Text" id="" name="" value="${empActivityScore}"  class="form-control" readonly>
+                                                </div>
+                                            </div> 
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                </div>
+                                <%--</form:form>--%>
+                            </div><!-- /.tab-content -->
+                        </div><!-- nav-tabs-custom -->
+                    </div><!-- /.col -->
+                </div>
             </section><!-- /.content -->
         </div>
     </body>

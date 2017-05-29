@@ -173,6 +173,7 @@
                                                 <input type="hidden" name="countId" id="countId" value="${fn:length(kragoal)}">
                                                 <input type="hidden" name="appraisalId" id="appraisalId" value="${appraisalId}">
                                                 <input type="hidden" name="employeeId" id="employeeId" value="${employeeId}">
+                                                <input type="hidden" name="year" id="year" value="${year}">
                                                 <th style="text-align: center">Sr. No.</th>
                                                 <th style="text-align: center" id="kraGoalid1">High Impact Goal / KRA</th>
                                                 <th style="text-align: center" id="metricid1">Metric</th>
@@ -275,182 +276,182 @@
                                 </div>
                             </div>
 
+                            <c:if test="${year == 2016}">
+                                <div class="box-header">
+                                    <h3 class="box-title">Additional Activities / Projects:</h3>
 
-                            <div class="box-header">
-                                <h3 class="box-title">Additional Activities / Projects:</h3>
+                                </div>
 
-                            </div>
+                                <div class="box-body no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="table-responsive">
+                                                <table id="demo10" class="table table-bordered table-striped table-hover" style="" align="Center">
+                                                    <tr>
 
-                            <div class="box-body no-padding">
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12">
-                                        <div class="table-responsive">
-                                            <table id="demo10" class="table table-bordered table-striped table-hover" style="" align="Center">
-                                                <tr>
+                                                    <input type="hidden" name="status1" id="status1" value="${status}">
 
-                                                <input type="hidden" name="status1" id="status1" value="${status}">
+                                                    <input type="hidden" id="managerStatus" name="managerStatus" value="${managerStatus}">
+                                                    <input type="hidden" id="employeeStatus" name="employeeStatus" value="${employeeStatus}">
+                                                    <input type="hidden" name="weightage" id="weightage" value="${weightage}">
 
-                                                <input type="hidden" id="managerStatus" name="managerStatus" value="${managerStatus}">
-                                                <input type="hidden" id="employeeStatus" name="employeeStatus" value="${employeeStatus}">
-                                                <input type="hidden" name="weightage" id="weightage" value="${weightage}">
-
-                                                <th style="text-align: center">Sr. No.</th>
-
-
-                                                <th style="text-align: center" id="kraGoalid1">Additional Activities / Projects</th>
-                                                <th style="text-align: center" id="metricid1">Metric</th>
-                                                <th style="text-align: center" id="metricid1">KRA Category</th>
-
-                                                <th style="margin: 0px;width: 25px;text-align: center;" id="">Priority</th>
-
-                                                <th style="margin: 0px;width: 70px;text-align: center" id="midYearDivid">Mid Year Status</th>
-                                                <th style="margin: 0px;width: 70px;text-align: center" id="endYearDivid1">End Year Status</th>
-                                                <th style="margin: 0px;width: 25px;text-align: center" id="finalScoreid01">Activity/Project Performance</th>
+                                                    <th style="text-align: center">Sr. No.</th>
 
 
-                                                </tr>
-                                                <input type="hidden" name="kragoalLengthactivity" id="kragoalLengthactivity" value="${fn:length(kragoalOtherActivity)}">
+                                                    <th style="text-align: center" id="kraGoalid1">Additional Activities / Projects</th>
+                                                    <th style="text-align: center" id="metricid1">Metric</th>
+                                                    <th style="text-align: center" id="metricid1">KRA Category</th>
 
-                                                <c:choose>
-                                                    <c:when test="${fn:length(kragoalOtherActivity) > 0}">
-                                                        <input type="hidden" name="countactivityId" id="countactivityId" value="${fn:length(kragoalOtherActivity)}">
-                                                        <c:forEach var="kragoalOtherActivity" items="${kragoalOtherActivity}" varStatus="status">
-                                                            <%--<c:if test="${kragoallist.kragoal_activity ne '' && kragoallist.metric_activity ne ''}">--%>
+                                                    <th style="margin: 0px;width: 25px;text-align: center;" id="">Priority</th>
+
+                                                    <th style="margin: 0px;width: 70px;text-align: center" id="midYearDivid">Mid Year Status</th>
+                                                    <th style="margin: 0px;width: 70px;text-align: center" id="endYearDivid1">End Year Status</th>
+                                                    <th style="margin: 0px;width: 25px;text-align: center" id="finalScoreid01">Activity/Project Performance</th>
+
+
+                                                    </tr>
+                                                    <input type="hidden" name="kragoalLengthactivity" id="kragoalLengthactivity" value="${fn:length(kragoalOtherActivity)}">
+
+                                                    <c:choose>
+                                                        <c:when test="${fn:length(kragoalOtherActivity) > 0}">
+                                                            <input type="hidden" name="countactivityId" id="countactivityId" value="${fn:length(kragoalOtherActivity)}">
+                                                            <c:forEach var="kragoalOtherActivity" items="${kragoalOtherActivity}" varStatus="status">
+                                                                <%--<c:if test="${kragoallist.kragoal_activity ne '' && kragoallist.metric_activity ne ''}">--%>
+                                                                <tr>
+                                                                <input type="hidden" name="kragoal_activity_id${status.count}" id="kragoal_activity_id${status.count}" value="${kragoalOtherActivity.id}">
+                                                                <td style="margin: 0px;width: 45px;">${status.count} </td>
+                                                                <td id="">${kragoalOtherActivity.kraGoalActivitiesManager}</td>
+                                                                <td id="">${kragoalOtherActivity.metricActivitiesManager}</td>
+                                                                <td id="kraCategoryId${status.count}">
+
+                                                                    <c:forEach var="kraCategory" items="${kraCategoryMap}">
+                                                                        <c:if test="${kragoalOtherActivity.kraCategoryByManagerActivities eq kraCategory.key}">
+                                                                            ${kraCategory.value}
+                                                                        </c:if>
+                                                                    </c:forEach>
+
+                                                                </td>
+                                                                <td id="priorityid${status.count}">
+                                                                    ${kragoalOtherActivity.priority}
+                                                                </td> 
+                                                                <td id="midYearDivid1${status.count}">
+                                                                    ${kragoalOtherActivity.midyearStatusActivities}
+                                                                </td>
+                                                                <td id="endYearDivid1${status.count}">${kragoalOtherActivity.endyearStatusActivities}</td>
+
+
+                                                                <td id="activityDivid1${status.count}">${kragoalOtherActivity.activity}</td>
+
+
+                                                                </tr>
+
+                                                                <!--<table id="demo1" class="table table-bordered table-striped table-hover" style="" align="Center">-->
+
+
+                                                                <tr id="">
+                                                                    <td colspan="3"><b>Employee’s Mid - Year Self – Assessment For Other Activities:</b></td>
+                                                                    <td colspan="5"><b>Manager’s Mid - Year Review / Evaluation For Other Activities:</b></td>
+                                                                </tr>
+                                                                <tr id="">
+                                                                    <td colspan="3">${kragoalOtherActivity.empMidyearSelfassessmentGoalActivities}</td>
+                                                                    <td colspan="5">${kragoalOtherActivity.managerMidyearSelfassesssmentGoalActivities}</td>
+                                                                </tr>
+
+                                                                <tr id="">
+                                                                    <td colspan="3"><b>Employee’s End - Year Self – Assessment For Other Activities:</b></td>
+                                                                    <td colspan="5"><b>Manager’s End - Year Review / Evaluation For Other Activities:</b></td>
+                                                                </tr>
+                                                                <tr id="">
+                                                                    <td colspan="3">${kragoalOtherActivity.empEndyearSelfassessmentGoalActivities}</td>
+                                                                    <td colspan="5">${kragoalOtherActivity.managerEndyearSelfassesssmentGoalActivities}</td>
+                                                                </tr>
+                                                                <!--</table>-->
+
+
+                                                            </c:forEach>
+                                                        </c:when>
+                                                        <c:otherwise>
                                                             <tr>
-                                                            <input type="hidden" name="kragoal_activity_id${status.count}" id="kragoal_activity_id${status.count}" value="${kragoalOtherActivity.id}">
-                                                            <td style="margin: 0px;width: 45px;">${status.count} </td>
-                                                            <td id="">${kragoalOtherActivity.kraGoalActivitiesManager}</td>
-                                                            <td id="">${kragoalOtherActivity.metricActivitiesManager}</td>
-                                                            <td id="kraCategoryId${status.count}">
-
-                                                                <c:forEach var="kraCategory" items="${kraCategoryMap}">
-                                                                    <c:if test="${kragoalOtherActivity.kraCategoryByManagerActivities eq kraCategory.key}">
-                                                                        ${kraCategory.value}
-                                                                    </c:if>
-                                                                </c:forEach>
-
+                                                                <td style="margin: 0px;width: 45px;">1</td>
+                                                                <%--<c:if test="${flag eq true}">--%>
+                                                            <input type="hidden" name="countactivityId" id="countactivityId" value="1">
+                                                            <!--<td id="kraGoalid"><textarea type="Text" name="kraGoal1" id="kraGoal1" class="form-control"></textarea></td>-->
+                                                            <td id=""></td>
+                                                            <td id=""></td>
+                                                            <td id="kraCategoryId">
+                                                                <select id="kraCategoryMap1" name="kraCategoryMap1" class="form-control" style="margin: 0px;width: 115px;">
+                                                                    <option value="">--SELECT--</option>
+                                                                    <c:forEach var="kraCategory" items="${kraCategoryMap}">
+                                                                        <option value="${kraCategory.key}">${kraCategory.value}</option>
+                                                                    </c:forEach>
+                                                                </select>
                                                             </td>
-                                                            <td id="priorityid${status.count}">
-                                                                ${kragoalOtherActivity.priority}
+                                                            <td id="priorityid">
+                                                                <select id="priority1" name="priority1" class="form-control" style="margin: 0px;width: 115px;">
+                                                                    <option value="">--SELECT--</option>
+                                                                    <option value="High Priority">High Priority</option>
+                                                                    <option value="Medium Priority">Medium Priority</option>
+                                                                    <option value="Low Priority">Low Priority</option>
+                                                                </select>
                                                             </td> 
-                                                            <td id="midYearDivid1${status.count}">
-                                                                ${kragoalOtherActivity.midyearStatusActivities}
+                                                            <td id="midYearDividact1"><div>
+                                                                    <select id="midYearDivOther1" name="midYearDivOther1" class="form-control" style="margin: 0px;width: 115px;">
+                                                                        <option value="">--SELECT--</option>
+                                                                        <option value="Yet to Start">Yet to Start</option>
+                                                                        <option value="In Progress">In Progress</option>
+                                                                        <option value="Completed">Completed</option>
+                                                                        <option value="Canceled">Canceled</option>
+                                                                    </select>
+                                                                </div>
                                                             </td>
-                                                            <td id="endYearDivid1${status.count}">${kragoalOtherActivity.endyearStatusActivities}</td>
-
-
-                                                            <td id="activityDivid1${status.count}">${kragoalOtherActivity.activity}</td>
-
-
-                                                            </tr>
-
-                                                            <!--<table id="demo1" class="table table-bordered table-striped table-hover" style="" align="Center">-->
-
-
-                                                            <tr id="">
-                                                                <td colspan="3"><b>Employee’s Mid - Year Self – Assessment For Other Activities:</b></td>
-                                                                <td colspan="5"><b>Manager’s Mid - Year Review / Evaluation For Other Activities:</b></td>
-                                                            </tr>
-                                                            <tr id="">
-                                                                <td colspan="3">${kragoalOtherActivity.empMidyearSelfassessmentGoalActivities}</td>
-                                                                <td colspan="5">${kragoalOtherActivity.managerMidyearSelfassesssmentGoalActivities}</td>
-                                                            </tr>
-
-                                                            <tr id="">
-                                                                <td colspan="3"><b>Employee’s End - Year Self – Assessment For Other Activities:</b></td>
-                                                                <td colspan="5"><b>Manager’s End - Year Review / Evaluation For Other Activities:</b></td>
-                                                            </tr>
-                                                            <tr id="">
-                                                                <td colspan="3">${kragoalOtherActivity.empEndyearSelfassessmentGoalActivities}</td>
-                                                                <td colspan="5">${kragoalOtherActivity.managerEndyearSelfassesssmentGoalActivities}</td>
-                                                            </tr>
-                                                            <!--</table>-->
-
-
-                                                        </c:forEach>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <tr>
-                                                            <td style="margin: 0px;width: 45px;">1</td>
-                                                            <%--<c:if test="${flag eq true}">--%>
-                                                        <input type="hidden" name="countactivityId" id="countactivityId" value="1">
-                                                        <!--<td id="kraGoalid"><textarea type="Text" name="kraGoal1" id="kraGoal1" class="form-control"></textarea></td>-->
-                                                        <td id=""></td>
-                                                        <td id=""></td>
-                                                        <td id="kraCategoryId">
-                                                            <select id="kraCategoryMap1" name="kraCategoryMap1" class="form-control" style="margin: 0px;width: 115px;">
-                                                                <option value="">--SELECT--</option>
-                                                                <c:forEach var="kraCategory" items="${kraCategoryMap}">
-                                                                    <option value="${kraCategory.key}">${kraCategory.value}</option>
-                                                                </c:forEach>
-                                                            </select>
-                                                        </td>
-                                                        <td id="priorityid">
-                                                            <select id="priority1" name="priority1" class="form-control" style="margin: 0px;width: 115px;">
-                                                                <option value="">--SELECT--</option>
-                                                                <option value="High Priority">High Priority</option>
-                                                                <option value="Medium Priority">Medium Priority</option>
-                                                                <option value="Low Priority">Low Priority</option>
-                                                            </select>
-                                                        </td> 
-                                                        <td id="midYearDividact1"><div>
-                                                                <select id="midYearDivOther1" name="midYearDivOther1" class="form-control" style="margin: 0px;width: 115px;">
+                                                            <td id="endYearDividact"><div>
+                                                                    <select id="endYearDivOther1" name="endYearDivOther1" class="form-control" style="margin: 0px;width: 115px;">
+                                                                        <option value="">--SELECT--</option>
+                                                                        <option value="Yet to Start">Yet to Start</option>
+                                                                        <option value="In Progress">In Progress</option>
+                                                                        <option value="Completed">Completed</option>
+                                                                        <option value="Canceled">Canceled</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                            <td id="">
+                                                                <select id="activity1" name="activity1" class="form-control" style="margin: 0px;width: 115px;">
                                                                     <option value="">--SELECT--</option>
-                                                                    <option value="Yet to Start">Yet to Start</option>
-                                                                    <option value="In Progress">In Progress</option>
-                                                                    <option value="Completed">Completed</option>
-                                                                    <option value="Canceled">Canceled</option>
+                                                                    <option value="Excellent">Excellent</option>
+                                                                    <option value="Very Good">Very Good</option>
+                                                                    <option value="Good">Good</option>
+                                                                    <option value="Average">Average</option>
+                                                                    <option value="Needs Improvement">Needs Improvement</option>
                                                                 </select>
-                                                            </div>
-                                                        </td>
-                                                        <td id="endYearDividact"><div>
-                                                                <select id="endYearDivOther1" name="endYearDivOther1" class="form-control" style="margin: 0px;width: 115px;">
-                                                                    <option value="">--SELECT--</option>
-                                                                    <option value="Yet to Start">Yet to Start</option>
-                                                                    <option value="In Progress">In Progress</option>
-                                                                    <option value="Completed">Completed</option>
-                                                                    <option value="Canceled">Canceled</option>
-                                                                </select>
-                                                            </div>
-                                                        </td>
-                                                        <td id="">
-                                                            <select id="activity1" name="activity1" class="form-control" style="margin: 0px;width: 115px;">
-                                                                <option value="">--SELECT--</option>
-                                                                <option value="Excellent">Excellent</option>
-                                                                <option value="Very Good">Very Good</option>
-                                                                <option value="Good">Good</option>
-                                                                <option value="Average">Average</option>
-                                                                <option value="Needs Improvement">Needs Improvement</option>
-                                                            </select>
-                                                        </td>
+                                                            </td>
 
 
-                                                        <tr id="employeesMid">
-                                                            <td colspan="4"><b>Employee’s Mid - Year Self – Assessment For Other Activities:</b></td>
-                                                            <td colspan="4"><b>Manager’s Mid - Year Review / Evaluation For Other Activities:</b></td>
-                                                        </tr>
-                                                        <tr id="textemployeesMid">
-                                                            <td colspan="4"></td>
-                                                            <td colspan="4"></td>
-                                                        </tr>
+                                                            <tr id="employeesMid">
+                                                                <td colspan="4"><b>Employee’s Mid - Year Self – Assessment For Other Activities:</b></td>
+                                                                <td colspan="4"><b>Manager’s Mid - Year Review / Evaluation For Other Activities:</b></td>
+                                                            </tr>
+                                                            <tr id="textemployeesMid">
+                                                                <td colspan="4"></td>
+                                                                <td colspan="4"></td>
+                                                            </tr>
 
-                                                        <tr id="employeesEnd">
-                                                            <td colspan="4"><b>Employee’s End - Year Self – Assessment For Other Activities:</b></td>
-                                                            <td colspan="4"><b>Manager’s End - Year Review / Evaluation For Other Activities:</b></td>
-                                                        </tr>
-                                                        <tr id="textemployeesEnd">
-                                                            <td colspan="4"></td>
-                                                            <td colspan="4"></td>
-                                                        </tr>
+                                                            <tr id="employeesEnd">
+                                                                <td colspan="4"><b>Employee’s End - Year Self – Assessment For Other Activities:</b></td>
+                                                                <td colspan="4"><b>Manager’s End - Year Review / Evaluation For Other Activities:</b></td>
+                                                            </tr>
+                                                            <tr id="textemployeesEnd">
+                                                                <td colspan="4"></td>
+                                                                <td colspan="4"></td>
+                                                            </tr>
 
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </table>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
+                            </c:if>
 
 
                             <div class="box-header">

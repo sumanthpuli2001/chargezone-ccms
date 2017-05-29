@@ -4735,9 +4735,11 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //            String behaviorsFinalscore = "";
 //            request.setAttribute("behaviorsFinalscore", behaviorsFinalscore);
 //        }
-        int year = Calendar.getInstance().get(Calendar.YEAR);
+        //int year = Calendar.getInstance().get(Calendar.YEAR);
+        String year = request.getParameter("year");
+        request.setAttribute("year", year);
 //        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId);
-        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
+        List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, Integer.parseInt(year));
         if (!list.isEmpty()) {
 
             appraisalPerformanceMaster = (AppraisalPerformanceMaster) list.get(0);
@@ -4907,6 +4909,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         selectEmployee(request, response);
         department(request, response);
         competencyList(request);
+        pmpyearList(request);
 //        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
 //        UserRightMaster user1 = (UserRightMaster) request.getSession().getAttribute("userRight");
 //        int cyear = Calendar.getInstance().get(Calendar.YEAR);
@@ -4988,16 +4991,17 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             appraisalFillingData = (AppraisalFillingData) timeLineList.get(timeLineList.size() - 1);
         }
 
+        String pyear = request.getParameter("pmpyear");
         if (null != searchvalue) {
             if (searchvalue.equals("rating")) {
-                List<?> empDetail = appraisalPerformanceService.readPMPSearchByEmployee(appraisalPerformanceMaster);
+                List<?> empDetail = appraisalPerformanceService.readPMPSearchByEmployee(appraisalPerformanceMaster,Integer.parseInt(pyear));
                 mv.getModelMap().put("list", empDetail);
                 response.setContentType("application/vnd.ms-excel");
                 response.setHeader("Content-Disposition", "attachment; filename=EmployeePMPRating.xls");
                 mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
                 mv.setViewName("Appraisal/PMPReport");
             } else if (searchvalue.equals("stageWise")) {
-                List<?> stageWise = appraisalPerformanceService.readstageWiseSearchByEmployee(appraisalPerformanceMaster, appraisalFillingData);
+                List<?> stageWise = appraisalPerformanceService.readstageWiseSearchByEmployee(appraisalPerformanceMaster, appraisalFillingData, Integer.parseInt(pyear));
                 mv.getModelMap().put("list", stageWise);
 //                request.setAttribute("flag1", flag1);
 //                request.setAttribute("flag2", flag2);
@@ -5461,6 +5465,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             }
 
             int year = Integer.parseInt(request.getParameter("year"));
+            request.setAttribute("year", year);
             List<?> list = appraisalPerformanceService.readByAppraisalPerformanceId(employeeId, year);
             if (!list.isEmpty()) {
 
@@ -8147,6 +8152,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         } else {
             appraisalPerformanceService.update(appraisalPerformanceMaster1);
             mv = searchClick(request, response);
+            request.setAttribute("successMessage",
+                    "Info : Your Request Are Done");
         }
         return mv;
     }

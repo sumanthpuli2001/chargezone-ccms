@@ -716,12 +716,13 @@
                                                             </div>
                                                         <form:errors path="dateOfJoining" cssClass="errorDiv"></form:errors>
                                                         </div>
-
+                                                    <c:if test="${sessionScope.userRight.hr == true}" >
                                                         <div class="col-sm-6">
                                                             <label>Last Year's Performance Rating:</label>
                                                             <input type="text" class="form-control" value="${lastYearPerformanceRatingsOfEmployee}" readonly="true">
-                                                        <%--<form:hidden path="lastYearPerformanceRating" class="form-control"></form:input>--%>
-                                                    </div>
+                                                            <%--<form:hidden path="lastYearPerformanceRating" class="form-control"></form:input>--%>
+                                                        </div>
+                                                    </c:if>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
@@ -772,9 +773,9 @@
                                                         <div class="col-sm-6">
                                                             <label>Competency Evaluation:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="competencyEvaluationId" id="competencyEvaluationId" class="form-control">
-                                                                 <option value="">--SELECT--</option>
-                                                               <c:forEach var="competencyMap" items="${competencyMap}">
-                                                                     <c:if test="${competencyMap.key eq employeeMaster.competencyEvaluationId}">
+                                                                <option value="">--SELECT--</option>
+                                                            <c:forEach var="competencyMap" items="${competencyMap}">
+                                                                <c:if test="${competencyMap.key eq employeeMaster.competencyEvaluationId}">
                                                                     <option value="${competencyMap.key}" selected="">${competencyMap.value}</option>
                                                                 </c:if>
                                                                 <c:if test="${competencyMap.key ne employeeMaster.competencyEvaluationId}">
@@ -1238,14 +1239,12 @@
                 $('#shiftNameDiv').hide();
                 $('#shiftRotationNameDiv').hide();
                 $('#shiftRotationDateDiv').hide();
-            }
-            else if ($('#shiftType').find("option:selected").val() == "ShiftBase") {
+            } else if ($('#shiftType').find("option:selected").val() == "ShiftBase") {
                 $('#shiftNameDiv').show();
                 $('#shiftRotationNameDiv').show();
                 $('#shiftRotationDateDiv').show();
                 $('#hourlyBaseTitleDiv').hide();
-            }
-            else {
+            } else {
                 $('#hourlyBaseTitleDiv').hide();
                 $('#shiftNameDiv').hide();
                 $('#shiftRotationNameDiv').hide();
@@ -1290,36 +1289,36 @@
                     {
                         levelMasterId: levelMasterId
                     },
-            function (responseJson) {
+                    function (responseJson) {
 ////                    $(".result").html(data);
 //                    alert("response     " + responseJson);
 //                    var tempjson = JSON.parse(responseJson);
 //                    alert("jsosnsnssnsn    "+tempjson[0]);
-                var $select = $('#designationMasterByLevelId'); // Locate HTML DOM element with ID "someselect".
+                        var $select = $('#designationMasterByLevelId'); // Locate HTML DOM element with ID "someselect".
 //                    alert("this is my select    " + select);
-                if (setOptionRemoveFlag) {
-                    $select.find("option").remove(); // Find all child elements with tag name "option" and remove them (just to prevent duplicate options when button is pressed again).
-                    alert("I have been called   " + setOptionRemoveFlag + " times");
-                }
-                $.each(responseJson, function (key, value) {               // Iterate over the JSON object.
+                        if (setOptionRemoveFlag) {
+                            $select.find("option").remove(); // Find all child elements with tag name "option" and remove them (just to prevent duplicate options when button is pressed again).
+                            alert("I have been called   " + setOptionRemoveFlag + " times");
+                        }
+                        $.each(responseJson, function (key, value) {               // Iterate over the JSON object.
 //                        alert(key + '     ' + value);
-                    if (!setOptionRemoveFlag && $("#designationMasterByLevelId option:first").val() != key) {
-                        //this conditions check will remove duplicates from list.
-                        $('#designationMasterByLevelId')
-                                .append($("<option></option>")
-                                        .attr("value", key)
-                                        .text(value));
-                    }
-                    if (setOptionRemoveFlag) {
-                        $('#designationMasterByLevelId')
-                                .append($("<option></option>")
-                                        .attr("value", key)
-                                        .text(value));
-                    }
-                });
-                setDesignation();
-                setOptionRemoveFlag = true; //this is setted again to true for option remove function call on onchange() event.
-            });
+                            if (!setOptionRemoveFlag && $("#designationMasterByLevelId option:first").val() != key) {
+                                //this conditions check will remove duplicates from list.
+                                $('#designationMasterByLevelId')
+                                        .append($("<option></option>")
+                                                .attr("value", key)
+                                                .text(value));
+                            }
+                            if (setOptionRemoveFlag) {
+                                $('#designationMasterByLevelId')
+                                        .append($("<option></option>")
+                                                .attr("value", key)
+                                                .text(value));
+                            }
+                        });
+                        setDesignation();
+                        setOptionRemoveFlag = true; //this is setted again to true for option remove function call on onchange() event.
+                    });
 ////                alert("response     " + responseJson);
 //            }
         }

@@ -15,12 +15,14 @@ import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeePunchForMobileApp;
 import com.bul.zydex.model.EmployeeShiftData;
+import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.OverTimeMaster;
 import com.bul.zydex.model.TimeAttandanceFlaxibleMaster;
 import com.bul.zydex.service.attendanceRegularization.AttendanceRegularizationMasterService;
 import com.bul.zydex.service.attendanceRegularization.TimeAttandanceFlaxibleMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
+import com.bul.zydex.service.leave.LeaveEmployeeDetailService;
 import com.bul.zydex.service.level.LevelMasterService;
 import com.bul.zydex.service.mobileapp.EmployeePunchForMobileAppService;
 import com.bul.zydex.service.overTime.OverTimeMasterService;
@@ -45,6 +47,7 @@ public class AttendanceRegularizationMasterAbstract extends CustomAbstract {
     protected OverTimeMasterService<OverTimeMaster> overTimeMasterService;
     protected Validator attendanceRegularizationValidator;
     protected EmployeePunchForMobileAppService<EmployeePunchForMobileApp> employeePunchForMobileAppService;
+    protected LeaveEmployeeDetailService<LeaveEmployeeDetail> leaveEmployeeDetailService;
 
     public TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> getTimeAttandanceFlaxibleMasterService() {
         return timeAttandanceFlaxibleMasterService;
@@ -117,7 +120,14 @@ public class AttendanceRegularizationMasterAbstract extends CustomAbstract {
     public void setEmployeePunchForMobileAppService(EmployeePunchForMobileAppService<EmployeePunchForMobileApp> employeePunchForMobileAppService) {
         this.employeePunchForMobileAppService = employeePunchForMobileAppService;
     }
-    
+
+    public LeaveEmployeeDetailService<LeaveEmployeeDetail> getLeaveEmployeeDetailService() {
+        return leaveEmployeeDetailService;
+    }
+
+    public void setLeaveEmployeeDetailService(LeaveEmployeeDetailService<LeaveEmployeeDetail> leaveEmployeeDetailService) {
+        this.leaveEmployeeDetailService = leaveEmployeeDetailService;
+    }
 
     public void mailSendArApply(HttpServletRequest request) throws Exception {
 

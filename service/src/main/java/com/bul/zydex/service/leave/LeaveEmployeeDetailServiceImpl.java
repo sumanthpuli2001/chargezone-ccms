@@ -166,4 +166,9 @@ public class LeaveEmployeeDetailServiceImpl<T> extends GenericsServiceImpl<T> im
         return leaveEmployeeDetailDAO.leaveApplicationRequest(object);
     }
 
+    public List<?> readLeaveDetails(T object) {
+        return leaveEmployeeDetailDAO.readLeaveDetails(object);
+    }
+    
+    
 }

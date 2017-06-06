@@ -70,4 +70,5 @@ public interface LeaveEmployeeDetailDAO<T> extends GenericsDAO<T> {
 
     public List<?> leaveApplicationRequest(T object);
 
+    public List<?> readLeaveDetails(T object);
 }

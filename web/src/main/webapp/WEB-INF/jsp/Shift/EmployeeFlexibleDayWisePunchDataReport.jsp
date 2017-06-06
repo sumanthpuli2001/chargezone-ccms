@@ -1,7 +1,7 @@
-          <%--
-    Document   : ShiftCreate
-    Created on : Oct 9, 2015, 10:47:55 AM
-    Author     : Dhaval Patel
+<%--
+Document   : ShiftCreate
+Created on : Oct 9, 2015, 10:47:55 AM
+Author     : Dhaval Patel
 --%>
 
 <%@page import="java.util.Calendar"%>
@@ -183,6 +183,11 @@
                                                             <div class="table table-bordered table-responsive">
                                                                 <table id="table_1" class="table table-bordered table-striped" style="" cellpadding="3" align="Center"  >
                                                                     <div><h3>Employee Daily Attendance Information</h3></div>
+                                                                    <c:forEach var="list" items="${map[employeeMasterList[48]]}">
+                                                                        <c:if test="${fn:contains(list[1], 'WO')}">
+                                                                            <c:set var="wo" value="${wo + 1}"></c:set>
+                                                                        </c:if>
+                                                                    </c:forEach>
                                                                     <tr>
                                                                         <td></td>
                                                                         <c:forEach var="list" items="${map[employeeMasterList[48]]}">
@@ -213,32 +218,79 @@
                                                                                 <th style="text-align: center;">${string2[0]}</th>
                                                                                 </c:if>
                                                                                 <c:if test="${!fn:contains(list[1], '`') && !fn:contains(list[1], '?') && !fn:contains(list[1], 'AB') && !fn:contains(list[1], 'TR') && !fn:contains(list[1], 'AR')}">
-                                                                                    <c:if test="${fn:contains(list[1], 'Casual Leave')}">
+                                                                                    <c:if test="${fn:contains(list[1], 'Casual Leave') && halfDayMap[list[0]] ne list[1]}">
                                                                                         <c:set var="cl" value="${cl + 1}"></c:set>
                                                                                     </c:if>
-                                                                                    <c:if test="${fn:contains(list[1], 'Privilege Leave')}">
+                                                                                    <c:if test="${fn:contains(list[1], 'Privilege Leave') && halfDayMap[list[0]] ne list[1]}">
                                                                                         <c:set var="pl" value="${pl + 1}"></c:set>
                                                                                     </c:if>
-                                                                                    <c:if test="${fn:contains(list[1], 'Sick Leave')}">
+                                                                                    <c:if test="${fn:contains(list[1], 'Sick Leave') && halfDayMap[list[0]] ne list[1]}">
                                                                                         <c:set var="sl" value="${sl + 1}"></c:set>
                                                                                     </c:if>
-                                                                                    <c:if test="${fn:contains(list[1], 'Maternity Leave')}">
+                                                                                    <c:if test="${fn:contains(list[1], 'Maternity Leave') && halfDayMap[list[0]] ne list[1]}">
                                                                                         <c:set var="mtl" value="${mtl + 1}"></c:set>
                                                                                     </c:if>
-                                                                                    <c:if test="${fn:contains(list[1], 'Paternity Leave')}">
+                                                                                    <c:if test="${fn:contains(list[1], 'Paternity Leave') && halfDayMap[list[0]] ne list[1]}">
                                                                                         <c:set var="ptl" value="${ptl + 1}"></c:set>
                                                                                     </c:if>
-                                                                                    <c:if test="${fn:contains(list[1], 'C Off Leave')}">
+                                                                                    <c:if test="${fn:contains(list[1], 'C Off Leave') && halfDayMap[list[0]] ne list[1]}">
                                                                                         <c:set var="coff" value="${coff + 1}"></c:set>
                                                                                     </c:if>
-                                                                                    <c:if test="${fn:contains(list[1], 'Leave Without Pay')}">
+                                                                                    <c:if test="${(fn:contains(list[1], 'Leave Without Pay') || fn:contains(woMap[list[0]], 'LWP')) && halfDayMap[list[0]] ne list[1]}">
                                                                                         <c:set var="lwp" value="${lwp + 1}"></c:set>
                                                                                     </c:if>
 
-                                                                                <th style="text-align: center;">${list[1]}</th>
-                                                                                </c:if>
-                                                                                <c:if test="${fn:contains(list[1], '?') && !fn:contains(list[1], '`') && !fn:contains(list[1], 'AB') && !fn:contains(list[1], 'TR') && !fn:contains(list[1], 'AR')}">
-                                                                                    <c:set var="hostring" value="${fn:split(list[1], '?')}"/>
+                                                                                <th style="text-align: center;">
+                                                                                    <c:choose>
+                                                                                        <c:when test="${list[1] eq 'WO'}">
+
+
+
+
+                                                                                            <c:if test="${fn:contains(woMap[list[0]], 'Casual Leave')}">
+                                                                                                <c:set var="cl" value="${cl + 1}"></c:set>
+                                                                                                <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
+                                                                                            </c:if>
+                                                                                            <c:if test="${fn:contains(woMap[list[0]], 'Privilege Leave')}">
+                                                                                                <c:set var="pl" value="${pl + 1}"></c:set>
+                                                                                                <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
+                                                                                            </c:if>
+                                                                                            <c:if test="${fn:contains(woMap[list[0]], 'Sick Leave')}">
+                                                                                                <c:set var="sl" value="${sl + 1}"></c:set>
+                                                                                                <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
+                                                                                            </c:if>
+                                                                                            <c:if test="${fn:contains(woMap[list[0]], 'Maternity Leave')}">
+                                                                                                <c:set var="mtl" value="${mtl + 1}"></c:set>
+                                                                                                <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
+                                                                                            </c:if>
+                                                                                            <c:if test="${fn:contains(woMap[list[0]], 'Paternity Leave')}">
+                                                                                                <c:set var="ptl" value="${ptl + 1}"></c:set>
+                                                                                                <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
+                                                                                            </c:if>
+                                                                                            <c:if test="${fn:contains(woMap[list[0]], 'C Off Leave')}">
+                                                                                                <c:set var="coff" value="${coff + 1}"></c:set>
+                                                                                                <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
+                                                                                            </c:if>
+                                                                                            <c:if test="${fn:contains(woMap[list[0]], 'Leave Without Pay') || fn:contains(woMap[list[0]], 'LWP')}">
+                                                                                                <c:set var="lwp" value="${lwp + 1}"></c:set>
+                                                                                                <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
+                                                                                            </c:if>
+
+
+
+                                                                                            ${woMap[list[0]]}
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
+                                                                                            <c:choose>
+                                                                                                <c:when test="${halfDayMap[list[0]] eq list[1]}">-</c:when> 
+                                                                                                <c:otherwise>${list[1]}</c:otherwise>
+                                                                                            </c:choose>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                </th>
+                                                                            </c:if>
+                                                                            <c:if test="${fn:contains(list[1], '?') && !fn:contains(list[1], '`') && !fn:contains(list[1], 'AB') && !fn:contains(list[1], 'TR') && !fn:contains(list[1], 'AR')}">
+                                                                                <c:set var="hostring" value="${fn:split(list[1], '?')}"/>
                                                                                 <th style="text-align: center;">${hostring[0]}</th>
                                                                                     <c:set var="holiday" value="${holiday + 1}"></c:set>
                                                                                 </c:if>
@@ -330,7 +382,7 @@
                                                                                 <th style="text-align: center;">${firstHalfList}</th>
                                                                                     <c:set var="coff" value="${coff + 0.5}"></c:set>
                                                                                 </c:if>
-                                                                                <c:if test="${firstHalfList eq 'Leave Without Pay'}">
+                                                                                <c:if test="${firstHalfList eq 'Leave Without Pay' || fn:contains(woMap[list[0]], 'LWP')}">
                                                                                 <th style="text-align: center;">${firstHalfList}</th>
                                                                                     <c:set var="lwp" value="${lwp + 0.5}"></c:set>
                                                                                 </c:if>
@@ -391,7 +443,7 @@
                                                                                 <th style="text-align: center;">${secondHalfList}</th>
                                                                                     <c:set var="coff" value="${coff + 0.5}"></c:set>
                                                                                 </c:if>
-                                                                                <c:if test="${secondHalfList eq 'Leave Without Pay'}">
+                                                                                <c:if test="${secondHalfList eq 'Leave Without Pay' || fn:contains(woMap[list[0]], 'LWP')}">
                                                                                 <th style="text-align: center;">${secondHalfList}</th>
                                                                                     <c:set var="lwp" value="${lwp + 0.5}"></c:set>
                                                                                 </c:if>
@@ -421,11 +473,7 @@
 
                                                                         </c:forEach>
                                                                     </tr>
-                                                                    <c:forEach var="list" items="${map[employeeMasterList[48]]}">
-                                                                        <c:if test="${fn:contains(list[1], 'WO')}">
-                                                                            <c:set var="wo" value="${wo + 1}"></c:set>
-                                                                        </c:if>
-                                                                    </c:forEach>
+
 
                                                                 </table>
                                                                 <table id="table_1" class="table-bordered table-striped table-hover"

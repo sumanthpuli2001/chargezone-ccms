@@ -688,6 +688,37 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
     }
 
     @Override
+    public List<?> readLeaveDetails(T object) {
+        LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
+        String query = "";
+        String condition = "";
+
+        if (null != leaveEmployeeDetail.getStartDate() && !"".equals(leaveEmployeeDetail.getStartDate())) {
+//            condition += " AND STR_TO_DATE(a.startDate,'%d/%m/%Y') >= STR_TO_DATE('" + leaveEmployeeDetail.getStartDate() + "','%d/%m/%Y')";
+            condition += " and STR_TO_DATE('" + leaveEmployeeDetail.getStartDate() + "','%d/%m/%Y') "
+                    + "  between STR_TO_DATE(a.startDate, '%d/%m/%Y') "
+                    + "  and STR_TO_DATE(a.endDate, '%d/%m/%Y') ";
+        }
+//        if (null != leaveEmployeeDetail.getEndDate() && !"".equals(leaveEmployeeDetail.getEndDate())) {
+//            condition += " AND STR_TO_DATE(a.endDate,'%d/%m/%Y') <= STR_TO_DATE('" + leaveEmployeeDetail.getEndDate() + "','%d/%m/%Y')";
+//        }
+        if (null != leaveEmployeeDetail.getLeaveTypeMaster() && !"".equals(leaveEmployeeDetail.getLeaveTypeMaster())) {
+            condition += " AND b.id = '" + leaveEmployeeDetail.getLeaveTypeMaster().getId() + "'";
+        }
+        if (!"".equals(leaveEmployeeDetail.getStatus())) {
+            condition += " AND a.status = " + leaveEmployeeDetail.getStatus();
+        }
+
+        query += " Select b.leaveType, a.startDate, a.endDate, a.noOfDays, a.id, a.status,a.startDateStatus, a.endDateStatus"
+                + " FROM LeaveEmployeeDetail a"
+                + " LEFT JOIN a.leaveTypeMaster b"
+                + " WHERE a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
+                + condition;
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
     public List<?> leaveApplicationRequest(T object) {
         LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
         String query = "";

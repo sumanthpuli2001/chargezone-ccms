@@ -10,6 +10,7 @@ import com.bul.zydex.model.EmployeeDatetimeData;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeShiftData;
+import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.OverTimeMaster;
@@ -27,8 +28,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -44,7 +47,7 @@ import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 
 public class AttendanceRegularizationMasterController extends AttendanceRegularizationMasterAbstract {
-    
+
     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -63,7 +66,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             if (!reportmanager.equals("")) {
                 reportingId = Integer.parseInt(reportmanager);
             }
-            
+
             employeeMaster1.setId(reportingId);
         }
         List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
@@ -71,12 +74,12 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
             request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
         }
-        
+
         mv.getModelMap().put("attendanceRegularization", attendanceRegularization);
         mv.setViewName("AttendanceRegularization/attendanceRegularizationFormForEmployee");
         return mv;
     }
-    
+
     public ModelAndView createSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -101,7 +104,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 if (!reportmanager.equals("")) {
                     reportingId = Integer.parseInt(reportmanager);
                 }
-                
+
                 employeeMaster1.setId(reportingId);
             }
             List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
@@ -111,17 +114,17 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             }
             request.setAttribute("employeeMaster", empDetailList.get(0));
             request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
-            
+
             mv.getModelMap().put("attendanceRegularization", attendanceRegularization);
             mv.setViewName("AttendanceRegularization/attendanceRegularizationFormForEmployee");
         } else {
             attendanceRegularization.setUserMasterId(userMasterId);
             attendanceRegularization.setStatus(0);
             attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
-            
+
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
-            
+
             mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=searchSubmit");
             try {
                 mailSendArApply(request);
@@ -147,7 +150,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         }
         return mv;
     }
-    
+
     public ModelAndView searchSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -174,7 +177,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("AttendanceRegularization/attendanceRegularizationResult");
         return mv;
     }
-    
+
     public ModelAndView editClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -194,7 +197,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             if (!reportmanager.equals("")) {
                 reportingId = Integer.parseInt(reportmanager);
             }
-            
+
             employeeMaster1.setId(reportingId);
         }
         List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
@@ -202,7 +205,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
             request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
         }
-        
+
         attendanceRegularization = attendanceRegularizationMasterService.readById(Integer.parseInt(id));
         int status1 = attendanceRegularization.getStatus();
         String status = Integer.toString(status1);
@@ -213,7 +216,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("AttendanceRegularization/attendanceRegularizationFormForEmployeeEdit");
         return mv;
     }
-    
+
     public ModelAndView editSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -224,7 +227,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         String btnSubmit = request.getParameter("btnSubmit");
         attendanceRegularization1 = attendanceRegularizationMasterService.readById(Integer.parseInt(id));
         if (btnSubmit.equals("Submit")) {
-            
+
             if (attendanceRegularization1.getStatus() == 7) {
                 attendanceRegularization.setStatus(0);
                 attendanceRegularization.setManagerRemark(attendanceRegularization1.getManagerRemark());
@@ -238,7 +241,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
             try {
-                
+
                 EmailTemplate emailTemplate = new EmailTemplate();
                 EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                 DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
@@ -262,7 +265,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                         msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                         sendMail.sendMail(from, To, Subject, msg);
-                        
+
                         String name = "Attendance";
                         EmailAddMaster emailAddMaster = new EmailAddMaster();
                         emailAddMaster.setModuleName(name);
@@ -282,9 +285,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                     msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                     sendMail.sendMail(from1, To1, subject1, msg1);
-                                    
+
                                 }
-                                
+
                             }
                         }
                         List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
@@ -305,18 +308,18 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 }
                             }
                         }
-                        
+
                     }
-                    
+
                 }
-                
+
             } catch (Exception e) {
             }
-            
+
         } else if (btnSubmit.equals("Withdraw")) {
             attendanceRegularization.setStatus(2);
             try {
-                
+
                 EmailTemplate emailTemplate = new EmailTemplate();
                 EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                 DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
@@ -340,21 +343,21 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                         msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                         sendMail.sendMail(from, To, Subject, msg);
-                        
+
                     }
-                    
+
                 }
-                
+
             } catch (Exception e) {
             }
-            
+
         }
         attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
 //        mv = searchSubmit(request, response);
         mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=searchSubmit");
         return mv;
     }
-    
+
     public ModelAndView approvalSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -379,7 +382,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("AttendanceRegularization/attendanceRegularizationApprovalResult");
         return mv;
     }
-    
+
     public ModelAndView approvalEditClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -402,12 +405,12 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             Object[] arrayOfObject = (Object[]) empDetailList.get(0);
             String reportmanager = (String) arrayOfObject[6];
         }
-        
+
         mv.getModelMap().put("attendanceRegularization", attendanceRegularization);
         mv.setViewName("AttendanceRegularization/attendanceRegularizationApproval");
         return mv;
     }
-    
+
     public ModelAndView approvalEditSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -423,7 +426,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         String requestdate = sdf.format(new Date());
         attendanceRegularization.setApprovedDate(requestdate);
         attendanceRegularization.setEmployeeMaster(approverName);
-        
+
         attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
 //        Employee Date Time Data
         if (attendanceRegularization.getStatus() == 1) {
@@ -510,21 +513,21 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                         msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                         sendMail.sendMail(from, To, Subject, msg);
-                        
+
                     }
-                    
+
                 }
-                
+
             } catch (Exception e) {
             }
-            
+
         }
 //        Employee Date Time Data
 
         mv = approvalSubmit(request, response);
         return mv;
     }
-    
+
     public ModelAndView rejectSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -539,9 +542,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         attendanceRegularization.setApprovedDate(requestdate);
         attendanceRegularization.setEmployeeMaster(approverName);
         attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
-        
+
         try {
-            
+
             EmailTemplate emailTemplate = new EmailTemplate();
             EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
             DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
@@ -570,14 +573,14 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
 //                }
             }
-            
+
         } catch (Exception e) {
         }
-        
+
         mv = approvalSubmit(request, response);
         return mv;
     }
-    
+
     public ModelAndView reworkSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -593,7 +596,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         attendanceRegularization.setEmployeeMaster(approverName);
         attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
         try {
-            
+
             EmailTemplate emailTemplate = new EmailTemplate();
             EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
             DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
@@ -619,16 +622,16 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
-                
+
             }
-            
+
         } catch (Exception e) {
         }
-        
+
         mv = approvalSubmit(request, response);
         return mv;
     }
-    
+
     public ModelAndView approvedList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -640,7 +643,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("AttendanceRegularization/attendanceRegularizationApproedList");
         return mv;
     }
-    
+
     public ModelAndView employyeAttendanceApproeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -652,7 +655,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("AttendanceRegularization/attendanceRegularizationResult");
         return mv;
     }
-    
+
     public ModelAndView userDashboardAttendanceRegularizationPendingRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -687,7 +690,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("forward:visitorManagement.htm?act=userDashboardVisitorManagementPendingRequest");
         return mv;
     }
-    
+
     public ModelAndView searchAttendanceRegularizationPendingSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -699,7 +702,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("AttendanceRegularization/attendanceRegularizationResult");
         return mv;
     }
-    
+
     public ModelAndView showOwnAttandance(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
@@ -716,6 +719,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setDepartmentId(null);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        Map<String, String> woMap = new HashMap<String, String>();
+        Map<String, String> halfDayMap = new HashMap<String, String>();
         if (null != employeeMaster.getId() && !employeeMaster.getId().equals("")) {
             employeeShiftData.setId(employeeMaster.getId());
         }
@@ -766,13 +771,13 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setDateOfBirthOfEmpChilld1(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfBirthOfEmpChild2(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfTransferOfEntity(Boolean.FALSE);
-        
+
         if ((!"".equals(startDate) && null != startDate) && (!"".equals(endDate) && null != endDate)) {
             if (!"".equals(startDate) && null != startDate) {
                 Date sDate = sdf.parse(startDate);
 //            "2012-01-01"
                 employeeShiftData.setInDateTime(new SimpleDateFormat("yyyy-MM-dd").format(sDate));
-                
+
             }
             if (!"".equals(endDate) && null != endDate) {
                 Date eDate = sdf.parse(endDate);
@@ -783,7 +788,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             int year = c.get(Calendar.YEAR);
             int day = c.get(Calendar.DAY_OF_MONTH);
             int month = c.get(Calendar.MONTH) + 1;
-            
+
             startDate = year + "-" + (month < 10 ? ("0" + month) : (month)) + "-01";
             Date sDate = sdf1.parse(startDate);
             endDate = year + "-" + (month < 10 ? ("0" + month) : (month)) + "-" + day;
@@ -791,18 +796,46 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             employeeShiftData.setInDateTime(sdf1.format(sDate));
             employeeShiftData.setOutDateTime(sdf1.format(eDate));
         }
-        
+
         List<?> empDetail = employeeMasterService.empOrDateWiseSearch(employeeAdvanceSearch);
         Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
         for (Object o1 : empDetail) {
             Object[] o = (Object[]) o1;
             int id1 = (Integer) o[48];
             employeeShiftData.setId(id1);
-            List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
+            List list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
+            int i = 0;
+            for (Iterator<? extends Object> iterator = list.iterator(); iterator.hasNext();) {
+                Object[] next = (Object[]) iterator.next();
+
+                String firstHalf = "" + next[1];
+                if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
+                        && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                        && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                    Date date1 = sdf.parse("" + next[0]);
+                    Calendar c2 = Calendar.getInstance();
+                    c2.setTime(date1);
+                    SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
+                    String[] userTimeInStr = firstHalf.split("`");
+                    String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                    String[] userTimeOutStr = firstHalf.split("!");
+                    String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                    Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                    Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                    if (userTimeOut.before(userTimeIn)) {
+                        next[1] = ("" + next[1]).replace("AB", "fullday");
+//                        tempList.add(""+next[0]);
+//                        tempList.add(("" + next[1]).replace("AB", "PR"));
+                        list.set(i, next);
+                    }
+                }
+                i++;
+            }
+
             map.put(id, list);
             request.setAttribute("attendanceDateList", list);
         }
-        
+
         boolean flexible = false;
         int earlyMinute = 0;
         int lateMinute = 0;
@@ -827,21 +860,140 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         List workingHour = new ArrayList();
         for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
             Iterator itr5 = entry.getValue().iterator();
-            int firstCounter = 0;
             while (itr5.hasNext()) {
                 try {
                     Object[] next = (Object[]) itr5.next();
                     String firstHalf = "" + next[1];
-                    int firstHalfVal = 0;
-                    int counter = 0;
-                    
+
                     Date date = sdf.parse("" + next[0]);
                     Calendar c = Calendar.getInstance();
-                    c.setTime(date);
+//                    c.setTime(date);
+                    // week off code start
+                    Calendar c1 = Calendar.getInstance();
+                    c1.setTime(date);
+                    if (firstHalf.contains("WO")) {
+                        LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+                        c1.add(Calendar.DATE, -1);
+                        SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy");
+                        leaveEmployeeDetail.setStartDate("" + sdf3.format(c1.getTime()));
+                        leaveEmployeeDetail.setEndDate("" + sdf3.format(c1.getTime()));
+                        leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
+                        leaveEmployeeDetail.setStatus(3);
+                        List firstLeaveEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
+                        if (!firstLeaveEmployeeDetail.isEmpty()) {
+                            c1.add(Calendar.DATE, 2);
+                            leaveEmployeeDetail.setStartDate("" + sdf3.format(c1.getTime()));
+                            leaveEmployeeDetail.setEndDate("" + sdf3.format(c1.getTime()));
+                            leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
+                            leaveEmployeeDetail.setStatus(3);
+                            List secondLeaveEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
+
+                            // saturday sandwich Leave code start
+                            Object[] oSatArray = (Object[]) firstLeaveEmployeeDetail.get(0);
+                            String woSatType = "" + oSatArray[0];
+                            Date sSatDate = sdf.parse("" + oSatArray[1]);
+                            Date eSatDate = sdf.parse("" + oSatArray[2]);
+                            String sSatDateStr = "" + oSatArray[6];
+                            String eSatDateStr = "" + oSatArray[7];
+                            float noOfSatDays = (float) oSatArray[3];
+                            float diffInSatDays = 0;
+                            if ((sSatDateStr.equals("Fullday") && eSatDateStr.equals("Fullday"))
+                                    || (sSatDateStr.equals("Fullday") && sSatDate.equals(eSatDate))) {
+                                diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
+                                        / (1000 * 60 * 60 * 24)) + 1;
+                            } else if ((sSatDateStr.equals("SecondHalf") && eSatDateStr.equals("Fullday"))
+                                    || (sSatDateStr.equals("Fullday") && eSatDateStr.equals("FirstHalf"))) {
+                                diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
+                                        / (1000 * 60 * 60 * 24)) + 1;
+                                diffInSatDays = diffInSatDays - (float) 0.5;
+                            } else if (sSatDateStr.equals("SecondHalf") && eSatDateStr.equals("FirstHalf")) {
+                                diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
+                                        / (1000 * 60 * 60 * 24)) + 1;
+                                diffInSatDays = diffInSatDays - 1;
+                            }
+                            // saturday sandwich Leave code End
+
+                            // Monday sandwich Leave code start
+                            float noOfMonDays = 0;
+                            float diffInMonDays = -1;
+                            String woMonType = "";
+                            if (!secondLeaveEmployeeDetail.isEmpty()) {
+                                Object[] oMonArray = (Object[]) secondLeaveEmployeeDetail.get(0);
+                                woMonType = "" + oMonArray[0];
+                                Date sMonDate = sdf.parse("" + oMonArray[1]);
+                                Date eMonDate = sdf.parse("" + oMonArray[2]);
+                                String sMonDateStr = "" + oMonArray[6];
+                                String eMonDateStr = "" + oMonArray[7];
+                                noOfMonDays = (float) oMonArray[3];
+                                if ((sMonDateStr.equals("Fullday") && eMonDateStr.equals("Fullday"))
+                                        || (sMonDateStr.equals("Fullday") && sMonDate.equals(eMonDate))) {
+                                    diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
+                                            / (1000 * 60 * 60 * 24)) + 1;
+                                } else if ((sMonDateStr.equals("SecondHalf") && eMonDateStr.equals("Fullday"))
+                                        || (sMonDateStr.equals("Fullday") && eMonDateStr.equals("FirstHalf"))) {
+                                    diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
+                                            / (1000 * 60 * 60 * 24)) + 1;
+                                    diffInMonDays = diffInMonDays - (float) 0.5;
+                                } else if (sMonDateStr.equals("SecondHalf") && eMonDateStr.equals("FirstHalf")) {
+                                    diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
+                                            / (1000 * 60 * 60 * 24)) + 1;
+                                    diffInMonDays = diffInMonDays - 1;
+                                }
+                            }
+                            // Monday sandwich Leave code end
+
+//                            if (diffInSatDays != noOfSatDays || (!date.equals(sSatDate) && !date.equals(eSatDate))) {
+                            if (diffInSatDays != noOfSatDays || (date.before(eSatDate)
+                                    && date.after(sSatDate) && diffInSatDays == noOfSatDays)) {
+                                woMap.put("" + next[0], woSatType);
+                            } else if (diffInMonDays != -1 && diffInMonDays != noOfMonDays) {
+                                woMap.put("" + next[0], woMonType);
+                            } else if ((diffInSatDays % 1 == 0 && diffInSatDays == noOfSatDays) && diffInMonDays == noOfMonDays) {
+                                woMap.put("" + next[0], "LWP");
+                            } else {
+                                woMap.put("" + next[0], "WO");
+                            }
+                        } else {
+                            woMap.put("" + next[0], "WO");
+                        }
+                    }
+                    // week off code End
+
+//         1st Half:             Half day absent Code when start date is full and end date is first half start Code
+                    Date date1 = sdf.parse("" + next[0]);
+                    Calendar c2 = Calendar.getInstance();
+                    c2.setTime(date1);
+                    LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+                    SimpleDateFormat sdfAb = new SimpleDateFormat("dd/MM/yyyy");
+                    leaveEmployeeDetail.setStartDate("" + sdfAb.format(c2.getTime()));
+                    leaveEmployeeDetail.setEndDate("" + sdfAb.format(c2.getTime()));
+                    leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
+                    leaveEmployeeDetail.setStatus(3);
+                    List absentEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
+                    float diffInDays = 0;
+                    String woType = "";
+                    if (!absentEmployeeDetail.isEmpty()) {
+                        Object[] oSatArray = (Object[]) absentEmployeeDetail.get(0);
+                        woType = "" + oSatArray[0];
+                        Date sDate = sdf.parse("" + oSatArray[1]);
+                        Date eDate = sdf.parse("" + oSatArray[2]);
+                        String sDateStr = "" + oSatArray[6];
+                        String eDateStr = "" + oSatArray[7];
+                        float noOfDays = (float) oSatArray[3];
+                        if ((sDateStr.equals("Fullday") && eDateStr.equals("FirstHalf"))) {
+                            diffInDays = (float) ((eDate.getTime() - sDate.getTime())
+                                    / (1000 * 60 * 60 * 24)) + 1;
+                            if (date1.equals(eDate)) {
+                                diffInDays = diffInDays - (float) 0.5;
+                            }
+                        }
+                    }
+//        1st Half:              Half day absent Code when start date is full and end date is first half  End code
+
                     int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
                     SimpleDateFormat format = new SimpleDateFormat("EEEE");
                     String dayName = format.format(date);
-                    
+
                     if (firstHalf.contains("fullday")) {
                         newList.add("PR");
                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
@@ -921,7 +1073,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                         newList.add("Leave Without Pay");
                                     }
                                 }
-                                
+
                             } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
                                 if (firstHalf.contains("*")) {
                                     String[] shortArray = firstHalf.split("\\*");
@@ -966,49 +1118,88 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 if (leave1[0].contains("Leave Without Pay")) {
                                     newList.add("Leave Without Pay");
                                 }
-                                
+
                             } else if (leave1[0].contains("AB")) {
                                 newList.add("-");
-                                
+
                             } else {
                                 newList.add("AB");
                             }
-                            
+
                         } else if (userTimeIn != null && !firstHalf.contains("WO") && !firstHalf.contains("?")) {
                             newList.add("AB");
                         } else if (firstHalf.contains("WO") || firstHalf.contains("?")) {
                             newList.add("-");
                         }
-                        
+
                     } else if (firstHalf.equals("WO")) {
                         newList.add("-");
                     } else if (firstHalf.contains("AR")) {
                         newList.add("AR/P");
                     } else if (firstHalf.equals("AB")) {
                         newList.add("AB");
-                    }else if (firstHalf.equals("TR")) {
+                    } else if (firstHalf.equals("TR")) {
                         newList.add("-");
-                    }else if (firstHalf.contains("?")) {
+                    } else if (firstHalf.contains("?")) {
                         newList.add("-");
                     } else if (firstHalf.equals("Casual Leave") || firstHalf.equals("Privilege Leave") || firstHalf.equals("Sick Leave")
                             || firstHalf.equals("Maternity Leave") || firstHalf.equals("Paternity Leave") || firstHalf.equals("C Off Leave")
                             || firstHalf.equals("Leave Without Pay")) {
-                        newList.add("-");
+//       1st Half:                 Half day absent Code  start date is full and end date is First Half start code
+                        if (diffInDays % 1 == 0) {
+                            newList.add("-");
+                        } else {
+                            newList.add(firstHalf);
+                            halfDayMap.put("" + next[0], woType);
+                        }
+//       1st Half:                 Half day absent Code  start date is full and end date is First Half End code
+//                            newList.add("-");
                     }
                 } catch (Exception e) {
-                    
+
                 }
             }
-            
+
             Iterator itr6 = entry.getValue().iterator();
             int weekNameCounter = 0;
             boolean satWeekOff = false;
             while (itr6.hasNext()) {
                 try {
                     Object[] next = (Object[]) itr6.next();
-                    
+
                     String secondHalf = "" + next[1];
                     int firstHalfVal = 0;
+
+//       2nd Half:              Half day absent Code when start date is full and end date is first half  start Code
+                    Date date1 = sdf.parse("" + next[0]);
+                    Calendar c1 = Calendar.getInstance();
+                    c1.setTime(date1);
+                    LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+                    SimpleDateFormat sdfAb = new SimpleDateFormat("dd/MM/yyyy");
+                    leaveEmployeeDetail.setStartDate("" + sdfAb.format(c1.getTime()));
+                    leaveEmployeeDetail.setEndDate("" + sdfAb.format(c1.getTime()));
+                    leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
+                    leaveEmployeeDetail.setStatus(3);
+                    List absentEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
+                    float diffInDays = 0;
+                    String woType = "";
+                    if (!absentEmployeeDetail.isEmpty()) {
+                        Object[] oSatArray = (Object[]) absentEmployeeDetail.get(0);
+                        woType = "" + oSatArray[0];
+                        Date sDate = sdf.parse("" + oSatArray[1]);
+                        Date eDate = sdf.parse("" + oSatArray[2]);
+                        String sDateStr = "" + oSatArray[6];
+                        String eDateStr = "" + oSatArray[7];
+                        float noOfDays = (float) oSatArray[3];
+                        if ((sDateStr.equals("Fullday") && eDateStr.equals("FirstHalf"))) {
+                            diffInDays = (float) ((eDate.getTime() - sDate.getTime())
+                                    / (1000 * 60 * 60 * 24)) + 1;
+                            if (date1.equals(eDate)) {
+                                diffInDays = diffInDays - (float) 0.5;
+                            }
+                        }
+                    }
+//       2nd Half:              Half day absent Code when start date is full and end date is first half  end Code
                     int counter = 0;
                     String shiftName = "";
 //                                    2nd Sat Week Off Codding
@@ -1020,14 +1211,14 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     int dayOfWeek = cal.get(Calendar.WEEK_OF_MONTH);
                     EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
                     ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
-                    
+
                     if (dayName.equals("Saturday")) {
                         if (dayOfWeek == 2) {
                             satWeekOff = true;
                         } else {
                             satWeekOff = false;
                         }
-                        
+
                     } else {
                         satWeekOff = false;
                     }
@@ -1048,20 +1239,74 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     int s = 2;
                     boolean checkLunchTime = false;
                     try {
-                        if (listPunch.size() > 2) {
-                            while (listPunch.size() > d && listPunch.size() > s) {
-                                Object[] startLunchTime = (Object[]) listPunch.get(d);
-                                Object[] endLunchTime = (Object[]) listPunch.get(s);
-                                startTime = (String) startLunchTime[0];
-                                endTime = (String) endLunchTime[0];
-                                Date launchStrTime = sdf3.parse(startTime);
-                                Date launchEndTime = sdf3.parse(endTime);
-                                long diff = launchEndTime.getTime() - launchStrTime.getTime();
-                                lunchTime = diff / (60 * 1000);
-                                outTime = outTime + lunchTime;
-                                d = d + 2;
-                                s = s + 2;
+                        if (zydexLocationMaster.getId().equals("1") || zydexLocationMaster.getId().equals("6")) {
+                            if (listPunch.size() > 2) {
+                                while (listPunch.size() > d && listPunch.size() > s) {
+                                    Object[] startLunchTime = (Object[]) listPunch.get(d);
+                                    Object[] endLunchTime = (Object[]) listPunch.get(s);
+                                    startTime = (String) startLunchTime[0];
+                                    endTime = (String) endLunchTime[0];
+                                    Date launchStrTime = sdf3.parse(startTime);
+                                    Date launchEndTime = sdf3.parse(endTime);
+                                    long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                                    lunchTime = diff / (60 * 1000);
+                                    outTime = outTime + lunchTime;
+                                    d = d + 2;
+                                    s = s + 2;
+                                }
+                                String[] userTimeInStr = secondHalf.split("`");
+                                String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                String[] userTimeOutStr = secondHalf.split("!");
+                                String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                                Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                                String[] startHoursStr = secondHalf.split("%");
+                                String[] firstStartHoursStr = startHoursStr[1].split("\\+");
+                                String[] endHoursStr = secondHalf.split("&");
+                                Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
+                                Calendar cal1 = Calendar.getInstance();
+                                cal1.setTime(firstStartHours);
+                                cal1.add(Calendar.MINUTE, -earlyMinute);
+
+                                String newTime1 = sdf2.format(cal1.getTime());
+                                Date flexibleInTime = sdf2.parse(newTime1);
+                                Date endHours = sdf2.parse(endHoursStr[1]);
+                                long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
+                                shiftdiffMinutes = shiftTotalTime / (60 * 1000);
+                                long diff1 = 0;
+                                long diff2 = 0;
+                                if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
+                                    diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+
+                                } else {
+                                    diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                                }
+                                totalDayTime = diff1 / (60 * 1000);
+
+                                diff2 = userTimeOut.getTime() - userTimeIn.getTime();
+                                totalDayTime1 = diff2 / (60 * 1000);
+
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                                long outTime1 = outTime;
+                                outTime = outTime - 30;
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+                                if (outTime1 == totalDayTime1) {
+                                    totalTime = totalDayTime;
+                                } else if (outTime > 0) {
+                                    totalTime = totalDayTime - outTime;
+                                    checkLunchTime = true;
+                                }
+
                             }
+                        } else {
+//                            if (listPunch.size() > 2) {
+//                                    Object[] startTimeO = (Object[]) listPunch.get(0);
+//                                    Object[] endTimeO = (Object[]) listPunch.get(listPunch.size()-1);
+//                                    startTime = (String) startTimeO[0];
+//                                    endTime = (String) endTimeO[0];
+
                             String[] userTimeInStr = secondHalf.split("`");
                             String[] userTimeInStr1 = userTimeInStr[1].split("!");
                             String[] userTimeOutStr = secondHalf.split("!");
@@ -1075,7 +1320,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             Calendar cal1 = Calendar.getInstance();
                             cal1.setTime(firstStartHours);
                             cal1.add(Calendar.MINUTE, -earlyMinute);
-                            
+
                             String newTime1 = sdf2.format(cal1.getTime());
                             Date flexibleInTime = sdf2.parse(newTime1);
                             Date endHours = sdf2.parse(endHoursStr[1]);
@@ -1085,31 +1330,21 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             long diff2 = 0;
                             if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
                                 diff1 = userTimeOut.getTime() - userTimeIn.getTime();
-                                
+
                             } else {
                                 diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                             }
                             totalDayTime = diff1 / (60 * 1000);
-                            
+
                             diff2 = userTimeOut.getTime() - userTimeIn.getTime();
                             totalDayTime1 = diff2 / (60 * 1000);
+                            totalTime = totalDayTime;
+//                            }
 
-//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                            long outTime1 = outTime;
-                            outTime = outTime - 30;
-//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                            if (outTime1 == totalDayTime1) {
-                                totalTime = totalDayTime;
-                            } else if (outTime > 0) {
-                                totalTime = totalDayTime - outTime;
-                                checkLunchTime = true;
-                            }
-                            
                         }
+
                     } catch (Exception e) {
-                        
+
                     }
 
 //                                    Lunch Breck Cut Off
@@ -1117,7 +1352,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         String[] string1 = secondHalf.split("#");
                         String[] string2 = string1[1].split("\\$");
                         shiftName = string2[0].trim();
-                        
+
                     }
                     if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
                         secondHalfList.add("WO");
@@ -1127,7 +1362,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         secondHalfList.add("AB");
                     } else if (secondHalf.contains("fullday")) {
                         secondHalfList.add("PR");;
-                        
+
                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
                             && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
                             && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
@@ -1142,7 +1377,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         String[] endHoursStr = secondHalf.split("&");
                         String[] startHoursStr = secondHalf.split("%");
                         String[] firstStartHoursStr = startHoursStr[1].split("\\+");
-                        
+
                         Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
                         Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
                         Date userTimeOut1 = sdf2.parse("23:59");
@@ -1156,7 +1391,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         String totalDuration2 = getOutHours[0];
                         Date endHours = sdf2.parse(endHoursStr[1]);
                         Date secondHalfTimeStr2 = sdf2.parse(secondHalfTimeStr1[0]);
-                        
+
                         Calendar cal1 = Calendar.getInstance();
                         Calendar cal2 = Calendar.getInstance();
                         cal1.setTime(firstStartHours);
@@ -1165,7 +1400,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         cal2.add(Calendar.MINUTE, lateMinute);
                         String newTime = sdf2.format(cal2.getTime());
                         Date flexibleEndTime = sdf2.parse(newTime);
-                        
+
                         String newTime1 = sdf2.format(cal1.getTime());
                         Date flexibleInTime = sdf2.parse(newTime1);
                         long diff = endHours.getTime() - firstStartHours.getTime();
@@ -1177,18 +1412,18 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             } else {
                                 diff1 = userTimeOut.getTime() - userTimeIn.getTime();
                             }
-                            
+
                         } else if (userTimeOut.before(userTimeIn)) {
                             diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
                         } else {
                             diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                         }
                         long diffMinutes1 = diff1 / (60 * 1000);
-                        
+
                         if (userTimeIn != null) {
                             if (leave1[0].contains("AR")) {
                                 secondHalfList.add("AR/P");
-                                
+
                             } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
                                 if (secondHalf.contains("*")) {
                                     String[] shortArray = secondHalf.split("\\*");
@@ -1249,37 +1484,44 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 if (leave1[0].contains("Leave Without Pay")) {
                                     secondHalfList.add("Leave Without Pay");
                                 }
-                                
+
                             } else if (leave1[0].contains("AB")) {
                                 secondHalfList.add("AB");
                             } else {
                                 secondHalfList.add("AB");
                             }
-                            
+
                         } else if (userTimeIn != null && !secondHalf.contains("WO") && !secondHalf.contains("?")) {
                             secondHalfList.add("AB");
                         } else if (secondHalf.contains("WO") || secondHalf.contains("?")) {
                             secondHalfList.add("-");
                         }
-                        
+
                     } else if (secondHalf.equals("WO")) {
                         secondHalfList.add("-");
                     } else if (secondHalf.equals("AB")) {
                         secondHalfList.add("AB");
-                    }else if (secondHalf.equals("TR")) {
+                    } else if (secondHalf.equals("TR")) {
                         secondHalfList.add("-");
-                    }else if (secondHalf.contains("?")) {
+                    } else if (secondHalf.contains("?")) {
                         secondHalfList.add("-");
-                    }else if (secondHalf.equals("Casual Leave") || secondHalf.equals("Privilege Leave") || secondHalf.equals("Sick Leave")
+                    } else if (secondHalf.equals("Casual Leave") || secondHalf.equals("Privilege Leave") || secondHalf.equals("Sick Leave")
                             || secondHalf.equals("Maternity Leave") || secondHalf.equals("Paternity Leave") || secondHalf.equals("C Off Leave")
                             || secondHalf.equals("Leave Without Pay")) {
-                        secondHalfList.add("-");
+//2nd Half:              Half day absent Code when start date is full and end date is first half  start Code
+                        if (diffInDays % 1 == 0) {
+                            secondHalfList.add("-");
+                        } else {
+                            secondHalfList.add("AB");
+                        }
+// 2nd Half:              Half day absent Code when start date is full and end date is first half  end Code
+//                            secondHalfList.add("-");
                     }
                 } catch (Exception e) {
-                    
+
                 }
             }
-            
+
             Iterator itr7 = entry.getValue().iterator();
             while (itr7.hasNext()) {
                 try {
@@ -1288,9 +1530,12 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     int firstHalfVal = 0;
                     int counter = 0;
                     String shiftName = "";
-                    
+                    if (("" + next[0]).contains("17/")) {
+                        System.out.println("hiii" + shiftName);
+                    }
                     List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
-                    List mobPunchlist = employeePunchForMobileAppService.readPuchDataDateWise("" + next[0], id);
+//                    List mobPunchlist = employeePunchForMobileAppService.readPuchDataDateWise("" + next[0], id);
+                    List mobPunchlist = null;
                     long lunchTime = 0;
                     long outTime = 0;
                     long totalDayTime = 0;
@@ -1304,30 +1549,35 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     String endTime = "";
                     SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     if (listPunch.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
-                        if (listPunch.size() > 2) {
-                            while (listPunch.size() > i && listPunch.size() > j) {
-                                
-                                Object[] startLunchTime = (Object[]) listPunch.get(i);
-                                Object[] endLunchTime = (Object[]) listPunch.get(j);
-                                startTime = (String) startLunchTime[0];
-                                endTime = (String) endLunchTime[0];
-                                Date launchStrTime = sdf3.parse(startTime);
-                                Date launchEndTime = sdf3.parse(endTime);
-                                long diff = launchEndTime.getTime() - launchStrTime.getTime();
-                                lunchTime = diff / (60 * 1000);
-                                outTime = outTime + lunchTime;
-                                i = i + 2;
-                                j = j + 2;
+                        EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
+                        ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
+                        if (zydexLocationMaster.getId().equals("1") || zydexLocationMaster.getId().equals("6")) {
+                            if (listPunch.size() > 2) {
+                                while (listPunch.size() > i && listPunch.size() > j) {
+
+                                    Object[] startLunchTime = (Object[]) listPunch.get(i);
+                                    Object[] endLunchTime = (Object[]) listPunch.get(j);
+                                    startTime = (String) startLunchTime[0];
+                                    endTime = (String) endLunchTime[0];
+                                    Date launchStrTime = sdf3.parse(startTime);
+                                    Date launchEndTime = sdf3.parse(endTime);
+                                    long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                                    lunchTime = diff / (60 * 1000);
+                                    outTime = outTime + lunchTime;
+                                    i = i + 2;
+                                    j = j + 2;
+                                }
                             }
                         }
-                        
+
                         String[] userTimeInStr = secondHalf.split("`");
                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
                         String[] userTimeOutStr = secondHalf.split("!");
                         String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
                         Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
                         Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
-                        Date userTimeOut1 = sdf2.parse("23:59");
+                        Date userTimeOut1 = sdf2.parse("24:00");
+                        Date userTimeon12 = sdf2.parse("00:00");
                         String[] startHoursStr = secondHalf.split("%");
                         String[] firstStartHoursStr = startHoursStr[1].split("\\+");
                         String[] endHoursStr = secondHalf.split("&");
@@ -1342,51 +1592,111 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         shiftdiffMinutes = shiftTotalTime / (60 * 1000);
                         long diff1 = 0;
                         long diff2 = 0;
-                        if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
-                            if (userTimeOut.before(userTimeIn)) {
-                                diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
-                            } else {
-                                diff1 = userTimeOut.getTime() - userTimeIn.getTime();
-                            }
-                            
-                        } else if (userTimeOut.before(userTimeIn)) {
-                            diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
-                        } else {
-                            diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
-                        }
-                        
-                        totalDayTime = diff1 / (60 * 1000);
-                        
-                        if (userTimeOut.before(userTimeIn)) {
-                            diff2 = userTimeOut1.getTime() - userTimeIn.getTime();
-                        } else {
-                            diff2 = userTimeOut.getTime() - userTimeIn.getTime();
-                        }
-                        
-                        totalDayTime1 = diff2 / (60 * 1000);
 
-//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                        long outTime1 = outTime;
-                        outTime = outTime - 30;
-//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                        if (outTime > 0 && outTime1 != totalDayTime1) {
-                            totalTime = totalDayTime - outTime;
-                            double empHour = (double) totalTime / 60;
-                            int hours = (int) empHour;
-                            int minutes = (int) (empHour * 60) % 60;
-                            String hour = "" + hours;
-                            String minute = "" + minutes;
-                            if (minutes < 10 && minutes > 0) {
-                                minute = "0" + minute;
-                            } else if (minutes < 0) {
-                                minute = "00";
+                        if (zydexLocationMaster.getId().equals("1") || zydexLocationMaster.getId().equals("6")) {
+                            if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
+                                if (userTimeOut.before(userTimeIn)) {
+                                    diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
+                                } else {
+                                    diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                                }
+
+                            } else if (userTimeOut.before(userTimeIn)) {
+                                diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
+                            } else {
+                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                             }
-                            String workingHours = hour + ":" + minute;
-                            workingHour.add(workingHours);
-                            
+
+                            totalDayTime = diff1 / (60 * 1000);
+
+                            if (userTimeOut.before(userTimeIn)) {
+                                diff2 = userTimeOut1.getTime() - userTimeIn.getTime();
+                            } else {
+                                diff2 = userTimeOut.getTime() - userTimeIn.getTime();
+                            }
+
+                            totalDayTime1 = diff2 / (60 * 1000);
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                            long outTime1 = outTime;
+                            outTime = outTime - 30;
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+                            if (outTime > 0 && outTime1 != totalDayTime1) {
+                                totalTime = totalDayTime - outTime;
+                                double empHour = (double) totalTime / 60;
+                                int hours = (int) empHour;
+                                int minutes = (int) (empHour * 60) % 60;
+                                String hour = "" + hours;
+                                String minute = "" + minutes;
+                                if (minutes < 10 && minutes > 0) {
+                                    minute = "0" + minute;
+                                } else if (minutes < 0) {
+                                    minute = "00";
+                                }
+                                String workingHours = hour + ":" + minute;
+                                workingHour.add(workingHours);
+
+                            } else {
+                                double empHour = (double) totalDayTime / 60;
+                                int hours = (int) empHour;
+                                int minutes = (int) (empHour * 60) % 60;
+                                String hour = "" + hours;
+                                String minute = "" + minutes;
+                                if (minutes < 10 && minutes > 0) {
+                                    minute = "0" + minute;
+                                } else if (minutes < 0) {
+                                    minute = "00";
+                                }
+                                String workingHours = hour + ":" + minute;
+                                workingHour.add(workingHours);
+                            }
                         } else {
+
+                            if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
+                                if (userTimeOut.before(userTimeIn)) {
+                                    diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
+                                } else {
+                                    diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                                }
+
+                            } else if (userTimeOut.before(userTimeIn)) {
+                                diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
+                            } else {
+                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                            }
+
+                            totalDayTime = diff1 / (60 * 1000);
+
+                            if (userTimeOut.before(userTimeIn)) {
+
+                                diff2 = userTimeOut.getTime() - userTimeon12.getTime();
+//                                diff2 = userTimeOut1.getTime() - userTimeIn.getTime();
+                            } else {
+//                                diff2 = userTimeOut.getTime() - userTimeIn.getTime();
+                            }
+                            ///////////////AR code Start///////////////////////////////////////////////////
+                            AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+                            attendanceRegularization.setStartDateTime("" + next[0]);
+                            attendanceRegularization.setUserMasterId(employeeMaster.getUserMaster().getId());
+                            long ARdiff = 0;
+                            long ARTime = 0;
+                            SimpleDateFormat sdf4 = new SimpleDateFormat("dd/mm/yyyy HH:mm");
+                            List list = attendanceRegularizationMasterService.readArCountList(attendanceRegularization);
+                            if (!list.isEmpty()) {
+                                Object[] arm = (Object[]) list.get(0);
+                                Date InTimeAR = sdf4.parse(arm[1].toString());
+                                Date OutTimeAR = sdf4.parse(arm[2].toString());
+
+                                ARdiff = OutTimeAR.getTime() - InTimeAR.getTime();
+                                ARTime = ARdiff / (60 * 1000);
+
+                            }
+                            ///////////////AR code End////////////////////////////////////////
+                            totalDayTime1 = diff2 / (60 * 1000);
+
+                            totalDayTime = totalDayTime + totalDayTime1 + ARTime;
+
                             double empHour = (double) totalDayTime / 60;
                             int hours = (int) empHour;
                             int minutes = (int) (empHour * 60) % 60;
@@ -1397,14 +1707,16 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             } else if (minutes < 0) {
                                 minute = "00";
                             }
+
                             String workingHours = hour + ":" + minute;
                             workingHour.add(workingHours);
+
                         }
-                        
-                    } else if (mobPunchlist.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
+
+                    } else if (null != mobPunchlist && mobPunchlist.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
                         if (mobPunchlist.size() > 2) {
                             while (mobPunchlist.size() > i && mobPunchlist.size() > j) {
-                                
+
                                 Object[] startLunchTime = (Object[]) mobPunchlist.get(i);
                                 Object[] endLunchTime = (Object[]) mobPunchlist.get(j);
                                 startTime = (String) startLunchTime[0];
@@ -1418,7 +1730,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 j = j + 2;
                             }
                         }
-                        
+
                         String[] userTimeInStr = secondHalf.split("`");
                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
                         String[] userTimeOutStr = secondHalf.split("!");
@@ -1446,21 +1758,21 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             } else {
                                 diff1 = userTimeOut.getTime() - userTimeIn.getTime();
                             }
-                            
+
                         } else if (userTimeOut.before(userTimeIn)) {
                             diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
                         } else {
                             diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                         }
-                        
+
                         totalDayTime = diff1 / (60 * 1000);
-                        
+
                         if (userTimeOut.before(userTimeIn)) {
                             diff2 = userTimeOut1.getTime() - userTimeIn.getTime();
                         } else {
                             diff2 = userTimeOut.getTime() - userTimeIn.getTime();
                         }
-                        
+
                         totalDayTime1 = diff2 / (60 * 1000);
 
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
@@ -1483,7 +1795,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             }
                             String workingHours = hour + ":" + minute;
                             workingHour.add(workingHours);
-                            
+
                         } else {
                             double empHour = (double) totalDayTime / 60;
                             int hours = (int) empHour;
@@ -1503,11 +1815,11 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     }
                 } catch (Exception e) {
                     workingHour.add("-");
-                    
+
                 }
-                
+
             }
-            
+
         }
 
 //        List<?> attendanceDateList =
@@ -1526,9 +1838,13 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.getModelMap()
                 .put("map", map);
         mv.getModelMap()
+                .put("woMap", woMap);
+        mv.getModelMap()
+                .put("halfDayMap", halfDayMap);
+        mv.getModelMap()
                 .put("employeeAdvanceSearch", employeeAdvanceSearch);
         Date notflexibleSupportDate;
-        
+
         if (startDate.contains("-")) {
             notflexibleSupportDate = sdf1.parse(startDate);
         } else {
@@ -1538,21 +1854,20 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         Date notflexibleSupportDate1 = sdf.parse(FixedFlexibleDate);
         Calendar calForFlexiNotSupport1 = Calendar.getInstance();
         Calendar calForFlexiNotSupport2 = Calendar.getInstance();
-        
+
         calForFlexiNotSupport1.setTime(notflexibleSupportDate);
-        
+
         calForFlexiNotSupport2.setTime(notflexibleSupportDate1);
-        
-        
+
         if (flexible == true) {
             mv.setViewName("Shift/EmployeeFlexibleDayWisePunchDataReport");
         } else {
             mv.setViewName("Shift/EmployeeIndividualOrDateWiseShiftSearch");
         }
-        
+
         return mv;
     }
-    
+
     public ModelAndView employeeDataSearchSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeShiftData employeeShiftData = new EmployeeShiftData();
@@ -1562,7 +1877,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         bind(request, employeeAdvanceSearch);
         String searchval = request.getParameter("vallist");
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-        
+
         employeeAdvanceSearch.setId("" + employeeMaster.getId());
         employeeAdvanceSearch.setZydexLocationId(null);
         employeeAdvanceSearch.setLevelID(null);
@@ -1618,18 +1933,18 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setDateOfBirthOfEmpChilld1(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfBirthOfEmpChild2(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfTransferOfEntity(Boolean.FALSE);
-        
+
         if (!startDate.equals("")) {
             Date sDate = sdf.parse(startDate);
 //            "2012-01-01"
             employeeShiftData.setInDateTime(new SimpleDateFormat("yyyy-MM-dd").format(sDate));
-            
+
         }
         if (!endDate.equals("")) {
             Date eDate = sdf.parse(endDate);
             employeeShiftData.setOutDateTime(new SimpleDateFormat("yyyy-MM-dd").format(eDate));
         }
-        
+
         List<?> empDetail = employeeMasterService.empOrDateWiseSearch(employeeAdvanceSearch);
         Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
         for (Object o1 : empDetail) {
@@ -1648,7 +1963,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("Shift/EmployeeShiftResult");
         return mv;
     }
-    
+
     public ModelAndView showDateWisePunchData(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String date = request.getParameter("date");
@@ -1658,20 +1973,20 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //        String date = sdf1.format(datecoverted);
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         int empId = employeeMaster.getId();
-        
+
         List<?> punchList = employeeDatetimeDataService.readPuchDataDateWise(date, empId);
         if (punchList.isEmpty()) {
             List<?> MobPunchList = employeePunchForMobileAppService.readPuchDataDateWise(date, empId);
             mv.getModelMap().put("punchList", MobPunchList);
         } else {
             mv.getModelMap().put("punchList", punchList);
-            
+
         }
         mv.setViewName("Shift/ShowIndividualPuchData");
-        
+
         return mv;
     }
-    
+
     public ModelAndView powerAdminApprovalList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -1681,7 +1996,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("AttendanceRegularization/attendanceRegularizationViewResult");
         return mv;
     }
-    
+
     public ModelAndView approvalEditClickByAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -1704,12 +2019,12 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             Object[] arrayOfObject = (Object[]) empDetailList.get(0);
             String reportmanager = (String) arrayOfObject[6];
         }
-        
+
         mv.getModelMap().put("attendanceRegularization", attendanceRegularization);
         mv.setViewName("AttendanceRegularization/attendanceRegularizationApprovalAdmin");
         return mv;
     }
-    
+
     public ModelAndView approvalEditSubmitByAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -1772,14 +2087,14 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 String dayOfWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(startDate1);
                 if (dayOfWeek.equals("Sunday")) {
                     String time = "0.8";
-                    
+
                     OverTimeMaster overTimeMaster = new OverTimeMaster();
                     String overTimeDate = sdf1.format(startDate1);
                     overTimeMaster.setDate(overTimeDate);
                     overTimeMaster.setTime(time);
-                    
+
                     overTimeMaster.setEmployeeMaster(employeeMaster);
-                    
+
                     EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
                     EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
                     LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
@@ -1807,7 +2122,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         }
                         overTimeMasterService.create(overTimeMaster);
                     }
-                    
+
                 }
                 Calendar c = Calendar.getInstance();
                 c.setTime(startDate1);
@@ -1839,7 +2154,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
-                    
+
                     String name = "Attendance";
                     EmailAddMaster emailAddMaster = new EmailAddMaster();
                     emailAddMaster.setModuleName(name);
@@ -1859,20 +2174,20 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                 msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                 sendMail.sendMail(from1, To1, subject1, msg1);
-                                
+
                             }
                         }
                     }
                 }
             } catch (Exception e) {
             }
-            
+
         }
 //        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
         mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=approvalSubmit");
         return mv;
     }
-    
+
     public ModelAndView rejectSubmitByAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -1887,9 +2202,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         attendanceRegularization.setApprovedDate(requestdate);
         attendanceRegularization.setEmployeeMaster(approverName);
         attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
-        
+
         try {
-            
+
             EmailTemplate emailTemplate = new EmailTemplate();
             EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
             DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
@@ -1918,15 +2233,15 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
 //                }
             }
-            
+
         } catch (Exception e) {
         }
-        
+
         mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=approvalSubmit");
 //        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
         return mv;
     }
-    
+
     public ModelAndView reworkSubmitByAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -1942,7 +2257,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         attendanceRegularization.setEmployeeMaster(approverName);
         attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
         try {
-            
+
             EmailTemplate emailTemplate = new EmailTemplate();
             EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
             DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
@@ -1968,17 +2283,17 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
-                
+
             }
-            
+
         } catch (Exception e) {
         }
-        
+
         mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=approvalSubmit");
 //        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
         return mv;
     }
-    
+
     public ModelAndView exportToExcelAttendenceRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -1990,7 +2305,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("AttendanceRegularization/attendanceRegularizationViewResultExport");
         return mv;
     }
-    
+
     public ModelAndView subOrdinateAttendanceView(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
@@ -1999,7 +2314,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("AttendanceRegularization/SubOrdinateAttendanceView");
         return mv;
     }
-    
+
     public ModelAndView showOwnAttandanceOfSubordinate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
@@ -2007,7 +2322,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         String startDate = request.getParameter("inDateTime");
         String endDate = request.getParameter("outDateTime");
         bind(request, employeeAdvanceSearch);
-        
+
         String id = request.getParameter("id");
         employeeAdvanceSearch.setId(id);
         employeeAdvanceSearch.setZydexLocationId(null);
@@ -2015,6 +2330,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setDepartmentId(null);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        Map<String, String> woMap = new HashMap<String, String>();
+        Map<String, String> halfDayMap = new HashMap<String, String>();
         if (null != id && !id.equals("")) {
             employeeShiftData.setId(Integer.parseInt(id));
         }
@@ -2065,13 +2382,13 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setDateOfBirthOfEmpChilld1(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfBirthOfEmpChild2(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfTransferOfEntity(Boolean.FALSE);
-        
+
         if ((!"".equals(startDate) && null != startDate) && (!"".equals(endDate) && null != endDate)) {
             if (!"".equals(startDate) && null != startDate) {
                 Date sDate = sdf.parse(startDate);
 //            "2012-01-01"
                 employeeShiftData.setInDateTime(new SimpleDateFormat("yyyy-MM-dd").format(sDate));
-                
+
             }
             if (!"".equals(endDate) && null != endDate) {
                 Date eDate = sdf.parse(endDate);
@@ -2082,7 +2399,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             int year = c.get(Calendar.YEAR);
             int day = c.get(Calendar.DAY_OF_MONTH);
             int month = c.get(Calendar.MONTH) + 1;
-            
+
             startDate = year + "-" + (month < 10 ? ("0" + month) : (month)) + "-01";
             Date sDate = sdf1.parse(startDate);
             endDate = year + "-" + (month < 10 ? ("0" + month) : (month)) + "-" + day;
@@ -2090,18 +2407,47 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             employeeShiftData.setInDateTime(sdf1.format(sDate));
             employeeShiftData.setOutDateTime(sdf1.format(eDate));
         }
-        
+
         List<?> empDetail = employeeMasterService.empOrDateWiseSearch(employeeAdvanceSearch);
         Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
         for (Object o1 : empDetail) {
             Object[] o = (Object[]) o1;
             int id1 = (Integer) o[48];
             employeeShiftData.setId(id1);
-            List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
+
+            List list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
+            int i = 0;
+            for (Iterator<? extends Object> iterator = list.iterator(); iterator.hasNext();) {
+                Object[] next = (Object[]) iterator.next();
+
+                String firstHalf = "" + next[1];
+                if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
+                        && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                        && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                    Date date1 = sdf.parse("" + next[0]);
+                    Calendar c2 = Calendar.getInstance();
+                    c2.setTime(date1);
+                    SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
+                    String[] userTimeInStr = firstHalf.split("`");
+                    String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                    String[] userTimeOutStr = firstHalf.split("!");
+                    String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                    Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                    Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                    if (userTimeOut.before(userTimeIn)) {
+                        next[1] = ("" + next[1]).replace("AB", "fullday");
+//                        tempList.add(""+next[0]);
+//                        tempList.add(("" + next[1]).replace("AB", "PR"));
+                        list.set(i, next);
+                    }
+                }
+                i++;
+            }
             map.put(Integer.parseInt(id), list);
             request.setAttribute("attendanceDateList", list);
         }
-        
+
+        EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(id));
         boolean flexible = false;
         int earlyMinute = 0;
         int lateMinute = 0;
@@ -2110,7 +2456,6 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             for (Object flexiObject : timeAttFlexibleList) {
                 TimeAttandanceFlaxibleMaster timeAttandanceFlaxibleMaster = (TimeAttandanceFlaxibleMaster) flexiObject;
                 int zydexLocId = timeAttandanceFlaxibleMaster.getZydexLocationMaster().getId();
-                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(id));
                 int zydexLocId2 = employeeMaster1.getZydexLocationMaster().getId();
                 if (zydexLocId == zydexLocId2) {
                     flexible = true;
@@ -2125,22 +2470,141 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         List secondHalfList = new ArrayList();
         List workingHour = new ArrayList();
         for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
-           Iterator itr5 = entry.getValue().iterator();
-            int firstCounter = 0;
+            Iterator itr5 = entry.getValue().iterator();
             while (itr5.hasNext()) {
                 try {
                     Object[] next = (Object[]) itr5.next();
                     String firstHalf = "" + next[1];
-                    int firstHalfVal = 0;
-                    int counter = 0;
-                    
+
                     Date date = sdf.parse("" + next[0]);
                     Calendar c = Calendar.getInstance();
-                    c.setTime(date);
+                    //                    c.setTime(date);
+                    // week off code start
+                    Calendar c1 = Calendar.getInstance();
+                    c1.setTime(date);
+                    if (firstHalf.contains("WO")) {
+                        LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+                        c1.add(Calendar.DATE, -1);
+                        SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy");
+                        leaveEmployeeDetail.setStartDate("" + sdf3.format(c1.getTime()));
+                        leaveEmployeeDetail.setEndDate("" + sdf3.format(c1.getTime()));
+                        leaveEmployeeDetail.setEmployeeMaster(employeeMaster1);
+                        leaveEmployeeDetail.setStatus(3);
+                        List firstLeaveEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
+                        if (!firstLeaveEmployeeDetail.isEmpty()) {
+                            c1.add(Calendar.DATE, 2);
+                            leaveEmployeeDetail.setStartDate("" + sdf3.format(c1.getTime()));
+                            leaveEmployeeDetail.setEndDate("" + sdf3.format(c1.getTime()));
+                            leaveEmployeeDetail.setEmployeeMaster(employeeMaster1);
+                            leaveEmployeeDetail.setStatus(3);
+                            List secondLeaveEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
+
+                            // saturday sandwich Leave code start
+                            Object[] oSatArray = (Object[]) firstLeaveEmployeeDetail.get(0);
+                            String woSatType = "" + oSatArray[0];
+                            Date sSatDate = sdf.parse("" + oSatArray[1]);
+                            Date eSatDate = sdf.parse("" + oSatArray[2]);
+                            String sSatDateStr = "" + oSatArray[6];
+                            String eSatDateStr = "" + oSatArray[7];
+                            float noOfSatDays = (float) oSatArray[3];
+                            float diffInSatDays = 0;
+                            if ((sSatDateStr.equals("Fullday") && eSatDateStr.equals("Fullday"))
+                                    || (sSatDateStr.equals("Fullday") && sSatDate.equals(eSatDate))) {
+                                diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
+                                        / (1000 * 60 * 60 * 24)) + 1;
+                            } else if ((sSatDateStr.equals("SecondHalf") && eSatDateStr.equals("Fullday"))
+                                    || (sSatDateStr.equals("Fullday") && eSatDateStr.equals("FirstHalf"))) {
+                                diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
+                                        / (1000 * 60 * 60 * 24)) + 1;
+                                diffInSatDays = diffInSatDays - (float) 0.5;
+                            } else if (sSatDateStr.equals("SecondHalf") && eSatDateStr.equals("FirstHalf")) {
+                                diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
+                                        / (1000 * 60 * 60 * 24)) + 1;
+                                diffInSatDays = diffInSatDays - 1;
+                            }
+                            // saturday sandwich Leave code End
+
+                            // Monday sandwich Leave code start
+                            float noOfMonDays = 0;
+                            float diffInMonDays = -1;
+                            String woMonType = "";
+                            if (!secondLeaveEmployeeDetail.isEmpty()) {
+                                Object[] oMonArray = (Object[]) secondLeaveEmployeeDetail.get(0);
+                                woMonType = "" + oMonArray[0];
+                                Date sMonDate = sdf.parse("" + oMonArray[1]);
+                                Date eMonDate = sdf.parse("" + oMonArray[2]);
+                                String sMonDateStr = "" + oMonArray[6];
+                                String eMonDateStr = "" + oMonArray[7];
+                                noOfMonDays = (float) oMonArray[3];
+                                if ((sMonDateStr.equals("Fullday") && eMonDateStr.equals("Fullday"))
+                                        || (sMonDateStr.equals("Fullday") && sMonDate.equals(eMonDate))) {
+                                    diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
+                                            / (1000 * 60 * 60 * 24)) + 1;
+                                } else if ((sMonDateStr.equals("SecondHalf") && eMonDateStr.equals("Fullday"))
+                                        || (sMonDateStr.equals("Fullday") && eMonDateStr.equals("FirstHalf"))) {
+                                    diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
+                                            / (1000 * 60 * 60 * 24)) + 1;
+                                    diffInMonDays = diffInMonDays - (float) 0.5;
+                                } else if (sMonDateStr.equals("SecondHalf") && eMonDateStr.equals("FirstHalf")) {
+                                    diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
+                                            / (1000 * 60 * 60 * 24)) + 1;
+                                    diffInMonDays = diffInMonDays - 1;
+                                }
+                            }
+                            // Monday sandwich Leave code end
+
+//                            if (diffInSatDays != noOfSatDays || (!date.equals(sSatDate) && !date.equals(eSatDate))) {
+                            if (diffInSatDays != noOfSatDays || (date.before(eSatDate)
+                                    && date.after(sSatDate) && diffInSatDays == noOfSatDays)) {
+                                woMap.put("" + next[0], woSatType);
+                            } else if (diffInMonDays != -1 && diffInMonDays != noOfMonDays) {
+                                woMap.put("" + next[0], woMonType);
+                            } else if ((diffInSatDays % 1 == 0 && diffInSatDays == noOfSatDays) && diffInMonDays == noOfMonDays) {
+                                woMap.put("" + next[0], "LWP");
+                            } else {
+                                woMap.put("" + next[0], "WO");
+                            }
+                        } else {
+                            woMap.put("" + next[0], "WO");
+                        }
+                    }
+                    // week off code End
+
+//         1st Half:             Half day absent Code when start date is full and end date is first half start Code
+                    Date date1 = sdf.parse("" + next[0]);
+                    Calendar c2 = Calendar.getInstance();
+                    c2.setTime(date1);
+                    LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+                    SimpleDateFormat sdfAb = new SimpleDateFormat("dd/MM/yyyy");
+                    leaveEmployeeDetail.setStartDate("" + sdfAb.format(c2.getTime()));
+                    leaveEmployeeDetail.setEndDate("" + sdfAb.format(c2.getTime()));
+                    leaveEmployeeDetail.setEmployeeMaster(employeeMaster1);
+                    leaveEmployeeDetail.setStatus(3);
+                    List absentEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
+                    float diffInDays = 0;
+                    String woType = "";
+                    if (!absentEmployeeDetail.isEmpty()) {
+                        Object[] oSatArray = (Object[]) absentEmployeeDetail.get(0);
+                        woType = "" + oSatArray[0];
+                        Date sDate = sdf.parse("" + oSatArray[1]);
+                        Date eDate = sdf.parse("" + oSatArray[2]);
+                        String sDateStr = "" + oSatArray[6];
+                        String eDateStr = "" + oSatArray[7];
+                        float noOfDays = (float) oSatArray[3];
+                        if ((sDateStr.equals("Fullday") && eDateStr.equals("FirstHalf"))) {
+                            diffInDays = (float) ((eDate.getTime() - sDate.getTime())
+                                    / (1000 * 60 * 60 * 24)) + 1;
+                            if (date1.equals(eDate)) {
+                                diffInDays = diffInDays - (float) 0.5;
+                            }
+                        }
+                    }
+//        1st Half:              Half day absent Code when start date is full and end date is first half  End code
+
                     int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
                     SimpleDateFormat format = new SimpleDateFormat("EEEE");
                     String dayName = format.format(date);
-                    
+
                     if (firstHalf.contains("fullday")) {
                         newList.add("PR");
                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
@@ -2220,7 +2684,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                         newList.add("Leave Without Pay");
                                     }
                                 }
-                                
+
                             } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
                                 if (firstHalf.contains("*")) {
                                     String[] shortArray = firstHalf.split("\\*");
@@ -2265,20 +2729,20 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 if (leave1[0].contains("Leave Without Pay")) {
                                     newList.add("Leave Without Pay");
                                 }
-                                
+
                             } else if (leave1[0].contains("AB")) {
                                 newList.add("-");
-                                
+
                             } else {
                                 newList.add("AB");
                             }
-                            
+
                         } else if (userTimeIn != null && !firstHalf.contains("WO") && !firstHalf.contains("?")) {
                             newList.add("AB");
                         } else if (firstHalf.contains("WO") || firstHalf.contains("?")) {
                             newList.add("-");
                         }
-                        
+
                     } else if (firstHalf.equals("WO")) {
                         newList.add("-");
                     } else if (firstHalf.contains("AR")) {
@@ -2290,22 +2754,61 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     } else if (firstHalf.equals("Casual Leave") || firstHalf.equals("Privilege Leave") || firstHalf.equals("Sick Leave")
                             || firstHalf.equals("Maternity Leave") || firstHalf.equals("Paternity Leave") || firstHalf.equals("C Off Leave")
                             || firstHalf.equals("Leave Without Pay")) {
-                        newList.add("-");
+//       1st Half:                 Half day absent Code  start date is full and end date is First Half start code
+                        if (diffInDays % 1 == 0) {
+                            newList.add("-");
+                        } else {
+                            newList.add(firstHalf);
+                            halfDayMap.put("" + next[0], woType);
+                        }
+//       1st Half:                 Half day absent Code  start date is full and end date is First Half End code
+//                            newList.add("-");
                     }
                 } catch (Exception e) {
-                    
+
                 }
             }
-            
+
             Iterator itr6 = entry.getValue().iterator();
             int weekNameCounter = 0;
             boolean satWeekOff = false;
             while (itr6.hasNext()) {
                 try {
                     Object[] next = (Object[]) itr6.next();
-                    
+
                     String secondHalf = "" + next[1];
                     int firstHalfVal = 0;
+
+//       2nd Half:              Half day absent Code when start date is full and end date is first half  start Code
+                    Date date1 = sdf.parse("" + next[0]);
+                    Calendar c1 = Calendar.getInstance();
+                    c1.setTime(date1);
+                    LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+                    SimpleDateFormat sdfAb = new SimpleDateFormat("dd/MM/yyyy");
+                    leaveEmployeeDetail.setStartDate("" + sdfAb.format(c1.getTime()));
+                    leaveEmployeeDetail.setEndDate("" + sdfAb.format(c1.getTime()));
+                    leaveEmployeeDetail.setEmployeeMaster(employeeMaster1);
+                    leaveEmployeeDetail.setStatus(3);
+                    List absentEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
+                    float diffInDays = 0;
+                    String woType = "";
+                    if (!absentEmployeeDetail.isEmpty()) {
+                        Object[] oSatArray = (Object[]) absentEmployeeDetail.get(0);
+                        woType = "" + oSatArray[0];
+                        Date sDate = sdf.parse("" + oSatArray[1]);
+                        Date eDate = sdf.parse("" + oSatArray[2]);
+                        String sDateStr = "" + oSatArray[6];
+                        String eDateStr = "" + oSatArray[7];
+                        float noOfDays = (float) oSatArray[3];
+                        if ((sDateStr.equals("Fullday") && eDateStr.equals("FirstHalf"))) {
+                            diffInDays = (float) ((eDate.getTime() - sDate.getTime())
+                                    / (1000 * 60 * 60 * 24)) + 1;
+                            if (date1.equals(eDate)) {
+                                diffInDays = diffInDays - (float) 0.5;
+                            }
+                        }
+                    }
+//       2nd Half:              Half day absent Code when start date is full and end date is first half  end Code
                     int counter = 0;
                     String shiftName = "";
 //                                    2nd Sat Week Off Codding
@@ -2315,23 +2818,23 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     SimpleDateFormat format = new SimpleDateFormat("EEEE");
                     String dayName = format.format(date);
                     int dayOfWeek = cal.get(Calendar.WEEK_OF_MONTH);
-                   EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(id));
+//                    EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(id));
                     ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
-                    
+
                     if (dayName.equals("Saturday")) {
                         if (dayOfWeek == 2) {
                             satWeekOff = true;
                         } else {
                             satWeekOff = false;
                         }
-                        
+
                     } else {
                         satWeekOff = false;
                     }
 //                                    2nd Sat Week Off Codding
 
 //                                    Lunch Breck Cut Off
-                   List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], Integer.parseInt(id));
+                    List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], Integer.parseInt(id));
                     long lunchTime = 0;
                     long totalDayTime = 0;
                     long totalDayTime1 = 0;
@@ -2345,20 +2848,74 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     int s = 2;
                     boolean checkLunchTime = false;
                     try {
-                        if (listPunch.size() > 2) {
-                            while (listPunch.size() > d && listPunch.size() > s) {
-                                Object[] startLunchTime = (Object[]) listPunch.get(d);
-                                Object[] endLunchTime = (Object[]) listPunch.get(s);
-                                startTime = (String) startLunchTime[0];
-                                endTime = (String) endLunchTime[0];
-                                Date launchStrTime = sdf3.parse(startTime);
-                                Date launchEndTime = sdf3.parse(endTime);
-                                long diff = launchEndTime.getTime() - launchStrTime.getTime();
-                                lunchTime = diff / (60 * 1000);
-                                outTime = outTime + lunchTime;
-                                d = d + 2;
-                                s = s + 2;
+                        if (zydexLocationMaster.getId().equals("1") || zydexLocationMaster.getId().equals("6")) {
+                            if (listPunch.size() > 2) {
+                                while (listPunch.size() > d && listPunch.size() > s) {
+                                    Object[] startLunchTime = (Object[]) listPunch.get(d);
+                                    Object[] endLunchTime = (Object[]) listPunch.get(s);
+                                    startTime = (String) startLunchTime[0];
+                                    endTime = (String) endLunchTime[0];
+                                    Date launchStrTime = sdf3.parse(startTime);
+                                    Date launchEndTime = sdf3.parse(endTime);
+                                    long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                                    lunchTime = diff / (60 * 1000);
+                                    outTime = outTime + lunchTime;
+                                    d = d + 2;
+                                    s = s + 2;
+                                }
+                                String[] userTimeInStr = secondHalf.split("`");
+                                String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                String[] userTimeOutStr = secondHalf.split("!");
+                                String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                                Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                                String[] startHoursStr = secondHalf.split("%");
+                                String[] firstStartHoursStr = startHoursStr[1].split("\\+");
+                                String[] endHoursStr = secondHalf.split("&");
+                                Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
+                                Calendar cal1 = Calendar.getInstance();
+                                cal1.setTime(firstStartHours);
+                                cal1.add(Calendar.MINUTE, -earlyMinute);
+
+                                String newTime1 = sdf2.format(cal1.getTime());
+                                Date flexibleInTime = sdf2.parse(newTime1);
+                                Date endHours = sdf2.parse(endHoursStr[1]);
+                                long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
+                                shiftdiffMinutes = shiftTotalTime / (60 * 1000);
+                                long diff1 = 0;
+                                long diff2 = 0;
+                                if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
+                                    diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+
+                                } else {
+                                    diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                                }
+                                totalDayTime = diff1 / (60 * 1000);
+
+                                diff2 = userTimeOut.getTime() - userTimeIn.getTime();
+                                totalDayTime1 = diff2 / (60 * 1000);
+
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                                long outTime1 = outTime;
+                                outTime = outTime - 30;
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+                                if (outTime1 == totalDayTime1) {
+                                    totalTime = totalDayTime;
+                                } else if (outTime > 0) {
+                                    totalTime = totalDayTime - outTime;
+                                    checkLunchTime = true;
+                                }
+
                             }
+                        } else {
+//                            if (listPunch.size() > 2) {
+//                                    Object[] startTimeO = (Object[]) listPunch.get(0);
+//                                    Object[] endTimeO = (Object[]) listPunch.get(listPunch.size()-1);
+//                                    startTime = (String) startTimeO[0];
+//                                    endTime = (String) endTimeO[0];
+
                             String[] userTimeInStr = secondHalf.split("`");
                             String[] userTimeInStr1 = userTimeInStr[1].split("!");
                             String[] userTimeOutStr = secondHalf.split("!");
@@ -2372,7 +2929,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             Calendar cal1 = Calendar.getInstance();
                             cal1.setTime(firstStartHours);
                             cal1.add(Calendar.MINUTE, -earlyMinute);
-                            
+
                             String newTime1 = sdf2.format(cal1.getTime());
                             Date flexibleInTime = sdf2.parse(newTime1);
                             Date endHours = sdf2.parse(endHoursStr[1]);
@@ -2382,31 +2939,21 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             long diff2 = 0;
                             if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
                                 diff1 = userTimeOut.getTime() - userTimeIn.getTime();
-                                
+
                             } else {
                                 diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                             }
                             totalDayTime = diff1 / (60 * 1000);
-                            
+
                             diff2 = userTimeOut.getTime() - userTimeIn.getTime();
                             totalDayTime1 = diff2 / (60 * 1000);
+                            totalTime = totalDayTime;
+//                            }
 
-//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                            long outTime1 = outTime;
-                            outTime = outTime - 30;
-//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                            if (outTime1 == totalDayTime1) {
-                                totalTime = totalDayTime;
-                            } else if (outTime > 0) {
-                                totalTime = totalDayTime - outTime;
-                                checkLunchTime = true;
-                            }
-                            
                         }
+
                     } catch (Exception e) {
-                        
+
                     }
 
 //                                    Lunch Breck Cut Off
@@ -2414,7 +2961,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         String[] string1 = secondHalf.split("#");
                         String[] string2 = string1[1].split("\\$");
                         shiftName = string2[0].trim();
-                        
+
                     }
                     if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
                         secondHalfList.add("WO");
@@ -2424,7 +2971,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         secondHalfList.add("AB");
                     } else if (secondHalf.contains("fullday")) {
                         secondHalfList.add("PR");;
-                        
+
                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
                             && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
                             && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
@@ -2439,7 +2986,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         String[] endHoursStr = secondHalf.split("&");
                         String[] startHoursStr = secondHalf.split("%");
                         String[] firstStartHoursStr = startHoursStr[1].split("\\+");
-                        
+
                         Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
                         Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
                         Date userTimeOut1 = sdf2.parse("23:59");
@@ -2453,7 +3000,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         String totalDuration2 = getOutHours[0];
                         Date endHours = sdf2.parse(endHoursStr[1]);
                         Date secondHalfTimeStr2 = sdf2.parse(secondHalfTimeStr1[0]);
-                        
+
                         Calendar cal1 = Calendar.getInstance();
                         Calendar cal2 = Calendar.getInstance();
                         cal1.setTime(firstStartHours);
@@ -2462,7 +3009,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         cal2.add(Calendar.MINUTE, lateMinute);
                         String newTime = sdf2.format(cal2.getTime());
                         Date flexibleEndTime = sdf2.parse(newTime);
-                        
+
                         String newTime1 = sdf2.format(cal1.getTime());
                         Date flexibleInTime = sdf2.parse(newTime1);
                         long diff = endHours.getTime() - firstStartHours.getTime();
@@ -2474,18 +3021,18 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             } else {
                                 diff1 = userTimeOut.getTime() - userTimeIn.getTime();
                             }
-                            
+
                         } else if (userTimeOut.before(userTimeIn)) {
                             diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
                         } else {
                             diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                         }
                         long diffMinutes1 = diff1 / (60 * 1000);
-                        
+
                         if (userTimeIn != null) {
                             if (leave1[0].contains("AR")) {
                                 secondHalfList.add("AR/P");
-                                
+
                             } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
                                 if (secondHalf.contains("*")) {
                                     String[] shortArray = secondHalf.split("\\*");
@@ -2546,35 +3093,43 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 if (leave1[0].contains("Leave Without Pay")) {
                                     secondHalfList.add("Leave Without Pay");
                                 }
-                                
+
                             } else if (leave1[0].contains("AB")) {
                                 secondHalfList.add("AB");
                             } else {
                                 secondHalfList.add("AB");
                             }
-                            
+
                         } else if (userTimeIn != null && !secondHalf.contains("WO") && !secondHalf.contains("?")) {
                             secondHalfList.add("AB");
                         } else if (secondHalf.contains("WO") || secondHalf.contains("?")) {
                             secondHalfList.add("-");
                         }
-                        
+
                     } else if (secondHalf.equals("WO")) {
                         secondHalfList.add("-");
                     } else if (secondHalf.equals("AB")) {
                         secondHalfList.add("AB");
                     } else if (secondHalf.contains("?")) {
                         secondHalfList.add("-");
-                    }else if (secondHalf.equals("Casual Leave") || secondHalf.equals("Privilege Leave") || secondHalf.equals("Sick Leave")
+                    } else if (secondHalf.equals("Casual Leave") || secondHalf.equals("Privilege Leave") || secondHalf.equals("Sick Leave")
                             || secondHalf.equals("Maternity Leave") || secondHalf.equals("Paternity Leave") || secondHalf.equals("C Off Leave")
                             || secondHalf.equals("Leave Without Pay")) {
-                        secondHalfList.add("-");
+                        //2nd Half:              Half day absent Code when start date is full and end date is first half  start Code
+                        if (diffInDays % 1 == 0) {
+                            secondHalfList.add("-");
+                        } else {
+                            secondHalfList.add("AB");
+                        }
+// 2nd Half:              Half day absent Code when start date is full and end date is first half  end Code
+//                            secondHalfList.add("-");
+
                     }
                 } catch (Exception e) {
-                    
+
                 }
             }
-            
+
             Iterator itr7 = entry.getValue().iterator();
             while (itr7.hasNext()) {
                 try {
@@ -2583,7 +3138,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     int firstHalfVal = 0;
                     int counter = 0;
                     String shiftName = "";
-                    
+
                     List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], Integer.parseInt(id));
                     List mobPunchlist = employeePunchForMobileAppService.readPuchDataDateWise("" + next[0], Integer.parseInt(id));
                     long lunchTime = 0;
@@ -2599,30 +3154,35 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     String endTime = "";
                     SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     if (listPunch.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
-                        if (listPunch.size() > 2) {
-                            while (listPunch.size() > i && listPunch.size() > j) {
-                                
-                                Object[] startLunchTime = (Object[]) listPunch.get(i);
-                                Object[] endLunchTime = (Object[]) listPunch.get(j);
-                                startTime = (String) startLunchTime[0];
-                                endTime = (String) endLunchTime[0];
-                                Date launchStrTime = sdf3.parse(startTime);
-                                Date launchEndTime = sdf3.parse(endTime);
-                                long diff = launchEndTime.getTime() - launchStrTime.getTime();
-                                lunchTime = diff / (60 * 1000);
-                                outTime = outTime + lunchTime;
-                                i = i + 2;
-                                j = j + 2;
+                        ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
+                        if (zydexLocationMaster.getId().equals("1") || zydexLocationMaster.getId().equals("6")) {
+                            if (listPunch.size() > 2) {
+                                while (listPunch.size() > i && listPunch.size() > j) {
+
+                                    Object[] startLunchTime = (Object[]) listPunch.get(i);
+                                    Object[] endLunchTime = (Object[]) listPunch.get(j);
+                                    startTime = (String) startLunchTime[0];
+                                    endTime = (String) endLunchTime[0];
+                                    Date launchStrTime = sdf3.parse(startTime);
+                                    Date launchEndTime = sdf3.parse(endTime);
+                                    long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                                    lunchTime = diff / (60 * 1000);
+                                    outTime = outTime + lunchTime;
+                                    i = i + 2;
+                                    j = j + 2;
+                                }
                             }
                         }
-                        
+
                         String[] userTimeInStr = secondHalf.split("`");
                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
                         String[] userTimeOutStr = secondHalf.split("!");
                         String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
                         Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
                         Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
-                        Date userTimeOut1 = sdf2.parse("23:59");
+
+                        Date userTimeOut1 = sdf2.parse("24:00");
+                        Date userTimeon12 = sdf2.parse("00:00");
                         String[] startHoursStr = secondHalf.split("%");
                         String[] firstStartHoursStr = startHoursStr[1].split("\\+");
                         String[] endHoursStr = secondHalf.split("&");
@@ -2637,51 +3197,112 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         shiftdiffMinutes = shiftTotalTime / (60 * 1000);
                         long diff1 = 0;
                         long diff2 = 0;
-                        if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
-                            if (userTimeOut.before(userTimeIn)) {
-                                diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
+                        if (zydexLocationMaster.getId().equals("1") || zydexLocationMaster.getId().equals("6")) {
+                            if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
+                                if (userTimeOut.before(userTimeIn)) {
+                                    diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
+                                } else {
+                                    diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                                }
+
+                            } else if (userTimeOut.before(userTimeIn)) {
+                                diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
                             } else {
-                                diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                             }
-                            
-                        } else if (userTimeOut.before(userTimeIn)) {
-                            diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
-                        } else {
-                            diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
-                        }
-                        
-                        totalDayTime = diff1 / (60 * 1000);
-                        
-                        if (userTimeOut.before(userTimeIn)) {
-                            diff2 = userTimeOut1.getTime() - userTimeIn.getTime();
-                        } else {
-                            diff2 = userTimeOut.getTime() - userTimeIn.getTime();
-                        }
-                        
-                        totalDayTime1 = diff2 / (60 * 1000);
+
+                            totalDayTime = diff1 / (60 * 1000);
+
+                            if (userTimeOut.before(userTimeIn)) {
+                                diff2 = userTimeOut1.getTime() - userTimeIn.getTime();
+                            } else {
+                                diff2 = userTimeOut.getTime() - userTimeIn.getTime();
+                            }
+
+                            totalDayTime1 = diff2 / (60 * 1000);
 
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
 //                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-                        long outTime1 = outTime;
-                        outTime = outTime - 30;
+                            long outTime1 = outTime;
+                            outTime = outTime - 30;
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-                        if (outTime > 0 && outTime1 != totalDayTime1) {
-                            totalTime = totalDayTime - outTime;
-                            double empHour = (double) totalTime / 60;
-                            int hours = (int) empHour;
-                            int minutes = (int) (empHour * 60) % 60;
-                            String hour = "" + hours;
-                            String minute = "" + minutes;
-                            if (minutes < 10 && minutes > 0) {
-                                minute = "0" + minute;
-                            } else if (minutes < 0) {
-                                minute = "00";
+                            if (outTime > 0 && outTime1 != totalDayTime1) {
+                                totalTime = totalDayTime - outTime;
+                                double empHour = (double) totalTime / 60;
+                                int hours = (int) empHour;
+                                int minutes = (int) (empHour * 60) % 60;
+                                String hour = "" + hours;
+                                String minute = "" + minutes;
+                                if (minutes < 10 && minutes > 0) {
+                                    minute = "0" + minute;
+                                } else if (minutes < 0) {
+                                    minute = "00";
+                                }
+                                String workingHours = hour + ":" + minute;
+                                workingHour.add(workingHours);
+
+                            } else {
+                                double empHour = (double) totalDayTime / 60;
+                                int hours = (int) empHour;
+                                int minutes = (int) (empHour * 60) % 60;
+                                String hour = "" + hours;
+                                String minute = "" + minutes;
+                                if (minutes < 10 && minutes > 0) {
+                                    minute = "0" + minute;
+                                } else if (minutes < 0) {
+                                    minute = "00";
+                                }
+                                String workingHours = hour + ":" + minute;
+                                workingHour.add(workingHours);
                             }
-                            String workingHours = hour + ":" + minute;
-                            workingHour.add(workingHours);
-                            
+
                         } else {
+
+                            if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
+                                if (userTimeOut.before(userTimeIn)) {
+                                    diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
+                                } else {
+                                    diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                                }
+
+                            } else if (userTimeOut.before(userTimeIn)) {
+                                diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
+                            } else {
+                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                            }
+
+                            totalDayTime = diff1 / (60 * 1000);
+
+                            if (userTimeOut.before(userTimeIn)) {
+
+                                diff2 = userTimeOut.getTime() - userTimeon12.getTime();
+//                                diff2 = userTimeOut1.getTime() - userTimeIn.getTime();
+                            } else {
+//                                diff2 = userTimeOut.getTime() - userTimeIn.getTime();
+                            }
+                            ///////////////AR code Start///////////////////////////////////////////////////
+                            AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+                            attendanceRegularization.setStartDateTime("" + next[0]);
+                            attendanceRegularization.setUserMasterId(employeeMaster1.getUserMaster().getId());
+                            long ARdiff = 0;
+                            long ARTime = 0;
+                            SimpleDateFormat sdf4 = new SimpleDateFormat("dd/mm/yyyy HH:mm");
+                            List list = attendanceRegularizationMasterService.readArCountList(attendanceRegularization);
+                            if (!list.isEmpty()) {
+                                Object[] arm = (Object[]) list.get(0);
+                                Date InTimeAR = sdf4.parse(arm[1].toString());
+                                Date OutTimeAR = sdf4.parse(arm[2].toString());
+
+                                ARdiff = OutTimeAR.getTime() - InTimeAR.getTime();
+                                ARTime = ARdiff / (60 * 1000);
+
+                            }
+                            ///////////////AR code End////////////////////////////////////////
+                            totalDayTime1 = diff2 / (60 * 1000);
+
+                            totalDayTime = totalDayTime + totalDayTime1 + ARTime;
+
                             double empHour = (double) totalDayTime / 60;
                             int hours = (int) empHour;
                             int minutes = (int) (empHour * 60) % 60;
@@ -2692,14 +3313,16 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             } else if (minutes < 0) {
                                 minute = "00";
                             }
+
                             String workingHours = hour + ":" + minute;
                             workingHour.add(workingHours);
+
                         }
-                        
-                    } else if (mobPunchlist.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
+
+                    } else if (null != mobPunchlist && mobPunchlist.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
                         if (mobPunchlist.size() > 2) {
                             while (mobPunchlist.size() > i && mobPunchlist.size() > j) {
-                                
+
                                 Object[] startLunchTime = (Object[]) mobPunchlist.get(i);
                                 Object[] endLunchTime = (Object[]) mobPunchlist.get(j);
                                 startTime = (String) startLunchTime[0];
@@ -2713,7 +3336,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 j = j + 2;
                             }
                         }
-                        
+
                         String[] userTimeInStr = secondHalf.split("`");
                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
                         String[] userTimeOutStr = secondHalf.split("!");
@@ -2741,21 +3364,21 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             } else {
                                 diff1 = userTimeOut.getTime() - userTimeIn.getTime();
                             }
-                            
+
                         } else if (userTimeOut.before(userTimeIn)) {
                             diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
                         } else {
                             diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                         }
-                        
+
                         totalDayTime = diff1 / (60 * 1000);
-                        
+
                         if (userTimeOut.before(userTimeIn)) {
                             diff2 = userTimeOut1.getTime() - userTimeIn.getTime();
                         } else {
                             diff2 = userTimeOut.getTime() - userTimeIn.getTime();
                         }
-                        
+
                         totalDayTime1 = diff2 / (60 * 1000);
 
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
@@ -2778,7 +3401,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             }
                             String workingHours = hour + ":" + minute;
                             workingHour.add(workingHours);
-                            
+
                         } else {
                             double empHour = (double) totalDayTime / 60;
                             int hours = (int) empHour;
@@ -2798,11 +3421,11 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     }
                 } catch (Exception e) {
                     workingHour.add("-");
-                    
+
                 }
-                
+
             }
-            
+
         }
 
 //        List<?> attendanceDateList =
@@ -2821,9 +3444,13 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.getModelMap()
                 .put("map", map);
         mv.getModelMap()
+                .put("woMap", woMap);
+        mv.getModelMap()
+                .put("halfDayMap", halfDayMap);
+        mv.getModelMap()
                 .put("employeeAdvanceSearch", employeeAdvanceSearch);
         Date notflexibleSupportDate;
-        
+
         if (startDate.contains(
                 "-")) {
             notflexibleSupportDate = sdf1.parse(startDate);
@@ -2834,22 +3461,22 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         Date notflexibleSupportDate1 = sdf.parse(FixedFlexibleDate);
         Calendar calForFlexiNotSupport1 = Calendar.getInstance();
         Calendar calForFlexiNotSupport2 = Calendar.getInstance();
-        
+
         calForFlexiNotSupport1.setTime(notflexibleSupportDate);
-        
+
         calForFlexiNotSupport2.setTime(notflexibleSupportDate1);
         request.setAttribute("id", id);
         if (flexible == true ) {
 //        if (flexible == true) {
             mv.setViewName("Shift/EmployeeFlexibleDayWisePunchDataReportOfSubordinate");
-            
+
         } else {
             mv.setViewName("Shift/EmployeeIndividualOrDateWiseShiftSearchForSubordinate");
         }
-        
+
         return mv;
     }
-    
+
     public void checkPunchtime(HttpServletRequest request, HttpServletResponse response) throws ParseException, IOException {
         String strDate = request.getParameter("strDate");
         String message = "";
@@ -2867,7 +3494,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         PrintWriter out = response.getWriter();
         out.print(message);
     }
-    
+
     public ModelAndView showDateWisePunchDataOfSubordinate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String date = request.getParameter("date");
@@ -2878,13 +3505,13 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             mv.getModelMap().put("punchList", MobPunchList);
         } else {
             mv.getModelMap().put("punchList", punchList);
-            
+
         }
         mv.setViewName("Shift/ShowIndividualPuchData");
-        
+
         return mv;
     }
-    
+
     public ModelAndView departmentWiseAttendanceView(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");

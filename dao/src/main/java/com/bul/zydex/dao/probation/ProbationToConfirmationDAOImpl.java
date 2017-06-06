@@ -145,4 +145,14 @@ public class ProbationToConfirmationDAOImpl<T> extends GenericsDAOImpl<T> implem
                 + " Where a.status=5";
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> readByAssessmentToDate(String date) {
+        String query = "";
+        query += "Select a"
+                + " From ProbationToConfirmation a "
+                + " Where STR_TO_DATE(a.assessmentToDate,'%d/%m/%Y')= STR_TO_DATE('" + date + "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+
+    }
 }

@@ -79,7 +79,7 @@
             <property name="cronExpression" value="0 0/15 * * * ?" />
         </bean>
     -->
-<!--    <bean id="coffDeleteId"
+    <!--    <bean id="coffDeleteId"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="shiftRotationMasterController1" />
         <property name="targetMethod" value="coffDelete" />
@@ -104,7 +104,7 @@
     <!--<property name="cronExpression" value="0 15 10 * * ? />-->
     <!--</bean>-->
     
-<!--         <bean id="probationToConfirmation"
+    <!--         <bean id="probationToConfirmation"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="probationToConfirmationController1" />
         <property name="targetMethod" value="probationToconfirmationAddInEmployeeMaster" />
@@ -138,20 +138,20 @@
         <property name="cronExpression" value="0 5 0 1/1 * ? *" />
     </bean>-->
     
-<!--    <bean id="reportingManagerChangeId"
-          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="resignationMasterController1" />
-        <property name="targetMethod" value="reportingManagerChangeCheck" />
-    </bean>
--->   
- <!--<bean id="cronTrigger11"-->
-          <!--class="org.springframework.scheduling.quartz.CronTriggerBean">-->
-        <!--<property name="jobDetail" ref="reportingManagerChangeId" />-->
-        <!--<property name="cronExpression" value="0 0/3 * * * ?" />-->
-        <!--0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying-->
+    <!--    <bean id="reportingManagerChangeId"
+              class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+            <property name="targetObject" ref="resignationMasterController1" />
+            <property name="targetMethod" value="reportingManagerChangeCheck" />
+        </bean>
+    -->   
+    <!--<bean id="cronTrigger11"-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerBean">-->
+    <!--<property name="jobDetail" ref="reportingManagerChangeId" />-->
+    <!--<property name="cronExpression" value="0 0/3 * * * ?" />-->
+    <!--0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying-->
     <!--</bean>-->
     
-<!--        <bean id="pmpIntimation"
+    <!--        <bean id="pmpIntimation"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="appraisalPerformanceController1" />
         <property name="targetMethod" value="mailSendPmp" />
@@ -161,7 +161,7 @@
         <property name="jobDetail" ref="pmpIntimation" />
         <property name="cronExpression" value="0 0/3 * * * ?" />
     </bean>-->
-<!--        <bean id="mobilePunchDailyEntry"
+    <!--        <bean id="mobilePunchDailyEntry"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="employeePunch1" />
         <property name="targetMethod" value="mobPunchEntryDaily" />
@@ -172,7 +172,7 @@
         <property name="cronExpression" value="0 0/3 * * * ?" />
         0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying
     </bean>-->
-<!--        <bean id="daysLeftProbationToConfirmation"
+<!--    <bean id="daysLeftProbationToConfirmation"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="probationToConfirmationController1" />
         <property name="targetMethod" value="mailSendForProbationToConfirmationLeft" />
@@ -183,6 +183,17 @@
         <property name="cronExpression" value="0 0/3 * * * ?" />
        
     </bean>-->
+    <bean id="daysLeftForKraRemainder"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="appraisalPerformanceController1" />
+        <property name="targetMethod" value="mailSendForKraRegistration" />
+    </bean>
+    <bean id="cronTrigger15"
+          class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="daysLeftForKraRemainder" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
+       
+    </bean>
     
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="jobDetails">
@@ -195,13 +206,15 @@
                 <!--<ref bean="coffDeleteId" />-->
                 <!--<ref bean="shortLeveId" />-->
              
-<!--                                <ref bean="probationToConfirmation" />
+                <!--                                <ref bean="probationToConfirmation" />
                 <ref bean="probationToConfirmationCreateCheck" />
                 <ref bean="travelEscalationId" />
                 <ref bean="reportingManagerChangeId" />-->
-<!--                <ref bean="pmpIntimation" />
+                <!--                <ref bean="pmpIntimation" />
                 <ref bean="mobilePunchDailyEntry" />
-                <ref bean="daysLeftProbationToConfirmation" />-->
+                -->
+                <!--<ref bean="daysLeftProbationToConfirmation" />-->
+                <ref bean="daysLeftForKraRemainder" />
             </list>
         </property>
         <property name="triggers">
@@ -217,9 +230,11 @@
                 <ref bean="cronTrigger9" />
                 <ref bean="cronTrigger10" />-->
                 <!--<ref bean="cronTrigger11" />-->
-<!--                <ref bean="cronTrigger12" />
+                <!--                <ref bean="cronTrigger12" />
                 <ref bean="cronTrigger13" />
-                <ref bean="cronTrigger14" />-->
+                -->
+                <!--<ref bean="cronTrigger14" />-->
+                <ref bean="cronTrigger15" />
             </list>
         </property>
     </bean>

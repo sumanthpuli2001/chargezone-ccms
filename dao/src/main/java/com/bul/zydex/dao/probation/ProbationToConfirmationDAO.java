@@ -32,4 +32,6 @@ public interface ProbationToConfirmationDAO<T> extends GenericsDAO<T> {
 
     public List<?> readConfirmedEmployee();
 
+    public List<?> readByAssessmentToDate(String date);
+
 }

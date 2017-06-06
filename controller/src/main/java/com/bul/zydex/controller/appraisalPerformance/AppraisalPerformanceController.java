@@ -4994,7 +4994,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         String pyear = request.getParameter("pmpyear");
         if (null != searchvalue) {
             if (searchvalue.equals("rating")) {
-                List<?> empDetail = appraisalPerformanceService.readPMPSearchByEmployee(appraisalPerformanceMaster,Integer.parseInt(pyear));
+                List<?> empDetail = appraisalPerformanceService.readPMPSearchByEmployee(appraisalPerformanceMaster, Integer.parseInt(pyear));
                 mv.getModelMap().put("list", empDetail);
                 response.setContentType("application/vnd.ms-excel");
                 response.setHeader("Content-Disposition", "attachment; filename=EmployeePMPRating.xls");
@@ -8156,5 +8156,246 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                     "Info : Your Request Are Done");
         }
         return mv;
+    }
+
+    private synchronized void mailSendForKraRegistration() throws Exception {
+
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        Calendar c = Calendar.getInstance();
+        Date d = new Date();
+        c.setTime(d);
+        c.add(Calendar.DAY_OF_MONTH, -1);
+        Date checkDate = c.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String CheckDate = sdf.format(checkDate);
+        AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
+        List<?> empList = employeeMasterService.readByJoinDate(CheckDate);
+        if (!empList.isEmpty()) {
+            for (Object o : empList) {
+                employeeMaster = (EmployeeMaster) o;
+                int employeeId = employeeMaster.getId();
+                String emailId = employeeMaster.getEmailAddress();
+                List<?> apmList = appraisalPerformanceService.readByEmpID(employeeId);
+                if (!apmList.isEmpty()) {
+                    for (Object o1 : apmList) {
+                        appraisalPerformanceMaster = (AppraisalPerformanceMaster) o1;
+                        int status = appraisalPerformanceMaster.getStatus();
+                        if (status == 0) {
+                            EmailTemplate emailTemplate = emailTemplateService.readById(140); ///////141 template for probation to confirm
+                            for (String emailId1 : emailId.split(",")) {
+                                if (!emailId1.equals("")) {
+                                    String To1 = emailId1;
+                                    String from1 = employeeMaster.getOfficeEmailId();
+                                    String subject1 = emailTemplate.getSubject();
+                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                                    String msg1 = emailTemplate.getBodytext();
+                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                                    sendMail.sendMail(from1, To1, subject1, msg1);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    EmailTemplate emailTemplate = emailTemplateService.readById(140); ///////141 template for probation to confirm
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMaster.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+                        }
+                    }
+                }
+            }
+        }
+
+        Calendar cal1 = Calendar.getInstance();
+        cal1.add(Calendar.DAY_OF_MONTH, -3);
+        Date checkDate1 = cal1.getTime();
+        String CheckDate1 = sdf.format(checkDate1);
+        List<?> empList1 = employeeMasterService.readByJoinDate(CheckDate1);
+        if (!empList1.isEmpty()) {
+            for (Object o : empList1) {
+                employeeMaster = (EmployeeMaster) o;
+                int employeeId = employeeMaster.getId();
+                String emailId = employeeMaster.getEmailAddress();
+                List<?> apmList = appraisalPerformanceService.readByEmpID(employeeId);
+                if (!apmList.isEmpty()) {
+                    for (Object o1 : apmList) {
+                        appraisalPerformanceMaster = (AppraisalPerformanceMaster) o1;
+                        int status = appraisalPerformanceMaster.getStatus();
+                        if (status == 0) {
+                            EmailTemplate emailTemplate = emailTemplateService.readById(140); ///////141 template for probation to confirm
+                            for (String emailId1 : emailId.split(",")) {
+                                if (!emailId1.equals("")) {
+                                    String To1 = emailId1;
+                                    String from1 = employeeMaster.getOfficeEmailId();
+                                    String subject1 = emailTemplate.getSubject();
+                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                                    String msg1 = emailTemplate.getBodytext();
+                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                                    sendMail.sendMail(from1, To1, subject1, msg1);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    EmailTemplate emailTemplate = emailTemplateService.readById(140); ///////141 template for probation to confirm
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMaster.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+                        }
+                    }
+                }
+            }
+        }
+        Calendar cal2 = Calendar.getInstance();
+        cal2.add(Calendar.DAY_OF_MONTH, -7);
+        Date checkDate2 = cal2.getTime();
+        String CheckDate2 = sdf.format(checkDate2);
+        List<?> empList2 = employeeMasterService.readByJoinDate(CheckDate2);
+        if (!empList2.isEmpty()) {
+            for (Object o : empList2) {
+                employeeMaster = (EmployeeMaster) o;
+                int employeeId = employeeMaster.getId();
+                String emailId = employeeMaster.getEmailAddress();
+                List<?> apmList = appraisalPerformanceService.readByEmpID(employeeId);
+                if (!apmList.isEmpty()) {
+                    for (Object o1 : apmList) {
+                        appraisalPerformanceMaster = (AppraisalPerformanceMaster) o1;
+                        int status = appraisalPerformanceMaster.getStatus();
+                        if (status == 0) {
+                            EmailTemplate emailTemplate = emailTemplateService.readById(140); ///////141 template for probation to confirm
+                            for (String emailId1 : emailId.split(",")) {
+                                if (!emailId1.equals("")) {
+                                    String To1 = emailId1;
+                                    String from1 = employeeMaster.getOfficeEmailId();
+                                    String subject1 = emailTemplate.getSubject();
+                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                                    String msg1 = emailTemplate.getBodytext();
+                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                                    sendMail.sendMail(from1, To1, subject1, msg1);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    EmailTemplate emailTemplate = emailTemplateService.readById(140); ///////141 template for probation to confirm
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMaster.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+                        }
+                    }
+                }
+            }
+        }
+        Calendar cal3 = Calendar.getInstance();
+        cal3.add(Calendar.DAY_OF_MONTH, -15);
+        Date checkDate3 = cal3.getTime();
+        String CheckDate3 = sdf.format(checkDate3);
+        List<?> empList3 = employeeMasterService.readByJoinDate(CheckDate3);
+        if (!empList3.isEmpty()) {
+            for (Object o : empList3) {
+                employeeMaster = (EmployeeMaster) o;
+                int employeeId = employeeMaster.getId();
+                String emailId = employeeMaster.getEmailAddress();
+                List<?> apmList = appraisalPerformanceService.readByEmpID(employeeId);
+                if (!apmList.isEmpty()) {
+                    for (Object o1 : apmList) {
+                        appraisalPerformanceMaster = (AppraisalPerformanceMaster) o1;
+                        int status = appraisalPerformanceMaster.getStatus();
+                        if (status == 0) {
+                            EmailTemplate emailTemplate = emailTemplateService.readById(140); ///////141 template for probation to confirm
+                            for (String emailId1 : emailId.split(",")) {
+                                if (!emailId1.equals("")) {
+                                    String To1 = emailId1;
+                                    String from1 = employeeMaster.getOfficeEmailId();
+                                    String subject1 = emailTemplate.getSubject();
+                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                                    String msg1 = emailTemplate.getBodytext();
+                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                                    sendMail.sendMail(from1, To1, subject1, msg1);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    EmailTemplate emailTemplate = emailTemplateService.readById(140); ///////141 template for probation to confirm
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMaster.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+                        }
+                    }
+                }
+            }
+        }
+        Calendar cal4 = Calendar.getInstance();
+        cal4.add(Calendar.DAY_OF_MONTH, -30);
+        Date checkDate4 = cal4.getTime();
+        String CheckDate4 = sdf.format(checkDate4);
+        List<?> empList4 = employeeMasterService.readByJoinDate(CheckDate4);
+        if (!empList4.isEmpty()) {
+            for (Object o : empList4) {
+                employeeMaster = (EmployeeMaster) o;
+                int employeeId = employeeMaster.getId();
+                String emailId = employeeMaster.getEmailAddress();
+                List<?> apmList = appraisalPerformanceService.readByEmpID(employeeId);
+                if (!apmList.isEmpty()) {
+                    for (Object o1 : apmList) {
+                        appraisalPerformanceMaster = (AppraisalPerformanceMaster) o1;
+                        int status = appraisalPerformanceMaster.getStatus();
+                        if (status == 0) {
+                            EmailTemplate emailTemplate = emailTemplateService.readById(140); ///////141 template for probation to confirm
+                            for (String emailId1 : emailId.split(",")) {
+                                if (!emailId1.equals("")) {
+                                    String To1 = emailId1;
+                                    String from1 = employeeMaster.getOfficeEmailId();
+                                    String subject1 = emailTemplate.getSubject();
+                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                                    String msg1 = emailTemplate.getBodytext();
+                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                                    sendMail.sendMail(from1, To1, subject1, msg1);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    EmailTemplate emailTemplate = emailTemplateService.readById(140); ///////141 template for probation to confirm
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMaster.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }

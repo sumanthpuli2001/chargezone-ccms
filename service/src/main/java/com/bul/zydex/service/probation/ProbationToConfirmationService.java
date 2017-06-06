@@ -31,4 +31,7 @@ public interface ProbationToConfirmationService<T> extends GenericsService<T> {
     public List<?> readConfimationDateByTodayDateWise(T object);
 
     public List<?> readConfirmedEmployee();
+
+    public List<?> readByAssessmentToDate(String date);
+
 }

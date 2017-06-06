@@ -150,4 +150,26 @@ public class AttendanceRegularizationMasterDAOImpl<T> extends GenericsDAOImpl<T>
                 + " order by a.id desc";
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> readArCountList(T object) {
+        AttendanceRegularization attendanceRegularization = (AttendanceRegularization) object;
+        String query = "SELECT a.id,a.start_date_time,a.end_date_time "
+                + " FROM attendance_regularization a"
+                + " inner join employee_master b on b.user_master_id = a.user_master_id"
+                + " WHERE b.user_master_id =" + attendanceRegularization.getUserMasterId()
+                + " AND a.status = 1"
+                + " AND DATE_FORMAT(STR_TO_DATE('" + attendanceRegularization.getStartDateTime() + "', '%d/%m/%Y'),'%Y-%m-%d') "
+                + " BETWEEN DATE_FORMAT(STR_TO_DATE(a.start_date_time, '%d/%m/%Y'),'%Y-%m-%d') "
+                + " AND DATE_FORMAT(STR_TO_DATE(a.end_date_time, '%d/%m/%Y'),'%Y-%m-%d')";
+//        String query = "SELECT a.id,a.startDateTime,a.endDateTime"
+//                + " FROM AttendanceRegularization a"
+//                + " LEFT JOIN a.employeeMaster b"
+//                + " WHERE b.userMaster.id =" + attendanceRegularization.getUserMasterId()
+//                + " AND a.status = 1"
+//                + " AND DATE_FORMAT(STR_TO_DATE('" + attendanceRegularization.getStartDateTime() + "', '%Y-%m-%d'),'%Y-%m-%d') "
+//                + " BETWEEN DATE_FORMAT(STR_TO_DATE(a.startDateTime, '%d/%m/%Y %H:%i:%s'),'%Y-%m-%d') "
+//                + " AND DATE_FORMAT(STR_TO_DATE(a.endDateTime, '%d/%m/%Y %H:%i:%s'),'%Y-%m-%d')";
+        return getSession().createSQLQuery(query).list();
+    }
 }

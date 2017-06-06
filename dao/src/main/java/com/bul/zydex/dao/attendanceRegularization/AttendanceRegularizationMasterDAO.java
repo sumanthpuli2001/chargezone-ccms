@@ -27,13 +27,14 @@ public interface AttendanceRegularizationMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readByAttendanceRegularizationApproverPendingList(T object);
 
     public List<?> readByAttendanceRegularizationApprover2PendingList(T object);
-    
+
     public List<?> userReportingManager(int id);
-    
+
     public List<?> searchLeaveApproveOfEmployeeByMonthWise(T object);
-    
+
     public List<?> searchLeaveApproveOfEmployeeByPreviousMonthWise(T object);
-    
+
     public List<?> powerAdminAttendanceRegularizationList();
 
+    public List<?> readArCountList(T object);
 }

@@ -81,4 +81,8 @@ public class AttendanceRegularizationMasterServiceImpl<T> extends GenericsServic
         return attendanceRegularizationMasterDAO.powerAdminAttendanceRegularizationList();
     }
 
+    @Override
+    public List<?> readArCountList(T object) {
+        return attendanceRegularizationMasterDAO.readArCountList(object);
+    }
 }

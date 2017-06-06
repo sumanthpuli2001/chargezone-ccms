@@ -687,4 +687,20 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> leaveApplicationRequest(T object) {
+        LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
+        String query = "";
+
+        query += " Select b.leaveType, a.startDate, a.startDateStatus, a.endDate, a.endDateStatus, a.noOfDays, a.empRemark, a.status, a.hrRemark"
+                + " FROM LeaveEmployeeDetail a"
+                + " LEFT JOIN a.leaveTypeMaster b"
+                + " LEFT JOIN a.employeeMaster c"
+                + " LEFT JOIN c.userMaster d"
+                + " WHERE c.id=" + leaveEmployeeDetail.getEmployeeMaster().getId()
+                + " AND a.id=" + leaveEmployeeDetail.getId();
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

@@ -8,8 +8,12 @@ package com.bul.zydex.webservice;
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.ItRequestType;
 import com.bul.zydex.model.ItServiceRequest;
+import com.bul.zydex.model.LevelMaster;
+import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.service.emprequest.ItRequestTypeService;
 import com.bul.zydex.service.emprequest.ItServiceRequestService;
+import com.bul.zydex.service.level.LevelMasterService;
+import com.bul.zydex.service.location.LocationMasterService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +29,24 @@ public class ItWebServiceAbstract extends CustomAbstract {
 
     protected ItRequestTypeService<ItRequestType> itRequestTypeService;
     protected ItServiceRequestService<ItServiceRequest> itServiceRequestService;
+     protected LevelMasterService<LevelMaster> levelMasterService;
+    protected LocationMasterService<LocationMaster> locationMasterService;
+
+    public LevelMasterService<LevelMaster> getLevelMasterService() {
+        return levelMasterService;
+    }
+
+    public void setLevelMasterService(LevelMasterService<LevelMaster> levelMasterService) {
+        this.levelMasterService = levelMasterService;
+    }
+
+    public LocationMasterService<LocationMaster> getLocationMasterService() {
+        return locationMasterService;
+    }
+
+    public void setLocationMasterService(LocationMasterService<LocationMaster> locationMasterService) {
+        this.locationMasterService = locationMasterService;
+    }
 
     public ItRequestTypeService<ItRequestType> getItRequestTypeService() {
         return itRequestTypeService;

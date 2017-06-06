@@ -7,7 +7,10 @@ package com.bul.zydex.webservice.Travel;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.CurrencyMaster;
+import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.HotelAccommodation;
+import com.bul.zydex.model.LevelMaster;
+import com.bul.zydex.model.OverTimeMaster;
 import com.bul.zydex.model.PolicyDeviationForAir;
 import com.bul.zydex.model.TravelApproverHistory;
 import com.bul.zydex.model.TravelDetail;
@@ -15,6 +18,9 @@ import com.bul.zydex.model.TravelRequestMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.service.CurrencyMasterService;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
+import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
+import com.bul.zydex.service.level.LevelMasterService;
+import com.bul.zydex.service.overTime.OverTimeMasterService;
 import com.bul.zydex.service.travel.HotelAccommodationService;
 import com.bul.zydex.service.travel.PolicyDeviationForAirService;
 import com.bul.zydex.service.travel.TravelApproverHistoryService;
@@ -22,6 +28,9 @@ import com.bul.zydex.service.travel.TravelDetailService;
 import com.bul.zydex.service.travel.TravelRequestMasterService;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import org.json.JSONException;
@@ -39,6 +48,42 @@ public abstract class TravelWebServiceAbstract extends CustomAbstract {
     protected HotelAccommodationService<HotelAccommodation> hotelAccommodationService;
     protected CurrencyMasterService<CurrencyMaster> currencyMasterService;
     protected TravelApproverHistoryService<TravelApproverHistory> travelApproverHistoryService;
+    protected LevelMasterService<LevelMaster> levelMasterService;
+    protected EmployeeLeaveBalanceService<EmployeeLeaveBalance> employeeLeaveBalanceService;
+    protected OverTimeMasterService<OverTimeMaster> overTimeMasterService;
+    protected UserRightMasterService<UserRightMaster> userRightMasterService;
+
+    public UserRightMasterService<UserRightMaster> getUserRightMasterService() {
+        return userRightMasterService;
+    }
+
+    public void setUserRightMasterService(UserRightMasterService<UserRightMaster> userRightMasterService) {
+        this.userRightMasterService = userRightMasterService;
+    }
+
+    public OverTimeMasterService<OverTimeMaster> getOverTimeMasterService() {
+        return overTimeMasterService;
+    }
+
+    public void setOverTimeMasterService(OverTimeMasterService<OverTimeMaster> overTimeMasterService) {
+        this.overTimeMasterService = overTimeMasterService;
+    }
+
+    public EmployeeLeaveBalanceService<EmployeeLeaveBalance> getEmployeeLeaveBalanceService() {
+        return employeeLeaveBalanceService;
+    }
+
+    public void setEmployeeLeaveBalanceService(EmployeeLeaveBalanceService<EmployeeLeaveBalance> employeeLeaveBalanceService) {
+        this.employeeLeaveBalanceService = employeeLeaveBalanceService;
+    }
+
+    public LevelMasterService<LevelMaster> getLevelMasterService() {
+        return levelMasterService;
+    }
+
+    public void setLevelMasterService(LevelMasterService<LevelMaster> levelMasterService) {
+        this.levelMasterService = levelMasterService;
+    }
 
     public TravelRequestMasterService<TravelRequestMaster> getTravelRequestMasterService() {
         return travelRequestMasterService;
@@ -108,5 +153,16 @@ public abstract class TravelWebServiceAbstract extends CustomAbstract {
 //        }
         return jsonObject;
 
+    }
+     protected void readcurrencyList(HttpServletRequest request) {
+        CurrencyMaster currencyMaster = new CurrencyMaster();
+        List<?> currencyList = currencyMasterService.read();
+        Map<Integer, String> currencyMap = new HashMap<>();
+        for (Object o : currencyList) {
+            currencyMaster = (CurrencyMaster) o;
+            currencyMap.put(currencyMaster.getId(), currencyMaster.getCurrencyName() + "(" + currencyMaster.getCurrencyCode() + ")");
+        }
+
+        request.setAttribute("currencyMap", currencyMap);
     }
 }

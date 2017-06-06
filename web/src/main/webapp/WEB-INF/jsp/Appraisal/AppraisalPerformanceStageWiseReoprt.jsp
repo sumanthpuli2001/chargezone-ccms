@@ -22,6 +22,7 @@
                 $('#selecctallId').show();
 
                 $('#departmentIdDiv').show();
+                $('#yearid').show();
                 $('#competencyEId').hide(500);
 
             } else if (val == 'competency') {
@@ -29,6 +30,8 @@
                 $('#stages').hide();
                 $('#stages1').hide();
                 $('#selecctallId').hide();
+                $('#yearid').hide();
+                
 //                $('#departmentIdDiv').show();
 
             } else if (val == 'rating') {
@@ -36,6 +39,7 @@
                 $('#stages').hide();
                 $('#stages1').hide();
                 $('#selecctallId').hide();
+                $('#yearid').show();
 //                $('#departmentIdDiv').show();
 
             } else if (val == 'idp') {
@@ -43,6 +47,8 @@
                 $('#stages').hide();
                 $('#stages1').hide();
                 $('#selecctallId').hide();
+                $('#yearid').hide();
+                
 //                $('#departmentIdDiv').show();
 
             }
@@ -105,6 +111,16 @@
                                                     <option value="">--SELECT--</option>
                                                     <c:forEach var="competencyMap" items="${competencyMap}">
                                                         <option value="${competencyMap.key}">${competencyMap.value}</option>
+                                                    </c:forEach>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-sm-3" id="yearid" >
+                                                    <label>Year:</label>
+                                                    <select name="pmpyear" id="pmpyear" class="form-control"/>
+                                                    <!--<option value="">--SELECT--</option>-->
+                                                    <c:forEach var="pmpyearMap" items="${pmpyearList}">
+                                                        <option value="${pmpyearMap.value}">${pmpyearMap.value}-${pmpyearMap.value+1}</option>
                                                     </c:forEach>
                                                     </select>
                                                 </div>

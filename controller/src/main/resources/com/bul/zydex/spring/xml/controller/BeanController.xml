@@ -78,7 +78,7 @@
         <property name="shiftGenerateMonthlyScheduleService" ref="shiftGenerateMonthlyScheduleService1" />
         <property name="zydexLocationMasterService" ref="zydexLocationMasterService1" />
         <property name="competencyEvaluationMasterService" ref="competencyEvaluationMasterService1" />
-         <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1" />
+        <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1" />
     </bean>
     <!--Department Master-->
     <bean id="departmentMasterController1" class="com.bul.zydex.controller.emp.DepartmentMasterController" parent="controllerConfig" >
@@ -564,6 +564,11 @@
         <property name="hotelAccommodationService" ref="hotelAccommodationService1" />
         <property name="currencyMasterService" ref="currencyMasterService1" />
         <property name="travelApproverHistoryService" ref="travelApproverHistoryService1" />
+        <property name="levelMasterService" ref="levelMasterService1" />
+        <property name="designationMasterService" ref="designationMasterService1" />
+        <property name="employeeMasterService" ref="employeeMasterService1" />
+        <property name="overTimeMasterService" ref="overTimeMasterService1" />
+        <property name="employeeLeaveBalanceService" ref="employeeLeaveBalanceService1" />
     </bean>
     <bean id="expenseWebService1" class="com.bul.zydex.webservice.Expense.ExpenseWebService" parent="controllerConfig">
         
@@ -571,11 +576,23 @@
     <bean id="itWebService1" class="com.bul.zydex.webservice.ItWebService" parent="controllerConfig">
         <property name="itRequestTypeService" ref="itRequestTypeService1" />
         <property name="itServiceRequestService" ref="itServiceRequestService1" />
+        <property name="levelMasterService" ref="levelMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />     
     </bean>
     <bean id="hrWebService1" class="com.bul.zydex.webservice.HrWebService" parent="controllerConfig">
         <property name="hrServiceRequestService" ref="hrServiceRequestService1" />
         <property name="queryTypeService" ref="queryTypeService1" />
+        <property name="levelMasterService" ref="levelMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
         
+    </bean>
+    <bean id="attendanceRegularizationMasterwebServices1"  class="com.bul.zydex.webservice.AttendanceRegularizationMasterwebServices" parent="controllerConfig" >
+        <property name="attendanceRegularizationMasterService" ref="attendanceRegularizationMasterService1" /> 
+        <property name="levelMasterService" ref="levelMasterService1" />        
+        <property name="locationMasterService" ref="locationMasterService1" />
+        <property name="employeeShiftDataService" ref="employeeShiftDataService1" />
+        <property name="employeeLeaveBalanceService" ref="employeeLeaveBalanceService1" />
+        <property name="overTimeMasterService" ref="overTimeMasterService1" />
     </bean>
     
     <bean id="urlMasterController1" class="com.bul.zydex.controller.url.UrlMasterController" parent="controllerConfig" >

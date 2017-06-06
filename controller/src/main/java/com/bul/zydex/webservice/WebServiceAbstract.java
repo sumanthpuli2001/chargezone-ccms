@@ -38,10 +38,13 @@ import com.bul.zydex.service.travel.TravelRequestMasterService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -72,7 +75,6 @@ public abstract class WebServiceAbstract extends CustomAbstract {
     public void setEmployeeShiftDataService(EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService) {
         this.employeeShiftDataService = employeeShiftDataService;
     }
-    
 
     public ItServiceRequestService<ItServiceRequest> getItServiceRequestService() {
         return itServiceRequestService;
@@ -89,6 +91,7 @@ public abstract class WebServiceAbstract extends CustomAbstract {
     public void setHrServiceRequestService(HrServiceRequestService<HrServiceRequest> hrServiceRequestService) {
         this.hrServiceRequestService = hrServiceRequestService;
     }
+
     public TravelRequestMasterService<TravelRequestMaster> getTravelRequestMasterService() {
         return travelRequestMasterService;
     }
@@ -104,7 +107,7 @@ public abstract class WebServiceAbstract extends CustomAbstract {
     public void setExpenseMasterService(ExpenseMasterService<ExpenseMaster> expenseMasterService) {
         this.expenseMasterService = expenseMasterService;
     }
-    
+
     public LocationMasterService<LocationMaster> getLocationMasterService() {
         return locationMasterService;
     }
@@ -184,6 +187,99 @@ public abstract class WebServiceAbstract extends CustomAbstract {
 
         return jsonObject;
 
+    }
+
+    protected void readleaveType(HttpServletRequest request) {
+        List list = leaveTypeMasterService.read();
+        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+        Map<Integer, String> leaveTypemap = new HashMap();
+        for (Object o : list) {
+            leaveTypeMaster = (LeaveTypeMaster) o;
+            leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType());
+        }
+        request.setAttribute("leaveTypemap11", leaveTypemap);
+    }
+
+    public void selectEmployeeForParticularManager(HttpServletRequest request,
+            HttpServletResponse response, int id) throws Exception {
+
+        List<?> list = employeeMasterService.readEmployeeForParticularManager(id);
+        String tempStr = "[";
+        Object[] arrayOfObject;
+
+        EmployeeMaster employeeMaster;
+        boolean flag = false;
+        for (Iterator<? extends Object> it = list.iterator(); it.hasNext();) {
+            arrayOfObject = (Object[]) it.next();
+
+            if (flag) {
+                tempStr += ", ";
+            }
+            flag = true;
+            tempStr += "{id: \"" + arrayOfObject[0]
+                    + "\", name: \"" + arrayOfObject[1]
+                    + "  /" + arrayOfObject[2]
+                    + "  /" + arrayOfObject[3]
+                    + "  /" + arrayOfObject[4]
+                    + "  /" + arrayOfObject[5] + "\"}";
+
+        }
+        tempStr += "]";
+
+        request.setAttribute("list", tempStr);
+    }
+
+    protected void addleaveType(HttpServletRequest request) {
+        List list = leaveTypeMasterService.read();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+
+        EmployeeMaster employeeSession = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
+        zydexLocationMaster = zydexLocationMasterService.readById(employeeSession.getZydexLocationMaster().getId());
+
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+        employeeMaster.setUserMaster(user);
+        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empId.get(0);
+        }
+        employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+        Map<Integer, String> leaveTypemap = new HashMap();
+        for (Object o : list) {
+            leaveTypeMaster = (LeaveTypeMaster) o;
+            employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+//          if((zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D")) && leaveTypeMaster.getLeaveType().equals("Short Leave")){
+//              
+//          }else{
+
+            List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+            if (!balanceList.isEmpty()) {
+                employeeLeaveBalance = (EmployeeLeaveBalance) balanceList.get(0);
+            }
+            try {
+                if (null != employeeMaster.getGender() && employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Paternity Leave")) {
+
+                } else if (!employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Maternity Leave")) {
+
+                } else if (employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Maternity Leave")) {
+                    leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(As Per Maternity Act)");
+
+                } else if (!employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Paternity Leave") && employeeMaster.getMaritalStatus().equals("UnMarried")) {
+
+                } else if (leaveTypeMaster.getId().intValue() == employeeLeaveBalance.getLeaveTypeMaster().getId().intValue() && !balanceList.isEmpty()) {
+                    leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(" + employeeLeaveBalance.getNoOfLeaveRemain() + ")");
+                } else {
+                    leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(" + 0 + ")");
+                }
+            } catch (Exception e) {
+
+            }
+//          }
+
+        }
+        request.setAttribute("leaveTypemap", leaveTypemap);
     }
 
 }

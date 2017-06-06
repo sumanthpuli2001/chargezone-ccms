@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -63,9 +63,11 @@ public interface LeaveEmployeeDetailDAO<T> extends GenericsDAO<T> {
     public List<?> readDate(T object);
 
     public List<?> leaveCheck(T object);
-    
+
     public List<?> leaveCheckStartDate(T object);
-    
+
     public List<?> plLeaveCheck(int empId);
+
+    public List<?> leaveApplicationRequest(T object);
 
 }

@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -54,6 +55,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.sf.ehcache.util.counter.Counter;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -538,6 +540,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
                 Date date = new Date();
                 Format formatter = new SimpleDateFormat("dd/MM/YYYY");
+                List< ?> employeeShiftPunchList = new ArrayList<Object>();
 
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                 String s = formatter.format(date);
@@ -569,50 +572,43 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     shiftName = shiftMaster1.getShiftName();
                     shiftTime = shiftMaster1.getEndTime();
                 } else if (empShiftList.size() > 0) {
-                    shiftMaster.setId(Integer.parseInt(shiftId));
-                    shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
-                    shiftName = shiftMaster1.getShiftName();
-                    shiftTime = shiftMaster1.getEndTime();
+                    if (!shiftId.equals("-1")) {
+                        shiftMaster.setId(Integer.parseInt(shiftId));
+                        shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
+                        shiftName = shiftMaster1.getShiftName();
+                        shiftTime = shiftMaster1.getEndTime();
 
-                }
-//                =========================== Auto Capture Shift========================
-                EmployeeMaster employeeMaster1 = employeeMasterService.readById(employeeMaster.getId());
-                if (!employeeMaster1.getZydexLocationMaster().getId().equals(1) && !employeeMaster1.getZydexLocationMaster().getId().equals(6)) {
-
-                    SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                    SimpleDateFormat timeFormat1 = new SimpleDateFormat("HH:mm");
-                    String dynamicShiftDateTime = employeeDatetimeData1.getDateTime();
-                    Date dynamicTime = sdf3.parse(dynamicShiftDateTime);
-
-                    Date date1 = new Date();
-                    Date dateBefore = new Date(date1.getTime() - 24 * 60 * 60 * 1000);
-                    String yesterdayDate = formatter.format(dateBefore);
-                    ShiftMaster generalShift = new ShiftMaster();
-                    if (employeeMaster1.getZydexLocationMaster().getId().equals(1) && employeeMaster1.getZydexLocationMaster().getId().equals(6)) {
-                        generalShift = shiftMasterService.readById(1);
-                    } else {
-                        generalShift = shiftMasterService.readById(6);
                     }
+                }
+
+                //////////////////////////// new code///////////////////////////////////////////
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(employeeMaster.getId());
+                SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+                if (!employeeMaster1.getZydexLocationMaster().getId().equals(1)
+                        && !employeeMaster1.getZydexLocationMaster().getId().equals(6)) {
+
                     ShiftMaster firstShift = shiftMasterService.readById(3);
                     ShiftMaster secondShift = shiftMasterService.readById(4);
                     ShiftMaster nightShift = shiftMasterService.readById(5);
+                    ShiftMaster generalShift = shiftMasterService.readById(6);
+                    Date date1 = new Date();
+                    Date dateBefore = new Date(date1.getTime() - 24 * 60 * 60 * 1000);
+                    String yesterdayDate = formatter.format(dateBefore);
 
-//                String generalShiftStartTime = "02/07/2016" + " " + generalShift.getStartTime();
-//                String firstShiftStartTime = "02/07/2016" + " " + firstShift.getStartTime();
-//                String secondShiftStartTime = "02/07/2016" + " " + secondShift.getStartTime();
-//                String nightShiftStartTime = "02/07/2016" + " " + nightShift.getStartTime();
-//                String yesterdatSecondShiftStartTime = "01/07/2016" + " " + secondShift.getStartTime();
                     String generalShiftStartTime = s + " " + generalShift.getStartTime();
                     String firstShiftStartTime = s + " " + firstShift.getStartTime();
                     String secondShiftStartTime = s + " " + secondShift.getStartTime();
                     String nightShiftStartTime = s + " " + nightShift.getStartTime();
                     String yesterdatSecondShiftStartTime = yesterdayDate + " " + secondShift.getStartTime();
+                    String yesterdayNightStartTime = yesterdayDate + " " + nightShift.getStartTime();
 
                     Date dategeneralShiftStartTime = sdf3.parse(generalShiftStartTime);
                     Date dateFirstShiftStartTime = sdf3.parse(firstShiftStartTime);
                     Date dateSecondShiftStartTime = sdf3.parse(secondShiftStartTime);
                     Date dateNightShiftStartTime = sdf3.parse(nightShiftStartTime);
                     Date dateyesterdatSecondShiftStartTime = sdf3.parse(yesterdatSecondShiftStartTime);
+                    Date dateyesterdatNightShiftStartTime = sdf3.parse(yesterdayNightStartTime);
 
                     Calendar calGeneralShiftBefore = Calendar.getInstance();
                     Calendar calGeneralShiftAfter = Calendar.getInstance();
@@ -624,6 +620,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     Calendar calNightShiftAfter = Calendar.getInstance();
                     Calendar calYesterSecondShiftBefore = Calendar.getInstance();
                     Calendar calYesterSecondShiftAfter = Calendar.getInstance();
+                    Calendar calYesterNightShiftBefore = Calendar.getInstance();
+                    Calendar calYesterNightShiftAfter = Calendar.getInstance();
 
                     calGeneralShiftBefore.setTime(dategeneralShiftStartTime);
                     calGeneralShiftBefore.add(Calendar.MINUTE, -90);
@@ -632,165 +630,677 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     calGeneralShiftAfter.add(Calendar.HOUR, 2);
 
                     calFirstShiftBefore.setTime(dateFirstShiftStartTime);
-                    calFirstShiftBefore.add(Calendar.HOUR, -2);
+                    calFirstShiftBefore.add(Calendar.HOUR, -4);
 
                     calFirstShiftAfter.setTime(dateFirstShiftStartTime);
                     calFirstShiftAfter.add(Calendar.HOUR, 2);
 
                     calSecondShiftBefore.setTime(dateSecondShiftStartTime);
-                    calSecondShiftBefore.add(Calendar.HOUR, -2);
+                    calSecondShiftBefore.add(Calendar.HOUR, -4);
 
                     calSecondShiftAfter.setTime(dateSecondShiftStartTime);
                     calSecondShiftAfter.add(Calendar.HOUR, 2);
 
                     calNightShiftBefore.setTime(dateNightShiftStartTime);
-                    calNightShiftBefore.add(Calendar.HOUR, -2);
+                    calNightShiftBefore.add(Calendar.HOUR, -4);
 
                     calNightShiftAfter.setTime(dateNightShiftStartTime);
                     calNightShiftAfter.add(Calendar.HOUR, 2);
 
                     calYesterSecondShiftBefore.setTime(dateyesterdatSecondShiftStartTime);
-                    calYesterSecondShiftBefore.add(Calendar.HOUR, -2);
+                    calYesterSecondShiftBefore.add(Calendar.HOUR, -4);
 
                     calYesterSecondShiftAfter.setTime(dateyesterdatSecondShiftStartTime);
                     calYesterSecondShiftAfter.add(Calendar.HOUR, 2);
 
-                    if ((dynamicTime.after(calGeneralShiftBefore.getTime()) || dynamicTime.equals(calGeneralShiftBefore.getTime()))
-                            && (dynamicTime.before(calGeneralShiftAfter.getTime()) || dynamicTime.equals(calGeneralShiftAfter.getTime()))) {
-                        daynamicShiftName = generalShift.getShiftName();
-                        if (daynamicShiftName.equals("General")) {
-                            shiftMaster1 = shiftMasterService.readById(1);
-                        } else {
-                            shiftMaster1 = shiftMasterService.readById(6);
-                        }
-                    } else if ((dynamicTime.after(calFirstShiftBefore.getTime()) || dynamicTime.equals(calFirstShiftBefore.getTime()))
-                            && (dynamicTime.before(calFirstShiftAfter.getTime()) || dynamicTime.equals(calFirstShiftAfter.getTime()))) {
+                    calYesterNightShiftBefore.setTime(dateyesterdatNightShiftStartTime);
+                    calYesterNightShiftBefore.add(Calendar.HOUR, -4);
+
+                    calYesterNightShiftAfter.setTime(dateyesterdatNightShiftStartTime);
+                    calYesterNightShiftAfter.add(Calendar.HOUR, 2);
+
+                    if (shiftName.equals("First")) {
+
                         List<?> employeeYesterdayPunchData = employeeDatetimeDataService.readYesterdayEmployeeData("" + employeeMaster.getId());
+                        int yesterDayNo = Integer.parseInt(s1[0]) - 1;
 
+                        String yestershiftId = "";
+                        String yesterNightPunchEntry = "";
                         if (!employeeYesterdayPunchData.isEmpty()) {
-                            EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) employeeYesterdayPunchData.get(0);
-                            EmployeeDatetimeData employeeDatetimeData2 = (EmployeeDatetimeData) employeeYesterdayPunchData.get(employeeYesterdayPunchData.size() - 1);
-                            String startPunchTime = employeeDatetimeData.getDateTime();
-                            String endPunchTime = employeeDatetimeData2.getDateTime();
-                            Date punchTime1 = sdf3.parse(startPunchTime);
-                            Date punchTime2 = sdf3.parse(endPunchTime);
-                            if ((punchTime1.after(calYesterSecondShiftBefore.getTime()) || punchTime1.equals(calYesterSecondShiftBefore.getTime()))
-                                    && (punchTime1.before(calYesterSecondShiftAfter.getTime()) || punchTime1.equals(calYesterSecondShiftAfter.getTime()))) {
-                                daynamicShiftName = firstShift.getShiftName();
-                                shiftMaster1 = shiftMasterService.readById(3);
-                            } else if ((punchTime2.after(calYesterSecondShiftBefore.getTime()) || punchTime2.equals(calYesterSecondShiftBefore.getTime()))
-                                    && (punchTime2.before(calYesterSecondShiftAfter.getTime()) || punchTime2.equals(calYesterSecondShiftAfter.getTime()))) {
-                                daynamicShiftName = firstShift.getShiftName();
-                                shiftMaster1 = shiftMasterService.readById(3);
-                            } else {
-                                daynamicShiftName = nightShift.getShiftName();
-                                shiftMaster1 = shiftMasterService.readById(5);
-                                shiftTime = shiftMaster1.getEndTime();
+                            int countNightPunch = 1;
+                            for (Object o : employeeYesterdayPunchData) {
+                                EmployeeDatetimeData employeeyesterDayData = (EmployeeDatetimeData) o;
+                                String checkPunchNight = employeeyesterDayData.getDateTime();
+                                Date FirstPunch1 = sdf3.parse(checkPunchNight);
+                                if (countNightPunch == 1 && (FirstPunch1.after(calYesterNightShiftBefore.getTime()) || FirstPunch1.equals(calYesterNightShiftBefore.getTime()))) {
+                                    yesterNightPunchEntry = checkPunchNight;
+                                    countNightPunch++;
+                                }
+
                             }
+                        }
+
+                        List<?> empYesterShiftList = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftData(shiftGenerateMonthlySchedule, yesterDayNo);
+                        if (!empYesterShiftList.isEmpty()) {
+                            yestershiftId = "" + empYesterShiftList.get(0);
+                        }
+                        if (!employeeYesterdayPunchData.isEmpty() && !yesterNightPunchEntry.equals("") && yestershiftId.equals("5")) {
+                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            String newShiftTime = "";
+                            Date time = timeFormat.parse(shiftTime);
+                            Calendar cal22 = Calendar.getInstance();
+                            List dayWiseShiftList = new ArrayList();
+                            cal22.setTime(time);
+                            cal22.add(Calendar.HOUR_OF_DAY, 8);
+                            time = cal22.getTime();
+                            newShiftTime = timeFormat.format(time);
+                            String newShiftTimeSplit = "";
+                            cal22.setTime(time);
+                            cal22.add(Calendar.HOUR_OF_DAY, 8);
+                            time = cal22.getTime();
+                            newShiftTime = timeFormat.format(time);
+                            newShiftTimeSplit = newShiftTime.split(":")[0];
+
+                            employeeShiftPunchList = employeeDatetimeDataService.readTodaysEmployeeData("" + employeeMaster.getId());
+                            if (!employeeShiftPunchList.isEmpty()) {
+                                Object o = employeeShiftPunchList.get(0);
+                                EmployeeDatetimeData employeeTodayDatetimeData = (EmployeeDatetimeData) o;
+                                String todayFirstPunch = employeeTodayDatetimeData.getDateTime();
+                                employeeShiftData.setEmployeeMaster(employeeTodayDatetimeData.getEmployeeMaster());
+
+                                EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                                dayWiseShiftList = employeeShiftDataService.getPastAndCurrentPunch(employeeShiftData, newShiftTime);
+                                if (!dayWiseShiftList.isEmpty()) {
+                                    employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
+                                }
+
+                                employeeShiftData1.setOutDateTime(todayFirstPunch);
+                                employeeShiftDataService.update(employeeShiftData1);
+
+                            }
+
+                            for (int i = 1; i < employeeShiftPunchList.size(); i++) {
+
+                                Object objToday = employeeShiftPunchList.get(i);
+                                List FirstShiftdayWiseShiftList = new ArrayList();
+                                EmployeeDatetimeData employeeTodayData = (EmployeeDatetimeData) objToday;
+                                EmployeeShiftData employeeFirstShiftData = new EmployeeShiftData();
+                                employeeShiftData.setEmployeeMaster(employeeMaster);
+                                employeeFirstShiftData.setEmployeeMaster(employeeMaster);
+                                employeeFirstShiftData.setShiftMaster(shiftMaster1);
+                                FirstShiftdayWiseShiftList = employeeShiftDataService.dailyTimeEntry(employeeShiftData);
+                                if (!FirstShiftdayWiseShiftList.isEmpty()) {
+
+                                    employeeFirstShiftData = (EmployeeShiftData) FirstShiftdayWiseShiftList.get(0);
+                                    employeeShiftData.setInDateTime(employeeFirstShiftData.getInDateTime());
+                                    employeeFirstShiftData.setOutDateTime(employeeTodayData.getDateTime());
+                                    employeeShiftDataService.update(employeeFirstShiftData);
+
+                                } else {
+                                    employeeFirstShiftData.setInDateTime(employeeTodayData.getDateTime());
+                                    employeeFirstShiftData.setOutDateTime(employeeTodayData.getDateTime());
+                                    employeeShiftDataService.create(employeeFirstShiftData);
+                                }
+
+                            }
+
                         } else {
-                            daynamicShiftName = firstShift.getShiftName();
-                            shiftMaster1 = shiftMasterService.readById(3);
-                        }
-
-                    } else if ((dynamicTime.after(calSecondShiftBefore.getTime()) || dynamicTime.equals(calSecondShiftBefore.getTime()))
-                            && (dynamicTime.before(calSecondShiftAfter.getTime()) || dynamicTime.equals(calSecondShiftAfter.getTime()))) {
-                        daynamicShiftName = secondShift.getShiftName();
-                        shiftMaster1 = shiftMasterService.readById(4);
-                    } else if ((dynamicTime.after(calNightShiftBefore.getTime()) || dynamicTime.equals(calNightShiftBefore.getTime()))
-                            && (dynamicTime.before(calNightShiftAfter.getTime()) || dynamicTime.equals(calNightShiftAfter.getTime()))) {
-                        daynamicShiftName = nightShift.getShiftName();
-                        shiftMaster1 = shiftMasterService.readById(5);
-                        shiftTime = shiftMaster1.getEndTime();
-                    } else if (empShiftList.size() > 0) {
-                        shiftMaster.setId(Integer.parseInt(shiftId));
-                        shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
-                        daynamicShiftName = shiftMaster1.getShiftName();
-                        if (daynamicShiftName.equals("General")) {
-                            if (employeeMaster1.getZydexLocationMaster().getId().equals(1) || employeeMaster1.getZydexLocationMaster().getId().equals(6)) {
-                                shiftMaster1 = shiftMasterService.readById(1);
-                            } else {
-                                shiftMaster1 = shiftMasterService.readById(6);
-                            }
-                        }
-                        shiftTime = shiftMaster1.getEndTime();
-
-                    }
-
-                } else {
-                    shiftMaster1 = shiftMasterService.readById(1);
-                }
-//                =========================== Auto Capture Shift========================
-                List< ?> employeeShiftPunchList = new ArrayList<Object>();
-                String newShiftTime = "";
-                if (daynamicShiftName.contains("Night")) {
-                    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-
-                    Date time = timeFormat.parse(shiftTime);
-//            Date
-                    Calendar cal22 = Calendar.getInstance();
-                    cal22.setTime(time);
-                    cal22.add(Calendar.HOUR_OF_DAY, 8);
-                    time = cal22.getTime();
-                    newShiftTime = timeFormat.format(time);
-
-                    employeeShiftPunchList = employeeDatetimeDataService.readTodaysAndPreviousData("" + employeeMaster.getId(), newShiftTime);
-
-                    for (Object o : employeeShiftPunchList) {
-                        EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
-                        EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
-                        List dayWiseShiftList = new ArrayList();
-                        employeeShiftData.setEmployeeMaster(employeeMaster);
-                        employeeShiftData1.setEmployeeMaster(employeeMaster);
-                        employeeShiftData1.setShiftMaster(shiftMaster1);
-
-                        String newShiftTimeSplit = "";
-
-                        cal22.setTime(time);
-                        cal22.add(Calendar.HOUR_OF_DAY, 8);
-                        time = cal22.getTime();
-                        newShiftTime = timeFormat.format(time);
-                        newShiftTimeSplit = newShiftTime.split(":")[0];
-                        dayWiseShiftList = employeeShiftDataService.getPastAndCurrentPunch(employeeShiftData, newShiftTime);
-
-                        if (!dayWiseShiftList.isEmpty()) {
-//                    if (size % 2 == 0) {
-                            SimpleDateFormat sdf111 = new SimpleDateFormat("dd/MM/yyyy");
-                            employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
-                            employeeShiftData.setInDateTime(employeeShiftData1.getInDateTime());
-                            String[] splited = employeeShiftData1.getOutDateTime().split(" ");
-                            String[] splited1 = employeeDatetimeData.getDateTime().split(" ");
-                            String spDate = splited[0];
-                            Date currentDate = new Date();
-//                            String punDate = "01/07/2016";
-                            String punDate = sdf111.format(currentDate);
-                            Date inDate = sdf111.parse(spDate);
-                            Date pDate = sdf111.parse(punDate);
-                            String timeSplit = splited1[1].split(":")[0];
-
-                            if (inDate.equals(pDate) && Integer.parseInt(timeSplit) > Integer.parseInt(newShiftTimeSplit)) {
-                                if (dayWiseShiftList.size() > 1) {
-                                    employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(1);
-                                    employeeShiftData1.setInDateTime(employeeShiftData1.getInDateTime());
+                            employeeShiftPunchList = employeeDatetimeDataService.readTodaysEmployeeData("" + employeeMaster.getId());
+                            for (Object o : employeeShiftPunchList) {
+                                EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
+                                EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                                List dayWiseShiftList = new ArrayList();
+                                employeeShiftData.setEmployeeMaster(employeeMaster);
+                                employeeShiftData1.setEmployeeMaster(employeeMaster);
+                                employeeShiftData1.setShiftMaster(shiftMaster1);
+                                dayWiseShiftList = employeeShiftDataService.dailyTimeEntry(employeeShiftData);
+                                if (!dayWiseShiftList.isEmpty()) {
+                                    employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
+                                    employeeShiftData.setInDateTime(employeeShiftData1.getInDateTime());
                                     employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
                                     employeeShiftDataService.createOrUpdate(employeeShiftData1);
                                 } else {
                                     employeeShiftData1.setInDateTime(employeeDatetimeData.getDateTime());
                                     employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
-                                    employeeShiftDataService.create(employeeShiftData1);
+                                    employeeShiftDataService.createOrUpdate(employeeShiftData1);
                                 }
+
+                            }
+                        }
+
+                    } else if (shiftName.equals("Second")) {
+                        /////////////////// check yesterday data 
+                        List<?> employeeYesterdayPunchData = employeeDatetimeDataService.readYesterdayEmployeeData("" + employeeMaster.getId());
+                        int yesterDayNo = Integer.parseInt(s1[0]) - 1;
+
+                        String yestershiftId = "";
+                        String yesterNightPunchEntry = "";
+                        if (!employeeYesterdayPunchData.isEmpty()) {
+                            int countNightPunch = 1;
+                            for (Object o : employeeYesterdayPunchData) {
+                                EmployeeDatetimeData employeeyesterDayData = (EmployeeDatetimeData) o;
+                                String checkPunchNight = employeeyesterDayData.getDateTime();
+                                Date FirstPunch1 = sdf3.parse(checkPunchNight);
+                                if (countNightPunch == 1 && (FirstPunch1.after(calYesterNightShiftBefore.getTime()) || FirstPunch1.equals(calYesterNightShiftBefore.getTime()))) {
+                                    yesterNightPunchEntry = checkPunchNight;
+                                    countNightPunch++;
+                                }
+
+                            }
+                        }
+                        //////////////////////// check today data
+                        List<?> employeeTodayPunchList = employeeDatetimeDataService.readTodaysEmployeeData("" + employeeMaster.getId());
+
+                        String TodayPunchBeforeSecond = "";
+//                        String TodayPunchBeforeNight = "";
+                        int countTodayBeforeSecond = 0;
+//                        int countTodayBeforeNight = 0;
+                        if (!employeeTodayPunchList.isEmpty()) {
+
+                            for (Object o : employeeTodayPunchList) {
+                                EmployeeDatetimeData employeeyesterDayData = (EmployeeDatetimeData) o;
+                                String checkPunchToday = employeeyesterDayData.getDateTime();
+                                Date FirstPunch1 = sdf3.parse(checkPunchToday);
+
+                                if ((FirstPunch1.after(calSecondShiftBefore.getTime()) || FirstPunch1.equals(calSecondShiftBefore.getTime()))) {
+                                    break;
+                                }
+                                TodayPunchBeforeSecond = checkPunchToday;
+                                countTodayBeforeSecond++;
+                            }
+//                            
+//                            
+                        }
+                        ///////////////////////////////////////////////////////////
+                        List<?> empYesterShiftList = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftData(shiftGenerateMonthlySchedule, yesterDayNo);
+                        if (!empYesterShiftList.isEmpty()) {
+                            yestershiftId = "" + empYesterShiftList.get(0);
+                        }
+                        if (!employeeYesterdayPunchData.isEmpty() && !TodayPunchBeforeSecond.equals("") && !yesterNightPunchEntry.equals("") && yestershiftId.equals("5")) {
+                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            String newShiftTime = "";
+                            Date time = timeFormat.parse(shiftTime);
+                            Calendar cal22 = Calendar.getInstance();
+                            List dayWiseShiftList = new ArrayList();
+                            cal22.setTime(time);
+                            cal22.add(Calendar.HOUR_OF_DAY, 8);
+                            time = cal22.getTime();
+                            newShiftTime = timeFormat.format(time);
+                            String newShiftTimeSplit = "";
+                            cal22.setTime(time);
+                            cal22.add(Calendar.HOUR_OF_DAY, 8);
+                            time = cal22.getTime();
+                            newShiftTime = timeFormat.format(time);
+                            newShiftTimeSplit = newShiftTime.split(":")[0];
+
+                            employeeShiftPunchList = employeeDatetimeDataService.readTodaysEmployeeData("" + employeeMaster.getId());
+                            if (!employeeShiftPunchList.isEmpty()) {
+                                Object o = employeeShiftPunchList.get(0);
+                                EmployeeDatetimeData employeeTodayDatetimeData = (EmployeeDatetimeData) o;
+                                String todayFirstPunch = employeeTodayDatetimeData.getDateTime();
+                                employeeShiftData.setEmployeeMaster(employeeTodayDatetimeData.getEmployeeMaster());
+
+                                EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                                dayWiseShiftList = employeeShiftDataService.getPastAndCurrentPunch(employeeShiftData, newShiftTime);
+                                if (!dayWiseShiftList.isEmpty()) {
+                                    employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
+                                }
+
+                                employeeShiftData1.setOutDateTime(TodayPunchBeforeSecond);
+                                employeeShiftDataService.update(employeeShiftData1);
+
+                            }
+
+                            for (int i = countTodayBeforeSecond; i < employeeShiftPunchList.size(); i++) {
+
+                                Object objToday = employeeShiftPunchList.get(i);
+                                List FirstShiftdayWiseShiftList = new ArrayList();
+                                EmployeeDatetimeData employeeTodayData = (EmployeeDatetimeData) objToday;
+                                EmployeeShiftData employeeFirstShiftData = new EmployeeShiftData();
+                                employeeShiftData.setEmployeeMaster(employeeMaster);
+                                employeeFirstShiftData.setEmployeeMaster(employeeMaster);
+                                employeeFirstShiftData.setShiftMaster(shiftMaster1);
+                                FirstShiftdayWiseShiftList = employeeShiftDataService.dailyTimeEntry(employeeShiftData);
+                                if (!FirstShiftdayWiseShiftList.isEmpty()) {
+
+                                    employeeFirstShiftData = (EmployeeShiftData) FirstShiftdayWiseShiftList.get(0);
+                                    employeeShiftData.setInDateTime(employeeFirstShiftData.getInDateTime());
+                                    employeeFirstShiftData.setOutDateTime(employeeTodayData.getDateTime());
+                                    employeeShiftDataService.update(employeeFirstShiftData);
+
+                                } else {
+                                    employeeFirstShiftData.setInDateTime(employeeTodayData.getDateTime());
+                                    employeeFirstShiftData.setOutDateTime(employeeTodayData.getDateTime());
+                                    employeeShiftDataService.create(employeeFirstShiftData);
+                                }
+
+                            }
+//
+                        } else if (!employeeYesterdayPunchData.isEmpty() && !TodayPunchBeforeSecond.equals("") && !yesterNightPunchEntry.equals("") && yestershiftId.equals("4")) {
+
+                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            String newShiftTime = "";
+                            Date time = timeFormat.parse(shiftTime);
+                            Calendar cal22 = Calendar.getInstance();
+                            List dayWiseShiftList = new ArrayList();
+                            cal22.setTime(time);
+                            cal22.add(Calendar.HOUR_OF_DAY, 8);
+                            time = cal22.getTime();
+                            newShiftTime = timeFormat.format(time);
+                            String newShiftTimeSplit = "";
+                            cal22.setTime(time);
+                            cal22.add(Calendar.HOUR_OF_DAY, 8);
+                            time = cal22.getTime();
+                            newShiftTime = timeFormat.format(time);
+                            newShiftTimeSplit = newShiftTime.split(":")[0];
+
+                            employeeShiftPunchList = employeeDatetimeDataService.readTodaysEmployeeData("" + employeeMaster.getId());
+                            if (!employeeShiftPunchList.isEmpty()) {
+                                Object o = employeeShiftPunchList.get(0);
+                                EmployeeDatetimeData employeeTodayDatetimeData = (EmployeeDatetimeData) o;
+////                                String todayFirstPunch = employeeTodayDatetimeData.getDateTime();
+                                employeeShiftData.setEmployeeMaster(employeeTodayDatetimeData.getEmployeeMaster());
+
+                                EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                                dayWiseShiftList = employeeShiftDataService.getPastAndCurrentPunch(employeeShiftData, newShiftTime);
+                                if (!dayWiseShiftList.isEmpty()) {
+                                    employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
+                                }
+
+                                employeeShiftData1.setOutDateTime(TodayPunchBeforeSecond);
+                                employeeShiftDataService.update(employeeShiftData1);
+
+                            }
+
+                            for (int i = countTodayBeforeSecond; i < employeeShiftPunchList.size(); i++) {
+
+                                Object objToday = employeeShiftPunchList.get(i);
+                                List FirstShiftdayWiseShiftList = new ArrayList();
+                                EmployeeDatetimeData employeeTodayData = (EmployeeDatetimeData) objToday;
+                                EmployeeShiftData employeeFirstShiftData = new EmployeeShiftData();
+                                employeeShiftData.setEmployeeMaster(employeeMaster);
+                                employeeFirstShiftData.setEmployeeMaster(employeeMaster);
+                                employeeFirstShiftData.setShiftMaster(shiftMaster1);
+                                FirstShiftdayWiseShiftList = employeeShiftDataService.dailyTimeEntry(employeeShiftData);
+                                if (!FirstShiftdayWiseShiftList.isEmpty()) {
+
+                                    employeeFirstShiftData = (EmployeeShiftData) FirstShiftdayWiseShiftList.get(0);
+                                    employeeShiftData.setInDateTime(employeeFirstShiftData.getInDateTime());
+                                    employeeFirstShiftData.setOutDateTime(employeeTodayData.getDateTime());
+                                    employeeShiftDataService.update(employeeFirstShiftData);
+
+                                } else {
+                                    employeeFirstShiftData.setInDateTime(employeeTodayData.getDateTime());
+                                    employeeFirstShiftData.setOutDateTime(employeeTodayData.getDateTime());
+                                    employeeShiftDataService.create(employeeFirstShiftData);
+                                }
+
+                            }
+
+                        } else {
+
+                            employeeShiftPunchList = employeeDatetimeDataService.readTodaysEmployeeData("" + employeeMaster.getId());
+                            for (Object o : employeeShiftPunchList) {
+                                EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
+                                EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                                List dayWiseShiftList = new ArrayList();
+                                employeeShiftData.setEmployeeMaster(employeeMaster);
+                                employeeShiftData1.setEmployeeMaster(employeeMaster);
+                                employeeShiftData1.setShiftMaster(shiftMaster1);
+                                dayWiseShiftList = employeeShiftDataService.dailyTimeEntry(employeeShiftData);
+                                if (!dayWiseShiftList.isEmpty()) {
+                                    employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
+                                    employeeShiftData.setInDateTime(employeeShiftData1.getInDateTime());
+                                    employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
+                                    employeeShiftDataService.createOrUpdate(employeeShiftData1);
+                                } else {
+                                    employeeShiftData1.setInDateTime(employeeDatetimeData.getDateTime());
+                                    employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
+                                    employeeShiftDataService.createOrUpdate(employeeShiftData1);
+                                }
+
+                            }
+                        }
+
+                    } else if (shiftName.equals("Night")) {
+                        /////////////////// check yesterday data 
+                        List<?> employeeYesterdayPunchData = employeeDatetimeDataService.readYesterdayEmployeeData("" + employeeMaster.getId());
+                        int yesterDayNo = Integer.parseInt(s1[0]) - 1;
+
+                        String yestershiftId = "";
+                        String yesterNightPunchEntry = "";
+                        if (!employeeYesterdayPunchData.isEmpty()) {
+                            int countNightPunch = 1;
+                            for (Object o : employeeYesterdayPunchData) {
+                                EmployeeDatetimeData employeeyesterDayData = (EmployeeDatetimeData) o;
+                                String checkPunchNight = employeeyesterDayData.getDateTime();
+                                Date FirstPunch1 = sdf3.parse(checkPunchNight);
+                                if (countNightPunch == 1 && (FirstPunch1.after(calYesterNightShiftBefore.getTime()) || FirstPunch1.equals(calYesterNightShiftBefore.getTime()))) {
+                                    yesterNightPunchEntry = checkPunchNight;
+                                    countNightPunch++;
+                                }
+
+                            }
+                        }
+                        //////////////////////// check today data
+                        List<?> employeeTodayPunchList = employeeDatetimeDataService.readTodaysEmployeeData("" + employeeMaster.getId());
+
+//                        String TodayPunchBeforeSecond = "";
+                        String TodayPunchBeforeNight = "";
+//                        int countTodayBeforeSecond = 0;
+                        int countTodayBeforeNight = 0;
+                        if (!employeeTodayPunchList.isEmpty()) {
+
+//                         
+                            for (Object obj : employeeTodayPunchList) {
+                                EmployeeDatetimeData employeeyesterDayData = (EmployeeDatetimeData) obj;
+                                String checkPunchToday = employeeyesterDayData.getDateTime();
+                                Date FirstPunch1 = sdf3.parse(checkPunchToday);
+                                if ((FirstPunch1.after(calNightShiftBefore.getTime()) || FirstPunch1.equals(calNightShiftBefore.getTime()))) {
+                                    break;
+                                }
+                                TodayPunchBeforeNight = checkPunchToday;
+                                countTodayBeforeNight++;
+
+                            }
+                        }
+                        ///////////////////////////////////////////////////////////
+                        List<?> empYesterShiftList = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftData(shiftGenerateMonthlySchedule, yesterDayNo);
+                        if (!empYesterShiftList.isEmpty()) {
+                            yestershiftId = "" + empYesterShiftList.get(0);
+                        }
+                        if (!employeeYesterdayPunchData.isEmpty() && !TodayPunchBeforeNight.equals("") && !yesterNightPunchEntry.equals("") && yestershiftId.equals("5")) {
+                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            String newShiftTime = "";
+                            Date time = timeFormat.parse(shiftTime);
+                            Calendar cal22 = Calendar.getInstance();
+                            List dayWiseShiftList = new ArrayList();
+                            cal22.setTime(time);
+                            cal22.add(Calendar.HOUR_OF_DAY, 8);
+                            time = cal22.getTime();
+                            newShiftTime = timeFormat.format(time);
+                            String newShiftTimeSplit = "";
+                            cal22.setTime(time);
+                            cal22.add(Calendar.HOUR_OF_DAY, 8);
+                            time = cal22.getTime();
+                            newShiftTime = timeFormat.format(time);
+                            newShiftTimeSplit = newShiftTime.split(":")[0];
+
+                            employeeShiftPunchList = employeeDatetimeDataService.readTodaysEmployeeData("" + employeeMaster.getId());
+                            if (!employeeShiftPunchList.isEmpty()) {
+                                Object o = employeeShiftPunchList.get(0);
+                                EmployeeDatetimeData employeeTodayDatetimeData = (EmployeeDatetimeData) o;
+                                String todayFirstPunch = employeeTodayDatetimeData.getDateTime();
+                                employeeShiftData.setEmployeeMaster(employeeTodayDatetimeData.getEmployeeMaster());
+
+                                EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                                dayWiseShiftList = employeeShiftDataService.getPastAndCurrentPunch(employeeShiftData, newShiftTime);
+                                if (!dayWiseShiftList.isEmpty()) {
+                                    employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
+                                }
+
+                                employeeShiftData1.setOutDateTime(TodayPunchBeforeNight);
+                                employeeShiftDataService.update(employeeShiftData1);
+
+                            }
+
+                            for (int i = countTodayBeforeNight; i < employeeShiftPunchList.size(); i++) {
+
+                                Object objToday = employeeShiftPunchList.get(i);
+                                List FirstShiftdayWiseShiftList = new ArrayList();
+                                EmployeeDatetimeData employeeTodayData = (EmployeeDatetimeData) objToday;
+                                EmployeeShiftData employeeFirstShiftData = new EmployeeShiftData();
+                                employeeShiftData.setEmployeeMaster(employeeMaster);
+                                employeeFirstShiftData.setEmployeeMaster(employeeMaster);
+                                employeeFirstShiftData.setShiftMaster(shiftMaster1);
+                                FirstShiftdayWiseShiftList = employeeShiftDataService.dailyTimeEntry(employeeShiftData);
+                                if (!FirstShiftdayWiseShiftList.isEmpty()) {
+
+                                    employeeFirstShiftData = (EmployeeShiftData) FirstShiftdayWiseShiftList.get(0);
+                                    employeeShiftData.setInDateTime(employeeFirstShiftData.getInDateTime());
+                                    employeeFirstShiftData.setOutDateTime(employeeTodayData.getDateTime());
+                                    employeeShiftDataService.update(employeeFirstShiftData);
+
+                                } else {
+                                    employeeFirstShiftData.setInDateTime(employeeTodayData.getDateTime());
+                                    employeeFirstShiftData.setOutDateTime(employeeTodayData.getDateTime());
+                                    employeeShiftDataService.create(employeeFirstShiftData);
+                                }
+
+                            }
+//
+                        } else if (!employeeYesterdayPunchData.isEmpty() && !TodayPunchBeforeNight.equals("") && !yesterNightPunchEntry.equals("") && yestershiftId.equals("4")) {
+
+                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            String newShiftTime = "";
+                            Date time = timeFormat.parse(shiftTime);
+                            Calendar cal22 = Calendar.getInstance();
+                            List dayWiseShiftList = new ArrayList();
+                            cal22.setTime(time);
+                            cal22.add(Calendar.HOUR_OF_DAY, 8);
+                            time = cal22.getTime();
+                            newShiftTime = timeFormat.format(time);
+                            String newShiftTimeSplit = "";
+                            cal22.setTime(time);
+                            cal22.add(Calendar.HOUR_OF_DAY, 8);
+                            time = cal22.getTime();
+                            newShiftTime = timeFormat.format(time);
+                            newShiftTimeSplit = newShiftTime.split(":")[0];
+
+                            employeeShiftPunchList = employeeDatetimeDataService.readTodaysEmployeeData("" + employeeMaster.getId());
+                            if (!employeeShiftPunchList.isEmpty()) {
+                                Object o = employeeShiftPunchList.get(0);
+                                EmployeeDatetimeData employeeTodayDatetimeData = (EmployeeDatetimeData) o;
+////                                String todayFirstPunch = employeeTodayDatetimeData.getDateTime();
+                                employeeShiftData.setEmployeeMaster(employeeTodayDatetimeData.getEmployeeMaster());
+
+                                EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                                dayWiseShiftList = employeeShiftDataService.getPastAndCurrentPunch(employeeShiftData, newShiftTime);
+                                if (!dayWiseShiftList.isEmpty()) {
+                                    employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
+                                }
+
+                                employeeShiftData1.setOutDateTime(TodayPunchBeforeNight);
+                                employeeShiftDataService.update(employeeShiftData1);
+
+                            }
+
+                            for (int i = countTodayBeforeNight; i < employeeShiftPunchList.size(); i++) {
+
+                                Object objToday = employeeShiftPunchList.get(i);
+                                List FirstShiftdayWiseShiftList = new ArrayList();
+                                EmployeeDatetimeData employeeTodayData = (EmployeeDatetimeData) objToday;
+                                EmployeeShiftData employeeFirstShiftData = new EmployeeShiftData();
+                                employeeShiftData.setEmployeeMaster(employeeMaster);
+                                employeeFirstShiftData.setEmployeeMaster(employeeMaster);
+                                employeeFirstShiftData.setShiftMaster(shiftMaster1);
+                                FirstShiftdayWiseShiftList = employeeShiftDataService.dailyTimeEntry(employeeShiftData);
+                                if (!FirstShiftdayWiseShiftList.isEmpty()) {
+
+                                    employeeFirstShiftData = (EmployeeShiftData) FirstShiftdayWiseShiftList.get(0);
+                                    employeeShiftData.setInDateTime(employeeFirstShiftData.getInDateTime());
+                                    employeeFirstShiftData.setOutDateTime(employeeTodayData.getDateTime());
+                                    employeeShiftDataService.update(employeeFirstShiftData);
+
+                                } else {
+                                    employeeFirstShiftData.setInDateTime(employeeTodayData.getDateTime());
+                                    employeeFirstShiftData.setOutDateTime(employeeTodayData.getDateTime());
+                                    employeeShiftDataService.create(employeeFirstShiftData);
+                                }
+
+                            }
+
+                        } else {
+
+                            employeeShiftPunchList = employeeDatetimeDataService.readTodaysEmployeeData("" + employeeMaster.getId());
+                            for (Object o : employeeShiftPunchList) {
+                                EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
+                                EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                                List dayWiseShiftList = new ArrayList();
+                                employeeShiftData.setEmployeeMaster(employeeMaster);
+                                employeeShiftData1.setEmployeeMaster(employeeMaster);
+                                employeeShiftData1.setShiftMaster(shiftMaster1);
+                                dayWiseShiftList = employeeShiftDataService.dailyTimeEntry(employeeShiftData);
+                                if (!dayWiseShiftList.isEmpty()) {
+                                    employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
+                                    employeeShiftData.setInDateTime(employeeShiftData1.getInDateTime());
+                                    employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
+                                    employeeShiftDataService.createOrUpdate(employeeShiftData1);
+                                } else {
+                                    employeeShiftData1.setInDateTime(employeeDatetimeData.getDateTime());
+                                    employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
+                                    employeeShiftDataService.createOrUpdate(employeeShiftData1);
+                                }
+
+                            }
+                        }
+
+                    } else if (shiftId.equals("-1")) {
+
+                        List<?> employeeYesterdayPunchData = employeeDatetimeDataService.readYesterdayEmployeeData("" + employeeMaster.getId());
+                        int yesterDayNo = Integer.parseInt(s1[0]) - 1;
+
+                        String yestershiftId = "";
+                        String yesterNightPunchEntry = "";
+                        if (!employeeYesterdayPunchData.isEmpty()) {
+                            int countNightPunch = 1;
+                            for (Object o : employeeYesterdayPunchData) {
+                                EmployeeDatetimeData employeeyesterDayData = (EmployeeDatetimeData) o;
+                                String checkPunchNight = employeeyesterDayData.getDateTime();
+                                Date FirstPunch1 = sdf3.parse(checkPunchNight);
+                                if (countNightPunch == 1 && (FirstPunch1.after(calYesterNightShiftBefore.getTime()) || FirstPunch1.equals(calYesterNightShiftBefore.getTime()))) {
+                                    yesterNightPunchEntry = checkPunchNight;
+                                    countNightPunch++;
+                                }
+
+                            }
+                        }
+                        //////////////////////// check today data
+                        List<?> employeeTodayPunchList = employeeDatetimeDataService.readTodaysEmployeeData("" + employeeMaster.getId());
+
+//                        String TodayPunchBeforeSecond = "";
+                        String TodayPunchBeforeNight = "";
+//                        int countTodayBeforeSecond = 0;
+                        int countTodayBeforeNight = 0;
+                        if (!employeeTodayPunchList.isEmpty()) {
+
+//                         
+                            for (Object obj : employeeTodayPunchList) {
+                                EmployeeDatetimeData employeeyesterDayData = (EmployeeDatetimeData) obj;
+                                String checkPunchToday = employeeyesterDayData.getDateTime();
+                                Date FirstPunch1 = sdf3.parse(checkPunchToday);
+                                if ((FirstPunch1.after(calNightShiftBefore.getTime()) || FirstPunch1.equals(calNightShiftBefore.getTime()))) {
+                                    break;
+                                }
+                                TodayPunchBeforeNight = checkPunchToday;
+                                countTodayBeforeNight++;
+
+                            }
+                        }
+                        ///////////////////////////////////////////////////////////
+                        List<?> empYesterShiftList = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftData(shiftGenerateMonthlySchedule, yesterDayNo);
+                        if (!empYesterShiftList.isEmpty()) {
+                            yestershiftId = "" + empYesterShiftList.get(0);
+                        }
+                        if (!employeeYesterdayPunchData.isEmpty() && !TodayPunchBeforeNight.equals("") && !yesterNightPunchEntry.equals("") && yestershiftId.equals("5")) {
+                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            String newShiftTime = "";
+                            Date time = timeFormat.parse(shiftTime);
+                            Calendar cal22 = Calendar.getInstance();
+                            List dayWiseShiftList = new ArrayList();
+                            cal22.setTime(time);
+                            cal22.add(Calendar.HOUR_OF_DAY, 8);
+                            time = cal22.getTime();
+                            newShiftTime = timeFormat.format(time);
+                            String newShiftTimeSplit = "";
+                            cal22.setTime(time);
+                            cal22.add(Calendar.HOUR_OF_DAY, 8);
+                            time = cal22.getTime();
+                            newShiftTime = timeFormat.format(time);
+                            newShiftTimeSplit = newShiftTime.split(":")[0];
+
+                            employeeShiftPunchList = employeeDatetimeDataService.readTodaysEmployeeData("" + employeeMaster.getId());
+                            if (!employeeShiftPunchList.isEmpty()) {
+                                Object o = employeeShiftPunchList.get(0);
+                                EmployeeDatetimeData employeeTodayDatetimeData = (EmployeeDatetimeData) o;
+                                String todayFirstPunch = employeeTodayDatetimeData.getDateTime();
+                                employeeShiftData.setEmployeeMaster(employeeTodayDatetimeData.getEmployeeMaster());
+
+                                EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                                dayWiseShiftList = employeeShiftDataService.getPastAndCurrentPunch(employeeShiftData, newShiftTime);
+                                if (!dayWiseShiftList.isEmpty()) {
+                                    employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
+                                }
+
+                                employeeShiftData1.setOutDateTime(TodayPunchBeforeNight);
+                                employeeShiftDataService.update(employeeShiftData1);
+
+                            }
+
+//
+                        } else if (!employeeYesterdayPunchData.isEmpty() && !TodayPunchBeforeNight.equals("") && !yesterNightPunchEntry.equals("") && yestershiftId.equals("4")) {
+
+                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            String newShiftTime = "";
+                            Date time = timeFormat.parse(shiftTime);
+                            Calendar cal22 = Calendar.getInstance();
+                            List dayWiseShiftList = new ArrayList();
+                            cal22.setTime(time);
+                            cal22.add(Calendar.HOUR_OF_DAY, 8);
+                            time = cal22.getTime();
+                            newShiftTime = timeFormat.format(time);
+                            String newShiftTimeSplit = "";
+                            cal22.setTime(time);
+                            cal22.add(Calendar.HOUR_OF_DAY, 8);
+                            time = cal22.getTime();
+                            newShiftTime = timeFormat.format(time);
+                            newShiftTimeSplit = newShiftTime.split(":")[0];
+
+                            employeeShiftPunchList = employeeDatetimeDataService.readTodaysEmployeeData("" + employeeMaster.getId());
+                            if (!employeeShiftPunchList.isEmpty()) {
+                                Object o = employeeShiftPunchList.get(0);
+                                EmployeeDatetimeData employeeTodayDatetimeData = (EmployeeDatetimeData) o;
+////                                String todayFirstPunch = employeeTodayDatetimeData.getDateTime();
+                                employeeShiftData.setEmployeeMaster(employeeTodayDatetimeData.getEmployeeMaster());
+
+                                EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                                dayWiseShiftList = employeeShiftDataService.getPastAndCurrentPunch(employeeShiftData, newShiftTime);
+                                if (!dayWiseShiftList.isEmpty()) {
+                                    employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
+                                }
+
+                                employeeShiftData1.setOutDateTime(TodayPunchBeforeNight);
+                                employeeShiftDataService.update(employeeShiftData1);
+
+                            }
+
+                        }
+                    } else {
+                        employeeShiftPunchList = employeeDatetimeDataService.readTodaysEmployeeData("" + employeeMaster.getId());
+                        for (Object o : employeeShiftPunchList) {
+                            EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
+                            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                            List dayWiseShiftList = new ArrayList();
+                            employeeShiftData.setEmployeeMaster(employeeMaster);
+                            employeeShiftData1.setEmployeeMaster(employeeMaster);
+                            employeeShiftData1.setShiftMaster(shiftMaster1);
+                            dayWiseShiftList = employeeShiftDataService.dailyTimeEntry(employeeShiftData);
+                            if (!dayWiseShiftList.isEmpty()) {
+                                employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
+                                employeeShiftData.setInDateTime(employeeShiftData1.getInDateTime());
+                                employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
+                                employeeShiftDataService.createOrUpdate(employeeShiftData1);
                             } else {
+                                employeeShiftData1.setInDateTime(employeeDatetimeData.getDateTime());
                                 employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
                                 employeeShiftDataService.createOrUpdate(employeeShiftData1);
                             }
-                        } else {
-                            employeeShiftData1.setInDateTime(employeeDatetimeData.getDateTime());
-                            employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
-                            employeeShiftDataService.createOrUpdate(employeeShiftData1);
+
                         }
 
                     }
-
-                } else {
+                } //              =========================== Auto Capture Shift========================
+                else {
                     employeeShiftPunchList = employeeDatetimeDataService.readTodaysEmployeeData("" + employeeMaster.getId());
                     for (Object o : employeeShiftPunchList) {
                         EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
@@ -2212,7 +2722,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 }
                             }
                         }
-                        if (flexible == true ) {
+                        if (flexible == true) {
                             rownum = rownum + 1;
                             Row row4 = firstSheet.createRow(rownum);
                             Cell cell4 = row4.createCell(0);
@@ -10575,6 +11085,153 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         request.setAttribute("successMessage",
                 "Information : The Selected Date Punch is Updated Successfully.");
         mv.setViewName("Shift/EmployeeManualPunch");
+        return mv;
+    }
+
+    public ModelAndView EmployeeShiftAssignDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        List<?> list = shiftGenerateMonthlyScheduleService.employeeListReadByMonth(month, year);
+        mv.getModelMap().put("list", list);
+
+        mv.setViewName("Shift/EmployeeMonthlyShiftDetail");
+        return mv;
+    }
+
+    public ModelAndView viewClickEmployeeShiftAssign(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String id = request.getParameter("id");
+        ModelAndView mv = new ModelAndView();
+        Calendar cal = Calendar.getInstance();
+        int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        List<?> shiftList = shiftGenerateMonthlyScheduleService.employeeMonthlyShiftDetail(Integer.parseInt(id));
+        ShiftGenerateMonthlySchedule monthlySchedule = shiftGenerateMonthlyScheduleService.readById(Integer.parseInt(id));
+        monthlySchedule.setNoOfDays(daysInMonth);
+
+        Object[] obj = null;
+        if (!shiftList.isEmpty()) {
+            obj = (Object[]) shiftList.get(0);
+            for (int i = 0; i < daysInMonth; i++) {
+                if (null == obj[i]) {
+                    obj[i] = "WO";
+                }
+            }
+        }
+        mv.getModelMap().put("monthlySchedule", monthlySchedule);
+        mv.getModelMap().put("list", obj);
+
+        mv.setViewName("Shift/EmployeeShiftAssignView");
+        return mv;
+
+    }
+
+    public ModelAndView EditEmployeeShiftAssign(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        String id = request.getParameter("id");
+        String dayNo = request.getParameter("dayNo");
+
+        String shiftId = "";
+        List<?> empShiftList = shiftGenerateMonthlyScheduleService.readDayWiseShift(Integer.parseInt(id), Integer.parseInt(dayNo));
+        if (!empShiftList.isEmpty()) {
+            shiftId = "" + empShiftList.get(0);
+        }
+//        ShiftMaster shiftMaster = shiftMasterService.readById(Integer.parseInt(shiftId));
+        readShiftName(request);
+        ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = shiftGenerateMonthlyScheduleService.readById(Integer.parseInt(id));
+        shiftGenerateMonthlySchedule.setNoOfDays(Integer.parseInt(dayNo));
+        mv.getModelMap().put("shiftGenerateMonthlySchedule", shiftGenerateMonthlySchedule);
+        request.setAttribute("dayNo", dayNo);
+        request.setAttribute("id", id);
+        mv.setViewName("Shift/EditEmployeeDayWiseShift");
+        return mv;
+    }
+
+    public ModelAndView submitEmployeeShiftAssign(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        String id = request.getParameter("id");
+//        String dayNo = request.getParameter("dayNo");
+        ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
+
+        BindException errors = new BindException(shiftGenerateMonthlySchedule, "shiftGenerateMonthlySchedule");
+        bind(request, shiftGenerateMonthlySchedule);
+        int id = shiftGenerateMonthlySchedule.getId();
+        ShiftGenerateMonthlySchedule monthlySchedule = shiftGenerateMonthlyScheduleService.readById(id);
+        int noday = shiftGenerateMonthlySchedule.getNoOfDays();
+        if (noday == 1) {
+            monthlySchedule.setDay1(shiftGenerateMonthlySchedule.getDay1());
+        } else if (noday == 2) {
+            monthlySchedule.setDay2(shiftGenerateMonthlySchedule.getDay2());
+        } else if (noday == 3) {
+            monthlySchedule.setDay3(shiftGenerateMonthlySchedule.getDay3());
+        } else if (noday == 4) {
+            monthlySchedule.setDay4(shiftGenerateMonthlySchedule.getDay4());
+        } else if (noday == 5) {
+            monthlySchedule.setDay5(shiftGenerateMonthlySchedule.getDay5());
+        } else if (noday == 6) {
+            monthlySchedule.setDay6(shiftGenerateMonthlySchedule.getDay6());
+        } else if (noday == 7) {
+            monthlySchedule.setDay7(shiftGenerateMonthlySchedule.getDay7());
+        } else if (noday == 8) {
+            monthlySchedule.setDay8(shiftGenerateMonthlySchedule.getDay8());
+        } else if (noday == 9) {
+            monthlySchedule.setDay9(shiftGenerateMonthlySchedule.getDay9());
+        } else if (noday == 10) {
+            monthlySchedule.setDay10(shiftGenerateMonthlySchedule.getDay10());
+        } else if (noday == 11) {
+            monthlySchedule.setDay11(shiftGenerateMonthlySchedule.getDay11());
+        } else if (noday == 12) {
+            monthlySchedule.setDay12(shiftGenerateMonthlySchedule.getDay12());
+        } else if (noday == 13) {
+            monthlySchedule.setDay13(shiftGenerateMonthlySchedule.getDay13());
+        } else if (noday == 14) {
+            monthlySchedule.setDay14(shiftGenerateMonthlySchedule.getDay14());
+        } else if (noday == 15) {
+            monthlySchedule.setDay15(shiftGenerateMonthlySchedule.getDay15());
+        } else if (noday == 16) {
+            monthlySchedule.setDay16(shiftGenerateMonthlySchedule.getDay16());
+        } else if (noday == 17) {
+            monthlySchedule.setDay17(shiftGenerateMonthlySchedule.getDay17());
+        } else if (noday == 18) {
+            monthlySchedule.setDay18(shiftGenerateMonthlySchedule.getDay18());
+        } else if (noday == 19) {
+            monthlySchedule.setDay19(shiftGenerateMonthlySchedule.getDay19());
+        } else if (noday == 20) {
+            monthlySchedule.setDay20(shiftGenerateMonthlySchedule.getDay20());
+        } else if (noday == 21) {
+            monthlySchedule.setDay21(shiftGenerateMonthlySchedule.getDay21());
+        } else if (noday == 22) {
+            monthlySchedule.setDay22(shiftGenerateMonthlySchedule.getDay22());
+        } else if (noday == 23) {
+            monthlySchedule.setDay23(shiftGenerateMonthlySchedule.getDay23());
+        } else if (noday == 24) {
+            monthlySchedule.setDay24(shiftGenerateMonthlySchedule.getDay24());
+        } else if (noday == 25) {
+            monthlySchedule.setDay25(shiftGenerateMonthlySchedule.getDay25());
+        } else if (noday == 26) {
+            monthlySchedule.setDay26(shiftGenerateMonthlySchedule.getDay26());
+        } else if (noday == 27) {
+            monthlySchedule.setDay27(shiftGenerateMonthlySchedule.getDay27());
+        } else if (noday == 28) {
+            monthlySchedule.setDay28(shiftGenerateMonthlySchedule.getDay28());
+        } else if (noday == 29) {
+            monthlySchedule.setDay29(shiftGenerateMonthlySchedule.getDay29());
+        } else if (noday == 30) {
+            monthlySchedule.setDay30(shiftGenerateMonthlySchedule.getDay30());
+        } else if (noday == 31) {
+            monthlySchedule.setDay31(shiftGenerateMonthlySchedule.getDay31());
+        }
+
+//        int tabId = Integer.parseInt(id);
+//        int dayOfMonth = Integer.parseInt(dayNo);
+//        int ShiftId = shiftMaster.getId();
+        shiftGenerateMonthlyScheduleService.update(monthlySchedule);
+
+//        shiftGenerateMonthlyScheduleService.updateDayWiseShift(tabId, dayOfMonth, ShiftId);
+        mv.setViewName("redirect:shiftRotationMaster.htm?act=EmployeeShiftAssignDetail");
+
         return mv;
     }
 

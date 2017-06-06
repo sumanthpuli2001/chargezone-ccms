@@ -332,7 +332,7 @@
                                                             <th style="margin: 0px;width: 25px;text-align: center" id="finalScoreid01">Final Score</th>
 
                                                             <th style="text-align: center;width: 50px" id="editT">Edit <br><a href="#" title="Deleted KRA" data-toggle="modal" data-target="#deletedKraModel" onclick="deletedKraajaxfun('${appraisalId}');" style="color: red;">KRA</a> </th>
-                                                            <th style="text-align: center;width: 50px"><span style='margin-top: 5px;'>
+                                                            <th style="text-align: center;width: 50px"><span style='margin-top: 5px;'>Add New KRA
                                                                     <c:if test="${flag ne 'true' && flag1 ne 'true' && flag2 ne 'true'}">
                                                                         <input type="button" value="+" id="addRowButtonId" title="Add New" />
                                                                     </c:if>

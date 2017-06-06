@@ -67,4 +67,6 @@ public interface TravelRequestMasterService<T> extends GenericsService<T> {
 
     public List<?> readForRequestResultForDashboard(T object);
 
+    public List<?> readListForApprover(T object, int id);
+
 }

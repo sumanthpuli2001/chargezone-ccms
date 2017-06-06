@@ -15,9 +15,16 @@ import java.util.List;
 public interface ShiftGenerateMonthlyScheduleService<T> extends GenericsService<T> {
 
     public List<?> readByEmployeeShift(T object);
-    
-    public List<?> readByCurrentDateWiseEmployeeShift(T object);
-    
-    public List<?> readByDayWiseEmployeeShiftData(T object,int day);
 
+    public List<?> readByCurrentDateWiseEmployeeShift(T object);
+
+    public List<?> readByDayWiseEmployeeShiftData(T object, int day);
+
+    public List<?> employeeListReadByMonth(int month, int year);
+
+    public List<?> employeeMonthlyShiftDetail(int id);
+
+    public List<?> readDayWiseShift(int id, int dayNo);
+
+    public void updateDayWiseShift(int id, int dayNo, int shiftId);
 }

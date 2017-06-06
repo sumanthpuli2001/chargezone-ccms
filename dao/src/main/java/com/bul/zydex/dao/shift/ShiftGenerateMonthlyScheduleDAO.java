@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -19,5 +19,13 @@ public interface ShiftGenerateMonthlyScheduleDAO<T> extends GenericsDAO<T> {
     public List<?> readByCurrentDateWiseEmployeeShift(T object);
 
     public List<?> readByDayWiseEmployeeShiftData(T object, int day);
+
+    public List<?> employeeListReadByMonth(int month, int year);
+
+    public List<?> employeeMonthlyShiftDetail(int id);
+
+    public List<?> readDayWiseShift(int id, int dayNo);
+
+    public void updateDayWiseShift(int id, int dayNo,int shiftId);
 
 }

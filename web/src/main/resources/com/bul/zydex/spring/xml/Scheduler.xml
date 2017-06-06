@@ -29,7 +29,8 @@
         0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying
     </bean>-->
     <!--
--->
+
+-->    
 <!--    <bean id="dailyTimeEntryId"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="shiftRotationMasterController1" />
@@ -40,10 +41,10 @@
         <property name="jobDetail" ref="dailyTimeEntryId" />
         <property name="cronExpression" value="0 0/3 * * * ?" />
         0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying
-    </bean>-->
-    <!--
--->
-<!--    <bean id="overTimeEntryId"
+    </bean>
+    
+
+    <bean id="overTimeEntryId"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="shiftRotationMasterController1" />
         <property name="targetMethod" value="overTimeEntry" />
@@ -171,31 +172,56 @@
         <property name="cronExpression" value="0 0/3 * * * ?" />
         0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying
     </bean>
-    -->
+    
+        <bean id="daysLeftProbationToConfirmation"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="probationToConfirmationController1" />
+        <property name="targetMethod" value="mailSendForProbationToConfirmationLeft" />
+    </bean>
+    <bean id="cronTrigger14"
+          class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="daysLeftProbationToConfirmation" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
+       
+    </bean>-->
+<!--    <bean id="daysLeftForKraRemainder"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="appraisalPerformanceController1" />
+        <property name="targetMethod" value="mailSendForKraRegistration" />
+    </bean>
+    <bean id="cronTrigger15"
+          class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="daysLeftForKraRemainder" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
+       
+    </bean>-->
+  
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="jobDetails">
             <list>
                 <!--<ref bean="timeAttendanceDetail" />-->
-                <!--<ref bean="dailyTimeEntryId" />-->
-                <!--<ref bean="overTimeEntryId" />-->
+<!--                <ref bean="dailyTimeEntryId" />
+                <ref bean="overTimeEntryId" />-->
                 <!--                <ref bean="carryForwardLeave" />
                 <ref bean="deviceId" />-->
                 <!--<ref bean="coffDeleteId" />-->
                 <!--<ref bean="shortLeveId" />-->
              
-<!--                                <ref bean="probationToConfirmation" />
+                <!--                                <ref bean="probationToConfirmation" />
                 <ref bean="probationToConfirmationCreateCheck" />
                 <ref bean="travelEscalationId" />
                 <ref bean="reportingManagerChangeId" />-->
                 <!--<ref bean="pmpIntimation" />-->
                 <!--<ref bean="mobilePunchDailyEntry" />-->
+                <!--<ref bean="daysLeftProbationToConfirmation" />-->
+                <!--<ref bean="daysLeftForKraRemainder" />-->
             </list>
         </property>
         <property name="triggers">
             <list>
                 <!--<ref bean="cronTrigger1" />-->
-                <!--<ref bean="cronTrigger2" />-->
-                <!--<ref bean="cronTrigger3" />-->
+<!--                <ref bean="cronTrigger2" />
+                <ref bean="cronTrigger3" />-->
                 <!--                <ref bean="cronTrigger4" />
                 <ref bean="cronTrigger5" /> -->
                 <!--<ref bean="cronTrigger6" />-->
@@ -206,6 +232,8 @@
                 <!--<ref bean="cronTrigger11" />-->
                 <!--<ref bean="cronTrigger12" />-->
                 <!--<ref bean="cronTrigger13" />-->
+                <!--<ref bean="cronTrigger14" />-->
+                <!--<ref bean="cronTrigger15" />-->
             </list>
         </property>
     </bean>

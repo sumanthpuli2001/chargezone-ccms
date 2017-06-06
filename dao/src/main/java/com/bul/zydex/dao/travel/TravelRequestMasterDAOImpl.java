@@ -794,4 +794,48 @@ public class TravelRequestMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         return getHibernateTemplate().find(query);
     }
+
+    public List<?> readListForApprover(T object, int id) {
+        TravelRequestMaster travelRequestMaster = (TravelRequestMaster) object;
+        String query = "";
+        String condition = "Where 1=1";
+
+        if (!"".equals(travelRequestMaster.getTravelType()) && null != travelRequestMaster.getTravelType()) {
+            condition += " AND a.travelType = '" + travelRequestMaster.getTravelType() + "'";
+        }
+        if (null != travelRequestMaster.getEmployeeMasterByEmployeeMasterId()) {
+            if (null != travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId()) {
+                condition += " AND  b.id = " + travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId();
+            }
+        }
+//        if (!"".equals(travelRequestMaster.getCashRequired()) && null != travelRequestMaster.getCashRequired()) {
+//            condition += " AND c.id = " + travelRequestMaster.getCashRequired();
+//        }
+//        if (!"".equals(travelRequestMaster.getDateOfSubmit()) && null != travelRequestMaster.getDateOfSubmit()) {
+//            condition += " AND d.id = " + travelRequestMaster.getDateOfSubmit();
+//        }
+        if (!"".equals(travelRequestMaster.getStartDateTime()) && null != travelRequestMaster.getStartDateTime()
+                && !"".equals(travelRequestMaster.getEndDateTime()) && null != travelRequestMaster.getEndDateTime()) {
+            condition += " AND a.startDateTime BETWEEN '" + travelRequestMaster.getStartDateTime() + "' AND '" + travelRequestMaster.getEndDateTime() + "' ";
+        }
+
+        query += " Select b.id,a.id,b.employeeId, b.employeeName, a.travelType,a.travelRequestNo,"
+                + " a.startDateTime,a.endDateTime,a.status, a.dateOfSubmit,"
+                + " case when (a.status=5 and a.travelType ='International')"
+                + " then d.id ELSE c.id END as approverId ,"
+                + " case when (a.status=5 and a.travelType ='International')"
+                + " then d.employeeName ELSE c.employeeName END as approver "
+                + " FROM TravelRequestMaster a"
+                + " LEFT JOIN a.employeeMasterByEmployeeMasterId b"
+                + " LEFT JOIN a.employeeMasterByApprover1Id c"
+                + " LEFT JOIN a.employeeMasterByApprover2Id d "
+                + "  Where (b.reportingManagerLevel1='" + id + "'"
+                + " or b.reportingManagerLevel2='" + id + "'"
+                + " or b.reportingManagerLevel3='" + id + "'"
+                + " or b.reportingManagerLevel4='" + id + "'"
+                + " or b.reportingManagerLevel5='" + id + "')";
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

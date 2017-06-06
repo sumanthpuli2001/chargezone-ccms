@@ -239,6 +239,9 @@
                                 <li><a href="temporaryShiftAssign.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Temporary Shift Assign </a></li>
                                 </c:if>
                         </ul>
+                        <ul class="treeview-menu">
+                            <li><a href="shiftRotationMaster.htm?act=EmployeeShiftAssignDetail"><i class="fa fa-circle-o"></i>Employee Shift Assign</a></li>
+                        </ul>
                     </li>
                 </c:if>
                 <li class="treeview">

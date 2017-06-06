@@ -31,13 +31,35 @@ public class ShiftGenerateMonthlyScheduleServiceImpl<T> extends GenericsServiceI
     public List<?> readByEmployeeShift(T object) {
         return shiftGenerateMonthlyScheduleDAO.readByEmployeeShift(object);
     }
+
     @Override
     public List<?> readByCurrentDateWiseEmployeeShift(T object) {
         return shiftGenerateMonthlyScheduleDAO.readByCurrentDateWiseEmployeeShift(object);
     }
+
     @Override
-    public List<?> readByDayWiseEmployeeShiftData(T object,int day) {
-        return shiftGenerateMonthlyScheduleDAO.readByDayWiseEmployeeShiftData(object,day);
+    public List<?> readByDayWiseEmployeeShiftData(T object, int day) {
+        return shiftGenerateMonthlyScheduleDAO.readByDayWiseEmployeeShiftData(object, day);
+    }
+
+    @Override
+    public List<?> employeeListReadByMonth(int month, int year) {
+        return shiftGenerateMonthlyScheduleDAO.employeeListReadByMonth(month, year);
+    }
+
+    @Override
+    public List<?> employeeMonthlyShiftDetail(int id) {
+        return shiftGenerateMonthlyScheduleDAO.employeeMonthlyShiftDetail(id);
+    }
+
+    @Override
+    public List<?> readDayWiseShift(int id, int dayNo) {
+        return shiftGenerateMonthlyScheduleDAO.readDayWiseShift(id, dayNo);
+    }
+
+    @Override
+    public void updateDayWiseShift(int id, int dayNo, int shiftId) {
+       shiftGenerateMonthlyScheduleDAO.updateDayWiseShift(id, dayNo,shiftId);
     }
 
 }

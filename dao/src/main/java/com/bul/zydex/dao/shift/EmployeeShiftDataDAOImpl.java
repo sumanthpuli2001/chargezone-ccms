@@ -1082,4 +1082,21 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
 
     }
 
+    @Override
+    public List<?> checkEmpDailyData() {
+        String query = "";
+        Date date = new Date();
+        Format formatter = new SimpleDateFormat("dd/MM/YYYY");
+        Date dateBefore = new Date(date.getTime() - 24 * 60 * 60 * 1000);
+        String s1 = formatter.format(dateBefore);
+//        String s1 = "22/07/2016";
+
+        query += " From EmployeeShiftData a "
+                + "Where STR_TO_DATE(a.inDateTime,'%d/%m/%Y') = STR_TO_DATE('" + s1 + "','%d/%m/%Y')"
+                + "OR STR_TO_DATE(a.outDateTime,'%d/%m/%Y') = STR_TO_DATE('" + s1 + "','%d/%m/%Y')"
+                + " Group By a.employeeMaster.id";
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

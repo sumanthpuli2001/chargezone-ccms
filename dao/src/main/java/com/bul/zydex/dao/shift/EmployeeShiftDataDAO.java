@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -36,8 +36,10 @@ public interface EmployeeShiftDataDAO<T> extends GenericsDAO<T> {
 
     public List<?> getPastAndCurrentPunchForSelectedDate(T object, String endShiftTime, String selectDate, String PreviousDate);
 
-    public List<?> dailyTimeEntryForSelectedDate(T object,String date);
-    
-    public List<?> readByEmployeeId(T object,String date);
+    public List<?> dailyTimeEntryForSelectedDate(T object, String date);
+
+    public List<?> readByEmployeeId(T object, String date);
+
+    public List<?> checkEmpDailyData();
 
 }

@@ -403,14 +403,18 @@
                                                                                     <th style="color: blue;text-align: center;">AR/P</th>
                                                                                         <c:set var="ar" value="${ar + 0.5}"></c:set>
                                                                                     </c:if>
-                                                                                    <c:if test="${list[1] == 'TR' || list[1] == 'WO' || fn:contains(list[1], '?') ||
-                                                                                                  list[1] == 'Sick Leave' || list[1] == 'Casual Leave'
-                                                                                                  || list[1] == 'Privilege Leave' || list[1] == 'Paternity Leave'
-                                                                                                  || list[1] == 'Maternity Leave' || list[1] == 'Leave Without Pay' }">
-                                                                                    <th style="text-align: center;">-</th>
+
+                                                                                <c:if test="${list[1] == 'TR' || list[1] == 'WO' || fn:contains(list[1], '?') ||
+                                                                                              list[1] == 'Sick Leave' || list[1] == 'Casual Leave'
+                                                                                              || list[1] == 'Privilege Leave' || list[1] == 'Paternity Leave'
+                                                                                              || list[1] == 'Maternity Leave' || list[1] == 'Leave Without Pay' }">
+                                                                                      <th style="text-align: center;">-</th>
 
                                                                                 </c:if>
-                                                                            </c:if>
+                                                                                <c:if test="${list[1] == 'Short Leave'}">
+                                                                                    <th  style="color: red;text-align: center;">AB</th>
+                                                                                    </c:if>
+                                                                                </c:if>
 
                                                                         </c:forEach>
 
@@ -710,44 +714,44 @@
     </div>
     <script type="text/javascript">
         $('.form_datetime').datetimepicker({
-        //language:  'fr',         weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
+            //language:  'fr',         weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
             todayHighlight: 1,
             startView: 2,
             minView: 2,
-                forceParse: 0,
-                endDate: new Date()
+            forceParse: 0,
+            endDate: new Date()
         });</script>
 
     <script>
-                jQuery.noConflict();
-                jQuery(document).ready(function () {
-        jQuery("#employeeMasterId").tokenInput(${list}, {
-            preventDuplicates: true,
-            noResultsText: "No Result",
-                tokenLimit: "1",
-                    searchingText: "Searching ... .. .",
-                    });
-        });
-    </script>
-    <script>
-                jQuery.noConflict();
-                jQuery(document).ready(function () {
-        jQuery("#zydexLocationId").tokenInput(${zydexLocationList}, {
-            preventDuplicates: true,
+        jQuery.noConflict();
+        jQuery(document).ready(function () {
+            jQuery("#employeeMasterId").tokenInput(${list}, {
+                preventDuplicates: true,
                 noResultsText: "No Result",
                 tokenLimit: "1",
-                    searchingText: "Searching ... .. .",
-                    });
+                searchingText: "Searching ... .. .",
+            });
         });
     </script>
     <script>
         jQuery.noConflict();
-                jQuery(document).ready(function () {
-        jQuery("#levelId").tokenInput(${levelList}, {
+        jQuery(document).ready(function () {
+            jQuery("#zydexLocationId").tokenInput(${zydexLocationList}, {
                 preventDuplicates: true,
-            noResultsText: "No Result",
+                noResultsText: "No Result",
+                tokenLimit: "1",
+                searchingText: "Searching ... .. .",
+            });
+        });
+    </script>
+    <script>
+        jQuery.noConflict();
+        jQuery(document).ready(function () {
+            jQuery("#levelId").tokenInput(${levelList}, {
+                preventDuplicates: true,
+                noResultsText: "No Result",
                 tokenLimit: "1",
                 searchingText: "Searching ... .. .",
             });

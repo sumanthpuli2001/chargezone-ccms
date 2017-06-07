@@ -1154,6 +1154,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         }
 //       1st Half:                 Half day absent Code  start date is full and end date is First Half End code
 //                            newList.add("-");
+                    } else if (firstHalf.equals("Short Leave")) {
+                        newList.add("AB");
                     }
                 } catch (Exception e) {
 
@@ -1239,7 +1241,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     int s = 2;
                     boolean checkLunchTime = false;
                     try {
-                        if (zydexLocationMaster.getId().equals("1") || zydexLocationMaster.getId().equals("6")) {
+                        if (zydexLocationMaster.getId() == 1 || zydexLocationMaster.getId() == 6) {
                             if (listPunch.size() > 2) {
                                 while (listPunch.size() > d && listPunch.size() > s) {
                                     Object[] startLunchTime = (Object[]) listPunch.get(d);
@@ -1516,6 +1518,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         }
 // 2nd Half:              Half day absent Code when start date is full and end date is first half  end Code
 //                            secondHalfList.add("-");
+                    } else if (secondHalf.equals("Short Leave")) {
+                        secondHalfList.add("AB");
                     }
                 } catch (Exception e) {
 
@@ -1551,7 +1555,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     if (listPunch.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
                         EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
                         ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
-                        if (zydexLocationMaster.getId().equals("1") || zydexLocationMaster.getId().equals("6")) {
+                        if (zydexLocationMaster.getId() == 1 || zydexLocationMaster.getId() == 6) {
                             if (listPunch.size() > 2) {
                                 while (listPunch.size() > i && listPunch.size() > j) {
 
@@ -1593,7 +1597,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         long diff1 = 0;
                         long diff2 = 0;
 
-                        if (zydexLocationMaster.getId().equals("1") || zydexLocationMaster.getId().equals("6")) {
+                        if (zydexLocationMaster.getId() == 1 || zydexLocationMaster.getId() == 6) {
                             if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
                                 if (userTimeOut.before(userTimeIn)) {
                                     diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
@@ -2848,7 +2852,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     int s = 2;
                     boolean checkLunchTime = false;
                     try {
-                        if (zydexLocationMaster.getId().equals("1") || zydexLocationMaster.getId().equals("6")) {
+                        if (zydexLocationMaster.getId() == 1 || zydexLocationMaster.getId() == 6) {
                             if (listPunch.size() > 2) {
                                 while (listPunch.size() > d && listPunch.size() > s) {
                                     Object[] startLunchTime = (Object[]) listPunch.get(d);
@@ -3155,7 +3159,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     if (listPunch.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
                         ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
-                        if (zydexLocationMaster.getId().equals("1") || zydexLocationMaster.getId().equals("6")) {
+                        if (zydexLocationMaster.getId() == 1 || zydexLocationMaster.getId() == 6) {
                             if (listPunch.size() > 2) {
                                 while (listPunch.size() > i && listPunch.size() > j) {
 
@@ -3197,7 +3201,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         shiftdiffMinutes = shiftTotalTime / (60 * 1000);
                         long diff1 = 0;
                         long diff2 = 0;
-                        if (zydexLocationMaster.getId().equals("1") || zydexLocationMaster.getId().equals("6")) {
+                        if (zydexLocationMaster.getId() == 1 || zydexLocationMaster.getId() == 6) {
                             if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
                                 if (userTimeOut.before(userTimeIn)) {
                                     diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
@@ -3466,7 +3470,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
         calForFlexiNotSupport2.setTime(notflexibleSupportDate1);
         request.setAttribute("id", id);
-        if (flexible == true ) {
+        if (flexible == true) {
 //        if (flexible == true) {
             mv.setViewName("Shift/EmployeeFlexibleDayWisePunchDataReportOfSubordinate");
 

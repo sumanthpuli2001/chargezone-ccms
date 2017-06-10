@@ -32,5 +32,8 @@
         <property name="approvedDate" type="string">
             <column name="approved_date" length="45" />
         </property>
+        <property name="dateOfSubmit" type="string">
+            <column name="date_of_submit" length="45" />
+        </property>
     </class>
 </hibernate-mapping>

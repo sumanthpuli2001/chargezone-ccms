@@ -73,6 +73,7 @@
                                                                     <th>End Date & Time</th>
                                                                     <th>Reason</th>
                                                                     <th>Status</th>
+                                                                    <th>Date of Submission</th>
                                                                     <th>Action</th>
                                                                 </tr>
                                                             </thead>
@@ -105,6 +106,7 @@
                                                                 <c:if test="${list.status eq 7}">
                                                                     <td><span class="label label-info">Rework by ${managerName}</span></td>
                                                                 </c:if>
+                                                                    <td>${list.dateOfSubmit}</td>
                                                                 <td>  <button type="button" class="btn btn-default" onclick="editClick(${list.id});">View</button></td>
 
                                                             </tr>

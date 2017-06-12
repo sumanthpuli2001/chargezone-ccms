@@ -42,4 +42,6 @@ public interface EmployeeShiftDataDAO<T> extends GenericsDAO<T> {
 
     public List<?> checkEmpDailyData();
 
+    public List<?> checkEmpDateWiseInOutData(String date);
+
 }

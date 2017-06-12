@@ -89,11 +89,16 @@ public class EmployeeShiftDataServiceImpl<T> extends GenericsServiceImpl<T> impl
 
     @Override
     public List<?> readByEmployeeId(T object, String date) {
-        return employeeShiftDataDAO.readByEmployeeId(object,date);
+        return employeeShiftDataDAO.readByEmployeeId(object, date);
     }
 
     @Override
     public List<?> checkEmpDailyData() {
-       return employeeShiftDataDAO.checkEmpDailyData();
+        return employeeShiftDataDAO.checkEmpDailyData();
+    }
+
+    @Override
+    public List<?> checkEmpDateWiseInOutData(String date) {
+        return employeeShiftDataDAO.checkEmpDateWiseInOutData(date);
     }
 }

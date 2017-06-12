@@ -1053,7 +1053,8 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
         String query = "";
         query += " From EmployeeShiftData a "
                 + " Where a.employeeMaster.id = '" + employeeShiftData.getEmployeeMaster().getId() + "'"
-                + "and STR_TO_DATE(a.inDateTime,'%d/%m/%Y %H:%i:%s') BETWEEN STR_TO_DATE('" + PreviousDate + " " + endShiftTime + ":00','%d/%m/%Y %H:%i:%s') AND (STR_TO_DATE('" + selectDate + " 23:59:00','%d/%m/%Y %H:%i:%s'))";
+                + " and (STR_TO_DATE(a.inDateTime,'%d/%m/%Y %H:%i:%s') BETWEEN STR_TO_DATE('" + PreviousDate + " " + endShiftTime + ":00','%d/%m/%Y %H:%i:%s') AND (STR_TO_DATE('" + selectDate + " 23:59:00','%d/%m/%Y %H:%i:%s'))"
+                + " OR STR_TO_DATE(a.outDateTime,'%d/%m/%Y %H:%i:%s') BETWEEN STR_TO_DATE('" + PreviousDate + " " + endShiftTime + ":00','%d/%m/%Y %H:%i:%s') AND (STR_TO_DATE('" + selectDate + " 23:59:00','%d/%m/%Y %H:%i:%s')))";
 
         return getHibernateTemplate().find(query);
     }
@@ -1094,6 +1095,18 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
         query += " From EmployeeShiftData a "
                 + "Where STR_TO_DATE(a.inDateTime,'%d/%m/%Y') = STR_TO_DATE('" + s1 + "','%d/%m/%Y')"
                 + "OR STR_TO_DATE(a.outDateTime,'%d/%m/%Y') = STR_TO_DATE('" + s1 + "','%d/%m/%Y')"
+                + " Group By a.employeeMaster.id";
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> checkEmpDateWiseInOutData(String date) {
+        String query = "";
+//        String s1 = "22/07/2016";
+        query += " From EmployeeShiftData a "
+                + "Where STR_TO_DATE(a.inDateTime,'%d/%m/%Y') = STR_TO_DATE('" + date + "','%d/%m/%Y')"
+                + "OR STR_TO_DATE(a.outDateTime,'%d/%m/%Y') = STR_TO_DATE('" + date + "','%d/%m/%Y')"
                 + " Group By a.employeeMaster.id";
 
         return getHibernateTemplate().find(query);

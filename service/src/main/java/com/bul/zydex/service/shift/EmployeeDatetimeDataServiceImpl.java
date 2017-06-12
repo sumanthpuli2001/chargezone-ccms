@@ -71,12 +71,19 @@ public class EmployeeDatetimeDataServiceImpl<T> extends GenericsServiceImpl<T> i
     public List<?> readYesterdayEmployeeDataBySelectedDate(String empId, String date) {
         return employeeDatetimeDataDAO.readYesterdayEmployeeDataBySelectedDate(empId, date);
     }
+
     @Override
-    public List<?> readTodaysAndPreviousDataOnSelectedDate(String empId, String endShiftTime,String selectDate,String PreviousDate){
-        return employeeDatetimeDataDAO.readTodaysAndPreviousDataOnSelectedDate(empId,endShiftTime,selectDate,PreviousDate);
+    public List<?> readTodaysAndPreviousDataOnSelectedDate(String empId, String endShiftTime, String selectDate, String PreviousDate) {
+        return employeeDatetimeDataDAO.readTodaysAndPreviousDataOnSelectedDate(empId, endShiftTime, selectDate, PreviousDate);
     }
+
     @Override
-     public List<?> readSelectedDateEmployeeData(String empId,String date){
-        return employeeDatetimeDataDAO.readSelectedDateEmployeeData(empId,date);
+    public List<?> readSelectedDateEmployeeData(String empId, String date) {
+        return employeeDatetimeDataDAO.readSelectedDateEmployeeData(empId, date);
+    }
+
+    @Override
+    public List<?> readEmployeePunchDateWise(int empId, String Date) {
+        return employeeDatetimeDataDAO.readEmployeePunchDateWise(empId, Date);
     }
 }

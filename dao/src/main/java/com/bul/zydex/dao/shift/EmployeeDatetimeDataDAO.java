@@ -29,10 +29,12 @@ public interface EmployeeDatetimeDataDAO<T> extends GenericsDAO<T> {
     public List<?> readYesterdayEmployeeData(String empId);
 
     public List<?> readEmployeeBySelectedDate(String date);
-    
-    public List<?> readYesterdayEmployeeDataBySelectedDate(String empId,String date);
-    
-    public List<?> readTodaysAndPreviousDataOnSelectedDate(String empId, String endShiftTime,String selectDate,String PreviousDate);
 
-     public List<?> readSelectedDateEmployeeData(String empId,String date);
+    public List<?> readYesterdayEmployeeDataBySelectedDate(String empId, String date);
+
+    public List<?> readTodaysAndPreviousDataOnSelectedDate(String empId, String endShiftTime, String selectDate, String PreviousDate);
+
+    public List<?> readSelectedDateEmployeeData(String empId, String date);
+
+    public List<?> readEmployeePunchDateWise(int empId,String Date);
 }

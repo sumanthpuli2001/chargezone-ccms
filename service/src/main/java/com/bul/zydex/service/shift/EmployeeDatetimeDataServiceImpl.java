@@ -79,4 +79,9 @@ public class EmployeeDatetimeDataServiceImpl<T> extends GenericsServiceImpl<T> i
      public List<?> readSelectedDateEmployeeData(String empId,String date){
         return employeeDatetimeDataDAO.readSelectedDateEmployeeData(empId,date);
     }
+
+    @Override
+    public List<?> readEmployeeByDatevise(String date) {
+        return employeeDatetimeDataDAO.readEmployeeByDatevise(date);
+    }
 }

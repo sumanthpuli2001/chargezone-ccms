@@ -61,6 +61,7 @@
         <property name="deviceMasterValidator" ref="deviceMasterValidator1"/>
         <property name="deviceMasterService" ref="deviceMasterService1"/>
         <property name="employeeDatetimeDataService" ref="employeeDatetimeDataService1"/>
+        <property name="deviceMasterNotificationService" ref="deviceMasterNotificationService1"/>
     </bean>
     <!--Employee-->
     <bean id="employeeMasterController1" class="com.bul.zydex.controller.emp.EmployeeMasterController" parent="controllerConfig" >

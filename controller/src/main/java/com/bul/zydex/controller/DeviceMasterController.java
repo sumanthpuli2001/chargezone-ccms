@@ -6,6 +6,8 @@
 package com.bul.zydex.controller;
 
 import com.bul.zydex.model.DeviceMaster;
+import com.bul.zydex.model.DeviceMasterNotification;
+import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeDatetimeData;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
@@ -19,6 +21,7 @@ import java.util.List;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.BeanUtils;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,6 +45,7 @@ public class DeviceMasterController extends DeviceMasterAbstract {
     public ModelAndView createSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         DeviceMaster deviceMaster = new DeviceMaster();
+        DeviceMasterNotification deviceMasterNotification = new DeviceMasterNotification();
         BindException errors = new BindException(deviceMaster, "deviceMaster");
         bind(request, deviceMaster);
         deviceMasterValidator.validate(deviceMaster, errors);
@@ -49,6 +53,7 @@ public class DeviceMasterController extends DeviceMasterAbstract {
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid.");
             mv.addAllObjects(errors.getModel());
+            zydexLocationList(request);
 //            mv = createClick(request, response);
             mv.setViewName("User/Device");
         } else {
@@ -56,6 +61,9 @@ public class DeviceMasterController extends DeviceMasterAbstract {
             ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
             zydexLocationMaster = zydexLocationMasterService.readById(Integer.parseInt(location));
             deviceMasterService.create(deviceMaster);
+            BeanUtils.copyProperties(deviceMaster, deviceMasterNotification);
+            deviceMasterNotification.setCountConnectionOut(0);
+            deviceMasterNotificationService.create(deviceMasterNotification);
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
 
@@ -94,6 +102,7 @@ public class DeviceMasterController extends DeviceMasterAbstract {
     public ModelAndView editSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         DeviceMaster deviceMaster = new DeviceMaster();
+        DeviceMasterNotification deviceMasterNotification = new DeviceMasterNotification();
         BindException errors = new BindException(deviceMaster, "deviceMaster");
         deviceMaster.setId(Integer.parseInt(request.getParameter("id")));
         bind(request, deviceMaster);
@@ -102,8 +111,16 @@ public class DeviceMasterController extends DeviceMasterAbstract {
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid.");
             mv = editClick(request, response);
+            mv.addAllObjects(errors.getModel());
         } else {
             deviceMasterService.update(deviceMaster);
+            BeanUtils.copyProperties(deviceMaster, deviceMasterNotification);
+            List<DeviceMasterNotification> l = (List<DeviceMasterNotification>) deviceMasterNotificationService.readByIpAddress(deviceMasterNotification);
+            if (!l.isEmpty()) {
+                deviceMasterNotification.setId(((DeviceMasterNotification) l.get(0)).getId());
+                deviceMasterNotification.setCountConnectionOut(0);
+                deviceMasterNotificationService.update(deviceMasterNotification);
+            }
             request.setAttribute("successMessage",
                     "Information : The Information is Updated Successfully.");
             mv = searchSubmit(request, response);
@@ -118,6 +135,18 @@ public class DeviceMasterController extends DeviceMasterAbstract {
         String deviceMasterId[] = request.getParameterValues("checkId");
         for (String z : deviceMasterId) {
             try {
+                try {
+
+                    DeviceMaster deviceMaster = deviceMasterService.readById(Integer.parseInt(z));
+                    DeviceMasterNotification deviceMasterNotification = new DeviceMasterNotification();
+                    BeanUtils.copyProperties(deviceMaster, deviceMasterNotification);
+                    List<DeviceMasterNotification> l = (List<DeviceMasterNotification>) deviceMasterNotificationService.readByIpAddress(deviceMasterNotification);
+                    for (DeviceMasterNotification l1 : l) {
+                        deviceMasterNotificationService.delete(l1.getId());
+                    }
+                } catch (Exception e) {
+
+                }
                 deviceMasterService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
                         "Info : One or more records are deleted successfully.");
@@ -145,6 +174,14 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                 if (seq_number == 50000) {
                     seq_number = 1;
                     deviceMaster.setSeqNumber(seq_number);
+                    DeviceMasterNotification deviceMasterNotification = new DeviceMasterNotification();
+                    BeanUtils.copyProperties(deviceMaster, deviceMasterNotification);
+                    List<DeviceMasterNotification> l = (List<DeviceMasterNotification>) deviceMasterNotificationService.readByIpAddress(deviceMasterNotification);
+                    if (!l.isEmpty()) {
+                        deviceMasterNotification.setId(((DeviceMasterNotification) l.get(0)).getId());
+                        deviceMasterNotification.setCountConnectionOut(0);
+                        deviceMasterNotificationService.update(deviceMasterNotification);
+                    }
                     deviceMasterService.update(deviceMaster);
                 }
                 int seqNoCounter = seq_number;
@@ -178,8 +215,9 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                 String encoded1 = new sun.misc.BASE64Encoder().encode(loginPassword1.getBytes());
                 myURLConnection1 = myURL1.openConnection();
                 myURLConnection1.setRequestProperty("Authorization", "Basic " + encoded1);
-                myURLConnection1.connect();
                 myURLConnection1.setConnectTimeout(15000);
+                myURLConnection1.setReadTimeout(20000);
+                myURLConnection1.connect();
                 if (myURLConnection1.getInputStream().available() > 0) {
                     reader1 = new BufferedReader(new InputStreamReader(myURLConnection1.getInputStream()));
                 } else {
@@ -188,7 +226,36 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                 String response;
                 String rollOverCount = "";
                 String urlSeqNo = "";
+                if (null == reader1.readLine() || "".equals(reader1.readLine())) {
+                    DeviceMasterNotification deviceMasterNotification = new DeviceMasterNotification();
+                    deviceMasterNotification.setIpAddress(deviceip);
+                    List<DeviceMasterNotification> l = (List<DeviceMasterNotification>) deviceMasterNotificationService.readByIpAddress(deviceMasterNotification);
+                    for (DeviceMasterNotification l2 : l) {
+                        if ((null != l2.getReceipt() || !"".equals(l2.getReceipt())) && deviceMaster.getCountConnectionOut() == l2.getCountConnectionOut()) {
+                            for (String empId : l2.getReceipt().split(",")) {
+                                if (!"".equals(empId)) {
 
+                                    EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                                    EmailTemplate emailTemplate = new EmailTemplate();
+                                    employeeMaster2 = employeeMasterService.readById(Integer.parseInt(empId));
+                                    String To = employeeMaster2.getOfficeEmailId();
+                                    emailTemplate = emailTemplateService.readById(141);
+                                    String Subject = emailTemplate.getSubject();
+                                    String msg = emailTemplate.getBodytext();
+                                    sendMail.sendMail("admin@zydexindustries.com", To, Subject, msg);
+                                    l2.setCountConnectionOut(0);
+
+                                } else {
+                                    l2.setCountConnectionOut((l2.getCountConnectionOut() + 1));
+
+                                }
+                                deviceMasterNotificationService.update(l2);
+                            }
+                        } else {
+
+                        }
+                    }
+                }
                 while ((response = reader1.readLine()) != null) {
                     System.out.println(response);
                     if (response1LineCounter == 3) {
@@ -236,8 +303,9 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                         String encoded = new sun.misc.BASE64Encoder().encode(loginPassword.getBytes());
                         myURLConnection = myURL.openConnection();
                         myURLConnection.setRequestProperty("Authorization", "Basic " + encoded);
-                        myURLConnection.connect();
                         myURLConnection.setConnectTimeout(15000);
+                        myURLConnection.setReadTimeout(20000);
+                        myURLConnection.connect();
                         if (myURLConnection.getInputStream().available() > 0) {
                             reader = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
                         } else {
@@ -249,7 +317,38 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                         String punchInDate = "";
                         String punchInTime = "";
                         String punchInEmployeeId = "";
-                        if (reader.readLine() == null) {
+                        if (null == reader.readLine()) {
+                            if (null == reader1.readLine() || "".equals(reader1.readLine())) {
+                                DeviceMasterNotification deviceMasterNotification = new DeviceMasterNotification();
+                                deviceMasterNotification.setIpAddress(deviceip);
+                                List<DeviceMasterNotification> l = (List<DeviceMasterNotification>) deviceMasterNotificationService.readByIpAddress(deviceMasterNotification);
+                                for (DeviceMasterNotification l2 : l) {
+                                    if ((null != l2.getReceipt() || !"".equals(l2.getReceipt())) && deviceMaster.getCountConnectionOut() == l2.getCountConnectionOut()) {
+                                        for (String empId : l2.getReceipt().split(",")) {
+                                            if (!"".equals(empId)) {
+
+                                                EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                                                EmailTemplate emailTemplate = new EmailTemplate();
+                                                employeeMaster2 = employeeMasterService.readById(Integer.parseInt(empId));
+                                                String To = employeeMaster2.getOfficeEmailId();
+                                                emailTemplate = emailTemplateService.readById(141);
+                                                String Subject = emailTemplate.getSubject();
+                                                String msg = emailTemplate.getBodytext();
+                                                sendMail.sendMail("admin@zydexindustries.com", To, Subject, msg);
+                                                l2.setCountConnectionOut(0);
+
+                                            } else {
+                                                l2.setCountConnectionOut((l2.getCountConnectionOut() + 1));
+
+                                            }
+                                            deviceMasterNotificationService.update(l2);
+                                        }
+                                    } else {
+
+                                    }
+                                }
+                            }
+
                             break;
                         } else {
                             while ((response1 = reader.readLine()) != null) //print response
@@ -280,6 +379,14 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                                 employeeDatetimeDataService.create(employeeDatetimeData);
                             }
                             //deviceMaster1.setSeqNumber(Integer.parseInt(sequenceNoUrl));
+                            DeviceMasterNotification deviceMasterNotification = new DeviceMasterNotification();
+                            BeanUtils.copyProperties(deviceMaster, deviceMasterNotification);
+                            List<DeviceMasterNotification> l = (List<DeviceMasterNotification>) deviceMasterNotificationService.readByIpAddress(deviceMasterNotification);
+                            if (!l.isEmpty()) {
+                                deviceMasterNotification.setId(((DeviceMasterNotification) l.get(0)).getId());
+                                deviceMasterNotification.setCountConnectionOut(0);
+                                deviceMasterNotificationService.update(deviceMasterNotification);
+                            }
                             deviceMasterService.update(deviceMaster1);
                             seq_number++;
                             if (seq_number == 50000) {

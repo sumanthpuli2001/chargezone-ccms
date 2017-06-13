@@ -11,11 +11,12 @@ import java.util.Set;
 public class DeviceMaster  implements java.io.Serializable {
 
 
-     private int id;
+     private Integer id;
      private ZydexLocationMaster zydexLocationMaster;
      private String ipAddress;
      private Integer portNo;
      private Integer seqNumber;
+     private Integer countConnectionOut;
      private Set employeeDatetimeDatas = new HashSet(0);
      private Set employeeDatetimeDatas_1 = new HashSet(0);
 
@@ -23,24 +24,25 @@ public class DeviceMaster  implements java.io.Serializable {
     }
 
 	
-    public DeviceMaster(int id) {
+    public DeviceMaster(Integer id) {
         this.id = id;
     }
-    public DeviceMaster(int id, ZydexLocationMaster zydexLocationMaster, String ipAddress, Integer portNo, Integer seqNumber, Set employeeDatetimeDatas, Set employeeDatetimeDatas_1) {
+    public DeviceMaster(Integer id, ZydexLocationMaster zydexLocationMaster, String ipAddress, Integer portNo, Integer seqNumber,Integer countConnectionOut, Set employeeDatetimeDatas, Set employeeDatetimeDatas_1) {
        this.id = id;
        this.zydexLocationMaster = zydexLocationMaster;
        this.ipAddress = ipAddress;
        this.portNo = portNo;
        this.seqNumber = seqNumber;
+       this.countConnectionOut = countConnectionOut;
        this.employeeDatetimeDatas = employeeDatetimeDatas;
        this.employeeDatetimeDatas_1 = employeeDatetimeDatas_1;
     }
-   
-    public int getId() {
-        return this.id;
+
+    public Integer getId() {
+        return id;
     }
-    
-    public void setId(int id) {
+
+    public void setId(Integer id) {
         this.id = id;
     }
     public ZydexLocationMaster getZydexLocationMaster() {
@@ -71,6 +73,15 @@ public class DeviceMaster  implements java.io.Serializable {
     public void setSeqNumber(Integer seqNumber) {
         this.seqNumber = seqNumber;
     }
+
+    public Integer getCountConnectionOut() {
+        return countConnectionOut;
+    }
+
+    public void setCountConnectionOut(Integer countConnectionOut) {
+        this.countConnectionOut = countConnectionOut;
+    }
+    
     public Set getEmployeeDatetimeDatas() {
         return this.employeeDatetimeDatas;
     }

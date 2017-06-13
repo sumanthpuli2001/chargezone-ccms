@@ -310,7 +310,7 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
 
     public List<?> searchLeaveApproveOfEmployeeByMonthWise(T object) {
         LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
-        String query = "select"
+        String query = "select DATE_FORMAT(STR_TO_DATE(selected_date, '%Y-%m-%d'),'%d/%m/%Y') As selecteddate ,"
                 + "    case"
                 + "                when"
                 + "            (select"
@@ -406,10 +406,10 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         Query query1 = getSession().createSQLQuery(query);
         List results = query1.list();
 
-        Iterator<String> iterator = results.iterator();
+        Iterator iterator = results.iterator();
         while (iterator.hasNext()) {
-            String value = iterator.next();
-            if ("AB".equals(value) || "WO".equals(value)) {
+            Object[] value = (Object[]) iterator.next();
+            if ("AB".equals(value[1]) || "WO".equals(value[1])) {
                 iterator.remove();
             }
         }
@@ -420,7 +420,7 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
     public List<?> searchLeaveApproveOfEmployeeByPreviousMonthWise(T object) {
         LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
 
-        String query = "select"
+        String query = "select DATE_FORMAT(STR_TO_DATE(selected_date, '%Y-%m-%d'),'%d/%m/%Y') As selecteddate ,"
                 + "    case"
                 + "                when"
                 + "            (select"
@@ -515,10 +515,10 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         Query query1 = getSession().createSQLQuery(query);
         List results = query1.list();
-        Iterator<String> iterator = results.iterator();
+        Iterator iterator = results.iterator();
         while (iterator.hasNext()) {
-            String value = iterator.next();
-            if ("AB".equals(value) || "WO".equals(value)) {
+             Object[] value = (Object[]) iterator.next();
+            if ("AB".equals(value[1]) || "WO".equals(value[1])) {
                 iterator.remove();
             }
         }

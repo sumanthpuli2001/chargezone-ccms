@@ -31,6 +31,8 @@ public class DeviceMasterValidator implements Validator {
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "zydexLocationMaster.id",
                 "field.error13", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "countConnectionOut",
+                "field.error1", "None");
         DeviceMaster deviceMaster = (DeviceMaster) o; 
     } 
 

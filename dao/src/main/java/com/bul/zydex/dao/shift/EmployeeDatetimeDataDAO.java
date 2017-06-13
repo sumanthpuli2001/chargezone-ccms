@@ -36,5 +36,7 @@ public interface EmployeeDatetimeDataDAO<T> extends GenericsDAO<T> {
 
     public List<?> readSelectedDateEmployeeData(String empId, String date);
 
-    public List<?> readEmployeePunchDateWise(int empId,String Date);
+    public List<?> readEmployeePunchDateWise(int empId, String Date);
+
+    public List<?> readEmployeeByDatevise(String date);
 }

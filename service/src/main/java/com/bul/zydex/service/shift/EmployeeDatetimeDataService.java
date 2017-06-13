@@ -28,4 +28,6 @@ public interface EmployeeDatetimeDataService<T> extends GenericsService<T> {
     public List<?> readSelectedDateEmployeeData(String empId, String date);
 
     public List<?> readEmployeePunchDateWise(int empId, String Date);
+
+    public List<?> readEmployeeByDatevise(String date);
 }

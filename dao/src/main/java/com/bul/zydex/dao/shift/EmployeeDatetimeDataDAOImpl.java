@@ -176,6 +176,19 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
 
         return getHibernateTemplate().find(query);
     }
+//    Rishi Start
+
+    @Override
+    public List<?> readEmployeeByDatevise(String date) {
+        String query = "";
+//        String s = "02/07/2016";
+        query += " From EmployeeDatetimeData a "
+                + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y') IN (STR_TO_DATE('" + date + "','%d/%m/%Y'))"
+                + " GROUP BY a.employeeMaster.id";
+
+        return getHibernateTemplate().find(query);
+    }
+//    Rishi End
 
     @Override
     public List<?> readEmployeePunchDateWise(int empId, String Date) {
@@ -185,7 +198,7 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
         query += " From EmployeeDatetimeData a "
                 + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y') IN (STR_TO_DATE('" + Date + "','%d/%m/%Y'),STR_TO_DATE('" + Date + "','%d/%m/%Y'))"
                 + " And a.employeeMaster.id=" + empId
-                + " GROUP BY a.dateTime"
+                + " GROUP BY a.employeeMaster.id"
                 + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
 
         return getHibernateTemplate().find(query);

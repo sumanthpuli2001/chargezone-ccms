@@ -53,7 +53,7 @@ public class AttendanceRegularizationMasterDAOImpl<T> extends GenericsDAOImpl<T>
     @Override
     public List<?> approvalLeval1WiseAttendanceRegularizationList(int id) {
         String query = "";
-        query += " SELECT a.id,b.employeeName,a.startDateTime,a.endDateTime,a.reason,a.status"
+        query += " SELECT a.id,b.employeeName,a.startDateTime,a.endDateTime,a.reason,a.status,a.dateOfSubmit"
                 + " FROM AttendanceRegularization a,"
                 + " EmployeeMaster b"
                 + " Where a.userMasterId=b.userMaster.id"
@@ -66,7 +66,7 @@ public class AttendanceRegularizationMasterDAOImpl<T> extends GenericsDAOImpl<T>
     @Override
     public List<?> attendanceRegularizationApprivedList(int id) {
         String query = "";
-        query += " SELECT a.id,b.employeeName,a.startDateTime,a.endDateTime,a.reason,a.status"
+        query += " SELECT a.id,b.employeeName,a.startDateTime,a.endDateTime,a.reason,a.status,a.dateOfSubmit"
                 + " FROM AttendanceRegularization a,"
                 + " EmployeeMaster b"
                 + " Where a.userMasterId=b.userMaster.id"
@@ -143,7 +143,7 @@ public class AttendanceRegularizationMasterDAOImpl<T> extends GenericsDAOImpl<T>
     @Override
     public List<?> powerAdminAttendanceRegularizationList() {
         String query = "";
-        query += " SELECT a.id,b.employeeName,a.startDateTime,a.endDateTime,a.reason,a.status,b.employeeId"
+        query += " SELECT a.id,b.employeeName,a.startDateTime,a.endDateTime,a.reason,a.status,b.employeeId,a.dateOfSubmit"
                 + " FROM AttendanceRegularization a,"
                 + " EmployeeMaster b"
                 + " Where a.userMasterId=b.userMaster.id"

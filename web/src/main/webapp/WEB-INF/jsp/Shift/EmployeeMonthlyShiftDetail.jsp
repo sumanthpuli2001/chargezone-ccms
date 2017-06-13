@@ -26,8 +26,8 @@
     </head>
     <script>
         function viewClick(monthlyShiftId) {
-         
-            window.location = 'shiftRotationMaster.htm?act=viewClickEmployeeShiftAssign&id=' + monthlyShiftId;
+            alert(monthlyShiftId);
+            window.location = "shiftRotationMaster.htm?act=viewClickEmployeeShiftAssign&id=" + monthlyShiftId;
         }
 
 //        function approveClick(arId) {
@@ -41,6 +41,51 @@
 //        function reworkClick(arId) {
 //            window.location = 'attendanceRegularizationMaster.htm?act=reworkSubmitByAdmin&id=' + arId;
 //        }
+    </script>
+
+    <script>
+        function monthwiseData() {
+
+            var SelectedYear = document.getElementById("monthSelect");
+            var month = SelectedYear.options[SelectedYear.selectedIndex].value;
+
+
+
+            window.location = "shiftRotationMaster.htm?act=MonthlyEmployeeShiftAssignData&selectedMonth=" + month;
+
+
+
+
+        }
+    </script>
+    <script>
+        function  monthData() {
+            var start = 0;
+            var end = 12;
+            var options = "";
+            var totyears = "";
+            var selectedMonth =${selectedMonth};
+//            if (null !== selectedMonth) {
+//                options += "<option value=" + selectedMonth + ">" + selectedMonth + "</option>";
+//            }
+
+            for (var year = start; year <= end; year++) {
+                totyears += year;
+
+                if (year === start) {
+
+                    options += "<option value= >Select</option>";
+                } else {
+                    if (year === selectedMonth) {
+                        options += "<option selected value=" + selectedMonth + ">" + selectedMonth + "</option>";
+                    } else {
+                        options += "<option value=" + year + ">" + year + "</option>";
+                    }
+
+                }
+            }
+            document.getElementById("monthSelect").innerHTML = options;
+        }
     </script>
 
     <div class="content-wrapper">
@@ -59,9 +104,16 @@
         <c:if test="${!empty failureMessage}">
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
+        <div class="form-group">
+            <div class="col-sm-6">
+                <label> Month</label>
+                <select id="monthSelect" onchange="monthwiseData();">
+                </select>
+            </div>
+        </div>
         <!-- Main content -->
         <form:form     
-                   name='form1' onsubmit='return saveSubmit11();' class="form-horizontal" role="form">
+            name='form1' onsubmit='return saveSubmit11();' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
@@ -145,6 +197,12 @@
             minView: 0,
             maxView: 1,
             forceParse: 0
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            monthData();
         });
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

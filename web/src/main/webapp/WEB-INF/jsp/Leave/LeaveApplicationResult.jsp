@@ -142,6 +142,7 @@
                                                                     <th>Start Date</th>
                                                                     <th>End Date</th>
                                                                     <th>No Of Days</th>
+                                                                    <th>Date of submission</th>
                                                                     <th>Status</th>
                                                                     <th>Action</th>
                                                                 </tr>
@@ -172,6 +173,7 @@
                                                                     <td>WithDraw</td>
                                                                 </c:if>
                                                                 <!--<td>$//{list[5]}</td>-->
+                                                                <td>${list[6]}</td>
                                                                 <td>
                                                                     <div class="btn-group">
                                                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -54,7 +54,7 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form action="shiftRotationMaster.htm?act=employeeManualPunchSubmit" method="post" commandName="employeeAdvanceSearch"
+        <form:form action="shiftRotationMaster.htm?act=manualEntryDaily" method="post" 
                    name='form1' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">

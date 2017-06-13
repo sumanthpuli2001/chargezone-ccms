@@ -25,6 +25,7 @@ import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.service.shift.EmployeeShiftDataService;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -301,6 +302,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                         leaveEmployeeDetail3.setEndDateStatus("Fullday");
                                         leaveEmployeeDetail3.setNoOfDays(1.0f);
                                         leaveEmployeeDetail3.setStatus(0);
+                                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                        String currentDate = dateFormat1.format(new Date());
+                                        leaveEmployeeDetail.setDateOfSubmit(currentDate);
                                         leaveEmployeeDetailService.create(leaveEmployeeDetail3);
                                     }
 
@@ -327,6 +331,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                         employeeLeaveBalanceService.update(employeeLeaveBalance1);
                                         float addDays = leaveEmployeeDetail2.getNoOfDays() + 1.0f;
                                         leaveEmployeeDetail2.setNoOfDays(addDays);
+                                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                        String currentDate = dateFormat1.format(new Date());
+                                        leaveEmployeeDetail.setDateOfSubmit(currentDate);
                                         leaveEmployeeDetailService.update(leaveEmployeeDetail2);
                                     } else {
                                         leaveCkeck = true;
@@ -345,6 +352,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                         leaveEmployeeDetail3.setEndDateStatus("Fullday");
                                         leaveEmployeeDetail3.setNoOfDays(1.0f);
                                         leaveEmployeeDetail3.setStatus(0);
+                                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                        String currentDate = dateFormat1.format(new Date());
+                                        leaveEmployeeDetail.setDateOfSubmit(currentDate);
                                         leaveEmployeeDetailService.create(leaveEmployeeDetail3);
                                     }
                                 } else if ((!leaveEmployeeDetail2.getLeaveTypeMaster().getId().equals(leaveEmployeeDetail.getLeaveTypeMaster().getId()))) {
@@ -374,6 +384,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                         employeeLeaveBalanceService.update(employeeLeaveBalance2);
                                         float addDays = leaveEmployeeDetail2.getNoOfDays() + 1;
                                         leaveEmployeeDetail2.setNoOfDays(addDays);
+                                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                        String currentDate = dateFormat1.format(new Date());
+                                        leaveEmployeeDetail2.setDateOfSubmit(currentDate);
                                         leaveEmployeeDetailService.update(leaveEmployeeDetail2);
 
                                     } else {
@@ -393,6 +406,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                         leaveEmployeeDetail3.setEndDateStatus("Fullday");
                                         leaveEmployeeDetail3.setNoOfDays(1.0f);
                                         leaveEmployeeDetail3.setStatus(0);
+                                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                        String currentDate = dateFormat1.format(new Date());
+                                        leaveEmployeeDetail.setDateOfSubmit(currentDate);
                                         leaveEmployeeDetailService.create(leaveEmployeeDetail3);
                                     }
                                 }
@@ -444,6 +460,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                         leaveEmployeeDetail3.setEndDateStatus("Fullday");
                                         leaveEmployeeDetail3.setNoOfDays(1.0f);
                                         leaveEmployeeDetail3.setStatus(0);
+                                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                        String currentDate = dateFormat1.format(new Date());
+                                        leaveEmployeeDetail.setDateOfSubmit(currentDate);
                                         leaveEmployeeDetailService.create(leaveEmployeeDetail3);
                                     }
 
@@ -470,6 +489,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                         employeeLeaveBalanceService.update(employeeLeaveBalance1);
                                         float addDays = leaveEmployeeDetail2.getNoOfDays() + 1.0f;
                                         leaveEmployeeDetail2.setNoOfDays(addDays);
+                                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                        String currentDate = dateFormat1.format(new Date());
+                                        leaveEmployeeDetail2.setDateOfSubmit(currentDate);
                                         leaveEmployeeDetailService.update(leaveEmployeeDetail2);
                                     } else {
                                         leaveCkeck = true;
@@ -488,6 +510,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                         leaveEmployeeDetail3.setEndDateStatus("Fullday");
                                         leaveEmployeeDetail3.setNoOfDays(1.0f);
                                         leaveEmployeeDetail3.setStatus(0);
+                                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                        String currentDate = dateFormat1.format(new Date());
+                                        leaveEmployeeDetail.setDateOfSubmit(currentDate);
                                         leaveEmployeeDetailService.create(leaveEmployeeDetail3);
                                     }
                                 } else if ((!leaveEmployeeDetail2.getLeaveTypeMaster().getId().equals(leaveEmployeeDetail.getLeaveTypeMaster().getId()))) {
@@ -517,6 +542,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                         employeeLeaveBalanceService.update(employeeLeaveBalance2);
                                         float addDays = leaveEmployeeDetail2.getNoOfDays() + 1;
                                         leaveEmployeeDetail2.setNoOfDays(addDays);
+                                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                        String currentDate = dateFormat1.format(new Date());
+                                        leaveEmployeeDetail2.setDateOfSubmit(currentDate);
                                         leaveEmployeeDetailService.update(leaveEmployeeDetail2);
 
                                     } else {
@@ -536,6 +564,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                         leaveEmployeeDetail3.setEndDateStatus("Fullday");
                                         leaveEmployeeDetail3.setNoOfDays(1.0f);
                                         leaveEmployeeDetail3.setStatus(0);
+                                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                        String currentDate = dateFormat1.format(new Date());
+                                        leaveEmployeeDetail.setDateOfSubmit(currentDate);
                                         leaveEmployeeDetailService.create(leaveEmployeeDetail3);
                                     }
                                 }
@@ -643,6 +674,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             mv = applyClick(request, response);
                         } else {
                             leaveEmployeeDetail.setNoOfDays(Float.parseFloat("1"));
+                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                            String currentDate = dateFormat1.format(new Date());
+                            leaveEmployeeDetail.setDateOfSubmit(currentDate);
                             leaveEmployeeDetailService.create(leaveEmployeeDetail);
 
                             balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
@@ -736,6 +770,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             mv = applyClick(request, response);
 
                         } else {
+                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                            String currentDate = dateFormat1.format(new Date());
+                            leaveEmployeeDetail.setDateOfSubmit(currentDate);
                             leaveEmployeeDetailService.create(leaveEmployeeDetail);
                             try {
                                 Mailsend(request);
@@ -771,6 +808,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                             mv = applyClick(request, response);
                         } else {
+                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                            String currentDate = dateFormat1.format(new Date());
+                            leaveEmployeeDetail.setDateOfSubmit(currentDate);
                             leaveEmployeeDetailService.create(leaveEmployeeDetail);
                             balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
                             noOfDay = leaveEmployeeDetail.getNoOfDays();
@@ -835,6 +875,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             mv = searchOwnLeaveDetail(request, response);
                         }
                     } else {
+                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        String currentDate = dateFormat1.format(new Date());
+                        leaveEmployeeDetail.setDateOfSubmit(currentDate);
                         leaveEmployeeDetailService.create(leaveEmployeeDetail);
                         balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
                         noOfDay = leaveEmployeeDetail.getNoOfDays();
@@ -1062,6 +1105,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         request.setAttribute("oldLeaveId", leaveEmployeeDetail.getLeaveTypeMaster().getId());
         request.setAttribute("oldLeaveDays", leaveEmployeeDetail.getNoOfDays());
         request.setAttribute("flag", leaveEmployeeDetail.getStatus());
+        request.setAttribute("currentdate", leaveEmployeeDetail.getDateOfSubmit());
         mv.getModelMap().put("leaveEmployeeDetail", leaveEmployeeDetail);
         mv.setViewName("Leave/LeaveApplicationFormEdit");
         return mv;
@@ -1288,6 +1332,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
                         } else {
                             leaveEmployeeDetail.setStatus(0);
+                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                            String currentDate = dateFormat1.format(new Date());
+                            leaveEmployeeDetail.setDateOfSubmit(currentDate);
                             leaveEmployeeDetailService.update(leaveEmployeeDetail);
                             String oldLeaveId = request.getParameter("oldLeaveId");
                             String oldLeaveDays = request.getParameter("oldLeaveDays");
@@ -1349,6 +1396,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         }
                     } else {
                         leaveEmployeeDetail.setStatus(0);
+                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        String currentDate = dateFormat1.format(new Date());
+                        leaveEmployeeDetail.setDateOfSubmit(currentDate);
                         leaveEmployeeDetailService.update(leaveEmployeeDetail);
 
                         balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
@@ -1458,6 +1508,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             employeeLeaveBalanceService.update(employeeLeaveBalance2);
                             noOfdays = noOfdays - 1;
                             leaveEmployeeDetail2.setNoOfDays(noOfdays);
+                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                            String currentDate = dateFormat1.format(new Date());
+                            leaveEmployeeDetail2.setDateOfSubmit(currentDate);
                             leaveEmployeeDetailService.update(leaveEmployeeDetail2);
 
                         }
@@ -1515,6 +1568,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             employeeLeaveBalanceService.update(employeeLeaveBalance2);
                             noOfdays = noOfdays - 1;
                             leaveEmployeeDetail2.setNoOfDays(noOfdays);
+                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                            String currentDate = dateFormat1.format(new Date());
+                            leaveEmployeeDetail2.setDateOfSubmit(currentDate);
                             leaveEmployeeDetailService.update(leaveEmployeeDetail2);
 
                         }
@@ -1576,6 +1632,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //                balanceDay = balanceDay + noOfDay;
 //                employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
 //                employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                String currentDate = dateFormat1.format(new Date());
+                leaveEmployeeDetail.setDateOfSubmit(currentDate);
                 leaveEmployeeDetailService.update(leaveEmployeeDetail);
                 request.setAttribute("successMessage",
                         "Information : Withdraw Leave Request sent Successfully.");
@@ -3160,6 +3219,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             mv = employeeLeaveApplicationClick(request, response);
                         } else {
                             leaveEmployeeDetail.setNoOfDays(Float.parseFloat("1"));
+                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                            String currentDate = dateFormat1.format(new Date());
+                            leaveEmployeeDetail.setDateOfSubmit(currentDate);
                             leaveEmployeeDetailService.create(leaveEmployeeDetail);
                             balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
                             noOfDay = leaveEmployeeDetail.getNoOfDays();
@@ -3211,6 +3273,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             mv = employeeLeaveApplicationClick(request, response);
 
                         } else {
+                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                            String currentDate = dateFormat1.format(new Date());
+                            leaveEmployeeDetail.setDateOfSubmit(currentDate);
                             leaveEmployeeDetailService.create(leaveEmployeeDetail);
                             int leaveTypeId = leaveEmployeeDetail.getLeaveTypeMaster().getId();
                             LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(leaveTypeId);
@@ -3233,6 +3298,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         mv = employeeLeaveApplicationClick(request, response);
 
                     } else {
+                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        String currentDate = dateFormat1.format(new Date());
+                        leaveEmployeeDetail.setDateOfSubmit(currentDate);
                         leaveEmployeeDetailService.create(leaveEmployeeDetail);
                         balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
                         noOfDay = leaveEmployeeDetail.getNoOfDays();

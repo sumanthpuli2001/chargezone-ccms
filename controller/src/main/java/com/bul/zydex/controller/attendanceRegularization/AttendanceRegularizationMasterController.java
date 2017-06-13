@@ -120,6 +120,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         } else {
             attendanceRegularization.setUserMasterId(userMasterId);
             attendanceRegularization.setStatus(0);
+            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            String currentDate = dateFormat1.format(new Date());
+            attendanceRegularization.setDateOfSubmit(currentDate);
             attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
 
             request.setAttribute("successMessage",
@@ -352,6 +355,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             }
 
         }
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String currentDate = dateFormat1.format(new Date());
+        attendanceRegularization.setDateOfSubmit(currentDate);
         attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
 //        mv = searchSubmit(request, response);
         mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=searchSubmit");

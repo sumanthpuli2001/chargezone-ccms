@@ -26,4 +26,6 @@ public interface EmployeeDatetimeDataService<T> extends GenericsService<T> {
     public List<?> readTodaysAndPreviousDataOnSelectedDate(String empId, String endShiftTime,String selectDate,String PreviousDate);
 
      public List<?> readSelectedDateEmployeeData(String empId,String date);
+     
+     public List<?> readEmployeeByDatevise(String date);
 }

@@ -4,9 +4,9 @@
 <!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.bul.zydex.model.DeviceMaster" table="device_master" catalog="employee_cafe">
-        <id name="id" type="int">
+        <id name="id" type="java.lang.Integer">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="zydexLocationMaster" class="com.bul.zydex.model.ZydexLocationMaster" fetch="select">
             <column name="zydex_location" />
@@ -19,6 +19,9 @@
         </property>
         <property name="seqNumber" type="java.lang.Integer">
             <column name="seq_number" />
+        </property>
+        <property name="countConnectionOut" type="java.lang.Integer">
+            <column name="count_connection_out" />
         </property>
         <set name="employeeDatetimeDatas" inverse="true">
             <key>

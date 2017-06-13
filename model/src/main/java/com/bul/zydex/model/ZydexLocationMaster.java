@@ -11,106 +11,111 @@ import java.util.Set;
 public class ZydexLocationMaster  implements java.io.Serializable {
 
 
-     private Integer id;
-     private String zydexLocation;
-     private Set employeeMasters = new HashSet(0);
-     private Set employeeMasters_1 = new HashSet(0);
-     private Set deviceMasters = new HashSet(0);
-     private Set COffLeaveMasters = new HashSet(0);
-     private Set shortLeaves = new HashSet(0);
-     private Set deviceMasters_1 = new HashSet(0);
-     private Set shortLeaves_1 = new HashSet(0);
-     private Set COffLeaveMasters_1 = new HashSet(0);
+    private Integer id;
+    private String zydexLocation;
+    private Set employeeMasters = new HashSet(0);
+    private Set employeeMasters_1 = new HashSet(0);
+    private Set deviceMasters = new HashSet(0);
+    private Set COffLeaveMasters = new HashSet(0);
+    private Set shortLeaves = new HashSet(0);
+    private Set deviceMasters_1 = new HashSet(0);
+    private Set shortLeaves_1 = new HashSet(0);
+    private Set COffLeaveMasters_1 = new HashSet(0);
+    private Set deviceMasterNotifications = new HashSet(0);
 
     public ZydexLocationMaster() {
     }
 
-    public ZydexLocationMaster(String zydexLocation, Set employeeMasters, Set employeeMasters_1, Set deviceMasters, Set COffLeaveMasters, Set shortLeaves, Set deviceMasters_1, Set shortLeaves_1, Set COffLeaveMasters_1) {
-       this.zydexLocation = zydexLocation;
-       this.employeeMasters = employeeMasters;
-       this.employeeMasters_1 = employeeMasters_1;
-       this.deviceMasters = deviceMasters;
-       this.COffLeaveMasters = COffLeaveMasters;
-       this.shortLeaves = shortLeaves;
-       this.deviceMasters_1 = deviceMasters_1;
-       this.shortLeaves_1 = shortLeaves_1;
-       this.COffLeaveMasters_1 = COffLeaveMasters_1;
+    public ZydexLocationMaster(String zydexLocation, Set employeeMasters, Set employeeMasters_1, Set deviceMasters, Set COffLeaveMasters, Set shortLeaves, Set deviceMasters_1, Set shortLeaves_1, Set COffLeaveMasters_1, Set deviceMasterNotifications) {
+        this.zydexLocation = zydexLocation;
+        this.employeeMasters = employeeMasters;
+        this.employeeMasters_1 = employeeMasters_1;
+        this.deviceMasters = deviceMasters;
+        this.COffLeaveMasters = COffLeaveMasters;
+        this.shortLeaves = shortLeaves;
+        this.deviceMasters_1 = deviceMasters_1;
+        this.shortLeaves_1 = shortLeaves_1;
+        this.COffLeaveMasters_1 = COffLeaveMasters_1;
+        this.deviceMasterNotifications = deviceMasterNotifications;
     }
-   
+
     public Integer getId() {
         return this.id;
     }
-    
+
     public void setId(Integer id) {
         this.id = id;
     }
     public String getZydexLocation() {
         return this.zydexLocation;
     }
-    
+
     public void setZydexLocation(String zydexLocation) {
         this.zydexLocation = zydexLocation;
     }
     public Set getEmployeeMasters() {
         return this.employeeMasters;
     }
-    
+
     public void setEmployeeMasters(Set employeeMasters) {
         this.employeeMasters = employeeMasters;
     }
     public Set getEmployeeMasters_1() {
         return this.employeeMasters_1;
     }
-    
+
     public void setEmployeeMasters_1(Set employeeMasters_1) {
         this.employeeMasters_1 = employeeMasters_1;
     }
     public Set getDeviceMasters() {
         return this.deviceMasters;
     }
-    
+
     public void setDeviceMasters(Set deviceMasters) {
         this.deviceMasters = deviceMasters;
     }
     public Set getCOffLeaveMasters() {
         return this.COffLeaveMasters;
     }
-    
+
     public void setCOffLeaveMasters(Set COffLeaveMasters) {
         this.COffLeaveMasters = COffLeaveMasters;
     }
     public Set getShortLeaves() {
         return this.shortLeaves;
     }
-    
+
     public void setShortLeaves(Set shortLeaves) {
         this.shortLeaves = shortLeaves;
     }
     public Set getDeviceMasters_1() {
         return this.deviceMasters_1;
     }
-    
+
     public void setDeviceMasters_1(Set deviceMasters_1) {
         this.deviceMasters_1 = deviceMasters_1;
     }
     public Set getShortLeaves_1() {
         return this.shortLeaves_1;
     }
-    
+
     public void setShortLeaves_1(Set shortLeaves_1) {
         this.shortLeaves_1 = shortLeaves_1;
     }
     public Set getCOffLeaveMasters_1() {
         return this.COffLeaveMasters_1;
     }
-    
+
     public void setCOffLeaveMasters_1(Set COffLeaveMasters_1) {
         this.COffLeaveMasters_1 = COffLeaveMasters_1;
     }
 
+    public Set getDeviceMasterNotifications() {
+        return this.deviceMasterNotifications;
+    }
 
-
+    public void setDeviceMasterNotifications(Set deviceMasterNotifications) {
+        this.deviceMasterNotifications = deviceMasterNotifications;
+    }
 
 }
-
-

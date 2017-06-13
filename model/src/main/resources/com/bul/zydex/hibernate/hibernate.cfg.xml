@@ -103,5 +103,6 @@
     <mapping resource="com/bul/zydex/model/UrlMaster.hbm.xml"/>
     <mapping resource="com.bul.zydex.model/PmpFormStatusMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/RegisterMobForPunch.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/DeviceMasterNotification.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

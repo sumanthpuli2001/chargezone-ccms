@@ -1618,7 +1618,7 @@
                                 <div class="box box-info collapsed-box">
 
                                     <div class="box-header">
-                                        <h3 class="box-title">Leave Detail:</h3>
+                                        <h3 class="box-title">Leave Detail:</h3> &nbsp;&nbsp;<b> Applied on:</b> ${currentdate} 
                                         <div class="box-tools pull-right">
                                             <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2()"><i class="fa fa-plus" id="minusId2"></i></button>
                                         </div>

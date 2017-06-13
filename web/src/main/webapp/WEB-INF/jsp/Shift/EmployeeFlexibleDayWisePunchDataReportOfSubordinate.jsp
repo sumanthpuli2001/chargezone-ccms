@@ -185,25 +185,25 @@
                                                                                 </c:if>
                                                                                 <c:if test="${!fn:contains(list[1], '`') && !fn:contains(list[1], '?') && !fn:contains(list[1], 'AB') && !fn:contains(list[1], 'TR') && !fn:contains(list[1], 'AR')}">
                                                                                     <c:if test="${fn:contains(list[1], 'Casual Leave') && halfDayMap[list[0]] ne list[1]}">
-                                                                                        <c:set var="cl" value="${cl + 1}"></c:set>
+                                                                                        <c:set var="cl" value="${(satMap[list[0]] eq 'AB') ? (cl + 0.5) : (cl + 1)}"></c:set>
                                                                                     </c:if>
                                                                                     <c:if test="${fn:contains(list[1], 'Privilege Leave') && halfDayMap[list[0]] ne list[1]}">
-                                                                                        <c:set var="pl" value="${pl + 1}"></c:set>
+                                                                                        <c:set var="pl" value="${(satMap[list[0]] eq 'AB') ? (pl + 0.5) : (pl + 1)}"></c:set>
                                                                                     </c:if>
                                                                                     <c:if test="${fn:contains(list[1], 'Sick Leave') && halfDayMap[list[0]] ne list[1]}">
-                                                                                        <c:set var="sl" value="${sl + 1}"></c:set>
+                                                                                        <c:set var="sl" value="${(satMap[list[0]] eq 'AB') ? (sl + 0.5) : (sl + 1)}"></c:set>
                                                                                     </c:if>
                                                                                     <c:if test="${fn:contains(list[1], 'Maternity Leave') && halfDayMap[list[0]] ne list[1]}">
-                                                                                        <c:set var="mtl" value="${mtl + 1}"></c:set>
+                                                                                        <c:set var="mtl" value="${(satMap[list[0]] eq 'AB') ? (mtl + 0.5) : (mtl + 1)}"></c:set>
                                                                                     </c:if>
                                                                                     <c:if test="${fn:contains(list[1], 'Paternity Leave') && halfDayMap[list[0]] ne list[1]}">
-                                                                                        <c:set var="ptl" value="${ptl + 1}"></c:set>
+                                                                                        <c:set var="ptl" value="${(satMap[list[0]] eq 'AB') ? (ptl + 0.5) :(ptl + 1)}"></c:set>
                                                                                     </c:if>
                                                                                     <c:if test="${fn:contains(list[1], 'C Off Leave') && halfDayMap[list[0]] ne list[1]}">
-                                                                                        <c:set var="coff" value="${coff + 1}"></c:set>
+                                                                                        <c:set var="coff" value="${(satMap[list[0]] eq 'AB') ? (coff + 0.5) : (coff + 1)}"></c:set>
                                                                                     </c:if>
                                                                                     <c:if test="${(fn:contains(list[1], 'Leave Without Pay') || fn:contains(woMap[list[0]], 'LWP')) && halfDayMap[list[0]] ne list[1]}">
-                                                                                        <c:set var="lwp" value="${lwp + 1}"></c:set>
+                                                                                        <c:set var="lwp" value="${(satMap[list[0]] eq 'AB') ? (lwp + 0.5) : (lwp + 1)}"></c:set>
                                                                                     </c:if>
 
                                                                                 <th style="text-align: center;">

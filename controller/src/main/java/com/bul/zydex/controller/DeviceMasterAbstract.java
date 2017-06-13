@@ -6,19 +6,22 @@
 package com.bul.zydex.controller;
 
 import com.bul.zydex.model.DeviceMaster;
+import com.bul.zydex.model.DeviceMasterNotification;
 import com.bul.zydex.model.EmployeeDatetimeData;
+import com.bul.zydex.service.DeviceMasterNotificationService;
 import com.bul.zydex.service.DeviceMasterService;
 import com.bul.zydex.service.shift.EmployeeDatetimeDataService;
-import com.bul.zydex.validator.DeviceMasterValidator;
 import org.springframework.validation.Validator;
 
 /**
  *
  * @author Dhaval Parmar<dhaval@bulwarks.com>
  */
-public class DeviceMasterAbstract extends CustomAbstract{
+public class DeviceMasterAbstract extends CustomAbstract {
+
     protected DeviceMasterService<DeviceMaster> deviceMasterService;
     protected EmployeeDatetimeDataService<EmployeeDatetimeData> employeeDatetimeDataService;
+    protected DeviceMasterNotificationService<DeviceMasterNotification> deviceMasterNotificationService;
     protected Validator deviceMasterValidator;
 
     public DeviceMasterService<DeviceMaster> getDeviceMasterService() {
@@ -45,6 +48,12 @@ public class DeviceMasterAbstract extends CustomAbstract{
         this.employeeDatetimeDataService = employeeDatetimeDataService;
     }
 
-    
-    
+    public DeviceMasterNotificationService<DeviceMasterNotification> getDeviceMasterNotificationService() {
+        return deviceMasterNotificationService;
+    }
+
+    public void setDeviceMasterNotificationService(DeviceMasterNotificationService<DeviceMasterNotification> deviceMasterNotificationService) {
+        this.deviceMasterNotificationService = deviceMasterNotificationService;
+    }
+
 }

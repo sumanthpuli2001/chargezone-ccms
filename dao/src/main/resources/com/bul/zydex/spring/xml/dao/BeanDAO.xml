@@ -19,6 +19,7 @@
     <bean id="mailMasterDAO1" class="com.bul.zydex.dao.MailMasterDAOImpl" parent="sessionFactoryConfig" />
     <bean id="smsMasterDAO1" class="com.bul.zydex.dao.SmsMasterDAOImpl" parent="sessionFactoryConfig" />
     <bean id="deviceMasterDAO1" class="com.bul.zydex.dao.DeviceMasterDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="deviceMasterNotificationDAO1" class="com.bul.zydex.dao.DeviceMasterNotificationDAOImpl" parent="sessionFactoryConfig" />
 
     <!--Employee-->
     <bean id="employeeMasterDAO1" class="com.bul.zydex.dao.emp.EmployeeMasterDAOImpl" parent="sessionFactoryConfig" />

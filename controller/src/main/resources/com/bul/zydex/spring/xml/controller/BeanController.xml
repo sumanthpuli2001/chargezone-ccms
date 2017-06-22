@@ -530,6 +530,11 @@
         <property name="itServiceRequestService" ref="itServiceRequestService1"/>
         <property name="hrServiceRequestService" ref="hrServiceRequestService1"/>
         <property name="employeeShiftDataService" ref="employeeShiftDataService1"/>
+        <property name="travelApproverHistoryService" ref="travelApproverHistoryService1"/>
+        <property name="expenseOtherTypeService" ref="expenseOtherTypeService1"/>
+        <property name="relocationOrOtherExpenseService" ref="relocationOrOtherExpenseService1"/>
+        <property name="expenseTravelTypeService" ref="expenseTravelTypeService1"/>
+        <property name="attendanceRegularizationMasterService" ref="attendanceRegularizationMasterService1" /> 
         
     </bean>
     <bean id="emailAddMasterController1" class="com.bul.zydex.controller.EmailAddMasterController" parent="controllerConfig" >

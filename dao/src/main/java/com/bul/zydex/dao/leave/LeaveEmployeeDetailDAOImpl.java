@@ -72,7 +72,7 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
         String query = "";
 
-        query += " Select c.employeeName, b.leaveType, a.startDate, a.endDate, a.noOfDays, a.id, a.status, d.id"
+        query += " Select c.employeeName, b.leaveType, a.startDate, a.endDate, a.noOfDays, a.id, a.status, d.id, a.dateOfSubmit"
                 + " FROM LeaveEmployeeDetail a"
                 + " LEFT JOIN a.leaveTypeMaster b"
                 + " LEFT JOIN a.employeeMaster c"
@@ -629,7 +629,7 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
             condition += " AND b.id = '" + leaveEmployeeDetail.getLeaveTypeMaster().getId() + "'";
         }
 
-        query += " Select b.leaveType, a.startDate, a.endDate, a.noOfDays, a.id, a.status, a.empRemark, (Select c.employeeName from EmployeeMaster c where c.id=a.approverId) as ApproveName  "
+        query += " Select b.leaveType, a.startDate, a.endDate, a.noOfDays, a.id, a.status, a.empRemark, a.dateOfSubmit, (Select c.employeeName from EmployeeMaster c where c.id=a.approverId) as ApproveName  "
                 + " FROM LeaveEmployeeDetail a"
                 + " LEFT JOIN a.leaveTypeMaster b"
                 + " WHERE a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()

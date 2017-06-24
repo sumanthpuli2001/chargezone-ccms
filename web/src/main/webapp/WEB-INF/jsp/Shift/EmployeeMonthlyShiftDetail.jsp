@@ -26,7 +26,7 @@
     </head>
     <script>
         function viewClick(monthlyShiftId) {
-            alert(monthlyShiftId);
+           
             window.location = "shiftRotationMaster.htm?act=viewClickEmployeeShiftAssign&id=" + monthlyShiftId;
         }
 

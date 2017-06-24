@@ -1185,117 +1185,117 @@ public class ExpenseReport extends ExpenseReportAbstarct {
 //            request.setAttribute("successMessage",
 //                    "Information : The Request is Approved successfully.");
 
-//                try {
-//                    EmailTemplate emailTemplate = new EmailTemplate();
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
 //                    EmployeeMaster employeeMasterModel = employeeMasterService.readById(userid);
-//                    DesignationMaster designationMaster = new DesignationMaster();
-//                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(empApprover.getDesignationMaster().getId());
 //                    // id=20 for Send to expense Admin...
-//                    List expenseAdminList = userRightMasterService.readExpenseAdmin();
-//                    Iterator itr = expenseAdminList.iterator();
-//                    while (itr.hasNext()) {
-//                        Object[] next = (Object[]) itr.next();
-//                        String userId = "" + next[0];
-//                        String ExpenseId = "" + next[1];
-//                        EmployeeMaster employeeMasterHr = new EmployeeMaster();
-//                        employeeMasterHr = employeeMasterService.readById(Integer.parseInt(expenseId));
-//
-//                        employeeMaster = employeeMasterService.readById(userid);
-//                        emailTemplate = emailTemplateService.readById(20);
-//                        String To = employeeMasterHr.getOfficeEmailId();
-//                        String from = employeeMasterModel.getOfficeEmailId();
-//                        String Subject = emailTemplate.getSubject();
-//                        Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
-//                        String msg = emailTemplate.getBodytext();
-//                        msg = msg.replaceAll("\\{to_user\\}", employeeMasterModel.getEmployeeName());
-//                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-//                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-//                        sendMail.sendMail(from, To, Subject, msg);
-//                    }
-//                } catch (Exception e) {
-//                }
-//                try {
-//                    EmailTemplate emailTemplate = new EmailTemplate();
+                    List expenseAdminList = userRightMasterService.readExpenseAdmin();
+                    Iterator itr = expenseAdminList.iterator();
+                    while (itr.hasNext()) {
+                        Object[] next = (Object[]) itr.next();
+                        String userId = "" + next[0];
+                        String ExpenseId = "" + next[1];
+                        EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                        employeeMasterHr = employeeMasterService.readById(Integer.parseInt(ExpenseId));
+
+                     
+                        emailTemplate = emailTemplateService.readById(20);
+                        String To = employeeMasterHr.getOfficeEmailId();
+                        String from = empApprover.getOfficeEmailId();
+                        String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", master.getEmployeeName());
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", empApprover.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", empApprover.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, Subject, msg);
+                    }
+                } catch (Exception e) {
+                }
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
 //                    EmployeeMaster employeeMasterModel = employeeMasterService.readById(userid);
-//                    DesignationMaster designationMaster = new DesignationMaster();
-//                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-//                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
-//                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
-//                    // id=55 for Expense Approve to employee...
-////                employeeMaster = employeeMasterService.readById(userid);
-//                    emailTemplate = emailTemplateService.readById(55);
-//                    String To = employeeMasterHr.getOfficeEmailId();
-//                    String from = employeeMasterModel.getOfficeEmailId();
-//                    String Subject = emailTemplate.getSubject();
-//                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-//                    String msg = emailTemplate.getBodytext();
-//                    msg = msg.replaceAll("\\{to_user\\}", employeeMasterModel.getEmployeeName());
-//                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-//                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-//                    sendMail.sendMail(from, To, Subject, msg);
-//                } catch (Exception e) {
-//                }
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(empApprover.getDesignationMaster().getId());
+                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(empApprover.getReportingManagerLevel1()));
+                    // id=55 for Expense Approve to employee...
+              
+                    emailTemplate = emailTemplateService.readById(55);
+                    String To = master.getOfficeEmailId();
+                    String from = empApprover.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", master.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", master.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", empApprover.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+                }
             }
             if (btnType.equals("Rework")) {
 
                 expenseMaster.setStatus(1);
                 expenseMasterService.update(expenseMaster);
-//                request.setAttribute("successMessage",
-//                        "Information : The Request is Returned successfully.");
+                request.setAttribute("successMessage",
+                        "Information : The Request is Returned successfully.");
 
-//                try {
-//                    EmailTemplate emailTemplate = new EmailTemplate();
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
 //                    EmployeeMaster employeeMasterModel = employeeMasterService.readById(userid);
-//                    DesignationMaster designationMaster = new DesignationMaster();
-//                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-//                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
-//                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
-//                    // id=20 for Expense Rework...
-//
-////                    employeeMaster = employeeMasterService.readById(userid);
-//                    emailTemplate = emailTemplateService.readById(21);
-//                    String To = employeeMasterModel.getOfficeEmailId();
-//                    String from = employeeMasterModel.getOfficeEmailId();
-//                    String Subject = emailTemplate.getSubject();
-//                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-//                    String msg = emailTemplate.getBodytext();
-//                    msg = msg.replaceAll("\\{to_user\\}", employeeMasterModel.getEmployeeName());
-//                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-//                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-//                    sendMail.sendMail(from, To, Subject, msg);
-//                } catch (Exception e) {
-//                }
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(empApprover.getDesignationMaster().getId());
+                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(empApprover.getReportingManagerLevel1()));
+                    // id=20 for Expense Rework...
+
+//                    employeeMaster = employeeMasterService.readById(userid);
+                    emailTemplate = emailTemplateService.readById(21);
+                    String To = master.getOfficeEmailId();
+                    String from = empApprover.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", master.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", master.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", empApprover.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+                }
             }
 
             if (btnType.equals("Reject")) {
 
                 expenseMaster.setStatus(10);
                 expenseMasterService.update(expenseMaster);
-//                request.setAttribute("successMessage",
-//                        "Information : The Request is Rejected successfully.");
-//                try {
-//                    EmailTemplate emailTemplate = new EmailTemplate();
+                request.setAttribute("successMessage",
+                        "Information : The Request is Rejected successfully.");
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
 //                    EmployeeMaster employeeMasterModel = employeeMasterService.readById(userid);
-//                    DesignationMaster designationMaster = new DesignationMaster();
-//                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-//                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
-//                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
-//
-//                    // id=22 for Expense Reject...
-////                    employeeMaster = employeeMasterService.readById(userid);
-//                    emailTemplate = emailTemplateService.readById(22);
-//                    String To = employeeMasterModel.getOfficeEmailId();
-//                    String from = employeeMasterModel.getOfficeEmailId();
-//                    String Subject = emailTemplate.getSubject();
-//                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-//                    String msg = emailTemplate.getBodytext();
-//                    msg = msg.replaceAll("\\{to_user\\}", employeeMasterModel.getEmployeeName());
-//                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-//                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-//                    sendMail.sendMail(from, To, Subject, msg);
-//
-//                } catch (Exception e) {
-//                }
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(empApprover.getDesignationMaster().getId());
+                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(empApprover.getReportingManagerLevel1()));
+
+                    // id=22 for Expense Reject...
+//                    employeeMaster = employeeMasterService.readById(userid);
+                    emailTemplate = emailTemplateService.readById(22);
+                    String To = master.getOfficeEmailId();
+                    String from = empApprover.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", master.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", master.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", empApprover.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+
+                } catch (Exception e) {
+                }
             }
             rcode = "1";
             message = "Success";

@@ -2591,13 +2591,18 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
         }
         int coutnter = 0;
+        boolean sundayCheck = false;
         Calendar c = Calendar.getInstance();
         c.setTime(sDate);
         List<String> list1 = new ArrayList<String>();
         float days = 0;
         while (c.getTime().before(eDate) || c.getTime().equals(eDate)) {
 
-//
+            Calendar calForEnddate = Calendar.getInstance();
+            calForEnddate.setTime(eDate);
+            int dayEnd = calForEnddate.get(Calendar.DAY_OF_WEEK);
+
+//              
 ////                    if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
             int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
             Date nDate = c.getTime();
@@ -2613,6 +2618,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 if (!z.equals("")) {
                     if (z.equals("sunday")) {
                         weekOff = 1;
+                        sundayCheck = true;
                     } else if (z.equals("monday")) {
                         weekOff = 2;
                     } else if (z.equals("tuesday")) {
@@ -2670,6 +2676,12 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             }
                         }
                     }
+                    if (dayOfWeek == 2 && dayEnd == 7 && c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("SecondHalf") && eDateStatus.contains("FirstHalf")) {
+                        if (!strDate.equals(enDate)) {
+                            days = days + (float) 0.50;
+                        }
+                    }
+
                 }
 //                if (leavetype.equals("8")) {
 //                    if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {

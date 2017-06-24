@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.webservice;
 
+import com.bul.zydex.model.AttendanceRegularization;
 import com.bul.zydex.model.COffLeaveMaster;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
@@ -14,6 +15,8 @@ import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.ExpenseMaster;
+import com.bul.zydex.model.ExpenseOtherType;
+import com.bul.zydex.model.ExpenseTravelType;
 import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.HrServiceRequest;
 import com.bul.zydex.model.ItServiceRequest;
@@ -21,6 +24,8 @@ import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.RelocationOrOtherExpense;
+import com.bul.zydex.model.TravelApproverHistory;
 import com.bul.zydex.model.TravelRequestMaster;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.UserRightMaster;
@@ -43,17 +48,20 @@ import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.crypto.ExemptionMechanismException;
 import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.lang3.time.DateUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -808,6 +816,9 @@ public class WebService extends WebServiceAbstract {
                                             leaveEmployeeDetail3.setEndDateStatus("Fullday");
                                             leaveEmployeeDetail3.setNoOfDays(1.0f);
                                             leaveEmployeeDetail3.setStatus(0);
+                                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                            String currentDate = dateFormat1.format(new Date());
+                                            leaveEmployeeDetail.setDateOfSubmit(currentDate);
                                             leaveEmployeeDetailService.create(leaveEmployeeDetail3);
                                         }
 
@@ -834,6 +845,9 @@ public class WebService extends WebServiceAbstract {
                                             employeeLeaveBalanceService.update(employeeLeaveBalance1);
                                             float addDays = leaveEmployeeDetail2.getNoOfDays() + 1.0f;
                                             leaveEmployeeDetail2.setNoOfDays(addDays);
+                                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                            String currentDate = dateFormat1.format(new Date());
+                                            leaveEmployeeDetail.setDateOfSubmit(currentDate);
                                             leaveEmployeeDetailService.update(leaveEmployeeDetail2);
                                         } else {
                                             leaveCkeck = true;
@@ -852,6 +866,9 @@ public class WebService extends WebServiceAbstract {
                                             leaveEmployeeDetail3.setEndDateStatus("Fullday");
                                             leaveEmployeeDetail3.setNoOfDays(1.0f);
                                             leaveEmployeeDetail3.setStatus(0);
+                                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                            String currentDate = dateFormat1.format(new Date());
+                                            leaveEmployeeDetail.setDateOfSubmit(currentDate);
                                             leaveEmployeeDetailService.create(leaveEmployeeDetail3);
                                         }
                                     } else if ((!leaveEmployeeDetail2.getLeaveTypeMaster().getId().equals(leaveEmployeeDetail.getLeaveTypeMaster().getId()))) {
@@ -881,6 +898,9 @@ public class WebService extends WebServiceAbstract {
                                             employeeLeaveBalanceService.update(employeeLeaveBalance2);
                                             float addDays = leaveEmployeeDetail2.getNoOfDays() + 1;
                                             leaveEmployeeDetail2.setNoOfDays(addDays);
+                                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                            String currentDate = dateFormat1.format(new Date());
+                                            leaveEmployeeDetail.setDateOfSubmit(currentDate);
                                             leaveEmployeeDetailService.update(leaveEmployeeDetail2);
 
                                         } else {
@@ -900,6 +920,9 @@ public class WebService extends WebServiceAbstract {
                                             leaveEmployeeDetail3.setEndDateStatus("Fullday");
                                             leaveEmployeeDetail3.setNoOfDays(1.0f);
                                             leaveEmployeeDetail3.setStatus(0);
+                                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                            String currentDate = dateFormat1.format(new Date());
+                                            leaveEmployeeDetail.setDateOfSubmit(currentDate);
                                             leaveEmployeeDetailService.create(leaveEmployeeDetail3);
                                         }
                                     }
@@ -936,6 +959,9 @@ public class WebService extends WebServiceAbstract {
                     } else {
 
                         leaveEmployeeDetail.setNoOfDays(Float.parseFloat("1"));
+                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        String currentDate = dateFormat1.format(new Date());
+                        leaveEmployeeDetail.setDateOfSubmit(currentDate);
                         leaveEmployeeDetailService.create(leaveEmployeeDetail);
                         balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
                         noOfDay = leaveEmployeeDetail.getNoOfDays();
@@ -983,6 +1009,9 @@ public class WebService extends WebServiceAbstract {
 
                     } else {
                         leaveEmployeeDetail.setNoOfDays(Float.parseFloat("1"));
+                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        String currentDate = dateFormat1.format(new Date());
+                        leaveEmployeeDetail.setDateOfSubmit(currentDate);
                         leaveEmployeeDetailService.create(leaveEmployeeDetail);
                         balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
                         noOfDay = leaveEmployeeDetail.getNoOfDays();
@@ -1047,6 +1076,10 @@ public class WebService extends WebServiceAbstract {
                         message = "No Of Days is Greater than Leave Balance Days...";
 
                     } else {
+
+                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        String currentDate = dateFormat1.format(new Date());
+                        leaveEmployeeDetail.setDateOfSubmit(currentDate);
                         leaveEmployeeDetailService.create(leaveEmployeeDetail);
                         int leaveTypeId = leaveEmployeeDetail.getLeaveTypeMaster().getId();
                         LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(leaveTypeId);
@@ -1078,6 +1111,10 @@ public class WebService extends WebServiceAbstract {
                         message = "No Of Days is Greater than maximum allowed Days...";
 
                     } else {
+
+                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        String currentDate = dateFormat1.format(new Date());
+                        leaveEmployeeDetail.setDateOfSubmit(currentDate);
                         leaveEmployeeDetailService.create(leaveEmployeeDetail);
                         balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
                         noOfDay = leaveEmployeeDetail.getNoOfDays();
@@ -1109,6 +1146,10 @@ public class WebService extends WebServiceAbstract {
 
                     }
                 } else {
+
+                    SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    String currentDate = dateFormat1.format(new Date());
+                    leaveEmployeeDetail.setDateOfSubmit(currentDate);
                     leaveEmployeeDetailService.create(leaveEmployeeDetail);
 
                     balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
@@ -1193,10 +1234,18 @@ public class WebService extends WebServiceAbstract {
                         String Status = arrayOfObject[5].toString();
                         String empreason = arrayOfObject[6].toString();
                         String ApproveName;
+                        String dateOfSubmit;
+
                         if (null == arrayOfObject[7]) {
+                            dateOfSubmit = "";
+                        } else {
+                            dateOfSubmit = arrayOfObject[7].toString();
+                        }
+
+                        if (null == arrayOfObject[8]) {
                             ApproveName = "";
                         } else {
-                            ApproveName = arrayOfObject[7].toString();
+                            ApproveName = arrayOfObject[8].toString();
                         }
                         String statusmsg = "";
 
@@ -1238,6 +1287,7 @@ public class WebService extends WebServiceAbstract {
                         obj.put("status", Status);
                         obj.put("statusmsg", statusmsg);
                         obj.put("approveName", ApproveName);
+                        obj.put("dateOfSubmit", dateOfSubmit);
                         jSONArray.put(obj);
                         rcode = "1";
                         message = "Success";
@@ -1578,6 +1628,9 @@ public class WebService extends WebServiceAbstract {
                     employeeLeaveBalanceService.update(employeeLeaveBalance3);
 
                     leaveEmployeeDetail.setStatus(0);
+                    SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    String currentDate = dateFormat1.format(new Date());
+                    leaveEmployeeDetail.setDateOfSubmit(currentDate);
                     leaveEmployeeDetailService.update(leaveEmployeeDetail);
                     LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(Integer.parseInt(leavetypeid));
                     if (leaveTypeMaster1.getLeaveType().equals("Paternity Leave")) {
@@ -1646,6 +1699,9 @@ public class WebService extends WebServiceAbstract {
                     employeeLeaveBalanceService.update(employeeLeaveBalance3);
 
                     leaveEmployeeDetail.setStatus(0);
+                    SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    String currentDate = dateFormat1.format(new Date());
+                    leaveEmployeeDetail.setDateOfSubmit(currentDate);
                     leaveEmployeeDetailService.update(leaveEmployeeDetail);
                     LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(Integer.parseInt(leavetypeid));
                     if (leaveTypeMaster1.getLeaveType().equals("Paternity Leave")) {
@@ -1730,6 +1786,9 @@ public class WebService extends WebServiceAbstract {
                     employeeLeaveBalanceService.update(employeeLeaveBalance3);
 
                     leaveEmployeeDetail.setStatus(0);
+                    SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    String currentDate = dateFormat1.format(new Date());
+                    leaveEmployeeDetail.setDateOfSubmit(currentDate);
                     leaveEmployeeDetailService.update(leaveEmployeeDetail);
                     LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(Integer.parseInt(leavetypeid));
                     if (leaveTypeMaster1.getLeaveType().equals("Paternity Leave")) {
@@ -1798,6 +1857,9 @@ public class WebService extends WebServiceAbstract {
                     employeeLeaveBalanceService.update(employeeLeaveBalance3);
 
                     leaveEmployeeDetail.setStatus(0);
+                    SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    String currentDate = dateFormat1.format(new Date());
+                    leaveEmployeeDetail.setDateOfSubmit(currentDate);
                     leaveEmployeeDetailService.update(leaveEmployeeDetail);
                     LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(Integer.parseInt(leavetypeid));
                     if (leaveTypeMaster1.getLeaveType().equals("Paternity Leave")) {
@@ -1851,6 +1913,9 @@ public class WebService extends WebServiceAbstract {
                 employeeLeaveBalanceService.update(employeeLeaveBalance3);
 
                 leaveEmployeeDetail.setStatus(0);
+                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                String currentDate = dateFormat1.format(new Date());
+                leaveEmployeeDetail.setDateOfSubmit(currentDate);
                 leaveEmployeeDetailService.update(leaveEmployeeDetail);
                 LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(Integer.parseInt(leavetypeid));
                 if (leaveTypeMaster1.getLeaveType().equals("Paternity Leave")) {
@@ -1943,6 +2008,7 @@ public class WebService extends WebServiceAbstract {
                 String leaveType = "";
                 String EndDate = "";
                 String StartDate = "";
+                String dateOfSubmit;
 
                 int leaveEmployeeDeatilId = 0;
                 int Status = 0;
@@ -1960,6 +2026,11 @@ public class WebService extends WebServiceAbstract {
                     leaveEmployeeDeatilId = (Integer) o[5];
                     userId = (Integer) o[7];
                     Status = (Integer) o[6];
+                    if (null == o[8]) {
+                        dateOfSubmit = "";
+                    } else {
+                        dateOfSubmit = o[8].toString();
+                    }
                     userData.put("empName", empName);
                     userData.put("leaveType", leaveType);
                     userData.put("StartDate", StartDate);
@@ -1968,6 +2039,7 @@ public class WebService extends WebServiceAbstract {
                     userData.put("leaveEmployeeDeatilId", leaveEmployeeDeatilId);
                     userData.put("userId", userId);
                     userData.put("status", Status);
+                    userData.put("dateOfSubmit", dateOfSubmit);
                     String Statusmessage = "";
                     if (o[6].equals(0)) {
                         Statusmessage = "Pending";
@@ -2695,4 +2767,684 @@ public class WebService extends WebServiceAbstract {
 
     }
 
+    public boolean managercheck(int tabId, String MangerId, int i, int j) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        boolean flag = false;
+        List l1 = travelApproverHistoryService.readpreviousmanagerdata(tabId, MangerId);
+        String lastApproveDateString = (String) l1.get(0);
+        Date lastApproveDate = sdf.parse(lastApproveDateString);
+        Calendar c1 = Calendar.getInstance();
+        c1.setTime(lastApproveDate);
+        c1.add(Calendar.DATE, i);
+        Date managerapprove1 = c1.getTime();
+
+        c1.setTime(managerapprove1);
+        c1.add(Calendar.DATE, j);
+        Date managerapprove2 = c1.getTime();
+
+        String today = sdf.format(new Date());
+        Date tDate = sdf.parse(today);
+
+        if ((DateUtils.isSameDay(managerapprove1, tDate) || tDate.after(managerapprove1)) && (DateUtils.isSameDay(managerapprove2, tDate) || tDate.before(managerapprove2))) {
+            flag = true;
+        }
+
+        return flag;
+    }
+
+    public void hrDashboard(HttpServletRequest request,
+            HttpServletResponse response) throws
+            IOException, JSONException, ServletException, ParseException {
+
+        PrintWriter out = null;
+        out = response.getWriter();
+        UserMaster user = new UserMaster();
+        String rcode = "";
+        String empid = "";
+        String message = "";
+        JSONObject userData = new JSONObject();
+        JSONObject data = new JSONObject();
+        JSONObject data1 = new JSONObject();
+        JSONArray array = new JSONArray();
+        int hrPendingList = 0;
+        int LeavePendingList = 0;
+        int ITPendingList = 0;
+        int expensePendingList = 0;
+        int travelPendingList = 0;
+        int ARPendingList = 0;
+        try {
+            String id = request.getParameter("id");
+            int userid = Integer.parseInt(id);
+            user.setId(userid);
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            EmployeeMaster employeeMaster1 = new EmployeeMaster();
+            employeeMaster.setUserMaster(user);
+            JSONArray jSONArray = new JSONArray();
+
+            List<EmployeeMaster> empDetailList = (List<EmployeeMaster>) employeeMasterService.readByEmployeeUserId(employeeMaster);
+            if (!empDetailList.isEmpty()) {
+                employeeMaster1 = (EmployeeMaster) empDetailList.get(0);
+            }
+
+            //////////////////// Leave 
+            LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+            leaveEmployeeDetail.setEmployeeMaster(employeeMaster1);
+            LeavePendingList = leaveEmployeeDetailService.readPendingApproverLeaveRequestForDashboard(leaveEmployeeDetail);
+
+            /////////////////////AR 
+            AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+            attendanceRegularization.setId(employeeMaster1.getId());
+            List<?> list1 = attendanceRegularizationMasterService.readByAttendanceRegularizationApproverPendingList(attendanceRegularization);
+            ARPendingList = list1.size();
+
+            //////////////////////expense 
+            ExpenseMaster expenseMaster = new ExpenseMaster();
+            List<?> travelTypeList = new ArrayList<Object>();
+            List<?> relocationTypeList = new ArrayList<Object>();
+            List<?> travelOtherTypeList = new ArrayList<Object>();
+            List<?> relocationOtherTypeList = new ArrayList<Object>();
+            List<?> policyOtherTypeList = new ArrayList<Object>();
+            List<?> othersList = new ArrayList<Object>();
+
+            List<?> reportingLevel1List = expenseMasterService.readExpenseRequestByReportingLevel1(expenseMaster, "" + employeeMaster1.getId());
+            int level1List = reportingLevel1List.size();
+            if (!reportingLevel1List.isEmpty()) {
+                Iterator it = reportingLevel1List.iterator();
+                while (it.hasNext()) {
+                    Object[] next = (Object[]) it.next();
+                    String expenseId = "" + next[0];
+                    String expenseType = "" + next[4];
+                    String pendingStatus = "" + next[5];
+                    if (!pendingStatus.equals("0")) {
+                        it.remove();
+                    }
+                    String flag3 = "true";
+                    if (expenseType.equals("Travel")) {
+                        travelTypeList = expenseTravelTypeService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                        for (Object o : travelTypeList) {
+                            ExpenseTravelType expenseTravelType = (ExpenseTravelType) o;
+                            if (expenseTravelType.getStatus() != 1) {
+                                flag3 = "false";
+                            }
+
+                        }
+                        travelOtherTypeList = relocationOrOtherExpenseService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                        for (Object o2 : travelOtherTypeList) {
+                            RelocationOrOtherExpense relocationOrOtherExpense = (RelocationOrOtherExpense) o2;
+                            if (relocationOrOtherExpense.getStatus() != 1) {
+                                flag3 = "false";
+                            }
+
+                        }
+                    }
+
+                    if (expenseType.equals("Relocation")) {
+                        relocationTypeList = expenseTravelTypeService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                        for (Object o3 : relocationTypeList) {
+                            ExpenseTravelType expenseTravelType = (ExpenseTravelType) o3;
+                            if (expenseTravelType.getStatus() != 1) {
+                                flag3 = "false";
+                            }
+
+                        }
+                        relocationOtherTypeList = relocationOrOtherExpenseService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                        for (Object o4 : relocationOtherTypeList) {
+                            RelocationOrOtherExpense relocationOrOtherExpense = (RelocationOrOtherExpense) o4;
+                            if (relocationOrOtherExpense.getStatus() != 1) {
+                                flag3 = "false";
+                            }
+                        }
+                    }
+                    if (expenseType.equals("PolicyReimbursements")) {
+                        policyOtherTypeList = relocationOrOtherExpenseService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                        for (Object policyReimb : policyOtherTypeList) {
+                            RelocationOrOtherExpense relocationOrOtherExpense = (RelocationOrOtherExpense) policyReimb;
+                            if (relocationOrOtherExpense.getStatus() != 1) {
+                                flag3 = "false";
+                            }
+                        }
+                    }
+                    if (expenseType.equals("Others")) {
+                        othersList = expenseOtherTypeService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                        for (Object o1 : othersList) {
+                            ExpenseOtherType expenseOtherType = (ExpenseOtherType) o1;
+
+                            if (expenseOtherType.getStatus() != 1) {
+                                flag3 = "false";
+                            }
+                        }
+                    }
+                    try {
+
+                        if (flag3.equals("true")) {
+                            it.remove();
+                        }
+                    } catch (Exception e) {
+
+                    }
+
+                }
+                expensePendingList = reportingLevel1List.size();
+
+            }
+            List<?> reportingLevel2List = expenseMasterService.readExpenseRequestByReportingLevel2(expenseMaster, "" + id);
+            int level2List = reportingLevel2List.size();
+            if (level1List == 0) {
+
+                if (!reportingLevel2List.isEmpty()) {
+                    Iterator it = reportingLevel2List.iterator();
+                    while (it.hasNext()) {
+                        Object[] next = (Object[]) it.next();
+                        String expenseId = "" + next[0];
+                        String expenseType = "" + next[4];
+                        String pendingStatus = "" + next[5];
+                        if (!pendingStatus.equals("0")) {
+                            it.remove();
+                        }
+                        String flag3 = "true";
+                        if (expenseType.equals("Travel")) {
+                            travelTypeList = expenseTravelTypeService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                            for (Object o : travelTypeList) {
+                                ExpenseTravelType expenseTravelType = (ExpenseTravelType) o;
+                                if (expenseTravelType.getStatus() != 1) {
+                                    flag3 = "false";
+                                }
+
+                            }
+                            travelOtherTypeList = relocationOrOtherExpenseService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                            for (Object o2 : travelOtherTypeList) {
+                                RelocationOrOtherExpense relocationOrOtherExpense = (RelocationOrOtherExpense) o2;
+                                if (relocationOrOtherExpense.getStatus() != 1) {
+                                    flag3 = "false";
+                                }
+
+                            }
+                        }
+
+                        if (expenseType.equals("Relocation")) {
+                            relocationTypeList = expenseTravelTypeService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                            for (Object o3 : relocationTypeList) {
+                                ExpenseTravelType expenseTravelType = (ExpenseTravelType) o3;
+                                if (expenseTravelType.getStatus() != 1) {
+                                    flag3 = "false";
+                                }
+
+                            }
+                            relocationOtherTypeList = relocationOrOtherExpenseService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                            for (Object o4 : relocationOtherTypeList) {
+                                RelocationOrOtherExpense relocationOrOtherExpense = (RelocationOrOtherExpense) o4;
+                                if (relocationOrOtherExpense.getStatus() != 1) {
+                                    flag3 = "false";
+                                }
+                            }
+                        }
+                        if (expenseType.equals("PolicyReimbursements")) {
+                            policyOtherTypeList = relocationOrOtherExpenseService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                            for (Object policyReimb : policyOtherTypeList) {
+                                RelocationOrOtherExpense relocationOrOtherExpense = (RelocationOrOtherExpense) policyReimb;
+                                if (relocationOrOtherExpense.getStatus() != 1) {
+                                    flag3 = "false";
+                                }
+                            }
+                        }
+                        if (expenseType.equals("Others")) {
+                            othersList = expenseOtherTypeService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                            for (Object o1 : othersList) {
+                                ExpenseOtherType expenseOtherType = (ExpenseOtherType) o1;
+                                System.out.println("ajay" + expenseOtherType.getStatus());
+                                if (expenseOtherType.getStatus() != 1) {
+                                    flag3 = "false";
+                                }
+                            }
+                        }
+                        try {
+
+                            if (flag3.equals("true")) {
+                                it.remove();
+                            }
+                        } catch (Exception e) {
+
+                        }
+                    }
+                    expensePendingList = reportingLevel1List.size();
+
+                }
+            }
+
+            List<?> reportingLevel3List = expenseMasterService.readExpenseRequestByReportingLevel3(expenseMaster, "" + id);
+
+            if (level1List == 0 && level2List == 0) {
+
+                if (!reportingLevel3List.isEmpty()) {
+                    Iterator it = reportingLevel3List.iterator();
+                    while (it.hasNext()) {
+                        Object[] next = (Object[]) it.next();
+                        String expenseId = "" + next[0];
+                        String expenseType = "" + next[4];
+                        String pendingStatus = "" + next[5];
+                        if (!pendingStatus.equals("0")) {
+                            it.remove();
+                        }
+                        String flag3 = "true";
+                        if (expenseType.equals("Travel")) {
+                            travelTypeList = expenseTravelTypeService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                            for (Object o : travelTypeList) {
+                                ExpenseTravelType expenseTravelType = (ExpenseTravelType) o;
+                                if (expenseTravelType.getStatus() != 1) {
+                                    flag3 = "false";
+                                }
+
+                            }
+                            travelOtherTypeList = relocationOrOtherExpenseService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                            for (Object o2 : travelOtherTypeList) {
+                                RelocationOrOtherExpense relocationOrOtherExpense = (RelocationOrOtherExpense) o2;
+                                if (relocationOrOtherExpense.getStatus() != 1) {
+                                    flag3 = "false";
+                                }
+
+                            }
+                        }
+
+                        if (expenseType.equals("Relocation")) {
+                            relocationTypeList = expenseTravelTypeService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                            for (Object o3 : relocationTypeList) {
+                                ExpenseTravelType expenseTravelType = (ExpenseTravelType) o3;
+                                if (expenseTravelType.getStatus() != 1) {
+                                    flag3 = "false";
+                                }
+
+                            }
+                            relocationOtherTypeList = relocationOrOtherExpenseService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                            for (Object o4 : relocationOtherTypeList) {
+                                RelocationOrOtherExpense relocationOrOtherExpense = (RelocationOrOtherExpense) o4;
+                                if (relocationOrOtherExpense.getStatus() != 1) {
+                                    flag3 = "false";
+                                }
+                            }
+                        }
+                        if (expenseType.equals("PolicyReimbursements")) {
+                            policyOtherTypeList = relocationOrOtherExpenseService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                            for (Object policyReimb : policyOtherTypeList) {
+                                RelocationOrOtherExpense relocationOrOtherExpense = (RelocationOrOtherExpense) policyReimb;
+                                if (relocationOrOtherExpense.getStatus() != 1) {
+                                    flag3 = "false";
+                                }
+                            }
+                        }
+                        if (expenseType.equals("Others")) {
+                            othersList = expenseOtherTypeService.readByExpenseMasterId(Integer.parseInt(expenseId));
+                            for (Object o1 : othersList) {
+                                ExpenseOtherType expenseOtherType = (ExpenseOtherType) o1;
+                                System.out.println("ajay" + expenseOtherType.getStatus());
+                                if (expenseOtherType.getStatus() != 1) {
+                                    flag3 = "false";
+                                }
+                            }
+                        }
+                        try {
+
+                            if (flag3.equals("true")) {
+                                it.remove();
+                            }
+                        } catch (Exception e) {
+
+                        }
+                    }
+                    expensePendingList = reportingLevel1List.size();
+
+                }
+            }
+
+            /////////////////////////////////travel
+            int loginempId = employeeMaster1.getId();
+            String loginId = employeeMaster1.getId().toString();
+            EmployeeMaster employeeMaster2 = new EmployeeMaster();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            TravelRequestMaster travelRequestMaster = new TravelRequestMaster();
+            List<Object> finalList = new ArrayList<>();
+            List<Object> finalList1 = new ArrayList<>();
+            boolean flag = false;
+            List<?> list = travelRequestMasterService.readForRequestResultForDashboard(travelRequestMaster);
+            if (!list.isEmpty()) {
+                for (Object obj : list) {
+                    Object[] o1 = (Object[]) obj;
+                    int employeeId = (int) o1[0];
+                    int tabId = (int) o1[1];
+                    int status = (int) o1[8];
+                    employeeMaster2 = employeeMasterService.readById(employeeId);
+                    String manager1 = employeeMaster2.getReportingManagerLevel1();
+                    String manager2 = employeeMaster2.getReportingManagerLevel2();
+                    String manager3 = employeeMaster2.getReportingManagerLevel3();
+                    String manager4 = employeeMaster2.getReportingManagerLevel4();
+                    String manager5 = employeeMaster2.getReportingManagerLevel5();
+                    String aprroverid = "";
+                    int ReturnFlag = 0;
+                    int historyappid = 0;
+                    int historyappid1 = 0;
+                    if (status != 0) {
+                        if (status != 10) {
+                            aprroverid = "" + o1[10];
+                        }
+                    }
+                    List<?> approverList = travelApproverHistoryService.readapproverlist(tabId, loginId);
+                    for (Object o : approverList) {
+                        TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+                        travelApproverHistory = (TravelApproverHistory) o;
+                        ReturnFlag = travelApproverHistory.getReturnFlag();
+                        if (ReturnFlag == 0) {
+                            historyappid = travelApproverHistory.getEmployeeMasterByTravelApproverId().getId();
+                        }
+                        if (ReturnFlag == 1) {
+                            historyappid1 = travelApproverHistory.getEmployeeMasterByTravelApproverId().getId();
+                        }
+                    }
+                    if ((status == 3 && ReturnFlag == 0) || status == 0 || status == 10 || status == 1) {
+                        String dos1 = o1[9].toString();
+                        Date dos = sdf.parse(dos1);
+                        String today = sdf.format(new Date());
+                        Date tDate = sdf.parse(today);
+                        Calendar c = Calendar.getInstance();
+                        c.setTime(dos);
+                        c.add(Calendar.DATE, 7);
+                        Date Date7 = c.getTime();
+                        c.setTime(Date7);
+                        c.add(Calendar.DATE, 7);
+                        Date Date14 = c.getTime();
+                        c.setTime(Date14);
+                        c.add(Calendar.DATE, 7);
+                        Date Date21 = c.getTime();
+                        c.setTime(Date21);
+                        c.add(Calendar.DATE, 7);
+                        Date Date28 = c.getTime();
+                        c.setTime(Date28);
+                        c.add(Calendar.DATE, 7);
+                        Date Date35 = c.getTime();
+
+                        if (Integer.parseInt(manager1) == Integer.parseInt(loginId)) {
+                            if ((DateUtils.isSameDay(dos, tDate) || tDate.after(dos)) && tDate.before(Date7)) {
+                                finalList.add(obj);
+                            }
+                        }
+                        if (!manager2.isEmpty() && !manager1.isEmpty()) {
+                            if (Integer.parseInt(manager2) == Integer.parseInt(loginId)) {
+                                if (historyappid != 0) {
+                                    if (Integer.parseInt(loginId) == historyappid) {
+                                        finalList.add(obj);
+                                    }
+                                }
+                                if (aprroverid == null || aprroverid == "") {
+                                    if ((DateUtils.isSameDay(Date7, tDate) || tDate.after(Date7)) && tDate.before(Date14)) {
+                                        finalList.add(obj);
+                                    }
+                                } else if (status != 1) {
+                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                        finalList.add(obj);
+                                    }
+                                }
+                            }
+                        }
+                        if (!manager3.isEmpty() && !manager2.isEmpty() && !manager1.isEmpty()) {
+                            if (Integer.parseInt(manager3) == Integer.parseInt(loginId)) {
+                                if (historyappid != 0) {
+                                    if (Integer.parseInt(loginId) == historyappid) {
+                                        finalList.add(obj);
+                                    }
+                                }
+                                if (aprroverid == null || aprroverid == "") {
+                                    if ((DateUtils.isSameDay(Date14, tDate) || tDate.after(Date14)) && tDate.before(Date21)) {
+                                        finalList.add(obj);
+                                    }
+                                } else if (status != 1) {
+                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                        finalList.add(obj);
+                                    } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 7, 7);
+                                        if (tDate.before(Date21) && checklastapprovedateflag == true) {
+                                            finalList.add(obj);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!manager4.isEmpty() && !manager3.isEmpty() && !manager2.isEmpty() && !manager1.isEmpty()) {
+                            if (Integer.parseInt(manager4) == Integer.parseInt(loginId)) {
+                                if (historyappid != 0) {
+                                    if (Integer.parseInt(loginId) == historyappid) {
+                                        finalList.add(obj);
+                                    }
+                                }
+                                if (aprroverid == null || aprroverid == "") {
+                                    if ((DateUtils.isSameDay(Date21, tDate) || tDate.after(Date21)) && tDate.before(Date28)) {
+                                        finalList.add(obj);
+                                    }
+                                } else if (status != 1) {
+                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
+                                        finalList.add(obj);
+                                    } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 7, 7);
+                                        if (tDate.before(Date28) && checklastapprovedateflag == true) {
+                                            finalList.add(obj);
+                                        }
+                                    } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                        boolean checklastapprovedateflag1 = managercheck(tabId, manager1, 14, 7);
+                                        if (tDate.before(Date28) && checklastapprovedateflag1 == true) {
+                                            finalList.add(obj);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!manager5.isEmpty()) {
+                            if (Integer.parseInt(manager5) == Integer.parseInt(loginId)) {
+                                if (historyappid != 0 || status == 8) {
+                                    if (Integer.parseInt(loginId) == historyappid) {
+                                        finalList.add(obj);
+                                    }
+                                }
+                                if (aprroverid == null || aprroverid == "") {
+                                    if ((DateUtils.isSameDay(Date28, tDate) || tDate.after(Date28)) && tDate.before(Date35)) {
+                                        finalList.add(obj);
+                                    }
+                                } else if (!manager4.isEmpty()) {
+                                    if (status != 1) {
+                                        if (Integer.parseInt(aprroverid) == Integer.parseInt(manager4)) {
+                                            finalList.add(obj);
+                                        }
+                                    }
+                                    if (!manager3.isEmpty()) {
+                                        if (status != 1) {
+                                            if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
+                                                boolean checklastapprovedateflag = managercheck(tabId, manager3, 7, 7);
+                                                if (tDate.before(Date21) && checklastapprovedateflag == true) {
+                                                    finalList.add(obj);
+                                                }
+                                            } else if (!manager2.isEmpty()) {
+                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager2, 14, 7);
+                                                    if (checklastapprovedateflag == true) {
+                                                        finalList.add(obj);
+                                                    }
+                                                }
+                                            } else if (!manager1.isEmpty()) {
+                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager1, 21, 7);
+                                                    if (checklastapprovedateflag == true) {
+                                                        finalList.add(obj);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else if (manager4 == null || manager4 == "") {
+                                    if (!manager3.isEmpty()) {
+                                        if (status != 1) {
+                                            if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
+                                                boolean checklastapprovedateflag = managercheck(tabId, manager3, 0, 7);
+                                                if (tDate.before(Date21) && checklastapprovedateflag == true) {
+                                                    finalList.add(obj);
+                                                }
+                                            } else if (!manager2.isEmpty()) {
+                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager2, 7, 7);
+                                                    if (checklastapprovedateflag == true) {
+                                                        finalList.add(obj);
+                                                    }
+                                                }
+                                            } else if (!manager1.isEmpty()) {
+                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager1, 14, 7);
+                                                    if (checklastapprovedateflag == true) {
+                                                        finalList.add(obj);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    } else if (manager3 == null || manager3 == "") {
+                                        if (!manager2.isEmpty()) {
+                                            if (status != 1) {
+                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager2, 0, 7);
+                                                    if (checklastapprovedateflag == true) {
+                                                        finalList.add(obj);
+                                                    }
+                                                } else if (!manager1.isEmpty()) {
+                                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 7, 7);
+                                                        if (checklastapprovedateflag == true) {
+                                                            finalList.add(obj);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        } else if (manager2 == null || manager2 == "") {
+                                            if (!manager1.isEmpty()) {
+                                                if (status != 1) {
+                                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                        if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                            boolean checklastapprovedateflag = managercheck(tabId, manager1, 0, 7);
+                                                            finalList.add(obj);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else if (status == 6 || status == 5) {
+                        try {
+
+                            if (Integer.parseInt(loginId) == Integer.parseInt(manager1)
+                                    || Integer.parseInt(loginId) == Integer.parseInt(manager5)) {
+                                finalList.add(obj);
+                            } else if (!manager2.isEmpty()) {
+                                if (Integer.parseInt(loginId) == Integer.parseInt(manager2)) {
+                                    finalList.add(obj);
+                                }
+                            } else if (!manager3.isEmpty()) {
+                                if (Integer.parseInt(loginId) == Integer.parseInt(manager3)) {
+                                    finalList.add(obj);
+                                }
+                            } else if (!manager4.isEmpty()) {
+                                if (Integer.parseInt(loginId) == Integer.parseInt(manager4)) {
+                                    finalList.add(obj);
+                                }
+                            }
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }
+                if (!finalList.isEmpty()) {
+                    for (Object obj : finalList) {
+                        Object[] o1 = (Object[]) obj;
+                        int employeeId = (int) o1[0];
+                        int tabId = (int) o1[1];
+                        int status = (int) o1[8];
+                        if (status == 3) {
+                            List approverList = travelApproverHistoryService.readapproverlist(tabId, loginId);
+                            for (Object o : approverList) {
+                                TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+                                travelApproverHistory = (TravelApproverHistory) o;
+                                int prevStatus = travelApproverHistory.getTravelApproveStatus();
+                                int prevflag = travelApproverHistory.getReturnFlag();
+                                int tbId = travelApproverHistory.getTravelRequestMaster().getId();
+//                          in both take list[10] as approverid list[11] appname
+                                if (prevflag == 0) {
+                                    List<?> newfinallist = travelRequestMasterService.readlastapprove(tbId, loginId);
+                                    flag = true;
+                                    finalList1.add(newfinallist.get(0));
+                                    break;
+                                }
+                            }
+                            if (approverList.size() == 0) {
+//                                    List<Object> l1 = new ArrayList<>();
+//                                    l1.add(obj);
+                                finalList1.add(obj);
+                            }
+                        } else {
+//                                    List<Object> l1 = new ArrayList<>();
+//                                    l1.add(obj);
+                            finalList1.add(obj);
+                        }
+                    }
+                }
+            }
+            Set<Object> foo = new HashSet<Object>(finalList1);
+            List<Object> list111 = new ArrayList<Object>(foo);
+            for (Iterator<Object> iterator = list111.iterator(); iterator.hasNext();) {
+                try {
+                    Object[] next = (Object[]) iterator.next();
+                    String status = "" + next[8];
+                    String historystatus = "";
+                    if (next.length == 14) {
+
+                        historystatus = "" + next[13];
+                        if (Integer.parseInt(status) == 0 || (Integer.parseInt(status) == 3 && !historystatus.equals("0"))) {
+                        } else {
+                            iterator.remove();
+
+                        }
+                    } else if (Integer.parseInt(status) == 0 || Integer.parseInt(status) == 3 || Integer.parseInt(status) == 10) {
+                    } else {
+                        iterator.remove();
+                    }
+                } catch (Exception e) {
+
+                }
+            }
+            travelPendingList = list111.size();
+
+            /////////////////////it 
+            ItServiceRequest itServiceRequest = new ItServiceRequest();
+            itServiceRequest.setEmployeeMasterByEmployeeMasterId(employeeMaster1);
+            List<?> listIT = itServiceRequestService.readByItServiceApproverPendingRequest(itServiceRequest);
+            ITPendingList = listIT.size();
+
+            //////////////////////hr 
+            HrServiceRequest hrServiceRequest = new HrServiceRequest();
+            hrServiceRequest.setEmployeeMasterByEmployeeMasterId(employeeMaster1);
+            List<?> listHR = hrServiceRequestService.readHrServiceApproverPendingRequest(hrServiceRequest);
+            hrPendingList = listHR.size();
+
+        } catch (Exception exception) {
+            rcode = "0";
+            message = "Error";
+        }
+        rcode = "1";
+        message = "Success";
+
+        data.put("LeaveModule", LeavePendingList);
+        data.put("hrModule", hrPendingList);
+        data.put("ArModule", ARPendingList);
+        data.put("ItModule", ITPendingList);
+        data.put("TravelModule", travelPendingList);
+        data.put("ExpenseModule", expensePendingList);
+        data.put("responseMessage", message);
+        data.put("responseCode", rcode);
+        out.print(data);
+
+    }
 }

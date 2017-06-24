@@ -116,7 +116,7 @@
             <div class="row" >
                 <div class="col-md-12">
                     <!-- Custom Tabs -->
-                    <h3>&nbsp;&nbsp;&nbsp;Result sdddsds:</h3>
+                    <h3>&nbsp;&nbsp;&nbsp;Result :</h3>
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="box-header">
@@ -143,6 +143,7 @@
                                                                 <th>Start Date</th>
                                                                 <th>End Date</th>
                                                                 <th>No Of Days</th>
+                                                                <th>Date of Submission</th>
                                                                 <th>Status</th>
                                                                 <th>Action</th>
                                                             </tr>
@@ -157,6 +158,7 @@
                                                             <td>${list[2]}</td>
                                                             <td>${list[3]}</td>
                                                             <td>${list[4]}</td>
+                                                            <td>${list[8]}</td>
                                                             <c:if test="${list[6] eq 0}">
                                                                 <td><span class="badge">Pending</span></td>
                                                             </c:if>

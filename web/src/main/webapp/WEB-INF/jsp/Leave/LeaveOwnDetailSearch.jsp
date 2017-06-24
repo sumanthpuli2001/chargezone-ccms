@@ -152,8 +152,8 @@
                                                                     <th>Start Date</th>
                                                                     <th>End Date</th>
                                                                     <th>No Of Days</th>
-                                                                    <th>Status</th>
                                                                     <th>Date of Submission</th>
+                                                                    <th>Status</th>
                                                                     <th>Action</th>
                                                                 </tr>
                                                             </thead>
@@ -166,6 +166,7 @@
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[2]}</td>
                                                                 <td>${list[3]}</td>
+                                                                <td>${list[6]}</td>
                                                                 <c:if test="${list[5] eq 0}">
                                                                     <td><span class="badge">Pending</span></td>
                                                                 </c:if>
@@ -185,7 +186,6 @@
                                                                     <td><span class="label label-info">WithDrawn By ${list[6]}</span></td>
                                                                 </c:if>
                                                                 <!--<td>$//{list[5]}</td>-->
-                                                                <td>${list[6]}</td>
                                                                 <td>
                                                                     <div class="btn-group">
                                                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

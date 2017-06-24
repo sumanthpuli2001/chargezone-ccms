@@ -91,4 +91,6 @@ public class EmployeeDatetimeDataServiceImpl<T> extends GenericsServiceImpl<T> i
     public List<?> readEmployeeByDatevise(String date) {
         return employeeDatetimeDataDAO.readEmployeeByDatevise(date);
     }
+
+   
 }

@@ -89,16 +89,23 @@
                                                     <form:errors path="seqNumber" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class=" col-sm-6">
-                                                         <label>Device Location:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="zydexLocationMaster.id" value="" class="form-control">
-                                                                    <c:forEach var="Map" items="${deptMap}">
-                                                                        <form:option value="${Map.key}">${Map.value}</form:option>
-                                                                    </c:forEach>
-                                                        </form:select>  
-                                                       <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
+                                                        <label>Device Location:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:select path="zydexLocationMaster.id" value="" class="form-control">
+                                                        <c:forEach var="Map" items="${deptMap}">
+                                                            <form:option value="${Map.key}">${Map.value}</form:option>
+                                                        </c:forEach>
+                                                    </form:select>  
+                                                    <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
-                                                    <br/>
+                                                <div class="form-group">
+                                                    <div class=" col-sm-6">
+                                                        <label>No. of Attempts:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:input path="countConnectionOut" class="form-control" placeholder="Enter No. of Attempts"></form:input>
+                                                    <form:errors path="countConnectionOut" cssClass="errorDiv"></form:errors>
+                                                    </div>
+                                                </div>
+                                                <br/>
                                                 <button  type="submit" class="btn btn-primary center-block" style="width: 100px;font-weight: bold;" id="saveSubmit1" >SUBMIT</button>
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->

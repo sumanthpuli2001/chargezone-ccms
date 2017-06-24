@@ -177,7 +177,6 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
         return getHibernateTemplate().find(query);
     }
 //    Rishi Start
-
     @Override
     public List<?> readEmployeeByDatevise(String date) {
         String query = "";
@@ -188,6 +187,8 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
 
         return getHibernateTemplate().find(query);
     }
+//    Rishi End
+
 //    Rishi End
 
     @Override

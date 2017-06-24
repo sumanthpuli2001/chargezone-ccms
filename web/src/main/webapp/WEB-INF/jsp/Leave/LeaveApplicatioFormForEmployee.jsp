@@ -1737,42 +1737,42 @@
         }
     </script>
     <script>
-        function calculateSecondSatByAjax() {
-        try {
-
-        var strDate = document.getElementById("startDate").value;
-        var enDate = document.getElementById("endDate").value;
-        //                && sDateStatus != '' && eDateStatus != ''
-
-        if (strDate != '' && enDate != '') {
-        //                    alert("wwww" + strDate);
-        //                    alert("sDateStatus" + sDateStatus);
-        $.ajax({
-        type: "POST",
-                url: "leaveEmployeeDetail.htm?act=getSecondSatDayByAjax&strDate=" + strDate + "&enDate=" + enDate,
-                data: {},
-                dataType: "text",
-                success: function (responseTxt) {
-                if (responseTxt == '0'){
-                $("#leaveStartDate_SelectFullOrHalfId option[value='Fullday']").hide();
-                $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").show();
-                $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
-                }
-                if (responseTxt == '1'){
-                $("#leaveEndDate_SelectFullOrHalfId option[value='Fullday']").hide();
-                $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").show();
-                $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
-                }
-
-                },
-                error: function () {
-                }
-        });
-        }
-        } catch (e) {
-
-        }
-        }
+//        function calculateSecondSatByAjax() {
+//        try {
+//
+//        var strDate = document.getElementById("startDate").value;
+//        var enDate = document.getElementById("endDate").value;
+//        //                && sDateStatus != '' && eDateStatus != ''
+//
+//        if (strDate != '' && enDate != '') {
+//        //                    alert("wwww" + strDate);
+//        //                    alert("sDateStatus" + sDateStatus);
+//        $.ajax({
+//        type: "POST",
+//                url: "leaveEmployeeDetail.htm?act=getSecondSatDayByAjax&strDate=" + strDate + "&enDate=" + enDate,
+//                data: {},
+//                dataType: "text",
+//                success: function (responseTxt) {
+//                if (responseTxt == '0'){
+//                $("#leaveStartDate_SelectFullOrHalfId option[value='Fullday']").hide();
+//                $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+//                $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+//                }
+//                if (responseTxt == '1'){
+//                $("#leaveEndDate_SelectFullOrHalfId option[value='Fullday']").hide();
+//                $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+//                $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+//                }
+//
+//                },
+//                error: function () {
+//                }
+//        });
+//        }
+//        } catch (e) {
+//
+//        }
+//        }
 
     </script>
 

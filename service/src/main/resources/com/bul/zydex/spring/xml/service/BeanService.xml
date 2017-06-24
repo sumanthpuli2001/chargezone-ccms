@@ -27,6 +27,9 @@
     <bean id="deviceMasterService1" class="com.bul.zydex.service.DeviceMasterServiceImpl">
         <property name="deviceMasterDAO" ref="deviceMasterDAO1"/>
     </bean>
+    <bean id="deviceMasterNotificationService1" class="com.bul.zydex.service.DeviceMasterNotificationServiceImpl">
+        <property name="deviceMasterNotificationDAO" ref="deviceMasterNotificationDAO1"/>
+    </bean>
 
     <!--Employee-->
     <bean id="employeeMasterService1" class="com.bul.zydex.service.emp.EmployeeMasterServiceImpl">

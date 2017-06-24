@@ -2577,6 +2577,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         ShiftRotationInfo shiftRotationInfo = new ShiftRotationInfo();
         int appId = employeeMaster1.getId();
         String shiftType = employeeMaster1.getShiftType();
+        int ZydexLocId = employeeMaster1.getZydexLocationMaster().getId();
         String weekOffDay = "";
         if (shiftType.contains("ShiftBase")) {
             shiftRotationMaster = shiftRotationMasterService.readById(employeeMaster1.getShiftHoursId());
@@ -2598,6 +2599,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
 //
 ////                    if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+            int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
             Date nDate = c.getTime();
             String daString = sdf.format(nDate);
             HolidayMaster holidayMaster = new HolidayMaster();
@@ -2634,10 +2636,38 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         }
                     }
                 }
-                if (leavetype.equals("8")) {
+                if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16")) {
                     if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
                         if (!strDate.equals(enDate)) {
                             days--;
+                        }
+                    }
+                }
+
+                if ((ZydexLocId == 1 || ZydexLocId == 6)) {
+                    if (dayOfWeek == 2 && c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+                        if (!strDate.equals(enDate) && !eDateStatus.contains("FirstHalf")) {
+                            days = days - (float) 0.50;
+                        }
+                        if (strDate.equals(enDate) && !sDateStatus.contains("SecondHalf") && !sDateStatus.contains("FirstHalf")) {
+                            days = days - (float) 0.50;
+                        }
+//                          
+                    }
+                    if (dayOfWeek == 3 && c.get(Calendar.DAY_OF_WEEK) == 1) {
+                        if (!strDate.equals(enDate)) {
+                            days--;
+                        }
+                        if (!sDateStatus.contains("SecondHalf") && eDateStatus.contains("FirstHalf")) {
+                            days = days - (float) 0.50;
+                        }
+
+                    }
+                    if (dayOfWeek == 2 && c.get(Calendar.DAY_OF_WEEK) == 7) {
+                        if (coutnter != 0 && sDateStatus.contains("SecondHalf")) {
+                            if (!strDate.equals(enDate)) {
+                                days = days - (float) 0.50;
+                            }
                         }
                     }
                 }
@@ -2648,6 +2678,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //                        }
 //                    }
 //                }
+
                 coutnter++;
             }
             c.add(Calendar.DATE, 1);

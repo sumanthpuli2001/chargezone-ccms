@@ -726,6 +726,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         Map<String, String> woMap = new HashMap<String, String>();
+        Map<String, String> satMap = new HashMap<String, String>();
         Map<String, String> halfDayMap = new HashMap<String, String>();
         if (null != employeeMaster.getId() && !employeeMaster.getId().equals("")) {
             employeeShiftData.setId(employeeMaster.getId());
@@ -881,87 +882,96 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
                         c1.add(Calendar.DATE, -1);
                         SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy");
-                        leaveEmployeeDetail.setStartDate("" + sdf3.format(c1.getTime()));
-                        leaveEmployeeDetail.setEndDate("" + sdf3.format(c1.getTime()));
-                        leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
-                        leaveEmployeeDetail.setStatus(3);
-                        List firstLeaveEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
-                        if (!firstLeaveEmployeeDetail.isEmpty()) {
-                            c1.add(Calendar.DATE, 2);
+                        SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                        String dayName = format.format(c1.getTime());
+                        int dayOfWeek = c1.get(Calendar.WEEK_OF_MONTH);
+                        if (dayName.equals("Saturday") && dayOfWeek != 2) {
+
                             leaveEmployeeDetail.setStartDate("" + sdf3.format(c1.getTime()));
                             leaveEmployeeDetail.setEndDate("" + sdf3.format(c1.getTime()));
                             leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
                             leaveEmployeeDetail.setStatus(3);
-                            List secondLeaveEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
+                            List firstLeaveEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
+                            if (!firstLeaveEmployeeDetail.isEmpty()) {
+                                c1.add(Calendar.DATE, 2);
+                                leaveEmployeeDetail.setStartDate("" + sdf3.format(c1.getTime()));
+                                leaveEmployeeDetail.setEndDate("" + sdf3.format(c1.getTime()));
+                                leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
+                                leaveEmployeeDetail.setStatus(3);
+                                List secondLeaveEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
 
-                            // saturday sandwich Leave code start
-                            Object[] oSatArray = (Object[]) firstLeaveEmployeeDetail.get(0);
-                            String woSatType = "" + oSatArray[0];
-                            Date sSatDate = sdf.parse("" + oSatArray[1]);
-                            Date eSatDate = sdf.parse("" + oSatArray[2]);
-                            String sSatDateStr = "" + oSatArray[6];
-                            String eSatDateStr = "" + oSatArray[7];
-                            float noOfSatDays = (float) oSatArray[3];
-                            float diffInSatDays = 0;
-                            if ((sSatDateStr.equals("Fullday") && eSatDateStr.equals("Fullday"))
-                                    || (sSatDateStr.equals("Fullday") && sSatDate.equals(eSatDate))) {
-                                diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
-                                        / (1000 * 60 * 60 * 24)) + 1;
-                            } else if ((sSatDateStr.equals("SecondHalf") && eSatDateStr.equals("Fullday"))
-                                    || (sSatDateStr.equals("Fullday") && eSatDateStr.equals("FirstHalf"))) {
-                                diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
-                                        / (1000 * 60 * 60 * 24)) + 1;
-                                diffInSatDays = diffInSatDays - (float) 0.5;
-                            } else if (sSatDateStr.equals("SecondHalf") && eSatDateStr.equals("FirstHalf")) {
-                                diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
-                                        / (1000 * 60 * 60 * 24)) + 1;
-                                diffInSatDays = diffInSatDays - 1;
-                            }
+                                // saturday sandwich Leave code start
+                                Object[] oSatArray = (Object[]) firstLeaveEmployeeDetail.get(0);
+                                String woSatType = "" + oSatArray[0];
+                                Date sSatDate = sdf.parse("" + oSatArray[1]);
+                                Date eSatDate = sdf.parse("" + oSatArray[2]);
+                                String sSatDateStr = "" + oSatArray[6];
+                                String eSatDateStr = "" + oSatArray[7];
+                                float noOfSatDays = (float) oSatArray[3];
+                                float diffInSatDays = 0;
+                                if ((sSatDateStr.equals("Fullday") && eSatDateStr.equals("Fullday"))
+                                        || (sSatDateStr.equals("Fullday") && sSatDate.equals(eSatDate))) {
+                                    diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
+                                            / (1000 * 60 * 60 * 24)) + 1;
+                                } else if ((sSatDateStr.equals("SecondHalf") && eSatDateStr.equals("Fullday"))
+                                        || (sSatDateStr.equals("Fullday") && eSatDateStr.equals("FirstHalf"))) {
+                                    diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
+                                            / (1000 * 60 * 60 * 24)) + 1;
+                                    diffInSatDays = diffInSatDays - (float) 0.5;
+                                } else if (sSatDateStr.equals("SecondHalf") && eSatDateStr.equals("FirstHalf")) {
+                                    diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
+                                            / (1000 * 60 * 60 * 24)) + 1;
+                                    diffInSatDays = diffInSatDays - 1;
+                                }
                             // saturday sandwich Leave code End
 
-                            // Monday sandwich Leave code start
-                            float noOfMonDays = 0;
-                            float diffInMonDays = -1;
-                            String woMonType = "";
-                            if (!secondLeaveEmployeeDetail.isEmpty()) {
-                                Object[] oMonArray = (Object[]) secondLeaveEmployeeDetail.get(0);
-                                woMonType = "" + oMonArray[0];
-                                Date sMonDate = sdf.parse("" + oMonArray[1]);
-                                Date eMonDate = sdf.parse("" + oMonArray[2]);
-                                String sMonDateStr = "" + oMonArray[6];
-                                String eMonDateStr = "" + oMonArray[7];
-                                noOfMonDays = (float) oMonArray[3];
-                                if ((sMonDateStr.equals("Fullday") && eMonDateStr.equals("Fullday"))
-                                        || (sMonDateStr.equals("Fullday") && sMonDate.equals(eMonDate))) {
-                                    diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
-                                            / (1000 * 60 * 60 * 24)) + 1;
-                                } else if ((sMonDateStr.equals("SecondHalf") && eMonDateStr.equals("Fullday"))
-                                        || (sMonDateStr.equals("Fullday") && eMonDateStr.equals("FirstHalf"))) {
-                                    diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
-                                            / (1000 * 60 * 60 * 24)) + 1;
-                                    diffInMonDays = diffInMonDays - (float) 0.5;
-                                } else if (sMonDateStr.equals("SecondHalf") && eMonDateStr.equals("FirstHalf")) {
-                                    diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
-                                            / (1000 * 60 * 60 * 24)) + 1;
-                                    diffInMonDays = diffInMonDays - 1;
+                                // Monday sandwich Leave code start
+                                float noOfMonDays = 0;
+                                float diffInMonDays = -1;
+                                String woMonType = "";
+                                if (!secondLeaveEmployeeDetail.isEmpty()) {
+                                    Object[] oMonArray = (Object[]) secondLeaveEmployeeDetail.get(0);
+                                    woMonType = "" + oMonArray[0];
+                                    Date sMonDate = sdf.parse("" + oMonArray[1]);
+                                    Date eMonDate = sdf.parse("" + oMonArray[2]);
+                                    String sMonDateStr = "" + oMonArray[6];
+                                    String eMonDateStr = "" + oMonArray[7];
+                                    noOfMonDays = (float) oMonArray[3];
+                                    if ((sMonDateStr.equals("Fullday") && eMonDateStr.equals("Fullday"))
+                                            || (sMonDateStr.equals("Fullday") && sMonDate.equals(eMonDate))) {
+                                        diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
+                                                / (1000 * 60 * 60 * 24)) + 1;
+                                    } else if ((sMonDateStr.equals("SecondHalf") && eMonDateStr.equals("Fullday"))
+                                            || (sMonDateStr.equals("Fullday") && eMonDateStr.equals("FirstHalf"))) {
+                                        diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
+                                                / (1000 * 60 * 60 * 24)) + 1;
+                                        diffInMonDays = diffInMonDays - (float) 0.5;
+                                    } else if (sMonDateStr.equals("SecondHalf") && eMonDateStr.equals("FirstHalf")) {
+                                        diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
+                                                / (1000 * 60 * 60 * 24)) + 1;
+                                        diffInMonDays = diffInMonDays - 1;
+                                    }
                                 }
-                            }
-                            // Monday sandwich Leave code end
+                                // Monday sandwich Leave code end
 
 //                            if (diffInSatDays != noOfSatDays || (!date.equals(sSatDate) && !date.equals(eSatDate))) {
-                            if (diffInSatDays != noOfSatDays || (date.before(eSatDate)
-                                    && date.after(sSatDate) && diffInSatDays == noOfSatDays)) {
-                                woMap.put("" + next[0], woSatType);
-                            } else if (diffInMonDays != -1 && diffInMonDays != noOfMonDays) {
-                                woMap.put("" + next[0], woMonType);
-                            } else if ((diffInSatDays % 1 == 0 && diffInSatDays == noOfSatDays) && diffInMonDays == noOfMonDays) {
-                                woMap.put("" + next[0], "LWP");
+                                if (diffInSatDays != noOfSatDays || (date.before(eSatDate)
+                                        && date.after(sSatDate) && diffInSatDays == noOfSatDays)) {
+                                    woMap.put("" + next[0], woSatType);
+                                } else if (diffInMonDays != -1 && diffInMonDays != noOfMonDays) {
+                                    woMap.put("" + next[0], woMonType);
+                                } else if ((diffInSatDays % 1 == 0 && diffInSatDays == noOfSatDays) && diffInMonDays == noOfMonDays) {
+                                    woMap.put("" + next[0], "LWP");
+                                } else {
+                                    woMap.put("" + next[0], "WO");
+                                }
                             } else {
                                 woMap.put("" + next[0], "WO");
                             }
                         } else {
                             woMap.put("" + next[0], "WO");
                         }
+
                     }
                     // week off code End
 
@@ -1223,6 +1233,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     if (dayName.equals("Saturday")) {
                         if (dayOfWeek == 2) {
                             satWeekOff = true;
+                            satMap.put("" + next[0], "AB");
                         } else {
                             satWeekOff = false;
                         }
@@ -1632,6 +1643,25 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             long outTime1 = outTime;
                             outTime = outTime - 30;
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+                            ///////////////AR code Start///////////////////////////////////////////////////
+                            AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+                            attendanceRegularization.setStartDateTime("" + next[0]);
+                            attendanceRegularization.setUserMasterId(employeeMaster.getUserMaster().getId());
+                            long ARdiff = 0;
+                            long ARTime = 0;
+                            SimpleDateFormat sdf4 = new SimpleDateFormat("dd/mm/yyyy HH:mm");
+                            List list = attendanceRegularizationMasterService.readArCountList(attendanceRegularization);
+                            if (!list.isEmpty()) {
+                                Object[] arm = (Object[]) list.get(0);
+                                Date InTimeAR = sdf4.parse(arm[1].toString());
+                                Date OutTimeAR = sdf4.parse(arm[2].toString());
+
+                                ARdiff = OutTimeAR.getTime() - InTimeAR.getTime();
+                                ARTime = ARdiff / (60 * 1000);
+
+                            }
+                            ///////////////AR code End////////////////////////////////////////
+                            totalDayTime = totalDayTime + ARTime;
                             if (outTime > 0 && outTime1 != totalDayTime1) {
                                 totalTime = totalDayTime - outTime;
                                 double empHour = (double) totalTime / 60;
@@ -1849,6 +1879,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 .put("map", map);
         mv.getModelMap()
                 .put("woMap", woMap);
+        mv.getModelMap()
+                .put("satMap", satMap);
         mv.getModelMap()
                 .put("halfDayMap", halfDayMap);
         mv.getModelMap()
@@ -2341,6 +2373,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         Map<String, String> woMap = new HashMap<String, String>();
+        Map<String, String> satMap = new HashMap<String, String>();
         Map<String, String> halfDayMap = new HashMap<String, String>();
         if (null != id && !id.equals("")) {
             employeeShiftData.setId(Integer.parseInt(id));
@@ -2495,82 +2528,89 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     if (firstHalf.contains("WO")) {
                         LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
                         c1.add(Calendar.DATE, -1);
-                        SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy");
-                        leaveEmployeeDetail.setStartDate("" + sdf3.format(c1.getTime()));
-                        leaveEmployeeDetail.setEndDate("" + sdf3.format(c1.getTime()));
-                        leaveEmployeeDetail.setEmployeeMaster(employeeMaster1);
-                        leaveEmployeeDetail.setStatus(3);
-                        List firstLeaveEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
-                        if (!firstLeaveEmployeeDetail.isEmpty()) {
-                            c1.add(Calendar.DATE, 2);
+                        SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                        String dayName = format.format(c1.getTime());
+                        int dayOfWeek = c1.get(Calendar.WEEK_OF_MONTH);
+                        if (dayName.equals("Saturday") && dayOfWeek != 2) {
+                            SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy");
                             leaveEmployeeDetail.setStartDate("" + sdf3.format(c1.getTime()));
                             leaveEmployeeDetail.setEndDate("" + sdf3.format(c1.getTime()));
                             leaveEmployeeDetail.setEmployeeMaster(employeeMaster1);
                             leaveEmployeeDetail.setStatus(3);
-                            List secondLeaveEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
+                            List firstLeaveEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
+                            if (!firstLeaveEmployeeDetail.isEmpty()) {
+                                c1.add(Calendar.DATE, 2);
+                                leaveEmployeeDetail.setStartDate("" + sdf3.format(c1.getTime()));
+                                leaveEmployeeDetail.setEndDate("" + sdf3.format(c1.getTime()));
+                                leaveEmployeeDetail.setEmployeeMaster(employeeMaster1);
+                                leaveEmployeeDetail.setStatus(3);
+                                List secondLeaveEmployeeDetail = leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
 
-                            // saturday sandwich Leave code start
-                            Object[] oSatArray = (Object[]) firstLeaveEmployeeDetail.get(0);
-                            String woSatType = "" + oSatArray[0];
-                            Date sSatDate = sdf.parse("" + oSatArray[1]);
-                            Date eSatDate = sdf.parse("" + oSatArray[2]);
-                            String sSatDateStr = "" + oSatArray[6];
-                            String eSatDateStr = "" + oSatArray[7];
-                            float noOfSatDays = (float) oSatArray[3];
-                            float diffInSatDays = 0;
-                            if ((sSatDateStr.equals("Fullday") && eSatDateStr.equals("Fullday"))
-                                    || (sSatDateStr.equals("Fullday") && sSatDate.equals(eSatDate))) {
-                                diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
-                                        / (1000 * 60 * 60 * 24)) + 1;
-                            } else if ((sSatDateStr.equals("SecondHalf") && eSatDateStr.equals("Fullday"))
-                                    || (sSatDateStr.equals("Fullday") && eSatDateStr.equals("FirstHalf"))) {
-                                diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
-                                        / (1000 * 60 * 60 * 24)) + 1;
-                                diffInSatDays = diffInSatDays - (float) 0.5;
-                            } else if (sSatDateStr.equals("SecondHalf") && eSatDateStr.equals("FirstHalf")) {
-                                diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
-                                        / (1000 * 60 * 60 * 24)) + 1;
-                                diffInSatDays = diffInSatDays - 1;
-                            }
+                                // saturday sandwich Leave code start
+                                Object[] oSatArray = (Object[]) firstLeaveEmployeeDetail.get(0);
+                                String woSatType = "" + oSatArray[0];
+                                Date sSatDate = sdf.parse("" + oSatArray[1]);
+                                Date eSatDate = sdf.parse("" + oSatArray[2]);
+                                String sSatDateStr = "" + oSatArray[6];
+                                String eSatDateStr = "" + oSatArray[7];
+                                float noOfSatDays = (float) oSatArray[3];
+                                float diffInSatDays = 0;
+                                if ((sSatDateStr.equals("Fullday") && eSatDateStr.equals("Fullday"))
+                                        || (sSatDateStr.equals("Fullday") && sSatDate.equals(eSatDate))) {
+                                    diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
+                                            / (1000 * 60 * 60 * 24)) + 1;
+                                } else if ((sSatDateStr.equals("SecondHalf") && eSatDateStr.equals("Fullday"))
+                                        || (sSatDateStr.equals("Fullday") && eSatDateStr.equals("FirstHalf"))) {
+                                    diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
+                                            / (1000 * 60 * 60 * 24)) + 1;
+                                    diffInSatDays = diffInSatDays - (float) 0.5;
+                                } else if (sSatDateStr.equals("SecondHalf") && eSatDateStr.equals("FirstHalf")) {
+                                    diffInSatDays = (float) ((eSatDate.getTime() - sSatDate.getTime())
+                                            / (1000 * 60 * 60 * 24)) + 1;
+                                    diffInSatDays = diffInSatDays - 1;
+                                }
                             // saturday sandwich Leave code End
 
-                            // Monday sandwich Leave code start
-                            float noOfMonDays = 0;
-                            float diffInMonDays = -1;
-                            String woMonType = "";
-                            if (!secondLeaveEmployeeDetail.isEmpty()) {
-                                Object[] oMonArray = (Object[]) secondLeaveEmployeeDetail.get(0);
-                                woMonType = "" + oMonArray[0];
-                                Date sMonDate = sdf.parse("" + oMonArray[1]);
-                                Date eMonDate = sdf.parse("" + oMonArray[2]);
-                                String sMonDateStr = "" + oMonArray[6];
-                                String eMonDateStr = "" + oMonArray[7];
-                                noOfMonDays = (float) oMonArray[3];
-                                if ((sMonDateStr.equals("Fullday") && eMonDateStr.equals("Fullday"))
-                                        || (sMonDateStr.equals("Fullday") && sMonDate.equals(eMonDate))) {
-                                    diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
-                                            / (1000 * 60 * 60 * 24)) + 1;
-                                } else if ((sMonDateStr.equals("SecondHalf") && eMonDateStr.equals("Fullday"))
-                                        || (sMonDateStr.equals("Fullday") && eMonDateStr.equals("FirstHalf"))) {
-                                    diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
-                                            / (1000 * 60 * 60 * 24)) + 1;
-                                    diffInMonDays = diffInMonDays - (float) 0.5;
-                                } else if (sMonDateStr.equals("SecondHalf") && eMonDateStr.equals("FirstHalf")) {
-                                    diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
-                                            / (1000 * 60 * 60 * 24)) + 1;
-                                    diffInMonDays = diffInMonDays - 1;
+                                // Monday sandwich Leave code start
+                                float noOfMonDays = 0;
+                                float diffInMonDays = -1;
+                                String woMonType = "";
+                                if (!secondLeaveEmployeeDetail.isEmpty()) {
+                                    Object[] oMonArray = (Object[]) secondLeaveEmployeeDetail.get(0);
+                                    woMonType = "" + oMonArray[0];
+                                    Date sMonDate = sdf.parse("" + oMonArray[1]);
+                                    Date eMonDate = sdf.parse("" + oMonArray[2]);
+                                    String sMonDateStr = "" + oMonArray[6];
+                                    String eMonDateStr = "" + oMonArray[7];
+                                    noOfMonDays = (float) oMonArray[3];
+                                    if ((sMonDateStr.equals("Fullday") && eMonDateStr.equals("Fullday"))
+                                            || (sMonDateStr.equals("Fullday") && sMonDate.equals(eMonDate))) {
+                                        diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
+                                                / (1000 * 60 * 60 * 24)) + 1;
+                                    } else if ((sMonDateStr.equals("SecondHalf") && eMonDateStr.equals("Fullday"))
+                                            || (sMonDateStr.equals("Fullday") && eMonDateStr.equals("FirstHalf"))) {
+                                        diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
+                                                / (1000 * 60 * 60 * 24)) + 1;
+                                        diffInMonDays = diffInMonDays - (float) 0.5;
+                                    } else if (sMonDateStr.equals("SecondHalf") && eMonDateStr.equals("FirstHalf")) {
+                                        diffInMonDays = (float) ((eMonDate.getTime() - sMonDate.getTime())
+                                                / (1000 * 60 * 60 * 24)) + 1;
+                                        diffInMonDays = diffInMonDays - 1;
+                                    }
                                 }
-                            }
-                            // Monday sandwich Leave code end
+                                // Monday sandwich Leave code end
 
 //                            if (diffInSatDays != noOfSatDays || (!date.equals(sSatDate) && !date.equals(eSatDate))) {
-                            if (diffInSatDays != noOfSatDays || (date.before(eSatDate)
-                                    && date.after(sSatDate) && diffInSatDays == noOfSatDays)) {
-                                woMap.put("" + next[0], woSatType);
-                            } else if (diffInMonDays != -1 && diffInMonDays != noOfMonDays) {
-                                woMap.put("" + next[0], woMonType);
-                            } else if ((diffInSatDays % 1 == 0 && diffInSatDays == noOfSatDays) && diffInMonDays == noOfMonDays) {
-                                woMap.put("" + next[0], "LWP");
+                                if (diffInSatDays != noOfSatDays || (date.before(eSatDate)
+                                        && date.after(sSatDate) && diffInSatDays == noOfSatDays)) {
+                                    woMap.put("" + next[0], woSatType);
+                                } else if (diffInMonDays != -1 && diffInMonDays != noOfMonDays) {
+                                    woMap.put("" + next[0], woMonType);
+                                } else if ((diffInSatDays % 1 == 0 && diffInSatDays == noOfSatDays) && diffInMonDays == noOfMonDays) {
+                                    woMap.put("" + next[0], "LWP");
+                                } else {
+                                    woMap.put("" + next[0], "WO");
+                                }
                             } else {
                                 woMap.put("" + next[0], "WO");
                             }
@@ -2834,6 +2874,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     if (dayName.equals("Saturday")) {
                         if (dayOfWeek == 2) {
                             satWeekOff = true;
+                            satMap.put("" + next[0], "AB");
                         } else {
                             satWeekOff = false;
                         }
@@ -3237,6 +3278,25 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             long outTime1 = outTime;
                             outTime = outTime - 30;
 //                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+                            ///////////////AR code Start///////////////////////////////////////////////////
+                            AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+                            attendanceRegularization.setStartDateTime("" + next[0]);
+                            attendanceRegularization.setUserMasterId(employeeMaster1.getUserMaster().getId());
+                            long ARdiff = 0;
+                            long ARTime = 0;
+                            SimpleDateFormat sdf4 = new SimpleDateFormat("dd/mm/yyyy HH:mm");
+                            List list = attendanceRegularizationMasterService.readArCountList(attendanceRegularization);
+                            if (!list.isEmpty()) {
+                                Object[] arm = (Object[]) list.get(0);
+                                Date InTimeAR = sdf4.parse(arm[1].toString());
+                                Date OutTimeAR = sdf4.parse(arm[2].toString());
+
+                                ARdiff = OutTimeAR.getTime() - InTimeAR.getTime();
+                                ARTime = ARdiff / (60 * 1000);
+
+                            }
+                            ///////////////AR code End////////////////////////////////////////
+                            totalDayTime = totalDayTime + ARTime;
                             if (outTime > 0 && outTime1 != totalDayTime1) {
                                 totalTime = totalDayTime - outTime;
                                 double empHour = (double) totalTime / 60;
@@ -3455,6 +3515,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 .put("map", map);
         mv.getModelMap()
                 .put("woMap", woMap);
+        mv.getModelMap()
+                .put("satMap", satMap);
         mv.getModelMap()
                 .put("halfDayMap", halfDayMap);
         mv.getModelMap()

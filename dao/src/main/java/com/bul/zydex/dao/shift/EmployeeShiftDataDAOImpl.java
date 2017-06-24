@@ -113,7 +113,7 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
                     + "     DATE_FORMAT(STR_TO_DATE(selected_date, '%Y-%m-%d'),'%d/%m/%Y') As selecteddate ,"
                     + "    case"
                     + "        when"
-                    + "            (select"
+                    + "            ((select"
                     + "                    sm.weekof"
                     + "                from"
                     + "                    employee_shift_data a,"
@@ -123,7 +123,9 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
                     + "                            DAYNAME(DATE_FORMAT(STR_TO_DATE(selected_date, '%Y-%m-%d'),"
                     + "                                            '%Y-%m-%d')),"
                     + "                            '%')"
-                    + "                limit 1) is not null"
+                    + "                limit 1) is not null and (SELECT a.id FROM employee_shift_data a WHERE a.employee_master_id =" + employeeShiftData.getId() + ""
+                    + "                      AND DATE_FORMAT(STR_TO_DATE(a.in_date_time, '%d/%m/%Y %H:%i:%s'),'%d/%m/%Y') = "
+                    + "                         DATE_FORMAT(STR_TO_DATE(selected_date, '%Y-%m-%d'),'%d/%m/%Y')) is null)"
                     + "        then"
                     + "            (select"
                     + "                    'WO' as sunday"
@@ -1054,7 +1056,8 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
         query += " From EmployeeShiftData a "
                 + " Where a.employeeMaster.id = '" + employeeShiftData.getEmployeeMaster().getId() + "'"
                 + " and (STR_TO_DATE(a.inDateTime,'%d/%m/%Y %H:%i:%s') BETWEEN STR_TO_DATE('" + PreviousDate + " " + endShiftTime + ":00','%d/%m/%Y %H:%i:%s') AND (STR_TO_DATE('" + selectDate + " 23:59:00','%d/%m/%Y %H:%i:%s'))"
-                + " OR STR_TO_DATE(a.outDateTime,'%d/%m/%Y %H:%i:%s') BETWEEN STR_TO_DATE('" + PreviousDate + " " + endShiftTime + ":00','%d/%m/%Y %H:%i:%s') AND (STR_TO_DATE('" + selectDate + " 23:59:00','%d/%m/%Y %H:%i:%s')))";
+                + " OR STR_TO_DATE(a.outDateTime,'%d/%m/%Y %H:%i:%s') BETWEEN STR_TO_DATE('" + PreviousDate + " " + endShiftTime + ":00','%d/%m/%Y %H:%i:%s') AND (STR_TO_DATE('" + selectDate + " 23:59:00','%d/%m/%Y %H:%i:%s')))"
+                + " ORDER BY a.inDateTime asc";
 
         return getHibernateTemplate().find(query);
     }

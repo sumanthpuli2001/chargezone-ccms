@@ -20,6 +20,7 @@ import com.bul.zydex.service.overTime.OverTimeMasterService;
 import com.bul.zydex.service.shift.EmployeeShiftDataService;
 import java.io.BufferedReader;
 import java.io.IOException;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -99,6 +100,23 @@ public class AttendanceRegularizationMasterwebAbstract extends CustomAbstract {
         JSONObject jSONObject = new JSONObject(buffer.toString());
 
         return jSONObject;
+    }
+    
+       public JSONObject doPost(HttpServletRequest request)
+            throws ServletException, IOException, JSONException {
+        StringBuffer jb = new StringBuffer();
+        String line = null;
+        try {
+            BufferedReader reader = request.getReader();
+            while ((line = reader.readLine()) != null) {
+                jb.append(line);
+            }
+        } catch (Exception e) {
+            /*report an error*/ }
+        JSONObject jsonObject = new JSONObject(jb.toString());
+
+        return jsonObject;
+
     }
 
 }

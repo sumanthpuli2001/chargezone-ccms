@@ -6,11 +6,14 @@
 package com.bul.zydex.webservice;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.AttendanceRegularization;
 import com.bul.zydex.model.COffLeaveMaster;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.ExpenseMaster;
+import com.bul.zydex.model.ExpenseOtherType;
+import com.bul.zydex.model.ExpenseTravelType;
 import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.HrServiceRequest;
 import com.bul.zydex.model.ItServiceRequest;
@@ -18,14 +21,19 @@ import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.RelocationOrOtherExpense;
+import com.bul.zydex.model.TravelApproverHistory;
 import com.bul.zydex.model.TravelRequestMaster;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
+import com.bul.zydex.service.attendanceRegularization.AttendanceRegularizationMasterService;
 import com.bul.zydex.service.emprequest.HrServiceRequestService;
 import com.bul.zydex.service.emprequest.ItServiceRequestService;
 import com.bul.zydex.service.expense.ExpenseMasterService;
+import com.bul.zydex.service.expenseOtherType.ExpenseOtherTypeService;
+import com.bul.zydex.service.expenseTravelType.ExpenseTravelTypeService;
 import com.bul.zydex.service.holiday.HolidayMasterService;
 import com.bul.zydex.service.leave.COffLeaveMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
@@ -33,7 +41,9 @@ import com.bul.zydex.service.leave.LeaveEmployeeDetailService;
 import com.bul.zydex.service.leave.LeaveTypeMasterService;
 import com.bul.zydex.service.level.LevelMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
+import com.bul.zydex.service.otherExpense.RelocationOrOtherExpenseService;
 import com.bul.zydex.service.shift.EmployeeShiftDataService;
+import com.bul.zydex.service.travel.TravelApproverHistoryService;
 import com.bul.zydex.service.travel.TravelRequestMasterService;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -67,6 +77,51 @@ public abstract class WebServiceAbstract extends CustomAbstract {
     protected ItServiceRequestService<ItServiceRequest> itServiceRequestService;
     protected HrServiceRequestService<HrServiceRequest> hrServiceRequestService;
     protected EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService;
+    protected AttendanceRegularizationMasterService<AttendanceRegularization> attendanceRegularizationMasterService;
+    protected ExpenseTravelTypeService<ExpenseTravelType> expenseTravelTypeService;
+    protected RelocationOrOtherExpenseService<RelocationOrOtherExpense> relocationOrOtherExpenseService;
+    protected ExpenseOtherTypeService<ExpenseOtherType> expenseOtherTypeService;
+
+    public ExpenseOtherTypeService<ExpenseOtherType> getExpenseOtherTypeService() {
+        return expenseOtherTypeService;
+    }
+
+    public void setExpenseOtherTypeService(ExpenseOtherTypeService<ExpenseOtherType> expenseOtherTypeService) {
+        this.expenseOtherTypeService = expenseOtherTypeService;
+    }
+
+    public TravelApproverHistoryService<TravelApproverHistory> getTravelApproverHistoryService() {
+        return travelApproverHistoryService;
+    }
+
+    public void setTravelApproverHistoryService(TravelApproverHistoryService<TravelApproverHistory> travelApproverHistoryService) {
+        this.travelApproverHistoryService = travelApproverHistoryService;
+    }
+    protected TravelApproverHistoryService<TravelApproverHistory> travelApproverHistoryService;
+
+    public RelocationOrOtherExpenseService<RelocationOrOtherExpense> getRelocationOrOtherExpenseService() {
+        return relocationOrOtherExpenseService;
+    }
+
+    public void setRelocationOrOtherExpenseService(RelocationOrOtherExpenseService<RelocationOrOtherExpense> relocationOrOtherExpenseService) {
+        this.relocationOrOtherExpenseService = relocationOrOtherExpenseService;
+    }
+
+    public AttendanceRegularizationMasterService<AttendanceRegularization> getAttendanceRegularizationMasterService() {
+        return attendanceRegularizationMasterService;
+    }
+
+    public void setAttendanceRegularizationMasterService(AttendanceRegularizationMasterService<AttendanceRegularization> attendanceRegularizationMasterService) {
+        this.attendanceRegularizationMasterService = attendanceRegularizationMasterService;
+    }
+
+    public ExpenseTravelTypeService<ExpenseTravelType> getExpenseTravelTypeService() {
+        return expenseTravelTypeService;
+    }
+
+    public void setExpenseTravelTypeService(ExpenseTravelTypeService<ExpenseTravelType> expenseTravelTypeService) {
+        this.expenseTravelTypeService = expenseTravelTypeService;
+    }
 
     public EmployeeShiftDataService<EmployeeShiftData> getEmployeeShiftDataService() {
         return employeeShiftDataService;

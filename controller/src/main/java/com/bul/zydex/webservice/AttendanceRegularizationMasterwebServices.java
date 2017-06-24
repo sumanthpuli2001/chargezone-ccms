@@ -17,6 +17,8 @@ import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.OverTimeMaster;
 import com.bul.zydex.model.UserMaster;
+import com.bul.zydex.model.UserRightMaster;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -24,10 +26,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -93,6 +98,12 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
                     listType.put("Status", ob[5].toString());
                     listType.put("EndDateTime", ob[3].toString());
                     listType.put("StartDateTime", ob[2].toString());
+                    String dateOfSubmit = "";
+                    if (null != ob[6]) {
+                        dateOfSubmit = ob[6].toString();
+                    }
+                    listType.put("dateOfSubmit", dateOfSubmit);
+
                     listType.put("empMastId", empMastId);
                     listType.put("Usermaster_id", empMast.getUserMaster().getId());
                     String status_Messsage = "";
@@ -535,4 +546,410 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
         userData.put("responseCode", rcode);
         out.print(userData);
     }
+
+    public void AttendanceRegularizationResult(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        PrintWriter out = null;
+        out = response.getWriter();
+        String rcode = "";
+        String message = "";
+        UserMaster user = new UserMaster();
+
+        JSONObject userData = new JSONObject();
+        JSONObject data = new JSONObject();
+        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        try {
+            String id = request.getParameter("id");
+            int userid = Integer.parseInt(id);
+            user.setId(userid);
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            employeeMaster.setUserMaster(user);
+            List<?> list1 = attendanceRegularizationMasterService.userReportingManager(Integer.parseInt(id));
+            List<?> list = attendanceRegularizationMasterService.userWiseAttendanceRegularizationList(Integer.parseInt(id));
+
+            String managerName = "";
+            EmployeeMaster employeeMaster1 = new EmployeeMaster();
+            if (!list1.isEmpty()) {
+                employeeMaster = (EmployeeMaster) list1.get(0);
+
+                employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+
+            }
+            if (!list.isEmpty()) {
+
+                JSONArray listsType = new JSONArray();
+                employeeMaster = (EmployeeMaster) list1.get(0);
+                if (!employeeMaster.getReportingManagerLevel1().equals("")) {
+
+                }
+
+                for (int i = 0; i < list.size(); i++) {
+                    AttendanceRegularization atendanceRegularization = (AttendanceRegularization) list.get(i);;
+                    JSONObject listType = new JSONObject();
+                    listType.put("Attendenceregularization_id", atendanceRegularization.getId());
+                    listType.put("StartDate", atendanceRegularization.getStartDateTime());
+                    listType.put("Reason", atendanceRegularization.getReason());
+                    listType.put("Status", atendanceRegularization.getStatus());
+                    listType.put("EndDateTime", atendanceRegularization.getEndDateTime());
+                    listType.put("DateOfSubmit", atendanceRegularization.getDateOfSubmit());
+                    String dateOfSubmit = "";
+                    if (null != atendanceRegularization.getDateOfSubmit()) {
+                        dateOfSubmit = atendanceRegularization.getDateOfSubmit();
+                    }
+                    listType.put("dateOfSubmit", dateOfSubmit);
+
+                    String status_Messsage = "";
+                    if (atendanceRegularization.getStatus() == 0) {
+                        status_Messsage = "Pending";
+                    } else if (atendanceRegularization.getStatus() == 1) {
+                        status_Messsage = "Approved";
+                    } else if (atendanceRegularization.getStatus() == 7) {
+                        status_Messsage = "Rework";
+                    } else if (atendanceRegularization.getStatus() == 3) {
+                        status_Messsage = "Rejected";
+                    } else if (atendanceRegularization.getStatus() == 2) {
+                        status_Messsage = "Withdrawn";
+                    }
+                    listType.put("StatusMsg", status_Messsage);
+                    listsType.put(listType);
+                    data.put("Attendance Regularization List", listsType);
+                    rcode = "1";
+                    message = "Sucess";
+                }
+
+            } else {
+                rcode = "2";
+                message = "No request found.";
+
+            }
+            userData.put("data", data);
+            userData.put("responseMessage", message);
+            userData.put("responseCode", rcode);
+            out.print(userData);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void ViewAttendanceRegularization(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        PrintWriter out = null;
+        out = response.getWriter();
+        JSONArray jSONArray = new JSONArray();
+        UserMaster user = new UserMaster();
+        JSONObject userdata = new JSONObject();
+        String rcode = "";
+        String message = "";
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        int reportingId = 0;
+        String id = request.getParameter("id");
+        int userid = Integer.parseInt(id);
+        user.setId(userid);
+        try {
+            JSONObject data1 = doPost(request);
+            String Attendenceregularizationid = data1.getString("Attendenceregularizationid");
+            AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            employeeMaster.setUserMaster(user);
+
+//        EmployeeMaster em = (EmployeeMaster) employeeMasterService.readByReportManager(employeeMaster1);
+//        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+//        if (!reportmanager1.isEmpty()) {
+//            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+//            
+//            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+            List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+            if (!empDetailList.isEmpty()) {
+
+                String employeeId = "";
+                String employeeName = "";
+                String designationName = "";
+                String level = "";
+                String departmentName = "";
+                String location = "";
+                String reportingManagerLevel1 = "";
+
+                int leaveEmployeeDeatilId = 0;
+                int Status = 0;
+                int userId = 0;
+                float NoOfDays = 0;
+
+                for (int i = 0; i < empDetailList.size(); i++) {
+                    Object[] o = (Object[]) empDetailList.get(i);
+                    JSONObject userData = new JSONObject();
+                    employeeId = (String) o[0];
+                    employeeName = (String) o[1];
+                    designationName = (String) o[2];
+                    level = (String) o[3];
+                    departmentName = (String) o[4];
+                    location = (String) o[5];
+                    reportingManagerLevel1 = (String) o[6];
+                    userData.put("employeeId", employeeId);
+                    userData.put("employeeName", employeeName);
+                    userData.put("designationName", designationName);
+                    userData.put("level", level);
+                    userData.put("departmentName", departmentName);
+                    userData.put("location", location);
+                    userData.put("reportingManagerLevel1", employeeMaster1.getEmployeeName());
+
+                    attendanceRegularization = attendanceRegularizationMasterService.readById(Integer.parseInt(Attendenceregularizationid));
+                    userData.put("StartDateTime", attendanceRegularization.getStartDateTime());
+                    userData.put("EndDateTime", attendanceRegularization.getEndDateTime());
+                    userData.put("DateOfSubmit", attendanceRegularization.getDateOfSubmit());
+                    userData.put("Reason", attendanceRegularization.getReason());
+                    jSONArray.put(userData);
+
+                }
+
+            }
+            rcode = "1";
+            message = "Success";
+
+            userdata.put("EmployeeDetail", jSONArray);
+
+            userdata.put("responseMessage", message);
+            userdata.put("responseCode", rcode);
+            out.print(userdata);
+        } catch (Exception e) {
+            rcode = "1";
+            message = "Something went wrong";
+            e.printStackTrace();
+        }
+    }
+
+    public void ArWithdraw(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        PrintWriter out = null;
+        out = response.getWriter();
+        String rcode = "";
+        String message = "";
+        JSONObject userData = new JSONObject();
+        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        AttendanceRegularization attendanceRegularization1 = new AttendanceRegularization();
+        UserMaster user = new UserMaster();
+        String id = request.getParameter("id");
+        int userid = Integer.parseInt(id);
+        user.setId(userid);
+        try {
+            JSONObject data1 = doPost(request);
+            String Attendenceregularizationid = data1.getString("Attendenceregularizationid");
+            String btnSubmit = data1.getString("btnSubmit");
+            attendanceRegularization1 = attendanceRegularizationMasterService.readById(Integer.parseInt(Attendenceregularizationid));
+            if (btnSubmit.equals("Submit")) {
+
+                if (attendanceRegularization1.getStatus() == 7) {
+                    attendanceRegularization.setStatus(0);
+                    attendanceRegularization.setManagerRemark(attendanceRegularization1.getManagerRemark());
+                    attendanceRegularization.setUserMasterId(attendanceRegularization1.getUserMasterId());
+                } else {
+                    attendanceRegularization.setStatus(2);
+                    attendanceRegularization.setManagerRemark(attendanceRegularization1.getManagerRemark());
+                    attendanceRegularization.setUserMasterId(attendanceRegularization1.getUserMasterId());
+                }
+                request.setAttribute("successMessage",
+                        "Information : The Information is saved Successfully.");
+                try {
+
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = employeeMasterService.readById(userid);
+
+                    DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                    EmployeeMaster EmployeeHR = new EmployeeMaster();
+                    EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                    //id=14 is for attandence regularization Apply...
+                    emailTemplate = emailTemplateService.readById(14);
+                    String EmpStr = request.getParameter("empid");
+                    if (null != EmpStr && !"".equals(EmpStr)) {
+                        int Empid = Integer.parseInt(EmpStr);
+                        List list = employeeMasterService.readByEmployeeNo(Empid);
+                        if (!list.isEmpty()) {
+                            employeeMaster1 = (EmployeeMaster) list.get(0);
+                            String To = EmployeeHR.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
+
+                            String name = "Attendance";
+                            EmailAddMaster emailAddMaster = new EmailAddMaster();
+                            emailAddMaster.setModuleName(name);
+                            emailAddMaster.setDepartmentMaster(employeeMasterModel.getDepartmentMaster());
+                            List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                            if (!emailSendList.isEmpty()) {
+                                EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                                String emailId = emailAddMaster1.getEmailId();
+                                for (String emailId1 : emailId.split(",")) {
+                                    if (!emailId1.equals("")) {
+                                        String To1 = emailId1;
+                                        String from1 = employeeMasterModel.getOfficeEmailId();
+                                        String subject1 = emailTemplate.getSubject();
+                                        subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                                        String msg1 = emailTemplate.getBodytext();
+                                        msg1 = msg1.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from1, To1, subject1, msg1);
+
+                                    }
+
+                                }
+                            }
+                            List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
+                            if (!allDeptmailList.isEmpty()) {
+                                EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
+                                String emailId = emailAddMaster1.getEmailId();
+                                for (String emailId1 : emailId.split(",")) {
+                                    if (!emailId1.equals("")) {
+                                        String To1 = emailId1;
+                                        String from1 = employeeMasterModel.getOfficeEmailId();
+                                        String subject1 = emailTemplate.getSubject();
+                                        subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                                        String msg1 = emailTemplate.getBodytext();
+                                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from1, To1, subject1, msg1);
+                                    }
+                                }
+                            }
+
+                        }
+
+                    }
+
+                } catch (Exception e) {
+                }
+
+            } else if (btnSubmit.equals("Withdraw")) {
+                attendanceRegularization = attendanceRegularizationMasterService.readById(Integer.parseInt(Attendenceregularizationid));
+                attendanceRegularization.setStatus(2);
+                try {
+
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = employeeMasterService.readById(userid);
+                    DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                    EmployeeMaster EmployeeHR = new EmployeeMaster();
+                    EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                    //id=18 is for attandence regularization withdrow...
+                    emailTemplate = emailTemplateService.readById(18);
+                    String EmpStr = request.getParameter("empid");
+                    if (null != EmpStr && !"".equals(EmpStr)) {
+                        int Empid = Integer.parseInt(EmpStr);
+                        List list = employeeMasterService.readByEmployeeNo(Empid);
+                        if (!list.isEmpty()) {
+                            employeeMaster1 = (EmployeeMaster) list.get(0);
+                            String To = EmployeeHR.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
+
+                        }
+                    }
+                } catch (Exception e) {
+                }
+
+            }
+            rcode = "1";
+            message = "Success";
+
+            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            String currentDate = dateFormat1.format(new Date());
+            attendanceRegularization.setDateOfSubmit(currentDate);
+            attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
+
+        } catch (Exception e) {
+            rcode = "1";
+            message = "Something went wrong";
+            e.printStackTrace();
+        }
+        userData.put("responseMessage", message);
+        userData.put("responseCode", rcode);
+        out.print(userData);
+
+    }
+
+    public void createARRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException, ServletException {
+        PrintWriter out = null;
+        out = response.getWriter();
+        String rcode = "";
+        String message = "";
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        UserMaster userMaster = new UserMaster();
+        UserMaster user = new UserMaster();
+        String id = request.getParameter("id");
+        int userid = Integer.parseInt(id);
+        user.setId(userid);
+        employeeMaster.setUserMaster(user);
+        JSONObject userData = new JSONObject();
+        JSONObject data = doPost(request);
+        try {
+
+            AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            String Startdate = data.getString("startdate");
+            String enddate = data.getString("enddate");
+            String reason = data.getString("reason");
+            String userId = data.getString("userId");
+            int userMasterId = Integer.parseInt(userId);
+
+            Date sdate = dateFormat1.parse(Startdate);
+            Date edate = dateFormat1.parse(enddate);
+
+            attendanceRegularization.setUserMasterId(userMasterId);
+            attendanceRegularization.setStartDateTime(sdate.toString());
+            attendanceRegularization.setEndDateTime(edate.toString());
+            attendanceRegularization.setReason(reason);
+            attendanceRegularization.setStatus(0);
+
+            String currentDate = dateFormat1.format(new Date());
+            attendanceRegularization.setDateOfSubmit(currentDate);
+            attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
+
+            try {
+                EmployeeMaster employeeMaster1 = (EmployeeMaster) employeeMasterService.readByEmployeeUserId(employeeMaster);
+//                mailSendArApply(request);
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = employeeMasterService.readById(userMasterId);
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                // id 14 is for Attendence regularization apply....
+                emailTemplate = emailTemplateService.readById(14);
+                String To = employeeMasterHr.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
+
+            rcode = "1";
+            message = "Sucess";
+
+        } catch (Exception e) {
+            rcode = "0";
+            message = "ERROR";
+        }
+        userData.put("responseMessage", message);
+        userData.put("responseCode", rcode);
+        out.print(userData);
+    }
+
 }

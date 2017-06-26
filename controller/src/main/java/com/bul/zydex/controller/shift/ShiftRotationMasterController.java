@@ -13330,7 +13330,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         EmployeeDatetimeData employeeDatetimeData1 = new EmployeeDatetimeData();
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date d = sdf.parse(userdate);
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        Date d = sdf1.parse(userdate);
         int month = d.getMonth();
 //                = //        userMaster.setId(1614);
         //        employeeMaster.setUserMaster(userMaster);

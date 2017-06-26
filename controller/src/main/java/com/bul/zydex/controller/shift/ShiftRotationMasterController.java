@@ -14277,6 +14277,20 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             shiftRotationId = 51;
                         } else if (shiftRotationName.contains("First - Second")) {
                             shiftRotationId = 52;
+                        } else if (shiftRotationName.contains("General - Second")) {
+                            shiftRotationId = 53;
+                        } else if (shiftRotationName.contains("General - First")) {
+                            shiftRotationId = 57;
+                        } else if (shiftRotationName.contains("First - Night")) {
+                            shiftRotationId = 58;
+                        }else if (shiftRotationName.contains("General -Night")) {
+                            shiftRotationId = 60;
+                        }else if (shiftRotationName.contains("Second-Night")) {
+                            shiftRotationId = 61;
+                        }else if (shiftRotationName.contains("First")) {
+                            shiftRotationId = 58;
+                        }else if (shiftRotationName.contains("Second")) {
+                            shiftRotationId = 62;
                         }
                         for (int i = 1; i < 31; i++) {
 

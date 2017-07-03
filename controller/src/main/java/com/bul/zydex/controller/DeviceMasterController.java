@@ -216,7 +216,7 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                 myURLConnection1 = myURL1.openConnection();
                 myURLConnection1.setRequestProperty("Authorization", "Basic " + encoded1);
                 myURLConnection1.setConnectTimeout(15000);
-                myURLConnection1.setReadTimeout(20000);
+//                myURLConnection1.setReadTimeout(20000);
                 myURLConnection1.connect();
                 if (myURLConnection1.getInputStream().available() > 0) {
                     reader1 = new BufferedReader(new InputStreamReader(myURLConnection1.getInputStream()));
@@ -226,7 +226,7 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                 String response;
                 String rollOverCount = "";
                 String urlSeqNo = "";
-                if (null == reader1.readLine() || "".equals(reader1.readLine())) {
+                if (null == reader1) {
                     DeviceMasterNotification deviceMasterNotification = new DeviceMasterNotification();
                     deviceMasterNotification.setIpAddress(deviceip);
                     List<DeviceMasterNotification> l = (List<DeviceMasterNotification>) deviceMasterNotificationService.readByIpAddress(deviceMasterNotification);
@@ -304,7 +304,7 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                         myURLConnection = myURL.openConnection();
                         myURLConnection.setRequestProperty("Authorization", "Basic " + encoded);
                         myURLConnection.setConnectTimeout(15000);
-                        myURLConnection.setReadTimeout(20000);
+//                        myURLConnection.setReadTimeout(20000);
                         myURLConnection.connect();
                         if (myURLConnection.getInputStream().available() > 0) {
                             reader = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
@@ -317,40 +317,39 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                         String punchInDate = "";
                         String punchInTime = "";
                         String punchInEmployeeId = "";
-                        if (null == reader.readLine()) {
-                            if (null == reader1.readLine() || "".equals(reader1.readLine())) {
-                                DeviceMasterNotification deviceMasterNotification = new DeviceMasterNotification();
-                                deviceMasterNotification.setIpAddress(deviceip);
-                                List<DeviceMasterNotification> l = (List<DeviceMasterNotification>) deviceMasterNotificationService.readByIpAddress(deviceMasterNotification);
-                                for (DeviceMasterNotification l2 : l) {
-                                    if ((null != l2.getReceipt() || !"".equals(l2.getReceipt())) && deviceMaster.getCountConnectionOut() == l2.getCountConnectionOut()) {
-                                        for (String empId : l2.getReceipt().split(",")) {
-                                            if (!"".equals(empId)) {
+                        if (null == reader) {
+                            DeviceMasterNotification deviceMasterNotification = new DeviceMasterNotification();
+                            deviceMasterNotification.setIpAddress(deviceip);
+                            List<DeviceMasterNotification> l = (List<DeviceMasterNotification>) deviceMasterNotificationService.readByIpAddress(deviceMasterNotification);
+                            for (DeviceMasterNotification l2 : l) {
+                                if ((null != l2.getReceipt() || !"".equals(l2.getReceipt())) && deviceMaster.getCountConnectionOut() == l2.getCountConnectionOut()) {
+                                    for (String empId : l2.getReceipt().split(",")) {
+                                        if (!"".equals(empId)) {
 
-                                                EmployeeMaster employeeMaster2 = new EmployeeMaster();
-                                                EmailTemplate emailTemplate = new EmailTemplate();
-                                                employeeMaster2 = employeeMasterService.readById(Integer.parseInt(empId));
-                                                String To = employeeMaster2.getOfficeEmailId();
-                                                emailTemplate = emailTemplateService.readById(141);
-                                                String Subject = emailTemplate.getSubject();
-                                                String msg = emailTemplate.getBodytext();
-                                                sendMail.sendMail("admin@zydexindustries.com", To, Subject, msg);
-                                                l2.setCountConnectionOut(0);
+                                            EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                                            EmailTemplate emailTemplate = new EmailTemplate();
+                                            employeeMaster2 = employeeMasterService.readById(Integer.parseInt(empId));
+                                            String To = employeeMaster2.getOfficeEmailId();
+                                            emailTemplate = emailTemplateService.readById(141);
+                                            String Subject = emailTemplate.getSubject();
+                                            String msg = emailTemplate.getBodytext();
+                                            sendMail.sendMail("admin@zydexindustries.com", To, Subject, msg);
+                                            l2.setCountConnectionOut(0);
 
-                                            } else {
-                                                l2.setCountConnectionOut((l2.getCountConnectionOut() + 1));
+                                        } else {
+                                            l2.setCountConnectionOut((l2.getCountConnectionOut() + 1));
 
-                                            }
-                                            deviceMasterNotificationService.update(l2);
                                         }
-                                    } else {
-
+                                        deviceMasterNotificationService.update(l2);
                                     }
+                                } else {
+
                                 }
                             }
 
                             break;
                         } else {
+                            String temp = reader.readLine();
                             while ((response1 = reader.readLine()) != null) //print response
                             {
                                 System.out.println(response1);

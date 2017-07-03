@@ -67,7 +67,7 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
-                                  <div class="box-header" style="text-align: right;">
+                                <div class="box-header" style="text-align: right;">
                                     <button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="window.location = 'attendanceRegularizationMaster.htm?act=exportToExcelAttendenceRequest'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>
                                 </div>
                                 <div class="box-body no-padding">
@@ -86,11 +86,12 @@
                                                         <c:otherwise>
                                                             <thead>
                                                                 <tr >
-                                                                      <th>Employee Id</th>
+                                                                    <th>Employee Id</th>
                                                                     <th>Employee Name</th>
                                                                     <th>Start Date & Time</th>
                                                                     <th>End Date & Time</th>
                                                                     <th>Reason</th>
+                                                                    <th>Date of Submission</th>
                                                                     <th>Status</th>
                                                                 </tr>
                                                             </thead>
@@ -104,6 +105,7 @@
                                                                 <td >${list[2]}</td>
                                                                 <td>${list[3]}</td>
                                                                 <td style="width:40%;">${list[4]}</td>
+                                                                <td >${list[7]}</td>
                                                                 <c:if test="${list[5] eq 0}">
                                                                     <td><span  class="label label-primary" >Pending</span></td>
                                                                 </c:if>
@@ -122,7 +124,7 @@
                                                                 <c:if test="${list[5] eq 7}">
                                                                     <td><span class="label label-info">Rework</span></td>
                                                                 </c:if>
-                                                             
+
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>

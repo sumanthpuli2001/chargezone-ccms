@@ -137,7 +137,7 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
             condition += " AND d.id = " + leaveEmployeeDetail.getEndDateStatus();
         }
 
-        query += " Select b.employeeId, b.employeeName, c.departmentName, d.designationName, e.leaveType, a.startDate, a.endDate,a.status, a.noOfDays "
+        query += " Select b.employeeId, b.employeeName, c.departmentName, d.designationName, e.leaveType, a.startDate, a.endDate,a.status, a.noOfDays, a.dateOfSubmit "
                 + " From LeaveEmployeeDetail a "
                 + " LEFT JOIN a.employeeMaster b "
                 + " LEFT JOIN b.departmentMaster c "

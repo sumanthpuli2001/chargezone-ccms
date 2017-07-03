@@ -89,6 +89,7 @@
                                                                     <th>Start Date & Time</th>
                                                                     <th>End Date & Time</th>
                                                                     <th>Reason</th>
+                                                                    <th>Date of Submission</th>
                                                                     <th>Status</th>
                                                                     <th style="text-align: center;">Action</th>
                                                                 </tr>
@@ -102,6 +103,7 @@
                                                                 <td >${list[2]}</td>
                                                                 <td>${list[3]}</td>
                                                                 <td style="width:40%;">${list[4]}</td>
+                                                                <td>${list[6]}</td>
                                                                 <c:if test="${list[5] eq 0}">
                                                                     <td><span  class="label label-primary" >Pending</span></td>
                                                                 </c:if>

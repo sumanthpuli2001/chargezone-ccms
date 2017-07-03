@@ -245,6 +245,9 @@
                         <ul class="treeview-menu">
                             <li><a href="shiftRotationMaster.htm?act=employeeManualPunch"><i class="fa fa-circle-o"></i>Employee Punch Entry</a></li>
                         </ul>
+                        <ul class="treeview-menu">
+                            <li><a href="shiftRotationMaster.htm?act=employeeShiftChangeMonthly"><i class="fa fa-circle-o"></i>Employee Manual Shift Assign Monthly</a></li>
+                        </ul>
                     </li>
                 </c:if>
                 <li class="treeview">
@@ -566,8 +569,8 @@
                             <li><a href="shiftRotationMaster.htm?act=employeePresentSearch"><i class="fa fa-circle-o"></i>Daily Present Report</a></li>
                             <li><a href="shiftRotationMaster.htm?act=attendanceExcelUpload"><i class="fa fa-circle-o"></i>Attendance Upload</a></li>
                             <!--<li><a href="shiftRotationMaster.htm?act=employeeManualPunch"><i class="fa fa-circle-o"></i>Manual Punch</a></li>-->
-                            </c:if>
-                            <c:if test="${sessionScope.userRight.lunaPlantAttendanceMgnt}">
+                        </c:if>
+                        <c:if test="${sessionScope.userRight.lunaPlantAttendanceMgnt}">
                             <li><a href="shiftRotationMaster.htm?act=employeeAttendanceForLuna"><i class="fa fa-circle-o"></i>Luna Attendance Download</a></li>
                             </c:if>
                             <c:if test="${sessionScope.userRight.gavasatPlantAttendanceMgnt}">

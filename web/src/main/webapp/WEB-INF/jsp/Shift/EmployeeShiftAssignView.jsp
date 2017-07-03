@@ -26,7 +26,7 @@
     </head>
     <script>
         function viewClick(id, dayNo) {
-           
+
 
             window.location = 'shiftRotationMaster.htm?act=EditEmployeeShiftAssign&id=' + id + '&dayNo=' + dayNo;
         }
@@ -43,6 +43,8 @@
 //            window.location = 'attendanceRegularizationMaster.htm?act=reworkSubmitByAdmin&id=' + arId;
 //        }
     </script>
+
+  
 
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -63,16 +65,22 @@
         <!-- Main content -->
         <form:form 
             name='form1' onsubmit='return saveSubmit11();' class="form-horizontal" role="form">
+            <input type="hidden" id="empId" name="empId" value="${monthlySchedule.employeeMaster.id}">
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
+                       
+
                             <div class="tab-content">
                                 <!--                                <div class="box-header" style="text-align: right;">
                                                                     <button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="window.location = 'attendanceRegularizationMaster.htm?act=exportToExcelAttendenceRequest'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>
                                                                 </div>-->
                                 <div class="box-body no-padding">
+
+
+
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
                                             <div class="table table-bordered">
@@ -104,10 +112,10 @@
                                                                 <td>${i+1}</td>
                                                                 <td>${list[i]}</td>
                                                                 <%--<c:if test='${list[i]ne"WO"}'>--%> 
-                                                                    <td> 
-                                                                        <button type="button" class="btn btn-default dropdown-toggle" onclick="viewClick(${monthlySchedule.id},${i+1});" >
-                                                                            Edit
-                                                                        </button>
+                                                                <td> 
+                                                                    <button type="button" class="btn btn-default dropdown-toggle" onclick="viewClick(${monthlySchedule.id},${i+1});" >
+                                                                        Edit
+                                                                    </button>
                                                                     <%--</c:if>--%>
                                                                 </td>
 
@@ -153,6 +161,7 @@
             forceParse: 0
         });
     </script>
+ 
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>
 

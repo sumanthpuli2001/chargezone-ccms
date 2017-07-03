@@ -42,6 +42,7 @@
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>No Of Day</th>
+                        <th>Date of Submission</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -58,6 +59,7 @@
                     <td>${list[5]}</td>
                     <td>${list[6]}</td>
                     <td>${list[8]}</td>
+                    <td>${list[9]}</td>
                     <c:if test="${list[7] eq 0}">
                         <td><span class="badge">Pending</span></td>
                     </c:if>

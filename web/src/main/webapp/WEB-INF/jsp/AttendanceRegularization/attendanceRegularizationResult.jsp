@@ -72,8 +72,8 @@
                                                                     <th>Start Date & Time</th>
                                                                     <th>End Date & Time</th>
                                                                     <th>Reason</th>
-                                                                    <th>Status</th>
                                                                     <th>Date of Submission</th>
+                                                                    <th>Status</th>
                                                                     <th>Action</th>
                                                                 </tr>
                                                             </thead>
@@ -85,6 +85,7 @@
                                                                 <td>${list.startDateTime}</td>
                                                                 <td>${list.endDateTime}</td>
                                                                 <td>${list.reason}</td>
+                                                                <td>${list.dateOfSubmit}</td>
                                                                 <c:if test="${list.status eq 0}">
                                                                     <td><span class="label label-primary ">Pending</span></td>
                                                                 </c:if>
@@ -106,7 +107,7 @@
                                                                 <c:if test="${list.status eq 7}">
                                                                     <td><span class="label label-info">Rework by ${managerName}</span></td>
                                                                 </c:if>
-                                                                    <td>${list.dateOfSubmit}</td>
+
                                                                 <td>  <button type="button" class="btn btn-default" onclick="editClick(${list.id});">View</button></td>
 
                                                             </tr>

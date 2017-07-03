@@ -84,7 +84,7 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
     public void setTimeAttandanceFlaxibleMasterService(TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> timeAttandanceFlaxibleMasterService) {
         this.timeAttandanceFlaxibleMasterService = timeAttandanceFlaxibleMasterService;
     }
-   
+
     public TravelRequestMasterService<TravelRequestMaster> getTravelRequestMasterService() {
         return travelRequestMasterService;
     }
@@ -92,7 +92,6 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
     public void setTravelRequestMasterService(TravelRequestMasterService<TravelRequestMaster> travelRequestMasterService) {
         this.travelRequestMasterService = travelRequestMasterService;
     }
-    
 
     public AttendanceRegularizationMasterService<AttendanceRegularization> getAttendanceRegularizationMasterService() {
         return attendanceRegularizationMasterService;
@@ -102,7 +101,6 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
         this.attendanceRegularizationMasterService = attendanceRegularizationMasterService;
     }
 
-
     public HolidayMasterService<HolidayMaster> getHolidayMasterService() {
         return holidayMasterService;
     }
@@ -110,7 +108,7 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
     public void setHolidayMasterService(HolidayMasterService<HolidayMaster> holidayMasterService) {
         this.holidayMasterService = holidayMasterService;
     }
-    
+
     public LeaveEmployeeDetailService<LeaveEmployeeDetail> getLeaveEmployeeDetailService() {
         return leaveEmployeeDetailService;
     }
@@ -345,4 +343,5 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
         request.setAttribute("departmentList", tempStr);
     }
 
+   
 }

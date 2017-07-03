@@ -1207,7 +1207,7 @@ public class ExpenseReport extends ExpenseReportAbstarct {
                         String Subject = emailTemplate.getSubject();
                         Subject = Subject.replaceAll("\\{user\\}", master.getEmployeeName());
                         String msg = emailTemplate.getBodytext();
-                        msg = msg.replaceAll("\\{to_user\\}", empApprover.getEmployeeName());
+                        msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
                         msg = msg.replaceAll("\\{from_user\\}", empApprover.getEmployeeName());
                         msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                         sendMail.sendMail(from, To, Subject, msg);

@@ -18,6 +18,7 @@ import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.OverTimeMaster;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.UserRightMaster;
+import com.bul.zydex.model.support.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -342,9 +343,9 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
                     startDate1 = c.getTime();
                 }
                 // add c-off balance in employee leave balance when day is sunday
-
                 EmailTemplate emailTemplate = new EmailTemplate();
-                EmployeeMaster employeeMasterModel = employeeMasterService.readById(Integer.parseInt(id));
+                EmployeeMaster employeeMasterModel = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+//                EmployeeMaster employeeMasterModel = (EmployeeMaster) employeeMasterService.readEmpUserIdWise(employeeMaster);
 //                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                 DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
                 EmployeeMaster employeeMaster1 = new EmployeeMaster();
@@ -356,13 +357,13 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
                 employeeMaster2.setUserMaster(userMaster1);
                 List list1 = employeeMasterService.readByUserName(employeeMaster2);
                 if (!list1.isEmpty()) {
-                    employeeMaster1 = (EmployeeMaster) list1.get(0);
-                    String To = employeeMaster1.getOfficeEmailId();
+                    employeeMaster = (EmployeeMaster) list1.get(0);
+                    String To = employeeMaster.getOfficeEmailId();
                     String from = employeeMasterModel.getOfficeEmailId();
                     String Subject = emailTemplate.getSubject();
-                    Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
                     String msg = emailTemplate.getBodytext();
-                    msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
                     msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
@@ -370,19 +371,19 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
                     String name = "Attendance";
                     EmailAddMaster emailAddMaster = new EmailAddMaster();
                     emailAddMaster.setModuleName(name);
-                    emailAddMaster.setDepartmentMaster(employeeMaster1.getDepartmentMaster());
+                    emailAddMaster.setDepartmentMaster(employeeMaster.getDepartmentMaster());
                     List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
                     if (!emailSendList.isEmpty()) {
                         EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
                         String emailId = emailAddMaster1.getEmailId();
                         for (String emailId1 : emailId.split(",")) {
                             if (!emailId1.equals("")) {
-                                String To1 = emailId1;
+                                String To1 = employeeMaster.getOfficeEmailId();
                                 String from1 = employeeMasterModel.getOfficeEmailId();
                                 String subject1 = emailTemplate.getSubject();
-                                subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                                subject1 = subject1.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
                                 String msg1 = emailTemplate.getBodytext();
-                                msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                                msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
                                 msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                 msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                 sendMail.sendMail(from1, To1, subject1, msg1);
@@ -417,9 +418,13 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
         JSONObject userData = new JSONObject();
 
         try {
-
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            UserMaster user = new UserMaster();
             AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
             String id = request.getParameter("id");
+            int userid = Integer.parseInt(id);
+            user.setId(userid);
+            employeeMaster.setUserMaster(user);
             JSONObject data = doConvert(request);
 
             String empId = data.getString("EmpId");
@@ -437,24 +442,24 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
             attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
 
             EmailTemplate emailTemplate = new EmailTemplate();
-            EmployeeMaster employeeMasterModel = employeeMasterService.readById(Integer.parseInt(id));
-//            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-            DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            EmployeeMaster employeeMasterModel = employeeMasterService.readById(Integer.parseInt(empId));
+            employeeMaster = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+            DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
             UserMaster userMaster = new UserMaster();
             userMaster.setId(attendanceRegularization.getUserMasterId());
             EmployeeMaster employeeMaster1 = new EmployeeMaster();
             employeeMaster1.setUserMaster(userMaster);
-            List list = employeeMasterService.readByUserName(employeeMaster1);
+            List list = employeeMasterService.readByUserName(employeeMasterModel);
             emailTemplate = emailTemplateService.readById(17);
             if (!list.isEmpty()) {
                 employeeMaster1 = (EmployeeMaster) list.get(0);
-                String To = employeeMaster1.getOfficeEmailId();
-                String from = employeeMasterModel.getOfficeEmailId();
+                String To = employeeMasterModel.getOfficeEmailId();
+                String from = employeeMaster.getOfficeEmailId();
                 String Subject = emailTemplate.getSubject();
-                Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
                 String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
 
@@ -485,9 +490,13 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
         JSONObject userData = new JSONObject();
 
         try {
-
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            UserMaster user = new UserMaster();
             AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
             String id = request.getParameter("id");
+            int userid = Integer.parseInt(id);
+            user.setId(userid);
+            employeeMaster.setUserMaster(user);
             JSONObject data = doConvert(request);
 
             String empId = data.getString("EmpId");
@@ -506,29 +515,30 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
             attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
 
             EmailTemplate emailTemplate = new EmailTemplate();
-            EmployeeMaster employeeMasterModel = employeeMasterService.readById(Integer.parseInt(id));
+            EmployeeMaster employeeMasterModel = employeeMasterService.readById(Integer.parseInt(empId));
+            employeeMaster = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
 //            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-            DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
             EmployeeMaster employeeMaster1 = new EmployeeMaster();
             //id=16 is for attandence regularization rework...
             emailTemplate = emailTemplateService.readById(16);
             UserMaster userMaster = new UserMaster();
             userMaster.setId(attendanceRegularization.getUserMasterId());
             employeeMaster1.setUserMaster(userMaster);
-            List<?> list = employeeMasterService.readByUserName(employeeMaster1);
+            List<?> list = employeeMasterService.readByUserName(employeeMasterModel);
 //            String EmpStr = request.getParameter("empid");
 //            if (null != EmpStr && !"".equals(EmpStr)) {
 //                int Empid = Integer.parseInt(EmpStr);
 //                List list = employeeMasterService.readByEmployeeNo(Empid);
             if (!list.isEmpty()) {
                 employeeMaster1 = (EmployeeMaster) list.get(0);
-                String To = employeeMaster1.getOfficeEmailId();
-                String from = employeeMasterModel.getOfficeEmailId();
+                String To = employeeMasterModel.getOfficeEmailId();
+                String from = employeeMaster.getOfficeEmailId();
                 String Subject = emailTemplate.getSubject();
-                Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
                 String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
 
@@ -918,23 +928,27 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
             attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
 
             try {
-                EmployeeMaster employeeMaster1 = (EmployeeMaster) employeeMasterService.readByEmployeeUserId(employeeMaster);
-//                mailSendArApply(request);
                 EmailTemplate emailTemplate = new EmailTemplate();
-                EmployeeMaster employeeMasterModel = employeeMasterService.readById(userMasterId);
+                EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                List<?> empDetailList = employeeMasterService.readByEmployeeUserId(employeeMaster);
+                if (!empDetailList.isEmpty()) {
+                    employeeMaster1 = (EmployeeMaster) empDetailList.get(0);
+                }
+//                EmployeeMaster employeeMasterModel = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                EmployeeMaster employeeMasterModel = employeeMasterService.readById(Integer.parseInt(employeeMaster1.getReportingManagerLevel1()));
                 DesignationMaster designationMaster = new DesignationMaster();
                 designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
                 EmployeeMaster employeeMasterHr = new EmployeeMaster();
-                employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMaster1.getReportingManagerLevel1()));
                 // id 14 is for Attendence regularization apply....
                 emailTemplate = emailTemplateService.readById(14);
-                String To = employeeMasterHr.getOfficeEmailId();
-                String from = employeeMasterModel.getOfficeEmailId();
+                String To = employeeMasterModel.getOfficeEmailId();
+                String from = employeeMaster1.getOfficeEmailId();
                 String Subject = emailTemplate.getSubject();
-                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
                 String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
-                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster1.getEmployeeName());
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {

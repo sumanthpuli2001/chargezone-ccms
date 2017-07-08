@@ -1543,34 +1543,40 @@ public class TravelWebService extends TravelWebServiceAbstract {
 //                    Travel Request Approve
 
                         try {
-                            EmailTemplate emailtemplate = new EmailTemplate();
-                            EmployeeMaster employeemastermodel = employeeMasterService.readById(employeeId);
+                            EmployeeMaster employeemastermodel1 = employeeMasterService.readById(Integer.parseInt(empMasterId));
+                            empManager1 = employeeMasterService.readById(Integer.parseInt(employeemastermodel1.getReportingManagerLevel1()));
                             DesignationMaster designationMaster = new DesignationMaster();
-                            designationMaster = designationMasterService.readById(employeemastermodel.getDesignationMaster().getId());
-//                   employeeMaster = employeeMasterService.readById(employeeId);
-                            EmployeeMaster employeemasterhr = new EmployeeMaster();
-                            employeemasterhr = employeeMasterService.readById(Integer.parseInt(employeemastermodel.getReportingManagerLevel1()));
-                            //Id=25 is for travel request approve...
-                            EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                            designationMaster = designationMasterService.readById(empManager1.getDesignationMaster().getId());
+                            EmployeeMaster employeemasterHr = new EmployeeMaster();
+                            employeemasterHr = employeeMasterService.readById(Integer.parseInt(employeemastermodel1.getReportingManagerLevel1()));
+//                    EmailTemplate emailTemplate1 = new EmailTemplate();
+                            EmailTemplate emailtemplate = new EmailTemplate();
+//                            EmployeeMaster employeemastermodel = employeeMasterService.readById(employeeId);
+////                            DesignationMaster designationMaster = new DesignationMaster();
+//                            designationMaster = designationMasterService.readById(employeemastermodel.getDesignationMaster().getId());
+////                   employeeMaster = employeeMasterService.readById(employeeId);
+//                            EmployeeMaster employeemasterhr = new EmployeeMaster();
+//                            employeemasterhr = employeeMasterService.readById(Integer.parseInt(employeemastermodel.getReportingManagerLevel1()));
+//                            //Id=25 is for travel request approve...
+//                            EmployeeMaster employeeMaster2 = new EmployeeMaster();
 
-                            String empIdStr = request.getParameter("empid");
-                            if (null != empIdStr && !"".equals(empIdStr)) {
-
-                                int empID = Integer.parseInt(empIdStr);
-                                List list = employeeMasterService.readByEmployeeNo(empID);
-                                if (!list.isEmpty()) {
-                                    employeeMaster2 = (EmployeeMaster) list.get(0);
-                                }
-                            }
-
+//                            String empIdStr = request.getParameter("empid");
+//                            if (null != empIdStr && !"".equals(empIdStr)) {
+//
+//                                int empID = Integer.parseInt(empIdStr);
+//                                List list = employeeMasterService.readByEmployeeNo(empID);
+//                                if (!list.isEmpty()) {
+//                                    employeeMaster2 = (EmployeeMaster) list.get(0);
+//                                }
+//                            }
                             emailtemplate = emailTemplateService.readById(25);
-                            String from = employeemastermodel.getOfficeEmailId();
-                            String to = employeemasterhr.getOfficeEmailId();
+                            String from = empManager1.getOfficeEmailId();
+                            String to = employeemastermodel1.getOfficeEmailId();
                             String subject = emailtemplate.getSubject();
-                            subject = subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                            subject = subject.replaceAll("\\{user\\}", employeemastermodel1.getEmployeeName());
                             String msg = emailtemplate.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeemasterhr.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
+                            msg = msg.replaceAll("\\{to_user\\}", employeemastermodel1.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", empManager1.getEmployeeName());
                             msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                             sendMail.sendMail(from, to, subject, msg);
 
@@ -1584,17 +1590,17 @@ public class TravelWebService extends TravelWebServiceAbstract {
                                 String emailId = emailAddMaster1.getEmailId();
                                 for (String emailId1 : emailId.split(",")) {
                                     if (!emailId1.equals("")) {
-                                        String To1 = emailId1;
-                                        String from1 = employeemastermodel.getOfficeEmailId();
+                                        String To1 =  emailId1;
+                                        String from1 = empManager1.getOfficeEmailId();
                                         String subject1 = emailtemplate.getSubject();
-                                        subject1 = subject1.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                                        subject1 = subject1.replaceAll("\\{user\\}", employeemastermodel1.getEmployeeName());
                                         String msg1 = emailtemplate.getBodytext();
-                                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
-                                        msg1 = msg1.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{to_user\\}", employeemastermodel1.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_user\\}", empManager1.getEmployeeName());
                                         msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                         sendMail.sendMail(from1, To1, subject1, msg1);
 
-                                        List<?> gmOrStateHeadMailSend = employeeMasterService.readForSendMailToAll(employeeMaster2);
+                                        List<?> gmOrStateHeadMailSend = employeeMasterService.readForSendMailToAll(employeemastermodel1);
                                         if (!gmOrStateHeadMailSend.isEmpty()) {
                                             Object[] emaillist = (Object[]) gmOrStateHeadMailSend.get(0);
                                             for (int i = 0; i <= emaillist.length; i++) {
@@ -1602,13 +1608,13 @@ public class TravelWebService extends TravelWebServiceAbstract {
                                                     String emailid = emaillist[i].toString();
 
                                                     String To3 = emailid;
-                                                    String from3 = employeemastermodel.getOfficeEmailId();
+                                                    String from3 = empManager1.getOfficeEmailId();
                                                     String subject3 = emailtemplate.getSubject();
 
-                                                    subject3 = subject3.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                                                    subject3 = subject3.replaceAll("\\{user\\}", employeemastermodel1.getEmployeeName());
                                                     String msg3 = emailtemplate.getBodytext();
-                                                    msg3 = msg3.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
-                                                    msg3 = msg3.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
+                                                    msg3 = msg3.replaceAll("\\{to_user\\}", employeemastermodel1.getEmployeeName());
+                                                    msg3 = msg3.replaceAll("\\{from_user\\}", empManager1.getEmployeeName());
                                                     msg3 = msg3.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                                     sendMail.sendMail(from3, To3, subject3, msg3);
                                                 }
@@ -1626,12 +1632,12 @@ public class TravelWebService extends TravelWebServiceAbstract {
                                 for (String emailId1 : emailId.split(",")) {
                                     if (!emailId1.equals("")) {
                                         String To1 = emailId1;
-                                        String from1 = employeemastermodel.getOfficeEmailId();
+                                        String from1 = empManager1.getOfficeEmailId();
                                         String subject1 = emailtemplate.getSubject();
-                                        subject1 = subject1.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                                        subject1 = subject1.replaceAll("\\{user\\}", employeemastermodel1.getEmployeeName());
                                         String msg1 = emailtemplate.getBodytext();
-                                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
-                                        msg1 = msg1.replaceAll("\\{from_user\\}", employeemastermodel.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{to_user\\}", employeemastermodel1.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_user\\}", empManager1.getEmployeeName());
                                         msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                         sendMail.sendMail(from1, To1, subject1, msg1);
                                     }
@@ -1702,40 +1708,40 @@ public class TravelWebService extends TravelWebServiceAbstract {
                         "Information : The Travel Request Rejected successfully.");
                 try {
 
-//                    EmployeeMaster employeemastermodel = employeeMasterService.readById(employeeId);
-//                    EmployeeMaster employeemastermodel = employeeMasterService.readById(employeeId);
+                    EmployeeMaster employeemastermodel1 = employeeMasterService.readById(Integer.parseInt(empMasterId));
+                    empManager1 = employeeMasterService.readById(Integer.parseInt(employeemastermodel1.getReportingManagerLevel1()));
                     DesignationMaster designationMaster = new DesignationMaster();
                     designationMaster = designationMasterService.readById(empManager1.getDesignationMaster().getId());
                     EmployeeMaster employeemasterHr = new EmployeeMaster();
-                    employeemasterHr = employeeMasterService.readById(Integer.parseInt(empManager1.getReportingManagerLevel1()));
+                    employeemasterHr = employeeMasterService.readById(Integer.parseInt(employeemastermodel1.getReportingManagerLevel1()));
                     EmailTemplate emailTemplate1 = new EmailTemplate();
 
                     //id=27 for travel request reject..
                     emailTemplate1 = emailTemplateService.readById(27);
-//                    EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                    EmployeeMaster employeeMaster2 = new EmployeeMaster();
 
 //                    String empIdStr = request.getParameter("empid");
-//                    if (null != empIdStr && !"".equals(empIdStr)) {
+//                    if (null != empIdStr && !"".equals(empMasterId)) {
 //
-//                        int empID = Integer.parseInt(empIdStr);
+//                        int empID = Integer.parseInt(empMasterId);
 //                        List list = employeeMasterService.readByEmployeeNo(Integer.parseInt(userId));
 //                        if (!list.isEmpty()) {
 //                            employeeMaster2 = (EmployeeMaster) list.get(0);
-                            String To = employeeMaster.getOfficeEmailId();
-                            String from = empManager1.getOfficeEmailId();
-                            String subject = emailTemplate1.getSubject();
-                            subject = subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
-                            String msg = emailTemplate1.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_user\\}", empManager1.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from, To, subject, msg);
+                    String To = employeemastermodel1.getOfficeEmailId();
+                    String from = empManager1.getOfficeEmailId();
+                    String subject = emailTemplate1.getSubject();
+                    subject = subject.replaceAll("\\{user\\}", employeemastermodel1.getEmployeeName());
+                    String msg = emailTemplate1.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeemastermodel1.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", empManager1.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, subject, msg);
 //                        }
 //                    }
 
                 } catch (Exception e) {
-                rcode = "1";
-                message = "Success";
+                    rcode = "1";
+                    message = "Success";
                 }
 
             } else if (btnSubmit.equals("rework")) {
@@ -1757,10 +1763,12 @@ public class TravelWebService extends TravelWebServiceAbstract {
                 request.setAttribute("successMessage",
                         "Information : The Travel Request Reworked successfully.");
                 try {
-                    EmployeeMaster employeemastermodel = employeeMasterService.readById(employeeId);
+                    EmployeeMaster employeemastermodel1 = employeeMasterService.readById(Integer.parseInt(empMasterId));
+                    empManager1 = employeeMasterService.readById(Integer.parseInt(employeemastermodel1.getReportingManagerLevel1()));
                     DesignationMaster designationMaster = new DesignationMaster();
-                    designationMaster = designationMasterService.readById(employeemastermodel.getDesignationMaster().getId());
-                    EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                    designationMaster = designationMasterService.readById(empManager1.getDesignationMaster().getId());
+                    EmployeeMaster employeemasterHr = new EmployeeMaster();
+                    employeemasterHr = employeeMasterService.readById(Integer.parseInt(employeemastermodel1.getReportingManagerLevel1()));
                     EmailTemplate emailTemplate1 = new EmailTemplate();
 
                     //id=26 for Travel request rework...
@@ -1771,20 +1779,19 @@ public class TravelWebService extends TravelWebServiceAbstract {
 //                        List list = employeeMasterService.readByEmployeeNo(empID);
 //                        if (!list.isEmpty()) {
 //                            employeeMaster2 = (EmployeeMaster) list.get(0);
-                            String To = employeeMaster.getOfficeEmailId();
-                            String from = empManager1.getOfficeEmailId();
-                            String subject = emailTemplate1.getSubject();
-                            subject = subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
-                            String msg = emailTemplate1.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeeMaster.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_user\\}", empManager1.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from, To, subject, msg);
+                    String To = employeemastermodel1.getOfficeEmailId();
+                    String from = empManager1.getOfficeEmailId();
+                    String subject = emailTemplate1.getSubject();
+                    subject = subject.replaceAll("\\{user\\}", employeemastermodel1.getEmployeeName());
+                    String msg = emailTemplate1.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeemastermodel1.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", empManager1.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, subject, msg);
 
 //                        }
 //
 //                    }
-
                 } catch (Exception e) {
                 }
                 rcode = "1";

@@ -12370,7 +12370,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
                             }
                         } else {
-
+                            employeeShiftPunchList = employeeDatetimeDataService.readSelectedDateEmployeeData("" + employeeMaster.getId(), changeDate);
                             for (Object o : employeeShiftPunchList) {
                                 EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
                                 EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
@@ -12385,10 +12385,12 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
                                     employeeShiftData.setInDateTime(employeeShiftData1.getInDateTime());
                                     employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
+                                    employeeShiftData1.setShiftMaster(shiftMaster2);
                                     employeeShiftDataService.createOrUpdate(employeeShiftData1);
                                 } else {
                                     employeeShiftData1.setInDateTime(employeeDatetimeData.getDateTime());
                                     employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
+                                    employeeShiftData1.setShiftMaster(shiftMaster2);
                                     employeeShiftDataService.createOrUpdate(employeeShiftData1);
                                 }
 
@@ -12412,10 +12414,12 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 employeeShiftData1 = (EmployeeShiftData) dayWiseShiftList.get(0);
                                 employeeShiftData.setInDateTime(employeeShiftData1.getInDateTime());
                                 employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
+                                employeeShiftData1.setShiftMaster(shiftMaster2);
                                 employeeShiftDataService.createOrUpdate(employeeShiftData1);
                             } else {
                                 employeeShiftData1.setInDateTime(employeeDatetimeData.getDateTime());
                                 employeeShiftData1.setOutDateTime(employeeDatetimeData.getDateTime());
+                                employeeShiftData1.setShiftMaster(shiftMaster2);
                                 employeeShiftDataService.createOrUpdate(employeeShiftData1);
                             }
 
@@ -14283,13 +14287,13 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             shiftRotationId = 57;
                         } else if (shiftRotationName.contains("First - Night")) {
                             shiftRotationId = 58;
-                        }else if (shiftRotationName.contains("General -Night")) {
+                        } else if (shiftRotationName.contains("General -Night")) {
                             shiftRotationId = 60;
-                        }else if (shiftRotationName.contains("Second-Night")) {
+                        } else if (shiftRotationName.contains("Second-Night")) {
                             shiftRotationId = 61;
-                        }else if (shiftRotationName.contains("First")) {
+                        } else if (shiftRotationName.contains("First")) {
                             shiftRotationId = 58;
-                        }else if (shiftRotationName.contains("Second")) {
+                        } else if (shiftRotationName.contains("Second")) {
                             shiftRotationId = 62;
                         }
                         for (int i = 1; i < 31; i++) {

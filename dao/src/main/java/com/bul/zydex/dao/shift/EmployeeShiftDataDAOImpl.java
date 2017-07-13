@@ -125,7 +125,7 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
                     + "                            '%')"
                     + "                limit 1) is not null and (SELECT a.id FROM employee_shift_data a WHERE a.employee_master_id =" + employeeShiftData.getId() + ""
                     + "                      AND DATE_FORMAT(STR_TO_DATE(a.in_date_time, '%d/%m/%Y %H:%i:%s'),'%d/%m/%Y') = "
-                    + "                         DATE_FORMAT(STR_TO_DATE(selected_date, '%Y-%m-%d'),'%d/%m/%Y')) is null)"
+                    + "                         DATE_FORMAT(STR_TO_DATE(selected_date, '%Y-%m-%d'),'%d/%m/%Y') LIMIT 1) is null)"
                     + "        then"
                     + "            (select"
                     + "                    'WO' as sunday"

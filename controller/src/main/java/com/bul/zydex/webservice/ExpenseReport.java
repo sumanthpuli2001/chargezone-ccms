@@ -1343,7 +1343,7 @@ public class ExpenseReport extends ExpenseReportAbstarct {
                     TravelRequestMaster travelRequestMaster1 = (TravelRequestMaster) travelList.get(i);
                     int status = travelRequestMaster1.getStatus();
                     String traveltype = travelRequestMaster1.getTravelType();
-                    if (status == 5 && !traveltype.contains("Local")) {
+                    if (!traveltype.contains("Local")) {
                         String trn = travelRequestMaster1.getTravelRequestNo();
                         String sdt = travelRequestMaster1.getStartDateTime();
                         String edt = travelRequestMaster1.getEndDateTime();

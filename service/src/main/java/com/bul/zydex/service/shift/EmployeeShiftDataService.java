@@ -34,4 +34,6 @@ public interface EmployeeShiftDataService<T> extends GenericsService<T> {
     public List<?> checkEmpDailyData();
 
     public List<?> checkEmpDateWiseInOutData(String date);
+
+    public Boolean checkDailyEntry(T object);
 }

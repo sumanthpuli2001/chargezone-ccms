@@ -101,4 +101,9 @@ public class EmployeeShiftDataServiceImpl<T> extends GenericsServiceImpl<T> impl
     public List<?> checkEmpDateWiseInOutData(String date) {
         return employeeShiftDataDAO.checkEmpDateWiseInOutData(date);
     }
+
+    @Override
+    public Boolean checkDailyEntry(T object) {
+       return employeeShiftDataDAO.checkDailyEntry(object);
+    }
 }

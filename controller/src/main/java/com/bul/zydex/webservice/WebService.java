@@ -3105,225 +3105,228 @@ public class WebService extends WebServiceAbstract {
             List<Object> finalList = new ArrayList<>();
             List<Object> finalList1 = new ArrayList<>();
             boolean flag = false;
-            List<?> list = travelRequestMasterService.readForRequestResultForDashboard(travelRequestMaster);
+            List<?> list = travelRequestMasterService.readListForApprover(travelRequestMaster, employeeMaster1.getId());
             if (!list.isEmpty()) {
                 for (Object obj : list) {
                     Object[] o1 = (Object[]) obj;
                     int employeeId = (int) o1[0];
                     int tabId = (int) o1[1];
                     int status = (int) o1[8];
-                    employeeMaster2 = employeeMasterService.readById(employeeId);
-                    String manager1 = employeeMaster2.getReportingManagerLevel1();
-                    String manager2 = employeeMaster2.getReportingManagerLevel2();
-                    String manager3 = employeeMaster2.getReportingManagerLevel3();
-                    String manager4 = employeeMaster2.getReportingManagerLevel4();
-                    String manager5 = employeeMaster2.getReportingManagerLevel5();
-                    String aprroverid = "";
-                    int ReturnFlag = 0;
-                    int historyappid = 0;
-                    int historyappid1 = 0;
-                    if (status != 0) {
-                        if (status != 10) {
-                            aprroverid = "" + o1[10];
+                    if (status == 0 || status == 1 || status == 3 || status == 4 || status == 6 || status == 10
+                            || status == 11) {
+                        employeeMaster2 = employeeMasterService.readById(employeeId);
+                        String manager1 = employeeMaster2.getReportingManagerLevel1();
+                        String manager2 = employeeMaster2.getReportingManagerLevel2();
+                        String manager3 = employeeMaster2.getReportingManagerLevel3();
+                        String manager4 = employeeMaster2.getReportingManagerLevel4();
+                        String manager5 = employeeMaster2.getReportingManagerLevel5();
+                        String aprroverid = "";
+                        int ReturnFlag = 0;
+                        int historyappid = 0;
+                        int historyappid1 = 0;
+                        if (status != 0) {
+                            if (status != 10) {
+                                aprroverid = "" + o1[10];
+                            }
                         }
-                    }
-                    List<?> approverList = travelApproverHistoryService.readapproverlist(tabId, loginId);
-                    for (Object o : approverList) {
-                        TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
-                        travelApproverHistory = (TravelApproverHistory) o;
-                        ReturnFlag = travelApproverHistory.getReturnFlag();
-                        if (ReturnFlag == 0) {
-                            historyappid = travelApproverHistory.getEmployeeMasterByTravelApproverId().getId();
+                        List<?> approverList = travelApproverHistoryService.readapproverlist(tabId, loginId);
+                        for (Object o : approverList) {
+                            TravelApproverHistory travelApproverHistory = new TravelApproverHistory();
+                            travelApproverHistory = (TravelApproverHistory) o;
+                            ReturnFlag = travelApproverHistory.getReturnFlag();
+                            if (ReturnFlag == 0) {
+                                historyappid = travelApproverHistory.getEmployeeMasterByTravelApproverId().getId();
+                            }
+                            if (ReturnFlag == 1) {
+                                historyappid1 = travelApproverHistory.getEmployeeMasterByTravelApproverId().getId();
+                            }
                         }
-                        if (ReturnFlag == 1) {
-                            historyappid1 = travelApproverHistory.getEmployeeMasterByTravelApproverId().getId();
-                        }
-                    }
-                    if ((status == 3 && ReturnFlag == 0) || status == 0 || status == 10 || status == 1) {
-                        String dos1 = o1[9].toString();
-                        Date dos = sdf.parse(dos1);
-                        String today = sdf.format(new Date());
-                        Date tDate = sdf.parse(today);
-                        Calendar c = Calendar.getInstance();
-                        c.setTime(dos);
-                        c.add(Calendar.DATE, 7);
-                        Date Date7 = c.getTime();
-                        c.setTime(Date7);
-                        c.add(Calendar.DATE, 7);
-                        Date Date14 = c.getTime();
-                        c.setTime(Date14);
-                        c.add(Calendar.DATE, 7);
-                        Date Date21 = c.getTime();
-                        c.setTime(Date21);
-                        c.add(Calendar.DATE, 7);
-                        Date Date28 = c.getTime();
-                        c.setTime(Date28);
-                        c.add(Calendar.DATE, 7);
-                        Date Date35 = c.getTime();
+                        if ((status == 3 && ReturnFlag == 0) || status == 0 || status == 10 || status == 1) {
+                            String dos1 = o1[9].toString();
+                            Date dos = sdf.parse(dos1);
+                            String today = sdf.format(new Date());
+                            Date tDate = sdf.parse(today);
+                            Calendar c = Calendar.getInstance();
+                            c.setTime(dos);
+                            c.add(Calendar.DATE, 7);
+                            Date Date7 = c.getTime();
+                            c.setTime(Date7);
+                            c.add(Calendar.DATE, 7);
+                            Date Date14 = c.getTime();
+                            c.setTime(Date14);
+                            c.add(Calendar.DATE, 7);
+                            Date Date21 = c.getTime();
+                            c.setTime(Date21);
+                            c.add(Calendar.DATE, 7);
+                            Date Date28 = c.getTime();
+                            c.setTime(Date28);
+                            c.add(Calendar.DATE, 7);
+                            Date Date35 = c.getTime();
 
-                        if (Integer.parseInt(manager1) == Integer.parseInt(loginId)) {
-                            if ((DateUtils.isSameDay(dos, tDate) || tDate.after(dos)) && tDate.before(Date7)) {
-                                finalList.add(obj);
-                            }
-                        }
-                        if (!manager2.isEmpty() && !manager1.isEmpty()) {
-                            if (Integer.parseInt(manager2) == Integer.parseInt(loginId)) {
-                                if (historyappid != 0) {
-                                    if (Integer.parseInt(loginId) == historyappid) {
-                                        finalList.add(obj);
-                                    }
-                                }
-                                if (aprroverid == null || aprroverid == "") {
-                                    if ((DateUtils.isSameDay(Date7, tDate) || tDate.after(Date7)) && tDate.before(Date14)) {
-                                        finalList.add(obj);
-                                    }
-                                } else if (status != 1) {
-                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                        finalList.add(obj);
-                                    }
+                            if (Integer.parseInt(manager1) == Integer.parseInt(loginId)) {
+                                if ((DateUtils.isSameDay(dos, tDate) || tDate.after(dos)) && tDate.before(Date7)) {
+                                    finalList.add(obj);
                                 }
                             }
-                        }
-                        if (!manager3.isEmpty() && !manager2.isEmpty() && !manager1.isEmpty()) {
-                            if (Integer.parseInt(manager3) == Integer.parseInt(loginId)) {
-                                if (historyappid != 0) {
-                                    if (Integer.parseInt(loginId) == historyappid) {
-                                        finalList.add(obj);
+                            if (!manager2.isEmpty() && !manager1.isEmpty()) {
+                                if (Integer.parseInt(manager2) == Integer.parseInt(loginId)) {
+                                    if (historyappid != 0) {
+                                        if (Integer.parseInt(loginId) == historyappid) {
+                                            finalList.add(obj);
+                                        }
                                     }
-                                }
-                                if (aprroverid == null || aprroverid == "") {
-                                    if ((DateUtils.isSameDay(Date14, tDate) || tDate.after(Date14)) && tDate.before(Date21)) {
-                                        finalList.add(obj);
-                                    }
-                                } else if (status != 1) {
-                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
-                                        finalList.add(obj);
-                                    } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 7, 7);
-                                        if (tDate.before(Date21) && checklastapprovedateflag == true) {
+                                    if (aprroverid == null || aprroverid == "") {
+                                        if ((DateUtils.isSameDay(Date7, tDate) || tDate.after(Date7)) && tDate.before(Date14)) {
+                                            finalList.add(obj);
+                                        }
+                                    } else if (status != 1) {
+                                        if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
                                             finalList.add(obj);
                                         }
                                     }
                                 }
                             }
-                        }
-                        if (!manager4.isEmpty() && !manager3.isEmpty() && !manager2.isEmpty() && !manager1.isEmpty()) {
-                            if (Integer.parseInt(manager4) == Integer.parseInt(loginId)) {
-                                if (historyappid != 0) {
-                                    if (Integer.parseInt(loginId) == historyappid) {
-                                        finalList.add(obj);
-                                    }
-                                }
-                                if (aprroverid == null || aprroverid == "") {
-                                    if ((DateUtils.isSameDay(Date21, tDate) || tDate.after(Date21)) && tDate.before(Date28)) {
-                                        finalList.add(obj);
-                                    }
-                                } else if (status != 1) {
-                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
-                                        finalList.add(obj);
-                                    } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
-                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 7, 7);
-                                        if (tDate.before(Date28) && checklastapprovedateflag == true) {
-                                            finalList.add(obj);
-                                        }
-                                    } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                        boolean checklastapprovedateflag1 = managercheck(tabId, manager1, 14, 7);
-                                        if (tDate.before(Date28) && checklastapprovedateflag1 == true) {
+                            if (!manager3.isEmpty() && !manager2.isEmpty() && !manager1.isEmpty()) {
+                                if (Integer.parseInt(manager3) == Integer.parseInt(loginId)) {
+                                    if (historyappid != 0) {
+                                        if (Integer.parseInt(loginId) == historyappid) {
                                             finalList.add(obj);
                                         }
                                     }
-                                }
-                            }
-                        }
-                        if (!manager5.isEmpty()) {
-                            if (Integer.parseInt(manager5) == Integer.parseInt(loginId)) {
-                                if (historyappid != 0 || status == 8) {
-                                    if (Integer.parseInt(loginId) == historyappid) {
-                                        finalList.add(obj);
-                                    }
-                                }
-                                if (aprroverid == null || aprroverid == "") {
-                                    if ((DateUtils.isSameDay(Date28, tDate) || tDate.after(Date28)) && tDate.before(Date35)) {
-                                        finalList.add(obj);
-                                    }
-                                } else if (!manager4.isEmpty()) {
-                                    if (status != 1) {
-                                        if (Integer.parseInt(aprroverid) == Integer.parseInt(manager4)) {
+                                    if (aprroverid == null || aprroverid == "") {
+                                        if ((DateUtils.isSameDay(Date14, tDate) || tDate.after(Date14)) && tDate.before(Date21)) {
                                             finalList.add(obj);
                                         }
-                                    }
-                                    if (!manager3.isEmpty()) {
-                                        if (status != 1) {
-                                            if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
-                                                boolean checklastapprovedateflag = managercheck(tabId, manager3, 7, 7);
-                                                if (tDate.before(Date21) && checklastapprovedateflag == true) {
-                                                    finalList.add(obj);
-                                                }
-                                            } else if (!manager2.isEmpty()) {
-                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
-                                                    boolean checklastapprovedateflag = managercheck(tabId, manager2, 14, 7);
-                                                    if (checklastapprovedateflag == true) {
-                                                        finalList.add(obj);
-                                                    }
-                                                }
-                                            } else if (!manager1.isEmpty()) {
-                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                                    boolean checklastapprovedateflag = managercheck(tabId, manager1, 21, 7);
-                                                    if (checklastapprovedateflag == true) {
-                                                        finalList.add(obj);
-                                                    }
-                                                }
+                                    } else if (status != 1) {
+                                        if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                            finalList.add(obj);
+                                        } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                            boolean checklastapprovedateflag = managercheck(tabId, manager1, 7, 7);
+                                            if (tDate.before(Date21) && checklastapprovedateflag == true) {
+                                                finalList.add(obj);
                                             }
                                         }
                                     }
-                                } else if (manager4 == null || manager4 == "") {
-                                    if (!manager3.isEmpty()) {
-                                        if (status != 1) {
-                                            if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
-                                                boolean checklastapprovedateflag = managercheck(tabId, manager3, 0, 7);
-                                                if (tDate.before(Date21) && checklastapprovedateflag == true) {
-                                                    finalList.add(obj);
-                                                }
-                                            } else if (!manager2.isEmpty()) {
-                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
-                                                    boolean checklastapprovedateflag = managercheck(tabId, manager2, 7, 7);
-                                                    if (checklastapprovedateflag == true) {
-                                                        finalList.add(obj);
-                                                    }
-                                                }
-                                            } else if (!manager1.isEmpty()) {
-                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                                    boolean checklastapprovedateflag = managercheck(tabId, manager1, 14, 7);
-                                                    if (checklastapprovedateflag == true) {
-                                                        finalList.add(obj);
-                                                    }
-                                                }
+                                }
+                            }
+                            if (!manager4.isEmpty() && !manager3.isEmpty() && !manager2.isEmpty() && !manager1.isEmpty()) {
+                                if (Integer.parseInt(manager4) == Integer.parseInt(loginId)) {
+                                    if (historyappid != 0) {
+                                        if (Integer.parseInt(loginId) == historyappid) {
+                                            finalList.add(obj);
+                                        }
+                                    }
+                                    if (aprroverid == null || aprroverid == "") {
+                                        if ((DateUtils.isSameDay(Date21, tDate) || tDate.after(Date21)) && tDate.before(Date28)) {
+                                            finalList.add(obj);
+                                        }
+                                    } else if (status != 1) {
+                                        if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
+                                            finalList.add(obj);
+                                        } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                            boolean checklastapprovedateflag = managercheck(tabId, manager2, 7, 7);
+                                            if (tDate.before(Date28) && checklastapprovedateflag == true) {
+                                                finalList.add(obj);
+                                            }
+                                        } else if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                            boolean checklastapprovedateflag1 = managercheck(tabId, manager1, 14, 7);
+                                            if (tDate.before(Date28) && checklastapprovedateflag1 == true) {
+                                                finalList.add(obj);
                                             }
                                         }
-                                    } else if (manager3 == null || manager3 == "") {
-                                        if (!manager2.isEmpty()) {
+                                    }
+                                }
+                            }
+                            if (!manager5.isEmpty()) {
+                                if (Integer.parseInt(manager5) == Integer.parseInt(loginId)) {
+                                    if (historyappid != 0 || status == 8) {
+                                        if (Integer.parseInt(loginId) == historyappid) {
+                                            finalList.add(obj);
+                                        }
+                                    }
+                                    if (aprroverid == null || aprroverid == "") {
+                                        if ((DateUtils.isSameDay(Date28, tDate) || tDate.after(Date28)) && tDate.before(Date35)) {
+                                            finalList.add(obj);
+                                        }
+                                    } else if (!manager4.isEmpty()) {
+                                        if (status != 1) {
+                                            if (Integer.parseInt(aprroverid) == Integer.parseInt(manager4)) {
+                                                finalList.add(obj);
+                                            }
+                                        }
+                                        if (!manager3.isEmpty()) {
                                             if (status != 1) {
-                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
-                                                    boolean checklastapprovedateflag = managercheck(tabId, manager2, 0, 7);
-                                                    if (checklastapprovedateflag == true) {
+                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager3, 7, 7);
+                                                    if (tDate.before(Date21) && checklastapprovedateflag == true) {
                                                         finalList.add(obj);
+                                                    }
+                                                } else if (!manager2.isEmpty()) {
+                                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 14, 7);
+                                                        if (checklastapprovedateflag == true) {
+                                                            finalList.add(obj);
+                                                        }
                                                     }
                                                 } else if (!manager1.isEmpty()) {
                                                     if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 7, 7);
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 21, 7);
                                                         if (checklastapprovedateflag == true) {
                                                             finalList.add(obj);
                                                         }
                                                     }
                                                 }
                                             }
-                                        } else if (manager2 == null || manager2 == "") {
-                                            if (!manager1.isEmpty()) {
-                                                if (status != 1) {
-                                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                                        if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
-                                                            boolean checklastapprovedateflag = managercheck(tabId, manager1, 0, 7);
+                                        }
+                                    } else if (manager4 == null || manager4 == "") {
+                                        if (!manager3.isEmpty()) {
+                                            if (status != 1) {
+                                                if (Integer.parseInt(aprroverid) == Integer.parseInt(manager3)) {
+                                                    boolean checklastapprovedateflag = managercheck(tabId, manager3, 0, 7);
+                                                    if (tDate.before(Date21) && checklastapprovedateflag == true) {
+                                                        finalList.add(obj);
+                                                    }
+                                                } else if (!manager2.isEmpty()) {
+                                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 7, 7);
+                                                        if (checklastapprovedateflag == true) {
                                                             finalList.add(obj);
+                                                        }
+                                                    }
+                                                } else if (!manager1.isEmpty()) {
+                                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager1, 14, 7);
+                                                        if (checklastapprovedateflag == true) {
+                                                            finalList.add(obj);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        } else if (manager3 == null || manager3 == "") {
+                                            if (!manager2.isEmpty()) {
+                                                if (status != 1) {
+                                                    if (Integer.parseInt(aprroverid) == Integer.parseInt(manager2)) {
+                                                        boolean checklastapprovedateflag = managercheck(tabId, manager2, 0, 7);
+                                                        if (checklastapprovedateflag == true) {
+                                                            finalList.add(obj);
+                                                        }
+                                                    } else if (!manager1.isEmpty()) {
+                                                        if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                            boolean checklastapprovedateflag = managercheck(tabId, manager1, 7, 7);
+                                                            if (checklastapprovedateflag == true) {
+                                                                finalList.add(obj);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            } else if (manager2 == null || manager2 == "") {
+                                                if (!manager1.isEmpty()) {
+                                                    if (status != 1) {
+                                                        if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                            if (Integer.parseInt(aprroverid) == Integer.parseInt(manager1)) {
+                                                                boolean checklastapprovedateflag = managercheck(tabId, manager1, 0, 7);
+                                                                finalList.add(obj);
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -3332,28 +3335,28 @@ public class WebService extends WebServiceAbstract {
                                     }
                                 }
                             }
-                        }
-                    } else if (status == 6 || status == 5) {
-                        try {
+                        } else if (status == 6 || status == 5) {
+                            try {
 
-                            if (Integer.parseInt(loginId) == Integer.parseInt(manager1)
-                                    || Integer.parseInt(loginId) == Integer.parseInt(manager5)) {
-                                finalList.add(obj);
-                            } else if (!manager2.isEmpty()) {
-                                if (Integer.parseInt(loginId) == Integer.parseInt(manager2)) {
+                                if (Integer.parseInt(loginId) == Integer.parseInt(manager1)
+                                        || Integer.parseInt(loginId) == Integer.parseInt(manager5)) {
                                     finalList.add(obj);
+                                } else if (!manager2.isEmpty()) {
+                                    if (Integer.parseInt(loginId) == Integer.parseInt(manager2)) {
+                                        finalList.add(obj);
+                                    }
+                                } else if (!manager3.isEmpty()) {
+                                    if (Integer.parseInt(loginId) == Integer.parseInt(manager3)) {
+                                        finalList.add(obj);
+                                    }
+                                } else if (!manager4.isEmpty()) {
+                                    if (Integer.parseInt(loginId) == Integer.parseInt(manager4)) {
+                                        finalList.add(obj);
+                                    }
                                 }
-                            } else if (!manager3.isEmpty()) {
-                                if (Integer.parseInt(loginId) == Integer.parseInt(manager3)) {
-                                    finalList.add(obj);
-                                }
-                            } else if (!manager4.isEmpty()) {
-                                if (Integer.parseInt(loginId) == Integer.parseInt(manager4)) {
-                                    finalList.add(obj);
-                                }
+                            } catch (Exception e) {
+
                             }
-                        } catch (Exception e) {
-
                         }
                     }
                 }

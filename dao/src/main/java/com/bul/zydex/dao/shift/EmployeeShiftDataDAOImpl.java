@@ -1115,4 +1115,19 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public Boolean checkDailyEntry(T object) {
+        EmployeeShiftData employeeShiftData = (EmployeeShiftData) object;
+        String query = "";
+        query += " FROM EmployeeShiftData a"
+                + " Where a.employeeMaster.id = '" + employeeShiftData.getEmployeeMaster().getId() + "'"
+                + " and a.inDateTime = '" + employeeShiftData.getInDateTime() + "'"
+                + " and a.outDateTime = '" + employeeShiftData.getOutDateTime() + "'";
+        List<?> list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -896,12 +896,12 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
         String rcode = "";
         String message = "";
         EmployeeMaster employeeMaster = new EmployeeMaster();
-        UserMaster userMaster = new UserMaster();
+//        UserMaster userMaster = new UserMaster();
         UserMaster user = new UserMaster();
-        String id = request.getParameter("id");
-        int userid = Integer.parseInt(id);
-        user.setId(userid);
-        employeeMaster.setUserMaster(user);
+////        String id = request.getParameter("id");
+////        int userid = Integer.parseInt(id);
+////        user.setId(userid);
+//        employeeMaster.setUserMaster(user);
         JSONObject userData = new JSONObject();
         JSONObject data = doPost(request);
         try {
@@ -913,6 +913,9 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
             String reason = data.getString("reason");
             String userId = data.getString("userId");
             int userMasterId = Integer.parseInt(userId);
+
+            user.setId(userMasterId);
+            employeeMaster.setUserMaster(user);
 
             Date sdate = dateFormat1.parse(Startdate);
             Date edate = dateFormat1.parse(enddate);

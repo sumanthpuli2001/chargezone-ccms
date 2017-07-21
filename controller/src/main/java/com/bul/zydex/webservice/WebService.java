@@ -1232,9 +1232,15 @@ public class WebService extends WebServiceAbstract {
                         String Noofdays = arrayOfObject[3].toString();
                         String leaveid = arrayOfObject[4].toString();
                         String Status = arrayOfObject[5].toString();
-                        String empreason = arrayOfObject[6].toString();
+                        String empreason;
                         String ApproveName;
                         String dateOfSubmit;
+
+                        if (null == arrayOfObject[6].toString()) {
+                            empreason = "";
+                        } else {
+                            empreason = arrayOfObject[6].toString();
+                        }
 
                         if (null == arrayOfObject[7]) {
                             dateOfSubmit = "";

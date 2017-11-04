@@ -1503,13 +1503,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 empHour = (double) totalDayTime / 60;
 
                             }
-                         if (empHour >= 4 && empHour <= 7.9) {
+                            if (empHour >= 4 && empHour <= 7.9) {
                                 time2 = "0.5";
-                            }
-                            else if (empHour >= 8 && empHour <= 11.9) {
+                            } else if (empHour >= 8 && empHour <= 11.9) {
                                 time2 = "1.0";
-                            }
-                            else if (empHour >= 12) {
+                            } else if (empHour >= 12) {
                                 time2 = "1.5";
                             }
 
@@ -1568,13 +1566,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             double empHour = (double) totalDayTime / 60;
                             if (empHour >= 3 && empHour <= 3.9) {
                                 time2 = "0.3";
-                            }else if (empHour >= 4 && empHour <= 5.9) {
+                            } else if (empHour >= 4 && empHour <= 5.9) {
                                 time2 = "0.5";
-                            }
-                            else if (empHour >= 6 && empHour <= 7.9) {
+                            } else if (empHour >= 6 && empHour <= 7.9) {
                                 time2 = "0.6";
-                            }
-                            else if (empHour >= 8) {
+                            } else if (empHour >= 8) {
                                 time2 = "1.0";
                             }
 
@@ -14234,7 +14230,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         String employeeNo = "";
         String shiftRotationName = "";
         int shiftRotationId = 0;
-        int[] day = new int[31];
+        int[] day = new int[32];
 //        String day1 = "";
 //        String day2 = "";
 //        String day3 = "";
@@ -14263,7 +14259,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //        String day26 = "";
 //        String day27 = "";
 //        String day28 = "";
-//        String day29 = "";
+//        String day29 = ""; 
 //        String day30 = "";
         String NextShiftName = "";
         int NextShiftId = 0;
@@ -14285,44 +14281,48 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             employeeNo = "" + (null == row.getCell((short) 0) ? "" : row.getCell((short) 0));
                         }
                         shiftRotationName = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
-                        if (shiftRotationName.contains("General Fixed Shift")) {
+                        if (shiftRotationName.equals("General Fixed Shift")) {
                             shiftRotationId = 46;
-                        } else if (shiftRotationName.contains("First - Night - Second")) {
+                        } else if (shiftRotationName.equals("First - Night - Second")) {
                             shiftRotationId = 51;
-                        } else if (shiftRotationName.contains("First - Second")) {
+                        } else if (shiftRotationName.equals("First - Second")) {
                             shiftRotationId = 52;
-                        } else if (shiftRotationName.contains("General - Second")) {
+                        } else if (shiftRotationName.equals("General - Second")) {
                             shiftRotationId = 53;
-                        } else if (shiftRotationName.contains("General - First")) {
+                        } else if (shiftRotationName.equals("General - First")) {
                             shiftRotationId = 57;
-                        } else if (shiftRotationName.contains("First - Night")) {
+                        } else if (shiftRotationName.equals("First - Night")) {
                             shiftRotationId = 58;
-                        } else if (shiftRotationName.contains("General -Night")) {
+                        } else if (shiftRotationName.equals("General -Night")) {
                             shiftRotationId = 60;
-                        } else if (shiftRotationName.contains("Second-Night")) {
+                        } else if (shiftRotationName.equals("Second-Night")) {
                             shiftRotationId = 61;
-                        } else if (shiftRotationName.contains("First")) {
+                        } else if (shiftRotationName.equals("First")) {
                             shiftRotationId = 59;
-                        } else if (shiftRotationName.contains("Second")) {
+                        } else if (shiftRotationName.equals("Second")) {
                             shiftRotationId = 62;
-                        } else if (shiftRotationName.contains("Plant General")) {
+                        } else if (shiftRotationName.equals("Plant General")) {
                             shiftRotationId = 63;
+                        } else if (shiftRotationName.equals("Gavasad GeneralShift")) {
+                            shiftRotationId = 64;
                         }
-                        for (int i = 1; i < 31; i++) {
+                        for (int i = 1; i <= 31; i++) {
 
                             String dayValue = "" + (null == row.getCell((short) (i + 1)) ? "" : row.getCell((short) (i + 1)));
 
-                            if (dayValue.contains("General")) {
+                            if (dayValue.equals("General")) {
                                 day[i] = 1;
-                            } else if (dayValue.contains("First")) {
+                            } else if (dayValue.equals("First")) {
                                 day[i] = 3;
-                            } else if (dayValue.contains("Second")) {
+                            } else if (dayValue.equals("Second")) {
                                 day[i] = 4;
-                            } else if (dayValue.contains("Night")) {
+                            } else if (dayValue.equals("Night")) {
                                 day[i] = 5;
-                            } else if (dayValue.contains("General Plant")) {
+                            } else if (dayValue.equals("General Plant")) {
                                 day[i] = 6;
-                            } else if (dayValue.contains("WO")) {
+                            } else if (dayValue.equals("Gavasad GeneralShift")) {
+                                day[i] = 7;
+                            } else if (dayValue.equals("WO")) {
                                 day[i] = -1;
                             }
 
@@ -14330,16 +14330,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //                      
 
                         NextShiftName = "" + (null == row.getCell((short) 33) ? "" : row.getCell((short) 33));
-                        if (NextShiftName.contains("General")) {
+                        if (NextShiftName.equals("General")) {
                             NextShiftId = 1;
-                        } else if (NextShiftName.contains("First")) {
+                        } else if (NextShiftName.equals("First")) {
                             NextShiftId = 3;
-                        } else if (NextShiftName.contains("Second")) {
+                        } else if (NextShiftName.equals("Second")) {
                             NextShiftId = 4;
-                        } else if (NextShiftName.contains("Night")) {
+                        } else if (NextShiftName.equals("Night")) {
                             NextShiftId = 5;
-                        } else if (NextShiftName.contains("General Plant")) {
+                        } else if (NextShiftName.equals("General Plant")) {
                             NextShiftId = 6;
+                        } else if (NextShiftName.equals("Gavasad GeneralShift")) {
+                            NextShiftId = 7;
                         }
 
                         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -14349,8 +14351,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         List<?> list = employeeMasterService.readByEmployeeNo(empNo);
                         if (!list.isEmpty()) {
                             employeeMaster = (EmployeeMaster) list.get(0);
-                            int month = 7;
-                            int year = 2017;
+//                            int month = 7;
+//                            int year = 2017;
+                            Calendar cal = Calendar.getInstance();
+                            int year = cal.get(Calendar.YEAR);
+                            int month = cal.get(Calendar.MONTH) + 1;
                             int empID = employeeMaster.getId();
                             List<?> shiftList = shiftGenerateMonthlyScheduleService.ReadEmployeeShiftByMonthYear(empID, month, year);
                             if (!shiftList.isEmpty()) {
@@ -14386,7 +14391,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 monthlySchedule.setDay28(day[28]);
                                 monthlySchedule.setDay29(day[29]);
                                 monthlySchedule.setDay30(day[30]);
-                             
+                                monthlySchedule.setDay31(day[31]);
 
                                 monthlySchedule.setNextShiftId(NextShiftId);
                                 rotationMaster.setId(shiftRotationId);
@@ -14423,7 +14428,6 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 monthlySchedule.setDay28(day[28]);
                                 monthlySchedule.setDay29(day[29]);
                                 monthlySchedule.setDay30(day[30]);
-                             
 
                                 monthlySchedule.setNextShiftId(NextShiftId);
                                 rotationMaster.setId(shiftRotationId);

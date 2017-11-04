@@ -1680,6 +1680,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
     private synchronized void mailSendForProbationToConfirmationLeft() throws Exception {
 
         EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster fromEmp = employeeMasterService.readById(1544);
         Calendar c = Calendar.getInstance();
         Date d = new Date();
         c.setTime(d);
@@ -1698,28 +1699,28 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 EmployeeMaster manager = employeeMasterService.readById(Integer.parseInt(managerId));
 
 //             
-                EmailTemplate emailTemplate = emailTemplateService.readById(140); ///////141 template for probation to confirm
+                EmailTemplate emailTemplate = emailTemplateService.readById(141); ///////141 template for probation to confirm
                 String emailId = employee.getEmailAddress();
                 String managerMailId = manager.getEmailAddress();
                 for (String emailId1 : emailId.split(",")) {
                     if (!emailId1.equals("")) {
                         String To1 = emailId1;
-                        String from1 = employee.getOfficeEmailId();
+                        String from1 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
-                        msg1 = msg1.replaceAll("\\{to_user\\}", employee.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{no_days\\}", "30");
                         sendMail.sendMail(from1, To1, subject1, msg1);
                     }
                 }
                 for (String managerMailId1 : managerMailId.split(",")) {
                     if (!managerMailId1.equals("")) {
                         String To2 = managerMailId1;
-                        String from2 = manager.getOfficeEmailId();
+                        String from2 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
-                        msg1 = msg1.replaceAll("\\{to_user\\}", manager.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{no_days\\}", "30");
                         sendMail.sendMail(from2, To2, subject1, msg1);
                     }
                 }
@@ -1742,28 +1743,28 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 EmployeeMaster manager = employeeMasterService.readById(Integer.parseInt(managerId));
 
 //             
-                EmailTemplate emailTemplate = emailTemplateService.readById(140); ///////141 template for probation to confirm
+                EmailTemplate emailTemplate = emailTemplateService.readById(141); ///////141 template for probation to confirm
                 String emailId = employee.getEmailAddress();
                 String managerMailId = manager.getEmailAddress();
                 for (String emailId1 : emailId.split(",")) {
                     if (!emailId1.equals("")) {
                         String To1 = emailId1;
-                        String from1 = employee.getOfficeEmailId();
+                        String from1 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
-                        msg1 = msg1.replaceAll("\\{to_user\\}", employee.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{no_days\\}", "15");
                         sendMail.sendMail(from1, To1, subject1, msg1);
                     }
                 }
                 for (String managerMailId1 : managerMailId.split(",")) {
                     if (!managerMailId1.equals("")) {
                         String To2 = managerMailId1;
-                        String from2 = manager.getOfficeEmailId();
+                        String from2 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
-                        msg1 = msg1.replaceAll("\\{to_user\\}", manager.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{no_days\\}", "15");
                         sendMail.sendMail(from2, To2, subject1, msg1);
                     }
                 }
@@ -1785,28 +1786,28 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 EmployeeMaster manager = employeeMasterService.readById(Integer.parseInt(managerId));
 
 //             
-                EmailTemplate emailTemplate = emailTemplateService.readById(140); ///////141 template for probation to confirm
+                EmailTemplate emailTemplate = emailTemplateService.readById(141); ///////141 template for probation to confirm
                 String emailId = employee.getEmailAddress();
                 String managerMailId = manager.getEmailAddress();
                 for (String emailId1 : emailId.split(",")) {
                     if (!emailId1.equals("")) {
                         String To1 = emailId1;
-                        String from1 = employee.getOfficeEmailId();
+                        String from1 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
-                        msg1 = msg1.replaceAll("\\{to_user\\}", employee.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{no_days\\}", "7");
                         sendMail.sendMail(from1, To1, subject1, msg1);
                     }
                 }
                 for (String managerMailId1 : managerMailId.split(",")) {
                     if (!managerMailId1.equals("")) {
                         String To2 = managerMailId1;
-                        String from2 = manager.getOfficeEmailId();
+                        String from2 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
-                        msg1 = msg1.replaceAll("\\{to_user\\}", manager.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{no_days\\}", "7");
                         sendMail.sendMail(from2, To2, subject1, msg1);
                     }
                 }
@@ -1828,28 +1829,28 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 EmployeeMaster manager = employeeMasterService.readById(Integer.parseInt(managerId));
 
 //             
-                EmailTemplate emailTemplate = emailTemplateService.readById(140); ///////141 template for probation to confirm
+                EmailTemplate emailTemplate = emailTemplateService.readById(141); ///////141 template for probation to confirm
                 String emailId = employee.getEmailAddress();
                 String managerMailId = manager.getEmailAddress();
                 for (String emailId1 : emailId.split(",")) {
                     if (!emailId1.equals("")) {
                         String To1 = emailId1;
-                        String from1 = employee.getOfficeEmailId();
+                        String from1 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
-                        msg1 = msg1.replaceAll("\\{to_user\\}", employee.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{no_days\\}", "3");
                         sendMail.sendMail(from1, To1, subject1, msg1);
                     }
                 }
                 for (String managerMailId1 : managerMailId.split(",")) {
                     if (!managerMailId1.equals("")) {
                         String To2 = managerMailId1;
-                        String from2 = manager.getOfficeEmailId();
+                        String from2 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
-                        msg1 = msg1.replaceAll("\\{to_user\\}", manager.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{no_days\\}", "3");
                         sendMail.sendMail(from2, To2, subject1, msg1);
                     }
                 }
@@ -1871,28 +1872,28 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 EmployeeMaster manager = employeeMasterService.readById(Integer.parseInt(managerId));
 
 //             
-                EmailTemplate emailTemplate = emailTemplateService.readById(140); ///////141 template for probation to confirm
+                EmailTemplate emailTemplate = emailTemplateService.readById(141); ///////141 template for probation to confirm
                 String emailId = employee.getEmailAddress();
                 String managerMailId = manager.getEmailAddress();
                 for (String emailId1 : emailId.split(",")) {
                     if (!emailId1.equals("")) {
                         String To1 = emailId1;
-                        String from1 = employee.getOfficeEmailId();
+                        String from1 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
-                        msg1 = msg1.replaceAll("\\{to_user\\}", employee.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{no_days\\}", "1");
                         sendMail.sendMail(from1, To1, subject1, msg1);
                     }
                 }
                 for (String managerMailId1 : managerMailId.split(",")) {
                     if (!managerMailId1.equals("")) {
                         String To2 = managerMailId1;
-                        String from2 = manager.getOfficeEmailId();
+                        String from2 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
-                        msg1 = msg1.replaceAll("\\{to_user\\}", manager.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{no_days\\}", "1");
                         sendMail.sendMail(from2, To2, subject1, msg1);
                     }
                 }

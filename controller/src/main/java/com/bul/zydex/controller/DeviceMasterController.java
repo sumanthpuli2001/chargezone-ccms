@@ -179,6 +179,7 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                     List<DeviceMasterNotification> l = (List<DeviceMasterNotification>) deviceMasterNotificationService.readByIpAddress(deviceMasterNotification);
                     if (!l.isEmpty()) {
                         deviceMasterNotification.setId(((DeviceMasterNotification) l.get(0)).getId());
+                        deviceMasterNotification = deviceMasterNotificationService.readById(deviceMasterNotification.getId());
                         deviceMasterNotification.setCountConnectionOut(0);
                         deviceMasterNotificationService.update(deviceMasterNotification);
                     }
@@ -216,12 +217,16 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                 myURLConnection1 = myURL1.openConnection();
                 myURLConnection1.setRequestProperty("Authorization", "Basic " + encoded1);
                 myURLConnection1.setConnectTimeout(15000);
-//                myURLConnection1.setReadTimeout(20000);
-                myURLConnection1.connect();
-                if (myURLConnection1.getInputStream().available() > 0) {
-                    reader1 = new BufferedReader(new InputStreamReader(myURLConnection1.getInputStream()));
-                } else {
-                    break;
+                myURLConnection1.setReadTimeout(20000);
+                try {
+                    myURLConnection1.connect();
+                    if (myURLConnection1.getInputStream().available() > 0) {
+                        reader1 = new BufferedReader(new InputStreamReader(myURLConnection1.getInputStream()));
+                    } else {
+                        break;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 String response;
                 String rollOverCount = "";
@@ -256,150 +261,158 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                         }
                     }
                 }
-                while ((response = reader1.readLine()) != null) {
-                    System.out.println(response);
-                    if (response1LineCounter == 3) {
-                        urlSeqNo = response;
-                        String[] aa = urlSeqNo.split(">");
-                        String zz = aa[1];
-                        String[] xx = zz.split("<");
-                        urlSeqNo = xx[0].trim();
+                if (null != reader1) {
+                    while ((response = reader1.readLine()) != null) {
+                        System.out.println(response);
+                        if (response1LineCounter == 3) {
+                            urlSeqNo = response;
+                            String[] aa = urlSeqNo.split(">");
+                            String zz = aa[1];
+                            String[] xx = zz.split("<");
+                            urlSeqNo = xx[0].trim();
+                        }
+                        if (response1LineCounter == 2) {
+                            rollOverCount = response;
+                            String[] aa = rollOverCount.split(">");
+                            String zz = aa[1];
+                            String[] xx = zz.split("<");
+                            rollOverCount = xx[0].trim();
+                        }
+                        response1LineCounter++;
                     }
-                    if (response1LineCounter == 2) {
-                        rollOverCount = response;
-                        String[] aa = rollOverCount.split(">");
-                        String zz = aa[1];
-                        String[] xx = zz.split("<");
-                        rollOverCount = xx[0].trim();
-                    }
-                    response1LineCounter++;
-                }
-                int curSeqNo = Integer.parseInt(urlSeqNo);
-                int rollOverCountInUrl = Integer.parseInt(rollOverCount);
+                    int curSeqNo = Integer.parseInt(urlSeqNo);
+                    int rollOverCountInUrl = Integer.parseInt(rollOverCount);
 //encoding message
-                String encoded_message = URLEncoder.encode(message);
-                while (seq_number <= curSeqNo) //-1 is for make this condition alwayts true. and we will termi9nate thisa loop while we get the null response from server using the sequence no.
-                {
+                    String encoded_message = URLEncoder.encode(message);
+                    while (seq_number <= curSeqNo) //-1 is for make this condition alwayts true. and we will termi9nate thisa loop while we get the null response from server using the sequence no.
+                    {
 
 //Send SMS API
 //            String mainUrl = "http://deviceip:deviceport/device.cgi/events?action=getevent&roll-over-count=1&seq-number=1&no-of-event=1";
-                    String mainUrl = "http://" + deviceip + ":" + deviceport + "/device.cgi/events?action=getevent&roll-over-count=" + rollOverCountInUrl + "&seq-number=" + seq_number + "&no-of-events=1";
+                        String mainUrl = "http://" + deviceip + ":" + deviceport + "/device.cgi/events?action=getevent&roll-over-count=" + rollOverCountInUrl + "&seq-number=" + seq_number + "&no-of-events=1";
 
 //Prepare parameter string
-                    StringBuilder sbPostData = new StringBuilder(mainUrl);
+                        StringBuilder sbPostData = new StringBuilder(mainUrl);
 //            StringBuilder sbPostData = new StringBuilder(mainUrl);
 //            StringBuffer sbPostData = new StringBuffer(mainUrl);
 //                   sbPostData.append("&action=" + authkey);
-                    //       sbPostData.append("&mobiles=" + mobiles);
-                    //       sbPostData.append("&message=" + encoded_message);
-                    //       sbPostData.append("&route=" + route);
-                    //       sbPostData.append("&sender=" + senderId);
+                        //       sbPostData.append("&mobiles=" + mobiles);
+                        //       sbPostData.append("&message=" + encoded_message);
+                        //       sbPostData.append("&route=" + route);
+                        //       sbPostData.append("&sender=" + senderId);
 
 //final string
-                    mainUrl = sbPostData.toString();
-                    try {
-                        myURL = new URL(mainUrl);
-                        String loginPassword = "admin" + ":" + "1234";
-                        String encoded = new sun.misc.BASE64Encoder().encode(loginPassword.getBytes());
-                        myURLConnection = myURL.openConnection();
-                        myURLConnection.setRequestProperty("Authorization", "Basic " + encoded);
-                        myURLConnection.setConnectTimeout(15000);
-//                        myURLConnection.setReadTimeout(20000);
-                        myURLConnection.connect();
-                        if (myURLConnection.getInputStream().available() > 0) {
-                            reader = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
-                        } else {
-                            break;
-                        }
-                        //reading response
-                        String response1;
-                        int responseLineCounter = 1;
-                        String punchInDate = "";
-                        String punchInTime = "";
-                        String punchInEmployeeId = "";
-                        if (null == reader) {
-                            DeviceMasterNotification deviceMasterNotification = new DeviceMasterNotification();
-                            deviceMasterNotification.setIpAddress(deviceip);
-                            List<DeviceMasterNotification> l = (List<DeviceMasterNotification>) deviceMasterNotificationService.readByIpAddress(deviceMasterNotification);
-                            for (DeviceMasterNotification l2 : l) {
-                                if ((null != l2.getReceipt() || !"".equals(l2.getReceipt())) && deviceMaster.getCountConnectionOut() == l2.getCountConnectionOut()) {
-                                    for (String empId : l2.getReceipt().split(",")) {
-                                        if (!"".equals(empId)) {
-
-                                            EmployeeMaster employeeMaster2 = new EmployeeMaster();
-                                            EmailTemplate emailTemplate = new EmailTemplate();
-                                            employeeMaster2 = employeeMasterService.readById(Integer.parseInt(empId));
-                                            String To = employeeMaster2.getOfficeEmailId();
-                                            emailTemplate = emailTemplateService.readById(141);
-                                            String Subject = emailTemplate.getSubject();
-                                            String msg = emailTemplate.getBodytext();
-                                            sendMail.sendMail("admin@zydexindustries.com", To, Subject, msg);
-                                            l2.setCountConnectionOut(0);
-
-                                        } else {
-                                            l2.setCountConnectionOut((l2.getCountConnectionOut() + 1));
-
-                                        }
-                                        deviceMasterNotificationService.update(l2);
-                                    }
+                        mainUrl = sbPostData.toString();
+                        try {
+                            myURL = new URL(mainUrl);
+                            String loginPassword = "admin" + ":" + "1234";
+                            String encoded = new sun.misc.BASE64Encoder().encode(loginPassword.getBytes());
+                            myURLConnection = myURL.openConnection();
+                            myURLConnection.setRequestProperty("Authorization", "Basic " + encoded);
+                            myURLConnection.setConnectTimeout(15000);
+                            myURLConnection.setReadTimeout(20000);
+                            try {
+                                myURLConnection.connect();
+                                if (myURLConnection.getInputStream().available() > 0) {
+                                    reader = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
                                 } else {
+                                    break;
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            //reading response
+                            String response1;
+                            int responseLineCounter = 1;
+                            String punchInDate = "";
+                            String punchInTime = "";
+                            String punchInEmployeeId = "";
+                            if (null == reader) {
+                                DeviceMasterNotification deviceMasterNotification = new DeviceMasterNotification();
+                                deviceMasterNotification.setIpAddress(deviceip);
+                                List<DeviceMasterNotification> l = (List<DeviceMasterNotification>) deviceMasterNotificationService.readByIpAddress(deviceMasterNotification);
+                                for (DeviceMasterNotification l2 : l) {
+                                    if ((null != l2.getReceipt() || !"".equals(l2.getReceipt())) && deviceMaster.getCountConnectionOut() == l2.getCountConnectionOut()) {
+                                        for (String empId : l2.getReceipt().split(",")) {
+                                            if (!"".equals(empId)) {
 
+                                                EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                                                EmailTemplate emailTemplate = new EmailTemplate();
+                                                employeeMaster2 = employeeMasterService.readById(Integer.parseInt(empId));
+                                                String To = employeeMaster2.getOfficeEmailId();
+                                                emailTemplate = emailTemplateService.readById(141);
+                                                String Subject = emailTemplate.getSubject();
+                                                String msg = emailTemplate.getBodytext();
+                                                sendMail.sendMail("admin@zydexindustries.com", To, Subject, msg);
+                                                l2.setCountConnectionOut(0);
+
+                                            } else {
+                                                l2.setCountConnectionOut((l2.getCountConnectionOut() + 1));
+
+                                            }
+                                            deviceMasterNotificationService.update(l2);
+                                        }
+                                    } else {
+
+                                    }
+                                }
+
+                                break;
+                            } else {
+                                String temp = reader.readLine();
+                                while ((response1 = reader.readLine()) != null) //print response
+                                {
+                                    System.out.println(response1);
+                                    if (responseLineCounter == 2) {
+                                        punchInDate = response1.replace("date=", "").trim();
+                                    }
+                                    if (responseLineCounter == 3) {
+                                        punchInTime = response1.replace("time=", "").trim();
+                                    }
+                                    if (responseLineCounter == 5) {
+                                        punchInEmployeeId = response1.replace("detail-1=", "").trim();
+                                    }
+                                    responseLineCounter++;
+                                }
+
+                                DeviceMaster deviceMaster1 = new DeviceMaster();
+                                deviceMaster1 = deviceMasterService.readById(deviceId);
+                                deviceMaster1.setSeqNumber(seq_number);
+                                employeeMaster.setEmployeeId(punchInEmployeeId);
+                                List<?> empDataList = employeeMasterService.readEmployeeId(punchInEmployeeId);
+                                if (!empDataList.isEmpty()) {
+                                    employeeMaster = (EmployeeMaster) empDataList.get(0);
+                                    employeeDatetimeData.setEmployeeMaster(employeeMaster);
+                                    employeeDatetimeData.setDateTime(punchInDate + " " + punchInTime);
+                                    employeeDatetimeData.setDeviceMaster(deviceMaster1);
+                                    employeeDatetimeDataService.create(employeeDatetimeData);
+                                }
+                                //deviceMaster1.setSeqNumber(Integer.parseInt(sequenceNoUrl));
+                                DeviceMasterNotification deviceMasterNotification = new DeviceMasterNotification();
+                                BeanUtils.copyProperties(deviceMaster, deviceMasterNotification);
+                                List<DeviceMasterNotification> l = (List<DeviceMasterNotification>) deviceMasterNotificationService.readByIpAddress(deviceMasterNotification);
+                                if (!l.isEmpty()) {
+                                    deviceMasterNotification.setId(((DeviceMasterNotification) l.get(0)).getId());
+                                    deviceMasterNotification = deviceMasterNotificationService.readById(deviceMasterNotification.getId());
+                                    deviceMasterNotification.setCountConnectionOut(0);
+                                    deviceMasterNotificationService.update(deviceMasterNotification);
+                                }
+                                deviceMasterService.update(deviceMaster1);
+                                seq_number++;
+                                if (seq_number == 50000) {
+                                    seq_number = 1;
                                 }
                             }
 
-                            break;
-                        } else {
-                            String temp = reader.readLine();
-                            while ((response1 = reader.readLine()) != null) //print response
-                            {
-                                System.out.println(response1);
-                                if (responseLineCounter == 2) {
-                                    punchInDate = response1.replace("date=", "").trim();
-                                }
-                                if (responseLineCounter == 3) {
-                                    punchInTime = response1.replace("time=", "").trim();
-                                }
-                                if (responseLineCounter == 5) {
-                                    punchInEmployeeId = response1.replace("detail-1=", "").trim();
-                                }
-                                responseLineCounter++;
-                            }
+                            //finally close connection`
+                            reader.close();
 
-                            DeviceMaster deviceMaster1 = new DeviceMaster();
-                            deviceMaster1 = deviceMasterService.readById(deviceId);
-                            deviceMaster1.setSeqNumber(seq_number);
-                            employeeMaster.setEmployeeId(punchInEmployeeId);
-                            List<?> empDataList = employeeMasterService.readEmployeeId(punchInEmployeeId);
-                            if (!empDataList.isEmpty()) {
-                                employeeMaster = (EmployeeMaster) empDataList.get(0);
-                                employeeDatetimeData.setEmployeeMaster(employeeMaster);
-                                employeeDatetimeData.setDateTime(punchInDate + " " + punchInTime);
-                                employeeDatetimeData.setDeviceMaster(deviceMaster1);
-                                employeeDatetimeDataService.create(employeeDatetimeData);
-                            }
-                            //deviceMaster1.setSeqNumber(Integer.parseInt(sequenceNoUrl));
-                            DeviceMasterNotification deviceMasterNotification = new DeviceMasterNotification();
-                            BeanUtils.copyProperties(deviceMaster, deviceMasterNotification);
-                            List<DeviceMasterNotification> l = (List<DeviceMasterNotification>) deviceMasterNotificationService.readByIpAddress(deviceMasterNotification);
-                            if (!l.isEmpty()) {
-                                deviceMasterNotification.setId(((DeviceMasterNotification) l.get(0)).getId());
-                                deviceMasterNotification.setCountConnectionOut(0);
-                                deviceMasterNotificationService.update(deviceMasterNotification);
-                            }
-                            deviceMasterService.update(deviceMaster1);
-                            seq_number++;
-                            if (seq_number == 50000) {
-                                seq_number = 1;
-                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-
-                        //finally close connection`
-                        reader.close();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
                 }
+
             } catch (Exception ex) {
                 System.out.println("Deveice Exception" + ex);
             }

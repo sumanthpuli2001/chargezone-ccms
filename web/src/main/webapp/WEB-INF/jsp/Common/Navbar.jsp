@@ -246,7 +246,7 @@
                             <li><a href="shiftRotationMaster.htm?act=employeeManualPunch"><i class="fa fa-circle-o"></i>Employee Punch Entry</a></li>
                         </ul>
                         <ul class="treeview-menu">
-                            <li><a href="shiftRotationMaster.htm?act=employeeShiftChangeMonthly"><i class="fa fa-circle-o"></i>Employee Manual Shift Assign Monthly</a></li>
+                            <li><a href="shiftRotationMaster.htm?act=employeeShiftChangeMonthly"><i class="fa fa-circle-o"></i>Monthly Shift Assign By Excel</a></li>
                         </ul>
                     </li>
                 </c:if>

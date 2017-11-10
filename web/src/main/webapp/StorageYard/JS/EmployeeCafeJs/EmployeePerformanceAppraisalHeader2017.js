@@ -1182,7 +1182,9 @@ function weitageAlert() {
 //    
 //}
 $(document).on("click", ":submit", function (e) {
-    if (confirm("Are you sure you want to Submit")) {
+    var msg = "Are you sure you want to " +  $(this).val();
+    
+    if (confirm(msg)) {
 
         if ($(this).val() !== "" && $(this).val() === "submit") {
 

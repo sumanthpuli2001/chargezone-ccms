@@ -1741,7 +1741,8 @@
                                                 <c:choose>
                                                     <c:when test="${employeeStatus eq '0'}">
                                                         <div class="col-sm-6 " style="text-align: left;">
-                                                            <button type="submit" class="btn btn-warning" data-original-title="" value="save" id="save" name="save" title="" >SAVE</button>
+                                                            <!--<button type="button" class="btn btn-warning" data-original-title="" value="save" id="save" name="save" title="" onclick="return myFunction(this);">SAVE</button>-->
+                                                            <button type="submit" class="btn btn-warning" data-original-title="" value="save" id="save" name="save" title="" onclick="return myFunction(this, event);">SAVE</button>
                                                         </div>
                                                         <div class="col-sm-6 " style="text-align: right;">
                                                             <button type="submit" class="btn btn-primary" data-original-title="" id="submit" name="submit" value="submit" title="" >SUBMIT</button>

@@ -37,4 +37,6 @@ public interface AttendanceRegularizationMasterDAO<T> extends GenericsDAO<T> {
     public List<?> powerAdminAttendanceRegularizationList();
 
     public List<?> readArCountList(T object);
+    
+    public int countByAttendanceRegularizationPendingList(int id);
 }

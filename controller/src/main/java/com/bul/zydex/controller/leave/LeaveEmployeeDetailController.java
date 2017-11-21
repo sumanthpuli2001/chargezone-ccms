@@ -580,91 +580,197 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             }
 
             String leaveTypeMasterId = request.getParameter("leaveTypeMaster.id");
-            if (!"".equals(leaveTypeMasterId)) {
-                leaveTypeMaster.setId(Integer.parseInt(leaveTypeMasterId));
-                if (leaveCkeck) {
-                    leaveTypeMaster = leaveTypeMasterService.readById(leaveEmployeeDetail.getLeaveTypeMaster().getId());
-                } else {
-                    leaveTypeMaster = leaveTypeMasterService.readById(leaveTypeMaster.getId());
-                }
-                if (leaveTypeMaster.getLeaveType().contains("Short Leave")) {
-                    leaveEmployeeDetail.setStartDate(request.getParameter("startDateShort"));
-                    leaveEmployeeDetail.setEndDate(request.getParameter("endDateShort"));
-                }
-                employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
-            }
-            employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
-            employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
-            List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance1);
-            if (!balanceList.isEmpty()) {
-                employeeLeaveBalance1 = (EmployeeLeaveBalance) balanceList.get(0);
-            }
-            boolean balance = false;
-            employeeLeaveBalance.setEmployeeMaster(employeeMaster);
-            List<?> empLeaveBalanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
-            if (!empLeaveBalanceList.isEmpty()) {
-                employeeLeaveBalance = (EmployeeLeaveBalance) empLeaveBalanceList.get(0);
-                if (!leaveTypeMaster.getLeaveType().contains("Short Leave") && !leaveTypeMaster.getLeaveType().contains("C Off Leave")) {
-                    if (leaveEmployeeDetail.getNoOfDays().floatValue() > employeeLeaveBalance.getNoOfLeaveRemain()) {
-                        balance = true;
-                    }
-                } else {
-                    balance = true;
+            if (!"".equals(leaveTypeMasterId) && leaveTypeMasterId.equals("12")) {
+
+                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                String currentDate = dateFormat1.format(new Date());
+                leaveEmployeeDetail.setDateOfSubmit(currentDate);
+                leaveEmployeeDetailService.create(leaveEmployeeDetail);
+
+//            
+                request.setAttribute("successMessage",
+                        "Information : The Information is saved Successfully.");
+                mv = searchOwnLeaveDetail(request, response);
+                //Emailtemplate for submit click .....
+                try {
+                    Mailsend(request);
+                    String startdate = leaveEmployeeDetail.getStartDate();
+                    String enddate = leaveEmployeeDetail.getEndDate();
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                    // id six is apply status
+                    emailTemplate = emailTemplateService.readById(6);
+                    String To = employeeMasterHr.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                    msg = msg.replaceAll("\\{start_date\\}", startdate);
+                    msg = msg.replaceAll("\\{end_date\\}", enddate);
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
 
                 }
-            }
-            try {
-                if (leaveCkeck) {
-                    leaveTypeMaster = leaveTypeMasterService.readById(leaveEmployeeDetail.getLeaveTypeMaster().getId());
-                } else {
-                    leaveTypeMaster = leaveTypeMasterService.readById(Integer.parseInt(leaveTypeMasterId));
+
+            } else {
+                if (!"".equals(leaveTypeMasterId)) {
+                    leaveTypeMaster.setId(Integer.parseInt(leaveTypeMasterId));
+                    if (leaveCkeck) {
+                        leaveTypeMaster = leaveTypeMasterService.readById(leaveEmployeeDetail.getLeaveTypeMaster().getId());
+                    } else {
+                        leaveTypeMaster = leaveTypeMasterService.readById(leaveTypeMaster.getId());
+                    }
+                    if (leaveTypeMaster.getLeaveType().contains("Short Leave")) {
+                        leaveEmployeeDetail.setStartDate(request.getParameter("startDateShort"));
+                        leaveEmployeeDetail.setEndDate(request.getParameter("endDateShort"));
+                    }
+                    employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
                 }
-                leaveTypeMaster.getMaxDayAllowedLeave();
-                Date startDate = sdf.parse(leaveEmployeeDetail.getStartDate());
-                Date endDate = sdf.parse(leaveEmployeeDetail.getEndDate());
-                long diffDays1 = 0;
-                List<?> list = new ArrayList();
+                employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+                employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
+                List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance1);
+                if (!balanceList.isEmpty()) {
+                    employeeLeaveBalance1 = (EmployeeLeaveBalance) balanceList.get(0);
+                }
+                boolean balance = false;
+                employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+                List<?> empLeaveBalanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                if (!empLeaveBalanceList.isEmpty()) {
+                    employeeLeaveBalance = (EmployeeLeaveBalance) empLeaveBalanceList.get(0);
+                    if (!leaveTypeMaster.getLeaveType().contains("Short Leave") && !leaveTypeMaster.getLeaveType().contains("C Off Leave")) {
+                        if (leaveEmployeeDetail.getNoOfDays().floatValue() > employeeLeaveBalance.getNoOfLeaveRemain()) {
+                            balance = true;
+                        }
+                    } else {
+                        balance = true;
+
+                    }
+                }
+                try {
+                    if (leaveCkeck) {
+                        leaveTypeMaster = leaveTypeMasterService.readById(leaveEmployeeDetail.getLeaveTypeMaster().getId());
+                    } else {
+                        leaveTypeMaster = leaveTypeMasterService.readById(Integer.parseInt(leaveTypeMasterId));
+                    }
+                    leaveTypeMaster.getMaxDayAllowedLeave();
+                    Date startDate = sdf.parse(leaveEmployeeDetail.getStartDate());
+                    Date endDate = sdf.parse(leaveEmployeeDetail.getEndDate());
+                    long diffDays1 = 0;
+                    List<?> list = new ArrayList();
 //                if (leaveTypeMaster.getLeaveType().equals("Casual Leave")) {
 //                    getNoOfDays(leaveEmployeeDetail, startDate, endDate);
 //                }
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
-                Calendar cal5 = Calendar.getInstance();
-                Date satdate = sdf.parse(leaveEmployeeDetail.getStartDate());
-                cal5.setTime(satdate);
-                String dayName = format2.format(satdate);
-                int dayOfWeek = cal5.get(Calendar.WEEK_OF_MONTH);
-                int locationId = employeeMaster.getZydexLocationMaster().getId();
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
+                    Calendar cal5 = Calendar.getInstance();
+                    Date satdate = sdf.parse(leaveEmployeeDetail.getStartDate());
+                    cal5.setTime(satdate);
+                    String dayName = format2.format(satdate);
+                    int dayOfWeek = cal5.get(Calendar.WEEK_OF_MONTH);
+                    int locationId = employeeMaster.getZydexLocationMaster().getId();
 
-                if (!startDate.after(endDate)) {
-                    LeaveEmployeeDetail leaveEmployeeDetail1 = new LeaveEmployeeDetail();
-                    leaveEmployeeDetail1.setEmployeeMaster(employeeMaster);
-                    List<?> l1 = leaveEmployeeDetailService.readByEmployeeId(leaveEmployeeDetail1);
-                    boolean flag = false;
-                    for (Object leave1 : l1) {
+                    if (!startDate.after(endDate)) {
+                        LeaveEmployeeDetail leaveEmployeeDetail1 = new LeaveEmployeeDetail();
+                        leaveEmployeeDetail1.setEmployeeMaster(employeeMaster);
+                        List<?> l1 = leaveEmployeeDetailService.readByEmployeeId(leaveEmployeeDetail1);
+                        boolean flag = false;
+                        for (Object leave1 : l1) {
 
-                        leaveEmployeeDetail1 = (LeaveEmployeeDetail) leave1;
-                        Date strDate1 = sdf.parse(leaveEmployeeDetail1.getStartDate());
-                        Date endDate1 = sdf.parse(leaveEmployeeDetail1.getEndDate());
-                        Integer id1 = leaveEmployeeDetail1.getLeaveTypeMaster().getId();
+                            leaveEmployeeDetail1 = (LeaveEmployeeDetail) leave1;
+                            Date strDate1 = sdf.parse(leaveEmployeeDetail1.getStartDate());
+                            Date endDate1 = sdf.parse(leaveEmployeeDetail1.getEndDate());
+                            Integer id1 = leaveEmployeeDetail1.getLeaveTypeMaster().getId();
 
-                        if (leaveEmployeeDetail1.getStatus() != 5 && (startDate.equals(strDate1) || startDate.after(strDate1) && startDate.before(endDate1) || (endDate.after(strDate1) && endDate.before(endDate1)))) {
-                            flag = true;
-                            break;
-                        } else {
-                            flag = false;
+                            if (leaveEmployeeDetail1.getStatus() != 5 && (startDate.equals(strDate1) || startDate.after(strDate1) && startDate.before(endDate1) || (endDate.after(strDate1) && endDate.before(endDate1)))) {
+                                flag = true;
+                                break;
+                            } else {
+                                flag = false;
+                            }
                         }
-                    }
-                    boolean plBalCheck = false;
-                    List<?> plCheck = leaveEmployeeDetailService.plLeaveCheck(employeeMaster.getId());
-                    if (plCheck.size() >= 3) {
-                        plBalCheck = true;
-                    }
+                        boolean plBalCheck = false;
+                        List<?> plCheck = leaveEmployeeDetailService.plLeaveCheck(employeeMaster.getId());
+                        if (plCheck.size() >= 3) {
+                            plBalCheck = true;
+                        }
 
-                    if (leaveTypeMaster.getLeaveType().contains("Short Leave")) {
+                        if (leaveTypeMaster.getLeaveType().contains("Short Leave")) {
 
-                        if (dayName.equals("Saturday") && dayOfWeek == 2 && (locationId == 1 || locationId == 6)) {
+                            if (dayName.equals("Saturday") && dayOfWeek == 2 && (locationId == 1 || locationId == 6)) {
+                                request.setAttribute("failureMessage",
+                                        "Error :On Second Saturday You can Not Apply Short Leave");
+                                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                                mv = applyClick(request, response);
+                            } else if (flag) {
+                                request.setAttribute("failureMessage",
+                                        "Error :You Have Already apply Leave On that Day...");
+                                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                                mv = applyClick(request, response);
+                            } else {
+                                leaveEmployeeDetail.setNoOfDays(Float.parseFloat("1"));
+                                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                String currentDate = dateFormat1.format(new Date());
+                                leaveEmployeeDetail.setDateOfSubmit(currentDate);
+                                leaveEmployeeDetailService.create(leaveEmployeeDetail);
+
+                                balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
+                                noOfDay = leaveEmployeeDetail.getNoOfDays();
+                                balanceDay = balanceDay - noOfDay;
+                                employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
+                                employeeLeaveBalanceService.update(employeeLeaveBalance1);
+
+                                request.setAttribute("successMessage",
+                                        "Information : The Information is saved Successfully.");
+                                mv = searchOwnLeaveDetail(request, response);
+                                //Emailtemplate for submit click .....
+                                try {
+                                    Mailsend(request);
+                                    String startdate = leaveEmployeeDetail.getStartDate();
+                                    String enddate = leaveEmployeeDetail.getEndDate();
+                                    EmailTemplate emailTemplate = new EmailTemplate();
+                                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                                    DesignationMaster designationMaster = new DesignationMaster();
+                                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                                    // id six is apply status
+                                    emailTemplate = emailTemplateService.readById(6);
+                                    String To = employeeMasterHr.getOfficeEmailId();
+                                    String from = employeeMasterModel.getOfficeEmailId();
+                                    String Subject = emailTemplate.getSubject();
+                                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                                    String msg = emailTemplate.getBodytext();
+                                    msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                                    msg = msg.replaceAll("\\{start_date\\}", startdate);
+                                    msg = msg.replaceAll("\\{end_date\\}", enddate);
+                                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                    sendMail.sendMail(from, To, Subject, msg);
+                                } catch (Exception e) {
+
+                                }
+                            }
+//                        mv.setViewName("redirect:leaveEmployeeDetail.htm?act=searchOwnLeaveDetail");
+                        } else if (dayName.equals("Saturday") && dayOfWeek == 2 && (locationId == 1 || locationId == 6) && leaveEmployeeDetail.getStartDateStatus().equals("Fullday")) {
                             request.setAttribute("failureMessage",
-                                    "Error :On Second Saturday You can Not Apply Short Leave");
+                                    "Error :On Second Saturday You can Not Apply Full Day Of Leave");
+                            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                            mv = applyClick(request, response);
+                        } else if (plBalCheck && leaveTypeMaster.getLeaveType().contains("Privilege Leave") && leaveEmployeeDetail.getNoOfDays() < 3) {
+                            request.setAttribute("failureMessage",
+                                    "Error :Your Pl Limit for less dhen 3 is over so you can't apply less than 3 days pl leave.");
+                            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                            mv = applyClick(request, response);
+                        } else if (leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave()) && !leaveTypeMaster.getLeaveType().contains("Privilege Leave") && !leaveTypeMaster.getLeaveType().contains("Maternity Leave") && !leaveTypeMaster.getLeaveType().contains("C Off Leave")
+                                && !leaveTypeMaster.getLeaveType().contains("Sick Leave")) {
+                            request.setAttribute("failureMessage",
+                                    "Error :No Of Days is Greater than maximum allowed Days...");
                             request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                             mv = applyClick(request, response);
                         } else if (flag) {
@@ -672,141 +778,307 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                     "Error :You Have Already apply Leave On that Day...");
                             request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                             mv = applyClick(request, response);
-                        } else {
-                            leaveEmployeeDetail.setNoOfDays(Float.parseFloat("1"));
-                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                            String currentDate = dateFormat1.format(new Date());
-                            leaveEmployeeDetail.setDateOfSubmit(currentDate);
-                            leaveEmployeeDetailService.create(leaveEmployeeDetail);
+                        } else if (!leaveCkeck) {
+                            request.setAttribute("failureMessage",
+                                    "Error :Your Balance Is Less then Your apply Leave Days.");
+                            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                            mv = applyClick(request, response);
 
-                            balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
-                            noOfDay = leaveEmployeeDetail.getNoOfDays();
-                            balanceDay = balanceDay - noOfDay;
-                            employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
-                            employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                        } else if (leaveTypeMaster.getLeaveType().equals("Paternity Leave")) {
 
-                            request.setAttribute("successMessage",
-                                    "Information : The Information is saved Successfully.");
-                            mv = searchOwnLeaveDetail(request, response);
-                            //Emailtemplate for submit click .....
-                            try {
-                                Mailsend(request);
-                                String startdate = leaveEmployeeDetail.getStartDate();
-                                String enddate = leaveEmployeeDetail.getEndDate();
-                                EmailTemplate emailTemplate = new EmailTemplate();
-                                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                                DesignationMaster designationMaster = new DesignationMaster();
-                                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                                EmployeeMaster employeeMasterHr = new EmployeeMaster();
-                                employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
-                                // id six is apply status
-                                emailTemplate = emailTemplateService.readById(6);
-                                String To = employeeMasterHr.getOfficeEmailId();
-                                String from = employeeMasterModel.getOfficeEmailId();
-                                String Subject = emailTemplate.getSubject();
-                                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-                                String msg = emailTemplate.getBodytext();
-                                msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
-                                msg = msg.replaceAll("\\{start_date\\}", startdate);
-                                msg = msg.replaceAll("\\{end_date\\}", enddate);
-                                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                                sendMail.sendMail(from, To, Subject, msg);
-                            } catch (Exception e) {
+                            list = leaveEmployeeDetailService.readEmployeeWiseMaternity(leaveEmployeeDetail);
+                            if (employeeMaster.getMaritalStatus().equals("UnMarried")) {
+                                request.setAttribute("failureMessage",
+                                        "Error :UnMarried Employee Should Not Apply Paternity Leave...");
+                                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                                mv = applyClick(request, response);
+                            } else if (employeeMaster.getGender()) {
+                                request.setAttribute("failureMessage",
+                                        "Error :Female Employee Should Not Apply Paternity Leave...");
+                                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                                mv = applyClick(request, response);
+                            } else if (list.size() >= 2) {
+                                request.setAttribute("failureMessage",
+                                        "Error :You have Only Apply 2 Time Paternity Leave Days...");
+                                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                                mv = applyClick(request, response);
 
+                            } else if (balance) {
+                                request.setAttribute("failureMessage",
+                                        "Error :No Of Days is Greater than Leave Balance Days...");
+                                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                                mv = applyClick(request, response);
+
+                            } else {
+                                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                String currentDate = dateFormat1.format(new Date());
+                                leaveEmployeeDetail.setDateOfSubmit(currentDate);
+                                leaveEmployeeDetailService.create(leaveEmployeeDetail);
+                                try {
+                                    Mailsend(request);
+                                } catch (Exception e) {
+                                }
+                                int leaveTypeId = leaveEmployeeDetail.getLeaveTypeMaster().getId();
+                                LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(leaveTypeId);
+                                if (leaveTypeMaster1.getLeaveType().equals("Paternity Leave")) {
+                                    noOfDay = (float) 3.0;
+                                }
+                                balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
+                                noOfDay = leaveEmployeeDetail.getNoOfDays();
+                                balanceDay = balanceDay - noOfDay;
+                                employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
+                                employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                                request.setAttribute("successMessage",
+                                        "Information : The Information is saved Successfully.");
+                                mv = searchOwnLeaveDetail(request, response);
                             }
-                        }
-//                        mv.setViewName("redirect:leaveEmployeeDetail.htm?act=searchOwnLeaveDetail");
-                    } else if (dayName.equals("Saturday") && dayOfWeek == 2 && (locationId == 1 || locationId == 6) && leaveEmployeeDetail.getStartDateStatus().equals("Fullday")) {
-                        request.setAttribute("failureMessage",
-                                "Error :On Second Saturday You can Not Apply Full Day Of Leave");
-                        request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                        mv = applyClick(request, response);
-                    } else if (plBalCheck && leaveTypeMaster.getLeaveType().contains("Privilege Leave") && leaveEmployeeDetail.getNoOfDays() < 3) {
-                        request.setAttribute("failureMessage",
-                                "Error :Your Pl Limit for less dhen 3 is over so you can't apply less than 3 days pl leave.");
-                        request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                        mv = applyClick(request, response);
-                    } else if (leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave()) && !leaveTypeMaster.getLeaveType().contains("Privilege Leave") && !leaveTypeMaster.getLeaveType().contains("Maternity Leave") && !leaveTypeMaster.getLeaveType().contains("C Off Leave")
-                            && !leaveTypeMaster.getLeaveType().contains("Sick Leave")) {
-                        request.setAttribute("failureMessage",
-                                "Error :No Of Days is Greater than maximum allowed Days...");
-                        request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                        mv = applyClick(request, response);
-                    } else if (flag) {
-                        request.setAttribute("failureMessage",
-                                "Error :You Have Already apply Leave On that Day...");
-                        request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                        mv = applyClick(request, response);
-                    } else if (!leaveCkeck) {
-                        request.setAttribute("failureMessage",
-                                "Error :Your Balance Is Less then Your apply Leave Days.");
-                        request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                        mv = applyClick(request, response);
-
-                    } else if (leaveTypeMaster.getLeaveType().equals("Paternity Leave")) {
-
-                        list = leaveEmployeeDetailService.readEmployeeWiseMaternity(leaveEmployeeDetail);
-                        if (employeeMaster.getMaritalStatus().equals("UnMarried")) {
-                            request.setAttribute("failureMessage",
-                                    "Error :UnMarried Employee Should Not Apply Paternity Leave...");
-                            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                            mv = applyClick(request, response);
-                        } else if (employeeMaster.getGender()) {
-                            request.setAttribute("failureMessage",
-                                    "Error :Female Employee Should Not Apply Paternity Leave...");
-                            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                            mv = applyClick(request, response);
-                        } else if (list.size() >= 2) {
-                            request.setAttribute("failureMessage",
-                                    "Error :You have Only Apply 2 Time Paternity Leave Days...");
-                            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                            mv = applyClick(request, response);
-
-                        } else if (balance) {
+                        } else if (!leaveTypeMaster.getLeaveType().contains("Maternity Leave") && !leaveTypeMaster.getLeaveType().contains("Leave Without Pay") && leaveEmployeeDetail.getNoOfDays() > employeeLeaveBalance.getNoOfLeaveRemain()) {
                             request.setAttribute("failureMessage",
                                     "Error :No Of Days is Greater than Leave Balance Days...");
                             request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                             mv = applyClick(request, response);
 
-                        } else {
-                            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                            String currentDate = dateFormat1.format(new Date());
-                            leaveEmployeeDetail.setDateOfSubmit(currentDate);
-                            leaveEmployeeDetailService.create(leaveEmployeeDetail);
-                            try {
-                                Mailsend(request);
-                            } catch (Exception e) {
-                            }
-                            int leaveTypeId = leaveEmployeeDetail.getLeaveTypeMaster().getId();
-                            LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(leaveTypeId);
-                            if (leaveTypeMaster1.getLeaveType().equals("Paternity Leave")) {
-                                noOfDay = (float) 3.0;
-                            }
-                            balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
-                            noOfDay = leaveEmployeeDetail.getNoOfDays();
-                            balanceDay = balanceDay - noOfDay;
-                            employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
-                            employeeLeaveBalanceService.update(employeeLeaveBalance1);
-                            request.setAttribute("successMessage",
-                                    "Information : The Information is saved Successfully.");
-                            mv = searchOwnLeaveDetail(request, response);
-                        }
-                    } else if (!leaveTypeMaster.getLeaveType().contains("Maternity Leave") && !leaveTypeMaster.getLeaveType().contains("Leave Without Pay") && leaveEmployeeDetail.getNoOfDays() > employeeLeaveBalance.getNoOfLeaveRemain()) {
-                        request.setAttribute("failureMessage",
-                                "Error :No Of Days is Greater than Leave Balance Days...");
-                        request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                        mv = applyClick(request, response);
+                        } else if (leaveTypeMaster.getLeaveType().contains("Sick Leave")) {
+                            ////////////// code to check continue 3days
 
-                    } else if (leaveTypeMaster.getLeaveType().contains("Sick Leave")) {
-                        String leaveDate = leaveEmployeeDetail.getStartDate();
-                        Date checkLeaveDate = sdf.parse(leaveDate);
-                        Date checkLeaveDate2 = new Date();
-                        if (checkLeaveDate.after(checkLeaveDate2)) {
-                            request.setAttribute("failureMessage",
-                                    "Error : Sick Leave Can Not Be Apply In Advance");
-                            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                            mv = applyClick(request, response);
+                            Calendar calenderSick = Calendar.getInstance();
+                            Date dateOfSickLeave = sdf.parse(leaveEmployeeDetail.getStartDate());
+                            calenderSick.setTime(dateOfSickLeave);
+                            String dayNameOfLeave = format2.format(dateOfSickLeave);
+
+                            ///////////2day         
+                            LeaveEmployeeDetail LED = new LeaveEmployeeDetail();
+                            LED.setEmployeeMaster(employeeMaster);
+                            calenderSick.add(Calendar.DAY_OF_MONTH, -2);
+                            Date dateSet = calenderSick.getTime();
+                            String finalDateSet = sdf.format(dateSet);
+                            LED.setStartDate(finalDateSet);
+                            List<?> TwodayBeforeLeaveCheckList = leaveEmployeeDetailService.sickleaveCheck(LED);
+                            //////1day
+                            LeaveEmployeeDetail led1dayBefore = new LeaveEmployeeDetail();
+                            led1dayBefore.setEmployeeMaster(employeeMaster);
+                            calenderSick.add(Calendar.DAY_OF_MONTH, +1);
+                            Date day1before = calenderSick.getTime();
+                            String finalday1before = sdf.format(day1before);
+                            led1dayBefore.setStartDate(finalday1before);
+                            List<?> OnedayBeforeLeaveCheckList = leaveEmployeeDetailService.sickleaveCheck(led1dayBefore);
+
+                      ///////////////////////////////////////////////////
+                            Calendar calenderSickAfter = Calendar.getInstance();
+                            calenderSickAfter.setTime(dateOfSickLeave);
+
+                            ///////////2day         
+                            LeaveEmployeeDetail TwodayAfter = new LeaveEmployeeDetail();
+                            TwodayAfter.setEmployeeMaster(employeeMaster);
+                            calenderSickAfter.add(Calendar.DAY_OF_MONTH, +2);
+                            Date dateSetSickAfter = calenderSickAfter.getTime();
+                            String finalDateSetSickAfter = sdf.format(dateSetSickAfter);
+                            TwodayAfter.setStartDate(finalDateSetSickAfter);
+                            List<?> TwodayAfterLeaveCheckList = leaveEmployeeDetailService.sickleaveCheck(TwodayAfter);
+                            //////1day
+                            LeaveEmployeeDetail led1dayAfter = new LeaveEmployeeDetail();
+                            led1dayAfter.setEmployeeMaster(employeeMaster);
+                            calenderSickAfter.add(Calendar.DAY_OF_MONTH, -1);
+                            Date day1After = calenderSickAfter.getTime();
+                            String finalday1After = sdf.format(day1After);
+                            led1dayAfter.setStartDate(finalday1After);
+                            List<?> OnedayAfterLeaveCheckList = leaveEmployeeDetailService.sickleaveCheck(led1dayAfter);
+
+                            if (!TwodayBeforeLeaveCheckList.isEmpty() && !OnedayBeforeLeaveCheckList.isEmpty()) {
+
+                                request.setAttribute("failureMessage",
+                                        "Error : Sick Leave Can Not Be Apply Continue 3 days");
+                                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                                mv = applyClick(request, response);
+
+                            } else if (!TwodayAfterLeaveCheckList.isEmpty() && !OnedayAfterLeaveCheckList.isEmpty()) {
+                                request.setAttribute("failureMessage",
+                                        "Error : Sick Leave Can Not Be Apply Continue 3 days");
+                                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                                mv = applyClick(request, response);
+                            } else {
+                                String leaveDate = leaveEmployeeDetail.getStartDate();
+                                Date checkLeaveDate = sdf.parse(leaveDate);
+                                Date checkLeaveDate2 = new Date();
+                                if (checkLeaveDate.after(checkLeaveDate2)) {
+                                    request.setAttribute("failureMessage",
+                                            "Error : Sick Leave Can Not Be Apply In Advance");
+                                    request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                                    mv = applyClick(request, response);
+                                } else {
+                                    SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                    String currentDate = dateFormat1.format(new Date());
+                                    leaveEmployeeDetail.setDateOfSubmit(currentDate);
+                                    leaveEmployeeDetailService.create(leaveEmployeeDetail);
+                                    balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
+                                    noOfDay = leaveEmployeeDetail.getNoOfDays();
+                                    balanceDay = balanceDay - noOfDay;
+                                    employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
+                                    employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                                    request.setAttribute("successMessage",
+                                            "Information : The Information is saved Successfully.");
+
+                                    //Emailtemplate for submit click .....
+                                    try {
+                                        Mailsend(request);
+                                        String startdate = leaveEmployeeDetail.getStartDate();
+                                        String enddate = leaveEmployeeDetail.getEndDate();
+                                        EmailTemplate emailTemplate = new EmailTemplate();
+                                        EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                                        DesignationMaster designationMaster = new DesignationMaster();
+                                        designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                                        EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                                        employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                                        // id six is apply status
+                                        emailTemplate = emailTemplateService.readById(6);
+                                        String To = employeeMasterHr.getOfficeEmailId();
+                                        String from = employeeMasterModel.getOfficeEmailId();
+                                        String Subject = emailTemplate.getSubject();
+                                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                                        String msg = emailTemplate.getBodytext();
+                                        msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                                        msg = msg.replaceAll("\\{start_date\\}", startdate);
+                                        msg = msg.replaceAll("\\{end_date\\}", enddate);
+                                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from, To, Subject, msg);
+
+                                        if (noOfDay > 3) {
+                                            List<UserRightMaster> userlist = (List<UserRightMaster>) userRightMasterService.readByleaveRight();
+                                            for (UserRightMaster emplist : userlist) {
+                                                EmailTemplate emailTemplate1 = new EmailTemplate();
+                                                int id = emplist.getUserMaster().getId();
+                                                EmployeeMaster employeeMail = employeeMasterService.readById(id);
+                                                emailTemplate1 = emailTemplateService.readById(140);
+
+                                                String To1 = employeeMail.getEmailAddress();
+                                                String from1 = employeeMasterModel.getOfficeEmailId();
+                                                String Subject1 = emailTemplate1.getSubject();
+                                                Subject1 = Subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                                                String msg1 = emailTemplate1.getBodytext();
+                                                msg1 = msg1.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                                                msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                                msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                                sendMail.sendMail(from1, To1, Subject1, msg1);
+
+                                            }
+
+                                        }
+                                    } catch (Exception e) {
+
+                                    }
+
+                                    request.setAttribute("successMessage",
+                                            "Information : The Information is saved Successfully.");
+                                    mv = searchOwnLeaveDetail(request, response);
+                                }
+                            }
+                        } else if (leaveTypeMaster.getLeaveType().contains("Casual Leave")) {
+                            ////////////// code to check continue 3days
+
+                            Calendar calenderSick = Calendar.getInstance();
+                            Date dateOfSickLeave = sdf.parse(leaveEmployeeDetail.getStartDate());
+                            calenderSick.setTime(dateOfSickLeave);
+                            String dayNameOfLeave = format2.format(dateOfSickLeave);
+
+                            ///////////2day         
+                            LeaveEmployeeDetail LED = new LeaveEmployeeDetail();
+                            LED.setEmployeeMaster(employeeMaster);
+                            calenderSick.add(Calendar.DAY_OF_MONTH, -2);
+                            Date dateSet = calenderSick.getTime();
+                            String finalDateSet = sdf.format(dateSet);
+                            LED.setStartDate(finalDateSet);
+                            List<?> TwodayBeforeLeaveCheckList = leaveEmployeeDetailService.casualleaveCheck(LED);
+                            //////1day
+                            LeaveEmployeeDetail led1dayBefore = new LeaveEmployeeDetail();
+                            led1dayBefore.setEmployeeMaster(employeeMaster);
+                            calenderSick.add(Calendar.DAY_OF_MONTH, +1);
+                            Date day1before = calenderSick.getTime();
+                            String finalday1before = sdf.format(day1before);
+                            led1dayBefore.setStartDate(finalday1before);
+                            List<?> OnedayBeforeLeaveCheckList = leaveEmployeeDetailService.casualleaveCheck(led1dayBefore);
+
+                      ///////////////////////////////////////////////////
+                            Calendar calenderSickAfter = Calendar.getInstance();
+                            calenderSickAfter.setTime(dateOfSickLeave);
+
+                            ///////////2day         
+                            LeaveEmployeeDetail TwodayAfter = new LeaveEmployeeDetail();
+                            TwodayAfter.setEmployeeMaster(employeeMaster);
+                            calenderSickAfter.add(Calendar.DAY_OF_MONTH, +2);
+                            Date dateSetSickAfter = calenderSickAfter.getTime();
+                            String finalDateSetSickAfter = sdf.format(dateSetSickAfter);
+                            TwodayAfter.setStartDate(finalDateSetSickAfter);
+                            List<?> TwodayAfterLeaveCheckList = leaveEmployeeDetailService.casualleaveCheck(TwodayAfter);
+                            //////1day
+                            LeaveEmployeeDetail led1dayAfter = new LeaveEmployeeDetail();
+                            led1dayAfter.setEmployeeMaster(employeeMaster);
+                            calenderSickAfter.add(Calendar.DAY_OF_MONTH, -1);
+                            Date day1After = calenderSickAfter.getTime();
+                            String finalday1After = sdf.format(day1After);
+                            led1dayAfter.setStartDate(finalday1After);
+                            List<?> OnedayAfterLeaveCheckList = leaveEmployeeDetailService.casualleaveCheck(led1dayAfter);
+
+                            if (!TwodayBeforeLeaveCheckList.isEmpty() && !OnedayBeforeLeaveCheckList.isEmpty()) {
+
+                                request.setAttribute("failureMessage",
+                                        "Error : Casual Leave Can Not Be Apply Continue 3 days");
+                                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                                mv = applyClick(request, response);
+
+                            } else if (!TwodayAfterLeaveCheckList.isEmpty() && !OnedayAfterLeaveCheckList.isEmpty()) {
+                                request.setAttribute("failureMessage",
+                                        "Error : Casual Leave Can Not Be Apply Continue 3 days");
+                                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                                mv = applyClick(request, response);
+                            } else {
+                                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                String currentDate = dateFormat1.format(new Date());
+                                leaveEmployeeDetail.setDateOfSubmit(currentDate);
+                                leaveEmployeeDetailService.create(leaveEmployeeDetail);
+                                balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
+                                noOfDay = leaveEmployeeDetail.getNoOfDays();
+                                balanceDay = balanceDay - noOfDay;
+                                employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
+                                employeeLeaveBalanceService.update(employeeLeaveBalance1);
+                                request.setAttribute("successMessage",
+                                        "Information : The Information is saved Successfully.");
+
+                                //Emailtemplate for submit click .....
+                                try {
+                                    Mailsend(request);
+                                    String startdate = leaveEmployeeDetail.getStartDate();
+                                    String enddate = leaveEmployeeDetail.getEndDate();
+                                    EmailTemplate emailTemplate = new EmailTemplate();
+                                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                                    DesignationMaster designationMaster = new DesignationMaster();
+                                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                                    // id six is apply status
+                                    emailTemplate = emailTemplateService.readById(6);
+                                    String To = employeeMasterHr.getOfficeEmailId();
+                                    String from = employeeMasterModel.getOfficeEmailId();
+                                    String Subject = emailTemplate.getSubject();
+                                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                                    String msg = emailTemplate.getBodytext();
+                                    msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                                    msg = msg.replaceAll("\\{start_date\\}", startdate);
+                                    msg = msg.replaceAll("\\{end_date\\}", enddate);
+                                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                    sendMail.sendMail(from, To, Subject, msg);
+                                } catch (Exception e) {
+
+                                }
+
+                                request.setAttribute("successMessage",
+                                        "Information : The Information is saved Successfully.");
+                                mv = searchOwnLeaveDetail(request, response);
+//                        mv.setViewName("redirect:leaveEmployeeDetail.htm?act=searchOwnLeaveDetail");
+
+                            }
+
                         } else {
                             SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                             String currentDate = dateFormat1.format(new Date());
@@ -844,28 +1116,6 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                 sendMail.sendMail(from, To, Subject, msg);
-
-                                if (noOfDay > 3) {
-                                    List<UserRightMaster> userlist = (List<UserRightMaster>) userRightMasterService.readByleaveRight();
-                                    for (UserRightMaster emplist : userlist) {
-                                        EmailTemplate emailTemplate1 = new EmailTemplate();
-                                        int id = emplist.getUserMaster().getId();
-                                        EmployeeMaster employeeMail = employeeMasterService.readById(id);
-                                        emailTemplate1 = emailTemplateService.readById(140);
-
-                                        String To1 = employeeMail.getEmailAddress();
-                                        String from1 = employeeMasterModel.getOfficeEmailId();
-                                        String Subject1 = emailTemplate1.getSubject();
-                                        Subject1 = Subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-                                        String msg1 = emailTemplate1.getBodytext();
-                                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
-                                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                                        sendMail.sendMail(from1, To1, Subject1, msg1);
-
-                                    }
-
-                                }
                             } catch (Exception e) {
 
                             }
@@ -873,65 +1123,21 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             request.setAttribute("successMessage",
                                     "Information : The Information is saved Successfully.");
                             mv = searchOwnLeaveDetail(request, response);
-                        }
-                    } else {
-                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                        String currentDate = dateFormat1.format(new Date());
-                        leaveEmployeeDetail.setDateOfSubmit(currentDate);
-                        leaveEmployeeDetailService.create(leaveEmployeeDetail);
-                        balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
-                        noOfDay = leaveEmployeeDetail.getNoOfDays();
-                        balanceDay = balanceDay - noOfDay;
-                        employeeLeaveBalance1.setNoOfLeaveRemain(balanceDay);
-                        employeeLeaveBalanceService.update(employeeLeaveBalance1);
-                        request.setAttribute("successMessage",
-                                "Information : The Information is saved Successfully.");
-
-                        //Emailtemplate for submit click .....
-                        try {
-                            Mailsend(request);
-                            String startdate = leaveEmployeeDetail.getStartDate();
-                            String enddate = leaveEmployeeDetail.getEndDate();
-                            EmailTemplate emailTemplate = new EmailTemplate();
-                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                            DesignationMaster designationMaster = new DesignationMaster();
-                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                            EmployeeMaster employeeMasterHr = new EmployeeMaster();
-                            employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
-                            // id six is apply status
-                            emailTemplate = emailTemplateService.readById(6);
-                            String To = employeeMasterHr.getOfficeEmailId();
-                            String from = employeeMasterModel.getOfficeEmailId();
-                            String Subject = emailTemplate.getSubject();
-                            Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-                            String msg = emailTemplate.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
-                            msg = msg.replaceAll("\\{start_date\\}", startdate);
-                            msg = msg.replaceAll("\\{end_date\\}", enddate);
-                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from, To, Subject, msg);
-                        } catch (Exception e) {
-
-                        }
-
-                        request.setAttribute("successMessage",
-                                "Information : The Information is saved Successfully.");
-                        mv = searchOwnLeaveDetail(request, response);
 //                        mv.setViewName("redirect:leaveEmployeeDetail.htm?act=searchOwnLeaveDetail");
 
+                        }
+                    } else {
+                        request.setAttribute("failureMessage",
+                                "Error : Please Insert start date before end date.");
+                        request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                        mv = applyClick(request, response);
                     }
-                } else {
+                } catch (Exception e) {
                     request.setAttribute("failureMessage",
-                            "Error : Please Insert start date before end date.");
+                            "Error : Please Insert Valid Data.");
                     request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                     mv = applyClick(request, response);
                 }
-            } catch (Exception e) {
-                request.setAttribute("failureMessage",
-                        "Error : Please Insert Valid Data.");
-                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                mv = applyClick(request, response);
             }
         }
 

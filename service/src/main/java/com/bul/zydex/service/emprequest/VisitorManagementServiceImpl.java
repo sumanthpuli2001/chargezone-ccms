@@ -63,6 +63,16 @@ public class VisitorManagementServiceImpl<T> extends GenericsServiceImpl<T> impl
     public List<?> readEmpIdFromTabId(int id) {
          return visitorManagementDAO.readEmpIdFromTabId(id);
     }
+
+    @Override
+    public int countVisitorManagementPendingRequest(T object) {
+        return visitorManagementDAO.countVisitorManagementPendingRequest(object);
+    }
+
+    @Override
+    public int countVisitorManagementApproverPendingRequest(T object) {
+        return visitorManagementDAO.countVisitorManagementApproverPendingRequest(object);
+    }
     
 
 }

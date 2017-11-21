@@ -22,9 +22,13 @@ public interface HrServiceRequestService<T> extends GenericsService<T> {
     public List<?> readSearchEmpRequest(T object);
 
     public List<?> readSearchRequest(T object);
-    
+
     public List<?> readHrServicePendingRequest(T object);
-    
+
     public List<?> readHrServiceApproverPendingRequest(T object);
+
+    public int countHrServicePendingRequest(T object);
+
+    public int countHrServiceApproverPendingRequest(T object);
 
 }

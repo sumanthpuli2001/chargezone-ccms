@@ -27,5 +27,7 @@ public interface Appraisal360Service<T> extends GenericsService<T> {
     public List<?> searchAppraisalFeedback(int empId, String startD, String endD);
     public List<?> read360SearchByEmployee(T object);
     public List<?> read360SearchByFillingEmployee(T object);
+    
+    public int countEmployeeAppraisalFeedback(int id);
 
 }

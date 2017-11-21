@@ -162,4 +162,9 @@ public class TravelRequestMasterServiceImpl<T> extends GenericsServiceImpl<T> im
         return travelRequestMasterDAO.readListForApprover(object, id);
     }
 
+    @Override
+    public int countPendingTravelRequest(T object) {
+        return travelRequestMasterDAO.countPendingTravelRequest(object);
+    }
+
 }

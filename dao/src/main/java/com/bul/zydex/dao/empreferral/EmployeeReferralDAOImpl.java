@@ -79,7 +79,8 @@ public class EmployeeReferralDAOImpl<T> extends GenericsDAOImpl<T> implements Em
                 .append(" left join em.userMaster as um left join um.userRightMasters as urm")
                 .append(" where urm.employeeReferral is true")
                 .append(" and urm.travelExpenseAdmin is not true")//this is for trick work for get only single useer of employeeReferral
-                .append(" and urm.employeeManagement is not true");//this is for trick work for get only single useer of employeeReferral
+                .append(" and urm.employeeManagement is not true")//this is for trick work for get only single useer of employeeReferral
+                .append(" order by er.id desc");//this is for trick work for get only single useer of employeeReferral
         String hqlQryString = sb.toString();
 //        String qryString = getSessionFactory().getCurrentSession().createQuery(hqlQryString).getQueryString();
         List<?> list = getHibernateTemplate().find(hqlQryString);
@@ -96,17 +97,19 @@ public class EmployeeReferralDAOImpl<T> extends GenericsDAOImpl<T> implements Em
 
         return getHibernateTemplate().find(query);
     }
+
     @Override
     public List<?> finalApproveByHrHead() {
         String query = "";
 
         query += " SELECT a FROM EmployeeMaster a"
-                + " WHERE a.departmentMaster.id="+ 59
-                + " and a.designationMaster.id="+ 114;
+                + " WHERE a.departmentMaster.id=" + 59
+                + " and a.designationMaster.id=" + 114;
 
         return getHibernateTemplate().find(query);
     }
-     public List<?> finalApproveList(T object) {
+
+    public List<?> finalApproveList(T object) {
         EmployeeReferral employeeReferral = (EmployeeReferral) object;
         StringBuilder sb = new StringBuilder();
 
@@ -119,9 +122,9 @@ public class EmployeeReferralDAOImpl<T> extends GenericsDAOImpl<T> implements Em
                 .append(" left join em.levelMaster lev")
                 .append(" left join em.locationMaster as lm")
                 .append(" left join em.zydexLocationMaster as zlm");
-  
-            sb.append(" where er.status=2");
-    
+
+        sb.append(" where er.status=2");
+
         sb.append(" and (er.candidatePositionReferredFor=prm.id) order By er.id desc");
 
         String hqlQryString = sb.toString();

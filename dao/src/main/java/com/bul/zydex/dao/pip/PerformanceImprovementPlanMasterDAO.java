@@ -22,4 +22,8 @@ public interface PerformanceImprovementPlanMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readOwnPipPending(T object);
 
     public List<?> readEmployeePipPending(String managerId);
+    
+    public int countOwnPipPending(T object);
+    
+    public int countEmployeePipPending(String managerId);
 }

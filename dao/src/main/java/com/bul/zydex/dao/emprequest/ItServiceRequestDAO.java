@@ -26,4 +26,8 @@ public interface ItServiceRequestDAO<T> extends GenericsDAO<T> {
     public List<?> readByItServicePendingRequest(T object);
     
     public List<?> readByItServiceApproverPendingRequest(T object);
+    
+    public int countByItServicePendingRequest(T object);
+    
+    public int countByItServiceApproverPendingRequest(T object);
 }

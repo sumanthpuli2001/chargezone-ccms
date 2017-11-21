@@ -82,7 +82,7 @@
                                         <div class="col-sm-6" id="excelDiv">
                                             <input type="file" name="file1" id="file11" value="" onchange="checkfile(this);"/>
                                             <input type="hidden" id="fileName" name="fileName" value=""/>
-                                            <span>[ <a href="leaveTypeMaster.htm?act=readLeaveUploadFile&amp;fileName=LeaveExcelUpload.xlsx">Sample Excel</a> ]</span>
+                                            <span>[ <a href="shiftRotationMaster.htm?act=readShiftUploadFile&amp;fileName=EmployeeMonthlyShiftData.xls">Sample Excel</a> ]</span>
                                         </div>
                                     </div>
                                     <div class="form-group">

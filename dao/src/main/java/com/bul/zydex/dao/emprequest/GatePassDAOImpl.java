@@ -194,6 +194,23 @@ public class GatePassDAOImpl<T> extends GenericsDAOImpl<T> implements GatePassDA
     }
 
     @Override
+    public int countByGatePassPendingRequest(T object) {
+        GatePass gatePass = (GatePass) object;
+        String query = "";
+        int i = 0;
+        query += "select count(a.id) "
+                + "From GatePass a "
+                + " where a.employeeMasterByEmployeeMasterId = " + gatePass.getEmployeeMasterByEmployeeMasterId().getId()
+                + " and a.status in (1,6,7,8,9,10,16,17,18,19)";
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            long l = (long) list.get(0);
+            i = (int) l;
+        }
+        return i;
+    }
+
+    @Override
     public List<?> readByGatePassApproverPendingRequest(T object) {
         GatePass gatePass = (GatePass) object;
         String query = "";
@@ -204,6 +221,24 @@ public class GatePassDAOImpl<T> extends GenericsDAOImpl<T> implements GatePassDA
                 + " and b.reportingManagerLevel1=" + gatePass.getEmployeeMasterByEmployeeMasterId().getId()
                 + " and a.status in (1,8,10,17,18)";
         return getHibernateTemplate().find(query);
+    }
+    @Override
+    public int countByGatePassApproverPendingRequest(T object) {
+        GatePass gatePass = (GatePass) object;
+        String query = "";
+        int i =0;
+        query += " Select count(a.id)"
+                + " From GatePass a,"
+                + " EmployeeMaster b"
+                + " where a.employeeMasterByEmployeeMasterId =b.id"
+                + " and b.reportingManagerLevel1=" + gatePass.getEmployeeMasterByEmployeeMasterId().getId()
+                + " and a.status in (1,8,10,17,18)";
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            long l = (long) list.get(0);
+            i = (int) l;
+        }
+        return i;
     }
 
     public List<?> readEmpIdFromTabId(int id) {

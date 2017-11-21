@@ -110,32 +110,32 @@ public class VisitorManagementController extends VisitorManagementAbstract {
                 request.setAttribute("successMessage",
                         "Information : Request Sent Successfully.");
                 //    Email Sent to Security
-                                List<?> SecurityList = userRightMasterService.readSecurityList();
-                                 for (Object o : SecurityList) {
-                                        Object[] o1 = (Object[]) o;
-                                        int SecurityId = (int) o1[0];
-                             try {
-                            EmailTemplate emailTemplate = new EmailTemplate();
-                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                            DesignationMaster designationMaster = new DesignationMaster();
-                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                            EmployeeMaster employeeMasterHr = new EmployeeMaster();
-                            employeeMasterHr = employeeMasterService.readById(SecurityId);
-                    // id 34 is for Visitor Management Apply
-                            emailTemplate = emailTemplateService.readById(34);
-                            String To = employeeMasterHr.getOfficeEmailId();
-                            String from = employeeMasterModel.getOfficeEmailId();
-                            String Subject = emailTemplate.getSubject();
-                            Subject=Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-                            String msg = emailTemplate.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from, To, Subject, msg);
-                             } catch (Exception e) {
-                            
-                         }
-                        }
+                List<?> SecurityList = userRightMasterService.readSecurityList();
+                for (Object o : SecurityList) {
+                    Object[] o1 = (Object[]) o;
+                    int SecurityId = (int) o1[0];
+                    try {
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                        DesignationMaster designationMaster = new DesignationMaster();
+                        designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                        EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                        employeeMasterHr = employeeMasterService.readById(SecurityId);
+                        // id 34 is for Visitor Management Apply
+                        emailTemplate = emailTemplateService.readById(34);
+                        String To = employeeMasterHr.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, Subject, msg);
+                    } catch (Exception e) {
+
+                    }
+                }
                 mv.getModelMap().put("visitorManagement", visitorManagement);
                 mv = searchSubmit(request, response);
             }
@@ -151,12 +151,12 @@ public class VisitorManagementController extends VisitorManagementAbstract {
         VisitorManagement visitorManagement = new VisitorManagement();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         String id = request.getParameter("id");
-        List<?> Approverlist=null;
+        List<?> Approverlist = null;
         Object object = (Object) request.getAttribute("flag");
-        if(object==null){
-            
-        Approverlist = visitorManagementService.readByapproverId(visitorManagement);
-        }else{
+        if (object == null) {
+
+            Approverlist = visitorManagementService.readByapproverId(visitorManagement);
+        } else {
             Approverlist = (List<?>) request.getAttribute("Approverlist");
         }
         selectEmployee(request, response);
@@ -231,28 +231,28 @@ public class VisitorManagementController extends VisitorManagementAbstract {
             visitorManagementService.update(visitorManagement);
             request.setAttribute("successMessage",
                     "Information : Request Approved Successfully.");
-             //    Email Sent to Employee
-                try {
-                            EmailTemplate emailTemplate = new EmailTemplate();
-                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                            DesignationMaster designationMaster = new DesignationMaster();
-                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                            List l1 = visitorManagementService.readEmpIdFromTabId(Integer.parseInt(id));
-                           EmployeeMaster employeeRequestee =  (EmployeeMaster) l1.get(0);
-                   // id 35 is for status Visitor Confirm
-                            emailTemplate = emailTemplateService.readById(35);
-                            String To = employeeRequestee.getOfficeEmailId();
-                            String from = employeeMasterModel.getOfficeEmailId();
-                            String Subject = emailTemplate.getSubject();
-                            Subject=Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
-                            String msg = emailTemplate.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from, To, Subject, msg);
-                        } catch (Exception e) {
-                            
-                        }
+            //    Email Sent to Employee
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                List l1 = visitorManagementService.readEmpIdFromTabId(Integer.parseInt(id));
+                EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                // id 35 is for status Visitor Confirm
+                emailTemplate = emailTemplateService.readById(35);
+                String To = employeeRequestee.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+
+            }
         }
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("visitorManagement", visitorManagement);
@@ -520,11 +520,16 @@ public class VisitorManagementController extends VisitorManagementAbstract {
         VisitorManagement visitorManagement = new VisitorManagement();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         visitorManagement.setEmployeeMasterByEmployeeMasterId(employeeMaster);
-        List<?> list = visitorManagementService.readVisitorManagementPendingRequest(visitorManagement);
-        int visitorPendingRequest = list.size();
+
+        //----------comment and update by uday----------from----//
+//        List<?> list = visitorManagementService.readVisitorManagementPendingRequest(visitorManagement);
+//        int visitorPendingRequest = list.size();
+//        List<?> list1 = visitorManagementService.readVisitorManagementApproverPendingRequest(visitorManagement);
+//        int visitorApproverPendingRequest = list1.size();
+        int visitorPendingRequest = visitorManagementService.countVisitorManagementPendingRequest(visitorManagement);
+        int visitorApproverPendingRequest = visitorManagementService.countVisitorManagementApproverPendingRequest(visitorManagement);
+        //----------------to-------------------//
         request.setAttribute("visitorPendingRequest", visitorPendingRequest);
-        List<?> list1 = visitorManagementService.readVisitorManagementApproverPendingRequest(visitorManagement);
-        int visitorApproverPendingRequest = list1.size();
         request.setAttribute("visitorApproverPendingRequest", visitorApproverPendingRequest);
         mv.setViewName("forward:gatePass.htm?act=userDashboardGetPassPendingRequest");
         return mv;

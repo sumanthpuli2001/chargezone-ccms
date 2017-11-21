@@ -33,6 +33,10 @@ public interface PoolCarRequestService<T> extends GenericsService<T> {
     public List<?> readByApproverWisePoolCarPendingRequest(T object);
     
     public List<?> readEmpIdFromTabId(int id);
+    
+    public int countByPoolCarPendingRequest(T object);
+    
+    public int countByApproverWisePoolCarPendingRequest(T object);
 
 
 }

@@ -53,4 +53,14 @@ public class PerformanceImprovementPlanMasterServiceImpl<T> extends GenericsServ
         return performanceImprovementPlanMasterDAO.readEmployeePipPending(managerId);
     }
 
+    @Override
+    public int countOwnPipPending(T object) {
+        return  performanceImprovementPlanMasterDAO.countOwnPipPending(object);
+    }
+
+    @Override
+    public int countEmployeePipPending(String managerId) {
+        return performanceImprovementPlanMasterDAO.countEmployeePipPending(managerId);
+    }
+
 }

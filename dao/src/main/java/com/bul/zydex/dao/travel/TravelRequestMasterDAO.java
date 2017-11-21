@@ -68,5 +68,7 @@ public interface TravelRequestMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readForRequestResultForDashboard(T object);
 
     public List<?> readListForApprover(T object, int id);
+    
+    public int countPendingTravelRequest(T object);
 
 }

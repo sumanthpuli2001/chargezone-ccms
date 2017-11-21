@@ -32,4 +32,8 @@ public interface GatePassService<T> extends GenericsService<T> {
     public List<?> readByGatePassApproverPendingRequest(T object);
     
     public List<?> readEmpIdFromTabId(int id);
+    
+    public int countByGatePassPendingRequest(T object);
+    
+    public int countByGatePassApproverPendingRequest(T object);
 }

@@ -46,13 +46,18 @@
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-4">
                                                     <label>Name Of The Employee:</label>
                                                     <input type="Text" class="form-control" value="${employeeMaster.employeeName}" readonly="true">
                                                     <input type="hidden"  name="empId" value="${employeeMaster.id}">
                                                 </div>
+                                                <div class="col-sm-4">
+                                                    <label>Employee Code:</label>
+                                                    <input type="Text" class="form-control" value="${employeeMaster.employeeId}" readonly="true">
+                                                    <input type="hidden"  name="empId" value="${employeeMaster.id}">
+                                                </div>
 
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-4">
                                                     <label>Date Of Relieving:</label>
                                                     <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                         <input id="leaveStartDateId" class="form-control" size="16" type="text" value="${employeeMaster.dateOfLeaving}" readonly>
@@ -121,7 +126,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="computerFiles" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="computerFiles" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -138,7 +143,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="advanceAmount" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="advanceAmount" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -158,7 +163,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="deptOther" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="deptOther" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -199,7 +204,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="carProvided" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="carProvided" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -215,7 +220,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="stationaryItem" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="stationaryItem" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -232,7 +237,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="residance" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="residance" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -249,7 +254,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="identityCard" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="identityCard" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -266,7 +271,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="library" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="library" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -283,7 +288,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="cafeteria" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="cafeteria" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -300,7 +305,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="exitInterview" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="exitInterview" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -320,7 +325,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="hrOther" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="hrOther" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -355,7 +360,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="companyMobile" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="companyMobile" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -371,7 +376,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="computerChecked" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="computerChecked" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -388,7 +393,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="email" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="email" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -405,7 +410,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="computerTransfered" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="computerTransfered" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -425,7 +430,7 @@
                                             <td>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <form:input path="itOther" class="form-control" value="" readonly="true" ></form:input>
+                                                        <%--<form:input path="itOther" class="form-control" value="" readonly="true" ></form:input>--%>
                                                         </div>
                                                     </div>
                                                 </td>

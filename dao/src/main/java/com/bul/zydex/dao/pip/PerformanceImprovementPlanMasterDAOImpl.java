@@ -85,6 +85,24 @@ public class PerformanceImprovementPlanMasterDAOImpl<T> extends GenericsDAOImpl<
     }
 
     @Override
+    public int countOwnPipPending(T object) {
+        PerformanceImprovementPlanMaster performanceImprovementPlanMaster = (PerformanceImprovementPlanMaster) object;
+        String query = "";
+        int i = 0;
+        query += "SELECT count(a.id)"
+                + " FROM PerformanceImprovementPlanMaster a"
+                + " Where a.employeeMasterByPipEmployeeId=" + performanceImprovementPlanMaster.getEmployeeMasterByPipEmployeeId().getId()
+                + " and a.status=1";
+
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            long l = (long) list.get(0);
+            i = (int) l;
+        }
+        return i;
+    }
+
+    @Override
     public List<?> readEmployeePipPending(String managerId) {
         String query = "";
 
@@ -99,6 +117,28 @@ public class PerformanceImprovementPlanMasterDAOImpl<T> extends GenericsDAOImpl<
                 + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
 
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public int countEmployeePipPending(String managerId) {
+        String query = "";
+        int i = 0;
+        query += "Select count(a.id)"
+                + " FROM PerformanceImprovementPlanMaster a"
+                + " left join a.employeeMasterByPipEmployeeId b"
+                + " left join b.levelMaster c"
+                + " left join b.departmentMaster d "
+                + " left join b.designationMaster e"
+                + " where b.reportingManagerLevel1=" + managerId
+                + " and ((b.dateOfLeaving is null or b.dateOfLeaving = '') "
+                + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
+
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            long l = (long) list.get(0);
+            i = (int) l;
+        }
+        return i;
     }
 
 }

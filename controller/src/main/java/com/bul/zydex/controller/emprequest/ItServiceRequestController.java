@@ -255,7 +255,7 @@ public class ItServiceRequestController extends ItServiceRequestAbstract {
         itServiceRequest.setEmployeeMasterByItApproverId(employeeMaster);
         itServiceRequest.setStatus(2);
         itServiceRequestService.update(itServiceRequest);
-        
+
         EmailTemplate emailTemplate = new EmailTemplate();
         EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         DesignationMaster designationMaster = new DesignationMaster();
@@ -267,7 +267,7 @@ public class ItServiceRequestController extends ItServiceRequestAbstract {
         String To = employeeMaster1.getOfficeEmailId();
         String from = employeeMasterModel.getOfficeEmailId();
         String Subject = emailTemplate.getSubject();
-        Subject = Subject.replaceAll("\\{user\\}",employeeMaster1.getEmployeeName());
+        Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
         String msg = emailTemplate.getBodytext();
         msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
         msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
@@ -275,31 +275,30 @@ public class ItServiceRequestController extends ItServiceRequestAbstract {
         sendMail.sendMail(from, To, Subject, msg);
         request.setAttribute("successMessage",
                 "Information : Request Closed Successfully.");
-        
-        
-                String name = "IT Service";
-                EmailAddMaster emailAddMaster = new EmailAddMaster();
-                emailAddMaster.setModuleName(name);
-                emailAddMaster.setDepartmentMaster(employeeMaster1.getDepartmentMaster());
-                List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
-                if (!emailSendList.isEmpty()) {
-                    EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
-                    String emailId = emailAddMaster1.getEmailId();
-                    for (String emailId1 : emailId.split(",")) {
-                        if (!emailId1.equals("")) {
-                            String To1 = emailId1;
-                            String from1 = employeeMasterModel.getOfficeEmailId();
-                            String subject1 = emailTemplate.getSubject();
-                            subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
-                            String msg1 = emailTemplate.getBodytext();
-                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-                            msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                            msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from1, To1, subject1, msg1);
 
-                        }
-                    }
+        String name = "IT Service";
+        EmailAddMaster emailAddMaster = new EmailAddMaster();
+        emailAddMaster.setModuleName(name);
+        emailAddMaster.setDepartmentMaster(employeeMaster1.getDepartmentMaster());
+        List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+        if (!emailSendList.isEmpty()) {
+            EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+            String emailId = emailAddMaster1.getEmailId();
+            for (String emailId1 : emailId.split(",")) {
+                if (!emailId1.equals("")) {
+                    String To1 = emailId1;
+                    String from1 = employeeMasterModel.getOfficeEmailId();
+                    String subject1 = emailTemplate.getSubject();
+                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                    String msg1 = emailTemplate.getBodytext();
+                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                    msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from1, To1, subject1, msg1);
+
                 }
+            }
+        }
 //        if (null != statusType) {
 //            if (statusType.equals("3")) {
 //                itServiceRequest.setStatus(3);
@@ -690,12 +689,18 @@ public class ItServiceRequestController extends ItServiceRequestAbstract {
         ItServiceRequest itServiceRequest = new ItServiceRequest();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         itServiceRequest.setEmployeeMasterByEmployeeMasterId(employeeMaster);
-        List<?> list = itServiceRequestService.readByItServicePendingRequest(itServiceRequest);
-        int itServicePending = list.size();
+        //----code and update by ----------from-----//
+//        List<?> list = itServiceRequestService.readByItServicePendingRequest(itServiceRequest);
+//        int itServicePending = list.size();
+//        List<?> list1 = itServiceRequestService.readByItServiceApproverPendingRequest(itServiceRequest);
+//        int itServiceApproverPending = list1.size();
+//        request.setAttribute("itServicePending", itServicePending);
+//        request.setAttribute("itServiceApproverPending", itServiceApproverPending);
+        int itServicePending = itServiceRequestService.countByItServicePendingRequest(itServiceRequest);
+        int itServiceApproverPending = itServiceRequestService.countByItServiceApproverPendingRequest(itServiceRequest);
         request.setAttribute("itServicePending", itServicePending);
-        List<?> list1 = itServiceRequestService.readByItServiceApproverPendingRequest(itServiceRequest);
-        int itServiceApproverPending = list1.size();
         request.setAttribute("itServiceApproverPending", itServiceApproverPending);
+        //-------------to-----------------//
         mv.setViewName("forward:hrServiceRequest.htm?act=userDashboardHrServicePendingRequest");
         return mv;
     }

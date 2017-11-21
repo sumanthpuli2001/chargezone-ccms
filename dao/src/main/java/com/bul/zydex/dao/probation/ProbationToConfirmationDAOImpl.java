@@ -6,6 +6,8 @@ package com.bul.zydex.dao.probation;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.ProbationToConfirmation;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import org.hibernate.Query;
 

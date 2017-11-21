@@ -24,9 +24,13 @@ public interface VisitorManagementService<T> extends GenericsService<T> {
     public List<?> readSearchRequest(T object);
 
     public List<?> readVisitorManagementPendingRequest(T object);
-    
+
     public List<?> readVisitorManagementApproverPendingRequest(T object);
-    
-     public List<?> readEmpIdFromTabId(int id);
+
+    public List<?> readEmpIdFromTabId(int id);
+
+    public int countVisitorManagementPendingRequest(T object);
+
+    public int countVisitorManagementApproverPendingRequest(T object);
 
 }

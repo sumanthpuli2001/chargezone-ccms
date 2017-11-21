@@ -24,8 +24,12 @@ public interface CafeteriaRequestService<T> extends GenericsService<T> {
     public List<?> readSearchRequest(T object);
 
     public List<?> readByCafeTeriaPendingRequest(T object);
-    
+
     public List<?> readByCafeTeriaApproverPendingRequest(T object);
+
+    public List<?> readEmpIdFromTabId(int id);
+
+    public int countByCafeTeriaPendingRequest(T object);
     
-     public List<?> readEmpIdFromTabId(int id);
+    public int countByCafeTeriaApproverPendingRequest(T object);
 }

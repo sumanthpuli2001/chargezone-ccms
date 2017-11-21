@@ -1010,9 +1010,12 @@ public class GatePassController extends GatePassAbstract {
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         gatePass.setEmployeeMasterByEmployeeMasterId(employeeMaster);
         List<?> list = gatePassService.readByGatePassPendingRequest(gatePass);
+        int i = gatePassService.countByGatePassPendingRequest(gatePass);
         int gatePassPending = list.size();
         request.setAttribute("gatePassPending", gatePassPending);
         List<?> list1 = gatePassService.readByGatePassApproverPendingRequest(gatePass);
+        int j = gatePassService.countByGatePassApproverPendingRequest(gatePass);
+        
         int gatePassApproverPending = list1.size();
         request.setAttribute("gatePassApproverPending", gatePassApproverPending);
         mv.setViewName("forward:cafeteriaRequest.htm?act=userDashboardCafeTeriaPendingRequest");

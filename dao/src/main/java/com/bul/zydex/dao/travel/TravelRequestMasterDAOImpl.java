@@ -231,6 +231,24 @@ public class TravelRequestMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
     }
 
     @Override
+    public int countPendingTravelRequest(T object) {
+        int i = 0;
+        TravelRequestMaster travelRequestMaster = (TravelRequestMaster) object;
+        String query = "";
+        query += " Select count(a.id) "
+                + " FROM TravelRequestMaster a"
+                + " Where a.employeeMasterByEmployeeMasterId =" + travelRequestMaster.getEmployeeMasterByEmployeeMasterId().getId()
+                + " and a.status=0";
+
+        List l = getHibernateTemplate().find(query);
+        if (!l.isEmpty()) {
+            long no = (long) l.get(0);
+            i = (int) no;
+        }
+        return i;
+    }
+
+    @Override
     public List<?> readApproverPendingTravelRequest(T object) {
         TravelRequestMaster travelRequestMaster = (TravelRequestMaster) object;
         String query = "";

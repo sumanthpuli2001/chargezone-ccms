@@ -151,6 +151,7 @@
                                                                     <th>Leave Type</th>
                                                                     <th>Start Date</th>
                                                                     <th>End Date</th>
+                                                                    <th>Reason</th>
                                                                     <th>No Of Days</th>
                                                                     <th>Date of Submission</th>
                                                                     <th>Status</th>
@@ -165,25 +166,26 @@
                                                                 <td>${list[0]}</td>
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[2]}</td>
+                                                                <td>${list[8]}</td>
                                                                 <td>${list[3]}</td>
                                                                 <td>${list[6]}</td>
                                                                 <c:if test="${list[5] eq 0}">
                                                                     <td><span class="badge">Pending</span></td>
                                                                 </c:if>
                                                                 <c:if test="${list[5] eq 3}">
-                                                                    <td><span class="label label-success">Approved By ${list[6]}</span></td>
+                                                                    <td><span class="label label-success">Approved By ${list[7]}</span></td>
                                                                 </c:if>
                                                                 <c:if test="${list[5] eq 2}">
-                                                                    <td><span class="label label-danger">Rejected By ${list[6]}</span></td>
+                                                                    <td><span class="label label-danger">Rejected By ${list[7]}</span></td>
                                                                 </c:if>
                                                                 <c:if test="${list[5] eq 1}">
-                                                                    <td><span class="label label-warning">Reworked By ${list[6]}</span></td>
+                                                                    <td><span class="label label-warning">Reworked By ${list[7]}</span></td>
                                                                 </c:if>
                                                                 <c:if test="${list[5] eq 4}">
                                                                     <td><span class="label label-info">WithDraw Request</span></td>
                                                                 </c:if>
                                                                 <c:if test="${list[5] eq 5}">
-                                                                    <td><span class="label label-info">WithDrawn By ${list[6]}</span></td>
+                                                                    <td><span class="label label-info">WithDrawn By ${list[7]}</span></td>
                                                                 </c:if>
                                                                 <!--<td>$//{list[5]}</td>-->
                                                                 <td>

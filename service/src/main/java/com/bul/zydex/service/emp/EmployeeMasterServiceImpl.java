@@ -296,43 +296,64 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> readEmployeeForLeaveBalance(T object) {
         return employeeMasterDAO.readEmployeeForLeaveBalance(object);
     }
+
     @Override
     public List<?> readEmployeeForLeaveBalanceForActiveUser(T object) {
         return employeeMasterDAO.readEmployeeForLeaveBalanceForActiveUser(object);
     }
+
     @Override
     public List<?> readEmployeeForLeaveBalanceForInActiveUser(T object) {
         return employeeMasterDAO.readEmployeeForLeaveBalanceForInActiveUser(object);
     }
-    
+
     @Override
-    public List<?> listOfCEO(){
+    public List<?> listOfCEO() {
         return employeeMasterDAO.listOfCEO();
     }
+
     @Override
-public List<?> readEmployeeForPlant(){
+    public List<?> readEmployeeForPlant() {
         return employeeMasterDAO.readEmployeeForPlant();
     }
 
     @Override
     public List<?> readEmpUserIdWise(T object) {
-          return employeeMasterDAO.readEmpUserIdWise(object);
+        return employeeMasterDAO.readEmpUserIdWise(object);
     }
+
     @Override
-     public List<?> readAllSubordinate(T object){
-          return employeeMasterDAO.readAllSubordinate(object);
+    public List<?> readAllSubordinate(T object) {
+        return employeeMasterDAO.readAllSubordinate(object);
     }
+
     @Override
-      public List<?> readForSendMailToAll(T object){
-          return employeeMasterDAO.readForSendMailToAll(object);
+    public List<?> readForSendMailToAll(T object) {
+        return employeeMasterDAO.readForSendMailToAll(object);
     }
+
     @Override
-     public List<?> readDepartmentWiseEmployee(T object){
-          return employeeMasterDAO.readDepartmentWiseEmployee(object);
+    public List<?> readDepartmentWiseEmployee(T object) {
+        return employeeMasterDAO.readDepartmentWiseEmployee(object);
     }
 
     @Override
     public List<?> readByJoinDate(String date) {
         return employeeMasterDAO.readByJoinDate(date);
+    }
+
+    @Override
+    public Boolean checkLevel1AndLevel5FunctionheadByEmployeeMasterId(int empId) {
+        return employeeMasterDAO.checkLevel1AndLevel5FunctionheadByEmployeeMasterId(empId);
+    }
+
+    @Override
+    public Boolean checkLevel1AndLevel6FunctionheadByEmployeeMasterId(int empId) {
+        return employeeMasterDAO.checkLevel1AndLevel5FunctionheadByEmployeeMasterId(empId);
+    }
+
+    @Override
+    public List<?> readLevel1AndLevel5FunctionheadByEmployeeMasterId(int id) {
+        return employeeMasterDAO.readLevel1AndLevel5FunctionheadByEmployeeMasterId(id);
     }
 }

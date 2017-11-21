@@ -87,6 +87,23 @@ public class AttendanceRegularizationMasterDAOImpl<T> extends GenericsDAOImpl<T>
     }
 
     @Override
+    public int countByAttendanceRegularizationPendingList(int id) {
+        String query = "";
+        int i = 0;
+        query += "select count(a.id)"
+                + "FROM AttendanceRegularization a"
+                + " Where a.userMasterId=" + id
+                + " and a.status=0";
+
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            long l = (long) list.get(0);
+            i = (int) l;
+        }
+        return i;
+    }
+
+    @Override
     public List<?> readByAttendanceRegularizationApproverPendingList(T object) {
         AttendanceRegularization attendanceRegularization = (AttendanceRegularization) object;
         String query = "";

@@ -1190,9 +1190,11 @@ public class PoolCarRequestController extends PoolCarRequestAbstract {
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         poolCarRequest.setEmployeeMasterByEmployeeMasterId(employeeMaster);
         List<?> list = poolCarRequestService.readByPoolCarPendingRequest(poolCarRequest);
+        int i = poolCarRequestService.countByPoolCarPendingRequest(poolCarRequest);
         int poolCarPending = list.size();
         request.setAttribute("poolCarPending", poolCarPending);
         List<?> list1 = poolCarRequestService.readByApproverWisePoolCarPendingRequest(poolCarRequest);
+        int j= poolCarRequestService.countByApproverWisePoolCarPendingRequest(poolCarRequest);
         int poolCarApproverPending = list1.size();
         request.setAttribute("poolCarApproverPending", poolCarApproverPending);
         mv.setViewName("forward:attendanceRegularizationMaster.htm?act=userDashboardAttendanceRegularizationPendingRequest");

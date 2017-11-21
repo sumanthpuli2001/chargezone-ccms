@@ -64,6 +64,16 @@ public class CafeteriaRequestServiceImpl<T> extends GenericsServiceImpl<T> imple
     public List<?> readEmpIdFromTabId(int id) {
         return cafeteriaRequestDAO.readEmpIdFromTabId(id);
     }
+
+    @Override
+    public int countByCafeTeriaPendingRequest(T object) {
+        return cafeteriaRequestDAO.countByCafeTeriaPendingRequest(object);
+    }
+
+    @Override
+    public int countByCafeTeriaApproverPendingRequest(T object) {
+        return cafeteriaRequestDAO.countByCafeTeriaApproverPendingRequest(object);
+    }
     
     
 

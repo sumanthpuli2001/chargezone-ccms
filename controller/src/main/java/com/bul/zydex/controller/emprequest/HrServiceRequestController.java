@@ -513,12 +513,19 @@ public class HrServiceRequestController extends HrServiceRequestAbstract{
         HrServiceRequest hrServiceRequest=new HrServiceRequest();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         hrServiceRequest.setEmployeeMasterByEmployeeMasterId(employeeMaster);
-        List<?> list = hrServiceRequestService.readHrServicePendingRequest(hrServiceRequest);
-        int hrServicePending=list.size();
+        
+        //----------comment and update by uday-----------from--------//
+//        List<?> list = hrServiceRequestService.readHrServicePendingRequest(hrServiceRequest);
+//        int hrServicePending=list.size();
+//        request.setAttribute("hrServicePending", hrServicePending);
+//        List<?> list1 = hrServiceRequestService.readHrServiceApproverPendingRequest(hrServiceRequest);
+//        int heServiceApproverPending=list1.size();
+//        request.setAttribute("heServiceApproverPending", heServiceApproverPending);
+        int hrServicePending=hrServiceRequestService.countHrServicePendingRequest(hrServiceRequest);
         request.setAttribute("hrServicePending", hrServicePending);
-        List<?> list1 = hrServiceRequestService.readHrServiceApproverPendingRequest(hrServiceRequest);
-        int heServiceApproverPending=list1.size();
+        int heServiceApproverPending= hrServiceRequestService.countHrServiceApproverPendingRequest(hrServiceRequest);
         request.setAttribute("heServiceApproverPending", heServiceApproverPending);
+        //--------------to---------------------//
         mv.setViewName("forward:resignationMaster.htm?act=userDashboardResignationPendingRequest");
         return mv;
     }

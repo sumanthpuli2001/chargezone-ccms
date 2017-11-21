@@ -62,4 +62,9 @@ public class Appraisal360SeviceImpl<T> extends GenericsServiceImpl<T> implements
         return appraisal360DAO.read360SearchByFillingEmployee(object);
     } 
 
+    @Override
+    public int countEmployeeAppraisalFeedback(int id) {
+        return  appraisal360DAO.countEmployeeAppraisalFeedback(id);
+    }
+
 }   

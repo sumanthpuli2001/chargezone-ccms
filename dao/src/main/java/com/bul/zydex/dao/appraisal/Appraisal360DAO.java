@@ -25,4 +25,6 @@ public interface Appraisal360DAO<T> extends GenericsDAO<T> {
     public List<?> searchAppraisalFeedback(int empId, String startD, String endD);
     public List<?> read360SearchByEmployee(T object);
     public List<?> read360SearchByFillingEmployee(T object);
+    
+    public int countEmployeeAppraisalFeedback(int id);
 }

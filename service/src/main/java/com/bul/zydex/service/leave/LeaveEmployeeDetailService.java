@@ -69,6 +69,11 @@ public interface LeaveEmployeeDetailService<T> extends GenericsService<T> {
     public List<?> plLeaveCheck(int empId);
 
     public List<?> leaveApplicationRequest(T object);
+
     public List<?> readLeaveDetails(T object);
+
+    public List<?> sickleaveCheck(T object);
+
+    public List<?> casualleaveCheck(T object);
 
 }

@@ -39,6 +39,28 @@ public class Appraisal360DAOImpl<T> extends GenericsDAOImpl<T> implements Apprai
     }
 
     @Override
+    public int countEmployeeAppraisalFeedback(int id) {
+
+        int i = 0;
+
+        String query = "";
+        query += " "
+                + " SELECT count(a.id)"
+                + " FROM AppraisalFeedback360 a "
+                + " left join a.employeeMasterByRefForEmpId b "
+                + " left join a.employeeMasterByRefDoneEmpId d "
+                + " left join b.departmentMaster c "
+                + " WHERE d.id='" + id + "' and a.status=0";
+
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+          long  l =   (long) list.get(0);
+          i =(int) l;
+        }
+        return i;
+    }
+
+    @Override
     public List<?> readHRAppraisalData(int id, int forId) {
         String query = "";
         query += " "
@@ -127,8 +149,7 @@ public class Appraisal360DAOImpl<T> extends GenericsDAOImpl<T> implements Apprai
                 + " LEFT JOIN b.designationMaster c "
                 + " LEFT JOIN b.userMaster e "
                 + " LEFT JOIN b.levelMaster f "
-                + " WHERE status=1 and a.employeeMasterByRefForEmpId="+appraisalFeedback360.getEmployeeMasterByRefForEmpId().getId()
-                ;
+                + " WHERE status=1 and a.employeeMasterByRefForEmpId=" + appraisalFeedback360.getEmployeeMasterByRefForEmpId().getId();
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
@@ -140,8 +161,7 @@ public class Appraisal360DAOImpl<T> extends GenericsDAOImpl<T> implements Apprai
         String query = "";
         String condition = "";
 
-
-       if (null != appraisalFeedback360.getEmployeeMasterByRefForEmpId().getId()) {
+        if (null != appraisalFeedback360.getEmployeeMasterByRefForEmpId().getId()) {
             condition += " AND  b.id = " + appraisalFeedback360.getEmployeeMasterByRefForEmpId().getId();
         }
 
@@ -159,7 +179,7 @@ public class Appraisal360DAOImpl<T> extends GenericsDAOImpl<T> implements Apprai
                 + " LEFT JOIN b.userMaster e "
                 + " LEFT JOIN b.levelMaster f "
                 + " WHERE status=1" + condition
-                 + " Group By a.employeeMasterByRefForEmpId";           
+                + " Group By a.employeeMasterByRefForEmpId";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

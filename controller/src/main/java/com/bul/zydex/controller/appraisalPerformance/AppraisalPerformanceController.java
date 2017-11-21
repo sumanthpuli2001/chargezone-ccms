@@ -1578,12 +1578,18 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                appraisalPerformanceBehaviorsService.create(appraisalPerformanceBehaviors);
 //            }
         }
-        mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
+        String btn1 = request.getParameter("save");
+        if (null != btn1 && btn1.equals("save")) {
+            String year = request.getParameter("yearparmStr");
+            mv.setViewName("redirect:appraisalPerformance.htm?act=editClick1&id=" + employee.getId() + "&userid=" + employee.getUserMaster().getId() + "&appraisalId=" + appraisalId + "&year=" + year);
+        } else {
+            mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
 //        mv.setViewName("forward:userMaster.htm?act=userDashboard");
 //        mv = createClick(request, response);
-        mv.setViewName("redirect:appraisalPerformance.htm?act=searchOwnappraisalPerformanceSubmit");
+            mv.setViewName("redirect:appraisalPerformance.htm?act=searchOwnappraisalPerformanceSubmit");
 //        mv = searchOwnappraisalPerformanceSubmit(request, response);
 //        mv.setViewName("Appraisal/PerformanceAppraisalForm");
+        }
         return mv;
     }
 

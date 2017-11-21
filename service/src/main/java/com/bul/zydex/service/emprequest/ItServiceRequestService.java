@@ -26,5 +26,9 @@ public interface ItServiceRequestService<T> extends GenericsService<T> {
      public List<?> readByItServicePendingRequest(T object);
      
      public List<?> readByItServiceApproverPendingRequest(T object);
+     
+     public int countByItServicePendingRequest(T object);
+     
+     public int countByItServiceApproverPendingRequest(T object);
 
 }

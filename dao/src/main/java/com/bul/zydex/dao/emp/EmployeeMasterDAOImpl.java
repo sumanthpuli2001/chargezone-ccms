@@ -1812,4 +1812,39 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return list;
     }
 
+    @Override
+    public Boolean checkLevel1AndLevel6FunctionheadByEmployeeMasterId(int empId) {
+        boolean flag = false;
+        List<?> list = getHibernateTemplate().find("from EmployeeMaster where reportingManagerLevel5 = ''"
+                + " and reportingManagerLevel1=reportingManagerLevel6"
+                + " and id =" + empId);
+        if (list.isEmpty()) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    @Override
+    public Boolean checkLevel1AndLevel5FunctionheadByEmployeeMasterId(int empId) {
+        boolean flag = false;
+        List<?> list = getHibernateTemplate().find("from EmployeeMaster where reportingManagerLevel1=reportingManagerLevel5"
+                + " and id =" + empId);
+        if (list.isEmpty()) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    @Override
+    public List<?> readLevel1AndLevel5FunctionheadByEmployeeMasterId(int id) {
+        String query = "";
+        query += " "
+                + " FROM EmployeeMaster a "
+                + " WHERE a.reportingManagerLevel1= a.reportingManagerLevel5"
+                + " AND a.reportingManagerLevel1= " + id;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

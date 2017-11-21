@@ -1,4 +1,4 @@
- /*
+/*
  * 
  * Author Vinita
  */
@@ -26,5 +26,9 @@ public interface HrServiceRequestDAO<T> extends GenericsDAO<T> {
     public List<?> readHrServicePendingRequest(T object);
 
     public List<?> readHrServiceApproverPendingRequest(T object);
+
+    public int countHrServicePendingRequest(T object);
+
+    public int countHrServiceApproverPendingRequest(T object);
 
 }

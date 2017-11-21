@@ -1,4 +1,4 @@
- /*
+/*
  * 
  * Author Vinita
  */
@@ -30,6 +30,10 @@ public interface GatePassDAO<T> extends GenericsDAO<T> {
     public List<?> readByGatePassPendingRequest(T object);
 
     public List<?> readByGatePassApproverPendingRequest(T object);
+
+    public List<?> readEmpIdFromTabId(int id);
+
+    public int countByGatePassPendingRequest(T object);
     
-     public List<?> readEmpIdFromTabId(int id);
+    public int countByGatePassApproverPendingRequest(T object);
 }

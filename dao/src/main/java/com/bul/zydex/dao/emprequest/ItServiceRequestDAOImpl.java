@@ -153,6 +153,24 @@ public class ItServiceRequestDAOImpl<T> extends GenericsDAOImpl<T> implements It
     }
 
     @Override
+    public int countByItServicePendingRequest(T object) {
+        ItServiceRequest itServiceRequest = (ItServiceRequest) object;
+        String query = "";
+        int i = 0;
+        query += " SELECT count(a.id)"
+                + " From ItServiceRequest a "
+                + " LEFT JOIN a.itRequestType b "
+                + " where a.employeeMasterByEmployeeMasterId = " + itServiceRequest.getEmployeeMasterByEmployeeMasterId().getId()
+                + " and a.status in (1,4,5,6,9,10)";
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            long l = (long) list.get(0);
+            i = (int) l;
+        }
+        return i;
+    }
+
+    @Override
     public List<?> readByItServiceApproverPendingRequest(T object) {
         ItServiceRequest itServiceRequest = (ItServiceRequest) object;
         String query = "";
@@ -163,5 +181,24 @@ public class ItServiceRequestDAOImpl<T> extends GenericsDAOImpl<T> implements It
                 + " and b.reportingManagerLevel1=" + itServiceRequest.getEmployeeMasterByEmployeeMasterId().getId()
                 + " and a.status in (1,5,6,10)";
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public int countByItServiceApproverPendingRequest(T object) {
+        ItServiceRequest itServiceRequest = (ItServiceRequest) object;
+        String query = "";
+        int i = 0;
+        query += " SELECT count(a.id)"
+                + " From ItServiceRequest a,"
+                + " EmployeeMaster b"
+                + " where a.employeeMasterByEmployeeMasterId = b.id"
+                + " and b.reportingManagerLevel1=" + itServiceRequest.getEmployeeMasterByEmployeeMasterId().getId()
+                + " and a.status in (1,5,6,10)";
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            long l = (long) list.get(0);
+            i = (int) l;
+        }
+        return i;
     }
 }

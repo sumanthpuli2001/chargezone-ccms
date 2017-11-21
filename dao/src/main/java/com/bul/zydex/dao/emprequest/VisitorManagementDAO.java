@@ -28,4 +28,8 @@ public interface VisitorManagementDAO<T> extends GenericsDAO<T> {
     public List<?> readVisitorManagementApproverPendingRequest(T object);
     
      public List<?> readEmpIdFromTabId(int id);
+     
+     public int countVisitorManagementPendingRequest(T object);
+     
+     public int countVisitorManagementApproverPendingRequest(T object);
 }

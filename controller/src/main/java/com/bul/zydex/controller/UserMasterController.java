@@ -144,6 +144,8 @@ public class UserMasterController extends UserMasterAbstract {
 //        List<List<?>> finalList = new ArrayList<>();
         List<?> list = appraisal360Service.readEmployeeAppraisalFeedback(id);
         int appraisalcount = list.size();
+//        int i = appraisal360Service.countEmployeeAppraisalFeedback(id);
+        
         List<?> list1 = exitInterviewMasterService.readByEmployeeId(id);
         if (!list1.isEmpty()) {
             String dateOfSubmit = "";
@@ -207,6 +209,9 @@ public class UserMasterController extends UserMasterAbstract {
         List<?> reportingManager4List = employeeMasterService.readEmployeeForParticularManager(id);
         List<?> probationEmployee = probationToConfirmationService.readloginEmployeeData(id);
         List<?> FunctionalheadList = employeeMasterService.readfunctionalhead(id);
+        if(FunctionalheadList.isEmpty()){
+            FunctionalheadList =  employeeMasterService.readLevel1AndLevel5FunctionheadByEmployeeMasterId(id);
+        }
         List<?> probationtypeList = employeeMasterService.readForEmployeeType(id);
         List<Object> finalprobationList = new ArrayList<>();
         if (!probationtypeList.isEmpty()) {

@@ -38,5 +38,7 @@ public interface AttendanceRegularizationMasterService<T> extends GenericsServic
     public List<?> powerAdminAttendanceRegularizationList();
 
     public List<?> readArCountList(T object);
+    
+    public int countByAttendanceRegularizationPendingList(int id);
 
 }

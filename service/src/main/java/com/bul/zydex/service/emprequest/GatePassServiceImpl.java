@@ -73,6 +73,16 @@ public class GatePassServiceImpl<T> extends GenericsServiceImpl<T> implements Ga
     public List<?> readEmpIdFromTabId(int id) {
         return gatePassDAO.readEmpIdFromTabId(id);
     }
+
+    @Override
+    public int countByGatePassPendingRequest(T object) {
+        return gatePassDAO.countByGatePassPendingRequest(object);
+    }
+
+    @Override
+    public int countByGatePassApproverPendingRequest(T object) {
+        return gatePassDAO.countByGatePassApproverPendingRequest(object);
+    }
     
     
     

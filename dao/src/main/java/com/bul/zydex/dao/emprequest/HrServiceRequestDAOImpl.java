@@ -162,6 +162,25 @@ public class HrServiceRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Hr
     }
 
     @Override
+    public int countHrServicePendingRequest(T object) {
+        HrServiceRequest hrServiceRequest = (HrServiceRequest) object;
+        String query = "";
+        int i = 0;
+        query += " SELECT count(a.id)"
+                + " From HrServiceRequest a"
+                + " LEFT JOIN a.queryType b"
+                + " where a.employeeMasterByEmployeeMasterId=" + hrServiceRequest.getEmployeeMasterByEmployeeMasterId().getId()
+                + " and a.status in (1,4,5,6,9,10)";
+
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            long l = (long) list.get(0);
+            i = (int) l;
+        }
+        return i;
+    }
+
+    @Override
     public List<?> readHrServiceApproverPendingRequest(T object) {
         HrServiceRequest hrServiceRequest = (HrServiceRequest) object;
         String query = "";
@@ -173,5 +192,25 @@ public class HrServiceRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Hr
                 + " and a.status in (1,5,6,10)";
 
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public int countHrServiceApproverPendingRequest(T object) {
+        HrServiceRequest hrServiceRequest = (HrServiceRequest) object;
+        String query = "";
+        int i = 0;
+        query += " SELECT count(a.id)"
+                + " From HrServiceRequest a,"
+                + " EmployeeMaster b"
+                + " where a.employeeMasterByEmployeeMasterId=b.id"
+                + " and b.reportingManagerLevel1=" + hrServiceRequest.getEmployeeMasterByEmployeeMasterId().getId()
+                + " and a.status in (1,5,6,10)";
+
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            long l = (long) list.get(0);
+            i = (int) l;
+        }
+        return i;
     }
 }

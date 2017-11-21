@@ -61,36 +61,36 @@
 //            alert("called");
                 var selectedValue = document.getElementById("hrSelectId").value;
 //                alert(selectedValue);
-if(document.getElementById('saveSubmit1').value=='approve'){
-    
-                if (document.getElementById("hrSelectId").value == '') {
-                    document.getElementById("hrSelectError").innerHTML = "- It must be Selected";
-                    flag3 = false;
-                } else {
+                if (document.getElementById('saveSubmit1').value == 'approve') {
 
-                    if (selectedValue == "Extend") {
-                        if (document.getElementById("hrextendmonth").value == '') {
-                            document.getElementById("hrExtendPeriodError").innerHTML = "- It must be Selected";
-                            flag3 = false;
-                        } else {
-                            document.getElementById("hrExtendPeriodError").innerHTML = "";
-                        }
-                        if (document.getElementById("hrremark").value == '') {
-                            document.getElementById("hrApprovalRemarkError").innerHTML = "- It must be Selected";
-                            flag3 = false;
-                        } else {
-                            document.getElementById("hrApprovalRemarkError").innerHTML = "";
-                        }
-                    } else if (selectedValue == "No") {
-                        if (document.getElementById("hrremark").value == '') {
-                            document.getElementById("hrApprovalRemarkError").innerHTML = "- It must be Selected";
-                            flag3 = false;
-                        } else {
-                            document.getElementById("hrApprovalRemarkError").innerHTML = "";
+                    if (document.getElementById("hrSelectId").value == '') {
+                        document.getElementById("hrSelectError").innerHTML = "- It must be Selected";
+                        flag3 = false;
+                    } else {
+
+                        if (selectedValue == "Extend") {
+                            if (document.getElementById("hrextendmonth").value == '') {
+                                document.getElementById("hrExtendPeriodError").innerHTML = "- It must be Selected";
+                                flag3 = false;
+                            } else {
+                                document.getElementById("hrExtendPeriodError").innerHTML = "";
+                            }
+                            if (document.getElementById("hrremark").value == '') {
+                                document.getElementById("hrApprovalRemarkError").innerHTML = "- It must be Selected";
+                                flag3 = false;
+                            } else {
+                                document.getElementById("hrApprovalRemarkError").innerHTML = "";
+                            }
+                        } else if (selectedValue == "No") {
+                            if (document.getElementById("hrremark").value == '') {
+                                document.getElementById("hrApprovalRemarkError").innerHTML = "- It must be Selected";
+                                flag3 = false;
+                            } else {
+                                document.getElementById("hrApprovalRemarkError").innerHTML = "";
+                            }
                         }
                     }
                 }
-}
 
                 if (flag3) {
 
@@ -353,30 +353,30 @@ if(document.getElementById('saveSubmit1').value=='approve'){
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="table-responsive">
                                                         <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                            <tr>
-                                                                <td >REPORTING MANAGER (RECOMMENDATION)</td>
-                                                                <td>
-                                                                    <form:input path="recommendationSelect"  class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                                    </td>
-                                                                <c:if test="${ptc.recommendationSelect eq 'Extend'}">
-                                                                    <td id="RecomendationExtPeriodId" >Extention Period</td>
-                                                                    <td id="RecomendationExtSelectId" >
-                                                                        <form:input path="recommendationExtendPeriod"  class="form-control" size="16" type="text" value="" readonly="true"></form:input>
+                                                                <tr>
+                                                                    <td >REPORTING MANAGER (RECOMMENDATION)</td>
+                                                                    <td>
+                                                                        <form:input path="recommendationSelect"  class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                                         </td>
-                                                                </c:if>
-                                                                <c:if test="${ptc.recommendationSelect eq 'Extend' || ptc.recommendationSelect eq 'No'}">
-                                                                    <td id="RecomendationRemarkId" >Remark</td>
-                                                                    <td id="RecomendationRemarkTxtId">
-                                                                        <form:textarea path="recommendationRemark" class="form-control" type="text" value="" readonly="true"></form:textarea>
+                                                                    <c:if test="${ptc.recommendationSelect eq 'Extend'}">
+                                                                        <td id="RecomendationExtPeriodId" >Extention Period</td>
+                                                                        <td id="RecomendationExtSelectId" >
+                                                                            <form:input path="recommendationExtendPeriod"  class="form-control" size="16" type="text" value="" readonly="true"></form:input>
+                                                                            </td>
                                                                     </c:if>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="9"><b>Please provide your detailed justification for Confirmation / Extension of Probation / Termination of Services. Kindly Note, the same is mandatory for further process.</b></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="9"> <form:textarea path="managerJustification" rows="3" class="form-control" type="text" readonly="true" value=""></form:textarea></td>
+                                                                    <c:if test="${ptc.recommendationSelect eq 'Extend' || ptc.recommendationSelect eq 'No'}">
+                                                                        <td id="RecomendationRemarkId" >Remark</td>
+                                                                        <td id="RecomendationRemarkTxtId">
+                                                                            <form:textarea path="recommendationRemark" class="form-control" type="text" value="" readonly="true"></form:textarea>
+                                                                        </c:if>
+                                                                    </td>
                                                                 </tr>
+                                                                <tr>
+                                                                    <td colspan="9"><b>Please provide your detailed justification for Confirmation / Extension of Probation / Termination of Services. Kindly Note, the same is mandatory for further process.</b></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="9"> <form:textarea path="managerJustification" rows="3" class="form-control" type="text" readonly="true" value=""></form:textarea></td>
+                                                                    </tr>
                                                             <tr>
                                                                 <td >FUNCTIONAL HEAD (RECOMMENDATION)</td>
                                                                 <td>
@@ -485,7 +485,7 @@ if(document.getElementById('saveSubmit1').value=='approve'){
                                                                     </c:if>
                                                                 </tr>
                                                             </c:if>
-                                                            
+
                                                             <tr>
                                                                 <td>RECOMMENDATION BY HR (IF ANY):</td>
                                                                 <td colspan="5" >
@@ -514,10 +514,10 @@ if(document.getElementById('saveSubmit1').value=='approve'){
                                                 <div class="col-sm-12">
                                                     <div class="col-sm-6" style="text-align: left;">
                                                         &nbsp;&nbsp;<button type="submit" style="width: 100px;"class="btn btn-warning" id="saveSubmit1" name="submit" value="rework" >Rework</button>
-                                                </div>
-                                                <div class="col-sm-6" style="text-align: right;">
-                                                    &nbsp;&nbsp;<button type="submit" style="width: 100px;"class="btn btn-primary" id="saveSubmit1" name="submit" value="approve">Submit</button>
-                                                </div>
+                                                    </div>
+                                                    <div class="col-sm-6" style="text-align: right;">
+                                                        &nbsp;&nbsp;<button type="submit" style="width: 100px;"class="btn btn-primary" id="saveSubmit1" name="submit" value="approve">Submit</button>
+                                                    </div>
                                                 </div>
                                             </c:if>
                                         </c:if>

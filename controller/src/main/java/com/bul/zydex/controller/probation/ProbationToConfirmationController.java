@@ -41,7 +41,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         Integer LoginempId = employeeMaster.getId();
         List<?> probationtypeList = employeeMasterService.readForEmployeeType(LoginempId);
         List<Object> finalprobationList1 = new ArrayList<>();
-
+        
         if (!probationtypeList.isEmpty()) {
             for (Object o : probationtypeList) {
                 EmployeeMaster employeeMaster1 = new EmployeeMaster();
@@ -55,13 +55,13 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     ptc2 = (ProbationToConfirmation) listrepeat.get(0);
                     Integer status = ptc2.getStatus();
                     if (status == 1 || status == 2) {
-
+                        
                     } else if (status == 4 || status == 0 || status == 10) {
                         String assessmentToDatestring = ptc2.getAssessmentToDate();
                         String today = sdf.format(new Date());
                         Date tDate = sdf.parse(today);
                         Date assessmentToDate = sdf.parse(assessmentToDatestring);
-
+                        
                         Calendar c = Calendar.getInstance();
                         c.setTime(assessmentToDate);
 //                        c.add(Calendar.DATE, -15);
@@ -70,14 +70,14 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         c.setTime(datebefore1);
                         c.add(Calendar.MONTH, 1);
                         Date level1Date = c.getTime();
-
+                        
                         c.setTime(level1Date);
                         c.add(Calendar.DATE, 15);
                         Date level2Date = c.getTime();
                         c.setTime(level2Date);
                         c.add(Calendar.DATE, 15);
                         Date level3Date = c.getTime();
-
+                        
                         c.setTime(level3Date);
                         c.add(Calendar.DATE, 15);
                         Date level4Date = c.getTime();
@@ -178,9 +178,9 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         mv.getModelMap().put("ptc", ptc);
         mv.setViewName("Probation/ProbationResult");
         return mv;
-
+        
     }
-
+    
     public ModelAndView viewClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -228,17 +228,17 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
             } else if (pt.getStatus().equals(10)) {
                 ptc = (ProbationToConfirmation) pt;
                 ptc.setEmployeeMasterByEmployeeMasterId(employeeMaster);
-
+                
             }
         } else {
-
+            
         }
         mv.getModelMap().put("ptc", ptc);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Probation/Probationlevel1");
         return mv;
     }
-
+    
     public ModelAndView level1Submit(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -247,7 +247,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         BindException errors = new BindException(ptc, "ptc");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         bind(request, ptc);
-
+        
         probationtoConfirmationValidator.validate(ptc, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
@@ -306,10 +306,10 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     request.setAttribute("successMessage",
                             "Information : Successfully Submited to Functional head for Confirmation.");
                     mv = searchSubmit(request, response);
-
+                    
                 }
             } else {
-
+                
             }
             String eId = request.getParameter("employeeMasterByEmployeeMasterId.id");
             //    Email Sent to Employee
@@ -354,7 +354,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
-
+                
                 String name = "Probation To Conformation";
                 EmailAddMaster emailAddMaster = new EmailAddMaster();
                 emailAddMaster.setModuleName(name);
@@ -374,12 +374,12 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                             msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                             msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                             sendMail.sendMail(from1, To1, subject1, msg1);
-
+                            
                         }
                     }
                 }
             } catch (Exception e) {
-
+                
             }
             //    Email Sent to HR having Probation to confirmation Rights
             List<?> ptcAdminList = userRightMasterService.readProbationToConfirmationAdminList();
@@ -406,7 +406,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
                 } catch (Exception e) {
-
+                    
                 }
             }
             mv = searchSubmit(request, response);
@@ -430,7 +430,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         mv.setViewName("Probation/Probationlevel2Result");
         return mv;
     }
-
+    
     public ModelAndView functionalheadview(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -454,7 +454,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         mv.setViewName("Probation/Probationlevel2");
         return mv;
     }
-
+    
     public ModelAndView functionalheadSubmit(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -534,7 +534,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
             msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
             sendMail.sendMail(from, To, Subject, msg);
         } catch (Exception e) {
-
+            
         }
         //    Email Sent to HR having Probation to confirmation Rights
         List<?> ptcAdminList = userRightMasterService.readProbationToConfirmationAdminList();
@@ -561,12 +561,12 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
-
+                
             }
         }
         return mv;
     }
-
+    
     public ModelAndView functionalheadSubmitOLD(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -587,7 +587,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         ptc.setFunctionalHeadId(empId);
         ptc.setImprovementComment(ptc1.getImprovementComment());
         ptc.setApprovalSelect(ptc1.getApprovalSelect());
-
+        
         if (ptc.getApprovalSelect().equals("Yes")) {
             ptc.setStatus(2);
 // employee type confirm
@@ -673,7 +673,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         ModelAndView mv = new ModelAndView();
         ProbationToConfirmation ptc = new ProbationToConfirmation();
         EmployeeMaster employeeMaster = new EmployeeMaster();
-
+        
         List<?> pendingProbationList = employeeMasterService.readProbationByAdmin();
         Map<Integer, String> map = new HashMap<Integer, String>();
         if (!pendingProbationList.isEmpty()) {
@@ -682,10 +682,10 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 Integer emptabid = (Integer) o1[0];
                 String empid = "" + o1[1];
                 String empname = "" + o1[2];
-
+                
                 String ptcid = "" + o1[5];
                 String status = "" + o1[6];
-
+                
                 if (!"null".equals(ptcid)) {
                     String assesmentdate = "" + o1[7];
                     map.put(emptabid, assesmentdate);
@@ -701,7 +701,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date d = sdf.parse(date);
                     c.setTime(d);
-
+                    
                     c.add(Calendar.MONTH, probationPeriod);
 //                    c.add(Calendar.MONTH, 6);
                     date = sdf.format(c.getTime());
@@ -717,7 +717,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         mv.setViewName("Probation/ProbationHrResult");
         return mv;
     }
-
+    
     public ModelAndView hrview(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -743,7 +743,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         mv.setViewName("Probation/ProbationHrView");
         return mv;
     }
-
+    
     public ModelAndView hrSubmit(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -757,10 +757,10 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         bind(request, ptc1);
         ptc = probationToConfirmationService.readById(Integer.parseInt(id));
         if (submitType.equals("approve")) {
-
+            
             ptc.setRecomendationByHr(ptc1.getRecomendationByHr());
             ptc.setImprovementComment(ptc1.getImprovementComment());
-
+            
             ptc.setHrSelect(ptc1.getHrSelect());
             if (ptc.getHrSelect().equals("Yes")) {
                 ptc.setStatus(5);
@@ -774,7 +774,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     employeeMaster = employeeMasterService.readById(Integer.parseInt(Emid));
                     employeeMaster.setEmployeeType("Confirmed");
                     employeeMasterService.update(employeeMaster);
-
+                    
                 }
                 //    Email Sent to Employee
 //            try {
@@ -818,7 +818,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
                 } catch (Exception e) {
-
+                    
                 }
                 //    Email Sent to FH
                 try {
@@ -840,7 +840,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
-
+                    
                     String name = "Probation To Conformation";
                     EmailAddMaster emailAddMaster = new EmailAddMaster();
                     emailAddMaster.setModuleName(name);
@@ -860,13 +860,13 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                                 msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                                 msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                                 sendMail.sendMail(from1, To1, subject1, msg1);
-
+                                
                             }
                         }
                     }
-
+                    
                 } catch (Exception e) {
-
+                    
                 }
             } else if (ptc.getHrSelect().equals("No")) {
                 ptc.setStatus(3);
@@ -915,7 +915,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
                 } catch (Exception e) {
-
+                    
                 }
                 //    Email Sent to FH
                 try {
@@ -938,7 +938,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
                 } catch (Exception e) {
-
+                    
                 }
             } else if (ptc.getHrSelect().equals("Extend")) {
                 ptc.setStatus(4);
@@ -995,7 +995,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     String Date1String = sdf.format(Date1);
                     ptc.setAssessmentFromDate(doj);
                     ptc.setAssessmentToDate(Date1String);
-
+                    
                 } else if (ptc.getHrExtendPeriod().equals("7Month")) {
                     Calendar c = Calendar.getInstance();
                     c.setTime(date6aftermonth);
@@ -1065,7 +1065,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
                 } catch (Exception e) {
-
+                    
                 }
                 //    Email Sent to FH
                 try {
@@ -1088,7 +1088,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
                 } catch (Exception e) {
-
+                    
                 }
             }
 //        if (ptc.getStatus().equals(4)) {
@@ -1100,7 +1100,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
             ptc.setStatus(10);   // status 10 for Rework
             request.setAttribute("successMessage",
                     "Information : Reworked Sucessfully");
-
+            
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
                 EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
@@ -1121,7 +1121,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
-
+                
             }
         }
         String hrdate = sdf.format(new Date());
@@ -1159,7 +1159,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         request.setAttribute("managerName", list.get(0));
                     }
                 } else if (Status == 1) {
-
+                    
                     int id = Integer.parseInt("" + o1[8]);
                     EmployeeMaster em = new EmployeeMaster();
                     em = employeeMasterService.readById(id);
@@ -1177,7 +1177,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         mv.setViewName("Probation/empResult");
         return mv;
     }
-
+    
     public ModelAndView empViewClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -1209,7 +1209,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         List<?> probationToConfirmationRequestsList = probationToConfirmationService.readProbationToConfirmationList();
         String pending = "";
         String completed = "";
-
+        
         Object[] probationToConfirmationReportArray;
         if (!probationToConfirmationRequestsList.isEmpty()) {
             probationToConfirmationReportArray = (Object[]) probationToConfirmationRequestsList.get(0);
@@ -1228,11 +1228,11 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 + completed
                 + "]";
         mv.addObject("probationToCinfirmationReportString", probationToCinfirmationReportString);
-
+        
         mv.setViewName("forward:appraisalPerformance.htm?act=hrDashboard");
         return mv;
     }
-
+    
     public ModelAndView viewProbationToConfirmation(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -1274,7 +1274,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         mv.setViewName("Probation/SearchProbationToConfirmation");
         return mv;
     }
-
+    
     public ModelAndView exportToExcel(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -1312,7 +1312,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         mv.setViewName("Probation/probationExcel");
         return mv;
     }
-
+    
     public ModelAndView probationManualTrigger(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -1347,14 +1347,14 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
 //            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
             sendMail.sendMail(from, To, Subject, msg);
         } catch (Exception e) {
-
+            
         }
         request.setAttribute("successMessage",
                 "Information : Triggerred Sucessfully");
         mv = hrResultClick(request, response);
         return mv;
     }
-
+    
     public synchronized void probationToconfirmationAddInEmployeeMaster() {
         ProbationToConfirmation ptc = new ProbationToConfirmation();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -1372,11 +1372,11 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 employeeMasterService.update(employeeMaster);
             }
         }
-
+        
     }
-
+    
     public synchronized void probationToconfirmationCheck() throws ParseException {
-
+        
         List<?> empList = employeeMasterService.readForProbationToConfirmation();
         List<Object> finalprobationList = new ArrayList<>();
         List<Object> extendedprobationList = new ArrayList<>();
@@ -1388,7 +1388,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
             for (Object o : empList) {
                 EmployeeMaster employeeMaster = new EmployeeMaster();
                 employeeMaster = (EmployeeMaster) o;
-
+                
                 DesignationMaster designationMaster = new DesignationMaster();
                 designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 Integer desgnId = designationMaster.getId();
@@ -1398,7 +1398,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     probationPeriod = (int) list.get(0);
                 }
                 int pp = probationPeriod - 1;
-
+                
                 String dojstring = employeeMaster.getDateOfJoining();
                 Date dojdate = null;
                 try {
@@ -1417,7 +1417,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 if (tDate.after(dateAfterPP)) {
                     extendedprobationList.add(employeeMaster);
                 }
-
+                
             }
             System.out.println("---------------------" + finalprobationList);
             if (!finalprobationList.isEmpty()) {
@@ -1450,10 +1450,18 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         Date dateAdded = c.getTime();
                         String dateAddedstring = sdf.format(dateAdded);
 
+//                        Boolean flag1 = employeeMasterService.checkLevel1AndLevel6FunctionheadByEmployeeMasterId(employeeMaster.getId());
+                        Boolean flag = employeeMasterService.checkLevel1AndLevel5FunctionheadByEmployeeMasterId(Integer.parseInt(employeeMaster.getReportingManagerLevel5()));
+                        
+                        if (flag) {
+                            ptc.setStatus(1);
+                            ptc.setManagerJustification("Same person has both the Reporting Manager and Funtional Head permission");
+                        } else {
+                            ptc.setStatus(0);
+                        }
                         ptc.setEmployeeMasterByEmployeeMasterId(employeeMaster);
                         ptc.setAssessmentFromDate(doj);
                         ptc.setAssessmentToDate(dateAddedstring);
-                        ptc.setStatus(0);
                         probationToConfirmationService.create(ptc);
                         //      Email Sent to ReportingManager1
                         try {
@@ -1470,7 +1478,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                             msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
                             sendMail.sendMail(from, To, Subject, msg);
                         } catch (Exception e) {
-
+                            
                         }
                     }
                 }
@@ -1491,15 +1499,15 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                             ptc1 = (ProbationToConfirmation) listrepeat1;
                             int Status = ptc1.getStatus();
                             if (Status == 4) {
-
+                                
                                 String assessmentToDatestring = ptc1.getAssessmentToDate();
                                 Date assessmentToDate = sdf.parse(assessmentToDatestring);
-
+                                
                                 Calendar c = Calendar.getInstance();
                                 c.setTime(assessmentToDate);
                                 c.add(Calendar.MONTH, -1);
                                 Date datebefore1 = c.getTime();
-
+                                
                                 if (DateUtils.isSameDay(tDate, datebefore1)) {
                                     //      Email Sent to ReportingManager1
                                     try {
@@ -1514,10 +1522,10 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                                         Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
                                         String msg = emailTemplate.getBodytext();
                                         msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
-
+                                        
                                         sendMail.sendMail(from, To, Subject, msg);
                                     } catch (Exception e) {
-
+                                        
                                     }
                                 }
                             }
@@ -1527,7 +1535,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
             }
         }
     }
-
+    
     public ModelAndView printClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -1553,19 +1561,19 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         mv.setViewName("Probation/ProbationPrictView");
         return mv;
     }
-
+    
     public ModelAndView probationconfirmedEmployee(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
         List probatonConfirmedList = probationToConfirmationService.readConfirmedEmployee();
-
+        
         request.setAttribute("probatonConfirmedList", probatonConfirmedList);
         session.setAttribute("probatonConfirmedSessionList", probatonConfirmedList);
         mv.setViewName("Probation/ProbatonConfirmedEmployeeList");
         return mv;
     }
-
+    
     public ModelAndView viewProbationconfirmedEmployee(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -1591,7 +1599,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         mv.setViewName("Probation/ProbationConfirmedView");
         return mv;
     }
-
+    
     public ModelAndView exportToExcelProbationconfirmedEmployee(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         List<?> probatonConfirmedSessionList = (List<?>) request.getSession().getAttribute("probatonConfirmedSessionList");
@@ -1601,7 +1609,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         mv.setViewName("Probation/ProbationConfirmedExcel");
         return mv;
     }
-
+    
     public ModelAndView probationDashBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         ProbationToConfirmation ptc = new ProbationToConfirmation();
@@ -1611,11 +1619,11 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         Integer LoginempId = employeeMaster.getId();
         List<?> probationtypeList = employeeMasterService.readForEmployeeType(LoginempId);
         List<Object> finalprobationList1 = new ArrayList<>();
-
+        
         if (!probationtypeList.isEmpty()) {
             for (Object o : probationtypeList) {
                 try {
-
+                    
                     EmployeeMaster employeeMaster1 = new EmployeeMaster();
                     employeeMaster1 = (EmployeeMaster) o;
                     String employeeId = employeeMaster1.getId().toString();
@@ -1627,13 +1635,13 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         ptc2 = (ProbationToConfirmation) listrepeat.get(0);
                         Integer status = ptc2.getStatus();
                         if (status == 1 || status == 2) {
-
+                            
                         } else if (status == 4 || status == 0 || status == 10) {
                             String assessmentToDatestring = ptc2.getAssessmentToDate();
                             String today = sdf.format(new Date());
                             Date tDate = sdf.parse(today);
                             Date assessmentToDate = sdf.parse(assessmentToDatestring);
-
+                            
                             Calendar c = Calendar.getInstance();
                             c.setTime(assessmentToDate);
 //                        c.add(Calendar.DATE, -15);
@@ -1642,14 +1650,14 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                             c.setTime(datebefore1);
                             c.add(Calendar.MONTH, 1);
                             Date level1Date = c.getTime();
-
+                            
                             c.setTime(level1Date);
                             c.add(Calendar.DATE, 15);
                             Date level2Date = c.getTime();
                             c.setTime(level2Date);
                             c.add(Calendar.DATE, 15);
                             Date level3Date = c.getTime();
-
+                            
                             c.setTime(level3Date);
                             c.add(Calendar.DATE, 15);
                             Date level4Date = c.getTime();
@@ -1662,12 +1670,12 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         }
                     }
                 } catch (Exception e) {
-
+                    
                 }
             }
         }
         List<?> finalprobationList = finalprobationList1;
-
+        
         request.setAttribute("finalprobationDashboardList", finalprobationList.size());
         List headlist = probationToConfirmationService.readForFunctionalHead(ptc);
         request.setAttribute("fHeadCuonter", headlist.size());
@@ -1676,9 +1684,9 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         mv.setViewName("forward:userMaster.htm?act=userDashboardShow");
         return mv;
     }
-
+    
     private synchronized void mailSendForProbationToConfirmationLeft() throws Exception {
-
+        
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster fromEmp = employeeMasterService.readById(1544);
         Calendar c = Calendar.getInstance();
@@ -1727,7 +1735,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
 //                }
             }
         }
-
+        
         Calendar cal1 = Calendar.getInstance();
         cal1.setTime(d);
         cal1.add(Calendar.DAY_OF_MONTH, 15);
@@ -1900,7 +1908,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
 //                }
             }
         }
-
+        
     }
-
+    
 }

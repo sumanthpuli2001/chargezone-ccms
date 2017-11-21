@@ -140,4 +140,10 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
 
     public List<?> readByJoinDate(String date);
 
+    public Boolean checkLevel1AndLevel6FunctionheadByEmployeeMasterId(int empId);
+    
+    public Boolean checkLevel1AndLevel5FunctionheadByEmployeeMasterId(int empId);
+    
+    public List<?> readLevel1AndLevel5FunctionheadByEmployeeMasterId(int id);
+
 }

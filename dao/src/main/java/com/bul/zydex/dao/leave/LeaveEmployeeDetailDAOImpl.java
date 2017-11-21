@@ -57,7 +57,7 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
             condition += " AND b.id = '" + leaveEmployeeDetail.getLeaveTypeMaster().getId() + "'";
         }
 
-        query += " Select b.leaveType, a.startDate, a.endDate, a.noOfDays, a.id, a.status,a.dateOfSubmit, (Select c.employeeName from EmployeeMaster c where c.id=a.approverId) as ApproveName  "
+        query += " Select b.leaveType, a.startDate, a.endDate, a.noOfDays, a.id, a.status,a.dateOfSubmit, (Select c.employeeName from EmployeeMaster c where c.id=a.approverId) as ApproveName, a.empRemark  "
                 + " FROM LeaveEmployeeDetail a"
                 + " LEFT JOIN a.leaveTypeMaster b"
                 + " WHERE a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
@@ -72,7 +72,7 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
         String query = "";
 
-        query += " Select c.employeeName, b.leaveType, a.startDate, a.endDate, a.noOfDays, a.id, a.status, d.id, a.dateOfSubmit"
+        query += " Select c.employeeName, b.leaveType, a.startDate, a.endDate, a.noOfDays, a.id, a.status, d.id, a.dateOfSubmit,a.empRemark "
                 + " FROM LeaveEmployeeDetail a"
                 + " LEFT JOIN a.leaveTypeMaster b"
                 + " LEFT JOIN a.employeeMaster c"
@@ -517,7 +517,7 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         List results = query1.list();
         Iterator iterator = results.iterator();
         while (iterator.hasNext()) {
-             Object[] value = (Object[]) iterator.next();
+            Object[] value = (Object[]) iterator.next();
             if ("AB".equals(value[1]) || "WO".equals(value[1])) {
                 iterator.remove();
             }
@@ -734,4 +734,26 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> sickleaveCheck(T object) {
+        LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
+        String query = "from LeaveEmployeeDetail a"
+                + " WHERE a.status !=5"
+                + " AND a.leaveTypeMaster = 16"
+                + " AND a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
+                + " AND STR_TO_DATE(a.endDate,'%d/%m/%Y')=STR_TO_DATE('" + leaveEmployeeDetail.getStartDate() + "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> casualleaveCheck(T object) {
+        LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
+        String query = "from LeaveEmployeeDetail a"
+                + " WHERE a.status !=5"
+                + " AND a.leaveTypeMaster = 6"
+                + " AND a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
+                + " AND STR_TO_DATE(a.endDate,'%d/%m/%Y')=STR_TO_DATE('" + leaveEmployeeDetail.getStartDate() + "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+
+    }
 }

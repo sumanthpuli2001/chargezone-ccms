@@ -194,6 +194,25 @@ public class PoolCarRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Pool
     }
 
     @Override
+    public int countByPoolCarPendingRequest(T object) {
+        PoolCarRequest poolCarRequest = (PoolCarRequest) object;
+        String query = "";
+        int i = 0;
+        query += "select count(a.id)"
+                + " From PoolCarRequest a"
+                + " where a.employeeMasterByEmployeeMasterId=" + poolCarRequest.getEmployeeMasterByEmployeeMasterId().getId()
+                + " and a.status in (1,6,7,8,9,10,16,17,18,19)"
+                + " Order by a.id desc";
+
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            long l = (long) list.get(0);
+            i = (int) l;
+        }
+        return i;
+    }
+
+    @Override
     public List<?> readByApproverWisePoolCarPendingRequest(T object) {
         PoolCarRequest poolCarRequest = (PoolCarRequest) object;
         String query = "";
@@ -206,6 +225,27 @@ public class PoolCarRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Pool
                 + " Order by a.id desc";
 
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public int countByApproverWisePoolCarPendingRequest(T object) {
+        PoolCarRequest poolCarRequest = (PoolCarRequest) object;
+        String query = "";
+        int i = 0;
+        query += " SELECT count(a.id)"
+                + " From PoolCarRequest a,"
+                + " EmployeeMaster b"
+                + " Where a.employeeMasterByEmployeeMasterId=b.id"
+                + " and b.reportingManagerLevel1=" + poolCarRequest.getEmployeeMasterByEmployeeMasterId().getId()
+                + " and a.status in (1,8,10,17,18)"
+                + " Order by a.id desc";
+
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            long l = (long) list.get(0);
+            i = (int) l;
+        }
+        return i;
     }
 
     @Override

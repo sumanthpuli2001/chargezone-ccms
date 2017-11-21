@@ -169,6 +169,15 @@ public class LeaveEmployeeDetailServiceImpl<T> extends GenericsServiceImpl<T> im
     public List<?> readLeaveDetails(T object) {
         return leaveEmployeeDetailDAO.readLeaveDetails(object);
     }
-    
-    
+
+    @Override
+    public List<?> sickleaveCheck(T object) {
+        return leaveEmployeeDetailDAO.sickleaveCheck(object);
+    }
+
+    @Override
+    public List<?> casualleaveCheck(T object) {
+        return leaveEmployeeDetailDAO.casualleaveCheck(object);
+    }
+
 }

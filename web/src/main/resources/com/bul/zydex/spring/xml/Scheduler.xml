@@ -116,8 +116,8 @@
         <property name="jobDetail" ref="probationToConfirmation" />
         <property name="cronExpression" value="0 0/1 * * * ?" />
         <property name="cronExpression" value="0 30 23 1/1 * ? *" />
-    </bean>
-     <bean id="probationToConfirmationCreateCheck"
+    </bean>-->
+<!--     <bean id="probationToConfirmationCreateCheck"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="probationToConfirmationController1" />
         <property name="targetMethod" value="probationToconfirmationCheck" />
@@ -127,6 +127,7 @@
         <property name="jobDetail" ref="probationToConfirmationCreateCheck" />
         <property name="cronExpression" value="0 0/1 * * * ?" />0 0 10 * * ?
         <property name="cronExpression" value="0 0 10 * * ?" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
     </bean>-->
 
     <!--    <bean id="travelEscalationId"
@@ -180,8 +181,8 @@
         <property name="targetMethod" value="mailSendForProbationToConfirmationLeft" />
     </bean>
     
-        <bean id="daysLeftProbationToConfirmation"
-          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+    <bean id="daysLeftProbationToConfirmation"
+                 class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="probationToConfirmationController1" />
         <property name="targetMethod" value="mailSendForProbationToConfirmationLeft" />
     </bean>
@@ -214,9 +215,9 @@
                 <!--<ref bean="coffDeleteId" />-->
                 <!--<ref bean="shortLeveId" />-->
              
-                <!--                                <ref bean="probationToConfirmation" />
-                <ref bean="probationToConfirmationCreateCheck" />
-                <ref bean="travelEscalationId" />
+                <!--                                <ref bean="probationToConfirmation" />-->
+                <!--<ref bean="probationToConfirmationCreateCheck" />-->
+                <!--      <ref bean="travelEscalationId" />
                 <ref bean="reportingManagerChangeId" />-->
                 <!--<ref bean="pmpIntimation" />-->
                 <!--<ref bean="mobilePunchDailyEntry" />-->
@@ -233,9 +234,9 @@
                 <ref bean="cronTrigger5" /> -->
                 <!--<ref bean="cronTrigger6" />-->
                 <!--<ref bean="cronTrigger7" />-->
-                <!--                <ref bean="cronTrigger8" />
-                <ref bean="cronTrigger9" />
-                <ref bean="cronTrigger10" />-->
+                <!--                <ref bean="cronTrigger8" />-->
+                <!--<ref bean="cronTrigger9" />-->
+                <!--   <ref bean="cronTrigger10" />-->
                 <!--<ref bean="cronTrigger11" />-->
                 <!--<ref bean="cronTrigger12" />-->
                 <!--<ref bean="cronTrigger13" />-->

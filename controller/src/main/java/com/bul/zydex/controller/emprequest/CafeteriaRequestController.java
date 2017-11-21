@@ -632,9 +632,11 @@ public class CafeteriaRequestController extends CafeteriaRequestAbstract {
         cafeteriaRequest.setEmployeeMasterByEmployeeMasterId(employeeMaster);
         List<?> list = cafeteriaRequestService.readByCafeTeriaPendingRequest(cafeteriaRequest);
         int cafeTeriaPending = list.size();
+        int i=cafeteriaRequestService.countByCafeTeriaPendingRequest(cafeteriaRequest);
         request.setAttribute("cafeTeriaPending", cafeTeriaPending);
         List<?> list1 = cafeteriaRequestService.readByCafeTeriaApproverPendingRequest(cafeteriaRequest);
         int cafeTeriaApproverPending = list1.size();
+        int j=cafeteriaRequestService.countByCafeTeriaApproverPendingRequest(cafeteriaRequest);
         request.setAttribute("cafeTeriaApproverPending", cafeTeriaApproverPending);
         mv.setViewName("forward:itServiceRequest.htm?act=userDashboardItServicePendingRequest");
         return mv;

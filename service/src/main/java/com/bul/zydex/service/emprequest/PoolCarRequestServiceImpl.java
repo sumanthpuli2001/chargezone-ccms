@@ -74,4 +74,14 @@ public class PoolCarRequestServiceImpl<T> extends GenericsServiceImpl<T> impleme
     public List<?> readEmpIdFromTabId(int id) {
         return poolCarRequestDAO.readEmpIdFromTabId(id);
     }
+
+    @Override
+    public int countByPoolCarPendingRequest(T object) {
+        return poolCarRequestDAO.countByPoolCarPendingRequest(object);
+    }
+
+    @Override
+    public int countByApproverWisePoolCarPendingRequest(T object) {
+        return poolCarRequestDAO.countByApproverWisePoolCarPendingRequest(object);
+    }
 }

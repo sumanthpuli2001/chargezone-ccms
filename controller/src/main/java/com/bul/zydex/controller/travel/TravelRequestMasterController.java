@@ -215,83 +215,83 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                     }
 
                 }
-                if (flag) {
-
-                    request.setAttribute("failureMessage",
-                            "Error : You can't Apply Request on Same Day..");
-                    mv.getModelMap().put("travelRequestMaster", travelRequestMaster);
-                    request.setAttribute("travelRequestMaster1", travelRequestMaster);
-                    mv = applyClick(request, response);
-
-                } else {
+//                if (flag) {
+//
+//                    request.setAttribute("failureMessage",
+//                            "Error : You can't Apply Request on Same Day..");
+//                    mv.getModelMap().put("travelRequestMaster", travelRequestMaster);
+//                    request.setAttribute("travelRequestMaster1", travelRequestMaster);
+//                    mv = applyClick(request, response);
+//
+//                } else {
 //                    travelRequestMaster.setStatus(11); // Go to Travel Adm
-                    travelRequestMasterService.create(travelRequestMaster);
+                travelRequestMasterService.create(travelRequestMaster);
 
-                    // For Emailtemplate
-                    try {
-                        mailSendtTravelapply(request);
-                        EmailTemplate emailTemplate = new EmailTemplate();
-                        EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                        DesignationMaster designationMaster = new DesignationMaster();
-                        designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                        EmployeeMaster employeeMasterHr = new EmployeeMaster();
-                        employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
-                        // id 24 is apply status
-                        emailTemplate = emailTemplateService.readById(24);
-                        String To = employeeMasterHr.getOfficeEmailId();
-                        String from = employeeMasterModel.getOfficeEmailId();
-                        String Subject = emailTemplate.getSubject();
-                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-                        String msg = emailTemplate.getBodytext();
-                        msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
-                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                        sendMail.sendMail(from, To, Subject, msg);
-                    } catch (Exception e) {
-                    }
+                // For Emailtemplate
+                try {
+                    mailSendtTravelapply(request);
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                    employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                    // id 24 is apply status
+                    emailTemplate = emailTemplateService.readById(24);
+                    String To = employeeMasterHr.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+                }
 
 //                        mv.setViewName("redirect:leaveEmployeeDetail.htm?act=searchOwnLeaveDetail");
-                    travelDetail.setTravelRequestMaster(travelRequestMaster);
-                    hotelAccommodation.setTravelRequestMaster(travelRequestMaster);
-                    int countId = Integer.parseInt(request.getParameter("countId"));
-                    int countDetailId = Integer.parseInt(request.getParameter("countDetailId"));
-                    for (int i = 1; i <= countId; i++) {
+                travelDetail.setTravelRequestMaster(travelRequestMaster);
+                hotelAccommodation.setTravelRequestMaster(travelRequestMaster);
+                int countId = Integer.parseInt(request.getParameter("countId"));
+                int countDetailId = Integer.parseInt(request.getParameter("countDetailId"));
+                for (int i = 1; i <= countId; i++) {
 
-                        String date = request.getParameter("date" + i);
-                        String fromLocation = request.getParameter("fromLocation" + i);
-                        String toLocation = request.getParameter("toLocation" + i);
-                        String travelModeId = request.getParameter("travelModeId" + i);
-                        String policyDeviation = request.getParameter("deviateId" + i);
-                        String comments = request.getParameter("comments" + i);
-                        if (!"".equals(date) && null != date && !"".equals(fromLocation) && null != fromLocation && !"".equals(toLocation) && null != toLocation && !"".equals(travelModeId) && null != travelModeId) {
-                            travelDetail.setDate(date);
-                            travelDetail.setFromLocation(fromLocation);
-                            travelDetail.setToLocation(toLocation);
-                            travelDetail.setModeOfTravel(travelModeId);
-                            travelDetail.setPolicyDeviation(policyDeviation);
-                            travelDetail.setComments(comments);
-                            travelDetailService.create(travelDetail);
+                    String date = request.getParameter("date" + i);
+                    String fromLocation = request.getParameter("fromLocation" + i);
+                    String toLocation = request.getParameter("toLocation" + i);
+                    String travelModeId = request.getParameter("travelModeId" + i);
+                    String policyDeviation = request.getParameter("deviateId" + i);
+                    String comments = request.getParameter("comments" + i);
+                    if (!"".equals(date) && null != date && !"".equals(fromLocation) && null != fromLocation && !"".equals(toLocation) && null != toLocation && !"".equals(travelModeId) && null != travelModeId) {
+                        travelDetail.setDate(date);
+                        travelDetail.setFromLocation(fromLocation);
+                        travelDetail.setToLocation(toLocation);
+                        travelDetail.setModeOfTravel(travelModeId);
+                        travelDetail.setPolicyDeviation(policyDeviation);
+                        travelDetail.setComments(comments);
+                        travelDetailService.create(travelDetail);
 
-                        } else {
-                            request.setAttribute("failureMessage",
-                                    "Error : Please Enter the Valid Data.");
-                        }
-
+                    } else {
+                        request.setAttribute("failureMessage",
+                                "Error : Please Enter the Valid Data.");
                     }
-                    for (int j = 1; j <= countDetailId; j++) {
-                        String location = request.getParameter("location" + j);
-                        String checkInDate = request.getParameter("checkInDate" + j);
-//                String pickUpCheckBoxId = request.getParameter("pickUpCheckBoxId" + j);
-                        String pickUpId = request.getParameter("pickUpId" + j);
-                        String preferredHotel = request.getParameter("preferredHotel" + j);
-                        String hotelBookingRequired = request.getParameter("hotelBookingRequired" + j);
-                        String checkOutDate = request.getParameter("checkOutDate" + j);
-//                String dropCheckBoxId = request.getParameter("dropCheckBoxId" + j);
-                        String dropId = request.getParameter("dropId" + j);
-                        String remark = request.getParameter("remark" + j);
 
-                        hotelAccommodation.setLocation(location);
-                        hotelAccommodation.setCheckInDate(checkInDate);
+                }
+                for (int j = 1; j <= countDetailId; j++) {
+                    String location = request.getParameter("location" + j);
+                    String checkInDate = request.getParameter("checkInDate" + j);
+//                String pickUpCheckBoxId = request.getParameter("pickUpCheckBoxId" + j);
+                    String pickUpId = request.getParameter("pickUpId" + j);
+                    String preferredHotel = request.getParameter("preferredHotel" + j);
+                    String hotelBookingRequired = request.getParameter("hotelBookingRequired" + j);
+                    String checkOutDate = request.getParameter("checkOutDate" + j);
+//                String dropCheckBoxId = request.getParameter("dropCheckBoxId" + j);
+                    String dropId = request.getParameter("dropId" + j);
+                    String remark = request.getParameter("remark" + j);
+
+                    hotelAccommodation.setLocation(location);
+                    hotelAccommodation.setCheckInDate(checkInDate);
 //                if (pickUpCheckBoxId.equals("on")) {
 //
 //                    hotelAccommodation.setPickUpCheck(true);
@@ -299,10 +299,10 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 //                    hotelAccommodation.setPickUpCheck(false);
 //
 //                }
-                        hotelAccommodation.setPickLocation(pickUpId);
-                        hotelAccommodation.setPreferredHotel(preferredHotel);
-                        hotelAccommodation.setHotelBookingRequired(hotelBookingRequired);
-                        hotelAccommodation.setCheckOutDate(checkOutDate);
+                    hotelAccommodation.setPickLocation(pickUpId);
+                    hotelAccommodation.setPreferredHotel(preferredHotel);
+                    hotelAccommodation.setHotelBookingRequired(hotelBookingRequired);
+                    hotelAccommodation.setCheckOutDate(checkOutDate);
 //                if (dropCheckBoxId.equals("on")) {
 //
 //                    hotelAccommodation.setDropCheck(true);
@@ -310,15 +310,15 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 //                    hotelAccommodation.setDropCheck(false);
 //
 //                }
-                        hotelAccommodation.setDropLocation(dropId);
-                        hotelAccommodation.setComments(remark);
-                        hotelAccommodationService.create(hotelAccommodation);
+                    hotelAccommodation.setDropLocation(dropId);
+                    hotelAccommodation.setComments(remark);
+                    hotelAccommodationService.create(hotelAccommodation);
 
-                    }
-                    request.setAttribute("successMessage",
-                            "Information : The Information is Saved Successfully.");
-                    mv = requestResult(request, response);
                 }
+                request.setAttribute("successMessage",
+                        "Information : The Information is Saved Successfully.");
+                mv = requestResult(request, response);
+//                }
 
             } else {
                 request.setAttribute("failureMessage",
@@ -1779,7 +1779,10 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
         List<Object> finalList = new ArrayList<>();
         List<Object> finalList1 = new ArrayList<>();
         boolean flag = false;
-        List<?> list = travelRequestMasterService.readForRequestResultForDashboard(travelRequestMaster);
+        //-------------comment and update by uday-----from----------//
+        List<?> list = travelRequestMasterService.readListForApprover(travelRequestMaster, employeeMaster.getId());
+//        List<?> list = travelRequestMasterService.readForRequestResultForDashboard(travelRequestMaster);
+        //-----------------to---------------------//
         if (!list.isEmpty()) {
             for (Object obj : list) {
                 Object[] o1 = (Object[]) obj;
@@ -2092,10 +2095,14 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
         request.setAttribute("pendingApprover1Travel", list111.size());
         EmployeeMaster employeeMaster11 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         travelRequestMaster.setEmployeeMasterByEmployeeMasterId(employeeMaster11);
-        List<?> list11 = travelRequestMasterService.readPendingTravelRequest(travelRequestMaster);
-        int pendingTravel = list11.size();
-        request.setAttribute("pendingTravel", pendingTravel);
+//        List<?> list11 = travelRequestMasterService.readPendingTravelRequest(travelRequestMaster);
+//        int pendingTravel = list11.size();
 
+        ///// code by Uday //////
+        ///-------------from------------///
+        int pendingTravel = travelRequestMasterService.countPendingTravelRequest(travelRequestMaster);
+        request.setAttribute("pendingTravel", pendingTravel);
+        ////---------to-----------////
         mv.setViewName("forward:performanceImprovementPlanMaster.htm?act=userDashBoard");
 
         return mv;

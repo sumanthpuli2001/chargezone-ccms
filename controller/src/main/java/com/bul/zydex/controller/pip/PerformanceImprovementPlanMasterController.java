@@ -242,31 +242,30 @@ public class PerformanceImprovementPlanMasterController extends PerformanceImpro
             msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
             msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
             sendMail.sendMail(from, To, Subject, msg);
-            
-            
-                        String name = "PIP";
-                        EmailAddMaster emailAddMaster = new EmailAddMaster();
-                        emailAddMaster.setModuleName(name);
-                        emailAddMaster.setDepartmentMaster(employeeMasterModel.getDepartmentMaster());
-                        List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
-                        if (!emailSendList.isEmpty()) {
-                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
-                            String emailId = emailAddMaster1.getEmailId();
-                            for (String emailId1 : emailId.split(",")) {
-                                if (!emailId1.equals("")) {
-                                    String To1 = emailId1;
-                                    String from1 = employeeMasterModel.getOfficeEmailId();
-                                    String subject1 = emailTemplate.getSubject();
-                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-                                    String msg1 = emailTemplate.getBodytext();
-                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
-                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                                    sendMail.sendMail(from1, To1, subject1, msg1);
 
-                                }
-                            }
-                        }
+            String name = "PIP";
+            EmailAddMaster emailAddMaster = new EmailAddMaster();
+            emailAddMaster.setModuleName(name);
+            emailAddMaster.setDepartmentMaster(employeeMasterModel.getDepartmentMaster());
+            List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+            if (!emailSendList.isEmpty()) {
+                EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                String emailId = emailAddMaster1.getEmailId();
+                for (String emailId1 : emailId.split(",")) {
+                    if (!emailId1.equals("")) {
+                        String To1 = emailId1;
+                        String from1 = employeeMasterModel.getOfficeEmailId();
+                        String subject1 = emailTemplate.getSubject();
+                        subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg1 = emailTemplate.getBodytext();
+                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from1, To1, subject1, msg1);
+
+                    }
+                }
+            }
         } catch (Exception e) {
         }
 
@@ -614,14 +613,18 @@ public class PerformanceImprovementPlanMasterController extends PerformanceImpro
         EmployeeMaster employeemastermodel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         PerformanceImprovementPlanMaster performanceImprovementPlanMaster = new PerformanceImprovementPlanMaster();
         performanceImprovementPlanMaster.setEmployeeMasterByPipEmployeeId(employeemastermodel);
-        List ownPipPendingList = performanceImprovementPlanMasterService.readOwnPipPending(performanceImprovementPlanMaster);
-
-        List empPendingPip = performanceImprovementPlanMasterService.readEmployeePipPending("" + employeemastermodel.getId());
-
+        //----------comment and update by uday---------from----//
+//        List ownPipPendingList = performanceImprovementPlanMasterService.readOwnPipPending(performanceImprovementPlanMaster);
+//        List empPendingPip = performanceImprovementPlanMasterService.readEmployeePipPending("" + employeemastermodel.getId());
 //        For Employee
-        request.setAttribute("ownPipPendingList", ownPipPendingList.size());
+//        request.setAttribute("ownPipPendingList", ownPipPendingList.size());
 //        For Manager
-        request.setAttribute("empPendingPip", empPendingPip.size());
+//        request.setAttribute("empPendingPip", empPendingPip.size());
+        int ownPipPendingList = performanceImprovementPlanMasterService.countOwnPipPending(performanceImprovementPlanMaster);
+        int empPendingPip = performanceImprovementPlanMasterService.countEmployeePipPending("" + employeemastermodel.getId());
+        request.setAttribute("ownPipPendingList", ownPipPendingList);
+        request.setAttribute("empPendingPip", empPendingPip);
+        //-----------------to----------------//
         mv.setViewName("forward:poolCarRequest.htm?act=userDashboardPoolCarPendingRequest");
         return mv;
     }

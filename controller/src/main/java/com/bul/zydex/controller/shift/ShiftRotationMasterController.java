@@ -14463,4 +14463,22 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         return mv;
     }
 
+    public void readShiftUploadFile(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        String fileName = request.getParameter("fileName");
+
+        String filePath = File.separator + "StorageYard" + File.separator
+                + "Other" + File.separator + "UserDoc" + File.separator
+                + "EmployeeShiftData" + File.separator + fileName;
+
+        String appPath = request.getServletContext().getRealPath("");
+
+        String fullPath = appPath + filePath;
+
+        request.setAttribute("filePath", fullPath);
+
+        DownloadFile downloadFile = new DownloadFile();
+        downloadFile.doDownload(request, response);
+    }
+
 }

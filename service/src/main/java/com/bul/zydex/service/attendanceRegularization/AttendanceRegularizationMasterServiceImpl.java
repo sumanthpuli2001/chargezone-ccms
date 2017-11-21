@@ -85,4 +85,9 @@ public class AttendanceRegularizationMasterServiceImpl<T> extends GenericsServic
     public List<?> readArCountList(T object) {
         return attendanceRegularizationMasterDAO.readArCountList(object);
     }
+
+    @Override
+    public int countByAttendanceRegularizationPendingList(int id) {
+        return attendanceRegularizationMasterDAO.countByAttendanceRegularizationPendingList(id);
+    }
 }

@@ -59,6 +59,16 @@ public class ItServiceRequestServiceImpl<T> extends GenericsServiceImpl<T> imple
      public List<?> readByItServiceApproverPendingRequest(T object) {
         return itServiceRequestDAO.readByItServiceApproverPendingRequest(object);
     }
+
+    @Override
+    public int countByItServicePendingRequest(T object) {
+        return itServiceRequestDAO.countByItServicePendingRequest(object);
+    }
+
+    @Override
+    public int countByItServiceApproverPendingRequest(T object) {
+        return itServiceRequestDAO.countByItServiceApproverPendingRequest(object);
+    }
     
     
 

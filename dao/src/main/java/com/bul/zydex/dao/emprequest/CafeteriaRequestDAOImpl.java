@@ -160,6 +160,24 @@ public class CafeteriaRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Ca
     }
 
     @Override
+    public int countByCafeTeriaPendingRequest(T object) {
+        CafeteriaRequest cafeteriaRequest = (CafeteriaRequest) object;
+        String query = "";
+        int i = 0;
+        query += "select count(a.id) "
+                + " From CafeteriaRequest a"
+                + " Where a.employeeMasterByEmployeeMasterId=" + cafeteriaRequest.getEmployeeMasterByEmployeeMasterId().getId()
+                + " and a.status in (1,4,5,6,9,10)";
+//                   + " and a.status in (1,6,7,8,9,10,16,17,18,19)";
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            long l = (long) list.get(0);
+            i = (int) l;
+        }
+        return i;
+    }
+
+    @Override
     public List<?> readByCafeTeriaApproverPendingRequest(T object) {
         CafeteriaRequest cafeteriaRequest = (CafeteriaRequest) object;
         String query = "";
@@ -171,6 +189,26 @@ public class CafeteriaRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Ca
                 + " and a.status in (1,5,6,10)";
 //                  + " and a.status in (1,7,8,10,17,18)";
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public int countByCafeTeriaApproverPendingRequest(T object) {
+        CafeteriaRequest cafeteriaRequest = (CafeteriaRequest) object;
+        String query = "";
+        int i = 0;
+        query += "Select count(a.id)"
+                + " From CafeteriaRequest a,"
+                + " EmployeeMaster b"
+                + " Where a.employeeMasterByEmployeeMasterId=b.id"
+                + " and b.reportingManagerLevel1=" + cafeteriaRequest.getEmployeeMasterByEmployeeMasterId().getId()
+                + " and a.status in (1,5,6,10)";
+//                  + " and a.status in (1,7,8,10,17,18)";
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            long l = (long) list.get(0);
+            i = (int) l;
+        }
+        return i;
     }
 
     public List<?> readEmpIdFromTabId(int id) {

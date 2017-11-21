@@ -23,4 +23,8 @@ public interface PerformanceImprovementPlanMasterService<T> extends GenericsServ
     public List<?> readOwnPipPending(T object);
 
     public List<?> readEmployeePipPending(String managerId);
+    
+    public int countOwnPipPending(T object);
+    
+    public int countEmployeePipPending(String managerId);
 }

@@ -142,6 +142,7 @@
                                                                 <th>Leave Type</th>
                                                                 <th>Start Date</th>
                                                                 <th>End Date</th>
+                                                                <th>Reason</th>
                                                                 <th>No Of Days</th>
                                                                 <th>Date of Submission</th>
                                                                 <th>Status</th>
@@ -157,6 +158,7 @@
                                                             <td>${list[1]}</td>
                                                             <td>${list[2]}</td>
                                                             <td>${list[3]}</td>
+                                                            <td>${list[9]}</td>
                                                             <td>${list[4]}</td>
                                                             <td>${list[8]}</td>
                                                             <c:if test="${list[6] eq 0}">

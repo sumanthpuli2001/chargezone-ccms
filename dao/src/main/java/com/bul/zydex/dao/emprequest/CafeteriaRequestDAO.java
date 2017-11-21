@@ -28,5 +28,9 @@ public interface CafeteriaRequestDAO<T> extends GenericsDAO<T> {
     public List<?> readByCafeTeriaApproverPendingRequest(T object);
     
     public List<?> readEmpIdFromTabId(int id);
+    
+    public int countByCafeTeriaPendingRequest(T object);
+    
+    public int countByCafeTeriaApproverPendingRequest(T object);
 
 }

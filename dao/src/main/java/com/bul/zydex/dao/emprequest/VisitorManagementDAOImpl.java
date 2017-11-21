@@ -117,7 +117,7 @@ public class VisitorManagementDAOImpl<T> extends GenericsDAOImpl<T> implements V
                 + " LEFT JOIN b.departmentMaster c "
                 + " LEFT JOIN b.designationMaster d "
                 + " Where 1=1" + condition
-                 + "Order by a.id desc";
+                + "Order by a.id desc";
         List list = getHibernateTemplate().find(query);
         return list;
     }
@@ -133,6 +133,23 @@ public class VisitorManagementDAOImpl<T> extends GenericsDAOImpl<T> implements V
     }
 
     @Override
+    public int countVisitorManagementPendingRequest(T object) {
+        VisitorManagement visitorManagement = (VisitorManagement) object;
+        String query = "";
+        int i = 0;
+        query += "select count(a.id) "
+                + " From VisitorManagement a "
+                + " where a.employeeMasterByEmployeeMasterId=" + visitorManagement.getEmployeeMasterByEmployeeMasterId().getId()
+                + " and a.status in (1,4,5,6,9,10)";
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            long l = (long) list.get(0);
+            i = (int) l;
+        }
+        return i;
+    }
+
+    @Override
     public List<?> readVisitorManagementApproverPendingRequest(T object) {
         VisitorManagement visitorManagement = (VisitorManagement) object;
         String query = "";
@@ -143,6 +160,25 @@ public class VisitorManagementDAOImpl<T> extends GenericsDAOImpl<T> implements V
                 + " and b.reportingManagerLevel1=" + visitorManagement.getEmployeeMasterByEmployeeMasterId().getId()
                 + " and a.status in (1,5,6,10)";
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public int countVisitorManagementApproverPendingRequest(T object) {
+        VisitorManagement visitorManagement = (VisitorManagement) object;
+        String query = "";
+        int i = 0;
+        query += "Select count(a.id)"
+                + " From VisitorManagement a,"
+                + " EmployeeMaster b"
+                + " where a.employeeMasterByEmployeeMasterId=b.id"
+                + " and b.reportingManagerLevel1=" + visitorManagement.getEmployeeMasterByEmployeeMasterId().getId()
+                + " and a.status in (1,5,6,10)";
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            long l = (long) list.get(0);
+            i = (int) l;
+        }
+        return i;
     }
 
     @Override

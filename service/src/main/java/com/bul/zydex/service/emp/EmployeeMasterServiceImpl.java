@@ -343,6 +343,11 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     }
 
     @Override
+    public List<?> readByEmployeeId(String empid) {
+        return employeeMasterDAO.readByEmployeeId(empid);
+    }
+
+    @Override
     public Boolean checkLevel1AndLevel5FunctionheadByEmployeeMasterId(int empId) {
         return employeeMasterDAO.checkLevel1AndLevel5FunctionheadByEmployeeMasterId(empId);
     }

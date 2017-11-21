@@ -335,4 +335,9 @@ public List<?> readEmployeeForPlant(){
     public List<?> readByJoinDate(String date) {
         return employeeMasterDAO.readByJoinDate(date);
     }
+
+    @Override
+    public List<?> readByEmployeeId(String empid) {
+        return employeeMasterDAO.readByEmployeeId(empid);
+    }
 }

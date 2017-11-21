@@ -89,6 +89,28 @@
         }
 
     </script>
+    <body onload="myFunction()">
+
+        <h1>Hello World!</h1>
+
+        <script>
+            function myFunction() {
+                setInterval(function () {
+                    document.getElementById("save").click()
+//                    alert("Hello");
+                }, 300000);
+            }
+        </script>
+
+    </body>
+    <script>
+        window.onload = myFunction()
+//        function myFunction() {
+//            setInterval(function () {
+//                alert("Hello");
+//            }, 3000);
+//        }
+    </script>
     <script>
         function appraisalSelectedPrint() {
             var empId = document.getElementById("empId").value;
@@ -209,6 +231,7 @@
                                 <!--<span style="color: red;font-size: 14px;">All the editable fields are mandatory.</span>-->
                                 <form:form class="form-horizontal" id="form1" role="form1" action="appraisalPerformance.htm?act=createSubmit" commandName="appraisalPerformanceMaster" enctype="multipart/form-data" method="post" name='form'>
                                     <input type="hidden" id="yearparmStr" name="yearparmStr" value="${year}">
+                                    <div id="autocall" onload="myFunction();" hidden></div>
                                     <!--form horizontal starts here-->
                                     <!--<form class="form-horizontal" role="form" commandName="AppraisalPerformanceMaster">-->
                                     <div class="box box-info collapsed-box displayAction">
@@ -1742,7 +1765,7 @@
                                                     <c:when test="${employeeStatus eq '0'}">
                                                         <div class="col-sm-6 " style="text-align: left;">
                                                             <!--<button type="button" class="btn btn-warning" data-original-title="" value="save" id="save" name="save" title="" onclick="return myFunction(this);">SAVE</button>-->
-                                                            <button type="submit" class="btn btn-warning" data-original-title="" value="save" id="save" name="save" title="" onclick="return myFunction(this, event);">SAVE</button>
+                                                            <button type="submit" class="btn btn-warning" data-original-title="" value="save" id="save" name="save" title="" >SAVE</button>
                                                         </div>
                                                         <div class="col-sm-6 " style="text-align: right;">
                                                             <button type="submit" class="btn btn-primary" data-original-title="" id="submit" name="submit" value="submit" title="" >SUBMIT</button>

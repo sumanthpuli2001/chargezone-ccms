@@ -141,5 +141,7 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readDepartmentWiseEmployee(T object);
     
     public List<?> readByJoinDate(String date);
+    
+    public List<?> readByEmployeeId(String  empid);
 
 }

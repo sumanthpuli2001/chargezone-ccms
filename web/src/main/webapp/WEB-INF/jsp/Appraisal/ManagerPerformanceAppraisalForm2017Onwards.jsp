@@ -180,6 +180,7 @@
                                 <!--<span style="color: red;font-size: 14px;">All the editable fields are mandatory.</span>-->
                                 <form:form class="form-horizontal" id="form1" role="form1" action="appraisalPerformance.htm?act=createSubmitManager" commandName="appraisalPerformanceMaster" enctype="multipart/form-data" method="post" name='form' >
                                     <input type="hidden" id="yearparmStr" name="yearparmStr" value="${year}">
+                                    <input type="hidden" id="employeeNo" name="employeeNo" readonly value="${employeeMaster[0]}">
                                     <!--form horizontal starts here-->
                                     <!--<form class="form-horizontal" role="form" commandName="AppraisalPerformanceMaster">-->
                                     <div class="box box-info collapsed-box ">
@@ -2397,7 +2398,7 @@
                                                             <button type="button" class="btn btn-primary" data-original-title="" data-toggle="modal" data-target="#reworkPmp" id="rework" value="rework" name="rework" title="" disabled="true">REWORK</button>
                                                         </div>
                                                         <div class="col-sm-4" style="text-align: right;">
-                                                            <button type="submit" class="btn btn-success" data-original-title="" id="submit" name="submit" value="submit" title="" disabled="true">APPROVE</button>
+                                                            <button type="submit" class="btn btn-success" data-original-title="" id="submit" name="submit" value="submit" title="" disabled="true">APPROVE${employeeId}</button>
                                                         </div>
                                                     </c:otherwise>
                                                 </c:choose>

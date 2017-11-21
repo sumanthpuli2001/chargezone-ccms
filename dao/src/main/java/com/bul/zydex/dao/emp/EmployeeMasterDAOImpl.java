@@ -1811,5 +1811,13 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+@Override
+    public List<?> readByEmployeeId(String  empid) {
+        String query = "";
 
+        query += " FROM EmployeeMaster a"
+                + " WHERE a.employeeId = '"+ empid+"'";
+
+        return getHibernateTemplate().find(query);
+    }
 }

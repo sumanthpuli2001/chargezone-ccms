@@ -139,5 +139,7 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
     public List<?> readDepartmentWiseEmployee(T object);
 
     public List<?> readByJoinDate(String date);
+    
+    public List<?> readByEmployeeId(String  empid);
 
 }

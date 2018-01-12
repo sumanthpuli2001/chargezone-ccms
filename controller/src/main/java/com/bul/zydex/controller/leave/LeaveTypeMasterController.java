@@ -316,7 +316,7 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
             if (count > 0) {
                 request.setAttribute("failureMessage", "Information : " + countEmpId + " Rcecords Not Inserted Due To Employe No Is Not Correct");
             }
-            mv = searchSubmit(request, response);
+            mv = leaveExcelUpload(request, response);
         } catch (Exception e) {
             request.setAttribute("failureMessage", "Information : The Excel Not Upload Successfully. Please Check Excel Data.");
             mv = leaveExcelUpload(request, response);

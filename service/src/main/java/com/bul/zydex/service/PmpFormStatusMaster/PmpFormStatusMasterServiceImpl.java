@@ -29,6 +29,11 @@ public class PmpFormStatusMasterServiceImpl<T> extends GenericsServiceImpl<T> im
     public List<?> readByPmpformstatusStatus(String employeeId) {
          return pmpFormStatusMasterDAO.readByPmpformstatusStatus(employeeId);
     }
+
+    @Override
+    public List<?> delete1(String employeeId) {
+         return pmpFormStatusMasterDAO.delete1(employeeId);
+    }
     
      
 }

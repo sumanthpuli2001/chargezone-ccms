@@ -29,7 +29,7 @@
                                <tr style="background-color: #3c8dbc"> 
                                    <td colspan="3">
                                          <a href="#" class="logo">
-                                     <span class="logo-lg"><img src="StorageYard/Images/logo.png" style="width: 160px; margin: 20px;" /></span>
+                                     <!--<span class="logo-lg"><img src="StorageYard/Images/logo.png" style="width: 160px; margin: 20px;" /></span>-->
                                         </a>
                                    </td>
                                </tr>
@@ -63,7 +63,7 @@
                                             </table>
                                    </td> 
                                     <td>
-                                    <div style="margin: 30px"><img src="StorageYard/Images/disco.jpg"></div>
+<!--                                    <div style="margin: 30px"><img src="StorageYard/Images/disco.jpg"></div>-->
                                     </td>
                                </tr>
                            </tbody>

@@ -513,7 +513,7 @@
         document.getElementById('Privilege Leave2').innerHTML = document.getElementById('Privilege Leave1').innerHTML;
         }
         if (strUser == "Casual Leave") {
-        if (parseFloat(document.getElementById("noOfDays").value) > 2) {
+        if (parseFloat(document.getElementById("noOfDays").value) > 3) {
         $("#calsualLeaveDiv").show();
         document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
         setTimeout(function () {
@@ -632,7 +632,7 @@
         }
         if (strUser == "Casual Leave") {
 
-        if (parseFloat(document.getElementById("noOfDays").value) > 2) {
+        if (parseFloat(document.getElementById("noOfDays").value) > 3) {
         $("#calsualLeaveDiv").show();
         document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
         setTimeout(function () {
@@ -754,7 +754,7 @@
         document.getElementById('Privilege Leave2').innerHTML = document.getElementById('Privilege Leave1').innerHTML;
         }
         if (strUser == "Casual Leave") {
-        if (parseFloat(document.getElementById("noOfDays").value) > 2) {
+        if (parseFloat(document.getElementById("noOfDays").value) > 3) {
         document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
         setTimeout(function () {
         $("#calsualLeaveDiv").fadeOut();
@@ -889,7 +889,7 @@
         document.getElementById('Privilege Leave2').innerHTML = document.getElementById('Privilege Leave1').innerHTML;
         }
         if (strUser == "Casual Leave") {
-        if (parseFloat(document.getElementById("noOfDays").value) > 2) {
+        if (parseFloat(document.getElementById("noOfDays").value) > 3) {
         $("#calsualLeaveDiv").show();
         document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
         setTimeout(function () {
@@ -1008,7 +1008,7 @@
         document.getElementById('Privilege Leave2').innerHTML = document.getElementById('Privilege Leave1').innerHTML;
         }
         if (strUser == "Casual Leave") {
-        if (parseFloat(document.getElementById("noOfDays").value) > 2) {
+        if (parseFloat(document.getElementById("noOfDays").value) > 3) {
         $("#calsualLeaveDiv").show();
         document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
         setTimeout(function () {
@@ -1130,7 +1130,7 @@
         }
         if (strUser == "Casual Leave") {
 
-        if (parseFloat(document.getElementById("noOfDays").value) > 2) {
+        if (parseFloat(document.getElementById("noOfDays").value) > 3) {
         $("#calsualLeaveDiv").show();
         document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
         setTimeout(function () {
@@ -1250,7 +1250,7 @@
         document.getElementById('Privilege Leave2').innerHTML = document.getElementById('Privilege Leave1').innerHTML;
         }
         if (strUser == "Casual Leave") {
-        if (parseFloat(document.getElementById("noOfDays").value) > 2) {
+        if (parseFloat(document.getElementById("noOfDays").value) > 3) {
         $("#calsualLeaveDiv").show();
         document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
         setTimeout(function () {
@@ -1379,7 +1379,7 @@
         document.getElementById('Privilege Leave2').innerHTML = document.getElementById('Privilege Leave1').innerHTML;
         }
         if (strUser == "Casual Leave") {
-        if (parseFloat(document.getElementById("noOfDays").value) > 2) {
+        if (parseFloat(document.getElementById("noOfDays").value) > 3) {
         $("#calsualLeaveDiv").show();
         document.getElementById("leaveEndDate_SelectFullOrHalfId").value = '';
         setTimeout(function () {

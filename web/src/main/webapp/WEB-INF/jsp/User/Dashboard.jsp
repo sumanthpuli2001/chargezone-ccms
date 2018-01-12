@@ -6,7 +6,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Zydex | Dashboard</title>
+        <title>HR-Power | Dashboard</title>
         <script>
             function viewEmployeeDetail(employeeId, userId) {
                 window.location = "employeeMaster.htm?act=getUserDetail&id=" + employeeId + "&userid=" + userId;

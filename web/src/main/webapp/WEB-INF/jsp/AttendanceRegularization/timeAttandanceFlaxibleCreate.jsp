@@ -11,7 +11,7 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Zydex Location Create</title>
+        <title> Location Create</title>
     </head>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -43,7 +43,7 @@
                                            commandName="timeAttandanceFlaxibleMaster" action="timeAttandanceFlaxibleMaster.htm?act=createSubmit">
                                     <div class="form-group">
                                         <div class="col-sm-6">
-                                            <label>Zydex Location:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
                                             <form:select path="zydexLocationMaster.id" class="form-control ">
                                                 <form:option value="" label="-- Select --" ></form:option>
                                                 <form:options items="${zydexLocationMap}"></form:options>

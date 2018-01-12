@@ -68,7 +68,7 @@
                                                 </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Zydex Location:</label>
+                                                    <label> Location:</label>
                                                     <input type="text" id="zydexLocationId" name="zydexLocationId" class="form-control">
                                                 </div>
                                             </div>

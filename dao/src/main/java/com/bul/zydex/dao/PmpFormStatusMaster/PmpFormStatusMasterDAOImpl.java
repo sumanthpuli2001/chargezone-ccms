@@ -35,4 +35,18 @@ public class PmpFormStatusMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> delete1(String employeeId) {
+      String query = "";
+
+        query += "  "
+                + " select a"
+                +" FROM PmpFormStatusMaster a "
+                //                + " WHERE a.behaviorsYear =" + year
+                + " where a.employeeMaster = " + employeeId;
+//                + "FROM AppraisalPerformanceMaster a "
+//                + " WHERE a.employeeMaster = " + employeeId;
+        return getHibernateTemplate().find(query);
+    }
+
 }

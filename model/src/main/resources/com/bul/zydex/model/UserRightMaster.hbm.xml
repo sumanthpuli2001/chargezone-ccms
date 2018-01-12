@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.UserRightMaster" table="user_right_master" catalog="employee_cafe">
+    <class name="com.bul.zydex.model.UserRightMaster" table="user_right_master" catalog="hira_technology">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -74,14 +74,11 @@
         <property name="cashAdvanceView" type="boolean">
             <column name="cash_advance_view" not-null="true" />
         </property>
-        <property name="lunaPlantAttendanceMgnt" type="boolean">
-            <column name="luna_plant_Attendance_mgnt" not-null="true" />
+        <property name="lunaPlantAttendanceMgnt" type="java.lang.Boolean">
+            <column name="luna_plant_Attendance_mgnt" />
         </property>
-        <property name="gavasatPlantAttendanceMgnt" type="boolean">
-            <column name="gavasat_plant_Attendance_mgnt" not-null="true" />
-        </property>
-        <property name="departmentWiseAttendance" type="boolean">
-            <column name="department_Wise_Attendance" not-null="true" />
+        <property name="gavasatPlantAttendanceMgnt" type="java.lang.Boolean">
+            <column name="gavasat_plant_Attendance_mgnt" />
         </property>
     </class>
 </hibernate-mapping>

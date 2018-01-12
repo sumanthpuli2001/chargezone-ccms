@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.ProbationToConfirmation" table="probation_to_confirmation" catalog="employee_cafe">
+    <class name="com.bul.zydex.model.ProbationToConfirmation" table="probation_to_confirmation" catalog="hira_technology">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -21,19 +21,19 @@
             <column name="assessment_to_date" length="45" />
         </property>
         <property name="jobHandled" type="string">
-            <column name="job_handled" />
+            <column name="job_handled" length="16777215" />
         </property>
         <property name="performanceRating" type="string">
-            <column name="performance_rating" length="16777215" />
+            <column name="performance_rating" />
         </property>
         <property name="recommendationSelect" type="string">
-            <column name="recommendation_select" length="16777215" />
+            <column name="recommendation_select" />
         </property>
         <property name="recommendationExtendPeriod" type="string">
             <column name="recommendation_extend_period" />
         </property>
         <property name="recommendationRemark" type="string">
-            <column name="recommendation_remark" />
+            <column name="recommendation_remark" length="16777215" />
         </property>
         <property name="approvalSelect" type="string">
             <column name="approval_select" />
@@ -42,10 +42,10 @@
             <column name="approval_extend_period" />
         </property>
         <property name="approvalRemark" type="string">
-            <column name="approval_remark" />
+            <column name="approval_remark" length="16777215" />
         </property>
         <property name="improvementComment" type="string">
-            <column name="improvement_comment" />
+            <column name="improvement_comment" length="16777215" />
         </property>
         <property name="recomendationByHr" type="string">
             <column name="recomendation_by_hr" />
@@ -53,7 +53,7 @@
         <property name="status" type="java.lang.Integer">
             <column name="status">
                 <comment>1= reporting manager submited 2 = functional head approved and employeetype in employeemaster changed to confirmation 3= functional head rejected
-                    (selected no) 4= functional head extended the request 5= hr submited 6= hr Submited the extended request 8=</comment>
+                (selected no) 4= functional head extended the request 5= hr submited 6= hr Submited the extended request 8=</comment>
             </column>
         </property>
         <property name="reportingManagerId" type="string">
@@ -75,16 +75,16 @@
             <column name="hr_select" />
         </property>
         <property name="hrExtendPeriod" type="string">
-            <column name="hr_extend_period" length="16777215" />
+            <column name="hr_extend_period" />
         </property>
         <property name="hrApprovalRemark" type="string">
-            <column name="hr_approval_remark"  />
+            <column name="hr_approval_remark" length="16777215" />
         </property>
         <property name="managerJustification" type="string">
-            <column name="manager_justification"  />
+            <column name="manager_justification" length="16777215" />
         </property>
         <property name="hrAdditionalRemark" type="string">
-            <column name="hr_additional_remark"  />
+            <column name="hr_additional_remark" length="16777215" />
         </property>
     </class>
 </hibernate-mapping>

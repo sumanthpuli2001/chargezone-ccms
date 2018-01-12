@@ -153,6 +153,50 @@
                 <prop key="itWebService.html">itWebService1</prop>
                 <prop key="pmpFormStatusMaster.htm">pmpFormStatusMasterController1</prop>
                 <prop key="attendanceRegularizationMasterwebServices.html">attendanceRegularizationMasterwebServices1</prop>
+                 <!--Company -->
+                <prop key="companyMaster.htm">companyMasterController1</prop>
+                <!--Employee Policy Detail-->
+                <prop key="employeePolicyDetail.htm">employeePolicyDetailMasterController1</prop>
+                <!--Payroll-->
+                <prop key="payrollSavingType.htm">payrollSavingTypeController1</prop>
+                <prop key="payrollSalaryType.htm">payrollSalaryTypeController1</prop>
+                <prop key="payrollLoanType.htm">payrollLoanTypeController1</prop>
+                <prop key="payrollProfessionalTax.htm">payrollProfessionalTaxController1</prop>
+                <prop key="payrollProvidentFund.htm">payrollProvidentFundController1</prop>
+                <prop key="payrollTaxRule.htm">payrollTaxRuleController1</prop>
+                <prop key="payrollMaximumSavingTaxAmount.htm">payrollMaximumSavingTaxAmountController1</prop>
+                <prop key="payrollFinancialYear.htm">payrollFinancialYearController1</prop>
+                <prop key="payrollFormSixteenMaster.htm">payrollFormSixteenMasterController1</prop>
+                <prop key="payrollStationWiseSavingTax.htm">payrollStationWiseSavingTaxController1</prop>
+                <prop key="payrollDeduction.htm">payrollDeductionController1</prop>
+                <prop key="payrollRecurringDeduction.htm">payrollRecurringDeductionController1</prop>
+                <prop key="payrollBonus.htm">payrollBonusController1</prop>
+                <prop key="payrollCommission.htm">payrollCommissionController1</prop>
+                <prop key="payrollRecurringAdditionalAmount.htm">payrollRecurringAdditionalAmountController1</prop>
+                <prop key="payrollAdditionalAmount.htm">payrollAdditionalAmountController1</prop>
+                <prop key="employeeType.htm">employeeTypeController1</prop>
+                <prop key="employeeSubType.htm">employeeSubTypeController1</prop>
+                <prop key="payrollPfCheck.htm">payrollPfCheckController1</prop>
+                <prop key="payrollPtCheck.htm">payrollPtCheckController1</prop>
+                <prop key="employeeTypeWiseSalary.htm">employeeTypeWiseSalaryController1</prop>
+                <prop key="employeeSalaryProcess.htm">employeeSalaryProcessController1</prop>
+                <prop key="additionalAmountCheck.htm">additionalAmountCheckController1</prop>
+                <prop key="payrollSalaryLock.htm">payrollSalaryLockController1</prop>
+                <prop key="payrollEmployeeFormSixteen.htm">payrollEmployeeFormSixteenController1</prop>
+                <prop key="payrollSavingAmount.htm">payrollSavingAmountController1</prop>
+                <prop key="employeePfCheck.htm">employeePfCheckController1</prop>
+                <prop key="employeePtCheck.htm">employeePtCheckController1</prop>
+                <prop key="employeeSalarySlip.htm">employeeSalarySlipController1</prop>
+                <prop key="certificateTemplate.htm">certificateTemplateController1</prop>
+                <prop key="companyMonthlyReport.htm">companyMonthlyReportController1</prop>
+                <prop key="companyPTReport.htm">companyPTReportController1</prop>
+                <prop key="bankStatement.htm">bankStatementController1</prop>
+                <prop key="esicDeductionStatement.htm">esicDeductionStatementController1</prop>
+                <prop key="overTime.htm">overTimeController1</prop>
+                <prop key="pFChallen.htm">pFChallenController1</prop>
+                <prop key="loanReport.htm">loanReportController1</prop>
+                <prop key="attendanceReport.htm">attendanceReportController1</prop>
+                <prop key="employeeIncentiveMonthWise.htm">employeeIncentiveMonthWiseController1</prop>
                 
            
             </props>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.PayrollFormSixteenMaster" table="payroll_form_sixteen_master" catalog="hira_technology">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="payrollFinancialYear" class="com.bul.zydex.model.PayrollFinancialYear" fetch="select">
+            <column name="payroll_financial_year_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="zydexLocationMaster" class="com.bul.zydex.model.ZydexLocationMaster" fetch="select">
+            <column name="zydex_location_id" not-null="true" />
+        </many-to-one>
+        <property name="ename" type="string">
+            <column name="ename" not-null="true" />
+        </property>
+        <property name="fname" type="string">
+            <column name="fname" />
+        </property>
+        <property name="memberShip" type="string">
+            <column name="member_ship" />
+        </property>
+        <property name="date" type="string">
+            <column name="date" />
+        </property>
+        <property name="place" type="string">
+            <column name="place" />
+        </property>
+        <property name="panNo" type="string">
+            <column name="pan_no" />
+        </property>
+        <property name="tanNo" type="string">
+            <column name="tan_no" />
+        </property>
+        <set name="payrollSavingAmounts" inverse="true">
+            <key>
+                <column name="payroll_financial_year_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.PayrollSavingAmount" />
+        </set>
+    </class>
+</hibernate-mapping>

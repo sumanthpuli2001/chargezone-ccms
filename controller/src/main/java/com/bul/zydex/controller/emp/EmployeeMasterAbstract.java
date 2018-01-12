@@ -6,16 +6,23 @@
 package com.bul.zydex.controller.emp;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.Company;
 import com.bul.zydex.model.CompetencyEvaluationMaster;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.EmployeePolicyDetail;
+import com.bul.zydex.model.EmployeeSubType;
+import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.HoursBasis;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.PayrollPfCheck;
+import com.bul.zydex.model.PayrollPtCheck;
 import com.bul.zydex.model.PmpFormStatusMaster;
+import com.bul.zydex.model.PolicyMaster;
 import com.bul.zydex.model.RotationMaster;
 import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
 import com.bul.zydex.model.ShiftMaster;
@@ -23,13 +30,20 @@ import com.bul.zydex.model.ShiftRotationInfo;
 import com.bul.zydex.model.ShiftRotationMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
+import com.bul.zydex.service.EmployeePolicyDetail.EmployeePolicyDetailService;
+import com.bul.zydex.service.Payroll.PayrollPfCheckService;
+import com.bul.zydex.service.Payroll.PayrollPtCheckService;
 import com.bul.zydex.service.PmpFormStatusMaster.PmpFormStatusMasterService;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.appraisalPerformance.CompetencyEvaluationMasterService;
+import com.bul.zydex.service.company.CompanyMasterService;
+import com.bul.zydex.service.emp.EmployeeSubTypeService;
+import com.bul.zydex.service.emp.EmployeeTypeService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
 import com.bul.zydex.service.leave.LeaveTypeMasterService;
 import com.bul.zydex.service.level.LevelMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
+import com.bul.zydex.service.policy.PolicyMasterService;
 import com.bul.zydex.service.shift.HoursBasisService;
 import com.bul.zydex.service.shift.RotationMasterService;
 import com.bul.zydex.service.shift.ShiftGenerateMonthlyScheduleService;
@@ -38,6 +52,7 @@ import com.bul.zydex.service.shift.ShiftRotationInfoService;
 import com.bul.zydex.service.shift.ShiftRotationMasterService;
 import com.bul.zydex.service.zydexLocation.ZydexLocationMasterService;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -64,6 +79,13 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     protected ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService;
     protected CompetencyEvaluationMasterService<CompetencyEvaluationMaster> competencyEvaluationMasterService;
     protected PmpFormStatusMasterService<PmpFormStatusMaster> pmpFormStatusMasterService;
+    protected EmployeeTypeService<EmployeeTypeMaster> employeeTypeService;
+    protected EmployeeSubTypeService<EmployeeSubType> employeeSubTypeService;
+    protected CompanyMasterService<Company> companyMasterService;
+    protected PolicyMasterService<PolicyMaster> policyMasterService;
+    protected EmployeePolicyDetailService<EmployeePolicyDetail> employeePolicyDetailService;
+    protected PayrollPfCheckService<PayrollPfCheck> payrollPfCheckService;
+    protected PayrollPtCheckService<PayrollPtCheck> payrollPtCheckService;
 
     public CompetencyEvaluationMasterService<CompetencyEvaluationMaster> getCompetencyEvaluationMasterService() {
         return competencyEvaluationMasterService;
@@ -176,6 +198,23 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     public void setRotationMasterService(RotationMasterService<RotationMaster> rotationMasterService) {
         this.rotationMasterService = rotationMasterService;
     }
+
+    public PayrollPfCheckService<PayrollPfCheck> getPayrollPfCheckService() {
+        return payrollPfCheckService;
+    }
+
+    public void setPayrollPfCheckService(PayrollPfCheckService<PayrollPfCheck> payrollPfCheckService) {
+        this.payrollPfCheckService = payrollPfCheckService;
+    }
+
+    public PayrollPtCheckService<PayrollPtCheck> getPayrollPtCheckService() {
+        return payrollPtCheckService;
+    }
+
+    public void setPayrollPtCheckService(PayrollPtCheckService<PayrollPtCheck> payrollPtCheckService) {
+        this.payrollPtCheckService = payrollPtCheckService;
+    }
+    
 
     protected void departmentList(HttpServletRequest request) {
         DepartmentMaster departmentMaster = new DepartmentMaster();
@@ -535,7 +574,111 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     public void setPmpFormStatusMasterService(PmpFormStatusMasterService<PmpFormStatusMaster> pmpFormStatusMasterService) {
         this.pmpFormStatusMasterService = pmpFormStatusMasterService;
     }
-    
-    
+
+    public EmployeeTypeService<EmployeeTypeMaster> getEmployeeTypeService() {
+        return employeeTypeService;
+    }
+
+    public void setEmployeeTypeService(EmployeeTypeService<EmployeeTypeMaster> employeeTypeService) {
+        this.employeeTypeService = employeeTypeService;
+    }
+
+    public EmployeeSubTypeService<EmployeeSubType> getEmployeeSubTypeService() {
+        return employeeSubTypeService;
+    }
+
+    public void setEmployeeSubTypeService(EmployeeSubTypeService<EmployeeSubType> employeeSubTypeService) {
+        this.employeeSubTypeService = employeeSubTypeService;
+    }
+
+    public CompanyMasterService<Company> getCompanyMasterService() {
+        return companyMasterService;
+    }
+
+    public void setCompanyMasterService(CompanyMasterService<Company> companyMasterService) {
+        this.companyMasterService = companyMasterService;
+    }
+
+    public PolicyMasterService<PolicyMaster> getPolicyMasterService() {
+        return policyMasterService;
+    }
+
+    public void setPolicyMasterService(PolicyMasterService<PolicyMaster> policyMasterService) {
+        this.policyMasterService = policyMasterService;
+    }
+
+    public EmployeePolicyDetailService<EmployeePolicyDetail> getEmployeePolicyDetailService() {
+        return employeePolicyDetailService;
+    }
+
+    public void setEmployeePolicyDetailService(EmployeePolicyDetailService<EmployeePolicyDetail> employeePolicyDetailService) {
+        this.employeePolicyDetailService = employeePolicyDetailService;
+    }
+    protected void EmployeeTypeList(HttpServletRequest request) {
+        List<?> EmployeeTypeList = employeeTypeService.read();
+        Map<Integer, String> map = new HashMap();
+        for (Object obj : EmployeeTypeList) {
+            EmployeeTypeMaster employeeTypeMaster = (EmployeeTypeMaster) obj;
+            map.put(employeeTypeMaster.getId(), employeeTypeMaster.getTypeOfEmployee());
+        }
+        request.setAttribute("EmployeeTypeList", map);
+    }
+
+    protected void EmployeeSubTypeList(HttpServletRequest request) {
+        List<?> EmployeeSubTypeList = employeeSubTypeService.read();
+        Map<Integer, String> map = new HashMap();
+        for (Object obj : EmployeeSubTypeList) {
+            EmployeeSubType employeeSubType = (EmployeeSubType) obj;
+            map.put(employeeSubType.getId(), employeeSubType.getSubType());
+        }
+        request.setAttribute("EmployeeSubTypeList", map);
+    }
+
+    protected void EmpTypeAjaxmap(HttpServletRequest request, String empId) {
+        EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
+        RotationMaster rotationMaster = new RotationMaster();
+//        shiftRotationMaster.setId(Integer.parseInt(rotationId));
+//        rotationMaster.setShiftRotationMaster(shiftRotationMaster);
+        Map<Integer, String> shiftMap = new HashMap();
+        List<?> list = null;
+        if (!"".equals(empId)) {
+
+            int rotationId1 = Integer.parseInt(empId);
+            list = rotationMasterService.readForShift(rotationId1);
+            Iterator it = list.iterator();
+            while (it.hasNext()) {
+                Object next[] = (Object[]) it.next();
+                int shiftId = (int) next[0];
+                String shiftName = (String) next[1];
+                shiftMap.put(shiftId, shiftName);
+            }
+        }
+
+        request.setAttribute("shiftAjaxMap", shiftMap);
+    }
+
+    protected void companyList(HttpServletRequest request) {
+        Company companyMaster = new Company();
+        List<?> companyList = companyMasterService.read();
+
+        Map<Integer, String> company = new HashMap<>();
+        for (Object o : companyList) {
+            companyMaster = (Company) o;
+            company.put(companyMaster.getCompanyId(), companyMaster.getCompanyName());
+        }
+        request.setAttribute("company", company);
+    }
+
+    protected void policyList(HttpServletRequest request) {
+        PolicyMaster policyMaster = new PolicyMaster();
+        List<?> policyList = policyMasterService.read();
+
+        Map<Integer, String> policy = new HashMap<>();
+        for (Object o : policyList) {
+            policyMaster = (PolicyMaster) o;
+            policy.put(policyMaster.getId(), policyMaster.getPolicyName());
+        }
+        request.setAttribute("policy", policy);
+    }
 
 }

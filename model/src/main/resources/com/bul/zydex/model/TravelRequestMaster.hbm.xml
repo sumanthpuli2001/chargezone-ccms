@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.TravelRequestMaster" table="travel_request_master" catalog="employee_cafe">
+    <class name="com.bul.zydex.model.TravelRequestMaster" table="travel_request_master" catalog="hira_technology">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -45,13 +45,13 @@
             <column name="purpose" length="65535" />
         </property>
         <property name="empRemark" type="string">
-            <column name="emp_remark" length="16777215" />
+            <column name="emp_remark" length="65535" />
         </property>
         <property name="managerRemark" type="string">
-            <column name="manager_remark" length="16777215" />
+            <column name="manager_remark" length="65535" />
         </property>
         <property name="adminRemark" type="string">
-            <column name="admin_remark" length="16777215" />
+            <column name="admin_remark" length="65535" />
         </property>
         <property name="status" type="int">
             <column name="status" not-null="true" />
@@ -66,15 +66,9 @@
             <column name="cash_advance_status" not-null="true" />
         </property>
         <property name="cashAdvanceComment" type="string">
-            <column name="cash_advance_comment" length="16777215" />
+            <column name="cash_advance_comment" length="65535" />
         </property>
         <set name="travelDetails" inverse="true">
-            <key>
-                <column name="travel_request_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.TravelDetail" />
-        </set>
-        <set name="travelDetails_1" inverse="true">
             <key>
                 <column name="travel_request_id" not-null="true" />
             </key>
@@ -86,19 +80,7 @@
             </key>
             <one-to-many class="com.bul.zydex.model.HotelAccommodation" />
         </set>
-        <set name="hotelAccommodations_1" inverse="true">
-            <key>
-                <column name="travel_request_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.HotelAccommodation" />
-        </set>
         <set name="travelApproverHistories" inverse="true">
-            <key>
-                <column name="travel_request_master_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.TravelApproverHistory" />
-        </set>
-        <set name="travelApproverHistories_1" inverse="true">
             <key>
                 <column name="travel_request_master_id" not-null="true" />
             </key>

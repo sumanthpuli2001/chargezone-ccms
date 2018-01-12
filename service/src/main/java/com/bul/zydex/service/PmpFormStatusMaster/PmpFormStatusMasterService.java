@@ -13,5 +13,8 @@ import java.util.List;
  * @author BlackBull
  */
 public interface PmpFormStatusMasterService<T> extends GenericsService<T> {
+
     public List<?> readByPmpformstatusStatus(String employeeId);
+
+    public List<?> delete1(String employeeId);
 }

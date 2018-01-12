@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.AssetsHardware" table="assets_hardware" catalog="hira_technology">
+        <id name="assetHardwareId" type="java.lang.Integer">
+            <column name="asset_hardware_id" />
+            <generator class="identity" />
+        </id>
+        <property name="assetType" type="string">
+            <column name="asset_type" length="50" />
+        </property>
+        <property name="vendor" type="string">
+            <column name="vendor" length="50" not-null="true" />
+        </property>
+        <property name="model" type="string">
+            <column name="model" length="30" not-null="true" />
+        </property>
+        <property name="serialnumber" type="string">
+            <column name="serialnumber" length="30" />
+        </property>
+        <property name="assetTag" type="string">
+            <column name="asset_tag" length="24" />
+        </property>
+        <property name="purchaseOrder" type="string">
+            <column name="purchase_order" length="50" />
+        </property>
+        <property name="motherboard" type="string">
+            <column name="motherboard" length="100" not-null="true" />
+        </property>
+        <property name="processor" type="string">
+            <column name="processor" length="100" not-null="true" />
+        </property>
+        <property name="monitor" type="string">
+            <column name="Monitor" length="10" not-null="true" />
+        </property>
+        <property name="hdd" type="string">
+            <column name="hdd" length="100" not-null="true" />
+        </property>
+        <property name="ram" type="string">
+            <column name="ram" length="100" not-null="true" />
+        </property>
+        <property name="location" type="string">
+            <column name="location" length="50" />
+        </property>
+        <property name="datePurchase" type="string">
+            <column name="date_purchase" length="12" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="50" />
+        </property>
+        <property name="user" type="string">
+            <column name="user" length="50" />
+        </property>
+        <property name="empCode" type="string">
+            <column name="emp_code" length="10" not-null="true" />
+        </property>
+        <property name="departmenth" type="string">
+            <column name="departmenth" length="100" not-null="true" />
+        </property>
+        <property name="department" type="string">
+            <column name="department" length="100" not-null="true" />
+        </property>
+        <property name="division" type="string">
+            <column name="division" length="50" />
+        </property>
+        <property name="platform" type="string">
+            <column name="platform" length="50" />
+        </property>
+        <property name="comments" type="string">
+            <column name="comments" length="65535" />
+        </property>
+        <property name="monitorSize" type="java.lang.Integer">
+            <column name="monitor_size" />
+        </property>
+        <property name="warranty" type="string">
+            <column name="warranty" length="15" />
+        </property>
+        <property name="designation" type="string">
+            <column name="Designation" length="12" />
+        </property>
+    </class>
+</hibernate-mapping>

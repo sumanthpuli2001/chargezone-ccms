@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.PayrollPfCheck" table="payroll_pf_check" catalog="hira_technology">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="employeeTypeMaster" class="com.bul.zydex.model.EmployeeTypeMaster" fetch="select">
+            <column name="employee_type_master_id" />
+        </many-to-one>
+        <many-to-one name="employeeSubType" class="com.bul.zydex.model.EmployeeSubType" fetch="select">
+            <column name="employee_sub_type_id" />
+        </many-to-one>
+        <property name="pfCheck" type="boolean">
+            <column name="pf_check" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

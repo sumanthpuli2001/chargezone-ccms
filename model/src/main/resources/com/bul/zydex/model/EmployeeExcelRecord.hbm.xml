@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.EmployeeExcelRecord" table="employee_excel_record" catalog="hira_technology">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+       
+        <property name="workingDays" type="java.lang.Float">
+            <column name="working_days" precision="12" scale="0" />
+        </property>
+        <property name="presentDays" type="java.lang.Float">
+            <column name="present_days" precision="12" scale="0" />
+        </property>
+        <property name="casuaLeave" type="java.lang.Float">
+            <column name="casual_leave" precision="12" scale="0" />
+        </property>
+        <property name="sickLeave" type="java.lang.Float">
+            <column name="sick_leave" precision="12" scale="0" />
+        </property>
+        <property name="pleave" type="java.lang.Float">
+            <column name="p_leave" precision="12" scale="0" />
+        </property>
+        <property name="otherLeave" type="java.lang.Float">
+            <column name="other_leave" precision="12" scale="0" />
+        </property>
+        <property name="otHours" type="java.lang.Double">
+            <column name="ot_hours" precision="22" scale="0" />
+        </property>
+        <property name="otAmount" type="java.lang.Double">
+            <column name="ot_amount" precision="22" scale="0" />
+        </property>
+        <property name="month" type="string">
+            <column name="month" length="45" />
+        </property>
+        <property name="year" type="string">
+            <column name="year" length="45" />
+        </property>
+        <many-to-one name="employeeSalaryProcess" class="com.bul.zydex.model.EmployeeSalaryProcess" fetch="select">
+            <column name="employee_salary_process_id" />
+        </many-to-one>
+        <property name="lwp" type="java.lang.Double">
+            <column name="lwp" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

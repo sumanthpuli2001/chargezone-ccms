@@ -23,9 +23,9 @@
                 <!-- Logo -->
                 <a href="userMaster.htm?act=goToDashboard" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span class="logo-mini"><b>Z</b>ydex</span>
+                    <!--<span class="logo-mini"><b>Z</b>ydex</span>-->
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg"><img src="StorageYard/Images/logo.png" style="width: 160px" /></span>
+                    <!--<span class="logo-lg"><img src="StorageYard/Images/logo.png" style="width: 160px" /></span>-->
                 </a>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top" role="navigation">
@@ -35,7 +35,7 @@
                     </a>
                     <ul class="nav navbar-left">
                         <li class="hidden-xs">
-                            <font style="font-size: 30px;color: white;"><b>&nbsp&nbsp&nbsp&nbsp&nbsp Employee Cafe</b></font>
+                            <font style="font-size: 30px;color: white;"><b>&nbsp&nbsp&nbsp&nbsp&nbsp HR-POWER</b></font>
                         </li>
                     </ul>
                     <!-- Navbar Right Menu -->

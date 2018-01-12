@@ -13,6 +13,7 @@
         <title>Employee Create</title>
     </head>
 
+
     <script>
         function buttonFun1() {
             var className = $('#minusId1').attr('class');
@@ -336,6 +337,85 @@
 
         }
     </script>
+    <script>
+        function selectsubtype(typeId) {
+
+            var empSubTypeId = document.getElementById("subTypeId").value;
+//            document.getElementById('EmployeeId').innerHTML = "Fetching ... .. .";
+            $.post("employeeMaster.htm?act=readEmpTypeAjax",
+                    {
+                        typeId: typeId,
+                        empSubTypeId: empSubTypeId
+                    }, function (responseTxt, statusTxt, xhr) {
+                if (statusTxt === "success") {
+                    ("responseTxt" + responseTxt);
+                    document.getElementById('employeeSubTypeId').innerHTML = responseTxt;
+                }
+                if (statusTxt === "error")
+                    ("Error: " + xhr.status + ": " + xhr.statusText);
+            });
+        }
+
+        $(document).ready(function () {
+            var empTypeId = document.getElementById("employeeTypeMaster.id").value;
+            selectsubtype(empTypeId);
+        });
+    </script>
+    <script>
+        var tempCount3 = 1;
+        $(function () {
+            $("#policyCloneid").on("click", function () {
+                tempCount3++;
+                //                alert(tempCount3);
+                var clone = "<tr id='addmoreFile" + tempCount3 + "' style='clear:both;'>"
+                        + "<td style=\"text-align: center\">" + tempCount3 + "</td>"
+                        + "<td id=\"policyTd" + tempCount3 + "\"><div><select id='policyId" + tempCount3 + "' name='policyId" + tempCount3 + "' class=\"form-control\">"
+                        + "</select>"
+                        + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
+                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "'  min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\">"
+                        + "<span style='margin-top: 5px;'>"
+                        + "<input type=\"button\"value=\"-\"  onclick=\"removePolicy('addmoreFile" + tempCount3 + "');\"/>"
+                        + "</span>"
+                        + "</td>"
+                        + "</tr>";
+                $("#policyTable").append(clone);
+                document.getElementById('policyCount').value = tempCount3;
+//                var expenseType = document.getElementById('expenseType').value;
+                addAPolicy(tempCount3);
+
+            });
+        });
+
+        function addAPolicy(id) {
+            //                alert(id);
+            var element2 = document.getElementById('policyId1');
+            var obj2 = document.getElementById("policyId" + id);
+            for (var i2 = 0; i2 < element2.options.length; i2++) {
+                var opt2 = document.createElement("option");
+                opt2.value = element2.options[i2].value;
+                opt2.text = element2.options[i2].text;
+                obj2.appendChild(opt2);
+            }
+        }
+
+        function removePolicy(policyDiv) {
+            try {
+                tempCount3--;
+                var val = document.getElementById("policyCount").value;
+                val = val - 1;
+                document.getElementById("policyCount").value = val;
+                var element1 = document.getElementById(policyDiv);
+                element1.parentNode.removeChild(element1);
+            } catch (e) {
+
+            }
+        }
+
+    </script>
+
+
     <script>
         function setDesignation() {
 
@@ -761,15 +841,36 @@
                                                             <label>Company:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="company" id="company" class="form-control ">
                                                             <form:option value="">--SELECT--</form:option>
-                                                            <form:option value="Zydex Industries">Zydex Industries</form:option>
-                                                            <form:option value="Zydex Industries Pvt. Ltd.">Zydex Industries Pvt. Ltd.</form:option>
+                                                            <form:option value="HIRA TECHNOSOFT">HIRA TECHNOSOFT </form:option>
+                                                            <%--<form:option value="Zydex Industries Pvt. Ltd.">Zydex Industries Pvt. Ltd.</form:option>--%>
                                                         </form:select>
                                                         <form:errors path="company" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
+                                                    <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>Type of Employee :<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
+                                                            <form:option value="" label="-- Select --" ></form:option>
+                                                            <form:options items="${EmployeeTypeList}"></form:options>
+                                                        </form:select>
+                                                        <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6" id="employeeSubTypeId">
+                                                            <label>Employee SubType:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <input type="hidden" name="subTypeId" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
+                                                        <form:select path="employeeSubType.id" class="form-control">
+                                                            <form:option value="" label="-- Select --" ></form:option> 
+                                                        </form:select>
+                                                        <form:errors path="employeeSubType.id" cssClass="errorDiv"></form:errors>
+
+
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Zydex Location:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="zydexLocationMaster.id" class="form-control ">
                                                             <form:option value="" label="-- Select --" ></form:option>
                                                             <form:options items="${zydexLocationMap}"></form:options>
@@ -916,33 +1017,132 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Competency Evaluation:<span style="color: red;font-size: 12px;">*</span></label>
-                                                              <select name="competencyEvaluationId" id="competencyEvaluationId" class="form-control">
-                                                             <option value="">--SELECT--</option>
-                                                                <c:forEach var="competencyMap" items="${competencyMap}">
-                                                                    <option value="${competencyMap.key}">${competencyMap.value}</option>
+                                                            <select name="competencyEvaluationId" id="competencyEvaluationId" class="form-control">
+                                                                <option value="">--SELECT--</option>
+                                                            <c:forEach var="competencyMap" items="${competencyMap}">
+                                                                <option value="${competencyMap.key}">${competencyMap.value}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="basicSalary" class="form-control"  placeholder="Enter Basic Salary"/>
+                                                        <form:errors path="basicSalary" cssClass="errorDiv"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>Conveys:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="conveysAmount" class="form-control"   placeholder="Enter Basic Conveys"/>
+                                                            <form:errors path="conveysAmount" cssClass="errorDiv"/>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="esicNo" class="form-control"  placeholder="Enter ESIC No"/>
+                                                            <form:errors path="esicNo" cssClass="errorDiv"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <div class="col-sm-6">
+                                                        <label>TDS Amount<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="tdsAmount" class="form-control"  placeholder="Enter TDS Amount"/>
+                                                            <form:errors path="tdsAmount" cssClass="errorDiv"/>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>Company:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:select path="company"  class="form-control ">
+                                                                <form:option label="-- Select --"  value="" ></form:option>
+                                                                <c:forEach var="comp" items="${company}" >
+                                                                    <form:option value="${comp.value}">${comp.value}</form:option>
                                                                 </c:forEach>
-                                                            </select>
+                                                            </form:select>
+                                                            <form:errors path="company" cssClass="errorDiv"></form:errors>
+                                                        </div>
+
+                                                    </div> 
+                                                    <div class="form-group">
+                                                        <div class="col-sm-4">
+                                                            <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <fieldset>
+                                                                <input type="radio" name="pf" id="pf" value="false" checked>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <input type="radio" name="pf" id="pf" value="true">YES
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>Provident Tax:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <fieldset>
+                                                                <input type="radio" name="pt" id="pt" value="false" checked>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <input type="radio" name="pt" id="pt" value="true">YES
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>ESIC:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                            <fieldset>
+                                                            <form:radiobutton path="esic" value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="esic" value="true"/>YES
+                                                        </fieldset>
+                                                        <form:errors path="esic" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
-                                    <!--organization detail completes here-->
-                                    <div class="box box-info collapsed-box" id="empInfo_id">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Employee's Bank Account Detail:</h3>
-                                            <div class="box-tools pull-right">
-                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
-                                                <span id="spanId7">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7"></i></button>
-                                            </div>
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <div class="table-responsive">
+                                                            <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                                <tr>
+                                                                    <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
+                                                                    <th style="text-align: center; vertical-align: middle">Select Policy</th>
+                                                                    <th style="text-align: center; vertical-align: middle">Policy Number</th>
+                                                                    <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                    <th style="text-align: center; vertical-align: middle">Add New</th>
+                                                                <input type="hidden" name="policyCount" id="policyCount" value="1"/>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: center">1</td>
+                                                                    <td id="policyTd1"><div>
+                                                                            <select id="policyId1"  name="policyId1"  class="form-control">
+                                                                                <option value="">--SELECT--</option>
+                                                                            <c:forEach var="comp" items="${policy}" varStatus = "status">
+                                                                                <option value="${comp.key}">${comp.value}</option>
+                                                                            </c:forEach>
+                                                                        </select>
+                                                                    </div>
+                                                                    <span id="policyError1" style="color: red;"></span>
+                                                                </td>
+                                                                <td style="text-align: center">
+                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control">
+                                                                </td>
+                                                                <td style="text-align: center">
+                                                                    <input type="number" name="amount1" id="amount1" min="0" class="form-control">
+                                                                </td>
+                                                                <td style="text-align: center">
+                                                                    <span style='margin-top: 5px;'>
+                                                                        <input type="button" value="+" id="policyCloneid" />
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div><!-- /.col -->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                </div>
+                                <!--organization detail completes here-->
+                                <div class="box box-info collapsed-box" id="empInfo_id">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Employee's Bank Account Detail:</h3>
+                                        <div class="box-tools pull-right">
+                                            <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                            <span id="spanId7">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7"></i></button>
                                         </div>
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Bank Name:</label>
+                                    </div>
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>Bank Name:</label>
                                                         <form:input path="bankName" class="form-control"></form:input>
                                                         <form:errors path="bankName" cssClass="errorDiv"></form:errors>
                                                         </div>
@@ -960,7 +1160,37 @@
                                                         <form:input path="bankIfscCode" class="form-control" placeholder="(1-4: alphabets, 5th: reserved as 0, 6-11: digits) Example: SBIN0898965"></form:input>
                                                         <form:errors path="bankIfscCode" cssClass="errorDiv"></form:errors>
                                                         </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Payment Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:select path="paymentType" id="paymentType" class="form-control ">
+                                                            <option value="">--Select--</option>
+                                                            <form:option value="0">Bank</form:option>
+                                                            <form:option value="1">Cash</form:option>
+
+                                                        </form:select>
                                                     </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>PF No.:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="pfNo" id="pfNo" class="form-control"></form:input>
+                                                        <form:errors path="pfNo" cssClass="errorDiv"></form:errors>
+                                                        </div> 
+
+                                                        <div class="col-sm-6">
+                                                            <label>UAN No.:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="uanNo" id="uanNo"  class="form-control"></form:input>
+                                                        <form:errors path="uanNo" cssClass="errorDiv"></form:errors>
+                                                        </div>  
+                                                    </div>  
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>PF Amount:</label>
+                                                        <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
+                                                        <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
@@ -1717,6 +1947,7 @@
                 }
             }
         }</script>
+
 
 </html>
 

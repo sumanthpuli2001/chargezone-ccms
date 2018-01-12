@@ -138,7 +138,7 @@
                                                     </div>
 
                                                     <div class="col-sm-6" id="zydexLocationIdDiv" style="display: none;">
-                                                        <label>Zydex Location:</label>
+                                                        <label> Location:</label>
                                                         <input type="text" id="zydexLocationId" name="zydexLocationId" class="form-control">
                                                     </div>
                                                 </div>
@@ -287,7 +287,7 @@
                                                     <li>
                                                         <form:checkbox  class="checkbox1" value="zydexLocation" path="zydexLocation" />
 
-                                                        <label>Zydex Location</label>
+                                                        <label> Location</label>
                                                     </li>
                                                     <li>
                                                         <form:checkbox  class="checkbox1" value="workLocation" path="workLocation" />

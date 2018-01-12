@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.PayrollFinancialYear" table="payroll_financial_year" catalog="hira_technology">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="zydexLocationMaster" class="com.bul.zydex.model.ZydexLocationMaster" fetch="select">
+            <column name="zydex_location_id" not-null="true" />
+        </many-to-one>
+        <property name="startDate" type="string">
+            <column name="start_date" />
+        </property>
+        <property name="endDate" type="string">
+            <column name="end_date" />
+        </property>
+        <property name="title" type="string">
+            <column name="title" />
+        </property>
+        <set name="payrollFormSixteenMasters" inverse="true">
+            <key>
+                <column name="payroll_financial_year_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.PayrollFormSixteenMaster" />
+        </set>
+    </class>
+</hibernate-mapping>

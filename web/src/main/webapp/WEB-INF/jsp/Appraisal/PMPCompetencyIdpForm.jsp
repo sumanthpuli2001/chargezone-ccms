@@ -291,7 +291,7 @@
 
                                     <div class="box box-info collapsed-box displayAction">
                                         <div class="box-header">
-                                            <h3 class="box-title">Competency Evaluation (As Per Zydex Competency Framework) :${cpmname}</h3>
+                                            <h3 class="box-title">Competency Evaluation (As Per Bulwark Systems Competency Framework) :${cpmname}</h3>
                                             <div class="box-tools pull-right">
                                                 <span id="spanId3">Expand</span><span class="btn btn-box-tool" id="btn4" data-widget="collapse" onclick="
                                                         buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></span>

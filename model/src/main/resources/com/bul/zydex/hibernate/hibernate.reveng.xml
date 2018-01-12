@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
-  <schema-selection match-catalog="employee_cafe"/>
+  <schema-selection match-catalog="hira_technology"/>
   <table-filter match-name="visitor_visited_location"/>
   <table-filter match-name="cafeteria_request"/>
   <table-filter match-name="currency_master"/>
@@ -72,7 +72,7 @@
   <table-filter match-name="improvement_goal"/>
   <table-filter match-name="probation_to_confirmation"/>
   <table-filter match-name="goal_resource_management"/>
-  <!--<table-filter match-name="appraisal_kra_activity"/>-->
+  <table-filter match-name="appraisal_kra_activity"/>
   <table-filter match-name="query_type"/>
   <table-filter match-name="travel_detail"/>
   <table-filter match-name="zydex_location_master"/>
@@ -95,4 +95,6 @@
   <table-filter match-name="email_add_master"/>
   <table-filter match-name="employee_punch_data_for_mobile_app"/>
   <table-filter match-name="device_master_notification"/>
+  
+  
 </hibernate-reverse-engineering>

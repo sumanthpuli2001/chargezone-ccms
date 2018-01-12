@@ -340,7 +340,7 @@
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
                                 <!--<span style="color: red;font-size: 14px;">* indicates mandatory field.</span>-->
-                                <h4 class="box-title">The Purpose Of This Performance Improvement Plan (PIP) Is To Define Serious Areas Of Concern, Gaps In Your Work Performance, Reiterate <b>Zydex</b> Expectations, And Allow You The Opportunity To Demonstrate Improvement And Commitment.</h4>
+                                <h4 class="box-title">The Purpose Of This Performance Improvement Plan (PIP) Is To Define Serious Areas Of Concern, Gaps In Your Work Performance, Reiterate <b></b> Expectations, And Allow You The Opportunity To Demonstrate Improvement And Commitment.</h4>
                                 <form:form action="performanceImprovementPlanMaster.htm?act=createSubmit" method="post" commandName=""
                                            name='form1'  class="form-horizontal" role="form">
                                     <input type="hidden" name="pip_id" id="pip_id" value="${performanceImprovementPlanMaster.id}">

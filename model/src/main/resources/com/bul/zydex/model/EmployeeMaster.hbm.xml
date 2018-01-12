@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.EmployeeMaster" table="employee_master" catalog="employee_cafe">
+    <class name="com.bul.zydex.model.EmployeeMaster" table="employee_master" catalog="hira_technology">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -13,6 +13,12 @@
         </many-to-one>
         <many-to-one name="designationMaster" class="com.bul.zydex.model.DesignationMaster" fetch="select">
             <column name="designation_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="employeeTypeMaster" class="com.bul.zydex.model.EmployeeTypeMaster" fetch="select">
+            <column name="type_of_employee" />
+        </many-to-one>
+        <many-to-one name="employeeSubType" class="com.bul.zydex.model.EmployeeSubType" fetch="select">
+            <column name="employee_sub_type" />
         </many-to-one>
         <many-to-one name="zydexLocationMaster" class="com.bul.zydex.model.ZydexLocationMaster" fetch="select">
             <column name="zydex_location_id" not-null="true" />
@@ -199,7 +205,34 @@
         <property name="competencyEvaluationId" type="java.lang.Integer">
             <column name="competency_evaluation_id"/>
         </property>
-    
+        <property name="paymentType" type="string">
+            <column name="payment_type" length="65" />
+        </property>
+        <property name="pfNo" type="string">
+            <column name="pf_no" length="65" />
+        </property>
+        <property name="uanNo" type="string">
+            <column name="uan_no" length="65" />
+        </property>
+        <property name="basicSalary" type="string">
+            <column name="basic_salary" length="45" />
+        </property>
+        <property name="conveysAmount" type="string">
+            <column name="conveys_amount" length="45" />
+        </property>
+        <property name="esicNo" type="string">
+            <column name="esic_no" length="45" />
+        </property>
+        <property name="tdsAmount" type="string">
+            <column name="tds_amount" length="45" />
+        </property>
+        <property name="esic" type="java.lang.Boolean">
+            <column name="esic">
+            </column>
+        </property>
+        <property name="pfAmount" type="string">
+            <column name="pf_amount" length="45" />
+        </property>
         <set name="employeeDatetimeDatas" inverse="true">
             <key>
                 <column name="employee_master_id" />
@@ -458,12 +491,7 @@
             </key>
             <one-to-many class="com.bul.zydex.model.PoolCarRequest" />
         </set>
-        <set name="overTimeMasters" inverse="true">
-            <key>
-                <column name="employee_master_id" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.OverTimeMaster" />
-        </set>
+        
         <set name="poolCarRequestsForAdminApproverId" inverse="true">
             <key>
                 <column name="admin_approver_id" />
@@ -716,12 +744,7 @@
             </key>
             <one-to-many class="com.bul.zydex.model.PerformanceImprovementPlanMaster" />
         </set>
-        <set name="overTimeMasters_1" inverse="true">
-            <key>
-                <column name="employee_master_id" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.OverTimeMaster" />
-        </set>
+        
         <set name="employeeShiftDatas_1" inverse="true">
             <key>
                 <column name="employee_master_id" />
@@ -805,6 +828,66 @@
                 <column name="employee_master_id" />
             </key>
             <one-to-many class="com.bul.zydex.model.EmployeePunchForMobileApp" />
+        </set>
+        <set name="payrollSavingAmounts" inverse="true">
+            <key>
+                <column name="employee_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.PayrollSavingAmount" />
+        </set>
+        <set name="payrollRecurringDeductions" inverse="true">
+            <key>
+                <column name="employee_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.PayrollRecurringDeduction" />
+        </set>
+        <set name="payrollAdditionalAmounts" inverse="true">
+            <key>
+                <column name="employee_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.PayrollAdditionalAmount" />
+        </set>
+        <set name="payrollBonuses" inverse="true">
+            <key>
+                <column name="employee_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.PayrollBonus" />
+        </set>
+        <set name="employeeSalaryProcesses" inverse="true">
+            <key>
+                <column name="employee_master_id" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.EmployeeSalaryProcess" />
+        </set>
+        <set name="payrollCommissions" inverse="true">
+            <key>
+                <column name="employee_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.PayrollCommission" />
+        </set>
+        <set name="overTimeMasters" inverse="true">
+            <key>
+                <column name="employee_master_id" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.OverTimeMaster" />
+        </set>
+        <set name="payrollRecurringAdditionalAmounts" inverse="true">
+            <key>
+                <column name="employee_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.PayrollRecurringAdditionalAmount" />
+        </set>
+        <set name="payrollDeductions" inverse="true">
+            <key>
+                <column name="employee_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.PayrollDeduction" />
+        </set>
+        <set name="employeePolicyDetail" inverse="true">
+            <key>
+                <column name="employee_master_id" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.EmployeePolicyDetail" />
         </set>
     
     </class>

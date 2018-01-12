@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.PayrollLoanDetail" table="payroll_loan_detail" catalog="hira_technology">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="employeeMaster" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="employee_master_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="payrollLoanType" class="com.bul.zydex.model.PayrollLoanType" fetch="select">
+            <column name="payroll_loan_type_id" not-null="true" />
+        </many-to-one>
+        <property name="loanAmount" type="java.lang.Double">
+            <column name="loan_amount" precision="22" scale="0" />
+        </property>
+        <property name="monltyEmi" type="java.lang.Double">
+            <column name="monlty_emi" precision="22" scale="0" />
+        </property>
+        <property name="monthyInstallment" type="java.lang.Double">
+            <column name="monthy_installment" precision="22" scale="0" />
+        </property>
+        <property name="startDate" type="string">
+            <column name="start_date" not-null="true" />
+        </property>
+        <property name="endDate" type="string">
+            <column name="end_date" not-null="true" />
+        </property>
+        <property name="instRate" type="string">
+            <column name="inst_rate" not-null="true" />
+        </property>
+         <property name="opRemainingBal" type="java.lang.Double">
+            <column name="op_remaining_bal" precision="22" scale="0" />
+        </property>
+         <property name="monthlyRateAmount" type="java.lang.Double">
+            <column name="monthly_rate_amount" precision="22" scale="0" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

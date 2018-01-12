@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 22, 2016 1:37:15 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.AppraisalPerformanceKra" table="appraisal_performance_kra" catalog="employee_cafe">
+    <class name="com.bul.zydex.model.AppraisalPerformanceKra" table="appraisal_performance_kra" catalog="hira_technology">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -87,18 +87,6 @@
         </property>
         <property name="finalScoreManager" type="string">
             <column name="final_score_manager" />
-        </property>
-        <property name="midyearEmpSelfassStatus" type="int">
-            <column name="midyear_emp_selfass_status" not-null="true" />
-        </property>
-        <property name="midyearManagerSelfassStatus" type="int">
-            <column name="midyear_manager_selfass_status" not-null="true" />
-        </property>
-        <property name="endyearEmpSelfassStatus" type="int">
-            <column name="endyear_emp_selfass_status" not-null="true" />
-        </property>
-        <property name="endyearManagerSelfassStatus" type="int">
-            <column name="endyear_manager_selfass_status" not-null="true" />
         </property>
         <set name="updateAppraisalPerformanceKras" inverse="true">
             <key>

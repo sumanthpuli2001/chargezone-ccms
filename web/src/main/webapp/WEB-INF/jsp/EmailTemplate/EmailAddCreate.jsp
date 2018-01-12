@@ -66,7 +66,7 @@
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
-                                <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
+                                <!--<span style="color: red;font-size: 14px;">* indicates mandatory field.</span>-->
                                 <c:if test="${!empty successMessage}">
                                     <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
                                 </c:if>
@@ -78,7 +78,7 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-3">
-                                            <label class="control-label">Enter Module Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <label class="control-label">Enter Module Name:<span style="color: red;font-size: 12px;"></span></label>
                                         </div>
                                         <div class="col-sm-6">
                                             <form:select path="moduleName" class="form-control">
@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-3">
-                                            <label class="control-label">Department :<span style="color: red;font-size: 12px;">*</span></label>
+                                            <label class="control-label">Department :<span style="color: red;font-size: 12px;"></span></label>
                                         </div>
                                         <div class="col-sm-6">
                                             <form:select path="departmentMaster.id" class="form-control">

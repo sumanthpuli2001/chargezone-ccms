@@ -528,7 +528,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Zydex Location:</label>
+                                                            <label> Location:</label>
                                                         <form:select path="zydexLocationMaster.id" class="form-control" disabled="true">
                                                             <%--<form:option value="" label="-- Select --" ></form:option>--%>
                                                             <form:options items="${zydexLocationMap}"></form:options>

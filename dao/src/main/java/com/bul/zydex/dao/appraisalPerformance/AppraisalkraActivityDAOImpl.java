@@ -6,7 +6,7 @@
 package com.bul.zydex.dao.appraisalPerformance;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
-import com.bul.zydex.model.AppraisalkraActivity;
+import com.bul.zydex.model.AppraisalKraActivity;
 import java.util.List;
 
 /**
@@ -17,12 +17,12 @@ public class AppraisalkraActivityDAOImpl<T> extends GenericsDAOImpl<T> implement
 
     @Override
     protected Class getDomainClass() {
-        return AppraisalkraActivity.class;
+        return AppraisalKraActivity.class;
     }
-    
-     @Override
+
+    @Override
     public List<?> readByKraGoalName(T object) {
-          AppraisalkraActivity appraisalkraActivity = (AppraisalkraActivity) object; 
+        AppraisalKraActivity appraisalkraActivity = (AppraisalKraActivity) object;
         String query = "";
 
         query += " FROM AppraisalkraActivity a"
@@ -31,9 +31,10 @@ public class AppraisalkraActivityDAOImpl<T> extends GenericsDAOImpl<T> implement
 
         return getHibernateTemplate().find(query);
     }
-     @Override
+
+    @Override
     public List<?> readByActivitiesName(T object) {
-          AppraisalkraActivity appraisalkraActivity = (AppraisalkraActivity) object; 
+        AppraisalKraActivity appraisalkraActivity = (AppraisalKraActivity) object;
         String query = "";
 
         query += " FROM AppraisalkraActivity a"

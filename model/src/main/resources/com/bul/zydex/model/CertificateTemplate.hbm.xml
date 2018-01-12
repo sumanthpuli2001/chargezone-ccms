@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.CertificateTemplate" table="certificate_template" catalog="hira_technology">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="certificateName" type="string">
+            <column name="certificate_Name" length="45" not-null="true" />
+        </property>
+        <property name="certificateType" type="string">
+            <column name="certificate_Type" length="45" not-null="true" />
+        </property>
+        
+        <property name="certificateTitle" type="string">
+            <column name="certificate_Title" not-null="true" />
+        </property>
+       
+        <property name="certificateBody" type="string">
+            <column name="certificate_Body" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -24,6 +24,18 @@
         }
 
     </script>
+    <script>
+        jQuery.noConflict();
+        jQuery(document).ready(function () {
+            jQuery("#employeeName").tokenInput(${list}, {
+                preventDuplicates: true,
+                noResultsText: "No Result",
+                tokenLimit: "1",
+                searchingText: "Searching ... .. .",
+            });
+        });
+
+    </script>
 
 
 
@@ -608,18 +620,7 @@
                 });
             });
         </script>-->
-    <script>
-        jQuery.noConflict();
-            jQuery(document).ready(function () {
-            jQuery("#employeeName").tokenInput(${list}, {
-                        preventDuplicates: true,
-                        noResultsText: "No Result",
-                        tokenLimit: "1",
-                    searchingText: "Searching ... .. .",
-                });
-        });
 
-    </script>
 
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
     <!--    <script>

@@ -351,6 +351,120 @@
     </bean>  
     <bean id="registerMobForPunchService1" class="com.bul.zydex.service.RegisterMobForPunch.RegisterMobForPunchServiceImpl">
         <property name="registerMobForPunchDAO" ref="registerMobForPunchDAO1"/>
+    </bean>
+     <!--PayRoll-->
+    <bean id="payrollSavingTypeService1" class="com.bul.zydex.service.Payroll.PayrollSavingTypeServiceImpl">
+        <property name="payrollSavingTypeDAO" ref="payrollSavingTypeDAO1" />
+    </bean>
+    <bean id="payrollSalaryTypeService1" class="com.bul.zydex.service.Payroll.PayrollSalaryTypeServiceImpl">
+        <property name="payrollSalaryTypeDAO" ref="payrollSalaryTypeDAO1" />
+    </bean>
+
+    <bean id="payrollLoanTypeService1" class="com.bul.zydex.service.Payroll.PayrollLoanTypeServiceImpl">
+        <property name="payrollLoanTypeDAO" ref="payrollLoanTypeDAO1" />
+    </bean>
+    <bean id="payrollProfessionalTaxService1" class="com.bul.zydex.service.Payroll.PayrollProfessionalTaxServiceImpl">
+        <property name="payrollProfessionalTaxDAO" ref="payrollProfessionalTaxDAO1"/>
+    </bean>
+    <bean id="payrollProvidentFundService1" class="com.bul.zydex.service.Payroll.PayrollProvidentFundServiceImpl">
+        <property name="payrollProvidentFundDAO" ref="payrollProvidentFundDAO1"/>
+    </bean>
+    <bean id="payrollTaxRuleService1" class="com.bul.zydex.service.Payroll.PayrollTaxRuleServiceImpl">
+        <property name="payrollTaxRuleDAO" ref="payrollTaxRuleDAO1"/>
+    </bean>
+    <bean id="payrollMaximumSavingTaxAmountService1" class="com.bul.zydex.service.Payroll.PayrollMaximumSavingTaxAmountServiceImpl">
+        <property name="payrollMaximumSavingTaxAmountDAO" ref="payrollMaximumSavingTaxAmountDAO1"/>
+    </bean>
+    <bean id="payrollDeductionService1" class="com.bul.zydex.service.Payroll.PayrollDeductionServiceImpl">
+        <property name="payrollDeductionDAO" ref="payrollDeductionDAO1"/>
+    </bean>
+    <bean id="payrollRecurringDeductionService1" class="com.bul.zydex.service.Payroll.PayrollRecurringDeductionServiceImpl">
+        <property name="payrollRecurringDeductionDAO" ref="payrollRecurringDeductionDAO1"/>
+    </bean>
+    <bean id="payrollAdditionalAmountService1" class="com.bul.zydex.service.Payroll.PayrollAdditionalAmountServiceImpl">
+        <property name="payrollAdditionalAmountDAO" ref="payrollAdditionalAmountDAO1"/>
+    </bean>
+    <bean id="payrollRecurringAdditionalAmountService1" class="com.bul.zydex.service.Payroll.PayrollRecurringAdditionalAmountServiceImpl">
+        <property name="payrollRecurringAdditionalAmountDAO" ref="payrollRecurringAdditionalAmountDAO1"/>
+    </bean>
+    <bean id="payrollCommissionService1" class="com.bul.zydex.service.Payroll.PayrollCommissionServiceImpl">
+        <property name="payrollCommissionDAO" ref="payrollCommissionDAO1"/>
+    </bean>
+    <bean id="payrollBonusService1" class="com.bul.zydex.service.Payroll.PayrollBonusServiceImpl">
+        <property name="payrollBonusDAO" ref="payrollBonusDAO1"/>
+    </bean>
+    <bean id="payrollFinancialYearService1" class="com.bul.zydex.service.Payroll.PayrollFinancialYearServiceImpl">
+        <property name="payrollFinancialYearDAO" ref="payrollFinancialYearDAO1" />
+    </bean>
+    <bean id="payrollFormSixteenMasterService1" class="com.bul.zydex.service.Payroll.PayrollFormSixteenMasterServiceImpl">
+        <property name="payrollFormSixteenMasterDAO" ref="payrollFormSixteenMasterDAO1" />
+    </bean>
+    <bean id="payrollStationWiseSavingTaxService1" class="com.bul.zydex.service.Payroll.PayrollStationWiseSavingTaxServiceImpl">
+        <property name="payrollStationWiseSavingTaxDAO" ref="payrollStationWiseSavingTaxDAO1" />
+    </bean>
+    <bean id="employeeTypeService1" class="com.bul.zydex.service.emp.EmployeeTypeServiceImpl">
+        <property name="employeeTypeDAO" ref="employeeTypeDAO1" />
+    </bean>
+    
+    <bean id="employeeSubTypeService1" class="com.bul.zydex.service.emp.EmployeeSubTypeServiceImpl">
+        <property name="employeeSubTypeDAO" ref="employeeSubTypeDAO1" />
+    </bean>
+    <bean id="payrollPfCheckService1" class="com.bul.zydex.service.Payroll.PayrollPfCheckServiceImpl">
+        <property name="payrollPfCheckDAO" ref="payrollPfCheckDAO1" />
+    </bean>
+    <bean id="payrollPtCheckService1" class="com.bul.zydex.service.Payroll.PayrollPtCheckServiceImpl">
+        <property name="payrollPtCheckDAO" ref="payrollPtCheckDAO1" />
+    </bean>
+    <bean id="employeeMultipleSalaryService1" class="com.bul.zydex.service.Payroll.EmployeeMultipleSalaryServiceImpl">
+        <property name="employeeMultipleSalaryDAO" ref="employeeMultipleSalaryDAO1" />
+    </bean>
+    <bean id="employeeTypeWiseSalaryService1" class="com.bul.zydex.service.Payroll.EmployeeTypeWiseSalaryServiceImpl">
+        <property name="employeeTypeWiseSalaryDAO" ref="employeeTypeWiseSalaryDAO1" />
+    </bean>
+    <bean id="employeeAdditionalSalaryService1" class="com.bul.zydex.service.Payroll.EmployeeAdditionalSalaryServiceImpl">
+        <property name="employeeAdditionalSalaryDAO" ref="employeeAdditionalSalaryDAO1" />
+    </bean>
+    <bean id="employeeDeductionAmountService1" class="com.bul.zydex.service.Payroll.EmployeeDeductionAmountServiceImpl">
+        <property name="employeeDeductionAmountDAO" ref="employeeDeductionAmountDAO1" />
+    </bean>
+    <bean id="employeeSalaryProcessService1" class="com.bul.zydex.service.Payroll.EmployeeSalaryProcessServiceImpl">
+        <property name="employeeSalaryProcessDAO" ref="employeeSalaryProcessDAO1" />
+    </bean>
+    <bean id="additionalAmountCheckService1" class="com.bul.zydex.service.Payroll.AdditionalAmountCheckServiceImpl">
+        <property name="additionalAmountCheckDAO" ref="additionalAmountCheckDAO1" />
+    </bean>
+    <bean id="payrollSalaryLockService1" class="com.bul.zydex.service.Payroll.PayrollSalaryLockServiceImpl">
+        <property name="payrollSalaryLockDAO" ref="payrollSalaryLockDAO1" />
+    </bean>
+    <bean id="payrollSavingAmountService1" class="com.bul.zydex.service.Payroll.PayrollSavingAmountServiceImpl">
+        <property name="payrollSavingAmountDAO" ref="payrollSavingAmountDAO1" />
+    </bean>
+    <bean id="certificateTemplateService1" class="com.bul.zydex.service.Payroll.CertificateTemplateServiceImpl">
+        <property name="certificateTemplateDAO" ref="certificateTemplateDAO1" />
+    </bean>
+    <bean id="employeeExcelRecordService1" class="com.bul.zydex.service.Payroll.EmployeeExcelRecordServiceImpl">
+        <property name="employeeExcelRecordDAO" ref="employeeExcelRecordDAO1" />
+    </bean>
+    <bean id="companyMasterService1" class="com.bul.zydex.service.company.CompanyMasterServiceImpl">
+        <property name="companyMasterDAO" ref="companyMasterDAO1" />
+    </bean>
+    <bean id="employeePolicyDetailService1" class="com.bul.zydex.service.EmployeePolicyDetail.EmployeePolicyDetailServiceImpl">
+        <property name="employeePolicyDetailDAO" ref="employeePolicyDetailDAO1" />
+    </bean>
+    <bean id="payrollLoanDetailService1" class="com.bul.zydex.service.Payroll.PayrollLoanDetailServiceImpl">
+        <property name="payrollLoanDetailDAO" ref="payrollLoanDetailDAO1" />
+    </bean>
+    <bean id="payrollEsicDeductionService1" class="com.bul.zydex.service.Payroll.PayrollEsicDeductionServiceImpl">
+        <property name="payrollEsicDeductionDAO" ref="payrollEsicDeductionDAO1" />
+    </bean>
+    <bean id="payrollLoanRemainingAmountService1" class="com.bul.zydex.service.Payroll.PayrollLoanRemainingAmountServiceImpl">
+        <property name="payrollLoanRemainingAmountDAO" ref="payrollLoanRemainingAmountDAO1" />
+    </bean>
+    <bean id="employeeIncentiveMonthwiseService1" class="com.bul.zydex.service.Payroll.EmployeeIncentiveMonthwiseServiceImpl">
+        <property name="employeeIncentiveMonthwiseDAO" ref="employeeIncentiveMonthwiseDAO1" />
+    </bean>
+    <bean id="employeePayrollIncentiveService1" class="com.bul.zydex.service.Payroll.EmployeePayrollIncentiveServiceImpl">
+        <property name="employeePayrollIncentiveDAO" ref="employeePayrollIncentiveDAO1" />
     </bean>  
     <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
         <property name="beanNames">

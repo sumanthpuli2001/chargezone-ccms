@@ -16,6 +16,8 @@ public class EmployeeMaster implements java.io.Serializable {
     private DepartmentMaster departmentMaster;
     private LocationMaster locationMaster;
     private UserMaster userMaster;
+    private EmployeeTypeMaster employeeTypeMaster;
+    private EmployeeSubType employeeSubType;
     private String employeeId;
     private String employeeName;
     private String dateOfJoining;
@@ -73,6 +75,15 @@ public class EmployeeMaster implements java.io.Serializable {
     private String dateOfBirthOfEmpChild2;
     private String dateOfTransferOfEntity;
     private Integer competencyEvaluationId;
+    private String basicSalary;
+    private String conveysAmount;
+    private String esicNo;
+    private String tdsAmount;
+    private String paymentType;
+    private String pfNo;
+    private String uanNo;
+    private Boolean esic;
+    private String pfAmount;
     private Set employeeDatetimeDatas = new HashSet(0);
     private Set visitorManagementsForApproverId = new HashSet(0);
     private Set travelRequestMastersForApprover2Id = new HashSet(0);
@@ -174,6 +185,15 @@ public class EmployeeMaster implements java.io.Serializable {
     private Set hrServiceRequestsForEmployeeMasterId_1 = new HashSet(0);
     private Set hrServiceRequestsForHrApproveId_1 = new HashSet(0);
     private Set employeePunchForMobileApps = new HashSet(0);
+    private Set employeePolicyDetail = new HashSet(0);
+    private Set payrollSavingAmounts = new HashSet(0);
+    private Set payrollRecurringDeductions = new HashSet(0);
+    private Set payrollAdditionalAmounts = new HashSet(0);
+    private Set payrollBonuses = new HashSet(0);
+    private Set employeeSalaryProcesses = new HashSet(0);
+    private Set payrollCommissions = new HashSet(0);
+    private Set payrollRecurringAdditionalAmounts = new HashSet(0);
+    private Set payrollDeductions = new HashSet(0);
 
     public EmployeeMaster() {
     }
@@ -191,7 +211,7 @@ public class EmployeeMaster implements java.io.Serializable {
         this.shiftType = shiftType;
     }
 
-    public EmployeeMaster(LevelMaster levelMaster, DesignationMaster designationMaster, ZydexLocationMaster zydexLocationMaster, DepartmentMaster departmentMaster, LocationMaster locationMaster, UserMaster userMaster, String employeeId, String employeeName, String dateOfJoining, String role, String company, String emailAddress, String contactNo1, String contactNo2, String fatherName, String motherName, String dateOfBirth, Boolean gender, String maritalStatus, String spouseName, String emergencyContactPerson, String emergencyContactNo, String panCard, String passportNo, String passportIssueDate, String passportExpiryDate, String dateOfLeaving, String reasonForLeaving, String reportingManagerLevel1, String reportingManagerLevel2, String reportingManagerLevel3, String reportingManagerLevel4, String reportingManagerLevel5, String reportingManagerLevel6, String employeeType, String shiftType, Integer shiftHoursId, String officeEmailId, String child1, String child2, String highestEducationDetails, String experienceYearOnDoj, String permanentAddress, String presentAddress, String adharCard, String drivingLicence, String lastYearPerformanceRating, String bloodGroups, String shiftRotationDate, String govLicenceName, String maritalStatusOthers, String experienceMonthOnDoj, String bankName, String bankAccountNo, String bankIfscCode, String cityOfEmployee, String dateOfBirthOfEmpFather, String dateOfBirthOfEmpMother, String dateOfBirthOfEmpSpous, String dateOfBirthOfEmpChilld1, String dateOfBirthOfEmpChild2, String dateOfTransferOfEntity, Integer competencyEvaluationId) {
+    public EmployeeMaster(LevelMaster levelMaster, DesignationMaster designationMaster, ZydexLocationMaster zydexLocationMaster, DepartmentMaster departmentMaster, LocationMaster locationMaster, UserMaster userMaster, String employeeId, String employeeName, String dateOfJoining, String role, String company, String emailAddress, String contactNo1, String contactNo2, String fatherName, String motherName, String dateOfBirth, Boolean gender, String maritalStatus, String spouseName, String emergencyContactPerson, String emergencyContactNo, String panCard, String passportNo, String passportIssueDate, String passportExpiryDate, String dateOfLeaving, String reasonForLeaving, String reportingManagerLevel1, String reportingManagerLevel2, String reportingManagerLevel3, String reportingManagerLevel4, String reportingManagerLevel5, String reportingManagerLevel6, String employeeType, String shiftType, Integer shiftHoursId, String officeEmailId, String child1, String child2, String highestEducationDetails, String experienceYearOnDoj, String permanentAddress, String presentAddress, String adharCard, String drivingLicence, String lastYearPerformanceRating, String bloodGroups, String shiftRotationDate, String govLicenceName, String maritalStatusOthers, String experienceMonthOnDoj, String bankName, String bankAccountNo, String bankIfscCode, String cityOfEmployee, String dateOfBirthOfEmpFather, String dateOfBirthOfEmpMother, String dateOfBirthOfEmpSpous, String dateOfBirthOfEmpChilld1, String dateOfBirthOfEmpChild2, String dateOfTransferOfEntity, Integer competencyEvaluationId, EmployeeTypeMaster employeeTypeMaster, EmployeeSubType employeeSubType, String basicSalary, String conveysAmount, String esicNo, String tdsAmount, String paymentType, String pfNo, String uanNo, Boolean esic,String pfAmount, Set payrollSavingAmounts, Set payrollRecurringDeductions, Set payrollAdditionalAmounts, Set payrollBonuses, Set employeeSalaryProcesses, Set payrollCommissions, Set payrollRecurringAdditionalAmounts, Set payrollDeductions, Set employeePolicyDetail) {
         this.levelMaster = levelMaster;
         this.designationMaster = designationMaster;
         this.zydexLocationMaster = zydexLocationMaster;
@@ -255,6 +275,26 @@ public class EmployeeMaster implements java.io.Serializable {
         this.dateOfBirthOfEmpChild2 = dateOfBirthOfEmpChild2;
         this.dateOfTransferOfEntity = dateOfTransferOfEntity;
         this.competencyEvaluationId = competencyEvaluationId;
+        this.employeeTypeMaster = employeeTypeMaster;
+        this.employeeSubType = employeeSubType;
+        this.basicSalary = basicSalary;
+        this.conveysAmount = conveysAmount;
+        this.esicNo = esicNo;
+        this.tdsAmount = tdsAmount;
+        this.paymentType = paymentType;
+        this.pfNo = pfNo;
+        this.uanNo = uanNo;
+        this.esic = esic;
+        this.pfAmount = pfAmount;
+        this.payrollSavingAmounts = payrollSavingAmounts;
+        this.payrollRecurringDeductions = payrollRecurringDeductions;
+        this.payrollAdditionalAmounts = payrollAdditionalAmounts;
+        this.payrollBonuses = payrollBonuses;
+        this.employeeSalaryProcesses = employeeSalaryProcesses;
+        this.payrollCommissions = payrollCommissions;
+        this.payrollRecurringAdditionalAmounts = payrollRecurringAdditionalAmounts;
+        this.payrollDeductions = payrollDeductions;
+        this.employeePolicyDetail = employeePolicyDetail;
     }
 
     public Integer getId() {
@@ -760,8 +800,6 @@ public class EmployeeMaster implements java.io.Serializable {
     public void setDateOfTransferOfEntity(String dateOfTransferOfEntity) {
         this.dateOfTransferOfEntity = dateOfTransferOfEntity;
     }
-
-   
 
     public Set getEmployeeDatetimeDatas() {
         return employeeDatetimeDatas;
@@ -1579,6 +1617,165 @@ public class EmployeeMaster implements java.io.Serializable {
         this.competencyEvaluationId = competencyEvaluationId;
     }
 
+    public EmployeeTypeMaster getEmployeeTypeMaster() {
+        return employeeTypeMaster;
+    }
 
+    public void setEmployeeTypeMaster(EmployeeTypeMaster employeeTypeMaster) {
+        this.employeeTypeMaster = employeeTypeMaster;
+    }
+
+    public EmployeeSubType getEmployeeSubType() {
+        return employeeSubType;
+    }
+
+    public void setEmployeeSubType(EmployeeSubType employeeSubType) {
+        this.employeeSubType = employeeSubType;
+    }
+
+    public String getBasicSalary() {
+        return basicSalary;
+    }
+
+    public void setBasicSalary(String basicSalary) {
+        this.basicSalary = basicSalary;
+    }
+
+    public String getConveysAmount() {
+        return conveysAmount;
+    }
+
+    public void setConveysAmount(String conveysAmount) {
+        this.conveysAmount = conveysAmount;
+    }
+
+    public String getEsicNo() {
+        return esicNo;
+    }
+
+    public void setEsicNo(String esicNo) {
+        this.esicNo = esicNo;
+    }
+
+    public String getTdsAmount() {
+        return tdsAmount;
+    }
+
+    public void setTdsAmount(String tdsAmount) {
+        this.tdsAmount = tdsAmount;
+    }
+
+    public Set getEmployeePolicyDetail() {
+        return employeePolicyDetail;
+    }
+
+    public void setEmployeePolicyDetail(Set employeePolicyDetail) {
+        this.employeePolicyDetail = employeePolicyDetail;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    public String getPfNo() {
+        return pfNo;
+    }
+
+    public void setPfNo(String pfNo) {
+        this.pfNo = pfNo;
+    }
+
+    public String getUanNo() {
+        return uanNo;
+    }
+
+    public void setUanNo(String uanNo) {
+        this.uanNo = uanNo;
+    }
+
+    public Boolean getEsic() {
+        return esic;
+    }
+
+    public void setEsic(Boolean esic) {
+        this.esic = esic;
+    }
+
+    public String getPfAmount() {
+        return pfAmount;
+    }
+
+    public void setPfAmount(String pfAmount) {
+        this.pfAmount = pfAmount;
+    }
+    
+
+    public Set getPayrollSavingAmounts() {
+        return payrollSavingAmounts;
+    }
+
+    public void setPayrollSavingAmounts(Set payrollSavingAmounts) {
+        this.payrollSavingAmounts = payrollSavingAmounts;
+    }
+
+    public Set getPayrollRecurringDeductions() {
+        return payrollRecurringDeductions;
+    }
+
+    public void setPayrollRecurringDeductions(Set payrollRecurringDeductions) {
+        this.payrollRecurringDeductions = payrollRecurringDeductions;
+    }
+
+    public Set getPayrollAdditionalAmounts() {
+        return payrollAdditionalAmounts;
+    }
+
+    public void setPayrollAdditionalAmounts(Set payrollAdditionalAmounts) {
+        this.payrollAdditionalAmounts = payrollAdditionalAmounts;
+    }
+
+    public Set getPayrollBonuses() {
+        return payrollBonuses;
+    }
+
+    public void setPayrollBonuses(Set payrollBonuses) {
+        this.payrollBonuses = payrollBonuses;
+    }
+
+    public Set getEmployeeSalaryProcesses() {
+        return employeeSalaryProcesses;
+    }
+
+    public void setEmployeeSalaryProcesses(Set employeeSalaryProcesses) {
+        this.employeeSalaryProcesses = employeeSalaryProcesses;
+    }
+
+    public Set getPayrollCommissions() {
+        return payrollCommissions;
+    }
+
+    public void setPayrollCommissions(Set payrollCommissions) {
+        this.payrollCommissions = payrollCommissions;
+    }
+
+    public Set getPayrollRecurringAdditionalAmounts() {
+        return payrollRecurringAdditionalAmounts;
+    }
+
+    public void setPayrollRecurringAdditionalAmounts(Set payrollRecurringAdditionalAmounts) {
+        this.payrollRecurringAdditionalAmounts = payrollRecurringAdditionalAmounts;
+    }
+
+    public Set getPayrollDeductions() {
+        return payrollDeductions;
+    }
+
+    public void setPayrollDeductions(Set payrollDeductions) {
+        this.payrollDeductions = payrollDeductions;
+    }
 
 }

@@ -10,7 +10,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Zydex Locations List:</title>
+        <title> Locations List:</title>
         <script>
             function deleteCheck11() {
                 var checkboxes = "";
@@ -32,10 +32,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>All Zydex Locations List</h1>
+            <h1>All  Locations List</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Zydex Locations List</li>
+                <li class="active"> Locations List</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">
@@ -76,7 +76,7 @@
                                                                 <tr>
                                                                     <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
                                                                     <th>Sr.No.</th>
-                                                                    <th>Zydex Location Name</th>
+                                                                    <th>Location Name</th>
                                                                     <th>Edit</th>
                                                                 </tr>
                                                             </thead>

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.UserMaster" table="user_master" catalog="employee_cafe">
+    <class name="com.bul.zydex.model.UserMaster" table="user_master" catalog="hira_technology">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -20,12 +20,6 @@
         <property name="firstTime" type="boolean">
             <column name="first_time" not-null="true" />
         </property>
-        <set name="COffLeaveRequests" inverse="true">
-            <key>
-                <column name="user_master_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.COffLeaveRequest" />
-        </set>
         <set name="timeAttendanceMasters" inverse="true">
             <key>
                 <column name="user_master_id" not-null="true" />
@@ -38,11 +32,11 @@
             </key>
             <one-to-many class="com.bul.zydex.model.ShiftRotationInfo" />
         </set>
-        <set name="employeeMasters" inverse="true">
+        <set name="userRightMasters" inverse="true">
             <key>
                 <column name="user_master_id" not-null="true" />
             </key>
-            <one-to-many class="com.bul.zydex.model.EmployeeMaster" />
+            <one-to-many class="com.bul.zydex.model.UserRightMaster" />
         </set>
         <set name="punchs" inverse="true">
             <key>
@@ -50,17 +44,11 @@
             </key>
             <one-to-many class="com.bul.zydex.model.Punch" />
         </set>
-        <set name="employeeMasters_1" inverse="true">
+        <set name="employeeMasters" inverse="true">
             <key>
                 <column name="user_master_id" not-null="true" />
             </key>
             <one-to-many class="com.bul.zydex.model.EmployeeMaster" />
-        </set>
-        <set name="timeAttendanceMasters_1" inverse="true">
-            <key>
-                <column name="user_master_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.TimeAttendanceMaster" />
         </set>
         <set name="userActivityLogs" inverse="true">
             <key>
@@ -68,7 +56,7 @@
             </key>
             <one-to-many class="com.bul.zydex.model.UserActivityLog" />
         </set>
-        <set name="COffLeaveRequests_1" inverse="true">
+        <set name="COffLeaveRequests" inverse="true">
             <key>
                 <column name="user_master_id" not-null="true" />
             </key>
@@ -79,42 +67,6 @@
                 <column name="user_id" not-null="true" />
             </key>
             <one-to-many class="com.bul.zydex.model.UserLastLogin" />
-        </set>
-        <set name="userRightMasters" inverse="true">
-            <key>
-                <column name="user_master_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.UserRightMaster" />
-        </set>
-        <set name="punchs_1" inverse="true">
-            <key>
-                <column name="user_master_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.Punch" />
-        </set>
-        <set name="userLastLogins_1" inverse="true">
-            <key>
-                <column name="user_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.UserLastLogin" />
-        </set>
-        <set name="userRightMasters_1" inverse="true">
-            <key>
-                <column name="user_master_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.UserRightMaster" />
-        </set>
-        <set name="shiftRotationInfos_1" inverse="true">
-            <key>
-                <column name="user_master_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.ShiftRotationInfo" />
-        </set>
-        <set name="userActivityLogs_1" inverse="true">
-            <key>
-                <column name="user_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.UserActivityLog" />
         </set>
     </class>
 </hibernate-mapping>

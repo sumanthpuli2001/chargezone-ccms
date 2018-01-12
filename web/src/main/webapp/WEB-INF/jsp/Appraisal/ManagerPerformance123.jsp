@@ -530,7 +530,7 @@
                                         </div>
                                         <div class="box box-info collapsed-box">
                                             <div class="box-header">
-                                                <h3 class="box-title">Competency Evaluation (As Per Zydex Competency Framework) :</h3>
+                                                <h3 class="box-title">Competency Evaluation (As Per Bulwark Systems Competency Framework) :</h3>
                                                 <div class="box-tools pull-right">
                                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                                                 </div>

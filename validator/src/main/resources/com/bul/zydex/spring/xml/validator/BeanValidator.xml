@@ -112,4 +112,36 @@
     <bean id="emailTemplateValidator1" class="com.bul.zydex.validator.EmailTemplateValidator" />
     <bean id="probationPeriodValidator1" class="com.bul.zydex.validator.probationtoconfirmation.ProbationPeriodValidator" />
     <bean id="timeAttendanceFlexibleValidator1" class="com.bul.zydex.validator.attendanceRegularization.TimeAttendanceFlexibleValidator" />
+     <!--Payroll-->
+    <bean id="payrollSavingTypeValidator1" class="com.bul.zydex.validator.Payroll.PayrollSavingTypeValidator" />
+    <bean id="payrollSalaryTypeValidator1" class="com.bul.zydex.validator.Payroll.PayrollSalaryTypeValidator" />
+    <bean id="payrollLoanTypeValidator1" class="com.bul.zydex.validator.Payroll.PayrollLoanTypeValidator" />
+    <bean id="payrollProfessionalTaxValidator1" class="com.bul.zydex.validator.Payroll.PayrollProfessionalTaxValidator" />
+    <bean id="payrollProvidentFundValidator1" class="com.bul.zydex.validator.Payroll.PayrollProvidentFundValidator" />
+    <bean id="payrollTaxRuleValidator1" class="com.bul.zydex.validator.Payroll.PayrollTaxRuleValidator" />
+    <bean id="payrollMaximumSavingTaxAmountValidator1" class="com.bul.zydex.validator.Payroll.PayrollMaximumSavingTaxAmountValidator" />
+    <bean id="payrollDeductionValidator1" class="com.bul.zydex.validator.Payroll.PayrollDeductionValidator" />
+    <bean id="payrollRecurringDeductionValidator1" class="com.bul.zydex.validator.Payroll.PayrollRecurringDeductionValidator" />
+    <bean id="payrollAdditionalAmountValidator1" class="com.bul.zydex.validator.Payroll.PayrollAdditionalAmountValidator" />
+    <bean id="payrollRecurringAdditionalAmountValidator1" class="com.bul.zydex.validator.Payroll.PayrollRecurringAdditionalAmountValidator" />
+    <bean id="payrollCommissionValidator1" class="com.bul.zydex.validator.Payroll.PayrollCommissionValidator" />
+    <bean id="payrollFinancialYearValidator1" class="com.bul.zydex.validator.Payroll.PayrollFinancialYearValidator" />
+    <bean id="payrollFormSixteenMasterValidator1" class="com.bul.zydex.validator.Payroll.PayrollFormSixteenMasterValidator" />
+    <bean id="payrollBonusValidator1" class="com.bul.zydex.validator.Payroll.PayrollBonusValidator" />
+    <bean id="payrollStationWiseSavingTaxValidator1" class="com.bul.zydex.validator.Payroll.PayrollStationWiseSavingTaxValidator" />
+    <bean id="employeeTypeValidator1" class="com.bul.zydex.validator.emp.EmployeeTypeValidator" />
+    <bean id="employeeSubTypeValidator1" class="com.bul.zydex.validator.emp.EmployeeSubTypeValidator" />
+    <bean id="payrollPfCheckValidator1" class="com.bul.zydex.validator.Payroll.PayrollPfCheckValidator" />
+    <bean id="payrollPtCheckValidator1" class="com.bul.zydex.validator.Payroll.PayrollPtCheckValidator" />
+    <bean id="employeeMultipleSalaryValidator1" class="com.bul.zydex.validator.Payroll.EmployeeMultipleSalaryValidator" />
+    <bean id="employeeTypeWiseSalaryValidator1" class="com.bul.zydex.validator.Payroll.EmployeeTypeWiseSalaryValidator" />
+    <bean id="employeeAdditionalSalaryValidator1" class="com.bul.zydex.validator.Payroll.EmployeeAdditionalSalaryValidator" />
+    <bean id="employeeDeductionAmountValidator1" class="com.bul.zydex.validator.Payroll.EmployeeDeductionAmountValidator" />
+    <bean id="employeeSalaryProcessValidator1" class="com.bul.zydex.validator.Payroll.EmployeeSalaryProcessValidator" />
+    <bean id="additionalAmountCheckValidator1" class="com.bul.zydex.validator.Payroll.AdditionalAmountCheckValidator" />
+    <bean id="payrollSalaryLockValidator1" class="com.bul.zydex.validator.Payroll.PayrollSalaryLockValidator" />
+    <bean id="payrollSavingAmountValidator1" class="com.bul.zydex.validator.Payroll.PayrollSavingAmountValidator" />
+    <bean id="certificateTemplateValidator1" class="com.bul.zydex.validator.Payroll.certificateTemplateValidator" />
+    <bean id="payrollLoanTypeDetailsValidator1" class="com.bul.zydex.validator.Payroll.PayrollLoanTypeDetailsValidator" />
+    <bean id="companyMasterValidator1" class="com.bul.zydex.validator.Company.CompanyMasterValidator" />
 </beans>

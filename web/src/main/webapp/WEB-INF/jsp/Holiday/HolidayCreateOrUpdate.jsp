@@ -113,6 +113,19 @@
                                             <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Department:<span style="color: red;font-size: 12px;">*</span></label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                            <form:select path="departmentMaster.id" class="form-control">
+                                                <form:option value="" label="-- Select --" ></form:option>
+                                                <form:options items="${deptMap}"></form:options>
+                                            </form:select>
+                                            <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
+                                            </div>
+                                        </div>
+                                        
                                         <br/>
                                         <div class="form-group">
                                             <div class="col-sm-6 col-sm-offset-5">

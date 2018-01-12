@@ -104,14 +104,14 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Employee Name:</label>
+                                                        <label>Employee Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <div>
                                                             <input type="text" id="employeeMasterId" name="employeeMasterId" class="form-control">
                                                         </div>
                                                     <form:errors path="employeeMaster" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class=" col-sm-6">
-                                                        <label>Shift Name:</label>
+                                                        <label>Shift Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <div>
                                                             <input type="text"  id="shiftMasterId" name="shiftMasterId" class="form-control">
                                                         </div>

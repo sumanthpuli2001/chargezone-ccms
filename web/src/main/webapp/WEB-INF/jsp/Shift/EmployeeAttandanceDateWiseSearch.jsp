@@ -117,7 +117,7 @@
                                                         <input type="text" id="employeeMasterId" name="employeeMasterId" class="form-control">
                                                     </div>
                                                     <div class="col-sm-6" id="zydexLocationIdDiv" style="display: none;">
-                                                        <label>Zydex Location:</label>
+                                                        <label> Location:</label>
                                                         <input type="text" id="zydexLocationId" name="zydexLocationId" class="form-control">
                                                     </div>
                                                 </div>

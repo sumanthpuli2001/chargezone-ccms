@@ -22,11 +22,24 @@ public class ZydexLocationMaster  implements java.io.Serializable {
     private Set shortLeaves_1 = new HashSet(0);
     private Set COffLeaveMasters_1 = new HashSet(0);
     private Set deviceMasterNotifications = new HashSet(0);
+      private Set payrollFinancialYears = new HashSet(0);
+//     private Set employeeMasters = new HashSet(0);
+     private Set payrollTaxRules = new HashSet(0);
+     private Set payrollFormSixteenMasters = new HashSet(0);
+//     private Set deviceMasters = new HashSet(0);
+     private Set payrollProvidentFunds = new HashSet(0);
+//     private Set COffLeaveMasters = new HashSet(0);
+     private Set timeAttandanceFlaxibleMasters = new HashSet(0);
+     private Set payrollStationWiseSavingTaxes = new HashSet(0);
+//     private Set shortLeaves = new HashSet(0);
+     private Set payrollMaximumSavingTaxAmounts = new HashSet(0);
+     private Set employeeTypeWiseSalaries = new HashSet(0);
+
 
     public ZydexLocationMaster() {
     }
 
-    public ZydexLocationMaster(String zydexLocation, Set employeeMasters, Set employeeMasters_1, Set deviceMasters, Set COffLeaveMasters, Set shortLeaves, Set deviceMasters_1, Set shortLeaves_1, Set COffLeaveMasters_1, Set deviceMasterNotifications) {
+    public ZydexLocationMaster(String zydexLocation, Set employeeMasters, Set employeeMasters_1, Set deviceMasters, Set COffLeaveMasters, Set shortLeaves, Set deviceMasters_1, Set shortLeaves_1, Set COffLeaveMasters_1, Set deviceMasterNotifications,Set payrollFinancialYears,Set payrollTaxRules,Set payrollFormSixteenMasters,Set payrollProvidentFunds,Set timeAttandanceFlaxibleMasters,Set payrollStationWiseSavingTaxes,Set payrollMaximumSavingTaxAmounts,Set employeeTypeWiseSalaries) {
         this.zydexLocation = zydexLocation;
         this.employeeMasters = employeeMasters;
         this.employeeMasters_1 = employeeMasters_1;
@@ -37,6 +50,13 @@ public class ZydexLocationMaster  implements java.io.Serializable {
         this.shortLeaves_1 = shortLeaves_1;
         this.COffLeaveMasters_1 = COffLeaveMasters_1;
         this.deviceMasterNotifications = deviceMasterNotifications;
+        this.payrollFinancialYears = payrollFinancialYears;
+        this.payrollTaxRules = payrollTaxRules;
+        this.payrollProvidentFunds = payrollProvidentFunds;
+        this.timeAttandanceFlaxibleMasters = timeAttandanceFlaxibleMasters;
+        this.payrollStationWiseSavingTaxes = payrollStationWiseSavingTaxes;
+        this.payrollMaximumSavingTaxAmounts = payrollMaximumSavingTaxAmounts;
+        this.employeeTypeWiseSalaries = employeeTypeWiseSalaries;
     }
 
     public Integer getId() {
@@ -117,5 +137,70 @@ public class ZydexLocationMaster  implements java.io.Serializable {
     public void setDeviceMasterNotifications(Set deviceMasterNotifications) {
         this.deviceMasterNotifications = deviceMasterNotifications;
     }
+
+    public Set getPayrollFinancialYears() {
+        return payrollFinancialYears;
+    }
+
+    public void setPayrollFinancialYears(Set payrollFinancialYears) {
+        this.payrollFinancialYears = payrollFinancialYears;
+    }
+
+    public Set getPayrollTaxRules() {
+        return payrollTaxRules;
+    }
+
+    public void setPayrollTaxRules(Set payrollTaxRules) {
+        this.payrollTaxRules = payrollTaxRules;
+    }
+
+    public Set getPayrollFormSixteenMasters() {
+        return payrollFormSixteenMasters;
+    }
+
+    public void setPayrollFormSixteenMasters(Set payrollFormSixteenMasters) {
+        this.payrollFormSixteenMasters = payrollFormSixteenMasters;
+    }
+
+    public Set getPayrollProvidentFunds() {
+        return payrollProvidentFunds;
+    }
+
+    public void setPayrollProvidentFunds(Set payrollProvidentFunds) {
+        this.payrollProvidentFunds = payrollProvidentFunds;
+    }
+
+    public Set getTimeAttandanceFlaxibleMasters() {
+        return timeAttandanceFlaxibleMasters;
+    }
+
+    public void setTimeAttandanceFlaxibleMasters(Set timeAttandanceFlaxibleMasters) {
+        this.timeAttandanceFlaxibleMasters = timeAttandanceFlaxibleMasters;
+    }
+
+    public Set getPayrollStationWiseSavingTaxes() {
+        return payrollStationWiseSavingTaxes;
+    }
+
+    public void setPayrollStationWiseSavingTaxes(Set payrollStationWiseSavingTaxes) {
+        this.payrollStationWiseSavingTaxes = payrollStationWiseSavingTaxes;
+    }
+
+    public Set getPayrollMaximumSavingTaxAmounts() {
+        return payrollMaximumSavingTaxAmounts;
+    }
+
+    public void setPayrollMaximumSavingTaxAmounts(Set payrollMaximumSavingTaxAmounts) {
+        this.payrollMaximumSavingTaxAmounts = payrollMaximumSavingTaxAmounts;
+    }
+
+    public Set getEmployeeTypeWiseSalaries() {
+        return employeeTypeWiseSalaries;
+    }
+
+    public void setEmployeeTypeWiseSalaries(Set employeeTypeWiseSalaries) {
+        this.employeeTypeWiseSalaries = employeeTypeWiseSalaries;
+    }
+    
 
 }

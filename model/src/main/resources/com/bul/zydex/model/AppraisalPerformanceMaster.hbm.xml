@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.AppraisalPerformanceMaster" table="appraisal_performance_master" catalog="employee_cafe">
+    <class name="com.bul.zydex.model.AppraisalPerformanceMaster" table="appraisal_performance_master" catalog="hira_technology">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -13,9 +13,6 @@
         </many-to-one>
         <property name="weightageScore" type="string">
             <column name="weightage_score" />
-        </property>
-        <property name="weightageScoreManager" type="string">
-            <column name="weightage_score_manager" />
         </property>
         <property name="totalScore" type="string">
             <column name="total_score" />
@@ -69,7 +66,7 @@
             <column name="rework_status" not-null="true" />
         </property>
         <property name="reworkComment" type="string">
-            <column name="rework_comment" />
+            <column name="rework_comment" length="16777215" />
         </property>
         <property name="midYearEmployeeStatus" type="int">
             <column name="mid_year_employee_status" not-null="true" />
@@ -83,53 +80,8 @@
         <property name="endYearManagerStatus" type="int">
             <column name="end_year_manager_status" not-null="true" />
         </property>
-        <property name="behaviorsMidyearOtherremarkForemployee" type="string">
-            <column name="behaviors_midyear_otherremark_foremployee" />
-        </property>
-        <property name="behaviorsEndyearOtherremarkForemployee" type="string">
-            <column name="behaviors_endyear_otherremark_foremployee" />
-        </property>
-        <property name="behaviorsFinalscoreForemployee" type="string">
-            <column name="behaviors_finalscore_foremployee" length="45" />
-        </property>
-        <property name="totalScoreForemployee" type="string">
-            <column name="total_score_foremployee" />
-        </property>
-        <property name="behaviorsMidyearTotalscoreForemp" type="string">
-            <column name="behaviors_midyear_totalscore_foremp" />
-        </property>
-        <property name="behaviorsEndyearTotalscoreForemp" type="string">
-            <column name="behaviors_endyear_totalscore_foremp" />
-        </property>
-        <property name="employeeCompetencyStatus" type="int">
-            <column name="employee_competency_status" not-null="true" />
-        </property>
-        <property name="managerCompetencyStatus" type="int">
-            <column name="manager_competency_status" not-null="true" />
-        </property>
-        <property name="competencyReworkStatus" type="int">
-            <column name="competency_rework_status" not-null="true" />
-        </property>
-        <property name="competencyReworkComment" type="string">
-            <column name="competency_rework_comment" length="16777215" />
-        </property>
-        <property name="employeeIdpStatus" type="int">
-            <column name="employee_idp_status" not-null="true" />
-        </property>
-        <property name="managerIdpStatus" type="int">
-            <column name="manager_idp_status" not-null="true" />
-        </property>
-        <property name="idpReworkStatus" type="int">
-            <column name="idp_rework_status" not-null="true" />
-        </property>
-        <property name="idpReworkComment" type="string">
-            <column name="idp_rework_comment" length="16777215" />
-        </property>
         <property name="empActivityScore" type="string">
-            <column name="emp_activity_score" length="45" />
-        </property>
-        <property name="managerActivityScore" type="string">
-            <column name="manager_activity_score" length="45" />
+            <column name="emp_activity_score"/>
         </property>
         <set name="appraisalPerformanceBehaviorses" inverse="true">
             <key>
@@ -137,17 +89,23 @@
             </key>
             <one-to-many class="com.bul.zydex.model.AppraisalPerformanceBehaviors" />
         </set>
+        <set name="appraisalKraActivities" inverse="true">
+            <key>
+                <column name="appraisal_performance_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.AppraisalKraActivity" />
+        </set>
+        <set name="appraisalPerformanceCompetencyEvaluations" inverse="true">
+            <key>
+                <column name="appraisal_performance_id" not-null="true" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.AppraisalPerformanceCompetencyEvaluation" />
+        </set>
         <set name="appraisalPerformanceIndividualDevelopmentPlans" inverse="true">
             <key>
                 <column name="appraisal_performance_id" not-null="true" />
             </key>
             <one-to-many class="com.bul.zydex.model.AppraisalPerformanceIndividualDevelopmentPlan" />
-        </set>
-        <set name="appraisalPerformanceBehaviorses_1" inverse="true">
-            <key>
-                <column name="appraisal_performance_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.AppraisalPerformanceBehaviors" />
         </set>
         <set name="appraisalPerformanceKras" inverse="true">
             <key>
@@ -160,36 +118,6 @@
                 <column name="appraisal_performance_id" not-null="true" />
             </key>
             <one-to-many class="com.bul.zydex.model.AppraisalPerformanceActivities" />
-        </set>
-        <set name="appraisalPerformanceCompetencyEvaluations" inverse="true">
-            <key>
-                <column name="appraisal_performance_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.AppraisalPerformanceCompetencyEvaluation" />
-        </set>
-        <set name="appraisalPerformanceIndividualDevelopmentPlans_1" inverse="true">
-            <key>
-                <column name="appraisal_performance_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.AppraisalPerformanceIndividualDevelopmentPlan" />
-        </set>
-        <set name="appraisalPerformanceKras_1" inverse="true">
-            <key>
-                <column name="appraisal_performance_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.AppraisalPerformanceKra" />
-        </set>
-        <set name="appraisalPerformanceActivitieses_1" inverse="true">
-            <key>
-                <column name="appraisal_performance_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.AppraisalPerformanceActivities" />
-        </set>
-        <set name="appraisalPerformanceCompetencyEvaluations_1" inverse="true">
-            <key>
-                <column name="appraisal_performance_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.AppraisalPerformanceCompetencyEvaluation" />
         </set>
     </class>
 </hibernate-mapping>

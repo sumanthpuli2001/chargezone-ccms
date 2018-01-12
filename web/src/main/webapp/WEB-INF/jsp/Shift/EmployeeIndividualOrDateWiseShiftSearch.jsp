@@ -80,7 +80,7 @@
                                         <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <div class="col-sm-6" id="zydexLocationIdDiv" style="display: none;">
-                                                    <label>Zydex Location:</label>
+                                                    <label> Location:</label>
                                                     <input type="text" id="zydexLocationId" name="zydexLocationId" class="form-control">
                                                 </div>
                                             </div>

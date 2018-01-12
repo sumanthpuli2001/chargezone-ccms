@@ -44,7 +44,7 @@
                     <th>Designation</th>
                     <th>Level</th>
                     <th>Company Name</th>
-                    <th>Zydex Location</th>
+                    <th> Location</th>
                     <th>Work Location</th>
                     <th>Last Year Performance Rating</th>
                     <th>E-mail-Id</th>

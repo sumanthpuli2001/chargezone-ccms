@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.CafeteriaRequest" table="cafeteria_request" catalog="employee_cafe">
+    <class name="com.bul.zydex.model.CafeteriaRequest" table="cafeteria_request" catalog="hira_technology">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -33,7 +33,7 @@
             <column name="order_date_time" length="45" not-null="true" />
         </property>
         <property name="reason" type="string">
-            <column name="reason" length="16777215" />
+            <column name="reason" />
         </property>
         <property name="requestDate" type="string">
             <column name="request_date" length="45" />
@@ -45,10 +45,10 @@
             <column name="approver_date" length="45" />
         </property>
         <property name="rejectRemark" type="string">
-            <column name="reject_remark" length="16777215" />
+            <column name="reject_remark" />
         </property>
         <property name="adminRemark" type="string">
-            <column name="admin_remark" length="16777215" />
+            <column name="admin_remark" />
         </property>
     </class>
 </hibernate-mapping>

@@ -80,6 +80,13 @@
         <property name="zydexLocationMasterService" ref="zydexLocationMasterService1" />
         <property name="competencyEvaluationMasterService" ref="competencyEvaluationMasterService1" />
         <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="companyMasterService" ref="companyMasterService1" />
+        <property name="policyMasterService" ref="policyMasterService1" />
+        <property name="employeePolicyDetailService" ref="employeePolicyDetailService1" />
+        <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
+        <property name="payrollPtCheckService" ref="payrollPtCheckService1" />
     </bean>
     <!--Department Master-->
     <bean id="departmentMasterController1" class="com.bul.zydex.controller.emp.DepartmentMasterController" parent="controllerConfig" >
@@ -494,6 +501,9 @@
     <bean id="policyMasterController1" class="com.bul.zydex.controller.policy.PolicyMasterController" parent="controllerConfig" >
         <property name="policyMasterService" ref="policyMasterService1" />
         <property name="policyMasterValidator" ref="policyMasterValidator1" />
+         <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
+        <property name="employeePolicyDetailService" ref="employeePolicyDetailService1" />
+        
     </bean>
     <!--EmailTemplate-->
     <bean id="emailTemplateController1" class="com.bul.zydex.controller.EmailTemplateController" parent="controllerConfig" >
@@ -612,5 +622,374 @@
         <property name="appraisalPerformanceActivitiesService" ref="appraisalPerformanceActivitiesService1"/>
         
     </bean>
+       <!--Payroll-->
+    <bean id="payrollSavingTypeController1" class="com.bul.zydex.controller.Payroll.PayrollSavingTypeController" parent="controllerConfig">
+        <property name="payrollSavingTypeService" ref="payrollSavingTypeService1" />
+        <property name="payrollSavingTypeValidator" ref="payrollSavingTypeValidator1" />
+    </bean>
+
+    <bean id="payrollSalaryTypeController1" class="com.bul.zydex.controller.Payroll.PayrollSalaryTypeController" parent="controllerConfig">
+        <property name="payrollSalaryTypeService" ref="payrollSalaryTypeService1" />
+        <property name="payrollSalaryTypeValidator" ref="payrollSalaryTypeValidator1" />
+    </bean>
+
+    <bean id="payrollLoanTypeController1" class="com.bul.zydex.controller.Payroll.PayrollLoanTypeController" parent="controllerConfig">
+        <property name="payrollLoanTypeService" ref="payrollLoanTypeService1" />
+        <property name="payrollLoanTypeValidator" ref="payrollLoanTypeValidator1" />
+        <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
+           <property name="payrollLoanTypeDetailsValidator" ref="payrollLoanTypeDetailsValidator1" />
+    </bean>
+
+    <!--Payroll-->
+    <bean id="payrollProfessionalTaxController1" class="com.bul.zydex.controller.Payroll.PayrollProfessionalTaxController" parent="controllerConfig" >
+        <property name="payrollProfessionalTaxService" ref="payrollProfessionalTaxService1" />
+        <property name="payrollProfessionalTaxValidator" ref="payrollProfessionalTaxValidator1" />
+    </bean>
+    <bean id="payrollProvidentFundController1" class="com.bul.zydex.controller.Payroll.PayrollProvidentFundController" parent="controllerConfig" >
+        <property name="payrollProvidentFundService" ref="payrollProvidentFundService1" />
+        <property name="payrollProvidentFundValidator" ref="payrollProvidentFundValidator1" />
+    </bean>
+    <bean id="payrollTaxRuleController1" class="com.bul.zydex.controller.Payroll.PayrollTaxRuleController" parent="controllerConfig" >
+        <property name="payrollTaxRuleService" ref="payrollTaxRuleService1" />
+        <property name="payrollTaxRuleValidator" ref="payrollTaxRuleValidator1" />
+    </bean>
+    <bean id="payrollMaximumSavingTaxAmountController1" class="com.bul.zydex.controller.Payroll.PayrollMaximumSavingTaxAmountController" parent="controllerConfig" >
+        <property name="payrollMaximumSavingTaxAmountService" ref="payrollMaximumSavingTaxAmountService1" />
+        <property name="payrollMaximumSavingTaxAmountValidator" ref="payrollMaximumSavingTaxAmountValidator1" />
+    </bean>
+    <bean id="payrollFinancialYearController1" class="com.bul.zydex.controller.Payroll.PayrollFinancialYearController" parent="controllerConfig">
+        <property name="payrollFinancialYearService" ref="payrollFinancialYearService1" />
+        <property name="payrollFinancialYearValidator" ref="payrollFinancialYearValidator1" />
+    </bean>
+    <bean id="payrollFormSixteenMasterController1" class="com.bul.zydex.controller.Payroll.PayrollFormSixteenMasterController" parent="controllerConfig">
+        <property name="payrollFormSixteenMasterService" ref="payrollFormSixteenMasterService1" />
+        <property name="payrollFormSixteenMasterValidator" ref="payrollFormSixteenMasterValidator1" />
+        <property name="payrollFinancialYearService" ref="payrollFinancialYearService1" />
+
+    </bean>
+    <bean id="payrollStationWiseSavingTaxController1" class="com.bul.zydex.controller.Payroll.PayrollStationWiseSavingTaxController" parent="controllerConfig" >
+        <property name="payrollStationWiseSavingTaxService" ref="payrollStationWiseSavingTaxService1" />
+        <property name="payrollStationWiseSavingTaxValidator" ref="payrollStationWiseSavingTaxValidator1" />
+    </bean>
+
+    <bean id="payrollDeductionController1" class="com.bul.zydex.controller.Payroll.PayrollDeductionController" parent="controllerConfig" >
+        <property name="payrollDeductionService" ref="payrollDeductionService1" />
+        <property name="payrollDeductionValidator" ref="payrollDeductionValidator1" />
+    </bean>
+    <bean id="payrollRecurringDeductionController1" class="com.bul.zydex.controller.Payroll.PayrollRecurringDeductionController" parent="controllerConfig" >
+        <property name="payrollRecurringDeductionService" ref="payrollRecurringDeductionService1" />
+        <property name="payrollRecurringDeductionValidator" ref="payrollRecurringDeductionValidator1" />
+    </bean>
+
+    <bean id="payrollBonusController1" class="com.bul.zydex.controller.Payroll.PayrollBonusController" parent="controllerConfig">
+        <property name="payrollBonusService" ref="payrollBonusService1" />
+        <property name="payrollBonusValidator" ref="payrollBonusValidator1" />
+    </bean>
+
+    <bean id="payrollCommissionController1" class="com.bul.zydex.controller.Payroll.PayrollCommissionController" parent="controllerConfig">
+        <property name="payrollCommissionService" ref="payrollCommissionService1" />
+        <property name="payrollCommissionValidator" ref="payrollCommissionValidator1" />
+    </bean>
+
+    <bean id="payrollRecurringAdditionalAmountController1" class="com.bul.zydex.controller.Payroll.PayrollRecurringAdditionalAmountController" parent="controllerConfig">
+        <property name="payrollRecurringAdditionalAmountService" ref="payrollRecurringAdditionalAmountService1" />
+        <property name="payrollRecurringAdditionalAmountValidator" ref="payrollRecurringAdditionalAmountValidator1" />
+    </bean>
+    <bean id="payrollAdditionalAmountController1" class="com.bul.zydex.controller.Payroll.PayrollAdditionalAmountController" parent="controllerConfig" >
+        <property name="payrollAdditionalAmountService" ref="payrollAdditionalAmountService1" />
+        <property name="payrollAdditionalAmountValidator" ref="payrollAdditionalAmountValidator1" />
+    </bean>
+    <bean id="employeeTypeController1" class="com.bul.zydex.controller.emp.EmployeeTypeController" parent="controllerConfig" >
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeTypeValidator" ref="employeeTypeValidator1" />
+    </bean>
+    <bean id="employeeSubTypeController1" class="com.bul.zydex.controller.emp.EmployeeSubTypeController" parent="controllerConfig" >
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeSubTypeValidator" ref="employeeSubTypeValidator1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+    </bean>
+    <bean id="payrollPfCheckController1" class="com.bul.zydex.controller.Payroll.PayrollPfCheckController" parent="controllerConfig" >
+        <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
+        <property name="payrollPfCheckValidator" ref="payrollPfCheckValidator1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+    </bean>
+    <bean id="payrollPtCheckController1" class="com.bul.zydex.controller.Payroll.PayrollPtCheckController" parent="controllerConfig" >
+        <property name="payrollPtCheckService" ref="payrollPtCheckService1" />
+        <property name="payrollPtCheckValidator" ref="payrollPtCheckValidator1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+    </bean>
+    <bean id="companyMasterController1" class="com.bul.zydex.controller.company.CompanyMasterController" parent="controllerConfig" >
+        <property name="companyMasterService" ref="companyMasterService1" />
+        <!--<property name="companyMasterValidator1" ref="companyMasterValidator1" />-->
+    </bean>
+    <bean id="employeePolicyDetailMasterController1" class="com.bul.zydex.controller.EmployeePolicyDetail.EmployeePolicyDetailMasterController" parent="controllerConfig" >
+        <property name="employeePolicyDetailService" ref="employeePolicyDetailService1" />
+    </bean>
+    <bean id="employeeTypeWiseSalaryController1" class="com.bul.zydex.controller.Payroll.EmployeeTypeWiseSalaryController" parent="controllerConfig" >
+        <property name="employeeTypeWiseSalaryService" ref="employeeTypeWiseSalaryService1" />
+        <property name="payrollSalaryTypeService" ref="payrollSalaryTypeService1" />
+        <property name="employeeTypeWiseSalaryValidator" ref="employeeTypeWiseSalaryValidator1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeMultipleSalaryService" ref="employeeMultipleSalaryService1" />
+    </bean>
+    <bean id="employeeSalaryProcessController1" class="com.bul.zydex.controller.Payroll.EmployeeSalaryProcessController" parent="controllerConfig" >
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
+        <property name="employeeSalaryProcessValidator" ref="employeeSalaryProcessValidator1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeAdditionalSalaryService" ref="employeeAdditionalSalaryService1" />
+        <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
+        <property name="payrollSalaryTypeService" ref="payrollSalaryTypeService1" />
+        <property name="employeeTypeWiseSalaryService" ref="employeeTypeWiseSalaryService1" />
+        <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
+        <property name="payrollAdditionalAmountService" ref="payrollAdditionalAmountService1" />
+        <property name="payrollRecurringAdditionalAmountService" ref="payrollRecurringAdditionalAmountService1" />
+        <property name="payrollDeductionService" ref="payrollDeductionService1" />
+        <property name="payrollRecurringDeductionService" ref="payrollRecurringDeductionService1" />
+        <property name="payrollPtCheckService" ref="payrollPtCheckService1" />
+        <property name="payrollProfessionalTaxService" ref="payrollProfessionalTaxService1" />
+        <property name="payrollProvidentFundService" ref="payrollProvidentFundService1" />
+        <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
+        <property name="payrollSalaryLockService" ref="payrollSalaryLockService1" />
+        <property name="employeeExcelRecordService" ref="employeeExcelRecordService1" />
+        <property name="policyMasterService" ref="policyMasterService1" />
+        <property name="employeePolicyDetailService" ref="employeePolicyDetailService1" />
+        <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
+        <property name="payrollLoanTypeService" ref="payrollLoanTypeService1" />
+        <property name="payrollEsicDeductionService" ref="payrollEsicDeductionService1" />
+        <property name="payrollBonusService" ref="payrollBonusService1" />
+        <property name="payrollLoanRemainingAmountService" ref="payrollLoanRemainingAmountService1" />
+    </bean>
+    <bean id="additionalAmountCheckController1" class="com.bul.zydex.controller.Payroll.AdditionalAmountCheckController" parent="controllerConfig" >
+        <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
+        <property name="additionalAmountCheckValidator" ref="additionalAmountCheckValidator1" />
+        <property name="payrollSalaryTypeService" ref="payrollSalaryTypeService1" />
+    </bean>
+    <bean id="payrollSalaryLockController1" class="com.bul.zydex.controller.Payroll.PayrollSalaryLockController" parent="controllerConfig" >
+        <property name="payrollSalaryLockService" ref="payrollSalaryLockService1" />
+        <property name="payrollSalaryLockValidator" ref="payrollSalaryLockValidator1" />
+    </bean>
+    <bean id="payrollEmployeeFormSixteenController1" class="com.bul.zydex.controller.Payroll.PayrollEmployeeFormSixteenController" parent="controllerConfig" >
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeAdditionalSalaryService" ref="employeeAdditionalSalaryService1" />
+        <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
+        <property name="payrollSalaryTypeService" ref="payrollSalaryTypeService1" />
+        <property name="employeeTypeWiseSalaryService" ref="employeeTypeWiseSalaryService1" />
+        <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
+        <property name="payrollAdditionalAmountService" ref="payrollAdditionalAmountService1" />
+        <property name="payrollRecurringAdditionalAmountService" ref="payrollRecurringAdditionalAmountService1" />
+        <property name="payrollDeductionService" ref="payrollDeductionService1" />
+        <property name="payrollRecurringDeductionService" ref="payrollRecurringDeductionService1" />
+        <property name="payrollPtCheckService" ref="payrollPtCheckService1" />
+        <property name="payrollProfessionalTaxService" ref="payrollProfessionalTaxService1" />
+        <property name="payrollProvidentFundService" ref="payrollProvidentFundService1" />
+        <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
+        <property name="payrollFinancialYearService" ref="payrollFinancialYearService1" />
+        <property name="payrollFormSixteenMasterService" ref="payrollFormSixteenMasterService1" />
+        <property name="payrollSavingAmountService" ref="payrollSavingAmountService1" />
+         
+         
+    </bean>
+    <bean id="payrollSavingAmountController1" class="com.bul.zydex.controller.Payroll.PayrollSavingAmountController" parent="controllerConfig" >
+        <property name="payrollSavingAmountService" ref="payrollSavingAmountService1" />
+        <property name="payrollFormSixteenMasterService" ref="payrollFormSixteenMasterService1" />
+        <property name="payrollSavingAmountValidator" ref="payrollSavingAmountValidator1" />
+    </bean>
+    <bean id="employeePfCheckController1" class="com.bul.zydex.controller.Payroll.EmployeePfCheckController" parent="controllerConfig" >
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeAdditionalSalaryService" ref="employeeAdditionalSalaryService1" />
+        <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
+        <property name="payrollSalaryTypeService" ref="payrollSalaryTypeService1" />
+        <property name="employeeTypeWiseSalaryService" ref="employeeTypeWiseSalaryService1" />
+        <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
+        <property name="payrollAdditionalAmountService" ref="payrollAdditionalAmountService1" />
+        <property name="payrollRecurringAdditionalAmountService" ref="payrollRecurringAdditionalAmountService1" />
+        <property name="payrollDeductionService" ref="payrollDeductionService1" />
+        <property name="payrollRecurringDeductionService" ref="payrollRecurringDeductionService1" />
+        <property name="payrollPtCheckService" ref="payrollPtCheckService1" />
+        <property name="payrollProfessionalTaxService" ref="payrollProfessionalTaxService1" />
+        <property name="payrollProvidentFundService" ref="payrollProvidentFundService1" />
+        <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
+         
+    </bean>
+    <bean id="employeePtCheckController1" class="com.bul.zydex.controller.Payroll.EmployeePtCheckcontroller" parent="controllerConfig" >
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeAdditionalSalaryService" ref="employeeAdditionalSalaryService1" />
+        <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
+        <property name="payrollSalaryTypeService" ref="payrollSalaryTypeService1" />
+        <property name="employeeTypeWiseSalaryService" ref="employeeTypeWiseSalaryService1" />
+        <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
+        <property name="payrollAdditionalAmountService" ref="payrollAdditionalAmountService1" />
+        <property name="payrollRecurringAdditionalAmountService" ref="payrollRecurringAdditionalAmountService1" />
+        <property name="payrollDeductionService" ref="payrollDeductionService1" />
+        <property name="payrollRecurringDeductionService" ref="payrollRecurringDeductionService1" />
+        <property name="payrollPtCheckService" ref="payrollPtCheckService1" />
+        <property name="payrollProfessionalTaxService" ref="payrollProfessionalTaxService1" />
+        <property name="payrollProvidentFundService" ref="payrollProvidentFundService1" />
+        <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
+         
+    </bean>
+    <bean id="employeeSalarySlipController1" class="com.bul.zydex.controller.Payroll.EmployeeSalarySlipController" parent="controllerConfig" >
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeAdditionalSalaryService" ref="employeeAdditionalSalaryService1" />
+        <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
+        <property name="payrollSalaryTypeService" ref="payrollSalaryTypeService1" />
+        <property name="employeeTypeWiseSalaryService" ref="employeeTypeWiseSalaryService1" />
+        <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
+        <property name="payrollAdditionalAmountService" ref="payrollAdditionalAmountService1" />
+        <property name="payrollRecurringAdditionalAmountService" ref="payrollRecurringAdditionalAmountService1" />
+        <property name="payrollDeductionService" ref="payrollDeductionService1" />
+        <property name="payrollRecurringDeductionService" ref="payrollRecurringDeductionService1" />
+        <property name="payrollPtCheckService" ref="payrollPtCheckService1" />
+        <property name="payrollProfessionalTaxService" ref="payrollProfessionalTaxService1" />
+        <property name="payrollProvidentFundService" ref="payrollProvidentFundService1" />
+        <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
+        <property name="employeeExcelRecordService" ref="employeeExcelRecordService1" />
+        <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
+        <property name="payrollLoanRemainingAmountService" ref="payrollLoanRemainingAmountService1" />
+        <property name="payrollLoanTypeService" ref="payrollLoanTypeService1" />
+    </bean>
+    <bean id="certificateTemplateController1" class="com.bul.zydex.controller.Payroll.CertificateTemplateController" parent="controllerConfig" >
+        <property name="certificateTemplateService" ref="certificateTemplateService1" />
+        <property name="certificateTemplateValidator" ref="certificateTemplateValidator1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+    </bean>
+    
+    <bean id="companyMonthlyReportController1" class="com.bul.zydex.controller.Payroll.CompanyMonthlyReportController" parent="controllerConfig" >
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
+        <property name="employeeAdditionalSalaryService" ref="employeeAdditionalSalaryService1" />
+        <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
+        <property name="employeePolicyDetailService" ref="employeePolicyDetailService1" />
+        <property name="payrollSalaryTypeService" ref="payrollSalaryTypeService1" />
+    </bean>
+    
+    <bean id="companyPTReportController1" class="com.bul.zydex.controller.Payroll.CompanyPTReportController" parent="controllerConfig" >
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="payrollPtCheckService" ref="payrollPtCheckService1" />
+        <property name="payrollProfessionalTaxService" ref="payrollProfessionalTaxService1" />
+        <property name="employeeMasterService" ref="employeeMasterService1"></property>
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
+        <property name="employeeAdditionalSalaryService" ref="employeeAdditionalSalaryService1" />
+    </bean>
+    <bean id="bankStatementController1" class="com.bul.zydex.controller.Payroll.BankStatementController" parent="controllerConfig" >
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeAdditionalSalaryService" ref="employeeAdditionalSalaryService1" />
+        <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
+        <property name="payrollSalaryTypeService" ref="payrollSalaryTypeService1" />
+        <property name="employeeTypeWiseSalaryService" ref="employeeTypeWiseSalaryService1" />
+        <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
+        <property name="payrollAdditionalAmountService" ref="payrollAdditionalAmountService1" />
+        <property name="payrollRecurringAdditionalAmountService" ref="payrollRecurringAdditionalAmountService1" />
+        <property name="payrollDeductionService" ref="payrollDeductionService1" />
+        <property name="payrollRecurringDeductionService" ref="payrollRecurringDeductionService1" />
+        <property name="payrollPtCheckService" ref="payrollPtCheckService1" />
+        <property name="payrollProfessionalTaxService" ref="payrollProfessionalTaxService1" />
+        <property name="payrollProvidentFundService" ref="payrollProvidentFundService1" />
+        <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
+        <property name="employeeExcelRecordService" ref="employeeExcelRecordService1" />
+        <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
+    </bean>
+    <bean id="esicDeductionStatementController1" class="com.bul.zydex.controller.Payroll.EsicDeductionStatementController" parent="controllerConfig" >
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeAdditionalSalaryService" ref="employeeAdditionalSalaryService1" />
+        <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
+        <property name="payrollSalaryTypeService" ref="payrollSalaryTypeService1" />
+        <property name="employeeTypeWiseSalaryService" ref="employeeTypeWiseSalaryService1" />
+        <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
+        <property name="payrollAdditionalAmountService" ref="payrollAdditionalAmountService1" />
+        <property name="payrollRecurringAdditionalAmountService" ref="payrollRecurringAdditionalAmountService1" />
+        <property name="payrollDeductionService" ref="payrollDeductionService1" />
+        <property name="payrollRecurringDeductionService" ref="payrollRecurringDeductionService1" />
+        <property name="payrollPtCheckService" ref="payrollPtCheckService1" />
+        <property name="payrollProfessionalTaxService" ref="payrollProfessionalTaxService1" />
+        <property name="payrollProvidentFundService" ref="payrollProvidentFundService1" />
+        <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
+        <property name="employeeExcelRecordService" ref="employeeExcelRecordService1" />
+        <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
+    </bean>
+    <bean id="overTimeController1" class="com.bul.zydex.controller.Payroll.OverTimeController" parent="controllerConfig" >
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeAdditionalSalaryService" ref="employeeAdditionalSalaryService1" />
+        <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
+        <property name="payrollSalaryTypeService" ref="payrollSalaryTypeService1" />
+        <property name="employeeTypeWiseSalaryService" ref="employeeTypeWiseSalaryService1" />
+        <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
+        <property name="payrollAdditionalAmountService" ref="payrollAdditionalAmountService1" />
+        <property name="payrollRecurringAdditionalAmountService" ref="payrollRecurringAdditionalAmountService1" />
+        <property name="payrollDeductionService" ref="payrollDeductionService1" />
+        <property name="payrollRecurringDeductionService" ref="payrollRecurringDeductionService1" />
+        <property name="payrollPtCheckService" ref="payrollPtCheckService1" />
+        <property name="payrollProfessionalTaxService" ref="payrollProfessionalTaxService1" />
+        <property name="payrollProvidentFundService" ref="payrollProvidentFundService1" />
+        <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
+        <property name="employeeExcelRecordService" ref="employeeExcelRecordService1" />
+        <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
+    </bean>
+    <bean id="pFChallenController1" class="com.bul.zydex.controller.Payroll.PFChallenController" parent="controllerConfig" >
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeAdditionalSalaryService" ref="employeeAdditionalSalaryService1" />
+        <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
+        <property name="payrollSalaryTypeService" ref="payrollSalaryTypeService1" />
+        <property name="employeeTypeWiseSalaryService" ref="employeeTypeWiseSalaryService1" />
+        <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
+        <property name="payrollAdditionalAmountService" ref="payrollAdditionalAmountService1" />
+        <property name="payrollRecurringAdditionalAmountService" ref="payrollRecurringAdditionalAmountService1" />
+        <property name="payrollDeductionService" ref="payrollDeductionService1" />
+        <property name="payrollRecurringDeductionService" ref="payrollRecurringDeductionService1" />
+        <property name="payrollPtCheckService" ref="payrollPtCheckService1" />
+        <property name="payrollProfessionalTaxService" ref="payrollProfessionalTaxService1" />
+        <property name="payrollProvidentFundService" ref="payrollProvidentFundService1" />
+        <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
+        <property name="employeeExcelRecordService" ref="employeeExcelRecordService1" />
+        <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
+    </bean>
+    <bean id="loanReportController1" class="com.bul.zydex.controller.Payroll.LoanReportController" parent="controllerConfig" >
+        <property name="payrollLoanTypeService" ref="payrollLoanTypeService1" />
+        <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
+        <property name="payrollLoanRemainingAmountService" ref="payrollLoanRemainingAmountService1" />
+    </bean>
+    <bean id="attendanceReportController1" class="com.bul.zydex.controller.Payroll.AttendanceReportController" parent="controllerConfig" >
+        <property name="employeeMasterService" ref="employeeMasterService1"></property>
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
+        <property name="employeeExcelRecordService" ref="employeeExcelRecordService1" />
+    </bean>
+    <bean id="employeeIncentiveMonthWiseController1" class="com.bul.zydex.controller.Payroll.EmployeeIncentiveMonthWiseController" parent="controllerConfig" >
+        <property name="employeeMasterService" ref="employeeMasterService1"></property>
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
+        <property name="employeeExcelRecordService" ref="employeeExcelRecordService1" />
+        <property name="employeeIncentiveMonthwiseService" ref="employeeIncentiveMonthwiseService1" />
+        <property name="employeePayrollIncentiveService" ref="employeePayrollIncentiveService1" />
+       
+       
+        
+    </bean>
+
+    
+    
 </beans>
  

@@ -78,7 +78,7 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th align="center" style="width: 1px;"><input type="checkbox" id="toggleId"/></th>
-                                                                    <th>Zydex Location</th>
+                                                                    <th>Location</th>
                                                                     <th>No Of Hours</th>
                                                                     <th>Action</th>
                                                                 </tr>

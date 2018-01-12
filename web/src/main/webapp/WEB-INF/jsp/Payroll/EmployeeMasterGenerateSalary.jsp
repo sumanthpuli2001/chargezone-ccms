@@ -1,0 +1,306 @@
+<%--
+    Document   : LeaveEmployeeDetailSearch
+    Created on : Oct 19, 2015, 4:03:28 PM
+    Author     : AJAY
+--%>
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
+    <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
+
+    <head>
+        <title>  Salary Search</title>
+    </head>
+
+    <script>
+
+        function saveSubmit11() {
+            var flag3 = true;
+//            alert(document.getElementById("month").value);
+            if (document.getElementById("month").value == '') {
+                document.getElementById("monthError").innerHTML = "- It must be selected.";
+                flag3 = false;
+            } else {
+                document.getElementById("monthError").innerHTML = '';
+            }
+//            alert(flag3);
+            if (flag3) {
+                flag3 = false;
+                document.getElementById('saveSubmit1').innerHTML = 'Searching ... .. .';
+                document.form1.submit();
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>Search Employee Detail:</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Search Salary Detail</li>
+            </ol>
+        </section>
+        <c:if test="${!empty successMessage}">
+            <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
+        </c:if>
+        <c:if test="${!empty failureMessage}">
+            <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
+        </c:if>
+        <!-- Main content -->
+        <form:form class="form-horizontal" role="form1" action="employeeSalaryProcess.htm?act=searchEmpLeaveDetailSubmit" method="post" name='form' onsubmit='return saveSubmit11();'>
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Custom Tabs -->
+                        <div class="nav-tabs-custom">
+                            <div class="tab-content">
+                                <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
+                                <!--form horizontal starts here-->
+
+                                <div class="box-header">
+                                </div>
+                                <div class="box-body no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label>Location:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control ">
+                                                        <option value="" label="-- Select --" ></option>
+                                                        <c:forEach var="deptName" items="${deptMap}">
+                                                            <option value="${deptName.key}" label="${deptName.value}" ></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+
+                                                <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
+                                                <div class="col-sm-6">
+                                                    <label>Type of Employee :<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <select name="employeeTypeMasterId" id="employeeTypeMasterId" onchange="selectsubtype(this.value);" class="form-control">
+                                                        <option value="" label="-- Select --" ></option>
+                                                        <c:forEach var="EmpType" items="${EmployeeTypeList}">
+                                                            <option value="${EmpType.key}" label="${EmpType.value}" ></option>
+                                                        </c:forEach>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-6" id="employeeSubTypeId">
+                                                    <label>Employee SubType:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <select name="employeeSubTypeId" id="employeeSubTypeId" class="form-control">
+                                                        <option value="" label="-- Select --" ></option> 
+
+                                                    </select>
+                                                </div>
+
+
+                                                <div class="col-sm-6">
+                                                    <label>Payment Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <select name="paymentType" id="paymentType" class="form-control ">
+                                                        <option value="">--Select--</option>
+                                                        <option value="0">Cheque</option>
+                                                        <option value="1">Cash</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+<!--                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label>Months:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
+                                                    <select name="month" id="month" class="form-control ">
+                                                        <option value="">--Select--</option>
+                                                        <option value="01">January</option>
+                                                        <option value="02">February</option>
+                                                        <option value="03">March </option>
+                                                        <option value="04">April</option>
+                                                        <option value="05">May</option>
+                                                        <option value="06">June</option>
+                                                        <option value="07">July</option>
+                                                        <option value="08">August</option>
+                                                        <option value="09">September</option>
+                                                        <option value="10">October </option>
+                                                        <option value="11">November </option>
+                                                        <option value="12">December</option>
+
+                                                    </select>
+                                                    <span id="monthError" style="color: red;"></span>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <label>Year:<span style="color: red;font-size: 12px;"></span></label>  
+                                                    <select name="year11" id="year11" class="form-control ">
+
+                                                    </select>
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                    </div><!-- /.col -->
+                                </div><!-- /.row -->
+                            </div><!-- /.box-body -->
+                            <div class="form-group">
+                                <div class=" col-sm-2">
+                                    <button type="submit" class="btn btn-primary" data-original-title="" title="" >Search</button>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="tab_3"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </form:form>
+        <form:form action="employeeSalaryProcess.htm?act=createSubmit" method="post" commandName="employeeSalaryProcess"
+                   name='form2'  class="form-horizontal" role="form">
+            <input type="hidden" name="month" value="${month}">
+            <input type="hidden" name="year" value="${year}">
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Custom Tabs -->
+                        <div class="nav-tabs-custom">
+                            <div class="tab-content">
+<!--                                <div class="box-header" style="text-align: right;">
+                                    <button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="window.location = 'leaveEmployeeDetail.htm?act=exportToExcelForLeaveRequest'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>
+                                </div>-->
+                                <div class="box-body no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="table table-bordered">
+                                                <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                    <c:choose>
+                                                        <c:when test="${empty employeelist}">
+                                                            <tr>
+                                                                <td align="center">
+                                                                    <c:out value="There is no record found."></c:out>
+                                                                    </td>
+                                                                </tr>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Employee Id</th>
+                                                                    <th>Employee Name</th>
+<!--                                                                    <th>LWP</th>
+                                                                    <th>Leave Encashment</th>-->
+                                                                    <th style="display: none;"></th>
+
+                                                                </tr>
+                                                            </thead>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <tbody>
+                                                    <input style="display: none;" type="Text" name="employeeListLength"  value="${fn:length(employeelist)}"/>
+
+                                                    <c:forEach var="list" items="${employeelist}" varStatus="status">
+                                                        <tr>
+                                                            <td>${list.employeeId}</td>
+                                                            <td>${list.employeeName}</td>
+<!--                                                            <td><input type="text" name="lwpText${status.count}" id="lwpText${status.count}" value="0.0" class="form-control"></td>
+                                                            <td style="display: none;"><input type="text" name="empId${status.count}" id="empId${status.count}" value="${list.id}" class="form-control"></td>
+                                                             <td><input type="text" name="leaveText${status.count}" id="leaveText${status.count}" value="0.0" class="form-control"></td>-->
+                                                        </tr>
+                                                    </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <c:if test="${!empty employeelist}">
+                                                <div class="form-group">
+                                                    <div class=" col-sm-2">
+                                                        <button type="submit" class="btn btn-primary" data-original-title="" title="" >Generate</button>
+                                                    </div>
+                                                </div>
+                                            </c:if>
+
+                                        </div><!-- /.col -->
+                                    </div><!-- /.row -->
+                                </div><!-- /.box-body -->
+                            </div><!-- /.tab-content -->
+                        </div><!-- nav-tabs-custom -->
+
+                    </div>
+                </div><!-- /.col -->
+            </section>
+
+        </form:form>
+    </div>
+    <script>
+        function selectsubtype(typeId) {
+
+            var empSubTypeId = document.getElementById("employeeSubTypeId").value;
+            //            document.getElementById('EmployeeId').innerHTML = "Fetching ... .. .";
+            $.post("employeeTypeWiseSalary.htm?act=readEmpTypeAjax",
+                    {
+                        typeId: typeId,
+                        empSubTypeId: empSubTypeId
+                    }, function (responseTxt, statusTxt, xhr) {
+                if (statusTxt === "success") {
+                    ("responseTxt" + responseTxt);
+                    document.getElementById('employeeSubTypeId').innerHTML = responseTxt;
+                }
+                if (statusTxt === "error")
+                    ("Error: " + xhr.status + ": " + xhr.statusText);
+            });
+        }
+
+        $(document).ready(function () {
+            var empTypeId = document.getElementById("employeeTypeMasterId").value;
+            selectsubtype(empTypeId);
+
+        });
+
+    </script>
+    <script type="text/javascript">
+        $('.form_datetime').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
+
+    <script>
+        jQuery.noConflict();
+        jQuery(document).ready(function () {
+            jQuery("#employeeName").tokenInput(${list}, {
+                preventDuplicates: true,
+                noResultsText: "No Result",
+                tokenLimit: "1",
+                searchingText: "Searching ... .. .",
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        window.onload = init;
+        function init() {
+            document.form1.month.options[new Date().getMonth()].selected = true;
+        }
+        var start = 1990;
+        var end = new Date().getFullYear();
+        var options11 = "";
+
+        for (var year1 = end; year1 >= start; year1--) {
+            options11 += "<option>" + year1 + "</option>";
+        }
+        document.getElementById('year11').innerHTML = options11;
+    </script>
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+</html>
+

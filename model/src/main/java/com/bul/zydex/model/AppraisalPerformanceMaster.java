@@ -61,6 +61,12 @@ public class AppraisalPerformanceMaster implements java.io.Serializable {
     private Set appraisalPerformanceKras_1 = new HashSet(0);
     private Set appraisalPerformanceActivitieses_1 = new HashSet(0);
     private Set appraisalPerformanceCompetencyEvaluations_1 = new HashSet(0);
+//     private Set appraisalPerformanceBehaviorses = new HashSet(0);
+     private Set appraisalKraActivities = new HashSet(0);
+//     private Set appraisalPerformanceCompetencyEvaluations = new HashSet(0);
+//     private Set appraisalPerformanceIndividualDevelopmentPlans = new HashSet(0);
+//     private Set appraisalPerformanceKras = new HashSet(0);
+//     private Set appraisalPerformanceActivitieses = new HashSet(0);
 
     public AppraisalPerformanceMaster() {
     }
@@ -85,7 +91,7 @@ public class AppraisalPerformanceMaster implements java.io.Serializable {
         this.managerActivityScore = managerActivityScore;
     }
 
-    public AppraisalPerformanceMaster(EmployeeMaster employeeMaster, String weightageScore, String weightageScoreManager, String totalScore, String empMidyearSelfassOtheractivty, String empEndyearSelfassOtheractivty, String managerMidyearReviewevalOtheractivity, String managerEndyearReviewevalOtheractivity, String behaviorsMidyearTotalscore, String behaviorsMidyearOtherremark, String behaviorsFinalscore, String behaviorsDate, String behaviorsYear, String behaviorsEndyearOtherremark, String behaviorsEndyearTotalscore, int status, int managerStatus, int employeeStatus, int managerkraStatus, int reworkStatus, String reworkComment, int midYearEmployeeStatus, int midYearManagerStatus, int endYearEmployeeStatus, int endYearManagerStatus, String behaviorsMidyearOtherremarkForemployee, String behaviorsEndyearOtherremarkForemployee, String behaviorsFinalscoreForemployee, String totalScoreForemployee, String behaviorsMidyearTotalscoreForemp, String behaviorsEndyearTotalscoreForemp, int employeeCompetencyStatus, int managerCompetencyStatus, int competencyReworkStatus, String competencyReworkComment, int employeeIdpStatus, int managerIdpStatus, int idpReworkStatus, String idpReworkComment) {
+    public AppraisalPerformanceMaster(EmployeeMaster employeeMaster, String weightageScore, String weightageScoreManager, String totalScore, String empMidyearSelfassOtheractivty, String empEndyearSelfassOtheractivty, String managerMidyearReviewevalOtheractivity, String managerEndyearReviewevalOtheractivity, String behaviorsMidyearTotalscore, String behaviorsMidyearOtherremark, String behaviorsFinalscore, String behaviorsDate, String behaviorsYear, String behaviorsEndyearOtherremark, String behaviorsEndyearTotalscore, int status, int managerStatus, int employeeStatus, int managerkraStatus, int reworkStatus, String reworkComment, int midYearEmployeeStatus, int midYearManagerStatus, int endYearEmployeeStatus, int endYearManagerStatus, String behaviorsMidyearOtherremarkForemployee, String behaviorsEndyearOtherremarkForemployee, String behaviorsFinalscoreForemployee, String totalScoreForemployee, String behaviorsMidyearTotalscoreForemp, String behaviorsEndyearTotalscoreForemp, int employeeCompetencyStatus, int managerCompetencyStatus, int competencyReworkStatus, String competencyReworkComment, int employeeIdpStatus, int managerIdpStatus, int idpReworkStatus, String idpReworkComment,Set appraisalKraActivities) {
         this.employeeMaster = employeeMaster;
         this.weightageScore = weightageScore;
         this.weightageScoreManager = weightageScoreManager;
@@ -125,6 +131,7 @@ public class AppraisalPerformanceMaster implements java.io.Serializable {
         this.managerIdpStatus = managerIdpStatus;
         this.idpReworkStatus = idpReworkStatus;
         this.idpReworkComment = idpReworkComment;
+        this.appraisalKraActivities = appraisalKraActivities;
 
     }
 
@@ -543,4 +550,13 @@ public class AppraisalPerformanceMaster implements java.io.Serializable {
     public void setManagerActivityScore(String managerActivityScore) {
         this.managerActivityScore = managerActivityScore;
     }
+
+    public Set getAppraisalKraActivities() {
+        return appraisalKraActivities;
+    }
+
+    public void setAppraisalKraActivities(Set appraisalKraActivities) {
+        this.appraisalKraActivities = appraisalKraActivities;
+    }
+    
 }

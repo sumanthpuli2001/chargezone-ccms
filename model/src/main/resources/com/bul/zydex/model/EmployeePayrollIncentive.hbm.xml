@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.EmployeePayrollIncentive" table="employee_payroll_incentive" catalog="hira_technology">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="employeeMaster" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="employee_master_id" />
+        </many-to-one>
+        <many-to-one name="employeeIncentiveMonthwise" class="com.bul.zydex.model.EmployeeIncentiveMonthwise" fetch="select">
+            <column name="employee_incentive_monthwise_id" />
+        </many-to-one>
+        <property name="pDay" type="java.lang.Float">
+            <column name="pday" precision="12" scale="0" />
+        </property>
+        <property name="prodIncentivePerDay" type="java.lang.Double">
+            <column name="prod_incentive_per_day" precision="22" scale="0" />
+        </property>
+        <property name="basicRatePerDay" type="java.lang.Double">
+            <column name="basic_rate_per_day" precision="22" scale="0" />
+        </property>
+        <property name="attenIncentiveDay" type="java.lang.Double">
+            <column name="atten_incentive_day" precision="22" scale="0" />
+        </property>
+        <property name="incentiveAmount" type="java.lang.Double">
+            <column name="incentive_amount" precision="22" scale="0" />
+        </property>
+        <property name="month" type="string">
+            <column name="month" length="45" />
+        </property>
+        <property name="year" type="string">
+            <column name="year" length="45" />
+        </property>
+        <property name="prodIncentiveAmount" type="java.lang.Double">
+            <column name="prod_incentive_amount" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

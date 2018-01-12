@@ -11,11 +11,17 @@ import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.EmployeePolicyDetail;
+import com.bul.zydex.model.EmployeeSubType;
+import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.HoursBasis;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.PayrollPfCheck;
+import com.bul.zydex.model.PayrollPtCheck;
 import com.bul.zydex.model.PmpFormStatusMaster;
+import com.bul.zydex.model.PolicyMaster;
 import com.bul.zydex.model.RotationMaster;
 import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
 import com.bul.zydex.model.ShiftMaster;
@@ -71,6 +77,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         LevelMaster levelMaster = new LevelMaster();
         LocationMaster locationMaster = new LocationMaster();
         UserMaster userMaster = new UserMaster();
+        EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
+        EmployeeSubType employeeSubType = new EmployeeSubType();
         ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
 //        ShiftMaster shiftMaster = new ShiftMaster();
         selectEmployee(request, response);
@@ -82,6 +90,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         shiftRotaionList(request);
         setZydexLocationList(request);
         competencyList(request);
+        EmployeeTypeList(request);
+        EmployeeSubTypeList(request);
+        companyList(request);
+        policyList(request);
         //master's data setting completed on request
 //        shiftList(request);
         hoursBasisList(request);
@@ -91,6 +103,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         employeeMaster.setDepartmentMaster(departmentMaster);
         employeeMaster.setDesignationMaster(designationMaster);
         employeeMaster.setZydexLocationMaster(zydexLocationMaster);
+        employeeMaster.setEmployeeTypeMaster(employeeTypeMaster);
+        employeeMaster.setEmployeeSubType(employeeSubType);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Employee/EmployeeRegistrationForm");
         return mv;
@@ -101,9 +115,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeLeaveBalance employeeLeaveBalance;
 //        EmployeeMaster employeeMaster1 = new EmployeeMaster();
-
+        EmployeeSubType employeeSubType = new EmployeeSubType();
         BindException errors = new BindException(employeeMaster, "employeeMaster");
         UserMaster userMaster = new UserMaster();
+
         bind(request, employeeMaster);
         //Deopdown List//
         departmentList(request);
@@ -114,11 +129,16 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         hoursBasisList(request);
         setZydexLocationList(request);
         competencyList(request);
+        EmployeeTypeList(request);
+        EmployeeSubTypeList(request);
+        companyList(request);
+        policyList(request);
         //DeowpDown list//
 //        String reasonForLeaving = request.getParameter("password");
         String userName = request.getParameter("userName");
 //        String password = reasonForLeaving;
         String password = "";
+        String employeeSubTypeId = request.getParameter("subTypeId");
 //        String gender = request.getParameter("gender");
 //        String reportingManagerLevel1 = request.getParameter("reportingManagerLevel1");
 //        String reportingManagerLevel2 = request.getParameter("reportingManagerLevel2");
@@ -154,6 +174,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             c1.add(Calendar.YEAR, 18);
             DOB1 = c1.getTime();
         }
+        if (null != employeeSubTypeId && !employeeSubTypeId.equals("")) {
+            employeeSubType.setId(Integer.parseInt(employeeSubTypeId));
+        }
+        employeeMaster.setEmployeeSubType(employeeSubType);
 //        if (!userMasterService.isExist(userName) && !userName.equals("") && !password.equals("")) {
 //
 //            userMasterService.create(userMaster);
@@ -175,6 +199,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             } else if (!"".equals(HoursTitle) && HoursTitle != null) {
                 employeeMaster.setShiftHoursId(Integer.parseInt(HoursTitle));
             }
+
 //            employeeMaster.setShiftHoursId(Integer.parseInt(shiftId));
 //           above line is commented because it produces "NumberFormatException" while we submits blank page
 //            By Irfan
@@ -227,8 +252,72 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             userMaster.setFirstTime(true);
 //set firstTime is true for compulsory password change on first time login
             userMasterService.create(userMaster);
+            if(employeeMaster.getPfAmount().equals("")){
+                employeeMaster.setPfAmount("0");
+            }
             employeeMasterService.create(employeeMaster);
-            PmpFormStatusMaster pmpFormStatusMaster=new PmpFormStatusMaster();
+            //Code for Employee Policy Detail
+            EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
+            int otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
+            for (int i = 1; i <= otherDetailCount; i++) {
+                PolicyMaster policyMaster = new PolicyMaster();
+                if (null != request.getParameter("policyId" + i) && null != request.getParameter("amount" + i) && null != request.getParameter("policyNumber" + i)) {
+                    if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("amount" + i).equals("") && !request.getParameter("policyNumber" + i).equals("")) {
+                        int policyId = Integer.parseInt(request.getParameter("policyId" + i));
+                        policyMaster.setId(policyId);
+                        Double amount = Double.valueOf(request.getParameter("amount" + i));
+                        String policyNumber = request.getParameter("policyNumber" + i);
+                        employeePolicyDetail.setEmployeeMaster(employeeMaster);
+                        employeePolicyDetail.setAmount(amount);
+                        employeePolicyDetail.setPolicyMaster(policyMaster);
+                        employeePolicyDetail.setPolicyNum(policyNumber);
+                        employeePolicyDetailService.create(employeePolicyDetail);
+                    }
+                }
+            }
+            //End
+            //Code for Payroll Provident
+            int empId = employeeMaster.getEmployeeTypeMaster().getId();
+            int empSubId = employeeMaster.getEmployeeSubType().getId();
+            EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
+            employeeTypeMaster.setId(empId);
+            EmployeeSubType employeeSubTypeMaster = new EmployeeSubType();
+            employeeSubTypeMaster.setId(empSubId);
+            Boolean pfCheck = payrollPfCheckService.isExistPF(empId, empSubId);
+            if (!pfCheck) {
+                PayrollPfCheck payrollPfCheck = new PayrollPfCheck();
+                payrollPfCheck.setEmployeeSubType(employeeSubTypeMaster);
+                payrollPfCheck.setEmployeeTypeMaster(employeeTypeMaster);
+                if (null != request.getParameter("pf")) {
+                    if (!request.getParameter("pf").equals("")) {
+                        if (request.getParameter("pf").equals("true")) {
+                            payrollPfCheck.setPfCheck(true);
+                        } else {
+                            payrollPfCheck.setPfCheck(false);
+                        }
+                        payrollPfCheckService.create(payrollPfCheck);
+                    }
+                }
+            }
+            Boolean ptCheck = payrollPtCheckService.isExistPT(empId, empSubId);
+            if (!ptCheck) {
+                PayrollPtCheck payrollPtCheck = new PayrollPtCheck();
+                payrollPtCheck.setEmployeeSubType(employeeSubTypeMaster);
+                payrollPtCheck.setEmployeeTypeMaster(employeeTypeMaster);
+                if (null != request.getParameter("pt")) {
+                    if (!request.getParameter("pt").equals("")) {
+                        if (request.getParameter("pt").equals("true")) {
+                            payrollPtCheck.setPtCheck(true);
+                        } else {
+                            payrollPtCheck.setPtCheck(false);
+                        }
+                        payrollPtCheckService.create(payrollPtCheck);
+                    }
+                }
+            }
+            //End
+
+            PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
             pmpFormStatusMaster.setEmployeeMaster(employeeMaster);
             pmpFormStatusMaster.setStartYearStatus(false);
             pmpFormStatusMaster.setMidYearStatus(false);
@@ -241,9 +330,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             pmpFormStatusMaster.setCompentencyMidYearStatus(false);
             pmpFormStatusMaster.setCompentencyStartYearStatus(false);
             pmpFormStatusMasterService.create(pmpFormStatusMaster);
-            
-            
-            
+
             //employeeMaster.setEmployeeId("" + employeeMaster1);
             boolean isLeapYear = false;
             LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
@@ -570,6 +657,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        employeeMaster.setId(Integer.parseInt(id));
 //        employeeMaster.setEmployeeId(id);
         //set Employee master id//
+        EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
+        EmployeeSubType employeeSubType = new EmployeeSubType();
         UserMaster userMaster = new UserMaster();
         employeeMaster = employeeMasterService.readById(id);
         ///this code is for read file name and display it
@@ -601,6 +690,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         shiftRotaionList(request);
         setZydexLocationList(request);
         competencyList(request);
+        EmployeeTypeList(request);
+        EmployeeSubTypeList(request);
+        policyList(request);
 
 //        shiftList(request);
         hoursBasisList(request);
@@ -636,18 +728,37 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 }
             }
         }
+        //Code to fetch policy details IN VIEW CLICK
+        List finalPolicyList = new ArrayList();
+        PolicyMaster policyMaster = new PolicyMaster();
+        List<?> policyData = (List<?>) employeePolicyDetailService.fetchPolicyData(employeeMaster.getId());
+        for (Object policyDataObject : policyData) {
+            List policyList = new ArrayList();
+            Object[] policyDetail = (Object[]) policyDataObject;
+            policyList.add(policyDetail[0]);
+            policyList.add(policyDetail[1]);
+            policyList.add(policyDetail[2]);
+            policyList.add(policyDetail[3]);
+            finalPolicyList.add(policyList);
+        }
+        int empId = employeeMaster.getEmployeeTypeMaster().getId();
+        int empSubId = employeeMaster.getEmployeeSubType().getId();
+        Boolean checkPf = payrollPfCheckService.getPFCheckValue(empId, empSubId);
+        Boolean checkPt = payrollPtCheckService.getPTCheckValue(empId, empSubId);
+
 //        selectedEmployeeLevel2(request, employeeMaster);
 //        selectedEmployeeLevel3(request, employeeMaster);
 //        selectedEmployeeLevel4(request, employeeMaster);
 //        selectedEmployeeLevel5(request, employeeMaster);
 //        selectedEmployeeLevel6(request, employeeMaster);
-
+        request.setAttribute("checkPf", checkPf);
+        request.setAttribute("checkPt", checkPt);
         request.setAttribute("lastYearPerformanceRatingsOfEmployee", lastYearPerformanceRatingsOfEmployee);
         request.setAttribute("company", employeeMaster.getCompany());
         request.setAttribute("employeeType", employeeMaster.getEmployeeType());
         request.setAttribute("shiftType", employeeMaster.getShiftType());
         request.setAttribute("certificatesList", certificatesList);
-
+        request.setAttribute("finalPolicyList", finalPolicyList);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         request.setAttribute("mriStatus", employeeMaster.getMaritalStatus());
         mv.setViewName("Employee/EditUserProfile");
@@ -658,6 +769,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
     public ModelAndView editSubmit(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         String lastYearPerformanceRatingsOfEmployee = "";
+        EmployeeSubType employeeSubType = new EmployeeSubType();
         EmployeeMaster employeeMasterForReportingManagerUpdateWherRequired = new EmployeeMaster();
         employeeMasterForReportingManagerUpdateWherRequired = employeeMasterService.readById(employeeMaster.getId());
         String reportingManagerBeforeUpdate = "" + employeeMasterForReportingManagerUpdateWherRequired.getReportingManagerLevel1();
@@ -675,6 +787,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        shiftList(request);
         hoursBasisList(request);
         //user levels //
+
         selectedEmployeeLevel1(request, employeeMaster);
 //        selectedEmployeeLevel2(request, employeeMaster);
 //        selectedEmployeeLevel3(request, employeeMaster);
@@ -695,11 +808,16 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String userId = "" + request.getParameter("userMaster.id");
         String id = request.getParameter("id");
         String zid = request.getParameter("zydexLocationMaster.id");
+        String employeeSubTypeId = request.getParameter("subTypeId");
         if (null != zid && !zid.equals("")) {
             ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
             zydexLocationMaster.setId(Integer.parseInt(zid));
             employeeMaster.setZydexLocationMaster(zydexLocationMaster);
         }
+        if (null != employeeSubTypeId && !employeeSubTypeId.equals("")) {
+            employeeSubType.setId(Integer.parseInt(employeeSubTypeId));
+        }
+        employeeMaster.setEmployeeSubType(employeeSubType);
 //        employeeMaster.setEmployeeId(id);
 //        String reportingManagerLevel1 = request.getParameter("reportingManagerLevel1");
 //        String reportingManagerLevel2 = request.getParameter("reportingManagerLevel2");
@@ -841,6 +959,34 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         if (!certificateListFile.exists()) {
             certificateListFile.mkdir();
         }
+        //Code for Employee Policy Detail
+        EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
+//       Boolean check =  employeePolicyDetailService.deleteByEmployeeId(employeeMaster.getId());
+        List<?> policyDetail = employeePolicyDetailService.readPolicyId(employeeMaster.getId());
+        for (Object policyObject : policyDetail) {
+            employeePolicyDetail = (EmployeePolicyDetail) policyObject;
+            employeePolicyDetailService.delete(employeePolicyDetail.getId());
+        }
+
+        EmployeePolicyDetail employeePolicyDetailObject = new EmployeePolicyDetail();
+        int otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
+        for (int i = 1; i <= otherDetailCount; i++) {
+            PolicyMaster policyMaster = new PolicyMaster();
+            if (null != request.getParameter("policyId" + i) && null != request.getParameter("amount" + i) && null != request.getParameter("policyNumber" + i)) {
+                if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("amount" + i).equals("") && !request.getParameter("policyNumber" + i).equals("")) {
+                    int policyId = Integer.parseInt(request.getParameter("policyId" + i));
+                    policyMaster.setId(policyId);
+                    employeePolicyDetail.setPolicyMaster(policyMaster);
+                    Double amount = Double.valueOf(request.getParameter("amount" + i));
+                    employeePolicyDetail.setAmount(amount);
+                    String policyNumber = request.getParameter("policyNumber" + i);
+                    employeePolicyDetail.setPolicyNum(policyNumber);
+                    employeePolicyDetail.setEmployeeMaster(employeeMaster);
+                    employeePolicyDetailService.create(employeePolicyDetail);
+                }
+            }
+        }
+        //End
 //        String firstStepCount = request.getParameter("firstStepCount");
 //        for (int i = 1; i <= Integer.parseInt(firstStepCount); i++) {
 //
@@ -888,8 +1034,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String empId[] = request.getParameterValues("checkId");
         for (String z : empId) {
             try {
+                PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
+                List<?> list11 = pmpFormStatusMasterService.delete1(z);
+                for (Object pdf1 : list11) {
+                    pmpFormStatusMaster = (PmpFormStatusMaster) pdf1;
+//                 Object[] o1=(Object[]) pdf;
+
+                    pmpFormStatusMasterService.delete(pmpFormStatusMaster.getId());
+                }
+
+//                pmpFormStatusMasterService.delete1(z);
                 employeeMasterService.delete(Integer.parseInt(z));
-                //userMasterService.delete(Integer.parseInt(z));
+                //userMasterService.delete (Integer.parseInt(z));
                 //userRightMasterService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
                         "Info : One or more records are deleted successfully.");
@@ -2190,6 +2346,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         MultipartFile multipartFile = multipartRequest.getFile("file1");
         EmployeeMaster employeeMaster = new EmployeeMaster();
         LevelMaster levelMaster = new LevelMaster();
+        EmployeeTypeMaster employeeType1 = new EmployeeTypeMaster();
+        EmployeeSubType employeeSubType = new EmployeeSubType();
         DepartmentMaster departmentMaster = new DepartmentMaster();
         DesignationMaster designationMaster = new DesignationMaster();
         ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
@@ -2248,7 +2406,15 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         boolean isShiftMasterCreated = false;//if new created RotationMaster table with ShiftRotationMaster.
         ShiftMaster shiftMasteDefault = new ShiftMaster();
         String employeeType = "";
-
+        String basicSalary = "";  //basic Salary
+        String conveysAmount = ""; //conveysAmount
+        String esicNo = ""; //esic no
+        String tdsAmount = ""; //tds
+        String paymentType = ""; //payment type
+        String pfNo = ""; //pf 
+        String uanNo = ""; //uano
+        String typeofemployee = ""; // employee Type
+        String employeeSubtype = ""; // employee sub type
         boolean gender = false;
         StringBuffer stringBuffer = new StringBuffer();
         StringBuffer stringBufferOfExceptions = new StringBuffer();
@@ -2352,11 +2518,54 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             shiftRotation = "" + (null == row.getCell((short) 34) ? "" : row.getCell((short) 34));
                             shift = "" + (null == row.getCell((short) 35) ? "" : row.getCell((short) 35));
                             employeeType = "" + (null == row.getCell((short) 36) ? "" : row.getCell((short) 36));
-
+                            basicSalary = "" + (null == row.getCell((short) 37) ? "" : row.getCell((short) 37));
+                            conveysAmount = "" + (null == row.getCell((short) 38) ? "" : row.getCell((short) 38));
+                            esicNo = "" + (null == row.getCell((short) 39) ? "" : row.getCell((short) 39));
+                            tdsAmount = "" + (null == row.getCell((short) 40) ? "" : row.getCell((short) 40));
+                            paymentType = "" + (null == row.getCell((short) 41) ? "" : row.getCell((short) 41));
+                            pfNo = "" + (null == row.getCell((short) 42) ? "" : row.getCell((short) 42));
+                            uanNo = "" + (null == row.getCell((short) 43) ? "" : row.getCell((short) 43));
+                            typeofemployee = "" + (null == row.getCell((short) 44) ? "" : row.getCell((short) 44));
+                            employeeSubtype = "" + (null == row.getCell((short) 45) ? "" : row.getCell((short) 45));
                             employeeMaster.setEmployeeId(employeeNo);
                             employeeMaster.setEmployeeName(employeeName);
                             employeeMaster.setDateOfJoining(dateOfJoiningNonFormated);
+                            employeeMaster.setBasicSalary(basicSalary);
+                            employeeMaster.setConveysAmount(conveysAmount);
+                            employeeMaster.setEsicNo(esicNo);
+                            employeeMaster.setTdsAmount(tdsAmount);
+                            employeeMaster.setPaymentType(paymentType);
+                            employeeMaster.setPfNo(pfNo);
+                            employeeMaster.setUanNo(uanNo);
 
+                            if (!typeofemployee.equals("")) {
+                                List<?> levelList11 = employeeTypeService.readByName(typeofemployee);
+                                if (!levelList11.isEmpty()) {
+                                    employeeType1 = (EmployeeTypeMaster) levelList11.get(0);
+                                    employeeMaster.setEmployeeTypeMaster(employeeType1);
+                                } else {
+                                    employeeType1.setTypeOfEmployee(employeeType1.toString());
+                                    employeeTypeService.create(employeeType1);
+                                    employeeMaster.setEmployeeTypeMaster(employeeType1);
+
+                                }
+                            } else {
+                                employeeMaster.setEmployeeTypeMaster(null);
+                            }
+                            if (!employeeSubtype.equals("")) {
+                                List<?> levelList2 = employeeSubTypeService.readByName(employeeSubtype);
+                                if (!levelList2.isEmpty()) {
+                                    employeeSubType = (EmployeeSubType) levelList2.get(0);
+                                    employeeMaster.setEmployeeSubType(employeeSubType);
+                                } else {
+                                    employeeSubType.setSubType(employeeSubType.toString());
+                                    employeeSubTypeService.create(employeeSubType);
+                                    employeeMaster.setEmployeeSubType(employeeSubType);
+
+                                }
+                            } else {
+                                employeeMaster.setEmployeeSubType(null);
+                            }
                             if (!level.equals("")) {
                                 List<?> levelList = levelMasterService.readByName(level.trim().toLowerCase());
                                 if (!levelList.isEmpty()) {
@@ -3703,6 +3912,30 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         employeeMaster1.setDateOfLeaving(employeeMaster.getDateOfLeaving());
         employeeMasterService.update(employeeMaster1);
         mv.setViewName("redirect:employeeMaster.htm?act=searchSubmit");
+        return mv;
+    }
+
+    public ModelAndView readEmpTypeAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        String typeId = request.getParameter("typeId");
+        String employeeId = request.getParameter("employeeId");
+
+        String empSubTypeId = request.getParameter("empSubTypeId");
+
+        if (null == employeeId) {
+        } else {
+            employeeMaster = employeeMasterService.readById(Integer.parseInt(employeeId));
+            request.setAttribute("employeeSubTypeId", employeeMaster.getEmployeeSubType().getId());
+        }
+        if (null == empSubTypeId) {
+        } else {
+            request.setAttribute("employeeSubTypeId", empSubTypeId);
+        }
+        List<?> employeeSubTypeList = employeeSubTypeService.readByEmployeeTypeId(typeId);
+        request.setAttribute("employeeSubTypeList", employeeSubTypeList);
+        mv.setViewName("Employee/EmployeeSubTypeAjax");
         return mv;
     }
 }

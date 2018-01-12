@@ -7,6 +7,7 @@ package com.bul.zydex.validator.Position;
 
 import com.bul.zydex.model.PositionReferMaster;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 /**
@@ -21,8 +22,12 @@ public class PositionReferMasterValidator implements Validator {
     }
 
     @Override
-    public void validate(Object target, Errors errors) {
-        PositionReferMaster positionReferMaster = (PositionReferMaster) target;
+    public void validate(Object o, Errors errors) {
+        PositionReferMaster positionReferMaster = (PositionReferMaster) o;
+          ValidationUtils.rejectIfEmptyOrWhitespace(errors, "positionName",
+                "field.error1", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "positionCode",
+                "field.error1", "None");
     }
 
 }

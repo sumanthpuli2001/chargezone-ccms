@@ -121,7 +121,7 @@ public class AppraisalPerformanceDAOImpl<T> extends GenericsDAOImpl<T> implement
         String query = "";
         int cyear = Calendar.getInstance().get(Calendar.YEAR);
         query += "  "
-                + "FROM AppraisalPerformanceMaster a "
+                + " FROM AppraisalPerformanceMaster a "
                 + " WHERE (a.behaviorsYear =" + year + " or a.behaviorsYear =" + cyear + ")"
                 + " and a.employeeMaster = " + employeeId;
 

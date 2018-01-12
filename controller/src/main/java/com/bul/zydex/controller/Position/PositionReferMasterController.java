@@ -36,11 +36,11 @@ public class PositionReferMasterController extends PositionReferMasterAbstract {
         BindException errors = new BindException(positionReferMaster, "positionReferMaster");
         positionReferMasterValidator.validate(positionReferMaster, errors);
         if (errors.hasErrors()) {
-            if (errors.hasFieldErrors("location")) {
+//            if (errors.hasFieldErrors("location")) {
                 mv.addObject("failureMessage", "Error : Information Is Not Valid.");
                 mv.addAllObjects(errors.getModel());
                 mv.setViewName("Position/PositionCreate");
-            }
+//            }
         } else {
             if (positionReferMasterService.isExist(positionReferMaster)) {
                 positionReferMasterService.createOrUpdate(positionReferMaster);

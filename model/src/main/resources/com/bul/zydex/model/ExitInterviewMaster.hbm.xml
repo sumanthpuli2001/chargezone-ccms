@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.ExitInterviewMaster" table="exit_interview_master" catalog="employee_cafe">
+    <class name="com.bul.zydex.model.ExitInterviewMaster" table="exit_interview_master" catalog="hira_technology">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -18,7 +18,7 @@
             <column name="approver_id" />
         </many-to-one>
         <property name="reasonLeaving" type="string">
-            <column name="reason_leaving" length="16777215" not-null="true" />
+            <column name="reason_leaving" not-null="true" />
         </property>
         <property name="typeOfWork" type="boolean">
             <column name="type_of_work" not-null="true" />
@@ -159,13 +159,13 @@
             <column name="time_to_commute" not-null="true" />
         </property>
         <property name="reasonForSustain" type="string">
-            <column name="reason_for_sustain" length="16777215" not-null="true" />
+            <column name="reason_for_sustain" not-null="true" />
         </property>
         <property name="notToJoinReason" type="string">
-            <column name="not_to_join_reason" length="16777215" />
+            <column name="not_to_join_reason" />
         </property>
         <property name="otherFeedback" type="string">
-            <column name="other_feedback" length="16777215" />
+            <column name="other_feedback" />
         </property>
         <property name="againJoin" type="boolean">
             <column name="again_join" not-null="true" />

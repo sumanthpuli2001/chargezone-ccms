@@ -13,7 +13,7 @@ import com.bul.zydex.model.AppraisalPerformanceCompetencyEvaluation;
 import com.bul.zydex.model.AppraisalPerformanceIndividualDevelopmentPlan;
 import com.bul.zydex.model.AppraisalPerformanceKra;
 import com.bul.zydex.model.AppraisalPerformanceMaster;
-import com.bul.zydex.model.AppraisalkraActivity;
+import com.bul.zydex.model.AppraisalKraActivity;
 import com.bul.zydex.model.CompetencyEvaluationMaster;
 import com.bul.zydex.model.CompetencyEvaluationTextmaster;
 import com.bul.zydex.model.DepartmentMaster;
@@ -71,7 +71,7 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
     protected KraCategoryService<KraCategory> kraCategoryService;
     protected AppraisalPerformanceActivitiesService<AppraisalPerformanceActivities> appraisalPerformanceActivitiesService;
     protected UpdateAppraisalPerformanceActivitiesService<UpdateAppraisalPerformanceActivities> updateAppraisalPerformanceActivitiesService;
-    protected AppraisalkraActivityService<AppraisalkraActivity> appraisalkraActivityService;
+    protected AppraisalkraActivityService<AppraisalKraActivity> appraisalkraActivityService;
     protected PmpFormStatusMasterService<PmpFormStatusMaster> pmpFormStatusMasterService;
 
     public UpdateAppraisalPerformanceKraService<UpdateAppraisalPerformanceKra> getUpdateAppraisalPerformanceKraService() {
@@ -178,11 +178,11 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
         this.updateAppraisalPerformanceActivitiesService = updateAppraisalPerformanceActivitiesService;
     }
 
-    public AppraisalkraActivityService<AppraisalkraActivity> getAppraisalkraActivityService() {
+    public AppraisalkraActivityService<AppraisalKraActivity> getAppraisalkraActivityService() {
         return appraisalkraActivityService;
     }
 
-    public void setAppraisalkraActivityService(AppraisalkraActivityService<AppraisalkraActivity> appraisalkraActivityService) {
+    public void setAppraisalkraActivityService(AppraisalkraActivityService<AppraisalKraActivity> appraisalkraActivityService) {
         this.appraisalkraActivityService = appraisalkraActivityService;
     }
 

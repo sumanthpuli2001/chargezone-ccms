@@ -156,7 +156,7 @@
                         <th style="margin:0px;padding:0px;height:100%;">Company</th>
                         </c:if>
                         <c:if test="${employeeAdvanceSearch.zydexLocation}">
-                        <th style="margin:0px;padding:0px;height:100%;">Zydex Location</th>
+                        <th style="margin:0px;padding:0px;height:100%;"> Location</th>
                         </c:if>
                         <c:if test="${employeeAdvanceSearch.workLocation}">
                         <th style="margin:0px;padding:0px;height:100%;">Work Location</th>

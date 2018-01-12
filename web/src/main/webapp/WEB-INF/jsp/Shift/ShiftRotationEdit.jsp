@@ -42,7 +42,7 @@
             }
         }
         function remove111(ii) {
-            alert(ii);
+//            alert(ii);
             var element1 = document.getElementById(ii);
             element1.parentNode.removeChild(element1);
         }

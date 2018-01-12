@@ -43,7 +43,7 @@
                                     <form:hidden path="id"></form:hidden>
                                         <div class="form-group" style="pointer-events: none;">
                                             <div class="col-sm-6">
-                                                <label>Zydex Location:<span style="color: red;font-size: 12px;">*</span></label>
+                                                <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
                                             <form:select path="zydexLocationMaster.id" class="form-control ">
                                                 <form:option value="" label="-- Select --" ></form:option>
                                                 <form:options items="${zydexLocationMap}"></form:options>

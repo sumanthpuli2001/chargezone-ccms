@@ -100,7 +100,7 @@
                                         <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Zydex Location<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <label>Location<span style="color: red;font-size: 12px;">*</span></label>
 
                                                     <form:select path="zydexLocationMaster.id"  class="form-control">
                                                         <%--<form:option value="" label="-- Select --" ></form:option>--%>

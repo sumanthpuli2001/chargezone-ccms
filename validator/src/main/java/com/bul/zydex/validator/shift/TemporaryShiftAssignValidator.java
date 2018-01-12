@@ -30,10 +30,10 @@ public class TemporaryShiftAssignValidator implements Validator {
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "endDate",
                 "field.error1", "None");
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "employeeMaster",
-//                "field.error1", "None");
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "shiftMaster",
-//                "field.error1", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "employeeMaster",
+                "field.error1", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "shiftMaster",
+                "field.error1", "None");
     }
 
 }

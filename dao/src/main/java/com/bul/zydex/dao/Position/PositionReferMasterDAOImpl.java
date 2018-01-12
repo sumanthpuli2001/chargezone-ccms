@@ -33,7 +33,7 @@ public class PositionReferMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
     @Override
     public List<?> readPositionData() {
-        String Query = " from PositionReferMaster  where status =0";
+        String Query = "from PositionReferMaster  where status =0";
         return getHibernateTemplate().find(Query);
     }
 

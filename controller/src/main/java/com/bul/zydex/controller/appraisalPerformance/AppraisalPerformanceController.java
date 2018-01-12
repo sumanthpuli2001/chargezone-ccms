@@ -12,7 +12,7 @@ import com.bul.zydex.model.AppraisalPerformanceCompetencyEvaluation;
 import com.bul.zydex.model.AppraisalPerformanceIndividualDevelopmentPlan;
 import com.bul.zydex.model.AppraisalPerformanceKra;
 import com.bul.zydex.model.AppraisalPerformanceMaster;
-import com.bul.zydex.model.AppraisalkraActivity;
+import com.bul.zydex.model.AppraisalKraActivity;
 import com.bul.zydex.model.CompetencyEvaluationMaster;
 import com.bul.zydex.model.CompetencyEvaluationTextmaster;
 import com.bul.zydex.model.DesignationMaster;
@@ -671,7 +671,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             try {
                                 AppraisalPerformanceKra appraisalPerformanceKra2 = new AppraisalPerformanceKra();
                                 UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra1 = new UpdateAppraisalPerformanceKra();
-                                AppraisalkraActivity appraisalkraActivity = new AppraisalkraActivity();
+                                AppraisalKraActivity appraisalkraActivity = new AppraisalKraActivity();
 
                                 appraisalPerformanceKra2.setId(Integer.parseInt(id));
                                 appraisalPerformanceKra2 = appraisalPerformanceKraService.readById(appraisalPerformanceKra2.getId());
@@ -710,7 +710,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                                 try {
                                     AppraisalPerformanceActivities appraisalPerformanceActivities2 = new AppraisalPerformanceActivities();
                                     UpdateAppraisalPerformanceActivities updateAppraisalPerformanceActivities1 = new UpdateAppraisalPerformanceActivities();
-                                    AppraisalkraActivity appraisalkraActivity = new AppraisalkraActivity();
+                                    AppraisalKraActivity appraisalkraActivity = new AppraisalKraActivity();
 
                                     appraisalPerformanceActivities2.setId(Integer.parseInt(id));
                                     appraisalPerformanceActivities2 = appraisalPerformanceActivitiesService.readById(appraisalPerformanceActivities2.getId());
@@ -1854,7 +1854,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                            try {
 //                                AppraisalPerformanceKra appraisalPerformanceKra2 = new AppraisalPerformanceKra();
 //                                UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra1 = new UpdateAppraisalPerformanceKra();
-//                                AppraisalkraActivity appraisalkraActivity = new AppraisalkraActivity();
+//                                AppraisalKraActivity appraisalkraActivity = new AppraisalKraActivity();
 //
 //                                appraisalPerformanceKra2.setId(Integer.parseInt(id));
 //                                appraisalPerformanceKra2 = appraisalPerformanceKraService.readById(appraisalPerformanceKra2.getId());
@@ -1893,7 +1893,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                                try {
 //                                    AppraisalPerformanceActivities appraisalPerformanceActivities2 = new AppraisalPerformanceActivities();
 //                                    UpdateAppraisalPerformanceActivities updateAppraisalPerformanceActivities1 = new UpdateAppraisalPerformanceActivities();
-//                                    AppraisalkraActivity appraisalkraActivity = new AppraisalkraActivity();
+//                                    AppraisalKraActivity appraisalkraActivity = new AppraisalKraActivity();
 //
 //                                    appraisalPerformanceActivities2.setId(Integer.parseInt(id));
 //                                    appraisalPerformanceActivities2 = appraisalPerformanceActivitiesService.readById(appraisalPerformanceActivities2.getId());
@@ -4266,7 +4266,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                             if (!id.equals("")) {
                                 AppraisalPerformanceKra appraisalPerformanceKra2 = new AppraisalPerformanceKra();
                                 UpdateAppraisalPerformanceKra updateAppraisalPerformanceKra1 = new UpdateAppraisalPerformanceKra();
-                                AppraisalkraActivity appraisalkraActivity = new AppraisalkraActivity();
+                                AppraisalKraActivity appraisalkraActivity = new AppraisalKraActivity();
                                 appraisalkraActivity.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
 
                                 appraisalPerformanceKra2.setId(Integer.parseInt(id));
@@ -4579,7 +4579,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                                 if (!id.equals("")) {
                                     AppraisalPerformanceActivities appraisalPerformanceActivities2 = new AppraisalPerformanceActivities();
                                     UpdateAppraisalPerformanceActivities updateAppraisalPerformanceActivities1 = new UpdateAppraisalPerformanceActivities();
-                                    AppraisalkraActivity appraisalkraActivity = new AppraisalkraActivity();
+                                    AppraisalKraActivity appraisalkraActivity = new AppraisalKraActivity();
 
                                     appraisalPerformanceActivities2.setId(Integer.parseInt(id));
                                     appraisalPerformanceActivities2 = appraisalPerformanceActivitiesService.readById(appraisalPerformanceActivities2.getId());
@@ -6842,7 +6842,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         String pmpId = request.getParameter("appraisalId");
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
         appraisalPerformanceMaster.setId(Integer.parseInt(pmpId));
-        AppraisalkraActivity appraisalkraActivity = new AppraisalkraActivity();
+        AppraisalKraActivity appraisalkraActivity = new AppraisalKraActivity();
         appraisalkraActivity.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
         List<?> deletedkraGoalList = appraisalkraActivityService.readByKraGoalName(appraisalkraActivity);
         request.setAttribute("deletedkraGoalList", deletedkraGoalList);
@@ -6855,7 +6855,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         String pmpId = request.getParameter("appraisalId");
         AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
         appraisalPerformanceMaster.setId(Integer.parseInt(pmpId));
-        AppraisalkraActivity appraisalkraActivity = new AppraisalkraActivity();
+        AppraisalKraActivity appraisalkraActivity = new AppraisalKraActivity();
         appraisalkraActivity.setAppraisalPerformanceMaster(appraisalPerformanceMaster);
         List<?> deletedActivitiesList = appraisalkraActivityService.readByActivitiesName(appraisalkraActivity);
         request.setAttribute("deletedActivitiesList", deletedActivitiesList);

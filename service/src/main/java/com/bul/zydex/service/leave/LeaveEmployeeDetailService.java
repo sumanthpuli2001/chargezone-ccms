@@ -76,4 +76,6 @@ public interface LeaveEmployeeDetailService<T> extends GenericsService<T> {
 
     public List<?> casualleaveCheck(T object);
 
+    public List<?> getEmployeeLeaveDetail(int empId, String prevDate);
+
 }

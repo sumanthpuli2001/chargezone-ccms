@@ -1062,21 +1062,21 @@
 
                                                     </div> 
                                                     <div class="form-group">
-                                                        <div class="col-sm-4">
+                                                        <div class="col-sm-3">
                                                             <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset>
                                                                 <input type="radio" name="pf" id="pf" value="false" checked>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                 <input type="radio" name="pf" id="pf" value="true">YES
                                                             </fieldset>
                                                         </div>
-                                                        <div class="col-sm-4">
+                                                        <div class="col-sm-3">
                                                             <label>Provident Tax:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset>
                                                                 <input type="radio" name="pt" id="pt" value="false" checked>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                 <input type="radio" name="pt" id="pt" value="true">YES
                                                             </fieldset>
                                                         </div>
-                                                        <div class="col-sm-4">
+                                                        <div class="col-sm-3">
                                                             <label>ESIC:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
                                                             <fieldset>
                                                             <form:radiobutton path="esic" value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1084,23 +1084,30 @@
                                                         </fieldset>
                                                         <form:errors path="esic" cssClass="errorDiv"></form:errors>
                                                         </div>
+                                                        <div class="col-sm-3">
+                                                            <label>Odd Punch Required:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <fieldset>
+                                                            <form:radiobutton path="oddPunch" value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="oddPunch" value="true"/>YES
+                                                        </fieldset>
                                                     </div>
-                                                    <div class="col-md-12 col-sm-12">
-                                                        <div class="table-responsive">
-                                                            <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                                <tr>
-                                                                    <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                                    <th style="text-align: center; vertical-align: middle">Select Policy</th>
-                                                                    <th style="text-align: center; vertical-align: middle">Policy Number</th>
-                                                                    <th style="text-align: center; vertical-align: middle">Amount</th>
-                                                                    <th style="text-align: center; vertical-align: middle">Add New</th>
-                                                                <input type="hidden" name="policyCount" id="policyCount" value="1"/>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="text-align: center">1</td>
-                                                                    <td id="policyTd1"><div>
-                                                                            <select id="policyId1"  name="policyId1"  class="form-control">
-                                                                                <option value="">--SELECT--</option>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="table-responsive">
+                                                        <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                            <tr>
+                                                                <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
+                                                                <th style="text-align: center; vertical-align: middle">Select Policy</th>
+                                                                <th style="text-align: center; vertical-align: middle">Policy Number</th>
+                                                                <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                <th style="text-align: center; vertical-align: middle">Add New</th>
+                                                            <input type="hidden" name="policyCount" id="policyCount" value="1"/>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align: center">1</td>
+                                                                <td id="policyTd1"><div>
+                                                                        <select id="policyId1"  name="policyId1"  class="form-control">
+                                                                            <option value="">--SELECT--</option>
                                                                             <c:forEach var="comp" items="${policy}" varStatus = "status">
                                                                                 <option value="${comp.key}">${comp.value}</option>
                                                                             </c:forEach>

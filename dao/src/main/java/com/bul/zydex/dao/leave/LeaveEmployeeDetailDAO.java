@@ -75,4 +75,6 @@ public interface LeaveEmployeeDetailDAO<T> extends GenericsDAO<T> {
     public List<?> sickleaveCheck(T object);
 
     public List<?> casualleaveCheck(T object);
+
+    public List<?> getEmployeeLeaveDetail(int empId, String prevDate);
 }

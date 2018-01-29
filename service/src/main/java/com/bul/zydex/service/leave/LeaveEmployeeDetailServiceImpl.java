@@ -180,4 +180,9 @@ public class LeaveEmployeeDetailServiceImpl<T> extends GenericsServiceImpl<T> im
         return leaveEmployeeDetailDAO.casualleaveCheck(object);
     }
 
+    @Override
+    public List<?> getEmployeeLeaveDetail(int empId, String prevDate) {
+        return leaveEmployeeDetailDAO.getEmployeeLeaveDetail(empId, prevDate);
+    }
+
 }

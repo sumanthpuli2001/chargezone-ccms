@@ -138,6 +138,7 @@
                 <!--Attendance Management-->
                 <prop key="emailTemplate.htm">emailTemplateController1</prop>
                 <prop key="kraCategory.htm">kraCategoryController1</prop>
+                <prop key="employeeDatetimeData.htm">oddPunchController1</prop>
                 <!--PIP-->
                 <prop key="performanceImprovementPlanMaster.htm">performanceImprovementPlanMasterController1</prop>
                 <!--probation Period-->

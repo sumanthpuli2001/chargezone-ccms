@@ -501,7 +501,7 @@
     <bean id="policyMasterController1" class="com.bul.zydex.controller.policy.PolicyMasterController" parent="controllerConfig" >
         <property name="policyMasterService" ref="policyMasterService1" />
         <property name="policyMasterValidator" ref="policyMasterValidator1" />
-         <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
+        <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
         <property name="employeePolicyDetailService" ref="employeePolicyDetailService1" />
         
     </bean>
@@ -622,7 +622,7 @@
         <property name="appraisalPerformanceActivitiesService" ref="appraisalPerformanceActivitiesService1"/>
         
     </bean>
-       <!--Payroll-->
+    <!--Payroll-->
     <bean id="payrollSavingTypeController1" class="com.bul.zydex.controller.Payroll.PayrollSavingTypeController" parent="controllerConfig">
         <property name="payrollSavingTypeService" ref="payrollSavingTypeService1" />
         <property name="payrollSavingTypeValidator" ref="payrollSavingTypeValidator1" />
@@ -637,7 +637,7 @@
         <property name="payrollLoanTypeService" ref="payrollLoanTypeService1" />
         <property name="payrollLoanTypeValidator" ref="payrollLoanTypeValidator1" />
         <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
-           <property name="payrollLoanTypeDetailsValidator" ref="payrollLoanTypeDetailsValidator1" />
+        <property name="payrollLoanTypeDetailsValidator" ref="payrollLoanTypeDetailsValidator1" />
     </bean>
 
     <!--Payroll-->
@@ -988,8 +988,9 @@
        
         
     </bean>
-
     
-    
+    <bean id="oddPunchController1" class="com.bul.zydex.controller.OddPunch.OddPunchController" parent="controllerConfig" >
+        <property name="employeeDatetimeDataService" ref="employeeDatetimeDataService1"/>
+    </bean>
 </beans>
  

@@ -136,6 +136,7 @@
                             <li><a href="attendanceRegularizationMaster.htm?act=departmentWiseAttendanceView"><i class="fa fa-circle-o"></i>Department Wise Attendance</a></li>
 
                         </c:if>
+                        <li><a href="employeeDatetimeData.htm?act=searchOddPunch"><i class="fa fa-circle-o"></i>Odd Punch Report</a></li>
 
                     </ul>
                 </li>

@@ -930,7 +930,7 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <div class="col-sm-4">
+                                                        <div class="col-sm-3">
                                                             <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset>
                                                             <c:if test="${checkPf eq 'false'}">
@@ -944,7 +944,7 @@
 
                                                         </fieldset>
                                                     </div>
-                                                    <div class="col-sm-4">
+                                                    <div class="col-sm-3">
                                                         <label>Provident Tax:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <fieldset>
                                                             <c:if test="${checkPt eq 'false'}">
@@ -957,13 +957,20 @@
                                                             </c:if>
                                                         </fieldset>
                                                     </div>
-                                                    <div class="col-sm-4">
+                                                    <div class="col-sm-3">
                                                         <label>ESIC:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
                                                         <fieldset>
                                                             <form:radiobutton path="esic" value="false"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <form:radiobutton path="esic" value="true"/>YES
                                                         </fieldset>
                                                         <form:errors path="esic" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <label>Odd Punch Required:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <fieldset>
+                                                                <form:radiobutton path="oddPunch" value="false"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="oddPunch" value="true"/>YES
+                                                            </fieldset>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 col-sm-12">

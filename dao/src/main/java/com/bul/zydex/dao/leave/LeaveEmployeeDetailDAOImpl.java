@@ -756,4 +756,17 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         return getHibernateTemplate().find(query);
 
     }
+
+    @Override
+    public List<?> getEmployeeLeaveDetail(int empId, String prevDate) {
+        String query = "";
+
+        query += " select b.leaveType,a.startDateStatus,a.employeeMaster.id From LeaveEmployeeDetail a "
+                + " left join a.leaveTypeMaster b"
+                + " where a.employeeMaster.id = " + empId + " and "
+                + " STR_TO_DATE('" + prevDate + "','%d/%m/%Y') >= STR_TO_DATE(a.startDate,'%d/%m/%Y') AND "
+                + " STR_TO_DATE('" + prevDate + "','%d/%m/%Y') <= STR_TO_DATE(a.endDate,'%d/%m/%Y') ";
+
+        return getHibernateTemplate().find(query);
+    }
 }

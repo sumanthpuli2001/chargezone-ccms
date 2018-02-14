@@ -215,4 +215,6 @@
     <bean id="mprEmployeeTypeMasterDAO1" class="com.bul.zydex.dao.Recruitment.MprEmployeeTypeMasterDAOImpl" parent="sessionFactoryConfig" />
     <bean id="mprEmployeeCategoryDAO1" class="com.bul.zydex.dao.Recruitment.MprEmployeeCategoryDAOImpl" parent="sessionFactoryConfig" />
     <bean id="qulificationMasterDAO1" class="com.bul.zydex.dao.Recruitment.QulificationMasterDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="questionAnsDAO1" class="com.bul.zydex.dao.questionlibrary.QuestionAnsDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="questionLibraryDAO1" class="com.bul.zydex.dao.questionlibrary.QuestionLibraryDAOImpl" parent="sessionFactoryConfig" />
 </beans>

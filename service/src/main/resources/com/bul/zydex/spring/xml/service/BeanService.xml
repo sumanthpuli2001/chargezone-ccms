@@ -484,17 +484,24 @@
     <bean id="qulificationMasterService1" class="com.bul.zydex.service.Recruitment.QulificationMasterServiceImpl">
         <property name="qulificationMasterDAO" ref="qulificationMasterDAO1" />
     </bean> 
-    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
-        <property name="beanNames">
-            <list>
-                <value>*Service1*</value>
-            </list>
-        </property>
-        <!--        <property name="interceptorNames">
-            <list>
-                <value>transactionInterceptor</value>
-            </list>
-        </property>-->
-    </bean>
+</bean>  
+<bean id="questionLibraryService1" class="com.bul.zydex.service.questionlibrary.QuestionLibraryServiceImpl">
+    <property name="questionLibraryDAO" ref="questionLibraryDAO1" />
+</bean>  
+<bean id="questionAnsService1" class="com.bul.zydex.service.questionlibrary.QuestionAnsServiceImpl">
+    <property name="questionAnsDAO" ref="questionAnsDAO1" />
+</bean>
+<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+    <property name="beanNames">
+        <list>
+            <value>*Service1*</value>
+        </list>
+    </property>
+    <!--        <property name="interceptorNames">
+        <list>
+            <value>transactionInterceptor</value>
+        </list>
+    </property>-->
+</bean>
 
 </beans>

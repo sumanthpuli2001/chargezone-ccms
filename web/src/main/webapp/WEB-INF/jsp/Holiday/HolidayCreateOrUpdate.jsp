@@ -48,7 +48,12 @@
                 <li class="active">Add New Holiday</li>
             </ol>
         </section>
-
+        <c:if test="${!empty successMessage}">
+            <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
+        </c:if>
+        <c:if test="${!empty failureMessage}">
+            <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
+        </c:if>
         <!-- Main content -->
         <section class="content">
             <div class="row">
@@ -58,12 +63,7 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
                                 <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
-                                <c:if test="${!empty successMessage}">
-                                    <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
-                                </c:if>
-                                <c:if test="${!empty failureMessage}">
-                                    <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
-                                </c:if>
+
                                 <form:form class="form-horizontal" method="post"
                                            modelAttribute="holidayMaster" action="holidayMaster.htm?act=createOrUpdateSubmit">
                                     <form:hidden path="id"></form:hidden>
@@ -81,7 +81,7 @@
                                         <div class="col-sm-3">
                                             <form:label class="control-label" path="holidayFromDate">Start Date:<span style="color: red;font-size: 12px;">*</span></form:label>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="form-group">
                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                 <form:input path="holidayFromDate" class="form-control" size="16" type="text" readonly="true" onchange="dateValidator(0);"></form:input>
                                                 <form:errors path="holidayFromDate" cssClass="errorDiv"></form:errors>
@@ -93,7 +93,7 @@
                                             <div class="col-sm-3">
                                             <form:label class="control-label" path="holidayToDate">End Date:<span style="color: red;font-size: 12px;">*</span></form:label>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="form-group">
                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                 <form:input path="holidayToDate" class="form-control" size="16" type="text" readonly="true" onchange="dateValidator(1);"></form:input>
                                                 <form:errors path="holidayToDate" cssClass="errorDiv"></form:errors>
@@ -105,7 +105,7 @@
                                             <div class="col-sm-3">
                                                 <label class="control-label">Location:<span style="color: red;font-size: 12px;">*</span></label>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="form-group">
                                             <form:select path="locationMaster.id" class="form-control">
                                                 <form:option value="" label="-- Select --" />
                                                 <form:options items="${locationMap}"/>
@@ -113,19 +113,8 @@
                                             <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-3">
-                                                <label class="control-label">Department:<span style="color: red;font-size: 12px;">*</span></label>
-                                            </div>
-                                            <div class="col-sm-6">
-                                            <form:select path="departmentMaster.id" class="form-control">
-                                                <form:option value="" label="-- Select --" ></form:option>
-                                                <form:options items="${deptMap}"></form:options>
-                                            </form:select>
-                                            <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
-                                            </div>
-                                        </div>
-                                        
+
+
                                         <br/>
                                         <div class="form-group">
                                             <div class="col-sm-6 col-sm-offset-5">
@@ -136,13 +125,13 @@
                                                                                     </div>-->
                                         </div>
                                 </form:form>
-                            </div><!-- /.tab-pane -->
-                        </div><!-- /.tab-content -->
-                    </div><!-- nav-tabs-custom -->
-                </div><!-- /.col -->
-            </div>
+                            </div>
+
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div>
+            </div><!-- /.tab-content -->
         </section>
-        <!-- /.content -->
     </div><!-- /.content-wrapper -->
     <script type="text/javascript">
         $('.form_datetime').datetimepicker({

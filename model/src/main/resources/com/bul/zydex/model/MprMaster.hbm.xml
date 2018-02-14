@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.MprMaster" table="mpr_master" catalog="hr_power_astral">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="locationMaster" class="com.bul.zydex.model.LocationMaster" fetch="select">
+            <column name="location_id" />
+        </many-to-one>
+        <many-to-one name="departmentMaster" class="com.bul.zydex.model.DepartmentMaster" fetch="select">
+            <column name="department_id" />
+        </many-to-one>
+        <many-to-one name="mprEmployeeCategory" class="com.bul.zydex.model.MprEmployeeCategory" fetch="select">
+            <column name="employee_category_id" />
+        </many-to-one>
+        <many-to-one name="mprEmployeeTypeMaster" class="com.bul.zydex.model.MprEmployeeTypeMaster" fetch="select">
+            <column name="employee_type" />
+        </many-to-one>
+        <many-to-one name="jobtypeMaster" class="com.bul.zydex.model.JobtypeMaster" fetch="select">
+            <column name="jobtype_id" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" />
+        </property>
+        <property name="numberOfPosition" type="java.lang.Integer">
+            <column name="number_of_position" />
+        </property>
+        <property name="budget" type="java.lang.Integer">
+            <column name="budget" />
+        </property>
+        <many-to-one name="qulificationMaster" class="com.bul.zydex.model.QulificationMaster" fetch="select">
+            <column name="qulification_id" />
+        </many-to-one>
+        <property name="experience" type="string">
+            <column name="experience" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" />
+        </property>
+        <many-to-one name="designationMaster" class="com.bul.zydex.model.DesignationMaster" fetch="select">
+            <column name="designation_id" />
+        </many-to-one>
+        <property name="dateOfLeaving" type="string">
+            <column name="date_of_leaving" />
+        </property>
+    </class>
+</hibernate-mapping>

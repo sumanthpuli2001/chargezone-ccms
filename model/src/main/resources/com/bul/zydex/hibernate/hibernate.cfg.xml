@@ -104,8 +104,12 @@
     <mapping resource="com.bul.zydex.model/PmpFormStatusMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/RegisterMobForPunch.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/DeviceMasterNotification.hbm.xml"/>
-    <mapping resource="com/bul/zydex/model/QuestionAns.hbm.xml"/>
-    <mapping resource="com/bul/zydex/model/QuestionLibrary.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/RecruitmentMaster.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/JobtypeMaster.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/MprMaster.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/MprEmployeeTypeMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/MprEmployeeCategory.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/QulificationMaster.hbm.xml"/>
+    <mapping/>
   </session-factory>
 </hibernate-configuration>

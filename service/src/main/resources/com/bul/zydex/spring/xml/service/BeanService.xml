@@ -352,7 +352,7 @@
     <bean id="registerMobForPunchService1" class="com.bul.zydex.service.RegisterMobForPunch.RegisterMobForPunchServiceImpl">
         <property name="registerMobForPunchDAO" ref="registerMobForPunchDAO1"/>
     </bean>
-     <!--PayRoll-->
+    <!--PayRoll-->
     <bean id="payrollSavingTypeService1" class="com.bul.zydex.service.Payroll.PayrollSavingTypeServiceImpl">
         <property name="payrollSavingTypeDAO" ref="payrollSavingTypeDAO1" />
     </bean>
@@ -465,13 +465,25 @@
     </bean>
     <bean id="employeePayrollIncentiveService1" class="com.bul.zydex.service.Payroll.EmployeePayrollIncentiveServiceImpl">
         <property name="employeePayrollIncentiveDAO" ref="employeePayrollIncentiveDAO1" />
-    </bean>  
-    <bean id="questionLibraryService1" class="com.bul.zydex.service.questionlibrary.QuestionLibraryServiceImpl">
-        <property name="questionLibraryDAO" ref="questionLibraryDAO1" />
-    </bean>  
-    <bean id="questionAnsService1" class="com.bul.zydex.service.questionlibrary.QuestionAnsServiceImpl">
-        <property name="questionAnsDAO" ref="questionAnsDAO1" />
-    </bean>  
+    </bean> 
+    <bean id="recruitmentService1" class="com.bul.zydex.service.Recruitment.RecruitmentServiceImpl">
+        <property name="recruitmentDAO" ref="recruitmentDAO1"/>
+    </bean>
+    <bean id="jobtypeMasterService1" class="com.bul.zydex.service.Recruitment.JobtypeMasterServiceImpl">
+        <property name="jobtypeMasterDAO" ref="jobtypeMasterDAO1" />
+    </bean> 
+    <bean id="mprMasterService1" class="com.bul.zydex.service.Recruitment.MprMasterServiceImpl">
+        <property name="mprMasterDAO" ref="mprMasterDAO1" />
+    </bean> 
+    <bean id="mprEmployeeTypeMasterService1" class="com.bul.zydex.service.Recruitment.MprEmployeeTypeMasterServiceImpl">
+        <property name="mprEmployeeTypeMasterDAO" ref="mprEmployeeTypeMasterDAO1" />
+    </bean> 
+    <bean id="mprEmployeeCategoryService1" class="com.bul.zydex.service.Recruitment.MprEmployeeCategoryServiceImpl">
+        <property name="mprEmployeeCategoryDAO" ref="mprEmployeeCategoryDAO1" />
+    </bean> 
+    <bean id="qulificationMasterService1" class="com.bul.zydex.service.Recruitment.QulificationMasterServiceImpl">
+        <property name="qulificationMasterDAO" ref="qulificationMasterDAO1" />
+    </bean> 
     <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
         <property name="beanNames">
             <list>

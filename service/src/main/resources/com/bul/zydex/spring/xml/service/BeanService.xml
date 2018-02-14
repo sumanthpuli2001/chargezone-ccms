@@ -466,6 +466,12 @@
     <bean id="employeePayrollIncentiveService1" class="com.bul.zydex.service.Payroll.EmployeePayrollIncentiveServiceImpl">
         <property name="employeePayrollIncentiveDAO" ref="employeePayrollIncentiveDAO1" />
     </bean>  
+    <bean id="questionLibraryService1" class="com.bul.zydex.service.questionlibrary.QuestionLibraryServiceImpl">
+        <property name="questionLibraryDAO" ref="questionLibraryDAO1" />
+    </bean>  
+    <bean id="questionAnsService1" class="com.bul.zydex.service.questionlibrary.QuestionAnsServiceImpl">
+        <property name="questionAnsDAO" ref="questionAnsDAO1" />
+    </bean>  
     <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
         <property name="beanNames">
             <list>

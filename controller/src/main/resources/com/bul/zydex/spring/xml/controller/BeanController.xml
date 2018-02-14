@@ -989,6 +989,18 @@
         
     </bean>
     
+    <bean id="recruitmentController1" class="com.bul.zydex.controller.Recruitment.RecruitmentController" parent="controllerConfig" >
+        <property name="recruitmentService" ref="recruitmentService1"></property>
+        <property name="locationMasterService" ref="locationMasterService1" />
+        <property name="jobtypeMasterService" ref="jobtypeMasterService1"/>
+        <property name="recruitmentValidator" ref="recruitmentValidator1"/>
+        <property name="mprMasterService" ref="mprMasterService1"/>
+        <property name="mprEmployeeTypeMasterService" ref="mprEmployeeTypeMasterService1"/>
+        <property name="mprEmployeeCategoryService" ref="mprEmployeeCategoryService1"/>
+        <property name="qulificationMasterService" ref="qulificationMasterService1"/>
+        <property name="designationMasterService" ref="designationMasterService1"/>
+    </bean><!--
+    -->
     <bean id="oddPunchController1" class="com.bul.zydex.controller.OddPunch.OddPunchController" parent="controllerConfig" >
         <property name="employeeDatetimeDataService" ref="employeeDatetimeDataService1"/>
     </bean>

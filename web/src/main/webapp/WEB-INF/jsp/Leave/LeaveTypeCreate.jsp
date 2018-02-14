@@ -126,40 +126,42 @@
                                     </div><!-- nav-tabs-custom -->
                                 </div><!-- /.col -->
                             </div>
-                            </section>
+                        </div>
+                    </div>
+                </section>
 
-                    </form:form>
-                    <!--</div>-->
-                    <!--Employee detail completes here-->
-                    <!--read only entries ends here-->
+        </form:form>
+        <!--</div>-->
+        <!--Employee detail completes here-->
+        <!--read only entries ends here-->
 
-                    <!--form horizontal ends here-->
-                    <div class="tab-pane" id="tab_3"></div><!-- /.tab-pane -->
-                    <!-- /.content -->
-                </div>
+        <!--form horizontal ends here-->
+        <div class="tab-pane" id="tab_3"></div><!-- /.tab-pane -->
+        <!-- /.content -->
+    </div>
 
-                <script type="text/javascript">
-                    $('.form_datetime').datetimepicker({
-                        //            language: 'fr',
-                        weekStart: 1,
-                        //            todayBtn: 1,
-                        autoclose: 1,
-                        todayHighlight: 1,
-                        startView: 1,
-                        minView: 0,
-                        maxView: 1,
-                        forceParse: 0
-                    });
-                </script>
-                <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-                <script>
-                    $('#carriedForwardStatus1').on('ifChecked', function (event) {
-                        $('#chechBoxDivId').show(500);
-                    });
-                    $('#carriedForwardStatus1').on('ifUnchecked', function (event) {
-                        $('#chechBoxDivId').hide(500);
-                    });
+    <script type="text/javascript">
+        $('.form_datetime').datetimepicker({
+            //            language: 'fr',
+            weekStart: 1,
+            //            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 1,
+            minView: 0,
+            maxView: 1,
+            forceParse: 0
+        });
+    </script>
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    <script>
+        $('#carriedForwardStatus1').on('ifChecked', function (event) {
+            $('#chechBoxDivId').show(500);
+        });
+        $('#carriedForwardStatus1').on('ifUnchecked', function (event) {
+            $('#chechBoxDivId').hide(500);
+        });
 
 
-                </script>
-                </html>
+    </script>
+</html>

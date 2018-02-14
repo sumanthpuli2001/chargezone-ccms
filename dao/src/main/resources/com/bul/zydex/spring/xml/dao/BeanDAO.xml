@@ -209,4 +209,10 @@
     <bean id="payrollLoanRemainingAmountDAO1" class="com.bul.zydex.dao.Payroll.PayrollLoanRemainingAmountDAOImpl" parent="sessionFactoryConfig" />
     <bean id="employeeIncentiveMonthwiseDAO1" class="com.bul.zydex.dao.Payroll.EmployeeIncentiveMonthwiseDAOImpl" parent="sessionFactoryConfig" />
     <bean id="employeePayrollIncentiveDAO1" class="com.bul.zydex.dao.Payroll.EmployeePayrollIncentiveDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="recruitmentDAO1" class="com.bul.zydex.dao.Recruitment.RecruitmentDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="jobtypeMasterDAO1" class="com.bul.zydex.dao.Recruitment.JobtypeMasterDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="mprMasterDAO1" class="com.bul.zydex.dao.Recruitment.MprMasterDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="mprEmployeeTypeMasterDAO1" class="com.bul.zydex.dao.Recruitment.MprEmployeeTypeMasterDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="mprEmployeeCategoryDAO1" class="com.bul.zydex.dao.Recruitment.MprEmployeeCategoryDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="qulificationMasterDAO1" class="com.bul.zydex.dao.Recruitment.QulificationMasterDAOImpl" parent="sessionFactoryConfig" />
 </beans>

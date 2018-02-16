@@ -484,7 +484,6 @@
     <bean id="qulificationMasterService1" class="com.bul.zydex.service.Recruitment.QulificationMasterServiceImpl">
         <property name="qulificationMasterDAO" ref="qulificationMasterDAO1" />
     </bean> 
-</bean>  
 <bean id="questionLibraryService1" class="com.bul.zydex.service.questionlibrary.QuestionLibraryServiceImpl">
     <property name="questionLibraryDAO" ref="questionLibraryDAO1" />
 </bean>  

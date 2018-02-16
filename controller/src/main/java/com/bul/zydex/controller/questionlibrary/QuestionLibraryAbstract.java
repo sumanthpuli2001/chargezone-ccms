@@ -10,6 +10,7 @@ import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.QuestionAns;
 import com.bul.zydex.model.QuestionLibrary;
+import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
 import com.bul.zydex.service.questionlibrary.QuestionAnsService;
 import com.bul.zydex.service.questionlibrary.QuestionLibraryService;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ public abstract class QuestionLibraryAbstract extends CustomAbstract{
     
     protected QuestionLibraryService<QuestionLibrary> questionLibraryService;
     protected QuestionAnsService<QuestionAns> questionAnsService;
+    protected MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService;
 
     public QuestionLibraryService<QuestionLibrary> getQuestionLibraryService() {
         return questionLibraryService;
@@ -41,15 +43,24 @@ public abstract class QuestionLibraryAbstract extends CustomAbstract{
     public void setQuestionAnsService(QuestionAnsService<QuestionAns> questionAnsService) {
         this.questionAnsService = questionAnsService;
     }
-//    protected void employeecategoryList(HttpServletRequest request) {
-//        MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
-//        List<?> categoryList = mprEmployeeCategoryService.read();
-//        Map<Integer, String> en = new HashMap<>();
-//        for (Object o : categoryList) {
-//            mprEmployeeCategory = (MprEmployeeCategory) o;
-//            en.put(mprEmployeeCategory.getId(), mprEmployeeCategory.getEmployeeCategory());
-//        }
-//
-//        request.setAttribute("categoryList", en);
-//    }
+
+    public MprEmployeeCategoryService<MprEmployeeCategory> getMprEmployeeCategoryService() {
+        return mprEmployeeCategoryService;
+    }
+
+    public void setMprEmployeeCategoryService(MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService) {
+        this.mprEmployeeCategoryService = mprEmployeeCategoryService;
+    }
+    
+  protected void employeecategoryList(HttpServletRequest request) {
+        MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
+        List<?> categoryList = mprEmployeeCategoryService.read();
+        Map<Integer, String> en = new HashMap<>();
+        for (Object o : categoryList) {
+            mprEmployeeCategory = (MprEmployeeCategory) o;
+            en.put(mprEmployeeCategory.getId(), mprEmployeeCategory.getEmployeeCategory());
+        }
+
+        request.setAttribute("categoryList", en);
+    }
 }

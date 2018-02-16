@@ -217,4 +217,5 @@
     <bean id="qulificationMasterDAO1" class="com.bul.zydex.dao.Recruitment.QulificationMasterDAOImpl" parent="sessionFactoryConfig" />
     <bean id="questionAnsDAO1" class="com.bul.zydex.dao.questionlibrary.QuestionAnsDAOImpl" parent="sessionFactoryConfig" />
     <bean id="questionLibraryDAO1" class="com.bul.zydex.dao.questionlibrary.QuestionLibraryDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="vacancyMasterDAO1" class="com.bul.zydex.dao.Vacancy.VacancyMasterDAOImpl" parent="sessionFactoryConfig" />
 </beans>

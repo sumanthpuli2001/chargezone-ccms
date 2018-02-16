@@ -154,7 +154,7 @@
                 <prop key="itWebService.html">itWebService1</prop>
                 <prop key="pmpFormStatusMaster.htm">pmpFormStatusMasterController1</prop>
                 <prop key="attendanceRegularizationMasterwebServices.html">attendanceRegularizationMasterwebServices1</prop>
-                 <!--Company -->
+                <!--Company -->
                 <prop key="companyMaster.htm">companyMasterController1</prop>
                 <!--Employee Policy Detail-->
                 <prop key="employeePolicyDetail.htm">employeePolicyDetailMasterController1</prop>
@@ -200,6 +200,7 @@
                 <prop key="employeeIncentiveMonthWise.htm">employeeIncentiveMonthWiseController1</prop>
                 <prop key="recruitment.htm">recruitmentController1</prop>
                 <prop key="questionLibrary.htm">questionLibraryController1</prop>
+                <prop key="vacancy.htm">vacancyController1</prop>
                 
            
             </props>

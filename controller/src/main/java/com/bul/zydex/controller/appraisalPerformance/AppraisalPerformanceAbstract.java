@@ -7,13 +7,13 @@ package com.bul.zydex.controller.appraisalPerformance;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.AppraisalFillingData;
+import com.bul.zydex.model.AppraisalKraActivity;
 import com.bul.zydex.model.AppraisalPerformanceActivities;
 import com.bul.zydex.model.AppraisalPerformanceBehaviors;
 import com.bul.zydex.model.AppraisalPerformanceCompetencyEvaluation;
 import com.bul.zydex.model.AppraisalPerformanceIndividualDevelopmentPlan;
 import com.bul.zydex.model.AppraisalPerformanceKra;
 import com.bul.zydex.model.AppraisalPerformanceMaster;
-import com.bul.zydex.model.AppraisalKraActivity;
 import com.bul.zydex.model.CompetencyEvaluationMaster;
 import com.bul.zydex.model.CompetencyEvaluationTextmaster;
 import com.bul.zydex.model.DepartmentMaster;

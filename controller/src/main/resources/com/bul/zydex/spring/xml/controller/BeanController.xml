@@ -988,6 +988,15 @@
        
         
     </bean>
+    <bean id="questionLibraryController1" class="com.bul.zydex.controller.questionlibrary.QuestionLibraryController" parent="controllerConfig" >
+        <property name="questionLibraryService" ref="questionLibraryService1"></property>
+        <property name="questionAnsService" ref="questionAnsService1" />
+        <property name="mprEmployeeCategoryService" ref="mprEmployeeCategoryService1" />
+    </bean>
+    <bean id="questionAnsController1" class="com.bul.zydex.controller.questionlibrary.QuestionAnsController" parent="controllerConfig" >
+        <property name="questionLibraryService" ref="questionLibraryService1"></property>
+        <property name="questionAnsService" ref="questionAnsService1" />
+    </bean>
     
     <bean id="recruitmentController1" class="com.bul.zydex.controller.Recruitment.RecruitmentController" parent="controllerConfig" >
         <property name="recruitmentService" ref="recruitmentService1"></property>

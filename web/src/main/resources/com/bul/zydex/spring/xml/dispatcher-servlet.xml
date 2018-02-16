@@ -199,7 +199,7 @@
                 <prop key="attendanceReport.htm">attendanceReportController1</prop>
                 <prop key="employeeIncentiveMonthWise.htm">employeeIncentiveMonthWiseController1</prop>
                 <prop key="recruitment.htm">recruitmentController1</prop>
-                <prop key="vacancy.htm">vacancyController1</prop>
+                <prop key="questionLibrary.htm">questionLibraryController1</prop>
                 
            
             </props>

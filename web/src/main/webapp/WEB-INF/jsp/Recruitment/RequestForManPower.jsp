@@ -103,8 +103,8 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="nameOfMpr" class="form-control" placeholder="Name"></form:input>
-                                                    <form:errors path="nameOfMpr" cssClass="errorDiv"></form:errors>
+                                                    <form:input path="name" class="form-control" placeholder="Name"></form:input>
+                                                    <form:errors path="name" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Budget:<span style="color: red;font-size: 12px;">*</span></label>

@@ -110,6 +110,6 @@
     <mapping resource="com/bul/zydex/model/MprEmployeeTypeMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/MprEmployeeCategory.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/QulificationMaster.hbm.xml"/>
-    <mapping/>
+    <mapping resource="com/bul/zydex/model/VacancyMaster.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -44,7 +44,7 @@
 
 
                                         <form:form class="form-horizontal" method="post"
-                                                   commandName="recruitmentMaster" action="recruitment.htm?act=mprEditSubmitDetail">
+                                                   commandName="mprMaster" action="recruitment.htm?act=mprEditSubmitDetail">
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Department:<span style="color: red;font-size: 12px;"></span></label>
@@ -105,10 +105,14 @@
                                                     <form:input path="name" class="form-control" placeholder="Name"></form:input>
                                                     <form:errors path="name" cssClass="errorDiv"></form:errors>
                                                     </div>
-                                                    <br>
                                                     <div class="col-sm-6">
-                                                        <label>Created Budget:<span style="color: red;font-size: 15px;"></span><br>${recruitmentMaster.budget}</label>
-                                                </div>
+                                                        <label>Budget:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:input path="budget" class="form-control" placeholder="Budget"></form:input>
+                                                    <form:errors path="budget" cssClass="errorDiv"></form:errors>
+                                                    </div>
+                                                    <!--                                                    <div class="col-sm-6">
+                                                                                                            <label>Created Budget:<span style="color: red;font-size: 15px;"></span><br>${recruitmentMaster.budget}</label>
+                                                                                                    </div>-->
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
@@ -117,19 +121,19 @@
                                                     <form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>Budget:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="budget" class="form-control" placeholder="Budget"></form:input>
-                                                    <form:errors path="budget" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
                                                         <label>Work Experience:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="experience" class="form-control" placeholder="Experience"></form:input>
                                                     <form:errors path="experience" cssClass="errorDiv"></form:errors>
                                                     </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <!--                                                    <div class="col-sm-6">
+                                                                                                            <label>Work Experience:<span style="color: red;font-size: 12px;">*</span></label>
+                                                <%--<form:input path="experience" class="form-control" placeholder="Experience"></form:input>--%>
+                                                <%--<form:errors path="experience" cssClass="errorDiv"></form:errors>--%>
+                                                </div>-->
+                                                <div class="col-sm-6">
+                                                    <label>Description:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="description" class="form-control" placeholder="Description"></form:input>
                                                     <form:errors path="description" cssClass="errorDiv"></form:errors>
                                                     </div>

@@ -77,9 +77,9 @@
                                                                         </c:if>
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">Name</th>
-                                                                    <th style="width: 50px;">Number Of Position</th>
                                                                     <th style="width: 50px;">Budget</th>
-                                                                        <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                                    <th style="width: 50px;">Number Of Position</th>
+                                                                    <th style="width: 50px;">Experience</th>
                                                                     <th style="width: 50px;">Action</th>
                                                                         <%--</c:if>--%>
 
@@ -95,15 +95,15 @@
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
                                                                 <td>${list[1]}</td>
-                                                                <td>${list[2]}</td>
                                                                 <td>${list[3]}</td>
+                                                                <td>${list[2]}</td>
+                                                                <td>${list[4]}</td>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>
                                                                     <div class="btn-group">
-                                                                        <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                            &nbsp;&nbsp;Edit1
+                                                                        <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            &nbsp;&nbsp;Edit
                                                                         </button>
-
                                                                     </div>
                                                                 </td>
                                                                 <%--</c:if>--%>
@@ -128,10 +128,10 @@
         <div class="tab-pane" id="tab_3"></div><!-- /.tab-pane -->
         <!-- /.content -->
     </div>
-     <script>
-                        function editViewClick(id) {
-                        window.location = 'recruitment.htm?act=editMprClick&id=' + id;
-                        }
+    <script>
+        function editViewClick(id) {
+            window.location = 'recruitment.htm?act=editMprClick&id=' + id;
+        }
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

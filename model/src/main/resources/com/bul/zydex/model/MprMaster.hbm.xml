@@ -49,5 +49,8 @@
         <property name="dateOfLeaving" type="string">
             <column name="date_of_leaving" />
         </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -484,6 +484,9 @@
     <bean id="qulificationMasterService1" class="com.bul.zydex.service.Recruitment.QulificationMasterServiceImpl">
         <property name="qulificationMasterDAO" ref="qulificationMasterDAO1" />
     </bean> 
+    <bean id="vacancyMasterService1" class="com.bul.zydex.service.Vacancy.VacancyMasterServiceImpl">
+        <property name="vacancyMasterDAO" ref="vacancyMasterDAO1" />
+    </bean> 
     <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
         <property name="beanNames">
             <list>

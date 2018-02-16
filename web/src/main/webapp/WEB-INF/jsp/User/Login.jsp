@@ -185,6 +185,7 @@
                         <!--<input type="text" name="Password" placeholder="Password..." class="contact-subject form-control" id="contact-subject">-->
                         <div class="col-sm-5">
                             <div><a href="out.html?act=forgotPassword" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg1"></spring:message></a></div>
+                            <div><a href="vacancy.htm?act=showVacancyList" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg2"></spring:message></a></div>
                             </div>
                         </div>
                 </form:form>

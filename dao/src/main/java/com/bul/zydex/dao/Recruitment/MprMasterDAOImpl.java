@@ -24,7 +24,7 @@ public class MprMasterDAOImpl<T> extends GenericsDAOImpl<T> implements MprMaster
     public List<?> readMprList() {
         String query = "";
         query += " "
-                + " SELECT a.id, a.name, a.numberOfPosition, a.budget"
+                + " SELECT a.id, a.name, a.numberOfPosition, a.budget, a.experience, a.status"
                 + " FROM MprMaster a ";
 
         List<?> list = getHibernateTemplate().find(query);

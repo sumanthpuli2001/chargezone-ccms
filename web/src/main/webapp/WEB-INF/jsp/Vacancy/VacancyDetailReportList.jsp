@@ -24,7 +24,8 @@
 
         <script>
             function deleteCheck11() {
-                var checkboxes = "";
+                var checkboxes = confirm("Are you sure you want to delete?");
+                if(checkboxes){
                 checkboxes = document.getElementsByName('checkId');
                 for (var i = 0, n = checkboxes.length; i < n; i++) {
                     if (checkboxes[i].checked) {
@@ -32,6 +33,7 @@
                     }
                 }
                 alert("Please, Select one or more record(s).");
+            }
                 return false;
             }
         </script>
@@ -81,8 +83,10 @@
                                                                     <th style="width: 50px;">Vacancy Name</th>
                                                                     <th style="width: 50px;">Number Of Position</th>
                                                                     <th style="width: 50px;">Experience</th>
+                                                                    <th style="width: 50px;">Start Date</th>
+                                                                    <th style="width: 50px;">End Date</th>
                                                                     <!--<th style="width: 50px;">Budget</th>-->
-                                                                        <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                                    <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <th style="width: 50px;">Action</th>
                                                                         <%--</c:if>--%>
 
@@ -100,6 +104,8 @@
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[2]}</td>
                                                                 <td>${list[4]}</td>
+                                                                <td>${list[6]}</td>
+                                                                <td>${list[7]}</td>
                                                                 <!--<td>${list[2]}</td>-->
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>
@@ -134,7 +140,7 @@
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
     <script>
         function editViewClick(id) {
-            window.location = 'recruitment.htm?act=editMppRClick&id=' + id;
+            window.location = 'vacancy.htm?act=viewEditVacancy&id=' + id;
         }
     </script>
 </html>

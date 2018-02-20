@@ -127,11 +127,6 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Description:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="description" class="form-control" placeholder="Description"></form:input>
-                                                    <form:errors path="description" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                    <div class="col-sm-6">
                                                         <label>Employee Type:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:select path="qulificationMaster.id" id="qulificationMaster" class="form-control">
                                                             <form:option value="" label="-- Select --" />
@@ -139,8 +134,14 @@
                                                         </form:select>
                                                         <form:errors path="qulificationMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
+                                                </div> 
+                                                <div class="form-group">
+                                                    <div class="col-sm-10">
+                                                        <label>Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:input path="description" class="form-control" id="editor" placeholder="Description"></form:input>
+                                                    <form:errors path="description" cssClass="errorDiv"></form:errors>
+                                                    </div>
                                                 </div>
-
                                                 <div class="form-group">
                                                     <div class="col-sm-6 col-sm-offset-5">
                                                         <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
@@ -159,4 +160,11 @@
         </section>
     </div>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
+    <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
+    <!--<link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/css/samples.css">-->
+    <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+    <script>
+        initSample();
+    </script>
 </html>

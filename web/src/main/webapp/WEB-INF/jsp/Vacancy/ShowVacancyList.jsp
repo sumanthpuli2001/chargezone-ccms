@@ -95,7 +95,7 @@
         </section>
         <br/>
         <br/>
-     <form:form action="vacancy.htm?act=clickDeleteVacancy" method="post" commandName="vacancyMaster"
+        <form:form action="vacancy.htm?act=clickDeleteVacancy" method="post" commandName="vacancyMaster"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">
@@ -104,10 +104,10 @@
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
                                 <c:if test="${sessionScope.userRight.employeeManagement}">
-                                    <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
+                                    <!--<button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>-->
                                     <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
 
-                                    <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'vacancy.htm?act=newVacancyCreate'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
+                                    <!--<button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'vacancy.htm?act=newVacancyCreate'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>-->
                                 </c:if>
                                 <div class="box-header">
                                 </div>
@@ -128,13 +128,14 @@
                                                             <thead>
                                                                 <tr>
                                                                     <c:if test="${sessionScope.userRight.employeeManagement}">
-                                                                        <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
+                                                                        <!--<th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>-->
                                                                         </c:if>
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">Vacancy Name</th>
                                                                     <th style="width: 50px;">Number Of Position</th>
                                                                     <th style="width: 50px;">Experience</th>
-                                                                    <!--<th style="width: 50px;">Budget</th>-->
+                                                                    <th style="width: 50px;">Start Date</th>
+                                                                    <th style="width: 50px;">End Date</th>
                                                                     <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <th style="width: 50px;">Action</th>
                                                                         <%--</c:if>--%>
@@ -153,6 +154,8 @@
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[2]}</td>
                                                                 <td>${list[4]}</td>
+                                                                <td>${list[6]}</td>
+                                                                <td>${list[7]}</td>
                                                                 <!--<td>${list[2]}</td>-->
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>
@@ -180,6 +183,11 @@
             </section>
 
         </form:form>
+        <script>
+            function editViewClick(id) {
+                window.location = 'vacancy.htm?act=viewVacancy&id=' + id;
+            }
+        </script>
         <!-- Javascript -->
         <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
         <script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>

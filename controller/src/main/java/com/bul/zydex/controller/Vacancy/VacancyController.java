@@ -104,18 +104,19 @@ public class VacancyController extends VacancyAbstract {
 //        selectBudget(request, response);
         departmentList(request);
 
+        vacancyValidator.validate(vacancyMaster, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
-                    "Error : The recruitmentMaster is not valid. NO white Space");
+                    "Error : All Fields Are Mandatorys");
+            mv = newVacancyCreate(request, response);
         } else {
             vacancyMaster.setStatus(0);
             vacancyMasterService.create(vacancyMaster);
             request.setAttribute("successMessage",
-                    "Information : The Information is saved Successfully.");
+                    "Information : The Information is Created Successfully.");
 
-        }
-//        mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
         mv = vacancyDetailList(request, response);
+        }
 
         return mv;
     }
@@ -128,7 +129,7 @@ public class VacancyController extends VacancyAbstract {
             try {
                 vacancyMasterService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
-                        "Info : One or more records are deleted successfully.");
+                        "Info :The Records are deleted successfully.");
             } catch (Exception e) {
 
             }
@@ -146,6 +147,132 @@ public class VacancyController extends VacancyAbstract {
         mv.getModelMap().put("list", vacancylist);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
         mv.setViewName("Vacancy/ShowVacancyList");
+        return mv;
+    }
+
+    public ModelAndView viewVacancy(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        LocationMaster locationMaster = new LocationMaster();
+        JobtypeMaster jobtypeMaster = new JobtypeMaster();
+        DesignationMaster designationMaster = new DesignationMaster();
+        MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
+        MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
+
+        departmentList(request);
+        designationList(request);
+        employeecategoryList(request);
+        employeeTypeList(request);
+        Map<Integer, String> locationMap = readLocations();
+        Map<Integer, String> jobtype1 = jobtypeList();
+        mv.addObject("locationMap", locationMap);
+        mv.addObject("jobtype1", jobtype1);
+
+        String id = request.getParameter("id");
+        vacancyMaster = vacancyMasterService.readById(Integer.parseInt(id));
+        mv.getModelMap().put("departmentMaster", departmentMaster);
+        mv.getModelMap().put("locationMaster", locationMaster);
+        mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
+        mv.getModelMap().put("mprEmployeeCategory", mprEmployeeCategory);
+        mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+        mv.getModelMap().put("designationMaster", designationMaster);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.setViewName("Vacancy/OutViewVacancy");
+
+        return mv;
+    }
+
+    public ModelAndView viewEditVacancy(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        LocationMaster locationMaster = new LocationMaster();
+        JobtypeMaster jobtypeMaster = new JobtypeMaster();
+        MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
+        MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
+        DesignationMaster designationMaster = new DesignationMaster();
+        if (vacancyMaster.getId() != null) {
+            vacancyMaster = vacancyMasterService.readById(vacancyMaster.getId());
+            vacancyMaster.setLocationMaster(vacancyMaster.getLocationMaster());
+            vacancyMaster.setDepartmentMaster(vacancyMaster.getDepartmentMaster());
+            vacancyMaster.setJobtypeMaster(vacancyMaster.getJobtypeMaster());
+            vacancyMaster.setMprEmployeeCategory(vacancyMaster.getMprEmployeeCategory());
+            vacancyMaster.setMprEmployeeTypeMaster(vacancyMaster.getMprEmployeeTypeMaster());
+            vacancyMaster.setDesignationMaster(vacancyMaster.getDesignationMaster());
+        } else {
+            vacancyMaster.setLocationMaster(new LocationMaster());
+            vacancyMaster.setDepartmentMaster(new DepartmentMaster());
+            vacancyMaster.setJobtypeMaster(new JobtypeMaster());
+            vacancyMaster.setMprEmployeeCategory(new MprEmployeeCategory());
+            vacancyMaster.setMprEmployeeTypeMaster(new MprEmployeeTypeMaster());
+            vacancyMaster.setDesignationMaster(new DesignationMaster());
+        }
+        departmentList(request);
+        employeecategoryList(request);
+        employeeTypeList(request);
+        designationList(request);
+        Map<Integer, String> locationMap = readLocations();
+        Map<Integer, String> jobtype1 = jobtypeList();
+        mv.addObject("locationMap", locationMap);
+        mv.addObject("jobtype1", jobtype1);
+
+        String id = request.getParameter("id");
+        vacancyMaster = vacancyMasterService.readById(Integer.parseInt(id));
+        mv.getModelMap().put("departmentMaster", departmentMaster);
+        mv.getModelMap().put("locationMaster", locationMaster);
+        mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
+        mv.getModelMap().put("mprEmployeeCategory", mprEmployeeCategory);
+        mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+        mv.getModelMap().put("designationMaster", designationMaster);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.setViewName("Vacancy/ViewVecancy");
+        return mv;
+    }
+
+    public ModelAndView editVacancy(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+
+        BindException errors = new BindException(vacancyMaster, "vacancyMaster");
+        bind(request, vacancyMaster);
+//        payrollProfessionalTaxValidator.validate(payrollProfessionalTax, errors);
+        Map<Integer, String> locationMap = readLocations();
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Professional Tax is not valid.");
+            mv.addAllObjects(errors.getModel());
+        } else {
+            vacancyMasterService.update(vacancyMaster);
+            request.setAttribute("successMessage",
+                    "Information: The Information is Edited Successfully");
+        }
+
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv = vacancyDetailList(request, response);
+
+        return mv;
+    }
+
+    public ModelAndView backButton(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        mv = showVacancyList(request, response);
+        return mv;
+    }
+
+    public ModelAndView jobApplaClick(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("Vacancy/JobVacancyLogin");
         return mv;
     }
 }

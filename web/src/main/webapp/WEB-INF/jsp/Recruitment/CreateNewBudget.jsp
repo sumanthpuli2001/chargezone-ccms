@@ -15,7 +15,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1> New Budget Create</h1>
+            <h1>Man Power Planning New Budget Create</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Budget Create</li>
@@ -47,7 +47,7 @@
                                                    commandName="recruitmentMaster" action="recruitment.htm?act=budgetCreateDetail">
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Department:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="departmentMaster.id" id="departmentMaster" class="form-control">
                                                             <form:option value="" label="-- Select --" />
                                                             <form:options items="${deptMap}"></form:options>
@@ -56,7 +56,7 @@
                                                     </div>
                                                     <!--<div class="form-group">-->
                                                     <div class="col-sm-6">
-                                                        <label>LocationMaster<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>LocationMaster<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="locationMaster.id" id="locationMaster" class="form-control">
                                                             <form:option value="" label="-- Select --" />
                                                             <form:options items="${locationMap}"/>
@@ -66,7 +66,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Job Type:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>Job Type:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="jobtypeMaster.id" id="jobtypeMaster" class="form-control">
                                                             <form:option value="" label="-- Select --" />
                                                             <form:options items="${jobtype1}"></form:options>
@@ -84,6 +84,14 @@
                                                         <label>Number Of Position<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="numberOfPosition" class="form-control" placeholder="Number Of Position"></form:input>
                                                     <form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>
+                                                    </div>
+                                                     <div class="col-sm-6">
+                                                        <label>Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" >
+                                                        <form:input path="date" class="form-control" onchange="dateDifference(this.value);" placeholder="From Date" readonly="true"></form:input>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                        </div>
+                                                    <form:errors path="date" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -104,5 +112,18 @@
             </div>
         </section>
     </div>
+      <script type="text/javascript">
+        $('.form_datetime').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+
+    </script>
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.validation.Validator;
 
 /**
  *
@@ -36,6 +37,7 @@ public class VacancyAbstract extends CustomAbstract {
     protected DesignationMasterService<DesignationMaster> designationMasterService;
     protected MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService;
     protected MprEmployeeTypeMasterService<MprEmployeeTypeMaster> mprEmployeeTypeMasterService;
+    protected Validator vacancyValidator;
 
     public VacancyMasterService<VacancyMaster> getVacancyMasterService() {
         return vacancyMasterService;
@@ -84,6 +86,15 @@ public class VacancyAbstract extends CustomAbstract {
     public void setMprEmployeeTypeMasterService(MprEmployeeTypeMasterService<MprEmployeeTypeMaster> mprEmployeeTypeMasterService) {
         this.mprEmployeeTypeMasterService = mprEmployeeTypeMasterService;
     }
+
+    public Validator getVacancyValidator() {
+        return vacancyValidator;
+    }
+
+    public void setVacancyValidator(Validator vacancyValidator) {
+        this.vacancyValidator = vacancyValidator;
+    }
+    
 
     protected void departmentList(HttpServletRequest request) {
         DepartmentMaster departmentMaster = new DepartmentMaster();

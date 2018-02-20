@@ -537,6 +537,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <!--<li><a href="intervalMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>Interval Master</a></li>-->
+                            <li><a href="approval.htm?act=createApprovalSetting"><i class="fa fa-circle-o"></i>Approval Setting</a></li>
                             <li><a href="deviceMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Device Management</a></li>
                             <li><a href="departmentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Department List</a></li>
                             <li><a href="designationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Designation List</a></li>

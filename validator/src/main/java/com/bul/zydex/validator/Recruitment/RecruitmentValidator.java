@@ -16,16 +16,6 @@ import org.springframework.validation.Validator;
  */
 public class RecruitmentValidator implements Validator {
 
-//    @Override
-//    public boolean supports(Class<?> type) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public void validate(Object o, Errors errors) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
     @Override
     public boolean supports(Class<?> type) {
         return RecruitmentMaster.class.equals(type);
@@ -35,15 +25,17 @@ public class RecruitmentValidator implements Validator {
     public void validate(Object o, Errors errors) {
         RecruitmentMaster recruitmentMaster = (RecruitmentMaster) o;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "locationMaster",
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "locationMaster.id",
                 "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "departmentMaster",
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "departmentMaster.id",
                 "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "jobtypeMaster",
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "jobtypeMaster.id",
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "numberOfPosition",
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "budget",
+                "field.error1", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "date",
                 "field.error1", "None");
        
     }

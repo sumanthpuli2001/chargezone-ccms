@@ -28,7 +28,8 @@ public class RecruitmentDAOImpl<T> extends GenericsDAOImpl<T> implements Recruit
                 + " FROM RecruitmentMaster a "
                 + " LEFT JOIN a.locationMaster b "
                 + " LEFT JOIN a.departmentMaster c "
-                + " LEFT JOIN a.jobtypeMaster d ";
+                + " LEFT JOIN a.jobtypeMaster d "
+                + " order by a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

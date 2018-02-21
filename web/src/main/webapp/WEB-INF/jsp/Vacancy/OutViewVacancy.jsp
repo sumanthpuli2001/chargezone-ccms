@@ -75,7 +75,7 @@
     </head>
     <body>
         <section class="content-header">
-            <button type="button" class="btn btn-primary" style="float: left; width: 155px;" onclick="window.location = 'logIn.html?act=firstStep'"><i class="fa fa-check"></i>&nbsp&nbsp&nbsp;Applay For Job</button>
+            <button type="button" class="btn btn-primary" style="float: left; width: 155px;" onclick="window.location = 'vacancy.htm?act=jobApplaClick'"><i class="fa fa-check"></i>&nbsp&nbsp&nbsp;Applay For Job</button>
             <button type="button" class="btn btn-primary" style="float: right; width: 120px;" onclick="window.location = 'vacancy.htm?act=backButton'"><i class="fa fa-backward"></i>&nbsp&nbsp&nbsp;Back</button>
             <h1>View Vacancy Detail</h1>
         </section>

@@ -89,6 +89,7 @@
     </head>
     <body>
         <section class="content-header">
+            <button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign Up</button>
             <h1>Job Vacancy List</h1>
             <ol class="breadcrumb">
             </ol>

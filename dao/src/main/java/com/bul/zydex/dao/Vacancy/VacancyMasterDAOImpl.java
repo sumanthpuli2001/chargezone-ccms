@@ -25,7 +25,8 @@ public class VacancyMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Vacan
         String query = "";
         query += " "
                 + " SELECT a.id, a.name, a.numberOfPosition, a.salaryRange, a.experience, a.status, a.fromDate, a.toDate"
-                + " FROM VacancyMaster a ";
+                + " FROM VacancyMaster a "
+                + " order by a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

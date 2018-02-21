@@ -157,7 +157,7 @@
                         <div class="col-sm-4">
                             <form:input path="userName" value="${userName}" cssClass="contact-subject form-control" placeholder="Enter User Name" onchange="formFieldManager();"></form:input>
                             </div>
-                            <div >
+                            <div>
                                 <label class="sr-only" for="contact-subject">Password:</label>
                             </div>
                             <div class="col-sm-4">

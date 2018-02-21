@@ -275,4 +275,11 @@ public class VacancyController extends VacancyAbstract {
         mv.setViewName("Vacancy/JobVacancyLogin");
         return mv;
     }
+    public ModelAndView signUp(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("Vacancy/signUpButton");
+        return mv;
+    }
 }

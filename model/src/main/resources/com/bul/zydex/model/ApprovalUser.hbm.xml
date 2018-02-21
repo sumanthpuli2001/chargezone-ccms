@@ -13,8 +13,26 @@
         <many-to-one name="approvalMaster" class="com.bul.zydex.model.ApprovalMaster" fetch="select">
             <column name="approvalMaster" />
         </many-to-one>
-        <property name="userId" type="java.lang.Integer">
-            <column name="user_id" />
+        <many-to-one name="employeeMaster" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="employee_master_id" not-null="true" />
+        </many-to-one>
+        <property name="level" type="java.lang.Integer">
+            <column name="level" />
+        </property>
+        <property name="createdBy" type="java.lang.Integer">
+            <column name="created_by" />
+        </property>
+        <property name="createdDate" type="string">
+            <column name="created_date" />
+        </property>
+        <property name="updatedBy" type="java.lang.Integer">
+            <column name="updated_by" />
+        </property>
+        <property name="updatedDate" type="string">
+            <column name="updated_date" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
         </property>
     </class>
 </hibernate-mapping>

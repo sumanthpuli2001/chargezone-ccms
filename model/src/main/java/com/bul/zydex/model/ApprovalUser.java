@@ -9,21 +9,35 @@ package com.bul.zydex.model;
  *
  * @author Vikas
  */
-public class ApprovalUser implements java.io.Serializable{
-    
+public class ApprovalUser implements java.io.Serializable {
+
     private Integer id;
     private ApprovalMaster approvalMaster;
-    private Integer userId;
-    
-    public  ApprovalUser(){
-        
+    private EmployeeMaster employeeMaster;
+    private Integer level;
+    private Integer createdBy;
+    private String createdDate;
+    private Integer updatedBy;
+    private String updatedDate;
+    private Integer status;
+
+    public ApprovalUser() {
+
     }
 
-    public ApprovalUser(Integer id, ApprovalMaster approvalMaster, Integer userId) {
-        this.id = id;
-        this.approvalMaster = approvalMaster;
-        this.userId = userId;
-    }
+//    public ApprovalUser(Integer id, ApprovalMaster approvalMaster, Integer userId, Integer level, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate, Integer status) {
+//        this.id = id;
+//        this.approvalMaster = approvalMaster;
+//        this.userId = userId;
+//        this.level = level;
+//        this.createdBy = createdBy;
+//        this.createdDate = createdDate;
+//        this.updatedBy = updatedBy;
+//        this.updatedDate = updatedDate;
+//        this.status = status;
+//    }
+
+  
 
     public Integer getId() {
         return id;
@@ -41,14 +55,63 @@ public class ApprovalUser implements java.io.Serializable{
         this.approvalMaster = approvalMaster;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public EmployeeMaster getEmployeeMaster() {
+        return employeeMaster;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setEmployeeMaster(EmployeeMaster employeeMaster) {
+        this.employeeMaster = employeeMaster;
+    }
+   
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Integer createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Integer getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(Integer updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public String getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
     
     
-    
+
 }

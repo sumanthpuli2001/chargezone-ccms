@@ -116,5 +116,6 @@
     <mapping resource="com/bul/zydex/model/MprEmployeeCategory.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/ApprovalMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/ApprovalUser.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/ApplayJobUserMaster.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

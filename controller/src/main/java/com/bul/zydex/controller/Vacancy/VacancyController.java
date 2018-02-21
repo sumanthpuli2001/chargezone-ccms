@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller.Vacancy;
 
+import com.bul.zydex.model.ApplayJobUserMaster;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
@@ -290,7 +291,11 @@ public class VacancyController extends VacancyAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
+        ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+        mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
         mv.setViewName("Vacancy/signUpButton");
+        return mv;
+    }
     
       public ModelAndView submitRegistration(HttpServletRequest request,
             HttpServletResponse response) throws Exception {

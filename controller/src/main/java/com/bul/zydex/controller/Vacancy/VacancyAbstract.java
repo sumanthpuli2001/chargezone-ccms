@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.Vacancy;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.JobtypeMaster;
@@ -13,6 +14,7 @@ import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
 import com.bul.zydex.model.VacancyMaster;
+import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
 import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
 import com.bul.zydex.service.Recruitment.MprEmployeeTypeMasterService;
@@ -37,7 +39,17 @@ public class VacancyAbstract extends CustomAbstract {
     protected DesignationMasterService<DesignationMaster> designationMasterService;
     protected MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService;
     protected MprEmployeeTypeMasterService<MprEmployeeTypeMaster> mprEmployeeTypeMasterService;
+    protected CandidateJobApplyService<CandidateApplyJob>candidateJobApplyService;
+//    protected VacancyMasterService<VacancyMaster>vacancyMasterService;
     protected Validator vacancyValidator;
+
+    public CandidateJobApplyService<CandidateApplyJob> getCandidateJobApplyService() {
+        return candidateJobApplyService;
+    }
+
+    public void setCandidateJobApplyService(CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService) {
+        this.candidateJobApplyService = candidateJobApplyService;
+    }
 
     public VacancyMasterService<VacancyMaster> getVacancyMasterService() {
         return vacancyMasterService;

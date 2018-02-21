@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller.Vacancy;
 
+import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.JobtypeMaster;
@@ -34,6 +35,16 @@ public class VacancyController extends VacancyAbstract {
         mv.getModelMap().put("list", vacancylist);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
         mv.setViewName("Vacancy/VacancyDetailReportList");
+        return mv;
+    }
+    
+    public ModelAndView applyJobRegistration(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        mv.setViewName("Vacancy/applyJobCandidateRegistration");
         return mv;
     }
 
@@ -273,6 +284,21 @@ public class VacancyController extends VacancyAbstract {
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("Vacancy/JobVacancyLogin");
+        return mv;
+    }
+    
+      public ModelAndView submitRegistration(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+         BindException errors = new BindException(candidateApplyJob, "candidateApplyJob");
+        bind(request, candidateApplyJob);
+        
+        candidateJobApplyService.create(candidateApplyJob);
+
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        mv.setViewName("Vacancy/applyJobCandidateRegistration");
         return mv;
     }
 }

@@ -523,4 +523,7 @@
     <bean id="approvalUserService1" class="com.bul.zydex.service.Approval.ApprovalUserServiceImpl">
         <property name="approvalUserDAO" ref="approvalUserDAO1" />
     </bean>
+    <bean id="candidateJobApplyService1" class="com.bul.zydex.service.CandidateJobApply.CandidateJobApplyServiceImpl">
+        <property name="candidateJobApplyDAO" ref="candidateJobApplyDAO1" />
+    </bean>
 </beans>

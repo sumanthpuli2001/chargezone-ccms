@@ -33,7 +33,9 @@ public class ApprovalController extends ApprovalAbstract {
 
         EmployeeMaster employeeMaster = new EmployeeMaster();
         selectEmployee(request, response);
-        selectEmployeeForParticularManager(request, response);
+//          EmployeeMaster employeeMaster= new EmployeeMaster();
+        selectedEmployeeFor360Feedback(request, employeeMaster); 
+//        selectEmployeeForParticularManager(request, response);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("approvalMaster", approvalMaster);
         mv.getModelMap().put("approvalUser", approvalUser);

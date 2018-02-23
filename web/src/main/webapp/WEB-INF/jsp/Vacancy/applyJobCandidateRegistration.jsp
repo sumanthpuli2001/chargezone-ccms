@@ -132,7 +132,7 @@
 
                             </div>
                             <div class="col-sm-2" style="text-align: left">
-                                <label>Candidate Name11:<span style="color: red;font-size: 12px;">*</span></label>
+                                <label>Candidate Name:<span style="color: red;font-size: 12px;">*</span></label>
                             </div>
                             <div class="col-sm-3">
                                 <form:input path="name" class="form-control" placeholder="Enter Candidate Name"></form:input>

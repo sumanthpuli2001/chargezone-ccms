@@ -75,7 +75,7 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <div class="form-group">
-                            <div class="col-sm-1">
+                            <div class="col-sm-3">
                             </div>
                             <div class="col-sm-2" style="text-align: left">
                                 <label>User Name:<span style="color: red;font-size: 12px;">*</span></label>
@@ -84,7 +84,14 @@
                                 <input path="employeeName" class="form-control"></input>
                                 <%--<form:errors path="employeeId" cssClass="errorDiv"></form:errors>--%>
                             </div>
-
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                            </div>
                             <div class="col-sm-2" style="text-align: left" >
                                 <label>Password :<span style="color: red;font-size: 12px;">*</span></label>
                             </div>

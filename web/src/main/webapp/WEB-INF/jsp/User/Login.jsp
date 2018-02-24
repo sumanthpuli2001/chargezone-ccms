@@ -157,7 +157,7 @@
                         <div class="col-sm-4">
                             <form:input path="userName" value="${userName}" cssClass="contact-subject form-control" placeholder="Enter User Name" onchange="formFieldManager();"></form:input>
                             </div>
-                            <div >
+                            <div>
                                 <label class="sr-only" for="contact-subject">Password:</label>
                             </div>
                             <div class="col-sm-4">
@@ -185,6 +185,7 @@
                         <!--<input type="text" name="Password" placeholder="Password..." class="contact-subject form-control" id="contact-subject">-->
                         <div class="col-sm-5">
                             <div><a href="out.html?act=forgotPassword" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg1"></spring:message></a></div>
+                            <div><a href="vacancy.htm?act=showVacancyList" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg2"></spring:message></a></div>
                             </div>
                         </div>
                 </form:form>

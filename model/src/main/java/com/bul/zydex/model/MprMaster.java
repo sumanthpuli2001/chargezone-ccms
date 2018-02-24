@@ -25,12 +25,13 @@ public class MprMaster implements java.io.Serializable {
     private String description;
     private DesignationMaster designationMaster;
     private String dateOfLeaving;
+    private Integer status;
 
     public MprMaster() {
 
     }
 
-    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, MprEmployeeCategory mprEmployeeCategory, MprEmployeeTypeMaster mprEmployeeTypeMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, QulificationMaster qulificationMaster, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving) {
+    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, MprEmployeeCategory mprEmployeeCategory, MprEmployeeTypeMaster mprEmployeeTypeMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, QulificationMaster qulificationMaster, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving, Integer status) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
@@ -45,6 +46,7 @@ public class MprMaster implements java.io.Serializable {
         this.description = description;
         this.designationMaster = designationMaster;
         this.dateOfLeaving = dateOfLeaving;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -131,7 +133,7 @@ public class MprMaster implements java.io.Serializable {
         return experience;
     }
 
-    public void setExperience(String Experience) {
+    public void setExperience(String experience) {
         this.experience = experience;
     }
 
@@ -158,5 +160,15 @@ public class MprMaster implements java.io.Serializable {
     public void setDateOfLeaving(String dateOfLeaving) {
         this.dateOfLeaving = dateOfLeaving;
     }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+    
+    
 
 }

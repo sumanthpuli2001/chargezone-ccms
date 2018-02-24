@@ -217,6 +217,10 @@
     <bean id="qulificationMasterDAO1" class="com.bul.zydex.dao.Recruitment.QulificationMasterDAOImpl" parent="sessionFactoryConfig" />
     <bean id="questionAnsDAO1" class="com.bul.zydex.dao.questionlibrary.QuestionAnsDAOImpl" parent="sessionFactoryConfig" />
     <bean id="questionLibraryDAO1" class="com.bul.zydex.dao.questionlibrary.QuestionLibraryDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="vacancyMasterDAO1" class="com.bul.zydex.dao.Vacancy.VacancyMasterDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="approvalMasterDAO1" class="com.bul.zydex.dao.Approval.ApprovalMasterDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="approvalUserDAO1" class="com.bul.zydex.dao.Approval.ApprovalUserDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="candidateJobApplyDAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateJobApplyDAOImpl" parent="sessionFactoryConfig" />
     <bean id="thoughtMasterDAO1" class="com.bul.zydex.dao.thought.ThoughtMasterDAOImpl" parent="sessionFactoryConfig" />
     <bean id="corporateVideoDAO1" class="com.bul.zydex.dao.CorporateVideo.CorporateVideoDAOImpl" parent="sessionFactoryConfig" />
     <bean id="galleryDAO1" class="com.bul.zydex.dao.thought.GalleryDAOImpl" parent="sessionFactoryConfig" />

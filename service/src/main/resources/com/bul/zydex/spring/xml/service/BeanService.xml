@@ -483,36 +483,47 @@
     </bean> 
     <bean id="qulificationMasterService1" class="com.bul.zydex.service.Recruitment.QulificationMasterServiceImpl">
         <property name="qulificationMasterDAO" ref="qulificationMasterDAO1" />
+    </bean>
+    <bean id="vacancyMasterService1" class="com.bul.zydex.service.Vacancy.VacancyMasterServiceImpl">
+        <property name="vacancyMasterDAO" ref="vacancyMasterDAO1" />
     </bean> 
-<bean id="questionLibraryService1" class="com.bul.zydex.service.questionlibrary.QuestionLibraryServiceImpl">
-    <property name="questionLibraryDAO" ref="questionLibraryDAO1" />
-</bean>  
-<bean id="questionAnsService1" class="com.bul.zydex.service.questionlibrary.QuestionAnsServiceImpl">
-    <property name="questionAnsDAO" ref="questionAnsDAO1" />
-</bean>
-<bean id="thoughtMasterService1" class="com.bul.zydex.service.thought.ThoughtMasterServiceImpl">
-    <property name="thoughtMasterDAO" ref="thoughtMasterDAO1" />
-</bean>
-<bean id="corporateVideoService1" class="com.bul.zydex.service.CorporateVideo.CorporateVideoServiceImpl">
-    <property name="corporateVideoDAO" ref="corporateVideoDAO1" />
-</bean>
-<bean id="galleryService1" class="com.bul.zydex.service.thought.GalleryServiceImpl">
-    <property name="galleryDAO" ref="galleryDAO1" />
-</bean>
-<bean id="rAndRService1" class="com.bul.zydex.service.thought.RAndRServiceImpl">
-    <property name="rAndRDAO" ref="rAndRDAO1" />
-</bean>
-<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
-    <property name="beanNames">
-        <list>
-            <value>*Service1*</value>
-        </list>
-    </property>
-    <!--        <property name="interceptorNames">
-        <list>
-            <value>transactionInterceptor</value>
-        </list>
-    </property>-->
-</bean>
-
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames">
+            <list>
+                <value>*Service1*</value>
+            </list>
+        </property>
+        <!--        <property name="interceptorNames">
+            <list>
+                <value>transactionInterceptor</value>
+            </list>
+        </property>-->
+    </bean> 
+    <bean id="questionLibraryService1" class="com.bul.zydex.service.questionlibrary.QuestionLibraryServiceImpl">
+        <property name="questionLibraryDAO" ref="questionLibraryDAO1" />
+    </bean>  
+    <bean id="questionAnsService1" class="com.bul.zydex.service.questionlibrary.QuestionAnsServiceImpl">
+        <property name="questionAnsDAO" ref="questionAnsDAO1" />
+    </bean>
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames">
+            <list>
+                <value>*Service1*</value>
+            </list>
+        </property>
+        <!--        <property name="interceptorNames">
+            <list>
+                <value>transactionInterceptor</value>
+            </list>
+        </property>-->
+    </bean>
+    <bean id="approvalMasterService1" class="com.bul.zydex.service.Approval.ApprovalMasterServiceImpl">
+        <property name="approvalMasterDAO" ref="approvalMasterDAO1" />
+    </bean>
+    <bean id="approvalUserService1" class="com.bul.zydex.service.Approval.ApprovalUserServiceImpl">
+        <property name="approvalUserDAO" ref="approvalUserDAO1" />
+    </bean>
+    <bean id="candidateJobApplyService1" class="com.bul.zydex.service.CandidateJobApply.CandidateJobApplyServiceImpl">
+        <property name="candidateJobApplyDAO" ref="candidateJobApplyDAO1" />
+    </bean>
 </beans>

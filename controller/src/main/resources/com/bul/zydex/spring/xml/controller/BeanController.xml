@@ -1003,12 +1003,24 @@
         <property name="locationMasterService" ref="locationMasterService1" />
         <property name="jobtypeMasterService" ref="jobtypeMasterService1"/>
         <property name="recruitmentValidator" ref="recruitmentValidator1"/>
+        <property name="MprValidator" ref="mprValidator1"/>
         <property name="mprMasterService" ref="mprMasterService1"/>
         <property name="mprEmployeeTypeMasterService" ref="mprEmployeeTypeMasterService1"/>
         <property name="mprEmployeeCategoryService" ref="mprEmployeeCategoryService1"/>
         <property name="qulificationMasterService" ref="qulificationMasterService1"/>
         <property name="designationMasterService" ref="designationMasterService1"/>
     </bean>
+    
+    <bean id="vacancyController1" class="com.bul.zydex.controller.Vacancy.VacancyController" parent="controllerConfig" >
+        <property name="vacancyMasterService" ref="vacancyMasterService1"></property>
+        <property name="locationMasterService" ref="locationMasterService1" />
+        <property name="jobtypeMasterService" ref="jobtypeMasterService1"/>
+        <property name="mprEmployeeTypeMasterService" ref="mprEmployeeTypeMasterService1"/>
+        <property name="mprEmployeeCategoryService" ref="mprEmployeeCategoryService1"/>
+        <property name="designationMasterService" ref="designationMasterService1"/>
+        <property name="vacancyValidator" ref="vacancyValidator1"/>
+        <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
+        
     <bean id="thoughtMasterController1" class="com.bul.zydex.controller.thought.ThoughtMasterController" parent="controllerConfig" >
         <property name="thoughtMasterService" ref="thoughtMasterService1"></property>
         <property name="rAndRService" ref="rAndRService1"></property>
@@ -1020,6 +1032,19 @@
     </bean>
     <bean id="oddPunchController1" class="com.bul.zydex.controller.OddPunch.OddPunchController" parent="controllerConfig" >
         <property name="employeeDatetimeDataService" ref="employeeDatetimeDataService1"/>
+    </bean>
+    <bean id="approvalController1" class="com.bul.zydex.controller.Approval.ApprovalController" parent="controllerConfig" >
+        <property name="approvalMasterService" ref="approvalMasterService1"/>
+        <property name="approvalUserService" ref="approvalUserService1"/>
+        <property name="leaveTypeMasterService" ref="leaveTypeMasterService1" />
+    </bean>
+    <bean id="candidateJobApply1" class="com.bul.zydex.controller.candidateJobApply.CandidateJobApplyController" parent="controllerConfig" >
+        <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
+        <property name="vacancyMasterService" ref="vacancyMasterService1"/>
+    </bean>
+    <bean id="homeController1" class="com.bul.zydex.controller.HomeController" parent="controllerConfig" >
+        <property name="levelMasterService" ref="levelMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
     </bean>
 </beans>
  

@@ -10,27 +10,29 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Request For Man Power Requisition</title>
+        <title>MPR Created List</title>
     </head>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Request For Man Power Requisition</h1>
+            <h1>Man Power Requisition List</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Request For Man Power Requisition</li>
+                <li class="active">MPR Created List</li>
             </ol>
         </section>
         <script>
             function deleteCheck11() {
-                var checkboxes = "";
-                checkboxes = document.getElementsByName('checkId');
-                for (var i = 0, n = checkboxes.length; i < n; i++) {
-                    if (checkboxes[i].checked) {
-                        return true;
+                var checkboxes = confirm("Are you sure you want to delete?");
+                if (checkboxes) {
+                    checkboxes = document.getElementsByName('checkId');
+                    for (var i = 0, n = checkboxes.length; i < n; i++) {
+                        if (checkboxes[i].checked) {
+                            return true;
+                        }
                     }
+                    alert("Please, Select one or more record(s).");
                 }
-                alert("Please, Select one or more record(s).");
                 return false;
             }
         </script>
@@ -50,7 +52,7 @@
                             <div class="tab-content">
                                 <c:if test="${sessionScope.userRight.employeeManagement}">
                                     <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
-                                    <button type="button" class="btn btn-facebook" style="float: right; width: 100px;" onclick="window.location = 'recruitment.htm?act=searchForCreatedBudget'"><i class="fa fa-search"></i>&nbsp&nbsp;SEARCH</button>
+                                    <button type="button" class="btn btn-facebook" style="float: right; width: 200px;" onclick="window.location = 'recruitment.htm?act=searchForCreatedBudget'"><i class="fa fa-search"></i>&nbsp&nbsp;Man Power Planning Search</button>
 
                                     <!--<button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'recruitment.htm?act=requestForManPower'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>-->
                                 </c:if>
@@ -77,10 +79,12 @@
                                                                         </c:if>
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">Name</th>
-                                                                    <th style="width: 50px;">Number Of Position</th>
                                                                     <th style="width: 50px;">Budget</th>
-                                                                        <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                                    <th style="width: 50px;">Number Of Position</th>
+                                                                    <th style="width: 50px;">Experience</th>
+                                                                    <th style="width: 50px;">Status</th>
                                                                     <th style="width: 50px;">Action</th>
+                                                                    <th style="width: 50px;">Create Vacancy</th>
                                                                         <%--</c:if>--%>
 
                                                                 </tr>
@@ -95,15 +99,30 @@
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
                                                                 <td>${list[1]}</td>
-                                                                <td>${list[2]}</td>
                                                                 <td>${list[3]}</td>
+                                                                <td>${list[2]}</td>
+                                                                <td>${list[4]}</td>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                                <c:if test="${list[5] == 0}"><td><span class="badge">Pending</span></td></c:if>
+                                                                <c:if test="${list[5] == 1}"><td><span class="label label-success">Approved</span></td></c:if>
+                                                                <c:if test="${list[5] == 2}"><td><span class="label label-danger">Returned</span></td></c:if>
+                                                                <c:if test="${list[5] == 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
+                                                                    <td>
+                                                                    <c:if test="${list[5] == 0}">
+                                                                        <div class="btn-group">
+                                                                            <button  type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                                &nbsp;&nbsp;Edit
+                                                                            </button>
+                                                                        </div>
+                                                                    </c:if>
+                                                                </td>
                                                                 <td>
                                                                     <div class="btn-group">
-                                                                        <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                            &nbsp;&nbsp;Edit1
-                                                                        </button>
-
+                                                                        <c:if test="${list[5] == 1}">
+                                                                            <button type="button" onclick="vacancyClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                                &nbsp;&nbsp;Create Vacancy
+                                                                            </button>
+                                                                        </c:if>
                                                                     </div>
                                                                 </td>
                                                                 <%--</c:if>--%>
@@ -128,10 +147,15 @@
         <div class="tab-pane" id="tab_3"></div><!-- /.tab-pane -->
         <!-- /.content -->
     </div>
-     <script>
-                        function editViewClick(id) {
-                        window.location = 'recruitment.htm?act=editMprClick&id=' + id;
-                        }
+    <script>
+        function editViewClick(id) {
+            window.location = 'recruitment.htm?act=editMprClick&id=' + id;
+        }
+    </script>
+    <script>
+        function vacancyClick(id) {
+            window.location = 'vacancy.htm?act=newVacancyCreate&id=' + id;
+        }
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

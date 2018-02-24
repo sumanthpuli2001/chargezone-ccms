@@ -43,6 +43,7 @@ public class RecruitmentAbstract extends CustomAbstract {
     protected LocationMasterService<LocationMaster> locationMasterService;
     protected JobtypeMasterService<JobtypeMaster> jobtypeMasterService;
     protected Validator recruitmentValidator;
+    protected Validator mprValidator;
     protected MprMasterService<MprMaster> mprMasterService;
     protected MprEmployeeTypeMasterService<MprEmployeeTypeMaster> mprEmployeeTypeMasterService;
     protected MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService;
@@ -95,6 +96,14 @@ public class RecruitmentAbstract extends CustomAbstract {
 
     public void setRecruitmentValidator(Validator recruitmentValidator) {
         this.recruitmentValidator = recruitmentValidator;
+    }
+
+    public Validator getMprValidator() {
+        return mprValidator;
+    }
+
+    public void setMprValidator(Validator mprValidator) {
+        this.mprValidator = mprValidator;
     }
 
     public RecruitmentService<RecruitmentMaster> getRecruitmentService() {
@@ -231,8 +240,8 @@ public class RecruitmentAbstract extends CustomAbstract {
 
         request.setAttribute("qulytypeList", qt);
     }
-    
-        public void selectMPRBudget(HttpServletRequest request,
+
+    public void selectMPRBudget(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         List<?> list = mprMasterService.readForMPRDetail();
         String tempStr = "[";

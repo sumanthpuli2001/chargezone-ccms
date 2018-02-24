@@ -145,4 +145,6 @@
     <bean id="payrollLoanTypeDetailsValidator1" class="com.bul.zydex.validator.Payroll.PayrollLoanTypeDetailsValidator" />
     <bean id="companyMasterValidator1" class="com.bul.zydex.validator.Company.CompanyMasterValidator" />
     <bean id="recruitmentValidator1" class="com.bul.zydex.validator.Recruitment.RecruitmentValidator" />
+    <bean id="mprValidator1" class="com.bul.zydex.validator.Recruitment.MprValidator" />
+    <bean id="vacancyValidator1" class="com.bul.zydex.validator.Vacancy.VacancyValidator" />
 </beans>

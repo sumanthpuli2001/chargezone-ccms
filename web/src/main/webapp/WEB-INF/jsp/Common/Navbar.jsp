@@ -44,6 +44,20 @@
                         </a>
                     </li>
                 </c:if>
+                <c:if test="${!sessionScope.userRight.hr}">
+                    <li class="active treeview">
+                        <a href="homeController.htm?act=openHomePage">
+                            <i class="fa fa-dashboard fa-lg"></i> <span>Home</span>
+                        </a>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.userRight.hr}">
+                    <li class="active treeview">
+                        <a href="homeController.htm?act=openHomePage">
+                            <i class="fa fa-dashboard fa-lg"></i> <span>Home</span>
+                        </a>
+                    </li>
+                </c:if>
                 <c:if test="${sessionScope.userRight.employeeManagement}">
                     <li class="treeview">
                         <a href="#">
@@ -56,10 +70,25 @@
                             <!--<li><a href="employeeMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>Employee Registration</a></li>-->
                             <li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP</a></li>
                             <li><a href="recruitment.htm?act=createMpr"><i class="fa fa-circle-o"></i>MPR</a></li>
-                            <li><a href="employeeMaster.htm?act=excelUploadRegistration"><i class="fa fa-circle-o"></i>Employee Registration By Excel</a></li>
+                            <li><a href="vacancy.htm?act=vacancyDetailList"><i class="fa fa-circle-o"></i>Vacancy</a></li>
+                            <li><a href="vacancy.htm?act=applyJobRegistration"><i class="fa fa-circle-o"></i>Apply Job</a></li>
                             <!--                        <li><a href="userMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>User Right</a></li>-->
                         </ul>
                     </li>
+                </c:if>
+                <c:if test="${!sessionScope.userRight.employeeManagement}">
+                    <c:if test="${sessionScope.userRight.hr}">
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-user fa-lg"></i>
+                                <span>Recruitment</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>Recruitment Approval</a></li>
+                            </ul>
+                        </li>
+                    </c:if>
                 </c:if>
                 <c:if test="${sessionScope.userRight.employeeManagement}">
                     <li class="treeview">
@@ -523,6 +552,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <!--<li><a href="intervalMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>Interval Master</a></li>-->
+                            <li><a href="approval.htm?act=createApprovalSetting"><i class="fa fa-circle-o"></i>Approval Setting</a></li>
                             <li><a href="deviceMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Device Management</a></li>
                             <li><a href="departmentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Department List</a></li>
                             <li><a href="designationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Designation List</a></li>

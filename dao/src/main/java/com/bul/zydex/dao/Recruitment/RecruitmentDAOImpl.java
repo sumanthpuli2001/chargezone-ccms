@@ -24,11 +24,12 @@ public class RecruitmentDAOImpl<T> extends GenericsDAOImpl<T> implements Recruit
     public List<?> readBudgetDetail() {
         String query = "";
         query += " "
-                + " SELECT a.id, a.numberOfPosition, a.budget, b.location, c.departmentName, d.jobTypeName"
+                + " SELECT a.id, a.numberOfPosition, a.budget, a.date, b.location, c.departmentName, d.jobTypeName"
                 + " FROM RecruitmentMaster a "
                 + " LEFT JOIN a.locationMaster b "
                 + " LEFT JOIN a.departmentMaster c "
-                + " LEFT JOIN a.jobtypeMaster d ";
+                + " LEFT JOIN a.jobtypeMaster d "
+                + " order by a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

@@ -220,5 +220,6 @@
     <bean id="vacancyMasterDAO1" class="com.bul.zydex.dao.Vacancy.VacancyMasterDAOImpl" parent="sessionFactoryConfig" />
     <bean id="approvalMasterDAO1" class="com.bul.zydex.dao.Approval.ApprovalMasterDAOImpl" parent="sessionFactoryConfig" />
     <bean id="approvalUserDAO1" class="com.bul.zydex.dao.Approval.ApprovalUserDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="candidateJobApplyDAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateJobApplyDAOImpl" parent="sessionFactoryConfig" />
     <bean id="applayJobUserMasterDAO1" class="com.bul.zydex.dao.ApplayJobUserMaster.ApplayJobUserMasterDAOImpl" parent="sessionFactoryConfig" />
 </beans>

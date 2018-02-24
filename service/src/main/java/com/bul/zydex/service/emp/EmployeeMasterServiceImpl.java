@@ -361,4 +361,9 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> readLevel1AndLevel5FunctionheadByEmployeeMasterId(int id) {
         return employeeMasterDAO.readLevel1AndLevel5FunctionheadByEmployeeMasterId(id);
     }
+
+    @Override
+    public List<?> readEmployeeByBirthday(String date) {
+          return employeeMasterDAO.readEmployeeByBirthday(date);
+    }
 }

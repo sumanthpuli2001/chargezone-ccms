@@ -44,6 +44,20 @@
                         </a>
                     </li>
                 </c:if>
+                <c:if test="${!sessionScope.userRight.hr}">
+                    <li class="active treeview">
+                        <a href="homeController.htm?act=openHomePage">
+                            <i class="fa fa-dashboard fa-lg"></i> <span>Home</span>
+                        </a>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.userRight.hr}">
+                    <li class="active treeview">
+                        <a href="homeController.htm?act=openHomePage">
+                            <i class="fa fa-dashboard fa-lg"></i> <span>Home</span>
+                        </a>
+                    </li>
+                </c:if>
                 <c:if test="${sessionScope.userRight.employeeManagement}">
                     <li class="treeview">
                         <a href="#">
@@ -57,6 +71,7 @@
                             <li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP</a></li>
                             <li><a href="recruitment.htm?act=createMpr"><i class="fa fa-circle-o"></i>MPR</a></li>
                             <li><a href="vacancy.htm?act=vacancyDetailList"><i class="fa fa-circle-o"></i>Vacancy</a></li>
+                            <li><a href="vacancy.htm?act=applyJobRegistration"><i class="fa fa-circle-o"></i>Apply Job</a></li>
                             <!--                        <li><a href="userMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>User Right</a></li>-->
                         </ul>
                     </li>

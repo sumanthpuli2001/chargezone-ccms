@@ -1019,6 +1019,7 @@
         <property name="mprEmployeeCategoryService" ref="mprEmployeeCategoryService1"/>
         <property name="designationMasterService" ref="designationMasterService1"/>
         <property name="vacancyValidator" ref="vacancyValidator1"/>
+        <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
         <property name="applayJobUserMasterSerivce" ref="applayJobUserMasterService1"/>
         <property name="applayJobUserMasterValidator" ref="applayJobUserMasterValidator1"/>
         
@@ -1030,6 +1031,14 @@
         <property name="approvalMasterService" ref="approvalMasterService1"/>
         <property name="approvalUserService" ref="approvalUserService1"/>
         <property name="leaveTypeMasterService" ref="leaveTypeMasterService1" />
+    </bean>
+    <bean id="candidateJobApply1" class="com.bul.zydex.controller.candidateJobApply.CandidateJobApplyController" parent="controllerConfig" >
+        <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
+        <property name="vacancyMasterService" ref="vacancyMasterService1"/>
+    </bean>
+    <bean id="homeController1" class="com.bul.zydex.controller.HomeController" parent="controllerConfig" >
+        <property name="levelMasterService" ref="levelMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
     </bean>
 </beans>
  

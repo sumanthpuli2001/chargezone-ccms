@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.bul.zydex.dao.thought;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
@@ -14,21 +13,37 @@ import java.util.List;
  *
  * @author Rishi
  */
-public class ThoughtMasterDAOImpl<T> extends GenericsDAOImpl<T> implements ThoughtMasterDAO<T>  {
+public class ThoughtMasterDAOImpl<T> extends GenericsDAOImpl<T> implements ThoughtMasterDAO<T> {
 
     @Override
     protected Class getDomainClass() {
         return ThoughtMaster.class;
     }
 
-     @Override
+    @Override
     public List<?> readthoughtmasterDetail() {
         String query = "";
         query += " "
                 + " SELECT a.id, a.thought, a.date"
                 + " FROM ThoughtMaster a ";
-               
+
         List<?> list = getHibernateTemplate().find(query);
         return list;
+    }
+
+    @Override
+    public ThoughtMaster readByCurrentDate(String date) {
+        ThoughtMaster master = new ThoughtMaster();
+        String query = "";
+        query = " FROM ThoughtMaster a "
+                + " WHERE STR_TO_DATE(a.date,'%d/%m/%Y') = STR_TO_DATE('" + date + "','%d/%m/%Y')";
+
+        List<?> list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            master = (ThoughtMaster) list.get(0);
+        } else {
+            master = null;
+        }
+        return master;
     }
 }

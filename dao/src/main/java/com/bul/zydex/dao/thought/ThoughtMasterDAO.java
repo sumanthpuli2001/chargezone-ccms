@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.thought;
 
 import com.bul.zydex.dao.GenericsDAO;
+import com.bul.zydex.model.ThoughtMaster;
 import java.util.List;
 
 /**
@@ -15,5 +16,7 @@ import java.util.List;
 public interface ThoughtMasterDAO<T> extends GenericsDAO<T> {
     
     public List<?> readthoughtmasterDetail();
+    
+    public ThoughtMaster readByCurrentDate(String date);
     
 }

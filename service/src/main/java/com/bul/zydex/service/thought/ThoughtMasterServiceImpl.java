@@ -7,6 +7,7 @@
 package com.bul.zydex.service.thought;
 
 import com.bul.zydex.dao.thought.ThoughtMasterDAO;
+import com.bul.zydex.model.ThoughtMaster;
 import com.bul.zydex.service.GenericsServiceImpl;
 import java.util.List;
 
@@ -30,6 +31,11 @@ public class ThoughtMasterServiceImpl<T> extends GenericsServiceImpl<T>
     @Override
     public List<?> readthoughtmasterDetail() {
         return thoughtMasterDAO.readthoughtmasterDetail();
+    }
+
+    @Override
+    public ThoughtMaster readByCurrentDate(String date) {
+         return thoughtMasterDAO.readByCurrentDate(date);
     }
 
 }

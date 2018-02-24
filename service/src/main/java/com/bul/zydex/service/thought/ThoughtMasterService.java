@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.service.thought;
 
+import com.bul.zydex.model.ThoughtMaster;
 import com.bul.zydex.service.GenericsService;
 import java.util.List;
 
@@ -15,4 +16,6 @@ import java.util.List;
 public interface ThoughtMasterService<T> extends GenericsService<T> {
    
     public List<?> readthoughtmasterDetail();
+    
+      public ThoughtMaster readByCurrentDate(String date);
 }

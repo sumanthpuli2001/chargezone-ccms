@@ -44,6 +44,20 @@
                         </a>
                     </li>
                 </c:if>
+                <c:if test="${!sessionScope.userRight.hr}">
+                    <li class="active treeview">
+                        <a href="homeController.htm?act=openHomePage">
+                            <i class="fa fa-dashboard fa-lg"></i> <span>Home</span>
+                        </a>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.userRight.hr}">
+                    <li class="active treeview">
+                        <a href="homeController.htm?act=openHomePage">
+                            <i class="fa fa-dashboard fa-lg"></i> <span>Home</span>
+                        </a>
+                    </li>
+                </c:if>
                 <c:if test="${sessionScope.userRight.employeeManagement}">
                     <li class="treeview">
                         <a href="#">

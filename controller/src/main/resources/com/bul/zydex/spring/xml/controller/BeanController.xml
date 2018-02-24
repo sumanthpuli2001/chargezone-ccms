@@ -1021,5 +1021,9 @@
     <bean id="oddPunchController1" class="com.bul.zydex.controller.OddPunch.OddPunchController" parent="controllerConfig" >
         <property name="employeeDatetimeDataService" ref="employeeDatetimeDataService1"/>
     </bean>
+    <bean id="homeController1" class="com.bul.zydex.controller.HomeController" parent="controllerConfig" >
+        <property name="levelMasterService" ref="levelMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
+    </bean>
 </beans>
  

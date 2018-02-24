@@ -6,11 +6,14 @@
 package com.bul.zydex.service.questionlibrary;
 
 import com.bul.zydex.service.GenericsService;
+import java.util.List;
 
 /**
  *
  * @author Dell-1
  */
 public interface QuestionLibraryService<T> extends GenericsService<T> {
-    
+
+    public List<?> readAllQuestionLibrary();
+
 }

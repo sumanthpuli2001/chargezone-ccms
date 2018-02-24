@@ -20,12 +20,12 @@
     <style type="text/css">
 
 
-        //.....
+
         br.newpage {
             mso-special-character:line-break;
             page-break-after:always;
         }
-        //.....
+
     </style>
 
     <!-- Content Wrapper. Contains page content -->
@@ -309,14 +309,14 @@
                                                 <td align="left"><b>Remaining Company Loan Balance :</b> ${employeeMaster[8][0]} </td>
 
                                             </tr>
-                                         
+
 
                                         </c:if>
-                                        
-                                            <tr>
-                                                <td><hr></td>
-                                                <td><hr></td>
-                                            </tr>
+
+                                        <tr>
+                                            <td><hr></td>
+                                            <td><hr></td>
+                                        </tr>
 
                                     </c:forEach>
 

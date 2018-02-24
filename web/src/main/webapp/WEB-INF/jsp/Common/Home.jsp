@@ -318,11 +318,14 @@
                                                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             </div>
                                             <div class="box-body">
-                                                <ul class="products-list product-list-in-box">
-                                                    <li class="item">
-                                                        <span class="product-title">  ${employeeMaster.employeeId}</span>
-                                                    </li>
-                                                </ul>
+
+                                                <c:forEach var="todayBirthday" items="${TodaysBirthdays}">
+                                                    <ul class="products-list product-list-in-box">
+                                                        <li class="item">
+                                                            <span class="product-title">  ${todayBirthday[1]}</span>
+                                                        </li>
+                                                    </ul>
+                                                </c:forEach>
                                             </div>
                                         </div>
                                     </div>

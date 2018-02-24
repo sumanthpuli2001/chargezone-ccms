@@ -70,7 +70,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             recruitmentMaster.setDepartmentMaster(new DepartmentMaster());
             recruitmentMaster.setJobtypeMaster(new JobtypeMaster());
         }
-        selectBudget(request, response);
+//        selectBudget(request, response);
         departmentList(request);
         Map<Integer, String> locationMap = readLocations();
         Map<Integer, String> jobtype1 = jobtypeList();
@@ -96,21 +96,22 @@ public class RecruitmentController extends RecruitmentAbstract {
         BindException errors = new BindException(recruitmentMaster, "recruitmentMaster");
         bind(request, recruitmentMaster);
 
-        selectBudget(request, response);
+//        selectBudget(request, response);
         departmentList(request);
 
         recruitmentValidator.validate(recruitmentMaster, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
-                    "Error : The recruitmentMaster is not valid. NO white Space");
+                    "Error : The Entered Information is not valid");
+            mv.addAllObjects(errors.getModel());
+            mv = newCreateBudget(request, response);
         } else {
             recruitmentService.create(recruitmentMaster);
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
 
+            mv = recruitmentCreate(request, response);
         }
-//        mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
-        mv = recruitmentCreate(request, response);
 
         return mv;
     }
@@ -123,7 +124,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             try {
                 recruitmentService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
-                        "Info : One or more records are deleted successfully.");
+                        "Info :Records are deleted successfully.");
             } catch (Exception e) {
 
             }
@@ -217,13 +218,21 @@ public class RecruitmentController extends RecruitmentAbstract {
 
 //        selectMPRBudget(request, response);
         departmentList(request);
-        mprMaster.setStatus(0);
-        mprMasterService.create(mprMaster);
-        request.setAttribute("successMessage",
-                "Information : The Information is saved Successfully.");
 
-        mv = createMpr(request, response);
+        mprValidator.validate(mprMaster, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid");
+            mv.addAllObjects(errors.getModel());
+            mv = viewClick(request, response);
+        } else {
+            mprMaster.setStatus(0);
+            mprMasterService.create(mprMaster);
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
 
+            mv = createMpr(request, response);
+        }
         return mv;
     }
 
@@ -296,7 +305,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             try {
                 mprMasterService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
-                        "Info : One or more records are deleted successfully.");
+                        "Info : Records are deleted successfully.");
             } catch (Exception e) {
 
             }
@@ -308,59 +317,19 @@ public class RecruitmentController extends RecruitmentAbstract {
     public ModelAndView editMprClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         MprMaster mprMaster = new MprMaster();
-        RecruitmentMaster recruitmentMaster = new RecruitmentMaster();
-        DepartmentMaster departmentMaster = new DepartmentMaster();
-        LocationMaster locationMaster = new LocationMaster();
-        JobtypeMaster jobtypeMaster = new JobtypeMaster();
-        DesignationMaster designationMaster = new DesignationMaster();
-        MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
-        MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
 
-        if (mprMaster.getId() != null) {
-            mprMaster = mprMasterService.readById(mprMaster.getId());
-            mprMaster.setLocationMaster(mprMaster.getLocationMaster());
-            mprMaster.setDepartmentMaster(mprMaster.getDepartmentMaster());
-            mprMaster.setJobtypeMaster(mprMaster.getJobtypeMaster());
-            mprMaster.setDesignationMaster(mprMaster.getDesignationMaster());
-            mprMaster.setMprEmployeeCategory(mprMaster.getMprEmployeeCategory());
-            mprMaster.setMprEmployeeTypeMaster(mprMaster.getMprEmployeeTypeMaster());
-//            mprMaster.setQulificationMaster(mprMaster.getQulificationMaster());
-        } else {
-            mprMaster.setLocationMaster(new LocationMaster());
-            mprMaster.setDepartmentMaster(new DepartmentMaster());
-            mprMaster.setJobtypeMaster(new JobtypeMaster());
-            mprMaster.setDesignationMaster(new DesignationMaster());
-            mprMaster.setMprEmployeeCategory(new MprEmployeeCategory());
-            mprMaster.setMprEmployeeTypeMaster(new MprEmployeeTypeMaster());
-//            mprMaster.setQulificationMaster(new QulificationMaster());
-        }
-//        selectMPRBudget(request, response);
         departmentList(request);
         designationList(request);
         employeecategoryList(request);
         employeeTypeList(request);
-//        qulificationList(request);
         Map<Integer, String> locationMap = readLocations();
         Map<Integer, String> jobtype1 = jobtypeList();
         mv.addObject("locationMap", locationMap);
         mv.addObject("jobtype1", jobtype1);
-        mprMaster.setDepartmentMaster(new DepartmentMaster());
-        mprMaster.setLocationMaster(new LocationMaster());
-        mprMaster.setJobtypeMaster(new JobtypeMaster());
-        mprMaster.setDesignationMaster(new DesignationMaster());
-        mprMaster.setMprEmployeeCategory(new MprEmployeeCategory());
-        mprMaster.setMprEmployeeTypeMaster(new MprEmployeeTypeMaster());
 
         String id = request.getParameter("id");
         mprMaster = mprMasterService.readById(Integer.parseInt(id));
         mv.getModelMap().put("mprMaster", mprMaster);
-        mv.getModelMap().put("departmentMaster", departmentMaster);
-        mv.getModelMap().put("locationMaster", locationMaster);
-        mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
-        mv.getModelMap().put("designationMaster", designationMaster);
-        mv.getModelMap().put("mprEmployeeCategory", mprEmployeeCategory);
-        mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
-        mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
         mv.setViewName("Recruitment/MprEditSubmit");
         return mv;
     }
@@ -398,12 +367,6 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         String id = request.getParameter("id");
         recruitmentMaster = recruitmentService.readById(Integer.parseInt(id));
-        recruitmentMaster.setDepartmentMaster(new DepartmentMaster());
-        recruitmentMaster.setLocationMaster(new LocationMaster());
-        recruitmentMaster.setJobtypeMaster(new JobtypeMaster());
-        mv.getModelMap().put("departmentMaster", departmentMaster);
-        mv.getModelMap().put("locationMaster", locationMaster);
-        mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
         mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
         mv.setViewName("Recruitment/RecruitmentEditView");
 
@@ -421,7 +384,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         Map<Integer, String> locationMap = readLocations();
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
-                    "Error : The Professional Tax is not valid.");
+                    "Error :  not valid.");
             mv.addAllObjects(errors.getModel());
         } else {
             recruitmentService.update(recruitmentMaster);
@@ -429,7 +392,7 @@ public class RecruitmentController extends RecruitmentAbstract {
 //                    "The Professional Tax is Updated -."
 //                    + payrollProfessionalTax.getAmount());
             request.setAttribute("successMessage",
-                    "Information: The Professional Tax is Updated successfully");
+                    "Information: The MPP is Updated successfully");
         }
 
         mv.getModelMap().put("recruitmentMaster", recruitmentMaster);

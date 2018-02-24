@@ -25,7 +25,8 @@ public class MprMasterDAOImpl<T> extends GenericsDAOImpl<T> implements MprMaster
         String query = "";
         query += " "
                 + " SELECT a.id, a.name, a.numberOfPosition, a.budget, a.experience, a.status"
-                + " FROM MprMaster a ";
+                + " FROM MprMaster a "
+                + " order by a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

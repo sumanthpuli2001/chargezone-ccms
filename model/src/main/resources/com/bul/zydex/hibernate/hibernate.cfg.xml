@@ -114,5 +114,8 @@
     <mapping resource="com/bul/zydex/model/QuestionLibrary.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/MprEmployeeCategory.hbm.xml"/>
     <mapping/>
+    <mapping resource="com/bul/zydex/model/ThoughtMaster.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/CorporateVideo.hbm.xml"/>
+    <mapping/>
   </session-factory>
 </hibernate-configuration>

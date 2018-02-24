@@ -490,6 +490,18 @@
 <bean id="questionAnsService1" class="com.bul.zydex.service.questionlibrary.QuestionAnsServiceImpl">
     <property name="questionAnsDAO" ref="questionAnsDAO1" />
 </bean>
+<bean id="thoughtMasterService1" class="com.bul.zydex.service.thought.ThoughtMasterServiceImpl">
+    <property name="thoughtMasterDAO" ref="thoughtMasterDAO1" />
+</bean>
+<bean id="corporateVideoService1" class="com.bul.zydex.service.CorporateVideo.CorporateVideoServiceImpl">
+    <property name="corporateVideoDAO" ref="corporateVideoDAO1" />
+</bean>
+<bean id="galleryService1" class="com.bul.zydex.service.thought.GalleryServiceImpl">
+    <property name="galleryDAO" ref="galleryDAO1" />
+</bean>
+<bean id="rAndRService1" class="com.bul.zydex.service.thought.RAndRServiceImpl">
+    <property name="rAndRDAO" ref="rAndRDAO1" />
+</bean>
 <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
     <property name="beanNames">
         <list>

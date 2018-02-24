@@ -95,6 +95,6 @@
   <table-filter match-name="email_add_master"/>
   <table-filter match-name="employee_punch_data_for_mobile_app"/>
   <table-filter match-name="device_master_notification"/>
-  
+  <table-filter match-name="thought_master"/>
   
 </hibernate-reverse-engineering>

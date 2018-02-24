@@ -11,6 +11,22 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <title>Dashbord Setting </title>
+         <script>
+            function deleteCheck11() {
+                var checkboxes = confirm("Are you sure you want to delete?");
+                if(checkboxes){
+                checkboxes = document.getElementsByName('checkId');
+                for (var i = 0, n = checkboxes.length; i < n; i++) {
+                    if (checkboxes[i].checked) {
+                        return true;
+                    }
+                }
+                
+                alert("Please, Select one or more record(s).");
+                }
+                return false;
+            }
+        </script>
     </head>
     <div class="content-wrapper">
         <section class="content-header">
@@ -26,7 +42,7 @@
     <li><a href="thoughtMaster.htm?act=createthought2">Gallery</a></li>
     <li class="active"><a href="">R & R</a></li>
   </ul> 
-        <form:form action="thoughtMaster.htm?act=deleteSubmit" method="post"
+        <form:form action="thoughtMaster.htm?act=deleteeandrSubmit" method="post"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">
@@ -64,7 +80,7 @@
                                                                     <th style="width: 50px;">Thought</th>
                                                                     <th style="width: 50px;">Date</th>
                                                                         <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                                                    <th style="width: 50px;">Action</th>
+                                                                    <!--<th style="width: 50px;">Action</th>-->
                                                                         <%--</c:if>--%>
 
                                                                 </tr>
@@ -78,10 +94,10 @@
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
-                                                                <td>${list[1]}</td>
+                                                                <td>${list[1]}<img src="StorageYard/RandRimage/${list[1]}" width="50px; !important" height="50px; !important"></td>
                                                                 <td>${list[2]}</td>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                                                    <td>
+<!--                                                                    <td>
                                                                         <div class="btn-group">
                                                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                 Action <span class="caret"></span>
@@ -92,14 +108,14 @@
                                                                                 <li style="width: 100px;">
                                                                                     <a href="#"
                                                                                        onclick="viewClick(${list[0]});">
-                                                                                        <!--onclick="viewClick($//{list[0]},$//{list[1]});">-->
+                                                                                        onclick="viewClick($//{list[0]},$//{list[1]});">
                                                                                         &nbsp;&nbsp;Edit
                                                                                     </a>
                                                                                 </li>
                                                                                 </c:if>
                                                                             </ul>
                                                                         </div>
-                                                                    </td>
+                                                                    </td>-->
                                                                 <%--</c:if>--%>
                                                             </tr>
                                                         </c:forEach>

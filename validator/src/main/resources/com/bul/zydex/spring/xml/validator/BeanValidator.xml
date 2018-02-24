@@ -147,4 +147,5 @@
     <bean id="recruitmentValidator1" class="com.bul.zydex.validator.Recruitment.RecruitmentValidator" />
     <bean id="mprValidator1" class="com.bul.zydex.validator.Recruitment.MprValidator" />
     <bean id="vacancyValidator1" class="com.bul.zydex.validator.Vacancy.VacancyValidator" />
+    <bean id="applayJobUserMasterValidator1" class="com.bul.zydex.validator.Recruitment.ApplayJobUserMasterValidator" />
 </beans>

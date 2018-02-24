@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.Vacancy;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.ApplayJobUserMaster;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.JobtypeMaster;
@@ -13,12 +14,14 @@ import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
 import com.bul.zydex.model.VacancyMaster;
+import com.bul.zydex.service.ApplayJobUserMaster.ApplayJobUserMasterService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
 import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
 import com.bul.zydex.service.Recruitment.MprEmployeeTypeMasterService;
 import com.bul.zydex.service.Vacancy.VacancyMasterService;
 import com.bul.zydex.service.emp.DesignationMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
+import com.bul.zydex.validator.Recruitment.ApplayJobUserMasterValidator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +41,8 @@ public class VacancyAbstract extends CustomAbstract {
     protected MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService;
     protected MprEmployeeTypeMasterService<MprEmployeeTypeMaster> mprEmployeeTypeMasterService;
     protected Validator vacancyValidator;
+    protected ApplayJobUserMasterService<ApplayJobUserMaster> applayJobUserMasterSerivce;
+    protected ApplayJobUserMasterValidator applayJobUserMasterValidator;
 
     public VacancyMasterService<VacancyMaster> getVacancyMasterService() {
         return vacancyMasterService;
@@ -94,8 +99,23 @@ public class VacancyAbstract extends CustomAbstract {
     public void setVacancyValidator(Validator vacancyValidator) {
         this.vacancyValidator = vacancyValidator;
     }
-    
 
+    public ApplayJobUserMasterService<ApplayJobUserMaster> getApplayJobUserMasterSerivce() {
+        return applayJobUserMasterSerivce;
+    }
+
+    public void setApplayJobUserMasterSerivce(ApplayJobUserMasterService<ApplayJobUserMaster> applayJobUserMasterSerivce) {
+        this.applayJobUserMasterSerivce = applayJobUserMasterSerivce;
+    }
+
+    public ApplayJobUserMasterValidator getApplayJobUserMasterValidator() {
+        return applayJobUserMasterValidator;
+    }
+
+    public void setApplayJobUserMasterValidator(ApplayJobUserMasterValidator applayJobUserMasterValidator) {
+        this.applayJobUserMasterValidator = applayJobUserMasterValidator;
+    }
+    
     protected void departmentList(HttpServletRequest request) {
         DepartmentMaster departmentMaster = new DepartmentMaster();
         List<?> depttList = departmentMasterService.read();

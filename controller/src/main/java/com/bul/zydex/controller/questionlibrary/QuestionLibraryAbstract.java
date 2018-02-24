@@ -10,9 +10,11 @@ import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.QuestionAns;
 import com.bul.zydex.model.QuestionLibrary;
+import com.bul.zydex.model.QuestionPaper;
 import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
 import com.bul.zydex.service.questionlibrary.QuestionAnsService;
 import com.bul.zydex.service.questionlibrary.QuestionLibraryService;
+import com.bul.zydex.service.questionlibrary.QuestionPaperService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +29,7 @@ public abstract class QuestionLibraryAbstract extends CustomAbstract{
     protected QuestionLibraryService<QuestionLibrary> questionLibraryService;
     protected QuestionAnsService<QuestionAns> questionAnsService;
     protected MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService;
+    protected QuestionPaperService<QuestionPaper> questionPaperService;
 
     public QuestionLibraryService<QuestionLibrary> getQuestionLibraryService() {
         return questionLibraryService;
@@ -51,6 +54,15 @@ public abstract class QuestionLibraryAbstract extends CustomAbstract{
     public void setMprEmployeeCategoryService(MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService) {
         this.mprEmployeeCategoryService = mprEmployeeCategoryService;
     }
+
+    public QuestionPaperService<QuestionPaper> getQuestionPaperService() {
+        return questionPaperService;
+    }
+
+    public void setQuestionPaperService(QuestionPaperService<QuestionPaper> questionPaperService) {
+        this.questionPaperService = questionPaperService;
+    }
+    
     
   protected void employeecategoryList(HttpServletRequest request) {
         MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();

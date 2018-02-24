@@ -10,6 +10,7 @@ import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.ThoughtMaster;
 import com.bul.zydex.model.UserMaster;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,12 +52,20 @@ public class HomeController extends HomeAbstract {
             employeeMaster1.setLocationMaster(locationMaster);
 
         }
+        
+        
 
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String CurrentDate = sdf.format(d);
+        List<?> galleryList = galleryService.read();
         List<?> TodaysBirthdays = employeeMasterService.readEmployeeByBirthday(CurrentDate);
+        ThoughtMaster  thoughtMaster=thoughtMasterService.readByCurrentDate(CurrentDate);
+         List<?>newJoiningList = employeeMasterService.readEmployeeByBirthday(CurrentDate);
+        request.setAttribute("galleryList", galleryList);
+        request.setAttribute("thoughtMaster", thoughtMaster);
         request.setAttribute("employeeMaster", employeeMaster1);
+        request.setAttribute("newJoiningList", newJoiningList);
         request.setAttribute("TodaysBirthdays", TodaysBirthdays);
         mv.setViewName("Common/Home");
         return mv;

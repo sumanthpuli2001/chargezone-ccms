@@ -992,6 +992,7 @@
         <property name="questionLibraryService" ref="questionLibraryService1"></property>
         <property name="questionAnsService" ref="questionAnsService1" />
         <property name="mprEmployeeCategoryService" ref="mprEmployeeCategoryService1" />
+        <property name="questionPaperService" ref="questionPaperService1" />
     </bean>
     <bean id="questionAnsController1" class="com.bul.zydex.controller.questionlibrary.QuestionAnsController" parent="controllerConfig" >
         <property name="questionLibraryService" ref="questionLibraryService1"></property>
@@ -1021,6 +1022,15 @@
         <property name="designationMasterService" ref="designationMasterService1"/>
         <property name="vacancyValidator" ref="vacancyValidator1"/>
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
+    </bean> 
+    <bean id="thoughtMasterController1" class="com.bul.zydex.controller.thought.ThoughtMasterController" parent="controllerConfig" >
+        <property name="thoughtMasterService" ref="thoughtMasterService1"></property>
+        <property name="rAndRService" ref="rAndRService1"></property>
+        <property name="galleryService" ref="galleryService1"></property>
+        <property name="corporateVideoService" ref="corporateVideoService1"></property>
+    </bean>
+    <bean id="corporateVideoController1" class="com.bul.zydex.controller.CorporateVideo.CorporateVideoController" parent="controllerConfig" >
+        <property name="corporateVideoService" ref="corporateVideoService1"></property>
         <property name="applayJobUserMasterSerivce" ref="applayJobUserMasterService1"/>
         <property name="applayJobUserMasterValidator" ref="applayJobUserMasterValidator1"/>
         
@@ -1040,6 +1050,8 @@
     <bean id="homeController1" class="com.bul.zydex.controller.HomeController" parent="controllerConfig" >
         <property name="levelMasterService" ref="levelMasterService1" />
         <property name="locationMasterService" ref="locationMasterService1" />
+        <property name="thoughtMasterService" ref="thoughtMasterService1"></property>
+        <property name="galleryService" ref="galleryService1"></property>
     </bean>
 </beans>
  

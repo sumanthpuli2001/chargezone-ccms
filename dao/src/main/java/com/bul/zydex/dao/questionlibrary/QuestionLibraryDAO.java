@@ -6,11 +6,14 @@
 package com.bul.zydex.dao.questionlibrary;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.List;
 
 /**
  *
  * @author Dell-1
  */
 public interface QuestionLibraryDAO<T> extends GenericsDAO<T> {
+    
+     public List<?> readAllQuestionLibrary();
     
 }

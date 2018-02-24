@@ -6,11 +6,16 @@
 package com.bul.zydex.dao.questionlibrary;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.List;
 
 /**
  *
  * @author Dell-1
  */
 public interface QuestionAnsDAO<T> extends GenericsDAO<T> {
-    
+
+    public List<?> readByQLId(int qlId);
+
+    public void deleteByQlId(T object);
+
 }

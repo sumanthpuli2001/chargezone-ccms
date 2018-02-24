@@ -7,6 +7,7 @@ package com.bul.zydex.service.questionlibrary;
 
 import com.bul.zydex.dao.questionlibrary.QuestionLibraryDAO;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.List;
 
 /**
  *
@@ -26,5 +27,9 @@ public class QuestionLibraryServiceImpl<T> extends GenericsServiceImpl<T>
         setGenericsDAO(questionLibraryDAO);
     }
 
-    
+    @Override
+    public List<?> readAllQuestionLibrary() {
+        return questionLibraryDAO.readAllQuestionLibrary();
+    }
+
 }

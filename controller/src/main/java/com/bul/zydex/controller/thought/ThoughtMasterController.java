@@ -143,7 +143,7 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
 
         return mv;
     }
-
+    
     public ModelAndView submitgallery(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         Gallery gallery = new Gallery();
@@ -164,17 +164,12 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
             Folder1.mkdirs();
         }
         if (multipartFile != null && multipartFile.getSize() > 0) {
-            File corporateVideoFile = new File(fileLocationURL);
-            if (corporateVideoFile.exists() && corporateVideoFile.listFiles().length > 0) {
-                File[] corporateVideoArray = corporateVideoFile.listFiles();
-                corporateVideoArray[0].delete();
-            }
             try {
                 File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename());
                 File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename());
                 multipartFile.transferTo(file2);
-                gallery.setImagesPath("" + file);
-                gallery.setDisc(multipartFile.getOriginalFilename());
+//                gallery.setImagesPath("" + file);
+                gallery.setImagesPath(multipartFile.getOriginalFilename());
             } catch (Exception e) {
 
             }
@@ -193,7 +188,7 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
                 "successMessage",
                 "Information : Image is Already Exist.");
         }
-        mv.setViewName("Thought/createGallery");
+        mv=createthought2(request, response);
         return mv;
     }
 
@@ -217,17 +212,12 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
             Folder1.mkdirs();
         }
         if (multipartFile != null && multipartFile.getSize() > 0) {
-            File corporateVideoFile = new File(fileLocationURL);
-            if (corporateVideoFile.exists() && corporateVideoFile.listFiles().length > 0) {
-                File[] corporateVideoArray = corporateVideoFile.listFiles();
-                corporateVideoArray[0].delete();
-            }
             try {
                 File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename());
                 File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename());
                 multipartFile.transferTo(file2);
-                gallery.setImagesPath("" + file);
-                gallery.setDisc(multipartFile.getOriginalFilename());
+//                gallery.setImagesPath("" + file);
+                gallery.setImagesPath(multipartFile.getOriginalFilename());
             } catch (Exception e) {
 
             }
@@ -248,4 +238,49 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
         mv = createthought3(request, response);
         return mv;
     }
+    public ModelAndView deletegallerySubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String empId[] = request.getParameterValues("checkId");
+        for (String z : empId) {
+            try {
+                Gallery Gallery = galleryService.readById(Integer.parseInt(z));
+                String fileLocationURL = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "galleryimage" + File.separator +""+Gallery.getDisc();
+            File File = new File(fileLocationURL);
+                File.delete();
+                galleryService.delete(Integer.parseInt(z));
+            } catch (Exception e) {
+
+            }
+        }
+        request.setAttribute("successMessage",
+                "Info :Records are deleted successfully.");
+        mv =createthought2(request, response);
+
+        return mv;
+    }
+    public ModelAndView deleteeandrSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String empId[] = request.getParameterValues("checkId");
+        for (String z : empId) {
+            try {
+                 RAndR RAndR = rAndRService.readById(Integer.parseInt(z));
+                String fileLocationURL = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "RandRimage" + File.separator +""+RAndR.getDisc();
+            File File = new File(fileLocationURL);
+                File.delete();
+                rAndRService.delete(Integer.parseInt(z));
+            } catch (Exception e) {
+
+            }
+        }
+        request.setAttribute("successMessage",
+                "Info :Records are deleted successfully.");
+        mv =createthought3(request, response);
+
+        return mv;
+    }
+
 }

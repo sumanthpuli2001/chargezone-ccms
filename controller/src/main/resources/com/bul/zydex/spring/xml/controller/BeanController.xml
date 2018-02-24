@@ -1020,7 +1020,7 @@
         <property name="designationMasterService" ref="designationMasterService1"/>
         <property name="vacancyValidator" ref="vacancyValidator1"/>
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
-        
+    </bean> 
     <bean id="thoughtMasterController1" class="com.bul.zydex.controller.thought.ThoughtMasterController" parent="controllerConfig" >
         <property name="thoughtMasterService" ref="thoughtMasterService1"></property>
         <property name="rAndRService" ref="rAndRService1"></property>

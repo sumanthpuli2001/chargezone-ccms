@@ -15,7 +15,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>MPP Budget Detail List</h1>
+            <h1>Man Power Planning Budget List</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Budget Detail List</li>
@@ -50,12 +50,12 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
-                                <c:if test="${sessionScope.userRight.employeeManagement}">
-                                    <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
+                                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                    <!--<button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>-->
                                     <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
 
-                                    <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'recruitment.htm?act=requestForManPower'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
-                                </c:if>
+                                    <!--<button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'recruitment.htm?act=requestForManPower'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>-->
+                                <%--</c:if>--%>
                                 <div class="box-header">
                                 </div>
                                 <div class="box-body no-padding">
@@ -74,12 +74,13 @@
                                                         <c:otherwise>
                                                             <thead>
                                                                 <tr>
-                                                                    <c:if test="${sessionScope.userRight.employeeManagement}">
-                                                                        <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
-                                                                        </c:if>
+                                                                    <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                                        <!--<th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>-->
+                                                                        <%--</c:if>--%>
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">Budget</th>
                                                                     <th style="width: 50px;">Number Of Position</th>
+                                                                    <th style="width: 50px;">Date</th>
                                                                     <th style="width: 50px;">Location</th>
                                                                     <th style="width: 50px;">Department</th>
                                                                     <th style="width: 50px;">job Type</th>
@@ -94,20 +95,21 @@
                                                     <tbody>
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
-                                                                <c:if test="${sessionScope.userRight.employeeManagement}">
-                                                                    <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
-                                                                    </c:if>
+                                                                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                                    <!--<td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>-->
+                                                                    <%--</c:if>--%>
                                                                 <!--<td>/</td>-->
                                                                 <td>${list[2]}</td>
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[3]}</td>
                                                                 <td>${list[4]}</td>
                                                                 <td>${list[5]}</td>
+                                                                <td>${list[6]}</td>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>
                                                                     <div class="btn-group">
                                                                         <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                            &nbsp;&nbsp;Edit
+                                                                            &nbsp;&nbsp;Create MPR
                                                                         </button>
 
                                                                     </div>

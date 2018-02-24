@@ -25,8 +25,11 @@
         <property name="budget" type="java.lang.Integer">
             <column name="budget" />
         </property>
-        <property name="dateOfLeaving" type="string">
-            <column name="date_of_leaving" />
+        <property name="date" type="string">
+            <column name="date" />
+        </property>
+        <property name="mppStatus" type="java.lang.Integer">
+            <column name="mpp_status" />
         </property>
     </class>
 </hibernate-mapping>

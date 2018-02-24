@@ -517,5 +517,13 @@
             </list>
         </property>-->
     </bean>
-
+    <bean id="approvalMasterService1" class="com.bul.zydex.service.Approval.ApprovalMasterServiceImpl">
+        <property name="approvalMasterDAO" ref="approvalMasterDAO1" />
+    </bean>
+    <bean id="approvalUserService1" class="com.bul.zydex.service.Approval.ApprovalUserServiceImpl">
+        <property name="approvalUserDAO" ref="approvalUserDAO1" />
+    </bean>
+    <bean id="candidateJobApplyService1" class="com.bul.zydex.service.CandidateJobApply.CandidateJobApplyServiceImpl">
+        <property name="candidateJobApplyDAO" ref="candidateJobApplyDAO1" />
+    </bean>
 </beans>

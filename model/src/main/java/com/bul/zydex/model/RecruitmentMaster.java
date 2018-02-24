@@ -20,7 +20,8 @@ public class RecruitmentMaster implements java.io.Serializable {
     private JobtypeMaster jobtypeMaster;
     private Integer numberOfPosition;
     private Integer budget;
-    private String dateOfLeaving;
+    private String date;
+    private Integer mppStatus;
 
 //    public RecruitmentMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, Integer numberOfPosition, Integer budget, String dateOfLeaving) {
 //        this.id = id;
@@ -38,14 +39,15 @@ public class RecruitmentMaster implements java.io.Serializable {
 //        this.id = id;
 //        this.locationMaster = locationMaster;
 //    }
-    public RecruitmentMaster(int id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobTypeMaster, Integer numberOfPosition, Integer budget, String dateOfLeaving) {
+    public RecruitmentMaster(int id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobTypeMaster, Integer numberOfPosition, Integer budget, String date, Integer mppStatus) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
         this.jobtypeMaster = jobTypeMaster;
         this.numberOfPosition = numberOfPosition;
         this.budget = budget;
-        this.dateOfLeaving = dateOfLeaving;
+        this.date = date;
+        this.mppStatus = mppStatus;
     }
 
     public Integer getId() {
@@ -96,12 +98,22 @@ public class RecruitmentMaster implements java.io.Serializable {
         this.budget = budget;
     }
 
-    public String getDateOfLeaving() {
-        return dateOfLeaving;
+    public String getDate() {
+        return date;
     }
 
-    public void setDateOfLeaving(String dateOfLeaving) {
-        this.dateOfLeaving = dateOfLeaving;
+    public void setDate(String date) {
+        this.date = date;
     }
+
+    public Integer getMppStatus() {
+        return mppStatus;
+    }
+
+    public void setMppStatus(Integer mppStatus) {
+        this.mppStatus = mppStatus;
+    }
+
+ 
 
 }

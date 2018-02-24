@@ -15,7 +15,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Budget Detail </h1>
+            <h1>Man Power Requisition Confirmation </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Budget Detail List</li>
@@ -128,13 +128,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <!--                                                    <div class="col-sm-6">
-                                                                                                            <label>Work Experience:<span style="color: red;font-size: 12px;">*</span></label>
-                                                <%--<form:input path="experience" class="form-control" placeholder="Experience"></form:input>--%>
-                                                <%--<form:errors path="experience" cssClass="errorDiv"></form:errors>--%>
-                                                </div>-->
-                                                <div class="col-sm-6">
-                                                    <label>Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <div class="col-sm-6">
+                                                        <label>Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:input path="description" class="form-control" placeholder="Description"></form:input>
+                                                    <form:errors path="description" cssClass="errorDiv"></form:errors>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>Comment:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="description" class="form-control" placeholder="Description"></form:input>
                                                     <form:errors path="description" cssClass="errorDiv"></form:errors>
                                                     </div>
@@ -142,19 +142,22 @@
 
                                                 <div class="form-group">
                                                     <div class="col-sm-4" style="text-align: left">
-                                                        <button type="submit" class="btn btn-success" id="btnType1" name="btnType" value="Approve" style="width: 100px" >APPROVE</button>
-                                                    </div>
-
-                                                    <div class="col-sm-4" style="text-align: center">
-                                                        <button type="submit" class="btn btn-warning" id="btnType2" name="btnType"  value="Return"  style="width: 100px">REWORK</button>
-
-                                                    </div>
-                                                    <div class="col-sm-4" style="text-align: right">
-                                                        <button type="submit" class="btn btn-danger" id="btnType2" name="btnType"  value="Reject" style="width: 100px">REJECT</button>
-
-                                                    </div>
-
+                                                    <c:if test="${status != 1}">
+                                                        <button type="submit" class="btn btn-danger" id="btnType1" name="btnType" value="Reject" style="width: 100px" >REJECT</button>
+                                                    </c:if>
                                                 </div>
+                                                <div class="col-sm-4" style="text-align: center">
+                                                    <c:if test="${status != 2}">
+                                                        <button type="submit" class="btn btn-warning" id="btnType2" name="btnType"  value="Return"  style="width: 100px">REWORK</button>
+                                                    </c:if>
+                                                </div>
+                                                <div class="col-sm-4" style="text-align: right">
+                                                    <c:if test="${status != 3}">
+                                                        <button type="submit" class="btn btn-success" id="btnType2" name="btnType"  value="Approve" style="width: 100px">APPROVE</button>
+                                                    </c:if>
+                                                </div>
+
+                                            </div>
                                         </form:form>
                                         <!--</div>-->
 

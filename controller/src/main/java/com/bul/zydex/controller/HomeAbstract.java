@@ -5,13 +5,17 @@
  */
 package com.bul.zydex.controller;
 
+import com.bul.zydex.model.CorporateVideo;
 import com.bul.zydex.model.Gallery;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.RAndR;
 import com.bul.zydex.model.ThoughtMaster;
+import com.bul.zydex.service.CorporateVideo.CorporateVideoService;
 import com.bul.zydex.service.level.LevelMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.service.thought.GalleryService;
+import com.bul.zydex.service.thought.RAndRService;
 import com.bul.zydex.service.thought.ThoughtMasterService;
 
 /**
@@ -24,6 +28,8 @@ public abstract class HomeAbstract extends CustomAbstract {
     protected LocationMasterService<LocationMaster> locationMasterService;
     protected ThoughtMasterService<ThoughtMaster> thoughtMasterService;
     protected GalleryService<Gallery> galleryService;
+    protected CorporateVideoService<CorporateVideo> corporateVideoService;
+    protected RAndRService<RAndR> rAndRService;
 
     public LevelMasterService<LevelMaster> getLevelMasterService() {
         return levelMasterService;
@@ -56,8 +62,22 @@ public abstract class HomeAbstract extends CustomAbstract {
     public void setGalleryService(GalleryService<Gallery> galleryService) {
         this.galleryService = galleryService;
     }
-    
-   
+
+    public CorporateVideoService<CorporateVideo> getCorporateVideoService() {
+        return corporateVideoService;
+    }
+
+    public void setCorporateVideoService(CorporateVideoService<CorporateVideo> corporateVideoService) {
+        this.corporateVideoService = corporateVideoService;
+    }
+
+    public RAndRService<RAndR> getrAndRService() {
+        return rAndRService;
+    }
+
+    public void setrAndRService(RAndRService<RAndR> rAndRService) {
+        this.rAndRService = rAndRService;
+    }
     
     
 

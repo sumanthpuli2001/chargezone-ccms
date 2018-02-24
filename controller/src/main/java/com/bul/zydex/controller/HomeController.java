@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller;
 
+import com.bul.zydex.model.CorporateVideo;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmployeeMaster;
@@ -13,6 +14,7 @@ import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.ThoughtMaster;
 import com.bul.zydex.model.UserMaster;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +34,9 @@ public class HomeController extends HomeAbstract {
         UserMaster user = (UserMaster) session.getAttribute("user");
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        Calendar cal6 = Calendar.getInstance();
+        cal6.add(Calendar.DAY_OF_MONTH, -8);
+        Date dateSet = cal6.getTime();
 
         DepartmentMaster departmentMaster = new DepartmentMaster();
         LevelMaster levelMaster = new LevelMaster();
@@ -52,16 +57,18 @@ public class HomeController extends HomeAbstract {
             employeeMaster1.setLocationMaster(locationMaster);
 
         }
-        
-        
 
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String lastOldDate = sdf.format(dateSet);
         String CurrentDate = sdf.format(d);
         List<?> galleryList = galleryService.read();
         List<?> TodaysBirthdays = employeeMasterService.readEmployeeByBirthday(CurrentDate);
-        ThoughtMaster  thoughtMaster=thoughtMasterService.readByCurrentDate(CurrentDate);
-         List<?>newJoiningList = employeeMasterService.readEmployeeByBirthday(CurrentDate);
+        ThoughtMaster thoughtMaster = thoughtMasterService.readByCurrentDate(CurrentDate);
+        List<?> newJoiningList = employeeMasterService.newJoiningEmployee(lastOldDate);
+
+        List<CorporateVideo> l1 = (List<CorporateVideo>) corporateVideoService.readCorporateVideoDetail();
+        request.setAttribute("videoList", l1);
         request.setAttribute("galleryList", galleryList);
         request.setAttribute("thoughtMaster", thoughtMaster);
         request.setAttribute("employeeMaster", employeeMaster1);

@@ -281,9 +281,12 @@
                                             </div>
                                             <div class="box-body">
                                                 <div class="col-xs-12 col-sm-12">
-                                                    <video controls style="width: 100%" height="367px;">
-                                                        <source src="https://ak5.picdn.net/shutterstock/videos/25164725/preview/stock-footage-close-up-portrait-of-woman-looking-up-at-rain-in-nature-with-wet-hair-hiker-girl-trekking-in-scotlan.mp4" type="video/mp4">
-                                                    </video>
+                                                    <c:forEach var="video" items="${videoList}">
+
+                                                        <video controls style="width: 100%" height="367px;">
+                                                            <source src="${video[1]}" type="video/mp4">
+                                                        </video>
+                                                    </c:forEach>
                                                 </div>
                                             </div>
                                         </div>
@@ -341,7 +344,7 @@
                                                         <c:forEach var="newJoining" items="${newJoiningList}">
                                                             <ul class="products-list product-list-in-box">
                                                                 <li class="item">
-                                                                    <span class="product-title">  ${newJoining[0]}</span>
+                                                                    <span class="product-title">  ${newJoining}</span>
                                                                 </li>
                                                             </ul>
                                                         </c:forEach>

@@ -63,6 +63,7 @@ public class HomeController extends HomeAbstract {
         String lastOldDate = sdf.format(dateSet);
         String CurrentDate = sdf.format(d);
         List<?> galleryList = galleryService.read();
+        List<?> RRList = rAndRService.read();
         List<?> TodaysBirthdays = employeeMasterService.readEmployeeByBirthday(CurrentDate);
         ThoughtMaster thoughtMaster = thoughtMasterService.readByCurrentDate(CurrentDate);
         List<?> newJoiningList = employeeMasterService.newJoiningEmployee(lastOldDate);
@@ -70,6 +71,7 @@ public class HomeController extends HomeAbstract {
         List<CorporateVideo> l1 = (List<CorporateVideo>) corporateVideoService.readCorporateVideoDetail();
         request.setAttribute("videoList", l1);
         request.setAttribute("galleryList", galleryList);
+        request.setAttribute("RRList", RRList);
         request.setAttribute("thoughtMaster", thoughtMaster);
         request.setAttribute("employeeMaster", employeeMaster1);
         request.setAttribute("newJoiningList", newJoiningList);

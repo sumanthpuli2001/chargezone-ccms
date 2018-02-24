@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.Vacancy;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.ApplayJobUserMaster;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
@@ -14,6 +15,7 @@ import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
 import com.bul.zydex.model.VacancyMaster;
+import com.bul.zydex.service.ApplayJobUserMaster.ApplayJobUserMasterService;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
 import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
@@ -41,7 +43,6 @@ public class VacancyAbstract extends CustomAbstract {
     protected MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService;
     protected MprEmployeeTypeMasterService<MprEmployeeTypeMaster> mprEmployeeTypeMasterService;
     protected CandidateJobApplyService<CandidateApplyJob>candidateJobApplyService;
-//    protected VacancyMasterService<VacancyMaster>vacancyMasterService;
     protected Validator vacancyValidator;
     protected ApplayJobUserMasterService<ApplayJobUserMaster> applayJobUserMasterSerivce;
     protected ApplayJobUserMasterValidator applayJobUserMasterValidator;

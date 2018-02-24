@@ -203,6 +203,8 @@
                 <prop key="vacancy.htm">vacancyController1</prop>
                 <prop key="approval.htm">approvalController1</prop>
                 <prop key="homeController.htm">homeController1</prop>
+                <prop key="thoughtMaster.htm">thoughtMasterController1</prop>
+                <prop key="corporateVideo.htm">corporateVideoController1</prop>
                 
            
             </props>

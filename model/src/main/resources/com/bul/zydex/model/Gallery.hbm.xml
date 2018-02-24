@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 23, 2018 12:49:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.Gallery" table="gallery" catalog="hr_power_astral" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="imagesPath" type="string">
+            <column name="images_path" length="450" />
+        </property>
+        <property name="disc" type="string">
+            <column name="disc" length="450" />
+        </property>
+        <property name="createdBy" type="java.lang.Integer">
+            <column name="created_by" />
+        </property>
+        <property name="createdDate" type="string">
+            <column name="created_date" length="45" />
+        </property>
+        <property name="updatedBy" type="java.lang.Integer">
+            <column name="updated_by" />
+        </property>
+        <property name="updatedDate" type="string">
+            <column name="updated_date" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

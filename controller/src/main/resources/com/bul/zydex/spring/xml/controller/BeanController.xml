@@ -1032,7 +1032,8 @@
     </bean>
     <bean id="candidateJobApply1" class="com.bul.zydex.controller.candidateJobApply.CandidateJobApplyController" parent="controllerConfig" >
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
-         <property name="vacancyMasterService" ref="vacancyMasterService1"/>
+        <property name="vacancyMasterService" ref="vacancyMasterService1"/>
+    </bean>
     <bean id="homeController1" class="com.bul.zydex.controller.HomeController" parent="controllerConfig" >
         <property name="levelMasterService" ref="levelMasterService1" />
         <property name="locationMasterService" ref="locationMasterService1" />

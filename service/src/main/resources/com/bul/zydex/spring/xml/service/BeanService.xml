@@ -505,6 +505,9 @@
     <bean id="questionAnsService1" class="com.bul.zydex.service.questionlibrary.QuestionAnsServiceImpl">
         <property name="questionAnsDAO" ref="questionAnsDAO1" />
     </bean>
+    <bean id="questionPaperService1" class="com.bul.zydex.service.questionlibrary.QuestionPaperServiceImpl">
+        <property name="questionPaperDAO" ref="questionPaperDAO1" />
+    </bean>
     <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
         <property name="beanNames">
             <list>

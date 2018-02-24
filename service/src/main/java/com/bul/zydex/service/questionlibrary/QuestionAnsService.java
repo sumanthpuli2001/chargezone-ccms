@@ -6,11 +6,16 @@
 package com.bul.zydex.service.questionlibrary;
 
 import com.bul.zydex.service.GenericsService;
+import java.util.List;
 
 /**
  *
  * @author Dell-1
  */
 public interface QuestionAnsService<T> extends GenericsService<T> {
-    
+
+    public List<?> readByQLId(int qlId);
+
+    public void deleteByQlId(T object);
+
 }

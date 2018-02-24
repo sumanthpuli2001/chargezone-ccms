@@ -1021,6 +1021,14 @@
         <property name="vacancyValidator" ref="vacancyValidator1"/>
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
         
+    <bean id="thoughtMasterController1" class="com.bul.zydex.controller.thought.ThoughtMasterController" parent="controllerConfig" >
+        <property name="thoughtMasterService" ref="thoughtMasterService1"></property>
+        <property name="rAndRService" ref="rAndRService1"></property>
+        <property name="galleryService" ref="galleryService1"></property>
+        <property name="corporateVideoService" ref="corporateVideoService1"></property>
+    </bean>
+    <bean id="corporateVideoController1" class="com.bul.zydex.controller.CorporateVideo.CorporateVideoController" parent="controllerConfig" >
+        <property name="corporateVideoService" ref="corporateVideoService1"></property>
     </bean>
     <bean id="oddPunchController1" class="com.bul.zydex.controller.OddPunch.OddPunchController" parent="controllerConfig" >
         <property name="employeeDatetimeDataService" ref="employeeDatetimeDataService1"/>

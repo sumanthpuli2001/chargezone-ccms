@@ -1033,9 +1033,6 @@
     </bean>
     <bean id="corporateVideoController1" class="com.bul.zydex.controller.CorporateVideo.CorporateVideoController" parent="controllerConfig" >
         <property name="corporateVideoService" ref="corporateVideoService1"></property>
-        <property name="applayJobUserMasterSerivce" ref="applayJobUserMasterService1"/>
-        <property name="applayJobUserMasterValidator" ref="applayJobUserMasterValidator1"/>
-        
     </bean>
     <bean id="oddPunchController1" class="com.bul.zydex.controller.OddPunch.OddPunchController" parent="controllerConfig" >
         <property name="employeeDatetimeDataService" ref="employeeDatetimeDataService1"/>

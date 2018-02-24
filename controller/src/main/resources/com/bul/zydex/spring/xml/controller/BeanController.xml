@@ -1009,6 +1009,7 @@
         <property name="mprEmployeeCategoryService" ref="mprEmployeeCategoryService1"/>
         <property name="qulificationMasterService" ref="qulificationMasterService1"/>
         <property name="designationMasterService" ref="designationMasterService1"/>
+        <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
     </bean>
     
     <bean id="vacancyController1" class="com.bul.zydex.controller.Vacancy.VacancyController" parent="controllerConfig" >

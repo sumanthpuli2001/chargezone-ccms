@@ -7,13 +7,14 @@ package com.bul.zydex.service.CandidateJobApply;
 
 import com.bul.zydex.dao.CandiateJobApply.CandidateJobApplyDAO;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.List;
 
 /**
  *
  * @author Aman
  */
-public class CandidateJobApplyServiceImpl<T>extends GenericsServiceImpl<T> implements CandidateJobApplyService<T>{
-    
+public class CandidateJobApplyServiceImpl<T> extends GenericsServiceImpl<T> implements CandidateJobApplyService<T> {
+
     private CandidateJobApplyDAO<T> candidateJobApplyDAO;
 
     public CandidateJobApplyDAO<T> getCandidateJobApplyDAO() {
@@ -24,6 +25,10 @@ public class CandidateJobApplyServiceImpl<T>extends GenericsServiceImpl<T> imple
         this.candidateJobApplyDAO = candidateJobApplyDAO;
         setGenericsDAO(candidateJobApplyDAO);
     }
-    
-    
+
+    @Override
+    public List<?> fetchcandidatelist() {
+        return candidateJobApplyDAO.fetchcandidatelist();
+    }
+
 }

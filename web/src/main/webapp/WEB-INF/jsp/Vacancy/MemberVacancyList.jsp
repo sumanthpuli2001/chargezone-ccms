@@ -140,7 +140,7 @@
                                                                     <th>${list.fromDate}</th>
                                                                     <th>${list.toDate}</th>
                                                                         <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                                                    <th style="width: 50px;"><a href="vacancy.htm?act=createthought2">Applay</a></th>
+                                                                    <th style="width: 50px;"><a href="vacancy.htm?act=applyJobRegistration">Apply</a></th>
                                                                         <%--</c:if>--%>
 
                                                                 </tr>

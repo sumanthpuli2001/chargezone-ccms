@@ -78,7 +78,7 @@
                                                                         </c:if>
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">Thought</th>
-                                                                    <th style="width: 50px;">Date</th>
+                                                                    <th style="width: 50px;">Description</th>
                                                                         <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <!--<th style="width: 50px;">Action</th>-->
                                                                         <%--</c:if>--%>

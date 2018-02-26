@@ -165,11 +165,11 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
         }
         if (multipartFile != null && multipartFile.getSize() > 0) {
             try {
-                File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename());
-                File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename());
+                File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
                 multipartFile.transferTo(file2);
-//                gallery.setImagesPath("" + file);
-                gallery.setImagesPath(multipartFile.getOriginalFilename());
+                gallery.setDisc(request.getParameter("Des"));
+                gallery.setImagesPath(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
             } catch (Exception e) {
 
             }
@@ -213,11 +213,11 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
         }
         if (multipartFile != null && multipartFile.getSize() > 0) {
             try {
-                File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename());
-                File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename());
+                File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename().replaceAll(" ", "_")                                    );
                 multipartFile.transferTo(file2);
-//                gallery.setImagesPath("" + file);
-                gallery.setImagesPath(multipartFile.getOriginalFilename());
+                gallery.setDisc(request.getParameter("Des"));
+                gallery.setImagesPath(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
             } catch (Exception e) {
 
             }

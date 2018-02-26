@@ -64,6 +64,10 @@
 
 
                                                 </div>
+                                                <div class="col-sm-6">
+                                                    <label>Description:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <input type="text" class="form-control" id="Des" name="Des" >
+                                                </div>
                                             </div>
 
 

@@ -93,7 +93,7 @@
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
-                                                                <td>${list[1]}<img src="StorageYard/galleryimage/${list[1]}" width="50px; !important" height="50px; !important"></td>
+                                                                <td><img src="StorageYard/galleryimage/${list[1]}" width="50px; !important" height="50px; !important">${list[1]}</td>
                                                                 <td>${list[2]}</td>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
 <!--                                                                    <td>

@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.Recruitment;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmployeeMaster;
@@ -17,6 +18,7 @@ import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.QulificationMaster;
 //import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMaster;
+import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
 import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
 import com.bul.zydex.service.Recruitment.MprEmployeeTypeMasterService;
@@ -49,6 +51,7 @@ public class RecruitmentAbstract extends CustomAbstract {
     protected MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService;
     protected QulificationMasterService<QulificationMaster> qulificationMasterService;
     protected DesignationMasterService<DesignationMaster> designationMasterService;
+    protected CandidateJobApplyService<CandidateApplyJob>candidateJobApplyService;
 
     public MprMasterService<MprMaster> getMprMasterService() {
         return mprMasterService;
@@ -129,6 +132,16 @@ public class RecruitmentAbstract extends CustomAbstract {
     public void setLocationMasterService(LocationMasterService<LocationMaster> locationMasterService) {
         this.locationMasterService = locationMasterService;
     }
+
+    public CandidateJobApplyService<CandidateApplyJob> getCandidateJobApplyService() {
+        return candidateJobApplyService;
+    }
+
+    public void setCandidateJobApplyService(CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService) {
+        this.candidateJobApplyService = candidateJobApplyService;
+    }
+    
+    
 
     public void selectBudget(HttpServletRequest request,
             HttpServletResponse response) throws Exception {

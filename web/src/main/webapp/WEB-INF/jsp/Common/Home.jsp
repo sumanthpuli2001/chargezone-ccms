@@ -357,7 +357,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                         <!--<span class="product-title">  ${thoughtMaster}</span>-->
-                                    <marquee style="font-size:26px !important;">${thoughtMaster.thought}... !!</marquee>
+                                    <marquee style="font-size:26px !important;">${thoughtMaster.thought}shutterstock ...!!</marquee>
                                 </div>
                             </div>
                         </div>

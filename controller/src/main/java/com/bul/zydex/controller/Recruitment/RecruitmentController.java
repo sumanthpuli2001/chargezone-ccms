@@ -531,5 +531,16 @@ public class RecruitmentController extends RecruitmentAbstract {
         mv.setViewName("Recruitment/CandidateRequestList");
         return mv;
     }
+      public ModelAndView CandidateViewClick(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+         String id = request.getParameter("id");
+        candidateApplyJob  = candidateJobApplyService.readById(Integer.parseInt(id));
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        mv.setViewName("Recruitment/CandidateApproval");
+        return mv;
+    }
 
 }

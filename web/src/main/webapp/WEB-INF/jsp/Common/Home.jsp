@@ -363,6 +363,7 @@
                                     <marquee style="font-size:26px !important;">${thoughtMaster.thought}... !!</marquee>
                                 </div>
                             </div>
+                      
                         </div>
                         <div class="tab-pane" id="tab_2">
                         </div>
@@ -396,7 +397,7 @@
                                 <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;">
                                     <c:forEach var="gallery" items="${galleryList}">
                                         <div data-p="240.00">
-                                            <img data-u="image" src="${gallery.imagesPath}" />
+                                            <img data-u="image" src="StorageYard/galleryimage/${gallery.imagesPath}" />
                                         </div>
                                     </c:forEach>
 
@@ -438,15 +439,11 @@
                                     <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="img/spin.svg" />
                                 </div>
                                 <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;">
-                                    <div data-p="170.00">
-                                        <img data-u="image" src="StorageYard\GalleryImages\1.png" />
-                                    </div>
-                                    <div data-p="170.00">
-                                        <img data-u="image" src="StorageYard\GalleryImages\2.png" />
-                                    </div>
-                                    <div data-p="170.00">
-                                        <img data-u="image" src="StorageYard\GalleryImages\3.png" />
-                                    </div>
+                                    <c:forEach var="RR" items="${RRList}">
+                                        <div data-p="240.00">
+                                            <img data-u="image" src="StorageYard/RandRimage/${RR.imagesPath}" />
+                                        </div>
+                                    </c:forEach>
                                 </div>
                                 <div data-u="arrowleft" class="jssora053" style="width:55px;height:55px;top:0px;left:25px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
                                     <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">

@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller.Recruitment;
 
+import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmployeeMaster;
@@ -516,6 +517,18 @@ public class RecruitmentController extends RecruitmentAbstract {
         }
         mv.getModelMap().put("mprMaster", mprMaster);
         mv = recruitmentApprovalCreate(request, response);
+        return mv;
+    }
+    
+      public ModelAndView candidateList(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        List<?> candidateApplyJobList  = candidateJobApplyService.fetchcandidatelist();
+        mv.getModelMap().put("list", candidateApplyJobList);
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        mv.setViewName("Recruitment/CandidateRequestList");
         return mv;
     }
 

@@ -6,11 +6,14 @@
 package com.bul.zydex.dao.CandiateJobApply;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.List;
 
 /**
  *
  * @author Aman
  */
 public interface CandidateJobApplyDAO<T> extends GenericsDAO<T>{
+
+    public List<?> fetchcandidatelist();
     
 }

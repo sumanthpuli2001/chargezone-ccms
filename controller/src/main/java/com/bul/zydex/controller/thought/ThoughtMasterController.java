@@ -165,11 +165,11 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
         }
         if (multipartFile != null && multipartFile.getSize() > 0) {
             try {
-                File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename());
-                File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename());
+                File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
                 multipartFile.transferTo(file2);
-//                gallery.setImagesPath("" + file);
-                gallery.setImagesPath(multipartFile.getOriginalFilename());
+                gallery.setDisc(request.getParameter("Des"));
+                gallery.setImagesPath(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
             } catch (Exception e) {
 
             }
@@ -213,11 +213,11 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
         }
         if (multipartFile != null && multipartFile.getSize() > 0) {
             try {
-                File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename());
-                File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename());
+                File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename().replaceAll(" ", "_")                                    );
                 multipartFile.transferTo(file2);
-//                gallery.setImagesPath("" + file);
-                gallery.setImagesPath(multipartFile.getOriginalFilename());
+                gallery.setDisc(request.getParameter("Des"));
+                gallery.setImagesPath(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
             } catch (Exception e) {
 
             }
@@ -246,7 +246,7 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
                 Gallery Gallery = galleryService.readById(Integer.parseInt(z));
                 String fileLocationURL = getServletContext().getRealPath("/")
                 + File.separator + "StorageYard"
-                + File.separator + "galleryimage" + File.separator +""+Gallery.getDisc();
+                + File.separator + "galleryimage" + File.separator +""+Gallery.getImagesPath();
             File File = new File(fileLocationURL);
                 File.delete();
                 galleryService.delete(Integer.parseInt(z));
@@ -268,7 +268,7 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
                  RAndR RAndR = rAndRService.readById(Integer.parseInt(z));
                 String fileLocationURL = getServletContext().getRealPath("/")
                 + File.separator + "StorageYard"
-                + File.separator + "RandRimage" + File.separator +""+RAndR.getDisc();
+                + File.separator + "RandRimage" + File.separator +""+RAndR.getImagesPath();
             File File = new File(fileLocationURL);
                 File.delete();
                 rAndRService.delete(Integer.parseInt(z));

@@ -78,7 +78,7 @@
                                                                         </c:if>
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">Thought</th>
-                                                                    <th style="width: 50px;">Date</th>
+                                                                    <th style="width: 50px;">Description</th>
                                                                         <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <!--<th style="width: 50px;">Action</th>-->
                                                                         <%--</c:if>--%>
@@ -94,7 +94,7 @@
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
-                                                                <td>${list[1]}<img src="StorageYard/RandRimage/${list[1]}" width="50px; !important" height="50px; !important"></td>
+                                                                <td><img src="StorageYard/RandRimage/${list[1]}" width="50px; !important" height="50px; !important">${list[1]}</td>
                                                                 <td>${list[2]}</td>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
 <!--                                                                    <td>

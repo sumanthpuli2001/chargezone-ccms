@@ -1051,6 +1051,8 @@
         <property name="locationMasterService" ref="locationMasterService1" />
         <property name="thoughtMasterService" ref="thoughtMasterService1"></property>
         <property name="galleryService" ref="galleryService1"></property>
+        <property name="corporateVideoService" ref="corporateVideoService1"></property>
+        <property name="rAndRService" ref="rAndRService1"></property>
     </bean>
 </beans>
  

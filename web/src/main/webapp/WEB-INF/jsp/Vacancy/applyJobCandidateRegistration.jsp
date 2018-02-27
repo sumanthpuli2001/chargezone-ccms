@@ -119,6 +119,12 @@
             <ol class="breadcrumb">
             </ol>
         </section>
+            <c:if test="${!empty successMessage}">
+            <div class="alert alert-info" role="alert">${successMessage}</div>
+        </c:if>
+        <c:if test="${!empty failureMessage}">
+            <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
+        </c:if>
         <br/>
         <br/>
         <form:form action="vacancy.htm?act=submitRegistration" method="post" commandName="candidateApplyJob"
@@ -230,7 +236,7 @@
                                     <label>Blood Group :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
-                                    <select path="bloodGroups" id="bloodGroups" class="form-control ">
+                                    <select path="bloodGroup" id="bloodGroups" class="form-control ">
                                         <option value="">--Select--</option>
                                         <option value="A +ve">A +ve</option>
                                         <option value="A -ve">A -ve</option>
@@ -241,7 +247,7 @@
                                         <option value="O +ve">O +ve</option>
                                         <option value="O -ve">O -ve</option>
                                     </select>
-                                <%--<form:errors path="employeeName" cssClass="errorDiv"></form:errors>--%>
+                                <form:errors path="bloodGroup" cssClass="errorDiv"></form:errors>
                             </div>
                         </div>
                         <div class="form-group">

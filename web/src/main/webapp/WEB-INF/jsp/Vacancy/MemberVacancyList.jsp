@@ -83,8 +83,8 @@
         <br/>
         <ul class="nav nav-tabs" style="text-align: center" >
             <li class="active " ><a href="">My Application</a></li>
-            <li ><a href="thoughtMaster.htm?act=createthought">My Profile</a></li>
-            <li ><a href="thoughtMaster.htm?act=createthought2">Assessment</a></li>
+            <li ><a href="vacancy.htm?act=myProfileClick">My Profile</a></li>
+            <li ><a href="vacancy.htm?act=clickassessment">Assessment</a></li>
         </ul>
         <br/>
         <br/>

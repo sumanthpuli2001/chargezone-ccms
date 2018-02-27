@@ -26,12 +26,14 @@ public class MprMaster implements java.io.Serializable {
     private DesignationMaster designationMaster;
     private String dateOfLeaving;
     private Integer status;
+    private Integer currentLevel;
+    private Integer totalLevel;
 
     public MprMaster() {
 
     }
 
-    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, MprEmployeeCategory mprEmployeeCategory, MprEmployeeTypeMaster mprEmployeeTypeMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, QulificationMaster qulificationMaster, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving, Integer status) {
+    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, MprEmployeeCategory mprEmployeeCategory, MprEmployeeTypeMaster mprEmployeeTypeMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, QulificationMaster qulificationMaster, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving, Integer status, Integer currentLevel, Integer totalLevel) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
@@ -47,6 +49,8 @@ public class MprMaster implements java.io.Serializable {
         this.designationMaster = designationMaster;
         this.dateOfLeaving = dateOfLeaving;
         this.status = status;
+        this.currentLevel = currentLevel;
+        this.totalLevel = totalLevel;
     }
 
     public Integer getId() {
@@ -168,6 +172,23 @@ public class MprMaster implements java.io.Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+    public Integer getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public void setCurrentLevel(Integer currentLevel) {
+        this.currentLevel = currentLevel;
+    }
+
+    public Integer getTotalLevel() {
+        return totalLevel;
+    }
+
+    public void setTotalLevel(Integer totalLevel) {
+        this.totalLevel = totalLevel;
+    }
+    
     
     
 

@@ -12,6 +12,7 @@ import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.JobtypeMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.MprApproval;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
 import com.bul.zydex.model.MprMaster;
@@ -19,6 +20,7 @@ import com.bul.zydex.model.QulificationMaster;
 //import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
+import com.bul.zydex.service.MprApproval.MprApprovalService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
 import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
 import com.bul.zydex.service.Recruitment.MprEmployeeTypeMasterService;
@@ -51,7 +53,8 @@ public class RecruitmentAbstract extends CustomAbstract {
     protected MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService;
     protected QulificationMasterService<QulificationMaster> qulificationMasterService;
     protected DesignationMasterService<DesignationMaster> designationMasterService;
-    protected CandidateJobApplyService<CandidateApplyJob>candidateJobApplyService;
+    protected CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService;
+    protected MprApprovalService<MprApproval> mprApprovalService;
 
     public MprMasterService<MprMaster> getMprMasterService() {
         return mprMasterService;
@@ -140,9 +143,15 @@ public class RecruitmentAbstract extends CustomAbstract {
     public void setCandidateJobApplyService(CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService) {
         this.candidateJobApplyService = candidateJobApplyService;
     }
-    
-    
 
+    public MprApprovalService<MprApproval> getMprApprovalService() {
+        return mprApprovalService;
+    }
+
+    public void setMprApprovalService(MprApprovalService<MprApproval> mprApprovalService) {
+        this.mprApprovalService = mprApprovalService;
+    }
+    
     public void selectBudget(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         List<?> list = recruitmentService.readForBudgetDetail();

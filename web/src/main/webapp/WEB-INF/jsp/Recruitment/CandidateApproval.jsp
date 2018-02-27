@@ -44,7 +44,7 @@
 
 
                                         <form:form class="form-horizontal" method="post"
-                                                   commandName="candidateApplyJob" action="recruitment.htm?act=approveSubmitForMpr">
+                                                   commandName="candidateApplyJob" action="recruitment.htm?act=assessmentClick">
                                             <input type="hidden" id="empreqid" name="empreqid" value="${mprMaster.id}">
 
 
@@ -52,12 +52,12 @@
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Candidate Name:</label>
-                                                    <form:input path="name" class="form-control" placeholder="Name"></form:input>
+                                                    <form:input path="name" class="form-control" placeholder="Name" readonly="true"></form:input>
                                                     <form:errors path="name" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Candidate D.O.B:</label>
-                                                    <form:input path="dob" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="dob" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="dob" cssClass="errorDiv"></form:errors>
                                                     </div>
 
@@ -65,108 +65,108 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Father Name:</label>
-                                                    <form:input path="fatherName" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="fatherName" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="fatherName" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Father D.O.B:</label>
-                                                    <form:input path="fatherDob" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="fatherDob" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="fatherDob" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Mother Name:</label>
-                                                    <form:input path="motherName" class="form-control" placeholder="Number Of Position"></form:input>
+                                                    <form:input path="motherName" class="form-control" placeholder="Number Of Position" readonly="true"></form:input>
                                                     <form:errors path="motherName" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Mother D.O.B:</label>
-                                                    <form:input path="motherDob" class="form-control" placeholder="Experience"></form:input>
+                                                    <form:input path="motherDob" class="form-control" placeholder="Experience" readonly="true"></form:input>
                                                     <form:errors path="motherDob" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Sex:</label>
-                                                    <form:input path="sex" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="sex" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="sex" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>photograph:</label>
-                                                    <form:input path="photograph" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="photograph" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="photograph" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Present Address:</label>
-                                                    <form:input path="presentAddress" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="presentAddress" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="presentAddress" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Permanent Address:</label>
-                                                    <form:input path="permanentAddress" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="permanentAddress" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="permanentAddress" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>city:</label>
-                                                    <form:input path="city" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="city" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="city" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Blood Group:</label>
-                                                    <form:input path="bloodGroup" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="bloodGroup" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="bloodGroup" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Email Id:</label>
-                                                    <form:input path="emailId" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="emailId" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="emailId" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>contact No:</label>
-                                                    <form:input path="contactNo" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="contactNo" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="contactNo" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Emergency Contact Person:</label>
-                                                    <form:input path="emergencyContactPerson" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="emergencyContactPerson" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Emergency Contact No:</label>
-                                                    <form:input path="emergencyContactNo" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="emergencyContactNo" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Highest Education Qualification:</label>
-                                                    <form:input path="highestEducationQualification" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="highestEducationQualification" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="highestEducationQualification" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Experiance Date Joining Year:</label>
-                                                    <form:input path="experianceDateJoiningYear" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="experianceDateJoiningYear" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="experianceDateJoiningYear" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Experiance Date Joining Month:</label>
-                                                    <form:input path="experianceDateJoiningMonth" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="experianceDateJoiningMonth" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="experianceDateJoiningMonth" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Certificate Attach:</label>
-                                                    <form:input path="certificateAttach" class="form-control" placeholder="Description"></form:input>
+                                                    <form:input path="certificateAttach" class="form-control" placeholder="Description" readonly="true"></form:input>
                                                     <form:errors path="certificateAttach" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>

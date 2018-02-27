@@ -228,6 +228,8 @@ public class RecruitmentController extends RecruitmentAbstract {
             mv = viewClick(request, response);
         } else {
             mprMaster.setStatus(0);
+            mprMaster.setCurrentLevel(1);
+//            mprMaster.setTotalLevel();
             mprMasterService.create(mprMaster);
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
@@ -539,6 +541,13 @@ public class RecruitmentController extends RecruitmentAbstract {
          String id = request.getParameter("id");
         candidateApplyJob  = candidateJobApplyService.readById(Integer.parseInt(id));
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        mv.setViewName("Recruitment/CandidateApproval");
+        return mv;
+    }
+      public ModelAndView assessmentClick(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
         mv.setViewName("Recruitment/CandidateApproval");
         return mv;
     }

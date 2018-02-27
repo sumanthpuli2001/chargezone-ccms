@@ -52,5 +52,11 @@
         <property name="status" type="java.lang.Integer">
             <column name="status" />
         </property>
+        <property name="currentLevel" type="java.lang.Integer">
+            <column name="current_level" />
+        </property>
+        <property name="totalLevel" type="java.lang.Integer">
+            <column name="total_level" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -11,7 +11,7 @@
             <generator class="identity" />
         </id>
         <many-to-one name="approvalMaster" class="com.bul.zydex.model.ApprovalMaster" fetch="select">
-            <column name="approvalMaster" />
+            <column name="approval_id" />
         </many-to-one>
         <many-to-one name="employeeMaster" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
             <column name="employee_master_id" not-null="true" />

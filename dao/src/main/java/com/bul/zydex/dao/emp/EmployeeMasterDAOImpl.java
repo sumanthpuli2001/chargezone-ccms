@@ -1856,4 +1856,28 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+
+    @Override
+    public List<?> readEmployeeByBirthday(String date) {
+        
+      
+    
+        String query = "";
+
+        query += "SELECT a.id,a.employeeName FROM EmployeeMaster a"
+                + " WHERE STR_TO_DATE(a.dateOfBirth,'%d/%m') = STR_TO_DATE('" + date + "','%d/%m')";
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> newJoiningEmployee(String date) {
+           String query = "";
+
+        query += "SELECT a.employeeName FROM EmployeeMaster a"
+                + " WHERE STR_TO_DATE(a.dateOfJoining,'%d/%m/%Y') > STR_TO_DATE('" + date + "','%d/%m/%Y')";
+
+        return getHibernateTemplate().find(query);
+    }
+    
 }

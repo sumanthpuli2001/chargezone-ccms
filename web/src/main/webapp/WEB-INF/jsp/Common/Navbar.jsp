@@ -44,6 +44,20 @@
                         </a>
                     </li>
                 </c:if>
+                <c:if test="${!sessionScope.userRight.hr}">
+                    <li class="active treeview">
+                        <a href="homeController.htm?act=openHomePage">
+                            <i class="fa fa-dashboard fa-lg"></i> <span>Home</span>
+                        </a>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.userRight.hr}">
+                    <li class="active treeview">
+                        <a href="homeController.htm?act=openHomePage">
+                            <i class="fa fa-dashboard fa-lg"></i> <span>Home</span>
+                        </a>
+                    </li>
+                </c:if>
                 <c:if test="${sessionScope.userRight.employeeManagement}">
                     <li class="treeview">
                         <a href="#">
@@ -72,6 +86,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>Recruitment Approval</a></li>
+                                <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
                             </ul>
                         </li>
                     </c:if>
@@ -556,6 +571,8 @@
                             <li><a href="appraisalPerformance.htm?act=trasferCompatencyEvaluationInEmployeeMaster"><i class="fa fa-pie-chart fa-lg"></i>Competency Evaluation Transfer</a></li>
                             <li><a href="companyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Company Master</a></li>
                             <li><a href="questionLibrary.htm?act=QuestionLibraryCreate"><i class="fa fa-circle-o"></i>Question Library</a></li>
+                            <li><a href="questionLibrary.htm?act=questionPaperView"><i class="fa fa-circle-o"></i>Question Paper</a></li>
+                            <li><a href="thoughtMaster.htm?act=createthought"><i class="fa fa-circle-o"></i>Dashbord setting</a></li>
                         </ul>
                     </li>
                 </c:if>

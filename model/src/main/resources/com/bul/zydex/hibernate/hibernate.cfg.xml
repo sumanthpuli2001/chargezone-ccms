@@ -114,9 +114,12 @@
         <mapping resource="com/bul/zydex/model/QuestionAns.hbm.xml"/>
         <mapping resource="com/bul/zydex/model/QuestionLibrary.hbm.xml"/>
         <mapping resource="com/bul/zydex/model/MprEmployeeCategory.hbm.xml"/>
+        <mapping resource="com/bul/zydex/model/QuestionPaper.hbm.xml"/>
         <mapping resource="com/bul/zydex/model/ApprovalMaster.hbm.xml"/>
         <mapping resource="com/bul/zydex/model/ApprovalUser.hbm.xml"/>
         <mapping resource="com/bul/zydex/model/ApplayJobUserMaster.hbm.xml"/>
         <mapping resource="com/bul/zydex/model/CandidateApplyJob.hbm.xml"/>
+        <mapping resource="com/bul/zydex/model/ThoughtMaster.hbm.xml"/>
+        <mapping resource="com/bul/zydex/model/CorporateVideo.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

@@ -154,33 +154,21 @@ public class RecruitmentController extends RecruitmentAbstract {
         LocationMaster locationMaster = new LocationMaster();
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
         DesignationMaster designationMaster = new DesignationMaster();
-        MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
-        MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
-        QulificationMaster qulificationMaster = new QulificationMaster();
         if (mprMaster.getId() != null) {
             mprMaster = mprMasterService.readById(mprMaster.getId());
             mprMaster.setLocationMaster(mprMaster.getLocationMaster());
             mprMaster.setDepartmentMaster(mprMaster.getDepartmentMaster());
             mprMaster.setJobtypeMaster(mprMaster.getJobtypeMaster());
             mprMaster.setDesignationMaster(mprMaster.getDesignationMaster());
-            mprMaster.setMprEmployeeCategory(mprMaster.getMprEmployeeCategory());
-            mprMaster.setMprEmployeeTypeMaster(mprMaster.getMprEmployeeTypeMaster());
-            mprMaster.setQulificationMaster(mprMaster.getQulificationMaster());
         } else {
             mprMaster.setLocationMaster(new LocationMaster());
             mprMaster.setDepartmentMaster(new DepartmentMaster());
             mprMaster.setJobtypeMaster(new JobtypeMaster());
             mprMaster.setDesignationMaster(new DesignationMaster());
-            mprMaster.setMprEmployeeCategory(new MprEmployeeCategory());
-            mprMaster.setMprEmployeeTypeMaster(new MprEmployeeTypeMaster());
-            mprMaster.setQulificationMaster(new QulificationMaster());
         }
 //        selectMPRBudget(request, response);
         departmentList(request);
         designationList(request);
-        employeecategoryList(request);
-        employeeTypeList(request);
-//        qulificationList(request);
         Map<Integer, String> locationMap = readLocations();
         Map<Integer, String> jobtype1 = jobtypeList();
         mv.addObject("locationMap", locationMap);
@@ -189,17 +177,11 @@ public class RecruitmentController extends RecruitmentAbstract {
         mprMaster.setLocationMaster(new LocationMaster());
         mprMaster.setJobtypeMaster(new JobtypeMaster());
         mprMaster.setDesignationMaster(new DesignationMaster());
-        mprMaster.setMprEmployeeCategory(new MprEmployeeCategory());
-        mprMaster.setMprEmployeeTypeMaster(new MprEmployeeTypeMaster());
-        mprMaster.setQulificationMaster(new QulificationMaster());
         mv.getModelMap().put("mprMaster", mprMaster);
         mv.getModelMap().put("departmentMaster", departmentMaster);
         mv.getModelMap().put("locationMaster", locationMaster);
         mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
         mv.getModelMap().put("designationMaster", designationMaster);
-        mv.getModelMap().put("mprEmployeeCategory", mprEmployeeCategory);
-        mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
-        mv.getModelMap().put("qulificationMaster", qulificationMaster);
         mv.setViewName("Recruitment/RequestForManPower");
         return mv;
     }
@@ -207,7 +189,9 @@ public class RecruitmentController extends RecruitmentAbstract {
     public ModelAndView detailCreateForMpr(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
+        String id = request.getParameter("recruitmentMasterid");
         MprMaster mprMaster = new MprMaster();
+        RecruitmentMaster recruitmentMaster = new RecruitmentMaster();
         DepartmentMaster departmentMaster = new DepartmentMaster();
         LocationMaster locationMaster = new LocationMaster();
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
@@ -217,6 +201,21 @@ public class RecruitmentController extends RecruitmentAbstract {
         BindException errors = new BindException(mprMaster, "mprMaster");
         bind(request, mprMaster);
 
+        recruitmentMaster = recruitmentService.readById(Integer.parseInt(id));
+        int jobtype = recruitmentMaster.getJobtypeMaster().getId();
+        jobtypeMaster=jobtypeMasterService.readById(jobtype);
+        mprMaster.setJobtypeMaster(jobtypeMaster);
+        
+        int department = recruitmentMaster.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        mprMaster.setDepartmentMaster(departmentMaster);
+        
+        int location = recruitmentMaster.getLocationMaster().getId();
+        locationMaster = locationMasterService.readById(location);
+        mprMaster.setLocationMaster(locationMaster);
+
+        int position =recruitmentMaster.getNumberOfPosition();
+        mprMaster.setNumberOfPosition(position);
 //        selectMPRBudget(request, response);
         departmentList(request);
 
@@ -228,6 +227,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             mv = viewClick(request, response);
         } else {
             mprMaster.setStatus(0);
+
             mprMasterService.create(mprMaster);
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
@@ -246,33 +246,21 @@ public class RecruitmentController extends RecruitmentAbstract {
         LocationMaster locationMaster = new LocationMaster();
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
         DesignationMaster designationMaster = new DesignationMaster();
-        MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
-        MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
-//        QulificationMaster qulificationMaster = new QulificationMaster();
         if (mprMaster.getId() != null) {
             mprMaster = mprMasterService.readById(mprMaster.getId());
             mprMaster.setLocationMaster(mprMaster.getLocationMaster());
             mprMaster.setDepartmentMaster(mprMaster.getDepartmentMaster());
             mprMaster.setJobtypeMaster(mprMaster.getJobtypeMaster());
             mprMaster.setDesignationMaster(mprMaster.getDesignationMaster());
-            mprMaster.setMprEmployeeCategory(mprMaster.getMprEmployeeCategory());
-            mprMaster.setMprEmployeeTypeMaster(mprMaster.getMprEmployeeTypeMaster());
-//            mprMaster.setQulificationMaster(mprMaster.getQulificationMaster());
         } else {
             mprMaster.setLocationMaster(new LocationMaster());
             mprMaster.setDepartmentMaster(new DepartmentMaster());
             mprMaster.setJobtypeMaster(new JobtypeMaster());
             mprMaster.setDesignationMaster(new DesignationMaster());
-            mprMaster.setMprEmployeeCategory(new MprEmployeeCategory());
-            mprMaster.setMprEmployeeTypeMaster(new MprEmployeeTypeMaster());
-//            mprMaster.setQulificationMaster(new QulificationMaster());
         }
 //        selectMPRBudget(request, response);
         departmentList(request);
         designationList(request);
-        employeecategoryList(request);
-        employeeTypeList(request);
-//        qulificationList(request);
         Map<Integer, String> locationMap = readLocations();
         Map<Integer, String> jobtype1 = jobtypeList();
         mv.addObject("locationMap", locationMap);
@@ -281,18 +269,16 @@ public class RecruitmentController extends RecruitmentAbstract {
         mprMaster.setLocationMaster(new LocationMaster());
         mprMaster.setJobtypeMaster(new JobtypeMaster());
         mprMaster.setDesignationMaster(new DesignationMaster());
-        mprMaster.setMprEmployeeCategory(new MprEmployeeCategory());
-        mprMaster.setMprEmployeeTypeMaster(new MprEmployeeTypeMaster());
-//        mprMaster.setQulificationMaster(new QulificationMaster());
         String id = request.getParameter("id");
         recruitmentMaster = recruitmentService.readById(Integer.parseInt(id));
+        int jobtypeId = recruitmentMaster.getJobtypeMaster().getId();
+        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+        String jobtypeNAme = jobtypeMaster.getJobTypeName();
         mv.getModelMap().put("mprMaster", mprMaster);
         mv.getModelMap().put("departmentMaster", departmentMaster);
         mv.getModelMap().put("locationMaster", locationMaster);
         mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
         mv.getModelMap().put("designationMaster", designationMaster);
-        mv.getModelMap().put("mprEmployeeCategory", mprEmployeeCategory);
-        mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
         mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
         mv.setViewName("Recruitment/MprSearchCreateBudget");
         return mv;
@@ -321,8 +307,6 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         departmentList(request);
         designationList(request);
-        employeecategoryList(request);
-        employeeTypeList(request);
         Map<Integer, String> locationMap = readLocations();
         Map<Integer, String> jobtype1 = jobtypeList();
         mv.addObject("locationMap", locationMap);
@@ -424,8 +408,6 @@ public class RecruitmentController extends RecruitmentAbstract {
         LocationMaster locationMaster = new LocationMaster();
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
         DesignationMaster designationMaster = new DesignationMaster();
-        MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
-        MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
 
         if (mprMaster.getId() != null) {
             mprMaster = mprMasterService.readById(mprMaster.getId());
@@ -433,24 +415,15 @@ public class RecruitmentController extends RecruitmentAbstract {
             mprMaster.setDepartmentMaster(mprMaster.getDepartmentMaster());
             mprMaster.setJobtypeMaster(mprMaster.getJobtypeMaster());
             mprMaster.setDesignationMaster(mprMaster.getDesignationMaster());
-            mprMaster.setMprEmployeeCategory(mprMaster.getMprEmployeeCategory());
-            mprMaster.setMprEmployeeTypeMaster(mprMaster.getMprEmployeeTypeMaster());
-//            mprMaster.setQulificationMaster(mprMaster.getQulificationMaster());
         } else {
             mprMaster.setLocationMaster(new LocationMaster());
             mprMaster.setDepartmentMaster(new DepartmentMaster());
             mprMaster.setJobtypeMaster(new JobtypeMaster());
             mprMaster.setDesignationMaster(new DesignationMaster());
-            mprMaster.setMprEmployeeCategory(new MprEmployeeCategory());
-            mprMaster.setMprEmployeeTypeMaster(new MprEmployeeTypeMaster());
-//            mprMaster.setQulificationMaster(new QulificationMaster());
         }
 //        selectMPRBudget(request, response);
         departmentList(request);
         designationList(request);
-        employeecategoryList(request);
-        employeeTypeList(request);
-//        qulificationList(request);
         Map<Integer, String> locationMap = readLocations();
         Map<Integer, String> jobtype1 = jobtypeList();
         mv.addObject("locationMap", locationMap);
@@ -459,8 +432,6 @@ public class RecruitmentController extends RecruitmentAbstract {
         mprMaster.setLocationMaster(new LocationMaster());
         mprMaster.setJobtypeMaster(new JobtypeMaster());
         mprMaster.setDesignationMaster(new DesignationMaster());
-        mprMaster.setMprEmployeeCategory(new MprEmployeeCategory());
-        mprMaster.setMprEmployeeTypeMaster(new MprEmployeeTypeMaster());
 
         String id = request.getParameter("id");
         mprMaster = mprMasterService.readById(Integer.parseInt(id));
@@ -469,8 +440,6 @@ public class RecruitmentController extends RecruitmentAbstract {
         mv.getModelMap().put("locationMaster", locationMaster);
         mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
         mv.getModelMap().put("designationMaster", designationMaster);
-        mv.getModelMap().put("mprEmployeeCategory", mprEmployeeCategory);
-        mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
         mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
         mv.setViewName("Recruitment/ViewApprovlPage");
         return mv;
@@ -486,8 +455,6 @@ public class RecruitmentController extends RecruitmentAbstract {
         LocationMaster locationMaster = new LocationMaster();
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
         DesignationMaster designationMaster = new DesignationMaster();
-        MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
-        MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
 
         bind(request, mprMaster);
         String btnType = request.getParameter("btnType");
@@ -519,27 +486,95 @@ public class RecruitmentController extends RecruitmentAbstract {
         mv = recruitmentApprovalCreate(request, response);
         return mv;
     }
-    
-      public ModelAndView candidateList(HttpServletRequest request,
+
+    public ModelAndView candidateList(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
-        List<?> candidateApplyJobList  = candidateJobApplyService.fetchcandidatelist();
+        List<?> candidateApplyJobList = candidateJobApplyService.fetchcandidatelist();
         mv.getModelMap().put("list", candidateApplyJobList);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Recruitment/CandidateRequestList");
         return mv;
     }
-      public ModelAndView CandidateViewClick(HttpServletRequest request,
+
+    public ModelAndView CandidateViewClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
-         String id = request.getParameter("id");
-        candidateApplyJob  = candidateJobApplyService.readById(Integer.parseInt(id));
+        String id = request.getParameter("id");
+        candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(id));
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Recruitment/CandidateApproval");
+        return mv;
+    }
+
+    public ModelAndView mprCreateClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        RecruitmentMaster recruitmentMaster = new RecruitmentMaster();
+        MprMaster mprMaster = new MprMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        LocationMaster locationMaster = new LocationMaster();
+        JobtypeMaster jobtypeMaster = new JobtypeMaster();
+        DesignationMaster designationMaster = new DesignationMaster();
+        if (mprMaster.getId() != null) {
+            mprMaster = mprMasterService.readById(mprMaster.getId());
+            mprMaster.setLocationMaster(mprMaster.getLocationMaster());
+            mprMaster.setDepartmentMaster(mprMaster.getDepartmentMaster());
+            mprMaster.setJobtypeMaster(mprMaster.getJobtypeMaster());
+            mprMaster.setDesignationMaster(mprMaster.getDesignationMaster());
+        } else {
+            mprMaster.setLocationMaster(new LocationMaster());
+            mprMaster.setDepartmentMaster(new DepartmentMaster());
+            mprMaster.setJobtypeMaster(new JobtypeMaster());
+            mprMaster.setDesignationMaster(new DesignationMaster());
+        }
+//        selectMPRBudget(request, response);
+        departmentList(request);
+        designationList(request);
+        Map<Integer, String> locationMap = readLocations();
+        Map<Integer, String> jobtype1 = jobtypeList();
+        mv.addObject("locationMap", locationMap);
+        mv.addObject("jobtype1", jobtype1);
+        mprMaster.setDepartmentMaster(new DepartmentMaster());
+        mprMaster.setLocationMaster(new LocationMaster());
+        mprMaster.setJobtypeMaster(new JobtypeMaster());
+        mprMaster.setDesignationMaster(new DesignationMaster());
+        String id = request.getParameter("id");
+        
+        recruitmentMaster = recruitmentService.readById(Integer.parseInt(id));
+        
+        int jobtypeId = recruitmentMaster.getJobtypeMaster().getId();
+        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+        String jobtypeNAme = jobtypeMaster.getJobTypeName();
+        
+        int department = recruitmentMaster.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        String departmentName = departmentMaster.getDepartmentName();
+        
+        int localtion = recruitmentMaster.getLocationMaster().getId();
+        locationMaster = locationMasterService.readById(localtion);
+        String locationName = locationMaster.getLocation();
+        
+        int position = recruitmentMaster.getNumberOfPosition();
+        
+     
+             
+
+        mv.getModelMap().put("mprMaster", mprMaster);
+        mv.getModelMap().put("departmentMaster", departmentMaster);
+        mv.getModelMap().put("locationMaster", locationMaster);
+        mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
+        mv.getModelMap().put("designationMaster", designationMaster);
+        mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
+        request.setAttribute("jobtypeNAme", jobtypeNAme);
+        request.setAttribute("departmentName", departmentName);
+        request.setAttribute("locationName", locationName);
+        request.setAttribute("position", position);
+        mv.setViewName("Recruitment/MprSearchCreateBudget");
         return mv;
     }
 

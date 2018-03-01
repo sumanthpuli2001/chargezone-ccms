@@ -16,12 +16,6 @@
         <many-to-one name="departmentMaster" class="com.bul.zydex.model.DepartmentMaster" fetch="select">
             <column name="department_id" />
         </many-to-one>
-        <many-to-one name="mprEmployeeCategory" class="com.bul.zydex.model.MprEmployeeCategory" fetch="select">
-            <column name="employee_category_id" />
-        </many-to-one>
-        <many-to-one name="mprEmployeeTypeMaster" class="com.bul.zydex.model.MprEmployeeTypeMaster" fetch="select">
-            <column name="employee_type" />
-        </many-to-one>
         <many-to-one name="jobtypeMaster" class="com.bul.zydex.model.JobtypeMaster" fetch="select">
             <column name="jobtype_id" />
         </many-to-one>
@@ -34,9 +28,6 @@
         <property name="budget" type="java.lang.Integer">
             <column name="budget" />
         </property>
-        <many-to-one name="qulificationMaster" class="com.bul.zydex.model.QulificationMaster" fetch="select">
-            <column name="qulification_id" />
-        </many-to-one>
         <property name="experience" type="string">
             <column name="experience" />
         </property>

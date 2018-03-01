@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.Recruitment;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.ApprovalUser;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
@@ -19,6 +20,7 @@ import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.QulificationMaster;
 //import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMaster;
+import com.bul.zydex.service.Approval.ApprovalUserService;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.MprApproval.MprApprovalService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
@@ -51,10 +53,10 @@ public class RecruitmentAbstract extends CustomAbstract {
     protected MprMasterService<MprMaster> mprMasterService;
     protected MprEmployeeTypeMasterService<MprEmployeeTypeMaster> mprEmployeeTypeMasterService;
     protected MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService;
-    protected QulificationMasterService<QulificationMaster> qulificationMasterService;
     protected DesignationMasterService<DesignationMaster> designationMasterService;
     protected CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService;
     protected MprApprovalService<MprApproval> mprApprovalService;
+    protected ApprovalUserService<ApprovalUser> approvalUserService;
 
     public MprMasterService<MprMaster> getMprMasterService() {
         return mprMasterService;
@@ -86,14 +88,6 @@ public class RecruitmentAbstract extends CustomAbstract {
 
     public void setMprEmployeeCategoryService(MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService) {
         this.mprEmployeeCategoryService = mprEmployeeCategoryService;
-    }
-
-    public QulificationMasterService<QulificationMaster> getQulificationMasterService() {
-        return qulificationMasterService;
-    }
-
-    public void setQulificationMasterService(QulificationMasterService<QulificationMaster> qulificationMasterService) {
-        this.qulificationMasterService = qulificationMasterService;
     }
 
     public Validator getRecruitmentValidator() {
@@ -151,7 +145,16 @@ public class RecruitmentAbstract extends CustomAbstract {
     public void setMprApprovalService(MprApprovalService<MprApproval> mprApprovalService) {
         this.mprApprovalService = mprApprovalService;
     }
+
+    public ApprovalUserService<ApprovalUser> getApprovalUserService() {
+        return approvalUserService;
+    }
+
+    public void setApprovalUserService(ApprovalUserService<ApprovalUser> approvalUserService) {
+        this.approvalUserService = approvalUserService;
+    }
     
+
     public void selectBudget(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         List<?> list = recruitmentService.readForBudgetDetail();
@@ -249,18 +252,6 @@ public class RecruitmentAbstract extends CustomAbstract {
         }
 
         request.setAttribute("emptypeList", et);
-    }
-
-    protected void qulificationList(HttpServletRequest request) {
-        QulificationMaster qulificationMaster = new QulificationMaster();
-        List<?> qulificationTypeList = qulificationMasterService.read();
-        Map<Integer, String> qt = new HashMap<>();
-        for (Object o : qulificationTypeList) {
-            qulificationMaster = (QulificationMaster) o;
-            qt.put(qulificationMaster.getId(), qulificationMaster.getQulificationType());
-        }
-
-        request.setAttribute("qulytypeList", qt);
     }
 
     public void selectMPRBudget(HttpServletRequest request,

@@ -20,7 +20,6 @@ public class MprMaster implements java.io.Serializable {
     private String name;
     private Integer numberOfPosition;
     private Integer budget;
-    private QulificationMaster qulificationMaster;
     private String experience;
     private String description;
     private DesignationMaster designationMaster;
@@ -33,7 +32,7 @@ public class MprMaster implements java.io.Serializable {
 
     }
 
-    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, MprEmployeeCategory mprEmployeeCategory, MprEmployeeTypeMaster mprEmployeeTypeMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, QulificationMaster qulificationMaster, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving, Integer status, Integer currentLevel, Integer totalLevel) {
+    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, MprEmployeeCategory mprEmployeeCategory, MprEmployeeTypeMaster mprEmployeeTypeMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving, Integer status, Integer currentLevel, Integer totalLevel) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
@@ -43,7 +42,6 @@ public class MprMaster implements java.io.Serializable {
         this.name = name;
         this.numberOfPosition = numberOfPosition;
         this.budget = budget;
-        this.qulificationMaster = qulificationMaster;
         this.experience = experience;
         this.description = description;
         this.designationMaster = designationMaster;
@@ -123,14 +121,6 @@ public class MprMaster implements java.io.Serializable {
 
     public void setBudget(Integer budget) {
         this.budget = budget;
-    }
-
-    public QulificationMaster getQulificationMaster() {
-        return qulificationMaster;
-    }
-
-    public void setQulificationMaster(QulificationMaster qulificationMaster) {
-        this.qulificationMaster = qulificationMaster;
     }
 
     public String getExperience() {

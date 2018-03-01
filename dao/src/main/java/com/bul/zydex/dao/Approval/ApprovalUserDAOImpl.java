@@ -7,6 +7,7 @@ package com.bul.zydex.dao.Approval;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.ApprovalUser;
+import java.util.List;
 
 /**
  *
@@ -17,6 +18,18 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
     @Override
     protected Class getDomainClass() {
         return ApprovalUser.class;
+    }
+
+    @Override
+    public List<?> readByApprovalId(int id) {
+        String query = "";
+        query += ""
+                + " FROM ApprovalUser a "
+                + " left join a.approvalMaster b"
+                + " WHERE b.id = " + id;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
     }
 
 }

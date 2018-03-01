@@ -138,7 +138,7 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
                                                         <label>Description:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="description" class="form-control" id="editor" placeholder="Description"></form:input>
+                                                    <form:textarea path="description" class="form-control" id="editor" placeholder="Description"></form:textarea>
                                                     <form:errors path="description" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>

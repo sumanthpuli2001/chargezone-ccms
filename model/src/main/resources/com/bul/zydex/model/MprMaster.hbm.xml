@@ -34,9 +34,6 @@
         <property name="budget" type="java.lang.Integer">
             <column name="budget" />
         </property>
-        <many-to-one name="qulificationMaster" class="com.bul.zydex.model.QulificationMaster" fetch="select">
-            <column name="qulification_id" />
-        </many-to-one>
         <property name="experience" type="string">
             <column name="experience" />
         </property>

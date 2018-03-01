@@ -7,6 +7,7 @@ package com.bul.zydex.dao.MprApproval;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.MprApproval;
+import java.util.List;
 
 /**
  *
@@ -18,5 +19,5 @@ public class MprApprovalDAOImpl<T> extends GenericsDAOImpl<T> implements MprAppr
     protected Class getDomainClass() {
        return MprApproval.class;
     }
-    
-}
+
+    }

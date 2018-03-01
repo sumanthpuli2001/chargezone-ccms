@@ -148,7 +148,7 @@
                                                 </div>
                                                 <div class="col-sm-4" style="text-align: center">
                                                     <c:if test="${status != 2}">
-                                                        <button type="submit" class="btn btn-warning" id="btnType2" name="btnType"  value="Return"  style="width: 100px">REWORK</button>
+                                                        <button type="submit" class="btn btn-warning" id="btnType2" name="btnType"  value="Return"  style="width: 100px">RECYCLE</button>
                                                     </c:if>
                                                 </div>
                                                 <div class="col-sm-4" style="text-align: right">

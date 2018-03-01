@@ -105,7 +105,7 @@
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <c:if test="${list[5] == 0}"><td><span class="badge">Pending</span></td></c:if>
                                                                 <c:if test="${list[5] == 1}"><td><span class="label label-success">Approved</span></td></c:if>
-                                                                <c:if test="${list[5] == 2}"><td><span class="label label-danger">Returned</span></td></c:if>
+                                                                <c:if test="${list[5] == 2}"><td><span class="label label-warning">Recycled</span></td></c:if>
                                                                 <c:if test="${list[5] == 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
                                                                     <td>
                                                                     <c:if test="${list[5] == 0}">

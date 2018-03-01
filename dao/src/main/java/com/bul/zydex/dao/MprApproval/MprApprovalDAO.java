@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.MprApproval;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.List;
 
 /**
  *

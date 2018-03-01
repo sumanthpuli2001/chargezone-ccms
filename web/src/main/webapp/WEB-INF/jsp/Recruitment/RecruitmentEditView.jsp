@@ -76,30 +76,32 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Budget:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <form:input path="budget" class="form-control" placeholder="Budget"></form:input>
-                                                    <form:errors path="budget" cssClass="errorDiv"></form:errors>
+                                                        <form:input path="budget" class="form-control" placeholder="Budget"></form:input>
+                                                        <form:errors path="budget" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Number Of Position:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <form:input path="numberOfPosition" class="form-control" placeholder="Number Of Position"></form:input>
-                                                    <form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>
+                                                        <form:input path="numberOfPosition" class="form-control" placeholder="Number Of Position"></form:input>
+                                                        <form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Date:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:input path="date" class="form-control" placeholder="Date"></form:input>
-                                                        <form:errors path="date" cssClass="errorDiv"></form:errors>
+                                                            <form:input path="date" class="form-control" placeholder="Date"></form:input>
+                                                            <form:errors path="date" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            <c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 2}">
                                                 <div class="form-group">
                                                     <div class="col-sm-6 col-sm-offset-5">
                                                         <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
                                                     </div>
 
                                                 </div>
+                                            </c:if>
                                         </form:form>
                                         <!--</div>-->
 

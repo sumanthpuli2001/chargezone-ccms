@@ -309,12 +309,12 @@ public class VacancyController extends VacancyAbstract {
         bind(request, candidateApplyJob);
 
         candidateJobApplyValidator.validate(candidateApplyJob, errors);
-         if (errors.hasErrors()) {
+        if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
                     "Error : This Form All Fields Are Require");
-               mv.setViewName("Vacancy/applyJobCandidateRegistration"); 
-         }
-        
+            mv.setViewName("Vacancy/applyJobCandidateRegistration");
+        }
+
         candidateJobApplyService.create(candidateApplyJob);
 
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
@@ -449,6 +449,7 @@ public class VacancyController extends VacancyAbstract {
 //        mv.getModelMap().put("vacancyMaster", vacancyMaster);
         return mv;
     }
+
     public ModelAndView myProfileClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
@@ -459,6 +460,7 @@ public class VacancyController extends VacancyAbstract {
 
         return mv;
     }
+
     public ModelAndView clickassessment(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
@@ -467,6 +469,18 @@ public class VacancyController extends VacancyAbstract {
         mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
         mv.setViewName("Vacancy/AssessmentCandidate");
 
+        return mv;
+    }
+
+    public ModelAndView backToHomeVacancyList(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        mv.getModelMap().put("list", vacancylist);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.setViewName("Vacancy/backToHomeVacancyList");
         return mv;
     }
 

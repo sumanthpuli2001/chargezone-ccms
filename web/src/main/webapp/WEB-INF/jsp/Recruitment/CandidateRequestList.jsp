@@ -25,14 +25,14 @@
         <script>
             function deleteCheck11() {
                 var checkboxes = confirm("Are you sure you want to delete?");
-                if(checkboxes){
-                checkboxes = document.getElementsByName('checkId');
-                for (var i = 0, n = checkboxes.length; i < n; i++) {
-                    if (checkboxes[i].checked) {
-                        return true;
+                if (checkboxes) {
+                    checkboxes = document.getElementsByName('checkId');
+                    for (var i = 0, n = checkboxes.length; i < n; i++) {
+                        if (checkboxes[i].checked) {
+                            return true;
+                        }
                     }
-                }
-                alert("Please, Select one or more record(s).");
+                    alert("Please, Select one or more record(s).");
                 }
                 return false;
             }
@@ -52,6 +52,11 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
+                                <div>
+                                    <a type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-user"></i>&nbsp; F To F</a>
+                                    <a type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'vacancy.htm?act=Login'"><i class="fa fa-opera"></i>&nbsp; online</a>
+                                </div>
+
                                 <c:if test="${sessionScope.userRight.employeeManagement}">
                                     <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
                                     <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->

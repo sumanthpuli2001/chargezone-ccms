@@ -206,18 +206,18 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         recruitmentMaster = recruitmentService.readById(Integer.parseInt(id));
         int jobtype = recruitmentMaster.getJobtypeMaster().getId();
-        jobtypeMaster=jobtypeMasterService.readById(jobtype);
+        jobtypeMaster = jobtypeMasterService.readById(jobtype);
         mprMaster.setJobtypeMaster(jobtypeMaster);
-        
+
         int department = recruitmentMaster.getDepartmentMaster().getId();
         departmentMaster = departmentMasterService.readById(department);
         mprMaster.setDepartmentMaster(departmentMaster);
-        
+
         int location = recruitmentMaster.getLocationMaster().getId();
         locationMaster = locationMasterService.readById(location);
         mprMaster.setLocationMaster(locationMaster);
 
-        int position =recruitmentMaster.getNumberOfPosition();
+        int position = recruitmentMaster.getNumberOfPosition();
         mprMaster.setNumberOfPosition(position);
 //        selectMPRBudget(request, response);
         departmentList(request);
@@ -556,25 +556,22 @@ public class RecruitmentController extends RecruitmentAbstract {
         mprMaster.setJobtypeMaster(new JobtypeMaster());
         mprMaster.setDesignationMaster(new DesignationMaster());
         String id = request.getParameter("id");
-        
+
         recruitmentMaster = recruitmentService.readById(Integer.parseInt(id));
-        
+
         int jobtypeId = recruitmentMaster.getJobtypeMaster().getId();
         jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
         String jobtypeNAme = jobtypeMaster.getJobTypeName();
-        
+
         int department = recruitmentMaster.getDepartmentMaster().getId();
         departmentMaster = departmentMasterService.readById(department);
         String departmentName = departmentMaster.getDepartmentName();
-        
+
         int localtion = recruitmentMaster.getLocationMaster().getId();
         locationMaster = locationMasterService.readById(localtion);
         String locationName = locationMaster.getLocation();
-        
+
         int position = recruitmentMaster.getNumberOfPosition();
-        
-     
-             
 
         mv.getModelMap().put("mprMaster", mprMaster);
         mv.getModelMap().put("departmentMaster", departmentMaster);
@@ -587,6 +584,10 @@ public class RecruitmentController extends RecruitmentAbstract {
         request.setAttribute("locationName", locationName);
         request.setAttribute("position", position);
         mv.setViewName("Recruitment/MprSearchCreateBudget");
+
+        return mv;
+    }
+
     public ModelAndView assessmentClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
@@ -606,8 +607,8 @@ public class RecruitmentController extends RecruitmentAbstract {
         mv.setViewName("Recruitment/MppApprovalList");
         return mv;
     }
-    
-      public ModelAndView mPPViewApproval(HttpServletRequest request,
+
+    public ModelAndView mPPViewApproval(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         RecruitmentMaster recruitmentMaster = new RecruitmentMaster();
@@ -628,8 +629,8 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         return mv;
     }
-      
-          public ModelAndView submitMppApprove(HttpServletRequest request,
+
+    public ModelAndView submitMppApprove(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
@@ -654,7 +655,7 @@ public class RecruitmentController extends RecruitmentAbstract {
                     "Information : The Request is Returned successfully.");
         }
         if (btnType.equals("Reject")) {
-             recruitmentMaster = recruitmentService.readById(Integer.parseInt(mppid));
+            recruitmentMaster = recruitmentService.readById(Integer.parseInt(mppid));
             recruitmentMaster.setMppStatus(3);
             recruitmentService.update(recruitmentMaster);
             request.setAttribute("successMessage",

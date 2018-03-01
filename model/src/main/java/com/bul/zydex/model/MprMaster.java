@@ -14,8 +14,6 @@ public class MprMaster implements java.io.Serializable {
     private Integer id;
     private LocationMaster locationMaster;
     private DepartmentMaster departmentMaster;
-    private MprEmployeeCategory mprEmployeeCategory;
-    private MprEmployeeTypeMaster mprEmployeeTypeMaster;
     private JobtypeMaster jobtypeMaster;
     private String name;
     private Integer numberOfPosition;
@@ -32,12 +30,10 @@ public class MprMaster implements java.io.Serializable {
 
     }
 
-    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, MprEmployeeCategory mprEmployeeCategory, MprEmployeeTypeMaster mprEmployeeTypeMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving, Integer status, Integer currentLevel, Integer totalLevel) {
+    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving, Integer status) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
-        this.mprEmployeeCategory = mprEmployeeCategory;
-        this.mprEmployeeTypeMaster = mprEmployeeTypeMaster;
         this.jobtypeMaster = jobtypeMaster;
         this.name = name;
         this.numberOfPosition = numberOfPosition;
@@ -75,21 +71,6 @@ public class MprMaster implements java.io.Serializable {
         this.departmentMaster = departmentMaster;
     }
 
-    public MprEmployeeCategory getMprEmployeeCategory() {
-        return mprEmployeeCategory;
-    }
-
-    public void setMprEmployeeCategory(MprEmployeeCategory mprEmployeeCategory) {
-        this.mprEmployeeCategory = mprEmployeeCategory;
-    }
-
-    public MprEmployeeTypeMaster getMprEmployeeTypeMaster() {
-        return mprEmployeeTypeMaster;
-    }
-
-    public void setMprEmployeeTypeMaster(MprEmployeeTypeMaster mprEmployeeTypeMaster) {
-        this.mprEmployeeTypeMaster = mprEmployeeTypeMaster;
-    }
 
     public JobtypeMaster getJobtypeMaster() {
         return jobtypeMaster;
@@ -122,6 +103,7 @@ public class MprMaster implements java.io.Serializable {
     public void setBudget(Integer budget) {
         this.budget = budget;
     }
+
 
     public String getExperience() {
         return experience;

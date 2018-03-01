@@ -1006,8 +1006,6 @@
         <property name="recruitmentValidator" ref="recruitmentValidator1"/>
         <property name="MprValidator" ref="mprValidator1"/>
         <property name="mprMasterService" ref="mprMasterService1"/>
-        <property name="mprEmployeeTypeMasterService" ref="mprEmployeeTypeMasterService1"/>
-        <property name="mprEmployeeCategoryService" ref="mprEmployeeCategoryService1"/>
         <property name="designationMasterService" ref="designationMasterService1"/>
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
         <property name="mprApprovalService" ref="mprApprovalService1"/>

@@ -51,8 +51,6 @@ public class RecruitmentAbstract extends CustomAbstract {
     protected Validator recruitmentValidator;
     protected Validator mprValidator;
     protected MprMasterService<MprMaster> mprMasterService;
-    protected MprEmployeeTypeMasterService<MprEmployeeTypeMaster> mprEmployeeTypeMasterService;
-    protected MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService;
     protected DesignationMasterService<DesignationMaster> designationMasterService;
     protected CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService;
     protected MprApprovalService<MprApproval> mprApprovalService;
@@ -74,21 +72,6 @@ public class RecruitmentAbstract extends CustomAbstract {
         this.mprMasterService = mprMasterService;
     }
 
-    public MprEmployeeTypeMasterService<MprEmployeeTypeMaster> getMprEmployeeTypeMasterService() {
-        return mprEmployeeTypeMasterService;
-    }
-
-    public void setMprEmployeeTypeMasterService(MprEmployeeTypeMasterService<MprEmployeeTypeMaster> mprEmployeeTypeMasterService) {
-        this.mprEmployeeTypeMasterService = mprEmployeeTypeMasterService;
-    }
-
-    public MprEmployeeCategoryService<MprEmployeeCategory> getMprEmployeeCategoryService() {
-        return mprEmployeeCategoryService;
-    }
-
-    public void setMprEmployeeCategoryService(MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService) {
-        this.mprEmployeeCategoryService = mprEmployeeCategoryService;
-    }
 
     public Validator getRecruitmentValidator() {
         return recruitmentValidator;
@@ -230,29 +213,6 @@ public class RecruitmentAbstract extends CustomAbstract {
         request.setAttribute("desigList", dn);
     }
 
-    protected void employeecategoryList(HttpServletRequest request) {
-        MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
-        List<?> categoryList = mprEmployeeCategoryService.read();
-        Map<Integer, String> en = new HashMap<>();
-        for (Object o : categoryList) {
-            mprEmployeeCategory = (MprEmployeeCategory) o;
-            en.put(mprEmployeeCategory.getId(), mprEmployeeCategory.getEmployeeCategory());
-        }
-
-        request.setAttribute("categoryList", en);
-    }
-
-    protected void employeeTypeList(HttpServletRequest request) {
-        MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
-        List<?> employeeTypeList = mprEmployeeTypeMasterService.read();
-        Map<Integer, String> et = new HashMap<>();
-        for (Object o : employeeTypeList) {
-            employeeTypeMaster = (MprEmployeeTypeMaster) o;
-            et.put(employeeTypeMaster.getId(), employeeTypeMaster.getEmployeeType());
-        }
-
-        request.setAttribute("emptypeList", et);
-    }
 
     public void selectMPRBudget(HttpServletRequest request,
             HttpServletResponse response) throws Exception {

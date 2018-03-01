@@ -29,10 +29,6 @@ public class MprValidator implements Validator{
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "departmentMaster.id",
                 "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mprEmployeeCategory.id",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mprEmployeeTypeMaster.id",
-                "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "jobtypeMaster.id",
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name",

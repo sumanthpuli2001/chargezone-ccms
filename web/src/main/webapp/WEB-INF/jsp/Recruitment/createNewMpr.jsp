@@ -108,7 +108,7 @@
                                                                 <c:if test="${list[5] == 2}"><td><span class="label label-warning">Recycled</span></td></c:if>
                                                                 <c:if test="${list[5] == 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
                                                                     <td>
-                                                                    <c:if test="${list[5] == 0}">
+                                                                    <c:if test="${list[5] == 0 || list[5] == 2}">
                                                                         <div class="btn-group">
                                                                             <button  type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                                 &nbsp;&nbsp;Edit

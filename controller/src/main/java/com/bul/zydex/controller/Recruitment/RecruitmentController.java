@@ -342,7 +342,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         String id = request.getParameter("id");
         mprMaster = mprMasterService.readById(Integer.parseInt(id));
         mv.getModelMap().put("mprMaster", mprMaster);
-        mv.setViewName("Recruitment/budgetCreateDetail");
+        mv.setViewName("Recruitment/MprEditSubmit");
         return mv;
     }
 

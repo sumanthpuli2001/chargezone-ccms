@@ -77,8 +77,26 @@
         <property name="lunaPlantAttendanceMgnt" type="java.lang.Boolean">
             <column name="luna_plant_Attendance_mgnt" />
         </property>
-        <property name="gavasatPlantAttendanceMgnt" type="java.lang.Boolean">
-            <column name="gavasat_plant_Attendance_mgnt" />
+        <property name="mpr" type="java.lang.Boolean">
+            <column name="mpr" />
+        </property>
+        <property name="budget" type="java.lang.Boolean">
+            <column name="budget" />
+        </property>
+        <property name="vacancy" type="java.lang.Boolean">
+            <column name="vacancy" />
+        </property>
+        <property name="assessmentReview" type="java.lang.Boolean">
+            <column name="assessment_review" />
+        </property>
+        <property name="faceTofaceInterview" type="java.lang.Boolean">
+            <column name="face_to_face_interview" />
+        </property>
+        <property name="candidateInduction" type="java.lang.Boolean">
+            <column name="candidate_induction" />
+        </property>
+        <property name="candidateList" type="java.lang.Boolean">
+            <column name="candidate_list" />
         </property>
     </class>
 </hibernate-mapping>

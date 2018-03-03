@@ -84,7 +84,7 @@
                                                                     <th style="width: 50px;">Department Name</th>
                                                                     <th style="width: 50px;">Job Type</th>
                                                                     <th style="width: 50px;">Budget</th>
-                                                                    <th style="width: 50px;">Date</th>
+                                                                    <!--<th style="width: 50px;">Date</th>-->
                                                                         <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <th style="width: 50px;">Action</th>
                                                                         <%--</c:if>--%>
@@ -100,11 +100,11 @@
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
+                                                                <td>${list[3]}</td>
                                                                 <td>${list[4]}</td>
                                                                 <td>${list[5]}</td>
-                                                                <td>${list[6]}</td>
                                                                 <td>${list[2]}</td>
-                                                                <td>${list[3]}</td>
+                                                                <!--<td>${list[3]}</td>-->
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>
                                                                     <div class="btn-group">

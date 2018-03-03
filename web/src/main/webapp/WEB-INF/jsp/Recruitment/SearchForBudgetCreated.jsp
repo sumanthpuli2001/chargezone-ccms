@@ -80,7 +80,7 @@
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">Budget</th>
                                                                     <th style="width: 50px;">Number Of Position</th>
-                                                                    <th style="width: 50px;">Date</th>
+                                                                    <!--<th style="width: 50px;">Date</th>-->
                                                                     <th style="width: 50px;">Location</th>
                                                                     <th style="width: 50px;">Department</th>
                                                                     <th style="width: 50px;">job Type</th>
@@ -101,10 +101,10 @@
                                                                 <!--<td>/</td>-->
                                                                 <td>${list[2]}</td>
                                                                 <td>${list[1]}</td>
+                                                                <!--<td>${list[3]}</td>-->
                                                                 <td>${list[3]}</td>
                                                                 <td>${list[4]}</td>
                                                                 <td>${list[5]}</td>
-                                                                <td>${list[6]}</td>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>
                                                                     <div class="btn-group">

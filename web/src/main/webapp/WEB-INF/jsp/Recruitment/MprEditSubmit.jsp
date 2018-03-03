@@ -84,24 +84,6 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Employee Category:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="mprEmployeeCategory.id" id="mprEmployeeCategory" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${categoryList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="mprEmployeeCategory.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Employee Type:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="mprEmployeeTypeMaster.id" id="mprEmployeeTypeMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${emptypeList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="mprEmployeeTypeMaster.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
                                                         <label>Vacancy Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="name" class="form-control" placeholder="Name"></form:input>
                                                     <form:errors path="name" cssClass="errorDiv"></form:errors>

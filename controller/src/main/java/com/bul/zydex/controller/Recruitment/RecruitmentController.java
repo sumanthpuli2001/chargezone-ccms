@@ -16,6 +16,8 @@ import com.bul.zydex.model.MprEmployeeTypeMaster;
 import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.QulificationMaster;
 import com.bul.zydex.model.RecruitmentMaster;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 //import com.bul.zydex.model.RecruitmentMaster;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +37,7 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         ModelAndView mv = new ModelAndView();
         RecruitmentMaster recruitmentMaster = new RecruitmentMaster();
+
         List<?> recruitmentMasterList = recruitmentService.readBudgetDetail();
         mv.getModelMap().put("list", recruitmentMasterList);
         mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
@@ -61,18 +64,24 @@ public class RecruitmentController extends RecruitmentAbstract {
         DepartmentMaster departmentMaster = new DepartmentMaster();
         LocationMaster locationMaster = new LocationMaster();
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
+        DesignationMaster designationMaster = new DesignationMaster();
+
         if (recruitmentMaster.getId() != null) {
             recruitmentMaster = recruitmentService.readById(recruitmentMaster.getId());
             recruitmentMaster.setLocationMaster(recruitmentMaster.getLocationMaster());
             recruitmentMaster.setDepartmentMaster(recruitmentMaster.getDepartmentMaster());
+            recruitmentMaster.setDesignationMaster(recruitmentMaster.getDesignationMaster());
             recruitmentMaster.setJobtypeMaster(recruitmentMaster.getJobtypeMaster());
         } else {
             recruitmentMaster.setLocationMaster(new LocationMaster());
             recruitmentMaster.setDepartmentMaster(new DepartmentMaster());
             recruitmentMaster.setJobtypeMaster(new JobtypeMaster());
+            recruitmentMaster.setDesignationMaster(new DesignationMaster());
         }
 //        selectBudget(request, response);
         departmentList(request);
+        designationList(request);
+
         Map<Integer, String> locationMap = readLocations();
         Map<Integer, String> jobtype1 = jobtypeList();
         mv.addObject("locationMap", locationMap);
@@ -80,8 +89,10 @@ public class RecruitmentController extends RecruitmentAbstract {
         recruitmentMaster.setDepartmentMaster(new DepartmentMaster());
         recruitmentMaster.setLocationMaster(new LocationMaster());
         recruitmentMaster.setJobtypeMaster(new JobtypeMaster());
+        recruitmentMaster.setDesignationMaster(new DesignationMaster());
         mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
         mv.getModelMap().put("departmentMaster", departmentMaster);
+        mv.getModelMap().put("designationMaster", designationMaster);
         mv.getModelMap().put("locationMaster", locationMaster);
         mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
         mv.setViewName("Recruitment/CreateNewBudget");
@@ -97,6 +108,9 @@ public class RecruitmentController extends RecruitmentAbstract {
         BindException errors = new BindException(recruitmentMaster, "recruitmentMaster");
         bind(request, recruitmentMaster);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+        recruitmentMaster.setCreatedDate(sdf.format(cDate));
 //        selectBudget(request, response);
         departmentList(request);
 
@@ -203,18 +217,18 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         recruitmentMaster = recruitmentService.readById(Integer.parseInt(id));
         int jobtype = recruitmentMaster.getJobtypeMaster().getId();
-        jobtypeMaster=jobtypeMasterService.readById(jobtype);
+        jobtypeMaster = jobtypeMasterService.readById(jobtype);
         mprMaster.setJobtypeMaster(jobtypeMaster);
-        
+
         int department = recruitmentMaster.getDepartmentMaster().getId();
         departmentMaster = departmentMasterService.readById(department);
         mprMaster.setDepartmentMaster(departmentMaster);
-        
+
         int location = recruitmentMaster.getLocationMaster().getId();
         locationMaster = locationMasterService.readById(location);
         mprMaster.setLocationMaster(locationMaster);
 
-        int position =recruitmentMaster.getNumberOfPosition();
+        int position = recruitmentMaster.getNumberOfPosition();
         mprMaster.setNumberOfPosition(position);
 //        selectMPRBudget(request, response);
         departmentList(request);
@@ -315,7 +329,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         String id = request.getParameter("id");
         mprMaster = mprMasterService.readById(Integer.parseInt(id));
         mv.getModelMap().put("mprMaster", mprMaster);
-        mv.setViewName("Recruitment/MprEditSubmit");
+        mv.setViewName("Recruitment/budgetCreateDetail");
         return mv;
     }
 
@@ -336,6 +350,8 @@ public class RecruitmentController extends RecruitmentAbstract {
         return mv;
     }
 
+    ///////////  MPP Edit -------------
+
     public ModelAndView editMppRClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -344,7 +360,12 @@ public class RecruitmentController extends RecruitmentAbstract {
         LocationMaster locationMaster = new LocationMaster();
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+        recruitmentMaster.setCreatedDate(sdf.format(cDate));
+
         departmentList(request);
+        designationList(request);
         Map<Integer, String> locationMap = readLocations();
         Map<Integer, String> jobtype1 = jobtypeList();
         mv.addObject("locationMap", locationMap);
@@ -372,6 +393,9 @@ public class RecruitmentController extends RecruitmentAbstract {
                     "Error :  not valid.");
             mv.addAllObjects(errors.getModel());
         } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date cDate = new Date();
+            recruitmentMaster.setUpdatedDate(sdf.format(cDate));
             recruitmentService.update(recruitmentMaster);
 //            log(request, ActionType.UPDATE.toString(),
 //                    "The Professional Tax is Updated -."
@@ -544,25 +568,22 @@ public class RecruitmentController extends RecruitmentAbstract {
         mprMaster.setJobtypeMaster(new JobtypeMaster());
         mprMaster.setDesignationMaster(new DesignationMaster());
         String id = request.getParameter("id");
-        
+
         recruitmentMaster = recruitmentService.readById(Integer.parseInt(id));
-        
+
         int jobtypeId = recruitmentMaster.getJobtypeMaster().getId();
         jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
         String jobtypeNAme = jobtypeMaster.getJobTypeName();
-        
+
         int department = recruitmentMaster.getDepartmentMaster().getId();
         departmentMaster = departmentMasterService.readById(department);
         String departmentName = departmentMaster.getDepartmentName();
-        
+
         int localtion = recruitmentMaster.getLocationMaster().getId();
         locationMaster = locationMasterService.readById(localtion);
         String locationName = locationMaster.getLocation();
-        
+
         int position = recruitmentMaster.getNumberOfPosition();
-        
-     
-             
 
         mv.getModelMap().put("mprMaster", mprMaster);
         mv.getModelMap().put("departmentMaster", departmentMaster);

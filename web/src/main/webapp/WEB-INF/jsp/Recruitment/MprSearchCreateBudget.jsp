@@ -114,7 +114,7 @@
                                                     <form:errors path="budget" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>Designation:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Job Role:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:select path="designationMaster.id" id="designationMaster" class="form-control">
                                                         <form:option value="" label="-- Select --" />
                                                         <form:options items="${desigList}"></form:options>

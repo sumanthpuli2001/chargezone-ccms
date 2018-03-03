@@ -1335,6 +1335,11 @@
                                                     </table>
                                                 </div>
                                             </div>
+                                            <div class="col-md-12 col-sm-12">
+                                                    <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:textarea  path="jobDescription" id="editor"></form:textarea>
+                                                    <form:errors path="jobDescription" cssClass="errorDiv"/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1954,7 +1959,17 @@
                 }
             }
         }</script>
+ 
+    
+    <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
+    <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
+    <!--<link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/css/samples.css">-->
+    <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+    <script>
+        initSample();
 
+
+    </script>
 
 </html>
 

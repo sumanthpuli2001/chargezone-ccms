@@ -23,7 +23,7 @@
                         + "<td id=\"policyTd" + tempCount3 + "\"><div><input type=\"text\" id='policyId" + tempCount3 + "' name='policyId" + tempCount3 + "' class=\"form-control\" >"
                         + "</select>"
                         + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
-                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "' value=" + tempCount3 + " readonly=\"true\" class=\"form-control\"></td>"
 //                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "'  min=\"0\" class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
@@ -34,7 +34,7 @@
                 $("#policyTable").append(clone);
 //                $("#policyTable").addClass(token-input-input-token);
                 document.getElementById('policyCount').value = tempCount3;
-                jQuery("#policyId"+tempCount3).tokenInput(${list}, {
+                jQuery("#policyId" + tempCount3).tokenInput(${list}, {
                     preventDuplicates: true,
                     noResultsText: "No Result",
                     tokenLimit: "1",
@@ -98,60 +98,24 @@
                                     <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
                                 </c:if>
                                 <form:form class="form-horizontal" method="post"
-                                           commandName="employeeMaster" action="approval.htm?act=approvalSubmit">
+                                           commandName="approvalMaster" action="approval.htm?act=submitApproval" onsubmit="return saveSubmit()" >
                                     <form:hidden path="id"></form:hidden>
-                                        <div class="col-sm-6"><span style="color: red;font-size: 12px;"></span>
-                                            <label>Employee Name:<span style="color: red;font-size: 12px;"></span></label>
-                                            <form:input path="employeeName" class="form-control"></form:input>
-                                            <form:errors path="employeeName" cssClass="errorDiv"></form:errors>
+                                        <div class="col-sm-4"><span style="color: red;font-size: 12px;"></span>
+                                            <label>Approval Name:<span style="color: red;font-size: 12px;"></span></label>
+                                            <input name="name" id ="name" class="form-control" required></input>
+                                            <span  id="monthError" cssClass="errorDiv"></span>
                                         </div>
 
-                                        <div class="form-group">
-                                            <div class="col-sm-3">
-                                                <label class="control-label"> * Approval Setting Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                            </div>
-                                            <div class="col-sm-6">
-                                            <%--<form:input path="name" class="form-control"  placeholder="Name"  maxlength="20"/>--%>
-                                            <%--<form:errors path="name" cssClass="errorDiv"/>--%>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label"> * Add User :<span style="color: red;font-size: 12px;">*</span> </label>
-                                        </div>
+
+                                        <!--                                    <div class="form-group">
+                                                                                <div class="col-sm-3">
+                                                                                    <label class="control-label"> * Add User :<span style="color: red;font-size: 12px;">*</span> </label>
+                                                                                </div>-->
 
                                         <div class="form-group">
-                                            <!--                                            <div class="col-sm-6">
-                                                                                            <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                                                                <tr>
-                                                                                                    <th style="text-align: center;width: 6%;">Sr No.</th>
-                                                                                                    <th style="text-align: center">User Name <span style="color: red;font-size: 12px;">*</span></th>
-                                                                                                    <th style="text-align: center">Level <span style="color: red;font-size: 12px;">*</span></th>
-                                                                                                    <th style="text-align: center">Add New<span style="color: red;font-size: 12px;">*</span></th>
-                                                                                                <input type="hidden" name="userCount" id="userCount" value="1">
-                                                                                                </tr>
-                                                                                                <tr>
-                                                                                                <input type="hidden" name="countId" id="countId" value="1">
-                                                                                                <td style="text-align: center">1</td>
-                                                                                                <td>
-                                            <%--<form:input path="employeeName" class="form-control"></form:input>--%>
-                                            <input type="Text" name="name" id="leave" value="1" class="form-control">
-                                                <span id="userNameError1" style="color: red;"></span>
-                                            </td>
-                                            <td><input type="Text" name="fromLocation1" id="leave" value="1" class="form-control">
-                                                <span id="leaveError1" style="color: red;"></span>
-                                            </td>
-                                            <td style="text-align: center">
-                                                <span style='margin-top: 5px;' class="col-sm-1">
-                                                    <input type="button" value="+" id="addUser" />
-                                                </span>
-                                            </td>
-                                            </tr>
-                                        </table>
-                                    </div>-->
-                                            <div class="col-md-12 col-sm-12">
+                                            <div class="col-md-8 col-sm-8">
                                                 <div class="table-responsive">
-                                                    <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                    <table id="policyTable" class="table table-bordered table-striped table-hover" style="margin-top: 10px" align="Center"  >
                                                         <tr>
                                                             <!--<th style="text-align: center; vertical-align: middle;width: 5%"></th>-->
                                                             <th style="text-align: center; vertical-align: middle">User Name</th>
@@ -163,58 +127,89 @@
                                                         <tr>
                                                             <!--<td style="text-align: center"></td>-->
                                                             <td id="policyTd1"><div>
-                                                                    <input type="text" name="policyId1" id="policyId1" class="form-control">
-                                                                    <%--<form:errors path="employeeMaster.id" cssClass="errorDiv"></form:errors>--%>
+                                                                    <input type="text" name="policyId1" id="policyId1" class="form-control"/>
+                                                                    <errors id="policyerror" cssClass="errorDiv"></errors>
+                                                                    <!--                                                                <select  name="policyId1" id="policyId1" class="form-control">
+                                                                                                                                        <option value="" label="-- Select --"></option>
+                                                                                                                                        <options items="${policyId1}"></options>
+                                                                                                                                    </select>-->
+                                                            </div>
+                                                            <span id="policyError1" style="color: red;"></span>
+                                                        </td>
+                                                        <td style="text-align: center">
+                                                            <input type="text"  name="policyNumber1" id="policyNumber1" value="1" readonly="true"class="form-control">
+                                                        </td>
 
-                                                                </div>
-                                                                <span id="policyError1" style="color: red;"></span>
-                                                            </td>
-                                                            <td style="text-align: center">
-                                                                <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control">
-                                                            </td>
-
-                                                            <td style="text-align: center">
-                                                                <span style='margin-top: 5px;'>
-                                                                    <input type="button" value="+" id="policyCloneid" />
-                                                                </span>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
+                                                        <td style="text-align: center">
+                                                            <span style='margin-top: 5px;'>
+                                                                <input type="button" value="+" id="policyCloneid" />
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-6 col-sm-offset-5">
-                                            <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                        <div class="form-group">
+                                            <div class="col-sm-6 col-sm-offset-5">
+                                                <input type="submit" class="btn btn-primary" style="width: 100px;"   title="" value="SUBMIT">
+                                            </div>
+                                            <!--                                        <div class=" col-sm-offset-2 col-sm-3 ">
+                                                                                        <button type="button" class="btn btn-danger" data-original-title="" title="" onclick="window.location = 'departmentMaster.htm?act=showList'">Cancel</button>
+                                                                                    </div>-->
                                         </div>
-                                        <!--                                        <div class=" col-sm-offset-2 col-sm-3 ">
-                                                                                    <button type="button" class="btn btn-danger" data-original-title="" title="" onclick="window.location = 'departmentMaster.htm?act=showList'">Cancel</button>
-                                                                                </div>-->
                                     </div>
-                                </form:form>
-                            </div><!-- /.tab-pane -->
-                        </div><!-- /.tab-content -->
-                    </div><!-- nav-tabs-custom -->
-                </div><!-- /.col -->
-            </div>
-        </section>
+                                </div>
+                                <!--                                    <div class="form-group">
+                                                                        <div class="col-sm-6 col-sm-offset-5">
+                                                                            <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                                                        </div>
+                                                                                                                <div class=" col-sm-offset-2 col-sm-3 ">
+                                                                                                                    <button type="button" class="btn btn-danger" data-original-title="" title="" onclick="window.location = 'departmentMaster.htm?act=showList'">Cancel</button>
+                                                                                                                </div>
+                                                                    </div>-->
+                            </form:form>
+                        </div><!-- /.tab-pane -->
+                    </div><!-- /.tab-content -->
+                </div><!-- nav-tabs-custom -->
+            </div><!-- /.col -->
     </div>
-    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-    <script>
-        jQuery.noConflict();
-        jQuery(document).ready(function () {
+</section>
+</div>
+<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+<script>
+    jQuery.noConflict();
+    jQuery(document).ready(function () {
 
-            jQuery("#policyId1").tokenInput(${list}, {
-                preventDuplicates: true,
-                noResultsText: "No Result",
-                tokenLimit: "1",
-                searchingText: "Searching ... .. .",
-                prePopulate: ${preList}
-            });
+        jQuery("#policyId1").tokenInput(${list}, {
+            preventDuplicates: true,
+            noResultsText: "No Result",
+            tokenLimit: "1",
+            searchingText: "Searching ... .. .",
+            prePopulate: ${preList}
         });
+    });
 
-    </script>
+</script>
+<script>
+    var flag3 = true;
+    function saveSubmit() {
+//        if (document.getElementById("name").value === "") {
+//
+//            document.getElementById("monthError").innerHTML = "- It must be filled.";
+//            flag3 = false;
+//        }
+//            alert(document.getElementById("month").value);
+        if (document.getElementById("policyId1").value === "") {
 
-    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+            document.getElementById("policyerror").innerHTML = "- It must be filled.";
+            flag3 = false;
+        }
+        else {
+            return true;
+        }
+        return false;
+    }
+</script>
+
+<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

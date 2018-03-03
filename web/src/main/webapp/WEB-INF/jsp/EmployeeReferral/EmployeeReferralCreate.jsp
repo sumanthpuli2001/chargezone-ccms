@@ -74,7 +74,7 @@
 
                         <div class="tab-content">
 
-                            <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
+                           
                             <c:if test="${!empty successMessage}">
                                 <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
                             </c:if>

@@ -968,20 +968,20 @@
                                                         <div class="col-sm-3">
                                                             <label>Odd Punch Required:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset>
-                                                                <form:radiobutton path="oddPunch" value="false"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="oddPunch" value="false"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <form:radiobutton path="oddPunch" value="true"/>YES
-                                                            </fieldset>
-                                                        </div>
+                                                        </fieldset>
                                                     </div>
-                                                    <div class="col-md-12 col-sm-12">
-                                                        <div class="table-responsive">
-                                                            <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                                <tr>
-                                                                    <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                                    <th style="text-align: center; vertical-align: middle">Select Policy</th>
-                                                                    <th style="text-align: center; vertical-align: middle">Policy Number</th>
-                                                                    <th style="text-align: center; vertical-align: middle">Amount</th>
-                                                                    <th style="text-align: center; vertical-align: middle">Add New</th>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="table-responsive">
+                                                        <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                            <tr>
+                                                                <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
+                                                                <th style="text-align: center; vertical-align: middle">Select Policy</th>
+                                                                <th style="text-align: center; vertical-align: middle">Policy Number</th>
+                                                                <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                <th style="text-align: center; vertical-align: middle">Add New</th>
                                                                     <c:choose>
                                                                         <c:when test="${not empty finalPolicyList}">
                                                                     <input type="hidden" name="policyCount" id="policyCount"  value="${fn:length(finalPolicyList)}"/>
@@ -1220,440 +1220,456 @@
                                                 </c:forEach>
 
                                             </div>
-
-                                            <div class="form-group">
-                                                <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center">
-                                                    <tr>
-                                                        <th style="text-align: center;width:55px">Sr No.</th>
-                                                        <th style="text-align: center;">Certificate Attach</th>
-                                                        <th style="text-align: center;width:55px"></th>
-                                                    </tr>
-                                                    <input type="hidden" name="firstStepCount" id="firstStepCount" value="1">
-                                                    <tr id="cloneTr_Id">
-                                                        <td style="text-align: center">1</td>
-                                                        <td>
-                                                            <input type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png" onchange="checkCertificateFileSize(1);">
-                                                            <span style="font-size: 14px; color: red;" id="certificateError"></span>
-                                                        </td>
-                                                        <td style="text-align: center"><span style='margin-top: 5px;'>
-                                                                <input type="button" value="+" id="step1cloneid" />  </span>
-                                                        </td>
-                                                    </tr>
-                                                </table>
+                                            <div class="box-body no-padding">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center">
+                                                                <tr>
+                                                                    <th style="text-align: center;width:55px">Sr No.</th>
+                                                                    <th style="text-align: center;">Certificate Attach</th>
+                                                                    <th style="text-align: center;width:55px"></th>
+                                                                </tr>
+                                                                <input type="hidden" name="firstStepCount" id="firstStepCount" value="1">
+                                                                <tr id="cloneTr_Id">
+                                                                    <td style="text-align: center">1</td>
+                                                                    <td>
+                                                                        <input type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png" onchange="checkCertificateFileSize(1);">
+                                                                        <span style="font-size: 14px; color: red;" id="certificateError"></span>
+                                                                    </td>
+                                                                    <td style="text-align: center"><span style='margin-top: 5px;'>
+                                                                            <input type="button" value="+" id="step1cloneid" />  </span>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div></div>
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:textarea  path="jobDescription" id="editor"></form:textarea>
+                                                            <form:errors path="jobDescription" cssClass="errorDiv"/>
+                                                        </div>
+                                                        </div></div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+
+                                        <c:if test="${!(employeeMaster.employeeName eq  'Admin')}">
+                                            <div class="form-group">
+                                                <div class=" col-sm-12" style="text-align: center;">
+                                                    <button type="submit" class="btn btn-primary" data-original-title="" title="" style="width: 100px;">SUBMIT</button>
+                                                </div>
+                                            </div>
+                                        </c:if>
                                     </div>
+
                                 </div>
+
+
+                                <div class="tab-pane" id="tab_3"></div>
                             </div>
-
-                            <c:if test="${!(employeeMaster.employeeName eq  'Admin')}">
-                                <div class="form-group">
-                                    <div class=" col-sm-12" style="text-align: center;">
-                                        <button type="submit" class="btn btn-primary" data-original-title="" title="" style="width: 100px;">SUBMIT</button>
-                                    </div>
-                                </div>
-                            </c:if>
-                        </div>
-
-                    </div>
-
-
-                    <div class="tab-pane" id="tab_3"></div>
-                </div>
-        </div>
+<!--                        </div>
+                    </div>-->
+            </section>
+        </form:form>
     </div>
-</section>
-</form:form>
-</div>
-<script type="text/javascript">
-    $('.date_of_transfer').datetimepicker({
-        //language:  'fr',
-        weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        forceParse: 0
-    });
-</script>
-<script type="text/javascript">
-    $('.form_datetime').datetimepicker({
-        //language:  'fr',
-        weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        forceParse: 0
-    });</script>
-
-<script type="text/javascript">
-    var dt = new Date();
-    dt.setFullYear(new Date().getFullYear() - 18);
-    var dt1 = new Date();
-    dt1.setFullYear(new Date().getFullYear() - 100);
-    $('.form_datetime_dob').datetimepicker({
-        //language:  'fr',
-        weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        startDate: dt1,
-        endDate: dt,
-        forceParse: 0
-    });</script>
-
-<script type="text/javascript">
-    var dt = new Date();
-    dt.setFullYear(new Date().getFullYear() - 10);
-    var dt1 = new Date();
-    dt1.setFullYear(new Date().getFullYear() + 10);
-    $('.form_datetime_passport_issue').datetimepicker({
-        //language:  'fr',
-        weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        startDate: dt,
-        endDate: dt1,
-        forceParse: 0
-    });</script>
-
-<script type="text/javascript">
-    var dt = new Date();
-    var dt1 = new Date();
-    dt1.setFullYear(new Date().getFullYear() + 10);
-    $('.form_datetime_passport_expiry').datetimepicker({
-        //language:  'fr',
-        weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        startDate: dt,
-        endDate: dt1,
-        forceParse: 0
-    });</script>
-
-<script>
-    jQuery.noConflict();
-    jQuery(document).ready(function () {
-        jQuery("#reportingManagerLevel1").tokenInput(${list}, {
-            preventDuplicates: true,
-            noResultsText: "No Result",
-            tokenLimit: "1",
-            searchingText: "Searching ... .. .",
-            prePopulate: ${preList}
+    <script type="text/javascript">
+        $('.date_of_transfer').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
         });
-    });
-    jQuery(document).ready(function () {
-        reportingLevelSet();
-        if ($('#mriStatus').val() === "Married") {
-            $("#hideInfo1").show(500);
-            $("#hideInfo2").show(500);
-            $("#otherMaritalStatusId").hide(500);
-        } else {
+    </script>
+    <script type="text/javascript">
+        $('.form_datetime').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });</script>
 
-            $("#hideInfo1").hide(500);
-            $("#hideInfo2").hide(500);
-            $("#otherMaritalStatusId").hide(500);
-        }
-        if ($('#mriStatus').val() === "Other") {
-            $("#hideInfo1").hide(500);
-            $("#hideInfo2").hide(500);
-            $("#otherMaritalStatusId").show(500);
-        }
-    }); //when document loaded it loads based on erlier reporting manager
-    function reportingLevelSet() {
+    <script type="text/javascript">
+        var dt = new Date();
+        dt.setFullYear(new Date().getFullYear() - 18);
+        var dt1 = new Date();
+        dt1.setFullYear(new Date().getFullYear() - 100);
+        $('.form_datetime_dob').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            startDate: dt1,
+            endDate: dt,
+            forceParse: 0
+        });</script>
 
-        var level = document.getElementById("reportingManagerLevel1").value;
+    <script type="text/javascript">
+        var dt = new Date();
+        dt.setFullYear(new Date().getFullYear() - 10);
+        var dt1 = new Date();
+        dt1.setFullYear(new Date().getFullYear() + 10);
+        $('.form_datetime_passport_issue').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            startDate: dt,
+            endDate: dt1,
+            forceParse: 0
+        });</script>
 
-        if (level != null && level != '') {
-            $.ajax({
-                url: 'employeeMaster.htm?act=readReportingHierarchy&id=' + level,
-                type: 'GET',
-                success: function (result) {
-                    var array = result.split("~");
-                    //blank whole fields before put new data
-                    document.getElementById("reportingManagerLevel2").value = '';
-                    document.getElementById("reportingManagerLevel3").value = '';
-                    document.getElementById("reportingManagerLevel4").value = '';
-                    document.getElementById("reportingManagerLevel5").value = '';
-                    document.getElementById("reportingManagerLevel6").value = '';
-                    document.getElementById("reportingManagerLevel2Name").value = '';
-                    document.getElementById("reportingManagerLevel3Name").value = '';
-                    document.getElementById("reportingManagerLevel4Name").value = '';
-                    document.getElementById("reportingManagerLevel5Name").value = '';
-                    document.getElementById("reportingManagerLevel6Name").value = '';
-                    document.getElementById("reportingManagerLevel2").value = array[0];
-                    document.getElementById("reportingManagerLevel3").value = array[1];
-                    document.getElementById("reportingManagerLevel4").value = array[2];
-//this conditions checks for level 5 and level 6 if these are empty then set conditional values(for id in databese)
-                    if ((array[4] == "" || array[4] == null) && (array[5] == "" || array[5] == null)) {
-                        if (array[2] == "" || array[2] == null) {
-                            document.getElementById("reportingManagerLevel6").value = level;
-                        } else {
-                            document.getElementById("reportingManagerLevel5").value = level;
-                            document.getElementById("reportingManagerLevel6").value = array[2];
-                        }
-                    } else {
-                        if (array[4] == "" || array[4] == null) {
-                            document.getElementById("reportingManagerLevel5").value = level;
-                        } else {
-                            document.getElementById("reportingManagerLevel5").value = array[4];
-                        }
-                        document.getElementById("reportingManagerLevel6").value = array[5];
-                    }
-                    document.getElementById("reportingManagerLevel2Name").value = array[6];
-                    document.getElementById("reportingManagerLevel3Name").value = array[7];
-                    document.getElementById("reportingManagerLevel4Name").value = array[8];
-//this conditions checks for level 5 and level 6 if these are empty then set conditional values(for values display on jsp)
-                    if ((array[10] == "" || array[10] == null) && (array[11] == "" || array[11] == null)) {
-                        if (array[6] == "" || array[6] == null) {
-                            document.getElementById("reportingManagerLevel6Name").value = array[12];
-                            //array[12] is for employee name reporting manager.
-                        } else {
-                            document.getElementById("reportingManagerLevel5Name").value = array[12];
-                            document.getElementById("reportingManagerLevel6Name").value = array[6];
-                        }
-                    } else {
-                        if (array[10] == "" || array[10] == null) {
-                            document.getElementById("reportingManagerLevel5Name").value = array[12];
-                        } else {
-                            document.getElementById("reportingManagerLevel5Name").value = array[10];
-                        }
-                        document.getElementById("reportingManagerLevel6Name").value = array[11];
-                    }
-                }
+    <script type="text/javascript">
+        var dt = new Date();
+        var dt1 = new Date();
+        dt1.setFullYear(new Date().getFullYear() + 10);
+        $('.form_datetime_passport_expiry').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            startDate: dt,
+            endDate: dt1,
+            forceParse: 0
+        });</script>
+
+    <script>
+        jQuery.noConflict();
+        jQuery(document).ready(function () {
+            jQuery("#reportingManagerLevel1").tokenInput(${list}, {
+                preventDuplicates: true,
+                noResultsText: "No Result",
+                tokenLimit: "1",
+                searchingText: "Searching ... .. .",
+                prePopulate: ${preList}
             });
-        }
-    }
-
-    //this script is comented because only first level reporting manager is only required.
-//        jQuery(document).ready(function () {
-//            jQuery("#reportingManagerLevel2").tokenInput(${list}, {
-//                preventDuplicates: true,
-//                noResultsText: "No Result",
-//                tokenLimit: "1",
-//                searchingText: "Searching ... .. .",
-//                prePopulate: ${preList2}
-//            });
-//        });
-//        jQuery(document).ready(function () {
-//            jQuery("#reportingManagerLevel3").tokenInput(${list}, {
-//                preventDuplicates: true,
-//                noResultsText: "No Result",
-//                tokenLimit: "1",
-//                searchingText: "Searching ... .. .",
-//                prePopulate: ${preList3}
-//            });
-//        });
-//        jQuery(document).ready(function () {
-//            jQuery("#reportingManagerLevel4").tokenInput(${list}, {
-//                preventDuplicates: true,
-//                noResultsText: "No Result",
-//                tokenLimit: "1",
-//                searchingText: "Searching ... .. .",
-//                prePopulate: ${preList4}
-//            });
-//        });
-//        jQuery(document).ready(function () {
-//            jQuery("#reportingManagerLevel5").tokenInput(${list}, {
-//                preventDuplicates: true,
-//                noResultsText: "No Result",
-//                tokenLimit: "1",
-//                searchingText: "Searching ... .. .",
-//                prePopulate: ${preList5}
-//            });
-//        });
-//        jQuery(document).ready(function () {
-//            jQuery("#reportingManagerLevel6").tokenInput(${list}, {
-//                preventDuplicates: true,
-//                noResultsText: "No Result",
-//                tokenLimit: "1",
-//                searchingText: "Searching ... .. .",
-//                prePopulate: ${preList6}
-//            });
-//        });
-</script>
-<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-<!--    <script>
-        $(document).ready(function () {
-            showHide();
         });
-        $("#levelMasterId").on('change', function () {
-            showHide();
-        });
-        $("#WorkTypeSelectId").on("change", function () {
-            shift();
-        });
-        function showHide() {
-            var textVal = $("#levelMasterId option:selected").text();
-            $('#levelIdDiv1').hide();
-            $('#levelIdDiv2').hide();
-            $('#levelIdDiv3').hide();
-            $('#levelIdDiv4').hide();
-            $('#levelIdDiv5').hide();
-            $('#levelIdDiv6').hide();
-            if (textVal === "Level 1") {
-                $('#levelIdDiv1').show();
-
-            } else if (textVal === "Level 2") {
-                $('#levelIdDiv1').show();
-                $('#levelIdDiv2').show();
-
-            } else if (textVal === "Level 3") {
-                $('#levelIdDiv1').show();
-                $('#levelIdDiv2').show();
-                $('#levelIdDiv3').show();
-
-            } else if (textVal === "Level 4") {
-                $('#levelIdDiv1').show();
-                $('#levelIdDiv2').show();
-                $('#levelIdDiv3').show();
-                $('#levelIdDiv4').show();
-
-            } else if (textVal === "Level 5") {
-                $('#levelIdDiv1').show();
-                $('#levelIdDiv2').show();
-                $('#levelIdDiv3').show();
-                $('#levelIdDiv4').show();
-                $('#levelIdDiv5').show();
-
-            } else if (textVal === "Level 6") {
-                $('#levelIdDiv1').show();
-                $('#levelIdDiv2').show();
-                $('#levelIdDiv3').show();
-                $('#levelIdDiv4').show();
-                $('#levelIdDiv5').show();
-                $('#levelIdDiv6').show();
-            }
-        }
-
-    </script>-->
-<script>
-    $(document).ready(function () {
-
-//            if ($('.checked input[name=maritalStatus]')) {
-
-//            }
-
-        if ($('#shiftType').find("option:selected")) {
-            if ($('#shiftType').find("option:selected").val() == "HourlyBase") {
-                $('#hourlyBaseTitleDiv').show();
-                $('#shiftNameDiv').hide();
-                $('#shiftRotationNameDiv').hide();
-                $('#shiftRotationDateDiv').hide();
-            } else if ($('#shiftType').find("option:selected").val() == "ShiftBase") {
-                $('#shiftNameDiv').show();
-                $('#shiftRotationNameDiv').show();
-                $('#shiftRotationDateDiv').show();
-                $('#hourlyBaseTitleDiv').hide();
+        jQuery(document).ready(function () {
+            reportingLevelSet();
+            if ($('#mriStatus').val() === "Married") {
+                $("#hideInfo1").show(500);
+                $("#hideInfo2").show(500);
+                $("#otherMaritalStatusId").hide(500);
             } else {
-                $('#hourlyBaseTitleDiv').hide();
-                $('#shiftNameDiv').hide();
-                $('#shiftRotationNameDiv').hide();
-                $('#shiftRotationDateDiv').hide();
+
+                $("#hideInfo1").hide(500);
+                $("#hideInfo2").hide(500);
+                $("#otherMaritalStatusId").hide(500);
             }
-        }
-//            });
+            if ($('#mriStatus').val() === "Other") {
+                $("#hideInfo1").hide(500);
+                $("#hideInfo2").hide(500);
+                $("#otherMaritalStatusId").show(500);
+            }
+        }); //when document loaded it loads based on erlier reporting manager
+        function reportingLevelSet() {
 
-    });
-    $('input[name=maritalStatus]').on('ifChecked', function (event) {
-        if (this.value === "Married") {
-            $("#hideInfo1").show(500);
-            $("#hideInfo2").show(500);
-            $("#otherMaritalStatusId").hide(500);
-        } else {
+            var level = document.getElementById("reportingManagerLevel1").value;
 
-            $("#hideInfo1").hide(500);
-            $("#hideInfo2").hide(500);
-            $("#otherMaritalStatusId").hide(500);
-        }
-        if (this.value === "Other") {
-            $("#hideInfo1").hide(500);
-            $("#hideInfo2").hide(500);
-            $("#otherMaritalStatusId").show(500);
-        }
-
-    });
-//        $('#gender1').iCheck('check');
-</script>
-
-<script>
-    var setOptionRemoveFlag = true;
-    jQuery(document).ready(function () {
-        setOptionRemoveFlag = false;
-        getDesignation();
-    });
-    function getDesignation() {
-        var levelMasterId = document.getElementById('levelMaster.id').value;
-//            alert("levelmaster id    " + levelMasterId);
-        if (levelMasterId != "") {
-            $.get("employeeMaster.htm?act=getDesignationByLevel",
-                    {
-                        levelMasterId: levelMasterId
-                    },
-            function (responseJson) {
-////                    $(".result").html(data);
-//                    alert("response     " + responseJson);
-//                    var tempjson = JSON.parse(responseJson);
-//                    alert("jsosnsnssnsn    "+tempjson[0]);
-                var $select = $('#designationMasterByLevelId'); // Locate HTML DOM element with ID "someselect".
-//                    alert("this is my select    " + select);
-                if (setOptionRemoveFlag) {
-                    $select.find("option").remove(); // Find all child elements with tag name "option" and remove them (just to prevent duplicate options when button is pressed again).
-                    alert("I have been called   " + setOptionRemoveFlag + " times");
-                }
-                $.each(responseJson, function (key, value) {               // Iterate over the JSON object.
-//                        alert(key + '     ' + value);
-                    if (!setOptionRemoveFlag && $("#designationMasterByLevelId option:first").val() != key) {
-                        //this conditions check will remove duplicates from list.
-                        $('#designationMasterByLevelId')
-                                .append($("<option></option>")
-                                        .attr("value", key)
-                                        .text(value));
-                    }
-                    if (setOptionRemoveFlag) {
-                        $('#designationMasterByLevelId')
-                                .append($("<option></option>")
-                                        .attr("value", key)
-                                        .text(value));
+            if (level != null && level != '') {
+                $.ajax({
+                    url: 'employeeMaster.htm?act=readReportingHierarchy&id=' + level,
+                    type: 'GET',
+                    success: function (result) {
+                        var array = result.split("~");
+                        //blank whole fields before put new data
+                        document.getElementById("reportingManagerLevel2").value = '';
+                        document.getElementById("reportingManagerLevel3").value = '';
+                        document.getElementById("reportingManagerLevel4").value = '';
+                        document.getElementById("reportingManagerLevel5").value = '';
+                        document.getElementById("reportingManagerLevel6").value = '';
+                        document.getElementById("reportingManagerLevel2Name").value = '';
+                        document.getElementById("reportingManagerLevel3Name").value = '';
+                        document.getElementById("reportingManagerLevel4Name").value = '';
+                        document.getElementById("reportingManagerLevel5Name").value = '';
+                        document.getElementById("reportingManagerLevel6Name").value = '';
+                        document.getElementById("reportingManagerLevel2").value = array[0];
+                        document.getElementById("reportingManagerLevel3").value = array[1];
+                        document.getElementById("reportingManagerLevel4").value = array[2];
+                        //this conditions checks for level 5 and level 6 if these are empty then set conditional values(for id in databese)
+                        if ((array[4] == "" || array[4] == null) && (array[5] == "" || array[5] == null)) {
+                            if (array[2] == "" || array[2] == null) {
+                                document.getElementById("reportingManagerLevel6").value = level;
+                            } else {
+                                document.getElementById("reportingManagerLevel5").value = level;
+                                document.getElementById("reportingManagerLevel6").value = array[2];
+                            }
+                        } else {
+                            if (array[4] == "" || array[4] == null) {
+                                document.getElementById("reportingManagerLevel5").value = level;
+                            } else {
+                                document.getElementById("reportingManagerLevel5").value = array[4];
+                            }
+                            document.getElementById("reportingManagerLevel6").value = array[5];
+                        }
+                        document.getElementById("reportingManagerLevel2Name").value = array[6];
+                        document.getElementById("reportingManagerLevel3Name").value = array[7];
+                        document.getElementById("reportingManagerLevel4Name").value = array[8];
+                        //this conditions checks for level 5 and level 6 if these are empty then set conditional values(for values display on jsp)
+                        if ((array[10] == "" || array[10] == null) && (array[11] == "" || array[11] == null)) {
+                            if (array[6] == "" || array[6] == null) {
+                                document.getElementById("reportingManagerLevel6Name").value = array[12];
+                                //array[12] is for employee name reporting manager.
+                            } else {
+                                document.getElementById("reportingManagerLevel5Name").value = array[12];
+                                document.getElementById("reportingManagerLevel6Name").value = array[6];
+                            }
+                        } else {
+                            if (array[10] == "" || array[10] == null) {
+                                document.getElementById("reportingManagerLevel5Name").value = array[12];
+                            } else {
+                                document.getElementById("reportingManagerLevel5Name").value = array[10];
+                            }
+                            document.getElementById("reportingManagerLevel6Name").value = array[11];
+                        }
                     }
                 });
-                setDesignation();
-                setOptionRemoveFlag = true; //this is setted again to true for option remove function call on onchange() event.
-            });
-////                alert("response     " + responseJson);
-//            }
+            }
         }
 
+        //this script is comented because only first level reporting manager is only required.
+        //        jQuery(document).ready(function () {
+        //            jQuery("#reportingManagerLevel2").tokenInput(${list}, {
+        //                preventDuplicates: true,
+        //                noResultsText: "No Result",
+        //                tokenLimit: "1",
+        //                searchingText: "Searching ... .. .",
+        //                prePopulate: ${preList2}
+        //            });
+        //        });
+        //        jQuery(document).ready(function () {
+        //            jQuery("#reportingManagerLevel3").tokenInput(${list}, {
+        //                preventDuplicates: true,
+        //                noResultsText: "No Result",
+        //                tokenLimit: "1",
+        //                searchingText: "Searching ... .. .",
+        //                prePopulate: ${preList3}
+        //            });
+        //        });
+        //        jQuery(document).ready(function () {
+        //            jQuery("#reportingManagerLevel4").tokenInput(${list}, {
+        //                preventDuplicates: true,
+        //                noResultsText: "No Result",
+        //                tokenLimit: "1",
+        //                searchingText: "Searching ... .. .",
+        //                prePopulate: ${preList4}
+        //            });
+        //        });
+        //        jQuery(document).ready(function () {
+        //            jQuery("#reportingManagerLevel5").tokenInput(${list}, {
+        //                preventDuplicates: true,
+        //                noResultsText: "No Result",
+        //                tokenLimit: "1",
+        //                searchingText: "Searching ... .. .",
+        //                prePopulate: ${preList5}
+        //            });
+        //        });
+        //        jQuery(document).ready(function () {
+        //            jQuery("#reportingManagerLevel6").tokenInput(${list}, {
+        //                preventDuplicates: true,
+        //                noResultsText: "No Result",
+        //                tokenLimit: "1",
+        //                searchingText: "Searching ... .. .",
+        //                prePopulate: ${preList6}
+        //            });
+        //        });
+    </script>
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    <!--    <script>
+            $(document).ready(function () {
+                showHide();
+            });
+            $("#levelMasterId").on('change', function () {
+                showHide();
+            });
+            $("#WorkTypeSelectId").on("change", function () {
+                shift();
+            });
+            function showHide() {
+                var textVal = $("#levelMasterId option:selected").text();
+                $('#levelIdDiv1').hide();
+                $('#levelIdDiv2').hide();
+                $('#levelIdDiv3').hide();
+                $('#levelIdDiv4').hide();
+                $('#levelIdDiv5').hide();
+                $('#levelIdDiv6').hide();
+                if (textVal === "Level 1") {
+                    $('#levelIdDiv1').show();
+    
+                } else if (textVal === "Level 2") {
+                    $('#levelIdDiv1').show();
+                    $('#levelIdDiv2').show();
+    
+                } else if (textVal === "Level 3") {
+                    $('#levelIdDiv1').show();
+                    $('#levelIdDiv2').show();
+                    $('#levelIdDiv3').show();
+    
+                } else if (textVal === "Level 4") {
+                    $('#levelIdDiv1').show();
+                    $('#levelIdDiv2').show();
+                    $('#levelIdDiv3').show();
+                    $('#levelIdDiv4').show();
+    
+                } else if (textVal === "Level 5") {
+                    $('#levelIdDiv1').show();
+                    $('#levelIdDiv2').show();
+                    $('#levelIdDiv3').show();
+                    $('#levelIdDiv4').show();
+                    $('#levelIdDiv5').show();
+    
+                } else if (textVal === "Level 6") {
+                    $('#levelIdDiv1').show();
+                    $('#levelIdDiv2').show();
+                    $('#levelIdDiv3').show();
+                    $('#levelIdDiv4').show();
+                    $('#levelIdDiv5').show();
+                    $('#levelIdDiv6').show();
+                }
+            }
+    
+        </script>-->
+    <script>
+        $(document).ready(function () {
 
-    }
-</script>
-<script>
-    function setDesignation() {
+            //            if ($('.checked input[name=maritalStatus]')) {
 
-        var designationMasterId = document.getElementById('designationMasterByLevelId').value;
-//            alert("this is designation for it   " + designationMasterId);
-        document.getElementById('designationMaster.id').value = designationMasterId;
-    }
-</script>
-<script>
-    <c:if test="${!sessionScope.userRight.hr}">
+            //            }
 
-    $('.readItOnly').attr('readonly', true);
-    </c:if>
+            if ($('#shiftType').find("option:selected")) {
+                if ($('#shiftType').find("option:selected").val() == "HourlyBase") {
+                    $('#hourlyBaseTitleDiv').show();
+                    $('#shiftNameDiv').hide();
+                    $('#shiftRotationNameDiv').hide();
+                    $('#shiftRotationDateDiv').hide();
+                } else if ($('#shiftType').find("option:selected").val() == "ShiftBase") {
+                    $('#shiftNameDiv').show();
+                    $('#shiftRotationNameDiv').show();
+                    $('#shiftRotationDateDiv').show();
+                    $('#hourlyBaseTitleDiv').hide();
+                } else {
+                    $('#hourlyBaseTitleDiv').hide();
+                    $('#shiftNameDiv').hide();
+                    $('#shiftRotationNameDiv').hide();
+                    $('#shiftRotationDateDiv').hide();
+                }
+            }
+            //            });
 
-</script>
+        });
+        $('input[name=maritalStatus]').on('ifChecked', function (event) {
+            if (this.value === "Married") {
+                $("#hideInfo1").show(500);
+                $("#hideInfo2").show(500);
+                $("#otherMaritalStatusId").hide(500);
+            } else {
 
+                $("#hideInfo1").hide(500);
+                $("#hideInfo2").hide(500);
+                $("#otherMaritalStatusId").hide(500);
+            }
+            if (this.value === "Other") {
+                $("#hideInfo1").hide(500);
+                $("#hideInfo2").hide(500);
+                $("#otherMaritalStatusId").show(500);
+            }
+
+        });
+        //        $('#gender1').iCheck('check');
+    </script>
+
+    <script>
+        var setOptionRemoveFlag = true;
+        jQuery(document).ready(function () {
+            setOptionRemoveFlag = false;
+            getDesignation();
+        });
+        function getDesignation() {
+            var levelMasterId = document.getElementById('levelMaster.id').value;
+            //            alert("levelmaster id    " + levelMasterId);
+            if (levelMasterId != "") {
+                $.get("employeeMaster.htm?act=getDesignationByLevel",
+                        {
+                            levelMasterId: levelMasterId
+                        },
+                function (responseJson) {
+                    ////                    $(".result").html(data);
+                    //                    alert("response     " + responseJson);
+                    //                    var tempjson = JSON.parse(responseJson);
+                    //                    alert("jsosnsnssnsn    "+tempjson[0]);
+                    var $select = $('#designationMasterByLevelId'); // Locate HTML DOM element with ID "someselect".
+                    //                    alert("this is my select    " + select);
+                    if (setOptionRemoveFlag) {
+                        $select.find("option").remove(); // Find all child elements with tag name "option" and remove them (just to prevent duplicate options when button is pressed again).
+                        alert("I have been called   " + setOptionRemoveFlag + " times");
+                    }
+                    $.each(responseJson, function (key, value) {               // Iterate over the JSON object.
+                        //                        alert(key + '     ' + value);
+                        if (!setOptionRemoveFlag && $("#designationMasterByLevelId option:first").val() != key) {
+                            //this conditions check will remove duplicates from list.
+                            $('#designationMasterByLevelId')
+                                    .append($("<option></option>")
+                                            .attr("value", key)
+                                            .text(value));
+                        }
+                        if (setOptionRemoveFlag) {
+                            $('#designationMasterByLevelId')
+                                    .append($("<option></option>")
+                                            .attr("value", key)
+                                            .text(value));
+                        }
+                    });
+                    setDesignation();
+                    setOptionRemoveFlag = true; //this is setted again to true for option remove function call on onchange() event.
+                });
+                ////                alert("response     " + responseJson);
+                //            }
+            }
+
+
+        }
+    </script>
+    <script>
+        function setDesignation() {
+
+            var designationMasterId = document.getElementById('designationMasterByLevelId').value;
+            //            alert("this is designation for it   " + designationMasterId);
+            document.getElementById('designationMaster.id').value = designationMasterId;
+        }
+    </script>
+    <script>
+        <c:if test="${!sessionScope.userRight.hr}">
+
+        $('.readItOnly').attr('readonly', true);
+        </c:if>
+
+    </script>
+    <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
+    <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
+    <!--<link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/css/samples.css">-->
+    <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+    <script>
+        initSample();
+
+
+    </script>
 
 
 </html>

@@ -107,7 +107,7 @@
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>
                                                                     <div class="btn-group">
-                                                                        <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                        <button type="button" onclick="ViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
                                                                         </button>
                                                                     </div>
@@ -136,8 +136,8 @@
     </div>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
     <script>
-        function editViewClick(id) {
-            window.location = 'recruitment.htm?act=editMppRClick&id=' + id;
+        function ViewClick(id) {
+            window.location = 'recruitment.htm?act=CandidateViewClick&id=' + id;
         }
     </script>
 </html>

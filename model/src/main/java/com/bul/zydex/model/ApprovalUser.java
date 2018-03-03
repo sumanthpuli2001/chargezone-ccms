@@ -25,17 +25,16 @@ public class ApprovalUser implements java.io.Serializable {
 
     }
 
-//    public ApprovalUser(Integer id, ApprovalMaster approvalMaster, Integer userId, Integer level, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate, Integer status) {
-//        this.id = id;
-//        this.approvalMaster = approvalMaster;
-//        this.userId = userId;
-//        this.level = level;
-//        this.createdBy = createdBy;
-//        this.createdDate = createdDate;
-//        this.updatedBy = updatedBy;
-//        this.updatedDate = updatedDate;
-//        this.status = status;
-//    }
+    public ApprovalUser(Integer id, ApprovalMaster approvalMaster, Integer userId, Integer level, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate, Integer status) {
+        this.id = id;
+        this.approvalMaster = approvalMaster;
+        this.level = level;
+        this.createdBy = createdBy;
+        this.createdDate = createdDate;
+        this.updatedBy = updatedBy;
+        this.updatedDate = updatedDate;
+        this.status = status;
+    }
 
   
 

@@ -138,7 +138,7 @@
     </div>
     <script>
                         function editViewClick(id) {
-                        window.location = 'recruitment.htm?act=viewClick&id=' + id;
+                        window.location = 'recruitment.htm?act=mprCreateClick&id=' + id;
                         }
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

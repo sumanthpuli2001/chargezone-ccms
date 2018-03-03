@@ -242,6 +242,9 @@
         <property name="oddPunch" type="java.lang.Boolean">
             <column name="odd_punch"></column>
         </property>
+        <property name="jobDescription" type="string">
+            <column name="job_description" />
+        </property>
         <set name="employeeDatetimeDatas" inverse="true">
             <key>
                 <column name="employee_master_id" />

@@ -42,21 +42,23 @@ public class HomeController extends HomeAbstract {
         LevelMaster levelMaster = new LevelMaster();
         DesignationMaster designationMaster = new DesignationMaster();
         LocationMaster locationMaster = new LocationMaster();
-        employeeMaster.setUserMaster(user);
+//        employeeMaster.setUserMaster(user);
 
-        List<?> employeeList = employeeMasterService.readByUserName(employeeMaster);
-        if (!employeeList.isEmpty()) {
-            employeeMaster1 = (EmployeeMaster) employeeList.get(0);
-            departmentMaster = departmentMasterService.readById(employeeMaster1.getDepartmentMaster().getId());
-            employeeMaster1.setDepartmentMaster(departmentMaster);
-            levelMaster = levelMasterService.readById(employeeMaster1.getLevelMaster().getId());
-            employeeMaster1.setLevelMaster(levelMaster);
-            designationMaster = designationMasterService.readById(employeeMaster1.getDesignationMaster().getId());
-            employeeMaster1.setDesignationMaster(designationMaster);
-            locationMaster = locationMasterService.readById(employeeMaster1.getLocationMaster().getId());
-            employeeMaster1.setLocationMaster(locationMaster);
-
-        }
+//        List<?> employeeList = employeeMasterService.readByUserName(employeeMaster);
+//        if (!employeeList.isEmpty()) {
+//            employeeMaster1 = (EmployeeMaster) employeeList.get(0);
+//            departmentMaster = departmentMasterService.readById(employeeMaster1.getDepartmentMaster().getId());
+//            employeeMaster1.setDepartmentMaster(departmentMaster);
+//            levelMaster = levelMasterService.readById(employeeMaster1.getLevelMaster().getId());
+//            employeeMaster1.setLevelMaster(levelMaster);
+//            designationMaster = designationMasterService.readById(employeeMaster1.getDesignationMaster().getId());
+//            employeeMaster1.setDesignationMaster(designationMaster);
+//            locationMaster = locationMasterService.readById(employeeMaster1.getLocationMaster().getId());
+//            employeeMaster1.setLocationMaster(locationMaster);
+//
+//        }
+        selectEmployee(request, response);
+//        selectedEmployeeFor360Feedback(request, employeeMaster1);
 
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -73,10 +75,73 @@ public class HomeController extends HomeAbstract {
         request.setAttribute("galleryList", galleryList);
         request.setAttribute("RRList", RRList);
         request.setAttribute("thoughtMaster", thoughtMaster);
-        request.setAttribute("employeeMaster", employeeMaster1);
         request.setAttribute("newJoiningList", newJoiningList);
         request.setAttribute("TodaysBirthdays", TodaysBirthdays);
+        mv.getModelMap().put("employeeMaster", employeeMaster1);
         mv.setViewName("Common/Home");
         return mv;
     }
+
+    public ModelAndView searchEmployeeDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession(false);
+        UserMaster user = (UserMaster) session.getAttribute("user");
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        Calendar cal6 = Calendar.getInstance();
+        cal6.add(Calendar.DAY_OF_MONTH, -8);
+        Date dateSet = cal6.getTime();
+
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        LevelMaster levelMaster = new LevelMaster();
+        DesignationMaster designationMaster = new DesignationMaster();
+        LocationMaster locationMaster = new LocationMaster();
+//        employeeMaster.setUserMaster(user);
+
+//        List<?> employeeList = employeeMasterService.readByUserName(employeeMaster);
+//        if (!employeeList.isEmpty()) {
+//            employeeMaster1 = (EmployeeMaster) employeeList.get(0);
+//            departmentMaster = departmentMasterService.readById(employeeMaster1.getDepartmentMaster().getId());
+//            employeeMaster1.setDepartmentMaster(departmentMaster);
+//            levelMaster = levelMasterService.readById(employeeMaster1.getLevelMaster().getId());
+//            employeeMaster1.setLevelMaster(levelMaster);
+//            designationMaster = designationMasterService.readById(employeeMaster1.getDesignationMaster().getId());
+//            employeeMaster1.setDesignationMaster(designationMaster);
+//            locationMaster = locationMasterService.readById(employeeMaster1.getLocationMaster().getId());
+//            employeeMaster1.setLocationMaster(locationMaster);
+//
+//        }
+        selectEmployee(request, response);
+//        selectedEmployeeFor360Feedback(request, employeeMaster1);
+
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String lastOldDate = sdf.format(dateSet);
+        String CurrentDate = sdf.format(d);
+        List<?> galleryList = galleryService.read();
+        List<?> RRList = rAndRService.read();
+        List<?> TodaysBirthdays = employeeMasterService.readEmployeeByBirthday(CurrentDate);
+        ThoughtMaster thoughtMaster = thoughtMasterService.readByCurrentDate(CurrentDate);
+        List<?> newJoiningList = employeeMasterService.newJoiningEmployee(lastOldDate);
+
+        List<CorporateVideo> l1 = (List<CorporateVideo>) corporateVideoService.readCorporateVideoDetail();
+        request.setAttribute("videoList", l1);
+        request.setAttribute("galleryList", galleryList);
+        request.setAttribute("RRList", RRList);
+        request.setAttribute("thoughtMaster", thoughtMaster);
+        request.setAttribute("newJoiningList", newJoiningList);
+        request.setAttribute("TodaysBirthdays", TodaysBirthdays);
+        mv.getModelMap().put("employeeMaster", employeeMaster1);
+        mv.setViewName("Common/Home");
+        return mv;
+    }
+
+    public ModelAndView opanGallery(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        List<?> galleryList = galleryService.read();
+        request.setAttribute("galleryList", galleryList);
+        mv.setViewName("Common/Gallery");
+        return mv;
+    }
+
 }

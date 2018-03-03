@@ -16,6 +16,8 @@
         <%@include file="/WEB-INF/jsp/Common/Top.jsp"%>
 
     </head>
+    
+
     <body class="hold-transition skin-blue sidebar-mini"><!--    closed in footer's second last line-->
         <div class="wrapper">
             <!--         wrapper will close in footer and comment is given there by me-->
@@ -25,7 +27,7 @@
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <!--<span class="logo-mini"><b>Z</b>ydex</span>-->
                     <!-- logo for regular state and mobile devices -->
-                    <!--<span class="logo-lg"><img src="StorageYard/Images/logo.png" style="width: 160px" /></span>-->
+                    <span hight="60"class="logo-lg"><img src="StorageYard/Images/logo.png"  /></span>
                 </a>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top" role="navigation">
@@ -35,7 +37,7 @@
                     </a>
                     <ul class="nav navbar-left">
                         <li class="hidden-xs">
-                            <font style="font-size: 30px;color: white;"><b>&nbsp&nbsp&nbsp&nbsp&nbsp HR-POWER</b></font>
+                            <font style="font-size: 30px;color: white;"><b>&nbsp&nbsp&nbsp&nbsp&nbsp MY SPC</b></font>
                         </li>
                     </ul>
                     <!-- Navbar Right Menu -->

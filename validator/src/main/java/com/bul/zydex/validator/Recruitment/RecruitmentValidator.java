@@ -35,8 +35,11 @@ public class RecruitmentValidator implements Validator {
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "budget",
                 "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "date",
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "designationMaster.id",
                 "field.error1", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "experiance",
+                "field.error1", "None");
+       
        
     }
 

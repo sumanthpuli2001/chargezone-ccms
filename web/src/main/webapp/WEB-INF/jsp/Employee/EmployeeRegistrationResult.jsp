@@ -32,6 +32,9 @@
             function inActiveFun(id) {
                 window.location = 'employeeMaster.htm?act=inActiveEmployeeClick&id=' + id;
             }
+            function printdis(id) {
+                window.location = 'employeeMaster.htm?act=printemployeedescription&id=' + id;
+            }
 
             function deleteCheck11() {
                 var checkboxes = "";
@@ -177,12 +180,21 @@
                                                                                     </a>
                                                                                 </li>
                                                                                 </c:if>
-                                                                                <!--                                                                            <li>
+                                                                                <c:if test="${sessionScope.userRight.employeeManagement}">
+                                                                                    
+                                                                                <li>
+                                                                                    <a href="#"
+                                                                                       onclick="printdis(${list[0]});">
+                                                                                        &nbsp;&nbsp;Print Employee Description
+                                                                                    </a>
+                                                                                </li>
+                                                                                </c:if>
+                                                                                                                                                            <li>
                                                                                                                                                                 <a href="#"
                                                                                                                                                                    onclick="editRotation($/{list[6]});">
                                                                                                                                                                     &nbsp;&nbsp;Edit Shift Rotation
                                                                                                                                                                 </a>
-                                                                                                                                                            </li>-->
+                                                                                                                                                            </li>
                                                                             </ul>
                                                                         </div>
                                                                     </td>

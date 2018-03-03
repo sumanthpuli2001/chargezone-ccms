@@ -84,9 +84,9 @@
                                                                     <th style="width: 50px;">Department Name</th>
                                                                     <th style="width: 50px;">Job Type</th>
                                                                     <th style="width: 50px;">Budget</th>
-                                                                    <th style="width: 50px;">Date</th>
                                                                     <th style="width: 50px;">Status</th>
                                                                     <th style="width: 50px;">Action</th>
+                                                                    <th style="width: 50px;">Edit</th>
                                                                         <%--</c:if>--%>
 
                                                                 </tr>
@@ -100,25 +100,25 @@
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
+                                                                <td>${list[3]}</td>
                                                                 <td>${list[4]}</td>
                                                                 <td>${list[5]}</td>
-                                                                <td>${list[6]}</td>
                                                                 <td>${list[2]}</td>
                                                                 <td>${list[3]}</td>
-                                                                <c:if test="${list[7] == 0}"><td><span class="badge">Pending</span></td></c:if>
-                                                                <c:if test="${list[7] == 1}"><td><span class="label label-success">Approved</span></td></c:if>
-                                                                <c:if test="${list[7] == 2}"><td><span class="label label-warning">Recycled</span></td></c:if>
-                                                                <c:if test="${list[7] == 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
+                                                                <c:if test="${list[6] == 0}"><td><span class="badge">Pending</span></td></c:if>
+                                                                <c:if test="${list[6] == 1}"><td><span class="label label-success">Approved</span></td></c:if>
+                                                                <c:if test="${list[6] == 2}"><td><span class="label label-warning">Recycled</span></td></c:if>
+                                                                <c:if test="${list[6] == 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
 
                                                                     <td>
-                                                                    <c:if test="${list[7] eq 0 || list[7] eq 2}">
+                                                                    <c:if test="${list[6] eq 0 || list[6] eq 2}">
                                                                         <div class="btn-group">
                                                                             <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                                 &nbsp;&nbsp;&nbsp;&nbsp;Edit
                                                                             </button>
                                                                         </div>
                                                                     </c:if>
-                                                                          <c:if test="${list[7] == 1}">
+                                                                          <c:if test="${list[6] == 1}">
                                                                         <div class="btn-group">
                                                                             <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                                 &nbsp;&nbsp;View

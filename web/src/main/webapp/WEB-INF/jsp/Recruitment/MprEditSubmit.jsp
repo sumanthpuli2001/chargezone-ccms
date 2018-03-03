@@ -82,7 +82,7 @@
                                                         <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
-<!--                                                <div class="form-group">
+                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Vacancy Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="name" class="form-control" placeholder="Name"></form:input>

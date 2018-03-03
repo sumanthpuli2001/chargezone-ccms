@@ -103,7 +103,6 @@
                                                     <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>  
                                                 </div>
-                                            <c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 2}">
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Work Experience(In Year):<span style="color: red;font-size: 12px;">*</span></label>
@@ -117,7 +116,6 @@
                                                     </div>
 
                                                 </div>
-                                            </c:if>
                                         </form:form>
                                         <!--</div>-->
 

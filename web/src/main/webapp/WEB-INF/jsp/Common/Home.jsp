@@ -296,11 +296,18 @@
 
 
             .links {
-             font-size:24px; 
-             color: #00a56c;
+                font-size:24px; 
+                color: #00a56c;
             }
-            
-            
+
+            .test {
+                width:60px;
+                margin-bottom: 20px;
+                white-space: normal;
+                text-align: center;
+
+            }
+
         </style>
 
 
@@ -436,31 +443,73 @@
                                     <div class="box box-primary">
                                         <div class="box-header">
                                             <h3 class="box-title">Todays Birthday</h3>
-                                            <div class="box-tools pull-right">
-                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            </div>
+<!--                                            <div class="box-tools pull-right">
+                                                <button class="btn btn-box-tool" data-widget="collapse"></button>
+                                            </div>-->
                                             <div class="box-body">
+                                                
+                                                
+                                                 <marquee>
+                                                    <div class="node-cell">
+                                                        <div class="node ui-draggable ui-droppable"> 
+                                                            <div >
+                                                                <c:forEach var="todayBirthday" items="${TodaysBirthdays}">
 
-                                                <marquee>
+                                                                    <img src="${todayBirthday[2]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                </c:forEach>
+                                                            </div>
+                                                            <div>
+                                                                <c:forEach var="todayBirthday" items="${TodaysBirthdays}">
+
+
+                                                                    <label class="test">${todayBirthday[1]}</label>
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+
+                                                                </c:forEach>
+                                                            </div>
+                                                        </div>
+                                                </marquee>
+
+
+<!--                                                <marquee>
                                                     <div class="node-cell">
                                                         <div class="node ui-draggable ui-droppable">
 
-                                                            <c:forEach var="todayBirthday" items="${TodaysBirthdays}">
+                                                            <%--<c:forEach var="" items="">--%>
 
-                                                                <img src="${todayBirthday[2]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                                <img src="" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
                                                                 <br>
 
-                                                                <span style="font-size: 105%;color: black">${todayBirthday[1]}</span>
+                                                                <span style="font-size: 105%;color: black"></span>
 
 
-                                                            </c:forEach>
+                                                            <%--</c:forEach>--%>
                                                         </div>
                                                     </div>
 
 
 
 
-                                                </marquee>
+                                                </marquee>-->
 
 
                                             </div>
@@ -473,28 +522,56 @@
                                     <div class="box box-primary">
                                         <div class="box-header">
                                             <h3 class="box-title">New Joinee</h3>
-                                            <div class="box-tools pull-right">
+<!--                                            <div class="box-tools pull-right">
                                                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            </div>
+                                            </div>-->
                                             <div class="box-body">
+
+
                                                 <marquee>
+                                                    <div class="node-cell">
+                                                        <div class="node ui-draggable ui-droppable"> 
+                                                            <div >
+                                                                <c:forEach var="newJoining" items="${newJoiningList}">
+
+                                                                    <img src="${newJoining[2]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                </c:forEach>
+                                                            </div>
+                                                            <div>
+                                                                <c:forEach var="newJoining" items="${newJoiningList}">
 
 
-                                                    <c:forEach var="newJoining" items="${newJoiningList}">
-                                                        <div class="col-xs-3">        
-                                                            <img src="${newJoining[2]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
-                                                            <br>
+                                                                    <label class="test">${newJoining[1]}</label>
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
 
-                                                            <span class="test">${newJoining[1]}</span>
+                                                                </c:forEach>
+                                                            </div>
                                                         </div>
-
-                                                    </c:forEach>
-
-
-
-
-
                                                 </marquee>
+
+
+
+
+
 
                                             </div>
                                         </div>
@@ -558,7 +635,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                         <!--<span class="product-title">  ${thoughtMaster}</span>-->
-                                    <marquee style="font-size:26px !important;"><strong>Today's Thought:</strong> ${thoughtMaster.thought}</marquee>
+                                    <marquee style="font-size:26px !important;"><strong style="color: mediumseagreen">Today's Thought:</strong> <span style="color: #006fad">${thoughtMaster.thought}</span></marquee>
                                 </div>
                             </div>
 

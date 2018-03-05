@@ -46,6 +46,7 @@
                                         <form:form class="form-horizontal" method="post"
                                                    commandName="mprMaster" action="recruitment.htm?act=mprEditSubmitDetail">
                                             <form:hidden path="id"></form:hidden>
+                                            <form:hidden path="status"></form:hidden>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
@@ -80,24 +81,6 @@
                                                             <form:options items="${desigList}"></form:options>
                                                         </form:select>
                                                         <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Employee Category:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="mprEmployeeCategory.id" id="mprEmployeeCategory" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${categoryList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="mprEmployeeCategory.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Employee Type:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="mprEmployeeTypeMaster.id" id="mprEmployeeTypeMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${emptypeList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="mprEmployeeTypeMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">

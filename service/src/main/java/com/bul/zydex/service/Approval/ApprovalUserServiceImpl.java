@@ -7,6 +7,7 @@ package com.bul.zydex.service.Approval;
 
 import com.bul.zydex.dao.Approval.ApprovalUserDAO;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.List;
 
 /**
  *
@@ -23,6 +24,11 @@ public class ApprovalUserServiceImpl<T> extends GenericsServiceImpl<T> implement
     public void setApprovalUserDAO(ApprovalUserDAO<T> approvalUserDAO) {
         this.approvalUserDAO = approvalUserDAO;
         setGenericsDAO(approvalUserDAO);
+    }
+
+    @Override
+    public List<?> readByApprovalId(int id) {
+        return approvalUserDAO.readByApprovalId(id);
     }
     
     

@@ -111,7 +111,7 @@
 
                 <div class="form-group">
                     <div class=" col-sm-offset-0">
-                        <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >SUBMIT 1</button>
+                        <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >SUBMIT</button>
                     </div>
                 </div>
 

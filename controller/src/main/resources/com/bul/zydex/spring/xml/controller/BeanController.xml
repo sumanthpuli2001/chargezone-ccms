@@ -1008,6 +1008,8 @@
         <property name="mprMasterService" ref="mprMasterService1"/>
         <property name="designationMasterService" ref="designationMasterService1"/>
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
+        <property name="mprApprovalService" ref="mprApprovalService1"/>
+        <property name="approvalUserService" ref="approvalUserService1"/>
     </bean>
     
     <bean id="vacancyController1" class="com.bul.zydex.controller.Vacancy.VacancyController" parent="controllerConfig" >
@@ -1021,6 +1023,7 @@
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
         <property name="applayJobUserMasterSerivce" ref="applayJobUserMasterService1"/>
         <property name="applayJobUserMasterValidator" ref="applayJobUserMasterValidator1"/>
+        <property name="candidateJobApplyValidator" ref="candidateJobApplyValidator1"/>
     </bean> 
     <bean id="thoughtMasterController1" class="com.bul.zydex.controller.thought.ThoughtMasterController" parent="controllerConfig" >
         <property name="thoughtMasterService" ref="thoughtMasterService1"></property>

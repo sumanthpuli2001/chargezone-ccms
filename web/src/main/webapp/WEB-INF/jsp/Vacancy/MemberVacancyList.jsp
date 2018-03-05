@@ -69,7 +69,7 @@
     </head>
     <body>
         <section class="content-header">
-            <button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=showVacancyList'"><i class="fa fa-home"></i>&nbsp&nbsp&nbsp;Home</button>
+            <button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=backToHomeVacancyList'"><i class="fa fa-home"></i>&nbsp&nbsp&nbsp;Home</button>
             <!--<button type="button" class="btn btn-primary" style="float: left; width: 130px;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-user"></i>&nbsp&nbsp&nbsp;My Profile</button>-->
             <label>Candidate User Name &nbsp : &nbsp&nbsp${applayJobUserMaster.userName}</label>
         </section>
@@ -83,8 +83,8 @@
         <br/>
         <ul class="nav nav-tabs" style="text-align: center" >
             <li class="active " ><a href="">My Application</a></li>
-            <li ><a href="thoughtMaster.htm?act=createthought">My Profile</a></li>
-            <li ><a href="thoughtMaster.htm?act=createthought2">Assessment</a></li>
+            <li ><a href="vacancy.htm?act=myProfileClick">My Profile</a></li>
+            <li ><a href="vacancy.htm?act=clickassessment">Assessment</a></li>
         </ul>
         <br/>
         <br/>

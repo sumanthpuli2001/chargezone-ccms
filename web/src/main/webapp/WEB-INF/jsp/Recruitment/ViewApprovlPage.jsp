@@ -82,24 +82,24 @@
                                                         <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+<!--                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Employee Category:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="mprEmployeeCategory.id" id="mprEmployeeCategory" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${categoryList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="mprEmployeeCategory.id" cssClass="errorDiv"></form:errors>
+                                                        <%--<form:select path="mprEmployeeCategory.id" id="mprEmployeeCategory" class="form-control">--%>
+                                                            <%--<form:option value="" label="-- Select --" />--%>
+                                                            <%--<form:options items="${categoryList}"></form:options>--%>
+                                                        <%--</form:select>--%>
+                                                        <%--<form:errors path="mprEmployeeCategory.id" cssClass="errorDiv"></form:errors>--%>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Employee Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="mprEmployeeTypeMaster.id" id="mprEmployeeTypeMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${emptypeList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="mprEmployeeTypeMaster.id" cssClass="errorDiv"></form:errors>
+                                                        <%--<form:select path="mprEmployeeTypeMaster.id" id="mprEmployeeTypeMaster" class="form-control">--%>
+                                                            <%--<form:option value="" label="-- Select --" />--%>
+                                                            <%--<form:options items="${emptypeList}"></form:options>--%>
+                                                        <%--</form:select>--%>
+                                                        <%--<form:errors path="mprEmployeeTypeMaster.id" cssClass="errorDiv"></form:errors>--%>
                                                     </div>
-                                                </div>
+                                                </div>-->
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Name:<span style="color: red;font-size: 12px;">*</span></label>
@@ -148,7 +148,7 @@
                                                 </div>
                                                 <div class="col-sm-4" style="text-align: center">
                                                     <c:if test="${status != 2}">
-                                                        <button type="submit" class="btn btn-warning" id="btnType2" name="btnType"  value="Return"  style="width: 100px">REWORK</button>
+                                                        <button type="submit" class="btn btn-warning" id="btnType2" name="btnType"  value="Return"  style="width: 100px">RECYCLE</button>
                                                     </c:if>
                                                 </div>
                                                 <div class="col-sm-4" style="text-align: right">

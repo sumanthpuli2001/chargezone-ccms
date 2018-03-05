@@ -70,7 +70,7 @@
     </head>
     <body>
         <section class="content-header">
-            <h1>Login222:</h1>
+            <h1>Login:</h1>
             <ol class="breadcrumb">
             </ol>
         </section>
@@ -93,7 +93,7 @@
                                 <div class="col-sm-2">
                                 </div>
                                 <div class="col-sm-1" style="text-align: left">
-                                    <input type="text" name="checkId" value="${applayJobUserMaster.id}"/>
+                                    <input type="hidden" name="checkId" value="${applayJobUserMaster.id}"/>
                                 <label>Email Id:<span style="color: red;font-size: 12px;">*</span></label>
                             </div>
                             <div class="col-sm-3">
@@ -116,7 +116,8 @@
 
                 <div class="form-group">
                     <div class=" col-sm-offset-0">
-                        <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >SUBMIT 1</button>
+                        <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >SUBMIT</button>
+                    <button type="button" class="btn btn-primary" style="float: center; width: 120px;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign Up</button>
                     </div>
                 </div>
 

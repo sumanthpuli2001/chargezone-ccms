@@ -24,6 +24,7 @@ import com.bul.zydex.service.Vacancy.VacancyMasterService;
 import com.bul.zydex.service.emp.DesignationMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.validator.Recruitment.ApplayJobUserMasterValidator;
+import com.bul.zydex.validator.Vacancy.CandidateJobApplyValidator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +47,7 @@ public class VacancyAbstract extends CustomAbstract {
     protected Validator vacancyValidator;
     protected ApplayJobUserMasterService<ApplayJobUserMaster> applayJobUserMasterSerivce;
     protected ApplayJobUserMasterValidator applayJobUserMasterValidator;
+    protected CandidateJobApplyValidator candidateJobApplyValidator;
 
     public CandidateJobApplyService<CandidateApplyJob> getCandidateJobApplyService() {
         return candidateJobApplyService;
@@ -126,6 +128,15 @@ public class VacancyAbstract extends CustomAbstract {
     public void setApplayJobUserMasterValidator(ApplayJobUserMasterValidator applayJobUserMasterValidator) {
         this.applayJobUserMasterValidator = applayJobUserMasterValidator;
     }
+
+    public CandidateJobApplyValidator getCandidateJobApplyValidator() {
+        return candidateJobApplyValidator;
+    }
+
+    public void setCandidateJobApplyValidator(CandidateJobApplyValidator candidateJobApplyValidator) {
+        this.candidateJobApplyValidator = candidateJobApplyValidator;
+    }
+    
     
     protected void departmentList(HttpServletRequest request) {
         DepartmentMaster departmentMaster = new DepartmentMaster();

@@ -23,6 +23,8 @@ public class MprMaster implements java.io.Serializable {
     private DesignationMaster designationMaster;
     private String dateOfLeaving;
     private Integer status;
+    private Integer currentLevel;
+    private Integer totalLevel;
 
     public MprMaster() {
 
@@ -41,6 +43,8 @@ public class MprMaster implements java.io.Serializable {
         this.designationMaster = designationMaster;
         this.dateOfLeaving = dateOfLeaving;
         this.status = status;
+        this.currentLevel = currentLevel;
+        this.totalLevel = totalLevel;
     }
 
     public Integer getId() {
@@ -140,6 +144,23 @@ public class MprMaster implements java.io.Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+    public Integer getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public void setCurrentLevel(Integer currentLevel) {
+        this.currentLevel = currentLevel;
+    }
+
+    public Integer getTotalLevel() {
+        return totalLevel;
+    }
+
+    public void setTotalLevel(Integer totalLevel) {
+        this.totalLevel = totalLevel;
+    }
+    
     
     
 

@@ -308,6 +308,13 @@ public class VacancyController extends VacancyAbstract {
         BindException errors = new BindException(candidateApplyJob, "candidateApplyJob");
         bind(request, candidateApplyJob);
 
+        candidateJobApplyValidator.validate(candidateApplyJob, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : This Form All Fields Are Require");
+            mv.setViewName("Vacancy/applyJobCandidateRegistration");
+        }
+
         candidateJobApplyService.create(candidateApplyJob);
 
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
@@ -440,6 +447,40 @@ public class VacancyController extends VacancyAbstract {
 //        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
         mv.getModelMap().put("list", vacancyMaster);
 //        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        return mv;
+    }
+
+    public ModelAndView myProfileClick(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+        mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
+        mv.setViewName("Vacancy/MyProfile");
+
+        return mv;
+    }
+
+    public ModelAndView clickassessment(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+        mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
+        mv.setViewName("Vacancy/AssessmentCandidate");
+
+        return mv;
+    }
+
+    public ModelAndView backToHomeVacancyList(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        mv.getModelMap().put("list", vacancylist);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.setViewName("Vacancy/backToHomeVacancyList");
         return mv;
     }
 

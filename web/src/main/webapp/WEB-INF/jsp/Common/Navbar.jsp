@@ -85,7 +85,8 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>Recruitment Approval</a></li>
+                                <li><a href="recruitment.htm?act=approvalMppCreate"><i class="fa fa-circle-o"></i>MPP Approval</a></li>
+                                <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>MPR Approval</a></li>
                                 <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
                             </ul>
                         </li>

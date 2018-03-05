@@ -96,6 +96,9 @@
                 width: 100%;
             }
         }
+        img:hover {
+            cursor: pointer;
+        }
     </style>
 </head>
 <div class="content-wrapper">
@@ -121,14 +124,14 @@
 </div>
 
 <script>
-    
-    
-    
+
+
+
 // Get the modal
     var modal = document.getElementById('myModal1');
 
 // Get the image and insert it inside the modal - use its "alt" text as a caption
-    
+
     var modalImg = document.getElementById("img01");
     imageClick = function (abc) {
         modal.style.display = "block";

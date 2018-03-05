@@ -27,7 +27,7 @@
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <!--<span class="logo-mini"><b>Z</b>ydex</span>-->
                     <!-- logo for regular state and mobile devices -->
-                    <span hight="60"class="logo-lg"><img src="StorageYard/Images/logo.png"  /></span>
+                    <span hight="50"class="logo-lg"><img src="StorageYard/Images/logo.png"  /></span>
                 </a>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top" role="navigation">

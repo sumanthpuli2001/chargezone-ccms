@@ -7,7 +7,7 @@
 
 <head >
 
-    <title>Gallery</title>
+    <title>Life @ SPC</title>
     <style>
         body {font-family: Arial, Helvetica, sans-serif;}
 
@@ -100,7 +100,7 @@
 </head>
 <div class="content-wrapper">
     <section class="content-header">
-        <h1>Gallery</h1>
+        <h1>Life @ SPC</h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
             <li class="active">Dashboard</li>

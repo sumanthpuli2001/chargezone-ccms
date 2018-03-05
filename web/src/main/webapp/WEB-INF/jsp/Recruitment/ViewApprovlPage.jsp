@@ -20,6 +20,18 @@
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Budget Detail List</li>
             </ol>
+            
+               <script>
+            function reject() {
+                var checkreject = confirm("If You Reject You Can Not Edit,Submit Or View. So, Are You Sure You Want to Reject This MPR?");
+                if (checkreject) {
+                    checkreject = document.getElementsByName('Reject');
+                    return true;
+                }
+                return false;
+            }
+        </script>
+            
         </section>
         <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>
@@ -143,7 +155,7 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-4" style="text-align: left">
                                                     <c:if test="${status != 1}">
-                                                        <button type="submit" class="btn btn-danger" id="btnType1" name="btnType" value="Reject" style="width: 100px" >REJECT</button>
+                                                        <button type="submit" class="btn btn-danger" onclick="return reject();" id="btnType1" name="btnType" value="Reject" style="width: 100px" >REJECT</button>
                                                     </c:if>
                                                 </div>
                                                 <div class="col-sm-4" style="text-align: center">

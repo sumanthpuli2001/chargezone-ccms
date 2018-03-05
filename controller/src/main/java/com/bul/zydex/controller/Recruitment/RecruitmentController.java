@@ -672,7 +672,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             request.setAttribute("successMessage",
                     "Information : The Request is Approved successfully.");
         }
-        if (btnType.equals("Return")) {
+        if (btnType.equals("Recycle")) {
             recruitmentMaster = recruitmentService.readById(Integer.parseInt(mppid));
             recruitmentMaster.setMppStatus(2);
             recruitmentService.update(recruitmentMaster);

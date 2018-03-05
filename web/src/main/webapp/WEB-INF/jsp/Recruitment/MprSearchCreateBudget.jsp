@@ -46,7 +46,7 @@
                                            
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Man Power Planning Budget:${recruitmentMaster.id}<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <label>Man Power Planning Budget:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="budget" id="budget1" readonly="true" class="form-control" placeholder="Budget"></form:input>
                                                     <form:errors path="budget" cssClass="errorDiv"></form:errors>
                                                     </div>
@@ -148,7 +148,7 @@
                                             
                                             <div class="form-group">
                                                 <div class="col-sm-10">
-                                                    <label>Job Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <label>Job Description1:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:textarea path="description" class="form-control" id="editor"  placeholder="Description"></form:textarea>
                                                     <form:errors path="description" cssClass="errorDiv"></form:errors>
                                                     </div>

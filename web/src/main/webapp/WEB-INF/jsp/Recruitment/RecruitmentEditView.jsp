@@ -110,7 +110,7 @@
                                                     <form:input path="experiance" class="form-control" placeholder="Experience"></form:input>
                                                     <form:errors path="experiance" cssClass="errorDiv"></form:errors>
                                                     </div>
-                                                </div>${{recruitmentMaster.mppStatus}}
+                                                </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6 col-sm-offset-5">
                                                 <c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 3}">

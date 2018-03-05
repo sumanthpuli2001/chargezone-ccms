@@ -145,7 +145,7 @@ public class UserMasterController extends UserMasterAbstract {
         List<?> list = appraisal360Service.readEmployeeAppraisalFeedback(id);
         int appraisalcount = list.size();
 //        int i = appraisal360Service.countEmployeeAppraisalFeedback(id);
-        
+
         List<?> list1 = exitInterviewMasterService.readByEmployeeId(id);
         if (!list1.isEmpty()) {
             String dateOfSubmit = "";
@@ -209,70 +209,69 @@ public class UserMasterController extends UserMasterAbstract {
         List<?> reportingManager4List = employeeMasterService.readEmployeeForParticularManager(id);
         List<?> probationEmployee = probationToConfirmationService.readloginEmployeeData(id);
         List<?> FunctionalheadList = employeeMasterService.readfunctionalhead(id);
-        if(FunctionalheadList.isEmpty()){
-            FunctionalheadList =  employeeMasterService.readLevel1AndLevel5FunctionheadByEmployeeMasterId(id);
+        if (FunctionalheadList.isEmpty()) {
+            FunctionalheadList = employeeMasterService.readLevel1AndLevel5FunctionheadByEmployeeMasterId(id);
         }
         List<?> probationtypeList = employeeMasterService.readForEmployeeType(id);
         List<Object> finalprobationList = new ArrayList<>();
         if (!probationtypeList.isEmpty()) {
             for (Object o : probationtypeList) {
-                  SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MMM-yyyy");
-                 String today = sdf.format(new Date());
-                        Date tDate = sdf.parse(today);
+                String today = sdf.format(new Date());
+                Date tDate = sdf.parse(today);
                 EmployeeMaster employeeMaster3 = new EmployeeMaster();
                 employeeMaster3 = (EmployeeMaster) o;
-                  String employeeId = employeeMaster3.getId().toString();
+                String employeeId = employeeMaster3.getId().toString();
                 ProbationToConfirmation ptc1 = new ProbationToConfirmation();
                 ptc1.setEmployeeMasterByEmployeeMasterId(employeeMaster3);
                 List<?> listrepeat = probationToConfirmationService.readForRepeatedId(ptc1);
                 if (!listrepeat.isEmpty()) {
-                      ProbationToConfirmation ptc2 = new ProbationToConfirmation();
-                       ptc2 = (ProbationToConfirmation) listrepeat.get(0);
-                       String assessmentToDatestring = ptc2.getAssessmentToDate();
-                       
-                        Date assessmentToDate = sdf.parse(assessmentToDatestring);
-                        Calendar c = Calendar.getInstance();
-                        c.setTime(assessmentToDate);
-                        c.add(Calendar.MONTH, -1);
-                        Date datebefore1 = c.getTime();
-                        if (DateUtils.isSameDay(tDate, datebefore1) || tDate.after(datebefore1)) {
-                    List<?> probationList = employeeMasterService.readForProbation(employeeMaster3);
+                    ProbationToConfirmation ptc2 = new ProbationToConfirmation();
+                    ptc2 = (ProbationToConfirmation) listrepeat.get(0);
+                    String assessmentToDatestring = ptc2.getAssessmentToDate();
 
-                    if (!probationList.isEmpty() || probationList.size() > 0) {
-                        finalprobationList.add(probationList);
+                    Date assessmentToDate = sdf.parse(assessmentToDatestring);
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(assessmentToDate);
+                    c.add(Calendar.MONTH, -1);
+                    Date datebefore1 = c.getTime();
+                    if (DateUtils.isSameDay(tDate, datebefore1) || tDate.after(datebefore1)) {
+                        List<?> probationList = employeeMasterService.readForProbation(employeeMaster3);
+
+                        if (!probationList.isEmpty() || probationList.size() > 0) {
+                            finalprobationList.add(probationList);
+                        }
                     }
-                }
-                }else{
-                 
-                String dojstring = employeeMaster3.getDateOfJoining();
-                Date dojdate=null;
-                try{
-                 dojdate = sdf.parse(dojstring);
-                 } catch(Exception e){
-                 dojdate = sdf1.parse(dojstring);
-                }
-                Calendar c = Calendar.getInstance();
-                c.setTime(dojdate);
+                } else {
+
+                    String dojstring = employeeMaster3.getDateOfJoining();
+                    Date dojdate = null;
+                    try {
+                        dojdate = sdf.parse(dojstring);
+                    } catch (Exception e) {
+                        dojdate = sdf1.parse(dojstring);
+                    }
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(dojdate);
 //                c.add(Calendar.DATE, 165);
-                c.add(Calendar.MONTH, 5);
-                Date dateAfter5month = c.getTime();
-                String checkdateString = sdf.format(dateAfter5month);
-                if (DateUtils.isSameDay(tDate, dateAfter5month) || tDate.after(dateAfter5month)) {
-                    List<?> probationList = employeeMasterService.readForProbation(employeeMaster3);
+                    c.add(Calendar.MONTH, 5);
+                    Date dateAfter5month = c.getTime();
+                    String checkdateString = sdf.format(dateAfter5month);
+                    if (DateUtils.isSameDay(tDate, dateAfter5month) || tDate.after(dateAfter5month)) {
+                        List<?> probationList = employeeMasterService.readForProbation(employeeMaster3);
 
-                    if (!probationList.isEmpty() || probationList.size() > 0) {
-                        finalprobationList.add(probationList);
+                        if (!probationList.isEmpty() || probationList.size() > 0) {
+                            finalprobationList.add(probationList);
+                        }
                     }
+
                 }
-                
             }
-        }
         }
 
         HttpSession session1 = request.getSession(false);
         EmployeeMaster employeeMaster1 = (EmployeeMaster) session1.getAttribute("employeeInfo");
-        
 
 //        HttpSession session = request.getSession();
 //        session.setAttribute("FunctionalheadList", FunctionalheadList);
@@ -313,6 +312,66 @@ public class UserMasterController extends UserMasterAbstract {
             session.setAttribute("isExistingNoDueDataExist", !existingnoduelist.isEmpty());
             session.setAttribute("isProbationEmployee", !probationEmployee.isEmpty());
         }
+    }
+
+    public ModelAndView goToHomePage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String rightsAndDataListsCallingCounter = "";
+        Integer setCallingCounterOfSessionAttributes = 0;//this counter will check method is called first time or second time.
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession(false);
+        UserMaster user = (UserMaster) session.getAttribute("user");
+        CallingCounter callingCounter = new CallingCounter(setCallingCounterOfSessionAttributes);//setting that it is first time.
+        if (session.getAttribute("timesGoToDashboardCalled") == null) {
+            if (null != user.getEmployeeMasters()) {
+                addUserPersonals(request, user);
+                addUserRight(request, user);
+                addemployeeExit(request, user);
+                showUserImage(request, session, user);//this method adds userprofile image on dashbord.
+            }
+            callingCounter.increment();
+            System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName() + " is first time visited!");
+            session.setAttribute("timesGoToDashboardCalled", callingCounter.getCounter());
+            rightsAndDataListsCallingCounter = "firstTime";
+        } else {
+
+            callingCounter.increment();
+            System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName() + " is" + callingCounter.getCounter() + " times visited!");
+            session.setAttribute("timesGoToDashboardCalled", callingCounter.getCounter());
+        }
+//        rightsAndDataListsCallingCounter = callingCounter.getCounter();//number of times request for dashboard.
+        setRightsAndDataLists(request, session, user, rightsAndDataListsCallingCounter);
+        UserRightMaster userRightMaster = (UserRightMaster) session.getAttribute("userRight");
+//        if (userRightMaster.isHr()) {
+//            mv = hrDashboard(request, response);
+//        }
+//        if (!userRightMaster.isHr()) {
+//          
+//        }
+        mv = userHomeShow(request, response);
+
+        return mv;
+    }
+
+    public ModelAndView userHomeShow(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        //this request is gets modified because in empChart method in EmployeeMaster Controller modifies it and
+        // at user dashboard we requires reporting manager name but not id so we sets employeeName again here.
+        HttpSession session = request.getSession(false);
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getAttribute("employeeMaster");
+        EmployeeMaster employeeMaster1 = (EmployeeMaster) session.getAttribute("employeeInfo");
+        int id = employeeMaster1.getLevelMaster().getId();
+        LevelMaster levelMaster = new LevelMaster();
+        levelMaster = levelMasterService.readById(id);
+        try {
+            EmployeeMaster employeeMaster2 = employeeMasterService.readById(Integer.parseInt("" + employeeMaster1.getReportingManagerLevel1()));
+            employeeMaster.setReportingManagerLevel1(employeeMaster2.getEmployeeName());
+
+        } catch (NullPointerException ne) {
+        } catch (NumberFormatException nfe) {
+        }
+        session.setAttribute("level", levelMaster.getLevel());
+        mv.setViewName("forward:homeController.htm?act=openHomePage");
+        return mv;
     }
 
 }

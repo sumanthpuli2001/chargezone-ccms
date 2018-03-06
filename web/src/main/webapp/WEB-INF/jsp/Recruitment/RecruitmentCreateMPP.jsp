@@ -84,8 +84,8 @@
                                                                     <th style="width: 50px;">Department Name</th>
                                                                     <th style="width: 50px;">Job Type</th>
                                                                     <th style="width: 50px;">Budget</th>
-                                                                    <!--<th style="width: 50px;">Status</th>-->
                                                                     <th style="width: 50px;">Status</th>
+                                                                    <th style="width: 50px;">Action</th>
                                                                     <th style="width: 50px;">Edit</th>
                                                                         <%--</c:if>--%>
 
@@ -104,7 +104,7 @@
                                                                 <td>${list[4]}</td>
                                                                 <td>${list[5]}</td>
                                                                 <td>${list[2]}</td>
-                                                                <!--<td>${list[6]}</td>-->
+                                                                <td>${list[6]}</td>
                                                                 <c:if test="${list[6] == 0}"><td><span class="badge">Pending</span></td></c:if>
                                                                 <c:if test="${list[6] == 1}"><td><span class="label label-success">Approved</span></td></c:if>
                                                                 <c:if test="${list[6] == 2}"><td><span class="label label-warning">Recycled</span></td></c:if>

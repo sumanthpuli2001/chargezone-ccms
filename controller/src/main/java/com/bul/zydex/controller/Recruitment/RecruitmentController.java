@@ -594,6 +594,12 @@ public class RecruitmentController extends RecruitmentAbstract {
         int localtion = recruitmentMaster.getLocationMaster().getId();
         locationMaster = locationMasterService.readById(localtion);
         String locationName = locationMaster.getLocation();
+        
+        int  designation =  recruitmentMaster.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(designation);
+        String designationName = designationMaster.getDesignationName();
+        
+        String experiance = recruitmentMaster.getExperiance();
 
         int position = recruitmentMaster.getNumberOfPosition();
 
@@ -607,6 +613,8 @@ public class RecruitmentController extends RecruitmentAbstract {
         request.setAttribute("departmentName", departmentName);
         request.setAttribute("locationName", locationName);
         request.setAttribute("position", position);
+        request.setAttribute("designationName", designationName);
+        request.setAttribute("experiance", experiance);
         mv.setViewName("Recruitment/MprSearchCreateBudget");
 
         return mv;

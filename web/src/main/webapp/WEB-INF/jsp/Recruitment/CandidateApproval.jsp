@@ -172,8 +172,10 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                <div class="col-md-12" style="text-align: right">
+                                                    <div class="col-md-12" style="text-align: right">
                                                     <%--<c:if test="${status != 1}">--%>
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">&nbsp; F To F</button>
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalOnline">&nbsp; online</button>
                                                     <button type="submit" class="btn btn-success" id="btnType1" name="btnType" value="AssessMent" style="width: 100px" >assessment</button>
                                                     <%--</c:if>--%>
                                                 </div>
@@ -193,4 +195,48 @@
         </section>
     </div>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    
+        <div class="container">
+        <div class="modal fade" id="myModalOnline" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Online</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Online Assessment</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FACE TO FACE FORE MODAL -->
+    <div class="container">
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Face To Face</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Face To Face Assessment</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </html>

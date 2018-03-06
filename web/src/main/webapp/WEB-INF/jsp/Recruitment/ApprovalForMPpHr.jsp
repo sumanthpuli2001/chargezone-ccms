@@ -94,6 +94,11 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
+                                                        <label>Comment:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <form:input path="approvalComment" name="approvalComment" class="form-control" placeholder="Approval Comment"></form:input>
+                                                    <form:errors path="approvalComment" cssClass="errorDiv"></form:errors>
+                                                    </div>
+                                                    <div class="col-sm-6">
                                                         <label>Number Of Position:<span style="color: red;font-size: 12px;"></span></label>
                                                     <form:input path="numberOfPosition" class="form-control" placeholder="Number Of Position"></form:input>
                                                     <form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>

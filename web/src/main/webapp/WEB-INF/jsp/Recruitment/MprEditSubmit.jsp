@@ -50,37 +50,37 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="departmentMaster.id" id="departmentMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${deptMap}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
+                                                    <form:select path="departmentMaster.id" id="departmentMaster" class="form-control">
+                                                        <form:option value="" label="-- Select --" />
+                                                        <form:options items="${deptMap}"></form:options>
+                                                    </form:select>
+                                                    <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Location:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="locationMaster.id" id="locationMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${locationMap}"/>
-                                                        </form:select>
-                                                        <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
+                                                    <form:select path="locationMaster.id" id="locationMaster" class="form-control">
+                                                        <form:option value="" label="-- Select --" />
+                                                        <form:options items="${locationMap}"/>
+                                                    </form:select>
+                                                    <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Job Type:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="jobtypeMaster.id" id="jobtypeMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${jobtype1}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="jobtypeMaster.id" cssClass="errorDiv"></form:errors>
+                                                    <form:select path="jobtypeMaster.id" id="jobtypeMaster" class="form-control">
+                                                        <form:option value="" label="-- Select --" />
+                                                        <form:options items="${jobtype1}"></form:options>
+                                                    </form:select>
+                                                    <form:errors path="jobtypeMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Designation:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="designationMaster.id" id="designationMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${desigList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
+                                                    <form:select path="designationMaster.id" id="designationMaster" class="form-control">
+                                                        <form:option value="" label="-- Select --" />
+                                                        <form:options items="${desigList}"></form:options>
+                                                    </form:select>
+                                                    <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -108,9 +108,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Description:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="description" class="form-control" placeholder="Description"></form:input>
+                                                    <div class="col-sm-10">
+                                                        <label>Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:textarea path="description" class="form-control" id="editor" placeholder="Description"></form:textarea>
                                                     <form:errors path="description" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
@@ -133,4 +133,12 @@
         </section>
     </div>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+
+    <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
+    <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
+    <!--<link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/css/samples.css">-->
+    <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+    <script>
+        initSample();
+    </script>
 </html>

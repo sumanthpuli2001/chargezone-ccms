@@ -364,7 +364,6 @@ public class RecruitmentController extends RecruitmentAbstract {
     }
 
     ///////////  MPP Edit -------------
-
     public ModelAndView editMppRClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -664,10 +663,12 @@ public class RecruitmentController extends RecruitmentAbstract {
         bind(request, recruitmentMaster);
         String btnType = request.getParameter("btnType");
         String mppid = request.getParameter("empreqid");
+        String approvalComment = request.getParameter("approvalComment");
 
         if (btnType.equals("Approve")) {
             recruitmentMaster = recruitmentService.readById(Integer.parseInt(mppid));
             recruitmentMaster.setMppStatus(1);
+            recruitmentMaster.setApprovalComment(approvalComment);
             recruitmentService.update(recruitmentMaster);
             request.setAttribute("successMessage",
                     "Information : The Request is Approved successfully.");
@@ -675,6 +676,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         if (btnType.equals("Recycle")) {
             recruitmentMaster = recruitmentService.readById(Integer.parseInt(mppid));
             recruitmentMaster.setMppStatus(2);
+            recruitmentMaster.setApprovalComment(approvalComment);
             recruitmentService.update(recruitmentMaster);
             request.setAttribute("successMessage",
                     "Information : The Request is Returned successfully.");
@@ -682,6 +684,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         if (btnType.equals("Reject")) {
             recruitmentMaster = recruitmentService.readById(Integer.parseInt(mppid));
             recruitmentMaster.setMppStatus(3);
+            recruitmentMaster.setApprovalComment(approvalComment);
             recruitmentService.update(recruitmentMaster);
             request.setAttribute("successMessage",
                     "Information : The Request is Rejectd successfully.");

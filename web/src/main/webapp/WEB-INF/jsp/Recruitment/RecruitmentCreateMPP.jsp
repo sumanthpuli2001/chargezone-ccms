@@ -104,7 +104,7 @@
                                                                 <td>${list[4]}</td>
                                                                 <td>${list[5]}</td>
                                                                 <td>${list[2]}</td>
-                                                                <td>${list[3]}</td>
+                                                                <td>${list[6]}</td>
                                                                 <c:if test="${list[6] == 0}"><td><span class="badge">Pending</span></td></c:if>
                                                                 <c:if test="${list[6] == 1}"><td><span class="label label-success">Approved</span></td></c:if>
                                                                 <c:if test="${list[6] == 2}"><td><span class="label label-warning">Recycled</span></td></c:if>

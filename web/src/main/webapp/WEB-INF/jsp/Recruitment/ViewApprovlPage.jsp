@@ -20,6 +20,18 @@
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Budget Detail List</li>
             </ol>
+            
+               <script>
+            function reject() {
+                var checkreject = confirm("If You Reject You Can Not Edit,Submit Or View. So, Are You Sure You Want to Reject This MPR?");
+                if (checkreject) {
+                    checkreject = document.getElementsByName('Reject');
+                    return true;
+                }
+                return false;
+            }
+        </script>
+            
         </section>
         <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>
@@ -82,24 +94,24 @@
                                                         <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+<!--                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Employee Category:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="mprEmployeeCategory.id" id="mprEmployeeCategory" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${categoryList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="mprEmployeeCategory.id" cssClass="errorDiv"></form:errors>
+                                                        <%--<form:select path="mprEmployeeCategory.id" id="mprEmployeeCategory" class="form-control">--%>
+                                                            <%--<form:option value="" label="-- Select --" />--%>
+                                                            <%--<form:options items="${categoryList}"></form:options>--%>
+                                                        <%--</form:select>--%>
+                                                        <%--<form:errors path="mprEmployeeCategory.id" cssClass="errorDiv"></form:errors>--%>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Employee Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="mprEmployeeTypeMaster.id" id="mprEmployeeTypeMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${emptypeList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="mprEmployeeTypeMaster.id" cssClass="errorDiv"></form:errors>
+                                                        <%--<form:select path="mprEmployeeTypeMaster.id" id="mprEmployeeTypeMaster" class="form-control">--%>
+                                                            <%--<form:option value="" label="-- Select --" />--%>
+                                                            <%--<form:options items="${emptypeList}"></form:options>--%>
+                                                        <%--</form:select>--%>
+                                                        <%--<form:errors path="mprEmployeeTypeMaster.id" cssClass="errorDiv"></form:errors>--%>
                                                     </div>
-                                                </div>
+                                                </div>-->
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Name:<span style="color: red;font-size: 12px;">*</span></label>
@@ -143,7 +155,7 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-4" style="text-align: left">
                                                     <c:if test="${status != 1}">
-                                                        <button type="submit" class="btn btn-danger" id="btnType1" name="btnType" value="Reject" style="width: 100px" >REJECT</button>
+                                                        <button type="submit" class="btn btn-danger" onclick="return reject();" id="btnType1" name="btnType" value="Reject" style="width: 100px" >REJECT</button>
                                                     </c:if>
                                                 </div>
                                                 <div class="col-sm-4" style="text-align: center">

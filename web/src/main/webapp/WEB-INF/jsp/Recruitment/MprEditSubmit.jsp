@@ -46,6 +46,7 @@
                                         <form:form class="form-horizontal" method="post"
                                                    commandName="mprMaster" action="recruitment.htm?act=mprEditSubmitDetail">
                                             <form:hidden path="id"></form:hidden>
+                                            <form:hidden path="status"></form:hidden>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Department:<span style="color: red;font-size: 12px;">*</span></label>

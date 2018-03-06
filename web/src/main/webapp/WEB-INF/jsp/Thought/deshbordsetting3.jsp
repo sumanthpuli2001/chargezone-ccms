@@ -10,7 +10,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Dashbord Setting </title>
+        <title>Home Setting </title>
          <script>
             function deleteCheck11() {
                 var checkboxes = confirm("Are you sure you want to delete?");
@@ -30,10 +30,10 @@
     </head>
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>Dashbord Setting</h1>
+            <h1>Home Setting</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li><li>Setting</li>
-                <li class="active">Dashbord Setting</li>
+                <li class="active">Home Setting</li>
             </ol>
         </section>
        <ul class="nav nav-tabs">

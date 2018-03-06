@@ -68,7 +68,8 @@ public class LogInController extends LogInAbstract {
             mv = redirectToLogin(request, response);
         } else {
             addUser(request, user);
-            mv.setViewName("forward:userMaster.htm?act=goToDashboard");
+//            mv.setViewName("forward:userMaster.htm?act=goToDashboard");
+            mv.setViewName("forward:userMaster.htm?act=goToHomePage");
         }
         return mv;
     }

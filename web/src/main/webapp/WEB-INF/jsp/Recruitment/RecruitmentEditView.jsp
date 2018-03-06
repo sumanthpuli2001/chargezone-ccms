@@ -15,7 +15,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Edit Budget Detail</h1>
+            <h1>Edit Budget Detail11</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Edit Budget Detail</li>
@@ -46,6 +46,7 @@
 
                                         <form:form class="form-horizontal" method="post" commandName="recruitmentMaster" action="recruitment.htm?act=budgetEditSubmit">
                                             <form:hidden path="id"></form:hidden>
+                                            <form:hidden path="mppStatus"></form:hidden>
                                             <form:hidden path="createdDate"></form:hidden>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
@@ -109,13 +110,15 @@
                                                     <form:input path="experiance" class="form-control" placeholder="Experience"></form:input>
                                                     <form:errors path="experiance" cssClass="errorDiv"></form:errors>
                                                     </div>
-                                                </div>  
+                                                </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6 col-sm-offset-5">
+                                                <c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 3}">
                                                         <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                                </c:if>
                                                     </div>
 
-                                                </div>
+                                            </div>
                                         </form:form>
                                         <!--</div>-->
 

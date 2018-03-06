@@ -1,7 +1,7 @@
 <%@page import="com.bul.zydex.model.EmployeeMaster"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<script src="StorageYard/JS/jssor.slider-27.0.3.min.js"></script>
+<!--<script src="StorageYard/JS/jssor.slider-27.0.3.min.js"></script>
 <!DOCTYPE html>
 <style>
     body {font-family: Arial, Helvetica, sans-serif;}
@@ -117,88 +117,206 @@
     .jssora053:hover {opacity:.8;}
     .jssora053.jssora053dn {opacity:.5;}
     .jssora053.jssora053ds {opacity:.3;pointer-events:none;}
-</style>
+</style>-->
 
 <html>
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
-    <head>
+    <head onload="rrshowSlides(1);">
         <title>Home</title>
         <script>
             function viewEmployeeDetail(employeeId, userId) {
                 window.location = "employeeMaster.htm?act=getUserDetail&id=" + employeeId + "&userid=" + userId;
             }
         </script>
-        <script type="text/javascript">
-            jssor_1_slider_init = function () {
+        <script>
+            jQuery.noConflict();
+            jQuery(document).ready(function () {
 
-                var jssor_1_SlideoTransitions = [
-                    [{b: 0, d: 600, y: -290, e: {y: 27}}],
-                    [{b: 0, d: 1000, y: 185}, {b: 1000, d: 500, o: -1}, {b: 1500, d: 500, o: 1}, {b: 2000, d: 1500, r: 360}, {b: 3500, d: 1000, rX: 30}, {b: 4500, d: 500, rX: -30}, {b: 5000, d: 1000, rY: 30}, {b: 6000, d: 500, rY: -30}, {b: 6500, d: 500, sX: 1}, {b: 7000, d: 500, sX: -1}, {b: 7500, d: 500, sY: 1}, {b: 8000, d: 500, sY: -1}, {b: 8500, d: 500, kX: 30}, {b: 9000, d: 500, kX: -30}, {b: 9500, d: 500, kY: 30}, {b: 10000, d: 500, kY: -30}, {b: 10500, d: 500, c: {x: 125.00, t: -125.00}}, {b: 11000, d: 500, c: {x: -125.00, t: 125.00}}],
-                    [{b: 0, d: 600, x: 535, e: {x: 27}}],
-                    [{b: -1, d: 1, o: -1}, {b: 0, d: 600, o: 1, e: {o: 5}}],
-                    [{b: -1, d: 1, c: {x: 250.0, t: -250.0}}, {b: 0, d: 800, c: {x: -250.0, t: 250.0}, e: {c: {x: 7, t: 7}}}],
-                    [{b: -1, d: 1, o: -1}, {b: 0, d: 600, x: -570, o: 1, e: {x: 6}}],
-                    [{b: -1, d: 1, o: -1, r: -180}, {b: 0, d: 800, o: 1, r: 180, e: {r: 7}}],
-                    [{b: 0, d: 1000, y: 80, e: {y: 24}}, {b: 1000, d: 1100, x: 570, y: 170, o: -1, r: 30, sX: 9, sY: 9, e: {x: 2, y: 6, r: 1, sX: 5, sY: 5}}],
-                    [{b: 2000, d: 600, rY: 30}],
-                    [{b: 0, d: 500, x: -105}, {b: 500, d: 500, x: 230}, {b: 1000, d: 500, y: -120}, {b: 1500, d: 500, x: -70, y: 120}, {b: 2600, d: 500, y: -80}, {b: 3100, d: 900, y: 160, e: {y: 24}}],
-                    [{b: 0, d: 1000, o: -0.4, rX: 2, rY: 1}, {b: 1000, d: 1000, rY: 1}, {b: 2000, d: 1000, rX: -1}, {b: 3000, d: 1000, rY: -1}, {b: 4000, d: 1000, o: 0.4, rX: -1, rY: -1}]
-                ];
+                jQuery("#employeeName").tokenInput(${list}, {
+                    preventDuplicates: true,
+                    noResultsText: "No Result",
+                    tokenLimit: "1",
+                    searchingText: "Searching ... .. ."
+                });
+            });
 
-                var jssor_1_options = {
-                    $AutoPlay: 1,
-                    $Idle: 2000,
-                    $Cols: 1,
-                    $Align: 0,
-                    $CaptionSliderOptions: {
-                        $Class: $JssorCaptionSlideo$,
-                        $Transitions: jssor_1_SlideoTransitions,
-                        $Breaks: [
-                            [{d: 2000, b: 1000}]
-                        ]
-                    },
-                    $ArrowNavigatorOptions: {
-                        $Class: $JssorArrowNavigator$
-                    },
-                    $BulletNavigatorOptions: {
-                        $Class: $JssorBulletNavigator$
-                    }
-                };
-
-                var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-
-                /*#region responsive code begin*/
-
-                var MAX_WIDTH = 980;
-
-                function ScaleSlider() {
-                    var containerElement = jssor_1_slider.$Elmt.parentNode;
-                    var containerWidth = containerElement.clientWidth;
-
-                    if (containerWidth) {
-
-                        var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
-
-                        jssor_1_slider.$ScaleWidth(expectedWidth);
-                    }
-                    else {
-                        window.setTimeout(ScaleSlider, 30);
-                    }
-                }
-
-                ScaleSlider();
-
-                $Jssor$.$AddEvent(window, "load", ScaleSlider);
-                $Jssor$.$AddEvent(window, "resize", ScaleSlider);
-                $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
-                /*#endregion responsive code end*/
-            };
         </script>
-        <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,regular,500,600,700&subset=latin-ext,vietnamese,latin,cyrillic" rel="stylesheet" type="text/css" />
+
+        <style>
+            /*            body {
+                            font-family: Arial;
+                            margin: 0;
+                        }
+            
+                        * {
+                            box-sizing: border-box;
+                        }
+            
+                        img {
+                            vertical-align: middle;
+                        }*/
+
+            /* Position the image container (needed to position the left and right arrows) */
+            .imgcontainer {
+                position: relative;
+            }
+
+            /* Hide the images by default */
+            .mySlides {
+                display: none;
+                width: 100% !important;
+                height: 150px !important;
+            }
+            div.mySlides img{
+                width: 100% !important;
+                height: 150px !important;
+            }
+
+            /* Add a pointer when hovering over the thumbnail images */
+            /*            .cursor {
+                            cursor: pointer;
+                        }*/
+
+            /* Next & previous buttons */
+            .prev1,
+            .next1 {
+                cursor: pointer;
+                position: absolute;
+                top: 38%;
+                width: auto;
+                margin-top: -50px;
+                color: white;
+                font-weight: bold;
+                font-size: 20px;
+                border-radius: 0 3px 3px 0;
+                user-select: none;
+                -webkit-user-select: none;
+            }
+
+            .prev1{
+                padding-left: 3%;
+            }
+
+            /* Position the "next button" to the right */
+            .next1 {
+                right: 0;
+                border-radius: 3px 0 0 3px;
+                padding-right: 10%;
+            }
+
+            /* On hover, add a black background color with a little bit see-through */
+            .prev1:hover,
+            .next1:hover {
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+            /* Number text (1/3 etc) */
+            /*            .numbertext {
+                            color: #f2f2f2;
+                            font-size: 12px;
+                            padding: 8px 12px;
+                            position: absolute;
+                            top: 0;
+                        }*/
+
+            /* Container for image text */
+            .img-caption-container {
+                text-align: center;
+                background-color: #222;
+                padding: 2px 16px;
+                color: white;
+            }
+
+            /*            .row:after {
+                            content: "";
+                            display: table;
+                            clear: both;
+                        }*/
+
+            /* Six columns side by side */
+            /*            .column {
+                            float: left;
+                            width: 16.66%;
+                        }*/
+
+            /* Add a transparency effect for thumnbail images */
+            /*            .demo {
+                            opacity: 0.6;
+                        }*/
+
+            /*            .active,
+                        .demo:hover {
+                            opacity: 1;
+                        }*/
+
+
+            .rrmySlides {
+                display: none;
+                width: 100% !important;
+                height: 150px !important;
+            }
+
+            div.rrmySlides img{
+                width: 100% !important;
+                height: 150px !important;
+            }
+
+            .prev2,
+            .next2 {
+                cursor: pointer;
+                position: absolute;
+                top: 88%;
+                width: auto;
+                margin-top: -50px;
+                color: white;
+                font-weight: bold;
+                font-size: 20px;
+                border-radius: 0 3px 3px 0;
+                user-select: none;
+                -webkit-user-select: none;
+            }
+
+            .prev2{
+                padding-left: 3%;
+            }
+
+            /* Position the "next button" to the right */
+            .next2 {
+                right: 0;
+                border-radius: 3px 0 0 3px;
+                padding-right: 10%;
+            }
+
+            /* On hover, add a black background color with a little bit see-through */
+            .prev2:hover,
+            .next2:hover {
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+
+            .links {
+                font-size:24px; 
+                color: #00a56c;
+            }
+
+            .test {
+                width:60px;
+                margin-bottom: 20px;
+                white-space: normal;
+                text-align: center;
+
+            }
+
+        </style>
+
+
+        <!--<link href="https://fonts.googleapis.com/css?family=Oswald:200,300,regular,500,600,700&subset=latin-ext,vietnamese,latin,cyrillic" rel="stylesheet" type="text/css" />-->
     </head>
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>Home</h1>
@@ -227,48 +345,74 @@
                                     </div>
                                 </div>
                                 <div class="row">
+
+
+
+
                                     <div class="col-md-5">
                                         <div class="box box-primary">
                                             <div class="box-header">
-                                                <h3 class="box-title">Employee Detail</h3>
-                                                <div class="box-tools pull-right">
-                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="box-body">
-                                                <ul class="products-list product-list-in-box">
-                                                    <li class="item">
-                                                        <span class="product-title">Employee No : </span>
-                                                        <span class="product-title">  ${employeeMaster.employeeId}</span>
-                                                    </li>
-                                                    <li class="item">
-                                                        <span class="product-title">Employee Name : </span>
-                                                        <span class="product-title">  ${employeeMaster.employeeName}</span>
-                                                    </li>
-                                                    <li class="item">
-                                                        <span class="product-title">Department : </span>
-                                                        <span class="product-title">  ${employeeMaster.departmentMaster.departmentName}</span>
-                                                    </li> 
-                                                    <li class="item">
-                                                        <span class="product-title">Designation : </span>
-                                                        <span class="product-title">  ${employeeMaster.designationMaster.designationName}</span>
-                                                    </li>
-                                                    <li class="item">
-                                                        <span class="product-title">Level : </span>
-                                                        <span class="product-title">  ${employeeMaster.levelMaster.level}</span>
-                                                    </li> 
-                                                    <li class="item">
-                                                        <span class="product-title">Reporting Manager :</span>
-                                                        <span class="product-title">  ${employeeMaster.reportingManagerLevel1}</span>
-                                                    </li> 
-                                                    <li class="item">
-                                                        <span class="product-title">Work Location :</span>
-                                                        <span class="product-title">  ${employeeMaster.locationMaster.location}</span>
-                                                    </li> 
-                                                </ul>
+                                                <h3 class="box-title" id="gallery">Life @ Spc</h3>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="box-body">
+                                            <div>
+                                                <c:forEach var="gallery" items="${galleryList}">
+
+                                                    <a href="homeController.htm?act=opanGallery">
+                                                        <div  class="mySlides">
+
+                                                            <img hight="400" width="500" src="StorageYard/galleryimage/${gallery.imagesPath}"  >
+                                                        </div>
+                                                    </a>
+                                                </c:forEach>
+
+
+
+                                                <a class="prev1" onclick="plusSlides(-1)">❮</a>
+                                                <a class="next1" onclick="plusSlides(1)">❯</a>
+
+                                                <div >
+                                                    <p id="caption"></p>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="box box-primary">
+                                            <div class="box-header">
+                                                <h3 class="box-title" id="rAndR">Rewards And Recognition</h3>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="box-body">
+                                            <div>
+                                                <c:forEach var="rr" items="${RRList}">
+
+                                                    <a href="homeController.htm?act=opanRR">
+                                                        <div  class="rrmySlides">
+
+                                                            <img hight="400" width="500" src="StorageYard/RandRimage/${rr.imagesPath}"  >
+                                                        </div>
+                                                    </a>
+                                                </c:forEach>
+
+
+
+                                                <a class="prev2" onclick="rrplusSlides(-1)">❮</a>
+                                                <a class="next2" onclick="rrplusSlides(1)">❯</a>
+
+                                                <div >
+                                                    <p id="caption"></p>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>           
+
                                     <div class="col-md-1">
                                     </div>
                                     <div class="col-md-6">
@@ -293,64 +437,142 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-md-5">
-                                    <div class="box box-primary">
-                                        <div class="box-header">
-                                            <h3 class="box-title" id="gallery">Gallery</h3>
-                                        </div>
-                                    </div>
-                                    <div class="box box-primary">
-                                        <div class="box-header">
-                                            <h3 class="box-title" id="myImg1">Emergency Contact Detail</h3>
-                                        </div>
-                                    </div>
-                                    <div class="box box-primary">
-                                        <div class="box-header">
-                                            <h3 class="box-title" id="rAndR">Rewards And Recognition</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                </div>
                                 <div class="col-md-5">
                                     <div class="box box-primary">
                                         <div class="box-header">
                                             <h3 class="box-title">Todays Birthday</h3>
-                                            <div class="box-tools pull-right">
-                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            </div>
+<!--                                            <div class="box-tools pull-right">
+                                                <button class="btn btn-box-tool" data-widget="collapse"></button>
+                                            </div>-->
                                             <div class="box-body">
+                                                
+                                                
+                                                 <marquee>
+                                                    <div class="node-cell">
+                                                        <div class="node ui-draggable ui-droppable"> 
+                                                            <div >
+                                                                <c:forEach var="todayBirthday" items="${TodaysBirthdays}">
 
-                                                <c:forEach var="todayBirthday" items="${TodaysBirthdays}">
-                                                    <ul class="products-list product-list-in-box">
-                                                        <li class="item">
-                                                            <span class="product-title">  ${todayBirthday[1]}</span>
-                                                        </li>
-                                                    </ul>
-                                                </c:forEach>
+                                                                    <img src="${todayBirthday[2]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                </c:forEach>
+                                                            </div>
+                                                            <div>
+                                                                <c:forEach var="todayBirthday" items="${TodaysBirthdays}">
+
+
+                                                                    <label class="test">${todayBirthday[1]}</label>
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+
+                                                                </c:forEach>
+                                                            </div>
+                                                        </div>
+                                                </marquee>
+
+
+<!--                                                <marquee>
+                                                    <div class="node-cell">
+                                                        <div class="node ui-draggable ui-droppable">
+
+                                                            <%--<c:forEach var="" items="">--%>
+
+                                                                <img src="" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                                <br>
+
+                                                                <span style="font-size: 105%;color: black"></span>
+
+
+                                                            <%--</c:forEach>--%>
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                </marquee>-->
+
+
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-5">
                                     <div class="box box-primary">
                                         <div class="box-header">
-                                            <h3 class="box-title">Last Registered Employee Detail</h3>
-                                            <div class="box-tools pull-right">
+                                            <h3 class="box-title">New Joinee</h3>
+<!--                                            <div class="box-tools pull-right">
                                                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            </div>
+                                            </div>-->
                                             <div class="box-body">
-                                                <ul class="products-list product-list-in-box">
-                                                    <li class="item">
-                                                        <c:forEach var="newJoining" items="${newJoiningList}">
-                                                            <ul class="products-list product-list-in-box">
-                                                                <li class="item">
-                                                                    <span class="product-title">  ${newJoining}</span>
-                                                                </li>
-                                                            </ul>
-                                                        </c:forEach>
 
-                                                    </li>
-                                                </ul>
+
+                                                <marquee>
+                                                    <div class="node-cell">
+                                                        <div class="node ui-draggable ui-droppable"> 
+                                                            <div >
+                                                                <c:forEach var="newJoining" items="${newJoiningList}">
+
+                                                                    <img src="${newJoining[2]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                </c:forEach>
+                                                            </div>
+                                                            <div>
+                                                                <c:forEach var="newJoining" items="${newJoiningList}">
+
+
+                                                                    <label class="test">${newJoining[1]}</label>
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+                                                                    &nbsp;
+
+                                                                </c:forEach>
+                                                            </div>
+                                                        </div>
+                                                </marquee>
+
+
+
+
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -358,12 +580,65 @@
 
                             </div>
                             <div class="row">
+                                <div class="col-md-1">
+                                </div>
+
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a class="label label-success" style="font-size: 20px"  href="hrServiceRequest.htm?act=searchSubmit">
+                                        <i class="fa fa-envelope"></i><strong> HR Help Desk </strong>
+                                    </a>
+                                </div>
+                                <div  class="col-xs-4 col-sm-4 col-md-4">
+                                    <a class="label label-warning" style="font-size: 20px" >
+                                        <i class="fa fa-twitch"></i>
+                                        <strong> Suggestion Box</strong>
+                                    </a>
+                                </div>
+                                <div  class="col-xs-4 col-sm-4 col-md-3">
+                                    <a class="label label-info" style="font-size: 20px" >
+                                        <i class="fa fa-weixin"></i>
+                                        <strong>Classified</strong>
+                                    </a>
+                                </div>
+
+
+                            </div>
+                            <br>
+                            <br>
+                            <div class="row">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a class="label label-primary" style="font-size: 20px" href="hrServiceRequest.htm?act=searchSubmit">
+                                        <i class="fa fa-book"></i> &nbsp<strong>Emergency Contact</strong>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a class="label label-default" style="font-size: 20px"  href="http://www.spcls.co.in/csr.aspx" target="_blank">
+                                        <i class="fa fa-pencil-square-o"></i> &nbsp<strong>CSR</strong>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-3">
+                                    <a class="label label-danger" style="font-size: 20px"  href="http://www.spcls.co.in/news-events.aspx" target="_blank">
+                                        <i class="fa fa-newspaper-o"></i> &nbsp<strong>News & Event</strong>
+                                    </a>
+                                </div>
+
+
+                            </div>
+                            <br>
+                            <br>
+
+                            <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                         <!--<span class="product-title">  ${thoughtMaster}</span>-->
-                                    <marquee style="font-size:26px !important;">${thoughtMaster.thought}shutterstock ...!!</marquee>
+                                    <marquee style="font-size:26px !important;"><strong style="color: mediumseagreen">Today's Thought:</strong> <span style="color: #006fad">${thoughtMaster.thought}</span></marquee>
                                 </div>
                             </div>
-                      
+
                         </div>
                         <div class="tab-pane" id="tab_2">
                         </div>
@@ -388,33 +663,33 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="tab-content">
-                        <div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
-                            <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:980px;height:380px;overflow:hidden;visibility:hidden;">
-                                <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
-                                    <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="img/spin.svg" />
-                                </div>
-                                <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;">
-                                    <c:forEach var="gallery" items="${galleryList}">
-                                        <div data-p="240.00">
-                                            <img data-u="image" src="StorageYard/galleryimage/${gallery.imagesPath}" />
-                                        </div>
-                                    </c:forEach>
-
-                                </div>
-                                <div data-u="arrowleft" class="jssora053" style="width:55px;height:55px;top:0px;left:25px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-                                    <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                                    <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
-                                    </svg>
-                                </div>
-                                <div data-u="arrowright" class="jssora053" style="width:55px;height:55px;top:0px;right:25px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-                                    <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                                    <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
-                                    </svg>
-                                </div>
-                            </div>
+                    <!--                    <div class="tab-content">
+                                            <div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
+                                                <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:980px;height:380px;overflow:hidden;visibility:hidden;">
+                                                    <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
+                                                        <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="img/spin.svg" />
+                                                    </div>
+                                                    <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;">
+                    <%--<c:forEach var="gallery" items="${galleryList}">--%>
+                        <div data-p="240.00">
+                            <img data-u="image" src="StorageYard/galleryimage/${gallery.imagesPath}" />
                         </div>
-                    </div>
+                    <%--</c:forEach>--%>
+
+                </div>
+                <div data-u="arrowleft" class="jssora053" style="width:55px;height:55px;top:0px;left:25px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
+                    <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                    <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
+                    </svg>
+                </div>
+                <div data-u="arrowright" class="jssora053" style="width:55px;height:55px;top:0px;right:25px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
+                    <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                    <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>-->
                 </div>
             </div>
         </div>
@@ -508,36 +783,141 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 
 
+</html>
 <script>
-    jQuery(document).ready(function () {
-        $("#org").jOrgChart({
-            chartElement: '#chart',
-            dragAndDrop: true
-        });
-    });
+    var slideIndex = 1;
+    showSlides(slideIndex);
 
-    // Get the modal
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
 
+    function showSlides(n) {
+        var i;
+        var j;
+        var imgsize = 1;
 
-    // Get the image and insert it inside the modal - use its "alt" text as a caption
-    var galleryModel = document.getElementById('gallery');
-    var rAndrModel = document.getElementById('rAndR');
-    var modal = document.getElementById('myModal');
-    galleryModel.onclick = function () {
-        $('#myModal').modal('show');
-    };
-    rAndrModel.onclick = function () {
-        $('#myModal1').modal('show');
+        var slides = document.getElementsByClassName("mySlides");
 
 
-    };
+        if (n > slides.length) {
+            slideIndex = 1;
+        }
+        if (n < 1) {
+            slideIndex = slides.length;
+        }
+        if (n === 1 && slides.length === 0) {
+            slides.length = 1;
+
+        }
+
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        slides[slideIndex - 1].style.display = "block";
+
+
+    }
+
 
 </script>
 
+<script>
+    showSlides();
+    var slideIndex = 0;
 
-<script type="text/javascript">jssor_1_slider_init();</script>
-</html>
+    function showSlides() {
+        var slides = document.getElementsByClassName("mySlides");
+        var n;
+
+        for (n = 0; n < slides.length; n++) {
+            slides[n].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+            slideIndex = 1;
+        }
+
+        slides[slideIndex - 1].style.display = "block";
+
+        setTimeout(showSlides, 5000); // Change image every 2 seconds
+    }
+</script>
+
+
+
+<script>
+    var rrslideIndex = 1;
+    rrshowSlides(rrslideIndex);
+
+    function rrplusSlides(n) {
+        rrshowSlides(rrslideIndex += n);
+    }
+    function rrcurrentSlide(n) {
+        rrshowSlides(rrslideIndex = n);
+    }
+
+    function rrshowSlides(n) {
+        var i;
+        var j;
+        var imgsize = 1;
+
+        var rrslides = document.getElementsByClassName("rrmySlides");
+
+
+        if (n > rrslides.length) {
+            rrslideIndex = 1;
+        }
+        if (n < 1) {
+            rrslideIndex = rrslides.length;
+        }
+        if (n === 1 && rrslides.length === 0) {
+            rrslides.length = 1;
+
+        }
+
+        for (i = 0; i < rrslides.length; i++) {
+            rrslides[i].style.display = "none";
+        }
+
+        rrslides[rrslideIndex - 1].style.display = "block";
+
+
+    }
+
+
+</script>
+<script>
+    rrshowSlides();
+    var rrslideIndex = 0;
+
+    function rrshowSlides() {
+        var rrslides = document.getElementsByClassName("rrmySlides");
+        var n;
+
+        for (n = 0; n < rrslides.length; n++) {
+            rrslides[n].style.display = "none";
+        }
+        rrslideIndex++;
+        if (rrslideIndex > rrslides.length) {
+            rrslideIndex = 1;
+        }
+
+        rrslides[rrslideIndex - 1].style.display = "block";
+
+        setTimeout(rrshowSlides, 5000); // Change image every 2 seconds
+    }
+</script>
+
+
+
+

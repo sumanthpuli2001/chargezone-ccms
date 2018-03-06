@@ -21,6 +21,18 @@
                 <li class="active">Edit Budget Detail</li>
             </ol>
         </section>
+        
+            <script>
+            function reject() {
+                var checkreject = confirm("If You Reject You Can Not Edit,Submit Or View. So, Are You Sure You Want to Reject This Man Power Planning?");
+                if (checkreject) {
+                    checkreject = document.getElementsByName('Reject');
+                    return true;
+                }
+                return false;
+            }
+        </script>
+        
         <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>
         </c:if>
@@ -86,28 +98,21 @@
                                                     <form:input path="numberOfPosition" class="form-control" placeholder="Number Of Position"></form:input>
                                                     <form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Date:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:input path="date" class="form-control" placeholder="Date"></form:input>
-                                                        <form:errors path="date" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                  <div class="form-group">
                                                     <div class="col-sm-4" style="text-align: left">
-                                                    <c:if test="${status != 1}">
-                                                        <button type="submit" class="btn btn-danger" id="btnType1" name="btnType" value="Reject" style="width: 100px" >REJECT</button>
+                                                    <c:if test="${recruitmentMaster.mppStatus == 1 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 0}">
+                                                        <input type="submit" class="btn btn-danger" onclick="return reject();" id="btnType1" name="btnType" value="Reject" style="width: 100px" ></input>
                                                     </c:if>
                                                 </div>
                                                 <div class="col-sm-4" style="text-align: center">
-                                                    <c:if test="${status != 2}">
-                                                        <button type="submit" class="btn btn-warning" id="btnType2" name="btnType"  value="Return"  style="width: 100px">RECYCLE</button>
+                                                    <c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 3 || recruitmentMaster.mppStatus == 1}">
+                                                        <input type="submit" class="btn btn-warning" id="btnType2" name="btnType"  value="Recycle"  style="width: 100px"></input>
                                                     </c:if>
                                                 </div>
                                                 <div class="col-sm-4" style="text-align: right">
-                                                    <c:if test="${status != 3}">
-                                                        <button type="submit" class="btn btn-success" id="btnType2" name="btnType"  value="Approve" style="width: 100px">APPROVE</button>
+                                                    <c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 3}">
+                                                        <input type="submit" class="btn btn-success" id="btnType2" name="btnType"  value="Approve" style="width: 100px"></input>
                                                     </c:if>
                                                 </div>
 

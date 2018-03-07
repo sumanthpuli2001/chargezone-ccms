@@ -99,16 +99,39 @@
                                                                 <td>${list[3]}</td>
                                                                 <td>${list[2]}</td>
                                                                 <td>${list[4]}</td>
-                                                                <c:if test="${list[5] == 0}"><td><span class="badge">Pending</span></td></c:if>
-                                                                <c:if test="${list[5] == 1}"><td><span class="label label-success">Approved</span></td></c:if>
-                                                                <c:if test="${list[5] == 2}"><td><span class="label label-warning">Recycled</span></td></c:if>
-                                                                <c:if test="${list[5] == 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
+                                                                <td>
+                                                                    <c:if test="${list[5] eq 0}"><span class="badge">Pending</span></c:if>
+                                                                    <%--<c:if test="${list[5] == 1}"><span class="badge">Recycle</span></c:if>--%>
+                                                                    <%--<c:if test="${list[5] == 2}"><span class="badge">Recycle</span></c:if>--%>
+                                                                    <c:if test="${list[5] eq 3}"><span class="badge">Reject</span></c:if>
+                                                                    <c:if test="${list[5] eq 4 && list[6] ne list[7]}"><span class="label label-success">Approved</span></c:if>
+                                                                    <c:if test="${list[5] eq 4 && list[6] eq list[7]}"><span class="badge">Pending</span></c:if>
+                                                                    <c:if test="${list[5]  eq 5}"><span class="label label-success">Final Approved</span></c:if>
+                                                                    <c:if test="${list[5] eq 2}"><span class="label label-warning">Recycled</span></c:if>
+                                                                    <%--<c:if test="${list[5] == 0}"><span class="badge">Rejected</span></c:if>--%>
+
+
+
+                                                                </td>
+
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>
-                                                                    <div class="btn-group">
-                                                                        <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                    <div class="btn-group"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        <button type="button" onclick="viewMprApproval(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
                                                                         </button>
+                                                                    </div>
+                                                                    <div class="btn-group">
+                                                                        <c:if test="${list[5] eq 4 && list[6] eq list[7]}">
+                                                                            <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                                &nbsp;&nbsp;Edit
+                                                                            </button>
+                                                                        </c:if>
+                                                                        <c:if test="${list[5] eq 2 && list[6] eq list[7]}">
+                                                                            <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                                &nbsp;&nbsp;Edit
+                                                                            </button>
+                                                                        </c:if>
                                                                     </div>
                                                                 </td>
                                                                 <%--</c:if>--%>
@@ -136,6 +159,11 @@
     <script>
         function editViewClick(id) {
             window.location = 'recruitment.htm?act=viewClickApprove&id=' + id;
+        }
+    </script>
+    <script>
+        function viewMprApproval(id) {
+            window.location = 'recruitment.htm?act=mprViewOnly&id=' + id;
         }
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

@@ -6,12 +6,17 @@
 package com.bul.zydex.dao.MprApproval;
 
 import com.bul.zydex.dao.GenericsDAO;
+import com.bul.zydex.model.MprApproval;
 import java.util.List;
 
 /**
  *
  * @author Vikas
  */
-public interface MprApprovalDAO<T> extends GenericsDAO<T>{
+public interface MprApprovalDAO<T> extends GenericsDAO<T> {
+
+    public List<?> readApprovalMPRList(int empId);
+
+    public MprApproval readByMprIdAndEmpId(int mprid, int empid);
     
 }

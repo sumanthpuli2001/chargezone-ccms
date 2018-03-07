@@ -37,4 +37,9 @@ public class MprMasterServiceImpl<T> extends GenericsServiceImpl<T> implements M
         return mprMasterDAO.readForMPRDetail();
     }
 
+    @Override
+    public List<?> readMprListByUserId(int empId) {
+        return mprMasterDAO.readMprListByUserId(empId);
+    }
+
 }

@@ -31,4 +31,45 @@ public class QuestionLibraryDAOImpl<T> extends GenericsDAOImpl<T> implements Que
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readByQusNameCatyMark(int categoryId, String Question, int marks) {
+        String query = "";
+        String condition = "";
+
+        if (0 != categoryId) {
+            condition += "Where m.id=" + categoryId;
+        }
+        if (!Question.equals("")) {
+            if (condition.equals("")) {
+                condition += "Where a.question like '%" + Question + "%'";
+            } else {
+                condition += "and a.question like '%" + Question + "%'";
+            }
+        }
+        if (0 != marks) {
+            if (condition.equals("")) {
+                condition += "Where a.marks = " + marks;
+            } else {
+                condition += "and a.marks = " + marks;
+            }
+        }
+
+//     
+        if (!condition.equals("")) {
+            query += " Select a "
+                    + " From QuestionLibrary a "
+                    + " left join a.mprEmployeeCategory m "
+                    +  condition
+                    + " order by a.id desc ";
+        } else {
+            query += " Select a "
+                    + " From QuestionLibrary a "
+                    + " left join a.mprEmployeeCategory m "
+                    + " order by a.id desc ";
+        }
+
+        return getHibernateTemplate().find(query);
+    }
+    
+
 }

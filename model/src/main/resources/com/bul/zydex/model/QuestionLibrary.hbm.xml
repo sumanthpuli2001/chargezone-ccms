@@ -26,11 +26,11 @@
         <property name="satatus" type="java.lang.Integer">
             <column name="satatus" />
         </property>
-        <set name="questionAnses" inverse="true">
+<!--        <set name="questionAnses" inverse="true">
             <key>
                 <column name="question_library_id" not-null="true" />
             </key>
             <one-to-many class="com.bul.zydex.model.QuestionAns" />
-        </set>
+        </set>-->
     </class>
 </hibernate-mapping>

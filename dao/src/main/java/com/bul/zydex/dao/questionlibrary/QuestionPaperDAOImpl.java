@@ -22,10 +22,11 @@ public class QuestionPaperDAOImpl<T> extends GenericsDAOImpl<T> implements Quest
 
     @Override
     public List<?> readAllQuestionPaper() {
-         String query = "";
-//                            0   1           2       
-        query += " select a.id,a.paperName,a.totalMarks "
+        String query = "";
+//                           0   1           2             3               4
+        query += " select a.id,a.paperName,a.totalMarks,b.employeeCategory,a.status "
                 + " From QuestionPaper a "
+                + " left join a.categoryName b "
                 + " ORDER BY a.id desc";
         return getHibernateTemplate().find(query);
     }

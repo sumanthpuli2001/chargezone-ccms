@@ -7,6 +7,7 @@ package com.bul.zydex.service.Recruitment;
 
 import com.bul.zydex.dao.Recruitment.MprEmployeeCategoryDAO;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.List;
 
 /**
  *
@@ -23,6 +24,11 @@ public class MprEmployeeCategoryServiceImpl<T> extends GenericsServiceImpl<T> im
     public void setMprEmployeeCategoryDAO(MprEmployeeCategoryDAO<T> mprEmployeeCategoryDAO) {
         this.mprEmployeeCategoryDAO = mprEmployeeCategoryDAO;
         setGenericsDAO(mprEmployeeCategoryDAO);
+    }
+
+    @Override
+    public List<?> getByName(String Ctname) {
+        return mprEmployeeCategoryDAO.getByName(Ctname);
     }
 
 }

@@ -26,19 +26,19 @@ public class QuestionLibrary  implements java.io.Serializable {
      private Integer marks;
      private Integer ansId;
      private Integer satatus;
-     private Set questionAnses = new HashSet(0);
+//     private Set questionAnses = new HashSet(0);
 
     public QuestionLibrary() {
     }
 
-    public QuestionLibrary(MprEmployeeCategory mprEmployeeCategory, String question, Integer type, Integer marks, Integer ansId, Integer satatus, Set questionAnses) {
+    public QuestionLibrary(MprEmployeeCategory mprEmployeeCategory, String question, Integer type, Integer marks, Integer ansId, Integer satatus) {
        this.mprEmployeeCategory = mprEmployeeCategory;
        this.question = question;
        this.type = type;
        this.marks = marks;
        this.ansId = ansId;
        this.satatus = satatus;
-       this.questionAnses = questionAnses;
+//       this.questionAnses = questionAnses;
     }
    
     public Integer getId() {
@@ -90,13 +90,13 @@ public class QuestionLibrary  implements java.io.Serializable {
     public void setSatatus(Integer satatus) {
         this.satatus = satatus;
     }
-    public Set getQuestionAnses() {
-        return this.questionAnses;
-    }
-    
-    public void setQuestionAnses(Set questionAnses) {
-        this.questionAnses = questionAnses;
-    }
+//    public Set getQuestionAnses() {
+//        return this.questionAnses;
+//    }
+//    
+//    public void setQuestionAnses(Set questionAnses) {
+//        this.questionAnses = questionAnses;
+//    }
 
 
 

@@ -33,28 +33,28 @@
                 <c:if test="${!sessionScope.userRight.hr}">
                     <li class="active treeview">
                         <a href="userMaster.htm?act=goToDashboard">
-                            <i class="fa fa-dashboard fa-lg"></i> <span>Dashboard</span>
+                            <i class="fa fa-dashboard fa-lg"></i> <span>My Dashboard</span>
                         </a>
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.userRight.hr}">
                     <li class="active treeview">
                         <a href="userMaster.htm?act=hrDashboard">
-                            <i class="fa fa-dashboard fa-lg"></i> <span>Dashboard</span>
+                            <i class="fa fa-dashboard fa-lg"></i> <span>My Dashboard</span>
                         </a>
                     </li>
                 </c:if>
                 <c:if test="${!sessionScope.userRight.hr}">
                     <li class="active treeview">
                         <a href="homeController.htm?act=openHomePage">
-                            <i class="fa fa-home fa-lg"></i> <span>Home</span>
+                            <i class="fa fa-home fa-lg"></i> <span>Homepage</span>
                         </a>
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.userRight.hr}">
                     <li class="active treeview">
                         <a href="homeController.htm?act=openHomePage">
-                            <i class="fa fa-home fa-lg"></i> <span>Home</span>
+                            <i class="fa fa-home fa-lg"></i> <span>Homepage</span>
                         </a>
                     </li>
                 </c:if>
@@ -573,7 +573,7 @@
                             <li><a href="companyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Company Master</a></li>
                             <li><a href="questionLibrary.htm?act=QuestionLibraryCreate"><i class="fa fa-circle-o"></i>Question Library</a></li>
                             <li><a href="questionLibrary.htm?act=questionPaperView"><i class="fa fa-circle-o"></i>Question Paper</a></li>
-                            <li><a href="thoughtMaster.htm?act=createthought"><i class="fa fa-circle-o"></i>Home Setting</a></li>
+                            <li><a href="thoughtMaster.htm?act=createthought"><i class="fa fa-circle-o"></i>Homepage Setting</a></li>
                         </ul>
                     </li>
                 </c:if>

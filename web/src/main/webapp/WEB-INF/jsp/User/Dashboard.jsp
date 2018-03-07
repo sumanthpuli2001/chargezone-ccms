@@ -6,7 +6,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>HR-Power | Dashboard</title>
+        <title>HR-Power |My Dashboard</title>
         <script>
             function viewEmployeeDetail(employeeId, userId) {
                 window.location = "employeeMaster.htm?act=getUserDetail&id=" + employeeId + "&userid=" + userId;
@@ -20,10 +20,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Dashboard</h1>
+            <h1>My Dashboard</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
+                <li class="active">My Dashboard</li>
             </ol>
         </section>
         <!-- Main content -->
@@ -56,7 +56,7 @@
                                                                                     <!-- Nature of Business Pane -->
                                                                                     <div class="box box-primary">
                                                                                         <div class="box-header">
-                                                                                            <h3 class="box-title">Employee Detail</h3>
+                                                                                            <h3 class="box-title">My Detail</h3>
                                                                                             <div class="box-tools pull-right">
                                                                                                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                                                                             </div>
@@ -105,7 +105,7 @@
                                         <!-- USERS LIST -->
                                         <div class="box box-danger">
                                             <div class="box-header">
-                                                <h3 class="box-title">Organization Chart</h3>
+                                                <h3 class="box-title">My Hierarchy</h3>
                                                 <div class="box-tools pull-right">
                                                     <button class="btn btn-box-tool" data-widget="collapse">
                                                         <i class="fa fa-minus"></i>
@@ -425,7 +425,7 @@
                                                         <!-- Nature of Business Pane -->
                                                         <div class="box box-warning">
                                                             <div class="box-header">
-                                                                <h3 class="box-title">Leave Detail</h3>
+                                                                <h3 class="box-title">My Leave Details</h3>
                                                                 <div class="box-tools pull-right">
                                                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                                                     <!--<button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>-->

@@ -364,6 +364,16 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
 
     @Override
     public List<?> readEmployeeByBirthday(String date) {
-          return employeeMasterDAO.readEmployeeByBirthday(date);
+        return employeeMasterDAO.readEmployeeByBirthday(date);
+    }
+
+    @Override
+    public List<?> newJoiningEmployee(String date) {
+        return employeeMasterDAO.newJoiningEmployee(date);
+    }
+
+    @Override
+    public List<?> searchEmployeeDetailForContactInfo(String searchString) {
+          return employeeMasterDAO.searchEmployeeDetailForContactInfo(searchString);
     }
 }

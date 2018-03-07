@@ -47,14 +47,14 @@
                 <c:if test="${!sessionScope.userRight.hr}">
                     <li class="active treeview">
                         <a href="homeController.htm?act=openHomePage">
-                            <i class="fa fa-dashboard fa-lg"></i> <span>Home</span>
+                            <i class="fa fa-home fa-lg"></i> <span>Home</span>
                         </a>
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.userRight.hr}">
                     <li class="active treeview">
                         <a href="homeController.htm?act=openHomePage">
-                            <i class="fa fa-dashboard fa-lg"></i> <span>Home</span>
+                            <i class="fa fa-home fa-lg"></i> <span>Home</span>
                         </a>
                     </li>
                 </c:if>
@@ -85,7 +85,9 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>Recruitment Approval</a></li>
+                                <li><a href="recruitment.htm?act=approvalMppCreate"><i class="fa fa-circle-o"></i>MPP Approval</a></li>
+                                <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>MPR Approval</a></li>
+                                <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
                             </ul>
                         </li>
                     </c:if>
@@ -571,7 +573,7 @@
                             <li><a href="companyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Company Master</a></li>
                             <li><a href="questionLibrary.htm?act=QuestionLibraryCreate"><i class="fa fa-circle-o"></i>Question Library</a></li>
                             <li><a href="questionLibrary.htm?act=questionPaperView"><i class="fa fa-circle-o"></i>Question Paper</a></li>
-                            <li><a href="thoughtMaster.htm?act=createthought"><i class="fa fa-circle-o"></i>Dashbord setting</a></li>
+                            <li><a href="thoughtMaster.htm?act=createthought"><i class="fa fa-circle-o"></i>Home Setting</a></li>
                         </ul>
                     </li>
                 </c:if>
@@ -654,6 +656,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                 </li>
+                    <c:if test="${sessionScope.userRight.hr}">
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-rupee fa-lg"></i>
@@ -818,7 +821,7 @@
                 </li>
             </ul>
             </li>
-
+                    </c:if>
             </ul>
         </section>
         <!-- /.sidebar -->

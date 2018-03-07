@@ -67,30 +67,38 @@
             <ol class="breadcrumb">
             </ol>
         </section>
+         <c:if test="${!empty successMessage}">
+            <div class="alert alert-info" role="alert">${successMessage}</div>
+        </c:if>
+        <c:if test="${!empty failureMessage}">
+            <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
+        </c:if>
         <br/>
         <br/>
-        <form:form role="form" cssClass="form-signin" action="logIn.html?act=loginSubmit" method="post" commandName="userMaster" name='form1' onsubmit='return saveSubmit11();'>
-            <input type="hidden" name="lockCounter" value="0"/>
+        <form:form class="form-horizontal" method="post"
+                   commandName="applayJobUserMaster" action="vacancy.htm?act=signUpCandidate">
+            <form:hidden path="id"></form:hidden>
+            <!--<input type="hidden" name="lockCounter" value="0"/>-->
             <section class="content">
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <div class="form-group">
-                            <div class="col-sm-1">
+                            <div class="col-sm-2">
                             </div>
-                            <div class="col-sm-2" style="text-align: left">
+                            <div class="col-sm-1" style="text-align: left">
                                 <label>Email Id:<span style="color: red;font-size: 12px;">*</span></label>
                             </div>
                             <div class="col-sm-3">
-                                <input path="employeeName" class="form-control"></input>
-                                <%--<form:errors path="employeeId" cssClass="errorDiv"></form:errors>--%>
+                                <form:input path="userName" class="form-control" placeholder="Name"></form:input>
+                                <form:errors path="userName" cssClass="errorDiv"></form:errors>
                             </div>
 
-                            <div class="col-sm-2" style="text-align: left" >
+                            <div class="col-sm-1" style="text-align: left" >
                                 <label>Password :<span style="color: red;font-size: 12px;">*</span></label>
                             </div>
                             <div class="col-sm-3">
-                                <input path="employeeName" class="form-control"></input>
-                                <%--<form:errors path="employeeName" cssClass="errorDiv"></form:errors>--%>
+                            <form:password path="password" class="form-control" placeholder="Name"></form:password>
+                                <form:errors path="password" cssClass="errorDiv"></form:errors>
                             </div>
                         </div>
                     </div>

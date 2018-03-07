@@ -54,9 +54,9 @@ public class CorporateVideoController extends CorporateVideoAbstract {
                 corporateVideoArray[0].delete();
             }
             try {
-                File file2 = new File(fileLocationURL1 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
                 multipartFile.transferTo(file2);
-                corporateVideo.setCorporateVideoPath("" + file2);
+                corporateVideo.setCorporateVideoPath(fileLocationURL1 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
             } catch (Exception e) {
 
             }

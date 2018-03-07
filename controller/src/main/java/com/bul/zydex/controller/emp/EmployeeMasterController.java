@@ -852,7 +852,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
             String ptl = "Paternity Leave";
             List<?> ptlList = leaveTypeMasterService.readLeaveType(ptl);
-            leaveTypeMaster = (LeaveTypeMaster) ptlList.get(0);
+            leaveTypeMaster.setId((Integer)ptlList.get(0));
             employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
             employeeLeaveBalance.setEmployeeMaster(employeeMaster);
             List<?> empLeaveBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
@@ -2307,12 +2307,14 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         EmployeeMaster employeeMaster = new EmployeeMaster();
         String searchString = request.getParameter("searchString");
 //        List<?> employeeMasterList = employeeMasterService.read();
-        List<?> employeeMasterList = employeeMasterService.searchEmployeeDetail(searchString);
+//        List<?> employeeMasterList = employeeMasterService.searchEmployeeDetail(searchString);
+        List<?> employeeMasterList = employeeMasterService.searchEmployeeDetailForContactInfo(searchString);
         mv.getModelMap().put("list", employeeMasterList);
         //dont rename "list" because same used on searchSubmit method and employeeRegistrationResult.jsp
         mv.getModelMap().put("employeeMaster", employeeMaster);
-        mv.setViewName("Employee/EmployeeRegistrationResult");
 
+//        mv.setViewName("Employee/EmployeeRegistrationResult");
+        mv.setViewName("Employee/EmployeeContactDetailResult");
         return mv;
     }
 
@@ -3936,6 +3938,27 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         List<?> employeeSubTypeList = employeeSubTypeService.readByEmployeeTypeId(typeId);
         request.setAttribute("employeeSubTypeList", employeeSubTypeList);
         mv.setViewName("Employee/EmployeeSubTypeAjax");
+        return mv;
+    }
+     public ModelAndView printemployeedescription(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        DesignationMaster designationMaster = new DesignationMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        LevelMaster levelMaster = new LevelMaster();
+        String empId = request.getParameter("id");
+        employeeMaster = employeeMasterService.readById(Integer.parseInt(empId));
+        designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+        departmentMaster = departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId());
+        levelMaster = levelMasterService.readById(employeeMaster.getLevelMaster().getId());
+        request.setAttribute("empId", empId);
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.getModelMap().put("designationMaster", designationMaster);
+        mv.getModelMap().put("departmentMaster", departmentMaster);
+        mv.getModelMap().put("departmentMaster", departmentMaster);
+        mv.getModelMap().put("levelMaster", levelMaster);
+        mv.setViewName("Employee/printemployeedescription");
+
         return mv;
     }
 }

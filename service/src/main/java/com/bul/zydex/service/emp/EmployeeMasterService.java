@@ -150,4 +150,8 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
 
     public List<?> readEmployeeByBirthday(String date);
 
+    public List<?> newJoiningEmployee(String date);
+
+    public List<?> searchEmployeeDetailForContactInfo(final String searchString);
+
 }

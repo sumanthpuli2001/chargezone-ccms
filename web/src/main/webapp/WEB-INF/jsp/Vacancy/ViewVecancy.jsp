@@ -157,9 +157,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-10">
                                                         <label>Description:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <form:input path="description" class="form-control" placeholder="description"></form:input>
+                                                    <form:textarea path="description" class="form-control" id="editor" placeholder="description"></form:textarea>
                                                     <form:errors path="description" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
@@ -196,4 +196,13 @@
     </script>
 </script>
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+ <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
+    <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
+    <!--<link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/css/samples.css">-->
+    <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+ <script>
+                                                            initSample();
+
+
+    </script>
 </html>

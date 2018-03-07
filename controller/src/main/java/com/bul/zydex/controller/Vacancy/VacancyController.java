@@ -13,7 +13,10 @@ import com.bul.zydex.model.JobtypeMaster;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
+import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.VacancyMaster;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +41,7 @@ public class VacancyController extends VacancyAbstract {
         mv.setViewName("Vacancy/VacancyDetailReportList");
         return mv;
     }
-    
+
     public ModelAndView applyJobRegistration(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
@@ -53,6 +56,7 @@ public class VacancyController extends VacancyAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
+        MprMaster mprMaster = new MprMaster();
         VacancyMaster vacancyMaster = new VacancyMaster();
         DepartmentMaster departmentMaster = new DepartmentMaster();
         LocationMaster locationMaster = new LocationMaster();
@@ -90,6 +94,31 @@ public class VacancyController extends VacancyAbstract {
         vacancyMaster.setMprEmployeeCategory(new MprEmployeeCategory());
         vacancyMaster.setMprEmployeeTypeMaster(new MprEmployeeTypeMaster());
         vacancyMaster.setDesignationMaster(new DesignationMaster());
+        String id = request.getParameter("id");
+        mprMaster = mprMasterService.readById(Integer.parseInt(id));
+
+        int jobtypeId = mprMaster.getJobtypeMaster().getId();
+        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+        String jobtypeNAme = jobtypeMaster.getJobTypeName();
+
+        int department = mprMaster.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        String departmentName = departmentMaster.getDepartmentName();
+
+        int localtion = mprMaster.getLocationMaster().getId();
+        locationMaster = locationMasterService.readById(localtion);
+        String locationName = locationMaster.getLocation();
+
+        int designation = mprMaster.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(designation);
+        String designationName = designationMaster.getDesignationName();
+        
+         String experiance = mprMaster.getExperience();
+
+        int position = mprMaster.getNumberOfPosition();
+        int budget = mprMaster.getBudget();
+
+        mv.getModelMap().put("mprMaster", mprMaster);
         mv.getModelMap().put("departmentMaster", departmentMaster);
         mv.getModelMap().put("locationMaster", locationMaster);
         mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
@@ -97,6 +126,13 @@ public class VacancyController extends VacancyAbstract {
         mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
         mv.getModelMap().put("designationMaster", designationMaster);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
+         request.setAttribute("jobtypeNAme", jobtypeNAme);
+        request.setAttribute("departmentName", departmentName);
+        request.setAttribute("locationName", locationName);
+        request.setAttribute("position", position);
+        request.setAttribute("designationName", designationName);
+        request.setAttribute("experiance", experiance);
+        request.setAttribute("budget", budget);
         mv.setViewName("Vacancy/CreateVacancy");
         return mv;
     }
@@ -127,7 +163,7 @@ public class VacancyController extends VacancyAbstract {
             request.setAttribute("successMessage",
                     "Information : The Information is Created Successfully.");
 
-        mv = vacancyDetailList(request, response);
+            mv = vacancyDetailList(request, response);
         }
 
         return mv;
@@ -287,6 +323,7 @@ public class VacancyController extends VacancyAbstract {
         mv.setViewName("Vacancy/JobVacancyLogin");
         return mv;
     }
+
     public ModelAndView signUp(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
@@ -296,19 +333,189 @@ public class VacancyController extends VacancyAbstract {
         mv.setViewName("Vacancy/signUpButton");
         return mv;
     }
-    
-      public ModelAndView submitRegistration(HttpServletRequest request,
+
+    public ModelAndView submitRegistration(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
-         BindException errors = new BindException(candidateApplyJob, "candidateApplyJob");
+        BindException errors = new BindException(candidateApplyJob, "candidateApplyJob");
         bind(request, candidateApplyJob);
-        
+
+        candidateJobApplyValidator.validate(candidateApplyJob, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : This Form All Fields Are Require");
+            mv.setViewName("Vacancy/applyJobCandidateRegistration");
+        }
+
         candidateJobApplyService.create(candidateApplyJob);
 
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Vacancy/applyJobCandidateRegistration");
         return mv;
     }
+
+    public ModelAndView signUpCandidate(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+        BindException errors = new BindException(applayJobUserMaster, "applayJobUserMaster");
+        bind(request, applayJobUserMaster);
+
+        applayJobUserMasterValidator.validate(applayJobUserMaster, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : All Fields Are Mandatorys");
+            mv = signUp(request, response);
+
+        } else if (applayJobUserMasterSerivce.isExist(applayJobUserMaster)) {
+            request.setAttribute("failureMessage",
+                    "Error : UserName & Password is already used.");
+            mv = signUp(request, response);
+        } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date cDate = new Date();
+            applayJobUserMaster.setCreatedDate(sdf.format(cDate));
+            applayJobUserMaster.setFirstTime(0);
+            applayJobUserMasterSerivce.create(applayJobUserMaster);
+            request.setAttribute("successMessage",
+                    "Information : signUp Successfully.");
+            return new ModelAndView("Vacancy/MemberPage", "applayJobUserMaster", applayJobUserMaster);
+        }
+        return mv;
+    }
+
+    public ModelAndView Login(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+        mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
+
+        mv.setViewName("Vacancy/LoginButton");
+        return mv;
+    }
+
+    public ModelAndView loginCandidate(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        BindException errors = new BindException(applayJobUserMaster, "applayJobUserMaster");
+        bind(request, applayJobUserMaster);
+
+        applayJobUserMasterValidator.validate(applayJobUserMaster, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : All Fields Are Mandatorys");
+            mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
+            mv = Login(request, response);
+        } else if (applayJobUserMasterSerivce.isExist(applayJobUserMaster)) {
+            request.setAttribute("successMessage",
+                    "Information : Login Successfully.");
+            mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
+            return new ModelAndView("Vacancy/MemberVacancyList", "applayJobUserMaster", applayJobUserMaster);
+        } else {
+            request.setAttribute("failureMessage",
+                    "Error : Invalid UserName Or Password.");
+            mv = Login(request, response);
+        }
+        mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
+        return mv;
+    }
+
+    public ModelAndView backToHome(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+        String id = request.getParameter("id");
+        applayJobUserMaster = applayJobUserMasterSerivce.readById(Integer.parseInt(id));
+//          mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
+        mv = showVacancyList(request, response);
+        return mv;
+    }
+
+    public ModelAndView applayForJob(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        BindException errors = new BindException(applayJobUserMaster, "applayJobUserMaster");
+        bind(request, applayJobUserMaster);
+
+        applayJobUserMasterValidator.validate(applayJobUserMaster, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : All Fields Are Mandatorys");
+            mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
+            mv.setViewName("Vacancy/ApplayLoginpage");
+        } else if (applayJobUserMasterSerivce.isExist(applayJobUserMaster)) {
+            String id = request.getParameter("id");
+            vacancyMaster = vacancyMasterService.readById(Integer.parseInt(id));
+            request.setAttribute("successMessage",
+                    "Information : Login Successfully.");
+            mv.getModelMap().put("list", vacancyMaster);
+            mv.setViewName("Vacancy/MemberVacancyList");
+//            return new ModelAndView("Vacancy/MemberVacancyList", "vacancyMaster", vacancyMaster);
+        } else {
+            request.setAttribute("failureMessage",
+                    "Error : Invalid UserName Or Password.");
+            mv = Login(request, response);
+        }
+        mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
+        return mv;
+    }
+
+    public ModelAndView membershowVacancyList(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        String id = request.getParameter("id");
+        vacancyMaster = vacancyMasterService.readById(Integer.parseInt(id));
+//        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        mv.getModelMap().put("list", vacancyMaster);
+//        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        return mv;
+    }
+
+    public ModelAndView myProfileClick(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+        mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
+        mv.setViewName("Vacancy/MyProfile");
+
+        return mv;
+    }
+
+    public ModelAndView clickassessment(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+        mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
+        mv.setViewName("Vacancy/AssessmentCandidate");
+
+        return mv;
+    }
+
+    public ModelAndView backToHomeVacancyList(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        mv.getModelMap().put("list", vacancylist);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.setViewName("Vacancy/backToHomeVacancyList");
+        return mv;
+    }
+
 }

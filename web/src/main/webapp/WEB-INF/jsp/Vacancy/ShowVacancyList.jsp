@@ -17,7 +17,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Forgot Password</title>
+        <title>Job Vacancy List</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
@@ -89,7 +89,8 @@
     </head>
     <body>
         <section class="content-header">
-            <button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign Up</button>
+            <button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign Up</button></br></br>
+            <button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=Login'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Login</button>
             <h1>Job Vacancy List</h1>
             <ol class="breadcrumb">
             </ol>

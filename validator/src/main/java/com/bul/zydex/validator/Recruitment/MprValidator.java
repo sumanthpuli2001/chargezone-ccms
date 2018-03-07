@@ -25,26 +25,22 @@ public class MprValidator implements Validator{
     public void validate(Object o, Errors errors) {
         MprMaster mprMaster = (MprMaster) o;
         
-          ValidationUtils.rejectIfEmptyOrWhitespace(errors, "locationMaster.id",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "departmentMaster.id",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mprEmployeeCategory.id",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mprEmployeeTypeMaster.id",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "jobtypeMaster.id",
-                "field.error1", "None");
+//          ValidationUtils.rejectIfEmptyOrWhitespace(errors, "locationMaster.id",
+//                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "departmentMaster.id",
+//                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "jobtypeMaster.id",
+//                "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name",
                 "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "numberOfPosition",
-                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "numberOfPosition",
+//                "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "budget",
                 "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "experience",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "designationMaster",
-                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "experience",
+//                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "designationMaster",
+//                "field.error1", "None");
     }
     
 }

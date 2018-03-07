@@ -1008,10 +1008,10 @@
         <property name="recruitmentValidator" ref="recruitmentValidator1"/>
         <property name="MprValidator" ref="mprValidator1"/>
         <property name="mprMasterService" ref="mprMasterService1"/>
-        <property name="mprEmployeeTypeMasterService" ref="mprEmployeeTypeMasterService1"/>
-        <property name="mprEmployeeCategoryService" ref="mprEmployeeCategoryService1"/>
-        <property name="qulificationMasterService" ref="qulificationMasterService1"/>
         <property name="designationMasterService" ref="designationMasterService1"/>
+        <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
+        <property name="mprApprovalService" ref="mprApprovalService1"/>
+        <property name="approvalUserService" ref="approvalUserService1"/>
     </bean>
     
     <bean id="vacancyController1" class="com.bul.zydex.controller.Vacancy.VacancyController" parent="controllerConfig" >
@@ -1023,6 +1023,10 @@
         <property name="designationMasterService" ref="designationMasterService1"/>
         <property name="vacancyValidator" ref="vacancyValidator1"/>
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
+        <property name="applayJobUserMasterSerivce" ref="applayJobUserMasterService1"/>
+        <property name="applayJobUserMasterValidator" ref="applayJobUserMasterValidator1"/>
+        <property name="candidateJobApplyValidator" ref="candidateJobApplyValidator1"/>
+        <property name="mprMasterService" ref="mprMasterService1"/>
     </bean> 
     <bean id="thoughtMasterController1" class="com.bul.zydex.controller.thought.ThoughtMasterController" parent="controllerConfig" >
         <property name="thoughtMasterService" ref="thoughtMasterService1"></property>
@@ -1050,6 +1054,8 @@
         <property name="locationMasterService" ref="locationMasterService1" />
         <property name="thoughtMasterService" ref="thoughtMasterService1"></property>
         <property name="galleryService" ref="galleryService1"></property>
+        <property name="corporateVideoService" ref="corporateVideoService1"></property>
+        <property name="rAndRService" ref="rAndRService1"></property>
     </bean>
 </beans>
  

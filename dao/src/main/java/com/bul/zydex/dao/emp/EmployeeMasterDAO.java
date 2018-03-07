@@ -152,4 +152,8 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
 
     public List<?> readEmployeeByBirthday(String date);
 
+    public List<?> newJoiningEmployee(String date);
+
+    public List<?> searchEmployeeDetailForContactInfo(final String searchString);
+
 }

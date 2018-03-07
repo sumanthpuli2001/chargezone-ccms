@@ -1864,9 +1864,45 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
     
         String query = "";
 
-        query += "SELECT a.id,a.employeeName FROM EmployeeMaster a"
+        query += "SELECT a FROM EmployeeMaster a"
                 + " WHERE STR_TO_DATE(a.dateOfBirth,'%d/%m') = STR_TO_DATE('" + date + "','%d/%m')";
 
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> newJoiningEmployee(String date) {
+           String query = "";
+
+        query += "SELECT a FROM EmployeeMaster a"
+                + " WHERE STR_TO_DATE(a.dateOfJoining,'%d/%m/%Y') > STR_TO_DATE('" + date + "','%d/%m/%Y')";
+
+        return getHibernateTemplate().find(query);
+    }
+    
+    
+    
+     @Override
+    public List<?> searchEmployeeDetailForContactInfo(final String searchString) {
+        String hqlString = " SELECT a.id, a.employeeId, a.employeeName, c.departmentName, b.designationName, a.role, d.id,a.emailAddress,a.officeEmailId,a.contactNo1"
+                + " FROM EmployeeMaster a "
+                + " LEFT JOIN a.designationMaster b "
+                + " LEFT JOIN a.departmentMaster c "
+                + " LEFT JOIN a.userMaster d "
+                + " where"
+                + " (a.employeeName like '%" + searchString + "%'"
+                + " OR"
+                + " b.designationName like '%" + searchString + "%'"
+                + " OR"
+                + " c.departmentName like '%" + searchString + "%'"
+                + " OR"
+                + " d.userName like '%" + searchString + "%'"
+                + ")"
+                + " and (a.dateOfLeaving is null or a.dateOfLeaving = '') "
+                //                + " STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y') <= CURDATE()";
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()";
+
+        return getHibernateTemplate().find(hqlString);
+    }
+    
 }

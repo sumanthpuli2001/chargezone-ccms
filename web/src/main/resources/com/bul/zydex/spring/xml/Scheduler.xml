@@ -31,17 +31,17 @@
     
 
 -->    
-<!--    <bean id="dailyTimeEntryId"
+    <bean id="dailyTimeEntryId"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="shiftRotationMasterController1" />
         <property name="targetMethod" value="timeEntryDaily" />
-    </bean>
-    <bean id="cronTrigger2"
+    </bean><!--
+-->    <bean id="cronTrigger2"
           class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="dailyTimeEntryId" />
-        <property name="cronExpression" value="0 0/3 * * * ?" />
-        0 0/3 * 1/1 * ? *//this is for no load on project please replace above value with this one when deploying
-    </bean>
+        <property name="cronExpression" value="0 0/5 * * * ?" />
+      
+    </bean><!--
     
 
 -->    
@@ -70,7 +70,7 @@
             <property name="cronExpression" value="0 59 23 31 12 ? *" />
         </bean>
     -->
-    <!--    <bean id="deviceId"
+  <bean id="deviceId"
               class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
             <property name="targetObject" ref="deviceMasterController1" />
             <property name="targetMethod" value="deviceManagementUsingThread" />
@@ -78,9 +78,9 @@
         <bean id="cronTrigger5"
               class="org.springframework.scheduling.quartz.CronTriggerBean">
             <property name="jobDetail" ref="deviceId" />
-            <property name="cronExpression" value="0 0/15 * * * ?" />
+            <property name="cronExpression" value="0 0/3 * * * ?" />
         </bean>
-    -->
+  
     <!--    <bean id="coffDeleteId"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="shiftRotationMasterController1" />
@@ -208,10 +208,10 @@
         <property name="jobDetails">
             <list>
                 <!--<ref bean="timeAttendanceDetail" />-->
-                <!--<ref bean="dailyTimeEntryId" />-->
+                <ref bean="dailyTimeEntryId" />
                 <!--<ref bean="overTimeEntryId" />-->
-                <!--                <ref bean="carryForwardLeave" />
-                <ref bean="deviceId" />-->
+                <!--                <ref bean="carryForwardLeave" />-->
+                <ref bean="deviceId" />
                 <!--<ref bean="coffDeleteId" />-->
                 <!--<ref bean="shortLeveId" />-->
              
@@ -228,10 +228,10 @@
         <property name="triggers">
             <list>
                 <!--<ref bean="cronTrigger1" />-->
-                <!--<ref bean="cronTrigger2" />-->
+                <ref bean="cronTrigger2" />
                 <!--<ref bean="cronTrigger3" />-->
-                <!--                <ref bean="cronTrigger4" />
-                <ref bean="cronTrigger5" /> -->
+                <!--                <ref bean="cronTrigger4" />-->
+                <ref bean="cronTrigger5" />
                 <!--<ref bean="cronTrigger6" />-->
                 <!--<ref bean="cronTrigger7" />-->
                 <!--                <ref bean="cronTrigger8" />-->

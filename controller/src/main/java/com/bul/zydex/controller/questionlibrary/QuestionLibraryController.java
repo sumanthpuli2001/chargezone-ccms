@@ -238,7 +238,7 @@ public class QuestionLibraryController extends QuestionLibraryAbstract {
         String categoryName = request.getParameter("categoryName.id");
         String paperName = request.getParameter("paperName");
         employeecategoryList(request);
-        int total =0;
+        int total = 0;
         MprEmployeeCategory mprEmployeeCategory = mprEmployeeCategoryService.readById(Integer.parseInt(categoryName));
         if ("" == id) {
 
@@ -260,15 +260,16 @@ public class QuestionLibraryController extends QuestionLibraryAbstract {
         }
 
 //        request.setAttribute("questionAns", qaList);
-        List<?> questionDetailses = questionDetailsService.readByQuePaperId(Integer.parseInt(id));
-        for (int i = 0; i < questionDetailses.size(); i++) {
-            Object[] row = (Object[]) questionDetailses.get(i);
-            int sum = (int) row[2];
-            total = total + sum;
+        if ("" != id) {
+            List<?> questionDetailses = questionDetailsService.readByQuePaperId(Integer.parseInt(id));
+            for (int i = 0; i < questionDetailses.size(); i++) {
+                Object[] row = (Object[]) questionDetailses.get(i);
+                int sum = (int) row[2];
+                total = total + sum;
+            }
+            request.setAttribute("questionDetailses", questionDetailses);
         }
         request.setAttribute("total", total);
-
-        request.setAttribute("questionDetailses", questionDetailses);
         mv.getModelMap().put("questionPaper", questionPaper);
         mv.setViewName("QuestionPaper/CreateQuestionPaperStep2");
         return mv;

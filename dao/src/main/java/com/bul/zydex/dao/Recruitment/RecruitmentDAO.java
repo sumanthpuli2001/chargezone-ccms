@@ -17,5 +17,7 @@ public interface RecruitmentDAO<T> extends GenericsDAO<T> {
     public List<?> readBudgetDetail();
 
     public List<?> readForBudgetDetail();
+    
+    public List<?> searchMppApproval();
 
 }

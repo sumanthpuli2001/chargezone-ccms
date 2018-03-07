@@ -14,39 +14,41 @@ public class MprMaster implements java.io.Serializable {
     private Integer id;
     private LocationMaster locationMaster;
     private DepartmentMaster departmentMaster;
-    private MprEmployeeCategory mprEmployeeCategory;
-    private MprEmployeeTypeMaster mprEmployeeTypeMaster;
     private JobtypeMaster jobtypeMaster;
     private String name;
     private Integer numberOfPosition;
     private Integer budget;
-    private QulificationMaster qulificationMaster;
     private String experience;
     private String description;
     private DesignationMaster designationMaster;
     private String dateOfLeaving;
     private Integer status;
+    private Integer currentLevel;
+    private Integer totalLevel;
+    private Integer remainingBudget;
+    private String approvalComment;
 
     public MprMaster() {
 
     }
 
-    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, MprEmployeeCategory mprEmployeeCategory, MprEmployeeTypeMaster mprEmployeeTypeMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, QulificationMaster qulificationMaster, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving, Integer status) {
+    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving, Integer status, Integer remainingBudget, String approvalComment) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
-        this.mprEmployeeCategory = mprEmployeeCategory;
-        this.mprEmployeeTypeMaster = mprEmployeeTypeMaster;
         this.jobtypeMaster = jobtypeMaster;
         this.name = name;
         this.numberOfPosition = numberOfPosition;
         this.budget = budget;
-        this.qulificationMaster = qulificationMaster;
         this.experience = experience;
         this.description = description;
         this.designationMaster = designationMaster;
         this.dateOfLeaving = dateOfLeaving;
         this.status = status;
+        this.currentLevel = currentLevel;
+        this.totalLevel = totalLevel;
+        this.remainingBudget = remainingBudget;
+        this.approvalComment = approvalComment;
     }
 
     public Integer getId() {
@@ -71,22 +73,6 @@ public class MprMaster implements java.io.Serializable {
 
     public void setDepartmentMaster(DepartmentMaster departmentMaster) {
         this.departmentMaster = departmentMaster;
-    }
-
-    public MprEmployeeCategory getMprEmployeeCategory() {
-        return mprEmployeeCategory;
-    }
-
-    public void setMprEmployeeCategory(MprEmployeeCategory mprEmployeeCategory) {
-        this.mprEmployeeCategory = mprEmployeeCategory;
-    }
-
-    public MprEmployeeTypeMaster getMprEmployeeTypeMaster() {
-        return mprEmployeeTypeMaster;
-    }
-
-    public void setMprEmployeeTypeMaster(MprEmployeeTypeMaster mprEmployeeTypeMaster) {
-        this.mprEmployeeTypeMaster = mprEmployeeTypeMaster;
     }
 
     public JobtypeMaster getJobtypeMaster() {
@@ -119,14 +105,6 @@ public class MprMaster implements java.io.Serializable {
 
     public void setBudget(Integer budget) {
         this.budget = budget;
-    }
-
-    public QulificationMaster getQulificationMaster() {
-        return qulificationMaster;
-    }
-
-    public void setQulificationMaster(QulificationMaster qulificationMaster) {
-        this.qulificationMaster = qulificationMaster;
     }
 
     public String getExperience() {
@@ -167,6 +145,38 @@ public class MprMaster implements java.io.Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public void setCurrentLevel(Integer currentLevel) {
+        this.currentLevel = currentLevel;
+    }
+
+    public Integer getTotalLevel() {
+        return totalLevel;
+    }
+
+    public void setTotalLevel(Integer totalLevel) {
+        this.totalLevel = totalLevel;
+    }
+
+    public Integer getRemainingBudget() {
+        return remainingBudget;
+    }
+
+    public void setRemainingBudget(Integer remainingBudget) {
+        this.remainingBudget = remainingBudget;
+    }
+
+    public String getApprovalComment() {
+        return approvalComment;
+    }
+
+    public void setApprovalComment(String approvalComment) {
+        this.approvalComment = approvalComment;
     }
     
     

@@ -6,11 +6,12 @@
 package com.bul.zydex.service.Recruitment;
 
 import com.bul.zydex.service.GenericsService;
+import java.util.List;
 
 /**
  *
  * @author Vikas
  */
 public interface MprEmployeeCategoryService<T> extends GenericsService<T>{
-    
+  public List<?> getByName(String Ctname);  
 }

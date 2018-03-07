@@ -61,7 +61,7 @@
                                             <input type="hidden" id="empreqid" name="empreqid" value="${mprMaster.id}">
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Department:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <label>Department111111:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:select path="departmentMaster.id" id="departmentMaster" class="form-control">
                                                             <form:option value="" label="-- Select --" />
                                                             <form:options items="${deptMap}"></form:options>

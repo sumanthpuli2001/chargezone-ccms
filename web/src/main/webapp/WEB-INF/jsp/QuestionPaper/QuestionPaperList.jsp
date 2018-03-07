@@ -15,8 +15,8 @@
         <title>Question Paper List</title>
 
         <script>
-            function editClick(id, eprId) {
-                window.location = 'questionLibrary.htm?act=editQuestionPaperClick&id=' + id + '&eprId=' + eprId;
+            function editClick(id) {
+                window.location = 'questionLibrary.htm?act=createQuestionPaper&id=' + id ;
             }
             function deleteClick(id, eprId) {
                 window.location = 'questionLibrary.htm?act=deleteClick&id=' + id + '&eprId=' + eprId;
@@ -24,14 +24,16 @@
 
 
             function deleteCheck11() {
-                var checkboxes = "";
-                checkboxes = document.getElementsByName('checkId');
-                for (var i = 0, n = checkboxes.length; i < n; i++) {
-                    if (checkboxes[i].checked) {
-                        return true;
+                var checkboxes = confirm("Are you sure want to delete ?");
+                if (checkboxes) {
+                    checkboxes = document.getElementsByName('checkId');
+                    for (var i = 0, n = checkboxes.length; i < n; i++) {
+                        if (checkboxes[i].checked) {
+                            return true;
+                        }
                     }
+                    alert("Please, Select one or more record(s).");
                 }
-                alert("Please, Select one or more record(s).");
                 return false;
             }
         </script>
@@ -55,7 +57,8 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form  class="form-horizontal" role="form">
+        <form:form action="questionLibrary.htm?act=deleteQuesPaperClick" method="post" modelAttribute="questionLibrary" commandName="questionPaper"
+                   name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
@@ -87,8 +90,10 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th ></th>
-                                                                    <th >Category</th>
-                                                                    <th style="width: 50px;">Questions Paper Name</th>
+                                                                    <th style="align-content: center">Category</th>
+                                                                    <th style="align-content: center">Questions Paper Name</th>
+                                                                    <th style="align-content: center">Total Marks</th>
+                                                                    <th style="align-content: center">Status</th>
                                                                     <th style="width: 50px;">Action</th>
 
                                                                 </tr>
@@ -101,38 +106,47 @@
                                                                 <c:if test="${sessionScope.userRight.employeeManagement}">
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     </c:if>
-                                                                <td>${list[2]}</td>
-                                                                <td>${list[1]}</td>
+                                                                <td style="align-content: center">${list[3]}</td>
+                                                                <td style="align-content: center">${list[1]}</td>
+                                                                <td style="align-content: center">${list[2]}</td>
+                                                                <td style="align-content: center">
+                                                                    <c:if test="${list[4] eq 1}">Inactive</c:if>
+                                                                    <c:if test="${list[4] eq 0}">Active</c:if>
+                                                                </td>
                                                                 <td>
-                                                                    <div class="btn-group">
-                                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                            <span class="caret"></span>
-                                                                        </button>
-                                                                        <ul class="dropdown-menu" >
-                                                                            <c:if test="${sessionScope.userRight.employeeManagement}">
+                                                                    <a href="#"
+                                                                       onclick="editClick(${list[0]});">
+                                                                        &nbsp;&nbsp;View/Edit
+                                                                    </a>
+                                                                    <!--                                                                    <div class="btn-group">
+                                                                                                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                                                                <span class="caret"></span>
+                                                                                                                                            </button>
+                                                                                                                                            <ul class="dropdown-menu" >
+                                                                    <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
 
-                                                                                <li style="width: 100px;">
-                                                                                    <a href="#"
-                                                                                       onclick="editClick(${list[0]},${list[6]});">
-                                                                                        &nbsp;&nbsp;View/Edit
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li style="width: 100px;">
-                                                                                    <a href="#"
-                                                                                       onclick="deleteClick(${list[0]},${list[6]});">
-                                                                                        &nbsp;&nbsp;Delete
-                                                                                    </a>
-                                                                                </li>
-                                                                            </c:if>
+                                                                        <li style="width: 100px;">
+                                                                            <a href="#"
+                                                                               onclick="editClick(${list[0]},${list[6]});">
+                                                                                &nbsp;&nbsp;View/Edit
+                                                                            </a>
+                                                                        </li>
+                                                                        <li style="width: 100px;">
+                                                                            <a href="#"
+                                                                               onclick="deleteClick(${list[0]},${list[6]});">
+                                                                                &nbsp;&nbsp;Delete
+                                                                            </a>
+                                                                        </li>
+                                                                    <%--</c:if>--%>
 
-                                                                            <!--                                                                            <li>
-                                                                                                                                                            <a href="#"
-                                                                                                                                                               onclick="editRotation($/{list[6]});">
-                                                                                                                                                                &nbsp;&nbsp;Edit Shift Rotation
-                                                                                                                                                            </a>
-                                                                                                                                                        </li>-->
-                                                                        </ul>
-                                                                    </div>
+                                                                                                                                                <li>
+                                                                                                                                                    <a href="#"
+                                                                                                                                                       onclick="editRotation($/{list[6]});">
+                                                                                                                                                        &nbsp;&nbsp;Edit Shift Rotation
+                                                                                                                                                    </a>
+                                                                                                                                                </li>
+                                                                </ul>
+                                                            </div>-->
                                                                 </td>
                                                                 <%--</c:if>--%>
                                                             </tr>

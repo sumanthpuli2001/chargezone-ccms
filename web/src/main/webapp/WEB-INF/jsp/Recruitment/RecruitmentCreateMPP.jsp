@@ -118,9 +118,9 @@
                                                                             </button>
                                                                         </div>
                                                                     </c:if>
-                                                                          <c:if test="${list[6] == 1}">
+                                                                          <c:if test="${list[6] == 1 || list[6] == 3}">
                                                                         <div class="btn-group">
-                                                                            <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            <button type="button" onclick="viewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                                 &nbsp;&nbsp;View
                                                                             </button>
                                                                         </div>
@@ -151,6 +151,11 @@
     <script>
         function editViewClick(id) {
             window.location = 'recruitment.htm?act=editMppRClick&id=' + id;
+        }
+    </script>
+    <script>
+        function viewClick(id) {
+            window.location = 'recruitment.htm?act=viewMPPShow&id=' + id;
         }
     </script>
 </html>

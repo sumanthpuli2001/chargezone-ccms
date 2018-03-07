@@ -109,17 +109,20 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <label>Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Job Description:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:textarea path="description" class="form-control" id="editor" placeholder="Description"></form:textarea>
                                                     <form:errors path="description" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
+                                                <c:if test="${mprMaster.status == 0 || mprMaster.status == 2}">
                                                     <div class="col-sm-6 col-sm-offset-5">
                                                         <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
                                                     </div>
-                                                </div>
+                                                </c:if>
+
+                                            </div>
                                         </form:form>
                                         <!--</div>-->
 

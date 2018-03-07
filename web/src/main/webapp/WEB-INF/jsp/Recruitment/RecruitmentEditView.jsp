@@ -15,7 +15,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Edit Budget Detail11</h1>
+            <h1>Edit Budget Detail</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Edit Budget Detail</li>
@@ -50,21 +50,20 @@
                                             <form:hidden path="createdDate"></form:hidden>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Department:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="departmentMaster.id" id="departmentMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${deptMap}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                    <!--<div class="form-group">-->
-                                                    <div class="col-sm-6">
                                                         <label>Location:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:select path="locationMaster.id" id="locationMaster" class="form-control">
                                                             <form:option value="" label="-- Select --" />
                                                             <form:options items="${locationMap}"/>
                                                         </form:select>
                                                         <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>Department:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <form:select path="departmentMaster.id" id="departmentMaster" class="form-control">
+                                                            <form:option value="" label="-- Select --" />
+                                                            <form:options items="${deptMap}"></form:options>
+                                                        </form:select>
+                                                        <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -76,11 +75,15 @@
                                                         </form:select>
                                                         <form:errors path="jobtypeMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Budget:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:input path="budget" class="form-control" placeholder="Budget"></form:input>
-                                                        <form:errors path="budget" cssClass="errorDiv"></form:errors>
+                                                      <div class="col-sm-6">
+                                                    <label>Job Role:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <form:select path="designationMaster.id" class="form-control">
+                                                        <form:option value="" label="-- Select --" />
+                                                        <form:options items="${desigList}"></form:options>
+                                                    </form:select>
+                                                    <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
+                                               
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
@@ -88,37 +91,25 @@
                                                         <form:input path="numberOfPosition" class="form-control" placeholder="Number Of Position"></form:input>
                                                         <form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>
                                                     </div>
-                                                    <!--<div class="form-group">-->
-                                                    <!--                                                        <div class="col-sm-6">
-                                                                                                                <label>Date:<span style="color: red;font-size: 12px;"></span></label>
-                                                <%--<form:input path="date" class="form-control" placeholder="Date"></form:input>--%>
-                                                <%--<form:errors path="date" cssClass="errorDiv"></form:errors>--%>
-                                                </div>-->
-                                                <!--                                                    </div>-->
-                                                <div class="col-sm-6">
-                                                    <label>Job Role:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:select path="designationMaster.id" class="form-control">
-                                                        <form:option value="" label="-- Select --" />
-                                                        <form:options items="${desigList}"></form:options>
-                                                    </form:select>
-                                                    <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
-                                                    </div>  
+                                                     <div class="col-sm-6">
+                                                        <label>Budget:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <form:input path="budget" class="form-control" placeholder="Budget"></form:input>
+                                                        <form:errors path="budget" cssClass="errorDiv"></form:errors>
+                                                    </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Work Experience(In Year):<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Work Experience(In Year):<span style="color: red;font-size: 12px;"></span></label>
                                                     <form:input path="experiance" class="form-control" placeholder="Experience"></form:input>
                                                     <form:errors path="experiance" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6 col-sm-offset-5">
-                                                <c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 3}">
                                                         <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
-                                                </c:if>
                                                     </div>
 
-                                            </div>
+                                                </div>
                                         </form:form>
                                         <!--</div>-->
 

@@ -132,7 +132,7 @@
                                                     <form:errors path="budget" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>Vacancy Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>MPR Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="name" class="form-control" placeholder="Name"></form:input>
                                                     <form:errors path="name" cssClass="errorDiv"></form:errors>
                                                     </div>
@@ -167,7 +167,7 @@
 
                                             <div class="form-group">
                                                 <div class="col-sm-10">
-                                                    <label>Job Description1:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <label>Job Description:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:textarea path="description" class="form-control" id="editor"  placeholder="Description"></form:textarea>
                                                     <form:errors path="description" cssClass="errorDiv"></form:errors>
                                                     </div>

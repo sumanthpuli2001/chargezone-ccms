@@ -13,6 +13,7 @@ import com.bul.zydex.model.JobtypeMaster;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
+import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.VacancyMaster;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -55,6 +56,7 @@ public class VacancyController extends VacancyAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
+        MprMaster mprMaster = new MprMaster();
         VacancyMaster vacancyMaster = new VacancyMaster();
         DepartmentMaster departmentMaster = new DepartmentMaster();
         LocationMaster locationMaster = new LocationMaster();
@@ -92,6 +94,31 @@ public class VacancyController extends VacancyAbstract {
         vacancyMaster.setMprEmployeeCategory(new MprEmployeeCategory());
         vacancyMaster.setMprEmployeeTypeMaster(new MprEmployeeTypeMaster());
         vacancyMaster.setDesignationMaster(new DesignationMaster());
+        String id = request.getParameter("id");
+        mprMaster = mprMasterService.readById(Integer.parseInt(id));
+
+        int jobtypeId = mprMaster.getJobtypeMaster().getId();
+        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+        String jobtypeNAme = jobtypeMaster.getJobTypeName();
+
+        int department = mprMaster.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        String departmentName = departmentMaster.getDepartmentName();
+
+        int localtion = mprMaster.getLocationMaster().getId();
+        locationMaster = locationMasterService.readById(localtion);
+        String locationName = locationMaster.getLocation();
+
+        int designation = mprMaster.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(designation);
+        String designationName = designationMaster.getDesignationName();
+        
+         String experiance = mprMaster.getExperience();
+
+        int position = mprMaster.getNumberOfPosition();
+        int budget = mprMaster.getBudget();
+
+        mv.getModelMap().put("mprMaster", mprMaster);
         mv.getModelMap().put("departmentMaster", departmentMaster);
         mv.getModelMap().put("locationMaster", locationMaster);
         mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
@@ -99,6 +126,13 @@ public class VacancyController extends VacancyAbstract {
         mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
         mv.getModelMap().put("designationMaster", designationMaster);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
+         request.setAttribute("jobtypeNAme", jobtypeNAme);
+        request.setAttribute("departmentName", departmentName);
+        request.setAttribute("locationName", locationName);
+        request.setAttribute("position", position);
+        request.setAttribute("designationName", designationName);
+        request.setAttribute("experiance", experiance);
+        request.setAttribute("budget", budget);
         mv.setViewName("Vacancy/CreateVacancy");
         return mv;
     }

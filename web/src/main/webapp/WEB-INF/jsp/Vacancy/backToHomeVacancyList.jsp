@@ -139,7 +139,7 @@
                                                                     <th style="width: 50px;">Start Date</th>
                                                                     <th style="width: 50px;">End Date</th>
                                                                     <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                                                    <!--<th style="width: 50px;">Action</th>-->
+                                                                    <th style="width: 50px;">Action</th>
                                                                         <%--</c:if>--%>
 
                                                                 </tr>
@@ -159,6 +159,13 @@
                                                                 <td>${list[6]}</td>
                                                                 <td>${list[7]}</td>
                                                                 <!--<td>${list[2]}</td>-->
+                                                                 <td>
+                                                                    <div class="btn-group">
+                                                                        <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            &nbsp;&nbsp;View
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
 <!--                                                                <td>
                                                                     <div class="btn-group">

@@ -49,5 +49,11 @@
         <property name="totalLevel" type="java.lang.Integer">
             <column name="total_level" />
         </property>
+        <property name="remainingBudget" type="java.lang.Integer">
+            <column name="remaining_budget" />
+        </property>
+          <property name="approvalComment" type="string">
+            <column name="approval_comment" />
+        </property>
     </class>
 </hibernate-mapping>

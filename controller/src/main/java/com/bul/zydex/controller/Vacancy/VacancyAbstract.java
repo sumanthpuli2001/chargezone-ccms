@@ -14,12 +14,14 @@ import com.bul.zydex.model.JobtypeMaster;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
+import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.ApplayJobUserMaster.ApplayJobUserMasterService;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
 import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
 import com.bul.zydex.service.Recruitment.MprEmployeeTypeMasterService;
+import com.bul.zydex.service.Recruitment.MprMasterService;
 import com.bul.zydex.service.Vacancy.VacancyMasterService;
 import com.bul.zydex.service.emp.DesignationMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
@@ -48,6 +50,7 @@ public class VacancyAbstract extends CustomAbstract {
     protected ApplayJobUserMasterService<ApplayJobUserMaster> applayJobUserMasterSerivce;
     protected ApplayJobUserMasterValidator applayJobUserMasterValidator;
     protected CandidateJobApplyValidator candidateJobApplyValidator;
+    protected MprMasterService<MprMaster> mprMasterService;
 
     public CandidateJobApplyService<CandidateApplyJob> getCandidateJobApplyService() {
         return candidateJobApplyService;
@@ -136,6 +139,16 @@ public class VacancyAbstract extends CustomAbstract {
     public void setCandidateJobApplyValidator(CandidateJobApplyValidator candidateJobApplyValidator) {
         this.candidateJobApplyValidator = candidateJobApplyValidator;
     }
+
+    public MprMasterService<MprMaster> getMprMasterService() {
+        return mprMasterService;
+    }
+
+    public void setMprMasterService(MprMasterService<MprMaster> mprMasterService) {
+        this.mprMasterService = mprMasterService;
+    }
+    
+    
     
     
     protected void departmentList(HttpServletRequest request) {

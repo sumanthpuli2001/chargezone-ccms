@@ -25,11 +25,12 @@ public class RecruitmentMaster implements java.io.Serializable {
     private DesignationMaster designationMaster; 
     private String  experiance;
     private String updatedDate;
+    private String approvalComment;
 
     public RecruitmentMaster() {
     }
 
-    public RecruitmentMaster(int id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobTypeMaster, Integer numberOfPosition, Integer budget, String createdDate, Integer mppStatus,DesignationMaster designationMaster, String experiance,String updatedDate) {
+    public RecruitmentMaster(int id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobTypeMaster, Integer numberOfPosition, Integer budget, String createdDate, Integer mppStatus,DesignationMaster designationMaster, String experiance,String updatedDate, String approvalComment) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
@@ -41,6 +42,7 @@ public class RecruitmentMaster implements java.io.Serializable {
         this.designationMaster = designationMaster;
         this.experiance = experiance;
         this.updatedDate = updatedDate;
+        this.approvalComment = approvalComment;
     }
 
     public Integer getId() {
@@ -129,6 +131,16 @@ public class RecruitmentMaster implements java.io.Serializable {
     public void setUpdatedDate(String updatedDate) {
         this.updatedDate = updatedDate;
     }
+
+    public String getApprovalComment() {
+        return approvalComment;
+    }
+
+    public void setApprovalComment(String approvalComment) {
+        this.approvalComment = approvalComment;
+    }
+    
+    
 
  
 

@@ -25,12 +25,14 @@ public class MprMaster implements java.io.Serializable {
     private Integer status;
     private Integer currentLevel;
     private Integer totalLevel;
+    private Integer remainingBudget;
+    private String approvalComment;
 
     public MprMaster() {
 
     }
 
-    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving, Integer status) {
+    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving, Integer status, Integer remainingBudget, String approvalComment) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
@@ -45,6 +47,8 @@ public class MprMaster implements java.io.Serializable {
         this.status = status;
         this.currentLevel = currentLevel;
         this.totalLevel = totalLevel;
+        this.remainingBudget = remainingBudget;
+        this.approvalComment = approvalComment;
     }
 
     public Integer getId() {
@@ -70,7 +74,6 @@ public class MprMaster implements java.io.Serializable {
     public void setDepartmentMaster(DepartmentMaster departmentMaster) {
         this.departmentMaster = departmentMaster;
     }
-
 
     public JobtypeMaster getJobtypeMaster() {
         return jobtypeMaster;
@@ -103,7 +106,6 @@ public class MprMaster implements java.io.Serializable {
     public void setBudget(Integer budget) {
         this.budget = budget;
     }
-
 
     public String getExperience() {
         return experience;
@@ -160,7 +162,22 @@ public class MprMaster implements java.io.Serializable {
     public void setTotalLevel(Integer totalLevel) {
         this.totalLevel = totalLevel;
     }
-    
+
+    public Integer getRemainingBudget() {
+        return remainingBudget;
+    }
+
+    public void setRemainingBudget(Integer remainingBudget) {
+        this.remainingBudget = remainingBudget;
+    }
+
+    public String getApprovalComment() {
+        return approvalComment;
+    }
+
+    public void setApprovalComment(String approvalComment) {
+        this.approvalComment = approvalComment;
+    }
     
     
 

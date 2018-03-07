@@ -34,5 +34,9 @@ public class RecruitmentServiceImpl<T> extends GenericsServiceImpl<T> implements
     public List<?> readForBudgetDetail() {
         return recruitmentDAO.readForBudgetDetail();
     }
+    @Override
+    public List<?> searchMppApproval() {
+        return recruitmentDAO.searchMppApproval();
+    }
 
 }

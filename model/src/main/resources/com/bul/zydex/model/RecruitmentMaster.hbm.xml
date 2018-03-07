@@ -40,5 +40,8 @@
         <property name="updatedDate" type="string">
             <column name="updated_date" />
         </property>
+        <property name="approvalComment" type="string">
+            <column name="approval_comment" />
+        </property>
     </class>
 </hibernate-mapping>

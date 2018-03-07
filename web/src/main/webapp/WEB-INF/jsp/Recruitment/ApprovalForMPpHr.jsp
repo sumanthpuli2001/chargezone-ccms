@@ -21,6 +21,18 @@
                 <li class="active">Edit Budget Detail</li>
             </ol>
         </section>
+        
+            <script>
+            function reject() {
+                var checkreject = confirm("If You Reject You Can Not Edit,Submit Or View. So, Are You Sure You Want to Reject This Man Power Planning?");
+                if (checkreject) {
+                    checkreject = document.getElementsByName('Reject');
+                    return true;
+                }
+                return false;
+            }
+        </script>
+        
         <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>
         </c:if>
@@ -82,6 +94,11 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
+                                                        <label>Comment:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <form:input path="approvalComment" name="approvalComment" class="form-control" placeholder="Approval Comment"></form:input>
+                                                    <form:errors path="approvalComment" cssClass="errorDiv"></form:errors>
+                                                    </div>
+                                                    <div class="col-sm-6">
                                                         <label>Number Of Position:<span style="color: red;font-size: 12px;"></span></label>
                                                     <form:input path="numberOfPosition" class="form-control" placeholder="Number Of Position"></form:input>
                                                     <form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>
@@ -90,7 +107,7 @@
                                                  <div class="form-group">
                                                     <div class="col-sm-4" style="text-align: left">
                                                     <c:if test="${recruitmentMaster.mppStatus == 1 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 0}">
-                                                        <input type="submit" class="btn btn-danger" id="btnType1" name="btnType" value="Reject" style="width: 100px" ></input>
+                                                        <input type="submit" class="btn btn-danger" onclick="return reject();" id="btnType1" name="btnType" value="Reject" style="width: 100px" ></input>
                                                     </c:if>
                                                 </div>
                                                 <div class="col-sm-4" style="text-align: center">

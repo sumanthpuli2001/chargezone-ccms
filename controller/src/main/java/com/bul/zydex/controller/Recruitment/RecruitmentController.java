@@ -52,7 +52,7 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         ModelAndView mv = new ModelAndView();
         RecruitmentMaster recruitmentMaster = new RecruitmentMaster();
-        List<?> recruitmentMasterList = recruitmentService.readBudgetDetail();
+        List<?> recruitmentMasterList = recruitmentService.searchMppApproval();
         mv.getModelMap().put("list", recruitmentMasterList);
         mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
         mv.setViewName("Recruitment/SearchForBudgetCreated");
@@ -364,7 +364,6 @@ public class RecruitmentController extends RecruitmentAbstract {
     }
 
     ///////////  MPP Edit -------------
-
     public ModelAndView editMppRClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -496,10 +495,12 @@ public class RecruitmentController extends RecruitmentAbstract {
         bind(request, mprMaster);
         String btnType = request.getParameter("btnType");
         String empreqid = request.getParameter("empreqid");
+        String approvalComment = request.getParameter("approvalComment");
 
         if (btnType.equals("Approve")) {
             mprMaster = mprMasterService.readById(Integer.parseInt(empreqid));
             mprMaster.setStatus(1);
+            mprMaster.setApprovalComment(approvalComment);
             mprMasterService.update(mprMaster);
             request.setAttribute("successMessage",
                     "Information : The Request is Approved successfully.");
@@ -507,6 +508,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         if (btnType.equals("Return")) {
             mprMaster = mprMasterService.readById(Integer.parseInt(empreqid));
             mprMaster.setStatus(2);
+            mprMaster.setApprovalComment(approvalComment);
             mprMasterService.update(mprMaster);
             request.setAttribute("successMessage",
                     "Information : The Request is Returned successfully.");
@@ -514,6 +516,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         if (btnType.equals("Reject")) {
             mprMaster = mprMasterService.readById(Integer.parseInt(empreqid));
             mprMaster.setStatus(3);
+            mprMaster.setApprovalComment(approvalComment);
             mprMasterService.update(mprMaster);
             request.setAttribute("successMessage",
                     "Information : The Request is Rejectd successfully.");
@@ -596,6 +599,12 @@ public class RecruitmentController extends RecruitmentAbstract {
         locationMaster = locationMasterService.readById(localtion);
         String locationName = locationMaster.getLocation();
 
+        int designation = recruitmentMaster.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(designation);
+        String designationName = designationMaster.getDesignationName();
+
+        String experiance = recruitmentMaster.getExperiance();
+
         int position = recruitmentMaster.getNumberOfPosition();
 
         mv.getModelMap().put("mprMaster", mprMaster);
@@ -608,6 +617,8 @@ public class RecruitmentController extends RecruitmentAbstract {
         request.setAttribute("departmentName", departmentName);
         request.setAttribute("locationName", locationName);
         request.setAttribute("position", position);
+        request.setAttribute("designationName", designationName);
+        request.setAttribute("experiance", experiance);
         mv.setViewName("Recruitment/MprSearchCreateBudget");
 
         return mv;
@@ -664,17 +675,20 @@ public class RecruitmentController extends RecruitmentAbstract {
         bind(request, recruitmentMaster);
         String btnType = request.getParameter("btnType");
         String mppid = request.getParameter("empreqid");
+        String approvalComment = request.getParameter("approvalComment");
 
         if (btnType.equals("Approve")) {
             recruitmentMaster = recruitmentService.readById(Integer.parseInt(mppid));
             recruitmentMaster.setMppStatus(1);
+            recruitmentMaster.setApprovalComment(approvalComment);
             recruitmentService.update(recruitmentMaster);
             request.setAttribute("successMessage",
                     "Information : The Request is Approved successfully.");
         }
-        if (btnType.equals("Return")) {
+        if (btnType.equals("Recycle")) {
             recruitmentMaster = recruitmentService.readById(Integer.parseInt(mppid));
             recruitmentMaster.setMppStatus(2);
+            recruitmentMaster.setApprovalComment(approvalComment);
             recruitmentService.update(recruitmentMaster);
             request.setAttribute("successMessage",
                     "Information : The Request is Returned successfully.");
@@ -682,6 +696,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         if (btnType.equals("Reject")) {
             recruitmentMaster = recruitmentService.readById(Integer.parseInt(mppid));
             recruitmentMaster.setMppStatus(3);
+            recruitmentMaster.setApprovalComment(approvalComment);
             recruitmentService.update(recruitmentMaster);
             request.setAttribute("successMessage",
                     "Information : The Request is Rejectd successfully.");
@@ -689,6 +704,66 @@ public class RecruitmentController extends RecruitmentAbstract {
         }
         mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
         mv = approvalMppCreate(request, response);
+        return mv;
+    }
+
+    public ModelAndView viewMPPShow(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        RecruitmentMaster recruitmentMaster = new RecruitmentMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        LocationMaster locationMaster = new LocationMaster();
+        JobtypeMaster jobtypeMaster = new JobtypeMaster();
+        DesignationMaster designationMaster = new DesignationMaster();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+        recruitmentMaster.setCreatedDate(sdf.format(cDate));
+
+        departmentList(request);
+        designationList(request);
+        Map<Integer, String> locationMap = readLocations();
+        Map<Integer, String> jobtype1 = jobtypeList();
+        mv.addObject("locationMap", locationMap);
+        mv.addObject("jobtype1", jobtype1);
+
+        String id = request.getParameter("id");
+        recruitmentMaster = recruitmentService.readById(Integer.parseInt(id));
+
+        int jobtypeId = recruitmentMaster.getJobtypeMaster().getId();
+        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+        String jobtypeNAme = jobtypeMaster.getJobTypeName();
+
+        int department = recruitmentMaster.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        String departmentName = departmentMaster.getDepartmentName();
+
+        int localtion = recruitmentMaster.getLocationMaster().getId();
+        locationMaster = locationMasterService.readById(localtion);
+        String locationName = locationMaster.getLocation();
+
+        int designation = recruitmentMaster.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(designation);
+        String designationName = designationMaster.getDesignationName();
+
+        String experiance = recruitmentMaster.getExperiance();
+
+        int position = recruitmentMaster.getNumberOfPosition();
+
+        mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
+        mv.getModelMap().put("departmentMaster", departmentMaster);
+        mv.getModelMap().put("locationMaster", locationMaster);
+        mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
+        mv.getModelMap().put("designationMaster", designationMaster);
+        mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
+        request.setAttribute("jobtypeNAme", jobtypeNAme);
+        request.setAttribute("departmentName", departmentName);
+        request.setAttribute("locationName", locationName);
+        request.setAttribute("position", position);
+        request.setAttribute("designationName", designationName);
+        request.setAttribute("experiance", experiance);
+        mv.setViewName("Recruitment/ViewMppShow");
+
         return mv;
     }
 

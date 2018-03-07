@@ -61,28 +61,20 @@ public class VacancyController extends VacancyAbstract {
         DepartmentMaster departmentMaster = new DepartmentMaster();
         LocationMaster locationMaster = new LocationMaster();
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
-        MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
-        MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
         DesignationMaster designationMaster = new DesignationMaster();
         if (vacancyMaster.getId() != null) {
             vacancyMaster = vacancyMasterService.readById(vacancyMaster.getId());
             vacancyMaster.setLocationMaster(vacancyMaster.getLocationMaster());
             vacancyMaster.setDepartmentMaster(vacancyMaster.getDepartmentMaster());
             vacancyMaster.setJobtypeMaster(vacancyMaster.getJobtypeMaster());
-            vacancyMaster.setMprEmployeeCategory(vacancyMaster.getMprEmployeeCategory());
-            vacancyMaster.setMprEmployeeTypeMaster(vacancyMaster.getMprEmployeeTypeMaster());
             vacancyMaster.setDesignationMaster(vacancyMaster.getDesignationMaster());
         } else {
             vacancyMaster.setLocationMaster(new LocationMaster());
             vacancyMaster.setDepartmentMaster(new DepartmentMaster());
             vacancyMaster.setJobtypeMaster(new JobtypeMaster());
-            vacancyMaster.setMprEmployeeCategory(new MprEmployeeCategory());
-            vacancyMaster.setMprEmployeeTypeMaster(new MprEmployeeTypeMaster());
             vacancyMaster.setDesignationMaster(new DesignationMaster());
         }
         departmentList(request);
-        employeecategoryList(request);
-        employeeTypeList(request);
         designationList(request);
         Map<Integer, String> locationMap = readLocations();
         Map<Integer, String> jobtype1 = jobtypeList();
@@ -91,8 +83,6 @@ public class VacancyController extends VacancyAbstract {
         vacancyMaster.setDepartmentMaster(new DepartmentMaster());
         vacancyMaster.setLocationMaster(new LocationMaster());
         vacancyMaster.setJobtypeMaster(new JobtypeMaster());
-        vacancyMaster.setMprEmployeeCategory(new MprEmployeeCategory());
-        vacancyMaster.setMprEmployeeTypeMaster(new MprEmployeeTypeMaster());
         vacancyMaster.setDesignationMaster(new DesignationMaster());
         String id = request.getParameter("id");
         mprMaster = mprMasterService.readById(Integer.parseInt(id));
@@ -122,8 +112,6 @@ public class VacancyController extends VacancyAbstract {
         mv.getModelMap().put("departmentMaster", departmentMaster);
         mv.getModelMap().put("locationMaster", locationMaster);
         mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
-        mv.getModelMap().put("mprEmployeeCategory", mprEmployeeCategory);
-        mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
         mv.getModelMap().put("designationMaster", designationMaster);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
          request.setAttribute("jobtypeNAme", jobtypeNAme);
@@ -140,7 +128,9 @@ public class VacancyController extends VacancyAbstract {
     public ModelAndView vacancySubmitCreate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         VacancyMaster vacancyMaster = new VacancyMaster();
+         String id = request.getParameter("mprMasterid");
         DepartmentMaster departmentMaster = new DepartmentMaster();
+        MprMaster mprMaster = new MprMaster();
         LocationMaster locationMaster = new LocationMaster();
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
         DesignationMaster designationMaster = new DesignationMaster();
@@ -149,6 +139,30 @@ public class VacancyController extends VacancyAbstract {
         BindException errors = new BindException(vacancyMaster, "vacancyMaster");
         bind(request, vacancyMaster);
 
+        mprMaster = mprMasterService.readById(Integer.parseInt(id));
+        
+        int jobtype = mprMaster.getJobtypeMaster().getId();
+        jobtypeMaster = jobtypeMasterService.readById(jobtype);
+        vacancyMaster.setJobtypeMaster(jobtypeMaster);
+        
+        int department = mprMaster.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        vacancyMaster.setDepartmentMaster(departmentMaster);
+        
+        int jobrole = mprMaster.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(jobrole);
+        vacancyMaster.setDesignationMaster(designationMaster);
+        
+        String experiance = mprMaster.getExperience();
+        vacancyMaster.setExperience(experiance);
+        
+        int location = mprMaster.getLocationMaster().getId();
+        locationMaster = locationMasterService.readById(location);
+        vacancyMaster.setLocationMaster(locationMaster);
+        
+        int position = mprMaster.getNumberOfPosition();
+        vacancyMaster.setNumberOfPosition(position);
+        
 //        selectBudget(request, response);
         departmentList(request);
 
@@ -212,8 +226,6 @@ public class VacancyController extends VacancyAbstract {
 
         departmentList(request);
         designationList(request);
-        employeecategoryList(request);
-        employeeTypeList(request);
         Map<Integer, String> locationMap = readLocations();
         Map<Integer, String> jobtype1 = jobtypeList();
         mv.addObject("locationMap", locationMap);
@@ -224,8 +236,6 @@ public class VacancyController extends VacancyAbstract {
         mv.getModelMap().put("departmentMaster", departmentMaster);
         mv.getModelMap().put("locationMaster", locationMaster);
         mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
-        mv.getModelMap().put("mprEmployeeCategory", mprEmployeeCategory);
-        mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
         mv.getModelMap().put("designationMaster", designationMaster);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
         mv.setViewName("Vacancy/OutViewVacancy");
@@ -241,28 +251,20 @@ public class VacancyController extends VacancyAbstract {
         DepartmentMaster departmentMaster = new DepartmentMaster();
         LocationMaster locationMaster = new LocationMaster();
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
-        MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
-        MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
         DesignationMaster designationMaster = new DesignationMaster();
         if (vacancyMaster.getId() != null) {
             vacancyMaster = vacancyMasterService.readById(vacancyMaster.getId());
             vacancyMaster.setLocationMaster(vacancyMaster.getLocationMaster());
             vacancyMaster.setDepartmentMaster(vacancyMaster.getDepartmentMaster());
             vacancyMaster.setJobtypeMaster(vacancyMaster.getJobtypeMaster());
-            vacancyMaster.setMprEmployeeCategory(vacancyMaster.getMprEmployeeCategory());
-            vacancyMaster.setMprEmployeeTypeMaster(vacancyMaster.getMprEmployeeTypeMaster());
             vacancyMaster.setDesignationMaster(vacancyMaster.getDesignationMaster());
         } else {
             vacancyMaster.setLocationMaster(new LocationMaster());
             vacancyMaster.setDepartmentMaster(new DepartmentMaster());
             vacancyMaster.setJobtypeMaster(new JobtypeMaster());
-            vacancyMaster.setMprEmployeeCategory(new MprEmployeeCategory());
-            vacancyMaster.setMprEmployeeTypeMaster(new MprEmployeeTypeMaster());
             vacancyMaster.setDesignationMaster(new DesignationMaster());
         }
         departmentList(request);
-        employeecategoryList(request);
-        employeeTypeList(request);
         designationList(request);
         Map<Integer, String> locationMap = readLocations();
         Map<Integer, String> jobtype1 = jobtypeList();
@@ -274,8 +276,6 @@ public class VacancyController extends VacancyAbstract {
         mv.getModelMap().put("departmentMaster", departmentMaster);
         mv.getModelMap().put("locationMaster", locationMaster);
         mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
-        mv.getModelMap().put("mprEmployeeCategory", mprEmployeeCategory);
-        mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
         mv.getModelMap().put("designationMaster", designationMaster);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
         mv.setViewName("Vacancy/ViewVecancy");

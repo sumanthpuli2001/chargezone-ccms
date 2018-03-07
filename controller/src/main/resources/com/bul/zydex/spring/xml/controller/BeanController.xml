@@ -1016,8 +1016,6 @@
         <property name="vacancyMasterService" ref="vacancyMasterService1"></property>
         <property name="locationMasterService" ref="locationMasterService1" />
         <property name="jobtypeMasterService" ref="jobtypeMasterService1"/>
-        <property name="mprEmployeeTypeMasterService" ref="mprEmployeeTypeMasterService1"/>
-        <property name="mprEmployeeCategoryService" ref="mprEmployeeCategoryService1"/>
         <property name="designationMasterService" ref="designationMasterService1"/>
         <property name="vacancyValidator" ref="vacancyValidator1"/>
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>

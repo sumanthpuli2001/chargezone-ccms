@@ -72,6 +72,5 @@
         <many-to-one name="vacancyId" class="com.bul.zydex.model.VacancyMaster" fetch="select">
             <column name="vacancy_id" />
         </many-to-one>
-       
     </class>
 </hibernate-mapping>

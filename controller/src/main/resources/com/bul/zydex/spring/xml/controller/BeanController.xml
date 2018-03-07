@@ -993,6 +993,8 @@
         <property name="questionAnsService" ref="questionAnsService1" />
         <property name="mprEmployeeCategoryService" ref="mprEmployeeCategoryService1" />
         <property name="questionPaperService" ref="questionPaperService1" />
+        <property name="questionDetailsService" ref="questionDetailsService1" />
+        
     </bean>
     <bean id="questionAnsController1" class="com.bul.zydex.controller.questionlibrary.QuestionAnsController" parent="controllerConfig" >
         <property name="questionLibraryService" ref="questionLibraryService1"></property>

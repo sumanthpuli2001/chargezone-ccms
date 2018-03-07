@@ -13,7 +13,9 @@ import java.util.List;
  * @author Dell-1
  */
 public interface QuestionLibraryDAO<T> extends GenericsDAO<T> {
-    
-     public List<?> readAllQuestionLibrary();
-    
+
+    public List<?> readAllQuestionLibrary();
+
+    public List<?> readByQusNameCatyMark(int categoryId, String Question, int marks);
+
 }

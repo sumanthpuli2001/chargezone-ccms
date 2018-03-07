@@ -541,4 +541,7 @@
     <bean id="candidateJobApplyService1" class="com.bul.zydex.service.CandidateJobApply.CandidateJobApplyServiceImpl">
         <property name="candidateJobApplyDAO" ref="candidateJobApplyDAO1" />
     </bean>
+    <bean id="questionDetailsService1" class="com.bul.zydex.service.questionlibrary.QuestionDetailsServiceImpl">
+        <property name="questionDetailsDAO" ref="questionDetailsDAO1" />
+    </bean>
 </beans>

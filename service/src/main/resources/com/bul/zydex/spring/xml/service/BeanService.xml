@@ -544,4 +544,19 @@
     <bean id="applayJobUserMasterService1" class="com.bul.zydex.service.ApplayJobUserMaster.ApplayJobUserMasterServiceImpl">
         <property name="applayJobUserMasterDAO" ref="applayJobUserMasterDAO1" />
     </bean>
+    <bean id="trainingTypeService1" class="com.bul.zydex.service.Training.TrainingTypeServiceImpl">
+        <property name="trainingTypeDAO" ref="trainingTypeDAO1" />
+    </bean>
+    <bean id="trainingSubTypeService1" class="com.bul.zydex.service.Training.TrainingSubTypeServiceImpl">
+        <property name="trainingSubTypeDAO" ref="trainingSubTypeDAO1" />
+    </bean>
+    <bean id="trainingSubMasterService1" class="com.bul.zydex.service.Training.TrainingSubMasterServiceImpl">
+        <property name="trainingSubMasterDAO" ref="trainingSubMasterDAO1" />
+    </bean>
+    <bean id="trainingMasterService1" class="com.bul.zydex.service.Training.TrainingMasterServiceImpl">
+        <property name="trainingMasterDAO" ref="trainingMasterDAO1" />
+    </bean>
+    <bean id="trainerService1" class="com.bul.zydex.service.Training.TrainerServiceImpl">
+        <property name="trainerDAO" ref="trainerDAO1" />
+    </bean>
 </beans>

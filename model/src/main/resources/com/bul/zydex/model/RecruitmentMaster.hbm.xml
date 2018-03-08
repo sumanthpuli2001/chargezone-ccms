@@ -25,11 +25,23 @@
         <property name="budget" type="java.lang.Integer">
             <column name="budget" />
         </property>
-        <property name="date" type="string">
-            <column name="date" />
+        <property name="createdDate" type="string">
+            <column name="created_date" />
         </property>
         <property name="mppStatus" type="java.lang.Integer">
             <column name="mpp_status" />
+        </property>
+        <many-to-one name="designationMaster" class="com.bul.zydex.model.DesignationMaster" fetch="select">
+            <column name="designation_id" />
+        </many-to-one>
+         <property name="experiance" type="string">
+            <column name="experience" />
+        </property>
+        <property name="updatedDate" type="string">
+            <column name="updated_date" />
+        </property>
+        <property name="approvalComment" type="string">
+            <column name="approval_comment" />
         </property>
     </class>
 </hibernate-mapping>

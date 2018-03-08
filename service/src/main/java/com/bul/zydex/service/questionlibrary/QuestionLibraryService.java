@@ -16,4 +16,6 @@ public interface QuestionLibraryService<T> extends GenericsService<T> {
 
     public List<?> readAllQuestionLibrary();
 
+    public List<?> readByQusNameCatyMark(int categoryId, String Question, int marks);
+
 }

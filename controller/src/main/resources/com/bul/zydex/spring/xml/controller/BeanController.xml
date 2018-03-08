@@ -993,6 +993,8 @@
         <property name="questionAnsService" ref="questionAnsService1" />
         <property name="mprEmployeeCategoryService" ref="mprEmployeeCategoryService1" />
         <property name="questionPaperService" ref="questionPaperService1" />
+        <property name="questionDetailsService" ref="questionDetailsService1" />
+        
     </bean>
     <bean id="questionAnsController1" class="com.bul.zydex.controller.questionlibrary.QuestionAnsController" parent="controllerConfig" >
         <property name="questionLibraryService" ref="questionLibraryService1"></property>
@@ -1008,19 +1010,21 @@
         <property name="mprMasterService" ref="mprMasterService1"/>
         <property name="designationMasterService" ref="designationMasterService1"/>
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
+        <property name="mprApprovalService" ref="mprApprovalService1"/>
+        <property name="approvalUserService" ref="approvalUserService1"/>
     </bean>
     
     <bean id="vacancyController1" class="com.bul.zydex.controller.Vacancy.VacancyController" parent="controllerConfig" >
         <property name="vacancyMasterService" ref="vacancyMasterService1"></property>
         <property name="locationMasterService" ref="locationMasterService1" />
         <property name="jobtypeMasterService" ref="jobtypeMasterService1"/>
-        <property name="mprEmployeeTypeMasterService" ref="mprEmployeeTypeMasterService1"/>
-        <property name="mprEmployeeCategoryService" ref="mprEmployeeCategoryService1"/>
         <property name="designationMasterService" ref="designationMasterService1"/>
         <property name="vacancyValidator" ref="vacancyValidator1"/>
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
         <property name="applayJobUserMasterSerivce" ref="applayJobUserMasterService1"/>
         <property name="applayJobUserMasterValidator" ref="applayJobUserMasterValidator1"/>
+        <property name="candidateJobApplyValidator" ref="candidateJobApplyValidator1"/>
+        <property name="mprMasterService" ref="mprMasterService1"/>
     </bean> 
     <bean id="thoughtMasterController1" class="com.bul.zydex.controller.thought.ThoughtMasterController" parent="controllerConfig" >
         <property name="thoughtMasterService" ref="thoughtMasterService1"></property>

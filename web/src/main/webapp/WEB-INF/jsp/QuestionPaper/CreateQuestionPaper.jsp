@@ -18,7 +18,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Question Paper Create </h1>
+            <h1>Question Paper Create Step 1</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Question Paper</li>
@@ -31,7 +31,7 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form class="form-horizontal" method="post" commandName="questionPaper" action="questionLibrary.htm?act=submitQuestionPaper">
+        <form:form class="form-horizontal" method="post" commandName="questionPaper" action="questionLibrary.htm?act=submitQuestionPaperStep1">
             <section class="content">
                 <div class="col-md-12">
                     <div class="nav-tabs-custom">
@@ -40,99 +40,100 @@
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12">
                                         <div class="form-group">
-                                            <div class="col-sm-4">
-                                                <%--<form:input path="id" id="id" class="form-control" type="hidden"></form:input>--%>
+                                            <div class="col-sm-5">
+                                                <form:input path="id" id="id" class="form-control" type="hidden"></form:input>
+                                                
                                                 <label>Category :<span style="color: red;font-size: 12px;"></span></label>
-                                                    <form:select path="categoryName" id="categoryName" class="form-control">
+                                                    <form:select path="categoryName.id" id="categoryName" class="form-control">
                                                         <form:option value="" label="-- Select --" />
                                                         <form:options items="${categoryList}"></form:options>
                                                     </form:select>
-                                                    <form:errors path="categoryName" cssClass="errorDiv"></form:errors>
+                                                    <form:errors path="categoryName.id" cssClass="errorDiv"></form:errors>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-5">
                                                     <label>Question Paper Name : <span style="color: red;font-size: 12px;">*</span></label>
-                                                <form:input path="paperName" id="marks" class="form-control" placeholder="Marks"></form:input>
+                                                <form:input path="paperName" id="marks" class="form-control" placeholder="Enter Paper Name"></form:input>
                                                 <form:errors path="paperName" cssClass="errorDiv"></form:errors>
 
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <label>Status : <span style="color: red;font-size: 12px;">*</span></label>
-                                                    <fieldset>
-                                                    <form:radiobutton path="status" id="status" name="status"  value="0"/>Active&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <form:radiobutton path="status" id="status" name="status" value="1"/>Inactive
-                                                </fieldset>
-                                            </div>
+                                                <!--<div class="col-sm-4">-->
+                                                <!--                                                    <label>Status : <span style="color: red;font-size: 12px;">*</span></label>
+                                                                                                    <fieldset>-->
+
+
+                                                <!--</fieldset>-->
+                                                <!--</div>-->
 
                                             <%--<form:errors path="type" cssClass="errorDiv"></form:errors>--%>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-6">
-                                                <button  class="btn btn-default" style="width: 100px;" data-original-title="" title="" >Search</button>
-                                            </div>
+                                        <!--                                        <div class="form-group">
+                                                                                    <div class="col-sm-6">
+                                                                                        <button  class="btn btn-default" style="width: 100px;" data-original-title="" title="" >Search</button>
+                                                                                    </div>
+                                        
+                                                                                </div>-->
+                                        <!--                                        <div class="col-md-12 col-sm-12">
+                                                                                    <div class="table-responsive">
+                                                                                        <table id="questionTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                                                            <tr>
+                                                                                                <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
+                                                                                                <th style="text-align: center; vertical-align: middle">Question</th>
+                                                                                                <th style="text-align: center; vertical-align: middle">Marks</th>
+                                                                                                <th style="text-align: center; vertical-align: middle">Action</th>
+                                                                                            <input type="hidden" name="questionCount" id="questionCount" value="1"/>
+                                                                                            </tr>
+                                        
+                                        <%--<c:forEach var="questionList" items="${questionList}" varStatus="status">--%>
+                                            <tr id="templateRow">
 
-                                        </div>
-                                        <div class="col-md-12 col-sm-12">
-                                            <div class="table-responsive">
-                                                <table id="questionTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                    <tr>
-                                                        <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                        <th style="text-align: center; vertical-align: middle">Question</th>
-                                                        <th style="text-align: center; vertical-align: middle">Marks</th>
-                                                        <th style="text-align: center; vertical-align: middle">Action</th>
-                                                    <input type="hidden" name="questionCount" id="questionCount" value="1"/>
-                                                    </tr>
+                                                <td style="text-align: center">${status.count}</td>
+                                                <td id="policyTd1">
+                                                    <input type="text" name="ans${status.count}" id="ans1" value="${questionList.ans}" class="form-control">
+                                                </td>
+                                                <td style="text-align: center">
 
-                                                    <%--<c:forEach var="questionList" items="${questionList}" varStatus="status">--%>
-<!--                                                        <tr id="templateRow">
+                                                    <input type="text" name="ans${status.count}" id="ans1" value="${questionList.ans}" class="form-control">
 
-                                                            <td style="text-align: center">${status.count}</td>
-                                                            <td id="policyTd1">
-                                                                <input type="text" name="ans${status.count}" id="ans1" value="${questionList.ans}" class="form-control">
-                                                            </td>
-                                                            <td style="text-align: center">
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" >
 
-                                                                <input type="text" name="ans${status.count}" id="ans1" value="${questionList.ans}" class="form-control">
+                                                                <li style="width: 100px;">
+                                                                    <a href="#"
+                                                                       onclick="editClick(${list[0]},${list[6]});">
+                                                                        &nbsp;&nbsp;View/Edit
+                                                                    </a>
+                                                                </li>
+                                                                <li style="width: 100px;">
+                                                                    <a href="#"
+                                                                       onclick="deleteClick(${list[0]},${list[6]});">
+                                                                        &nbsp;&nbsp;Delete
+                                                                    </a>
+                                                                </li>
+                                                            
 
-                                                            </td>
-                                                            <td>
-                                                                <div class="btn-group">
-                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        <span class="caret"></span>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu" >
+                                                        </ul>
+                                                    </div>
+                                                </td>
 
-                                                                            <li style="width: 100px;">
-                                                                                <a href="#"
-                                                                                   onclick="editClick(${list[0]},${list[6]});">
-                                                                                    &nbsp;&nbsp;View/Edit
-                                                                                </a>
-                                                                            </li>
-                                                                            <li style="width: 100px;">
-                                                                                <a href="#"
-                                                                                   onclick="deleteClick(${list[0]},${list[6]});">
-                                                                                    &nbsp;&nbsp;Delete
-                                                                                </a>
-                                                                            </li>
-                                                                        
-
-                                                                    </ul>
-                                                                </div>
-                                                            </td>
-
-                                                        </tr>-->
+                                            </tr>
 
 
-                                                    <%--</c:forEach>--%>
-                                                </table>
-                                            </div>
-                                        </div>
+                                        <%--</c:forEach>--%>
+                                    </table>
+                                </div>
+                            </div>-->
                                     </div>
                                     &nbsp;
 
 
                                     <div class="form-group">
                                         <div class=" col-sm-6 col-sm-offset-5">
-                                            <button type="submit" class="btn btn-primary" style="width: 100px;" data-original-title="" title="" >SUBMIT</button>
+                                            <button type="submit" class="btn btn-primary" style="width: 100px;" data-original-title="" title="" >Save & Next</button>
                                         </div>
                                     </div>
                                 </div>
@@ -151,6 +152,6 @@
 <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
 <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
 <script>
-                                                                                           initSample();
+    initSample();
 </script>
 

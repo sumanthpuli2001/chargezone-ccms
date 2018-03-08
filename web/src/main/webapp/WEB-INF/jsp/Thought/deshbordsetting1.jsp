@@ -10,14 +10,14 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Dashbord Setting </title>
+        <title>Homepage Setting </title>
     </head>
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>Dashbord Setting</h1>
+            <h1>Homepage Setting</h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li><li>Setting</li>
-                <li class="active">Dashbord Setting</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Homepage</a></li><li>Setting</li>
+                <li class="active">Homepage Setting</li>
             </ol>
         </section>
         <ul class="nav nav-tabs">

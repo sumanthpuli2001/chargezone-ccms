@@ -2307,12 +2307,14 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         EmployeeMaster employeeMaster = new EmployeeMaster();
         String searchString = request.getParameter("searchString");
 //        List<?> employeeMasterList = employeeMasterService.read();
-        List<?> employeeMasterList = employeeMasterService.searchEmployeeDetail(searchString);
+//        List<?> employeeMasterList = employeeMasterService.searchEmployeeDetail(searchString);
+        List<?> employeeMasterList = employeeMasterService.searchEmployeeDetailForContactInfo(searchString);
         mv.getModelMap().put("list", employeeMasterList);
         //dont rename "list" because same used on searchSubmit method and employeeRegistrationResult.jsp
         mv.getModelMap().put("employeeMaster", employeeMaster);
-        mv.setViewName("Employee/EmployeeRegistrationResult");
 
+//        mv.setViewName("Employee/EmployeeRegistrationResult");
+        mv.setViewName("Employee/EmployeeContactDetailResult");
         return mv;
     }
 

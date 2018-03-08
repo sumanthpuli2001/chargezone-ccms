@@ -32,4 +32,9 @@ public class QuestionLibraryServiceImpl<T> extends GenericsServiceImpl<T>
         return questionLibraryDAO.readAllQuestionLibrary();
     }
 
+    @Override
+    public List<?> readByQusNameCatyMark(int categoryId, String Question, int marks) {
+        return questionLibraryDAO.readByQusNameCatyMark(categoryId, Question, marks);
+    }
+
 }

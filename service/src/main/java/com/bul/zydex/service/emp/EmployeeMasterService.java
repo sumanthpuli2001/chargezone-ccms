@@ -149,6 +149,9 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
     public List<?> readLevel1AndLevel5FunctionheadByEmployeeMasterId(int id);
 
     public List<?> readEmployeeByBirthday(String date);
+
     public List<?> newJoiningEmployee(String date);
+
+    public List<?> searchEmployeeDetailForContactInfo(final String searchString);
 
 }

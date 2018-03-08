@@ -88,9 +88,9 @@
         </script>
     </head>
     <body>
-        <section class="content-header">
-            <button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign In</button></br></br>
-            <button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=Login'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Login</button>
+        <section class="content-header" style="margin-top: 5%;">
+            <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 1%;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign In</button>
+            <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 2%;" onclick="window.location = 'vacancy.htm?act=Login'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Login</button>
             <h1>Job Vacancy List</h1>
             <ol class="breadcrumb">
             </ol>
@@ -116,8 +116,8 @@
                                 <div class="box-body no-padding">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
-                                            <div class="table table-bordered">
-                                                <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="center"  >
+                                            <div class="table table-bordered" style="width: 85%;margin-left: 7%;">
+                                                <table id="table_1" class="table table-bordered table-striped table-hover"  align="center"  >
                                                     <c:choose>
                                                         <c:when test="${empty list}">
                                                             <tr>
@@ -132,14 +132,14 @@
                                                                     <c:if test="${sessionScope.userRight.employeeManagement}">
                                                                         <!--<th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>-->
                                                                         </c:if>
-                                                                    <!--<th>user id</th>-->
-                                                                    <th style="width: 50px;">Vacancy Name</th>
-                                                                    <th style="width: 50px;">Number Of Position</th>
-                                                                    <th style="width: 50px;">Experience</th>
-                                                                    <th style="width: 50px;">Start Date</th>
-                                                                    <th style="width: 50px;">End Date</th>
+<!--                                                                    <th>sr.no</th>-->
+                                                                    <th style="width: 142px;">Vacancy Name</th>
+                                                                    <th style="width: 185px;">Number Of Position</th>
+                                                                    <th style="width: 130px;">Experience</th>
+                                                                    <th style="width: 105px;">Start Date</th>
+                                                                    <th style="width: 132px;">End Date</th>
                                                                     <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                                                    <th style="width: 50px;">Action</th>
+                                                                    <th style="width: 132px;">Action</th>
                                                                         <%--</c:if>--%>
 
                                                                 </tr>
@@ -150,9 +150,9 @@
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
                                                                 <c:if test="${sessionScope.userRight.employeeManagement}">
-                                                                    <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
+<!--                                                                    <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>-->
                                                                     </c:if>
-                                                                <!--<td>/</td>-->
+<!--                                                                <td>1</td>-->
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[2]}</td>
                                                                 <td>${list[4]}</td>

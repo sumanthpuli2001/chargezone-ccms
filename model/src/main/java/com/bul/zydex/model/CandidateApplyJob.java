@@ -35,12 +35,13 @@ public class CandidateApplyJob  implements java.io.Serializable{
     private String experianceDateJoiningMonth;
     private String certificateAttach;
     private VacancyMaster vacancyId;
+    private Integer status;
     
     public CandidateApplyJob(){
         
     }
 
-    public CandidateApplyJob(Integer id, String name, String fatherName, String motherName, String fatherDob, String motherDob, String sex, String martialStatus, String dob, String photograph, String presentAddress, String permanentAddress, String city, String bloodGroup, String emailId, String contactNo, String emergencyContactPerson, String emergencyContactNo, String highestEducationQualification, String experianceDateJoiningYear, String experianceDateJoiningMonth, String certificateAttach, VacancyMaster vacancyId) {
+    public CandidateApplyJob(Integer id, String name, String fatherName, String motherName, String fatherDob, String motherDob, String sex, String martialStatus, String dob, String photograph, String presentAddress, String permanentAddress, String city, String bloodGroup, String emailId, String contactNo, String emergencyContactPerson, String emergencyContactNo, String highestEducationQualification, String experianceDateJoiningYear, String experianceDateJoiningMonth, String certificateAttach, VacancyMaster vacancyId,Integer status) {
         this.id = id;
         this.name = name;
         this.fatherName = fatherName;
@@ -64,6 +65,7 @@ public class CandidateApplyJob  implements java.io.Serializable{
         this.experianceDateJoiningMonth = experianceDateJoiningMonth;
         this.certificateAttach = certificateAttach;
         this.vacancyId = vacancyId;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -249,6 +251,8 @@ public class CandidateApplyJob  implements java.io.Serializable{
     public void setVacancyId(VacancyMaster vacancyId) {
         this.vacancyId = vacancyId;
     }
+
+   
     
     
     

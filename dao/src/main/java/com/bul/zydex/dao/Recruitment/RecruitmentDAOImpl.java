@@ -24,7 +24,7 @@ public class RecruitmentDAOImpl<T> extends GenericsDAOImpl<T> implements Recruit
     public List<?> readBudgetDetail() {
         String query = "";
         query += " "
-                + " SELECT a.id, a.numberOfPosition, a.budget, a.date, b.location, c.departmentName, d.jobTypeName"
+                + " SELECT a.id, a.numberOfPosition, a.budget, b.location, c.departmentName, d.jobTypeName, a.mppStatus"
                 + " FROM RecruitmentMaster a "
                 + " LEFT JOIN a.locationMaster b "
                 + " LEFT JOIN a.departmentMaster c "
@@ -46,6 +46,22 @@ public class RecruitmentDAOImpl<T> extends GenericsDAOImpl<T> implements Recruit
                 + " LEFT JOIN a.jobtypeMaster d "
                 + " where (a.dateOfLeaving is null or a.dateOfLeaving = '') "
                 + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+    
+        @Override
+    public List<?> searchMppApproval() {
+        String query = "";
+        query += " "
+                + " SELECT a.id, a.numberOfPosition, a.budget, b.location, c.departmentName, d.jobTypeName, a.mppStatus"
+                + " FROM RecruitmentMaster a "
+                + " LEFT JOIN a.locationMaster b "
+                + " LEFT JOIN a.departmentMaster c "
+                + " LEFT JOIN a.jobtypeMaster d "
+                + " WHERE a.mppStatus = 1 "
+                + " order by a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

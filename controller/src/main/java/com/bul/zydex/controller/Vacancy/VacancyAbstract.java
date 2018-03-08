@@ -14,16 +14,19 @@ import com.bul.zydex.model.JobtypeMaster;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
+import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.ApplayJobUserMaster.ApplayJobUserMasterService;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
 import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
 import com.bul.zydex.service.Recruitment.MprEmployeeTypeMasterService;
+import com.bul.zydex.service.Recruitment.MprMasterService;
 import com.bul.zydex.service.Vacancy.VacancyMasterService;
 import com.bul.zydex.service.emp.DesignationMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.validator.Recruitment.ApplayJobUserMasterValidator;
+import com.bul.zydex.validator.Vacancy.CandidateJobApplyValidator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,12 +43,12 @@ public class VacancyAbstract extends CustomAbstract {
     protected LocationMasterService<LocationMaster> locationMasterService;
     protected JobtypeMasterService<JobtypeMaster> jobtypeMasterService;
     protected DesignationMasterService<DesignationMaster> designationMasterService;
-    protected MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService;
-    protected MprEmployeeTypeMasterService<MprEmployeeTypeMaster> mprEmployeeTypeMasterService;
     protected CandidateJobApplyService<CandidateApplyJob>candidateJobApplyService;
     protected Validator vacancyValidator;
     protected ApplayJobUserMasterService<ApplayJobUserMaster> applayJobUserMasterSerivce;
     protected ApplayJobUserMasterValidator applayJobUserMasterValidator;
+    protected CandidateJobApplyValidator candidateJobApplyValidator;
+    protected MprMasterService<MprMaster> mprMasterService;
 
     public CandidateJobApplyService<CandidateApplyJob> getCandidateJobApplyService() {
         return candidateJobApplyService;
@@ -87,21 +90,6 @@ public class VacancyAbstract extends CustomAbstract {
         return designationMasterService;
     }
 
-    public MprEmployeeCategoryService<MprEmployeeCategory> getMprEmployeeCategoryService() {
-        return mprEmployeeCategoryService;
-    }
-
-    public void setMprEmployeeCategoryService(MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService) {
-        this.mprEmployeeCategoryService = mprEmployeeCategoryService;
-    }
-
-    public MprEmployeeTypeMasterService<MprEmployeeTypeMaster> getMprEmployeeTypeMasterService() {
-        return mprEmployeeTypeMasterService;
-    }
-
-    public void setMprEmployeeTypeMasterService(MprEmployeeTypeMasterService<MprEmployeeTypeMaster> mprEmployeeTypeMasterService) {
-        this.mprEmployeeTypeMasterService = mprEmployeeTypeMasterService;
-    }
 
     public Validator getVacancyValidator() {
         return vacancyValidator;
@@ -126,6 +114,25 @@ public class VacancyAbstract extends CustomAbstract {
     public void setApplayJobUserMasterValidator(ApplayJobUserMasterValidator applayJobUserMasterValidator) {
         this.applayJobUserMasterValidator = applayJobUserMasterValidator;
     }
+
+    public CandidateJobApplyValidator getCandidateJobApplyValidator() {
+        return candidateJobApplyValidator;
+    }
+
+    public void setCandidateJobApplyValidator(CandidateJobApplyValidator candidateJobApplyValidator) {
+        this.candidateJobApplyValidator = candidateJobApplyValidator;
+    }
+
+    public MprMasterService<MprMaster> getMprMasterService() {
+        return mprMasterService;
+    }
+
+    public void setMprMasterService(MprMasterService<MprMaster> mprMasterService) {
+        this.mprMasterService = mprMasterService;
+    }
+    
+    
+    
     
     protected void departmentList(HttpServletRequest request) {
         DepartmentMaster departmentMaster = new DepartmentMaster();
@@ -174,28 +181,5 @@ public class VacancyAbstract extends CustomAbstract {
         request.setAttribute("desigList", dn);
     }
 
-    protected void employeecategoryList(HttpServletRequest request) {
-        MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
-        List<?> categoryList = mprEmployeeCategoryService.read();
-        Map<Integer, String> en = new HashMap<>();
-        for (Object o : categoryList) {
-            mprEmployeeCategory = (MprEmployeeCategory) o;
-            en.put(mprEmployeeCategory.getId(), mprEmployeeCategory.getEmployeeCategory());
-        }
-
-        request.setAttribute("categoryList", en);
-    }
-
-    protected void employeeTypeList(HttpServletRequest request) {
-        MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
-        List<?> employeeTypeList = mprEmployeeTypeMasterService.read();
-        Map<Integer, String> et = new HashMap<>();
-        for (Object o : employeeTypeList) {
-            employeeTypeMaster = (MprEmployeeTypeMaster) o;
-            et.put(employeeTypeMaster.getId(), employeeTypeMaster.getEmployeeType());
-        }
-
-        request.setAttribute("emptypeList", et);
-    }
 
 }

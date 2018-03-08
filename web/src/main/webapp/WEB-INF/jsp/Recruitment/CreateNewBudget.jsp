@@ -46,38 +46,42 @@
                                         <form:form class="form-horizontal" method="post" onsubmit='return deleteCheck11();'
                                                    commandName="recruitmentMaster" action="recruitment.htm?act=budgetCreateDetail">
                                             <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>Location<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:select path="locationMaster.id" id="locationMaster" class="form-control">
+                                                        <form:option value="" label="-- Select --" />
+                                                        <form:options items="${locationMap}"/>
+                                                    </form:select>
+                                                    <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
+                                                    </div>
                                                 <div class="col-sm-6">
                                                     <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="departmentMaster.id" id="departmentMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${deptMap}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
+                                                    <form:select path="departmentMaster.id" id="departmentMaster" class="form-control">
+                                                        <form:option value="" label="-- Select --" />
+                                                        <form:options items="${deptMap}"></form:options>
+                                                    </form:select>
+                                                    <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <!--<div class="form-group">-->
-                                                    <div class="col-sm-6">
-                                                        <label>LocationMaster<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="locationMaster.id" id="locationMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${locationMap}"/>
-                                                        </form:select>
-                                                        <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Job Type:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="jobtypeMaster.id" id="jobtypeMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${jobtype1}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="jobtypeMaster.id" cssClass="errorDiv"></form:errors>
+                                                    <form:select path="jobtypeMaster.id" id="jobtypeMaster" class="form-control">
+                                                        <form:option value="" label="-- Select --" />
+                                                        <form:options items="${jobtype1}"></form:options>
+                                                    </form:select>
+                                                    <form:errors path="jobtypeMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Budget:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="budget" class="form-control" placeholder="Budget"></form:input>
-                                                    <form:errors path="budget" cssClass="errorDiv"></form:errors>
+                                                      <div class="col-sm-6">
+                                                        <label>Job Role:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:select path="designationMaster.id" class="form-control">
+                                                        <form:option value="" label="-- Select --" />
+                                                        <form:options items="${desigList}"></form:options>
+                                                    </form:select>
+                                                    <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
+                                                
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
@@ -85,21 +89,25 @@
                                                     <form:input path="numberOfPosition" class="form-control" placeholder="Number Of Position"></form:input>
                                                     <form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>
                                                     </div>
-                                                     <div class="col-sm-6">
-                                                        <label>Date:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" >
-                                                        <form:input path="date" class="form-control" onchange="dateDifference(this.value);" placeholder="From Date" readonly="true"></form:input>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                    <form:errors path="date" cssClass="errorDiv"></form:errors>
+                                                <div class="col-sm-6">
+                                                        <label>Budget(Yearly):<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:input path="budget" class="form-control" placeholder="Budget"></form:input>
+                                                    <form:errors path="budget" cssClass="errorDiv"></form:errors>
                                                     </div>
-                                                </div>
+                                            </div>
                                                 <div class="form-group">
-                                                    <div class="col-sm-6 col-sm-offset-5">
-                                                        <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                                    <div class="col-sm-6">
+                                                        <label>Work Experience(In Year):<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:input path="experiance" class="form-control" placeholder="Experience"></form:input>
+                                                    <form:errors path="experiance" cssClass="errorDiv"></form:errors>
                                                     </div>
-
                                                 </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-6 col-sm-offset-5">
+                                                    <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                                </div>
+
+                                            </div>
                                         </form:form>
                                         <!--</div>-->
 
@@ -112,7 +120,7 @@
             </div>
         </section>
     </div>
-      <script type="text/javascript">
+    <script type="text/javascript">
         $('.form_datetime').datetimepicker({
             //language:  'fr',
             weekStart: 1,
@@ -125,5 +133,5 @@
         });
 
     </script>
-<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

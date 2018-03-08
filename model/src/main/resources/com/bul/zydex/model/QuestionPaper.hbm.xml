@@ -6,12 +6,12 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="questionLibrary" class="com.bul.zydex.model.QuestionLibrary" fetch="select">
-            <column name="question_library_id"  />
-        </many-to-one>
-        <property name="categoryName" type="string">
+        <many-to-one name="categoryName" class="com.bul.zydex.model.MprEmployeeCategory" fetch="select">
             <column name="category_name" />
-        </property>
+        </many-to-one>
+<!--        <property name="categoryName" type="string">
+            <column name="category_name" />
+        </property>-->
         <property name="paperName" type="string">
             <column name="paper_name"  />
         </property>

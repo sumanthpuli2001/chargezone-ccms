@@ -20,6 +20,18 @@
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Budget Detail List</li>
             </ol>
+
+            <script>
+                function reject() {
+                    var checkreject = confirm("If You Reject You Can Not Edit,Submit Or View. So, Are You Sure You Want to Reject This MPR?");
+                    if (checkreject) {
+                        checkreject = document.getElementsByName('Reject');
+                        return true;
+                    }
+                    return false;
+                }
+            </script>
+
         </section>
         <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>
@@ -45,10 +57,11 @@
 
                                         <form:form class="form-horizontal" method="post"
                                                    commandName="mprMaster" action="recruitment.htm?act=approveSubmitForMpr">
+                                              <form:hidden path="approvalComment"></form:hidden>
                                             <input type="hidden" id="empreqid" name="empreqid" value="${mprMaster.id}">
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Department:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <label>Department111111:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:select path="departmentMaster.id" id="departmentMaster" class="form-control">
                                                             <form:option value="" label="-- Select --" />
                                                             <form:options items="${deptMap}"></form:options>
@@ -82,27 +95,27 @@
                                                         <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Employee Category:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="mprEmployeeCategory.id" id="mprEmployeeCategory" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${categoryList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="mprEmployeeCategory.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Employee Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="mprEmployeeTypeMaster.id" id="mprEmployeeTypeMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${emptypeList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="mprEmployeeTypeMaster.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                <!--                                                <div class="form-group">
+                                                                                                    <div class="col-sm-6">
+                                                                                                        <label>Employee Category:<span style="color: red;font-size: 12px;"></span></label>
+                                            <%--<form:select path="mprEmployeeCategory.id" id="mprEmployeeCategory" class="form-control">--%>
+                                            <%--<form:option value="" label="-- Select --" />--%>
+                                            <%--<form:options items="${categoryList}"></form:options>--%>
+                                            <%--</form:select>--%>
+                                            <%--<form:errors path="mprEmployeeCategory.id" cssClass="errorDiv"></form:errors>--%>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>Employee Type:<span style="color: red;font-size: 12px;"></span></label>
+                                            <%--<form:select path="mprEmployeeTypeMaster.id" id="mprEmployeeTypeMaster" class="form-control">--%>
+                                            <%--<form:option value="" label="-- Select --" />--%>
+                                            <%--<form:options items="${emptypeList}"></form:options>--%>
+                                            <%--</form:select>--%>
+                                            <%--<form:errors path="mprEmployeeTypeMaster.id" cssClass="errorDiv"></form:errors>--%>
+                                        </div>
+                                    </div>-->
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label>Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="name" class="form-control" placeholder="Name"></form:input>
                                                     <form:errors path="name" cssClass="errorDiv"></form:errors>
                                                     </div>
@@ -130,25 +143,25 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Description:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="description" class="form-control" placeholder="Description"></form:input>
+                                                    <form:textarea path="description" class="form-control" id="editor" placeholder="Description"></form:textarea>
                                                     <form:errors path="description" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Comment:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="description" class="form-control" placeholder="Description"></form:input>
-                                                    <form:errors path="description" cssClass="errorDiv"></form:errors>
+                                                    <form:input path="approvalComment" class="form-control" placeholder="Approval Comment"></form:input>
+                                                    <form:errors path="approvalComment" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="col-sm-4" style="text-align: left">
                                                     <c:if test="${status != 1}">
-                                                        <button type="submit" class="btn btn-danger" id="btnType1" name="btnType" value="Reject" style="width: 100px" >REJECT</button>
+                                                        <button type="submit" class="btn btn-danger" onclick="return reject();" id="btnType1" name="btnType" value="Reject" style="width: 100px" >REJECT</button>
                                                     </c:if>
                                                 </div>
                                                 <div class="col-sm-4" style="text-align: center">
                                                     <c:if test="${status != 2}">
-                                                        <button type="submit" class="btn btn-warning" id="btnType2" name="btnType"  value="Return"  style="width: 100px">REWORK</button>
+                                                        <button type="submit" class="btn btn-warning" id="btnType2" name="btnType"  value="Return"  style="width: 100px">RECYCLE</button>
                                                     </c:if>
                                                 </div>
                                                 <div class="col-sm-4" style="text-align: right">
@@ -171,4 +184,13 @@
         </section>
     </div>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
+    <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
+    <!--<link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/css/samples.css">-->
+    <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+    <script>
+                                                            initSample();
+
+
+    </script>
 </html>

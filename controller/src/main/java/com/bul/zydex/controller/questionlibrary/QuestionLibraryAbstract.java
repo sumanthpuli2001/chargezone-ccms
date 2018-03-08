@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.bul.zydex.controller.questionlibrary;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.QuestionAns;
+import com.bul.zydex.model.QuestionDetails;
 import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.QuestionPaper;
 import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
 import com.bul.zydex.service.questionlibrary.QuestionAnsService;
+import com.bul.zydex.service.questionlibrary.QuestionDetailsService;
 import com.bul.zydex.service.questionlibrary.QuestionLibraryService;
 import com.bul.zydex.service.questionlibrary.QuestionPaperService;
 import java.util.HashMap;
@@ -24,12 +25,13 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Rishi
  */
-public abstract class QuestionLibraryAbstract extends CustomAbstract{
-    
+public abstract class QuestionLibraryAbstract extends CustomAbstract {
+
     protected QuestionLibraryService<QuestionLibrary> questionLibraryService;
     protected QuestionAnsService<QuestionAns> questionAnsService;
     protected MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService;
     protected QuestionPaperService<QuestionPaper> questionPaperService;
+    protected QuestionDetailsService<QuestionDetails> questionDetailsService;
 
     public QuestionLibraryService<QuestionLibrary> getQuestionLibraryService() {
         return questionLibraryService;
@@ -62,9 +64,17 @@ public abstract class QuestionLibraryAbstract extends CustomAbstract{
     public void setQuestionPaperService(QuestionPaperService<QuestionPaper> questionPaperService) {
         this.questionPaperService = questionPaperService;
     }
+
+    public QuestionDetailsService<QuestionDetails> getQuestionDetailsService() {
+        return questionDetailsService;
+    }
+
+    public void setQuestionDetailsService(QuestionDetailsService<QuestionDetails> questionDetailsService) {
+        this.questionDetailsService = questionDetailsService;
+    }
     
-    
-  protected void employeecategoryList(HttpServletRequest request) {
+
+    protected void employeecategoryList(HttpServletRequest request) {
         MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
         List<?> categoryList = mprEmployeeCategoryService.read();
         Map<Integer, String> en = new HashMap<>();

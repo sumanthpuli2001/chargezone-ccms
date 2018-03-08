@@ -25,14 +25,14 @@
         <script>
             function deleteCheck11() {
                 var checkboxes = confirm("Are you sure you want to delete?");
-                if(checkboxes){
-                checkboxes = document.getElementsByName('checkId');
-                for (var i = 0, n = checkboxes.length; i < n; i++) {
-                    if (checkboxes[i].checked) {
-                        return true;
+                if (checkboxes) {
+                    checkboxes = document.getElementsByName('checkId');
+                    for (var i = 0, n = checkboxes.length; i < n; i++) {
+                        if (checkboxes[i].checked) {
+                            return true;
+                        }
                     }
-                }
-                alert("Please, Select one or more record(s).");
+                    alert("Please, Select one or more record(s).");
                 }
                 return false;
             }
@@ -52,6 +52,11 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
+                                <div>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">&nbsp; F To F</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalOnline">&nbsp; online</button>
+                                </div>
+
                                 <c:if test="${sessionScope.userRight.employeeManagement}">
                                     <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
                                     <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
@@ -76,7 +81,7 @@
                                                         <c:otherwise>
                                                             <thead>
                                                                 <tr>
-                                                                    <c:if test="${sessionScope.userRight.employeeManagement}">
+                                                                    <c:if test="${sessionScope.userRight.hr}">
                                                                         <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
                                                                         </c:if>
                                                                     <!--<th>user id</th>-->
@@ -95,7 +100,7 @@
                                                     <tbody>
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
-                                                                <c:if test="${sessionScope.userRight.employeeManagement}">
+                                                                <c:if test="${sessionScope.userRight.hr}">
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
@@ -140,4 +145,48 @@
             window.location = 'recruitment.htm?act=CandidateViewClick&id=' + id;
         }
     </script>
+
+    <!-- ONLINE Modal -->
+    <div class="container">
+        <div class="modal fade" id="myModalOnline" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Online</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Some text in the modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FACE TO FACE FORE MODAL -->
+    <div class="container">
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Face To Face</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Some text in the modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </html>

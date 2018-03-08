@@ -14,13 +14,10 @@ public class VacancyMaster implements java.io.Serializable {
     private Integer id;
     private LocationMaster locationMaster;
     private DepartmentMaster departmentMaster;
-    private MprEmployeeCategory mprEmployeeCategory;
-    private MprEmployeeTypeMaster mprEmployeeTypeMaster;
     private JobtypeMaster jobtypeMaster;
     private String name;
     private Integer numberOfPosition;
     private Integer salaryRange;
-    private QulificationMaster qulificationMaster;
     private String experience;
     private String responsibility;
     private String skill;
@@ -34,17 +31,14 @@ public class VacancyMaster implements java.io.Serializable {
 
     }
 
-    public VacancyMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, MprEmployeeCategory mprEmployeeCategory, MprEmployeeTypeMaster mprEmployeeTypeMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer salaryRange, QulificationMaster qulificationMaster, String experience, String responsibility, String skill, String fromDate, String toDate, String description, Integer status, DesignationMaster designationMaster) {
+    public VacancyMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer salaryRange, String experience, String responsibility, String skill, String fromDate, String toDate, String description, Integer status, DesignationMaster designationMaster) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
-        this.mprEmployeeCategory = mprEmployeeCategory;
-        this.mprEmployeeTypeMaster = mprEmployeeTypeMaster;
         this.jobtypeMaster = jobtypeMaster;
         this.name = name;
         this.numberOfPosition = numberOfPosition;
         this.salaryRange = salaryRange;
-        this.qulificationMaster = qulificationMaster;
         this.experience = experience;
         this.responsibility = responsibility;
         this.skill = skill;
@@ -79,21 +73,6 @@ public class VacancyMaster implements java.io.Serializable {
         this.departmentMaster = departmentMaster;
     }
 
-    public MprEmployeeCategory getMprEmployeeCategory() {
-        return mprEmployeeCategory;
-    }
-
-    public void setMprEmployeeCategory(MprEmployeeCategory mprEmployeeCategory) {
-        this.mprEmployeeCategory = mprEmployeeCategory;
-    }
-
-    public MprEmployeeTypeMaster getMprEmployeeTypeMaster() {
-        return mprEmployeeTypeMaster;
-    }
-
-    public void setMprEmployeeTypeMaster(MprEmployeeTypeMaster mprEmployeeTypeMaster) {
-        this.mprEmployeeTypeMaster = mprEmployeeTypeMaster;
-    }
 
     public JobtypeMaster getJobtypeMaster() {
         return jobtypeMaster;
@@ -127,13 +106,6 @@ public class VacancyMaster implements java.io.Serializable {
         this.salaryRange = salaryRange;
     }
 
-    public QulificationMaster getQulificationMaster() {
-        return qulificationMaster;
-    }
-
-    public void setQulificationMaster(QulificationMaster qulificationMaster) {
-        this.qulificationMaster = qulificationMaster;
-    }
 
     public String getExperience() {
         return experience;

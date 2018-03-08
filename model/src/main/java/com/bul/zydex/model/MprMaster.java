@@ -23,12 +23,20 @@ public class MprMaster implements java.io.Serializable {
     private DesignationMaster designationMaster;
     private String dateOfLeaving;
     private Integer status;
+    private Integer currentLevel;
+    private Integer totalLevel;
+    private Integer remainingBudget;
+    private String approvalComment;
+    private Integer createdBy;
+    private String createdDate;
+    private Integer updatedBy;
+    private String updatedDate;
 
     public MprMaster() {
 
     }
 
-    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving, Integer status) {
+    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving, Integer status, Integer remainingBudget, String approvalComment) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
@@ -41,6 +49,10 @@ public class MprMaster implements java.io.Serializable {
         this.designationMaster = designationMaster;
         this.dateOfLeaving = dateOfLeaving;
         this.status = status;
+        this.currentLevel = currentLevel;
+        this.totalLevel = totalLevel;
+        this.remainingBudget = remainingBudget;
+        this.approvalComment = approvalComment;
     }
 
     public Integer getId() {
@@ -66,7 +78,6 @@ public class MprMaster implements java.io.Serializable {
     public void setDepartmentMaster(DepartmentMaster departmentMaster) {
         this.departmentMaster = departmentMaster;
     }
-
 
     public JobtypeMaster getJobtypeMaster() {
         return jobtypeMaster;
@@ -99,7 +110,6 @@ public class MprMaster implements java.io.Serializable {
     public void setBudget(Integer budget) {
         this.budget = budget;
     }
-
 
     public String getExperience() {
         return experience;
@@ -139,6 +149,70 @@ public class MprMaster implements java.io.Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public void setCurrentLevel(Integer currentLevel) {
+        this.currentLevel = currentLevel;
+    }
+
+    public Integer getTotalLevel() {
+        return totalLevel;
+    }
+
+    public void setTotalLevel(Integer totalLevel) {
+        this.totalLevel = totalLevel;
+    }
+
+    public Integer getRemainingBudget() {
+        return remainingBudget;
+    }
+
+    public void setRemainingBudget(Integer remainingBudget) {
+        this.remainingBudget = remainingBudget;
+    }
+
+    public String getApprovalComment() {
+        return approvalComment;
+    }
+
+    public void setApprovalComment(String approvalComment) {
+        this.approvalComment = approvalComment;
+    }
+
+    public Integer getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Integer createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Integer getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(Integer updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public String getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
     }
     
     

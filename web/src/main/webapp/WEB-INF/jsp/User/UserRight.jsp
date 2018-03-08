@@ -208,26 +208,60 @@
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="lunaPlantAttendanceMgnt"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal">Luna Plant Attendance Mgt.</label>
-
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                    <form:checkbox path="gavasatPlantAttendanceMgnt"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal">Gavasad Plant Attendance Mgt.</label>
-
-                                                    </div>
-
-                                                    <div class="col-sm-3">
                                                     <form:checkbox path="departmentWiseAttendance"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal">Department Wise Attendance</label>
 
                                                     </div>
-                                                </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="faceTofaceInterview"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Face To Face InterView</label>
 
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="candidateList"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Candidate List</label>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="mpr"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Mpr</label>
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="budget"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Budget</label>
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="vacancy"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Vacancy</label>
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="candidateInduction"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Candidate Induction</label>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="assessmentReview"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Assessment Review</label>
+
+                                                    </div>
+
+
+                                                </div>
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div><!-- /.tab-content -->

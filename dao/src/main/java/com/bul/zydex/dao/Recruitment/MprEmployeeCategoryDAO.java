@@ -6,11 +6,14 @@
 package com.bul.zydex.dao.Recruitment;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.List;
 
 /**
  *
  * @author Vikas
  */
-public interface MprEmployeeCategoryDAO<T> extends GenericsDAO<T>{
-    
+public interface MprEmployeeCategoryDAO<T> extends GenericsDAO<T> {
+
+    public List<?> getByName(String Ctname);
+
 }

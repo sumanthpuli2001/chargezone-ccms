@@ -68,7 +68,8 @@ public class LogInController extends LogInAbstract {
             mv = redirectToLogin(request, response);
         } else {
             addUser(request, user);
-            mv.setViewName("forward:userMaster.htm?act=goToDashboard");
+//            mv.setViewName("forward:userMaster.htm?act=goToDashboard");
+            mv.setViewName("forward:userMaster.htm?act=goToHomePage");
         }
         return mv;
     }
@@ -143,20 +144,22 @@ public class LogInController extends LogInAbstract {
             } else {
                 UserMaster user3;
                 user3 = (UserMaster) tempList.get(0);
-                int userId =0;
+                int userId = 0;
                 boolean DateOfLeavingflag = false;
-                userId =user3.getId();
-                if(userId != 0){
+                userId = user3.getId();
+                if (userId != 0) {
                     List list = employeeMasterService.readDateOfLeaving(userId);
-                     if (!"".equals(list.get(0)) && null != list.get(0)) {
+                    if (!list.isEmpty()) {
+                        if (!"".equals(list.get(0)) && null != list.get(0)) {
                             String date = (String) list.get(0);
                             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
                             Date doldate = sdf.parse(date);
                             String today = sdf.format(new Date());
                             Date tDate = sdf.parse(today);
-                            if(doldate.before(tDate)){
+                            if (doldate.before(tDate)) {
                                 DateOfLeavingflag = true;
                             }
+                        }
                     }
                 }
                 if (user3.isBlockStatus()) {
@@ -200,24 +203,24 @@ public class LogInController extends LogInAbstract {
             mv.getModelMap().put("userModel", userModel);
             mv.setViewName("User/UserInitPwdChange");
         } else {
-        UserMaster user = new UserMaster();
-        user.setUserName(userModel.getUsername());
-        user.setPassword(userModel.getPassword());
-        List<?> tempList = userMasterService.read(user);
-        if (null == tempList || tempList.isEmpty()) {
-            request.setAttribute("faliureMessage",
-                    "Error : Current Username or Password is not valid.");
-            mv.addAllObjects(errors.getModel());
-            mv.getModelMap().put("userModel", userModel);
-            mv.setViewName("User/UserInitPwdChange");
-        } else {
-            user = (UserMaster) tempList.get(0);
-            user.setPassword(userModel.getNewPassword());
-            user.setFirstTime(false);
-            userMasterService.update(user);
-            request.setAttribute("user", user);
-            mv = home(request, response);
-        }
+            UserMaster user = new UserMaster();
+            user.setUserName(userModel.getUsername());
+            user.setPassword(userModel.getPassword());
+            List<?> tempList = userMasterService.read(user);
+            if (null == tempList || tempList.isEmpty()) {
+                request.setAttribute("faliureMessage",
+                        "Error : Current Username or Password is not valid.");
+                mv.addAllObjects(errors.getModel());
+                mv.getModelMap().put("userModel", userModel);
+                mv.setViewName("User/UserInitPwdChange");
+            } else {
+                user = (UserMaster) tempList.get(0);
+                user.setPassword(userModel.getNewPassword());
+                user.setFirstTime(false);
+                userMasterService.update(user);
+                request.setAttribute("user", user);
+                mv = home(request, response);
+            }
         }
         return mv;
     }

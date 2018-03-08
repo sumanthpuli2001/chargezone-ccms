@@ -25,34 +25,18 @@ public class VacancyValidator implements Validator {
     public void validate(Object o, Errors errors) {
         VacancyMaster vacancyMaster = (VacancyMaster) o;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "locationMaster.id",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "departmentMaster.id",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mprEmployeeCategory.id",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mprEmployeeTypeMaster.id",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "jobtypeMaster.id",
-                "field.error1", "None");
+       
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "numberOfPosition",
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "salaryRange",
                 "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "experience",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "responsibility",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "skill",
-                "field.error1", "None");
+        
+      
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fromDate",
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "toDate",
                 "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "designationMaster",
-                "field.error1", "None");
+      
 
     }
 

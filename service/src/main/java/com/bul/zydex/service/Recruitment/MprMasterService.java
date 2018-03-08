@@ -18,4 +18,6 @@ public interface MprMasterService<T> extends GenericsDAO<T> {
 
     public List<?> readForMPRDetail();
 
+    public List<?> readMprListByUserId(int empId);
+
 }

@@ -822,6 +822,36 @@
             </ul>
             </li>
                     </c:if>
+             <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-pie-chart fa-lg"></i>
+                    <span>Training</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-rupee fa-lg"></i>
+                            <span>Master</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+
+                            <li><a href="trainingType.htm?act=newtraining"><i class="fa fa-circle-o"></i>Training Type</a></li>
+                            <li><a href="trainingType.htm?act=newsubtraining"><i class="fa fa-circle-o"></i>Training Sub Type</a></li>
+
+
+
+                        </ul>
+                    </li>
+                    <li><a href="trainingType.htm?act=showcalendar"><i class="fa fa-circle-o"></i>calendar</a></li>
+
+
+
+            </li>
+
+
+
             </ul>
         </section>
         <!-- /.sidebar -->

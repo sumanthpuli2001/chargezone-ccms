@@ -517,5 +517,47 @@ public class VacancyController extends VacancyAbstract {
         mv.setViewName("Vacancy/backToHomeVacancyList");
         return mv;
     }
+    
+        public ModelAndView createVacancyNewButton(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        LocationMaster locationMaster = new LocationMaster();
+        JobtypeMaster jobtypeMaster = new JobtypeMaster();
+        MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
+        MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
+        DesignationMaster designationMaster = new DesignationMaster();
+        if (vacancyMaster.getId() != null) {
+            vacancyMaster = vacancyMasterService.readById(vacancyMaster.getId());
+            vacancyMaster.setLocationMaster(vacancyMaster.getLocationMaster());
+            vacancyMaster.setDepartmentMaster(vacancyMaster.getDepartmentMaster());
+            vacancyMaster.setJobtypeMaster(vacancyMaster.getJobtypeMaster());
+            vacancyMaster.setDesignationMaster(vacancyMaster.getDesignationMaster());
+        } else {
+            vacancyMaster.setLocationMaster(new LocationMaster());
+            vacancyMaster.setDepartmentMaster(new DepartmentMaster());
+            vacancyMaster.setJobtypeMaster(new JobtypeMaster());
+            vacancyMaster.setDesignationMaster(new DesignationMaster());
+        }
+        departmentList(request);
+        designationList(request);
+        Map<Integer, String> locationMap = readLocations();
+        Map<Integer, String> jobtype1 = jobtypeList();
+        mv.addObject("locationMap", locationMap);
+        mv.addObject("jobtype1", jobtype1);
+        vacancyMaster.setDepartmentMaster(new DepartmentMaster());
+        vacancyMaster.setLocationMaster(new LocationMaster());
+        vacancyMaster.setJobtypeMaster(new JobtypeMaster());
+        vacancyMaster.setDesignationMaster(new DesignationMaster());
+        mv.getModelMap().put("departmentMaster", departmentMaster);
+        mv.getModelMap().put("locationMaster", locationMaster);
+        mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
+        mv.getModelMap().put("designationMaster", designationMaster);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.setViewName("Vacancy/NewButtonCreateVacancy");
+        return mv;
+    }
 
 }

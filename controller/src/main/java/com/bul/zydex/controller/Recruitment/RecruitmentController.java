@@ -880,4 +880,17 @@ public class RecruitmentController extends RecruitmentAbstract {
         return mv;
     }
 
+    public ModelAndView allMprFetch(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        RecruitmentMaster recruitmentMaster = new RecruitmentMaster();
+        MprMaster mprMaster = new MprMaster();
+        List<?> mprMasterList = mprMasterService.readMprList();
+        mv.getModelMap().put("list", mprMasterList);
+        mv.getModelMap().put("mprMaster", mprMaster);
+        mv.setViewName("MPR/ShowAllMprList");
+        return mv;
+    }
+
 }

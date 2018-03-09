@@ -252,7 +252,30 @@ public class RecruitmentController extends RecruitmentAbstract {
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid");
-            mv.addAllObjects(errors.getModel());
+//            mv.addAllObjects(errors.getModel());
+            String jobtypeNAme = jobtypeMaster.getJobTypeName();
+
+            String departmentName = departmentMaster.getDepartmentName();
+
+            String locationName = locationMaster.getLocation();
+
+            String designationName = designationMaster.getDesignationName();
+
+        
+
+            mv.getModelMap().put("mprMaster", mprMaster);
+            mv.getModelMap().put("departmentMaster", departmentMaster);
+            mv.getModelMap().put("locationMaster", locationMaster);
+            mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
+            mv.getModelMap().put("designationMaster", designationMaster);
+            mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
+            request.setAttribute("jobtypeNAme", jobtypeNAme);
+            request.setAttribute("departmentName", departmentName);
+            request.setAttribute("locationName", locationName);
+            request.setAttribute("position", position);
+            request.setAttribute("designationName", designationName);
+            request.setAttribute("experiance", experiance);
+            mv.setViewName("Recruitment/MprSearchCreateBudget");
             mv.setViewName("Recruitment/MprSearchCreateBudget");
 //            mv = viewClick(request, response);
         } else {

@@ -102,8 +102,8 @@ public class VacancyController extends VacancyAbstract {
         int designation = mprMaster.getDesignationMaster().getId();
         designationMaster = designationMasterService.readById(designation);
         String designationName = designationMaster.getDesignationName();
-        
-         String experiance = mprMaster.getExperience();
+
+        String experiance = mprMaster.getExperience();
 
         int position = mprMaster.getNumberOfPosition();
         int budget = mprMaster.getBudget();
@@ -114,7 +114,7 @@ public class VacancyController extends VacancyAbstract {
         mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
         mv.getModelMap().put("designationMaster", designationMaster);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
-         request.setAttribute("jobtypeNAme", jobtypeNAme);
+        request.setAttribute("jobtypeNAme", jobtypeNAme);
         request.setAttribute("departmentName", departmentName);
         request.setAttribute("locationName", locationName);
         request.setAttribute("position", position);
@@ -128,7 +128,7 @@ public class VacancyController extends VacancyAbstract {
     public ModelAndView vacancySubmitCreate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         VacancyMaster vacancyMaster = new VacancyMaster();
-         String id = request.getParameter("mprMasterid");
+        String id = request.getParameter("mprMasterid");
         DepartmentMaster departmentMaster = new DepartmentMaster();
         MprMaster mprMaster = new MprMaster();
         LocationMaster locationMaster = new LocationMaster();
@@ -140,29 +140,29 @@ public class VacancyController extends VacancyAbstract {
         bind(request, vacancyMaster);
 
         mprMaster = mprMasterService.readById(Integer.parseInt(id));
-        
+
         int jobtype = mprMaster.getJobtypeMaster().getId();
         jobtypeMaster = jobtypeMasterService.readById(jobtype);
         vacancyMaster.setJobtypeMaster(jobtypeMaster);
-        
+
         int department = mprMaster.getDepartmentMaster().getId();
         departmentMaster = departmentMasterService.readById(department);
         vacancyMaster.setDepartmentMaster(departmentMaster);
-        
+
         int jobrole = mprMaster.getDesignationMaster().getId();
         designationMaster = designationMasterService.readById(jobrole);
         vacancyMaster.setDesignationMaster(designationMaster);
-        
+
         String experiance = mprMaster.getExperience();
         vacancyMaster.setExperience(experiance);
-        
+
         int location = mprMaster.getLocationMaster().getId();
         locationMaster = locationMasterService.readById(location);
         vacancyMaster.setLocationMaster(locationMaster);
-        
+
         int position = mprMaster.getNumberOfPosition();
         vacancyMaster.setNumberOfPosition(position);
-        
+
 //        selectBudget(request, response);
         departmentList(request);
 
@@ -170,7 +170,33 @@ public class VacancyController extends VacancyAbstract {
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
                     "Error : All Fields Are Mandatorys");
-            mv = newVacancyCreate(request, response);
+
+            String jobtypeNAme = jobtypeMaster.getJobTypeName();
+
+            String departmentName = departmentMaster.getDepartmentName();
+            
+            String locationName = locationMaster.getLocation();
+
+            String designationName = designationMaster.getDesignationName();
+            
+            int budget = mprMaster.getBudget();
+
+            mv.getModelMap().put("mprMaster", mprMaster);
+            mv.getModelMap().put("departmentMaster", departmentMaster);
+            mv.getModelMap().put("locationMaster", locationMaster);
+            mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
+            mv.getModelMap().put("designationMaster", designationMaster);
+            mv.getModelMap().put("vacancyMaster", vacancyMaster);
+            request.setAttribute("jobtypeNAme", jobtypeNAme);
+            request.setAttribute("departmentName", departmentName);
+            request.setAttribute("locationName", locationName);
+            request.setAttribute("position", position);
+            request.setAttribute("designationName", designationName);
+            request.setAttribute("experiance", experiance);
+            request.setAttribute("budget", budget);
+            mv.setViewName("Vacancy/CreateVacancy");
+            return mv;
+
         } else {
             vacancyMaster.setStatus(0);
             vacancyMasterService.create(vacancyMaster);
@@ -517,8 +543,8 @@ public class VacancyController extends VacancyAbstract {
         mv.setViewName("Vacancy/backToHomeVacancyList");
         return mv;
     }
-    
-        public ModelAndView createVacancyNewButton(HttpServletRequest request,
+
+    public ModelAndView createVacancyNewButton(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();

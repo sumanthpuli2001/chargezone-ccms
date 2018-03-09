@@ -1012,6 +1012,7 @@
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
         <property name="mprApprovalService" ref="mprApprovalService1"/>
         <property name="approvalUserService" ref="approvalUserService1"/>
+        <property name="recruitmentMppApprovalService" ref="recruitmentMppApprovalService1"/>
     </bean>
     
     <bean id="vacancyController1" class="com.bul.zydex.controller.Vacancy.VacancyController" parent="controllerConfig" >

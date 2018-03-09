@@ -565,4 +565,7 @@
     <bean id="trainerService1" class="com.bul.zydex.service.Training.TrainerServiceImpl">
         <property name="trainerDAO" ref="trainerDAO1" />
     </bean>
+    <bean id="recruitmentMppApprovalService1" class="com.bul.zydex.service.RecruitmentMppApproval.RecruitmentMppApprovalServiceImpl">
+        <property name="recruitmentMppApprovalDAO" ref="recruitmentMppApprovalDAO1" />
+    </bean>
 </beans>

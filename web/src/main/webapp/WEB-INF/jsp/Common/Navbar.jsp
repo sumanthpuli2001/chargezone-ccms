@@ -575,6 +575,7 @@
                             <li><a href="questionLibrary.htm?act=QuestionLibraryCreate"><i class="fa fa-circle-o"></i>Question Library</a></li>
                             <li><a href="questionLibrary.htm?act=questionPaperView"><i class="fa fa-circle-o"></i>Question Paper</a></li>
                             <li><a href="thoughtMaster.htm?act=createthought"><i class="fa fa-circle-o"></i>Homepage Setting</a></li>
+                            <li><a href="trainingMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Training Master</a></li>
                         </ul>
                     </li>
                 </c:if>

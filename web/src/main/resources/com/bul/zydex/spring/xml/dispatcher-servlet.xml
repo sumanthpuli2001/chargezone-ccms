@@ -206,6 +206,7 @@
                 <prop key="thoughtMaster.htm">thoughtMasterController1</prop>
                 <prop key="corporateVideo.htm">corporateVideoController1</prop>
                 <prop key="trainingType.htm">trainingTypeController1</prop>
+                <prop key="trainingMaster.htm">trainingMasterController1</prop>
                 
            
             </props>

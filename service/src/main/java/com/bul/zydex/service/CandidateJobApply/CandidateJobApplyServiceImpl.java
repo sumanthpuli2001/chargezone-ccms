@@ -36,5 +36,10 @@ public class CandidateJobApplyServiceImpl<T> extends GenericsServiceImpl<T> impl
         return candidateJobApplyDAO.readProfileByCandidateUserID(userId);
 
     }
+     @Override
+    public List<?> readOnlineAssementCandidate(int userMaster) {
+        return candidateJobApplyDAO.readOnlineAssementCandidate(userMaster);
+
+    }
 
 }

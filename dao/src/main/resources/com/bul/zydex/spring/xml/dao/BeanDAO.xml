@@ -239,4 +239,5 @@
     <bean id="trainingAttendanceDAO1" class="com.bul.zydex.dao.Training.TrainingAttendanceDAOImpl" parent="sessionFactoryConfig" />
     <bean id="trainingIdentificationDAO1" class="com.bul.zydex.dao.Training.TrainingIdentificationDAOImpl" parent="sessionFactoryConfig" />
     <bean id="candidateJobApplicationDAO1" class="com.bul.zydex.dao.Recruitment.CandidateJobApplicationDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="classifiedBoxDAO1" class="com.bul.zydex.dao.ClassifiedBox.ClassifiedBoxDAOImpl" parent="sessionFactoryConfig" />
 </beans>

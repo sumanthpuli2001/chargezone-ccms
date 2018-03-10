@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.TrainingAttendance" table="training_attendance" catalog="hr_power_astral" optimistic-lock="version">
+    
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="trainingMaster" class="com.bul.zydex.model.TrainingMaster" fetch="select">
+            <column name="training_id" />
+        </many-to-one>
+        <many-to-one name="trainer" class="com.bul.zydex.model.Trainer" fetch="select">
+            <column name="trainer_id" />
+        </many-to-one>
+        <many-to-one name="employeeMaster" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="employee_id" />
+        </many-to-one>
+        <property name="trainingDate" type="string">
+            <column name="training_date" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="Status" />
+        </property>
+    </class>
+  
+
+</hibernate-mapping>

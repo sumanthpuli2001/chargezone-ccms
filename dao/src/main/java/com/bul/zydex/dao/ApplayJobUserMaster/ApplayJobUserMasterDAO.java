@@ -6,7 +6,7 @@
 package com.bul.zydex.dao.ApplayJobUserMaster;
 
 import com.bul.zydex.dao.GenericsDAO;
-import java.util.List;
+import com.bul.zydex.model.ApplayJobUserMaster;
 
 /**
  *
@@ -15,7 +15,9 @@ import java.util.List;
 public interface ApplayJobUserMasterDAO<T> extends GenericsDAO<T> {
 
     public boolean isExist(T object);
-
-    public List<?> isExist1(T object);
-
+    
+    public boolean profileFilling(int userId);
+    
+     public ApplayJobUserMaster checkByUserNameandPass(T object);
+    
 }

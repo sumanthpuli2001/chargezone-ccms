@@ -17,6 +17,8 @@ public interface ApplayJobUserMasterService<T> extends GenericsService<T> {
 
     public boolean isExist(T object);
 
-    public List<?> isExist1(T object);
+    public boolean profileFilling(int userId);
+
+    public ApplayJobUserMaster checkByUserNameandPass(T object);
 
 }

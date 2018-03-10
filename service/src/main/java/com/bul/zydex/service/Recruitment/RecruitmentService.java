@@ -17,7 +17,9 @@ public interface RecruitmentService<T> extends GenericsService<T> {
     public List<?> readBudgetDetail();
 
     public List<?> readForBudgetDetail();
-    
-    public List<?> searchMppApproval();
+
+    public List<?> searchMppApproval(int empId);
+
+    public List<?> readMppListByUserId(int empId);
 
 }

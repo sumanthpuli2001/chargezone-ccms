@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.RecruitmentMppApproval" table="recruitment_mpp_approval" catalog="hr_power_astral">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="recruitmentMaster" class="com.bul.zydex.model.RecruitmentMaster" fetch="select">
+            <column name="recruitment_mpp_id" />
+        </many-to-one>
+        <many-to-one name="employeeMaster" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="employee_master_id" />
+        </many-to-one>
+        <property name="level" type="java.lang.Integer">
+            <column name="level" />
+        </property>
+        <property name="comment" type="string">
+            <column name="comment" />
+        </property>
+        <property name="createdBy" type="java.lang.Integer">
+            <column name="created_by" />
+        </property>
+        <property name="createdDate" type="string">
+            <column name="created_date" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+    </class>
+  
+
+</hibernate-mapping>

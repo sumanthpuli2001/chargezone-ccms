@@ -34,16 +34,15 @@ public class CandidateJobApplyDAOImpl<T> extends GenericsDAOImpl<T> implements C
     }
 
     @Override
-    public List<?> readOnlineAssementCandidate(int userMaster) {
-        String query = "";
-        String condition = "";
-        query += "Select c.id,b.id"
-                + " From CandidateApplyJob a"
-                + " LEFT JOIN a.applayJobUserMasterId b"
-                + " LEFT JOIN a.vacancyId c"
-                + " Where b.id=" + userMaster;
+    public List<?> readProfileByCandidateUserID(int userId) {
 
-        return getHibernateTemplate().find(query);
+        String query = " SELECT a "
+                + " FROM CandidateApplyJob a "
+                + " LEFT JOIN a.applayJobUserMaster b "
+                + " Where a.applayJobUserMaster.id = " + userId;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
     }
 
 }

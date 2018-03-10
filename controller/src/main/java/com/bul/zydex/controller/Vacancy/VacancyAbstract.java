@@ -8,6 +8,7 @@ package com.bul.zydex.controller.Vacancy;
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.ApplayJobUserMaster;
 import com.bul.zydex.model.CandidateApplyJob;
+import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.JobtypeMaster;
@@ -18,6 +19,7 @@ import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.ApplayJobUserMaster.ApplayJobUserMasterService;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
+import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
 import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
 import com.bul.zydex.service.Recruitment.MprEmployeeTypeMasterService;
@@ -49,6 +51,7 @@ public class VacancyAbstract extends CustomAbstract {
     protected ApplayJobUserMasterValidator applayJobUserMasterValidator;
     protected CandidateJobApplyValidator candidateJobApplyValidator;
     protected MprMasterService<MprMaster> mprMasterService;
+    protected CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService;
 
     public CandidateJobApplyService<CandidateApplyJob> getCandidateJobApplyService() {
         return candidateJobApplyService;
@@ -130,6 +133,16 @@ public class VacancyAbstract extends CustomAbstract {
     public void setMprMasterService(MprMasterService<MprMaster> mprMasterService) {
         this.mprMasterService = mprMasterService;
     }
+
+    public CandidateJobApplicationService<CandidateJobApplication> getCandidateJobApplicationService() {
+        return candidateJobApplicationService;
+    }
+
+    public void setCandidateJobApplicationService(CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService) {
+        this.candidateJobApplicationService = candidateJobApplicationService;
+    }
+    
+    
     
     
     

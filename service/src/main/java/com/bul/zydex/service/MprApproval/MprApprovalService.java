@@ -13,9 +13,12 @@ import java.util.List;
  *
  * @author Vikas
  */
-public interface MprApprovalService<T> extends GenericsService<T>{
-      public List<?> readApprovalMPRList(int empId);
-      
-       public MprApproval readByMprIdAndEmpId(int mprid, int empid);
-    
+public interface MprApprovalService<T> extends GenericsService<T> {
+
+    public List<?> readApprovalMPRList(int empId);
+
+    public MprApproval readByMprIdAndEmpId(int mprid, int empid);
+
+    public List<?> mPrDelete(String mprId);
+
 }

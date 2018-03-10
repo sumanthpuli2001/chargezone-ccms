@@ -123,7 +123,7 @@
                                                                     <th ></th>
                                                                         <%--</c:if>--%>
                                                                     <!--<th>user id</th>-->
-                                                                    <th style="width: 50px;">Questions</th>
+                                                                    <th >Questions</th>
                                                                     <!--<th style="width: 50px;">Employee Name</th>-->
                                                                     <!--                                                                    <th style="width: 50px;">Department</th>
                                                                                                                                         <th style="width: 50px;">Designation</th>-->
@@ -138,9 +138,9 @@
                                                     <tbody>
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
-                                                                <c:if test="${sessionScope.userRight.employeeManagement}">
+                                                                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
-                                                                    </c:if>
+                                                                    <%--</c:if>--%>
                                                                 <!--<td>/</td>-->
                                                                 <td>${list[1]}</td>
 <!--                                                                <td>${list[2]}</td>
@@ -153,7 +153,7 @@
                                                                             <span class="caret"></span>
                                                                         </button>
                                                                         <ul class="dropdown-menu" >
-                                                                            <c:if test="${sessionScope.userRight.employeeManagement}">
+                                                                            <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
 
                                                                                 <li style="width: 100px;">
                                                                                     <a href="#"
@@ -167,7 +167,7 @@
                                                                                         &nbsp;&nbsp;Delete
                                                                                     </a>
                                                                                 </li>
-                                                                            </c:if>
+                                                                            <%--</c:if>--%>
 
                                                                             <!--                                                                            <li>
                                                                                                                                                             <a href="#"

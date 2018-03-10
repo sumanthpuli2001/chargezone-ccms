@@ -37,4 +37,9 @@ public class MprApprovalServiceImpl<T> extends GenericsServiceImpl<T> implements
         return mprApprovalDAO.readByMprIdAndEmpId(mprid, empid);
     }
 
+    @Override
+    public List<?> mPrDelete(String mprId) {
+        return mprApprovalDAO.mPrDelete(mprId);
+    }
+
 }

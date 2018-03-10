@@ -88,6 +88,7 @@
                                 <li><a href="recruitment.htm?act=approvalMppCreate"><i class="fa fa-circle-o"></i>MPP Approval</a></li>
                                 <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>MPR Approval</a></li>
                                 <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
+                                <li><a href="recruitment.htm?act=allMprFetch"><i class="fa fa-circle-o"></i>MPR Fetch</a></li>
                             </ul>
                         </li>
                     </c:if>
@@ -823,6 +824,36 @@
             </ul>
             </li>
                     </c:if>
+             <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-pie-chart fa-lg"></i>
+                    <span>Training</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-rupee fa-lg"></i>
+                            <span>Master</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+
+                            <li><a href="trainingType.htm?act=newtraining"><i class="fa fa-circle-o"></i>Training Type</a></li>
+                            <li><a href="trainingType.htm?act=newsubtraining"><i class="fa fa-circle-o"></i>Training Sub Type</a></li>
+                            <li><a href="trainer.htm?act=createTrainerShow"><i class="fa fa-circle-o"></i>Trainer</a></li>
+
+
+                        </ul>
+                    </li>
+                    <li><a href="trainingType.htm?act=showcalendar"><i class="fa fa-circle-o"></i>calendar</a></li>
+
+
+
+            </li>
+
+
+
             </ul>
         </section>
         <!-- /.sidebar -->

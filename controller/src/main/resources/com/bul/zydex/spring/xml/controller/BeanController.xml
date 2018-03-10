@@ -1012,7 +1012,9 @@
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
         <property name="mprApprovalService" ref="mprApprovalService1"/>
         <property name="approvalUserService" ref="approvalUserService1"/>
+        <property name="questionPaperService" ref="questionPaperService1"/>
         <property name="recruitmentMppApprovalService" ref="recruitmentMppApprovalService1"/>
+        <property name="candidateJobApplicationService" ref="candidateJobApplicationService1"/>
     </bean>
     
     <bean id="vacancyController1" class="com.bul.zydex.controller.Vacancy.VacancyController" parent="controllerConfig" >
@@ -1026,6 +1028,7 @@
         <property name="applayJobUserMasterValidator" ref="applayJobUserMasterValidator1"/>
         <property name="candidateJobApplyValidator" ref="candidateJobApplyValidator1"/>
         <property name="mprMasterService" ref="mprMasterService1"/>
+        <property name="candidateJobApplicationService" ref="candidateJobApplicationService1"/>
     </bean> 
     <bean id="thoughtMasterController1" class="com.bul.zydex.controller.thought.ThoughtMasterController" parent="controllerConfig" >
         <property name="thoughtMasterService" ref="thoughtMasterService1"></property>
@@ -1056,12 +1059,31 @@
         <property name="corporateVideoService" ref="corporateVideoService1"></property>
         <property name="rAndRService" ref="rAndRService1"></property>
     </bean>
+    <bean id="onlineAssessmentController1" class="com.bul.zydex.controller.Recruitment.OnlineAssessmentController" parent="controllerConfig" >
+        <property name="onlineAssessmentService" ref="onlineAssessmentService1" />
+        <property name="questionPaperService" ref="questionPaperService1" />
+        
+    </bean>
     <bean id="trainingTypeController1" class="com.bul.zydex.controller.Training.TrainingTypeController" parent="controllerConfig" >
         <property name="trainingTypeService" ref="trainingTypeService1" />
         <property name="trainingSubTypeService" ref="trainingSubTypeService1" />
         <property name="trainerService" ref="trainerService1" />
         <property name="trainingMasterService" ref="trainingMasterService1" />
         <property name="trainingSubMasterService" ref="trainingSubMasterService1" />
+    </bean>
+    <bean id="trainerController1" class="com.bul.zydex.controller.Training.TrainerController" parent="controllerConfig" >
+        <property name="trainerService" ref="trainerService1"></property>
+        <property name="trainerValidator" ref="trainerValidator1"></property>
+    </bean>
+    <bean id="trainingAttendanceController1" class="com.bul.zydex.controller.Training.TrainingAttendanceController" parent="controllerConfig" >
+        <property name="trainingAttendanceService" ref="trainingAttendanceService1"></property>
+    </bean>
+    <bean id="trainingIdentificationController1" class="com.bul.zydex.controller.Training.TrainingIdentificationController" parent="controllerConfig" >
+        <property name="trainingIdentificationService" ref="trainingIdentificationService1"></property>
+    </bean>
+    <bean id="classifiedBoxController1" class="com.bul.zydex.controller.ClassifiedBox.ClassifiedBoxController" parent="controllerConfig" >
+        <property name="classifiedBoxService" ref="classifiedBoxService1" />
+        <property name="classifiedBoxValidator" ref="classifiedBoxValidator1" />
     </bean>
 </beans>
  

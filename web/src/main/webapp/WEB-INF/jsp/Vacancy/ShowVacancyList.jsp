@@ -89,7 +89,7 @@
     </head>
     <body>
         <section class="content-header" style="margin-top: 5%;">
-            <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 1%;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign In</button>
+            <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 1%;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign Up</button>
             <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 2%;" onclick="window.location = 'vacancy.htm?act=Login'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Login</button>
             <h1>Job Vacancy List</h1>
             <ol class="breadcrumb">

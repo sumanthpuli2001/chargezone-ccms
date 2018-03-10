@@ -53,4 +53,17 @@ public class MprApprovalDAOImpl<T> extends GenericsDAOImpl<T> implements MprAppr
         return mprApproval;
     }
 
+    @Override
+    public List<?> mPrDelete(String mprId) {
+        String query = "";
+
+        query += "  "
+                + " select a"
+                + " FROM MprApproval a "
+                + " WHERE a.mprMaster.id = " + mprId;
+//        return getHibernateTemplate().find(query);
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

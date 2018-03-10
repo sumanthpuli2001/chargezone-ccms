@@ -8,6 +8,7 @@ package com.bul.zydex.controller.Recruitment;
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.ApprovalUser;
 import com.bul.zydex.model.CandidateApplyJob;
+import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmployeeMaster;
@@ -17,6 +18,7 @@ import com.bul.zydex.model.MprApproval;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
 import com.bul.zydex.model.MprMaster;
+import com.bul.zydex.model.QuestionPaper;
 import com.bul.zydex.model.QulificationMaster;
 //import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMaster;
@@ -24,6 +26,7 @@ import com.bul.zydex.model.RecruitmentMppApproval;
 import com.bul.zydex.service.Approval.ApprovalUserService;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.MprApproval.MprApprovalService;
+import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
 import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
 import com.bul.zydex.service.Recruitment.MprEmployeeTypeMasterService;
@@ -33,6 +36,7 @@ import com.bul.zydex.service.Recruitment.RecruitmentService;
 import com.bul.zydex.service.RecruitmentMppApproval.RecruitmentMppApprovalService;
 import com.bul.zydex.service.emp.DesignationMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
+import com.bul.zydex.service.questionlibrary.QuestionPaperService;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -57,7 +61,9 @@ public class RecruitmentAbstract extends CustomAbstract {
     protected CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService;
     protected MprApprovalService<MprApproval> mprApprovalService;
     protected ApprovalUserService<ApprovalUser> approvalUserService;
+    protected QuestionPaperService<QuestionPaper> questionPaperService;
     protected RecruitmentMppApprovalService<RecruitmentMppApproval> recruitmentMppApprovalService;
+    protected CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService;
 
     public MprMasterService<MprMaster> getMprMasterService() {
         return mprMasterService;
@@ -74,7 +80,6 @@ public class RecruitmentAbstract extends CustomAbstract {
     public void setMprMasterService(MprMasterService<MprMaster> mprMasterService) {
         this.mprMasterService = mprMasterService;
     }
-
 
     public Validator getRecruitmentValidator() {
         return recruitmentValidator;
@@ -140,6 +145,14 @@ public class RecruitmentAbstract extends CustomAbstract {
         this.approvalUserService = approvalUserService;
     }
 
+    public QuestionPaperService<QuestionPaper> getQuestionPaperService() {
+        return questionPaperService;
+    }
+
+    public void setQuestionPaperService(QuestionPaperService<QuestionPaper> questionPaperService) {
+        this.questionPaperService = questionPaperService;
+    }
+
     public RecruitmentMppApprovalService<RecruitmentMppApproval> getRecruitmentMppApprovalService() {
         return recruitmentMppApprovalService;
     }
@@ -147,6 +160,15 @@ public class RecruitmentAbstract extends CustomAbstract {
     public void setRecruitmentMppApprovalService(RecruitmentMppApprovalService<RecruitmentMppApproval> recruitmentMppApprovalService) {
         this.recruitmentMppApprovalService = recruitmentMppApprovalService;
     }
+
+    public CandidateJobApplicationService<CandidateJobApplication> getCandidateJobApplicationService() {
+        return candidateJobApplicationService;
+    }
+
+    public void setCandidateJobApplicationService(CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService) {
+        this.candidateJobApplicationService = candidateJobApplicationService;
+    }
+    
     
 
     public void selectBudget(HttpServletRequest request,
@@ -224,7 +246,6 @@ public class RecruitmentAbstract extends CustomAbstract {
         request.setAttribute("desigList", dn);
     }
 
-
     public void selectMPRBudget(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         List<?> list = mprMasterService.readForMPRDetail();
@@ -251,6 +272,18 @@ public class RecruitmentAbstract extends CustomAbstract {
         tempStr += "]";
 
         request.setAttribute("list", tempStr);
+    }
+
+    protected void questionList(HttpServletRequest request) {
+        QuestionPaper questionPaper = new QuestionPaper();
+        List<?> depttList = questionPaperService.read();
+        Map<Integer, String> dm = new HashMap<>();
+        for (Object o : depttList) {
+            questionPaper = (QuestionPaper) o;
+            dm.put(questionPaper.getId(), questionPaper.getPaperName());
+        }
+
+        request.setAttribute("questions", dm);
     }
 
 }

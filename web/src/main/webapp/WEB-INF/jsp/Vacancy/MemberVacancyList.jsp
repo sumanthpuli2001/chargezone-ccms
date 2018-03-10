@@ -70,8 +70,8 @@
     <body>
         <section class="content-header">
             <button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=backToHomeVacancyList'"><i class="fa fa-home"></i>&nbsp&nbsp&nbsp;Home</button>
-            <!--<button type="button" class="btn btn-primary" style="float: left; width: 130px;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-user"></i>&nbsp&nbsp&nbsp;My Profile</button>-->
-            <label>Candidate User Name &nbsp : &nbsp&nbsp${applayJobUserMaster.userName}</label>
+            <button type="button" class="btn btn-primary" style="float: left; width: 130px;" onclick="window.location = 'vacancy.htm?act=logout'"><i class="fa fa-long-arrow-left"></i>&nbsp&nbsp&nbsp;Log Out</button>
+            <label>Candidate User Name&nbsp : &nbsp&nbsp${ajuMaster.userName}</label>
         </section>
         <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>
@@ -95,7 +95,7 @@
                         <button type="submit" class="btn btn-primary" style="text-align: center; width: 150px;" data-original-title="" title="" >Assessment</button>
                     </div>
                 </div>-->
-        <form:form action="vacancy.htm?act=clickDeleteVacancy" method="post" commandName="vacancyMaster"
+        <form:form action="vacancy.htm?act=clickDeleteVacancy" method="post"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">
@@ -120,6 +120,7 @@
                                                         </c:when>
                                                         <c:otherwise>
                                                             <thead>
+
                                                                 <tr>
                                                                     <th style="width: 50px;">Vacancy Name</th>
                                                                     <th style="width: 50px;">Number Of Position</th>
@@ -131,19 +132,24 @@
                                                                         <%--</c:if>--%>
 
                                                                 </tr>
+
                                                             </thead>
                                                             <thead>
-                                                                <tr>
+                                                                <c:forEach var="list" items="${list}">
+                                                                    <tr>
                                                                     <th>${list.name}</th>
                                                                     <th>${list.numberOfPosition}</th>
                                                                     <th>${list.experience}</th>
                                                                     <th>${list.fromDate}</th>
                                                                     <th>${list.toDate}</th>
-                                                                        <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                                                    <th style="width: 50px;"><a href="vacancy.htm?act=applyJobRegistration">Apply</a></th>
-                                                                        <%--</c:if>--%>
+                                                                            <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                                        <th style="width: 50px;">
+                                                                            <a href="vacancy.htm?act=applyJobRegistration&vacancyId=${list.id}">Apply</a>
+                                                                        </th>
+                                                                            <%--</c:if>--%>
 
-                                                                </tr>
+                                                                    </tr>
+                                                                </c:forEach>
                                                             </thead>
                                                         </c:otherwise>
                                                     </c:choose>

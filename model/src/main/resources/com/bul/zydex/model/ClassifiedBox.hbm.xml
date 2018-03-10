@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ <class name="com.bul.zydex.model.ClassifiedBox" table="classified_box" catalog="hr_power_astral">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="advertisementName" type="string">
+            <column name="advertisement_name" length="45" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="45" />
+        </property>
+        <property name="createBy" type="java.lang.Integer">
+            <column name="create_by"   />
+        </property>
+        <property name="createDate" type="string">
+            <column name="create_date" length="45" />
+        </property>
+        <property name="updateDate" type="string">
+            <column name="update_date" length="45" />
+        </property>
+        
+         <property name="updateBy" type="java.lang.Integer">
+            <column name="update_by"   />
+        </property>
+         <property name="status" type="int">
+            <column name="status"  />
+        </property>
+    </class>
+  
+
+</hibernate-mapping>

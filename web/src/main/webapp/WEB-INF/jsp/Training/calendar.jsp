@@ -44,7 +44,6 @@
             text-align: center;
         }
         .calendar table.table tbody td {
-            text-align: center;
             width: 100px;
             height: 120px;
             cursor: pointer;
@@ -68,6 +67,11 @@
         }
         td,th{
             border: 1px #e1e1e1 solid !important;
+        }
+        .borderClass{
+            width: 100%;
+            border: 1px #e2e2e2 solid !important;
+            background-color: #e1e1e1;
         }
     </style>
 
@@ -95,19 +99,19 @@
             <div class="widget-body" style="padding-bottom: 0px;">
                 <div class="calendar">
                     <div class="top-nav">
-${list}
-                            <div class="col-xs-12 no-padding">
+
+                        <div class="col-xs-12 no-padding">
                             <div class="col-xs-5">
-                                 <a class="btn btn-default" onclick="viewClick('${list[0]}', 'Last')"><i class="fa fa-arrow-left"></i></a>
+                                <a class="btn btn-default" onclick="viewClick('${list[0]}', 'Last')"><i class="fa fa-arrow-left"></i></a>
                             </div>
                             <div class="col-xs-2">
                                 <h4><label><b>${list[0]}</b></label></h4>
                             </div>
                             <div class="col-xs-5">
-                                
-                            <a class="btn btn-default pull-right" onclick="viewClick('${list[0]}', 'Next')"><i class="fa fa-arrow-right" ></i></a>
+
+                                <a class="btn btn-default pull-right" onclick="viewClick('${list[0]}', 'Next')"><i class="fa fa-arrow-right" ></i></a>
                             </div>
-                           
+
                         </div>
                     </div>
                     <div style="padding-top: 30px;">
@@ -129,14 +133,14 @@ ${list}
                                     <c:forEach var="list" items="${list[1]}" varStatus="status">
                                         <tr>
 
-                                            <td  id="tableId${list[0]}"  >${list[0][4]}</td>
-                                            <td  id="tableId${list[1]}"  >${list[1][4]}</td>
-                                            <td  id="tableId${list[2]}"  >${list[2][4]}</td>
-                                            <td  id="tableId${list[3]}"  >${list[3][4]}</td>
-                                            <td  id="tableId${list[4]}"  >${list[4][4]}</td>
-                                            <td  id="tableId${list[5]}"  >${list[5][4]}</td>
-                                            <td  id="tableId${list[6]}"  >${list[6][4]}</td> 
-                                        </tr>
+                                            <td  id="tableId${list[0]}"  ><span >${list[0][1]}</span><br><c:forEach var="innerlist" items="${list[0][3]}" varStatus="status"><div class="text-left  borderClass"><a href="trainingType.htm?act=viewProfile&id=${innerlist[0]}&eventdate=${innerlist[2]}">${status.count}.${innerlist[1]}</a></div><br></c:forEach></td>
+                                            <td  id="tableId${list[1]}"  ><span >${list[1][1]}</span><br><c:forEach var="innerlist1" items="${list[1][3]}" varStatus="status"><div class="text-left  borderClass"><a href="trainingType.htm?act=viewProfile&id=${innerlist1[0]}&eventdate=${innerlist1[2]}">${status.count}.${innerlist1[1]}</a></div><br></c:forEach></td>
+                                            <td  id="tableId${list[2]}"  ><span >${list[2][1]}</span><br><c:forEach var="innerlist2" items="${list[2][3]}" varStatus="status"><div class="text-left  borderClass"><a href="trainingType.htm?act=viewProfile&id=${innerlist2[0]}&eventdate=${innerlist2[2]}">${status.count}.${innerlist2[1]}</a></div><br></c:forEach></td>
+                                            <td  id="tableId${list[3]}"  ><span >${list[3][1]}</span><br><c:forEach var="innerlist3" items="${list[3][3]}" varStatus="status"><div class="text-left  borderClass"><a href="trainingType.htm?act=viewProfile&id=${innerlist3[0]}&eventdate=${innerlist3[2]}">${status.count}.${innerlist3[1]}</a></div><br></c:forEach></td>
+                                            <td  id="tableId${list[4]}"  ><span >${list[4][1]}</span><br><c:forEach var="innerlist4" items="${list[4][3]}" varStatus="status"><div class="text-left  borderClass"><a href="trainingType.htm?act=viewProfile&id=${innerlist4[0]}&eventdate=${innerlist4[2]}">${status.count}.${innerlist4[1]}</a></div><br></c:forEach></td>
+                                            <td  id="tableId${list[5]}"  ><span >${list[5][1]}</span><br><c:forEach var="innerlist5" items="${list[5][3]}" varStatus="status"><div class="text-left  borderClass"><a href="trainingType.htm?act=viewProfile&id=${innerlist5[0]}&eventdate=${innerlist5[2]}">${status.count}.${innerlist5[1]}</a></div><br></c:forEach></td>
+                                            <td  id="tableId${list[6]}"  ><span >${list[6][1]}</span><br><c:forEach var="innerlist6" items="${list[6][3]}" varStatus="status"><div class="text-left  borderClass"><a href="trainingType.htm?act=viewProfile&id=${innerlist6[0]}&eventdate=${innerlist6[2]}">${status.count}.${innerlist6[1]}</a></div><br></c:forEach></td> 
+                                            </tr>
                                     </c:forEach>
                                 </tbody>
                             </table>

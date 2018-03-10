@@ -18,7 +18,7 @@
             <h1>Candidate Job Applying Request List</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Candidate Request Lis</li>
+                <li class="active">Candidate Request List</li>
             </ol>
         </section>
 
@@ -54,7 +54,7 @@
                             <div class="tab-content">
                                 <div>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">&nbsp; F To F</button>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalOnline">&nbsp; online</button>
+                                    <button type="button" class="btn btn-default " data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>
                                 </div>
 
                                 <c:if test="${sessionScope.userRight.employeeManagement}">
@@ -88,7 +88,8 @@
                                                                     <th style="width: 50px;">Candidate Name</th>
                                                                     <th style="width: 50px;">Qualification</th>
                                                                     <th style="width: 50px;">Email Address</th>
-                                                                    <th style="width: 50px;">Experiance Joining Year</th>
+                                                                    <th style="width: 50px;">Experience Joining Year</th>
+                                                                    <th style="width: 50px;">Vacancy Name</th>
                                                                         <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <th style="width: 50px;">Action</th>
                                                                         <%--</c:if>--%>
@@ -101,13 +102,14 @@
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
                                                                 <c:if test="${sessionScope.userRight.hr}">
-                                                                    <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
+                                                                    <td align="center" style="width: 1px;"><input type="checkbox" id="checkId" name="checkId"  value="${list[0]}"  /></td>
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
-                                                                <td>${list[1]}</td>
-                                                                <td>${list[2]}</td>
                                                                 <td>${list[3]}</td>
                                                                 <td>${list[4]}</td>
+                                                                <td>${list[5]}</td>
+                                                                <td>${list[6]}</td>
+                                                                <td>${list[7]}</td>
                                                                 <!--<td>${list[3]}</td>-->
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>
@@ -155,14 +157,101 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Online</h4>
+                        <h4 class="modal-title">Online Assessment</h4>
                     </div>
-                    <div class="modal-body">
-                        <p>Some text in the modal.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+                    <form:form class="form-horizontal" method="post" commandName="onlineAssessment" action="onlineAssessment.htm?act=submitAssessment"
+                               onsubmit='return checkBoxCheck();'>
+                        <section class="content">
+                            <!--<div class="col-md-12">-->
+                            <div class="nav-tabs-custom">
+                                <div class="tab-content">
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="col-sm-4">
+                                                        <form:input path="id" id="id" class="form-control" type="hidden"></form:input>
+
+                                                            <label>Question Paper Name :<span style="color: red;font-size: 12px;"></span></label>
+
+                                                            <select name="questions" class="form-control">
+                                                                <option value="">--Select--</option>
+                                                            <c:forEach items="${questions}" var="questions">
+                                                                <option value="${questions.key}">${questions.value}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>Passing Percentage : <span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="passingPercentage" id="passingPercentage" class="form-control" placeholder="Enter Passing Percentage"></form:input>
+                                                        <form:errors path="passingPercentage" cssClass="errorDiv"></form:errors>
+
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>Assessment Duration : <span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="duration" id="duration" class="form-control" placeholder="Enter Duration"></form:input>
+                                                        <form:errors path="duration" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-4">
+                                                        <%--<form:input path="id" id="id" class="form-control" type="hidden"></form:input>--%>
+
+                                                        <label>Validity From :<span style="color: red;font-size: 12px;"></span></label>
+                                                        <input type="text" id="datetimepicker2" class="form-control" placeholder="Please select From Date" name="validityFrom" readonly="true"/>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <%--<form:input path="id" id="id" class="form-control" type="hidden"></form:input>--%>
+
+                                                        <label>Validity To :<span style="color: red;font-size: 12px;"></span></label>
+                                                        <input type="text" id="datetimepicker1" class="form-control" name="validityTo" placeholder="Please select To Date" readonly="true"/>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>Number Of Attempt : <span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="noOfAttampt" id="noOfAttampt" class="form-control" placeholder="Enter Number Of Attempt"></form:input>
+                                                        <form:errors path="noOfAttampt" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-4">
+                                                        <%--<form:input path="id" id="id" class="form-control" type="hidden"></form:input>--%>
+
+                                                        <label>Number of Questions :<span style="color: red;font-size: 12px;"></span></label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <%--<form:input path="id" id="id" class="form-control" type="hidden"></form:input>--%>
+
+                                                        <label>Total Marks :<span style="color: red;font-size: 12px;"></span></label>
+
+
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+
+
+
+                                            <!--<div class="row">-->
+                                            <div class="form-group">
+                                                <div class=" col-sm-5 col-sm-offset-5">
+                                                    <button type="submit" class="btn btn-primary" data-original-title="" title="" >Submit</button>
+                                                </div>
+                                            </div>
+                                            <div style="float: right;">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--</div>-->
+                            <!--</div>-->
+
+                        </section>
+                    </form:form>
+
                 </div>
             </div>
         </div>
@@ -189,4 +278,51 @@
             </div>
         </div>
     </div>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+
+
 </html>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('#datetimepicker1').datepicker({
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#datetimepicker2').datepicker({
+        });
+    });
+</script>
+<script>
+
+    function checkBoxCheck() {
+        var checkboxes = "";
+
+        checkboxes = document.getElementsByName('checkId');
+        for (var i = 0, n = checkboxes.length; i < n; i++) {
+            if (checkboxes[i].checked) {
+
+                return true;
+            }
+        }
+        alert("Please, Select one or more record(s).");
+        return false;
+    }
+
+</script>

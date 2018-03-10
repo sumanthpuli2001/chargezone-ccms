@@ -16,6 +16,7 @@ import com.bul.zydex.model.MprApproval;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
 import com.bul.zydex.model.MprMaster;
+import com.bul.zydex.model.OnlineAssessment;
 import com.bul.zydex.model.QulificationMaster;
 import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMppApproval;
@@ -125,7 +126,8 @@ public class RecruitmentController extends RecruitmentAbstract {
             request.setAttribute("failureMessage",
                     "All field are Required.Please Enter Valid data");
             mv.addAllObjects(errors.getModel());
-            mv = newCreateBudget(request, response);
+            mv.setViewName("Recruitment/CreateNewBudget");
+//            mv = newCreateBudget(request, response);
         } else {
             recruitmentMaster.setMppStatus(0);
             recruitmentMaster.setCurrentLevel(1);
@@ -159,14 +161,14 @@ public class RecruitmentController extends RecruitmentAbstract {
         String savingList[] = request.getParameterValues("checkId");
         for (String z : savingList) {
             try {
-                
+
                 RecruitmentMppApproval recruitmentMppApproval = new RecruitmentMppApproval();
-                List<?>list = recruitmentMppApprovalService.recruitmentMppdelete(z);
-                for(Object object : list){
+                List<?> list = recruitmentMppApprovalService.recruitmentMppdelete(z);
+                for (Object object : list) {
                     recruitmentMppApproval = (RecruitmentMppApproval) object;
                     recruitmentMppApprovalService.delete(recruitmentMppApproval.getId());
                 }
-                
+
                 recruitmentService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
                         "Info :Records are deleted successfully.");
@@ -383,6 +385,14 @@ public class RecruitmentController extends RecruitmentAbstract {
         String savingList[] = request.getParameterValues("checkId");
         for (String z : savingList) {
             try {
+
+                MprApproval mprApproval = new MprApproval();
+                List<?> list = mprApprovalService.mPrDelete(z);
+                for (Object object : list) {
+                    mprApproval = (MprApproval) object;
+                    mprApprovalService.delete(mprApproval.getId());
+                }
+
                 mprMasterService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
                         "Info : Records are deleted successfully.");
@@ -638,8 +648,13 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         ModelAndView mv = new ModelAndView();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
-        List<?> candidateApplyJobList = candidateJobApplyService.fetchcandidatelist();
-        mv.getModelMap().put("list", candidateApplyJobList);
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+//        List<?> candidateApplyJobList = candidateJobApplyService.fetchcandidatelist();
+        List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
+        
+        mv.getModelMap().put("list", candidateJobList);
+        questionList(request);
+        mv.getModelMap().put("onlineAssessment", onlineAssessment);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Recruitment/CandidateRequestList");
         return mv;

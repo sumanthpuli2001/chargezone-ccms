@@ -22,5 +22,8 @@
         <property name="firstTime" type="java.lang.Integer">
             <column name="first_time" />
         </property>
+        <property name="profileSubmit" type="java.lang.Integer">
+            <column name="profile_submit" />
+        </property>
     </class>
 </hibernate-mapping>

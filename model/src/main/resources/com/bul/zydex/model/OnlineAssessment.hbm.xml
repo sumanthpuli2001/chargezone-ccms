@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.OnlineAssessment" table="online_assessment" catalog="hr_power_astral" >
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="candidateApplyJob" class="com.bul.zydex.model.CandidateApplyJob" fetch="select">
+            <column name="candidate_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="questionPaper" class="com.bul.zydex.model.QuestionPaper" fetch="select">
+            <column name="question_paper" not-null="true" />
+        </many-to-one>
+        <property name="passingPercentage" type="java.lang.Double">
+            <column name="passing_percentage" />
+        </property>
+        <property name="validityFrom" type="string">
+            <column name="validity_from"  />
+        </property>
+        <property name="validityTo" type="string">
+            <column name="validity_to"  />
+        </property>
+        <property name="duration" type="string">
+            <column name="duration"  />
+        </property>
+        <property name="noOfAttampt" type="java.lang.Integer">
+            <column name="no_of_attampt" />
+        </property>
+        <property name="noOfQue" type="java.lang.Integer">
+            <column name="no_of_que" />
+        </property>
+        <property name="totalMarks" type="java.lang.Double">
+            <column name="total_marks"/>
+        </property>
+        <property name="createdBy" type="java.lang.Integer">
+            <column name="created_by" />
+        </property>
+        <property name="createdDate" type="string">
+            <column name="created_date"  />
+        </property>
+        <property name="updatedBy" type="java.lang.Integer">
+            <column name="updated_by" />
+        </property>
+        <property name="udatedDate" type="string">
+            <column name="udated_date"  />
+        </property>
+    </class>
+  
+
+</hibernate-mapping>

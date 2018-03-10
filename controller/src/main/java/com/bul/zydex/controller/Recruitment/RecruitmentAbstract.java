@@ -17,6 +17,7 @@ import com.bul.zydex.model.MprApproval;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
 import com.bul.zydex.model.MprMaster;
+import com.bul.zydex.model.QuestionPaper;
 import com.bul.zydex.model.QulificationMaster;
 //import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMaster;
@@ -31,6 +32,7 @@ import com.bul.zydex.service.Recruitment.QulificationMasterService;
 import com.bul.zydex.service.Recruitment.RecruitmentService;
 import com.bul.zydex.service.emp.DesignationMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
+import com.bul.zydex.service.questionlibrary.QuestionPaperService;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -55,6 +57,7 @@ public class RecruitmentAbstract extends CustomAbstract {
     protected CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService;
     protected MprApprovalService<MprApproval> mprApprovalService;
     protected ApprovalUserService<ApprovalUser> approvalUserService;
+    protected QuestionPaperService<QuestionPaper> questionPaperService;
 
     public MprMasterService<MprMaster> getMprMasterService() {
         return mprMasterService;
@@ -71,7 +74,6 @@ public class RecruitmentAbstract extends CustomAbstract {
     public void setMprMasterService(MprMasterService<MprMaster> mprMasterService) {
         this.mprMasterService = mprMasterService;
     }
-
 
     public Validator getRecruitmentValidator() {
         return recruitmentValidator;
@@ -136,7 +138,14 @@ public class RecruitmentAbstract extends CustomAbstract {
     public void setApprovalUserService(ApprovalUserService<ApprovalUser> approvalUserService) {
         this.approvalUserService = approvalUserService;
     }
-    
+
+    public QuestionPaperService<QuestionPaper> getQuestionPaperService() {
+        return questionPaperService;
+    }
+
+    public void setQuestionPaperService(QuestionPaperService<QuestionPaper> questionPaperService) {
+        this.questionPaperService = questionPaperService;
+    }
 
     public void selectBudget(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
@@ -213,7 +222,6 @@ public class RecruitmentAbstract extends CustomAbstract {
         request.setAttribute("desigList", dn);
     }
 
-
     public void selectMPRBudget(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         List<?> list = mprMasterService.readForMPRDetail();
@@ -240,6 +248,18 @@ public class RecruitmentAbstract extends CustomAbstract {
         tempStr += "]";
 
         request.setAttribute("list", tempStr);
+    }
+
+    protected void questionList(HttpServletRequest request) {
+        QuestionPaper questionPaper = new QuestionPaper();
+        List<?> depttList = questionPaperService.read();
+        Map<Integer, String> dm = new HashMap<>();
+        for (Object o : depttList) {
+            questionPaper = (QuestionPaper) o;
+            dm.put(questionPaper.getId(), questionPaper.getPaperName());
+        }
+
+        request.setAttribute("questions", dm);
     }
 
 }

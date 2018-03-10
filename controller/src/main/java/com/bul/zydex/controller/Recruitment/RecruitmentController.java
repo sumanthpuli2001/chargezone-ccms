@@ -16,6 +16,7 @@ import com.bul.zydex.model.MprApproval;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
 import com.bul.zydex.model.MprMaster;
+import com.bul.zydex.model.OnlineAssessment;
 import com.bul.zydex.model.QulificationMaster;
 import com.bul.zydex.model.RecruitmentMaster;
 import java.text.SimpleDateFormat;
@@ -532,8 +533,11 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         ModelAndView mv = new ModelAndView();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
         List<?> candidateApplyJobList = candidateJobApplyService.fetchcandidatelist();
         mv.getModelMap().put("list", candidateApplyJobList);
+        questionList(request);
+        mv.getModelMap().put("onlineAssessment", onlineAssessment);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Recruitment/CandidateRequestList");
         return mv;

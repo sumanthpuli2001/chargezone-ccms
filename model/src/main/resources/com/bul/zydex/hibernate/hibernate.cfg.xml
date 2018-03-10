@@ -123,5 +123,6 @@
     <mapping resource="com/bul/zydex/model/CorporateVideo.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/QuestionDetails.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/MprApproval.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/OnlineAssessment.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

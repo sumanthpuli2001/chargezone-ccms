@@ -71,7 +71,7 @@
         <section class="content-header">
             <button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=backToHomeVacancyList'"><i class="fa fa-home"></i>&nbsp&nbsp&nbsp;Home</button>
             <!--<button type="button" class="btn btn-primary" style="float: left; width: 130px;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-user"></i>&nbsp&nbsp&nbsp;My Profile</button>-->
-            <label>Candidate User Name &nbsp : &nbsp&nbsp${applayJobUserMaster.userName}</label>
+            <label>Candidate User Name &nbsp : &nbsp&nbsp${applayJobUserMaster.userName}--${applayJobUserMaster.id}</label>
         </section>
         <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>

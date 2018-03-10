@@ -5,6 +5,8 @@
  */
 package com.bul.zydex.controller.Training;
 
+import com.bul.zydex.model.Trainer;
+import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.UserMaster;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -174,7 +176,8 @@ public class TrainingTypeController extends TrainingTypeAbstract {
 
         return mv;
     }
-     public ModelAndView calendarList(HttpServletRequest request, HttpServletResponse response) throws ParseException, Exception {
+
+    public ModelAndView calendarList(HttpServletRequest request, HttpServletResponse response) throws ParseException, Exception {
         ModelAndView mv = new ModelAndView();
         String monthAndYear = request.getParameter("monthAndYear");;
         String btnType = request.getParameter("btnType");;
@@ -197,12 +200,10 @@ public class TrainingTypeController extends TrainingTypeAbstract {
             monthAndYear = simpleDateFormat.format(dateTime);
         }
         HttpSession session = request.getSession(false);
-         auditgetCalDate(request,monthAndYear, cal3);
+        auditgetCalDate(request, monthAndYear, cal3);
         mv.setViewName("Training/calendar");
         return mv;
     }
-
-    
 
     public ModelAndView showcalendar(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
@@ -214,8 +215,25 @@ public class TrainingTypeController extends TrainingTypeAbstract {
         String monthAndYear = simpleDateFormat.format(new Date());
         dateTime = simpleDateFormat.parse(monthAndYear);
         cal3.setTime(dateTime);
-        auditgetCalDate(request,monthAndYear, cal3);
+        auditgetCalDate(request, monthAndYear, cal3);
         mv.setViewName("Training/calendar");
+        return mv;
+    }
+
+    public ModelAndView viewProfile(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String id = request.getParameter("id");
+        String eventdate = request.getParameter("eventdate");
+        TrainingMaster trainingMaster = trainingMasterService.readById(Integer.parseInt(id));
+        Trainer trainer = trainerService.readById(trainingMaster.getTrainer().getId());
+        TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster.getTrainingSubType().getId());
+        TrainingType trainingType = trainingTypeService.readById(trainingMaster.getTrainingType().getId());
+        trainingMaster.setTrainer(trainer);
+        trainingMaster.setTrainingSubType(trainingSubType);
+        trainingMaster.setTrainingType(trainingType);
+        request.setAttribute("trainingMaster", trainingMaster);
+        mv.setViewName("Training/TrainingMasterlblview");
         return mv;
     }
 }

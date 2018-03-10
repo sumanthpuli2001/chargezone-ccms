@@ -7,6 +7,7 @@ package com.bul.zydex.controller.Recruitment;
 
 import com.bul.zydex.model.ApprovalUser;
 import com.bul.zydex.model.CandidateApplyJob;
+import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmployeeMaster;
@@ -628,7 +629,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         OnlineAssessment onlineAssessment = new OnlineAssessment();
 //        List<?> candidateApplyJobList = candidateJobApplyService.fetchcandidatelist();
         List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
-        
+
         mv.getModelMap().put("list", candidateJobList);
         questionList(request);
         mv.getModelMap().put("onlineAssessment", onlineAssessment);
@@ -643,7 +644,13 @@ public class RecruitmentController extends RecruitmentAbstract {
         ModelAndView mv = new ModelAndView();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         String id = request.getParameter("id");
-        candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(id));
+        int candJobApplicationid = Integer.parseInt(id);
+        CandidateJobApplication cja = candidateJobApplicationService.readById(candJobApplicationid);
+        candidateApplyJob = candidateJobApplyService.readById(cja.getCandidateApplyJob().getId());
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+        questionList(request);
+        mv.getModelMap().put("onlineAssessment", onlineAssessment);
+        request.setAttribute("candidateJobApplication", cja);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Recruitment/CandidateApproval");
         return mv;

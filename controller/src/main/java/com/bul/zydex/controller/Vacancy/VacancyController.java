@@ -574,6 +574,8 @@ public class VacancyController extends VacancyAbstract {
 
         ModelAndView mv = new ModelAndView();
         ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+        String id = request.getParameter("id");
+
         mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
         mv.setViewName("Vacancy/MyProfile");
 
@@ -585,6 +587,14 @@ public class VacancyController extends VacancyAbstract {
 
         ModelAndView mv = new ModelAndView();
         ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+        String id = request.getParameter("id");
+        List<?> list1 = candidateJobApplyService.readOnlineAssementCandidate(Integer.parseInt(id));
+        for (Object o1 : list1) {
+            Object str[] = (Object[]) o1;
+            
+
+        }
+
         mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
         mv.setViewName("Vacancy/AssessmentCandidate");
 

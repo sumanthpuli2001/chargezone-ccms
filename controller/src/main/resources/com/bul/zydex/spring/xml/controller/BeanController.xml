@@ -1081,5 +1081,9 @@
     <bean id="trainingIdentificationController1" class="com.bul.zydex.controller.Training.TrainingIdentificationController" parent="controllerConfig" >
         <property name="trainingIdentificationService" ref="trainingIdentificationService1"></property>
     </bean>
+    <bean id="classifiedBoxController1" class="com.bul.zydex.controller.ClassifiedBox.ClassifiedBoxController" parent="controllerConfig" >
+        <property name="classifiedBoxService" ref="classifiedBoxService1" />
+        <property name="classifiedBoxValidator" ref="classifiedBoxValidator1" />
+    </bean>
 </beans>
  

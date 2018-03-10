@@ -34,6 +34,7 @@ public class ApplayJobUserMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         }
         return false;
     }
+    
 
     @Override
     public boolean profileFilling(int userId) {

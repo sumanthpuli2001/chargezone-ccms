@@ -36,13 +36,13 @@ public class CandidateApplyJob  implements java.io.Serializable{
     private String certificateAttach;
     private VacancyMaster vacancyId;
     private ApplayJobUserMaster applayJobUserMaster;
-    private Integer status;
+   
     
     public CandidateApplyJob(){
         
     }
 
-    public CandidateApplyJob(Integer id, String name, String fatherName, String motherName, String fatherDob, String motherDob, String sex, String martialStatus, String dob, String photograph, String presentAddress, String permanentAddress, String city, String bloodGroup, String emailId, String contactNo, String emergencyContactPerson, String emergencyContactNo, String highestEducationQualification, String experianceDateJoiningYear, String experianceDateJoiningMonth, String certificateAttach, VacancyMaster vacancyId,Integer status) {
+    public CandidateApplyJob(Integer id, String name, String fatherName, String motherName, String fatherDob, String motherDob, String sex, String martialStatus, String dob, String photograph, String presentAddress, String permanentAddress, String city, String bloodGroup, String emailId, String contactNo, String emergencyContactPerson, String emergencyContactNo, String highestEducationQualification, String experianceDateJoiningYear, String experianceDateJoiningMonth, String certificateAttach, VacancyMaster vacancyId,ApplayJobUserMaster applayJobUserMaster) {
         this.id = id;
         this.name = name;
         this.fatherName = fatherName;
@@ -66,7 +66,8 @@ public class CandidateApplyJob  implements java.io.Serializable{
         this.experianceDateJoiningMonth = experianceDateJoiningMonth;
         this.certificateAttach = certificateAttach;
         this.vacancyId = vacancyId;
-        this.status = status;
+        this.applayJobUserMaster = applayJobUserMaster;
+        
     }
 
     public Integer getId() {
@@ -261,13 +262,7 @@ public class CandidateApplyJob  implements java.io.Serializable{
         this.applayJobUserMaster = applayJobUserMaster;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+    
     
     
 

@@ -7,6 +7,7 @@ package com.bul.zydex.service.ApplayJobUserMaster;
 
 import com.bul.zydex.model.ApplayJobUserMaster;
 import com.bul.zydex.service.GenericsService;
+import java.util.List;
 
 /**
  *

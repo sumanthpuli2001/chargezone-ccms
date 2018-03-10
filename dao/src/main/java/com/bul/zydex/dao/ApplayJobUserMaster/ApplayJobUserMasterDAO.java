@@ -12,8 +12,8 @@ import com.bul.zydex.model.ApplayJobUserMaster;
  *
  * @author Vikas
  */
-public interface ApplayJobUserMasterDAO<T> extends GenericsDAO<T>{
-    
+public interface ApplayJobUserMasterDAO<T> extends GenericsDAO<T> {
+
     public boolean isExist(T object);
     
     public boolean profileFilling(int userId);

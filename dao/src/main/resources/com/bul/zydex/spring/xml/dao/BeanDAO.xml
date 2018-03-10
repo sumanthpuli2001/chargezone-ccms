@@ -235,4 +235,6 @@
     <bean id="trainerDAO1" class="com.bul.zydex.dao.Training.TrainerDAOImpl" parent="sessionFactoryConfig" />
     <bean id="trainingMasterDAO1" class="com.bul.zydex.dao.Training.TrainingMasterDAOImpl" parent="sessionFactoryConfig" />
     <bean id="recruitmentMppApprovalDAO1" class="com.bul.zydex.dao.RecruitmentMppApproval.RecruitmentMppApprovalDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="trainingAttendanceDAO1" class="com.bul.zydex.dao.Training.TrainingAttendanceDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="trainingIdentificationDAO1" class="com.bul.zydex.dao.Training.TrainingIdentificationDAOImpl" parent="sessionFactoryConfig" />
 </beans>

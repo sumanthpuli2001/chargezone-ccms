@@ -8,11 +8,32 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <set name="trainingMasters" table="training_master" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="trainer_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.TrainingMaster" />
-        </set>
+        <property name="trainerName" type="string">
+            <column name="trainer_name" />
+        </property>
+        <property name="userName" type="string">
+            <column name="user_name" />
+        </property>
+        <property name="passwrod" type="string">
+            <column name="password" />
+        </property>
+        <property name="emailId" type="string">
+            <column name="email_id" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" />
+        </property>
+        <property name="createdBy" type="java.lang.Integer">
+            <column name="created_by" />
+        </property>
+        <property name="createdDate" type="string">
+            <column name="created_date" />
+        </property>
+        <property name="updatedBy" type="java.lang.Integer">
+            <column name="updated_by" />
+        </property>
+        <property name="updatedate" type="string">
+            <column name="updated_date" />
+        </property>
     </class>
 </hibernate-mapping>

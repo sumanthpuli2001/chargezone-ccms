@@ -422,7 +422,7 @@ public class VacancyController extends VacancyAbstract {
             applayJobUserMasterSerivce.create(applayJobUserMaster);
             request.setAttribute("successMessage",
                     "Information : signUp Successfully.");
-            return new ModelAndView("Vacancy/MemberPage", "applayJobUserMaster", applayJobUserMaster);
+            return new ModelAndView("Vacancy/ApplayLoginpage", "applayJobUserMaster", applayJobUserMaster);
         }
         return mv;
     }
@@ -434,7 +434,7 @@ public class VacancyController extends VacancyAbstract {
         ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
         mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
 
-        mv.setViewName("Vacancy/LoginButton");
+        mv.setViewName("Vacancy/ApplayLoginpage");
         return mv;
     }
 

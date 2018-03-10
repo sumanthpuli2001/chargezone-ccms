@@ -67,7 +67,7 @@
             <ol class="breadcrumb">
             </ol>
         </section>
-         <c:if test="${!empty successMessage}">
+        <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>
         </c:if>
         <c:if test="${!empty failureMessage}">
@@ -78,39 +78,48 @@
         <form:form class="form-horizontal" method="post"
                    commandName="applayJobUserMaster" action="vacancy.htm?act=signUpCandidate">
             <form:hidden path="id"></form:hidden>
-            <!--<input type="hidden" name="lockCounter" value="0"/>-->
-            <section class="content">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                        <div class="form-group">
-                            <div class="col-sm-2">
-                            </div>
-                            <div class="col-sm-1" style="text-align: left">
-                                <label>Email Id:<span style="color: red;font-size: 12px;">*</span></label>
-                            </div>
-                            <div class="col-sm-3">
+                <!--<input type="hidden" name="lockCounter" value="0"/>-->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                </div>
+                                <div class="col-sm-1" style="text-align: center">
+                                    <label>Email Id:<span style="color: red;font-size: 12px;">*</span></label>
+                                </div>
+                                <div class="col-sm-3">
                                 <form:input path="userName" class="form-control" placeholder="Name"></form:input>
                                 <form:errors path="userName" cssClass="errorDiv"></form:errors>
-                            </div>
-
-                            <div class="col-sm-1" style="text-align: left" >
-                                <label>Password :<span style="color: red;font-size: 12px;">*</span></label>
-                            </div>
-                            <div class="col-sm-3">
-                            <form:password path="password" class="form-control" placeholder="Name"></form:password>
-                                <form:errors path="password" cssClass="errorDiv"></form:errors>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            </br>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                </div>
+                                <div class="col-sm-1" style="text-align: center" >
+                                    <label>Password :<span style="color: red;font-size: 12px;">*</span></label>
+                                </div>
+                                <div class="col-sm-3">
+                                <form:password path="password" class="form-control" placeholder="Name"></form:password>
+                                <form:errors path="password" cssClass="errorDiv"></form:errors>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
 
-            <div class="form-group">
-                <div class=" col-sm-offset-0">
-                    <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >SUBMIT</button>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="col-sm-1" style="text-align: left" >
+                        <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >SUBMIT</button>
+                    </div>
                 </div>
-            </div>
 
         </form:form>
         <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>

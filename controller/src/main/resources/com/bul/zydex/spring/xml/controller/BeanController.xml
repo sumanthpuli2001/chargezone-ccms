@@ -1055,5 +1055,10 @@
         <property name="corporateVideoService" ref="corporateVideoService1"></property>
         <property name="rAndRService" ref="rAndRService1"></property>
     </bean>
+    <bean id="classifiedBoxController1" class="com.bul.zydex.controller.ClassifiedBox.ClassifiedBoxController" parent="controllerConfig" >
+        <property name="classifiedBoxService" ref="classifiedBoxService1" />
+        <property name="classifiedBoxValidator" ref="classifiedBoxValidator1" />
+        
+    </bean>
 </beans>
  

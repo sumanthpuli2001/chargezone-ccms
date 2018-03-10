@@ -205,6 +205,7 @@
                 <prop key="homeController.htm">homeController1</prop>
                 <prop key="thoughtMaster.htm">thoughtMasterController1</prop>
                 <prop key="corporateVideo.htm">corporateVideoController1</prop>
+                <prop key="classifiedBox.htm">classifiedBoxController1</prop>
                 
            
             </props>

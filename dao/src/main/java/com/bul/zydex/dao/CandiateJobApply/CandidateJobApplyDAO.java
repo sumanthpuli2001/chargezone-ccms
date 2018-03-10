@@ -12,8 +12,10 @@ import java.util.List;
  *
  * @author Aman
  */
-public interface CandidateJobApplyDAO<T> extends GenericsDAO<T>{
+public interface CandidateJobApplyDAO<T> extends GenericsDAO<T> {
 
     public List<?> fetchcandidatelist();
-    
+
+    public List<?> readOnlineAssementCandidate(int userMaster);
+
 }

@@ -34,5 +34,16 @@ public class ApplayJobUserMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         }
         return false;
     }
+    @Override
+    public List<?> isExist1(T object) {
+        ApplayJobUserMaster applayJobUserMaster = (ApplayJobUserMaster) object;
+        String query = "";
+        query += " Select a.id"
+                + " From ApplayJobUserMaster a "
+                + " WHERE a.userName = '" + applayJobUserMaster.getUserName() + "'"
+                + " And a.password = '" + applayJobUserMaster.getPassword() + "'";
+        List list = getHibernateTemplate().find(query);
+        return list;
+    }
 
 }

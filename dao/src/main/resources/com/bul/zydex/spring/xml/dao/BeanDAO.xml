@@ -229,4 +229,5 @@
     <bean id="questionDetailsDAO1" class="com.bul.zydex.dao.questionlibrary.QuestionDetailsDAOImpl" parent="sessionFactoryConfig" />
     <bean id="applayJobUserMasterDAO1" class="com.bul.zydex.dao.ApplayJobUserMaster.ApplayJobUserMasterDAOImpl" parent="sessionFactoryConfig" />
     <bean id="mprApprovalDAO1" class="com.bul.zydex.dao.MprApproval.MprApprovalDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="classifiedBoxDAO1" class="com.bul.zydex.dao.ClassifiedBox.ClassifiedBoxDAOImpl" parent="sessionFactoryConfig" />
 </beans>

@@ -72,5 +72,8 @@
         <many-to-one name="vacancyId" class="com.bul.zydex.model.VacancyMaster" fetch="select">
             <column name="vacancy_id" />
         </many-to-one>
+        <many-to-one name="applayJobUserMasterId" class="com.bul.zydex.model.ApplayJobUserMaster" fetch="select">
+            <column name="applay_job_user_master_id" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

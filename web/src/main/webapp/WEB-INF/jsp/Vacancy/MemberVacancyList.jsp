@@ -48,6 +48,13 @@
 
         </style>
         <script>
+            function viewClick(id) {
+                alert(id);
+//            window.location = 'payrollSalaryType.htm?act=viewClick&id=' + id;
+                window.location = 'vacancy.htm?act=clickassessment&id=' + id;
+            }
+        </script>
+        <script>
             var flag3 = true;
             function saveSubmit11() {
                 if (flag3) {
@@ -62,7 +69,6 @@
         </script>
         <script>
             function homeClick(id) {
-                alert(id);
                 window.location = 'vacancy.htm?act=backToHome&id=' + id;
             }
         </script>
@@ -83,8 +89,9 @@
         <br/>
         <ul class="nav nav-tabs" style="text-align: center" >
             <li class="active " ><a href="">My Application</a></li>
-            <li ><a href="vacancy.htm?act=myProfileClick">My Profile</a></li>
-            <li ><a href="vacancy.htm?act=clickassessment">Assessment</a></li>
+            <li ><a onclick="" >My Profile</a></li>
+            <!--<li ><a href="vacancy.htm?act=clickassessment">Assessment</a></li>-->
+            <li ><a onclick="viewClick(${applayJobUserMaster.id});">Assessment</a></li>
         </ul>
         <br/>
         <br/>

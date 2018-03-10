@@ -33,4 +33,9 @@ public class ApplayJobUserMasterServiceImpl<T> extends GenericsServiceImpl<T> im
         return applayJobUserMasterDAO.isExist(object);
     }
 
+    @Override
+    public List<?> isExist1(T object) {
+      return applayJobUserMasterDAO.isExist1(object);
+    }
+
 }

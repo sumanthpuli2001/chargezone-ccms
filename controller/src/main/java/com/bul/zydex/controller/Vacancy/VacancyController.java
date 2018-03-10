@@ -199,7 +199,33 @@ public class VacancyController extends VacancyAbstract {
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
                     "Error : All Fields Are Mandatorys");
-            mv = newVacancyCreate(request, response);
+
+            String jobtypeNAme = jobtypeMaster.getJobTypeName();
+
+            String departmentName = departmentMaster.getDepartmentName();
+            
+            String locationName = locationMaster.getLocation();
+
+            String designationName = designationMaster.getDesignationName();
+            
+            int budget = mprMaster.getBudget();
+
+            mv.getModelMap().put("mprMaster", mprMaster);
+            mv.getModelMap().put("departmentMaster", departmentMaster);
+            mv.getModelMap().put("locationMaster", locationMaster);
+            mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
+            mv.getModelMap().put("designationMaster", designationMaster);
+            mv.getModelMap().put("vacancyMaster", vacancyMaster);
+            request.setAttribute("jobtypeNAme", jobtypeNAme);
+            request.setAttribute("departmentName", departmentName);
+            request.setAttribute("locationName", locationName);
+            request.setAttribute("position", position);
+            request.setAttribute("designationName", designationName);
+            request.setAttribute("experiance", experiance);
+            request.setAttribute("budget", budget);
+            mv.setViewName("Vacancy/CreateVacancy");
+            return mv;
+
         } else {
             vacancyMaster.setStatus(0);
             vacancyMasterService.create(vacancyMaster);
@@ -422,7 +448,7 @@ public class VacancyController extends VacancyAbstract {
             applayJobUserMasterSerivce.create(applayJobUserMaster);
             request.setAttribute("successMessage",
                     "Information : signUp Successfully.");
-            return new ModelAndView("Vacancy/MemberPage", "applayJobUserMaster", applayJobUserMaster);
+            return new ModelAndView("Vacancy/ApplayLoginpage", "applayJobUserMaster", applayJobUserMaster);
         }
         return mv;
     }
@@ -434,7 +460,7 @@ public class VacancyController extends VacancyAbstract {
         ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
         mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
 
-        mv.setViewName("Vacancy/LoginButton");
+        mv.setViewName("Vacancy/ApplayLoginpage");
         return mv;
     }
 

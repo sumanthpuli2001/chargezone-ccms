@@ -22,7 +22,8 @@ public class CandidateJobApplicationDAOImpl<T> extends GenericsDAOImpl<T> implem
 
     @Override
     public List<?> readByCandidateId(int candidateId) {
-        String query = " SELECT c "
+        String query = " SELECT a.id as cjaId,b.id as cajId,c.id as vmId,c.name as vacancyName,c.numberOfPosition,"
+                + " c.experience,c.fromDate,c.toDate,a.status "
                 + " FROM CandidateJobApplication a "
                 + " LEFT JOIN a.candidateApplyJob b "
                 + " LEFT JOIN a.vacancyMaster c "
@@ -48,8 +49,8 @@ public class CandidateJobApplicationDAOImpl<T> extends GenericsDAOImpl<T> implem
 
     @Override
     public CandidateJobApplication readByCandidateIdAndVacancyId(int candId, int vacId) {
-        CandidateJobApplication application=new CandidateJobApplication();
-          String query = " SELECT a "
+        CandidateJobApplication application = new CandidateJobApplication();
+        String query = " SELECT a "
                 + " FROM CandidateJobApplication a "
                 + " LEFT JOIN a.candidateApplyJob b "
                 + " LEFT JOIN a.vacancyMaster c "
@@ -57,10 +58,10 @@ public class CandidateJobApplicationDAOImpl<T> extends GenericsDAOImpl<T> implem
                 + " And a.vacancyMaster.id = " + vacId;
 
         List<?> list = getHibernateTemplate().find(query);
-        if(!list.isEmpty()){
-            application =(CandidateJobApplication) list.get(0);
-        }else{
-            application=null;
+        if (!list.isEmpty()) {
+            application = (CandidateJobApplication) list.get(0);
+        } else {
+            application = null;
         }
         return application;
     }

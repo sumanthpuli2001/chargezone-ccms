@@ -568,4 +568,7 @@
     <bean id="recruitmentMppApprovalService1" class="com.bul.zydex.service.RecruitmentMppApproval.RecruitmentMppApprovalServiceImpl">
         <property name="recruitmentMppApprovalDAO" ref="recruitmentMppApprovalDAO1" />
     </bean>
+    <bean id="candidateJobApplicationService1" class="com.bul.zydex.service.Recruitment.CandidateJobApplicationServiceImpl">
+        <property name="candidateJobApplicationDAO" ref="candidateJobApplicationDAO1" />
+    </bean>
 </beans>

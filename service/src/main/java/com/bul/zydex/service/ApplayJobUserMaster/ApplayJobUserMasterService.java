@@ -12,8 +12,12 @@ import com.bul.zydex.service.GenericsService;
  *
  * @author Vikas
  */
-public interface ApplayJobUserMasterService<T> extends GenericsService<T>{
-    
+public interface ApplayJobUserMasterService<T> extends GenericsService<T> {
+
     public boolean isExist(T object);
-    
+
+    public boolean profileFilling(int userId);
+
+    public ApplayJobUserMaster checkByUserNameandPass(T object);
+
 }

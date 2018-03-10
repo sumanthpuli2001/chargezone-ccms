@@ -16,4 +16,6 @@ public interface CandidateJobApplyDAO<T> extends GenericsDAO<T>{
 
     public List<?> fetchcandidatelist();
     
+      public List<?> readProfileByCandidateUserID(int userId); 
+    
 }

@@ -19,4 +19,6 @@ public interface MprApprovalDAO<T> extends GenericsDAO<T> {
 
     public MprApproval readByMprIdAndEmpId(int mprid, int empid);
     
+    public List<?> mPrDelete(String mprId);
+    
 }

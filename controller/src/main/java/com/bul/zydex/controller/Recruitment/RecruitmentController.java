@@ -125,7 +125,8 @@ public class RecruitmentController extends RecruitmentAbstract {
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid");
             mv.addAllObjects(errors.getModel());
-            mv = newCreateBudget(request, response);
+            mv.setViewName("Recruitment/CreateNewBudget");
+//            mv = newCreateBudget(request, response);
         } else {
             recruitmentMaster.setMppStatus(0);
             recruitmentMaster.setCurrentLevel(1);
@@ -159,14 +160,14 @@ public class RecruitmentController extends RecruitmentAbstract {
         String savingList[] = request.getParameterValues("checkId");
         for (String z : savingList) {
             try {
-                
+
                 RecruitmentMppApproval recruitmentMppApproval = new RecruitmentMppApproval();
-                List<?>list = recruitmentMppApprovalService.recruitmentMppdelete(z);
-                for(Object object : list){
+                List<?> list = recruitmentMppApprovalService.recruitmentMppdelete(z);
+                for (Object object : list) {
                     recruitmentMppApproval = (RecruitmentMppApproval) object;
                     recruitmentMppApprovalService.delete(recruitmentMppApproval.getId());
                 }
-                
+
                 recruitmentService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
                         "Info :Records are deleted successfully.");
@@ -360,6 +361,14 @@ public class RecruitmentController extends RecruitmentAbstract {
         String savingList[] = request.getParameterValues("checkId");
         for (String z : savingList) {
             try {
+
+                MprApproval mprApproval = new MprApproval();
+                List<?> list = mprApprovalService.mPrDelete(z);
+                for (Object object : list) {
+                    mprApproval = (MprApproval) object;
+                    mprApprovalService.delete(mprApproval.getId());
+                }
+
                 mprMasterService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
                         "Info : Records are deleted successfully.");

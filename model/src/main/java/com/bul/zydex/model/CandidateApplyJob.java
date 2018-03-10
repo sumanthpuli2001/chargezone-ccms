@@ -35,6 +35,7 @@ public class CandidateApplyJob  implements java.io.Serializable{
     private String experianceDateJoiningMonth;
     private String certificateAttach;
     private VacancyMaster vacancyId;
+    private ApplayJobUserMaster applayJobUserMaster;
     private Integer status;
     
     public CandidateApplyJob(){
@@ -251,6 +252,24 @@ public class CandidateApplyJob  implements java.io.Serializable{
     public void setVacancyId(VacancyMaster vacancyId) {
         this.vacancyId = vacancyId;
     }
+
+    public ApplayJobUserMaster getApplayJobUserMaster() {
+        return applayJobUserMaster;
+    }
+
+    public void setApplayJobUserMaster(ApplayJobUserMaster applayJobUserMaster) {
+        this.applayJobUserMaster = applayJobUserMaster;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+    
+    
 
    
     

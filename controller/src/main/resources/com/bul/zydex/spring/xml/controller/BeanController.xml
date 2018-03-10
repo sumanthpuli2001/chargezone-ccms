@@ -1026,6 +1026,7 @@
         <property name="applayJobUserMasterValidator" ref="applayJobUserMasterValidator1"/>
         <property name="candidateJobApplyValidator" ref="candidateJobApplyValidator1"/>
         <property name="mprMasterService" ref="mprMasterService1"/>
+        <property name="candidateJobApplicationService" ref="candidateJobApplicationService1"/>
     </bean> 
     <bean id="thoughtMasterController1" class="com.bul.zydex.controller.thought.ThoughtMasterController" parent="controllerConfig" >
         <property name="thoughtMasterService" ref="thoughtMasterService1"></property>

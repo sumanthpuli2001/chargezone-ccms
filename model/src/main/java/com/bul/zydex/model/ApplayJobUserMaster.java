@@ -16,6 +16,7 @@ public class ApplayJobUserMaster implements java.io.Serializable {
     private String password;
     private String createdDate;
     private Integer firstTime;
+    private Integer profileSubmit;
     
     public ApplayJobUserMaster (){
         
@@ -68,6 +69,15 @@ public class ApplayJobUserMaster implements java.io.Serializable {
     public void setFirstTime(Integer firstTime) {
         this.firstTime = firstTime;
     }
+
+    public Integer getProfileSubmit() {
+        return profileSubmit;
+    }
+
+    public void setProfileSubmit(Integer profileSubmit) {
+        this.profileSubmit = profileSubmit;
+    }
+    
 
     
 }

@@ -626,8 +626,10 @@ public class RecruitmentController extends RecruitmentAbstract {
         ModelAndView mv = new ModelAndView();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         OnlineAssessment onlineAssessment = new OnlineAssessment();
-        List<?> candidateApplyJobList = candidateJobApplyService.fetchcandidatelist();
-        mv.getModelMap().put("list", candidateApplyJobList);
+//        List<?> candidateApplyJobList = candidateJobApplyService.fetchcandidatelist();
+        List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
+        
+        mv.getModelMap().put("list", candidateJobList);
         questionList(request);
         mv.getModelMap().put("onlineAssessment", onlineAssessment);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);

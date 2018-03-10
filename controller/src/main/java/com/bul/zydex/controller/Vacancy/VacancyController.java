@@ -52,11 +52,32 @@ public class VacancyController extends VacancyAbstract {
             HttpServletResponse response) throws Exception {
 
         String vacancyId = request.getParameter("vacancyId");
+        int vacId = Integer.parseInt(vacancyId);
         ModelAndView mv = new ModelAndView();
-        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
 
-        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
-        mv.setViewName("Vacancy/applyJobCandidateRegistration");
+        HttpSession session = request.getSession();
+        ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
+
+        List<CandidateApplyJob> candidateProfile = (List<CandidateApplyJob>) candidateJobApplyService.readProfileByCandidateUserID(ajuMaster.getId());
+//        VacancyMaster master=
+        List<?> CandidateJobApplyList = new ArrayList<>();
+        if (!candidateProfile.isEmpty()) {
+            CandidateApplyJob caj = (CandidateApplyJob) candidateProfile.get(0);
+            CandidateJobApplication cja = candidateJobApplicationService.readByCandidateIdAndVacancyId(caj.getId(), vacId);
+            cja.setStatus(1);
+            candidateJobApplicationService.update(cja);
+
+            CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(caj.getId());
+
+        }
+        request.setAttribute("list", CandidateJobApplyList);
+        mv.getModelMap().put("applayJobUserMaster", ajuMaster);
+        mv.setViewName("Vacancy/MemberVacancyList");
+
+//        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+//
+//        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+//        mv.setViewName("Vacancy/applyJobCandidateRegistration");
         return mv;
     }
 

@@ -89,6 +89,7 @@
                                                                     <th style="width: 50px;">Qualification</th>
                                                                     <th style="width: 50px;">Email Address</th>
                                                                     <th style="width: 50px;">Experience Joining Year</th>
+                                                                    <th style="width: 50px;">Vacancy Name</th>
                                                                         <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <th style="width: 50px;">Action</th>
                                                                         <%--</c:if>--%>
@@ -104,10 +105,11 @@
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" id="checkId" name="checkId"  value="${list[0]}"  /></td>
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
-                                                                <td>${list[1]}</td>
-                                                                <td>${list[2]}</td>
                                                                 <td>${list[3]}</td>
                                                                 <td>${list[4]}</td>
+                                                                <td>${list[5]}</td>
+                                                                <td>${list[6]}</td>
+                                                                <td>${list[7]}</td>
                                                                 <!--<td>${list[3]}</td>-->
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>

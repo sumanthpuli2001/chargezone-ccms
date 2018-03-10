@@ -89,8 +89,14 @@
     </head>
     <body>
         <section class="content-header" style="margin-top: 5%;">
-            <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 1%;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign Up</button>
-            <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 2%;" onclick="window.location = 'vacancy.htm?act=Login'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Login</button>
+            <c:if test="${sessionScope.ApplayJobUserMaster ne null}">
+                <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 2%;" onclick="window.location = 'vacancy.htm?act=logout'"><i class="fa fa-sign-out"></i>&nbsp&nbsp&nbsp;Log Out</button>
+                <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 1%;" onclick="window.location = 'vacancy.htm?act=candidateProfile'"><i class="fa fa-Home"></i>&nbsp&nbsp&nbsp;My Profile</button>
+            </c:if>
+            <c:if test="${sessionScope.ApplayJobUserMaster eq null}">
+                <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 1%;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-up"></i>&nbsp&nbsp&nbsp;Sign Up</button>
+                <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 2%;" onclick="window.location = 'vacancy.htm?act=Login'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Login</button>
+            </c:if>
             <h1>Job Vacancy List</h1>
             <ol class="breadcrumb">
             </ol>
@@ -131,14 +137,14 @@
                                                                 <tr>
                                                                     <c:if test="${sessionScope.userRight.employeeManagement}">
                                                                         <!--<th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>-->
-                                                                        </c:if>
-<!--                                                                    <th>sr.no</th>-->
+                                                                    </c:if>
+                                                                    <!--                                                                    <th>sr.no</th>-->
                                                                     <th style="width: 142px;">Vacancy Name</th>
                                                                     <th style="width: 185px;">Number Of Position</th>
                                                                     <th style="width: 130px;">Experience</th>
                                                                     <th style="width: 105px;">Start Date</th>
                                                                     <th style="width: 132px;">End Date</th>
-                                                                    <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                                        <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <th style="width: 132px;">Action</th>
                                                                         <%--</c:if>--%>
 
@@ -151,8 +157,8 @@
                                                             <tr>
                                                                 <c:if test="${sessionScope.userRight.employeeManagement}">
 <!--                                                                    <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>-->
-                                                                    </c:if>
-<!--                                                                <td>1</td>-->
+                                                                </c:if>
+                                                                <!--                                                                <td>1</td>-->
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[2]}</td>
                                                                 <td>${list[4]}</td>

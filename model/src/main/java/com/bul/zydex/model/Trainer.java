@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package com.bul.zydex.model;
+// Generated Mar 7, 2018 12:10:09 PM by Hibernate Tools 4.3.1
+
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *

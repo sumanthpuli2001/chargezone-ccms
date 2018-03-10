@@ -229,9 +229,13 @@
     <bean id="questionDetailsDAO1" class="com.bul.zydex.dao.questionlibrary.QuestionDetailsDAOImpl" parent="sessionFactoryConfig" />
     <bean id="applayJobUserMasterDAO1" class="com.bul.zydex.dao.ApplayJobUserMaster.ApplayJobUserMasterDAOImpl" parent="sessionFactoryConfig" />
     <bean id="mprApprovalDAO1" class="com.bul.zydex.dao.MprApproval.MprApprovalDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="onlineAssessmentDAO1" class="com.bul.zydex.dao.Recruitment.OnlineAssessmentDAOImpl" parent="sessionFactoryConfig" />
     <bean id="trainingTypeDAO1" class="com.bul.zydex.dao.Training.TrainingTypeDAOImpl" parent="sessionFactoryConfig" />
     <bean id="trainingSubTypeDAO1" class="com.bul.zydex.dao.Training.TrainingSubTypeDAOImpl" parent="sessionFactoryConfig" />
     <bean id="trainingSubMasterDAO1" class="com.bul.zydex.dao.Training.TrainingSubMasterDAOImpl" parent="sessionFactoryConfig" />
     <bean id="trainerDAO1" class="com.bul.zydex.dao.Training.TrainerDAOImpl" parent="sessionFactoryConfig" />
     <bean id="trainingMasterDAO1" class="com.bul.zydex.dao.Training.TrainingMasterDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="recruitmentMppApprovalDAO1" class="com.bul.zydex.dao.RecruitmentMppApproval.RecruitmentMppApprovalDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="trainingAttendanceDAO1" class="com.bul.zydex.dao.Training.TrainingAttendanceDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="trainingIdentificationDAO1" class="com.bul.zydex.dao.Training.TrainingIdentificationDAOImpl" parent="sessionFactoryConfig" />
 </beans>

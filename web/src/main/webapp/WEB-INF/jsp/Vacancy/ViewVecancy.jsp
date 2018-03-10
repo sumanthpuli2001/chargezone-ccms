@@ -85,24 +85,6 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Employee Category:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="mprEmployeeCategory.id" id="mprEmployeeCategory" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${categoryList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="mprEmployeeCategory.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Employee Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="mprEmployeeTypeMaster.id" id="mprEmployeeTypeMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${emptypeList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="mprEmployeeTypeMaster.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
                                                         <label>From Date:<span style="color: red;font-size: 12px;"></span></label>
                                                         <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" >
                                                         <form:input path="fromDate" class="form-control" onchange="dateDifference(this.value);" placeholder="From Date" readonly="true"></form:input>

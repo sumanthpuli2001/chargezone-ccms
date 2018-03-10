@@ -27,5 +27,11 @@ public class TrainerServiceImpl<T> extends GenericsServiceImpl<T> implements Tra
         setGenericsDAO(trainerDAO);
     }
 
+    @Override
+    public List<?> readTrainerList() {
+        return trainerDAO.readTrainerList();
+    }
+
+
    
 }

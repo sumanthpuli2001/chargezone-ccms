@@ -116,13 +116,11 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                <c:if test="${mprMaster.status == 0 || mprMaster.status == 2}">
                                                     <div class="col-sm-6 col-sm-offset-5">
                                                         <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
                                                     </div>
-                                                </c:if>
 
-                                            </div>
+                                                </div>
                                         </form:form>
                                         <!--</div>-->
 

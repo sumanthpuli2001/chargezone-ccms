@@ -21,6 +21,7 @@ import com.bul.zydex.model.QuestionPaper;
 import com.bul.zydex.model.QulificationMaster;
 //import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMaster;
+import com.bul.zydex.model.RecruitmentMppApproval;
 import com.bul.zydex.service.Approval.ApprovalUserService;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.MprApproval.MprApprovalService;
@@ -30,6 +31,7 @@ import com.bul.zydex.service.Recruitment.MprEmployeeTypeMasterService;
 import com.bul.zydex.service.Recruitment.MprMasterService;
 import com.bul.zydex.service.Recruitment.QulificationMasterService;
 import com.bul.zydex.service.Recruitment.RecruitmentService;
+import com.bul.zydex.service.RecruitmentMppApproval.RecruitmentMppApprovalService;
 import com.bul.zydex.service.emp.DesignationMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.service.questionlibrary.QuestionPaperService;
@@ -58,6 +60,7 @@ public class RecruitmentAbstract extends CustomAbstract {
     protected MprApprovalService<MprApproval> mprApprovalService;
     protected ApprovalUserService<ApprovalUser> approvalUserService;
     protected QuestionPaperService<QuestionPaper> questionPaperService;
+    protected RecruitmentMppApprovalService<RecruitmentMppApproval> recruitmentMppApprovalService;
 
     public MprMasterService<MprMaster> getMprMasterService() {
         return mprMasterService;
@@ -145,6 +148,14 @@ public class RecruitmentAbstract extends CustomAbstract {
 
     public void setQuestionPaperService(QuestionPaperService<QuestionPaper> questionPaperService) {
         this.questionPaperService = questionPaperService;
+    }
+
+    public RecruitmentMppApprovalService<RecruitmentMppApproval> getRecruitmentMppApprovalService() {
+        return recruitmentMppApprovalService;
+    }
+
+    public void setRecruitmentMppApprovalService(RecruitmentMppApprovalService<RecruitmentMppApproval> recruitmentMppApprovalService) {
+        this.recruitmentMppApprovalService = recruitmentMppApprovalService;
     }
 
     public void selectBudget(HttpServletRequest request,

@@ -44,11 +44,25 @@ public class MprMasterDAOImpl<T> extends GenericsDAOImpl<T> implements MprMaster
                 + " LEFT JOIN a.MprEmployeeTypeMaster e "
                 + " LEFT JOIN a.jobtypeMaster f "
                 + " LEFT JOIN a.QulificationMaster g "
-                + " LEFT JOIN a.DesignationMaster h " 
+                + " LEFT JOIN a.DesignationMaster h "
                 + " where (a.dateOfLeaving is null or a.dateOfLeaving = '') "
                 + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()";
-        
+
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+
+    @Override
+    public List<?> readMprListByUserId(int empId) {
+        String query = "";
+        query += " "
+                + " SELECT a.id, a.name, a.numberOfPosition, a.budget, a.experience, a.status"
+                + " FROM MprMaster a "
+                + " Where a.createdBy =" + empId
+                + " order by a.id desc";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

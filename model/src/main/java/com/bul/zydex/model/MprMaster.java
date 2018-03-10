@@ -27,6 +27,10 @@ public class MprMaster implements java.io.Serializable {
     private Integer totalLevel;
     private Integer remainingBudget;
     private String approvalComment;
+    private Integer createdBy;
+    private String createdDate;
+    private Integer updatedBy;
+    private String updatedDate;
 
     public MprMaster() {
 
@@ -177,6 +181,38 @@ public class MprMaster implements java.io.Serializable {
 
     public void setApprovalComment(String approvalComment) {
         this.approvalComment = approvalComment;
+    }
+
+    public Integer getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Integer createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Integer getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(Integer updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public String getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
     }
     
     

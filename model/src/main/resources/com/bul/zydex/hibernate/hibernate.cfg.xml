@@ -124,5 +124,6 @@
     <mapping resource="com/bul/zydex/model/QuestionDetails.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/MprApproval.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/OnlineAssessment.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/RecruitmentMppApproval.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

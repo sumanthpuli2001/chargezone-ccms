@@ -123,7 +123,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head onload="rrshowSlides(1);">
-        <title>Home</title>
+        <title>Homepage</title>
         <script>
             function viewEmployeeDetail(employeeId, userId) {
                 window.location = "employeeMaster.htm?act=getUserDetail&id=" + employeeId + "&userid=" + userId;
@@ -319,10 +319,10 @@
 
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Home</h1>
+            <h1>Homepage</h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Homepage</a></li>
+                <li class="active">My Dashboard</li>
             </ol>
         </section>
         <!-- Main content -->

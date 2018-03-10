@@ -22,14 +22,15 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
 
     @Override
     public List<?> readByApprovalId(int id) {
-        String query = "";
-        query += ""
+
+        String query = "SELECT a"
                 + " FROM ApprovalUser a "
                 + " left join a.approvalMaster b"
-                + " WHERE b.id = " + id;
+                + " WHERE a.approvalMaster.id = " + id;
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+   
 
 }

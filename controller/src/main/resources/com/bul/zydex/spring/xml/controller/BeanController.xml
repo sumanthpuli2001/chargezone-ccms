@@ -1013,14 +1013,13 @@
         <property name="mprApprovalService" ref="mprApprovalService1"/>
         <property name="approvalUserService" ref="approvalUserService1"/>
         <property name="questionPaperService" ref="questionPaperService1"/>
+        <property name="recruitmentMppApprovalService" ref="recruitmentMppApprovalService1"/>
     </bean>
     
     <bean id="vacancyController1" class="com.bul.zydex.controller.Vacancy.VacancyController" parent="controllerConfig" >
         <property name="vacancyMasterService" ref="vacancyMasterService1"></property>
         <property name="locationMasterService" ref="locationMasterService1" />
         <property name="jobtypeMasterService" ref="jobtypeMasterService1"/>
-        <property name="mprEmployeeTypeMasterService" ref="mprEmployeeTypeMasterService1"/>
-        <property name="mprEmployeeCategoryService" ref="mprEmployeeCategoryService1"/>
         <property name="designationMasterService" ref="designationMasterService1"/>
         <property name="vacancyValidator" ref="vacancyValidator1"/>
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
@@ -1062,6 +1061,13 @@
         <property name="onlineAssessmentService" ref="onlineAssessmentService1" />
         <property name="questionPaperService" ref="questionPaperService1" />
         
+    </bean>
+    <bean id="trainingTypeController1" class="com.bul.zydex.controller.Training.TrainingTypeController" parent="controllerConfig" >
+        <property name="trainingTypeService" ref="trainingTypeService1" />
+        <property name="trainingSubTypeService" ref="trainingSubTypeService1" />
+        <property name="trainerService" ref="trainerService1" />
+        <property name="trainingMasterService" ref="trainingMasterService1" />
+        <property name="trainingSubMasterService" ref="trainingSubMasterService1" />
     </bean>
 </beans>
  

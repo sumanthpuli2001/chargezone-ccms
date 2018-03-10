@@ -55,5 +55,17 @@
           <property name="approvalComment" type="string">
             <column name="approval_comment" />
         </property>
+        <property name="createdBy" type="java.lang.Integer">
+            <column name="created_by" />
+        </property>
+          <property name="createdDate" type="string">
+            <column name="created_date" />
+        </property>
+        <property name="updatedBy" type="java.lang.Integer">
+            <column name="updated_by" />
+        </property>
+          <property name="updatedDate" type="string">
+            <column name="updated_date" />
+        </property>
     </class>
 </hibernate-mapping>

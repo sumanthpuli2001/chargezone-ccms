@@ -33,28 +33,28 @@
                 <c:if test="${!sessionScope.userRight.hr}">
                     <li class="active treeview">
                         <a href="userMaster.htm?act=goToDashboard">
-                            <i class="fa fa-dashboard fa-lg"></i> <span>Dashboard</span>
+                            <i class="fa fa-dashboard fa-lg"></i> <span>My Dashboard</span>
                         </a>
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.userRight.hr}">
                     <li class="active treeview">
                         <a href="userMaster.htm?act=hrDashboard">
-                            <i class="fa fa-dashboard fa-lg"></i> <span>Dashboard</span>
+                            <i class="fa fa-dashboard fa-lg"></i> <span>My Dashboard</span>
                         </a>
                     </li>
                 </c:if>
                 <c:if test="${!sessionScope.userRight.hr}">
                     <li class="active treeview">
                         <a href="homeController.htm?act=openHomePage">
-                            <i class="fa fa-home fa-lg"></i> <span>Home</span>
+                            <i class="fa fa-home fa-lg"></i> <span>Homepage</span>
                         </a>
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.userRight.hr}">
                     <li class="active treeview">
                         <a href="homeController.htm?act=openHomePage">
-                            <i class="fa fa-home fa-lg"></i> <span>Home</span>
+                            <i class="fa fa-home fa-lg"></i> <span>Homepage</span>
                         </a>
                     </li>
                 </c:if>
@@ -88,6 +88,7 @@
                                 <li><a href="recruitment.htm?act=approvalMppCreate"><i class="fa fa-circle-o"></i>MPP Approval</a></li>
                                 <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>MPR Approval</a></li>
                                 <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
+                                <li><a href="recruitment.htm?act=allMprFetch"><i class="fa fa-circle-o"></i>MPR Fetch</a></li>
                             </ul>
                         </li>
                     </c:if>
@@ -573,7 +574,7 @@
                             <li><a href="companyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Company Master</a></li>
                             <li><a href="questionLibrary.htm?act=QuestionLibraryCreate"><i class="fa fa-circle-o"></i>Question Library</a></li>
                             <li><a href="questionLibrary.htm?act=questionPaperView"><i class="fa fa-circle-o"></i>Question Paper</a></li>
-                            <li><a href="thoughtMaster.htm?act=createthought"><i class="fa fa-circle-o"></i>Home Setting</a></li>
+                            <li><a href="thoughtMaster.htm?act=createthought"><i class="fa fa-circle-o"></i>Homepage Setting</a></li>
                         </ul>
                     </li>
                 </c:if>
@@ -822,6 +823,36 @@
             </ul>
             </li>
                     </c:if>
+             <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-pie-chart fa-lg"></i>
+                    <span>Training</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-rupee fa-lg"></i>
+                            <span>Master</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+
+                            <li><a href="trainingType.htm?act=newtraining"><i class="fa fa-circle-o"></i>Training Type</a></li>
+                            <li><a href="trainingType.htm?act=newsubtraining"><i class="fa fa-circle-o"></i>Training Sub Type</a></li>
+
+
+
+                        </ul>
+                    </li>
+                    <li><a href="trainingType.htm?act=showcalendar"><i class="fa fa-circle-o"></i>calendar</a></li>
+
+
+
+            </li>
+
+
+
             </ul>
         </section>
         <!-- /.sidebar -->

@@ -114,6 +114,7 @@
                                         </form:form>
                                         <form:form class="form-horizontal" method="post"
                                                    commandName="vacancyMaster" action="vacancy.htm?act=vacancySubmitCreate">
+                                             <input type="hidden" name="mprMasterid" id="mprMasterid" value="${mprMaster.id}">
 
                                             <div class="form-group">
                                                 <div class="col-sm-6">

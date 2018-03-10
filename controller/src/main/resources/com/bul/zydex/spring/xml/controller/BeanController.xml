@@ -1012,6 +1012,7 @@
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
         <property name="mprApprovalService" ref="mprApprovalService1"/>
         <property name="approvalUserService" ref="approvalUserService1"/>
+        <property name="questionPaperService" ref="questionPaperService1"/>
         <property name="recruitmentMppApprovalService" ref="recruitmentMppApprovalService1"/>
     </bean>
     
@@ -1055,6 +1056,11 @@
         <property name="galleryService" ref="galleryService1"></property>
         <property name="corporateVideoService" ref="corporateVideoService1"></property>
         <property name="rAndRService" ref="rAndRService1"></property>
+    </bean>
+    <bean id="onlineAssessmentController1" class="com.bul.zydex.controller.Recruitment.OnlineAssessmentController" parent="controllerConfig" >
+        <property name="onlineAssessmentService" ref="onlineAssessmentService1" />
+        <property name="questionPaperService" ref="questionPaperService1" />
+        
     </bean>
     <bean id="trainingTypeController1" class="com.bul.zydex.controller.Training.TrainingTypeController" parent="controllerConfig" >
         <property name="trainingTypeService" ref="trainingTypeService1" />

@@ -550,6 +550,9 @@
     <bean id="mprApprovalService1" class="com.bul.zydex.service.MprApproval.MprApprovalServiceImpl">
         <property name="mprApprovalDAO" ref="mprApprovalDAO1" />
     </bean>
+    <bean id="onlineAssessmentService1" class="com.bul.zydex.service.Recruitment.OnlineAssessmentServiceImpl">
+        <property name="onlineAssessmentDAO" ref="onlineAssessmentDAO1" />
+    </bean>
     <bean id="trainingTypeService1" class="com.bul.zydex.service.Training.TrainingTypeServiceImpl">
         <property name="trainingTypeDAO" ref="trainingTypeDAO1" />
     </bean>

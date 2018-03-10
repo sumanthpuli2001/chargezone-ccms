@@ -123,7 +123,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         recruitmentValidator.validate(recruitmentMaster, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
-                    "Error : The Entered Information is not valid");
+                    "All field are Required.Please Enter Valid data");
             mv.addAllObjects(errors.getModel());
             mv = newCreateBudget(request, response);
         } else {

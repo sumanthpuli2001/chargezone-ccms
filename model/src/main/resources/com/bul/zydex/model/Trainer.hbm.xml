@@ -1,18 +1,44 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Mar 7, 2018 12:10:10 PM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.Trainer" table="trainer" catalog="hr_power_astral" optimistic-lock="version">
+    <class name="com.bul.zydex.model.Trainer" table="trainer" catalog="hr_power_astral">
+        
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <set name="trainingMasters" table="training_master" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="trainer_id" not-null="true" />
-            </key>
-            <one-to-many class="com.bul.zydex.model.TrainingMaster" />
-        </set>
+        <property name="trainerName" type="string">
+            <column name="trainer_name" />
+        </property>
+        <property name="userName" type="string">
+            <column name="user_name" />
+        </property>
+        <property name="passwrod" type="string">
+            <column name="password" />
+        </property>
+        <property name="emailId" type="string">
+            <column name="email_id" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" />
+        </property>
+        <property name="createdBy" type="java.lang.Integer">
+            <column name="created_by" />
+        </property>
+        <property name="createdDate" type="string">
+            <column name="created_date" />
+        </property>
+        <property name="updatedBy" type="java.lang.Integer">
+            <column name="updated_by" />
+        </property>
+        <property name="updatedate" type="string">
+            <column name="updated_date" />
+        </property>
     </class>
+  
+
 </hibernate-mapping>

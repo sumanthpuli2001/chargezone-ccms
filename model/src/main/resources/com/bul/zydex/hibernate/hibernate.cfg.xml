@@ -123,7 +123,10 @@
     <mapping resource="com/bul/zydex/model/CorporateVideo.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/QuestionDetails.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/MprApproval.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/OnlineAssessment.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/RecruitmentMppApproval.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/CandidateJobApplication.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/TrainingAttendance.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/TrainingIdentification.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

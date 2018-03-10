@@ -840,7 +840,7 @@
 
                             <li><a href="trainingType.htm?act=newtraining"><i class="fa fa-circle-o"></i>Training Type</a></li>
                             <li><a href="trainingType.htm?act=newsubtraining"><i class="fa fa-circle-o"></i>Training Sub Type</a></li>
-
+                            <li><a href="trainer.htm?act=createTrainerShow"><i class="fa fa-circle-o"></i>Trainer</a></li>
 
 
                         </ul>

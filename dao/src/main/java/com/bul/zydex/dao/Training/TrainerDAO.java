@@ -13,5 +13,8 @@ import java.util.List;
  * @author Dell-1
  */
 public interface TrainerDAO<T> extends GenericsDAO<T> {
+
+    public List<?> readTrainerList();
+
     
 }

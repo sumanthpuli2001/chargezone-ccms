@@ -119,7 +119,7 @@
             <ol class="breadcrumb">
             </ol>
         </section>
-            <c:if test="${!empty successMessage}">
+          <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>
         </c:if>
         <c:if test="${!empty failureMessage}">
@@ -129,6 +129,7 @@
         <br/>
         <form:form action="vacancy.htm?act=submitRegistration" method="post" commandName="candidateApplyJob"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
+            <input type="hidden" id="empreqid" name="empreqid" value="${candidateApplyJob.id}">
             <section class="content">
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
@@ -142,7 +143,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <form:input path="name" class="form-control" placeholder="Enter Candidate Name"></form:input>
-                                <form:errors path="name" cssClass="errorDiv"></form:errors>
+                                <span style="color: red;font-size: 12px;"><form:errors path="name" cssClass="errorDiv"></form:errors></span>
                                 </div>
 
                                 <div class="col-sm-2" style="text-align: left" >
@@ -150,7 +151,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                 <form:input path="dob" class="form-control" placeholder="Enter D.O.B"></form:input>
-                                <form:errors path="dob" cssClass="errorDiv"></form:errors>
+                                <span style="color: red;font-size: 12px;"><form:errors path="dob" cssClass="errorDiv"></form:errors></span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -163,7 +164,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                 <form:input path="fatherName" class="form-control" placeholder="Enter Father Name"></form:input>
-                                <form:errors path="fatherName" cssClass="errorDiv"></form:errors>
+                                <span style="color: red;font-size: 12px;"><form:errors path="fatherName" cssClass="errorDiv"></form:errors></span>
                                 </div>
 
                                 <div class="col-sm-2" style="text-align: left">
@@ -171,7 +172,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                 <form:input path="motherName" class="form-control" placeholder="Enter Mother Name"></form:input>
-                                <form:errors path="motherName" cssClass="errorDiv"></form:errors>
+                                <span style="color: red;font-size: 12px;"><form:errors path="motherName" cssClass="errorDiv"></form:errors></span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -184,7 +185,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                 <form:input path="fatherDob"  class="form-control" size="16" placeholder="DD/MM/YYYY" ></form:input>
-                                <form:errors path="fatherDob" cssClass="errorDiv"></form:errors>
+                                <span style="color: red;font-size: 12px;"><form:errors path="fatherDob" cssClass="errorDiv"></form:errors></span>
                                 </div>
 
                                 <div class="col-sm-2" style="text-align: left">
@@ -192,7 +193,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                 <form:input path="motherDob"  class="form-control" size="16" placeholder="DD/MM/YYYY" ></form:input>
-                                <form:errors path="motherDob" cssClass="errorDiv"></form:errors>
+                                <span style="color: red;font-size: 12px;"><form:errors path="motherDob" cssClass="errorDiv"></form:errors></span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -229,7 +230,7 @@
                             </div>
                             <div class="col-sm-3" style="text-align: left;">
                                 <form:input type="file" path="photograph" class="form-control" id="photograph" name="photograph" accept="image/jpg,image/jpeg,image/png"></form:input>
-                                <form:errors path="photograph" cssClass="errorDiv"></form:errors>
+                                <%--<form:errors path="photograph" cssClass="errorDiv"></form:errors>--%>
                                 </div>
 
                                 <div class="col-sm-2" style="text-align: left">
@@ -247,19 +248,19 @@
                                         <option value="O +ve">O +ve</option>
                                         <option value="O -ve">O -ve</option>
                                     </select>
-                                <form:errors path="bloodGroup" cssClass="errorDiv"></form:errors>
+                                <%--<form:errors path="bloodGroup" cssClass="errorDiv"></form:errors>--%>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
+                            <div class="form-group">
 
-                            <div class="col-sm-1">
-                            </div>
-                            <div class="col-sm-2" style="text-align: left">
-                                <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
-                            </div>
-                            <div class="col-sm-3" style="text-align: left;">
+                                <div class="col-sm-1">
+                                </div>
+                                <div class="col-sm-2" style="text-align: left">
+                                    <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
+                                </div>
+                                <div class="col-sm-3" style="text-align: left;">
                                 <form:textarea path="presentAddress" class="form-control" placeholder="Enter Present Address"></form:textarea>
-                                <form:errors path="presentAddress" cssClass="errorDiv"></form:errors>
+                                <span style="color: red;font-size: 12px;"><form:errors path="presentAddress" cssClass="errorDiv"></form:errors></span>
                                 </div>
 
                                 <div class="col-sm-2" style="text-align: left">
@@ -267,7 +268,7 @@
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
                                 <form:textarea path="permanentAddress" class="form-control" placeholder="Enter Permanent Address"></form:textarea>
-                                <form:errors path="permanentAddress" cssClass="errorDiv"></form:errors>
+                                <span style="color: red;font-size: 12px;"><form:errors path="permanentAddress" cssClass="errorDiv"></form:errors></span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -279,14 +280,14 @@
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
                                 <form:input path="city" class="form-control" placeholder="Enter City"></form:input>
-                                <form:errors path="city" cssClass="errorDiv"></form:errors>
+                                <span style="color: red;font-size: 12px;"><form:errors path="city" cssClass="errorDiv"></form:errors></span>
                                 </div>
                                 <div class="col-sm-2" style="text-align: left">
                                     <label>Email.Id<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
                                 <form:input path="emailId" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="abc@domain.com" required=""></form:input>
-                                <form:errors path="emailId" cssClass="errorDiv"></form:errors>
+                                <span style="color: red;font-size: 12px;"><form:errors path="emailId" cssClass="errorDiv"></form:errors></span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -298,14 +299,14 @@
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
                                 <form:input path="contactNo" placeholder="Enter Contact No" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                <form:errors path="contactNo" cssClass="errorDiv"></form:errors>
+                                <span style="color: red;font-size: 12px;"><form:errors path="contactNo" cssClass="errorDiv"></form:errors></span>
                                 </div>
                                 <div class="col-sm-2" style="text-align: left">
                                     <label>Emergency Contact Person:<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
                                 <form:input path="emergencyContactPerson" class="form-control" placeholder="Enter Emergency contact Person"></form:input>
-                                <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
+                                <span style="color: red;font-size: 12px;"><form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors></span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -317,14 +318,14 @@
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
                                 <form:input path="emergencyContactNo" placeholder="Enter Emergency Contact No"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
+                                <span style="color: red;font-size: 12px;"><form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors></span>
                                 </div>
                                 <div class="col-sm-2" style="text-align: left">
                                     <label>Highest Education Qualification<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
                                 <form:input path="highestEducationQualification" placeholder="Enter Highest Education" class="form-control"></form:input>
-                                <form:errors path="highestEducationQualification" cssClass="errorDiv"></form:errors>
+                                <span style="color: red;font-size: 12px;"><form:errors path="highestEducationQualification" cssClass="errorDiv"></form:errors></span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -335,52 +336,48 @@
                                     <label>Experience On Date Of Joining: Year:<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
-                                    <form:input path="experianceDateJoiningYear" placeholder="Enter Date of Joining Year" class="form-control"></form:input>
-                                <form:errors path="experianceDateJoiningYear" cssClass="errorDiv"></form:errors>
-                            </div>
-                            <div class="col-sm-2" style="text-align: left">
-                                <label>Experience On Date Of Joining: Month:<span style="color: red;font-size: 12px;">*</span></label>
-                            </div>
-                            <div class="col-sm-3" style="text-align: left;">
+                                <form:input path="experianceDateJoiningYear" placeholder="Enter Date of Joining Year" class="form-control"></form:input>
+                                <span style="color: red;font-size: 12px;"><form:errors path="experianceDateJoiningYear" cssClass="errorDiv"></form:errors></span>
+                                </div>
+                                <div class="col-sm-2" style="text-align: left">
+                                    <label>Experience On Date Of Joining: Month:<span style="color: red;font-size: 12px;">*</span></label>
+                                </div>
+                                <div class="col-sm-3" style="text-align: left;">
                                 <form:input path="experianceDateJoiningMonth" placeholder="Enter Date of Joining Month" class="form-control"></form:input>
-                                <form:errors path="experianceDateJoiningMonth" cssClass="errorDiv"></form:errors>
+                                <span style="color: red;font-size: 12px;"><form:errors path="experianceDateJoiningMonth" cssClass="errorDiv"></form:errors></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
+                            <div class="form-group">
 
-                            <div class="col-sm-1">
+                                <div class="col-sm-1">
+                                </div>
+                                <div class="col-sm-2" style="text-align: left">
+                                    <label>Resume Attach :<span style="color: red;font-size: 12px;">*</span></label>
+                                </div>
+                                <div class="col-sm-3" style="text-align: left;">
+                                <form:input path="certificateAttach" type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png" onchange="checkCertificateFileSize(1);"></form:input>
+                                <span style="color: red;font-size: 12px;"><form:errors path="certificateAttach" cssClass="errorDiv"></form:errors></span>
+                                </div>
+
+
                             </div>
-                            <div class="col-sm-2" style="text-align: left">
-                                <label>Certificate Attach :<span style="color: red;font-size: 12px;">*</span></label>
-                            </div>
-                            <div class="col-sm-3" style="text-align: left;">
-                            <form:input path="certificateAttach" type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png" onchange="checkCertificateFileSize(1);"></form:input>
-                                <form:errors path="certificateAttach" cssClass="errorDiv"></form:errors>
-                            </div>
-
-
-                        </div>
 
 
 
 
 
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
 
-            </section>
-            <div class="form-group">
-                <div class=" col-sm-6 col-sm-offset-7">
-                    <button type="submit" class="btn btn-primary" style="width: 100px;" data-original-title="" title="" >SUBMIT</button>
+                </section>
+                <div class="form-group">
+                    <div class=" col-sm-6 col-sm-offset-7">
+                        <button type="submit" class="btn btn-primary" style="width: 100px;" data-original-title="" title="" >SUBMIT</button>
+                    </div>
                 </div>
-            </div>
 
         </form:form>
-        <script>
-            function editViewClick(id) {
-                window.location = 'vacancy.htm?act=viewVacancy&id=' + id;
-            }
-        </script>
+
         <!-- Javascript -->
         <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
         <script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>
@@ -394,6 +391,19 @@
         <![endif]-->
 
     </body>
+    <script type="text/javascript">
+            $('.form_datetime').datetimepicker({
+                //language:  'fr',
+                weekStart: 1,
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                minView: 2,
+                forceParse: 0
+            });
 
+    </script>
+    <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
 </html>
 

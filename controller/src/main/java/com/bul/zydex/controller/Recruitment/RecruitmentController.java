@@ -121,6 +121,11 @@ public class RecruitmentController extends RecruitmentAbstract {
         Date cDate = new Date();
 
         departmentList(request);
+        designationList(request);
+        Map<Integer, String> locationMap = readLocations();
+        Map<Integer, String> jobtype1 = jobtypeList();
+        mv.addObject("locationMap", locationMap);
+        mv.addObject("jobtype1", jobtype1);
 
         recruitmentValidator.validate(recruitmentMaster, errors);
         if (errors.hasErrors()) {
@@ -290,8 +295,6 @@ public class RecruitmentController extends RecruitmentAbstract {
 
             String designationName = designationMaster.getDesignationName();
 
-        
-
             mv.getModelMap().put("mprMaster", mprMaster);
             mv.getModelMap().put("departmentMaster", departmentMaster);
             mv.getModelMap().put("locationMaster", locationMaster);
@@ -427,10 +430,10 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         ModelAndView mv = new ModelAndView();
         MprMaster mprMaster = new MprMaster();
-        MprMaster mprMaster1 = mprMasterService.readById(mprMaster.getId());
         BindException errors = new BindException(mprMaster, "mprMaster");
         bind(request, mprMaster);
         departmentList(request);
+        MprMaster mprMaster1 = mprMasterService.readById(mprMaster.getId());
 
         mprMaster.setStatus(0);
 
@@ -481,7 +484,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         RecruitmentMaster recruitmentMaster = new RecruitmentMaster();
-
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         BindException errors = new BindException(recruitmentMaster, "recruitmentMaster");
         bind(request, recruitmentMaster);
 //        payrollProfessionalTaxValidator.validate(payrollProfessionalTax, errors);
@@ -494,6 +497,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             Date cDate = new Date();
             recruitmentMaster.setUpdatedDate(sdf.format(cDate));
+            recruitmentMaster.setUpdatedBy(employeeMaster.getId());
             recruitmentService.update(recruitmentMaster);
 //            log(request, ActionType.UPDATE.toString(),
 //                    "The Professional Tax is Updated -."

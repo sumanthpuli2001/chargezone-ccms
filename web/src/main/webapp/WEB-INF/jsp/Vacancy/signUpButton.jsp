@@ -83,7 +83,7 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
                             <div class="form-group">
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                 </div>
                                 <div class="col-sm-1" style="text-align: center">
                                     <label>Email Id:<span style="color: red;font-size: 12px;">*</span></label>
@@ -98,7 +98,7 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
                             <div class="form-group">
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                 </div>
                                 <div class="col-sm-1" style="text-align: center" >
                                     <label>Password :<span style="color: red;font-size: 12px;">*</span></label>
@@ -114,7 +114,7 @@
                 
 
                 <div class="form-group">
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                     </div>
                     <div class="col-sm-1" style="text-align: left" >
                         <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >SUBMIT</button>

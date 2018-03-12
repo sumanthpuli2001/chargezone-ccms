@@ -401,23 +401,26 @@ public class VacancyController extends VacancyAbstract {
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
                     "Error : This Form All Fields Are Require");
+            mv.addAllObjects(errors.getModel());
+            mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
             mv.setViewName("Vacancy/applyJobCandidateRegistration");
-        }
-
-        HttpSession session = request.getSession();
-        ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
-        candidateApplyJob.setApplayJobUserMaster(ajuMaster);
-        List<CandidateApplyJob> list = (List<CandidateApplyJob>) candidateJobApplyService.readProfileByCandidateUserID(ajuMaster.getId());
-        if (!list.isEmpty()) {
         } else {
-            candidateJobApplyService.create(candidateApplyJob);
-        }
 
-        VacancyMaster vacancyMaster = new VacancyMaster();
-        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
-        mv.getModelMap().put("list", vacancylist);
-        mv.getModelMap().put("vacancyMaster", vacancyMaster);
-        mv.setViewName("Vacancy/ShowVacancyList");
+            HttpSession session = request.getSession();
+            ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
+            candidateApplyJob.setApplayJobUserMaster(ajuMaster);
+            List<CandidateApplyJob> list = (List<CandidateApplyJob>) candidateJobApplyService.readProfileByCandidateUserID(ajuMaster.getId());
+            if (!list.isEmpty()) {
+            } else {
+                candidateJobApplyService.create(candidateApplyJob);
+            }
+
+            VacancyMaster vacancyMaster = new VacancyMaster();
+            List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+            mv.getModelMap().put("list", vacancylist);
+            mv.getModelMap().put("vacancyMaster", vacancyMaster);
+            mv.setViewName("Vacancy/ShowVacancyList");
+        }
         return mv;
     }
 

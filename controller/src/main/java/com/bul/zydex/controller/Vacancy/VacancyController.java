@@ -482,6 +482,8 @@ public class VacancyController extends VacancyAbstract {
             ApplayJobUserMaster ajum = new ApplayJobUserMaster();
             ajum.setUserName(userName);
             ajum.setPassword(PassString);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date cDate = new Date();
 
             ApplayJobUserMaster master = applayJobUserMasterSerivce.checkByUserNameandPass(ajum);
             if (null != master) {
@@ -495,14 +497,44 @@ public class VacancyController extends VacancyAbstract {
                 List<?> CandidateJobApplyList = new ArrayList<>();
                 if (!candidateProfile.isEmpty()) {
                     CandidateApplyJob caj = (CandidateApplyJob) candidateProfile.get(0);
+                    if ("" != request.getParameter("id")) {
+                        String id = request.getParameter("id");
+                        int VacId = Integer.parseInt(id);
+                        vacancyMaster = vacancyMasterService.readById(VacId);
+                        CandidateJobApplication application = candidateJobApplicationService.readByCandidateIdAndVacancyId(caj.getId(), vacancyMaster.getId());
+                        if (null == application) {
+
+                            CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
+                            candidateJobApplication.setVacancyMaster(vacancyMaster);
+                            candidateJobApplication.setApplayJobUserMaster(master);
+                            candidateJobApplication.setCreatedBy(master.getId());
+                            candidateJobApplication.setCreatedDate(sdf.format(cDate));
+                            candidateJobApplication.setStatus(0);
+
+                            candidateJobApplication.setCandidateApplyJob(caj);
+
+                            candidateJobApplicationService.create(candidateJobApplication);
+                        } else {
+                            request.setAttribute("successMessage",
+                                    "You are already apply for this job.");
+                            List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+                            mv.getModelMap().put("list", vacancylist);
+                            mv.getModelMap().put("vacancyMaster", vacancyMaster);
+                            mv.setViewName("Vacancy/ShowVacancyList");
+                            return mv;
+
+                        }
+                    }
+
                     CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(caj.getId());
+                    request.setAttribute("successMessage",
+                            "Information : Login Successfully.");
+                    request.setAttribute("list", CandidateJobApplyList);
+                    mv.getModelMap().put("applayJobUserMaster", master);
+                    mv.setViewName("Vacancy/MemberVacancyList");
+                    return mv;
                 }
-                request.setAttribute("successMessage",
-                        "Information : Login Successfully.");
-                request.setAttribute("list", CandidateJobApplyList);
-                mv.getModelMap().put("applayJobUserMaster", master);
-                mv.setViewName("Vacancy/MemberVacancyList");
-                return mv;
+
             } else {
                 request.setAttribute("failureMessage",
                         "Error : Invalid UserName Or Password.");
@@ -540,14 +572,16 @@ public class VacancyController extends VacancyAbstract {
         VacancyMaster vacancyMaster = new VacancyMaster();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
+        String id = request.getParameter("id");
+        vacancyMaster = vacancyMasterService.readById(Integer.parseInt(id));
+    
 
         if (null != ajuMaster) {
 
             List<CandidateApplyJob> candidateProfile = (List<CandidateApplyJob>) candidateJobApplyService.readProfileByCandidateUserID(ajuMaster.getId());
 
             if (!candidateProfile.isEmpty()) {
-                String id = request.getParameter("id");
-                vacancyMaster = vacancyMasterService.readById(Integer.parseInt(id));
+
                 CandidateApplyJob caj = (CandidateApplyJob) candidateProfile.get(0);
 
                 CandidateJobApplication application = candidateJobApplicationService.readByCandidateIdAndVacancyId(caj.getId(), vacancyMaster.getId());
@@ -566,7 +600,6 @@ public class VacancyController extends VacancyAbstract {
 
                     List<?> CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(caj.getId());
 
-                   
                     request.setAttribute("list", CandidateJobApplyList);
                     mv.getModelMap().put("ajuMaster", ajuMaster);
                     mv.setViewName("Vacancy/MemberVacancyList");
@@ -590,6 +623,7 @@ public class VacancyController extends VacancyAbstract {
             }
 
         } else {
+            request.setAttribute("vacid", id);
             mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
             mv.setViewName("Vacancy/ApplayLoginpage");
 

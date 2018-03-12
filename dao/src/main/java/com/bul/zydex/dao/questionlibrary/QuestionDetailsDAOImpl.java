@@ -32,7 +32,7 @@ public class QuestionDetailsDAOImpl<T> extends GenericsDAOImpl<T> implements Que
     }
 
     @Override
-    public boolean isExistQuestion(int QlId,int QpId) {
+    public boolean isExistQuestion(int QlId, int QpId) {
         boolean flag = false;
         String query = ""
                 + " From QuestionDetails a "
@@ -44,7 +44,7 @@ public class QuestionDetailsDAOImpl<T> extends GenericsDAOImpl<T> implements Que
         }
         return flag;
     }
-    
+
     @Override
     public void deleteByQPaperId(T object) {
         QuestionDetails questionDetails = (QuestionDetails) object;
@@ -58,6 +58,18 @@ public class QuestionDetailsDAOImpl<T> extends GenericsDAOImpl<T> implements Que
             flag = true;
         }
 
+    }
+
+    @Override
+    public List<?> getTotalMarksAndNoOfQueByQuePaperId(int qpId) {
+        String query = "";
+//                           
+        query += " select (select count(qd.id) from QuestionDetails qd where qd.questionPaper.id =" + qpId + ") as NumberOfQues, b.totalMarks "
+                + " From QuestionDetails a "
+                + " left join a.questionPaper b "
+                + " where b.id= " + qpId
+                + " group BY b.id ";
+        return getHibernateTemplate().find(query);
     }
 
 }

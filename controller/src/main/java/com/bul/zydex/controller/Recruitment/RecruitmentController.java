@@ -430,10 +430,10 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         ModelAndView mv = new ModelAndView();
         MprMaster mprMaster = new MprMaster();
-        MprMaster mprMaster1 = mprMasterService.readById(mprMaster.getId());
         BindException errors = new BindException(mprMaster, "mprMaster");
         bind(request, mprMaster);
         departmentList(request);
+        MprMaster mprMaster1 = mprMasterService.readById(mprMaster.getId());
 
         mprMaster.setStatus(0);
 

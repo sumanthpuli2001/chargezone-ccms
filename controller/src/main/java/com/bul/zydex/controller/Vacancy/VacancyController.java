@@ -223,8 +223,8 @@ public class VacancyController extends VacancyAbstract {
             request.setAttribute("designationName", designationName);
             request.setAttribute("experiance", experiance);
             request.setAttribute("budget", budget);
+            mv.addAllObjects(errors.getModel());
             mv.setViewName("Vacancy/CreateVacancy");
-            return mv;
 
         } else {
             vacancyMaster.setStatus(0);
@@ -566,7 +566,6 @@ public class VacancyController extends VacancyAbstract {
 
                     List<?> CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(caj.getId());
 
-                   
                     request.setAttribute("list", CandidateJobApplyList);
                     mv.getModelMap().put("ajuMaster", ajuMaster);
                     mv.setViewName("Vacancy/MemberVacancyList");
@@ -615,10 +614,10 @@ public class VacancyController extends VacancyAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
-        ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+//        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         String id = request.getParameter("id");
-
-        mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
+        CandidateApplyJob candidateApplyJob = candidateJobApplyService.readByapplayjobusermasterid(Integer.parseInt(id));
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Vacancy/MyProfile");
 
         return mv;
@@ -731,5 +730,30 @@ public class VacancyController extends VacancyAbstract {
         mv.setViewName("Vacancy/MemberVacancyList");
         return mv;
 
+    }
+
+    public ModelAndView candidateEditProfile(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        BindException errors = new BindException(candidateApplyJob, "candidateApplyJob");
+        bind(request, candidateApplyJob);
+
+        CandidateApplyJob caj = candidateJobApplyService.readById(candidateApplyJob.getId());
+
+        candidateApplyJob.setApplayJobUserMaster(caj.getApplayJobUserMaster());
+        candidateJobApplyService.update(candidateApplyJob);
+        request.setAttribute("successMessage",
+                "Information : The Information is Updated Successfully.");
+
+        List<?> CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(caj.getId());
+
+        request.setAttribute("list", CandidateJobApplyList);
+        mv.getModelMap().put("ajuMaster", ajuMaster);
+        mv.setViewName("Vacancy/MemberVacancyList");
+
+        return mv;
     }
 }

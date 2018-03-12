@@ -83,7 +83,7 @@
         <br/>
         <ul class="nav nav-tabs" style="text-align: center" >
             <li class="active " ><a href="">My Application</a></li>
-            <li ><a href="vacancy.htm?act=myProfileClick">My Profile</a></li>
+            <li ><a href="vacancy.htm?act=myProfileClick&id=${sessionScope.ApplayJobUserMaster.id}">My Profile</a></li>
             <li ><a href="vacancy.htm?act=clickassessment">Assessment</a></li>
         </ul>
         <br/>

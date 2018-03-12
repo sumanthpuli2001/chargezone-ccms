@@ -88,6 +88,9 @@
         </script>
     </head>
     <body>
+        <c:if test="${!empty successMessage}">
+            <div class="alert alert-info" role="alert">${successMessage}</div>
+        </c:if>
         <section class="content-header" style="margin-top: 5%;">
             <c:if test="${sessionScope.ApplayJobUserMaster ne null}">
                 <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 2%;" onclick="window.location = 'vacancy.htm?act=logout'"><i class="fa fa-sign-out"></i>&nbsp&nbsp&nbsp;Log Out</button>

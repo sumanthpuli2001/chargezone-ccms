@@ -545,27 +545,40 @@ public class VacancyController extends VacancyAbstract {
             if (!candidateProfile.isEmpty()) {
                 String id = request.getParameter("id");
                 vacancyMaster = vacancyMasterService.readById(Integer.parseInt(id));
-
-                CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
-                candidateJobApplication.setVacancyMaster(vacancyMaster);
-                candidateJobApplication.setApplayJobUserMaster(ajuMaster);
-                candidateJobApplication.setCreatedBy(ajuMaster.getId());
-                candidateJobApplication.setCreatedDate(sdf.format(cDate));
-                candidateJobApplication.setStatus(0);
-
                 CandidateApplyJob caj = (CandidateApplyJob) candidateProfile.get(0);
-                candidateJobApplication.setCandidateApplyJob(caj);
 
-                candidateJobApplicationService.create(candidateJobApplication);
+                CandidateJobApplication application = candidateJobApplicationService.readByCandidateIdAndVacancyId(caj.getId(), vacancyMaster.getId());
+                if (null == application) {
 
-                List<?> CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(caj.getId());
+                    CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
+                    candidateJobApplication.setVacancyMaster(vacancyMaster);
+                    candidateJobApplication.setApplayJobUserMaster(ajuMaster);
+                    candidateJobApplication.setCreatedBy(ajuMaster.getId());
+                    candidateJobApplication.setCreatedDate(sdf.format(cDate));
+                    candidateJobApplication.setStatus(0);
 
-                request.setAttribute("successMessage",
-                        "Information : Login Successfully.");
-                request.setAttribute("list", CandidateJobApplyList);
-                mv.getModelMap().put("ajuMaster", ajuMaster);
-                mv.setViewName("Vacancy/MemberVacancyList");
-                return mv;
+                    candidateJobApplication.setCandidateApplyJob(caj);
+
+                    candidateJobApplicationService.create(candidateJobApplication);
+
+                    List<?> CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(caj.getId());
+
+                   
+                    request.setAttribute("list", CandidateJobApplyList);
+                    mv.getModelMap().put("ajuMaster", ajuMaster);
+                    mv.setViewName("Vacancy/MemberVacancyList");
+                    return mv;
+
+                } else {
+                    request.setAttribute("successMessage",
+                            "You are already apply for this job.");
+                    List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+                    mv.getModelMap().put("list", vacancylist);
+                    mv.getModelMap().put("vacancyMaster", vacancyMaster);
+                    mv.setViewName("Vacancy/ShowVacancyList");
+                    return mv;
+
+                }
             } else {
                 CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
 
@@ -710,7 +723,6 @@ public class VacancyController extends VacancyAbstract {
             CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(caj.getId());
         }
 
-      
         request.setAttribute("list", CandidateJobApplyList);
         mv.getModelMap().put("ajuMaster", ajuMaster);
         mv.setViewName("Vacancy/MemberVacancyList");

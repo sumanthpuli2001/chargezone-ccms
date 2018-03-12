@@ -115,9 +115,10 @@
     </head>
     <body>
         <section class="content-header">
-            <h1>Candidate Registration Form:</h1>
-            <ol class="breadcrumb">
-            </ol>
+            <h1>Candidate Registration</h1>
+            <button type="button" class="btn btn-primary" style="float: left; width: 120px;" onclick="window.location = 'vacancy.htm?act=backButton'"><i class="fa fa-backward"></i>&nbsp&nbsp&nbsp;Back</button>
+            <button type="button" class="btn btn-primary" style="float: right; width: 120px;" onclick="window.location = 'vacancy.htm?act=showVacancyList'"><i class="fa fa-home"></i>&nbsp&nbsp&nbsp;Home</button>
+           
         </section>
           <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>

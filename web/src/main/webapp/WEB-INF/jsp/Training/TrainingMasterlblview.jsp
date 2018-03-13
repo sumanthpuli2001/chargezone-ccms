@@ -92,71 +92,84 @@
                                             <label>Description : </label>&nbsp; &nbsp;<textarea rows="4" style="width: 100%">${trainingMaster.trainingDescription}</textarea>
                                         </div>
                                     </div>
-                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class ="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:3%; margin-bottom: 3%;">
-                                            <table >
-                                            <thead>                                          
-                                                <tr>
-                                                    <th>No.</th>
-                                                    <th>Employee name</th>
-                                                </tr>
-                                            </thead>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Rahul</td>
-                                                </tr>
-                                                 <tr>
-                                                    <td>2</td>
-                                                    <td>Rohita</td>
-                                                </tr>
+                                    <div class="col-md-12 col-sm-12">
+                                        <h2 align="center">Trainee List</h2>
+                                        <div class="table table-bordered">
+                                            <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="center"  >
+                                                <c:choose>
+                                                    <c:when test="${empty list}">
+                                                        <tr>
+                                                            <td align="center">
+                                                                <c:out value="There is no record found."></c:out>
+                                                                </td>
+                                                            </tr>
+                                                    </c:when>
+                                                    <c:otherwise>
+
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width: 50px;">SR. No</th>
+                                                                <th style="width: 50px;">Employee Name</th>
+                                                                <th style="width: 50px;">Attendance</th>
+
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            <c:forEach var="list"  items="${list}" varStatus="status">
+                                                                <tr>
+                                                                    <td>${status.count}</td>
+                                                                    <td>${list[1]}</td>
+                                                                    <!--<td>-->
+                                                                        <c:if test="${shosts eq true}">
+                                                                            <c:if test="${list[2] eq 0}">
+                                                                                <td><b style="color: green">PR</b></td>
+                                                                        </c:if> 
+                                                                            <c:if test="${list[2] eq 1}">
+                                                                                <td><b style="color: red">AB</b></td>
+                                                                        </c:if> 
+                                                                        </c:if> 
+                                                                        <c:if test="${shosts eq false}">
+                                                                            <td></td>
+                                                                        </c:if> 
+
+                                                                    <!--</td>-->
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </tbody>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </table>
                                         </div>
-                                        <div class ="col-lg-6 col-md-6 col-sm-12 col-xs-12"style="margin-top:3%; margin-bottom: 3%;">
-                                            <table>
-                                                <tr>
-                                                    <th>No.</th>
-                                                    <th>Employee name</th>
-                                                    <th>Absent/Present</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Rahul</td>
-                                                    <td> Absent</td>
-                                                </tr>
-                                                 <tr>
-                                                    <td>2</td>
-                                                    <td>Rohita</td>
-                                                    <td>Present</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
+                                        <input type="button" class="btn btn-primary" value="Back" onclick="window.history.back();" />
+
+                                    </div><!-- /.col -->
 
                                 </div>
                             </div><!-- /.tab-content -->
                         </div>
                     </div>
-                                        </div><!-- nav-tabs-custom -->
-                                            </section>
-                    </div><!-- /.col -->
-                
-        
-                                     
-                        
-        </form:form><!-- /.content -->
-    </div><!-- /.content-wrapper -->
-    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+                </div><!-- nav-tabs-custom -->
+            </section>
+        </div><!-- /.col -->
+
+
+
+
+    </form:form><!-- /.content -->
+</div><!-- /.content-wrapper -->
+<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>
 <style>
     table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-td, th {
-    border: 1px solid ;
-    text-align: left;
-    padding: 8px;
-}
-    </style>
+    td, th {
+        border: 1px solid ;
+        text-align: left;
+        padding: 8px;
+    }
+</style>

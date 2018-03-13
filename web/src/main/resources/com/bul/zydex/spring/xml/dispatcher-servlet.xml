@@ -205,8 +205,14 @@
                 <prop key="homeController.htm">homeController1</prop>
                 <prop key="thoughtMaster.htm">thoughtMasterController1</prop>
                 <prop key="corporateVideo.htm">corporateVideoController1</prop>
+                <prop key="onlineAssessment.htm">onlineAssessmentController1</prop>
                 <prop key="trainingType.htm">trainingTypeController1</prop>
+                <prop key="trainer.htm">trainerController1</prop>
+                <prop key="trainingAttendance.htm">trainingAttendanceController1</prop>
+                <prop key="trainingIdentificationController.htm">trainingIdentificationController1</prop>
+                <prop key="classifiedBox.htm">classifiedBoxController1</prop>
                 <prop key="trainingMaster.htm">trainingMasterController1</prop>
+                <prop key="trainerLogin.htm">trainerLogInController1</prop>
                 
            
             </props>

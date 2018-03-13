@@ -33,4 +33,14 @@ public class ApplayJobUserMasterServiceImpl<T> extends GenericsServiceImpl<T> im
         return applayJobUserMasterDAO.isExist(object);
     }
 
+    @Override
+    public boolean profileFilling(int userId) {
+        return applayJobUserMasterDAO.profileFilling(userId);
+    }
+
+    @Override
+    public ApplayJobUserMaster checkByUserNameandPass(T object) {
+        return applayJobUserMasterDAO.checkByUserNameandPass(object);
+    }
+
 }

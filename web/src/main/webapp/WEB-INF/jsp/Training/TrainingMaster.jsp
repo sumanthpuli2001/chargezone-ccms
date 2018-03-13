@@ -64,11 +64,11 @@
                                                                     <th>Sr.No.</th>
                                                                     <th>Title</th>
                                                                     <th>Description</th>
-                                                                    <th>Requester</th>
+                                                                    <th>Training Requester</th>
                                                                     <th>venue</th>
                                                                     <th>cost</th>
                                                                     <th>Company Sponsor</th>
-                                                                    <th>training Source</th>
+                                                                    <th>Training Source</th>
                                                                     <th>status</th>
                                                                     <th>Action</th>
                                                                 </tr>

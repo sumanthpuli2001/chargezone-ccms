@@ -105,7 +105,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-5">
-                                            <label class="control-label">Owner<span style="color: red;font-size: 12px;">*</span></label>
+                                            <label class="control-label">Training Requester<span style="color: red;font-size: 12px;">*</span></label>
                                             <form:input path="trainingOwner" class="form-control"/>
                                         </div>
                                         <div class="col-sm-5">

@@ -80,7 +80,7 @@
     </head>
     <body style="width:95%;">
         <section class="content-header" style='margin-top:5%; margin-left:5%;'>
-            <button type="button" class="btn btn-primary" style="float: left; width: 170px;" onclick="ApplayClick(${vacancyMaster.id});"><i class="fa fa-check"></i>&nbsp&nbsp&nbsp;Applay For Job1</button>
+            <button type="button" class="btn btn-primary" style="float: left; width: 170px;" onclick="ApplayClick(${vacancyMaster.id});"><i class="fa fa-check"></i>&nbsp&nbsp&nbsp;Applay For Job</button>
             <button type="button" class="btn btn-primary" style="float: right; width: 120px;" onclick="window.location = 'vacancy.htm?act=backButton'"><i class="fa fa-backward"></i>&nbsp&nbsp&nbsp;Back</button>
             <h1>View Vacancy Detail</h1>
         </section>

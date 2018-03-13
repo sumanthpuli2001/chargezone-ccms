@@ -74,10 +74,9 @@
                                                                         <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
                                                                         </c:if>
                                                                     <!--<th>user id</th>-->
-                                                                    <th style="width: 50px;">Location</th>
-                                                                    <th style="width: 50px;">Department Name</th>
-                                                                    <th style="width: 50px;">Job Type</th>
+                                                                    <th style="width: 50px;">Number Of Position</th>
                                                                     <th style="width: 50px;">Budget</th>
+                                                                    <th style="width: 50px;">Experiance</th>
                                                                     <th style="width: 50px;">Action</th>
                                                                     <th style="width: 50px;">View</th>
                                                                         <%--</c:if>--%>
@@ -93,14 +92,23 @@
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
-                                                                <td>${list[3]}</td>
-                                                                <td>${list[4]}</td>
-                                                                <td>${list[5]}</td>
+                                                                <td>${list[1]}</td>
                                                                 <td>${list[2]}</td>
-                                                                <c:if test="${list[6] == 0}"><td><span class="badge">Pending</span></td></c:if>
-                                                                <c:if test="${list[6] == 1}"><td><span class="label label-success">Approved</span></td></c:if>
-                                                                <c:if test="${list[6] == 2}"><td><span class="label label-warning">Recycled</span></td></c:if>
-                                                                <c:if test="${list[6] == 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
+                                                                <td>${list[3]}</td>
+                                                                                     <td>
+                                                                    <c:if test="${list[4] eq 0}"><span class="badge">Pending</span></c:if>
+                                                                    <%--<c:if test="${list[5] == 1}"><span class="badge">Recycle</span></c:if>--%>
+                                                                    <%--<c:if test="${list[5] == 2}"><span class="badge">Recycle</span></c:if>--%>
+                                                                    <c:if test="${list[4] eq 3}"><span class="label label-danger">Reject</span></c:if>
+                                                                    <c:if test="${list[4] eq 4 && list[5] ne list[6]}"><span class="label label-success">Approved</span></c:if>
+                                                                    <c:if test="${list[4] eq 4 && list[5] eq list[6]}"><span class="badge">Pending</span></c:if>
+                                                                    <c:if test="${list[4]  eq 5}"><span class="label label-success">Final Approved</span></c:if>
+                                                                    <c:if test="${list[4] eq 2}"><span class="label label-warning">Recycled</span></c:if>
+                                                                    <%--<c:if test="${list[5] == 0}"><span class="badge">Rejected</span></c:if>--%>
+
+
+
+                                                                </td>
                                                                 
                                                                 <td>
                                                                     <div class="btn-group">

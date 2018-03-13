@@ -83,7 +83,7 @@
         <br/>
         <br/>
         <form:form class="form-horizontal" role="form" method="post" name='form1'
-                   commandName="applayJobUserMaster" onsubmit='return deleteCheck11();' action="vacancy.htm?act=applayForJob">
+                   commandName="applayJobUserMaster" onsubmit='return deleteCheck11();' action="vacancy.htm?act=loginCandidate">
             <form:hidden path="id"></form:hidden>
                 <!--<input type="hidden" name="lockCounter" value="0"/>-->
                 <section class="content">

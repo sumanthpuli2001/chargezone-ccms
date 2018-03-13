@@ -106,19 +106,19 @@
                                                 </div>
                                                  <div class="form-group">
                                                     <div class="col-sm-4" style="text-align: left">
-                                                    <c:if test="${recruitmentMaster.mppStatus == 1 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 0}">
+                                                    <%--<c:if test="${recruitmentMaster.mppStatus == 1 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 0}">--%>
                                                         <input type="submit" class="btn btn-danger" onclick="return reject();" id="btnType1" name="btnType" value="Reject" style="width: 100px" ></input>
-                                                    </c:if>
+                                                    <%--</c:if>--%>
                                                 </div>
                                                 <div class="col-sm-4" style="text-align: center">
-                                                    <c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 3 || recruitmentMaster.mppStatus == 1}">
+                                                    <%--<c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 3 || recruitmentMaster.mppStatus == 1}">--%>
                                                         <input type="submit" class="btn btn-warning" id="btnType2" name="btnType"  value="Recycle"  style="width: 100px"></input>
-                                                    </c:if>
+                                                    <%--</c:if>--%>
                                                 </div>
                                                 <div class="col-sm-4" style="text-align: right">
-                                                    <c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 3}">
+                                                    <%--<c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 3}">--%>
                                                         <input type="submit" class="btn btn-success" id="btnType2" name="btnType"  value="Approve" style="width: 100px"></input>
-                                                    </c:if>
+                                                    <%--</c:if>--%>
                                                 </div>
 
                                             </div>

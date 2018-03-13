@@ -35,8 +35,15 @@ public class RecruitmentServiceImpl<T> extends GenericsServiceImpl<T> implements
         return recruitmentDAO.readForBudgetDetail();
     }
     @Override
-    public List<?> searchMppApproval() {
-        return recruitmentDAO.searchMppApproval();
+    public List<?> searchMppApproval(int empId) {
+        return recruitmentDAO.searchMppApproval(empId);
     }
+
+    @Override
+    public List<?> readMppListByUserId(int empId) {
+        return recruitmentDAO.readMppListByUserId(empId);
+    }
+    
+    
 
 }

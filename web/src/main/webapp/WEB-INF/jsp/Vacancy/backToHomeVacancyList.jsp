@@ -90,11 +90,12 @@
     <body>
         <section class="content-header">
             <!--<button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign Up</button></br></br>-->
-            <h1>Vacancy List</h1>
+            <h1>Vacancy List
+            </h1>
             <ol class="breadcrumb">
-            </ol>
+            </ol>${ajuMaster.userName}
         </section>
-            <button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=Login'"><i class="fa fa-user"></i>&nbsp&nbsp&nbsp;My Profile</button>
+            <!--<button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=Login'"><i class="fa fa-user"></i>&nbsp&nbsp&nbsp;My Profile</button>-->
         <br/>
         <br/>
         <form:form action="vacancy.htm?act=clickDeleteVacancy" method="post" commandName="vacancyMaster"

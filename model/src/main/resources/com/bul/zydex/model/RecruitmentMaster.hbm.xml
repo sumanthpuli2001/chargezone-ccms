@@ -25,6 +25,9 @@
         <property name="budget" type="java.lang.Integer">
             <column name="budget" />
         </property>
+        <property name="createdBy" type="java.lang.Integer">
+            <column name="created_by" />
+        </property>
         <property name="createdDate" type="string">
             <column name="created_date" />
         </property>
@@ -37,11 +40,20 @@
          <property name="experiance" type="string">
             <column name="experience" />
         </property>
+         <property name="updatedBy" type="java.lang.Integer">
+            <column name="updated_by" />
+        </property>
         <property name="updatedDate" type="string">
             <column name="updated_date" />
         </property>
         <property name="approvalComment" type="string">
             <column name="approval_comment" />
+        </property>
+          <property name="currentLevel" type="java.lang.Integer">
+            <column name="current_level" />
+        </property>
+          <property name="totalLevel" type="java.lang.Integer">
+            <column name="total_level" />
         </property>
     </class>
 </hibernate-mapping>

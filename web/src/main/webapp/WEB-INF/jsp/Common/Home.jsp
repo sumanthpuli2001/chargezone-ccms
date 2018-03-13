@@ -443,13 +443,13 @@
                                     <div class="box box-primary">
                                         <div class="box-header">
                                             <h3 class="box-title">Todays Birthday</h3>
-<!--                                            <div class="box-tools pull-right">
-                                                <button class="btn btn-box-tool" data-widget="collapse"></button>
-                                            </div>-->
+                                            <!--                                            <div class="box-tools pull-right">
+                                                                                            <button class="btn btn-box-tool" data-widget="collapse"></button>
+                                                                                        </div>-->
                                             <div class="box-body">
-                                                
-                                                
-                                                 <marquee>
+
+
+                                                <marquee>
                                                     <div class="node-cell">
                                                         <div class="node ui-draggable ui-droppable"> 
                                                             <div >
@@ -490,26 +490,26 @@
                                                 </marquee>
 
 
-<!--                                                <marquee>
-                                                    <div class="node-cell">
-                                                        <div class="node ui-draggable ui-droppable">
+                                                <!--                                                <marquee>
+                                                                                                    <div class="node-cell">
+                                                                                                        <div class="node ui-draggable ui-droppable">
+                                                
+                                                <%--<c:forEach var="" items="">--%>
 
-                                                            <%--<c:forEach var="" items="">--%>
+                                                    <img src="" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                    <br>
 
-                                                                <img src="" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
-                                                                <br>
-
-                                                                <span style="font-size: 105%;color: black"></span>
-
-
-                                                            <%--</c:forEach>--%>
-                                                        </div>
-                                                    </div>
+                                                    <span style="font-size: 105%;color: black"></span>
 
 
+                                                <%--</c:forEach>--%>
+                                            </div>
+                                        </div>
 
 
-                                                </marquee>-->
+
+
+                                    </marquee>-->
 
 
                                             </div>
@@ -522,9 +522,9 @@
                                     <div class="box box-primary">
                                         <div class="box-header">
                                             <h3 class="box-title">New Joinee</h3>
-<!--                                            <div class="box-tools pull-right">
-                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            </div>-->
+                                            <!--                                            <div class="box-tools pull-right">
+                                                                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                                                        </div>-->
                                             <div class="box-body">
 
 
@@ -595,7 +595,7 @@
                                     </a>
                                 </div>
                                 <div  class="col-xs-4 col-sm-4 col-md-3">
-                                    <a class="label label-info" style="font-size: 20px" >
+                                    <a class="label label-info" style="font-size: 20px"  href="classifiedBox.htm?act=searchSubmit" >
                                         <i class="fa fa-weixin"></i>
                                         <strong>Classified</strong>
                                     </a>
@@ -695,6 +695,9 @@
         </div>
     </div>
 </div>
+
+
+
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -786,6 +789,8 @@
 
     </div>
 </div>
+
+
 
 
 </html>

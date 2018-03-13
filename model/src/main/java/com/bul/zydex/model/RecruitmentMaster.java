@@ -20,29 +20,37 @@ public class RecruitmentMaster implements java.io.Serializable {
     private JobtypeMaster jobtypeMaster;
     private Integer numberOfPosition;
     private Integer budget;
+    private Integer createdBy;
     private String createdDate;
     private Integer mppStatus;
-    private DesignationMaster designationMaster; 
-    private String  experiance;
+    private DesignationMaster designationMaster;
+    private String experiance;
+    private Integer updatedBy;
     private String updatedDate;
     private String approvalComment;
+    private Integer currentLevel;
+    private Integer totalLevel;
 
     public RecruitmentMaster() {
     }
 
-    public RecruitmentMaster(int id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobTypeMaster, Integer numberOfPosition, Integer budget, String createdDate, Integer mppStatus,DesignationMaster designationMaster, String experiance,String updatedDate, String approvalComment) {
+    public RecruitmentMaster(int id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobTypeMaster, Integer numberOfPosition, Integer budget, Integer createdBy, String createdDate, Integer mppStatus, DesignationMaster designationMaster, String experiance, Integer updatedBy, String updatedDate, String approvalComment, Integer currentLevel, Integer totalLevel) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
         this.jobtypeMaster = jobTypeMaster;
         this.numberOfPosition = numberOfPosition;
         this.budget = budget;
+        this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.mppStatus = mppStatus;
         this.designationMaster = designationMaster;
         this.experiance = experiance;
+        this.updatedBy = updatedBy;
         this.updatedDate = updatedDate;
         this.approvalComment = approvalComment;
+        this.currentLevel = currentLevel;
+        this.totalLevel = totalLevel;
     }
 
     public Integer getId() {
@@ -92,6 +100,7 @@ public class RecruitmentMaster implements java.io.Serializable {
     public void setBudget(Integer budget) {
         this.budget = budget;
     }
+
     public Integer getMppStatus() {
         return mppStatus;
     }
@@ -139,9 +148,39 @@ public class RecruitmentMaster implements java.io.Serializable {
     public void setApprovalComment(String approvalComment) {
         this.approvalComment = approvalComment;
     }
-    
-    
 
- 
+    public Integer getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Integer createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Integer getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(Integer updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public Integer getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public void setCurrentLevel(Integer currentLevel) {
+        this.currentLevel = currentLevel;
+    }
+
+    public Integer getTotalLevel() {
+        return totalLevel;
+    }
+
+    public void setTotalLevel(Integer totalLevel) {
+        this.totalLevel = totalLevel;
+    }
+    
+    
 
 }

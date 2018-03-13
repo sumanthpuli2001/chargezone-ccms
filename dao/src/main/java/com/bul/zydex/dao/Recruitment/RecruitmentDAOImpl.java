@@ -50,9 +50,9 @@ public class RecruitmentDAOImpl<T> extends GenericsDAOImpl<T> implements Recruit
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
-    
-        @Override
-    public List<?> searchMppApproval() {
+
+    @Override
+    public List<?> searchMppApproval(int empId) {
         String query = "";
         query += " "
                 + " SELECT a.id, a.numberOfPosition, a.budget, b.location, c.departmentName, d.jobTypeName, a.mppStatus"
@@ -60,7 +60,24 @@ public class RecruitmentDAOImpl<T> extends GenericsDAOImpl<T> implements Recruit
                 + " LEFT JOIN a.locationMaster b "
                 + " LEFT JOIN a.departmentMaster c "
                 + " LEFT JOIN a.jobtypeMaster d "
-                + " WHERE a.mppStatus = 1 "
+                + " WHERE a.mppStatus = 5 "
+                + " And a.createdBy = " + empId
+                + " order by a.id desc";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public List<?> readMppListByUserId(int empId) {
+        String query = "";
+        query += " "
+                + " SELECT a.id, a.numberOfPosition, a.budget, b.location, c.departmentName, d.jobTypeName, a.mppStatus"
+                + " FROM RecruitmentMaster a "
+                + " LEFT JOIN a.locationMaster b "
+                + " LEFT JOIN a.departmentMaster c "
+                + " LEFT JOIN a.jobtypeMaster d "
+                + " Where a.createdBy =" + empId
                 + " order by a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);

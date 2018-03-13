@@ -114,6 +114,7 @@
                                     <hr style="clear:both;border: 0px;"/>
                                     <div class="col-sm-12"><a href="out.html?act=forgotPassword" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg1"></spring:message></a></div>
                                     <div class="col-sm-12"><a href="vacancy.htm?act=showVacancyList" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg2"></spring:message></a></div>
+                                    <div class="col-sm-12"><a href="trainerLogin.htm?act=Login" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg3"></spring:message></a></div>
                                     </div>
                                 </div>
                         </form:form>

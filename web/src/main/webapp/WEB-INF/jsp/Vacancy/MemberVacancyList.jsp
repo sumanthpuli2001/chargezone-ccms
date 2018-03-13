@@ -47,6 +47,13 @@
             }
 
         </style>
+         <script>
+            function viewClick(id) {
+
+//            window.location = 'payrollSalaryType.htm?act=viewClick&id=' + id;
+                window.location = 'vacancy.htm?act=clickassessment&id=' + id;
+            }
+        </script>
         <script>
             var flag3 = true;
             function saveSubmit11() {
@@ -84,7 +91,7 @@
         <ul class="nav nav-tabs" style="text-align: center" >
             <li class="active " ><a href="">My Application</a></li>
             <li ><a href="vacancy.htm?act=myProfileClick&id=${sessionScope.ApplayJobUserMaster.id}">My Profile</a></li>
-            <li ><a href="vacancy.htm?act=clickassessment">Assessment</a></li>
+              <li ><a onclick="viewClick(${applayJobUserMaster.id});">Assessment</a></li>
         </ul>
         <br/>
         <br/>

@@ -50,44 +50,9 @@ public class OnlineAssessment implements java.io.Serializable {
        this.updatedBy = updatedBy;
        this.udatedDate = udatedDate;
     }
-   
-    public Integer getId() {
-        return this.id;
-    }
-    
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public CandidateJobApplication getCandidateJobApplication() {
-        return candidateJobApplication;
-    }
-
-    public void setCandidateJobApplication(CandidateJobApplication candidateJobApplication) {
-        this.candidateJobApplication = candidateJobApplication;
-    }
-   
-    public QuestionPaper getQuestionPaper() {
-        return this.questionPaper;
-    }
-    
-    public void setQuestionPaper(QuestionPaper questionPaper) {
-        this.questionPaper = questionPaper;
-        this.passingPercentage = passingPercentage;
-        this.validityFrom = validityFrom;
-        this.validityTo = validityTo;
-        this.duration = duration;
-        this.noOfAttampt = noOfAttampt;
-        this.noOfQue = noOfQue;
-        this.totalMarks = totalMarks;
-        this.createdBy = createdBy;
-        this.createdDate = createdDate;
-        this.updatedBy = updatedBy;
-        this.udatedDate = udatedDate;
-    }
 
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Integer id) {
@@ -103,13 +68,14 @@ public class OnlineAssessment implements java.io.Serializable {
     }
 
     public QuestionPaper getQuestionPaper() {
-        return this.questionPaper;
+        return questionPaper;
     }
 
     public void setQuestionPaper(QuestionPaper questionPaper) {
         this.questionPaper = questionPaper;
     }
-
+   
+    
     public Double getPassingPercentage() {
         return this.passingPercentage;
     }

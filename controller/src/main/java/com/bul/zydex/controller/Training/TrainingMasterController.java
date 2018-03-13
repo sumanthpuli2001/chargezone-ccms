@@ -204,7 +204,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         } else {
 
             mv.getModelMap().put("trainingMaster", trainingMaster);
-            trainingMasterService.create(trainingMaster);
+            trainingMasterService.update(trainingMaster);
 
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");

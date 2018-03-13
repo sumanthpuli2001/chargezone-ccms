@@ -69,7 +69,12 @@
             <ol class="breadcrumb">
             </ol>
         </section>
-
+<c:if test="${!empty successMessage}">
+            <div class="alert alert-info" role="alert">${successMessage}</div>
+        </c:if>
+        <c:if test="${!empty failureMessage}">
+            <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
+        </c:if>
         <br/>
         <br/>
         <form:form role="form" cssClass="form-signin" action="trainerLogin.htm?act=loginSubmit" method="post" commandName="trainerMaster" name='form1' onsubmit='return saveSubmit11();'>
@@ -106,6 +111,8 @@
                             <div class="col-sm-10">
                                 <div class=" col-sm-offset-0">
                                     <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >SUBMIT</button>
+                                    <!--<button type="button" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" onclick="window.location = 'trainerLogin.htm?act=backToHome'">BACK</button>-->
+                                    <button type="button" class="btn btn-primary" onclick="location.href='logIn.html?act=loginClick';"  style="text-align: center; width: 100px;" >BACK</button>
                                 </div>
                             </div>
                         </div>

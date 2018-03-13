@@ -58,7 +58,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
 //            train.setPassword(password);
 //            Trainer master = (Trainer) trainerService.read();
 
-            if (null != trainerMaster) {
+            if (trainerMaster.getId()!=null) {
                 HttpSession session1 = request.getSession(false);
                 session1.setAttribute("trainerMaster", trainerMaster);
 
@@ -78,16 +78,39 @@ public class TrainerLogInController extends TrainerLogInAbstract {
                 mv.setViewName("Trainer/TrainerList");
                 return mv;
             } else {
-                request.setAttribute("failureMessage",
+                request.setAttribute("successMessage",
                         "Error : Invalid UserName Or Password.");
                 mv = Login(request, response);
             }
         } else {
-            request.setAttribute("failureMessage",
+            request.setAttribute("successMessage",
                     "Error : Invalid UserName Or Password.");
             mv = Login(request, response);
         }
 //        mv.getModelMap().put("trainerMaster", trainerMaster);
         return mv;
     }
+   public ModelAndView logout(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession(false);
+        Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
+        session.invalidate();
+        Trainer vacancyMaster = new Trainer();
+        mv.setViewName("Trainer/TrainerLogin");
+        return mv;
+
+    }
+//   public ModelAndView backToHome(HttpServletRequest request,
+//            HttpServletResponse response) throws Exception {
+//
+//        ModelAndView mv = new ModelAndView();
+//        HttpSession session = request.getSession(false);
+////        Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
+////        session.invalidate();
+//        mv.setViewName("User/Login");
+//        return mv;
+//
+//    }
 }

@@ -14,4 +14,5 @@ import java.util.List;
  */
 public interface TrainingSubTypeService<T> extends GenericsService<T> {
     public List<?> readtrainingSubTypeDetail();
+    public List<?> readtrainingSubTypeByTrainingTypeId(int trainingTypeId);
 }

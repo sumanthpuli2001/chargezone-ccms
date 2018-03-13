@@ -37,4 +37,9 @@ public class QuestionAnsServiceImpl<T> extends GenericsServiceImpl<T>
        questionAnsDAO.deleteByQlId(object);
     }
 
+    @Override
+    public List<?> takeTestOnlineAssementCandidateAnswer(int questionLibraryID) {
+      return questionAnsDAO.takeTestOnlineAssementCandidateAnswer(questionLibraryID);
+    }
+
 }

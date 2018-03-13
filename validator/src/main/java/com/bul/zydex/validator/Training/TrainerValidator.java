@@ -29,7 +29,7 @@ public class TrainerValidator implements Validator{
                 "field.error1","None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName",
                 "field.error1","None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "passwrod",
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password",
                 "field.error1","None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailId",
                 "field.error1","None");

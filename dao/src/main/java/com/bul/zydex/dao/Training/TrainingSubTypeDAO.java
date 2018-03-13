@@ -14,5 +14,6 @@ import java.util.List;
  */
 public interface TrainingSubTypeDAO<T> extends GenericsDAO<T> {
     public List<?> readtrainingSubTypeDetail();
+    public List<?> readtrainingSubTypeByTrainingTypeId(int trainingTypeId);
     
 }

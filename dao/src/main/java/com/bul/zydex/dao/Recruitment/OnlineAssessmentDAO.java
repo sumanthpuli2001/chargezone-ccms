@@ -6,11 +6,13 @@
 package com.bul.zydex.dao.Recruitment;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.List;
 
 /**
  *
  * @author Admin
  */
-public interface OnlineAssessmentDAO<T> extends GenericsDAO<T>{
-    
+public interface OnlineAssessmentDAO<T> extends GenericsDAO<T> {
+
+    public List<?> readOnlineAssementCandidateList(int candidateJobApplicationID);
 }

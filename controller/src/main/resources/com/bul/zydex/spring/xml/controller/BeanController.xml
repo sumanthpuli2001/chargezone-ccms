@@ -1068,6 +1068,8 @@
         <property name="trainerService" ref="trainerService1" />
         <property name="trainingMasterService" ref="trainingMasterService1" />
         <property name="trainingSubMasterService" ref="trainingSubMasterService1" />
+        <property name="trainingAttendanceService" ref="trainingAttendanceService1"></property>
+        <property name="trainingIdentificationService" ref="trainingIdentificationService1"></property>
     </bean>
     <bean id="trainerController1" class="com.bul.zydex.controller.Training.TrainerController" parent="controllerConfig" >
         <property name="trainerService" ref="trainerService1"></property>

@@ -91,7 +91,7 @@
         <ul class="nav nav-tabs" style="text-align: center" >
             <li class="active " ><a href="">My Application</a></li>
             <li ><a href="vacancy.htm?act=myProfileClick&id=${sessionScope.ApplayJobUserMaster.id}">My Profile</a></li>
-              <li ><a onclick="viewClick(${applayJobUserMaster.id});">Assessment</a></li>
+              <li ><a onclick="viewClick(${sessionScope.ApplayJobUserMaster.id});">Assessment</a></li>
         </ul>
         <br/>
         <br/>

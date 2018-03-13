@@ -10,7 +10,7 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="candidateApplyJob" class="com.bul.zydex.model.CandidateApplyJob" fetch="select">
+        <many-to-one name="candidateJobApplication" class="com.bul.zydex.model.CandidateJobApplication" fetch="select">
             <column name="candidate_id" not-null="true" />
         </many-to-one>
         <many-to-one name="questionPaper" class="com.bul.zydex.model.QuestionPaper" fetch="select">

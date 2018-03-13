@@ -6,11 +6,12 @@
 package com.bul.zydex.service.Training;
 
 import com.bul.zydex.service.GenericsService;
+import java.util.List;
 
 /**
  *
  * @author Aman
  */
 public interface TrainingAttendanceService<T> extends GenericsService<T>{
-    
+  public List<?> gettrainingattendance(String eventDate,int id);  
 }

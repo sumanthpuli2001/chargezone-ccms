@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.Recruitment;
 
 import com.bul.zydex.dao.GenericsDAO;
+import com.bul.zydex.model.CandidateJobApplication;
 import java.util.List;
 
 /**
@@ -15,7 +16,9 @@ import java.util.List;
 public interface CandidateJobApplicationDAO<T> extends GenericsDAO<T> {
 
     public List<?> readByCandidateId(int candidateId);
-
-    public List<?> readOnlineAssementCandidate(int userMaster);
-
+    
+    public List<?> readCandidateApplyForJob();
+    
+    public CandidateJobApplication readByCandidateIdAndVacancyId(int candId,int vacId);
+    
 }

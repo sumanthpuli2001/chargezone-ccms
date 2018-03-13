@@ -21,12 +21,12 @@
                 <li class="active">Create New Vacancy</li>
             </ol>
         </section>
-        <c:if test="${!empty successMessage}">
-            <div class="alert alert-info" role="alert">${successMessage}</div>
-        </c:if>
-        <c:if test="${!empty failureMessage}">
-            <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
-        </c:if>
+        <%--<c:if test="${!empty successMessage}">--%>
+            <!--<div class="alert alert-info" role="alert">${successMessage}</div>-->
+        <%--</c:if>--%>
+        <%--<c:if test="${!empty failureMessage}">--%>
+            <!--<div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>-->
+        <%--</c:if>--%>
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
@@ -120,7 +120,7 @@
                                                 <div class="col-sm-6">
                                                     <label>From Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" >
-                                                        <form:input path="fromDate" class="form-control" onchange="dateDifference(this.value);" placeholder="From Date" readonly="true"></form:input>
+                                                        <form:input path="fromDate" class="form-control" onchange="dateDifference(this.value);" placeholder="From Date" readonly="true" ></form:input>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                         </div>
                                                     <form:errors path="fromDate" cssClass="errorDiv"></form:errors>

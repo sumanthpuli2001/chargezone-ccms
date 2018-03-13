@@ -6,6 +6,7 @@
 package com.bul.zydex.service.Recruitment;
 
 import com.bul.zydex.dao.Recruitment.CandidateJobApplicationDAO;
+import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.service.GenericsServiceImpl;
 import java.util.List;
 
@@ -32,8 +33,13 @@ public class CandidateJobApplicationServiceImpl<T> extends GenericsServiceImpl<T
     }
 
     @Override
-    public List<?> readOnlineAssementCandidate(int userMaster) {
-       return candidateJobApplicationDAO.readOnlineAssementCandidate(userMaster);
+    public List<?> readCandidateApplyForJob() {
+        return candidateJobApplicationDAO.readCandidateApplyForJob();
+    }
+
+    @Override
+    public CandidateJobApplication readByCandidateIdAndVacancyId(int candId, int vacId) {
+        return candidateJobApplicationDAO.readByCandidateIdAndVacancyId(candId, vacId);
     }
 
 }

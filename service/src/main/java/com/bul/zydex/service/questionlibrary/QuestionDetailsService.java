@@ -20,5 +20,5 @@ public interface QuestionDetailsService<T> extends GenericsService<T> {
 
     public void deleteByQPaperId(T object);
 
-    public List<?> takeTestOnlineAssementCandidate(int questionpaperID);
+    public List<?> getTotalMarksAndNoOfQueByQuePaperId(int qpId);
 }

@@ -21,12 +21,12 @@
                 <li class="active">Budget Create</li>
             </ol>
         </section>
-        <c:if test="${!empty successMessage}">
-            <div class="alert alert-info" role="alert">${successMessage}</div>
-        </c:if>
-        <c:if test="${!empty failureMessage}">
-            <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
-        </c:if>
+        <%--<c:if test="${!empty successMessage}">--%>
+            <!--<div class="alert alert-info" role="alert">${successMessage}</div>-->
+        <%--</c:if>--%>
+        <%--<c:if test="${!empty failureMessage}">--%>
+            <!--<div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>-->
+        <%--</c:if>--%>
         <section class="content">
             <div class="row">
                 <div class="col-md-12">

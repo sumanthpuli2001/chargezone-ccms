@@ -61,15 +61,14 @@ public class QuestionDetailsDAOImpl<T> extends GenericsDAOImpl<T> implements Que
     }
 
     @Override
-    public List<?> takeTestOnlineAssementCandidate(int questionpaperID) {
+    public List<?> getTotalMarksAndNoOfQueByQuePaperId(int qpId) {
         String query = "";
-        String condition = "";
-        query += "Select a.id,b.id,c.id "
+//                           
+        query += " select (select count(qd.id) from QuestionDetails qd where qd.questionPaper.id =" + qpId + ") as NumberOfQues, b.totalMarks "
                 + " From QuestionDetails a "
-                + " LEFT JOIN a.questionPaper b"
-                + " LEFT JOIN a.questionLibrary c"
-                + " Where b.id=" + questionpaperID;
-
+                + " left join a.questionPaper b "
+                + " where b.id= " + qpId
+                + " group BY b.id ";
         return getHibernateTemplate().find(query);
     }
 

@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.Training;
 
 import com.bul.zydex.dao.GenericsDAO;
+import com.bul.zydex.model.Trainer;
 import java.util.List;
 
 /**
@@ -16,5 +17,10 @@ public interface TrainerDAO<T> extends GenericsDAO<T> {
 
     public List<?> readTrainerList();
 
-    
+    public List<?> read(T object);
+
+    public List<?> readByUserName(T object);
+
+    public List<?> readByUser(String username);
+
 }

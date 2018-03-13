@@ -64,8 +64,8 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Password :<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="passwrod" class="form-control"></form:input>
-                                                    <form:errors path="passwrod" cssClass="errorDiv"></form:errors>
+                                                    <form:input path="password" class="form-control"></form:input>
+                                                    <form:errors path="password" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Email Id :<span style="color: red;font-size: 12px;">*</span></label>

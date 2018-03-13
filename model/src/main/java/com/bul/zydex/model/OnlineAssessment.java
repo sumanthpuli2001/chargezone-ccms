@@ -9,7 +9,7 @@ package com.bul.zydex.model;
  *
  * @author Admin
  */
-public class OnlineAssessment  implements java.io.Serializable {
+public class OnlineAssessment implements java.io.Serializable {
 
 
      private Integer id;
@@ -73,86 +73,129 @@ public class OnlineAssessment  implements java.io.Serializable {
     
     public void setQuestionPaper(QuestionPaper questionPaper) {
         this.questionPaper = questionPaper;
-    }
-    public Double getPassingPercentage() {
-        return this.passingPercentage;
-    }
-    
-    public void setPassingPercentage(Double passingPercentage) {
         this.passingPercentage = passingPercentage;
-    }
-    public String getValidityFrom() {
-        return this.validityFrom;
-    }
-    
-    public void setValidityFrom(String validityFrom) {
         this.validityFrom = validityFrom;
-    }
-    public String getValidityTo() {
-        return this.validityTo;
-    }
-    
-    public void setValidityTo(String validityTo) {
         this.validityTo = validityTo;
-    }
-    public String getDuration() {
-        return this.duration;
-    }
-    
-    public void setDuration(String duration) {
         this.duration = duration;
-    }
-    public Integer getNoOfAttampt() {
-        return this.noOfAttampt;
-    }
-    
-    public void setNoOfAttampt(Integer noOfAttampt) {
         this.noOfAttampt = noOfAttampt;
-    }
-    public Integer getNoOfQue() {
-        return this.noOfQue;
-    }
-    
-    public void setNoOfQue(Integer noOfQue) {
         this.noOfQue = noOfQue;
-    }
-    public Double getTotalMarks() {
-        return this.totalMarks;
-    }
-    
-    public void setTotalMarks(Double totalMarks) {
         this.totalMarks = totalMarks;
-    }
-    public Integer getCreatedBy() {
-        return this.createdBy;
-    }
-    
-    public void setCreatedBy(Integer createdBy) {
         this.createdBy = createdBy;
-    }
-    public String getCreatedDate() {
-        return this.createdDate;
-    }
-    
-    public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
-    }
-    public Integer getUpdatedBy() {
-        return this.updatedBy;
-    }
-    
-    public void setUpdatedBy(Integer updatedBy) {
         this.updatedBy = updatedBy;
-    }
-    public String getUdatedDate() {
-        return this.udatedDate;
-    }
-    
-    public void setUdatedDate(String udatedDate) {
         this.udatedDate = udatedDate;
     }
 
+    public Integer getId() {
+        return this.id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
+    public CandidateJobApplication getCandidateJobApplication() {
+        return candidateJobApplication;
+    }
+
+    public void setCandidateJobApplication(CandidateJobApplication candidateJobApplication) {
+        this.candidateJobApplication = candidateJobApplication;
+    }
+
+    public QuestionPaper getQuestionPaper() {
+        return this.questionPaper;
+    }
+
+    public void setQuestionPaper(QuestionPaper questionPaper) {
+        this.questionPaper = questionPaper;
+    }
+
+    public Double getPassingPercentage() {
+        return this.passingPercentage;
+    }
+
+    public void setPassingPercentage(Double passingPercentage) {
+        this.passingPercentage = passingPercentage;
+    }
+
+    public String getValidityFrom() {
+        return this.validityFrom;
+    }
+
+    public void setValidityFrom(String validityFrom) {
+        this.validityFrom = validityFrom;
+    }
+
+    public String getValidityTo() {
+        return this.validityTo;
+    }
+
+    public void setValidityTo(String validityTo) {
+        this.validityTo = validityTo;
+    }
+
+    public String getDuration() {
+        return this.duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public Integer getNoOfAttampt() {
+        return this.noOfAttampt;
+    }
+
+    public void setNoOfAttampt(Integer noOfAttampt) {
+        this.noOfAttampt = noOfAttampt;
+    }
+
+    public Integer getNoOfQue() {
+        return this.noOfQue;
+    }
+
+    public void setNoOfQue(Integer noOfQue) {
+        this.noOfQue = noOfQue;
+    }
+
+    public Double getTotalMarks() {
+        return this.totalMarks;
+    }
+
+    public void setTotalMarks(Double totalMarks) {
+        this.totalMarks = totalMarks;
+    }
+
+    public Integer getCreatedBy() {
+        return this.createdBy;
+    }
+
+    public void setCreatedBy(Integer createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getCreatedDate() {
+        return this.createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Integer getUpdatedBy() {
+        return this.updatedBy;
+    }
+
+    public void setUpdatedBy(Integer updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public String getUdatedDate() {
+        return this.udatedDate;
+    }
+
+    public void setUdatedDate(String udatedDate) {
+        this.udatedDate = udatedDate;
+    }
 
 }

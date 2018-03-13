@@ -42,8 +42,8 @@ public class QuestionDetailsServiceImpl<T> extends GenericsServiceImpl<T> implem
     }
 
     @Override
-    public List<?> takeTestOnlineAssementCandidate(int questionpaperID) {
-      return questionDetailsDAO.takeTestOnlineAssementCandidate(questionpaperID);
+    public List<?> getTotalMarksAndNoOfQueByQuePaperId(int qpId) {
+        return questionDetailsDAO.getTotalMarksAndNoOfQueByQuePaperId(qpId);
     }
 
 }

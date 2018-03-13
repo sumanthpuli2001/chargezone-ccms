@@ -1,5 +1,5 @@
 package com.bul.zydex.model;
-// Generated Mar 3, 2018 11:05:49 AM by Hibernate Tools 4.3.1
+// Generated Mar 8, 2018 3:43:06 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -18,18 +18,20 @@ public class TrainingType  implements java.io.Serializable {
      private String createddate;
      private Integer updatedby;
      private String updateddate;
+     private Set trainingMasters = new HashSet(0);
      private Set trainingSubTypes = new HashSet(0);
 
     public TrainingType() {
     }
 
-    public TrainingType(String training, Integer status, Integer createdby, String createddate, Integer updatedby, String updateddate, Set trainingSubTypes) {
+    public TrainingType(String training, Integer status, Integer createdby, String createddate, Integer updatedby, String updateddate, Set trainingMasters, Set trainingSubTypes) {
        this.training = training;
        this.status = status;
        this.createdby = createdby;
        this.createddate = createddate;
        this.updatedby = updatedby;
        this.updateddate = updateddate;
+       this.trainingMasters = trainingMasters;
        this.trainingSubTypes = trainingSubTypes;
     }
    
@@ -81,6 +83,13 @@ public class TrainingType  implements java.io.Serializable {
     
     public void setUpdateddate(String updateddate) {
         this.updateddate = updateddate;
+    }
+    public Set getTrainingMasters() {
+        return this.trainingMasters;
+    }
+    
+    public void setTrainingMasters(Set trainingMasters) {
+        this.trainingMasters = trainingMasters;
     }
     public Set getTrainingSubTypes() {
         return this.trainingSubTypes;

@@ -1062,6 +1062,9 @@
     <bean id="onlineAssessmentController1" class="com.bul.zydex.controller.Recruitment.OnlineAssessmentController" parent="controllerConfig" >
         <property name="onlineAssessmentService" ref="onlineAssessmentService1" />
         <property name="questionPaperService" ref="questionPaperService1" />
+        <property name="questionDetailsService" ref="questionDetailsService1" />
+        <property name="candidateJobApplicationService" ref="candidateJobApplicationService1" />
+        <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
         
     </bean>
     <bean id="trainingTypeController1" class="com.bul.zydex.controller.Training.TrainingTypeController" parent="controllerConfig" >

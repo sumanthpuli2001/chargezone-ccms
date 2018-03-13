@@ -136,13 +136,13 @@
                                                     <span>${candidateApplyJob.highestEducationQualification}</span>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Experiance Date Joining Year:</label> &nbsp;&nbsp;&nbsp;
+                                                    <label>Experience Date Joining Year:</label> &nbsp;&nbsp;&nbsp;
                                                     <span>${candidateApplyJob.experianceDateJoiningYear}</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Experiance Date Joining Month:</label> &nbsp;&nbsp;&nbsp;
+                                                    <label>Experience Date Joining Month:</label> &nbsp;&nbsp;&nbsp;
                                                     <span>${candidateApplyJob.experianceDateJoiningMonth}</span>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -156,7 +156,7 @@
                                                     <%--<c:if test="${status != 1}">--%>
                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">&nbsp; F To F</button>
                                                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>
-                                                    <!--<button type="submit" class="btn btn-success" id="btnType1" name="btnType" value="AssessMent" style="width: 100px" >assessment</button>-->
+                                                    <button type="button" class="btn btn-primary" id="btnType1" onclick="goToAns()" name="btnType" value="AssessMent" style="width: 100px" >Ans</button>
                                                     <%--</c:if>--%>
                                                 </div>
 
@@ -198,11 +198,11 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-4">
                                                         <form:input path="id" id="id" class="form-control" type="hidden"></form:input>
+                                                        <input type="hidden" value="${candidateJobApplication.id}" name="candidateJobApplicationId"/>
+                                                        <label>Question Paper Name :<span style="color: red;font-size: 12px;"></span></label>
 
-                                                            <label>Question Paper Name :<span style="color: red;font-size: 12px;"></span></label>
-
-                                                            <select name="questions" class="form-control" id="questions" onchange="getTotalMarksAndNoOfQue(this);">
-                                                                <option value="">--Select--</option>
+                                                        <select name="questions" class="form-control" id="questions" onchange="getTotalMarksAndNoOfQue(this);">
+                                                            <option value="">--Select--</option>
                                                             <c:forEach items="${questions}" var="questions">
                                                                 <option value="${questions.key}">${questions.value}</option>
                                                             </c:forEach>
@@ -243,13 +243,15 @@
                                                         <div class="col-sm-4">
                                                         <%--<form:input path="id" id="id" class="form-control" type="hidden"></form:input>--%>
 
-                                                        <label>Number of Questions :<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>Number of Questions :<span style="color: red;font-size: 12px;" ></span></label>
+                                                        <label id="test" name="test"></label>
+                                                        <input type="hidden" id="NoOfQue" name="NoOfQue" >
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <%--<form:input path="id" id="id" class="form-control" type="hidden"></form:input>--%>
 
                                                         <label>Total Marks :<span style="color: red;font-size: 12px;"></span></label>
-
+                                                        <label id="test2" name="test2"></label>
+                                                        <input type="hidden" id="totalMarks" name="totalMarks" >
 
                                                     </div>
 
@@ -321,36 +323,53 @@
 <script>
 
     function getTotalMarksAndNoOfQue(id) {
-        alert(id.value);
-         
-          try {
-                
-                
-                    $.ajax({
-                        type: "POST",
-                        url: "onlineAssessment.htm?act=getTotalMarksAndNoOfQue&id=" + id,
-                        data: {},
-                        dataType: "text",
-                        success: function (responseTxt) {
-                            document.getElementById("woandHlerrorDiv").innerHTML = responseTxt;
-                            if (responseTxt != '') {
-                                document.getElementById("startDateTime").value = "";
-                               
-                                document.getElementById("endDateTime").value = "";
-                            }
-                        },
-                        error: function () {
 
-                        }
-                    });
-               
+        try {
+
+            $.ajax({
+                type: "POST",
+                url: "onlineAssessment.htm?act=getTotalMarksAndNoOfQue&id=" + id.value,
+                data: {},
+                dataType: "json",
+                success: function (responseTxt) {
+//                    document.getElementById("name").value = JSON.stringify(responseTxt.check);
+//                    document.getElementById("email").value = JSON.stringify(responseTxt.val2);
+//                    document.getElementById("name").value = responseTxt
+                    var v1 = JSON.stringify(responseTxt.check);
+                    var v2 = JSON.stringify(responseTxt.val2);
+                    $('#test2').html(responseTxt.check).modal('show');
+                    $('#test').html(responseTxt.val2).modal('show');
+
+                    document.getElementById("NoOfQue").value = responseTxt.val2;
+                    document.getElementById("totalMarks").value = responseTxt.check;
+//                    $('#NoOfQue').val(v1);
+//                    $('#totalMarks').val(v2);
+//                    alert(JSON.stringify(responseTxt.check));
+
+//                    document.getElementById("").innerHTML = responseTxt;
+                    if (responseTxt != '') {
+                        document.getElementById("").value = "";
 
 
-            } catch (e) {
+                    }
+                },
+                error: function () {
 
-            }
-        
+                }
+            });
+
+
+
+        } catch (e) {
+
+        }
+
 
     }
 
+</script>
+<script>
+    function goToAns(id) {
+        window.location = 'onlineAssessment.htm?act=goToAns&id=' + id;
+    }
 </script>

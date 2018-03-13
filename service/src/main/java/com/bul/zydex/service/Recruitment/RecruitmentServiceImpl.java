@@ -43,6 +43,11 @@ public class RecruitmentServiceImpl<T> extends GenericsServiceImpl<T> implements
     public List<?> readMppListByUserId(int empId) {
         return recruitmentDAO.readMppListByUserId(empId);
     }
+
+    @Override
+    public List<?> fetchAllMpp() {
+        return  recruitmentDAO.fetchAllMpp();
+    }
     
     
 

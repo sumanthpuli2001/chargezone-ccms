@@ -34,6 +34,37 @@ public class TrainerDAOImpl<T> extends GenericsDAOImpl<T> implements TrainerDAO<
          
     }
 
+    @Override
+    public List<?> read(T object) {
+        Trainer trainer = (Trainer) object;
+        String hqlString = "from Trainer tn where tn.userName='"
+                + trainer.getUserName()
+                + "'"
+                + " AND tn.password='"
+                + trainer.getPassword()
+                + "'";
+        return getHibernateTemplate().find(hqlString);
+    }
+
+    @Override
+    public List<?> readByUserName(T object) {
+        Trainer user = (Trainer) object;
+        String query = "";
+        query += " FROM Trainer a"
+                + " WHERE a.userName = '" + user.getUserName() + "'";
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public List<?> readByUser(String username) {
+        String query = "";
+        query += " FROM Trainer a"
+                + " WHERE a.userName = '" + username + "'";
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
    
 
 }

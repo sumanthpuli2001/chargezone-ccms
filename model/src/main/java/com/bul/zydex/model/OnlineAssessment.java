@@ -11,47 +11,48 @@ package com.bul.zydex.model;
  */
 public class OnlineAssessment implements java.io.Serializable {
 
-    private Integer id;
-    private CandidateJobApplication candidateJobApplication;
-    private QuestionPaper questionPaper;
-    private Double passingPercentage;
-    private String validityFrom;
-    private String validityTo;
-    private String duration;
-    private Integer noOfAttampt;
-    private Integer noOfQue;
-    private Double totalMarks;
-    private Integer createdBy;
-    private String createdDate;
-    private Integer updatedBy;
-    private String udatedDate;
+
+     private Integer id;
+     private CandidateJobApplication candidateJobApplication;
+     private QuestionPaper questionPaper;
+     private Double passingPercentage;
+     private String validityFrom;
+     private String validityTo;
+     private String duration;
+     private Integer noOfAttampt;
+     private Integer noOfQue;
+     private Double totalMarks;
+     private Integer createdBy;
+     private String createdDate;
+     private Integer updatedBy;
+     private String udatedDate;
 
     public OnlineAssessment() {
     }
 
+	
     public OnlineAssessment(CandidateJobApplication candidateJobApplication, QuestionPaper questionPaper) {
         this.candidateJobApplication = candidateJobApplication;
         this.questionPaper = questionPaper;
     }
-
-    public OnlineAssessment(CandidateJobApplication candidateJobApplication, QuestionPaper questionPaper, Double passingPercentage, String validityFrom, String validityTo, String duration, Integer noOfAttampt, Integer noOfQue, Double totalMarks, Integer createdBy, String createdDate, Integer updatedBy, String udatedDate) {
-        this.candidateJobApplication = candidateJobApplication;
-        this.questionPaper = questionPaper;
-        this.passingPercentage = passingPercentage;
-        this.validityFrom = validityFrom;
-        this.validityTo = validityTo;
-        this.duration = duration;
-        this.noOfAttampt = noOfAttampt;
-        this.noOfQue = noOfQue;
-        this.totalMarks = totalMarks;
-        this.createdBy = createdBy;
-        this.createdDate = createdDate;
-        this.updatedBy = updatedBy;
-        this.udatedDate = udatedDate;
+    public OnlineAssessment(CandidateApplyJob candidateApplyJob, QuestionPaper questionPaper, Double passingPercentage, String validityFrom, String validityTo, String duration, Integer noOfAttampt, Integer noOfQue, Double totalMarks, Integer createdBy, String createdDate, Integer updatedBy, String udatedDate) {
+       this.candidateJobApplication = candidateJobApplication;
+       this.questionPaper = questionPaper;
+       this.passingPercentage = passingPercentage;
+       this.validityFrom = validityFrom;
+       this.validityTo = validityTo;
+       this.duration = duration;
+       this.noOfAttampt = noOfAttampt;
+       this.noOfQue = noOfQue;
+       this.totalMarks = totalMarks;
+       this.createdBy = createdBy;
+       this.createdDate = createdDate;
+       this.updatedBy = updatedBy;
+       this.udatedDate = udatedDate;
     }
 
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Integer id) {
@@ -67,13 +68,14 @@ public class OnlineAssessment implements java.io.Serializable {
     }
 
     public QuestionPaper getQuestionPaper() {
-        return this.questionPaper;
+        return questionPaper;
     }
 
     public void setQuestionPaper(QuestionPaper questionPaper) {
         this.questionPaper = questionPaper;
     }
-
+   
+    
     public Double getPassingPercentage() {
         return this.passingPercentage;
     }

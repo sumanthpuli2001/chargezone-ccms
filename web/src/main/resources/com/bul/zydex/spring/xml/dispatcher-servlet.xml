@@ -211,6 +211,8 @@
                 <prop key="trainingAttendance.htm">trainingAttendanceController1</prop>
                 <prop key="trainingIdentificationController.htm">trainingIdentificationController1</prop>
                 <prop key="classifiedBox.htm">classifiedBoxController1</prop>
+                <prop key="trainingMaster.htm">trainingMasterController1</prop>
+                <prop key="trainerLogin.htm">trainerLogInController1</prop>
                 
            
             </props>

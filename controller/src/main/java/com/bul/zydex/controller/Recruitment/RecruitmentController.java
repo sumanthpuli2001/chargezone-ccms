@@ -488,6 +488,9 @@ public class RecruitmentController extends RecruitmentAbstract {
         BindException errors = new BindException(recruitmentMaster, "recruitmentMaster");
         bind(request, recruitmentMaster);
 //        payrollProfessionalTaxValidator.validate(payrollProfessionalTax, errors);
+        
+        RecruitmentMaster rm = recruitmentService.readById(recruitmentMaster.getId());
+        
         Map<Integer, String> locationMap = readLocations();
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
@@ -498,6 +501,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             Date cDate = new Date();
             recruitmentMaster.setUpdatedDate(sdf.format(cDate));
             recruitmentMaster.setUpdatedBy(employeeMaster.getId());
+            recruitmentMaster.setCreatedBy(rm.getCreatedBy());
             recruitmentService.update(recruitmentMaster);
 //            log(request, ActionType.UPDATE.toString(),
 //                    "The Professional Tax is Updated -."
@@ -990,12 +994,23 @@ public class RecruitmentController extends RecruitmentAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
-        RecruitmentMaster recruitmentMaster = new RecruitmentMaster();
         MprMaster mprMaster = new MprMaster();
         List<?> mprMasterList = mprMasterService.readMprList();
         mv.getModelMap().put("list", mprMasterList);
         mv.getModelMap().put("mprMaster", mprMaster);
         mv.setViewName("MPR/ShowAllMprList");
+        return mv;
+    }
+    public ModelAndView allMppFetch(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        RecruitmentMaster recruitmentMaster = new RecruitmentMaster();
+        MprMaster mprMaster = new MprMaster();
+        List<?> mpplist = recruitmentService.fetchAllMpp();
+        mv.getModelMap().put("list", mpplist);
+        mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
+        mv.setViewName("Recruitment/MppShowAllList");
         return mv;
     }
 

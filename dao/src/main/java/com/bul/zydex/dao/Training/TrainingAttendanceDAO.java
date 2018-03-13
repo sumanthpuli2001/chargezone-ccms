@@ -6,11 +6,12 @@
 package com.bul.zydex.dao.Training;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.List;
 
 /**
  *
  * @author Aman
  */
 public interface TrainingAttendanceDAO<T> extends GenericsDAO<T>{
-    
+ public List<?> gettrainingattendance(String eventDate,int id);   
 }

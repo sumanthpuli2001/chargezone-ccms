@@ -21,5 +21,7 @@ public interface RecruitmentDAO<T> extends GenericsDAO<T> {
     public List<?> searchMppApproval(int empId);
 
     public List<?> readMppListByUserId(int empId);
+    
+    public List<?> fetchAllMpp();
 
 }

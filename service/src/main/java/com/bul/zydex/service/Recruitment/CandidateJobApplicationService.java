@@ -23,6 +23,5 @@ public interface CandidateJobApplicationService<T> extends GenericsService<T> {
 
     public List<?> readOnlineAssementCandidate(int userMaster);
 
-    public int GETByCandidateId(int candidateId);
 
 }

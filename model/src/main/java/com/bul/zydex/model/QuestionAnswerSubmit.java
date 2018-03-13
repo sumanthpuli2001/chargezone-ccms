@@ -12,7 +12,7 @@ package com.bul.zydex.model;
 public class QuestionAnswerSubmit implements java.io.Serializable {
 
     private Integer id;
-    private CandidateJobApplication candidateJobApplicationID;
+    private CandidateApplyJob candidateApplyJobId;
     private QuestionLibrary questionLibraryId;
     private QuestionAns questionAnsId;
     private String description;
@@ -23,9 +23,9 @@ public class QuestionAnswerSubmit implements java.io.Serializable {
 
     }
 
-    public QuestionAnswerSubmit(Integer id, CandidateJobApplication candidateJobApplicationID, QuestionLibrary questionLibraryId, QuestionAns questionAnsId, String description, Double obtainMarks, Integer ansStatus) {
+    public QuestionAnswerSubmit(Integer id, CandidateApplyJob candidateApplyJobId, QuestionLibrary questionLibraryId, QuestionAns questionAnsId, String description, Double obtainMarks, Integer ansStatus) {
         this.id = id;
-        this.candidateJobApplicationID = candidateJobApplicationID;
+        this.candidateApplyJobId = candidateApplyJobId;
         this.questionLibraryId = questionLibraryId;
         this.questionAnsId = questionAnsId;
         this.description = description;
@@ -41,15 +41,14 @@ public class QuestionAnswerSubmit implements java.io.Serializable {
         this.id = id;
     }
 
-    public CandidateJobApplication getCandidateJobApplicationID() {
-        return candidateJobApplicationID;
+    public CandidateApplyJob getCandidateApplyJobId() {
+        return candidateApplyJobId;
     }
 
-    public void setCandidateJobApplicationID(CandidateJobApplication candidateJobApplicationID) {
-        this.candidateJobApplicationID = candidateJobApplicationID;
+    public void setCandidateApplyJobId(CandidateApplyJob candidateApplyJobId) {
+        this.candidateApplyJobId = candidateApplyJobId;
     }
 
-    
     public QuestionLibrary getQuestionLibraryId() {
         return questionLibraryId;
     }

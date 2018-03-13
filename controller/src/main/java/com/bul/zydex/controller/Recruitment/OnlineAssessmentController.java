@@ -121,4 +121,12 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
 
     }
 
+    public ModelAndView goToAns(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        String id = request.getParameter("id");
+
+        return mv;
+    }
+
 }

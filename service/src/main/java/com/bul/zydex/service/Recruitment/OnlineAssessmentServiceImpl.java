@@ -7,6 +7,7 @@ package com.bul.zydex.service.Recruitment;
 
 import com.bul.zydex.dao.Recruitment.OnlineAssessmentDAO;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.List;
 
 /**
  *
@@ -23,6 +24,11 @@ public class OnlineAssessmentServiceImpl<T> extends GenericsServiceImpl<T> imple
     public void setOnlineAssessmentDAO(OnlineAssessmentDAO<T> onlineAssessmentDAO) {
         this.onlineAssessmentDAO = onlineAssessmentDAO;
         setGenericsDAO(onlineAssessmentDAO);
+    }
+
+    @Override
+    public List<?> readOnlineAssementCandidateList(int candidateJobApplicationID) {
+      return onlineAssessmentDAO.readOnlineAssementCandidateList(candidateJobApplicationID);
     }
     
     

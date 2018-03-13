@@ -47,6 +47,15 @@
             }
 
         </style>
+        
+
+        <script>
+            function viewClick(id) {
+
+//            window.location = 'payrollSalaryType.htm?act=viewClick&id=' + id;
+                window.location = 'vacancy.htm?act=clickassessment&id=' + id;
+            }
+        </script>
         <script>
             var flag3 = true;
             function saveSubmit11() {
@@ -84,7 +93,9 @@
         <ul class="nav nav-tabs" style="text-align: center" >
             <li class="active " ><a href="">My Application</a></li>
             <li ><a href="vacancy.htm?act=myProfileClick">My Profile</a></li>
-            <li ><a href="vacancy.htm?act=clickassessment">Assessment</a></li>
+            <!--<li ><a href="vacancy.htm?act=clickassessment">Assessment</a></li>-->
+            <li ><a onclick="viewClick(${applayJobUserMaster.id});">Assessment</a></li>
+            <!--<li ><a href="#" id="tab-2" >Assessment</a></li>-->
         </ul>
         <br/>
         <br/>
@@ -137,11 +148,11 @@
                                                             <thead>
                                                                 <c:forEach var="list" items="${list}">
                                                                     <tr>
-                                                                    <th>${list.name}</th>
-                                                                    <th>${list.numberOfPosition}</th>
-                                                                    <th>${list.experience}</th>
-                                                                    <th>${list.fromDate}</th>
-                                                                    <th>${list.toDate}</th>
+                                                                        <th>${list.name}</th>
+                                                                        <th>${list.numberOfPosition}</th>
+                                                                        <th>${list.experience}</th>
+                                                                        <th>${list.fromDate}</th>
+                                                                        <th>${list.toDate}</th>
                                                                             <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                         <th style="width: 50px;"><a href="vacancy.htm?act=applyJobRegistration">Apply</a></th>
                                                                             <%--</c:if>--%>
@@ -163,6 +174,11 @@
             </section>
 
         </form:form>
+
+
+
+       
+
 
 
         <%--</form:form>--%>

@@ -32,7 +32,7 @@ public class QuestionDetailsDAOImpl<T> extends GenericsDAOImpl<T> implements Que
     }
 
     @Override
-    public boolean isExistQuestion(int QlId,int QpId) {
+    public boolean isExistQuestion(int QlId, int QpId) {
         boolean flag = false;
         String query = ""
                 + " From QuestionDetails a "
@@ -44,7 +44,7 @@ public class QuestionDetailsDAOImpl<T> extends GenericsDAOImpl<T> implements Que
         }
         return flag;
     }
-    
+
     @Override
     public void deleteByQPaperId(T object) {
         QuestionDetails questionDetails = (QuestionDetails) object;
@@ -58,6 +58,19 @@ public class QuestionDetailsDAOImpl<T> extends GenericsDAOImpl<T> implements Que
             flag = true;
         }
 
+    }
+
+    @Override
+    public List<?> takeTestOnlineAssementCandidate(int questionpaperID) {
+        String query = "";
+        String condition = "";
+        query += "Select a.id,b.id,c.id "
+                + " From QuestionDetails a "
+                + " LEFT JOIN a.questionPaper b"
+                + " LEFT JOIN a.questionLibrary c"
+                + " Where b.id=" + questionpaperID;
+
+        return getHibernateTemplate().find(query);
     }
 
 }

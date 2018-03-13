@@ -1028,6 +1028,12 @@
         <property name="candidateJobApplyValidator" ref="candidateJobApplyValidator1"/>
         <property name="mprMasterService" ref="mprMasterService1"/>
         <property name="candidateJobApplicationService" ref="candidateJobApplicationService1"/>
+        <property name="onlineAssessmentService" ref="onlineAssessmentService1"/>
+        <property name="questionAnsService" ref="questionAnsService1"/>
+        <property name="questionDetailsService" ref="questionDetailsService1"/>
+        <property name="questionLibraryService" ref="questionLibraryService1"/>
+        <property name="questionPaperService" ref="questionPaperService1"/>
+        <property name="questionAnswerSubmitService" ref="questionAnswerSubmitService1"/>
     </bean> 
     <bean id="thoughtMasterController1" class="com.bul.zydex.controller.thought.ThoughtMasterController" parent="controllerConfig" >
         <property name="thoughtMasterService" ref="thoughtMasterService1"></property>

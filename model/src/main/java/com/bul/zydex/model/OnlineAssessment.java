@@ -13,7 +13,7 @@ public class OnlineAssessment  implements java.io.Serializable {
 
 
      private Integer id;
-     private CandidateApplyJob candidateApplyJob;
+     private CandidateJobApplication candidateJobApplication;
      private QuestionPaper questionPaper;
      private Double passingPercentage;
      private String validityFrom;
@@ -31,12 +31,12 @@ public class OnlineAssessment  implements java.io.Serializable {
     }
 
 	
-    public OnlineAssessment(CandidateApplyJob candidateApplyJob, QuestionPaper questionPaper) {
-        this.candidateApplyJob = candidateApplyJob;
+    public OnlineAssessment(CandidateJobApplication candidateJobApplication, QuestionPaper questionPaper) {
+        this.candidateJobApplication = candidateJobApplication;
         this.questionPaper = questionPaper;
     }
     public OnlineAssessment(CandidateApplyJob candidateApplyJob, QuestionPaper questionPaper, Double passingPercentage, String validityFrom, String validityTo, String duration, Integer noOfAttampt, Integer noOfQue, Double totalMarks, Integer createdBy, String createdDate, Integer updatedBy, String udatedDate) {
-       this.candidateApplyJob = candidateApplyJob;
+       this.candidateJobApplication = candidateJobApplication;
        this.questionPaper = questionPaper;
        this.passingPercentage = passingPercentage;
        this.validityFrom = validityFrom;
@@ -58,13 +58,15 @@ public class OnlineAssessment  implements java.io.Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    public CandidateApplyJob getCandidateApplyJob() {
-        return this.candidateApplyJob;
+
+    public CandidateJobApplication getCandidateJobApplication() {
+        return candidateJobApplication;
     }
-    
-    public void setCandidateApplyJob(CandidateApplyJob candidateApplyJob) {
-        this.candidateApplyJob = candidateApplyJob;
+
+    public void setCandidateJobApplication(CandidateJobApplication candidateJobApplication) {
+        this.candidateJobApplication = candidateJobApplication;
     }
+   
     public QuestionPaper getQuestionPaper() {
         return this.questionPaper;
     }

@@ -22,7 +22,7 @@ public class CandidateJobApplicationDAOImpl<T> extends GenericsDAOImpl<T> implem
 
     @Override
     public List<?> readByCandidateId(int candidateId) {
-           String query = " SELECT c "
+        String query = " SELECT c "
                 + " FROM CandidateJobApplication a "
                 + " LEFT JOIN a.candidateApplyJob b "
                 + " LEFT JOIN a.vacancyMaster c "
@@ -30,6 +30,20 @@ public class CandidateJobApplicationDAOImpl<T> extends GenericsDAOImpl<T> implem
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
+    }
+
+    @Override
+    public List<?> readOnlineAssementCandidate(int userMaster) {
+        String query = "";
+        String condition = "";
+        query += "Select a.id,b.id,c.id,d.id"
+                + " From CandidateJobApplication a"
+                + " LEFT JOIN a.applayJobUserMaster b"
+                + " LEFT JOIN a.candidateApplyJob c"
+                + " LEFT JOIN a.vacancyMaster d"
+                + " Where b.id=" + userMaster;
+
+        return getHibernateTemplate().find(query);
     }
 
 }

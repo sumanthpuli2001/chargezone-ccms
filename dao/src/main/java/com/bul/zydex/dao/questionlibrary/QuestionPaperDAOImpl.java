@@ -31,4 +31,5 @@ public class QuestionPaperDAOImpl<T> extends GenericsDAOImpl<T> implements Quest
         return getHibernateTemplate().find(query);
     }
 
+    
 }

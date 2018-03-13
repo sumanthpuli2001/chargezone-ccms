@@ -9,7 +9,7 @@ package com.bul.zydex.model;
  *
  * @author Admin
  */
-public class QuestionDetails {
+public class QuestionDetails implements java.io.Serializable{
 
     private Integer id;
     private QuestionPaper questionPaper;

@@ -72,4 +72,17 @@ public class QuestionDetailsDAOImpl<T> extends GenericsDAOImpl<T> implements Que
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> takeTestOnlineAssementCandidate(int questionpaperID) {
+        String query = "";
+        String condition = "";
+        query += "Select a.id,b.id,c.id "
+                + " From QuestionDetails a "
+                + " LEFT JOIN a.questionPaper b"
+                + " LEFT JOIN a.questionLibrary c"
+                + " Where b.id=" + questionpaperID;
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

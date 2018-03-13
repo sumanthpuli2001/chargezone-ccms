@@ -16,4 +16,6 @@ public interface QuestionPaperService<T> extends GenericsService<T> {
 
     public List<?> readAllQuestionPaper();
 
+    
+
 }

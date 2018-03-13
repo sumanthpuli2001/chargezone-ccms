@@ -16,8 +16,13 @@ import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
 import com.bul.zydex.model.MprMaster;
+import com.bul.zydex.model.QuestionAns;
+import com.bul.zydex.model.QuestionAnswerSubmit;
+import com.bul.zydex.model.QuestionDetails;
+import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.util.ActionType;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -528,10 +533,13 @@ public class VacancyController extends VacancyAbstract {
 
                     CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(caj.getId());
                 }
+
+//              ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
                 request.setAttribute("successMessage",
                         "Information : Login Successfully.");
                 request.setAttribute("list", CandidateJobApplyList);
                 mv.getModelMap().put("applayJobUserMaster", master);
+
                 mv.setViewName("Vacancy/MemberVacancyList");
                 return mv;
 
@@ -657,24 +665,66 @@ public class VacancyController extends VacancyAbstract {
         return mv;
     }
 
-    public ModelAndView clickassessment(HttpServletRequest request,
+       public ModelAndView clickassessment(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
         ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
         String id = request.getParameter("id");
-        List<?> list1 = candidateJobApplyService.readOnlineAssementCandidate(Integer.parseInt(id));
-        for (Object o1 : list1) {
-            Object str[] = (Object[]) o1;
+        Integer applayJobUserMasterId = 0;
+        Integer candidateApplyJobid = 0;
+        List listOfFinalList = new ArrayList();
+        List<?> list1 = candidateJobApplicationService.readOnlineAssementCandidate(Integer.parseInt(id));
+        if (!list1.isEmpty()) {
+            for (Object o1 : list1) {
+                Object str[] = (Object[]) o1;
+                Integer CandidateJobApplicationID = (Integer) str[0];
+                applayJobUserMasterId = (Integer) str[1];
+                candidateApplyJobid = (Integer) str[2];
+                Integer vacancyMasterID = (Integer) str[3];
 
+                List<?> list2 = onlineAssessmentService.readOnlineAssementCandidateList(CandidateJobApplicationID);
+                if (!list2.isEmpty()) {
+                    for (Object o2 : list2) {
+                        Object str1[] = (Object[]) o2;
+                        List finalList = new ArrayList();
+                        Integer onlineAssessmentID = (Integer) str1[0];
+                        finalList.add(onlineAssessmentID);
+                        Integer candidateJobApplicationID = (Integer) str1[1];
+                        finalList.add(candidateJobApplicationID);
+                        Integer questionPaperId = (Integer) str1[2];
+                        finalList.add(questionPaperId);
+                        Double passingPercentage = (Double) str1[3];
+                        finalList.add(passingPercentage);
+                        String validityFrom = (String) str1[4];
+                        finalList.add(validityFrom);
+                        String validityTo = (String) str1[5];
+                        finalList.add(validityTo);
+                        String duration = (String) str1[6];
+                        finalList.add(duration);
+                        Integer noOfAttampt = (Integer) str1[7];
+                        finalList.add(noOfAttampt);
+                        Integer noOfQue = (Integer) str1[8];
+                        finalList.add(noOfQue);
+                        Double totalMarks = (Double) str1[9];
+                        finalList.add(totalMarks);
+                        String paperName = (String) str1[10];
+                        finalList.add(paperName);
+                        finalList.add(candidateApplyJobid);
+                        listOfFinalList.add(finalList);
+                    }
+                }
+
+            }
         }
-
-        mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
-        mv.setViewName("Vacancy/AssessmentCandidate");
+        mv.getModelMap().put("list2", listOfFinalList);
+//        mv.getModelMap().put("candidateApplyJobid", candidateApplyJobid);
+        mv.setViewName("Vacancy/AssementOnline");
 
         return mv;
     }
 
+//    }
     public ModelAndView backToHomeVacancyList(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
@@ -788,6 +838,109 @@ public class VacancyController extends VacancyAbstract {
         mv.getModelMap().put("ajuMaster", ajuMaster);
         mv.setViewName("Vacancy/MemberVacancyList");
 
+        return mv;
+    }
+       public ModelAndView clickassessmentOnlineTest(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+        String id = request.getParameter("id");
+        String candidateID = request.getParameter("candidateID");
+        List listOfFinalList = new ArrayList();
+        List<?> list1 = questionDetailsService.takeTestOnlineAssementCandidate(Integer.parseInt(id));
+        for (Object o1 : list1) {
+            Object str[] = (Object[]) o1;
+            List finalList = new ArrayList();
+            Integer questionDetailsID = (Integer) str[0];
+            Integer questionPaperId = (Integer) str[1];
+            Integer questionLibraryID = (Integer) str[2];
+            QuestionLibrary questionLibrary = new QuestionLibrary();
+            questionLibrary = questionLibraryService.readById(questionLibraryID);
+            Integer questionLibraryid = questionLibrary.getId();
+            String question = questionLibrary.getQuestion();
+            finalList.add(question);
+            Integer type = questionLibrary.getType();
+            finalList.add(type);
+            finalList.add(questionLibraryid);
+
+            List<?> list2 = questionAnsService.takeTestOnlineAssementCandidateAnswer(questionLibraryid);
+            for (Object o2 : list2) {
+                Object str1[] = (Object[]) o2;
+                Integer questionAnsID = (Integer) str1[0];
+                String answer = (String) str1[2];
+                finalList.add(answer);
+                finalList.add(questionAnsID);
+            }
+            listOfFinalList.add(finalList);
+        }
+//        
+        mv.getModelMap().put("list2", listOfFinalList);
+        mv.getModelMap().put("candidateID", candidateID);
+        mv.setViewName("Vacancy/OnlineTestQuestionPaper");
+
+        return mv;
+    }
+        public ModelAndView clickSubmitQuestionAnswer(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+
+        String candidateiD = request.getParameter("candidateId");
+        String[] question = request.getParameterValues("finalData1");
+        String[] email = request.getParameterValues("finalData");
+//       
+        String[] doneId1 = email[0].split(",");
+        String[] doneId2 = question[0].split(",");
+        String emailId = "";
+        String emailId1 = "";
+//        for (String s1 : doneId1) {
+//            emailId += s1 + ",";
+//            if (emailId == "") {
+//                questionAnswerSubmit.setDescription(emailId);
+//                questionAnswerSubmit.setQuestionAnsId(questionAns);
+//            } else {
+//                questionAns.setId(Integer.parseInt(s1));
+//                questionAnswerSubmit.setQuestionAnsId(questionAns);// Question Anaswer Id set
+//
+//            }
+//           
+//
+//            for (String s2 : doneId2) {
+//                emailId1 += s2 + ",";
+//               
+//
+//            }
+//        }
+//        
+        for (int i = 0; i < doneId2.length; i++) {
+            QuestionAnswerSubmit questionAnswerSubmit = new QuestionAnswerSubmit();
+            QuestionAns questionAns = new QuestionAns();
+            QuestionLibrary questionLibrary = new QuestionLibrary();
+            String ques = doneId2[i];
+            String ans = doneId1[i];
+            boolean parsable = true;
+            try {
+                Integer.parseInt(ans);
+                questionAns.setId(Integer.parseInt(ans));
+            } catch (Exception e) {
+                parsable = false;
+                questionAnswerSubmit.setDescription(ans);
+            }
+//            return parsable;
+
+            questionAnswerSubmit.setQuestionAnsId(questionAns);// Question Anaswer Id set
+            candidateApplyJob.setId(Integer.parseInt(candidateiD));
+            questionAnswerSubmit.setCandidateApplyJobId(candidateApplyJob);/// candidate Apply job ID set 
+            questionLibrary.setId(Integer.parseInt(ques));
+            questionAnswerSubmit.setQuestionLibraryId(questionLibrary);
+            questionAnswerSubmitService.create(questionAnswerSubmit);
+//             mv.setViewName("Vacancy/AssementOnline");
+        }
+        request.setAttribute("successMessage", "Information : The Data Submitted Successfully.");
+        mv.setViewName("Vacancy/OnlineTestQuestionPaper");
         return mv;
     }
 }

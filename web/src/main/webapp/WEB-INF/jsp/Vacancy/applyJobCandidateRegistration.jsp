@@ -230,7 +230,7 @@
                                 <label>Photograph<span style="color: red;font-size: 12px;">*</span></label>
                             </div>
                             <div class="col-sm-3" style="text-align: left;">
-                                <form:input type="file" path="photograph" class="form-control" id="photograph" name="photograph" accept="image/jpg,image/jpeg,image/png"></form:input>
+                                <form:input type="file" path="photograph" class="form-control" id="photograph" name="photograph" accept="image/jpg,image/jpeg,image/png" onchange="checkFileSize();"></form:input>
                                 <%--<form:errors path="photograph" cssClass="errorDiv"></form:errors>--%>
                                 </div>
 
@@ -392,6 +392,22 @@
         <![endif]-->
 
     </body>
+    
+    <script>
+             function checkFileSize() {
+            if (typeof FileReader !== "undefined") {
+                var fileSize = document.getElementById('photograph').files[0].size;
+//                alert("my File size is   " + fileSize);
+                if (fileSize > 102400) {
+                    document.getElementById('photograph').value = '';
+                    document.getElementById('photographError').innerHTML = "- It must not more than 100kb";
+                } else {
+                    document.getElementById('photographError').innerHTML = '';
+                }
+                // check file size
+            }
+        </script>
+    
     <script type="text/javascript">
             $('.form_datetime').datetimepicker({
                 //language:  'fr',

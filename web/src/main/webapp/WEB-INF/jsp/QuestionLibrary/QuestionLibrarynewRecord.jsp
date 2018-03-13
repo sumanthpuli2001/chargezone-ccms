@@ -10,7 +10,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Employee Create</title>
+        <title>Question Library</title>
         <script>
             var tempCount3 = 1;
             $(function () {
@@ -98,7 +98,7 @@
             <h1>Question Library </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Employee Registration Form</li>
+                <li class="active">Question Create Form</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">

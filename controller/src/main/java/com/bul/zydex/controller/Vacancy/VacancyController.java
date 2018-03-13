@@ -665,7 +665,7 @@ public class VacancyController extends VacancyAbstract {
         return mv;
     }
 
-       public ModelAndView clickassessment(HttpServletRequest request,
+    public ModelAndView clickassessment(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
@@ -840,7 +840,8 @@ public class VacancyController extends VacancyAbstract {
 
         return mv;
     }
-       public ModelAndView clickassessmentOnlineTest(HttpServletRequest request,
+
+    public ModelAndView clickassessmentOnlineTest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
@@ -881,17 +882,19 @@ public class VacancyController extends VacancyAbstract {
 
         return mv;
     }
-        public ModelAndView clickSubmitQuestionAnswer(HttpServletRequest request,
+
+    public ModelAndView clickSubmitQuestionAnswer(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
 
-        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        CandidateJobApplication candidateApplyJob = new CandidateJobApplication();
 
         String candidateiD = request.getParameter("candidateId");
         String[] question = request.getParameterValues("finalData1");
         String[] email = request.getParameterValues("finalData");
-//       
+        List<?> canidateApllist = candidateJobApplicationService.readByCandidateId(Integer.parseInt(candidateiD));
+        int jobApliId = candidateJobApplicationService.GETByCandidateId(Integer.parseInt(candidateiD));
         String[] doneId1 = email[0].split(",");
         String[] doneId2 = question[0].split(",");
         String emailId = "";
@@ -933,7 +936,7 @@ public class VacancyController extends VacancyAbstract {
 
             questionAnswerSubmit.setQuestionAnsId(questionAns);// Question Anaswer Id set
             candidateApplyJob.setId(Integer.parseInt(candidateiD));
-            questionAnswerSubmit.setCandidateApplyJobId(candidateApplyJob);/// candidate Apply job ID set 
+            questionAnswerSubmit.setCandidateJobApplicationID(candidateApplyJob);/// candidate Apply job ID set 
             questionLibrary.setId(Integer.parseInt(ques));
             questionAnswerSubmit.setQuestionLibraryId(questionLibrary);
             questionAnswerSubmitService.create(questionAnswerSubmit);

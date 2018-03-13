@@ -70,8 +70,8 @@
     <body>
         <section class="content-header">
             <button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=backToHomeVacancyList'"><i class="fa fa-home"></i>&nbsp&nbsp&nbsp;Home</button>
-            <!--<button type="button" class="btn btn-primary" style="float: left; width: 130px;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-user"></i>&nbsp&nbsp&nbsp;My Profile</button>-->
-            <label>Candidate User Name &nbsp : &nbsp&nbsp${applayJobUserMaster.userName}--${applayJobUserMaster.id}</label>
+            <button type="button" class="btn btn-primary" style="float: left; width: 130px;" onclick="window.location = 'vacancy.htm?act=logout'"><i class="fa fa-long-arrow-left"></i>&nbsp&nbsp&nbsp;Log Out</button>
+            <label>Candidate User Name&nbsp : &nbsp&nbsp${sessionScope.ApplayJobUserMaster.userName}</label>
         </section>
         <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>
@@ -83,7 +83,7 @@
         <br/>
         <ul class="nav nav-tabs" style="text-align: center" >
             <li class="active " ><a href="">My Application</a></li>
-            <li ><a href="vacancy.htm?act=myProfileClick">My Profile</a></li>
+            <li ><a href="vacancy.htm?act=myProfileClick&id=${sessionScope.ApplayJobUserMaster.id}">My Profile</a></li>
             <li ><a href="vacancy.htm?act=clickassessment">Assessment</a></li>
         </ul>
         <br/>
@@ -95,7 +95,7 @@
                         <button type="submit" class="btn btn-primary" style="text-align: center; width: 150px;" data-original-title="" title="" >Assessment</button>
                     </div>
                 </div>-->
-        <form:form action="vacancy.htm?act=clickDeleteVacancy" method="post" commandName="vacancyMaster"
+        <form:form action="vacancy.htm?act=clickDeleteVacancy" method="post"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">
@@ -120,6 +120,7 @@
                                                         </c:when>
                                                         <c:otherwise>
                                                             <thead>
+
                                                                 <tr>
                                                                     <th style="width: 50px;">Vacancy Name</th>
                                                                     <th style="width: 50px;">Number Of Position</th>
@@ -131,19 +132,32 @@
                                                                         <%--</c:if>--%>
 
                                                                 </tr>
+
                                                             </thead>
                                                             <thead>
-                                                                <tr>
-                                                                    <th>${list.name}</th>
-                                                                    <th>${list.numberOfPosition}</th>
-                                                                    <th>${list.experience}</th>
-                                                                    <th>${list.fromDate}</th>
-                                                                    <th>${list.toDate}</th>
-                                                                        <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                                                    <th style="width: 50px;"><a href="vacancy.htm?act=applyJobRegistration">Apply</a></th>
+                                                                <c:forEach var="list" items="${list}">
+                                                                    <tr>
+                                                                        <th>${list[3]}</th>
+                                                                        <th>${list[4]}</th>
+                                                                        <th>${list[5]}</th>
+                                                                        <th>${list[6]}</th>
+                                                                        <th>${list[7]}</th>
+                                                                        <th style="width: 50px;">
+                                                                            <c:if test="${list[8] eq 0}">
+                                                                                <span>
+                                                                                    <a href="vacancy.htm?act=applyJobRegistration&vacancyId=${list[2]}">Apply</a>
+                                                                                </span>
+                                                                            </c:if>
+                                                                            <c:if test="${list[8] eq 1}">
+                                                                                <span>
+                                                                                    Applied
+                                                                                </span>
+                                                                            </c:if>
+                                                                        </th>
                                                                         <%--</c:if>--%>
 
-                                                                </tr>
+                                                                    </tr>
+                                                                </c:forEach>
                                                             </thead>
                                                         </c:otherwise>
                                                     </c:choose>

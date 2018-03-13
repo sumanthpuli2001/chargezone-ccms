@@ -6,9 +6,15 @@
 package com.bul.zydex.controller.Recruitment;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.CandidateApplyJob;
+import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.OnlineAssessment;
+import com.bul.zydex.model.QuestionDetails;
 import com.bul.zydex.model.QuestionPaper;
+import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
+import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
 import com.bul.zydex.service.Recruitment.OnlineAssessmentService;
+import com.bul.zydex.service.questionlibrary.QuestionDetailsService;
 import com.bul.zydex.service.questionlibrary.QuestionPaperService;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +31,12 @@ public class OnlineAssessmentAbstract extends CustomAbstract {
 
     protected QuestionPaperService<QuestionPaper> questionPaperService;
 
+    protected QuestionDetailsService<QuestionDetails> questionDetailsService;
+
+    protected CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService;
+
+    protected CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService;
+
     public OnlineAssessmentService<OnlineAssessment> getOnlineAssessmentService() {
         return onlineAssessmentService;
     }
@@ -39,6 +51,30 @@ public class OnlineAssessmentAbstract extends CustomAbstract {
 
     public void setQuestionPaperService(QuestionPaperService<QuestionPaper> questionPaperService) {
         this.questionPaperService = questionPaperService;
+    }
+
+    public QuestionDetailsService<QuestionDetails> getQuestionDetailsService() {
+        return questionDetailsService;
+    }
+
+    public void setQuestionDetailsService(QuestionDetailsService<QuestionDetails> questionDetailsService) {
+        this.questionDetailsService = questionDetailsService;
+    }
+
+    public CandidateJobApplicationService<CandidateJobApplication> getCandidateJobApplicationService() {
+        return candidateJobApplicationService;
+    }
+
+    public void setCandidateJobApplicationService(CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService) {
+        this.candidateJobApplicationService = candidateJobApplicationService;
+    }
+
+    public CandidateJobApplyService<CandidateApplyJob> getCandidateJobApplyService() {
+        return candidateJobApplyService;
+    }
+
+    public void setCandidateJobApplyService(CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService) {
+        this.candidateJobApplyService = candidateJobApplyService;
     }
 
     protected void questionList(HttpServletRequest request) {

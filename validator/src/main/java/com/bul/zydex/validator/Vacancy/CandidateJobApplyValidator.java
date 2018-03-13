@@ -37,10 +37,10 @@ public class CandidateJobApplyValidator implements Validator {
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "motherDob",
                 "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "photograph",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "bloodGroup",
-                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "photograph",
+//                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "bloodGroup",
+//                "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "presentAddress",
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "permanentAddress",
@@ -61,8 +61,8 @@ public class CandidateJobApplyValidator implements Validator {
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "experianceDateJoiningMonth",
                 "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "certificateAttach",
-                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "certificateAttach",
+//                "field.error1", "None");
     }
 
 }

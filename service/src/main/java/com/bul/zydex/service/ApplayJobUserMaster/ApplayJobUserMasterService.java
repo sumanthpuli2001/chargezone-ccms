@@ -7,13 +7,18 @@ package com.bul.zydex.service.ApplayJobUserMaster;
 
 import com.bul.zydex.model.ApplayJobUserMaster;
 import com.bul.zydex.service.GenericsService;
+import java.util.List;
 
 /**
  *
  * @author Vikas
  */
-public interface ApplayJobUserMasterService<T> extends GenericsService<T>{
-    
+public interface ApplayJobUserMasterService<T> extends GenericsService<T> {
+
     public boolean isExist(T object);
-    
+
+    public boolean profileFilling(int userId);
+
+    public ApplayJobUserMaster checkByUserNameandPass(T object);
+
 }

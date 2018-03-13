@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.service.CandidateJobApply;
 
+import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.service.GenericsService;
 import java.util.List;
 
@@ -12,8 +13,14 @@ import java.util.List;
  *
  * @author Aman
  */
-public interface CandidateJobApplyService<T> extends GenericsService<T>{
-    
-    public List <?> fetchcandidatelist();
-    
+public interface CandidateJobApplyService<T> extends GenericsService<T> {
+
+    public List<?> fetchcandidatelist();
+
+    public List<?> readProfileByCandidateUserID(int userId);
+
+    public List<?> readOnlineAssementCandidate(int userMaster);
+
+    public CandidateApplyJob readByapplayjobusermasterid(int id);
+
 }

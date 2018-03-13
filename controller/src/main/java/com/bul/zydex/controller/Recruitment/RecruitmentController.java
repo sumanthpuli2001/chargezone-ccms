@@ -7,6 +7,7 @@ package com.bul.zydex.controller.Recruitment;
 
 import com.bul.zydex.model.ApprovalUser;
 import com.bul.zydex.model.CandidateApplyJob;
+import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmployeeMaster;
@@ -120,13 +121,19 @@ public class RecruitmentController extends RecruitmentAbstract {
         Date cDate = new Date();
 
         departmentList(request);
+        designationList(request);
+        Map<Integer, String> locationMap = readLocations();
+        Map<Integer, String> jobtype1 = jobtypeList();
+        mv.addObject("locationMap", locationMap);
+        mv.addObject("jobtype1", jobtype1);
 
         recruitmentValidator.validate(recruitmentMaster, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
-                    "Error : The Entered Information is not valid");
+                    "All field are Required.Please Enter Valid data");
             mv.addAllObjects(errors.getModel());
-            mv = newCreateBudget(request, response);
+            mv.setViewName("Recruitment/CreateNewBudget");
+//            mv = newCreateBudget(request, response);
         } else {
             recruitmentMaster.setMppStatus(0);
             recruitmentMaster.setCurrentLevel(1);
@@ -160,14 +167,14 @@ public class RecruitmentController extends RecruitmentAbstract {
         String savingList[] = request.getParameterValues("checkId");
         for (String z : savingList) {
             try {
-                
+
                 RecruitmentMppApproval recruitmentMppApproval = new RecruitmentMppApproval();
-                List<?>list = recruitmentMppApprovalService.recruitmentMppdelete(z);
-                for(Object object : list){
+                List<?> list = recruitmentMppApprovalService.recruitmentMppdelete(z);
+                for (Object object : list) {
                     recruitmentMppApproval = (RecruitmentMppApproval) object;
                     recruitmentMppApprovalService.delete(recruitmentMppApproval.getId());
                 }
-                
+
                 recruitmentService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
                         "Info :Records are deleted successfully.");
@@ -279,7 +286,28 @@ public class RecruitmentController extends RecruitmentAbstract {
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid");
-            mv.addAllObjects(errors.getModel());
+//            mv.addAllObjects(errors.getModel());
+            String jobtypeNAme = jobtypeMaster.getJobTypeName();
+
+            String departmentName = departmentMaster.getDepartmentName();
+
+            String locationName = locationMaster.getLocation();
+
+            String designationName = designationMaster.getDesignationName();
+
+            mv.getModelMap().put("mprMaster", mprMaster);
+            mv.getModelMap().put("departmentMaster", departmentMaster);
+            mv.getModelMap().put("locationMaster", locationMaster);
+            mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
+            mv.getModelMap().put("designationMaster", designationMaster);
+            mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
+            request.setAttribute("jobtypeNAme", jobtypeNAme);
+            request.setAttribute("departmentName", departmentName);
+            request.setAttribute("locationName", locationName);
+            request.setAttribute("position", position);
+            request.setAttribute("designationName", designationName);
+            request.setAttribute("experiance", experiance);
+            mv.setViewName("Recruitment/MprSearchCreateBudget");
             mv.setViewName("Recruitment/MprSearchCreateBudget");
 //            mv = viewClick(request, response);
         } else {
@@ -361,6 +389,14 @@ public class RecruitmentController extends RecruitmentAbstract {
         String savingList[] = request.getParameterValues("checkId");
         for (String z : savingList) {
             try {
+
+                MprApproval mprApproval = new MprApproval();
+                List<?> list = mprApprovalService.mPrDelete(z);
+                for (Object object : list) {
+                    mprApproval = (MprApproval) object;
+                    mprApprovalService.delete(mprApproval.getId());
+                }
+
                 mprMasterService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
                         "Info : Records are deleted successfully.");
@@ -394,10 +430,10 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         ModelAndView mv = new ModelAndView();
         MprMaster mprMaster = new MprMaster();
-        MprMaster mprMaster1 = mprMasterService.readById(mprMaster.getId());
         BindException errors = new BindException(mprMaster, "mprMaster");
         bind(request, mprMaster);
         departmentList(request);
+        MprMaster mprMaster1 = mprMasterService.readById(mprMaster.getId());
 
         mprMaster.setStatus(0);
 
@@ -448,10 +484,13 @@ public class RecruitmentController extends RecruitmentAbstract {
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         RecruitmentMaster recruitmentMaster = new RecruitmentMaster();
-
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         BindException errors = new BindException(recruitmentMaster, "recruitmentMaster");
         bind(request, recruitmentMaster);
 //        payrollProfessionalTaxValidator.validate(payrollProfessionalTax, errors);
+        
+        RecruitmentMaster rm = recruitmentService.readById(recruitmentMaster.getId());
+        
         Map<Integer, String> locationMap = readLocations();
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
@@ -461,6 +500,8 @@ public class RecruitmentController extends RecruitmentAbstract {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             Date cDate = new Date();
             recruitmentMaster.setUpdatedDate(sdf.format(cDate));
+            recruitmentMaster.setUpdatedBy(employeeMaster.getId());
+            recruitmentMaster.setCreatedBy(rm.getCreatedBy());
             recruitmentService.update(recruitmentMaster);
 //            log(request, ActionType.UPDATE.toString(),
 //                    "The Professional Tax is Updated -."
@@ -617,8 +658,10 @@ public class RecruitmentController extends RecruitmentAbstract {
         ModelAndView mv = new ModelAndView();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         OnlineAssessment onlineAssessment = new OnlineAssessment();
-        List<?> candidateApplyJobList = candidateJobApplyService.fetchcandidatelist();
-        mv.getModelMap().put("list", candidateApplyJobList);
+//        List<?> candidateApplyJobList = candidateJobApplyService.fetchcandidatelist();
+        List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
+
+        mv.getModelMap().put("list", candidateJobList);
         questionList(request);
         mv.getModelMap().put("onlineAssessment", onlineAssessment);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
@@ -632,7 +675,13 @@ public class RecruitmentController extends RecruitmentAbstract {
         ModelAndView mv = new ModelAndView();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         String id = request.getParameter("id");
-        candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(id));
+        int candJobApplicationid = Integer.parseInt(id);
+        CandidateJobApplication cja = candidateJobApplicationService.readById(candJobApplicationid);
+        candidateApplyJob = candidateJobApplyService.readById(cja.getCandidateApplyJob().getId());
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+        questionList(request);
+        mv.getModelMap().put("onlineAssessment", onlineAssessment);
+        request.setAttribute("candidateJobApplication", cja);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Recruitment/CandidateApproval");
         return mv;
@@ -945,12 +994,23 @@ public class RecruitmentController extends RecruitmentAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
-        RecruitmentMaster recruitmentMaster = new RecruitmentMaster();
         MprMaster mprMaster = new MprMaster();
         List<?> mprMasterList = mprMasterService.readMprList();
         mv.getModelMap().put("list", mprMasterList);
         mv.getModelMap().put("mprMaster", mprMaster);
         mv.setViewName("MPR/ShowAllMprList");
+        return mv;
+    }
+    public ModelAndView allMppFetch(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        RecruitmentMaster recruitmentMaster = new RecruitmentMaster();
+        MprMaster mprMaster = new MprMaster();
+        List<?> mpplist = recruitmentService.fetchAllMpp();
+        mv.getModelMap().put("list", mpplist);
+        mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
+        mv.setViewName("Recruitment/MppShowAllList");
         return mv;
     }
 

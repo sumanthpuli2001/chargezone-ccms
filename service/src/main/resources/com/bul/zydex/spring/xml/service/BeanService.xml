@@ -577,4 +577,10 @@
     <bean id="trainingIdentificationService1" class="com.bul.zydex.service.Training.TrainingIdentificationServiceImpl">
         <property name="trainingIdentificationDAO" ref="trainingIdentificationDAO1" />
     </bean>
+    <bean id="candidateJobApplicationService1" class="com.bul.zydex.service.Recruitment.CandidateJobApplicationServiceImpl">
+        <property name="candidateJobApplicationDAO" ref="candidateJobApplicationDAO1" />
+    </bean>
+     <bean id="classifiedBoxService1" class="com.bul.zydex.service.ClassifiedBox.ClassifiedBoxServiceImpl">
+        <property name="classifiedBoxDAO" ref="classifiedBoxDAO1" />
+     </bean>
 </beans>

@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="com.bul.zydex.model.CandidateApplyJob" table="candidate_apply_job" catalog="hr_power_astral">
-         <id name="id" type="java.lang.Integer">
+        <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
@@ -71,6 +71,9 @@
         </property>
         <many-to-one name="vacancyId" class="com.bul.zydex.model.VacancyMaster" fetch="select">
             <column name="vacancy_id" />
+        </many-to-one>
+        <many-to-one name="applayJobUserMaster" class="com.bul.zydex.model.ApplayJobUserMaster" fetch="select">
+            <column name="applay_job_user_master_id" />
         </many-to-one>
     </class>
 </hibernate-mapping>

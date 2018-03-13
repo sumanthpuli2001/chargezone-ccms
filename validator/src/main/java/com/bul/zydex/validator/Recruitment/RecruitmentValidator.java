@@ -26,17 +26,17 @@ public class RecruitmentValidator implements Validator {
         RecruitmentMaster recruitmentMaster = (RecruitmentMaster) o;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "locationMaster.id",
-                "field.error1", "None");
+                "field.error13", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "departmentMaster.id",
-                "field.error1", "None");
+                "field.error13", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "jobtypeMaster.id",
-                "field.error1", "None");
+                "field.error13", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "numberOfPosition",
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "budget",
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "designationMaster.id",
-                "field.error1", "None");
+                "field.error13", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "experiance",
                 "field.error1", "None");
        

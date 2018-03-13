@@ -150,4 +150,5 @@
     <bean id="applayJobUserMasterValidator1" class="com.bul.zydex.validator.Recruitment.ApplayJobUserMasterValidator" />
     <bean id="candidateJobApplyValidator1" class="com.bul.zydex.validator.Vacancy.CandidateJobApplyValidator" />
     <bean id="trainerValidator1" class="com.bul.zydex.validator.Training.TrainerValidator" />
+    <bean id="classifiedBoxValidator1" class="com.bul.zydex.validator.Classified.ClassifiedBoxValidator" />
 </beans>

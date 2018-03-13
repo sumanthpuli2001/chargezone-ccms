@@ -89,6 +89,7 @@
                                 <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>MPR Approval</a></li>
                                 <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
                                 <li><a href="recruitment.htm?act=allMprFetch"><i class="fa fa-circle-o"></i>MPR Fetch</a></li>
+                                <li><a href="recruitment.htm?act=allMppFetch"><i class="fa fa-circle-o"></i>MPP Fetch</a></li>
                             </ul>
                         </li>
                     </c:if>
@@ -575,6 +576,7 @@
                             <li><a href="questionLibrary.htm?act=QuestionLibraryCreate"><i class="fa fa-circle-o"></i>Question Library</a></li>
                             <li><a href="questionLibrary.htm?act=questionPaperView"><i class="fa fa-circle-o"></i>Question Paper</a></li>
                             <li><a href="thoughtMaster.htm?act=createthought"><i class="fa fa-circle-o"></i>Homepage Setting</a></li>
+                            <li><a href="classifiedBox.htm?act=showResult"><i class="fa fa-circle-o"></i>Classified Setting</a></li>
                         </ul>
                     </li>
                 </c:if>

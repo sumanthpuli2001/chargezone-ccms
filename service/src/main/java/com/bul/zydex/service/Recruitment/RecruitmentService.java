@@ -22,4 +22,6 @@ public interface RecruitmentService<T> extends GenericsService<T> {
 
     public List<?> readMppListByUserId(int empId);
 
+    public List<?> fetchAllMpp();
+
 }

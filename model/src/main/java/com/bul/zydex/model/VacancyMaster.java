@@ -26,12 +26,13 @@ public class VacancyMaster implements java.io.Serializable {
     private String description;
     private Integer status;
     private DesignationMaster designationMaster;
+    private MprMaster mprMaster;
 
     public VacancyMaster() {
 
     }
 
-    public VacancyMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer salaryRange, String experience, String responsibility, String skill, String fromDate, String toDate, String description, Integer status, DesignationMaster designationMaster) {
+    public VacancyMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer salaryRange, String experience, String responsibility, String skill, String fromDate, String toDate, String description, Integer status, DesignationMaster designationMasterm, MprMaster mprMaster) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
@@ -47,6 +48,7 @@ public class VacancyMaster implements java.io.Serializable {
         this.description = description;
         this.status = status;
         this.designationMaster = designationMaster;
+        this.mprMaster = mprMaster;
     }
 
     public Integer getId() {
@@ -72,7 +74,6 @@ public class VacancyMaster implements java.io.Serializable {
     public void setDepartmentMaster(DepartmentMaster departmentMaster) {
         this.departmentMaster = departmentMaster;
     }
-
 
     public JobtypeMaster getJobtypeMaster() {
         return jobtypeMaster;
@@ -105,7 +106,6 @@ public class VacancyMaster implements java.io.Serializable {
     public void setSalaryRange(Integer salaryRange) {
         this.salaryRange = salaryRange;
     }
-
 
     public String getExperience() {
         return experience;
@@ -169,6 +169,14 @@ public class VacancyMaster implements java.io.Serializable {
 
     public void setDesignationMaster(DesignationMaster designationMaster) {
         this.designationMaster = designationMaster;
+    }
+
+    public MprMaster getMprMaster() {
+        return mprMaster;
+    }
+
+    public void setMprMaster(MprMaster mprMaster) {
+        this.mprMaster = mprMaster;
     }
 
 }

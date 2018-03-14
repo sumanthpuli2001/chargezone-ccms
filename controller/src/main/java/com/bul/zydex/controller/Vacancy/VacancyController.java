@@ -177,6 +177,8 @@ public class VacancyController extends VacancyAbstract {
         bind(request, vacancyMaster);
 
         mprMaster = mprMasterService.readById(Integer.parseInt(id));
+        
+        vacancyMaster.setMprMaster(mprMaster);
 
         int jobtype = mprMaster.getJobtypeMaster().getId();
         jobtypeMaster = jobtypeMasterService.readById(jobtype);

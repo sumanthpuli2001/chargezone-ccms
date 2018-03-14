@@ -52,5 +52,8 @@
         <many-to-one name="designationMaster" class="com.bul.zydex.model.DesignationMaster" fetch="select">
             <column name="designation_id" />
         </many-to-one>
+        <many-to-one name="mprMaster" class="com.bul.zydex.model.MprMaster" fetch="select">
+            <column name="mpr_master_id" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

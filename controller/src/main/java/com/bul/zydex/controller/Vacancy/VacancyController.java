@@ -22,6 +22,7 @@ import com.bul.zydex.model.QuestionDetails;
 import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.util.ActionType;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.AbstractList;
@@ -33,6 +34,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.validation.BindException;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -402,6 +405,54 @@ public class VacancyController extends VacancyAbstract {
         BindException errors = new BindException(candidateApplyJob, "candidateApplyJob");
         bind(request, candidateApplyJob);
 
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartFile multipartFile = multipartRequest.getFile("photograph");
+        if (candidateJobApplyService.isExist(multipartFile.getOriginalFilename())) {
+            String fileLocationURL = getServletContext().getRealPath("/")
+                    + File.separator + "StorageYard"
+                    + File.separator + "candidateimage" + File.separator;
+            String fileLocationURL1 = "StorageYard"
+                    + File.separator + "candidateimage" + File.separator;
+            File Folder1 = new File(fileLocationURL);
+            if (!Folder1.exists()) {
+                Folder1.mkdirs();
+            }
+            if (multipartFile != null && multipartFile.getSize() > 0) {
+                try {
+                    File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                    File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                    multipartFile.transferTo(file2);
+                    candidateApplyJob.setPhotograph(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                } catch (Exception e) {
+
+                }
+            }
+        }
+        MultipartHttpServletRequest multipartRequest1 = (MultipartHttpServletRequest) request;
+        MultipartFile multipartFile1 = multipartRequest.getFile("certificateId1");
+        if (candidateJobApplyService.isExistCertificateAttach(multipartFile1.getOriginalFilename())) {
+            String fileLocationURL = getServletContext().getRealPath("/")
+                    + File.separator + "StorageYard"
+                    + File.separator + "CertificateAttach" + File.separator;
+            String fileLocationURL1 = "StorageYard"
+                    + File.separator + "CertificateAttach" + File.separator;
+            File Folder1 = new File(fileLocationURL);
+            if (!Folder1.exists()) {
+                Folder1.mkdirs();
+            }
+            if (multipartFile1 != null && multipartFile1.getSize() > 0) {
+                try {
+                    File file2 = new File(fileLocationURL + multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
+                    File file = new File(fileLocationURL1 + multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
+                    multipartFile1.transferTo(file2);
+                    candidateApplyJob.setCertificateAttach(multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
+                } catch (Exception e) {
+
+                }
+            }
+        }
         candidateJobApplyValidator.validate(candidateApplyJob, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
@@ -411,7 +462,6 @@ public class VacancyController extends VacancyAbstract {
             mv.setViewName("Vacancy/applyJobCandidateRegistration");
         } else {
 
-            HttpSession session = request.getSession();
             ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
             candidateApplyJob.setApplayJobUserMaster(ajuMaster);
             List<CandidateApplyJob> list = (List<CandidateApplyJob>) candidateJobApplyService.readProfileByCandidateUserID(ajuMaster.getId());
@@ -426,6 +476,7 @@ public class VacancyController extends VacancyAbstract {
             mv.getModelMap().put("vacancyMaster", vacancyMaster);
             mv.setViewName("Vacancy/ShowVacancyList");
         }
+
         return mv;
     }
 
@@ -665,7 +716,7 @@ public class VacancyController extends VacancyAbstract {
         return mv;
     }
 
-       public ModelAndView clickassessment(HttpServletRequest request,
+    public ModelAndView clickassessment(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
@@ -827,6 +878,66 @@ public class VacancyController extends VacancyAbstract {
 
         CandidateApplyJob caj = candidateJobApplyService.readById(candidateApplyJob.getId());
 
+        String fileLocationURL = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "candidateimage" + File.separator + "" + caj.getPhotograph();
+        File File = new File(fileLocationURL);
+        File.delete();
+
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartFile multipartFile = multipartRequest.getFile("photograph");
+//        if (candidateJobApplyService.isExist(multipartFile.getOriginalFilename())) {
+        String fileLocationURL2 = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "candidateimage" + File.separator;
+        String fileLocationURL1 = "StorageYard"
+                + File.separator + "candidateimage" + File.separator;
+        File Folder1 = new File(fileLocationURL2);
+        if (!Folder1.exists()) {
+            Folder1.mkdirs();
+        }
+        if (multipartFile != null && multipartFile.getSize() > 0) {
+            try {
+                File file2 = new File(fileLocationURL2 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                multipartFile.transferTo(file2);
+                candidateApplyJob.setPhotograph(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+            } catch (Exception e) {
+
+            }
+        }
+//        }
+        
+         String fileLocationURL11 = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "CertificateAttach" + File.separator + "" + caj.getCertificateAttach();
+        File File1 = new File(fileLocationURL11);
+        File1.delete();
+
+        MultipartHttpServletRequest multipartRequest1 = (MultipartHttpServletRequest) request;
+        MultipartFile multipartFile1 = multipartRequest.getFile("certificateId1");
+//        if (candidateJobApplyService.isExistCertificateAttach(multipartFile1.getOriginalFilename())) {
+            String fileLocationURL3 = getServletContext().getRealPath("/")
+                    + File1.separator + "StorageYard"
+                    + File1.separator + "CertificateAttach" + File1.separator;
+            String fileLocationURL12 = "StorageYard"
+                    + File1.separator + "CertificateAttach" + File1.separator;
+            File Folder12 = new File(fileLocationURL3);
+            if (!Folder12.exists()) {
+                Folder12.mkdirs();
+            }
+            if (multipartFile1 != null && multipartFile1.getSize() > 0) {
+                try {
+                    File file2 = new File(fileLocationURL3 + multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
+                    File file = new File(fileLocationURL12 + multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
+                    multipartFile1.transferTo(file2);
+                    candidateApplyJob.setCertificateAttach(multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
+                } catch (Exception e) {
+
+                }
+            }
+//        }
+
         candidateApplyJob.setApplayJobUserMaster(caj.getApplayJobUserMaster());
         candidateJobApplyService.update(candidateApplyJob);
         request.setAttribute("successMessage",
@@ -840,7 +951,8 @@ public class VacancyController extends VacancyAbstract {
 
         return mv;
     }
-       public ModelAndView clickassessmentOnlineTest(HttpServletRequest request,
+
+    public ModelAndView clickassessmentOnlineTest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
@@ -881,7 +993,8 @@ public class VacancyController extends VacancyAbstract {
 
         return mv;
     }
-        public ModelAndView clickSubmitQuestionAnswer(HttpServletRequest request,
+
+    public ModelAndView clickSubmitQuestionAnswer(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();

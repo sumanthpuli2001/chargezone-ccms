@@ -23,4 +23,8 @@ public interface CandidateJobApplyService<T> extends GenericsService<T> {
 
     public CandidateApplyJob readByapplayjobusermasterid(int id);
 
+    public boolean isExist(String name);
+
+    public boolean isExistCertificateAttach(String name);
+
 }

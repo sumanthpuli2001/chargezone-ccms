@@ -128,7 +128,7 @@
         </c:if>
         <br/>
         <br/>
-        <form:form action="vacancy.htm?act=submitRegistration" method="post" commandName="candidateApplyJob"
+        <form:form action="vacancy.htm?act=submitRegistration" method="post" enctype="multipart/form-data"  commandName="candidateApplyJob"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <input type="hidden" id="empreqid" name="empreqid" value="${candidateApplyJob.id}">
             <section class="content">
@@ -230,7 +230,8 @@
                                 <label>Photograph<span style="color: red;font-size: 12px;">*</span></label>
                             </div>
                             <div class="col-sm-3" style="text-align: left;">
-                                <form:input type="file" path="photograph" class="form-control" id="photograph" name="photograph" accept="image/jpg,image/jpeg,image/png" onchange="checkFileSize();"></form:input>
+                                 <input type="file" class="form-control" id="photograph" name="photograph" accept="image/jpg,image/jpeg,image/png" onchange="checkFileSize();">
+                                <!--<input type="file" path="photograph" class="form-control" id="photograph" name="photograph" accept="image/jpg,image/jpeg,image/png" onchange="checkFileSize();">-->
                                 <%--<form:errors path="photograph" cssClass="errorDiv"></form:errors>--%>
                                 </div>
 
@@ -356,7 +357,8 @@
                                     <label>Resume Attach :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
-                                <form:input path="certificateAttach" type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png" onchange="checkCertificateFileSize(1);"></form:input>
+                                     <input type="file" class="form-control" id="certificateId1"  size = "50"  name="certificateId1"  onchange="checkFilecertificate();">
+                                <%--<form:input path="certificateAttach" type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png" onchange="checkCertificateFileSize(1);"></form:input>--%>
                                 <span style="color: red;font-size: 12px;"><form:errors path="certificateAttach" cssClass="errorDiv"></form:errors></span>
                                 </div>
 
@@ -420,6 +422,26 @@
                 forceParse: 0
             });
 
+    </script>
+    
+<script type="text/javascript">
+        function checkFilecertificate()
+        {
+        var fup = document.getElementById('certificateId1');
+        var certificateId1 = fup.value;
+        alert(certificateId1);
+        var ext = certificateId1.substring(certificateId1.lastIndexOf('.') + 1);
+        if(ext == "pdf" )
+        {
+        return true;
+        } 
+        else
+        {
+        alert("Upload pdf files only");
+        fup.focus();
+        return false;
+        }
+        }
     </script>
     <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
 </html>

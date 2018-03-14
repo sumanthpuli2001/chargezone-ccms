@@ -177,7 +177,7 @@ public class VacancyController extends VacancyAbstract {
         bind(request, vacancyMaster);
 
         mprMaster = mprMasterService.readById(Integer.parseInt(id));
-        
+
         vacancyMaster.setMprMaster(mprMaster);
 
         int jobtype = mprMaster.getJobtypeMaster().getId();
@@ -909,8 +909,8 @@ public class VacancyController extends VacancyAbstract {
             }
         }
 //        }
-        
-         String fileLocationURL11 = getServletContext().getRealPath("/")
+
+        String fileLocationURL11 = getServletContext().getRealPath("/")
                 + File.separator + "StorageYard"
                 + File.separator + "CertificateAttach" + File.separator + "" + caj.getCertificateAttach();
         File File1 = new File(fileLocationURL11);
@@ -919,25 +919,25 @@ public class VacancyController extends VacancyAbstract {
         MultipartHttpServletRequest multipartRequest1 = (MultipartHttpServletRequest) request;
         MultipartFile multipartFile1 = multipartRequest.getFile("certificateId1");
 //        if (candidateJobApplyService.isExistCertificateAttach(multipartFile1.getOriginalFilename())) {
-            String fileLocationURL3 = getServletContext().getRealPath("/")
-                    + File1.separator + "StorageYard"
-                    + File1.separator + "CertificateAttach" + File1.separator;
-            String fileLocationURL12 = "StorageYard"
-                    + File1.separator + "CertificateAttach" + File1.separator;
-            File Folder12 = new File(fileLocationURL3);
-            if (!Folder12.exists()) {
-                Folder12.mkdirs();
-            }
-            if (multipartFile1 != null && multipartFile1.getSize() > 0) {
-                try {
-                    File file2 = new File(fileLocationURL3 + multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
-                    File file = new File(fileLocationURL12 + multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
-                    multipartFile1.transferTo(file2);
-                    candidateApplyJob.setCertificateAttach(multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
-                } catch (Exception e) {
+        String fileLocationURL3 = getServletContext().getRealPath("/")
+                + File1.separator + "StorageYard"
+                + File1.separator + "CertificateAttach" + File1.separator;
+        String fileLocationURL12 = "StorageYard"
+                + File1.separator + "CertificateAttach" + File1.separator;
+        File Folder12 = new File(fileLocationURL3);
+        if (!Folder12.exists()) {
+            Folder12.mkdirs();
+        }
+        if (multipartFile1 != null && multipartFile1.getSize() > 0) {
+            try {
+                File file2 = new File(fileLocationURL3 + multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
+                File file = new File(fileLocationURL12 + multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
+                multipartFile1.transferTo(file2);
+                candidateApplyJob.setCertificateAttach(multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
+            } catch (Exception e) {
 
-                }
             }
+        }
 //        }
 
         candidateApplyJob.setApplayJobUserMaster(caj.getApplayJobUserMaster());
@@ -1056,6 +1056,48 @@ public class VacancyController extends VacancyAbstract {
         }
         request.setAttribute("successMessage", "Information : The Data Submitted Successfully.");
         mv.setViewName("Vacancy/OnlineTestQuestionPaper");
+        return mv;
+    }
+
+    public ModelAndView CreateNewVacancy(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        LocationMaster locationMaster = new LocationMaster();
+        JobtypeMaster jobtypeMaster = new JobtypeMaster();
+        BindException errors = new BindException(vacancyMaster, "vacancyMaster");
+        bind(request, vacancyMaster);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+
+        departmentList(request);
+        designationList(request);
+        Map<Integer, String> locationMap = readLocations();
+        Map<Integer, String> jobtype1 = jobtypeList();
+        mv.addObject("locationMap", locationMap);
+        mv.addObject("jobtype1", jobtype1);
+
+        vacancyValidator.validate(vacancyMaster, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "All field are Required.Please Enter Valid data");
+            mv.addAllObjects(errors.getModel());
+            mv.setViewName("Vacancy/NewButtonCreateVacancy");
+        } else {
+            vacancyMaster.setStatus(0);
+            vacancyMaster.setCreatedBy(employeeMaster.getId());
+            vacancyMaster.setCreatedDate(sdf.format(cDate));
+
+            vacancyMasterService.create(vacancyMaster);
+
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
+
+            mv = vacancyDetailList(request,response);
+        }
+
         return mv;
     }
 }

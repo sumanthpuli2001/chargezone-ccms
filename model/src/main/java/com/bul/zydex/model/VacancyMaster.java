@@ -27,12 +27,16 @@ public class VacancyMaster implements java.io.Serializable {
     private Integer status;
     private DesignationMaster designationMaster;
     private MprMaster mprMaster;
+    private Integer createdBy;
+    private String createdDate;
+    private Integer updatedBy;
+    private String updatedDate;
 
     public VacancyMaster() {
 
     }
 
-    public VacancyMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer salaryRange, String experience, String responsibility, String skill, String fromDate, String toDate, String description, Integer status, DesignationMaster designationMasterm, MprMaster mprMaster) {
+    public VacancyMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer salaryRange, String experience, String responsibility, String skill, String fromDate, String toDate, String description, Integer status, DesignationMaster designationMasterm, MprMaster mprMaster, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
@@ -49,6 +53,10 @@ public class VacancyMaster implements java.io.Serializable {
         this.status = status;
         this.designationMaster = designationMaster;
         this.mprMaster = mprMaster;
+        this.createdBy = createdBy;
+        this.createdDate = createdDate;
+        this.updatedBy = updatedBy;
+        this.updatedDate = updatedDate;
     }
 
     public Integer getId() {
@@ -178,5 +186,38 @@ public class VacancyMaster implements java.io.Serializable {
     public void setMprMaster(MprMaster mprMaster) {
         this.mprMaster = mprMaster;
     }
+
+    public Integer getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Integer createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Integer getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(Integer updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public String getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+    
 
 }

@@ -10,6 +10,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/jsp/Common/Top.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,6 +61,18 @@
             }
 
         </style>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+        <script>
+            $(function () {
+                $("#datepicker").datepicker();
+            });
+            $(function () {
+                $("#datepicker1").datepicker();
+            });
+            $(function () {
+                $("#datepicker2").datepicker();
+            });
+        </script>
         <!--        <style>
                     element.style {
                         left: 0px !important;
@@ -127,7 +140,7 @@
                                     <label>D.O.B :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3">
-                                <form:input path="dob" class="form-control" placeholder="Enter D.O.B"></form:input>
+                                <form:input path="dob" class="form-control" id="datepicker" placeholder="Enter D.O.B" readonly="true"></form:input>
                                 <span style="color: red;font-size: 12px;"><form:errors path="dob" cssClass="errorDiv"></form:errors></span>
                                 </div>
                             </div>
@@ -161,7 +174,7 @@
                                     <label>Father D.O.B :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3">
-                                <form:input path="fatherDob"  class="form-control" size="16" placeholder="DD/MM/YYYY" ></form:input>
+                                <form:input path="fatherDob" id="datepicker1" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" ></form:input>
                                 <span style="color: red;font-size: 12px;"><form:errors path="fatherDob" cssClass="errorDiv"></form:errors></span>
                                 </div>
 
@@ -169,7 +182,7 @@
                                     <label>Mother D.O.B :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3">
-                                <form:input path="motherDob"  class="form-control" size="16" placeholder="DD/MM/YYYY" ></form:input>
+                                <form:input path="motherDob" id="datepicker2"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
                                 <span style="color: red;font-size: 12px;"><form:errors path="motherDob" cssClass="errorDiv"></form:errors></span>
                                 </div>
                             </div>
@@ -408,4 +421,24 @@
             }
         }
     </script>
+
+    <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
+    <!--<script src="StorageYard/Plugins/jQuery/jQuery-2.1.4.min.js"></script>-->
+    <!--============= Move On Last in this Page ===========================-->
+    <!--<script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>-->
+    <!--============= Move On Last in this Page =================================-->
+    <script src="StorageYard/Plugins/jQueryUI/jquery-ui.min.js"></script>
+    <script src="StorageYard/Plugins/fastclick/fastclick.min.js"></script>
+    <script src="StorageYard/JS/bootstrap/app.min.js"></script>
+    <script src="StorageYard/Plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="StorageYard/Plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="StorageYard/Plugins/chartjs/Chart.min.js"></script>
+    <script src="StorageYard/Plugins/daterangepicker/moment.min.js"></script>
+    <script src="StorageYard/Plugins/fullcalendar/fullcalendar.min.js"></script>
+    <script src="StorageYard/Plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="StorageYard/Plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="StorageYard/Plugins/iCheck/icheck.min.js"></script>
+    <script src="StorageYard/JS/JQuery/common.js"></script>
+    <script src="StorageYard/JS/bootstrap/jquery.tokeninput.js"></script>
+    <script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>
 </html>

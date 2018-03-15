@@ -504,7 +504,7 @@ public class VacancyController extends VacancyAbstract {
 
         } else if (applayJobUserMasterSerivce.isExist(applayJobUserMaster)) {
             request.setAttribute("failureMessage",
-                    "Error : UserName & Password is already used.");
+                    "Error : UserName is already used.");
             mv = signUp(request, response);
         } else {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

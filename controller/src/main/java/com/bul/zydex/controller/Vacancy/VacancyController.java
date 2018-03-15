@@ -48,8 +48,9 @@ public class VacancyController extends VacancyAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         VacancyMaster vacancyMaster = new VacancyMaster();
-        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        List<?> vacancylist = vacancyMasterService.fetchCreatedVacancy(employeeMaster.getId());
         mv.getModelMap().put("list", vacancylist);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
         mv.setViewName("Vacancy/VacancyDetailReportList");
@@ -165,6 +166,9 @@ public class VacancyController extends VacancyAbstract {
     public ModelAndView vacancySubmitCreate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         VacancyMaster vacancyMaster = new VacancyMaster();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
         String id = request.getParameter("mprMasterid");
         DepartmentMaster departmentMaster = new DepartmentMaster();
         MprMaster mprMaster = new MprMaster();
@@ -238,6 +242,8 @@ public class VacancyController extends VacancyAbstract {
 
         } else {
             vacancyMaster.setStatus(0);
+            vacancyMaster.setCreatedBy(employeeMaster.getId());
+            vacancyMaster.setCreatedDate(sdf.format(cDate));
             vacancyMasterService.create(vacancyMaster);
             request.setAttribute("successMessage",
                     "Information : The Information is Created Successfully.");
@@ -1095,9 +1101,22 @@ public class VacancyController extends VacancyAbstract {
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
 
-            mv = vacancyDetailList(request,response);
+            mv = vacancyDetailList(request, response);
         }
 
+        return mv;
+    }
+
+    public ModelAndView vacancyFetch(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+
+        List<?> vacancyList = vacancyMasterService.fetchVacancyDetail();
+        mv.getModelMap().put("list", vacancyList);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.setViewName("Vacancy/vacancyList");
         return mv;
     }
 }

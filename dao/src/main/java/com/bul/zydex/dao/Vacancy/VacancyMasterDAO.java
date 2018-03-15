@@ -16,4 +16,6 @@ public interface VacancyMasterDAO<T> extends GenericsDAO<T>{
     
     public List<?> fetchVacancyDetail();
     
+    public List<?> fetchCreatedVacancy(int empId);
+    
 }

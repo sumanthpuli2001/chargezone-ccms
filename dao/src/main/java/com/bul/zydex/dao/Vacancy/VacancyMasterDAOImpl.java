@@ -32,4 +32,17 @@ public class VacancyMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Vacan
         return list;
     }
 
+    @Override
+    public List<?> fetchCreatedVacancy(int empId) {
+        String query = "";
+        query += " "
+                + " SELECT a.id, a.name, a.numberOfPosition, a.salaryRange, a.experience, a.status, a.fromDate, a.toDate"
+                + " FROM VacancyMaster a "
+                + " Where a.createdBy =" + empId
+                + " order by a.id desc";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+
+    }
 }

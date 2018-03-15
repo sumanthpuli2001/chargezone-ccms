@@ -358,7 +358,7 @@
 
 
                             </div>
-                       
+
 
 
 
@@ -421,4 +421,24 @@
             }
         }
     </script>
+
+    <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
+    <!--<script src="StorageYard/Plugins/jQuery/jQuery-2.1.4.min.js"></script>-->
+    <!--============= Move On Last in this Page ===========================-->
+    <!--<script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>-->
+    <!--============= Move On Last in this Page =================================-->
+    <script src="StorageYard/Plugins/jQueryUI/jquery-ui.min.js"></script>
+    <script src="StorageYard/Plugins/fastclick/fastclick.min.js"></script>
+    <script src="StorageYard/JS/bootstrap/app.min.js"></script>
+    <script src="StorageYard/Plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="StorageYard/Plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="StorageYard/Plugins/chartjs/Chart.min.js"></script>
+    <script src="StorageYard/Plugins/daterangepicker/moment.min.js"></script>
+    <script src="StorageYard/Plugins/fullcalendar/fullcalendar.min.js"></script>
+    <script src="StorageYard/Plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="StorageYard/Plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="StorageYard/Plugins/iCheck/icheck.min.js"></script>
+    <script src="StorageYard/JS/JQuery/common.js"></script>
+    <script src="StorageYard/JS/bootstrap/jquery.tokeninput.js"></script>
+    <script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>
 </html>

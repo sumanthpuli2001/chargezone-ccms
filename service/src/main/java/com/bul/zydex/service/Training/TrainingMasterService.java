@@ -13,4 +13,6 @@ import java.util.List;
  * @author Dell-1
  */
 public interface TrainingMasterService<T> extends GenericsService<T> {
+    
+    public void deletetrainingSubMaster(final Integer id);
 }

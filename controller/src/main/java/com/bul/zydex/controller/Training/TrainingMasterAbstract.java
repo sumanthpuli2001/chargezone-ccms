@@ -6,13 +6,14 @@
 package com.bul.zydex.controller.Training;
 
 import com.bul.zydex.controller.CustomAbstract;
-import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingMaster;
+import com.bul.zydex.model.TrainingSubMaster;
 import com.bul.zydex.model.TrainingSubType;
 import com.bul.zydex.model.TrainingType;
 import com.bul.zydex.service.Training.TrainerService;
 import com.bul.zydex.service.Training.TrainingMasterService;
+import com.bul.zydex.service.Training.TrainingSubMasterService;
 import com.bul.zydex.service.Training.TrainingSubTypeService;
 import com.bul.zydex.service.Training.TrainingTypeService;
 import java.util.HashMap;
@@ -29,6 +30,7 @@ public abstract class TrainingMasterAbstract extends CustomAbstract{
     protected TrainingSubTypeService<TrainingSubType> trainingSubTypeService;
     protected TrainerService<Trainer> trainerService;
     protected TrainingMasterService<TrainingMaster> trainingMasterService;
+    protected TrainingSubMasterService<TrainingSubMaster> trainingSubMasterService;
 
     public TrainingTypeService<TrainingType> getTrainingTypeService() {
         return trainingTypeService;
@@ -60,6 +62,14 @@ public abstract class TrainingMasterAbstract extends CustomAbstract{
 
     public void setTrainingMasterService(TrainingMasterService<TrainingMaster> trainingMasterService) {
         this.trainingMasterService = trainingMasterService;
+    }
+
+    public TrainingSubMasterService<TrainingSubMaster> getTrainingSubMasterService() {
+        return trainingSubMasterService;
+    }
+
+    public void setTrainingSubMasterService(TrainingSubMasterService<TrainingSubMaster> trainingSubMasterService) {
+        this.trainingSubMasterService = trainingSubMasterService;
     }
     
      protected void trainerList(HttpServletRequest request) {

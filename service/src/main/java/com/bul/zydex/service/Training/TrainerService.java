@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.service.Training;
 
+import com.bul.zydex.model.Trainer;
 import com.bul.zydex.service.GenericsService;
 import java.util.List;
 
@@ -14,6 +15,12 @@ import java.util.List;
  */
 public interface TrainerService<T> extends GenericsService<T> {
 
+    public List<?> readByUserName(T object);
+
+    public List<?> readByUser(String username);
+
     public List<?> readTrainerList();
+
+    public List<?> read(T object);
 
 }

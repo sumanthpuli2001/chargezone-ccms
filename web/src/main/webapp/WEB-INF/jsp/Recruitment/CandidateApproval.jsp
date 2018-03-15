@@ -87,7 +87,7 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>photograph:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.photograph}</span>
+                                                    <span><img src="StorageYard/candidateimage/${candidateApplyJob.photograph}" width="50px; !important" height="50px; !important">&nbsp;&nbsp;${candidateApplyJob.photograph}</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">

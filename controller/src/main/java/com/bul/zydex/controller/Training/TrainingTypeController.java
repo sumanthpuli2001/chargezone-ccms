@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -232,6 +233,18 @@ public class TrainingTypeController extends TrainingTypeAbstract {
         trainingMaster.setTrainer(trainer);
         trainingMaster.setTrainingSubType(trainingSubType);
         trainingMaster.setTrainingType(trainingType);
+        List attenlist=  new LinkedList();
+         attenlist =  trainingAttendanceService.gettrainingattendance(eventdate,Integer.parseInt(id));
+        boolean shosts=true;
+       
+       if(attenlist.isEmpty()){
+           shosts=false;
+           attenlist=  trainingIdentificationService.gettrainingattendance(Integer.parseInt(id));
+           
+       }
+       
+        request.setAttribute("shosts", shosts);
+        request.setAttribute("list", attenlist);
         request.setAttribute("trainingMaster", trainingMaster);
         mv.setViewName("Training/TrainingMasterlblview");
         return mv;

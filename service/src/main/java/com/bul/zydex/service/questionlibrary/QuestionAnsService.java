@@ -18,4 +18,6 @@ public interface QuestionAnsService<T> extends GenericsService<T> {
 
     public void deleteByQlId(T object);
 
+    public List<?> takeTestOnlineAssementCandidateAnswer(int questionLibraryID);
+
 }

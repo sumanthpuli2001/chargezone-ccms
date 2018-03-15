@@ -13,12 +13,14 @@ import java.util.List;
  *
  * @author Vikas
  */
-public interface CandidateJobApplicationDAO<T> extends GenericsDAO<T>{
-    
+public interface CandidateJobApplicationDAO<T> extends GenericsDAO<T> {
+
     public List<?> readByCandidateId(int candidateId);
-    
+
     public List<?> readCandidateApplyForJob();
-    
-    public CandidateJobApplication readByCandidateIdAndVacancyId(int candId,int vacId);
-    
+
+    public CandidateJobApplication readByCandidateIdAndVacancyId(int candId, int vacId);
+
+    public List<?> readOnlineAssementCandidate(int userMaster);
+
 }

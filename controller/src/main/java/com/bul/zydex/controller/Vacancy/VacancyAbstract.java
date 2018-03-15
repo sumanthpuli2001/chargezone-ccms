@@ -16,17 +16,29 @@ import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
 import com.bul.zydex.model.MprMaster;
+import com.bul.zydex.model.OnlineAssessment;
+import com.bul.zydex.model.QuestionAns;
+import com.bul.zydex.model.QuestionAnswerSubmit;
+import com.bul.zydex.model.QuestionDetails;
+import com.bul.zydex.model.QuestionLibrary;
+import com.bul.zydex.model.QuestionPaper;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.ApplayJobUserMaster.ApplayJobUserMasterService;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
+import com.bul.zydex.service.QuestionAnswerSubmit.QuestionAnswerSubmitService;
 import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
 import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
 import com.bul.zydex.service.Recruitment.MprEmployeeTypeMasterService;
 import com.bul.zydex.service.Recruitment.MprMasterService;
+import com.bul.zydex.service.Recruitment.OnlineAssessmentService;
 import com.bul.zydex.service.Vacancy.VacancyMasterService;
 import com.bul.zydex.service.emp.DesignationMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
+import com.bul.zydex.service.questionlibrary.QuestionAnsService;
+import com.bul.zydex.service.questionlibrary.QuestionDetailsService;
+import com.bul.zydex.service.questionlibrary.QuestionLibraryService;
+import com.bul.zydex.service.questionlibrary.QuestionPaperService;
 import com.bul.zydex.validator.Recruitment.ApplayJobUserMasterValidator;
 import com.bul.zydex.validator.Vacancy.CandidateJobApplyValidator;
 import java.util.HashMap;
@@ -52,6 +64,12 @@ public class VacancyAbstract extends CustomAbstract {
     protected CandidateJobApplyValidator candidateJobApplyValidator;
     protected MprMasterService<MprMaster> mprMasterService;
     protected CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService;
+    protected OnlineAssessmentService<OnlineAssessment> onlineAssessmentService;
+    protected QuestionPaperService<QuestionPaper> questionPaperService;
+    protected QuestionDetailsService<QuestionDetails> questionDetailsService;
+    protected QuestionLibraryService<QuestionLibrary> questionLibraryService;
+    protected QuestionAnsService<QuestionAns> questionAnsService;
+    protected QuestionAnswerSubmitService<QuestionAnswerSubmit> questionAnswerSubmitService;
 
     public CandidateJobApplyService<CandidateApplyJob> getCandidateJobApplyService() {
         return candidateJobApplyService;
@@ -141,6 +159,56 @@ public class VacancyAbstract extends CustomAbstract {
     public void setCandidateJobApplicationService(CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService) {
         this.candidateJobApplicationService = candidateJobApplicationService;
     }
+
+    public OnlineAssessmentService<OnlineAssessment> getOnlineAssessmentService() {
+        return onlineAssessmentService;
+    }
+
+    public void setOnlineAssessmentService(OnlineAssessmentService<OnlineAssessment> onlineAssessmentService) {
+        this.onlineAssessmentService = onlineAssessmentService;
+    }
+
+    public QuestionPaperService<QuestionPaper> getQuestionPaperService() {
+        return questionPaperService;
+    }
+
+    public void setQuestionPaperService(QuestionPaperService<QuestionPaper> questionPaperService) {
+        this.questionPaperService = questionPaperService;
+    }
+
+    public QuestionDetailsService<QuestionDetails> getQuestionDetailsService() {
+        return questionDetailsService;
+    }
+
+    public void setQuestionDetailsService(QuestionDetailsService<QuestionDetails> questionDetailsService) {
+        this.questionDetailsService = questionDetailsService;
+    }
+
+    public QuestionLibraryService<QuestionLibrary> getQuestionLibraryService() {
+        return questionLibraryService;
+    }
+
+    public void setQuestionLibraryService(QuestionLibraryService<QuestionLibrary> questionLibraryService) {
+        this.questionLibraryService = questionLibraryService;
+    }
+
+    public QuestionAnsService<QuestionAns> getQuestionAnsService() {
+        return questionAnsService;
+    }
+
+    public void setQuestionAnsService(QuestionAnsService<QuestionAns> questionAnsService) {
+        this.questionAnsService = questionAnsService;
+    }
+
+    public QuestionAnswerSubmitService<QuestionAnswerSubmit> getQuestionAnswerSubmitService() {
+        return questionAnswerSubmitService;
+    }
+
+    public void setQuestionAnswerSubmitService(QuestionAnswerSubmitService<QuestionAnswerSubmit> questionAnswerSubmitService) {
+        this.questionAnswerSubmitService = questionAnswerSubmitService;
+    }
+    
+    
     
     
     

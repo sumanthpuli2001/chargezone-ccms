@@ -18,4 +18,6 @@ public interface QuestionLibraryDAO<T> extends GenericsDAO<T> {
 
     public List<?> readByQusNameCatyMark(int categoryId, String Question, int marks);
 
+    
+
 }

@@ -129,9 +129,6 @@
     <mapping resource="com/bul/zydex/model/TrainingAttendance.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/TrainingIdentification.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/ClassifiedBox.hbm.xml"/>
-    <mapping resource="../../../TrainingFeedback.xml"/>
-    <mapping resource="com/bul/zydex/model/EmployeeFeedback.hbm.xml"/>
-    <mapping resource="com/bul/zydex/model/TrainingFeedback.hbm.xml"/>
-    <mapping resource="com/bul/zydex/model/EmployeeFeedback.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/QuestionAnswerSubmit.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

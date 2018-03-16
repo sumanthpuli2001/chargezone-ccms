@@ -582,8 +582,8 @@
     </bean>
     <bean id="classifiedBoxService1" class="com.bul.zydex.service.ClassifiedBox.ClassifiedBoxServiceImpl">
         <property name="classifiedBoxDAO" ref="classifiedBoxDAO1" />
-     </bean>
-     <bean id="employeeFeedbackService1" class="com.bul.zydex.service.Training.EmployeeFeedbackServiceImpl">
-        <property name="employeeFeedbackDAO" ref="employeeFeedbackDAO1" />
-     </bean>
+    </bean>
+    <bean id="questionAnswerSubmitService1" class="com.bul.zydex.service.QuestionAnswerSubmit.QuestionAnswerSubmitServiceImpl">
+        <property name="questionAnswerSubmitDAO" ref="questionAnswerSubmitDAO1" />
+    </bean>
 </beans>

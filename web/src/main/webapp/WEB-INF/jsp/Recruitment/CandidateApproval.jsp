@@ -156,7 +156,7 @@
                                                     <%--<c:if test="${status != 1}">--%>
                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">&nbsp; F To F</button>
                                                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>
-                                                    <button type="button" class="btn btn-primary" id="btnType1" onclick="goToAns(${candidateApplyJob.id})" name="btnType" value="AssessMent" style="width: 100px" >Ans</button>
+                                                    <button type="button" class="btn btn-primary" id="btnType1" onclick="goToAns(${candidateJobApplication.id},${candidateApplyJob.id})" name="btnType" value="AssessMent" style="width: 100px" >Ans</button>
                                                     <%--</c:if>--%>
                                                 </div>
 
@@ -369,7 +369,7 @@
 
 </script>
 <script>
-    function goToAns(applyJobId) {
-        window.location = 'onlineAssessment.htm?act=goToAns&id=' + applyJobId;
+    function goToAns(applicationId, candidateId) {
+        window.location = 'onlineAssessment.htm?act=goToAns&id=' + applicationId + '&candidateId=' + candidateId;
     }
 </script>

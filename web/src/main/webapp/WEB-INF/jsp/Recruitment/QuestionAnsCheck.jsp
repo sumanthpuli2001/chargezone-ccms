@@ -32,82 +32,177 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form class="form-horizontal" method="post" commandName="questionLibrary" action="questionLibrary.htm?act=submitQuestionLibrarynewRecord">
-            <%--action="vacancy.htm?act=clickSubmitQuestionAnswer"--%> 
+
+        <form:form class="form-horizontal" method="post" commandName="questionPaper" action="questionLibrary.htm?act=submitQuestionPaperStep1">
             <section class="content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Custom Tabs -->
-                        <div class="nav-tabs-custom">
-                            <div class="tab-content">
-                                <div class="box-header">
-                                </div>
-                                <div class="box-body no-padding">
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12" style="width:96%;">
-                                            <div class="table table-bordered" style="margin-left: 2%; margin-right: 5%;">
-                                                <table id="table_1" class="table table-bordered table-striped table-hover" style=" text-align: left; border-bottom: 0px !important; margin-right: 5%;"   >
-                                                    <c:choose>
-                                                        <c:when test="${empty list2}">
-                                                            <tr>
-                                                                <td align="center">
-                                                                    <c:out value="There is no record found."></c:out>
-                                                                    </td>
-                                                                </tr>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <thead>
+                <div class="col-md-12">
+                    <div class="nav-tabs-custom">
+                        <div class="tab-content">
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <%--<c:choose>--%>
+                                        <%--<c:when test="${empty list2}">--%>
+                                        <c:if test="${empty list2}">
+                                            <div class="col-md-12 col-sm-12">
 
-                                                            <input type="hidden" name="candidateID" id="candidateID" value="${candidateID}">
-                                                            <input type="hidden" name="countDetailId" id="countDetailId" value="${fn:length(list2)}">
-                                                            <c:forEach var="employeeAdditional" items="${list2}" varStatus="status">
-                                                                <%--<c:if test="${employeeAdditional[1] ne 0.0}">--%>
+                                                <c:out value="There is no record found."></c:out>
+                                                </div>
+                                        </c:if>
+                                        <%--</c:when>--%>
+                                        <%--<c:otherwise>--%>
 
-                                                                <tr>
-                                                                    <td>${status.count}. ${employeeAdditional[0]}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <c:if test="${employeeAdditional[1] eq 0}">
+                                        <input type="hidden" name="candidateID" id="candidateID" value="${candidateID}">
+                                        <input type="hidden" name="countDetailId" id="countDetailId" value="${fn:length(list2)}">
 
-                                                                        <!--                                                                        <input type="checkbox" class="form-check-input" id="checkbox104">
-                                                                                                                                                <label class="form-check-label" for="checkbox1">${employeeAdditional[2]}</label>-->
-                                                                    <tr><td><input class="form-check-input" name="${status.count}" type="radio" id="radio100${status.count}" value="${employeeAdditional[3]}" >
-                                                                            <label class="form-check-label" for="radio100${employeeAdditional[3]}">${employeeAdditional[2]}</label></td></tr>
-                                                                    <tr><td><input class="form-check-input" name="${status.count}" type="radio" id="radio100${status.count}" value="${employeeAdditional[5]}">
-                                                                            <label class="form-check-label" for="radio100${employeeAdditional[5]}">${employeeAdditional[4]}</label></td></tr>
-                                                                    <tr><td><input class="form-check-input" name="${status.count}" type="radio" id="radio100${status.count}" value="${employeeAdditional[7]}">
-                                                                            <label class="form-check-label" for="radio100${employeeAdditional[7]}">${employeeAdditional[6]}</label></td></tr>
-                                                                    <tr><td><input class="form-check-input" name="${status.count}" type="radio" id="radio100${status.count}" value="${employeeAdditional[9]}">
-                                                                            <label class="form-check-label" for="radio100${employeeAdditional[9]}">${employeeAdditional[8]}</label></td></tr>
-                                                                        </c:if>
-                                                                        <c:if test="${employeeAdditional[1] eq 1}">
-                                                                    <td><textarea type="text" name="${status.count}" id="${status.count}" rows="4" cols="70" placeholder="Enter your answer here..."></textarea></td>
-                                                                    </c:if>
-                                                                </tr>
+                                        <div class="form-group">
+                                            <div class="col-sm-8"><h4><b>Questions</b></h4></div>
+                                            <div class="col-sm-2"><h4><b>Answer Status</b></h4></div>
+                                            <div class="col-sm-2"><h4><b>Marks</b></h4></div>
+                                        </div>
+                                        <c:forEach var="employeeAdditional" items="${list2}" varStatus="status">
 
-                                                            </c:forEach>
 
-                                                            </thead>
-                                                        </c:otherwise>
-                                                    </c:choose>
-
-                                                </table>
-                                                <div class="form-group">
-
-                                                    <div class=" col-sm-2">
-                                                        <button type="submit" class="btn btn-primary" data-original-title=""  title="" style="text-align: center" >Submit</button> 
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    ${status.count}. ${employeeAdditional[0]}
+                                                </div>
+                                                <c:if test="${employeeAdditional[1] eq 0}">
+                                                    <div class="col-sm-2">
+                                                        <c:if test="${employeeAdditional[3] eq employeeAdditional[4]}">
+                                                            Correct
+                                                        </c:if>
+                                                        <c:if test="${employeeAdditional[3] ne employeeAdditional[4]}">
+                                                            Incorrect
+                                                        </c:if>
                                                     </div>
+                                                    <c:if test="${employeeAdditional[3] eq employeeAdditional[4]}">
+                                                        <div class="col-sm-2">
+                                                            <input type="text" value="${employeeAdditional[5]}" id="givenMarks2" name="givenMarks2" class="form1" readonly="true">
+                                                            /Out of <b>${employeeAdditional[5]}</b>
+                                                        </div>
+                                                    </c:if>
+                                                    <c:if test="${employeeAdditional[3] ne employeeAdditional[4]}">
+                                                        <div class="col-sm-2">
+                                                            <input type="text" value="0" name="givenMarks2" class="form1" id="givenMarks2" readonly="true">
+                                                            /Out of <b>${employeeAdditional[5]}</b>
+                                                        </div>
+                                                    </c:if>
+                                                </c:if>
+                                                <c:if test="${employeeAdditional[1] eq 1}">
+
+                                                    <div class="col-sm-1">
+                                                        <input class="form-check-input" name="${status.count}" type="radio"  value="${employeeAdditional[4]}" >
+                                                        <label class="form-check-label" for="radio100${employeeAdditional[6]}">Correct</label>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <input class="form-check-input" name="${status.count}" type="radio"  value="${employeeAdditional[4]}" >
+                                                        <label class="form-check-label" for="radio100${employeeAdditional[6]}">Incorrect</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+
+                                                        <input type="number" name="givenMarks1" class="form-control" id="givenMarks3" class="form2">
+                                                        <label>/Out Of ${employeeAdditional[5]}</label>
+                                                    </div>
+                                                </c:if>
+
+                                                <c:if test="${employeeAdditional[1] eq 0}">
+                                                    <div class="col-sm-10">
+                                                        <c:if test="${employeeAdditional[3] eq employeeAdditional[7]}">
+
+                                                            <input class="form-check-input" name="${status.count}" type="radio" id="radio100${status.count}" value="${employeeAdditional[2]}"  checked="true">
+                                                        </c:if>
+                                                        <c:if test="${employeeAdditional[3] ne employeeAdditional[7]}">
+
+                                                            <input class="form-check-input" name="${status.count}" type="radio"  value="${employeeAdditional[2]}"  disabled>
+                                                        </c:if>
+                                                        <label class="form-check-label" for="radio100${employeeAdditional[3]}">${employeeAdditional[6]}</label>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <c:if test="${employeeAdditional[3] eq employeeAdditional[9]}">
+                                                            <input class="form-check-input" name="${status.count}" type="radio" id="radio100${status.count}" value="${employeeAdditional[4]}" checked="true">
+                                                        </c:if>
+                                                        <c:if test="${employeeAdditional[3] ne employeeAdditional[9]}">
+                                                            <input class="form-check-input" name="${status.count}" type="radio"  value="${employeeAdditional[4]}" disabled>
+                                                        </c:if>
+                                                        <label class="form-check-label" for="radio100${employeeAdditional[6]}">${employeeAdditional[8]}</label>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <c:if test="${employeeAdditional[3] eq employeeAdditional[11]}">
+
+                                                            <input class="form-check-input" name="${status.count}" type="radio" id="radio100${status.count}" value="${employeeAdditional[7]}" checked="true">
+                                                        </c:if>
+                                                        <c:if test="${employeeAdditional[3] ne employeeAdditional[11]}">
+
+                                                            <input class="form-check-input" name="${status.count}" type="radio"  value="${employeeAdditional[7]}" disabled>
+                                                        </c:if>
+                                                        <label class="form-check-label" for="radio100${employeeAdditional[8]}">${employeeAdditional[10]}</label>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <c:if test="${employeeAdditional[3] eq employeeAdditional[13]}">
+
+                                                            <input class="form-check-input" name="${status.count}" type="radio" id="radio100${status.count}" value="${employeeAdditional[9]}" checked="true">
+                                                        </c:if>
+                                                        <c:if test="${employeeAdditional[3] ne employeeAdditional[13]}">
+
+                                                            <input class="form-check-input" name="${status.count}" type="radio"  value="${employeeAdditional[9]}" disabled>
+                                                        </c:if>
+                                                        <label class="form-check-label" for="radio100${employeeAdditional[10]}">${employeeAdditional[12]}</label>
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${employeeAdditional[1] eq 1}">
+                                                    <div class="col-sm-8">
+                                                        <textarea type="text" class="form-control"  name="${status.count}" id="${status.count}" rows="4" cols="70" readonly="true">${employeeAdditional[6]}</textarea>
+                                                    </div>
+                                                </c:if>
+                                                ${givenMarks2}
+
+
+                                            </div>
+
+
+
+                                        </c:forEach>
+                                        <%--</c:otherwise>--%>
+
+
+                                        <div class="form-group">
+                                            <div class="col-sm-5">
+
+                                            </div>
+                                            <div class="col-sm-5">
+
+
+                                            </div>
+
+                                            <div class="row">
+                                                <br>
+                                                <div  class="form-group" >
+                                                    <div style="float: right;" class="col-sm-3">
+                                                        
+                                                      
+                                                        <h4> <label class="control-label">Total Marks :   <a onclick="totalcal()" class="btn btn-default">Calculate</a></label></h4>
+                                                        <label><input id="tt" class="form-control"></label>
+                                                    </div>
+                                                   
                                                 </div>
                                             </div>
-                                        </div><!-- /.col -->
-                                    </div><!-- /.row -->
+
+
+                                            <div class="form-group">
+                                                <div class=" col-sm-6 col-sm-offset-5">
+                                                    <button type="submit" class="btn btn-primary" style="width: 100px;" data-original-title="" title="" >Save & Next</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%--</c:choose>--%>
+                                    </div>
                                 </div>
-                            </div><!-- /.tab-content -->
-                        </div><!-- nav-tabs-custom -->
-                    </div><!-- /.col -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
-
         </form:form>
     </div>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
@@ -115,5 +210,40 @@
     <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
     <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
     <script>
-        initSample();
+                                                            initSample();
     </script>
+</html>
+<script>
+    function totalcal() {
+//        var text_value = $("#givenMarks2").val();
+        var givenMarks2 = document.getElementById("givenMarks2").value;
+        var givenMarks3 = document.getElementById("givenMarks3").value;
+//        var text_value1 = $("#givenMarks1").val();
+//        var text_value3 = $("#givenMarks3").val();
+       
+
+       document.getElementById("tt").value= Number(givenMarks2)+Number(givenMarks3);
+    
+
+    }
+//    $(document).ready(function () {
+//       
+//// Function to get input value.
+//        $('#givenMarks2').click(function () {
+//            var text_value = $("#givenMarks2").val();
+//            if (text_value == '') {
+//                alert("Enter Some Text In Input Field");
+//            } else {
+//                alert(text_value);
+//            }
+//        });
+//        $('#givenMarks1').click(function () {
+//            var text_value = $("#givenMarks1").val();
+//            if (text_value == '') {
+//                alert("Enter Some Text In Input Field");
+//            } else {
+//                alert(text_value);
+//            }
+//        });
+//    });
+</script>

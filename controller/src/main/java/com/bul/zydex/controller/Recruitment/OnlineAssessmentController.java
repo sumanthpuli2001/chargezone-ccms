@@ -5,14 +5,17 @@
  */
 package com.bul.zydex.controller.Recruitment;
 
+import com.bul.zydex.model.ApplayJobUserMaster;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.OnlineAssessment;
+import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.QuestionPaper;
 import com.bul.zydex.model.UserMaster;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -119,6 +122,57 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
         System.out.println("JSON " + json);
         out.close();
 
+    }
+
+    public ModelAndView goToAns(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String appliCationId = request.getParameter("id");
+        String candidateId = request.getParameter("candidateId");
+
+        List<?> QuestionAnswerListIds = questionAnswerSubmitService.readByCandidateApplicationId(Integer.parseInt(appliCationId));
+        List listOfFinalList = new ArrayList();
+//        List<?> list1 = questionDetailsService.takeTestOnlineAssementCandidate(Integer.parseInt(id));
+        for (Object o1 : QuestionAnswerListIds) {
+            Object str[] = (Object[]) o1;
+            List finalList = new ArrayList();
+            Integer questionLibraryID = (Integer) str[2];
+            Integer selectedAns = (Integer) str[3];
+            Integer correctAns = (Integer) str[4];
+            String Description = (String) str[5];
+            Integer marks = (Integer) str[6];
+            QuestionLibrary questionLibrary = new QuestionLibrary();
+            questionLibrary = questionLibraryService.readById(questionLibraryID);
+            Integer questionLibraryid = questionLibrary.getId();
+            String question = questionLibrary.getQuestion();
+            finalList.add(question);                // 0
+            Integer type = questionLibrary.getType();
+            finalList.add(type);                    // 1
+            finalList.add(questionLibraryid);       // 2
+            finalList.add(selectedAns);     //3
+            finalList.add(correctAns);      //4
+            finalList.add(marks);      //5
+
+            List<?> list2 = questionAnsService.takeTestOnlineAssementCandidateAnswer(questionLibraryid);
+            if (!list2.isEmpty()) {
+                for (Object o2 : list2) {
+                    Object str1[] = (Object[]) o2;
+                    Integer questionAnsID = (Integer) str1[0];
+                    String answer = (String) str1[2];
+                    finalList.add(answer);      
+                    finalList.add(questionAnsID);
+                }
+
+            } else {
+
+                finalList.add(Description);
+            }
+            listOfFinalList.add(finalList);
+        }
+//        
+        mv.getModelMap().put("list2", listOfFinalList);
+        mv.getModelMap().put("candidateID", candidateId);
+        mv.setViewName("Recruitment/QuestionAnsCheck");
+        return mv;
     }
 
 }

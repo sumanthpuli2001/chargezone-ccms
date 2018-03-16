@@ -14,4 +14,6 @@ import java.util.List;
  */
 public interface TrainingMasterDAO<T> extends GenericsDAO<T> {
     
+    public void deletetrainingSubMaster(final Integer id);
+    
 }

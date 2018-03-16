@@ -27,5 +27,10 @@ public class TrainingMasterServiceImpl<T> extends GenericsServiceImpl<T> impleme
         setGenericsDAO(trainingMasterDAO);
     }
 
+    @Override
+    public void deletetrainingSubMaster(Integer id) {
+        trainingMasterDAO.deletetrainingSubMaster(id);
+    }
+
    
 }

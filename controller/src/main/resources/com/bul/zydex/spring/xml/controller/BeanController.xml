@@ -1075,6 +1075,9 @@
         <property name="questionDetailsService" ref="questionDetailsService1" />
         <property name="candidateJobApplicationService" ref="candidateJobApplicationService1" />
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
+        <property name="questionAnswerSubmitService" ref="questionAnswerSubmitService1"/>
+        <property name="questionLibraryService" ref="questionLibraryService1"/>
+        <property name="questionAnsService" ref="questionAnsService1"/>
         
     </bean>
     <bean id="trainingTypeController1" class="com.bul.zydex.controller.Training.TrainingTypeController" parent="controllerConfig" >
@@ -1100,11 +1103,12 @@
         <property name="classifiedBoxService" ref="classifiedBoxService1" />
         <property name="classifiedBoxValidator" ref="classifiedBoxValidator1" />
     </bean>
-     <bean id="trainingMasterController1" class="com.bul.zydex.controller.Training.TrainingMasterController" parent="controllerConfig" >
+    <bean id="trainingMasterController1" class="com.bul.zydex.controller.Training.TrainingMasterController" parent="controllerConfig" >
         <property name="trainingTypeService" ref="trainingTypeService1" />
         <property name="trainingSubTypeService" ref="trainingSubTypeService1" />
         <property name="trainerService" ref="trainerService1" />
         <property name="trainingMasterService" ref="trainingMasterService1" />
+        <property name="trainingSubMasterService" ref="trainingSubMasterService1" />
     </bean>
   
   

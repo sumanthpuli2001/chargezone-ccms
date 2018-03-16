@@ -115,7 +115,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
         BindException errors = new BindException(recruitmentMaster, "recruitmentMaster");
         bind(request, recruitmentMaster);
-        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(99);
+        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(1);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
@@ -252,7 +252,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
         BindException errors = new BindException(mprMaster, "mprMaster");
         bind(request, mprMaster);
-        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(99);
+        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(1);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
@@ -488,9 +488,9 @@ public class RecruitmentController extends RecruitmentAbstract {
         BindException errors = new BindException(recruitmentMaster, "recruitmentMaster");
         bind(request, recruitmentMaster);
 //        payrollProfessionalTaxValidator.validate(payrollProfessionalTax, errors);
-        
+
         RecruitmentMaster rm = recruitmentService.readById(recruitmentMaster.getId());
-        
+
         Map<Integer, String> locationMap = readLocations();
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
@@ -499,6 +499,8 @@ public class RecruitmentController extends RecruitmentAbstract {
         } else {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             Date cDate = new Date();
+            recruitmentMaster.setCurrentLevel(1);
+            recruitmentMaster.setTotalLevel(rm.getTotalLevel());
             recruitmentMaster.setUpdatedDate(sdf.format(cDate));
             recruitmentMaster.setUpdatedBy(employeeMaster.getId());
             recruitmentMaster.setCreatedBy(rm.getCreatedBy());
@@ -1001,6 +1003,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         mv.setViewName("MPR/ShowAllMprList");
         return mv;
     }
+
     public ModelAndView allMppFetch(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 

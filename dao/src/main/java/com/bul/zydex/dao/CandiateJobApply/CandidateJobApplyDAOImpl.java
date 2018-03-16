@@ -44,7 +44,8 @@ public class CandidateJobApplyDAOImpl<T> extends GenericsDAOImpl<T> implements C
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
-     @Override
+
+    @Override
     public List<?> readOnlineAssementCandidate(int userMaster) {
         String query = "";
         String condition = "";
@@ -55,6 +56,44 @@ public class CandidateJobApplyDAOImpl<T> extends GenericsDAOImpl<T> implements C
                 + " Where b.id=" + userMaster;
 
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public CandidateApplyJob readByapplayjobusermasterid(int id) {
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        String query = " SELECT a "
+                + " FROM CandidateApplyJob a "
+                + " Where a.applayJobUserMaster.id = " + id;
+
+        List<?> list = getHibernateTemplate().find(query);
+
+        if (!list.isEmpty()) {
+            candidateApplyJob = (CandidateApplyJob) list.get(0);
+        } else {
+            candidateApplyJob = null;
+        }
+        return candidateApplyJob;
+
+    }
+
+    @Override
+    public boolean isExist(String name) {
+        boolean flag = false;
+        List list = getHibernateTemplate().find("from CandidateApplyJob where photograph='" + name + "'");
+        if (list.isEmpty()) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean isExistCertificateAttach(String name) {
+        boolean flag = false;
+        List list = getHibernateTemplate().find("from CandidateApplyJob where certificateAttach='" + name + "'");
+        if (list.isEmpty()) {
+            flag = true;
+        }
+        return flag;
     }
 
 }

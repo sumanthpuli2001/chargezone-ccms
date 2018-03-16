@@ -83,7 +83,7 @@ public class TrainerController extends TrainerAbstract {
 //             mv.setViewName("Training/CreateTrainer");
             }
             else{
-            trainer.setUpdatedate(sdf.format(cDate));
+            trainer.setUpdatedDate(sdf.format(cDate));
             trainer.setUpdatedBy(user.getId());
             trainerService.update(trainer);
             request.setAttribute("successMessage",

@@ -12,8 +12,10 @@ import java.util.List;
  *
  * @author Admin
  */
-public interface QuestionPaperDAO<T> extends GenericsDAO<T>{
-    
+public interface QuestionPaperDAO<T> extends GenericsDAO<T> {
+
     public List<?> readAllQuestionPaper();
-    
+
+   
+
 }

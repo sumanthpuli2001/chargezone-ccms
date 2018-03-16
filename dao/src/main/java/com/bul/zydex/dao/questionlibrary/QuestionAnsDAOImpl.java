@@ -48,4 +48,16 @@ public class QuestionAnsDAOImpl<T> extends GenericsDAOImpl<T> implements Questio
 
     }
 
+    @Override
+    public List<?> takeTestOnlineAssementCandidateAnswer(int questionLibraryID) {
+         String query = "";
+        String condition = "";
+        query += "Select a.id,b.id,a.ans"
+                + " From QuestionAns a"
+                + " LEFT JOIN a.questionLibrary b"
+                + " Where b.id=" + questionLibraryID;
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

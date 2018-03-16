@@ -41,4 +41,14 @@ public class QuestionDetailsServiceImpl<T> extends GenericsServiceImpl<T> implem
         questionDetailsDAO.deleteByQPaperId(object);
     }
 
+    @Override
+    public List<?> getTotalMarksAndNoOfQueByQuePaperId(int qpId) {
+        return questionDetailsDAO.getTotalMarksAndNoOfQueByQuePaperId(qpId);
+    }
+
+    @Override
+    public List<?> takeTestOnlineAssementCandidate(int questionpaperID) {
+        return questionDetailsDAO.takeTestOnlineAssementCandidate(questionpaperID);
+    }
+
 }

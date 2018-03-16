@@ -8,6 +8,7 @@ package com.bul.zydex.controller.Recruitment;
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.ApprovalUser;
 import com.bul.zydex.model.CandidateApplyJob;
+import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmployeeMaster;
@@ -25,6 +26,7 @@ import com.bul.zydex.model.RecruitmentMppApproval;
 import com.bul.zydex.service.Approval.ApprovalUserService;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.MprApproval.MprApprovalService;
+import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
 import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
 import com.bul.zydex.service.Recruitment.MprEmployeeTypeMasterService;
@@ -61,6 +63,7 @@ public class RecruitmentAbstract extends CustomAbstract {
     protected ApprovalUserService<ApprovalUser> approvalUserService;
     protected QuestionPaperService<QuestionPaper> questionPaperService;
     protected RecruitmentMppApprovalService<RecruitmentMppApproval> recruitmentMppApprovalService;
+    protected CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService;
 
     public MprMasterService<MprMaster> getMprMasterService() {
         return mprMasterService;
@@ -157,6 +160,16 @@ public class RecruitmentAbstract extends CustomAbstract {
     public void setRecruitmentMppApprovalService(RecruitmentMppApprovalService<RecruitmentMppApproval> recruitmentMppApprovalService) {
         this.recruitmentMppApprovalService = recruitmentMppApprovalService;
     }
+
+    public CandidateJobApplicationService<CandidateJobApplication> getCandidateJobApplicationService() {
+        return candidateJobApplicationService;
+    }
+
+    public void setCandidateJobApplicationService(CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService) {
+        this.candidateJobApplicationService = candidateJobApplicationService;
+    }
+    
+    
 
     public void selectBudget(HttpServletRequest request,
             HttpServletResponse response) throws Exception {

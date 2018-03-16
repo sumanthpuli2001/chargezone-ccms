@@ -65,7 +65,7 @@
     </head>
     <body>
         <section class="content-header">
-            <h1>Login:</h1>
+            <h1></h1>
             <ol class="breadcrumb">
             </ol>
         </section>

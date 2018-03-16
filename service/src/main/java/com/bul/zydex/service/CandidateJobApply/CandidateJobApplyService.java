@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.service.CandidateJobApply;
 
+import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.service.GenericsService;
 import java.util.List;
 
@@ -19,5 +20,11 @@ public interface CandidateJobApplyService<T> extends GenericsService<T> {
     public List<?> readProfileByCandidateUserID(int userId);
 
     public List<?> readOnlineAssementCandidate(int userMaster);
+
+    public CandidateApplyJob readByapplayjobusermasterid(int id);
+
+    public boolean isExist(String name);
+
+    public boolean isExistCertificateAttach(String name);
 
 }

@@ -19,4 +19,8 @@ public interface QuestionDetailsService<T> extends GenericsService<T> {
     public boolean isExistQuestion(int QlId, int QpId);
 
     public void deleteByQPaperId(T object);
+
+    public List<?> getTotalMarksAndNoOfQueByQuePaperId(int qpId);
+
+    public List<?> takeTestOnlineAssementCandidate(int questionpaperID);
 }

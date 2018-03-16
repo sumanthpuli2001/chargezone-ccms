@@ -20,4 +20,8 @@ public interface QuestionDetailsDAO<T> extends GenericsDAO<T> {
 
     public void deleteByQPaperId(T object);
 
+    public List<?> getTotalMarksAndNoOfQueByQuePaperId(int qpId);
+
+    public List<?> takeTestOnlineAssementCandidate(int questionpaperID);
+
 }

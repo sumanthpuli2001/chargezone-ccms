@@ -30,4 +30,9 @@ private TrainingSubTypeDAO<T> trainingSubTypeDAO;
     public List<?> readtrainingSubTypeDetail() {
         return trainingSubTypeDAO.readtrainingSubTypeDetail();
     }
+
+    @Override
+    public List<?> readtrainingSubTypeByTrainingTypeId(int trainingTypeId) {
+        return trainingSubTypeDAO.readtrainingSubTypeByTrainingTypeId(trainingTypeId);
+    }
 }

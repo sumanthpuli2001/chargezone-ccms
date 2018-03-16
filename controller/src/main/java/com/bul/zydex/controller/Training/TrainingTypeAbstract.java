@@ -8,6 +8,8 @@ package com.bul.zydex.controller.Training;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.Trainer;
+import com.bul.zydex.model.TrainingAttendance;
+import com.bul.zydex.model.TrainingIdentification;
 import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.TrainingSubMaster;
 import com.bul.zydex.service.Training.TrainingSubTypeService;
@@ -19,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.bul.zydex.model.TrainingSubType;
 import com.bul.zydex.model.TrainingType;
 import com.bul.zydex.service.Training.TrainerService;
+import com.bul.zydex.service.Training.TrainingAttendanceService;
+import com.bul.zydex.service.Training.TrainingIdentificationService;
 import com.bul.zydex.service.Training.TrainingMasterService;
 import com.bul.zydex.service.Training.TrainingSubMasterService;
 import java.text.ParseException;
@@ -40,6 +44,24 @@ public abstract class TrainingTypeAbstract extends CustomAbstract {
     protected TrainerService<Trainer> trainerService;
     protected TrainingMasterService<TrainingMaster> trainingMasterService;
     protected TrainingSubMasterService<TrainingSubMaster> trainingSubMasterService;
+    protected TrainingAttendanceService<TrainingAttendance> trainingAttendanceService;
+    protected TrainingIdentificationService<TrainingIdentification> trainingIdentificationService;
+
+    public TrainingAttendanceService<TrainingAttendance> getTrainingAttendanceService() {
+        return trainingAttendanceService;
+    }
+
+    public void setTrainingAttendanceService(TrainingAttendanceService<TrainingAttendance> trainingAttendanceService) {
+        this.trainingAttendanceService = trainingAttendanceService;
+    }
+
+    public TrainingIdentificationService<TrainingIdentification> getTrainingIdentificationService() {
+        return trainingIdentificationService;
+    }
+
+    public void setTrainingIdentificationService(TrainingIdentificationService<TrainingIdentification> trainingIdentificationService) {
+        this.trainingIdentificationService = trainingIdentificationService;
+    }
 
     public TrainerService<Trainer> getTrainerService() {
         return trainerService;

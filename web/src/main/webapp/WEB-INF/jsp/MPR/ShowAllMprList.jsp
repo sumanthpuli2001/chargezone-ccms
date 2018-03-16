@@ -15,7 +15,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Man Power Planning Budget List</h1>
+            <h1>MPR List</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home111</a></li>
                 <li class="active">Budget Detail List</li>
@@ -86,7 +86,7 @@
                                                                     <th style="width: 50px;">Experience</th>
                                                                     <!--<th style="width: 50px;">Status</th>-->
                                                                     <th style="width: 50px;">Action</th>
-                                                                    <th style="width: 50px;">Edit</th>
+                                                                    <!--<th style="width: 50px;">Edit</th>-->
                                                                         <%--</c:if>--%>
 
                                                                 </tr>
@@ -111,20 +111,20 @@
                                                                 <c:if test="${list[6] == 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
 
                                                                     <td>
-                                                                    <c:if test="${list[6] eq 0 || list[6] eq 2}">
-                                                                        <div class="btn-group">
+                                                                    <%--<c:if test="${list[6] eq 0 || list[6] eq 2}">--%>
+<!--                                                                        <div class="btn-group">
                                                                             <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                                 &nbsp;&nbsp;&nbsp;&nbsp;Edit
                                                                             </button>
-                                                                        </div>
-                                                                    </c:if>
-                                                                          <c:if test="${list[6] == 1 || list[6] == 3}">
+                                                                        </div>-->
+                                                                    <%--</c:if>--%>
+                                                                          <%--<c:if test="${list[6] == 1 || list[6] == 3}">--%>
                                                                         <div class="btn-group">
                                                                             <button type="button" onclick="viewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                                 &nbsp;&nbsp;View
                                                                             </button>
                                                                         </div>
-                                                                    </c:if>
+                                                                    <%--</c:if>--%>
                                                                 </td>
                                                             </tr>
                                                         </c:forEach>

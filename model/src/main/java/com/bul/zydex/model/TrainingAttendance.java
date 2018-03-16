@@ -16,6 +16,7 @@ public class TrainingAttendance {
     private TrainingMaster trainingMaster;
     private EmployeeMaster employeeMaster;
     private String trainingDate;
+    private String attendanceDate;
     private Integer status;
 
     public TrainingAttendance() {
@@ -72,6 +73,14 @@ public class TrainingAttendance {
         this.trainingDate = trainingDate;
     }
 
+    public String getAttendanceDate() {
+        return attendanceDate;
+    }
+
+    public void setAttendanceDate(String attendanceDate) {
+        this.attendanceDate = attendanceDate;
+    }
+    
     public Integer getStatus() {
         return status;
     }

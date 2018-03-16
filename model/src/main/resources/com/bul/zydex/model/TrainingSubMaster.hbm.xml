@@ -11,6 +11,9 @@
         <property name="trainingMasterid" type="java.lang.Integer">
             <column name="training_master_id" not-null="true" />
         </property>
+        <property name="trainerMasterid" type="java.lang.Integer">
+            <column name="trainer_master_id" not-null="true" />
+        </property>
         <property name="trainingdate" type="string">
             <column name="trainingdate" length="45" />
         </property>

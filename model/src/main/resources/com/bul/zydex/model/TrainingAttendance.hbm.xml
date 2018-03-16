@@ -23,6 +23,9 @@
         <property name="trainingDate" type="string">
             <column name="training_date" />
         </property>
+        <property name="attendanceDate" type="string">
+            <column name="attendance_date" />
+        </property>
         <property name="status" type="java.lang.Integer">
             <column name="Status" />
         </property>

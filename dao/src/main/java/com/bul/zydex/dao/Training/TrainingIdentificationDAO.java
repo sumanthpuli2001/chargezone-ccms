@@ -15,4 +15,6 @@ import java.util.List;
 public interface TrainingIdentificationDAO<T>extends GenericsDAO<T>{
   
     public List<?> gettrainingattendance(int id);
+    public List<?> getTrainerAttendance(int id);
+    public Boolean checkExistance(int trainingId,int empId, int trainerId);
 }

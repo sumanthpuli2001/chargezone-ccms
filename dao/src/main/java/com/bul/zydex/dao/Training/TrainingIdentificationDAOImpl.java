@@ -28,4 +28,29 @@ public class TrainingIdentificationDAOImpl<T> extends GenericsDAOImpl<T> impleme
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+    public List<?> getTrainerAttendance(int id) {
+        String query = "select c.id,c.employeeName"
+                + " FROM TrainingIdentification b"
+                + " left join b.employeeMaster c"
+                + " where b.trainingMaster.id=" + id;
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public Boolean checkExistance(int trainingId, int empId, int trainerId) {
+        String query = "select b.id"
+                + " FROM TrainingAttendance b"
+                + " where b.trainingMaster.id=" + trainingId
+                + " AND b.trainer.id=" + trainerId
+                + " AND b.employeeMaster.id=" + empId;
+        List<?> list = getHibernateTemplate().find(query);
+        if(list.isEmpty()){
+        return true;
+        }
+        return false;
+    }
+
+   
+   
 }

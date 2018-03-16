@@ -29,4 +29,14 @@ public class TrainingAttendanceDAOImpl<T> extends GenericsDAOImpl<T> implements 
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+
+    @Override
+    public List<?> gettrainerTasks(String eventDate, int id) {
+        String query = "select b.employeeMaster.id,b.employeeMaster.employeeName,b.status"
+                + " FROM TrainingAttendance b"
+                + " where STR_TO_DATE(b.trainingDate, '%d/%m/%Y')=STR_TO_DATE('" + eventDate + "', '%d/%m/%Y')"
+                + " and b.trainingMaster.id="+id;
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
 }

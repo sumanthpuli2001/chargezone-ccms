@@ -13,8 +13,8 @@ import java.util.List;
  *
  * @author Aman
  */
-public class TrainingIdentificationServiceImpl<T> extends GenericsServiceImpl<T> implements TrainingIdentificationService<T>{
-    
+public class TrainingIdentificationServiceImpl<T> extends GenericsServiceImpl<T> implements TrainingIdentificationService<T> {
+
     private TrainingIdentificationDAO<T> trainingIdentificationDAO;
 
     public TrainingIdentificationDAO<T> getTrainingIdentificationDAO() {
@@ -30,7 +30,15 @@ public class TrainingIdentificationServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> gettrainingattendance(int id) {
         return trainingIdentificationDAO.gettrainingattendance(id);
     }
-    
-    
-    
+
+    @Override
+    public List<?> getTrainerAttendance(int id) {
+        return trainingIdentificationDAO.getTrainerAttendance(id);
+    }
+
+    @Override
+    public Boolean checkExistance(int trainingId, int empId, int trainerId) {
+         return trainingIdentificationDAO.checkExistance(trainingId,empId,trainerId);
+    }
+
 }

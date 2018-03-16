@@ -23,4 +23,5 @@ public interface TrainerService<T> extends GenericsService<T> {
 
     public List<?> read(T object);
 
+    public List<?> ListeventDates(String eventDate , int trainerId);
 }

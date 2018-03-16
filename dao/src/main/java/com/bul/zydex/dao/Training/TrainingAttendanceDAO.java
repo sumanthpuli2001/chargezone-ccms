@@ -14,4 +14,5 @@ import java.util.List;
  */
 public interface TrainingAttendanceDAO<T> extends GenericsDAO<T>{
  public List<?> gettrainingattendance(String eventDate,int id);   
+ public List<?> gettrainerTasks(String eventDate,int id);   
 }

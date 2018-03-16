@@ -23,4 +23,5 @@ public interface TrainerDAO<T> extends GenericsDAO<T> {
 
     public List<?> readByUser(String username);
 
+    public List<?> ListeventDates(String eventDate , int trainerId);
 }

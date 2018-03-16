@@ -6,11 +6,18 @@
 package com.bul.zydex.dao.Training;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.List;
 
 /**
  *
  * @author Aman
  */
 public interface TrainingIdentificationDAO<T>extends GenericsDAO<T>{
+
+    public List<?> readTrainingIdentificationList();
+
+    public List<?> readTrainingList(int userid);
+
+    public List<?> readTraingFeedback();
     
 }

@@ -23,4 +23,6 @@ public interface CandidateJobApplicationDAO<T> extends GenericsDAO<T> {
 
     public List<?> readOnlineAssementCandidate(int userMaster);
 
+    public int GETByCandidateId(int candidateId);
+
 }

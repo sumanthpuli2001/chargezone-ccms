@@ -22,5 +22,9 @@ public interface CandidateJobApplyDAO<T> extends GenericsDAO<T> {
     public List<?> readOnlineAssementCandidate(int userMaster);
 
     public CandidateApplyJob readByapplayjobusermasterid(int id);
+    
+    public boolean isExist(String name);
+    
+     public boolean isExistCertificateAttach(String name);
 
 }

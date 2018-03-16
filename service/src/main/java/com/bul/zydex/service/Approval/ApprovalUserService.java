@@ -12,7 +12,10 @@ import java.util.List;
  *
  * @author Vikas
  */
-public interface ApprovalUserService<T> extends GenericsService<T>{
-        public List<?> readByApprovalId(int id);
-    
+public interface ApprovalUserService<T> extends GenericsService<T> {
+
+    public List<?> readByApprovalId(int id);
+
+    public List<?> readapprovalempId();
+
 }

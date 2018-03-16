@@ -14,13 +14,13 @@ import java.util.List;
  * @author Vikas
  */
 public class VacancyMasterServiceImpl<T> extends GenericsServiceImpl<T> implements VacancyMasterService<T> {
-    
-    private VacancyMasterDAO<T> vacancyMasterDAO;    
-    
+
+    private VacancyMasterDAO<T> vacancyMasterDAO;
+
     public VacancyMasterDAO<T> getVacancyMasterDAO() {
         return vacancyMasterDAO;
     }
-    
+
     public void setVacancyMasterDAO(VacancyMasterDAO<T> vacancyMasterDAO) {
         this.vacancyMasterDAO = vacancyMasterDAO;
         setGenericsDAO(vacancyMasterDAO);
@@ -30,5 +30,10 @@ public class VacancyMasterServiceImpl<T> extends GenericsServiceImpl<T> implemen
     public List<?> fetchVacancyDetail() {
         return vacancyMasterDAO.fetchVacancyDetail();
     }
-    
+
+    @Override
+    public List<?> fetchCreatedVacancy(int empId) {
+        return vacancyMasterDAO.fetchCreatedVacancy(empId);
+    }
+
 }

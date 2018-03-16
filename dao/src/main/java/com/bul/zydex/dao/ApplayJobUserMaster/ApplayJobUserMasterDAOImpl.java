@@ -26,8 +26,8 @@ public class ApplayJobUserMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         String query = "";
         query += ""
                 + " From ApplayJobUserMaster a "
-                + " WHERE a.userName = '" + applayJobUserMaster.getUserName() + "'"
-                + " And a.password = '" + applayJobUserMaster.getPassword() + "'";
+                + " WHERE a.userName = '" + applayJobUserMaster.getUserName() + "'";
+      
         List list = getHibernateTemplate().find(query);
         if (!list.isEmpty()) {
             return true;

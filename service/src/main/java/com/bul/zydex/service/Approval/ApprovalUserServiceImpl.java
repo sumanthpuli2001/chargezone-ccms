@@ -13,8 +13,8 @@ import java.util.List;
  *
  * @author Vikas
  */
-public class ApprovalUserServiceImpl<T> extends GenericsServiceImpl<T> implements ApprovalUserService<T>{
-    
+public class ApprovalUserServiceImpl<T> extends GenericsServiceImpl<T> implements ApprovalUserService<T> {
+
     private ApprovalUserDAO<T> approvalUserDAO;
 
     public ApprovalUserDAO<T> getApprovalUserDAO() {
@@ -30,7 +30,10 @@ public class ApprovalUserServiceImpl<T> extends GenericsServiceImpl<T> implement
     public List<?> readByApprovalId(int id) {
         return approvalUserDAO.readByApprovalId(id);
     }
-    
-    
-    
+
+    @Override
+    public List<?> readapprovalempId() {
+        return approvalUserDAO.readapprovalempId();
+    }
+
 }

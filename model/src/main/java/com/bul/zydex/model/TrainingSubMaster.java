@@ -8,6 +8,7 @@ public class TrainingSubMaster implements java.io.Serializable {
 
     private Integer id;
     private Integer trainingMasterid;
+    private Integer trainerMasterid;
     private String trainingdate;
     private String title;
 
@@ -32,13 +33,6 @@ public class TrainingSubMaster implements java.io.Serializable {
         this.id = id;
     }
 
-    public Integer getTrainingMaster() {
-        return this.trainingMasterid;
-    }
-
-    public void setTrainingMaster(Integer trainingMasterid) {
-        this.trainingMasterid = trainingMasterid;
-    }
 
     public String getTrainingdate() {
         return this.trainingdate;
@@ -61,6 +55,14 @@ public class TrainingSubMaster implements java.io.Serializable {
 
     public void setTrainingMasterid(Integer trainingMasterid) {
         this.trainingMasterid = trainingMasterid;
+    }
+
+    public Integer getTrainerMasterid() {
+        return trainerMasterid;
+    }
+
+    public void setTrainerMasterid(Integer trainerMasterid) {
+        this.trainerMasterid = trainerMasterid;
     }
 
 }

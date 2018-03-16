@@ -21,6 +21,12 @@ public class TrainingMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Trai
         return TrainingMaster.class;
     }
 
-    
+  @Override
+    public void deletetrainingSubMaster(final Integer id) {
+       String query=""
+                + " delete FROM TrainingSubMaster b"
+                + " where b.id="+id;
+         getHibernateTemplate().find(query);
+    }  
 
 }

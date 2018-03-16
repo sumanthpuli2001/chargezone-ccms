@@ -10,6 +10,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/jsp/Common/Top.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,6 +61,18 @@
             }
 
         </style>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+        <script>
+            $(function () {
+                $("#datepicker").datepicker();
+            });
+            $(function () {
+                $("#datepicker1").datepicker();
+            });
+            $(function () {
+                $("#datepicker2").datepicker();
+            });
+        </script>
         <!--        <style>
                     element.style {
                         left: 0px !important;
@@ -93,9 +106,9 @@
             <h1>Candidate Registration</h1>
             <button type="button" class="btn btn-primary" style="float: left; width: 120px;" onclick="window.location = 'vacancy.htm?act=candidateProfile'"><i class="fa fa-backward"></i>&nbsp&nbsp&nbsp;Back</button>
             <!--<button type="button" class="btn btn-primary" style="float: right; width: 120px;" onclick="window.location = 'vacancy.htm?act=showVacancyList'"><i class="fa fa-home"></i>&nbsp&nbsp&nbsp;Home</button>-->
-           
+
         </section>
-          <c:if test="${!empty successMessage}">
+        <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>
         </c:if>
         <c:if test="${!empty failureMessage}">
@@ -103,22 +116,22 @@
         </c:if>
         <br/>
         <br/>
-        <form:form action="vacancy.htm?act=candidateEditProfile" method="post" commandName="candidateApplyJob"
+        <form:form action="vacancy.htm?act=candidateEditProfile" method="post" enctype="multipart/form-data"  commandName="candidateApplyJob"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <!--<input type="hidden" id="empreqid" name="empreqid" value="${candidateApplyJob.id}">-->
-              <form:hidden path="id"></form:hidden>
-            <section class="content">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                        <div class="form-group">
+            <form:hidden path="id"></form:hidden>
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
 
-                            <div class="col-sm-1">
+                                <div class="col-sm-1">
 
-                            </div>
-                            <div class="col-sm-2" style="text-align: left">
-                                <label>Candidate Name:<span style="color: red;font-size: 12px;">*</span></label>
-                            </div>
-                            <div class="col-sm-3">
+                                </div>
+                                <div class="col-sm-2" style="text-align: left">
+                                    <label>Candidate Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                </div>
+                                <div class="col-sm-3">
                                 <form:input path="name" class="form-control" placeholder="Enter Candidate Name"></form:input>
                                 <span style="color: red;font-size: 12px;"><form:errors path="name" cssClass="errorDiv"></form:errors></span>
                                 </div>
@@ -127,7 +140,7 @@
                                     <label>D.O.B :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3">
-                                <form:input path="dob" class="form-control" placeholder="Enter D.O.B"></form:input>
+                                <form:input path="dob" class="form-control" id="datepicker" placeholder="Enter D.O.B" readonly="true"></form:input>
                                 <span style="color: red;font-size: 12px;"><form:errors path="dob" cssClass="errorDiv"></form:errors></span>
                                 </div>
                             </div>
@@ -161,7 +174,7 @@
                                     <label>Father D.O.B :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3">
-                                <form:input path="fatherDob"  class="form-control" size="16" placeholder="DD/MM/YYYY" ></form:input>
+                                <form:input path="fatherDob" id="datepicker1" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" ></form:input>
                                 <span style="color: red;font-size: 12px;"><form:errors path="fatherDob" cssClass="errorDiv"></form:errors></span>
                                 </div>
 
@@ -169,7 +182,7 @@
                                     <label>Mother D.O.B :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3">
-                                <form:input path="motherDob"  class="form-control" size="16" placeholder="DD/MM/YYYY" ></form:input>
+                                <form:input path="motherDob" id="datepicker2"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
                                 <span style="color: red;font-size: 12px;"><form:errors path="motherDob" cssClass="errorDiv"></form:errors></span>
                                 </div>
                             </div>
@@ -207,35 +220,36 @@
                             </div>
                             <div class="col-sm-3" style="text-align: left;">
                                 <form:input type="file" path="photograph" class="form-control" id="photograph" name="photograph" accept="image/jpg,image/jpeg,image/png"></form:input>
-                                <%--<form:errors path="photograph" cssClass="errorDiv"></form:errors>--%>
-                                </div>
-
-                                <div class="col-sm-2" style="text-align: left">
-                                    <label>Blood Group :<span style="color: red;font-size: 12px;">*</span></label>
-                                </div>
-                                <div class="col-sm-3" style="text-align: left;">
-                                    <select path="bloodGroup" id="bloodGroups" class="form-control ">
-                                        <option value="">--Select--</option>
-                                        <option value="A +ve">A +ve</option>
-                                        <option value="A -ve">A -ve</option>
-                                        <option value="B +ve">B +ve</option>
-                                        <option value="B -ve">B -ve</option>
-                                        <option value="AB +ve">AB +ve</option>
-                                        <option value="AB -ve">AB -ve</option>
-                                        <option value="O +ve">O +ve</option>
-                                        <option value="O -ve">O -ve</option>
-                                    </select>
-                                <%--<form:errors path="bloodGroup" cssClass="errorDiv"></form:errors>--%>
-                                </div>
+                                <span><img src="StorageYard/candidateimage/${candidateApplyJob.photograph}" width="50px; !important" height="50px; !important">&nbsp;&nbsp;${candidateApplyJob.photograph}</span>
+                                    <%--<form:errors path="photograph" cssClass="errorDiv"></form:errors>--%>
                             </div>
-                            <div class="form-group">
 
-                                <div class="col-sm-1">
-                                </div>
-                                <div class="col-sm-2" style="text-align: left">
-                                    <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
-                                </div>
-                                <div class="col-sm-3" style="text-align: left;">
+                            <div class="col-sm-2" style="text-align: left">
+                                <label>Blood Group :<span style="color: red;font-size: 12px;">*</span></label>
+                            </div>
+                            <div class="col-sm-3" style="text-align: left;">
+                                <select path="bloodGroup" id="bloodGroups" class="form-control ">
+                                    <option value="">--Select--</option>
+                                    <option value="A +ve">A +ve</option>
+                                    <option value="A -ve">A -ve</option>
+                                    <option value="B +ve">B +ve</option>
+                                    <option value="B -ve">B -ve</option>
+                                    <option value="AB +ve">AB +ve</option>
+                                    <option value="AB -ve">AB -ve</option>
+                                    <option value="O +ve">O +ve</option>
+                                    <option value="O -ve">O -ve</option>
+                                </select>
+                                <%--<form:errors path="bloodGroup" cssClass="errorDiv"></form:errors>--%>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-sm-1">
+                            </div>
+                            <div class="col-sm-2" style="text-align: left">
+                                <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
+                            </div>
+                            <div class="col-sm-3" style="text-align: left;">
                                 <form:textarea path="presentAddress" class="form-control" placeholder="Enter Present Address"></form:textarea>
                                 <span style="color: red;font-size: 12px;"><form:errors path="presentAddress" cssClass="errorDiv"></form:errors></span>
                                 </div>
@@ -332,8 +346,14 @@
                                     <label>Resume Attach :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
-                                <form:input path="certificateAttach" type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png" onchange="checkCertificateFileSize(1);"></form:input>
-                                <span style="color: red;font-size: 12px;"><form:errors path="certificateAttach" cssClass="errorDiv"></form:errors></span>
+                                    <input type="file" class="form-control" id="certificateId1"  size = "5000"  name="certificateId1"  onchange="checkFilecertificate();">
+                                    <span data="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}" type="application/pdf" width="500" height="300">
+                                    <a href="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}">${candidateApplyJob.certificateAttach}</a>
+                                </span>
+                                                                <!--<span><img src="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}" width="50px; !important" height="50px; !important">&nbsp;&nbsp;${candidateApplyJob.certificateAttach}</span>-->
+                                                                 <!--<a href="${candidateApplyJob.certificateAttach}/StorageYard/CertificateAttach">Download</a>-->
+                                <%--<form:input path="certificateAttach" type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png" onchange="checkCertificateFileSize(1);"></form:input>--%>
+                                / <span style="color: red;font-size: 12px;"><form:errors path="certificateAttach" cssClass="errorDiv"></form:errors></span>
                                 </div>
 
 
@@ -369,17 +389,56 @@
 
     </body>
     <script type="text/javascript">
-            $('.form_datetime').datetimepicker({
-                //language:  'fr',
-                weekStart: 1,
-                todayBtn: 1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                minView: 2,
-                forceParse: 0
-            });
+                                        $('.form_datetime').datetimepicker({
+                                            //language:  'fr',
+                                            weekStart: 1,
+                                            todayBtn: 1,
+                                            autoclose: 1,
+                                            todayHighlight: 1,
+                                            startView: 2,
+                                            minView: 2,
+                                            forceParse: 0
+                                        });
 
     </script>
     <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+    <script type="text/javascript">
+        function checkFilecertificate()
+        {
+            var fup = document.getElementById('certificateId1');
+            var certificateId1 = fup.value;
+            alert(certificateId1);
+            var ext = certificateId1.substring(certificateId1.lastIndexOf('.') + 1);
+            if (ext == "pdf")
+            {
+                return true;
+            }
+            else
+            {
+                alert("Upload pdf files only");
+                fup.focus();
+                return false;
+            }
+        }
+    </script>
+
+    <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
+    <!--<script src="StorageYard/Plugins/jQuery/jQuery-2.1.4.min.js"></script>-->
+    <!--============= Move On Last in this Page ===========================-->
+    <!--<script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>-->
+    <!--============= Move On Last in this Page =================================-->
+    <script src="StorageYard/Plugins/jQueryUI/jquery-ui.min.js"></script>
+    <script src="StorageYard/Plugins/fastclick/fastclick.min.js"></script>
+    <script src="StorageYard/JS/bootstrap/app.min.js"></script>
+    <script src="StorageYard/Plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="StorageYard/Plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="StorageYard/Plugins/chartjs/Chart.min.js"></script>
+    <script src="StorageYard/Plugins/daterangepicker/moment.min.js"></script>
+    <script src="StorageYard/Plugins/fullcalendar/fullcalendar.min.js"></script>
+    <script src="StorageYard/Plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="StorageYard/Plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="StorageYard/Plugins/iCheck/icheck.min.js"></script>
+    <script src="StorageYard/JS/JQuery/common.js"></script>
+    <script src="StorageYard/JS/bootstrap/jquery.tokeninput.js"></script>
+    <script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>
 </html>

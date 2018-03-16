@@ -41,7 +41,7 @@
                                         <div class="table table-bordered">
                                         </div>
                                         <form:form class="form-horizontal" method="post"
-                                                   commandName="vacancyMaster" action="vacancy.htm?act=vacancySubmitCreate">
+                                                   commandName="vacancyMaster" action="vacancy.htm?act=CreateNewVacancy">
                                             <input type="hidden" name="mprMasterid" id="mprMasterid" value="${mprMaster.id}">
 
                                             <div class="form-group">

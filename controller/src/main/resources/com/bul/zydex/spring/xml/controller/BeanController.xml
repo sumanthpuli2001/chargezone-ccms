@@ -1108,6 +1108,7 @@
         <property name="trainingSubTypeService" ref="trainingSubTypeService1" />
         <property name="trainerService" ref="trainerService1" />
         <property name="trainingMasterService" ref="trainingMasterService1" />
+        <property name="trainingSubMasterService" ref="trainingSubMasterService1" />
     </bean>
   
   

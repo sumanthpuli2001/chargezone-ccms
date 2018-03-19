@@ -16,7 +16,7 @@ public interface TrainingIdentificationService<T> extends GenericsService<T>{
 
     public List<?> readTrainingIdentificationList();
 
-    public List<?> readTrainingList(int userid);
+    public List<?> readTrainingList(String eventDate,int userid);
 
     public List<?> readTraingFeedback();
     
@@ -24,4 +24,5 @@ public interface TrainingIdentificationService<T> extends GenericsService<T>{
     public List<?> gettrainingattendance(int id);
     public List<?> getTrainerAttendance(int id);
     public Boolean checkExistance(int trainingId,int empId, int trainerId);
+    public List<?> ListeventDates(String eventDate, int userId);
 }

@@ -864,7 +864,7 @@
                 </a>
                          <ul class="treeview-menu">
 
-                            <li><a href="trainingIdentification.htm?act=createTraineList"><i class="fa fa-circle-o"></i>My Training List</a></li>
+                            <li><a href="trainingIdentification.htm?act=showcalendar"><i class="fa fa-circle-o"></i>My Training List</a></li>
 
 
                         </ul>

@@ -1105,6 +1105,11 @@
         <property name="trainingIdentificationService" ref="trainingIdentificationService1"></property>
         <property name="trainingMasterService" ref="trainingMasterService1"></property>
         <property name="employeeFeedbackService" ref="employeeFeedbackService1"></property>
+        <property name="trainerService" ref="trainerService1"></property>
+        <property name="trainingSubTypeService" ref="trainingSubTypeService1"></property>
+        <property name="trainingTypeService" ref="trainingTypeService1"></property>
+        <property name="trainingAttendanceService" ref="trainingAttendanceService1"></property>
+        <property name="employeeMasterService" ref="employeeMasterService1"></property>
     </bean>
     <bean id="classifiedBoxController1" class="com.bul.zydex.controller.ClassifiedBox.ClassifiedBoxController" parent="controllerConfig" >
         <property name="classifiedBoxService" ref="classifiedBoxService1" />

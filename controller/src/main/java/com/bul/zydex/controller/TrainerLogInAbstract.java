@@ -5,15 +5,36 @@
  */
 package com.bul.zydex.controller;
 
+import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.Trainer;
+import com.bul.zydex.model.TrainingAttendance;
+import com.bul.zydex.model.TrainingIdentification;
+import com.bul.zydex.model.TrainingMaster;
+import com.bul.zydex.model.TrainingSubType;
+import com.bul.zydex.model.TrainingType;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.service.Training.TrainerService;
+import com.bul.zydex.service.Training.TrainingAttendanceService;
+import com.bul.zydex.service.Training.TrainingIdentificationService;
+import com.bul.zydex.service.Training.TrainingMasterService;
+import com.bul.zydex.service.Training.TrainingSubTypeService;
+import com.bul.zydex.service.Training.TrainingTypeService;
+import com.bul.zydex.service.emp.EmployeeMasterService;
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.validation.Validator;
 
 /**
@@ -23,6 +44,61 @@ import org.springframework.validation.Validator;
 public abstract class TrainerLogInAbstract extends CustomAbstract{
     
     protected TrainerService<Trainer> trainerService;
+    protected TrainingMasterService<TrainingMaster> trainingMasterService;
+    protected TrainingSubTypeService<TrainingSubType> trainingSubTypeService;
+    protected TrainingTypeService<TrainingType> trainingTypeService;
+    protected TrainingAttendanceService<TrainingAttendance> trainingAttendanceService;
+    protected TrainingIdentificationService<TrainingIdentification> trainingIdentificationService;
+    protected EmployeeMasterService<EmployeeMaster> employeeMasterService;
+
+    public EmployeeMasterService<EmployeeMaster> getEmployeeMasterService() {
+        return employeeMasterService;
+    }
+
+    public void setEmployeeMasterService(EmployeeMasterService<EmployeeMaster> employeeMasterService) {
+        this.employeeMasterService = employeeMasterService;
+    }
+    
+
+    public TrainingMasterService<TrainingMaster> getTrainingMasterService() {
+        return trainingMasterService;
+    }
+
+    public void setTrainingMasterService(TrainingMasterService<TrainingMaster> trainingMasterService) {
+        this.trainingMasterService = trainingMasterService;
+    }
+
+    public TrainingSubTypeService<TrainingSubType> getTrainingSubTypeService() {
+        return trainingSubTypeService;
+    }
+
+    public void setTrainingSubTypeService(TrainingSubTypeService<TrainingSubType> trainingSubTypeService) {
+        this.trainingSubTypeService = trainingSubTypeService;
+    }
+
+    public TrainingTypeService<TrainingType> getTrainingTypeService() {
+        return trainingTypeService;
+    }
+
+    public void setTrainingTypeService(TrainingTypeService<TrainingType> trainingTypeService) {
+        this.trainingTypeService = trainingTypeService;
+    }
+
+    public TrainingAttendanceService<TrainingAttendance> getTrainingAttendanceService() {
+        return trainingAttendanceService;
+    }
+
+    public void setTrainingAttendanceService(TrainingAttendanceService<TrainingAttendance> trainingAttendanceService) {
+        this.trainingAttendanceService = trainingAttendanceService;
+    }
+
+    public TrainingIdentificationService<TrainingIdentification> getTrainingIdentificationService() {
+        return trainingIdentificationService;
+    }
+
+    public void setTrainingIdentificationService(TrainingIdentificationService<TrainingIdentification> trainingIdentificationService) {
+        this.trainingIdentificationService = trainingIdentificationService;
+    }
 
     public TrainerService<Trainer> getTrainerService() {
         return trainerService;
@@ -31,6 +107,8 @@ public abstract class TrainerLogInAbstract extends CustomAbstract{
     public void setTrainerService(TrainerService<Trainer> trainerService) {
         this.trainerService = trainerService;
     }
+    
+    
 
 //    public Validator getForgotPwdValidator() {
 //        return forgotPwdValidator;
@@ -86,4 +164,83 @@ public abstract class TrainerLogInAbstract extends CustomAbstract{
 //         //        HttpSession session = request.getSession();
 //        //        session.setAttribute("user", userMasterService.readById(user.getId()));
 //    }
+     public void auditgetCalDate(HttpServletRequest request,String monthAndYear, Calendar now,int trainerId) throws ParseException, JSONException {
+        List<List<JSONObject>> finalList = new ArrayList<>();
+
+        String monthName = new SimpleDateFormat("MMM-yyyy").format(now.getTime());
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar c1 = Calendar.getInstance();
+        c1.setTime(now.getTime());
+        c1.set(Calendar.DAY_OF_MONTH,
+                c1.getActualMinimum(Calendar.DAY_OF_MONTH));
+        Date firstDayOfTheMonth = c1.getTime();
+        String firstdayDate = format.format(firstDayOfTheMonth);
+        firstDayOfTheMonth = format.parse(firstdayDate);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(now.getTime());
+        cal.set(Calendar.DAY_OF_MONTH,
+                c1.getActualMaximum(Calendar.DAY_OF_MONTH));
+        Date lastDateOfNextMonth = cal.getTime();
+        String lastDate = format.format(lastDateOfNextMonth);
+        lastDateOfNextMonth = format.parse(lastDate);
+
+        System.out.println("firstDayOfTheMonth " + firstDayOfTheMonth);
+
+        int week = now.getActualMaximum(Calendar.WEEK_OF_MONTH);
+        now.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        int counter = 1;
+        for (int z = 1; z <= week; z++) {
+            List monthDays = new ArrayList();
+            now.set(Calendar.WEEK_OF_MONTH, z);
+
+//            date dd1 = 
+            for (int i = 0; i < 7; i++) {
+                Calendar cal2 = Calendar.getInstance();
+                cal2.setTime(now.getTime());
+                Date preDate = cal2.getTime();
+                String preDate1 = format.format(preDate);
+                preDate = format.parse(preDate1);
+                List dateObject = new ArrayList();
+                if (preDate.after(firstDayOfTheMonth) || preDate.equals(firstDayOfTheMonth)) {
+
+                    if (preDate.before(lastDateOfNextMonth) || preDate.equals(lastDateOfNextMonth)) {
+                        dateObject.add(counter);
+                        dateObject.add(format.format(preDate).split("/")[0]);
+                        dateObject.add(format.format(preDate));
+
+                        List<?> list = trainerService.ListeventDates(format.format(preDate),trainerId);
+                        if (!list.isEmpty()) {
+                            dateObject.add(list);
+                        } else {
+                            dateObject.add(null);
+                        }
+                        monthDays.add(dateObject);
+                    } else {
+                        dateObject.add(counter);
+                        dateObject.add("");
+                        dateObject.add("");
+                        monthDays.add(dateObject);
+                    }
+
+                } else {
+                    dateObject.add(counter);
+                    dateObject.add("");
+                    dateObject.add("");
+                    monthDays.add(dateObject);
+                }
+
+                now.add(Calendar.DAY_OF_MONTH, 1);
+                counter++;
+            }
+            finalList.add(monthDays);
+
+        }
+
+        List object = new LinkedList();
+        object.add(monthName);
+        object.add(finalList);
+        
+        request.setAttribute("list", object);
+    }
 }

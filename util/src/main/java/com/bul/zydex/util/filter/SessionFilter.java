@@ -46,7 +46,7 @@ public class SessionFilter implements Filter {
         }
 
         chain.doFilter(request, response);
-    }
+        }
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

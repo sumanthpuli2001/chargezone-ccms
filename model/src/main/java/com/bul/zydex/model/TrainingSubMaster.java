@@ -49,6 +49,7 @@ public class TrainingSubMaster implements java.io.Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
     public Integer getTrainingMasterid() {
         return trainingMasterid;
     }

@@ -52,7 +52,12 @@
     </bean>
     <bean id="trainerLogInController1" class="com.bul.zydex.controller.TrainerLogInController" parent="controllerConfig" >
         <property name="trainerService" ref="trainerService1" />
-        <!--<property name="loginValidator" ref="loginValidator1" />-->
+        <property name="trainingMasterService" ref="trainingMasterService1" />
+        <property name="trainingSubTypeService" ref="trainingSubTypeService1" />
+        <property name="trainingTypeService" ref="trainingTypeService1" />
+        <property name="trainingAttendanceService" ref="trainingAttendanceService1" />
+        <property name="trainingIdentificationService" ref="trainingIdentificationService1" />
+        <property name="employeeMasterService" ref="employeeMasterService1" />
     </bean>
     <bean id="outController1" class="com.bul.zydex.controller.OutController" parent="controllerConfig" >
         <property name="userInitPwdValidator" ref="userInitPwdValidator1" />
@@ -1098,6 +1103,13 @@
     </bean>
     <bean id="trainingIdentificationController1" class="com.bul.zydex.controller.Training.TrainingIdentificationController" parent="controllerConfig" >
         <property name="trainingIdentificationService" ref="trainingIdentificationService1"></property>
+        <property name="trainingMasterService" ref="trainingMasterService1"></property>
+        <property name="employeeFeedbackService" ref="employeeFeedbackService1"></property>
+        <property name="trainerService" ref="trainerService1"></property>
+        <property name="trainingSubTypeService" ref="trainingSubTypeService1"></property>
+        <property name="trainingTypeService" ref="trainingTypeService1"></property>
+        <property name="trainingAttendanceService" ref="trainingAttendanceService1"></property>
+        <property name="employeeMasterService" ref="employeeMasterService1"></property>
     </bean>
     <bean id="classifiedBoxController1" class="com.bul.zydex.controller.ClassifiedBox.ClassifiedBoxController" parent="controllerConfig" >
         <property name="classifiedBoxService" ref="classifiedBoxService1" />
@@ -1110,10 +1122,8 @@
         <property name="trainingMasterService" ref="trainingMasterService1" />
         <property name="trainingSubMasterService" ref="trainingSubMasterService1" />
     </bean>
-  
-  
-    
-    
-    
+  <bean id="employeeFeedbackController1" class="com.bul.zydex.controller.Training.EmployeeFeedbackController" parent="controllerConfig" >
+        <property name="employeeFeedbackService" ref="employeeFeedbackService1"></property>
+    </bean>
 </beans>
  

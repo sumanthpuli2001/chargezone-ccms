@@ -64,6 +64,11 @@ public class TrainerServiceImpl<T> extends GenericsServiceImpl<T> implements Tra
         return trainerDAO.readByUser(username);
     }
 
+    @Override
+    public List<?> ListeventDates(String eventDate, int trainerId) {
+         return trainerDAO.ListeventDates(eventDate, trainerId);
+    }
+
 
    
 }

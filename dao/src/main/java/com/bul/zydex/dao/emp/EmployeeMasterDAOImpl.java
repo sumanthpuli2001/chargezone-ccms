@@ -1859,9 +1859,7 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
     @Override
     public List<?> readEmployeeByBirthday(String date) {
-        
-      
-    
+
         String query = "";
 
         query += "SELECT a FROM EmployeeMaster a"
@@ -1872,17 +1870,15 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
     @Override
     public List<?> newJoiningEmployee(String date) {
-           String query = "";
+        String query = "";
 
         query += "SELECT a FROM EmployeeMaster a"
                 + " WHERE STR_TO_DATE(a.dateOfJoining,'%d/%m/%Y') > STR_TO_DATE('" + date + "','%d/%m/%Y')";
 
         return getHibernateTemplate().find(query);
     }
-    
-    
-    
-     @Override
+
+    @Override
     public List<?> searchEmployeeDetailForContactInfo(final String searchString) {
         String hqlString = " SELECT a.id, a.employeeId, a.employeeName, c.departmentName, b.designationName, a.role, d.id,a.emailAddress,a.officeEmailId,a.contactNo1"
                 + " FROM EmployeeMaster a "
@@ -1904,5 +1900,19 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         return getHibernateTemplate().find(hqlString);
     }
-    
+
+    @Override
+    public List<?> readEmployeeList(int id) {
+        String query = "";
+        query += " "
+                + " SELECT a.id, a.employeeName, b.departmentName, c.designationName "
+                + " FROM EmployeeMaster a "
+                + " left join a.departmentMaster b "
+                + " left join a.designationMaster c "
+                + " WHERE a.reportingManagerLevel1  like '%" + id + "%'";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

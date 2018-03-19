@@ -206,7 +206,8 @@
                                     <div class="form-group">
                                         <div class="col-sm-5">
                                             <label class="control-label">Company Sponsor<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:input path="companySponsor" class="form-control"/>
+                                            <form:radiobutton path="companySponsor" value="1" required="required"/>Yes
+                                            <form:radiobutton path="companySponsor" value="0" required="required"/>No
                                         </div>
                                         <div class="col-sm-5">
                                             <label class="control-label">Status<span style="color: red;font-size: 12px;">*</span></label>

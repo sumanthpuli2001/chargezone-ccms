@@ -725,12 +725,17 @@ public class VacancyController extends VacancyAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
-//        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         String id = request.getParameter("id");
-        CandidateApplyJob candidateApplyJob = candidateJobApplyService.readByapplayjobusermasterid(Integer.parseInt(id));
-        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
-        mv.setViewName("Vacancy/MyProfile");
+        if (id != null) {
 
+            CandidateApplyJob candidateApplyJob1 = candidateJobApplyService.readByapplayjobusermasterid(Integer.parseInt(id));
+            mv.getModelMap().put("candidateApplyJob", candidateApplyJob1);
+            mv.setViewName("Vacancy/MyProfile");
+        } else {
+            mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+            mv.setViewName("Vacancy/MyProfile");
+        }
         return mv;
     }
 

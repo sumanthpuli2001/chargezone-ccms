@@ -730,8 +730,13 @@ public class VacancyController extends VacancyAbstract {
         if (id != null) {
 
             CandidateApplyJob candidateApplyJob1 = candidateJobApplyService.readByapplayjobusermasterid(Integer.parseInt(id));
-            mv.getModelMap().put("candidateApplyJob", candidateApplyJob1);
-            mv.setViewName("Vacancy/MyProfile");
+            if (candidateApplyJob1 != null) {
+                mv.getModelMap().put("candidateApplyJob", candidateApplyJob1);
+                mv.setViewName("Vacancy/MyProfile");
+            } else {
+                mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+                mv.setViewName("Vacancy/MyProfile");
+            }
         } else {
             mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
             mv.setViewName("Vacancy/MyProfile");

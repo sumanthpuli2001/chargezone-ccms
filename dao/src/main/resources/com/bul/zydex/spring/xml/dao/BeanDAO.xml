@@ -242,4 +242,6 @@
     <bean id="classifiedBoxDAO1" class="com.bul.zydex.dao.ClassifiedBox.ClassifiedBoxDAOImpl" parent="sessionFactoryConfig" />
     <bean id="employeeFeedbackDAO1" class="com.bul.zydex.dao.Training.EmployeeFeedbackDAOImpl" parent="sessionFactoryConfig" />
     <bean id="questionAnswerSubmitDAO1" class="com.bul.zydex.dao.QuestionAnswerSubmit.QuestionAnswerSubmitDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="candidateF2FApprovalDAO1" class="com.bul.zydex.dao.CandidateF2FApproval.CandidateF2FApprovalDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="candidateF2FRequestDAO1" class="com.bul.zydex.dao.CandidateF2FRequest.CandidateF2FRequestDAOImpl" parent="sessionFactoryConfig" />
 </beans>

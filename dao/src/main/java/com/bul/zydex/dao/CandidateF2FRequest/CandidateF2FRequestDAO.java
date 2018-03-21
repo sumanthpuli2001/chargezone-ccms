@@ -6,6 +6,8 @@
 package com.bul.zydex.dao.CandidateF2FRequest;
 
 import com.bul.zydex.dao.GenericsDAO;
+import com.bul.zydex.model.CandidateF2FRequest;
+import java.util.List;
 
 /**
  *
@@ -13,4 +15,9 @@ import com.bul.zydex.dao.GenericsDAO;
  */
 public interface CandidateF2FRequestDAO<T> extends GenericsDAO<T> {
     
+    
+    public List<?> interviewReqDetailread();
+    
+    
+    public CandidateF2FRequest readById(int id);
 }

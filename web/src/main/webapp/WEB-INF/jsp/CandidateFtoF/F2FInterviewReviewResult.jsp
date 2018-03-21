@@ -6,11 +6,19 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<script>
+    function reviewClick(f2fRequestId) {
+        alert(f2fRequestId);
+        window.location = 'candidateF2FApproval.htm?act=openInterviewReviewPage&id='+f2fRequestId;
+    }
+</script>
+
 <html>
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
         <title>F2F Interview List</title>
     </head>
 
@@ -74,12 +82,44 @@
                                                     <c:forEach var="list" items="${F2FInterviewList}">
                                                         <tr>
 
-                                                            <td>${list.dateOfInterview}</td>
-                                                            <td>${list.dateOfInterview}</td>
-                                                            <td>${list.dateOfInterview}</td>
-                                                            <td>${list.status}</td>
+                                                            <td>${list[1]}</td>
+                                                            <td>${list[2]}</td>
+                                                            <td>${list[3]}</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-primary" onclick="reviewClick(${list.id});">&nbsp; Review </button>
+                                                                <c:if test="${list[4] eq 0}">
+
+                                                                    <span>Pending</span>    
+                                                                </c:if>
+                                                                <c:if test="${list[4] eq 1}">
+
+                                                                    <span>Submitted By Comittee</span>    
+                                                                </c:if>
+                                                                <c:if test="${list[4] eq 2}">
+
+                                                                    <span>
+                                                                        Submitted By HR
+
+                                                                    </span>    
+                                                                </c:if>
+                                                                <c:if test="${list[4] eq 3}">
+
+                                                                    <span>
+                                                                        Final Submitted
+
+                                                                    </span>    
+                                                                </c:if>
+
+
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="btn-group">
+                                                                        <button type="button" onclick="reviewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            &nbsp;&nbsp;View
+                                                                        </button>
+                                                                    </div>
+                                                                
+                                                                <!--<button type="button" class="btn btn-primary" onclick="(${list[0]});"> Review </button>-->
                                                             </td>
 
                                                         </tr>
@@ -109,12 +149,10 @@
                 $('#table_2').DataTable();
             })
         </script>-->
-    <script>
-        function reviewClick(f2fRequestId) {
-            window.location = 'candidateF2FApproval.htm?act=openInterviewReviewPage&id='f2fRequestId;
-        }
-    </script>
+
 
 </html>
+
+
 
 

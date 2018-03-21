@@ -6,7 +6,9 @@
 package com.bul.zydex.service.CandidateF2FApproval;
 
 import com.bul.zydex.dao.CandidateF2FApproval.CandidateF2FApprovalDAO;
+import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.List;
 
 /**
  *
@@ -24,7 +26,12 @@ public class CandidateF2FApprovalServiceImpl<T> extends GenericsServiceImpl<T> i
         this.candidateF2FApprovalDAO = candidateF2FApprovalDAO;
         setGenericsDAO(candidateF2FApprovalDAO);
     }
-    
+
+    @Override
+    public List<?> readByReqId(int id) {
+        return  candidateF2FApprovalDAO.readByReqId(id);
+    }
+
     
     
 }

@@ -1138,6 +1138,8 @@
         <property name="candidateF2FApprovalService" ref="candidateF2FApprovalService1"></property>
         <property name="candidateF2FRequestService" ref="candidateF2FRequestService1"></property>
         <property name="candidateJobApplicationService" ref="candidateJobApplicationService1"></property>
+        <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
+        <property name="vacancyMasterService" ref="vacancyMasterService1"/>
     </bean>
 </beans>
  

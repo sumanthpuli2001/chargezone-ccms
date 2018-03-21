@@ -6,12 +6,16 @@
 package com.bul.zydex.controller.CandidateF2F;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateF2FApproval;
 import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.model.CandidateJobApplication;
+import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.CandidateF2FApproval.CandidateF2FApprovalService;
 import com.bul.zydex.service.CandidateF2FRequest.CandidateF2FRequestService;
+import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
+import com.bul.zydex.service.Vacancy.VacancyMasterService;
 
 /**
  *
@@ -22,6 +26,8 @@ public class CandidateF2FApprovalAbstract extends CustomAbstract {
     protected CandidateF2FRequestService<CandidateF2FRequest> candidateF2FRequestService;
     protected CandidateF2FApprovalService<CandidateF2FApproval> candidateF2FApprovalService;
     protected CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService;
+    protected CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService;
+    protected VacancyMasterService<VacancyMaster> vacancyMasterService;
 
     public CandidateF2FRequestService<CandidateF2FRequest> getCandidateF2FRequestService() {
         return candidateF2FRequestService;
@@ -46,7 +52,22 @@ public class CandidateF2FApprovalAbstract extends CustomAbstract {
     public void setCandidateJobApplicationService(CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService) {
         this.candidateJobApplicationService = candidateJobApplicationService;
     }
-    
+
+    public CandidateJobApplyService<CandidateApplyJob> getCandidateJobApplyService() {
+        return candidateJobApplyService;
+    }
+
+    public void setCandidateJobApplyService(CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService) {
+        this.candidateJobApplyService = candidateJobApplyService;
+    }
+
+    public VacancyMasterService<VacancyMaster> getVacancyMasterService() {
+        return vacancyMasterService;
+    }
+
+    public void setVacancyMasterService(VacancyMasterService<VacancyMaster> vacancyMasterService) {
+        this.vacancyMasterService = vacancyMasterService;
+    }
     
     
 

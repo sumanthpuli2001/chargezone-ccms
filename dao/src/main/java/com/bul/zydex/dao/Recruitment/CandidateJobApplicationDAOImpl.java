@@ -41,7 +41,7 @@ public class CandidateJobApplicationDAOImpl<T> extends GenericsDAOImpl<T> implem
                 + " FROM CandidateJobApplication a "
                 + " LEFT JOIN a.candidateApplyJob b "
                 + " LEFT JOIN a.vacancyMaster c "
-                + " Where a.status=1 ";
+                + " Where a.status in (1,2,4,5,6) ";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

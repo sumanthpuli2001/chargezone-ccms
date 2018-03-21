@@ -16,11 +16,11 @@
         <property name="status" type="java.lang.Integer">
             <column name="status" />
         </property>
-        <property name="currentApproverCount" type="java.lang.Integer">
-            <column name="current_approver_count" />
+        <property name="hrStatus" type="java.lang.Integer">
+            <column name="hr_status" />
         </property>
-        <property name="totalApproverCount" type="java.lang.Integer">
-            <column name="total_approver_count" />
+        <property name="userStatus" type="java.lang.Integer">
+            <column name="user_status" />
         </property>
         <property name="createdBy" type="java.lang.Integer">
             <column name="created_by" />
@@ -43,5 +43,11 @@
         <property name="dateOfInterview" type="string">
             <column name="date_Of_Interview" />
         </property>
+         <many-to-one name="vacancyMaster" class="com.bul.zydex.model.VacancyMaster" fetch="select">
+            <column name="vacancy_master_id" />
+        </many-to-one>
+         <many-to-one name="candidateApplyJob" class="com.bul.zydex.model.CandidateApplyJob" fetch="select">
+            <column name="candidate_job_apply_id" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

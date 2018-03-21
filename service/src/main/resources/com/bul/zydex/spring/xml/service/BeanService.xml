@@ -595,4 +595,7 @@
     <bean id="candidateF2FRequestService1" class="com.bul.zydex.service.CandidateF2FRequest.CandidateF2FRequestServiceImpl">
         <property name="candidateF2FRequestDAO" ref="candidateF2FRequestDAO1" />
     </bean>
+    <bean id="candidateResultStatusService1" class="com.bul.zydex.service.QuestionAnswerSubmit.CandidateResultStatusServiceImpl">
+        <property name="candidateResultStatusDAO" ref="candidateResultStatusDAO1" />
+    </bean>
 </beans>

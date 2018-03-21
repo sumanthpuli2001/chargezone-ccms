@@ -586,4 +586,7 @@
     <bean id="questionAnswerSubmitService1" class="com.bul.zydex.service.QuestionAnswerSubmit.QuestionAnswerSubmitServiceImpl">
         <property name="questionAnswerSubmitDAO" ref="questionAnswerSubmitDAO1" />
     </bean>
+    <bean id="candidateResultStatusService1" class="com.bul.zydex.service.QuestionAnswerSubmit.CandidateResultStatusServiceImpl">
+        <property name="candidateResultStatusDAO" ref="candidateResultStatusDAO1" />
+    </bean>
 </beans>

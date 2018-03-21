@@ -241,4 +241,5 @@
     <bean id="candidateJobApplicationDAO1" class="com.bul.zydex.dao.Recruitment.CandidateJobApplicationDAOImpl" parent="sessionFactoryConfig" />
     <bean id="classifiedBoxDAO1" class="com.bul.zydex.dao.ClassifiedBox.ClassifiedBoxDAOImpl" parent="sessionFactoryConfig" />
     <bean id="questionAnswerSubmitDAO1" class="com.bul.zydex.dao.QuestionAnswerSubmit.QuestionAnswerSubmitDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="candidateResultStatusDAO1" class="com.bul.zydex.dao.QuestionAnswerSubmit.CandidateResultStatusDAOImpl" parent="sessionFactoryConfig" />
 </beans>

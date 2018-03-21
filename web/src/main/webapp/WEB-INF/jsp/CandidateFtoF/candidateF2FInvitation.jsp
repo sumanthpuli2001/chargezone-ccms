@@ -99,11 +99,23 @@
                                 <form:form class="form-horizontal" method="post"
                                            commandName="candidateF2FRequest" action="candidateF2FRequest.htm?act=submitFtoF" onsubmit="return saveSubmit()" >
                                     <input type="hidden" id="applicationId" name="applicationId" value="${applicationId}">   
-                                    
+                              
+                                  
+                                 
+                                 <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label>Candidate Name:</label> &nbsp;&nbsp;&nbsp;
+                                            <span>${candidateApplyJob.name}</span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>Vacancy Name:</label> &nbsp;&nbsp;&nbsp;
+                                            <span>${vacancyMaster.name}</span>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
-                                            <div class="col-sm-5">
-                                                <label>Date Of Interview:<span style="color: red;font-size: 12px;">*</span></label>
-                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" >
+                                        <div class="col-sm-5">
+                                            <label>Date Of Interview:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" >
                                                 <%--<form:input path="dateOfInterview" class="form-control" onchange="dateDifference(this.value);" placeholder="Date" readonly="true" ></form:input>--%>
                                                 <input type="text" id="datetimepicker2" class="form-control" placeholder="Please select From Date" name="dateOfInterview" readonly="true"/>
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
@@ -180,57 +192,57 @@
             </div><!-- /.col -->
     </div>
 
-<script>
-    jQuery.noConflict();
-    jQuery(document).ready(function () {
+    <script>
+        jQuery.noConflict();
+        jQuery(document).ready(function () {
 
-        jQuery("#policyId1").tokenInput(${list}, {
-            preventDuplicates: true,
-            noResultsText: "No Result",
-            tokenLimit: "1",
-            searchingText: "Searching ... .. .",
-            prePopulate: ${preList}
+            jQuery("#policyId1").tokenInput(${list}, {
+                preventDuplicates: true,
+                noResultsText: "No Result",
+                tokenLimit: "1",
+                searchingText: "Searching ... .. .",
+                prePopulate: ${preList}
+            });
         });
-    });
 
-</script>
-<script>
-    var flag3 = true;
-    function saveSubmit() {
-//        if (document.getElementById("name").value === "") {
-//
-//            document.getElementById("monthError").innerHTML = "- It must be filled.";
-//            flag3 = false;
-//        }
-//            alert(document.getElementById("month").value);
-        if (document.getElementById("policyId1").value === "") {
+    </script>
+    <script>
+        var flag3 = true;
+        function saveSubmit() {
+            //        if (document.getElementById("name").value === "") {
+            //
+            //            document.getElementById("monthError").innerHTML = "- It must be filled.";
+            //            flag3 = false;
+            //        }
+            //            alert(document.getElementById("month").value);
+            if (document.getElementById("policyId1").value === "") {
 
-            document.getElementById("policyerror").innerHTML = "- It must be filled.";
-            flag3 = false;
+                document.getElementById("policyerror").innerHTML = "- It must be filled.";
+                flag3 = false;
+            }
+            else {
+                return true;
+            }
+            return false;
         }
-        else {
-            return true;
-        }
-        return false;
-    }
-</script>
+    </script>
 
-<!--<script type="text/javascript">
-    $('.form_datetime').datetimepicker({
-        //language:  'fr',
-        weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        forceParse: 0
-    });
+    <!--<script type="text/javascript">
+        $('.form_datetime').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    
+    </script>-->
 
-</script>-->
-
-<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 </html>
 <script>
     $(document).ready(function () {

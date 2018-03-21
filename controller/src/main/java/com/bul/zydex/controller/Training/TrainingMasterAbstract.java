@@ -11,15 +11,24 @@ import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.TrainingSubMaster;
 import com.bul.zydex.model.TrainingSubType;
 import com.bul.zydex.model.TrainingType;
+import com.bul.zydex.model.support.User;
 import com.bul.zydex.service.Training.TrainerService;
 import com.bul.zydex.service.Training.TrainingMasterService;
 import com.bul.zydex.service.Training.TrainingSubMasterService;
 import com.bul.zydex.service.Training.TrainingSubTypeService;
 import com.bul.zydex.service.Training.TrainingTypeService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -105,4 +114,5 @@ public abstract class TrainingMasterAbstract extends CustomAbstract{
 
         request.setAttribute("trainingSubTypeMap", trnsb);
     }
+     
 }

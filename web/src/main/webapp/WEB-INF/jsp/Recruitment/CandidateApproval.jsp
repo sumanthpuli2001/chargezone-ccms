@@ -378,3 +378,8 @@
         window.location = 'onlineAssessment.htm?act=goToAns&id=' + applicationId + '&candidateId=' + candidateId;
     }
 </script>
+<script>
+    function sendToF2F(applicationId, candidateId) {
+        window.location = 'candidateF2FRequest.htm?act=createCandidateF2FInvitation&id=' + applicationId + '&candidateId=' + candidateId;
+    }
+</script>

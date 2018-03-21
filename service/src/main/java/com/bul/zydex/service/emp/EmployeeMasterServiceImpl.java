@@ -376,4 +376,9 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> searchEmployeeDetailForContactInfo(String searchString) {
           return employeeMasterDAO.searchEmployeeDetailForContactInfo(searchString);
     }
+
+    @Override
+    public List<?> readEmployeeList(int id) {
+        return employeeMasterDAO.readEmployeeList(id);
+    }
 }

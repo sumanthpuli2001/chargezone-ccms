@@ -130,6 +130,9 @@
     <mapping resource="com/bul/zydex/model/TrainingIdentification.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/ClassifiedBox.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/QuestionAnswerSubmit.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/CandidateF2FApproval.hbm.xml"/>
+    <mapping resource="com/bul/zydex/hibernate/CandidateF2FRequest.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/CandidateF2FRequest.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/CandidateResultStatus.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

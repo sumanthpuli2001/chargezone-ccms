@@ -12,6 +12,9 @@ import java.util.List;
  *
  * @author Vikas
  */
-public interface ApprovalUserDAO<T> extends GenericsDAO<T>{
-     public List<?> readByApprovalId(int id);
+public interface ApprovalUserDAO<T> extends GenericsDAO<T> {
+
+    public List<?> readByApprovalId(int id);
+
+    public List<?> readapprovalempId();
 }

@@ -71,7 +71,7 @@
                             <li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP</a></li>
                             <li><a href="recruitment.htm?act=createMpr"><i class="fa fa-circle-o"></i>MPR</a></li>
                             <li><a href="vacancy.htm?act=vacancyDetailList"><i class="fa fa-circle-o"></i>Vacancy</a></li>
-                            <li><a href="vacancy.htm?act=applyJobRegistration"><i class="fa fa-circle-o"></i>Apply Job</a></li>
+                            <!--<li><a href="vacancy.htm?act=applyJobRegistration"><i class="fa fa-circle-o"></i>Apply Job</a></li>-->
                             <!--                        <li><a href="userMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>User Right</a></li>-->
                         </ul>
                     </li>
@@ -90,6 +90,8 @@
                                 <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
                                 <li><a href="recruitment.htm?act=allMprFetch"><i class="fa fa-circle-o"></i>MPR Fetch</a></li>
                                 <li><a href="recruitment.htm?act=allMppFetch"><i class="fa fa-circle-o"></i>MPP Fetch</a></li>
+                                <li><a href="vacancy.htm?act=vacancyFetch"><i class="fa fa-circle-o"></i>Vacancy Fetch</a></li>
+                                <li><a href="candidateF2FRequest.htm?act=f2fSelectedCandidate"><i class="fa fa-circle-o"></i>Face To Face</a></li>
                             </ul>
                         </li>
                     </c:if>
@@ -848,6 +850,7 @@
                             <li><a href="trainingType.htm?act=newtraining"><i class="fa fa-circle-o"></i>Training Type</a></li>
                             <li><a href="trainingType.htm?act=newsubtraining"><i class="fa fa-circle-o"></i>Training Sub Type</a></li>
                             <li><a href="trainer.htm?act=createTrainerShow"><i class="fa fa-circle-o"></i>Trainer</a></li>
+                            <li><a href="trainingIdentification.htm?act=createTraineAssigne"><i class="fa fa-circle-o"></i>Traine Assigne</a></li>
 
 
                         </ul>
@@ -857,10 +860,19 @@
 
 
             </li>
-
-
-
             </ul>
+                   <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-pie-chart fa-lg"></i>
+                    <span>My Training</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                         <ul class="treeview-menu">
+
+                            <li><a href="trainingIdentification.htm?act=showcalendar"><i class="fa fa-circle-o"></i>My Training List</a></li>
+
+
+                        </ul>
         </section>
         <!-- /.sidebar -->
     </aside>

@@ -90,6 +90,7 @@
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
+                                <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'approval.htm?act=approvalList'">List</button>
                                 <span style="color: red;font-size: 12px;">* indicates mandatory field.</span>
                                 <c:if test="${!empty successMessage}">
                                     <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
@@ -172,10 +173,8 @@
                     </div><!-- /.tab-content -->
                 </div><!-- nav-tabs-custom -->
             </div><!-- /.col -->
+        </section>
     </div>
-</section>
-</div>
-<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 <script>
     jQuery.noConflict();
     jQuery(document).ready(function () {

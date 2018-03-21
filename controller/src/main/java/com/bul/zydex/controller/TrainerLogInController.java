@@ -5,10 +5,19 @@
  */
 package com.bul.zydex.controller;
 
+import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.Trainer;
+import com.bul.zydex.model.TrainingAttendance;
+import com.bul.zydex.model.TrainingMaster;
+import com.bul.zydex.model.TrainingSubType;
+import com.bul.zydex.model.TrainingType;
 import com.bul.zydex.model.UserMaster;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author DELL3
  */
 public class TrainerLogInController extends TrainerLogInAbstract {
+
     public ModelAndView Login(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
@@ -31,11 +41,12 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         mv.setViewName("Trainer/TrainerLogin");
         return mv;
     }
-   public ModelAndView loginSubmit(HttpServletRequest request,
+
+    public ModelAndView loginSubmit(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-     String username= request.getParameter("userName");
-     String password= request.getParameter("password");
-     
+        String username = request.getParameter("userName");
+        String password = request.getParameter("password");
+
         ModelAndView mv = new ModelAndView();
         Trainer trainerMaster = new Trainer();
 //        VacancyMaster vacancyMaster = new VacancyMaster();
@@ -46,19 +57,17 @@ public class TrainerLogInController extends TrainerLogInAbstract {
 //        String userName = trainerMaster.getUserName();
 //        String PassString = trainerMaster.getPassword();
 
-
         if (!"".equals(username) && !"".equals(password)) {
- List<?> TrainerList = trainerService.readByUser(username);
- for(Object o :TrainerList)
- {
-     trainerMaster =(Trainer)o;
- }
+            List<?> TrainerList = trainerService.readByUser(username);
+            for (Object o : TrainerList) {
+                trainerMaster = (Trainer) o;
+            }
 //            Trainer train = new Trainer();
 //            train.setUserName(username);
 //            train.setPassword(password);
 //            Trainer master = (Trainer) trainerService.read();
 
-            if (trainerMaster.getId()!=null) {
+            if (trainerMaster.getId() != null) {
                 HttpSession session1 = request.getSession(false);
                 session1.setAttribute("trainerMaster", trainerMaster);
 
@@ -74,8 +83,9 @@ public class TrainerLogInController extends TrainerLogInAbstract {
 //                request.setAttribute("successMessage",
 //                        "Information : Login Successfully.");
 //                request.setAttribute("list", CandidateJobApplyList);
-                mv.getModelMap().put("TrainerList", TrainerList);
-                mv.setViewName("Trainer/TrainerList");
+//                mv.getModelMap().put("TrainerList", TrainerList);
+//                mv.setViewName("Trainer/TrainerList");
+                mv = showcalendar(request, response);
                 return mv;
             } else {
                 request.setAttribute("successMessage",
@@ -88,9 +98,12 @@ public class TrainerLogInController extends TrainerLogInAbstract {
             mv = Login(request, response);
         }
 //        mv.getModelMap().put("trainerMaster", trainerMaster);
+
         return mv;
+
     }
-   public ModelAndView logout(HttpServletRequest request,
+
+    public ModelAndView logout(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
@@ -107,10 +120,148 @@ public class TrainerLogInController extends TrainerLogInAbstract {
 //
 //        ModelAndView mv = new ModelAndView();
 //        HttpSession session = request.getSession(false);
-////        Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
-////        session.invalidate();
+//        Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
+//        session.invalidate();
 //        mv.setViewName("User/Login");
 //        return mv;
 //
 //    }
+
+    public ModelAndView calendarList(HttpServletRequest request, HttpServletResponse response) throws ParseException, Exception {
+        ModelAndView mv = new ModelAndView();
+        String monthAndYear = request.getParameter("monthAndYear");;
+        String btnType = request.getParameter("btnType");;
+        Calendar cal3 = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM-yyyy");
+        Date dateTime = new Date();
+        if (monthAndYear.equals("NA")) {
+            monthAndYear = simpleDateFormat.format(new Date());
+            dateTime = simpleDateFormat.parse(monthAndYear);
+            cal3.setTime(dateTime);
+        } else {
+            dateTime = simpleDateFormat.parse(monthAndYear);
+            cal3.setTime(dateTime);
+            if ("Next".equals(btnType)) {
+                cal3.add(Calendar.MONTH, 1);
+            } else if ("Last".equals(btnType)) {
+                cal3.add(Calendar.MONTH, -1);
+            }
+            dateTime = cal3.getTime();
+            monthAndYear = simpleDateFormat.format(dateTime);
+        }
+        HttpSession session = request.getSession(false);
+        Trainer trainer = (Trainer) session.getAttribute("trainerMaster");
+        auditgetCalDate(request, monthAndYear, cal3, trainer.getId());
+        mv.setViewName("Trainer/TrainerList");
+        return mv;
+    }
+
+    public ModelAndView showcalendar(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        Calendar cal3 = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM-yyyy");
+        Date dateTime = new Date();
+        HttpSession session = request.getSession(false);
+        Trainer trainer = (Trainer) session.getAttribute("trainerMaster");
+        String monthAndYear = simpleDateFormat.format(new Date());
+        dateTime = simpleDateFormat.parse(monthAndYear);
+        cal3.setTime(dateTime);
+        auditgetCalDate(request, monthAndYear, cal3, trainer.getId());
+        mv.setViewName("Trainer/TrainerList");
+        return mv;
+    }
+
+    public ModelAndView viewProfile(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String id = request.getParameter("id");
+        String eventdate = request.getParameter("eventdate");
+        List attenlist = new LinkedList();
+        attenlist = trainingAttendanceService.gettrainerTasks(eventdate, Integer.parseInt(id));
+        boolean shosts = true;
+
+        if (attenlist.isEmpty()) {
+            shosts = false;
+            attenlist = trainingIdentificationService.getTrainerAttendance(Integer.parseInt(id));
+
+        }
+        request.setAttribute("shosts", shosts);
+        request.setAttribute("eventdate", eventdate);
+        request.setAttribute("list", attenlist);
+        request.setAttribute("trainingMasterId", id);
+        mv.setViewName("Trainer/TrainerMasterlblView");
+        return mv;
+    }
+
+    public ModelAndView SubmitAttendanceClick(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
+        String[] checkId = request.getParameterValues("checkId");
+        String trainingMasterId = request.getParameter("trainingMasterId");
+        String eventdate = request.getParameter("eventdate");
+//        Object[] allTrainingsId = (Object[])request.getParameterValues("allTrainingsId");
+        
+        
+        String checkStr = "";
+        ModelAndView mv = new ModelAndView();
+        int count = 0;
+        HttpSession session = request.getSession(false);
+        Trainer trainer = (Trainer) session.getAttribute("trainerMaster");
+        TrainingMaster trnMaster =new TrainingMaster();
+        trnMaster.setId(Integer.parseInt(trainingMasterId));
+//        List<String> checkIdList = Arrays.asList(checkId);
+//            checkIdList.forEach((checkedValues) -> departmentMasterService.delete(Integer.parseInt(checkedValues)));
+        boolean flag = false;
+        for (String checkedValues : checkId) {
+            try {
+                
+                EmployeeMaster em = new EmployeeMaster();
+                em.setId(Integer.parseInt(checkedValues));
+                TrainingAttendance trnatt=new TrainingAttendance();
+                trnatt.setEmployeeMaster(em);
+                trnatt.setTrainer(trainer);
+                trnatt.setTrainingMaster(trnMaster);
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar cal = Calendar.getInstance();
+        Date d = new Date();
+        String currentDate = dateFormat.format(d);
+        trnatt.setTrainingDate(eventdate);
+        trnatt.setAttendanceDate(currentDate.toString());
+        trnatt.setStatus(0);
+                trainingAttendanceService.create(trnatt);
+            } catch (Exception e) {
+            }
+        }
+        List<?> Tran = trainingIdentificationService.getTrainerAttendance(Integer.parseInt(trainingMasterId));
+        for (Object checkedValue : Tran) {
+            try {
+                Object[] obj = (Object[]) checkedValue;
+                if(trainingIdentificationService.checkExistance(trnMaster.getId(),Integer.parseInt(""+obj[0]),trainer.getId())){
+                EmployeeMaster em = new EmployeeMaster();
+                em.setId(Integer.parseInt(""+obj[0]));
+                
+                TrainingAttendance trnatt=new TrainingAttendance();
+                trnatt.setEmployeeMaster(em);
+                trnatt.setTrainer(trainer);
+                trnatt.setTrainingMaster(trnMaster);
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar cal = Calendar.getInstance();
+        Date d = new Date();
+        String currentDate = dateFormat.format(d);
+        trnatt.setTrainingDate(eventdate);
+        trnatt.setAttendanceDate(currentDate.toString());
+        trnatt.setStatus(1);
+                trainingAttendanceService.create(trnatt);
+                }
+            } catch (Exception e) {
+            }
+        }
+        if (flag) {
+            mv.addObject("failureMessage", "Error.... " + "<b>" + checkStr + "</b>");
+        } else {
+            mv.addObject("successMessage", "Information Is Submitted Successfully.");
+        }
+        mv=showcalendar(request, response);
+//        mv.setViewName("Trainer/TrainerMasterlblView");
+        return mv;
+    }
 }

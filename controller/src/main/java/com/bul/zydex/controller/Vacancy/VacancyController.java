@@ -48,8 +48,9 @@ public class VacancyController extends VacancyAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         VacancyMaster vacancyMaster = new VacancyMaster();
-        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        List<?> vacancylist = vacancyMasterService.fetchCreatedVacancy(employeeMaster.getId());
         mv.getModelMap().put("list", vacancylist);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
         mv.setViewName("Vacancy/VacancyDetailReportList");
@@ -165,6 +166,9 @@ public class VacancyController extends VacancyAbstract {
     public ModelAndView vacancySubmitCreate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         VacancyMaster vacancyMaster = new VacancyMaster();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
         String id = request.getParameter("mprMasterid");
         DepartmentMaster departmentMaster = new DepartmentMaster();
         MprMaster mprMaster = new MprMaster();
@@ -238,6 +242,8 @@ public class VacancyController extends VacancyAbstract {
 
         } else {
             vacancyMaster.setStatus(0);
+            vacancyMaster.setCreatedBy(employeeMaster.getId());
+            vacancyMaster.setCreatedDate(sdf.format(cDate));
             vacancyMasterService.create(vacancyMaster);
             request.setAttribute("successMessage",
                     "Information : The Information is Created Successfully.");
@@ -352,9 +358,12 @@ public class VacancyController extends VacancyAbstract {
 
         ModelAndView mv = new ModelAndView();
         VacancyMaster vacancyMaster = new VacancyMaster();
-
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         BindException errors = new BindException(vacancyMaster, "vacancyMaster");
         bind(request, vacancyMaster);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+        VacancyMaster vacancyMaster1 = vacancyMasterService.readById(vacancyMaster.getId());
 //        payrollProfessionalTaxValidator.validate(payrollProfessionalTax, errors);
         Map<Integer, String> locationMap = readLocations();
         if (errors.hasErrors()) {
@@ -362,6 +371,13 @@ public class VacancyController extends VacancyAbstract {
                     "Error : The Professional Tax is not valid.");
             mv.addAllObjects(errors.getModel());
         } else {
+
+            vacancyMaster.setCreatedBy(vacancyMaster1.getCreatedBy());
+            vacancyMaster.setCreatedDate(vacancyMaster1.getCreatedDate());
+            vacancyMaster.setUpdatedBy(employeeMaster.getId());
+            vacancyMaster.setUpdatedDate(sdf.format(cDate));
+            vacancyMaster.setMprMaster(vacancyMaster1.getMprMaster());
+            vacancyMaster.setStatus(0);
             vacancyMasterService.update(vacancyMaster);
             request.setAttribute("successMessage",
                     "Information: The Information is Edited Successfully");
@@ -709,12 +725,22 @@ public class VacancyController extends VacancyAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
-//        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         String id = request.getParameter("id");
-        CandidateApplyJob candidateApplyJob = candidateJobApplyService.readByapplayjobusermasterid(Integer.parseInt(id));
-        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
-        mv.setViewName("Vacancy/MyProfile");
+        if (id != null) {
 
+            CandidateApplyJob candidateApplyJob1 = candidateJobApplyService.readByapplayjobusermasterid(Integer.parseInt(id));
+            if (candidateApplyJob1 != null) {
+                mv.getModelMap().put("candidateApplyJob", candidateApplyJob1);
+                mv.setViewName("Vacancy/MyProfile");
+            } else {
+                mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+                mv.setViewName("Vacancy/MyProfile");
+            }
+        } else {
+            mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+            mv.setViewName("Vacancy/MyProfile");
+        }
         return mv;
     }
 
@@ -1005,7 +1031,7 @@ public class VacancyController extends VacancyAbstract {
 
         String candidateiD = request.getParameter("candidateId");
         int candidateJobapplicationid = candidateJobApplicationService.GETByCandidateId(Integer.parseInt(candidateiD));
-        
+
         String[] question = request.getParameterValues("finalData1");
         String[] email = request.getParameterValues("finalData");
 //       
@@ -1097,9 +1123,22 @@ public class VacancyController extends VacancyAbstract {
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
 
-            mv = vacancyDetailList(request,response);
+            mv = vacancyDetailList(request, response);
         }
 
+        return mv;
+    }
+
+    public ModelAndView vacancyFetch(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+
+        List<?> vacancyList = vacancyMasterService.fetchVacancyDetail();
+        mv.getModelMap().put("list", vacancyList);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.setViewName("Vacancy/vacancyList");
         return mv;
     }
 }

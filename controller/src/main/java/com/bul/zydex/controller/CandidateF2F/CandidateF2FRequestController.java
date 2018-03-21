@@ -51,6 +51,8 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         CandidateF2FRequest candidateF2FRequest = new CandidateF2FRequest();
         CandidateF2FApproval candidateF2FApproval = new CandidateF2FApproval();
         CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
 //        EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         BindException errors = new BindException(candidateF2FRequest, "candidateF2FRequest");
@@ -87,8 +89,6 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
                 }
             }
         }
-        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
-        OnlineAssessment onlineAssessment = new OnlineAssessment();
 
         List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
 
@@ -96,7 +96,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         questionList(request);
         mv.getModelMap().put("onlineAssessment", onlineAssessment);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
-        mv.setViewName("CandidateFtoF/FtoFCandidateList");
+        mv.setViewName("Recruitment/CandidateRequestList");
 //        mv = createCandidateF2FInvitation(request, response);
         return mv;
     }
@@ -107,7 +107,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         ModelAndView mv = new ModelAndView();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         OnlineAssessment onlineAssessment = new OnlineAssessment();
-
+        
         List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
 
         mv.getModelMap().put("list", candidateJobList);

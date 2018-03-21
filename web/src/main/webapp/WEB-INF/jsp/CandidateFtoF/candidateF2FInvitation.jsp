@@ -104,8 +104,8 @@
                                             <div class="col-sm-5">
                                                 <label>Date Of Interview:<span style="color: red;font-size: 12px;">*</span></label>
                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" >
-                                                <form:input path="dateOfInterview" class="form-control" onchange="dateDifference(this.value);" placeholder="Date" readonly="true" ></form:input>
-                                                <!--<input type="text" id="datetimepicker2" class="form-control" placeholder="Please select From Date" name="dateOfInterview" readonly="true"/>-->
+                                                <%--<form:input path="dateOfInterview" class="form-control" onchange="dateDifference(this.value);" placeholder="Date" readonly="true" ></form:input>--%>
+                                                <input type="text" id="datetimepicker2" class="form-control" placeholder="Please select From Date" name="dateOfInterview" readonly="true"/>
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                             </div>
                                             <%--<form:errors path="dateOfInterview" cssClass="errorDiv"></form:errors>--%>
@@ -215,7 +215,7 @@
     }
 </script>
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
     $('.form_datetime').datetimepicker({
         //language:  'fr',
         weekStart: 1,
@@ -227,15 +227,15 @@
         forceParse: 0
     });
 
-</script>
+</script>-->
 
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 </html>
-<!--<script>
+<script>
     $(document).ready(function () {
         $('#datetimepicker2').datepicker({
         });
     });
-</script>-->
+</script>
 

@@ -37,11 +37,11 @@ public class CandidateJobApplicationDAOImpl<T> extends GenericsDAOImpl<T> implem
     @Override
     public List<?> readCandidateApplyForJob() {
         String query = " SELECT a.id as cjaId,b.id as cajId,c.id as vmId,b.name as candidatename, "
-                + " b.highestEducationQualification,b.emailId,b.experianceDateJoiningYear,c.name as vacancyName "
+                + " b.highestEducationQualification,b.emailId,b.experianceDateJoiningYear,c.name as vacancyName,a.status "
                 + " FROM CandidateJobApplication a "
                 + " LEFT JOIN a.candidateApplyJob b "
                 + " LEFT JOIN a.vacancyMaster c "
-                + " Where a.status in (1,2,4,5,6) ";
+                + " Where a.status!=0 ";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

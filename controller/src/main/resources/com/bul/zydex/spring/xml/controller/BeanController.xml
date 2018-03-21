@@ -1083,6 +1083,7 @@
         <property name="questionAnswerSubmitService" ref="questionAnswerSubmitService1"/>
         <property name="questionLibraryService" ref="questionLibraryService1"/>
         <property name="questionAnsService" ref="questionAnsService1"/>
+        <property name="candidateResultStatusService" ref="candidateResultStatusService1"/>
         
     </bean>
     <bean id="trainingTypeController1" class="com.bul.zydex.controller.Training.TrainingTypeController" parent="controllerConfig" >

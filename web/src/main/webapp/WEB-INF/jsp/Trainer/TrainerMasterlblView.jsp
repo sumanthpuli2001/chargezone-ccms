@@ -167,6 +167,7 @@
                                
         </form:form><!-- /.content -->
     </div><!-- /.content-wrapper -->
+        <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
     <script>
         function viewClick(id)
         {
@@ -198,7 +199,7 @@
         //        });
         });
     </script>
-    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    
 </html>
 
 <style>

@@ -94,7 +94,7 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
-                                <c:if test="${sessionScope.userRight.employeeManagement}">
+                                <c:if test="${sessionScope.userRight.hr}">
                                     <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
                                     <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
 
@@ -124,6 +124,7 @@
                                                                         <%--</c:if>--%>
                                                                     <!--<th>user id</th>-->
                                                                     <th >Questions</th>
+                                                                    <th >Category</th>
                                                                     <!--<th style="width: 50px;">Employee Name</th>-->
                                                                     <!--                                                                    <th style="width: 50px;">Department</th>
                                                                                                                                         <th style="width: 50px;">Designation</th>-->
@@ -139,13 +140,15 @@
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                                                    <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
+                                                                <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     <%--</c:if>--%>
                                                                 <!--<td>/</td>-->
                                                                 <td>${list[1]}</td>
+                                                                <td> ${list[7]}</td>
+
 <!--                                                                <td>${list[2]}</td>
-                                                                <td>${list[3]}</td>
-                                                                <td>${list[4]}</td>-->
+ <td>${list[3]}</td>
+ <td>${list[4]}</td>-->
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>
                                                                     <div class="btn-group">
@@ -155,18 +158,18 @@
                                                                         <ul class="dropdown-menu" >
                                                                             <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
 
-                                                                                <li style="width: 100px;">
-                                                                                    <a href="#"
-                                                                                       onclick="editClick(${list[0]},${list[6]});">
-                                                                                        &nbsp;&nbsp;View/Edit
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li style="width: 100px;">
-                                                                                    <a href="#"
-                                                                                       onclick="deleteClick(${list[0]},${list[6]});">
-                                                                                        &nbsp;&nbsp;Delete
-                                                                                    </a>
-                                                                                </li>
+                                                                            <li style="width: 100px;">
+                                                                                <a href="#"
+                                                                                   onclick="editClick(${list[0]},${list[6]});">
+                                                                                    &nbsp;&nbsp;View/Edit
+                                                                                </a>
+                                                                            </li>
+                                                                            <li style="width: 100px;">
+                                                                                <a href="#"
+                                                                                   onclick="deleteClick(${list[0]},${list[6]});">
+                                                                                    &nbsp;&nbsp;Delete
+                                                                                </a>
+                                                                            </li>
                                                                             <%--</c:if>--%>
 
                                                                             <!--                                                                            <li>

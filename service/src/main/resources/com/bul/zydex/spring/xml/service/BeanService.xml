@@ -589,4 +589,13 @@
     <bean id="employeeFeedbackService1" class="com.bul.zydex.service.Training.EmployeeFeedbackServiceImpl">
         <property name="employeeFeedbackDAO" ref="employeeFeedbackDAO1" />
     </bean>
+    <bean id="candidateF2FApprovalService1" class="com.bul.zydex.service.CandidateF2FApproval.CandidateF2FApprovalServiceImpl">
+        <property name="candidateF2FApprovalDAO" ref="candidateF2FApprovalDAO1" />
+    </bean>
+    <bean id="candidateF2FRequestService1" class="com.bul.zydex.service.CandidateF2FRequest.CandidateF2FRequestServiceImpl">
+        <property name="candidateF2FRequestDAO" ref="candidateF2FRequestDAO1" />
+    </bean>
+    <bean id="candidateResultStatusService1" class="com.bul.zydex.service.QuestionAnswerSubmit.CandidateResultStatusServiceImpl">
+        <property name="candidateResultStatusDAO" ref="candidateResultStatusDAO1" />
+    </bean>
 </beans>

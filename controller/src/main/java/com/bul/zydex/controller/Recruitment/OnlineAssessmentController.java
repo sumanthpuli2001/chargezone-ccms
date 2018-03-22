@@ -8,7 +8,10 @@ package com.bul.zydex.controller.Recruitment;
 import com.bul.zydex.model.ApplayJobUserMaster;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateJobApplication;
+import com.bul.zydex.model.CandidateResultStatus;
 import com.bul.zydex.model.OnlineAssessment;
+import com.bul.zydex.model.QuestionAns;
+import com.bul.zydex.model.QuestionAnswerSubmit;
 import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.QuestionPaper;
 import com.bul.zydex.model.UserMaster;
@@ -48,53 +51,63 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.now();
         QuestionPaper questionPaper = questionPaperService.readById(Integer.parseInt(questionsPaperId));
-        if ("" == id) {
+        try {
+            if ("" == id) {
 
+                OnlineAssessment onlineAssessment = new OnlineAssessment();
+                onlineAssessment.setCreatedBy(user.getId());
+                onlineAssessment.setCreatedDate(dtf.format(localDate));
+                onlineAssessment.setDuration(duration);
+                onlineAssessment.setNoOfAttampt(Integer.parseInt(noOfAttampt));
+                onlineAssessment.setQuestionPaper(questionPaper);
+                onlineAssessment.setValidityFrom(validityFrom);
+                onlineAssessment.setValidityTo(validityTo);
+                double pp = Integer.parseInt(passingPercentage);
+                onlineAssessment.setPassingPercentage(pp);
+                onlineAssessment.setNoOfQue(Integer.parseInt(NoOfQue));
+                double total = Integer.parseInt(totalMarks);
+                onlineAssessment.setTotalMarks(total);
+                CandidateJobApplication jobApplication = candidateJobApplicationService.readById(Integer.parseInt(candidateJobApplicationId));
+                onlineAssessment.setCandidateJobApplication(jobApplication);
+                jobApplication.setStatus(5);
+                candidateJobApplicationService.update(jobApplication);
+                onlineAssessmentService.create(onlineAssessment);
+            } else {
+
+                OnlineAssessment onlineAssessment = onlineAssessmentService.readById(Integer.parseInt(id));
+                onlineAssessment.setUpdatedBy(user.getId());
+                onlineAssessment.setUdatedDate(dtf.format(localDate));
+                onlineAssessment.setDuration(duration);
+                onlineAssessment.setNoOfAttampt(Integer.parseInt(noOfAttampt));
+                onlineAssessment.setQuestionPaper(questionPaper);
+                onlineAssessment.setValidityFrom(validityFrom);
+                onlineAssessment.setValidityTo(validityTo);
+                double pp = Integer.parseInt(passingPercentage);
+                onlineAssessment.setPassingPercentage(pp);
+                onlineAssessment.setNoOfQue(Integer.parseInt(NoOfQue));
+                double total = Integer.parseInt(totalMarks);
+                onlineAssessment.setTotalMarks(total);
+                CandidateJobApplication jobApplication = candidateJobApplicationService.readById(Integer.parseInt(candidateJobApplicationId));
+                jobApplication.setStatus(5);
+                candidateJobApplicationService.update(jobApplication);
+                onlineAssessment.setCandidateJobApplication(jobApplication);
+                onlineAssessmentService.update(onlineAssessment);
+
+            }
+
+            CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(candidateJobApplicationId));
+            CandidateApplyJob candidateApplyJob = candidateJobApplyService.readById(cja.getCandidateApplyJob().getId());
             OnlineAssessment onlineAssessment = new OnlineAssessment();
-            onlineAssessment.setCreatedBy(user.getId());
-            onlineAssessment.setCreatedDate(dtf.format(localDate));
-            onlineAssessment.setDuration(duration);
-            onlineAssessment.setNoOfAttampt(Integer.parseInt(noOfAttampt));
-            onlineAssessment.setQuestionPaper(questionPaper);
-            onlineAssessment.setValidityFrom(validityFrom);
-            onlineAssessment.setValidityTo(validityTo);
-            double pp = Integer.parseInt(passingPercentage);
-            onlineAssessment.setPassingPercentage(pp);
-            onlineAssessment.setNoOfQue(Integer.parseInt(NoOfQue));
-            double total = Integer.parseInt(totalMarks);
-            onlineAssessment.setTotalMarks(total);
-            CandidateJobApplication jobApplication = candidateJobApplicationService.readById(Integer.parseInt(candidateJobApplicationId));
-            onlineAssessment.setCandidateJobApplication(jobApplication);
-            onlineAssessmentService.create(onlineAssessment);
-        } else {
-
-            OnlineAssessment onlineAssessment = onlineAssessmentService.readById(Integer.parseInt(id));
-            onlineAssessment.setUpdatedBy(user.getId());
-            onlineAssessment.setUdatedDate(dtf.format(localDate));
-            onlineAssessment.setDuration(duration);
-            onlineAssessment.setNoOfAttampt(Integer.parseInt(noOfAttampt));
-            onlineAssessment.setQuestionPaper(questionPaper);
-            onlineAssessment.setValidityFrom(validityFrom);
-            onlineAssessment.setValidityTo(validityTo);
-            double pp = Integer.parseInt(passingPercentage);
-            onlineAssessment.setPassingPercentage(pp);
-            onlineAssessment.setNoOfQue(Integer.parseInt(NoOfQue));
-            double total = Integer.parseInt(totalMarks);
-            onlineAssessment.setTotalMarks(total);
-            CandidateJobApplication jobApplication = candidateJobApplicationService.readById(Integer.parseInt(candidateJobApplicationId));
-            onlineAssessment.setCandidateJobApplication(jobApplication);
-            onlineAssessmentService.update(onlineAssessment);
+            questionList(request);
+            mv.getModelMap().put("onlineAssessment", onlineAssessment);
+            request.setAttribute("candidateJobApplication", cja);
+            mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+            mv.setViewName("Recruitment/CandidateApproval");
+        } catch (Exception e) {
+            request.setAttribute("failureMessage",
+                    "All field are Required.Please Enter Valid data");
 
         }
-
-        CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(candidateJobApplicationId));
-        CandidateApplyJob candidateApplyJob = candidateJobApplyService.readById(cja.getCandidateApplyJob().getId());
-        OnlineAssessment onlineAssessment = new OnlineAssessment();
-        questionList(request);
-        mv.getModelMap().put("onlineAssessment", onlineAssessment);
-        request.setAttribute("candidateJobApplication", cja);
-        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
-        mv.setViewName("Recruitment/CandidateApproval");
         return mv;
 
     }
@@ -128,13 +141,26 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
         ModelAndView mv = new ModelAndView();
         String appliCationId = request.getParameter("id");
         String candidateId = request.getParameter("candidateId");
+        CandidateApplyJob candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(candidateId));
+        List<?> OnList = onlineAssessmentService.readOnlineAssementCandidateList(Integer.parseInt(appliCationId));
+        Double passingPercentage = 0.0;
+        Double totalMarks = 0.0;
 
+        if (!OnList.isEmpty()) {
+            for (Object o2 : OnList) {
+                Object str1[] = (Object[]) o2;
+                passingPercentage = (Double) str1[3];
+                totalMarks = (Double) str1[9];
+
+            }
+        }
         List<?> QuestionAnswerListIds = questionAnswerSubmitService.readByCandidateApplicationId(Integer.parseInt(appliCationId));
         List listOfFinalList = new ArrayList();
 //        List<?> list1 = questionDetailsService.takeTestOnlineAssementCandidate(Integer.parseInt(id));
         for (Object o1 : QuestionAnswerListIds) {
             Object str[] = (Object[]) o1;
             List finalList = new ArrayList();
+            Integer qasid = (Integer) str[0];
             Integer questionLibraryID = (Integer) str[2];
             Integer selectedAns = (Integer) str[3];
             Integer correctAns = (Integer) str[4];
@@ -151,6 +177,9 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
             finalList.add(selectedAns);     //3
             finalList.add(correctAns);      //4
             finalList.add(marks);      //5
+            finalList.add(passingPercentage);  //6
+            finalList.add(totalMarks);  //7
+            finalList.add(qasid);  //8
 
             List<?> list2 = questionAnsService.takeTestOnlineAssementCandidateAnswer(questionLibraryid);
             if (!list2.isEmpty()) {
@@ -158,7 +187,7 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
                     Object str1[] = (Object[]) o2;
                     Integer questionAnsID = (Integer) str1[0];
                     String answer = (String) str1[2];
-                    finalList.add(answer);      
+                    finalList.add(answer);
                     finalList.add(questionAnsID);
                 }
 
@@ -170,9 +199,85 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
         }
 //        
         mv.getModelMap().put("list2", listOfFinalList);
-        mv.getModelMap().put("candidateID", candidateId);
+        mv.getModelMap().put("candidateID", appliCationId);
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Recruitment/QuestionAnsCheck");
         return mv;
+    }
+
+    public ModelAndView submitResult(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        String[] id = request.getParameterValues("id");
+
+        String candidateiD = request.getParameter("candidateId");
+        CandidateJobApplication candidateJobapplicationid = candidateJobApplicationService.readById(Integer.parseInt(candidateiD));
+        String totalResult = request.getParameter("totalResult");
+        String percentageResult = request.getParameter("percentageResult");
+        String passResult = request.getParameter("passResult");
+        String failResult = request.getParameter("failResult");
+//        String[] givenMarks1 = request.getParameterValues("givenMarks3");
+        String[] givenMarks2 = request.getParameterValues("givenMarks2");
+        String[] type = request.getParameterValues("type");
+        String[] mcqStatus = request.getParameterValues("mcqStatus");
+        try {
+            for (int i = 0; i < id.length; i++) {
+                String ids = id[i];
+                String tp = type[i];
+                String mcqSts = null; // last add
+                String inputqSts = null; // last add
+                QuestionAnswerSubmit questionAnswerSubmit = questionAnswerSubmitService.readById(Integer.parseInt(ids));
+                String inputedMarks = null;
+                int typeofQue = Integer.parseInt(tp);
+                if (1 == typeofQue) {
+                    inputedMarks = givenMarks2[i];
+                    inputqSts = mcqStatus[i];
+                    questionAnswerSubmit.setAnsStatus(Integer.parseInt(inputqSts));
+                } else {
+                    inputedMarks = givenMarks2[i];
+                    mcqSts = mcqStatus[i];
+                    questionAnswerSubmit.setAnsStatus(Integer.parseInt(mcqSts));
+                }
+//            String ans = doneId1[i];
+
+                questionAnswerSubmit.setObtainMarks(Double.parseDouble(inputedMarks));
+
+                questionAnswerSubmitService.update(questionAnswerSubmit);
+//             mv.setViewName("Vacancy/AssementOnline");
+            }
+            CandidateResultStatus candidateResultStatus = new CandidateResultStatus();
+            candidateResultStatus.setCandidateJobApplication(candidateJobapplicationid);
+            candidateResultStatus.setObtainTotal(Double.parseDouble(totalResult));
+            candidateResultStatus.setObtainsPercentage(Double.parseDouble(percentageResult));
+            candidateResultStatus.setResultStatus(passResult);
+            candidateResultStatusService.create(candidateResultStatus);
+            if ("" != passResult) {
+                candidateJobapplicationid.setStatus(6);   // 6 status Pass
+                candidateJobApplicationService.update(candidateJobapplicationid);
+            }
+            if ("" != failResult) {
+                candidateJobapplicationid.setStatus(7);   // 7 status Fail
+                candidateJobApplicationService.update(candidateJobapplicationid);
+            }
+
+            CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+            OnlineAssessment onlineAssessment = new OnlineAssessment();
+//        List<?> candidateApplyJobList = candidateJobApplyService.fetchcandidatelist();
+            List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
+
+            mv.getModelMap().put("list", candidateJobList);
+            questionList(request);
+            mv.getModelMap().put("onlineAssessment", onlineAssessment);
+            mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+            mv.setViewName("Recruitment/CandidateRequestList");
+
+        } catch (Exception e) {
+            request.setAttribute("failureMessage",
+                    "All field are Required.Please Enter Valid data");
+
+        }
+        return mv;
+
     }
 
 }

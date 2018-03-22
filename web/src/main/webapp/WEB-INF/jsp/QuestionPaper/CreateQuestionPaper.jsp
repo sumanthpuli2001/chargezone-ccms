@@ -44,7 +44,7 @@
                                                 <form:input path="id" id="id" class="form-control" type="hidden"></form:input>
                                                 
                                                 <label>Category :<span style="color: red;font-size: 12px;"></span></label>
-                                                    <form:select path="categoryName.id" id="categoryName" class="form-control">
+                                                    <form:select path="categoryName.id" id="categoryName" class="form-control" required="true">
                                                         <form:option value="" label="-- Select --" />
                                                         <form:options items="${categoryList}"></form:options>
                                                     </form:select>
@@ -52,7 +52,7 @@
                                                 </div>
                                                 <div class="col-sm-5">
                                                     <label>Question Paper Name : <span style="color: red;font-size: 12px;">*</span></label>
-                                                <form:input path="paperName" id="marks" class="form-control" placeholder="Enter Paper Name"></form:input>
+                                                <form:input path="paperName" id="marks" class="form-control" placeholder="Enter Paper Name" required="true"></form:input>
                                                 <form:errors path="paperName" cssClass="errorDiv"></form:errors>
 
                                                 </div>

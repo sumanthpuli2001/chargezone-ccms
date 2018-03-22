@@ -33,6 +33,9 @@ public class TrainingMasterServiceImpl<T> extends GenericsServiceImpl<T> impleme
     }
 
     @Override
+    public List<?> readTrainingMasterList() {
+      return trainingMasterDAO.readTrainingMasterList();
+    }
     public List<?> fetchtrainingMaster(String date) {
       return  trainingMasterDAO.fetchtrainingMaster(date);
     }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.CandidateResultStatus" table="candidate_result_status" catalog="hr_power_astral">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="candidateJobApplication" class="com.bul.zydex.model.CandidateJobApplication" fetch="select">
+            <column name="candidate_job_application_id"  />
+        </many-to-one>
+        <property name="obtainsPercentage" type="java.lang.Double">
+            <column name="obtain_percentage" />
+        </property>
+        <property name="obtainTotal" type="java.lang.Double">
+            <column name="obtain_total" />
+        </property>
+        <property name="resultStatus" type="string">
+            <column name="result_status"  />
+        </property>
+       
+    </class>
+</hibernate-mapping>

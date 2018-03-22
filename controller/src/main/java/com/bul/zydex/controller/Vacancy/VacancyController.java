@@ -358,9 +358,12 @@ public class VacancyController extends VacancyAbstract {
 
         ModelAndView mv = new ModelAndView();
         VacancyMaster vacancyMaster = new VacancyMaster();
-
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         BindException errors = new BindException(vacancyMaster, "vacancyMaster");
         bind(request, vacancyMaster);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+        VacancyMaster vacancyMaster1 = vacancyMasterService.readById(vacancyMaster.getId());
 //        payrollProfessionalTaxValidator.validate(payrollProfessionalTax, errors);
         Map<Integer, String> locationMap = readLocations();
         if (errors.hasErrors()) {
@@ -368,6 +371,13 @@ public class VacancyController extends VacancyAbstract {
                     "Error : The Professional Tax is not valid.");
             mv.addAllObjects(errors.getModel());
         } else {
+
+            vacancyMaster.setCreatedBy(vacancyMaster1.getCreatedBy());
+            vacancyMaster.setCreatedDate(vacancyMaster1.getCreatedDate());
+            vacancyMaster.setUpdatedBy(employeeMaster.getId());
+            vacancyMaster.setUpdatedDate(sdf.format(cDate));
+            vacancyMaster.setMprMaster(vacancyMaster1.getMprMaster());
+            vacancyMaster.setStatus(0);
             vacancyMasterService.update(vacancyMaster);
             request.setAttribute("successMessage",
                     "Information: The Information is Edited Successfully");
@@ -715,12 +725,22 @@ public class VacancyController extends VacancyAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
-//        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         String id = request.getParameter("id");
-        CandidateApplyJob candidateApplyJob = candidateJobApplyService.readByapplayjobusermasterid(Integer.parseInt(id));
-        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
-        mv.setViewName("Vacancy/MyProfile");
+        if (id != null) {
 
+            CandidateApplyJob candidateApplyJob1 = candidateJobApplyService.readByapplayjobusermasterid(Integer.parseInt(id));
+            if (candidateApplyJob1 != null) {
+                mv.getModelMap().put("candidateApplyJob", candidateApplyJob1);
+                mv.setViewName("Vacancy/MyProfile");
+            } else {
+                mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+                mv.setViewName("Vacancy/MyProfile");
+            }
+        } else {
+            mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+            mv.setViewName("Vacancy/MyProfile");
+        }
         return mv;
     }
 
@@ -1011,7 +1031,7 @@ public class VacancyController extends VacancyAbstract {
 
         String candidateiD = request.getParameter("candidateId");
         int candidateJobapplicationid = candidateJobApplicationService.GETByCandidateId(Integer.parseInt(candidateiD));
-        
+
         String[] question = request.getParameterValues("finalData1");
         String[] email = request.getParameterValues("finalData");
 //       

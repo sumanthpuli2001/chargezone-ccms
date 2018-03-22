@@ -15,6 +15,8 @@ import java.util.List;
 public interface TrainingMasterService<T> extends GenericsService<T> {
     
     public void deletetrainingSubMaster(final Integer id);
+
+    public List<?> readTrainingMasterList();
     
     public List<?> fetchtrainingMaster(String date);
     

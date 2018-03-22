@@ -9,7 +9,6 @@
 
 <script>
     function reviewClick(f2fRequestId) {
-        alert(f2fRequestId);
         window.location = 'candidateF2FApproval.htm?act=openInterviewReviewPage&id='+f2fRequestId;
     }
 </script>

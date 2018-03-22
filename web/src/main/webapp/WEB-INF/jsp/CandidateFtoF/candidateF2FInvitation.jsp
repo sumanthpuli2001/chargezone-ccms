@@ -252,12 +252,12 @@
 </html>
 <script>
     $(document).ready(function () {
-//        $('#datetimepicker2').datepicker({
-//            dateFormat: 'dd/mm/yy'
-//        });
-        $('#datetimepicker2').datetimepicker({
-    format: 'yyyy-mm-dd hh:ii'
-});
+        $('#datetimepicker2').datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
+//        $('#datetimepicker2').datetimepicker({
+//    format: 'yyyy-mm-dd hh:ii'
+//});
     });
     
 </script>

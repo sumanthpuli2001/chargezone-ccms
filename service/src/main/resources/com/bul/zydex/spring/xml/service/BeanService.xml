@@ -598,4 +598,7 @@
     <bean id="candidateResultStatusService1" class="com.bul.zydex.service.QuestionAnswerSubmit.CandidateResultStatusServiceImpl">
         <property name="candidateResultStatusDAO" ref="candidateResultStatusDAO1" />
     </bean>
+    <bean id="trainingAssessmentService1" class="com.bul.zydex.service.Training.TrainingAssessmentServiceImpl">
+        <property name="trainingAssessmentDAO" ref="trainingAssessmentDAO1" />
+    </bean>
 </beans>

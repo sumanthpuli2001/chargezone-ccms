@@ -59,8 +59,11 @@
                             >-->
                             <c:if test="${sessionScope.userRight.employeeManagement}">
                                 <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
+                                
 
                                 <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'trainingType.htm?act=createtraining'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
+                                <br>
+                                
                             </c:if>
                             <!--                                <div class="box-header">
                                                             </div>-->
@@ -84,8 +87,8 @@
                                                                     <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
                                                                     </c:if>
                                                                 <!--<th>user id</th>-->
-                                                                <th style="width: 50px;">Thought</th>
-                                                                <th style="width: 50px;">Date</th>
+                                                                <th style="width: 50px;">Training Type</th>
+                                                                <!--<th style="width: 50px;"></th>-->
                                                                     <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <th style="width: 50px;">Action</th>
                                                                     <%--</c:if>--%>
@@ -102,9 +105,11 @@
                                                                 </c:if>
                                                             <!--<td>/</td>-->
                                                             <td>${list[1]}</td>
-                                                            <td>${list[2]}</td>
-                                                            <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                             <td>
+                                                                <!--${list[2]}-->
+                                                            <!--</td>-->
+                                                            <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                            <!--<td>-->
                                                                 <div class="btn-group">
                                                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                         Action <span class="caret"></span>
@@ -122,7 +127,7 @@
                                                                         <%--</c:if>--%>
                                                                     </ul>
                                                                 </div>
-                                                            </td>
+                                                            <!--</td>-->
                                                             <%--</c:if>--%>
                                                         </tr>
                                                     </c:forEach>

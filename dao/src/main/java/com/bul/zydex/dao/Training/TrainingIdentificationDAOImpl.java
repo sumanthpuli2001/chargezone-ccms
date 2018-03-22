@@ -9,6 +9,7 @@ import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.TrainingIdentification;
 import java.util.LinkedList;
 import java.util.List;
+import org.hibernate.Query;
 
 /**
  *
@@ -38,15 +39,28 @@ public class TrainingIdentificationDAOImpl<T> extends GenericsDAOImpl<T> impleme
     }
 
     @Override
-    public List<?> readTrainingList(String eventDate,int userid) {
-        String query = ""
-                + " SELECT b.id ,b.trainingTitle"
-                + " FROM TrainingIdentification a"
-                + " LEFT JOIN a.trainingMaster b "
-                + " WHERE STR_TO_DATE(b.startDate, '%d/%m/%Y')=STR_TO_DATE('" + eventDate + "', '%d/%m/%Y')"
-                + " And a.employeeMaster.id=" + userid;
-
-        List<?> list = getHibernateTemplate().find(query);
+    public List<?> readTrainingList(String eventDate, int userid) {
+//        String query = ""
+//                + " SELECT c.trainingMasterid ,c.title"
+//                + " FROM TrainingIdentification a,TrainingSubMaster c"
+//                + " LEFT JOIN a.trainingMaster b"
+//                + " WHERE b.id=c.trainingMasterid"
+//                + " AND STR_TO_DATE(b.startDate, '%d/%m/%Y')=STR_TO_DATE('" + eventDate + "', '%d/%m/%Y')"
+//                + " And a.employeeMaster.id=" + userid;
+//
+//        List<?> list = getHibernateTemplate().find(query);
+        String sqlString = "SELECT"
+                + " c.training_master_id,c.title,c.trainingdate"
+                + " FROM"
+                + " hr_power_astral.training_master b"
+                + " LEFT JOIN"
+                + " training_identification a ON b.id = a.training_id"
+                + " LEFT JOIN"
+                + " training_sub_master c ON b.id = c.training_master_id"
+                + " WHERE STR_TO_DATE(c.trainingdate, '%d/%m/%Y')=STR_TO_DATE('" + eventDate + "', '%d/%m/%Y')"
+                + " And a.employee_id ="+userid;
+        Query query = getSession().createSQLQuery(sqlString);
+        List<?> list = query.list();
         return list;
     }
 
@@ -113,6 +127,18 @@ public class TrainingIdentificationDAOImpl<T> extends GenericsDAOImpl<T> impleme
 
             return finallist;
         }
+        return list;
+    }
+
+    @Override
+    public List<?> checkTraineeAvailableStatus(int trainingId, int empId) {
+         String query = "select c"
+                + " FROM TrainingIdentification b"
+                + " left join b.trainingMaster c"
+//                + " where c.id=" + trainingId
+                + " where b.employeeMaster.id=" + empId
+                + " group by c.id";
+        List<?> list = getHibernateTemplate().find(query);
         return list;
     }
 

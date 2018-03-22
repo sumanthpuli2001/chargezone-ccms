@@ -15,4 +15,5 @@ import java.util.List;
 public interface TrainingAttendanceService<T> extends GenericsService<T>{
   public List<?> gettrainingattendance(String eventDate,int id);  
   public List<?> gettrainerTasks(String eventDate,int id);  
+  public Boolean checkFeedbackstatus(int id);  
 }

@@ -38,7 +38,6 @@
             }
 
             function checkBlankField() {
-                alert("yooooooooooooo");
                 var flag = true;
                 if ($('#trainingMaster').val() == '') {
                     document.getElementById('trainingMasterError').innerHTML = '-It must not be empty or white space.';

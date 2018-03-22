@@ -59,7 +59,6 @@
 </script>
 <script>
     function checkBlankField() {
-        alert("HElloooo");
         var flag = true;
         if ($('#trainingTitle').val() == '') {
             document.getElementById('trainingTitleError').innerHTML = '-It must not be empty or white space.';

@@ -26,6 +26,10 @@ public class EmployeeFeedbackServiceImpl<T> extends GenericsServiceImpl<T> imple
         setGenericsDAO(employeeFeedbackDAO);
     }
     
+    @Override
+    public Boolean checkFeedbackforEmp(int empId, int trainingId) {
+         return employeeFeedbackDAO.checkFeedbackforEmp(empId, trainingId);
+    }
     
     
 }

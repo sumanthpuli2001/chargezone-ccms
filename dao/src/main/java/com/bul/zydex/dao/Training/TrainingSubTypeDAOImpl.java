@@ -23,7 +23,7 @@ public class TrainingSubTypeDAOImpl<T> extends GenericsDAOImpl<T> implements Tra
 
     @Override
     public List<?> readtrainingSubTypeDetail() {
-        String query = "Select a.id,a.trainingsubtype,a.createddate";
+        String query = "Select a.id,a.trainingsubtype,a.trainingType.training";
         query += " FROM TrainingSubType a";
         List<?> list = getHibernateTemplate().find(query);
         return list;

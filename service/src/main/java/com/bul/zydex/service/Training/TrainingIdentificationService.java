@@ -12,17 +12,21 @@ import java.util.List;
  *
  * @author Aman
  */
-public interface TrainingIdentificationService<T> extends GenericsService<T>{
+public interface TrainingIdentificationService<T> extends GenericsService<T> {
 
     public List<?> readTrainingIdentificationList();
 
-    public List<?> readTrainingList(String eventDate,int userid);
+    public List<?> readTrainingList(String eventDate, int userid);
 
     public List<?> readTraingFeedback();
-    
-   
+
     public List<?> gettrainingattendance(int id);
+
     public List<?> getTrainerAttendance(int id);
-    public Boolean checkExistance(int trainingId,int empId, int trainerId);
+
+    public Boolean checkExistance(int trainingId, int empId, int trainerId);
+
     public List<?> ListeventDates(String eventDate, int userId);
+
+    public List<?> checkTraineeAvailableStatus(int trainingId, int empId);
 }

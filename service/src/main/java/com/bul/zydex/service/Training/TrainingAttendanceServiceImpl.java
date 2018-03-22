@@ -35,6 +35,11 @@ public class TrainingAttendanceServiceImpl<T> extends GenericsServiceImpl<T> imp
     public List<?> gettrainerTasks(String eventDate, int id) {
         return trainingAttendanceDAO.gettrainerTasks(eventDate, id);
     }
+
+    @Override
+    public Boolean checkFeedbackstatus(int id) {
+         return trainingAttendanceDAO.checkFeedbackstatus(id);
+    }
     
     
     

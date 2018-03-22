@@ -86,6 +86,9 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         candidateF2FRequest.setHrStatus(0);
         candidateF2FRequest.setUserStatus(0);
         candidateF2FRequestService.create(candidateF2FRequest);
+        
+        candidateJobApplication.setStatus(8);
+        candidateJobApplicationService.update(candidateJobApplication);
 
         otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
         for (int i = 0; i <= otherDetailCount; i++) {

@@ -214,6 +214,7 @@
                 <prop key="trainingMaster.htm">trainingMasterController1</prop>
                 <prop key="trainerLogin.htm">trainerLogInController1</prop>
                 <prop key="candidateF2FRequest.htm">candidateF2FRequestController1</prop>
+                <prop key="candidateF2FApproval.htm">candidateF2FApprovalController1</prop>
                 
            
             </props>

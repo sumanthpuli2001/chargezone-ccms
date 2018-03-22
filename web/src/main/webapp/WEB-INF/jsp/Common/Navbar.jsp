@@ -71,6 +71,8 @@
                             <li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP</a></li>
                             <li><a href="recruitment.htm?act=createMpr"><i class="fa fa-circle-o"></i>MPR</a></li>
                             <li><a href="vacancy.htm?act=vacancyDetailList"><i class="fa fa-circle-o"></i>Vacancy</a></li>
+
+
                             <!--<li><a href="vacancy.htm?act=applyJobRegistration"><i class="fa fa-circle-o"></i>Apply Job</a></li>-->
                             <!--                        <li><a href="userMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>User Right</a></li>-->
                         </ul>
@@ -92,6 +94,7 @@
                                 <li><a href="recruitment.htm?act=allMppFetch"><i class="fa fa-circle-o"></i>MPP Fetch</a></li>
                                 <li><a href="vacancy.htm?act=vacancyFetch"><i class="fa fa-circle-o"></i>Vacancy Fetch</a></li>
                                 <li><a href="candidateF2FRequest.htm?act=f2fSelectedCandidate"><i class="fa fa-circle-o"></i>Face To Face</a></li>
+                                <li><a href="candidateF2FApproval.htm?act=candidateF2FInterviewList"><i class="fa fa-circle-o"></i> F2F Interview Review</a></li>
                             </ul>
                         </li>
                     </c:if>
@@ -861,18 +864,18 @@
 
             </li>
             </ul>
-                   <li class="treeview">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-pie-chart fa-lg"></i>
                     <span>My Training</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
-                         <ul class="treeview-menu">
+                <ul class="treeview-menu">
 
-                            <li><a href="trainingIdentification.htm?act=showcalendar"><i class="fa fa-circle-o"></i>My Training List</a></li>
+                    <li><a href="trainingIdentification.htm?act=showcalendar"><i class="fa fa-circle-o"></i>My Training List</a></li>
 
 
-                        </ul>
+                </ul>
         </section>
         <!-- /.sidebar -->
     </aside>

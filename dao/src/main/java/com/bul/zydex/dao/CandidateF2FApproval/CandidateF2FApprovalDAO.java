@@ -6,11 +6,14 @@
 package com.bul.zydex.dao.CandidateF2FApproval;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.List;
 
 /**
  *
  * @author Vikas
  */
 public interface CandidateF2FApprovalDAO<T> extends GenericsDAO<T>{
+    
+    public List<?> readByReqId(int id);
     
 }

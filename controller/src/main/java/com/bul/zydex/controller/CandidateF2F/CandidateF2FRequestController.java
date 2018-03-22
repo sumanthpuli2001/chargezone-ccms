@@ -11,6 +11,7 @@ import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.OnlineAssessment;
+import com.bul.zydex.model.VacancyMaster;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -30,16 +31,28 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
+        CandidateApplyJob candidateApplyJob1 = new CandidateApplyJob();
         CandidateF2FRequest candidateF2FRequest = new CandidateF2FRequest();
-
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         String applicationId = request.getParameter("id");
+        String candidateId = request.getParameter("candidateId");
         EmployeeMaster employeeMaster = new EmployeeMaster();
         selectEmployee(request, response);
-//          EmployeeMaster employeeMaster= new EmployeeMaster();
+
+        CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
+        candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(candidateId));
+        VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
+        
+        candidateF2FRequest.setCandidateApplyJob(candidateApplyJob);
+        candidateF2FRequest.setVacancyMaster(vm);
+        
         selectedEmployeeFor360Feedback(request, employeeMaster);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("candidateF2FRequest", candidateF2FRequest);
         mv.getModelMap().put("applicationId", applicationId);
+        mv.getModelMap().put("vacancyMaster", vm);
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        mv.getModelMap().put("candidateApplyJob1", candidateApplyJob1);
         mv.setViewName("CandidateFtoF/candidateF2FInvitation");
         return mv;
     }
@@ -65,11 +78,13 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         candidateJobApplication = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
 
         candidateF2FRequest.setCandidateJobApplication(candidateJobApplication);
+        candidateF2FRequest.setCandidateApplyJob(candidateJobApplication.getCandidateApplyJob());
+        candidateF2FRequest.setVacancyMaster(candidateJobApplication.getVacancyMaster());
         candidateF2FRequest.setCreatedBy(employeeMaster.getId());
         candidateF2FRequest.setCreatedDate(sdf.format(cDate));
         candidateF2FRequest.setStatus(0);
-        candidateF2FRequest.setCurrentApproverCount(0);
-        candidateF2FRequest.setTotalApproverCount(0);
+        candidateF2FRequest.setHrStatus(0);
+        candidateF2FRequest.setUserStatus(0);
         candidateF2FRequestService.create(candidateF2FRequest);
 
         otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
@@ -107,7 +122,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         ModelAndView mv = new ModelAndView();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         OnlineAssessment onlineAssessment = new OnlineAssessment();
-        
+
         List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
 
         mv.getModelMap().put("list", candidateJobList);

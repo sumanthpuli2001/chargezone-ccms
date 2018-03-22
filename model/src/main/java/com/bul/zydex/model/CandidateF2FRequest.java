@@ -14,8 +14,8 @@ public class CandidateF2FRequest {
     private Integer id;
     private CandidateJobApplication candidateJobApplication;
     private Integer status;
-    private Integer currentApproverCount;
-    private Integer totalApproverCount;
+    private Integer hrStatus;
+    private Integer userStatus;
     private Integer createdBy;
     private String createdDate;
     private Integer updatedBy;
@@ -23,17 +23,19 @@ public class CandidateF2FRequest {
     private String message;
     private String location;
     private String dateOfInterview;
+    private VacancyMaster vacancyMaster;
+    private CandidateApplyJob candidateApplyJob;
 
     public CandidateF2FRequest() {
 
     }
 
-    public CandidateF2FRequest(Integer id, CandidateJobApplication candidateJobApplication, Integer status, Integer currentApproverCount, Integer totalApproverCount, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate, String message, String location, String dateOfInterview) {
+    public CandidateF2FRequest(Integer id, CandidateJobApplication candidateJobApplication, Integer status, Integer hrStatus, Integer userStatus, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate, String message, String location, String dateOfInterview, VacancyMaster vacancyMaster, CandidateApplyJob candidateApplyJob) {
         this.id = id;
         this.candidateJobApplication = candidateJobApplication;
         this.status = status;
-        this.currentApproverCount = currentApproverCount;
-        this.totalApproverCount = totalApproverCount;
+        this.hrStatus = hrStatus;
+        this.userStatus = userStatus;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.updatedBy = updatedBy;
@@ -41,6 +43,8 @@ public class CandidateF2FRequest {
         this.message = message;
         this.location = location;
         this.dateOfInterview = dateOfInterview;
+        this.vacancyMaster = vacancyMaster;
+        this.candidateApplyJob = candidateApplyJob;
     }
 
     public Integer getId() {
@@ -67,20 +71,20 @@ public class CandidateF2FRequest {
         this.status = status;
     }
 
-    public Integer getCurrentApproverCount() {
-        return currentApproverCount;
+    public Integer getHrStatus() {
+        return hrStatus;
     }
 
-    public void setCurrentApproverCount(Integer currentApproverCount) {
-        this.currentApproverCount = currentApproverCount;
+    public void setHrStatus(Integer hrStatus) {
+        this.hrStatus = hrStatus;
     }
 
-    public Integer getTotalApproverCount() {
-        return totalApproverCount;
+    public Integer getUserStatus() {
+        return userStatus;
     }
 
-    public void setTotalApproverCount(Integer totalApproverCount) {
-        this.totalApproverCount = totalApproverCount;
+    public void setUserStatus(Integer userStatus) {
+        this.userStatus = userStatus;
     }
 
     public Integer getCreatedBy() {
@@ -138,6 +142,24 @@ public class CandidateF2FRequest {
     public void setDateOfInterview(String dateOfInterview) {
         this.dateOfInterview = dateOfInterview;
     }
+
+    public VacancyMaster getVacancyMaster() {
+        return vacancyMaster;
+    }
+
+    public void setVacancyMaster(VacancyMaster vacancyMaster) {
+        this.vacancyMaster = vacancyMaster;
+    }
+
+    public CandidateApplyJob getCandidateApplyJob() {
+        return candidateApplyJob;
+    }
+
+    public void setCandidateApplyJob(CandidateApplyJob candidateApplyJob) {
+        this.candidateApplyJob = candidateApplyJob;
+    }
+    
+    
     
     
 

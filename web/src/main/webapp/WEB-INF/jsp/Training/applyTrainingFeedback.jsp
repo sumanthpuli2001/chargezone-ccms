@@ -12,6 +12,27 @@
     <head>
         <title>Create Budget</title>
     </head>
+    <script>
+        function checkBlankField() {
+            var flag = true;
+            if ($('#trainingFeedback').val() == '') {
+                document.getElementById('trainingFeedbackError').innerHTML = '-It must not be empty or white space.';
+                flag = false;
+            }
+            if ($('#description').val() == '') {
+                document.getElementById('descriptionError').innerHTML = '-It must not be empty or white space.';
+                flag = false;
+            }
+            return flag;
+        }
+
+        function trainingOnChange(idString) {
+            if (document.getElementById(idString).innerHTML != null) {
+                document.getElementById(idString).innerHTML = '';
+            }
+        }
+    </script>
+
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -43,23 +64,24 @@
                                         <!--<div class="form-group">-->
 
 
-                                        <form:form class="form-horizontal" method="post" onsubmit='return deleteCheck11();'
+                                        <form:form class="form-horizontal" method="post" onsubmit='return checkBlankField();'
                                                    commandName="employeeFeedback" action="trainingIdentification.htm?act=submitEmployeeFeedbackCreate">
                                             <input type ="hidden" id="id2" name="id2" value="${id}">
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                        <label>Feedback <span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:select path="trainingFeedback.id"  class="form-control">
+                                                    <label>Feedback <span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:select path="trainingFeedback.id" id="trainingFeedback" class="form-control" onchange="trainingOnChange('trainingFeedbackError');">
                                                         <form:option value="" label="-- Select --" />
                                                         <form:options items="${list}"/>
                                                     </form:select>
+                                                    <span style="font-size: 14px; color: #dd4b39;" id="trainingFeedbackError"></span>
                                                     <%--<form:errors path="trainingMaster.id" cssClass="errorDiv"></form:errors>--%>
-                                                    </div>
+                                                </div>
 
-                                                    <div class="col-md-12 col-sm-12">
-                                                        <label>Description:<span style="color: red;font-size: 12px;">*</span></label><br>
-                                                    <form:textarea style="resize: none; width:515px !important"  path="description" id="editor"></form:textarea>
-                                                    <form:errors path="description" cssClass="errorDiv"/>
+                                                <div class="col-md-12 col-sm-12">
+                                                    <label>Description:<span style="color: red;font-size: 12px;">*</span></label><br>
+                                                    <form:textarea style="resize: none; width:515px !important"  path="description" id="description" onchange="trainingOnChange('descriptionError');"></form:textarea><br>
+                                                    <span style="font-size: 14px; color: #dd4b39;" id="descriptionError"></span>
                                                 </div>
                                             </div> 
 

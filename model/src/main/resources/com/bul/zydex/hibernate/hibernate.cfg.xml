@@ -134,5 +134,6 @@
     <mapping resource="com/bul/zydex/hibernate/CandidateF2FRequest.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/CandidateF2FRequest.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/CandidateResultStatus.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/TrainingAssessment.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

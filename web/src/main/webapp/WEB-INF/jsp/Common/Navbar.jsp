@@ -93,7 +93,7 @@
                                 <li><a href="recruitment.htm?act=allMprFetch"><i class="fa fa-circle-o"></i>MPR Fetch</a></li>
                                 <li><a href="recruitment.htm?act=allMppFetch"><i class="fa fa-circle-o"></i>MPP Fetch</a></li>
                                 <li><a href="vacancy.htm?act=vacancyFetch"><i class="fa fa-circle-o"></i>Vacancy Fetch</a></li>
-                                <li><a href="candidateF2FRequest.htm?act=f2fSelectedCandidate"><i class="fa fa-circle-o"></i>Face To Face</a></li>
+                                <!--<li><a href="candidateF2FRequest.htm?act=f2fSelectedCandidate"><i class="fa fa-circle-o"></i>Face To Face</a></li>-->
                                 <li><a href="candidateF2FApproval.htm?act=candidateF2FInterviewList"><i class="fa fa-circle-o"></i> F2F Interview Review</a></li>
                             </ul>
                         </li>
@@ -586,7 +586,7 @@
                                 </c:if>
                             <li><a href="thoughtMaster.htm?act=createthought"><i class="fa fa-circle-o"></i>Homepage Setting</a></li>
                             <li><a href="classifiedBox.htm?act=showResult"><i class="fa fa-circle-o"></i>Classified Setting</a></li>
-                            <li><a href="trainingMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Training Master</a></li>
+
                         </ul>
                     </li>
                 </c:if>
@@ -853,29 +853,22 @@
                             <li><a href="trainingType.htm?act=newtraining"><i class="fa fa-circle-o"></i>Training Type</a></li>
                             <li><a href="trainingType.htm?act=newsubtraining"><i class="fa fa-circle-o"></i>Training Sub Type</a></li>
                             <li><a href="trainer.htm?act=createTrainerShow"><i class="fa fa-circle-o"></i>Trainer</a></li>
-                            <li><a href="trainingIdentification.htm?act=createTraineAssigne"><i class="fa fa-circle-o"></i>Traine Assigne</a></li>
+
+                            <li><a href="trainingMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Training Master</a></li>
 
 
                         </ul>
                     </li>
                     <li><a href="trainingType.htm?act=showcalendar"><i class="fa fa-circle-o"></i>calendar</a></li>
-
+                    <li><a href="trainingIdentification.htm?act=showcalendar"><i class="fa fa-circle-o"></i>My Training List</a></li>
+                    <li><a href="trainingIdentification.htm?act=createTraineAssigne"><i class="fa fa-circle-o"></i>Assign Trainer</a></li>
+                    <li><a href="trainingIdentification.htm?act=showTrainingFeedbackList"><i class="fa fa-circle-o"></i>Training Feedback Details</a></li>
 
 
             </li>
             </ul>
             <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-pie-chart fa-lg"></i>
-                    <span>My Training</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
 
-                    <li><a href="trainingIdentification.htm?act=showcalendar"><i class="fa fa-circle-o"></i>My Training List</a></li>
-
-
-                </ul>
         </section>
         <!-- /.sidebar -->
     </aside>

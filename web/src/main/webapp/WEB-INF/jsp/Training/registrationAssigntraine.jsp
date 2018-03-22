@@ -36,6 +36,30 @@
                 }
                 return false;
             }
+
+            function checkBlankField() {
+                var flag = true;
+                if ($('#trainingMaster').val() == '') {
+                    document.getElementById('trainingMasterError').innerHTML = '-It must not be empty or white space.';
+                    flag = false;
+                }
+                if ($('#description').val() == '') {
+                    document.getElementById('descriptionError').innerHTML = '-It must not be empty or white space.';
+                    flag = false;
+                }
+              
+              if(flag){
+                  return deleteCheck11(); 
+              }
+                return flag;
+            }
+
+            function trainingOnChange(idString) {
+                if (document.getElementById(idString).innerHTML != null) {
+                    document.getElementById(idString).innerHTML = '';
+                }
+            }
+
         </script>
         <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>
@@ -45,7 +69,7 @@
         </c:if>
         <!-- Main content -->
         <form:form action="trainingIdentification.htm?act=trainingAssignSubmit" method="post" commandName="trainingIdentification"
-                   name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
+                   name='form1' onsubmit='return checkBlankField();' class="form-horizontal" role="form">
             <form:hidden path="id"></form:hidden>
                 <section class="content">
                     <div class="row">
@@ -101,18 +125,18 @@
                                                                 <td>${list[3]}</td>
 
                                                                 <!--<td>-->
-                                                                    <!--                                                                        <div class="btn-group">
-                                                                                                                                                <button type="button" onclick="viewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
-                                                                                                                                                &nbsp;&nbsp;View
-                                                                                                                                            </button>
-                                                                                                                                        </div>-->
-                                                                    <%--<c:if test="${list[6] eq 0 || list[6] eq 1}">--%>
-<!--                                                                    <div class="btn-group">
-                                                                        <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
-                                                                            &nbsp;&nbsp;&nbsp;&nbsp;Edit
-                                                                        </button>
-                                                                    </div>-->
-                                                                    <%--</c:if>--%>
+                                                                <!--                                                                        <div class="btn-group">
+                                                                                                                                            <button type="button" onclick="viewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                                                                                            &nbsp;&nbsp;View
+                                                                                                                                        </button>
+                                                                                                                                    </div>-->
+                                                                <%--<c:if test="${list[6] eq 0 || list[6] eq 1}">--%>
+                                                                <!--                                                                    <div class="btn-group">
+                                                                                                                                        <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                                                                                            &nbsp;&nbsp;&nbsp;&nbsp;Edit
+                                                                                                                                        </button>
+                                                                                                                                    </div>-->
+                                                                <%--</c:if>--%>
 
                                                                 <!--</td>-->
                                                             </tr>
@@ -124,42 +148,44 @@
 
                                         </div><!-- /.col -->
                                     </div><!-- /.row -->
-                            <div class="tab-content">
-                                <div class="box-header">
-                                </div>
-                                <div class="box-body no-padding">
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                     <form:input path="id" id="id" class="form-control" type="hidden"></form:input>
-                                                    <label>Training Tittle<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:select path="trainingMaster.id"  class="form-control">
-                                                        <form:option value="" label="-- Select --" />
-                                                        <form:options items="${tlist}"/>
-                                                    </form:select>
-                                                    <form:errors path="trainingMaster.id" cssClass="errorDiv"></form:errors>
+                                    <div class="tab-content">
+                                        <div class="box-header">
+                                        </div>
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <form:input path="id" id="id" class="form-control" type="hidden"></form:input>
+                                                                <label>Training Tittle<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:select path="trainingMaster.id" id="trainingMaster"  class="form-control" onchange="trainingOnChange('trainingMasterError');">
+                                                                <form:option value="" label="-- Select --" />
+                                                                <form:options items="${tlist}"/>
+                                                            </form:select>
+                                                            <span style="font-size: 14px; color: #dd4b39;" id="trainingMasterError"></span>
+                                                            <%--<form:errors path="trainingMaster.id" cssClass="errorDiv"></form:errors>--%>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <label>Description:<span style="color: red;font-size: 12px;">*</span></label><br>
+                                                            <form:textarea style="resize: none; width:515px !important"  path="description" id="description" onchange="trainingOnChange('descriptionError');"></form:textarea>
+                                                            <br>
+                                                            <span style="font-size: 14px; color: #dd4b39;" id="descriptionError"></span>
+                                                        </div>
+
+
+                                                    </div> 
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <label>Description:<span style="color: red;font-size: 12px;">*</span></label><br>
-                                                    <form:textarea style="resize: none; width:515px !important"  path="description" id="editor"></form:textarea>
-                                                    <form:errors path="description" cssClass="errorDiv"/>
-                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6 col-sm-offset-5">
+                                                <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                            </div>
 
-
-                                            </div> 
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-6 col-sm-offset-5">
-                                        <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
-                                    </div>
-
-                                </div>
-                            </div>
                                 </div>
                             </div><!-- /.tab-content -->
                         </div><!-- nav-tabs-custom -->

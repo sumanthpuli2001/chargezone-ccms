@@ -5,9 +5,11 @@
  */
 package com.bul.zydex.controller;
 
+import com.bul.zydex.model.EmployeeFeedback;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingAttendance;
+import com.bul.zydex.model.TrainingFeedback;
 import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.TrainingSubType;
 import com.bul.zydex.model.TrainingType;
@@ -180,6 +182,29 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         List attenlist = new LinkedList();
         attenlist = trainingAttendanceService.gettrainerTasks(eventdate, Integer.parseInt(id));
         boolean shosts = true;
+        boolean feedbackStatus=trainingAttendanceService.checkFeedbackstatus(Integer.parseInt(id));
+        if (attenlist.isEmpty()) {
+            shosts = false;
+            attenlist = trainingIdentificationService.getTrainerAttendance(Integer.parseInt(id));
+
+        }
+        request.setAttribute("shosts", shosts);
+        request.setAttribute("eventdate", eventdate);
+        request.setAttribute("list", attenlist);
+        request.setAttribute("trainingMasterId", id);
+        request.setAttribute("feedbackStatus", feedbackStatus);
+        mv.setViewName("Trainer/TrainerMasterlblView");
+        return mv;
+    }
+    public ModelAndView viewProfile1(HttpServletRequest request,
+            HttpServletResponse response ,String id,String eventdate) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        String id = request.getParameter("id");
+//        String eventdate = request.getParameter("eventdate");
+ boolean feedbackStatus=trainingAttendanceService.checkFeedbackstatus(Integer.parseInt(id));
+        List attenlist = new LinkedList();
+        attenlist = trainingAttendanceService.gettrainerTasks(eventdate, Integer.parseInt(id));
+        boolean shosts = true;
 
         if (attenlist.isEmpty()) {
             shosts = false;
@@ -190,6 +215,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         request.setAttribute("eventdate", eventdate);
         request.setAttribute("list", attenlist);
         request.setAttribute("trainingMasterId", id);
+        request.setAttribute("feedbackStatus", feedbackStatus);
         mv.setViewName("Trainer/TrainerMasterlblView");
         return mv;
     }
@@ -262,6 +288,22 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         }
         mv=showcalendar(request, response);
 //        mv.setViewName("Trainer/TrainerMasterlblView");
+        return mv;
+    }
+    public ModelAndView sendFeedback(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        String eventdate=request.getParameter("eventdate");
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        UserMaster user = (UserMaster) session.getAttribute("user");
+        int id =Integer.parseInt(request.getParameter("id"));
+        TrainingMaster trainingMaster=(TrainingMaster)trainingMasterService.readById(id);
+        trainingMaster.setStatus(1);
+        trainingMasterService.update(trainingMaster);
+        mv=viewProfile1(request, response, ""+id, eventdate);
+//        request.setAttribute("id", id);
+//        request.setAttribute("eventdate", eventdate);
+//        mv.setViewName("Training/applyTrainingFeedback");
         return mv;
     }
 }

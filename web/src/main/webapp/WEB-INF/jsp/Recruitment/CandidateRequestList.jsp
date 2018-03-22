@@ -53,7 +53,7 @@
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
                                 <div>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">&nbsp; F To F</button>
+<!--                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">&nbsp; F To F</button>-->
                                     <!--<button type="button" class="btn btn-default " data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>-->
                                 </div>
 

@@ -1116,6 +1116,8 @@
         <property name="trainerService" ref="trainerService1" />
         <property name="trainingMasterService" ref="trainingMasterService1" />
         <property name="trainingSubMasterService" ref="trainingSubMasterService1" />
+        <property name="trainingMasterValidator" ref="trainingMasterValidator1" />
+        
     </bean>
   <bean id="employeeFeedbackController1" class="com.bul.zydex.controller.Training.EmployeeFeedbackController" parent="controllerConfig" >
         <property name="employeeFeedbackService" ref="employeeFeedbackService1"></property>

@@ -32,5 +32,10 @@ public class TrainingMasterServiceImpl<T> extends GenericsServiceImpl<T> impleme
         trainingMasterDAO.deletetrainingSubMaster(id);
     }
 
+    @Override
+    public List<?> readTrainingMasterList() {
+      return trainingMasterDAO.readTrainingMasterList();
+    }
+
    
 }

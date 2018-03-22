@@ -29,6 +29,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.validation.Validator;
 
 /**
  *
@@ -40,6 +41,7 @@ public abstract class TrainingMasterAbstract extends CustomAbstract{
     protected TrainerService<Trainer> trainerService;
     protected TrainingMasterService<TrainingMaster> trainingMasterService;
     protected TrainingSubMasterService<TrainingSubMaster> trainingSubMasterService;
+    protected Validator trainingMasterValidator;
 
     public TrainingTypeService<TrainingType> getTrainingTypeService() {
         return trainingTypeService;
@@ -80,6 +82,16 @@ public abstract class TrainingMasterAbstract extends CustomAbstract{
     public void setTrainingSubMasterService(TrainingSubMasterService<TrainingSubMaster> trainingSubMasterService) {
         this.trainingSubMasterService = trainingSubMasterService;
     }
+
+    public Validator getTrainingMasterValidator() {
+        return trainingMasterValidator;
+    }
+
+    public void setTrainingMasterValidator(Validator trainingMasterValidator) {
+        this.trainingMasterValidator = trainingMasterValidator;
+    }
+    
+    
     
      protected void trainerList(HttpServletRequest request) {
         Trainer trainerMaster = new Trainer();

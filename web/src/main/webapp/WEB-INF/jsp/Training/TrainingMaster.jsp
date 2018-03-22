@@ -29,7 +29,7 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form action="trainingMaster.htm?act=deleteClick" method="post" commandName="trainingList"
+        <form:form action="trainingMaster.htm?act=deleteClick" method="post" commandName="TrainingMaster"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             
             <section class="content">
@@ -52,7 +52,7 @@
                                                 <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                     
                                                    <c:choose>
-                                                        <c:when test="${empty trainingList}">
+                                                        <c:when test="${empty list}">
                                                             <tr>
                                                                 <td align="Center">There Is No Any Record</td>
                                                             </tr>
@@ -61,57 +61,38 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
-                                                                    <th>Sr.No.</th>
                                                                     <th>Title</th>
                                                                     <th>Description</th>
-                                                                    <th>Training Requester</th>
-                                                                    <th>venue</th>
-                                                                    <th>cost</th>
-                                                                    <th>Company Sponsor</th>
-                                                                    <th>Training Source</th>
+                                                                    <th>Trainer</th>
+                                                                    <th>Trainer Type</th>
                                                                     <th>status</th>
                                                                     <th>Action</th>
                                                                 </tr>
                                                             </thead>
-                                                            <c:set var="count" value="0" scope="page" />
                                                             <tbody>
-                                                                <!--${trainingTitle}-->
-                                                                <c:forEach  var="trainingList" items="${trainingList}">
-                                                                    <c:set var="count" value="${count + 1}" scope="page"/>
+                                                                <c:forEach  var="trainingList" items="${list}">
                                                                     <tr>
                                                                         <td align="Center">
-                                                                            <input type="checkbox" name="checkId" id="checkId" value="${trainingList.id}">
+                                                                            <input type="checkbox" name="checkId" id="checkId" value="${trainingList[0]}">
                                                                         </td>
                                                                         <td>
-                                                                            <c:out value = "${count}"/>
+                                                                            ${trainingList[1]}
                                                                         </td>
                                                                         <td>
-                                                                            ${trainingList.trainingTitle}
+                                                                            ${trainingList[2]}
                                                                         </td>
                                                                         <td>
-                                                                            ${trainingList.trainingDescription}
+                                                                            ${trainingList[3]}
                                                                         </td>
                                                                         <td>
-                                                                            ${trainingList.trainingOwner}
+                                                                            ${trainingList[4]}
                                                                         </td>
                                                                         <td>
-                                                                            ${trainingList.venue}
-                                                                        </td>
-                                                                        <td>
-                                                                            ${trainingList.cost}
-                                                                        </td>
-                                                                        <td>
-                                                                            ${trainingList.companySponsor}
-                                                                        </td>
-                                                                        <td>
-                                                                            ${trainingList.trainingSource}
-                                                                        </td>
-                                                                        <td>
-                                                                            ${trainingList.status}
+                                                                            ${trainingList[5]}
                                                                         </td>
                                                                         <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="viewClick(${trainingList.id});">
+                                                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="viewClick(${trainingList[0]});">
                                                                                     &nbsp;Edit
                                                                                 </button>
 

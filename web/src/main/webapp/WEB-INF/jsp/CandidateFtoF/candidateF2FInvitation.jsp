@@ -22,8 +22,8 @@
 //                        + "<td style=\"text-align: center\">" + tempCount3 + "</td>"
                         + "<td id=\"policyTd" + tempCount3 + "\"><div><input type=\"text\" id='policyId" + tempCount3 + "' name='policyId" + tempCount3 + "' class=\"form-control\" >"
                         + "</select>"
-                        + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
-                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "' value=" + tempCount3 + " readonly=\"true\" class=\"form-control\"></td>"
+//                        + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
+//                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "' value=" + tempCount3 + " readonly=\"true\" class=\"form-control\"></td>"
 //                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "'  min=\"0\" class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
@@ -137,7 +137,7 @@
                                                         <tr>
                                                             <!--<th style="text-align: center; vertical-align: middle;width: 5%"></th>-->
                                                             <th style="text-align: center; vertical-align: middle">User Name</th>
-                                                            <th style="text-align: center; vertical-align: middle">Level</th>
+                                                            <!--<th style="text-align: center; vertical-align: middle">Level</th>-->
                                                             <!--<th style="text-align: center; vertical-align: middle">Amount</th>-->
                                                             <th style="text-align: center; vertical-align: middle">Add New</th>
                                                         <input type="hidden" name="policyCount" id="policyCount" value="1"/>
@@ -154,9 +154,9 @@
                                                             </div>
                                                             <span id="policyError1" style="color: red;"></span>
                                                         </td>
-                                                        <td style="text-align: center">
+<!--                                                        <td style="text-align: center">
                                                             <input type="text"  name="policyNumber1" id="policyNumber1" value="1" readonly="true"class="form-control">
-                                                        </td>
+                                                        </td>-->
 
                                                         <td style="text-align: center">
                                                             <span style='margin-top: 5px;'>

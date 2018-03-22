@@ -5,6 +5,8 @@
  */
 package com.bul.zydex.controller.emp;
 
+import com.bul.zydex.model.CandidateApplyJob;
+import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.CompetencyEvaluationMaster;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
@@ -252,7 +254,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             userMaster.setFirstTime(true);
 //set firstTime is true for compulsory password change on first time login
             userMasterService.create(userMaster);
-            if(employeeMaster.getPfAmount().equals("")){
+            if (employeeMaster.getPfAmount().equals("")) {
                 employeeMaster.setPfAmount("0");
             }
             employeeMasterService.create(employeeMaster);
@@ -852,7 +854,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
             String ptl = "Paternity Leave";
             List<?> ptlList = leaveTypeMasterService.readLeaveType(ptl);
-            leaveTypeMaster.setId((Integer)ptlList.get(0));
+            leaveTypeMaster.setId((Integer) ptlList.get(0));
             employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
             employeeLeaveBalance.setEmployeeMaster(employeeMaster);
             List<?> empLeaveBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
@@ -3940,7 +3942,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("Employee/EmployeeSubTypeAjax");
         return mv;
     }
-     public ModelAndView printemployeedescription(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    public ModelAndView printemployeedescription(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         DesignationMaster designationMaster = new DesignationMaster();
@@ -3960,5 +3963,611 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("Employee/printemployeedescription");
 
         return mv;
+    }
+
+    public ModelAndView inductionCreateClick(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        EmployeeMaster employeeMaster = new EmployeeMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        DesignationMaster designationMaster = new DesignationMaster();
+        LevelMaster levelMaster = new LevelMaster();
+        LocationMaster locationMaster = new LocationMaster();
+        UserMaster userMaster = new UserMaster();
+        EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
+        EmployeeSubType employeeSubType = new EmployeeSubType();
+        ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
+//        ShiftMaster shiftMaster = new ShiftMaster();
+        selectEmployee(request, response);
+        selectedEmployeeLevel1(request, employeeMaster);
+        departmentList(request);
+        designationList(request);
+        levelList(request);
+        locationList(request);
+        shiftRotaionList(request);
+        setZydexLocationList(request);
+        competencyList(request);
+        EmployeeTypeList(request);
+        EmployeeSubTypeList(request);
+        companyList(request);
+        policyList(request);
+        //master's data setting completed on request
+//        shiftList(request);
+        hoursBasisList(request);
+        employeeMaster.setUserMaster(userMaster);
+        employeeMaster.setLevelMaster(levelMaster);
+        employeeMaster.setLocationMaster(locationMaster);
+        employeeMaster.setDepartmentMaster(departmentMaster);
+        employeeMaster.setDesignationMaster(designationMaster);
+        employeeMaster.setZydexLocationMaster(zydexLocationMaster);
+        employeeMaster.setEmployeeTypeMaster(employeeTypeMaster);
+        employeeMaster.setEmployeeSubType(employeeSubType);
+
+        //////////////////set the employee basic detail
+        String applicationId = request.getParameter("id");
+        String candidateId = request.getParameter("candidateId");
+
+        CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
+        CandidateApplyJob candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(candidateId));
+
+        employeeMaster.setEmployeeName(candidateApplyJob.getName());
+        employeeMaster.setFatherName(candidateApplyJob.getFatherName());
+        employeeMaster.setMotherName(candidateApplyJob.getMotherName());
+        employeeMaster.setDateOfBirthOfEmpFather(candidateApplyJob.getFatherDob());
+        employeeMaster.setDateOfBirthOfEmpMother(candidateApplyJob.getMotherDob());
+
+        Boolean Gender = true;
+        if ((candidateApplyJob.getSex()).equals("false")) {
+            Gender = false;
+        }
+        employeeMaster.setGender(Gender);
+
+        employeeMaster.setMaritalStatus(candidateApplyJob.getMartialStatus());
+        employeeMaster.setDateOfBirth(candidateApplyJob.getDob());
+
+        employeeMaster.setPresentAddress(candidateApplyJob.getPresentAddress());
+        employeeMaster.setPermanentAddress(candidateApplyJob.getPermanentAddress());
+        employeeMaster.setCityOfEmployee(candidateApplyJob.getCity());
+        employeeMaster.setBloodGroups(candidateApplyJob.getBloodGroup());
+        employeeMaster.setEmailAddress(candidateApplyJob.getEmailId());
+        employeeMaster.setContactNo1(candidateApplyJob.getContactNo());
+        employeeMaster.setEmergencyContactPerson(candidateApplyJob.getEmergencyContactPerson());
+        employeeMaster.setEmergencyContactNo(candidateApplyJob.getEmergencyContactNo());
+        employeeMaster.setPermanentAddress(candidateApplyJob.getPermanentAddress());
+        employeeMaster.setHighestEducationDetails(candidateApplyJob.getHighestEducationQualification());
+
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.getModelMap().put("applicationId", applicationId);
+        mv.getModelMap().put("candidateId", candidateId);
+        mv.setViewName("Employee/EmployeeInductionForm");
+        return mv;
+    }
+
+    public ModelAndView inductionSubmit(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeLeaveBalance employeeLeaveBalance;
+        String applicationId = request.getParameter("applicationId");
+        String candidateId = request.getParameter("candidateId");
+//        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        EmployeeSubType employeeSubType = new EmployeeSubType();
+        BindException errors = new BindException(employeeMaster, "employeeMaster");
+        UserMaster userMaster = new UserMaster();
+
+        bind(request, employeeMaster);
+        //Deopdown List//
+        departmentList(request);
+        designationList(request);
+        levelList(request);
+        locationList(request);
+        shiftRotaionList(request);
+        hoursBasisList(request);
+        setZydexLocationList(request);
+        competencyList(request);
+        EmployeeTypeList(request);
+        EmployeeSubTypeList(request);
+        companyList(request);
+        policyList(request);
+        //DeowpDown list//
+//        String reasonForLeaving = request.getParameter("password");
+        String userName = request.getParameter("userName");
+//        String password = reasonForLeaving;
+        String password = "";
+        String employeeSubTypeId = request.getParameter("subTypeId");
+//        String gender = request.getParameter("gender");
+//        String reportingManagerLevel1 = request.getParameter("reportingManagerLevel1");
+//        String reportingManagerLevel2 = request.getParameter("reportingManagerLevel2");
+//        String reportingManagerLevel3 = request.getParameter("reportingManagerLevel3");
+//        String reportingManagerLevel4 = request.getParameter("reportingManagerLevel4");
+//        String reportingManagerLevel5 = request.getParameter("reportingManagerLevel5");
+//        String reportingManagerLevel6 = request.getParameter("reportingManagerLevel6");
+        String dateOfJoining = request.getParameter("dateOfJoining");
+        String dateOfBirth = request.getParameter("dateOfBirth");
+        String shiftMasterId = request.getParameter("shiftMasterId");
+        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
+        userMaster.setUserName(userName);
+        if (employeeMaster.getUserMaster() != null) {
+            if (employeeMaster.getUserMaster().getPassword() != null) {
+                password = password + employeeMaster.getUserMaster().getPassword();
+                //if we directly gettting 'employeeMaster.getUserMaster().getPassword()' its possibility for nullpointer exception.
+            }
+        }
+
+        userMaster.setPassword(password);
+        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+        Date DOB = new Date();
+        Date DOJ = new Date();
+        Date DOB1 = new Date();
+        if (!"".equals(dateOfJoining)) {
+            DOJ = sd.parse(dateOfJoining);
+
+        }
+        if (!"".equals(dateOfBirth)) {
+            DOB = sd.parse(dateOfBirth);
+            Calendar c1 = Calendar.getInstance();
+            c1.setTime(DOB);
+            c1.add(Calendar.YEAR, 18);
+            DOB1 = c1.getTime();
+        }
+        if (null != employeeSubTypeId && !employeeSubTypeId.equals("")) {
+            employeeSubType.setId(Integer.parseInt(employeeSubTypeId));
+        }
+        employeeMaster.setEmployeeSubType(employeeSubType);
+//        if (!userMasterService.isExist(userName) && !userName.equals("") && !password.equals("")) {
+//
+//            userMasterService.create(userMaster);
+//        } else {
+//            request.setAttribute("failureMessage",
+//                    "Error : User isExist.");
+//            mv.addAllObjects(errors.getModel());
+//            mv.setViewName("Employee/EmployeeRegistrationForm");
+//        }
+        employeeMasterValidator.validate(employeeMaster, errors);
+        if (errors.hasErrors()) {
+
+            String shiftId = request.getParameter("shiftId");
+            String shiftMasterId1 = request.getParameter("shiftMasterId");
+            String HoursTitle = request.getParameter("shiftHoursId");
+//            *********************************************************************************
+            if (!"".equals(shiftId) && shiftId != null) {
+                employeeMaster.setShiftHoursId(Integer.parseInt(shiftId));
+            } else if (!"".equals(HoursTitle) && HoursTitle != null) {
+                employeeMaster.setShiftHoursId(Integer.parseInt(HoursTitle));
+            }
+
+//            employeeMaster.setShiftHoursId(Integer.parseInt(shiftId));
+//           above line is commented because it produces "NumberFormatException" while we submits blank page
+//            By Irfan
+//            **********************************************************************************
+            request.setAttribute("shiftName", shiftMasterId1);
+            request.setAttribute("competencyEvaluationId", competencyEvaluationId);
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+            selectEmployee(request, response);
+            selectedEmployeeLevel1(request, employeeMaster);
+//            request.setAttribute("employeeMaster", employeeMaster);
+            mv.getModelMap().put("employeeMaster", employeeMaster);
+            mv.setViewName("Employee/EmployeeRegistrationForm");
+        } else if (DOJ.before(DOB1)) {
+            request.setAttribute("failureMessage",
+                    "Error : Enter Valid Date of Joining");
+
+            selectEmployee(request, response);
+            selectedEmployeeLevel1(request, employeeMaster);
+            request.setAttribute("employeeMaster", employeeMaster);
+            mv.setViewName("Employee/EmployeeRegistrationForm");
+        } else if (!userMasterService.isExist(userName) && !userName.equals("") && !"".equals(password)) {
+
+//            if (!password.equals("")) {
+//                if (employeeMaster.getShiftType().equals("HourlyBase")) {
+            if ("HourlyBase".equals(employeeMaster.getShiftType())) {
+                String hoursId = request.getParameter("shiftHoursId");
+                if (null != hoursId && !hoursId.equals("")) {
+                    employeeMaster.setShiftHoursId(Integer.parseInt(hoursId));
+                }
+            }
+//                if (employeeMaster.getShiftType().equals("ShiftBase")) {
+            if ("ShiftBase".equals(employeeMaster.getShiftType())) {
+                String shfitId = request.getParameter("shiftId");
+                if (null != shfitId && !shfitId.equals("")) {
+                    employeeMaster.setShiftHoursId(Integer.parseInt(shfitId));
+                }
+            }
+            employeeMaster.setCompetencyEvaluationId(Integer.parseInt(competencyEvaluationId));
+            // employeeMaster.setId(userMaster.getId());
+            employeeMaster.setUserMaster(userMaster);
+//                employeeMaster.setReportingManagerLevel1(reportingManagerLevel1);
+//                employeeMaster.setReportingManagerLevel2(reportingManagerLevel2);
+//                employeeMaster.setReportingManagerLevel3(reportingManagerLevel3);
+//                employeeMaster.setReportingManagerLevel4(reportingManagerLevel4);
+//                employeeMaster.setReportingManagerLevel5(reportingManagerLevel5);
+//                employeeMaster.setReportingManagerLevel6(reportingManagerLevel6);
+            employeeMaster.setPanCard(String.valueOf(employeeMaster.getPanCard()).toUpperCase());//this is for store pan card in uppercase in database.
+            userMaster.setFirstTime(true);
+//set firstTime is true for compulsory password change on first time login
+            userMasterService.create(userMaster);
+            if (employeeMaster.getPfAmount().equals("")) {
+                employeeMaster.setPfAmount("0");
+            }
+            CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
+            cja.setStatus(13);
+            candidateJobApplicationService.create(cja);
+            employeeMasterService.create(employeeMaster);
+            //Code for Employee Policy Detail
+            EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
+            int otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
+            for (int i = 1; i <= otherDetailCount; i++) {
+                PolicyMaster policyMaster = new PolicyMaster();
+                if (null != request.getParameter("policyId" + i) && null != request.getParameter("amount" + i) && null != request.getParameter("policyNumber" + i)) {
+                    if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("amount" + i).equals("") && !request.getParameter("policyNumber" + i).equals("")) {
+                        int policyId = Integer.parseInt(request.getParameter("policyId" + i));
+                        policyMaster.setId(policyId);
+                        Double amount = Double.valueOf(request.getParameter("amount" + i));
+                        String policyNumber = request.getParameter("policyNumber" + i);
+                        employeePolicyDetail.setEmployeeMaster(employeeMaster);
+                        employeePolicyDetail.setAmount(amount);
+                        employeePolicyDetail.setPolicyMaster(policyMaster);
+                        employeePolicyDetail.setPolicyNum(policyNumber);
+                        employeePolicyDetailService.create(employeePolicyDetail);
+                    }
+                }
+            }
+            //End
+            //Code for Payroll Provident
+            int empId = employeeMaster.getEmployeeTypeMaster().getId();
+            int empSubId = employeeMaster.getEmployeeSubType().getId();
+            EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
+            employeeTypeMaster.setId(empId);
+            EmployeeSubType employeeSubTypeMaster = new EmployeeSubType();
+            employeeSubTypeMaster.setId(empSubId);
+            Boolean pfCheck = payrollPfCheckService.isExistPF(empId, empSubId);
+            if (!pfCheck) {
+                PayrollPfCheck payrollPfCheck = new PayrollPfCheck();
+                payrollPfCheck.setEmployeeSubType(employeeSubTypeMaster);
+                payrollPfCheck.setEmployeeTypeMaster(employeeTypeMaster);
+                if (null != request.getParameter("pf")) {
+                    if (!request.getParameter("pf").equals("")) {
+                        if (request.getParameter("pf").equals("true")) {
+                            payrollPfCheck.setPfCheck(true);
+                        } else {
+                            payrollPfCheck.setPfCheck(false);
+                        }
+                        payrollPfCheckService.create(payrollPfCheck);
+                    }
+                }
+            }
+            Boolean ptCheck = payrollPtCheckService.isExistPT(empId, empSubId);
+            if (!ptCheck) {
+                PayrollPtCheck payrollPtCheck = new PayrollPtCheck();
+                payrollPtCheck.setEmployeeSubType(employeeSubTypeMaster);
+                payrollPtCheck.setEmployeeTypeMaster(employeeTypeMaster);
+                if (null != request.getParameter("pt")) {
+                    if (!request.getParameter("pt").equals("")) {
+                        if (request.getParameter("pt").equals("true")) {
+                            payrollPtCheck.setPtCheck(true);
+                        } else {
+                            payrollPtCheck.setPtCheck(false);
+                        }
+                        payrollPtCheckService.create(payrollPtCheck);
+                    }
+                }
+            }
+            //End
+
+            PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
+            pmpFormStatusMaster.setEmployeeMaster(employeeMaster);
+            pmpFormStatusMaster.setStartYearStatus(false);
+            pmpFormStatusMaster.setMidYearStatus(false);
+            pmpFormStatusMaster.setEndYearStatus(false);
+            pmpFormStatusMaster.setManagerSide(false);
+            pmpFormStatusMaster.setEmployeeSide(false);
+            pmpFormStatusMaster.setCompentencyEmployeeSide(false);
+            pmpFormStatusMaster.setCompentencyEndYearStatus(false);
+            pmpFormStatusMaster.setCompentencyManagerSide(false);
+            pmpFormStatusMaster.setCompentencyMidYearStatus(false);
+            pmpFormStatusMaster.setCompentencyStartYearStatus(false);
+            pmpFormStatusMasterService.create(pmpFormStatusMaster);
+
+            //employeeMaster.setEmployeeId("" + employeeMaster1);
+            boolean isLeapYear = false;
+            LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+            List<?> leaveType = leaveTypeMasterService.read();
+            final boolean gender_Female = employeeMaster.getGender();
+            String marital_status = employeeMaster.getMaritalStatus();
+            for (Object o : leaveType) {
+                employeeLeaveBalance = new EmployeeLeaveBalance();
+                leaveTypeMaster = (LeaveTypeMaster) o;
+                employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+                String noOfLeave = "" + leaveTypeMaster.getNoOfLeave();
+                String leave = "" + leaveTypeMaster.getLeaveType();
+                Calendar cal1 = new GregorianCalendar();
+                Calendar cal2 = new GregorianCalendar();
+                Calendar gc = new GregorianCalendar();
+                int year = gc.get(Calendar.YEAR);
+                String cyear = "" + year;
+                String dateOfEndMonth = "31/12/";
+                String dateOfEnd = dateOfEndMonth + cyear;
+                if ((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0))) {
+                    isLeapYear = true;
+                }
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+                Date date1 = sdf.parse(dateOfJoining);
+                Date date3 = new Date();
+                cal1.setTime(date1);
+                Date date2 = sdf.parse(dateOfEnd);
+                cal2.setTime(date2);
+                int y = Integer.parseInt(noOfLeave);
+                long days = 0;
+                if (date1.before(date3)) {
+                    days = date2.getTime() - date3.getTime();
+                } else {
+                    days = date2.getTime() - date1.getTime();
+                }
+                long diffDays = days / (24 * 60 * 60 * 1000) + 1;
+                if (leave.equals("Sick Leave")) {
+                    if (isLeapYear == true) {
+                        long SL = (diffDays * y / 366) + 1;
+                        employeeLeaveBalance.setNoOfLeaveRemain(SL);
+                    } else {
+                        long SL = (diffDays * y / 365) + 1;
+                        employeeLeaveBalance.setNoOfLeaveRemain(SL);
+                    }
+                } else if (leave.equals("Casual Leave")) {
+                    if (isLeapYear == true) {
+                        long CL = (diffDays * y / 366) + 1;
+                        employeeLeaveBalance.setNoOfLeaveRemain(CL);
+                    } else {
+                        long CL = (diffDays * y / 365) + 1;
+                        employeeLeaveBalance.setNoOfLeaveRemain(CL);
+                    }
+                } //                else if (leave.equals("Privilege Leave")) {
+                //                    if (isLeapYear == true) {
+                //                        long PL = (diffDays * y / 366) + 1;
+                //                        employeeLeaveBalance.setNoOfLeaveRemain(PL);
+                //                    } else {
+                //                        long PL = (diffDays * y / 365) + 1;
+                //                        employeeLeaveBalance.setNoOfLeaveRemain(PL);
+                //                    }
+                //                }
+                else if (leave.equals("Paternity Leave") && !gender_Female && marital_status.equals("Married")) {
+                    if (isLeapYear == true) {
+//                        long PAT = (diffDays * y / 366) + 1;
+                        long PAT = 6;
+                        employeeLeaveBalance.setNoOfLeaveRemain(PAT);
+                    } else {
+                        long PAT = 6;
+                        employeeLeaveBalance.setNoOfLeaveRemain(PAT);
+                    }
+                } else if (leave.equals("Maternity Leave")) {
+                    if (gender_Female) {
+                        long ML = 0;
+                        employeeLeaveBalance.setNoOfLeaveRemain(ML);
+                    }
+                } else if (leave.equals("Short Leave")) {
+                    if (isLeapYear == true) {
+                        long SHL = (diffDays * y / 366) + 1;
+                        employeeLeaveBalance.setNoOfLeaveRemain(SHL);
+                    } else {
+                        long SHL = (diffDays * y / 365) + 1;
+                        employeeLeaveBalance.setNoOfLeaveRemain(SHL);
+                    }
+                } else if (leave.equals("Leave Without Pay")) {
+                    if (isLeapYear == true) {
+                        long LWP = (diffDays * y / 366) + 1;
+                        employeeLeaveBalance.setNoOfLeaveRemain(LWP);
+                    } else {
+                        long LWP = (diffDays * y / 365) + 1;
+                        employeeLeaveBalance.setNoOfLeaveRemain(LWP);
+                    }
+                }
+
+                employeeLeaveBalanceService.create(employeeLeaveBalance);
+
+            }
+            ShiftRotationInfo shiftRotationInfo = new ShiftRotationInfo();
+            ShiftRotationInfo shiftRotationInfo1 = new ShiftRotationInfo();
+            ShiftRotationMaster shiftRotationMaster = new ShiftRotationMaster();
+//                EmployeeMaster employeeMaster = (EmployeeMaster) request.getAttribute("employeeMaster");
+//                UserMaster userMaster = (UserMaster) request.getAttribute("userMaster");
+//                String shiftMasterId = request.getAttribute("shiftMasterId").toString();
+            if (null != shiftMasterId && !"".equals(shiftMasterId)) {
+
+                shiftRotationInfo.setFirstShiftId(Integer.parseInt(shiftMasterId));
+                shiftRotationInfo.setUserMaster(userMaster);
+
+                List<?> list = shiftRotationInfoService.readRotaionDetail(shiftRotationInfo);
+                if (!list.isEmpty()) {
+
+                    shiftRotationInfo = (ShiftRotationInfo) list.get(0);
+                }
+                if (shiftRotationInfo.getId() == null) {
+                    shiftRotationMaster.setId(employeeMaster.getShiftHoursId());
+                    shiftRotationInfo.setShiftRotationMaster(shiftRotationMaster);
+                    shiftRotationInfo.setRotationDate(employeeMaster.getShiftRotationDate());
+
+                    shiftRotationInfoService.create(shiftRotationInfo);
+                }
+
+            }
+//        Code for Shift generate monthly Schedule(Start)
+//                if (employeeMaster.getShiftType().equals("ShiftBase")) {
+            if ("ShiftBase".equals(employeeMaster.getShiftType())) {
+                ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
+                shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster);
+//                     shiftMasterId
+                String shfitId = "" + request.getParameter("shiftId");
+                String shiftRotationDate = "" + request.getParameter("shiftRotationDate");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date rd = sdf.parse(shiftRotationDate);
+                LocalDate localDate = rd.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                int year = localDate.getYear();
+                String cyear = "" + year;
+                int month = localDate.getMonthValue();
+                String cmonth = "" + month;
+                int dayofmonth = localDate.getDayOfMonth();
+                String cdayofmonth = "" + dayofmonth;
+//                     shiftGenerateMonthlySchedule.setShiftMonth(cmonth);
+//                     shiftGenerateMonthlySchedule.setShiftYear(cyear);
+                Calendar c = Calendar.getInstance();
+                Date newDate = c.getTime();
+                int tday = c.get(Calendar.DATE);
+                shiftRotationMaster = shiftRotationMasterService.readById(Integer.parseInt(shfitId));
+                String duration = "" + shiftRotationMaster.getDuration();
+                int day = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+                RotationMaster rotationMaster = new RotationMaster();
+                rotationMaster.setShiftRotationMaster(shiftRotationMaster);
+
+                if ("monthly".equals(duration) && day == 30) {
+                    weeklyGenerate(rotationMaster, rd, shiftRotationMaster, 30, employeeMaster, shiftMasterId);
+                } else if ("weekly".equals(duration)) {
+                    weeklyGenerateShift(rotationMaster, rd, shiftRotationMaster, 7, employeeMaster, shiftMasterId);
+                } else if ("fortNightly".equals(duration)) {
+                    weeklyGenerate(rotationMaster, rd, shiftRotationMaster, 14, employeeMaster, shiftMasterId);
+                } else {
+                    weeklyGenerate(rotationMaster, rd, shiftRotationMaster, day, employeeMaster, shiftMasterId);
+                }
+            }
+//        Code for Shift generate monthly Schedule(End)
+
+//////Make Dir///////
+//            String userName = (String) request.getSession().getAttribute("userName");
+            String fileLocationURL = getServletContext().getRealPath("/")
+                    + File.separator + "StorageYard" + File.separator + "UserProfile"
+                    + File.separator + userName + File.separator;
+            //String basePath = getServletContext().getRealPath("/") + "StorageYard" + File.separator + "DigitalSignature" + File.separator + userName + File.separator;
+            File profilePictureFile = new File(fileLocationURL);//file directory
+//                File profilePicture = profilePictureFile.listFiles()[0];//First File Of Directory.
+            if (profilePictureFile.exists() && profilePictureFile.listFiles().length > 0) {
+                File[] profilePictureArray = profilePictureFile.listFiles();
+                try {
+                    request.setAttribute("imageFile", "StorageYard" + File.separator + "UserProfile" + File.separator + userName + File.separator + profilePictureArray[0].getName().replaceAll(" ", ""));
+                } catch (Exception e) {
+                }
+            }
+//                String fileLocationURL1 = getServletContext().getRealPath("")
+//                        + File.separator + "StorageYard" + File.separator + "DigitalSignature"
+//                        + File.separator + userName + File.separator;
+            if (profilePictureFile.exists() && profilePictureFile.listFiles().length > 0) {
+                File[] profilePictureArray = profilePictureFile.listFiles();
+                profilePictureArray[0].delete();//if file exist then delete it.
+            }
+
+            if (!profilePictureFile.exists()) {
+                profilePictureFile.mkdir();//make directory for first time user creation.
+            }
+            //File Photo Uploard///
+            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+            ////this code is using loop but there is actually only one image so changed for only single file
+//                String url = "";
+//                List<MultipartFile> multipartFile2 = multipartRequest.getFiles("photograph");
+//                for (MultipartFile multipartFile1 : multipartFile2) {
+//                    if (multipartFile1.getSize() > 0) {
+//                        File file2 = new File(fileLocationURL + File.separator
+//                                + multipartFile1.getOriginalFilename());
+//                        url = fileLocationURL + File.separator + multipartFile1.getOriginalFilename();
+//                        multipartFile1.transferTo(file2);
+//                    }
+//                }
+            ////this is changed code for only one file.
+            MultipartFile multipartFile = multipartRequest.getFile("photograph");
+            if (multipartFile != null && multipartFile.getSize() > 0) {
+                //null if there is no photograph in form.
+                //this condition checking not required if photograph field is compulsary in form.
+                try {
+
+                    File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", ""));
+                    multipartFile.transferTo(file2);
+                } catch (Exception e) {
+
+                }
+            }
+
+//            Certificate attach code
+            String certificateFileLocationURL = getServletContext().getRealPath("/")
+                    + File.separator + "StorageYard" + File.separator + "UserCertificate"
+                    + File.separator + userName + File.separator;
+            File certificateListFile = new File(certificateFileLocationURL);
+            if (certificateListFile.exists() && certificateListFile.listFiles().length > 0) {
+                File[] certificateListFileArray = certificateListFile.listFiles();
+                try {
+                    request.setAttribute("imageFile", "StorageYard" + File.separator + "UserCertificate" + File.separator + userName + File.separator + certificateListFileArray[0].getName().replaceAll(" ", ""));
+                } catch (Exception e) {
+                }
+            }
+            if (!certificateListFile.exists()) {
+                certificateListFile.mkdir();
+            }
+            String firstStepCount = request.getParameter("firstStepCount");
+            for (int i = 1; i <= Integer.parseInt(firstStepCount); i++) {
+
+//                String certificateId = request.getParameter("certificateId" + i);
+                MultipartFile multipartFile1 = multipartRequest.getFile("certificateId" + i);
+                if (multipartFile1 != null && multipartFile1.getSize() > 0) {
+                    try {
+                        File file3 = new File(certificateFileLocationURL + multipartFile1.getOriginalFilename().replaceAll(" ", ""));
+                        multipartFile1.transferTo(file3);
+                    } catch (Exception e) {
+
+                    }
+                }
+
+            }
+
+//            Certificate attach code
+            //now setting default right as employee.
+            setDefaultUserRights(request, employeeMaster);
+
+            request.setAttribute("successMessage",
+                    "Information : The Information Is Saved Successfully."
+                    + "<br/>"
+                    + "You Must Provide UserRights For Allow Successfull Login Of Newly Registered User.");
+//            } else {
+//                request.setAttribute("failureMessage",
+//                        "Error : The Entered Information is not valid.");
+//
+//            }
+            int userMasterId = 0;
+            if (employeeMaster.getUserMaster() != null) {
+                userMasterId = employeeMaster.getUserMaster().getId();
+            }
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                // id 138 is for Newly Registered User....
+                emailTemplate = emailTemplateService.readById(138);
+                String To = employeeMaster.getOfficeEmailId();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+//                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{user_id\\}", userMaster.getUserName());
+                msg = msg.replaceAll("\\{user_pwd\\}", userMaster.getPassword());
+//                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
+            mv.setViewName("forward:userRightMaster.htm?act=createClick&id=" + String.valueOf(userMasterId));
+        } else {
+            request.setAttribute("failureMessage",
+                    "Error : User isExist.");
+            mv.addAllObjects(errors.getModel());
+            mv.setViewName("Employee/EmployeeRegistrationForm");
+
+        }
+//            mv.getModelMap().put("userMaster", userMaster);
+//            mv.getModelMap().put("shiftMasterId", shiftMasterId);
+//            if (employeeMaster.getShiftType().equals("ShiftBase")) {
+//
+//                mv.setViewName("forward:shiftRotationInfo.htm?act=createSubmit");
+//            } else {
+//
+//                mv.setViewName("Employee/EmployeeRegistrationForm");
+//            }
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        return mv;
+
     }
 }

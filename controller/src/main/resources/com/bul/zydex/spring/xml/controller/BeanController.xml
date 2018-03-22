@@ -96,6 +96,8 @@
         <property name="employeePolicyDetailService" ref="employeePolicyDetailService1" />
         <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
         <property name="payrollPtCheckService" ref="payrollPtCheckService1" />
+        <property name="candidateJobApplicationService" ref="candidateJobApplicationService1"></property>
+        <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
     </bean>
     <!--Department Master-->
     <bean id="departmentMasterController1" class="com.bul.zydex.controller.emp.DepartmentMasterController" parent="controllerConfig" >

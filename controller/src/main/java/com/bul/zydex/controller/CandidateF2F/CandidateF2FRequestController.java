@@ -130,7 +130,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
 
         cja.setStatus(2);
-        candidateJobApplicationService.create(cja);
+        candidateJobApplicationService.update(cja);
 
         List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
 

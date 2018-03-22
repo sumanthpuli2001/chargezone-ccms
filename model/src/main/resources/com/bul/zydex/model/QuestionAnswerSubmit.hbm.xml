@@ -14,7 +14,7 @@
             <column name="question_library_id"  />
         </many-to-one>
         <many-to-one name="candidateJobApplicationid" class="com.bul.zydex.model.CandidateJobApplication" fetch="select">
-            <column name="candidate_apply_job_id"/>
+            <column name="candidate_job_application_id"/>
         </many-to-one>
         <many-to-one name="questionAnsId" class="com.bul.zydex.model.QuestionAns" fetch="select">
             <column name="question_ans_id" />

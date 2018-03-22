@@ -219,8 +219,8 @@
                                     <label>Sex :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
-                                    <input type="radio" path="gender" value="false"/>Male&nbsp;&nbsp;
-                                    <input type="radio" path="gender" value="true"/>Female
+                                <form:radiobutton  path="sex"  id="sex" value="false"/>Male&nbsp;&nbsp;
+                                <form:radiobutton  path="sex"  id="sex" value="true"/>Female
                                 <%--<form:errors path="employeeId" cssClass="errorDiv"></form:errors>--%>
                             </div>
 
@@ -228,9 +228,9 @@
                                 <label>Marital Status:<span style="color: red;font-size: 12px;">*</span></label>
                             </div>
                             <div class="col-sm-3" style="text-align: left;">
-                                <input type="radio" path="maritalStatus"  value="UnMarried"/>UnMarried
-                                <input type="radio" path="maritalStatus"  value="Married"/>Married
-                                <input type="radio" path="maritalStatus" value="Other"/>Other
+                                <form:radiobutton  path="martialStatus"  id="maritalStatus"  value="UnMarried"/>UnMarried
+                                <form:radiobutton  path="martialStatus"   id="maritalStatus"  value="Married"/>Married
+                                <form:radiobutton  path="martialStatus"  id="maritalStatus"  value="Other"/>Other
                                 <%--<form:errors path="employeeName" cssClass="errorDiv"></form:errors>--%>
                             </div>
                         </div>
@@ -252,17 +252,17 @@
                                 <label>Blood Group :<span style="color: red;font-size: 12px;">*</span></label>
                             </div>
                             <div class="col-sm-3" style="text-align: left;">
-                                <select path="bloodGroup" id="bloodGroups" class="form-control ">
+                            <form:select path="bloodGroup" id="bloodGroups" class="form-control ">
                                     <option value="">--Select--</option>
-                                    <option value="A +ve">A +ve</option>
-                                    <option value="A -ve">A -ve</option>
-                                    <option value="B +ve">B +ve</option>
-                                    <option value="B -ve">B -ve</option>
-                                    <option value="AB +ve">AB +ve</option>
-                                    <option value="AB -ve">AB -ve</option>
-                                    <option value="O +ve">O +ve</option>
-                                    <option value="O -ve">O -ve</option>
-                                </select>
+                                    <form:option value="A +ve">A+</form:option>
+                                    <form:option value="A -ve">A-</form:option>
+                                    <form:option value="B +ve">B+</form:option>
+                                    <form:option value="B -ve">B-</form:option>
+                                    <form:option value="AB +ve">AB+</form:option>
+                                    <form:option value="AB -ve">AB-</form:option>
+                                    <form:option value="O +ve">O+</form:option>
+                                    <form:option value="O -ve">O-</form:option>
+                                </form:select>
                                 <%--<form:errors path="bloodGroup" cssClass="errorDiv"></form:errors>--%>
                             </div>
                         </div>

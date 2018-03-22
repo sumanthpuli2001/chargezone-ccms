@@ -175,8 +175,6 @@
             </div><!-- /.col -->
         </section>
     </div>
-</div>
-<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 <script>
     jQuery.noConflict();
     jQuery(document).ready(function () {

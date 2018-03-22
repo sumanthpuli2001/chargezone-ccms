@@ -49,8 +49,6 @@ public class QuestionAnswerSubmit implements java.io.Serializable {
         this.candidateJobApplicationid = candidateJobApplicationid;
     }
 
-    
-
     public QuestionLibrary getQuestionLibraryId() {
         return questionLibraryId;
     }
@@ -91,4 +89,4 @@ public class QuestionAnswerSubmit implements java.io.Serializable {
         this.ansStatus = ansStatus;
     }
 
-}
+    }

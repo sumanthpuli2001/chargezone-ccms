@@ -32,8 +32,8 @@ public class TrainingIdentificationServiceImpl<T> extends GenericsServiceImpl<T>
     }
 
     @Override
-    public List<?> readTrainingList(int userid) {
-        return trainingIdentificationDAO.readTrainingList(userid);
+    public List<?> readTrainingList(String eventDate,int userid) {
+        return trainingIdentificationDAO.readTrainingList(eventDate,userid);
     }
 
     @Override
@@ -55,6 +55,11 @@ public class TrainingIdentificationServiceImpl<T> extends GenericsServiceImpl<T>
     @Override
     public Boolean checkExistance(int trainingId, int empId, int trainerId) {
          return trainingIdentificationDAO.checkExistance(trainingId,empId,trainerId);
+    }
+
+    @Override
+    public List<?> ListeventDates(String eventDate, int userId) {
+        return trainingIdentificationDAO.ListeventDates(eventDate, userId);
     }
 
 }

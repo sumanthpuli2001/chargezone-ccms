@@ -50,10 +50,10 @@
 
 
         <script>
-            function viewClick(id,candidateID) {
-                
+            function viewClick(id, candidateID, onlineAssment) {
+
 //            window.location = 'payrollSalaryType.htm?act=viewClick&id=' + id;
-                window.location = 'vacancy.htm?act=clickassessmentOnlineTest&id=' + id+ '&candidateID=' + candidateID;
+                window.location = 'vacancy.htm?act=clickassessmentOnlineTest&id=' + id + '&candidateID=' + candidateID + '&onlineAssment=' + onlineAssment;
             }
         </script>
         <script>
@@ -71,7 +71,7 @@
         </script>
         <script>
             function homeClick(id) {
-                alert(id);
+
                 window.location = 'vacancy.htm?act=backToHome&id=' + id;
             }
         </script>
@@ -80,7 +80,7 @@
         <section class="content-header">
             <button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=backToHomeVacancyList'"><i class="fa fa-home"></i>&nbsp&nbsp&nbsp;Home</button>
             <button type="button" class="btn btn-primary" style="float: left; width: 130px;" onclick="window.location = 'vacancy.htm?act=logout'"><i class="fa fa-long-arrow-left"></i>&nbsp&nbsp&nbsp;Log Out</button>
-            <label>Candidate User Name&nbsp : &nbsp&nbsp${ajuMaster.userName}</label>
+            <label>Candidate User Name&nbsp : &nbsp&nbsp${sessionScope.ApplayJobUserMaster.userName}</label>
         </section>
         <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>
@@ -154,7 +154,7 @@
                                                                         <th>${list2[8]}</th>
                                                                         <th>${list2[9]}</th>
                                                                             <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                                                        <th style="width: 50px;"><a onclick="viewClick(${list2[2]},${list2[11]});">Take Test</a></th>
+                                                                        <th style="width: 50px;"><a onclick="viewClick(${list2[2]},${list2[11]},${list2[0]});">Take Test</a></th>
                                                                             <%--</c:if>--%>
 
                                                                     </tr>

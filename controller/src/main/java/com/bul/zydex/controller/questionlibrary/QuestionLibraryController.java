@@ -157,8 +157,8 @@ public class QuestionLibraryController extends QuestionLibraryAbstract {
 
                 }
                 questionLibraryService.update(questionLibrary);
-                mv = QuestionLibraryCreate(request, response);
             }
+            mv = QuestionLibraryCreate(request, response);
         } catch (Exception e) {
 
             if (questionLibrary.getId() != null) {

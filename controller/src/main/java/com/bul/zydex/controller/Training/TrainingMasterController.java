@@ -97,8 +97,9 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         String trainingTimeTo = request.getParameter("trainingTimeTo");
         String trainingSource = request.getParameter("trainingSource");
         String companySource = request.getParameter("companySponsor");
+        trainingMaster.setCompanySponsor("No");
         int reimbursable = Integer.parseInt(request.getParameter("reimbursable"));
-        int status = Integer.parseInt(request.getParameter("status"));
+//        int status = Integer.parseInt(request.getParameter("status"));
         HttpSession session = request.getSession();
         UserMaster userMaster = (UserMaster) session.getAttribute("user");
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -121,7 +122,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         trainingMaster.setTrainingSource(trainingSource);
         trainingMaster.setCompanySponsor(companySource);
         trainingMaster.setReimbursable(reimbursable);
-        trainingMaster.setStatus(status);
+        trainingMaster.setStatus(0);
         trainingMaster.setCreatedBy(userMaster.getId());
         trainingMaster.setCreatedDate(currentDate);
         trainingMaster.setUpdatedBy(0);

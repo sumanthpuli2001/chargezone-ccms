@@ -32,6 +32,19 @@
                                 <div class="box-body no-padding">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
+                                            <div class="form-group"><div class="col-md-12 col-sm-12">
+                                                <div class="col-sm-6">
+                                                    <label>Training Type:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <form:select path="trainingType.id"  class="form-control ">
+                                                            <form:option label="-- Select --"  value="" ></form:option>
+                                                            <c:forEach var="list" items="${list}" >
+                                                                <form:option value="${list.key}">${list.value}</form:option>
+                                                            </c:forEach>
+                                                        </form:select>
+                                                        <form:errors path="trainingType.id" cssClass="errorDiv"></form:errors>
+                                                    </div>
+                                                </div>
+                                        </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6"><span style="color: red;font-size: 12px;"></span>
                                                     <label>Training Sub Type:<span style="color: red;font-size: 12px;"></span></label>
@@ -51,18 +64,7 @@
 
                                         </div>
 
-                                        <div class="form-group"><div class="col-md-12 col-sm-12">
-                                                <div class="col-sm-6">
-                                                    <label>Training Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="trainingType.id"  class="form-control ">
-                                                            <form:option label="-- Select --"  value="" ></form:option>
-                                                            <c:forEach var="list" items="${list}" >
-                                                                <form:option value="${list.key}">${list.value}</form:option>
-                                                            </c:forEach>
-                                                        </form:select>
-                                                        <form:errors path="trainingType.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                </div></div>
+                                        
                                             <%--</c:if>--%>
                                         <div class="form-group">
                                             <div class=" col-sm-6 col-sm-offset-5">

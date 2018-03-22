@@ -62,4 +62,9 @@ public class TrainingIdentificationServiceImpl<T> extends GenericsServiceImpl<T>
         return trainingIdentificationDAO.ListeventDates(eventDate, userId);
     }
 
+    @Override
+    public List<?> checkTraineeAvailableStatus(int trainingId, int empId) {
+        return trainingIdentificationDAO.checkTraineeAvailableStatus(trainingId, empId);
+    }
+
 }

@@ -7,11 +7,45 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
-    <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+    <%--<%@include file="/WEB-INF/jsp/Common/Header.jsp"%>--%>
+    <%--<%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>--%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Trainings Details</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="StorageYard/CSS/bootstrap/bootstrap.min.css">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <!--<link rel="stylesheet" href="StorageYard/CSS/bootstrap/font-awesome.min.css">-->
+        <link rel="stylesheet" href="StorageYard/CSS/login/form-elements.css">
+        <link rel="stylesheet" href="StorageYard/CSS/login/style.css">
+
+        <link rel="shortcut icon" href="../../dist/img/ico/logo.png">
+        <!--<link rel="shortcut icon" href="../../bootstrap/ico/favicon.png">-->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="StorageYard/Images/login/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="StorageYard/Images/login/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="StorageYard/Images/login/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="StorageYard/Images/login/apple-touch-icon-57-precomposed.png">
+
+        <style>
+            #containers {
+                display: flex;              /* establish flex container */
+                flex-direction: column;
+                justify-content: center;    /* align items vertically, in this case */
+                align-items: center;        /* align items horizontally, in this case */
+                height: 800px;
+                /*border: 1px solid black;*/
+            }
+
+        </style>
     </head>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -41,12 +75,11 @@
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
                                 <!--<button type="button" class="btn btn-primary" title="" style="float: right; width: 120px;" onclick="window.history.back();"></i>&nbsp;&nbsp;BACK</button>-->
-                                <c:if test="${shosts eq true}">
-                                <input type="button" class="btn btn-primary" value="Back" onclick="window.history.back();" />
+                                <input type="button" class="btn btn-primary" value="Back" style="float: left" onclick="window.location='trainerLogin.htm?act=showcalendar'" />
+                                <c:if test="${feedbackStatus eq true}">
+                                <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location='trainerLogin.htm?act=sendFeedback&id=${trainingMasterId}&eventdate=${eventdate}'"><i class="fa fa-pencil-square-o"></i>Feedback</button>
                                 </c:if>
-                                <c:if test="${shosts eq false}">
-                                <button type="submit" class="btn btn-primary" style="" title="" style="width: 100px;"><!--<i class="fa fa-"></i>-->Submit</button>
-                                 </c:if>
+                                
                                 <div class="box-header">
                                 </div>
                                 <div class="box-body no-padding">
@@ -111,9 +144,16 @@
                                                                     </tr>
                                                                 </c:forEach>
                                                             </tbody>
+                                                           
                                                         </c:otherwise>
+                                                            
                                                     </c:choose>
+                                                            
                                                 </table>
+                                                <br>
+                                                 <c:if test="${shosts eq false}">
+                                                                <button type="submit" class="btn btn-primary" style="float: left" title="" style="width: 100px;"><!--<i class="fa fa-"></i>-->Submit</button>
+                                                            </c:if>
                                             </div>
                                         </div>
 
@@ -124,6 +164,7 @@
                     </div><!-- /.col -->
                 </div>
             </section>
+                               
         </form:form><!-- /.content -->
     </div><!-- /.content-wrapper -->
     <script>

@@ -23,6 +23,7 @@ import com.bul.zydex.service.Training.TrainingMasterService;
 import com.bul.zydex.service.Training.TrainingSubTypeService;
 import com.bul.zydex.service.Training.TrainingTypeService;
 import com.bul.zydex.service.emp.EmployeeMasterService;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -91,7 +92,11 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
 
     protected void readTrainingMaster(HttpServletRequest request) {
         TrainingMaster trainingMaster = new TrainingMaster();
-        List<?> traininglist = trainingMasterService.read();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar cal = Calendar.getInstance();
+        Date d = new Date();
+        String currentDate = dateFormat.format(d);
+        List<?> traininglist = trainingMasterService.fetchtrainingMaster(currentDate);
         Map<Integer, String> trainingMastername = new HashMap<>();
         for (Object o : traininglist) {
             trainingMaster = (TrainingMaster) o;
@@ -235,4 +240,16 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
         request.setAttribute("list", object);
     }
 
+      protected void trainingsList(HttpServletRequest request) {
+        TrainingMaster trainMaster = new TrainingMaster();
+        List<?> trainingList = trainingMasterService.read();
+        Map<Integer, String> trainingsMap = new HashMap<>();
+        for (Object o : trainingList) {
+            trainMaster = (TrainingMaster) o;
+            trainingsMap.put(trainMaster.getId(), trainMaster.getTrainingTitle());
+        }
+
+        request.setAttribute("trainingsMaps", trainingsMap);
+    }
+       
 }

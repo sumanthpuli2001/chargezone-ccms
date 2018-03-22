@@ -11,6 +11,8 @@ import com.bul.zydex.service.GenericsService;
  *
  * @author Aman
  */
-public interface EmployeeFeedbackService<T> extends GenericsService<T>{
-    
+public interface EmployeeFeedbackService<T> extends GenericsService<T> {
+
+    public Boolean checkFeedbackforEmp(int empId, int trainingId);
+
 }

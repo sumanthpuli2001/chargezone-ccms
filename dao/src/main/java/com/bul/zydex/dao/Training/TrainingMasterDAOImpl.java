@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.bul.zydex.dao.Training;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
@@ -21,12 +20,39 @@ public class TrainingMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Trai
         return TrainingMaster.class;
     }
 
-  @Override
+    @Override
     public void deletetrainingSubMaster(final Integer id) {
-       String query=""
+        String query = ""
                 + " delete FROM TrainingSubMaster b"
-                + " where b.id="+id;
-         getHibernateTemplate().bulkUpdate(query);
-    }  
+                + " where b.id=" + id;
+        getHibernateTemplate().bulkUpdate(query);
+    }
+
+    @Override
+    public List<?> fetchtrainingMaster(String date) {
+        String query = ""
+                + "FROM TrainingMaster b"
+                + " where STR_TO_DATE(b.startDate, '%d/%m/%Y')>=STR_TO_DATE('" + date + "', '%d/%m/%Y')";
+        List<?> list = getHibernateTemplate().find(query);
+
+        return list;
+    }
+
+    @Override
+    public List<?> fetchtTrainingforFeedback(int traininigId, int user) {
+        String query = ""
+                + "select b.id, b.trainingFeedback.feedaback,b.employeeMaster.employeeName FROM EmployeeFeedback b"
+                + " where b.trainingMaster.id=" + traininigId
+                + " and b.employeeMaster.id in("
+                + " SELECT a.id"
+                + " FROM EmployeeMaster a "
+                + " left join a.departmentMaster b "
+                + " left join a.designationMaster c "
+                + " WHERE a.reportingManagerLevel1  like '%" + user + "%')";
+
+        List<?> list = getHibernateTemplate().find(query);
+
+        return list;
+    }
 
 }

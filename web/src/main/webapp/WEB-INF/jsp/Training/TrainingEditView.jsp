@@ -205,21 +205,21 @@
                                         </div>
                                         <div class="col-sm-5">
                                             <label class="control-label">Reimbursable<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:radiobutton path="reimbursable" value="1" required="required"/>Active
-                                            <form:radiobutton path="reimbursable" value="0" required="required"/>Inactive
+                                            <form:radiobutton path="reimbursable" value="1" required="required"/>Yes
+                                            <form:radiobutton path="reimbursable" value="0" required="required"/>No
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-sm-5">
+<!--                                        <div class="col-sm-5">
                                             <label class="control-label">Company Sponsor<span style="color: red;font-size: 12px;">*</span></label>
                                             <form:radiobutton path="companySponsor" value="1" required="required"/>Yes
                                             <form:radiobutton path="companySponsor" value="0" required="required"/>No
-                                        </div>
-                                        <div class="col-sm-5">
+                                        </div>-->
+<!--                                        <div class="col-sm-5">
                                             <label class="control-label">Status<span style="color: red;font-size: 12px;">*</span></label>
                                             <form:radiobutton path="status" value="1" required="required"/>Active
                                             <form:radiobutton path="status" value="0" required="required"/>Inactive
-                                        </div>
+                                        </div>-->
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-6 col-sm-offset-5">

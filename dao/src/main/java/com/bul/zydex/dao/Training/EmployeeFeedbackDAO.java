@@ -11,6 +11,8 @@ import com.bul.zydex.dao.GenericsDAO;
  *
  * @author Aman
  */
-public interface EmployeeFeedbackDAO<T> extends GenericsDAO<T>{
-    
+public interface EmployeeFeedbackDAO<T> extends GenericsDAO<T> {
+
+    public Boolean checkFeedbackforEmp(int empId, int trainingId);
+
 }

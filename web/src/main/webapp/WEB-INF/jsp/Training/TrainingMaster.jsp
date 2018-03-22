@@ -67,9 +67,9 @@
                                                                     <th>Training Requester</th>
                                                                     <th>venue</th>
                                                                     <th>cost</th>
-                                                                    <th>Company Sponsor</th>
+                                                                    <!--<th>Company Sponsor</th>-->
                                                                     <th>Training Source</th>
-                                                                    <th>status</th>
+                                                                    <!--<th>status</th>-->
                                                                     <th>Action</th>
                                                                 </tr>
                                                             </thead>
@@ -100,15 +100,15 @@
                                                                         <td>
                                                                             ${trainingList.cost}
                                                                         </td>
-                                                                        <td>
+<!--                                                                        <td>
                                                                             ${trainingList.companySponsor}
-                                                                        </td>
+                                                                        </td>-->
                                                                         <td>
                                                                             ${trainingList.trainingSource}
                                                                         </td>
-                                                                        <td>
+<!--                                                                        <td>
                                                                             ${trainingList.status}
-                                                                        </td>
+                                                                        </td>-->
                                                                         <td>
                                                                             <div class="btn-group">
                                                                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="viewClick(${trainingList.id});">

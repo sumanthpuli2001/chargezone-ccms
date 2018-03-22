@@ -7,6 +7,7 @@ package com.bul.zydex.controller.Training;
 
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingMaster;
+import com.bul.zydex.model.TrainingSubMaster;
 import com.bul.zydex.model.TrainingSubType;
 import com.bul.zydex.model.TrainingType;
 import com.bul.zydex.model.UserMaster;
@@ -14,11 +15,17 @@ import com.google.gson.Gson;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -32,9 +39,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class TrainingMasterController extends TrainingMasterAbstract {
 
     public ModelAndView showList(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
+        
         ModelAndView mv = new ModelAndView();
-        List<?> trainingList = trainingMasterService.read();
-        mv.addObject("trainingList", trainingList);
+        List<?> trainingList = trainingMasterService.readTrainingMasterList();
+        mv.getModelMap().put("list", trainingList);
         mv.setViewName("Training/TrainingMaster");
         return mv;
     }
@@ -75,72 +83,99 @@ public class TrainingMasterController extends TrainingMasterAbstract {
 
     public ModelAndView createSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
+//        int SubtypeBytrainingTypeId = Integer.parseInt(request.getParameter("SubtypeBytrainingTypeId"));
         TrainingMaster trainingMaster = new TrainingMaster();
-        String trainingTitle = request.getParameter("trainingTitle");
-        String trainingDescription = request.getParameter("trainingDescription");
-        String trainingOwner = request.getParameter("trainingOwner");
-        int trainerId = Integer.parseInt(request.getParameter("trainer"));
-        int trainingType = Integer.parseInt(request.getParameter("trainingType"));
-        int SubtypeBytrainingTypeId = Integer.parseInt(request.getParameter("SubtypeBytrainingTypeId"));
-        String venue = request.getParameter("venue");
-        String cost = request.getParameter("cost");
-        String startDate = request.getParameter("startDate");
-        String endDate = request.getParameter("endDate");
-        String trainingTimeForm = request.getParameter("trainingTimeForm");
-        String trainingTimeTo = request.getParameter("trainingTimeTo");
-        String trainingSource = request.getParameter("trainingSource");
-        String companySource = request.getParameter("companySponsor");
-        int reimbursable = Integer.parseInt(request.getParameter("reimbursable"));
-        int status = Integer.parseInt(request.getParameter("status"));
-        HttpSession session = request.getSession();
-        UserMaster userMaster = (UserMaster) session.getAttribute("user");
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        Date d = new Date();
-        String currentDate = dateFormat.format(d);
-
-        trainingMaster.setTrainingTitle(trainingTitle);
-        trainingMaster.setTrainingDescription(trainingDescription);
-        trainingMaster.setTrainingOwner(trainingOwner);
-        trainingMaster.setTrainer(trainerService.readById(trainerId));
-        trainingMaster.setTrainingType(trainingTypeService.readById(trainingType));
-        trainingMaster.setTrainingSubType(trainingSubTypeService.readById(SubtypeBytrainingTypeId));
-        trainingMaster.setVenue(venue);
-        trainingMaster.setCost(cost);
-        trainingMaster.setStartDate(startDate);
-        trainingMaster.setEndDate(endDate);
-        trainingMaster.setTrainingTimeForm(trainingTimeForm);
-        trainingMaster.setTrainingTimeTo(trainingTimeTo);
-        trainingMaster.setTrainingSource(trainingSource);
-        trainingMaster.setCompanySponsor(companySource);
-        trainingMaster.setReimbursable(reimbursable);
-        trainingMaster.setStatus(status);
-        trainingMaster.setCreatedBy(userMaster.getId());
-        trainingMaster.setCreatedDate(currentDate);
-        trainingMaster.setUpdatedBy(0);
-        trainingMaster.setUpdatedDate(null);
+//        trainingMaster.setTrainingSubType(trainingSubTypeService.readById(SubtypeBytrainingTypeId));
         BindException errors = new BindException(trainingMaster, "trainingMaster");
         bind(request, trainingMaster);
-//        currencyMasterValidator.validate(trainingMaster, errors);
+//        trainingMasterValidator.validate(trainingMaster, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid.");
+            trainerList(request);
+            trainingtypeList(request);
+            trainingSubtypeList(request);
+
             mv.addAllObjects(errors.getModel());
+//            mv.getModelMap().put("trainingMaster", trainingMaster);
 
             mv.setViewName("Training/TrainingCreate");
-
         } else {
+            String trainingTitle = request.getParameter("trainingTitle");
+            String trainingDescription = request.getParameter("trainingDescription");
+            String trainingOwner = request.getParameter("trainingOwner");
+            int trainerId = Integer.parseInt(request.getParameter("trainer"));
+            int trainingType = Integer.parseInt(request.getParameter("trainingType"));
+            int SubtypeBytrainingTypeId = Integer.parseInt(request.getParameter("SubtypeBytrainingTypeId"));
+            String venue = request.getParameter("venue");
+            String cost = request.getParameter("cost");
+            String startDate = request.getParameter("startDate");
+            String endDate = request.getParameter("endDate");
+            String trainingTimeForm = request.getParameter("trainingTimeForm");
+            String trainingTimeTo = request.getParameter("trainingTimeTo");
+            String trainingSource = request.getParameter("trainingSource");
+            String companySource = request.getParameter("companySponsor");
+            int reimbursable = Integer.parseInt(request.getParameter("reimbursable"));
+            int status = Integer.parseInt(request.getParameter("status"));
+            HttpSession session = request.getSession();
+            UserMaster userMaster = (UserMaster) session.getAttribute("user");
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Calendar cal = Calendar.getInstance();
+            Date d = new Date();
+            String currentDate = dateFormat.format(d);
+
+            trainingMaster.setTrainingTitle(trainingTitle);
+            trainingMaster.setTrainingDescription(trainingDescription);
+            trainingMaster.setTrainingOwner(trainingOwner);
+            trainingMaster.setTrainer(trainerService.readById(trainerId));
+            trainingMaster.setTrainingType(trainingTypeService.readById(trainingType));
+            trainingMaster.setTrainingSubType(trainingSubTypeService.readById(SubtypeBytrainingTypeId));
+            trainingMaster.setVenue(venue);
+            trainingMaster.setCost(cost);
+            trainingMaster.setStartDate(startDate);
+            trainingMaster.setEndDate(endDate);
+            trainingMaster.setTrainingTimeForm(trainingTimeForm);
+            trainingMaster.setTrainingTimeTo(trainingTimeTo);
+            trainingMaster.setTrainingSource(trainingSource);
+            trainingMaster.setCompanySponsor(companySource);
+            trainingMaster.setReimbursable(reimbursable);
+            trainingMaster.setStatus(status);
+            trainingMaster.setCreatedBy(userMaster.getId());
+            trainingMaster.setCreatedDate(currentDate);
+            trainingMaster.setUpdatedBy(0);
+            trainingMaster.setUpdatedDate(null);
 
             mv.getModelMap().put("trainingMaster", trainingMaster);
             trainingMasterService.create(trainingMaster);
-
-            request.setAttribute("successMessage",
+            /////////////////////////////////////////////////////
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate Startdate = LocalDate.parse(trainingMaster.getStartDate(), formatter);
+            LocalDate Enddate = LocalDate.parse(trainingMaster.getEndDate(), formatter);
+            List<LocalDate> alldate = getDatesBetween(Startdate, Enddate);
+            for (LocalDate alldate1 : alldate) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date initDate = convertToDateViaSqlDate(alldate1);
+                String finalDateSet = sdf.format(initDate);
+                TrainingSubMaster trainingSubMaster = new TrainingSubMaster();
+                trainingSubMaster.setTrainingdate(finalDateSet);
+                trainingSubMaster.setTrainingMasterid(trainingMaster.getId());
+                trainingSubMaster.setTrainerMasterid(trainingMaster.getTrainer().getId());
+                trainingSubMaster.setTitle(trainingMaster.getTrainingTitle());
+                trainingSubMasterService.create(trainingSubMaster);
+            }
+            /////////////////////////////////////////////////////
+            request.setAttribute(
+                    "successMessage",
                     "Information : The Information is saved Successfully.");
             List<?> trainingList = trainingMasterService.read();
-            mv.addObject("trainingList", trainingList);
-            mv.setViewName("Training/TrainingMaster");
-        }
 
+            mv.addObject(
+                    "trainingList", trainingList);
+//            mv.setViewName(
+//                    "Training/TrainingMaster");
+              mv = showList(request,response,trainingMaster);
+
+        }
 //            mv = searchSubmit(request, response);
         return mv;
     }
@@ -206,12 +241,27 @@ public class TrainingMasterController extends TrainingMasterAbstract {
             mv.getModelMap().put("trainingMaster", trainingMaster);
             trainingMasterService.update(trainingMaster);
 
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate Startdate = LocalDate.parse(trainingMaster.getStartDate(), formatter);
+            LocalDate Enddate = LocalDate.parse(trainingMaster.getEndDate(), formatter);
+            List<LocalDate> alldate = getDatesBetween(Startdate, Enddate);
+            trainingMasterService.deletetrainingSubMaster(trainingMaster.getId());
+            for (LocalDate alldate1 : alldate) {
+                TrainingSubMaster trainingSubMaster = new TrainingSubMaster();
+                trainingSubMaster.setTrainingdate(alldate1.toString());
+                trainingSubMaster.setTrainingMasterid(trainingMaster.getId());
+                trainingSubMaster.setTrainerMasterid(trainingMaster.getTrainer().getId());
+                trainingSubMaster.setTitle(trainingMaster.getTrainingTitle());
+                trainingSubMasterService.create(trainingSubMaster);
+
+            }
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
 //             mv.getModelMap().put("trainingMaster", trainingMaster);
             List<?> trainingList = trainingMasterService.read();
             mv.addObject("trainingList", trainingList);
-            mv.setViewName("Training/TrainingMaster");
+//            mv.setViewName("Training/TrainingMaster");
+            mv = showList(request,response,trainingMaster);
         }
 
 //            mv = searchSubmit(request, response);
@@ -275,9 +325,24 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         } else {
             mv.addObject("successMessage", "Information Is Deleted Successfully.");
         }
-        List<?> trainingList = trainingMasterService.read();
-            mv.addObject("trainingList", trainingList);
-            mv.setViewName("Training/TrainingMaster");
+//        List<?> trainingList = trainingMasterService.read();
+//          mv.addObject("trainingList", trainingList);
+        mv = showList(request,response,trainingMaster);
+//        showList(request,response,trainingMaster);
         return mv;
+    }
+
+    public static List<LocalDate> getDatesBetween(
+            LocalDate startDate, LocalDate endDate) {
+
+        long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, endDate);
+        return IntStream.iterate(0, i -> i + 1)
+                .limit(numOfDaysBetween)
+                .mapToObj(i -> startDate.plusDays(i))
+                .collect(Collectors.toList());
+    }
+
+    public Date convertToDateViaSqlDate(LocalDate dateToConvert) {
+        return java.sql.Date.valueOf(dateToConvert);
     }
 }

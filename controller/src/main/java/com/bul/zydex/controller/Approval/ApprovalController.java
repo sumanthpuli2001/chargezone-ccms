@@ -12,6 +12,7 @@ import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.LeaveEmployeeDetail;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.validation.BindException;
@@ -22,15 +23,15 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Vikas
  */
 public class ApprovalController extends ApprovalAbstract {
-
+    
     public ModelAndView createApprovalSetting(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-
+        
         ModelAndView mv = new ModelAndView();
         ApprovalMaster approvalMaster = new ApprovalMaster();
         ApprovalUser approvalUser = new ApprovalUser();
         bind(request, approvalUser);
-
+        
         EmployeeMaster employeeMaster = new EmployeeMaster();
         selectEmployee(request, response);
 //          EmployeeMaster employeeMaster= new EmployeeMaster();
@@ -42,10 +43,10 @@ public class ApprovalController extends ApprovalAbstract {
         mv.setViewName("Approval/CreateApproval");
         return mv;
     }
-
+    
     public ModelAndView approvalSubmit(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-
+        
         ModelAndView mv = new ModelAndView();
         ApprovalMaster approvalMaster = new ApprovalMaster();
         LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
@@ -61,15 +62,16 @@ public class ApprovalController extends ApprovalAbstract {
         approvalMaster.setCreatedDate(sdf.format(cDate));
         approvalMaster.setStatus(0);
         approvalMasterService.create(approvalMaster);
-
+        
         mv = createApprovalSetting(request, response);
         return mv;
     }
-
+    
     public ModelAndView submitApproval(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-
+        
         ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         ApprovalMaster approvalMaster = new ApprovalMaster();
         ApprovalUser approvalUser = new ApprovalUser();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -81,11 +83,11 @@ public class ApprovalController extends ApprovalAbstract {
         String id = request.getParameter("id");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
-
+        approvalMaster.setCreatedBy(employeeMaster1.getId());
         approvalMaster.setCreatedDate(sdf.format(cDate));
         approvalMaster.setStatus(0);
         approvalMasterService.create(approvalMaster);
-
+        
         otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
         for (int i = 0; i <= otherDetailCount; i++) {
             if (null != request.getParameter("policyId" + i) && null != request.getParameter("policyNumber" + i)) {
@@ -98,6 +100,7 @@ public class ApprovalController extends ApprovalAbstract {
                     SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
                     Date cDate1 = new Date();
                     approvalUser.setCreatedDate(sdf1.format(cDate1));
+                    approvalUser.setCreatedBy(employeeMaster1.getId());
                     String policyNumber = request.getParameter("policyNumber" + i);
                     approvalUser.setLevel(Integer.parseInt(policyNumber));
                     approvalUser.setStatus(0);
@@ -107,11 +110,23 @@ public class ApprovalController extends ApprovalAbstract {
                 }
             }
         }
-
-//        employeeMaster=employeeMasterService.readById(employeeMaster.getId());
-//        approvalUser.setEmployeeMaster(employeeMaster);
+        
+        mv = createApprovalSetting(request, response);
+        
         return mv;
-
+        
     }
-
+    
+    public ModelAndView approvalList(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        
+        ModelAndView mv = new ModelAndView();
+        ApprovalMaster approvalMaster = new ApprovalMaster();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        List<?> approvalMasterList = approvalUserService.readapprovalempId();
+        mv.getModelMap().put("list", approvalMasterList);
+        mv.getModelMap().put("approvalMaster", approvalMaster);
+        mv.setViewName("Approval/ApprovalList");
+        return mv;
+    }
 }

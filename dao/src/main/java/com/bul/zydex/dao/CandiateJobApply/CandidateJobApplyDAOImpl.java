@@ -76,4 +76,24 @@ public class CandidateJobApplyDAOImpl<T> extends GenericsDAOImpl<T> implements C
 
     }
 
+    @Override
+    public boolean isExist(String name) {
+        boolean flag = false;
+        List list = getHibernateTemplate().find("from CandidateApplyJob where photograph='" + name + "'");
+        if (list.isEmpty()) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean isExistCertificateAttach(String name) {
+        boolean flag = false;
+        List list = getHibernateTemplate().find("from CandidateApplyJob where certificateAttach='" + name + "'");
+        if (list.isEmpty()) {
+            flag = true;
+        }
+        return flag;
+    }
+
 }

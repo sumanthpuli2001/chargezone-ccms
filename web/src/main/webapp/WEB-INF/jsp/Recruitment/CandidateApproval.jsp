@@ -87,7 +87,7 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>photograph:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.photograph}</span>
+                                                    <span><img src="StorageYard/candidateimage/${candidateApplyJob.photograph}" width="50px; !important" height="50px; !important">&nbsp;&nbsp;${candidateApplyJob.photograph}</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -153,11 +153,18 @@
 
                                             <div class="form-group">
                                                 <div class="col-md-12" style="text-align: right">
-                                                    <%--<c:if test="${status != 1}">--%>
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">&nbsp; F To F</button>
-                                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>
-                                                    <button type="button" class="btn btn-primary" id="btnType1" onclick="goToAns()" name="btnType" value="AssessMent" style="width: 100px" >Ans</button>
-                                                    <%--</c:if>--%>
+                                                    <c:if test="${candidateJobApplication.status != 13}">
+                                                        <button type="button" class="btn btn-primary" onclick="induction(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; Induction</button>
+                                                    </c:if>
+                                                    <c:if test="${candidateJobApplication.status != 13}">
+                                                        <button type="button" class="btn btn-primary" onclick="sendToF2F(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; F To F</button>
+                                                    </c:if>    
+                                                    <c:if test="${candidateJobApplication.status != 13}">
+                                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>
+                                                    </c:if>
+                                                    <c:if test="${candidateJobApplication.status eq 5}">
+                                                        <button type="button" class="btn btn-primary" id="btnType1" onclick="goToAns(${candidateJobApplication.id},${candidateApplyJob.id})" name="btnType" value="AssessMent" style="width: 100px" >Ans</button>
+                                                    </c:if>
                                                 </div>
 
 
@@ -369,7 +376,17 @@
 
 </script>
 <script>
-    function goToAns(id) {
-        window.location = 'onlineAssessment.htm?act=goToAns&id=' + id;
+    function goToAns(applicationId, candidateId) {
+        window.location = 'onlineAssessment.htm?act=goToAns&id=' + applicationId + '&candidateId=' + candidateId;
+    }
+</script>
+<script>
+    function sendToF2F(applicationId, candidateId) {
+        window.location = 'candidateF2FRequest.htm?act=createCandidateF2FInvitation&id=' + applicationId + '&candidateId=' + candidateId;
+    }
+</script>
+<script>
+    function induction(applicationId, candidateId) {
+        window.location = 'employeeMaster.htm?act=inductionCreateClick&id=' + applicationId + '&candidateId=' + candidateId;
     }
 </script>

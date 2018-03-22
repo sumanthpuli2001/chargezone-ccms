@@ -6,6 +6,8 @@
 package com.bul.zydex.controller.emp;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.CandidateApplyJob;
+import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.Company;
 import com.bul.zydex.model.CompetencyEvaluationMaster;
 import com.bul.zydex.model.DepartmentMaster;
@@ -30,10 +32,12 @@ import com.bul.zydex.model.ShiftRotationInfo;
 import com.bul.zydex.model.ShiftRotationMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
+import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.EmployeePolicyDetail.EmployeePolicyDetailService;
 import com.bul.zydex.service.Payroll.PayrollPfCheckService;
 import com.bul.zydex.service.Payroll.PayrollPtCheckService;
 import com.bul.zydex.service.PmpFormStatusMaster.PmpFormStatusMasterService;
+import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.appraisalPerformance.CompetencyEvaluationMasterService;
 import com.bul.zydex.service.company.CompanyMasterService;
@@ -86,6 +90,8 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     protected EmployeePolicyDetailService<EmployeePolicyDetail> employeePolicyDetailService;
     protected PayrollPfCheckService<PayrollPfCheck> payrollPfCheckService;
     protected PayrollPtCheckService<PayrollPtCheck> payrollPtCheckService;
+    protected CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService;
+    protected CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService;
 
     public CompetencyEvaluationMasterService<CompetencyEvaluationMaster> getCompetencyEvaluationMasterService() {
         return competencyEvaluationMasterService;
@@ -214,7 +220,6 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     public void setPayrollPtCheckService(PayrollPtCheckService<PayrollPtCheck> payrollPtCheckService) {
         this.payrollPtCheckService = payrollPtCheckService;
     }
-    
 
     protected void departmentList(HttpServletRequest request) {
         DepartmentMaster departmentMaster = new DepartmentMaster();
@@ -614,6 +619,25 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     public void setEmployeePolicyDetailService(EmployeePolicyDetailService<EmployeePolicyDetail> employeePolicyDetailService) {
         this.employeePolicyDetailService = employeePolicyDetailService;
     }
+
+    public CandidateJobApplicationService<CandidateJobApplication> getCandidateJobApplicationService() {
+        return candidateJobApplicationService;
+    }
+
+    public void setCandidateJobApplicationService(CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService) {
+        this.candidateJobApplicationService = candidateJobApplicationService;
+    }
+
+    public CandidateJobApplyService<CandidateApplyJob> getCandidateJobApplyService() {
+        return candidateJobApplyService;
+    }
+
+    public void setCandidateJobApplyService(CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService) {
+        this.candidateJobApplyService = candidateJobApplyService;
+    }
+    
+    
+
     protected void EmployeeTypeList(HttpServletRequest request) {
         List<?> EmployeeTypeList = employeeTypeService.read();
         Map<Integer, String> map = new HashMap();

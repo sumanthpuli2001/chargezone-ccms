@@ -90,6 +90,7 @@
                                                                     <th style="width: 50px;">Email Address</th>
                                                                     <th style="width: 50px;">Experience Joining Year</th>
                                                                     <th style="width: 50px;">Vacancy Name</th>
+                                                                    <th style="width: 50px;">Status</th>
                                                                         <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <th style="width: 50px;">Action</th>
                                                                         <%--</c:if>--%>
@@ -110,7 +111,21 @@
                                                                 <td>${list[5]}</td>
                                                                 <td>${list[6]}</td>
                                                                 <td>${list[7]}</td>
-                                                                <!--<td>${list[3]}</td>-->
+                                                                <td>
+                                                                    <c:if test="${list[8] eq 1}"><span class="label label-default">New Applicant</span></c:if>
+                                                                    <c:if test="${list[8] eq 2}"><span class="label label-default">Shortlisted</span></c:if>
+                                                                    <c:if test="${list[8] eq 3}"><span class="label label-default">Rejected</span></c:if>
+                                                                    <c:if test="${list[8] eq 4}"><span class="label label-default">Online Assessment</span></c:if>
+                                                                    <c:if test="${list[8] eq 5}"><span class="label label-default">Assessment Submission </span></c:if>
+                                                                    <c:if test="${list[8] eq 6}"><span class="label label-default">Assessment Pass </span></c:if>
+                                                                    <c:if test="${list[8] eq 7}"><span class="label label-default">Assessment Fail</span></c:if>
+                                                                    <c:if test="${list[8] eq 8}"><span class="label label-default">F2F interview Invitation</span></c:if>
+                                                                    <c:if test="${list[8] eq 9}"><span class="label label-default">Candidate On hold</span></c:if>
+                                                                    <c:if test="${list[8] eq 10}"><span class="label label-default">Candidate Rejected </span></c:if>
+                                                                    <c:if test="${list[8] eq 11}"><span class="label label-default">Candidate Selected</span></c:if>
+                                                                    <c:if test="${list[8] eq 12}"><span class="label label-default">Employee Induction</span></c:if>
+                                                                    <c:if test="${list[8] eq 13}"><span class="label label-default">Employee On board </span></c:if>
+                                                                    </td>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>
                                                                     <div class="btn-group">

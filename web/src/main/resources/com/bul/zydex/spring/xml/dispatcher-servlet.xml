@@ -209,10 +209,13 @@
                 <prop key="trainingType.htm">trainingTypeController1</prop>
                 <prop key="trainer.htm">trainerController1</prop>
                 <prop key="trainingAttendance.htm">trainingAttendanceController1</prop>
-                <prop key="trainingIdentificationController.htm">trainingIdentificationController1</prop>
+                <prop key="trainingIdentification.htm">trainingIdentificationController1</prop>
                 <prop key="classifiedBox.htm">classifiedBoxController1</prop>
                 <prop key="trainingMaster.htm">trainingMasterController1</prop>
                 <prop key="trainerLogin.htm">trainerLogInController1</prop>
+                <prop key="candidateF2FRequest.htm">candidateF2FRequestController1</prop>
+                <prop key="candidateF2FApproval.htm">candidateF2FApprovalController1</prop>
+                <prop key="trainingAssessment.htm">trainingAssessmentController1</prop>
                 
            
             </props>

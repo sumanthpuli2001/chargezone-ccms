@@ -156,4 +156,6 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
 
     public List<?> searchEmployeeDetailForContactInfo(final String searchString);
 
+    public List<?> readEmployeeList(int id);
+
 }

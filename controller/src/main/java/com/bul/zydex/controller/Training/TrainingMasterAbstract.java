@@ -6,19 +6,30 @@
 package com.bul.zydex.controller.Training;
 
 import com.bul.zydex.controller.CustomAbstract;
-import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingMaster;
+import com.bul.zydex.model.TrainingSubMaster;
 import com.bul.zydex.model.TrainingSubType;
 import com.bul.zydex.model.TrainingType;
+import com.bul.zydex.model.support.User;
 import com.bul.zydex.service.Training.TrainerService;
 import com.bul.zydex.service.Training.TrainingMasterService;
+import com.bul.zydex.service.Training.TrainingSubMasterService;
 import com.bul.zydex.service.Training.TrainingSubTypeService;
 import com.bul.zydex.service.Training.TrainingTypeService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.validation.Validator;
 
 /**
  *
@@ -29,6 +40,8 @@ public abstract class TrainingMasterAbstract extends CustomAbstract{
     protected TrainingSubTypeService<TrainingSubType> trainingSubTypeService;
     protected TrainerService<Trainer> trainerService;
     protected TrainingMasterService<TrainingMaster> trainingMasterService;
+    protected TrainingSubMasterService<TrainingSubMaster> trainingSubMasterService;
+    protected Validator trainingMasterValidator;
 
     public TrainingTypeService<TrainingType> getTrainingTypeService() {
         return trainingTypeService;
@@ -61,6 +74,24 @@ public abstract class TrainingMasterAbstract extends CustomAbstract{
     public void setTrainingMasterService(TrainingMasterService<TrainingMaster> trainingMasterService) {
         this.trainingMasterService = trainingMasterService;
     }
+
+    public TrainingSubMasterService<TrainingSubMaster> getTrainingSubMasterService() {
+        return trainingSubMasterService;
+    }
+
+    public void setTrainingSubMasterService(TrainingSubMasterService<TrainingSubMaster> trainingSubMasterService) {
+        this.trainingSubMasterService = trainingSubMasterService;
+    }
+
+    public Validator getTrainingMasterValidator() {
+        return trainingMasterValidator;
+    }
+
+    public void setTrainingMasterValidator(Validator trainingMasterValidator) {
+        this.trainingMasterValidator = trainingMasterValidator;
+    }
+    
+    
     
      protected void trainerList(HttpServletRequest request) {
         Trainer trainerMaster = new Trainer();
@@ -95,4 +126,5 @@ public abstract class TrainingMasterAbstract extends CustomAbstract{
 
         request.setAttribute("trainingSubTypeMap", trnsb);
     }
+     
 }

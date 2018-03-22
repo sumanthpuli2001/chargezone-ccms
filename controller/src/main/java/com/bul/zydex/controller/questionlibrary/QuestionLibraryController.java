@@ -63,102 +63,117 @@ public class QuestionLibraryController extends QuestionLibraryAbstract {
         ModelAndView mv = new ModelAndView();
         QuestionLibrary questionLibrary = new QuestionLibrary();
         MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
-        mprEmployeeCategory.setId(Integer.parseInt(request.getParameter("mprEmployeeCategory.id")));
-        questionLibrary.setQuestion(request.getParameter("question"));
-        String selected = request.getParameter("correctans");
-        String id = request.getParameter("id");
+        try {
+            mprEmployeeCategory.setId(Integer.parseInt(request.getParameter("mprEmployeeCategory.id")));
+            questionLibrary.setQuestion(request.getParameter("question"));
+            String selected = request.getParameter("ansId");
+//        String selected = request.getParameter("correctans");
+            String id = request.getParameter("id");
 
-        int radiocount = 0;
-        int asd = Integer.parseInt(request.getParameter("type"));
+            int radiocount = 0;
+            int asd = Integer.parseInt(request.getParameter("type"));
 
-        if ("" == id) {
+            if ("" == id) {
 
-            if (0 == asd) {
+                if (0 == asd) {
 
-                radiocount = Integer.parseInt(selected);
+                    radiocount = Integer.parseInt(selected);
 //                radiocount = Integer.parseInt(selected.substring(1));
-            }
-            int otherDetailCount = 0;
-            String correctans = null;
-            try {
+                }
+                int otherDetailCount = 0;
+                String correctans = null;
+                try {
 
-                questionLibrary.setType(asd);
-                questionLibrary.setMarks(Integer.parseInt(request.getParameter("marks")));
-                questionLibrary.setSatatus(Integer.parseInt(request.getParameter("satatus")));
-                questionLibrary.setMprEmployeeCategory(mprEmployeeCategory);
-                otherDetailCount = 6;
+                    questionLibrary.setType(asd);
+                    questionLibrary.setMarks(Integer.parseInt(request.getParameter("marks")));
+                    questionLibrary.setSatatus(Integer.parseInt(request.getParameter("satatus")));
+                    questionLibrary.setMprEmployeeCategory(mprEmployeeCategory);
+                    otherDetailCount = 6;
 //                otherDetailCount = Integer.parseInt(request.getParameter("questionCount"));
-            } catch (Exception e) {
-            }
-            questionLibraryService.create(questionLibrary);
-            if (0 == asd) {
-                for (int i = 1; i <= otherDetailCount; i++) {
-                    QuestionAns questionAns = new QuestionAns();
-                    if (null != request.getParameter("ans" + i)) {
-                        if (!request.getParameter("ans" + i).equals("")) {
-                            String ans = request.getParameter("ans" + i);
-                            questionAns.setAns(ans);
-                            questionAns.setQuestionLibrary(questionLibrary);
-                            questionAnsService.create(questionAns);
-                            if (i == radiocount) {
-                                questionLibrary.setAnsId(questionAns.getId());
+                } catch (Exception e) {
+                }
+                questionLibraryService.create(questionLibrary);
+                if (0 == asd) {
+                    for (int i = 1; i <= otherDetailCount; i++) {
+                        QuestionAns questionAns = new QuestionAns();
+                        if (null != request.getParameter("ans" + i)) {
+                            if (!request.getParameter("ans" + i).equals("")) {
+                                String ans = request.getParameter("ans" + i);
+                                questionAns.setAns(ans);
+                                questionAns.setQuestionLibrary(questionLibrary);
+                                questionAnsService.create(questionAns);
+                                if (i == radiocount) {
+                                    questionLibrary.setAnsId(questionAns.getId());
+                                }
                             }
                         }
                     }
                 }
-            }
-            questionLibraryService.update(questionLibrary);
-        } else {
-            int qlId = Integer.parseInt(id);
-            questionLibrary = questionLibraryService.readById(qlId);
+                questionLibraryService.update(questionLibrary);
+            } else {
+                int qlId = Integer.parseInt(id);
+                questionLibrary = questionLibraryService.readById(qlId);
 
 //            if (0 == asd) {
 //
 //                radiocount = Integer.parseInt(selected.substring(1));
-            radiocount = Integer.parseInt(selected);
+                radiocount = Integer.parseInt(selected);
 //            }
-            int otherDetailCount = 0;
-            String correctans = null;
-            try {
+                int otherDetailCount = 6;
+                String correctans = null;
+                try {
 
-                questionLibrary.setType(asd);
-                questionLibrary.setMarks(Integer.parseInt(request.getParameter("marks")));
-                questionLibrary.setSatatus(Integer.parseInt(request.getParameter("satatus")));
-                questionLibrary.setMprEmployeeCategory(mprEmployeeCategory);
-                otherDetailCount = Integer.parseInt(request.getParameter("questionCount"));
-            } catch (Exception e) {
-            }
-            questionLibraryService.update(questionLibrary);
-            List<QuestionAns> anses = (List<QuestionAns>) questionAnsService.readByQLId(qlId);
-            for (QuestionAns ans : anses) {
+                    questionLibrary.setType(asd);
+                    questionLibrary.setMarks(Integer.parseInt(request.getParameter("marks")));
+                    questionLibrary.setSatatus(Integer.parseInt(request.getParameter("satatus")));
+                    questionLibrary.setMprEmployeeCategory(mprEmployeeCategory);
+//                otherDetailCount = Integer.parseInt(request.getParameter("questionCount"));
+                } catch (Exception e) {
+                }
+                questionLibraryService.update(questionLibrary);
+                List<QuestionAns> anses = (List<QuestionAns>) questionAnsService.readByQLId(qlId);
+                for (QuestionAns ans : anses) {
 
-                questionAnsService.delete(ans.getId());
-            }
-            if (0 == asd) {
-                for (int i = 1; i <= otherDetailCount; i++) {
-                    QuestionAns questionAns = new QuestionAns();
-                    if (null != request.getParameter("ans" + i)) {
-                        if (!request.getParameter("ans" + i).equals("")) {
-                            String ans = request.getParameter("ans" + i);
-                            questionAns.setAns(ans);
-                            questionAns.setQuestionLibrary(questionLibrary);
-                            questionAnsService.create(questionAns);
-                            if (i == radiocount) {
-                                questionLibrary.setAnsId(questionAns.getId());
+                    questionAnsService.delete(ans.getId());
+                }
+                if (0 == asd) {
+                    for (int i = 1; i <= otherDetailCount; i++) {
+                        QuestionAns questionAns = new QuestionAns();
+                        if (null != request.getParameter("ans" + i)) {
+                            if (!request.getParameter("ans" + i).equals("")) {
+                                String ans = request.getParameter("ans" + i);
+                                questionAns.setAns(ans);
+                                questionAns.setQuestionLibrary(questionLibrary);
+                                questionAnsService.create(questionAns);
+                                if (i == radiocount) {
+                                    questionLibrary.setAnsId(questionAns.getId());
+                                }
                             }
                         }
                     }
-                }
 //                List<QuestionAns> qaList = (List<QuestionAns>) questionAnsService.readByQLId(qlId);
 //                Set<?> foo = new HashSet<>(qaList);
 //                questionLibrary.setQuestionAnses(foo);
 
+                }
+                questionLibraryService.update(questionLibrary);
             }
-            questionLibraryService.update(questionLibrary);
+            mv = QuestionLibraryCreate(request, response);
+        } catch (Exception e) {
 
+            if (questionLibrary.getId() != null) {
+                questionLibrary.setMprEmployeeCategory(questionLibrary.getMprEmployeeCategory());
+            } else {
+                questionLibrary.setMprEmployeeCategory(new MprEmployeeCategory());
+            }
+            employeecategoryList(request);
+            mv.getModelMap().put("mprEmployeeCategory", mprEmployeeCategory);
+            mv.getModelMap().put("questionLibrary", questionLibrary);
+            mv.setViewName("QuestionLibrary/QuestionLibrarynewRecord");
+            request.setAttribute("failureMessage",
+                    "All field are Required.Please Enter Valid data");
         }
 
-        mv = QuestionLibraryCreate(request, response);
         return mv;
 
     }

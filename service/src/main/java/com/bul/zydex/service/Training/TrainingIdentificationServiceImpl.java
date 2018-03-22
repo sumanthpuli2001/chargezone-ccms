@@ -13,8 +13,8 @@ import java.util.List;
  *
  * @author Aman
  */
-public class TrainingIdentificationServiceImpl<T> extends GenericsServiceImpl<T> implements TrainingIdentificationService<T>{
-    
+public class TrainingIdentificationServiceImpl<T> extends GenericsServiceImpl<T> implements TrainingIdentificationService<T> {
+
     private TrainingIdentificationDAO<T> trainingIdentificationDAO;
 
     public TrainingIdentificationDAO<T> getTrainingIdentificationDAO() {
@@ -27,10 +27,44 @@ public class TrainingIdentificationServiceImpl<T> extends GenericsServiceImpl<T>
     }
 
     @Override
-    public List<?> gettrainingattendance(int id) {
-        return trainingIdentificationDAO.gettrainingattendance(id);
+    public List<?> readTrainingIdentificationList() {
+        return trainingIdentificationDAO.readTrainingIdentificationList();
+    }
+
+    @Override
+    public List<?> readTrainingList(String eventDate,int userid) {
+        return trainingIdentificationDAO.readTrainingList(eventDate,userid);
+    }
+
+    @Override
+    public List<?> readTraingFeedback() {
+        return trainingIdentificationDAO.readTraingFeedback();
     }
     
     
     
+    public List<?> gettrainingattendance(int id) {
+        return trainingIdentificationDAO.gettrainingattendance(id);
+    }
+
+    @Override
+    public List<?> getTrainerAttendance(int id) {
+        return trainingIdentificationDAO.getTrainerAttendance(id);
+    }
+
+    @Override
+    public Boolean checkExistance(int trainingId, int empId, int trainerId) {
+         return trainingIdentificationDAO.checkExistance(trainingId,empId,trainerId);
+    }
+
+    @Override
+    public List<?> ListeventDates(String eventDate, int userId) {
+        return trainingIdentificationDAO.ListeventDates(eventDate, userId);
+    }
+
+    @Override
+    public List<?> checkTraineeAvailableStatus(int trainingId, int empId) {
+        return trainingIdentificationDAO.checkTraineeAvailableStatus(trainingId, empId);
+    }
+
 }

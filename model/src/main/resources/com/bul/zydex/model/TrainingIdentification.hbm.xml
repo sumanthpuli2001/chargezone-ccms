@@ -22,6 +22,9 @@
         <property name="description" type="string">
             <column name="description" />
         </property>
+        <property name="feedbackStatus" type="java.lang.Integer">
+            <column name="feedback_status" />
+        </property>
     
     </class>
   

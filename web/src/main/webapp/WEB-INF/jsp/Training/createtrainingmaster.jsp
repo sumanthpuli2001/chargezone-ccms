@@ -13,6 +13,22 @@
         <title>Training Type Master </title>
 
     </head>
+    <script>
+        function checkBlankField() {
+            var flag = true;
+            if ($('#training').val() == '') {
+                document.getElementById('trainingError').innerHTML = '-It must not be empty or white space.';
+                flag = false;
+        }
+        return flag;
+    }
+    function trainerOnchangeFunction(idString) {
+        if (document.getElementById(idString).innerHTML != null) {
+            document.getElementById(idString).innerHTML = '';
+        }
+    }
+    </script>
+
     <div class="content-wrapper">
         <section class="content-header">
             <h1>Training Type Master</h1>
@@ -21,37 +37,37 @@
                 <li class="active">Training Type Master</li>
             </ol>
         </section>
-        <form:form class="form-horizontal" role="form1" action="trainingType.htm?act=Submittraningtype"  method="post" name='form' commandName="trainingType" onsubmit='return saveSubmit11();'>
+        <form:form class="form-horizontal" role="form1" action="trainingType.htm?act=Submittraningtype"  method="post" name='form' commandName="trainingType" onsubmit='return checkBlankField();'>
             <form:hidden path="id"></form:hidden>
             <form:hidden path="createdby"></form:hidden>
             <form:hidden path="createddate"></form:hidden>
-            <section class="content">
-                <div class="col-md-12">
-                    <div class="nav-tabs-custom">
-                        <div class="tab-content">
-                            <div class="box-body no-padding">
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <div class="col-sm-6"><span style="color: red;font-size: 12px;"></span>
+                <section class="content">
+                    <div class="col-md-12">
+                        <div class="nav-tabs-custom">
+                            <div class="tab-content">
+                                <div class="box-body no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="col-sm-6"><span style="color: red;font-size: 12px;"></span>
                                                     <label>Training Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:input path="training" id="training" class="form-control" placeholder="Training"></form:input>
-                                                        <form:errors path="training" cssClass="errorDiv"></form:errors>
-
-                                                    </div>
-                                                <div class="col-sm-6">
-                                                        <label>Status:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <fieldset>
-                                                            <!--                                                    <input type="radio" name="status" id="status" value="0" checked>Active&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                                <input type="radio" name="status" id="status" value="1">Inactive-->
-                                                        <form:radiobutton path="status" id="status" name="status"  value="0"/>Active&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <form:radiobutton path="status" id="status" name="status" value="1"/>Inactive
-                                                    </fieldset>
+                                                    <form:input path="training" id="training" class="form-control" placeholder="Training" onchange="trainerOnchangeFunction('trainingError');"></form:input>
+                                                    <form:errors path="training" cssClass="errorDiv"></form:errors>
+                                                     <span style="font-size: 14px; color: #dd4b39;" id="trainingError"></span>
                                                 </div>
-                                                
+                                                <div class="col-sm-6">
+                                                    <label>Status:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <fieldset>
+                                                        <!--                                                    <input type="radio" name="status" id="status" value="0" checked>Active&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                            <input type="radio" name="status" id="status" value="1">Inactive-->
+                                                    <form:radiobutton path="status" id="status" name="status" required="required"  value="0"/>Active&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <form:radiobutton path="status" id="status" name="status" required="required" value="1"/>Inactive
+                                                </fieldset>
+                                            </div>
+
                                         </div>
-                                       
-                                        
+
+
                                         <%--</c:if>--%>
                                         <div class="form-group">
                                             <div class=" col-sm-6 col-sm-offset-5">

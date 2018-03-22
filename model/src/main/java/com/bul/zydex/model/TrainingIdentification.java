@@ -16,17 +16,27 @@ public class TrainingIdentification {
     private TrainingMaster trainingMaster;
     private Integer status;
     private String description;
+    private Integer feedbackStatus;
     
    public TrainingIdentification(){
        
    } 
 
-    public TrainingIdentification(Integer id, EmployeeMaster employeeMaster, TrainingMaster trainingMaster, Integer status, String description) {
+    public TrainingIdentification(Integer id, EmployeeMaster employeeMaster, TrainingMaster trainingMaster, Integer status, String description, Integer feedbackStatus) {
         this.id = id;
         this.employeeMaster = employeeMaster;
         this.trainingMaster = trainingMaster;
         this.status = status;
         this.description = description;
+        this.feedbackStatus=feedbackStatus;
+    }
+
+    public Integer getFeedbackStatus() {
+        return feedbackStatus;
+    }
+
+    public void setFeedbackStatus(Integer feedbackStatus) {
+        this.feedbackStatus = feedbackStatus;
     }
 
     public Integer getId() {

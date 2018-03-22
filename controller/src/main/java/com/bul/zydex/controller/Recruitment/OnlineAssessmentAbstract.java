@@ -8,13 +8,21 @@ package com.bul.zydex.controller.Recruitment;
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateJobApplication;
+import com.bul.zydex.model.CandidateResultStatus;
 import com.bul.zydex.model.OnlineAssessment;
+import com.bul.zydex.model.QuestionAns;
+import com.bul.zydex.model.QuestionAnswerSubmit;
 import com.bul.zydex.model.QuestionDetails;
+import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.QuestionPaper;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
+import com.bul.zydex.service.QuestionAnswerSubmit.CandidateResultStatusService;
+import com.bul.zydex.service.QuestionAnswerSubmit.QuestionAnswerSubmitService;
 import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
 import com.bul.zydex.service.Recruitment.OnlineAssessmentService;
+import com.bul.zydex.service.questionlibrary.QuestionAnsService;
 import com.bul.zydex.service.questionlibrary.QuestionDetailsService;
+import com.bul.zydex.service.questionlibrary.QuestionLibraryService;
 import com.bul.zydex.service.questionlibrary.QuestionPaperService;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +44,14 @@ public class OnlineAssessmentAbstract extends CustomAbstract {
     protected CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService;
 
     protected CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService;
+
+    protected QuestionAnswerSubmitService<QuestionAnswerSubmit> questionAnswerSubmitService;
+
+    protected QuestionLibraryService<QuestionLibrary> questionLibraryService;
+
+    protected QuestionAnsService<QuestionAns> questionAnsService;
+
+    protected CandidateResultStatusService<CandidateResultStatus> candidateResultStatusService;
 
     public OnlineAssessmentService<OnlineAssessment> getOnlineAssessmentService() {
         return onlineAssessmentService;
@@ -76,6 +92,40 @@ public class OnlineAssessmentAbstract extends CustomAbstract {
     public void setCandidateJobApplyService(CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService) {
         this.candidateJobApplyService = candidateJobApplyService;
     }
+
+    public QuestionAnswerSubmitService<QuestionAnswerSubmit> getQuestionAnswerSubmitService() {
+        return questionAnswerSubmitService;
+    }
+
+    public void setQuestionAnswerSubmitService(QuestionAnswerSubmitService<QuestionAnswerSubmit> questionAnswerSubmitService) {
+        this.questionAnswerSubmitService = questionAnswerSubmitService;
+    }
+
+    public QuestionLibraryService<QuestionLibrary> getQuestionLibraryService() {
+        return questionLibraryService;
+    }
+
+    public void setQuestionLibraryService(QuestionLibraryService<QuestionLibrary> questionLibraryService) {
+        this.questionLibraryService = questionLibraryService;
+    }
+
+    public QuestionAnsService<QuestionAns> getQuestionAnsService() {
+        return questionAnsService;
+    }
+
+    public void setQuestionAnsService(QuestionAnsService<QuestionAns> questionAnsService) {
+        this.questionAnsService = questionAnsService;
+    }
+
+    public CandidateResultStatusService<CandidateResultStatus> getCandidateResultStatusService() {
+        return candidateResultStatusService;
+    }
+
+    public void setCandidateResultStatusService(CandidateResultStatusService<CandidateResultStatus> candidateResultStatusService) {
+        this.candidateResultStatusService = candidateResultStatusService;
+    }
+    
+    
 
     protected void questionList(HttpServletRequest request) {
         QuestionPaper questionPaper = new QuestionPaper();

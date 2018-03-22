@@ -1101,6 +1101,9 @@ public class VacancyController extends VacancyAbstract {
 
             questionAnswerSubmit.setQuestionAnsId(questionAns);// Question Anaswer Id set
             candidateJobApplication.setId(candidateJobapplicationid);
+            candidateJobApplication=candidateJobApplicationService.readById(candidateJobapplicationid);
+            candidateJobApplication.setStatus(4);// set 4 bz candidate submision
+            candidateJobApplicationService.update(candidateJobApplication);
             questionAnswerSubmit.setCandidateJobApplicationid(candidateJobApplication);/// candidate Apply job ID set 
             questionLibrary.setId(Integer.parseInt(ques));
             questionAnswerSubmit.setQuestionLibraryId(questionLibrary);
@@ -1108,7 +1111,11 @@ public class VacancyController extends VacancyAbstract {
 //             mv.setViewName("Vacancy/AssementOnline");
         }
         request.setAttribute("successMessage", "Information : The Data Submitted Successfully.");
-        mv = Login(request, response);
+        ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+        mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
+
+        mv.setViewName("Vacancy/ApplayLoginpage");
+//        return mv;
         return mv;
     }
 

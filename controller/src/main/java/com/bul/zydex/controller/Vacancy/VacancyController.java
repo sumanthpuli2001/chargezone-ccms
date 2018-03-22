@@ -1085,10 +1085,10 @@ public class VacancyController extends VacancyAbstract {
         for (int i = 0; i < doneId2.length; i++) {
             QuestionAnswerSubmit questionAnswerSubmit = new QuestionAnswerSubmit();
             QuestionAns questionAns = new QuestionAns();
-            String ans = null;
+
             QuestionLibrary questionLibrary = new QuestionLibrary();
             String ques = doneId2[i];
-            ans = doneId1[i];
+            String ans = doneId1[i];
             boolean parsable = true;
             try {
                 Integer.parseInt(ans);
@@ -1166,7 +1166,7 @@ public class VacancyController extends VacancyAbstract {
         mv.setViewName("Vacancy/vacancyList");
         return mv;
     }
-    
+
     public ModelAndView clickSubmitQuestionAnswerExpired(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
@@ -1203,6 +1203,7 @@ public class VacancyController extends VacancyAbstract {
         mv.setViewName("Vacancy/ShowVacancyList");
         return mv;
     }
+
     public ModelAndView logoutCandidateLogout(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 

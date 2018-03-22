@@ -37,7 +37,49 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         return mv;
     }
 
+    public ModelAndView candidateF2FReqListForInterviewer(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        List<?> f2flist = new ArrayList<>();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+
+        f2flist = candidateF2FApprovalService.readByEmpId(employeeMaster.getId());
+
+        request.setAttribute("F2FInterviewList", f2flist);
+
+        mv.setViewName("CandidateFtoF/F2FReqForApprovalResult");
+        return mv;
+    }
+
     public ModelAndView openInterviewReviewPage(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        String applicationId = request.getParameter("id");
+        CandidateF2FRequest candidateF2FRequest = new CandidateF2FRequest();
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
+        candidateApplyJob = candidateJobApplyService.readById(candidateF2FRequest.getCandidateApplyJob().getId());
+        VacancyMaster vm = vacancyMasterService.readById(candidateF2FRequest.getVacancyMaster().getId());
+        List<CandidateF2FApproval> committeedetaillist = new ArrayList<>();
+        List<CandidateF2FApproval> comitteeList = (List<CandidateF2FApproval>) candidateF2FApprovalService.readByReqId(candidateF2FRequest.getId());
+        for (CandidateF2FApproval cffa : comitteeList) {
+            EmployeeMaster em = employeeMasterService.readById(cffa.getEmployeeMaster().getId());
+            cffa.setEmployeeMaster(em);
+            committeedetaillist.add(cffa);
+
+        }
+
+        candidateF2FRequest.setCandidateApplyJob(candidateApplyJob);
+        candidateF2FRequest.setVacancyMaster(vm);
+        request.setAttribute("comitteeList", committeedetaillist);
+        mv.getModelMap().put("candidateF2FRequest", candidateF2FRequest);
+
+        mv.setViewName("CandidateFtoF/F2FInterviewReview");
+        return mv;
+    }
+    public ModelAndView openF2FApproverReviewPage(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
@@ -75,14 +117,12 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         if (btnSubmit.equals("approve")) {
         }
         if (btnSubmit.equals("reject")) {
-            
+
         }
         if (btnSubmit.equals("recycle")) {
-            
-        }
-       
 
-      
+        }
+
         return mv;
     }
 

@@ -1166,4 +1166,64 @@ public class VacancyController extends VacancyAbstract {
         mv.setViewName("Vacancy/vacancyList");
         return mv;
     }
+    
+    public ModelAndView clickSubmitQuestionAnswerExpired(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+
+        String onlineAssmentID = request.getParameter("onlineAssmentID");
+        onlineAssessment = onlineAssessmentService.readById(Integer.parseInt(onlineAssmentID));
+
+        onlineAssessment.setStartTimeNow(null);
+        onlineAssessmentService.update(onlineAssessment);
+        mv = Login(request, response);
+
+        return mv;
+    }
+
+    public ModelAndView backToHomeVacancyListCandidate(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+
+        String onlineAssmentID = request.getParameter("onlineAssmentID");
+        onlineAssessment = onlineAssessmentService.readById(Integer.parseInt(onlineAssmentID));
+
+        onlineAssessment.setStartTimeNow(null);
+        onlineAssessmentService.update(onlineAssessment);
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        mv.getModelMap().put("list", vacancylist);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.setViewName("Vacancy/ShowVacancyList");
+        return mv;
+    }
+    public ModelAndView logoutCandidateLogout(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+
+        String onlineAssmentID = request.getParameter("onlineAssmentID");
+        onlineAssessment = onlineAssessmentService.readById(Integer.parseInt(onlineAssmentID));
+
+        onlineAssessment.setStartTimeNow(null);
+        onlineAssessmentService.update(onlineAssessment);
+        HttpSession session = request.getSession(false);
+        ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
+        session.invalidate();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        mv.getModelMap().put("list", vacancylist);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.setViewName("Vacancy/ShowVacancyList");
+        return mv;
+
+    }
 }

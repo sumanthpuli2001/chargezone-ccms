@@ -113,22 +113,22 @@
             document.getElementById('startDate').value;
         }
     }
-    function dateCheck1(endDateString) {
-        alert(endDateString);
-        var startDateString = $('#startDate').val();
-        var a = startDateString.split("/");
-        var startDate = new Date(a[2], a[1] - 1, a[0]);
-
-        var b = endDateString.split("/");
-        var endDate = new Date(b[2], b[1] - 1, b[0]);
-        var flag = endDate.toDateString() >= startDate.toDateString();
-        alert(endDate.toDateString());
-        alert(startDate.toDateString());
-        if (!flag) {
-            document.getElementById('endDate').value = '';
-            alert("End Date Not Less than Start Date.");
-        }
-    }
+//    function dateCheck1(endDateString) {
+//        alert(endDateString);
+//        var startDateString = $('#startDate').val();
+//        var a = startDateString.split("/");
+//        var startDate = new Date(a[2], a[1] - 1, a[0]);
+//
+//        var b = endDateString.split("/");
+//        var endDate = new Date(b[2], b[1] - 1, b[0]);
+//        var flag = endDate.toDateString() >= startDate.toDateString();
+//        alert(endDate.toDateString());
+//        alert(startDate.toDateString());
+//        if (!flag) {
+//            document.getElementById('endDate').value = '';
+//            alert("End Date Not Less than Start Date.");
+//        }
+//    }
 </script>
 
 
@@ -308,12 +308,12 @@
                                         <form:radiobutton path="companySponsor" value="0" required="required"/>No
                                         <%--<form:errors path="companySponsor" cssClass="errorDiv"></form:errors>--%>
                                     </div>
-                                    <div class="col-sm-5">
+<!--                                    <div class="col-sm-5">
                                         <label class="control-label">Status<span style="color: red;font-size: 12px;">*</span></label>
                                         <form:radiobutton path="status" value="1" required="required"/>Active
                                         <form:radiobutton path="status" value="0" required="required"/>Inactive
                                         <%--<form:errors path="status" cssClass="errorDiv"></form:errors>--%>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-6 col-sm-offset-5">

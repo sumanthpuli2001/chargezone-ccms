@@ -14,26 +14,30 @@
     <%--<%@include file="/WEB-INF/jsp/Common/Header.jsp"%>--%>
     <%--<%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>--%>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Trainings Details</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">-->
+<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
+<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">-->
+<link rel="shortcut icon" href="StorageYard/Images/Icon/favicon.ico" type="image/x-icon">
+<link rel="icon" href="StorageYard/Images/Icon/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="StorageYard/CSS/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="StorageYard/CSS/bootstrap/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="StorageYard/Plugins/fullcalendar/fullcalendar.min.css">
+<link rel="stylesheet" href="StorageYard/Plugins/fullcalendar/fullcalendar.print.css" media="print">
+<link rel="stylesheet" href="StorageYard/Plugins/datatables/jquery.dataTables.min.css">
+<link rel="stylesheet" href="StorageYard/Plugins/iCheck/square/blue.css">
+ <!--Theme style--> 
+<!--<link rel="stylesheet" href="StorageYard/CSS/bootstrap/vms.css">-->
+<!-- Employyee Search css -->
+<link rel="stylesheet" href="StorageYard/CSS/bootstrap/token-input.css">
+<link rel="stylesheet" href="StorageYard/CSS/bootstrap/token-input-fb.css">
+<link rel="stylesheet" href="StorageYard/CSS/bootstrap/_all-skins.min.css">
+<script type="text/javascript" src="StorageYard/Plugins/jQuery/jQuery-2.1.4.min.js"></script>
 
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-        <link rel="stylesheet" href="StorageYard/CSS/bootstrap/bootstrap.min.css">
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <!--<link rel="stylesheet" href="StorageYard/CSS/bootstrap/font-awesome.min.css">-->
-        <link rel="stylesheet" href="StorageYard/CSS/login/form-elements.css">
-        <link rel="stylesheet" href="StorageYard/CSS/login/style.css">
-
-        <link rel="shortcut icon" href="../../dist/img/ico/logo.png">
-        <!--<link rel="shortcut icon" href="../../bootstrap/ico/favicon.png">-->
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="StorageYard/Images/login/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="StorageYard/Images/login/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="StorageYard/Images/login/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="StorageYard/Images/login/apple-touch-icon-57-precomposed.png">
+<link rel="stylesheet" href="StorageYard/CSS/bootstrap-datetimepicker.css">
+<script type="text/javascript" src="StorageYard/JS/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 
         <style>
             #containers {
@@ -55,6 +59,7 @@
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Training Details</li>
             </ol>
+            
         </section>
         <c:if test="${!empty successMessage}">
             <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
@@ -65,19 +70,26 @@
         <!-- Main content -->
         <form:form action="trainerLogin.htm?act=SubmitAttendanceClick" method="post" commandName="trainerMaster"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
+            
+            <br>
             <input type="hidden" id="trainingMasterId" name="trainingMasterId" value="${trainingMasterId}">
             <input type="hidden" id="eventdate" name="eventdate" value="${eventdate}">
             <!--<input type="hidden" id="allTrainingsId" name="allTrainingsId" value="${list[0]}">-->
             <section class="content">
+                <input type="button" class="btn btn-primary" value="Back" style="float: left" onclick="window.location='trainerLogin.htm?act=showcalendar'" />
+                <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location='trainerLogin.htm?act=showTrainingFeedbackList'"><i class="fa fa-pencil-square-o"></i>Show Feedback</button>
                 <div class="row">
                     <div class="col-md-12">
+                        
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
+                            
+                            
                             <div class="tab-content">
                                 <!--<button type="button" class="btn btn-primary" title="" style="float: right; width: 120px;" onclick="window.history.back();"></i>&nbsp;&nbsp;BACK</button>-->
-                                <input type="button" class="btn btn-primary" value="Back" style="float: left" onclick="window.location='trainerLogin.htm?act=showcalendar'" />
+                                ${feedbackStatus}
                                 <c:if test="${feedbackStatus eq true}">
-                                <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location='trainerLogin.htm?act=sendFeedback&id=${trainingMasterId}&eventdate=${eventdate}'"><i class="fa fa-pencil-square-o"></i>Feedback</button>
+                                <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location='trainerLogin.htm?act=sendFeedback&id=${trainingMasterId}&eventdate=${eventdate}'"><i class="fa fa-pencil-square-o"></i>Get Feedback</button>
                                 </c:if>
                                 
                                 <div class="box-header">
@@ -151,10 +163,11 @@
                                                             
                                                 </table>
                                                 <br>
-                                                 <c:if test="${shosts eq false}">
+                                                 
+                                            </div>
+                                            <c:if test="${shosts eq false}">
                                                                 <button type="submit" class="btn btn-primary" style="float: left" title="" style="width: 100px;"><!--<i class="fa fa-"></i>-->Submit</button>
                                                             </c:if>
-                                            </div>
                                         </div>
 
                                     </div><!-- /.tab-pane -->

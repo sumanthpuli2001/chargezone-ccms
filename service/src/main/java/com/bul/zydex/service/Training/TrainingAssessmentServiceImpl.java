@@ -8,6 +8,7 @@ package com.bul.zydex.service.Training;
 import com.bul.zydex.dao.Training.TrainingAssessmentDAO;
 import com.bul.zydex.model.TrainingAssessment;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.List;
 
 /**
  *
@@ -25,6 +26,11 @@ public class TrainingAssessmentServiceImpl<T> extends GenericsServiceImpl<T> imp
         this.trainingAssessmentDAO = trainingAssessmentDAO;
         setGenericsDAO(trainingAssessmentDAO);
        
+    }
+
+    @Override
+    public List<?> readTrainingAssementList(int trainerId) {
+      return trainingAssessmentDAO.readTrainingAssementList(trainerId);
     }
     
     

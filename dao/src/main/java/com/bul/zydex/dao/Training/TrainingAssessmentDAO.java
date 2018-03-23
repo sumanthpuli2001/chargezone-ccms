@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.Training;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.List;
 
 /**
  *
@@ -13,4 +14,5 @@ import com.bul.zydex.dao.GenericsDAO;
  */
 public interface TrainingAssessmentDAO<T> extends GenericsDAO<T>{
     
+    public List<?> readTrainingAssementList(int trainerId);
 }

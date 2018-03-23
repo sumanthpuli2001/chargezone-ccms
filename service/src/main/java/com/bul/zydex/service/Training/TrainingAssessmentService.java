@@ -15,4 +15,6 @@ import java.util.List;
 public interface TrainingAssessmentService<T> extends GenericsService<T> {
 
     public List<?> readOnlineAssementCandidateTraningList(int empid);
+
+    public List<?> readTrainingAssementList(int trainerId);
 }

@@ -11,8 +11,11 @@ import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.OnlineAssessment;
+import com.bul.zydex.model.RecruitmentMaster;
+import com.bul.zydex.model.RecruitmentMppApproval;
 import com.bul.zydex.model.VacancyMaster;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -141,4 +144,5 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.setViewName("Recruitment/CandidateRequestList");
         return mv;
     }
+
 }

@@ -147,28 +147,30 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Certificate Attach:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.certificateAttach}</span>
+                                                    <span data="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}" type="application/pdf" width="500" height="300">
+                                                        <a href="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}">${candidateApplyJob.certificateAttach}</a>
+                                                    </span>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <div class="col-md-12" style="text-align: right">
-                                                    <c:if test="${candidateJobApplication.status != 2}">
+                                                    <c:if test="${candidateJobApplication.status eq 1}">
                                                         <button type="button" class="btn btn-primary" onclick="shortlisted(${candidateJobApplication.id},${candidateApplyJob.id});">Shortlisted</button>
                                                     </c:if>
-                                                    <%--<c:if test="${candidateJobApplication.status eq 11}">--%>
+                                                    <c:if test="${candidateJobApplication.status eq 11}">
                                                     <button type="button" class="btn btn-primary" onclick="induction(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; Induction</button>
-                                                    <%--</c:if>--%>
-                                                    <%--<c:if--%>
-                                                        <!--test="${candidateJobApplication.status eq 2}">-->
+                                                    </c:if>
+                                                    <c:if
+                                                        test="${candidateJobApplication.status eq 2}">
                                                     <button type="button" class="btn btn-primary" onclick="sendToF2F(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; F To F</button>
-                                                    <%--</c:if>--%>    
-                                                    <%--<c:if test="${candidateJobApplication.status eq 2}">--%>
+                                                    </c:if>    
+                                                    <c:if test="${candidateJobApplication.status eq 2}">
                                                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>
-                                                    <%--</c:if>--%>
-                                                    <%--<c:if test="${candidateJobApplication.status eq 5}">--%>
+                                                    </c:if>
+                                                    <c:if test="${candidateJobApplication.status eq 4}">
                                                     <button type="button" class="btn btn-primary" id="btnType1" onclick="goToAns(${candidateJobApplication.id},${candidateApplyJob.id})" name="btnType" value="AssessMent" style="width: 100px" >Ans</button>
-                                                    <%--</c:if>--%>
+                                                    </c:if>
                                                 </div>
 
 

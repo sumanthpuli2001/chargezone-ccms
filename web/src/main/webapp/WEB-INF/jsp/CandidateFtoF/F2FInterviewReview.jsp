@@ -97,7 +97,7 @@
                                     <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
                                 </c:if>
                                 <form:form class="form-horizontal" method="post"
-                                           commandName="candidateF2FRequest" action="candidateF2FRequest.htm?act=hrApprovalSubmit" onsubmit="return saveSubmit()" >
+                                           commandName="candidateF2FRequest" action="candidateF2FApproval.htm?act=approvalFaceToFaceInvitation" onsubmit="return saveSubmit()" >
                                     <input type="hidden" id="applicationId" name="applicationId" value="${applicationId}">   
                                     <div class="form-group">
                                         <div class="col-sm-6">
@@ -142,38 +142,34 @@
                                         <div class="col-sm-6">
                                             <label>HR Comment:</label> &nbsp;&nbsp;&nbsp;
                                             <textarea class="form-control"
-                                                      id="hrRemark" name="hrRemark" ></textarea>
+                                                      id="message" name="message" ></textarea>
                                         </div>
 
 
                                         <div class="col-sm-6">
                                             <label>Interviewer Comment:</label> &nbsp;&nbsp;&nbsp;
                                             <textarea class="form-control"
-                                                    id="interviewerRemark" name="interviewerRemark"  ></textarea>
+                                                      id="interviewerRemark" name="interviewerRemark"  ></textarea>
                                         </div>
 
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-4" style="text-align: left">
-                                            <button type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-success" style="width: 100px" data-original-title="" title="" value="approve">APPROVE</button>
+                                            <%--<c:if test="${recruitmentMaster.mppStatus == 1 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 0}">--%>
+                                            <input type="submit" class="btn btn-success"  id="btnType1" name="btnType" value="APPROVE" style="width: 100px" ></input>
+                                            <%--</c:if>--%>
                                         </div>
                                         <div class="col-sm-4" style="text-align: center">
-                                            <button type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-warning" style="width: 100px" data-original-title="" title="" value="rework">ON HOLD</button>
+                                            <%--<c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 3 || recruitmentMaster.mppStatus == 1}">--%>
+                                            <input type="submit" class="btn btn-warning" id="btnType2" name="btnType"  value="ON HOLD"  style="width: 100px"></input>
+                                            <%--</c:if>--%>
                                         </div>
                                         <div class="col-sm-4" style="text-align: right">
-                                            <button type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-danger" style="width: 100px" data-original-title="" title="" value="reject">REJECT</button>
+                                            <%--<c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 3}">--%>
+                                            <input type="submit" class="btn btn-danger" id="btnType2" name="btnType"  value="REJECT" style="width: 100px"></input>
+                                            <%--</c:if>--%>
                                         </div>
                                     </div>
-                                    <!--                                    <div class="form-group">
-                                    <%--<c:forEach  var="test" items="${comitteeList}">--%>
-                                        <div class="col-sm-8">
-
-                                            <span>${test.employeeMaster.employeeName}</span>
-                                        </div>
-                                    <%--</c:forEach>--%>
-                                </div>-->
-
-
                                 </form:form>
                             </div><!-- /.tab-pane -->
                         </div><!-- /.tab-content -->

@@ -16,6 +16,7 @@ import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
 import com.bul.zydex.model.MprMaster;
+import com.bul.zydex.model.OnlineAssessment;
 import com.bul.zydex.model.QuestionAns;
 import com.bul.zydex.model.QuestionAnswerSubmit;
 import com.bul.zydex.model.QuestionDetails;
@@ -791,6 +792,7 @@ public class VacancyController extends VacancyAbstract {
                         finalList.add(paperName);
                         finalList.add(candidateApplyJobid);
                         listOfFinalList.add(finalList);
+
                     }
                 }
 
@@ -985,8 +987,27 @@ public class VacancyController extends VacancyAbstract {
 
         ModelAndView mv = new ModelAndView();
         ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
         String id = request.getParameter("id");
         String candidateID = request.getParameter("candidateID");
+        String onlineAssmentID = request.getParameter("onlineAssment");
+        SimpleDateFormat sdfAb = new SimpleDateFormat("hh:mm:ss");
+        Date cDate1 = new Date();
+        String time = sdfAb.format(cDate1);
+        onlineAssessment = onlineAssessmentService.readById(Integer.parseInt(onlineAssmentID));
+//        onlineAssessment.setId(Integer.parseInt(onlineAssmentID));
+        String StartTime1 = onlineAssessment.getStartTimeNow();
+        if (null == StartTime1 || "" == StartTime1 || StartTime1.isEmpty()) {
+            onlineAssessment.setStartTimeNow(time);
+            Integer attempt = onlineAssessment.getNoOfAttampt();
+            Integer NoofAttemptleft = attempt - 1;
+            onlineAssessment.setNoOfAttampt(NoofAttemptleft);
+            onlineAssessmentService.update(onlineAssessment);
+        }
+
+        String Duration = onlineAssessment.getDuration();
+        String StartTime = onlineAssessment.getStartTimeNow();
+//        String Duration = onlineAssessment.getDuration();
         List listOfFinalList = new ArrayList();
         List<?> list1 = questionDetailsService.takeTestOnlineAssementCandidate(Integer.parseInt(id));
         for (Object o1 : list1) {
@@ -1017,6 +1038,9 @@ public class VacancyController extends VacancyAbstract {
 //        
         mv.getModelMap().put("list2", listOfFinalList);
         mv.getModelMap().put("candidateID", candidateID);
+        mv.getModelMap().put("Duration", Duration);
+        mv.getModelMap().put("StartTime", StartTime);
+        mv.getModelMap().put("onlineAssmentID", onlineAssmentID);
         mv.setViewName("Vacancy/OnlineTestQuestionPaper");
 
         return mv;
@@ -1061,6 +1085,7 @@ public class VacancyController extends VacancyAbstract {
         for (int i = 0; i < doneId2.length; i++) {
             QuestionAnswerSubmit questionAnswerSubmit = new QuestionAnswerSubmit();
             QuestionAns questionAns = new QuestionAns();
+
             QuestionLibrary questionLibrary = new QuestionLibrary();
             String ques = doneId2[i];
             String ans = doneId1[i];
@@ -1083,7 +1108,7 @@ public class VacancyController extends VacancyAbstract {
 //             mv.setViewName("Vacancy/AssementOnline");
         }
         request.setAttribute("successMessage", "Information : The Data Submitted Successfully.");
-        mv.setViewName("Vacancy/OnlineTestQuestionPaper");
+        mv = Login(request, response);
         return mv;
     }
 
@@ -1140,5 +1165,66 @@ public class VacancyController extends VacancyAbstract {
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
         mv.setViewName("Vacancy/vacancyList");
         return mv;
+    }
+
+    public ModelAndView clickSubmitQuestionAnswerExpired(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+
+        String onlineAssmentID = request.getParameter("onlineAssmentID");
+        onlineAssessment = onlineAssessmentService.readById(Integer.parseInt(onlineAssmentID));
+
+        onlineAssessment.setStartTimeNow(null);
+        onlineAssessmentService.update(onlineAssessment);
+        mv = Login(request, response);
+
+        return mv;
+    }
+
+    public ModelAndView backToHomeVacancyListCandidate(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+
+        String onlineAssmentID = request.getParameter("onlineAssmentID");
+        onlineAssessment = onlineAssessmentService.readById(Integer.parseInt(onlineAssmentID));
+
+        onlineAssessment.setStartTimeNow(null);
+        onlineAssessmentService.update(onlineAssessment);
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        mv.getModelMap().put("list", vacancylist);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.setViewName("Vacancy/ShowVacancyList");
+        return mv;
+    }
+
+    public ModelAndView logoutCandidateLogout(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+
+        String onlineAssmentID = request.getParameter("onlineAssmentID");
+        onlineAssessment = onlineAssessmentService.readById(Integer.parseInt(onlineAssmentID));
+
+        onlineAssessment.setStartTimeNow(null);
+        onlineAssessmentService.update(onlineAssessment);
+        HttpSession session = request.getSession(false);
+        ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
+        session.invalidate();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        mv.getModelMap().put("list", vacancylist);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.setViewName("Vacancy/ShowVacancyList");
+        return mv;
+
     }
 }

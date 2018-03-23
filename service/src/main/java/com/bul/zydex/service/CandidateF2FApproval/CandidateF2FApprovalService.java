@@ -15,4 +15,6 @@ import java.util.List;
  */
 public interface CandidateF2FApprovalService<T> extends GenericsService<T>{
        public List<?> readByReqId(int id);
+       
+        public List<?> readByEmpId(int empid);
 }

@@ -144,5 +144,28 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.setViewName("Recruitment/CandidateRequestList");
         return mv;
     }
+    
+    public ModelAndView reject(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
+        String applicationId = request.getParameter("id");
+        CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
+
+        cja.setStatus(3);
+        candidateJobApplicationService.update(cja);
+
+        List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
+
+        mv.getModelMap().put("list", candidateJobList);
+        questionList(request);
+        mv.getModelMap().put("onlineAssessment", onlineAssessment);
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        mv.setViewName("Recruitment/CandidateRequestList");
+        return mv;
+    }
 
 }

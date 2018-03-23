@@ -158,7 +158,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             cja.setStatus(9);
             candidateJobApplicationService.update(cja);
             request.setAttribute("successMessage",
-                    "Information : The Request is Approved successfully.");
+                    "Information : The Request is Hold successfully.");
         }
         if (btnType.equals("REJECT")) {
 
@@ -173,7 +173,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             cja.setStatus(10);
             candidateJobApplicationService.update(cja);
             request.setAttribute("successMessage",
-                    "Information : The Request is Approved successfully.");
+                    "Information : The Request is Rejected successfully.");
 
         }
         List<?> f2flist = new ArrayList<>();

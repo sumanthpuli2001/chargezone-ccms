@@ -17,5 +17,7 @@ public interface VacancyMasterService<T> extends GenericsService<T>{
    public List<?> fetchVacancyDetail();
    
    public List<?> fetchCreatedVacancy(int empId);
+   
+    public List<?> fetchVacancyBydate(String date);
     
 }

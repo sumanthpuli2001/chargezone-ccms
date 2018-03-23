@@ -108,7 +108,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         request.setAttribute("applicationId", applicationId);
         mv.getModelMap().put("candidateF2FRequest", candidateF2FRequest);
 
-        mv.setViewName("CandidateFtoF/F2FInterviewReview");
+        mv.setViewName("CandidateFtoF/F2FReqApproverReview");
         return mv;
     }
 
@@ -165,7 +165,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             candidateF2FRequest.setHrEmpId(employeeMaster.getId());
             candidateF2FRequest.setHrName(employeeMaster.getEmployeeName());
             candidateF2FRequestService.update(candidateF2FRequest);
-              
+
             ///////reject
             cja.setStatus(10);
             candidateJobApplicationService.update(cja);
@@ -177,6 +177,36 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         f2flist = candidateF2FRequestService.interviewReqDetailread();
         request.setAttribute("F2FInterviewList", f2flist);
         mv.setViewName("CandidateFtoF/F2FInterviewReviewResult");
+        return mv;
+    }
+
+    public ModelAndView submitByApprover(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        CandidateF2FRequest candidateF2FRequest = new CandidateF2FRequest();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        bind(request, candidateF2FRequest);
+        String btnType = request.getParameter("btnType");
+        String applicationId = request.getParameter("applicationId");
+        String message = request.getParameter("interviewerRemark");
+
+        candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
+        CandidateJobApplication cja = candidateJobApplicationService.readById(candidateF2FRequest.getCandidateJobApplication().getId());
+
+        CandidateF2FApproval candidateF2FApproval = candidateF2FApprovalService.readByEmpIdAndReqId(employeeMaster.getId(), candidateF2FRequest.getId());
+
+        candidateF2FApproval.setComment(message);
+        candidateF2FApprovalService.update(candidateF2FApproval);
+
+        candidateF2FRequest.setStatus(1);
+        candidateF2FRequest.setUserStatus(1);
+        candidateF2FRequestService.update(candidateF2FRequest);
+
+        List<?> f2flist = new ArrayList<>();
+        f2flist = candidateF2FApprovalService.readByEmpId(employeeMaster.getId());
+        request.setAttribute("F2FInterviewList", f2flist);
+        mv.setViewName("CandidateFtoF/F2FReqForApprovalResult");
         return mv;
     }
 

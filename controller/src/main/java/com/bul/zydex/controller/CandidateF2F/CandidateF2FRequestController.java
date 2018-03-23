@@ -95,8 +95,8 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
 
         otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
         for (int i = 0; i <= otherDetailCount; i++) {
-            if (null != request.getParameter("policyId" + i) && null != request.getParameter("policyNumber" + i)) {
-                if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("policyNumber" + i).equals("")) {
+            if (null != request.getParameter("policyId" + i)) {
+                if (!request.getParameter("policyId" + i).equals("")) {
                     int policyId = Integer.parseInt(request.getParameter("policyId" + i));
                     employeeMaster = employeeMasterService.readById(policyId);
 

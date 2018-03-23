@@ -147,7 +147,9 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Certificate Attach:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.certificateAttach}</span>
+                                                    <span data="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}" type="application/pdf" width="500" height="300">
+                                                        <a href="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}">${candidateApplyJob.certificateAttach}</a>
+                                                    </span>
                                                 </div>
                                             </div>
 

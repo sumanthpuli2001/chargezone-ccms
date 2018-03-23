@@ -598,4 +598,13 @@
     <bean id="candidateResultStatusService1" class="com.bul.zydex.service.QuestionAnswerSubmit.CandidateResultStatusServiceImpl">
         <property name="candidateResultStatusDAO" ref="candidateResultStatusDAO1" />
     </bean>
+    <bean id="trainingAssessmentService1" class="com.bul.zydex.service.Training.TrainingAssessmentServiceImpl">
+        <property name="trainingAssessmentDAO" ref="trainingAssessmentDAO1" />
+    </bean>
+    <bean id="trainingQuestionAnswerSubmitService1" class="com.bul.zydex.service.Training.TrainingQuestionAnswerSubmitServiceImpl">
+        <property name="trainingQuestionAnswerSubmitDAO" ref="trainingQuestionAnswerSubmitDAO1" />
+    </bean>
+    <bean id="trainingResultStatusService1" class="com.bul.zydex.service.Training.TrainingResultStatusServiceImpl">
+        <property name="trainingResultStatusDAO" ref="trainingResultStatusDAO1" />
+    </bean>
 </beans>

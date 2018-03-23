@@ -43,11 +43,17 @@
         <property name="dateOfInterview" type="string">
             <column name="date_Of_Interview" />
         </property>
-         <many-to-one name="vacancyMaster" class="com.bul.zydex.model.VacancyMaster" fetch="select">
+        <many-to-one name="vacancyMaster" class="com.bul.zydex.model.VacancyMaster" fetch="select">
             <column name="vacancy_master_id" />
         </many-to-one>
-         <many-to-one name="candidateApplyJob" class="com.bul.zydex.model.CandidateApplyJob" fetch="select">
+        <many-to-one name="candidateApplyJob" class="com.bul.zydex.model.CandidateApplyJob" fetch="select">
             <column name="candidate_job_apply_id" />
         </many-to-one>
+        <property name="hrEmpId" type="java.lang.Integer">
+            <column name="hr_emp_id" />
+        </property>
+        <property name="hrName" type="string">
+            <column name="hr_name" />
+        </property>
     </class>
 </hibernate-mapping>

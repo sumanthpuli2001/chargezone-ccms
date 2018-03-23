@@ -26,6 +26,7 @@ public class OnlineAssessment implements java.io.Serializable {
      private String createdDate;
      private Integer updatedBy;
      private String udatedDate;
+     private String  startTimeNow;
 
     public OnlineAssessment() {
     }
@@ -35,7 +36,7 @@ public class OnlineAssessment implements java.io.Serializable {
         this.candidateJobApplication = candidateJobApplication;
         this.questionPaper = questionPaper;
     }
-    public OnlineAssessment(CandidateApplyJob candidateApplyJob, QuestionPaper questionPaper, Double passingPercentage, String validityFrom, String validityTo, String duration, Integer noOfAttampt, Integer noOfQue, Double totalMarks, Integer createdBy, String createdDate, Integer updatedBy, String udatedDate) {
+    public OnlineAssessment(CandidateApplyJob candidateApplyJob, QuestionPaper questionPaper, Double passingPercentage, String validityFrom, String validityTo, String duration, Integer noOfAttampt, Integer noOfQue, Double totalMarks, Integer createdBy, String createdDate, Integer updatedBy, String udatedDate,String startTimeNow) {
        this.candidateJobApplication = candidateJobApplication;
        this.questionPaper = questionPaper;
        this.passingPercentage = passingPercentage;
@@ -49,6 +50,7 @@ public class OnlineAssessment implements java.io.Serializable {
        this.createdDate = createdDate;
        this.updatedBy = updatedBy;
        this.udatedDate = udatedDate;
+       this.startTimeNow = startTimeNow;
     }
 
     public Integer getId() {
@@ -163,5 +165,14 @@ public class OnlineAssessment implements java.io.Serializable {
     public void setUdatedDate(String udatedDate) {
         this.udatedDate = udatedDate;
     }
+
+    public String getStartTimeNow() {
+        return startTimeNow;
+    }
+
+    public void setStartTimeNow(String startTimeNow) {
+        this.startTimeNow = startTimeNow;
+    }
+    
 
 }

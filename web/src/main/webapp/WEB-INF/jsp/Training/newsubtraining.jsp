@@ -35,7 +35,7 @@
 </head>
 <div class="content-wrapper">
     <section class="content-header">
-        <h1>Training Sub Type Master</h1>
+        <h1>Training Type Master</h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Training Type Master</li>
@@ -77,8 +77,8 @@
                                                                     <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
                                                                     </c:if>
                                                                 <!--<th>user id</th>-->
-                                                                <th style="width: 50px;">Training Sub Type</th>
-                                                                <th style="width: 50px;">Training Type</th>
+                                                                <th style="width: 50px;">Thought</th>
+                                                                <th style="width: 50px;">Date</th>
                                                                     <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <th style="width: 50px;">Action</th>
                                                                     <%--</c:if>--%>

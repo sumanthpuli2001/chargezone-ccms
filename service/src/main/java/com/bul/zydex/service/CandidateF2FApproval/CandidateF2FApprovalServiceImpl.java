@@ -6,6 +6,7 @@
 package com.bul.zydex.service.CandidateF2FApproval;
 
 import com.bul.zydex.dao.CandidateF2FApproval.CandidateF2FApprovalDAO;
+import com.bul.zydex.model.CandidateF2FApproval;
 import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.service.GenericsServiceImpl;
 import java.util.List;
@@ -30,6 +31,21 @@ public class CandidateF2FApprovalServiceImpl<T> extends GenericsServiceImpl<T> i
     @Override
     public List<?> readByReqId(int id) {
         return  candidateF2FApprovalDAO.readByReqId(id);
+    }
+
+    @Override
+    public List<?> readByEmpId(int empid) {
+         return  candidateF2FApprovalDAO.readByEmpId(empid);
+    }
+
+    @Override
+    public CandidateF2FApproval readByEmpIdAndReqId(int empid, int ReqId) {
+         return  candidateF2FApprovalDAO.readByEmpIdAndReqId(empid,ReqId);
+    }
+
+    @Override
+    public List<?> readEmployeeCommentByReqId(int id) {
+          return  candidateF2FApprovalDAO.readEmployeeCommentByReqId(id);
     }
 
     

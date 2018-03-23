@@ -32,4 +32,48 @@ public class CandidateF2FApprovalDAOImpl<T> extends GenericsDAOImpl<T> implement
 
     }
 
+    @Override
+    public List<?> readByEmpId(int empid) {
+
+        String query = " SELECT b.id,c.name as condidateName,d.name as vacancyName,b.dateOfInterview,"
+                + " b.status "
+                + " FROM CandidateF2FApproval a "
+                + " Left join a.candidateF2FRequest b "
+                + " LEFT JOIN b.candidateApplyJob c "
+                + " LEFT JOIN b.vacancyMaster d"
+                + " WHERE a.employeeMaster.id =" + empid;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public CandidateF2FApproval readByEmpIdAndReqId(int empid, int ReqId) {
+        CandidateF2FApproval candidateF2FApproval = new CandidateF2FApproval();
+        String query = " SELECT a"
+                + " FROM CandidateF2FApproval a "
+                + " WHERE a.candidateF2FRequest.id =" + ReqId
+                + " AND a.employeeMaster.id =" + empid;
+
+        List<?> list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            candidateF2FApproval = (CandidateF2FApproval) list.get(0);
+        } else {
+            candidateF2FApproval = null;
+        }
+        return candidateF2FApproval;
+    }
+
+    @Override
+    public List<?> readEmployeeCommentByReqId(int id) {
+        String query = " SELECT a.id,a.Comment,b.employeeName "
+                + " FROM CandidateF2FApproval a "
+                + " Left Join a.employeeMaster b "
+                + " WHERE a.candidateF2FRequest.id =" + id
+                + " And a.status = 1";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

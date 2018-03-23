@@ -245,4 +245,7 @@
     <bean id="candidateF2FApprovalDAO1" class="com.bul.zydex.dao.CandidateF2FApproval.CandidateF2FApprovalDAOImpl" parent="sessionFactoryConfig" />
     <bean id="candidateF2FRequestDAO1" class="com.bul.zydex.dao.CandidateF2FRequest.CandidateF2FRequestDAOImpl" parent="sessionFactoryConfig" />
     <bean id="candidateResultStatusDAO1" class="com.bul.zydex.dao.QuestionAnswerSubmit.CandidateResultStatusDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="trainingAssessmentDAO1" class="com.bul.zydex.dao.Training.TrainingAssessmentDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="trainingQuestionAnswerSubmitDAO1" class="com.bul.zydex.dao.Training.TrainingQuestionAnswerSubmitDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="trainingResultStatusDAO1" class="com.bul.zydex.dao.Training.TrainingResultStatusDAOImpl" parent="sessionFactoryConfig" />
 </beans>

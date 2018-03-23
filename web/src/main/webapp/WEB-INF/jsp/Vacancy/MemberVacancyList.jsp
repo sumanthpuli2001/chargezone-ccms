@@ -155,7 +155,7 @@
                                                                                     <a href="vacancy.htm?act=applyJobRegistration&vacancyId=${list[2]}">Apply</a>
                                                                                 </span>
                                                                             </c:if>
-                                                                            <c:if test="${list[8] eq 1}">
+                                                                            <c:if test="${list[8] ne 0}">
                                                                                 <span>
                                                                                     Applied
                                                                                 </span>

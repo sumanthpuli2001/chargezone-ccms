@@ -53,7 +53,7 @@
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
                                 <div>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">&nbsp; F To F</button>
+<!--                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">&nbsp; F To F</button>-->
                                     <!--<button type="button" class="btn btn-default " data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>-->
                                 </div>
 
@@ -81,9 +81,9 @@
                                                         <c:otherwise>
                                                             <thead>
                                                                 <tr>
-                                                                    <c:if test="${sessionScope.userRight.hr}">
-                                                                        <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
-                                                                        </c:if>
+                                                                    <%--<c:if test="${sessionScope.userRight.hr}">--%>
+                                                                        <!--<th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>-->
+                                                                        <%--</c:if>--%>
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">Candidate Name</th>
                                                                     <th style="width: 50px;">Qualification</th>
@@ -102,9 +102,9 @@
                                                     <tbody>
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
-                                                                <c:if test="${sessionScope.userRight.hr}">
-                                                                    <td align="center" style="width: 1px;"><input type="checkbox" id="checkId" name="checkId"  value="${list[0]}"  /></td>
-                                                                    </c:if>
+                                                                <%--<c:if test="${sessionScope.userRight.hr}">--%>
+                                                                    <!--<td align="center" style="width: 1px;"><input type="checkbox" id="checkId" name="checkId"  value="${list[0]}"  /></td>-->
+                                                                    <%--</c:if>--%>
                                                                 <!--<td>/</td>-->
                                                                 <td>${list[3]}</td>
                                                                 <td>${list[4]}</td>
@@ -113,18 +113,18 @@
                                                                 <td>${list[7]}</td>
                                                                 <td>
                                                                     <c:if test="${list[8] eq 1}"><span class="label label-default">New Applicant</span></c:if>
-                                                                    <c:if test="${list[8] eq 2}"><span class="label label-success">screening Done</span></c:if>
-                                                                    <c:if test="${list[8] eq 3}"><span class="label label-danger">Rejected</span></c:if>
-                                                                    <c:if test="${list[8] eq 4}"><span class="label label-success">Online Assessment</span></c:if>
-                                                                    <c:if test="${list[8] eq 5}"><span class="label label-success">Assessment Submission </span></c:if>
-                                                                    <c:if test="${list[8] eq 6}"><span class="label label-success">Assessment Pass </span></c:if>
-                                                                    <c:if test="${list[8] eq 7}"><span class="label label-success">Assessment Fail</span></c:if>
-                                                                    <c:if test="${list[8] eq 8}"><span class="label label-success">F2F interview Invitation</span></c:if>
-                                                                    <c:if test="${list[8] eq 9}"><span class="label label-warning">Candidate On hold</span></c:if>
-                                                                    <c:if test="${list[8] eq 10}"><span class="label label-danger">Candidate Rejected </span></c:if>
-                                                                    <c:if test="${list[8] eq 11}"><span class="label label-success">Candidate Selected</span></c:if>
-                                                                    <c:if test="${list[8] eq 12}"><span class="label label-success">Employee Induction</span></c:if>
-                                                                    <c:if test="${list[8] eq 13}"><span class="label label-success">Employee On board </span></c:if>
+                                                                    <c:if test="${list[8] eq 2}"><span class="label label-default">Shortlisted</span></c:if>
+                                                                    <c:if test="${list[8] eq 3}"><span class="label label-default">Rejected</span></c:if>
+                                                                    <c:if test="${list[8] eq 4}"><span class="label label-default">Online Assessment</span></c:if>
+                                                                    <c:if test="${list[8] eq 5}"><span class="label label-default">Assessment Submission </span></c:if>
+                                                                    <c:if test="${list[8] eq 6}"><span class="label label-default">Assessment Pass </span></c:if>
+                                                                    <c:if test="${list[8] eq 7}"><span class="label label-default">Assessment Fail</span></c:if>
+                                                                    <c:if test="${list[8] eq 8}"><span class="label label-default">F2F interview Invitation</span></c:if>
+                                                                    <c:if test="${list[8] eq 9}"><span class="label label-default">Candidate On hold</span></c:if>
+                                                                    <c:if test="${list[8] eq 10}"><span class="label label-default">Candidate Rejected </span></c:if>
+                                                                    <c:if test="${list[8] eq 11}"><span class="label label-default">Candidate Selected</span></c:if>
+                                                                    <c:if test="${list[8] eq 12}"><span class="label label-default">Employee Induction</span></c:if>
+                                                                    <c:if test="${list[8] eq 13}"><span class="label label-default">Employee On board </span></c:if>
                                                                     </td>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>

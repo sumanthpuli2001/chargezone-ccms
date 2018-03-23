@@ -14,6 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Training Feedback</title>
+       
     </head>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -31,8 +32,8 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form action="trainingMaster.htm?act=deleteClick" method="post" commandName="employeeFeedback"
-                   name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
+        <form:form action="trainingIdentification.htm?act=showTrainingFeedbackList" method="post" commandName="employeeFeedback"
+                   name='form1' class="form-horizontal" role="form">
 
             <section class="content">
                 <div class="row">
@@ -40,18 +41,24 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
-                                <button type="button" class="btn btn-primary" title="" onclick="window.location = 'trainingIdentification.htm?act=showTrainingFeedbackList'"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</button>
+                                <button type="submit" class="btn btn-primary" title="" onclick="window.location = 'trainingIdentification.htm?act=showTrainingFeedbackList2'"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</button>
                                 <!--<button type="submit" class="btn btn-danger" title="" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp;&nbsp;DELETE</button>-->
                                 <!--<div class="col-sm-5">-->
 
                                 <div class="col-sm-5">
                                     <!--${trainingsMaps}-->
                                     <label>Training:<span style="color: red;font-size: 12px;">*</span></label>
-                                    <form:select path="trainingMaster" class="form-control">
-                                        <form:option value="" label="-- Select --" ></form:option>
-                                        <form:options items="${trainingsMaps}"></form:options>
-                                    </form:select>
-                                    <form:errors path="trainingMaster" cssClass="errorDiv"></form:errors>
+                                    <%--<form:select path="trainingMaster" id="TrainingId" name="TrainingId" class="form-control">--%>
+                                        <%--<form:option value="" label="-- Select --" ></form:option>--%>
+                                        <%--<form:options items="${trainingsMaps}"></form:options>--%>
+                                    <%--</form:select>--%>
+                                    <select id="TrainingId" path="trainingMaster.id" name="TrainingId" class="form-control" >
+                                        <option value="">--SELECT--</option>
+                                        <c:forEach var="trainingsMaps" items="${trainingsMaps}">
+                                            <option value="${trainingsMaps.key}">${trainingsMaps.value}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <form:errors path="trainingMaster.id" cssClass="errorDiv"></form:errors>
                                     </div>
                                 </div>
                                 <div class="box-header">
@@ -66,7 +73,7 @@
                                                 <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
 
                                                 <c:choose>
-                                                    <c:when test="${empty trainingList}">
+                                                    <c:when test="${empty trainingFeedbackList}">
                                                         <tr>
                                                             <td align="Center">There Is No Any Record</td>
                                                         </tr>
@@ -76,61 +83,36 @@
                                                             <tr>
                                                                 <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
                                                                 <th>Sr.No.</th>
-                                                                <th>Title</th>
-                                                                <th>Description</th>
-                                                                <th>Training Requester</th>
-                                                                <th>venue</th>
-                                                                <th>cost</th>
-                                                                <!--<th>Company Sponsor</th>
-                                                                <th>Training Source</th>
-                                                                <!--<th>status</th>-->
-                                                                <th>Action</th>
+                                                                <th>Employee</th>
+                                                                <th>Feedback</th>
                                                             </tr>
                                                         </thead>
                                                         <c:set var="count" value="0" scope="page" />
                                                         <tbody>
-                                                            <!--${trainingTitle}-->
-                                                            <c:forEach  var="trainingList" items="${trainingList}">
+                                                            <!--${trainingFeedbackList}-->
+                                                            <c:forEach  var="trainingFeedbackList" items="${trainingFeedbackList}">
                                                                 <c:set var="count" value="${count + 1}" scope="page"/>
                                                                 <tr>
                                                                     <td align="Center">
-                                                                        <input type="checkbox" name="checkId" id="checkId" value="${trainingList.id}">
+                                                                        <input type="checkbox" name="checkId" id="checkId" value="${trainingFeedbackList[0]}">
                                                                     </td>
                                                                     <td>
                                                                         <c:out value = "${count}"/>
                                                                     </td>
                                                                     <td>
-                                                                        ${trainingList.trainingTitle}
+                                                                        ${trainingFeedbackList[2]}
                                                                     </td>
                                                                     <td>
-                                                                        ${trainingList.trainingDescription}
+                                                                        ${trainingFeedbackList[1]}
                                                                     </td>
-                                                                    <td>
-                                                                        ${trainingList.trainingOwner}
-                                                                    </td>
-                                                                    <td>
-                                                                        ${trainingList.venue}
-                                                                    </td>
-                                                                    <td>
-                                                                        ${trainingList.cost}
-                                                                    </td>
-                                                                    <!--                                                                        <td>
-                                                                    ${trainingList.companySponsor}
-                                                                </td>-->
-                                                                    <td>
-                                                                        ${trainingList.trainingSource}
-                                                                    </td>
-                                                                    <!--                                                                        <td>
-                                                                    ${trainingList.status}
-                                                                </td>-->
-                                                                    <td>
+<!--                                                                    <td>
                                                                         <div class="btn-group">
                                                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="viewClick(${trainingList.id});">
                                                                                 &nbsp;Edit
                                                                             </button>
 
                                                                         </div>
-                                                                    </td>
+                                                                    </td>-->
                                                                 </tr>
                                                             </c:forEach>
                                                         </tbody>
@@ -145,27 +127,8 @@
                         </div><!-- /.tab-content -->
                     </div><!-- nav-tabs-custom -->
                 </div><!-- /.col -->
-        </div>
     </section>
 </form:form><!-- /.content -->
-</div><!-- /.content-wrapper -->
-<script>
-    function viewClick(id)
-    {
-//            alert('hello '+id);
-        window.location = 'trainingMaster.htm?act=editClick&id=' + id;
-    }
-    function deleteCheck11() {
-        var checkboxes = "";
-        checkboxes = document.getElementsByName('checkId');
-        for (var i = 0, n = checkboxes.length; i < n; i++) {
-            if (checkboxes[i].checked) {
-                return true;
-            }
-        }
-        alert("Please, Select one or more record(s).");
-        return false;
-    }
-</script>
+        </div>
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

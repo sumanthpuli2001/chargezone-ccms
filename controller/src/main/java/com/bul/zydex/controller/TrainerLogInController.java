@@ -17,6 +17,7 @@ import com.bul.zydex.model.UserMaster;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -300,10 +301,39 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         TrainingMaster trainingMaster=(TrainingMaster)trainingMasterService.readById(id);
         trainingMaster.setStatus(1);
         trainingMasterService.update(trainingMaster);
-        mv=viewProfile1(request, response, ""+id, eventdate);
+//        mv=viewProfile1(request, response, ""+id, eventdate);
 //        request.setAttribute("id", id);
 //        request.setAttribute("eventdate", eventdate);
-//        mv.setViewName("Training/applyTrainingFeedback");
+        mv.setViewName("Training/applyTrainingFeedback");
+        return mv;
+    }
+    
+    public ModelAndView showTrainingFeedbackList(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
+        ModelAndView mv = new ModelAndView();
+            
+        
+        String trainingId = request.getParameter("TrainingId");
+         TrainingMaster trainingMaster1 = new TrainingMaster();
+      
+        
+        EmployeeFeedback employeeFeedback = new EmployeeFeedback();
+        HttpSession session = request.getSession(false);
+//        UserMaster user = (UserMaster) session.getAttribute("user");
+        Trainer user = (Trainer) session.getAttribute("trainerMaster");
+//        Trainer trainer= new Trainer();
+        List<?> trainingFeedbackList = new ArrayList();
+        if (null != trainingId) {
+            trainingFeedbackList = trainingMasterService.fetchtTrainingforFeedback(Integer.parseInt(trainingId), user.getId());
+        }
+        trainingsList(request);
+        employeeFeedback.setTrainingMaster(trainingMaster);
+//         mv.getModelMap().put("trainerMaster", trainerMaster);
+        mv.addObject("trainingFeedbackList", trainingFeedbackList);
+        mv.addObject("trainingMaster1", trainingMaster1);
+//        mv.addObject("employeeFeedback", employeeFeedback);
+//        mv.addObject("trainerMaster", trainer);
+//        mv.addObject("trainingsMaps", trainingsMap);
+        mv.setViewName("Trainer/TrainerFeedbackDetails");
         return mv;
     }
 }

@@ -33,6 +33,7 @@
         <form:form action="designationMaster.htm?act=deleteClick" method="post" commandName="trainingMaster"
                    name='form1' class="form-horizontal" role="form">
             <input type="hidden" id="id" name="id" value="${trainingMaster.id}"/>
+            <input type="hidden" id="id" name="eventdate" value="${eventdate}"/>
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
@@ -40,7 +41,7 @@
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
                                 <c:if test="${showFeedbackButton eq true}">
-                                <button type="button" class="btn btn-primary" style="width: 100px;" onclick="window.location = 'trainingIdentification.htm?act=sendFeedback&id=${trainingMaster.id}'"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Feedback</button>
+                                <button type="button" class="btn btn-primary" style="width: 100px;" onclick="window.location = 'trainingIdentification.htm?act=sendFeedback&id=${trainingMaster.id}&eventdate=${eventdate}'"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Feedback</button>
                                 </c:if>
                                 <!--<button type="submit" class="btn btn-danger" title="" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp;&nbsp;DELETE</button>-->
                                 <div class="box-header">

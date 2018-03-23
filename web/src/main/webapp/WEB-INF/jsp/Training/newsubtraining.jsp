@@ -85,7 +85,7 @@
 
                                                             </tr>
                                                         </thead>
-                                                    </c:otherwise>va
+                                                    </c:otherwise>
                                                 </c:choose>
                                                 <tbody>
                                                     <c:forEach var="list" items="${list}">

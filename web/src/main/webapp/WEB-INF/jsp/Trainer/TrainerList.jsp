@@ -136,8 +136,8 @@
             </ol>
         </section>
         <ul class="nav nav-tabs" style="text-align: center" >
-            <li class="active " ><a href="">My Calendar</a></li>
-            <li ><a href="">Second Tab</a></li>
+            <li class="active " ><a href="trainerLogin.htm?act=showcalendar">My Calendar</a></li>
+            <!--<li ><a href="trainerLogin.htm?act=showTrainingFeedbackList">Feedback</a></li>-->
         </ul>
         <br/>
         <br/>

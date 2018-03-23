@@ -5,14 +5,17 @@
  */
 package com.bul.zydex.controller;
 
+import com.bul.zydex.model.EmployeeFeedback;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingAttendance;
+import com.bul.zydex.model.TrainingFeedback;
 import com.bul.zydex.model.TrainingIdentification;
 import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.TrainingSubType;
 import com.bul.zydex.model.TrainingType;
 import com.bul.zydex.model.UserMaster;
+import com.bul.zydex.service.Training.EmployeeFeedbackService;
 import com.bul.zydex.service.Training.TrainerService;
 import com.bul.zydex.service.Training.TrainingAttendanceService;
 import com.bul.zydex.service.Training.TrainingIdentificationService;
@@ -26,8 +29,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,6 +55,15 @@ public abstract class TrainerLogInAbstract extends CustomAbstract{
     protected TrainingAttendanceService<TrainingAttendance> trainingAttendanceService;
     protected TrainingIdentificationService<TrainingIdentification> trainingIdentificationService;
     protected EmployeeMasterService<EmployeeMaster> employeeMasterService;
+    protected EmployeeFeedbackService<EmployeeFeedback> employeeFeedbackService;
+
+    public EmployeeFeedbackService<EmployeeFeedback> getEmployeeFeedbackService() {
+        return employeeFeedbackService;
+    }
+
+    public void setEmployeeFeedbackService(EmployeeFeedbackService<EmployeeFeedback> employeeFeedbackService) {
+        this.employeeFeedbackService = employeeFeedbackService;
+    }
 
     public EmployeeMasterService<EmployeeMaster> getEmployeeMasterService() {
         return employeeMasterService;
@@ -242,5 +256,16 @@ public abstract class TrainerLogInAbstract extends CustomAbstract{
         object.add(finalList);
         
         request.setAttribute("list", object);
+    }
+      protected void trainingsList(HttpServletRequest request) {
+        TrainingMaster trainMaster = new TrainingMaster();
+        List<?> trainingList = trainingMasterService.read();
+        Map<Integer, String> trainingsMap = new HashMap<>();
+        for (Object o : trainingList) {
+            trainMaster = (TrainingMaster) o;
+            trainingsMap.put(trainMaster.getId(), trainMaster.getTrainingTitle());
+        }
+
+        request.setAttribute("trainingsMaps", trainingsMap);
     }
 }

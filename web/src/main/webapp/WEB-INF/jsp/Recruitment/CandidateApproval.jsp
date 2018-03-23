@@ -156,20 +156,23 @@
                                             <div class="form-group">
                                                 <div class="col-md-12" style="text-align: right">
                                                     <c:if test="${candidateJobApplication.status eq 1}">
-                                                        <button type="button" class="btn btn-primary" onclick="shortlisted(${candidateJobApplication.id},${candidateApplyJob.id});">Shortlisted</button>
+                                                        <button type="button" class="btn btn-danger" onclick="return reject(${candidateJobApplication.id},${candidateApplyJob.id});" value="Reject">Reject</button>
+                                                    </c:if>
+                                                    <c:if test="${candidateJobApplication.status eq 1}">
+                                                        <button type="button" class="btn btn-primary" onclick="shortlisted(${candidateJobApplication.id},${candidateApplyJob.id});">Shortlist</button>
                                                     </c:if>
                                                     <c:if test="${candidateJobApplication.status eq 11}">
-                                                    <button type="button" class="btn btn-primary" onclick="induction(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; Induction</button>
+                                                        <button type="button" class="btn btn-primary" onclick="induction(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; Induction</button>
                                                     </c:if>
                                                     <c:if
                                                         test="${candidateJobApplication.status eq 2}">
-                                                    <button type="button" class="btn btn-primary" onclick="sendToF2F(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; F To F</button>
+                                                        <button type="button" class="btn btn-primary" onclick="sendToF2F(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; F To F</button>
                                                     </c:if>    
                                                     <c:if test="${candidateJobApplication.status eq 2}">
-                                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>
+                                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>
                                                     </c:if>
                                                     <c:if test="${candidateJobApplication.status eq 4}">
-                                                    <button type="button" class="btn btn-primary" id="btnType1" onclick="goToAns(${candidateJobApplication.id},${candidateApplyJob.id})" name="btnType" value="AssessMent" style="width: 100px" >Ans</button>
+                                                        <button type="button" class="btn btn-primary" id="btnType1" onclick="goToAns(${candidateJobApplication.id},${candidateApplyJob.id})" name="btnType" value="AssessMent" style="width: 100px" >Ans</button>
                                                     </c:if>
                                                 </div>
 
@@ -401,3 +404,15 @@
         window.location = 'candidateF2FRequest.htm?act=CandidateShortlisted&id=' + applicationId + '&candidateId=' + candidateId;
     }
 </script>
+<script>
+    function reject(applicationId, candidateId) {
+        var checkreject = confirm("If You Reject You Can Not Edit,Submit Or View. So, Are You Sure You Want to Reject This Candidate?");
+        if (checkreject) {
+            checkreject = document.getElementsByName('Reject');
+            window.location = 'candidateF2FRequest.htm?act=reject&id=' + applicationId + '&candidateId=' + candidateId;
+            return true;
+        }
+        return false;
+    }
+</script>
+

@@ -81,9 +81,9 @@
                                                         <c:otherwise>
                                                             <thead>
                                                                 <tr>
-                                                                    <c:if test="${sessionScope.userRight.hr}">
-                                                                        <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
-                                                                        </c:if>
+                                                                    <%--<c:if test="${sessionScope.userRight.hr}">--%>
+                                                                        <!--<th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>-->
+                                                                        <%--</c:if>--%>
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">Candidate Name</th>
                                                                     <th style="width: 50px;">Qualification</th>
@@ -102,9 +102,9 @@
                                                     <tbody>
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
-                                                                <c:if test="${sessionScope.userRight.hr}">
-                                                                    <td align="center" style="width: 1px;"><input type="checkbox" id="checkId" name="checkId"  value="${list[0]}"  /></td>
-                                                                    </c:if>
+                                                                <%--<c:if test="${sessionScope.userRight.hr}">--%>
+                                                                    <!--<td align="center" style="width: 1px;"><input type="checkbox" id="checkId" name="checkId"  value="${list[0]}"  /></td>-->
+                                                                    <%--</c:if>--%>
                                                                 <!--<td>/</td>-->
                                                                 <td>${list[3]}</td>
                                                                 <td>${list[4]}</td>

@@ -7,16 +7,32 @@ package com.bul.zydex.dao.Training;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.TrainingAssessment;
+import java.util.List;
 
 /**
  *
  * @author Aman
  */
-public class TrainingAssessmentDAOImpl<T>extends GenericsDAOImpl<T> implements TrainingAssessmentDAO<T>{
+public class TrainingAssessmentDAOImpl<T> extends GenericsDAOImpl<T> implements TrainingAssessmentDAO<T> {
 
     @Override
     protected Class getDomainClass() {
         return TrainingAssessment.class;
     }
-    
+
+    @Override
+    public List<?> readOnlineAssementCandidateTraningList(int empid) {
+        String query = "";
+        String condition = "";
+        query += "Select a.id,b.id,c.id,a.passingPercentage,a.validityFrom,a.validityTo,a.duration,a.noOfAttampt,a.noOfQue,a.totalMarks,c.paperName"
+                + " From TrainingAssessment a"
+                + " LEFT JOIN a.employeeMaster b"
+                + " LEFT JOIN a.questionPaper c"
+                + " Where b.id=" + empid
+                + " and a.noOfAttampt >0 "
+                + " and a.status =0 ";
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

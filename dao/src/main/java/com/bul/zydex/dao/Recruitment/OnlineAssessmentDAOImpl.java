@@ -30,7 +30,7 @@ public class OnlineAssessmentDAOImpl<T> extends GenericsDAOImpl<T> implements On
                 + " LEFT JOIN a.questionPaper c"
                 + " Where b.id=" + candidateJobApplicationID
                 + " and a.noOfAttampt > 0 "
-                + " and b.status !=4 ";
+                + " and b.status =5 ";
 
         return getHibernateTemplate().find(query);
     }

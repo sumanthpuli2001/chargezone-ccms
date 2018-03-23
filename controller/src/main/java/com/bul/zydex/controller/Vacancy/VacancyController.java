@@ -1063,25 +1063,7 @@ public class VacancyController extends VacancyAbstract {
         String[] doneId2 = question[0].split(",");
         String emailId = "";
         String emailId1 = "";
-//        for (String s1 : doneId1) {
-//            emailId += s1 + ",";
-//            if (emailId == "") {
-//                questionAnswerSubmit.setDescription(emailId);
-//                questionAnswerSubmit.setQuestionAnsId(questionAns);
-//            } else {
-//                questionAns.setId(Integer.parseInt(s1));
-//                questionAnswerSubmit.setQuestionAnsId(questionAns);// Question Anaswer Id set
-//
-//            }
-//           
-//
-//            for (String s2 : doneId2) {
-//                emailId1 += s2 + ",";
-//               
-//
-//            }
-//        }
-//        
+//     
         for (int i = 0; i < doneId2.length; i++) {
             QuestionAnswerSubmit questionAnswerSubmit = new QuestionAnswerSubmit();
             QuestionAns questionAns = new QuestionAns();
@@ -1101,7 +1083,7 @@ public class VacancyController extends VacancyAbstract {
 
             questionAnswerSubmit.setQuestionAnsId(questionAns);// Question Anaswer Id set
             candidateJobApplication.setId(candidateJobapplicationid);
-            candidateJobApplication=candidateJobApplicationService.readById(candidateJobapplicationid);
+            candidateJobApplication = candidateJobApplicationService.readById(candidateJobapplicationid);
             candidateJobApplication.setStatus(4);// set 4 bz candidate submision
             candidateJobApplicationService.update(candidateJobApplication);
             questionAnswerSubmit.setCandidateJobApplicationid(candidateJobApplication);/// candidate Apply job ID set 
@@ -1110,13 +1092,8 @@ public class VacancyController extends VacancyAbstract {
             questionAnswerSubmitService.create(questionAnswerSubmit);
 //             mv.setViewName("Vacancy/AssementOnline");
         }
-        request.setAttribute("successMessage", "Information : The Data Submitted Successfully.");
-        ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
-        mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
-
-        mv.setViewName("Vacancy/ApplayLoginpage");
-//        return mv;
         return mv;
+ 
     }
 
     public ModelAndView CreateNewVacancy(HttpServletRequest request, HttpServletResponse response) throws Exception {

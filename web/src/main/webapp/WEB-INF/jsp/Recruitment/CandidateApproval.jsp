@@ -406,7 +406,7 @@
 </script>
 <script>
     function reject(applicationId, candidateId) {
-        var checkreject = confirm("If You Reject You Can Not Edit,Submit Or View. So, Are You Sure You Want to Reject This MPR?");
+        var checkreject = confirm("If You Reject You Can Not Edit,Submit Or View. So, Are You Sure You Want to Reject This Candidate?");
         if (checkreject) {
             checkreject = document.getElementsByName('Reject');
             window.location = 'candidateF2FRequest.htm?act=reject&id=' + applicationId + '&candidateId=' + candidateId;

@@ -72,10 +72,13 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
 
         }
 
+        List<?> approverCommentList = candidateF2FApprovalService.readEmployeeCommentByReqId(candidateF2FRequest.getId());
+
         request.setAttribute("applicationId", applicationId);
 
         candidateF2FRequest.setCandidateApplyJob(candidateApplyJob);
         candidateF2FRequest.setVacancyMaster(vm);
+        request.setAttribute("commentlist", approverCommentList);
         request.setAttribute("comitteeList", committeedetaillist);
         mv.getModelMap().put("candidateF2FRequest", candidateF2FRequest);
 
@@ -179,7 +182,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         mv.setViewName("CandidateFtoF/F2FInterviewReviewResult");
         return mv;
     }
-    
+
     public ModelAndView showViewClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
@@ -198,13 +201,15 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             committeedetaillist.add(cffa);
 
         }
-        
+
+        List<?> approverCommentList = candidateF2FApprovalService.readEmployeeCommentByReqId(candidateF2FRequest.getId());
         candidateF2FRequest.setMessage(candidateF2FRequest.getMessage());
 
         request.setAttribute("applicationId", applicationId);
 
         candidateF2FRequest.setCandidateApplyJob(candidateApplyJob);
         candidateF2FRequest.setVacancyMaster(vm);
+        request.setAttribute("commentlist", approverCommentList);
         request.setAttribute("comitteeList", committeedetaillist);
         mv.getModelMap().put("candidateF2FRequest", candidateF2FRequest);
 
@@ -229,6 +234,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         CandidateF2FApproval candidateF2FApproval = candidateF2FApprovalService.readByEmpIdAndReqId(employeeMaster.getId(), candidateF2FRequest.getId());
 
         candidateF2FApproval.setComment(message);
+        candidateF2FApproval.setStatus(1);
         candidateF2FApprovalService.update(candidateF2FApproval);
 
         candidateF2FRequest.setStatus(1);
@@ -239,6 +245,38 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         f2flist = candidateF2FApprovalService.readByEmpId(employeeMaster.getId());
         request.setAttribute("F2FInterviewList", f2flist);
         mv.setViewName("CandidateFtoF/F2FReqForApprovalResult");
+        return mv;
+    }
+
+    public ModelAndView showclickAdmin(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        String applicationId = request.getParameter("id");
+        CandidateF2FRequest candidateF2FRequest = new CandidateF2FRequest();
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
+        candidateApplyJob = candidateJobApplyService.readById(candidateF2FRequest.getCandidateApplyJob().getId());
+        VacancyMaster vm = vacancyMasterService.readById(candidateF2FRequest.getVacancyMaster().getId());
+        List<CandidateF2FApproval> committeedetaillist = new ArrayList<>();
+        List<CandidateF2FApproval> comitteeList = (List<CandidateF2FApproval>) candidateF2FApprovalService.readByReqId(candidateF2FRequest.getId());
+        for (CandidateF2FApproval cffa : comitteeList) {
+            EmployeeMaster em = employeeMasterService.readById(cffa.getEmployeeMaster().getId());
+            cffa.setEmployeeMaster(em);
+            committeedetaillist.add(cffa);
+
+        }
+
+        request.setAttribute("applicationId", applicationId);
+
+        candidateF2FRequest.setCandidateApplyJob(candidateApplyJob);
+        candidateF2FRequest.setVacancyMaster(vm);
+        List<?> approverCommentList = candidateF2FApprovalService.readEmployeeCommentByReqId(candidateF2FRequest.getId());
+        request.setAttribute("commentlist", approverCommentList);
+        request.setAttribute("comitteeList", committeedetaillist);
+        mv.getModelMap().put("candidateF2FRequest", candidateF2FRequest);
+
+        mv.setViewName("CandidateFtoF/showClickAdmin");
         return mv;
     }
 

@@ -1149,12 +1149,18 @@
     </bean>
     <bean id="trainingAssessmentController1" class="com.bul.zydex.controller.Training.TrainingAssessmentController" parent="controllerConfig" >
         <property name="trainingAssessmentService" ref="trainingAssessmentService1"></property>
+        <property name="questionAnsService" ref="questionAnsService1"/>
+        <property name="questionDetailsService" ref="questionDetailsService1"/>
+        <property name="questionLibraryService" ref="questionLibraryService1"/>
+        <property name="questionPaperService" ref="questionPaperService1"/>
+        <property name="trainingQuestionAnswerSubmitService" ref="trainingQuestionAnswerSubmitService1"/>
     </bean>
     <bean id="trainingQuestionAnswerSubmitController1" class="com.bul.zydex.controller.Training.TrainingQuestionAnswerSubmitController" parent="controllerConfig" >
         <property name="trainingQuestionAnswerSubmitService" ref="trainingQuestionAnswerSubmitService1"></property>
     </bean>
     <bean id="trainingResultStatusController1" class="com.bul.zydex.controller.Training.TrainingResultStatusController" parent="controllerConfig" >
         <property name="trainingResultStatusService" ref="trainingResultStatusService1"></property>
+        
     </bean>
 </beans>
  

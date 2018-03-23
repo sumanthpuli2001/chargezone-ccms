@@ -12,7 +12,9 @@ import java.util.List;
  *
  * @author Aman
  */
-public interface TrainingAssessmentDAO<T> extends GenericsDAO<T>{
-    
+public interface TrainingAssessmentDAO<T> extends GenericsDAO<T> {
+
+    public List<?> readOnlineAssementCandidateTraningList(int empid);
+
     public List<?> readTrainingAssementList(int trainerId);
 }

@@ -1148,5 +1148,11 @@
     <bean id="trainingAssessmentController1" class="com.bul.zydex.controller.Training.TrainingAssessmentController" parent="controllerConfig" >
         <property name="trainingAssessmentService" ref="trainingAssessmentService1"></property>
     </bean>
+    <bean id="trainingQuestionAnswerSubmitController1" class="com.bul.zydex.controller.Training.TrainingQuestionAnswerSubmitController" parent="controllerConfig" >
+        <property name="trainingQuestionAnswerSubmitService" ref="trainingQuestionAnswerSubmitService1"></property>
+    </bean>
+    <bean id="trainingResultStatusController1" class="com.bul.zydex.controller.Training.TrainingResultStatusController" parent="controllerConfig" >
+        <property name="trainingResultStatusService" ref="trainingResultStatusService1"></property>
+    </bean>
 </beans>
  

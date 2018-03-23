@@ -53,9 +53,9 @@
         </style>
 
         <script>
-            window.onbeforeunload = function () {
-                return false;
-            }
+//            window.onbeforeunload = function () {
+//                return false;
+//            }
 //            < script type = "text/javascript" >
 //                    $('p').append(Math.random());
 //            $(window).bind({
@@ -102,7 +102,7 @@
     </script>
     <script>
         function submitFormbyhome() {
-         
+
             var onlineAssmentID = document.getElementById("onlineAssmentID").value;
             window.location = 'vacancy.htm?act=backToHomeVacancyListCandidate&onlineAssmentID=' + onlineAssmentID;
         }
@@ -177,18 +177,14 @@
                 data: {},
                 dataType: "text",
                 success: function (responseTxt) {
-                    document.getElementById("endwoandHlerrorDiv").innerHTML = responseTxt;
-                    if (responseTxt != '') {
-                        document.getElementById("startDateTime").value = "";
-                        document.getElementById("endDateTime").value = "";
-                    }
+
                 },
-                error: function () {
-//                            alert('Error occured');
-                }
             });
-//                alert(finalData.toString());
-//                    window.location = "vacancy.htm?act=clickSubmitQuestionAnswer&finalData=" + finalData.toString();
+           
+//            alert("hii");
+////                alert(finalData.toString());
+//            window.location = "vacancy.htm?act=Login";
+//             alert("hii2");
 //                 action="vacancy.htm?act=clickSubmitQuestionAnswer" 
         }
     </script>
@@ -314,7 +310,7 @@
 
     <form:form onsubmit="saveSubmit();"
                method="post"
-               name='form1'  class="form-horizontal" role="form">
+               name='form1'  class="form-horizontal" role="form" action="vacancy.htm?act=Login">
         <%--action="vacancy.htm?act=clickSubmitQuestionAnswer"--%> 
         <section class="content">
             <div class="row">
@@ -415,7 +411,6 @@
     <script src="StorageYard/JS/login/scripts.js"></script>
     <script type="text/javascript" src="StorageYard/JS/JQuery/common.js"></script>
 </body>
-</html>
 <style>
 
     .table-bordered>thead>tr>td{
@@ -423,3 +418,4 @@
     }
 
 </style>
+</html>

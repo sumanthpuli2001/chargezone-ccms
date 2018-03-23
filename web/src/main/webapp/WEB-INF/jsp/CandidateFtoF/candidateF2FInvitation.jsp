@@ -130,7 +130,13 @@
                                                 <span id="empRemarkError" style="color: red;"></span>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label>Interview Committee<span style="color: red;font-size: 12px;">*</span></label>
+                                          
+                                            </div>
+                                       
+                                        <!--<div class="form-group">-->
                                             <div class="col-md-8 col-sm-8">
                                                 <div class="table-responsive">
                                                     <table id="policyTable" class="table table-bordered table-striped table-hover" style="margin-top: 10px" align="Center"  >
@@ -247,7 +253,12 @@
 <script>
     $(document).ready(function () {
         $('#datetimepicker2').datepicker({
+            dateFormat: 'dd/mm/yy'
         });
+//        $('#datetimepicker2').datetimepicker({
+//    format: 'yyyy-mm-dd hh:ii'
+//});
     });
+    
 </script>
 

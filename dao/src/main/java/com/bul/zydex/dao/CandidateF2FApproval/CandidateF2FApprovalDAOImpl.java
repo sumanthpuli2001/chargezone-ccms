@@ -32,4 +32,19 @@ public class CandidateF2FApprovalDAOImpl<T> extends GenericsDAOImpl<T> implement
 
     }
 
+    @Override
+    public List<?> readByEmpId(int empid) {
+
+        String query = " SELECT b.id,c.name as condidateName,d.name as vacancyName,b.dateOfInterview,"
+                + " b.status "
+                + " FROM CandidateF2FApproval a "
+                + " Left join a.candidateF2FRequest b "
+                + " LEFT JOIN b.candidateApplyJob c "
+                + " LEFT JOIN b.vacancyMaster d"
+                + " WHERE a.employeeMaster.id =" + empid;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

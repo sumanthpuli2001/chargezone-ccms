@@ -25,6 +25,8 @@ public class CandidateF2FRequest {
     private String dateOfInterview;
     private VacancyMaster vacancyMaster;
     private CandidateApplyJob candidateApplyJob;
+    private Integer hrEmpId;
+    private String hrName;
 
     public CandidateF2FRequest() {
 
@@ -158,8 +160,22 @@ public class CandidateF2FRequest {
     public void setCandidateApplyJob(CandidateApplyJob candidateApplyJob) {
         this.candidateApplyJob = candidateApplyJob;
     }
-    
-    
+
+    public Integer getHrEmpId() {
+        return hrEmpId;
+    }
+
+    public void setHrEmpId(Integer hrEmpId) {
+        this.hrEmpId = hrEmpId;
+    }
+
+    public String getHrName() {
+        return hrName;
+    }
+
+    public void setHrName(String hrName) {
+        this.hrName = hrName;
+    }
     
     
 

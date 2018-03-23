@@ -71,7 +71,7 @@
                             <li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP</a></li>
                             <li><a href="recruitment.htm?act=createMpr"><i class="fa fa-circle-o"></i>MPR</a></li>
                             <li><a href="vacancy.htm?act=vacancyDetailList"><i class="fa fa-circle-o"></i>Vacancy</a></li>
-
+                            <li><a href="candidateF2FApproval.htm?act=candidateF2FReqListForInterviewer"><i class="fa fa-circle-o"></i>Candidate F2F  Request</a></li>
 
                             <!--<li><a href="vacancy.htm?act=applyJobRegistration"><i class="fa fa-circle-o"></i>Apply Job</a></li>-->
                             <!--                        <li><a href="userMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>User Right</a></li>-->
@@ -93,8 +93,8 @@
                                 <li><a href="recruitment.htm?act=allMprFetch"><i class="fa fa-circle-o"></i>MPR Fetch</a></li>
                                 <li><a href="recruitment.htm?act=allMppFetch"><i class="fa fa-circle-o"></i>MPP Fetch</a></li>
                                 <li><a href="vacancy.htm?act=vacancyFetch"><i class="fa fa-circle-o"></i>Vacancy Fetch</a></li>
-                                <li><a href="candidateF2FRequest.htm?act=f2fSelectedCandidate"><i class="fa fa-circle-o"></i>Face To Face</a></li>
-                                <li><a href="candidateF2FApproval.htm?act=candidateF2FInterviewList"><i class="fa fa-circle-o"></i> F2F Interview Review</a></li>
+                                <!--<li><a href="candidateF2FRequest.htm?act=f2fSelectedCandidate"><i class="fa fa-circle-o"></i>Face To Face</a></li>-->
+                                <li><a href="candidateF2FApproval.htm?act=candidateF2FInterviewList"><i class="fa fa-circle-o"></i>All Candidate F2F Request</a></li>
                             </ul>
                         </li>
                     </c:if>

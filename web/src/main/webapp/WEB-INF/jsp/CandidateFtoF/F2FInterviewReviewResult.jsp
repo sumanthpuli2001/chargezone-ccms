@@ -4,13 +4,18 @@
     Author     : AJAY
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <script>
     function reviewClick(f2fRequestId) {
-        alert(f2fRequestId);
-        window.location = 'candidateF2FApproval.htm?act=openInterviewReviewPage&id='+f2fRequestId;
+        window.location = 'candidateF2FApproval.htm?act=openInterviewReviewPage&id=' + f2fRequestId;
+    }
+</script>
+<script>
+    function onlyView(f2fRequestId) {
+        window.location = 'candidateF2FApproval.htm?act=showViewClick&id=' + f2fRequestId;
     }
 </script>
 
@@ -18,7 +23,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        
+
         <title>F2F Interview List</title>
     </head>
 
@@ -88,38 +93,52 @@
                                                             <td>
                                                                 <c:if test="${list[4] eq 0}">
 
-                                                                    <span>Pending</span>    
+                                                                    <span class="badge">Pending</span>    
                                                                 </c:if>
                                                                 <c:if test="${list[4] eq 1}">
 
-                                                                    <span>Submitted By Comittee</span>    
+                                                                    <span class="label label-default">Submitted By Comittee</span>    
                                                                 </c:if>
                                                                 <c:if test="${list[4] eq 2}">
 
-                                                                    <span>
-                                                                        Submitted By HR
+                                                                    <span class="label label-success">
+                                                                        Approved
 
                                                                     </span>    
                                                                 </c:if>
                                                                 <c:if test="${list[4] eq 3}">
 
-                                                                    <span>
-                                                                        Final Submitted
+                                                                    <span class="label label-warning">
+                                                                        ON-HOLD
 
                                                                     </span>    
+                                                                </c:if>
+                                                                <c:if test="${list[4] eq 4}">
+
+                                                                    <span class="label label-danger">Reject</span>    
                                                                 </c:if>
 
 
                                                             </td>
 
                                                             <td>
-                                                                <div class="btn-group">
-                                                                        <button type="button" onclick="reviewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                <c:if test="${list[4] != 1}">
+                                                                    <div class="btn-group">
+                                                                        <button type="button" onclick="onlyView(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
                                                                         </button>
                                                                     </div>
-                                                                
-                                                                <!--<button type="button" class="btn btn-primary" onclick="(${list[0]});"> Review </button>-->
+                                                                </c:if>
+
+                                                                <c:if test="${list[4] eq 1}">
+                                                                    <div class="btn-group">
+                                                                        <button type="button" onclick="reviewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            &nbsp;&nbsp;Approval
+                                                                        </button>
+                                                                    </div>
+                                                                </c:if>
+
+<!--<button type="button" class="btn btn-primary" onclick="(${list[0]});"> Review </button>-->
                                                             </td>
 
                                                         </tr>

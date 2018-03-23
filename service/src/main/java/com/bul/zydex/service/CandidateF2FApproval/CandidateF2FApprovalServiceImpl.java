@@ -43,6 +43,11 @@ public class CandidateF2FApprovalServiceImpl<T> extends GenericsServiceImpl<T> i
          return  candidateF2FApprovalDAO.readByEmpIdAndReqId(empid,ReqId);
     }
 
+    @Override
+    public List<?> readEmployeeCommentByReqId(int id) {
+          return  candidateF2FApprovalDAO.readEmployeeCommentByReqId(id);
+    }
+
     
     
 }

@@ -119,43 +119,40 @@
                                             <span>${candidateF2FRequest.location}</span>
                                         </div>
                                     </div>
+                                    <c:forEach  var="comment" items="${commentlist}" varStatus="loop">
+                                        <div class="form-group">
+                                            <c:if test="${loop.index eq 0}">
+                                                <div class="col-sm-2">
+                                                    <label>Interviewer Comment:</label> &nbsp;&nbsp;&nbsp;
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${loop.index ne 0}">
+                                                <div class="col-sm-2">
+
+                                                </div>
+                                            </c:if>
+                                            <div class="col-sm-8">
+                                                <label>${comment[2]}</label> &nbsp;&nbsp;&nbsp;
+                                                <textarea class="form-control"
+                                                          id="interviewerRemark" name="interviewerRemark"   disabled>${comment[1]}</textarea>
+                                            </div>
+
+                                        </div>
+                                    </c:forEach>
                                     <div class="form-group">
-                                        <div class="col-sm-6">
-                                            <table>
-                                                <tr>
-                                                    <td><label>Interview Comittee:</label></td>
-                                                    <td>
-                                                        <c:forEach  var="test" items="${comitteeList}">
 
-                                                            &nbsp;&nbsp;&nbsp; &nbsp;<span>${test.employeeMaster.employeeName}</span>
-                                                            <br>
-                                                        </c:forEach>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <label></label> &nbsp;&nbsp;&nbsp;
+                                        <div class="col-sm-2">
+                                            <label>HR Comment:</label> &nbsp;&nbsp;&nbsp;
+                                        </div>
+                                        <div class="col-sm-8">
 
+                                            <textarea class="form-control"
+                                                      id="message" name="message" ></textarea>
                                         </div>
                                     </div>
-                                    <div class="form-group">
 
-                                        <div class="col-sm-6">
-                                            <label>HR Comment:</label> &nbsp;&nbsp;&nbsp;
-                                            <!--                                            <textarea class="form-control"
-                                                                                                  id="message" name="message" ></textarea>-->
-                                            <form:textarea path="message" class="form-control" id="editor" placeholder="Comment"></form:textarea>
-                                            </div>
-
-
-                                            <div class="col-sm-6">
-                                                <label>Interviewer Comment:</label> &nbsp;&nbsp;&nbsp;
-                                                <textarea class="form-control"
-                                                          id="interviewerRemark" name="interviewerRemark"  ></textarea>
-                                            </div>
-
-                                        </div>
-                                        <!--                                    <div class="form-group">
-                                                                                <div class="col-sm-4" style="text-align: left">
+                                    <!--                                    <div class="form-group">
+                                                                            <div class="col-sm-4" style="text-align: left">
                                     <%--<c:if test="${recruitmentMaster.mppStatus == 1 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 0}">--%>
                                     <input type="submit" class="btn btn-success"  id="btnType1" name="btnType" value="APPROVE" style="width: 100px" ></input>
                                     <%--</c:if>--%>

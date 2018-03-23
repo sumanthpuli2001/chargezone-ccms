@@ -11,8 +11,11 @@ import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.OnlineAssessment;
+import com.bul.zydex.model.RecruitmentMaster;
+import com.bul.zydex.model.RecruitmentMppApproval;
 import com.bul.zydex.model.VacancyMaster;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -92,8 +95,8 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
 
         otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
         for (int i = 0; i <= otherDetailCount; i++) {
-            if (null != request.getParameter("policyId" + i) && null != request.getParameter("policyNumber" + i)) {
-                if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("policyNumber" + i).equals("")) {
+            if (null != request.getParameter("policyId" + i)) {
+                if (!request.getParameter("policyId" + i).equals("")) {
                     int policyId = Integer.parseInt(request.getParameter("policyId" + i));
                     employeeMaster = employeeMasterService.readById(policyId);
 
@@ -141,4 +144,28 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.setViewName("Recruitment/CandidateRequestList");
         return mv;
     }
+    
+    public ModelAndView reject(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
+        String applicationId = request.getParameter("id");
+        CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
+
+        cja.setStatus(3);
+        candidateJobApplicationService.update(cja);
+
+        List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
+
+        mv.getModelMap().put("list", candidateJobList);
+        questionList(request);
+        mv.getModelMap().put("onlineAssessment", onlineAssessment);
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        mv.setViewName("Recruitment/CandidateRequestList");
+        return mv;
+    }
+
 }

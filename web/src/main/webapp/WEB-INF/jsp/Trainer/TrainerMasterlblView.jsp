@@ -8,9 +8,9 @@
 <!DOCTYPE html>
 <html>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+    <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+    <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
     <%--<%@include file="/WEB-INF/jsp/Common/Header.jsp"%>--%>
     <%--<%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>--%>
     <head>
@@ -87,11 +87,11 @@
                             
                             <div class="tab-content">
                                 <!--<button type="button" class="btn btn-primary" title="" style="float: right; width: 120px;" onclick="window.history.back();"></i>&nbsp;&nbsp;BACK</button>-->
-                                ${feedbackStatus}
+                                <input type="button" class="btn btn-primary" value="Back" style="float: left" onclick="window.location = 'trainerLogin.htm?act=showcalendar'" />
                                 <c:if test="${feedbackStatus eq true}">
                                 <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location='trainerLogin.htm?act=sendFeedback&id=${trainingMasterId}&eventdate=${eventdate}'"><i class="fa fa-pencil-square-o"></i>Get Feedback</button>
                                 </c:if>
-                                
+
                                 <div class="box-header">
                                 </div>
                                 <div class="box-body no-padding">
@@ -156,18 +156,20 @@
                                                                     </tr>
                                                                 </c:forEach>
                                                             </tbody>
-                                                           
+
                                                         </c:otherwise>
-                                                            
+
                                                     </c:choose>
-                                                            
+
                                                 </table>
                                                 <br>
-                                                 
+                                                <c:if test="${shosts eq false}">
+                                                    <button type="submit" class="btn btn-primary" style="float: left" title="" style="width: 100px;"><!--<i class="fa fa-"></i>-->Submit</button>
+                                                </c:if>
+                                                <c:if test="${shosts eq true}">
+                                                    <a style="float: right"  class="btn btn-primary" onclick="window.location = 'trainerLogin.htm?act=trainerAssessMent&id=${trainingMasterId}&eventdate=${eventdate}'">Online Assessment</a>
+                                                </c:if>
                                             </div>
-                                            <c:if test="${shosts eq false}">
-                                                                <button type="submit" class="btn btn-primary" style="float: left" title="" style="width: 100px;"><!--<i class="fa fa-"></i>-->Submit</button>
-                                                            </c:if>
                                         </div>
 
                                     </div><!-- /.tab-pane -->
@@ -177,15 +179,15 @@
                     </div><!-- /.col -->
                 </div>
             </section>
-                               
+
         </form:form><!-- /.content -->
     </div><!-- /.content-wrapper -->
-        <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
     <script>
         function viewClick(id)
         {
-        //            alert('hello '+id);
-        window.location = 'trainerLogin.htm?act=editClick&id=' + id;
+            //            alert('hello '+id);
+            window.location = 'trainerLogin.htm?act=editClick&id=' + id;
         }
         //        function deleteCheck11() {
         ////            alert("Hi");
@@ -210,9 +212,9 @@
         //        $("input:checkbox:unchecked").each(function () {
         //            alert("Id: " + $(this).attr("id") + " Value: " + $(this).val());
         //        });
-        });
+//        };
     </script>
-    
+
 </html>
 
 <style>
@@ -228,3 +230,9 @@
         padding: 8px;
     }
 </style>
+<script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
+<script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>
+<script src="StorageYard/JS/login/jquery.backstretch.min.js"></script>
+<script src="StorageYard/JS/login/retina-1.1.0.min.js"></script>
+<script src="StorageYard/JS/login/scripts.js"></script>
+<script type="text/javascript" src="StorageYard/JS/JQuery/common.js"></script>

@@ -47,4 +47,33 @@ public class CandidateF2FApprovalDAOImpl<T> extends GenericsDAOImpl<T> implement
         return list;
     }
 
+    @Override
+    public CandidateF2FApproval readByEmpIdAndReqId(int empid, int ReqId) {
+        CandidateF2FApproval candidateF2FApproval = new CandidateF2FApproval();
+        String query = " SELECT a"
+                + " FROM CandidateF2FApproval a "
+                + " WHERE a.candidateF2FRequest.id =" + ReqId
+                + " AND a.employeeMaster.id =" + empid;
+
+        List<?> list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            candidateF2FApproval = (CandidateF2FApproval) list.get(0);
+        } else {
+            candidateF2FApproval = null;
+        }
+        return candidateF2FApproval;
+    }
+
+    @Override
+    public List<?> readEmployeeCommentByReqId(int id) {
+        String query = " SELECT a.id,a.Comment,b.employeeName "
+                + " FROM CandidateF2FApproval a "
+                + " Left Join a.employeeMaster b "
+                + " WHERE a.candidateF2FRequest.id =" + id
+                + " And a.status = 1";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

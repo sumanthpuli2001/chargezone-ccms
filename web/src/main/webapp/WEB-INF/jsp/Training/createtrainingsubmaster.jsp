@@ -87,38 +87,7 @@
                                                     </div>
                                                 </div>
                                         </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6"><span style="color: red;font-size: 12px;"></span>
-                                                    <label>Training Sub Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <form:input path="trainingsubtype" id="trainingsubtype" class="form-control" placeholder="Training Sub Type" onchange="trainingOnChange('trainingsubtypeError');"></form:input>
-                                                         <span style="font-size: 14px; color: #dd4b39;" id="trainingsubtypeError"></span>
-                                                <%--<form:errors path="trainingsubtype" cssClass="errorDiv"></form:errors>--%>
-                                                    
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>Status:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <fieldset>
-                                                        <!--                                                    <input type="radio" name="status" id="status" value="0" checked>Active&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                            <input type="radio" name="status" id="status" value="1">Inactive-->
-                                                    <form:radiobutton path="status" id="status" name="status" required="required"  value="0"/>Active&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <form:radiobutton path="status" id="status" name="status" required="required" value="1"/>Inactive
-                                                </fieldset>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="form-group"><div class="col-md-12 col-sm-12">
-                                                <div class="col-sm-6">
-                                                    <label>Training Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="trainingType.id" id="trainingType" class="form-control " onchange="trainingOnChange('trainingTypeError');">
-                                                            <form:option label="-- Select --"  value="" ></form:option>
-                                                            <c:forEach var="list" items="${list}" >
-                                                                <form:option value="${list.key}">${list.value}</form:option>
-                                                            </c:forEach>
-                                                        </form:select>
-                                                     <span style="font-size: 14px; color: #dd4b39;" id="trainingTypeError"></span>
-                                                    </div>
-                                                </div></div>
+                                            
                                             <%--</c:if>--%>
                                         <div class="form-group">
                                             <div class=" col-sm-6 col-sm-offset-5">

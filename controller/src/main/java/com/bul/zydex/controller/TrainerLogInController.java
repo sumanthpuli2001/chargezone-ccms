@@ -8,15 +8,19 @@ package com.bul.zydex.controller;
 import com.bul.zydex.model.EmployeeFeedback;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.Trainer;
+import com.bul.zydex.model.TrainingAssessment;
 import com.bul.zydex.model.TrainingAttendance;
 import com.bul.zydex.model.TrainingFeedback;
 import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.TrainingSubType;
 import com.bul.zydex.model.TrainingType;
 import com.bul.zydex.model.UserMaster;
+import com.bul.zydex.service.Training.TrainingAssessmentService;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -24,6 +28,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.springframework.validation.BindException;
 //import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -182,7 +187,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         List attenlist = new LinkedList();
         attenlist = trainingAttendanceService.gettrainerTasks(eventdate, Integer.parseInt(id));
         boolean shosts = true;
-        boolean feedbackStatus=trainingAttendanceService.checkFeedbackstatus(Integer.parseInt(id));
+        boolean feedbackStatus = trainingAttendanceService.checkFeedbackstatus(Integer.parseInt(id));
         if (attenlist.isEmpty()) {
             shosts = false;
             attenlist = trainingIdentificationService.getTrainerAttendance(Integer.parseInt(id));
@@ -196,12 +201,13 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         mv.setViewName("Trainer/TrainerMasterlblView");
         return mv;
     }
+
     public ModelAndView viewProfile1(HttpServletRequest request,
-            HttpServletResponse response ,String id,String eventdate) throws Exception {
+            HttpServletResponse response, String id, String eventdate) throws Exception {
         ModelAndView mv = new ModelAndView();
 //        String id = request.getParameter("id");
 //        String eventdate = request.getParameter("eventdate");
- boolean feedbackStatus=trainingAttendanceService.checkFeedbackstatus(Integer.parseInt(id));
+        boolean feedbackStatus = trainingAttendanceService.checkFeedbackstatus(Integer.parseInt(id));
         List attenlist = new LinkedList();
         attenlist = trainingAttendanceService.gettrainerTasks(eventdate, Integer.parseInt(id));
         boolean shosts = true;
@@ -225,34 +231,33 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         String trainingMasterId = request.getParameter("trainingMasterId");
         String eventdate = request.getParameter("eventdate");
 //        Object[] allTrainingsId = (Object[])request.getParameterValues("allTrainingsId");
-        
-        
+
         String checkStr = "";
         ModelAndView mv = new ModelAndView();
         int count = 0;
         HttpSession session = request.getSession(false);
         Trainer trainer = (Trainer) session.getAttribute("trainerMaster");
-        TrainingMaster trnMaster =new TrainingMaster();
+        TrainingMaster trnMaster = new TrainingMaster();
         trnMaster.setId(Integer.parseInt(trainingMasterId));
 //        List<String> checkIdList = Arrays.asList(checkId);
 //            checkIdList.forEach((checkedValues) -> departmentMasterService.delete(Integer.parseInt(checkedValues)));
         boolean flag = false;
         for (String checkedValues : checkId) {
             try {
-                
+
                 EmployeeMaster em = new EmployeeMaster();
                 em.setId(Integer.parseInt(checkedValues));
-                TrainingAttendance trnatt=new TrainingAttendance();
+                TrainingAttendance trnatt = new TrainingAttendance();
                 trnatt.setEmployeeMaster(em);
                 trnatt.setTrainer(trainer);
                 trnatt.setTrainingMaster(trnMaster);
                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar cal = Calendar.getInstance();
-        Date d = new Date();
-        String currentDate = dateFormat.format(d);
-        trnatt.setTrainingDate(eventdate);
-        trnatt.setAttendanceDate(currentDate.toString());
-        trnatt.setStatus(0);
+                Calendar cal = Calendar.getInstance();
+                Date d = new Date();
+                String currentDate = dateFormat.format(d);
+                trnatt.setTrainingDate(eventdate);
+                trnatt.setAttendanceDate(currentDate.toString());
+                trnatt.setStatus(0);
                 trainingAttendanceService.create(trnatt);
             } catch (Exception e) {
             }
@@ -261,22 +266,22 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         for (Object checkedValue : Tran) {
             try {
                 Object[] obj = (Object[]) checkedValue;
-                if(trainingIdentificationService.checkExistance(trnMaster.getId(),Integer.parseInt(""+obj[0]),trainer.getId(),eventdate)){
-                EmployeeMaster em = new EmployeeMaster();
-                em.setId(Integer.parseInt(""+obj[0]));
-                
-                TrainingAttendance trnatt=new TrainingAttendance();
-                trnatt.setEmployeeMaster(em);
-                trnatt.setTrainer(trainer);
-                trnatt.setTrainingMaster(trnMaster);
-                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar cal = Calendar.getInstance();
-        Date d = new Date();
-        String currentDate = dateFormat.format(d);
-        trnatt.setTrainingDate(eventdate);
-        trnatt.setAttendanceDate(currentDate.toString());
-        trnatt.setStatus(1);
-                trainingAttendanceService.create(trnatt);
+                if (trainingIdentificationService.checkExistance(trnMaster.getId(), Integer.parseInt("" + obj[0]), trainer.getId())) {
+                    EmployeeMaster em = new EmployeeMaster();
+                    em.setId(Integer.parseInt("" + obj[0]));
+
+                    TrainingAttendance trnatt = new TrainingAttendance();
+                    trnatt.setEmployeeMaster(em);
+                    trnatt.setTrainer(trainer);
+                    trnatt.setTrainingMaster(trnMaster);
+                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    Calendar cal = Calendar.getInstance();
+                    Date d = new Date();
+                    String currentDate = dateFormat.format(d);
+                    trnatt.setTrainingDate(eventdate);
+                    trnatt.setAttendanceDate(currentDate.toString());
+                    trnatt.setStatus(1);
+                    trainingAttendanceService.create(trnatt);
                 }
             } catch (Exception e) {
             }
@@ -286,24 +291,76 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         } else {
             mv.addObject("successMessage", "Information Is Submitted Successfully.");
         }
-        mv=showcalendar(request, response);
+        mv = showcalendar(request, response);
 //        mv.setViewName("Trainer/TrainerMasterlblView");
         return mv;
     }
+
     public ModelAndView sendFeedback(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        String eventdate=request.getParameter("eventdate");
+        String eventdate = request.getParameter("eventdate");
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
         UserMaster user = (UserMaster) session.getAttribute("user");
-        int id =Integer.parseInt(request.getParameter("id"));
-        TrainingMaster trainingMaster=(TrainingMaster)trainingMasterService.readById(id);
+        int id = Integer.parseInt(request.getParameter("id"));
+        TrainingMaster trainingMaster = (TrainingMaster) trainingMasterService.readById(id);
         trainingMaster.setStatus(1);
         trainingMasterService.update(trainingMaster);
-        mv=viewProfile1(request, response, ""+id, eventdate);
+        mv = viewProfile1(request, response, "" + id, eventdate);
 //        request.setAttribute("id", id);
 //        request.setAttribute("eventdate", eventdate);
 //        mv.setViewName("Training/applyTrainingFeedback");
+        return mv;
+    }
+
+    public ModelAndView trainerAssessMent(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        TrainingAssessment trainingAssessment = new TrainingAssessment();
+        String eventdate = request.getParameter("eventdate");
+        int id = Integer.parseInt(request.getParameter("id"));
+        TrainingMaster trainingMaster = new TrainingMaster();
+        trainingMaster.setId(id);
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        questionList(request);
+        List attenlist = new LinkedList();
+        attenlist = trainingAttendanceService.gettrainerTasks(eventdate, id);
+        mv.getModelMap().put("trainingAssessment", trainingAssessment);
+        request.setAttribute("eventdate", eventdate);
+        request.setAttribute("trainingMaster", trainingMaster);
+        request.setAttribute("list", attenlist);
+        mv.setViewName("Trainer/TrainingAssessment");
+
+        return mv;
+    }
+
+    public ModelAndView submitTrainingAssessment(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.now();
+        TrainingAssessment trainingAssessment = new TrainingAssessment();
+        Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
+//        String eventdate = request.getParameter("eventdate");
+        int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
+        BindException errors = new BindException(trainingAssessment, "trainingAssessment");
+        bind(request, trainingAssessment);
+        TrainingMaster trainingMaster = trainingMasterService.readById(trainingMasterId);
+        trainingAssessment.setTrainingMaster(trainingMaster);
+        trainingAssessment.setCreatedBy(trnMaster.getId());
+        trainingAssessment.setCreatedDate(dtf.format(localDate));
+        String[] checkId = request.getParameterValues("checkId");
+        trainingAssessment.setStatus(0);  
+        for (String string : checkId) {
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            employeeMaster.setId(Integer.parseInt(string));
+            trainingAssessment.setEmployeeMaster(employeeMaster);
+            trainingAssessmentService.create(trainingAssessment);
+        }
+
+//        String[] checkId = request.getParameterValues("checkId");
+        ModelAndView mv = new ModelAndView();
+        mv = showcalendar(request, response);
         return mv;
     }
 }

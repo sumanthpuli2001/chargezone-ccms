@@ -55,6 +55,9 @@
         <property name="udatedDate" type="string">
             <column name="udated_date" length="45" />
         </property>
+        <property name="StartTimeNow" type="string">
+            <column name="Start_time_now" length="45" />
+        </property>
     </class>
   
 

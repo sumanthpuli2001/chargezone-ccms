@@ -863,6 +863,7 @@
                     <li><a href="trainingIdentification.htm?act=showcalendar"><i class="fa fa-circle-o"></i>My Training List</a></li>
                     <li><a href="trainingIdentification.htm?act=createTraineAssigne"><i class="fa fa-circle-o"></i>Assign Trainer</a></li>
                     <li><a href="trainingIdentification.htm?act=showTrainingFeedbackList"><i class="fa fa-circle-o"></i>Training Feedback Details</a></li>
+                    <li><a href="trainingAssessment.htm?act=clickassessment"><i class="fa fa-circle-o"></i>Training Assessment</a></li>
 
 
             </li>

@@ -13,6 +13,11 @@
         window.location = 'candidateF2FApproval.htm?act=openF2FApproverReviewPage&id='+f2fRequestId;
     }
 </script>
+<script>
+    function showClick(f2fRequestId) {
+        window.location = 'candidateF2FApproval.htm?act=showclickAdmin&id='+f2fRequestId;
+    }
+</script>
 
 <html>
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
@@ -88,22 +93,22 @@
                                                             <td>
                                                                 <c:if test="${list[4] eq 0}">
 
-                                                                    <span>Pending</span>    
+                                                                    <span class="label label-badge">Pending</span>    
                                                                 </c:if>
                                                                 <c:if test="${list[4] eq 1}">
 
-                                                                    <span>Submitted By Comittee</span>    
+                                                                    <span class="label label-success">Submitted By Comittee</span>    
                                                                 </c:if>
                                                                 <c:if test="${list[4] eq 2}">
 
-                                                                    <span>
+                                                                    <span class="label label-success">
                                                                         Submitted By HR
 
                                                                     </span>    
                                                                 </c:if>
                                                                 <c:if test="${list[4] eq 3}">
 
-                                                                    <span>
+                                                                    <span class="label label-success">
                                                                         Final Submitted
 
                                                                     </span>    
@@ -116,6 +121,11 @@
                                                                 <div class="btn-group">
                                                                         <button type="button" onclick="reviewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
+                                                                        </button>
+                                                                    </div>
+                                                                <div class="btn-group">
+                                                                        <button type="button" onclick="showClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            &nbsp;&nbsp;show
                                                                         </button>
                                                                     </div>
                                                                 

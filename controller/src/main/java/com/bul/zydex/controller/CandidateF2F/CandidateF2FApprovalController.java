@@ -247,8 +247,8 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         mv.setViewName("CandidateFtoF/F2FReqForApprovalResult");
         return mv;
     }
-    
-        public ModelAndView showclickAdmin(HttpServletRequest request,
+
+    public ModelAndView showclickAdmin(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
@@ -271,6 +271,8 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
 
         candidateF2FRequest.setCandidateApplyJob(candidateApplyJob);
         candidateF2FRequest.setVacancyMaster(vm);
+        List<?> approverCommentList = candidateF2FApprovalService.readEmployeeCommentByReqId(candidateF2FRequest.getId());
+        request.setAttribute("commentlist", approverCommentList);
         request.setAttribute("comitteeList", committeedetaillist);
         mv.getModelMap().put("candidateF2FRequest", candidateF2FRequest);
 

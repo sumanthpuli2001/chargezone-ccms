@@ -99,57 +99,53 @@
                                 <form:form class="form-horizontal" method="post"
                                            commandName="candidateF2FRequest" action="candidateF2FRequest.htm?act=submitFtoF" onsubmit="return saveSubmit()" >
                                     <input type="hidden" id="applicationId" name="applicationId" value="${applicationId}">   
-
-
-
-                                    <div class="form-group" style="margin-top: 3%; margin-left:0%; margin-right: 0%;">
-                                        <div class="col-sm-6 col-md-3 col-lg-3 col-xs-12">
+                              
+                                  
+                                 
+                                 <div class="form-group">
+                                        <div class="col-sm-6">
                                             <label>Candidate Name:</label> &nbsp;&nbsp;&nbsp;
                                             <span>${candidateApplyJob.name}</span>
                                         </div>
-                                        <div class="col-sm-6 col-md-3 col-lg-3 col-xs-12">
+                                        <div class="col-sm-6">
                                             <label>Vacancy Name:</label> &nbsp;&nbsp;&nbsp;
                                             <span>${vacancyMaster.name}</span>
                                         </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
-                                            <div class="col-md-4 col-lg-4" style="padding-right: 3%;">
-                                                <label>Date Of Interview:<span style="color: red;font-size: 12px;">*</span></label>
-                                            </div>
-                                            <div class="col-md-8 col-lg-8">
-                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" >
-                                                    <%--<form:input path="dateOfInterview" class="form-control" onchange="dateDifference(this.value);" placeholder="Date" readonly="true" ></form:input>--%>
-                                                    <input type="text" id="datetimepicker2" class="form-control" placeholder="Please select From Date" name="dateOfInterview" readonly="true" style=" font-size: 12px; height: 26px;"/>
-                                                    <span class="input-group-addon" style="padding: 3px 8px;"><span class="glyphicon glyphicon-th"></span></span>
-                                                </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-5">
+                                            <label>Date Of Interview:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" >
+                                                <%--<form:input path="dateOfInterview" class="form-control" onchange="dateDifference(this.value);" placeholder="Date" readonly="true" ></form:input>--%>
+                                                <input type="text" id="datetimepicker2" class="form-control" placeholder="Please select From Date" name="dateOfInterview" readonly="true"/>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                             </div>
                                             <%--<form:errors path="dateOfInterview" cssClass="errorDiv"></form:errors>--%>
                                         </div>
                                     </div>
-                                    
                                     <div class="form-group">
-                                        <div class="col-sm-6 col-md-5 col-lg-5 col-xs-12">
-                                            <div class="col-md-1 col-lg-1" style="padding-right: 10%;">
-                                                <label>Venue:<span style="color: red;font-size: 12px;">*</span></label>
+                                        <div class="col-sm-6">
+                                            <label>Venue:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <form:textarea path="location" class="form-control" placeholder="Venue" rows="3"></form:textarea>
+                                                <span id="empRemarkError" style="color: red;"></span>
                                             </div>
-                                            <div class="col-md-10 col-lg-10">
-                                                <form:textarea path="location" class="form-control" placeholder="Venue" rows="3"></form:textarea>
-                                                    <span id="empRemarkError" style="color: red;"></span>
-                                                </div>
+                                        </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label>Interview Committee<span style="color: red;font-size: 12px;">*</span></label>
+                                          
                                             </div>
-                                                    <div class="col-sm-6 col-md-7 col-lg-7 col-xs-12">
-                                                        <div class="col-md-2 col-lg-2" style="padding-right: 3%;">
-                                                <label>Interview Committee<span style="color: red;font-size: 12px;">*</span></label>
-
-                                            </div>
-                                                    <div class="col-md-10 col-sm-10 col-lg-10 col-xs-12">
+                                       
+                                        <!--<div class="form-group">-->
+                                            <div class="col-md-8 col-sm-8">
                                                 <div class="table-responsive">
-                                                    <table id="policyTable" class="table table-bordered table-striped table-hover" style="margin-top: 0px ; font-size: 11px; " align="Center"  >
+                                                    <table id="policyTable" class="table table-bordered table-striped table-hover" style="margin-top: 10px" align="Center"  >
                                                         <tr>
                                                             <!--<th style="text-align: center; vertical-align: middle;width: 5%"></th>-->
-                                                            <th style="text-align: center; vertical-align: middle; padding-top: 0%; padding-bottom: 0%;">User Name</th>
+                                                            <th style="text-align: center; vertical-align: middle">User Name</th>
                                                             <!--<th style="text-align: center; vertical-align: middle">Level</th>-->
                                                             <!--<th style="text-align: center; vertical-align: middle">Amount</th>-->
-                                                            <th style="text-align: center; vertical-align: middle; padding-top: 0%; padding-bottom: 0%;">Add New</th>
+                                                            <th style="text-align: center; vertical-align: middle">Add New</th>
                                                         <input type="hidden" name="policyCount" id="policyCount" value="1"/>
                                                         </tr>
                                                         <tr>
@@ -164,9 +160,9 @@
                                                             </div>
                                                             <span id="policyError1" style="color: red;"></span>
                                                         </td>
-                                                        <!--                                                        <td style="text-align: center">
-                                                                                                                    <input type="text"  name="policyNumber1" id="policyNumber1" value="1" readonly="true"class="form-control">
-                                                                                                                </td>-->
+<!--                                                        <td style="text-align: center">
+                                                            <input type="text"  name="policyNumber1" id="policyNumber1" value="1" readonly="true"class="form-control">
+                                                        </td>-->
 
                                                         <td style="text-align: center">
                                                             <span style='margin-top: 5px;'>
@@ -177,15 +173,9 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        </div>
                                         <div class="form-group">
-                                            
-
-                                            <!--<div class="form-group">-->
-                                            
-                                        <div class="form-group">
-                                            <div class="col-sm-6 col-sm-offset-5" style="margin-left: 84.666667%;">
-                                                <input type="submit" class="btn " style="width: 100px; background: #01DF3A; border-radius: 6px; padding-top: 0%; padding-bottom: 0%;"   title="" value="SUBMIT">
+                                            <div class="col-sm-6 col-sm-offset-5">
+                                                <input type="submit" class="btn btn-primary" style="width: 100px;"   title="" value="SUBMIT">
                                             </div>
                                             <!--                                        <div class=" col-sm-offset-2 col-sm-3 ">
                                                                                         <button type="button" class="btn btn-danger" data-original-title="" title="" onclick="window.location = 'departmentMaster.htm?act=showList'">Cancel</button>
@@ -235,7 +225,8 @@
 
                 document.getElementById("policyerror").innerHTML = "- It must be filled.";
                 flag3 = false;
-            } else {
+            }
+            else {
                 return true;
             }
             return false;
@@ -268,6 +259,6 @@
 //    format: 'yyyy-mm-dd hh:ii'
 //});
     });
-
+    
 </script>
 

@@ -148,7 +148,7 @@
                                                                         <th>${list[4]}</th>
                                                                         <th>${list[5]}</th>
                                                                         <th>${list[6]}</th>
-                                                                        <th>${list[8]}</th>
+                                                                        <th>${list[7]}</th>
                                                                         <th style="width: 50px;">
                                                                             <c:if test="${list[8] eq 0}">
                                                                                 <span>

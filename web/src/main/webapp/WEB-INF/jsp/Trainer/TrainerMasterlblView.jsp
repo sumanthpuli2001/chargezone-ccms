@@ -87,7 +87,6 @@
                             
                             <div class="tab-content">
                                 <!--<button type="button" class="btn btn-primary" title="" style="float: right; width: 120px;" onclick="window.history.back();"></i>&nbsp;&nbsp;BACK</button>-->
-                                <input type="button" class="btn btn-primary" value="Back" style="float: left" onclick="window.location = 'trainerLogin.htm?act=showcalendar'" />
                                 <c:if test="${feedbackStatus eq true}">
                                 <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location='trainerLogin.htm?act=sendFeedback&id=${trainingMasterId}&eventdate=${eventdate}'"><i class="fa fa-pencil-square-o"></i>Get Feedback</button>
                                 </c:if>

@@ -21,4 +21,6 @@ public interface CandidateF2FApprovalDAO<T> extends GenericsDAO<T> {
 
     public CandidateF2FApproval readByEmpIdAndReqId(int empid, int ReqId);
 
+    public List<?> readEmployeeCommentByReqId(int id);
+
 }

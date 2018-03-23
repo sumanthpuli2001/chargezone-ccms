@@ -14,10 +14,13 @@ import java.util.List;
  *
  * @author Vikas
  */
-public interface CandidateF2FApprovalService<T> extends GenericsService<T>{
-       public List<?> readByReqId(int id);
-       
-        public List<?> readByEmpId(int empid);
-        
-          public CandidateF2FApproval readByEmpIdAndReqId(int empid, int ReqId);
+public interface CandidateF2FApprovalService<T> extends GenericsService<T> {
+
+    public List<?> readByReqId(int id);
+
+    public List<?> readByEmpId(int empid);
+
+    public CandidateF2FApproval readByEmpIdAndReqId(int empid, int ReqId);
+
+    public List<?> readEmployeeCommentByReqId(int id);
 }

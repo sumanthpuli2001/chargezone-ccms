@@ -115,7 +115,7 @@
                                                                 </c:if>
                                                                 <c:if test="${list[4] eq 4}">
 
-                                                                    <span class="label label-danger">Reject</span>    
+                                                                    <span class="label label-danger">Rejected</span>    
                                                                 </c:if>
 
 
@@ -133,7 +133,7 @@
                                                                 <c:if test="${list[4] eq 1}">
                                                                     <div class="btn-group">
                                                                         <button type="button" onclick="reviewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
-                                                                            &nbsp;&nbsp;Approval
+                                                                            &nbsp;&nbsp;Edit
                                                                         </button>
                                                                     </div>
                                                                 </c:if>

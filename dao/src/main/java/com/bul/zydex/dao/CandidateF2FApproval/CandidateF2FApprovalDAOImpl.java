@@ -64,4 +64,16 @@ public class CandidateF2FApprovalDAOImpl<T> extends GenericsDAOImpl<T> implement
         return candidateF2FApproval;
     }
 
+    @Override
+    public List<?> readEmployeeCommentByReqId(int id) {
+        String query = " SELECT a.id,a.Comment,b.employeeName "
+                + " FROM CandidateF2FApproval a "
+                + " Left Join a.employeeMaster b "
+                + " WHERE a.candidateF2FRequest.id =" + id
+                + " And a.status = 1";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

@@ -1148,6 +1148,9 @@
         <property name="candidateJobApplicationService" ref="candidateJobApplicationService1"></property>
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
         <property name="vacancyMasterService" ref="vacancyMasterService1"/>
+        <property name="locationMasterService" ref="locationMasterService1" />
+        <property name="jobtypeMasterService" ref="jobtypeMasterService1"/>
+        <property name="mprMasterService" ref="mprMasterService1"/>
     </bean>
     <bean id="trainingAssessmentController1" class="com.bul.zydex.controller.Training.TrainingAssessmentController" parent="controllerConfig" >
         <property name="trainingAssessmentService" ref="trainingAssessmentService1"></property>

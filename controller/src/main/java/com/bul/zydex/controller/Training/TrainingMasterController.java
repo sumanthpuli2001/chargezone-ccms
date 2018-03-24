@@ -39,7 +39,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class TrainingMasterController extends TrainingMasterAbstract {
 
     public ModelAndView showList(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
-        
+
         ModelAndView mv = new ModelAndView();
         List<?> trainingList = trainingMasterService.readTrainingMasterList();
         mv.getModelMap().put("list", trainingList);
@@ -117,7 +117,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
             String companySource = request.getParameter("companySponsor");
             int reimbursable = Integer.parseInt(request.getParameter("reimbursable"));
 //            int status = Integer.parseInt(request.getParameter("status"));
-            
+
             HttpSession session = request.getSession();
             UserMaster userMaster = (UserMaster) session.getAttribute("user");
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -174,7 +174,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
                     "trainingList", trainingList);
 //            mv.setViewName(
 //                    "Training/TrainingMaster");
-              mv = showList(request,response,trainingMaster);
+            mv = showList(request, response, trainingMaster);
 
         }
 //            mv = searchSubmit(request, response);
@@ -184,6 +184,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
     public ModelAndView EditSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         TrainingMaster trainingMaster = new TrainingMaster();
+        Integer trainingId=Integer.parseInt(request.getParameter("id"));
         String trainingTitle = request.getParameter("trainingTitle");
         String trainingDescription = request.getParameter("trainingDescription");
         String trainingOwner = request.getParameter("trainingOwner");
@@ -199,14 +200,14 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         String trainingSource = request.getParameter("trainingSource");
         String companySource = request.getParameter("companySponsor");
         int reimbursable = Integer.parseInt(request.getParameter("reimbursable"));
-        int status = Integer.parseInt(request.getParameter("status"));
         HttpSession session = request.getSession();
         UserMaster userMaster = (UserMaster) session.getAttribute("user");
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Calendar cal = Calendar.getInstance();
         Date d = new Date();
         String currentDate = dateFormat.format(d);
-
+        TrainingMaster trn = trainingMasterService.readById(trainingId);
+        trainingMaster.setId(trainingId);
         trainingMaster.setTrainingTitle(trainingTitle);
         trainingMaster.setTrainingDescription(trainingDescription);
         trainingMaster.setTrainingOwner(trainingOwner);
@@ -222,7 +223,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         trainingMaster.setTrainingSource(trainingSource);
         trainingMaster.setTrainingSource(null);
         trainingMaster.setReimbursable(reimbursable);
-        trainingMaster.setStatus(0);
+        trainingMaster.setStatus(trn.getStatus());
         trainingMaster.setCreatedBy(userMaster.getId());
         trainingMaster.setCreatedDate(currentDate);
         trainingMaster.setUpdatedBy(0);
@@ -262,7 +263,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
             List<?> trainingList = trainingMasterService.read();
             mv.addObject("trainingList", trainingList);
 //            mv.setViewName("Training/TrainingMaster");
-            mv = showList(request,response,trainingMaster);
+            mv = showList(request, response, trainingMaster);
         }
 
 //            mv = searchSubmit(request, response);
@@ -328,7 +329,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         }
 //        List<?> trainingList = trainingMasterService.read();
 //          mv.addObject("trainingList", trainingList);
-        mv = showList(request,response,trainingMaster);
+        mv = showList(request, response, trainingMaster);
 //        showList(request,response,trainingMaster);
         return mv;
     }

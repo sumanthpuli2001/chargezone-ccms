@@ -63,7 +63,7 @@ public class TrainingMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Trai
     @Override
     public List<?> readTrainingMasterList() {
         String query = " "
-                + " select a.id, a.trainingTitle, a.trainingDescription, b.trainerName,c.training, a.status "
+                + " select a.id, a.trainingTitle, a.trainingDescription, b.trainerName,c.training, a.startDate, a.endDate "
                 + " FROM TrainingMaster a "
                 + " left join a.trainer b "
                 + " left join a.trainingType c"

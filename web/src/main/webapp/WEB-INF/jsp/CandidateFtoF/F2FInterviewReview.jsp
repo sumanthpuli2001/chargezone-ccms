@@ -173,7 +173,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-4" style="text-align: left">
                                             <%--<c:if test="${recruitmentMaster.mppStatus == 1 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 0}">--%>
-                                            <input type="submit" class="btn btn-success"  id="btnType1" name="btnType" value="APPROVE" style="width: 100px" ></input>
+                                            <input type="submit" class="btn btn-danger" id="btnType2" name="btnType"  value="REJECT" style="width: 100px"></input>
                                             <%--</c:if>--%>
                                         </div>
                                         <div class="col-sm-4" style="text-align: center">
@@ -183,7 +183,7 @@
                                         </div>
                                         <div class="col-sm-4" style="text-align: right">
                                             <%--<c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 3}">--%>
-                                            <input type="submit" class="btn btn-danger" id="btnType2" name="btnType"  value="REJECT" style="width: 100px"></input>
+                                            <input type="submit" class="btn btn-success"  id="btnType1" name="btnType" value="APPROVE" style="width: 100px" ></input>
                                             <%--</c:if>--%>
                                         </div>
                                     </div>

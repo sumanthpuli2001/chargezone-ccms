@@ -133,7 +133,7 @@
                                                                 <c:if test="${list[4] eq 1 || list[4] eq 3}">
                                                                     <div class="btn-group">
                                                                         <button type="button" onclick="reviewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
-                                                                            &nbsp;&nbsp;Edit
+                                                                            &nbsp;&nbsp;Approval
                                                                         </button>
                                                                     </div>
                                                                 </c:if>

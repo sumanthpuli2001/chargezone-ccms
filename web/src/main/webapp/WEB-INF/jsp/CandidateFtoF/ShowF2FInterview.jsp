@@ -146,7 +146,7 @@
                                                             <span> ${numberOfPositionMpr}</span>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>Experience:</label> &nbsp;&nbsp;&nbsp;
+                                                            <label>Work Experience(In Years):</label> &nbsp;&nbsp;&nbsp;
                                                             <span>${MprExperience}</span>
                                                         </div>
                                                     </div>

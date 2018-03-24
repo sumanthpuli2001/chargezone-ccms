@@ -5,7 +5,6 @@
  */
 package com.bul.zydex.dao.Recruitment;
 
-
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.CandidateJobApplication;
 import java.util.List;
@@ -41,7 +40,8 @@ public class CandidateJobApplicationDAOImpl<T> extends GenericsDAOImpl<T> implem
                 + " FROM CandidateJobApplication a "
                 + " LEFT JOIN a.candidateApplyJob b "
                 + " LEFT JOIN a.vacancyMaster c "
-                + " Where a.status!=0 ";
+                + " Where a.status!=0 "
+                + " order by a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
@@ -93,7 +93,7 @@ public class CandidateJobApplicationDAOImpl<T> extends GenericsDAOImpl<T> implem
         List list = getHibernateTemplate().find(query);
         if (!list.isEmpty()) {
             i = (Integer) list.get(0);
-            
+
         }
         return i;
     }

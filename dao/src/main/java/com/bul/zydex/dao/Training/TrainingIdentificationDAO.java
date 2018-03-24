@@ -24,7 +24,7 @@ public interface TrainingIdentificationDAO<T> extends GenericsDAO<T> {
 
     public List<?> getTrainerAttendance(int id);
 
-    public Boolean checkExistance(int trainingId, int empId, int trainerId);
+    public Boolean checkExistance(int trainingId, int empId, int trainerId, String eventdate);
 
     public List<?> ListeventDates(String eventDate, int userId);
 

@@ -95,7 +95,7 @@
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[2]}</td>
                                                                 <td>${list[3]}</td>
-                                                                                     <td>
+                                                                <td>
                                                                     <c:if test="${list[4] eq 0}"><span class="badge">Pending</span></c:if>
                                                                     <%--<c:if test="${list[5] == 1}"><span class="badge">Recycle</span></c:if>--%>
                                                                     <%--<c:if test="${list[5] == 2}"><span class="badge">Recycle</span></c:if>--%>
@@ -109,10 +109,17 @@
 
 
                                                                 </td>
-                                                                
+
                                                                 <td>
                                                                     <div class="btn-group">
+                                                                        <c:if test="${list[5] eq 0}">
                                                                         <button type="button" onclick="mPPViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            &nbsp;&nbsp;Edit
+                                                                        </button>
+                                                                        </c:if>
+                                                                    </div>
+                                                                    <div class="btn-group">
+                                                                        <button type="button" onclick="viewMpp(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
                                                                         </button>
                                                                     </div>
@@ -142,6 +149,11 @@
     <script>
         function mPPViewClick(id) {
             window.location = 'recruitment.htm?act=mPPViewApproval&id=' + id;
+        }
+    </script>
+    <script>
+        function viewMpp(id) {
+            window.location = 'recruitment.htm?act=viewMppOnly&id=' + id;
         }
     </script>
 </html>

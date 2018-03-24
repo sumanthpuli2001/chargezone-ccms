@@ -31,4 +31,9 @@ public class TrainingTypeServiceImpl<T> extends GenericsServiceImpl<T> implement
     public List<?> readtrainingTypeDetail() {
         return trainingTypeDAO.readtrainingTypeDetail();
     }
+    
+      @Override
+    public List<?> trainingTypeBystatus() {
+        return trainingTypeDAO.trainingTypeBystatus();
+    }
 }

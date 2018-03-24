@@ -14,8 +14,7 @@
     <%--<%@include file="/WEB-INF/jsp/Common/Header.jsp"%>--%>
     <%--<%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>--%>
     <head>
-        <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">-->
 <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
 <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">-->
@@ -38,6 +37,7 @@
 
 <link rel="stylesheet" href="StorageYard/CSS/bootstrap-datetimepicker.css">
 <script type="text/javascript" src="StorageYard/JS/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+
 
         <style>
             #containers {
@@ -78,7 +78,7 @@
             <section class="content">
                 <input type="button" class="btn btn-primary" value="Back" style="float: left" onclick="window.location='trainerLogin.htm?act=showcalendar'" />
 <!--                <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location='trainerLogin.htm?act=showTrainingFeedbackList'"><i class="fa fa-pencil-square-o"></i>Feedback</button>-->
-                <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location='trainerLogin.htm?act=showTrainingFeedbackList'"><i class="fa fa-pencil-square-o"></i> Show Feedback</button>
+                <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location='trainerLogin.htm?act=showTrainingFeedbackList&trainingMasterId=${trainingMasterId}'"><i class="fa fa-pencil-square-o"></i> Show Feedback</button>
                 
                 <div class="row">
                     <div class="col-md-12">

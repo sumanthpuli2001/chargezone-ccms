@@ -607,4 +607,7 @@
     <bean id="trainingResultStatusService1" class="com.bul.zydex.service.Training.TrainingResultStatusServiceImpl">
         <property name="trainingResultStatusDAO" ref="trainingResultStatusDAO1" />
     </bean>
+    <bean id="trainingFeedbackService1" class="com.bul.zydex.service.Training.TrainingFeedbackServiceImpl">
+        <property name="trainingFeedbackDAO" ref="trainingFeedbackDAO1" />
+    </bean>
 </beans>

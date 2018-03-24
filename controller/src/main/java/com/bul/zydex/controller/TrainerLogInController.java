@@ -16,6 +16,7 @@ import com.bul.zydex.model.TrainingSubType;
 import com.bul.zydex.model.TrainingType;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.service.Training.TrainingAssessmentService;
+import com.sun.jmx.snmp.SnmpDataTypeEnums;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -180,33 +181,39 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         return mv;
     }
 
-    public ModelAndView viewProfile(HttpServletRequest request,
+   public ModelAndView viewProfile(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String id = request.getParameter("id");
-        boolean feedbackStatus = trainingAttendanceService.checkFeedbackstatus(Integer.parseInt(id));
         String eventdate = request.getParameter("eventdate");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date cDate = new Date();
-        String currentDate=sdf.format(cDate);
-        Date currenstarttdate = sdf.parse(currentDate);
-        Date currentenddate = sdf.parse(eventdate);
-       
         List attenlist = new LinkedList();
         attenlist = trainingAttendanceService.gettrainerTasks(eventdate, Integer.parseInt(id));
         boolean shosts = true;
-        boolean shosts2 = true;
+        boolean feedbackStatus = trainingAttendanceService.checkFeedbackstatus(Integer.parseInt(id));
         if (attenlist.isEmpty()) {
             shosts = false;
             attenlist = trainingIdentificationService.getTrainerAttendance(Integer.parseInt(id));
 
         }
-        if( currenstarttdate.compareTo(currentenddate) <=0 )
-       {
-          shosts2=false; 
-       }
-        request.setAttribute("shosts", shosts);
+        TrainingMaster trainingMaster1 = trainingMasterService.readById(Integer.parseInt(id));
+        TrainingType trainingType = trainingTypeService.readById(trainingMaster1.getTrainingType().getId());
+        TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster1.getTrainingSubType().getId());
+        Trainer trainer = trainerService.readById(trainingMaster1.getTrainer().getId());
+        trainingMaster1.setTrainingType(trainingType);
+        trainingMaster1.setTrainingSubType(trainingSubType);
+        trainingMaster1.setTrainer(trainer);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+        String currentDate = sdf.format(cDate);
+        Date currenstarttdate = sdf.parse(currentDate);
+        Date currentenddate = sdf.parse(eventdate);
+        boolean shosts2 = true;
+        if (currenstarttdate.compareTo(currentenddate) <= 0) {
+            shosts2 = false;
+        }
         request.setAttribute("shosts2", shosts2);
+        request.setAttribute("trainingMaster", trainingMaster1);
+        request.setAttribute("shosts", shosts);
         request.setAttribute("eventdate", eventdate);
         request.setAttribute("list", attenlist);
         request.setAttribute("trainingMasterId", id);
@@ -230,6 +237,24 @@ public class TrainerLogInController extends TrainerLogInAbstract {
             attenlist = trainingIdentificationService.getTrainerAttendance(Integer.parseInt(id));
 
         }
+        TrainingMaster trainingMaster1 = trainingMasterService.readById(Integer.parseInt(id));
+        TrainingType trainingType = trainingTypeService.readById(trainingMaster1.getTrainingType().getId());
+        TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster1.getTrainingSubType().getId());
+        Trainer trainer = trainerService.readById(trainingMaster1.getTrainer().getId());
+        trainingMaster1.setTrainingType(trainingType);
+        trainingMaster1.setTrainingSubType(trainingSubType);
+        trainingMaster1.setTrainer(trainer);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+        String currentDate = sdf.format(cDate);
+        Date currenstarttdate = sdf.parse(currentDate);
+        Date currentenddate = sdf.parse(eventdate);
+        boolean shosts2 = true;
+        if (currenstarttdate.compareTo(currentenddate) <= 0) {
+            shosts2 = false;
+        }
+        request.setAttribute("shosts2", shosts2);
+        request.setAttribute("trainingMaster", trainingMaster1);
         request.setAttribute("shosts", shosts);
         request.setAttribute("eventdate", eventdate);
         request.setAttribute("list", attenlist);
@@ -411,6 +436,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
             EmployeeMaster employeeMaster = new EmployeeMaster();
             employeeMaster.setId(Integer.parseInt(string));
             trainingAssessment.setEmployeeMaster(employeeMaster);
+
 
             trainingAssessmentService.create(trainingAssessment);
         }

@@ -50,7 +50,7 @@ public class TrainingMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Trai
                 //                + " left join a.departmentMaster b "
                 //                + " left join a.designationMaster c "
                 //                + " WHERE a.reportingManagerLevel1  like '%" + user + "%')";
-                + "select a.trainingMaster.trainingTitle, a.trainingFeedback.feedaback, description, dateTime from EmployeeFeedback a"
+                + "select a.trainingMaster.trainingTitle, a.trainingFeedback.feedaback, description, dateTime,a.employeeMaster.employeeName,a.id from EmployeeFeedback a"
                 //                +" where a.trainingMaster.id="+traininigId+" and a.employeeMaster.id= a.trainingMaster.trainer.id="+user;
                 + " where a.employeeMaster.id in(select b.employeeMaster.id from TrainingIdentification b where b.trainingMaster.id=" + traininigId + ")";
 

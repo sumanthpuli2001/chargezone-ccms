@@ -168,6 +168,10 @@
                                                         test="${candidateJobApplication.status eq 2}">
                                                         <button type="button" class="btn btn-primary" onclick="sendToF2F(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; F To F</button>
                                                     </c:if>    
+                                                    <c:if
+                                                        test="${candidateJobApplication.status eq 6}">
+                                                        <button type="button" class="btn btn-primary" onclick="sendToF2F(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; F To F</button>
+                                                    </c:if>    
                                                     <c:if test="${candidateJobApplication.status eq 2}">
                                                         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>
                                                     </c:if>

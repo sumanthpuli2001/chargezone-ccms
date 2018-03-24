@@ -65,8 +65,9 @@
 
 
                                         <form:form class="form-horizontal" method="post" onsubmit='return checkBlankField();'
-                                                   commandName="employeeFeedback" action="trainingIdentification.htm?act=submitEmployeeFeedbackCreate">
+                                                   commandName="employeeFeedback" action="trainingIdentification.htm?act=submitEmployeeFeedbackCreate&eventdate=${eventdate}">
                                             <input type ="hidden" id="id2" name="id2" value="${id}">
+                                            <input type ="hidden" id="id2" name="eventdate" value="${eventdate}">
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Feedback <span style="color: red;font-size: 12px;">*</span></label>

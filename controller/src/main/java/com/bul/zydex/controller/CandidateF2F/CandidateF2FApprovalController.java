@@ -158,7 +158,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             cja.setStatus(9);
             candidateJobApplicationService.update(cja);
             request.setAttribute("successMessage",
-                    "Information : The Request is Approved successfully.");
+                    "Information : The Request is Hold successfully.");
         }
         if (btnType.equals("REJECT")) {
 
@@ -173,7 +173,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             cja.setStatus(10);
             candidateJobApplicationService.update(cja);
             request.setAttribute("successMessage",
-                    "Information : The Request is Approved successfully.");
+                    "Information : The Request is Rejected successfully.");
 
         }
         List<?> f2flist = new ArrayList<>();
@@ -247,8 +247,8 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         mv.setViewName("CandidateFtoF/F2FReqForApprovalResult");
         return mv;
     }
-    
-        public ModelAndView showclickAdmin(HttpServletRequest request,
+
+    public ModelAndView showclickAdmin(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
@@ -271,6 +271,8 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
 
         candidateF2FRequest.setCandidateApplyJob(candidateApplyJob);
         candidateF2FRequest.setVacancyMaster(vm);
+        List<?> approverCommentList = candidateF2FApprovalService.readEmployeeCommentByReqId(candidateF2FRequest.getId());
+        request.setAttribute("commentlist", approverCommentList);
         request.setAttribute("comitteeList", committeedetaillist);
         mv.getModelMap().put("candidateF2FRequest", candidateF2FRequest);
 

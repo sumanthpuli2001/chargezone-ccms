@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -266,7 +267,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         for (Object checkedValue : Tran) {
             try {
                 Object[] obj = (Object[]) checkedValue;
-                if (trainingIdentificationService.checkExistance(trnMaster.getId(), Integer.parseInt("" + obj[0]), trainer.getId())) {
+                if (trainingIdentificationService.checkExistance(trnMaster.getId(), Integer.parseInt("" + obj[0]), trainer.getId(),eventdate)) {
                     EmployeeMaster em = new EmployeeMaster();
                     em.setId(Integer.parseInt("" + obj[0]));
 
@@ -301,15 +302,43 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         String eventdate = request.getParameter("eventdate");
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
-        UserMaster user = (UserMaster) session.getAttribute("user");
         int id = Integer.parseInt(request.getParameter("id"));
         TrainingMaster trainingMaster = (TrainingMaster) trainingMasterService.readById(id);
         trainingMaster.setStatus(1);
         trainingMasterService.update(trainingMaster);
-        mv = viewProfile1(request, response, "" + id, eventdate);
+        mv=viewProfile1(request, response, ""+id, eventdate);
 //        request.setAttribute("id", id);
 //        request.setAttribute("eventdate", eventdate);
 //        mv.setViewName("Training/applyTrainingFeedback");
+        return mv;
+    }
+    
+    public ModelAndView showTrainingFeedbackList(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
+        ModelAndView mv = new ModelAndView();
+            
+        
+        String trainingId = request.getParameter("trainingMasterId");
+         TrainingMaster trainingMaster1 = new TrainingMaster();
+      
+        
+        EmployeeFeedback employeeFeedback = new EmployeeFeedback();
+        HttpSession session = request.getSession(false);
+//        UserMaster user = (UserMaster) session.getAttribute("user");
+        Trainer user = (Trainer) session.getAttribute("trainerMaster");
+//        Trainer trainer= new Trainer();
+        List<?> trainingFeedbackList = new ArrayList();
+//        if (null != trainingId) {
+            trainingFeedbackList = trainingMasterService.fetchtTrainingforFeedback(Integer.parseInt(trainingId), user.getId());
+//        }
+        trainingsList(request);
+        employeeFeedback.setTrainingMaster(trainingMaster);
+//         mv.getModelMap().put("trainerMaster", trainerMaster);
+        mv.addObject("trainingFeedbackList", trainingFeedbackList);
+        mv.addObject("trainingMaster1", trainingMaster1);
+//        mv.addObject("employeeFeedback", employeeFeedback);
+//        mv.addObject("trainerMaster", trainer);
+//        mv.addObject("trainingsMaps", trainingsMap);
+        mv.setViewName("Trainer/TrainerFeedbackDetails");
         return mv;
     }
 
@@ -350,17 +379,59 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         trainingAssessment.setCreatedBy(trnMaster.getId());
         trainingAssessment.setCreatedDate(dtf.format(localDate));
         String[] checkId = request.getParameterValues("checkId");
-        trainingAssessment.setStatus(0);  
+        trainingAssessment.setStatus(0);
         for (String string : checkId) {
             EmployeeMaster employeeMaster = new EmployeeMaster();
             employeeMaster.setId(Integer.parseInt(string));
             trainingAssessment.setEmployeeMaster(employeeMaster);
+            Integer hour = Integer.parseInt(trainingAssessment.getDuration())/60;
+            Integer minits = Integer.parseInt(trainingAssessment.getDuration())%60;
+            String strhout = hour.toString();
+            String strminits = minits.toString();
+            if(strhout.length()==1){
+             strhout= "0"+strhout;
+            }
+            if(strhout.length()==0){
+             strhout= "00";
+            }
+            if(strminits.length()==1){
+             strminits= "0"+strminits;
+            }
+            if(strminits.length()==0){
+             strminits= "00";
+            }
+            String finalduration = strhout+":"+strminits+":00";
+           trainingAssessment.setDuration(finalduration);
+            
             trainingAssessmentService.create(trainingAssessment);
         }
 
 //        String[] checkId = request.getParameterValues("checkId");
         ModelAndView mv = new ModelAndView();
         mv = showcalendar(request, response);
+        return mv;
+    }
+
+    public ModelAndView goToAns(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession();
+        ModelAndView mv = new ModelAndView();
+        TrainingAssessment trainingAssessment = new TrainingAssessment();
+        Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
+        int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
+        List<?> OnList = trainingAssessmentService.readTrainingAssementList(trainingMasterId);
+        Double passingPercentage = 0.0;
+        Double totalMarks = 0.0;
+
+        if (!OnList.isEmpty()) {
+            for (Object o2 : OnList) {
+                Object str1[] = (Object[]) o2;
+                passingPercentage = (Double) str1[4];
+                totalMarks = (Double) str1[10];
+
+            }
+        }
+
         return mv;
     }
 }

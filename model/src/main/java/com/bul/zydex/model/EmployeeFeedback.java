@@ -17,6 +17,15 @@ public class EmployeeFeedback {
     private TrainingMaster trainingMaster;
     private String description;
     private String dateTime;
+    private String eventDate;
+
+    public String getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
+    }
 
     public EmployeeFeedback() {
     }

@@ -60,6 +60,7 @@
         <property name="employeeMasterService" ref="employeeMasterService1" />
         <property name="questionPaperService" ref="questionPaperService1"/>
         <property name="trainingAssessmentService" ref="trainingAssessmentService1"/>
+        <property name="employeeFeedbackService" ref="employeeFeedbackService1" />
     </bean>
     <bean id="outController1" class="com.bul.zydex.controller.OutController" parent="controllerConfig" >
         <property name="userInitPwdValidator" ref="userInitPwdValidator1" />

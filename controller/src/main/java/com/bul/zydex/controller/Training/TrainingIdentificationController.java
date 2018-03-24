@@ -37,10 +37,10 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Aman
  */
 public class TrainingIdentificationController extends TrainingIdentificationAbstract {
-    
+
     public ModelAndView createTraineAssigne(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        
+
         ModelAndView mv = new ModelAndView();
         readTrainingMaster(request);
         TrainingIdentification trainingIdentification = new TrainingIdentification();
@@ -68,7 +68,7 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
 //    }
     public ModelAndView sendFeedback(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        
+
         ModelAndView mv = new ModelAndView();
         EmployeeFeedback employeeFeedback = new EmployeeFeedback();
         TrainingFeedback trainingFeedback = new TrainingFeedback();
@@ -76,42 +76,44 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         HttpSession session = request.getSession();
         UserMaster user = (UserMaster) session.getAttribute("user");
         String id = request.getParameter("id");
+        String eventdate = request.getParameter("eventdate");
         mv.getModelMap().put("id", id);
-        
+
         employeeFeedback.setTrainingFeedback(trainingFeedback);
         mv.getModelMap().put("employeeFeedback", employeeFeedback);
+        request.setAttribute("eventdate", eventdate);
         mv.setViewName("Training/applyTrainingFeedback");
         return mv;
     }
-    
+
     public ModelAndView newAssignTraine(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        
+
         ModelAndView mv = new ModelAndView();
         TrainingIdentification trainingIdentification = new TrainingIdentification();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         TrainingMaster trainingMaster = new TrainingMaster();
         HttpSession session = request.getSession();
         UserMaster user = (UserMaster) session.getAttribute("user");
-        
+
         readTrainingMaster(request);
-        
+
         trainingIdentification.setTrainingMaster(trainingMaster);
-        
+
         List<?> employeelist = employeeMasterService.readEmployeeList(user.getId());
         mv.getModelMap().put("trainingIdentification", trainingIdentification);
         mv.getModelMap().put("list", employeelist);
         mv.getModelMap().put("trainingMaster", trainingMaster);
         mv.setViewName("Training/registrationAssigntraine");
         return mv;
-        
+
     }
-    
+
     public ModelAndView trainingAssignSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        
+
         ModelAndView mv = new ModelAndView();
         TrainingIdentification trainingIdentification = new TrainingIdentification();
-        
+
         BindException errors = new BindException(trainingIdentification, "trainingIdentification");
         bind(request, trainingIdentification);
         String id = request.getParameter("id");
@@ -138,9 +140,9 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
                             if (currentstarttime.compareTo(starttime) >= 0 && currentstarttime.compareTo(endtime) <= 0 || currentendtime.compareTo(starttime) >= 0 && currentendtime.compareTo(endtime) <= 0) {
                                 i++;
                             }
-                            
+
                         }
-                        
+
                     }
                     if (i == 0) {
                         TrainingIdentification trainingIdentification1 = new TrainingIdentification();
@@ -155,7 +157,7 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
                                 "Info :The Records are deleted successfully.");
                     }
                 } catch (Exception e) {
-                    
+
                 }
             }
         } else {
@@ -167,11 +169,11 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         }
         mv = createTraineAssigne(request, response);
         return mv;
-        
+
     }
-    
+
     public ModelAndView trainingIdentificationdeleteDeleteSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        
+
         ModelAndView mv = new ModelAndView();
         String savingList[] = request.getParameterValues("checkId");
         for (String z : savingList) {
@@ -180,13 +182,13 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
                 request.setAttribute("successMessage",
                         "Info :The Records are deleted successfully.");
             } catch (Exception e) {
-                
+
             }
         }
         mv = createTraineAssigne(request, response);
         return mv;
     }
-    
+
     public ModelAndView submitEmployeeFeedbackCreate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeFeedback employeeFeedback = new EmployeeFeedback();
@@ -195,6 +197,7 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         HttpSession session = request.getSession();
         EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
         String id = request.getParameter("id2");
+        String eventdate = request.getParameter("eventdate");
         TrainingMaster trainingMaster = new TrainingMaster();
         trainingMaster.setId(Integer.parseInt(id));
         employeeFeedback.setTrainingMaster(trainingMaster);
@@ -202,13 +205,14 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
         employeeFeedback.setDateTime(sdf.format(cDate));
+        employeeFeedback.setEventDate(eventdate);
         employeeFeedbackService.create(employeeFeedback);
-        
+
         mv = showcalendar(request, response);
         return mv;
-        
+
     }
-    
+
     public ModelAndView calendarList(HttpServletRequest request, HttpServletResponse response) throws ParseException, Exception {
         ModelAndView mv = new ModelAndView();
         String monthAndYear = request.getParameter("monthAndYear");
@@ -237,7 +241,7 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         mv.setViewName("Training/TrainingList");
         return mv;
     }
-    
+
     public ModelAndView showcalendar(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -253,10 +257,10 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         mv.setViewName("Training/TrainingList");
         return mv;
     }
-    
+
     public ModelAndView viewProfile(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        
+
         HttpSession session = request.getSession(false);
         EmployeeMaster user = (EmployeeMaster) session.getAttribute("employeeInfo");
         ModelAndView mv = new ModelAndView();
@@ -272,8 +276,8 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
 //        List attenlist=  new LinkedList();
 //         attenlist =  trainingAttendanceService.gettrainingattendance(eventdate,Integer.parseInt(id));
         boolean shosts = true;
-        
-        boolean showFeedbackButton = employeeFeedbackService.checkFeedbackforEmp(user.getId(), trainingMaster.getId());
+
+        boolean showFeedbackButton = employeeFeedbackService.checkFeedbackforEmp(user.getId(), trainingMaster.getId(), eventdate);
 
 //       if(attenlist.isEmpty()){
 //           shosts=false;
@@ -282,12 +286,13 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
 //       }
         request.setAttribute("shosts", shosts);
         request.setAttribute("showFeedbackButton", showFeedbackButton);
+        request.setAttribute("eventdate", eventdate);
 //        request.setAttribute("list", attenlist);
         request.setAttribute("trainingMaster", trainingMaster);
         mv.setViewName("Training/MyTrainingMasterLabelView");
         return mv;
     }
-    
+
     public ModelAndView SubmitAttendanceClick(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
         String[] checkId = request.getParameterValues("checkId");
         String trainingMasterId = request.getParameter("trainingMasterId");
@@ -306,7 +311,7 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         boolean flag = false;
         for (String checkedValues : checkId) {
             try {
-                
+
                 EmployeeMaster em = new EmployeeMaster();
                 em.setId(Integer.parseInt(checkedValues));
                 TrainingAttendance trnatt = new TrainingAttendance();
@@ -328,10 +333,10 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         for (Object checkedValue : Tran) {
             try {
                 Object[] obj = (Object[]) checkedValue;
-                if (trainingIdentificationService.checkExistance(trnMaster.getId(), Integer.parseInt("" + obj[0]), trainer.getId())) {
+                if (trainingIdentificationService.checkExistance(trnMaster.getId(), Integer.parseInt("" + obj[0]), trainer.getId(),eventdate)) {
                     EmployeeMaster em = new EmployeeMaster();
                     em.setId(Integer.parseInt("" + obj[0]));
-                    
+
                     TrainingAttendance trnatt = new TrainingAttendance();
                     trnatt.setEmployeeMaster(em);
                     trnatt.setTrainer(trainer);
@@ -357,14 +362,16 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
 //        mv.setViewName("Trainer/TrainerMasterlblView");
         return mv;
     }
-    
+
     public ModelAndView showTrainingFeedbackList(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
-        String trainingId = (String) request.getAttribute("TrainingId");
+            
+        
+        String trainingId = request.getParameter("TrainingId");
+        EmployeeFeedback employeeFeedback = new EmployeeFeedback();
         HttpSession session = request.getSession(false);
         UserMaster user = (UserMaster) session.getAttribute("user");
-        List<?> trainingsList = trainingMasterService.read();
-        EmployeeFeedback employeeFeedback = new EmployeeFeedback();
+//        List<?> trainingsList = trainingMasterService.read();
 //        Map<Integer, String> trainingsMap = new HashMap<Integer, String>();
 //        for(Object o : trainingsList)
 //        {
@@ -388,5 +395,5 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         mv.setViewName("Training/TrainingFeedbackDetails");
         return mv;
     }
-    
+
 }

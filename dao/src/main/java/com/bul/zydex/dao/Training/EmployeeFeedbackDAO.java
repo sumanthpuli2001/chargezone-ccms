@@ -13,6 +13,6 @@ import com.bul.zydex.dao.GenericsDAO;
  */
 public interface EmployeeFeedbackDAO<T> extends GenericsDAO<T> {
 
-    public Boolean checkFeedbackforEmp(int empId, int trainingId);
+    public Boolean checkFeedbackforEmp(int empId, int trainingId, String eventdate);
 
 }

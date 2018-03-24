@@ -202,11 +202,27 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
             trainingQuestionAnswerSubmitService.create(trainingQuestionAnswerSubmit);
 //             mv.setViewName("Vacancy/AssementOnline");
         }
-            trainingAssessment=trainingAssessmentService.readById(Integer.parseInt(candidateiD));
-            trainingAssessment.setStatus(1);
-            trainingAssessmentService.update(trainingAssessment);
+        trainingAssessment = trainingAssessmentService.readById(Integer.parseInt(candidateiD));
+        trainingAssessment.setStatus(1);
+        trainingAssessmentService.update(trainingAssessment);
         return mv;
 
+    }
+
+    public ModelAndView backToHomeVacancyListCandidate(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+
+        TrainingAssessment trainingAssessment = new TrainingAssessment();
+
+        String onlineAssmentID = request.getParameter("onlineAssmentID");
+        trainingAssessment = trainingAssessmentService.readById(Integer.parseInt(onlineAssmentID));
+
+        trainingAssessment.setStartTimeNow(null);
+        trainingAssessmentService.update(trainingAssessment);
+        mv = clickassessment(request, response);
+        return mv;
     }
 
 }

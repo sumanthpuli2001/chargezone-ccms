@@ -5,16 +5,19 @@
  */
 package com.bul.zydex.controller;
 
+import com.bul.zydex.model.EmployeeFeedback;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.QuestionPaper;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingAssessment;
 import com.bul.zydex.model.TrainingAttendance;
+import com.bul.zydex.model.TrainingFeedback;
 import com.bul.zydex.model.TrainingIdentification;
 import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.TrainingSubType;
 import com.bul.zydex.model.TrainingType;
 import com.bul.zydex.model.UserMaster;
+import com.bul.zydex.service.Training.EmployeeFeedbackService;
 import com.bul.zydex.service.Training.TrainerService;
 import com.bul.zydex.service.Training.TrainingAssessmentService;
 import com.bul.zydex.service.Training.TrainingAttendanceService;
@@ -58,6 +61,15 @@ public abstract class TrainerLogInAbstract extends CustomAbstract {
     protected EmployeeMasterService<EmployeeMaster> employeeMasterService;
     protected QuestionPaperService<QuestionPaper> questionPaperService;
     protected TrainingAssessmentService<TrainingAssessment> trainingAssessmentService;
+    protected EmployeeFeedbackService<EmployeeFeedback> employeeFeedbackService;
+
+    public EmployeeFeedbackService<EmployeeFeedback> getEmployeeFeedbackService() {
+        return employeeFeedbackService;
+    }
+
+    public void setEmployeeFeedbackService(EmployeeFeedbackService<EmployeeFeedback> employeeFeedbackService) {
+        this.employeeFeedbackService = employeeFeedbackService;
+    }
 
     public EmployeeMasterService<EmployeeMaster> getEmployeeMasterService() {
         return employeeMasterService;
@@ -277,6 +289,17 @@ public abstract class TrainerLogInAbstract extends CustomAbstract {
         }
 
         request.setAttribute("questions", dm);
+    }
+    protected void trainingsList(HttpServletRequest request) {
+        TrainingMaster trainMaster = new TrainingMaster();
+        List<?> trainingList = trainingMasterService.read();
+        Map<Integer, String> trainingsMap = new HashMap<>();
+        for (Object o : trainingList) {
+            trainMaster = (TrainingMaster) o;
+            trainingsMap.put(trainMaster.getId(), trainMaster.getTrainingTitle());
+        }
+
+        request.setAttribute("trainingsMaps", trainingsMap);
     }
 
 }

@@ -141,7 +141,7 @@
                                 <label style=" font-weight: normal;font-size:14px; color: grey;" >${vacancyMaster.name}</label>
                             </p>
                             <p>
-                                <label style="font-weight: 500;">Work Experience:</label>
+                                <label style="font-weight: 500;">Work Experience(In Years):</label>
                                 <label style=" font-weight: normal; font-size:14px; color: grey;">${vacancyMaster.experience}</label>
                             </p>
                             <p>

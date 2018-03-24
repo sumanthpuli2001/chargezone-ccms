@@ -333,7 +333,7 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         for (Object checkedValue : Tran) {
             try {
                 Object[] obj = (Object[]) checkedValue;
-                if (trainingIdentificationService.checkExistance(trnMaster.getId(), Integer.parseInt("" + obj[0]), trainer.getId())) {
+                if (trainingIdentificationService.checkExistance(trnMaster.getId(), Integer.parseInt("" + obj[0]), trainer.getId(),eventdate)) {
                     EmployeeMaster em = new EmployeeMaster();
                     em.setId(Integer.parseInt("" + obj[0]));
 

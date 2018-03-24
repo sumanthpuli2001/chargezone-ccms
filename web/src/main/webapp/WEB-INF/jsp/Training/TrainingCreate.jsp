@@ -308,7 +308,7 @@
                                         <form:radiobutton path="companySponsor" value="0" required="required"/>No
                                         <%--<form:errors path="companySponsor" cssClass="errorDiv"></form:errors>--%>
                                     </div>
-                                    <div class="col-sm-5">
+<!--                                    <div class="col-sm-5">
                                         <label class="control-label">Status<span style="color: red;font-size: 12px;">*</span></label>
                                         <form:radiobutton path="status" value="1" required="required"/>Active
                                         <form:radiobutton path="status" value="0" required="required"/>Inactive

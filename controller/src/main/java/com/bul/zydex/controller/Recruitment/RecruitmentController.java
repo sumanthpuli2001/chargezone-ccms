@@ -1017,4 +1017,61 @@ public class RecruitmentController extends RecruitmentAbstract {
         return mv;
     }
 
+    public ModelAndView viewMppOnly(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        RecruitmentMaster recruitmentMaster = new RecruitmentMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        LocationMaster locationMaster = new LocationMaster();
+        JobtypeMaster jobtypeMaster = new JobtypeMaster();
+        DesignationMaster designationMaster = new DesignationMaster();
+
+        departmentList(request);
+        Map<Integer, String> locationMap = readLocations();
+        Map<Integer, String> jobtype1 = jobtypeList();
+        mv.addObject("locationMap", locationMap);
+        mv.addObject("jobtype1", jobtype1);
+
+        String id = request.getParameter("id");
+
+        recruitmentMaster = recruitmentService.readById(Integer.parseInt(id));
+
+        int jobtypeId = recruitmentMaster.getJobtypeMaster().getId();
+        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+        String jobtypeNAme = jobtypeMaster.getJobTypeName();
+
+        int department = recruitmentMaster.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        String departmentName = departmentMaster.getDepartmentName();
+
+        int localtion = recruitmentMaster.getLocationMaster().getId();
+        locationMaster = locationMasterService.readById(localtion);
+        String locationName = locationMaster.getLocation();
+
+        int designation = recruitmentMaster.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(designation);
+        String designationName = designationMaster.getDesignationName();
+
+        String experiance = recruitmentMaster.getExperiance();
+
+        int position = recruitmentMaster.getNumberOfPosition();
+        int budget = recruitmentMaster.getBudget();
+
+        mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
+        mv.getModelMap().put("departmentMaster", departmentMaster);
+        mv.getModelMap().put("locationMaster", locationMaster);
+        mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
+        mv.getModelMap().put("designationMaster", designationMaster);
+        request.setAttribute("jobtypeNAme", jobtypeNAme);
+        request.setAttribute("departmentName", departmentName);
+        request.setAttribute("locationName", locationName);
+        request.setAttribute("position", position);
+        request.setAttribute("designationName", designationName);
+        request.setAttribute("experiance", experiance);
+        request.setAttribute("budget", budget);
+        mv.setViewName("Recruitment/ApprovalOnlyViewMpp");
+
+        return mv;
+    }
+
 }

@@ -36,4 +36,9 @@ public class VacancyMasterServiceImpl<T> extends GenericsServiceImpl<T> implemen
         return vacancyMasterDAO.fetchCreatedVacancy(empId);
     }
 
+    @Override
+    public List<?> fetchVacancyBydate(String date) {
+           return vacancyMasterDAO.fetchVacancyBydate(date);
+    }
+
 }

@@ -45,4 +45,19 @@ public class VacancyMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Vacan
         return list;
 
     }
+
+    @Override
+    public List<?> fetchVacancyBydate(String date) {
+        String query = "";
+        query += " "
+                + " SELECT a.id, a.name, a.numberOfPosition, a.salaryRange, a.experience, a.status, a.fromDate, a.toDate"
+                + " FROM VacancyMaster a "
+                + " WHERE STR_TO_DATE(a.fromDate,'%d/%m/%Y') <=  STR_TO_DATE('" + date + "','%d/%m/%Y')"
+                + " AND STR_TO_DATE(a.toDate,'%d/%m/%Y') >=  STR_TO_DATE('" + date + "','%d/%m/%Y')"
+                + " order by a.id desc";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+
+    }
 }

@@ -18,6 +18,7 @@ import com.bul.zydex.model.TrainingType;
 import com.bul.zydex.service.Training.EmployeeFeedbackService;
 import com.bul.zydex.service.Training.TrainerService;
 import com.bul.zydex.service.Training.TrainingAttendanceService;
+import com.bul.zydex.service.Training.TrainingFeedbackService;
 import com.bul.zydex.service.Training.TrainingIdentificationService;
 import com.bul.zydex.service.Training.TrainingMasterService;
 import com.bul.zydex.service.Training.TrainingSubTypeService;
@@ -51,6 +52,7 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
     protected TrainingTypeService<TrainingType> trainingTypeService;
     protected TrainingAttendanceService<TrainingAttendance> trainingAttendanceService;
     protected EmployeeMasterService<EmployeeMaster> employeeMasterService;
+    protected TrainingFeedbackService<TrainingFeedback> trainingFeedbackService;
 
 
     public TrainingIdentificationService<TrainingIdentification> getTrainingIdentificationService() {
@@ -76,6 +78,15 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
     public void setEmployeeFeedbackService(EmployeeFeedbackService<EmployeeFeedback> employeeFeedbackService) {
         this.employeeFeedbackService = employeeFeedbackService;
     }
+
+    public TrainingFeedbackService<TrainingFeedback> getTrainingFeedbackService() {
+        return trainingFeedbackService;
+    }
+
+    public void setTrainingFeedbackService(TrainingFeedbackService<TrainingFeedback> trainingFeedbackService) {
+        this.trainingFeedbackService = trainingFeedbackService;
+    }
+    
     
 
     protected void readEmployeeMaster(HttpServletRequest request, int id) {

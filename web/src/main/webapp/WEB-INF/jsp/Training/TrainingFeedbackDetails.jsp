@@ -14,7 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Training Feedback</title>
-       
+
     </head>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -49,8 +49,8 @@
                                     <!--${trainingsMaps}-->
                                     <label>Training:<span style="color: red;font-size: 12px;">*</span></label>
                                     <%--<form:select path="trainingMaster" id="TrainingId" name="TrainingId" class="form-control">--%>
-                                        <%--<form:option value="" label="-- Select --" ></form:option>--%>
-                                        <%--<form:options items="${trainingsMaps}"></form:options>--%>
+                                    <%--<form:option value="" label="-- Select --" ></form:option>--%>
+                                    <%--<form:options items="${trainingsMaps}"></form:options>--%>
                                     <%--</form:select>--%>
                                     <select id="TrainingId" path="trainingMaster.id" name="TrainingId" class="form-control" >
                                         <option value="">--SELECT--</option>
@@ -85,6 +85,7 @@
                                                                 <th>Sr.No.</th>
                                                                 <th>Employee</th>
                                                                 <th>Feedback</th>
+                                                                <th style="width: 50px;">Action</th>
                                                             </tr>
                                                         </thead>
                                                         <c:set var="count" value="0" scope="page" />
@@ -105,14 +106,13 @@
                                                                     <td>
                                                                         ${trainingFeedbackList[1]}
                                                                     </td>
-<!--                                                                    <td>
-                                                                        <div class="btn-group">
-                                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="viewClick(${trainingList.id});">
-                                                                                &nbsp;Edit
-                                                                            </button>
-
-                                                                        </div>
-                                                                    </td>-->
+                                                                    <td>
+                                                                         <div class="btn-group">
+                                                                            <button type="button" onclick="viewClick(${trainingFeedbackList[5]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            &nbsp;&nbsp;View
+                                                                        </button>
+                                                                    </div>
+                                                                    </td>                                                              
                                                                 </tr>
                                                             </c:forEach>
                                                         </tbody>
@@ -122,13 +122,19 @@
                                         </div>
                                     </div>
 
-                                </div><!-- /.tab-pane -->
+                                </div><!-- /.tab-pane 
                             </div>
                         </div><!-- /.tab-content -->
                     </div><!-- nav-tabs-custom -->
                 </div><!-- /.col -->
-    </section>
-</form:form><!-- /.content -->
-        </div>
-<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+            </section>
+        </form:form><!-- /.content -->
+    </div>
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    
+    <script>
+        function viewClick(id) {
+            window.location = 'trainingIdentification.htm?act=showFeedbackView&id=' + id;
+        }
+    </script>
 </html>

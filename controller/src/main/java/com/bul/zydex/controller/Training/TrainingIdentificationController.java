@@ -333,7 +333,7 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         for (Object checkedValue : Tran) {
             try {
                 Object[] obj = (Object[]) checkedValue;
-                if (trainingIdentificationService.checkExistance(trnMaster.getId(), Integer.parseInt("" + obj[0]), trainer.getId(),eventdate)) {
+                if (trainingIdentificationService.checkExistance(trnMaster.getId(), Integer.parseInt("" + obj[0]), trainer.getId(), eventdate)) {
                     EmployeeMaster em = new EmployeeMaster();
                     em.setId(Integer.parseInt("" + obj[0]));
 
@@ -365,8 +365,7 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
 
     public ModelAndView showTrainingFeedbackList(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
-            
-        
+
         String trainingId = request.getParameter("TrainingId");
         EmployeeFeedback employeeFeedback = new EmployeeFeedback();
         HttpSession session = request.getSession(false);
@@ -393,6 +392,29 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         mv.addObject("employeeFeedback", employeeFeedback);
 //        mv.addObject("trainingsMaps", trainingsMap);
         mv.setViewName("Training/TrainingFeedbackDetails");
+        return mv;
+    }
+
+    public ModelAndView showFeedbackView(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String id = request.getParameter("id");
+        mv.getModelMap().put("id", id);
+
+        EmployeeFeedback employeeFeedback = employeeFeedbackService.readById(Integer.parseInt(id));
+        TrainingMaster trainingMaster1 = trainingMasterService.readById(employeeFeedback.getTrainingMaster().getId());
+        TrainingFeedback trainingFeedback = trainingFeedbackService.readById(employeeFeedback.getTrainingFeedback().getId());
+        EmployeeMaster employeeMaster = employeeMasterService.readById(employeeFeedback.getEmployeeMaster().getId());
+        TrainingType trainingType = trainingTypeService.readById(trainingMaster1.getTrainingType().getId());
+        TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster1.getTrainingSubType().getId());
+        Trainer trainer =  trainerService.readById(trainingMaster1.getTrainer().getId());
+        trainingMaster1.setTrainingType(trainingType);
+        trainingMaster1.setTrainingSubType(trainingSubType);
+        trainingMaster1.setTrainer(trainer);
+        request.setAttribute("trainingMaster", trainingMaster1);
+        request.setAttribute("description", employeeFeedback.getDescription());
+        request.setAttribute("Feedaback", trainingFeedback.getFeedaback());
+        request.setAttribute("EmployeeName", employeeMaster.getEmployeeName());
+        mv.setViewName("Training/FeedbackView");
         return mv;
     }
 

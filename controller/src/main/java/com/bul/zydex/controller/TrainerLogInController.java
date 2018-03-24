@@ -266,7 +266,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         for (Object checkedValue : Tran) {
             try {
                 Object[] obj = (Object[]) checkedValue;
-                if (trainingIdentificationService.checkExistance(trnMaster.getId(), Integer.parseInt("" + obj[0]), trainer.getId())) {
+                if (trainingIdentificationService.checkExistance(trnMaster.getId(), Integer.parseInt("" + obj[0]), trainer.getId(),eventdate)) {
                     EmployeeMaster em = new EmployeeMaster();
                     em.setId(Integer.parseInt("" + obj[0]));
 
@@ -350,7 +350,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         trainingAssessment.setCreatedBy(trnMaster.getId());
         trainingAssessment.setCreatedDate(dtf.format(localDate));
         String[] checkId = request.getParameterValues("checkId");
-        trainingAssessment.setStatus(0);  
+        trainingAssessment.setStatus(0);
         for (String string : checkId) {
             EmployeeMaster employeeMaster = new EmployeeMaster();
             employeeMaster.setId(Integer.parseInt(string));
@@ -361,6 +361,29 @@ public class TrainerLogInController extends TrainerLogInAbstract {
 //        String[] checkId = request.getParameterValues("checkId");
         ModelAndView mv = new ModelAndView();
         mv = showcalendar(request, response);
+        return mv;
+    }
+
+    public ModelAndView goToAns(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession();
+        ModelAndView mv = new ModelAndView();
+        TrainingAssessment trainingAssessment = new TrainingAssessment();
+        Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
+        int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
+        List<?> OnList = trainingAssessmentService.readTrainingAssementList(trainingMasterId);
+        Double passingPercentage = 0.0;
+        Double totalMarks = 0.0;
+
+        if (!OnList.isEmpty()) {
+            for (Object o2 : OnList) {
+                Object str1[] = (Object[]) o2;
+                passingPercentage = (Double) str1[4];
+                totalMarks = (Double) str1[10];
+
+            }
+        }
+
         return mv;
     }
 }

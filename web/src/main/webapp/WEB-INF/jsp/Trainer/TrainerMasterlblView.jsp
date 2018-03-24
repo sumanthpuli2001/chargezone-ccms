@@ -111,6 +111,7 @@
                                                                         </c:if> 
                                                                     <th style="width: 50px;">Trainings</th>
                                                                     <th style="width: 50px;">Attendance</th>
+                                                                    <th style="width: 50px;">CheckPaper</th>
 
                                                                 </tr>
                                                             </thead>
@@ -140,6 +141,7 @@
                                                                         <c:if test="${shosts eq false}">
                                                                             <td></td>
                                                                         </c:if> 
+                                                                        <td><button type="button" class="btn btn-primary" id="btnType1" onclick="goToAns(${list[0]})" name="btnType" value="AssessMent" style="width: 100px" >Ans</button></td>
                                                                         <!--</td>-->
                                                                     </tr>
                                                                 </c:forEach>
@@ -224,3 +226,8 @@
 <script src="StorageYard/JS/login/retina-1.1.0.min.js"></script>
 <script src="StorageYard/JS/login/scripts.js"></script>
 <script type="text/javascript" src="StorageYard/JS/JQuery/common.js"></script>
+<script>
+        function goToAns(trainerId) {
+            window.location = 'trainerLogin.htm?act=goToAns&id=' + trainerId;
+        }
+</script>

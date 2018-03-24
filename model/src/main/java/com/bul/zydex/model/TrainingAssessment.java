@@ -28,6 +28,7 @@ public class TrainingAssessment  implements java.io.Serializable {
      private String createdDate;
      private Integer updatedBy;
      private String udatedDate;
+     private String StartTimeNow;
 
     public TrainingAssessment() {
     }
@@ -38,7 +39,7 @@ public class TrainingAssessment  implements java.io.Serializable {
         this.questionPaper = questionPaper;
         this.trainingMaster = trainingMaster;
     }
-    public TrainingAssessment(EmployeeMaster employeeMaster, QuestionPaper questionPaper, TrainingMaster trainingMaster, Integer status, Double passingPercentage, String validityFrom, String validityTo, String duration, Integer noOfAttampt, Integer noOfQue, Double totalMarks, Integer createdBy, String createdDate, Integer updatedBy, String udatedDate) {
+    public TrainingAssessment(EmployeeMaster employeeMaster, QuestionPaper questionPaper, TrainingMaster trainingMaster, Integer status, Double passingPercentage, String validityFrom, String validityTo, String duration, Integer noOfAttampt, Integer noOfQue, Double totalMarks, Integer createdBy, String createdDate, Integer updatedBy, String udatedDate,String StartTimeNow) {
        this.employeeMaster = employeeMaster;
        this.questionPaper = questionPaper;
        this.trainingMaster = trainingMaster;
@@ -54,6 +55,7 @@ public class TrainingAssessment  implements java.io.Serializable {
        this.createdDate = createdDate;
        this.updatedBy = updatedBy;
        this.udatedDate = udatedDate;
+       this.StartTimeNow = StartTimeNow;
     }
    
     public Integer getId() {
@@ -167,6 +169,14 @@ public class TrainingAssessment  implements java.io.Serializable {
     
     public void setUdatedDate(String udatedDate) {
         this.udatedDate = udatedDate;
+    }
+
+    public String getStartTimeNow() {
+        return StartTimeNow;
+    }
+
+    public void setStartTimeNow(String StartTimeNow) {
+        this.StartTimeNow = StartTimeNow;
     }
 
 

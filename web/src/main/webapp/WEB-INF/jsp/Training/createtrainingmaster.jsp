@@ -50,7 +50,7 @@
                                         <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <div class="col-sm-6"><span style="color: red;font-size: 12px;"></span>
-                                                    <label>Training Type:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <label>Training Type:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="training" id="training" class="form-control" placeholder="Training" onchange="trainerOnchangeFunction('trainingError');"></form:input>
                                                     <form:errors path="training" cssClass="errorDiv"></form:errors>
                                                      <span style="font-size: 14px; color: #dd4b39;" id="trainingError"></span>

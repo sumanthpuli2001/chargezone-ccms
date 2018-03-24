@@ -27,6 +27,7 @@
         <!--<link rel="stylesheet" href="StorageYard/CSS/bootstrap/font-awesome.min.css">-->
         <link rel="stylesheet" href="StorageYard/CSS/login/form-elements.css">
         <link rel="stylesheet" href="StorageYard/CSS/login/style.css">
+        <script type="text/javascript" src="StorageYard/Plugins/jQuery/jQuery-2.1.4.min.js"></script>
 
         <link rel="shortcut icon" href="../../dist/img/ico/logo.png">
         <!--<link rel="shortcut icon" href="../../bootstrap/ico/favicon.png">-->
@@ -104,10 +105,14 @@
                                                             <thead>
                                                                 <tr>
                                                                     <c:if test="${shosts eq true}">
+                                                                    <%--<c:if test="${shosts2 eq true}">--%>
                                                                         <th style="width: 50px;">SR. No</th>
+                                                                        <%--</c:if>--%> 
                                                                         </c:if> 
                                                                         <c:if test="${shosts eq false}">
+                                                                        <c:if test="${shosts2 eq false}">
                                                                         <th align="Center" style="width: 1px;"><input type="checkbox" id="toggleId" align="Center" ></th>
+                                                                        </c:if> 
                                                                         </c:if> 
                                                                     <th style="width: 50px;">Trainings</th>
                                                                     <th style="width: 50px;">Attendance</th>
@@ -121,13 +126,15 @@
                                                                 <c:forEach var="list"  items="${list}" varStatus="status">
                                                                     <tr>
                                                                         <c:if test="${shosts eq false}">
+                                                                        <c:if test="${shosts2 eq false}">
                                                                             <td align="Center">
                                                                                 <input type="checkbox" onclick="deleteCheck11();" name="checkId" id="checkId" value="${list[0]}">
                                                                             </td>
                                                                         </c:if> 
+                                                                        </c:if> 
                                                                         <c:if test="${shosts eq true}">
                                                                             <td>${status.count}</td>
-                                                                        </c:if> 
+                                                                        </c:if>
                                                                         <td>${list[1]}</td>
                                                                         <!--<td>-->
                                                                         <c:if test="${shosts eq true}">
@@ -154,10 +161,14 @@
                                                 </table>
                                                 <br>
                                                 <c:if test="${shosts eq false}">
+                                                <c:if test="${shosts2 eq false}">
                                                     <button type="submit" class="btn btn-primary" style="float: left" title="" style="width: 100px;"><!--<i class="fa fa-"></i>-->Submit</button>
                                                 </c:if>
+                                                </c:if>
                                                 <c:if test="${shosts eq true}">
+                                                    <c:if test="${shosts2 eq true}">
                                                     <a style="float: right"  class="btn btn-primary" onclick="window.location = 'trainerLogin.htm?act=trainerAssessMent&id=${trainingMasterId}&eventdate=${eventdate}'">Online Assessment</a>
+                                                </c:if>
                                                 </c:if>
                                             </div>
                                         </div>

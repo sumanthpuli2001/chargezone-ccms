@@ -79,6 +79,7 @@ public class TrainingMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Trai
             slist.add(o[3]);
             slist.add(o[4]);
             slist.add(o[5]);
+            slist.add(o[6]);
             finallist.add(slist);
         }
         return finallist;

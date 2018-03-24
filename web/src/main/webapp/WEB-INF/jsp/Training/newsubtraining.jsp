@@ -35,7 +35,7 @@
 </head>
 <div class="content-wrapper">
     <section class="content-header">
-        <h1>Training Type Master</h1>
+        <h1>Training Sub Type Master</h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Training Sub Type Master</li>
@@ -77,8 +77,8 @@
                                                                     <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
                                                                     </c:if>
                                                                 <!--<th>user id</th>-->
-                                                                <th style="width: 50px;">Training</th>
-                                                                <th style="width: 50px;">Date</th>
+                                                                <th style="width: 50px;">Training Type</th>
+                                                                <th style="width: 50px;">Training Sub Type</th>
                                                                     <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <th style="width: 50px;">Action</th>
                                                                     <%--</c:if>--%>
@@ -94,8 +94,8 @@
                                                                 <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                 </c:if>
                                                             <!--<td>/</td>-->
-                                                            <td>${list[1]}</td>
                                                             <td>${list[2]}</td>
+                                                            <td>${list[1]}</td>
                                                             <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                             <td>
                                                                 <div class="btn-group">

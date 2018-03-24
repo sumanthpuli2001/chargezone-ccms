@@ -142,7 +142,7 @@
                                                     <form:errors path="name" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                         <div class="col-sm-6">
-                                                        <label>Salary Range:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Salary :<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="salaryRange" class="form-control" placeholder="Salary Range"></form:input>
                                                     <form:errors path="salaryRange" cssClass="errorDiv"></form:errors>
                                                     </div>

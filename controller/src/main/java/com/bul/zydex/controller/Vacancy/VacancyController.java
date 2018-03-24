@@ -389,7 +389,7 @@ public class VacancyController extends VacancyAbstract {
         }
 
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
-        mv = vacancyDetailList(request, response);
+        mv = vacancyFetch(request, response);
 
         return mv;
     }

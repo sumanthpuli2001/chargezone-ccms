@@ -102,16 +102,27 @@
     </script>
     <script>
         function submitFormbyhome() {
+            if (confirm('are you sure you want to leave this page?')) {
+                var onlineAssmentID = document.getElementById("onlineAssmentID").value;
+                window.location = 'vacancy.htm?act=backToHomeVacancyListCandidate&onlineAssmentID=' + onlineAssmentID;
+                // Save it!
+            } else {
+                // Do nothing!
+            }
 
-            var onlineAssmentID = document.getElementById("onlineAssmentID").value;
-            window.location = 'vacancy.htm?act=backToHomeVacancyListCandidate&onlineAssmentID=' + onlineAssmentID;
         }
     </script>
     <script>
         function submitFormbyLOgout() {
+            if (confirm('are you sure you want to log out?')) {
+                var onlineAssmentID = document.getElementById("onlineAssmentID").value;
+                window.location = 'vacancy.htm?act=logoutCandidateLogout&onlineAssmentID=' + onlineAssmentID;
+                // Save it!
+            } else {
+                // Do nothing!
+            }
 //            alert("hii");
-            var onlineAssmentID = document.getElementById("onlineAssmentID").value;
-            window.location = 'vacancy.htm?act=logoutCandidateLogout&onlineAssmentID=' + onlineAssmentID;
+
         }
     </script>
 </head>
@@ -180,7 +191,7 @@
 
                 },
             });
-           
+
 //            alert("hii");
 ////                alert(finalData.toString());
 //            window.location = "vacancy.htm?act=Login";
@@ -310,7 +321,7 @@
 
     <form:form onsubmit="saveSubmit();"
                method="post"
-               name='form1'  class="form-horizontal" role="form" action="vacancy.htm?act=Login">
+               name='form1'  class="form-horizontal" role="form" action="vacancy.htm?act=candidateProfile">
         <%--action="vacancy.htm?act=clickSubmitQuestionAnswer"--%> 
         <section class="content">
             <div class="row">

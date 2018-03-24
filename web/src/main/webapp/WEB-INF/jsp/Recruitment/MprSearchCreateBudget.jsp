@@ -46,26 +46,26 @@
 
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Man Power Planning Budget:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <label>Man Power Planning Budget: </label>
                                                     <form:input path="budget" id="budget1" readonly="true" class="form-control" placeholder="Budget"></form:input>
                                                     <form:errors path="budget" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>MPR Remaining Budget:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>MPR Remaining Budget: </label>
                                                         <input  id="remaining" name="remaining" readonly="true" class="form-control" placeholder="Remaining Budget"></input>
                                                     <form:errors  cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Job Type:<span style="color: red;font-size: 12px;">*</span></label>  &nbsp;&nbsp;&nbsp;
+                                                        <label>Job Type: </label> &nbsp;&nbsp;&nbsp;
                                                     <%--<form:select disabled="true" path="jobtypeMaster.id" id="jobtypeMaster" class="form-control" readonly="true">--%>
                                                     <span >${jobtypeNAme}</span>
                                                     <%--</form:select>--%>
                                                     <%--<form:errors path="jobtypeMaster.id" cssClass="errorDiv"></form:errors>--%>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Department:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <label>Department: </label> &nbsp;&nbsp;&nbsp;
                                                     <span>${departmentName}</span>    
                                                     <%--<form:select path="departmentMaster.id" id="departmentMaster" class="form-control" disabled="true" readonly="true">--%>
                                                     <%--<form:option value="" label="-- Select --" />--%>
@@ -76,14 +76,14 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Job Role:<span style="color: red;font-size: 12px;">*</span></label>  &nbsp;&nbsp;&nbsp;
+                                                    <label>Job Role: </label>  &nbsp;&nbsp;&nbsp;
                                                     <%--<form:select disabled="true" path="jobtypeMaster.id" id="jobtypeMaster" class="form-control" readonly="true">--%>
                                                     <span >${designationName}</span>
                                                     <%--</form:select>--%>
                                                     <%--<form:errors path="jobtypeMaster.id" cssClass="errorDiv"></form:errors>--%>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Experiance:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <label>Work Experience(In Year): </label> &nbsp;&nbsp;&nbsp;
                                                     <span>${experiance}</span>   
                                                     <%--<form:select path="departmentMaster.id" id="departmentMaster" class="form-control" disabled="true" readonly="true">--%>
                                                     <%--<form:option value="" label="-- Select --" />--%>
@@ -102,14 +102,14 @@
                                                 <%--<form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>--%>
                                             </div>-->
                                                 <div class="col-sm-6">
-                                                    <label>Location:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;&nbsp;
+                                                    <label>Location: </label>&nbsp;&nbsp;&nbsp;
                                                         <%--<form:select path="locationMaster.id" id="locationMaster" class="form-control"  disabled="true" >--%>
                                                         <%--<form:option value="" label="-- Select --" />--%>
 
                                                     <span> ${locationName}</span>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Number Of Position:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <label>Number Of Position: </label> &nbsp;&nbsp;&nbsp;
                                                     <span>${position}</span>
                                                     <%--<form:input path="numberOfPosition" class="form-control" placeholder="Number Of Position" disabled="true"></form:input>--%>
                                                     <%--<form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>--%>
@@ -122,52 +122,21 @@
                                                    commandName="mprMaster" action="recruitment.htm?act=detailCreateForMpr">
                                             <input type="hidden" name="recruitmentMasterid" id="recruitmentMasterid" value="${recruitmentMaster.id}">
                                             <div class="form-group">
-                                                <!--                                                <div class="col-sm-6">
-                                                                                                    <label>Man Power Planning Budget:<span style="color: red;font-size: 15px;"></span><br>[${recruitmentMaster.budget}]&nbsp;&nbsp;&nbsp;&nbsp;Remaining Budget :<p id="demo657"></p></label>
-                                                
-                                                                                                </div>-->
                                                 <div class="col-sm-6">
-                                                    <label>MPR Budget:<span style="color: red;font-size: 12px;">*(Budget should be less than ${recruitmentMaster.budget} )</span></label>
+                                                    <label>MPR Budget:<span style="color: red;font-size: 12px;">(Budget should be less than ${recruitmentMaster.budget})*</span></label>
                                                     <form:input path="budget" id="budget" onchange="onChangeTest(this)" class="form-control" placeholder="Budget"></form:input>
                                                     <form:errors path="budget" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>MPR Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>MPR Name<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="name" class="form-control" placeholder="Name"></form:input>
                                                     <form:errors path="name" cssClass="errorDiv"></form:errors>
                                                     </div>
-                                                    <!--                                                    <div class="col-sm-6">
-                                                                                                            <label>Job Role:<span style="color: red;font-size: 12px;">*</span></label>
-                                                <%--<form:select path="designationMaster.id" id="designationMaster" class="form-control">--%>
-                                                <%--<form:option value="" label="-- Select --" />--%>
-                                                <%--<form:options items="${desigList}"></form:options>--%>
-                                                <%--</form:select>--%>
-                                                <%--<form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>--%>
-                                                </div>-->
-                                                <!--<div class="col-sm-6">-->
-                                                <%--<form:select path="jobtypeMaster.id" id="jobtypeMaster" class="form-control">--%>
-                                                <%--<form:option value="" label="-- Select --" />--%>
-                                                <%--<form:options items="${jobtype1}"></form:options>--%>
-                                                <%--</form:select>--%>
-                                                <%--<form:errors path="jobtypeMaster.id" cssClass="errorDiv"></form:errors>--%>
-                                                <!--</div>-->
-                                            </div>
+                                                </div>
 
-                                            <div class="form-group">
-
-
-                                                <!--                                                    <div class="col-sm-6">
-                                                                                                        <label>Work Experience(In Year):<span style="color: red;font-size: 12px;">*</span></label>
-                                                <%--<form:input path="experience" class="form-control" placeholder="Experience"></form:input>--%>
-                                                <%--<form:errors path="experience" cssClass="errorDiv"></form:errors>--%>
-                                                </div>-->
-                                            </div>
-
-
-
-                                            <div class="form-group">
-                                                <div class="col-sm-10">
-                                                    <label>Job Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                <div class="form-group">
+                                                    <div class="col-sm-10">
+                                                        <label>Job Description:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:textarea path="description" class="form-control" id="editor"  placeholder="Description"></form:textarea>
                                                     <form:errors path="description" cssClass="errorDiv"></form:errors>
                                                     </div>
@@ -181,13 +150,12 @@
                                         </form:form>
                                         <!--</div>-->
 
-                                    </div><!-- /.col -->
-                                </div><!-- /.row -->
-                            </div>
-                        </div><!-- /.tab-content -->
-                    </div><!-- nav-tabs-custom -->
-                </div><!-- /.col -->
-            </div>
+                                    </div><!-- /.row -->
+                                </div>
+                            </div><!-- /.tab-content -->
+                        </div><!-- nav-tabs-custom -->
+                    </div><!-- /.col -->
+                </div>
         </section>
     </div>
     <script type="text/javascript">

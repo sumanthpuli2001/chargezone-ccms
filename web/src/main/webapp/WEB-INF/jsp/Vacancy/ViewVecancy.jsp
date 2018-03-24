@@ -47,9 +47,9 @@
                                                    commandName="vacancyMaster" action="vacancy.htm?act=editVacancy">
                                             <form:hidden path="id"></form:hidden>
                                             <%--<form:hidden path="vacancyMaster.id"></form:hidden>--%>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Department:<span style="color: red;font-size: 12px;"></span></label>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label>Department:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:select path="departmentMaster.id" id="departmentMaster" class="form-control">
                                                             <form:option value="" label="-- Select --" />
                                                             <form:options items="${deptMap}"></form:options>
@@ -104,48 +104,34 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Vacancy Name:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <form:input path="name" class="form-control" placeholder="Name"></form:input>
-                                                    <form:errors path="name" cssClass="errorDiv"></form:errors>
+                                                        <form:input path="name" class="form-control" placeholder="Name"></form:input>
+                                                        <form:errors path="name" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>Skill:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="skill" class="form-control" placeholder="skill"></form:input>
-                                                    <form:errors path="skill" cssClass="errorDiv"></form:errors>
+                                                        <label>Work Experience(In Year):<span style="color: red;font-size: 12px;"></span></label>
+                                                        <form:input path="experience" class="form-control" placeholder="Experience"></form:input>
+                                                        <form:errors path="experience" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Number Of Position<span style="color: red;font-size: 12px;"></span></label>
-                                                    <form:input path="numberOfPosition" class="form-control" placeholder="Number Of Position"></form:input>
-                                                    <form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>
+                                                        <form:input path="numberOfPosition" class="form-control" placeholder="Number Of Position"></form:input>
+                                                        <form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>Work Experience(In Year):<span style="color: red;font-size: 12px;"></span></label>
-                                                    <form:input path="experience" class="form-control" placeholder="Experience"></form:input>
-                                                    <form:errors path="experience" cssClass="errorDiv"></form:errors>
-                                                    </div>
-
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Salary Range:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <form:input path="salaryRange" class="form-control" placeholder="salaryRange"></form:input>
-                                                    <form:errors path="salaryRange" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Responsibility:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <form:input path="responsibility" class="form-control" placeholder="Responsibility:"></form:input>
-                                                    <form:errors path="responsibility" cssClass="errorDiv"></form:errors>
+                                                        <label>Salary :<span style="color: red;font-size: 12px;"></span></label>
+                                                        <form:input path="salaryRange" class="form-control" placeholder="salaryRange"></form:input>
+                                                        <form:errors path="salaryRange" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
                                                         <label>Description:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <form:textarea path="description" class="form-control" id="editor" placeholder="description"></form:textarea>
-                                                    <form:errors path="description" cssClass="errorDiv"></form:errors>
+                                                        <form:textarea path="description" class="form-control" id="editor" placeholder="description"></form:textarea>
+                                                        <form:errors path="description" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
-
                                                 <div class="form-group">
                                                     <div class="col-sm-6 col-sm-offset-5">
                                                         <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
@@ -178,13 +164,13 @@
     </script>
 </script>
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
- <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
-    <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
-    <!--<link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/css/samples.css">-->
-    <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
- <script>
-                                                            initSample();
+<script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
+<script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
+<!--<link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/css/samples.css">-->
+<link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+<script>
+        initSample();
 
 
-    </script>
+</script>
 </html>

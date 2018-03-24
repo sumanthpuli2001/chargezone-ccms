@@ -78,7 +78,7 @@
                                                     <%--<form:errors path="jobtypeMaster.id" cssClass="errorDiv"></form:errors>--%>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Experiance:</label> &nbsp;&nbsp;&nbsp;
+                                                    <label>Work Experience(In Years):</label> &nbsp;&nbsp;&nbsp;
                                                     <span>${experiance}</span>   
                                                     <%--<form:select path="departmentMaster.id" id="departmentMaster" class="form-control" disabled="true" readonly="true">--%>
                                                     <%--<form:option value="" label="-- Select --" />--%>

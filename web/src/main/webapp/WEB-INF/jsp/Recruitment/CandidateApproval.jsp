@@ -86,7 +86,7 @@
                                                     <span>${candidateApplyJob.sex}</span>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>photograph:</label> &nbsp;&nbsp;&nbsp;
+                                                    <label>Photograph:</label> &nbsp;&nbsp;&nbsp;
                                                     <span><img src="StorageYard/candidateimage/${candidateApplyJob.photograph}" width="50px; !important" height="50px; !important">&nbsp;&nbsp;${candidateApplyJob.photograph}</span>
                                                 </div>
                                             </div>
@@ -102,7 +102,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>city:</label> &nbsp;&nbsp;&nbsp;
+                                                    <label>City:</label> &nbsp;&nbsp;&nbsp;
                                                     <span>${candidateApplyJob.city}</span>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -146,7 +146,7 @@
                                                     <span>${candidateApplyJob.experianceDateJoiningMonth}</span>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Certificate Attach:</label> &nbsp;&nbsp;&nbsp;
+                                                    <label>Resume Attach:</label> &nbsp;&nbsp;&nbsp;
                                                     <span data="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}" type="application/pdf" width="500" height="300">
                                                         <a href="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}">${candidateApplyJob.certificateAttach}</a>
                                                     </span>

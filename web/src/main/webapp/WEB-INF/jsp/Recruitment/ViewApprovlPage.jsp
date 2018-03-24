@@ -57,97 +57,62 @@
 
                                         <form:form class="form-horizontal" method="post"
                                                    commandName="mprMaster" action="recruitment.htm?act=approveSubmitForMpr">
-                                              <form:hidden path="approvalComment"></form:hidden>
+                                            <form:hidden path="approvalComment"></form:hidden>
                                             <input type="hidden" id="empreqid" name="empreqid" value="${mprMaster.id}">
+
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Department111111:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="departmentMaster.id" id="departmentMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${deptMap}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Location:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="locationMaster.id" id="locationMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${locationMap}"/>
-                                                        </form:select>
-                                                        <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
+                                                    <label>MPR Name:</label> &nbsp;&nbsp;&nbsp;
+                                                    <span>${mprMaster.name}</span> 
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Job Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="jobtypeMaster.id" id="jobtypeMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${jobtype1}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="jobtypeMaster.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Designation:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="designationMaster.id" id="designationMaster" class="form-control">
-                                                            <form:option value="" label="-- Select --" />
-                                                            <form:options items="${desigList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
+                                                <div class="col-sm-6">
+                                                    <label>MPR Budget:</label> &nbsp;&nbsp;&nbsp;
+                                                    <span>${budget}</span> 
                                                 </div>
-                                                <!--                                                <div class="form-group">
-                                                                                                    <div class="col-sm-6">
-                                                                                                        <label>Employee Category:<span style="color: red;font-size: 12px;"></span></label>
-                                            <%--<form:select path="mprEmployeeCategory.id" id="mprEmployeeCategory" class="form-control">--%>
-                                            <%--<form:option value="" label="-- Select --" />--%>
-                                            <%--<form:options items="${categoryList}"></form:options>--%>
-                                            <%--</form:select>--%>
-                                            <%--<form:errors path="mprEmployeeCategory.id" cssClass="errorDiv"></form:errors>--%>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>Employee Type:<span style="color: red;font-size: 12px;"></span></label>
-                                            <%--<form:select path="mprEmployeeTypeMaster.id" id="mprEmployeeTypeMaster" class="form-control">--%>
-                                            <%--<form:option value="" label="-- Select --" />--%>
-                                            <%--<form:options items="${emptypeList}"></form:options>--%>
-                                            <%--</form:select>--%>
-                                            <%--<form:errors path="mprEmployeeTypeMaster.id" cssClass="errorDiv"></form:errors>--%>
-                                        </div>
-                                    </div>-->
+                                            </div>
+
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="name" class="form-control" placeholder="Name"></form:input>
-                                                    <form:errors path="name" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Budget:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="budget" class="form-control" placeholder="Budget"></form:input>
-                                                    <form:errors path="budget" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                    <!--                                                    <div class="col-sm-6">
-                                                                                                            <label>Created Budget:<span style="color: red;font-size: 15px;"></span><br>${recruitmentMaster.budget}</label>
-                                                                                                    </div>-->
+                                                    <label>Job Type:</label>  &nbsp;&nbsp;&nbsp;
+                                                    <span >${jobtypeNAme}</span>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
+                                                    <span >${designationName}</span>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Number Of Position<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="numberOfPosition" class="form-control" placeholder="Number Of Position"></form:input>
-                                                    <form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Work Experience:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="experience" class="form-control" placeholder="Experience"></form:input>
-                                                    <form:errors path="experience" cssClass="errorDiv"></form:errors>
-                                                    </div>
+                                                    <label>Location:</label> &nbsp;&nbsp;&nbsp;
+                                                    <span> ${locationName}</span>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Description:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:textarea path="description" class="form-control" id="editor" placeholder="Description"></form:textarea>
-                                                    <form:errors path="description" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Comment:<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                <div class="col-sm-6">
+                                                    <label>Department:</label> &nbsp;&nbsp;&nbsp;
+                                                    <span>${departmentName}</span>    
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
+                                                    <span>${position}</span>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label>Work Experience(In Years):</label> &nbsp;&nbsp;&nbsp;
+                                                    <span>${mprMaster.experience}</span> 
+                                                </div>
+
+
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label>Description :</label> &nbsp;&nbsp;&nbsp;
+                                                    <span> ${mprMaster.description}</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label>Comment:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="approvalComment" class="form-control" placeholder="Approval Comment"></form:input>
                                                     <form:errors path="approvalComment" cssClass="errorDiv"></form:errors>
                                                     </div>
@@ -166,7 +131,7 @@
                                                 </div>
                                                 <div class="col-sm-4" style="text-align: right">
                                                     <c:if test="${status != 3}">
-                                                        <button type="submit" class="btn btn-success" id="btnType2" name="btnType"  value="Approve" style="width: 100px">APPROVE</button>
+                                                        <button type="submit" class="btn btn-success" id="btnType2" name="btnType"  value="Approve" style="width: 100px"></button>
                                                     </c:if>
                                                 </div>
 

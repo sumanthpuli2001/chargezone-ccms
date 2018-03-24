@@ -50,6 +50,22 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
         UserMaster user = (UserMaster) session.getAttribute("user");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.now();
+         Integer hour = Integer.parseInt(duration) / 60;
+            Integer minits = Integer.parseInt(duration) % 60;
+            String strhout = hour.toString();
+            String strminits = minits.toString();
+            if (strhout.length() == 1) {
+                strhout = "0" + strhout;
+            }
+            if (strhout.length() == 0) {
+                strhout = "00";
+            }
+            if (strminits.length() == 1) {
+                strminits = "0" + strminits;
+            }
+            if (strminits.length() == 0) {
+                strminits = "00";
+            }
         QuestionPaper questionPaper = questionPaperService.readById(Integer.parseInt(questionsPaperId));
         try {
             if ("" == id) {
@@ -57,7 +73,7 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
                 OnlineAssessment onlineAssessment = new OnlineAssessment();
                 onlineAssessment.setCreatedBy(user.getId());
                 onlineAssessment.setCreatedDate(dtf.format(localDate));
-                onlineAssessment.setDuration(duration);
+                onlineAssessment.setDuration(strhout + ":" + strminits + ":00");
                 onlineAssessment.setNoOfAttampt(Integer.parseInt(noOfAttampt));
                 onlineAssessment.setQuestionPaper(questionPaper);
                 onlineAssessment.setValidityFrom(validityFrom);

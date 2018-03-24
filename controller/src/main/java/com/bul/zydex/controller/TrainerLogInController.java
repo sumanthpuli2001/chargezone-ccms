@@ -181,7 +181,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         return mv;
     }
 
-    public ModelAndView viewProfile(HttpServletRequest request,
+   public ModelAndView viewProfile(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String id = request.getParameter("id");
@@ -415,10 +415,6 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         trainingAssessment.setCreatedDate(dtf.format(localDate));
         String[] checkId = request.getParameterValues("checkId");
         trainingAssessment.setStatus(0);
-        for (String string : checkId) {
-            EmployeeMaster employeeMaster = new EmployeeMaster();
-            employeeMaster.setId(Integer.parseInt(string));
-            trainingAssessment.setEmployeeMaster(employeeMaster);
             Integer hour = Integer.parseInt(trainingAssessment.getDuration()) / 60;
             Integer minits = Integer.parseInt(trainingAssessment.getDuration()) % 60;
             String strhout = hour.toString();
@@ -435,9 +431,11 @@ public class TrainerLogInController extends TrainerLogInAbstract {
             if (strminits.length() == 0) {
                 strminits = "00";
             }
-            String finalduration = strhout + ":" + strminits + ":00";
-            trainingAssessment.setDuration(finalduration);
-
+            trainingAssessment.setDuration(strhout + ":" + strminits + ":00");
+        for (String string : checkId) {
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            employeeMaster.setId(Integer.parseInt(string));
+            trainingAssessment.setEmployeeMaster(employeeMaster);
             trainingAssessmentService.create(trainingAssessment);
         }
 

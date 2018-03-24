@@ -27,6 +27,7 @@
         <!--<link rel="stylesheet" href="StorageYard/CSS/bootstrap/font-awesome.min.css">-->
         <link rel="stylesheet" href="StorageYard/CSS/login/form-elements.css">
         <link rel="stylesheet" href="StorageYard/CSS/login/style.css">
+        <script type="text/javascript" src="StorageYard/Plugins/jQuery/jQuery-2.1.4.min.js"></script>
 
         <link rel="shortcut icon" href="../../dist/img/ico/logo.png">
         <!--<link rel="shortcut icon" href="../../bootstrap/ico/favicon.png">-->
@@ -175,6 +176,7 @@
                                                                     <c:if test="${shosts eq true}">
                                                                     <c:if test="${shosts2 eq true}">
                                                                         <th style="width: 50px;">SR. No</th>
+                                                                        <%--</c:if>--%> 
                                                                         </c:if> 
                                                                         </c:if> 
                                                                         <c:if test="${shosts eq false}">

@@ -436,8 +436,6 @@ public class TrainerLogInController extends TrainerLogInAbstract {
             EmployeeMaster employeeMaster = new EmployeeMaster();
             employeeMaster.setId(Integer.parseInt(string));
             trainingAssessment.setEmployeeMaster(employeeMaster);
-
-
             trainingAssessmentService.create(trainingAssessment);
         }
 

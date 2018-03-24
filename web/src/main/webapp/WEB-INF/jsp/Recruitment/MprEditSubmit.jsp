@@ -49,7 +49,7 @@
                                             <form:hidden path="status"></form:hidden>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Department:</label>
                                                     <form:select path="departmentMaster.id" id="departmentMaster" class="form-control">
                                                         <form:option value="" label="-- Select --" />
                                                         <form:options items="${deptMap}"></form:options>
@@ -57,7 +57,7 @@
                                                     <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>Location:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Location:</label>
                                                     <form:select path="locationMaster.id" id="locationMaster" class="form-control">
                                                         <form:option value="" label="-- Select --" />
                                                         <form:options items="${locationMap}"/>
@@ -67,7 +67,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Job Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Job Type:</label>
                                                     <form:select path="jobtypeMaster.id" id="jobtypeMaster" class="form-control">
                                                         <form:option value="" label="-- Select --" />
                                                         <form:options items="${jobtype1}"></form:options>
@@ -75,7 +75,7 @@
                                                     <form:errors path="jobtypeMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>Designation:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Designation:</label>
                                                     <form:select path="designationMaster.id" id="designationMaster" class="form-control">
                                                         <form:option value="" label="-- Select --" />
                                                         <form:options items="${desigList}"></form:options>
@@ -85,31 +85,31 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Vacancy Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Vacancy Name:</label>
                                                     <form:input path="name" class="form-control" placeholder="Name"></form:input>
                                                     <form:errors path="name" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>Budget:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Budget:</label>
                                                     <form:input path="budget" class="form-control" placeholder="Budget"></form:input>
                                                     <form:errors path="budget" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Number Of Position<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Number Of Position:</label>
                                                     <form:input path="numberOfPosition" class="form-control" placeholder="Number Of Position"></form:input>
                                                     <form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>Work Experience(In Years):<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Work Experience(In Years):</label>
                                                     <form:input path="experience" class="form-control" placeholder="Experience"></form:input>
                                                     <form:errors path="experience" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <label>Job Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Job Description:</label>
                                                     <form:textarea path="description" class="form-control" id="editor" placeholder="Description"></form:textarea>
                                                     <form:errors path="description" cssClass="errorDiv"></form:errors>
                                                     </div>

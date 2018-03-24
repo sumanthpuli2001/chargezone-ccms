@@ -106,7 +106,8 @@ public abstract class TrainingMasterAbstract extends CustomAbstract{
     }
      protected void trainingtypeList(HttpServletRequest request) {
         TrainingType trainingTypeMaster = new TrainingType();
-        List<?> trainingTypeList = trainingTypeService.read();
+//        List<?> trainingTypeList = trainingTypeService.read();
+        List<?> trainingTypeList = trainingTypeService.trainingTypeBystatus();
         Map<Integer, String> trn = new HashMap<>();
         for (Object o : trainingTypeList) {
             trainingTypeMaster = (TrainingType) o;

@@ -99,20 +99,20 @@
             document.getElementById(idString).innerHTML = '';
         }
     }
-    function dateCheck() {
-        var today = new Date();
-        var startDateString = $('#startDate').val();
-        var a = startDateString.split("/");
-        var startDate = new Date(a[2], a[1] - 1, a[0]);
-        var flag = startDate.toDateString() >= today.toDateString();
-        if (!flag) {
-            document.getElementById('startDate').value = '';
-            alert("Start Date Not Less than Today Date.");
-        }
-        else{
-            document.getElementById('startDate').value;
-        }
-    }
+//    function dateCheck() {
+//        var today = new Date();
+//        var startDateString = $('#startDate').val();
+//        var a = startDateString.split("/");
+//        var startDate = new Date(a[2], a[1] - 1, a[0]);
+//        var flag = startDate.toDateString() >= today.toDateString();
+//        if (!flag) {
+//            document.getElementById('startDate').value = '';
+//            alert("Start Date Not Less than Today Date.");
+//        }
+//        else{
+//            document.getElementById('startDate').value;
+//        }
+//    }
 //    function dateCheck1(endDateString) {
 //        alert(endDateString);
 //        var startDateString = $('#startDate').val();
@@ -300,8 +300,8 @@
                                             <form:radiobutton path="status" value="0" required="required"/>Inactive
                                         </div>-->
                                     </div>
-                                </div>
-                                <div class="form-group">
+                                <!--</div>-->
+<!--                                <div class="form-group">
                                     <div class="col-sm-5">
                                         <label class="control-label">Company Sponsor<span style="color: red;font-size: 12px;">*</span></label>
                                         <form:radiobutton path="companySponsor" value="1" required="required"/>Yes
@@ -313,8 +313,8 @@
                                         <form:radiobutton path="status" value="1" required="required"/>Active
                                         <form:radiobutton path="status" value="0" required="required"/>Inactive
                                         <%--<form:errors path="status" cssClass="errorDiv"></form:errors>--%>
-                                    </div>-->
-                                </div>
+                                    </div>
+                                </div>-->
                                 <div class="form-group">
                                     <div class="col-sm-6 col-sm-offset-5">
                                         <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
@@ -323,6 +323,7 @@
                                                                                 <button type="button" class="btn btn-danger" data-original-title="" title="" onclick="window.location = 'departmentMaster.htm?act=showList'">Cancel</button>
                                                                             </div>-->
                                 </div>
+                        </div>
                             </form:form>
 
 

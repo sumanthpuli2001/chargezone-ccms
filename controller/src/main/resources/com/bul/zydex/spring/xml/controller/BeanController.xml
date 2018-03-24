@@ -60,6 +60,7 @@
         <property name="employeeMasterService" ref="employeeMasterService1" />
         <property name="questionPaperService" ref="questionPaperService1"/>
         <property name="trainingAssessmentService" ref="trainingAssessmentService1"/>
+        <property name="employeeFeedbackService" ref="employeeFeedbackService1" />
     </bean>
     <bean id="outController1" class="com.bul.zydex.controller.OutController" parent="controllerConfig" >
         <property name="userInitPwdValidator" ref="userInitPwdValidator1" />
@@ -1115,6 +1116,7 @@
         <property name="trainingTypeService" ref="trainingTypeService1"></property>
         <property name="trainingAttendanceService" ref="trainingAttendanceService1"></property>
         <property name="employeeMasterService" ref="employeeMasterService1"></property>
+        <property name="trainingFeedbackService" ref="trainingFeedbackService1"></property>
     </bean>
     <bean id="classifiedBoxController1" class="com.bul.zydex.controller.ClassifiedBox.ClassifiedBoxController" parent="controllerConfig" >
         <property name="classifiedBoxService" ref="classifiedBoxService1" />

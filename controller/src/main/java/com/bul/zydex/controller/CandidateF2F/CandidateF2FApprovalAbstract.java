@@ -10,12 +10,18 @@ import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateF2FApproval;
 import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.model.CandidateJobApplication;
+import com.bul.zydex.model.JobtypeMaster;
+import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.CandidateF2FApproval.CandidateF2FApprovalService;
 import com.bul.zydex.service.CandidateF2FRequest.CandidateF2FRequestService;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
+import com.bul.zydex.service.Recruitment.JobtypeMasterService;
+import com.bul.zydex.service.Recruitment.MprMasterService;
 import com.bul.zydex.service.Vacancy.VacancyMasterService;
+import com.bul.zydex.service.location.LocationMasterService;
 
 /**
  *
@@ -28,6 +34,9 @@ public class CandidateF2FApprovalAbstract extends CustomAbstract {
     protected CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService;
     protected CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService;
     protected VacancyMasterService<VacancyMaster> vacancyMasterService;
+    protected JobtypeMasterService<JobtypeMaster> jobtypeMasterService;
+    protected LocationMasterService<LocationMaster> locationMasterService;
+    protected MprMasterService<MprMaster> mprMasterService;
 
     public CandidateF2FRequestService<CandidateF2FRequest> getCandidateF2FRequestService() {
         return candidateF2FRequestService;
@@ -68,6 +77,32 @@ public class CandidateF2FApprovalAbstract extends CustomAbstract {
     public void setVacancyMasterService(VacancyMasterService<VacancyMaster> vacancyMasterService) {
         this.vacancyMasterService = vacancyMasterService;
     }
+
+    public JobtypeMasterService<JobtypeMaster> getJobtypeMasterService() {
+        return jobtypeMasterService;
+    }
+
+    public void setJobtypeMasterService(JobtypeMasterService<JobtypeMaster> jobtypeMasterService) {
+        this.jobtypeMasterService = jobtypeMasterService;
+    }
+
+    public LocationMasterService<LocationMaster> getLocationMasterService() {
+        return locationMasterService;
+    }
+
+    public void setLocationMasterService(LocationMasterService<LocationMaster> locationMasterService) {
+        this.locationMasterService = locationMasterService;
+    }
+
+    public MprMasterService<MprMaster> getMprMasterService() {
+        return mprMasterService;
+    }
+
+    public void setMprMasterService(MprMasterService<MprMaster> mprMasterService) {
+        this.mprMasterService = mprMasterService;
+    }
+    
+    
     
     
 

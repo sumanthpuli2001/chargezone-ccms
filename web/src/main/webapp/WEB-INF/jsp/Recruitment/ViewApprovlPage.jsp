@@ -131,7 +131,7 @@
                                                 </div>
                                                 <div class="col-sm-4" style="text-align: right">
                                                     <c:if test="${status != 3}">
-                                                        <button type="submit" class="btn btn-success" id="btnType2" name="btnType"  value="Approve" style="width: 100px"></button>
+                                                        <button type="submit" class="btn btn-success" id="btnType2" name="btnType"  value="Approve" style="width: 100px">Approve</button>
                                                     </c:if>
                                                 </div>
 

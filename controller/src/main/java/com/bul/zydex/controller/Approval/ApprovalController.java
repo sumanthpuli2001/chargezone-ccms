@@ -23,15 +23,15 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Vikas
  */
 public class ApprovalController extends ApprovalAbstract {
-    
+
     public ModelAndView createApprovalSetting(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        
+
         ModelAndView mv = new ModelAndView();
         ApprovalMaster approvalMaster = new ApprovalMaster();
         ApprovalUser approvalUser = new ApprovalUser();
         bind(request, approvalUser);
-        
+
         EmployeeMaster employeeMaster = new EmployeeMaster();
         selectEmployee(request, response);
 //          EmployeeMaster employeeMaster= new EmployeeMaster();
@@ -43,10 +43,10 @@ public class ApprovalController extends ApprovalAbstract {
         mv.setViewName("Approval/CreateApproval");
         return mv;
     }
-    
+
     public ModelAndView approvalSubmit(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        
+
         ModelAndView mv = new ModelAndView();
         ApprovalMaster approvalMaster = new ApprovalMaster();
         LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
@@ -62,14 +62,14 @@ public class ApprovalController extends ApprovalAbstract {
         approvalMaster.setCreatedDate(sdf.format(cDate));
         approvalMaster.setStatus(0);
         approvalMasterService.create(approvalMaster);
-        
+
         mv = createApprovalSetting(request, response);
         return mv;
     }
-    
+
     public ModelAndView submitApproval(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        
+
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         ApprovalMaster approvalMaster = new ApprovalMaster();
@@ -87,7 +87,7 @@ public class ApprovalController extends ApprovalAbstract {
         approvalMaster.setCreatedDate(sdf.format(cDate));
         approvalMaster.setStatus(0);
         approvalMasterService.create(approvalMaster);
-        
+
         otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
         for (int i = 0; i <= otherDetailCount; i++) {
             if (null != request.getParameter("policyId" + i) && null != request.getParameter("policyNumber" + i)) {
@@ -110,16 +110,16 @@ public class ApprovalController extends ApprovalAbstract {
                 }
             }
         }
-        
+
         mv = createApprovalSetting(request, response);
-        
+
         return mv;
-        
+
     }
-    
+
     public ModelAndView approvalList(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        
+
         ModelAndView mv = new ModelAndView();
         ApprovalMaster approvalMaster = new ApprovalMaster();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
@@ -127,6 +127,27 @@ public class ApprovalController extends ApprovalAbstract {
         mv.getModelMap().put("list", approvalMasterList);
         mv.getModelMap().put("approvalMaster", approvalMaster);
         mv.setViewName("Approval/ApprovalList");
+        return mv;
+    }
+
+    public ModelAndView viewApprovalDetail(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        ApprovalMaster approvalMaster = new ApprovalMaster();
+        ApprovalUser approvalUser = new ApprovalUser();
+        String id = request.getParameter("id");
+        approvalUser = approvalUserService.readById(Integer.parseInt(id));
+        approvalMaster = approvalMasterService.readById(approvalUser.getApprovalMaster().getId());
+
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        selectEmployee(request, response);
+        selectedEmployeeFor360Feedback(request, employeeMaster);
+
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.getModelMap().put("approvalUser", approvalUser);
+        mv.getModelMap().put("approvalMaster", approvalMaster);
+        mv.setViewName("Approval/ViewApprovalDetail");
         return mv;
     }
 }

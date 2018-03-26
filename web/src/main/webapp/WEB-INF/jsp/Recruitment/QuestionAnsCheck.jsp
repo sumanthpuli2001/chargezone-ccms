@@ -81,11 +81,11 @@
                                                     <div class="col-sm-2">
                                                         <c:if test="${employeeAdditional[3] eq employeeAdditional[4]}">
                                                             Correct
-                                                            <input type="text" name="mcqStatus" value="0">
+                                                            <input type="hidden" name="mcqStatus" value="0">
                                                         </c:if>
                                                         <c:if test="${employeeAdditional[3] ne employeeAdditional[4]}">
                                                             Incorrect
-                                                            <input type="text" name="mcqStatus" value="1">
+                                                            <input type="hidden" name="mcqStatus" value="1">
                                                         </c:if>
                                                     </div>
                                                     <c:if test="${employeeAdditional[3] eq employeeAdditional[4]}">
@@ -104,11 +104,11 @@
                                                 <c:if test="${employeeAdditional[1] eq 1}">
 
                                                     <div class="col-sm-1">
-                                                        <input class="form-check-input" name="mcqStatus" type="radio"  value="0" >
+                                                        <input class="form-check-input" name="mcqStatus${status.count}" type="radio"  value="0" >
                                                         <label class="form-check-label" for="radio100${employeeAdditional[6]}">Correct</label>
                                                     </div>
                                                     <div class="col-sm-1">
-                                                        <input class="form-check-input" name="mcqStatus" type="radio"  value="1" >
+                                                        <input class="form-check-input" name="mcqStatus${status.count}" type="radio"  value="1" >
                                                         <label class="form-check-label" for="radio100${employeeAdditional[6]}">Incorrect</label>
                                                     </div>
                                                     <div class="col-sm-2">

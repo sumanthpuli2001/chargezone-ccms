@@ -25,9 +25,12 @@ public class RecruitmentMppApprovalDAOImpl<T> extends GenericsDAOImpl<T> impleme
         String query = "";
         query += " "
                 + " SELECT rm.id, rm.numberOfPosition, rm.budget, rm.experiance, rm.mppStatus, rm.currentLevel, "
-                + " rma.level "
+                + " rma.level, b.location, c.departmentName, d.jobTypeName, rm.createdDate "
                 + " FROM RecruitmentMppApproval rma "
                 + " Left Join rma.recruitmentMaster rm "
+                + " LEFT JOIN rm.locationMaster b "
+                + " LEFT JOIN rm.departmentMaster c "
+                + " LEFT JOIN rm.jobtypeMaster d "
                 + " Where  rm.currentLevel >= rma.level "
                 + " And rma.employeeMaster.id = " + empId
                 + " order by rm.id desc";
@@ -52,10 +55,10 @@ public class RecruitmentMppApprovalDAOImpl<T> extends GenericsDAOImpl<T> impleme
         }
         return recruitmentMppApproval;
     }
-    
-        @Override
+
+    @Override
     public List<?> recruitmentMppdelete(String employeeId) {
-      String query = "";
+        String query = "";
 
         query += "  "
                 + " select a"

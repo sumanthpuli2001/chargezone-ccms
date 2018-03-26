@@ -83,7 +83,7 @@
                                                             <tr>
                                                                 <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
                                                                 <th>Sr.No.</th>
-                                                                <th>Employee</th>
+                                                                <th>Description</th>
                                                                 <th>Feedback</th>
                                                                 <th style="width: 50px;">Action</th>
                                                             </tr>

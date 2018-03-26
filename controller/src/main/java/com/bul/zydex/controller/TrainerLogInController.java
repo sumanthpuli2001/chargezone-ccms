@@ -182,7 +182,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         return mv;
     }
 
-   public ModelAndView viewProfile(HttpServletRequest request,
+    public ModelAndView viewProfile(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String id = request.getParameter("id");
@@ -416,6 +416,27 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         trainingAssessment.setCreatedDate(dtf.format(localDate));
         String[] checkId = request.getParameterValues("checkId");
         trainingAssessment.setStatus(0);
+//            Integer hour = Integer.parseInt(trainingAssessment.getDuration()) / 60;
+//            Integer minits = Integer.parseInt(trainingAssessment.getDuration()) % 60;
+//            String strhout = hour.toString();
+//            String strminits = minits.toString();
+//            if (strhout.length() == 1) {
+//                strhout = "0" + strhout;
+//            }
+//            if (strhout.length() == 0) {
+//                strhout = "00";
+//            }
+//            if (strminits.length() == 1) {
+//                strminits = "0" + strminits;
+//            }
+//            if (strminits.length() == 0) {
+//                strminits = "00";
+//            }
+//            trainingAssessment.setDuration(strhout + ":" + strminits + ":00");
+        for (String string : checkId) {
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            employeeMaster.setId(Integer.parseInt(string));
+            trainingAssessment.setEmployeeMaster(employeeMaster);
             Integer hour = Integer.parseInt(trainingAssessment.getDuration()) / 60;
             Integer minits = Integer.parseInt(trainingAssessment.getDuration()) % 60;
             String strhout = hour.toString();
@@ -432,11 +453,9 @@ public class TrainerLogInController extends TrainerLogInAbstract {
             if (strminits.length() == 0) {
                 strminits = "00";
             }
-            trainingAssessment.setDuration(strhout + ":" + strminits + ":00");
-        for (String string : checkId) {
-            EmployeeMaster employeeMaster = new EmployeeMaster();
-            employeeMaster.setId(Integer.parseInt(string));
-            trainingAssessment.setEmployeeMaster(employeeMaster);
+            String finalduration = strhout + ":" + strminits + ":00";
+            trainingAssessment.setDuration(finalduration);
+
             trainingAssessmentService.create(trainingAssessment);
         }
 

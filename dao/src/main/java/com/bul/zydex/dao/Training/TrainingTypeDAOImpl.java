@@ -22,7 +22,7 @@ public class TrainingTypeDAOImpl<T> extends GenericsDAOImpl<T> implements Traini
     }
     @Override
     public List<?> readtrainingTypeDetail() {
-        String query = "Select a.id,a.training,a.createddate";
+        String query = "Select a.id,a.training,a.createddate, a.status";
         query += " FROM TrainingType a"
                 +" order by a.id desc";
         List<?> list = getHibernateTemplate().find(query);

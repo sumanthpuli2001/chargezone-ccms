@@ -99,76 +99,300 @@
                                 <form:form class="form-horizontal" method="post"
                                            commandName="candidateF2FRequest" action="candidateF2FApproval.htm?act=approvalFaceToFaceInvitation" onsubmit="return saveSubmit()" >
                                     <input type="hidden" id="applicationId" name="applicationId" value="${applicationId}">   
-                                    <div class="form-group">
-                                        <div class="col-sm-6">
-                                            <label>Candidate Name:</label> &nbsp;&nbsp;&nbsp;
-                                            <span>${candidateF2FRequest.candidateApplyJob.name}</span>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>Vacancy Name:</label> &nbsp;&nbsp;&nbsp;
-                                            <span>${candidateF2FRequest.vacancyMaster.name}</span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-6">
-                                            <label>Date Of Interview  :</label> &nbsp;&nbsp;&nbsp;
-                                            <span>${candidateF2FRequest.dateOfInterview}</span>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>Venue :</label> &nbsp;&nbsp;&nbsp;
-                                            <span>${candidateF2FRequest.location}</span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-6">
-                                            <table>
-                                                <tr>
-                                                    <td><label>Interview Comittee:</label></td>
-                                                    <td>
-                                                        <c:forEach  var="test" items="${comitteeList}">
 
-                                                            &nbsp;&nbsp;&nbsp; &nbsp;<span>${test.employeeMaster.employeeName}</span>
-                                                            <br>
+                                    <div class="box box-info collapsed-box ">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Man Power Requisition Detail:</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>MPR Name:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span> ${vacancyName}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>MPR Budget:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span> ${Mprbudget}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Job Type:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${jobtypeNAme1}</span>    
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
+                                                            <span >${designationName1}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Location:</label>  &nbsp;&nbsp;&nbsp;
+                                                            <span >${locationName1}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Department:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${departmentName1}</span>   
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span> ${numberOfPositionMpr}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Work Experience(In Years): </label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${MprExperience}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Description:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span> ${Mprdescription}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box box-info collapsed-box ">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Vacancy Detail:</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun1()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Vacancy Name:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span> ${vacancyName}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Vacancy Created Date:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span> ${fromDate}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Vacancy End Date:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${toDate}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Location:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span> ${locationName}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${position}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Job Type:</label>  &nbsp;&nbsp;&nbsp;
+                                                            <span >${jobtypeNAme}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Department:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${departmentName}</span>    
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
+                                                            <span >${designationName}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Work Experience(In Years):</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${experiance}</span>   
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Description:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${description}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${position}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box box-info collapsed-box ">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Candidate Detail:</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun2()"><i class="fa fa-plus" id="minusId2"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Candidate Name:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.name}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Contact No:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.contactNo}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Father Name:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.fatherName}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Father Date Of Birth</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.fatherDob}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Mother Name:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.motherName}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Mother Date Of Birth:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.motherDob}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Gender:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.sex}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Martial Status:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.martialStatus}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Candidate Date Of Birth:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.dob}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Blood Group:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.bloodGroup}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Present Address:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.presentAddress}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Permanent Address:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.permanentAddress}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>City:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.city}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Email Address:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.emailId}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Emergency Contact Person:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.emergencyContactPerson}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Emergency Contact No:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.emergencyContactNo}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Experience Date Joining Year:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.experianceDateJoiningYear}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Experience Date Joining Month:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${candidateF2FRequest.candidateApplyJob.experianceDateJoiningMonth}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box box-info collapsed-box ">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Candidate Face To Face Detail:</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="box-body no-padding">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Date Of Interview  :</label> &nbsp;&nbsp;&nbsp;
+                                                                <span>${candidateF2FRequest.dateOfInterview}</span>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label>Venue :</label> &nbsp;&nbsp;&nbsp;
+                                                                <span>${candidateF2FRequest.location}</span>
+                                                            </div>
+                                                        </div>
+                                                        <c:forEach  var="comment" items="${commentlist}" varStatus="loop">
+                                                            <div class="form-group">
+                                                                <c:if test="${loop.index eq 0}">
+                                                                    <div class="col-sm-2">
+                                                                        <label>Interviewer Comment:</label> &nbsp;&nbsp;&nbsp;
+                                                                    </div>
+                                                                </c:if>
+                                                                <c:if test="${loop.index ne 0}">
+                                                                    <div class="col-sm-2">
+
+                                                                    </div>
+                                                                </c:if>
+                                                                <div class="col-sm-8">
+                                                                    <label>${comment[2]}</label> &nbsp;&nbsp;&nbsp;
+                                                                    <textarea class="form-control"
+                                                                              id="interviewerRemark" name="interviewerRemark"   disabled>${comment[1]}</textarea>
+                                                                </div>
+
+                                                            </div>
                                                         </c:forEach>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <label></label> &nbsp;&nbsp;&nbsp;
+                                                        <div class="form-group">
 
+                                                            <div class="col-sm-2">
+                                                                <label>HR Comment:</label> &nbsp;&nbsp;&nbsp;
+                                                            </div>
+                                                            <div class="col-sm-8">
+
+                                                                <textarea class="form-control"
+                                                                          id="message" name="message" disabled></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <c:forEach  var="comment" items="${commentlist}" varStatus="loop">
-                                        <div class="form-group">
-                                            <c:if test="${loop.index eq 0}">
-                                            <div class="col-sm-2">
-                                                <label>Interviewer Comment:</label> &nbsp;&nbsp;&nbsp;
-                                            </div>
-                                            </c:if>
-                                            <c:if test="${loop.index ne 0}">
-                                            <div class="col-sm-2">
-                                              
-                                            </div>
-                                            </c:if>
-                                            <div class="col-sm-8">
-                                                <label>${comment[2]}</label> &nbsp;&nbsp;&nbsp;
-                                                <textarea class="form-control"
-                                                          id="interviewerRemark" name="interviewerRemark"   disabled>${comment[1]}</textarea>
-                                            </div>
-
-                                        </div>
-                                    </c:forEach>
-                                    <div class="form-group">
-
-                                        <div class="col-sm-2">
-                                            <label>HR Comment:</label> &nbsp;&nbsp;&nbsp;
-                                        </div>
-                                        <div class="col-sm-8">
-
-                                            <textarea class="form-control"
-                                                      id="message" name="message" ></textarea>
-                                        </div>
-                                    </div>
-
 
                                     <div class="form-group">
                                         <div class="col-sm-4" style="text-align: left">
@@ -246,6 +470,42 @@
 
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+
+    <script>
+        function buttonFun1() {
+            var className = $('#minusId1').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId1').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId1').innerHTML = 'Expand';
+            }
+        }
+        function buttonFun2() {
+            var className = $('#minusId2').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId2').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId2').innerHTML = 'Expand';
+            }
+        }
+        function buttonFun3() {
+            var className = $('#minusId3').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId3').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId3').innerHTML = 'Expand';
+            }
+        }
+        function buttonFun4() {
+            var className = $('#minusId4').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId4').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId4').innerHTML = 'Expand';
+            }
+        }
+    </script>
+
 </html>
 <script>
     $(document).ready(function () {

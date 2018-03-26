@@ -92,6 +92,9 @@
                                                                             ${trainingList[5]}
                                                                         </td>
                                                                         <td>
+                                                                            ${trainingList[6]}
+                                                                        </td>
+                                                                        <td>
                                                                             <div class="btn-group">
                                                                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="viewClick(${trainingList[0]});">
                                                                                     &nbsp;Edit

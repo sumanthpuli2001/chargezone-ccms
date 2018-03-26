@@ -126,7 +126,7 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
-                                <button type="submit" class="btn btn-primary" title="" onclick="window.location = 'trainingIdentification.htm?act=showTrainingFeedbackList2'"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</button>
+                                <!--<button type="submit" class="btn btn-primary" title="" onclick="window.location = 'trainingIdentification.htm?act=showTrainingFeedbackList2'"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</button>-->
                                 <input type="button" class="btn btn-primary" style="float: left" value="Back" onclick="window.history.back();" />
                                 <!--<button type="submit" class="btn btn-danger" title="" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp;&nbsp;DELETE</button>-->
                                 <!--<div class="col-sm-5">-->
@@ -139,12 +139,12 @@
                                                                                                 <option value="" label="-- Select --" ></option>
                                                                                                 <options items="${deptMap}"></options>
                                                                                             </select>-->
-                                    <select id="TrainingId" name="TrainingId" class="form-control" >
+<!--                                    <select id="TrainingId" name="TrainingId" class="form-control" >
                                         <option value="">--SELECT--</option>
-                                        <c:forEach var="trainingsMaps" items="${trainingsMaps}">
+                                        <%--<c:forEach var="trainingsMaps" items="${trainingsMaps}">--%>
                                             <option value="${trainingsMaps.key}">${trainingsMaps.value}</option>
-                                        </c:forEach>
-                                    </select>
+                                        <%--</c:forEach>--%>
+                                    </select>-->
 
                                     <%--<form:errors path="trainingMaster.id" cssClass="errorDiv"></form:errors>--%>
                                 </div>

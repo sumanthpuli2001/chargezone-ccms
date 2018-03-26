@@ -99,36 +99,36 @@
             document.getElementById(idString).innerHTML = '';
         }
     }
-    function dateCheck() {
-        var today = new Date();
-        var startDateString = $('#startDate').val();
-        var a = startDateString.split("/");
-        var startDate = new Date(a[2], a[1] - 1, a[0]);
-        var flag = startDate.toDateString() >= today.toDateString();
-        if (!flag) {
-            document.getElementById('startDate').value = '';
-            alert("Start Date Not Less than Today Date.");
-        }
-        else{
-            document.getElementById('startDate').value;
-        }
-    }
-    function dateCheck1(endDateString) {
-        alert(endDateString);
-        var startDateString = $('#startDate').val();
-        var a = startDateString.split("/");
-        var startDate = new Date(a[2], a[1] - 1, a[0]);
-
-        var b = endDateString.split("/");
-        var endDate = new Date(b[2], b[1] - 1, b[0]);
-        var flag = endDate.toDateString() >= startDate.toDateString();
-        alert(endDate.toDateString());
-        alert(startDate.toDateString());
-        if (!flag) {
-            document.getElementById('endDate').value = '';
-            alert("End Date Not Less than Start Date.");
-        }
-    }
+//    function dateCheck() {
+//        var today = new Date();
+//        var startDateString = $('#startDate').val();
+//        var a = startDateString.split("/");
+//        var startDate = new Date(a[2], a[1] - 1, a[0]);
+//        var flag = startDate.toDateString() >= today.toDateString();
+//        if (!flag) {
+//            document.getElementById('startDate').value = '';
+//            alert("Start Date Not Less than Today Date.");
+//        }
+//        else{
+//            document.getElementById('startDate').value;
+//        }
+//    }
+//    function dateCheck1(endDateString) {
+//        alert(endDateString);
+//        var startDateString = $('#startDate').val();
+//        var a = startDateString.split("/");
+//        var startDate = new Date(a[2], a[1] - 1, a[0]);
+//
+//        var b = endDateString.split("/");
+//        var endDate = new Date(b[2], b[1] - 1, b[0]);
+//        var flag = endDate.toDateString() >= startDate.toDateString();
+//        alert(endDate.toDateString());
+//        alert(startDate.toDateString());
+//        if (!flag) {
+//            document.getElementById('endDate').value = '';
+//            alert("End Date Not Less than Start Date.");
+//        }
+//    }
 </script>
 
 

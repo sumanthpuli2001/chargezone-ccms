@@ -47,12 +47,12 @@
         <form:form action="recruitment.htm?act=budgetdeleteSubmit" method="post" commandName="recruitmentMaster"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <form:hidden path="id"></form:hidden>
-            <section class="content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Custom Tabs -->
-                        <div class="nav-tabs-custom">
-                            <div class="tab-content">
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Custom Tabs -->
+                            <div class="nav-tabs-custom">
+                                <div class="tab-content">
                                 <c:if test="${sessionScope.userRight.employeeManagement}">
                                     <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
                                     <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
@@ -85,10 +85,12 @@
                                                                     <th style="width: 50px;">Department Name</th>
                                                                     <th style="width: 50px;">Job Type</th>
                                                                     <th style="width: 50px;">Budget</th>
-                                                                    <!--<th style="width: 50px;">Status</th>-->
-                                                                    <th style="width: 50px;">Action</th>
-                                                                    <th style="width: 50px;">Edit</th>
-                                                                        <%--</c:if>--%>
+                                                                    <th style="width: 50px;">No Of Position</th>
+                                                                    <th style="width: 50px;">Date</th>
+                                                                    <th style="width: 50px;">Status</th>
+                                                                    <th style="width: 100px;">Action</th>
+                                                                    <!--<th style="width: 50px;">Edit</th>-->
+                                                                    <%--</c:if>--%>
 
                                                                 </tr>
                                                             </thead>
@@ -105,7 +107,8 @@
                                                                 <td>${list[4]}</td>
                                                                 <td>${list[5]}</td>
                                                                 <td>${list[2]}</td>
-                                                                <!--<td>${list[6]}</td>-->
+                                                                <td>${list[1]}</td>
+                                                                <td>${list[7]}</td>
                                                                 <c:if test="${list[6] == 0}"><td><span class="badge">Pending</span></td></c:if>
                                                                 <c:if test="${list[6] == 2}"><td><span class="badge">Pending</span></td></c:if>
                                                                 <c:if test="${list[6] == 1}"><td><span class="label label-warning">Recycled</span></td></c:if>

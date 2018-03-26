@@ -72,7 +72,7 @@ public class RecruitmentDAOImpl<T> extends GenericsDAOImpl<T> implements Recruit
     public List<?> readMppListByUserId(int empId) {
         String query = "";
         query += " "
-                + " SELECT a.id, a.numberOfPosition, a.budget, b.location, c.departmentName, d.jobTypeName, a.mppStatus"
+                + " SELECT a.id, a.numberOfPosition, a.budget, b.location, c.departmentName, d.jobTypeName, a.mppStatus,a.createdDate"
                 + " FROM RecruitmentMaster a "
                 + " LEFT JOIN a.locationMaster b "
                 + " LEFT JOIN a.departmentMaster c "

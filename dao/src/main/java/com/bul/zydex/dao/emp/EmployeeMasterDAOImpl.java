@@ -1903,6 +1903,13 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
     @Override
     public List<?> readEmployeeList(int id) {
+       String query1 = "  "
+                + "FROM UserRightMaster a "
+                + " WHERE a.userMaster.id = " + id
+                + " and a.hr =1";
+
+         List<?> list1 = getHibernateTemplate().find(query1);
+         if(list1.isEmpty()){
         String query = "";
         query += " "
                 + " SELECT a.id, a.employeeName, b.departmentName, c.designationName "
@@ -1911,8 +1918,18 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " left join a.designationMaster c "
                 + " WHERE a.reportingManagerLevel1  like '%" + id + "%'";
 
-        List<?> list = getHibernateTemplate().find(query);
-        return list;
+        return getHibernateTemplate().find(query);}
+         else{
+             String query = "";
+         query += " "
+                + " SELECT a.id, a.employeeName, b.departmentName, c.designationName "
+                + " FROM EmployeeMaster a "
+                + " left join a.departmentMaster b "
+                + " left join a.designationMaster c ";
+              
+
+        return getHibernateTemplate().find(query);
+         }
     }
 
 }

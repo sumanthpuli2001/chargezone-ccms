@@ -137,17 +137,28 @@
 
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                         <div class="form-group">
+
+                                        <div class="col-sm-2">
+                                            <label>Interviewer Comment:</label> &nbsp;&nbsp;&nbsp;
+                                        </div>
+                                        <div class="col-sm-8">
+
+                                            <textarea class="form-control"
+                                                      id="interviewerRemark" name="interviewerRemark" ></textarea>
+                                        </div>
+                                    </div>
+<!--                                    <div class="form-group">
 
 
 
                                         <div class="col-sm-12">
-                                            <label>Interviewer Comment:</label> &nbsp;&nbsp;&nbsp;
+                                            <label></label> &nbsp;&nbsp;&nbsp;
                                             <textarea class="form-control"
                                                       id="interviewerRemark" name="interviewerRemark"  ></textarea>
                                         </div>
 
-                                    </div>
+                                    </div>-->
                                     <div class="form-group">
                                         <div class="col-sm-6 col-sm-offset-5">
                                             <input type="submit" class="btn btn-primary" style="width: 100px;"   title="" value="SUBMIT">

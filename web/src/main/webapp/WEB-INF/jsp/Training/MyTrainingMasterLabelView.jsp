@@ -43,6 +43,8 @@
                                 <c:if test="${showFeedbackButton eq true}">
                                 <button type="button" class="btn btn-primary" style="width: 100px;" onclick="window.location = 'trainingIdentification.htm?act=sendFeedback&id=${trainingMaster.id}&eventdate=${eventdate}'"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Feedback</button>
                                 </c:if>
+                                 <input type="button" class="btn btn-primary" style="width: 130px !important;" value="Show Feedback" onclick="window.location = 'trainingIdentification.htm?act=showcalendar'" />
+                                 <input type="button" class="btn btn-primary" value="Back" onclick="window.location = 'trainingIdentification.htm?act=showcalendar'" />
                                 <!--<button type="submit" class="btn btn-danger" title="" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp;&nbsp;DELETE</button>-->
                                 <div class="box-header">
                                 </div>
@@ -102,7 +104,7 @@
                                 </div>
                             </div><!-- /.tab-content -->
                         </div>
-                        <input type="button" class="btn btn-primary" value="Back" onclick="window.location = 'trainingIdentification.htm?act=showcalendar'" />
+                       
                     </div>
                 </div><!-- nav-tabs-custom -->
             </section>

@@ -277,7 +277,11 @@ public class VacancyController extends VacancyAbstract {
 
         ModelAndView mv = new ModelAndView();
         VacancyMaster vacancyMaster = new VacancyMaster();
-        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String date = sdf.format(d);
+//        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        List<?> vacancylist = vacancyMasterService.fetchVacancyBydate(date);
         mv.getModelMap().put("list", vacancylist);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
         mv.setViewName("Vacancy/ShowVacancyList");
@@ -385,7 +389,7 @@ public class VacancyController extends VacancyAbstract {
         }
 
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
-        mv = vacancyDetailList(request, response);
+        mv = vacancyFetch(request, response);
 
         return mv;
     }
@@ -1093,7 +1097,7 @@ public class VacancyController extends VacancyAbstract {
 //             mv.setViewName("Vacancy/AssementOnline");
         }
         return mv;
- 
+
     }
 
     public ModelAndView CreateNewVacancy(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -1144,8 +1148,12 @@ public class VacancyController extends VacancyAbstract {
         ModelAndView mv = new ModelAndView();
         VacancyMaster vacancyMaster = new VacancyMaster();
 
-        List<?> vacancyList = vacancyMasterService.fetchVacancyDetail();
-        mv.getModelMap().put("list", vacancyList);
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String date = sdf.format(d);
+//        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        List<?> vacancylist = vacancyMasterService.fetchVacancyBydate(date);
+        mv.getModelMap().put("list", vacancylist);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
         mv.setViewName("Vacancy/vacancyList");
         return mv;
@@ -1181,7 +1189,11 @@ public class VacancyController extends VacancyAbstract {
         onlineAssessment.setStartTimeNow(null);
         onlineAssessmentService.update(onlineAssessment);
         VacancyMaster vacancyMaster = new VacancyMaster();
-        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String date = sdf.format(d);
+//        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        List<?> vacancylist = vacancyMasterService.fetchVacancyBydate(date);
         mv.getModelMap().put("list", vacancylist);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
         mv.setViewName("Vacancy/ShowVacancyList");
@@ -1204,7 +1216,11 @@ public class VacancyController extends VacancyAbstract {
         ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
         session.invalidate();
         VacancyMaster vacancyMaster = new VacancyMaster();
-        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String date = sdf.format(d);
+//        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        List<?> vacancylist = vacancyMasterService.fetchVacancyBydate(date);
         mv.getModelMap().put("list", vacancylist);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
         mv.setViewName("Vacancy/ShowVacancyList");

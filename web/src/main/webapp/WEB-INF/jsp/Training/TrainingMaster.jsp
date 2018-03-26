@@ -64,8 +64,9 @@
                                                                     <th>Title</th>
                                                                     <th>Description</th>
                                                                     <th>Trainer</th>
-                                                                    <th>Trainer Type</th>
-                                                                    <th>status</th>
+                                                                    <th>Training Type</th>
+                                                                    <th>Start Date</th>
+                                                                    <th>End Date</th>
                                                                     <th>Action</th>
                                                                 </tr>
                                                             </thead>
@@ -89,6 +90,9 @@
                                                                         </td>
                                                                         <td>
                                                                             ${trainingList[5]}
+                                                                        </td>
+                                                                        <td>
+                                                                            ${trainingList[6]}
                                                                         </td>
                                                                         <td>
                                                                             <div class="btn-group">

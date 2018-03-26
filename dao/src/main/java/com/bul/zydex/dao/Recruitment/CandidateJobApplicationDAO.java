@@ -25,4 +25,6 @@ public interface CandidateJobApplicationDAO<T> extends GenericsDAO<T> {
 
     public int GETByCandidateId(int candidateId);
 
+    public int GETByCandidateIdNew(int candidateId, int vacanyId);
+
 }

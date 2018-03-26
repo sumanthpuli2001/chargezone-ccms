@@ -50,22 +50,22 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
         UserMaster user = (UserMaster) session.getAttribute("user");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.now();
-         Integer hour = Integer.parseInt(duration) / 60;
-            Integer minits = Integer.parseInt(duration) % 60;
-            String strhout = hour.toString();
-            String strminits = minits.toString();
-            if (strhout.length() == 1) {
-                strhout = "0" + strhout;
-            }
-            if (strhout.length() == 0) {
-                strhout = "00";
-            }
-            if (strminits.length() == 1) {
-                strminits = "0" + strminits;
-            }
-            if (strminits.length() == 0) {
-                strminits = "00";
-            }
+        Integer hour = Integer.parseInt(duration) / 60;
+        Integer minits = Integer.parseInt(duration) % 60;
+        String strhout = hour.toString();
+        String strminits = minits.toString();
+        if (strhout.length() == 1) {
+            strhout = "0" + strhout;
+        }
+        if (strhout.length() == 0) {
+            strhout = "00";
+        }
+        if (strminits.length() == 1) {
+            strminits = "0" + strminits;
+        }
+        if (strminits.length() == 0) {
+            strminits = "00";
+        }
         QuestionPaper questionPaper = questionPaperService.readById(Integer.parseInt(questionsPaperId));
         try {
             if ("" == id) {
@@ -158,7 +158,7 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
         String appliCationId = request.getParameter("id");
         String candidateId = request.getParameter("candidateId");
         CandidateApplyJob candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(candidateId));
-        List<?> OnList = onlineAssessmentService.readOnlineAssementCandidateList(Integer.parseInt(appliCationId));
+        List<?> OnList = onlineAssessmentService.getOnlineAssementCandidateList(Integer.parseInt(appliCationId));
         Double passingPercentage = 0.0;
         Double totalMarks = 0.0;
 
@@ -235,7 +235,7 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
 //        String[] givenMarks1 = request.getParameterValues("givenMarks3");
         String[] givenMarks2 = request.getParameterValues("givenMarks2");
         String[] type = request.getParameterValues("type");
-        String[] mcqStatus = request.getParameterValues("mcqStatus");
+//        String[] mcqStatus = request.getParameterValues("mcqStatus");
         try {
             for (int i = 0; i < id.length; i++) {
                 String ids = id[i];
@@ -247,11 +247,11 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
                 int typeofQue = Integer.parseInt(tp);
                 if (1 == typeofQue) {
                     inputedMarks = givenMarks2[i];
-                    inputqSts = mcqStatus[i];
+                    inputqSts = request.getParameter("mcqStatus" + (i + 1));
                     questionAnswerSubmit.setAnsStatus(Integer.parseInt(inputqSts));
                 } else {
                     inputedMarks = givenMarks2[i];
-                    mcqSts = mcqStatus[i];
+                    mcqSts = request.getParameter("mcqStatus" + (i + 1));
                     questionAnswerSubmit.setAnsStatus(Integer.parseInt(mcqSts));
                 }
 //            String ans = doneId1[i];

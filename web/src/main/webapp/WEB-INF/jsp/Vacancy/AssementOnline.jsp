@@ -50,10 +50,10 @@
 
 
         <script>
-            function viewClick(id, candidateID, onlineAssment) {
+            function viewClick(id, candidateID, onlineAssment,vanacyID) {
 
 //            window.location = 'payrollSalaryType.htm?act=viewClick&id=' + id;
-                window.location = 'vacancy.htm?act=clickassessmentOnlineTest&id=' + id + '&candidateID=' + candidateID + '&onlineAssment=' + onlineAssment;
+                window.location = 'vacancy.htm?act=clickassessmentOnlineTest&id=' + id + '&candidateID=' + candidateID + '&onlineAssment=' + onlineAssment +'&vanacyID=' + vanacyID;
             }
         </script>
         <script>
@@ -154,7 +154,7 @@
                                                                         <th>${list2[8]}</th>
                                                                         <th>${list2[9]}</th>
                                                                             <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                                                        <th style="width: 50px;"><a onclick="viewClick(${list2[2]},${list2[11]},${list2[0]});">Take Test</a></th>
+                                                                        <th style="width: 50px;"><a onclick="viewClick(${list2[2]},${list2[11]},${list2[0]},${list2[12]});">Take Test</a></th>
                                                                             <%--</c:if>--%>
 
                                                                     </tr>

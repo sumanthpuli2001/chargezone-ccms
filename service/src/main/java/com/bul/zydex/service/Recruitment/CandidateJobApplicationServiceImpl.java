@@ -52,4 +52,9 @@ public class CandidateJobApplicationServiceImpl<T> extends GenericsServiceImpl<T
     public int GETByCandidateId(int candidateId) {
         return candidateJobApplicationDAO.GETByCandidateId(candidateId);
     }
+
+    @Override
+    public int GETByCandidateIdNew(int candidateId, int vacanyId) {
+       return candidateJobApplicationDAO.GETByCandidateIdNew(candidateId, vacanyId);
+    }
 }

@@ -112,9 +112,9 @@
 
                                                                 <td>
                                                                     <div class="btn-group">
-                                                                        <c:if test="${list[5] eq 0}">
+                                                                        <c:if test="${list[4] eq 0}">
                                                                         <button type="button" onclick="mPPViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
-                                                                            &nbsp;&nbsp;Edit
+                                                                            &nbsp;&nbsp;Approval
                                                                         </button>
                                                                         </c:if>
                                                                     </div>

@@ -57,7 +57,7 @@
                                     <!--<button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>-->
                                     <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
 
-                                    <!--<button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'recruitment.htm?act=newCreateBudget'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>-->
+                                    <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'approval.htm?act=createApprovalSetting'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
                                 </c:if>
                                 <div class="box-header">
                                 </div>
@@ -78,7 +78,7 @@
                                                             <thead>
                                                                 <tr>
                                                                     <c:if test="${sessionScope.userRight.employeeManagement}">
-                                                                        <!--<th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>-->
+                                                                        <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
                                                                         </c:if>
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">name</th>
@@ -96,7 +96,7 @@
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
                                                                 <c:if test="${sessionScope.userRight.employeeManagement}">
-                                                                    <!--<td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>-->
+                                                                    <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
                                                                 <td>${list[1]}</td>
@@ -133,14 +133,10 @@
         <!-- /.content -->
     </div>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-    <script>
-        function editViewClick(id) {
-            window.location = 'recruitment.htm?act=editMppRClick&id=' + id;
-        }
-    </script>
+
     <script>
         function viewClick(id) {
-            window.location = 'recruitment.htm?act=viewMPPShow&id=' + id;
+            window.location = 'approval.htm?act=viewApprovalDetail&id=' + id;
         }
     </script>
 </html>

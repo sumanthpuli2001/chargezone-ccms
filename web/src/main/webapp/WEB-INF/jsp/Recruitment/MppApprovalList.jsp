@@ -74,12 +74,21 @@
                                                                         <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
                                                                         </c:if>
                                                                     <!--<th>user id</th>-->
-                                                                    <th style="width: 50px;">Number Of Position</th>
+                                                                    <th style="width: 50px;">Location</th>
+                                                                    <th style="width: 50px;">Department Name</th>
+                                                                    <th style="width: 50px;">Job Type</th>
                                                                     <th style="width: 50px;">Budget</th>
-                                                                    <th style="width: 50px;">Experiance</th>
-                                                                    <th style="width: 50px;">Action</th>
-                                                                    <th style="width: 50px;">View</th>
-                                                                        <%--</c:if>--%>
+                                                                    <th style="width: 50px;">No Of Position</th>
+                                                                    <th style="width: 50px;">Date</th>
+                                                                    <th style="width: 50px;">Status</th>
+                                                                    <th style="width: 100px;">Action</th>
+
+                                                                    <!--                                                                    <th style="width: 50px;">Number Of Position</th>
+                                                                                                                                        <th style="width: 50px;">Budget</th>
+                                                                                                                                        <th style="width: 50px;">Experiance</th>
+                                                                                                                                        <th style="width: 50px;">Action</th>
+                                                                                                                                        <th style="width: 50px;">View</th>-->
+                                                                    <%--</c:if>--%>
 
                                                                 </tr>
                                                             </thead>
@@ -92,9 +101,13 @@
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
+                                                                <td>${list[7]}</td>
+                                                                <td>${list[8]}</td>
+                                                                <td>${list[9]}</td>
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[2]}</td>
-                                                                <td>${list[3]}</td>
+                                                                <td>${list[10]}</td>
+                                                                <!--<td>${list[3]}</td>-->
                                                                 <td>
                                                                     <c:if test="${list[4] eq 0}"><span class="badge">Pending</span></c:if>
                                                                     <%--<c:if test="${list[5] == 1}"><span class="badge">Recycle</span></c:if>--%>
@@ -112,16 +125,17 @@
 
                                                                 <td>
                                                                     <div class="btn-group">
-                                                                        <c:if test="${list[4] eq 0}">
-                                                                        <button type="button" onclick="mPPViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
-                                                                            &nbsp;&nbsp;Approval
-                                                                        </button>
-                                                                        </c:if>
-                                                                    </div>
-                                                                    <div class="btn-group">
                                                                         <button type="button" onclick="viewMpp(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
                                                                         </button>
+                                                                    </div>
+
+                                                                    <div class="btn-group">
+                                                                        <c:if test="${list[4] eq 0 || list[4] eq 4 && list[5] eq list[6]}">
+                                                                            <button type="button" onclick="mPPViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                                &nbsp;&nbsp;Approval
+                                                                            </button>
+                                                                        </c:if>
                                                                     </div>
                                                                 </td>
                                                             </tr>

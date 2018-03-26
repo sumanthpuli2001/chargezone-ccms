@@ -55,6 +55,19 @@
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
+                                                <div class="form-group"><div class="col-md-12 col-sm-12">
+                                                <div class="col-sm-6">
+                                                    <label>Training Type:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <form:select path="trainingType.id" id="trainingType" class="form-control " onchange="trainingOnChange('trainingTypeError');">
+                                                            <form:option label="-- Select --"  value="" ></form:option>
+                                                            <c:forEach var="list" items="${list}" >
+                                                                <form:option value="${list.key}">${list.value}</form:option>
+                                                            </c:forEach>
+                                                        </form:select>
+                                                     <span style="font-size: 14px; color: #dd4b39;" id="trainingTypeError"></span>
+                                                    </div>
+                                                </div>
+                                        </div>
                                                 <div class="col-sm-6"><span style="color: red;font-size: 12px;"></span>
                                                     <label>Training Sub Type:<span style="color: red;font-size: 12px;"></span></label>
                                                     <form:input path="trainingsubtype" id="trainingsubtype" class="form-control" placeholder="Training Sub Type" onchange="trainingOnChange('trainingsubtypeError');"></form:input>
@@ -74,19 +87,7 @@
 
                                         </div>
 
-                                        <div class="form-group"><div class="col-md-12 col-sm-12">
-                                                <div class="col-sm-6">
-                                                    <label>Training Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:select path="trainingType.id" id="trainingType" class="form-control " onchange="trainingOnChange('trainingTypeError');">
-                                                            <form:option label="-- Select --"  value="" ></form:option>
-                                                            <c:forEach var="list" items="${list}" >
-                                                                <form:option value="${list.key}">${list.value}</form:option>
-                                                            </c:forEach>
-                                                        </form:select>
-                                                     <span style="font-size: 14px; color: #dd4b39;" id="trainingTypeError"></span>
-                                                    </div>
-                                                </div>
-                                        </div>
+                                        
                                             
                                             <%--</c:if>--%>
                                         <div class="form-group">

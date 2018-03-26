@@ -88,6 +88,8 @@
                                                                     </c:if>
                                                                 <!--<th>user id</th>-->
                                                                 <th style="width: 50px;">Training Type</th>
+                                                                <th style="width: 50px;">Created Date</th>
+                                                                <th style="width: 50px;">Status</th>
                                                                 <!--<th style="width: 50px;"></th>-->
                                                                     <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <th style="width: 50px;">Action</th>
@@ -106,10 +108,18 @@
                                                             <!--<td>/</td>-->
                                                             <td>${list[1]}</td>
                                                             <td>
-                                                                <!--${list[2]}-->
-                                                            <!--</td>-->
+                                                                ${list[2]}
+                                                            </td>
+                                                            <td>
+                                                                <c:if test="${list[3]eq 0}">
+                                                                Active
+                                                                </c:if>
+                                                                <c:if test="${list[3]eq 1}">
+                                                                Inactive
+                                                                </c:if>
+                                                            </td>
                                                             <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                                            <!--<td>-->
+                                                            <td>
                                                                 <div class="btn-group">
                                                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                         Action <span class="caret"></span>
@@ -127,7 +137,7 @@
                                                                         <%--</c:if>--%>
                                                                     </ul>
                                                                 </div>
-                                                            <!--</td>-->
+                                                            </td>
                                                             <%--</c:if>--%>
                                                         </tr>
                                                     </c:forEach>

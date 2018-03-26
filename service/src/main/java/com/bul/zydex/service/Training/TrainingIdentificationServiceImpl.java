@@ -53,8 +53,8 @@ public class TrainingIdentificationServiceImpl<T> extends GenericsServiceImpl<T>
     }
 
     @Override
-    public Boolean checkExistance(int trainingId, int empId, int trainerId) {
-         return trainingIdentificationDAO.checkExistance(trainingId,empId,trainerId);
+    public Boolean checkExistance(int trainingId, int empId, int trainerId, String eventdate) {
+         return trainingIdentificationDAO.checkExistance(trainingId,empId,trainerId,eventdate);
     }
 
     @Override

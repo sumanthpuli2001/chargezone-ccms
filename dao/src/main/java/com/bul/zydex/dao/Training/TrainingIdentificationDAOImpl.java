@@ -58,7 +58,7 @@ public class TrainingIdentificationDAOImpl<T> extends GenericsDAOImpl<T> impleme
                 + " LEFT JOIN"
                 + " training_sub_master c ON b.id = c.training_master_id"
                 + " WHERE STR_TO_DATE(c.trainingdate, '%d/%m/%Y')=STR_TO_DATE('" + eventDate + "', '%d/%m/%Y')"
-                + " And a.employee_id ="+userid;
+                + " And a.employee_id =" + userid;
         Query query = getSession().createSQLQuery(sqlString);
         List<?> list = query.list();
         return list;
@@ -94,12 +94,13 @@ public class TrainingIdentificationDAOImpl<T> extends GenericsDAOImpl<T> impleme
     }
 
     @Override
-    public Boolean checkExistance(int trainingId, int empId, int trainerId) {
+    public Boolean checkExistance(int trainingId, int empId, int trainerId, String eventdate) {
         String query = "select b.id"
                 + " FROM TrainingAttendance b"
                 + " where b.trainingMaster.id=" + trainingId
                 + " AND b.trainer.id=" + trainerId
-                + " AND b.employeeMaster.id=" + empId;
+                + " AND b.employeeMaster.id=" + empId
+                + " AND STR_TO_DATE(b.trainingDate, '%d/%m/%Y')=STR_TO_DATE('" + eventdate + "', '%d/%m/%Y')";
         List<?> list = getHibernateTemplate().find(query);
         if (list.isEmpty()) {
             return true;
@@ -132,10 +133,10 @@ public class TrainingIdentificationDAOImpl<T> extends GenericsDAOImpl<T> impleme
 
     @Override
     public List<?> checkTraineeAvailableStatus(int trainingId, int empId) {
-         String query = "select c"
+        String query = "select c"
                 + " FROM TrainingIdentification b"
                 + " left join b.trainingMaster c"
-//                + " where c.id=" + trainingId
+                //                + " where c.id=" + trainingId
                 + " where b.employeeMaster.id=" + empId
                 + " group by c.id";
         List<?> list = getHibernateTemplate().find(query);

@@ -27,6 +27,7 @@
         <!--<link rel="stylesheet" href="StorageYard/CSS/bootstrap/font-awesome.min.css">-->
         <link rel="stylesheet" href="StorageYard/CSS/login/form-elements.css">
         <link rel="stylesheet" href="StorageYard/CSS/login/style.css">
+        <script type="text/javascript" src="StorageYard/Plugins/jQuery/jQuery-2.1.4.min.js"></script>
 
         <link rel="shortcut icon" href="../../dist/img/ico/logo.png">
         <!--<link rel="shortcut icon" href="../../bootstrap/ico/favicon.png">-->
@@ -63,6 +64,7 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
+
         <form:form action="trainerLogin.htm?act=SubmitAttendanceClick" method="post" commandName="trainerMaster"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <input type="hidden" id="trainingMasterId" name="trainingMasterId" value="${trainingMasterId}">
@@ -79,6 +81,74 @@
                                 <c:if test="${feedbackStatus eq true}">
                                     <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location = 'trainerLogin.htm?act=sendFeedback&id=${trainingMasterId}&eventdate=${eventdate}'"><i class="fa fa-pencil-square-o"></i>Feedback</button>
                                 </c:if>
+
+                                <section class="content">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <!-- Custom Tabs -->
+                                            <div class="nav-tabs-custom">
+                                                <div class="tab-content">
+                                                    <!--<button type="submit" class="btn btn-danger" title="" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp;&nbsp;DELETE</button>-->
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                <label>Training Title : </label>&nbsp;&nbsp;${trainingMaster.trainingTitle}
+                                                            </div>
+                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                <label>Training Requester : </label>&nbsp;&nbsp;${trainingMaster.trainingOwner}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                <label>Training Type : </label>&nbsp;&nbsp;${trainingMaster.trainingType.training}
+                                                            </div>
+                                                            <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                <label>Training sub-type : </label>&nbsp;&nbsp;${trainingMaster.trainingSubType.trainingsubtype}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                <label>Training Source : </label>&nbsp;&nbsp;${trainingMaster.trainingSource}
+                                                            </div>
+                                                            <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                <label>Trainer : </label>&nbsp;&nbsp;${trainingMaster.trainer.trainerName}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <div class ="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                                                <label>Start Date : </label>&nbsp;&nbsp;${trainingMaster.startDate}
+                                                            </div>
+                                                            <div class ="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                                <label>End Date : </label>&nbsp;&nbsp;${trainingMaster.endDate}
+                                                            </div>
+                                                            <div class ="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                                <label>Training time from : </label>&nbsp;&nbsp;${trainingMaster.trainingTimeForm}
+                                                            </div>
+                                                            <div class ="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                                <label>Training time to : </label>&nbsp;&nbsp;${trainingMaster.trainingTimeTo}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <div class ="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                <label>Venue : </label>&nbsp;&nbsp;${trainingMaster.venue}
+                                                            </div>
+                                                        </div>
+                                                        <div class ="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <div class ="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                <label>Description : </label>&nbsp; &nbsp;
+                                                                ${trainingMaster.trainingDescription}</textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+
+
 
                                 <div class="box-header">
                                 </div>
@@ -104,10 +174,15 @@
                                                             <thead>
                                                                 <tr>
                                                                     <c:if test="${shosts eq true}">
+                                                                    <c:if test="${shosts2 eq true}">
                                                                         <th style="width: 50px;">SR. No</th>
+                                                                        <%--</c:if>--%> 
+                                                                        </c:if> 
                                                                         </c:if> 
                                                                         <c:if test="${shosts eq false}">
+                                                                        <c:if test="${shosts2 eq false}">
                                                                         <th align="Center" style="width: 1px;"><input type="checkbox" id="toggleId" align="Center" ></th>
+                                                                        </c:if> 
                                                                         </c:if> 
                                                                     <th style="width: 50px;">Trainings</th>
                                                                     <th style="width: 50px;">Attendance</th>
@@ -121,12 +196,16 @@
                                                                 <c:forEach var="list"  items="${list}" varStatus="status">
                                                                     <tr>
                                                                         <c:if test="${shosts eq false}">
+                                                                        <c:if test="${shosts2 eq false}">
                                                                             <td align="Center">
                                                                                 <input type="checkbox" onclick="deleteCheck11();" name="checkId" id="checkId" value="${list[0]}">
                                                                             </td>
                                                                         </c:if> 
+                                                                        </c:if> 
                                                                         <c:if test="${shosts eq true}">
+                                                                        <c:if test="${shosts2 eq true}">
                                                                             <td>${status.count}</td>
+                                                                        </c:if> 
                                                                         </c:if> 
                                                                         <td>${list[1]}</td>
                                                                         <!--<td>-->
@@ -154,10 +233,14 @@
                                                 </table>
                                                 <br>
                                                 <c:if test="${shosts eq false}">
+                                                <c:if test="${shosts2 eq false}">
                                                     <button type="submit" class="btn btn-primary" style="float: left" title="" style="width: 100px;"><!--<i class="fa fa-"></i>-->Submit</button>
                                                 </c:if>
+                                                </c:if>
                                                 <c:if test="${shosts eq true}">
+                                                <c:if test="${shosts2 eq true}">
                                                     <a style="float: right"  class="btn btn-primary" onclick="window.location = 'trainerLogin.htm?act=trainerAssessMent&id=${trainingMasterId}&eventdate=${eventdate}'">Online Assessment</a>
+                                                </c:if>
                                                 </c:if>
                                             </div>
                                         </div>

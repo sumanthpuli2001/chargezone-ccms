@@ -78,7 +78,7 @@
                                                     <%--<form:errors path="jobtypeMaster.id" cssClass="errorDiv"></form:errors>--%>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Experiance:</label> &nbsp;&nbsp;&nbsp;
+                                                    <label>Work Experience(In Years):</label> &nbsp;&nbsp;&nbsp;
                                                     <span>${experiance}</span>   
                                                     <%--<form:select path="departmentMaster.id" id="departmentMaster" class="form-control" disabled="true" readonly="true">--%>
                                                     <%--<form:option value="" label="-- Select --" />--%>
@@ -142,7 +142,7 @@
                                                     <form:errors path="name" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                         <div class="col-sm-6">
-                                                        <label>Salary Range:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Salary :<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="salaryRange" class="form-control" placeholder="Salary Range"></form:input>
                                                     <form:errors path="salaryRange" cssClass="errorDiv"></form:errors>
                                                     </div>

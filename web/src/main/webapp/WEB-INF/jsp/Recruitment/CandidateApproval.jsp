@@ -86,7 +86,7 @@
                                                     <span>${candidateApplyJob.sex}</span>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>photograph:</label> &nbsp;&nbsp;&nbsp;
+                                                    <label>Photograph:</label> &nbsp;&nbsp;&nbsp;
                                                     <span><img src="StorageYard/candidateimage/${candidateApplyJob.photograph}" width="50px; !important" height="50px; !important">&nbsp;&nbsp;${candidateApplyJob.photograph}</span>
                                                 </div>
                                             </div>
@@ -102,7 +102,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>city:</label> &nbsp;&nbsp;&nbsp;
+                                                    <label>City:</label> &nbsp;&nbsp;&nbsp;
                                                     <span>${candidateApplyJob.city}</span>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -146,7 +146,7 @@
                                                     <span>${candidateApplyJob.experianceDateJoiningMonth}</span>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Certificate Attach:</label> &nbsp;&nbsp;&nbsp;
+                                                    <label>Resume Attach:</label> &nbsp;&nbsp;&nbsp;
                                                     <span data="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}" type="application/pdf" width="500" height="300">
                                                         <a href="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}">${candidateApplyJob.certificateAttach}</a>
                                                     </span>
@@ -168,11 +168,15 @@
                                                         test="${candidateJobApplication.status eq 2}">
                                                         <button type="button" class="btn btn-primary" onclick="sendToF2F(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; F To F</button>
                                                     </c:if>    
+                                                    <c:if
+                                                        test="${candidateJobApplication.status eq 6}">
+                                                        <button type="button" class="btn btn-primary" onclick="sendToF2F(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; F To F</button>
+                                                    </c:if>    
                                                     <c:if test="${candidateJobApplication.status eq 2}">
                                                         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>
                                                     </c:if>
                                                     <c:if test="${candidateJobApplication.status eq 4}">
-                                                        <button type="button" class="btn btn-primary" id="btnType1" onclick="goToAns(${candidateJobApplication.id},${candidateApplyJob.id})" name="btnType" value="AssessMent" style="width: 100px" >Ans</button>
+                                                        <button type="button" class="btn btn-default" id="btnType1" onclick="goToAns(${candidateJobApplication.id},${candidateApplyJob.id})" name="btnType" value="AssessMent"  >Check Assessment</button>
                                                     </c:if>
                                                 </div>
 
@@ -353,8 +357,10 @@
 //                    document.getElementById("name").value = responseTxt
                     var v1 = JSON.stringify(responseTxt.check);
                     var v2 = JSON.stringify(responseTxt.val2);
-                    $('#test2').html(responseTxt.check).modal('show');
-                    $('#test').html(responseTxt.val2).modal('show');
+//                    $('#test2').html(responseTxt.check).modal('show');
+//                    $('#test').html(responseTxt.val2).modal('show');
+                    document.getElementById("test2").innerHTML = responseTxt.check;
+                    document.getElementById("test").innerHTML = responseTxt.val2;
 
                     document.getElementById("NoOfQue").value = responseTxt.val2;
                     document.getElementById("totalMarks").value = responseTxt.check;

@@ -21,12 +21,11 @@ public class EmployeeFeedbackDAOImpl<T> extends GenericsDAOImpl<T> implements Em
     }
     
     @Override
-    public Boolean checkFeedbackforEmp(int empId, int trainingId) {
+    public Boolean checkFeedbackforEmp(int empId, int trainingId, String eventdate) {
         String query = "select b.id"
                 + " FROM EmployeeFeedback b"
-                + " Left Join b.trainingMaster c"
                 + " where b.trainingMaster.id=" + trainingId+" and b.employeeMaster.id="+empId
-                + " And c.status=1";
+                + " And STR_TO_DATE(b.eventDate, '%d/%m/%Y')=STR_TO_DATE('" + eventdate + "', '%d/%m/%Y')";
         List<?> list = getHibernateTemplate().find(query);
         if (list.isEmpty()) {
             return true;

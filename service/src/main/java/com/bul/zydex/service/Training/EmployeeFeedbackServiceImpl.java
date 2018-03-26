@@ -27,8 +27,8 @@ public class EmployeeFeedbackServiceImpl<T> extends GenericsServiceImpl<T> imple
     }
     
     @Override
-    public Boolean checkFeedbackforEmp(int empId, int trainingId) {
-         return employeeFeedbackDAO.checkFeedbackforEmp(empId, trainingId);
+    public Boolean checkFeedbackforEmp(int empId, int trainingId, String eventdate) {
+         return employeeFeedbackDAO.checkFeedbackforEmp(empId, trainingId, eventdate);
     }
     
     

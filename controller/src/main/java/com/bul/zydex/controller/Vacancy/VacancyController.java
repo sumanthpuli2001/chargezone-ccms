@@ -795,6 +795,7 @@ public class VacancyController extends VacancyAbstract {
                         String paperName = (String) str1[10];
                         finalList.add(paperName);
                         finalList.add(candidateApplyJobid);
+                        finalList.add(vacancyMasterID);
                         listOfFinalList.add(finalList);
 
                     }
@@ -995,6 +996,7 @@ public class VacancyController extends VacancyAbstract {
         String id = request.getParameter("id");
         String candidateID = request.getParameter("candidateID");
         String onlineAssmentID = request.getParameter("onlineAssment");
+        String vanacyID = request.getParameter("vanacyID");
         SimpleDateFormat sdfAb = new SimpleDateFormat("hh:mm:ss");
         Date cDate1 = new Date();
         String time = sdfAb.format(cDate1);
@@ -1045,6 +1047,7 @@ public class VacancyController extends VacancyAbstract {
         mv.getModelMap().put("Duration", Duration);
         mv.getModelMap().put("StartTime", StartTime);
         mv.getModelMap().put("onlineAssmentID", onlineAssmentID);
+        mv.getModelMap().put("vanacyID", vanacyID);
         mv.setViewName("Vacancy/OnlineTestQuestionPaper");
 
         return mv;
@@ -1058,7 +1061,8 @@ public class VacancyController extends VacancyAbstract {
         CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
 
         String candidateiD = request.getParameter("candidateId");
-        int candidateJobapplicationid = candidateJobApplicationService.GETByCandidateId(Integer.parseInt(candidateiD));
+        String vanacyID = request.getParameter("vanacyID");
+        int candidateJobapplicationid = candidateJobApplicationService.GETByCandidateIdNew(Integer.parseInt(candidateiD),Integer.parseInt(vanacyID));
 
         String[] question = request.getParameterValues("finalData1");
         String[] email = request.getParameterValues("finalData");

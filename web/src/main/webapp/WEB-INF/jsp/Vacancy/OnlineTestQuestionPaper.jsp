@@ -170,6 +170,7 @@
             var finalData1 = [];
             var finalData2 = [];
             var candidateId = document.getElementById("candidateID").value;
+            var vanacyID = document.getElementById("vanacyID").value;
 //                alert(candidateId);
             var len = document.getElementById("countDetailId").value;
             for (var i = 1; i < parseInt(len) + 1; i++) {
@@ -184,7 +185,7 @@
             }
             $.ajax({
                 type: "POST",
-                url: "vacancy.htm?act=clickSubmitQuestionAnswer&finalData=" + finalData + "&candidateId=" + candidateId + "&finalData1=" + finalData1,
+                url: "vacancy.htm?act=clickSubmitQuestionAnswer&finalData=" + finalData + "&candidateId=" + candidateId + "&finalData1=" + finalData1+ "&vanacyID=" + vanacyID,
                 data: {},
                 dataType: "text",
                 success: function (responseTxt) {
@@ -352,6 +353,7 @@
                                                         <thead>
 
                                                         <input type="hidden" name="candidateID" id="candidateID" value="${candidateID}">
+                                                        <input type="hidden" name="vanacyID" id="vanacyID" value="${vanacyID}">
                                                         <input type="hidden" name="onlineAssmentID" id="onlineAssmentID" value="${onlineAssmentID}">
                                                         <input type="hidden" name="StartTime" id="StartTime" value="${StartTime}">
 

@@ -103,7 +103,7 @@
                                     </div>
                                     <div class ="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class ="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                                            <label>Description : </label>&nbsp; &nbsp;<textarea rows="4" style="width: 100%">${trainingMaster.trainingDescription}</textarea>
+                                            <label>Description : </label>&nbsp; &nbsp;${trainingMaster.trainingDescription}
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-12">

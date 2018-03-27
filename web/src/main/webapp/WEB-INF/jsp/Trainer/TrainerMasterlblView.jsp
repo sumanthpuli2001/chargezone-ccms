@@ -181,9 +181,9 @@
                                                 </c:if>
                                                 </c:if>
                                                 <c:if test="${shosts eq true}">
-                                                <c:if test="${shosts2 eq true}">
+                                                <%--<c:if test="${shosts2 eq true}">--%>
                                                     <a style="float: right"  class="btn btn-primary" onclick="window.location = 'trainerLogin.htm?act=trainerAssessMent&id=${trainingMasterId}&eventdate=${eventdate}'">Online Assessment</a>
-                                                </c:if>
+                                                <%--</c:if>--%>
                                                 </c:if>
                                             </div>
                                         </div>

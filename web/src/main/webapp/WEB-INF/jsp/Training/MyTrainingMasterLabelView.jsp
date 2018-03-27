@@ -40,11 +40,11 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
+                                <input type="button" class="btn btn-primary" value="Back" onclick="window.location = 'trainingIdentification.htm?act=showcalendar'" />
                                 <c:if test="${showFeedbackButton eq true}">
-                                <button type="button" class="btn btn-primary" style="width: 100px;" onclick="window.location = 'trainingIdentification.htm?act=sendFeedback&id=${trainingMaster.id}&eventdate=${eventdate}'"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Feedback</button>
+                                    <button type="button" class="btn btn-primary" style="width: 120px !important;" onclick="window.location = 'trainingIdentification.htm?act=sendFeedback&id=${trainingMaster.id}&eventdate=${eventdate}'"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Feedback</button>
                                 </c:if>
-                                 <input type="button" class="btn btn-primary" style="width: 130px !important;" value="Show Feedback" onclick="window.location = 'trainingIdentification.htm?act=showcalendar'" />
-                                 <input type="button" class="btn btn-primary" value="Back" onclick="window.location = 'trainingIdentification.htm?act=showcalendar'" />
+                                <!--<input type="button" class="btn btn-primary" style="width: 130px !important;" value="Show Feedback" onclick="window.location = 'trainingIdentification.htm?act=showFeedbackTrainingView&id=${trainingMaster.id}'" />-->
                                 <!--<button type="submit" class="btn btn-danger" title="" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp;&nbsp;DELETE</button>-->
                                 <div class="box-header">
                                 </div>
@@ -103,8 +103,35 @@
 
                                 </div>
                             </div><!-- /.tab-content -->
+                            <c:if test="${showFeedbackButton eq false}">
+                            <section class="content-header">
+                                <h1>Feedback Details:</h1>
+                            </section>
+                            <div>
+                                <br>
+                                
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <label>Employee Name : </label>&nbsp;&nbsp;${feedbackList[0][3]}
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <label>Description  : </label>&nbsp;&nbsp;${feedbackList[0][1]}
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <label>DateTime : </label>&nbsp;&nbsp;${feedbackList[0][2]}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </div>
+
                         </div>
-                       
+
                     </div>
                 </div><!-- nav-tabs-custom -->
             </section>

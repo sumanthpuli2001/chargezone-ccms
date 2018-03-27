@@ -13,6 +13,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    <script>
+        function sendId() {
+            var trainingId = document.getElementById("TrainingId").value;
+      
+//            window.location ="trainingIdentification.htm?act=showTrainingFeedbackList&val=" + val;
+            window.location = 'trainingIdentification.htm?act=showTrainingFeedbackList&trainingId=' + trainingId;
+        }
+    </script>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -29,7 +37,10 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form action="designationMaster.htm?act=deleteClick" method="post" commandName="trainingMaster"
+        <br>
+        <input type="button" class="btn btn-primary" value="Back" onclick="window.history.back();" />
+        <button type="submit" style="width: 150px !important" class="btn btn-primary" title="" onclick="sendId();"><i class="fa fa-search"></i>&nbsp;&nbsp;Show Feedback</button>
+        <form:form action="" method="post" 
                    name='form1' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">
@@ -37,11 +48,14 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
+                                
                                 <!--                                <button type="button" class="btn btn-primary" title="" style="float: right; width: 120px;" onclick="window.location = 'trainingMaster.htm?act=createClick'"><i class="fa fa-plus"></i>&nbsp;&nbsp;New</button>
                                                                 <button type="submit" class="btn btn-danger" title="" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp;&nbsp;DELETE</button>-->
                                 <div class="box-header">
                                 </div>
                                 <div class="row">
+
+                                    <input type="hidden" id="TrainingId" name="TrainingId" value="${trainingMaster.id}">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <label>Training Title : </label>&nbsp;&nbsp;${trainingMaster.trainingTitle}
@@ -121,17 +135,17 @@
                                                                     <td>${status.count}</td>
                                                                     <td>${list[1]}</td>
                                                                     <!--<td>-->
-                                                                        <c:if test="${shosts eq true}">
-                                                                            <c:if test="${list[2] eq 0}">
-                                                                                <td><b style="color: green">PR</b></td>
+                                                                    <c:if test="${shosts eq true}">
+                                                                        <c:if test="${list[2] eq 0}">
+                                                                            <td><b style="color: green">PR</b></td>
                                                                         </c:if> 
-                                                                            <c:if test="${list[2] eq 1}">
-                                                                                <td><b style="color: red">AB</b></td>
+                                                                        <c:if test="${list[2] eq 1}">
+                                                                            <td><b style="color: red">AB</b></td>
                                                                         </c:if> 
-                                                                        </c:if> 
-                                                                        <c:if test="${shosts eq false}">
-                                                                            <td></td>
-                                                                        </c:if> 
+                                                                    </c:if> 
+                                                                    <c:if test="${shosts eq false}">
+                                                                        <td></td>
+                                                                    </c:if> 
 
                                                                     <!--</td>-->
                                                                 </tr>
@@ -141,7 +155,7 @@
                                                 </c:choose>
                                             </table>
                                         </div>
-                                        <input type="button" class="btn btn-primary" value="Back" onclick="window.history.back();" />
+                                        
 
                                     </div><!-- /.col -->
 

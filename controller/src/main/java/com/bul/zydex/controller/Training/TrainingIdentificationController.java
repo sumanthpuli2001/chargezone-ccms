@@ -273,6 +273,8 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         trainingMaster.setTrainer(trainer);
         trainingMaster.setTrainingSubType(trainingSubType);
         trainingMaster.setTrainingType(trainingType);
+          List<?> list1 = trainingIdentificationService.readEmployeeAndTraining(Integer.parseInt(id), user.getId());
+//        mv.getModelMap().put("feedback", list);
 //        List attenlist=  new LinkedList();
 //         attenlist =  trainingAttendanceService.gettrainingattendance(eventdate,Integer.parseInt(id));
         boolean shosts = true;
@@ -287,6 +289,7 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         request.setAttribute("shosts", shosts);
         request.setAttribute("showFeedbackButton", showFeedbackButton);
         request.setAttribute("eventdate", eventdate);
+        mv.getModelMap().put("feedbackList", list1);
 //        request.setAttribute("list", attenlist);
         request.setAttribute("trainingMaster", trainingMaster);
         mv.setViewName("Training/MyTrainingMasterLabelView");
@@ -363,13 +366,14 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         return mv;
     }
 
-    public ModelAndView showTrainingFeedbackList(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
+    public ModelAndView showTrainingFeedbackList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
 
-        String trainingId = request.getParameter("TrainingId");
+        String trainingId = request.getParameter("trainingId");
         EmployeeFeedback employeeFeedback = new EmployeeFeedback();
         HttpSession session = request.getSession(false);
         UserMaster user = (UserMaster) session.getAttribute("user");
+        TrainingMaster trainingMaster = new TrainingMaster();
 //        List<?> trainingsList = trainingMasterService.read();
 //        Map<Integer, String> trainingsMap = new HashMap<Integer, String>();
 //        for(Object o : trainingsList)
@@ -406,7 +410,7 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         EmployeeMaster employeeMaster = employeeMasterService.readById(employeeFeedback.getEmployeeMaster().getId());
         TrainingType trainingType = trainingTypeService.readById(trainingMaster1.getTrainingType().getId());
         TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster1.getTrainingSubType().getId());
-        Trainer trainer =  trainerService.readById(trainingMaster1.getTrainer().getId());
+        Trainer trainer = trainerService.readById(trainingMaster1.getTrainer().getId());
         trainingMaster1.setTrainingType(trainingType);
         trainingMaster1.setTrainingSubType(trainingSubType);
         trainingMaster1.setTrainer(trainer);
@@ -418,4 +422,15 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         return mv;
     }
 
+//    public ModelAndView showFeedbackTrainingView(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
+//        ModelAndView mv = new ModelAndView();
+//        String trainingId = request.getParameter("id");
+//        HttpSession session = request.getSession();
+//        EmployeeMaster employee = (EmployeeMaster) session.getAttribute("employeeInfo");
+//
+//        List<?> list = trainingIdentificationService.readEmployeeAndTraining(Integer.parseInt(trainingId), employee.getId());
+//        mv.getModelMap().put("feedback", list);
+//        mv.setViewName("Training/TrainingFeedbackview");
+//        return mv;
+//    }
 }

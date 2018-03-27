@@ -1162,6 +1162,13 @@
         <property name="questionLibraryService" ref="questionLibraryService1"/>
         <property name="questionPaperService" ref="questionPaperService1"/>
         <property name="trainingQuestionAnswerSubmitService" ref="trainingQuestionAnswerSubmitService1"/>
+        <property name="trainingResultStatusService" ref="trainingResultStatusService1"/>
+        <property name="trainingMasterService" ref="trainingMasterService1"/>
+        <property name="trainingAttendanceService" ref="trainingAttendanceService1"/>
+        <property name="trainingIdentificationService" ref="trainingIdentificationService1"/>
+        <property name="trainingTypeService" ref="trainingTypeService1"/>
+        <property name="trainingSubTypeService" ref="trainingSubTypeService1"/>
+        <property name="trainerService" ref="trainerService1"/>
     </bean>
     <bean id="trainingQuestionAnswerSubmitController1" class="com.bul.zydex.controller.Training.TrainingQuestionAnswerSubmitController" parent="controllerConfig" >
         <property name="trainingQuestionAnswerSubmitService" ref="trainingQuestionAnswerSubmitService1"></property>

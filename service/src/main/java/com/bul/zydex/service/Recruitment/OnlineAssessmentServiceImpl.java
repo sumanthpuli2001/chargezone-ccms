@@ -28,9 +28,12 @@ public class OnlineAssessmentServiceImpl<T> extends GenericsServiceImpl<T> imple
 
     @Override
     public List<?> readOnlineAssementCandidateList(int candidateJobApplicationID) {
-      return onlineAssessmentDAO.readOnlineAssementCandidateList(candidateJobApplicationID);
+        return onlineAssessmentDAO.readOnlineAssementCandidateList(candidateJobApplicationID);
     }
-    
-    
+
+    @Override
+    public List<?> getOnlineAssementCandidateList(int candidateJobApplicationID) {
+        return onlineAssessmentDAO.getOnlineAssementCandidateList(candidateJobApplicationID);
+    }
 
 }

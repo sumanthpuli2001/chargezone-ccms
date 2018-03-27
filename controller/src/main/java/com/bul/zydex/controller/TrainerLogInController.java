@@ -7,6 +7,7 @@ package com.bul.zydex.controller;
 
 import com.bul.zydex.model.EmployeeFeedback;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingAssessment;
 import com.bul.zydex.model.TrainingAttendance;
@@ -181,7 +182,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         return mv;
     }
 
-   public ModelAndView viewProfile(HttpServletRequest request,
+    public ModelAndView viewProfile(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String id = request.getParameter("id");
@@ -415,6 +416,27 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         trainingAssessment.setCreatedDate(dtf.format(localDate));
         String[] checkId = request.getParameterValues("checkId");
         trainingAssessment.setStatus(0);
+//            Integer hour = Integer.parseInt(trainingAssessment.getDuration()) / 60;
+//            Integer minits = Integer.parseInt(trainingAssessment.getDuration()) % 60;
+//            String strhout = hour.toString();
+//            String strminits = minits.toString();
+//            if (strhout.length() == 1) {
+//                strhout = "0" + strhout;
+//            }
+//            if (strhout.length() == 0) {
+//                strhout = "00";
+//            }
+//            if (strminits.length() == 1) {
+//                strminits = "0" + strminits;
+//            }
+//            if (strminits.length() == 0) {
+//                strminits = "00";
+//            }
+//            trainingAssessment.setDuration(strhout + ":" + strminits + ":00");
+        for (String string : checkId) {
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            employeeMaster.setId(Integer.parseInt(string));
+            trainingAssessment.setEmployeeMaster(employeeMaster);
             Integer hour = Integer.parseInt(trainingAssessment.getDuration()) / 60;
             Integer minits = Integer.parseInt(trainingAssessment.getDuration()) % 60;
             String strhout = hour.toString();
@@ -431,11 +453,9 @@ public class TrainerLogInController extends TrainerLogInAbstract {
             if (strminits.length() == 0) {
                 strminits = "00";
             }
-            trainingAssessment.setDuration(strhout + ":" + strminits + ":00");
-        for (String string : checkId) {
-            EmployeeMaster employeeMaster = new EmployeeMaster();
-            employeeMaster.setId(Integer.parseInt(string));
-            trainingAssessment.setEmployeeMaster(employeeMaster);
+            String finalduration = strhout + ":" + strminits + ":00";
+            trainingAssessment.setDuration(finalduration);
+
             trainingAssessmentService.create(trainingAssessment);
         }
 
@@ -449,22 +469,73 @@ public class TrainerLogInController extends TrainerLogInAbstract {
             HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         ModelAndView mv = new ModelAndView();
-        TrainingAssessment trainingAssessment = new TrainingAssessment();
-        Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
-        int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
-        List<?> OnList = trainingAssessmentService.readTrainingAssementList(trainingMasterId);
+        int id = Integer.parseInt(request.getParameter("id"));
+
+//        TrainingAssessment trainingAssessment = new TrainingAssessment();
+//        Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
+//        int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
+        List<?> OnList = trainingAssessmentService.readOnlineAssementCandidateTraningList(id);
         Double passingPercentage = 0.0;
         Double totalMarks = 0.0;
+        int assessmentId = 0;
 
         if (!OnList.isEmpty()) {
             for (Object o2 : OnList) {
                 Object str1[] = (Object[]) o2;
-                passingPercentage = (Double) str1[4];
-                totalMarks = (Double) str1[10];
+                passingPercentage = (Double) str1[3];
+                totalMarks = (Double) str1[9];
+                assessmentId = (int) str1[0];
 
             }
         }
 
+        List<?> QuestionAnswerListIds = trainingQuestionAnswerSubmitService.readByTrainigAssessmentId(assessmentId);
+        List listOfFinalList = new ArrayList();
+        for (Object o1 : QuestionAnswerListIds) {
+            Object str[] = (Object[]) o1;
+            List finalList = new ArrayList();
+            Integer qasid = (Integer) str[0];
+            Integer questionLibraryID = (Integer) str[2];
+            Integer selectedAns = (Integer) str[3];
+            Integer correctAns = (Integer) str[4];
+            String Description = (String) str[5];
+            Integer marks = (Integer) str[6];
+            QuestionLibrary questionLibrary = new QuestionLibrary();
+            questionLibrary = questionLibraryService.readById(questionLibraryID);
+            Integer questionLibraryid = questionLibrary.getId();
+            String question = questionLibrary.getQuestion();
+            finalList.add(question);                // 0
+            Integer type = questionLibrary.getType();
+            finalList.add(type);                    // 1
+            finalList.add(questionLibraryid);       // 2
+            finalList.add(selectedAns);     //3
+            finalList.add(correctAns);      //4
+            finalList.add(marks);      //5
+            finalList.add(passingPercentage);  //6
+            finalList.add(totalMarks);  //7
+            finalList.add(qasid);  //8
+            finalList.add(assessmentId);  //9
+
+            List<?> list2 = questionAnsService.takeTestOnlineAssementCandidateAnswer(questionLibraryid);
+            if (!list2.isEmpty()) {
+                for (Object o2 : list2) {
+                    Object str1[] = (Object[]) o2;
+                    Integer questionAnsID = (Integer) str1[0];
+                    String answer = (String) str1[2];
+                    finalList.add(answer);
+                    finalList.add(questionAnsID);
+                }
+
+            } else {
+
+                finalList.add(Description);
+            }
+            listOfFinalList.add(finalList);
+        }
+
+        mv.getModelMap().put("list2", listOfFinalList);
+        
+        mv.setViewName("Trainer/TrainingQuestionAnsCheck");
         return mv;
     }
 }

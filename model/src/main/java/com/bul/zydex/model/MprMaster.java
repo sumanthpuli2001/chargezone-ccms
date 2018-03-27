@@ -31,12 +31,13 @@ public class MprMaster implements java.io.Serializable {
     private String createdDate;
     private Integer updatedBy;
     private String updatedDate;
+    private RecruitmentMaster recruitmentMaster;
 
     public MprMaster() {
 
     }
 
-    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving, Integer status, Integer remainingBudget, String approvalComment) {
+    public MprMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer budget, String experience, String description, DesignationMaster designationMaster, String dateOfLeaving, Integer status, Integer remainingBudget, String approvalComment, RecruitmentMaster recruitmentMaster) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
@@ -53,6 +54,7 @@ public class MprMaster implements java.io.Serializable {
         this.totalLevel = totalLevel;
         this.remainingBudget = remainingBudget;
         this.approvalComment = approvalComment;
+        this.recruitmentMaster = recruitmentMaster;
     }
 
     public Integer getId() {
@@ -213,6 +215,14 @@ public class MprMaster implements java.io.Serializable {
 
     public void setUpdatedDate(String updatedDate) {
         this.updatedDate = updatedDate;
+    }
+
+    public RecruitmentMaster getRecruitmentMaster() {
+        return recruitmentMaster;
+    }
+
+    public void setRecruitmentMaster(RecruitmentMaster recruitmentMaster) {
+        this.recruitmentMaster = recruitmentMaster;
     }
     
     

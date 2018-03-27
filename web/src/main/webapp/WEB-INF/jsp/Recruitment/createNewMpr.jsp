@@ -83,7 +83,7 @@
                                                                     <th style="width: 50px;">Number Of Position</th>
                                                                     <th style="width: 50px;">Experience</th>
                                                                     <th style="width: 50px;">Status</th>
-                                                                    <th style="width: 50px;">Action</th>
+                                                                    <th style="width: 80px;">Action</th>
                                                                     <th style="width: 50px;">Create Vacancy</th>
                                                                         <%--</c:if>--%>
 

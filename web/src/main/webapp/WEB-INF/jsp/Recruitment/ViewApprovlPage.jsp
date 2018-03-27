@@ -110,13 +110,24 @@
                                                     <span> ${mprMaster.description}</span>
                                                 </div>
                                             </div>
+                                            <!--                                            <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Comment:<span style="color: red;font-size: 12px;">*</span></label>
+                                            
+                                                                                            </div>
+                                                                                        </div>-->
+
                                             <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Comment:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="approvalComment" class="form-control" placeholder="Approval Comment"></form:input>
+                                                <div class="col-sm-2">
+                                                    <label>Comment:<span style="color: red;font-size: 12px;"></span></label>
+
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <form:textarea path="approvalComment" class="form-control" placeholder="Approval Comment"></form:textarea>
                                                     <form:errors path="approvalComment" cssClass="errorDiv"></form:errors>
                                                     </div>
-                                                </div>
+                                                </div> 
+
 
                                                 <div class="form-group">
                                                     <div class="col-sm-4" style="text-align: left">

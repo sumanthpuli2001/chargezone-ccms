@@ -241,7 +241,12 @@
                                     <div class="col-sm-5">
                                         <label class="control-label">Start Date<span style="color: red;font-size: 12px;">*</span></label>
                                         <div class="input-group date form_Startdatetime"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                            <c:if test="${empty startdate}">
                                             <form:input path="startDate" id="startDate" class="form-control" size="16" type="text" value="" readonly="true" onchange="trainerOnchangeFunction('startDateError');dateCheck();" ></form:input>
+                                            </c:if>
+                                             <c:if test="${!empty startdate}">
+                                            <form:input path="startDate" id="startDate" class="form-control" size="16" type="text" value="${startdate}" readonly="true" onchange="trainerOnchangeFunction('startDateError');dateCheck();" ></form:input>
+                                             </c:if>
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                 <%--<form:errors path="startDate" cssClass="errorDiv"></form:errors>--%>

@@ -98,4 +98,22 @@ public class CandidateJobApplicationDAOImpl<T> extends GenericsDAOImpl<T> implem
         return i;
     }
 
+    @Override
+    public int GETByCandidateIdNew(int candidateId, int vacanyId) {
+        Integer i = 0;
+        String query = " SELECT a.id "
+                + " FROM CandidateJobApplication a "
+                + " LEFT JOIN a.candidateApplyJob b "
+                + " LEFT JOIN a.vacancyMaster c "
+                + " Where a.candidateApplyJob.id = " + candidateId
+                + " and a.vacancyMaster.id = " + vacanyId;
+
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            i = (Integer) list.get(0);
+
+        }
+        return i;
+    }
+
 }

@@ -145,8 +145,8 @@
                                                                     <th style="width: 142px;">Vacancy Name</th>
                                                                     <th style="width: 185px;">Number Of Position</th>
                                                                     <th style="width: 130px;">Experience</th>
-                                                                    <th style="width: 105px;">Start Date</th>
-                                                                    <th style="width: 132px;">End Date</th>
+                                                                    <!--<th style="width: 105px;">Start Date</th>-->
+                                                                    <th style="width: 132px;">Vacancy Last Date</th>
                                                                         <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <th style="width: 132px;">Action</th>
                                                                         <%--</c:if>--%>
@@ -165,7 +165,7 @@
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[2]}</td>
                                                                 <td>${list[4]}</td>
-                                                                <td>${list[6]}</td>
+                                                                <!--<td>${list[6]}</td>-->
                                                                 <td>${list[7]}</td>
                                                                 <!--<td>${list[2]}</td>-->
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>

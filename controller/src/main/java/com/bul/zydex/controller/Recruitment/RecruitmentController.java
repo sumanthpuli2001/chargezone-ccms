@@ -314,7 +314,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             mprMaster.setStatus(0);
             mprMaster.setCurrentLevel(1);
             mprMaster.setTotalLevel(approvalList.size());
-
+            mprMaster.setRecruitmentMaster(recruitmentMaster);
             mprMaster.setCreatedBy(employeeMaster.getId());
             mprMaster.setCreatedDate(sdf.format(cDate));
 

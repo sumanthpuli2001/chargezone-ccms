@@ -50,11 +50,15 @@ public class TrainingMasterController extends TrainingMasterAbstract {
     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         TrainingMaster trainingMaster = new TrainingMaster();
-
+        
+        //The Event date is used for fetching date from calendar +(Plus button)
+         String eventdate = request.getParameter("eventdate");
+        
         trainerList(request);
         trainingtypeList(request);
         trainingSubtypeList(request);
-
+        
+        request.setAttribute("startdate", eventdate);
         mv.getModelMap().put("trainingMaster", trainingMaster);
         mv.setViewName("Training/TrainingCreate");
         return mv;

@@ -104,7 +104,7 @@
 
 
                 </div>
-                <input type="button" class="btn btn-primary" value="Back" onclick="window.location = 'trainingIdentification.htm?act=showcalendar'" />
+                <input type="button" class="btn btn-primary" value="Back" onclick="window.history.back();" />
             </div>
         </div><!-- nav-tabs-custom -->
     </section>

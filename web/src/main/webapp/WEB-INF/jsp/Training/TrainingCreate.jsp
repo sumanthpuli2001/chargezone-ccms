@@ -12,7 +12,93 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Add Training</title>
+<script>
+//        jQuery.noConflict();
+//        jQuery(document).ready(function () {
+//            jQuery("#trainingOwner").tokenInput(${list}, {
+//                preventDuplicates: true,
+//                noResultsText: "No Result",
+//                tokenLimit: "1",
+//                searchingText: "Searching ......",
+//                prePopulate: ${preList}
+//
+//            });
+//        });
+        jQuery(document).ready(function () {
+            reportingLevelSet();
+        });
+        function reportingLevelSet() {
+            alert('hi');
+            var level = document.getElementById("trainingOwner").value;
+            if (level != null && level != '') {
+                $.ajax({
+                    url: 'employeeMaster.htm?act=readReportingHierarchy&id=' + level,
+                    type: 'GET',
+                    success: function (result) {
+                        //                        alert("this is result String    " + result);
+                        var array = result.split("~");
+                        //blank whole fields before put new data
+                        document.getElementById("reportingManagerLevel2").value = '';
+                        document.getElementById("reportingManagerLevel3").value = '';
+                        document.getElementById("reportingManagerLevel4").value = '';
+                        document.getElementById("reportingManagerLevel5").value = '';
+                        document.getElementById("reportingManagerLevel6").value = '';
+                        document.getElementById("reportingManagerLevel2Name").value = '';
+                        document.getElementById("reportingManagerLevel3Name").value = '';
+                        document.getElementById("reportingManagerLevel4Name").value = '';
+                        document.getElementById("reportingManagerLevel5Name").value = '';
+                        document.getElementById("reportingManagerLevel6Name").value = '';
+                        document.getElementById("reportingManagerLevel2").value = array[0];
+                        document.getElementById("reportingManagerLevel3").value = array[1];
+                        document.getElementById("reportingManagerLevel4").value = array[2];
+                        //this conditions checks for level 5 and level 6 if these are empty then set conditional values(for id in databese)
+                        if ((array[4] == "" || array[4] == null) && (array[5] == "" || array[5] == null)) {
+                            if (array[2] == "" || array[2] == null) {
+                                document.getElementById("reportingManagerLevel6").value = level;
+                            } else {
+                                document.getElementById("reportingManagerLevel5").value = level;
+                                document.getElementById("reportingManagerLevel6").value = array[2];
+                            }
+                        } else {
+                            //                            document.getElementById("reportingManagerLevel5").value = level;
+                            if (array[4] == "" || array[4] == null) {
+                                document.getElementById("reportingManagerLevel5").value = level;
 
+                            } else {
+                                document.getElementById("reportingManagerLevel5").value = array[4];
+                            }
+                            document.getElementById("reportingManagerLevel6").value = array[5];
+                            //                            if (array[4] != "" || array[4] != null) {
+
+                            //                            }
+
+                        }
+                        document.getElementById("reportingManagerLevel2Name").value = array[6];
+                        document.getElementById("reportingManagerLevel3Name").value = array[7];
+                        document.getElementById("reportingManagerLevel4Name").value = array[8];
+                        //this conditions checks for level 5 and level 6 if these are empty then set conditional values(for values display on jsp)
+                        if ((array[10] == "" || array[10] == null) && (array[11] == "" || array[11] == null)) {
+                            if (array[6] == "" || array[6] == null) {
+                                document.getElementById("reportingManagerLevel6Name").value = array[12];
+                                //array[12] is for employee name od reporting manager.
+                            } else {
+                                document.getElementById("reportingManagerLevel5Name").value = array[12];
+                                document.getElementById("reportingManagerLevel6Name").value = array[6];
+                            }
+                        } else {
+                            if (array[10] == "" || array[10] == null) {
+                                document.getElementById("reportingManagerLevel5Name").value = array[12];
+
+                            } else {
+                                document.getElementById("reportingManagerLevel5Name").value = array[10];
+                            }
+                            document.getElementById("reportingManagerLevel6Name").value = array[11];
+                        }
+                    }
+                });
+            }
+        }
+            </script>
 </head>
 <script>
     function getTrainingSubType() {
@@ -129,6 +215,8 @@
 //            alert("End Date Not Less than Start Date.");
 //        }
 //    }
+
+ 
 </script>
 
 
@@ -181,7 +269,8 @@
                                 <div class="form-group">
                                     <div class="col-sm-5">
                                         <label class="control-label">Training Requester<span style="color: red;font-size: 12px;"></span></label>
-                                        <form:input path="trainingOwner" class="form-control"/>
+                                        <%--<form:input path="trainingOwner" class="form-control"/>--%>
+                                        <form:input path="trainingOwner" class="form-control" onchange="reportingLevelSet();"></form:input>
                                     </div>
                                     <div class="col-sm-5">
                                         ${trainingMaster.trainer.trainerName}
@@ -241,7 +330,12 @@
                                     <div class="col-sm-5">
                                         <label class="control-label">Start Date<span style="color: red;font-size: 12px;">*</span></label>
                                         <div class="input-group date form_Startdatetime"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                            <c:if test="${empty startdate}">
                                             <form:input path="startDate" id="startDate" class="form-control" size="16" type="text" value="" readonly="true" onchange="trainerOnchangeFunction('startDateError');dateCheck();" ></form:input>
+                                            </c:if>
+                                             <c:if test="${!empty startdate}">
+                                            <form:input path="startDate" id="startDate" class="form-control" size="16" type="text" value="${startdate}" readonly="true" onchange="trainerOnchangeFunction('startDateError');dateCheck();" ></form:input>
+                                             </c:if>
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                 <%--<form:errors path="startDate" cssClass="errorDiv"></form:errors>--%>
@@ -271,7 +365,7 @@
                                         <div class="col-sm-5">
                                             <label class="control-label">Training time to<span style="color: red;font-size: 12px;">*</span></label>
                                             <div class="input-group date form_datetime" data-date-format="hh:ii " data-link-field="dtp_input1">
-                                            <form:input path="trainingTimeTo" id="trainingTimeTo" class="form-control" size="16" value="" readonly="" onchange="trainerOnchangeFunction('trainingTimeToError');"></form:input>
+                                            <form:input path="trainingTimeTo" id="trainingTimeTo" class="form-control" size="16" value="" readonly="true" onchange="trainerOnchangeFunction('trainingTimeToError');"></form:input>
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                             </div>
                                             <span style="font-size: 14px; color: #dd4b39;" id="trainingTimeToError"></span>

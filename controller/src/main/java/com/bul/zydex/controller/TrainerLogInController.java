@@ -417,6 +417,27 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         trainingAssessment.setCreatedDate(dtf.format(localDate));
         String[] checkId = request.getParameterValues("checkId");
         trainingAssessment.setStatus(0);
+            Integer hour = Integer.parseInt(trainingAssessment.getDuration()) / 60;
+            Integer minits = Integer.parseInt(trainingAssessment.getDuration()) % 60;
+            String strhout = hour.toString();
+            String strminits = minits.toString();
+            if (strhout.length() == 1) {
+                strhout = "0" + strhout;
+            }
+            if (strhout.length() == 0) {
+                strhout = "00";
+            }
+            if (strminits.length() == 1) {
+                strminits = "0" + strminits;
+            }
+            if (strminits.length() == 0) {
+                strminits = "00";
+            }
+            trainingAssessment.setDuration(strhout + ":" + strminits + ":00");
+        for (String string : checkId) {
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            employeeMaster.setId(Integer.parseInt(string));
+            trainingAssessment.setEmployeeMaster(employeeMaster);
 //            Integer hour = Integer.parseInt(trainingAssessment.getDuration()) / 60;
 //            Integer minits = Integer.parseInt(trainingAssessment.getDuration()) % 60;
 //            String strhout = hour.toString();
@@ -433,36 +454,8 @@ public class TrainerLogInController extends TrainerLogInAbstract {
 //            if (strminits.length() == 0) {
 //                strminits = "00";
 //            }
-//            trainingAssessment.setDuration(strhout + ":" + strminits + ":00");
-        TrainingAssessment trainingAssessment1 = new TrainingAssessment();
-        String Duration = trainingAssessment.getDuration();
-        trainingAssessment1.setDuration(Duration);
-        Integer hour = 0;
-        Integer minits = 0;
-        String strhout = "";
-        String strminits = "";
-        for (String string : checkId) {
-            EmployeeMaster employeeMaster = new EmployeeMaster();
-            employeeMaster.setId(Integer.parseInt(string));
-            trainingAssessment.setEmployeeMaster(employeeMaster);
-            hour = Integer.parseInt(trainingAssessment1.getDuration()) / 60;
-            minits = Integer.parseInt(trainingAssessment1.getDuration()) % 60;
-            strhout = hour.toString();
-            strminits = minits.toString();
-            if (strhout.length() == 1) {
-                strhout = "0" + strhout;
-            }
-            if (strhout.length() == 0) {
-                strhout = "00";
-            }
-            if (strminits.length() == 1) {
-                strminits = "0" + strminits;
-            }
-            if (strminits.length() == 0) {
-                strminits = "00";
-            }
-            String finalduration = strhout + ":" + strminits + ":00";
-            trainingAssessment.setDuration(finalduration);
+//            String finalduration = strhout + ":" + strminits + ":00";
+//            trainingAssessment.setDuration(finalduration);
 
             trainingAssessmentService.create(trainingAssessment);
         }

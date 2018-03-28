@@ -30,6 +30,7 @@ public class TrainingMaster  implements java.io.Serializable {
      private Integer updatedBy;
      private String updatedDate;
      private Integer status;
+     private Integer finishStatus;
 
     public TrainingMaster() {
     }
@@ -40,7 +41,7 @@ public class TrainingMaster  implements java.io.Serializable {
         this.trainingSubType = trainingSubType;
         this.trainingType = trainingType;
     }
-    public TrainingMaster(Trainer trainer, TrainingSubType trainingSubType, TrainingType trainingType, String trainingTitle, String trainingDescription, String trainingOwner, String venue, String startDate, String endDate, String trainingTimeForm, String trainingTimeTo, String trainingSource, String cost, Integer reimbursable, String companySponsor, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate, Integer status) {
+    public TrainingMaster(Trainer trainer, TrainingSubType trainingSubType, TrainingType trainingType, String trainingTitle, String trainingDescription, String trainingOwner, String venue, String startDate, String endDate, String trainingTimeForm, String trainingTimeTo, String trainingSource, String cost, Integer reimbursable, String companySponsor, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate, Integer status,Integer finishStatus) {
        this.trainer = trainer;
        this.trainingSubType = trainingSubType;
        this.trainingType = trainingType;
@@ -61,6 +62,7 @@ public class TrainingMaster  implements java.io.Serializable {
        this.updatedBy = updatedBy;
        this.updatedDate = updatedDate;
        this.status = status;
+       this.finishStatus = finishStatus;
     }
    
     public Integer getId() {
@@ -209,6 +211,14 @@ public class TrainingMaster  implements java.io.Serializable {
     
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getFinishStatus() {
+        return finishStatus;
+    }
+
+    public void setFinishStatus(Integer finishStatus) {
+        this.finishStatus = finishStatus;
     }
 
 

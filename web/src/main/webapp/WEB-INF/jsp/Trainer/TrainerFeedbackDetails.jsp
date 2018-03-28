@@ -196,7 +196,7 @@
                                                                     </td>
                                                                     <td style="text-align: left">
                                                                         <div class="btn-group">
-                                                                        <button type="button" data-toggle="modal" data-target="#myModalOnline" onclick="setid(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                        <button type="button" data-toggle="modal" data-target="#myModalOnline" onclick="setid(${trainingFeedbackList[5]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;&nbsp;&nbsp;View
                                                                         </button>
                                                                     </div>
@@ -228,4 +228,10 @@
 </form:form><!-- /.content -->
 </div><!-- /.content-wrapper -->
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+
+<script>
+                    function setid(id) {
+                        window.location = 'trainingIdentification.htm?act=showFeedbackView1&id=' + id;
+                    }
+                </script>
 </html>

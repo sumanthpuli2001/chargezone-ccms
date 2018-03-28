@@ -34,8 +34,8 @@ public class TrainingAssessmentServiceImpl<T> extends GenericsServiceImpl<T> imp
     }
 
     @Override
-    public List<?> readTrainingAssementList(int trainerId) {
-        return trainingAssessmentDAO.readTrainingAssementList(trainerId);
+    public List<?> readTrainingAssementList(int trainingMasterId, int empId) {
+        return trainingAssessmentDAO.readTrainingAssementList(trainingMasterId,empId);
     }
 
 }

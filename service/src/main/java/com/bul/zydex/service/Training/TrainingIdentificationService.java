@@ -29,4 +29,6 @@ public interface TrainingIdentificationService<T> extends GenericsService<T> {
     public List<?> ListeventDates(String eventDate, int userId);
 
     public List<?> checkTraineeAvailableStatus(int trainingId, int empId);
+    
+    public List<?> readEmployeeAndTraining(int trainingId, int id);
 }

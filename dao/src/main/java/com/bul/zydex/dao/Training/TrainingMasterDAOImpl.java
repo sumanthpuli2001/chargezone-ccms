@@ -33,7 +33,7 @@ public class TrainingMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Trai
     public List<?> fetchtrainingMaster(String date) {
         String query = ""
                 + "FROM TrainingMaster b"
-                + " where STR_TO_DATE(b.startDate, '%d/%m/%Y')>=STR_TO_DATE('" + date + "', '%d/%m/%Y')";
+                + " where STR_TO_DATE(b.endDate, '%d/%m/%Y')>=STR_TO_DATE('" + date + "', '%d/%m/%Y')";
         List<?> list = getHibernateTemplate().find(query);
 
         return list;

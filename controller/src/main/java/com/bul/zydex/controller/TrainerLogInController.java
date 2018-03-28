@@ -212,6 +212,15 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         if (currenstarttdate.compareTo(currentenddate) <= 0) {
             shosts2 = false;
         }
+        boolean assflage = false;
+         SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+                        Date startdate = formatter1.parse(trainingMaster1.getStartDate());
+                        Date enddate = formatter1.parse(trainingMaster1.getEndDate());
+                        if (currenstarttdate.compareTo(startdate) >= 0 && currenstarttdate.compareTo(enddate) <= 0 || currentenddate.compareTo(startdate) >= 0 && currentenddate.compareTo(enddate) <= 0) {
+                        assflage = true;
+                        }
+                        
+        request.setAttribute("assflage", assflage);
         request.setAttribute("shosts2", shosts2);
         request.setAttribute("trainingMaster", trainingMaster1);
         request.setAttribute("shosts", shosts);
@@ -350,6 +359,21 @@ public class TrainerLogInController extends TrainerLogInAbstract {
 //        mv.setViewName("Training/applyTrainingFeedback");
         return mv;
     }
+    public ModelAndView finishTraining(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        String eventdate = request.getParameter("eventdate");
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        int id = Integer.parseInt(request.getParameter("id"));
+        TrainingMaster trainingMaster = (TrainingMaster) trainingMasterService.readById(id);
+        trainingMaster.setFinishStatus(1);
+        trainingMasterService.update(trainingMaster);
+        mv = viewProfile1(request, response, "" + id, eventdate);
+//        request.setAttribute("id", id);
+//        request.setAttribute("eventdate", eventdate);
+//        mv.setViewName("Training/applyTrainingFeedback");
+        return mv;
+    }
 
     public ModelAndView showTrainingFeedbackList(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -405,6 +429,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.now();
         TrainingAssessment trainingAssessment = new TrainingAssessment();
+//        TrainingAssessment trainingAssessment1 = new TrainingAssessment();
         Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
 //        String eventdate = request.getParameter("eventdate");
         int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
@@ -416,6 +441,27 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         trainingAssessment.setCreatedDate(dtf.format(localDate));
         String[] checkId = request.getParameterValues("checkId");
         trainingAssessment.setStatus(0);
+        Integer hour = Integer.parseInt(trainingAssessment.getDuration()) / 60;
+        Integer minits = Integer.parseInt(trainingAssessment.getDuration()) % 60;
+        String strhout = hour.toString();
+        String strminits = minits.toString();
+        if (strhout.length() == 1) {
+            strhout = "0" + strhout;
+        }
+        if (strhout.length() == 0) {
+            strhout = "00";
+        }
+        if (strminits.length() == 1) {
+            strminits = "0" + strminits;
+        }
+        if (strminits.length() == 0) {
+            strminits = "00";
+        }
+        trainingAssessment.setDuration(strhout + ":" + strminits + ":00");
+        for (String string : checkId) {
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            employeeMaster.setId(Integer.parseInt(string));
+            trainingAssessment.setEmployeeMaster(employeeMaster);
 //            Integer hour = Integer.parseInt(trainingAssessment.getDuration()) / 60;
 //            Integer minits = Integer.parseInt(trainingAssessment.getDuration()) % 60;
 //            String strhout = hour.toString();
@@ -432,29 +478,8 @@ public class TrainerLogInController extends TrainerLogInAbstract {
 //            if (strminits.length() == 0) {
 //                strminits = "00";
 //            }
-//            trainingAssessment.setDuration(strhout + ":" + strminits + ":00");
-        for (String string : checkId) {
-            EmployeeMaster employeeMaster = new EmployeeMaster();
-            employeeMaster.setId(Integer.parseInt(string));
-            trainingAssessment.setEmployeeMaster(employeeMaster);
-            Integer hour = Integer.parseInt(trainingAssessment.getDuration()) / 60;
-            Integer minits = Integer.parseInt(trainingAssessment.getDuration()) % 60;
-            String strhout = hour.toString();
-            String strminits = minits.toString();
-            if (strhout.length() == 1) {
-                strhout = "0" + strhout;
-            }
-            if (strhout.length() == 0) {
-                strhout = "00";
-            }
-            if (strminits.length() == 1) {
-                strminits = "0" + strminits;
-            }
-            if (strminits.length() == 0) {
-                strminits = "00";
-            }
-            String finalduration = strhout + ":" + strminits + ":00";
-            trainingAssessment.setDuration(finalduration);
+//            String finalduration = strhout + ":" + strminits + ":00";
+//            trainingAssessment.setDuration(finalduration);
 
             trainingAssessmentService.create(trainingAssessment);
         }
@@ -469,12 +494,14 @@ public class TrainerLogInController extends TrainerLogInAbstract {
             HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         ModelAndView mv = new ModelAndView();
-        int id = Integer.parseInt(request.getParameter("id"));
+        int empId = Integer.parseInt(request.getParameter("id"));
+        int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
+        String eventdate = request.getParameter("eventdate");
 
 //        TrainingAssessment trainingAssessment = new TrainingAssessment();
 //        Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
 //        int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
-        List<?> OnList = trainingAssessmentService.readOnlineAssementCandidateTraningList(id);
+        List<?> OnList = trainingAssessmentService.readTrainingAssementList(trainingMasterId, empId);
         Double passingPercentage = 0.0;
         Double totalMarks = 0.0;
         int assessmentId = 0;
@@ -482,8 +509,8 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         if (!OnList.isEmpty()) {
             for (Object o2 : OnList) {
                 Object str1[] = (Object[]) o2;
-                passingPercentage = (Double) str1[3];
-                totalMarks = (Double) str1[9];
+                passingPercentage = (Double) str1[4];
+                totalMarks = (Double) str1[10];
                 assessmentId = (int) str1[0];
 
             }
@@ -534,7 +561,8 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         }
 
         mv.getModelMap().put("list2", listOfFinalList);
-        
+        mv.getModelMap().put("eventdate", eventdate);
+
         mv.setViewName("Trainer/TrainingQuestionAnsCheck");
         return mv;
     }

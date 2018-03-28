@@ -8,6 +8,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 
@@ -51,8 +52,8 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-
-        <form:form class="form-horizontal" method="post" commandName="questionPaper" action="onlineAssessment.htm?act=submitResult">
+        <input type="hidden" name="countDetailId" id="countDetailId" value="${fn:length(list2)}">
+        <form:form class="form-horizontal" method="post" commandName="trainingAssessment" action="trainingAssessment.htm?act=submitResult">
             <section class="content">
                 <div class="col-md-12">
                     <div class="nav-tabs-custom">
@@ -86,12 +87,15 @@
                                                 <div class="col-sm-2"><h4><b>Marks</b></h4></div>
                                             </div>
                                         </c:if>
+
                                         <c:forEach var="employeeAdditional" items="${list2}" varStatus="status">
 
+                                            <input type="hidden" id="eventdate" name="eventdate" value="${eventdate}">
                                             <input type="hidden" id="id" name="id" value="${employeeAdditional[8]}">
                                             <input type="hidden" id="id" name="type" value="${employeeAdditional[1]}">
                                             <input type="hidden" id="pp" name="pp" value="${employeeAdditional[6]}">
                                             <input type="hidden" id="ttm" name="ttm" value="${employeeAdditional[7]}">
+                                            <input type="hidden" id="ttm" name="assessmentId" value="${employeeAdditional[9]}">
                                             <div class="form-group">
                                                 <div class="col-sm-8" >
                                                     ${status.count}. ${employeeAdditional[0]}
@@ -100,22 +104,22 @@
                                                     <div class="col-sm-2">
                                                         <c:if test="${employeeAdditional[3] eq employeeAdditional[4]}">
                                                             Correct
-                                                            <input type="hidden" name="mcqStatus" value="0">
+                                                            <input type="hidden" name="mcqStatus${status.count}" value="0">
                                                         </c:if>
                                                         <c:if test="${employeeAdditional[3] ne employeeAdditional[4]}">
                                                             Incorrect
-                                                            <input type="hidden" name="mcqStatus" value="1">
+                                                            <input type="hidden" name="mcqStatus${status.count}" value="1">
                                                         </c:if>
                                                     </div>
                                                     <c:if test="${employeeAdditional[3] eq employeeAdditional[4]}">
                                                         <div class="col-sm-2">
-                                                            <input type="text" value="${employeeAdditional[5]}" id="givenMarks2" name="givenMarks2" class="form-control" readonly="true">
+                                                            <input type="text" value="${employeeAdditional[5]}" id="givenMarks2${status.count}" name="givenMarks2" class="form-control" readonly="true">
                                                             /Out of <b>${employeeAdditional[5]}</b>
                                                         </div>
                                                     </c:if>
                                                     <c:if test="${employeeAdditional[3] ne employeeAdditional[4]}">
                                                         <div class="col-sm-2">
-                                                            <input type="text" value="0" name="givenMarks2" class="form-control" id="givenMarks2" readonly="true">
+                                                            <input type="text" value="0" name="givenMarks2" class="form-control" id="givenMarks2${status.count}" readonly="true">
                                                             /Out of <b>${employeeAdditional[5]}</b>
                                                         </div>
                                                     </c:if>
@@ -132,7 +136,7 @@
                                                     </div>
                                                     <div class="col-sm-2">
 
-                                                        <input type="number" name="givenMarks2" class="form-control" id="givenMarks3" class="form-control">
+                                                        <input type="number" name="givenMarks2" class="form-control" id="givenMarks3${status.count}" class="form-control">
                                                         <label>/Out Of ${employeeAdditional[5]}</label>
                                                     </div>
                                                 </c:if>
@@ -200,7 +204,7 @@
                                             <div class="row">
                                                 <div class="form-group">
 
-                                                    <div  class="col-sm-4">
+                                                    <div  class="col-sm-3">
 
 
                                                         <h4> <label> Result Status :</label>&nbsp;
@@ -209,7 +213,7 @@
                                                         </h4>
 
                                                     </div>
-                                                    <div  class="col-sm-4">
+                                                    <div  class="col-sm-3">
 
 
                                                         <h4> <label> Percentage :&nbsp;</label>
@@ -218,11 +222,21 @@
                                                         </h4>
 
                                                     </div>
+                                                    <div  class="col-sm-3">
+
+
+                                                        <h4> <label>Obtain Marks :</label>&nbsp;<label id="obtainTT" ></label>
+                                                            <input type="hidden" name="totalResult" id="totalResult">
+                                                        </h4>
+
+
+
+                                                    </div>
                                                     <div style="float: right;" class="col-sm-3">
 
 
                                                         <h4> <label>Total Marks :</label>&nbsp;<label id="tt" ></label>
-                                                            <input type="hidden" name="totalResult" id="totalResult">
+                                                            <!--<input type="hidden" name="totalResult" id="totalResult">-->
                                                         </h4>
 
 
@@ -235,7 +249,7 @@
 
 
                                                 <div class="form-group">
-                                                    <div class=" col-sm-6 col-sm-offset-5">
+                                                    <div class=" col-sm-6 col-sm-offset-4">
                                                         <a onclick="totalcal()" class="btn btn-default">Check Result</a>
                                                         <button type="submit" class="btn btn-primary" style="width: 100px;" data-original-title="" title="" >SUBMIT</button>
                                                     </div>
@@ -269,19 +283,38 @@
 </html>
 <script>
     function totalcal() {
-//        var text_value = $("#givenMarks2").val();
-        var givenMarks2 = document.getElementById("givenMarks2").value;
-        alert(document.getElementById("givenMarks2").value);
-        var givenMarks3 = document.getElementById("givenMarks3").value;
+        var data;
+        var givenMarks2;
+        var givenMarks3;
+        var ttlm = 0;
+        var len = document.getElementById("countDetailId").value;
+        for (var i = 1; i < parseInt(len) + 1; i++) {
+//            data1 = document.getElementById("candidateIDEmp" + i).value;
+            if (document.getElementById("givenMarks2" + i) == null) {
+                givenMarks2 = 0
+            } else {
+                givenMarks2 = document.getElementById("givenMarks2" + i).value;
+
+                ttlm = ttlm + Number(givenMarks2);
+            }
+            if (document.getElementById("givenMarks3" + i) == null) {
+                givenMarks3 = 0
+            } else {
+                givenMarks3 = document.getElementById("givenMarks3" + i).value;
+                ttlm = ttlm + Number(givenMarks3);
+
+            }
+        }
+
         var pp = document.getElementById("pp").value;
         var ttm = document.getElementById("ttm").value;
-        alert("ok")
 //        var text_value1 = $("#givenMarks1").val();
 //        var text_value3 = $("#givenMarks3").val();
 
-        var ttlm = Number(givenMarks2) + Number(givenMarks3);
+//        var ttlm = Number(givenMarks2) + Number(givenMarks3);
         var per = (ttlm * 100) / Number(ttm);
 
+        document.getElementById("obtainTT").innerHTML = ttlm;
         document.getElementById("per").innerText = Number(per).toFixed(2);
         document.getElementById("percentageResult").value = Number(per).toFixed(2);
         if (per < pp) {
@@ -297,10 +330,8 @@
             document.getElementById("passResult").value = "PASS";
         }
 
-        document.getElementById("tt").innerText = Number(givenMarks2) + Number(givenMarks3);
-        document.getElementById("totalResult").value = Number(givenMarks2) + Number(givenMarks3);
-
-
+        document.getElementById("tt").innerText = ttm;
+        document.getElementById("totalResult").value = ttlm;
     }
 //    $(document).ready(function () {
 //       

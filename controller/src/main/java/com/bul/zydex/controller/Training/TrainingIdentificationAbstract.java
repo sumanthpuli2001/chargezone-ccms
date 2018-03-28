@@ -111,7 +111,9 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
         Map<Integer, String> trainingMastername = new HashMap<>();
         for (Object o : traininglist) {
             trainingMaster = (TrainingMaster) o;
-            trainingMastername.put(trainingMaster.getId(), trainingMaster.getTrainingTitle());
+            String trainingDetails=trainingMaster.getTrainingTitle()+" "+trainingMaster.getStartDate()+" "+trainingMaster.getTrainingTimeForm();
+            trainingMastername.put(trainingMaster.getId(), trainingDetails);
+//            trainingMastername.put(trainingMaster.getId(), trainingMaster.getTrainingTitle());
         }
 
         request.setAttribute("tlist", trainingMastername);

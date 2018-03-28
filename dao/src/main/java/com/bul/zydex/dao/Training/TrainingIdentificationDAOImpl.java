@@ -149,4 +149,15 @@ public class TrainingIdentificationDAOImpl<T> extends GenericsDAOImpl<T> impleme
         return list;
     }
 
+    @Override
+    public List<?> readEmployeeAndTraining(int trainingId, int id) {
+        String query=""
+                   +"select a.id,a.description, a.dateTime, a.employeeMaster.employeeName"
+                + " FROM EmployeeFeedback a"
+                + " where a.trainingMaster.id=" + trainingId
+                + " and a.employeeMaster.id=" + id;
+         List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

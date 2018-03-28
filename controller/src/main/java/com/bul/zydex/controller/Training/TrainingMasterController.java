@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller.Training;
 
+import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.TrainingSubMaster;
@@ -50,11 +51,20 @@ public class TrainingMasterController extends TrainingMasterAbstract {
     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         TrainingMaster trainingMaster = new TrainingMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        
+        //The Event date is used for fetching date from calendar +(Plus button)
+        String eventdate = request.getParameter("eventdate");
 
         trainerList(request);
         trainingtypeList(request);
         trainingSubtypeList(request);
-
+        selectEmployee(request, response);
+        
+        
+        selectedEmployeeFor360Feedback(request, employeeMaster);
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        request.setAttribute("startdate", eventdate);
         mv.getModelMap().put("trainingMaster", trainingMaster);
         mv.setViewName("Training/TrainingCreate");
         return mv;
@@ -141,6 +151,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
             trainingMaster.setCompanySponsor(null);
             trainingMaster.setReimbursable(reimbursable);
             trainingMaster.setStatus(0);
+            trainingMaster.setFinishStatus(0);
             trainingMaster.setCreatedBy(userMaster.getId());
             trainingMaster.setCreatedDate(currentDate);
             trainingMaster.setUpdatedBy(0);
@@ -164,6 +175,12 @@ public class TrainingMasterController extends TrainingMasterAbstract {
                 trainingSubMaster.setTitle(trainingMaster.getTrainingTitle());
                 trainingSubMasterService.create(trainingSubMaster);
             }
+            TrainingSubMaster trainingSubMaster = new TrainingSubMaster();
+            trainingSubMaster.setTrainingdate(trainingMaster.getEndDate());
+            trainingSubMaster.setTrainingMasterid(trainingMaster.getId());
+            trainingSubMaster.setTrainerMasterid(trainingMaster.getTrainer().getId());
+            trainingSubMaster.setTitle(trainingMaster.getTrainingTitle());
+            trainingSubMasterService.create(trainingSubMaster);
             /////////////////////////////////////////////////////
             request.setAttribute(
                     "successMessage",
@@ -184,7 +201,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
     public ModelAndView EditSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         TrainingMaster trainingMaster = new TrainingMaster();
-        Integer trainingId=Integer.parseInt(request.getParameter("id"));
+        Integer trainingId = Integer.parseInt(request.getParameter("id"));
         String trainingTitle = request.getParameter("trainingTitle");
         String trainingDescription = request.getParameter("trainingDescription");
         String trainingOwner = request.getParameter("trainingOwner");
@@ -224,6 +241,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         trainingMaster.setTrainingSource(null);
         trainingMaster.setReimbursable(reimbursable);
         trainingMaster.setStatus(trn.getStatus());
+        trainingMaster.setFinishStatus(trn.getFinishStatus());
         trainingMaster.setCreatedBy(userMaster.getId());
         trainingMaster.setCreatedDate(currentDate);
         trainingMaster.setUpdatedBy(0);
@@ -257,6 +275,12 @@ public class TrainingMasterController extends TrainingMasterAbstract {
                 trainingSubMasterService.create(trainingSubMaster);
 
             }
+            TrainingSubMaster trainingSubMaster = new TrainingSubMaster();
+            trainingSubMaster.setTrainingdate(trainingMaster.getEndDate());
+            trainingSubMaster.setTrainingMasterid(trainingMaster.getId());
+            trainingSubMaster.setTrainerMasterid(trainingMaster.getTrainer().getId());
+            trainingSubMaster.setTitle(trainingMaster.getTrainingTitle());
+            trainingSubMasterService.create(trainingSubMaster);
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
 //             mv.getModelMap().put("trainingMaster", trainingMaster);

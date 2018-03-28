@@ -101,6 +101,8 @@
         <property name="payrollPtCheckService" ref="payrollPtCheckService1" />
         <property name="candidateJobApplicationService" ref="candidateJobApplicationService1"></property>
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
+        <property name="ctcAllowanceService" ref="ctcAllowanceService1"/>
+        <property name="employeeCtcDetailService" ref="employeeCtcDetailService1"/>
     </bean>
     <!--Department Master-->
     <bean id="departmentMasterController1" class="com.bul.zydex.controller.emp.DepartmentMasterController" parent="controllerConfig" >
@@ -776,6 +778,8 @@
         <property name="payrollEsicDeductionService" ref="payrollEsicDeductionService1" />
         <property name="payrollBonusService" ref="payrollBonusService1" />
         <property name="payrollLoanRemainingAmountService" ref="payrollLoanRemainingAmountService1" />
+        <property name="ctcAllowanceService" ref="ctcAllowanceService1" />
+        <property name="employeeCtcDetailService" ref="employeeCtcDetailService1" />
     </bean>
     <bean id="additionalAmountCheckController1" class="com.bul.zydex.controller.Payroll.AdditionalAmountCheckController" parent="controllerConfig" >
         <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
@@ -1165,6 +1169,10 @@
     </bean>
     <bean id="trainingResultStatusController1" class="com.bul.zydex.controller.Training.TrainingResultStatusController" parent="controllerConfig" >
         <property name="trainingResultStatusService" ref="trainingResultStatusService1"></property>
+        
+    </bean>
+    <bean id="ctcAllowanceController1" class="com.bul.zydex.controller.policy.CtcAllowanceController" parent="controllerConfig" >
+        <property name="ctcAllowanceService" ref="ctcAllowanceService1"></property>
         
     </bean>
 </beans>

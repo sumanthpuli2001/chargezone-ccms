@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller.Payroll;
 
+import com.bul.zydex.model.CtcAllowance;
 import com.bul.zydex.model.EmployeeAdditionalSalary;
 import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeExcelRecord;
@@ -264,20 +265,20 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             employeeAdditionalSalary.setAdditionalAmount(bonusAmount);
             employeeAdditionalSalaryService.create(employeeAdditionalSalary);
         }
-         /////////////////////policy Start Here///////////////////////
+        /////////////////////policy Start Here///////////////////////
         employeeMaster = employeeMasterService.readById(employeeSalaryProcess.getEmployeeMaster().getId());
         List<?> PolicyAmountList = employeePolicyDetailService.readPolicy(employeeSalaryProcess.getEmployeeMaster().getId());
         if (!PolicyAmountList.isEmpty()) {
-            
-             for (Object PolicyAmountList1 : PolicyAmountList) {
-             Object[] o = (Object[]) PolicyAmountList1;
-               String policyName = (String) o[1];
-               Double PolicyAmount = (Double) o[0];
-            
-            employeeAdditionalSalary.setEmployeeSalaryProcess(employeeSalaryProcess);
-            employeeAdditionalSalary.setPayrollSalaryType(policyName);
-            employeeAdditionalSalary.setAdditionalAmount(PolicyAmount);
-            employeeAdditionalSalaryService.create(employeeAdditionalSalary);
+
+            for (Object PolicyAmountList1 : PolicyAmountList) {
+                Object[] o = (Object[]) PolicyAmountList1;
+                String policyName = (String) o[1];
+                Double PolicyAmount = (Double) o[0];
+
+                employeeAdditionalSalary.setEmployeeSalaryProcess(employeeSalaryProcess);
+                employeeAdditionalSalary.setPayrollSalaryType(policyName);
+                employeeAdditionalSalary.setAdditionalAmount(PolicyAmount);
+                employeeAdditionalSalaryService.create(employeeAdditionalSalary);
 
             }
         }
@@ -491,7 +492,6 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //        }
         /////////////////////policy end Here///////////////////////
         /////////////////////Loan Start Here///////////////////////
-
         PayrollLoanRemainingAmount payrollLoanRemainingAmount1 = new PayrollLoanRemainingAmount();
         List<?> list1 = payrollLoanRemainingAmountService.readByLoanReaminingAmount(employeeSalaryProcess);
 
@@ -772,12 +772,23 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         headerList.add("Gross Salary");
         headerList.add("Tot.Dedn");
         headerList.add("Net Pay");
+        List<?> list6 = ctcAllowanceService.read();
+        CtcAllowance ctcAllowance = new CtcAllowance();
+//        Map<Integer, String> leaveTypemap = new HashMap();
+        for (Object o : list6) {
+            ctcAllowance = (CtcAllowance) o;
+            headerList.add("" + ctcAllowance.getCtcName());
+        }
+        headerList.add("Total");
+        headerList.add("CTCPerMonth");
+
         List<EmployeeSalaryProcess> empList = (List<EmployeeSalaryProcess>) employeeSalaryProcessService.readEmpSalaryReport(employeeMaster);
         List<Object> finalList = new LinkedList<Object>();
         for (EmployeeSalaryProcess employeeSalaryProcess1 : empList) {
             Map<String, String> empMap = new HashMap<String, String>();
             double additionalAmount = 0.0;
             double deductionAmount = 0.0;
+            double total = 0.0;
             EmployeeExcelRecord employeeExcelRecord1 = new EmployeeExcelRecord();
             EmployeeMaster employeeMaster1 = employeeMasterService.readById(employeeSalaryProcess1.getEmployeeMaster().getId());
             List<?> list = employeeExcelRecordService.readByEmployeExcelReportSearch(employeeSalaryProcess1);
@@ -813,6 +824,15 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             empMap.put("Tot.Dedn", "" + df.format((int) Math.round(deductionAmount)));
             empMap.put("Net Pay", "" + df.format((int) Math.round(additionalAmount - deductionAmount)));
 //            empMap.put("Net Amount", "" + df.format(additionalAmount - deductionAmount));
+            List ctcList = employeeCtcDetailService.fetchctcData(employeeSalaryProcess1.getEmployeeMaster().getId());
+            for (Object dedSalaryList2 : ctcList) {
+                Object[] o5 = (Object[]) dedSalaryList2;
+//                empMap.put("" + o[0], "" + df.format(o[1]));
+                empMap.put("" + o5[1], "" + df.format((int) Math.round((double) o5[2])));
+                total += (Double) o5[2];
+            }
+            empMap.put("Total", "" + df.format((int) Math.round(total)));
+            empMap.put("CTCPerMonth", "" + df.format((int) Math.round(total + (additionalAmount - deductionAmount))));
             finalList.add(empMap);
         }
 
@@ -1377,7 +1397,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         }
 
         return mv;
-        
+
     }
 
 }

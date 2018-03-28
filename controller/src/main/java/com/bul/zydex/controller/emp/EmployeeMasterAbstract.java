@@ -10,8 +10,10 @@ import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.Company;
 import com.bul.zydex.model.CompetencyEvaluationMaster;
+import com.bul.zydex.model.CtcAllowance;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.EmployeeCtcDetail;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeePolicyDetail;
@@ -47,6 +49,8 @@ import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
 import com.bul.zydex.service.leave.LeaveTypeMasterService;
 import com.bul.zydex.service.level.LevelMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
+import com.bul.zydex.service.policy.CtcAllowanceService;
+import com.bul.zydex.service.policy.EmployeeCtcDetailService;
 import com.bul.zydex.service.policy.PolicyMasterService;
 import com.bul.zydex.service.shift.HoursBasisService;
 import com.bul.zydex.service.shift.RotationMasterService;
@@ -92,6 +96,8 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     protected PayrollPtCheckService<PayrollPtCheck> payrollPtCheckService;
     protected CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService;
     protected CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService;
+    protected CtcAllowanceService<CtcAllowance> ctcAllowanceService;
+    protected EmployeeCtcDetailService<EmployeeCtcDetail> employeeCtcDetailService;
 
     public CompetencyEvaluationMasterService<CompetencyEvaluationMaster> getCompetencyEvaluationMasterService() {
         return competencyEvaluationMasterService;
@@ -635,6 +641,23 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     public void setCandidateJobApplyService(CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService) {
         this.candidateJobApplyService = candidateJobApplyService;
     }
+
+    public CtcAllowanceService<CtcAllowance> getCtcAllowanceService() {
+        return ctcAllowanceService;
+    }
+
+    public void setCtcAllowanceService(CtcAllowanceService<CtcAllowance> ctcAllowanceService) {
+        this.ctcAllowanceService = ctcAllowanceService;
+    }
+
+    public EmployeeCtcDetailService<EmployeeCtcDetail> getEmployeeCtcDetailService() {
+        return employeeCtcDetailService;
+    }
+
+    public void setEmployeeCtcDetailService(EmployeeCtcDetailService<EmployeeCtcDetail> employeeCtcDetailService) {
+        this.employeeCtcDetailService = employeeCtcDetailService;
+    }
+    
     
     
 
@@ -703,6 +726,17 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
             policy.put(policyMaster.getId(), policyMaster.getPolicyName());
         }
         request.setAttribute("policy", policy);
+    }
+    protected void ctcList(HttpServletRequest request) {
+        CtcAllowance ctcAllowance = new CtcAllowance();
+        List<?> ctcList = ctcAllowanceService.read();
+
+        Map<Integer, String> ctc = new HashMap<>();
+        for (Object o : ctcList) {
+            ctcAllowance = (CtcAllowance) o;
+            ctc.put(ctcAllowance.getId(), ctcAllowance.getCtcName());
+        }
+        request.setAttribute("ctc", ctc);
     }
 
 }

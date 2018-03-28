@@ -8,9 +8,11 @@ package com.bul.zydex.controller.emp;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.CompetencyEvaluationMaster;
+import com.bul.zydex.model.CtcAllowance;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
+import com.bul.zydex.model.EmployeeCtcDetail;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeePolicyDetail;
@@ -96,6 +98,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         EmployeeSubTypeList(request);
         companyList(request);
         policyList(request);
+        ctcList(request);
         //master's data setting completed on request
 //        shiftList(request);
         hoursBasisList(request);
@@ -135,6 +138,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         EmployeeSubTypeList(request);
         companyList(request);
         policyList(request);
+        ctcList(request);
         //DeowpDown list//
 //        String reasonForLeaving = request.getParameter("password");
         String userName = request.getParameter("userName");
@@ -278,6 +282,26 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 }
             }
             //End
+            //Code for Employee ctc Detail
+            EmployeeCtcDetail employeeCtcDetail = new EmployeeCtcDetail();
+            int otherDetailCount1 = Integer.parseInt(request.getParameter("ctcCount"));
+            for (int i = 1; i <= otherDetailCount1; i++) {
+                CtcAllowance ctcAllowance = new CtcAllowance();
+                if (null != request.getParameter("ctcId" + i) && null != request.getParameter("ctcamount" + i)) {
+                    if (!request.getParameter("ctcId" + i).equals("") && !request.getParameter("ctcamount" + i).equals("")) {
+                        int ctcId = Integer.parseInt(request.getParameter("ctcId" + i));
+                        ctcAllowance.setId(ctcId);
+                        Double amount = Double.valueOf(request.getParameter("ctcamount" + i));
+//                        String policyNumber = request.getParameter("policyNumber" + i);
+                        employeeCtcDetail.setEmployeeMaster(employeeMaster);
+                        employeeCtcDetail.setAmount(amount);
+                        employeeCtcDetail.setCtcAllowance(ctcAllowance);
+                        employeeCtcDetailService.create(employeeCtcDetail);
+                    }
+                }
+            }
+            //End
+
             //Code for Payroll Provident
             int empId = employeeMaster.getEmployeeTypeMaster().getId();
             int empSubId = employeeMaster.getEmployeeSubType().getId();
@@ -695,6 +719,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         EmployeeTypeList(request);
         EmployeeSubTypeList(request);
         policyList(request);
+        ctcList(request);
 
 //        shiftList(request);
         hoursBasisList(request);
@@ -743,6 +768,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             policyList.add(policyDetail[3]);
             finalPolicyList.add(policyList);
         }
+        List finalctcList = new ArrayList();
+        CtcAllowance ctcAllowance = new CtcAllowance();
+        List<?> ctcData = (List<?>) employeeCtcDetailService.fetchctcData(employeeMaster.getId());
+        for (Object ctcDataObject : ctcData) {
+            List ctcList = new ArrayList();
+            Object[] policyDetail1 = (Object[]) ctcDataObject;
+            ctcList.add(policyDetail1[0]);
+            ctcList.add(policyDetail1[1]);
+            ctcList.add(policyDetail1[2]);
+//            ctcList.add(policyDetail1[3]);
+            finalctcList.add(ctcList);
+        }
         int empId = employeeMaster.getEmployeeTypeMaster().getId();
         int empSubId = employeeMaster.getEmployeeSubType().getId();
         Boolean checkPf = payrollPfCheckService.getPFCheckValue(empId, empSubId);
@@ -761,6 +798,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         request.setAttribute("shiftType", employeeMaster.getShiftType());
         request.setAttribute("certificatesList", certificatesList);
         request.setAttribute("finalPolicyList", finalPolicyList);
+        request.setAttribute("finalctcList", finalctcList);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         request.setAttribute("mriStatus", employeeMaster.getMaritalStatus());
         mv.setViewName("Employee/EditUserProfile");

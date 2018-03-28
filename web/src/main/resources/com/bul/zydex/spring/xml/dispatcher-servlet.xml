@@ -218,6 +218,7 @@
                 <prop key="trainingAssessment.htm">trainingAssessmentController1</prop>
                 <prop key="trainingQuestionAnswerSubmit.htm">trainingAssessmentController1</prop>
                 <prop key="trainingResultStatus.htm">trainingResultStatusController1</prop>
+                <prop key="ctcAllowance.htm">ctcAllowanceController1</prop>
                 
            
             </props>

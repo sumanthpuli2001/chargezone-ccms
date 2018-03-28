@@ -32,7 +32,7 @@ public class TrainingTypeDAOImpl<T> extends GenericsDAOImpl<T> implements Traini
     @Override
     public List<?> trainingTypeBystatus() {
         String query = "Select a"
-         + " FROM TrainingType a where a.status=1";
+         + " FROM TrainingType a where a.status=0";
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }

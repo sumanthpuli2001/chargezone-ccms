@@ -10,10 +10,24 @@ import com.bul.zydex.model.QuestionAns;
 import com.bul.zydex.model.QuestionDetails;
 import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.QuestionPaper;
+import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingAssessment;
+import com.bul.zydex.model.TrainingAttendance;
+import com.bul.zydex.model.TrainingIdentification;
+import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.TrainingQuestionAnswerSubmit;
+import com.bul.zydex.model.TrainingResultStatus;
+import com.bul.zydex.model.TrainingSubType;
+import com.bul.zydex.model.TrainingType;
+import com.bul.zydex.service.Training.TrainerService;
 import com.bul.zydex.service.Training.TrainingAssessmentService;
+import com.bul.zydex.service.Training.TrainingAttendanceService;
+import com.bul.zydex.service.Training.TrainingIdentificationService;
+import com.bul.zydex.service.Training.TrainingMasterService;
 import com.bul.zydex.service.Training.TrainingQuestionAnswerSubmitService;
+import com.bul.zydex.service.Training.TrainingResultStatusService;
+import com.bul.zydex.service.Training.TrainingSubTypeService;
+import com.bul.zydex.service.Training.TrainingTypeService;
 import com.bul.zydex.service.questionlibrary.QuestionAnsService;
 import com.bul.zydex.service.questionlibrary.QuestionDetailsService;
 import com.bul.zydex.service.questionlibrary.QuestionLibraryService;
@@ -31,6 +45,13 @@ public class TrainingAssessmentAbstract extends CustomAbstract {
     protected QuestionLibraryService<QuestionLibrary> questionLibraryService;
     protected QuestionAnsService<QuestionAns> questionAnsService;
     protected TrainingQuestionAnswerSubmitService<TrainingQuestionAnswerSubmit> trainingQuestionAnswerSubmitService;
+    protected TrainingResultStatusService<TrainingResultStatus> trainingResultStatusService;
+    protected TrainingMasterService<TrainingMaster> trainingMasterService;
+    protected TrainingAttendanceService<TrainingAttendance> trainingAttendanceService;
+    protected TrainingIdentificationService<TrainingIdentification> trainingIdentificationService;
+    protected TrainingTypeService<TrainingType> trainingTypeService;
+    protected TrainingSubTypeService<TrainingSubType> trainingSubTypeService;
+    protected TrainerService<Trainer> trainerService;
 
     public TrainingAssessmentService<TrainingAssessment> getTrainingAssessmentService() {
         return trainingAssessmentService;
@@ -80,6 +101,61 @@ public class TrainingAssessmentAbstract extends CustomAbstract {
         this.trainingQuestionAnswerSubmitService = trainingQuestionAnswerSubmitService;
     }
 
-   
+    public TrainingResultStatusService<TrainingResultStatus> getTrainingResultStatusService() {
+        return trainingResultStatusService;
+    }
 
+    public void setTrainingResultStatusService(TrainingResultStatusService<TrainingResultStatus> trainingResultStatusService) {
+        this.trainingResultStatusService = trainingResultStatusService;
+    }
+
+    public TrainingMasterService<TrainingMaster> getTrainingMasterService() {
+        return trainingMasterService;
+    }
+
+    public void setTrainingMasterService(TrainingMasterService<TrainingMaster> trainingMasterService) {
+        this.trainingMasterService = trainingMasterService;
+    }
+
+    public TrainingAttendanceService<TrainingAttendance> getTrainingAttendanceService() {
+        return trainingAttendanceService;
+    }
+
+    public void setTrainingAttendanceService(TrainingAttendanceService<TrainingAttendance> trainingAttendanceService) {
+        this.trainingAttendanceService = trainingAttendanceService;
+    }
+
+    public TrainingIdentificationService<TrainingIdentification> getTrainingIdentificationService() {
+        return trainingIdentificationService;
+    }
+
+    public void setTrainingIdentificationService(TrainingIdentificationService<TrainingIdentification> trainingIdentificationService) {
+        this.trainingIdentificationService = trainingIdentificationService;
+    }
+
+    public TrainingTypeService<TrainingType> getTrainingTypeService() {
+        return trainingTypeService;
+    }
+
+    public void setTrainingTypeService(TrainingTypeService<TrainingType> trainingTypeService) {
+        this.trainingTypeService = trainingTypeService;
+    }
+
+    public TrainingSubTypeService<TrainingSubType> getTrainingSubTypeService() {
+        return trainingSubTypeService;
+    }
+
+    public void setTrainingSubTypeService(TrainingSubTypeService<TrainingSubType> trainingSubTypeService) {
+        this.trainingSubTypeService = trainingSubTypeService;
+    }
+
+    public TrainerService<Trainer> getTrainerService() {
+        return trainerService;
+    }
+
+    public void setTrainerService(TrainerService<Trainer> trainerService) {
+        this.trainerService = trainerService;
+    }
+
+    
 }

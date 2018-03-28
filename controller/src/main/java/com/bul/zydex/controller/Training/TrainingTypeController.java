@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller.Training;
 
+import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.UserMaster;
@@ -242,9 +243,11 @@ public class TrainingTypeController extends TrainingTypeAbstract {
            attenlist=  trainingIdentificationService.gettrainingattendance(Integer.parseInt(id));
            
        }
+       boolean showFeedbackButton = employeeFeedbackService.checkFeedbackforHR(trainingMaster.getId());
        
         request.setAttribute("shosts", shosts);
         request.setAttribute("list", attenlist);
+        request.setAttribute("showFeedbackButton", showFeedbackButton);
         request.setAttribute("trainingMaster", trainingMaster);
         mv.setViewName("Training/TrainingMasterlblview");
         return mv;

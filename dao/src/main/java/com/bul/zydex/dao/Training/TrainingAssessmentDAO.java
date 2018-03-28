@@ -16,5 +16,5 @@ public interface TrainingAssessmentDAO<T> extends GenericsDAO<T> {
 
     public List<?> readOnlineAssementCandidateTraningList(int empid);
 
-    public List<?> readTrainingAssementList(int trainerId);
+    public List<?> readTrainingAssementList(int trainingMasterId, int empId);
 }

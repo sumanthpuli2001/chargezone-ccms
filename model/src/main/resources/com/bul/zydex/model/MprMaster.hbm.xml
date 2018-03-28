@@ -67,5 +67,8 @@
           <property name="updatedDate" type="string">
             <column name="updated_date" />
         </property>
+         <many-to-one name="recruitmentMaster" class="com.bul.zydex.model.RecruitmentMaster" fetch="select">
+            <column name="mpp_master_id" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

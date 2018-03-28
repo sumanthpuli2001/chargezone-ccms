@@ -67,4 +67,9 @@ public class TrainingIdentificationServiceImpl<T> extends GenericsServiceImpl<T>
         return trainingIdentificationDAO.checkTraineeAvailableStatus(trainingId, empId);
     }
 
+    @Override
+    public List<?> readEmployeeAndTraining(int trainingId, int id) {
+        return trainingIdentificationDAO.readEmployeeAndTraining(trainingId,id);
+    }
+
 }

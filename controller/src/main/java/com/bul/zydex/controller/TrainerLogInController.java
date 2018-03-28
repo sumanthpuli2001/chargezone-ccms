@@ -7,6 +7,7 @@ package com.bul.zydex.controller;
 
 import com.bul.zydex.model.EmployeeFeedback;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingAssessment;
 import com.bul.zydex.model.TrainingAttendance;
@@ -185,6 +186,8 @@ public class TrainerLogInController extends TrainerLogInAbstract {
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String id = request.getParameter("id");
+        HttpSession session = request.getSession(false);
+        Trainer user = (Trainer) session.getAttribute("trainerMaster");
         String eventdate = request.getParameter("eventdate");
         List attenlist = new LinkedList();
         attenlist = trainingAttendanceService.gettrainerTasks(eventdate, Integer.parseInt(id));
@@ -202,15 +205,31 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         trainingMaster1.setTrainingType(trainingType);
         trainingMaster1.setTrainingSubType(trainingSubType);
         trainingMaster1.setTrainer(trainer);
+        List<?>  trainingFeedbackList = trainingMasterService.fetchtTrainingforFeedback1(trainingMaster1.getId(), user.getId());
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
         String currentDate = sdf.format(cDate);
         Date currenstarttdate = sdf.parse(currentDate);
         Date currentenddate = sdf.parse(eventdate);
         boolean shosts2 = true;
+        boolean feedbackdshow = false;
+        if(!trainingFeedbackList.isEmpty()){
+        feedbackdshow = true;
+        }
         if (currenstarttdate.compareTo(currentenddate) <= 0) {
             shosts2 = false;
         }
+        boolean assflage = false;
+         SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+                        Date startdate = formatter1.parse(trainingMaster1.getStartDate());
+                        Date enddate = formatter1.parse(trainingMaster1.getEndDate());
+                        if (currenstarttdate.compareTo(startdate) >= 0 && currenstarttdate.compareTo(enddate) <= 0 || currentenddate.compareTo(startdate) >= 0 && currentenddate.compareTo(enddate) <= 0) {
+                        assflage = true;
+                        }
+                        
+        request.setAttribute("finishStatus", trainingMaster1.getFinishStatus());
+        request.setAttribute("feedbackdshow", feedbackdshow);
+        request.setAttribute("assflage", assflage);
         request.setAttribute("shosts2", shosts2);
         request.setAttribute("trainingMaster", trainingMaster1);
         request.setAttribute("shosts", shosts);
@@ -349,6 +368,21 @@ public class TrainerLogInController extends TrainerLogInAbstract {
 //        mv.setViewName("Training/applyTrainingFeedback");
         return mv;
     }
+    public ModelAndView finishTraining(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        String eventdate = request.getParameter("eventdate");
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        int id = Integer.parseInt(request.getParameter("id"));
+        TrainingMaster trainingMaster = (TrainingMaster) trainingMasterService.readById(id);
+        trainingMaster.setFinishStatus(1);
+        trainingMasterService.update(trainingMaster);
+        mv = viewProfile1(request, response, "" + id, eventdate);
+//        request.setAttribute("id", id);
+//        request.setAttribute("eventdate", eventdate);
+//        mv.setViewName("Training/applyTrainingFeedback");
+        return mv;
+    }
 
     public ModelAndView showTrainingFeedbackList(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -363,7 +397,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
 //        Trainer trainer= new Trainer();
         List<?> trainingFeedbackList = new ArrayList();
 //        if (null != trainingId) {
-        trainingFeedbackList = trainingMasterService.fetchtTrainingforFeedback(Integer.parseInt(trainingId), user.getId());
+        trainingFeedbackList = trainingMasterService.fetchtTrainingforFeedback1(Integer.parseInt(trainingId), user.getId());
 //        }
         trainingsList(request);
         employeeFeedback.setTrainingMaster(trainingMaster);
@@ -404,6 +438,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.now();
         TrainingAssessment trainingAssessment = new TrainingAssessment();
+//        TrainingAssessment trainingAssessment1 = new TrainingAssessment();
         Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
 //        String eventdate = request.getParameter("eventdate");
         int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
@@ -415,6 +450,27 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         trainingAssessment.setCreatedDate(dtf.format(localDate));
         String[] checkId = request.getParameterValues("checkId");
         trainingAssessment.setStatus(0);
+        Integer hour = Integer.parseInt(trainingAssessment.getDuration()) / 60;
+        Integer minits = Integer.parseInt(trainingAssessment.getDuration()) % 60;
+        String strhout = hour.toString();
+        String strminits = minits.toString();
+        if (strhout.length() == 1) {
+            strhout = "0" + strhout;
+        }
+        if (strhout.length() == 0) {
+            strhout = "00";
+        }
+        if (strminits.length() == 1) {
+            strminits = "0" + strminits;
+        }
+        if (strminits.length() == 0) {
+            strminits = "00";
+        }
+        trainingAssessment.setDuration(strhout + ":" + strminits + ":00");
+        for (String string : checkId) {
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            employeeMaster.setId(Integer.parseInt(string));
+            trainingAssessment.setEmployeeMaster(employeeMaster);
 //            Integer hour = Integer.parseInt(trainingAssessment.getDuration()) / 60;
 //            Integer minits = Integer.parseInt(trainingAssessment.getDuration()) % 60;
 //            String strhout = hour.toString();
@@ -431,29 +487,8 @@ public class TrainerLogInController extends TrainerLogInAbstract {
 //            if (strminits.length() == 0) {
 //                strminits = "00";
 //            }
-//            trainingAssessment.setDuration(strhout + ":" + strminits + ":00");
-        for (String string : checkId) {
-            EmployeeMaster employeeMaster = new EmployeeMaster();
-            employeeMaster.setId(Integer.parseInt(string));
-            trainingAssessment.setEmployeeMaster(employeeMaster);
-            Integer hour = Integer.parseInt(trainingAssessment.getDuration()) / 60;
-            Integer minits = Integer.parseInt(trainingAssessment.getDuration()) % 60;
-            String strhout = hour.toString();
-            String strminits = minits.toString();
-            if (strhout.length() == 1) {
-                strhout = "0" + strhout;
-            }
-            if (strhout.length() == 0) {
-                strhout = "00";
-            }
-            if (strminits.length() == 1) {
-                strminits = "0" + strminits;
-            }
-            if (strminits.length() == 0) {
-                strminits = "00";
-            }
-            String finalduration = strhout + ":" + strminits + ":00";
-            trainingAssessment.setDuration(finalduration);
+//            String finalduration = strhout + ":" + strminits + ":00";
+//            trainingAssessment.setDuration(finalduration);
 
             trainingAssessmentService.create(trainingAssessment);
         }
@@ -468,22 +503,76 @@ public class TrainerLogInController extends TrainerLogInAbstract {
             HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         ModelAndView mv = new ModelAndView();
-        TrainingAssessment trainingAssessment = new TrainingAssessment();
-        Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
+        int empId = Integer.parseInt(request.getParameter("id"));
         int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
-        List<?> OnList = trainingAssessmentService.readTrainingAssementList(trainingMasterId);
+        String eventdate = request.getParameter("eventdate");
+
+//        TrainingAssessment trainingAssessment = new TrainingAssessment();
+//        Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
+//        int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
+        List<?> OnList = trainingAssessmentService.readTrainingAssementList(trainingMasterId, empId);
         Double passingPercentage = 0.0;
         Double totalMarks = 0.0;
+        int assessmentId = 0;
 
         if (!OnList.isEmpty()) {
             for (Object o2 : OnList) {
                 Object str1[] = (Object[]) o2;
                 passingPercentage = (Double) str1[4];
                 totalMarks = (Double) str1[10];
+                assessmentId = (int) str1[0];
 
             }
         }
 
+        List<?> QuestionAnswerListIds = trainingQuestionAnswerSubmitService.readByTrainigAssessmentId(assessmentId);
+        List listOfFinalList = new ArrayList();
+        for (Object o1 : QuestionAnswerListIds) {
+            Object str[] = (Object[]) o1;
+            List finalList = new ArrayList();
+            Integer qasid = (Integer) str[0];
+            Integer questionLibraryID = (Integer) str[2];
+            Integer selectedAns = (Integer) str[3];
+            Integer correctAns = (Integer) str[4];
+            String Description = (String) str[5];
+            Integer marks = (Integer) str[6];
+            QuestionLibrary questionLibrary = new QuestionLibrary();
+            questionLibrary = questionLibraryService.readById(questionLibraryID);
+            Integer questionLibraryid = questionLibrary.getId();
+            String question = questionLibrary.getQuestion();
+            finalList.add(question);                // 0
+            Integer type = questionLibrary.getType();
+            finalList.add(type);                    // 1
+            finalList.add(questionLibraryid);       // 2
+            finalList.add(selectedAns);     //3
+            finalList.add(correctAns);      //4
+            finalList.add(marks);      //5
+            finalList.add(passingPercentage);  //6
+            finalList.add(totalMarks);  //7
+            finalList.add(qasid);  //8
+            finalList.add(assessmentId);  //9
+
+            List<?> list2 = questionAnsService.takeTestOnlineAssementCandidateAnswer(questionLibraryid);
+            if (!list2.isEmpty()) {
+                for (Object o2 : list2) {
+                    Object str1[] = (Object[]) o2;
+                    Integer questionAnsID = (Integer) str1[0];
+                    String answer = (String) str1[2];
+                    finalList.add(answer);
+                    finalList.add(questionAnsID);
+                }
+
+            } else {
+
+                finalList.add(Description);
+            }
+            listOfFinalList.add(finalList);
+        }
+
+        mv.getModelMap().put("list2", listOfFinalList);
+        mv.getModelMap().put("eventdate", eventdate);
+
+        mv.setViewName("Trainer/TrainingQuestionAnsCheck");
         return mv;
     }
 }

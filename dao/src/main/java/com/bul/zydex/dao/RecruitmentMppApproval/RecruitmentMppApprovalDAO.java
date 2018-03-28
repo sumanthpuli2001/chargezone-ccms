@@ -21,4 +21,6 @@ public interface RecruitmentMppApprovalDAO<T> extends GenericsDAO<T> {
     
     public List<?> recruitmentMppdelete(String employeeId);
 
+    public List<?> readByMppId(int id);
+
 }

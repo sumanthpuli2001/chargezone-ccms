@@ -171,8 +171,9 @@
                                                             <tr>
                                                                 <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
                                                                 <th>Sr.No.</th>
-                                                                <th>Employee</th>
+                                                                <th>Employee </th>
                                                                 <th>Feedback</th>
+                                                                <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <c:set var="count" value="0" scope="page" />
@@ -184,14 +185,21 @@
                                                                     <td align="Center">
                                                                         <input type="checkbox" name="checkId" id="checkId" value="${trainingFeedbackList[0]}">
                                                                     </td>
-                                                                    <td>
+                                                                    <td style="text-align: left">
                                                                         <c:out value = "${count}"/>
                                                                     </td>
-                                                                    <td>
-                                                                        ${trainingFeedbackList[2]}
+                                                                    <td style="text-align: left">
+                                                                        ${trainingFeedbackList[4]}
                                                                     </td>
-                                                                    <td>
+                                                                    <td style="text-align: left">
                                                                         ${trainingFeedbackList[1]}
+                                                                    </td>
+                                                                    <td style="text-align: left">
+                                                                        <div class="btn-group">
+                                                                        <button type="button" data-toggle="modal" data-target="#myModalOnline" onclick="setid(${trainingFeedbackList[5]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            &nbsp;&nbsp;&nbsp;&nbsp;View
+                                                                        </button>
+                                                                    </div>
                                                                     </td>
                                                                     <!--                                                                    <td>
                                                                                                                                             <div class="btn-group">
@@ -220,4 +228,10 @@
 </form:form><!-- /.content -->
 </div><!-- /.content-wrapper -->
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+
+<script>
+                    function setid(id) {
+                        window.location = 'trainingIdentification.htm?act=showFeedbackView1&id=' + id;
+                    }
+                </script>
 </html>

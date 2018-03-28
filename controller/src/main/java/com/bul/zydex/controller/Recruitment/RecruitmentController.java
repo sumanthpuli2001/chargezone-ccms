@@ -308,13 +308,13 @@ public class RecruitmentController extends RecruitmentAbstract {
             request.setAttribute("designationName", designationName);
             request.setAttribute("experiance", experiance);
             mv.setViewName("Recruitment/MprSearchCreateBudget");
-            mv.setViewName("Recruitment/MprSearchCreateBudget");
+//            mv.setViewName("Recruitment/MprSearchCreateBudget");
 //            mv = viewClick(request, response);
         } else {
             mprMaster.setStatus(0);
             mprMaster.setCurrentLevel(1);
             mprMaster.setTotalLevel(approvalList.size());
-
+            mprMaster.setRecruitmentMaster(recruitmentMaster);
             mprMaster.setCreatedBy(employeeMaster.getId());
             mprMaster.setCreatedDate(sdf.format(cDate));
 
@@ -499,6 +499,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         } else {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             Date cDate = new Date();
+            recruitmentMaster.setMppStatus(0);
             recruitmentMaster.setCurrentLevel(1);
             recruitmentMaster.setTotalLevel(rm.getTotalLevel());
             recruitmentMaster.setUpdatedDate(sdf.format(cDate));
@@ -908,6 +909,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         mv.addObject("jobtype1", jobtype1);
 
         String id = request.getParameter("id");
+        List<?> recruitmentMppApproval = recruitmentMppApprovalService.readByMppId(Integer.parseInt(id));
         recruitmentMaster = recruitmentService.readById(Integer.parseInt(id));
 
         int jobtypeId = recruitmentMaster.getJobtypeMaster().getId();
@@ -942,6 +944,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         request.setAttribute("position", position);
         request.setAttribute("designationName", designationName);
         request.setAttribute("experiance", experiance);
+        request.setAttribute("recruitmentMppApproval", recruitmentMppApproval);
         mv.setViewName("Recruitment/ViewMppShow");
 
         return mv;

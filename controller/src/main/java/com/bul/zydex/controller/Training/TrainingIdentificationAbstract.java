@@ -89,17 +89,17 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
     
     
 
-    protected void readEmployeeMaster(HttpServletRequest request, int id) {
-        EmployeeMaster employeeMaster = new EmployeeMaster();
-        List employeelist = employeeMasterService.readEmployeeList(id);
-//        Map<Integer, String> employeeMastername = new HashMap<>();
-//        for (Object o : employeelist) {
-//            employeeMaster = (EmployeeMaster) o;
-//            employeeMastername.put(employeeMaster.getId(), employeeMaster.getEmployeeName());
-//        }
-
-        request.setAttribute("list", employeelist);
-    }
+//    protected void readEmployeeMaster(HttpServletRequest request, int id) {
+//        EmployeeMaster employeeMaster = new EmployeeMaster();
+//        List employeelist = employeeMasterService.readEmployeeList(id);
+////        Map<Integer, String> employeeMastername = new HashMap<>();
+////        for (Object o : employeelist) {
+////            employeeMaster = (EmployeeMaster) o;
+////            employeeMastername.put(employeeMaster.getId(), employeeMaster.getEmployeeName());
+////        }
+//
+//        request.setAttribute("list", employeelist);
+//    }
 
     protected void readTrainingMaster(HttpServletRequest request) {
         TrainingMaster trainingMaster = new TrainingMaster();
@@ -111,7 +111,9 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
         Map<Integer, String> trainingMastername = new HashMap<>();
         for (Object o : traininglist) {
             trainingMaster = (TrainingMaster) o;
-            trainingMastername.put(trainingMaster.getId(), trainingMaster.getTrainingTitle());
+            String trainingDetails=trainingMaster.getTrainingTitle()+" "+trainingMaster.getStartDate()+" "+trainingMaster.getTrainingTimeForm();
+            trainingMastername.put(trainingMaster.getId(), trainingDetails);
+//            trainingMastername.put(trainingMaster.getId(), trainingMaster.getTrainingTitle());
         }
 
         request.setAttribute("tlist", trainingMastername);

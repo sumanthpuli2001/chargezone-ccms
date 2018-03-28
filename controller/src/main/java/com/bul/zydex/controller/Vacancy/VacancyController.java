@@ -201,6 +201,9 @@ public class VacancyController extends VacancyAbstract {
         String experiance = mprMaster.getExperience();
         vacancyMaster.setExperience(experiance);
 
+        String description = mprMaster.getDescription();
+        vacancyMaster.setDescription(description);
+        
         int location = mprMaster.getLocationMaster().getId();
         locationMaster = locationMasterService.readById(location);
         vacancyMaster.setLocationMaster(locationMaster);

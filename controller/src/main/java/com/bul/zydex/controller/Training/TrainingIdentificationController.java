@@ -91,6 +91,8 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
 
         ModelAndView mv = new ModelAndView();
         TrainingIdentification trainingIdentification = new TrainingIdentification();
+        String trainingId=request.getParameter("TrainingId");
+        
         EmployeeMaster employeeMaster = new EmployeeMaster();
         TrainingMaster trainingMaster = new TrainingMaster();
         HttpSession session = request.getSession();
@@ -99,10 +101,16 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         readTrainingMaster(request);
 
         trainingIdentification.setTrainingMaster(trainingMaster);
+        
+        if(trainingId !=null)
+        {
+            trainingMaster.setId(Integer.parseInt(trainingId));
+        }
 
         List<?> employeelist = employeeMasterService.readEmployeeList(user.getId());
         mv.getModelMap().put("trainingIdentification", trainingIdentification);
         mv.getModelMap().put("list", employeelist);
+//        mv.getModelMap().put("trainingId", trainingId);
         mv.getModelMap().put("trainingMaster", trainingMaster);
         mv.setViewName("Training/registrationAssigntraine");
         return mv;

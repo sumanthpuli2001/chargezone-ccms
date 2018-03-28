@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller.Training;
 
+import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.TrainingSubMaster;
@@ -50,6 +51,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         TrainingMaster trainingMaster = new TrainingMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
         
         //The Event date is used for fetching date from calendar +(Plus button)
          String eventdate = request.getParameter("eventdate");
@@ -57,7 +59,11 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         trainerList(request);
         trainingtypeList(request);
         trainingSubtypeList(request);
+        selectEmployee(request, response);
         
+        
+        selectedEmployeeFor360Feedback(request, employeeMaster);
+        mv.getModelMap().put("employeeMaster", employeeMaster);
         request.setAttribute("startdate", eventdate);
         mv.getModelMap().put("trainingMaster", trainingMaster);
         mv.setViewName("Training/TrainingCreate");

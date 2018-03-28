@@ -32,5 +32,16 @@ public class EmployeeFeedbackDAOImpl<T> extends GenericsDAOImpl<T> implements Em
         }
         return false;
     }
+    @Override
+    public Boolean checkFeedbackforHR(int trainingId) {
+        String query = "select b.id"
+                + " FROM EmployeeFeedback b"
+                + " where b.trainingMaster.id=" + trainingId;
+        List<?> list = getHibernateTemplate().find(query);
+        if (list.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
     
 }

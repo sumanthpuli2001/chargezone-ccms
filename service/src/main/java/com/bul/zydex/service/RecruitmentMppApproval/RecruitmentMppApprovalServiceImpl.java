@@ -42,4 +42,9 @@ public class RecruitmentMppApprovalServiceImpl<T> extends GenericsServiceImpl<T>
         return recruitmentMppApprovalDAO.recruitmentMppdelete(employeeId);
     }
 
+    @Override
+    public List<?> readByMppId(int id) {
+        return recruitmentMppApprovalDAO.readByMppId(id);
+    }
+
 }

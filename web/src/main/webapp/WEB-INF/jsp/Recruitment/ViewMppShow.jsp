@@ -46,13 +46,13 @@
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Man Power Planning Budget:</label> &nbsp;&nbsp;&nbsp;
-                                                <span >${recruitmentMaster.budget}</span>   
+                                                    <span >${recruitmentMaster.budget}</span>   
                                                 </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Job Type:</label>  &nbsp;&nbsp;&nbsp;
-                                                        <span >${jobtypeNAme}</span>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label>Job Type:</label>  &nbsp;&nbsp;&nbsp;
+                                                    <span >${jobtypeNAme}</span>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Department:</label> &nbsp;&nbsp;&nbsp;
@@ -81,6 +81,18 @@
                                                 </div>
 
                                             </div>
+
+                                            <table>
+                                                <tr>
+                                                    <td><label>Approval Comment:</label></td>
+                                                    <td>
+                                                        <c:forEach  var="test" items="${recruitmentMppApproval}">
+                                                            &nbsp;&nbsp;<span>${test[1]}</span>
+                                                        </c:forEach>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
                                         </form:form>
                                     </div>
                                 </div>
@@ -91,5 +103,5 @@
             </div>
         </section>
     </div>
-       <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

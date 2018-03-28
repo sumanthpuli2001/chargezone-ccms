@@ -33,8 +33,7 @@ public class VacancyValidator implements Validator {
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "salaryRange",
                 "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description",
-                "field.error1", "None");
+        
     }
 
 }

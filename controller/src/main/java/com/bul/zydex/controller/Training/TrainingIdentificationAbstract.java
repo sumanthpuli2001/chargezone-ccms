@@ -89,17 +89,17 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
     
     
 
-    protected void readEmployeeMaster(HttpServletRequest request, int id) {
-        EmployeeMaster employeeMaster = new EmployeeMaster();
-        List employeelist = employeeMasterService.readEmployeeList(id);
-//        Map<Integer, String> employeeMastername = new HashMap<>();
-//        for (Object o : employeelist) {
-//            employeeMaster = (EmployeeMaster) o;
-//            employeeMastername.put(employeeMaster.getId(), employeeMaster.getEmployeeName());
-//        }
-
-        request.setAttribute("list", employeelist);
-    }
+//    protected void readEmployeeMaster(HttpServletRequest request, int id) {
+//        EmployeeMaster employeeMaster = new EmployeeMaster();
+//        List employeelist = employeeMasterService.readEmployeeList(id);
+////        Map<Integer, String> employeeMastername = new HashMap<>();
+////        for (Object o : employeelist) {
+////            employeeMaster = (EmployeeMaster) o;
+////            employeeMastername.put(employeeMaster.getId(), employeeMaster.getEmployeeName());
+////        }
+//
+//        request.setAttribute("list", employeelist);
+//    }
 
     protected void readTrainingMaster(HttpServletRequest request) {
         TrainingMaster trainingMaster = new TrainingMaster();

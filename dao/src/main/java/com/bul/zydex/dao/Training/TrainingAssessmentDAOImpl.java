@@ -37,17 +37,16 @@ public class TrainingAssessmentDAOImpl<T> extends GenericsDAOImpl<T> implements 
     }
 
     @Override
-    public List<?> readTrainingAssementList(int trainerId) {
+    public List<?> readTrainingAssementList(int trainingMasterId, int empId) {
         String query = "";
-                          //0   1    2      3    4                   5               6           7           8           9           10          11
+                         //0   1    2      3    4                   5               6           7           8           9           10          11
         query += "Select a.id,b.id,c.id,d.id,a.passingPercentage,a.validityFrom,a.validityTo,a.duration,a.noOfAttampt,a.noOfQue,a.totalMarks,c.paperName"
                 + " From TrainingAssessment a"
                 + " LEFT JOIN a.employeeMaster b"
                 + " LEFT JOIN a.questionPaper c"
                 + " LEFT JOIN a.trainingMaster d"
-                + " Where b.id=" + trainerId
-                + " and a.noOfAttampt > 0 "
-                + " and b.status =5 ";
+                + " Where d.id=" + trainingMasterId
+                + " and b.id=" + empId;
 
         return getHibernateTemplate().find(query);
     }

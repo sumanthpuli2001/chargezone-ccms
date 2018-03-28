@@ -38,10 +38,14 @@
         </c:if>
         <!-- Main content -->
         <br>
-        <input type="button" class="btn btn-primary" value="Back" onclick="window.history.back();" />
-        <button type="submit" style="width: 150px !important" class="btn btn-primary" title="" onclick="sendId();"><i class="fa fa-search"></i>&nbsp;&nbsp;Show Feedback</button>
+       &nbsp;&nbsp;&nbsp;&nbsp; <input type="button" class="btn btn-primary" value="Back" onclick="window.history.back();" />
+        <c:if test="${ showFeedbackButton eq false}">
+        <button type="submit" style="width: 150px !important" class="btn btn-primary" title="" onclick="sendId();"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;Show Feedback</button>
+        </c:if>
+        <button type="button" style="width: 150px !important" class="btn btn-primary" title="" onclick="window.location = 'trainingIdentification.htm?act=newAssignTraine&TrainingId=${trainingMaster.id}'"><i class="fa fa-try"></i>&nbsp;&nbsp;Assign Trainer</button>
         <form:form action="" method="post" 
                    name='form1' class="form-horizontal" role="form">
+            
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">

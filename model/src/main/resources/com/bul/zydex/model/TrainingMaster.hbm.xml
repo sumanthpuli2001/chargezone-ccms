@@ -68,8 +68,8 @@
         <property name="status" type="java.lang.Integer">
             <column name="status" />
         </property>
-        <property name="finishStatus" type="java.lang.Integer">
-            <column name="finish_status" />
+        <property name="assessmentResultStatus" type="java.lang.Integer">
+            <column name="assessment_result_status" />
         </property>
     </class>
 </hibernate-mapping>

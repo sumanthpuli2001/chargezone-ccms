@@ -15,4 +15,6 @@ public interface EmployeeFeedbackDAO<T> extends GenericsDAO<T> {
 
     public Boolean checkFeedbackforEmp(int empId, int trainingId, String eventdate);
 
+    public Boolean checkFeedbackforHR(int trainingId);
+
 }

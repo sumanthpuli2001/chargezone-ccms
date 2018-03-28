@@ -15,4 +15,5 @@ public interface EmployeeFeedbackService<T> extends GenericsService<T> {
 
     public Boolean checkFeedbackforEmp(int empId, int trainingId, String eventdate);
 
+    public Boolean checkFeedbackforHR(int trainingId);
 }

@@ -429,6 +429,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.now();
         TrainingAssessment trainingAssessment = new TrainingAssessment();
+//        TrainingAssessment trainingAssessment1 = new TrainingAssessment();
         Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
 //        String eventdate = request.getParameter("eventdate");
         int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
@@ -493,12 +494,14 @@ public class TrainerLogInController extends TrainerLogInAbstract {
             HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         ModelAndView mv = new ModelAndView();
-        int id = Integer.parseInt(request.getParameter("id"));
+        int empId = Integer.parseInt(request.getParameter("id"));
+        int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
+        String eventdate = request.getParameter("eventdate");
 
 //        TrainingAssessment trainingAssessment = new TrainingAssessment();
 //        Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
 //        int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
-        List<?> OnList = trainingAssessmentService.readOnlineAssementCandidateTraningList(id);
+        List<?> OnList = trainingAssessmentService.readTrainingAssementList(trainingMasterId, empId);
         Double passingPercentage = 0.0;
         Double totalMarks = 0.0;
         int assessmentId = 0;
@@ -506,8 +509,8 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         if (!OnList.isEmpty()) {
             for (Object o2 : OnList) {
                 Object str1[] = (Object[]) o2;
-                passingPercentage = (Double) str1[3];
-                totalMarks = (Double) str1[9];
+                passingPercentage = (Double) str1[4];
+                totalMarks = (Double) str1[10];
                 assessmentId = (int) str1[0];
 
             }
@@ -558,6 +561,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         }
 
         mv.getModelMap().put("list2", listOfFinalList);
+        mv.getModelMap().put("eventdate", eventdate);
 
         mv.setViewName("Trainer/TrainingQuestionAnsCheck");
         return mv;

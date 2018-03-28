@@ -5,15 +5,22 @@
  */
 package com.bul.zydex.controller.Training;
 
+import com.bul.zydex.controller.TrainerLogInController;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.QuestionAns;
 import com.bul.zydex.model.QuestionAnswerSubmit;
 import com.bul.zydex.model.QuestionLibrary;
+import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingAssessment;
+import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.TrainingQuestionAnswerSubmit;
+import com.bul.zydex.model.TrainingResultStatus;
+import com.bul.zydex.model.TrainingSubType;
+import com.bul.zydex.model.TrainingType;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -222,6 +229,111 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
         trainingAssessment.setStartTimeNow(null);
         trainingAssessmentService.update(trainingAssessment);
         mv = clickassessment(request, response);
+        return mv;
+    }
+
+    public ModelAndView submitResult(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+
+        String[] id = request.getParameterValues("id");
+
+        String eventdate = request.getParameter("eventdate");
+        String assessmentId = request.getParameter("assessmentId");
+        TrainingAssessment trainingAssessment = trainingAssessmentService.readById(Integer.parseInt(assessmentId));
+        int trMasterId = trainingAssessment.getTrainingMaster().getId();
+        TrainingMaster trainingMaster = trainingMasterService.readById(trMasterId);
+        String totalResult = request.getParameter("totalResult");
+        String percentageResult = request.getParameter("percentageResult");
+        String passResult = request.getParameter("passResult");
+        String failResult = request.getParameter("failResult");
+//        String[] givenMarks1 = request.getParameterValues("givenMarks3");
+        String[] givenMarks2 = request.getParameterValues("givenMarks2");
+        String[] type = request.getParameterValues("type");
+//        String[] mcqStatus = request.getParameterValues("mcqStatus");
+        try {
+            for (int i = 0; i < id.length; i++) {
+                String ids = id[i];
+                String tp = type[i];
+                String mcqSts = null; // last add
+                String inputqSts = null; // last add
+                TrainingQuestionAnswerSubmit trainingQuestionAnswerSubmit = trainingQuestionAnswerSubmitService.readById(Integer.parseInt(ids));
+                String inputedMarks = null;
+                int typeofQue = Integer.parseInt(tp);
+                if (1 == typeofQue) {
+                    inputedMarks = givenMarks2[i];
+                    inputqSts = request.getParameter("mcqStatus" + (i + 1));
+                    trainingQuestionAnswerSubmit.setAnsStatus(Integer.parseInt(inputqSts));
+                } else {
+                    inputedMarks = givenMarks2[i];
+                    mcqSts = request.getParameter("mcqStatus" + (i + 1));
+                    trainingQuestionAnswerSubmit.setAnsStatus(Integer.parseInt(mcqSts));
+                }
+//            String ans = doneId1[i];
+
+                trainingQuestionAnswerSubmit.setObtainMarks(Double.parseDouble(inputedMarks));
+
+                trainingQuestionAnswerSubmitService.update(trainingQuestionAnswerSubmit);
+//             mv.setViewName("Vacancy/AssementOnline");
+            }
+            TrainingResultStatus trainingResultStatus = new TrainingResultStatus();
+            trainingResultStatus.setTrainingAssessment(trainingAssessment);
+            trainingResultStatus.setObtainTotal(Double.parseDouble(totalResult));
+            trainingResultStatus.setObtainPercentage(Double.parseDouble(percentageResult));
+
+            if ("" != passResult) {
+                trainingResultStatus.setResultStatus(passResult);
+                trainingResultStatusService.create(trainingResultStatus);
+                trainingMaster.setAssessmentResultStatus(0);
+                trainingMasterService.update(trainingMaster);
+            }
+            if ("" != failResult) {
+                trainingResultStatus.setResultStatus(failResult);
+                trainingResultStatusService.create(trainingResultStatus);
+                trainingMaster.setAssessmentResultStatus(1);
+                trainingMasterService.update(trainingMaster);
+            }
+           
+            List attenlist = new LinkedList();
+            attenlist = trainingAttendanceService.gettrainerTasks(eventdate, trMasterId);
+            boolean shosts = true;
+            boolean feedbackStatus = trainingAttendanceService.checkFeedbackstatus(trMasterId);
+            if (attenlist.isEmpty()) {
+                shosts = false;
+                attenlist = trainingIdentificationService.getTrainerAttendance(trMasterId);
+
+            }
+            TrainingMaster trainingMaster1 = trainingMasterService.readById(trMasterId);
+            TrainingType trainingType = trainingTypeService.readById(trainingMaster1.getTrainingType().getId());
+            TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster1.getTrainingSubType().getId());
+            Trainer trainer = trainerService.readById(trainingMaster1.getTrainer().getId());
+            trainingMaster1.setTrainingType(trainingType);
+            trainingMaster1.setTrainingSubType(trainingSubType);
+            trainingMaster1.setTrainer(trainer);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date cDate = new Date();
+            String currentDate = sdf.format(cDate);
+            Date currenstarttdate = sdf.parse(currentDate);
+            Date currentenddate = sdf.parse(eventdate);
+            boolean shosts2 = true;
+            if (currenstarttdate.compareTo(currentenddate) <= 0) {
+                shosts2 = false;
+            }
+            request.setAttribute("shosts2", shosts2);
+            request.setAttribute("trainingMaster", trainingMaster1);
+            request.setAttribute("shosts", shosts);
+            request.setAttribute("eventdate", eventdate);
+            request.setAttribute("list", attenlist);
+            request.setAttribute("trainingMasterId", id);
+            request.setAttribute("feedbackStatus", feedbackStatus);
+            mv.setViewName("Trainer/TrainerMasterlblView");
+
+        } catch (Exception e) {
+            request.setAttribute("failureMessage",
+                    "All field are Required.Please Enter Valid data");
+
+        }
         return mv;
     }
 

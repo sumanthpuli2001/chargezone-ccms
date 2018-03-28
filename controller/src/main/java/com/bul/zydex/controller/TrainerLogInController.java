@@ -186,6 +186,8 @@ public class TrainerLogInController extends TrainerLogInAbstract {
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String id = request.getParameter("id");
+        HttpSession session = request.getSession(false);
+        Trainer user = (Trainer) session.getAttribute("trainerMaster");
         String eventdate = request.getParameter("eventdate");
         List attenlist = new LinkedList();
         attenlist = trainingAttendanceService.gettrainerTasks(eventdate, Integer.parseInt(id));
@@ -203,12 +205,17 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         trainingMaster1.setTrainingType(trainingType);
         trainingMaster1.setTrainingSubType(trainingSubType);
         trainingMaster1.setTrainer(trainer);
+        List<?>  trainingFeedbackList = trainingMasterService.fetchtTrainingforFeedback1(trainingMaster1.getId(), user.getId());
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
         String currentDate = sdf.format(cDate);
         Date currenstarttdate = sdf.parse(currentDate);
         Date currentenddate = sdf.parse(eventdate);
         boolean shosts2 = true;
+        boolean feedbackdshow = false;
+        if(!trainingFeedbackList.isEmpty()){
+        feedbackdshow = true;
+        }
         if (currenstarttdate.compareTo(currentenddate) <= 0) {
             shosts2 = false;
         }
@@ -220,6 +227,8 @@ public class TrainerLogInController extends TrainerLogInAbstract {
                         assflage = true;
                         }
                         
+        request.setAttribute("finishStatus", trainingMaster1.getFinishStatus());
+        request.setAttribute("feedbackdshow", feedbackdshow);
         request.setAttribute("assflage", assflage);
         request.setAttribute("shosts2", shosts2);
         request.setAttribute("trainingMaster", trainingMaster1);
@@ -388,7 +397,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
 //        Trainer trainer= new Trainer();
         List<?> trainingFeedbackList = new ArrayList();
 //        if (null != trainingId) {
-        trainingFeedbackList = trainingMasterService.fetchtTrainingforFeedback(Integer.parseInt(trainingId), user.getId());
+        trainingFeedbackList = trainingMasterService.fetchtTrainingforFeedback1(Integer.parseInt(trainingId), user.getId());
 //        }
         trainingsList(request);
         employeeFeedback.setTrainingMaster(trainingMaster);

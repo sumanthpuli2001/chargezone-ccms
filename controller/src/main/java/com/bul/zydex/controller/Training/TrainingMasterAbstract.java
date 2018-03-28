@@ -6,6 +6,8 @@
 package com.bul.zydex.controller.Training;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.DepartmentMaster;
+import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.TrainingSubMaster;
@@ -17,12 +19,14 @@ import com.bul.zydex.service.Training.TrainingMasterService;
 import com.bul.zydex.service.Training.TrainingSubMasterService;
 import com.bul.zydex.service.Training.TrainingSubTypeService;
 import com.bul.zydex.service.Training.TrainingTypeService;
+import com.bul.zydex.service.emp.EmployeeMasterService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -91,7 +95,7 @@ public abstract class TrainingMasterAbstract extends CustomAbstract{
         this.trainingMasterValidator = trainingMasterValidator;
     }
     
-    
+
     
      protected void trainerList(HttpServletRequest request) {
         Trainer trainerMaster = new Trainer();
@@ -127,5 +131,5 @@ public abstract class TrainingMasterAbstract extends CustomAbstract{
 
         request.setAttribute("trainingSubTypeMap", trnsb);
     }
-     
-}
+
+            }

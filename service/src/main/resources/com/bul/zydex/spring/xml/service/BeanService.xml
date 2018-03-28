@@ -610,4 +610,10 @@
     <bean id="trainingFeedbackService1" class="com.bul.zydex.service.Training.TrainingFeedbackServiceImpl">
         <property name="trainingFeedbackDAO" ref="trainingFeedbackDAO1" />
     </bean>
+    <bean id="ctcAllowanceService1" class="com.bul.zydex.service.policy.CtcAllowanceServiceImpl">
+        <property name="ctcAllowanceDAO" ref="ctcAllowanceDAO1"/>
+    </bean>
+    <bean id="employeeCtcDetailService1" class="com.bul.zydex.service.policy.EmployeeCtcDetailServiceImpl">
+        <property name="employeeCtcDetailDAO" ref="employeeCtcDetailDAO1"/>
+    </bean>
 </beans>

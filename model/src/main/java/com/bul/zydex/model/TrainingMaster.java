@@ -28,6 +28,7 @@ public class TrainingMaster implements java.io.Serializable {
     private String updatedDate;
     private Integer status;
     private Integer assessmentResultStatus;
+    private Integer finishStatus;
 
     public TrainingMaster() {
     }
@@ -38,7 +39,7 @@ public class TrainingMaster implements java.io.Serializable {
         this.trainingType = trainingType;
     }
 
-    public TrainingMaster(Trainer trainer, TrainingSubType trainingSubType, TrainingType trainingType, String trainingTitle, String trainingDescription, String trainingOwner, String venue, String startDate, String endDate, String trainingTimeForm, String trainingTimeTo, String trainingSource, String cost, Integer reimbursable, String companySponsor, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate, Integer status, Integer assessmentResultStatus) {
+    public TrainingMaster(Trainer trainer, TrainingSubType trainingSubType, TrainingType trainingType, String trainingTitle, String trainingDescription, String trainingOwner, String venue, String startDate, String endDate, String trainingTimeForm, String trainingTimeTo, String trainingSource, String cost, Integer reimbursable, String companySponsor, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate, Integer status, Integer assessmentResultStatus,Integer finishStatus) {
         this.trainer = trainer;
         this.trainingSubType = trainingSubType;
         this.trainingType = trainingType;
@@ -60,6 +61,7 @@ public class TrainingMaster implements java.io.Serializable {
         this.updatedDate = updatedDate;
         this.status = status;
         this.assessmentResultStatus = assessmentResultStatus;
+        this.finishStatus = finishStatus;
     }
 
     public Integer getId() {
@@ -237,5 +239,14 @@ public class TrainingMaster implements java.io.Serializable {
     public void setAssessmentResultStatus(Integer assessmentResultStatus) {
         this.assessmentResultStatus = assessmentResultStatus;
     }
+
+    public Integer getFinishStatus() {
+        return finishStatus;
+    }
+
+    public void setFinishStatus(Integer finishStatus) {
+        this.finishStatus = finishStatus;
+    }
+    
 
 }

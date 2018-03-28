@@ -18,7 +18,9 @@ public interface RecruitmentMppApprovalService<T> extends GenericsService<T> {
     public List<?> mPpReadApprovalList(int empId);
 
     public RecruitmentMppApproval mppreadByIdAndEmpId(int mppid, int empid);
-    
+
     public List<?> recruitmentMppdelete(String employeeId);
+
+    public List<?> readByMppId(int id);
 
 }

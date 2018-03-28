@@ -72,20 +72,47 @@
             <!--<input type="hidden" id="allTrainingsId" name="allTrainingsId" value="${list[0]}">-->
             <!-- Custom Tabs -->
             <!--<button type="button" class="btn btn-primary" title="" style="float: right; width: 120px;" onclick="window.history.back();"></i>&nbsp;&nbsp;BACK</button>-->
-            <input type="button" class="btn btn-primary" value="Back" style="float: left" onclick="window.location = 'trainerLogin.htm?act=showcalendar'" />
+            <div class="col-md-12">
+                <div class ="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                    <button type="button" class="btn btn-primary" value="Back" style="float: left" onclick="window.location = 'trainerLogin.htm?act=showcalendar'" >Back</button>
+                </div>
+                <div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <c:if test="${feedbackdshow eq true}">
+                        <button type="button" class="btn btn-primary" style="float: left;margin-right: 10px" title="" style="width: 100px;" onclick="window.location = 'trainerLogin.htm?act=showTrainingFeedbackList&trainingMasterId=${trainingMasterId}'"><i class="fa fa-pencil-square-o"></i> Show Feedback</button>
+                    </c:if>
+                </div>
+                <div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <c:if test="${assflage eq true}">
+                        <button type="button" style="float: right"  class="btn btn-primary" onclick="window.location = 'trainerLogin.htm?act=trainerAssessMent&id=${trainingMasterId}&eventdate=${eventdate}'">Online Assessment</button>
+                    </c:if>
+                </div>
+                <div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <c:if test="${shosts eq false}">
+                        <c:if test="${shosts2 eq false}">
+                            <button type="submit" class="btn btn-primary" style="float: left" title="" style="width: 100px;"><!--<i class="fa fa-"></i>-->Submit Attendance</button>
+                        </c:if>
+                    </c:if>
+                </div>
+                <div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <c:if test="${feedbackStatus eq true}">
+                        <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location = 'trainerLogin.htm?act=sendFeedback&id=${trainingMasterId}&eventdate=${eventdate}'"><i class="fa fa-pencil-square-o"></i>Receive Feedback</button>
+                    </c:if>
+                </div>
+                <div class ="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                    <c:if test="${finishStatus eq 0}">
+                        <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location = 'trainerLogin.htm?act=finishTraining&id=${trainingMasterId}&eventdate=${eventdate}'"><i class="fa fa-pencil-square-o"></i>Finish Training</button>
+                    </c:if>
+                </div>
+            </div>
             <%--<c:if test="${feedbackStatus eq true}">--%>
                 <!--<button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location = 'trainerLogin.htm?act=sendFeedback&id=${trainingMasterId}&eventdate=${eventdate}'"><i class="fa fa-pencil-square-o"></i>Feedback</button>-->
-            <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location = 'trainerLogin.htm?act=showTrainingFeedbackList&trainingMasterId=${trainingMasterId}'"><i class="fa fa-pencil-square-o"></i> Show Feedback</button>
             <%--</c:if>--%>
             <div class="row">
                 <div class="col-md-12">
                     <!-- Custom Tabs -->
                     <div class="nav-tabs-custom">
                         <!--<button type="submit" class="btn btn-danger" title="" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp;&nbsp;DELETE</button>-->
-                        <c:if test="${feedbackStatus eq true}">
-                           <!--<button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location='trainerLogin.htm?act=sendFeedback&id=${trainingMasterId}&eventdate=${eventdate}'"><i class="fa fa-pencil-square-o"></i>Get Feedback</button>-->
-                            <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location = 'trainerLogin.htm?act=sendFeedback&id=${trainingMasterId}&eventdate=${eventdate}'"><i class="fa fa-pencil-square-o"></i>Fininsh Training</button>
-                        </c:if>
+
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -94,104 +121,6 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label>Training Requester : </label>&nbsp;&nbsp;${trainingMaster.trainingOwner}
                                 </div>
-                            </div>
-                            <div class="box-body">
-
-                                <div class="row">
-
-                                    <div class="col-md-12 col-sm-12">
-                                        <div class="table table-bordered">
-
-                                            <table id="table_1" class="table table-bordered table-striped" style="" align="center"  >
-                                                <c:choose>
-                                                    <c:when test="${empty list}">
-                                                        <tr>
-
-                                                            <td align="center">
-                                                                <c:out value="There is no record found."></c:out>
-                                                                </td>
-                                                            </tr>
-                                                    </c:when>
-                                                    <c:otherwise>
-
-                                                        <thead>
-                                                            <tr>
-                                                                <c:if test="${shosts eq true}">
-                                                                    <c:if test="${shosts2 eq true}">
-                                                                        <th style="width: 50px;">SR. No</th>
-                                                                            <%--</c:if>--%> 
-                                                                        </c:if> 
-                                                                    </c:if> 
-                                                                    <c:if test="${shosts eq false}">
-                                                                        <c:if test="${shosts2 eq false}">
-                                                                        <th align="Center" style="width: 1px;"><input type="checkbox" id="toggleId" align="Center" ></th>
-                                                                        </c:if> 
-                                                                    </c:if> 
-                                                                <th style="width: 50px;">Training</th>
-                                                                <th style="width: 50px;">Attendance</th>
-                                                                <th style="width: 50px;">Status</th>
-
-                                                            </tr>
-                                                        </thead>
-
-                                                        <tbody>
-                                                            <!--${list[0]}-->
-                                                            <c:forEach var="list"  items="${list}" varStatus="status">
-                                                                <tr>
-                                                                    <c:if test="${shosts eq false}">
-                                                                        <c:if test="${shosts2 eq false}">
-                                                                            <td align="Center">
-                                                                                <input type="checkbox" onclick="deleteCheck11();" name="checkId" id="checkId" value="${list[0]}">
-                                                                            </td>
-                                                                        </c:if> 
-                                                                    </c:if> 
-                                                                    <c:if test="${shosts eq true}">
-                                                                        <c:if test="${shosts2 eq true}">
-                                                                            <td>${status.count}</td>
-                                                                        </c:if> 
-                                                                    </c:if> 
-                                                                    <td>${list[1]}</td>
-                                                                    <!--<td>-->
-                                                                    <c:if test="${shosts eq true}">
-                                                                        <c:if test="${list[2] eq 0}">
-                                                                            <td><b style="color: green">PR</b></td>
-                                                                        </c:if> 
-                                                                        <c:if test="${list[2] eq 1}">
-                                                                            <td><b style="color: red">AB</b></td>
-                                                                        </c:if> 
-                                                                    </c:if> 
-                                                                    <c:if test="${shosts eq false}">
-                                                                        <td></td>
-                                                                    </c:if> 
-                                                            <input type="hidden" id="eventdate" name="eventdate" value="${eventdate}">
-                                                            <td><a type="button" class="btn btn-default" id="btnType1" onclick="window.location = 'trainerLogin.htm?act=goToAns&id=${list[0]}&eventdate=${eventdate}&trainingMasterId=${trainingMasterId}'" name="btnType" value="AssessMent">Check Paper</a></td>
-                                                            <!--<td><a type="button" class="btn btn-default" id="btnType1" onclick="goToAns(${list[0]},${trainingMasterId},${eventdate})" name="btnType" value="AssessMent">Training Assessment</a></td>-->
-                                                            <!--</td>-->
-                                                            </tr>
-                                                        </c:forEach>
-                                                        </tbody>
-
-                                                    </c:otherwise>
-
-                                                </c:choose>
-
-                                            </table>
-                                            <br>
-                                            <c:if test="${shosts eq false}">
-                                                <c:if test="${shosts2 eq false}">
-                                                    <button type="submit" class="btn btn-primary" style="float: left" title="" style="width: 100px;"><!--<i class="fa fa-"></i>-->Submit</button>
-                                                </c:if>
-                                                </c:if>
-                                                <c:if test="${shosts eq true}">
-                                                <%--<c:if test="${shosts2 eq true}">--%>
-                                                    <a style="float: right"  class="btn btn-primary" onclick="window.location = 'trainerLogin.htm?act=trainerAssessMent&id=${trainingMasterId}&eventdate=${eventdate}'">Online Assessment</a>
-                                                <%--</c:if>--%>
-                                                </c:if>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div><!-- /.tab-pane -->
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -231,7 +160,90 @@
                     </div>
                 </div>
             </div>
+            <div class="box-body no-padding">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="table table-bordered">
 
+                            <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="center"  >
+                                <c:choose>
+                                    <c:when test="${empty list}">
+                                        <tr>
+
+                                            <td align="center">
+                                                <c:out value="There is no record found."></c:out>
+                                                </td>
+                                            </tr>
+                                    </c:when>
+                                    <c:otherwise>
+
+                                        <thead>
+                                            <tr>
+                                                <c:if test="${shosts eq true}">
+                                                    <c:if test="${shosts2 eq true}">
+                                                        <th style="width: 50px;">SR. No</th>
+                                                        </c:if> 
+                                                    </c:if> 
+                                                    <c:if test="${shosts eq false}">
+                                                        <c:if test="${shosts2 eq false}">
+                                                        <th align="Center" style="width: 1px;"><input type="checkbox" id="toggleId" align="Center" ></th>
+                                                        </c:if> 
+                                                    </c:if> 
+                                                <th style="width: 50px;">Trainings</th>
+                                                <th style="width: 50px;">Attendance</th>
+                                                <th style="width: 50px;">CheckPaper</th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <!--${list[0]}-->
+                                            <c:forEach var="list"  items="${list}" varStatus="status">
+                                                <tr>
+                                                    <c:if test="${shosts eq false}">
+                                                        <c:if test="${shosts2 eq false}">
+                                                            <td align="Center">
+                                                                <input type="checkbox" onclick="deleteCheck11();" name="checkId" id="checkId" value="${list[0]}">
+                                                            </td>
+                                                        </c:if> 
+                                                    </c:if> 
+                                                    <c:if test="${shosts eq true}">
+                                                        <c:if test="${shosts2 eq true}">
+                                                            <td>${status.count}</td>
+                                                        </c:if> 
+                                                    </c:if> 
+                                                    <td>${list[1]}</td>
+                                                    <!--<td>-->
+                                                    <c:if test="${shosts eq true}">
+                                                        <c:if test="${list[2] eq 0}">
+                                                            <td><b style="color: green">PR</b></td>
+                                                        </c:if> 
+                                                        <c:if test="${list[2] eq 1}">
+                                                            <td><b style="color: red">AB</b></td>
+                                                        </c:if> 
+                                                    </c:if> 
+                                                    <c:if test="${shosts eq false}">
+                                                        <td></td>
+                                                    </c:if> 
+                                                    <td><button type="button" class="btn btn-primary" id="btnType1" onclick="goToAns(${list[0]})" name="btnType" value="AssessMent" style="width: 100px" >Ans</button></td>
+                                                    <!--</td>-->
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+
+                                    </c:otherwise>
+
+                                </c:choose>
+
+                            </table>
+                            <br>
+
+
+                        </div>
+                    </div>
+
+                </div><!-- /.tab-pane -->
+            </div>
 
         </form:form><!-- /.content -->
     </div><!-- /.content-wrapper -->
@@ -293,13 +305,7 @@
 <script src="StorageYard/JS/login/scripts.js"></script>
 <script type="text/javascript" src="StorageYard/JS/JQuery/common.js"></script>
 <script>
-        function goToAns(trainerId, trainingMasterId, eventdate) {
-            alert(trainerId);
-            alert(trainingMasterId);
-            alert(eventdate);
-            window.location = 'trainerLogin.htm?act=goToAns&id=' + trainerId + '&eventdate=' + eventdate + '&trainingMasterId=' + trainingMasterId;
-        }
-        function  godate(name) {
-            alert(name.valueOf());
+        function goToAns(trainerId) {
+            window.location = 'trainerLogin.htm?act=goToAns&id=' + trainerId;
         }
 </script>

@@ -68,4 +68,16 @@ public class RecruitmentMppApprovalDAOImpl<T> extends GenericsDAOImpl<T> impleme
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+
+    @Override
+    public List<?> readByMppId(int id) {
+        String query = "";
+        query += " "
+                + " SELECT a.id, a.comment, b.employeeName "
+                + " FROM RecruitmentMppApproval a "
+                + " Left Join a.employeeMaster b "
+                + " WHERE a.recruitmentMaster = " + id;
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
 }

@@ -901,6 +901,12 @@
             </key>
             <one-to-many class="com.bul.zydex.model.EmployeePolicyDetail" />
         </set>
+        <set name="employeeCtcDetail" inverse="true">
+            <key>
+                <column name="employee_master_id" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.EmployeeCtcDetail" />
+        </set>
     
     </class>
 </hibernate-mapping>

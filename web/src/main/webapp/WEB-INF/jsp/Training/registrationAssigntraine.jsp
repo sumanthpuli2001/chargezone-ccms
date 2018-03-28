@@ -101,9 +101,9 @@
                                                         <c:otherwise>
                                                             <thead>
                                                                 <tr>
-                                                                    <c:if test="${sessionScope.userRight.employeeManagement}">
+                                                                    <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                         <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
-                                                                        </c:if>
+                                                                        <%--</c:if>--%>
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">Employee Name</th>
                                                                     <th style="width: 50px;">Department Name</th>
@@ -116,9 +116,9 @@
                                                     <tbody>
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
-                                                                <c:if test="${sessionScope.userRight.employeeManagement}">
+                                                                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
-                                                                    </c:if>
+                                                                    <%--</c:if>--%>
                                                                 <!--<td>/</td>-->
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[2]}</td>

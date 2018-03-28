@@ -91,23 +91,23 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
 
         ModelAndView mv = new ModelAndView();
         TrainingIdentification trainingIdentification = new TrainingIdentification();
-        String trainingId=request.getParameter("TrainingId");
-        
-        EmployeeMaster employeeMaster = new EmployeeMaster();
+        String trainingId = request.getParameter("TrainingId");
+
+//        EmployeeMaster employeeMaster = new EmployeeMaster();
         TrainingMaster trainingMaster = new TrainingMaster();
         HttpSession session = request.getSession();
         UserMaster user = (UserMaster) session.getAttribute("user");
+        EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
 
         readTrainingMaster(request);
 
         trainingIdentification.setTrainingMaster(trainingMaster);
-        
-        if(trainingId !=null)
-        {
+
+        if (trainingId != null) {
             trainingMaster.setId(Integer.parseInt(trainingId));
         }
 
-        List<?> employeelist = employeeMasterService.readEmployeeList(user.getId());
+        List<?> employeelist = employeeMasterService.readEmployeeList(user.getId(),employeeMaster.getId());
         mv.getModelMap().put("trainingIdentification", trainingIdentification);
         mv.getModelMap().put("list", employeelist);
 //        mv.getModelMap().put("trainingId", trainingId);
@@ -281,7 +281,7 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         trainingMaster.setTrainer(trainer);
         trainingMaster.setTrainingSubType(trainingSubType);
         trainingMaster.setTrainingType(trainingType);
-          List<?> list1 = trainingIdentificationService.readEmployeeAndTraining(Integer.parseInt(id), user.getId());
+        List<?> list1 = trainingIdentificationService.readEmployeeAndTraining(Integer.parseInt(id), user.getId());
 //        mv.getModelMap().put("feedback", list);
 //        List attenlist=  new LinkedList();
 //         attenlist =  trainingAttendanceService.gettrainingattendance(eventdate,Integer.parseInt(id));
@@ -429,6 +429,7 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         mv.setViewName("Training/FeedbackView");
         return mv;
     }
+
     public ModelAndView showFeedbackView1(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         String id = request.getParameter("id");

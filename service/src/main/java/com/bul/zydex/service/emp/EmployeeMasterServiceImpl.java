@@ -378,7 +378,7 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     }
 
     @Override
-    public List<?> readEmployeeList(int id) {
-        return employeeMasterDAO.readEmployeeList(id);
+    public List<?> readEmployeeList(int id,int empid) {
+        return employeeMasterDAO.readEmployeeList(id,empid);
     }
 }

@@ -71,5 +71,8 @@
         <property name="assessmentResultStatus" type="java.lang.Integer">
             <column name="assessment_result_status" />
         </property>
+        <property name="finishStatus" type="java.lang.Integer">
+            <column name="finish_status" />
+        </property>
     </class>
 </hibernate-mapping>

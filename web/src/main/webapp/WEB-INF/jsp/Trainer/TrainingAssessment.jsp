@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Trainings Details</title>
+        <title>Training Details</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -87,7 +87,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Trainings Details:</h1>
+            <h1>Training Details:</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Training Details</li>
@@ -100,7 +100,7 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <input type="button" class="btn btn-primary" value="Back" style="float: left" onclick="window.location = 'trainerLogin.htm?act=showcalendar'" />
+        <!--        <input type="button" class="btn btn-primary" value="Back" style="float: left" onclick="window.location = 'trainerLogin.htm?act=showcalendar'" />-->
         <form:form class="form-horizontal" method="post" commandName="trainingAssessment" action="trainerLogin.htm?act=submitTrainingAssessment"
                    onsubmit='return checkBoxCheck();'>
             <section class="content">
@@ -241,10 +241,11 @@
 
                                         </table>
                                         <br>
-                                        <c:if test="${shosts eq false}">
-                                            <button type="submit" class="btn btn-primary" style="float: left" title="" style="width: 100px;"><!--<i class="fa fa-"></i>-->Submit</button>
-                                            <a style="float: right"  class="btn btn-primary" onclick="window.location = 'trainerLogin.htm?act=trainerAssessMent&id=${trainingMasterId}&eventdate=${eventdate}'">Online Assessment</a>
-                                        </c:if>
+                                        <%--<c:if test="${shosts eq false}">--%>
+                                            <!--<button type="submit" class="btn btn-primary" style="float: left" title="" style="width: 100px;"><i class="fa fa-"></i>Submit</button>-->
+                                            <!--<a style="float: right"  class="btn btn-primary" onclick="window.location = 'trainerLogin.htm?act=trainerAssessMent&id=${trainingMasterId}&eventdate=${eventdate}'">Online Assessment</a>-->
+                                            <!--        <input type="button" class="btn btn-primary" value="Back" style="float: left" onclick="window.location = 'trainerLogin.htm?act=showcalendar'" />-->
+                                        <%--</c:if>--%>
                                         <!--</div>-->
                                     </div>
 
@@ -254,9 +255,13 @@
 
                                 <!--<div class="row">-->
                                 <div class="form-group">
-                                    <div class=" col-sm-5 col-sm-offset-4">
-                                        <button type="submit" class="btn btn-primary" data-original-title="" title="" >Submit</button>
+                                    <div class=" col-sm-2">
+                                        <input type="button"  class="btn btn-primary" value="Back"  onclick="window.location = 'trainerLogin.htm?act=showcalendar'" />
                                     </div>
+                                    <div class=" col-sm-5">
+                                        <button type="submit" style="float: right" class="btn btn-primary" >Submit</button>
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -328,8 +333,8 @@
 //                    document.getElementById("name").value = responseTxt
                         var v1 = JSON.stringify(responseTxt.check);
                         var v2 = JSON.stringify(responseTxt.val2);
-                         document.getElementById("test2").innerHTML = responseTxt.check;
-                         document.getElementById("test").innerHTML = responseTxt.val2;
+                        document.getElementById("test2").innerHTML = responseTxt.check;
+                        document.getElementById("test").innerHTML = responseTxt.val2;
 //                        $('#test2').html(responseTxt.check).modal('show');
 //                        $('#test').html(responseTxt.val2).modal('show');
 

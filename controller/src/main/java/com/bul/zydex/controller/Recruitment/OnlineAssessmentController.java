@@ -265,13 +265,16 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
             candidateResultStatus.setCandidateJobApplication(candidateJobapplicationid);
             candidateResultStatus.setObtainTotal(Double.parseDouble(totalResult));
             candidateResultStatus.setObtainsPercentage(Double.parseDouble(percentageResult));
-            candidateResultStatus.setResultStatus(passResult);
-            candidateResultStatusService.create(candidateResultStatus);
+            
             if ("" != passResult) {
+                candidateResultStatus.setResultStatus(passResult);
+            candidateResultStatusService.create(candidateResultStatus);
                 candidateJobapplicationid.setStatus(6);   // 6 status Pass
                 candidateJobApplicationService.update(candidateJobapplicationid);
             }
             if ("" != failResult) {
+                candidateResultStatus.setResultStatus(failResult);
+            candidateResultStatusService.create(candidateResultStatus);
                 candidateJobapplicationid.setStatus(7);   // 7 status Fail
                 candidateJobApplicationService.update(candidateJobapplicationid);
             }

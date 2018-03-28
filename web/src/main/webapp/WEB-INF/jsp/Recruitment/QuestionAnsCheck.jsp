@@ -12,7 +12,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Check Question Paper Ans</title>
+        <title>Check Question Paper Answer</title>
 
     </head>
     <div class="content-wrapper">
@@ -67,7 +67,7 @@
                                                 <div class="col-sm-2"><h4><b>Marks</b></h4></div>
                                             </div>
                                         </c:if>
-                                        <input type="hidden" name="countDetailId" id="countDetailId" value="${fn:length(list2)}">
+                                        <!--<input type="hidden" name="countDetailId" id="countDetailId" value="${fn:length(list2)}">-->
                                         <c:forEach var="employeeAdditional" items="${list2}" varStatus="status">
 
                                             <input type="hidden" id="id" name="id" value="${employeeAdditional[8]}">

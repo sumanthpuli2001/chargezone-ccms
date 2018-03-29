@@ -283,6 +283,10 @@ public class RecruitmentController extends RecruitmentAbstract {
         departmentList(request);
 
         mprValidator.validate(mprMaster, errors);
+
+        int mppvalue = recruitmentMaster.getBudget();
+        int mprvalue = mprMaster.getBudget();
+
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid");
@@ -310,7 +314,34 @@ public class RecruitmentController extends RecruitmentAbstract {
             mv.setViewName("Recruitment/MprSearchCreateBudget");
 //            mv.setViewName("Recruitment/MprSearchCreateBudget");
 //            mv = viewClick(request, response);
+        } else if (mprvalue>mppvalue) {
+            request.setAttribute("failureMessage",
+                    "MPR Budget Should be less than MPP Budget");
+//            mv.addAllObjects(errors.getModel());
+            String jobtypeNAme = jobtypeMaster.getJobTypeName();
+
+            String departmentName = departmentMaster.getDepartmentName();
+
+            String locationName = locationMaster.getLocation();
+
+            String designationName = designationMaster.getDesignationName();
+
+            mv.getModelMap().put("mprMaster", mprMaster);
+            mv.getModelMap().put("departmentMaster", departmentMaster);
+            mv.getModelMap().put("locationMaster", locationMaster);
+            mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
+            mv.getModelMap().put("designationMaster", designationMaster);
+            mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
+            request.setAttribute("jobtypeNAme", jobtypeNAme);
+            request.setAttribute("departmentName", departmentName);
+            request.setAttribute("locationName", locationName);
+            request.setAttribute("position", position);
+            request.setAttribute("designationName", designationName);
+            request.setAttribute("experiance", experiance);
+            mv.setViewName("Recruitment/MprSearchCreateBudget");
+
         } else {
+            mprMaster.setRemainingBudget(mprvalue);
             mprMaster.setStatus(0);
             mprMaster.setCurrentLevel(1);
             mprMaster.setTotalLevel(approvalList.size());

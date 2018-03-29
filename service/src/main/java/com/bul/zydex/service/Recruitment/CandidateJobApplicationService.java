@@ -26,5 +26,7 @@ public interface CandidateJobApplicationService<T> extends GenericsService<T> {
     public int GETByCandidateId(int candidateId);
 
     public int GETByCandidateIdNew(int candidateId, int vacanyId);
+    
+     public List<?> deleteVacancyId(String vacancyId);
 
 }

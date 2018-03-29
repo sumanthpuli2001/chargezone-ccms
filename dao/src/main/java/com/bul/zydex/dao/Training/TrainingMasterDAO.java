@@ -23,6 +23,8 @@ public interface TrainingMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readTrainingMasterList();
 
     public List<?> fetchtTrainingforFeedback1(int traininigId, int user);
+    
+    public List<?> fetchtTrainingforFeedback2(int traininigId);
 
     
 }

@@ -129,7 +129,7 @@
         <section class="content-header" style="margin-top: 5%;">
             <c:if test="${sessionScope.trainerMaster ne null}">
                 <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 2%;" onclick="window.location = 'trainerLogin.htm?act=logout'"><i class="fa fa-sign-out"></i>&nbsp&nbsp&nbsp;Log Out</button>
-                <label>Candidate User Name&nbsp : &nbsp&nbsp${sessionScope.trainerMaster.userName}</label>
+                <label>Trainer User Name&nbsp : &nbsp&nbsp${sessionScope.trainerMaster.userName}</label>
             </c:if>
             <h1>Trainer</h1>
             <ol class="breadcrumb">

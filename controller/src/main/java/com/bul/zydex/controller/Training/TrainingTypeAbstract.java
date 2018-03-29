@@ -162,12 +162,21 @@ public abstract class TrainingTypeAbstract extends CustomAbstract {
                 String preDate1 = format.format(preDate);
                 preDate = format.parse(preDate1);
                 List dateObject = new ArrayList();
+                boolean sts = false;
                 if (preDate.after(firstDayOfTheMonth) || preDate.equals(firstDayOfTheMonth)) {
 
                     if (preDate.before(lastDateOfNextMonth) || preDate.equals(lastDateOfNextMonth)) {
                         dateObject.add(counter);
                         dateObject.add(format.format(preDate).split("/")[0]);
+                         SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+                         Date date = new Date();
+                        Date startdate = formatter1.parse(format.format(preDate));
+                        Date current = formatter1.parse(formatter1.format(date));
+                        if (current.compareTo(startdate) <= 0) {
+                            sts = true;
+                        }
                         dateObject.add(format.format(preDate));
+                        dateObject.add(sts);
 
                         List<?> list = trainingSubMasterService.ListeventDates(format.format(preDate));
                         if (!list.isEmpty()) {
@@ -180,6 +189,7 @@ public abstract class TrainingTypeAbstract extends CustomAbstract {
                         dateObject.add(counter);
                         dateObject.add("");
                         dateObject.add("");
+                        dateObject.add(sts);
                         monthDays.add(dateObject);
                     }
 
@@ -187,6 +197,7 @@ public abstract class TrainingTypeAbstract extends CustomAbstract {
                     dateObject.add(counter);
                     dateObject.add("");
                     dateObject.add("");
+                    dateObject.add(sts);
                     monthDays.add(dateObject);
                 }
 

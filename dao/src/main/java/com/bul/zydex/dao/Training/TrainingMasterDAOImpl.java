@@ -106,5 +106,16 @@ public class TrainingMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Trai
         return list;
 
     }
+     @Override
+    public List<?> fetchtTrainingforFeedback2(int traininigId) {
+        String query = ""
+                + "select a.trainingMaster.trainingTitle, a.trainingFeedback.feedaback, description, dateTime,a.employeeMaster.employeeName,a.id from EmployeeFeedback a"
+                + " where a.trainingMaster.id ="+traininigId;
+
+        List<?> list = getHibernateTemplate().find(query);
+
+        return list;
+
+    }
 
 }

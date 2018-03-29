@@ -37,7 +37,7 @@
         </script>
         <script>
             function homeClick(id) {
-                alert(id);
+//                alert(id);
                 window.location = 'trainerMaster.htm?act=backToHome&id=' + id;
             }
         </script>
@@ -120,10 +120,10 @@
             <ol class="breadcrumb">
             </ol>
         </section>
-        <ul class="nav nav-tabs" style="text-align: center" >
+<!--        <ul class="nav nav-tabs" style="text-align: center" >
             <li class="active " ><a href="">My Calendar</a></li>
-            <!--<li ><a href="">Second Tab</a></li>-->
-        </ul>
+            <li ><a href="">Second Tab</a></li>
+        </ul>-->
         <br/>
         <br/>
         <!--<div class="content-wrapper">-->

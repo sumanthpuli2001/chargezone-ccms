@@ -17,7 +17,7 @@
         <section class="content-header">
             <h1>Trainer List</h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home111</a></li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Trainer Detail List</li>
             </ol>
         </section>

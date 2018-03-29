@@ -5,10 +5,10 @@
  */
 package com.bul.zydex.controller.Training;
 
-import com.bul.zydex.controller.TrainerLogInController;
+import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.QuestionAns;
-import com.bul.zydex.model.QuestionAnswerSubmit;
 import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingAssessment;
@@ -76,7 +76,7 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
 
             }
         }
-
+       
         mv.getModelMap().put("list2", listOfFinalList);
         mv.getModelMap().put("trainingAssessment", trainingAssessment);
 //        mv.getModelMap().put("candidateApplyJobid", candidateApplyJobid);
@@ -209,9 +209,32 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
             trainingQuestionAnswerSubmitService.create(trainingQuestionAnswerSubmit);
 //             mv.setViewName("Vacancy/AssementOnline");
         }
+//          try {
+//                    EmailTemplate emailTemplate = new EmailTemplate();
+//                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//                    DesignationMaster designationMaster = new DesignationMaster();
+//                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+//                    TrainingAssessment trainingAssessment1 = new TrainingAssessment();
+//                    trainingAssessment1 = trainingAssessmentService.readById(Integer.parseInt(candidateiD));
+//                    emailTemplate = emailTemplateService.readById(143);
+//                    String To = trainingAssessment1.getTrainingMaster().getTrainer().getEmailId();
+//                    String from = employeeMasterModel.getOfficeEmailId();
+//                    String Subject = emailTemplate.getSubject();
+//                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+//                    String msg = emailTemplate.getBodytext();
+//                    msg = msg.replaceAll("\\{to_user\\}", trainingAssessment1.getTrainingMaster().getTrainer().getTrainerName());
+//                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//                    sendMail.sendMail(from, To, Subject, msg);
+//                } catch (Exception e) {
+//
+//                }
         trainingAssessment = trainingAssessmentService.readById(Integer.parseInt(candidateiD));
         trainingAssessment.setStatus(1);
         trainingAssessmentService.update(trainingAssessment);
+         request.setAttribute(
+                "successMessage",
+                "Test Submited Sucessfully");
         return mv;
 
     }

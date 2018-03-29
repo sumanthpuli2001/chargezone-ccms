@@ -44,7 +44,7 @@
         </script>
         <script>
             function viewClicklist(id, empid, onlineAssment) {
-                alert("hi");
+//                alert("hi");
 //            window.location = 'payrollSalaryType.htm?act=viewClick&id=' + id;
                 window.location = 'trainingAssessment.htm?act=clickassessmentOnlineTest&id=' + id + '&empid=' + empid + '&onlineAssment=' + onlineAssment;
             }
@@ -65,12 +65,6 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
-
-                                <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
-                                <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
-
-                                <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'trainingIdentification.htm?act=newAssignTraine'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
-
                                 <div class="box-header">
                                 </div>
                                 <div class="box-body no-padding">
@@ -127,7 +121,7 @@
                                                                                                                                             &nbsp;&nbsp;&nbsp;&nbsp;Take Test
                                                                                                                                         </button>
                                                                                                                                     </div>-->
-                                                                <td style="width: 50px;"><a onclick='viewClicklist(${list[2]},${list[11]},${list[0]});'>Take Test</a></td>
+                                                                <td style="width: 50px;"><a style="cursor: pointer;" onclick='viewClicklist(${list[2]},${list[11]},${list[0]});'>Take Test</a></td>
 
 
                                                             </tr>

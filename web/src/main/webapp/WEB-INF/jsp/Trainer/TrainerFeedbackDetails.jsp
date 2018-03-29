@@ -126,6 +126,76 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
+                                <h1>Training Details:</h1>
+                                <div class="box-header">
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <label>Training Title : </label>&nbsp;&nbsp;${trainingMaster.trainingTitle}
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <label>Training Requester : </label>&nbsp;&nbsp;${trainingMaster.trainingOwner}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <label>Training Type : </label>&nbsp;&nbsp;${trainingMaster.trainingType.training}
+                                        </div>
+                                        <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <label>Training sub-type : </label>&nbsp;&nbsp;${trainingMaster.trainingSubType.trainingsubtype}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <label>Training Source : </label>&nbsp;&nbsp;${trainingMaster.trainingSource}
+                                        </div>
+                                        <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <label>Trainer : </label>&nbsp;&nbsp;${trainingMaster.trainer.trainerName}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class ="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                            <label>Start Date : </label>&nbsp;&nbsp;${trainingMaster.startDate}
+                                        </div>
+                                        <div class ="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                            <label>End Date : </label>&nbsp;&nbsp;${trainingMaster.endDate}
+                                        </div>
+                                        <div class ="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                            <label>Training time from : </label>&nbsp;&nbsp;${trainingMaster.trainingTimeForm}
+                                        </div>
+                                        <div class ="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                            <label>Training time to : </label>&nbsp;&nbsp;${trainingMaster.trainingTimeTo}
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class ="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <label>Venue : </label>&nbsp;&nbsp;${trainingMaster.venue}
+                                        </div>
+                                    </div>
+                                    <div class ="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class ="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                            <label>Description : </label>&nbsp; &nbsp;
+                                            ${trainingMaster.trainingDescription}</textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div><!-- /.tab-content -->
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Custom Tabs -->
+                        <div class="nav-tabs-custom">
+                            <div class="tab-content">
                                 <!--<button type="submit" class="btn btn-primary" title="" onclick="window.location = 'trainingIdentification.htm?act=showTrainingFeedbackList2'"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</button>-->
                                 <input type="button" class="btn btn-primary" style="float: left" value="Back" onclick="window.history.back();" />
                                 <!--<button type="submit" class="btn btn-danger" title="" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp;&nbsp;DELETE</button>-->
@@ -139,12 +209,12 @@
                                                                                                 <option value="" label="-- Select --" ></option>
                                                                                                 <options items="${deptMap}"></options>
                                                                                             </select>-->
-<!--                                    <select id="TrainingId" name="TrainingId" class="form-control" >
-                                        <option value="">--SELECT--</option>
-                                        <%--<c:forEach var="trainingsMaps" items="${trainingsMaps}">--%>
-                                            <option value="${trainingsMaps.key}">${trainingsMaps.value}</option>
-                                        <%--</c:forEach>--%>
-                                    </select>-->
+                                    <!--                                    <select id="TrainingId" name="TrainingId" class="form-control" >
+                                                                            <option value="">--SELECT--</option>
+                                    <%--<c:forEach var="trainingsMaps" items="${trainingsMaps}">--%>
+                                        <option value="${trainingsMaps.key}">${trainingsMaps.value}</option>
+                                    <%--</c:forEach>--%>
+                                </select>-->
 
                                     <%--<form:errors path="trainingMaster.id" cssClass="errorDiv"></form:errors>--%>
                                 </div>
@@ -196,10 +266,10 @@
                                                                     </td>
                                                                     <td style="text-align: left">
                                                                         <div class="btn-group">
-                                                                        <button type="button" data-toggle="modal" data-target="#myModalOnline" onclick="setid(${trainingFeedbackList[5]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
-                                                                            &nbsp;&nbsp;&nbsp;&nbsp;View
-                                                                        </button>
-                                                                    </div>
+                                                                            <button type="button" data-toggle="modal" data-target="#myModalOnline" onclick="setid(${trainingFeedbackList[5]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                                &nbsp;&nbsp;&nbsp;&nbsp;View
+                                                                            </button>
+                                                                        </div>
                                                                     </td>
                                                                     <!--                                                                    <td>
                                                                                                                                             <div class="btn-group">
@@ -224,14 +294,14 @@
                     </div><!-- nav-tabs-custom -->
                 </div><!-- /.col -->
             </section>
-    </div>
-</form:form><!-- /.content -->
+        </div>
+    </form:form><!-- /.content -->
 </div><!-- /.content-wrapper -->
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 
 <script>
-                    function setid(id) {
-                        window.location = 'trainingIdentification.htm?act=showFeedbackView1&id=' + id;
-                    }
-                </script>
+    function setid(id) {
+        window.location = 'trainingIdentification.htm?act=showFeedbackView1&id=' + id;
+    }
+</script>
 </html>

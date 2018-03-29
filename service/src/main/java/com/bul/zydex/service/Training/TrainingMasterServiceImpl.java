@@ -50,6 +50,11 @@ public class TrainingMasterServiceImpl<T> extends GenericsServiceImpl<T> impleme
          return  trainingMasterDAO.fetchtTrainingforFeedback1(traininigId, user);
     }
 
+    @Override
+    public List<?> fetchtTrainingforFeedback2(int traininigId) {
+        return  trainingMasterDAO.fetchtTrainingforFeedback2(traininigId);
+    }
+
 
    
 }

@@ -130,6 +130,8 @@
                         </div><!-- /.tab-content -->
                             </div><!-- nav-tabs-custom -->
                         </div><!-- /.col -->
+                        </div><!-- /.col -->
+                        </div><!-- /.col -->
                         </section>
                     </form:form><!-- /.content -->
                 </div>

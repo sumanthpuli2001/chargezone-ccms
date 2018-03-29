@@ -265,6 +265,13 @@ public class VacancyController extends VacancyAbstract {
         String savingList[] = request.getParameterValues("checkId");
         for (String z : savingList) {
             try {
+                
+                CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
+                List<?> list = candidateJobApplicationService.deleteVacancyId(z);
+                for(Object object : list){
+                    candidateJobApplication = (CandidateJobApplication) object;
+                    candidateJobApplicationService.delete(candidateJobApplication.getId());
+                }
                 vacancyMasterService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
                         "Info :The Records are deleted successfully.");
@@ -393,7 +400,7 @@ public class VacancyController extends VacancyAbstract {
         }
 
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
-        mv = vacancyFetch(request, response);
+        mv = vacancyDetailList(request, response);
 
         return mv;
     }

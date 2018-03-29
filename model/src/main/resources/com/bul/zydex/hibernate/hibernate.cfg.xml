@@ -137,5 +137,7 @@
     <mapping resource="com/bul/zydex/model/TrainingAssessment.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/TrainingQuestionAnswerSubmit.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/TrainingResultStatus.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/CtcAllowance.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/EmployeeCtcDetail.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

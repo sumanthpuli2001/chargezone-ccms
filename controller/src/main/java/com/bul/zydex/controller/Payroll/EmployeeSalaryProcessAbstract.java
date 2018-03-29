@@ -7,7 +7,9 @@ package com.bul.zydex.controller.Payroll;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.AdditionalAmountCheck;
+import com.bul.zydex.model.CtcAllowance;
 import com.bul.zydex.model.EmployeeAdditionalSalary;
+import com.bul.zydex.model.EmployeeCtcDetail;
 import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeExcelRecord;
 import com.bul.zydex.model.EmployeePolicyDetail;
@@ -55,6 +57,8 @@ import com.bul.zydex.service.Payroll.PayrollSalaryLockService;
 import com.bul.zydex.service.Payroll.PayrollSalaryTypeService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.emp.EmployeeTypeService;
+import com.bul.zydex.service.policy.CtcAllowanceService;
+import com.bul.zydex.service.policy.EmployeeCtcDetailService;
 import com.bul.zydex.service.policy.PolicyMasterService;
 import java.util.HashMap;
 import java.util.List;
@@ -93,6 +97,8 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     protected PayrollEsicDeductionService<PayrollEsicDeduction> payrollEsicDeductionService;
     protected PayrollBonusService<PayrollBonus> payrollBonusService;
     protected PayrollLoanRemainingAmountService<PayrollLoanRemainingAmount> payrollLoanRemainingAmountService;
+    protected CtcAllowanceService<CtcAllowance> ctcAllowanceService;
+    protected EmployeeCtcDetailService<EmployeeCtcDetail> employeeCtcDetailService;
 
     Validator employeeSalaryProcessValidator;
 
@@ -302,6 +308,22 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
 
     public void setPayrollLoanRemainingAmountService(PayrollLoanRemainingAmountService<PayrollLoanRemainingAmount> payrollLoanRemainingAmountService) {
         this.payrollLoanRemainingAmountService = payrollLoanRemainingAmountService;
+    }
+
+    public CtcAllowanceService<CtcAllowance> getCtcAllowanceService() {
+        return ctcAllowanceService;
+    }
+
+    public void setCtcAllowanceService(CtcAllowanceService<CtcAllowance> ctcAllowanceService) {
+        this.ctcAllowanceService = ctcAllowanceService;
+    }
+
+    public EmployeeCtcDetailService<EmployeeCtcDetail> getEmployeeCtcDetailService() {
+        return employeeCtcDetailService;
+    }
+
+    public void setEmployeeCtcDetailService(EmployeeCtcDetailService<EmployeeCtcDetail> employeeCtcDetailService) {
+        this.employeeCtcDetailService = employeeCtcDetailService;
     }
     
     

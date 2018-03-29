@@ -51,7 +51,7 @@
                         + "<option value =\"\"> --SELECT-- </option>"
                         + "</select>"
                         + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
-                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
+//                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "'  min=\"0\" class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
@@ -83,6 +83,59 @@
                 var val = document.getElementById("policyCount").value;
                 val = val - 1;
                 document.getElementById("policyCount").value = val;
+                var element1 = document.getElementById(policyDiv);
+                element1.parentNode.removeChild(element1);
+            } catch (e) {
+
+            }
+        }
+
+    </script>
+    <script>
+        var tempCount4 = 1;
+        $(function () {
+            $("#ctcCloneid").on("click", function () {
+                tempCount4++;
+                //                alert(tempCount3);
+                var clone = "<tr id='addmoreFile" + tempCount4 + "' style='clear:both;'>"
+                        + "<td style=\"text-align: center\">" + tempCount4 + "</td>"
+                        + "<td id=\"ctcTd" + tempCount4 + "\"><div><select id='ctcId" + tempCount4 + "' name='ctcId" + tempCount4 + "' class=\"form-control\">"
+                        + "</select>"
+                        + "</div><span id=\"ctcError" + tempCount4 + "\" style=\"color: red;\"></span></td>"
+//                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'  min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\">"
+                        + "<span style='margin-top: 5px;'>"
+                        + "<input type=\"button\"value=\"-\"  onclick=\"removectc('addmoreFile" + tempCount4 + "');\"/>"
+                        + "</span>"
+                        + "</td>"
+                        + "</tr>";
+                $("#ctcTable").append(clone);
+                document.getElementById('ctcCount').value = tempCount4;
+//                var expenseType = document.getElementById('expenseType').value;
+                addActc(tempCount4);
+
+            });
+        });
+
+        function addActc(id) {
+            //                alert(id);
+            var element2 = document.getElementById('ctcId1');
+            var obj2 = document.getElementById("ctcId" + id);
+            for (var i2 = 0; i2 < element2.options.length; i2++) {
+                var opt2 = document.createElement("option");
+                opt2.value = element2.options[i2].value;
+                opt2.text = element2.options[i2].text;
+                obj2.appendChild(opt2);
+            }
+        }
+
+        function removectc(policyDiv) {
+            try {
+                tempCount4--;
+                var val = document.getElementById("ctcCount").value;
+                val = val - 1;
+                document.getElementById("ctcCount").value = val;
                 var element1 = document.getElementById(policyDiv);
                 element1.parentNode.removeChild(element1);
             } catch (e) {
@@ -978,8 +1031,8 @@
                                                         <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                             <tr>
                                                                 <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                                <th style="text-align: center; vertical-align: middle">Select Policy</th>
-                                                                <th style="text-align: center; vertical-align: middle">Policy Number</th>
+                                                                <th style="text-align: center; vertical-align: middle">Select Allowance</th>
+                                                                <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
                                                                 <th style="text-align: center; vertical-align: middle">Amount</th>
                                                                 <th style="text-align: center; vertical-align: middle">Add New</th>
                                                                     <c:choose>
@@ -1015,9 +1068,9 @@
                                                                                 <span id="policyError${countVal.count}" style="color: red;"></span>
                                                                             </td>
                                                                             <!--</td>-->
-                                                                            <td style="text-align: center">
-                                                                                <input type="text" name="policyNumber${countVal.count}" id="policyNumber${countVal.count}"  class="form-control"  value="${comp[2]}">
-                                                                            </td>
+                                                                            <!--                                                                            <td style="text-align: center">
+                                                                                                                                                            <input type="text" name="policyNumber${countVal.count}" id="policyNumber${countVal.count}"  class="form-control"  value="${comp[2]}">
+                                                                                                                                                        </td>-->
                                                                             <td style="text-align: center">
                                                                                 <input type="number" name="amount${countVal.count}" id="amount${countVal.count}" min="0" class="form-control" value="${comp[3]}">
                                                                             </td>
@@ -1062,9 +1115,9 @@
                                                                             </div>
                                                                             <span id="policyError1" style="color: red;"></span>
                                                                         </td>
-                                                                        <td style="text-align: center">
-                                                                            <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
-                                                                        </td>
+                                                                        <!--                                                                        <td style="text-align: center">
+                                                                                                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
+                                                                                                                                                </td>-->
                                                                         <td style="text-align: center">
                                                                             <input type="number" name="amount1" id="amount1" min="0" class="form-control" value="">
                                                                         </td>
@@ -1079,7 +1132,112 @@
                                                         </table>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="table-responsive">
+                                                        <table id="ctcTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                            <tr>
+                                                                <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
+                                                                <th style="text-align: center; vertical-align: middle">Select CTC</th>
+                                                                <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
+                                                                <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                <th style="text-align: center; vertical-align: middle">Add New</th>
+                                                                    <c:choose>
+                                                                        <c:when test="${not empty finalPolicyList}">
+                                                                    <input type="hidden" name="ctcCount" id="ctcCount"  value="${fn:length(finalctcList)}"/>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <input type="hidden" name="ctcCount" id="ctcCount"  value="1"/>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                            </tr>
+                                                            <c:choose>
+                                                                <c:when test="${not empty finalctcList}">
+                                                                    <c:forEach var="comp" items="${finalctcList}" varStatus = "countVal">
+                                                                        <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalctcList)}"/>
+                                                                        <tr>
+                                                                            <td style="text-align: center">${countVal.count}</td>
+                                                                            <td><div>
+                                                                                    <select id="ctcId${countVal.count}"  name="ctcId${countVal.count}"  class="form-control">
+                                                                                        <option value="">--SELECT--</option>
+                                                                                        <c:forEach var="policyData" items="${ctc}" varStatus = "status">
+                                                                                            <c:choose>
+                                                                                                <c:when test="${comp[1] == policyData.value}">
+                                                                                                    <option value="${policyData.key}" selected="selected">${comp[1]}</option>
+                                                                                                </c:when>
+                                                                                                <c:otherwise>
+                                                                                                    <option value="${policyData.key}" >${policyData.value}</option>
+                                                                                                </c:otherwise>
+                                                                                            </c:choose>
+                                                                                        </c:forEach>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <span id="ctcError${countVal.count}" style="color: red;"></span>
+                                                                            </td>
+                                                                            <!--</td>-->
+                                                                            <!--                                                                            <td style="text-align: center">
+                                                                                                                                                            <input type="text" name="policyNumber${countVal.count}" id="policyNumber${countVal.count}"  class="form-control"  value="${comp[2]}">
+                                                                                                                                                        </td>-->
+                                                                            <td style="text-align: center">
+                                                                                <input type="number" name="ctcamount${countVal.count}" id="ctcamount${countVal.count}" min="0" class="form-control" value="${comp[2]}">
+                                                                            </td>
+                                                                            <td style="text-align: center">
+                                                                                <%--<c:choose>--%>
+                                                                                <%--<c:when test="${countVal.first}">--%>
+                                                                                <!--<span style='margin-top: 5px;'>-->
+                                                                                <!--<input type="button" value="+" id="policyCloneid" />-->
+                                                                                <!--</span>-->
+                                                                                <%--</c:if>--%>
+                                                                                <%--</c:when>--%>
+                                                                                <%--<c:otherwise>--%>
+                                                                                <!--<span style='margin-top: 5px;'>-->
+                                                                                <!--<input type="button" value="-" id="policyRemoveid" onclick="removeForEdit()"/>-->
+                                                                                <!--</span>-->
+                                                                                <%--</c:otherwise>--%>
+                                                                                <%--</c:choose>--%>
+                                                                                <c:if test="${countVal.last}">
+                                                                                    <c:if test="${countVal.last}">
+                                                                                        <span style='margin-top: 5px;'>
+                                                                                            <input type="button" value="+" id="ctcCloneid" />
+                                                                                        </span>
+                                                                                    </c:if>
+                                                                                </c:if>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </c:forEach>
+                                                                </c:when>
+                                                                <c:otherwise>
 
+                                                                    <%--<c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">--%>
+    <!--                                                                        <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>-->
+                                                                    <tr>
+                                                                        <td style="text-align: center">1</td>
+                                                                        <td><div>
+                                                                                <select id="ctcId1"  name="ctcId1"  class="form-control">
+                                                                                    <option value="">--SELECT--</option>
+                                                                                    <c:forEach var="policyData" items="${ctc}" varStatus = "status">
+                                                                                        <option value="${policyData.key}" >${policyData.value}</option>
+                                                                                    </c:forEach>
+                                                                                </select>
+                                                                            </div>
+                                                                            <span id="ctcError1" style="color: red;"></span>
+                                                                        </td>
+                                                                        <!--                                                                        <td style="text-align: center">
+                                                                                                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
+                                                                                                                                                </td>-->
+                                                                        <td style="text-align: center">
+                                                                            <input type="number" name="ctcamount1" id="ctcamount1" min="0" class="form-control" value="">
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <span style='margin-top: 5px;'>
+                                                                                <input type="button" value="+" id="ctcCloneid" />
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </table>
+                                                    </div>
+                                                </div>
 
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
@@ -1243,33 +1401,33 @@
                                                                 </tr>
                                                             </table>
                                                         </div></div>
-                                                        <div class="col-md-12 col-sm-12">
-                                                            <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:textarea  path="jobDescription" id="editor"></form:textarea>
-                                                            <form:errors path="jobDescription" cssClass="errorDiv"/>
-                                                        </div>
-                                                        </div></div>
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:textarea  path="jobDescription" id="editor"></form:textarea>
+                                                        <form:errors path="jobDescription" cssClass="errorDiv"/>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                </div></div>
                                         </div>
-
-                                        <c:if test="${!(employeeMaster.employeeName eq  'Admin')}">
-                                            <div class="form-group">
-                                                <div class=" col-sm-12" style="text-align: center;">
-                                                    <button type="submit" class="btn btn-primary" data-original-title="" title="" style="width: 100px;">SUBMIT</button>
-                                                </div>
-                                            </div>
-                                        </c:if>
                                     </div>
-
                                 </div>
-
-
-                                <div class="tab-pane" id="tab_3"></div>
                             </div>
-<!--                        </div>
-                    </div>-->
+
+                            <c:if test="${!(employeeMaster.employeeName eq  'Admin')}">
+                                <div class="form-group">
+                                    <div class=" col-sm-12" style="text-align: center;">
+                                        <button type="submit" class="btn btn-primary" data-original-title="" title="" style="width: 100px;">SUBMIT</button>
+                                    </div>
+                                </div>
+                            </c:if>
+                        </div>
+
+                    </div>
+
+
+                    <div class="tab-pane" id="tab_3"></div>
+                </div>
+                <!--                        </div>
+                                    </div>-->
             </section>
         </form:form>
     </div>

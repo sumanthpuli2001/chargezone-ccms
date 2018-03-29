@@ -248,5 +248,7 @@
     <bean id="trainingAssessmentDAO1" class="com.bul.zydex.dao.Training.TrainingAssessmentDAOImpl" parent="sessionFactoryConfig" />
     <bean id="trainingQuestionAnswerSubmitDAO1" class="com.bul.zydex.dao.Training.TrainingQuestionAnswerSubmitDAOImpl" parent="sessionFactoryConfig" />
     <bean id="trainingResultStatusDAO1" class="com.bul.zydex.dao.Training.TrainingResultStatusDAOImpl" parent="sessionFactoryConfig" />
-     <bean id="trainingFeedbackDAO1" class="com.bul.zydex.dao.Training.TrainingFeedbackDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="trainingFeedbackDAO1" class="com.bul.zydex.dao.Training.TrainingFeedbackDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="ctcAllowanceDAO1" class="com.bul.zydex.dao.policy.CtcAllowanceDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="employeeCtcDetailDAO1" class="com.bul.zydex.dao.policy.EmployeeCtcDetailDAOImpl" parent="sessionFactoryConfig" />
 </beans>

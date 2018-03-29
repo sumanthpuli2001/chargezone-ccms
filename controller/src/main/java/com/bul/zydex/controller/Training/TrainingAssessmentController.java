@@ -285,16 +285,16 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
             if ("" != passResult) {
                 trainingResultStatus.setResultStatus(passResult);
                 trainingResultStatusService.create(trainingResultStatus);
-                trainingMaster.setAssessmentResultStatus(0);
-                trainingMasterService.update(trainingMaster);
+                trainingAssessment.setAssessmentResultStatus(0);
+                trainingAssessmentService.update(trainingAssessment);
             }
             if ("" != failResult) {
                 trainingResultStatus.setResultStatus(failResult);
                 trainingResultStatusService.create(trainingResultStatus);
-                trainingMaster.setAssessmentResultStatus(1);
-                trainingMasterService.update(trainingMaster);
+                trainingAssessment.setAssessmentResultStatus(1);
+                trainingAssessmentService.update(trainingAssessment);
             }
-           
+
             List attenlist = new LinkedList();
             attenlist = trainingAttendanceService.gettrainerTasks(eventdate, trMasterId);
             boolean shosts = true;

@@ -278,7 +278,7 @@
 
                                     <div class="box box-info collapsed-box">
                                         <div class="box-header">
-                                            <h3 class="box-title">Competency Evaluation (As Per Bulwark Systems Competency Framework) : ${competencyEvaluationList[0][2].title}</h3>
+                                            <h3 class="box-title">Competency Evaluation (As Per SPC Life Science Competency Framework) : ${competencyEvaluationList[0][2].title}</h3>
                                             <div class="box-tools pull-right">
                                                 <span id="spanId3">Expand</span><span class="btn btn-box-tool" id="btn4" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></span>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->

@@ -175,7 +175,7 @@
                                                         </tr>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <center>  <img src="StorageYard/Images/bulwarks.png" style="width:15%;height: 15%;" BORDER="0"/> </center> 
+                                                    <center>  <img src=" StorageYard/Images/logo.png" style="width:15%;height: 15%;" BORDER="0"/> </center> 
 
                                                     <!--                                                    <div class="form-group">
                                                                                                             <center><b><font size="4">CHEMCRUX ENTERPRISES LTD.</font></b></center> 

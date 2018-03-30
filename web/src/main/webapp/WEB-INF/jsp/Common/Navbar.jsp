@@ -587,6 +587,7 @@
                             <li><a href="thoughtMaster.htm?act=createthought"><i class="fa fa-circle-o"></i>Homepage Setting</a></li>
                             <li><a href="classifiedBox.htm?act=showResult"><i class="fa fa-circle-o"></i>Classified Setting</a></li>
                             <li><a href="ctcAllowance.htm?act=showList"><i class="fa fa-circle-o"></i>CTC Master</a></li>
+                            <li><a href="retirementAge.htm?act=showList"><i class="fa fa-circle-o"></i>Retirement Ages</a></li>
                         </ul>
                     </li>
                 </c:if>
@@ -807,6 +808,7 @@
                                     <li><a href="loanReport.htm?act=searchLoanData&search=none"><i class="fa fa-circle-o"></i>Loan</a></li>
                                     <li><a href="attendanceReport.htm?act=searchAttendanceData&search=none"><i class="fa fa-circle-o"></i>Attendance</a></li>
                                     <li><a href="employeeSalarySlip.htm?act=searchSalaryYearDetail&search=none"><i class="fa fa-circle-o"></i>Employee Salary Yearly</a></li>
+                                    <li><a href="employeePfCheck.htm?act=searchSalaryPfGovDetail&search=none"><i class="fa fa-circle-o"></i>Govt. Format PF</a></li>
                                 </ul>
                             </li>
                             <li>

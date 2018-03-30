@@ -218,7 +218,7 @@
                                 </div>
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
-                                        <h3 class="box-title">1)Please describe the primary reason(s) for leaving your current position with Bulwark Systems.</h3>
+                                        <h3 class="box-title">1)Please describe the primary reason(s) for leaving your current position with SPC Life Science.</h3>
                                         <div class="box-tools pull-right">
                                             <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
                                         </div>
@@ -241,7 +241,7 @@
 
                                     <div class="box box-info collapsed-box">
                                         <div class="box-header">
-                                            <h3 class="box-title">2)Which of the below mentioned factors were you dissatisfied with, which triggered your thought of leaving Bulwark Systems?</h3>
+                                            <h3 class="box-title">2)Which of the below mentioned factors were you dissatisfied with, which triggered your thought of leaving SPC Life Science?</h3>
                                             <div class="box-tools pull-right">
                                                 <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
                                             </div>
@@ -321,7 +321,7 @@
                                 </div><!-- /.box-body -->
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
-                                        <h3 class="box-title">3)Please provide your candid feedback and rate the following aspects with reference to your job at Bulwark Systems. (Please use the 1 – 5 scale below)</h3>
+                                        <h3 class="box-title">3)Please provide your candid feedback and rate the following aspects with reference to your job at SPC Life Science. (Please use the 1 – 5 scale below)</h3>
                                         <div class="box-tools pull-right">
                                             <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
                                         </div>
@@ -649,7 +649,7 @@
                                 </div><!-- /.box-body -->
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
-                                        <h3 class="box-title">6)Which reason made you take decision to leave Bulwark Systems?  Rate top 3 reasons from the following: (Rate 1,2 &3 only) 
+                                        <h3 class="box-title">6)Which reason made you take decision to leave SPC Life Science?  Rate top 3 reasons from the following: (Rate 1,2 &3 only) 
                                         </h3>
                                         <div class="box-tools pull-right">
                                             <span id="spanId7">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7" ></i></button>
@@ -720,7 +720,7 @@
                                 </div><!-- /.box-body -->
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
-                                        <h3 class="box-title">7)Since when were you considering leaving Bulwark Systems? What can be done to retain you? Please mention in brief.</h3>
+                                        <h3 class="box-title">7)Since when were you considering leaving SPC Life Science? What can be done to retain you? Please mention in brief.</h3>
                                         <div class="box-tools pull-right">
                                             <span id="spanId8">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun8();"><i class="fa fa-plus" id="minusId8" ></i></button>
                                         </div>

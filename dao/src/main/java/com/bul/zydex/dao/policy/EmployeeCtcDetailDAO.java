@@ -16,4 +16,6 @@ public interface EmployeeCtcDetailDAO<T> extends GenericsDAO<T> {
 
     public List<?> fetchctcData(int empId);
 
+    public List<?> readctc(int employeeid);
+
 }

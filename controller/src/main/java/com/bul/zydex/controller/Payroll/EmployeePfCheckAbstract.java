@@ -22,6 +22,7 @@ import com.bul.zydex.model.PayrollPtCheck;
 import com.bul.zydex.model.PayrollRecurringAdditionalAmount;
 import com.bul.zydex.model.PayrollRecurringDeduction;
 import com.bul.zydex.model.PayrollSalaryType;
+import com.bul.zydex.model.RetirementAge;
 import com.bul.zydex.service.Payroll.AdditionalAmountCheckService;
 import com.bul.zydex.service.Payroll.EmployeeAdditionalSalaryService;
 import com.bul.zydex.service.Payroll.EmployeeDeductionAmountService;
@@ -36,6 +37,7 @@ import com.bul.zydex.service.Payroll.PayrollPtCheckService;
 import com.bul.zydex.service.Payroll.PayrollRecurringAdditionalAmountService;
 import com.bul.zydex.service.Payroll.PayrollRecurringDeductionService;
 import com.bul.zydex.service.Payroll.PayrollSalaryTypeService;
+import com.bul.zydex.service.Payroll.RetirementAgeService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.emp.EmployeeTypeService;
 import java.util.HashMap;
@@ -64,6 +66,7 @@ public class EmployeePfCheckAbstract  extends CustomAbstract{
     protected PayrollProfessionalTaxService<PayrollProfessionalTax> payrollProfessionalTaxService;
     protected PayrollPfCheckService<PayrollPfCheck> payrollPfCheckService;
     protected PayrollProvidentFundService<PayrollProvidentFund> payrollProvidentFundService;
+    protected RetirementAgeService<RetirementAge> retirementAgeService;
 
     public EmployeeSalaryProcessService<EmployeeSalaryProcess> getEmployeeSalaryProcessService() {
         return employeeSalaryProcessService;
@@ -192,6 +195,15 @@ public class EmployeePfCheckAbstract  extends CustomAbstract{
     public void setPayrollProvidentFundService(PayrollProvidentFundService<PayrollProvidentFund> payrollProvidentFundService) {
         this.payrollProvidentFundService = payrollProvidentFundService;
     }
+
+    public RetirementAgeService<RetirementAge> getRetirementAgeService() {
+        return retirementAgeService;
+    }
+
+    public void setRetirementAgeService(RetirementAgeService<RetirementAge> retirementAgeService) {
+        this.retirementAgeService = retirementAgeService;
+    }
+    
      protected void EmployeeTypeList(HttpServletRequest request) {
         List<?> EmployeeTypeList = employeeTypeService.read();
         Map<Integer, String> map = new HashMap();

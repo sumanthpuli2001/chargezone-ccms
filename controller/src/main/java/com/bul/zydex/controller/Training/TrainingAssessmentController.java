@@ -5,10 +5,10 @@
  */
 package com.bul.zydex.controller.Training;
 
-import com.bul.zydex.controller.TrainerLogInController;
+import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.QuestionAns;
-import com.bul.zydex.model.QuestionAnswerSubmit;
 import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingAssessment;
@@ -209,9 +209,32 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
             trainingQuestionAnswerSubmitService.create(trainingQuestionAnswerSubmit);
 //             mv.setViewName("Vacancy/AssementOnline");
         }
+//          try {
+//                    EmailTemplate emailTemplate = new EmailTemplate();
+//                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//                    DesignationMaster designationMaster = new DesignationMaster();
+//                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+//                    TrainingAssessment trainingAssessment1 = new TrainingAssessment();
+//                    trainingAssessment1 = trainingAssessmentService.readById(Integer.parseInt(candidateiD));
+//                    emailTemplate = emailTemplateService.readById(143);
+//                    String To = trainingAssessment1.getTrainingMaster().getTrainer().getEmailId();
+//                    String from = employeeMasterModel.getOfficeEmailId();
+//                    String Subject = emailTemplate.getSubject();
+//                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+//                    String msg = emailTemplate.getBodytext();
+//                    msg = msg.replaceAll("\\{to_user\\}", trainingAssessment1.getTrainingMaster().getTrainer().getTrainerName());
+//                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//                    sendMail.sendMail(from, To, Subject, msg);
+//                } catch (Exception e) {
+//
+//                }
         trainingAssessment = trainingAssessmentService.readById(Integer.parseInt(candidateiD));
         trainingAssessment.setStatus(1);
         trainingAssessmentService.update(trainingAssessment);
+        request.setAttribute(
+                "successMessage",
+                "Test Submited Sucessfully");
         return mv;
 
     }
@@ -285,25 +308,76 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
             if ("" != passResult) {
                 trainingResultStatus.setResultStatus(passResult);
                 trainingResultStatusService.create(trainingResultStatus);
-                trainingMaster.setAssessmentResultStatus(0);
-                trainingMasterService.update(trainingMaster);
+                trainingAssessment.setAssessmentResultStatus(0);
+                trainingAssessmentService.update(trainingAssessment);
             }
             if ("" != failResult) {
                 trainingResultStatus.setResultStatus(failResult);
                 trainingResultStatusService.create(trainingResultStatus);
-                trainingMaster.setAssessmentResultStatus(1);
-                trainingMasterService.update(trainingMaster);
+                trainingAssessment.setAssessmentResultStatus(1);
+                trainingAssessmentService.update(trainingAssessment);
             }
-           
+
             List attenlist = new LinkedList();
+            List newlist = new LinkedList();
             attenlist = trainingAttendanceService.gettrainerTasks(eventdate, trMasterId);
             boolean shosts = true;
             boolean feedbackStatus = trainingAttendanceService.checkFeedbackstatus(trMasterId);
             if (attenlist.isEmpty()) {
                 shosts = false;
                 attenlist = trainingIdentificationService.getTrainerAttendance(trMasterId);
+                for (int i = 0; i < attenlist.size(); i++) {                ///from
+                    List fList = new ArrayList();
+                    Object o = attenlist.get(i);
+                    int size = attenlist.size();
+                    int assessmentResult = 0;
+                    Object str1[] = (Object[]) o;
+                    Integer empId = (Integer) str1[0];
+                    String name = (String) str1[1];
 
-            }
+                    List<?> list = trainingAssessmentService.readTrainingAssementList(trMasterId, empId);
+                    if (!list.isEmpty()) {
+                        for (Object o2 : list) {
+                            Object str[] = (Object[]) o2;
+                            assessmentResult = (int) str[12];
+
+                        }
+                    }
+                    fList.add(empId);
+                    fList.add(name);
+
+                    fList.add(assessmentResult);
+                    newlist.add(fList);
+
+                }
+
+            } else {
+
+                for (int i = 0; i < attenlist.size(); i++) {
+                    List fList = new ArrayList();
+                    Object o = attenlist.get(i);
+                    int size = attenlist.size();
+                    int assessmentResult = 0;
+                    Object str1[] = (Object[]) o;
+                    Integer empId = (Integer) str1[0];
+                    String name = (String) str1[1];
+                    Integer status = (Integer) str1[2];
+                    List<?> list = trainingAssessmentService.readTrainingAssementList(trMasterId, empId);
+                    if (!list.isEmpty()) {
+                        for (Object o2 : list) {
+                            Object str[] = (Object[]) o2;
+                            assessmentResult = (int) str[12];
+
+                        }
+                    }
+                    fList.add(empId);
+                    fList.add(name);
+                    fList.add(status);
+                    fList.add(assessmentResult);
+                    newlist.add(fList);
+
+                }
+            }                                                                    //   to
             TrainingMaster trainingMaster1 = trainingMasterService.readById(trMasterId);
             TrainingType trainingType = trainingTypeService.readById(trainingMaster1.getTrainingType().getId());
             TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster1.getTrainingSubType().getId());

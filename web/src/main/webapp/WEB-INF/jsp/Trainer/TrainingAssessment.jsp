@@ -40,7 +40,6 @@
                 display: flex;              /* establish flex container */
                 flex-direction: column;
                 justify-content: center;    /* align items vertically, in this case */
-                align-items: center;        /* align items horizontally, in this case */
                 height: 800px;
                 /*border: 1px solid black;*/
             }
@@ -105,6 +104,77 @@
                    onsubmit='return checkBoxCheck();'>
             <section class="content">
                 <!--<div class="col-md-12">-->
+                <div class="row">
+                <div class="col-md-12">
+                    <!-- Custom Tabs -->
+                    <div class="nav-tabs-custom">
+                        <div class="tab-content">
+                            <h1>Trainings Details:</h1>
+                            <div class="box-header">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <label>Training Title : </label>&nbsp;&nbsp;${trainingMaster.trainingTitle}
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <label>Training Requester : </label>&nbsp;&nbsp;${trainingMaster.trainingOwner}
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label>Training Type : </label>&nbsp;&nbsp;${trainingMaster.trainingType.training}
+                                    </div>
+                                    <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label>Training sub-type : </label>&nbsp;&nbsp;${trainingMaster.trainingSubType.trainingsubtype}
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label>Training Source : </label>&nbsp;&nbsp;${trainingMaster.trainingSource}
+                                    </div>
+                                    <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label>Trainer : </label>&nbsp;&nbsp;${trainingMaster.trainer.trainerName}
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class ="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                                        <label>Start Date : </label>&nbsp;&nbsp;${trainingMaster.startDate}
+                                    </div>
+                                    <div class ="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <label>End Date : </label>&nbsp;&nbsp;${trainingMaster.endDate}
+                                    </div>
+                                    <div class ="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <label>Training time from : </label>&nbsp;&nbsp;${trainingMaster.trainingTimeForm}
+                                    </div>
+                                    <div class ="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <label>Training time to : </label>&nbsp;&nbsp;${trainingMaster.trainingTimeTo}
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class ="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <label>Venue : </label>&nbsp;&nbsp;${trainingMaster.venue}
+                                    </div>
+                                </div>
+                                <div class ="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class ="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                        <label>Description : </label>&nbsp; &nbsp;
+                                        ${trainingMaster.trainingDescription}</textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!-- /.tab-content -->
+
+                    </div>
+
+                </div>
+
+            </div>
+                
+                
                 <div class="nav-tabs-custom">
                     <div class="tab-content">
                         <div class="box-body">
@@ -117,7 +187,7 @@
                                             <input type="hidden" id="eventdate" name="eventdate" value="${eventdate}">
                                             <label>Question Paper Name :<span style="color: red;font-size: 12px;"></span></label>
 
-                                            <select name="questionPaper.id" class="form-control" id="questions" onchange="getTotalMarksAndNoOfQue(this);">
+                                            <select name="questionPaper.id" class="form-control" id="questions" onchange="getTotalMarksAndNoOfQue(this);" required="true">
                                                 <option value="">--Select--</option>
                                                 <c:forEach items="${questions}" var="questions">
                                                     <option value="${questions.key}">${questions.value}</option>
@@ -126,13 +196,15 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <label>Passing Percentage : <span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:input path="passingPercentage" id="passingPercentage" class="form-control" placeholder="Enter Passing Percentage"></form:input>
+                                            <form:input path="passingPercentage" id="passingPercentage" class="form-control" onkeypress="return isNumberKey(event)"
+                                                        placeholder="Enter Passing Percentage" required="true"></form:input>
                                             <form:errors path="passingPercentage" cssClass="errorDiv"></form:errors>
 
                                             </div>
                                             <div class="col-sm-4">
                                                 <label>Duration (In Minutes):<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:input path="duration" id="duration" class="form-control" placeholder="Enter Duration"></form:input>
+                                            <form:input path="duration" id="duration" class="form-control" placeholder="Enter Duration"
+                                                        onkeypress="return isNumberKey(event)" required="true"></form:input>
                                             <form:errors path="duration" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
@@ -142,18 +214,20 @@
                                         <!--                                            <input type="text" id="datetimepicker2" class="form-control" placeholder="Please select From Date" name="validityFrom" readonly="true"/>-->
                                         <div class="col-sm-4    ">
                                             <label>Validity From :<span style="color: red;font-size: 12px;"></span></label>
-                                                <form:input path="validityFrom" id="datepicker1" class="form-control" placeholder="Please select From Date" readonly="true" ></form:input>
+                                                <form:input path="validityFrom" id="datepicker1" class="form-control" placeholder="Please select From Date" readonly="true" 
+                                                            required="true"></form:input>
                                                 <!--<span style="color: red;font-size: 12px;"><form:errors path="validityFrom" cssClass="errorDiv"></form:errors></span>-->
                                             </div>
                                             <div class="col-sm-4">
                                             <%--<form:input path="id" id="id" class="form-control" type="hidden"></form:input>--%>
 
                                             <label>Validity To :<span style="color: red;font-size: 12px;"></span></label>
-                                            <input type="text" id="datepicker2" class="form-control" name="validityTo" placeholder="Please select To Date" readonly="true"/>
+                                            <input type="text" id="datepicker2" class="form-control" name="validityTo" placeholder="Please select To Date" readonly="true" required="true"/>
                                         </div>
                                         <div class="col-sm-4">
                                             <label>Number Of Attempts :<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:input path="noOfAttampt" id="noOfAttampt" class="form-control" placeholder="Enter Number Of Attempt"></form:input>
+                                            <form:input path="noOfAttampt" id="noOfAttampt" class="form-control" placeholder="Enter Number Of Attempt"
+                                                        onkeypress="return isNumberKey(event)" required="true"></form:input>
                                             <form:errors path="noOfAttampt" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
@@ -242,9 +316,9 @@
                                         </table>
                                         <br>
                                         <%--<c:if test="${shosts eq false}">--%>
-                                            <!--<button type="submit" class="btn btn-primary" style="float: left" title="" style="width: 100px;"><i class="fa fa-"></i>Submit</button>-->
-                                            <!--<a style="float: right"  class="btn btn-primary" onclick="window.location = 'trainerLogin.htm?act=trainerAssessMent&id=${trainingMasterId}&eventdate=${eventdate}'">Online Assessment</a>-->
-                                            <!--        <input type="button" class="btn btn-primary" value="Back" style="float: left" onclick="window.location = 'trainerLogin.htm?act=showcalendar'" />-->
+                                        <!--<button type="submit" class="btn btn-primary" style="float: left" title="" style="width: 100px;"><i class="fa fa-"></i>Submit</button>-->
+                                        <!--<a style="float: right"  class="btn btn-primary" onclick="window.location = 'trainerLogin.htm?act=trainerAssessMent&id=${trainingMasterId}&eventdate=${eventdate}'">Online Assessment</a>-->
+                                        <!--        <input type="button" class="btn btn-primary" value="Back" style="float: left" onclick="window.location = 'trainerLogin.htm?act=showcalendar'" />-->
                                         <%--</c:if>--%>
                                         <!--</div>-->
                                     </div>
@@ -365,4 +439,15 @@
 
         }
 
+</script>
+<script>
+    function isNumberKey(evt)
+    {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode != 46 && charCode > 31
+                && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
 </script>

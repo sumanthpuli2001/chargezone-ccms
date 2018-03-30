@@ -182,15 +182,15 @@ public class TrainingMasterController extends TrainingMasterAbstract {
             trainingSubMaster.setTitle(trainingMaster.getTrainingTitle());
             trainingSubMasterService.create(trainingSubMaster);
             /////////////////////////////////////////////////////
-            request.setAttribute(
-                    "successMessage",
-                    "Information : The Information is saved Successfully.");
             List<?> trainingList = trainingMasterService.read();
 
             mv.addObject(
                     "trainingList", trainingList);
 //            mv.setViewName(
 //                    "Training/TrainingMaster");
+            request.setAttribute(
+                    "successMessage",
+                    "Information : The Information is saved Successfully.");
             mv = showList(request, response, trainingMaster);
 
         }

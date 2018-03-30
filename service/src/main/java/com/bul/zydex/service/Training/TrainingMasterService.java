@@ -23,4 +23,6 @@ public interface TrainingMasterService<T> extends GenericsService<T> {
     public List<?> fetchtTrainingforFeedback(int traininigId, int user);
 
     public List<?> fetchtTrainingforFeedback1(int traininigId, int user);
+    
+    public List<?> fetchtTrainingforFeedback2(int traininigId);
 }

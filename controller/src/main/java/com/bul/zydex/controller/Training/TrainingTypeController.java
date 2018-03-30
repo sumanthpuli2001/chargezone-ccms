@@ -114,6 +114,9 @@ public class TrainingTypeController extends TrainingTypeAbstract {
             trainingType.setUpdatedby(user.getId());
             trainingTypeService.update(trainingType);
         }
+        request.setAttribute(
+                "successMessage",
+                "Information : The Information is saved Successfully.");
         mv = newtraining(request, response);
         return mv;
     }
@@ -132,12 +135,18 @@ public class TrainingTypeController extends TrainingTypeAbstract {
             trainingType.setCreateddate(dtf.format(localDate));
             trainingType.setCreatedby(user.getId());
             trainingSubTypeService.create(trainingType);
+            request.setAttribute(
+                    "successMessage",
+                    "Information : The Information is saved Successfully.");
         } else {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.now();
             trainingType.setUpdateddate(dtf.format(localDate));
             trainingType.setUpdatedby(user.getId());
             trainingSubTypeService.update(trainingType);
+            request.setAttribute(
+                    "successMessage",
+                    "Information : The Information is saved Successfully.");
         }
         mv = newsubtraining(request, response);
         return mv;
@@ -234,17 +243,17 @@ public class TrainingTypeController extends TrainingTypeAbstract {
         trainingMaster.setTrainer(trainer);
         trainingMaster.setTrainingSubType(trainingSubType);
         trainingMaster.setTrainingType(trainingType);
-        List attenlist=  new LinkedList();
-         attenlist =  trainingAttendanceService.gettrainingattendance(eventdate,Integer.parseInt(id));
-        boolean shosts=true;
-       
-       if(attenlist.isEmpty()){
-           shosts=false;
-           attenlist=  trainingIdentificationService.gettrainingattendance(Integer.parseInt(id));
-           
-       }
-       boolean showFeedbackButton = employeeFeedbackService.checkFeedbackforHR(trainingMaster.getId());
-       
+        List attenlist = new LinkedList();
+        attenlist = trainingAttendanceService.gettrainingattendance(eventdate, Integer.parseInt(id));
+        boolean shosts = true;
+
+        if (attenlist.isEmpty()) {
+            shosts = false;
+            attenlist = trainingIdentificationService.gettrainingattendance(Integer.parseInt(id));
+
+        }
+        boolean showFeedbackButton = employeeFeedbackService.checkFeedbackforHR(trainingMaster.getId());
+
         request.setAttribute("shosts", shosts);
         request.setAttribute("list", attenlist);
         request.setAttribute("showFeedbackButton", showFeedbackButton);

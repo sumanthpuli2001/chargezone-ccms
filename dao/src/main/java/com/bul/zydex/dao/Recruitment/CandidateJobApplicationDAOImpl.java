@@ -116,4 +116,16 @@ public class CandidateJobApplicationDAOImpl<T> extends GenericsDAOImpl<T> implem
         return i;
     }
 
+    @Override
+    public List<?> deleteVacancyId(String vacancyId) {
+        String query = "";
+
+        query += "  "
+                + " select a"
+                + " FROM CandidateJobApplication a "
+                + " WHERE a.vacancyMaster.id = " + vacancyId;
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

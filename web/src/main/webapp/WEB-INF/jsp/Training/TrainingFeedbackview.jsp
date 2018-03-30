@@ -18,6 +18,13 @@
             <li class="active">Feedback Details</li>
         </ol>
     </section>
+
+    <c:if test="${!empty successMessage}">
+        <div class="alert alert-info" role="alert">${successMessage}</div>
+    </c:if>
+    <c:if test="${!empty failureMessage}">
+        <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
+    </c:if>
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -26,7 +33,7 @@
                 <div class="nav-tabs-custom">
                     <div class="tab-content">
                         <!--<button type="submit" class="btn btn-danger" title="" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp;&nbsp;DELETE</button>-->
-                            <div class="row">
+                        <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <label>Employee Name : </label>&nbsp;&nbsp;${feedback[0][3]}
@@ -34,16 +41,16 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label>Description  : </label>&nbsp;&nbsp;${feedback[0][1]}
                                 </div>
-                                
+
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label>DateTime : </label>&nbsp;&nbsp;${feedback[0][2]}
                                 </div>
-                                
+
                             </div>
                         </div>
-                           
+
                     </div><!-- /.tab-content -->
 
 

@@ -120,7 +120,7 @@
         <button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="submitFormbyhome();"><i class="fa fa-home"></i>&nbsp&nbsp&nbsp;Home</button>
         <!--<button type="button" class="btn btn-primary" style="float: left; width: 130px;" onclick="submitFormbyLOgout();"><i class="fa fa-long-arrow-left"></i>&nbsp&nbsp&nbsp;Log Out</button>-->
         <!--<button type="button" class="btn btn-primary" style="float: left; width: 130px;" onclick="window.location = 'vacancy.htm?act=logout'"><i class="fa fa-long-arrow-left"></i>&nbsp&nbsp&nbsp;Log Out</button>-->
-        <label>Candidate User Name&nbsp : &nbsp&nbsp${sessionScope.ApplayJobUserMaster.userName}</label>
+        <label>Trainer User Name&nbsp : &nbsp&nbsp${sessionScope.ApplayJobUserMaster.userName}</label>
     </section>
     <c:if test="${!empty successMessage}">
         <div class="alert alert-info" role="alert">${successMessage}</div>

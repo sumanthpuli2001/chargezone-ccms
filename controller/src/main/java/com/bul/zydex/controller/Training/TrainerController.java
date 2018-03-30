@@ -46,7 +46,7 @@ public class TrainerController extends TrainerAbstract {
 
     public ModelAndView newEditTrainer(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        
+
         String id = request.getParameter("id");
         ModelAndView mv = new ModelAndView();
         Trainer trainer = trainerService.readById(Integer.parseInt(id));
@@ -74,21 +74,20 @@ public class TrainerController extends TrainerAbstract {
             mv.addAllObjects(errors.getModel());
             mv.setViewName("Training/RegistrationTrainer");
         } else {
-            if(null==trainer.getId()){
-            trainer.setCreatedDate(sdf.format(cDate));
-            trainer.setCreatedBy(user.getId());
-            trainerService.create(trainer);
-            request.setAttribute("successMessage",
-                    "Information : The Information is saved Successfully.");
+            if (null == trainer.getId()) {
+                trainer.setCreatedDate(sdf.format(cDate));
+                trainer.setCreatedBy(user.getId());
+                trainerService.create(trainer);
+
 //             mv.setViewName("Training/CreateTrainer");
+            } else {
+                trainer.setUpdatedDate(sdf.format(cDate));
+                trainer.setUpdatedBy(user.getId());
+                trainerService.update(trainer);
+               
             }
-            else{
-            trainer.setUpdatedDate(sdf.format(cDate));
-            trainer.setUpdatedBy(user.getId());
-            trainerService.update(trainer);
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
-            }
             mv = createTrainerShow(request, response);
         }
         return mv;

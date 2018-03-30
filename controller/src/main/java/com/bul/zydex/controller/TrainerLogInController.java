@@ -188,14 +188,66 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         Trainer user = (Trainer) session.getAttribute("trainerMaster");
         String eventdate = request.getParameter("eventdate");
         List attenlist = new LinkedList();
+        List newlist = new LinkedList();
+
         attenlist = trainingAttendanceService.gettrainerTasks(eventdate, Integer.parseInt(id));
         boolean shosts = true;
         boolean feedbackStatus = trainingAttendanceService.checkFeedbackstatus(Integer.parseInt(id));
         if (attenlist.isEmpty()) {
             shosts = false;
             attenlist = trainingIdentificationService.getTrainerAttendance(Integer.parseInt(id));
+            for (int i = 0; i < attenlist.size(); i++) {                      //  from
+                List fList = new ArrayList();
+                Object o = attenlist.get(i);
+                int size = attenlist.size();
+                int assessmentResult = 0;
+                Object str1[] = (Object[]) o;
+                Integer empId = (Integer) str1[0];
+                String name = (String) str1[1];
 
-        }
+                List<?> list = trainingAssessmentService.readTrainingAssementList(Integer.parseInt(id), empId);
+                if (!list.isEmpty()) {
+                    for (Object o2 : list) {
+                        Object str[] = (Object[]) o2;
+                        assessmentResult = (int) str[12];
+
+                    }
+                }
+                fList.add(empId);
+                fList.add(name);
+
+                fList.add(assessmentResult);
+                newlist.add(fList);
+
+            }
+
+        } else {
+
+            for (int i = 0; i < attenlist.size(); i++) {
+                List fList = new ArrayList();
+                Object o = attenlist.get(i);
+                int size = attenlist.size();
+                int assessmentResult = 0;
+                Object str1[] = (Object[]) o;
+                Integer empId = (Integer) str1[0];
+                String name = (String) str1[1];
+                Integer status = (Integer) str1[2];
+                List<?> list = trainingAssessmentService.readTrainingAssementList(Integer.parseInt(id), empId);
+                if (!list.isEmpty()) {
+                    for (Object o2 : list) {
+                        Object str[] = (Object[]) o2;
+                        assessmentResult = (int) str[12];
+
+                    }
+                }
+                fList.add(empId);
+                fList.add(name);
+                fList.add(status);
+                fList.add(assessmentResult);
+                newlist.add(fList);
+
+            }
+        }                                                            // to
         TrainingMaster trainingMaster1 = trainingMasterService.readById(Integer.parseInt(id));
         TrainingType trainingType = trainingTypeService.readById(trainingMaster1.getTrainingType().getId());
         TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster1.getTrainingSubType().getId());
@@ -232,7 +284,8 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         request.setAttribute("trainingMaster", trainingMaster1);
         request.setAttribute("shosts", shosts);
         request.setAttribute("eventdate", eventdate);
-        request.setAttribute("list", attenlist);
+        request.setAttribute("list", newlist);
+//        request.setAttribute("list", attenlist);
         request.setAttribute("trainingMasterId", id);
         request.setAttribute("feedbackStatus", feedbackStatus);
         mv.setViewName("Trainer/TrainerMasterlblView");
@@ -439,15 +492,15 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         Trainer user = (Trainer) session.getAttribute("trainerMaster");
 //        Trainer trainer= new Trainer();
         List<?> trainingFeedbackList = new ArrayList();
-        
-         trainingMaster = trainingMasterService.readById(Integer.parseInt(trainingId));
+
+        trainingMaster = trainingMasterService.readById(Integer.parseInt(trainingId));
         Trainer trainer = trainerService.readById(trainingMaster.getTrainer().getId());
         TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster.getTrainingSubType().getId());
         TrainingType trainingType = trainingTypeService.readById(trainingMaster.getTrainingType().getId());
         trainingMaster.setTrainer(trainer);
         trainingMaster.setTrainingSubType(trainingSubType);
         trainingMaster.setTrainingType(trainingType);
-        
+
 //        if (null != trainingId) {
         trainingFeedbackList = trainingMasterService.fetchtTrainingforFeedback2(Integer.parseInt(trainingId));
 //        }
@@ -471,7 +524,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         int id = Integer.parseInt(request.getParameter("id"));
         TrainingMaster trainingMaster1 = new TrainingMaster();
         trainingMaster1.setId(id);
-        
+
         TrainingMaster trainingMaster = trainingMasterService.readById(id);
         Trainer trainer = trainerService.readById(trainingMaster.getTrainer().getId());
         TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster.getTrainingSubType().getId());
@@ -479,8 +532,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         trainingMaster.setTrainer(trainer);
         trainingMaster.setTrainingSubType(trainingSubType);
         trainingMaster.setTrainingType(trainingType);
-        
-        
+
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
         questionList(request);
@@ -560,7 +612,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
 //
 //        }
         ModelAndView mv = new ModelAndView();
-         request.setAttribute(
+        request.setAttribute(
                 "successMessage",
                 "Information : Online Assessment Submited  Successfully.");
         mv = viewProfile1(request, response, "" + trainingMasterId, eventdate);

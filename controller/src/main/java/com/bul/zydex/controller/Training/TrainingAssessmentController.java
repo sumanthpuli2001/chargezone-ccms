@@ -76,7 +76,7 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
 
             }
         }
-       
+
         mv.getModelMap().put("list2", listOfFinalList);
         mv.getModelMap().put("trainingAssessment", trainingAssessment);
 //        mv.getModelMap().put("candidateApplyJobid", candidateApplyJobid);
@@ -232,7 +232,7 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
         trainingAssessment = trainingAssessmentService.readById(Integer.parseInt(candidateiD));
         trainingAssessment.setStatus(1);
         trainingAssessmentService.update(trainingAssessment);
-         request.setAttribute(
+        request.setAttribute(
                 "successMessage",
                 "Test Submited Sucessfully");
         return mv;
@@ -319,14 +319,65 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
             }
 
             List attenlist = new LinkedList();
+            List newlist = new LinkedList();
             attenlist = trainingAttendanceService.gettrainerTasks(eventdate, trMasterId);
             boolean shosts = true;
             boolean feedbackStatus = trainingAttendanceService.checkFeedbackstatus(trMasterId);
             if (attenlist.isEmpty()) {
                 shosts = false;
                 attenlist = trainingIdentificationService.getTrainerAttendance(trMasterId);
+                for (int i = 0; i < attenlist.size(); i++) {                ///from
+                    List fList = new ArrayList();
+                    Object o = attenlist.get(i);
+                    int size = attenlist.size();
+                    int assessmentResult = 0;
+                    Object str1[] = (Object[]) o;
+                    Integer empId = (Integer) str1[0];
+                    String name = (String) str1[1];
 
-            }
+                    List<?> list = trainingAssessmentService.readTrainingAssementList(trMasterId, empId);
+                    if (!list.isEmpty()) {
+                        for (Object o2 : list) {
+                            Object str[] = (Object[]) o2;
+                            assessmentResult = (int) str[12];
+
+                        }
+                    }
+                    fList.add(empId);
+                    fList.add(name);
+
+                    fList.add(assessmentResult);
+                    newlist.add(fList);
+
+                }
+
+            } else {
+
+                for (int i = 0; i < attenlist.size(); i++) {
+                    List fList = new ArrayList();
+                    Object o = attenlist.get(i);
+                    int size = attenlist.size();
+                    int assessmentResult = 0;
+                    Object str1[] = (Object[]) o;
+                    Integer empId = (Integer) str1[0];
+                    String name = (String) str1[1];
+                    Integer status = (Integer) str1[2];
+                    List<?> list = trainingAssessmentService.readTrainingAssementList(trMasterId, empId);
+                    if (!list.isEmpty()) {
+                        for (Object o2 : list) {
+                            Object str[] = (Object[]) o2;
+                            assessmentResult = (int) str[12];
+
+                        }
+                    }
+                    fList.add(empId);
+                    fList.add(name);
+                    fList.add(status);
+                    fList.add(assessmentResult);
+                    newlist.add(fList);
+
+                }
+            }                                                                    //   to
             TrainingMaster trainingMaster1 = trainingMasterService.readById(trMasterId);
             TrainingType trainingType = trainingTypeService.readById(trainingMaster1.getTrainingType().getId());
             TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster1.getTrainingSubType().getId());

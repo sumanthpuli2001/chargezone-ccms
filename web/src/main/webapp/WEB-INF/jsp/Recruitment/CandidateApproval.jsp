@@ -47,109 +47,253 @@
                                                    commandName="candidateApplyJob" action="recruitment.htm?act=assessmentClick">
                                             <input type="hidden" id="empreqid" name="empreqid" value="${mprMaster.id}">
 
+                                            <div class="box box-info collapsed-box ">
+                                                <div class="box-header">
+                                                    <h3 class="box-title">Man Power Requisition Detail:</h3>
+                                                    <div class="box-tools pull-right">
+                                                        <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>MPR Name:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span> ${vacancyName}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>MPR Budget:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span> ${Mprbudget}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Job Type:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${jobtypeNAme1}</span>    
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
+                                                                    <span >${designationName1}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Location:</label>  &nbsp;&nbsp;&nbsp;
+                                                                    <span >${locationName1}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Department:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${departmentName1}</span>   
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span> ${numberOfPositionMpr}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Work Experience(In Years): </label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${MprExperience}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Description:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span> ${Mprdescription}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
+                                            <div class="box box-info collapsed-box ">
+                                                <div class="box-header">
+                                                    <h3 class="box-title">Vacancy Detail:</h3>
+                                                    <div class="box-tools pull-right">
+                                                        <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun1()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Vacancy Name:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span> ${vacancyName}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Vacancy Created Date:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span> ${fromDate}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Vacancy End Date:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${toDate}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Location:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span> ${locationName}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${position}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Job Type:</label>  &nbsp;&nbsp;&nbsp;
+                                                                    <span >${jobtypeNAme}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Department:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${departmentName}</span>    
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
+                                                                    <span >${designationName}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Work Experience(In Years):</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${experiance}</span>   
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Description:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${description}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${position}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Candidate Name:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.name}</span>
+                                            <div class="box box-info collapsed-box ">
+                                                <div class="box-header">
+                                                    <h3 class="box-title">Candidate Detail:</h3>
+                                                    <div class="box-tools pull-right">
+                                                        <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun1()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                                    </div>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <label>Candidate D.O.B:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.dob}</span>
-                                                </div>
+                                                <div class="box-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Candidate Name:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.name}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Candidate D.O.B:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.dob}</span>
+                                                                </div>
 
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Father Name:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.fatherName}</span>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>Father D.O.B:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.fatherDob}</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Mother Name:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.motherName}</span>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>Mother D.O.B:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.motherDob}</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Sex:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.sex}</span>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>Photograph:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span><img src="StorageYard/candidateimage/${candidateApplyJob.photograph}" width="50px; !important" height="50px; !important">&nbsp;&nbsp;${candidateApplyJob.photograph}</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Present Address:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.presentAddress}</span>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>Permanent Address:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.permanentAddress}</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>City:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.city}</span>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>Blood Group:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.bloodGroup}</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Email Id:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.emailId}</span>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>contact No:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.contactNo}</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Emergency Contact Person:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.emergencyContactPerson}</span>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>Emergency Contact No:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.emergencyContactNo}</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Highest Education Qualification:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.highestEducationQualification}</span>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>Experience Date Joining Year:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.experianceDateJoiningYear}</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Experience Date Joining Month:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span>${candidateApplyJob.experianceDateJoiningMonth}</span>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>Resume Attach:</label> &nbsp;&nbsp;&nbsp;
-                                                    <span data="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}" type="application/pdf" width="500" height="300">
-                                                        <a href="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}">${candidateApplyJob.certificateAttach}</a>
-                                                    </span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Father Name:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.fatherName}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Father D.O.B:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.fatherDob}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Mother Name:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.motherName}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Mother D.O.B:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.motherDob}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Sex:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.sex}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Photograph:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span><img src="StorageYard/candidateimage/${candidateApplyJob.photograph}" width="50px; !important" height="50px; !important">&nbsp;&nbsp;${candidateApplyJob.photograph}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Present Address:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.presentAddress}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Permanent Address:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.permanentAddress}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>City:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.city}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Blood Group:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.bloodGroup}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Email Id:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.emailId}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>contact No:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.contactNo}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Emergency Contact Person:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.emergencyContactPerson}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Emergency Contact No:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.emergencyContactNo}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Highest Education Qualification:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.highestEducationQualification}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Experience Date Joining Year:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.experianceDateJoiningYear}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Experience Date Joining Month:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${candidateApplyJob.experianceDateJoiningMonth}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Resume Attach:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span data="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}" type="application/pdf" width="500" height="300">
+                                                                        <a href="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}">${candidateApplyJob.certificateAttach}</a>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -166,11 +310,11 @@
                                                     </c:if>
                                                     <c:if
                                                         test="${candidateJobApplication.status eq 2}">
-                                                        <button type="button" class="btn btn-primary" onclick="sendToF2F(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; F To F</button>
+                                                        <button type="button" class="btn btn-default" onclick="sendToF2F(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; F To F Interview</button>
                                                     </c:if>    
                                                     <c:if
                                                         test="${candidateJobApplication.status eq 6}">
-                                                        <button type="button" class="btn btn-primary" onclick="sendToF2F(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; F To F</button>
+                                                        <button type="button" class="btn btn-default" onclick="sendToF2F(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; F To F Interview</button>
                                                     </c:if>    
                                                     <c:if test="${candidateJobApplication.status eq 2}">
                                                         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>
@@ -327,6 +471,41 @@
         </div>
     </div>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <script>
+        function buttonFun1() {
+            var className = $('#minusId1').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId1').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId1').innerHTML = 'Expand';
+            }
+        }
+        function buttonFun2() {
+            var className = $('#minusId2').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId2').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId2').innerHTML = 'Expand';
+            }
+        }
+        function buttonFun3() {
+            var className = $('#minusId3').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId3').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId3').innerHTML = 'Expand';
+            }
+        }
+        function buttonFun4() {
+            var className = $('#minusId4').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId4').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId4').innerHTML = 'Expand';
+            }
+        }
+    </script>
+
 </html>
 <script>
     $(document).ready(function () {
@@ -352,23 +531,23 @@
                 data: {},
                 dataType: "json",
                 success: function (responseTxt) {
-//                    document.getElementById("name").value = JSON.stringify(responseTxt.check);
-//                    document.getElementById("email").value = JSON.stringify(responseTxt.val2);
-//                    document.getElementById("name").value = responseTxt
+                    //                    document.getElementById("name").value = JSON.stringify(responseTxt.check);
+                    //                    document.getElementById("email").value = JSON.stringify(responseTxt.val2);
+                    //                    document.getElementById("name").value = responseTxt
                     var v1 = JSON.stringify(responseTxt.check);
                     var v2 = JSON.stringify(responseTxt.val2);
-//                    $('#test2').html(responseTxt.check).modal('show');
-//                    $('#test').html(responseTxt.val2).modal('show');
+                    //                    $('#test2').html(responseTxt.check).modal('show');
+                    //                    $('#test').html(responseTxt.val2).modal('show');
                     document.getElementById("test2").innerHTML = responseTxt.check;
                     document.getElementById("test").innerHTML = responseTxt.val2;
 
                     document.getElementById("NoOfQue").value = responseTxt.val2;
                     document.getElementById("totalMarks").value = responseTxt.check;
-//                    $('#NoOfQue').val(v1);
-//                    $('#totalMarks').val(v2);
-//                    alert(JSON.stringify(responseTxt.check));
+                    //                    $('#NoOfQue').val(v1);
+                    //                    $('#totalMarks').val(v2);
+                    //                    alert(JSON.stringify(responseTxt.check));
 
-//                    document.getElementById("").innerHTML = responseTxt;
+                    //                    document.getElementById("").innerHTML = responseTxt;
                     if (responseTxt != '') {
                         document.getElementById("").value = "";
 

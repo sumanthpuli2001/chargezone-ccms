@@ -329,11 +329,9 @@
 
                                 <!--<div class="row">-->
                                 <div class="form-group">
-                                    <div class=" col-sm-2">
+                                    <div class=" col-sm-6 col-sm-offset-3">
                                         <input type="button"  class="btn btn-primary" value="Back"  onclick="window.location = 'trainerLogin.htm?act=showcalendar'" />
-                                    </div>
-                                    <div class=" col-sm-5">
-                                        <button type="submit" style="float: right" class="btn btn-primary" >Submit</button>
+                                        <button type="submit" style="width: 100px;" class="btn btn-primary" >Submit</button>
                                     </div>
 
                                 </div>

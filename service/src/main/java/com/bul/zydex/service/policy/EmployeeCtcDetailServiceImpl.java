@@ -31,6 +31,11 @@ public class EmployeeCtcDetailServiceImpl<T> extends GenericsServiceImpl<T> impl
       return employeeCtcDetailDAO.fetchctcData(empId);
     }
 
+    @Override
+    public List<?> readctc(int employeeid) {
+       return employeeCtcDetailDAO.readctc(employeeid);
+    }
+
     
       
 }

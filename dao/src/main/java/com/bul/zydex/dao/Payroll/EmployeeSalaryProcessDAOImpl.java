@@ -855,4 +855,39 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readEmployeeForPfGov(EmployeeMaster object) {
+        String query = "";
+        String condition = "";
+        EmployeeMaster employeeMaster = (EmployeeMaster) object;
+
+        if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
+            condition += " AND a.zydexLocationMaster.id = " + employeeMaster.getAdharCard();
+        }
+        if (!"".equals(employeeMaster.getEmployeeType()) && null != employeeMaster.getEmployeeType()) {
+            condition += " AND a.employeeTypeMaster.id = " + employeeMaster.getEmployeeType();
+        }
+        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
+            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
+        }
+        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
+            condition += " AND a.paymentType = " + employeeMaster.getPaymentType();
+        }
+        if (!"".equals(employeeMaster.getBankAccountNo()) && null != employeeMaster.getBankAccountNo()) {
+            condition += " AND b.month = '" + employeeMaster.getBankAccountNo() + "'";
+        }
+        if (!"".equals(employeeMaster.getPanCard()) && null != employeeMaster.getPanCard()) {
+            condition += " AND b.year = '" + employeeMaster.getPanCard() + "'";
+        }
+        query += " Select a.employeeId, a.employeeName,"
+                + " a.id,b.id,"
+                + " a.uanNo,b.grossTotal,a.pfAmount,a.dateOfBirth"
+                + " From EmployeeMaster a"
+                + " left join a.employeeSalaryProcesses b"
+                + " where b.month  ='" + employeeMaster.getBankAccountNo() + "'"
+                + " and b.year  ='" + employeeMaster.getPanCard() + "'";
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

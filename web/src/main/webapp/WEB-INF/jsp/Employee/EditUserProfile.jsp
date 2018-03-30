@@ -751,23 +751,23 @@
                                                             <label>Company:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select id="companyId" name="companyId" class="form-control ">
                                                             <c:choose>
-                                                                <c:when test="${company.contains('HIRA TECHNOSOFT')}">
+                                                                <c:when test="${company.contains('SPC Life Science')}">
 
-                                                                    <option value="HIRA TECHNOSOFT" selected="">HIRA TECHNOSOFT</option>
+                                                                    <option value="SPC Life Science" selected="">SPC Life Science</option>
                                                                 </c:when>
                                                                 <c:otherwise>
 
-                                                                    <option value="HIRA TECHNOSOFT">HIRA TECHNOSOFT.</option>
+                                                                    <option value="SPC Life Science">SPC Life Science.</option>
                                                                 </c:otherwise>
                                                             </c:choose>
                                                             <c:choose>
-                                                                <c:when test="${company.contains('HIRA TECHNOSOFT')}">
+                                                                <c:when test="${company.contains('SPC Life Science')}">
 
-                                                                    <option value="HIRA TECHNOSOFT" selected="">HIRA TECHNOSOFT</option>
+                                                                    <option value="SPC Life Science" selected="">SPC Life Science</option>
                                                                 </c:when>
                                                                 <c:otherwise>
 
-                                                                    <option value="HIRA TECHNOSOFT">HIRA TECHNOSOFT</option>
+                                                                    <option value="SPC Life Science">SPC Life Science</option>
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </select>

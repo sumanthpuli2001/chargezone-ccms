@@ -228,8 +228,11 @@
                                                     </c:if> 
 
                                             <input type="hidden" id="eventdate" name="eventdate" value="${eventdate}">
-                                            <c:if test="${list[3] eq null}">
+                                            <c:if test="${list[3] eq 2}">
                                                 <td><a type="button" class="btn btn-default" id="btnType1" onclick="window.location = 'trainerLogin.htm?act=goToAns&id=${list[0]}&eventdate=${eventdate}&trainingMasterId=${trainingMasterId}'" name="btnType" value="AssessMent">Check Paper</a></td>
+                                            </c:if> 
+                                            <c:if test="${list[3] eq 3}">
+                                                <td>Assessment Submitted</td>
                                             </c:if> 
                                             <c:if test="${list[3] eq 1}">
                                                 <td><label style="color: red;">FAIL</label></td>

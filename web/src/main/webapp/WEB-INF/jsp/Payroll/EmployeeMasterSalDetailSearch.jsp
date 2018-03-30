@@ -197,7 +197,7 @@
                                                         </tr>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <center>  <img src="StorageYard/Images/chem2.jpg" style="width:15%;height: 15%;" BORDER="0"/> </center> 
+                                                    <center>  <img src="StorageYard/Images/logo.png" style="width:15%;height: 15%;" BORDER="0"/> </center> 
 
                                                     <header>
                                                         <center><b><font size="4">Employee Salary Yearly</font></b></center> 

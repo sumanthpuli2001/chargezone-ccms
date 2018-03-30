@@ -231,6 +231,7 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
 //                }
         trainingAssessment = trainingAssessmentService.readById(Integer.parseInt(candidateiD));
         trainingAssessment.setStatus(1);
+        trainingAssessment.setAssessmentResultStatus(2);   // 2 for assessment submit by user
         trainingAssessmentService.update(trainingAssessment);
         request.setAttribute(
                 "successMessage",

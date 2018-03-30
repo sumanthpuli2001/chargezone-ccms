@@ -17,5 +17,6 @@ public interface EmployeeCtcDetailService<T> extends GenericsService<T> {
 
     public List<?> fetchctcData(int empId);
 
-  
+    public List<?> readctc(int employeeid);
+
 }

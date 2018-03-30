@@ -226,9 +226,18 @@
                                                     <c:if test="${shosts eq false}">
                                                         <td></td>
                                                     </c:if> 
+
                                             <input type="hidden" id="eventdate" name="eventdate" value="${eventdate}">
-                                            <td><a type="button" class="btn btn-default" id="btnType1" onclick="window.location = 'trainerLogin.htm?act=goToAns&id=${list[0]}&eventdate=${eventdate}&trainingMasterId=${trainingMasterId}'" name="btnType" value="AssessMent">Check Paper</a></td>
-                                            <!--<td><a type="button" class="btn btn-default" id="btnType1" onclick="goToAns(${list[0]},${trainingMasterId},${eventdate})" name="btnType" value="AssessMent">Training Assessment</a></td>-->
+                                            <c:if test="${list[3] eq null}">
+                                                <td><a type="button" class="btn btn-default" id="btnType1" onclick="window.location = 'trainerLogin.htm?act=goToAns&id=${list[0]}&eventdate=${eventdate}&trainingMasterId=${trainingMasterId}'" name="btnType" value="AssessMent">Check Paper</a></td>
+                                            </c:if> 
+                                            <c:if test="${list[3] eq 1}">
+                                                <td><label style="color: red;">FAIL</label></td>
+                                            </c:if> 
+                                            <c:if test="${list[3] eq 0}">
+                                                <td><label style="color: green;">PASS</label></td>
+                                            </c:if> 
+                                    <!--<td><a type="button" class="btn btn-default" id="btnType1" onclick="goToAns(${list[0]},${trainingMasterId},${eventdate})" name="btnType" value="AssessMent">Training Assessment</a></td>-->
                                             <!--</td>-->
                                             </tr>
                                         </c:forEach>

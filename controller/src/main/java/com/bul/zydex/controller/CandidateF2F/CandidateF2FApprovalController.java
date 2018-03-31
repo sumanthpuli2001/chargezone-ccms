@@ -15,6 +15,7 @@ import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.JobtypeMaster;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprMaster;
+import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.VacancyMaster;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         candidateApplyJob = candidateJobApplyService.readById(candidateF2FRequest.getCandidateApplyJob().getId());
         VacancyMaster vm = vacancyMasterService.readById(candidateF2FRequest.getVacancyMaster().getId());
         MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
+        RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
         List<CandidateF2FApproval> committeedetaillist = new ArrayList<>();
         List<CandidateF2FApproval> comitteeList = (List<CandidateF2FApproval>) candidateF2FApprovalService.readByReqId(candidateF2FRequest.getId());
         for (CandidateF2FApproval cffa : comitteeList) {
@@ -107,6 +109,35 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         String experiance = vm.getExperience();
         int salaryRange = vm.getSalaryRange();
         int position = vm.getNumberOfPosition();
+        
+//        /        Mpp Master --------------------
+        int jobtypeId2 = rm.getJobtypeMaster().getId();
+        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+        String jobtypeNAme2 = jobtypeMaster.getJobTypeName();
+
+        int department2 = rm.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        String departmentName2 = departmentMaster.getDepartmentName();
+
+        int localtion2 = rm.getLocationMaster().getId();
+        locationMaster = locationMasterService.readById(localtion);
+        String locationName2 = locationMaster.getLocation();
+
+        int designation2 = rm.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(designation);
+        String designationName2 = designationMaster.getDesignationName();
+
+        int numberOfPositionMpp = rm.getNumberOfPosition();
+        int Mppbudget = rm.getBudget();
+        String MppExperience = rm.getExperiance();
+
+        request.setAttribute("jobtypeNAme2", jobtypeNAme2);
+        request.setAttribute("departmentName2", departmentName2);
+        request.setAttribute("locationName2", locationName2);
+        request.setAttribute("designationName2", designationName2);
+        request.setAttribute("numberOfPositionMpp", numberOfPositionMpp);
+        request.setAttribute("Mppbudget", Mppbudget);
+        request.setAttribute("MppExperience", MppExperience);
 
         //        MPR Master -------------
         int jobtypeId1 = mm.getJobtypeMaster().getId();

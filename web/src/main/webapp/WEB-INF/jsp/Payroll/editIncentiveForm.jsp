@@ -33,7 +33,7 @@
         <section class="content">
             <div class="row" id="printDiv">
 
-                <center><img src="StorageYard/Images/chem2.jpg" style="width:14%;height: 14%;" BORDER="0"/> </center>
+                <center><img src=" StorageYard/Images/logo.png" style="width:14%;height: 14%;" BORDER="0"/> </center>
                     <%
                         Date date = new Date();
                         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");

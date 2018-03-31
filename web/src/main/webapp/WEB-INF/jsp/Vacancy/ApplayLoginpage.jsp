@@ -97,7 +97,7 @@
                                 <label>Email Id:<span style="color: red;font-size: 12px;">*</span></label>
                             </div>
                             <div class="col-sm-3">
-                                <form:input path="userName" class="form-control" placeholder="Name"></form:input>
+                                <form:input path="userName" class="form-control" placeholder="userName"></form:input>
                                 <form:errors path="userName" cssClass="errorDiv"></form:errors>
                                 </div>
 
@@ -105,7 +105,7 @@
                                     <label>Password :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3">
-                                <form:password path="password" class="form-control" placeholder="Name"></form:password>
+                                <form:password path="password" class="form-control" placeholder="password"></form:password>
                                 <form:errors path="password" cssClass="errorDiv"></form:errors>
                                 </div>
                             </div>

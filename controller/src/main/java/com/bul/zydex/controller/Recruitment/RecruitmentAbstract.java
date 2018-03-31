@@ -23,6 +23,7 @@ import com.bul.zydex.model.QulificationMaster;
 //import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMppApproval;
+import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.Approval.ApprovalUserService;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.MprApproval.MprApprovalService;
@@ -34,6 +35,7 @@ import com.bul.zydex.service.Recruitment.MprMasterService;
 import com.bul.zydex.service.Recruitment.QulificationMasterService;
 import com.bul.zydex.service.Recruitment.RecruitmentService;
 import com.bul.zydex.service.RecruitmentMppApproval.RecruitmentMppApprovalService;
+import com.bul.zydex.service.Vacancy.VacancyMasterService;
 import com.bul.zydex.service.emp.DesignationMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.service.questionlibrary.QuestionPaperService;
@@ -64,6 +66,7 @@ public class RecruitmentAbstract extends CustomAbstract {
     protected QuestionPaperService<QuestionPaper> questionPaperService;
     protected RecruitmentMppApprovalService<RecruitmentMppApproval> recruitmentMppApprovalService;
     protected CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService;
+    protected VacancyMasterService<VacancyMaster> vacancyMasterService;
 
     public MprMasterService<MprMaster> getMprMasterService() {
         return mprMasterService;
@@ -167,6 +170,14 @@ public class RecruitmentAbstract extends CustomAbstract {
 
     public void setCandidateJobApplicationService(CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService) {
         this.candidateJobApplicationService = candidateJobApplicationService;
+    }
+
+    public VacancyMasterService<VacancyMaster> getVacancyMasterService() {
+        return vacancyMasterService;
+    }
+
+    public void setVacancyMasterService(VacancyMasterService<VacancyMaster> vacancyMasterService) {
+        this.vacancyMasterService = vacancyMasterService;
     }
     
     

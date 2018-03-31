@@ -13,6 +13,7 @@ import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.JobtypeMaster;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprMaster;
+import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.CandidateF2FApproval.CandidateF2FApprovalService;
 import com.bul.zydex.service.CandidateF2FRequest.CandidateF2FRequestService;
@@ -20,6 +21,7 @@ import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
 import com.bul.zydex.service.Recruitment.MprMasterService;
+import com.bul.zydex.service.Recruitment.RecruitmentService;
 import com.bul.zydex.service.Vacancy.VacancyMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
 
@@ -37,7 +39,16 @@ public class CandidateF2FApprovalAbstract extends CustomAbstract {
     protected JobtypeMasterService<JobtypeMaster> jobtypeMasterService;
     protected LocationMasterService<LocationMaster> locationMasterService;
     protected MprMasterService<MprMaster> mprMasterService;
+    protected RecruitmentService<RecruitmentMaster> recruitmentService;
 
+    public RecruitmentService<RecruitmentMaster> getRecruitmentService() {
+        return recruitmentService;
+    }
+
+    public void setRecruitmentService(RecruitmentService<RecruitmentMaster> recruitmentService) {
+        this.recruitmentService = recruitmentService;
+    }
+    
     public CandidateF2FRequestService<CandidateF2FRequest> getCandidateF2FRequestService() {
         return candidateF2FRequestService;
     }
@@ -101,9 +112,5 @@ public class CandidateF2FApprovalAbstract extends CustomAbstract {
     public void setMprMasterService(MprMasterService<MprMaster> mprMasterService) {
         this.mprMasterService = mprMasterService;
     }
-    
-    
-    
-    
 
 }

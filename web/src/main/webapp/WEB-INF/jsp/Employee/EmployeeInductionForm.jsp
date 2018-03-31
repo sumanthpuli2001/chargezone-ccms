@@ -843,7 +843,7 @@
                                                             <label>Company:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="company" id="company" class="form-control ">
                                                             <form:option value="">--SELECT--</form:option>
-                                                            <form:option value="HIRA TECHNOSOFT">HIRA TECHNOSOFT </form:option>
+                                                            <form:option value="SPC Life Science">SPC Life Science </form:option>
                                                             <%--<form:option value="Zydex Industries Pvt. Ltd.">Zydex Industries Pvt. Ltd.</form:option>--%>
                                                         </form:select>
                                                         <form:errors path="company" cssClass="errorDiv"></form:errors>

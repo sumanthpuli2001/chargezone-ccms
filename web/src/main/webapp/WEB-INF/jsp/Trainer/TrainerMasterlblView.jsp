@@ -165,7 +165,7 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="table table-bordered">
 
-                            <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="center"  >
+                            <table id="table_1" class="table table-bordered table-striped" style="" align="center"  >
                                 <c:choose>
                                     <c:when test="${empty list}">
                                         <tr>
@@ -182,6 +182,7 @@
                                                 <c:if test="${shosts eq true}">
                                                     <c:if test="${shosts2 eq true}">
                                                         <th style="width: 50px;">SR. No</th>
+                                                            <%--</c:if>--%> 
                                                         </c:if> 
                                                     </c:if> 
                                                     <c:if test="${shosts eq false}">
@@ -189,9 +190,9 @@
                                                         <th align="Center" style="width: 1px;"><input type="checkbox" id="toggleId" align="Center" ></th>
                                                         </c:if> 
                                                     </c:if> 
-                                                <th style="width: 50px;">Trainings</th>
+                                                <th style="width: 50px;">Training</th>
                                                 <th style="width: 50px;">Attendance</th>
-                                                <th style="width: 50px;">CheckPaper</th>
+                                                <th style="width: 50px;">Status</th>
 
                                             </tr>
                                         </thead>
@@ -225,10 +226,24 @@
                                                     <c:if test="${shosts eq false}">
                                                         <td></td>
                                                     </c:if> 
-                                                    <td><button type="button" class="btn btn-primary" id="btnType1" onclick="goToAns(${list[0]})" name="btnType" value="AssessMent" style="width: 100px" >Ans</button></td>
-                                                    <!--</td>-->
-                                                </tr>
-                                            </c:forEach>
+
+                                            <input type="hidden" id="eventdate" name="eventdate" value="${eventdate}">
+                                            <c:if test="${list[3] eq 2}">
+                                                <td><a type="button" class="btn btn-default" id="btnType1" onclick="window.location = 'trainerLogin.htm?act=goToAns&id=${list[0]}&eventdate=${eventdate}&trainingMasterId=${trainingMasterId}'" name="btnType" value="AssessMent">Check Paper</a></td>
+                                            </c:if> 
+                                            <c:if test="${list[3] eq 3}">
+                                                <td>Assessment Submitted</td>
+                                            </c:if> 
+                                            <c:if test="${list[3] eq 1}">
+                                                <td><label style="color: red;">FAIL</label></td>
+                                            </c:if> 
+                                            <c:if test="${list[3] eq 0}">
+                                                <td><label style="color: green;">PASS</label></td>
+                                            </c:if> 
+                                    <!--<td><a type="button" class="btn btn-default" id="btnType1" onclick="goToAns(${list[0]},${trainingMasterId},${eventdate})" name="btnType" value="AssessMent">Training Assessment</a></td>-->
+                                            <!--</td>-->
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
 
                                     </c:otherwise>

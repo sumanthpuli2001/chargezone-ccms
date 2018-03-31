@@ -5,7 +5,7 @@
   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-       <class name="com.bul.zydex.model.TrainingAssessment" table="training_assessment" catalog="hr_power_astral" optimistic-lock="version">
+    <class name="com.bul.zydex.model.TrainingAssessment" table="training_assessment" catalog="hr_power_astral" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -57,6 +57,9 @@
         </property>
         <property name="StartTimeNow" type="string">
             <column name="Start_time_now" length="45" />
+        </property>
+        <property name="assessmentResultStatus" type="java.lang.Integer">
+            <column name="assessment_result_status" />
         </property>
     </class>
   

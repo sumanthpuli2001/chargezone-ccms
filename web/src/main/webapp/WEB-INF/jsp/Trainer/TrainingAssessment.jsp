@@ -211,7 +211,7 @@
                                             <input type="hidden" id="eventdate" name="eventdate" value="${eventdate}">
                                             <label>Question Paper Name :<span style="color: red;font-size: 12px;"></span></label>
 
-                                            <select name="questionPaper.id" class="form-control" id="questions" onchange="getTotalMarksAndNoOfQue(this);" style="font-size:13px;    height: 25px;     padding: 3px 12px;">
+                                            <select name="questionPaper.id" class="form-control" id="questions" onchange="getTotalMarksAndNoOfQue(this);" required="true">
                                                 <option value="">--Select--</option>
                                                 <c:forEach items="${questions}" var="questions">
                                                     <option value="${questions.key}">${questions.value}</option>
@@ -220,13 +220,15 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Passing Percentage : <span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:input path="passingPercentage" id="passingPercentage" class="form-control" placeholder="Enter Passing Percentage" style="font-size:13px;height: 25px;"></form:input>
+                                            <form:input path="passingPercentage" id="passingPercentage" class="form-control" onkeypress="return isNumberKey(event)"
+                                                        placeholder="Enter Passing Percentage" required="true"></form:input>
                                             <form:errors path="passingPercentage" cssClass="errorDiv"></form:errors>
 
                                             </div>
                                             <div class="col-sm-3">
                                                 <label>Duration (In Minutes):<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:input path="duration" id="duration" class="form-control" placeholder="Enter Duration" style="font-size:13px;    height: 25px;"></form:input>
+                                            <form:input path="duration" id="duration" class="form-control" placeholder="Enter Duration"
+                                                        onkeypress="return isNumberKey(event)" required="true"></form:input>
                                             <form:errors path="duration" cssClass="errorDiv"></form:errors>
                                             </div>
                                             <div class="col-sm-3    ">
@@ -239,16 +241,22 @@
                                         <%--<form:input path="id" id="id" class="form-control" type="hidden"></form:input>--%>
 
                                         <!--                                            <input type="text" id="datetimepicker2" class="form-control" placeholder="Please select From Date" name="validityFrom" readonly="true"/>-->
-                                        
-                                            <div class="col-sm-3">
+                                        <div class="col-sm-4    ">
+                                            <label>Validity From :<span style="color: red;font-size: 12px;"></span></label>
+                                                <form:input path="validityFrom" id="datepicker1" class="form-control" placeholder="Please select From Date" readonly="true" 
+                                                            required="true"></form:input>
+                                                <!--<span style="color: red;font-size: 12px;"><form:errors path="validityFrom" cssClass="errorDiv"></form:errors></span>-->
+                                            </div>
+                                            <div class="col-sm-4">
                                             <%--<form:input path="id" id="id" class="form-control" type="hidden"></form:input>--%>
 
                                             <label>Validity To :<span style="color: red;font-size: 12px;"></span></label>
-                                            <input type="text" id="datepicker2" class="form-control" name="validityTo" placeholder="Please select To Date" readonly="true" style="font-size:13px;    height: 25px;"/>
+                                            <input type="text" id="datepicker2" class="form-control" name="validityTo" placeholder="Please select To Date" readonly="true" required="true"/>
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Number Of Attempts :<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:input path="noOfAttampt" id="noOfAttampt" class="form-control" placeholder="Enter Number Of Attempt" style="font-size:13px;     height: 25px;"></form:input>
+                                            <form:input path="noOfAttampt" id="noOfAttampt" class="form-control" placeholder="Enter Number Of Attempt"
+                                                        onkeypress="return isNumberKey(event)" required="true"></form:input>
                                             <form:errors path="noOfAttampt" cssClass="errorDiv"></form:errors>
                                             </div>
                                              <div class="col-sm-3>
@@ -352,12 +360,10 @@
 
 
                                 <!--<div class="row">-->
-                                <div class="form-group" style="float: right; margin-right:3%;">
-                                    <div class=" col-sm-2" style="padding-right:26%;">
-                                        <input type="button"  class="btn btn-primary" value="Back"  onclick="window.location = 'trainerLogin.htm?act=showcalendar'" style="background-color: #19b9e7; font-size: 11px;"/>
-                                    </div>
-                                    <div class=" col-sm-2">
-                                        <button type="submit"  class="btn btn-primary" style=" font-size: 11px;height: 29px;padding: 0 12px; ">Submit</button>
+                                <div class="form-group">
+                                    <div class=" col-sm-6 col-sm-offset-3">
+                                        <input type="button"  class="btn btn-primary" value="Back"  onclick="window.location = 'trainerLogin.htm?act=showcalendar'" />
+                                        <button type="submit" style="width: 100px;" class="btn btn-primary" >Submit</button>
                                     </div>
 
                                 </div>
@@ -463,4 +469,15 @@
 
         }
 
+</script>
+<script>
+    function isNumberKey(evt)
+    {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode != 46 && charCode > 31
+                && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
 </script>

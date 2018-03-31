@@ -109,8 +109,8 @@
                                                         <label class="form-check-label" for="radio100${employeeAdditional[6]}">Correct</label>
                                                     </div>
                                                     <div class="col-sm-1">
-                                                        <input class="form-check-input" name="mcqStatus${status.count}" type="radio"  value="1" >
-                                                        <label class="form-check-label" for="radio100${employeeAdditional[6]}">Incorrect</label>
+                                                        <input class="form-check-input" id="check" name="mcqStatus${status.count}"  type="radio"  value="1" >
+                                                        <label class="form-check-label"   for="radio100${employeeAdditional[6]}">Incorrect</label>
                                                     </div>
                                                     <div class="col-sm-2">
 
@@ -266,7 +266,7 @@
                 givenMarks2 = 0
             } else {
                 givenMarks2 = document.getElementById("givenMarks2" + i).value;
-                
+
                 ttlm = ttlm + Number(givenMarks2);
             }
             if (document.getElementById("givenMarks3" + i) == null) {
@@ -274,7 +274,7 @@
             } else {
                 givenMarks3 = document.getElementById("givenMarks3" + i).value;
                 ttlm = ttlm + Number(givenMarks3);
-                
+
             }
         }
 
@@ -283,10 +283,10 @@
         var ttm = document.getElementById("ttm").value;
 //        var text_value1 = $("#givenMarks1").val();
 //        var text_value3 = $("#givenMarks3").val();
-       
+
 //        var ttlm = Number(givenMarks2) + Number(givenMarks3);
         var per = (ttlm * 100) / Number(ttm);
-        
+
         document.getElementById("obtainTT").innerHTML = ttlm;
         document.getElementById("per").innerText = Number(per).toFixed(2);
         document.getElementById("percentageResult").value = Number(per).toFixed(2);
@@ -329,4 +329,14 @@
 //            }
 //        });
 //    });
+</script>
+<script>
+
+    document.getElementById("check").addEventListener("click", myFunction);
+
+    function myFunction() {
+        alert("iink");
+        document.getElementById("checkInco").innerHTML = "0";
+    }
+
 </script>

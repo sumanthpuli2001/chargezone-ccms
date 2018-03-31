@@ -616,4 +616,7 @@
     <bean id="employeeCtcDetailService1" class="com.bul.zydex.service.policy.EmployeeCtcDetailServiceImpl">
         <property name="employeeCtcDetailDAO" ref="employeeCtcDetailDAO1"/>
     </bean>
+    <bean id="retirementAgeService1" class="com.bul.zydex.service.Payroll.RetirementAgeServiceImpl">
+        <property name="retirementAgeDAO" ref="retirementAgeDAO1"/>
+    </bean>
 </beans>

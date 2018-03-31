@@ -139,7 +139,7 @@ public class EmployeeSalaryProcessServiceImpl<T> extends GenericsServiceImpl<T> 
 
     @Override
     public List<?> readEmployeeForBankStatement(EmployeeMaster object) {
-       return employeeSalaryProcessDAO.readEmployeeForBankStatement(object);
+        return employeeSalaryProcessDAO.readEmployeeForBankStatement(object);
     }
 
     @Override
@@ -159,12 +159,12 @@ public class EmployeeSalaryProcessServiceImpl<T> extends GenericsServiceImpl<T> 
 
     @Override
     public List<?> readEmployeeYearlySalary(EmployeeMaster object) {
-       return employeeSalaryProcessDAO.readEmployeeYearlySalary(object);
+        return employeeSalaryProcessDAO.readEmployeeYearlySalary(object);
     }
 
     @Override
     public List<?> readsalyearly(int empID) {
-     return employeeSalaryProcessDAO.readsalyearly(empID);
+        return employeeSalaryProcessDAO.readsalyearly(empID);
     }
 
     @Override
@@ -174,17 +174,17 @@ public class EmployeeSalaryProcessServiceImpl<T> extends GenericsServiceImpl<T> 
 
     @Override
     public List<?> readEmpSalaryReportyearly(int empID) {
-         return employeeSalaryProcessDAO.readEmpSalaryReportyearly(empID);
+        return employeeSalaryProcessDAO.readEmpSalaryReportyearly(empID);
     }
 
     @Override
-    public List<?> readEmployeebyEmpolyeeSalary(int EmpId,String month,String year) {
-       return employeeSalaryProcessDAO.readEmployeebyEmpolyeeSalary(EmpId, month, year);
+    public List<?> readEmployeebyEmpolyeeSalary(int EmpId, String month, String year) {
+        return employeeSalaryProcessDAO.readEmployeebyEmpolyeeSalary(EmpId, month, year);
     }
 
     @Override
     public List<?> readEmployeeMasterID(int employeeSalaryProcessId) {
-      return employeeSalaryProcessDAO.readEmployeeMasterID(employeeSalaryProcessId);
+        return employeeSalaryProcessDAO.readEmployeeMasterID(employeeSalaryProcessId);
     }
 
     @Override
@@ -195,6 +195,11 @@ public class EmployeeSalaryProcessServiceImpl<T> extends GenericsServiceImpl<T> 
     @Override
     public List<?> readsalDeductionSearch(EmployeeMaster object) {
         return employeeSalaryProcessDAO.readsalDeductionSearch(object);
+    }
+
+    @Override
+    public List<?> readEmployeeForPfGov(EmployeeMaster object) {
+        return employeeSalaryProcessDAO.readEmployeeForPfGov(object);
     }
 
 }

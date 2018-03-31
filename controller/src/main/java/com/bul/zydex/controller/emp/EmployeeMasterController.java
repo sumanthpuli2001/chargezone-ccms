@@ -1026,6 +1026,31 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 }
             }
         }
+
+        EmployeeCtcDetail employeeCtcDetail = new EmployeeCtcDetail();
+//       Boolean check =  employeePolicyDetailService.deleteByEmployeeId(employeeMaster.getId());
+        List<?> ctcDetail = employeeCtcDetailService.readctc(employeeMaster.getId());
+        for (Object policyObject : ctcDetail) {
+            employeeCtcDetail = (EmployeeCtcDetail) policyObject;
+            employeeCtcDetailService.delete(employeeCtcDetail.getId());
+        }
+//        EmployeeCtcDetail employeeCtcDetail = new EmployeeCtcDetail();
+        int otherDetailCount1 = Integer.parseInt(request.getParameter("ctcCount"));
+        for (int i = 1; i <= otherDetailCount1; i++) {
+            CtcAllowance ctcAllowance = new CtcAllowance();
+            if (null != request.getParameter("ctcId" + i) && null != request.getParameter("ctcamount" + i)) {
+                if (!request.getParameter("ctcId" + i).equals("") && !request.getParameter("ctcamount" + i).equals("")) {
+                    int ctcId = Integer.parseInt(request.getParameter("ctcId" + i));
+                    ctcAllowance.setId(ctcId);
+                    Double amount = Double.valueOf(request.getParameter("ctcamount" + i));
+//                        String policyNumber = request.getParameter("policyNumber" + i);
+                    employeeCtcDetail.setEmployeeMaster(employeeMaster);
+                    employeeCtcDetail.setAmount(amount);
+                    employeeCtcDetail.setCtcAllowance(ctcAllowance);
+                    employeeCtcDetailService.create(employeeCtcDetail);
+                }
+            }
+        }
         //End
 //        String firstStepCount = request.getParameter("firstStepCount");
 //        for (int i = 1; i <= Integer.parseInt(firstStepCount); i++) {

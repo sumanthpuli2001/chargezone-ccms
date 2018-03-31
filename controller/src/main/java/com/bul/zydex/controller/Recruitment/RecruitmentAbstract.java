@@ -20,6 +20,7 @@ import com.bul.zydex.model.MprEmployeeTypeMaster;
 import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.QuestionPaper;
 import com.bul.zydex.model.QulificationMaster;
+import com.bul.zydex.model.RecruitmentApprovalHistory;
 //import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMppApproval;
@@ -34,6 +35,7 @@ import com.bul.zydex.service.Recruitment.MprEmployeeTypeMasterService;
 import com.bul.zydex.service.Recruitment.MprMasterService;
 import com.bul.zydex.service.Recruitment.QulificationMasterService;
 import com.bul.zydex.service.Recruitment.RecruitmentService;
+import com.bul.zydex.service.RecruitmentApprovalHistory.RecruitmentApprovalHistoryService;
 import com.bul.zydex.service.RecruitmentMppApproval.RecruitmentMppApprovalService;
 import com.bul.zydex.service.Vacancy.VacancyMasterService;
 import com.bul.zydex.service.emp.DesignationMasterService;
@@ -67,6 +69,7 @@ public class RecruitmentAbstract extends CustomAbstract {
     protected RecruitmentMppApprovalService<RecruitmentMppApproval> recruitmentMppApprovalService;
     protected CandidateJobApplicationService<CandidateJobApplication> candidateJobApplicationService;
     protected VacancyMasterService<VacancyMaster> vacancyMasterService;
+    protected RecruitmentApprovalHistoryService<RecruitmentApprovalHistory> recruitmentApprovalHistoryService;
 
     public MprMasterService<MprMaster> getMprMasterService() {
         return mprMasterService;
@@ -178,6 +181,14 @@ public class RecruitmentAbstract extends CustomAbstract {
 
     public void setVacancyMasterService(VacancyMasterService<VacancyMaster> vacancyMasterService) {
         this.vacancyMasterService = vacancyMasterService;
+    }
+
+    public RecruitmentApprovalHistoryService<RecruitmentApprovalHistory> getRecruitmentApprovalHistoryService() {
+        return recruitmentApprovalHistoryService;
+    }
+
+    public void setRecruitmentApprovalHistoryService(RecruitmentApprovalHistoryService<RecruitmentApprovalHistory> recruitmentApprovalHistoryService) {
+        this.recruitmentApprovalHistoryService = recruitmentApprovalHistoryService;
     }
     
     

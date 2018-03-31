@@ -22,7 +22,7 @@
         <property name="status" type="java.lang.Integer">
             <column name="status" />
         </property>
-        <property name="statusMessage" type="java.lang.Integer">
+        <property name="statusMessage" type="string">
             <column name="status_message" />
         </property>
         <property name="createDate" type="string">
@@ -31,7 +31,9 @@
         <property name="createdBy" type="java.lang.Integer">
             <column name="created_by" />
         </property>
-        
+           <many-to-one name="recruitmentMaster" class="com.bul.zydex.model.RecruitmentMaster" fetch="select">
+            <column name="mpp_id" />
+        </many-to-one>
     </class>
   
 

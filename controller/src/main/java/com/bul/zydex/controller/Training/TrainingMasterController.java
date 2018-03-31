@@ -84,12 +84,12 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         selectEmployee(request, response);
         
         
-        selectedEmployeeFor360Feedback(request, employeeMaster);
         
         int employee = em.getId();
         employeeMaster = (EmployeeMaster)employeeMasterService.readById(employee);
         String employeeName = employeeMaster.getEmployeeName();
 
+        selectedEmployeeFor360Feedback(request, employeeMaster);
         trainingMaster.setTrainer(trainer);
         trainingMaster.setTrainingType(trainingType);
         trainingMaster.setTrainingSubType(trainingSubType);

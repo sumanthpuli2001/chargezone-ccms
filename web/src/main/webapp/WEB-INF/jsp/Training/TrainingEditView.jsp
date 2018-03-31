@@ -218,8 +218,10 @@
                                         <!--${list}-->
                                         <!--${employeeMaster.employeeName}-->
                                         <label class="control-label">Training Requester<span style="color: red;font-size: 12px;"></span></label>
-                                        <form:input path="trainingOwner" class="form-control"/>
-                                        <form:input path="trainingOwner" class="form-control" name="policyId1" id="policyId1"></form:input>
+                                        <%--<form:input path="trainingOwner" value="${employeeMaster.employeeName}" class="form-control" disabled="true"/>--%>
+                                        <!--<br>-->
+                                        <%--<form:input path="trainingOwner" class="form-control" name="policyId1" id="policyId1"></form:input>--%>
+                                        <form:input path="trainingOwner" class="form-control"></form:input>
                                     </div>
                                     <div class="col-sm-5">
                                         <!--${trainingMaster.trainer.trainerName}-->
@@ -397,17 +399,26 @@
             </script>
             <script type="text/javascript">
     jQuery.noConflict();
-    jQuery(document).ready(function () {
+//    jQuery(document).ready(function () {
+//
+//        jQuery("#policyId1").tokenInput(${list}, {
+//            preventDuplicates: true,
+//            noResultsText: "No Result",
+//            tokenLimit: "1",
+//            searchingText: "Searching ... .. .",
+//            prePopulate: ${preList}
+//        });
+//    });
 
-        jQuery("#policyId1").tokenInput(${list}, {
-            preventDuplicates: true,
-            noResultsText: "No Result",
-            tokenLimit: "1",
-            searchingText: "Searching ... .. .",
-            prePopulate: ${preList}
+jQuery(document).ready(function () {
+            jQuery("#trainingOwner").tokenInput(${list}, {
+                preventDuplicates: true,
+                noResultsText: "No Result",
+                tokenLimit: "1",
+                searchingText: "Searching ... .. .",
+                prePopulate: ${preList},
+            });
         });
-    });
-
 </script>
             <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 

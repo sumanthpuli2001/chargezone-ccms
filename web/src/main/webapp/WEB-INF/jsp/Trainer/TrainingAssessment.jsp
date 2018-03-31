@@ -94,12 +94,14 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Training Details:</h1>
+            <h2>Training Details:</h2>
             <ol class="breadcrumb" style="    padding: 0px 15px;font-size:13px;">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Training Details</li>
             </ol>
         </section>
+        
+        <div style="text-align: left;">
         <c:if test="${!empty successMessage}">
             <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
         </c:if>
@@ -123,48 +125,46 @@
                                 <div class="row" style="margin-left:9%;">
                                     
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-size:13px;text-align: left;">
-                                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                              <label>Training Title : </label>&nbsp;&nbsp;${trainingMaster.trainingTitle}
                                         </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                             <label>Training Requester : </label>&nbsp;&nbsp;${trainingMaster.trainingOwner}
                                         </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                            <label>Training Type : </label>&nbsp;&nbsp;${trainingMaster.trainingType.training} 
                                         </div>
                                        
                                         
                                         </div>
                                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-size:13px; text-align: left;">
-                                              <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                              <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                              <label>Training sub-type : </label>&nbsp;&nbsp;${trainingMaster.trainingSubType.trainingsubtype}
                                         </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                             <label>Training Source : </label>&nbsp;&nbsp;${trainingMaster.trainingSource}
                                         </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                            <label>Trainer : </label>&nbsp;&nbsp;${trainingMaster.trainer.trainerName}
                                         </div>
                                        
                                         
                                         </div>
-                                    </div>
+                                    
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-size:13px;">
-                                         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                            <label>Start Date : </label>&nbsp;&nbsp;${trainingMaster.startDate}
                                         </div>
-                                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                             <label>End Date : </label>&nbsp;&nbsp;${trainingMaster.endDate}
                                         </div>
-                                         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                             <label>Training time from : </label>&nbsp;&nbsp;${trainingMaster.trainingTimeForm}
                                         </div>
-                                       <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                       <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                              <label>Training time to : </label>&nbsp;&nbsp;${trainingMaster.trainingTimeTo}
-                                        </div>
-                                         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                                            <label>Venue : </label>&nbsp;&nbsp;${trainingMaster.venue}
-                                        </div>
+                                       </div>
+                                        
                                     </div>
                                         <style>
                                             .col-lg-2{
@@ -175,8 +175,10 @@
                                   
                                   
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-size:13px;">
-                                        
-                                        <div class ="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="text-align: left;    margin-left: 3%;">
+                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                            <label>Venue : </label>&nbsp;&nbsp;${trainingMaster.venue}
+                                        </div>
+                                        <div class ="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="text-align: left;">
                                             <label>Description : </label>&nbsp; &nbsp;${trainingMaster.trainingDescription}
                                             
                                         </div>
@@ -199,7 +201,7 @@
                 </div>
 
 
-                <div class="nav-tabs-custom" style=" margin-top: 2%;">
+                <div class="nav-tabs-custom" style=" margin-top: 2%;text-align: left;"  >
                     <div class="tab-content">
                         <div class="box-body">
                             <div class="row">
@@ -211,7 +213,7 @@
                                             <input type="hidden" id="eventdate" name="eventdate" value="${eventdate}">
                                             <label>Question Paper Name :<span style="color: red;font-size: 12px;"></span></label>
 
-                                            <select name="questionPaper.id" class="form-control" id="questions" onchange="getTotalMarksAndNoOfQue(this);" required="true">
+                                            <select name="questionPaper.id" class="form-control" id="questions" onchange="getTotalMarksAndNoOfQue(this);" style="font-size:13px;    height: 25px;     padding: 3px 12px;">
                                                 <option value="">--Select--</option>
                                                 <c:forEach items="${questions}" var="questions">
                                                     <option value="${questions.key}">${questions.value}</option>
@@ -220,15 +222,13 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Passing Percentage : <span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:input path="passingPercentage" id="passingPercentage" class="form-control" onkeypress="return isNumberKey(event)"
-                                                        placeholder="Enter Passing Percentage" required="true"></form:input>
+                                            <form:input path="passingPercentage" id="passingPercentage" class="form-control" placeholder="Enter Passing Percentage" style="font-size:13px;height: 25px;"></form:input>
                                             <form:errors path="passingPercentage" cssClass="errorDiv"></form:errors>
 
                                             </div>
                                             <div class="col-sm-3">
                                                 <label>Duration (In Minutes):<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:input path="duration" id="duration" class="form-control" placeholder="Enter Duration"
-                                                        onkeypress="return isNumberKey(event)" required="true"></form:input>
+                                            <form:input path="duration" id="duration" class="form-control" placeholder="Enter Duration" style="font-size:13px;    height: 25px;"></form:input>
                                             <form:errors path="duration" cssClass="errorDiv"></form:errors>
                                             </div>
                                             <div class="col-sm-3    ">
@@ -241,22 +241,16 @@
                                         <%--<form:input path="id" id="id" class="form-control" type="hidden"></form:input>--%>
 
                                         <!--                                            <input type="text" id="datetimepicker2" class="form-control" placeholder="Please select From Date" name="validityFrom" readonly="true"/>-->
-                                        <div class="col-sm-4    ">
-                                            <label>Validity From :<span style="color: red;font-size: 12px;"></span></label>
-                                                <form:input path="validityFrom" id="datepicker1" class="form-control" placeholder="Please select From Date" readonly="true" 
-                                                            required="true"></form:input>
-                                                <!--<span style="color: red;font-size: 12px;"><form:errors path="validityFrom" cssClass="errorDiv"></form:errors></span>-->
-                                            </div>
-                                            <div class="col-sm-4">
+                                        
+                                            <div class="col-sm-3">
                                             <%--<form:input path="id" id="id" class="form-control" type="hidden"></form:input>--%>
 
                                             <label>Validity To :<span style="color: red;font-size: 12px;"></span></label>
-                                            <input type="text" id="datepicker2" class="form-control" name="validityTo" placeholder="Please select To Date" readonly="true" required="true"/>
+                                            <input type="text" id="datepicker2" class="form-control" name="validityTo" placeholder="Please select To Date" readonly="true" style="font-size:13px;    height: 25px;"/>
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Number Of Attempts :<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:input path="noOfAttampt" id="noOfAttampt" class="form-control" placeholder="Enter Number Of Attempt"
-                                                        onkeypress="return isNumberKey(event)" required="true"></form:input>
+                                            <form:input path="noOfAttampt" id="noOfAttampt" class="form-control" placeholder="Enter Number Of Attempt" style="font-size:13px;     height: 25px;"></form:input>
                                             <form:errors path="noOfAttampt" cssClass="errorDiv"></form:errors>
                                             </div>
                                              <div class="col-sm-3>
@@ -360,10 +354,12 @@
 
 
                                 <!--<div class="row">-->
-                                <div class="form-group">
-                                    <div class=" col-sm-6 col-sm-offset-3">
-                                        <input type="button"  class="btn btn-primary" value="Back"  onclick="window.location = 'trainerLogin.htm?act=showcalendar'" />
-                                        <button type="submit" style="width: 100px;" class="btn btn-primary" >Submit</button>
+                                <div class="form-group" style="float: right; margin-right:3%;">
+                                    <div class=" col-sm-2" style="padding-right:26%;">
+                                        <input type="button"  class="btn btn-primary" value="Back"  onclick="window.location = 'trainerLogin.htm?act=showcalendar'" style="background-color: #19b9e7; font-size: 11px;"/>
+                                    </div>
+                                    <div class=" col-sm-2">
+                                        <button type="submit"  class="btn btn-primary" style=" font-size: 11px;height: 29px;padding: 0 12px; ">Submit</button>
                                     </div>
 
                                 </div>
@@ -378,6 +374,7 @@
             
         </form:form>
 
+          </div>
     </div><!-- /.content-wrapper -->
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
     <script>
@@ -469,15 +466,4 @@
 
         }
 
-</script>
-<script>
-    function isNumberKey(evt)
-    {
-        var charCode = (evt.which) ? evt.which : event.keyCode
-        if (charCode != 46 && charCode > 31
-                && (charCode < 48 || charCode > 57))
-            return false;
-
-        return true;
-    }
 </script>

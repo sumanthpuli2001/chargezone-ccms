@@ -51,7 +51,7 @@
                                     <div class="row">
                                         <div id="printableArea">
                                             <header>
-                                                <center><img src="StorageYard/Images/chem2.jpg" style="width:14%;height: 14%;" BORDER="0"/> </center>
+                                                <center><img src=" StorageYard/Images/logo.png" style="width:14%;height: 14%;" BORDER="0"/> </center>
                                                 <center><b><font size="4">  ${employeeMaster.company}</font></b></center> 
                                                 <center><b><font size="4">PAY SLIP FOR THE MONTH OF<c:if test="${month eq 1}">JANUARY</c:if>
                                                         <c:if test="${month eq 2}">FEBRUARY</c:if>

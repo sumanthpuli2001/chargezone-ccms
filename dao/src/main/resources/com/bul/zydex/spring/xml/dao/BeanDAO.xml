@@ -251,4 +251,5 @@
     <bean id="trainingFeedbackDAO1" class="com.bul.zydex.dao.Training.TrainingFeedbackDAOImpl" parent="sessionFactoryConfig" />
     <bean id="ctcAllowanceDAO1" class="com.bul.zydex.dao.policy.CtcAllowanceDAOImpl" parent="sessionFactoryConfig" />
     <bean id="employeeCtcDetailDAO1" class="com.bul.zydex.dao.policy.EmployeeCtcDetailDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="retirementAgeDAO1" class="com.bul.zydex.dao.Payroll.RetirementAgeDAOImpl" parent="sessionFactoryConfig" />
 </beans>

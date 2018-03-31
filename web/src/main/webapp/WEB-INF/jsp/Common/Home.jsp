@@ -380,11 +380,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="box box-primary">
-                                            <div class="box-header">
-                                                <h3 class="box-title" id="rAndR">Rewards And Recognition</h3>
-                                            </div>
-                                        </div>
+
 
 
                                         <div class="box-body">
@@ -415,26 +411,35 @@
 
                                     <div class="col-md-1">
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-5">
+
                                         <div class="box box-primary">
                                             <div class="box-header">
-                                                <h3 class="box-title">Video Detail</h3>
-                                                <div class="box-tools pull-right">
-                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="box-body">
-                                                <div class="col-xs-12 col-sm-12">
-                                                    <c:forEach var="video" items="${videoList}">
-
-                                                        <video controls style="width: 100%" height="367px;">
-                                                            <source src="${video[1]}" type="video/mp4">
-                                                        </video>
-                                                    </c:forEach>
-                                                </div>
+                                                <h3 class="box-title" id="rAndR">Rewards And Recognition</h3>
                                             </div>
                                         </div>
+
                                     </div>
+                                    <!--                                    <div class="col-md-6">
+                                                                            <div class="box box-primary">
+                                                                                <div class="box-header">
+                                                                                    <h3 class="box-title">Video Detail</h3>
+                                                                                    <div class="box-tools pull-right">
+                                                                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="box-body">
+                                                                                    <div class="col-xs-12 col-sm-12">
+                                    <c:forEach var="video" items="${videoList}">
+
+                                        <video controls style="width: 100%" height="367px;">
+                                            <source src="${video[1]}" type="video/mp4">
+                                        </video>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
                                 </div>
                             </div>
 

@@ -452,7 +452,12 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         String id = request.getParameter("id");
         mprMaster = mprMasterService.readById(Integer.parseInt(id));
+        RecruitmentMaster rm  = recruitmentService.readById(mprMaster.getRecruitmentMaster().getId());
+        
+        int Mppbudget = rm.getBudget();
+        
         mv.getModelMap().put("mprMaster", mprMaster);
+        mv.getModelMap().put("Mppbudget", Mppbudget);
         mv.setViewName("Recruitment/MprEditSubmit");
         return mv;
     }
@@ -729,6 +734,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         candidateApplyJob = candidateJobApplyService.readById(cja.getCandidateApplyJob().getId());
         VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
         MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
+        RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
 
         int jobtypeId = vm.getJobtypeMaster().getId();
         jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
@@ -778,6 +784,36 @@ public class RecruitmentController extends RecruitmentAbstract {
         int Mprbudget = mm.getBudget();
         String MprExperience = mm.getExperience();
         String Mprdescription = mm.getDescription();
+
+//        Mpp Master --------------------
+        int jobtypeId2 = rm.getJobtypeMaster().getId();
+        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+        String jobtypeNAme2 = jobtypeMaster.getJobTypeName();
+
+        int department2 = rm.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        String departmentName2 = departmentMaster.getDepartmentName();
+
+        int localtion2 = rm.getLocationMaster().getId();
+        locationMaster = locationMasterService.readById(localtion);
+        String locationName2 = locationMaster.getLocation();
+
+        int designation2 = rm.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(designation);
+        String designationName2 = designationMaster.getDesignationName();
+
+        int numberOfPositionMpp = rm.getNumberOfPosition();
+        int Mppbudget = rm.getBudget();
+        String MppExperience = rm.getExperiance();
+
+        request.setAttribute("jobtypeNAme2", jobtypeNAme2);
+        request.setAttribute("departmentName2", departmentName2);
+        request.setAttribute("locationName2", locationName2);
+        request.setAttribute("designationName2", designationName2);
+        request.setAttribute("numberOfPositionMpp", numberOfPositionMpp);
+        request.setAttribute("Mppbudget", Mppbudget);
+        request.setAttribute("MppExperience", MppExperience);
+
 //              MPR Master -------------
         request.setAttribute("jobtypeNAme1", jobtypeNAme1);
         request.setAttribute("departmentName1", departmentName1);

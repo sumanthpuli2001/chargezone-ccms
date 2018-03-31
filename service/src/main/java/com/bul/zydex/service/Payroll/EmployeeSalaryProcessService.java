@@ -81,4 +81,6 @@ public interface EmployeeSalaryProcessService<T> extends GenericsService<T> {
     public List<?> readsalSearch(EmployeeMaster object);
 
     public List<?> readsalDeductionSearch(EmployeeMaster object);
+
+    public List<?> readEmployeeForPfGov(EmployeeMaster object);
 }

@@ -732,6 +732,7 @@
         <property name="payrollPfCheckValidator" ref="payrollPfCheckValidator1" />
         <property name="employeeTypeService" ref="employeeTypeService1" />
         <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+     
     </bean>
     <bean id="payrollPtCheckController1" class="com.bul.zydex.controller.Payroll.PayrollPtCheckController" parent="controllerConfig" >
         <property name="payrollPtCheckService" ref="payrollPtCheckService1" />
@@ -838,6 +839,7 @@
         <property name="payrollProfessionalTaxService" ref="payrollProfessionalTaxService1" />
         <property name="payrollProvidentFundService" ref="payrollProvidentFundService1" />
         <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
+        <property name="retirementAgeService" ref="retirementAgeService1" />
          
     </bean>
     <bean id="employeePtCheckController1" class="com.bul.zydex.controller.Payroll.EmployeePtCheckcontroller" parent="controllerConfig" >
@@ -1160,6 +1162,7 @@
         <property name="locationMasterService" ref="locationMasterService1" />
         <property name="jobtypeMasterService" ref="jobtypeMasterService1"/>
         <property name="mprMasterService" ref="mprMasterService1"/>
+        <property name="recruitmentService" ref="recruitmentService1"/>
     </bean>
     <bean id="trainingAssessmentController1" class="com.bul.zydex.controller.Training.TrainingAssessmentController" parent="controllerConfig" >
         <property name="trainingAssessmentService" ref="trainingAssessmentService1"></property>
@@ -1186,6 +1189,10 @@
     <bean id="ctcAllowanceController1" class="com.bul.zydex.controller.policy.CtcAllowanceController" parent="controllerConfig" >
         <property name="ctcAllowanceService" ref="ctcAllowanceService1"></property>
         
+    </bean>
+    <bean id="retirementAgeController1" class="com.bul.zydex.controller.Payroll.RetirementAgeController" parent="controllerConfig" >
+        <property name="retirementAgeService" ref="retirementAgeService1"></property>
+
     </bean>
 </beans>
  

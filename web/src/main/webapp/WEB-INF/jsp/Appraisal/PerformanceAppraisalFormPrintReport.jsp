@@ -455,7 +455,7 @@
 
 
                             <div class="box-header">
-                                <h3 class="box-title">Competency Evaluation (As Per Bulwark Systems Competency Framework) :</h3>
+                                <h3 class="box-title">Competency Evaluation (As Per SPC Life Science Competency Framework) :</h3>
 
                             </div><!-- /.box-header -->
                             <div class="box-body no-padding">

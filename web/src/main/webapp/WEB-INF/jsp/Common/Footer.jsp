@@ -261,7 +261,7 @@
         });
     }
 </script>
-<label style="font-weight: normal;float: right;"> © 2017 <a href="http://www.bulwarks.com/" target="_blank"><strong>Bulwark Systems </strong></a> All rights reserved. </label>
+<label style="font-weight: normal;float: right;"> © 2017 <a href="http://www.bulwarks.com/" target="_blank"><strong>SPC Life Science </strong></a> All rights reserved. </label>
 <script>
 //==============================================================//
 //set time out for errorDiv Class

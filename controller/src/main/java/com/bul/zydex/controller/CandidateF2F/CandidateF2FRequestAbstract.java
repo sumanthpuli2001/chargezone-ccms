@@ -10,11 +10,13 @@ import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateF2FApproval;
 import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.model.CandidateJobApplication;
+import com.bul.zydex.model.CertificateTemplate;
 import com.bul.zydex.model.QuestionPaper;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.CandidateF2FApproval.CandidateF2FApprovalService;
 import com.bul.zydex.service.CandidateF2FRequest.CandidateF2FRequestService;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
+import com.bul.zydex.service.Payroll.CertificateTemplateService;
 import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
 import com.bul.zydex.service.Vacancy.VacancyMasterService;
 import com.bul.zydex.service.questionlibrary.QuestionPaperService;
@@ -35,6 +37,7 @@ public class CandidateF2FRequestAbstract extends CustomAbstract{
     protected QuestionPaperService<QuestionPaper> questionPaperService;
     protected CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService;
     protected VacancyMasterService<VacancyMaster> vacancyMasterService;
+    protected CertificateTemplateService<CertificateTemplate> certificateTemplateService;
 
     public CandidateF2FRequestService<CandidateF2FRequest> getCandidateF2FRequestService() {
         return candidateF2FRequestService;
@@ -82,6 +85,14 @@ public class CandidateF2FRequestAbstract extends CustomAbstract{
 
     public void setVacancyMasterService(VacancyMasterService<VacancyMaster> vacancyMasterService) {
         this.vacancyMasterService = vacancyMasterService;
+    }
+
+    public CertificateTemplateService<CertificateTemplate> getCertificateTemplateService() {
+        return certificateTemplateService;
+    }
+
+    public void setCertificateTemplateService(CertificateTemplateService<CertificateTemplate> certificateTemplateService) {
+        this.certificateTemplateService = certificateTemplateService;
     }
     
     

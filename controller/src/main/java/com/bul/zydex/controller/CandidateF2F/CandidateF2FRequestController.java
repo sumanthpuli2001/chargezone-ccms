@@ -9,6 +9,8 @@ import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateF2FApproval;
 import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.model.CandidateJobApplication;
+import com.bul.zydex.model.CertificateTemplate;
+import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.OnlineAssessment;
 import com.bul.zydex.model.RecruitmentMaster;
@@ -144,7 +146,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.setViewName("Recruitment/CandidateRequestList");
         return mv;
     }
-    
+
     public ModelAndView reject(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
@@ -156,6 +158,44 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
 
         cja.setStatus(3);
+        candidateJobApplicationService.update(cja);
+
+        List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
+
+        mv.getModelMap().put("list", candidateJobList);
+        questionList(request);
+        mv.getModelMap().put("onlineAssessment", onlineAssessment);
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        mv.setViewName("Recruitment/CandidateRequestList");
+        return mv;
+    }
+
+    public ModelAndView offerLater(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+        String applicationId = request.getParameter("id");
+        String candidateId = request.getParameter("candidateId");
+        CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
+        candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(candidateId));
+
+        try {
+            CertificateTemplate certificateTemplate = new CertificateTemplate();
+            certificateTemplate = certificateTemplateService.readById(1);
+            String from = employeeMaster.getOfficeEmailId();
+            String To = candidateApplyJob.getEmailId();
+            String Subject = certificateTemplate.getCertificateType();
+            String msg = certificateTemplate.getCertificateBody();
+            msg = msg.replaceAll("\\{to_user\\}", candidateApplyJob.getName());
+            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+            sendMail.sendMail(from, To, Subject, msg);
+        } catch (Exception e) {
+        }
+        
+        cja.setStatus(14);
         candidateJobApplicationService.update(cja);
 
         List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();

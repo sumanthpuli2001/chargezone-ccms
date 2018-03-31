@@ -349,13 +349,16 @@
 
                                             <div class="form-group">
                                                 <div class="col-md-12" style="text-align: right">
-                                                    <c:if test="${candidateJobApplication.status eq 1}">
+                                                    <c:if test="${candidateJobApplication.status eq 1 || candidateJobApplication.status eq 14}">
                                                         <button type="button" class="btn btn-danger" onclick="return reject(${candidateJobApplication.id},${candidateApplyJob.id});" value="Reject">Reject</button>
+                                                    </c:if>
+                                                    <c:if test="${candidateJobApplication.status eq 11}">
+                                                        <button type="button" class="btn btn-primary" onclick="offerLate(${candidateJobApplication.id},${candidateApplyJob.id});">Offer Later</button>
                                                     </c:if>
                                                     <c:if test="${candidateJobApplication.status eq 1}">
                                                         <button type="button" class="btn btn-primary" onclick="shortlisted(${candidateJobApplication.id},${candidateApplyJob.id});">Shortlist</button>
                                                     </c:if>
-                                                    <c:if test="${candidateJobApplication.status eq 11}">
+                                                    <c:if test="${candidateJobApplication.status eq 11 || candidateJobApplication.status eq 14}">
                                                         <button type="button" class="btn btn-primary" onclick="induction(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; Induction</button>
                                                     </c:if>
                                                     <c:if
@@ -640,6 +643,11 @@
 <script>
     function shortlisted(applicationId, candidateId) {
         window.location = 'candidateF2FRequest.htm?act=CandidateShortlisted&id=' + applicationId + '&candidateId=' + candidateId;
+    }
+</script>
+<script>
+    function offerLate(applicationId, candidateId) {
+        window.location = 'candidateF2FRequest.htm?act=offerLater&id=' + applicationId + '&candidateId=' + candidateId;
     }
 </script>
 <script>

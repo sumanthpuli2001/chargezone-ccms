@@ -72,13 +72,24 @@ public class TrainingMasterController extends TrainingMasterAbstract {
 
     public ModelAndView editClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = request.getParameter("id");
+        EmployeeMaster employeeMaster = new EmployeeMaster();
         ModelAndView mv = new ModelAndView();
         TrainingMaster trainingMaster = trainingMasterService.readById(Integer.parseInt(id));
         Trainer trainer = trainerService.readById(trainingMaster.getTrainer().getId());
         TrainingType trainingType = trainingTypeService.readById(trainingMaster.getTrainingType().getId());
         TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster.getTrainingSubType().getId());
+        EmployeeMaster em = employeeMasterService.readById(Integer.parseInt(trainingMaster.getTrainingOwner()));
         trainingSubType.setTrainingType(trainingType);
+        
+        selectEmployee(request, response);
+        
+        
+        
+        int employee = em.getId();
+        employeeMaster = (EmployeeMaster)employeeMasterService.readById(employee);
+        String employeeName = employeeMaster.getEmployeeName();
 
+        selectedEmployeeFor360Feedback(request, employeeMaster);
         trainingMaster.setTrainer(trainer);
         trainingMaster.setTrainingType(trainingType);
         trainingMaster.setTrainingSubType(trainingSubType);
@@ -86,6 +97,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         trainingtypeList(request);
         trainingSubtypeList(request);
 
+        mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("trainingMaster", trainingMaster);
         mv.setViewName("Training/TrainingEditView");
         return mv;

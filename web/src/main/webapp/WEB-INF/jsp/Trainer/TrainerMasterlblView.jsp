@@ -224,7 +224,7 @@
                                                         </c:if> 
                                                     </c:if> 
                                                     <c:if test="${shosts eq false}">
-                                                        <td></td>
+                                                        <td>Attendance not submitted</td>
                                                     </c:if> 
 
                                             <input type="hidden" id="eventdate" name="eventdate" value="${eventdate}">
@@ -240,6 +240,10 @@
                                             <c:if test="${list[3] eq 0}">
                                                 <td><label style="color: green;">PASS</label></td>
                                             </c:if> 
+                                                 <c:if test="${empty list[3] }">
+                                                     <td>Assessment Not Submitted</td>
+                                                 </c:if>
+                                                     
                                     <!--<td><a type="button" class="btn btn-default" id="btnType1" onclick="goToAns(${list[0]},${trainingMasterId},${eventdate})" name="btnType" value="AssessMent">Training Assessment</a></td>-->
                                             <!--</td>-->
                                             </tr>

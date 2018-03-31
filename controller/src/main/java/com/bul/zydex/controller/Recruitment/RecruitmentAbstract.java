@@ -190,6 +190,8 @@ public class RecruitmentAbstract extends CustomAbstract {
     public void setRecruitmentApprovalHistoryService(RecruitmentApprovalHistoryService<RecruitmentApprovalHistory> recruitmentApprovalHistoryService) {
         this.recruitmentApprovalHistoryService = recruitmentApprovalHistoryService;
     }
+    
+    
 
     public void selectBudget(HttpServletRequest request,
             HttpServletResponse response) throws Exception {

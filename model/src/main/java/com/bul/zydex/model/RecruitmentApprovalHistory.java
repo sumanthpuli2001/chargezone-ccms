@@ -19,12 +19,13 @@ public class RecruitmentApprovalHistory implements java.io.Serializable {
     private String statusMessage;
     private String createDate;
     private Integer createdBy;
+    private RecruitmentMaster recruitmentMaster;
     
     public RecruitmentApprovalHistory(){
         
     }
 
-    public RecruitmentApprovalHistory(Integer id, String approvalUserName, Integer approvalUserId, String comment, Integer status, String statusMessage, String createDate, Integer createdBy) {
+    public RecruitmentApprovalHistory(Integer id, String approvalUserName, Integer approvalUserId, String comment, Integer status, String statusMessage, String createDate, Integer createdBy, RecruitmentMaster recruitmentMaster) {
         this.id = id;
         this.approvalUserName = approvalUserName;
         this.approvalUserId = approvalUserId;
@@ -33,6 +34,7 @@ public class RecruitmentApprovalHistory implements java.io.Serializable {
         this.statusMessage = statusMessage;
         this.createDate = createDate;
         this.createdBy = createdBy;
+        this.recruitmentMaster = recruitmentMaster;
     }
 
     public Integer getId() {
@@ -97,6 +99,14 @@ public class RecruitmentApprovalHistory implements java.io.Serializable {
 
     public void setCreatedBy(Integer createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public RecruitmentMaster getRecruitmentMaster() {
+        return recruitmentMaster;
+    }
+
+    public void setRecruitmentMaster(RecruitmentMaster recruitmentMaster) {
+        this.recruitmentMaster = recruitmentMaster;
     }
     
     

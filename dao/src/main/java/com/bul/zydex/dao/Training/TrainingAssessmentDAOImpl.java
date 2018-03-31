@@ -31,7 +31,7 @@ public class TrainingAssessmentDAOImpl<T> extends GenericsDAOImpl<T> implements 
                 + " LEFT JOIN a.questionPaper c"
                 + " Where b.id=" + empid
                 + " and a.noOfAttampt >0 "
-                + " and a.status =0 ";
+                + " and a.status =0 order by a.id desc";
 
         return getHibernateTemplate().find(query);
     }

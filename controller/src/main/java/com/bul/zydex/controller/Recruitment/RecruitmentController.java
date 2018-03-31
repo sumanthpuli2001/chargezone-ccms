@@ -452,10 +452,10 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         String id = request.getParameter("id");
         mprMaster = mprMasterService.readById(Integer.parseInt(id));
-        RecruitmentMaster rm  = recruitmentService.readById(mprMaster.getRecruitmentMaster().getId());
-        
+        RecruitmentMaster rm = recruitmentService.readById(mprMaster.getRecruitmentMaster().getId());
+
         int Mppbudget = rm.getBudget();
-        
+
         mv.getModelMap().put("mprMaster", mprMaster);
         mv.getModelMap().put("Mppbudget", Mppbudget);
         mv.setViewName("Recruitment/MprEditSubmit");
@@ -1216,7 +1216,8 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         int position = recruitmentMaster.getNumberOfPosition();
         int budget = recruitmentMaster.getBudget();
-
+        int mppId = recruitmentMaster.getId();
+        List<?> list = recruitmentApprovalHistoryService.getByRecruitementMasterId(mppId);
         mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
         mv.getModelMap().put("departmentMaster", departmentMaster);
         mv.getModelMap().put("locationMaster", locationMaster);

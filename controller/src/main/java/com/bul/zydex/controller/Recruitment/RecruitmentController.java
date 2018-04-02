@@ -1271,6 +1271,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         request.setAttribute("designationName", designationName);
         request.setAttribute("experiance", experiance);
         request.setAttribute("budget", budget);
+        request.setAttribute("list", list);
         mv.setViewName("Recruitment/ApprovalOnlyViewMpp");
 
         return mv;

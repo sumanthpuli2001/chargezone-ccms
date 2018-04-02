@@ -23,11 +23,12 @@ public class RecruitmentApprovalHistoryDAOImpl<T> extends GenericsDAOImpl<T> imp
     @Override
     public List<?> getByRecruitementMasterId(int mppId) {
         String query = "";
-        query += "select ";
-//                + " FROM RecruitmentApprovalHistory a "
-//                + " LEFT JOIN a.employeeMasterByApprover1Id b"
-//                + " LEFT JOIN a.employeeMasterByEmployeeId c"
-//                + " WHERE b.id='" + appId + "' and  a.id='" + tabId + "' and (a.status=0) ";
+                    //      0       1               2               3           4       5               6           7           8
+        query += "select a.id,a.approvalUserName,a.approvalUserId,a.comment,a.status,a.statusMessage,a.createDate,a.createdBy,b.id "
+                + " FROM RecruitmentApprovalHistory a "
+                + " LEFT JOIN a.recruitmentMaster b "
+                + " WHERE b.id=" + mppId 
+                + " order by a.id desc ";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

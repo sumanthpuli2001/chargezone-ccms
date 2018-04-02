@@ -1040,6 +1040,7 @@
         <property name="candidateJobApplicationService" ref="candidateJobApplicationService1"/>
         <property name="vacancyMasterService" ref="vacancyMasterService1"/>
         <property name="recruitmentApprovalHistoryService" ref="recruitmentApprovalHistoryService1"/>
+        <property name="mprApprovalHistoryService" ref="mprApprovalHistoryService1"/>
     </bean>
     
     <bean id="vacancyController1" class="com.bul.zydex.controller.Vacancy.VacancyController" parent="controllerConfig" >

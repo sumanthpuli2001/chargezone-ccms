@@ -1305,7 +1305,8 @@ public class RecruitmentController extends RecruitmentAbstract {
         
         int position = recruitmentMaster.getNumberOfPosition();
         int budget = recruitmentMaster.getBudget();
-        
+        int mppId = recruitmentMaster.getId();
+        List<?> list = recruitmentApprovalHistoryService.getByRecruitementMasterId(mppId);
         mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
         mv.getModelMap().put("departmentMaster", departmentMaster);
         mv.getModelMap().put("locationMaster", locationMaster);
@@ -1318,6 +1319,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         request.setAttribute("designationName", designationName);
         request.setAttribute("experiance", experiance);
         request.setAttribute("budget", budget);
+        request.setAttribute("list", list);
         mv.setViewName("Recruitment/ApprovalOnlyViewMpp");
         
         return mv;

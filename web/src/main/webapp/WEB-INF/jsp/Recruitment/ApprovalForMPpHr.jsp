@@ -87,7 +87,7 @@
                                                         <form:errors path="jobtypeMaster.id" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>Budget:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>Budget(Yearly):<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:input path="budget" class="form-control" placeholder="Budget" disabled="true"></form:input>
                                                         <form:errors path="budget" cssClass="errorDiv"></form:errors>
                                                     </div>
@@ -98,6 +98,11 @@
                                                         <label>Number Of Position:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:input path="numberOfPosition" class="form-control" placeholder="Number Of Position" disabled="true"></form:input>
                                                         <form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>Experience (In Year):<span style="color: red;font-size: 12px;"></span></label>
+                                                        <form:input path="experiance" class="form-control" placeholder="Number Of Position" disabled="true"></form:input>
+                                                        <form:errors path="experiance" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">

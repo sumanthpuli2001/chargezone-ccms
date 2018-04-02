@@ -50,6 +50,10 @@
                                                     <label>MPR Budget:</label> &nbsp;&nbsp;&nbsp;
                                                     <span>${budget}</span> 
                                                 </div>
+                                                <div class="col-sm-6">
+                                                    <label>MPR Name:</label> &nbsp;&nbsp;&nbsp;
+                                                    <span>${mprName}</span> 
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">

@@ -61,6 +61,7 @@ public class RecruitmentDAOImpl<T> extends GenericsDAOImpl<T> implements Recruit
                 + " LEFT JOIN a.departmentMaster c "
                 + " LEFT JOIN a.jobtypeMaster d "
                 + " WHERE a.mppStatus = 5 "
+                + " And a.mppStatus!=21 "
                 + " And a.createdBy = " + empId
                 + " order by a.id desc";
 

@@ -374,6 +374,11 @@ public class RecruitmentController extends RecruitmentAbstract {
 
             mv = createMpr(request, response);
         }
+        if (mprvalue == mppvalue) {
+            recruitmentMaster.setMppStatus(21);
+            recruitmentService.update(recruitmentMaster);
+
+        }
         return mv;
     }
 

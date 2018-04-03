@@ -114,7 +114,7 @@
                                                                 <c:if test="${list[6] == 1}"><td><span class="label label-warning">Recycled</span></td></c:if>
                                                                 <c:if test="${list[6] == 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
                                                                 <c:if test="${list[6] == 4}"><td><span class="label label-success">Approved</span></td></c:if>
-                                                                <c:if test="${list[6] == 5}"><td><span class="label label-success">Final Approved</span></td></c:if>
+                                                                <c:if test="${list[6] == 5 || list[6] == 21}"><td><span class="label label-success">Final Approved</span></td></c:if>
 
                                                                     <td>
                                                                         <div class="btn-group">

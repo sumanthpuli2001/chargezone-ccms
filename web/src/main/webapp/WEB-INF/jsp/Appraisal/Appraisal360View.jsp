@@ -192,8 +192,6 @@
                                                             <c:if test="${list[9]eq 1}">
                                                                 <input  class="form-control" readonly="true" value="Completed"></input>
                                                             </c:if>
-
-
                                                         </div>
                                                     </div>
 
@@ -536,13 +534,11 @@
                                                             <tr>    
                                                                 <th>Given Remarks</th> 
                                                                 <th>Total Remarks</th>
-                                                                <!-- <th>Average Remarks</th>-->
                                                             </tr>
 
                                                             <tr>
                                                                 <td class='tdGivenRemarks'>${list[4]+list[5]+list[6]+list[7]+list[8]}</td>
                                                                 <td>25</td>
-                                                                <!--  <td>${(list[4]+list[5]+list[6]+list[7]+list[8])/5}</td>-->
                                                             </tr>  
                                                         </table>
                                                     </div>
@@ -640,13 +636,16 @@
 
 <script>
         var sum = 0;
-        var len = $('.tdGivenRemarks').length;
+        var counter = 0;
         $('.tdGivenRemarks').each(function(){
-            sum += parseInt($(this).text()); 
+            if($(this).text() !== '0')
+            {
+                sum += parseInt($(this).text());
+                counter++;
+            }
         });
-        var avg = sum/(len);
+        var avg = sum/counter;
         $('#labelTotalAverageRemarks').text(avg);
-       
 </script>
 
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

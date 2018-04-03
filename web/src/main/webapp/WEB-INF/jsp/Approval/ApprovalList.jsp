@@ -44,7 +44,7 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form action="recruitment.htm?act=budgetdeleteSubmit" method="post" commandName="approvalMaster"
+        <form:form action="approval.htm?act=createApprovalSetting" method="post" commandName="approvalMaster"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <form:hidden path="id"></form:hidden>
             <section class="content">
@@ -57,9 +57,11 @@
                                     <!--<button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>-->
                                     <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
 
-                                    <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'approval.htm?act=createApprovalSetting'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
+                                    <!--<button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'approval.htm?act=createApprovalSetting'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>-->
+                                    
                                 </c:if>
                                 <div class="box-header">
+                            <button type="button" class="btn btn-primary" title="" style="float: right; width: 120px;" onclick="window.location = 'approval.htm?act=createApprovalSetting'"><i class="fa fa-plus"></i>&nbsp;&nbsp;New</button>
                                 </div>
                                 <div class="box-body no-padding">
                                     <div class="row">
@@ -105,7 +107,7 @@
 
                                                                     <td>
                                                                         <div class="btn-group">
-                                                                            <button type="button" onclick="viewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            <button type="button" onclick="viewClick(${list[4]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
                                                                         </button>
                                                                     </div>

@@ -161,6 +161,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             approvalHistory.setCreatedBy(employeeMaster.getId());
             approvalHistory.setCreateDate(sdf.format(cDate));
             approvalHistory.setStatus(0);
+            approvalHistory.setComment("Creator");
             recruitmentApprovalHistoryService.create(approvalHistory);
             
             request.setAttribute("successMessage",
@@ -299,6 +300,8 @@ public class RecruitmentController extends RecruitmentAbstract {
         int mppvalue = recruitmentMaster.getBudget();
         int mprvalue = mprMaster.getBudget();
         
+        int total = mppvalue - mprvalue;
+        
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid");
@@ -353,7 +356,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             mv.setViewName("Recruitment/MprSearchCreateBudget");
             
         } else {
-            mprMaster.setRemainingBudget(mprvalue);
+            mprMaster.setRemainingBudget(total);
             mprMaster.setStatus(0);
             mprMaster.setCurrentLevel(1);
             mprMaster.setTotalLevel(approvalList.size());
@@ -1053,7 +1056,7 @@ public class RecruitmentController extends RecruitmentAbstract {
                 approvalHistory.setStatus(5);
             } else {
                 recruitmentMaster.setMppStatus(4);
-                approvalHistory.setStatus(4);
+                approvalHistory.setStatus(5);
                 recruitmentMaster.setCurrentLevel(CurrentLevel + 1);
                 
             }
@@ -1081,7 +1084,7 @@ public class RecruitmentController extends RecruitmentAbstract {
                 approvalHistory.setStatus(2);
             } else {
                 recruitmentMaster.setMppStatus(1);
-                approvalHistory.setStatus(1);
+                approvalHistory.setStatus(2);
                 recruitmentMaster.setCurrentLevel(CurrentLevel - 1);
                 
             }

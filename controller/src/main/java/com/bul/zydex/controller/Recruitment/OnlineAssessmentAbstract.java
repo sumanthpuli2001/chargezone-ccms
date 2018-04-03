@@ -9,6 +9,7 @@ import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.CandidateResultStatus;
+import com.bul.zydex.model.MprApprovalHistory;
 import com.bul.zydex.model.OnlineAssessment;
 import com.bul.zydex.model.QuestionAns;
 import com.bul.zydex.model.QuestionAnswerSubmit;
@@ -20,6 +21,7 @@ import com.bul.zydex.service.QuestionAnswerSubmit.CandidateResultStatusService;
 import com.bul.zydex.service.QuestionAnswerSubmit.QuestionAnswerSubmitService;
 import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
 import com.bul.zydex.service.Recruitment.OnlineAssessmentService;
+import com.bul.zydex.service.RecruitmentApprovalHistory.MprApprovalHistoryService;
 import com.bul.zydex.service.questionlibrary.QuestionAnsService;
 import com.bul.zydex.service.questionlibrary.QuestionDetailsService;
 import com.bul.zydex.service.questionlibrary.QuestionLibraryService;
@@ -53,6 +55,8 @@ public class OnlineAssessmentAbstract extends CustomAbstract {
 
     protected CandidateResultStatusService<CandidateResultStatus> candidateResultStatusService;
 
+    protected MprApprovalHistoryService<MprApprovalHistory> mprApprovalHistoryService;
+    
     public OnlineAssessmentService<OnlineAssessment> getOnlineAssessmentService() {
         return onlineAssessmentService;
     }
@@ -123,6 +127,14 @@ public class OnlineAssessmentAbstract extends CustomAbstract {
 
     public void setCandidateResultStatusService(CandidateResultStatusService<CandidateResultStatus> candidateResultStatusService) {
         this.candidateResultStatusService = candidateResultStatusService;
+    }
+
+    public MprApprovalHistoryService<MprApprovalHistory> getMprApprovalHistoryService() {
+        return mprApprovalHistoryService;
+    }
+
+    public void setMprApprovalHistoryService(MprApprovalHistoryService<MprApprovalHistory> mprApprovalHistoryService) {
+        this.mprApprovalHistoryService = mprApprovalHistoryService;
     }
     
     

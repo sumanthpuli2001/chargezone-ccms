@@ -8,6 +8,7 @@ package com.bul.zydex.service.RecruitmentApprovalHistory;
 
 import com.bul.zydex.dao.RecruitmentApprovalHistory.MprApprovalHistoryDAO;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.List;
 
 /**
  *
@@ -24,6 +25,11 @@ public class MprApprovalHistoryServiceImpl<T> extends GenericsServiceImpl<T> imp
     public void setMprApprovalHistoryDAO(MprApprovalHistoryDAO<T> mprApprovalHistoryDAO) {
         this.mprApprovalHistoryDAO = mprApprovalHistoryDAO;
         setGenericsDAO(mprApprovalHistoryDAO);
+    }
+
+    @Override
+    public List<?> getByMprId(int mprId) {
+       return mprApprovalHistoryDAO.getByMprId(mprId);
     }
     
     

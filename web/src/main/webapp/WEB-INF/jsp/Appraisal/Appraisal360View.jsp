@@ -192,8 +192,6 @@
                                                             <c:if test="${list[9]eq 1}">
                                                                 <input  class="form-control" readonly="true" value="Completed"></input>
                                                             </c:if>
-
-
                                                         </div>
                                                     </div>
 
@@ -530,19 +528,17 @@
                                             </div><!-- /.col -->
                                             <div class="form-group">
                                                 <div class="col-sm-12">
-                                                    <label>Average result of feedback marks given by, ${list[1]}</label>
+                                                    <label>Feedback Remarks given by, ${list[1]}</label>
                                                     <div class="table table-bordered">
                                                         <table class="table table-bordered ">
                                                             <tr>    
                                                                 <th>Given Remarks</th> 
                                                                 <th>Total Remarks</th>
-                                                                <!-- <th>Average Remarks</th>-->
                                                             </tr>
 
                                                             <tr>
                                                                 <td class='tdGivenRemarks'>${list[4]+list[5]+list[6]+list[7]+list[8]}</td>
                                                                 <td>25</td>
-                                                                <!--  <td>${(list[4]+list[5]+list[6]+list[7]+list[8])/5}</td>-->
                                                             </tr>  
                                                         </table>
                                                     </div>
@@ -556,7 +552,7 @@
                                 
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
-                                        <h3 class="box-title">Average Remarks given by all eligible Employees:</h3>
+                                        <h3 class="box-title">Average & Total Remarks given by all eligible Employees:</h3>
                                         <div class="box-tools pull-right">
                                             <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
                                         </div>
@@ -570,10 +566,12 @@
                                                         <div class="table table-bordered">
                                                             <table class="table table-bordered ">
                                                                 <tr>
-                                                                   <th>Total Average Remarks</th>       
+                                                                   <th>Average Remarks</th>
+                                                                   <th>Total Given Remarks</th>
                                                                 </tr>   
                                                                 <tr>
-                                                                    <td><label id='labelTotalAverageRemarks'></label></td>   
+                                                                    <td><label id='labelTotalAverageRemarks'></label></td>
+                                                                    <td><label id='labelTotalGivenRemarks'></label></td>
                                                                 </tr>  
                                                             </table>
                                                         </div>
@@ -640,13 +638,18 @@
 
 <script>
         var sum = 0;
-        var len = $('.tdGivenRemarks').length;
+        var counter = 0;
         $('.tdGivenRemarks').each(function(){
-            sum += parseInt($(this).text()); 
+            if($(this).text() !== '0')
+            {
+                sum += parseInt($(this).text());
+                counter++;
+            }
         });
-        var avg = sum/(len);
+        var avg = sum/counter;
         $('#labelTotalAverageRemarks').text(avg);
-       
+        $('#labelTotalGivenRemarks').text(sum);    
+    
 </script>
 
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

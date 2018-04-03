@@ -7,6 +7,7 @@ package com.bul.zydex.dao.RecruitmentApprovalHistory;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.RecruitmentApprovalHistory;
+import java.util.List;
 
 /**
  *
@@ -17,6 +18,20 @@ public class RecruitmentApprovalHistoryDAOImpl<T> extends GenericsDAOImpl<T> imp
     @Override
     protected Class getDomainClass() {
         return RecruitmentApprovalHistory.class;
+    }
+
+    @Override
+    public List<?> getByRecruitementMasterId(int mppId) {
+        String query = "";
+                    //      0       1               2               3           4       5               6           7           8
+        query += "select a.id,a.approvalUserName,a.approvalUserId,a.comment,a.status,a.statusMessage,a.createDate,a.createdBy,b.id "
+                + " FROM RecruitmentApprovalHistory a "
+                + " LEFT JOIN a.recruitmentMaster b "
+                + " WHERE b.id=" + mppId 
+                + " order by a.id desc ";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
     }
 
 }

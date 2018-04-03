@@ -32,6 +32,7 @@ public class RecruitmentMppApprovalDAOImpl<T> extends GenericsDAOImpl<T> impleme
                 + " LEFT JOIN rm.departmentMaster c "
                 + " LEFT JOIN rm.jobtypeMaster d "
                 + " Where  rm.currentLevel >= rma.level "
+                + " And  rm.mppStatus!=5 "
                 + " And rma.employeeMaster.id = " + empId
                 + " order by rm.id desc";
 

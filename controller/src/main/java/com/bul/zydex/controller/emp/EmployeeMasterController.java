@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller.emp;
 
+import com.bul.zydex.model.ApplayJobUserMaster;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.CompetencyEvaluationMaster;
@@ -4253,6 +4254,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 employeeMaster.setPfAmount("0");
             }
             CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
+            ApplayJobUserMaster ajum = applayJobUserMasterService.readById(cja.getApplayJobUserMaster().getId());
+            ajum.setFirstTime(5);
             cja.setStatus(13);
             candidateJobApplicationService.create(cja);
             employeeMasterService.create(employeeMaster);

@@ -1039,6 +1039,8 @@
         <property name="recruitmentMppApprovalService" ref="recruitmentMppApprovalService1"/>
         <property name="candidateJobApplicationService" ref="candidateJobApplicationService1"/>
         <property name="vacancyMasterService" ref="vacancyMasterService1"/>
+        <property name="recruitmentApprovalHistoryService" ref="recruitmentApprovalHistoryService1"/>
+        <property name="mprApprovalHistoryService" ref="mprApprovalHistoryService1"/>
     </bean>
     
     <bean id="vacancyController1" class="com.bul.zydex.controller.Vacancy.VacancyController" parent="controllerConfig" >
@@ -1099,6 +1101,7 @@
         <property name="questionLibraryService" ref="questionLibraryService1"/>
         <property name="questionAnsService" ref="questionAnsService1"/>
         <property name="candidateResultStatusService" ref="candidateResultStatusService1"/>
+        <property name="mprApprovalHistoryService" ref="mprApprovalHistoryService1"/>
         
     </bean>
     <bean id="trainingTypeController1" class="com.bul.zydex.controller.Training.TrainingTypeController" parent="controllerConfig" >
@@ -1153,6 +1156,7 @@
         <property name="candidateJobApplyService" ref="candidateJobApplyService1"/>
         <property name="vacancyMasterService" ref="vacancyMasterService1"/>
         <property name="certificateTemplateService" ref="certificateTemplateService1" />
+        <property name="mprApprovalHistoryService" ref="mprApprovalHistoryService1" />
     </bean>
     <bean id="candidateF2FApprovalController1" class="com.bul.zydex.controller.CandidateF2F.CandidateF2FApprovalController" parent="controllerConfig" >
         <property name="candidateF2FApprovalService" ref="candidateF2FApprovalService1"></property>

@@ -6,11 +6,14 @@
 package com.bul.zydex.service.RecruitmentApprovalHistory;
 
 import com.bul.zydex.service.GenericsService;
+import java.util.List;
 
 /**
  *
  * @author Dell-1
  */
-public interface MprApprovalHistoryService<T> extends GenericsService<T>{
-    
+public interface MprApprovalHistoryService<T> extends GenericsService<T> {
+
+    public List<?> getByMprId(int mprId);
+
 }

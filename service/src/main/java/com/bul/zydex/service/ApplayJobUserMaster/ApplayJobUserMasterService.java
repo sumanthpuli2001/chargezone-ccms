@@ -21,4 +21,6 @@ public interface ApplayJobUserMasterService<T> extends GenericsService<T> {
 
     public ApplayJobUserMaster checkByUserNameandPass(T object);
 
+    public Boolean checkByLogInStatus(T object);
+
 }

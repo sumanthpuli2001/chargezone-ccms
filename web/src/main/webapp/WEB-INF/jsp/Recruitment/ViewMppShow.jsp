@@ -138,15 +138,16 @@
                                                             <td>${list[1]}</td>
                                                             <td>${list[6]}</td>
                                                             <td>${list[3]}</td>
-                                                            <td>
-                                                                <c:if test="${list[4] eq 0}"><span class="label label-default">Pending</span></c:if>
-                                                                <c:if test="${list[4] eq 2}"><span class="label label-default">Pending</span></c:if>
-                                                                <c:if test="${list[4] eq 1}"><span class="label label-default">Recycle</span></c:if>
-                                                                <c:if test="${list[4] eq 5}"><span class="label label-default">Approve</span></c:if>
-                                                                <c:if test="${list[4] eq 3}"><span class="label label-default">Rejected</span></c:if>
-                                                                <c:if test="${list[4] eq 4}"><span class="label label-default">Online Assessment</span></c:if>
+                                                            <td><span class="label label-default">${list[5]}</span></td>
+                                                            <!--<td>-->
+                                                            <%--<c:if test="${list[4] eq 0}"><span class="label label-default">Pending</span></c:if>--%>
+                                                            <%--<c:if test="${list[4] eq 2}"><span class="label label-default">Pending</span></c:if>--%>
+                                                            <%--<c:if test="${list[4] eq 1}"><span class="label label-default">Recycle</span></c:if>--%>
+                                                            <%--<c:if test="${list[4] eq 5}"><span class="label label-default">Approve</span></c:if>--%>
+                                                            <%--<c:if test="${list[4] eq 3}"><span class="label label-default">Rejected</span></c:if>--%>
+                                                            <%--<c:if test="${list[4] eq 4}"><span class="label label-default">Online Assessment</span></c:if>--%>
 
-                                                                </td>
+                                                            <!--</td>-->
                                                             <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
 
                                                             <%--</c:if>--%>

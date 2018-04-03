@@ -114,10 +114,73 @@
                                                     <form:textarea path="approvalComment" name="approvalComment" class="form-control" placeholder="Approval Comment"></form:textarea>
                                                     <form:errors path="approvalComment" cssClass="errorDiv"></form:errors>
                                                     </div>
-                                                </div> 
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <label><h3>Approval Detail</h3></label>
+                                                        <div class="table table-bordered">
+                                                            <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="center"  >
+                                                            <c:choose>
+                                                                <c:when test="${empty list}">
+                                                                    <tr>
+                                                                        <td align="center">
+                                                                            <c:out value="There is no record found."></c:out>
+                                                                            </td>
+                                                                        </tr>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <%--<c:if test="${sessionScope.userRight.hr}">--%>
+                                                                            <!--<th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>-->
+                                                                            <%--</c:if>--%>
+                                                                            <!--<th>user id</th>-->
+                                                                            <th style="width: 50px;">Name</th>
+                                                                            <th style="width: 50px;">Date</th>
+                                                                            <th style="width: 50px;">Comment</th>
+                                                                            <th style="width: 50px;">Status</th>
 
-                                                <div class="form-group">
-                                                    <div class="col-sm-4" style="text-align: left">
+                                                                            <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                                            <%--</c:if>--%>
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                            <tbody>
+                                                                <c:forEach var="list" items="${list}">
+                                                                    <tr>
+                                                                        <%--<c:if test="${sessionScope.userRight.hr}">--%>
+                                                                            <!--<td align="center" style="width: 1px;"><input type="checkbox" id="checkId" name="checkId"  value="${list[0]}"  /></td>-->
+                                                                        <%--</c:if>--%>
+                                                                        <!--<td>/</td>-->
+                                                                        <td>${list[1]}</td>
+                                                                        <td>${list[6]}</td>
+                                                                        <td>${list[3]}</td>
+                                                                        <td>
+                                                                            <c:if test="${list[4] eq 0}"><span class="label label-default">Pending</span></c:if>
+                                                                            <c:if test="${list[4] eq 2}"><span class="label label-default">Pending</span></c:if>
+                                                                            <c:if test="${list[4] eq 1}"><span class="label label-default">Recycle</span></c:if>
+                                                                            <c:if test="${list[4] eq 5}"><span class="label label-default">Approve</span></c:if>
+                                                                            <c:if test="${list[4] eq 3}"><span class="label label-default">Rejected</span></c:if>
+                                                                            <c:if test="${list[4] eq 4}"><span class="label label-default">Online Assessment</span></c:if>
+
+                                                                            </td>
+                                                                        <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+
+                                                                        <%--</c:if>--%>
+                                                                    </tr>
+                                                                </c:forEach>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+
+                                                </div><!-- /.col -->
+                                            </div><!-- /.row -->
+
+                                            <div class="form-group">
+                                                <div class="col-sm-4" style="text-align: left">
                                                     <%--<c:if test="${recruitmentMaster.mppStatus == 1 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 0}">--%>
                                                     <input type="submit" class="btn btn-danger" onclick="return reject();" id="btnType1" name="btnType" value="Reject" style="width: 100px" ></input>
                                                     <%--</c:if>--%>

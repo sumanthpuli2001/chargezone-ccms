@@ -299,6 +299,8 @@ public class RecruitmentController extends RecruitmentAbstract {
         int mppvalue = recruitmentMaster.getBudget();
         int mprvalue = mprMaster.getBudget();
         
+        int total = mppvalue - mprvalue;
+        
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid");
@@ -353,7 +355,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             mv.setViewName("Recruitment/MprSearchCreateBudget");
             
         } else {
-            mprMaster.setRemainingBudget(mprvalue);
+            mprMaster.setRemainingBudget(total);
             mprMaster.setStatus(0);
             mprMaster.setCurrentLevel(1);
             mprMaster.setTotalLevel(approvalList.size());

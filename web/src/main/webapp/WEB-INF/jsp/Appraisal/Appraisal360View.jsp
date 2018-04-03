@@ -10,8 +10,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Appraisal Feedback Form</title>
     </head>
-    <script>
 
+    <script>     
         $(function () {
             $("#WorkTypeSelectId").on("change", function () {
                 var selectedValue = this.value;
@@ -19,12 +19,10 @@
                     $('#hourlyBaseTitleDiv').show();
                     $('#shiftNameDiv').hide();
 
-                }
-                else if (selectedValue == "ShiftBase") {
+                } else if (selectedValue == "ShiftBase") {
                     $('#shiftNameDiv').show();
                     $('#hourlyBaseTitleDiv').hide();
-                }
-                else {
+                } else {
                     $('#hourlyBaseTitleDiv').hide();
                     $('#shiftNameDiv').hide();
                 }
@@ -199,7 +197,6 @@
                                                         </div>
                                                     </div>
 
-
                                                     <div class="row">
                                                         <div class="col-md-12 col-sm-12">
                                                             <div class="table-responsive">
@@ -334,7 +331,7 @@
                                                                             <td style="text-align: center;vertical-align: middle"><input type="radio"  name="r12${index.count}" value="5" checked="checked"></td>
                                                                             </c:if>
                                                                     </tr>
-                                                                     <tr>
+                                                                    <tr>
                                                                         <td style="background-color: lightgrey"><b>WLB 2: Remark:</b></td>
                                                                         <td colspan="5"> <textarea  class="form-control"  readonly="true">${list[12]}</textarea></td>
                                                                     </tr>
@@ -388,9 +385,9 @@
                                                                             <td style="text-align: center;vertical-align: middle"><input type="radio"  name="r18${index.count}" value="5" checked="checked"></td>
                                                                             </c:if>
                                                                     </tr>
-                                                                     <tr>
+                                                                    <tr>
                                                                         <td style="background-color: lightgrey"><b>WLB 3: Remark:</b></td>
-                                                                        <td colspan="5"> <textarea  class="form-control"  readonly="true">${list[13]}</textarea></td>
+                                                                        <td colspan="5"> <textarea  class="form-control" readonly="true">${list[13]}</textarea></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <c:if test="${list[7]eq 0}">
@@ -496,7 +493,7 @@
                                                                             <td style="text-align: center;vertical-align: middle"><input type="radio"  name="r30${index.count}" value="5"  checked="checked"></td>
                                                                             </c:if>
                                                                     </tr>
-                                                                     <tr>
+                                                                    <tr>
                                                                         <td style="background-color: lightgrey"><b>WLB 5: Remark:</b></td>
                                                                         <td colspan="5"> <textarea  class="form-control"  readonly="true">${list[15]}</textarea></td>
                                                                     </tr>
@@ -531,11 +528,63 @@
                                                     <textarea  class="form-control"  readonly="true">${list[10]}</textarea>
                                                 </div>
                                             </div><!-- /.col -->
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <label>Average result of feedback marks given by, ${list[1]}</label>
+                                                    <div class="table table-bordered">
+                                                        <table class="table table-bordered ">
+                                                            <tr>    
+                                                                <th>Given Remarks</th> 
+                                                                <th>Total Remarks</th>
+                                                                <!-- <th>Average Remarks</th>-->
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td class='tdGivenRemarks'>${list[4]+list[5]+list[6]+list[7]+list[8]}</td>
+                                                                <td>25</td>
+                                                                <!--  <td>${(list[4]+list[5]+list[6]+list[7]+list[8])/5}</td>-->
+                                                            </tr>  
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.col -->
                                         </div>
 
                                     </div>
 
                                 </c:forEach>
+                                
+                                <div class="box box-info collapsed-box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Average Remarks given by all eligible Employees:</h3>
+                                        <div class="box-tools pull-right">
+                                            <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
+                                        </div>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <label>Average Remarks given by all Employees : </span></label>
+                                                        <div class="table table-bordered">
+                                                            <table class="table table-bordered ">
+                                                                <tr>
+                                                                   <th>Total Average Remarks</th>       
+                                                                </tr>   
+                                                                <tr>
+                                                                    <td><label id='labelTotalAverageRemarks'></label></td>   
+                                                                </tr>  
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.col -->
+                                            </div>
+
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                </div>
+                                 
                                 <!--Additional Remark and Comments In Detail completes Here-->
                                 <div class="form-group">
                                     <div class="col-sm-12" style="text-align: center">
@@ -573,7 +622,8 @@
     jQuery.noConflict();
     jQuery(document).ready(function () {
         //            alert("xkvn");
-
+ 
+        
         jQuery("#employeeMasterByRefForEmpId").tokenInput(${list}, {
             preventDuplicates: true,
             noResultsText: "No Result",
@@ -586,6 +636,17 @@
             searchingText: "Searching ... .. .",
         });
     });
+</script>
+
+<script>
+        var sum = 0;
+        var len = $('.tdGivenRemarks').length;
+        $('.tdGivenRemarks').each(function(){
+            sum += parseInt($(this).text()); 
+        });
+        var avg = sum/(len);
+        $('#labelTotalAverageRemarks').text(avg);
+       
 </script>
 
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

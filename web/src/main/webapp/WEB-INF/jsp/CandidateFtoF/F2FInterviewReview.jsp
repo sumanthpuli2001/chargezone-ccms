@@ -436,7 +436,7 @@
                                                             <div class="col-sm-8">
 
                                                                 <textarea class="form-control"
-                                                                          id="message" name="message" disabled></textarea>
+                                                                          id="message" name="message" ></textarea>
                                                             </div>
                                                         </div>
                                                     </div>

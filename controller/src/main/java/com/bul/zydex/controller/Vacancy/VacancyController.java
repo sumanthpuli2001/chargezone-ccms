@@ -144,6 +144,7 @@ public class VacancyController extends VacancyAbstract {
 
         String experiance = mprMaster.getExperience();
         String description = mprMaster.getDescription();
+        String mprName = mprMaster.getName();
         int position = mprMaster.getNumberOfPosition();
         int budget = mprMaster.getBudget();
 
@@ -161,6 +162,7 @@ public class VacancyController extends VacancyAbstract {
         request.setAttribute("experiance", experiance);
         request.setAttribute("budget", budget);
         request.setAttribute("description", description);
+        request.setAttribute("mprName", mprName);
         mv.setViewName("Vacancy/CreateVacancy");
         return mv;
     }

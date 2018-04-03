@@ -115,7 +115,7 @@
                                                                     <c:if test="${list[4] eq 3}"><span class="label label-danger">Reject</span></c:if>
                                                                     <c:if test="${list[4] eq 4 && list[5] ne list[6]}"><span class="label label-success">Approved</span></c:if>
                                                                     <c:if test="${list[4] eq 4 && list[5] eq list[6]}"><span class="badge">Pending</span></c:if>
-                                                                    <c:if test="${list[4]  eq 5}"><span class="label label-success">Final Approved</span></c:if>
+                                                                    <c:if test="${list[4]  eq 5 || list[4]  eq 21}"><span class="label label-success">Final Approved</span></c:if>
                                                                     <c:if test="${list[4] eq 2}"><span class="label label-warning">Recycled</span></c:if>
                                                                     <%--<c:if test="${list[5] == 0}"><span class="badge">Rejected</span></c:if>--%>
 

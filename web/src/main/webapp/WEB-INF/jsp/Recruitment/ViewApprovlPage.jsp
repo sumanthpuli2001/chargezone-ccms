@@ -57,7 +57,7 @@
 
                                         <form:form class="form-horizontal" method="post"
                                                    commandName="mprMaster" action="recruitment.htm?act=approveSubmitForMpr">
-                                            <form:hidden path="approvalComment"></form:hidden>
+                                            <%--<form:hidden path="approvalComment"></form:hidden>--%>
                                             <input type="hidden" id="empreqid" name="empreqid" value="${mprMaster.id}">
 
                                             <div class="form-group">

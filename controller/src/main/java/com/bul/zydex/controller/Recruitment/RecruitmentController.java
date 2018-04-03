@@ -381,6 +381,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             mprApprovalHistory.setCreatedBy(employeeMaster.getId());
             mprApprovalHistory.setStatus(0);
             mprApprovalHistory.setStatusMessage("Pending");
+            mprApprovalHistory.setComment("Creator");
 
             mprApprovalHistoryService.create(mprApprovalHistory);
 

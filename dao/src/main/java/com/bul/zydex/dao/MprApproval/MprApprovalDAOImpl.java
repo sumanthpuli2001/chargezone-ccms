@@ -29,6 +29,7 @@ public class MprApprovalDAOImpl<T> extends GenericsDAOImpl<T> implements MprAppr
                 + " FROM MprApproval ma "
                 + " Left Join ma.mprMaster mm "
                 + " Where  mm.currentLevel >= ma.level "
+                + " And mm.status!=5 "
                 + " And ma.employeeMaster.id = " + empId
                 + " order by mm.id desc";
 

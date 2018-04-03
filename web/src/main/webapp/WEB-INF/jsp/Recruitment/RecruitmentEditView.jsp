@@ -92,7 +92,7 @@
                                                         <form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                      <div class="col-sm-6">
-                                                        <label>Budget:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>Budget(Yearly):<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:input path="budget" class="form-control" placeholder="Budget"></form:input>
                                                         <form:errors path="budget" cssClass="errorDiv"></form:errors>
                                                     </div>

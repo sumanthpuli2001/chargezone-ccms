@@ -65,7 +65,7 @@
                                                     <span >${designationName}</span>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Experiance: </label> &nbsp;&nbsp;&nbsp;
+                                                    <label>Work Experience(In Year): </label> &nbsp;&nbsp;&nbsp;
                                                     <span>${experiance}</span>   
                                                 </div>
                                             </div>
@@ -88,6 +88,7 @@
                                                     <td>
                                                         <c:forEach  var="test" items="${recruitmentMppApproval}">
                                                             &nbsp;&nbsp;<span>${test[1]}</span>
+                                                             <br>
                                                         </c:forEach>
                                                     </td>
                                                 </tr>

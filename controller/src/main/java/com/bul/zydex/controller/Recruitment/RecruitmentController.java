@@ -392,7 +392,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         if (mprvalue == mppvalue) {
             recruitmentMaster.setMppStatus(21);
             recruitmentService.update(recruitmentMaster);
-
+            
         }
         return mv;
     }
@@ -1021,9 +1021,12 @@ public class RecruitmentController extends RecruitmentAbstract {
         Map<Integer, String> jobtype1 = jobtypeList();
         mv.addObject("locationMap", locationMap);
         mv.addObject("jobtype1", jobtype1);
-        
         String id = request.getParameter("id");
+        
+        List<?> list = recruitmentApprovalHistoryService.getByRecruitementMasterId(Integer.parseInt(id));
+        
         recruitmentMaster = recruitmentService.readById(Integer.parseInt(id));
+        request.setAttribute("list", list);
         mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
         mv.setViewName("Recruitment/ApprovalForMPpHr");
         
@@ -1174,6 +1177,8 @@ public class RecruitmentController extends RecruitmentAbstract {
         String experiance = recruitmentMaster.getExperiance();
         
         int position = recruitmentMaster.getNumberOfPosition();
+        int mppId = recruitmentMaster.getId();
+        List<?> list = recruitmentApprovalHistoryService.getByRecruitementMasterId(mppId);
         
         mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
         mv.getModelMap().put("departmentMaster", departmentMaster);
@@ -1188,6 +1193,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         request.setAttribute("designationName", designationName);
         request.setAttribute("experiance", experiance);
         request.setAttribute("recruitmentMppApproval", recruitmentMppApproval);
+        request.setAttribute("list", list);
         mv.setViewName("Recruitment/ViewMppShow");
         
         return mv;

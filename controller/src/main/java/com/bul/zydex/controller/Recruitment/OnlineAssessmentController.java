@@ -17,6 +17,7 @@ import com.bul.zydex.model.QuestionAnswerSubmit;
 import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.QuestionPaper;
 import com.bul.zydex.model.UserMaster;
+import com.bul.zydex.model.VacancyMaster;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -120,6 +121,7 @@ MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
 
             CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(candidateJobApplicationId));
             CandidateApplyJob candidateApplyJob = candidateJobApplyService.readById(cja.getCandidateApplyJob().getId());
+            VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
             OnlineAssessment onlineAssessment = new OnlineAssessment();
             questionList(request);
             
@@ -129,7 +131,7 @@ MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
             mprApprovalHistory.setCreatedBy(employeeMaster.getId());
             mprApprovalHistory.setStatus(5);
             mprApprovalHistory.setStatusMessage("Online Assessment");
-            mprApprovalHistory.setMprMaster(cja.getVacancyMaster().getMprMaster());
+            mprApprovalHistory.setMprMaster(vm.getMprMaster());
             mprApprovalHistoryService.create(mprApprovalHistory);
             
             mv.getModelMap().put("onlineAssessment", onlineAssessment);

@@ -140,5 +140,7 @@
     <mapping resource="com/bul/zydex/model/CtcAllowance.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/EmployeeCtcDetail.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/RetirementAge.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/RecruitmentApprovalHistory.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/MprApprovalHistory.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

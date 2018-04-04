@@ -34,7 +34,7 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
 
     @Override
     public List<?> readapprovalempId() {
-        String query = "SELECT a.id, b.name, c.employeeName, a.level"
+        String query = "SELECT a.id, b.name, c.employeeName, a.level, b.id"
                 + " FROM ApprovalUser a "
                 + " left join a.approvalMaster b"
                 + " left join a.employeeMaster c"

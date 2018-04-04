@@ -39,7 +39,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public class TrainingMasterController extends TrainingMasterAbstract {
 
-    public ModelAndView showList(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
+    public ModelAndView showList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
         List<?> trainingList = trainingMasterService.readTrainingMasterList();
@@ -72,13 +72,24 @@ public class TrainingMasterController extends TrainingMasterAbstract {
 
     public ModelAndView editClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id = request.getParameter("id");
+        EmployeeMaster employeeMaster = new EmployeeMaster();
         ModelAndView mv = new ModelAndView();
         TrainingMaster trainingMaster = trainingMasterService.readById(Integer.parseInt(id));
         Trainer trainer = trainerService.readById(trainingMaster.getTrainer().getId());
         TrainingType trainingType = trainingTypeService.readById(trainingMaster.getTrainingType().getId());
         TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster.getTrainingSubType().getId());
+        EmployeeMaster em = employeeMasterService.readById(Integer.parseInt(trainingMaster.getTrainingOwner()));
         trainingSubType.setTrainingType(trainingType);
+        
+        selectEmployee(request, response);
+        
+        
+        
+        int employee = em.getId();
+        employeeMaster = (EmployeeMaster)employeeMasterService.readById(employee);
+        String employeeName = employeeMaster.getEmployeeName();
 
+        selectedEmployeeFor360Feedback(request, employeeMaster);
         trainingMaster.setTrainer(trainer);
         trainingMaster.setTrainingType(trainingType);
         trainingMaster.setTrainingSubType(trainingSubType);
@@ -86,6 +97,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         trainingtypeList(request);
         trainingSubtypeList(request);
 
+        mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("trainingMaster", trainingMaster);
         mv.setViewName("Training/TrainingEditView");
         return mv;
@@ -191,7 +203,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
             request.setAttribute(
                     "successMessage",
                     "Information : The Information is saved Successfully.");
-            mv = showList(request, response, trainingMaster);
+            mv = showList(request, response);
 
         }
 //            mv = searchSubmit(request, response);
@@ -287,7 +299,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
             List<?> trainingList = trainingMasterService.read();
             mv.addObject("trainingList", trainingList);
 //            mv.setViewName("Training/TrainingMaster");
-            mv = showList(request, response, trainingMaster);
+            mv = showList(request, response);
         }
 
 //            mv = searchSubmit(request, response);
@@ -353,7 +365,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         }
 //        List<?> trainingList = trainingMasterService.read();
 //          mv.addObject("trainingList", trainingList);
-        mv = showList(request, response, trainingMaster);
+        mv = showList(request, response);
 //        showList(request,response,trainingMaster);
         return mv;
     }

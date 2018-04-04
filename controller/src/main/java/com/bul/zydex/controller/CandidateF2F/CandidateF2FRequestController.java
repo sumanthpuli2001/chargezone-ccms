@@ -9,7 +9,10 @@ import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateF2FApproval;
 import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.model.CandidateJobApplication;
+import com.bul.zydex.model.CertificateTemplate;
+import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.MprApprovalHistory;
 import com.bul.zydex.model.OnlineAssessment;
 import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMppApproval;
@@ -69,6 +72,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
         OnlineAssessment onlineAssessment = new OnlineAssessment();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
 //        EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         BindException errors = new BindException(candidateF2FRequest, "candidateF2FRequest");
@@ -79,6 +83,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         Date cDate = new Date();
 
         candidateJobApplication = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
+        VacancyMaster vm = vacancyMasterService.readById(candidateJobApplication.getVacancyMaster().getId());
 
         candidateF2FRequest.setCandidateJobApplication(candidateJobApplication);
         candidateF2FRequest.setCandidateApplyJob(candidateJobApplication.getCandidateApplyJob());
@@ -92,6 +97,15 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
 
         candidateJobApplication.setStatus(8);
         candidateJobApplicationService.update(candidateJobApplication);
+
+        mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+        mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+        mprApprovalHistory.setCreateDate(sdf.format(cDate));
+        mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+        mprApprovalHistory.setStatus(8);
+        mprApprovalHistory.setStatusMessage("Face To Face Interview");
+        mprApprovalHistory.setMprMaster(vm.getMprMaster());
+        mprApprovalHistoryService.create(mprApprovalHistory);
 
         otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
         for (int i = 0; i <= otherDetailCount; i++) {
@@ -126,14 +140,28 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
         OnlineAssessment onlineAssessment = new OnlineAssessment();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
         String applicationId = request.getParameter("id");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
         CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
+        VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
 
         cja.setStatus(2);
         candidateJobApplicationService.update(cja);
+
+        mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+        mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+        mprApprovalHistory.setMprMaster(vm.getMprMaster());
+        mprApprovalHistory.setStatus(2);
+        mprApprovalHistory.setStatusMessage("ShortListed");
+        mprApprovalHistory.setCreateDate(sdf.format(cDate));
+        mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+        mprApprovalHistoryService.create(mprApprovalHistory);
 
         List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
 
@@ -144,19 +172,83 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.setViewName("Recruitment/CandidateRequestList");
         return mv;
     }
-    
+
     public ModelAndView reject(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
         OnlineAssessment onlineAssessment = new OnlineAssessment();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
         String applicationId = request.getParameter("id");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
         CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
-
+        VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
         cja.setStatus(3);
         candidateJobApplicationService.update(cja);
+
+        mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+        mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+        mprApprovalHistory.setMprMaster(vm.getMprMaster());
+        mprApprovalHistory.setStatus(3);
+        mprApprovalHistory.setStatusMessage("Rejected");
+        mprApprovalHistory.setCreateDate(sdf.format(cDate));
+        mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+        mprApprovalHistoryService.create(mprApprovalHistory);
+
+        List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
+
+        mv.getModelMap().put("list", candidateJobList);
+        questionList(request);
+        mv.getModelMap().put("onlineAssessment", onlineAssessment);
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        mv.setViewName("Recruitment/CandidateRequestList");
+        return mv;
+    }
+
+    public ModelAndView offerLater(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+        String applicationId = request.getParameter("id");
+        String candidateId = request.getParameter("candidateId");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+        CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
+        VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
+        candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(candidateId));
+
+        try {
+            CertificateTemplate certificateTemplate = new CertificateTemplate();
+            certificateTemplate = certificateTemplateService.readById(1);
+            String from = employeeMaster.getOfficeEmailId();
+            String To = candidateApplyJob.getEmailId();
+            String Subject = certificateTemplate.getCertificateType();
+            String msg = certificateTemplate.getCertificateBody();
+            msg = msg.replaceAll("\\{to_user\\}", candidateApplyJob.getName());
+            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+            sendMail.sendMail(from, To, Subject, msg);
+        } catch (Exception e) {
+        }
+
+        cja.setStatus(14);
+        candidateJobApplicationService.update(cja);
+
+        mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+        mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+        mprApprovalHistory.setMprMaster(vm.getMprMaster());
+        mprApprovalHistory.setStatus(14);
+        mprApprovalHistory.setStatusMessage("Send Offer Laters");
+        mprApprovalHistory.setCreateDate(sdf.format(cDate));
+        mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+        mprApprovalHistoryService.create(mprApprovalHistory);
 
         List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
 

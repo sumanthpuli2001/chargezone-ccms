@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.emp;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.ApplayJobUserMaster;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.Company;
@@ -34,6 +35,7 @@ import com.bul.zydex.model.ShiftRotationInfo;
 import com.bul.zydex.model.ShiftRotationMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
+import com.bul.zydex.service.ApplayJobUserMaster.ApplayJobUserMasterService;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.EmployeePolicyDetail.EmployeePolicyDetailService;
 import com.bul.zydex.service.Payroll.PayrollPfCheckService;
@@ -98,6 +100,7 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     protected CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService;
     protected CtcAllowanceService<CtcAllowance> ctcAllowanceService;
     protected EmployeeCtcDetailService<EmployeeCtcDetail> employeeCtcDetailService;
+    protected ApplayJobUserMasterService<ApplayJobUserMaster> applayJobUserMasterService;
 
     public CompetencyEvaluationMasterService<CompetencyEvaluationMaster> getCompetencyEvaluationMasterService() {
         return competencyEvaluationMasterService;
@@ -657,7 +660,14 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     public void setEmployeeCtcDetailService(EmployeeCtcDetailService<EmployeeCtcDetail> employeeCtcDetailService) {
         this.employeeCtcDetailService = employeeCtcDetailService;
     }
-    
+
+    public ApplayJobUserMasterService<ApplayJobUserMaster> getApplayJobUserMasterService() {
+        return applayJobUserMasterService;
+    }
+
+    public void setApplayJobUserMasterService(ApplayJobUserMasterService<ApplayJobUserMaster> applayJobUserMasterService) {
+        this.applayJobUserMasterService = applayJobUserMasterService;
+    }
     
     
 
@@ -727,6 +737,7 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
         }
         request.setAttribute("policy", policy);
     }
+
     protected void ctcList(HttpServletRequest request) {
         CtcAllowance ctcAllowance = new CtcAllowance();
         List<?> ctcList = ctcAllowanceService.read();

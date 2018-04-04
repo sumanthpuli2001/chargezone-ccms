@@ -127,16 +127,16 @@
                                                 <c:if test="${employeeAdditional[1] eq 1}">
 
                                                     <div class="col-sm-1">
-                                                        <input class="form-check-input" name="mcqStatus${status.count}" type="radio"  value="0" >
+                                                        <input class="form-check-input" name="mcqStatus${status.count}" required type="radio"  value="0" >
                                                         <label class="form-check-label" for="radio100${employeeAdditional[6]}">Correct</label>
                                                     </div>
                                                     <div class="col-sm-1">
-                                                        <input class="form-check-input" name="mcqStatus${status.count}" type="radio"  value="1" >
+                                                        <input class="form-check-input" name="mcqStatus${status.count}" required type="radio"  value="1" >
                                                         <label class="form-check-label" for="radio100${employeeAdditional[6]}">Incorrect</label>
                                                     </div>
                                                     <div class="col-sm-2">
 
-                                                        <input type="number" name="givenMarks2" class="form-control" id="givenMarks3${status.count}" class="form-control">
+                                                        <input type="number" name="givenMarks2" class="form-control" id="givenMarks3${status.count}" class="form-control" required>
                                                         <label>/Out Of ${employeeAdditional[5]}</label>
                                                     </div>
                                                 </c:if>

@@ -233,6 +233,7 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
         trainingAssessment.setStatus(1);
         trainingAssessment.setAssessmentResultStatus(2);   // 2 for assessment submit by user
         trainingAssessmentService.update(trainingAssessment);
+         mv = clickassessment(request, response);
         request.setAttribute(
                 "successMessage",
                 "Test Submited Sucessfully");

@@ -102,6 +102,57 @@
 
                                     <div class="box box-info collapsed-box ">
                                         <div class="box-header">
+                                            <h3 class="box-title">Man Power Planing Detail:</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Man Power Planing Budget:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span> ${Mppbudget}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Job Type:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${jobtypeNAme2}</span>    
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
+                                                            <span >${designationName1}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Location:</label>  &nbsp;&nbsp;&nbsp;
+                                                            <span >${locationName2}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Department:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${departmentName2}</span>   
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
+                                                            <span> ${numberOfPositionMpp}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Work Experience(In Years): </label> &nbsp;&nbsp;&nbsp;
+                                                            <span>${MppExperience}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box box-info collapsed-box ">
+                                        <div class="box-header">
                                             <h3 class="box-title">Man Power Requisition Detail:</h3>
                                             <div class="box-tools pull-right">
                                                 <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId1"></i></button>
@@ -385,7 +436,7 @@
                                                             <div class="col-sm-8">
 
                                                                 <textarea class="form-control"
-                                                                          id="message" name="message" disabled></textarea>
+                                                                          id="message" name="message" ></textarea>
                                                             </div>
                                                         </div>
                                                     </div>

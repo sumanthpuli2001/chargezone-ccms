@@ -49,7 +49,13 @@
                                             <form:hidden path="status"></form:hidden>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Department:</label>
+                                                        <label>Man Power Planing Budget:</label> &nbsp;&nbsp;&nbsp;
+                                                        <span> ${Mppbudget}</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label>Department:</label>
                                                     <form:select path="departmentMaster.id" id="departmentMaster" class="form-control">
                                                         <form:option value="" label="-- Select --" />
                                                         <form:options items="${deptMap}"></form:options>

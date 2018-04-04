@@ -41,6 +41,16 @@
                 }
                 return false;
             }
+
+            
+//            function TimedRefresh() {
+//                alert("hi")
+//               location.reload();
+//            };
+//
+//            $(document).ready(function() {
+//              setTimeout("TimedRefresh()", 500); .
+//            });
         </script>
         <script>
             function viewClicklist(id, empid, onlineAssment) {
@@ -56,6 +66,7 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
+        <body>
         <form:form action="" method="post" 
                    name='form1'  commandName="trainingAssessment" onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
 
@@ -142,6 +153,7 @@
             </section>
 
         </form:form>
+        </body>
 
         <div class="tab-pane" id="tab_3"></div><!-- /.tab-pane -->
         <!-- /.content -->

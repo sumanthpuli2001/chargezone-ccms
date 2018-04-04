@@ -49,6 +49,56 @@
 
                                             <div class="box box-info collapsed-box ">
                                                 <div class="box-header">
+                                                    <h3 class="box-title">Man Power Planing Detail:</h3>
+                                                    <div class="box-tools pull-right">
+                                                        <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Man Power Planing Budget:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span> ${Mppbudget}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Job Type:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${jobtypeNAme2}</span>    
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
+                                                                    <span >${designationName1}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Location:</label>  &nbsp;&nbsp;&nbsp;
+                                                                    <span >${locationName2}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Department:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${departmentName2}</span>   
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span> ${numberOfPositionMpp}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Work Experience(In Years): </label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${MppExperience}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="box box-info collapsed-box ">
+                                                <div class="box-header">
                                                     <h3 class="box-title">Man Power Requisition Detail:</h3>
                                                     <div class="box-tools pull-right">
                                                         <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId1"></i></button>
@@ -299,13 +349,16 @@
 
                                             <div class="form-group">
                                                 <div class="col-md-12" style="text-align: right">
-                                                    <c:if test="${candidateJobApplication.status eq 1}">
+                                                    <c:if test="${candidateJobApplication.status eq 1 || candidateJobApplication.status eq 14}">
                                                         <button type="button" class="btn btn-danger" onclick="return reject(${candidateJobApplication.id},${candidateApplyJob.id});" value="Reject">Reject</button>
+                                                    </c:if>
+                                                    <c:if test="${candidateJobApplication.status eq 11}">
+                                                        <button type="button" class="btn btn-primary" onclick="offerLate(${candidateJobApplication.id},${candidateApplyJob.id});">Offer Later</button>
                                                     </c:if>
                                                     <c:if test="${candidateJobApplication.status eq 1}">
                                                         <button type="button" class="btn btn-primary" onclick="shortlisted(${candidateJobApplication.id},${candidateApplyJob.id});">Shortlist</button>
                                                     </c:if>
-                                                    <c:if test="${candidateJobApplication.status eq 11}">
+                                                    <c:if test="${candidateJobApplication.status eq 11 || candidateJobApplication.status eq 14}">
                                                         <button type="button" class="btn btn-primary" onclick="induction(${candidateJobApplication.id},${candidateApplyJob.id});">&nbsp; Induction</button>
                                                     </c:if>
                                                     <c:if
@@ -590,6 +643,11 @@
 <script>
     function shortlisted(applicationId, candidateId) {
         window.location = 'candidateF2FRequest.htm?act=CandidateShortlisted&id=' + applicationId + '&candidateId=' + candidateId;
+    }
+</script>
+<script>
+    function offerLate(applicationId, candidateId) {
+        window.location = 'candidateF2FRequest.htm?act=offerLater&id=' + applicationId + '&candidateId=' + candidateId;
     }
 </script>
 <script>

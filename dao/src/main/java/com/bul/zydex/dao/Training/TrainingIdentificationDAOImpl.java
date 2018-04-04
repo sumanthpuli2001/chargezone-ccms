@@ -91,7 +91,7 @@ public class TrainingIdentificationDAOImpl<T> extends GenericsDAOImpl<T> impleme
     }
 
     public List<?> getTrainerAttendance(int id) {
-        String query = "select c.id,c.employeeName"
+        String query = "select c.id,c.employeeName,b.status"
                 + " FROM TrainingIdentification b"
                 + " left join b.employeeMaster c"
                 + " where b.trainingMaster.id=" + id;

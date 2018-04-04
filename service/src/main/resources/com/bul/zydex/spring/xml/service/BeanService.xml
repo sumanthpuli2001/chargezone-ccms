@@ -619,4 +619,10 @@
     <bean id="retirementAgeService1" class="com.bul.zydex.service.Payroll.RetirementAgeServiceImpl">
         <property name="retirementAgeDAO" ref="retirementAgeDAO1"/>
     </bean>
+    <bean id="recruitmentApprovalHistoryService1" class="com.bul.zydex.service.RecruitmentApprovalHistory.RecruitmentApprovalHistoryServiceImpl">
+        <property name="recruitmentApprovalHistoryDAO" ref="recruitmentApprovalHistoryDAO1"/>
+    </bean>
+    <bean id="mprApprovalHistoryService1" class="com.bul.zydex.service.RecruitmentApprovalHistory.MprApprovalHistoryServiceImpl">
+        <property name="MprApprovalHistoryDAO" ref="MprApprovalHistoryDAO1"/>
+    </bean>
 </beans>

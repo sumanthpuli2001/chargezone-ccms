@@ -83,24 +83,32 @@
                 </div>
                 <div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                     <c:if test="${assflage eq true}">
-                        <button type="button" style="float: right"  class="btn btn-primary" onclick="window.location = 'trainerLogin.htm?act=trainerAssessMent&id=${trainingMasterId}&eventdate=${eventdate}'">Online Assessment</button>
+                        <c:if test="${attendance eq true}">
+                            <button type="button" style="float: right"  class="btn btn-primary" onclick="window.location = 'trainerLogin.htm?act=trainerAssessMent&id=${trainingMasterId}&eventdate=${eventdate}'">Online Assessment</button>
+                        </c:if>
                     </c:if>
                 </div>
                 <div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                     <c:if test="${shosts eq false}">
                         <c:if test="${shosts2 eq false}">
-                            <button type="submit" class="btn btn-primary" style="float: left" title="" style="width: 100px;"><!--<i class="fa fa-"></i>-->Submit Attendance</button>
+                            <c:if test="${attendance eq true}">
+                                <button type="submit" class="btn btn-primary" style="float: left" title="" style="width: 100px;"><!--<i class="fa fa-"></i>-->Submit Attendance</button>
+                            </c:if>
                         </c:if>
                     </c:if>
                 </div>
                 <div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                     <c:if test="${feedbackStatus eq true}">
-                        <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location = 'trainerLogin.htm?act=sendFeedback&id=${trainingMasterId}&eventdate=${eventdate}'"><i class="fa fa-pencil-square-o"></i>Receive Feedback</button>
+                        <c:if test="${attendance eq true}">
+                            <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location = 'trainerLogin.htm?act=sendFeedback&id=${trainingMasterId}&eventdate=${eventdate}'"><i class="fa fa-pencil-square-o"></i>Receive Feedback</button>
+                        </c:if>
                     </c:if>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                     <c:if test="${finishStatus eq 0}">
-                        <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location = 'trainerLogin.htm?act=finishTraining&id=${trainingMasterId}&eventdate=${eventdate}'"><i class="fa fa-pencil-square-o"></i>Finish Training</button>
+                        <c:if test="${attendance eq true}">
+                            <button type="button" class="btn btn-primary" style="float: right" title="" style="width: 100px;" onclick="window.location = 'trainerLogin.htm?act=finishTraining&id=${trainingMasterId}&eventdate=${eventdate}'"><i class="fa fa-pencil-square-o"></i>Finish Training</button>
+                        </c:if>
                     </c:if>
                 </div>
             </div>
@@ -224,9 +232,8 @@
                                                         </c:if> 
                                                     </c:if> 
                                                     <c:if test="${shosts eq false}">
-                                                        <td></td>
+                                                        <td>Attendance not submitted</td>
                                                     </c:if> 
-
                                             <input type="hidden" id="eventdate" name="eventdate" value="${eventdate}">
                                             <c:if test="${list[3] eq 2}">
                                                 <td><a type="button" class="btn btn-default" id="btnType1" onclick="window.location = 'trainerLogin.htm?act=goToAns&id=${list[0]}&eventdate=${eventdate}&trainingMasterId=${trainingMasterId}'" name="btnType" value="AssessMent">Check Paper</a></td>
@@ -240,7 +247,11 @@
                                             <c:if test="${list[3] eq 0}">
                                                 <td><label style="color: green;">PASS</label></td>
                                             </c:if> 
-                                    <!--<td><a type="button" class="btn btn-default" id="btnType1" onclick="goToAns(${list[0]},${trainingMasterId},${eventdate})" name="btnType" value="AssessMent">Training Assessment</a></td>-->
+                                            <c:if test="${empty list[3] }">
+                                                <td>Assessment Not Submitted</td>
+                                            </c:if>
+
+<!--<td><a type="button" class="btn btn-default" id="btnType1" onclick="goToAns(${list[0]},${trainingMasterId},${eventdate})" name="btnType" value="AssessMent">Training Assessment</a></td>-->
                                             <!--</td>-->
                                             </tr>
                                         </c:forEach>

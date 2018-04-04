@@ -18,15 +18,17 @@ public class EmployeePolicyDetail implements java.io.Serializable {
     private PolicyMaster policyMaster;
     private Double amount;
     private String policyNum;
+    private Integer status;
 
     public EmployeePolicyDetail() {
     }
 
-    public EmployeePolicyDetail(EmployeeMaster employeeMaster, PolicyMaster policyMaster, Double amount ,String policyNum) {
+    public EmployeePolicyDetail(EmployeeMaster employeeMaster, PolicyMaster policyMaster, Double amount ,String policyNum,Integer status) {
         this.employeeMaster = employeeMaster;
         this.policyMaster = policyMaster;
         this.amount = amount;
         this.policyNum = policyNum;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -68,6 +70,15 @@ public class EmployeePolicyDetail implements java.io.Serializable {
     public void setPolicyNum(String policyNum) {
         this.policyNum = policyNum;
     }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+    
     
 
 }

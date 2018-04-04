@@ -83,6 +83,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         Date cDate = new Date();
 
         candidateJobApplication = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
+        VacancyMaster vm = vacancyMasterService.readById(candidateJobApplication.getVacancyMaster().getId());
 
         candidateF2FRequest.setCandidateJobApplication(candidateJobApplication);
         candidateF2FRequest.setCandidateApplyJob(candidateJobApplication.getCandidateApplyJob());
@@ -103,7 +104,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mprApprovalHistory.setCreatedBy(employeeMaster.getId());
         mprApprovalHistory.setStatus(8);
         mprApprovalHistory.setStatusMessage("Face To Face Interview");
-        mprApprovalHistory.setMprMaster(candidateJobApplication.getVacancyMaster().getMprMaster());
+        mprApprovalHistory.setMprMaster(vm.getMprMaster());
         mprApprovalHistoryService.create(mprApprovalHistory);
 
         otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
@@ -148,13 +149,14 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
         CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
+        VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
 
         cja.setStatus(2);
         candidateJobApplicationService.update(cja);
 
         mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
         mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
-        mprApprovalHistory.setMprMaster(cja.getVacancyMaster().getMprMaster());
+        mprApprovalHistory.setMprMaster(vm.getMprMaster());
         mprApprovalHistory.setStatus(2);
         mprApprovalHistory.setStatusMessage("ShortListed");
         mprApprovalHistory.setCreateDate(sdf.format(cDate));
@@ -184,13 +186,13 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
         CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
-
+        VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
         cja.setStatus(3);
         candidateJobApplicationService.update(cja);
 
         mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
         mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
-        mprApprovalHistory.setMprMaster(cja.getVacancyMaster().getMprMaster());
+        mprApprovalHistory.setMprMaster(vm.getMprMaster());
         mprApprovalHistory.setStatus(3);
         mprApprovalHistory.setStatusMessage("Rejected");
         mprApprovalHistory.setCreateDate(sdf.format(cDate));
@@ -220,6 +222,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
         CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
+        VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
         candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(candidateId));
 
         try {
@@ -240,7 +243,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
 
         mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
         mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
-        mprApprovalHistory.setMprMaster(cja.getVacancyMaster().getMprMaster());
+        mprApprovalHistory.setMprMaster(vm.getMprMaster());
         mprApprovalHistory.setStatus(14);
         mprApprovalHistory.setStatusMessage("Send Offer Laters");
         mprApprovalHistory.setCreateDate(sdf.format(cDate));

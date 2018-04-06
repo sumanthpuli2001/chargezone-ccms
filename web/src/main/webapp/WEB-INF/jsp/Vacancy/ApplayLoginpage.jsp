@@ -85,7 +85,7 @@
         <form:form class="form-horizontal" role="form" method="post" name='form1'
                    commandName="applayJobUserMaster" onsubmit='return deleteCheck11();' action="vacancy.htm?act=loginCandidate&id=${vacid}">
             <form:hidden path="id"></form:hidden>
-                <!--<input type="hidden" name="lockCounter" value="0"/>-->
+                <input type="text" name="vacid" value="${vacid}"/>
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
@@ -117,7 +117,7 @@
                 <div class="form-group">
                     <div class=" col-sm-offset-0">
                         <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >SUBMIT</button>
-                    <button type="button" class="btn btn-primary" style="float: center; width: 120px;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign Up</button>
+                    <button type="button" class="btn btn-primary" style="float: center; width: 120px;" onclick="window.location = 'vacancy.htm?act=signUp&id=${vacid}'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign Up</button>
                     </div>
                 </div>
 

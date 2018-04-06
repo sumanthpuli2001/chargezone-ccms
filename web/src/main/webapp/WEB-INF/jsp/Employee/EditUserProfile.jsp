@@ -53,6 +53,7 @@
                         + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
 //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "'  min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
                         + "<input type=\"button\"value=\"-\"  onclick=\"removePolicy('addmoreFile" + tempCount3 + "');\"/>"
@@ -91,7 +92,7 @@
         }
 
     </script>
-    <script>
+  <script>
         var tempCount4 = 1;
         $(function () {
             $("#ctcCloneid").on("click", function () {
@@ -102,8 +103,26 @@
                         + "<td id=\"ctcTd" + tempCount4 + "\"><div><select id='ctcId" + tempCount4 + "' name='ctcId" + tempCount4 + "' class=\"form-control\">"
                         + "</select>"
                         + "</div><span id=\"ctcError" + tempCount4 + "\" style=\"color: red;\"></span></td>"
-//                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
+                        //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'  min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
+                        + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='month" + tempCount4 + "' name='month" + tempCount4 + "' class=\"form-control\">"
+                        + "<option value=\"\">--SELECT--</option>"
+                        + "<option value=\"01\">January</option>"
+                        + "<option value=\"02\">February</option>"
+                        + "<option value=\"03\">March</option>"
+                        + "<option value=\"04\">April</option>"
+                        + "<option value=\"05\">May</option>"
+                        + "<option value=\"06\">June</option>"
+                        + "<option value=\"07\">July</option>"
+                        + "<option value=\"08\">August</option>"
+                        + "<option value=\"09\">September</option>"
+                        + "<option value=\"10\">October</option>"
+                        + "<option value=\"11\">November</option>"
+                        + "<option value=\"12\">December</option></select>"
+                        + "</div></td>"
+                        + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='year" + tempCount4 + "' name='year" + tempCount4 + "' class=\"form-control\">"
+                        + "</div></td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
                         + "<input type=\"button\"value=\"-\"  onclick=\"removectc('addmoreFile" + tempCount4 + "');\"/>"
@@ -112,8 +131,26 @@
                         + "</tr>";
                 $("#ctcTable").append(clone);
                 document.getElementById('ctcCount').value = tempCount4;
-//                var expenseType = document.getElementById('expenseType').value;
+                //                var expenseType = document.getElementById('expenseType').value;
                 addActc(tempCount4);
+                window.onload = init;
+                function init() {
+                    document.form1.month.options[new Date().getMonth()].selected = true;
+                }
+                var start = 1990;
+                var end = 2050;
+                var options11 = "";
+
+                for (var year1 = end; year1 >= start; year1--) {
+                    options11 += "<option>" + year1 + "</option>";
+                }
+//                alert(tempCount4);
+                document.getElementById('year2').innerHTML = options11;
+                document.getElementById('year3').innerHTML = options11;
+                document.getElementById('year4').innerHTML = options11;
+                document.getElementById('year5').innerHTML = options11;
+                document.getElementById('year6').innerHTML = options11;
+                document.getElementById('year7').innerHTML = options11;
 
             });
         });
@@ -1034,6 +1071,7 @@
                                                                 <th style="text-align: center; vertical-align: middle">Select Allowance</th>
                                                                 <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
                                                                 <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                <th style="text-align: center; vertical-align: middle">Taxable</th>
                                                                 <th style="text-align: center; vertical-align: middle">Add New</th>
                                                                     <c:choose>
                                                                         <c:when test="${not empty finalPolicyList}">
@@ -1052,7 +1090,7 @@
                                                                             <td style="text-align: center">${countVal.count}</td>
                                                                             <td><div>
                                                                                     <select id="policyId${countVal.count}"  name="policyId${countVal.count}"  class="form-control">
-                                                                                        <option value="">--SELECT--</option>
+                                                                                        <option value="">--SELECT-- ${comp[5]}</option>
                                                                                         <c:forEach var="policyData" items="${policy}" varStatus = "status">
                                                                                             <c:choose>
                                                                                                 <c:when test="${comp[1] == policyData.value}">
@@ -1074,6 +1112,18 @@
                                                                             <td style="text-align: center">
                                                                                 <input type="number" name="amount${countVal.count}" id="amount${countVal.count}" min="0" class="form-control" value="${comp[3]}">
                                                                             </td>
+
+                                                                            <c:if test="${comp[4] eq 1}">
+
+                                                                                <td style="text-align: center">
+                                                                                    <input type="checkbox" name="taxable${countVal.count}" id="taxable${countVal.count}" checked="true">
+                                                                                </td>
+                                                                            </c:if>
+                                                                            <c:if test="${comp[4] ne 1}">
+                                                                                <td style="text-align: center">
+                                                                                    <input type="checkbox" name="taxable${countVal.count}" id="taxable${countVal.count}" >
+                                                                                </td>
+                                                                            </c:if>
                                                                             <td style="text-align: center">
                                                                                 <%--<c:choose>--%>
                                                                                 <%--<c:when test="${countVal.first}">--%>
@@ -1122,6 +1172,9 @@
                                                                             <input type="number" name="amount1" id="amount1" min="0" class="form-control" value="">
                                                                         </td>
                                                                         <td style="text-align: center">
+                                                                            <input type="checkbox" name="taxable1" id="taxable1" >
+                                                                        </td>
+                                                                        <td style="text-align: center">
                                                                             <span style='margin-top: 5px;'>
                                                                                 <input type="button" value="+" id="policyCloneid" />
                                                                             </span>
@@ -1140,6 +1193,9 @@
                                                                 <th style="text-align: center; vertical-align: middle">Select CTC</th>
                                                                 <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
                                                                 <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                <th style="text-align: center; vertical-align: middle">Taxable</th>
+                                                                <th style="text-align: center; vertical-align: middle">Month</th>
+                                                                <th style="text-align: center; vertical-align: middle">Year</th>
                                                                 <th style="text-align: center; vertical-align: middle">Add New</th>
                                                                     <c:choose>
                                                                         <c:when test="${not empty finalPolicyList}">
@@ -1180,6 +1236,230 @@
                                                                             <td style="text-align: center">
                                                                                 <input type="number" name="ctcamount${countVal.count}" id="ctcamount${countVal.count}" min="0" class="form-control" value="${comp[2]}">
                                                                             </td>
+                                                                            <c:if test="${comp[3] eq 1}">
+
+                                                                                <td style="text-align: center">
+                                                                                    <input type="checkbox" name="taxable${countVal.count}" id="taxable${countVal.count}" checked="true">
+                                                                                </td>
+                                                                            </c:if>
+                                                                            <c:if test="${comp[3] ne 1}">
+                                                                                <td style="text-align: center">
+                                                                                    <input type="checkbox" name="taxable${countVal.count}" id="taxable${countVal.count}" >
+                                                                                </td>
+                                                                            </c:if>
+                                                                            <td ><div>
+                                                                                    <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
+                                                                                    <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
+                                                                                    <select id="month${countVal.count}" name="month${countVal.count}"  class="form-control ">
+                                                                                        <c:choose>
+                                                                                            <c:when test="${comp[4] eq 01}">
+                                                                                                <option value="01" selected="selected">January</option>
+                                                                                                <option value="01">January</option>
+                                                                                                <option value="02">February</option>
+                                                                                                <option value="03">March </option>
+                                                                                                <option value="04">April</option>
+                                                                                                <option value="05">May</option>
+                                                                                                <option value="06">June</option>
+                                                                                                <option value="07">July</option>
+                                                                                                <option value="08">August</option>
+                                                                                                <option value="09">September</option>
+                                                                                                <option value="10">October </option>
+                                                                                                <option value="11">November </option>
+                                                                                                <option value="12">December</option>
+                                                                                            </c:when>
+                                                                                            <c:when test="${comp[4] eq 02}">
+                                                                                                <option value="02" selected="selected">February</option>
+                                                                                                <option value="01">January</option>
+                                                                                                <option value="02">February</option>
+                                                                                                <option value="03">March </option>
+                                                                                                <option value="04">April</option>
+                                                                                                <option value="05">May</option>
+                                                                                                <option value="06">June</option>
+                                                                                                <option value="07">July</option>
+                                                                                                <option value="08">August</option>
+                                                                                                <option value="09">September</option>
+                                                                                                <option value="10">October </option>
+                                                                                                <option value="11">November </option>
+                                                                                                <option value="12">December</option>
+                                                                                            </c:when>
+                                                                                            <c:when test="${comp[4] eq 03}">
+                                                                                                <option value="03" selected="selected">March</option>
+                                                                                                <option value="01">January</option>
+                                                                                                <option value="02">February</option>
+                                                                                                <option value="03">March </option>
+                                                                                                <option value="04">April</option>
+                                                                                                <option value="05">May</option>
+                                                                                                <option value="06">June</option>
+                                                                                                <option value="07">July</option>
+                                                                                                <option value="08">August</option>
+                                                                                                <option value="09">September</option>
+                                                                                                <option value="10">October </option>
+                                                                                                <option value="11">November </option>
+                                                                                                <option value="12">December</option>
+                                                                                            </c:when>
+                                                                                            <c:when test="${comp[4] eq 04}">
+                                                                                                <option value="04" selected="selected">April</option>
+                                                                                                <option value="01">January</option>
+                                                                                                <option value="02">February</option>
+                                                                                                <option value="03">March </option>
+                                                                                                <option value="04">April</option>
+                                                                                                <option value="05">May</option>
+                                                                                                <option value="06">June</option>
+                                                                                                <option value="07">July</option>
+                                                                                                <option value="08">August</option>
+                                                                                                <option value="09">September</option>
+                                                                                                <option value="10">October </option>
+                                                                                                <option value="11">November </option>
+                                                                                                <option value="12">December</option>
+                                                                                            </c:when>
+                                                                                            <c:when test="${comp[4] eq 05}">
+                                                                                                <option value="05" selected="selected">May</option>
+                                                                                                <option value="01">January</option>
+                                                                                                <option value="02">February</option>
+                                                                                                <option value="03">March </option>
+                                                                                                <option value="04">April</option>
+                                                                                                <option value="05">May</option>
+                                                                                                <option value="06">June</option>
+                                                                                                <option value="07">July</option>
+                                                                                                <option value="08">August</option>
+                                                                                                <option value="09">September</option>
+                                                                                                <option value="10">October </option>
+                                                                                                <option value="11">November </option>
+                                                                                                <option value="12">December</option>
+                                                                                            </c:when>
+                                                                                            <c:when test="${comp[4] eq 06}">
+                                                                                                <option value="06" selected="selected">June</option>
+                                                                                                <option value="01">January</option>
+                                                                                                <option value="02">February</option>
+                                                                                                <option value="03">March </option>
+                                                                                                <option value="04">April</option>
+                                                                                                <option value="05">May</option>
+                                                                                                <option value="06">June</option>
+                                                                                                <option value="07">July</option>
+                                                                                                <option value="08">August</option>
+                                                                                                <option value="09">September</option>
+                                                                                                <option value="10">October </option>
+                                                                                                <option value="11">November </option>
+                                                                                                <option value="12">December</option>
+                                                                                            </c:when>
+                                                                                            <c:when test="${comp[4] eq 07}">
+                                                                                                <option value="07" selected="selected">July</option>
+                                                                                                <option value="01">January</option>
+                                                                                                <option value="02">February</option>
+                                                                                                <option value="03">March </option>
+                                                                                                <option value="04">April</option>
+                                                                                                <option value="05">May</option>
+                                                                                                <option value="06">June</option>
+                                                                                                <option value="07">July</option>
+                                                                                                <option value="08">August</option>
+                                                                                                <option value="09">September</option>
+                                                                                                <option value="10">October </option>
+                                                                                                <option value="11">November </option>
+                                                                                                <option value="12">December</option>
+                                                                                            </c:when>
+                                                                                            <c:when test="${comp[4] eq 08}">
+                                                                                                <option value="08" selected="selected">August</option>
+                                                                                                <option value="01">January</option>
+                                                                                                <option value="02">February</option>
+                                                                                                <option value="03">March </option>
+                                                                                                <option value="04">April</option>
+                                                                                                <option value="05">May</option>
+                                                                                                <option value="06">June</option>
+                                                                                                <option value="07">July</option>
+                                                                                                <option value="08">August</option>
+                                                                                                <option value="09">September</option>
+                                                                                                <option value="10">October </option>
+                                                                                                <option value="11">November </option>
+                                                                                                <option value="12">December</option>
+                                                                                            </c:when>
+                                                                                            <c:when test="${comp[4] eq 09}">
+                                                                                                <option value="09" selected="selected">September</option>
+                                                                                                <option value="01">January</option>
+                                                                                                <option value="02">February</option>
+                                                                                                <option value="03">March </option>
+                                                                                                <option value="04">April</option>
+                                                                                                <option value="05">May</option>
+                                                                                                <option value="06">June</option>
+                                                                                                <option value="07">July</option>
+                                                                                                <option value="08">August</option>
+                                                                                                <option value="09">September</option>
+                                                                                                <option value="10">October </option>
+                                                                                                <option value="11">November </option>
+                                                                                                <option value="12">December</option>
+                                                                                            </c:when>
+                                                                                            <c:when test="${comp[4] eq 10}">
+                                                                                                <option value="10" selected="selected">October</option>
+                                                                                                <option value="01">January</option>
+                                                                                                <option value="02">February</option>
+                                                                                                <option value="03">March </option>
+                                                                                                <option value="04">April</option>
+                                                                                                <option value="05">May</option>
+                                                                                                <option value="06">June</option>
+                                                                                                <option value="07">July</option>
+                                                                                                <option value="08">August</option>
+                                                                                                <option value="09">September</option>
+                                                                                                <option value="10">October </option>
+                                                                                                <option value="11">November </option>
+                                                                                                <option value="12">December</option>
+                                                                                            </c:when>
+                                                                                            <c:when test="${comp[4] eq 11}">
+                                                                                                <option value="11" selected="selected">November</option>
+                                                                                                <option value="01">January</option>
+                                                                                                <option value="02">February</option>
+                                                                                                <option value="03">March </option>
+                                                                                                <option value="04">April</option>
+                                                                                                <option value="05">May</option>
+                                                                                                <option value="06">June</option>
+                                                                                                <option value="07">July</option>
+                                                                                                <option value="08">August</option>
+                                                                                                <option value="09">September</option>
+                                                                                                <option value="10">October </option>
+                                                                                                <option value="11">November </option>
+                                                                                                <option value="12">December</option>
+                                                                                            </c:when>
+                                                                                            <c:when test="${comp[4] eq 12}">
+                                                                                                <option value="12" selected="selected">December</option>
+                                                                                                <option value="01">January</option>
+                                                                                                <option value="02">February</option>
+                                                                                                <option value="03">March </option>
+                                                                                                <option value="04">April</option>
+                                                                                                <option value="05">May</option>
+                                                                                                <option value="06">June</option>
+                                                                                                <option value="07">July</option>
+                                                                                                <option value="08">August</option>
+                                                                                                <option value="09">September</option>
+                                                                                                <option value="10">October </option>
+                                                                                                <option value="11">November </option>
+                                                                                                <option value="12">December</option>
+                                                                                            </c:when>
+                                                                                            <c:otherwise>
+                                                                                                <!--<option value="">--Select--</option>-->
+                                                                                                <option value="01">January</option>
+                                                                                                <option value="02">February</option>
+                                                                                                <option value="03">March </option>
+                                                                                                <option value="04">April</option>
+                                                                                                <option value="05">May</option>
+                                                                                                <option value="06">June</option>
+                                                                                                <option value="07">July</option>
+                                                                                                <option value="08">August</option>
+                                                                                                <option value="09">September</option>
+                                                                                                <option value="10">October </option>
+                                                                                                <option value="11">November </option>
+                                                                                                <option value="12">December</option>
+                                                                                            </c:otherwise>
+                                                                                        </c:choose>
+
+
+                                                                                    </select>
+                                                                                </div>
+                                                                            </td>
+                                                                             <td ><div>
+                                                                                   
+                                                                                    <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
+                                                                                    <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
+                                                                                    <input   class="form-control" value="${comp[5]}"></select>
+                                                                                    </div>
+                                                                                    </td>
                                                                             <td style="text-align: center">
                                                                                 <%--<c:choose>--%>
                                                                                 <%--<c:when test="${countVal.first}">--%>
@@ -1226,6 +1506,36 @@
                                                                                                                                                 </td>-->
                                                                         <td style="text-align: center">
                                                                             <input type="number" name="ctcamount1" id="ctcamount1" min="0" class="form-control" value="">
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <input type="checkbox" name="taxable1" id="taxable1" >
+                                                                        </td>
+                                                                        <td id="monthTd1"><div>
+                                                                                <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
+                                                                                <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
+                                                                                <select id="month1" name="month1"  class="form-control ">
+                                                                                    <option value="">--Select--</option>
+                                                                                    <option value="01">January</option>
+                                                                                    <option value="02">February</option>
+                                                                                    <option value="03">March </option>
+                                                                                    <option value="04">April</option>
+                                                                                    <option value="05">May</option>
+                                                                                    <option value="06">June</option>
+                                                                                    <option value="07">July</option>
+                                                                                    <option value="08">August</option>
+                                                                                    <option value="09">September</option>
+                                                                                    <option value="10">October </option>
+                                                                                    <option value="11">November </option>
+                                                                                    <option value="12">December</option>
+
+                                                                                </select>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="text-align: center">
+
+                                                                            <select name="year1" id="year1" class="form-control ">
+
+                                                                            </select>
                                                                         </td>
                                                                         <td style="text-align: center">
                                                                             <span style='margin-top: 5px;'>
@@ -1828,7 +2138,20 @@
 
 
     </script>
+    <script type="text/javascript">
+        window.onload = init;
+        function init() {
+            document.form1.month.options[new Date().getMonth()].selected = true;
+        }
+        var start = 1990;
+        var end = 2050;
+        var options11 = "";
 
+        for (var year1 = end; year1 >= start; year1--) {
+            options11 += "<option>" + year1 + "</option>";
+        }
+        document.getElementById('year1').innerHTML = options11;
+    </script>
 
 </html>
 

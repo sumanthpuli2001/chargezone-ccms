@@ -695,7 +695,7 @@ public class RecruitmentController extends RecruitmentAbstract {
 
             } else {
                 mprMaster.setStatus(4);
-                mprApprovalHistory.setStatus(4);
+                mprApprovalHistory.setStatus(5);
                 mprMaster.setCurrentLevel(CurrentLevel + 1);
 
             }

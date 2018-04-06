@@ -268,8 +268,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             int otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
             for (int i = 1; i <= otherDetailCount; i++) {
                 PolicyMaster policyMaster = new PolicyMaster();
-                if (null != request.getParameter("policyId" + i) && null != request.getParameter("amount" + i) && null != request.getParameter("policyNumber" + i)) {
-                    if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("amount" + i).equals("") && !request.getParameter("policyNumber" + i).equals("")) {
+                if (null != request.getParameter("policyId" + i) && null != request.getParameter("amount" + i)) {
+                    if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("amount" + i).equals("")) {
                         int policyId = Integer.parseInt(request.getParameter("policyId" + i));
                         policyMaster.setId(policyId);
                         Double amount = Double.valueOf(request.getParameter("amount" + i));
@@ -278,6 +278,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         employeePolicyDetail.setAmount(amount);
                         employeePolicyDetail.setPolicyMaster(policyMaster);
                         employeePolicyDetail.setPolicyNum(policyNumber);
+                        if (null != request.getParameter("taxable" + i)) {
+                            employeePolicyDetail.setStatus(1);
+                        } else {
+                            employeePolicyDetail.setStatus(0);
+                        }
                         employeePolicyDetailService.create(employeePolicyDetail);
                     }
                 }
@@ -293,10 +298,19 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         int ctcId = Integer.parseInt(request.getParameter("ctcId" + i));
                         ctcAllowance.setId(ctcId);
                         Double amount = Double.valueOf(request.getParameter("ctcamount" + i));
+                        String month = request.getParameter("month" + i);
+                         String year = request.getParameter("year" + i);
 //                        String policyNumber = request.getParameter("policyNumber" + i);
                         employeeCtcDetail.setEmployeeMaster(employeeMaster);
                         employeeCtcDetail.setAmount(amount);
                         employeeCtcDetail.setCtcAllowance(ctcAllowance);
+                        if (null != request.getParameter("taxable" + i)) {
+                            employeeCtcDetail.setStatus(1);
+                        } else {
+                            employeeCtcDetail.setStatus(0);
+                        }
+                        employeeCtcDetail.setMonth(month);
+                        employeeCtcDetail.setYear(year);
                         employeeCtcDetailService.create(employeeCtcDetail);
                     }
                 }
@@ -767,6 +781,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             policyList.add(policyDetail[1]);
             policyList.add(policyDetail[2]);
             policyList.add(policyDetail[3]);
+            policyList.add(policyDetail[4]);
             finalPolicyList.add(policyList);
         }
         List finalctcList = new ArrayList();
@@ -778,6 +793,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             ctcList.add(policyDetail1[0]);
             ctcList.add(policyDetail1[1]);
             ctcList.add(policyDetail1[2]);
+            ctcList.add(policyDetail1[3]);
+            ctcList.add(policyDetail1[4]);
+            ctcList.add(policyDetail1[5]);
 //            ctcList.add(policyDetail1[3]);
             finalctcList.add(ctcList);
         }
@@ -1010,19 +1028,25 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         }
 
         EmployeePolicyDetail employeePolicyDetailObject = new EmployeePolicyDetail();
+//        EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
         int otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
         for (int i = 1; i <= otherDetailCount; i++) {
             PolicyMaster policyMaster = new PolicyMaster();
-            if (null != request.getParameter("policyId" + i) && null != request.getParameter("amount" + i) && null != request.getParameter("policyNumber" + i)) {
-                if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("amount" + i).equals("") && !request.getParameter("policyNumber" + i).equals("")) {
+            if (null != request.getParameter("policyId" + i) && null != request.getParameter("amount" + i)) {
+                if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("amount" + i).equals("")) {
                     int policyId = Integer.parseInt(request.getParameter("policyId" + i));
                     policyMaster.setId(policyId);
-                    employeePolicyDetail.setPolicyMaster(policyMaster);
                     Double amount = Double.valueOf(request.getParameter("amount" + i));
-                    employeePolicyDetail.setAmount(amount);
                     String policyNumber = request.getParameter("policyNumber" + i);
-                    employeePolicyDetail.setPolicyNum(policyNumber);
                     employeePolicyDetail.setEmployeeMaster(employeeMaster);
+                    employeePolicyDetail.setAmount(amount);
+                    employeePolicyDetail.setPolicyMaster(policyMaster);
+                    employeePolicyDetail.setPolicyNum(policyNumber);
+                    if (null != request.getParameter("taxable" + i)) {
+                        employeePolicyDetail.setStatus(1);
+                    } else {
+                        employeePolicyDetail.setStatus(0);
+                    }
                     employeePolicyDetailService.create(employeePolicyDetail);
                 }
             }
@@ -1036,6 +1060,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             employeeCtcDetailService.delete(employeeCtcDetail.getId());
         }
 //        EmployeeCtcDetail employeeCtcDetail = new EmployeeCtcDetail();
+//                EmployeeCtcDetail employeeCtcDetail = new EmployeeCtcDetail();
         int otherDetailCount1 = Integer.parseInt(request.getParameter("ctcCount"));
         for (int i = 1; i <= otherDetailCount1; i++) {
             CtcAllowance ctcAllowance = new CtcAllowance();
@@ -1044,10 +1069,19 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     int ctcId = Integer.parseInt(request.getParameter("ctcId" + i));
                     ctcAllowance.setId(ctcId);
                     Double amount = Double.valueOf(request.getParameter("ctcamount" + i));
+                    String month = request.getParameter("month" + i);
+                    String year = request.getParameter("year" + i);
 //                        String policyNumber = request.getParameter("policyNumber" + i);
                     employeeCtcDetail.setEmployeeMaster(employeeMaster);
                     employeeCtcDetail.setAmount(amount);
                     employeeCtcDetail.setCtcAllowance(ctcAllowance);
+                    if (null != request.getParameter("taxable" + i)) {
+                        employeeCtcDetail.setStatus(1);
+                    } else {
+                        employeeCtcDetail.setStatus(0);
+                    }
+                    employeeCtcDetail.setMonth(month);
+                    employeeCtcDetail.setYear(year);
                     employeeCtcDetailService.create(employeeCtcDetail);
                 }
             }

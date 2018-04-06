@@ -9,20 +9,27 @@ package com.bul.zydex.model;
  *
  * @author Hussain
  */
-public class EmployeeCtcDetail implements java.io.Serializable{
+public class EmployeeCtcDetail implements java.io.Serializable {
+
     private Integer id;
     private EmployeeMaster employeeMaster;
     private CtcAllowance ctcAllowance;
-    private Double amount; 
+    private Double amount;
+    private Integer status;
+    private String month;
+    private String year;
 
     public EmployeeCtcDetail() {
     }
 
-    public EmployeeCtcDetail(Integer id, EmployeeMaster employeeMaster, CtcAllowance ctcAllowance, Double amount) {
+    public EmployeeCtcDetail(Integer id, EmployeeMaster employeeMaster, CtcAllowance ctcAllowance, Double amount,Integer status,String month,String year) {
         this.id = id;
         this.employeeMaster = employeeMaster;
         this.ctcAllowance = ctcAllowance;
         this.amount = amount;
+        this.status = status;
+        this.month = month;
+        this.year = year;
     }
 
     public Integer getId() {
@@ -56,7 +63,31 @@ public class EmployeeCtcDetail implements java.io.Serializable{
     public void setAmount(Double amount) {
         this.amount = amount;
     }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
     
     
-    
+
 }

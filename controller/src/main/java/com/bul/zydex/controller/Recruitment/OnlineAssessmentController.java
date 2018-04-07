@@ -137,7 +137,10 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
             mv.getModelMap().put("onlineAssessment", onlineAssessment);
             request.setAttribute("candidateJobApplication", cja);
             mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+            request.setAttribute("successMessage",
+                    "Information : Assessment Submitted successfully.");
             mv.setViewName("Recruitment/CandidateApproval");
+            
         } catch (Exception e) {
             request.setAttribute("failureMessage",
                     "All field are Required.Please Enter Valid data");
@@ -307,6 +310,8 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
             questionList(request);
             mv.getModelMap().put("onlineAssessment", onlineAssessment);
             mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+              request.setAttribute("successMessage",
+                    "Information : Paper Checked successfully.");
             mv.setViewName("Recruitment/CandidateRequestList");
 
         } catch (Exception e) {

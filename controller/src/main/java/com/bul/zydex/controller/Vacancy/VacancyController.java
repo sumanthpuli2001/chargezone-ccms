@@ -600,6 +600,7 @@ public class VacancyController extends VacancyAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
+        String vacid = request.getParameter("vacid");
         HttpSession session = request.getSession();
         ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
         ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.bul.zydex.service.Training;
 
 import com.bul.zydex.dao.Training.TrainerDAO;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -38,7 +38,6 @@ public class TrainerServiceImpl<T> extends GenericsServiceImpl<T> implements Tra
         Trainer user;
         Trainer user2 = (Trainer) object;
         return trainerDAO.read(object);
-        
 
 //        List<?> list = userMasterDAO.read();
 //        Iterator i = list.iterator();
@@ -56,7 +55,7 @@ public class TrainerServiceImpl<T> extends GenericsServiceImpl<T> implements Tra
 
     @Override
     public List<?> readByUserName(T object) {
-         return trainerDAO.readByUserName(object);
+        return trainerDAO.readByUserName(object);
     }
 
     @Override
@@ -66,9 +65,22 @@ public class TrainerServiceImpl<T> extends GenericsServiceImpl<T> implements Tra
 
     @Override
     public List<?> ListeventDates(String eventDate, int trainerId) {
-         return trainerDAO.ListeventDates(eventDate, trainerId);
+        return trainerDAO.ListeventDates(eventDate, trainerId);
     }
 
+    @Override
+    public boolean isExist(Trainer trainer) {
+        Trainer trainer1 = (Trainer) trainer;
 
-   
+        List<?> list = trainerDAO.read();
+        Iterator i = list.iterator();
+        while (i.hasNext()) {
+            trainer = (Trainer) i.next();
+            if (trainer.getTrainerName().equalsIgnoreCase(trainer1.getTrainerName()) || trainer.getUserName().equalsIgnoreCase(trainer1.getUserName()) || trainer.getEmailId().equalsIgnoreCase(trainer1.getEmailId())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

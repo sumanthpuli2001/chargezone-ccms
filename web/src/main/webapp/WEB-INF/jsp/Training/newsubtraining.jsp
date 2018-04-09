@@ -44,8 +44,8 @@
         <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>
         </c:if>
-        <c:if test="${!empty failureMessage}">
-            <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
+        <c:if test="${!empty faliureMessage}">
+            <div class="fadeOutEffect alert alert-danger" role="alert">${faliureMessage}</div>
         </c:if>
         <form:form action="trainingType.htm?act=deleteSubmittrainingsubtype" method="post"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">

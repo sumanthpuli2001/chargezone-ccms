@@ -784,6 +784,7 @@
         <property name="payrollLoanRemainingAmountService" ref="payrollLoanRemainingAmountService1" />
         <property name="ctcAllowanceService" ref="ctcAllowanceService1" />
         <property name="employeeCtcDetailService" ref="employeeCtcDetailService1" />
+        <property name="employeeCtcDetailSalaryService" ref="employeeCtcDetailSalaryService1" />
     </bean>
     <bean id="additionalAmountCheckController1" class="com.bul.zydex.controller.Payroll.AdditionalAmountCheckController" parent="controllerConfig" >
         <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />

@@ -75,19 +75,33 @@ public class TrainerController extends TrainerAbstract {
             mv.setViewName("Training/RegistrationTrainer");
         } else {
             if (null == trainer.getId()) {
-                trainer.setCreatedDate(sdf.format(cDate));
-                trainer.setCreatedBy(user.getId());
-                trainerService.create(trainer);
+                if (!trainerService.isExist(trainer)) {
+                    trainer.setCreatedDate(sdf.format(cDate));
+                    trainer.setCreatedBy(user.getId());
+                    trainerService.create(trainer);
 
-//             mv.setViewName("Training/CreateTrainer");
+                    request.setAttribute("successMessage",
+                            "Information : The Information is saved Successfully.");
+                } else {
+                    request.setAttribute("faliureMessage",
+                            "Error : The Saving Type is already there.");
+                }
             } else {
-                trainer.setUpdatedDate(sdf.format(cDate));
-                trainer.setUpdatedBy(user.getId());
-                trainerService.update(trainer);
-               
+                if (!trainerService.isExist(trainer)) {
+                    trainer.setUpdatedDate(sdf.format(cDate));
+                    trainer.setUpdatedBy(user.getId());
+                    trainerService.update(trainer);
+
+                    request.setAttribute("successMessage",
+                            "Information : The Information is Updated Successfully.");
+
+                } else {
+                    request.setAttribute("faliureMessage",
+                            "Error : The Saving Type is already there.");
+                }
+
             }
-            request.setAttribute("successMessage",
-                    "Information : The Information is saved Successfully.");
+
             mv = createTrainerShow(request, response);
         }
         return mv;

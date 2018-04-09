@@ -142,5 +142,8 @@
     <mapping resource="com/bul/zydex/model/RetirementAge.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/RecruitmentApprovalHistory.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/MprApprovalHistory.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/DataTableReportMaster.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/Modules.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/ComponentMaster.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

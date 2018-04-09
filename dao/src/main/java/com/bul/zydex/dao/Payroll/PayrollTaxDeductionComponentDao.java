@@ -14,6 +14,11 @@ import java.util.List;
  */
 public interface PayrollTaxDeductionComponentDao<T> extends GenericsDAO<T> {
     
-    public List<?> readTaxDeductionComponent();
+//    public List<?> readTaxDeductionComponent();
+    
+    public List<?> readByComponentId(int id);
+
+    public List readSection();
+    
     
 }

@@ -6,7 +6,9 @@
 package com.bul.zydex.controller.Payroll;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.PayrollTaxDeductionComponent;
 import com.bul.zydex.model.PayrollTaxDeductionMaster;
+import com.bul.zydex.service.Payroll.PayrollTaxDeductionComponentService;
 
 import com.bul.zydex.service.Payroll.PayrollTaxDeductionMasterService;
 import java.util.HashMap;
@@ -21,6 +23,7 @@ import org.springframework.validation.Validator;
 public class PayrollTaxDeductionMasterAbstract extends CustomAbstract{
     
     protected PayrollTaxDeductionMasterService<PayrollTaxDeductionMaster> payrollTaxDeductionMasterService;
+    protected PayrollTaxDeductionComponentService<PayrollTaxDeductionComponent> payrollTaxDeductionComponentService;
     protected Validator payrollTaxDeductionMasterValidator;
     protected Validator payrollTaxDeductionComponentValidator; 
     
@@ -32,6 +35,14 @@ public class PayrollTaxDeductionMasterAbstract extends CustomAbstract{
         this.payrollTaxDeductionMasterService = payrollTaxDeductionMasterService;
     }
 
+    public PayrollTaxDeductionComponentService<PayrollTaxDeductionComponent> getPayrollTaxDeductionComponentService() {
+        return payrollTaxDeductionComponentService;
+    }
+
+    public void setPayrollTaxDeductionComponentService(PayrollTaxDeductionComponentService<PayrollTaxDeductionComponent> payrollTaxDeductionComponentService) {
+        this.payrollTaxDeductionComponentService = payrollTaxDeductionComponentService;
+    }
+ 
     public Validator getPayrollTaxDeductionMasterValidator() {
         return payrollTaxDeductionMasterValidator;
     }

@@ -15,9 +15,5 @@ import java.util.List;
 public interface PayrollTaxDeductionMasterDao<T> extends GenericsDAO<T> {
     
     public List<?> readTaxDeduction();
-
-    public List<?> readByComponentId();
-
-    public List readSection();
     
 }

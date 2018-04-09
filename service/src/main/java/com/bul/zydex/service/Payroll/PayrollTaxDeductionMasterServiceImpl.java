@@ -14,6 +14,7 @@ import java.util.List;
  * @author DELL3
  */
 public class PayrollTaxDeductionMasterServiceImpl<T> extends GenericsServiceImpl<T> implements PayrollTaxDeductionMasterService<T> {
+    
     private PayrollTaxDeductionMasterDao<T> payrollTaxDeductionMasterDao;
  
     public PayrollTaxDeductionMasterDao<T> getPayrollTaxDeductionMasterDao() {
@@ -29,18 +30,5 @@ public class PayrollTaxDeductionMasterServiceImpl<T> extends GenericsServiceImpl
     public List<?> readTaxDeduction() {
         return payrollTaxDeductionMasterDao.readTaxDeduction(); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public List<?> readByComponentId(int parseInt) {
-        return payrollTaxDeductionMasterDao.readByComponentId();
-    }
-
-    @Override
-    public List readSection() {
-        return payrollTaxDeductionMasterDao.readSection();
-    }
-
-
-
     
 }

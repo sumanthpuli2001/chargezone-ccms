@@ -161,8 +161,13 @@ public class PayrollTaxDeductionMasterController extends PayrollTaxDeductionMast
     public ModelAndView showTaxDeductionComponent(HttpServletRequest request, HttpServletResponse response)
     {
         ModelAndView mv = new ModelAndView();
+        
         PayrollTaxDeductionComponent payrollTaxDeductionComponentCreate = new PayrollTaxDeductionComponent();
+        
+   //     List<?> tdmList = payrollTaxDeductionComponentService.read();
+        
         mv.getModelMap().put("payrollTaxDeductionComponentCreate", payrollTaxDeductionComponentCreate);
+    //    mv.getModelMap().put("list",tdmList);
         mv.setViewName("Payroll/PayrollTaxDeductionComponentCreate");
         return mv;
     }
@@ -205,28 +210,22 @@ public class PayrollTaxDeductionMasterController extends PayrollTaxDeductionMast
             request.setAttribute("faliureMessage",
                         "Error : The Tax Deduction Component Creation is not valid.");
             mv.addAllObjects(errors.getModel());
-            mv.setViewName("Payroll/PayrollTaxDeductionNewCreate");
+            mv = createTaxDeductionComponentClick(request,response);
         }
         else
         {
-            String sectionId = request.getParameter("sectionSelectId");
-            payrollTaxDeductionMaster.setId(Integer.parseInt(sectionId));
-
-            payrollTaxDeductionComponentCreate.setPayrollTaxDeductionMaster(payrollTaxDeductionMaster);
-            payrollTaxDeductionComponentCreate.setCreatedBy(employeeMaster.getId());
-
-
-            payrollTaxDeductionComponentCreate.setCreatedDate(sdf.format(createdDate));
             payrollTaxDeductionComponentCreate.setTdcStatus(0);
-            payrollTaxDeductionMasterService.create(payrollTaxDeductionMaster);
-                
+            payrollTaxDeductionComponentCreate.setCreatedBy(employeeMaster.getId());
+            payrollTaxDeductionComponentCreate.setCreatedDate(sdf.format(createdDate));
+            payrollTaxDeductionComponentService.create(payrollTaxDeductionComponentCreate);
+
             request.setAttribute("successMessage","Information: The Tax Deduction Component is Created successfully");
+            mv.getModelMap().put("employeeMaster", employeeMaster);
+            mv.getModelMap().put("payrollTaxDeductionComponentCreate", payrollTaxDeductionComponentCreate);
+            
+            mv = showTaxDeductionComponent(request, response);
         }
         
-        mv.getModelMap().put("payrollTaxDeductionMaster", payrollTaxDeductionMaster);
-        mv.getModelMap().put("employeeMaster", employeeMaster);
-        mv.getModelMap().put("payrollTaxDeductionComponentCreate", payrollTaxDeductionComponentCreate);
-        mv = showTaxDeductionComponent(request, response);
         return mv;
     }
     
@@ -240,7 +239,8 @@ public class PayrollTaxDeductionMasterController extends PayrollTaxDeductionMast
         
         String id = request.getParameter("id");
         payrollTaxDeductionMaster = payrollTaxDeductionMasterService.readById(Integer.parseInt(id));
-        List<?> componentList = payrollTaxDeductionMasterService.readByComponentId(Integer.parseInt(id));
+        
+        List<?> componentList = payrollTaxDeductionComponentService.readByComponentId(Integer.parseInt(id));
 
         mv.getModelMap().put("payrollTaxDeductionComponent", payrollTaxDeductionComponent);
         mv.getModelMap().put("payrollTaxDeductionMaster", payrollTaxDeductionMaster);
@@ -278,9 +278,16 @@ public class PayrollTaxDeductionMasterController extends PayrollTaxDeductionMast
     {
         ModelAndView mv = new ModelAndView();
         PayrollTaxDeductionComponent payrollTaxDeductionComponentCreate = new PayrollTaxDeductionComponent();
+        
+        String id = request.getParameter("id");
+       
+        List<PayrollTaxDeductionComponent> componentList = (List<PayrollTaxDeductionComponent>) payrollTaxDeductionComponentService.readByComponentId(Integer.parseInt(id));
+
         mv.getModelMap().put("payrollTaxDeductionComponentCreate", payrollTaxDeductionComponentCreate);
+        mv.getModelMap().put("componentList", componentList);
         mv.setViewName("Payroll/PayrollTaxDeductionComponentEdit");
-        return mv;
+
+        return mv; 
     }
     
     public ModelAndView editTaxDeductionComponentSubmit(HttpServletRequest request, HttpServletResponse response)

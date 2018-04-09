@@ -1204,7 +1204,8 @@
     
     <bean id="payrollTaxDeductionMasterController1" class="com.bul.zydex.controller.Payroll.PayrollTaxDeductionMasterController"  parent="controllerConfig">
         <property name="payrollTaxDeductionMasterService" ref="payrollTaxDeductionMasterService1"></property>
-        <property name="payrollTaxDeductionMasterValidator" ref="payrollTaxDeductionMasterValidator1"/>
+        <property name="payrollTaxDeductionComponentService" ref="payrollTaxDeductionComponentService1"></property>
+        <property name="payrollTaxDeductionMasterValidator" ref="payrollTaxDeductionMasterValidator1"></property>
         <property name="payrollTaxDeductionComponentValidator" ref="payrollTaxDeductionComponentValidator1"></property> 
     </bean>
     

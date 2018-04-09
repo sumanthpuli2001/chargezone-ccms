@@ -58,6 +58,59 @@
                                 <div class="box-header">
                                 </div>
                                 
+                                <div class="box-body no-padding">
+
+                                    <div class="row">
+
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="table table-bordered">
+
+                                                <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                    <c:choose>
+                                                        <c:when test="${empty list}">
+                                                            <tr>
+                                                                <td align="Center">There is No Record Found.</td>
+                                                            </tr>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
+                                                                    <th>Section</th>
+                                                                    <th>Component</th>
+                                                                    <th>Age Limit</th>
+                                                                    <th>Tax Saving Limit - Component Wise</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <c:forEach  var="list" items="${list}" varStatus="status">
+                                                                    <tr>
+                                                                        <td align="Center">
+                                                                            <input type="checkbox" name="checkId" id="checkId" value="${list.componentId}">
+                                                                        </td>
+                                                                        <td>${list.component}</td>
+                                                                        <td>${list.component}</td>
+                                                                        <td>${list.ageLimit}</td>
+                                                                        <td>${list.taxSavingLimit}</td>
+                                                                        <td>
+                                                                            <div class="btn-group">
+                                                                                <button type="button" onclick="editClick(${list.componentId});" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                    &nbsp;&nbsp;Edit
+                                                                                </button>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </c:forEach>
+                                                            </tbody>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div> 
+                                </div>
+                                
                             </div><!-- /.tab-content -->
                         </div><!-- nav-tabs-custom -->
                     </div><!-- /.col -->

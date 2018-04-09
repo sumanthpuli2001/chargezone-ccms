@@ -20,14 +20,34 @@ public class PayrollTaxDeductionComponentDaoImpl<T> extends GenericsDAOImpl<T> i
         return PayrollTaxDeductionComponent.class;
     }
     
+//    @Override
+//    public List<?> readTaxDeductionComponent() {
+//       
+//        String query = "SELECT a "
+//                + " FROM PayrollTaxDeductionComponent a";
+//        
+//        List<?> list = getHibernateTemplate().find(query);
+//        return list;
+//        
+//    }
+    
+    
     @Override
-    public List<?> readTaxDeductionComponent() {
-       
+    public List<?> readByComponentId(int id) {
         String query = "SELECT a "
-                + " FROM PayrollTaxDeductionComponent a";
-        
+               + " FROM PayrollTaxDeductionComponent a"
+               + " WHERE componentId = " + id;
+      
         List<?> list = getHibernateTemplate().find(query);
         return list;
-        
     }
+
+    @Override
+    public List readSection(){
+        String query = "SELECT a.id,a.section "
+               + " FROM PayrollTaxDeductionMaster a";
+      
+        List list = getHibernateTemplate().find(query);
+        return list;
+    }   
 }

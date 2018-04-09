@@ -628,4 +628,7 @@
     <bean id="payrollTaxDeductionMasterService1" class="com.bul.zydex.service.Payroll.PayrollTaxDeductionMasterServiceImpl">
         <property name="payrollTaxDeductionMasterDao" ref="payrollTaxDeductionMasterDao1"/>
     </bean>
+    <bean id="payrollTaxDeductionComponentService1" class="com.bul.zydex.service.Payroll.PayrollTaxDeductionComponentServiceImpl">
+        <property name="payrollTaxDeductionComponentDao" ref="payrollTaxDeductionComponentDao1"/>
+    </bean>
 </beans>

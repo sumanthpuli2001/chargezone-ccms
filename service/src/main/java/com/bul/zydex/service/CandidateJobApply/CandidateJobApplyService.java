@@ -27,4 +27,5 @@ public interface CandidateJobApplyService<T> extends GenericsService<T> {
 
     public boolean isExistCertificateAttach(String name);
 
+    public List<?> candidateApplyJobcheackUserId(int userId);
 }

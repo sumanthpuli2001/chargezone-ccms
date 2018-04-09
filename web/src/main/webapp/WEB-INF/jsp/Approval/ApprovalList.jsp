@@ -10,15 +10,15 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Employee Registration Result</title>
+        <title>Approval Setting</title>
     </head>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Man Power Planning Budget List</h1>
+            <h1>Approval Setting</h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home111</a></li>
-                <li class="active">Budget Detail List</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Approval Setting</li>
             </ol>
         </section>
 
@@ -107,7 +107,7 @@
 
                                                                     <td>
                                                                         <div class="btn-group">
-                                                                            <button type="button" onclick="viewClick(${list[4]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            <button type="button" onclick="viewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
                                                                         </button>
                                                                     </div>

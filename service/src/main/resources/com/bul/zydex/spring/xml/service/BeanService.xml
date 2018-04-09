@@ -625,4 +625,10 @@
     <bean id="mprApprovalHistoryService1" class="com.bul.zydex.service.RecruitmentApprovalHistory.MprApprovalHistoryServiceImpl">
         <property name="MprApprovalHistoryDAO" ref="MprApprovalHistoryDAO1"/>
     </bean>
+    <bean id="payrollTaxDeductionMasterService1" class="com.bul.zydex.service.Payroll.PayrollTaxDeductionMasterServiceImpl">
+        <property name="payrollTaxDeductionMasterDao" ref="payrollTaxDeductionMasterDao1"/>
+    </bean>
+    <bean id="employeeCtcDetailSalaryService1" class="com.bul.zydex.service.EmployeeCtcDetailSalary.EmployeeCtcDetailSalaryServiceImpl">
+        <property name="employeeCtcDetailSalaryDAO" ref="employeeCtcDetailSalaryDAO1"/>
+    </bean>
 </beans>

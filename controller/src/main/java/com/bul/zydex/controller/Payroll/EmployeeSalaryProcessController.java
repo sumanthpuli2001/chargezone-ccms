@@ -7,6 +7,8 @@ package com.bul.zydex.controller.Payroll;
 
 import com.bul.zydex.model.CtcAllowance;
 import com.bul.zydex.model.EmployeeAdditionalSalary;
+import com.bul.zydex.model.EmployeeCtcDetail;
+import com.bul.zydex.model.EmployeeCtcDetailSalary;
 import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeExcelRecord;
 import com.bul.zydex.model.EmployeeLeaveBalance;
@@ -279,6 +281,53 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                 employeeAdditionalSalary.setPayrollSalaryType(policyName);
                 employeeAdditionalSalary.setAdditionalAmount(PolicyAmount);
                 employeeAdditionalSalaryService.create(employeeAdditionalSalary);
+
+            }
+        }
+        EmployeeCtcDetailSalary employeeCtcDetailSalary1 = new EmployeeCtcDetailSalary();
+        //// ctc delete allowance 
+        List<?> list32 = employeeCtcDetailSalaryService.readByEmployeCtcReport(employeeSalaryProcess.getEmployeeMaster().getId(), employeeSalaryProcess.getMonth(), employeeSalaryProcess.getYear());
+        for (Object o : list32) {
+            employeeCtcDetailSalary1 = (EmployeeCtcDetailSalary) o;
+            employeeCtcDetailSalaryService.delete(employeeCtcDetailSalary1.getId());
+        }
+
+        /////////////ctc ALLOWANCE
+        employeeMaster = employeeMasterService.readById(employeeSalaryProcess.getEmployeeMaster().getId());
+        List<?> CTCAMOUNTtList = employeeCtcDetailService.readEmployeeCtcDetail(employeeSalaryProcess.getEmployeeMaster().getId());
+        if (!CTCAMOUNTtList.isEmpty()) {
+
+            for (Object ctcAmountList1 : CTCAMOUNTtList) {
+                Object[] o = (Object[]) ctcAmountList1;
+                String ctcName = (String) o[1];
+                Double ctcAmount = (Double) o[0];
+                Integer ctcid = (Integer) o[2];
+                String month = (String) o[3];
+                String year = (String) o[4];
+                EmployeeCtcDetailSalary employeeCtcDetailSalary = new EmployeeCtcDetailSalary();
+                employeeCtcDetailSalary.setAmount(ctcAmount);
+                CtcAllowance ctcAllowance = new CtcAllowance();
+                ctcAllowance.setId(ctcid);
+                employeeCtcDetailSalary.setCtcAllowance(ctcAllowance);
+                employeeCtcDetailSalary.setEmployeeMaster(employeeMaster);
+                employeeCtcDetailSalary.setMonth(employeeSalaryProcess.getMonth());
+                employeeCtcDetailSalary.setYear(employeeSalaryProcess.getYear());
+                employeeCtcDetailSalary.setMonthly(month);
+                employeeCtcDetailSalary.setYearly(year);
+                employeeCtcDetailSalaryService.create(employeeCtcDetailSalary);
+                List<?> employeeCtcList = employeeCtcDetailSalaryService.readEmployeeCtcDetailSalary(employeeSalaryProcess.getEmployeeMaster().getId(), employeeSalaryProcess.getMonth(), employeeSalaryProcess.getYear(), ctcid);
+                if (!employeeCtcList.isEmpty()) {
+                    for (Object employeeCtcList1 : employeeCtcList) {
+                        Object[] o1 = (Object[]) employeeCtcList1;
+                        String ctcName1 = (String) o1[1];
+                        Double ctcAmount1 = (Double) o[0];
+                        employeeAdditionalSalary.setEmployeeSalaryProcess(employeeSalaryProcess);
+                        employeeAdditionalSalary.setPayrollSalaryType(ctcName1);
+                        employeeAdditionalSalary.setAdditionalAmount(ctcAmount1);
+                        employeeAdditionalSalaryService.create(employeeAdditionalSalary);
+                    }
+
+                }
 
             }
         }

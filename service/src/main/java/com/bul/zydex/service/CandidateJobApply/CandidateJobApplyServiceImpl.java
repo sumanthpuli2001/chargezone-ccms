@@ -59,4 +59,9 @@ public class CandidateJobApplyServiceImpl<T> extends GenericsServiceImpl<T> impl
         return candidateJobApplyDAO.isExistCertificateAttach(name);
     }
 
+    @Override
+    public List<?> candidateApplyJobcheackUserId(int userId) {
+         return candidateJobApplyDAO.candidateApplyJobcheackUserId(userId);
+    }
+
 }

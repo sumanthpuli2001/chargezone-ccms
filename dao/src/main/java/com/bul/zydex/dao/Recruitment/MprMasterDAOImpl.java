@@ -65,4 +65,16 @@ public class MprMasterDAOImpl<T> extends GenericsDAOImpl<T> implements MprMaster
         return list;
     }
 
-}
+    @Override
+    public List<?> Mppdelete(String mppId) {
+           String query = "";
+        query += " "
+                + " SELECT a"
+                + " FROM MprMaster a "
+                + " Where a.recruitmentMaster.id = " + mppId;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    }

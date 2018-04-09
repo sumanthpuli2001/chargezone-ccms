@@ -10,6 +10,7 @@ import com.bul.zydex.model.AdditionalAmountCheck;
 import com.bul.zydex.model.CtcAllowance;
 import com.bul.zydex.model.EmployeeAdditionalSalary;
 import com.bul.zydex.model.EmployeeCtcDetail;
+import com.bul.zydex.model.EmployeeCtcDetailSalary;
 import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeExcelRecord;
 import com.bul.zydex.model.EmployeePolicyDetail;
@@ -33,6 +34,7 @@ import com.bul.zydex.model.PayrollRecurringDeduction;
 import com.bul.zydex.model.PayrollSalaryLock;
 import com.bul.zydex.model.PayrollSalaryType;
 import com.bul.zydex.model.PolicyMaster;
+import com.bul.zydex.service.EmployeeCtcDetailSalary.EmployeeCtcDetailSalaryService;
 import com.bul.zydex.service.EmployeePolicyDetail.EmployeePolicyDetailService;
 import com.bul.zydex.service.Payroll.AdditionalAmountCheckService;
 import com.bul.zydex.service.Payroll.EmployeeAdditionalSalaryService;
@@ -99,6 +101,7 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     protected PayrollLoanRemainingAmountService<PayrollLoanRemainingAmount> payrollLoanRemainingAmountService;
     protected CtcAllowanceService<CtcAllowance> ctcAllowanceService;
     protected EmployeeCtcDetailService<EmployeeCtcDetail> employeeCtcDetailService;
+    protected EmployeeCtcDetailSalaryService<EmployeeCtcDetailSalary> employeeCtcDetailSalaryService;
 
     Validator employeeSalaryProcessValidator;
 
@@ -325,6 +328,15 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     public void setEmployeeCtcDetailService(EmployeeCtcDetailService<EmployeeCtcDetail> employeeCtcDetailService) {
         this.employeeCtcDetailService = employeeCtcDetailService;
     }
+
+    public EmployeeCtcDetailSalaryService<EmployeeCtcDetailSalary> getEmployeeCtcDetailSalaryService() {
+        return employeeCtcDetailSalaryService;
+    }
+
+    public void setEmployeeCtcDetailSalaryService(EmployeeCtcDetailSalaryService<EmployeeCtcDetailSalary> employeeCtcDetailSalaryService) {
+        this.employeeCtcDetailSalaryService = employeeCtcDetailSalaryService;
+    }
+    
     
     
 

@@ -22,8 +22,7 @@ public class RandomPasswordGenerator {
 		for (int i = 0; i < 10; i++) {
 			char[] pswd = new RandomPasswordGenerator().generatePswd(minLen,
 					maxLen, noOfCAPSAlpha, noOfDigits, noOfSplChars);
-			System.out
-					.println("Len = " + pswd.length + ", " + new String(pswd));
+			System.out.println("Len = " + pswd.length + ", " + new String(pswd));
 		}
 	}
 

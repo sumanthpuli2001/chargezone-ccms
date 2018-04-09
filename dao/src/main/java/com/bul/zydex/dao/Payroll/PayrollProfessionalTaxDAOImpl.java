@@ -40,6 +40,7 @@ public class PayrollProfessionalTaxDAOImpl<T> extends GenericsDAOImpl<T> impleme
                 + " AND CAST(ppt.salaryTo, Double) <= " + basicSalary;
 
         return getHibernateTemplate().find(query);
+        
     }
 
     

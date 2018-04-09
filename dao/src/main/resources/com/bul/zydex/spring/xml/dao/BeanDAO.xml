@@ -254,4 +254,6 @@
     <bean id="retirementAgeDAO1" class="com.bul.zydex.dao.Payroll.RetirementAgeDAOImpl" parent="sessionFactoryConfig" />
     <bean id="recruitmentApprovalHistoryDAO1" class="com.bul.zydex.dao.RecruitmentApprovalHistory.RecruitmentApprovalHistoryDAOImpl" parent="sessionFactoryConfig" />
     <bean id="MprApprovalHistoryDAO1" class="com.bul.zydex.dao.RecruitmentApprovalHistory.MprApprovalHistoryDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="payrollTaxDeductionMasterDao1" class="com.bul.zydex.dao.Payroll.PayrollTaxDeductionMasterDaoImpl" parent="sessionFactoryConfig"/>
+   
 </beans>

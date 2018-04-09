@@ -32,7 +32,6 @@
         <property name="emailTemplateService" ref="emailTemplateService1" />
         <property name="sendMail" ref="sendMail1" />
         <property name="emailAddMasterService" ref="emailAddMasterService1" />
-
     </bean>
     <!--User-->
     <bean id="userMasterController1" class="com.bul.zydex.controller.UserMasterController" parent="controllerConfig" >
@@ -987,11 +986,13 @@
         <property name="employeeExcelRecordService" ref="employeeExcelRecordService1" />
         <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
     </bean>
+    
     <bean id="loanReportController1" class="com.bul.zydex.controller.Payroll.LoanReportController" parent="controllerConfig" >
         <property name="payrollLoanTypeService" ref="payrollLoanTypeService1" />
         <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
         <property name="payrollLoanRemainingAmountService" ref="payrollLoanRemainingAmountService1" />
     </bean>
+    
     <bean id="attendanceReportController1" class="com.bul.zydex.controller.Payroll.AttendanceReportController" parent="controllerConfig" >
         <property name="employeeMasterService" ref="employeeMasterService1"></property>
         <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
@@ -1199,5 +1200,12 @@
         <property name="retirementAgeService" ref="retirementAgeService1"></property>
 
     </bean>
+    
+    <bean id="payrollTaxDeductionMasterController1" class="com.bul.zydex.controller.Payroll.PayrollTaxDeductionMasterController"  parent="controllerConfig">
+        <property name="payrollTaxDeductionMasterService" ref="payrollTaxDeductionMasterService1"></property>
+        <property name="payrollTaxDeductionMasterValidator" ref="payrollTaxDeductionMasterValidator1"/>
+        <property name="payrollTaxDeductionComponentValidator" ref="payrollTaxDeductionComponentValidator1"></property> 
+    </bean>
+    
 </beans>
  

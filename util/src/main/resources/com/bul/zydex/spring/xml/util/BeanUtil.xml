@@ -17,7 +17,6 @@
 
     <bean id="sendMail" class="com.bul.zydex.util.SendMail">
         <property name="mailSender" ref="mailSender"/>
-
     </bean>
     <!--<bean id="responseTimeFilter" class="com.bul.zydex.util.filter.ResponseTimeFilter"/>-->
 </beans>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.bul.zydex.model.PayrollTaxDeductionComponent" table="payroll_tax_deduction_component">
+        <id name="componentId" type="java.lang.Integer">
+             <column name="component_id"/>
+             <generator class="identity"/>
+        </id>
+
+        <many-to-one name="payrollTaxDeductionMaster" class="com.bul.zydex.model.PayrollTaxDeductionMaster" fetch="select">
+            <column name="section_id" />
+        </many-to-one>
+        
+        <property name="component" type="string">
+            <column name="component"/>
+        </property>
+        
+        <property name="ageLimit" type="java.lang.Integer">
+            <column name="age_limit" />
+        </property>
+        
+        <property name="taxSavingLimit" type="java.lang.Integer">
+            <column name="tax_saving_limit" />
+        </property>
+      
+        <property name="tdcStatus" type="java.lang.Integer">
+            <column name="tdc_status" />
+        </property>
+        
+        <property name="createdBy" type="java.lang.Integer">
+            <column name="created_by" />
+        </property>
+        
+        <property name="createdDate" type="string">
+            <column name="created_date" />
+        </property>
+        
+        <property name="updatedBy" type="java.lang.Integer">
+            <column name="updated_by" />
+        </property>
+        
+        <property name="updatedDate" type="java.lang.String">
+            <column name="updated_date" />
+        </property>
+  </class>
+</hibernate-mapping>

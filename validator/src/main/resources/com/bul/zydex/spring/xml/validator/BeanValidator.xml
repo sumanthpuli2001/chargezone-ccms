@@ -153,4 +153,6 @@
     <bean id="classifiedBoxValidator1" class="com.bul.zydex.validator.Classified.ClassifiedBoxValidator" />
     <bean id="trainingMasterValidator1" class="com.bul.zydex.validator.Training.TrainingMasterValidator" />
     <bean id="ctcValidator1" class="com.bul.zydex.validator.policy.CtcValidator"/>
+    <bean id="payrollTaxDeductionMasterValidator1" class="com.bul.zydex.validator.Payroll.PayrollTaxDeductionMasterValidator" />
+    <bean id="payrollTaxDeductionComponentValidator1" class="com.bul.zydex.validator.Payroll.PayrollTaxDeductionComponentValidator" />
 </beans>

@@ -431,11 +431,15 @@ public class VacancyController extends VacancyAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
-        String id = request.getParameter("id");
-        int VacId = Integer.parseInt(id);
+//        String id = request.getParameter("id");
+//        int VacId = Integer.parseInt(id);
         ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
         mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
-        mv.getModelMap().put("vacid", VacId);
+        if ("" == request.getParameter("id")) {
+            String id = request.getParameter("id");
+            int VacId = Integer.parseInt(id);
+            mv.getModelMap().put("vacid", VacId);
+        }
         mv.setViewName("Vacancy/signUpButton");
         return mv;
     }
@@ -525,7 +529,7 @@ public class VacancyController extends VacancyAbstract {
 
                     ajuMaster.setProfileSubmit(1);
                     applayJobUserMasterSerivce.update(ajuMaster);
-                    
+
                 }
             }
 

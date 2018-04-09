@@ -144,6 +144,7 @@ public class ApprovalController extends ApprovalAbstract {
        
 //        approvalMaster = approvalMasterService.readById(approvalUser.getApprovalMaster().getId());
         approvalMaster = approvalMasterService.readById(Integer.parseInt(id));
+        approvalUser = approvalUserService.readById(Integer.parseInt(id));
 
         EmployeeMaster employeeMaster = new EmployeeMaster();
         employeeMaster= approvalUser.getEmployeeMaster();

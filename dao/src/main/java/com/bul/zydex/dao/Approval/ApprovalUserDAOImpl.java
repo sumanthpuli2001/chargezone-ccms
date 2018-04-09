@@ -26,7 +26,7 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
         String query = "SELECT a"
                 + " FROM ApprovalUser a "
                 + " left join a.approvalMaster b"
-                + " WHERE a.approvalMaster.id = " + id;
+                + " WHERE a.id = " + id;
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
@@ -38,7 +38,7 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
                 + " FROM ApprovalUser a "
                 + " left join a.approvalMaster b"
                 + " left join a.employeeMaster c"
-                + " order by a.id desc";
+                + " order by a.id";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

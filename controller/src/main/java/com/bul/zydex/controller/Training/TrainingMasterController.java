@@ -39,7 +39,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public class TrainingMasterController extends TrainingMasterAbstract {
 
-    public ModelAndView showList(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
+    public ModelAndView showList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
         List<?> trainingList = trainingMasterService.readTrainingMasterList();
@@ -203,7 +203,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
             request.setAttribute(
                     "successMessage",
                     "Information : The Information is saved Successfully.");
-            mv = showList(request, response, trainingMaster);
+            mv = showList(request, response);
 
         }
 //            mv = searchSubmit(request, response);
@@ -299,7 +299,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
             List<?> trainingList = trainingMasterService.read();
             mv.addObject("trainingList", trainingList);
 //            mv.setViewName("Training/TrainingMaster");
-            mv = showList(request, response, trainingMaster);
+            mv = showList(request, response);
         }
 
 //            mv = searchSubmit(request, response);
@@ -365,7 +365,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         }
 //        List<?> trainingList = trainingMasterService.read();
 //          mv.addObject("trainingList", trainingList);
-        mv = showList(request, response, trainingMaster);
+        mv = showList(request, response);
 //        showList(request,response,trainingMaster);
         return mv;
     }

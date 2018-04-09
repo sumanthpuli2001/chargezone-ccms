@@ -16,4 +16,6 @@ public interface RecruitmentApprovalHistoryService<T> extends GenericsService<T>
 
     public List<?> getByRecruitementMasterId(int mppId);
 
+    public List<?> AppMppdelete(String APmppId);
+
 }

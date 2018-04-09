@@ -196,15 +196,15 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         if (attenlist.isEmpty()) {
             shosts = false;
             attenlist = trainingIdentificationService.getTrainerAttendance(Integer.parseInt(id));
-            for (int i = 0; i < attenlist.size(); i++) {                      //  from
+            for (int i = 0; i < attenlist.size(); i++) {
                 List fList = new ArrayList();
                 Object o = attenlist.get(i);
                 int size = attenlist.size();
-                int assessmentResult = 0;
+                int assessmentResult = 10;
                 Object str1[] = (Object[]) o;
                 Integer empId = (Integer) str1[0];
                 String name = (String) str1[1];
-
+                Integer status = (Integer) str1[2];
                 List<?> list = trainingAssessmentService.readTrainingAssementList(Integer.parseInt(id), empId);
                 if (!list.isEmpty()) {
                     for (Object o2 : list) {
@@ -215,7 +215,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
                 }
                 fList.add(empId);
                 fList.add(name);
-
+                fList.add(status);
                 fList.add(assessmentResult);
                 newlist.add(fList);
 
@@ -227,7 +227,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
                 List fList = new ArrayList();
                 Object o = attenlist.get(i);
                 int size = attenlist.size();
-                int assessmentResult = 0;
+                int assessmentResult = 10;
                 Object str1[] = (Object[]) o;
                 Integer empId = (Integer) str1[0];
                 String name = (String) str1[1];
@@ -262,6 +262,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         Date currenstarttdate = sdf.parse(currentDate);
         Date currentenddate = sdf.parse(eventdate);
         boolean shosts2 = true;
+        boolean attendance = false;
         boolean feedbackdshow = false;
         if (!trainingFeedbackList.isEmpty()) {
             feedbackdshow = true;
@@ -269,11 +270,14 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         if (currenstarttdate.compareTo(currentenddate) <= 0) {
             shosts2 = false;
         }
+        if (currenstarttdate.compareTo(currentenddate) >= 0) {
+            attendance = true;
+        }
         boolean assflage = false;
         SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
         Date startdate = formatter1.parse(trainingMaster1.getStartDate());
         Date enddate = formatter1.parse(trainingMaster1.getEndDate());
-        if (currenstarttdate.compareTo(startdate) >= 0 && currenstarttdate.compareTo(enddate) <= 0 || currentenddate.compareTo(startdate) >= 0 && currentenddate.compareTo(enddate) <= 0) {
+        if ((currenstarttdate.compareTo(startdate) >= 0 && currenstarttdate.compareTo(enddate) <= 0 || currentenddate.compareTo(startdate) >= 0 && currentenddate.compareTo(enddate) <= 0) ) {
             assflage = true;
         }
 
@@ -283,6 +287,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         request.setAttribute("shosts2", shosts2);
         request.setAttribute("trainingMaster", trainingMaster1);
         request.setAttribute("shosts", shosts);
+        request.setAttribute("attendance", attendance);
         request.setAttribute("eventdate", eventdate);
         request.setAttribute("list", newlist);
 //        request.setAttribute("list", attenlist);
@@ -308,13 +313,37 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         if (attenlist.isEmpty()) {
             shosts = false;
             attenlist = trainingIdentificationService.getTrainerAttendance(Integer.parseInt(id));
+            for (int i = 0; i < attenlist.size(); i++) {
+                List fList = new ArrayList();
+                Object o = attenlist.get(i);
+                int size = attenlist.size();
+                int assessmentResult = 10;
+                Object str1[] = (Object[]) o;
+                Integer empId = (Integer) str1[0];
+                String name = (String) str1[1];
+                Integer status = (Integer) str1[2];
+                List<?> list = trainingAssessmentService.readTrainingAssementList(Integer.parseInt(id), empId);
+                if (!list.isEmpty()) {
+                    for (Object o2 : list) {
+                        Object str[] = (Object[]) o2;
+                        assessmentResult = (int) str[12];
+
+                    }
+                }
+                fList.add(empId);
+                fList.add(name);
+                fList.add(status);
+                fList.add(assessmentResult);
+                newlist.add(fList);
+
+            }
 
         } else {
             for (int i = 0; i < attenlist.size(); i++) {
                 List fList = new ArrayList();
                 Object o = attenlist.get(i);
                 int size = attenlist.size();
-                int assessmentResult = 0;
+                int assessmentResult = 10;   // 10 status is not need to display
                 Object str1[] = (Object[]) o;
                 Integer empId = (Integer) str1[0];
                 String name = (String) str1[1];
@@ -349,12 +378,16 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         Date currenstarttdate = sdf.parse(currentDate);
         Date currentenddate = sdf.parse(eventdate);
         boolean shosts2 = true;
+        boolean attendance = false;
         boolean feedbackdshow = false;
         if (!trainingFeedbackList.isEmpty()) {
             feedbackdshow = true;
         }
         if (currenstarttdate.compareTo(currentenddate) <= 0) {
             shosts2 = false;
+        }
+        if (currenstarttdate.compareTo(currentenddate) >= 0) {
+            attendance = true;
         }
         boolean assflage = false;
         SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
@@ -370,6 +403,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         request.setAttribute("shosts2", shosts2);
         request.setAttribute("trainingMaster", trainingMaster1);
         request.setAttribute("shosts", shosts);
+        request.setAttribute("attendance", attendance);
         request.setAttribute("eventdate", eventdate);
         request.setAttribute("list", newlist);
 //        request.setAttribute("list", attenlist);

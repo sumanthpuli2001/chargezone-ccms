@@ -12,6 +12,9 @@
     function reviewClick(f2fRequestId) {
         window.location = 'candidateF2FApproval.htm?act=openInterviewReviewPage&id=' + f2fRequestId;
     }
+    function reviewAscommitteeAndHrClick(f2fRequestId) {
+        window.location = 'candidateF2FApproval.htm?act=reviewAscommitteeAndHrClick&id=' + f2fRequestId;
+    }
 </script>
 <script>
     function onlyView(f2fRequestId) {
@@ -122,17 +125,24 @@
                                                             </td>
 
                                                             <td>
-                                                                
-                                                                    <div class="btn-group">
-                                                                        <button type="button" onclick="onlyView(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
-                                                                            &nbsp;&nbsp;View
-                                                                        </button>
-                                                                    </div>
-                                                              
 
-                                                                <c:if test="${list[4] eq 0 || list[4] eq 3 || list[4] eq 1}">
+                                                                <div class="btn-group">
+                                                                    <button type="button" onclick="onlyView(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                        &nbsp;&nbsp;View
+                                                                    </button>
+                                                                </div>
+
+
+                                                                <c:if test="${list[4] eq 3 || list[4] eq 1}">
                                                                     <div class="btn-group">
                                                                         <button type="button" onclick="reviewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            &nbsp;&nbsp;Approval
+                                                                        </button>
+                                                                    </div>
+                                                                </c:if>
+                                                                <c:if test="${list[4] eq 0 && list[5] ne null}">
+                                                                    <div class="btn-group">
+                                                                        <button type="button" onclick="reviewAscommitteeAndHrClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;Approval
                                                                         </button>
                                                                     </div>

@@ -14,8 +14,8 @@ import java.util.List;
  *
  * @author Vikas
  */
-public class CandidateF2FRequestServiceImpl<T> extends GenericsServiceImpl<T> implements CandidateF2FRequestService<T>{
-    
+public class CandidateF2FRequestServiceImpl<T> extends GenericsServiceImpl<T> implements CandidateF2FRequestService<T> {
+
     private CandidateF2FRequestDAO<T> candidateF2FRequestDAO;
 
     public CandidateF2FRequestDAO<T> getCandidateF2FRequestDAO() {
@@ -28,15 +28,13 @@ public class CandidateF2FRequestServiceImpl<T> extends GenericsServiceImpl<T> im
     }
 
     @Override
-    public List<?> interviewReqDetailread() {
-        return  candidateF2FRequestDAO.interviewReqDetailread();
+    public List<?> interviewReqDetailread(int empId) {
+        return candidateF2FRequestDAO.interviewReqDetailread(empId);
     }
 
     @Override
     public CandidateF2FRequest readById(int id) {
-         return  candidateF2FRequestDAO.readById(id);
+        return candidateF2FRequestDAO.readById(id);
     }
-    
-    
-    
+
 }

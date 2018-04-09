@@ -31,4 +31,9 @@ public class RecruitmentApprovalHistoryServiceImpl<T> extends GenericsServiceImp
         return recruitmentApprovalHistoryDAO.getByRecruitementMasterId(mppId);
     }
 
+    @Override
+    public List<?> AppMppdelete(String APmppId) {
+        return recruitmentApprovalHistoryDAO.AppMppdelete(APmppId);
+    }
+
 }

@@ -27,14 +27,13 @@ public class ApplayJobUserMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         query += ""
                 + " From ApplayJobUserMaster a "
                 + " WHERE a.userName = '" + applayJobUserMaster.getUserName() + "'";
-      
+
         List list = getHibernateTemplate().find(query);
         if (!list.isEmpty()) {
             return true;
         }
         return false;
     }
-    
 
     @Override
     public boolean profileFilling(int userId) {
@@ -62,12 +61,35 @@ public class ApplayJobUserMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " And a.password = '" + applayJobUserMaster.getPassword() + "'";
         List list = getHibernateTemplate().find(query);
         if (!list.isEmpty()) {
-             ajum = (ApplayJobUserMaster) list.get(0);
+            ajum = (ApplayJobUserMaster) list.get(0);
 
-        }else{
-           ajum = null;
+        } else {
+            ajum = null;
         }
         return ajum;
+    }
+
+    @Override
+    public Boolean checkByLogInStatus(T object) {
+        ApplayJobUserMaster ajum = new ApplayJobUserMaster();
+        ApplayJobUserMaster applayJobUserMaster = (ApplayJobUserMaster) object;
+        String query = "";
+        Boolean flage = false;
+        query += ""
+                + " From ApplayJobUserMaster a "
+                + " WHERE a.userName = '" + applayJobUserMaster.getUserName() + "'"
+                + " And a.password = '" + applayJobUserMaster.getPassword() + "'"
+                + " and a.firstTime = 5";
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            flage = true;
+            ajum = (ApplayJobUserMaster) list.get(0);
+
+        } else {
+            ajum = null;
+            flage = false;
+        }
+        return flage;
     }
 
 }

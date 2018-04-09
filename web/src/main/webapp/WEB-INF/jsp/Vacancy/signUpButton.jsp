@@ -76,7 +76,7 @@
         <br/>
         <br/>
         <form:form class="form-horizontal" method="post"
-                   commandName="applayJobUserMaster" action="vacancy.htm?act=signUpCandidate">
+                   commandName="applayJobUserMaster" action="vacancy.htm?act=signUpCandidate&id=${vacid}">
             <form:hidden path="id"></form:hidden>
                 <!--<input type="hidden" name="lockCounter" value="0"/>-->
                 <section class="content">

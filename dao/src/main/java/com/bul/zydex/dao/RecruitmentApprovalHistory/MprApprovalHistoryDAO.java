@@ -6,11 +6,14 @@
 package com.bul.zydex.dao.RecruitmentApprovalHistory;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.List;
 
 /**
  *
  * @author Dell-1
  */
-public interface MprApprovalHistoryDAO<T> extends GenericsDAO<T>{
-    
+public interface MprApprovalHistoryDAO<T> extends GenericsDAO<T> {
+
+    public List<?> getByMprId(int mprId);
+
 }

@@ -39,8 +39,8 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
 
     public ModelAndView submitAssessment(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
- EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         String id = request.getParameter("id");
         String questionsPaperId = request.getParameter("questions");
         String passingPercentage = request.getParameter("passingPercentage");
@@ -124,7 +124,7 @@ MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
             VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
             OnlineAssessment onlineAssessment = new OnlineAssessment();
             questionList(request);
-            
+
             mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
             mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
             mprApprovalHistory.setCreateDate(sdf.format(cDate));
@@ -133,11 +133,14 @@ MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
             mprApprovalHistory.setStatusMessage("Online Assessment");
             mprApprovalHistory.setMprMaster(vm.getMprMaster());
             mprApprovalHistoryService.create(mprApprovalHistory);
-            
+
             mv.getModelMap().put("onlineAssessment", onlineAssessment);
             request.setAttribute("candidateJobApplication", cja);
             mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+            request.setAttribute("successMessage",
+                    "Information : Assessment Submitted successfully.");
             mv.setViewName("Recruitment/CandidateApproval");
+            
         } catch (Exception e) {
             request.setAttribute("failureMessage",
                     "All field are Required.Please Enter Valid data");
@@ -284,16 +287,16 @@ MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
             candidateResultStatus.setCandidateJobApplication(candidateJobapplicationid);
             candidateResultStatus.setObtainTotal(Double.parseDouble(totalResult));
             candidateResultStatus.setObtainsPercentage(Double.parseDouble(percentageResult));
-            
+
             if ("" != passResult) {
                 candidateResultStatus.setResultStatus(passResult);
-            candidateResultStatusService.create(candidateResultStatus);
+                candidateResultStatusService.create(candidateResultStatus);
                 candidateJobapplicationid.setStatus(6);   // 6 status Pass
                 candidateJobApplicationService.update(candidateJobapplicationid);
             }
             if ("" != failResult) {
                 candidateResultStatus.setResultStatus(failResult);
-            candidateResultStatusService.create(candidateResultStatus);
+                candidateResultStatusService.create(candidateResultStatus);
                 candidateJobapplicationid.setStatus(7);   // 7 status Fail
                 candidateJobApplicationService.update(candidateJobapplicationid);
             }
@@ -307,6 +310,8 @@ MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
             questionList(request);
             mv.getModelMap().put("onlineAssessment", onlineAssessment);
             mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+              request.setAttribute("successMessage",
+                    "Information : Paper Checked successfully.");
             mv.setViewName("Recruitment/CandidateRequestList");
 
         } catch (Exception e) {

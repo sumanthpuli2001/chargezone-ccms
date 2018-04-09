@@ -16,4 +16,6 @@ public interface RecruitmentApprovalHistoryDAO<T> extends GenericsDAO<T> {
 
     public List<?> getByRecruitementMasterId(int mppId);
 
+    public List<?> AppMppdelete(String APmppId);
+
 }

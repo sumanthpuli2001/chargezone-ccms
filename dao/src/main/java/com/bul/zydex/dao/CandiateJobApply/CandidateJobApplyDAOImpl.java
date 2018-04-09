@@ -96,4 +96,14 @@ public class CandidateJobApplyDAOImpl<T> extends GenericsDAOImpl<T> implements C
         return flag;
     }
 
+    @Override
+    public List<?> candidateApplyJobcheackUserId(int userId) {
+             String query = " SELECT a "
+                + " FROM CandidateApplyJob a "
+                + " Where a.applayJobUserMaster.id = " + userId;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

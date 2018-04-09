@@ -4137,6 +4137,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.getModelMap().put("applicationId", applicationId);
         mv.getModelMap().put("candidateId", candidateId);
         mv.setViewName("Employee/EmployeeInductionForm");
+        request.setAttribute("successMessage",
+                    "Information : The Induction successfully.");
         return mv;
     }
 

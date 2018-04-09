@@ -143,5 +143,7 @@
     <mapping resource="com/bul/zydex/model/RecruitmentApprovalHistory.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/MprApprovalHistory.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/EmployeeCtcDetailSalary.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/PayrollTaxDeductionMaster.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/PayrollTaxDeductionComponent.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

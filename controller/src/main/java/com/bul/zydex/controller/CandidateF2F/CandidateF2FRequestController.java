@@ -60,6 +60,8 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.getModelMap().put("candidateApplyJob1", candidateApplyJob1);
         mv.setViewName("CandidateFtoF/candidateF2FInvitation");
+        request.setAttribute("successMessage",
+                    "Information : The Candidate Face To Face Invitation successfully.");
         return mv;
     }
 
@@ -170,6 +172,8 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.getModelMap().put("onlineAssessment", onlineAssessment);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Recruitment/CandidateRequestList");
+        request.setAttribute("successMessage",
+                "Information : The Candidate Shortlisted successfully.");
         return mv;
     }
 
@@ -257,6 +261,8 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.getModelMap().put("onlineAssessment", onlineAssessment);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Recruitment/CandidateRequestList");
+        request.setAttribute("successMessage",
+                "Information : The Offer Later Send successfully.");
         return mv;
     }
 

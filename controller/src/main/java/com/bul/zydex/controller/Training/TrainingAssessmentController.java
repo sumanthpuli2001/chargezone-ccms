@@ -233,7 +233,7 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
         trainingAssessment.setStatus(1);
         trainingAssessment.setAssessmentResultStatus(2);   // 2 for assessment submit by user
         trainingAssessmentService.update(trainingAssessment);
-         mv = clickassessment(request, response);
+        mv = clickassessment(request, response);
         request.setAttribute(
                 "successMessage",
                 "Test Submited Sucessfully");
@@ -403,6 +403,8 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
             request.setAttribute("list", attenlist);
             request.setAttribute("trainingMasterId", id);
             request.setAttribute("feedbackStatus", feedbackStatus);
+            request.setAttribute("successMessage",
+                    "Information : Paper Checked successfully.");
             mv.setViewName("Trainer/TrainerMasterlblView");
 
         } catch (Exception e) {

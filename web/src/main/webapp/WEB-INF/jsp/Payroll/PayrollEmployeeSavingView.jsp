@@ -13,6 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Employee Saving Create</title>
     </head>
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -74,16 +75,20 @@
                                                     </thead>
                                                     <tbody>
                                                         <c:forEach var="listOfLoan1" items="${listOfLoan[1]}" varStatus="myindex1">
-                                                            <tr>
-                                                                <td>${myindex1.count}</td>
-                                                                <td>
-                                                                    <c:out value="${listOfLoan1}"/> </br>
-                                                                </td>
-                                                                <td><input type="text" name="savingTypeAmount1" value="0.0" class="form-control"></td>
-                                                                <td> <input type="file" name="file1" id="file11" value="" onchange="checkfile(this);"/></td>
-                                                                <td><input type="submit" class="btn btn-primary" style="width: 50px;"  title="" value="SUBMIT"></td>
-                                                            </tr>
-                                                        </c:forEach>
+                                                        <input type="hidden" id="hrId" name="hrId" value="${myindex1.count}"/>
+                                                        <tr>
+                                                            <td>${myindex1.count}</td>
+                                                            <td>
+                                                                <c:out value="${listOfLoan1}"/> </br>
+                                                            </td>
+                                                            <td><input type="text" name="savingTypeAmount1" value="0.0" class="form-control"></td>
+                                                            <td> <input type="file" name="file1" id="file11" value="" onchange="checkfile(this,${myindex1.count});"/></td>
+                                                            <td><div class="col-sm-6" id="uploadDiv${myindex1.count}" name="uploadDiv${myindex1.count}" style="display: none">
+                                                                    <input type="submit" style="width: 100px;"  value="UPLOAD" class="btn btn-primary" id="saveSubmit2"  onclick="document.getElementById('save').value = '1';" />
+                                                                </div></td>
+                                                                <td><input type="hidden" id="hrId" name="hrId" value="${myindex1.count}"/></td> 
+                                                        </tr>
+                                                    </c:forEach>
                                                 </table>
                                             </c:forEach>
                                         </div>
@@ -103,5 +108,29 @@
             </div>
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
+    <script type="text/javascript" language="javascript">
+        function checkfile(sender,index) {
+//          alert("hii"+index);
+                var tflag11 = document.getElementById("hrId").value;
+//            alert(tflag11);
+            $('#saveSubmit2').show();
+
+            var validExts = new Array(".xlsx", ".xls");
+            var fileExt = sender.value;
+            fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+            if (validExts.indexOf(fileExt) < 0) {
+                alert("Invalid file selected, valid files are of " +
+                        validExts.toString() + " types.");
+                document.getElementById('file11').value = '';
+                return false;
+                $("#uploadDiv"+index).hide();
+
+            }
+            else {
+                $("#uploadDiv"+index).show();
+                return true;
+            }
+        }
+    </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

@@ -431,11 +431,15 @@ public class VacancyController extends VacancyAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
-        String id = request.getParameter("id");
-        int VacId = Integer.parseInt(id);
+//        String id = request.getParameter("id");
+//        int VacId = Integer.parseInt(id);
         ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
         mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
-        mv.getModelMap().put("vacid", VacId);
+        if ("" == request.getParameter("id")) {
+            String id = request.getParameter("id");
+            int VacId = Integer.parseInt(id);
+            mv.getModelMap().put("vacid", VacId);
+        }
         mv.setViewName("Vacancy/signUpButton");
         return mv;
     }
@@ -525,7 +529,7 @@ public class VacancyController extends VacancyAbstract {
 
                     ajuMaster.setProfileSubmit(1);
                     applayJobUserMasterSerivce.update(ajuMaster);
-                    
+
                 }
             }
 
@@ -552,8 +556,8 @@ public class VacancyController extends VacancyAbstract {
         BindException errors = new BindException(applayJobUserMaster, "applayJobUserMaster");
         bind(request, applayJobUserMaster);
 
-        String id = request.getParameter("id");
-        int VacId = Integer.parseInt(id);
+//        String id = request.getParameter("id");
+//        int VacId = Integer.parseInt(id);
         applayJobUserMasterValidator.validate(applayJobUserMaster, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
@@ -579,7 +583,11 @@ public class VacancyController extends VacancyAbstract {
 
             request.setAttribute("successMessage",
                     "Information : signUp Successfully.");
-            request.setAttribute("vacid", VacId);
+            if ("" != request.getParameter("id")) {
+                String id = request.getParameter("id");
+                int VacId = Integer.parseInt(id);
+                request.setAttribute("vacid", VacId);
+            }
             return new ModelAndView("Vacancy/ApplayLoginpage", "applayJobUserMaster", applayJobUserMaster);
         }
         return mv;

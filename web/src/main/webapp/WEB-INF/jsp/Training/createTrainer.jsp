@@ -40,8 +40,8 @@
         <c:if test="${!empty successMessage}">
             <div class="alert alert-info" role="alert">${successMessage}</div>
         </c:if>
-        <c:if test="${!empty failureMessage}">
-            <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
+        <c:if test="${!empty faliureMessage}">
+            <div class="fadeOutEffect alert alert-danger" role="alert">${faliureMessage}</div>
         </c:if>
         <!-- Main content -->
         <form:form action="trainer.htm?act=budgetdeleteSubmit" method="post" commandName="trainer"

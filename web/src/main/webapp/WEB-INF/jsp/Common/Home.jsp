@@ -383,6 +383,18 @@
 
 
 
+                                        
+                                    </div>           
+
+                                    <div class="col-md-1">
+                                    </div>
+                                    <div class="col-md-5">
+
+                                        <div class="box box-primary">
+                                            <div class="box-header">
+                                                <h3 class="box-title" id="rAndR">Rewards And Recognition</h3>
+                                            </div>
+                                        </div>
                                         <div class="box-body">
                                             <div>
                                                 <c:forEach var="rr" items="${RRList}">
@@ -405,17 +417,6 @@
                                                 </div>
 
 
-                                            </div>
-                                        </div>
-                                    </div>           
-
-                                    <div class="col-md-1">
-                                    </div>
-                                    <div class="col-md-5">
-
-                                        <div class="box box-primary">
-                                            <div class="box-header">
-                                                <h3 class="box-title" id="rAndR">Rewards And Recognition</h3>
                                             </div>
                                         </div>
 

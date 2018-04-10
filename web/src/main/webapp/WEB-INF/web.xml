@@ -201,10 +201,12 @@
     <welcome-file-list>
         <welcome-file>Redirect.jsp</welcome-file>
     </welcome-file-list>
+    
     <error-page>
         <error-code>403</error-code>
         <location>/WEB-INF/jsp/Common/Error.jsp</location>
     </error-page>
+    
     <error-page>
         <error-code>404</error-code>
         <location>/WEB-INF/jsp/Common/Error.jsp</location>

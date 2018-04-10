@@ -33,7 +33,8 @@
         </c:if>
         <!-- Main content -->
 
-        <form:form class="form-horizontal" method="post" commandName="questionPaper" action="onlineAssessment.htm?act=submitResult">
+        <form:form class="form-horizontal" method="post" commandName="questionPaper" action="onlineAssessment.htm?act=submitResult"
+                   >
             <section class="content">
                 <div class="col-md-12">
                     <div class="nav-tabs-custom">
@@ -105,17 +106,22 @@
                                                 <c:if test="${employeeAdditional[1] eq 1}">
 
                                                     <div class="col-sm-1">
-                                                        <input class="form-check-input" name="mcqStatus${status.count}" type="radio"  value="0" >
+                                                        <input class="form-check-input" name="mcqStatus${status.count}" type="radio" required  value="0" >
                                                         <label class="form-check-label" for="radio100${employeeAdditional[6]}">Correct</label>
                                                     </div>
                                                     <div class="col-sm-1">
-                                                        <input class="form-check-input" id="check" name="mcqStatus${status.count}"  type="radio"  value="1" >
+                                                        <input class="form-check-input" id="check" name="mcqStatus${status.count}" required  type="radio"  value="1" >
                                                         <label class="form-check-label"   for="radio100${employeeAdditional[6]}">Incorrect</label>
+                                                        <label id="checkTk${status.count}" style="color: red;"></label>
                                                     </div>
                                                     <div class="col-sm-2">
 
-                                                        <input type="number" name="givenMarks2" class="form-control" id="givenMarks3${status.count}" class="form-control">
-                                                        <label>/Out Of ${employeeAdditional[5]}</label>
+                                                        <input type="number" name="givenMarks2" class="form-control" id="givenMarks3${status.count}" max="${employeeAdditional[5]}"
+                                                               required="true" class="form-control" oninput="maxLengthCheck(this)" onkeypress="return isNumeric(event)">
+  <!--                                                        <input type="number" name="givenMarks2" class="form-control" id="givenMarks3${status.count}" max="${employeeAdditional[5]}"
+                                                                 onchange="enterValueCheck()" required="true" class="form-control" onkeypress="return isNumberKey(event)">-->
+                                                        <label>/Out Of <input type="hidden" value="${employeeAdditional[5]}" id="outOf${status.count}" ><input type="hidden" id="counter" value="${status.count}">
+                                                            ${employeeAdditional[5]}</label></label>
                                                     </div>
                                                 </c:if>
 
@@ -332,11 +338,50 @@
 </script>
 <script>
 
-    document.getElementById("check").addEventListener("click", myFunction);
+    function validateForm() {
+        var len = document.getElementById("countDetailId").value;
+        for (var i = 1; i < parseInt(len) + 1; i++) {
+            var radios = document.getElementsByName("mcqStatus" + i);
+            var formValid = false;
 
-    function myFunction() {
-        alert("iink");
-        document.getElementById("checkInco").innerHTML = "0";
+            var i = 0;
+            while (!formValid && i < radios.length) {
+                if (radios[i].checked)
+                    formValid = true;
+                i++;
+            }
+
+            if (!formValid)
+                document.getElementById("checkTk" + i).innerText = "Select Option";
+            return formValid;
+        }
+    }
+    function reset_msg() {
+        document.getElementById('msg').innerHTML = '';
     }
 
 </script>
+
+<script>
+    function maxLengthCheck(object) {
+        
+        if (object.value > object.max || object.value.length > object.max.length) {
+//            if (object.value.length > object.max.length)
+            object.value = "";
+//            object.value = object.value.slice(0, object.max.length);
+        }
+    }
+
+    function isNumeric(evt) {
+        var theEvent = evt || window.event;
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault)
+                theEvent.preventDefault();
+        }
+    }
+</script>
+

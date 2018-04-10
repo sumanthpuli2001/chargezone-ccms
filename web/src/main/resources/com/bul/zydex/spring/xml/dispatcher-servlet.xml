@@ -219,15 +219,16 @@
                 <prop key="trainingQuestionAnswerSubmit.htm">trainingAssessmentController1</prop>
                 <prop key="trainingResultStatus.htm">trainingResultStatusController1</prop>
                 <prop key="ctcAllowance.htm">ctcAllowanceController1</prop>
+                <prop key="retirementAge.htm">retirementAgeController1</prop>
+                <prop key="payrollTaxDeduction.htm">payrollTaxDeductionMasterController1</prop>
                 
-           
             </props>
         </property>
-        <property name="order" value="0" /> 
+        <property name="order" value="0" />     
     </bean>
     <bean
         class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
-        <property name="caseSensitive" value="true" />
+        <property name="caseSensitive" value="true"/>
         <property name="order" value="1" />
     </bean>
 </beans>

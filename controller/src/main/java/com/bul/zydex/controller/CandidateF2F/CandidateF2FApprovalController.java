@@ -15,6 +15,7 @@ import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.JobtypeMaster;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprMaster;
+import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.VacancyMaster;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         List<?> f2flist = new ArrayList<>();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
 
-        f2flist = candidateF2FRequestService.interviewReqDetailread();
+        f2flist = candidateF2FRequestService.interviewReqDetailread(employeeMaster.getId());
 
         request.setAttribute("F2FInterviewList", f2flist);
 
@@ -73,6 +74,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         candidateApplyJob = candidateJobApplyService.readById(candidateF2FRequest.getCandidateApplyJob().getId());
         VacancyMaster vm = vacancyMasterService.readById(candidateF2FRequest.getVacancyMaster().getId());
         MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
+        RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
         List<CandidateF2FApproval> committeedetaillist = new ArrayList<>();
         List<CandidateF2FApproval> comitteeList = (List<CandidateF2FApproval>) candidateF2FApprovalService.readByReqId(candidateF2FRequest.getId());
         for (CandidateF2FApproval cffa : comitteeList) {
@@ -107,6 +109,35 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         String experiance = vm.getExperience();
         int salaryRange = vm.getSalaryRange();
         int position = vm.getNumberOfPosition();
+
+//        /        Mpp Master --------------------
+        int jobtypeId2 = rm.getJobtypeMaster().getId();
+        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+        String jobtypeNAme2 = jobtypeMaster.getJobTypeName();
+
+        int department2 = rm.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        String departmentName2 = departmentMaster.getDepartmentName();
+
+        int localtion2 = rm.getLocationMaster().getId();
+        locationMaster = locationMasterService.readById(localtion);
+        String locationName2 = locationMaster.getLocation();
+
+        int designation2 = rm.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(designation);
+        String designationName2 = designationMaster.getDesignationName();
+
+        int numberOfPositionMpp = rm.getNumberOfPosition();
+        int Mppbudget = rm.getBudget();
+        String MppExperience = rm.getExperiance();
+
+        request.setAttribute("jobtypeNAme2", jobtypeNAme2);
+        request.setAttribute("departmentName2", departmentName2);
+        request.setAttribute("locationName2", locationName2);
+        request.setAttribute("designationName2", designationName2);
+        request.setAttribute("numberOfPositionMpp", numberOfPositionMpp);
+        request.setAttribute("Mppbudget", Mppbudget);
+        request.setAttribute("MppExperience", MppExperience);
 
         //        MPR Master -------------
         int jobtypeId1 = mm.getJobtypeMaster().getId();
@@ -266,7 +297,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
 
         }
         List<?> f2flist = new ArrayList<>();
-        f2flist = candidateF2FRequestService.interviewReqDetailread();
+        f2flist = candidateF2FRequestService.interviewReqDetailread(employeeMaster.getId());
         request.setAttribute("F2FInterviewList", f2flist);
         mv.setViewName("CandidateFtoF/F2FInterviewReviewResult");
         return mv;
@@ -530,6 +561,227 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         mv.getModelMap().put("candidateF2FRequest", candidateF2FRequest);
 
         mv.setViewName("CandidateFtoF/showClickAdmin");
+        return mv;
+    }
+
+    public ModelAndView reviewAscommitteeAndHrClick(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        String applicationId = request.getParameter("id");
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        LocationMaster locationMaster = new LocationMaster();
+        JobtypeMaster jobtypeMaster = new JobtypeMaster();
+        DesignationMaster designationMaster = new DesignationMaster();
+        CandidateF2FRequest candidateF2FRequest = new CandidateF2FRequest();
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
+        candidateApplyJob = candidateJobApplyService.readById(candidateF2FRequest.getCandidateApplyJob().getId());
+        VacancyMaster vm = vacancyMasterService.readById(candidateF2FRequest.getVacancyMaster().getId());
+        MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
+        RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
+        List<CandidateF2FApproval> committeedetaillist = new ArrayList<>();
+        List<CandidateF2FApproval> comitteeList = (List<CandidateF2FApproval>) candidateF2FApprovalService.readByReqId(candidateF2FRequest.getId());
+        for (CandidateF2FApproval cffa : comitteeList) {
+            EmployeeMaster em = employeeMasterService.readById(cffa.getEmployeeMaster().getId());
+            cffa.setEmployeeMaster(em);
+            committeedetaillist.add(cffa);
+
+        }
+
+        List<?> approverCommentList = candidateF2FApprovalService.readEmployeeCommentByReqId(candidateF2FRequest.getId());
+//        Vacancy Master-------------
+        int jobtypeId = vm.getJobtypeMaster().getId();
+        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+        String jobtypeNAme = jobtypeMaster.getJobTypeName();
+
+        int department = vm.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        String departmentName = departmentMaster.getDepartmentName();
+
+        int localtion = vm.getLocationMaster().getId();
+        locationMaster = locationMasterService.readById(localtion);
+        String locationName = locationMaster.getLocation();
+
+        int designation = vm.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(designation);
+        String designationName = designationMaster.getDesignationName();
+
+        String vacancyName = vm.getName();
+        String fromDate = vm.getFromDate();
+        String toDate = vm.getToDate();
+        String description = vm.getDescription();
+        String experiance = vm.getExperience();
+        int salaryRange = vm.getSalaryRange();
+        int position = vm.getNumberOfPosition();
+
+//        /        Mpp Master --------------------
+        int jobtypeId2 = rm.getJobtypeMaster().getId();
+        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+        String jobtypeNAme2 = jobtypeMaster.getJobTypeName();
+
+        int department2 = rm.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        String departmentName2 = departmentMaster.getDepartmentName();
+
+        int localtion2 = rm.getLocationMaster().getId();
+        locationMaster = locationMasterService.readById(localtion);
+        String locationName2 = locationMaster.getLocation();
+
+        int designation2 = rm.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(designation);
+        String designationName2 = designationMaster.getDesignationName();
+
+        int numberOfPositionMpp = rm.getNumberOfPosition();
+        int Mppbudget = rm.getBudget();
+        String MppExperience = rm.getExperiance();
+
+        request.setAttribute("jobtypeNAme2", jobtypeNAme2);
+        request.setAttribute("departmentName2", departmentName2);
+        request.setAttribute("locationName2", locationName2);
+        request.setAttribute("designationName2", designationName2);
+        request.setAttribute("numberOfPositionMpp", numberOfPositionMpp);
+        request.setAttribute("Mppbudget", Mppbudget);
+        request.setAttribute("MppExperience", MppExperience);
+
+        //        MPR Master -------------
+        int jobtypeId1 = mm.getJobtypeMaster().getId();
+        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+        String jobtypeNAme1 = jobtypeMaster.getJobTypeName();
+
+        int department1 = mm.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        String departmentName1 = departmentMaster.getDepartmentName();
+
+        int localtion1 = mm.getLocationMaster().getId();
+        locationMaster = locationMasterService.readById(localtion);
+        String locationName1 = locationMaster.getLocation();
+
+        int designation1 = mm.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(designation);
+        String designationName1 = designationMaster.getDesignationName();
+
+        String MprName = mm.getName();
+        int numberOfPositionMpr = mm.getNumberOfPosition();
+        int Mprbudget = mm.getBudget();
+        String MprExperience = mm.getExperience();
+        String Mprdescription = mm.getDescription();
+
+        request.setAttribute("applicationId", applicationId);
+
+        candidateF2FRequest.setCandidateApplyJob(candidateApplyJob);
+        candidateF2FRequest.setVacancyMaster(vm);
+        request.setAttribute("commentlist", approverCommentList);
+        request.setAttribute("comitteeList", committeedetaillist);
+        mv.getModelMap().put("candidateF2FRequest", candidateF2FRequest);
+//        Vacancy Master-------------
+        mv.getModelMap().put("departmentMaster", departmentMaster);
+        mv.getModelMap().put("locationMaster", locationMaster);
+        mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
+        mv.getModelMap().put("designationMaster", designationMaster);
+        request.setAttribute("jobtypeNAme", jobtypeNAme);
+        request.setAttribute("departmentName", departmentName);
+        request.setAttribute("locationName", locationName);
+        request.setAttribute("position", position);
+        request.setAttribute("designationName", designationName);
+        request.setAttribute("experiance", experiance);
+        request.setAttribute("vacancyName", vacancyName);
+        request.setAttribute("fromDate", fromDate);
+        request.setAttribute("toDate", toDate);
+        request.setAttribute("description", description);
+//        MPR Master -------------
+        request.setAttribute("jobtypeNAme1", jobtypeNAme1);
+        request.setAttribute("departmentName1", departmentName1);
+        request.setAttribute("locationName1", locationName1);
+        request.setAttribute("designationName1", designationName1);
+        request.setAttribute("MprName", MprName);
+        request.setAttribute("numberOfPositionMpr", numberOfPositionMpr);
+        request.setAttribute("Mprbudget", Mprbudget);
+        request.setAttribute("MprExperience", MprExperience);
+        request.setAttribute("Mprdescription", Mprdescription);
+        request.setAttribute("applicationId", applicationId);
+
+        candidateF2FRequest.setCandidateApplyJob(candidateApplyJob);
+        candidateF2FRequest.setVacancyMaster(vm);
+        request.setAttribute("commentlist", approverCommentList);
+        request.setAttribute("comitteeList", committeedetaillist);
+        mv.getModelMap().put("candidateF2FRequest", candidateF2FRequest);
+
+        mv.setViewName("CandidateFtoF/reviewAscommitteeAndHrClick");
+        return mv;
+    }
+
+    public ModelAndView approvalFaceToFaceInvitationForCommASHr(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        CandidateF2FRequest candidateF2FRequest = new CandidateF2FRequest();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        bind(request, candidateF2FRequest);
+        String btnType = request.getParameter("btnType");
+        String applicationId = request.getParameter("applicationId");
+        String message = request.getParameter("message");
+        String InterviewerAsHr = request.getParameter("InterviewerAsHr");
+        candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
+        CandidateF2FApproval candidateF2FApproval = candidateF2FApprovalService.readByEmpIdAndReqId(employeeMaster.getId(), candidateF2FRequest.getId());
+
+        candidateF2FApproval.setComment(InterviewerAsHr);
+        candidateF2FApproval.setStatus(1);
+        candidateF2FApprovalService.update(candidateF2FApproval);
+
+        CandidateJobApplication cja = candidateJobApplicationService.readById(candidateF2FRequest.getCandidateJobApplication().getId());
+
+        if (btnType.equals("APPROVE")) {
+
+            candidateF2FRequest.setStatus(2);
+            candidateF2FRequest.setHrStatus(1);
+            candidateF2FRequest.setMessage(message);
+            candidateF2FRequest.setHrEmpId(employeeMaster.getId());
+            candidateF2FRequest.setHrName(employeeMaster.getEmployeeName());
+            candidateF2FRequestService.update(candidateF2FRequest);
+
+            /////////approve
+            cja.setStatus(11);
+            candidateJobApplicationService.update(cja);
+            request.setAttribute("successMessage",
+                    "Information : The Request is Approved successfully.");
+
+        }
+        if (btnType.equals("ON HOLD")) {
+
+            candidateF2FRequest.setStatus(3);
+            candidateF2FRequest.setHrStatus(1);
+            candidateF2FRequest.setMessage(message);
+            candidateF2FRequest.setHrEmpId(employeeMaster.getId());
+            candidateF2FRequest.setHrName(employeeMaster.getEmployeeName());
+            candidateF2FRequestService.update(candidateF2FRequest);
+
+            ///hold
+            cja.setStatus(9);
+            candidateJobApplicationService.update(cja);
+            request.setAttribute("successMessage",
+                    "Information : The Request is Hold successfully.");
+        }
+        if (btnType.equals("REJECT")) {
+
+            candidateF2FRequest.setStatus(4);
+            candidateF2FRequest.setHrStatus(1);
+            candidateF2FRequest.setMessage(message);
+            candidateF2FRequest.setHrEmpId(employeeMaster.getId());
+            candidateF2FRequest.setHrName(employeeMaster.getEmployeeName());
+            candidateF2FRequestService.update(candidateF2FRequest);
+
+            ///////reject
+            cja.setStatus(10);
+            candidateJobApplicationService.update(cja);
+            request.setAttribute("successMessage",
+                    "Information : The Request is Rejected successfully.");
+
+        }
+        List<?> f2flist = new ArrayList<>();
+        f2flist = candidateF2FRequestService.interviewReqDetailread(employeeMaster.getId());
+        request.setAttribute("F2FInterviewList", f2flist);
+        mv.setViewName("CandidateFtoF/F2FInterviewReviewResult");
         return mv;
     }
 

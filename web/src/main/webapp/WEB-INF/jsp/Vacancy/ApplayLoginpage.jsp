@@ -85,7 +85,7 @@
         <form:form class="form-horizontal" role="form" method="post" name='form1'
                    commandName="applayJobUserMaster" onsubmit='return deleteCheck11();' action="vacancy.htm?act=loginCandidate&id=${vacid}">
             <form:hidden path="id"></form:hidden>
-                <!--<input type="hidden" name="lockCounter" value="0"/>-->
+               
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
@@ -97,15 +97,16 @@
                                 <label>Email Id:<span style="color: red;font-size: 12px;">*</span></label>
                             </div>
                             <div class="col-sm-3">
-                                <form:input path="userName" class="form-control" placeholder="Name"></form:input>
+                                <form:input path="userName" class="form-control" placeholder="userName"></form:input>
                                 <form:errors path="userName" cssClass="errorDiv"></form:errors>
                                 </div>
 
                                 <div class="col-sm-1" style="text-align: left" >
+                                    <input type="hidden" name="vacid" value="${vacid}"/>
                                     <label>Password :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3">
-                                <form:password path="password" class="form-control" placeholder="Name"></form:password>
+                                <form:password path="password" class="form-control" placeholder="password"></form:password>
                                 <form:errors path="password" cssClass="errorDiv"></form:errors>
                                 </div>
                             </div>
@@ -117,7 +118,7 @@
                 <div class="form-group">
                     <div class=" col-sm-offset-0">
                         <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >SUBMIT</button>
-                    <button type="button" class="btn btn-primary" style="float: center; width: 120px;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign Up</button>
+                    <button type="button" class="btn btn-primary" style="float: center; width: 120px;" onclick="window.location = 'vacancy.htm?act=signUp&id=${vacid}'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign Up</button>
                     </div>
                 </div>
 

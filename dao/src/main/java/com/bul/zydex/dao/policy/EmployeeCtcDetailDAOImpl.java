@@ -24,7 +24,7 @@ public class EmployeeCtcDetailDAOImpl<T> extends GenericsDAOImpl<T> implements E
     @Override
     public List<?> fetchctcData(int empId) {
         String query = "";
-        query += " select b.id,b.ctcName,a.amount"
+        query += " select b.id,b.ctcName,a.amount,a.status,a.month,a.year"
                 + " FROM EmployeeCtcDetail a "
                 + " left join a.ctcAllowance b"
                 + " left join a.employeeMaster c"
@@ -33,6 +33,39 @@ public class EmployeeCtcDetailDAOImpl<T> extends GenericsDAOImpl<T> implements E
         return getHibernateTemplate().find(query);
     }
 
-    
+    @Override
+    public List<?> readctc(int employeeid) {
+        String query = "";
+        query += "select a.amount,b.ctcName"
+                + " FROM EmployeeCtcDetail a "
+                + " left join a.ctcAllowance b"
+                + " where a.employeeMaster.id=" + employeeid;
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readEmployeeCtcDetail(int employeeid) {
+        String query = "";
+        query += "select a.amount,b.ctcName,b.id,a.month,a.year"
+                + " FROM EmployeeCtcDetail a "
+                + " left join a.ctcAllowance b"
+                + " where a.employeeMaster.id=" + employeeid;
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readByEmployeCtcReport(int employeeid, String month, String year) {
+        String query = "";
+        query += "select a"
+                + " FROM EmployeeCtcDetail a "
+                + " left join a.ctcAllowance b"
+                + " where a.employeeMaster.id=" + employeeid
+                + " and a.year = '" + year + "'"
+                + " and a.month = '" + month + "'";
+
+        return getHibernateTemplate().find(query);
+    }
 
 }

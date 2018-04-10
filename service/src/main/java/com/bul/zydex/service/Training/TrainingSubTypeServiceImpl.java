@@ -7,7 +7,9 @@
 package com.bul.zydex.service.Training;
 
 import com.bul.zydex.dao.Training.TrainingSubTypeDAO;
+import com.bul.zydex.model.TrainingSubType;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -34,5 +36,21 @@ private TrainingSubTypeDAO<T> trainingSubTypeDAO;
     @Override
     public List<?> readtrainingSubTypeByTrainingTypeId(int trainingTypeId) {
         return trainingSubTypeDAO.readtrainingSubTypeByTrainingTypeId(trainingTypeId);
+    }
+
+    @Override
+    public boolean isExist(TrainingSubType trainingType) {
+         TrainingSubType trainingSubType1 = (TrainingSubType) trainingType;
+
+        List<?> list = trainingSubTypeDAO.read();
+        Iterator i = list.iterator();
+        while (i.hasNext()) {
+            trainingType = (TrainingSubType) i.next();
+            if (trainingType.getTrainingsubtype().equalsIgnoreCase(trainingSubType1.getTrainingsubtype())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

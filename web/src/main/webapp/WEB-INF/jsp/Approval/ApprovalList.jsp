@@ -10,15 +10,15 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Employee Registration Result</title>
+        <title>Approval Setting</title>
     </head>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Man Power Planning Budget List</h1>
+            <h1>Approval Setting</h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home111</a></li>
-                <li class="active">Budget Detail List</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Approval Setting</li>
             </ol>
         </section>
 
@@ -44,7 +44,7 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form action="recruitment.htm?act=budgetdeleteSubmit" method="post" commandName="approvalMaster"
+        <form:form action="approval.htm?act=createApprovalSetting" method="post" commandName="approvalMaster"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <form:hidden path="id"></form:hidden>
             <section class="content">
@@ -57,9 +57,11 @@
                                     <!--<button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>-->
                                     <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
 
-                                    <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'approval.htm?act=createApprovalSetting'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
+                                    <!--<button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'approval.htm?act=createApprovalSetting'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>-->
+                                    
                                 </c:if>
                                 <div class="box-header">
+                            <button type="button" class="btn btn-primary" title="" style="float: right; width: 120px;" onclick="window.location = 'approval.htm?act=createApprovalSetting'"><i class="fa fa-plus"></i>&nbsp;&nbsp;New</button>
                                 </div>
                                 <div class="box-body no-padding">
                                     <div class="row">

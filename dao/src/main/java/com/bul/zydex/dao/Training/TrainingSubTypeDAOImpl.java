@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.bul.zydex.dao.Training;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
@@ -24,7 +23,8 @@ public class TrainingSubTypeDAOImpl<T> extends GenericsDAOImpl<T> implements Tra
     @Override
     public List<?> readtrainingSubTypeDetail() {
         String query = "Select a.id,a.trainingsubtype,a.trainingType.training";
-        query += " FROM TrainingSubType a";
+        query += " FROM TrainingSubType a"
+                + "  order by a.id desc";
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
@@ -32,7 +32,7 @@ public class TrainingSubTypeDAOImpl<T> extends GenericsDAOImpl<T> implements Tra
     @Override
     public List<?> readtrainingSubTypeByTrainingTypeId(int trainingTypeId) {
         String query = "Select a.id,a.trainingsubtype,a.createddate";
-        query += " FROM TrainingSubType a where a.trainingType.id='"+trainingTypeId+"'";
+        query += " FROM TrainingSubType a where a.trainingType.id='" + trainingTypeId + "'";
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }

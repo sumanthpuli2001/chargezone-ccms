@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.service.Training;
 
+import com.bul.zydex.model.TrainingSubType;
 import com.bul.zydex.service.GenericsService;
 import java.util.List;
 
@@ -15,4 +16,6 @@ import java.util.List;
 public interface TrainingSubTypeService<T> extends GenericsService<T> {
     public List<?> readtrainingSubTypeDetail();
     public List<?> readtrainingSubTypeByTrainingTypeId(int trainingTypeId);
+
+    public boolean isExist(TrainingSubType trainingType);
 }

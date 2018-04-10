@@ -53,7 +53,7 @@
                                 <div class="box-body no-padding">
                                     <div class="row">
                                         <div id="printableArea">
-                                            <center> <img src="StorageYard/Images/bulwarks.png" style="width:15%;height: 15%;" BORDER="0"/> </center>
+                                            <center> <img src=" StorageYard/Images/logo.png" style="width:15%;height: 15%;" BORDER="0"/> </center>
                                                 <%
                                                     Date date = new Date();
                                                     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -61,7 +61,7 @@
                                                     out.print("<div align=\"right\">Date:" + df.format(date) + "</div>");
                                                 %>
                                             <div class="form-group">
-                                                <center><b><font size="4">Bulwark Systems</font></b></center> 
+                                                <center><b><font size="4">SPC Life Science</font></b></center> 
                                             </div>
                                             <!--                                                <header>
                                                                                                 <center><b><font size="4">Employee Salary Report <c:if test="${month eq 1}">January</c:if>

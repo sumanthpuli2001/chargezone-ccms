@@ -129,28 +129,28 @@
                                 <h1>Training Details:</h1>
                                 <div class="box-header">
                                 </div>
-                                <div class="row">
+                                <div class="row" align="left">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                             <label>Training Title : </label>&nbsp;&nbsp;${trainingMaster.trainingTitle}
                                         </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                             <label>Training Requester : </label>&nbsp;&nbsp;${trainingMaster.trainingOwner}
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class ="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                             <label>Training Type : </label>&nbsp;&nbsp;${trainingMaster.trainingType.training}
                                         </div>
-                                        <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class ="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                             <label>Training sub-type : </label>&nbsp;&nbsp;${trainingMaster.trainingSubType.trainingsubtype}
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class ="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                             <label>Training Source : </label>&nbsp;&nbsp;${trainingMaster.trainingSource}
                                         </div>
-                                        <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class ="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                             <label>Trainer : </label>&nbsp;&nbsp;${trainingMaster.trainer.trainerName}
                                         </div>
                                     </div>
@@ -221,78 +221,81 @@
                             </div>
                             <div class="box-header">
                             </div>
-                            <div class="box-body no-padding">
+                            <!--<div class="box-body no-padding">-->
+                                <div class="tab-content">
+                                    <div class="box-body">
+                                    <div class="row">
 
-                                <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="table table-bordered">
 
-                                    <div class="col-md-12 col-sm-12">
-                                        <div class="table table-bordered">
+                                                <table id="table_12" class="table table-bordered table-striped table-hover" style="" align="Center"  >
 
-                                            <table id="table_12" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-
-                                                <c:choose>
-                                                    <c:when test="${empty trainingFeedbackList}">
-                                                        <tr>
-                                                            <td align="Center">There Is No Any Record</td>
-                                                        </tr>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <thead>
+                                                    <c:choose>
+                                                        <c:when test="${empty trainingFeedbackList}">
                                                             <tr>
-                                                                <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
-                                                                <th>Sr.No.</th>
-                                                                <th>Employee </th>
-                                                                <th>Feedback</th>
-                                                                <th>Action</th>
+                                                                <td align="Center">There Is No Any Record</td>
                                                             </tr>
-                                                        </thead>
-                                                        <c:set var="count" value="0" scope="page" />
-                                                        <tbody>
-                                                            <!--${trainingFeedbackList}-->
-                                                            <c:forEach  var="trainingFeedbackList" items="${trainingFeedbackList}">
-                                                                <c:set var="count" value="${count + 1}" scope="page"/>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <thead>
                                                                 <tr>
-                                                                    <td align="Center">
-                                                                        <input type="checkbox" name="checkId" id="checkId" value="${trainingFeedbackList[0]}">
-                                                                    </td>
-                                                                    <td style="text-align: left">
-                                                                        <c:out value = "${count}"/>
-                                                                    </td>
-                                                                    <td style="text-align: left">
-                                                                        ${trainingFeedbackList[4]}
-                                                                    </td>
-                                                                    <td style="text-align: left">
-                                                                        ${trainingFeedbackList[1]}
-                                                                    </td>
-                                                                    <td style="text-align: left">
-                                                                        <div class="btn-group">
-                                                                            <button type="button" data-toggle="modal" data-target="#myModalOnline" onclick="setid(${trainingFeedbackList[5]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
-                                                                                &nbsp;&nbsp;&nbsp;&nbsp;View
-                                                                            </button>
-                                                                        </div>
-                                                                    </td>
-                                                                    <!--                                                                    <td>
-                                                                                                                                            <div class="btn-group">
-                                                                                                                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="viewClick(${trainingList.id});">
-                                                                                                                                                    &nbsp;Edit
-                                                                                                                                                </button>
-                                                                    
-                                                                                                                                            </div>
-                                                                                                                                        </td>-->
+                                                                    <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
+                                                                    <th>Sr.No.</th>
+                                                                    <th>Employee </th>
+                                                                    <th>Feedback</th>
+                                                                    <th>Action</th>
                                                                 </tr>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </table>
+                                                            </thead>
+                                                            <c:set var="count" value="0" scope="page" />
+                                                            <tbody>
+                                                                <!--${trainingFeedbackList}-->
+                                                                <c:forEach  var="trainingFeedbackList" items="${trainingFeedbackList}">
+                                                                    <c:set var="count" value="${count + 1}" scope="page"/>
+                                                                    <tr>
+                                                                        <td align="Center">
+                                                                            <input type="checkbox" name="checkId" id="checkId" value="${trainingFeedbackList[0]}">
+                                                                        </td>
+                                                                        <td style="text-align: left">
+                                                                            <c:out value = "${count}"/>
+                                                                        </td>
+                                                                        <td style="text-align: left">
+                                                                            ${trainingFeedbackList[4]}
+                                                                        </td>
+                                                                        <td style="text-align: left">
+                                                                            ${trainingFeedbackList[1]}
+                                                                        </td>
+                                                                        <td style="text-align: left">
+                                                                            <div class="btn-group">
+                                                                                <button type="button" data-toggle="modal" data-target="#myModalOnline" onclick="setid(${trainingFeedbackList[5]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;View
+                                                                                </button>
+                                                                            </div>
+                                                                        </td>
+                                                                        <!--                                                                    <td>
+                                                                                                                                                <div class="btn-group">
+                                                                                                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="viewClick(${trainingList.id});">
+                                                                                                                                                        &nbsp;Edit
+                                                                                                                                                    </button>
+                                                                        
+                                                                                                                                                </div>
+                                                                                                                                            </td>-->
+                                                                    </tr>
+                                                                </c:forEach>
+                                                            </tbody>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                </div><!-- /.tab-pane -->
-                            </div>
-                        </div><!-- /.tab-content -->
-                    </div><!-- nav-tabs-custom -->
-                </div><!-- /.col -->
+                                    </div><!-- /.tab-pane -->
+                                </div>
+                                </div>
+                            <!--</div>-->
+                            </div><!-- /.tab-content -->
+                        </div><!-- nav-tabs-custom -->
+                    </div><!-- /.col -->
             </section>
         </div>
     </form:form><!-- /.content -->

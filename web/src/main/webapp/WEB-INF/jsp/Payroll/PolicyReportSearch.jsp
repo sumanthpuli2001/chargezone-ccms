@@ -160,9 +160,9 @@
                                                                 <div id="printableArea">
 
                                                                     <header>
-                                                                        <center>  <img src="StorageYard/Images/bulwarks.png" style="width:15%;height: 15%;" BORDER="0"/></center>
+                                                                        <center>  <img src=" StorageYard/Images/logo.png" style="width:15%;height: 15%;" BORDER="0"/></center>
                                                                         <div class="form-group">
-                                                                            <center><b><font size="4">Bulwark Systems </font></b></center> 
+                                                                            <center><b><font size="4">SPC Life Science </font></b></center> 
                                                                         </div>
                                                                         <center><b><font size="4">${policyName[0]} Deduction Statement for the month of
                                                                                 <c:if test="${month eq 1}">January</c:if>

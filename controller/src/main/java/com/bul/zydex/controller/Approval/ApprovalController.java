@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -135,14 +136,20 @@ public class ApprovalController extends ApprovalAbstract {
 
         ModelAndView mv = new ModelAndView();
         ApprovalMaster approvalMaster = new ApprovalMaster();
+        ApprovalMaster approvalMaster2 = new ApprovalMaster();
         ApprovalUser approvalUser = new ApprovalUser();
         String id = request.getParameter("id");
         approvalUser = approvalUserService.readById(Integer.parseInt(id));
-        approvalMaster = approvalMasterService.readById(approvalUser.getApprovalMaster().getId());
+        List<?> approvalUserList = approvalUserService.readByApprovalId(Integer.parseInt(id));
+       
+//        approvalMaster = approvalMasterService.readById(approvalUser.getApprovalMaster().getId());
+        approvalMaster = approvalMasterService.readById(Integer.parseInt(id));
+        approvalUser = approvalUserService.readById(Integer.parseInt(id));
 
         EmployeeMaster employeeMaster = new EmployeeMaster();
-        selectEmployee(request, response);
+        employeeMaster= approvalUser.getEmployeeMaster();
         selectedEmployeeFor360Feedback(request, employeeMaster);
+        selectEmployee(request, response);
 
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("approvalUser", approvalUser);

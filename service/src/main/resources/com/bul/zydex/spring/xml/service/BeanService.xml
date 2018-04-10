@@ -616,4 +616,22 @@
     <bean id="employeeCtcDetailService1" class="com.bul.zydex.service.policy.EmployeeCtcDetailServiceImpl">
         <property name="employeeCtcDetailDAO" ref="employeeCtcDetailDAO1"/>
     </bean>
+    <bean id="retirementAgeService1" class="com.bul.zydex.service.Payroll.RetirementAgeServiceImpl">
+        <property name="retirementAgeDAO" ref="retirementAgeDAO1"/>
+    </bean>
+    <bean id="recruitmentApprovalHistoryService1" class="com.bul.zydex.service.RecruitmentApprovalHistory.RecruitmentApprovalHistoryServiceImpl">
+        <property name="recruitmentApprovalHistoryDAO" ref="recruitmentApprovalHistoryDAO1"/>
+    </bean>
+    <bean id="mprApprovalHistoryService1" class="com.bul.zydex.service.RecruitmentApprovalHistory.MprApprovalHistoryServiceImpl">
+        <property name="MprApprovalHistoryDAO" ref="MprApprovalHistoryDAO1"/>
+    </bean>
+    <bean id="payrollTaxDeductionMasterService1" class="com.bul.zydex.service.Payroll.PayrollTaxDeductionMasterServiceImpl">
+        <property name="payrollTaxDeductionMasterDao" ref="payrollTaxDeductionMasterDao1"/>
+    </bean>
+    <bean id="employeeCtcDetailSalaryService1" class="com.bul.zydex.service.EmployeeCtcDetailSalary.EmployeeCtcDetailSalaryServiceImpl">
+        <property name="employeeCtcDetailSalaryDAO" ref="employeeCtcDetailSalaryDAO1"/>
+    </bean>
+    <bean id="payrollTaxDeductionComponentService1" class="com.bul.zydex.service.Payroll.PayrollTaxDeductionComponentServiceImpl">
+        <property name="payrollTaxDeductionComponentDao" ref="payrollTaxDeductionComponentDao1"/>
+    </bean>
 </beans>

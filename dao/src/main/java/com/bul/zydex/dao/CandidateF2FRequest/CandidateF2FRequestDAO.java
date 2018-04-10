@@ -16,7 +16,7 @@ import java.util.List;
 public interface CandidateF2FRequestDAO<T> extends GenericsDAO<T> {
     
     
-    public List<?> interviewReqDetailread();
+    public List<?> interviewReqDetailread(int empId);
     
     
     public CandidateF2FRequest readById(int id);

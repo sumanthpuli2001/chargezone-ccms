@@ -43,4 +43,9 @@ public class ApplayJobUserMasterServiceImpl<T> extends GenericsServiceImpl<T> im
         return applayJobUserMasterDAO.checkByUserNameandPass(object);
     }
 
+    @Override
+    public Boolean checkByLogInStatus(T object) {
+       return applayJobUserMasterDAO.checkByLogInStatus(object);
+    }
+
 }

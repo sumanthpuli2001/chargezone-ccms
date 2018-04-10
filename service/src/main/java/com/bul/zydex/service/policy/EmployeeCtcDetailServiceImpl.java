@@ -15,7 +15,8 @@ import java.util.List;
  * @author Hussain
  */
 public class EmployeeCtcDetailServiceImpl<T> extends GenericsServiceImpl<T> implements EmployeeCtcDetailService<T> {
-      private  EmployeeCtcDetailDAO<T> employeeCtcDetailDAO;
+
+    private EmployeeCtcDetailDAO<T> employeeCtcDetailDAO;
 
     public EmployeeCtcDetailDAO<T> getEmployeeCtcDetailDAO() {
         return employeeCtcDetailDAO;
@@ -28,9 +29,22 @@ public class EmployeeCtcDetailServiceImpl<T> extends GenericsServiceImpl<T> impl
 
     @Override
     public List<?> fetchctcData(int empId) {
-      return employeeCtcDetailDAO.fetchctcData(empId);
+        return employeeCtcDetailDAO.fetchctcData(empId);
     }
 
-    
-      
+    @Override
+    public List<?> readctc(int employeeid) {
+        return employeeCtcDetailDAO.readctc(employeeid);
+    }
+
+    @Override
+    public List<?> readEmployeeCtcDetail(int employeeid) {
+        return employeeCtcDetailDAO.readEmployeeCtcDetail(employeeid);
+    }
+
+    @Override
+    public List<?> readByEmployeCtcReport(int employeeid, String month, String year) {
+       return employeeCtcDetailDAO.readByEmployeCtcReport(employeeid, month, year);
+    }
+
 }

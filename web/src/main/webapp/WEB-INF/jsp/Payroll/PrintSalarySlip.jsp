@@ -73,7 +73,7 @@
 
                                             <tr>
                                                 <td colspan="12">
-                                            <center><img src="StorageYard/Images/chem2.jpg" style="width:14%;height: 14%;" BORDER="0"/> </center>
+                                            <center><img src=" StorageYard/Images/logo.png" style="width:14%;height: 14%;" BORDER="0"/> </center>
                                             </td>
                                             </tr>
                                             <tr>

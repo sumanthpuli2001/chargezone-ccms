@@ -15,6 +15,68 @@
 
 </head>
 <script>
+    var tempCount3 = 1;
+    $(function () {
+        $("#policyCloneid").on("click", function () {
+            tempCount3++;
+            //                alert(tempCount3);
+            var clone = "<tr id='addmoreFile" + tempCount3 + "' >"
+                    //                        + "<td style=\"text-align: center\">" + tempCount3 + "</td>"
+                    + "<td id=\"policyTd" + tempCount3 + "\"><div><input type=\"text\" id='policyId" + tempCount3 + "' name='policyId" + tempCount3 + "' class=\"form-control\" >"
+                    + "</select>"
+                    //                        + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
+                    //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "' value=" + tempCount3 + " readonly=\"true\" class=\"form-control\"></td>"
+                    //                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "'  min=\"0\" class=\"form-control\"></td>"
+                    + "<td style=\"text-align: center\">"
+                    + "<span style='margin-top: 5px;'>"
+                    + "<input type=\"button\"value=\"-\"  onclick=\"removePolicy('addmoreFile" + tempCount3 + "');\"/>"
+                    + "</span>"
+                    + "</td>"
+                    + "</tr>";
+            $("#policyTable").append(clone);
+            //                $("#policyTable").addClass(token-input-input-token);
+            document.getElementById('policyCount').value = tempCount3;
+            jQuery("#policyId" + tempCount3).tokenInput(${list}, {
+                preventDuplicates: true,
+                noResultsText: "No Result",
+                tokenLimit: "1",
+                searchingText: "Searching ... .. .",
+                prePopulate: ${preList}
+            });
+            //                var expenseType = document.getElementById('expenseType').value;
+            addAPolicy(tempCount3);
+
+        });
+    });
+
+    function addAPolicy(id) {
+        //                alert(id);
+        var element2 = document.getElementById('policyId1');
+        var obj2 = document.getElementById("policyId" + id);
+
+        for (var i2 = 0; i2 < element2.options.length; i2++) {
+            var opt2 = document.createElement("option");
+            opt2.value = element2.options[i2].value;
+            opt2.text = element2.options[i2].text;
+            obj2.appendChild(opt2);
+        }
+    }
+
+    function removePolicy(policyDiv) {
+        try {
+            tempCount3--;
+            var val = document.getElementById("policyCount").value;
+            val = val - 1;
+            document.getElementById("policyCount").value = val;
+            var element1 = document.getElementById(policyDiv);
+            element1.parentNode.removeChild(element1);
+        } catch (e) {
+
+        }
+    }
+
+</script>
+<script>
     function getTrainingSubType() {
         var trainingTypeId = document.getElementById('trainingType').value;
 
@@ -152,8 +214,14 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-5">
+                                        <!--${trainingMaster.trainingOwner}-->
+                                        <!--${list}-->
+                                        <!--${employeeMaster.employeeName}-->
                                         <label class="control-label">Training Requester<span style="color: red;font-size: 12px;"></span></label>
-                                        <form:input path="trainingOwner" class="form-control"/>
+                                        <%--<form:input path="trainingOwner" value="${employeeMaster.employeeName}" class="form-control" disabled="true"/>--%>
+                                        <!--<br>-->
+                                        <%--<form:input path="trainingOwner" class="form-control" name="policyId1" id="policyId1"></form:input>--%>
+                                        <form:input path="trainingOwner" class="form-control"></form:input>
                                     </div>
                                     <div class="col-sm-5">
                                         <!--${trainingMaster.trainer.trainerName}-->
@@ -244,7 +312,7 @@
                                         <div class="col-sm-5">
                                             <label class="control-label">Training time to<span style="color: red;font-size: 12px;">*</span></label>
                                             <div class="input-group date form_datetime" data-date-format="hh:ii " data-link-field="dtp_input1">
-                                            <form:input path="trainingTimeTo" id="trainingTimeTo" class="form-control" size="16" value="" readonly="" onchange="trainerOnchangeFunction('trainingTimeToError');"></form:input>
+                                            <form:input path="trainingTimeTo" id="trainingTimeTo" class="form-control" size="16" value="" readonly="true" onchange="trainerOnchangeFunction('trainingTimeToError');"></form:input>
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                             </div>
                                             <span style="font-size: 14px; color: #dd4b39;" id="trainingTimeToError"></span>
@@ -329,6 +397,29 @@
                     forceParse: 0
                 });
             </script>
+            <script type="text/javascript">
+    jQuery.noConflict();
+//    jQuery(document).ready(function () {
+//
+//        jQuery("#policyId1").tokenInput(${list}, {
+//            preventDuplicates: true,
+//            noResultsText: "No Result",
+//            tokenLimit: "1",
+//            searchingText: "Searching ... .. .",
+//            prePopulate: ${preList}
+//        });
+//    });
+
+jQuery(document).ready(function () {
+            jQuery("#trainingOwner").tokenInput(${list}, {
+                preventDuplicates: true,
+                noResultsText: "No Result",
+                tokenLimit: "1",
+                searchingText: "Searching ... .. .",
+                prePopulate: ${preList},
+            });
+        });
+</script>
             <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 
 

@@ -136,7 +136,7 @@
                                                             <span id="policyError1" style="color: red;"></span>
                                                         </td>
                                                         <td style="text-align: center">
-                                                            <input type="text"  name="policyNumber1" id="policyNumber1" value="1" readonly="true"class="form-control">
+                                                            <input type="text"  name="policyNumber1" id="policyNumber1" value="${approvalUser.level}" readonly="true"class="form-control">
                                                         </td>
 
                                                         <td style="text-align: center">

@@ -27,4 +27,5 @@ public interface CandidateJobApplyDAO<T> extends GenericsDAO<T> {
     
      public boolean isExistCertificateAttach(String name);
 
+     public List<?> candidateApplyJobcheackUserId(int userId);
 }

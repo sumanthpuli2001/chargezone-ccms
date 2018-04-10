@@ -104,8 +104,8 @@
                                                                 <td>${list[7]}</td>
                                                                 <td>${list[8]}</td>
                                                                 <td>${list[9]}</td>
-                                                                <td>${list[1]}</td>
                                                                 <td>${list[2]}</td>
+                                                                <td>${list[1]}</td>
                                                                 <td>${list[10]}</td>
                                                                 <!--<td>${list[3]}</td>-->
                                                                 <td>
@@ -115,7 +115,7 @@
                                                                     <c:if test="${list[4] eq 3}"><span class="label label-danger">Reject</span></c:if>
                                                                     <c:if test="${list[4] eq 4 && list[5] ne list[6]}"><span class="label label-success">Approved</span></c:if>
                                                                     <c:if test="${list[4] eq 4 && list[5] eq list[6]}"><span class="badge">Pending</span></c:if>
-                                                                    <c:if test="${list[4]  eq 5}"><span class="label label-success">Final Approved</span></c:if>
+                                                                    <c:if test="${list[4]  eq 5 || list[4]  eq 21}"><span class="label label-success">Final Approved</span></c:if>
                                                                     <c:if test="${list[4] eq 2}"><span class="label label-warning">Recycled</span></c:if>
                                                                     <%--<c:if test="${list[5] == 0}"><span class="badge">Rejected</span></c:if>--%>
 
@@ -132,6 +132,13 @@
 
                                                                     <div class="btn-group">
                                                                         <c:if test="${list[4] eq 0 || list[4] eq 4 && list[5] eq list[6]}">
+                                                                            <button type="button" onclick="mPPViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                                &nbsp;&nbsp;Approval
+                                                                            </button>
+                                                                        </c:if>
+                                                                    </div>
+                                                                    <div class="btn-group">
+                                                                        <c:if test="${list[4] eq 2}">
                                                                             <button type="button" onclick="mPPViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                                 &nbsp;&nbsp;Approval
                                                                             </button>

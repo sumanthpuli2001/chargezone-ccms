@@ -13,6 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Employee Saving Create</title>
     </head>
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -40,130 +41,65 @@
                                 </c:if>
                                 <form:form action="payrollSavingAmount.htm?act=createSubmit" method="post" 
                                            name='form1' onsubmit='return saveSubmit11();' class="form-horizontal" role="form">
-                                    
-                                        <div class="box-body no-padding">
-                                            
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12" style="font-size: 16px; margin: 10px 0px 20px 0px;">
-                                           
-                                          
-                                                 <b>Employee Name : </b>
-                                                 <span>${employeeMaster.employeeName}</span>
-                                            <input type="hidden" name="employeeId" value="${employeeMaster.id}">
-                                            
-                                           &nbsp;&nbsp;&nbsp;
-                                             <b> Year : </b>
-                                             <span>${payrollFormSixteenMaster.payrollFinancialYear.title}</span> 
-                                           <input type="hidden" name="yearId" value="${payrollFormSixteenMaster.id}">  
-                                           
+
+                                    <div class="box-body no-padding">
+
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12" style="font-size: 16px; margin: 10px 0px 20px 0px;">
+                                                <b>Employee Name :</b>
+                                                <span>${employeeMaster.employeeName}</span>
+                                                <input type="hidden" name="employeeId" value="${employeeMaster.id}">
+
+                                                &nbsp;&nbsp;&nbsp;
+                                                <b> Year : </b>
+                                                <span>${payrollFormSixteenMaster.payrollFinancialYear.title}</span> 
+                                                <input type="hidden" name="yearId" value="${payrollFormSixteenMaster.id}">  
+
                                             </div>
-                                            </div>
-                                            <div class="table table-bordered">
+                                        </div>
+                                        <div class="table table-bordered">
+                                            <c:forEach var="listOfLoan" items="${finalData}" varStatus="myindex">
+
+                                                <div style="text-align: center;"><b>Section - ${listOfLoan[0]}</b></div>
+                                                <br/>
                                                 <table id="" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                     <thead>
                                                         <tr>
-                                                        <th>Sr. No.</th>
-                                                        <th>Saving Type</th>
-                                                        <th>Amount</th>
+                                                            <th>Sr. No.</th>
+                                                            <th>Saving Type
+                                                            </th>
+                                                            <th>Amount</th>
+                                                            <th>Proof submission </th>
+                                                            <th> </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <input type="hidden" name="savingTypeCount" value="15">
-                                                        
+                                                        <c:forEach var="listOfLoan1" items="${listOfLoan[1]}" varStatus="myindex1">
+                                                        <input type="hidden" id="hrId" name="hrId" value="${myindex1.count}"/>
                                                         <tr>
-                                                            <td>1.</td>
-                                                            <td><input type="hidden" name="savingType1" value="V.P.F.">V.P.F.</td>
+                                                            <td>${myindex1.count}</td>
+                                                            <td>
+                                                                <c:out value="${listOfLoan1}"/> </br>
+                                                            </td>
                                                             <td><input type="text" name="savingTypeAmount1" value="0.0" class="form-control"></td>
+                                                            <td> <input type="file" name="file1" id="file11" value="" onchange="checkfile(this,${myindex1.count});"/></td>
+                                                            <td><div class="col-sm-6" id="uploadDiv${myindex1.count}" name="uploadDiv${myindex1.count}" style="display: none">
+                                                                    <input type="submit" style="width: 100px;"  value="UPLOAD" class="btn btn-primary" id="saveSubmit2"  onclick="document.getElementById('save').value = '1';" />
+                                                                </div></td>
+                                                                <td><input type="hidden" id="hrId" name="hrId" value="${myindex1.count}"/></td> 
                                                         </tr>
-                                                        <tr>
-                                                            <td>2.</td>
-                                                            <td><input type="hidden" name="savingType2" value="LIC - SSS">LIC - SSS</td>
-                                                            <td><input type="text" name="savingTypeAmount2" value="0.0" class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3.</td>
-                                                            <td><input type="hidden" name="savingType3" value="LIC - DIRECT">LIC - DIRECT</td>
-                                                            <td><input type="text" name="savingTypeAmount3" value="0.0" class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4.</td>
-                                                            <td><input type="hidden" name="savingType4" value="P.P.F.">P.P.F.</td>
-                                                            <td><input type="text" name="savingTypeAmount4" value="0.0" class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5.</td>
-                                                            <td><input type="hidden" name="savingType5" value="ULIP">ULIP</td>
-                                                            <td><input type="text" name="savingTypeAmount5" value="0.0" class="form-control"></td>
-                                                        </tr>
-                                                    <tr>
-                                                            <td>6.</td>
-                                                            <td><input type="hidden" name="savingType6" value="NSC">NSC</td>
-                                                            <td><input type="text" name="savingTypeAmount6" value="0.0" class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>7.</td>
-                                                            <td><input type="hidden" name="savingType7" value="NSC Interest">NSC Interest</td>
-                                                            <td><input type="text" name="savingTypeAmount7" value="0.0" class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>8.</td>
-                                                            <td><input type="hidden" name="savingType8" value="Housing Loan">Housing Loan</td>
-                                                            <td><input type="text" name="savingTypeAmount8" value="0.0" class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>9.</td>
-                                                            <td><input type="hidden" name="savingType9" value="Home Loan">Home Loan</td>
-                                                            <td><input type="text" name="savingTypeAmount9" value="0.0" class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>10.</td>
-                                                            <td><input type="hidden" name="savingType10" value="ELSS">ELSS</td>
-                                                            <td><input type="text" name="savingTypeAmount10" value="0.0" class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>11.</td>
-                                                            <td><input type="hidden" name="savingType11" value="PLI">PLI</td>
-                                                            <td><input type="text" name="savingTypeAmount11" value="0.0" class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>12.</td>
-                                                            <td><input type="hidden" name="savingType12" value="Others">Others</td>
-                                                            <td><input type="text" name="savingTypeAmount12" value="0.0" class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>13.</td>
-                                                            <td><input type="hidden" name="savingType13" value="Education Expenses">Education Expenses</td>
-                                                            <td><input type="text" name="savingTypeAmount13" value="0.0" class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>14.</td>
-                                                            <td><input type="hidden" name="savingType14" value="Infrastructure Investment">Infrastructure Investment</td>
-                                                            <td><input type="text" name="savingTypeAmount14" value="0.0" class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>15.</td>
-                                                            <td><input type="hidden" name="savingType15" value="Bank Deposit">Bank Deposit</td>
-                                                            <td><input type="text" name="savingTypeAmount15" value="0.0" class="form-control"></td>
-                                                        </tr>
-                                                    
-                                                    </tbody>
+                                                    </c:forEach>
                                                 </table>
-                                            </div>
-                                            <c:if test="${!empty employeelist}">
-                                               
-                                            </c:if>
-
-                                        </div><!-- /.col -->
-                                    </div><!-- /.row -->
-                                </div><!-- /.box-body -->
-                                         
-                                       
-                                        <div class="form-group">
-                                            <div class="col-sm-6 col-sm-offset-5">
-                                                <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
-                                            </div>
-
+                                            </c:forEach>
                                         </div>
+                                        <c:if test="${!empty employeelist}">
+                                        </c:if>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6 col-sm-offset-5">
+                                            <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                        </div>
+                                    </div>
                                 </form:form>
                             </div><!-- /.tab-pane -->
                         </div><!-- /.tab-content -->
@@ -172,5 +108,29 @@
             </div>
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
+    <script type="text/javascript" language="javascript">
+        function checkfile(sender,index) {
+//          alert("hii"+index);
+                var tflag11 = document.getElementById("hrId").value;
+//            alert(tflag11);
+            $('#saveSubmit2').show();
+
+            var validExts = new Array(".xlsx", ".xls");
+            var fileExt = sender.value;
+            fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+            if (validExts.indexOf(fileExt) < 0) {
+                alert("Invalid file selected, valid files are of " +
+                        validExts.toString() + " types.");
+                document.getElementById('file11').value = '';
+                return false;
+                $("#uploadDiv"+index).hide();
+
+            }
+            else {
+                $("#uploadDiv"+index).show();
+                return true;
+            }
+        }
+    </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

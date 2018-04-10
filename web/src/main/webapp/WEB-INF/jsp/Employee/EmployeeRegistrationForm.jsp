@@ -374,6 +374,7 @@
                         + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
 //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "'  min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
                         + "<input type=\"button\"value=\"-\"  onclick=\"removePolicy('addmoreFile" + tempCount3 + "');\"/>"
@@ -414,7 +415,7 @@
         }
 
     </script>
-  <script>
+    <script>
         var tempCount4 = 1;
         $(function () {
             $("#ctcCloneid").on("click", function () {
@@ -425,8 +426,26 @@
                         + "<td id=\"ctcTd" + tempCount4 + "\"><div><select id='ctcId" + tempCount4 + "' name='ctcId" + tempCount4 + "' class=\"form-control\">"
                         + "</select>"
                         + "</div><span id=\"ctcError" + tempCount4 + "\" style=\"color: red;\"></span></td>"
-//                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
+                        //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'  min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
+                        + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='month" + tempCount4 + "' name='month" + tempCount4 + "' class=\"form-control\">"
+                        + "<option value=\"\">--SELECT--</option>"
+                        + "<option value=\"01\">January</option>"
+                        + "<option value=\"02\">February</option>"
+                        + "<option value=\"03\">March</option>"
+                        + "<option value=\"04\">April</option>"
+                        + "<option value=\"05\">May</option>"
+                        + "<option value=\"06\">June</option>"
+                        + "<option value=\"07\">July</option>"
+                        + "<option value=\"08\">August</option>"
+                        + "<option value=\"09\">September</option>"
+                        + "<option value=\"10\">October</option>"
+                        + "<option value=\"11\">November</option>"
+                        + "<option value=\"12\">December</option></select>"
+                        + "</div></td>"
+                        + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='year" + tempCount4 + "' name='year" + tempCount4 + "' class=\"form-control\">"
+                        + "</div></td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
                         + "<input type=\"button\"value=\"-\"  onclick=\"removectc('addmoreFile" + tempCount4 + "');\"/>"
@@ -435,8 +454,26 @@
                         + "</tr>";
                 $("#ctcTable").append(clone);
                 document.getElementById('ctcCount').value = tempCount4;
-//                var expenseType = document.getElementById('expenseType').value;
+                //                var expenseType = document.getElementById('expenseType').value;
                 addActc(tempCount4);
+                window.onload = init;
+                function init() {
+                    document.form1.month.options[new Date().getMonth()].selected = true;
+                }
+                var start = 1990;
+                var end = 2050;
+                var options11 = "";
+
+                for (var year1 = end; year1 >= start; year1--) {
+                    options11 += "<option>" + year1 + "</option>";
+                }
+//                alert(tempCount4);
+                document.getElementById('year2').innerHTML = options11;
+                document.getElementById('year3').innerHTML = options11;
+                document.getElementById('year4').innerHTML = options11;
+                document.getElementById('year5').innerHTML = options11;
+                document.getElementById('year6').innerHTML = options11;
+                document.getElementById('year7').innerHTML = options11;
 
             });
         });
@@ -893,7 +930,7 @@
                                                             <label>Company:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="company" id="company" class="form-control ">
                                                             <form:option value="">--SELECT--</form:option>
-                                                            <form:option value="HIRA TECHNOSOFT">HIRA TECHNOSOFT </form:option>
+                                                            <form:option value="SPC Life Science">SPC Life Science </form:option>
                                                             <%--<form:option value="Zydex Industries Pvt. Ltd.">Zydex Industries Pvt. Ltd.</form:option>--%>
                                                         </form:select>
                                                         <form:errors path="company" cssClass="errorDiv"></form:errors>
@@ -1152,6 +1189,7 @@
                                                                 <th style="text-align: center; vertical-align: middle">Select Allowance</th>
                                                                 <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
                                                                 <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                <th style="text-align: center; vertical-align: middle">Taxable</th>
                                                                 <th style="text-align: center; vertical-align: middle">Add New</th>
                                                             <input type="hidden" name="policyCount" id="policyCount" value="1"/>
                                                             </tr>
@@ -1167,11 +1205,14 @@
                                                                     </div>
                                                                     <span id="policyError1" style="color: red;"></span>
                                                                 </td>
-<!--                                                                <td style="text-align: center">
-                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control">
-                                                                </td>-->
+                                                                <!--                                                                <td style="text-align: center">
+                                                                                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control">
+                                                                                                                                </td>-->
                                                                 <td style="text-align: center">
                                                                     <input type="number" name="amount1" id="amount1" min="0" class="form-control">
+                                                                </td>
+                                                                <td style="text-align: center">
+                                                                    <input type="checkbox" name="taxable1" id="taxable1" >
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <span style='margin-top: 5px;'>
@@ -1182,7 +1223,7 @@
                                                         </table>
                                                     </div>
                                                 </div>
-                                                         <div class="col-md-12 col-sm-12">
+                                                <div class="col-md-12 col-sm-12">
                                                     <div class="table-responsive">
                                                         <table id="ctcTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                             <tr>
@@ -1190,6 +1231,9 @@
                                                                 <th style="text-align: center; vertical-align: middle">Select CTC</th>
                                                                 <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
                                                                 <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                <th style="text-align: center; vertical-align: middle">Taxable</th>
+                                                                <th style="text-align: center; vertical-align: middle">Month</th>
+                                                                <th style="text-align: center; vertical-align: middle">Year</th>
                                                                 <th style="text-align: center; vertical-align: middle">Add New</th>
                                                             <input type="hidden" name="ctcCount" id="ctcCount" value="1"/>
                                                             </tr>
@@ -1205,11 +1249,42 @@
                                                                     </div>
                                                                     <span id="ctcError1" style="color: red;"></span>
                                                                 </td>
-<!--                                                                <td style="text-align: center">
-                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control">
-                                                                </td>-->
+                                                                <!--                                                                <td style="text-align: center">
+                                                                                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control">
+                                                                                                                                </td>-->
                                                                 <td style="text-align: center">
                                                                     <input type="number" name="ctcamount1" id="ctcamount1" min="0" class="form-control">
+                                                                </td>
+                                                                <td style="text-align: center">
+                                                                    <input type="checkbox" name="taxable1" id="taxable1" >
+                                                                </td>
+                                                                <td id="monthTd1"><div>
+                                                                        <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
+                                                                        <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
+                                                                        <select id="month1" name="month1"  class="form-control ">
+                                                                            <option value="">--Select--</option>
+                                                                            <option value="01">January</option>
+                                                                            <option value="02">February</option>
+                                                                            <option value="03">March </option>
+                                                                            <option value="04">April</option>
+                                                                            <option value="05">May</option>
+                                                                            <option value="06">June</option>
+                                                                            <option value="07">July</option>
+                                                                            <option value="08">August</option>
+                                                                            <option value="09">September</option>
+                                                                            <option value="10">October </option>
+                                                                            <option value="11">November </option>
+                                                                            <option value="12">December</option>
+
+                                                                        </select>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td style="text-align: center">
+                                                                 
+                                                                    <select name="year1" id="year1" class="form-control ">
+
+                                                                    </select>
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <span style='margin-top: 5px;'>
@@ -1426,9 +1501,9 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-12">
-                                                    <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:textarea  path="jobDescription" id="editor"></form:textarea>
-                                                    <form:errors path="jobDescription" cssClass="errorDiv"/>
+                                                <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                <form:textarea  path="jobDescription" id="editor"></form:textarea>
+                                                <form:errors path="jobDescription" cssClass="errorDiv"/>
                                             </div>
                                         </div>
                                     </div>
@@ -2049,8 +2124,8 @@
                 }
             }
         }</script>
- 
-    
+
+
     <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
     <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
     <!--<link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/css/samples.css">-->
@@ -2059,6 +2134,20 @@
         initSample();
 
 
+    </script>
+    <script type="text/javascript">
+        window.onload = init;
+        function init() {
+            document.form1.month.options[new Date().getMonth()].selected = true;
+        }
+        var start = 1990;
+        var end = 2050;
+        var options11 = "";
+
+        for (var year1 = end; year1 >= start; year1--) {
+            options11 += "<option>" + year1 + "</option>";
+        }
+        document.getElementById('year1').innerHTML = options11;
     </script>
 
 </html>

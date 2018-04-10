@@ -68,26 +68,30 @@ public class VacancyController extends VacancyAbstract {
         HttpSession session = request.getSession();
         ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
 
-        List<CandidateApplyJob> candidateProfile = (List<CandidateApplyJob>) candidateJobApplyService.readProfileByCandidateUserID(ajuMaster.getId());
+        if (ajuMaster.getProfileSubmit() != 0) {
+
+            List<CandidateApplyJob> candidateProfile = (List<CandidateApplyJob>) candidateJobApplyService.readProfileByCandidateUserID(ajuMaster.getId());
 //        VacancyMaster master=
-        List<?> CandidateJobApplyList = new ArrayList<>();
-        if (!candidateProfile.isEmpty()) {
-            CandidateApplyJob caj = (CandidateApplyJob) candidateProfile.get(0);
-            CandidateJobApplication cja = candidateJobApplicationService.readByCandidateIdAndVacancyId(caj.getId(), vacId);
-            cja.setStatus(1);
-            candidateJobApplicationService.update(cja);
+            List<?> CandidateJobApplyList = new ArrayList<>();
+            if (!candidateProfile.isEmpty()) {
+                CandidateApplyJob caj = (CandidateApplyJob) candidateProfile.get(0);
+                CandidateJobApplication cja = candidateJobApplicationService.readByCandidateIdAndVacancyId(caj.getId(), vacId);
+                cja.setStatus(1);
+                candidateJobApplicationService.update(cja);
 
-            CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(caj.getId());
+                CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(caj.getId());
 
+            }
+            request.setAttribute("list", CandidateJobApplyList);
+            mv.getModelMap().put("applayJobUserMaster", ajuMaster);
+            mv.setViewName("Vacancy/MemberVacancyList");
+        } else {
+
+            CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+
+            mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+            mv.setViewName("Vacancy/applyJobCandidateRegistration");
         }
-        request.setAttribute("list", CandidateJobApplyList);
-        mv.getModelMap().put("applayJobUserMaster", ajuMaster);
-        mv.setViewName("Vacancy/MemberVacancyList");
-
-//        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
-//
-//        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
-//        mv.setViewName("Vacancy/applyJobCandidateRegistration");
         return mv;
     }
 
@@ -144,6 +148,7 @@ public class VacancyController extends VacancyAbstract {
 
         String experiance = mprMaster.getExperience();
         String description = mprMaster.getDescription();
+        String mprName = mprMaster.getName();
         int position = mprMaster.getNumberOfPosition();
         int budget = mprMaster.getBudget();
 
@@ -161,6 +166,7 @@ public class VacancyController extends VacancyAbstract {
         request.setAttribute("experiance", experiance);
         request.setAttribute("budget", budget);
         request.setAttribute("description", description);
+        request.setAttribute("mprName", mprName);
         mv.setViewName("Vacancy/CreateVacancy");
         return mv;
     }
@@ -203,7 +209,7 @@ public class VacancyController extends VacancyAbstract {
 
         String description = mprMaster.getDescription();
         vacancyMaster.setDescription(description);
-        
+
         int location = mprMaster.getLocationMaster().getId();
         locationMaster = locationMasterService.readById(location);
         vacancyMaster.setLocationMaster(locationMaster);
@@ -265,10 +271,10 @@ public class VacancyController extends VacancyAbstract {
         String savingList[] = request.getParameterValues("checkId");
         for (String z : savingList) {
             try {
-                
+
                 CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
                 List<?> list = candidateJobApplicationService.deleteVacancyId(z);
-                for(Object object : list){
+                for (Object object : list) {
                     candidateJobApplication = (CandidateJobApplication) object;
                     candidateJobApplicationService.delete(candidateJobApplication.getId());
                 }
@@ -425,8 +431,15 @@ public class VacancyController extends VacancyAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
+//        String id = request.getParameter("id");
+//        int VacId = Integer.parseInt(id);
         ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
         mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
+        if ("" == request.getParameter("id")) {
+            String id = request.getParameter("id");
+            int VacId = Integer.parseInt(id);
+            mv.getModelMap().put("vacid", VacId);
+        }
         mv.setViewName("Vacancy/signUpButton");
         return mv;
     }
@@ -497,15 +510,36 @@ public class VacancyController extends VacancyAbstract {
         } else {
 
             ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
-            candidateApplyJob.setApplayJobUserMaster(ajuMaster);
-            List<CandidateApplyJob> list = (List<CandidateApplyJob>) candidateJobApplyService.readProfileByCandidateUserID(ajuMaster.getId());
-            if (!list.isEmpty()) {
+            if (ajuMaster.getFirstTime() == 1) {
+                candidateApplyJob.setApplayJobUserMaster(ajuMaster);
+                List<CandidateApplyJob> list = (List<CandidateApplyJob>) candidateJobApplyService.readProfileByCandidateUserID(ajuMaster.getId());
+                if (!list.isEmpty()) {
+                } else {
+                    candidateJobApplyService.create(candidateApplyJob);
+                }
             } else {
-                candidateJobApplyService.create(candidateApplyJob);
+                List<CandidateApplyJob> list = (List<CandidateApplyJob>) candidateJobApplyService.candidateApplyJobcheackUserId(ajuMaster.getId());
+                if (!list.isEmpty()) {
+                    CandidateApplyJob cbj = list.get(0);
+                    candidateApplyJob.setId(cbj.getId());
+                    candidateApplyJob.setApplayJobUserMaster(ajuMaster);
+                    candidateJobApplyService.update(candidateApplyJob);
+                }
+                if (ajuMaster.getProfileSubmit() != 1) {
+
+                    ajuMaster.setProfileSubmit(1);
+                    applayJobUserMasterSerivce.update(ajuMaster);
+
+                }
             }
 
             VacancyMaster vacancyMaster = new VacancyMaster();
-            List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+//            List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+            Date d = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String date = sdf.format(d);
+
+            List<?> vacancylist = vacancyMasterService.fetchVacancyBydate(date);
             mv.getModelMap().put("list", vacancylist);
             mv.getModelMap().put("vacancyMaster", vacancyMaster);
             mv.setViewName("Vacancy/ShowVacancyList");
@@ -522,6 +556,8 @@ public class VacancyController extends VacancyAbstract {
         BindException errors = new BindException(applayJobUserMaster, "applayJobUserMaster");
         bind(request, applayJobUserMaster);
 
+//        String id = request.getParameter("id");
+//        int VacId = Integer.parseInt(id);
         applayJobUserMasterValidator.validate(applayJobUserMaster, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
@@ -539,8 +575,19 @@ public class VacancyController extends VacancyAbstract {
             applayJobUserMaster.setFirstTime(0);
             applayJobUserMaster.setProfileSubmit(0);
             applayJobUserMasterSerivce.create(applayJobUserMaster);
+
+            CandidateApplyJob caj = new CandidateApplyJob();
+            caj.setApplayJobUserMaster(applayJobUserMaster);
+
+            candidateJobApplyService.create(caj);
+
             request.setAttribute("successMessage",
                     "Information : signUp Successfully.");
+            if ("" != request.getParameter("id")) {
+                String id = request.getParameter("id");
+                int VacId = Integer.parseInt(id);
+                request.setAttribute("vacid", VacId);
+            }
             return new ModelAndView("Vacancy/ApplayLoginpage", "applayJobUserMaster", applayJobUserMaster);
         }
         return mv;
@@ -561,6 +608,9 @@ public class VacancyController extends VacancyAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
+        String vacid = request.getParameter("vacid");
+        HttpSession session = request.getSession();
+        ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
         ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
         VacancyMaster vacancyMaster = new VacancyMaster();
         BindException errors = new BindException(applayJobUserMaster, "applayJobUserMaster");
@@ -576,61 +626,72 @@ public class VacancyController extends VacancyAbstract {
             Date cDate = new Date();
 
             ApplayJobUserMaster master = applayJobUserMasterSerivce.checkByUserNameandPass(ajum);
-            if (null != master) {
-                HttpSession session1 = request.getSession(false);
-                session1.setAttribute("ApplayJobUserMaster", master);
+            Boolean flage = applayJobUserMasterSerivce.checkByLogInStatus(ajum);
+            if (false == flage) {
+                if (null != master) {
+                    HttpSession session1 = request.getSession(false);
+                    session1.setAttribute("ApplayJobUserMaster", master);
 
-                request.setAttribute("successMessage",
-                        "Information : Login Successfully.");
+                    request.setAttribute("successMessage",
+                            "Information : Login Successfully.");
 
-                List<CandidateApplyJob> candidateProfile = (List<CandidateApplyJob>) candidateJobApplyService.readProfileByCandidateUserID(master.getId());
-                List<?> CandidateJobApplyList = new ArrayList<>();
-                if (!candidateProfile.isEmpty()) {
-                    CandidateApplyJob caj = (CandidateApplyJob) candidateProfile.get(0);
-                    if ("" != request.getParameter("id")) {
-                        String id = request.getParameter("id");
-                        int VacId = Integer.parseInt(id);
-                        vacancyMaster = vacancyMasterService.readById(VacId);
-                        CandidateJobApplication application = candidateJobApplicationService.readByCandidateIdAndVacancyId(caj.getId(), vacancyMaster.getId());
-                        if (null == application) {
+                    List<CandidateApplyJob> candidateProfile = (List<CandidateApplyJob>) candidateJobApplyService.readProfileByCandidateUserID(master.getId());
+                    List<?> CandidateJobApplyList = new ArrayList<>();
+                    if (!candidateProfile.isEmpty()) {
+                        CandidateApplyJob caj = (CandidateApplyJob) candidateProfile.get(0);
+                        if ("" != request.getParameter("id")) {
+                            String id = request.getParameter("id");
+                            int VacId = Integer.parseInt(id);
+                            vacancyMaster = vacancyMasterService.readById(VacId);
+                            CandidateJobApplication application = candidateJobApplicationService.readByCandidateIdAndVacancyId(caj.getId(), vacancyMaster.getId());
+                            if (null == application) {
 
-                            CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
-                            candidateJobApplication.setVacancyMaster(vacancyMaster);
-                            candidateJobApplication.setApplayJobUserMaster(master);
-                            candidateJobApplication.setCreatedBy(master.getId());
-                            candidateJobApplication.setCreatedDate(sdf.format(cDate));
-                            candidateJobApplication.setStatus(0);
+                                CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
+                                candidateJobApplication.setVacancyMaster(vacancyMaster);
+                                candidateJobApplication.setApplayJobUserMaster(master);
+                                candidateJobApplication.setCreatedBy(master.getId());
+                                candidateJobApplication.setCreatedDate(sdf.format(cDate));
+                                candidateJobApplication.setStatus(0);
 
-                            candidateJobApplication.setCandidateApplyJob(caj);
+                                candidateJobApplication.setCandidateApplyJob(caj);
 
-                            candidateJobApplicationService.create(candidateJobApplication);
-                        } else {
-                            request.setAttribute("successMessage",
-                                    "You are already apply for this job.");
-                            List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
-                            mv.getModelMap().put("list", vacancylist);
-                            mv.getModelMap().put("vacancyMaster", vacancyMaster);
-                            mv.setViewName("Vacancy/ShowVacancyList");
-                            return mv;
+                                candidateJobApplicationService.create(candidateJobApplication);
+                            } else {
+                                request.setAttribute("successMessage",
+                                        "You are already apply for this job.");
+                                Date d = new Date();
+                                String date = sdf.format(d);
 
+                                List<?> vacancylist = vacancyMasterService.fetchVacancyBydate(date);
+//                                List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+                                mv.getModelMap().put("list", vacancylist);
+                                mv.getModelMap().put("vacancyMaster", vacancyMaster);
+                                mv.setViewName("Vacancy/ShowVacancyList");
+                                return mv;
+
+                            }
                         }
+
+                        CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(caj.getId());
                     }
 
-                    CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(caj.getId());
-                }
-
 //              ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
-                request.setAttribute("successMessage",
-                        "Information : Login Successfully.");
-                request.setAttribute("list", CandidateJobApplyList);
-                mv.getModelMap().put("applayJobUserMaster", master);
+                    request.setAttribute("successMessage",
+                            "Information : Login Successfully.");
+                    request.setAttribute("list", CandidateJobApplyList);
+                    mv.getModelMap().put("applayJobUserMaster", master);
 
-                mv.setViewName("Vacancy/MemberVacancyList");
-                return mv;
+                    mv.setViewName("Vacancy/MemberVacancyList");
+                    return mv;
 
+                } else {
+                    request.setAttribute("failureMessage",
+                            "Error : Invalid UserName Or Password.");
+                    mv = Login(request, response);
+                }
             } else {
-                request.setAttribute("failureMessage",
-                        "Error : Invalid UserName Or Password.");
+                request.setAttribute("successMessage",
+                        "Information : Your Selected, No need to Login.");
                 mv = Login(request, response);
             }
         } else {
@@ -700,7 +761,9 @@ public class VacancyController extends VacancyAbstract {
                 } else {
                     request.setAttribute("successMessage",
                             "You are already apply for this job.");
-                    List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+                    Date d = new Date();
+                    String date = sdf.format(d);
+                    List<?> vacancylist = vacancyMasterService.fetchVacancyBydate(date);
                     mv.getModelMap().put("list", vacancylist);
                     mv.getModelMap().put("vacancyMaster", vacancyMaster);
                     mv.setViewName("Vacancy/ShowVacancyList");
@@ -708,10 +771,36 @@ public class VacancyController extends VacancyAbstract {
 
                 }
             } else {
-                CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+//                CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+//
+//                mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+//                mv.setViewName("Vacancy/applyJobCandidateRegistration");
+                applayJobUserMaster = applayJobUserMasterSerivce.readById(ajuMaster.getId());
 
-                mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
-                mv.setViewName("Vacancy/applyJobCandidateRegistration");
+                applayJobUserMaster.setProfileSubmit(1);
+                applayJobUserMasterSerivce.update(applayJobUserMaster);
+
+                CandidateApplyJob applyJob = new CandidateApplyJob();
+                applyJob.setApplayJobUserMaster(ajuMaster);
+                applyJob.setVacancyId(vacancyMaster);
+                candidateJobApplyService.create(applyJob);
+
+                CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
+                candidateJobApplication.setApplayJobUserMaster(ajuMaster);
+                candidateJobApplication.setVacancyMaster(vacancyMaster);
+                candidateJobApplication.setCreatedBy(ajuMaster.getId());
+                candidateJobApplication.setCreatedDate(sdf.format(cDate));
+                candidateJobApplication.setStatus(0);
+                candidateJobApplication.setCandidateApplyJob(applyJob);
+                candidateJobApplicationService.create(candidateJobApplication);
+
+                List<?> CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(candidateJobApplication.getId());
+
+                request.setAttribute("list", CandidateJobApplyList);
+                mv.getModelMap().put("ajuMaster", ajuMaster);
+                mv.setViewName("Vacancy/MemberVacancyList");
+                return mv;
+
             }
 
         } else {
@@ -827,7 +916,11 @@ public class VacancyController extends VacancyAbstract {
 
         ModelAndView mv = new ModelAndView();
         VacancyMaster vacancyMaster = new VacancyMaster();
-        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String date = sdf.format(d);
+
+        List<?> vacancylist = vacancyMasterService.fetchVacancyBydate(date);
         mv.getModelMap().put("list", vacancylist);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
         mv.setViewName("Vacancy/ShowVacancyList");
@@ -884,7 +977,11 @@ public class VacancyController extends VacancyAbstract {
         ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
         session.invalidate();
         VacancyMaster vacancyMaster = new VacancyMaster();
-        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String date = sdf.format(d);
+//        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        List<?> vacancylist = vacancyMasterService.fetchVacancyBydate(date);
         mv.getModelMap().put("list", vacancylist);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
         mv.setViewName("Vacancy/ShowVacancyList");
@@ -986,6 +1083,14 @@ public class VacancyController extends VacancyAbstract {
 
         candidateApplyJob.setApplayJobUserMaster(caj.getApplayJobUserMaster());
         candidateJobApplyService.update(candidateApplyJob);
+
+        if (ajuMaster.getProfileSubmit() != 1) {
+
+            ajuMaster.setProfileSubmit(1);
+            applayJobUserMasterSerivce.update(ajuMaster);
+
+        }
+
         request.setAttribute("successMessage",
                 "Information : The Information is Updated Successfully.");
 
@@ -1073,7 +1178,7 @@ public class VacancyController extends VacancyAbstract {
 
         String candidateiD = request.getParameter("candidateId");
         String vanacyID = request.getParameter("vanacyID");
-        int candidateJobapplicationid = candidateJobApplicationService.GETByCandidateIdNew(Integer.parseInt(candidateiD),Integer.parseInt(vanacyID));
+        int candidateJobapplicationid = candidateJobApplicationService.GETByCandidateIdNew(Integer.parseInt(candidateiD), Integer.parseInt(vanacyID));
 
         String[] question = request.getParameterValues("finalData1");
         String[] email = request.getParameterValues("finalData");

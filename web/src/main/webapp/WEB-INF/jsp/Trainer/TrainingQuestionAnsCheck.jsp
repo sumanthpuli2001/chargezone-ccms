@@ -126,18 +126,20 @@
                                                 </c:if>
                                                 <c:if test="${employeeAdditional[1] eq 1}">
 
-                                                    <div class="col-sm-1">
-                                                        <input class="form-check-input" name="mcqStatus${status.count}" type="radio"  value="0" >
-                                                        <label class="form-check-label" for="radio100${employeeAdditional[6]}">Correct</label>
-                                                    </div>
-                                                    <div class="col-sm-1">
-                                                        <input class="form-check-input" name="mcqStatus${status.count}" type="radio"  value="1" >
+                                                    <div class="col-sm-2">
+                                                        <input class="form-check-input" name="mcqStatus${status.count}" required type="radio"  value="0" >
+                                                        <label class="form-check-label" for="radio100${employeeAdditional[6]}">Correct</label> &nbsp;
+                                                        <input class="form-check-input" name="mcqStatus${status.count}"  required type="radio"  value="1" >
                                                         <label class="form-check-label" for="radio100${employeeAdditional[6]}">Incorrect</label>
                                                     </div>
+                                                    <!--                                                    <div class="col-sm-1">
+                                                                                                        </div>-->
                                                     <div class="col-sm-2">
 
-                                                        <input type="number" name="givenMarks2" class="form-control" id="givenMarks3${status.count}" class="form-control">
-                                                        <label>/Out Of ${employeeAdditional[5]}</label>
+                                                            <input type="number" name="givenMarks2" class="form-control" id="givenMarks3${status.count}"  max="${employeeAdditional[5]}"
+                                                               oninput="maxLengthCheck(this)" onkeypress="return isNumeric(event)" required>
+                                                        <label>/Out Of <input type="hidden" value="${employeeAdditional[5]}" id="outOf${status.count}" ><input type="hidden" id="counter" value="${status.count}">
+                                                            ${employeeAdditional[5]}</label>
                                                     </div>
                                                 </c:if>
 
@@ -353,5 +355,34 @@
 //            }
 //        });
 //    });
+</script>
+<script>
+    function maxLengthCheck(object) {
+
+        if (object.value > object.max || object.value.length > object.max.length) {
+//            if (object.value.length > object.max.length)
+            object.value = "";
+//            object.value = object.value.slice(0, object.max.length);
+        }
+    }
+
+    function isNumeric(evt) {
+        var theEvent = evt || window.event;
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault)
+                theEvent.preventDefault();
+        }
+    }
+//    function incorrectValue() {
+//        var index = document.getElementById("counter").value;
+////        var index = document.getElementById("counter").value;
+//        alert(index);
+//        document.getElementById('givenMarks3' + index).innerHTML = ;
+//
+//    }
 </script>
 

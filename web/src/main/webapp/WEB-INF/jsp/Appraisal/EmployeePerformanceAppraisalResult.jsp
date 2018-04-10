@@ -149,35 +149,35 @@
                                                                                 <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Rework</span></div>
                                                                             </c:if>
                                                                         </li><!-- /.item -->
-                                                                        <li class="item">
+<!--                                                                        <li class="item">
                                                                             <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">Employee’s Mid Year Self Assessment</span></div>
-                                                                            <c:if test="${list[1][2] eq 'Approved'}">
+                                                                            <%--<c:if test="${list[1][2] eq 'Approved'}">--%>
                                                                                 <div class="col-sm-3" align="center"><span class="glyphicon glyphicon-ok" style="font-size: 15px; color: greenyellow;"></span></div>
-                                                                                </c:if>
-                                                                                <c:if test="${list[1][2] eq 'Expired'}">
+                                                                                <%--</c:if>--%>
+                                                                                <%--<c:if test="${list[1][2] eq 'Expired'}">--%>
                                                                                 <div class="col-sm-3" align="center"><span class="glyphicon glyphicon-remove" style="font-size: 15px; color: red;"></span></div>
-                                                                                </c:if>
-                                                                                <c:if test="${list[1][2] eq 'Pendding'}">
+                                                                                <%--</c:if>--%>
+                                                                                <%--<c:if test="${list[1][2] eq 'Pendding'}">--%>
                                                                                 <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Pending</span></div>
-                                                                            </c:if>
-                                                                        </li><!-- /.item -->
+                                                                            <%--</c:if>--%>
+                                                                        </li> /.item 
                                                                         <li class="item">
                                                                             <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">Manager’s Mid Year Review </span></div>
-                                                                            <c:if test="${list[1][3] eq 'Approved'}">
+                                                                            <%--<c:if test="${list[1][3] eq 'Approved'}">--%>
                                                                                 <div class="col-sm-3" align="center"><span class="glyphicon glyphicon-ok" style="font-size: 15px; color: greenyellow;"></span></div>
-                                                                                </c:if>
-                                                                                <c:if test="${list[1][3] eq 'Expired'}">
+                                                                                <%--</c:if>--%>
+                                                                                <%--<c:if test="${list[1][3] eq 'Expired'}">--%>
                                                                                 <div class="col-sm-3" align="center"><span class="glyphicon glyphicon-remove" style="font-size: 15px; color: red;"></span></div>
-                                                                                </c:if>
-                                                                                <c:if test="${list[1][3] eq 'Pendding'}">
+                                                                                <%--</c:if>--%>
+                                                                                <%--<c:if test="${list[1][3] eq 'Pendding'}">--%>
                                                                                 <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Pending</span></div>
-                                                                            </c:if>
-                                                                            <c:if test="${list[1][3] eq 'Rework'}">
+                                                                            <%--</c:if>--%>
+                                                                            <%--<c:if test="${list[1][3] eq 'Rework'}">--%>
                                                                                 <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Rework</span></div>
-                                                                            </c:if>
-                                                                        </li><!-- /.item -->
+                                                                            <%--</c:if>--%>
+                                                                        </li> /.item -->
                                                                         <li class="item">
-                                                                            <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">Employee’s End Year Self Assessment</span></div>
+                                                                            <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">Employee’s  Self Assessment</span></div>
                                                                             <c:if test="${list[1][4] eq 'Approved'}">
                                                                                 <div class="col-sm-3" align="center"><span class="glyphicon glyphicon-ok" style="font-size: 15px; color: greenyellow;"></span></div>
                                                                                 </c:if>
@@ -189,7 +189,7 @@
                                                                             </c:if>
                                                                         </li><!-- /.item -->
                                                                         <li class="item">
-                                                                            <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">Manager’s End Year Review</span></div>
+                                                                            <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">Manager’s  Review</span></div>
                                                                             <c:if test="${list[1][5] eq 'Approved'}">
                                                                                 <div class="col-sm-3" align="center"><span class="glyphicon glyphicon-ok" style="font-size: 15px; color: greenyellow;"></span></div>
                                                                                 </c:if>
@@ -228,26 +228,26 @@
                                                                                 </a>
                                                                             </li>
 
-                                                                            <li style="width: 100px;">
+<!--                                                                            <li style="width: 100px;">
                                                                                 <a href="#"
                                                                                    onclick="editClickCompetencyForManager(${list[0][1]},${list[0][7]},${list[0][0]},${list[0][8]});">
                                                                                     View Competency
                                                                                 </a>
-                                                                            </li>
-                                                                            <li style="width: 100px;">
+                                                                            </li>-->
+<!--                                                                            <li style="width: 100px;">
                                                                                 <a href="#"
                                                                                    onclick="editClickForIdpManager(${list[0][1]},${list[0][7]},${list[0][0]},${list[0][8]});">
                                                                                     View IDP
                                                                                 </a>
-                                                                            </li>
-                                                                            <c:if test="${sessionScope.userRight.hr == true}" >
-                                                                                <li style="width: 100px;">
+                                                                            </li>-->
+                                                                            <%--<c:if test="${sessionScope.userRight.hr == true}" >--%>
+<!--                                                                                <li style="width: 100px;">
                                                                                     <a href="#"
                                                                                        onclick="changeRequestPMP(${list[0][1]},${list[0][7]},${list[0][0]},${list[0][8]});">
                                                                                         Change Request
                                                                                     </a>
-                                                                                </li>
-                                                                            </c:if>
+                                                                                </li>-->
+                                                                            <%--</c:if>--%>
                                                                         </ul>
 
                                                                     </div>

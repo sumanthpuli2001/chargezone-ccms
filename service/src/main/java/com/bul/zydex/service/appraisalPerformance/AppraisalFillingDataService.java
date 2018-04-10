@@ -12,9 +12,19 @@ import java.util.List;
  *
  * @author admin
  */
-public interface AppraisalFillingDataService<T> extends GenericsService<T>{
+public interface AppraisalFillingDataService<T> extends GenericsService<T> {
+
     public boolean isExist(String year);
+
     public List<?> readByCurrentYear(String cyear);
+
     public List<?> getCurrentAndPreviousYear();
+
     public List<?> getappraisalDate();
+
+    public List<?> readByIdNew(int Id);
+
+    public List<?> readYearList();
+
+    public List<?> readByYear(String Year);
 }

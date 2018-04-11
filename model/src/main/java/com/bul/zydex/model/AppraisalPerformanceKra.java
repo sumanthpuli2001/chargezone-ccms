@@ -42,6 +42,7 @@ public class AppraisalPerformanceKra  implements java.io.Serializable {
      private int midyearManagerSelfassStatus;
      private int endyearEmpSelfassStatus;
      private int endyearManagerSelfassStatus;
+     private Float empFinalScore;
      private Set updateAppraisalPerformanceKras = new HashSet(0);
 
     public AppraisalPerformanceKra() {
@@ -306,6 +307,16 @@ public class AppraisalPerformanceKra  implements java.io.Serializable {
     public void setEndyearManagerSelfassStatus(int endyearManagerSelfassStatus) {
         this.endyearManagerSelfassStatus = endyearManagerSelfassStatus;
     }
+
+    public Float getEmpFinalScore() {
+        return empFinalScore;
+    }
+
+    public void setEmpFinalScore(Float empFinalScore) {
+        this.empFinalScore = empFinalScore;
+    }
+    
+    
     public Set getUpdateAppraisalPerformanceKras() {
         return this.updateAppraisalPerformanceKras;
     }

@@ -98,16 +98,25 @@
 
                                 </div><!-- /.box-header -->
                                 <div class="box-body no-padding">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Year:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="year" class="form-control" placeholder="Enter Year"></form:input>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label>Cycle Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:input path="year" class="form-control" placeholder="Enter Name"></form:input>
                                                     <form:errors path="year" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>Employee Time-Line Start Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Cycle Year:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:input path="cycleyear" class="form-control" placeholder="Enter Year"></form:input>
+                                                    <form:errors path="cycleyear" cssClass="errorDiv"></form:errors>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <div class="col-sm-6">
+                                                        <label>Cycle Start From Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                             <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                                         <form:input path="startDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
@@ -116,10 +125,8 @@
                                                         </div>
                                                     <form:errors path="startDate" cssClass="errorDiv"></form:errors>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Employee Time-Line End Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Cycle Start To Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                             <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                                         <form:input path="endDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
@@ -129,43 +136,44 @@
                                                     <form:errors path="endDate" cssClass="errorDiv"></form:errors>
                                                     </div>
 
-                                                    <div class="col-sm-6">
-                                                        <label>Employee Time-Line Mid Year Start Date:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="midYearStartDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                    <form:errors path="midYearStartDate" cssClass="errorDiv"></form:errors>
-                                                    </div>
+                                                    <!--                                                    <div class="col-sm-6">
+                                                                                                            <label>Employee Time-Line Mid Year Start Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                                                            <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                                                                <input class="form-control" size="16" type="text" value="" readonly>
+                                                <%--<form:input path="midYearStartDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>--%>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Employee Time-Line Mid Year End Date:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="midYearEndDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                    <form:errors path="midYearEndDate" cssClass="errorDiv"></form:errors>
-                                                    </div>
+                                                <%--<form:errors path="midYearStartDate" cssClass="errorDiv"></form:errors>--%>
+                                                </div>-->
+                                                <!--</div>-->
+                                                <!--<div class="form-group">-->
+                                                <!--<div class="col-sm-6">-->
+                                                <!--                                                        <label>Employee Time-Line Mid Year End Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">-->
+                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                <%--<form:input path="midYearEndDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>--%>
+                                                <!--                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                                                        </div>-->
+                                                <%--<form:errors path="midYearEndDate" cssClass="errorDiv"></form:errors>--%>
+                                                <!--                                                    </div>-->
 
-                                                    <div class="col-sm-6">
-                                                        <label>Employee Time-Line End Year Start Date:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label>Cycle End From Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                                         <form:input path="yearEndStartDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                         </div>
                                                     <form:errors path="yearEndStartDate" cssClass="errorDiv"></form:errors>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Employee Time-Line End Year End Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Cycle End To Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                             <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                                         <form:input path="yearEndEndDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
@@ -175,90 +183,90 @@
                                                     <form:errors path="yearEndEndDate" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Manager Time-Line Start Date:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="managerStartDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                    <form:errors path="managerStartDate" cssClass="errorDiv"></form:errors>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <label>Manager Time-Line End Date:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="managerEndDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                    <form:errors path="managerEndDate" cssClass="errorDiv"></form:errors>
-                                                    </div>
-
+                                                <!--<div class="form-group">-->
+                                                    <!--                                                    <div class="col-sm-6">
+                                                                                                            <label>Manager Time-Line Start Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                                                            <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                                                                <input class="form-control" size="16" type="text" value="" readonly>
+                                                <%--<form:input path="managerStartDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>--%>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Manager Time-Line Mid-Year Start Date:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="managerMidYearStartDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                    <form:errors path="managerMidYearStartDate" cssClass="errorDiv"></form:errors>
-                                                    </div>
+                                                <%--<form:errors path="managerStartDate" cssClass="errorDiv"></form:errors>--%>
+                                                </div>-->
 
-                                                    <div class="col-sm-6">
-                                                        <label>Manager Time-Line Mid-Year End Date:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="managerMidYearEndDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                    <form:errors path="managerMidYearEndDate" cssClass="errorDiv"></form:errors>
-                                                    </div>
-
+                                                <!--                                                    <div class="col-sm-6">
+                                                                                                        <label>Manager Time-Line End Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                                                            <input class="form-control" size="16" type="text" value="" readonly>
+                                                <%--<form:input path="managerEndDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>--%>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                 </div>
+                                                <%--<form:errors path="managerEndDate" cssClass="errorDiv"></form:errors>--%>
+                                                </div>-->
 
-
-
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Manager Time-Line Year-End Start Date:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="managerYearEndStartDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                    <form:errors path="managerYearEndStartDate" cssClass="errorDiv"></form:errors>
-                                                    </div>
-
-                                                    <div class="col-sm-6">
-                                                        <label>Manager Time-Line Year-End  End-Date:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="managerYearEndEndDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                    <form:errors path="managerYearEndEndDate" cssClass="errorDiv"></form:errors>
-                                                    </div>
-
+                                            <!--</div>-->
+                                            <!--<div class="form-group">-->
+                                                <!--                                                    <div class="col-sm-6">
+                                                                                                        <label>Manager Time-Line Mid-Year Start Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                                                            <input class="form-control" size="16" type="text" value="" readonly>
+                                                <%--<form:input path="managerMidYearStartDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>--%>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                 </div>
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div><!-- /.tab-content -->
-                                    <hr/>
-                                    <button type="submit" class="btn btn-primary" id="saveSubmit1" >Submit</button> 
-                                </div><!-- nav-tabs-custom -->
-                            </div><!-- /.col -->
-                        </div>
-                </section>
+                                                <%--<form:errors path="managerMidYearStartDate" cssClass="errorDiv"></form:errors>--%>
+                                                </div>-->
+
+                                                <!--                                                    <div class="col-sm-6">
+                                                                                                        <label>Manager Time-Line Mid-Year End Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                                                            <input class="form-control" size="16" type="text" value="" readonly>
+                                                <%--<form:input path="managerMidYearEndDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>--%>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                </div>
+                                                <%--<form:errors path="managerMidYearEndDate" cssClass="errorDiv"></form:errors>--%>
+                                                </div>-->
+
+                                            <!--</div>-->
+
+
+
+                                            <!--<div class="form-group">-->
+                                                <!--                                                    <div class="col-sm-6">
+                                                                                                        <label>Manager Time-Line Year-End Start Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                                                            <input class="form-control" size="16" type="text" value="" readonly>
+                                                <%--<form:input path="managerYearEndStartDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>--%>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                </div>-->
+                                                <%--<form:errors path="managerYearEndStartDate" cssClass="errorDiv"></form:errors>--%>
+                                                <!--</div>-->
+
+                                                <!--                                                    <div class="col-sm-6">
+                                                                                                        <label>Manager Time-Line Year-End  End-Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                                                            <input class="form-control" size="16" type="text" value="" readonly>
+                                                <%--<form:input path="managerYearEndEndDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>--%>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                </div>
+                                                <%--<form:errors path="managerYearEndEndDate" cssClass="errorDiv"></form:errors>--%>
+                                                </div>-->
+
+                                            <!--\</div>-->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.tab-content -->
+                                <hr/>
+                                <button type="submit" class="btn btn-primary" id="saveSubmit1" >Submit</button> 
+                            </div><!-- nav-tabs-custom -->
+                        </div><!-- /.col -->
+                    </div>
+            </section>
         </form:form> 
         <div class="tab-pane" id="tab_3"></div><!-- /.tab-pane --> 
     </div>

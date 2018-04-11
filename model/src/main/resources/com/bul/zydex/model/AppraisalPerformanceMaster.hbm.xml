@@ -83,6 +83,9 @@
         <property name="empActivityScore" type="string">
             <column name="emp_activity_score"/>
         </property>
+        <property name="employeeTotalFinalScore" type="string">
+            <column name="employee_total_Final_Score"/>
+        </property>
         <set name="appraisalPerformanceBehaviorses" inverse="true">
             <key>
                 <column name="appraisal_performance_id" not-null="true" />

@@ -63,4 +63,10 @@ public interface AppraisalPerformanceDAO<T> extends GenericsDAO<T> {
     public List<?> readByEmpID(int id);
 
     public List<?> readOwnAppraisalPerformanceTimeLine(EmployeeMaster employeeMaster, int cyear);
+    
+    ////////////////////////new query
+    
+      public List<?> readByAppraisalPerformanceIdNew(String employeeId, String yearId);
+      
+   
 }

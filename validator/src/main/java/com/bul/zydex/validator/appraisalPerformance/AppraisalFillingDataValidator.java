@@ -26,16 +26,16 @@ public class AppraisalFillingDataValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "year", "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "startDate", "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "endDate", "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "midYearStartDate", "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "midYearEndDate", "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "midYearStartDate", "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "midYearEndDate", "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "yearEndStartDate", "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "yearEndEndDate", "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "managerStartDate", "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "managerEndDate", "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "managerMidYearStartDate", "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "managerMidYearEndDate", "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "managerYearEndStartDate", "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "managerYearEndEndDate", "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "managerStartDate", "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "managerEndDate", "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "managerMidYearStartDate", "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "managerMidYearEndDate", "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "managerYearEndStartDate", "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "managerYearEndEndDate", "field.error1", "None");
         AppraisalFillingData appraisalFillingData = (AppraisalFillingData) o;
     }  
 

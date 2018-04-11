@@ -7,7 +7,9 @@
 package com.bul.zydex.service.Training;
 
 import com.bul.zydex.dao.Training.TrainingTypeDAO;
+import com.bul.zydex.model.TrainingType;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -35,5 +37,21 @@ public class TrainingTypeServiceImpl<T> extends GenericsServiceImpl<T> implement
       @Override
     public List<?> trainingTypeBystatus() {
         return trainingTypeDAO.trainingTypeBystatus();
+    }
+
+    @Override
+    public boolean isExist(TrainingType trainingType) {
+         TrainingType trainingType1 = (TrainingType) trainingType;
+
+        List<?> list = trainingTypeDAO.read();
+        Iterator i = list.iterator();
+        while (i.hasNext()) {
+            trainingType = (TrainingType) i.next();
+            if (trainingType.getTraining().equalsIgnoreCase(trainingType1.getTraining())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -24,6 +24,8 @@ import com.bul.zydex.model.PayrollPtCheck;
 import com.bul.zydex.model.PayrollRecurringAdditionalAmount;
 import com.bul.zydex.model.PayrollRecurringDeduction;
 import com.bul.zydex.model.PayrollSalaryType;
+import com.bul.zydex.model.PayrollTaxDeductionComponent;
+import com.bul.zydex.model.PayrollTaxDeductionMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.service.Payroll.AdditionalAmountCheckService;
 import com.bul.zydex.service.Payroll.EmployeeAdditionalSalaryService;
@@ -42,6 +44,8 @@ import com.bul.zydex.service.Payroll.PayrollRecurringAdditionalAmountService;
 import com.bul.zydex.service.Payroll.PayrollRecurringDeductionService;
 import com.bul.zydex.service.Payroll.PayrollSalaryTypeService;
 import com.bul.zydex.service.Payroll.PayrollSavingAmountService;
+import com.bul.zydex.service.Payroll.PayrollTaxDeductionComponentService;
+import com.bul.zydex.service.Payroll.PayrollTaxDeductionMasterService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.emp.EmployeeTypeService;
 import com.bul.zydex.service.zydexLocation.ZydexLocationMasterService;
@@ -55,6 +59,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Irfan <irfanbhindawala@gmail.com>
  */
 public class PayrollEmployeeFormSixteenAbstract extends CustomAbstract {
+
     protected PayrollFormSixteenMasterService<PayrollFormSixteenMaster> payrollFormSixteenMasterService;
     protected PayrollFinancialYearService<PayrollFinancialYear> payrollFinancialYearService;
     protected EmployeeSalaryProcessService<EmployeeSalaryProcess> employeeSalaryProcessService;
@@ -75,6 +80,8 @@ public class PayrollEmployeeFormSixteenAbstract extends CustomAbstract {
     protected PayrollProvidentFundService<PayrollProvidentFund> payrollProvidentFundService;
     protected ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService;
     protected PayrollSavingAmountService<ZydexLocationMaster> payrollSavingAmountService;
+    protected PayrollTaxDeductionMasterService<PayrollTaxDeductionMaster> payrollTaxDeductionMasterService;
+    protected PayrollTaxDeductionComponentService<PayrollTaxDeductionComponent> payrollTaxDeductionComponentService;
 
     public PayrollSavingAmountService<ZydexLocationMaster> getPayrollSavingAmountService() {
         return payrollSavingAmountService;
@@ -84,7 +91,6 @@ public class PayrollEmployeeFormSixteenAbstract extends CustomAbstract {
         this.payrollSavingAmountService = payrollSavingAmountService;
     }
 
-    
     public PayrollFormSixteenMasterService<PayrollFormSixteenMaster> getPayrollFormSixteenMasterService() {
         return payrollFormSixteenMasterService;
     }
@@ -228,7 +234,24 @@ public class PayrollEmployeeFormSixteenAbstract extends CustomAbstract {
     public void setPayrollProvidentFundService(PayrollProvidentFundService<PayrollProvidentFund> payrollProvidentFundService) {
         this.payrollProvidentFundService = payrollProvidentFundService;
     }
-     protected void EmployeeTypeList(HttpServletRequest request) {
+
+    public PayrollTaxDeductionMasterService<PayrollTaxDeductionMaster> getPayrollTaxDeductionMasterService() {
+        return payrollTaxDeductionMasterService;
+    }
+
+    public void setPayrollTaxDeductionMasterService(PayrollTaxDeductionMasterService<PayrollTaxDeductionMaster> payrollTaxDeductionMasterService) {
+        this.payrollTaxDeductionMasterService = payrollTaxDeductionMasterService;
+    }
+
+    public PayrollTaxDeductionComponentService<PayrollTaxDeductionComponent> getPayrollTaxDeductionComponentService() {
+        return payrollTaxDeductionComponentService;
+    }
+
+    public void setPayrollTaxDeductionComponentService(PayrollTaxDeductionComponentService<PayrollTaxDeductionComponent> payrollTaxDeductionComponentService) {
+        this.payrollTaxDeductionComponentService = payrollTaxDeductionComponentService;
+    }
+
+    protected void EmployeeTypeList(HttpServletRequest request) {
         List<?> EmployeeTypeList = employeeTypeService.read();
         Map<Integer, String> map = new HashMap();
         for (Object obj : EmployeeTypeList) {
@@ -237,8 +260,8 @@ public class PayrollEmployeeFormSixteenAbstract extends CustomAbstract {
         }
         request.setAttribute("EmployeeTypeList", map);
     }
-     
-     protected void EmployeeSubTypeList(HttpServletRequest request) {
+
+    protected void EmployeeSubTypeList(HttpServletRequest request) {
         List<?> EmployeeSubTypeList = employeeSubTypeService.read();
         Map<Integer, String> map = new HashMap();
         for (Object obj : EmployeeSubTypeList) {
@@ -247,11 +270,12 @@ public class PayrollEmployeeFormSixteenAbstract extends CustomAbstract {
         }
         request.setAttribute("EmployeeSubTypeList", map);
     }
-     protected void  financialYearList(HttpServletRequest request){
+
+    protected void financialYearList(HttpServletRequest request) {
         List<?> financialYearList = payrollFinancialYearService.read();
         Map<Integer, String> map = new HashMap();
         for (Object obj : financialYearList) {
-            PayrollFinancialYear payrollFinancialYear = (PayrollFinancialYear)obj;
+            PayrollFinancialYear payrollFinancialYear = (PayrollFinancialYear) obj;
             map.put(payrollFinancialYear.getId(), payrollFinancialYear.getTitle());
         }
         request.setAttribute("financialYearList", map);

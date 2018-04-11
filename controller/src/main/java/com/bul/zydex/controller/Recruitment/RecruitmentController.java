@@ -117,7 +117,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
         BindException errors = new BindException(recruitmentMaster, "recruitmentMaster");
         bind(request, recruitmentMaster);
-        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(1);
+        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(3);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
@@ -161,6 +161,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             approvalHistory.setCreatedBy(employeeMaster.getId());
             approvalHistory.setCreateDate(sdf.format(cDate));
             approvalHistory.setStatus(0);
+            approvalHistory.setStatusMessage("Created");
             approvalHistory.setComment("Creator");
             recruitmentApprovalHistoryService.create(approvalHistory);
 
@@ -185,6 +186,19 @@ public class RecruitmentController extends RecruitmentAbstract {
                 for (Object object : list) {
                     recruitmentMppApproval = (RecruitmentMppApproval) object;
                     recruitmentMppApprovalService.delete(recruitmentMppApproval.getId());
+                }
+                MprMaster mprMaster = new MprMaster();
+                List<?> list1 = mprMasterService.Mppdelete(z);
+                for (Object object : list1) {
+                    mprMaster = (MprMaster) object;
+                    mprMasterService.delete(mprMaster.getId());
+                }
+                RecruitmentApprovalHistory approvalHistory = new RecruitmentApprovalHistory();
+                List<?> list2 = recruitmentApprovalHistoryService.AppMppdelete(z);
+                for (Object object : list2) {
+                    approvalHistory = (RecruitmentApprovalHistory) object;
+                    recruitmentApprovalHistoryService.delete(approvalHistory.getId());
+
                 }
 
                 recruitmentService.delete(Integer.parseInt(z));
@@ -265,7 +279,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
         BindException errors = new BindException(mprMaster, "mprMaster");
         bind(request, mprMaster);
-        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(1);
+        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(3);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
@@ -380,7 +394,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             mprApprovalHistory.setCreateDate(sdf.format(cDate));
             mprApprovalHistory.setCreatedBy(employeeMaster.getId());
             mprApprovalHistory.setStatus(0);
-            mprApprovalHistory.setStatusMessage("Pending");
+            mprApprovalHistory.setStatusMessage("Created");
             mprApprovalHistory.setComment("Creator");
 
             mprApprovalHistoryService.create(mprApprovalHistory);
@@ -506,7 +520,7 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         mprMaster.setCurrentLevel(1);
         mprMaster.setTotalLevel(mprMaster1.getTotalLevel());
-
+        mprMaster.setRecruitmentMaster(mprMaster1.getRecruitmentMaster());
         mprMaster.setCreatedBy(mprMaster1.getCreatedBy());
         mprMaster.setCreatedDate(mprMaster1.getCreatedDate());
 

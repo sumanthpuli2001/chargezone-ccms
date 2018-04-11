@@ -364,9 +364,9 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
             Date midEndDate = sdf.parse(MidEndDate);
             Date yearEndStartDate = sdf.parse(YearEndStartDate);
             Date yearEndDate = sdf.parse(YearEndDate);
-            boolean flag = false;
-            boolean flag1 = false;
-            boolean flag2 = false;
+            boolean flag = true;
+            boolean flag1 = true;
+            boolean flag2 = true;
 //            if ((now.after(strDate) && now.before(eDate)) || now.equals(strDate) || now.equals(eDate)) {
 //                flag = true;
 //            } else if ((now.after(midDate) && now.before(midEndDate)) || now.equals(midDate) || now.equals(midEndDate)) {
@@ -376,30 +376,30 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 //            }
 
             //////////////////////Manager Time Line//////////////////////////////////////////
-            String ManagerStartDate = appraisalFillingData.getManagerStartDate();
-            String ManagerEndDate = appraisalFillingData.getManagerEndDate();
-            String ManagerMidDate = appraisalFillingData.getManagerMidYearStartDate();
-            String ManagerMidEndDate = appraisalFillingData.getManagerMidYearEndDate();
-            String ManagerYearEndStartDate = appraisalFillingData.getManagerYearEndStartDate();
-            String ManagerYearEndDate = appraisalFillingData.getManagerYearEndEndDate();
-
-            Date managerstrDate = sdf.parse(ManagerStartDate);
-            Date managerendDate = sdf.parse(ManagerEndDate);
-            Date managermidDate = sdf.parse(ManagerMidDate);
-            Date managermidEndDate = sdf.parse(ManagerMidEndDate);
-            Date manageryearEndStartDate = sdf.parse(ManagerYearEndStartDate);
-            Date manageryearEndDate = sdf.parse(ManagerYearEndDate);
-
-//            boolean flag = false;
-//            boolean flag1 = false;
-//            boolean flag2 = false;
-            if ((now.after(managerstrDate) && now.before(managerendDate)) || now.equals(managerstrDate) || now.equals(managerendDate)) {
-                flag = true;
-            } else if ((now.after(managermidDate) && now.before(managermidEndDate)) || now.equals(managermidDate) || now.equals(managermidEndDate)) {
-                flag1 = true;
-            } else if ((now.after(manageryearEndStartDate) && now.before(manageryearEndDate)) || now.equals(manageryearEndStartDate) || now.equals(manageryearEndDate)) {
-                flag2 = true;
-            }
+//            String ManagerStartDate = appraisalFillingData.getManagerStartDate();
+//            String ManagerEndDate = appraisalFillingData.getManagerEndDate();
+//            String ManagerMidDate = appraisalFillingData.getManagerMidYearStartDate();
+//            String ManagerMidEndDate = appraisalFillingData.getManagerMidYearEndDate();
+//            String ManagerYearEndStartDate = appraisalFillingData.getManagerYearEndStartDate();
+//            String ManagerYearEndDate = appraisalFillingData.getManagerYearEndEndDate();
+//
+//            Date managerstrDate = sdf.parse(ManagerStartDate);
+//            Date managerendDate = sdf.parse(ManagerEndDate);
+//            Date managermidDate = sdf.parse(ManagerMidDate);
+//            Date managermidEndDate = sdf.parse(ManagerMidEndDate);
+//            Date manageryearEndStartDate = sdf.parse(ManagerYearEndStartDate);
+//            Date manageryearEndDate = sdf.parse(ManagerYearEndDate);
+//
+////            boolean flag = false;
+////            boolean flag1 = false;
+////            boolean flag2 = false;
+//            if ((now.after(managerstrDate) && now.before(managerendDate)) || now.equals(managerstrDate) || now.equals(managerendDate)) {
+//                flag = true;
+//            } else if ((now.after(managermidDate) && now.before(managermidEndDate)) || now.equals(managermidDate) || now.equals(managermidEndDate)) {
+//                flag1 = true;
+//            } else if ((now.after(manageryearEndStartDate) && now.before(manageryearEndDate)) || now.equals(manageryearEndStartDate) || now.equals(manageryearEndDate)) {
+//                flag2 = true;
+//            }
 
             request.setAttribute("flag", flag);
             request.setAttribute("flag1", flag1);
@@ -693,26 +693,26 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
             boolean flag2 = false;
 
             //////////////////////Manager Time Line//////////////////////////////////////////
-            String ManagerStartDate = appraisalFillingData.getManagerStartDate();
-            String ManagerEndDate = appraisalFillingData.getManagerEndDate();
-            String ManagerMidDate = appraisalFillingData.getManagerMidYearStartDate();
-            String ManagerMidEndDate = appraisalFillingData.getManagerMidYearEndDate();
-            String ManagerYearEndStartDate = appraisalFillingData.getManagerYearEndStartDate();
-            String ManagerYearEndDate = appraisalFillingData.getManagerYearEndEndDate();
+//            String ManagerStartDate = appraisalFillingData.getManagerStartDate();
+//            String ManagerEndDate = appraisalFillingData.getManagerEndDate();
+//            String ManagerMidDate = appraisalFillingData.getManagerMidYearStartDate();
+//            String ManagerMidEndDate = appraisalFillingData.getManagerMidYearEndDate();
+//            String ManagerYearEndStartDate = appraisalFillingData.getManagerYearEndStartDate();
+//            String ManagerYearEndDate = appraisalFillingData.getManagerYearEndEndDate();
 
-            Date managerstrDate = sdf.parse(ManagerStartDate);
+//            Date managerstrDate = sdf.parse(ManagerStartDate);
 //            Date managerendDate = sdf.parse(ManagerEndDate);
 //            Date managermidDate = sdf.parse(ManagerMidDate);
 //            Date managermidEndDate = sdf.parse(ManagerMidEndDate);
 //            Date manageryearEndStartDate = sdf.parse(ManagerYearEndStartDate);
-            Date manageryearEndDate = sdf.parse(ManagerYearEndDate);
+//            Date manageryearEndDate = sdf.parse(ManagerYearEndDate);
 
 //            boolean flag = false;
 //            boolean flag1 = false;
 //            boolean flag2 = false;
-            if ((now.after(managerstrDate) && now.before(manageryearEndDate)) || now.equals(managerstrDate) || now.equals(manageryearEndDate)) {
+//            if ((now.after(managerstrDate) && now.before(manageryearEndDate)) || now.equals(managerstrDate) || now.equals(manageryearEndDate)) {
                 Tflag = true;
-            }
+//            }
 
             request.setAttribute("Tflag", Tflag);
 
@@ -904,5 +904,13 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
         }
 
         request.setAttribute("pmpyearList", dm);
+    }
+    protected void yearList(HttpServletRequest request) {
+        AppraisalFillingData appraisalFillingData = new AppraisalFillingData();
+//        List<?> pmpyearList = appraisalFillingDataService.getCurrentAndPreviousYear();
+        List<?> pmpyearList = appraisalFillingDataService.readYearList();
+       
+
+        request.setAttribute("cycleYear", pmpyearList);
     }
 }

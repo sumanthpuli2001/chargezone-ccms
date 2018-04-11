@@ -32,7 +32,6 @@
         <property name="emailTemplateService" ref="emailTemplateService1" />
         <property name="sendMail" ref="sendMail1" />
         <property name="emailAddMasterService" ref="emailAddMasterService1" />
-
     </bean>
     <!--User-->
     <bean id="userMasterController1" class="com.bul.zydex.controller.UserMasterController" parent="controllerConfig" >
@@ -784,6 +783,7 @@
         <property name="payrollLoanRemainingAmountService" ref="payrollLoanRemainingAmountService1" />
         <property name="ctcAllowanceService" ref="ctcAllowanceService1" />
         <property name="employeeCtcDetailService" ref="employeeCtcDetailService1" />
+        <property name="employeeCtcDetailSalaryService" ref="employeeCtcDetailSalaryService1" />
     </bean>
     <bean id="additionalAmountCheckController1" class="com.bul.zydex.controller.Payroll.AdditionalAmountCheckController" parent="controllerConfig" >
         <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
@@ -814,8 +814,8 @@
         <property name="payrollFinancialYearService" ref="payrollFinancialYearService1" />
         <property name="payrollFormSixteenMasterService" ref="payrollFormSixteenMasterService1" />
         <property name="payrollSavingAmountService" ref="payrollSavingAmountService1" />
-         
-         
+        <property name="payrollTaxDeductionMasterService" ref="payrollTaxDeductionMasterService1"></property>
+        <property name="payrollTaxDeductionComponentService" ref="payrollTaxDeductionComponentService1"/>
     </bean>
     <bean id="payrollSavingAmountController1" class="com.bul.zydex.controller.Payroll.PayrollSavingAmountController" parent="controllerConfig" >
         <property name="payrollSavingAmountService" ref="payrollSavingAmountService1" />
@@ -987,11 +987,13 @@
         <property name="employeeExcelRecordService" ref="employeeExcelRecordService1" />
         <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
     </bean>
+    
     <bean id="loanReportController1" class="com.bul.zydex.controller.Payroll.LoanReportController" parent="controllerConfig" >
         <property name="payrollLoanTypeService" ref="payrollLoanTypeService1" />
         <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
         <property name="payrollLoanRemainingAmountService" ref="payrollLoanRemainingAmountService1" />
     </bean>
+    
     <bean id="attendanceReportController1" class="com.bul.zydex.controller.Payroll.AttendanceReportController" parent="controllerConfig" >
         <property name="employeeMasterService" ref="employeeMasterService1"></property>
         <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
@@ -1103,6 +1105,10 @@
         <property name="candidateResultStatusService" ref="candidateResultStatusService1"/>
         <property name="mprApprovalHistoryService" ref="mprApprovalHistoryService1"/>
         <property name="vacancyMasterService" ref="vacancyMasterService1"/>
+        <property name="mprMasterService" ref="mprMasterService1"/>
+        <property name="recruitmentService" ref="recruitmentService1"/>
+        <property name="jobtypeMasterService" ref="jobtypeMasterService1"/>
+        <property name="locationMasterService" ref="locationMasterService1"/>
         
     </bean>
     <bean id="trainingTypeController1" class="com.bul.zydex.controller.Training.TrainingTypeController" parent="controllerConfig" >
@@ -1200,5 +1206,12 @@
         <property name="retirementAgeService" ref="retirementAgeService1"></property>
 
     </bean>
+    
+    <bean id="payrollTaxDeductionMasterController1" class="com.bul.zydex.controller.Payroll.PayrollTaxDeductionMasterController"  parent="controllerConfig">
+        <property name="payrollTaxDeductionMasterService" ref="payrollTaxDeductionMasterService1"></property>
+        <property name="payrollTaxDeductionMasterValidator" ref="payrollTaxDeductionMasterValidator1"/>
+        <property name="payrollTaxDeductionComponentValidator" ref="payrollTaxDeductionComponentValidator1"></property> 
+    </bean>
+    
 </beans>
  

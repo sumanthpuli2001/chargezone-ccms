@@ -39,7 +39,7 @@ public class AppraisalFillingDataDAOImpl<T> extends GenericsDAOImpl<T> implement
 
         query += ""
                 + "FROM AppraisalFillingData a"
-                + " WHERE a.year =" + cyear;
+                + " WHERE a.year = '" + cyear + "'";
         //+ " a.userMaster.id = " + employeeMaster.getUserMaster().getId();
 
         return getHibernateTemplate().find(query);
@@ -63,4 +63,37 @@ public class AppraisalFillingDataDAOImpl<T> extends GenericsDAOImpl<T> implement
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readByIdNew(int Id) {
+        String query = "";
+
+        query += "  "
+                + "FROM AppraisalFillingData a "
+                + " WHERE a.id =" + Id;
+
+//              
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readYearList() {
+        String query = "";
+
+        query += "SELECT a.cycleyear "
+                + " FROM AppraisalFillingData a "
+                + " Group BY a.cycleyear"
+                + " Order BY a.cycleyear";
+
+//              
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readByYear(String Year) {
+        String query = "";
+        query += " FROM AppraisalFillingData a"
+                + " WHERE a.cycleyear='" + Year + "'";
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
 }

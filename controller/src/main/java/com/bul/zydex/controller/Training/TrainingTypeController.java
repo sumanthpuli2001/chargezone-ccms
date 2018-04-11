@@ -102,21 +102,37 @@ public class TrainingTypeController extends TrainingTypeAbstract {
 //        BindException errors = new BindException(trainingType, "trainingType");
         bind(request, trainingType);
         if (trainingType.getId() == null) {
+            if(!trainingTypeService.isExist(trainingType)){
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.now();
             trainingType.setCreateddate(dtf.format(localDate));
             trainingType.setCreatedby(user.getId());
             trainingTypeService.create(trainingType);
+              request.setAttribute(
+                "successMessage",
+                "Information : The Information is saved Successfully.");
+            }
+            else {
+                request.setAttribute("faliureMessage",
+                        "Error : The Saving Type is already there.");
+            }
         } else {
+            if(!trainingTypeService.isExist(trainingType)){
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.now();
             trainingType.setUpdateddate(dtf.format(localDate));
             trainingType.setUpdatedby(user.getId());
             trainingTypeService.update(trainingType);
-        }
-        request.setAttribute(
+              request.setAttribute(
                 "successMessage",
-                "Information : The Information is saved Successfully.");
+                "Information : The Information is updated Successfully.");
+            }
+            else{
+                request.setAttribute("faliureMessage",
+                        "Error : The Saving Type is already there.");
+            }
+        }
+      
         mv = newtraining(request, response);
         return mv;
     }
@@ -130,6 +146,7 @@ public class TrainingTypeController extends TrainingTypeAbstract {
 //        BindException errors = new BindException(trainingType, "trainingType");
         bind(request, trainingType);
         if (trainingType.getId() == null) {
+            if(!trainingSubTypeService.isExist(trainingType)){
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.now();
             trainingType.setCreateddate(dtf.format(localDate));
@@ -138,7 +155,13 @@ public class TrainingTypeController extends TrainingTypeAbstract {
             request.setAttribute(
                     "successMessage",
                     "Information : The Information is saved Successfully.");
+            }
+            else{
+                request.setAttribute("faliureMessage",
+                        "Error : The Saving Type is already there.");
+            }
         } else {
+            if(!trainingSubTypeService.isExist(trainingType)){
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.now();
             trainingType.setUpdateddate(dtf.format(localDate));
@@ -146,7 +169,12 @@ public class TrainingTypeController extends TrainingTypeAbstract {
             trainingSubTypeService.update(trainingType);
             request.setAttribute(
                     "successMessage",
-                    "Information : The Information is saved Successfully.");
+                    "Information : The Information is Updated Successfully.");
+            }
+            else{
+                request.setAttribute("faliureMessage",
+                        "Error : The Saving Type is already there.");
+            }
         }
         mv = newsubtraining(request, response);
         return mv;

@@ -99,6 +99,7 @@
             <c:if test="${sessionScope.ApplayJobUserMaster eq null}">
                 <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 1%;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-up"></i>&nbsp&nbsp&nbsp;Sign Up</button>
                 <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 2%;" onclick="window.location = 'vacancy.htm?act=Login'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Login</button>
+                <button type="button" class="btn btn-primary" style="float: left; width: 130px; margin-right: 2%;" onclick="window.location = 'logIn.html?act=loginClick'"><i class="fa fa-Home"></i>&nbsp&nbsp&nbsp;Main Home</button>
             </c:if>
             <h1>Job Vacancy List</h1>
             <ol class="breadcrumb">

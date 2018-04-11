@@ -85,7 +85,7 @@
         <form:form class="form-horizontal" role="form" method="post" name='form1'
                    commandName="applayJobUserMaster" onsubmit='return deleteCheck11();' action="vacancy.htm?act=loginCandidate&id=${vacid}">
             <form:hidden path="id"></form:hidden>
-                <input type="text" name="vacid" value="${vacid}"/>
+               
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
@@ -102,6 +102,7 @@
                                 </div>
 
                                 <div class="col-sm-1" style="text-align: left" >
+                                    <input type="hidden" name="vacid" value="${vacid}"/>
                                     <label>Password :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3">

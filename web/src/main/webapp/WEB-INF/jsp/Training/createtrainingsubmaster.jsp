@@ -16,7 +16,7 @@
     <script>
         function checkBlankField() {
             var flag = true;
-            if ($('#trainingsubtype').val() == '') {
+            if ($('#trainingsubtype').val().replace(/\s/g, "") == '') {
                 document.getElementById('trainingsubtypeError').innerHTML = '-It must not be empty or white space.';
                 flag = false;
             }
@@ -32,6 +32,16 @@
                 document.getElementById(idString).innerHTML = '';
             }
         }
+
+//        function Check(evt) {
+//            alert("hel");
+//            if ((evt.keyCode == 32))
+//            {
+//                alert("Space not allowed");
+//                return false;
+//            }
+//            return true;
+//        }
     </script>
 
 

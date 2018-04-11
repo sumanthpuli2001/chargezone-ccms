@@ -27,42 +27,42 @@ public class CandidateJobApplyValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name",
                 "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dob",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fatherName",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "motherName",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fatherDob",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "motherDob",
-                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dob",
+//                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fatherName",
+//                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "motherName",
+//                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fatherDob",
+//                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "motherDob",
+//                "field.error1", "None");
 //        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "photograph",
 //                "field.error1", "None");
 //        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "bloodGroup",
 //                "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "presentAddress",
                 "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "permanentAddress",
-                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "permanentAddress",
+//                "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "city",
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailId",
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contactNo",
                 "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emergencyContactPerson",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emergencyContactNo",
-                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emergencyContactPerson",
+//                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emergencyContactNo",
+//                "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "highestEducationQualification",
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "experianceDateJoiningYear",
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "experianceDateJoiningMonth",
                 "field.error1", "None");
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "certificateAttach",
-//                "field.error1", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "certificateAttach",
+                "field.error1", "None");
     }
 
 }

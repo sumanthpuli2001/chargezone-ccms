@@ -16,7 +16,7 @@
     <script>
         function checkBlankField() {
             var flag = true;
-            if ($('#training').val() == '') {
+            if ($('#training').val().replace(/\s/g, "") == '') {
                 document.getElementById('trainingError').innerHTML = '-It must not be empty or white space.';
                 flag = false;
             }

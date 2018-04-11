@@ -122,11 +122,13 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="btn-group">
-                                                                        <c:if test="${list[5] eq 0}">
+                                                                        <c:if test="${list[5] eq 0 || list[5] eq 2}">
                                                                             <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                                 &nbsp;&nbsp;Approval
                                                                             </button>
                                                                         </c:if>
+                                                                    </div>
+                                                                    <div class="btn-group">
                                                                         <c:if test="${list[5] eq 4 && list[6] eq list[7]}">
                                                                             <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                                 &nbsp;&nbsp;Approval

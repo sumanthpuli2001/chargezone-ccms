@@ -18,7 +18,7 @@
     </head>
     <script>
         function editClick1(id, userid, appraisalId, year) {
-            alert(id, userid);
+          
 //            window.location = 'employeeMaster.htm?act=viewClick&id=' + id;
 //            window.location = 'appraisalPerformance.htm?act=editClick&id=' + id;
             window.location = 'appraisalPerformance.htm?act=editClick1&id=' + id + '&userid=' + userid + '&appraisalId=' + appraisalId + '&year=' + year;
@@ -45,7 +45,7 @@
             checkboxes = document.getElementsByName('checkId');
             for (var i = 0, n = checkboxes.length; i < n; i++) {
                 if (checkboxes[i].checked) {
-                    alert("fghfh");
+                  
                     return true;
                 }
             }

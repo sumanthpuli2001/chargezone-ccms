@@ -9,13 +9,19 @@ import com.bul.zydex.model.ApplayJobUserMaster;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.CandidateResultStatus;
+import com.bul.zydex.model.DepartmentMaster;
+import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.JobtypeMaster;
+import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprApprovalHistory;
+import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.OnlineAssessment;
 import com.bul.zydex.model.QuestionAns;
 import com.bul.zydex.model.QuestionAnswerSubmit;
 import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.QuestionPaper;
+import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.VacancyMaster;
 import java.io.PrintWriter;
@@ -134,13 +140,126 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
             mprApprovalHistory.setMprMaster(vm.getMprMaster());
             mprApprovalHistoryService.create(mprApprovalHistory);
 
+           
+            DepartmentMaster departmentMaster = new DepartmentMaster();
+            LocationMaster locationMaster = new LocationMaster();
+            JobtypeMaster jobtypeMaster = new JobtypeMaster();
+            DesignationMaster designationMaster = new DesignationMaster();
+            int candJobApplicationid = Integer.parseInt(candidateJobApplicationId);
+            candidateApplyJob = candidateJobApplyService.readById(cja.getCandidateApplyJob().getId());
+            MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
+            RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
+
+            int jobtypeId = vm.getJobtypeMaster().getId();
+            jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+            String jobtypeNAme = jobtypeMaster.getJobTypeName();
+
+            int department = vm.getDepartmentMaster().getId();
+            departmentMaster = departmentMasterService.readById(department);
+            String departmentName = departmentMaster.getDepartmentName();
+
+            int localtion = vm.getLocationMaster().getId();
+            locationMaster = locationMasterService.readById(localtion);
+            String locationName = locationMaster.getLocation();
+
+            int designation = vm.getDesignationMaster().getId();
+            designationMaster = designationMasterService.readById(designation);
+            String designationName = designationMaster.getDesignationName();
+
+            String vacancyName = vm.getName();
+            String fromDate = vm.getFromDate();
+            String toDate = vm.getToDate();
+            String description = vm.getDescription();
+            String experiance = vm.getExperience();
+            int salaryRange = vm.getSalaryRange();
+            int position = vm.getNumberOfPosition();
+
+            questionList(request);
+            //        MPR Master -------------
+            int jobtypeId1 = mm.getJobtypeMaster().getId();
+            jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+            String jobtypeNAme1 = jobtypeMaster.getJobTypeName();
+
+            int department1 = mm.getDepartmentMaster().getId();
+            departmentMaster = departmentMasterService.readById(department);
+            String departmentName1 = departmentMaster.getDepartmentName();
+
+            int localtion1 = mm.getLocationMaster().getId();
+            locationMaster = locationMasterService.readById(localtion);
+            String locationName1 = locationMaster.getLocation();
+
+            int designation1 = mm.getDesignationMaster().getId();
+            designationMaster = designationMasterService.readById(designation);
+            String designationName1 = designationMaster.getDesignationName();
+
+            String MprName = mm.getName();
+            int numberOfPositionMpr = mm.getNumberOfPosition();
+            int Mprbudget = mm.getBudget();
+            String MprExperience = mm.getExperience();
+            String Mprdescription = mm.getDescription();
+
+//        Mpp Master --------------------
+            int jobtypeId2 = rm.getJobtypeMaster().getId();
+            jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+            String jobtypeNAme2 = jobtypeMaster.getJobTypeName();
+
+            int department2 = rm.getDepartmentMaster().getId();
+            departmentMaster = departmentMasterService.readById(department);
+            String departmentName2 = departmentMaster.getDepartmentName();
+
+            int localtion2 = rm.getLocationMaster().getId();
+            locationMaster = locationMasterService.readById(localtion);
+            String locationName2 = locationMaster.getLocation();
+
+            int designation2 = rm.getDesignationMaster().getId();
+            designationMaster = designationMasterService.readById(designation);
+            String designationName2 = designationMaster.getDesignationName();
+
+            int numberOfPositionMpp = rm.getNumberOfPosition();
+            int Mppbudget = rm.getBudget();
+            String MppExperience = rm.getExperiance();
+
+            request.setAttribute("jobtypeNAme2", jobtypeNAme2);
+            request.setAttribute("departmentName2", departmentName2);
+            request.setAttribute("locationName2", locationName2);
+            request.setAttribute("designationName2", designationName2);
+            request.setAttribute("numberOfPositionMpp", numberOfPositionMpp);
+            request.setAttribute("Mppbudget", Mppbudget);
+            request.setAttribute("MppExperience", MppExperience);
+
+//              MPR Master -------------
+            request.setAttribute("jobtypeNAme1", jobtypeNAme1);
+            request.setAttribute("departmentName1", departmentName1);
+            request.setAttribute("locationName1", locationName1);
+            request.setAttribute("designationName1", designationName1);
+            request.setAttribute("MprName", MprName);
+            request.setAttribute("numberOfPositionMpr", numberOfPositionMpr);
+            request.setAttribute("Mprbudget", Mprbudget);
+            request.setAttribute("MprExperience", MprExperience);
+            request.setAttribute("Mprdescription", Mprdescription);
+            //        Vacancy Master-------------
+            mv.getModelMap().put("departmentMaster", departmentMaster);
+            mv.getModelMap().put("locationMaster", locationMaster);
+            mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
+            mv.getModelMap().put("designationMaster", designationMaster);
+            request.setAttribute("jobtypeNAme", jobtypeNAme);
+            request.setAttribute("departmentName", departmentName);
+            request.setAttribute("locationName", locationName);
+            request.setAttribute("position", position);
+            request.setAttribute("designationName", designationName);
+            request.setAttribute("experiance", experiance);
+            request.setAttribute("vacancyName", vacancyName);
+            request.setAttribute("fromDate", fromDate);
+            request.setAttribute("toDate", toDate);
+            request.setAttribute("description", description);
+//        // onlineAssessment -------------
             mv.getModelMap().put("onlineAssessment", onlineAssessment);
             request.setAttribute("candidateJobApplication", cja);
             mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
             request.setAttribute("successMessage",
                     "Information : Assessment Submitted successfully.");
             mv.setViewName("Recruitment/CandidateApproval");
-            
+
         } catch (Exception e) {
             request.setAttribute("failureMessage",
                     "All field are Required.Please Enter Valid data");
@@ -310,7 +429,7 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
             questionList(request);
             mv.getModelMap().put("onlineAssessment", onlineAssessment);
             mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
-              request.setAttribute("successMessage",
+            request.setAttribute("successMessage",
                     "Information : Paper Checked successfully.");
             mv.setViewName("Recruitment/CandidateRequestList");
 

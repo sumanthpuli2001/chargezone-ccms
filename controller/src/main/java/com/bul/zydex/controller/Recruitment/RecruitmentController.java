@@ -117,7 +117,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
         BindException errors = new BindException(recruitmentMaster, "recruitmentMaster");
         bind(request, recruitmentMaster);
-        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(1);
+        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(3);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
@@ -161,7 +161,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             approvalHistory.setCreatedBy(employeeMaster.getId());
             approvalHistory.setCreateDate(sdf.format(cDate));
             approvalHistory.setStatus(0);
-            approvalHistory.setStatusMessage("Pending");
+            approvalHistory.setStatusMessage("Created");
             approvalHistory.setComment("Creator");
             recruitmentApprovalHistoryService.create(approvalHistory);
 
@@ -279,7 +279,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
         BindException errors = new BindException(mprMaster, "mprMaster");
         bind(request, mprMaster);
-        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(1);
+        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(3);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
@@ -394,7 +394,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             mprApprovalHistory.setCreateDate(sdf.format(cDate));
             mprApprovalHistory.setCreatedBy(employeeMaster.getId());
             mprApprovalHistory.setStatus(0);
-            mprApprovalHistory.setStatusMessage("Pending");
+            mprApprovalHistory.setStatusMessage("Created");
             mprApprovalHistory.setComment("Creator");
 
             mprApprovalHistoryService.create(mprApprovalHistory);

@@ -68,6 +68,8 @@
                                         <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <div class="col-sm-6">
+                                                    <input type="hidden" value="${leaveTypeMaster.departmentMaster.id}" name="DeptID">
+                                                      <%--<form:input path="departmentMaster" class="form-control" type="hidden"></form:input>--%>
                                                     <label>Leave Type:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="leaveType" class="form-control" placeholder="Enter Leave Type"></form:input>
                                                     <form:errors path="leaveType" cssClass="errorDiv"></form:errors>

@@ -56,12 +56,12 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
-                                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                <c:if test="${sessionScope.userRight.employeeManagement}">
                                 <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
 
 
                                 <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'trainingType.htm?act=createtraining'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
-                                <%--</c:if>--%>
+                                </c:if>
                                 <div class="box-header">
                                 </div>
                                 <div class="box-body no-padding">

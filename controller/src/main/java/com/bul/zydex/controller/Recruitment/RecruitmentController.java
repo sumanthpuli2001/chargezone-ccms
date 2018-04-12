@@ -117,7 +117,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
         BindException errors = new BindException(recruitmentMaster, "recruitmentMaster");
         bind(request, recruitmentMaster);
-        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(3);
+        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(1);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
@@ -279,7 +279,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
         BindException errors = new BindException(mprMaster, "mprMaster");
         bind(request, mprMaster);
-        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(3);
+        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(1);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
@@ -1095,7 +1095,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             recruitmentApprovalHistoryService.create(approvalHistory);
             request.setAttribute("successMessage",
                     "Information : The Request is Approved successfully.");
-        }
+                    }
         if (btnType.equals("Recycle")) {
 
             if (userLevel > 1) {
@@ -1124,7 +1124,7 @@ public class RecruitmentController extends RecruitmentAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The Request is Returned successfully.");
-        }
+                        }
         if (btnType.equals("Reject")) {
 
             recruitmentMaster.setMppStatus(3);
@@ -1145,7 +1145,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             request.setAttribute("successMessage",
                     "Information : The Request is Rejectd successfully.");
 
-        }
+                            }
         mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
         mv = approvalMppCreate(request, response);
         return mv;

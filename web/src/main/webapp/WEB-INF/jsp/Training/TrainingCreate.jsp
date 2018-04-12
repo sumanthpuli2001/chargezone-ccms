@@ -260,51 +260,51 @@
                                     <div class="col-sm-5">
                                         <label class="control-label">Training Requester<span style="color: red;font-size: 12px;"></span></label>
                                             <%--<form:input path="trainingOwner" class="form-control"/>--%>
-                                         <form:input type="text" path="trainingOwner" name="policyId1" id="policyId1" class="form-control"/>
+                                            <form:input type="text" path="trainingOwner" name="policyId1" id="policyId1" class="form-control"/>
                                             <%--<form:input path="trainingOwner" class="form-control" onchange="reportingLevelSet();"></form:input>--%>
-                                        </div>
-<!--                                        <div class="col-md-8 col-sm-8">
-                                            <div class="table-responsive">
-                                                <table id="policyTable" class="table table-bordered table-striped table-hover" style="margin-top: 10px" align="Center"  >
-                                                    <tr>
-                                                        <th style="text-align: center; vertical-align: middle;width: 5%"></th>
-                                                        <th style="text->User Name
-                                                        </th>
-                                                        <th>
-
-                                                            <input type="hidden" name="policyCount" id="policyCount" value="1"/>
-                                                        </th>
-
-                                                        <th style="text-align: center; vertical-align: middle">Level</th>
-                                                        <th style="text-align: center; vertical-align: middle">Amount</th>
-                                                        <th style="text-align: center; vertical-align: middle">Add New</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="text-align: center"></td>
-                                                        <td id="policyTd1">
-                                                            <div>
-                                                                <input type="text" name="policyId1" id="policyId1" class="form-control"/>
-                                                                <errors id="policyerror" cssClass="errorDiv"></errors>
-                                                                                                                                <select  name="policyId1" id="policyId1" class="form-control">
-                                                                                                                                    <option value="" label="-- Select --"></option>
-                                                                                                                                    <options items="${policyId1}"></options>
-                                                                                                                                </select>
-                                                        </div>
-                                                        <span id="policyError1" style="color: red;"></span>
-                                                    </td>
-                                                                                                            <td style="text-align: center">
-                                                                                                                <input type="text"  name="policyNumber1" id="policyNumber1" value="1" readonly="true"class="form-control">
-                                                                                                            </td>
-
-                                                                                                            <td style="text-align: center">
-                                                                                                                <span style='margin-top: 5px;'>
-                                                                                                                    <input type="button" value="+" id="policyCloneid" />
-                                                                                                                </span>
-                                                                                                            </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>-->
+                                    </div>
+                                    <!--                                        <div class="col-md-8 col-sm-8">
+                                                                                <div class="table-responsive">
+                                                                                    <table id="policyTable" class="table table-bordered table-striped table-hover" style="margin-top: 10px" align="Center"  >
+                                                                                        <tr>
+                                                                                            <th style="text-align: center; vertical-align: middle;width: 5%"></th>
+                                                                                            <th style="text->User Name
+                                                                                            </th>
+                                                                                            <th>
+                                    
+                                                                                                <input type="hidden" name="policyCount" id="policyCount" value="1"/>
+                                                                                            </th>
+                                    
+                                                                                            <th style="text-align: center; vertical-align: middle">Level</th>
+                                                                                            <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                                            <th style="text-align: center; vertical-align: middle">Add New</th>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td style="text-align: center"></td>
+                                                                                            <td id="policyTd1">
+                                                                                                <div>
+                                                                                                    <input type="text" name="policyId1" id="policyId1" class="form-control"/>
+                                                                                                    <errors id="policyerror" cssClass="errorDiv"></errors>
+                                                                                                                                                                    <select  name="policyId1" id="policyId1" class="form-control">
+                                                                                                                                                                        <option value="" label="-- Select --"></option>
+                                                                                                                                                                        <options items="${policyId1}"></options>
+                                                                                                                                                                    </select>
+                                                                                            </div>
+                                                                                            <span id="policyError1" style="color: red;"></span>
+                                                                                        </td>
+                                                                                                                                                <td style="text-align: center">
+                                                                                                                                                    <input type="text"  name="policyNumber1" id="policyNumber1" value="1" readonly="true"class="form-control">
+                                                                                                                                                </td>
+                                    
+                                                                                                                                                <td style="text-align: center">
+                                                                                                                                                    <span style='margin-top: 5px;'>
+                                                                                                                                                        <input type="button" value="+" id="policyCloneid" />
+                                                                                                                                                    </span>
+                                                                                                                                                </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>-->
                                     <div class="col-sm-5">
                                         ${trainingMaster.trainer.trainerName}
                                         <label class="control-label">Trainer<span style="color: red;font-size: 12px;">*</span></label>
@@ -508,11 +508,10 @@
             noResultsText: "No Result",
             tokenLimit: "1",
             searchingText: "Searching ... .. .",
-            prePopulate: ${preList}
+            prePopulate: ${preList},
+            minChars : 3
         });
     });
-
 </script>
-
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 

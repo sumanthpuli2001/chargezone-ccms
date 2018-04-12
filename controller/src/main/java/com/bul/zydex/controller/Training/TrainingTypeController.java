@@ -101,38 +101,40 @@ public class TrainingTypeController extends TrainingTypeAbstract {
         TrainingType trainingType = new TrainingType();
 //        BindException errors = new BindException(trainingType, "trainingType");
         bind(request, trainingType);
+        String abc = trainingType.getTraining().trim();
+        abc = abc.replaceAll("\t", "");
+        trainingType.setTraining(abc);
         if (trainingType.getId() == null) {
-            if(!trainingTypeService.isExist(trainingType)){
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate localDate = LocalDate.now();
-            trainingType.setCreateddate(dtf.format(localDate));
-            trainingType.setCreatedby(user.getId());
-            trainingTypeService.create(trainingType);
-              request.setAttribute(
-                "successMessage",
-                "Information : The Information is saved Successfully.");
-            }
-            else {
+            if (!trainingTypeService.isExist(trainingType)) {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate localDate = LocalDate.now();
+
+                trainingType.setCreateddate(dtf.format(localDate));
+                trainingType.setCreatedby(user.getId());
+                trainingTypeService.create(trainingType);
+                request.setAttribute(
+                        "successMessage",
+                        "Information : The Information is saved Successfully.");
+            } else {
                 request.setAttribute("faliureMessage",
                         "Error : The Saving Type is already there.");
             }
         } else {
-            if(!trainingTypeService.isExist(trainingType)){
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate localDate = LocalDate.now();
-            trainingType.setUpdateddate(dtf.format(localDate));
-            trainingType.setUpdatedby(user.getId());
-            trainingTypeService.update(trainingType);
-              request.setAttribute(
-                "successMessage",
-                "Information : The Information is updated Successfully.");
-            }
-            else{
+            if (!trainingTypeService.isExist(trainingType)) {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate localDate = LocalDate.now();
+                trainingType.setUpdateddate(dtf.format(localDate));
+                trainingType.setUpdatedby(user.getId());
+                trainingTypeService.update(trainingType);
+                request.setAttribute(
+                        "successMessage",
+                        "Information : The Information is updated Successfully.");
+            } else {
                 request.setAttribute("faliureMessage",
                         "Error : The Saving Type is already there.");
             }
         }
-      
+
         mv = newtraining(request, response);
         return mv;
     }
@@ -145,33 +147,34 @@ public class TrainingTypeController extends TrainingTypeAbstract {
         TrainingSubType trainingType = new TrainingSubType();
 //        BindException errors = new BindException(trainingType, "trainingType");
         bind(request, trainingType);
+        String abc = trainingType.getTrainingsubtype().trim();
+        abc = abc.replaceAll("\t", "");
+        trainingType.setTrainingsubtype(abc);
         if (trainingType.getId() == null) {
-            if(!trainingSubTypeService.isExist(trainingType)){
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate localDate = LocalDate.now();
-            trainingType.setCreateddate(dtf.format(localDate));
-            trainingType.setCreatedby(user.getId());
-            trainingSubTypeService.create(trainingType);
-            request.setAttribute(
-                    "successMessage",
-                    "Information : The Information is saved Successfully.");
-            }
-            else{
+            if (!trainingSubTypeService.isExist(trainingType)) {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate localDate = LocalDate.now();
+                trainingType.setCreateddate(dtf.format(localDate));
+                trainingType.setCreatedby(user.getId());
+                trainingSubTypeService.create(trainingType);
+                request.setAttribute(
+                        "successMessage",
+                        "Information : The Information is saved Successfully.");
+            } else {
                 request.setAttribute("faliureMessage",
                         "Error : The Saving Type is already there.");
             }
         } else {
-            if(!trainingSubTypeService.isExist(trainingType)){
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate localDate = LocalDate.now();
-            trainingType.setUpdateddate(dtf.format(localDate));
-            trainingType.setUpdatedby(user.getId());
-            trainingSubTypeService.update(trainingType);
-            request.setAttribute(
-                    "successMessage",
-                    "Information : The Information is Updated Successfully.");
-            }
-            else{
+            if (!trainingSubTypeService.isExist(trainingType)) {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate localDate = LocalDate.now();
+                trainingType.setUpdateddate(dtf.format(localDate));
+                trainingType.setUpdatedby(user.getId());
+                trainingSubTypeService.update(trainingType);
+                request.setAttribute(
+                        "successMessage",
+                        "Information : The Information is Updated Successfully.");
+            } else {
                 request.setAttribute("faliureMessage",
                         "Error : The Saving Type is already there.");
             }

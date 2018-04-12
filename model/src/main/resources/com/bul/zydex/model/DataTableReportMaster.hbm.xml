@@ -6,9 +6,9 @@
 
 <hibernate-mapping>
     <class name="com.bul.zydex.model.DataTableReportMaster" table="data_table_report_master" catalog="hr_power_astral" optimistic-lock="version">
-        <id name="id" type="java.lang.Integer">
+        <id name="id" type="int">
             <column name="id" />
-            <generator class="identity" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="componentMaster" class="com.bul.zydex.model.ComponentMaster" fetch="select">
             <column name="report_component" not-null="true" />
@@ -17,7 +17,7 @@
             <column name="report_name" length="45" />
         </property>
         <property name="query" type="string">
-            <column name="query" length="200" />
+            <column name="query" length="1000" />
         </property>
         <property name="status" type="java.lang.Integer">
             <column name="status" />

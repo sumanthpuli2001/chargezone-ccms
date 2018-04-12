@@ -92,13 +92,13 @@
         }
 
     </script>
-  <script>
+    <script>
         var tempCount4 = 1;
         $(function () {
             $("#ctcCloneid").on("click", function () {
                 tempCount4++;
                 //                alert(tempCount3);
-                var clone = "<tr id='addmoreFile" + tempCount4 + "' style='clear:both;'>"
+                var clone = "<tr id='addmoreFile1" + tempCount4 + "' style='clear:both;'>"
                         + "<td style=\"text-align: center\">" + tempCount4 + "</td>"
                         + "<td id=\"ctcTd" + tempCount4 + "\"><div><select id='ctcId" + tempCount4 + "' name='ctcId" + tempCount4 + "' class=\"form-control\">"
                         + "</select>"
@@ -125,7 +125,7 @@
                         + "</div></td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
-                        + "<input type=\"button\"value=\"-\"  onclick=\"removectc('addmoreFile" + tempCount4 + "');\"/>"
+                        + "<input type=\"button\"value=\"-\"  onclick=\"removectc('addmoreFile1" + tempCount4 + "');\"/>"
                         + "</span>"
                         + "</td>"
                         + "</tr>";
@@ -144,7 +144,7 @@
                 for (var year1 = end; year1 >= start; year1--) {
                     options11 += "<option>" + year1 + "</option>";
                 }
-//                alert(tempCount4);
+                //                alert(tempCount4);
                 document.getElementById('year2').innerHTML = options11;
                 document.getElementById('year3').innerHTML = options11;
                 document.getElementById('year4').innerHTML = options11;
@@ -976,53 +976,31 @@
                                                 </div><!-- /.col -->
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Conveys:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="conveysAmount" class="form-control" placeholder="Enter Basic Conveys"/>
-                                                            <form:errors path="conveysAmount" cssClass="errorDiv"/>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>PF Amount:</label>
+                                                        <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
+                                                        <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
                                                             <form:input path="esicNo" class="form-control"    placeholder="Enter ESIC No"/>
                                                             <form:errors path="esicNo" cssClass="errorDiv"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>TDS Amount<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="tdsAmount" class="form-control"  placeholder="Enter TDS Amount"/>
-                                                            <form:errors path="tdsAmount" cssClass="errorDiv"/>
-                                                    </div>
+
                                                     <div class="col-sm-6">
                                                         <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="basicSalary" class="form-control"  placeholder="Enter Basic Salary"/>
                                                         <form:errors path="basicSalary" cssClass="errorDiv"/>
                                                     </div>
                                                 </div>
+
+
+                                                <!--</div>-->
                                                 <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Company:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <select id="companyId" name="companyId" class="form-control ">
-                                                            <c:choose>
-                                                                <c:when test="${company.contains('ASTRAL STERITECH PVT. LTD.')}">
-
-                                                                    <option value="ASTRAL STERITECH PVT. LTD." selected="">ASTRAL STERITECH PVT. LTD.</option>
-                                                                </c:when>
-                                                                <c:otherwise>
-
-                                                                    <option value="ASTRAL STERITECH PVT. LTD.">ASTRAL STERITECH PVT. LTD. </option>
-                                                                </c:otherwise>
-                                                            </c:choose>
-
-                                                        </select>
-
-                                                        <form:errors path="company" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-3">
-                                                            <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <fieldset>
+                                                    <div class="col-sm-4">
+                                                        <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <fieldset>
                                                             <c:if test="${checkPf eq 'false'}">
                                                                 <input type="radio" name="pf" id="pf" value="false" checked="true">NO
                                                                 <input type="radio" name="pf" id="pf" value="true">YES
@@ -1034,7 +1012,7 @@
 
                                                         </fieldset>
                                                     </div>
-                                                    <div class="col-sm-3">
+                                                    <div class="col-sm-4">
                                                         <label>Provident Tax:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <fieldset>
                                                             <c:if test="${checkPt eq 'false'}">
@@ -1047,7 +1025,7 @@
                                                             </c:if>
                                                         </fieldset>
                                                     </div>
-                                                    <div class="col-sm-3">
+                                                    <div class="col-sm-4">
                                                         <label>ESIC:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
                                                         <fieldset>
                                                             <form:radiobutton path="esic" value="false"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1055,10 +1033,29 @@
                                                         </fieldset>
                                                         <form:errors path="esic" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                        <div class="col-sm-3">
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-4">
+                                                            <label>Salary Base:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                            <fieldset>
+                                                            <form:radiobutton path="salaryBase" value="false" checked="checked"/>Month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="salaryBase" value="true"/>Day
+                                                        </fieldset>
+                                                        <form:errors path="salaryBase" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>OT:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                            <fieldset>
+                                                            <form:radiobutton path="ot" value="false" checked="checked"/>YES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="ot" value="true"/>NO
+                                                        </fieldset>
+                                                        <form:errors path="ot" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-4">
                                                             <label>Odd Punch Required:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset>
-                                                            <form:radiobutton path="oddPunch" value="false"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="oddPunch" value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <form:radiobutton path="oddPunch" value="true"/>YES
                                                         </fieldset>
                                                     </div>
@@ -1453,13 +1450,13 @@
                                                                                     </select>
                                                                                 </div>
                                                                             </td>
-                                                                             <td ><div>
-                                                                                   
+                                                                            <td ><div>
+
                                                                                     <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
                                                                                     <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
                                                                                     <input   class="form-control" value="${comp[5]}"></select>
-                                                                                    </div>
-                                                                                    </td>
+                                                                                </div>
+                                                                            </td>
                                                                             <td style="text-align: center">
                                                                                 <%--<c:choose>--%>
                                                                                 <%--<c:when test="${countVal.first}">--%>
@@ -1596,14 +1593,7 @@
                                                         </form:select>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>PF Amount:</label>
-                                                        <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
-                                                        <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
                                     </div><!-- /.box-body -->
@@ -1623,121 +1613,121 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6" id="levelIdDiv1">
                                                             <label>Reporting Manager:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="reportingManagerLevel1" class="form-control" onchange="reportingLevelSet();"></form:input>
-                                                        <form:errors path="reportingManagerLevel1" cssClass="errorDiv"></form:errors>
+                                                            <form:input path="reportingManagerLevel1" class="form-control" onchange="reportingLevelSet();"></form:input>
+                                                            <form:errors path="reportingManagerLevel1" cssClass="errorDiv"></form:errors>
 
+                                                            </div>
+                                                            <div id="reportingHirarchy_div">
+                                                                <div class="col-sm-6" id="levelIdDiv2">
+                                                                    <label>Level 2:</label>
+                                                                <form:hidden path="reportingManagerLevel2"></form:hidden>
+                                                                    <input type="text" name="reportingManagerLevel2Name" id="reportingManagerLevel2Name" class="form-control" readonly="true"/>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div id="reportingHirarchy_div">
-                                                            <div class="col-sm-6" id="levelIdDiv2">
-                                                                <label>Level 2:</label>
-                                                            <form:hidden path="reportingManagerLevel2"></form:hidden>
-                                                                <input type="text" name="reportingManagerLevel2Name" id="reportingManagerLevel2Name" class="form-control" readonly="true"/>
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6" id="levelIdDiv3">
+                                                                <label>Level 3:</label>
+                                                            <form:hidden path="reportingManagerLevel3"></form:hidden>
+                                                                <input type="text" name="reportingManagerLevel3Name" id="reportingManagerLevel3Name" class="form-control" readonly="true"/>
+                                                            </div>
+
+                                                            <div class="col-sm-6" id="levelIdDiv4">
+                                                                <label>Level 4:</label>
+                                                            <form:hidden path="reportingManagerLevel4"></form:hidden>
+                                                                <input type="text" name="reportingManagerLevel4Name" id="reportingManagerLevel4Name" class="form-control" readonly="true"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group" id="levelIdDiv5">
+                                                            <div class="col-sm-6">
+                                                                <label>Functional Head:</label>
+                                                            <form:hidden path="reportingManagerLevel5"></form:hidden>
+                                                                <input type="text" name="reportingManagerLevel5Name" id="reportingManagerLevel5Name" class="form-control" readonly="true"/>
+                                                            </div>
+
+                                                            <div class="col-sm-6" id="levelIdDiv6">
+                                                                <label>CEO/Proprietor/MD:</label>
+                                                            <form:hidden path="reportingManagerLevel6"></form:hidden>
+                                                                <input type="text" name="reportingManagerLevel6Name" id="reportingManagerLevel6Name" class="form-control" readonly="true"/>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div><!-- /.col -->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                    <div class="box box-info collapsed-box" id="login_detail_id">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Employee Certificate Attachments</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId8">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun8();"><i class="fa fa-plus" id="minusId8" ></i></button>
+                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
 
                                                     <div class="form-group">
-                                                        <div class="col-sm-6" id="levelIdDiv3">
-                                                            <label>Level 3:</label>
-                                                        <form:hidden path="reportingManagerLevel3"></form:hidden>
-                                                            <input type="text" name="reportingManagerLevel3Name" id="reportingManagerLevel3Name" class="form-control" readonly="true"/>
-                                                        </div>
+                                                    <c:forEach var="certificatesList" items="${certificatesList}">
 
-                                                        <div class="col-sm-6" id="levelIdDiv4">
-                                                            <label>Level 4:</label>
-                                                        <form:hidden path="reportingManagerLevel4"></form:hidden>
-                                                            <input type="text" name="reportingManagerLevel4Name" id="reportingManagerLevel4Name" class="form-control" readonly="true"/>
+                                                        <div class="col-sm-12">
+                                                            <span>[ <a href="employeeMaster.htm?act=downloadEmployeeCertificates&amp;fileName=${certificatesList}&userId=${employeeMaster.userMaster.id}">${certificatesList}</a> ]</span>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group" id="levelIdDiv5">
-                                                        <div class="col-sm-6">
-                                                            <label>Functional Head:</label>
-                                                        <form:hidden path="reportingManagerLevel5"></form:hidden>
-                                                            <input type="text" name="reportingManagerLevel5Name" id="reportingManagerLevel5Name" class="form-control" readonly="true"/>
-                                                        </div>
+                                                    </c:forEach>
 
-                                                        <div class="col-sm-6" id="levelIdDiv6">
-                                                            <label>CEO/Proprietor/MD:</label>
-                                                        <form:hidden path="reportingManagerLevel6"></form:hidden>
-                                                            <input type="text" name="reportingManagerLevel6Name" id="reportingManagerLevel6Name" class="form-control" readonly="true"/>
-                                                        </div>
-                                                    </div>
                                                 </div>
+                                                <div class="box-body no-padding">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center">
+                                                                    <tr>
+                                                                        <th style="text-align: center;width:55px">Sr No.</th>
+                                                                        <th style="text-align: center;">Certificate Attach</th>
+                                                                        <th style="text-align: center;width:55px"></th>
+                                                                    </tr>
+                                                                    <input type="hidden" name="firstStepCount" id="firstStepCount" value="1">
+                                                                    <tr id="cloneTr_Id">
+                                                                        <td style="text-align: center">1</td>
+                                                                        <td>
+                                                                            <input type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png" onchange="checkCertificateFileSize(1);">
+                                                                            <span style="font-size: 14px; color: red;" id="certificateError"></span>
+                                                                        </td>
+                                                                        <td style="text-align: center"><span style='margin-top: 5px;'>
+                                                                                <input type="button" value="+" id="step1cloneid" />  </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div></div>
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:textarea  path="jobDescription" id="editor"></form:textarea>
+                                                            <form:errors path="jobDescription" cssClass="errorDiv"/>
+                                                        </div>
+                                                    </div></div>
                                             </div>
-                                        </div><!-- /.col -->
-                                    </div><!-- /.row -->
-                                </div><!-- /.box-body -->
-                                <div class="box box-info collapsed-box" id="login_detail_id">
-                                    <div class="box-header">
-                                        <h3 class="box-title">Employee Certificate Attachments</h3>
-                                        <div class="box-tools pull-right">
-                                            <span id="spanId8">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun8();"><i class="fa fa-plus" id="minusId8" ></i></button>
-                                            <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
-                                        </div>
-                                    </div><!-- /.box-header -->
-                                    <div class="box-body no-padding">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12">
-
-                                                <div class="form-group">
-                                                <c:forEach var="certificatesList" items="${certificatesList}">
-
-                                                    <div class="col-sm-12">
-                                                        <span>[ <a href="employeeMaster.htm?act=downloadEmployeeCertificates&amp;fileName=${certificatesList}&userId=${employeeMaster.userMaster.id}">${certificatesList}</a> ]</span>
-                                                    </div>
-                                                </c:forEach>
-
-                                            </div>
-                                            <div class="box-body no-padding">
-                                                <div class="row">
-                                                    <div class="col-md-12 col-sm-12">
-                                                        <div class="form-group">
-                                                            <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center">
-                                                                <tr>
-                                                                    <th style="text-align: center;width:55px">Sr No.</th>
-                                                                    <th style="text-align: center;">Certificate Attach</th>
-                                                                    <th style="text-align: center;width:55px"></th>
-                                                                </tr>
-                                                                <input type="hidden" name="firstStepCount" id="firstStepCount" value="1">
-                                                                <tr id="cloneTr_Id">
-                                                                    <td style="text-align: center">1</td>
-                                                                    <td>
-                                                                        <input type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png" onchange="checkCertificateFileSize(1);">
-                                                                        <span style="font-size: 14px; color: red;" id="certificateError"></span>
-                                                                    </td>
-                                                                    <td style="text-align: center"><span style='margin-top: 5px;'>
-                                                                            <input type="button" value="+" id="step1cloneid" />  </span>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </div></div>
-                                                    <div class="col-md-12 col-sm-12">
-                                                        <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:textarea  path="jobDescription" id="editor"></form:textarea>
-                                                        <form:errors path="jobDescription" cssClass="errorDiv"/>
-                                                    </div>
-                                                </div></div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <c:if test="${!(employeeMaster.employeeName eq  'Admin')}">
+                                    <div class="form-group">
+                                        <div class=" col-sm-12" style="text-align: center;">
+                                            <button type="submit" class="btn btn-primary" data-original-title="" title="" style="width: 100px;">SUBMIT</button>
+                                        </div>
+                                    </div>
+                                </c:if>
                             </div>
 
-                            <c:if test="${!(employeeMaster.employeeName eq  'Admin')}">
-                                <div class="form-group">
-                                    <div class=" col-sm-12" style="text-align: center;">
-                                        <button type="submit" class="btn btn-primary" data-original-title="" title="" style="width: 100px;">SUBMIT</button>
-                                    </div>
-                                </div>
-                            </c:if>
                         </div>
 
+
+                        <div class="tab-pane" id="tab_3"></div>
                     </div>
-
-
-                    <div class="tab-pane" id="tab_3"></div>
-                </div>
-                <!--                        </div>
-                                    </div>-->
+                    <!--                        </div>
+                                        </div>-->
             </section>
         </form:form>
     </div>

@@ -243,11 +243,14 @@ public class PayrollEmployeeFormSixteenController extends PayrollEmployeeFormSix
                 finalDatatemp.add(selection);
                 List<?> taxDeductioncomponent = payrollTaxDeductionComponentService.readTaxDeductionComponentforFromSixteen(taxdeductionid);
                 List taxDeductioncomponentList = new ArrayList();
+                List taxDeductioncomponentIDList = new ArrayList();
                 if (!taxDeductioncomponent.isEmpty()) {
                     taxDeductionList.add(selection);
                     for (Object taxDeductionListcompmet1 : taxDeductioncomponent) {
                         Object[] o1 = (Object[]) taxDeductionListcompmet1;
                         Integer taxdeductionid1 = (Integer) o1[0];
+                        taxDeductioncomponentIDList.add(taxdeductionid1);
+
                         String compoment = (String) o1[1];
                         taxDeductioncomponentList.add(compoment);
                         Integer agelimit = (Integer) o1[2];
@@ -255,8 +258,9 @@ public class PayrollEmployeeFormSixteenController extends PayrollEmployeeFormSix
                     }
 
                     finalDatatemp.add(taxDeductioncomponentList);
+                    finalDatatemp.add(taxDeductioncomponentIDList);
                 }
-               
+
                 finalData.add(finalDatatemp);
             }
 

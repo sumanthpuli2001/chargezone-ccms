@@ -11,6 +11,7 @@ public class AppraisalFillingData  implements java.io.Serializable {
 
      private Integer id;
      private String year;
+     private String cycleyear;
      private String startDate;
      private String endDate;
      private String midYearStartDate;
@@ -141,6 +142,15 @@ public class AppraisalFillingData  implements java.io.Serializable {
     public void setManagerYearEndEndDate(String managerYearEndEndDate) {
         this.managerYearEndEndDate = managerYearEndEndDate;
     }
+
+    public String getCycleyear() {
+        return cycleyear;
+    }
+
+    public void setCycleyear(String cycleyear) {
+        this.cycleyear = cycleyear;
+    }
+    
 
 
 

@@ -42,13 +42,13 @@ public interface AppraisalPerformanceService<T> extends GenericsService<T> {
 
     public List<?> readOwnAppraisalPerformance(EmployeeMaster employeeMaster, int cyear);
 
-    public List<?> readPMPSearchByEmployee(T object,int pyear);
+    public List<?> readPMPSearchByEmployee(T object, int pyear);
 
     public List<?> readIDPSearchByEmployee(T object);
 
     public List<?> readcompetencySearchByEmployee(T object);
 
-    public List<?> readstageWiseSearchByEmployee(T object, AppraisalFillingData appraisalFillingData,int pyear);
+    public List<?> readstageWiseSearchByEmployee(T object, AppraisalFillingData appraisalFillingData, int pyear);
 
     public List<?> readEmpIdFromTabId(int id);
 
@@ -63,4 +63,9 @@ public interface AppraisalPerformanceService<T> extends GenericsService<T> {
     public List<?> readByEmpID(int id);
 
     public List<?> readOwnAppraisalPerformanceTimeLine(EmployeeMaster employeeMaster, int cyear);
+
+    ///////////////////////////new code
+    public List<?> readByAppraisalPerformanceIdNew(String employeeId, String yearId);
+    
+   
 }

@@ -161,7 +161,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             approvalHistory.setCreatedBy(employeeMaster.getId());
             approvalHistory.setCreateDate(sdf.format(cDate));
             approvalHistory.setStatus(0);
-            approvalHistory.setStatusMessage("Pending");
+            approvalHistory.setStatusMessage("Created");
             approvalHistory.setComment("Creator");
             recruitmentApprovalHistoryService.create(approvalHistory);
 
@@ -394,7 +394,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             mprApprovalHistory.setCreateDate(sdf.format(cDate));
             mprApprovalHistory.setCreatedBy(employeeMaster.getId());
             mprApprovalHistory.setStatus(0);
-            mprApprovalHistory.setStatusMessage("Pending");
+            mprApprovalHistory.setStatusMessage("Created");
             mprApprovalHistory.setComment("Creator");
 
             mprApprovalHistoryService.create(mprApprovalHistory);
@@ -1095,7 +1095,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             recruitmentApprovalHistoryService.create(approvalHistory);
             request.setAttribute("successMessage",
                     "Information : The Request is Approved successfully.");
-        }
+                    }
         if (btnType.equals("Recycle")) {
 
             if (userLevel > 1) {
@@ -1124,7 +1124,7 @@ public class RecruitmentController extends RecruitmentAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The Request is Returned successfully.");
-        }
+                        }
         if (btnType.equals("Reject")) {
 
             recruitmentMaster.setMppStatus(3);
@@ -1145,7 +1145,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             request.setAttribute("successMessage",
                     "Information : The Request is Rejectd successfully.");
 
-        }
+                            }
         mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
         mv = approvalMppCreate(request, response);
         return mv;

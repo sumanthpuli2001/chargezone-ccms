@@ -273,7 +273,12 @@
                                                             <div class="form-group">
                                                                 <div class="col-sm-6">
                                                                     <label>Sex:</label> &nbsp;&nbsp;&nbsp;
-                                                                    <span>${candidateApplyJob.sex}</span>
+                                                                    <c:if test="${candidateApplyJob.sex eq false}">
+                                                                    <span>Male</span>
+                                                                    </c:if>
+                                                                    <c:if test="${candidateApplyJob.sex eq true}">
+                                                                    <span>Female</span>
+                                                                    </c:if>
                                                                 </div>
                                                                 <div class="col-sm-6">
                                                                     <label>Photograph:</label> &nbsp;&nbsp;&nbsp;

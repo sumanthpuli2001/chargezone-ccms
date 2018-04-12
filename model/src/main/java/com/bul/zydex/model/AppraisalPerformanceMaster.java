@@ -51,6 +51,7 @@ public class AppraisalPerformanceMaster implements java.io.Serializable {
     private String idpReworkComment;
     private String empActivityScore;
     private String managerActivityScore;
+    private String employeeTotalFinalScore;
     private Set appraisalPerformanceBehaviorses = new HashSet(0);
     private Set appraisalPerformanceIndividualDevelopmentPlans = new HashSet(0);
     private Set appraisalPerformanceBehaviorses_1 = new HashSet(0);
@@ -558,5 +559,14 @@ public class AppraisalPerformanceMaster implements java.io.Serializable {
     public void setAppraisalKraActivities(Set appraisalKraActivities) {
         this.appraisalKraActivities = appraisalKraActivities;
     }
+
+    public String getEmployeeTotalFinalScore() {
+        return employeeTotalFinalScore;
+    }
+
+    public void setEmployeeTotalFinalScore(String employeeTotalFinalScore) {
+        this.employeeTotalFinalScore = employeeTotalFinalScore;
+    }
+    
     
 }

@@ -256,5 +256,6 @@
     <bean id="MprApprovalHistoryDAO1" class="com.bul.zydex.dao.RecruitmentApprovalHistory.MprApprovalHistoryDAOImpl" parent="sessionFactoryConfig" />
     <bean id="employeeCtcDetailSalaryDAO1" class="com.bul.zydex.dao.EmployeeCtcDetailSalary.EmployeeCtcDetailSalaryDAOImpl" parent="sessionFactoryConfig" />
     <bean id="payrollTaxDeductionMasterDao1" class="com.bul.zydex.dao.Payroll.PayrollTaxDeductionMasterDaoImpl" parent="sessionFactoryConfig"/>
+    <bean id="payrollTaxDeductionComponentDao1" class="com.bul.zydex.dao.Payroll.PayrollTaxDeductionComponentDaoImpl" parent="sessionFactoryConfig"/>
    
 </beans>

@@ -53,43 +53,42 @@ public class AppraisalFillingDataController extends AppraisalFillingDataAbstract
             String YearEndDate = appraisalFillingData.getYearEndEndDate();
             Date strDate = sdf.parse(StartDate);
             Date eDate = sdf.parse(EndDate);
-            Date midDate = sdf.parse(MidDate);
-            Date midEndDate = sdf.parse(MidEndDate);
+//            Date midDate = sdf.parse(MidDate);
+//            Date midEndDate = sdf.parse(MidEndDate);
             Date yearEndStartDate = sdf.parse(YearEndStartDate);
             Date yearEndDate = sdf.parse(YearEndDate);
             //////////////////////Manager Time Line//////////////////////////////////////////
-            String ManagerStartDate = appraisalFillingData.getManagerStartDate();
-            String ManagerEndDate = appraisalFillingData.getManagerEndDate();
-            String ManagerMidDate = appraisalFillingData.getManagerMidYearStartDate();
-            String ManagerMidEndDate = appraisalFillingData.getManagerMidYearEndDate();
-            String ManagerYearEndStartDate = appraisalFillingData.getManagerYearEndStartDate();
-            String ManagerYearEndDate = appraisalFillingData.getManagerMidYearEndDate();
+//            String ManagerStartDate = appraisalFillingData.getManagerStartDate();
+//            String ManagerEndDate = appraisalFillingData.getManagerEndDate();
+//            String ManagerMidDate = appraisalFillingData.getManagerMidYearStartDate();
+//            String ManagerMidEndDate = appraisalFillingData.getManagerMidYearEndDate();
+//            String ManagerYearEndStartDate = appraisalFillingData.getManagerYearEndStartDate();
+//            String ManagerYearEndDate = appraisalFillingData.getManagerMidYearEndDate();
 
-            Date managerstrDate = sdf.parse(ManagerStartDate);
-            Date managerendDate = sdf.parse(EndDate);
-            Date managermidDate = sdf.parse(MidDate);
-            Date managermidEndDate = sdf.parse(MidEndDate);
-            Date manageryearEndStartDate = sdf.parse(YearEndStartDate);
-            Date manageryearEndDate = sdf.parse(YearEndDate);
-
+//            Date managerstrDate = sdf.parse(ManagerStartDate);
+//            Date managerendDate = sdf.parse(EndDate);
+//            Date managermidDate = sdf.parse(MidDate);
+//            Date managermidEndDate = sdf.parse(MidEndDate);
+//            Date manageryearEndStartDate = sdf.parse(YearEndStartDate);
+//            Date manageryearEndDate = sdf.parse(YearEndDate);
             boolean flag = true;
 //            boolean flag1 = false;
             boolean flag2 = false;
-            if ((strDate.after(eDate)) && strDate != midDate && strDate != midEndDate && strDate != yearEndStartDate && strDate != yearEndDate && (managerstrDate.after(managerendDate)) && managerstrDate != managermidDate && managerstrDate != managermidEndDate && managerstrDate != manageryearEndStartDate && managerstrDate != manageryearEndDate) {
-                request.setAttribute("failureMessage",
-                        "Error : Enter The Start Date After the End Date.");
-                flag = false;
-            }
-            if ((midDate.after(midEndDate)) && midDate != yearEndStartDate && midDate != yearEndDate && (managermidDate.after(managermidEndDate)) && managermidDate != manageryearEndStartDate && managermidDate != manageryearEndDate) {
-                request.setAttribute("failureMessage",
-                        "Error : Enter The MidStart Date After the MidEnd Date.");
-                flag = false;
-            }
-            if ((yearEndStartDate.after(yearEndDate)) && strDate != yearEndStartDate && strDate != yearEndDate && (manageryearEndStartDate.after(manageryearEndDate)) && managerstrDate != manageryearEndStartDate && managerstrDate != manageryearEndDate) {
-                request.setAttribute("failureMessage",
-                        "Error : Enter The End Start Date After the End Date.");
-                flag = false;
-            }
+//            if ((strDate.after(eDate)) && strDate != midDate && strDate != midEndDate && strDate != yearEndStartDate && strDate != yearEndDate && (managerstrDate.after(managerendDate)) && managerstrDate != managermidDate && managerstrDate != managermidEndDate && managerstrDate != manageryearEndStartDate && managerstrDate != manageryearEndDate) {
+//                request.setAttribute("failureMessage",
+//                        "Error : Enter The Start Date After the End Date.");
+//                flag = false;
+//            }
+//            if ((midDate.after(midEndDate)) && midDate != yearEndStartDate && midDate != yearEndDate && (managermidDate.after(managermidEndDate)) && managermidDate != manageryearEndStartDate && managermidDate != manageryearEndDate) {
+//                request.setAttribute("failureMessage",
+//                        "Error : Enter The MidStart Date After the MidEnd Date.");
+//                flag = false;
+//            }
+//            if ((yearEndStartDate.after(yearEndDate)) && strDate != yearEndStartDate && strDate != yearEndDate && (manageryearEndStartDate.after(manageryearEndDate)) && managerstrDate != manageryearEndStartDate && managerstrDate != manageryearEndDate) {
+//                request.setAttribute("failureMessage",
+//                        "Error : Enter The End Start Date After the End Date.");
+//                flag = false;
+//            }
             if (flag) {
 
                 if (!appraisalFillingDataService.isExist(year) && !year.equals("")) {
@@ -106,7 +105,7 @@ public class AppraisalFillingDataController extends AppraisalFillingDataAbstract
         }
 //        mv.getModelMap().put("appraisalFillingData", appraisalFillingData);
 //        mv.setViewName("Appraisal/AppraisalFillingDataCreate");
-         mv = searchSubmit(request, response);
+        mv = searchSubmit(request, response);
         return mv;
     }
 
@@ -144,7 +143,7 @@ public class AppraisalFillingDataController extends AppraisalFillingDataAbstract
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid.");
-            mv = editClick(request, response); 
+            mv = editClick(request, response);
         } else {
 
             String year = request.getParameter("year");
@@ -152,55 +151,54 @@ public class AppraisalFillingDataController extends AppraisalFillingDataAbstract
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             String StartDate = appraisalFillingData.getStartDate();
             String EndDate = appraisalFillingData.getEndDate();
-            String MidDate = appraisalFillingData.getMidYearStartDate();
-            String MidEndDate = appraisalFillingData.getMidYearEndDate();
+//            String MidDate = appraisalFillingData.getMidYearStartDate();
+//            String MidEndDate = appraisalFillingData.getMidYearEndDate();
             String YearEndStartDate = appraisalFillingData.getYearEndStartDate();
             String YearEndDate = appraisalFillingData.getYearEndEndDate();
             Date strDate = sdf.parse(StartDate);
             Date eDate = sdf.parse(EndDate);
-            Date midDate = sdf.parse(MidDate);
-            Date midEndDate = sdf.parse(MidEndDate);
+//            Date midDate = sdf.parse(MidDate);
+//            Date midEndDate = sdf.parse(MidEndDate);
             Date yearEndStartDate = sdf.parse(YearEndStartDate);
             Date yearEndDate = sdf.parse(YearEndDate);
             //////////////////////Manager Time Line//////////////////////////////////////////
-            String ManagerStartDate = appraisalFillingData.getManagerStartDate();
-            String ManagerEndDate = appraisalFillingData.getManagerEndDate();
-            String ManagerMidDate = appraisalFillingData.getManagerMidYearStartDate();
-            String ManagerMidEndDate = appraisalFillingData.getManagerMidYearEndDate();
-            String ManagerYearEndStartDate = appraisalFillingData.getManagerYearEndStartDate();
-            String ManagerYearEndDate = appraisalFillingData.getManagerMidYearEndDate();
+//            String ManagerStartDate = appraisalFillingData.getManagerStartDate();
+//            String ManagerEndDate = appraisalFillingData.getManagerEndDate();
+//            String ManagerMidDate = appraisalFillingData.getManagerMidYearStartDate();
+//            String ManagerMidEndDate = appraisalFillingData.getManagerMidYearEndDate();
+//            String ManagerYearEndStartDate = appraisalFillingData.getManagerYearEndStartDate();
+//            String ManagerYearEndDate = appraisalFillingData.getManagerMidYearEndDate();
 
-            Date managerstrDate = sdf.parse(ManagerStartDate);
-            Date managerendDate = sdf.parse(EndDate);
-            Date managermidDate = sdf.parse(MidDate);
-            Date managermidEndDate = sdf.parse(MidEndDate);
-            Date manageryearEndStartDate = sdf.parse(YearEndStartDate);
-            Date manageryearEndDate = sdf.parse(YearEndDate);
-
+//            Date managerstrDate = sdf.parse(ManagerStartDate);
+//            Date managerendDate = sdf.parse(EndDate);
+////            Date managermidDate = sdf.parse(MidDate);
+////            Date managermidEndDate = sdf.parse(MidEndDate);
+//            Date manageryearEndStartDate = sdf.parse(YearEndStartDate);
+//            Date manageryearEndDate = sdf.parse(YearEndDate);
             boolean flag = true;
 //            boolean flag1 = false;
             boolean flag2 = false;
-            if ((strDate.after(eDate)) && strDate != midDate && strDate != midEndDate && strDate != yearEndStartDate && strDate != yearEndDate && (managerstrDate.after(managerendDate)) && managerstrDate != managermidDate && managerstrDate != managermidEndDate && managerstrDate != manageryearEndStartDate && managerstrDate != manageryearEndDate) {
-                request.setAttribute("failureMessage",
-                        "Error : Enter The Start Date After the End Date.");
-                flag = false;
-            }
-            if ((midDate.after(midEndDate)) && midDate != yearEndStartDate && midDate != yearEndDate && (managermidDate.after(managermidEndDate)) && managermidDate != manageryearEndStartDate && managermidDate != manageryearEndDate) {
-                request.setAttribute("failureMessage",
-                        "Error : Enter The MidStart Date After the MidEnd Date.");
-                flag = false;
-            }
-            if ((yearEndStartDate.after(yearEndDate)) && strDate != yearEndStartDate && strDate != yearEndDate && (manageryearEndStartDate.after(manageryearEndDate)) && managerstrDate != manageryearEndStartDate && managerstrDate != manageryearEndDate) {
-                request.setAttribute("failureMessage",
-                        "Error : Enter The End Start Date After the End Date.");
-                flag = false;
-            }
+//            if ((strDate.after(eDate)) && strDate != midDate && strDate != midEndDate && strDate != yearEndStartDate && strDate != yearEndDate && (managerstrDate.after(managerendDate)) && managerstrDate != managermidDate && managerstrDate != managermidEndDate && managerstrDate != manageryearEndStartDate && managerstrDate != manageryearEndDate) {
+//                request.setAttribute("failureMessage",
+//                        "Error : Enter The Start Date After the End Date.");
+//                flag = false;
+//            }
+//            if ((midDate.after(midEndDate)) && midDate != yearEndStartDate && midDate != yearEndDate && (managermidDate.after(managermidEndDate)) && managermidDate != manageryearEndStartDate && managermidDate != manageryearEndDate) {
+//                request.setAttribute("failureMessage",
+//                        "Error : Enter The MidStart Date After the MidEnd Date.");
+//                flag = false;
+//            }
+//            if ((yearEndStartDate.after(yearEndDate)) && strDate != yearEndStartDate && strDate != yearEndDate && (manageryearEndStartDate.after(manageryearEndDate)) && managerstrDate != manageryearEndStartDate && managerstrDate != manageryearEndDate) {
+//                request.setAttribute("failureMessage",
+//                        "Error : Enter The End Start Date After the End Date.");
+//                flag = false;
+//            }
 
             if (flag) {
 
                 if (appraisalFillingDataService.isExist(year) && !year.equals("")) {
 //                    appraisalFillingDataService.create(appraisalFillingData);
-                    appraisalFillingDataService.update(appraisalFillingData); 
+                    appraisalFillingDataService.update(appraisalFillingData);
                     request.setAttribute("successMessage",
                             "Information : The Information is Updated Successfully.");
                     mv = searchSubmit(request, response);
@@ -234,6 +232,16 @@ public class AppraisalFillingDataController extends AppraisalFillingDataAbstract
         }
         mv = searchSubmit(request, response);
 
+        return mv;
+    }
+
+    public ModelAndView readCycleNameAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String year = request.getParameter("typeId");
+        String empSubTypeId = request.getParameter("empSubTypeId");
+        List<?> cyclenameList = appraisalFillingDataService.readByYear(year);
+        request.setAttribute("cyclenameList", cyclenameList);
+        mv.setViewName("Appraisal/CyclenameAjax");
         return mv;
     }
 

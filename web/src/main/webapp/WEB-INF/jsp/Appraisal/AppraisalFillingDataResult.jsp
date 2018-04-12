@@ -14,7 +14,7 @@
         <title>Appraisal Filling Data Result</title>
     </head>
     <script>
-        function editClick(id) { 
+        function editClick(id) {
             window.location = 'appraisalFillingData.htm?act=editClick&id=' + id;
         }
 
@@ -78,19 +78,19 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th align="center" style="width: 1px;"><input type="checkbox" id="toggleId"/></th>
-                                                                    <th>Year</th>
-                                                                    <th style="font-size: 12px;">Employee Time-Line Start Date</th>
-                                                                    <th style="font-size: 12px;">Employee Time-Line End Date</th>
-                                                                    <th style="font-size: 12px;">Manager Time-Line Start Date</th><!--manager-->
-                                                                    <th style="font-size: 12px;">Manager Time-Line End Date</th><!--manager-->
-                                                                    <th style="font-size: 12px;">Employee Time-Line Mid Year Start Date</th>
-                                                                    <th style="font-size: 12px;">Employee Time-Line Mid Year End Date</th>
-                                                                    <th style="font-size: 12px;">Manager Time-Line Mid-Year Start Date</th><!--manager-->
-                                                                    <th style="font-size: 12px;">Manager Time-Line End-Year End-Date</th><!--manager-->
-                                                                    <th style="font-size: 12px;">Employee Time-Line End Year Start Date</th>
-                                                                    <th style="font-size: 12px;">Employee Time-Line End Year End Date</th>
-                                                                    <th style="font-size: 12px;">Manager Time-Line Year Start Date</th>
-                                                                    <th style="font-size: 12px;">Manager Time-Line Year End Date</th>
+                                                                    <th>Cycle Name</th>
+                                                                    <th style="font-size: 12px;">Cycle Start From Date</th>
+                                                                    <th style="font-size: 12px;">Cycle Start To Date</th>
+                                                                    <!--                                                                    <th style="font-size: 12px;">Manager Time-Line Start Date</th>manager
+                                                                                                                                        <th style="font-size: 12px;">Manager Time-Line End Date</th>manager-->
+                                                                    <!--                                                                    <th style="font-size: 12px;">Employee Time-Line Mid Year Start Date</th>
+                                                                                                                                        <th style="font-size: 12px;">Employee Time-Line Mid Year End Date</th>-->
+                                                                    <!--                                                                    <th style="font-size: 12px;">Manager Time-Line Mid-Year Start Date</th>manager
+                                                                                                                                        <th style="font-size: 12px;">Manager Time-Line End-Year End-Date</th>manager-->
+                                                                    <th style="font-size: 12px;">Cycle End From Date</th>
+                                                                    <th style="font-size: 12px;">Cycle End To Date</th>
+                                                                    <!--                                                                    <th style="font-size: 12px;">Manager Time-Line Year Start Date</th>
+                                                                                                                                        <th style="font-size: 12px;">Manager Time-Line Year End Date</th>-->
                                                                     <th>Action</th>
                                                                 </tr>
                                                             </thead>
@@ -103,29 +103,29 @@
                                                                 <td>${list.year}</td>
                                                                 <td>${list.startDate}</td>
                                                                 <td>${list.endDate}</td>
-                                                                <td>${list.managerStartDate}</td><!--manager-->
-                                                                <td>${list.managerEndDate}</td><!--manager-->
-                                                                <td>${list.midYearStartDate}</td>
-                                                                <td>${list.midYearEndDate}</td>
-                                                                <td>${list.managerMidYearStartDate}</td><!--manager-->
-                                                                <td>${list.managerMidYearEndDate}</td><!--manager-->
+<!--                                                                <td>${list.managerStartDate}</td>manager
+                                                                <td>${list.managerEndDate}</td>manager-->
+<!--                                                                <td>${list.midYearStartDate}</td>
+                                                                <td>${list.midYearEndDate}</td>-->
+<!--                                                                <td>${list.managerMidYearStartDate}</td>manager
+                                                                <td>${list.managerMidYearEndDate}</td>manager-->
                                                                 <td>${list.yearEndStartDate}</td>
                                                                 <td>${list.yearEndEndDate}</td>
-                                                                
-                                                                
-                                                                <td>${list.managerYearEndStartDate}</td>
-                                                                <td>${list.managerYearEndEndDate}</td>
+
+
+<!--                                                                <td>${list.managerYearEndStartDate}</td>
+<td>${list.managerYearEndEndDate}</td>-->
                                                                 <td>
                                                                     <div class="btn-group">
                                                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                             <!--Action <span class="caret"></span>-->
-                                                                             <span class="fa fa-pencil"></span>
-                                                                        <!--<ul class="dropdown-menu">-->
+                                                                            <span class="fa fa-pencil"></span>
+                                                                            <!--<ul class="dropdown-menu">-->
                                                                             <!--<li>-->
-                                                                                <a href="#"
-                                                                                   onclick="editClick(${list.id});">
-                                                                                    &nbsp;&nbsp;Edit
-                                                                                </a>
+                                                                            <a href="#"
+                                                                               onclick="editClick(${list.id});">
+                                                                                &nbsp;&nbsp;Edit
+                                                                            </a>
                                                                             <!--</li>-->
                                                                         </button>
 
@@ -158,5 +158,5 @@
     </div>
 
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
- 
+
 </html>

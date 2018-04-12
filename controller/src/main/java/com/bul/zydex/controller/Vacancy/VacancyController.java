@@ -436,9 +436,11 @@ public class VacancyController extends VacancyAbstract {
         ApplayJobUserMaster applayJobUserMaster = new ApplayJobUserMaster();
         mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
         if ("" == request.getParameter("id")) {
+        if ("" != request.getParameter("id")) {
             String id = request.getParameter("id");
             int VacId = Integer.parseInt(id);
             mv.getModelMap().put("vacid", VacId);
+        }
         }
         mv.setViewName("Vacancy/signUpButton");
         return mv;
@@ -503,7 +505,7 @@ public class VacancyController extends VacancyAbstract {
         candidateJobApplyValidator.validate(candidateApplyJob, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
-                    "Error : This Form All Fields Are Require");
+                    "Error : Please fill in all required fields");
             mv.addAllObjects(errors.getModel());
             mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
             mv.setViewName("Vacancy/applyJobCandidateRegistration");

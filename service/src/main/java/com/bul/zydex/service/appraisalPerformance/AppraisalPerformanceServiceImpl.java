@@ -144,4 +144,10 @@ public class AppraisalPerformanceServiceImpl<T> extends GenericsServiceImpl<T> i
         return appraisalPerformanceDAO.readOwnAppraisalPerformanceTimeLine(employeeMaster, cyear);
     }
 
+    @Override
+    public List<?> readByAppraisalPerformanceIdNew(String employeeId, String yearId) {
+            return appraisalPerformanceDAO.readByAppraisalPerformanceIdNew(employeeId, yearId);
+    }
+
+    
 }

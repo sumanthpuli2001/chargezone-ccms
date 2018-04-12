@@ -12,11 +12,19 @@ import java.util.List;
  *
  * @author admin
  */
-public interface AppraisalFillingDataDAO<T> extends GenericsDAO<T>{
-    
+public interface AppraisalFillingDataDAO<T> extends GenericsDAO<T> {
+
     public boolean isExist(String year);
+
     public List<?> readByCurrentYear(String cyear);
-         
+
     public List<?> getCurrentAndPreviousYear();
+
     public List<?> getappraisalDate();
+
+    public List<?> readByIdNew(int Id);
+
+    public List<?> readYearList();
+
+    public List<?> readByYear(String Year);
 }

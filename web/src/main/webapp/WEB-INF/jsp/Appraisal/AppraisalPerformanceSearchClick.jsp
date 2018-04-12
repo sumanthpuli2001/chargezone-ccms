@@ -100,11 +100,11 @@
                                                 </select>
                                             </div>-->
                                                 <div class="col-sm-6" id="competencyEId" >
-                                                    <label>Year:</label>
+                                                    <label>Cycle Name:</label>
                                                     <select name="pmpyear" id="pmpyear" class="form-control" onchange="ajaxfun();"/>
                                                     <!--<option value="">--SELECT--</option>-->
                                                     <c:forEach var="pmpyearMap" items="${pmpyearList}">
-                                                        <option value="${pmpyearMap.value}">${pmpyearMap.value}-${pmpyearMap.value+1}</option>
+                                                        <option value="${pmpyearMap.key}">${pmpyearMap.value}</option>
                                                     </c:forEach>
                                                     </select>
                                                 </div>

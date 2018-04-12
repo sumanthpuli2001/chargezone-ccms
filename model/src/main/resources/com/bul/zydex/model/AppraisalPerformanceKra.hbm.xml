@@ -88,6 +88,9 @@
         <property name="finalScoreManager" type="string">
             <column name="final_score_manager" />
         </property>
+        <property name="empFinalScore" type="java.lang.Float">
+            <column name="emp_final_score" precision="12" scale="0"/>
+        </property>
         <set name="updateAppraisalPerformanceKras" inverse="true">
             <key>
                 <column name="kra_id" not-null="true" />

@@ -9,21 +9,29 @@ import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.CandidateResultStatus;
+import com.bul.zydex.model.JobtypeMaster;
+import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprApprovalHistory;
+import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.OnlineAssessment;
 import com.bul.zydex.model.QuestionAns;
 import com.bul.zydex.model.QuestionAnswerSubmit;
 import com.bul.zydex.model.QuestionDetails;
 import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.QuestionPaper;
+import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.QuestionAnswerSubmit.CandidateResultStatusService;
 import com.bul.zydex.service.QuestionAnswerSubmit.QuestionAnswerSubmitService;
 import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
+import com.bul.zydex.service.Recruitment.JobtypeMasterService;
+import com.bul.zydex.service.Recruitment.MprMasterService;
 import com.bul.zydex.service.Recruitment.OnlineAssessmentService;
+import com.bul.zydex.service.Recruitment.RecruitmentService;
 import com.bul.zydex.service.RecruitmentApprovalHistory.MprApprovalHistoryService;
 import com.bul.zydex.service.Vacancy.VacancyMasterService;
+import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.service.questionlibrary.QuestionAnsService;
 import com.bul.zydex.service.questionlibrary.QuestionDetailsService;
 import com.bul.zydex.service.questionlibrary.QuestionLibraryService;
@@ -59,7 +67,12 @@ public class OnlineAssessmentAbstract extends CustomAbstract {
 
     protected MprApprovalHistoryService<MprApprovalHistory> mprApprovalHistoryService;
     protected VacancyMasterService<VacancyMaster> vacancyMasterService;
-    
+
+    protected MprMasterService<MprMaster> mprMasterService;
+    protected RecruitmentService<RecruitmentMaster> recruitmentService;
+    protected JobtypeMasterService<JobtypeMaster> jobtypeMasterService;
+    protected LocationMasterService<LocationMaster> locationMasterService;
+
     public OnlineAssessmentService<OnlineAssessment> getOnlineAssessmentService() {
         return onlineAssessmentService;
     }
@@ -147,8 +160,38 @@ public class OnlineAssessmentAbstract extends CustomAbstract {
     public void setVacancyMasterService(VacancyMasterService<VacancyMaster> vacancyMasterService) {
         this.vacancyMasterService = vacancyMasterService;
     }
-    
-    
+
+    public MprMasterService<MprMaster> getMprMasterService() {
+        return mprMasterService;
+    }
+
+    public void setMprMasterService(MprMasterService<MprMaster> mprMasterService) {
+        this.mprMasterService = mprMasterService;
+    }
+
+    public RecruitmentService<RecruitmentMaster> getRecruitmentService() {
+        return recruitmentService;
+    }
+
+    public void setRecruitmentService(RecruitmentService<RecruitmentMaster> recruitmentService) {
+        this.recruitmentService = recruitmentService;
+    }
+
+    public JobtypeMasterService<JobtypeMaster> getJobtypeMasterService() {
+        return jobtypeMasterService;
+    }
+
+    public void setJobtypeMasterService(JobtypeMasterService<JobtypeMaster> jobtypeMasterService) {
+        this.jobtypeMasterService = jobtypeMasterService;
+    }
+
+    public LocationMasterService<LocationMaster> getLocationMasterService() {
+        return locationMasterService;
+    }
+
+    public void setLocationMasterService(LocationMasterService<LocationMaster> locationMasterService) {
+        this.locationMasterService = locationMasterService;
+    }
 
     protected void questionList(HttpServletRequest request) {
         QuestionPaper questionPaper = new QuestionPaper();

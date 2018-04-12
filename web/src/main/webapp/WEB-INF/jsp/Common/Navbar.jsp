@@ -90,15 +90,15 @@
                                 <li><a href="recruitment.htm?act=approvalMppCreate"><i class="fa fa-circle-o"></i>MPP Approval</a></li>
                                 <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>MPR Approval</a></li>
                                 <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
-                                    <c:if test="${sessionScope.userRight.budget}">
+                                    <%--<c:if test="${sessionScope.userRight.budget}">--%>
                                     <li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.userRight.mpr}">
+                                    <%--</c:if>--%>
+                                    <%--<c:if test="${sessionScope.userRight.mpr}">--%>
                                     <li><a href="recruitment.htm?act=createMpr"><i class="fa fa-circle-o"></i>MPR</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.userRight.vacancy}">
+                                    <%--</c:if>--%>
+                                    <%--<c:if test="${sessionScope.userRight.vacancy}">--%>
                                     <li><a href="vacancy.htm?act=vacancyDetailList"><i class="fa fa-circle-o"></i>Vacancy</a></li>
-                                    </c:if>
+                                    <%--</c:if>--%>
                                 <li><a href="candidateF2FApproval.htm?act=candidateF2FInterviewList"><i class="fa fa-circle-o"></i>All Candidate F2F Request</a></li>
                             </ul>
                         </li>
@@ -331,7 +331,7 @@
                             <li><a href="performanceImprovementPlanMaster.htm?act=viewPipListByAdmin"><i class="fa fa-circle-o"></i>View All PIP </a></li>
                             <li><a href="kraCategory.htm?act=createClick"><i class="fa fa-circle-o"></i>KRA Category</a></li>
                             <!--<li><a href="appraisalFillingData.htm?act=createClick"><i class="fa fa-circle-o"></i>Appraisal Filling Data </a></li>-->
-                            <li><a href="appraisalFillingData.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Appraisal Time-Line Data</a></li>
+                            <li><a href="appraisalFillingData.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Cycle Time-Line Setting</a></li>
                             <!--<li><a href="competencyEvaluationMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>Competency Evaluation</a></li>-->
                             <li><a href="competencyEvaluationMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Competency Evaluation Search</a></li>
                             <!--<li><a href="competencyEvaluationTextmaster.htm?act=createClick"><i class="fa fa-circle-o"></i>Competency Evaluation Text</a></li>-->

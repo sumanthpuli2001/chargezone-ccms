@@ -139,7 +139,7 @@
                                                             <td>${list[1]}</td>
                                                             <td>${list[6]}</td>
                                                             <td>${list[3]}</td>
-                                                            <td><span class="label label-default">${list[5]}</span></td>
+                                                            <td><span class="label label-default">${list[5]} By&nbsp${list[1]} </span></td>
                                                             
                                                     </c:forEach>
                                                 </tbody>

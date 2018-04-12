@@ -1400,7 +1400,7 @@ $(document).on("click", ":submit", function (e) {
 //            var count = document.getElementById("subCompentencyCount").value;
 //            var countId = document.getElementById("IndividualId").value;
             var kragoalLength = document.getElementById("kragoalLength").value;
-            alert(kragoalLength);
+            
             //var kragoalLengthactivity = document.getElementById("kragoalLengthactivity").value;
 
 

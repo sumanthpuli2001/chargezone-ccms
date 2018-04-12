@@ -5449,7 +5449,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 }
                 pmpFormStatusMaster.setEmployeeSide(Boolean.TRUE);
                 pmpFormStatusMaster.setManagerSide(Boolean.TRUE);
-                pmpFormStatusMasterService.update(pmpFormStatusMaster);
+//                pmpFormStatusMasterService.update(pmpFormStatusMaster);
                 appraisalPerformanceService.update(appraisalPerformanceMaster);
                 if (!"".equals(appraisalId) && null != appraisalId) {
                     //    Email Sent to Employee(Start Year)

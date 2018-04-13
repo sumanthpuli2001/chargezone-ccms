@@ -42,10 +42,15 @@ public class UserRightMaster  implements java.io.Serializable {
      private boolean assessmentReview;
      private boolean faceTofaceInterview;
      private boolean candidateList;
+     private boolean mppApproval;
+     private boolean mprApproval;
+     private boolean faceTofaceApproval;
+     private boolean payroll;
+     private boolean training;
     public UserRightMaster() {
     }
 
-    public UserRightMaster(UserMaster userMaster, boolean hr, boolean employee, boolean travelAdmin, boolean travelExpenseAdmin, boolean poolCarAdmin, boolean security, boolean cafeteriaAdmin, boolean itAdmin, boolean employeeManagement, boolean leaveManagement, boolean shiftManagement, boolean appraisalPmp, boolean appraisal360, boolean probationToConfirmation, boolean employeeExit, boolean employeeReferral, boolean temporaryShiftAssign, boolean exitInterview, boolean noDue, boolean attendanceReport, boolean cashAdvanceView, boolean lunaPlantAttendanceMgnt, boolean gavasatPlantAttendanceMgnt, boolean departmentWiseAttendance, boolean mpr, boolean budget, boolean vacancy, boolean candidateInduction, boolean assessmentReview, boolean faceTofaceInterview, boolean candidateList) {
+    public UserRightMaster(UserMaster userMaster, boolean hr, boolean employee, boolean travelAdmin, boolean travelExpenseAdmin, boolean poolCarAdmin, boolean security, boolean cafeteriaAdmin, boolean itAdmin, boolean employeeManagement, boolean leaveManagement, boolean shiftManagement, boolean appraisalPmp, boolean appraisal360, boolean probationToConfirmation, boolean employeeExit, boolean employeeReferral, boolean temporaryShiftAssign, boolean exitInterview, boolean noDue, boolean attendanceReport, boolean cashAdvanceView, boolean lunaPlantAttendanceMgnt, boolean gavasatPlantAttendanceMgnt, boolean departmentWiseAttendance, boolean mpr, boolean budget, boolean vacancy, boolean candidateInduction, boolean assessmentReview, boolean faceTofaceInterview, boolean candidateList, boolean mppApproval, boolean mprApproval, boolean faceTofaceApproval, boolean payroll, boolean training) {
         this.userMaster = userMaster;
         this.hr = hr;
         this.employee = employee;
@@ -78,6 +83,11 @@ public class UserRightMaster  implements java.io.Serializable {
         this.faceTofaceInterview = faceTofaceInterview;
         this.candidateInduction = candidateInduction;
         this.candidateList = candidateList;
+        this.mppApproval = mppApproval;
+        this.mprApproval = mprApproval;
+        this.faceTofaceApproval =  faceTofaceApproval;
+        this.payroll = payroll;
+        this.training = training;
     }
 
     public Integer getId() {
@@ -342,6 +352,46 @@ public class UserRightMaster  implements java.io.Serializable {
 
     public void setCandidateList(boolean candidateList) {
         this.candidateList = candidateList;
+    }
+
+    public boolean isMppApproval() {
+        return mppApproval;
+    }
+
+    public void setMppApproval(boolean mppApproval) {
+        this.mppApproval = mppApproval;
+    }
+
+    public boolean isMprApproval() {
+        return mprApproval;
+    }
+
+    public void setMprApproval(boolean mprApproval) {
+        this.mprApproval = mprApproval;
+    }
+
+    public boolean isFaceTofaceApproval() {
+        return faceTofaceApproval;
+    }
+
+    public void setFaceTofaceApproval(boolean faceTofaceApproval) {
+        this.faceTofaceApproval = faceTofaceApproval;
+    }
+
+    public boolean isPayroll() {
+        return payroll;
+    }
+
+    public void setPayroll(boolean payroll) {
+        this.payroll = payroll;
+    }
+
+    public boolean isTraining() {
+        return training;
+    }
+
+    public void setTraining(boolean training) {
+        this.training = training;
     }
     
     

@@ -129,8 +129,8 @@
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[2]}</td>
                                                             <td>${list[4]}</td>
-                                                                <td>${list[7]}</td>
-                                                                <td>${list[9]}</td>
+                                                                <td>${list[8]}</td>
+                                                                <td>${list[10]}</td>
                                                                 <!--<td>${list[3]}</td>-->
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
 <!--                                                                    <td>

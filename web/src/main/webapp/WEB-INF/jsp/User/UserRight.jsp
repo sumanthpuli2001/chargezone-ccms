@@ -230,13 +230,13 @@
                                                     <div class="col-sm-3">
                                                     <form:checkbox path="mpr"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal">Mpr</label>
+                                                        <label  style="font-weight: normal">MPR Create</label>
 
                                                     </div>
                                                     <div class="col-sm-3">
                                                     <form:checkbox path="budget"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal">Budget</label>
+                                                        <label  style="font-weight: normal">MPP Budget Create</label>
 
                                                     </div>
                                                     <div class="col-sm-3">
@@ -259,8 +259,40 @@
                                                         <label  style="font-weight: normal">Assessment Review</label>
 
                                                     </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="mppApproval"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">MPP Budget Approval</label>
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="mprApproval"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">MPR Approval</label>
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="faceTofaceApproval"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Face To Face Approval</label>
+
+                                                    </div>
 
 
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="payroll"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Payroll</label>
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="training"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Training</label>
+
+                                                    </div>
                                                 </div>
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->

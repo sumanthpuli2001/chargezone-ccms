@@ -197,5 +197,10 @@ public class HomeController extends HomeAbstract {
         mv.setViewName("Common/RewardAndRecognition");
         return mv;
     }
+    public ModelAndView kaizen(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("Common/Kaizen");
+        return mv;
+    }
 
 }

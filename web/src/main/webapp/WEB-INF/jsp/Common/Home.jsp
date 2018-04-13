@@ -597,7 +597,7 @@
                                 <div  class="col-xs-4 col-sm-4 col-md-4">
                                     <a class="label label-primary" style="font-size: 20px" >
                                         <i class="fa fa-twitch"></i>
-                                        <strong> Suggestion Box</strong>
+                                        <strong>Kaizen</strong>
                                     </a>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-3">

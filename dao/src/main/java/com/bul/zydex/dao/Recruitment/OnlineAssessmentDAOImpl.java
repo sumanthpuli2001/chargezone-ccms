@@ -30,8 +30,8 @@ public class OnlineAssessmentDAOImpl<T> extends GenericsDAOImpl<T> implements On
                 + " LEFT JOIN a.questionPaper c"
                 + " Where b.id=" + candidateJobApplicationID
                 + " and a.noOfAttampt > 0 "
-                + " and str_to_date(Date_format(now(),'%d/%m/%Y'),'%d/%m/%Y') between str_to_date(a.validityFrom,'%d/%m/%Y') "
-                + " and str_to_date(a.validityTo,'%d/%m/%Y')"
+                + " and str_to_date(Date_format(now(),'%m/%d/%Y'),'%m/%d/%Y') between str_to_date(a.validityFrom,'%m/%d/%Y') "
+                + " and str_to_date(a.validityFrom,'%m/%d/%Y')"
                 + " and b.status =5 ";
 
         return getHibernateTemplate().find(query);

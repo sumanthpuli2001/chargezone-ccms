@@ -279,8 +279,11 @@ public class TrainingMasterController extends TrainingMasterAbstract {
             List<LocalDate> alldate = getDatesBetween(Startdate, Enddate);
             trainingMasterService.deletetrainingSubMaster(trainingMaster.getId());
             for (LocalDate alldate1 : alldate) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date initDate = convertToDateViaSqlDate(alldate1);
+                String allDate2 = sdf.format(initDate);
                 TrainingSubMaster trainingSubMaster = new TrainingSubMaster();
-                trainingSubMaster.setTrainingdate(alldate1.toString());
+                trainingSubMaster.setTrainingdate(allDate2.toString());
                 trainingSubMaster.setTrainingMasterid(trainingMaster.getId());
                 trainingSubMaster.setTrainerMasterid(trainingMaster.getTrainer().getId());
                 trainingSubMaster.setTitle(trainingMaster.getTrainingTitle());

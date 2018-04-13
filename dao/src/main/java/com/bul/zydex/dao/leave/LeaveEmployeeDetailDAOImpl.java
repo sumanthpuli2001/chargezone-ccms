@@ -296,8 +296,8 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         if (null != leaveEmployeeDetail.getEndDate() && !"".equals(leaveEmployeeDetail.getEndDate())) {
             condition += " AND STR_TO_DATE(a.endDate,'%d/%m/%Y') <= STR_TO_DATE('" + leaveEmployeeDetail.getEndDate() + "','%d/%m/%Y')";
         }
-
-        String hqlQuery = "SELECT b.employeeName, c.leaveType, a.startDate, a.endDate, a.noOfDays, a.id, a.status, d.id"
+                //                      0               1           2           3           4       5       6       7       8           9
+        String hqlQuery = "SELECT b.employeeName, c.leaveType, a.startDate, a.endDate, a.noOfDays, a.id, a.status, d.id,a.dateOfSubmit,a.empRemark "
                 + "  From LeaveEmployeeDetail a"
                 + " LEFT JOIN a.employeeMaster b "
                 + " LEFT JOIN a.leaveTypeMaster c"

@@ -117,7 +117,7 @@ public class QuestionLibraryController extends QuestionLibraryAbstract {
 //            if (0 == asd) {
 //
 //                radiocount = Integer.parseInt(selected.substring(1));
-                radiocount = Integer.parseInt(selected);
+//                radiocount = Integer.parseInt(selected);
 //            }
                 int otherDetailCount = 6;
                 String correctans = null;

@@ -383,7 +383,7 @@
 
 
 
-                                        
+
                                     </div>           
 
                                     <div class="col-md-1">
@@ -590,22 +590,27 @@
                                 </div>
 
                                 <div class="col-xs-4 col-sm-4 col-md-4">
-                                    <a class="label label-success" style="font-size: 20px"  href="hrServiceRequest.htm?act=searchSubmit">
+                                    <a class="label label-primary" style="font-size: 20px"  href="hrServiceRequest.htm?act=searchSubmit">
                                         <i class="fa fa-envelope"></i><strong> HR Help Desk </strong>
                                     </a>
                                 </div>
                                 <div  class="col-xs-4 col-sm-4 col-md-4">
-                                    <a class="label label-warning" style="font-size: 20px" href="homeController.htm?act=kaizen" >
+                                    <a class="label label-primary" style="font-size: 20px" >
                                         <i class="fa fa-twitch"></i>
                                         <strong>Kaizen</strong>
                                     </a>
                                 </div>
-                                <div  class="col-xs-4 col-sm-4 col-md-3">
-                                    <a class="label label-info" style="font-size: 20px"  href="classifiedBox.htm?act=searchSubmit" >
-                                        <i class="fa fa-weixin"></i>
-                                        <strong>Classified</strong>
+                                <div class="col-xs-4 col-sm-4 col-md-3">
+                                    <a class="label label-primary" style="font-size: 20px" href="hrServiceRequest.htm?act=searchSubmit">
+                                        <i class="fa fa-book"></i> &nbsp<strong>Emergency Contact</strong>
                                     </a>
                                 </div>
+                                <!--                                <div  class="col-xs-4 col-sm-4 col-md-3">
+                                                                    <a class="label label-info" style="font-size: 20px"  href="classifiedBox.htm?act=searchSubmit" >
+                                                                        <i class="fa fa-weixin"></i>
+                                                                        <strong>Classified</strong>
+                                                                    </a>
+                                                                </div>-->
 
 
                             </div>
@@ -617,18 +622,14 @@
                                 <div class="col-md-1">
 
                                 </div>
+
                                 <div class="col-xs-4 col-sm-4 col-md-4">
-                                    <a class="label label-primary" style="font-size: 20px" href="hrServiceRequest.htm?act=searchSubmit">
-                                        <i class="fa fa-book"></i> &nbsp<strong>Emergency Contact</strong>
-                                    </a>
-                                </div>
-                                <div class="col-xs-4 col-sm-4 col-md-4">
-                                    <a class="label label-default" style="font-size: 20px"  href="http://www.spcls.co.in/csr.aspx" target="_blank">
+                                    <a class="label label-primary" style="font-size: 20px"  href="http://www.spcls.co.in/csr.aspx" target="_blank">
                                         <i class="fa fa-pencil-square-o"></i> &nbsp<strong>CSR</strong>
                                     </a>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-3">
-                                    <a class="label label-danger" style="font-size: 20px"  href="http://www.spcls.co.in/news-events.aspx" target="_blank">
+                                    <a class="label label-primary" style="font-size: 20px"  href="http://www.spcls.co.in/news-events.aspx" target="_blank">
                                         <i class="fa fa-newspaper-o"></i> &nbsp<strong>News & Event</strong>
                                     </a>
                                 </div>

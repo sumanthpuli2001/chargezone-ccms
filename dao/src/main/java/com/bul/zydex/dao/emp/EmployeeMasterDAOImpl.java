@@ -1880,7 +1880,7 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
     @Override
     public List<?> searchEmployeeDetailForContactInfo(final String searchString) {
-        String hqlString = " SELECT a.id, a.employeeId, a.employeeName, c.departmentName, b.designationName, a.role, d.id,a.emailAddress,a.officeEmailId,a.contactNo1"
+        String hqlString = " SELECT a.id, a.employeeId, a.employeeName, c.departmentName, b.designationName, a.role, d.id,a.emailAddress,a.officeEmailId,a.contactNo1,a.contactNo2"
                 + " FROM EmployeeMaster a "
                 + " LEFT JOIN a.designationMaster b "
                 + " LEFT JOIN a.departmentMaster c "

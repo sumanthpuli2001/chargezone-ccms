@@ -5449,7 +5449,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 }
                 pmpFormStatusMaster.setEmployeeSide(Boolean.TRUE);
                 pmpFormStatusMaster.setManagerSide(Boolean.TRUE);
-                pmpFormStatusMasterService.update(pmpFormStatusMaster);
+//                pmpFormStatusMasterService.update(pmpFormStatusMaster);
                 appraisalPerformanceService.update(appraisalPerformanceMaster);
                 if (!"".equals(appraisalId) && null != appraisalId) {
                     //    Email Sent to Employee(Start Year)
@@ -6728,8 +6728,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         String competencyEvaluation_Id = request.getParameter("competencyEvaluation_Id");
         String kragoal = request.getParameter("kragoal");
         String weightage = request.getParameter("weightage");
-        String empMidYearSelfAssementGoal = request.getParameter("empMidYearSelfAssementGoal");
-        String managerMidYearReviewEvaluation = request.getParameter("managerMidYearReviewEvaluation");
+//        String empMidYearSelfAssementGoal = request.getParameter("empMidYearSelfAssementGoal");
+//        String managerMidYearReviewEvaluation = request.getParameter("managerMidYearReviewEvaluation");
         String empEndYearSelfAssementGoal = request.getParameter("empEndYearSelfAssementGoal");
         String managerEndYearReviewEvaluation = request.getParameter("managerEndYearReviewEvaluation");
 //        boolean flag1 = true;

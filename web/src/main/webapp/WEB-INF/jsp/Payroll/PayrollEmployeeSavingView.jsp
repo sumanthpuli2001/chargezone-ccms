@@ -75,6 +75,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <c:forEach var="listOfLoan1" items="${listOfLoan[1]}" varStatus="myindex1">
+                                                        <%--<c:forEach var="listOfLoan2" items="${listOfLoan[2]}" varStatus="myindex2">--%>
                                                         <input type="hidden" id="hrId" name="hrId" value="${myindex1.count}"/>
                                                         <tr>
                                                             <td>${myindex1.count}</td>
@@ -88,6 +89,7 @@
                                                                 </div></td>
                                                                 <td><input type="hidden" id="hrId" name="hrId" value="${myindex1.count}"/></td> 
                                                         </tr>
+                                                    <%--</c:forEach>--%>
                                                     </c:forEach>
                                                 </table>
                                             </c:forEach>

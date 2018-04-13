@@ -16,38 +16,40 @@
 
     <script>
         function selectDropsDown11(val) {
+            alert(val);
             if (val == 'stageWise') {
                 $('#employeeName').show();
-                $('#stages').show();
-                $('#selecctallId').show();
+//                $('#stages').show();
+//                $('#selecctallId').show();
 
                 $('#departmentIdDiv').show();
                 $('#yearid').show();
-                $('#competencyEId').hide(500);
+//                $('#competencyEId').hide(500);
 
             } else if (val == 'competency') {
-                $('#competencyEId').show();
-                $('#stages').hide();
-                $('#stages1').hide();
-                $('#selecctallId').hide();
-                $('#yearid').hide();
+//                $('#competencyEId').show();
+//                $('#stages').hide();
+//                $('#stages1').hide();
+//                $('#selecctallId').hide();
+//                $('#yearid').hide();
                 
 //                $('#departmentIdDiv').show();
 
-            } else if (val == 'rating') {
-                $('#competencyEId').hide(500);
-                $('#stages').hide();
-                $('#stages1').hide();
-                $('#selecctallId').hide();
-                $('#yearid').show();
+            }
+            else if (val == 'rating') {
+//                $('#competencyEId').hide(500);
+//                $('#stages').hide();
+//                $('#stages1').hide();
+//                $('#selecctallId').hide();
+//                $('#yearid').show();
 //                $('#departmentIdDiv').show();
 
             } else if (val == 'idp') {
-                $('#competencyEId').hide(500);
-                $('#stages').hide();
-                $('#stages1').hide();
-                $('#selecctallId').hide();
-                $('#yearid').hide();
+//                $('#competencyEId').hide(500);
+//                $('#stages').hide();
+//                $('#stages1').hide();
+//                $('#selecctallId').hide();
+//                $('#yearid').hide();
                 
 //                $('#departmentIdDiv').show();
 
@@ -101,26 +103,26 @@
                                                     <select name="valDetail" name="valDetail" class="form-control" onchange="selectDropsDown11(this.value);">
                                                         <option value="stageWise">By Stage Wise Search</option>
                                                         <option value="rating">By Rating Search</option>
-                                                        <option value="competency">By Competency Evaluation Search</option>
-                                                        <option value="idp">By IDP Search</option>
+<!--                                                        <option value="competency">By Competency Evaluation Search</option>
+                                                        <option value="idp">By IDP Search</option>-->
                                                     </select>
                                                 </div>
-                                                <div class="col-sm-6" id="competencyEId" style="display: none;">
+<!--                                                <div class="col-sm-6" id="competencyEId" style="display: none;">
                                                     <label>Competency Evaluation:</label>
                                                     <select name="competencyEvaluation_Id" id="competencyEvaluation_Id" class="form-control" onchange="ajaxfun();"/>
                                                     <option value="">--SELECT--</option>
-                                                    <c:forEach var="competencyMap" items="${competencyMap}">
+                                                    <%--<c:forEach var="competencyMap" items="${competencyMap}">--%>
                                                         <option value="${competencyMap.key}">${competencyMap.value}</option>
-                                                    </c:forEach>
+                                                    <%--</c:forEach>--%>
                                                     </select>
-                                                </div>
+                                                </div>-->
 
                                                 <div class="col-sm-3" id="yearid" >
-                                                    <label>Year:</label>
+                                                    <label>Cycle Name:</label>
                                                     <select name="pmpyear" id="pmpyear" class="form-control"/>
                                                     <!--<option value="">--SELECT--</option>-->
                                                     <c:forEach var="pmpyearMap" items="${pmpyearList}">
-                                                        <option value="${pmpyearMap.value}">${pmpyearMap.value}-${pmpyearMap.value+1}</option>
+                                                        <option value="${pmpyearMap.key}">${pmpyearMap.value}</option>
                                                     </c:forEach>
                                                     </select>
                                                 </div>

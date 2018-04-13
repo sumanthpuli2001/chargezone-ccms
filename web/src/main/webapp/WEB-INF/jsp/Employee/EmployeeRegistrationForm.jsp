@@ -361,6 +361,95 @@
             selectsubtype(empTypeId);
         });
     </script>
+     <script>
+        var tempCount4 = 1;
+        $(function () {
+            $("#ctcCloneid").on("click", function () {
+                tempCount4++;
+                //                alert(tempCount3);
+                var clone = "<tr id='addmoreFile1" + tempCount4 + "' style='clear:both;'>"
+                        + "<td style=\"text-align: center\">" + tempCount4 + "</td>"
+                        + "<td id=\"ctcTd" + tempCount4 + "\"><div><select id='ctcId" + tempCount4 + "' name='ctcId" + tempCount4 + "' class=\"form-control\">"
+                        + "</select>"
+                        + "</div><span id=\"ctcError" + tempCount4 + "\" style=\"color: red;\"></span></td>"
+                        //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'  min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
+                        + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='month" + tempCount4 + "' name='month" + tempCount4 + "' class=\"form-control\">"
+                        + "<option value=\"\">--SELECT--</option>"
+                        + "<option value=\"01\">January</option>"
+                        + "<option value=\"02\">February</option>"
+                        + "<option value=\"03\">March</option>"
+                        + "<option value=\"04\">April</option>"
+                        + "<option value=\"05\">May</option>"
+                        + "<option value=\"06\">June</option>"
+                        + "<option value=\"07\">July</option>"
+                        + "<option value=\"08\">August</option>"
+                        + "<option value=\"09\">September</option>"
+                        + "<option value=\"10\">October</option>"
+                        + "<option value=\"11\">November</option>"
+                        + "<option value=\"12\">December</option></select>"
+                        + "</div></td>"
+                        + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='year" + tempCount4 + "' name='year" + tempCount4 + "' class=\"form-control\">"
+                        + "</div></td>"
+                        + "<td style=\"text-align: center\">"
+                        + "<span style='margin-top: 5px;'>"
+                        + "<input type=\"button\"value=\"-\"  onclick=\"removectc('addmoreFile1" + tempCount4 + "');\"/>"
+                        + "</span>"
+                        + "</td>"
+                        + "</tr>";
+                $("#ctcTable").append(clone);
+                document.getElementById('ctcCount').value = tempCount4;
+                //                var expenseType = document.getElementById('expenseType').value;
+                addActc(tempCount4);
+                window.onload = init;
+                function init() {
+                    document.form1.month.options[new Date().getMonth()].selected = true;
+                }
+                var start = 1990;
+                var end = 2050;
+                var options11 = "";
+
+                for (var year1 = end; year1 >= start; year1--) {
+                    options11 += "<option>" + year1 + "</option>";
+                }
+//                alert(tempCount4);
+                document.getElementById('year2').innerHTML = options11;
+                document.getElementById('year3').innerHTML = options11;
+                document.getElementById('year4').innerHTML = options11;
+                document.getElementById('year5').innerHTML = options11;
+                document.getElementById('year6').innerHTML = options11;
+                document.getElementById('year7').innerHTML = options11;
+
+            });
+        });
+
+        function addActc(id) {
+            //                alert(id);
+            var element2 = document.getElementById('ctcId1');
+            var obj2 = document.getElementById("ctcId" + id);
+            for (var i22 = 0; i22 < element2.options.length; i22++) {
+                var opt22 = document.createElement("option");
+                opt22.value = element2.options[i22].value;
+                opt22.text = element2.options[i22].text;
+                obj2.appendChild(opt22);
+            }
+        }
+
+        function removectc(ctcDiv1) {
+            try {
+                tempCount4--;
+                var val = document.getElementById("ctcCount").value;
+                val = val - 1;
+                document.getElementById("ctcCount").value = val;
+                var element1 = document.getElementById(ctcDiv1);
+                element1.parentNode.removeChild(element1);
+            } catch (e) {
+
+            }
+        }
+
+    </script>
     <script>
         var tempCount3 = 1;
         $(function () {
@@ -415,95 +504,7 @@
         }
 
     </script>
-    <script>
-        var tempCount4 = 1;
-        $(function () {
-            $("#ctcCloneid").on("click", function () {
-                tempCount4++;
-                //                alert(tempCount3);
-                var clone = "<tr id='addmoreFile" + tempCount4 + "' style='clear:both;'>"
-                        + "<td style=\"text-align: center\">" + tempCount4 + "</td>"
-                        + "<td id=\"ctcTd" + tempCount4 + "\"><div><select id='ctcId" + tempCount4 + "' name='ctcId" + tempCount4 + "' class=\"form-control\">"
-                        + "</select>"
-                        + "</div><span id=\"ctcError" + tempCount4 + "\" style=\"color: red;\"></span></td>"
-                        //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'  min=\"0\" class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
-                        + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='month" + tempCount4 + "' name='month" + tempCount4 + "' class=\"form-control\">"
-                        + "<option value=\"\">--SELECT--</option>"
-                        + "<option value=\"01\">January</option>"
-                        + "<option value=\"02\">February</option>"
-                        + "<option value=\"03\">March</option>"
-                        + "<option value=\"04\">April</option>"
-                        + "<option value=\"05\">May</option>"
-                        + "<option value=\"06\">June</option>"
-                        + "<option value=\"07\">July</option>"
-                        + "<option value=\"08\">August</option>"
-                        + "<option value=\"09\">September</option>"
-                        + "<option value=\"10\">October</option>"
-                        + "<option value=\"11\">November</option>"
-                        + "<option value=\"12\">December</option></select>"
-                        + "</div></td>"
-                        + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='year" + tempCount4 + "' name='year" + tempCount4 + "' class=\"form-control\">"
-                        + "</div></td>"
-                        + "<td style=\"text-align: center\">"
-                        + "<span style='margin-top: 5px;'>"
-                        + "<input type=\"button\"value=\"-\"  onclick=\"removectc('addmoreFile" + tempCount4 + "');\"/>"
-                        + "</span>"
-                        + "</td>"
-                        + "</tr>";
-                $("#ctcTable").append(clone);
-                document.getElementById('ctcCount').value = tempCount4;
-                //                var expenseType = document.getElementById('expenseType').value;
-                addActc(tempCount4);
-                window.onload = init;
-                function init() {
-                    document.form1.month.options[new Date().getMonth()].selected = true;
-                }
-                var start = 1990;
-                var end = 2050;
-                var options11 = "";
-
-                for (var year1 = end; year1 >= start; year1--) {
-                    options11 += "<option>" + year1 + "</option>";
-                }
-//                alert(tempCount4);
-                document.getElementById('year2').innerHTML = options11;
-                document.getElementById('year3').innerHTML = options11;
-                document.getElementById('year4').innerHTML = options11;
-                document.getElementById('year5').innerHTML = options11;
-                document.getElementById('year6').innerHTML = options11;
-                document.getElementById('year7').innerHTML = options11;
-
-            });
-        });
-
-        function addActc(id) {
-            //                alert(id);
-            var element2 = document.getElementById('ctcId1');
-            var obj2 = document.getElementById("ctcId" + id);
-            for (var i2 = 0; i2 < element2.options.length; i2++) {
-                var opt2 = document.createElement("option");
-                opt2.value = element2.options[i2].value;
-                opt2.text = element2.options[i2].text;
-                obj2.appendChild(opt2);
-            }
-        }
-
-        function removectc(policyDiv) {
-            try {
-                tempCount4--;
-                var val = document.getElementById("ctcCount").value;
-                val = val - 1;
-                document.getElementById("ctcCount").value = val;
-                var element1 = document.getElementById(policyDiv);
-                element1.parentNode.removeChild(element1);
-            } catch (e) {
-
-            }
-        }
-
-    </script>
+   
 
     <script>
         function setDesignation() {
@@ -927,13 +928,14 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>Company:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="company" id="company" class="form-control ">
-                                                            <form:option value="">--SELECT--</form:option>
-                                                            <form:option value="SPC Life Science">SPC Life Science </form:option>
-                                                            <%--<form:option value="Zydex Industries Pvt. Ltd.">Zydex Industries Pvt. Ltd.</form:option>--%>
-                                                        </form:select>
-                                                        <form:errors path="company" cssClass="errorDiv"></form:errors>
+                                                            <label>Company:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:select path="company"  class="form-control ">
+                                                                <form:option label="-- Select --"  value="" ></form:option>
+                                                                <c:forEach var="comp" items="${company}" >
+                                                                    <form:option value="${comp.value}">${comp.value}</form:option>
+                                                                </c:forEach>
+                                                            </form:select>
+                                                            <form:errors path="company" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
                                                     <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
@@ -1120,52 +1122,35 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Conveys:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="conveysAmount" class="form-control"   placeholder="Enter Basic Conveys"/>
-                                                            <form:errors path="conveysAmount" cssClass="errorDiv"/>
-                                                    </div>
+
                                                     <div class="col-sm-6">
                                                         <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
                                                             <form:input path="esicNo" class="form-control"  placeholder="Enter ESIC No"/>
                                                             <form:errors path="esicNo" cssClass="errorDiv"/>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-
                                                     <div class="col-sm-6">
-                                                        <label>TDS Amount<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="tdsAmount" class="form-control"  placeholder="Enter TDS Amount"/>
-                                                            <form:errors path="tdsAmount" cssClass="errorDiv"/>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Company:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:select path="company"  class="form-control ">
-                                                                <form:option label="-- Select --"  value="" ></form:option>
-                                                                <c:forEach var="comp" items="${company}" >
-                                                                    <form:option value="${comp.value}">${comp.value}</form:option>
-                                                                </c:forEach>
-                                                            </form:select>
-                                                            <form:errors path="company" cssClass="errorDiv"></form:errors>
+                                                        <label>PF Amount:</label>
+                                                        <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
+                                                        <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
                                                         </div>
+                                                    </div>
 
-                                                    </div> 
                                                     <div class="form-group">
-                                                        <div class="col-sm-3">
+                                                        <div class="col-sm-4">
                                                             <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset>
                                                                 <input type="radio" name="pf" id="pf" value="false" checked>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                 <input type="radio" name="pf" id="pf" value="true">YES
                                                             </fieldset>
                                                         </div>
-                                                        <div class="col-sm-3">
+                                                        <div class="col-sm-4">
                                                             <label>Provident Tax:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset>
                                                                 <input type="radio" name="pt" id="pt" value="false" checked>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                 <input type="radio" name="pt" id="pt" value="true">YES
                                                             </fieldset>
                                                         </div>
-                                                        <div class="col-sm-3">
+                                                        <div class="col-sm-4">
                                                             <label>ESIC:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
                                                             <fieldset>
                                                             <form:radiobutton path="esic" value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1173,7 +1158,26 @@
                                                         </fieldset>
                                                         <form:errors path="esic" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                        <div class="col-sm-3">
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-4">
+                                                            <label>Salary Base:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                            <fieldset>
+                                                            <form:radiobutton path="salaryBase" value="false" checked="checked"/>Month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="salaryBase" value="true"/>Day
+                                                        </fieldset>
+                                                        <form:errors path="salaryBase" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>OT:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                            <fieldset>
+                                                            <form:radiobutton path="ot" value="false" checked="checked"/>YES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="ot" value="true"/>NO
+                                                        </fieldset>
+                                                        <form:errors path="ot" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-4">
                                                             <label>Odd Punch Required:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset>
                                                             <form:radiobutton path="oddPunch" value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1281,7 +1285,7 @@
                                                                 </td>
 
                                                                 <td style="text-align: center">
-                                                                 
+
                                                                     <select name="year1" id="year1" class="form-control ">
 
                                                                     </select>
@@ -1355,13 +1359,7 @@
                                                         <form:errors path="uanNo" cssClass="errorDiv"></form:errors>
                                                         </div>  
                                                     </div>  
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>PF Amount:</label>
-                                                        <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
-                                                        <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
+
 
                                                 </div>
                                             </div><!-- /.col -->

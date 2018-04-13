@@ -59,7 +59,7 @@
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.userRight.employeeManagement}">
-                   <li class="treeview" style="color: #585858;">
+                    <li class="treeview" style="color: #585858;">
                         <a href="#" style="background: #fff;">
                             <i class="fa fa-user fa-lg" style="color: #585858;"></i>
                             <span style="color: #585858;">Recruitment</span>
@@ -237,7 +237,7 @@
                     </ul>
                 </li>
 
-               <li class="treeview" style="color: #585858;">
+                <li class="treeview" style="color: #585858;">
                     <a href="#" style="background: #fff;">
                         <i class="fa fa-plane fa-lg" style="color: #585858;"></i>
                         <span style="color: #585858;">Travel Management</span>
@@ -281,7 +281,7 @@
                         <%--</c:if>--%>
                     </ul>
                 </li>
-                 <li class="treeview" style="color: #585858;">
+                <li class="treeview" style="color: #585858;">
                     <a href="#" style="background: #fff;">
                         <i class="fa fa-rupee fa-lg" style="color: #585858;"></i>
                         <span style="color: #585858;">Expense Report</span>
@@ -347,7 +347,7 @@
                         </ul>
                     </li>
                 </c:if>
-               <li class="treeview" style="color: #585858;">
+                <li class="treeview" style="color: #585858;">
                     <a href="#" style="background: #fff;">
                         <i class="fa fa-bar-chart fa-lg" style="color: #585858;"></i>
                         <span style="color: #585858;">Performance Management</span>
@@ -594,7 +594,7 @@
                     </ul>
                 </li>
                 <c:if test="${sessionScope.userRight.hr}">
-                   <li class="treeview" style="color: #585858;">
+                    <li class="treeview" style="color: #585858;">
                         <a href="#" style="background: #fff;">
                             <i class="fa fa-wrench fa-lg" style="color: #585858;"></i>
                             <span style="color: #585858;">Setting</span>
@@ -635,7 +635,7 @@
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.userRight.hr}">
-                                       <li class="treeview" style="color: #585858;">
+                    <li class="treeview" style="color: #585858;">
                         <a href="#" style="background: #fff;">
                             <i class="fa fa-laptop fa-lg" style="color: #585858;"></i>
                             <span style="color: #585858;">Email Template Master</span>
@@ -706,7 +706,7 @@
                                                                 </ul>
                                                             </li>-->
                 </c:if>
-                 <li class="treeview" style="color: #585858;">
+                <li class="treeview" style="color: #585858;">
                     <a href="holidayMaster.htm?act=viewHolidaysLocationWise" style="background: #fff;">
                         <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
                         <span style="color: #585858;">Holiday List</span>
@@ -716,9 +716,9 @@
                 <c:if test="${sessionScope.userRight.payroll}">
                     <li>
                         <a href="#">
-                            <i class="fa fa-rupee fa-lg"></i>
                             <!---------payroll Master (if payroll right give if show a payroll) --------> 
-                            <span>Payroll</span>
+                            <i class="fa fa-rupee" style="color: #585858;"></i>
+                            <span style="color: #585858;">Payroll</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
@@ -917,46 +917,50 @@
                 </ul>
                 </li>
             </c:if>
-             <li class="treeview" style="color: #585858;">
-                <a href="#" style="background: #fff;">
-                    <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
-                    <span style="color: #585858;">Training</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-rupee fa-lg"></i>
-                            <span>Master</span>
+            <c:if test="${!sessionScope.userRight.training}">
+                <c:if test="${sessionScope.userRight.employeeManagement}">
+                    <li class="treeview" style="color: #585858;">
+                        <a href="#" style="background: #fff;">
+                            <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
+                            <span style="color: #585858;">Training</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-rupee fa-lg"></i>
+                                    <span>Master</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
 
-                                <li><a href="trainingType.htm?act=newtraining"><i class="fa fa-circle-o"></i>Training Type</a></li>
-                                <li><a href="trainingType.htm?act=newsubtraining"><i class="fa fa-circle-o"></i>Training Sub Type</a></li>
-                                <li><a href="trainer.htm?act=createTrainerShow"><i class="fa fa-circle-o"></i>Trainer</a></li>
+                                    <li><a href="trainingType.htm?act=newtraining"><i class="fa fa-circle-o"></i>Training Type</a></li>
+                                    <li><a href="trainingType.htm?act=newsubtraining"><i class="fa fa-circle-o"></i>Training Sub Type</a></li>
+                                    <li><a href="trainer.htm?act=createTrainerShow"><i class="fa fa-circle-o"></i>Trainer</a></li>
 
-                                <li><a href="trainingMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Training Master</a></li>
-
-
-                            </ul>
-                        </li>
-                        <li><a href="trainingType.htm?act=showcalendar"><i class="fa fa-circle-o"></i>calendar</a></li>
-                        <li><a href="trainingIdentification.htm?act=showcalendar"><i class="fa fa-circle-o"></i>My Training List</a></li>
-                        <!--<li><a href="trainingIdentification.htm?act=createTraineAssigne"><i class="fa fa-circle-o"></i>Assign Trainee</a></li>-->
-                        <!--<li><a href="trainingIdentification.htm?act=showTrainingFeedbackList"><i class="fa fa-circle-o"></i>Training Feedback Details</a></li>-->
-                        <li><a href="trainingAssessment.htm?act=clickassessment"><i class="fa fa-circle-o"></i>Training Assessment</a></li>
+                                    <li><a href="trainingMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Training Master</a></li>
 
 
-                    </ul>
-                </li>
+                                </ul>
+                            </li>
+                            <li><a href="trainingType.htm?act=showcalendar"><i class="fa fa-circle-o"></i>calendar</a></li>
+                            <li><a href="trainingIdentification.htm?act=showcalendar"><i class="fa fa-circle-o"></i>My Training List</a></li>
+                            <!--<li><a href="trainingIdentification.htm?act=createTraineAssigne"><i class="fa fa-circle-o"></i>Assign Trainee</a></li>-->
+                            <!--<li><a href="trainingIdentification.htm?act=showTrainingFeedbackList"><i class="fa fa-circle-o"></i>Training Feedback Details</a></li>-->
+                            <li><a href="trainingAssessment.htm?act=clickassessment"><i class="fa fa-circle-o"></i>Training Assessment</a></li>
+
+
+                        </ul>
+                    </li>
+                </c:if>
             </c:if>
-            </c:if>
+            <%--</c:if>--%>
+            <%--</c:if>--%>
             <c:if test="${sessionScope.userRight.training}">
                 <li>
-                    <a href="#">
-                        <i class="fa fa-rupee fa-lg"></i>
-                        <span>Training</span>
+                    <a href="#" style="background: #fff;">
+                        <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
+                        <span style="color: #585858;">Training</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">

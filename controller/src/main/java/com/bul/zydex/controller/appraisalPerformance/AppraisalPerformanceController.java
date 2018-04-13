@@ -6728,8 +6728,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         String competencyEvaluation_Id = request.getParameter("competencyEvaluation_Id");
         String kragoal = request.getParameter("kragoal");
         String weightage = request.getParameter("weightage");
-        String empMidYearSelfAssementGoal = request.getParameter("empMidYearSelfAssementGoal");
-        String managerMidYearReviewEvaluation = request.getParameter("managerMidYearReviewEvaluation");
+//        String empMidYearSelfAssementGoal = request.getParameter("empMidYearSelfAssementGoal");
+//        String managerMidYearReviewEvaluation = request.getParameter("managerMidYearReviewEvaluation");
         String empEndYearSelfAssementGoal = request.getParameter("empEndYearSelfAssementGoal");
         String managerEndYearReviewEvaluation = request.getParameter("managerEndYearReviewEvaluation");
 //        boolean flag1 = true;

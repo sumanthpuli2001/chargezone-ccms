@@ -595,9 +595,9 @@
                                     </a>
                                 </div>
                                 <div  class="col-xs-4 col-sm-4 col-md-4">
-                                    <a class="label label-warning" style="font-size: 20px" >
+                                    <a class="label label-warning" style="font-size: 20px" href="homeController.htm?act=kaizen" >
                                         <i class="fa fa-twitch"></i>
-                                        <strong> Suggestion Box</strong>
+                                        <strong>Kaizen</strong>
                                     </a>
                                 </div>
                                 <div  class="col-xs-4 col-sm-4 col-md-3">

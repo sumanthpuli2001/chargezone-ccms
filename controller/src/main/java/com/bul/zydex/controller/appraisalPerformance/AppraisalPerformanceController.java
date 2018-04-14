@@ -3795,64 +3795,51 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //                }
             }
 
-        } else {
-//                    List appraisalFillingDataList = appraisalFillingDataService.readByCurrentYear("" + year1);
-            //List appraisalFillingDataList = appraisalFillingDataService.getappraisalDate();
-//                    if (!appraisalFillingData.isEmpty()) {
-//                        AppraisalFillingData appraisalFillingData = (AppraisalFillingData) appraisalFillingDataList.get(0);
-
-            //First Manager
-//                        Date endDate = dateFormat.parse(appraisalFillingData.getEndDate());
-//            Date endDate = dateFormat.parse(appraisalFillingData1.getManagerEndDate());
-//            if (currentDate.after(endDate) || currentDate.equals(endDate)) {
-//                if (!goalApproval.equals("Approved")) {
-//                    goalApproval = "Expired";
-//                }
-//                goalSetting = "Expired";
-//            } else {
+        } else //                    List appraisalFillingDataList = appraisalFillingDataService.readByCurrentYear("" + year1);
+        //List appraisalFillingDataList = appraisalFillingDataService.getappraisalDate();
+        //                    if (!appraisalFillingData.isEmpty()) {
+        //                        AppraisalFillingData appraisalFillingData = (AppraisalFillingData) appraisalFillingDataList.get(0);
+        //First Manager
+        //                        Date endDate = dateFormat.parse(appraisalFillingData.getEndDate());
+        //            Date endDate = dateFormat.parse(appraisalFillingData1.getManagerEndDate());
+        //            if (currentDate.after(endDate) || currentDate.equals(endDate)) {
+        //                if (!goalApproval.equals("Approved")) {
+        //                    goalApproval = "Expired";
+        //                }
+        //                goalSetting = "Expired";
+        //            } else {
+        {
             if (!goalApproval.equals("Approved")) {
                 goalApproval = "Pendding";
-            }
-//                goalSetting = "Pendding";
-//            }
-            // Middel year
-//                        Date MidendDate = dateFormat.parse(appraisalFillingData.getMidYearEndDate());
-//            Date MidendDate = dateFormat.parse(appraisalFillingData1.getManagerMidYearEndDate());
-//            if (currentDate.after(MidendDate) || currentDate.equals(MidendDate)) {
-//                if (!midSelfApproval.equals("Approved")) {
-//                    midSelfApproval = "Expired";
-//                }
-//                if (!managerMidSelfApproval.equals("Approved")) {
-//                    managerMidSelfApproval = "Expired";
-//                }
-//            } else {
-//                if (!midSelfApproval.equals("Approved")) {
-//                    midSelfApproval = "Pendding";
-//                }
-//                if (!managerMidSelfApproval.equals("Approved")) {
-//                    managerMidSelfApproval = "Pendding";
-//                }
-//            }
-            // End year
-//                        Date endEndDate = dateFormat.parse(appraisalFillingData.getYearEndEndDate());
-//            Date endEndDate = dateFormat.parse(appraisalFillingData1.getManagerYearEndEndDate());
-//            if (currentDate.after(endEndDate) || currentDate.equals(endEndDate)) {
-//                if (!endSelfApproval.equals("Approved")) {
-//                    endSelfApproval = "Expired";
-//                }
-//                if (!managerEndSelfApproval.equals("Approved")) {
-//                    managerEndSelfApproval = "Expired";
-//                }
-//            } else {
-//                if (!endSelfApproval.equals("Approved")) {
-//                    endSelfApproval = "Pendding";
-//                }
-//                if (!managerEndSelfApproval.equals("Approved")) {
-//                    managerEndSelfApproval = "Pendding";
-//                }
-//            }
-//                    }
-        }
+            } //                goalSetting = "Pendding";        //            }        // Middel year        //                        Date MidendDate = dateFormat.parse(appraisalFillingData.getMidYearEndDate());        //            Date MidendDate = dateFormat.parse(appraisalFillingData1.getManagerMidYearEndDate());        //            if (currentDate.after(MidendDate) || currentDate.equals(MidendDate)) {        //                if (!midSelfApproval.equals("Approved")) {        //                    midSelfApproval = "Expired";        //                }        //                if (!managerMidSelfApproval.equals("Approved")) {        //                    managerMidSelfApproval = "Expired";
+        }        //                }
+        //            } else {
+        //                if (!midSelfApproval.equals("Approved")) {
+        //                    midSelfApproval = "Pendding";
+        //                }
+        //                if (!managerMidSelfApproval.equals("Approved")) {
+        //                    managerMidSelfApproval = "Pendding";
+        //                }
+        //            }
+        // End year
+        //                        Date endEndDate = dateFormat.parse(appraisalFillingData.getYearEndEndDate());
+        //            Date endEndDate = dateFormat.parse(appraisalFillingData1.getManagerYearEndEndDate());
+        //            if (currentDate.after(endEndDate) || currentDate.equals(endEndDate)) {
+        //                if (!endSelfApproval.equals("Approved")) {
+        //                    endSelfApproval = "Expired";
+        //                }
+        //                if (!managerEndSelfApproval.equals("Approved")) {
+        //                    managerEndSelfApproval = "Expired";
+        //                }
+        //            } else {
+        //                if (!endSelfApproval.equals("Approved")) {
+        //                    endSelfApproval = "Pendding";
+        //                }
+        //                if (!managerEndSelfApproval.equals("Approved")) {
+        //                    managerEndSelfApproval = "Pendding";
+        //                }
+        //            }
+        //                    }
 
 //        if (null != appraisalPerformanceMaster.getWeightageScore()) {
 //            String weightageScore = appraisalPerformanceMaster.getWeightageScore();
@@ -6707,6 +6694,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         department(request, response);
         competencyList(request);
         pmpyearList(request);
+        yearList(request);
 //        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
 //        UserRightMaster user1 = (UserRightMaster) request.getSession().getAttribute("userRight");
 //        int cyear = Calendar.getInstance().get(Calendar.YEAR);
@@ -10211,5 +10199,91 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             }
         }
 
+    }
+
+    public ModelAndView searchReoprtByYearWiseSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        AppraisalPerformanceMaster appraisalPerformanceMaster = new AppraisalPerformanceMaster();
+        AppraisalPerformanceKra appraisalPerformanceKra = new AppraisalPerformanceKra();
+
+        String employeeMasterId = request.getParameter("employeeMasterIdForYear");
+        String cycleYear = request.getParameter("cycleYear");
+
+//        timeLineDate(request, response);
+//        String searchvalue = request.getParameter("valDetail");
+//        String chque[] = request.getParameterValues("checkedRows");
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+
+        if (null != employeeMasterId && !"".equals(employeeMasterId)) {
+            employeeMaster.setId(Integer.parseInt(employeeMasterId));
+        }
+        int cyear1 = Calendar.getInstance().get(Calendar.YEAR);
+        appraisalPerformanceMaster.setEmployeeMaster(employeeMaster);
+
+//        List timeLineList = appraisalFillingDataService.read();
+//        AppraisalFillingData appraisalFillingData = new AppraisalFillingData();
+//        if (!timeLineList.isEmpty()) {
+//            appraisalFillingData = (AppraisalFillingData) timeLineList.get(timeLineList.size() - 1);
+//        }App
+        List SefinlList = new ArrayList();
+
+        List<AppraisalFillingData> list = (List<AppraisalFillingData>) appraisalFillingDataService.readByYear(cycleYear);
+        for (AppraisalFillingData afd : list) {
+            String behYear = afd.getId().toString();
+            List<?> apm = appraisalPerformanceService.readByAppraisalPerformanceIdNew(employeeMasterId, behYear);
+            AppraisalPerformanceMaster master = new AppraisalPerformanceMaster();
+
+            String StartMonth = "";
+            String EndMonth = "";
+            String KRAStartDate = afd.getStartDate();
+            String StartDate = afd.getYearEndStartDate();
+            String KRAEndDate = afd.getEndDate();
+            String EndDate = afd.getYearEndEndDate();
+            String weitage = "";
+            String selfScore = "";
+            String managmentScore = "";
+            if (!apm.isEmpty()) {
+                master = (AppraisalPerformanceMaster) apm.get(0);
+                selfScore = master.getEmployeeTotalFinalScore();
+                managmentScore = master.getTotalScore();
+                weitage = master.getWeightageScore();
+
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = sdf.parse(KRAStartDate);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+            int FromMonth = cal.get(Calendar.MONTH);
+//            int FromMonth = calFrom.get(Calendar.MONTH);
+            String FromMonthName = monthNames[FromMonth];
+            Date date1 = sdf.parse(EndDate);
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTime(date1);
+            int ToMonth = cal1.get(Calendar.MONTH);
+            String ToMonthName = monthNames[ToMonth];
+            List finlList = new ArrayList();
+            finlList.add(StartDate);  //0
+            finlList.add(EndDate);  //1 
+            finlList.add(KRAStartDate); //2
+            finlList.add(KRAEndDate);   //3
+            finlList.add(weitage);  //4
+            finlList.add(selfScore);    //5
+            finlList.add(managmentScore);   //6
+            finlList.add(FromMonthName);    //7
+            finlList.add(ToMonthName);  //8
+            SefinlList.add(finlList);
+
+        }
+//        String pyear = request.getParameter("pmpyear");
+
+        mv.getModelMap().put("list", SefinlList);
+        request.setAttribute("list", SefinlList);
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-Disposition", "attachment; filename=EmployeePMPYearReport.xls");
+//        mv.getModelMap().put("appraisalPerformanceMaster", appraisalPerformanceMaster);
+        mv.setViewName("Appraisal/YearWiseReport");
+//          
+        return mv;
     }
 }

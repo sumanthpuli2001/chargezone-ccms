@@ -82,13 +82,6 @@
                     </c:if>
                 </div>
                 <div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                    <c:if test="${assflage eq true}">
-                        <c:if test="${attendance eq true}">
-                            <button type="button" style="float: right"  class="btn btn-primary" onclick="window.location = 'trainerLogin.htm?act=trainerAssessMent&id=${trainingMasterId}&eventdate=${eventdate}'">Online Assessment</button>
-                        </c:if>
-                    </c:if>
-                </div>
-                <div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                     <c:if test="${shosts eq false}">
                         <c:if test="${shosts2 eq false}">
                             <c:if test="${attendance eq true}">
@@ -97,6 +90,14 @@
                         </c:if>
                     </c:if>
                 </div>
+                <div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <c:if test="${assflage eq true}">
+                        <c:if test="${attendance eq true}">
+                            <button type="button" style="float: right"  class="btn btn-primary" onclick="window.location = 'trainerLogin.htm?act=trainerAssessMent&id=${trainingMasterId}&eventdate=${eventdate}'">Online Assessment</button>
+                        </c:if>
+                    </c:if>
+                </div>
+                
                 <div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                     <c:if test="${feedbackStatus eq true}">
                         <c:if test="${attendance eq true}">

@@ -98,5 +98,20 @@
         <property name="candidateList" type="java.lang.Boolean">
             <column name="candidate_list" />
         </property>
+        <property name="mppApproval" type="java.lang.Boolean">
+            <column name="mpp_approval" />
+        </property>
+        <property name="mprApproval" type="java.lang.Boolean">
+            <column name="mpr_approval" />
+        </property>
+        <property name="faceTofaceApproval" type="java.lang.Boolean">
+            <column name="f_to_f_approval" />
+        </property>
+        <property name="payroll" type="java.lang.Boolean">
+            <column name="payroll" />
+        </property>
+        <property name="training" type="java.lang.Boolean">
+            <column name="training" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -634,4 +634,10 @@
     <bean id="payrollTaxDeductionComponentService1" class="com.bul.zydex.service.Payroll.PayrollTaxDeductionComponentServiceImpl">
         <property name="payrollTaxDeductionComponentDao" ref="payrollTaxDeductionComponentDao1"/>
     </bean>
+    <bean id="taxDeductionDecarationSubmitService1" class="com.bul.zydex.service.Payroll.TaxDeductionDecarationSubmitServiceImpl">
+        <property name="taxDeductionDecarationSubmitDAO" ref="taxDeductionDecarationSubmitDAO1"/>
+    </bean>
+    <bean id="taxSavingSubmitService1" class="com.bul.zydex.service.Payroll.TaxSavingSubmitServiceImpl">
+        <property name="taxSavingSubmitDAO" ref="taxSavingSubmitDAO1"/>
+    </bean>
 </beans>

@@ -15,6 +15,7 @@
     </head>
     <script>
         function editClick(id) {
+           
             window.location = 'appraisalFillingData.htm?act=editClick&id=' + id;
         }
 
@@ -117,15 +118,12 @@
 <td>${list.managerYearEndEndDate}</td>-->
                                                                 <td>
                                                                     <div class="btn-group">
-                                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        <button type="button"  onclick="editClick(${list.id});" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                             <!--Action <span class="caret"></span>-->
                                                                             <span class="fa fa-pencil"></span>
                                                                             <!--<ul class="dropdown-menu">-->
                                                                             <!--<li>-->
-                                                                            <a href="#"
-                                                                               onclick="editClick(${list.id});">
-                                                                                &nbsp;&nbsp;Edit
-                                                                            </a>
+                                                                            <a href="#">&nbsp;&nbsp;Edit</a>
                                                                             <!--</li>-->
                                                                         </button>
 

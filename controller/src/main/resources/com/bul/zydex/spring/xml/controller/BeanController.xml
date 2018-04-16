@@ -377,6 +377,7 @@
         <property name="levelMasterService" ref="levelMasterService1" />
         <property name="locationMasterService" ref="locationMasterService1" />
         <property name="userRightMasterService" ref="userRightMasterService1" />
+        <property name="appraisalFillingDataService" ref="appraisalFillingDataService1" />
     </bean>
 
     <!--Resignation-->
@@ -439,6 +440,7 @@
         <property name="updateAppraisalPerformanceActivitiesService" ref="updateAppraisalPerformanceActivitiesService1" />
         <property name="appraisalkraActivityService" ref="appraisalkraActivityService1" />
         <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1" />
+        <property name="appraisal360Service" ref="appraisal360Service1" />
         
     </bean>
     <!--Appraisal Filling Data-->
@@ -814,8 +816,8 @@
         <property name="payrollFinancialYearService" ref="payrollFinancialYearService1" />
         <property name="payrollFormSixteenMasterService" ref="payrollFormSixteenMasterService1" />
         <property name="payrollSavingAmountService" ref="payrollSavingAmountService1" />
-         
-         
+        <property name="payrollTaxDeductionMasterService" ref="payrollTaxDeductionMasterService1"></property>
+        <property name="payrollTaxDeductionComponentService" ref="payrollTaxDeductionComponentService1"/>
     </bean>
     <bean id="payrollSavingAmountController1" class="com.bul.zydex.controller.Payroll.PayrollSavingAmountController" parent="controllerConfig" >
         <property name="payrollSavingAmountService" ref="payrollSavingAmountService1" />
@@ -1105,6 +1107,10 @@
         <property name="candidateResultStatusService" ref="candidateResultStatusService1"/>
         <property name="mprApprovalHistoryService" ref="mprApprovalHistoryService1"/>
         <property name="vacancyMasterService" ref="vacancyMasterService1"/>
+        <property name="mprMasterService" ref="mprMasterService1"/>
+        <property name="recruitmentService" ref="recruitmentService1"/>
+        <property name="jobtypeMasterService" ref="jobtypeMasterService1"/>
+        <property name="locationMasterService" ref="locationMasterService1"/>
         
     </bean>
     <bean id="trainingTypeController1" class="com.bul.zydex.controller.Training.TrainingTypeController" parent="controllerConfig" >

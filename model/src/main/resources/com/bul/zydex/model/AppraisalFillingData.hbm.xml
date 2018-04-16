@@ -11,6 +11,9 @@
         <property name="year" type="string">
             <column name="year" length="45" />
         </property>
+        <property name="cycleyear" type="string">
+            <column name="cycle_year" length="45" />
+        </property>
         <property name="startDate" type="string">
             <column name="start_date" length="45" />
         </property>

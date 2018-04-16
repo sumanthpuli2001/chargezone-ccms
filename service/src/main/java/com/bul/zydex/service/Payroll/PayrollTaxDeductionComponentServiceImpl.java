@@ -11,10 +11,10 @@ import java.util.List;
 
 /**
  *
- * @author DELL3
+ * @author Hussain
  */
 public class PayrollTaxDeductionComponentServiceImpl<T> extends GenericsServiceImpl<T> implements PayrollTaxDeductionComponentService<T> {
-    
+
     private PayrollTaxDeductionComponentDao<T> payrollTaxDeductionComponentDao;
 
     public PayrollTaxDeductionComponentDao<T> getPayrollTaxDeductionComponentDao() {
@@ -25,7 +25,12 @@ public class PayrollTaxDeductionComponentServiceImpl<T> extends GenericsServiceI
         this.payrollTaxDeductionComponentDao = payrollTaxDeductionComponentDao;
         setGenericsDAO(payrollTaxDeductionComponentDao);
     }
-    
+
+    @Override
+    public List<?> readTaxDeductionComponentforFromSixteen(int taxdeductionMasterid) {
+        return payrollTaxDeductionComponentDao.readTaxDeductionComponentforFromSixteen(taxdeductionMasterid);
+    }
+
     @Override
     public List<?> readByComponentId(int parseInt) {
         return payrollTaxDeductionComponentDao.readByComponentId(parseInt);
@@ -40,4 +45,5 @@ public class PayrollTaxDeductionComponentServiceImpl<T> extends GenericsServiceI
     public List<?> readComponent() {
         return payrollTaxDeductionComponentDao.readComponent();
     }
+
 }

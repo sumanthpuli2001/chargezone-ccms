@@ -14,6 +14,7 @@ import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.PayrollFinancialYear;
 import com.bul.zydex.model.PayrollFormSixteenMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -99,7 +100,7 @@ public class PayrollEmployeeFormSixteenController extends PayrollEmployeeFormSix
         PayrollFinancialYear payrollFinancialYear = new PayrollFinancialYear();
         PayrollFormSixteenMaster payrollFormSixteenMaster = new PayrollFormSixteenMaster();
         payrollFinancialYear.setId(Integer.parseInt(financialYearId));
-      
+
         List<PayrollFormSixteenMaster> financialYearList = checkformSixteenMaster(payrollFinancialYear, employeeMaster);
         if (!financialYearList.isEmpty()) {
             payrollFormSixteenMaster = (PayrollFormSixteenMaster) financialYearList.get(0);
@@ -107,31 +108,28 @@ public class PayrollEmployeeFormSixteenController extends PayrollEmployeeFormSix
                     payrollFinancialYearService.readById(payrollFormSixteenMaster.getPayrollFinancialYear().getId()));
         }
 //          PayrollSavingAmount payrollSavingAmount = new PayrollSavingAmount();
-        List<?> payrollSavingAmountList=payrollSavingAmountService.readCheckEmployeeSaving(Integer.parseInt(id), Integer.parseInt(financialYearId));
-        double totalSavinglist=0;
-        Iterator itr1=payrollSavingAmountList.iterator();
+        List<?> payrollSavingAmountList = payrollSavingAmountService.readCheckEmployeeSaving(Integer.parseInt(id), Integer.parseInt(financialYearId));
+        double totalSavinglist = 0;
+        Iterator itr1 = payrollSavingAmountList.iterator();
         while (itr1.hasNext()) {
-        Object[] next= (Object[])itr1.next();
-        totalSavinglist +=(Double)next[1];
-        
+            Object[] next = (Object[]) itr1.next();
+            totalSavinglist += (Double) next[1];
+
         }
         payrollFinancialYear = payrollFinancialYearService.readById(payrollFinancialYear.getId());
-        List<?> employeeDeductionAmountList=employeeDeductionAmountService.readCheckDeductionAmount(Integer.parseInt(id), payrollFinancialYear);
-        List<?> employeeAdditionalAmountList=employeeAdditionalSalaryService.readCheckAdditionalAmount(Integer.parseInt(id), payrollFinancialYear);
-        double totalBasicSalary=0;
-        double totalAdditionalAmount=0;
+        List<?> employeeDeductionAmountList = employeeDeductionAmountService.readCheckDeductionAmount(Integer.parseInt(id), payrollFinancialYear);
+        List<?> employeeAdditionalAmountList = employeeAdditionalSalaryService.readCheckAdditionalAmount(Integer.parseInt(id), payrollFinancialYear);
+        double totalBasicSalary = 0;
+        double totalAdditionalAmount = 0;
         Iterator itr = employeeAdditionalAmountList.iterator();
-         while (itr.hasNext()) {
-              Object[] next = (Object[])itr.next();
-              totalBasicSalary += (Double)next[0];
-              totalAdditionalAmount += (Double)next[1];
-          }
-         double totallist=totalBasicSalary+totalAdditionalAmount;
-         List<?> employeeDeductionPtAmountList=employeeDeductionAmountService.readCheckDeductionPtAmount(Integer.parseInt(id), payrollFinancialYear);
-       
-         
-         
-         
+        while (itr.hasNext()) {
+            Object[] next = (Object[]) itr.next();
+            totalBasicSalary += (Double) next[0];
+            totalAdditionalAmount += (Double) next[1];
+        }
+        double totallist = totalBasicSalary + totalAdditionalAmount;
+        List<?> employeeDeductionPtAmountList = employeeDeductionAmountService.readCheckDeductionPtAmount(Integer.parseInt(id), payrollFinancialYear);
+
         mv.getModelMap().put("employeeSalaryProcess", employeeSalaryProcess);
         request.setAttribute("employeeMaster", employeeMaster);
         request.setAttribute("payrollFormSixteenMaster", payrollFormSixteenMaster);
@@ -231,9 +229,47 @@ public class PayrollEmployeeFormSixteenController extends PayrollEmployeeFormSix
 
         }
         payrollFormSixteenMaster.setPayrollFinancialYear(payrollFinancialYear);
-        
+        List totalList = new ArrayList();
+        List finalData = new ArrayList();
+        List<?> taxDeduction = payrollTaxDeductionMasterService.readTaxDeductionForFormSixteen();
+        if (!taxDeduction.isEmpty()) {
+            List taxDeductionList = new ArrayList();
+            for (Object taxDeductionList1 : taxDeduction) {
+                List finalDatatemp = new ArrayList();
+                Object[] o = (Object[]) taxDeductionList1;
+                Integer taxdeductionid = (Integer) o[0];
+                String selection = (String) o[1];
+                String description = (String) o[2];
+                finalDatatemp.add(selection);
+                List<?> taxDeductioncomponent = payrollTaxDeductionComponentService.readTaxDeductionComponentforFromSixteen(taxdeductionid);
+                List taxDeductioncomponentList = new ArrayList();
+                List taxDeductioncomponentIDList = new ArrayList();
+                if (!taxDeductioncomponent.isEmpty()) {
+                    taxDeductionList.add(selection);
+                    for (Object taxDeductionListcompmet1 : taxDeductioncomponent) {
+                        Object[] o1 = (Object[]) taxDeductionListcompmet1;
+                        Integer taxdeductionid1 = (Integer) o1[0];
+                        taxDeductioncomponentIDList.add(taxdeductionid1);
+
+                        String compoment = (String) o1[1];
+                        taxDeductioncomponentList.add(compoment);
+                        Integer agelimit = (Integer) o1[2];
+                        Integer taxSavingLimit = (Integer) o1[3];
+                    }
+
+                    finalDatatemp.add(taxDeductioncomponentList);
+                    finalDatatemp.add(taxDeductioncomponentIDList);
+                }
+
+                finalData.add(finalDatatemp);
+            }
+
+        }
+
         mv.getModelMap().put("employeeSalaryProcess", employeeSalaryProcess);
         request.setAttribute("employeeMaster", employeeMaster);
+//        request.setAttribute("totalList", totalList);
+        request.setAttribute("finalData", finalData);
         request.setAttribute("payrollFormSixteenMaster", payrollFormSixteenMaster);
         mv.setViewName("Payroll/PayrollEmployeeSavingView");
         return mv;

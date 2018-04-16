@@ -39,7 +39,7 @@ public class Appraisal360Controller extends Appraisal360Abstract {
 //        selectedEmployeeFor360Feedback(request, employeeMaster);
 //        List<Object> list = new ArrayList<Object>();
 //        selectedEmployeeFor360Feedback1(request, list);
-
+        yearList(request);
         mv.getModelMap().put("appraisal360", appraisal360);
         mv.setViewName("Appraisal/Appraisal360FeedbackFormCreate");
 
@@ -87,6 +87,7 @@ public class Appraisal360Controller extends Appraisal360Abstract {
         EmployeeMaster employeeMaster3 = new EmployeeMaster();
         String[] doneId = request.getParameterValues("employeeMasterByRefDoneEmpId");
         String forId = request.getParameter("employeeMasterByRefForEmpId");
+        String feedBackYear = request.getParameter("cycleYear");
         UserMaster user = (UserMaster) request.getSession().getAttribute("user");
         user.getId();
         employeeMaster2.setUserMaster(user);
@@ -127,53 +128,52 @@ public class Appraisal360Controller extends Appraisal360Abstract {
                     selectEmployee1(request, response);
                     mv.setViewName("Appraisal/Appraisal360FeedbackFormCreate");
                     break;
+                } else if (appraisal360.getEmployeeMasterByRefForEmpId().getId() == appraisal360.getEmployeeMasterByRefDoneEmpId().getId()) {
+                    request.setAttribute("failureMessage",
+                            "Error : The Entered Information is not valid.");
+                    mv = createClick(request, response);
+                    break;
                 } else {
-                    if (appraisal360.getEmployeeMasterByRefForEmpId().getId() == appraisal360.getEmployeeMasterByRefDoneEmpId().getId()) {
-                        request.setAttribute("failureMessage",
-                                "Error : The Entered Information is not valid.");
-                        mv = createClick(request, response);
-                        break;
-                    } else {
-                        appraisal360Service.create(appraisal360);
+                    appraisal360.setFeedbackYear(feedBackYear);
+                    appraisal360Service.create(appraisal360);
 
-                        request.setAttribute("successMessage",
-                                "Information : The Information is saved Successfully.");
-                        try {
-                            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                            DesignationMaster designationMaster = new DesignationMaster();
-                            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                            EmailTemplate emailTemplate = new EmailTemplate();
-                            //id=108 for Appraisal feedback apply.....
-                            emailTemplate = emailTemplateService.readById(108);
-                            EmployeeMaster employeeMaster11 = new EmployeeMaster();
-                            employeeMaster3=employeeMasterService.readById(Integer.parseInt(forId));
-                            String employeeFDname=employeeMaster3.getEmployeeName();
+                    request.setAttribute("successMessage",
+                            "Information : The Information is saved Successfully.");
+                    try {
+                        EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                        DesignationMaster designationMaster = new DesignationMaster();
+                        designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        //id=108 for Appraisal feedback apply.....
+                        emailTemplate = emailTemplateService.readById(108);
+                        EmployeeMaster employeeMaster11 = new EmployeeMaster();
+                        employeeMaster3 = employeeMasterService.readById(Integer.parseInt(forId));
+                        String employeeFDname = employeeMaster3.getEmployeeName();
 
-                            String aaa = "" + appraisal360.getEmployeeMasterByRefDoneEmpId().getId();
-                            String StrDate = appraisal360.getPerformedDateStr();
-                            String EndDate = appraisal360.getCompleteDateStr();
-                            String[] zz = aaa.split(",");
-                            for (String oo : zz) {
-                                String idd = oo;
-                                employeeMaster11 = employeeMasterService.readById(Integer.parseInt(idd));
-                                String To = employeeMaster11.getOfficeEmailId();
-                                String From = employeeMasterModel.getOfficeEmailId();
-                                String Subject = emailTemplate.getSubject();
-                                Subject=Subject.replaceAll("\\{user\\}",employeeFDname);
-                                String msg = emailTemplate.getBodytext();
-                                msg = msg.replaceAll("\\{to_user\\}", employeeMaster11.getEmployeeName());
-                                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                                msg = msg.replaceAll("\\{from_Str_date\\}", StrDate);
-                                msg = msg.replaceAll("\\{from_End_date\\}", EndDate);
-                                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                                sendMail.sendMail(From, To, Subject, msg);
-                            }
-
-                        } catch (Exception e) {
+                        String aaa = "" + appraisal360.getEmployeeMasterByRefDoneEmpId().getId();
+                        String StrDate = appraisal360.getPerformedDateStr();
+                        String EndDate = appraisal360.getCompleteDateStr();
+                        String[] zz = aaa.split(",");
+                        for (String oo : zz) {
+                            String idd = oo;
+                            employeeMaster11 = employeeMasterService.readById(Integer.parseInt(idd));
+                            String To = employeeMaster11.getOfficeEmailId();
+                            String From = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            Subject = Subject.replaceAll("\\{user\\}", employeeFDname);
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMaster11.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_Str_date\\}", StrDate);
+                            msg = msg.replaceAll("\\{from_End_date\\}", EndDate);
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(From, To, Subject, msg);
                         }
 
-                        mv = createClick(request, response);
+                    } catch (Exception e) {
                     }
+
+                    mv = createClick(request, response);
                 }
             }
         } else {
@@ -268,6 +268,8 @@ public class Appraisal360Controller extends Appraisal360Abstract {
         int forid = Integer.parseInt(request.getParameter("forId"));
         int doneid = Integer.parseInt(request.getParameter("doneId"));
         int hrid = Integer.parseInt(request.getParameter("hrId"));
+        
+        AppraisalFeedback360 af=appraisal360Service.readById(id);
         appraisal360.setId(id);
         employeeMaster.setId(forid);
         employeeMaster1.setId(doneid);
@@ -282,6 +284,7 @@ public class Appraisal360Controller extends Appraisal360Abstract {
             appraisal360.setRemarkHr("");
         }
         appraisal360.setStatus(1);
+        appraisal360.setFeedbackYear(af.getFeedbackYear());
         appraisal360Service.update(appraisal360);
         request.setAttribute("successMessage",
                 "Information : The Information is saved Successfully.");
@@ -294,12 +297,10 @@ public class Appraisal360Controller extends Appraisal360Abstract {
             //id=112 for Appraisal feedback approval.....
             emailTemplate = emailTemplateService.readById(112);
 //            EmployeeMaster employeeMaster11 = new EmployeeMaster();
-            
-            
-            
+
             EmployeeMaster employeeMaster3 = new EmployeeMaster();
-            employeeMaster3=employeeMasterService.readById(forid);
-            String EmployeeFDname=employeeMaster3.getEmployeeName();
+            employeeMaster3 = employeeMasterService.readById(forid);
+            String EmployeeFDname = employeeMaster3.getEmployeeName();
 
             List list = userRightMasterService.readApparaisal360Rights();
             Iterator it = list.iterator();
@@ -312,7 +313,7 @@ public class Appraisal360Controller extends Appraisal360Abstract {
                 String To = EmailId;
                 String from = employeeMasterModel.getOfficeEmailId();
                 String Subject = emailTemplate.getSubject();
-                Subject=Subject.replaceAll("\\{user\\}",EmployeeFDname);
+                Subject = Subject.replaceAll("\\{user\\}", EmployeeFDname);
                 String msg = emailTemplate.getBodytext();
                 msg = msg.replaceAll("\\{to_user\\}", EmployeeName);
                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
@@ -356,7 +357,7 @@ public class Appraisal360Controller extends Appraisal360Abstract {
         String PerfDate = request.getParameter("perDate");
         String CompDate = request.getParameter("compDate");
 
-            List<?> list = appraisal360Service.readAppraisalFeedbackView(ForId, PerfDate, CompDate);
+        List<?> list = appraisal360Service.readAppraisalFeedbackView(ForId, PerfDate, CompDate);
 
         request.setAttribute("list", list);
         mv.setViewName("Appraisal/Appraisal360View");
@@ -456,22 +457,22 @@ public class Appraisal360Controller extends Appraisal360Abstract {
         appraisalFeedback360.setEmployeeMasterByRefForEmpId(employeeMaster);
         appraisalFeedback360.setPerformedDateStr(departmentId);
         appraisalFeedback360.setCompleteDateStr(levelId);
-            List<?> empFilled = appraisal360Service.read360SearchByFillingEmployee(appraisalFeedback360);
+        List<?> empFilled = appraisal360Service.read360SearchByFillingEmployee(appraisalFeedback360);
 //        mv.getModelMap().put("list", emp360list);
         List<List<String>> fianlList = new ArrayList();
-        Map<Object[],List<?>> mapList = new HashMap();
+        Map<Object[], List<?>> mapList = new HashMap();
 //        if (!emp360list.isEmpty()) {
 //            Object[] ss = (Object[]) emp360list.get(0);
         Iterator itr = empFilled.iterator();
         while (itr.hasNext()) {
 //        List<String> list12 = new ArrayList();
-            Object[] next = (Object[])itr.next();
+            Object[] next = (Object[]) itr.next();
             int forByEmpId = (Integer) next[1];
 //            list12.add(""+forByEmpId);
-           
+
             employeeMaster1.setId(forByEmpId);
             appraisalFeedback360.setEmployeeMasterByRefForEmpId(employeeMaster1);
-        List<?> emp360list = appraisal360Service.read360SearchByEmployee(appraisalFeedback360);
+            List<?> emp360list = appraisal360Service.read360SearchByEmployee(appraisalFeedback360);
             mapList.put(next, emp360list);
         }
 //            mv.getModelMap().put("list1", empFilled);
@@ -483,7 +484,7 @@ public class Appraisal360Controller extends Appraisal360Abstract {
         mv.setViewName("Appraisal/Appraisal360ReoprtResult");
         return mv;
     }
-    
+
     public ModelAndView exportToPDF(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AppraisalFeedback360 appraisal360 = new AppraisalFeedback360();
@@ -499,5 +500,5 @@ public class Appraisal360Controller extends Appraisal360Abstract {
         mv.setViewName("Appraisal/Appraisal360PDF");
         return mv;
     }
-    
+
 }

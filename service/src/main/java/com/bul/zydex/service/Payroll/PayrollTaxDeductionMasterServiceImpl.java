@@ -35,5 +35,23 @@ public class PayrollTaxDeductionMasterServiceImpl<T> extends GenericsServiceImpl
     public List<?> readSectionByName(String sectionName) {
         return payrollTaxDeductionMasterDao.readSectionByName(sectionName);
     }
+
+    @Override
+    public List readSection() {
+        return payrollTaxDeductionMasterDao.readSection();
+    }
+
+    @Override
+    public List<?> readTaxDeductionForFormSixteen() {
+       return payrollTaxDeductionMasterDao.readTaxDeductionForFormSixteen();
+    }
+
+    @Override
+    public List<?> readByComponentId(int parseInt) {
+      return payrollTaxDeductionMasterDao.readByComponentId(parseInt);
+    }
+
+
+
     
 }

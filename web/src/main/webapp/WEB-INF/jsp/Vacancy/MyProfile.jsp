@@ -324,17 +324,17 @@
                                 <div class="col-sm-1">
                                 </div>
                                 <div class="col-sm-2" style="text-align: left">
-                                    <label>Experience On Date Of Joining: Year:<span style="color: red;font-size: 12px;">*</span></label>
+                                    <label>Total Experience Year:<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
-                                <form:input path="experianceDateJoiningYear" placeholder="Enter Date of Joining Year" class="form-control"></form:input>
+                                <form:input path="experianceDateJoiningYear" placeholder="Total Experience (Year)" class="form-control"></form:input>
                                 <span style="color: red;font-size: 12px;"><form:errors path="experianceDateJoiningYear" cssClass="errorDiv"></form:errors></span>
                                 </div>
                                 <div class="col-sm-2" style="text-align: left">
-                                    <label>Experience On Date Of Joining: Month:<span style="color: red;font-size: 12px;">*</span></label>
+                                    <label>Total Experience Month:<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
-                                <form:input path="experianceDateJoiningMonth" placeholder="Enter Date of Joining Month" class="form-control"></form:input>
+                                <form:input path="experianceDateJoiningMonth" placeholder="Total Experience (Month)" class="form-control"></form:input>
                                 <span style="color: red;font-size: 12px;"><form:errors path="experianceDateJoiningMonth" cssClass="errorDiv"></form:errors></span>
                                 </div>
                             </div>

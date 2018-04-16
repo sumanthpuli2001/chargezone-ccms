@@ -13,9 +13,15 @@ import java.util.List;
  * @author DELL3
  */
 public interface PayrollTaxDeductionMasterDao<T> extends GenericsDAO<T> {
-    
+
     public List<?> readTaxDeduction();
 
+    public List<?> readByComponentId(int parseInt);
+
+    public List readSection();
+
+    public List<?> readTaxDeductionForFormSixteen();
+
     public List<?> readSectionByName(String sectionName);
-    
+
 }

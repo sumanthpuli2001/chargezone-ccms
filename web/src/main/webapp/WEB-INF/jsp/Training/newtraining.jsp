@@ -45,8 +45,8 @@
         <c:if test="${!empty successMessage}">
             <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
         </c:if>
-        <c:if test="${!empty failureMessage}">
-            <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
+        <c:if test="${!empty faliureMessage}">
+            <div class="fadeOutEffect alert alert-danger" role="alert">${faliureMessage}</div>
         </c:if>
         <form:form action="trainingType.htm?act=deleteSubmittrainingtype" method="post"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
@@ -56,12 +56,12 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
-                                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                <c:if test="${sessionScope.userRight.employeeManagement}">
                                 <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
 
 
                                 <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'trainingType.htm?act=createtraining'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
-                                <%--</c:if>--%>
+                                </c:if>
                                 <div class="box-header">
                                 </div>
                                 <div class="box-body no-padding">

@@ -42,7 +42,7 @@
                         <th>Department</th>
                         <th>Designation</th>
                         <th>Level</th>
-                        <th>Year</th>
+                        <th>Cycle Name</th>
                         <th>Pending Stage</th>
 
                     </tr>
@@ -57,7 +57,7 @@
                     <td>${list[2]}</td>
                     <td>${list[3]}</td>
                     <td>${list[4]}</td>
-                    <td>${list[5]} - ${list[5]+1}</td>
+                    <td>${list[5]}</td>
                     <td>
                         <c:if test="${list[6] eq null}">KRA Setting By Employee</c:if>
                         <c:if test="${list[6] ne null}">${list[6]}</c:if>
@@ -65,4 +65,6 @@
                         </td>
                     </tr>
             </c:forEach>
-            </html>
+        </tbody>
+    </table>
+</html>

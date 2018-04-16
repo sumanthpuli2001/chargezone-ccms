@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller.leave;
 
+import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.LeaveTypeMaster;
@@ -16,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -34,7 +36,10 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
-
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
+        DepartmentMaster departmentMaster = departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId());
+        leaveTypeMaster.setDepartmentMaster(departmentMaster);
         mv.getModelMap().put("leaveTypeMaster", leaveTypeMaster);
         mv.setViewName("Leave/LeaveTypeCreate");
         return mv;
@@ -52,6 +57,8 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
             mv.addAllObjects(errors.getModel());
             mv.setViewName("Leave/LeaveTypeCreate");
         } else {
+            DepartmentMaster departmentMaster = departmentMasterService.readById(Integer.parseInt(request.getParameter("DeptID")));
+            leaveTypeMaster.setDepartmentMaster(departmentMaster);
             leaveTypeMasterService.create(leaveTypeMaster);
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
@@ -90,6 +97,10 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
         BindException errors = new BindException(leaveTypeMaster, "leaveTypeMaster");
         leaveTypeMaster.setId(Integer.parseInt(request.getParameter("id")));
         bind(request, leaveTypeMaster);
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
+        DepartmentMaster departmentMaster = departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId());
+        leaveTypeMaster.setDepartmentMaster(departmentMaster);
         leaveTypeMasterValidator.validate(leaveTypeMaster, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
@@ -174,16 +185,24 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
         List<?> plList = leaveTypeMasterService.readLeaveType(pl);
         List<?> ptlList = leaveTypeMasterService.readLeaveType(ptl);
         if (!clList.isEmpty()) {
-            leaveTypeMaster = (LeaveTypeMaster) clList.get(0);
+            Integer id = (Integer) clList.get(0);
+            leaveTypeMaster = leaveTypeMasterService.readById(id);
+//            leaveTypeMaster = (LeaveTypeMaster) clList.get(0);
         }
         if (!slList.isEmpty()) {
-            leaveTypeMaster1 = (LeaveTypeMaster) slList.get(0);
+            Integer id1 = (Integer) slList.get(0);
+            leaveTypeMaster1 = leaveTypeMasterService.readById(id1);
+//            leaveTypeMaster1 = (LeaveTypeMaster) slList.get(0);
         }
         if (!plList.isEmpty()) {
-            leaveTypeMaster2 = (LeaveTypeMaster) plList.get(0);
+            Integer id2 = (Integer) plList.get(0);
+            leaveTypeMaster2 = leaveTypeMasterService.readById(id2);
+//            leaveTypeMaster2 = (LeaveTypeMaster) plList.get(0);
         }
         if (!ptlList.isEmpty()) {
-            leaveTypeMaster3 = (LeaveTypeMaster) ptlList.get(0);
+            Integer id3 = (Integer) ptlList.get(0);
+            leaveTypeMaster3 = leaveTypeMasterService.readById(id3);
+//            leaveTypeMaster3 = (LeaveTypeMaster) ptlList.get(0);
         }
 
         try {

@@ -434,7 +434,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
         double netSalary = (employeeSalaryProcess.getEmployeeBasicSalary() + additionalAmt);
         double netSalarywithOtamount = (employeeSalaryProcess.getEmployeeBasicSalary() + additionalAmtwithoutOtAmount);
-        double netSalarywithOtamount1 = (Double.parseDouble(employeeMaster.getBasicSalary()) + Double.parseDouble(employeeMaster.getConveysAmount()) + additionalAmtwithoutOtAmount);
+        double netSalarywithOtamount1 = (Double.parseDouble(employeeMaster.getBasicSalary()) + additionalAmtwithoutOtAmount);
 
         boolean ptFlag = payrollPtCheckService.readForPTCheck(employeeMaster.getEmployeeTypeMaster().getId(),
                 employeeMaster.getEmployeeSubType().getId());
@@ -469,15 +469,15 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         }
 
 //        TDs start here
-        double tdsAmount = Double.parseDouble(employeeMaster1.getTdsAmount());
+//        double tdsAmount = Double.parseDouble(employeeMaster1.getTdsAmount());
 
-        if (tdsAmount != 0) {
-
-            employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
-            employeeDeductionAmount.setDeductionType("TDS");
-            employeeDeductionAmount.setDeductionAmount(tdsAmount);
-            employeeDeductionAmountService.create(employeeDeductionAmount);
-        }
+//        if (tdsAmount != 0) {
+//
+//            employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+//            employeeDeductionAmount.setDeductionType("TDS");
+//            employeeDeductionAmount.setDeductionAmount(tdsAmount);
+//            employeeDeductionAmountService.create(employeeDeductionAmount);
+//        }
 
         /// tds end here  
         ////////////////////// PT Ends Here ///////////////////////////
@@ -1287,8 +1287,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 int empId = employeeMaster.getId();
                                 EmployeeMaster employeeMaster1 = employeeMasterService.readById(empId);
                                 double basicSalary = Double.parseDouble(employeeMaster1.getBasicSalary());
-                                double conveyAmount = Double.parseDouble(employeeMaster1.getConveysAmount());
-                                double tdsAmount = Double.parseDouble(employeeMaster1.getTdsAmount());
+//                                double conveyAmount = Double.parseDouble(employeeMaster1.getConveysAmount());
+//                                double tdsAmount = Double.parseDouble(employeeMaster1.getTdsAmount());
 
                                 double leaveTxt = 0;
 //                                Calendar cal = Calendar.getInstance();
@@ -1300,8 +1300,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 int days = 30;
                                 double basicSalary1 = basicSalary - (basicSalary * lwp1 / days);
 //                            conveys start
-                                double conveyAmount1 = 0;
-                                conveyAmount1 = conveyAmount - (conveyAmount * BothLwpABsent / days);
+//                                double conveyAmount1 = 0;
+//                                conveyAmount1 = conveyAmount - (conveyAmount * BothLwpABsent / days);
 //                            conveys end
 //                            OT calculate : 
                                 double OT2 = 0;
@@ -1371,10 +1371,10 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 checkAdditionDaywise(employeeSalaryProcess);
 //                             conveys create in Additional Salary
 
-                                employeeAdditionalSalary.setEmployeeSalaryProcess(employeeSalaryProcess);
-                                employeeAdditionalSalary.setPayrollSalaryType("Conveyance");
-                                employeeAdditionalSalary.setAdditionalAmount(conveyAmount1);
-                                employeeAdditionalSalaryService.create(employeeAdditionalSalary);
+//                                employeeAdditionalSalary.setEmployeeSalaryProcess(employeeSalaryProcess);
+//                                employeeAdditionalSalary.setPayrollSalaryType("Conveyance");
+//                                employeeAdditionalSalary.setAdditionalAmount(conveyAmount1);
+//                                employeeAdditionalSalaryService.create(employeeAdditionalSalary);
 //                            OT Amount Create in ADDitionalSalary
 
                                 employeeAdditionalSalary.setEmployeeSalaryProcess(employeeSalaryProcess);

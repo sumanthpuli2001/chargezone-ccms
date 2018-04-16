@@ -148,42 +148,28 @@ public class PayrollTaxDeductionMasterController extends PayrollTaxDeductionMast
         Date updatedDate = new Date();
         
         String sectionName = request.getParameter("section");
-        List<?> list = payrollTaxDeductionMasterService.readSectionByName(sectionName);
+        List<PayrollTaxDeductionMaster> list = (List<PayrollTaxDeductionMaster>) payrollTaxDeductionMasterService.readSectionByName(sectionName);
         
         payrollTaxDeductionMasterValidator.validate(payrollTaxDeductionMaster, errors);
 
-           if (errors.hasErrors()) {
-                request.setAttribute("faliureMessage",
-                        "Error : The Tax Deduction updation is not valid.");
-                mv.addAllObjects(errors.getModel());
-                mv.setViewName("Payroll/PayrollTaxDeductionEdit");
-           } 
-           else {
-               
-               if(list.isEmpty())
-               {
-                    payrollTaxDeductionMaster.setUpdatedBy(employeeMaster.getId());
-                    payrollTaxDeductionMaster.setUpdatedDate(sdf.format(updatedDate));
-                    payrollTaxDeductionMasterService.update(payrollTaxDeductionMaster);
+        if (errors.hasErrors()) {
+            request.setAttribute("faliureMessage",
+                    "Error : The Tax Deduction updation is not valid.");
+            mv.addAllObjects(errors.getModel());
+            mv.setViewName("Payroll/PayrollTaxDeductionEdit");
+        } 
+        else 
+        {
+            payrollTaxDeductionMaster.setUpdatedBy(employeeMaster.getId());
+            payrollTaxDeductionMaster.setUpdatedDate(sdf.format(updatedDate));
+            payrollTaxDeductionMasterService.update(payrollTaxDeductionMaster);
 
-                    request.setAttribute("successMessage",
-                        "Information: The Tax Deduction is Updated successfully");
-                    mv.getModelMap().put("employeeMaster",employeeMaster);
-                    mv.getModelMap().put("payrollTaxDeductionMaster", payrollTaxDeductionMaster);
-                    mv = taxDeductionCreate(request,response);
-                }
-                   
-                else
-                {
-                    request.setAttribute("failureMessage",
-                                        "Error : The Section is already exist. Try another.");
-                    mv.getModelMap().put("payrollTaxDeductionMaster", payrollTaxDeductionMaster);
-                  mv.getModelMap().put("employeeMaster",employeeMaster);
-                   
-                    mv = taxDeductionCreate(request,response);
-                }
+            request.setAttribute("successMessage",
+                "Information: The Tax Deduction is Updated successfully");
+            mv.getModelMap().put("employeeMaster",employeeMaster);
+            mv.getModelMap().put("payrollTaxDeductionMaster", payrollTaxDeductionMaster);
+            mv = taxDeductionCreate(request,response);
         }
-           
         
         return mv;
         

@@ -10,7 +10,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Tax Deduction List</title>
+        <title>Tax Deduction Component List</title>
     </head>
     <script>
         function editClick(id) {
@@ -32,10 +32,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Tax Deduction Master:</h1>
+            <h1>Tax Deduction Component:</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Tax Deduction Master</li>
+                <li class="active">Tax Deduction Component</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">
@@ -80,21 +80,23 @@
                                                                     <th>Component</th>
                                                                     <th>Age Limit</th>
                                                                     <th>Tax Saving Limit - Component Wise</th>
+                                                                    <th>Edit</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <c:forEach  var="list" items="${list}" varStatus="status">
                                                                     <tr>
                                                                         <td align="Center">
-                                                                            <input type="checkbox" name="checkId" id="checkId" value="${list.componentId}">
-                                                                        </td>
-                                                                        <td>${list.component}</td>
-                                                                        <td>${list.component}</td>
-                                                                        <td>${list.ageLimit}</td>
-                                                                        <td>${list.taxSavingLimit}</td>
+                                                                            <input type="checkbox" name="checkId" id="checkId" value="${list[0]}">
+                                                                       
+                                                                        <td>${list[4]}</td>
+                                                                        <td>${list[1]}</td>
+                                                                        <td>${list[2]}</td>
+                                                                        <td>${list[3]}</td>
+                                                                        
                                                                         <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" onclick="editClick(${list.componentId});" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                <button type="button" onclick="editClick(${list[0]});" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                     &nbsp;&nbsp;Edit
                                                                                 </button>
                                                                             </div>

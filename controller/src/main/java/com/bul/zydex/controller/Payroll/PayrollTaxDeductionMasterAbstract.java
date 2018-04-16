@@ -59,19 +59,7 @@ public class PayrollTaxDeductionMasterAbstract extends CustomAbstract{
     public void setPayrollTaxDeductionComponentValidator(Validator payrollTaxDeductionComponentValidator) {
         this.payrollTaxDeductionComponentValidator = payrollTaxDeductionComponentValidator;
     }
-        
-    protected Map<Integer, String> readSection() {
-        List sectionList = payrollTaxDeductionMasterService.read();
-        PayrollTaxDeductionMaster payrollTaxDeductionMaster = new PayrollTaxDeductionMaster();
-        Map<Integer, String> sectionMap = new HashMap<Integer, String>();
-        for (Object o : sectionList) {
-            payrollTaxDeductionMaster = (PayrollTaxDeductionMaster) o;
-            sectionMap.put(payrollTaxDeductionMaster.getId(), payrollTaxDeductionMaster.getSection());
-        }
-
-        return sectionMap;
-    }
-    
+            
     protected void sectionList(HttpServletRequest request) {
         PayrollTaxDeductionMaster payrollTaxDeductionMaster = new PayrollTaxDeductionMaster();
         List<?> tdmList = payrollTaxDeductionMasterService.read();

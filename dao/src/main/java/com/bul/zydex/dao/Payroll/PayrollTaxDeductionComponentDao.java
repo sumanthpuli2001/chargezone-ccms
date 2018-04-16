@@ -19,6 +19,8 @@ public interface PayrollTaxDeductionComponentDao<T> extends GenericsDAO<T> {
     public List<?> readByComponentId(int id);
 
     public List readSection();
+
+    public List<?> readComponent();
     
     
 }

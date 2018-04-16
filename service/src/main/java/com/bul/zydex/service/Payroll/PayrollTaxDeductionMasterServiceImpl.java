@@ -30,5 +30,10 @@ public class PayrollTaxDeductionMasterServiceImpl<T> extends GenericsServiceImpl
     public List<?> readTaxDeduction() {
         return payrollTaxDeductionMasterDao.readTaxDeduction(); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<?> readSectionByName(String sectionName) {
+        return payrollTaxDeductionMasterDao.readSectionByName(sectionName);
+    }
     
 }

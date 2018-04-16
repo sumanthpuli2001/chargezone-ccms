@@ -35,4 +35,9 @@ public class PayrollTaxDeductionComponentServiceImpl<T> extends GenericsServiceI
     public List readSection() {
         return payrollTaxDeductionComponentDao.readSection();
     }
+
+    @Override
+    public List<?> readComponent() {
+        return payrollTaxDeductionComponentDao.readComponent();
+    }
 }

@@ -713,6 +713,12 @@
                                     <li>
                                         <a href="payrollTaxDeduction.htm?act=showTaxDeductionComponent"><i class="fa fa-circle-o"></i>Tax Deduction Component</a>
                                     </li>
+                                    <li>
+                                        <a href="payrollTaxDeclaration.htm?act=showPeriod"><i class="fa fa-circle-o"></i>Tax Declaration Period</a>
+                                    </li>
+                                    <li>
+                                        <a href="payrollTaxRate.htm?act=showTaxRateList"><i class="fa fa-circle-o"></i>Tax Rate Master</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>

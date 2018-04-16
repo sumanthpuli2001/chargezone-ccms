@@ -155,4 +155,6 @@
     <bean id="ctcValidator1" class="com.bul.zydex.validator.policy.CtcValidator"/>
     <bean id="payrollTaxDeductionMasterValidator1" class="com.bul.zydex.validator.Payroll.PayrollTaxDeductionMasterValidator" />
     <bean id="payrollTaxDeductionComponentValidator1" class="com.bul.zydex.validator.Payroll.PayrollTaxDeductionComponentValidator" />
+    <bean id="payrollTaxDeclarationPeriodMasterValidator1" class="com.bul.zydex.validator.Payroll.PayrollTaxDeclarationPeriodMasterValidator" />
+    <bean id="payrollTaxRateMasterValidator1" class="com.bul.zydex.validator.Payroll.PayrollTaxRateMasterValidator" />
 </beans>

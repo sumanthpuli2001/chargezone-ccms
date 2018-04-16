@@ -18,4 +18,6 @@ public interface PayrollTaxDeductionMasterService<T> extends GenericsService<T> 
 
     public List<?> readTaxDeduction();
     
+    public List<?> readSectionByName(String sectionName);
+    
 }

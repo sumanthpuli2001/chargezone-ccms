@@ -30,5 +30,14 @@ public class PayrollTaxDeductionMasterDaoImpl<T> extends GenericsDAOImpl<T> impl
         return list;
         
     }
+
+    @Override
+    public List<?> readSectionByName(String sectionName) {
+        String query = "SELECT a.section "
+                + " FROM PayrollTaxDeductionMaster a "
+                + " WHERE a.section = " + "'"+ sectionName +"'";
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
  
 }

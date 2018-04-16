@@ -14,8 +14,10 @@ import java.util.List;
  */
 public interface PayrollTaxDeductionComponentService<T> extends GenericsService<T> {
     
-        public List<?> readByComponentId(int parseInt);
+    public List<?> readByComponentId(int parseInt);
 
-        public List readSection();
+    public List readSection();
+
+    public List<?> readComponent();
     
 }

@@ -12,10 +12,7 @@ import com.bul.zydex.model.PayrollTaxDeductionMaster;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -78,33 +75,50 @@ public class PayrollTaxDeductionMasterController extends PayrollTaxDeductionMast
         
         BindException errors = new BindException(payrollTaxDeductionMaster, "payrollTaxDeductionMaster");
         bind(request, payrollTaxDeductionMaster);
-        
+                            
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date createdDate = new Date();
         
-        payrollTaxDeductionMasterValidator.validate(payrollTaxDeductionMaster, errors);
+        String sectionName = request.getParameter("section");
+        List<?> list = payrollTaxDeductionMasterService.readSectionByName(sectionName);
+        
+            payrollTaxDeductionMasterValidator.validate(payrollTaxDeductionMaster, errors);
 
-           if (errors.hasErrors()) {
-                request.setAttribute("faliureMessage",
-                        "Error : The Tax Deduction Creation is not valid.");
-                mv.addAllObjects(errors.getModel());
-                mv.setViewName("Payroll/PayrollTaxDeductionNewCreate");
-           } 
-           else {
-                payrollTaxDeductionMaster.setCreatedBy(employeeMaster.getId());
-                payrollTaxDeductionMaster.setTdStatus(0);
-                payrollTaxDeductionMaster.setCreatedDate(sdf.format(createdDate));
-                payrollTaxDeductionMasterService.create(payrollTaxDeductionMaster);
-                
-                request.setAttribute("successMessage",
-                    "Information: The Tax Deduction is Created successfully");
-        }
+               if (errors.hasErrors()) {    
+                    request.setAttribute("failureMessage",
+                            "Error : The Tax Deduction Creation is not valid.");
+                    mv.addAllObjects(errors.getModel());
+                    mv.setViewName("Payroll/PayrollTaxDeductionNewCreate");
+               } 
+               else 
+               {
+                   if(list.isEmpty())
+                   {
+                        payrollTaxDeductionMaster.setCreatedBy(employeeMaster.getId());
+                        payrollTaxDeductionMaster.setTdStatus(0);
+                        payrollTaxDeductionMaster.setCreatedDate(sdf.format(createdDate));
+                        payrollTaxDeductionMasterService.create(payrollTaxDeductionMaster);
 
-        mv.getModelMap().put("payrollTaxDeductionMaster", payrollTaxDeductionMaster);
-        mv.getModelMap().put("employeeMaster",employeeMaster);
-        mv = taxDeductionCreate(request,response);
+                        request.setAttribute("successMessage",
+                            "Information: The Tax Deduction is Created successfully");
+
+                        mv.getModelMap().put("payrollTaxDeductionMaster", payrollTaxDeductionMaster);
+                        mv.getModelMap().put("employeeMaster",employeeMaster);
+                        mv = taxDeductionCreate(request,response);
+                   }
+                   
+                   else
+                   {
+                        request.setAttribute("failureMessage",
+                                        "Error : The Section is already exist. Try another.");
+                        mv.getModelMap().put("payrollTaxDeductionMaster", payrollTaxDeductionMaster);
+                        mv.getModelMap().put("employeeMaster",employeeMaster);
+                        mv = taxDeductionCreate(request,response);
+                    }
+                }
         return mv;
     }
+     
     
     public ModelAndView editClick(HttpServletRequest request, HttpServletResponse response)
     {
@@ -133,6 +147,9 @@ public class PayrollTaxDeductionMasterController extends PayrollTaxDeductionMast
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date updatedDate = new Date();
         
+        String sectionName = request.getParameter("section");
+        List<?> list = payrollTaxDeductionMasterService.readSectionByName(sectionName);
+        
         payrollTaxDeductionMasterValidator.validate(payrollTaxDeductionMaster, errors);
 
            if (errors.hasErrors()) {
@@ -142,16 +159,32 @@ public class PayrollTaxDeductionMasterController extends PayrollTaxDeductionMast
                 mv.setViewName("Payroll/PayrollTaxDeductionEdit");
            } 
            else {
-                payrollTaxDeductionMaster.setUpdatedBy(employeeMaster.getId());
-                payrollTaxDeductionMaster.setUpdatedDate(sdf.format(updatedDate));
-                payrollTaxDeductionMasterService.update(payrollTaxDeductionMaster);
-                
-                request.setAttribute("successMessage",
-                    "Information: The Tax Deduction is Updated successfully");
-        }
+               
+               if(list.isEmpty())
+               {
+                    payrollTaxDeductionMaster.setUpdatedBy(employeeMaster.getId());
+                    payrollTaxDeductionMaster.setUpdatedDate(sdf.format(updatedDate));
+                    payrollTaxDeductionMasterService.update(payrollTaxDeductionMaster);
 
-        mv.getModelMap().put("payrollTaxDeductionMaster", payrollTaxDeductionMaster);
-        mv = taxDeductionCreate(request,response);
+                    request.setAttribute("successMessage",
+                        "Information: The Tax Deduction is Updated successfully");
+                    mv.getModelMap().put("employeeMaster",employeeMaster);
+                    mv.getModelMap().put("payrollTaxDeductionMaster", payrollTaxDeductionMaster);
+                    mv = taxDeductionCreate(request,response);
+                }
+                   
+                else
+                {
+                    request.setAttribute("failureMessage",
+                                        "Error : The Section is already exist. Try another.");
+                    mv.getModelMap().put("payrollTaxDeductionMaster", payrollTaxDeductionMaster);
+                  mv.getModelMap().put("employeeMaster",employeeMaster);
+                   
+                    mv = taxDeductionCreate(request,response);
+                }
+        }
+           
+        
         return mv;
         
     }
@@ -162,12 +195,15 @@ public class PayrollTaxDeductionMasterController extends PayrollTaxDeductionMast
     {
         ModelAndView mv = new ModelAndView();
         
+        PayrollTaxDeductionMaster payrollTaxDeductionMaster= new PayrollTaxDeductionMaster();
         PayrollTaxDeductionComponent payrollTaxDeductionComponentCreate = new PayrollTaxDeductionComponent();
-        
-   //     List<?> tdmList = payrollTaxDeductionComponentService.read();
-        
+            
+        List<PayrollTaxDeductionComponent> tdcmList = (List<PayrollTaxDeductionComponent>) payrollTaxDeductionComponentService.readComponent();
+ 
+        mv.getModelMap().put("list", tdcmList);
+        mv.getModelMap().put("payrollTaxDeductionMaster", payrollTaxDeductionMaster);
         mv.getModelMap().put("payrollTaxDeductionComponentCreate", payrollTaxDeductionComponentCreate);
-    //    mv.getModelMap().put("list",tdmList);
+        
         mv.setViewName("Payroll/PayrollTaxDeductionComponentCreate");
         return mv;
     }
@@ -199,58 +235,116 @@ public class PayrollTaxDeductionMasterController extends PayrollTaxDeductionMast
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         
         BindException errors = new BindException(payrollTaxDeductionComponentCreate, "payrollTaxDeductionComponentCreate");
+        sectionList(request);
         bind(request, payrollTaxDeductionComponentCreate);
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date createdDate = new Date();
         
+            payrollTaxDeductionComponentValidator.validate(payrollTaxDeductionComponentCreate, errors);
+            if(errors.hasErrors())
+            {
+                request.setAttribute("faliureMessage",
+                            "Error : The Tax Deduction Component Creation is not valid.");
+                mv.addAllObjects(errors.getModel());
+                mv.setViewName("Payroll/PayrollTaxDeductionComponentNew");
+            }
+            else
+            {
+                if(null != payrollTaxDeductionComponentCreate.getPayrollTaxDeductionMaster().getId())
+                {
+                    payrollTaxDeductionComponentCreate.setTdcStatus(0);
+                    payrollTaxDeductionComponentCreate.setCreatedBy(employeeMaster.getId());
+                    payrollTaxDeductionComponentCreate.setCreatedDate(sdf.format(createdDate));
+                    payrollTaxDeductionComponentService.create(payrollTaxDeductionComponentCreate);
+
+                    request.setAttribute("successMessage","Information: The Tax Deduction Component is Created successfully");
+                    mv.getModelMap().put("employeeMaster", employeeMaster);
+                    mv.getModelMap().put("payrollTaxDeductionComponentCreate", payrollTaxDeductionComponentCreate);
+
+                    mv = showTaxDeductionComponent(request, response);
+                }
+                else
+                {
+                    request.setAttribute("faliureMessage",
+                                "Error : You selected black Section.");
+                    mv.getModelMap().put("employeeMaster", employeeMaster);
+                    mv.getModelMap().put("payrollTaxDeductionComponentCreate", payrollTaxDeductionComponentCreate);
+                    mv.setViewName("Payroll/PayrollTaxDeductionComponentNew");
+                }
+            }
+        
+        return mv;
+    }
+        
+    public ModelAndView editTaxDeductionComponentClick(HttpServletRequest request, HttpServletResponse response)
+    {
+        ModelAndView mv = new ModelAndView();
+        
+        PayrollTaxDeductionComponent payrollTaxDeductionComponentCreate = new PayrollTaxDeductionComponent();
+        PayrollTaxDeductionMaster payrollTaxDeductionMaster = new PayrollTaxDeductionMaster();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        
+        sectionList(request);
+        
+        String id = request.getParameter("id");
+        payrollTaxDeductionComponentCreate = payrollTaxDeductionComponentService.readById(Integer.parseInt(id));
+
+        mv.getModelMap().put("payrollTaxDeductionComponentCreate", payrollTaxDeductionComponentCreate);
+        mv.setViewName("Payroll/PayrollTaxDeductionComponentEdit");
+        return mv;
+    }
+    
+        
+    public ModelAndView editTaxDeductionComponentSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception
+    {
+        ModelAndView mv = new ModelAndView();
+        
+        PayrollTaxDeductionComponent payrollTaxDeductionComponentCreate = new PayrollTaxDeductionComponent();
+        PayrollTaxDeductionMaster payrollTaxDeductionMaster = new PayrollTaxDeductionMaster();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        
+        BindException errors = new BindException(payrollTaxDeductionComponentCreate, "payrollTaxDeductionComponentCreate");
+        sectionList(request);  
+        bind(request, payrollTaxDeductionComponentCreate);
+              
+        if(null != payrollTaxDeductionComponentCreate.getPayrollTaxDeductionMaster().getId())
+        {
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date updatedDate = new Date(); 
+        
         payrollTaxDeductionComponentValidator.validate(payrollTaxDeductionComponentCreate, errors);
         if(errors.hasErrors())
         {
             request.setAttribute("faliureMessage",
-                        "Error : The Tax Deduction Component Creation is not valid.");
+                        "Error : The Tax Deduction Component Updation is not valid.");
             mv.addAllObjects(errors.getModel());
-            mv = createTaxDeductionComponentClick(request,response);
+            mv.setViewName("Payroll/PayrollTaxDeductionComponentEdit");
         }
         else
         {
             payrollTaxDeductionComponentCreate.setTdcStatus(0);
-            payrollTaxDeductionComponentCreate.setCreatedBy(employeeMaster.getId());
-            payrollTaxDeductionComponentCreate.setCreatedDate(sdf.format(createdDate));
-            payrollTaxDeductionComponentService.create(payrollTaxDeductionComponentCreate);
+            payrollTaxDeductionComponentCreate.setUpdatedBy(employeeMaster.getId());
+            payrollTaxDeductionComponentCreate.setUpdatedDate(sdf.format(updatedDate));
+            payrollTaxDeductionComponentService.update(payrollTaxDeductionComponentCreate);
 
-            request.setAttribute("successMessage","Information: The Tax Deduction Component is Created successfully");
+            request.setAttribute("successMessage","Information: The Tax Deduction Component is Updated successfully");
             mv.getModelMap().put("employeeMaster", employeeMaster);
             mv.getModelMap().put("payrollTaxDeductionComponentCreate", payrollTaxDeductionComponentCreate);
             
             mv = showTaxDeductionComponent(request, response);
         }
-        
+        } else{
+            request.setAttribute("faliureMessage",
+                        "Error : You selected black Section.");
+            mv.getModelMap().put("employeeMaster", employeeMaster);
+            mv.getModelMap().put("payrollTaxDeductionComponentCreate", payrollTaxDeductionComponentCreate);
+            mv.setViewName("Payroll/PayrollTaxDeductionComponentEdit");  
+        }
         return mv;
     }
-    
-    public ModelAndView viewTaxDeductionComponentDetail(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-
-        ModelAndView mv = new ModelAndView();
-        PayrollTaxDeductionComponent payrollTaxDeductionComponent = new PayrollTaxDeductionComponent();
-        PayrollTaxDeductionMaster payrollTaxDeductionMaster = new PayrollTaxDeductionMaster();
-        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         
-        String id = request.getParameter("id");
-        payrollTaxDeductionMaster = payrollTaxDeductionMasterService.readById(Integer.parseInt(id));
-        
-        List<?> componentList = payrollTaxDeductionComponentService.readByComponentId(Integer.parseInt(id));
-
-        mv.getModelMap().put("payrollTaxDeductionComponent", payrollTaxDeductionComponent);
-        mv.getModelMap().put("payrollTaxDeductionMaster", payrollTaxDeductionMaster);
-        mv.getModelMap().put("employeeMaster", employeeMaster);
-        mv.getModelMap().put("componentList", componentList);
-       
-        mv.setViewName("Payroll/PayrollTaxDeductionComponentCreate");
-        return mv;
-    }
-    
     public ModelAndView deleteTaxDeductionComponentSubmit(HttpServletRequest request, HttpServletResponse response)
     {
         ModelAndView mv = new ModelAndView();
@@ -259,7 +353,7 @@ public class PayrollTaxDeductionMasterController extends PayrollTaxDeductionMast
         for (String z : savingList) {
             try {
                 
-                payrollTaxDeductionMasterService.delete(Integer.parseInt(z));
+                payrollTaxDeductionComponentService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
                         "Info : One or more records are deleted successfully.");
             } catch (Exception e) {
@@ -268,34 +362,9 @@ public class PayrollTaxDeductionMasterController extends PayrollTaxDeductionMast
         }
         
         mv.getModelMap().put("payrollTaxDeductionComponentCreate", payrollTaxDeductionComponentCreate);
-        mv.setViewName("Payroll/PayrollTaxDeductionComponentCreate");
         mv = showTaxDeductionComponent(request, response);
         return mv;
         
     }
     
-    public ModelAndView editTaxDeductionComponentClick(HttpServletRequest request, HttpServletResponse response)
-    {
-        ModelAndView mv = new ModelAndView();
-        PayrollTaxDeductionComponent payrollTaxDeductionComponentCreate = new PayrollTaxDeductionComponent();
-        
-        String id = request.getParameter("id");
-       
-        List<PayrollTaxDeductionComponent> componentList = (List<PayrollTaxDeductionComponent>) payrollTaxDeductionComponentService.readByComponentId(Integer.parseInt(id));
-
-        mv.getModelMap().put("payrollTaxDeductionComponentCreate", payrollTaxDeductionComponentCreate);
-        mv.getModelMap().put("componentList", componentList);
-        mv.setViewName("Payroll/PayrollTaxDeductionComponentEdit");
-
-        return mv; 
-    }
-    
-    public ModelAndView editTaxDeductionComponentSubmit(HttpServletRequest request, HttpServletResponse response)
-    {
-        ModelAndView mv = new ModelAndView();
-        PayrollTaxDeductionComponent payrollTaxDeductionComponentCreate = new PayrollTaxDeductionComponent();
-        mv.getModelMap().put("payrollTaxDeductionComponentCreate", payrollTaxDeductionComponentCreate);
-        mv.setViewName("Payroll/PayrollTaxDeductionComponentCreate");
-        return mv;
-    }
 }

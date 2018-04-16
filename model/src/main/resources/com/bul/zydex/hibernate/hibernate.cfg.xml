@@ -145,5 +145,7 @@
     <mapping resource="com/bul/zydex/model/EmployeeCtcDetailSalary.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/PayrollTaxDeductionMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/PayrollTaxDeductionComponent.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/PayrollTaxDeclarationPeriodMaster.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/PayrollTaxRateMaster.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

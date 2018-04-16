@@ -1210,5 +1210,15 @@
         <property name="payrollTaxDeductionComponentValidator" ref="payrollTaxDeductionComponentValidator1"></property> 
     </bean>
     
+    <bean id="payrollTaxDeclarationPeriodMasterController1" class="com.bul.zydex.controller.Payroll.PayrollTaxDeclarationPeriodMasterController"  parent="controllerConfig">
+        <property name="payrollTaxDeclarationPeriodMasterService" ref="payrollTaxDeclarationPeriodMasterService1"></property>
+        <property name="payrollFinancialYearService" ref="payrollFinancialYearService1"></property>
+        <property name="payrollTaxDeclarationPeriodMasterValidator" ref="payrollTaxDeclarationPeriodMasterValidator1"></property>
+    </bean>
+    
+    <bean id="payrollTaxRateMasterController1" class="com.bul.zydex.controller.Payroll.PayrollTaxRateMasterController" parent="controllerConfig">
+        <property name="payrollTaxRateMasterService" ref="payrollTaxRateMasterService1" />
+        <property name="payrollTaxRateMasterValidator" ref="payrollTaxRateMasterValidator1" />
+    </bean>
 </beans>
  

@@ -123,31 +123,40 @@
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <div class="col-sm-12">
+                                                    <div class="col-sm-6">
                                                         <label>Employee Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="employeeMasterByRefForEmpId"  class="form-control" onchange="return valEmp()"></form:input>
                                                         <form:errors path="employeeMasterByRefForEmpId" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div><!-- /.col -->
+                                                        <div class="col-sm-3" id="yearid" >
+                                                            <label>Year:</label>
+                                                            <select name="cycleYear" id="cycleYear" class="form-control"/>
+                                                            <!--<option value="">--SELECT--</option>-->
+                                                        <c:forEach var="cycleYear" items="${cycleYear}">
+                                                            <option value="${cycleYear}">${cycleYear}</option>
+                                                        </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                </div><!-- /.col -->
 
-                                                </div><!-- /.row -->
-                                            </div><!-- /.box-body -->
-                                        </div>
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
                                     </div>
-                                    <div class="box box-info collapsed-box">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Details of Employee who is giving a feedback:</h3>
-                                            <div class="box-tools pull-right">
-                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>-->
-                                                <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
-                                            </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <label>Employee Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                </div>
+                                <div class="box box-info collapsed-box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Details of Employee who is giving a feedback:</h3>
+                                        <div class="box-tools pull-right">
+                                            <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>-->
+                                            <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
+                                        </div>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <label>Employee Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="employeeMasterByRefDoneEmpId" class="form-control"></form:input>
                                                         <form:errors path="employeeMasterByRefDoneEmpId" cssClass="errorDiv"></form:errors>
                                                         </div>

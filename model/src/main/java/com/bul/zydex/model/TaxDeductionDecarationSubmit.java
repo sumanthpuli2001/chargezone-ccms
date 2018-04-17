@@ -40,6 +40,7 @@ public class TaxDeductionDecarationSubmit implements java.io.Serializable {
         this.attachment = attachment;
     }
 
+
     public Integer getId() {
         return id;
     }
@@ -79,6 +80,7 @@ public class TaxDeductionDecarationSubmit implements java.io.Serializable {
     public void setAmountTaxDecaration(Double amountTaxDecaration) {
         this.amountTaxDecaration = amountTaxDecaration;
     }
+
 
     public Integer getStatus() {
         return status;

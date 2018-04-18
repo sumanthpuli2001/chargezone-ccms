@@ -782,6 +782,18 @@
                                     <li><a href="employeeTypeWiseSalary.htm?act=showResult"><i class="fa fa-circle-o"></i>Assign Salary</a></li>
                                     <li><a href="additionalAmountCheck.htm?act=showResult"><i class="fa fa-circle-o"></i>Additional Amount Check</a></li>
                                     <li><a href="payrollEmployeeFormSixteen.htm?act=redirectToFormEmployeeSaving&search=none"><i class="fa fa-circle-o"></i>Employee Saving</a></li>
+                                    <li>
+                                        <a href="payrollTaxDeduction.htm?act=taxDeductionCreate"><i class="fa fa-circle-o"></i>Tax Deduction Master</a>
+                                    </li>
+                                    <li>
+                                        <a href="payrollTaxDeduction.htm?act=showTaxDeductionComponent"><i class="fa fa-circle-o"></i>Tax Deduction Component</a>
+                                    </li>
+                                    <li>
+                                        <a href="payrollTaxDeclaration.htm?act=showPeriod"><i class="fa fa-circle-o"></i>Tax Declaration Period</a>
+                                    </li>
+                                    <li>
+                                        <a href="payrollTaxRate.htm?act=showTaxRateList"><i class="fa fa-circle-o"></i>Tax Rate Master</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>

@@ -97,7 +97,7 @@
                                                                         /></td>
                                                             <td>
                                                                 <div class="col-sm-6">
-                                                                    <span>[ <a href="employeeMaster.htm?act=downloadEmployeeCertificates&amp;fileName=&userId=">${listOfLoan1[3][1]}</a> ]</span>
+                                                                    <span>[ <a href="employeeMaster.htm?act=downloadEmployeeCertificates&amp;fileName=&userId="></a> ]</span>
                                                                 </div>
                                                             </td>
 

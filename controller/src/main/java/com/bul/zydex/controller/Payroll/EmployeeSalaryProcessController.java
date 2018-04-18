@@ -1280,8 +1280,10 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 bonusExcel1 = Double.parseDouble(bonusExcel);
                             }
                             EmployeeMaster employeeMaster = new EmployeeMaster();
-                            int empNo = Integer.parseInt(employeeNo);
-                            List<?> list = employeeMasterService.readByEmployeeNo(empNo);
+//                            int empNo = Integer.parseInt(employeeNo);
+//                            int empNo = Integer.parseInt(employeeNo);
+                            
+                            List<?> list = employeeMasterService.readByEmployeeNo1(employeeNo);
                             if (!list.isEmpty()) {
                                 employeeMaster = (EmployeeMaster) list.get(0);
                                 int empId = employeeMaster.getId();

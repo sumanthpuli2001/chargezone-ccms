@@ -1932,4 +1932,12 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
          }
     }
 
+    @Override
+    public List<?> readByEmployeeNo1(String employeeNo) {
+        String query = "";
+        query += "From EmployeeMaster a "
+                + " Where a.employeeId = '" + employeeNo + "'";
+        return getHibernateTemplate().find(query);
+    }
+
 }

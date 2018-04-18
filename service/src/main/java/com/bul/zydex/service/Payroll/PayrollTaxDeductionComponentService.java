@@ -15,4 +15,6 @@ import java.util.List;
 public interface PayrollTaxDeductionComponentService<T> extends GenericsService<T> {
 
     public List<?> readTaxDeductionComponentforFromSixteen(int taxdeductionMasterid);
+
+    public int getTaxMasterID(int componentID);
 }

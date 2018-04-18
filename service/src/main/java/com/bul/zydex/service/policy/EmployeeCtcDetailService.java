@@ -23,4 +23,6 @@ public interface EmployeeCtcDetailService<T> extends GenericsService<T> {
 
     public List<?> readByEmployeCtcReport(int employeeid, String month, String year);
 
+    public List<?> readctcRegistration(int employeeid);
+
 }

@@ -6,11 +6,15 @@
 package com.bul.zydex.service.Payroll;
 
 import com.bul.zydex.service.GenericsService;
+import java.util.List;
 
 /**
  *
  * @author Hussain
  */
 public interface TaxDeductionDecarationSubmitService<T> extends GenericsService<T> {
-    
+
+    public List<?> readTaxDeductionDecarationSubmit(int taxSavingSubmitID);
+
+    public List<?> readTaxDeductionDecarationSubmitAmount(int taxSavingSubmitID,int taxDeductionMaster,int taxDeductioncomponent);
 }

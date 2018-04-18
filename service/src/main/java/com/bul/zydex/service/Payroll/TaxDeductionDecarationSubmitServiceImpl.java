@@ -7,6 +7,7 @@ package com.bul.zydex.service.Payroll;
 
 import com.bul.zydex.dao.Payroll.TaxDeductionDecarationSubmitDAO;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.List;
 
 /**
  *
@@ -23,6 +24,16 @@ public class TaxDeductionDecarationSubmitServiceImpl<T> extends GenericsServiceI
     public void setTaxDeductionDecarationSubmitDAO(TaxDeductionDecarationSubmitDAO<T> taxDeductionDecarationSubmitDAO) {
         this.taxDeductionDecarationSubmitDAO = taxDeductionDecarationSubmitDAO;
         setGenericsDAO(taxDeductionDecarationSubmitDAO);
+    }
+
+    @Override
+    public List<?> readTaxDeductionDecarationSubmit(int taxSavingSubmitID) {
+       return taxDeductionDecarationSubmitDAO.readTaxDeductionDecarationSubmit(taxSavingSubmitID);
+    }
+
+    @Override
+    public List<?> readTaxDeductionDecarationSubmitAmount(int taxSavingSubmitID,int taxDeductionMaster,int taxDeductioncomponent) {
+       return taxDeductionDecarationSubmitDAO.readTaxDeductionDecarationSubmitAmount(taxSavingSubmitID, taxDeductionMaster, taxDeductioncomponent);
     }
     
 }

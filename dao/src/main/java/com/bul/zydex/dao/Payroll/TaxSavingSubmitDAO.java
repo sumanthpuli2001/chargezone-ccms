@@ -6,11 +6,16 @@
 package com.bul.zydex.dao.Payroll;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.List;
 
 /**
  *
  * @author Hussain
  */
 public interface TaxSavingSubmitDAO<T> extends GenericsDAO<T> {
-    
+
+    public boolean isExist(Integer empID, Integer finicailyear);
+
+    public List<?> readTaxSavingSubmit(int EmplID,int finicailyear);
+
 }

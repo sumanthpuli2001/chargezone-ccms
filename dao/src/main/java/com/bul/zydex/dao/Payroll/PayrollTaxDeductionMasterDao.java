@@ -22,4 +22,6 @@ public interface PayrollTaxDeductionMasterDao<T> extends GenericsDAO<T> {
 
     public List<?> readTaxDeductionForFormSixteen();
 
+    public List<?> readTaxDeductionForFormSixteenFetch(int taxMasterid);
+
 }

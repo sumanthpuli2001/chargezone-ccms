@@ -683,7 +683,7 @@
         <property name="payrollFormSixteenMasterService" ref="payrollFormSixteenMasterService1" />
         <property name="payrollFormSixteenMasterValidator" ref="payrollFormSixteenMasterValidator1" />
         <property name="payrollFinancialYearService" ref="payrollFinancialYearService1" />
-
+      
     </bean>
     <bean id="payrollStationWiseSavingTaxController1" class="com.bul.zydex.controller.Payroll.PayrollStationWiseSavingTaxController" parent="controllerConfig" >
         <property name="payrollStationWiseSavingTaxService" ref="payrollStationWiseSavingTaxService1" />
@@ -816,6 +816,8 @@
         <property name="payrollSavingAmountService" ref="payrollSavingAmountService1" />
         <property name="payrollTaxDeductionMasterService" ref="payrollTaxDeductionMasterService1"></property>
         <property name="payrollTaxDeductionComponentService" ref="payrollTaxDeductionComponentService1"/>
+        <property name="taxDeductionDecarationSubmitService" ref="taxDeductionDecarationSubmitService1"/>
+        <property name="taxSavingSubmitService" ref="taxSavingSubmitService1"/>
     </bean>
     <bean id="payrollSavingAmountController1" class="com.bul.zydex.controller.Payroll.PayrollSavingAmountController" parent="controllerConfig" >
         <property name="payrollSavingAmountService" ref="payrollSavingAmountService1" />

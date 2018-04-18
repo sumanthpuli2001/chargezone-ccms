@@ -45,6 +45,11 @@ public class PayrollTaxDeductionMasterServiceImpl<T> extends GenericsServiceImpl
        return payrollTaxDeductionMasterDao.readTaxDeductionForFormSixteen();
     }
 
+    @Override
+    public List<?> readTaxDeductionForFormSixteenFetch(int taxMasterid) {
+      return payrollTaxDeductionMasterDao.readTaxDeductionForFormSixteenFetch(taxMasterid);
+    }
+
 
 
     

@@ -1348,15 +1348,15 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>PF No.:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>PF No.:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:input path="pfNo" id="pfNo" class="form-control"></form:input>
-                                                        <form:errors path="pfNo" cssClass="errorDiv"></form:errors>
+                                                        <%--<form:errors path="pfNo" cssClass="errorDiv"></form:errors>--%>
                                                         </div> 
 
                                                         <div class="col-sm-6">
-                                                            <label>UAN No.:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>UAN No.:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:input path="uanNo" id="uanNo"  class="form-control"></form:input>
-                                                        <form:errors path="uanNo" cssClass="errorDiv"></form:errors>
+                                                        <%--<form:errors path="uanNo" cssClass="errorDiv"></form:errors>--%>
                                                         </div>  
                                                     </div>  
 

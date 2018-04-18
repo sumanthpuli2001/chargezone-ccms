@@ -1054,9 +1054,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
         EmployeeCtcDetail employeeCtcDetail = new EmployeeCtcDetail();
 //       Boolean check =  employeePolicyDetailService.deleteByEmployeeId(employeeMaster.getId());
-        List<?> ctcDetail = employeeCtcDetailService.readctc(employeeMaster.getId());
-        for (Object policyObject : ctcDetail) {
-            employeeCtcDetail = (EmployeeCtcDetail) policyObject;
+        List<?> ctcDetail = employeeCtcDetailService.readctcRegistration(employeeMaster.getId());
+        for (Object policyObject1 : ctcDetail) {
+            employeeCtcDetail = (EmployeeCtcDetail) policyObject1;
             employeeCtcDetailService.delete(employeeCtcDetail.getId());
         }
 //        EmployeeCtcDetail employeeCtcDetail = new EmployeeCtcDetail();

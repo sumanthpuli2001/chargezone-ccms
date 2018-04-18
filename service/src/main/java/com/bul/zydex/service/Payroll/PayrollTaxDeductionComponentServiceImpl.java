@@ -30,5 +30,10 @@ public class PayrollTaxDeductionComponentServiceImpl<T> extends GenericsServiceI
     public List<?> readTaxDeductionComponentforFromSixteen(int taxdeductionMasterid) {
        return payrollTaxDeductionComponentDao.readTaxDeductionComponentforFromSixteen(taxdeductionMasterid);
     }
+
+    @Override
+    public int getTaxMasterID(int componentID) {
+         return payrollTaxDeductionComponentDao.getTaxMasterID(componentID);
+    }
     
 }

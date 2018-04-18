@@ -47,4 +47,9 @@ public class EmployeeCtcDetailServiceImpl<T> extends GenericsServiceImpl<T> impl
        return employeeCtcDetailDAO.readByEmployeCtcReport(employeeid, month, year);
     }
 
+    @Override
+    public List<?> readctcRegistration(int employeeid) {
+       return employeeCtcDetailDAO.readctcRegistration(employeeid);
+    }
+
 }

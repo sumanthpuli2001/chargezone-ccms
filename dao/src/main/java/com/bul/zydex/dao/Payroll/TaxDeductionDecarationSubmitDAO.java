@@ -6,11 +6,15 @@
 package com.bul.zydex.dao.Payroll;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.List;
 
 /**
  *
  * @author Hussain
  */
 public interface TaxDeductionDecarationSubmitDAO<T> extends GenericsDAO<T> {
-    
+
+    public List<?> readTaxDeductionDecarationSubmit(int taxSavingSubmitID);
+
+    public List<?> readTaxDeductionDecarationSubmitAmount(int taxSavingSubmitID,int taxDeductionMaster,int taxDeductioncomponent);
 }

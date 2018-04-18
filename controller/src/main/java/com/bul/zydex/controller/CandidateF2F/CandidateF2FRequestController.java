@@ -62,6 +62,20 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.setViewName("CandidateFtoF/candidateF2FInvitation");
         request.setAttribute("successMessage",
                     "Information : The Candidate Face To Face Invitation successfully.");
+        
+                try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                // id ( Not created id 138) is for Face To Face Invitation User....
+                emailTemplate = emailTemplateService.readById(138);
+                String To = cja.getCandidateApplyJob().getEmailId();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{user\\}", cja.getCandidateApplyJob().getName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
+        
         return mv;
     }
 
@@ -174,6 +188,20 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.setViewName("Recruitment/CandidateRequestList");
         request.setAttribute("successMessage",
                 "Information : The Candidate Shortlisted successfully.");
+        
+               try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                // id ( Not created id 138) is for Shortlisted User....
+                emailTemplate = emailTemplateService.readById(138);
+                String To = cja.getCandidateApplyJob().getEmailId();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{user\\}", cja.getCandidateApplyJob().getName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
+        
         return mv;
     }
 

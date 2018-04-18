@@ -14,6 +14,7 @@ import java.util.List;
  * @author DELL3
  */
 public class PayrollTaxDeductionMasterServiceImpl<T> extends GenericsServiceImpl<T> implements PayrollTaxDeductionMasterService<T> {
+    
     private PayrollTaxDeductionMasterDao<T> payrollTaxDeductionMasterDao;
  
     public PayrollTaxDeductionMasterDao<T> getPayrollTaxDeductionMasterDao() {
@@ -31,8 +32,8 @@ public class PayrollTaxDeductionMasterServiceImpl<T> extends GenericsServiceImpl
     }
 
     @Override
-    public List<?> readByComponentId(int parseInt) {
-        return payrollTaxDeductionMasterDao.readByComponentId();
+    public List<?> readSectionByName(String sectionName) {
+        return payrollTaxDeductionMasterDao.readSectionByName(sectionName);
     }
 
     @Override
@@ -43,6 +44,11 @@ public class PayrollTaxDeductionMasterServiceImpl<T> extends GenericsServiceImpl
     @Override
     public List<?> readTaxDeductionForFormSixteen() {
        return payrollTaxDeductionMasterDao.readTaxDeductionForFormSixteen();
+    }
+
+    @Override
+    public List<?> readByComponentId(int parseInt) {
+      return payrollTaxDeductionMasterDao.readByComponentId(parseInt);
     }
 
 

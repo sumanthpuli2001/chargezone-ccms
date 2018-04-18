@@ -15,5 +15,5 @@ import com.bul.zydex.service.GenericsService;
 public interface PayrollFinancialYearService<T> extends GenericsService<T>{
 
     public boolean isExist(PayrollFinancialYear payrollFinancialYear);
-    
+   
 }

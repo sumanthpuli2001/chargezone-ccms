@@ -10,6 +10,7 @@ import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.JobtypeMaster;
 import com.bul.zydex.model.LocationMaster;
@@ -728,6 +729,20 @@ public class RecruitmentController extends RecruitmentAbstract {
             mprApprovalHistoryService.create(mprApprovalHistory);
             request.setAttribute("successMessage",
                     "Information : The Request is Approved successfully.");
+
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                // id ( Not created id 138) is for Approved User....
+                emailTemplate = emailTemplateService.readById(138);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
+
         }
         if (btnType.equals("Return")) {
 //            mprMaster = mprMasterService.readById(Integer.parseInt(empreqid));
@@ -758,6 +773,20 @@ public class RecruitmentController extends RecruitmentAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The Request is Returned successfully.");
+
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                // id ( Not created id 138) is for Returned User....
+                emailTemplate = emailTemplateService.readById(138);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
+
         }
         if (btnType.equals("Reject")) {
 //            mprMaster = mprMasterService.readById(Integer.parseInt(empreqid));
@@ -778,6 +807,19 @@ public class RecruitmentController extends RecruitmentAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The Request is Rejectd successfully.");
+
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                // id ( Not created id 138) is for Rejectd User....
+                emailTemplate = emailTemplateService.readById(138);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
 
         }
         mv.getModelMap().put("mprMaster", mprMaster);
@@ -1095,7 +1137,20 @@ public class RecruitmentController extends RecruitmentAbstract {
             recruitmentApprovalHistoryService.create(approvalHistory);
             request.setAttribute("successMessage",
                     "Information : The Request is Approved successfully.");
-                    }
+
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                // id ( Not created id 138) is for Approved User....
+                emailTemplate = emailTemplateService.readById(138);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
+        }
         if (btnType.equals("Recycle")) {
 
             if (userLevel > 1) {
@@ -1124,7 +1179,21 @@ public class RecruitmentController extends RecruitmentAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The Request is Returned successfully.");
-                        }
+
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                // id ( Not created id 138) is for Returned User....
+                emailTemplate = emailTemplateService.readById(138);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
+
+        }
         if (btnType.equals("Reject")) {
 
             recruitmentMaster.setMppStatus(3);
@@ -1145,7 +1214,20 @@ public class RecruitmentController extends RecruitmentAbstract {
             request.setAttribute("successMessage",
                     "Information : The Request is Rejectd successfully.");
 
-                            }
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                // id ( Not created id 138) is for Rejectd User....
+                emailTemplate = emailTemplateService.readById(138);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
+
+        }
         mv.getModelMap().put("recruitmentMaster", recruitmentMaster);
         mv = approvalMppCreate(request, response);
         return mv;

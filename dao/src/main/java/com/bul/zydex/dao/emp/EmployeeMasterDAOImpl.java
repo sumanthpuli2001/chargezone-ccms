@@ -1902,34 +1902,71 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
     }
 
     @Override
-    public List<?> readEmployeeList(int id,int empid) {
-       String query1 = "  "
+    public List<?> readEmployeeList(int id, int empid) {
+        String query1 = "  "
                 + "FROM UserRightMaster a "
                 + " WHERE a.userMaster.id = " + id
                 + " and a.hr =1";
 
-         List<?> list1 = getHibernateTemplate().find(query1);
-         if(list1.isEmpty()){
-        String query = "";
-        query += " "
-                + " SELECT a.id, a.employeeName, b.departmentName, c.designationName "
-                + " FROM EmployeeMaster a "
-                + " left join a.departmentMaster b "
-                + " left join a.designationMaster c "
-                + " WHERE a.reportingManagerLevel1=" + empid;
+        List<?> list1 = getHibernateTemplate().find(query1);
+        if (list1.isEmpty()) {
+            String query = "";
+            query += " "
+                    + " SELECT a.id, a.employeeName, b.departmentName, c.designationName "
+                    + " FROM EmployeeMaster a "
+                    + " left join a.departmentMaster b "
+                    + " left join a.designationMaster c "
+                    + " WHERE a.reportingManagerLevel1=" + empid;
 
-        return getHibernateTemplate().find(query);}
-         else{
-             String query = "";
-         query += " "
-                + " SELECT a.id, a.employeeName, b.departmentName, c.designationName "
-                + " FROM EmployeeMaster a "
-                + " left join a.departmentMaster b "
-                + " left join a.designationMaster c ";
-              
+            return getHibernateTemplate().find(query);
+        } else {
+            String query = "";
+            query += " "
+                    + " SELECT a.id, a.employeeName, b.departmentName, c.designationName "
+                    + " FROM EmployeeMaster a "
+                    + " left join a.departmentMaster b "
+                    + " left join a.designationMaster c ";
 
-        return getHibernateTemplate().find(query);
-         }
+            return getHibernateTemplate().find(query);
+        }
     }
 
+    @Override
+    public List<?> checkSubordinate(int empId, int managerEmpId) {
+
+        String query = "";
+        query += " "
+                + " FROM EmployeeMaster a "
+                + " Where ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) "
+                + " AND a.id = " + managerEmpId
+                + " AND (a.reportingManagerLevel1= " + empId
+                + " Or a.reportingManagerLevel2= " + empId
+                + " Or a.reportingManagerLevel3= " + empId
+                + " Or a.reportingManagerLevel4= " + empId
+                + " Or a.reportingManagerLevel5= " + empId
+                + " Or a.reportingManagerLevel6= " + empId
+                + ")";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> checkSuprior(int empId, int managerEmpId) {
+
+        String query = "";
+        query += " "
+                + " FROM EmployeeMaster a "
+                + " Where ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) "
+                + " AND a.id = " + empId
+                + " AND (a.reportingManagerLevel1= " + managerEmpId
+                + " Or a.reportingManagerLevel2= " + managerEmpId
+                + " Or a.reportingManagerLevel3= " + managerEmpId
+                + " Or a.reportingManagerLevel4= " + managerEmpId
+                + " Or a.reportingManagerLevel5= " + managerEmpId
+                + " Or a.reportingManagerLevel6= " + managerEmpId
+                + ")";
+        return getHibernateTemplate().find(query);
+    }
+  
 }

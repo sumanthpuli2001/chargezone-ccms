@@ -2,29 +2,29 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.PayrollTaxDeductionMaster" table="payroll_tax_deduction_master">
+    <class name="com.bul.zydex.model.PayrollTaxDeductionMaster" table="payroll_tax_deduction_master" catalog="hr_power_astral">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
         
-        <property name="section" type="string">
-            <column name="section" />
+        <property name="section" type="string" not-null="true">
+            <column name="section" unique="true" />
         </property>
         
-        <property name="taxSavingLimit" type="java.lang.Integer">
+        <property name="taxSavingLimit" type="java.lang.Integer" not-null="true">
             <column name="tax_saving_limit"/>
         </property>
         
-        <property name="description" type="string">
+        <property name="description" type="string" not-null="true">
              <column name="description"/>
         </property>
               
-        <property name="additionalTaxBenefit" type="java.lang.Integer">
+        <property name="additionalTaxBenefit" type="java.lang.Integer" not-null="true">
             <column name="additional_tax_benefit"/>
         </property>
         
-        <property name="tdStatus" type="java.lang.Integer">
+        <property name="tdStatus" type="java.lang.Integer" not-null="true">
             <column name="td_status" />
         </property>
         

@@ -11,7 +11,7 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Tax Deduction New</title>
+        <title>Tax Deduction Edit</title>
     </head>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

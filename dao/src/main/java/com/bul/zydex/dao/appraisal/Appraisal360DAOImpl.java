@@ -54,8 +54,8 @@ public class Appraisal360DAOImpl<T> extends GenericsDAOImpl<T> implements Apprai
 
         List list = getHibernateTemplate().find(query);
         if (!list.isEmpty()) {
-          long  l =   (long) list.get(0);
-          i =(int) l;
+            long l = (long) list.get(0);
+            i = (int) l;
         }
         return i;
     }
@@ -180,6 +180,29 @@ public class Appraisal360DAOImpl<T> extends GenericsDAOImpl<T> implements Apprai
                 + " LEFT JOIN b.levelMaster f "
                 + " WHERE status=1" + condition
                 + " Group By a.employeeMasterByRefForEmpId";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public List<?> readByEmpIdAndYear(int empId, String Year) {
+        String query = "";
+        query += " "
+                + " FROM AppraisalFeedback360 a "
+                + " Where a.employeeMasterByRefForEmpId =" + empId
+                + " And a.feedbackYear = '" + Year + "'";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+    @Override
+    public List<?> readByEmpIdAndCname(int empId, String CycleName) {
+        String query = "";
+        query += " "
+                + " FROM AppraisalFeedback360 a "
+                + " Where a.employeeMasterByRefForEmpId =" + empId
+                + " And a.cycleName = '" + CycleName + "'";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

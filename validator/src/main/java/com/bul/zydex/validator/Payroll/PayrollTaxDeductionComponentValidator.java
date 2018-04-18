@@ -25,8 +25,9 @@ public class PayrollTaxDeductionComponentValidator implements Validator {
     public void validate(Object o, Errors errors) {
         
         PayrollTaxDeductionComponent payrollTaxDeductionComponentCreate = (PayrollTaxDeductionComponent) o;
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "payrollTaxDeductionMaster.id", "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "componentId", "field.error1", "none");
+        
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "payrollTaxDeductionMaster.id", "field.error13", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "component", "field.error1", "none");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "ageLimit", "field.error1", "none");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "taxSavingLimit", "field.error1", "none");
     }

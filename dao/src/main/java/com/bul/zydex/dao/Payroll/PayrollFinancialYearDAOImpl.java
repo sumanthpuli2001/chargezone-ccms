@@ -18,5 +18,12 @@ public class PayrollFinancialYearDAOImpl<T> extends GenericsDAOImpl<T> implement
     protected Class getDomainClass() {
         return PayrollFinancialYear.class;
     }
+
+//    public PayrollFinancialYear readByFinancialId(int parseInt) {
+//        String query = "SELECT a from "
+//                + " PayrollFinancialYear a "
+//                + " WHERE a.id = "+parseInt;
+//        return (PayrollFinancialYear) getHibernateTemplate().find(query);
+//    }
     
 }

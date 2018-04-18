@@ -45,12 +45,12 @@
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label>Section:<span style="color: red;font-size: 12px;">*</span></label>
-                                                <form:input path="section" placeholder="Enter Section" class="form-control"></form:input>
+                                                <form:input path="section" placeholder="Enter Section" name="section" id="section" class="form-control"></form:input>
                                                 <form:errors path="section" cssClass="errorDiv"></form:errors>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Tax Saving Limit:<span style="color: red;font-size: 12px;">*</span></label>
-                                                <form:input path="taxSavingLimit"  type="number" placeholder="Enter Tax Saving Limit"  class="form-control"></form:input>
+                                                <form:input path="taxSavingLimit"  type="number" placeholder="Enter Tax Saving Limit"  min="0" class="form-control"></form:input>
                                                 <form:errors path="taxSavingLimit" cssClass="errorDiv"></form:errors> 
                                             </div>
                                         </div>
@@ -62,13 +62,13 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Additional Tax Benefit:<span style="color: red;font-size: 12px;">*</span></label>
-                                                 <form:input path="additionalTaxBenefit" type="number" placeholder="Enter Additional Tax Benefit" class="form-control"></form:input>
+                                                 <form:input path="additionalTaxBenefit" type="number" placeholder="Enter Additional Tax Benefit" min="0" class="form-control"></form:input>
                                                 <form:errors path="additionalTaxBenefit" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-6 col-sm-offset-5">
-                                                <input type="submit" class="btn btn-primary" style="width: 100px;" onclick="return pepe();" title="" value="SUBMIT">
+                                                <input type="submit" class="btn btn-primary" style="width: 100px;" title="" value="SUBMIT">
                                             </div>
                                         </div>
                                 </form:form>

@@ -628,16 +628,23 @@
     <bean id="payrollTaxDeductionMasterService1" class="com.bul.zydex.service.Payroll.PayrollTaxDeductionMasterServiceImpl">
         <property name="payrollTaxDeductionMasterDao" ref="payrollTaxDeductionMasterDao1"/>
     </bean>
-    <bean id="employeeCtcDetailSalaryService1" class="com.bul.zydex.service.EmployeeCtcDetailSalary.EmployeeCtcDetailSalaryServiceImpl">
-        <property name="employeeCtcDetailSalaryDAO" ref="employeeCtcDetailSalaryDAO1"/>
-    </bean>
     <bean id="payrollTaxDeductionComponentService1" class="com.bul.zydex.service.Payroll.PayrollTaxDeductionComponentServiceImpl">
         <property name="payrollTaxDeductionComponentDao" ref="payrollTaxDeductionComponentDao1"/>
     </bean>
+    <bean id="employeeCtcDetailSalaryService1" class="com.bul.zydex.service.EmployeeCtcDetailSalary.EmployeeCtcDetailSalaryServiceImpl">
+        <property name="employeeCtcDetailSalaryDAO" ref="employeeCtcDetailSalaryDAO1"/>
+    </bean>
+   
     <bean id="taxDeductionDecarationSubmitService1" class="com.bul.zydex.service.Payroll.TaxDeductionDecarationSubmitServiceImpl">
         <property name="taxDeductionDecarationSubmitDAO" ref="taxDeductionDecarationSubmitDAO1"/>
     </bean>
     <bean id="taxSavingSubmitService1" class="com.bul.zydex.service.Payroll.TaxSavingSubmitServiceImpl">
         <property name="taxSavingSubmitDAO" ref="taxSavingSubmitDAO1"/>
+    </bean>
+    <bean id="payrollTaxDeclarationPeriodMasterService1" class="com.bul.zydex.service.Payroll.PayrollTaxDeclarationPeriodMasterServiceImpl">
+        <property name="payrollTaxDeclarationPeriodMasterDao" ref="payrollTaxDeclarationPeriodMasterDao1"/>
+    </bean>
+    <bean id="payrollTaxRateMasterService1" class="com.bul.zydex.service.Payroll.PayrollTaxRateMasterServiceImpl">
+        <property name="payrollTaxRateMasterDao" ref="payrollTaxRateMasterDao1" />
     </bean>
 </beans>

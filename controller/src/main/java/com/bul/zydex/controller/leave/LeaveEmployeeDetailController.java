@@ -3592,7 +3592,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     mv = employeeLeaveApplicationClick(request, response);
                 }
             } catch (Exception e) {
-            
+
                 request.setAttribute("failureMessage",
                         "Error : Please Insert Valid Data.");
                 request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);

@@ -193,32 +193,32 @@
                                                                                 <li>
                                                                                     <a href="#" data-toggle="modal" data-target="#myModal"
                                                                                        onclick="viewClick(${leaveType[0]});">
-                                                                                    &nbsp;&nbsp;CL
+                                                                                    &nbsp;&nbsp;CL--${leaveType[0]}
                                                                                 </a>
                                                                             </li>
                                                                             <li>
                                                                                 <a href="#" data-toggle="modal" data-target="#myModal"
                                                                                    onclick="viewClick(${leaveType[1]});">
-                                                                                    &nbsp;&nbsp;SL
+                                                                                    &nbsp;&nbsp;SL ---${leaveType[1]}
                                                                                 </a>
                                                                             </li>
                                                                             <li>
                                                                                 <a href="#" data-toggle="modal" data-target="#myModal"
                                                                                    onclick="viewClick(${leaveType[2]});">
-                                                                                    &nbsp;&nbsp;PL
+                                                                                    &nbsp;&nbsp;PL --${leaveType[2]}
                                                                                 </a>
                                                                             </li>
                                                                             <li>
                                                                                 <a href="#" data-toggle="modal" data-target="#myModal"
                                                                                    onclick="viewClick(${leaveType[4]});">
-                                                                                    &nbsp;&nbsp;Short Leave
+                                                                                    &nbsp;&nbsp;Short Leave --${leaveType[4]}
                                                                                 </a>
                                                                             </li>
                                                                             <c:if test="${leaveType[3] ne '0'}">
                                                                                 <li>
                                                                                     <a href="#" data-toggle="modal" data-target="#myModal"
                                                                                        onclick="viewClick(${leaveType[3]});">
-                                                                                        &nbsp;&nbsp;PTL
+                                                                                        &nbsp;&nbsp;PTL --${leaveType[3]}
                                                                                     </a>
                                                                                 </li>
                                                                             </c:if>

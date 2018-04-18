@@ -3812,32 +3812,8 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         {
             if (!goalApproval.equals("Approved")) {
                 goalApproval = "Pendding";
-            } //                goalSetting = "Pendding";        //            }        // Middel year        //                        Date MidendDate = dateFormat.parse(appraisalFillingData.getMidYearEndDate());        //            Date MidendDate = dateFormat.parse(appraisalFillingData1.getManagerMidYearEndDate());        //            if (currentDate.after(MidendDate) || currentDate.equals(MidendDate)) {        //                if (!midSelfApproval.equals("Approved")) {        //                    midSelfApproval = "Expired";        //                }        //                if (!managerMidSelfApproval.equals("Approved")) {        //                    managerMidSelfApproval = "Expired";        //                }        //            } else {        //                if (!midSelfApproval.equals("Approved")) {
-        }        //                    midSelfApproval = "Pendding";
-        //                }
-        //                if (!managerMidSelfApproval.equals("Approved")) {
-        //                    managerMidSelfApproval = "Pendding";
-        //                }
-        //            }
-        // End year
-        //                        Date endEndDate = dateFormat.parse(appraisalFillingData.getYearEndEndDate());
-        //            Date endEndDate = dateFormat.parse(appraisalFillingData1.getManagerYearEndEndDate());
-        //            if (currentDate.after(endEndDate) || currentDate.equals(endEndDate)) {
-        //                if (!endSelfApproval.equals("Approved")) {
-        //                    endSelfApproval = "Expired";
-        //                }
-        //                if (!managerEndSelfApproval.equals("Approved")) {
-        //                    managerEndSelfApproval = "Expired";
-        //                }
-        //            } else {
-        //                if (!endSelfApproval.equals("Approved")) {
-        //                    endSelfApproval = "Pendding";
-        //                }
-        //                if (!managerEndSelfApproval.equals("Approved")) {
-        //                    managerEndSelfApproval = "Pendding";
-        //                }
-        //            }
-        //                    }
+            } //                goalSetting = "Pendding";        //            }        // Middel year        //                        Date MidendDate = dateFormat.parse(appraisalFillingData.getMidYearEndDate());        //            Date MidendDate = dateFormat.parse(appraisalFillingData1.getManagerMidYearEndDate());        //            if (currentDate.after(MidendDate) || currentDate.equals(MidendDate)) {        //                if (!midSelfApproval.equals("Approved")) {        //                    midSelfApproval = "Expired";        //                }        //                if (!managerMidSelfApproval.equals("Approved")) {        //                    managerMidSelfApproval = "Expired";        //                }        //            } else {        //                if (!midSelfApproval.equals("Approved")) {        //                    midSelfApproval = "Pendding";        //                }        //                if (!managerMidSelfApproval.equals("Approved")) {        //                    managerMidSelfApproval = "Pendding";        //                }        //            }        // End year        //                        Date endEndDate = dateFormat.parse(appraisalFillingData.getYearEndEndDate());        //            Date endEndDate = dateFormat.parse(appraisalFillingData1.getManagerYearEndEndDate());        //            if (currentDate.after(endEndDate) || currentDate.equals(endEndDate)) {        //                if (!endSelfApproval.equals("Approved")) {        //                    endSelfApproval = "Expired";        //                }        //                if (!managerEndSelfApproval.equals("Approved")) {        //                    managerEndSelfApproval = "Expired";        //                }        //            } else {        //                if (!endSelfApproval.equals("Approved")) {        //                    endSelfApproval = "Pendding";        //                }        //                if (!managerEndSelfApproval.equals("Approved")) {        //                    managerEndSelfApproval = "Pendding";        //                }        //            }
+        }        //                    }
 
 //        if (null != appraisalPerformanceMaster.getWeightageScore()) {
 //            String weightageScore = appraisalPerformanceMaster.getWeightageScore();
@@ -10206,8 +10182,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 
         String employeeMasterId = request.getParameter("employeeMasterIdForYear");
         String cycleYear = request.getParameter("cycleYear");
-        EmployeeMaster master1= employeeMasterService.readById(Integer.parseInt(employeeMasterId));
-        
+        EmployeeMaster master1 = employeeMasterService.readById(Integer.parseInt(employeeMasterId));
 
 //        timeLineDate(request, response);
 //        String searchvalue = request.getParameter("valDetail");
@@ -10217,7 +10192,7 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         if (null != employeeMasterId && !"".equals(employeeMasterId)) {
             employeeMaster.setId(Integer.parseInt(employeeMasterId));
         }
-        int cyear1 = Calendar.getInstance().get(Calendar.YEAR);
+//        int cyear1 = Calendar.getInstance().get(Calendar.YEAR);
         appraisalPerformanceMaster.setEmployeeMaster(employeeMaster);
 
 //        List timeLineList = appraisalFillingDataService.read();
@@ -10227,7 +10202,9 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
 //        }App
         List SefinlList = new ArrayList();
         Double selftotal = 0.0;
+        int selfcount = 0;
         Double managmenttotal = 0.0;
+        int managamentcount = 0;
 
         List<AppraisalFillingData> list = (List<AppraisalFillingData>) appraisalFillingDataService.readByYear(cycleYear);
         for (AppraisalFillingData afd : list) {
@@ -10248,7 +10225,27 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 master = (AppraisalPerformanceMaster) apm.get(0);
                 selfScore = master.getEmployeeTotalFinalScore();
                 managmentScore = master.getTotalScore();
+
+                if (null != selfScore && "" != selfScore) {
+
+                    selftotal = selftotal + Double.parseDouble(selfScore);
+                    selfcount = selfcount + 1;
+                } else {
+                    selfScore = "-";
+                }
+                if (null != managmentScore && "" != managmentScore) {
+                    managmenttotal = managmenttotal + Double.parseDouble(managmentScore);
+                    managamentcount = managamentcount + 1;
+                } else {
+                    managmentScore = "-";
+                }
+
                 weitage = master.getWeightageScore();
+
+            } else {
+                selfScore = "-";
+                managmentScore = "-";
+                weitage = "-";
 
             }
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -10276,13 +10273,12 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
             finlList.add(ToMonthName);  //8
             SefinlList.add(finlList);
 
-            selftotal = selftotal + Double.parseDouble(selfScore);
-            managmenttotal = managmenttotal + Double.parseDouble(managmentScore);
-
+//            selftotal = selftotal + Double.parseDouble(selfScore);
+//            managmenttotal = managmenttotal + Double.parseDouble(managmentScore);
         }
 //        String pyear = request.getParameter("pmpyear");
-        Double avgselftotal = selftotal / list.size();
-        Double avgmanagmenttotal = managmenttotal / list.size();
+        Double avgselftotal = selftotal / selfcount;
+        Double avgmanagmenttotal = managmenttotal / managamentcount;
         request.setAttribute("selftotal", avgselftotal);
         request.setAttribute("managmenttotal", avgmanagmenttotal);
 
@@ -10312,11 +10308,144 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
         }
 
         Double avgWbs = totalWbs / totalApprover;
+        List cyclewiseFeedBackList = new ArrayList();
+
+        List<AppraisalFillingData> cyclelist = (List<AppraisalFillingData>) appraisalFillingDataService.readByYear(cycleYear);
+
+        for (AppraisalFillingData afd1 : cyclelist) {
+            int cycleNameId = afd1.getId();
+
+            List feedBackList = new ArrayList();
+
+            String CycleName = afd1.getYear();
+            String ConDepAvg = "";
+            String SuperiorAvg = "";
+            String SubAvg = "";
+            String peerAvg = "";
+            Double SuperiorTotal = 0.0;
+            Double SubTotal = 0.0;
+            Double ConDepTotal = 0.0;
+            Double peerTotal = 0.0;
+            Double AvgSuperior = 0.0;
+            Double AvgSub = 0.0;
+            Double AvgConDep = 0.0;
+            Double Avgpeer = 0.0;
+            int SuperiorCount = 0;
+            int SubCount = 0;
+            int ConDepCount = 0;
+            int peerCount = 0;
+
+            List<AppraisalFeedback360> feedlist = (List<AppraisalFeedback360>) appraisal360Service.readByEmpIdAndCname(Integer.parseInt(employeeMasterId), "" + cycleNameId);
+            for (AppraisalFeedback360 af : feedlist) {
+                int empId = af.getEmployeeMasterByRefForEmpId().getId();
+                int approverId = af.getEmployeeMasterByRefDoneEmpId().getId();
+                EmployeeMaster empMaster = employeeMasterService.readById(empId);
+                EmployeeMaster approverMaster = employeeMasterService.readById(approverId);
+
+                int w1 = af.getWlb1();
+                int w2 = af.getWlb2();
+                int w3 = af.getWlb3();
+                int w4 = af.getWlb4();
+                int w5 = af.getWlb5();
+                int Total = w1 + w2 + w3 + w4 + w5;
+
+                List<?> subOrdinateList = employeeMasterService.checkSubordinate(empId, approverId);
+
+                List<?> SuperiorList = employeeMasterService.checkSuprior(empId, approverId);
+
+                int empdepId = empMaster.getDepartmentMaster().getId();
+                int empdesgId = empMaster.getDesignationMaster().getId();
+                int approverdepId = approverMaster.getDepartmentMaster().getId();
+                int approverdesgId = approverMaster.getDepartmentMaster().getId();
+
+                ///////////////// subordinate
+                if (!subOrdinateList.isEmpty()) {
+                    if (af.getStatus() == 1) {
+                        SubCount = SubCount + 1;
+                        SubTotal = SubTotal + Total;
+                    }
+                } //////////superior
+                else if (!SuperiorList.isEmpty()) {
+                    if (af.getStatus() == 1) {
+                        SuperiorCount = SuperiorCount + 1;
+                        SuperiorTotal = SuperiorTotal + Total;
+                    }
+
+                } /////////////peer check
+                else if (empdepId == approverdepId && empdesgId == approverdesgId) {
+                    if (af.getStatus() == 1) {
+                        peerCount = peerCount + 1;
+                        peerTotal = peerTotal + Total;
+                    }
+
+                } else if (af.getStatus() == 1) {
+                    ConDepCount = ConDepCount + 1;
+                    ConDepTotal = ConDepTotal + Total;
+                }
+
+            }
+
+            String Avgfeedback = "";
+
+            Double feedbackAvg = 0.0;
+            Double feedbackTotal = 0.0;
+            int feedbackCount = 0;
+
+            if (SuperiorCount > 0) {
+                AvgSuperior = SuperiorTotal / SuperiorCount;
+                SuperiorAvg = "" + AvgSuperior;
+                feedbackTotal = feedbackTotal + AvgSuperior;
+                feedbackCount = feedbackCount + 1;
+            } else {
+                SuperiorAvg = "-";
+            }
+            if (SubCount > 0) {
+                AvgSub = SubTotal / SubCount;
+                SubAvg = "" + AvgSub;
+                feedbackTotal = feedbackTotal + AvgSub;
+                feedbackCount = feedbackCount + 1;
+            } else {
+                SubAvg = "-";
+            }
+            if (ConDepCount > 0) {
+                AvgConDep = ConDepTotal / ConDepCount;
+                ConDepAvg = "" + AvgConDep;
+                feedbackTotal = feedbackTotal + AvgConDep;
+                feedbackCount = feedbackCount + 1;
+            } else {
+                ConDepAvg = "-";
+            }
+            if (peerCount > 0) {
+                Avgpeer = peerTotal / peerCount;
+                peerAvg = "" + Avgpeer;
+                feedbackTotal = feedbackTotal + Avgpeer;
+                feedbackCount = feedbackCount + 1;
+            } else {
+                peerAvg = "-";
+            }
+
+            if (feedbackCount > 0) {
+                feedbackAvg = feedbackTotal / feedbackCount;
+                Avgfeedback = "" + feedbackAvg;
+            } else {
+                Avgfeedback = "-";
+            }
+
+            feedBackList.add(CycleName);
+            feedBackList.add(SuperiorAvg);
+            feedBackList.add(SubAvg);
+            feedBackList.add(ConDepAvg);
+            feedBackList.add(peerAvg);
+            feedBackList.add(Avgfeedback);
+            cyclewiseFeedBackList.add(feedBackList);
+
+        }
 
         mv.getModelMap().put("list", SefinlList);
         request.setAttribute("list", SefinlList);
         request.setAttribute("employeeMaster", master1);
         request.setAttribute("dataList", dataList);
+        request.setAttribute("cyclewiseFeedBackList", cyclewiseFeedBackList);
         request.setAttribute("avgWbs", avgWbs);
         response.setContentType("application/vnd.ms-excel");
         response.setHeader("Content-Disposition", "attachment; filename=EmployeePMPYearReport.xls");

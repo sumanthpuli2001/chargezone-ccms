@@ -88,6 +88,7 @@ public class Appraisal360Controller extends Appraisal360Abstract {
         String[] doneId = request.getParameterValues("employeeMasterByRefDoneEmpId");
         String forId = request.getParameter("employeeMasterByRefForEmpId");
         String feedBackYear = request.getParameter("cycleYear");
+        String nameCycle = request.getParameter("cyclename");
         UserMaster user = (UserMaster) request.getSession().getAttribute("user");
         user.getId();
         employeeMaster2.setUserMaster(user);
@@ -135,6 +136,7 @@ public class Appraisal360Controller extends Appraisal360Abstract {
                     break;
                 } else {
                     appraisal360.setFeedbackYear(feedBackYear);
+                    appraisal360.setCycleName(nameCycle);
                     appraisal360Service.create(appraisal360);
 
                     request.setAttribute("successMessage",
@@ -268,8 +270,8 @@ public class Appraisal360Controller extends Appraisal360Abstract {
         int forid = Integer.parseInt(request.getParameter("forId"));
         int doneid = Integer.parseInt(request.getParameter("doneId"));
         int hrid = Integer.parseInt(request.getParameter("hrId"));
-        
-        AppraisalFeedback360 af=appraisal360Service.readById(id);
+
+        AppraisalFeedback360 af = appraisal360Service.readById(id);
         appraisal360.setId(id);
         employeeMaster.setId(forid);
         employeeMaster1.setId(doneid);
@@ -285,6 +287,7 @@ public class Appraisal360Controller extends Appraisal360Abstract {
         }
         appraisal360.setStatus(1);
         appraisal360.setFeedbackYear(af.getFeedbackYear());
+        appraisal360.setCycleName(af.getCycleName());
         appraisal360Service.update(appraisal360);
         request.setAttribute("successMessage",
                 "Information : The Information is saved Successfully.");

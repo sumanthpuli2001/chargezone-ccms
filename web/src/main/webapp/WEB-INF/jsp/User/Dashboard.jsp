@@ -532,7 +532,7 @@
 
                                                                     </li><!-- /.item -->
                                                                     <li class="item">
-                                                                        <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">KRA Approval By Manager</span><span ><br>${ManagerStartDate} To ${ManagerEndDate}</span></div>
+                                                                        <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">KRA Approval By Manager</span><span ><br></span></div>
                                                                                 <c:if test="${goalApproval eq 'Approved'}">
                                                                             <div class="col-sm-3" align="center"><span class="glyphicon glyphicon-ok" style="font-size: 15px; color: greenyellow;"></span></div>
                                                                             </c:if>
@@ -546,35 +546,35 @@
                                                                             <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Rework</span></div>
                                                                         </c:if>
                                                                     </li><!-- /.item -->
-                                                                    <li class="item">
+<!--                                                                    <li class="item">
                                                                         <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">Employee's Mid Year Self Assessment</span><span ><br>${employeeMidStartDate} To ${employeeMidEndDate}</span></div>
-                                                                                <c:if test="${midSelfApproval eq 'Approved'}">
+                                                                                <%--<c:if test="${midSelfApproval eq 'Approved'}">--%>
                                                                             <div class="col-sm-3" align="center"><span class="glyphicon glyphicon-ok" style="font-size: 15px; color: greenyellow;"></span></div>
-                                                                            </c:if>
-                                                                            <c:if test="${midSelfApproval eq 'Expired'}">
+                                                                            <%--</c:if>--%>
+                                                                            <%--<c:if test="${midSelfApproval eq 'Expired'}">--%>
                                                                             <div class="col-sm-3" align="center"><span class="glyphicon glyphicon-remove" style="font-size: 15px; color: red;"></span></div>
-                                                                            </c:if>
-                                                                            <c:if test="${midSelfApproval eq 'Pendding'}">
+                                                                            <%--</c:if>--%>
+                                                                            <%--<c:if test="${midSelfApproval eq 'Pendding'}">--%>
                                                                             <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Pending</span></div>
-                                                                        </c:if>
-                                                                    </li><!-- /.item -->
-                                                                    <li class="item">
+                                                                        <%--</c:if>--%>
+                                                                    </li> /.item -->
+<!--                                                                    <li class="item">
                                                                         <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">Manager's Mid Year Review </span><span ><br>${ManagerMidStartDate} To ${ManagerMidEndDate}</span></div>
-                                                                                <c:if test="${managerMidSelfApproval eq 'Approved'}">
+                                                                                <%--<c:if test="${managerMidSelfApproval eq 'Approved'}">--%>
                                                                             <div class="col-sm-3" align="center"><span class="glyphicon glyphicon-ok" style="font-size: 15px; color: greenyellow;"></span></div>
-                                                                            </c:if>
-                                                                            <c:if test="${managerMidSelfApproval eq 'Expired'}">
+                                                                            <%--</c:if>--%>
+                                                                            <%--<c:if test="${managerMidSelfApproval eq 'Expired'}">--%>
                                                                             <div class="col-sm-3" align="center"><span class="glyphicon glyphicon-remove" style="font-size: 15px; color: red;"></span></div>
-                                                                            </c:if>
-                                                                            <c:if test="${managerMidSelfApproval eq 'Pendding'}">
+                                                                            <%--</c:if>--%>
+                                                                            <%--<c:if test="${managerMidSelfApproval eq 'Pendding'}">--%>
                                                                             <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Pending</span></div>
-                                                                        </c:if>
-                                                                        <c:if test="${managerMidSelfApproval eq 'Rework'}">
+                                                                        <%--</c:if>--%>
+                                                                        <%--<c:if test="${managerMidSelfApproval eq 'Rework'}">--%>
                                                                             <div class="col-sm-3" align="center"><span style="color: #3c8dbc">Rework</span></div>
-                                                                        </c:if>
-                                                                    </li><!-- /.item -->
+                                                                        <%--</c:if>--%>
+                                                                    </li> /.item -->
                                                                     <li class="item">
-                                                                        <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">Employee's End Year Self Assessment </span><span ><br>${employeeEndStartDate} To ${employeeEndEndDate}</span></div>
+                                                                        <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">Employee's  Self Assessment </span><span ><br>${employeeEndStartDate} To ${employeeEndEndDate}</span></div>
                                                                                 <c:if test="${endSelfApproval eq 'Approved'}">
                                                                             <div class="col-sm-3" align="center"><span class="glyphicon glyphicon-ok" style="font-size: 15px; color: greenyellow;"></span></div>
                                                                             </c:if>
@@ -586,7 +586,7 @@
                                                                         </c:if>
                                                                     </li><!-- /.item -->
                                                                     <li class="item">
-                                                                        <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">Manager's End Year Review </span><span ><br>${ManagerEndStartDate} To ${ManagerEndEndDate}</span></div>
+                                                                        <div class="col-sm-9" style="padding-right: 0px !important;padding-left: 0px !important;"><span class="product-title">Manager's Review </span><span ><br></span></div>
                                                                                 <c:if test="${managerEndSelfApproval eq 'Approved'}">
                                                                             <div class="col-sm-3" align="center"><span class="glyphicon glyphicon-ok" style="font-size: 15px; color: greenyellow;"></span></div>
                                                                             </c:if>

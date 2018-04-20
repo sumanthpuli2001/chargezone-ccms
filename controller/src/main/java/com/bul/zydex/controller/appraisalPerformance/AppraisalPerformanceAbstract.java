@@ -204,8 +204,6 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
     public void setAppraisal360Service(Appraisal360Service<AppraisalFeedback360> appraisal360Service) {
         this.appraisal360Service = appraisal360Service;
     }
-    
-    
 
     public void selectedEmployeeDate(HttpServletRequest request,
             HttpServletResponse response, String userid) throws Exception {
@@ -260,14 +258,14 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 
             String StartDate = appraisalFillingData.getStartDate();
             String EndDate = appraisalFillingData.getEndDate();
-            String MidDate = appraisalFillingData.getMidYearStartDate();
-            String MidEndDate = appraisalFillingData.getMidYearEndDate();
+//            String MidDate = appraisalFillingData.getMidYearStartDate();
+//            String MidEndDate = appraisalFillingData.getMidYearEndDate();
             String YearEndStartDate = appraisalFillingData.getYearEndStartDate();
             String YearEndDate = appraisalFillingData.getYearEndEndDate();
             Date strDate = sdf.parse(StartDate);
             Date eDate = sdf.parse(EndDate);
-            Date midDate = sdf.parse(MidDate);
-            Date midEndDate = sdf.parse(MidEndDate);
+//            Date midDate = sdf.parse(MidDate);
+//            Date midEndDate = sdf.parse(MidEndDate);
             Date yearEndStartDate = sdf.parse(YearEndStartDate);
             Date yearEndDate = sdf.parse(YearEndDate);
             boolean flag = false;
@@ -275,8 +273,10 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
             boolean flag2 = false;
             if ((now.after(strDate) && now.before(eDate)) || now.equals(strDate) || now.equals(eDate)) {
                 flag = true;
-            } else if ((now.after(midDate) && now.before(midEndDate)) || now.equals(midDate) || now.equals(midEndDate)) {
-                flag1 = true;
+
+//            } else if ((now.after(midDate) && now.before(midEndDate)) || now.equals(midDate) || now.equals(midEndDate)) {
+//                flag1 = true;
+//            } 
             } else if ((now.after(yearEndStartDate) && now.before(yearEndDate)) || now.equals(yearEndStartDate) || now.equals(yearEndDate)) {
                 flag2 = true;
             }
@@ -367,14 +367,14 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 
             String StartDate = appraisalFillingData.getStartDate();
             String EndDate = appraisalFillingData.getEndDate();
-            String MidDate = appraisalFillingData.getMidYearStartDate();
-            String MidEndDate = appraisalFillingData.getMidYearEndDate();
+//            String MidDate = appraisalFillingData.getMidYearStartDate();
+//            String MidEndDate = appraisalFillingData.getMidYearEndDate();
             String YearEndStartDate = appraisalFillingData.getYearEndStartDate();
             String YearEndDate = appraisalFillingData.getYearEndEndDate();
             Date strDate = sdf.parse(StartDate);
             Date eDate = sdf.parse(EndDate);
-            Date midDate = sdf.parse(MidDate);
-            Date midEndDate = sdf.parse(MidEndDate);
+//            Date midDate = sdf.parse(MidDate);
+//            Date midEndDate = sdf.parse(MidEndDate);
             Date yearEndStartDate = sdf.parse(YearEndStartDate);
             Date yearEndDate = sdf.parse(YearEndDate);
             boolean flag = true;

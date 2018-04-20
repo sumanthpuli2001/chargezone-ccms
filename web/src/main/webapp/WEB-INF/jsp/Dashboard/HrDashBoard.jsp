@@ -785,7 +785,7 @@
                                                                                                                         </div>
                                                                                                                     </li><!-- /.item -->
 
-                                                                                                                    <li class="">
+<!--                                                                                                                    <li class="">
                                                                                                                         <div class="progress-group" style="padding-bottom: 15px;">
                                                                                                                             <span class="progress-text">Employees Mid Year Self Assessment</span>
                                                                                                                             <span class="progress-number"><b>${performanceManagementStage[3]}</b>/${performanceManagementStage[0]}</span>
@@ -793,9 +793,9 @@
                                                                                                                                 <div class="progress-bar progress-bar-green" style="width: ${(performanceManagementStage[3]/performanceManagementStage[0])*100}%"></div>
                                                                                                                             </div>
                                                                                                                         </div>
-                                                                                                                    </li><!-- /.item -->
+                                                                                                                    </li> /.item -->
 
-                                                                                                                    <li class="">
+<!--                                                                                                                    <li class="">
                                                                                                                         <div class="progress-group" style="padding-bottom: 15px;">
                                                                                                                             <span class="progress-text">Managers Mid Year Review</span>
                                                                                                                             <span class="progress-number"><b>${performanceManagementStage[4]}</b>/${performanceManagementStage[0]}</span>
@@ -803,11 +803,11 @@
                                                                                                                                 <div class="progress-bar progress-bar-yellow" style="width: ${(performanceManagementStage[4]/performanceManagementStage[0])*100}%"></div>
                                                                                                                             </div>
                                                                                                                         </div>
-                                                                                                                    </li><!-- /.item -->
+                                                                                                                    </li> /.item -->
 
                                                                                                                     <li class="">
                                                                                                                         <div class="progress-group" style="padding-bottom: 15px;">
-                                                                                                                            <span class="progress-text">Employees End Year Self Assessment</span>
+                                                                                                                            <span class="progress-text">Employees  Self Assessment</span>
                                                                                                                             <span class="progress-number"><b>${performanceManagementStage[5]}</b>/${performanceManagementStage[0]}</span>
                                                                                                                             <div class="progress sm">
                                                                                                                                 <div class="progress-bar progress-bar-light-blue" style="width: ${(performanceManagementStage[5]/performanceManagementStage[0])*100}%"></div>
@@ -817,7 +817,7 @@
 
                                                                                                                     <li class="">
                                                                                                                         <div class="progress-group">
-                                                                                                                            <span class="progress-text">Managers End Year Review</span>
+                                                                                                                            <span class="progress-text">Managers  Review</span>
                                                                                                                             <span class="progress-number"><b>${performanceManagementStage[6]}</b>/${performanceManagementStage[0]}</span>
                                                                                                                             <div class="progress sm">
                                                                                                                                 <div class="progress-bar progress-bar-light-darkViolet" style="width: ${(performanceManagementStage[6]/performanceManagementStage[0])*100}%"></div>

@@ -36,17 +36,16 @@
                                 <c:if test="${!empty successMessage}">
                                     <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
                                 </c:if>
-                                <c:if test="${!empty failureMessage}">
-                                    <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
+                                <c:if test="${!empty faliureMessage}">
+                                    <div class="fadeOutEffect alert alert-danger" role="alert">${faliureMessage}</div>
                                 </c:if>
                                 <form:form class="form-horizontal" method="post" commandName="payrollTaxDeductionComponentCreate" 
                                            action="payrollTaxDeduction.htm?act=createTaxDeductionComponentSubmit">
-                                   
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label>Section:<span style="color: red;font-size: 12px;">*</span></label>
                                                 <form:select path="payrollTaxDeductionMaster.id" id="selectSectionId" class="form-control">
-                                                    <form:option value="" label="Select Section"/>
+                                                    <form:option value="" label="Select"/>
                                                     <form:options items="${sectionsMap}"/>
                                                 </form:select>
                                                 <form:errors path="payrollTaxDeductionMaster.id" cssClass="errorDiv"></form:errors>
@@ -58,12 +57,12 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Age Limit:<span style="color: red;font-size: 12px;">*</span></label>
-                                                <form:input path="ageLimit"  type="number" placeholder="Enter Age Limit"  class="form-control"></form:input>
+                                                <form:input path="ageLimit"  type="number" placeholder="Enter Age Limit" min="0" class="form-control"></form:input>
                                                 <form:errors path="ageLimit" cssClass="errorDiv"></form:errors>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Tax Saving Limit:<span style="color: red;font-size: 12px;">*</span></label>
-                                                <form:input path="taxSavingLimit" placeholder="Enter Tax Saving Limit" class="form-control"></form:input>
+                                                <form:input path="taxSavingLimit" placeholder="Enter Tax Saving Limit" min="0" class="form-control"></form:input>
                                                 <form:errors path="taxSavingLimit" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>

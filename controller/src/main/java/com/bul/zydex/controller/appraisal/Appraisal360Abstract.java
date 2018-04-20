@@ -7,12 +7,14 @@ package com.bul.zydex.controller.appraisal;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.AppraisalFeedback360;
+import com.bul.zydex.model.AppraisalFillingData;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.appraisal.Appraisal360Service;
+import com.bul.zydex.service.appraisalPerformance.AppraisalFillingDataService;
 import com.bul.zydex.service.level.LevelMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
 import java.util.Iterator;
@@ -32,6 +34,7 @@ public class Appraisal360Abstract extends CustomAbstract {
     protected LevelMasterService<LevelMaster> levelMasterService;
     protected LocationMasterService<LocationMaster> locationMasterService;
     protected UserRightMasterService<UserRightMaster> userRightMasterService;
+    protected AppraisalFillingDataService<AppraisalFillingData> appraisalFillingDataService;
 
     public LevelMasterService<LevelMaster> getLevelMasterService() {
         return levelMasterService;
@@ -72,6 +75,15 @@ public class Appraisal360Abstract extends CustomAbstract {
     public void setUserRightMasterService(UserRightMasterService<UserRightMaster> userRightMasterService) {
         this.userRightMasterService = userRightMasterService;
     }
+
+    public AppraisalFillingDataService<AppraisalFillingData> getAppraisalFillingDataService() {
+        return appraisalFillingDataService;
+    }
+
+    public void setAppraisalFillingDataService(AppraisalFillingDataService<AppraisalFillingData> appraisalFillingDataService) {
+        this.appraisalFillingDataService = appraisalFillingDataService;
+    }
+
     public void department(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         List<?> deptList = departmentMasterService.read();
@@ -93,7 +105,7 @@ public class Appraisal360Abstract extends CustomAbstract {
 
         request.setAttribute("departmentList", tempStr);
     }
-    
+
     public void level(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         List<?> levelList = levelMasterService.read();
@@ -114,6 +126,14 @@ public class Appraisal360Abstract extends CustomAbstract {
         tempStr += "]";
 
         request.setAttribute("levelList", tempStr);
-    }  
+    }
+
+    protected void yearList(HttpServletRequest request) {
+        AppraisalFillingData appraisalFillingData = new AppraisalFillingData();
+//        List<?> pmpyearList = appraisalFillingDataService.getCurrentAndPreviousYear();
+        List<?> pmpyearList = appraisalFillingDataService.readYearList();
+
+        request.setAttribute("cycleYear", pmpyearList);
+    }
 
 }

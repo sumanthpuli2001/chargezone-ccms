@@ -62,5 +62,11 @@
         <property name="wlb5Remark" type="string">
             <column name="WLB5_remark" />
         </property>
+        <property name="feedbackYear" type="string">
+            <column name="year" />
+        </property>
+        <property name="cycleName" type="string">
+            <column name="cycle_name" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -62,6 +62,30 @@
             width: 25%;
         }
     </style>
+    <script>
+        function searchSubmit11() {
+            var flag = true;
+            var checkboxes = "";
+            checkboxes = document.getElementById("employeeMasterId1");
+            
+            if ('' == checkboxes.value) {
+
+                document.getElementById('fill1').innerHTML = 'Please Enter Employee Name/ID';
+                flag = false;
+            } else {
+                flag = true;
+            }
+           
+            return flag;
+        }
+
+    </script>
+    <script>
+        function myFunction() {
+          
+            document.getElementById("fill1").innerHTML = " ";
+        }
+    </script>
 
 
     <div class="content-wrapper">
@@ -203,7 +227,7 @@
 
         </section>
         <form:form action="appraisalPerformance.htm?act=searchReoprtByYearWiseSubmit" method="post" commandName="appraisalPerformanceMaster"
-                   name='form1' class="form-horizontal" role="form">
+                   name='form1' onsubmit='return searchSubmit11();' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
@@ -241,8 +265,10 @@
                                             </div>-->
                                                 <div class="col-sm-6" id="employeeName">
                                                     <label>Employee ID/Name:</label>
-                                                    <input type="text" id="employeeMasterId1" name="employeeMasterIdForYear" class="form-control">
+                                                    <input type="text" oninput="myFunction()"  id="employeeMasterId1" name="employeeMasterIdForYear" class="form-control">
+                                                    <label id="fill1" style="color: red;"></label>
                                                 </div>
+
 
                                                 <div class="col-sm-3" id="yearid" >
                                                     <label>Year:</label>
@@ -260,13 +286,13 @@
                                     <br/>
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
-<!--                                            <div class="form-group">
-                                                <div class="col-sm-6" id="employeeName">
-                                                    <label>Employee ID/Name:</label>
-                                                    <input type="text" id="employeeMasterId1" name="employeeMasterId" class="form-control">
-                                                </div>
-
-                                            </div>-->
+                                            <!--                                            <div class="form-group">
+                                                                                            <div class="col-sm-6" id="employeeName">
+                                                                                                <label>Employee ID/Name:</label>
+                                                                                                <input type="text" id="employeeMasterId1" name="employeeMasterId" class="form-control">
+                                                                                            </div>
+                                            
+                                                                                        </div>-->
                                             <!--                                            <div class="form-group">
                                                                                             <div class="col-sm-6" id="departmentIdDiv">
                                                                                                 <label>Department Name:</label>

@@ -157,5 +157,10 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> searchEmployeeDetailForContactInfo(final String searchString);
 
     public List<?> readEmployeeList(int id,int empid);
+    
+    public List<?> checkSubordinate(int empId,int managerEmpId);
+    
+    public List<?> checkSuprior(int empId,int managerEmpId);
+   
 
 }

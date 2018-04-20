@@ -32,7 +32,7 @@ public class PayrollTaxDeductionMasterDaoImpl<T> extends GenericsDAOImpl<T> impl
     }
 
     @Override
-    public List<?> readByComponentId() {
+    public List<?> readByComponentId(int parseInt) {
         String query = "SELECT a "
                 + " FROM PayrollTaxDeductionComponent a";
 
@@ -54,6 +54,15 @@ public class PayrollTaxDeductionMasterDaoImpl<T> extends GenericsDAOImpl<T> impl
         String query = "SELECT a.id,a.section,a.description "
                 + " FROM PayrollTaxDeductionMaster a";
 
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public List<?> readSectionByName(String sectionName) {
+        String query = "SELECT a.section "
+                + " FROM PayrollTaxDeductionMaster a "
+                + " WHERE a.section = " + "'" + sectionName + "'";
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }

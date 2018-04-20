@@ -377,6 +377,7 @@
         <property name="levelMasterService" ref="levelMasterService1" />
         <property name="locationMasterService" ref="locationMasterService1" />
         <property name="userRightMasterService" ref="userRightMasterService1" />
+        <property name="appraisalFillingDataService" ref="appraisalFillingDataService1" />
     </bean>
 
     <!--Resignation-->
@@ -444,6 +445,7 @@
         <property name="updateAppraisalPerformanceActivitiesService" ref="updateAppraisalPerformanceActivitiesService1" />
         <property name="appraisalkraActivityService" ref="appraisalkraActivityService1" />
         <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1" />
+        <property name="appraisal360Service" ref="appraisal360Service1" />
         
     </bean>
     <!--Appraisal Filling Data-->
@@ -1214,9 +1216,20 @@
     
     <bean id="payrollTaxDeductionMasterController1" class="com.bul.zydex.controller.Payroll.PayrollTaxDeductionMasterController"  parent="controllerConfig">
         <property name="payrollTaxDeductionMasterService" ref="payrollTaxDeductionMasterService1"></property>
-        <property name="payrollTaxDeductionMasterValidator" ref="payrollTaxDeductionMasterValidator1"/>
+        <property name="payrollTaxDeductionComponentService" ref="payrollTaxDeductionComponentService1"></property>
+        <property name="payrollTaxDeductionMasterValidator" ref="payrollTaxDeductionMasterValidator1"></property>
         <property name="payrollTaxDeductionComponentValidator" ref="payrollTaxDeductionComponentValidator1"></property> 
     </bean>
     
+    <bean id="payrollTaxDeclarationPeriodMasterController1" class="com.bul.zydex.controller.Payroll.PayrollTaxDeclarationPeriodMasterController"  parent="controllerConfig">
+        <property name="payrollTaxDeclarationPeriodMasterService" ref="payrollTaxDeclarationPeriodMasterService1"></property>
+        <property name="payrollFinancialYearService" ref="payrollFinancialYearService1"></property>
+        <property name="payrollTaxDeclarationPeriodMasterValidator" ref="payrollTaxDeclarationPeriodMasterValidator1"></property>
+    </bean>
+    
+    <bean id="payrollTaxRateMasterController1" class="com.bul.zydex.controller.Payroll.PayrollTaxRateMasterController" parent="controllerConfig">
+        <property name="payrollTaxRateMasterService" ref="payrollTaxRateMasterService1" />
+        <property name="payrollTaxRateMasterValidator" ref="payrollTaxRateMasterValidator1" />
+    </bean>
 </beans>
  

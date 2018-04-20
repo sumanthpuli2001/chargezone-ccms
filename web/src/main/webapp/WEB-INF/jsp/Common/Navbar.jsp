@@ -367,7 +367,7 @@
                             <li><a href="performanceImprovementPlanMaster.htm?act=viewPipListByAdmin"><i class="fa fa-circle-o"></i>View All PIP </a></li>
                             <li><a href="kraCategory.htm?act=createClick"><i class="fa fa-circle-o"></i>KRA Category</a></li>
                             <!--<li><a href="appraisalFillingData.htm?act=createClick"><i class="fa fa-circle-o"></i>Appraisal Filling Data </a></li>-->
-                            <li><a href="appraisalFillingData.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Appraisal Time-Line Data</a></li>
+                            <li><a href="appraisalFillingData.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Cycle Time-Line Setting</a></li>
                             <!--<li><a href="competencyEvaluationMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>Competency Evaluation</a></li>-->
                             <li><a href="competencyEvaluationMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Competency Evaluation Search</a></li>
                             <!--<li><a href="competencyEvaluationTextmaster.htm?act=createClick"><i class="fa fa-circle-o"></i>Competency Evaluation Text</a></li>-->
@@ -770,6 +770,18 @@
                                     <li><a href="employeeTypeWiseSalary.htm?act=showResult"><i class="fa fa-circle-o"></i>Assign Salary</a></li>
                                     <li><a href="additionalAmountCheck.htm?act=showResult"><i class="fa fa-circle-o"></i>Additional Amount Check</a></li>
                                     <li><a href="payrollEmployeeFormSixteen.htm?act=redirectToFormEmployeeSaving&search=none"><i class="fa fa-circle-o"></i>Employee Saving</a></li>
+                                    <li>
+                                        <a href="payrollTaxDeduction.htm?act=taxDeductionCreate"><i class="fa fa-circle-o"></i>Tax Deduction Master</a>
+                                    </li>
+                                    <li>
+                                        <a href="payrollTaxDeduction.htm?act=showTaxDeductionComponent"><i class="fa fa-circle-o"></i>Tax Deduction Component</a>
+                                    </li>
+                                    <li>
+                                        <a href="payrollTaxDeclaration.htm?act=showPeriod"><i class="fa fa-circle-o"></i>Tax Declaration Period</a>
+                                    </li>
+                                    <li>
+                                        <a href="payrollTaxRate.htm?act=showTaxRateList"><i class="fa fa-circle-o"></i>Tax Rate Master</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>

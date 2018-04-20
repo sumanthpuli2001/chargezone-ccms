@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.Payroll;
 
 import com.bul.zydex.dao.GenericsDAO;
+import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.model.PayrollFinancialYear;
@@ -36,4 +37,6 @@ public interface EmployeeDeductionAmountDAO<T> extends GenericsDAO<T> {
     public List<?> readEmployeeloandelete(int empSalaryProcessid, String payrollLoanType);
 
     public List<?> readEmployeeForSalaryDeductioninfoSearch(EmployeeSalaryProcess employeeSalaryProcess);
+    
+    public List<?> readByedaId(int edaId);
 }

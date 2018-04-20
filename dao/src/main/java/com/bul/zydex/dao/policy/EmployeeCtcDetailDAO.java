@@ -22,4 +22,6 @@ public interface EmployeeCtcDetailDAO<T> extends GenericsDAO<T> {
 
     public List<?> readByEmployeCtcReport(int employeeid, String month, String year);
 
+    public List<?> empid(int employeeid);
+
 }

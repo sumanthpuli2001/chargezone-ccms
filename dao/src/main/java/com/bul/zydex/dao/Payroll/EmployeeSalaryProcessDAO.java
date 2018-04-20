@@ -85,4 +85,5 @@ public interface EmployeeSalaryProcessDAO<T> extends GenericsDAO<T> {
 
     public List<?> readEmployeeForPfGov(EmployeeMaster object);
 
+    public List<?> readEmpId(int EmpId);
 }

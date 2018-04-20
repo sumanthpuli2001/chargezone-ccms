@@ -890,4 +890,23 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readEmpId(int EmpId) {
+
+//        EmployeeSalaryProcess employeeSalaryProcess = new EmployeeSalaryProcess();
+        String query = "SELECT a"
+                + " FROM EmployeeSalaryProcess a "
+                + " WHERE a.employeeMaster=" + EmpId;
+
+        List<?> list = getHibernateTemplate().find(query);
+//        if (!list.isEmpty()) {
+//            employeeSalaryProcess = (EmployeeSalaryProcess) list.get(0);
+//        } else {
+//            employeeSalaryProcess = null;
+//        }
+        return list;
+    }
+
 }
+
+

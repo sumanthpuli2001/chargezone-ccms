@@ -210,4 +210,18 @@ public class EmployeeDeductionAmountDAOImpl<T> extends GenericsDAOImpl<T> implem
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readByedaId(int edaId) {
+
+//        EmployeeDeductionAmount deductionAmount = new EmployeeDeductionAmount();
+        String query = "SELECT a,b"
+                + " FROM EmployeeDeductionAmount a "
+                + " LEFT JOIN a.employeeSalaryProcess b"
+//                + " ON a.employeeSalaryProcess.id = b.id"
+                + " WHERE a.employeeSalaryProcess.id=" + edaId;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+
+    }
 }

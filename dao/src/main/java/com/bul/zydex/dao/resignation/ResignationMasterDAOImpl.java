@@ -208,10 +208,11 @@ public class ResignationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements R
         String query = "";
         query += " "
                 + " SELECT a.id, a.employeeId, a.employeeName, c.departmentName, b.designationName, a.role"
-                + " From ResignationMaster R"
-                + " LEFT JOIN R.employeeMaster a "
+                + " From ResignationMaster r"
+                + " LEFT JOIN r.employeeMaster a "
                 + " LEFT JOIN a.designationMaster b "
-                + " LEFT JOIN a.departmentMaster c ";
+                + " LEFT JOIN a.departmentMaster c "
+                + " WHERE r.status = 2 ";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
@@ -260,5 +261,21 @@ public class ResignationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements R
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
+    }
+
+    @Override
+    public ResignationMaster readByEmpId(int EmpId) {
+        ResignationMaster resignationMaster = new ResignationMaster();
+        String query = "SELECT a"
+                + " FROM ResignationMaster a "
+                + " WHERE a.employeeMaster=" + EmpId;
+
+        List<?> list = getHibernateTemplate().find(query);
+        if(!list.isEmpty()){
+            resignationMaster = (ResignationMaster) list.get(0);
+        }else{
+            resignationMaster = null;
+        }
+        return resignationMaster;
     }
 }

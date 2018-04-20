@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.resignation;
 
 import com.bul.zydex.dao.GenericsDAO;
+import com.bul.zydex.model.ResignationMaster;
 import java.util.List;
 
 /**
@@ -42,5 +43,8 @@ public interface ResignationMasterDAO<T> extends GenericsDAO<T> {
 
     public List<?> getFinallyResignedEmployees();
 
-    public List<?> getFinallyResignedEmployeesForDashBoard(String employeeId,boolean  employeeExit,boolean  itAdmin,boolean  travelAdmin);
+    public List<?> getFinallyResignedEmployeesForDashBoard(String employeeId, boolean employeeExit, boolean itAdmin, boolean travelAdmin);
+
+    public ResignationMaster readByEmpId(int EmpId);
+
 }

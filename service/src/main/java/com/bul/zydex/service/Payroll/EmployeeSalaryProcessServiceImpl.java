@@ -202,4 +202,9 @@ public class EmployeeSalaryProcessServiceImpl<T> extends GenericsServiceImpl<T> 
         return employeeSalaryProcessDAO.readEmployeeForPfGov(object);
     }
 
+    @Override
+    public List<?> readEmpId(int EmpId) {
+          return employeeSalaryProcessDAO.readEmpId(EmpId);
+    }
+
 }

@@ -6,14 +6,24 @@
 package com.bul.zydex.controller.resignation;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.EmployeeCtcDetail;
+import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.model.ExitInterviewMaster;
+import com.bul.zydex.model.FormateFullNdFinalLetter;
+import com.bul.zydex.model.FullAndFinalSettlement;
 import com.bul.zydex.model.NoDueMaster;
 import com.bul.zydex.model.ResignationMaster;
 import com.bul.zydex.model.UserRightMaster;
+import com.bul.zydex.service.FormateFullNdFinalLetter.FormateFullNdFinalLetterService;
+import com.bul.zydex.service.Payroll.EmployeeDeductionAmountService;
+import com.bul.zydex.service.Payroll.EmployeeSalaryProcessService;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.exitInterview.ExitInterviewMasterService;
 import com.bul.zydex.service.nodue.NoDueMasterService;
+import com.bul.zydex.service.policy.EmployeeCtcDetailService;
+import com.bul.zydex.service.resignation.FullAndFinalSettlementService;
 import com.bul.zydex.service.resignation.ResignationMasterService;
 import java.util.Iterator;
 import java.util.List;
@@ -32,6 +42,11 @@ public abstract class ResignationMasterAbstract extends CustomAbstract {
     protected NoDueMasterService<NoDueMaster> noDueMasterService;
     protected Validator resignationMasterValidator;
     protected UserRightMasterService<UserRightMaster> userRightMasterService;
+    protected FullAndFinalSettlementService<FullAndFinalSettlement> fullAndFinalSettlementService; 
+    protected EmployeeSalaryProcessService<EmployeeSalaryProcess> employeeSalaryProcessService; 
+    protected EmployeeCtcDetailService<EmployeeCtcDetail> employeeCtcDetailService; 
+    protected EmployeeDeductionAmountService<EmployeeDeductionAmount> employeeDeductionAmountService; 
+    protected FormateFullNdFinalLetterService<FormateFullNdFinalLetter> formateFullNdFinalLetterService; 
 
     public UserRightMasterService<UserRightMaster> getUserRightMasterService() {
         return userRightMasterService;
@@ -74,6 +89,48 @@ public abstract class ResignationMasterAbstract extends CustomAbstract {
     public void setNoDueMasterService(NoDueMasterService<NoDueMaster> noDueMasterService) {
         this.noDueMasterService = noDueMasterService;
     }
+
+    public FullAndFinalSettlementService<FullAndFinalSettlement> getFullAndFinalSettlementService() {
+        return fullAndFinalSettlementService;
+    }
+
+    public void setFullAndFinalSettlementService(FullAndFinalSettlementService<FullAndFinalSettlement> fullAndFinalSettlementService) {
+        this.fullAndFinalSettlementService = fullAndFinalSettlementService;
+    }
+
+    public EmployeeSalaryProcessService<EmployeeSalaryProcess> getEmployeeSalaryProcessService() {
+        return employeeSalaryProcessService;
+    }
+
+    public void setEmployeeSalaryProcessService(EmployeeSalaryProcessService<EmployeeSalaryProcess> employeeSalaryProcessService) {
+        this.employeeSalaryProcessService = employeeSalaryProcessService;
+    }
+
+    public EmployeeCtcDetailService<EmployeeCtcDetail> getEmployeeCtcDetailService() {
+        return employeeCtcDetailService;
+    }
+
+    public void setEmployeeCtcDetailService(EmployeeCtcDetailService<EmployeeCtcDetail> employeeCtcDetailService) {
+        this.employeeCtcDetailService = employeeCtcDetailService;
+    }
+
+    public EmployeeDeductionAmountService<EmployeeDeductionAmount> getEmployeeDeductionAmountService() {
+        return employeeDeductionAmountService;
+    }
+
+    public void setEmployeeDeductionAmountService(EmployeeDeductionAmountService<EmployeeDeductionAmount> employeeDeductionAmountService) {
+        this.employeeDeductionAmountService = employeeDeductionAmountService;
+    }
+
+    public FormateFullNdFinalLetterService<FormateFullNdFinalLetter> getFormateFullNdFinalLetterService() {
+        return formateFullNdFinalLetterService;
+    }
+
+    public void setFormateFullNdFinalLetterService(FormateFullNdFinalLetterService<FormateFullNdFinalLetter> formateFullNdFinalLetterService) {
+        this.formateFullNdFinalLetterService = formateFullNdFinalLetterService;
+    }
+    
+    
 
     public void selectResignedEmployee(HttpServletRequest request,
             HttpServletResponse response) throws Exception {

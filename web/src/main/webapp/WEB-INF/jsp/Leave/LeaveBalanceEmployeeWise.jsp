@@ -14,11 +14,12 @@
     </head>
 
     <script>
-        function viewClick(leaveBalId) {
+        function viewClick(empId, leaveTypId) {
             document.getElementById('viewLeaveBal_id').innerHTML = "Fetching ......";
             $.post("leaveEmployeeDetail.htm?act=readLeaveBalAjax",
                     {
-                        leaveBalId: leaveBalId
+                        empId: empId,
+                        leaveTypId: leaveTypId
                     }, function (responseTxt, statusTxt, xhr) {
                 if (statusTxt === "success") {
                     document.getElementById('viewLeaveBal_id').innerHTML = responseTxt;
@@ -175,13 +176,13 @@
                                                         <c:forEach var="employeeBalanceMap" items="${employeeBalanceMap}">
                                                             <tr>
                                                                 <%--<c:forEach var="empLeaveBalance" items="${employeeBalanceMap.value}" varStatus="sCount">--%>
-                                                                <td>${employeeBalanceMap.value[0]}</td>
-                                                                <td>${employeeBalanceMap.value[1]}</td>
-                                                                <td>${employeeBalanceMap.value[2]}</td>
-                                                                <td>${employeeBalanceMap.value[3]}</td>
-                                                                <td>${employeeBalanceMap.value[4]}</td>
-                                                                <td>${employeeBalanceMap.value[5]}</td>
-                                                                <td>${employeeBalanceMap.value[6]}</td>
+                                                                <td style="text-align: center;">${employeeBalanceMap.value[0]}</td>
+                                                                <td style="text-align: center;">${employeeBalanceMap.value[1]}</td>
+                                                                <td style="text-align: center;">${employeeBalanceMap.value[2]}</td>
+                                                                <td style="text-align: center;">${employeeBalanceMap.value[3]}</td>
+                                                                <td style="text-align: center;">${employeeBalanceMap.value[4]}</td>
+                                                                <td style="text-align: center;">${employeeBalanceMap.value[5]}</td>
+                                                                <td style="text-align: center;">${employeeBalanceMap.value[6]}</td>
                                                                 <%--</c:forEach>--%>
                                                                 <td>
                                                                     <c:set var="leaveType" value="${fn:split(employeeBalanceMap.value[7], '_')}"></c:set>
@@ -192,33 +193,33 @@
                                                                             <ul class="dropdown-menu">
                                                                                 <li>
                                                                                     <a href="#" data-toggle="modal" data-target="#myModal"
-                                                                                       onclick="viewClick(${leaveType[0]});">
-                                                                                    &nbsp;&nbsp;CL--${leaveType[0]}
+                                                                                       onclick="viewClick(${employeeBalanceMap.key},${leaveType[0]});">
+                                                                                    &nbsp;&nbsp;CL
                                                                                 </a>
                                                                             </li>
                                                                             <li>
                                                                                 <a href="#" data-toggle="modal" data-target="#myModal"
-                                                                                   onclick="viewClick(${leaveType[1]});">
-                                                                                    &nbsp;&nbsp;SL ---${leaveType[1]}
+                                                                                   onclick="viewClick(${employeeBalanceMap.key},${leaveType[1]});">
+                                                                                    &nbsp;&nbsp;SL
                                                                                 </a>
                                                                             </li>
                                                                             <li>
                                                                                 <a href="#" data-toggle="modal" data-target="#myModal"
-                                                                                   onclick="viewClick(${leaveType[2]});">
-                                                                                    &nbsp;&nbsp;PL --${leaveType[2]}
+                                                                                   onclick="viewClick(${employeeBalanceMap.key},${leaveType[2]});">
+                                                                                    &nbsp;&nbsp;PL
                                                                                 </a>
                                                                             </li>
                                                                             <li>
                                                                                 <a href="#" data-toggle="modal" data-target="#myModal"
-                                                                                   onclick="viewClick(${leaveType[4]});">
-                                                                                    &nbsp;&nbsp;Short Leave --${leaveType[4]}
+                                                                                   onclick="viewClick(${employeeBalanceMap.key},${leaveType[4]});">
+                                                                                    &nbsp;&nbsp;Short Leave
                                                                                 </a>
                                                                             </li>
                                                                             <c:if test="${leaveType[3] ne '0'}">
                                                                                 <li>
                                                                                     <a href="#" data-toggle="modal" data-target="#myModal"
-                                                                                       onclick="viewClick(${leaveType[3]});">
-                                                                                        &nbsp;&nbsp;PTL --${leaveType[3]}
+                                                                                       onclick="viewClick(${employeeBalanceMap.key},${leaveType[3]});">
+                                                                                        &nbsp;&nbsp;PTL
                                                                                     </a>
                                                                                 </li>
                                                                             </c:if>
@@ -278,7 +279,7 @@
     <script>
         jQuery.noConflict();
         jQuery(document).ready(function () {
-          
+
             jQuery("#employeeName").tokenInput(${list}, {
                 preventDuplicates: true,
                 noResultsText: "No Result",
@@ -291,14 +292,17 @@
             var empLeaveBalId = document.getElementById("empLeaveBalId").value;
 //            alert("empLeaveBalId" + empLeaveBalId);
             var leaveBalance = document.getElementById("leaveBalance").value;
+            var EmpId = document.getElementById("EmpId").value;
+            var leavetypeId = document.getElementById("leavetypeId").value;
 //            alert("leaveBalance" + leaveBalance);
             $.ajax({
                 type: "POST",
                 url: "leaveEmployeeDetail.htm?act=leaveBalUpdate&empLeaveBalId=" + empLeaveBalId,
-                data: {leaveBalance: leaveBalance},
+                data: {leaveBalance: leaveBalance, EmpId: EmpId, leavetypeId: leavetypeId},
                 dataType: "text",
                 success: function (responseTxt) {
                     alert(responseTxt);
+                    window.location.reload();
                     document.getElementById("alertId").innerHTML = responseTxt;
                 },
                 error: function () {

@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.service.resignation;
 
+import com.bul.zydex.model.ResignationMaster;
 import com.bul.zydex.service.GenericsService;
 import java.util.List;
 
@@ -44,4 +45,5 @@ public interface ResignationMasterService<T> extends GenericsService<T> {
 
     public List<?> getFinallyResignedEmployeesForDashBoard(String employeeId,boolean  employeeExit,boolean  itAdmin,boolean  travelAdmin);
 
+    public ResignationMaster readByEmpId(int EmpId);
 }

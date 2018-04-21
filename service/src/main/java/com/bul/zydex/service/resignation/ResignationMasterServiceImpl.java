@@ -6,6 +6,7 @@
 package com.bul.zydex.service.resignation;
 
 import com.bul.zydex.dao.resignation.ResignationMasterDAO;
+import com.bul.zydex.model.ResignationMaster;
 import com.bul.zydex.service.GenericsServiceImpl;
 import java.util.List;
 
@@ -99,5 +100,10 @@ public class ResignationMasterServiceImpl<T> extends GenericsServiceImpl<T> impl
     @Override
      public List<?> getFinallyResignedEmployeesForDashBoard(String employeeId,boolean  employeeExit,boolean  itAdmin,boolean  travelAdmin) {
         return resignationMasterDAO.getFinallyResignedEmployeesForDashBoard(employeeId,employeeExit,itAdmin,travelAdmin);
+    }
+
+    @Override
+    public ResignationMaster readByEmpId(int EmpId) {
+          return resignationMasterDAO.readByEmpId(EmpId);
     }
 }

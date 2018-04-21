@@ -16,8 +16,9 @@ import java.util.List;
  *
  * @author Irfan <irfanbhindawala@gmail.com>
  */
-public class EmployeeDeductionAmountServiceImpl<T> extends GenericsServiceImpl<T> implements EmployeeDeductionAmountService<T>{
-   private EmployeeDeductionAmountDAO<T> employeeDeductionAmountDAO; 
+public class EmployeeDeductionAmountServiceImpl<T> extends GenericsServiceImpl<T> implements EmployeeDeductionAmountService<T> {
+
+    private EmployeeDeductionAmountDAO<T> employeeDeductionAmountDAO;
 
     public EmployeeDeductionAmountDAO<T> getEmployeeDeductionAmountDAO() {
         return employeeDeductionAmountDAO;
@@ -45,12 +46,12 @@ public class EmployeeDeductionAmountServiceImpl<T> extends GenericsServiceImpl<T
 
     @Override
     public List<?> readEmployeeForSalaryAddDeductioninfo(EmployeeSalaryProcess employeeSalaryProcess) {
-       return employeeDeductionAmountDAO.readEmployeeForSalaryAddDeductioninfo(employeeSalaryProcess);
+        return employeeDeductionAmountDAO.readEmployeeForSalaryAddDeductioninfo(employeeSalaryProcess);
     }
 
     @Override
     public List<?> readCheckDeductionPtAmount(int empId, PayrollFinancialYear payrollFinancialYear) {
-       return employeeDeductionAmountDAO.readCheckDeductionPtAmount(empId, payrollFinancialYear);
+        return employeeDeductionAmountDAO.readCheckDeductionPtAmount(empId, payrollFinancialYear);
     }
 
     @Override
@@ -60,24 +61,27 @@ public class EmployeeDeductionAmountServiceImpl<T> extends GenericsServiceImpl<T
 
     @Override
     public List<?> readEmployeeForloanEditinfo(EmployeeSalaryProcess employeeSalaryProcess) {
-       return employeeDeductionAmountDAO.readEmployeeForloanEditinfo(employeeSalaryProcess);
+        return employeeDeductionAmountDAO.readEmployeeForloanEditinfo(employeeSalaryProcess);
     }
 
     @Override
     public void delete1(int empSalaryProcessid, String payrollLoanType) {
-       employeeDeductionAmountDAO.delete1(empSalaryProcessid, payrollLoanType);
+        employeeDeductionAmountDAO.delete1(empSalaryProcessid, payrollLoanType);
     }
 
     @Override
     public List<?> readEmployeeloandelete(int empSalaryProcessid, String payrollLoanType) {
-       return employeeDeductionAmountDAO.readEmployeeloandelete(empSalaryProcessid, payrollLoanType);
+        return employeeDeductionAmountDAO.readEmployeeloandelete(empSalaryProcessid, payrollLoanType);
     }
 
     @Override
     public List<?> readEmployeeForSalaryDeductioninfoSearch(EmployeeSalaryProcess employeeSalaryProcess) {
-      return employeeDeductionAmountDAO.readEmployeeForSalaryDeductioninfoSearch(employeeSalaryProcess);
+        return employeeDeductionAmountDAO.readEmployeeForSalaryDeductioninfoSearch(employeeSalaryProcess);
     }
 
-   
-   
+    @Override
+    public List<?> readByedaId(int edaId) {
+        return employeeDeductionAmountDAO.readByedaId(edaId);
+    }
+
 }

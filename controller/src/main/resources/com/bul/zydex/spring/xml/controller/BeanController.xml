@@ -387,6 +387,11 @@
         <property name="exitInterviewMasterService" ref="exitInterviewMasterService1" />
         <property name="noDueMasterService" ref="noDueMasterService1" />
         <property name="userRightMasterService" ref="userRightMasterService1" />
+        <property name="fullAndFinalSettlementService" ref="fullAndFinalSettlementService1" />
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
+        <property name="employeeCtcDetailService" ref="employeeCtcDetailService1" />
+        <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
+        <property name="formateFullNdFinalLetterService" ref="formateFullNdFinalLetterService1" />
 
     </bean>
     <!--ExitInterview-->

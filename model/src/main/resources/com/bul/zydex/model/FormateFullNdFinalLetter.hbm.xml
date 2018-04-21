@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.FormateFullNdFinalLetter" table="formate_full_nd_final_letter" catalog="hr_power_astral">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="companyName" type="string">
+            <column name="company_name" />
+        </property>
+        <property name="description" type="string">
+            <column name="descripation" />
+        </property>
+        <property name="approvalPerson" type="java.lang.Integer">
+            <column name="approval_person" />
+        </property>
+        <property name="createdBy" type="java.lang.Integer">
+            <column name="created_by" />
+        </property>
+        <property name="createDate" type="string">
+            <column name="created_date" />
+        </property>
+        <property name="updatedBy" type="java.lang.Integer">
+            <column name="updated_by" />
+        </property>
+        <property name="updatedDate" type="string">
+            <column name="updated_date" />
+        </property>
+        <property name="Status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+    </class>
+
+</hibernate-mapping>

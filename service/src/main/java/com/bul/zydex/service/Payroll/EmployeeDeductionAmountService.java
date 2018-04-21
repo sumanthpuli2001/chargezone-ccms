@@ -36,4 +36,6 @@ public interface EmployeeDeductionAmountService<T> extends GenericsService<T> {
     public List<?> readEmployeeloandelete(int empSalaryProcessid, String payrollLoanType);
 
     public List<?> readEmployeeForSalaryDeductioninfoSearch(EmployeeSalaryProcess employeeSalaryProcess);
+    
+    public List<?> readByedaId(int edaId);
 }

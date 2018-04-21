@@ -24,8 +24,9 @@ public class FullAndFinalSettlementDAOImpl<T> extends GenericsDAOImpl<T> impleme
     public List<?> readFAndFData() {
         String query = "";
         query += " "
-                + " SELECT a.id, a.resignationEmpId, a.noticePeriod, a.givenNotice"
+                + " SELECT a.id, b.employeeName, a.noticePeriod, a.givenNotice"
                 + " FROM FullAndFinalSettlement a "
+                + " LEFT JOIN a.employeeMaster b"
                 + " order by a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);

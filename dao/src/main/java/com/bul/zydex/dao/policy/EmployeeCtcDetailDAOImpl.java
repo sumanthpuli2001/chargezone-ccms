@@ -9,6 +9,8 @@ import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.EmployeeCtcDetail;
 import com.bul.zydex.model.EmployeeMaster;
 import java.util.List;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 /**
  *
@@ -71,18 +73,35 @@ public class EmployeeCtcDetailDAOImpl<T> extends GenericsDAOImpl<T> implements E
     @Override
     public List<?> empid(int employeeid) {
 
-//        EmployeeCtcDetail ctcDetail = new EmployeeCtcDetail();
+//        String query = "SELECT b.id, b.ctcAllowance, b.employeeMaster, b.amount, b.monthly, b.yearly"
+//                + " FROM EmployeeCtcDetail a "
+//                + " INNER JOIN EmployeeCtcDetailSalary b ON  b.monthly = a.month "
+//                + " WHERE b.employeeMaster=" + employeeid 
+//                + " group by b.ctcAllowance";
+        Session s = getSessionFactory().openSession();
+        String sqlString = "SELECT"
+                + "  b.id, b.ctc_allowance_id, b.employee_master_id, b.amount, b.monthly , b.yearly"
+                + " FROM"
+                + " hr_power_astral.employee_ctc_detail a"
+                + " INNER JOIN"
+                + " hr_power_astral.employee_ctc_detail_salary b"
+                + " ON b.monthly  = a.month"
+                + " WHERE  b.employee_master_id =" + employeeid
+                + " group by b.id";
+        SQLQuery query = s.createSQLQuery(sqlString);
+        List<?> list = query.list();
+        s.close();
+//        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public List<?> CtcDetailempid(int employeeid) {
         String query = "SELECT a"
                 + " FROM EmployeeCtcDetail a "
                 + " WHERE a.employeeMaster=" + employeeid;
 
         List<?> list = getHibernateTemplate().find(query);
-//        if (!list.isEmpty()) {
-//            ctcDetail = (EmployeeCtcDetail) list.get(0);
-//        } else {
-//            ctcDetail = null;
-//        }
         return list;
     }
-
 }

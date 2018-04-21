@@ -30,8 +30,8 @@
                                                 <%
                                                     Date date = new Date();
                                                     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                                                    //                                           out.print( "Date.." + df.format(date));
-                                                    out.print("<div align=\"right\">Date:" + df.format(date) + "</div>");
+                                                    out.print("Date : " + df.format(date));
+//                                                    out.print("<div align=\"right\">DATE : " + df.format(date) + "</div>");
                                                 %>
                                             <center><b><font size="3">SPC LIFESCIENCES PVT LTD. </font></b></center> 
                                             <div class="form-group">
@@ -86,28 +86,32 @@
                                                             <td>${esp.netPayable}</td>
                                                         </tr>
                                                     </c:forEach>
-                                                    <c:forEach var="ctcDetail" items="${ctcDetail}">
+                                                    <c:forEach var="ctcDetail11" items="${ctcDetail1}">
                                                         <tr>
-                                                            <c:if test="${ctcDetail.ctcAllowance.id == 2}"><td><b>Bonus</b></td></c:if>
-                                                            <c:if test="${ctcDetail.ctcAllowance.id == 3}"><td><b>Gratuiety</b></td></c:if>
-                                                            <c:if test="${ctcDetail.ctcAllowance.id == 4}"><td><b>LTA</td></b></c:if>
-                                                            <c:if test="${ctcDetail.ctcAllowance.id == 5}"><td><b>PERFORMANCE PAY</b></td></c:if>
-                                                            <c:if test="${ctcDetail.ctcAllowance.id == 6}"><td><b>Variable</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 2}"><td><b>Bonus</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 3}"><td><b>Gratuiety</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 4}"><td><b>LTA</td></b></c:if>
+                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 5}"><td><b>PERFORMANCE PAY</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 6}"><td><b>Variable</b></td></c:if>
                                                                 <th colspan="1"></th>
-                                                            <c:if test="${ctcDetail.month == 01}"><td><b>JAN</b></td></c:if>
-                                                            <c:if test="${ctcDetail.month == 02}"><td><b>FEB</b></td></c:if>
-                                                            <c:if test="${ctcDetail.month == 03}"><td><b>MAR</b></td></c:if>
-                                                            <c:if test="${ctcDetail.month == 04}"><td><b>APR</b></td></c:if>
-                                                            <c:if test="${ctcDetail.month == 05}"><td><b>MAY</b></td></c:if>
-                                                            <c:if test="${ctcDetail.month == 06}"><td><b>JUN</b></td></c:if>
-                                                            <c:if test="${ctcDetail.month == 07}"><td><b>JUL</b></td></c:if>
-                                                            <c:if test="${ctcDetail.month == 08}"><td><b>AUG</b></td></c:if>
-                                                            <c:if test="${ctcDetail.month == 09}"><td><b>SEP</b></td></c:if>
-                                                            <c:if test="${ctcDetail.month == 10}"><td><b>OCT</b></td></c:if>
-                                                            <c:if test="${ctcDetail.month == 11}"><td><b>NOV</b></td></c:if>
-                                                            <c:if test="${ctcDetail.month == 12}"><td><b>DEC</b></td></c:if>
-                                                            <td>${ctcDetail.amount}</td>
-                                                        </tr>
+                                                            <c:if test="${ctcDetail11.month == 01}"><td><b>JAN</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.month == 02}"><td><b>FEB</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.month == 03}"><td><b>MAR</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.month == 04}"><td><b>APR</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.month == 05}"><td><b>MAY</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.month == 06}"><td><b>JUN</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.month == 07}"><td><b>JUL</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.month == 08}"><td><b>AUG</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.month == 09}"><td><b>SEP</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.month == 10}"><td><b>OCT</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.month == 11}"><td><b>NOV</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.month == 12}"><td><b>DEC</b></td></c:if>
+                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 2}"><td>${totalMonthlyAmount2}</td></c:if>
+                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 3}"><td>${totalMonthlyAmount3}</td></c:if>
+                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 4}"><td>${totalMonthlyAmount4}</td></c:if>
+                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 5}"><td>${totalMonthlyAmount5}</td></c:if>
+                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 6}"><td>${totalMonthlyAmount6}</td></c:if>
+                                                            </tr>
                                                     </c:forEach>
 
                                                     <tr>
@@ -158,20 +162,20 @@
                                                     <tr>
                                                         <td colspan="2"> Said amount of Rs <b>${finaltotalBD}</b> /- will be credited to his ICICI Bank Account No. ${employeeMaster.bankAccountNo} against full and final statement of his account.</td>
                                                     </tr>
-                                                      <tr>
-                                                          <td colspan="2">&nbsp;</td>
+                                                    <tr>
+                                                        <td colspan="2">&nbsp;</td>
                                                     </tr>
                                                     <tr>
                                                         <td colspan="2"><b>${fNfList[0].companyName}</b></td>
                                                     </tr>
-                                                       <tr>
-                                                          <td colspan="2">&nbsp;</td>
+                                                    <tr>
+                                                        <td colspan="2">&nbsp;</td>
                                                     </tr>
-                                                       <tr>
-                                                          <td colspan="2">&nbsp;</td>
+                                                    <tr>
+                                                        <td colspan="2">&nbsp;</td>
                                                     </tr>
-                                                       <tr>
-                                                          <td colspan="2">&nbsp;</td>
+                                                    <tr>
+                                                        <td colspan="2">&nbsp;</td>
                                                     </tr>
                                                     <tr>
                                                         <td> <span style="border-top: 1px black solid;">Prepared By:</span></td>
@@ -181,17 +185,17 @@
                                                         <td>Kundan Gupta</td>
                                                         <td>Shailesh Limbachiya <br/> Manager HR & Admin</td>
                                                     </tr>
-                                                       <tr>
-                                                          <td colspan="2">&nbsp;</td>
+                                                    <tr>
+                                                        <td colspan="2">&nbsp;</td>
                                                     </tr>
-                                                   <tr>
+                                                    <tr>
                                                         <td colspan="2">${fNfList[0].description}</td>
                                                     </tr>
-                                                   <tr>
-                                                       <td colspan="2" style="text-align: right;"><b>MR.&nbsp;${employeeMaster.employeeName}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <tr>
+                                                        <td colspan="2" style="text-align: right;"><b>MR.&nbsp;${employeeMaster.employeeName}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                     </tr>
-                                                   <tr>
-                                                       <td colspan="2" style="text-align: right;">Receiver Signature&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <tr>
+                                                        <td colspan="2" style="text-align: right;">Receiver Signature&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                     </tr>
                                                 </table>
                                             </div>

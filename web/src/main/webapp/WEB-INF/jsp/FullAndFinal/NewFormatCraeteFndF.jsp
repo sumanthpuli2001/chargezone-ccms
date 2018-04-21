@@ -105,14 +105,14 @@
 
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 
-    <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
-    <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
+    <!--    <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
+        <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>-->
     <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
-    <script>
+<!--    <script>
         initSample();
 
 
-    </script>
+    </script>-->
     <script>
         function viewClick(id) {
             window.location = 'recruitment.htm?act=viewMPPShow&id=' + id;

@@ -24,4 +24,5 @@ public interface EmployeeCtcDetailDAO<T> extends GenericsDAO<T> {
 
     public List<?> empid(int employeeid);
 
+    public List<?> CtcDetailempid(int employeeid);
 }

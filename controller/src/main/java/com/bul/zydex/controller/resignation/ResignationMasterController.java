@@ -12,6 +12,7 @@ import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeCtcDetail;
+import com.bul.zydex.model.EmployeeCtcDetailSalary;
 import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeSalaryProcess;
@@ -1284,30 +1285,55 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         String id = request.getParameter("id");
         fullAndFinalSettlement = fullAndFinalSettlementService.readById(Integer.parseInt(id));
 
-        employeeMaster = employeeMasterService.readById(fullAndFinalSettlement.getResignationEmpId());
-        ResignationMaster rm = resignationMasterService.readByEmpId(fullAndFinalSettlement.getResignationEmpId());
+        employeeMaster = employeeMasterService.readById(fullAndFinalSettlement.getEmployeeMaster().getId());
+        ResignationMaster rm = resignationMasterService.readByEmpId(fullAndFinalSettlement.getEmployeeMaster().getId());
         List<?> esp = employeeSalaryProcessService.readEmpId(rm.getEmployeeMaster().getId());
-        List<?> ctcDetail = employeeCtcDetailService.empid(fullAndFinalSettlement.getResignationEmpId());
+        List<?> ctcDetail = employeeCtcDetailService.empid(fullAndFinalSettlement.getEmployeeMaster().getId());
+        List<?> ctcDetail1 = employeeCtcDetailService.CtcDetailempid(fullAndFinalSettlement.getEmployeeMaster().getId());
         List<?> fNfList = formateFullNdFinalLetterService.fetchFnFDate();
-        EmployeeCtcDetail ecd = (EmployeeCtcDetail) ctcDetail.get(0);
+        EmployeeCtcDetail ecd = (EmployeeCtcDetail) ctcDetail1.get(0);
         EmployeeSalaryProcess em = (EmployeeSalaryProcess) esp.get(0);
         List<?> list = employeeDeductionAmountService.readByedaId(em.getId());
         Double netPayable = 0.0;
-        Double amount = 0.0;
+        Double totalMonthlyAmount2 = 0.0;
+        Double totalMonthlyAmount3 = 0.0;
+        Double totalMonthlyAmount4 = 0.0;
+        Double totalMonthlyAmount5 = 0.0;
+        Double totalMonthlyAmount6 = 0.0;
         Double deductionAmount = 0.0;
 
+        for (int i = 0; i < ctcDetail.size(); i++) {
+            Object[] o = (Object[]) ctcDetail.get(i);
+            if ((Integer.parseInt(o[1].toString()) == 2)) {
+                Double amount1 = (Double) o[3];
+                totalMonthlyAmount2 += Double.valueOf(amount1);
+            }
+            if ((Integer.parseInt(o[1].toString()) == 3)) {
+                Double amount1 = (Double) o[3];
+                totalMonthlyAmount3 += Double.valueOf(amount1);
+            }
+            if ((Integer.parseInt(o[1].toString()) == 4)) {
+                Double amount1 = (Double) o[3];
+                totalMonthlyAmount4 += Double.valueOf(amount1);
+            }
+            if ((Integer.parseInt(o[1].toString()) == 5)) {
+                Double amount1 = (Double) o[3];
+                totalMonthlyAmount5 += Double.valueOf(amount1);
+            }
+            if ((Integer.parseInt(o[1].toString()) == 6)) {
+                Double amount1 = (Double) o[3];
+                totalMonthlyAmount6 += Double.valueOf(amount1);
+            }
+        }
 //       ///// --------   For Salary For The Month of -------//////
         for (int i = 0; i < esp.size(); i++) {
             EmployeeSalaryProcess em1 = (EmployeeSalaryProcess) esp.get(i);
             netPayable += em1.getNetPayable();
         }
 
-//        //////  ------ ctc_allowance ------------ //////
-        for (int i = 0; i < ctcDetail.size(); i++) {
-            EmployeeCtcDetail ecd1 = (EmployeeCtcDetail) ctcDetail.get(i);
-            amount += ecd1.getAmount();
-        }
+//        //////  ------ ctc_allowance for monthvise ------------ //////
 
+        Double monthAmountTotal = totalMonthlyAmount2 + totalMonthlyAmount3 + totalMonthlyAmount4 + totalMonthlyAmount5 + totalMonthlyAmount6;
 //        /////// -------- DEDUCTIONS -----------------//////
         for (int i = 0; i < list.size(); i++) {
             Object[] o = (Object[]) list.get(i);
@@ -1316,7 +1342,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         }
 
 //        --------  (B) TOTAL PAYABLES ------------   //////
-        Double totalpayable = netPayable + amount;
+        Double totalpayable = netPayable + monthAmountTotal;
 //        ------  TOTAL NET PAYABLE ( B - D ) -----  ///////
         Double finaltotalBD = totalpayable - deductionAmount;
 
@@ -1337,6 +1363,10 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.getModelMap().put("deductionAmount", deductionAmount);
         mv.getModelMap().put("finaltotalBD", finaltotalBD);
         mv.getModelMap().put("fNfList", fNfList);
+        mv.getModelMap().put("ctcDetail1", ctcDetail1);
+        mv.getModelMap().put("totalMonthlyAmount2", totalMonthlyAmount2);
+        mv.getModelMap().put("totalMonthlyAmount3", totalMonthlyAmount3);
+        mv.getModelMap().put("totalMonthlyAmount4", totalMonthlyAmount4);
         mv.getModelMap().put("designationName", designationName);
         mv.getModelMap().put("departmentName", departmentName);
         mv.setViewName("Resignation/FullAndFinaSettlementReportShow");
@@ -1348,7 +1378,8 @@ public class ResignationMasterController extends ResignationMasterAbstract {
 
         ModelAndView mv = new ModelAndView();
         FormateFullNdFinalLetter formateFullNdFinalLetter = new FormateFullNdFinalLetter();
-
+        List<?> list = formateFullNdFinalLetterService.fetchFnFDate();
+        mv.getModelMap().put("list", list);
         mv.getModelMap().put("formateFullNdFinalLetter", formateFullNdFinalLetter);
         mv.setViewName("FullAndFinal/FullAndFinalFetchList");
         return mv;
@@ -1384,12 +1415,12 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         formateFullNdFinalLetter.setCreatedBy(employeeMaster.getId());
         formateFullNdFinalLetter.setStatus(0);
         formateFullNdFinalLetterService.create(formateFullNdFinalLetter);
-        
-        request.setAttribute("successMessage",
-                    "Information: The Format Full And Final Settlement Create successfully");
 
-        mv = fullandfcreateClick(request,response);
-        
+        request.setAttribute("successMessage",
+                "Information: The Format Full And Final Settlement Create successfully");
+
+        mv = fullandfcreateClick(request, response);
+
         return mv;
     }
 }

@@ -11,7 +11,7 @@
             <generator class="identity" />
         </id>
         <many-to-one name="employeeMaster" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
-            <column name="resignation_emp_id" />
+            <column name="employee_master_id" />
         </many-to-one>
         <property name="noticePeriod" type="java.lang.Integer">
             <column name="notice_period" />

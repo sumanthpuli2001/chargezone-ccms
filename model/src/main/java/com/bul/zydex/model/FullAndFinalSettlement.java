@@ -24,7 +24,7 @@ public class FullAndFinalSettlement {
     public FullAndFinalSettlement(){
         
     }
-    
+
     public FullAndFinalSettlement(Integer id, EmployeeMaster employeeMaster, Integer noticePeriod, Integer givenNotice, String createdDate, Integer createdBy, String updateDate, Integer updatedBy, Integer status) {
         this.id = id;
         this.employeeMaster = employeeMaster;
@@ -52,7 +52,6 @@ public class FullAndFinalSettlement {
     public void setEmployeeMaster(EmployeeMaster employeeMaster) {
         this.employeeMaster = employeeMaster;
     }
-
 
     public Integer getNoticePeriod() {
         return noticePeriod;
@@ -110,6 +109,7 @@ public class FullAndFinalSettlement {
         this.status = status;
     }
     
-    
 
+
+   
 }

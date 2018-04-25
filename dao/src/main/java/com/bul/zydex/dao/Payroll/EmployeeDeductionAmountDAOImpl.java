@@ -13,6 +13,8 @@ import com.bul.zydex.model.PayrollFinancialYear;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 /**
  *
@@ -211,16 +213,23 @@ public class EmployeeDeductionAmountDAOImpl<T> extends GenericsDAOImpl<T> implem
     }
 
     @Override
-    public List<?> readByedaId(int edaId) {
+    public List<?> readByedaId(int edaId, String eftDate, String relivDate) {
 
-//        EmployeeDeductionAmount deductionAmount = new EmployeeDeductionAmount();
-        String query = "SELECT a,b"
-                + " FROM EmployeeDeductionAmount a "
-                + " LEFT JOIN a.employeeSalaryProcess b"
-//                + " ON a.employeeSalaryProcess.id = b.id"
-                + " WHERE a.employeeSalaryProcess.id=" + edaId;
+        Session s = getSessionFactory().openSession();
+        String sqlString = "SELECT"
+                + " c.id, c.month, c.year ,b.deduction_type, b.deduction_amount"
+                + " FROM"
+                + " hr_power_astral.resignation_master a "
+                + " LEFT JOIN hr_power_astral.employee_salary_process c ON a.emp_master_id = c.employee_master_id"
+                + " LEFT JOIN hr_power_astral.employee_deduction_amount b ON b.employee_salary_process_id = c.id"
+                + " WHERE"
+                + " month BETWEEN DATE_FORMAT(STR_TO_DATE('" + eftDate + "' , '%d/%m/%Y - %H:%i'),'%m')"
+                + " AND DATE_FORMAT(STR_TO_DATE( '" + relivDate + "' , '%d/%m/%Y - %H:%i'),'%m')"
+                + " AND c.employee_master_id=" + edaId;
 
-        List<?> list = getHibernateTemplate().find(query);
+        SQLQuery query = s.createSQLQuery(sqlString);
+        List<?> list = query.list();
+        s.close();
         return list;
 
     }

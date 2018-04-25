@@ -46,5 +46,7 @@ public interface ResignationMasterDAO<T> extends GenericsDAO<T> {
     public List<?> getFinallyResignedEmployeesForDashBoard(String employeeId, boolean employeeExit, boolean itAdmin, boolean travelAdmin);
 
     public ResignationMaster readByEmpId(int EmpId);
+    
+    public List<?> fetchBWdate(int emp, String eftDate, String relivDate);
 
 }

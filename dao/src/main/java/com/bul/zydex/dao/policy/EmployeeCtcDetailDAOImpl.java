@@ -80,14 +80,14 @@ public class EmployeeCtcDetailDAOImpl<T> extends GenericsDAOImpl<T> implements E
 //                + " group by b.ctcAllowance";
         Session s = getSessionFactory().openSession();
         String sqlString = "SELECT"
-                + "  b.id, b.ctc_allowance_id, b.employee_master_id, b.amount, b.monthly , b.yearly"
+                + "  b.id, b.ctc_allowance_id, b.employee_master_id, b.amount, b.month , b.year"
                 + " FROM"
                 + " hr_power_astral.employee_ctc_detail a"
                 + " INNER JOIN"
                 + " hr_power_astral.employee_ctc_detail_salary b"
                 + " ON b.monthly  = a.month"
                 + " WHERE  b.employee_master_id =" + employeeid
-                + " group by b.id";
+                + " group by b.ctc_allowance_id";
         SQLQuery query = s.createSQLQuery(sqlString);
         List<?> list = query.list();
         s.close();

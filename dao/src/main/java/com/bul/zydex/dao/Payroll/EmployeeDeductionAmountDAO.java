@@ -38,5 +38,5 @@ public interface EmployeeDeductionAmountDAO<T> extends GenericsDAO<T> {
 
     public List<?> readEmployeeForSalaryDeductioninfoSearch(EmployeeSalaryProcess employeeSalaryProcess);
     
-    public List<?> readByedaId(int edaId);
+    public List<?> readByedaId(int edaId, String eftDate, String relivDate);
 }

@@ -1236,15 +1236,18 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         FullAndFinalSettlement fullAndFinalSettlement = new FullAndFinalSettlement();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
         DesignationMaster designationMaster = new DesignationMaster();
         DepartmentMaster departmentMaster = new DepartmentMaster();
+        String empid = request.getParameter("employeeMaster");
+        employeeMaster1 = employeeMasterService.readById(Integer.parseInt(empid));
         BindException errors = new BindException(fullAndFinalSettlement, "fullAndFinalSettlement");
         bind(request, fullAndFinalSettlement);
         departmentList(request);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
-
+        fullAndFinalSettlement.setEmployeeMaster(employeeMaster1);
         fullAndFinalSettlement.setCreatedDate(sdf.format(cDate));
         fullAndFinalSettlement.setCreatedBy(employeeMaster.getId());
         fullAndFinalSettlement.setStatus(0);
@@ -1287,20 +1290,22 @@ public class ResignationMasterController extends ResignationMasterAbstract {
 
         employeeMaster = employeeMasterService.readById(fullAndFinalSettlement.getEmployeeMaster().getId());
         ResignationMaster rm = resignationMasterService.readByEmpId(fullAndFinalSettlement.getEmployeeMaster().getId());
+        List<?> ListBW = resignationMasterService.fetchBWdate(rm.getEmployeeMaster().getId(), rm.getEffectiveDatetime(), rm.getRelievingDate());
         List<?> esp = employeeSalaryProcessService.readEmpId(rm.getEmployeeMaster().getId());
         List<?> ctcDetail = employeeCtcDetailService.empid(fullAndFinalSettlement.getEmployeeMaster().getId());
-        List<?> ctcDetail1 = employeeCtcDetailService.CtcDetailempid(fullAndFinalSettlement.getEmployeeMaster().getId());
+//        List<?> ctcDetail1 = employeeCtcDetailService.CtcDetailempid(fullAndFinalSettlement.getEmployeeMaster().getId());
         List<?> fNfList = formateFullNdFinalLetterService.fetchFnFDate();
-        EmployeeCtcDetail ecd = (EmployeeCtcDetail) ctcDetail1.get(0);
-        EmployeeSalaryProcess em = (EmployeeSalaryProcess) esp.get(0);
-        List<?> list = employeeDeductionAmountService.readByedaId(em.getId());
-        Double netPayable = 0.0;
-        Double totalMonthlyAmount2 = 0.0;
-        Double totalMonthlyAmount3 = 0.0;
-        Double totalMonthlyAmount4 = 0.0;
-        Double totalMonthlyAmount5 = 0.0;
-        Double totalMonthlyAmount6 = 0.0;
-        Double deductionAmount = 0.0;
+//        EmployeeCtcDetail ecd = (EmployeeCtcDetail) ctcDetail1.get(0);
+//        EmployeeSalaryProcess em = (EmployeeSalaryProcess) esp.get(0);
+        List<?> list = employeeDeductionAmountService.readByedaId(rm.getEmployeeMaster().getId(), rm.getEffectiveDatetime(), rm.getRelievingDate());
+        Double netPayable = 0.00;
+        Double totalMonthlyAmount2 = 0.00;
+        Double totalMonthlyAmount3 = 0.00;
+        Double totalMonthlyAmount4 = 0.00;
+        Double totalMonthlyAmount5 = 0.00;
+        Double totalMonthlyAmount6 = 0.00;
+        Double deductionAmount = 0.00;
+        Double mmmm = 0.00;
 
         for (int i = 0; i < ctcDetail.size(); i++) {
             Object[] o = (Object[]) ctcDetail.get(i);
@@ -1325,24 +1330,29 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 totalMonthlyAmount6 += Double.valueOf(amount1);
             }
         }
-//       ///// --------   For Salary For The Month of -------//////
-        for (int i = 0; i < esp.size(); i++) {
-            EmployeeSalaryProcess em1 = (EmployeeSalaryProcess) esp.get(i);
-            netPayable += em1.getNetPayable();
+
+        for (int i = 0; i < ListBW.size(); i++) {
+            Object[] o = (Object[]) ListBW.get(i);
+            Double reafmowise = (Double) o[1];
+            mmmm += Double.valueOf(reafmowise);
         }
 
+//       ///// --------   For Salary For The Month of -------//////
+//        for (int i = 0; i < esp.size(); i++) {
+//            EmployeeSalaryProcess em1 = (EmployeeSalaryProcess) esp.get(i);
+//            netPayable += em1.getGrossTotal();
+//        }
 //        //////  ------ ctc_allowance for monthvise ------------ //////
-
         Double monthAmountTotal = totalMonthlyAmount2 + totalMonthlyAmount3 + totalMonthlyAmount4 + totalMonthlyAmount5 + totalMonthlyAmount6;
 //        /////// -------- DEDUCTIONS -----------------//////
         for (int i = 0; i < list.size(); i++) {
             Object[] o = (Object[]) list.get(i);
-            EmployeeDeductionAmount da = (EmployeeDeductionAmount) o[0];
-            deductionAmount += da.getDeductionAmount();
+            Double aaam = (Double) o[4];
+            deductionAmount += aaam.valueOf(aaam);
         }
 
 //        --------  (B) TOTAL PAYABLES ------------   //////
-        Double totalpayable = netPayable + monthAmountTotal;
+        Double totalpayable = mmmm + monthAmountTotal;
 //        ------  TOTAL NET PAYABLE ( B - D ) -----  ///////
         Double finaltotalBD = totalpayable - deductionAmount;
 
@@ -1356,19 +1366,21 @@ public class ResignationMasterController extends ResignationMasterAbstract {
 
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("rm", rm);
-        mv.getModelMap().put("esp", esp);
+//        mv.getModelMap().put("esp", esp);
+        mv.getModelMap().put("ListBW", ListBW);
         mv.getModelMap().put("ctcDetail", ctcDetail);
         mv.getModelMap().put("list", list);
         mv.getModelMap().put("totalpayable", totalpayable);
         mv.getModelMap().put("deductionAmount", deductionAmount);
         mv.getModelMap().put("finaltotalBD", finaltotalBD);
         mv.getModelMap().put("fNfList", fNfList);
-        mv.getModelMap().put("ctcDetail1", ctcDetail1);
+//        mv.getModelMap().put("ctcDetail1", ctcDetail1);
         mv.getModelMap().put("totalMonthlyAmount2", totalMonthlyAmount2);
         mv.getModelMap().put("totalMonthlyAmount3", totalMonthlyAmount3);
         mv.getModelMap().put("totalMonthlyAmount4", totalMonthlyAmount4);
         mv.getModelMap().put("designationName", designationName);
         mv.getModelMap().put("departmentName", departmentName);
+        mv.getModelMap().put("fullAndFinalSettlement", fullAndFinalSettlement);
         mv.setViewName("Resignation/FullAndFinaSettlementReportShow");
 
         return mv;
@@ -1421,6 +1433,22 @@ public class ResignationMasterController extends ResignationMasterAbstract {
 
         mv = fullandfcreateClick(request, response);
 
+        return mv;
+    }
+
+    public ModelAndView resignationDeleteList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String empId[] = request.getParameterValues("checkId");
+        for (String z : empId) {
+            try {
+                fullAndFinalSettlementService.delete(Integer.parseInt(z));
+                request.setAttribute("successMessage",
+                        "Info : One or more records are deleted successfully.");
+            } catch (Exception e) {
+
+            }
+        }
+        mv = fullAndfinal(request, response);
         return mv;
     }
 }

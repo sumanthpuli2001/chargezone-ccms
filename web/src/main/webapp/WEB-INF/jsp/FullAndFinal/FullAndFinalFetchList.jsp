@@ -46,7 +46,6 @@
         <!-- Main content -->
         <form:form action="resignationMaster.htm?act=newFormatCreate" method="post" commandName="formateFullNdFinalLetter"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
-            <form:hidden path="id"></form:hidden>
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12">
@@ -135,7 +134,7 @@
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
     <script>
         function viewClick(id) {
-            window.location = 'recruitment.htm?act=viewMPPShow&id=' + id;
+            window.location = 'resignationMaster.htm?act=ViewfullAndfinalSettlement&id=' + id;
         }
     </script>
 </html>

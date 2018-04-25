@@ -44,7 +44,7 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form action="recruitment.htm?act=budgetdeleteSubmit" method="post" commandName="fullAndFinalSettlement"
+        <form:form action="resignationMaster.htm?act=resignationDeleteList" method="post" commandName="fullAndFinalSettlement"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <form:hidden path="id"></form:hidden>
                 <section class="content">

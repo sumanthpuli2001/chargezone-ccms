@@ -22,6 +22,7 @@
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
+                                             <input type="button" class="btn btn-facebook" style="float: right; width: 100px;" value="Print" onclick= "printDiv('printableArea')">
 
                                 <div class="box-body">
                                     <div class="row">
@@ -30,7 +31,7 @@
                                                 <%
                                                     Date date = new Date();
                                                     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                                                    out.print("Date : " + df.format(date));
+                                                    out.print("ToDay : " + df.format(date));
 //                                                    out.print("<div align=\"right\">DATE : " + df.format(date) + "</div>");
                                                 %>
                                             <center><b><font size="3">SPC LIFESCIENCES PVT LTD. </font></b></center> 
@@ -67,50 +68,50 @@
                                                         <th colspan="3"></th>
                                                         <th>Amount (Rs.)</th>
                                                     </tr>
-                                                    <c:forEach var="esp" items="${esp}">
+                                                    <c:forEach var="ListBWw" items="${ListBW}">
                                                         <tr>
                                                             <td><b>Salary  For The Month of</b></td>
                                                             <th colspan="1"></th>
-                                                            <c:if test="${esp.month == 01}"><td><b>JAN</b></td></c:if>
-                                                            <c:if test="${esp.month == 02}"><td><b>FEB</b></td></c:if>
-                                                            <c:if test="${esp.month == 03}"><td><b>MAR</b></td></c:if>
-                                                            <c:if test="${esp.month == 04}"><td><b>APR</b></td></c:if>
-                                                            <c:if test="${esp.month == 05}"><td><b>MAY</b></td></c:if>
-                                                            <c:if test="${esp.month == 06}"><td><b>JUN</b></td></c:if>
-                                                            <c:if test="${esp.month == 07}"><td><b>JUL</b></td></c:if>
-                                                            <c:if test="${esp.month == 08}"><td><b>AUG</b></td></c:if>
-                                                            <c:if test="${esp.month == 09}"><td><b>SEP</b></td></c:if>
-                                                            <c:if test="${esp.month == 10}"><td><b>OCT</b></td></c:if>
-                                                            <c:if test="${esp.month == 11}"><td><b>NOV</b></td></c:if>
-                                                            <c:if test="${esp.month == 12}"><td><b>DEC</b></td></c:if>
-                                                            <td>${esp.netPayable}</td>
+                                                            <c:if test="${ListBWw[2] == 01}"><td><b>JAN</b>'${ListBWw[3]}</td></c:if>
+                                                            <c:if test="${ListBWw[2] == 02}"><td><b>FEB</b>'${ListBWw[3]}</td></c:if>
+                                                            <c:if test="${ListBWw[2] == 03}"><td><b>MAR</b>'${ListBWw[3]}</td></c:if>
+                                                            <c:if test="${ListBWw[2] == 04}"><td><b>APR</b>'${ListBWw[3]}</td></c:if>
+                                                            <c:if test="${ListBWw[2] == 05}"><td><b>MAY</b>'${ListBWw[3]}</td></c:if>
+                                                            <c:if test="${ListBWw[2] == 06}"><td><b>JUN</b>'${ListBWw[3]}</td></c:if>
+                                                            <c:if test="${ListBWw[2] == 07}"><td><b>JUL</b>'${ListBWw[3]}</td></c:if>
+                                                            <c:if test="${ListBWw[2] == 08}"><td><b>AUG</b>'${ListBWw[3]}</td></c:if>
+                                                            <c:if test="${ListBWw[2] == 09}"><td><b>SEP</b>'${ListBWw[3]}</td></c:if>
+                                                            <c:if test="${ListBWw[2] == 10}"><td><b>OCT</b>'${ListBWw[3]}</td></c:if>
+                                                            <c:if test="${ListBWw[2] == 11}"><td><b>NOV</b>'${ListBWw[3]}</td></c:if>
+                                                            <c:if test="${ListBWw[2] == 12}"><td><b>DEC</b>'${ListBWw[3]}</td></c:if>
+                                                            <td>${ListBWw[1]}</td>
                                                         </tr>
                                                     </c:forEach>
-                                                    <c:forEach var="ctcDetail11" items="${ctcDetail1}">
+                                                    <c:forEach var="ctcDetail1" items="${ctcDetail}">
                                                         <tr>
-                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 2}"><td><b>Bonus</b></td></c:if>
-                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 3}"><td><b>Gratuiety</b></td></c:if>
-                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 4}"><td><b>LTA</td></b></c:if>
-                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 5}"><td><b>PERFORMANCE PAY</b></td></c:if>
-                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 6}"><td><b>Variable</b></td></c:if>
+                                                            <c:if test="${ctcDetail1[1] == 2}"><td><b>Bonus</b></td></c:if>
+                                                            <c:if test="${ctcDetail1[1] == 3}"><td><b>Gratuiety</b></td></c:if>
+                                                            <c:if test="${ctcDetail1[1] == 4}"><td><b>LTA</td></b></c:if>
+                                                            <c:if test="${ctcDetail1[1] == 5}"><td><b>PERFORMANCE PAY</b></td></c:if>
+                                                            <c:if test="${ctcDetail1[1] == 6}"><td><b>Variable</b></td></c:if>
                                                                 <th colspan="1"></th>
-                                                            <c:if test="${ctcDetail11.month == 01}"><td><b>JAN</b></td></c:if>
-                                                            <c:if test="${ctcDetail11.month == 02}"><td><b>FEB</b></td></c:if>
-                                                            <c:if test="${ctcDetail11.month == 03}"><td><b>MAR</b></td></c:if>
-                                                            <c:if test="${ctcDetail11.month == 04}"><td><b>APR</b></td></c:if>
-                                                            <c:if test="${ctcDetail11.month == 05}"><td><b>MAY</b></td></c:if>
-                                                            <c:if test="${ctcDetail11.month == 06}"><td><b>JUN</b></td></c:if>
-                                                            <c:if test="${ctcDetail11.month == 07}"><td><b>JUL</b></td></c:if>
-                                                            <c:if test="${ctcDetail11.month == 08}"><td><b>AUG</b></td></c:if>
-                                                            <c:if test="${ctcDetail11.month == 09}"><td><b>SEP</b></td></c:if>
-                                                            <c:if test="${ctcDetail11.month == 10}"><td><b>OCT</b></td></c:if>
-                                                            <c:if test="${ctcDetail11.month == 11}"><td><b>NOV</b></td></c:if>
-                                                            <c:if test="${ctcDetail11.month == 12}"><td><b>DEC</b></td></c:if>
-                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 2}"><td>${totalMonthlyAmount2}</td></c:if>
-                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 3}"><td>${totalMonthlyAmount3}</td></c:if>
-                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 4}"><td>${totalMonthlyAmount4}</td></c:if>
-                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 5}"><td>${totalMonthlyAmount5}</td></c:if>
-                                                            <c:if test="${ctcDetail11.ctcAllowance.id == 6}"><td>${totalMonthlyAmount6}</td></c:if>
+                                                            <c:if test="${ctcDetail1[4] == 01}"><td><b>JAN</b>'${ctcDetail1[5]}</td></c:if>
+                                                            <c:if test="${ctcDetail1[4] == 02}"><td><b>FEB</b>'${ctcDetail1[5]}</td></c:if>
+                                                            <c:if test="${ctcDetail1[4] == 03}"><td><b>MAR</b>'${ctcDetail1[5]}</td></c:if>
+                                                            <c:if test="${ctcDetail1[4] == 04}"><td><b>APR</b>'${ctcDetail1[5]}</td></c:if>
+                                                            <c:if test="${ctcDetail1[4] == 05}"><td><b>MAY</b>'${ctcDetail1[5]}</td></c:if>
+                                                            <c:if test="${ctcDetail1[4] == 06}"><td><b>JUN</b>'${ctcDetail1[5]}</td></c:if>
+                                                            <c:if test="${ctcDetail1[4] == 07}"><td><b>JUL</b>'${ctcDetail1[5]}</td></c:if>
+                                                            <c:if test="${ctcDetail1[4] == 08}"><td><b>AUG</b>'${ctcDetail1[5]}</td></c:if>
+                                                            <c:if test="${ctcDetail1[4] == 09}"><td><b>SEP</b>'${ctcDetail1[5]}</td></c:if>
+                                                            <c:if test="${ctcDetail1[4] == 10}"><td><b>OCT</b>'${ctcDetail1[5]}</td></c:if>
+                                                            <c:if test="${ctcDetail1[4] == 11}"><td><b>NOV</b>'${ctcDetail1[5]}</td></c:if>
+                                                            <c:if test="${ctcDetail1[4] == 12}"><td><b>DEC</b>'${ctcDetail1[5]}</td></c:if>
+                                                            <c:if test="${ctcDetail1[1] == 2}"><td>${totalMonthlyAmount2}</td></c:if>
+                                                            <c:if test="${ctcDetail1[1] == 3}"><td>${totalMonthlyAmount3}</td></c:if>
+                                                            <c:if test="${ctcDetail1[1] == 4}"><td>${totalMonthlyAmount4}</td></c:if>
+                                                            <c:if test="${ctcDetail1[1] == 5}"><td>${totalMonthlyAmount5}</td></c:if>
+                                                            <c:if test="${ctcDetail1[1] == 6}"><td>${totalMonthlyAmount6}</td></c:if>
                                                             </tr>
                                                     </c:forEach>
 
@@ -126,21 +127,21 @@
                                                     <tbody>
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
-                                                                <td><b>${list[0].deductionType}</b></td>
+                                                                <td><b>${list[3]}</b></td>
                                                                 <th colspan="1"></th>
-                                                                <c:if test="${list[1].month == 01}"><td><b>JAN</b></td></c:if>
-                                                                <c:if test="${list[1].month == 02}"><td><b>FEB</b></td></c:if>
-                                                                <c:if test="${list[1].month == 03}"><td><b>MAR</b></td></c:if>
-                                                                <c:if test="${list[1].month == 04}"><td><b>APR</b></td></c:if>
-                                                                <c:if test="${list[1].month == 05}"><td><b>MAY</b></td></c:if>
-                                                                <c:if test="${list[1].month == 06}"><td><b>JUN</b></td></c:if>
-                                                                <c:if test="${list[1].month == 07}"><td><b>JUL</b></td></c:if>
-                                                                <c:if test="${list[1].month == 08}"><td><b>AUG</b></td></c:if>
-                                                                <c:if test="${list[1].month == 09}"><td><b>SEP</b></td></c:if>
-                                                                <c:if test="${list[1].month == 10}"><td><b>OCT</b></td></c:if>
-                                                                <c:if test="${list[1].month == 11}"><td><b>NOV</b></td></c:if>
-                                                                <c:if test="${list[1].month == 12}"><td><b>DEC</b></td></c:if>
-                                                                <td>${list[0].deductionAmount}</td>
+                                                                <c:if test="${list[1] == 01}"><td><b>JAN</b>'${list[2]}</td></c:if>
+                                                                <c:if test="${list[1] == 02}"><td><b>FEB</b>'${list[2]}</td></c:if>
+                                                                <c:if test="${list[1] == 03}"><td><b>MAR</b>'${list[2]}</td></c:if>
+                                                                <c:if test="${list[1] == 04}"><td><b>APR</b>'${list[2]}</td></c:if>
+                                                                <c:if test="${list[1] == 05}"><td><b>MAY</b>'${list[2]}</td></c:if>
+                                                                <c:if test="${list[1] == 06}"><td><b>JUN</b>'${list[2]}</td></c:if>
+                                                                <c:if test="${list[1] == 07}"><td><b>JUL</b>'${list[2]}</td></c:if>
+                                                                <c:if test="${list[1] == 08}"><td><b>AUG</b>'${list[2]}</td></c:if>
+                                                                <c:if test="${list[1] == 09}"><td><b>SEP</b>'${list[2]}</td></c:if>
+                                                                <c:if test="${list[1] == 10}"><td><b>OCT</b>'${list[2]}</td></c:if>
+                                                                <c:if test="${list[1] == 11}"><td><b>NOV</b>'${list[2]}</td></c:if>
+                                                                <c:if test="${list[1] == 12}"><td><b>DEC</b>'${list[2]}</td></c:if>
+                                                                <td>${list[4]}</td>
                                                             </tr>
                                                         </c:forEach>
                                                         <tr>
@@ -198,15 +199,15 @@
                                                         <td colspan="2" style="text-align: right;">Receiver Signature&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                     </tr>
                                                 </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
     </div>
     <script type="text/javascript">
@@ -217,5 +218,16 @@
             document.getElementById("remaining").value = z;
         }
     </script>
+    <script type="text/javascript">
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+//
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+    
+</script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

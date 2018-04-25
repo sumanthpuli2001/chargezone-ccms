@@ -55,11 +55,6 @@
                                                     <form:input path="companyName" class="form-control" placeholder="Company Name"></form:input>
                                                     <%--<form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>--%>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <label class="control-label">Manager HR & Admin :<span style="color: red;font-size: 12px;"></span></label>
-                                                    <!--<input type="text" name="empid" id="empid" class="form-control"/>-->
-                                                    <form:input type="text" path="approvalPerson" name="policyId1" id="policyId1" class="form-control"/>
-                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-10">
@@ -88,31 +83,17 @@
         <!-- /.content -->
     </div>
 
-    <script>
-        jQuery.noConflict();
-        jQuery(document).ready(function () {
-
-            jQuery("#policyId1").tokenInput(${list}, {
-                preventDuplicates: true,
-                noResultsText: "No Result",
-                tokenLimit: "1",
-                searchingText: "Searching ... .. .",
-                prePopulate: ${preList}
-            });
-        });
-
-    </script>
 
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 
-    <!--    <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
-        <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>-->
+        <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
+        <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
     <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
-<!--    <script>
+    <script>
         initSample();
 
 
-    </script>-->
+    </script>
     <script>
         function viewClick(id) {
             window.location = 'recruitment.htm?act=viewMPPShow&id=' + id;

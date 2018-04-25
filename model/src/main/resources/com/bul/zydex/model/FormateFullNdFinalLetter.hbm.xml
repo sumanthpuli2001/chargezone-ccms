@@ -16,9 +16,6 @@
         <property name="description" type="string">
             <column name="descripation" />
         </property>
-        <property name="approvalPerson" type="java.lang.Integer">
-            <column name="approval_person" />
-        </property>
         <property name="createdBy" type="java.lang.Integer">
             <column name="created_by" />
         </property>

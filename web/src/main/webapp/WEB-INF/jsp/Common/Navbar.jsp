@@ -601,7 +601,7 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="resignationMaster.htm?act=fullandfcreateClick"><i class="fa fa-circle-o"></i>F&F Settlement Letter Formate</a></li>
+                            <li><a href="resignationMaster.htm?act=newFormatCreate"><i class="fa fa-circle-o"></i>F&F Settlement Letter Formate</a></li>
                             <li><a href="modulesMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Modules Master</a></li>
                             <li><a href="componentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Component Master</a></li>
                             <li><a href="approval.htm?act=approvalList"><i class="fa fa-circle-o"></i>Approval Setting</a></li>

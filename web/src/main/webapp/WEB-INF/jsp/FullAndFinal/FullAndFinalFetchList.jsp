@@ -52,12 +52,12 @@
                             <!-- Custom Tabs -->
                             <div class="nav-tabs-custom">
                                 <div class="tab-content">
-                                <c:if test="${sessionScope.userRight.employeeManagement}">
+                                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                     <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
                                     <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
 
-                                    <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'recruitment.htm?act=newCreateBudget'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
-                                </c:if>
+                                    <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'resignationMaster.htm?act=newFormatCreate'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
+                                <%--</c:if>--%>
                                 <div class="box-header">
                                 </div>
                                 <div class="box-body no-padding">
@@ -92,22 +92,21 @@
                                                         </c:otherwise>
                                                     </c:choose>
                                                     <tbody>
-                                                        <c:forEach var="list" items="${list}">
+                                                        <c:forEach var="list[0]" items="${list}">
                                                             <tr>
                                                                 <c:if test="${sessionScope.userRight.employeeManagement}">
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     </c:if>
-                                                                <!--<td>/</td>-->
-<!--                                                                <td>${list.companyName}</td>
-                                                                <td>${list.approvalPerson}</td>
-                                                                <td>${list.createDate}</td>-->
+                                                                <td>${list[0].companyName}</td>
+                                                                <td>${list[0].createDate}</td>
+                                                                
 
                                                                     <td>
-<!--                                                                        <div class="btn-group">
-                                                                            <button type="button" onclick="viewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                        <div class="btn-group">
+                                                                            <button type="button" onclick="viewClick(${list[0].id});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
                                                                         </button>
-                                                                    </div>-->
+                                                                    </div>
 
                                                                 </td>
                                                             </tr>

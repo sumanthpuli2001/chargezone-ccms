@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class name="com.bul.zydex.model.PayrollTaxDeductionComponent" table="payroll_tax_deduction_component">
+  <class name="com.bul.zydex.model.PayrollTaxDeductionComponent" table="payroll_tax_deduction_component" catalog="hr_power_astral">
         <id name="componentId" type="java.lang.Integer">
              <column name="component_id"/>
              <generator class="identity"/>
@@ -12,15 +12,15 @@
             <column name="section_id" />
         </many-to-one>
         
-        <property name="component" type="string">
+        <property name="component" type="string" not-null="true">
             <column name="component"/>
         </property>
         
-        <property name="ageLimit" type="java.lang.Integer">
+        <property name="ageLimit" type="java.lang.Integer" not-null="true">
             <column name="age_limit" />
         </property>
         
-        <property name="taxSavingLimit" type="java.lang.Integer">
+        <property name="taxSavingLimit" type="java.lang.Integer" not-null="true">
             <column name="tax_saving_limit" />
         </property>
       

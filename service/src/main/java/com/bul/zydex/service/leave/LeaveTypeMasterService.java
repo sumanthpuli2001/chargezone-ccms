@@ -15,5 +15,8 @@ import java.util.List;
 public interface LeaveTypeMasterService<T> extends GenericsService<T> {
 
     public List<?> readCarriedForwardLeave();
+
     public List<?> readLeaveType(String type);
+
+    public List<?> readLeaveTypeEditRegistration(String type);
 }

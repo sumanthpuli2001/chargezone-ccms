@@ -377,6 +377,7 @@
         <property name="levelMasterService" ref="levelMasterService1" />
         <property name="locationMasterService" ref="locationMasterService1" />
         <property name="userRightMasterService" ref="userRightMasterService1" />
+        <property name="appraisalFillingDataService" ref="appraisalFillingDataService1" />
     </bean>
 
     <!--Resignation-->
@@ -386,6 +387,11 @@
         <property name="exitInterviewMasterService" ref="exitInterviewMasterService1" />
         <property name="noDueMasterService" ref="noDueMasterService1" />
         <property name="userRightMasterService" ref="userRightMasterService1" />
+        <property name="fullAndFinalSettlementService" ref="fullAndFinalSettlementService1" />
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
+        <property name="employeeCtcDetailService" ref="employeeCtcDetailService1" />
+        <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
+        <property name="formateFullNdFinalLetterService" ref="formateFullNdFinalLetterService1" />
 
     </bean>
     <!--ExitInterview-->
@@ -439,6 +445,7 @@
         <property name="updateAppraisalPerformanceActivitiesService" ref="updateAppraisalPerformanceActivitiesService1" />
         <property name="appraisalkraActivityService" ref="appraisalkraActivityService1" />
         <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1" />
+        <property name="appraisal360Service" ref="appraisal360Service1" />
         
     </bean>
     <!--Appraisal Filling Data-->
@@ -683,7 +690,7 @@
         <property name="payrollFormSixteenMasterService" ref="payrollFormSixteenMasterService1" />
         <property name="payrollFormSixteenMasterValidator" ref="payrollFormSixteenMasterValidator1" />
         <property name="payrollFinancialYearService" ref="payrollFinancialYearService1" />
-
+      
     </bean>
     <bean id="payrollStationWiseSavingTaxController1" class="com.bul.zydex.controller.Payroll.PayrollStationWiseSavingTaxController" parent="controllerConfig" >
         <property name="payrollStationWiseSavingTaxService" ref="payrollStationWiseSavingTaxService1" />
@@ -784,6 +791,13 @@
         <property name="ctcAllowanceService" ref="ctcAllowanceService1" />
         <property name="employeeCtcDetailService" ref="employeeCtcDetailService1" />
         <property name="employeeCtcDetailSalaryService" ref="employeeCtcDetailSalaryService1" />
+        <property name="payrollFinancialYearService" ref="payrollFinancialYearService1" />
+        <property name="taxSavingSubmitService" ref="taxSavingSubmitService1" />
+        <property name="taxDeductionDecarationSubmitService" ref="taxDeductionDecarationSubmitService1" />
+        <property name="payrollTaxDeductionComponentService" ref="payrollTaxDeductionComponentService1" />
+        <property name="payrollTaxDeductionMasterService" ref="payrollTaxDeductionMasterService1" />
+        <property name="payrollTaxDeclarationPeriodMasterService" ref="payrollTaxDeclarationPeriodMasterService1" />
+        <property name="payrollTaxRateMasterService" ref="payrollTaxRateMasterService1" />
     </bean>
     <bean id="additionalAmountCheckController1" class="com.bul.zydex.controller.Payroll.AdditionalAmountCheckController" parent="controllerConfig" >
         <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
@@ -816,6 +830,8 @@
         <property name="payrollSavingAmountService" ref="payrollSavingAmountService1" />
         <property name="payrollTaxDeductionMasterService" ref="payrollTaxDeductionMasterService1"></property>
         <property name="payrollTaxDeductionComponentService" ref="payrollTaxDeductionComponentService1"/>
+        <property name="taxDeductionDecarationSubmitService" ref="taxDeductionDecarationSubmitService1"/>
+        <property name="taxSavingSubmitService" ref="taxSavingSubmitService1"/>
     </bean>
     <bean id="payrollSavingAmountController1" class="com.bul.zydex.controller.Payroll.PayrollSavingAmountController" parent="controllerConfig" >
         <property name="payrollSavingAmountService" ref="payrollSavingAmountService1" />
@@ -1210,15 +1226,25 @@
     
     <bean id="payrollTaxDeductionMasterController1" class="com.bul.zydex.controller.Payroll.PayrollTaxDeductionMasterController"  parent="controllerConfig">
         <property name="payrollTaxDeductionMasterService" ref="payrollTaxDeductionMasterService1"></property>
-        <property name="payrollTaxDeductionMasterValidator" ref="payrollTaxDeductionMasterValidator1"/>
+        <property name="payrollTaxDeductionComponentService" ref="payrollTaxDeductionComponentService1"></property>
+        <property name="payrollTaxDeductionMasterValidator" ref="payrollTaxDeductionMasterValidator1"></property>
         <property name="payrollTaxDeductionComponentValidator" ref="payrollTaxDeductionComponentValidator1"></property> 
     </bean>
     
+    <bean id="payrollTaxDeclarationPeriodMasterController1" class="com.bul.zydex.controller.Payroll.PayrollTaxDeclarationPeriodMasterController"  parent="controllerConfig">
+        <property name="payrollTaxDeclarationPeriodMasterService" ref="payrollTaxDeclarationPeriodMasterService1"></property>
+        <property name="payrollFinancialYearService" ref="payrollFinancialYearService1"></property>
+        <property name="payrollTaxDeclarationPeriodMasterValidator" ref="payrollTaxDeclarationPeriodMasterValidator1"></property>
+    </bean>
+    
+    <bean id="payrollTaxRateMasterController1" class="com.bul.zydex.controller.Payroll.PayrollTaxRateMasterController" parent="controllerConfig">
+        <property name="payrollTaxRateMasterService" ref="payrollTaxRateMasterService1" />
+        <property name="payrollTaxRateMasterValidator" ref="payrollTaxRateMasterValidator1" />
+    </bean>
     <bean id="kaizenMasterController1" class="com.bul.zydex.controller.Kaizen.KaizenMasterController"  parent="controllerConfig">
         <property name="kaizenMasterService" ref="kaizenMasterService1"></property>
         <property name="kaizenApprovalService" ref="kaizenApprovalService1"></property>
         <property name="approvalUserService" ref="approvalUserService1"></property>
     </bean>
-    
 </beans>
  

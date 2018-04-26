@@ -10,7 +10,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Tax Deduction List</title>
+        <title>Tax Deduction Component List</title>
     </head>
     <script>
         function editClick(id) {
@@ -32,10 +32,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Tax Deduction Master:</h1>
+            <h1>Tax Deduction Component:</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Tax Deduction Master</li>
+                <li class="active">Tax Deduction Component</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">
@@ -56,6 +56,61 @@
                                 <button type="button" class="btn btn-primary" title="" style="float: right;width: 100px;" onclick="window.location = 'payrollTaxDeduction.htm?act=createTaxDeductionComponentClick'"><i class="fa fa-plus"></i>&nbsp;&nbsp;New</button>
                                 <button type="submit" class="btn btn-danger" title="" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp;&nbsp;DELETE</button>
                                 <div class="box-header">
+                                </div>
+                                
+                                <div class="box-body no-padding">
+
+                                    <div class="row">
+
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="table table-bordered">
+
+                                                <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                    <c:choose>
+                                                        <c:when test="${empty list}">
+                                                            <tr>
+                                                                <td align="Center">There is No Record Found.</td>
+                                                            </tr>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
+                                                                    <th>Section</th>
+                                                                    <th>Component</th>
+                                                                    <th>Age Limit</th>
+                                                                    <th>Tax Saving Limit - Component Wise</th>
+                                                                    <th>Edit</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <c:forEach  var="list" items="${list}" varStatus="status">
+                                                                    <tr>
+                                                                        <td align="Center">
+                                                                            <input type="checkbox" name="checkId" id="checkId" value="${list[0]}">
+                                                                       
+                                                                        <td>${list[4]}</td>
+                                                                        <td>${list[1]}</td>
+                                                                        <td>${list[2]}</td>
+                                                                        <td>${list[3]}</td>
+                                                                        
+                                                                        <td>
+                                                                            <div class="btn-group">
+                                                                                <button type="button" onclick="editClick(${list[0]});" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                    &nbsp;&nbsp;Edit
+                                                                                </button>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </c:forEach>
+                                                            </tbody>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div> 
                                 </div>
                                 
                             </div><!-- /.tab-content -->

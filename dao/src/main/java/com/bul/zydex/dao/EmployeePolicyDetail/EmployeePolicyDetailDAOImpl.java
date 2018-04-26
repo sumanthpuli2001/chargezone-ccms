@@ -95,11 +95,40 @@ public class EmployeePolicyDetailDAOImpl<T> extends GenericsDAOImpl<T> implement
     @Override
     public List<?> readBypolicyAmount(int empId) {
         String query = "";
-        
-         query += " "
+
+        query += " "
                 + " FROM EmployeePolicyDetail a "
                 + " where a.employeeMaster.id=" + empId;
 
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public boolean readBypolicyAmountTaxableAmount(Integer empID, Integer salaryType) {
+        boolean flag = true;
+
+        String query = "";
+        query += ""
+                + " From EmployeePolicyDetail a "
+                + " where a.employeeMaster = " + empID
+                + " and a.policyMaster = " + salaryType
+                + " and a.status=" + 1;
+//                + " AND STR_TO_DATE(a.startDateTime,'%d/%m/%Y %H:%i') BETWEEN STR_TO_DATE('" + poolCarRequest.getStartDateTime() + " 00:00','%d/%m/%Y %H:%i') AND STR_TO_DATE('" + poolCarRequest.getEndDateTime() + " 00:00','%d/%m/%Y %H:%i')";
+
+        List<?> list = getHibernateTemplate().find(query);
+        if (list.isEmpty()) {
+            flag = false;
+        }
+        return flag;
+    }
+
+    @Override
+    public List<?> readBypolicyAmountWithTaxable(int empId) {
+        String query = "";
+        query += " select SUM(a.amount)"
+                + " From EmployeePolicyDetail a "
+                + " where a.employeeMaster = " + empId
+                + " and a.status=" + 1;
         return getHibernateTemplate().find(query);
     }
 

@@ -16,10 +16,16 @@ public interface PayrollTaxDeductionMasterDao<T> extends GenericsDAO<T> {
 
     public List<?> readTaxDeduction();
 
-    public List<?> readByComponentId();
+    public List<?> readByComponentId(int parseInt);
 
     public List readSection();
 
     public List<?> readTaxDeductionForFormSixteen();
+
+    public List<?> readTaxDeductionForFormSixteenFetch(int taxMasterid);
+
+    public List<?> readSectionByName(String sectionName);
+
+    public List readSectionAmount();
 
 }

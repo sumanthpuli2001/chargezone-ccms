@@ -13,9 +13,10 @@ import java.util.List;
  * @author AJAY
  */
 public interface LeaveTypeMasterDAO<T> extends GenericsDAO<T> {
-    
-    
-     public List<?> readCarriedForwardLeave();
-     
-     public List<?> readLeaveType(String type);
+
+    public List<?> readCarriedForwardLeave();
+
+    public List<?> readLeaveType(String type);
+
+    public List<?> readLeaveTypeEditRegistration(String type);
 }

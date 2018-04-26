@@ -14,13 +14,13 @@ import java.util.List;
  * @author Hussain
  */
 public class PayrollTaxDeductionComponentServiceImpl<T> extends GenericsServiceImpl<T> implements PayrollTaxDeductionComponentService<T> {
-    
+
     private PayrollTaxDeductionComponentDao<T> payrollTaxDeductionComponentDao;
-    
+
     public PayrollTaxDeductionComponentDao<T> getPayrollTaxDeductionComponentDao() {
         return payrollTaxDeductionComponentDao;
     }
-    
+
     public void setPayrollTaxDeductionComponentDao(PayrollTaxDeductionComponentDao<T> payrollTaxDeductionComponentDao) {
         this.payrollTaxDeductionComponentDao = payrollTaxDeductionComponentDao;
         setGenericsDAO(payrollTaxDeductionComponentDao);
@@ -28,7 +28,27 @@ public class PayrollTaxDeductionComponentServiceImpl<T> extends GenericsServiceI
 
     @Override
     public List<?> readTaxDeductionComponentforFromSixteen(int taxdeductionMasterid) {
-       return payrollTaxDeductionComponentDao.readTaxDeductionComponentforFromSixteen(taxdeductionMasterid);
+        return payrollTaxDeductionComponentDao.readTaxDeductionComponentforFromSixteen(taxdeductionMasterid);
     }
-    
+
+    @Override
+    public List<?> readByComponentId(int parseInt) {
+        return payrollTaxDeductionComponentDao.readByComponentId(parseInt);
+    }
+
+    @Override
+    public List readSection() {
+        return payrollTaxDeductionComponentDao.readSection();
+    }
+
+    @Override
+    public List<?> readComponent() {
+        return payrollTaxDeductionComponentDao.readComponent();
+    }
+
+    @Override
+    public int getTaxMasterID(int componentID) {
+        return payrollTaxDeductionComponentDao.getTaxMasterID(componentID);
+    }
+
 }

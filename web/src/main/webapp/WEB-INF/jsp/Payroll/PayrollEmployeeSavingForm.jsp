@@ -83,74 +83,35 @@
                                 <div class="box-body no-padding">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Location:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control ">
-                                                        <option value="" label="-- Select --" ></option>
-                                                        <c:forEach var="deptName" items="${deptMap}">
-                                                            <option value="${deptName.key}" label="${deptName.value}" ></option>
-                                                        </c:forEach>
-                                                    </select>
-                                                    <span id="fError" style="color: red;"></span>
-                                                </div>
 
-                                                <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
-                                                <div class="col-sm-6">
-                                                    <label>Type of Employee :<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="employeeTypeMasterId" id="employeeTypeMasterId" onchange="selectsubtype(this.value);" class="form-control">
-                                                        <option value="" label="-- Select --" ></option>
-                                                        <c:forEach var="EmpType" items="${EmployeeTypeList}">
-                                                            <option value="${EmpType.key}" label="${EmpType.value}" ></option>
-                                                        </c:forEach>
-                                                    </select>
-
-                                                </div>
+                                            <div class="col-sm-4">
+                                                <label>Financial year:<span style="color: red;font-size: 12px;">*</span></label>
+                                                <select name="fnyear" id="fnyear" class="form-control ">
+                                                    <option value="">--Select--</option>
+                                                    <c:forEach var="finyear" items="${financialYearList}">
+                                                        <option value="${finyear.key}" label="${finyear.value}" ></option>
+                                                    </c:forEach>
+                                                </select>
+                                                <span id="fnError" style="color: red;"></span>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6" id="employeeSubTypeId">
-                                                    <label>Employee SubType:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="employeeSubTypeId" id="employeeSubTypeId" class="form-control">
-                                                        <option value="" label="-- Select --" ></option> 
+                                            <br>
 
-                                                    </select>
-                                                </div>
-
-
-                                                <div class="col-sm-6">
-                                                    <label>Financial year:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <select name="fnyear" id="fnyear" class="form-control ">
-                                                        <option value="">--Select--</option>
-                                                        <c:forEach var="finyear" items="${financialYearList}">
-                                                            <option value="${finyear.key}" label="${finyear.value}" ></option>
-                                                        </c:forEach>
-                                                    </select>
-                                                    <span id="fnError" style="color: red;"></span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label>Employee Name:</label>
-                                                    <div class="col-md-6" id="employeeName">
-                                                        <input type="text" id="employeeMasterId" name="employeeMasterId" class="form-control">
-                                                    </div>
-
-                                                </div>
-                                            </div>
                                         </div>
-                                    </div><!-- /.col -->
-                                </div><!-- /.row -->
-                            </div><!-- /.box-body -->
-                            <div class="form-group">
-                                <div class=" col-sm-2">
-                                    <button type="submit" class="btn btn-primary" data-original-title="" title="" >Search</button>
+                                        <!--</div> /.col -->
+                                    </div><!-- /.row -->
+                                </div><!-- /.box-body -->
+                                <div class="form-group">
+                                    <div class=" col-sm-12">
+                                        <center>
+                                        <button type="submit" class="btn btn-primary" data-original-title="" title="" >Search</button>
+                                        </center>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="tab-pane" id="tab_3"></div>
+                                <div class="tab-pane" id="tab_3"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
             </section>
         </form:form>

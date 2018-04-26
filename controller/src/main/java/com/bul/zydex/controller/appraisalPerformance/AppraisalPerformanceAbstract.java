@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.appraisalPerformance;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.AppraisalFeedback360;
 import com.bul.zydex.model.AppraisalFillingData;
 import com.bul.zydex.model.AppraisalKraActivity;
 import com.bul.zydex.model.AppraisalPerformanceActivities;
@@ -27,6 +28,7 @@ import com.bul.zydex.model.UpdateAppraisalPerformanceActivities;
 import com.bul.zydex.model.UpdateAppraisalPerformanceKra;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.service.PmpFormStatusMaster.PmpFormStatusMasterService;
+import com.bul.zydex.service.appraisal.Appraisal360Service;
 import com.bul.zydex.service.appraisalPerformance.AppraisalFillingDataService;
 import com.bul.zydex.service.appraisalPerformance.AppraisalPerformanceActivitiesService;
 import com.bul.zydex.service.appraisalPerformance.AppraisalPerformanceBehaviorsService;
@@ -73,6 +75,7 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
     protected UpdateAppraisalPerformanceActivitiesService<UpdateAppraisalPerformanceActivities> updateAppraisalPerformanceActivitiesService;
     protected AppraisalkraActivityService<AppraisalKraActivity> appraisalkraActivityService;
     protected PmpFormStatusMasterService<PmpFormStatusMaster> pmpFormStatusMasterService;
+    protected Appraisal360Service<AppraisalFeedback360> appraisal360Service;
 
     public UpdateAppraisalPerformanceKraService<UpdateAppraisalPerformanceKra> getUpdateAppraisalPerformanceKraService() {
         return updateAppraisalPerformanceKraService;
@@ -194,6 +197,14 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
         this.pmpFormStatusMasterService = pmpFormStatusMasterService;
     }
 
+    public Appraisal360Service<AppraisalFeedback360> getAppraisal360Service() {
+        return appraisal360Service;
+    }
+
+    public void setAppraisal360Service(Appraisal360Service<AppraisalFeedback360> appraisal360Service) {
+        this.appraisal360Service = appraisal360Service;
+    }
+
     public void selectedEmployeeDate(HttpServletRequest request,
             HttpServletResponse response, String userid) throws Exception {
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -247,14 +258,14 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 
             String StartDate = appraisalFillingData.getStartDate();
             String EndDate = appraisalFillingData.getEndDate();
-            String MidDate = appraisalFillingData.getMidYearStartDate();
-            String MidEndDate = appraisalFillingData.getMidYearEndDate();
+//            String MidDate = appraisalFillingData.getMidYearStartDate();
+//            String MidEndDate = appraisalFillingData.getMidYearEndDate();
             String YearEndStartDate = appraisalFillingData.getYearEndStartDate();
             String YearEndDate = appraisalFillingData.getYearEndEndDate();
             Date strDate = sdf.parse(StartDate);
             Date eDate = sdf.parse(EndDate);
-            Date midDate = sdf.parse(MidDate);
-            Date midEndDate = sdf.parse(MidEndDate);
+//            Date midDate = sdf.parse(MidDate);
+//            Date midEndDate = sdf.parse(MidEndDate);
             Date yearEndStartDate = sdf.parse(YearEndStartDate);
             Date yearEndDate = sdf.parse(YearEndDate);
             boolean flag = false;
@@ -262,8 +273,10 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
             boolean flag2 = false;
             if ((now.after(strDate) && now.before(eDate)) || now.equals(strDate) || now.equals(eDate)) {
                 flag = true;
-            } else if ((now.after(midDate) && now.before(midEndDate)) || now.equals(midDate) || now.equals(midEndDate)) {
-                flag1 = true;
+
+//            } else if ((now.after(midDate) && now.before(midEndDate)) || now.equals(midDate) || now.equals(midEndDate)) {
+//                flag1 = true;
+//            } 
             } else if ((now.after(yearEndStartDate) && now.before(yearEndDate)) || now.equals(yearEndStartDate) || now.equals(yearEndDate)) {
                 flag2 = true;
             }
@@ -354,14 +367,14 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 
             String StartDate = appraisalFillingData.getStartDate();
             String EndDate = appraisalFillingData.getEndDate();
-            String MidDate = appraisalFillingData.getMidYearStartDate();
-            String MidEndDate = appraisalFillingData.getMidYearEndDate();
+//            String MidDate = appraisalFillingData.getMidYearStartDate();
+//            String MidEndDate = appraisalFillingData.getMidYearEndDate();
             String YearEndStartDate = appraisalFillingData.getYearEndStartDate();
             String YearEndDate = appraisalFillingData.getYearEndEndDate();
             Date strDate = sdf.parse(StartDate);
             Date eDate = sdf.parse(EndDate);
-            Date midDate = sdf.parse(MidDate);
-            Date midEndDate = sdf.parse(MidEndDate);
+//            Date midDate = sdf.parse(MidDate);
+//            Date midEndDate = sdf.parse(MidEndDate);
             Date yearEndStartDate = sdf.parse(YearEndStartDate);
             Date yearEndDate = sdf.parse(YearEndDate);
             boolean flag = true;
@@ -400,7 +413,6 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 //            } else if ((now.after(manageryearEndStartDate) && now.before(manageryearEndDate)) || now.equals(manageryearEndStartDate) || now.equals(manageryearEndDate)) {
 //                flag2 = true;
 //            }
-
             request.setAttribute("flag", flag);
             request.setAttribute("flag1", flag1);
             request.setAttribute("flag2", flag2);
@@ -699,19 +711,17 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 //            String ManagerMidEndDate = appraisalFillingData.getManagerMidYearEndDate();
 //            String ManagerYearEndStartDate = appraisalFillingData.getManagerYearEndStartDate();
 //            String ManagerYearEndDate = appraisalFillingData.getManagerYearEndEndDate();
-
 //            Date managerstrDate = sdf.parse(ManagerStartDate);
 //            Date managerendDate = sdf.parse(ManagerEndDate);
 //            Date managermidDate = sdf.parse(ManagerMidDate);
 //            Date managermidEndDate = sdf.parse(ManagerMidEndDate);
 //            Date manageryearEndStartDate = sdf.parse(ManagerYearEndStartDate);
 //            Date manageryearEndDate = sdf.parse(ManagerYearEndDate);
-
 //            boolean flag = false;
 //            boolean flag1 = false;
 //            boolean flag2 = false;
 //            if ((now.after(managerstrDate) && now.before(manageryearEndDate)) || now.equals(managerstrDate) || now.equals(manageryearEndDate)) {
-                Tflag = true;
+            Tflag = true;
 //            }
 
             request.setAttribute("Tflag", Tflag);
@@ -905,11 +915,11 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 
         request.setAttribute("pmpyearList", dm);
     }
+
     protected void yearList(HttpServletRequest request) {
         AppraisalFillingData appraisalFillingData = new AppraisalFillingData();
 //        List<?> pmpyearList = appraisalFillingDataService.getCurrentAndPreviousYear();
         List<?> pmpyearList = appraisalFillingDataService.readYearList();
-       
 
         request.setAttribute("cycleYear", pmpyearList);
     }

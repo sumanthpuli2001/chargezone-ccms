@@ -6,6 +6,7 @@
 package com.bul.zydex.service.Payroll;
 
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.service.GenericsService;
 import java.util.List;
 
@@ -83,4 +84,8 @@ public interface EmployeeSalaryProcessService<T> extends GenericsService<T> {
     public List<?> readsalDeductionSearch(EmployeeMaster object);
 
     public List<?> readEmployeeForPfGov(EmployeeMaster object);
+
+    public List<?> readEmployeeGrossTotalTaxable(int EmpId, String startDate, String endate);
+
+    public List<?> readEmpId(int EmpId);
 }

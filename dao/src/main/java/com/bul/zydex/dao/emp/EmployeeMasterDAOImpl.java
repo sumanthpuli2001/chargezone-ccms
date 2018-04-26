@@ -1975,5 +1975,13 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " Where a.employeeId = '" + employeeNo + "'";
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> readEmId(String EmployeeId) {
+           String query = "";
+        query += "From EmployeeMaster a "
+                + " Where a.employeeId = '" + EmployeeId + "'";
+        return getHibernateTemplate().find(query);
+    }
   
 }

@@ -1092,6 +1092,7 @@
         <property name="galleryService" ref="galleryService1"></property>
         <property name="corporateVideoService" ref="corporateVideoService1"></property>
         <property name="rAndRService" ref="rAndRService1"></property>
+        <property name="kaizenMasterService" ref="kaizenMasterService1"></property>
     </bean>
     <bean id="onlineAssessmentController1" class="com.bul.zydex.controller.Recruitment.OnlineAssessmentController" parent="controllerConfig" >
         <property name="onlineAssessmentService" ref="onlineAssessmentService1" />
@@ -1211,6 +1212,12 @@
         <property name="payrollTaxDeductionMasterService" ref="payrollTaxDeductionMasterService1"></property>
         <property name="payrollTaxDeductionMasterValidator" ref="payrollTaxDeductionMasterValidator1"/>
         <property name="payrollTaxDeductionComponentValidator" ref="payrollTaxDeductionComponentValidator1"></property> 
+    </bean>
+    
+    <bean id="kaizenMasterController1" class="com.bul.zydex.controller.Kaizen.KaizenMasterController"  parent="controllerConfig">
+        <property name="kaizenMasterService" ref="kaizenMasterService1"></property>
+        <property name="kaizenApprovalService" ref="kaizenApprovalService1"></property>
+        <property name="approvalUserService" ref="approvalUserService1"></property>
     </bean>
     
 </beans>

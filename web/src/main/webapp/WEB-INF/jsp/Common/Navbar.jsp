@@ -104,11 +104,12 @@
                         </li>
                     </c:if>
                 </c:if>
+                <c:if test="${sessionScope.userRight.employeeManagement}">
                 <c:if test="${!sessionScope.userRight.employeeManagement}">
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-user fa-lg"></i>
-                            <span>Recruitment</span>
+                            <span>Recruitment1</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
@@ -139,6 +140,7 @@
                                 </c:if>
                         </ul>
                     </li>
+                </c:if>
                 </c:if>
                 <c:if test="${sessionScope.userRight.employeeManagement}">
                     <li class="treeview" style="color: #585858;">
@@ -681,10 +683,10 @@
                             <li><a href="shiftRotationMaster.htm?act=attendanceExcelUpload"><i class="fa fa-circle-o"></i>Attendance Upload</a></li>
                             <!--<li><a href="shiftRotationMaster.htm?act=employeeManualPunch"><i class="fa fa-circle-o"></i>Manual Punch</a></li>-->
                         </c:if>
-                        <c:if test="${sessionScope.userRight.lunaPlantAttendanceMgnt}">
-                            <li><a href="shiftRotationMaster.htm?act=employeeAttendanceForLuna"><i class="fa fa-circle-o"></i>Luna Attendance Download</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.userRight.gavasatPlantAttendanceMgnt}">
+                        <%--<c:if test="${sessionScope.userRight.lunaPlantAttendanceMgnt}">--%>
+                        <!--<li><a href="shiftRotationMaster.htm?act=employeeAttendanceForLuna"><i class="fa fa-circle-o"></i>Luna Attendance Download</a></li>-->
+                        <%--</c:if>--%>
+                        <c:if test="${sessionScope.userRight.gavasatPlantAttendanceMgnt}">
                             <li><a href="shiftRotationMaster.htm?act=employeeAttendanceForGavasat"><i class="fa fa-circle-o"></i>Gavasat Attendance Download</a></li>
                             </c:if>
                     </ul>
@@ -976,6 +978,24 @@
                     </ul>
                 </li>
             </c:if>
+            <li>
+                <a href="#" style="background: #fff;">
+                    <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
+                    <span style="color: #585858;">Kaizen</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+
+                    <!--<li><a href="kaizen.htm?act=myKaizen"><i class="fa fa-circle-o"></i>My Kaizen</a></li>-->
+                    <li><a href="kaizen.htm?act=kaizenList"><i class="fa fa-circle-o"></i>Approver Kaizen List</a></li>
+                    <li><a href="kaizen.htm?act=kaizenMasterList"><i class="fa fa-circle-o"></i>My Kaizen List</a></li>
+                    <li><a href="kaizen.htm?act=pastKaizenMasterList"><i class="fa fa-circle-o"></i>Past Kaizen List</a></li>
+                        <c:if test="${sessionScope.userRight.kaizenApproval}">
+                        <li><a href="kaizen.htm?act=kaizenApproverList"><i class="fa fa-circle-o"></i>Kaizen Approver</a></li>
+                        </c:if>
+                </ul>
+            </li>   
+
             <li class="treeview">
 
         </section>

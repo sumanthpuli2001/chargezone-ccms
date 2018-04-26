@@ -299,7 +299,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         ctcAllowance.setId(ctcId);
                         Double amount = Double.valueOf(request.getParameter("ctcamount" + i));
                         String month = request.getParameter("month" + i);
-                         String year = request.getParameter("year" + i);
+                        String year = request.getParameter("year" + i);
 //                        String policyNumber = request.getParameter("policyNumber" + i);
                         employeeCtcDetail.setEmployeeMaster(employeeMaster);
                         employeeCtcDetail.setAmount(amount);
@@ -735,6 +735,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         EmployeeSubTypeList(request);
         policyList(request);
         ctcList(request);
+        companyList(request);
 
 //        shiftList(request);
         hoursBasisList(request);
@@ -812,7 +813,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         request.setAttribute("checkPf", checkPf);
         request.setAttribute("checkPt", checkPt);
         request.setAttribute("lastYearPerformanceRatingsOfEmployee", lastYearPerformanceRatingsOfEmployee);
-        request.setAttribute("company", employeeMaster.getCompany());
+//        request.setAttribute("company", employeeMaster.getCompany());
         request.setAttribute("employeeType", employeeMaster.getEmployeeType());
         request.setAttribute("shiftType", employeeMaster.getShiftType());
         request.setAttribute("certificatesList", certificatesList);
@@ -4138,7 +4139,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.getModelMap().put("candidateId", candidateId);
         mv.setViewName("Employee/EmployeeInductionForm");
         request.setAttribute("successMessage",
-                    "Information : The Induction successfully.");
+                "Information : The Induction successfully.");
         return mv;
     }
 

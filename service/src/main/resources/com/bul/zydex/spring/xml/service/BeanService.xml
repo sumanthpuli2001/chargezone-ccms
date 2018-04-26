@@ -634,4 +634,10 @@
     <bean id="payrollTaxDeductionComponentService1" class="com.bul.zydex.service.Payroll.PayrollTaxDeductionComponentServiceImpl">
         <property name="payrollTaxDeductionComponentDao" ref="payrollTaxDeductionComponentDao1"/>
     </bean>
+    <bean id="kaizenMasterService1" class="com.bul.zydex.service.Kaizen.KaizenMasterServiceImpl">
+        <property name="kaizenMasterDAO" ref="kaizenMasterDAO1"/>
+    </bean>
+    <bean id="kaizenApprovalService1" class="com.bul.zydex.service.Kaizen.KaizenApprovalServiceImpl">
+        <property name="kaizenApprovalDAO" ref="kaizenApprovalDAO1"/>
+    </bean>
 </beans>

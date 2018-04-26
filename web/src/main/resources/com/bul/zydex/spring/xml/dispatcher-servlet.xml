@@ -221,6 +221,7 @@
                 <prop key="ctcAllowance.htm">ctcAllowanceController1</prop>
                 <prop key="retirementAge.htm">retirementAgeController1</prop>
                 <prop key="payrollTaxDeduction.htm">payrollTaxDeductionMasterController1</prop>
+                <prop key="kaizen.htm">kaizenMasterController1</prop>
                 
             </props>
         </property>

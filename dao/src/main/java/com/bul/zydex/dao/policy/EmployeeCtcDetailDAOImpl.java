@@ -104,4 +104,15 @@ public class EmployeeCtcDetailDAOImpl<T> extends GenericsDAOImpl<T> implements E
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+
+    @Override
+    public List<?> readctcRegistration(int employeeid) {
+        String query = "";
+        query += "select a"
+                + " FROM EmployeeCtcDetail a "
+                + " left join a.ctcAllowance b"
+                + " where a.employeeMaster.id=" + employeeid;
+
+        return getHibernateTemplate().find(query);
+    }
 }

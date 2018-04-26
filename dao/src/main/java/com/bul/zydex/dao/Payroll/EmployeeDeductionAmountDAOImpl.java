@@ -233,4 +233,38 @@ public class EmployeeDeductionAmountDAOImpl<T> extends GenericsDAOImpl<T> implem
         return list;
 
     }
+
+    @Override
+    public List<?> readEmployeeTdsAmount(int employeeMasterID, String startDate, String endate) {
+        String query = "";
+        String condition = "";
+        String sDate = startDate;
+        String eDate = endate;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("MM/yyyy");
+        try {
+
+            Date s1Date = sdf.parse(startDate);
+            Date e1Date = sdf.parse(endate);
+
+            sDate = sdf1.format(s1Date);
+            eDate = sdf1.format(e1Date);
+
+        } catch (Exception e) {
+
+        }
+//      String query = "";
+//        String condition = "";
+
+        query += " Select a.deductionType,a.deductionAmount"
+                + " From EmployeeDeductionAmount a"
+                + " left join a.employeeSalaryProcess b"
+                + " where b.employeeMaster.id= " + employeeMasterID
+                + " and a.deductionType like '%TDS%'"
+                + " and STR_TO_DATE(CONCAT(b.month,'/',b.year), '%m/%Y') BETWEEN STR_TO_DATE('" + sDate + "', '%m/%Y') and STR_TO_DATE('" + eDate + "', '%m/%Y')"
+                + " group by b.id";
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

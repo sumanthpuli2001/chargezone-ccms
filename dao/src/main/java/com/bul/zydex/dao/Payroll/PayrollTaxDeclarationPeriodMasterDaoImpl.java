@@ -30,4 +30,49 @@ public class PayrollTaxDeclarationPeriodMasterDaoImpl<T> extends GenericsDAOImpl
         return list;
     }
 
+    @Override
+    public List<?> readPayrollTaxDeclarationPeriodMaster(int finicialYearID, String month, String year) {
+      String query = "";
+        String condition = "";
+        String date = "01/" + month + "/" + year;
+
+        query += " select a.id,a.declarationThresholdDate,a.proofThresholdDate"
+                + " From PayrollTaxDeclarationPeriodMaster a"
+                + " where a.payrollFinancialYear.id=" + finicialYearID
+                + " and (str_to_date('" + date + "','%d/%m/%Y') between str_to_date(a.declarationThresholdDate,'%d/%m/%Y')"
+                + " and str_to_date(a.proofThresholdDate,'%d/%m/%Y'))";
+//              
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readPayrollTaxDeclarationPeriodMasterBefore(int finicialYearID, String month, String year) {
+       String query = "";
+        String condition = "";
+        String date = "01/" + month + "/" + year;
+
+        query += " select a.id,a.declarationThresholdDate,a.proofThresholdDate"
+                + " From PayrollTaxDeclarationPeriodMaster a"
+                + " where a.payrollFinancialYear.id=" + finicialYearID
+                + " and (str_to_date('" + date + "','%d/%m/%Y') < str_to_date(a.declarationThresholdDate,'%d/%m/%Y'))";
+               
+//              
+        return getHibernateTemplate().find(query); 
+    }
+
+    @Override
+    public List<?> readPayrollTaxDeclarationPeriodMasterAfterProofDate(int finicialYearID, String month, String year) {
+        String query = "";
+        String condition = "";
+        String date = "01/" + month + "/" + year;
+
+        query += " select a.id,a.declarationThresholdDate,a.proofThresholdDate"
+                + " From PayrollTaxDeclarationPeriodMaster a"
+                + " where a.payrollFinancialYear.id=" + finicialYearID
+                + " and (str_to_date('" + date + "','%d/%m/%Y') > str_to_date(a.proofThresholdDate,'%d/%m/%Y'))";
+               
+//              
+        return getHibernateTemplate().find(query);   
+    }
+
 }

@@ -28,14 +28,16 @@ public class PayrollTaxRateMasterServiceImpl<T> extends GenericsServiceImpl<T> i
     }
 
 
-    @Override
-    public PayrollTaxRateMaster readTaxRate() {
-        return payrollTaxRateMasterDao.readTaxRate();
-    }
+   
 
     @Override
     public List<?> getAgeValues(Integer ageF, Integer ageT, Integer incomeF, Integer incomeT) {
         return payrollTaxRateMasterDao.getAgeValues(ageF, ageT, incomeF, incomeT);
+    }
+
+    @Override
+    public List<?> getAgeValuesFOrSalaryGenerate(Integer ageF) {
+        return payrollTaxRateMasterDao.getAgeValuesFOrSalaryGenerate(ageF);
     }
     
     

@@ -10,6 +10,8 @@ import com.bul.zydex.model.EmployeeAdditionalSalary;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.model.PayrollAdditionalAmount;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -888,6 +890,36 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
                 + " and b.year  ='" + employeeMaster.getPanCard() + "'";
 
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readEmployeeGrossTotalTaxable(int EmpId, String startDate, String endate) {
+        String query = "";
+        String condition = "";
+        String sDate = startDate;
+        String eDate = endate;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("MM/yyyy");
+        try {
+
+            Date s1Date = sdf.parse(startDate);
+            Date e1Date = sdf.parse(endate);
+
+            sDate = sdf1.format(s1Date);
+            eDate = sdf1.format(e1Date);
+
+        } catch (Exception e) {
+
+        }
+//        String date = "01/" + month + "/" + year;
+        query += " select a.id,a.employeeBasicSalary"
+                + " From EmployeeSalaryProcess a"
+                + " LEFT JOIN a.employeeAdditionalSalaries c"
+                + " where a.employeeMaster.id=" + EmpId
+                + " and STR_TO_DATE(CONCAT(a.month,'/',a.year), '%m/%Y') BETWEEN STR_TO_DATE('" + sDate + "', '%m/%Y') and STR_TO_DATE('" + eDate + "', '%m/%Y')"
+                + " group by a.id";
+        return getHibernateTemplate().find(query);
+//         + " WHERE b.id=" + empId + " and (STR_TO_DATE(a.completeDateStr,'%d/%m/%Y') BETWEEN  STR_TO_DATE('" + startD + "','%d/%m/%Y') AND STR_TO_DATE('" + endD + "','%d/%m/%Y')) "
     }
 
 }

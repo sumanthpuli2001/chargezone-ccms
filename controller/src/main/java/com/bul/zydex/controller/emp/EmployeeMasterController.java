@@ -910,7 +910,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
             EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
             String ptl = "Paternity Leave";
-            List<?> ptlList = leaveTypeMasterService.readLeaveType(ptl);
+            List<?> ptlList = leaveTypeMasterService.readLeaveTypeEditRegistration(ptl);
             leaveTypeMaster.setId((Integer) ptlList.get(0));
             employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
             employeeLeaveBalance.setEmployeeMaster(employeeMaster);

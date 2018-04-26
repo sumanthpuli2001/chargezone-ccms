@@ -17,4 +17,8 @@ public interface TaxSavingSubmitService<T> extends GenericsService<T> {
     public boolean isExist(Integer empID, Integer finicailyear);
 
     public List<?> readTaxSavingSubmit(int EmplID, int finicailyear);
+
+    public List<?> readTaxSavingSubmitSalaryGenerate(int EmplID, int finicailyear);
+
+    public List<?> readTaxSavingSubmitSalaryGenerateAfterDate(int EmplID, int finicailyear);
 }

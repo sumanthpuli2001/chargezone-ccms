@@ -13,9 +13,11 @@ import java.util.List;
  *
  * @author DELL3
  */
-public interface PayrollTaxRateMasterDao<T> extends GenericsDAO<T> 
-{
+public interface PayrollTaxRateMasterDao<T> extends GenericsDAO<T> {
 
-    public List<?> getAgeValues(Integer ageF, Integer ageT,Integer incomeF, Integer incomeT);
-    public PayrollTaxRateMaster readTaxRate();
+    public List<?> getAgeValues(Integer ageF, Integer ageT, Integer incomeF, Integer incomeT);
+
+  
+
+    public List<?> getAgeValuesFOrSalaryGenerate(Integer ageF);
 }

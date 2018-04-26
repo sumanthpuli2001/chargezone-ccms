@@ -29,4 +29,8 @@ public interface EmployeeAdditionalSalaryDAO<T> extends GenericsDAO<T> {
     public List<?> readNotOTamountAdditionalAmount(int employeeSalaryProcessId);
 
     public List<?> readEmployeeForSalaryAdditionalinfoSearch(EmployeeSalaryProcess employeeSalaryProcess);
+
+    public List<?> readEmployeeAllowanceGrossTotalTaxable(int EmpSalaryProcessId);
+
+   
 }

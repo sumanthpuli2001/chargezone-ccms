@@ -26,4 +26,9 @@ public interface EmployeePolicyDetailService<T> extends GenericsService<T> {
     public List<?> readPolicyId(int empId);
 
     public List<?> readBypolicyAmount(int empId);
+
+    public boolean readBypolicyAmountTaxableAmount(Integer empID, Integer salaryType);
+
+    public List<?> readBypolicyAmountWithTaxable(int empId);
+
 }

@@ -39,7 +39,7 @@
                                 <c:if test="${!empty failureMessage}">
                                     <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
                                 </c:if>
-                                <form:form action="payrollEmployeeFormSixteen.htm?act=redirectToFormSexteen" method="post" enctype="multipart/form-data" 
+                                <form:form action="payrollEmployeeFormSixteen.htm?act=redirectToFormEmployeeSaving" method="post" enctype="multipart/form-data" 
                                            name='form1'  class="form-horizontal"  role="form">
 
                                     <div class="box-body no-padding">
@@ -118,6 +118,7 @@
     </div><!-- /.content-wrapper -->
     <script>
         function changeButton(idvalue) {
+           
         
             var className = document.getElementById("file" + idvalue).value;
             if (className != null || className != '') {
@@ -136,6 +137,7 @@
                     var fd = new FormData();
                     fd.append('userName', '${employeeMaster.id}');
                     fd.append('finicailyear', '${payrollFormSixteenMaster.payrollFinancialYear.id}');
+                    fd.append('compenomtid', idvalue);
                     fd.append('photographUpdate', photographUpdate);
                     $.ajax({
                         url: 'payrollEmployeeFormSixteen.htm?act=displayPictureTaxDeduction',

@@ -22,21 +22,27 @@ public class PayrollTaxRateMasterDaoImpl<T> extends GenericsDAOImpl<T> implement
 
     @Override
     public List<?> getAgeValues(Integer ageF, Integer ageT, Integer incomeF, Integer incomeT) {
-        
+
         String query = "SELECT a "
                 + " FROM PayrollTaxRateMaster a "
-                + " WHERE ((a.ageFrom between "+ageF+" and "+ageT+") "
-                + " or (a.ageTo between "+ageF+" and "+ageT+")) "
-                + " and ((a.incomeFrom between "+incomeF+" and "+incomeT+") "
-                + " or (a.incomeTo between "+incomeF+" and "+incomeT+"))";
-        
+                + " WHERE ((a.ageFrom between " + ageF + " and " + ageT + ") "
+                + " or (a.ageTo between " + ageF + " and " + ageT + ")) "
+                + " and ((a.incomeFrom between " + incomeF + " and " + incomeT + ") "
+                + " or (a.incomeTo between " + incomeF + " and " + incomeT + "))";
+
         List<?> list = getHibernateTemplate().find(query);
-        return list;        
+        return list;
     }
 
     @Override
-    public PayrollTaxRateMaster readTaxRate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<?> getAgeValuesFOrSalaryGenerate(Integer ageF) {
+        String query = "SELECT a "
+                + " FROM PayrollTaxRateMaster a "
+                + " WHERE (" + ageF + " between a.ageFrom and a.ageTo) "
+                + " order by a.id";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
     }
-    
+
 }

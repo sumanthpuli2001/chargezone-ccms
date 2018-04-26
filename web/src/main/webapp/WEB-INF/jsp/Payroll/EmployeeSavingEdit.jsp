@@ -39,7 +39,7 @@
                                 <c:if test="${!empty failureMessage}">
                                     <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
                                 </c:if>
-                                <form:form action="payrollEmployeeFormSixteen.htm?act=redirectToFormSexteen" method="post" enctype="multipart/form-data" 
+                                <form:form action="payrollEmployeeFormSixteen.htm?act=redirectToFormEmployeeSaving" method="post" enctype="multipart/form-data" 
                                            name='form1'  class="form-horizontal"  role="form">
 
                                     <div class="box-body no-padding">
@@ -72,6 +72,7 @@
                                                             <th>Amount</th>
                                                             <th>Proof submission </th>
                                                             <th></th>
+                                                            <th></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -88,7 +89,7 @@
                                                                 <c:out value="${listOfLoan1[0]}"/> </br>
                                                             </td>
 
-                                                            <td><input type="text" name="savingTypeAmount" id="savingTypeAmount${listOfLoan1[1]}" value="${listOfLoan1[3][0]}" class="form-control" onfocus="this.oldvalue = ${listOfLoan1[2]};
+                                                            <td><input type="text" name="savingTypeAmount" id="savingTypeAmount${listOfLoan1[1]}" value="${listOfLoan1[3]}" class="form-control" onfocus="this.oldvalue = ${listOfLoan1[2]};
                                                                     this.idvalue = savingTypeAmount${listOfLoan1[1]};" onchange="pepe(this.value, this.oldvalue, this.idvalue);
                                                                             this.oldvalue = ${listOfLoan1[2]};
                                                                             this.idvalue = savingTypeAmount${listOfLoan1[1]};"></td>
@@ -96,9 +97,8 @@
                                                                     this.idvalue1 = ${listOfLoan1[1]};"
                                                                         /></td>
                                                             <td>
-                                                                <div class="col-sm-6">
-                                                                    <span>[ <a href="employeeMaster.htm?act=downloadEmployeeCertificates&amp;fileName=&userId="></a> ]</span>
-                                                                </div>
+                                                                <a href="payrollEmployeeFormSixteen.htm?act=downloadEmployeeattachment&amp;fileName=${listOfLoan1[4]}&userId=${employeeMaster.id}&finicailyear=${payrollFormSixteenMaster.payrollFinancialYear.id}&compoentid=${listOfLoan1[1]}">${listOfLoan1[4]}</a> 
+
                                                             </td>
 
                                                         </tr>
@@ -142,6 +142,7 @@
                     var fd = new FormData();
                     fd.append('userName', '${employeeMaster.id}');
                     fd.append('finicailyear', '${payrollFormSixteenMaster.payrollFinancialYear.id}');
+                    fd.append('compenomtid', idvalue);
                     fd.append('photographUpdate', photographUpdate);
                     $.ajax({
                         url: 'payrollEmployeeFormSixteen.htm?act=displayPictureTaxDeduction',
@@ -198,7 +199,7 @@
 //            alert(list);
             $.ajax({
                 type: "POST",
-                url: "payrollEmployeeFormSixteen.htm?act=clickSubmitSavingAmount&list=" + list + "&emplId=" + emplId + "&yearID=" + yearID + "&finalData1=" + finalData1,
+                url: "payrollEmployeeFormSixteen.htm?act=clickSubmitSavingAmountEdit&list=" + list + "&emplId=" + emplId + "&yearID=" + yearID + "&finalData1=" + finalData1,
                 data: {},
                 dataType: "text",
                 success: function (responseTxt) {

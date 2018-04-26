@@ -69,8 +69,7 @@
                                                             <th>Saving Type</th>
                                                             <th>Amount</th>
                                                             <th>Proof submission </th>
-                                                            <th>Status</th>
-                                                            <th>Action</th>
+                                                            <th> </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -82,45 +81,12 @@
                                                             <td>
                                                                 <c:out value="${listOfLoan1}"/> </br>
                                                             </td>
-                                                            <td><input type="text" name="savingTypeAmount1" value="${listOfLoan[3]}" class="form-control"></td>
-                                                            <td> <input type="file" name="file1" id="file11" value="" onchange="checkfile(this,${myindex1.count});"/>
-                                                                <div class="col-sm-6" id="uploadDiv${myindex1.count}" name="uploadDiv${myindex1.count}" style="display: none">
+                                                            <td><input type="text" name="savingTypeAmount1" value="0.0" class="form-control"></td>
+                                                            <td> <input type="file" name="file1" id="file11" value="" onchange="checkfile(this,${myindex1.count});"/></td>
+                                                            <td><div class="col-sm-6" id="uploadDiv${myindex1.count}" name="uploadDiv${myindex1.count}" style="display: none">
                                                                     <input type="submit" style="width: 100px;"  value="UPLOAD" class="btn btn-primary" id="saveSubmit2"  onclick="document.getElementById('save').value = '1';" />
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                
-                                                            </td>
-                                                               <td>
-                                                                <div class="btn-group">
-                                                                    <button type="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        Action <span class="caret"></span>
-                                                                    </button>
-
-                                                                    <ul class="dropdown-menu" >
-                                                                        <li>
-                                                                            <a href="#"
-                                                                               onclick="">
-                                                                                &nbsp;&nbsp;Approve
-                                                                            </a>
-                                                                        </li>
-                                                
-                                                                        <li>
-                                                                            <a href="#"
-                                                                               onclick="changeStatus(${list[0]});">
-                                                                                &nbsp;&nbsp;Reject
-                                                                            </a>
-                                                                        </li>
-
-                                                                        <li>
-                                                                            <a href="#"
-                                                                               onclick="changeStatus(${list[0]});">
-                                                                                &nbsp;&nbsp;Recycle
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                              </td>
+                                                                </div></td>
+                                                                <td><input type="hidden" id="hrId" name="hrId" value="${myindex1.count}"/></td> 
                                                         </tr>
                                                     <%--</c:forEach>--%>
                                                     </c:forEach>
@@ -130,7 +96,11 @@
                                         <c:if test="${!empty employeelist}">
                                         </c:if>
                                     </div>
-                                    
+                                    <div class="form-group">
+                                        <div class="col-sm-6 col-sm-offset-5">
+                                            <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                        </div>
+                                    </div>
                                 </form:form>
                             </div><!-- /.tab-pane -->
                         </div><!-- /.tab-content -->

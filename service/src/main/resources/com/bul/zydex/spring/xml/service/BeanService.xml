@@ -647,4 +647,7 @@
     <bean id="payrollTaxRateMasterService1" class="com.bul.zydex.service.Payroll.PayrollTaxRateMasterServiceImpl">
         <property name="payrollTaxRateMasterDao" ref="payrollTaxRateMasterDao1" />
     </bean>
+    <bean id="taxDeductionDeclarationSavingStatusService1" class="com.bul.zydex.service.Payroll.TaxDeductionDeclarationSavingStatusServiceImpl">
+        <property name="taxDeductionDeclarationSavingStatusDAO" ref="taxDeductionDeclarationSavingStatusDAO1" />
+    </bean>
 </beans>

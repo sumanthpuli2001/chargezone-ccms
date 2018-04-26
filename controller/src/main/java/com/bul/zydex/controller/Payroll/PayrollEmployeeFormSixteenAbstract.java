@@ -86,14 +86,6 @@ public class PayrollEmployeeFormSixteenAbstract extends CustomAbstract {
     protected PayrollTaxDeductionComponentService<PayrollTaxDeductionComponent> payrollTaxDeductionComponentService;
     protected TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> taxDeductionDecarationSubmitService;
 
-    public ZydexLocationMasterService<ZydexLocationMaster> getZydexLocationMasterService() {
-        return zydexLocationMasterService;
-    }
-
-    public void setZydexLocationMasterService(ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService) {
-        this.zydexLocationMasterService = zydexLocationMasterService;
-    }
-
     public TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> getTaxDeductionDecarationSubmitService() {
         return taxDeductionDecarationSubmitService;
     }

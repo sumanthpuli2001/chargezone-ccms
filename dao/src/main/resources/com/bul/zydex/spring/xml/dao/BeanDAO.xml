@@ -261,4 +261,5 @@
     <bean id="taxSavingSubmitDAO1" class="com.bul.zydex.dao.Payroll.TaxSavingSubmitDAOImpl" parent="sessionFactoryConfig"/>
     <bean id="payrollTaxDeclarationPeriodMasterDao1" class="com.bul.zydex.dao.Payroll.PayrollTaxDeclarationPeriodMasterDaoImpl" parent="sessionFactoryConfig"></bean>
     <bean id="payrollTaxRateMasterDao1" class="com.bul.zydex.dao.Payroll.PayrollTaxRateMasterDaoImpl" parent="sessionFactoryConfig"/>
+    <bean id="taxDeductionDeclarationSavingStatusDAO1" class="com.bul.zydex.dao.Payroll.TaxDeductionDeclarationSavingStatusDAOImpl" parent="sessionFactoryConfig" />
 </beans>

@@ -6,7 +6,10 @@
 package com.bul.zydex.service.Payroll;
 
 import com.bul.zydex.dao.Payroll.TaxSavingSubmitDAO;
+import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.TaxSavingSubmit;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.List;
 
 /**
  *
@@ -24,5 +27,21 @@ public class TaxSavingSubmitServiceImpl<T> extends GenericsServiceImpl<T> implem
         this.taxSavingSubmitDAO = taxSavingSubmitDAO;
         setGenericsDAO(taxSavingSubmitDAO);
     }
+
+    @Override
+    public List<?> readTaxSavingSubmitForEmployee(EmployeeMaster employeeMaster) {
+        return taxSavingSubmitDAO.readTaxSavingSubmitForEmployee(employeeMaster);
+    }
+
+    @Override
+    public List taxSubmitSearchIdCheck(T object) {
+        return taxSavingSubmitDAO.taxSubmitSearchIdCheck(object);
+    }
+
+    @Override
+    public List<?> readDataForSaving(int employeeId, int financialId) {
+        return taxSavingSubmitDAO.readDataForSaving(employeeId, financialId);
+    }
+
     
 }

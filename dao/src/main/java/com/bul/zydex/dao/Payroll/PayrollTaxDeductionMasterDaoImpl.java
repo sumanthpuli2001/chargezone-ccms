@@ -66,4 +66,5 @@ public class PayrollTaxDeductionMasterDaoImpl<T> extends GenericsDAOImpl<T> impl
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+
 }

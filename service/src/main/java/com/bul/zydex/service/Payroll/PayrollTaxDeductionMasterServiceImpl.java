@@ -50,8 +50,5 @@ public class PayrollTaxDeductionMasterServiceImpl<T> extends GenericsServiceImpl
     public List<?> readByComponentId(int parseInt) {
       return payrollTaxDeductionMasterDao.readByComponentId(parseInt);
     }
-
-
-
     
 }

@@ -31,6 +31,9 @@
         <property name="status" type="java.lang.Integer">
             <column name="status" />
         </property>
+        <property name="actionStatus" type="java.lang.Integer">
+            <column name="action_status" />
+        </property>
         <property name="createdBy" type="java.lang.Integer">
             <column name="created_by" />
         </property>

@@ -5,12 +5,21 @@
  */
 package com.bul.zydex.service.Payroll;
 
+import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.TaxSavingSubmit;
 import com.bul.zydex.service.GenericsService;
+import java.util.List;
 
 /**
  *
  * @author Hussain
  */
 public interface TaxSavingSubmitService<T> extends GenericsService<T> {
+
+    public List<?> readTaxSavingSubmitForEmployee(EmployeeMaster employeeMaster);
+
+    public List taxSubmitSearchIdCheck(T object);
+
+    public List<?> readDataForSaving(int employeeId, int financialId);
     
 }

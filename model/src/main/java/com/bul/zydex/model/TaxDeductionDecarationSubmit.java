@@ -17,6 +17,7 @@ public class TaxDeductionDecarationSubmit implements java.io.Serializable {
     private PayrollTaxDeductionComponent payrollTaxDeductionComponent;
     private Double amountTaxDecaration;
     private Integer status;
+    private Integer actionStatus;
     private Integer createdBy;
     private Integer updatedBy;
     private String updatedDate;
@@ -26,19 +27,22 @@ public class TaxDeductionDecarationSubmit implements java.io.Serializable {
     public TaxDeductionDecarationSubmit() {
     }
 
-    public TaxDeductionDecarationSubmit(Integer id, TaxSavingSubmit taxSavingSubmit, PayrollTaxDeductionMaster payrollTaxDeductionMaster, PayrollTaxDeductionComponent payrollTaxDeductionComponent, Double amountTaxDecaration, Integer status, Integer createdBy, Integer updatedBy, String updatedDate, String createdDate, String attachment) {
+    public TaxDeductionDecarationSubmit(Integer id, TaxSavingSubmit taxSavingSubmit, PayrollTaxDeductionMaster payrollTaxDeductionMaster, PayrollTaxDeductionComponent payrollTaxDeductionComponent, Double amountTaxDecaration, Integer status, Integer actionStatus, Integer createdBy, Integer updatedBy, String updatedDate, String createdDate, String attachment) {
         this.id = id;
         this.taxSavingSubmit = taxSavingSubmit;
         this.payrollTaxDeductionMaster = payrollTaxDeductionMaster;
         this.payrollTaxDeductionComponent = payrollTaxDeductionComponent;
         this.amountTaxDecaration = amountTaxDecaration;
         this.status = status;
+        this.actionStatus = actionStatus;
         this.createdBy = createdBy;
         this.updatedBy = updatedBy;
         this.updatedDate = updatedDate;
         this.createdDate = createdDate;
         this.attachment = attachment;
     }
+
+   
 
 
     public Integer getId() {
@@ -88,6 +92,14 @@ public class TaxDeductionDecarationSubmit implements java.io.Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getActionStatus() {
+        return actionStatus;
+    }
+
+    public void setActionStatus(Integer actionStatus) {
+        this.actionStatus = actionStatus;
     }
 
     public Integer getCreatedBy() {

@@ -156,4 +156,5 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
 
     public List<?> readEmployeeList(int id,int empid);
 
+    public List<?> empOrDateWiseSearchforActiveSecond(EmployeeAdvanceSearch employeeAdvanceSearch);
 }

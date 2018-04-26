@@ -59,7 +59,7 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Taxable Income To:<span style="color: red;font-size: 12px;">*</span></label>
-                                                <form:input path="incomeTo" min="0" type="number" step="any" placeholder="Enter Income To" class="form-control"></form:input>
+                                                <form:input path="incomeTo" type="number" step="any" min="0" placeholder="Enter Income To" class="form-control"></form:input>
                                                 <form:errors path="incomeTo" cssClass="errorDiv"></form:errors> 
                                             </div>
                                         </div>

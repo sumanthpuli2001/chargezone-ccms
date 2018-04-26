@@ -203,8 +203,8 @@ public class EmployeeSalaryProcessServiceImpl<T> extends GenericsServiceImpl<T> 
     }
 
     @Override
-    public List<?> readEmployeeGrossTotalTaxable(int EmpId, String startDate, String endate) {
-        return employeeSalaryProcessDAO.readEmployeeGrossTotalTaxable(EmpId, startDate, endate);
+    public List<?> readEmpId(int EmpId) {
+          return employeeSalaryProcessDAO.readEmpId(EmpId);
     }
 
 }

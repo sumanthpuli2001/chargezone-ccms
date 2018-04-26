@@ -17,7 +17,9 @@ public interface EmployeeLeaveBalanceService<T> extends GenericsService<T> {
     public List<?> readByEmpId(T object);
 
     public List<?> readleaveWiseBalance(T object);
-    
+
     public List<?> readByleaveTypeId(T object);
+
+    public List<?> readByEmpIdAndLeaveTypeId(int empId, int levtyId);
 
 }

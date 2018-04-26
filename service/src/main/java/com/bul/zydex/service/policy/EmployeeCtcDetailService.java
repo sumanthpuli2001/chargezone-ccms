@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.service.policy;
 
+import com.bul.zydex.model.EmployeeCtcDetail;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.service.GenericsService;
 import java.util.List;
@@ -23,6 +24,8 @@ public interface EmployeeCtcDetailService<T> extends GenericsService<T> {
 
     public List<?> readByEmployeCtcReport(int employeeid, String month, String year);
 
+    public List<?> empid(int employeeid);
+    public List<?> CtcDetailempid(int employeeid);
     public List<?> readctcRegistration(int employeeid);
 
 }

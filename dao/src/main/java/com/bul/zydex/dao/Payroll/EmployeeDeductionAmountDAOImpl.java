@@ -13,6 +13,8 @@ import com.bul.zydex.model.PayrollFinancialYear;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 /**
  *
@@ -211,36 +213,24 @@ public class EmployeeDeductionAmountDAOImpl<T> extends GenericsDAOImpl<T> implem
     }
 
     @Override
-    public List<?> readEmployeeTdsAmount(int employeeMasterID, String startDate, String endate) {
-        String query = "";
-        String condition = "";
-        String sDate = startDate;
-        String eDate = endate;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat sdf1 = new SimpleDateFormat("MM/yyyy");
-        try {
+    public List<?> readByedaId(int edaId, String eftDate, String relivDate) {
 
-            Date s1Date = sdf.parse(startDate);
-            Date e1Date = sdf.parse(endate);
+        Session s = getSessionFactory().openSession();
+        String sqlString = "SELECT"
+                + " c.id, c.month, c.year ,b.deduction_type, b.deduction_amount"
+                + " FROM"
+                + " hr_power_astral.resignation_master a "
+                + " LEFT JOIN hr_power_astral.employee_salary_process c ON a.emp_master_id = c.employee_master_id"
+                + " LEFT JOIN hr_power_astral.employee_deduction_amount b ON b.employee_salary_process_id = c.id"
+                + " WHERE"
+                + " month BETWEEN DATE_FORMAT(STR_TO_DATE('" + eftDate + "' , '%d/%m/%Y - %H:%i'),'%m')"
+                + " AND DATE_FORMAT(STR_TO_DATE( '" + relivDate + "' , '%d/%m/%Y - %H:%i'),'%m')"
+                + " AND c.employee_master_id=" + edaId;
 
-            sDate = sdf1.format(s1Date);
-            eDate = sdf1.format(e1Date);
+        SQLQuery query = s.createSQLQuery(sqlString);
+        List<?> list = query.list();
+        s.close();
+        return list;
 
-        } catch (Exception e) {
-
-        }
-//      String query = "";
-//        String condition = "";
-
-        query += " Select a.deductionType,a.deductionAmount"
-                + " From EmployeeDeductionAmount a"
-                + " left join a.employeeSalaryProcess b"
-                + " where b.employeeMaster.id= " + employeeMasterID
-                + " and a.deductionType like '%TDS%'"
-                 + " and STR_TO_DATE(CONCAT(b.month,'/',b.year), '%m/%Y') BETWEEN STR_TO_DATE('" + sDate + "', '%m/%Y') and STR_TO_DATE('" + eDate + "', '%m/%Y')"
-                + " group by b.id";
-
-        return getHibernateTemplate().find(query);  
     }
-
 }

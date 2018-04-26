@@ -647,4 +647,10 @@
     <bean id="payrollTaxRateMasterService1" class="com.bul.zydex.service.Payroll.PayrollTaxRateMasterServiceImpl">
         <property name="payrollTaxRateMasterDao" ref="payrollTaxRateMasterDao1" />
     </bean>
+    <bean id="fullAndFinalSettlementService1" class="com.bul.zydex.service.resignation.FullAndFinalSettlementServiceImpl">
+        <property name="fullAndFinalSettlementDAO" ref="fullAndFinalSettlementDAO1"/>
+    </bean>
+    <bean id="formateFullNdFinalLetterService1" class="com.bul.zydex.service.FormateFullNdFinalLetter.FormateFullNdFinalLetterServiceImpl">
+        <property name="formateFullNdFinalLetterDAO" ref="formateFullNdFinalLetterDAO1"/>
+    </bean>
 </beans>

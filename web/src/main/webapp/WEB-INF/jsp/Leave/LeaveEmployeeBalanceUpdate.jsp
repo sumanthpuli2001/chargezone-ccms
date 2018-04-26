@@ -18,6 +18,8 @@
     <body class="navbar-fixed">
         <div id="shiftName">
             <input type="hidden" name="empLeaveBalId" id="empLeaveBalId" value="${employeeLeaveBalance.id}">
+            <input type="hidden" name="EmpId" id="EmpId" value="${employeeMaster.id}">
+            <input type="hidden" name="leavetypeId" id="leavetypeId" value="${leaveTypeMaster.id}">
             <div class="col-sm-12">
                 <div class="col-sm-2">
                     <label>Employee Id:<span style="color: red;font-size: 12px;"></span></label>

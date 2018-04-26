@@ -59,7 +59,7 @@ public class AppraisalFillingDataDAOImpl<T> extends GenericsDAOImpl<T> implement
         String query = "";
         query = " "
                 + " from AppraisalFillingData where str_to_date(Date_format(now(),'%d/%m/%Y'),'%d/%m/%Y') between str_to_date(startDate,'%d/%m/%Y') "
-                + " and str_to_date(managerYearEndEndDate,'%d/%m/%Y')";
+                + " and str_to_date(yearEndEndDate,'%d/%m/%Y')";
         return getHibernateTemplate().find(query);
     }
 

@@ -17,6 +17,7 @@ import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.HoursBasis;
 import com.bul.zydex.model.LeaveEmployeeDetail;
+import com.bul.zydex.model.LeaveEmployeeDetailsApprovalHistory;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.ShiftMaster;
 import com.bul.zydex.model.ShiftRotationInfo;
@@ -30,6 +31,7 @@ import com.bul.zydex.service.holiday.HolidayMasterService;
 import com.bul.zydex.service.leave.COffLeaveMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
 import com.bul.zydex.service.leave.LeaveEmployeeDetailService;
+import com.bul.zydex.service.leave.LeaveEmployeeDetailsApprovalHistoryService;
 import com.bul.zydex.service.leave.LeaveTypeMasterService;
 import com.bul.zydex.service.leave.ShortLeaveService;
 import com.bul.zydex.service.shift.EmployeeShiftDataService;
@@ -66,6 +68,7 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
     protected ShiftRotationInfoService<ShiftRotationInfo> shiftRotationInfoService;
     protected EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService;
     protected UserRightMasterService<UserRightMaster> userRightMasterService;
+    protected LeaveEmployeeDetailsApprovalHistoryService<LeaveEmployeeDetailsApprovalHistory> leaveEmployeeDetailsApprovalHistoryService;
 
     public UserRightMasterService<UserRightMaster> getUserRightMasterService() {
         return userRightMasterService;
@@ -169,6 +172,14 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
 
     public void setShiftRotationInfoService(ShiftRotationInfoService<ShiftRotationInfo> shiftRotationInfoService) {
         this.shiftRotationInfoService = shiftRotationInfoService;
+    }
+
+    public LeaveEmployeeDetailsApprovalHistoryService<LeaveEmployeeDetailsApprovalHistory> getLeaveEmployeeDetailsApprovalHistoryService() {
+        return leaveEmployeeDetailsApprovalHistoryService;
+    }
+
+    public void setLeaveEmployeeDetailsApprovalHistoryService(LeaveEmployeeDetailsApprovalHistoryService<LeaveEmployeeDetailsApprovalHistory> leaveEmployeeDetailsApprovalHistoryService) {
+        this.leaveEmployeeDetailsApprovalHistoryService = leaveEmployeeDetailsApprovalHistoryService;
     }
 
     protected void addleaveType(HttpServletRequest request) {

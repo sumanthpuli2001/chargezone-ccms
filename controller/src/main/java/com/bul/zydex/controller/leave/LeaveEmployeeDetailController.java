@@ -15,6 +15,7 @@ import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.HoursBasis;
 import com.bul.zydex.model.LeaveEmployeeDetail;
+import com.bul.zydex.model.LeaveEmployeeDetailsApprovalHistory;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.ShiftMaster;
 import com.bul.zydex.model.ShiftRotationInfo;
@@ -2068,6 +2069,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             }
 
         }
+        List<?> approvalHistoryList = leaveEmployeeDetailsApprovalHistoryService.getByLeaveEmpDetailId(Integer.parseInt(id));
+
+        request.setAttribute("approvalHistoryList", approvalHistoryList);
         request.setAttribute("listRemain", listRemain);
         request.setAttribute("empReqMap", empReqMap);
         request.setAttribute("totalDaysMap", totalDaysMap);
@@ -2086,6 +2090,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
         LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
         EmployeeMaster employeeMaster = new EmployeeMaster();
+        LeaveEmployeeDetailsApprovalHistory leaveEmployeeDetailsApprovalHistory = new LeaveEmployeeDetailsApprovalHistory();
         Float balanceDay;
         Float noOfDay;
         String id = request.getParameter("id");
@@ -2099,6 +2104,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         employeeMaster.setId(leaveEmployeeDetail.getEmployeeMaster().getId());
         employeeLeaveBalance.setEmployeeMaster(employeeMaster);
         employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+        Date date1 = new Date();
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        String submitDate = sdf1.format(date1);
 
         List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
         if (!balanceList.isEmpty()) {
@@ -2119,6 +2127,15 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 String approveDate = sdf.format(date);
                 leaveEmployeeDetail.setApproveDate(approveDate);
                 leaveEmployeeDetailService.update(leaveEmployeeDetail);
+                leaveEmployeeDetailsApprovalHistory.setApprovalId(employeeMaster1.getId());
+                leaveEmployeeDetailsApprovalHistory.setApprovalName(employeeMaster1.getEmployeeName());
+                leaveEmployeeDetailsApprovalHistory.setComment(hrRemark);
+                leaveEmployeeDetailsApprovalHistory.setCreatedBy(employeeMaster1.getId());
+                leaveEmployeeDetailsApprovalHistory.setCreatedDate(approveDate);
+                leaveEmployeeDetailsApprovalHistory.setLeaveEmployeeDetail(leaveEmployeeDetail);
+                leaveEmployeeDetailsApprovalHistory.setStatusMessage("Withdraw Approved");
+                leaveEmployeeDetailsApprovalHistory.setStatus(4); //Withdraw Approved
+                leaveEmployeeDetailsApprovalHistoryService.create(leaveEmployeeDetailsApprovalHistory);
                 request.setAttribute("successMessage",
                         "Information : The Leave is Withdrawn successfully.");//enter approve witdrw template..
                 try {
@@ -2163,6 +2180,15 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 String approveDate = sdf.format(date);
                 leaveEmployeeDetail.setApproveDate(approveDate);
                 leaveEmployeeDetailService.update(leaveEmployeeDetail);
+                leaveEmployeeDetailsApprovalHistory.setApprovalId(employeeMaster1.getId());
+                leaveEmployeeDetailsApprovalHistory.setApprovalName(employeeMaster1.getEmployeeName());
+                leaveEmployeeDetailsApprovalHistory.setComment(hrRemark);
+                leaveEmployeeDetailsApprovalHistory.setCreatedBy(employeeMaster1.getId());
+                leaveEmployeeDetailsApprovalHistory.setCreatedDate(approveDate);
+                leaveEmployeeDetailsApprovalHistory.setLeaveEmployeeDetail(leaveEmployeeDetail);
+                leaveEmployeeDetailsApprovalHistory.setStatusMessage("Approved");
+                leaveEmployeeDetailsApprovalHistory.setStatus(1); //Approved
+                leaveEmployeeDetailsApprovalHistoryService.create(leaveEmployeeDetailsApprovalHistory);
                 request.setAttribute("successMessage",
                         "Information : The Leave Approved successfully.");
                 try {
@@ -2276,6 +2302,15 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         if (btnSubmit.equals("reject")) {
 
             if (leaveEmployeeDetail.getStatus() == 4) {
+                leaveEmployeeDetailsApprovalHistory.setApprovalId(employeeMaster1.getId());
+                leaveEmployeeDetailsApprovalHistory.setApprovalName(employeeMaster1.getEmployeeName());
+                leaveEmployeeDetailsApprovalHistory.setComment(hrRemark);
+                leaveEmployeeDetailsApprovalHistory.setCreatedBy(employeeMaster1.getId());
+                leaveEmployeeDetailsApprovalHistory.setCreatedDate(submitDate);
+                leaveEmployeeDetailsApprovalHistory.setLeaveEmployeeDetail(leaveEmployeeDetail);
+                leaveEmployeeDetailsApprovalHistory.setStatusMessage("Withdraw Rejected");
+                leaveEmployeeDetailsApprovalHistory.setStatus(4); //Withdraw Rejected
+                leaveEmployeeDetailsApprovalHistoryService.create(leaveEmployeeDetailsApprovalHistory);
                 request.setAttribute("successMessage",
                         "Information : The Withdraw Request Rejected successfully.");
                 try {
@@ -2329,6 +2364,15 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 balanceDay = balanceDay + noOfDay;
                 employeeLeaveBalance.setNoOfLeaveRemain(balanceDay);
                 employeeLeaveBalanceService.update(employeeLeaveBalance);
+                leaveEmployeeDetailsApprovalHistory.setApprovalId(employeeMaster1.getId());
+                leaveEmployeeDetailsApprovalHistory.setApprovalName(employeeMaster1.getEmployeeName());
+                leaveEmployeeDetailsApprovalHistory.setComment(hrRemark);
+                leaveEmployeeDetailsApprovalHistory.setCreatedBy(employeeMaster1.getId());
+                leaveEmployeeDetailsApprovalHistory.setCreatedDate(submitDate);
+                leaveEmployeeDetailsApprovalHistory.setLeaveEmployeeDetail(leaveEmployeeDetail);
+                leaveEmployeeDetailsApprovalHistory.setStatusMessage("Rejected");
+                leaveEmployeeDetailsApprovalHistory.setStatus(2); //Rejected
+                leaveEmployeeDetailsApprovalHistoryService.create(leaveEmployeeDetailsApprovalHistory);
                 request.setAttribute("successMessage",
                         "Information : The Leave Rejected successfully.");
                 try {
@@ -2385,7 +2429,15 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             String approveDate = sdf.format(date);
             leaveEmployeeDetail.setApproveDate(approveDate);
             leaveEmployeeDetailService.update(leaveEmployeeDetail);
-
+            leaveEmployeeDetailsApprovalHistory.setApprovalId(employeeMaster1.getId());
+            leaveEmployeeDetailsApprovalHistory.setApprovalName(employeeMaster1.getEmployeeName());
+            leaveEmployeeDetailsApprovalHistory.setComment(hrRemark);
+            leaveEmployeeDetailsApprovalHistory.setCreatedBy(employeeMaster1.getId());
+            leaveEmployeeDetailsApprovalHistory.setCreatedDate(submitDate);
+            leaveEmployeeDetailsApprovalHistory.setLeaveEmployeeDetail(leaveEmployeeDetail);
+            leaveEmployeeDetailsApprovalHistory.setStatusMessage("Reworked");
+            leaveEmployeeDetailsApprovalHistory.setStatus(3); //Reworked
+            leaveEmployeeDetailsApprovalHistoryService.create(leaveEmployeeDetailsApprovalHistory);
             request.setAttribute("successMessage",
                     "Information : The Leave Reworked successfully.");
             try {

@@ -223,6 +223,7 @@
                 <prop key="payrollTaxDeduction.htm">payrollTaxDeductionMasterController1</prop>
                 <prop key="payrollTaxDeclaration.htm">payrollTaxDeclarationPeriodMasterController1</prop>
                 <prop key="payrollTaxRate.htm">payrollTaxRateMasterController1</prop>
+                <prop key="leaveEmployeeDetailsApprovalHistoryController.htm">leaveEmployeeDetailsApprovalHistoryController1</prop>
             </props>
         </property>
         <property name="order" value="0" />     

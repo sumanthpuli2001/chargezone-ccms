@@ -163,4 +163,7 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> checkSuprior(int empId,int managerEmpId);
    
 
+    public List<?> readByEmployeeNo1(String employeeNo);
+    
+    public List<?> readEmId(String EmployeeId);
 }

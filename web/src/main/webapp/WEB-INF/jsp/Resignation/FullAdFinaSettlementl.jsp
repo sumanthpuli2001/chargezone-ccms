@@ -51,7 +51,7 @@
                                         <div class="col-sm-5">
                                             <label class="control-label">Resignation Employee :<span style="color: red;font-size: 12px;"></span></label>
                                                 <!--<input type="text" name="empid" id="empid" class="form-control"/>-->
-                                                 <form:input type="text" path="resignationEmpId" name="policyId1" id="policyId1" class="form-control"/>
+                                                 <form:input type="text" path="employeeMaster" name="policyId1" id="policyId1" class="form-control"/>
                                         </div>
                                         <div class="col-sm-5">
                                             <label class="control-label">Notice Period :<span style="color: red;font-size: 12px;"></span></label>

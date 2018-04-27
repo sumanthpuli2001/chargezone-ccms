@@ -293,6 +293,12 @@
                                                         <label  style="font-weight: normal">Training</label>
 
                                                     </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="kaizenApproval"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">kaizen Approval</label>
+
+                                                    </div>
                                                 </div>
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->

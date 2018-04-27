@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.policy;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.List;
 
 /**
  *
@@ -15,4 +16,5 @@ public interface PolicyMasterDAO<T> extends GenericsDAO<T> {
 
     public boolean isExist(T object);
 
+    public List<?> readBySalaryTypeID(String salaryTpe);
 }

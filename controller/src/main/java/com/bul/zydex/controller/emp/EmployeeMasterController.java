@@ -735,6 +735,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         EmployeeSubTypeList(request);
         policyList(request);
         ctcList(request);
+        companyList(request);
 
 //        shiftList(request);
         hoursBasisList(request);
@@ -812,7 +813,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         request.setAttribute("checkPf", checkPf);
         request.setAttribute("checkPt", checkPt);
         request.setAttribute("lastYearPerformanceRatingsOfEmployee", lastYearPerformanceRatingsOfEmployee);
-        request.setAttribute("company", employeeMaster.getCompany());
+//        request.setAttribute("company", employeeMaster.getCompany());
         request.setAttribute("employeeType", employeeMaster.getEmployeeType());
         request.setAttribute("shiftType", employeeMaster.getShiftType());
         request.setAttribute("certificatesList", certificatesList);
@@ -910,7 +911,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
             EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
             String ptl = "Paternity Leave";
-            List<?> ptlList = leaveTypeMasterService.readLeaveType(ptl);
+            List<?> ptlList = leaveTypeMasterService.readLeaveTypeEditRegistration(ptl);
             leaveTypeMaster.setId((Integer) ptlList.get(0));
             employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
             employeeLeaveBalance.setEmployeeMaster(employeeMaster);
@@ -1054,9 +1055,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
         EmployeeCtcDetail employeeCtcDetail = new EmployeeCtcDetail();
 //       Boolean check =  employeePolicyDetailService.deleteByEmployeeId(employeeMaster.getId());
-        List<?> ctcDetail = employeeCtcDetailService.readctc(employeeMaster.getId());
-        for (Object policyObject : ctcDetail) {
-            employeeCtcDetail = (EmployeeCtcDetail) policyObject;
+        List<?> ctcDetail = employeeCtcDetailService.readctcRegistration(employeeMaster.getId());
+        for (Object policyObject1 : ctcDetail) {
+            employeeCtcDetail = (EmployeeCtcDetail) policyObject1;
             employeeCtcDetailService.delete(employeeCtcDetail.getId());
         }
 //        EmployeeCtcDetail employeeCtcDetail = new EmployeeCtcDetail();

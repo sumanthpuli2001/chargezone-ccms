@@ -10,9 +10,9 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="resignationEmpId" type="java.lang.Integer">
-            <column name="resignation_emp_id" />
-        </property>
+        <many-to-one name="employeeMaster" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="employee_master_id" />
+        </many-to-one>
         <property name="noticePeriod" type="java.lang.Integer">
             <column name="notice_period" />
         </property>

@@ -5,6 +5,8 @@ import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.ResignationMaster;
 import com.bul.zydex.model.UserRightMaster;
 import java.util.List;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -271,11 +273,31 @@ public class ResignationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements R
                 + " WHERE a.employeeMaster=" + EmpId;
 
         List<?> list = getHibernateTemplate().find(query);
-        if(!list.isEmpty()){
+        if (!list.isEmpty()) {
             resignationMaster = (ResignationMaster) list.get(0);
-        }else{
+        } else {
             resignationMaster = null;
         }
         return resignationMaster;
+    }
+
+    @Override
+    public List<?> fetchBWdate(int empId, String eftDate, String relivDate) {
+          Session s = getSessionFactory().openSession();
+        String sqlString = "SELECT"
+                + "  b.id, b.gross_total, b.month, b.year"
+                + " FROM"
+                + " hr_power_astral.resignation_master a"
+                + " LEFT JOIN"
+                + " hr_power_astral.employee_salary_process b"
+                + " ON a.emp_master_id = b.employee_master_id"
+                + " WHERE"
+                + " month BETWEEN DATE_FORMAT(STR_TO_DATE('"+eftDate+"' , '%d/%m/%Y - %H:%i'),'%m')"
+                + " AND DATE_FORMAT(STR_TO_DATE( '"+relivDate+"' , '%d/%m/%Y - %H:%i'),'%m')"
+                + " AND  b.employee_master_id =" + empId;
+        SQLQuery query = s.createSQLQuery(sqlString);
+        List<?> list = query.list();
+        s.close();
+        return list;
     }
 }

@@ -52,4 +52,14 @@ public class EmployeeCtcDetailServiceImpl<T> extends GenericsServiceImpl<T> impl
         return employeeCtcDetailDAO.empid(employeeid);
     }
 
+    @Override
+    public List<?> CtcDetailempid(int employeeid) {
+         return employeeCtcDetailDAO.CtcDetailempid(employeeid);
+    }
+
+    @Override
+    public List<?> readctcRegistration(int employeeid) {
+       return employeeCtcDetailDAO.readctcRegistration(employeeid);
+    }
+
 }

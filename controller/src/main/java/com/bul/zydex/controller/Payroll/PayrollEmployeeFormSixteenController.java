@@ -13,12 +13,26 @@ import com.bul.zydex.model.EmployeeType;
 import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.PayrollFinancialYear;
 import com.bul.zydex.model.PayrollFormSixteenMaster;
+import com.bul.zydex.model.PayrollTaxDeductionComponent;
+import com.bul.zydex.model.PayrollTaxDeductionMaster;
+import com.bul.zydex.model.TaxDeductionDecarationSubmit;
+import com.bul.zydex.model.TaxSavingSubmit;
+import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
+import com.bul.zydex.util.DownloadFile;
+import java.io.File;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -159,13 +173,13 @@ public class PayrollEmployeeFormSixteenController extends PayrollEmployeeFormSix
         ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
         EmployeeSubType employeeSubType = new EmployeeSubType();
 
-        EmployeeTypeList(request);
-        EmployeeSubTypeList(request);
-        zydexLocationList(request);
+//        EmployeeTypeList(request);
+//        EmployeeSubTypeList(request);
+//        zydexLocationList(request);
         financialYearList(request);
-        selectEmployee(request, response);
+//        selectEmployee(request, response);
         request.setAttribute("search", request.getParameter("search"));
-        mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+//        mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
         mv.setViewName("Payroll/PayrollEmployeeSavingForm");
         return mv;
     }
@@ -177,23 +191,27 @@ public class PayrollEmployeeFormSixteenController extends PayrollEmployeeFormSix
         EmployeeType employeeType = new EmployeeType();
         EmployeeSubType employeeSubType = new EmployeeSubType();
 
-        String zydex_location_id = request.getParameter("zydexLocationMasterId");
-        String type_of_employee = request.getParameter("employeeTypeMasterId");
-        String employee_sub_id = request.getParameter("subTypeId");
+//        String zydex_location_id = request.getParameter("zydexLocationMasterId");
+//        String type_of_employee = request.getParameter("employeeTypeMasterId");
+//        String employee_sub_id = request.getParameter("subTypeId");
         String Financial_year = request.getParameter("fnyear");
-        String Employee_Name = request.getParameter("employeeMasterId");
-
-//       
-        if (!zydex_location_id.equals("")) {
-            employeeMaster.setAdharCard(zydex_location_id);
-        }
-
-        if (!type_of_employee.equals("")) {
-            employeeMaster.setEmployeeType(type_of_employee);
-        }
-        if (null != employee_sub_id && !employee_sub_id.equals("")) {
-            employeeMaster.setCompany(employee_sub_id);
-        }
+//        String Employee_Name = request.getParameter("employeeMasterId");
+        HttpSession session = request.getSession();
+        EmployeeMaster employee = (EmployeeMaster) session.getAttribute("employeeInfo");
+        int id = employee.getId();
+        EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
+        String Employee_Name = employeeMaster1.getEmployeeName();
+////       
+//        if (!zydex_location_id.equals("")) {
+//            employeeMaster.setAdharCard(zydex_location_id);
+//        }
+//
+//        if (!type_of_employee.equals("")) {
+//            employeeMaster.setEmployeeType(type_of_employee);
+//        }
+//        if (null != employee_sub_id && !employee_sub_id.equals("")) {
+//            employeeMaster.setCompany(employee_sub_id);
+//        }
 //
         if (!Financial_year.equals("")) {
             employeeMaster.setPaymentType(Financial_year);
@@ -229,49 +247,423 @@ public class PayrollEmployeeFormSixteenController extends PayrollEmployeeFormSix
 
         }
         payrollFormSixteenMaster.setPayrollFinancialYear(payrollFinancialYear);
-        List totalList = new ArrayList();
-        List finalData = new ArrayList();
-        List<?> taxDeduction = payrollTaxDeductionMasterService.readTaxDeductionForFormSixteen();
-        if (!taxDeduction.isEmpty()) {
-            List taxDeductionList = new ArrayList();
-            for (Object taxDeductionList1 : taxDeduction) {
-                List finalDatatemp = new ArrayList();
-                Object[] o = (Object[]) taxDeductionList1;
-                Integer taxdeductionid = (Integer) o[0];
-                String selection = (String) o[1];
-                String description = (String) o[2];
-                finalDatatemp.add(selection);
-                List<?> taxDeductioncomponent = payrollTaxDeductionComponentService.readTaxDeductionComponentforFromSixteen(taxdeductionid);
-                List taxDeductioncomponentList = new ArrayList();
-                List taxDeductioncomponentIDList = new ArrayList();
-                if (!taxDeductioncomponent.isEmpty()) {
-                    taxDeductionList.add(selection);
-                    for (Object taxDeductionListcompmet1 : taxDeductioncomponent) {
-                        Object[] o1 = (Object[]) taxDeductionListcompmet1;
-                        Integer taxdeductionid1 = (Integer) o1[0];
-                        taxDeductioncomponentIDList.add(taxdeductionid1);
+        boolean isExist = taxSavingSubmitService.isExist(employeeMaster.getId(), payrollFinancialYear.getId());
+        if (isExist) {
 
-                        String compoment = (String) o1[1];
-                        taxDeductioncomponentList.add(compoment);
-                        Integer agelimit = (Integer) o1[2];
-                        Integer taxSavingLimit = (Integer) o1[3];
+            List<?> taxSavingAmount = taxSavingSubmitService.readTaxSavingSubmit(employeeMaster.getId(), payrollFinancialYear.getId());
+            if (!taxSavingAmount.isEmpty()) {
+                TaxSavingSubmit taxSavingSubmit = new TaxSavingSubmit();
+                for (Object o13 : taxSavingAmount) {
+                    taxSavingSubmit = (TaxSavingSubmit) o13;
+                    Integer taxSavingsubmitId = taxSavingSubmit.getId();
+                    List<?> taxDeductionDecarationSubmit = taxDeductionDecarationSubmitService.readTaxDeductionDecarationSubmit(taxSavingsubmitId);
+                    if (!taxDeductionDecarationSubmit.isEmpty()) {
+                        for (Object taxDeductionDecarationSubmit1 : taxDeductionDecarationSubmit) {
+                            Integer taxDeductionMaster1 = (Integer) taxDeductionDecarationSubmit1;
+//                            Object[] o12 = (Object[]) taxDeductionDecarationSubmit1;
+//                            Integer taxDeductionMasterCompennt = (Integer) o12[1];
+//                            Double taxAmount = (Double) o12[3];
+
+                            List totalList = new ArrayList();
+                            List finalData = new ArrayList();
+                            List<?> taxDeduction = payrollTaxDeductionMasterService.readTaxDeductionForFormSixteen();
+                            List taxDeductioncomponentIDList = new ArrayList();
+                            if (!taxDeduction.isEmpty()) {
+                                List taxDeductionList = new ArrayList();
+                                for (Object taxDeductionList1 : taxDeduction) {
+                                    List finalDatatemp = new ArrayList();
+                                    Object[] o = (Object[]) taxDeductionList1;
+                                    Integer taxdeductionid = (Integer) o[0];
+                                    String selection = (String) o[1];
+                                    String description = (String) o[2];
+                                    finalDatatemp.add(selection);
+                                    List<?> taxDeductioncomponent = payrollTaxDeductionComponentService.readTaxDeductionComponentforFromSixteen(taxdeductionid);
+                                    List taxDeductioncomponentList = new ArrayList();
+                                    if (!taxDeductioncomponent.isEmpty()) {
+                                        taxDeductionList.add(selection);
+                                        for (Object taxDeductionListcompmet1 : taxDeductioncomponent) {
+                                            List taxDeductioncomponentList1 = new ArrayList();
+                                            List taxDeductioncomponentList12 = new ArrayList();
+                                            Object[] o1 = (Object[]) taxDeductionListcompmet1;
+                                            Integer taxdeductionid1 = (Integer) o1[0];
+//                        taxDeductioncomponentIDList.add(taxdeductionid1);
+
+                                            String compoment = (String) o1[1];
+                                            taxDeductioncomponentList1.add(compoment);
+                                            taxDeductioncomponentList1.add(taxdeductionid1);
+                                            taxDeductioncomponentList12.add(taxdeductionid1);
+                                            Integer agelimit = (Integer) o1[2];
+                                            Integer taxSavingLimit = (Integer) o1[3];
+                                            Integer taxDeductionMAsterID = (Integer) o1[4];
+                                            taxDeductioncomponentList1.add(taxSavingLimit);
+                                            Double taxDeductionAmount = 0.0;
+                                            List<?> taxDeductionDecarationSubmit52 = taxDeductionDecarationSubmitService.readTaxDeductionDecarationSubmitAmount(taxSavingsubmitId, taxDeductionMAsterID, taxdeductionid1);
+                                            if (!taxDeductionDecarationSubmit52.isEmpty()) {
+                                                for (Object taxDeductionDecarationSubmit521 : taxDeductionDecarationSubmit52) {
+                                                    Object[] o132 = (Object[]) taxDeductionDecarationSubmit521;
+                                                    taxDeductionAmount = (Double) o132[0];
+                                                    String attachment = (String) o132[1];
+
+                                                    taxDeductioncomponentList1.add(taxDeductionAmount);
+                                                    taxDeductioncomponentList1.add(attachment);
+                                                }
+
+                                            }
+
+                                            taxDeductioncomponentList.add(taxDeductioncomponentList1);
+                                            taxDeductioncomponentIDList.add(taxdeductionid1.toString());
+
+                                        }
+
+                                        finalDatatemp.add(taxDeductioncomponentList);
+//                    finalDatatemp.add(taxDeductioncomponentIDList);
+                                    }
+
+                                    finalData.add(finalDatatemp);
+                                }
+
+                            }
+                            String listString = String.join(", ", taxDeductioncomponentIDList);
+
+                            mv.getModelMap().put("employeeSalaryProcess", employeeSalaryProcess);
+                            request.setAttribute("employeeMaster", employeeMaster);
+                            request.setAttribute("taxDeductioncomponentIDList", listString);
+                            request.setAttribute("finalData", finalData);
+                            request.setAttribute("payrollFormSixteenMaster", payrollFormSixteenMaster);
+                            mv.setViewName("Payroll/EmployeeSavingEdit");
+                            return mv;
+
+                        }
                     }
 
-                    finalDatatemp.add(taxDeductioncomponentList);
-                    finalDatatemp.add(taxDeductioncomponentIDList);
                 }
 
-                finalData.add(finalDatatemp);
             }
+        } else {
+
+            List totalList = new ArrayList();
+            List finalData = new ArrayList();
+            List<?> taxDeduction = payrollTaxDeductionMasterService.readTaxDeductionForFormSixteen();
+            List taxDeductioncomponentIDList = new ArrayList();
+            if (!taxDeduction.isEmpty()) {
+                List taxDeductionList = new ArrayList();
+                for (Object taxDeductionList1 : taxDeduction) {
+                    List finalDatatemp = new ArrayList();
+                    Object[] o = (Object[]) taxDeductionList1;
+                    Integer taxdeductionid = (Integer) o[0];
+                    String selection = (String) o[1];
+                    String description = (String) o[2];
+                    finalDatatemp.add(selection);
+                    List<?> taxDeductioncomponent = payrollTaxDeductionComponentService.readTaxDeductionComponentforFromSixteen(taxdeductionid);
+                    List taxDeductioncomponentList = new ArrayList();
+                    if (!taxDeductioncomponent.isEmpty()) {
+                        taxDeductionList.add(selection);
+                        for (Object taxDeductionListcompmet1 : taxDeductioncomponent) {
+                            List taxDeductioncomponentList1 = new ArrayList();
+                            List taxDeductioncomponentList12 = new ArrayList();
+                            Object[] o1 = (Object[]) taxDeductionListcompmet1;
+                            Integer taxdeductionid1 = (Integer) o1[0];
+//                        taxDeductioncomponentIDList.add(taxdeductionid1);
+
+                            String compoment = (String) o1[1];
+                            taxDeductioncomponentList1.add(compoment);
+                            taxDeductioncomponentList1.add(taxdeductionid1);
+                            taxDeductioncomponentList12.add(taxdeductionid1);
+                            Integer agelimit = (Integer) o1[2];
+                            Integer taxSavingLimit = (Integer) o1[3];
+                            taxDeductioncomponentList1.add(taxSavingLimit);
+                            taxDeductioncomponentList.add(taxDeductioncomponentList1);
+                            taxDeductioncomponentIDList.add(taxdeductionid1.toString());
+                        }
+
+                        finalDatatemp.add(taxDeductioncomponentList);
+//                    finalDatatemp.add(taxDeductioncomponentIDList);
+                    }
+
+                    finalData.add(finalDatatemp);
+                }
+
+            }
+            String listString = String.join(", ", taxDeductioncomponentIDList);
+
+            mv.getModelMap().put("employeeSalaryProcess", employeeSalaryProcess);
+            request.setAttribute("employeeMaster", employeeMaster);
+            request.setAttribute("taxDeductioncomponentIDList", listString);
+            request.setAttribute("finalData", finalData);
+            request.setAttribute("payrollFormSixteenMaster", payrollFormSixteenMaster);
+            mv.setViewName("Payroll/PayrollEmployeeSavingView");
+            return mv;
+        }
+        return mv;
+    }
+
+    public ModelAndView clickSubmitSavingAmount(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        String imgFile = "";
+        ModelAndView mv = new ModelAndView();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+        EmployeeMaster employeeMaster1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        TaxSavingSubmit taxSavingSubmit = new TaxSavingSubmit();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        PayrollFinancialYear payrollFinancialYear = new PayrollFinancialYear();
+        String employeeId = request.getParameter("emplId");
+        String yearId = request.getParameter("yearID");
+//        boolean isExist = taxSavingSubmitService.isExist(Integer.parseInt(employeeId), Integer.parseInt(yearId));
+//        if (isExist) {
+//
+//            List<?> taxSavingAmount = taxSavingSubmitService.readTaxSavingSubmit(Integer.parseInt(employeeId), Integer.parseInt(yearId));
+//            if (!taxSavingAmount.isEmpty()) {
+//                TaxSavingSubmit taxSavingSubmit1 = new TaxSavingSubmit();
+//                for (Object o13 : taxSavingAmount) {
+//                    taxSavingSubmit1 = (TaxSavingSubmit) o13;
+//                    Integer taxSavingsubmitId = taxSavingSubmit1.getId();
+//                    taxSavingSubmit1 = taxSavingSubmitService.readById(taxSavingSubmit1.getId());
+//                    taxSavingSubmit1.setUpdatedBy(employeeMaster1.getId());
+//                    taxSavingSubmit1.setUpdatedDate(sdf.format(cDate));
+//                    taxSavingSubmitService.update(taxSavingSubmit1);
+//
+//                }
+//
+//                TaxDeductionDecarationSubmit taxDeductionDecarationSubmit1 = new TaxDeductionDecarationSubmit();
+//                List<?> list1 = taxDeductionDecarationSubmitService.readByTaxDeductionDecarationDelete(taxSavingSubmit1.getId());
+//                for (Object pdf : list1) {
+//                    taxDeductionDecarationSubmit1 = (TaxDeductionDecarationSubmit) pdf;
+//                    taxDeductionDecarationSubmitService.delete(taxDeductionDecarationSubmit1.getId());
+//                }
+//                String[] savingList = request.getParameterValues("list");
+//                String[] taxCompenet = request.getParameterValues("finalData1");
+//                String as = savingList[0].toString();
+//
+//                TaxDeductionDecarationSubmit taxDeductionDecarationSubmit = new TaxDeductionDecarationSubmit();
+//                String[] var = savingList[0].split("-,");
+//                for (int i = 0; i < var.length; i = i + 3) {
+//                    String taxcomponentId = var[i];
+//                    String taxAMount = var[i + 1];
+//                    String attachment = var[i + 2];
+//                    PayrollTaxDeductionComponent payrollTaxDeductionComponent = new PayrollTaxDeductionComponent();
+//                    payrollTaxDeductionComponent.setComponentId(Integer.parseInt(taxcomponentId));//tax compenont id
+//                    taxDeductionDecarationSubmit.setAmountTaxDecaration(Double.parseDouble(taxAMount));// tax amount
+//                    int taxMasterID = payrollTaxDeductionComponentService.getTaxMasterID(Integer.parseInt(taxcomponentId));// fetch tax master id from compenont id
+//                    PayrollTaxDeductionMaster payrollTaxDeductionMaster = new PayrollTaxDeductionMaster();
+//                    payrollTaxDeductionMaster.setId(taxMasterID);
+//                    taxDeductionDecarationSubmit.setPayrollTaxDeductionMaster(payrollTaxDeductionMaster);//set taxdeduction master
+//                    taxDeductionDecarationSubmit.setTaxSavingSubmit(taxSavingSubmit1);
+//                    taxDeductionDecarationSubmit.setUpdatedBy(employeeMaster1.getId());
+//                    taxDeductionDecarationSubmit.setUpdatedDate(sdf.format(cDate));
+//                    taxDeductionDecarationSubmit.setPayrollTaxDeductionComponent(payrollTaxDeductionComponent);
+//
+//                    if (!attachment.endsWith("-") && !attachment.equals("")) {
+//                        taxDeductionDecarationSubmit.setAttachment(attachment);
+//                        taxDeductionDecarationSubmit.setStatus(1);
+//
+////              
+//                    } else {
+//                        taxDeductionDecarationSubmit.setAttachment("");
+//                        taxDeductionDecarationSubmit.setStatus(0);
+//                    }
+//                    taxDeductionDecarationSubmitService.create(taxDeductionDecarationSubmit);
+//
+//                }
+//
+//            }
+//        } else {
+        employeeMaster.setId(Integer.parseInt(employeeId));
+        payrollFinancialYear.setId(Integer.parseInt(yearId));
+        taxSavingSubmit.setEmployeeMaster(employeeMaster);
+        taxSavingSubmit.setPayrollFinancialYear(payrollFinancialYear);
+        taxSavingSubmit.setCreatedBy(employeeMaster1.getId());
+        taxSavingSubmit.setCreatedDate(sdf.format(cDate));
+        taxSavingSubmit.setStatus(1);// 1 when user submited form
+        taxSavingSubmitService.create(taxSavingSubmit);
+
+        String[] savingList = request.getParameterValues("list");
+        String[] taxCompenet = request.getParameterValues("finalData1");
+        String as = savingList[0].toString();
+
+        TaxDeductionDecarationSubmit taxDeductionDecarationSubmit = new TaxDeductionDecarationSubmit();
+        String[] var = savingList[0].split("-,");
+        for (int i = 0; i < var.length; i = i + 3) {
+            String taxcomponentId = var[i];
+            String taxAMount = var[i + 1];
+            String attachment = var[i + 2];
+            PayrollTaxDeductionComponent payrollTaxDeductionComponent = new PayrollTaxDeductionComponent();
+            payrollTaxDeductionComponent.setComponentId(Integer.parseInt(taxcomponentId));//tax compenont id
+            taxDeductionDecarationSubmit.setAmountTaxDecaration(Double.parseDouble(taxAMount));// tax amount
+            int taxMasterID = payrollTaxDeductionComponentService.getTaxMasterID(Integer.parseInt(taxcomponentId));// fetch tax master id from compenont id
+            PayrollTaxDeductionMaster payrollTaxDeductionMaster = new PayrollTaxDeductionMaster();
+            payrollTaxDeductionMaster.setId(taxMasterID);
+            taxDeductionDecarationSubmit.setPayrollTaxDeductionMaster(payrollTaxDeductionMaster);//set taxdeduction master
+            taxDeductionDecarationSubmit.setTaxSavingSubmit(taxSavingSubmit);
+            taxDeductionDecarationSubmit.setCreatedBy(employeeMaster1.getId());
+            taxDeductionDecarationSubmit.setCreatedDate(sdf.format(cDate));
+            taxDeductionDecarationSubmit.setPayrollTaxDeductionComponent(payrollTaxDeductionComponent);
+
+            if (!attachment.endsWith("-") && !attachment.equals("")) {
+                taxDeductionDecarationSubmit.setAttachment(attachment);
+                taxDeductionDecarationSubmit.setStatus(1);
+
+//              
+            } else {
+                taxDeductionDecarationSubmit.setAttachment("");
+                taxDeductionDecarationSubmit.setStatus(0);
+            }
+            taxDeductionDecarationSubmitService.create(taxDeductionDecarationSubmit);
 
         }
 
-        mv.getModelMap().put("employeeSalaryProcess", employeeSalaryProcess);
-        request.setAttribute("employeeMaster", employeeMaster);
-//        request.setAttribute("totalList", totalList);
-        request.setAttribute("finalData", finalData);
-        request.setAttribute("payrollFormSixteenMaster", payrollFormSixteenMaster);
-        mv.setViewName("Payroll/PayrollEmployeeSavingView");
+        mv = redirectToFormEmployeeSaving(request, response);
         return mv;
     }
+
+    public String displayPictureTaxDeduction(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String imgFile = "";
+        String userName = request.getParameter("userName");
+        String finicailyear = request.getParameter("finicailyear");
+        String compenomtid = request.getParameter("compenomtid");
+//       
+
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartFile multipartFile = multipartRequest.getFile("photographUpdate");
+//        if (candidateJobApplyService.isExist(multipartFile.getOriginalFilename())) {
+        String fileLocationURL = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "taxationDeduction" + File.separator + userName + File.separator + finicailyear + File.separator + compenomtid + File.separator;
+        String fileLocationURL1 = "StorageYard"
+                + File.separator + "taxationDeduction" + File.separator + userName + File.separator + finicailyear + File.separator + compenomtid + File.separator;
+        File Folder1 = new File(fileLocationURL);
+        if (!Folder1.exists()) {
+            Folder1.mkdirs();
+        }
+        if (multipartFile != null && multipartFile.getSize() > 0) {
+            File attchmentfile = new File(fileLocationURL);
+            if (attchmentfile.exists() && attchmentfile.listFiles().length > 0) {
+                File[] corporateVideoArray = attchmentfile.listFiles();
+                corporateVideoArray[0].delete();
+            }
+            try {
+                File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                multipartFile.transferTo(file2);
+//                    candidateApplyJob.setPhotograph(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+            } catch (Exception e) {
+
+            }
+        }
+//        }
+
+        return imgFile;
+    }
+
+    public void downloadEmployeeattachment(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        String fileName = request.getParameter("fileName");
+        String userId = request.getParameter("userId");
+        String finicailyear = request.getParameter("finicailyear");
+        String componentid = request.getParameter("compoentid");
+
+        String attachmentFileLocationURL = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard" + File.separator + "taxationDeduction"
+                + File.separator + userId + File.separator + finicailyear + File.separator + componentid + File.separator + fileName;
+
+        request.setAttribute("filePath", attachmentFileLocationURL);
+
+        DownloadFile downloadFile = new DownloadFile();
+        downloadFile.doDownload(request, response);
+    }
+
+    public ModelAndView clickSubmitSavingAmountEdit(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        String imgFile = "";
+        ModelAndView mv = new ModelAndView();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+        EmployeeMaster employeeMaster1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        TaxSavingSubmit taxSavingSubmit = new TaxSavingSubmit();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        PayrollFinancialYear payrollFinancialYear = new PayrollFinancialYear();
+        String employeeId = request.getParameter("emplId");
+        String yearId = request.getParameter("yearID");
+        boolean isExist = taxSavingSubmitService.isExist(Integer.parseInt(employeeId), Integer.parseInt(yearId));
+        if (isExist) {
+
+            List<?> taxSavingAmount = taxSavingSubmitService.readTaxSavingSubmit(Integer.parseInt(employeeId), Integer.parseInt(yearId));
+            if (!taxSavingAmount.isEmpty()) {
+                TaxSavingSubmit taxSavingSubmit1 = new TaxSavingSubmit();
+                for (Object o13 : taxSavingAmount) {
+                    taxSavingSubmit1 = (TaxSavingSubmit) o13;
+                    Integer taxSavingsubmitId = taxSavingSubmit1.getId();
+                    taxSavingSubmit1 = taxSavingSubmitService.readById(taxSavingSubmit1.getId());
+                    taxSavingSubmit1.setUpdatedBy(employeeMaster1.getId());
+                    taxSavingSubmit1.setUpdatedDate(sdf.format(cDate));
+                    taxSavingSubmitService.update(taxSavingSubmit1);
+
+                }
+
+//                TaxDeductionDecarationSubmit taxDeductionDecarationSubmit1 = new TaxDeductionDecarationSubmit();
+//                List<?> list1 = taxDeductionDecarationSubmitService.readByTaxDeductionDecarationDelete(taxSavingSubmit1.getId());
+//                for (Object pdf : list1) {
+//                    taxDeductionDecarationSubmit1 = (TaxDeductionDecarationSubmit) pdf;
+//                    taxDeductionDecarationSubmitService.delete(taxDeductionDecarationSubmit1.getId());
+//                }
+                String[] savingList = request.getParameterValues("list");
+                String[] taxCompenet = request.getParameterValues("finalData1");
+                String as = savingList[0].toString();
+
+                TaxDeductionDecarationSubmit taxDeductionDecarationSubmit = new TaxDeductionDecarationSubmit();
+                String[] var = savingList[0].split("-,");
+                for (int i = 0; i < var.length; i = i + 3) {
+                    String taxcomponentId = var[i];
+                    String taxAMount = var[i + 1];
+                    String attachment = var[i + 2];
+
+                    int taxMasterID = payrollTaxDeductionComponentService.getTaxMasterID(Integer.parseInt(taxcomponentId));// fetch tax master id from compenont id
+
+                    List<?> fetchtaxDeduction = taxDeductionDecarationSubmitService.readByTaxDeductionDecarationFetchRead(taxSavingSubmit1.getId(), taxMasterID, Integer.parseInt(taxcomponentId));
+                    if (!fetchtaxDeduction.isEmpty()) {
+                        for (Object o14 : fetchtaxDeduction) {
+                            taxDeductionDecarationSubmit = (TaxDeductionDecarationSubmit) o14;
+                            Integer taxdeclartionDeductionId = taxSavingSubmit1.getId();
+
+                        }
+                    }
+                    taxDeductionDecarationSubmit = taxDeductionDecarationSubmitService.readById(taxDeductionDecarationSubmit.getId());
+                    PayrollTaxDeductionComponent payrollTaxDeductionComponent = new PayrollTaxDeductionComponent();
+                    payrollTaxDeductionComponent.setComponentId(Integer.parseInt(taxcomponentId));//tax compenont id
+                    taxDeductionDecarationSubmit.setAmountTaxDecaration(Double.parseDouble(taxAMount));// tax amount
+                    PayrollTaxDeductionMaster payrollTaxDeductionMaster = new PayrollTaxDeductionMaster();
+                    payrollTaxDeductionMaster.setId(taxMasterID);
+                    taxDeductionDecarationSubmit.setPayrollTaxDeductionMaster(payrollTaxDeductionMaster);//set taxdeduction master
+                    taxDeductionDecarationSubmit.setTaxSavingSubmit(taxSavingSubmit1);
+                    taxDeductionDecarationSubmit.setUpdatedBy(employeeMaster1.getId());
+                    taxDeductionDecarationSubmit.setUpdatedDate(sdf.format(cDate));
+                    taxDeductionDecarationSubmit.setPayrollTaxDeductionComponent(payrollTaxDeductionComponent);
+
+                    if (!attachment.endsWith("-") && !attachment.equals("")) {
+                        taxDeductionDecarationSubmit.setAttachment(attachment);
+                        taxDeductionDecarationSubmit.setStatus(1);
+
+//              
+                    } else {
+
+                        if (taxDeductionDecarationSubmit.getStatus().equals(1)) {
+                            taxDeductionDecarationSubmit.setStatus(1);
+                        } else {
+                            taxDeductionDecarationSubmit.setAttachment("");
+                            taxDeductionDecarationSubmit.setStatus(0);
+                        }
+                    }
+                    taxDeductionDecarationSubmitService.update(taxDeductionDecarationSubmit);
+
+                }
+
+            }
+        }
+
+        mv = redirectToFormEmployeeSaving(request, response);
+        return mv;
+    }
+
 }

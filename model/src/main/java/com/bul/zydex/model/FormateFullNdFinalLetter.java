@@ -14,7 +14,6 @@ public class FormateFullNdFinalLetter implements java.io.Serializable {
     private Integer id;
     private String companyName;
     private String description;
-    private Integer approvalPerson;
     private String createDate;
     private Integer createdBy;
     private Integer updatedBy;
@@ -25,11 +24,10 @@ public class FormateFullNdFinalLetter implements java.io.Serializable {
         
     }
 
-    public FormateFullNdFinalLetter(Integer id, String companyName, String description, Integer approvalPerson, String createDate, Integer createdBy, Integer updatedBy, String updatedDate, Integer Status) {
+    public FormateFullNdFinalLetter(Integer id, String companyName, String description, String createDate, Integer createdBy, Integer updatedBy, String updatedDate, Integer Status) {
         this.id = id;
         this.companyName = companyName;
         this.description = description;
-        this.approvalPerson = approvalPerson;
         this.createDate = createDate;
         this.createdBy = createdBy;
         this.updatedBy = updatedBy;
@@ -59,14 +57,6 @@ public class FormateFullNdFinalLetter implements java.io.Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Integer getApprovalPerson() {
-        return approvalPerson;
-    }
-
-    public void setApprovalPerson(Integer approvalPerson) {
-        this.approvalPerson = approvalPerson;
     }
 
     public String getCreateDate() {

@@ -66,4 +66,24 @@ public class PayrollTaxDeductionMasterDaoImpl<T> extends GenericsDAOImpl<T> impl
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+
+    @Override
+    public List<?> readTaxDeductionForFormSixteenFetch(int taxMasterid) {
+        String query = "SELECT a.id,a.section,a.description "
+                + " FROM PayrollTaxDeductionMaster a"
+                + " where a.id = " + taxMasterid;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+
+    }
+
+    @Override
+    public List readSectionAmount() {
+        String query = "SELECT a.taxSavingLimit,a.id "
+                + " FROM PayrollTaxDeductionMaster a";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
 }

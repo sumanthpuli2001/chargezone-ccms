@@ -41,7 +41,8 @@ public class CandidateF2FApprovalDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " Left join a.candidateF2FRequest b "
                 + " LEFT JOIN b.candidateApplyJob c "
                 + " LEFT JOIN b.vacancyMaster d"
-                + " WHERE a.employeeMaster.id =" + empid;
+                + " WHERE a.employeeMaster.id =" + empid
+                + " order by b.id desc";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

@@ -85,5 +85,7 @@ public interface EmployeeSalaryProcessService<T> extends GenericsService<T> {
 
     public List<?> readEmployeeForPfGov(EmployeeMaster object);
 
+    public List<?> readEmployeeGrossTotalTaxable(int EmpId, String startDate, String endate);
+
     public List<?> readEmpId(int EmpId);
 }

@@ -30,6 +30,21 @@ public class PayrollTaxDeclarationPeriodMasterServiceImpl<T> extends GenericsSer
     public List<?> readDeclarationPeriod() {
         return payrollTaxDeclarationPeriodMasterDao.readDeclarationPeriod();
     }
+
+    @Override
+    public List<?> readPayrollTaxDeclarationPeriodMaster(int finicialYearID, String month, String year) {
+     return payrollTaxDeclarationPeriodMasterDao.readPayrollTaxDeclarationPeriodMaster(finicialYearID, month, year);
+    }
+
+    @Override
+    public List<?> readPayrollTaxDeclarationPeriodMasterBefore(int finicialYearID, String month, String year) {
+       return payrollTaxDeclarationPeriodMasterDao.readPayrollTaxDeclarationPeriodMasterBefore(finicialYearID, month, year);
+    }
+
+    @Override
+    public List<?> readPayrollTaxDeclarationPeriodMasterAfterProofDate(int finicialYearID, String month, String year) {
+       return payrollTaxDeclarationPeriodMasterDao.readPayrollTaxDeclarationPeriodMasterAfterProofDate(finicialYearID, month, year);
+    }
     
     
     

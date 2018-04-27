@@ -126,18 +126,32 @@ public class EmployeeAdditionalSalaryDAOImpl<T> extends GenericsDAOImpl<T> imple
 
     @Override
     public List<?> readEmployeeForSalaryAdditionalinfoSearch(EmployeeSalaryProcess employeeSalaryProcess) {
-      String query = "";
+        String query = "";
         String condition = "";
 
         query += " Select a.payrollSalaryType,a.additionalAmount"
                 + " From EmployeeAdditionalSalary a"
                 + " left join a.employeeSalaryProcess b"
                 + " where b.employeeMaster.id= " + employeeSalaryProcess.getEmployeeMaster().getId()
-                +" and a.payrollSalaryType not like '%OT Amount%'"
+                + " and a.payrollSalaryType not like '%OT Amount%'"
                 + " and b.month='" + employeeSalaryProcess.getMonth() + "'"
                 + " and b.year='" + employeeSalaryProcess.getYear() + "'";
 
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> readEmployeeAllowanceGrossTotalTaxable(int EmpSalaryProcessId) {
+        String query = "";
+        String condition = "";
+
+        query += " Select a.payrollSalaryType,a.additionalAmount"
+                + " From EmployeeAdditionalSalary a"
+                + " where a.employeeSalaryProcess.id= " + EmpSalaryProcessId;
+
+        return getHibernateTemplate().find(query);
+    }
+
+    
 
 }

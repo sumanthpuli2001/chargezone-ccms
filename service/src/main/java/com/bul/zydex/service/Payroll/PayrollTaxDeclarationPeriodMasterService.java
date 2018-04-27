@@ -12,8 +12,14 @@ import java.util.List;
  *
  * @author DELL3
  */
-public interface PayrollTaxDeclarationPeriodMasterService<T> extends GenericsService<T>{
-    
+public interface PayrollTaxDeclarationPeriodMasterService<T> extends GenericsService<T> {
+
     public List<?> readDeclarationPeriod();
-    
+
+    public List<?> readPayrollTaxDeclarationPeriodMaster(int finicialYearID, String month, String year);
+
+    public List<?> readPayrollTaxDeclarationPeriodMasterBefore(int finicialYearID, String month, String year);
+
+    public List<?> readPayrollTaxDeclarationPeriodMasterAfterProofDate(int finicialYearID, String month, String year);
+
 }

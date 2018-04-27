@@ -390,4 +390,14 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> checkSuprior(int empId,int managerEmpId){
         return employeeMasterDAO.checkSuprior(empId, managerEmpId);
     }
+
+    @Override
+    public List<?> readByEmployeeNo1(String employeeNo) {
+         return employeeMasterDAO.readByEmployeeNo1(employeeNo);
+    }
+
+    @Override
+    public List<?> readEmId(String EmployeeId) {
+        return employeeMasterDAO.readEmId(EmployeeId);
+    }
 }

@@ -785,31 +785,14 @@
 
 
                                                         <div class="col-sm-6">
-                                                            <label>Company:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <select id="companyId" name="companyId" class="form-control ">
-                                                            <c:choose>
-                                                                <c:when test="${company.contains('SPC Life Science')}">
-
-                                                                    <option value="SPC Life Science" selected="">SPC Life Science</option>
-                                                                </c:when>
-                                                                <c:otherwise>
-
-                                                                    <option value="SPC Life Science">SPC Life Science.</option>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                            <c:choose>
-                                                                <c:when test="${company.contains('SPC Life Science')}">
-
-                                                                    <option value="SPC Life Science" selected="">SPC Life Science</option>
-                                                                </c:when>
-                                                                <c:otherwise>
-
-                                                                    <option value="SPC Life Science">SPC Life Science</option>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </select>
-
-                                                        <form:errors path="company" cssClass="errorDiv"></form:errors>
+                                                            <label>Company:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:select path="company"  class="form-control ">
+                                                                <form:option label="-- Select --"  value="" ></form:option>
+                                                                <c:forEach var="comp" items="${company}" >
+                                                                    <form:option value="${comp.value}">${comp.value}</form:option>
+                                                                </c:forEach>
+                                                            </form:select>
+                                                            <form:errors path="company" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
                                                     <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
@@ -1248,7 +1231,9 @@
                                                                                     <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
                                                                                     <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
                                                                                     <select id="month${countVal.count}" name="month${countVal.count}"  class="form-control ">
+
                                                                                         <c:choose>
+
                                                                                             <c:when test="${comp[4] eq 01}">
                                                                                                 <option value="01" selected="selected">January</option>
                                                                                                 <option value="01">January</option>
@@ -1429,8 +1414,23 @@
                                                                                                 <option value="11">November </option>
                                                                                                 <option value="12">December</option>
                                                                                             </c:when>
+                                                                                            <c:when test="${empty comp[4] }">
+                                                                                                 <option value="">--Select--</option>
+                                                                                                <option value="01">January</option>
+                                                                                                <option value="02">February</option>
+                                                                                                <option value="03">March </option>
+                                                                                                <option value="04">April</option>
+                                                                                                <option value="05">May</option>
+                                                                                                <option value="06">June</option>
+                                                                                                <option value="07">July</option>
+                                                                                                <option value="08">August</option>
+                                                                                                <option value="09">September</option>
+                                                                                                <option value="10">October </option>
+                                                                                                <option value="11">November </option>
+                                                                                                <option value="12">December</option>
+                                                                                            </c:when>
                                                                                             <c:otherwise>
-                                                                                                <!--<option value="">--Select--</option>-->
+                                                                                                <option value="">--Select--</option>
                                                                                                 <option value="01">January</option>
                                                                                                 <option value="02">February</option>
                                                                                                 <option value="03">March </option>
@@ -1485,7 +1485,7 @@
                                                                 <c:otherwise>
 
                                                                     <%--<c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">--%>
-    <!--                                                                        <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>-->
+                                                                            <!--<input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>-->
                                                                     <tr>
                                                                         <td style="text-align: center">1</td>
                                                                         <td><div>
@@ -1593,6 +1593,19 @@
                                                         </form:select>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>PF No.:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="pfNo" id="pfNo" class="form-control"></form:input>
+                                                            <%--<form:errors path="pfNo" cssClass="errorDiv"></form:errors>--%>
+                                                    </div> 
+
+                                                    <div class="col-sm-6">
+                                                        <label>UAN No.:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="uanNo" id="uanNo"  class="form-control"></form:input>
+                                                            <%--<form:errors path="uanNo" cssClass="errorDiv"></form:errors>--%>
+                                                    </div>  
+                                                </div>  
 
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->

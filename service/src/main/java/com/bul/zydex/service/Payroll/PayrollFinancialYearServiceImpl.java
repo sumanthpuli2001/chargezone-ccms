@@ -46,4 +46,9 @@ public class PayrollFinancialYearServiceImpl<T> extends GenericsServiceImpl<T> i
         return false;
     }
 
+    @Override
+    public List<?> readDayFinancialYear(int locationId, String month, String year) {
+       return payrollFinancialYearDAO.readDayFinancialYear(locationId, month, year);
+    }
+
 }

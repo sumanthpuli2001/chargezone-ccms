@@ -7,6 +7,7 @@ package com.bul.zydex.service.policy;
 
 import com.bul.zydex.dao.policy.PolicyMasterDAO;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.List;
 
 /**
  *
@@ -28,6 +29,11 @@ public class PolicyMasterServiceImpl<T> extends GenericsServiceImpl<T> implement
     @Override
     public boolean isExist(T object) {
         return policyMasterDAO.isExist(object);
+    }
+
+    @Override
+    public List<?> readBySalaryTypeID(String salaryTpe) {
+       return policyMasterDAO.readBySalaryTypeID(salaryTpe);
     }
 
 }

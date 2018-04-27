@@ -12,7 +12,7 @@ package com.bul.zydex.model;
 public class FullAndFinalSettlement {
 
     private Integer id;
-    private Integer resignationEmpId;
+    private EmployeeMaster employeeMaster;
     private Integer noticePeriod;
     private Integer givenNotice;
     private String createdDate;
@@ -24,10 +24,10 @@ public class FullAndFinalSettlement {
     public FullAndFinalSettlement(){
         
     }
-    
-    public FullAndFinalSettlement(Integer id, Integer resignationEmpId, Integer noticePeriod, Integer givenNotice, String createdDate, Integer createdBy, String updateDate, Integer updatedBy, Integer status) {
+
+    public FullAndFinalSettlement(Integer id, EmployeeMaster employeeMaster, Integer noticePeriod, Integer givenNotice, String createdDate, Integer createdBy, String updateDate, Integer updatedBy, Integer status) {
         this.id = id;
-        this.resignationEmpId = resignationEmpId;
+        this.employeeMaster = employeeMaster;
         this.noticePeriod = noticePeriod;
         this.givenNotice = givenNotice;
         this.createdDate = createdDate;
@@ -45,12 +45,12 @@ public class FullAndFinalSettlement {
         this.id = id;
     }
 
-    public Integer getResignationEmpId() {
-        return resignationEmpId;
+    public EmployeeMaster getEmployeeMaster() {
+        return employeeMaster;
     }
 
-    public void setResignationEmpId(Integer resignationEmpId) {
-        this.resignationEmpId = resignationEmpId;
+    public void setEmployeeMaster(EmployeeMaster employeeMaster) {
+        this.employeeMaster = employeeMaster;
     }
 
     public Integer getNoticePeriod() {
@@ -109,6 +109,7 @@ public class FullAndFinalSettlement {
         this.status = status;
     }
     
-    
 
+
+   
 }

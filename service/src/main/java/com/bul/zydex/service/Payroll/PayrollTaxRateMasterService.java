@@ -14,11 +14,12 @@ import java.util.List;
  *
  * @author DELL3
  */
-public interface PayrollTaxRateMasterService<T> extends GenericsService<T>
-{
+public interface PayrollTaxRateMasterService<T> extends GenericsService<T> {
 
     public List<?> getAgeValues(Integer ageF, Integer ageT, Integer incomeF, Integer incomeT);
 
-    public PayrollTaxRateMaster readTaxRate();
-    
+  
+
+    public List<?> getAgeValuesFOrSalaryGenerate(Integer ageF);
+
 }

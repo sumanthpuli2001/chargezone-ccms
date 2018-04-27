@@ -37,4 +37,15 @@ public class TrainingSubTypeDAOImpl<T> extends GenericsDAOImpl<T> implements Tra
         return list;
     }
 
+    @Override
+    public List<?> deletetrainigId(String trainingTypeId) {
+        String query = "";
+        query += "  "
+                + " select a"
+                + " FROM TrainingSubType a "
+                + " WHERE a.trainingType.id = " + trainingTypeId;
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

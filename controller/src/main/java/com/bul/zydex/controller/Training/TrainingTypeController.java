@@ -188,7 +188,12 @@ public class TrainingTypeController extends TrainingTypeAbstract {
         String empId[] = request.getParameterValues("checkId");
         for (String z : empId) {
             try {
-
+                TrainingSubType subType = new TrainingSubType();
+                List<?> list = trainingSubTypeService.deletetrainigId(z);
+                for (Object object : list) {
+                    subType = (TrainingSubType) object;
+                    trainingSubTypeService.delete(subType.getId());
+                }
                 trainingTypeService.delete(Integer.parseInt(z));
             } catch (Exception e) {
 

@@ -18,4 +18,6 @@ public interface TrainingSubTypeService<T> extends GenericsService<T> {
     public List<?> readtrainingSubTypeByTrainingTypeId(int trainingTypeId);
 
     public boolean isExist(TrainingSubType trainingType);
+    
+    public List<?> deletetrainigId(String trainingTypeId);
 }

@@ -53,4 +53,9 @@ private TrainingSubTypeDAO<T> trainingSubTypeDAO;
 
         return false;
     }
+
+    @Override
+    public List<?> deletetrainigId(String trainingTypeId) {
+        return trainingSubTypeDAO.deletetrainigId(trainingTypeId);
+    }
 }

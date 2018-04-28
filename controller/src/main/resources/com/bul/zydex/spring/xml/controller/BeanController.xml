@@ -222,6 +222,7 @@
         <property name="shiftRotationMasterService" ref="shiftRotationMasterService1" />
         <property name="employeeShiftDataService" ref="employeeShiftDataService1" />
         <property name="userRightMasterService" ref="userRightMasterService1" />
+        <property name="leaveEmployeeDetailsApprovalHistoryService" ref="leaveEmployeeDetailsApprovalHistoryService1" />
     </bean>
     <bean id="employeeLeaveBalanceController1" class="com.bul.zydex.controller.leave.EmployeeLeaveBalanceController" parent="controllerConfig" >
         <property name="employeeLeaveBalanceService" ref="employeeLeaveBalanceService1" />
@@ -1108,6 +1109,7 @@
         <property name="galleryService" ref="galleryService1"></property>
         <property name="corporateVideoService" ref="corporateVideoService1"></property>
         <property name="rAndRService" ref="rAndRService1"></property>
+        <property name="kaizenMasterService" ref="kaizenMasterService1"></property>
     </bean>
     <bean id="onlineAssessmentController1" class="com.bul.zydex.controller.Recruitment.OnlineAssessmentController" parent="controllerConfig" >
         <property name="onlineAssessmentService" ref="onlineAssessmentService1" />
@@ -1239,6 +1241,14 @@
     <bean id="payrollTaxRateMasterController1" class="com.bul.zydex.controller.Payroll.PayrollTaxRateMasterController" parent="controllerConfig">
         <property name="payrollTaxRateMasterService" ref="payrollTaxRateMasterService1" />
         <property name="payrollTaxRateMasterValidator" ref="payrollTaxRateMasterValidator1" />
+    </bean>
+    <bean id="kaizenMasterController1" class="com.bul.zydex.controller.Kaizen.KaizenMasterController"  parent="controllerConfig">
+        <property name="kaizenMasterService" ref="kaizenMasterService1"></property>
+        <property name="kaizenApprovalService" ref="kaizenApprovalService1"></property>
+        <property name="approvalUserService" ref="approvalUserService1"></property>
+    </bean>
+    <bean id="leaveEmployeeDetailsApprovalHistoryController1" class="com.bul.zydex.controller.leave.LeaveEmployeeDetailsApprovalHistoryController" parent="controllerConfig">
+        <property name="leaveEmployeeDetailsApprovalHistoryService" ref="leaveEmployeeDetailsApprovalHistoryService1" />
     </bean>
 </beans>
  

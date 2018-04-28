@@ -13,7 +13,10 @@ import java.util.List;
  * @author Dell-1
  */
 public interface TrainingSubTypeDAO<T> extends GenericsDAO<T> {
+
     public List<?> readtrainingSubTypeDetail();
+
     public List<?> readtrainingSubTypeByTrainingTypeId(int trainingTypeId);
-    
+
+    public List<?> deletetrainigId(String trainingTypeId);
 }

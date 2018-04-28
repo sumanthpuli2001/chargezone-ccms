@@ -784,31 +784,14 @@
 
 
                                                         <div class="col-sm-6">
-                                                            <label>Company:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <select id="companyId" name="companyId" class="form-control ">
-                                                            <c:choose>
-                                                                <c:when test="${company.contains('SPC Life Science')}">
-
-                                                                    <option value="SPC Life Science" selected="">SPC Life Science</option>
-                                                                </c:when>
-                                                                <c:otherwise>
-
-                                                                    <option value="SPC Life Science">SPC Life Science.</option>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                            <c:choose>
-                                                                <c:when test="${company.contains('SPC Life Science')}">
-
-                                                                    <option value="SPC Life Science" selected="">SPC Life Science</option>
-                                                                </c:when>
-                                                                <c:otherwise>
-
-                                                                    <option value="SPC Life Science">SPC Life Science</option>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </select>
-
-                                                        <form:errors path="company" cssClass="errorDiv"></form:errors>
+                                                            <label>Company:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:select path="company"  class="form-control ">
+                                                                <form:option label="-- Select --"  value="" ></form:option>
+                                                                <c:forEach var="comp" items="${company}" >
+                                                                    <form:option value="${comp.value}">${comp.value}</form:option>
+                                                                </c:forEach>
+                                                            </form:select>
+                                                            <form:errors path="company" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
                                                     <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">

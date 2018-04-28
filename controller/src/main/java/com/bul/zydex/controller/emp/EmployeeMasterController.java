@@ -735,6 +735,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         EmployeeSubTypeList(request);
         policyList(request);
         ctcList(request);
+        companyList(request);
 
 //        shiftList(request);
         hoursBasisList(request);
@@ -812,7 +813,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         request.setAttribute("checkPf", checkPf);
         request.setAttribute("checkPt", checkPt);
         request.setAttribute("lastYearPerformanceRatingsOfEmployee", lastYearPerformanceRatingsOfEmployee);
-        request.setAttribute("company", employeeMaster.getCompany());
+//        request.setAttribute("company", employeeMaster.getCompany());
         request.setAttribute("employeeType", employeeMaster.getEmployeeType());
         request.setAttribute("shiftType", employeeMaster.getShiftType());
         request.setAttribute("certificatesList", certificatesList);

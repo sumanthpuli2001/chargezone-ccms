@@ -137,11 +137,10 @@
                 function init() {
                     document.form1.month.options[new Date().getMonth()].selected = true;
                 }
-                var start = 1990;
+                var start = new Date().getFullYear();
                 var end = 2050;
                 var options11 = "";
-
-                for (var year1 = end; year1 >= start; year1--) {
+                for (var year1 = start; year1 <= end; year1++) {
                     options11 += "<option>" + year1 + "</option>";
                 }
                 //                alert(tempCount4);
@@ -1252,8 +1251,8 @@
                                                                                         <c:choose>
 
                                                                                             <c:when test="${comp[4] eq 01}">
+                                                                                                <!--<option value="01" selected="selected">January</option>-->
                                                                                                 <option value="01" selected="selected">January</option>
-                                                                                                <option value="01">January</option>
                                                                                                 <option value="02">February</option>
                                                                                                 <option value="03">March </option>
                                                                                                 <option value="04">April</option>
@@ -1267,9 +1266,9 @@
                                                                                                 <option value="12">December</option>
                                                                                             </c:when>
                                                                                             <c:when test="${comp[4] eq 02}">
-                                                                                                <option value="02" selected="selected">February</option>
+                                                                                                <!--<option value="02" selected="selected">February</option>-->
                                                                                                 <option value="01">January</option>
-                                                                                                <option value="02">February</option>
+                                                                                                <option value="02" selected="selected">February</option>
                                                                                                 <option value="03">March </option>
                                                                                                 <option value="04">April</option>
                                                                                                 <option value="05">May</option>
@@ -1282,10 +1281,10 @@
                                                                                                 <option value="12">December</option>
                                                                                             </c:when>
                                                                                             <c:when test="${comp[4] eq 03}">
-                                                                                                <option value="03" selected="selected">March</option>
+                                                                                                <!--<option value="03" selected="selected">March</option>-->
                                                                                                 <option value="01">January</option>
                                                                                                 <option value="02">February</option>
-                                                                                                <option value="03">March </option>
+                                                                                                <option value="03" selected="selected">March </option>
                                                                                                 <option value="04">April</option>
                                                                                                 <option value="05">May</option>
                                                                                                 <option value="06">June</option>
@@ -1297,11 +1296,11 @@
                                                                                                 <option value="12">December</option>
                                                                                             </c:when>
                                                                                             <c:when test="${comp[4] eq 04}">
-                                                                                                <option value="04" selected="selected">April</option>
+                                                                                                <!--<option value="04" selected="selected">April</option>-->
                                                                                                 <option value="01">January</option>
                                                                                                 <option value="02">February</option>
                                                                                                 <option value="03">March </option>
-                                                                                                <option value="04">April</option>
+                                                                                                <option value="04" selected="selected">April</option>
                                                                                                 <option value="05">May</option>
                                                                                                 <option value="06">June</option>
                                                                                                 <option value="07">July</option>
@@ -1312,12 +1311,12 @@
                                                                                                 <option value="12">December</option>
                                                                                             </c:when>
                                                                                             <c:when test="${comp[4] eq 05}">
-                                                                                                <option value="05" selected="selected">May</option>
+                                                                                                <!--<option value="05" selected="selected">May</option>-->
                                                                                                 <option value="01">January</option>
                                                                                                 <option value="02">February</option>
                                                                                                 <option value="03">March </option>
                                                                                                 <option value="04">April</option>
-                                                                                                <option value="05">May</option>
+                                                                                                <option value="05" selected="selected">May</option>
                                                                                                 <option value="06">June</option>
                                                                                                 <option value="07">July</option>
                                                                                                 <option value="08">August</option>
@@ -1327,13 +1326,13 @@
                                                                                                 <option value="12">December</option>
                                                                                             </c:when>
                                                                                             <c:when test="${comp[4] eq 06}">
-                                                                                                <option value="06" selected="selected">June</option>
+                                                                                                <!--<option value="06" selected="selected">June</option>-->
                                                                                                 <option value="01">January</option>
                                                                                                 <option value="02">February</option>
                                                                                                 <option value="03">March </option>
                                                                                                 <option value="04">April</option>
                                                                                                 <option value="05">May</option>
-                                                                                                <option value="06">June</option>
+                                                                                                <option value="06" selected="selected">June</option>
                                                                                                 <option value="07">July</option>
                                                                                                 <option value="08">August</option>
                                                                                                 <option value="09">September</option>
@@ -1342,14 +1341,14 @@
                                                                                                 <option value="12">December</option>
                                                                                             </c:when>
                                                                                             <c:when test="${comp[4] eq 07}">
-                                                                                                <option value="07" selected="selected">July</option>
+                                                                                                <!--<option value="07" selected="selected">July</option>-->
                                                                                                 <option value="01">January</option>
                                                                                                 <option value="02">February</option>
                                                                                                 <option value="03">March </option>
                                                                                                 <option value="04">April</option>
                                                                                                 <option value="05">May</option>
                                                                                                 <option value="06">June</option>
-                                                                                                <option value="07">July</option>
+                                                                                                <option value="07" selected="selected">July</option>
                                                                                                 <option value="08">August</option>
                                                                                                 <option value="09">September</option>
                                                                                                 <option value="10">October </option>
@@ -1357,7 +1356,7 @@
                                                                                                 <option value="12">December</option>
                                                                                             </c:when>
                                                                                             <c:when test="${comp[4] eq 08}">
-                                                                                                <option value="08" selected="selected">August</option>
+                                                                                                <!--<option value="08" selected="selected">August</option>-->
                                                                                                 <option value="01">January</option>
                                                                                                 <option value="02">February</option>
                                                                                                 <option value="03">March </option>
@@ -1365,14 +1364,14 @@
                                                                                                 <option value="05">May</option>
                                                                                                 <option value="06">June</option>
                                                                                                 <option value="07">July</option>
-                                                                                                <option value="08">August</option>
+                                                                                                <option value="08" selected="selected">August</option>
                                                                                                 <option value="09">September</option>
                                                                                                 <option value="10">October </option>
                                                                                                 <option value="11">November </option>
                                                                                                 <option value="12">December</option>
                                                                                             </c:when>
                                                                                             <c:when test="${comp[4] eq 09}">
-                                                                                                <option value="09" selected="selected">September</option>
+                                                                                                <!--<option value="09" selected="selected">September</option>-->
                                                                                                 <option value="01">January</option>
                                                                                                 <option value="02">February</option>
                                                                                                 <option value="03">March </option>
@@ -1381,13 +1380,13 @@
                                                                                                 <option value="06">June</option>
                                                                                                 <option value="07">July</option>
                                                                                                 <option value="08">August</option>
-                                                                                                <option value="09">September</option>
+                                                                                                <option value="09" selected="selected">September</option>
                                                                                                 <option value="10">October </option>
                                                                                                 <option value="11">November </option>
                                                                                                 <option value="12">December</option>
                                                                                             </c:when>
                                                                                             <c:when test="${comp[4] eq 10}">
-                                                                                                <option value="10" selected="selected">October</option>
+                                                                                                <!--<option value="10" selected="selected">October</option>-->
                                                                                                 <option value="01">January</option>
                                                                                                 <option value="02">February</option>
                                                                                                 <option value="03">March </option>
@@ -1397,12 +1396,12 @@
                                                                                                 <option value="07">July</option>
                                                                                                 <option value="08">August</option>
                                                                                                 <option value="09">September</option>
-                                                                                                <option value="10">October </option>
+                                                                                                <option value="10" selected="selected">October </option>
                                                                                                 <option value="11">November </option>
                                                                                                 <option value="12">December</option>
                                                                                             </c:when>
                                                                                             <c:when test="${comp[4] eq 11}">
-                                                                                                <option value="11" selected="selected">November</option>
+                                                                                                <!--<option value="11" selected="selected">November</option>-->
                                                                                                 <option value="01">January</option>
                                                                                                 <option value="02">February</option>
                                                                                                 <option value="03">March </option>
@@ -1413,11 +1412,11 @@
                                                                                                 <option value="08">August</option>
                                                                                                 <option value="09">September</option>
                                                                                                 <option value="10">October </option>
-                                                                                                <option value="11">November </option>
+                                                                                                <option value="11" selected="selected">November </option>
                                                                                                 <option value="12">December</option>
                                                                                             </c:when>
                                                                                             <c:when test="${comp[4] eq 12}">
-                                                                                                <option value="12" selected="selected">December</option>
+                                                                                                <!--<option value="12" selected="selected">December</option>-->
                                                                                                 <option value="01">January</option>
                                                                                                 <option value="02">February</option>
                                                                                                 <option value="03">March </option>
@@ -1429,10 +1428,10 @@
                                                                                                 <option value="09">September</option>
                                                                                                 <option value="10">October </option>
                                                                                                 <option value="11">November </option>
-                                                                                                <option value="12">December</option>
+                                                                                                <option value="12" selected="selected">December</option>
                                                                                             </c:when>
                                                                                             <c:when test="${empty comp[4] }">
-                                                                                                 <option value="">--Select--</option>
+                                                                                                <option value="">--Select--</option>
                                                                                                 <option value="01">January</option>
                                                                                                 <option value="02">February</option>
                                                                                                 <option value="03">March </option>
@@ -1468,10 +1467,12 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td ><div>
+                                                                                    <!--<td style="text-align: center">-->
+                                                                                    <input  type="hidden" class="form-control" id="yearBase" value="${comp[5]}">
+                                                                                    <select name="year1" id="year1"  class="form-control" >
+                                                                                        <option  name="year1" id="year1"  value="${comp[5]}">${comp[5]}</option> 
 
-                                                                                    <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
-                                                                                    <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
-                                                                                    <input   class="form-control" value="${comp[5]}"></select>
+                                                                                    </select> 
                                                                                 </div>
                                                                             </td>
                                                                             <td style="text-align: center">
@@ -2161,17 +2162,47 @@
     <script type="text/javascript">
         window.onload = init;
         function init() {
-            document.form1.month.options[new Date().getMonth()].selected = true;
+            document.form1.month.options[new Date().getMonth].selected = true;
         }
-        var start = 1990;
+//       
+
+        var start = new Date().getFullYear();
         var end = 2050;
         var options11 = "";
-
-        for (var year1 = end; year1 >= start; year1--) {
+//        var objSelect = document.getElementById("yearBase").value;
+        for (var year1 = start; year1 <= end; year1++) {
             options11 += "<option>" + year1 + "</option>";
         }
+        
+//         if (objSelect == 2050) {
+//            options11.selected = true;
+//        }
         document.getElementById('year1').innerHTML = options11;
+
+////Get select object
+////        alert(objSelect);
+////        alert(year1.options.length);
+//////Set selected
+//        setSelectedValue(objSelect);
+//
+//        function setSelectedValue(selectObj) {
+//            alert(selectObj);
+//            var start = new Date().getFullYear();
+//            var end = 2050;
+//            var options11 = "";
+//            for (var year1 = start; year1 <= end; year1++) {
+//                options11 += "<option>" + year1 + "</option>";
+//                if (selectObj.options[year1].text == year1) {
+//                    selectObj.options[year1].selected = true;
+//                    return;
+//                }
+//            }
+
+//        }
+
+
     </script>
+
 
 </html>
 

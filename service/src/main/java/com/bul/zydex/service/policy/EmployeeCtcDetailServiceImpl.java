@@ -62,4 +62,9 @@ public class EmployeeCtcDetailServiceImpl<T> extends GenericsServiceImpl<T> impl
        return employeeCtcDetailDAO.readctcRegistration(employeeid);
     }
 
+    @Override
+    public List<?> CtcDetailempidMasterSalary(int employeeid, int ctcAllowanceId) {
+     return employeeCtcDetailDAO.CtcDetailempidMasterSalary(employeeid, ctcAllowanceId);
+    }
+
 }

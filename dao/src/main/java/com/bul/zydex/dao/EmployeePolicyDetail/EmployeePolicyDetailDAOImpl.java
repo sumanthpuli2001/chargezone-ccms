@@ -132,4 +132,15 @@ public class EmployeePolicyDetailDAOImpl<T> extends GenericsDAOImpl<T> implement
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readForMasterAdditionalAmount(int empTypeId, int policyMasterId) {
+        String query = " Select c.policyName,a.amount"
+                + " From EmployeePolicyDetail a"
+                + " left join a.policyMaster c"
+                + " where a.employeeMaster.id=" + empTypeId
+                + " and c.id=" + policyMasterId;
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

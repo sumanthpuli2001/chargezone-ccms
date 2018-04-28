@@ -237,8 +237,9 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
                         }
 
                         EmployeeMaster employeeMaster = new EmployeeMaster();
-                        int empNo = Integer.parseInt(employeeNo);
-                        List<?> list = employeeMasterService.readByEmployeeNo(empNo);
+//                        int empNo = Integer.parseInt(employeeNo);
+                        List<?> list = employeeMasterService.getByEmployeeNo(employeeNo);
+//                        List<?> list = employeeMasterService.readByEmployeeNo(empNo);
                         if (!list.isEmpty()) {
                             employeeMaster = (EmployeeMaster) list.get(0);
                             EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();

@@ -164,4 +164,6 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
 
     public List<?> readEmId(String EmployeeId);
 
+    public List<?> getByEmployeeNo(String employeeNo);
+
 }

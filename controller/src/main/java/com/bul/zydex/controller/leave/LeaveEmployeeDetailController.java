@@ -2069,6 +2069,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             }
 
         }
+       List<?> sameDateCheck= leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
         List<?> approvalHistoryList = leaveEmployeeDetailsApprovalHistoryService.getByLeaveEmpDetailId(Integer.parseInt(id));
 
         request.setAttribute("approvalHistoryList", approvalHistoryList);

@@ -67,6 +67,11 @@ public class EmployeePolicyDetailServiceImpl<T> extends GenericsServiceImpl<T> i
          return employeePolicyDetailDAO.readBypolicyAmountWithTaxable(empId);
     }
 
+    @Override
+    public List<?> readForMasterAdditionalAmount(int empTypeId, int policyMasterId) {
+       return employeePolicyDetailDAO.readForMasterAdditionalAmount(empTypeId, policyMasterId);
+    }
+
   
     
 }

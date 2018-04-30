@@ -981,30 +981,17 @@
                                                 <!--</div>-->
                                                 <div class="form-group">
                                                     <div class="col-sm-4">
-                                                        <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <fieldset>
-                                                            <c:if test="${checkPf eq 'false'}">
-                                                                <input type="radio" name="pf" id="pf" value="false" checked="true">NO
-                                                                <input type="radio" name="pf" id="pf" value="true">YES
-                                                            </c:if>
-                                                            <c:if test="${checkPf eq 'true'}">
-                                                                <input type="radio" name="pf" id="pf" value="false" >NO
-                                                                <input type="radio" name="pf" id="pf" value="true" checked="true">YES
-                                                            </c:if>
-
+                                                            <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <fieldset>
+                                                            <form:radiobutton path="pf"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="pf" value="true"/>YES
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <label>Provident Tax:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <fieldset>
-                                                            <c:if test="${checkPt eq 'false'}">
-                                                                <input type="radio" name="pt" id="pt" value="false" checked="true">NO
-                                                                <input type="radio" name="pt" id="pt" value="true">YES
-                                                            </c:if>
-                                                            <c:if test="${checkPt eq 'true'}">
-                                                                <input type="radio" name="pt" id="pt" value="false" >NO
-                                                                <input type="radio" name="pt" id="pt" value="true" checked="true">YES
-                                                            </c:if>
+                                                            <form:radiobutton path="pt"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="pt" value="true"/>YES
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-sm-4">

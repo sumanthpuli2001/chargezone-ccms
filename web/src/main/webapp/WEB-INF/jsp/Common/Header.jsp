@@ -23,14 +23,14 @@
             <!--         wrapper will close in footer and comment is given there by me-->
             <header class="main-header">
                 <!-- Logo -->
-                <a href="userMaster.htm?act=goToDashboard" class="logo">
+                <a href="userMaster.htm?act=goToDashboard" class="logo" style="background-color: #fff;">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <!--<span class="logo-mini"><b>Z</b>ydex</span>-->
                     <!-- logo for regular state and mobile devices -->
                     <span hight="50"class="logo-lg"><img src="StorageYard/Images/logo.png"  /></span>
                 </a>
                 <!-- Header Navbar: style can be found in header.less -->
-                <nav class="navbar navbar-static-top" role="navigation">
+                <nav class="navbar navbar-static-top" role="navigation" style="background-color:#00BFFF;">
                     <!-- Sidebar toggle button-->
                     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                         <span class="sr-only">Toggle navigation</span>

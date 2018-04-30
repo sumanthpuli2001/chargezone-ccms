@@ -5862,20 +5862,22 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 }
 
                 /// Manager side Weight==>Time Line First////
-                Date ManagerEndDate = dateFormat.parse(appraisalFillingData.getManagerEndDate());
-                Date ManagerStartDate = dateFormat.parse(appraisalFillingData.getManagerStartDate());
-                if ((currentDate.after(ManagerStartDate) && currentDate.before(ManagerEndDate)) || currentDate.equals(ManagerStartDate) || currentDate.equals(ManagerEndDate)) {
-                    if (!goalApproval.equals("Approved")) {
-                        goalApproval = "Pendding";
-                    }
-                } else if (currentDate.after(ManagerEndDate)) {
-                    if (!goalApproval.equals("Approved")) {
-                        goalApproval = "Expired";
-                    }
-                } else if (!goalApproval.equals("Approved")) {
-                    goalApproval = "";
-                }
-
+                
+                //.....................comment by you...............from.............//
+//                Date ManagerEndDate = dateFormat.parse(appraisalFillingData.getManagerEndDate());
+//                Date ManagerStartDate = dateFormat.parse(appraisalFillingData.getManagerStartDate());
+//                if ((currentDate.after(ManagerStartDate) && currentDate.before(ManagerEndDate)) || currentDate.equals(ManagerStartDate) || currentDate.equals(ManagerEndDate)) {
+//                    if (!goalApproval.equals("Approved")) {
+//                        goalApproval = "Pendding";
+//                    }
+//                } else if (currentDate.after(ManagerEndDate)) {
+//                    if (!goalApproval.equals("Approved")) {
+//                        goalApproval = "Expired";
+//                    }
+//                } else if (!goalApproval.equals("Approved")) {
+//                    goalApproval = "";
+//                }
+//........................................to.........................................//
                 /////////////////////mid year Employee//////////////////////
 //                Date MidendDate = dateFormat.parse(appraisalFillingData.getMidYearEndDate());
 //                Date MidYearStartDate = dateFormat.parse(appraisalFillingData.getMidYearStartDate());
@@ -5920,19 +5922,22 @@ public class AppraisalPerformanceController extends AppraisalPerformanceAbstract
                 }
 
                 /////////////////////////Manager End year////////////////////////////////////
-                Date managerYearEndEndDate = dateFormat.parse(appraisalFillingData.getManagerYearEndEndDate());
-                Date managerYearEndStartDate = dateFormat.parse(appraisalFillingData.getManagerYearEndStartDate());
-                if ((currentDate.after(managerYearEndStartDate) && currentDate.before(managerYearEndEndDate)) || currentDate.equals(managerYearEndStartDate) || currentDate.equals(managerYearEndEndDate)) {
-                    if (!managerEndSelfApproval.equals("Approved")) {
-                        managerEndSelfApproval = "Pendding";
-                    }
-                } else if (currentDate.after(managerYearEndEndDate)) {
-                    if (!managerEndSelfApproval.equals("Approved")) {
-                        managerEndSelfApproval = "Expired";
-                    }
-                } else if (!managerEndSelfApproval.equals("Approved")) {
-                    managerEndSelfApproval = "";
-                }
+                 //.....................comment by you...............from.............//
+//                Date managerYearEndEndDate = dateFormat.parse(appraisalFillingData.getManagerYearEndEndDate());
+//                Date managerYearEndStartDate = dateFormat.parse(appraisalFillingData.getManagerYearEndStartDate());
+//                if ((currentDate.after(managerYearEndStartDate) && currentDate.before(managerYearEndEndDate)) || currentDate.equals(managerYearEndStartDate) || currentDate.equals(managerYearEndEndDate)) {
+//                    if (!managerEndSelfApproval.equals("Approved")) {
+//                        managerEndSelfApproval = "Pendding";
+//                    }
+//                } else if (currentDate.after(managerYearEndEndDate)) {
+//                    if (!managerEndSelfApproval.equals("Approved")) {
+//                        managerEndSelfApproval = "Expired";
+//                    }
+//                } else if (!managerEndSelfApproval.equals("Approved")) {
+//                    managerEndSelfApproval = "";
+//                }
+                
+                //..............................end..............................//
 
             }
 //            goalApproval = "Expired";

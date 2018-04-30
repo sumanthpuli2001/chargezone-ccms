@@ -604,19 +604,22 @@ public class NoDueMasterController extends NoDueMasterAbstract {
     
     public ModelAndView viewNoDueRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        String employeeNoString = request.getParameter("employeeNo");
+         EmployeeMaster employeeMaster1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+         EmployeeMaster em = new EmployeeMaster();
         String employeeId = request.getParameter("employeeId");
         String reportingManager = request.getParameter("reportingManager");
         NoDueMaster noDueMaster = new NoDueMaster();
         NoDueMaster noDueMasterByEmployeeId = null;
         EmployeeMaster employeeMaster = new EmployeeMaster();
+        em = employeeMasterService.readById(Integer.parseInt(employeeId));
 //        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
 //        user.getId();
 //        employeeMaster.setUserMaster(user);try
         try {
-            int employeeNo = Integer.parseInt(employeeNoString);
+//            int employeeNo = Integer.parseInt(employeeNoString);
             List<?> noDueByEmployeeIdList = noDueMasterService.getNoDueByEmpId(Integer.parseInt(employeeId));
-            List<?> empList = employeeMasterService.readByEmployeeNo(employeeNo);
+//            List<?> empList = employeeMasterService.readByEmployeeNo(employeeNo);
+            List<?> empList = employeeMasterService.readEmId(em.getEmployeeId());
             request.setAttribute("list", empList);
             if (!noDueByEmployeeIdList.isEmpty()) {
                 request.setAttribute("noDueByEmployeeIdList", noDueByEmployeeIdList.get(0));

@@ -222,6 +222,7 @@
         <property name="shiftRotationMasterService" ref="shiftRotationMasterService1" />
         <property name="employeeShiftDataService" ref="employeeShiftDataService1" />
         <property name="userRightMasterService" ref="userRightMasterService1" />
+        <property name="leaveEmployeeDetailsApprovalHistoryService" ref="leaveEmployeeDetailsApprovalHistoryService1" />
     </bean>
     <bean id="employeeLeaveBalanceController1" class="com.bul.zydex.controller.leave.EmployeeLeaveBalanceController" parent="controllerConfig" >
         <property name="employeeLeaveBalanceService" ref="employeeLeaveBalanceService1" />
@@ -1245,6 +1246,9 @@
         <property name="kaizenMasterService" ref="kaizenMasterService1"></property>
         <property name="kaizenApprovalService" ref="kaizenApprovalService1"></property>
         <property name="approvalUserService" ref="approvalUserService1"></property>
+    </bean>
+    <bean id="leaveEmployeeDetailsApprovalHistoryController1" class="com.bul.zydex.controller.leave.LeaveEmployeeDetailsApprovalHistoryController" parent="controllerConfig">
+        <property name="leaveEmployeeDetailsApprovalHistoryService" ref="leaveEmployeeDetailsApprovalHistoryService1" />
     </bean>
 </beans>
  

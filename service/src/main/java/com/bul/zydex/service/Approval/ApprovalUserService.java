@@ -18,4 +18,6 @@ public interface ApprovalUserService<T> extends GenericsService<T> {
 
     public List<?> readapprovalempId();
 
+    public List<?> reademyId(int emid);
+
 }

@@ -66,6 +66,14 @@
                 document.getElementById('spanId5').innerHTML = 'Expand';
             }
         }
+        function buttonFun6() {
+            var className = $('#minusId6').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId6').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId6').innerHTML = 'Expand';
+            }
+        }
     </script>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -310,6 +318,58 @@
                                         </div><!-- /.row -->
                                     </div><!-- /.box-body -->
                                 </div>
+                                <div class="box box-info collapsed-box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Approver History:</h3>
+                                        <div class="box-tools pull-right">
+                                            <span id="spanId6">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun6()"><i class="fa fa-plus" id="minusId6"></i></button>
+                                        </div>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-sm-12">
+
+                                                <div class="table table-bordered">
+                                                    <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                        <c:choose>
+                                                            <c:when test="${empty approvalHistoryList}">
+                                                                <tr>
+                                                                    <td align="center">
+                                                                        <c:out value="There is no record found."></c:out>
+                                                                        </td>
+                                                                    </tr>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <thead>
+
+                                                                    <tr>
+                                                                        <th>Approver Name</th>
+                                                                        <th>Approver Comment</th>
+                                                                        <th>Approved Date</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
+                                                                </thead>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <tbody>
+                                                            <c:forEach var="list" items="${approvalHistoryList}">
+                                                                <tr>
+                                                                    <td>${list[1]}</td>
+                                                                    <td>${list[2]}</td>
+                                                                    <td>${list[4]}</td>
+                                                                    <td>${list[3]}</td>
+
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div><!-- /.col -->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                </div>
+
                                 <!--Leave Balance Shit In Detail completes Here-->
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">

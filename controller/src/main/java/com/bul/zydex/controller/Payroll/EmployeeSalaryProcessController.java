@@ -1480,25 +1480,32 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         headerList.add("Employee Name");
         headerList.add("Basic Salary");
 
-        List<?> salaryTypeList = payrollSalaryTypeService.read();
-        for (Object o1 : salaryTypeList) {
-            PayrollSalaryType payrollSalaryType = (PayrollSalaryType) o1;
-            headerList.add(payrollSalaryType.getText());
-        }
-//        List<?> list1 = policyMasterService.read();
-//        for (Object o1 : list1) {
-//            Object str[] = (Object[]) o1;
-//            if (!headerList.contains("" + str[5]) && null != str[5]) {
-//                headerList.add("" + str[5]);
-//            }
-//
+//        List<?> salaryTypeList = payrollSalaryTypeService.read();
+//        for (Object o1 : salaryTypeList) {
+//            PayrollSalaryType payrollSalaryType = (PayrollSalaryType) o1;
+//            headerList.add(payrollSalaryType.getText());
 //        }
+        List<?> policyMasterList = policyMasterService.read();
+        for (Object o1 : policyMasterList) {
+            PolicyMaster policyMaster = (PolicyMaster) o1;
+            headerList.add(policyMaster.getPolicyName());
+        }
 
         headerList.add("PF");
         headerList.add("PT");
         headerList.add("Total Gross Salary");
         headerList.add("Deductional Amount");
         headerList.add("NetSalary Amount");
+
+        List<?> list6 = ctcAllowanceService.read();
+        CtcAllowance ctcAllowance = new CtcAllowance();
+//        Map<Integer, String> leaveTypemap = new HashMap();
+        for (Object o : list6) {
+            ctcAllowance = (CtcAllowance) o;
+            headerList.add("" + ctcAllowance.getCtcName());
+        }
+        headerList.add("Total");
+        headerList.add("CTCPerMonth");
         List<EmployeeMaster> empList = (List<EmployeeMaster>) employeeSalaryProcessService.readEmpMasterSalary(employeeMaster);
 
         for (EmployeeMaster employeeMaster1 : empList) {
@@ -1507,35 +1514,25 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             finalList.add(employeeMaster1.getEmployeeId());
             finalList.add(employeeMaster1.getEmployeeName());
             finalList.add(employeeMaster1.getBasicSalary());
-
+//    Map<String, String> empMap = new HashMap<String, String>();
             double basicSalary1 = Double.parseDouble(employeeMaster1.getBasicSalary());
             double grossSalary = 0;
             double deductionAmount = 0;
-
-            List<?> salaryTypeList1 = payrollSalaryTypeService.read();
+            double total = 0.0;
+            List<?> salaryTypeList1 = policyMasterService.read();
             for (Object o1 : salaryTypeList1) {
-                PayrollSalaryType payrollSalaryType = (PayrollSalaryType) o1;
+                PolicyMaster policyMaster = (PolicyMaster) o1;
 
-                List<?> list = employeeTypeWiseSalaryService.readForMasterAdditionalAmount(employeeMaster1.getEmployeeTypeMaster().getId(),
-                        employeeMaster1.getEmployeeSubType().getId(), payrollSalaryType.getId());
+                List<?> list = employeePolicyDetailService.readForMasterAdditionalAmount(employeeMaster1.getId(), policyMaster.getId());
+
                 if (!list.isEmpty()) {
                     Iterator itr = list.iterator();
                     if (itr.hasNext()) {
                         Object[] next = (Object[]) itr.next();
-                        int salaryTypeId = (Integer) next[0];
-                        String amountType = next[2].toString();
-                        double salaryAmount = (Double) next[3];
+                        String amountType = next[0].toString();
+                        double salaryAmount = (Double) next[1];
 
-                        if (amountType.equals("value")) {
-
-                            finalList.add(df.format(salaryAmount));
-                            grossSalary += salaryAmount;
-                        } else {
-                            double basicSalary = Double.parseDouble(employeeMaster1.getBasicSalary());
-                            double additionalAmount = (salaryAmount / 100) * basicSalary;
-                            finalList.add(df.format(additionalAmount));
-                            grossSalary += additionalAmount;
-                        }
+                        finalList.add(df.format(salaryAmount));
 
                     }
                 } else {
@@ -1615,6 +1612,29 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             finalList.add(df.format(deductionAmount));
             double finalAmount = (basicSalary1 + grossSalary) - deductionAmount;
             finalList.add(df.format(finalAmount));
+            List<?> ctcAllowanceList = ctcAllowanceService.read();
+            for (Object o165 : ctcAllowanceList) {
+                CtcAllowance ctcAllowance2 = (CtcAllowance) o165;
+
+                List<?> list2 = employeeCtcDetailService.CtcDetailempidMasterSalary(employeeMaster1.getId(), ctcAllowance2.getId());
+
+                if (!list2.isEmpty()) {
+                    Iterator itr = list2.iterator();
+                    if (itr.hasNext()) {
+                        Object[] next = (Object[]) itr.next();
+                        String amountType = next[0].toString();
+                        double salaryAmount = (Double) next[1];
+                        total += (Double) next[1];
+                        finalList.add(df.format(salaryAmount));
+
+                    }
+                } else {
+                    finalList.add("-");
+                }
+            }
+
+            finalList.add("" + df.format((int) Math.round(total)));
+            finalList.add("" + df.format((int) Math.round(total + (basicSalary1 + grossSalary - deductionAmount))));
 
             empMap.put(employeeMaster1.getId(), finalList);
 

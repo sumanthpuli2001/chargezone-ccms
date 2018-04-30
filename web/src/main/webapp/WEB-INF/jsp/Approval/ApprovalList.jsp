@@ -24,7 +24,7 @@
 
         <script>
             function deleteCheck11() {
-                var checkboxes = confirm("Are you sure you want to delete?");
+                var checkboxes = confirm("Are you sure you want to delete? If you delete than after approval cycle does'n work");
                 if (checkboxes) {
                     checkboxes = document.getElementsByName('checkId');
                     for (var i = 0, n = checkboxes.length; i < n; i++) {
@@ -85,7 +85,7 @@
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">name</th>
                                                                     <th style="width: 50px;">Employee Name</th>
-                                                                    <th style="width: 50px;">level</th>
+                                                                    <!--<th style="width: 50px;">level</th>-->
                                                                     <th style="width: 50px;">Action</th>
                                                               
                                                                         <%--</c:if>--%>
@@ -103,11 +103,11 @@
                                                                 <!--<td>/</td>-->
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[2]}</td>
-                                                                <td>${list[3]}</td>
+                                                                <!--<td>${list[3]}</td>-->
 
                                                                     <td>
                                                                         <div class="btn-group">
-                                                                            <button type="button" onclick="viewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            <button type="button" onclick="viewClick(${list[4]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
                                                                         </button>
                                                                     </div>

@@ -79,7 +79,7 @@
                     </li>
                 </c:if>
                 <c:if test="${!sessionScope.userRight.employeeManagement}">
-                    <c:if test="${!sessionScope.userRight.hr}">
+                    <c:if test="${sessionScope.userRight.hr}">
                         <li class="treeview" style="color: #585858;">
                             <a href="#" style="background: #fff;">
                                 <i class="fa fa-user fa-lg" style="color: #585858;"></i>

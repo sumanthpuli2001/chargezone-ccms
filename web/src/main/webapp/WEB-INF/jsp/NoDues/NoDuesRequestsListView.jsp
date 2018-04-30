@@ -14,9 +14,10 @@
         <title>No Dues Requests</title>
     </head>
     <script>
-        function viewClick(employeeId, employeeNo, reportingManager) {
+        function viewClick(employeeId, reportingManager) {
+          
 //            window.location = 'employeeMaster.htm?act=viewClick&id=' + id;
-            window.location = 'noDueMaster.htm?act=viewNoDueRequest&employeeId=' + employeeId + '&employeeNo=' + employeeNo + '&reportingManager=' + reportingManager;
+            window.location = 'noDueMaster.htm?act=viewNoDueRequest&employeeId=' + employeeId + '&reportingManager=' + reportingManager;
         }
 //        function createClick(id) {
 //            window.location = 'userRightMaster.htm?act=createClick&id=' + id;
@@ -206,7 +207,7 @@
                                                                     <%--<c:if test="${sessionScope.userRight.hr}">--%>
                                                                     <td>
                                                                         <div class="btn-group">
-                                                                            <button type="button" class="btn btn-default dropdown-toggle" onclick="viewClick(${list[0]},${list[1]},${list[7]});" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                            <button type="button" class="btn btn-default dropdown-toggle" onclick="viewClick(${list[0]},${list[7]});" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                 View
                                                                             </button>
                                                                         </div>

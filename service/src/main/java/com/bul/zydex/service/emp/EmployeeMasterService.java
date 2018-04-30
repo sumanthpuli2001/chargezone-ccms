@@ -157,8 +157,13 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
     public List<?> readEmployeeList(int id, int empid);
 
     public List<?> readByEmployeeNo1(String employeeNo);
+
     public List<?> checkSubordinate(int empId, int managerEmpId);
 
     public List<?> checkSuprior(int empId, int managerEmpId);
+
+    public List<?> readEmId(String EmployeeId);
+
+    public List<?> getByEmployeeNo(String employeeNo);
 
 }

@@ -30,4 +30,6 @@ public interface EmployeeCtcDetailService<T> extends GenericsService<T> {
 
     public List<?> readctcRegistration(int employeeid);
 
+    public List<?> CtcDetailempidMasterSalary(int employeeid, int ctcAllowanceId);
+
 }

@@ -157,6 +157,6 @@
         <mapping resource="com/bul/zydex/model/KaizenMaster.xml"/>
         <mapping resource="com/bul/zydex/model/KaizenMaster.hbm.xml"/>
         <mapping resource="com/bul/zydex/model/KaizenApproval.hbm.xml"/>
-
+        <mapping resource="com/bul/zydex/model/LeaveEmployeeDetailsApprovalHistory.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

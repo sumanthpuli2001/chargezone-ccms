@@ -659,4 +659,7 @@
     <bean id="kaizenApprovalService1" class="com.bul.zydex.service.Kaizen.KaizenApprovalServiceImpl">
         <property name="kaizenApprovalDAO" ref="kaizenApprovalDAO1"/>
     </bean>
+    <bean id="leaveEmployeeDetailsApprovalHistoryService1" class="com.bul.zydex.service.leave.LeaveEmployeeDetailsApprovalHistoryServiceImpl">
+        <property name="leaveEmployeeDetailsApprovalHistoryDAO" ref="leaveEmployeeDetailsApprovalHistoryDAO1"/>
+    </bean>
 </beans>

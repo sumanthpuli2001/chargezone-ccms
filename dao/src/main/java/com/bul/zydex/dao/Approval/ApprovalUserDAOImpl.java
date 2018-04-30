@@ -8,6 +8,8 @@ package com.bul.zydex.dao.Approval;
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.ApprovalUser;
 import java.util.List;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 /**
  *
@@ -23,12 +25,27 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
     @Override
     public List<?> readByApprovalId(int id) {
 
-        String query = "SELECT a"
-                + " FROM ApprovalUser a "
-                + " left join a.approvalMaster b"
-                + " WHERE a.approvalMaster = " + id;
+//        String query = "SELECT a"
+//                + " FROM ApprovalMaster a "
+//                + " left join ApprovalUser b"
+//                + " WHERE a.approvalMaster = " + id;
+//
+//        List<?> list = getHibernateTemplate().find(query);
+        Session s = getSessionFactory().openSession();
+        String sqlString = "SELECT"
+                + " b.id, b.approval_id, b.level, c.id"
+                + " from"
+                + " hr_power_astral.approval_master a"
+                + " left join"
+                + " hr_power_astral.approval_user b on a.id = b.approval_id"
+                + " left join"
+                + " hr_power_astral.employee_master c on b.employee_master_id = c.id"
+                + " where a.id =" + id;
 
-        List<?> list = getHibernateTemplate().find(query);
+        SQLQuery query = s.createSQLQuery(sqlString);
+        List<?> list = query.list();
+        s.close();
+
         return list;
     }
 
@@ -38,10 +55,23 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
                 + " FROM ApprovalUser a "
                 + " left join a.approvalMaster b"
                 + " left join a.employeeMaster c"
-                + " order by a.id";
+                + " group by a.approvalMaster.id";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
 
-}
+    @Override
+    public List<?> reademyId(int emid) {
+
+              String query = "SELECT a"
+                + " FROM ApprovalUser a "
+                + " left join a.employeeMaster b"
+                + " where a.approvalMaster.id =" +emid;     
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+        
+    }
+
+    }

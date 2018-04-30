@@ -74,7 +74,7 @@
                                             </th>
                                             <th colspan="5" rowspan="5" style="text-align: center;" >
                                                 Before Photo <br>
-                                                <img hight="400" width="500" src="StorageYard/Kaizen/beforePhoto/${list.beforePhoto}"  >
+                                                <img hight="300" width="400" src="StorageYard/Kaizen/beforePhoto/${list.beforePhoto}"  >
                                             </th>
                                             <!--<th colspan="2"><input name="teamMember" type="text"></th>-->
                                         </tr>
@@ -100,7 +100,7 @@
                                                 ${list.improvementDescription}
                                             </th>
                                             <th colspan="5" rowspan="5" style="text-align: center;">After Photo<br>
-                                                <img hight="400" width="500" src="StorageYard/Kaizen/afterPhoto/${list.afterPhoto}">
+                                                <img hight="300" width="400" src="StorageYard/Kaizen/afterPhoto/${list.afterPhoto}">
                                             </th>
                                             <th colspan="2" rowspan="1">Tangible Benefit </th>
                                             <th colspan="2" rowspan="1">${list.tangibleBenefit}</th>

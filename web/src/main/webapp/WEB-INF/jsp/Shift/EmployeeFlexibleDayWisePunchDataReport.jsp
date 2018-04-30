@@ -53,6 +53,24 @@ Author     : Dhaval Patel
 
 
 
+    <script>
+        function CheckDate() {
+            var startDate = document.getElementById("inDateTime").value;
+            var endDate = document.getElementById("outDateTime").value;
+
+            if (endDate <= startDate) {
+                confirm("End date should be greater than Start date");
+//                document.getElementById("outDateTime").value = "";
+                return false;
+            } else {
+                return true;
+            }
+
+
+        }
+
+    </script>
+
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -67,7 +85,7 @@ Author     : Dhaval Patel
         </c:if>
         <!-- Main content -->
         <form:form action="attendanceRegularizationMaster.htm?act=showOwnAttandance" method="post" commandName="employeeAdvanceSearch"
-                   name='form1' class="form-horizontal" role="form">
+                   name='form1' onsubmit='return CheckDate();' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">

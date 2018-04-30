@@ -317,45 +317,45 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             }
             //End
 
-            //Code for Payroll Provident
-            int empId = employeeMaster.getEmployeeTypeMaster().getId();
-            int empSubId = employeeMaster.getEmployeeSubType().getId();
-            EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
-            employeeTypeMaster.setId(empId);
-            EmployeeSubType employeeSubTypeMaster = new EmployeeSubType();
-            employeeSubTypeMaster.setId(empSubId);
-            Boolean pfCheck = payrollPfCheckService.isExistPF(empId, empSubId);
-            if (!pfCheck) {
-                PayrollPfCheck payrollPfCheck = new PayrollPfCheck();
-                payrollPfCheck.setEmployeeSubType(employeeSubTypeMaster);
-                payrollPfCheck.setEmployeeTypeMaster(employeeTypeMaster);
-                if (null != request.getParameter("pf")) {
-                    if (!request.getParameter("pf").equals("")) {
-                        if (request.getParameter("pf").equals("true")) {
-                            payrollPfCheck.setPfCheck(true);
-                        } else {
-                            payrollPfCheck.setPfCheck(false);
-                        }
-                        payrollPfCheckService.create(payrollPfCheck);
-                    }
-                }
-            }
-            Boolean ptCheck = payrollPtCheckService.isExistPT(empId, empSubId);
-            if (!ptCheck) {
-                PayrollPtCheck payrollPtCheck = new PayrollPtCheck();
-                payrollPtCheck.setEmployeeSubType(employeeSubTypeMaster);
-                payrollPtCheck.setEmployeeTypeMaster(employeeTypeMaster);
-                if (null != request.getParameter("pt")) {
-                    if (!request.getParameter("pt").equals("")) {
-                        if (request.getParameter("pt").equals("true")) {
-                            payrollPtCheck.setPtCheck(true);
-                        } else {
-                            payrollPtCheck.setPtCheck(false);
-                        }
-                        payrollPtCheckService.create(payrollPtCheck);
-                    }
-                }
-            }
+//            //Code for Payroll Provident
+//            int empId = employeeMaster.getEmployeeTypeMaster().getId();
+//            int empSubId = employeeMaster.getEmployeeSubType().getId();
+//            EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
+//            employeeTypeMaster.setId(empId);
+//            EmployeeSubType employeeSubTypeMaster = new EmployeeSubType();
+//            employeeSubTypeMaster.setId(empSubId);
+//            Boolean pfCheck = payrollPfCheckService.isExistPF(empId, empSubId);
+//            if (!pfCheck) {
+//                PayrollPfCheck payrollPfCheck = new PayrollPfCheck();
+//                payrollPfCheck.setEmployeeSubType(employeeSubTypeMaster);
+//                payrollPfCheck.setEmployeeTypeMaster(employeeTypeMaster);
+//                if (null != request.getParameter("pf")) {
+//                    if (!request.getParameter("pf").equals("")) {
+//                        if (request.getParameter("pf").equals("true")) {
+//                            payrollPfCheck.setPfCheck(true);
+//                        } else {
+//                            payrollPfCheck.setPfCheck(false);
+//                        }
+//                        payrollPfCheckService.create(payrollPfCheck);
+//                    }
+//                }
+//            }
+//            Boolean ptCheck = payrollPtCheckService.isExistPT(empId, empSubId);
+//            if (!ptCheck) {
+//                PayrollPtCheck payrollPtCheck = new PayrollPtCheck();
+//                payrollPtCheck.setEmployeeSubType(employeeSubTypeMaster);
+//                payrollPtCheck.setEmployeeTypeMaster(employeeTypeMaster);
+//                if (null != request.getParameter("pt")) {
+//                    if (!request.getParameter("pt").equals("")) {
+//                        if (request.getParameter("pt").equals("true")) {
+//                            payrollPtCheck.setPtCheck(true);
+//                        } else {
+//                            payrollPtCheck.setPtCheck(false);
+//                        }
+//                        payrollPtCheckService.create(payrollPtCheck);
+//                    }
+//                }
+//            }
             //End
 
             PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();

@@ -1139,20 +1139,20 @@
                                                         <div class="col-sm-4">
                                                             <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset>
-                                                                <input type="radio" name="pf" id="pf" value="false" checked>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <input type="radio" name="pf" id="pf" value="true">YES
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <label>Provident Tax:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <fieldset>
-                                                                <input type="radio" name="pt" id="pt" value="false" checked>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <input type="radio" name="pt" id="pt" value="true">YES
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <label>ESIC:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
-                                                            <fieldset>
+                                                            <form:radiobutton path="pf"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="pf" value="true"/>YES
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>Provident Tax:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <fieldset>
+                                                            <form:radiobutton path="pt"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="pt" value="true"/>YES
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>ESIC:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                        <fieldset>
                                                             <form:radiobutton path="esic" value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <form:radiobutton path="esic" value="true"/>YES
                                                         </fieldset>

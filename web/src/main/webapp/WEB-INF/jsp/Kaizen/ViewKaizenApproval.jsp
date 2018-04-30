@@ -69,7 +69,7 @@
                                         </tr>
                                         <tr style="vertical-align: top;">
                                             <th colspan="3" rowspan="5">
-                                                Problem Description:  <br>Electricity Consumption is more  <br><br>
+                                                Problem Description :   <br><br>
                                                 ${list.problemDescription}
                                             </th>
                                             <th colspan="5" rowspan="5" style="text-align: center;" >
@@ -96,7 +96,7 @@
                                             <th colspan="2">${list.budgetRequirement}</th>
                                         </tr>
                                         <tr style="vertical-align: top;">
-                                            <th colspan="3" rowspan="5">Improvement Description :<br>We can remove the unnecessary lights<br><br>
+                                            <th colspan="3" rowspan="5">Improvement Description :<br><br>
                                                 ${list.improvementDescription}
                                             </th>
                                             <th colspan="5" rowspan="5" style="text-align: center;">After Photo<br>

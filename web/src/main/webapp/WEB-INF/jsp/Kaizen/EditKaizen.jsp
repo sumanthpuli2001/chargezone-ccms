@@ -132,7 +132,7 @@
                                         </tr>
                                         <tr style="vertical-align: top;">
                                             <th colspan="3" rowspan="5">
-                                                Problem Description:  <br>Electricity Consumption is more  <br><br>
+                                                Problem Description :   <br><br>
                                                 <textarea style="resize: none"  name="problemDescription"id="problemDescription" rows="12" cols="35"onchange="kaizenOnchangeFunction('problemDescriptionError');">${list.problemDescription}</textarea>
                                                 <br> <span style="font-size: 14px; color: #dd4b39;" id="problemDescriptionError"></span></th>
                                             <th colspan="5" rowspan="5" style="text-align: center;" >
@@ -162,7 +162,7 @@
                                                 <span style="font-size: 14px; color: #dd4b39;" id="budgetRequirementError"></span>
                                         </tr>
                                         <tr style="vertical-align: top;">
-                                            <th colspan="3" rowspan="5">Improvement Description :<br>We can remove the unnecessary lights<br><br>
+                                            <th colspan="3" rowspan="5">Improvement Description :<br><br>
 
                                                 <textarea name="improvementDescription"id="improvementDescription" style="resize: none"  rows="12" cols="35"onchange="kaizenOnchangeFunction('improvementDescriptionError');">${list.improvementDescription}</textarea>
                                                 <br><br>  <span style="font-size: 14px; color: #dd4b39;" id="improvementDescriptionError"></span></th>

@@ -375,31 +375,41 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             employeeDeductionAmountService.create(employeeDeductionAmount);
         }
         ///////////////////////PF Start Here///////////////////////
+
         EmployeeMaster employeeMaster = new EmployeeMaster();
         employeeMaster = employeeMasterService.readById(employeeSalaryProcess.getEmployeeMaster().getId());
+        if (employeeMaster1.getPf() == true) {
+            boolean pfFlag = payrollPfCheckService.readForPfCheck(employeeMaster.getEmployeeTypeMaster().getId(),
+                    employeeMaster.getEmployeeSubType().getId());
 
-        boolean pfFlag = payrollPfCheckService.readForPfCheck(employeeMaster.getEmployeeTypeMaster().getId(),
-                employeeMaster.getEmployeeSubType().getId());
-
-        if (pfFlag) {
-            List<?> pfAmountList = payrollProvidentFundService.readPf(employeeMaster.getZydexLocationMaster().getId());
+            if (pfFlag) {
+                List<?> pfAmountList = payrollProvidentFundService.readPf(employeeMaster.getZydexLocationMaster().getId());
 //         for (Object oPf : pfAmountList) {
-            double maxiAmount = 0;
-            if (!pfAmountList.isEmpty()) {
-                PayrollProvidentFund payrollProvidentFund = (PayrollProvidentFund) pfAmountList.get(0);
-                double basicSalary = employeeSalaryProcess.getEmployeeBasicSalary();
-                double pf = Double.parseDouble(payrollProvidentFund.getPfPercentage());
-                maxiAmount = Double.parseDouble(employeeMaster.getPfAmount());
-                double taxpf = 0;
-                if (maxiAmount != 0) {
-                    if (maxiAmount <= basicSalary) {
+                double maxiAmount = 0;
+                if (!pfAmountList.isEmpty()) {
+                    PayrollProvidentFund payrollProvidentFund = (PayrollProvidentFund) pfAmountList.get(0);
+                    double basicSalary = employeeSalaryProcess.getEmployeeBasicSalary();
+                    double pf = Double.parseDouble(payrollProvidentFund.getPfPercentage());
+                    maxiAmount = Double.parseDouble(employeeMaster.getPfAmount());
+                    double taxpf = 0;
+                    if (maxiAmount != 0) {
+                        if (maxiAmount <= basicSalary) {
 
-                        taxpf = (maxiAmount * pf / 100);
+                            taxpf = (maxiAmount * pf / 100);
 
-                        employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
-                        employeeDeductionAmount.setDeductionType("Provident Fund");
-                        employeeDeductionAmount.setDeductionAmount(taxpf);
-                        employeeDeductionAmountService.create(employeeDeductionAmount);
+                            employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                            employeeDeductionAmount.setDeductionType("Provident Fund");
+                            employeeDeductionAmount.setDeductionAmount(taxpf);
+                            employeeDeductionAmountService.create(employeeDeductionAmount);
+                        } else {
+                            taxpf = basicSalary * pf / 100;
+
+                            employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                            employeeDeductionAmount.setDeductionType("Provident Fund");
+                            employeeDeductionAmount.setDeductionAmount(taxpf);
+                            employeeDeductionAmountService.create(employeeDeductionAmount);
+                        }
+
                     } else {
                         taxpf = basicSalary * pf / 100;
 
@@ -407,22 +417,13 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                         employeeDeductionAmount.setDeductionType("Provident Fund");
                         employeeDeductionAmount.setDeductionAmount(taxpf);
                         employeeDeductionAmountService.create(employeeDeductionAmount);
+
                     }
-
-                } else {
-                    taxpf = basicSalary * pf / 100;
-
-                    employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
-                    employeeDeductionAmount.setDeductionType("Provident Fund");
-                    employeeDeductionAmount.setDeductionAmount(taxpf);
-                    employeeDeductionAmountService.create(employeeDeductionAmount);
 
                 }
 
             }
-
         }
-
         /////////////////PT Starts  here///////////
         double additionalAmt = 0;
         List<?> additionalAmount = employeeAdditionalSalaryService.readAdditionalAmount(employeeSalaryProcess.getId());
@@ -448,39 +449,39 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         double netSalary = (employeeSalaryProcess.getEmployeeBasicSalary() + additionalAmt);
         double netSalarywithOtamount = (employeeSalaryProcess.getEmployeeBasicSalary() + additionalAmtwithoutOtAmount);
         double netSalarywithOtamount1 = (Double.parseDouble(employeeMaster.getBasicSalary()) + additionalAmtwithoutOtAmount);
+        if (employeeMaster1.getPt() == true) {
+            boolean ptFlag = payrollPtCheckService.readForPTCheck(employeeMaster.getEmployeeTypeMaster().getId(),
+                    employeeMaster.getEmployeeSubType().getId());
+            if (ptFlag) {
+                double ptAmount = 0;
+                List<?> ptAmountList = payrollProfessionalTaxService.read();
+                PayrollProfessionalTax payrollProfessionalTax = new PayrollProfessionalTax();
+                for (Iterator<? extends Object> iterator = ptAmountList.iterator(); iterator.hasNext();) {
+                    payrollProfessionalTax = (PayrollProfessionalTax) iterator.next();
+                    double salaryForm = Double.parseDouble(payrollProfessionalTax.getSalaryFrom());
+                    double salaryTo = Double.parseDouble(payrollProfessionalTax.getSalaryTo());
 
-        boolean ptFlag = payrollPtCheckService.readForPTCheck(employeeMaster.getEmployeeTypeMaster().getId(),
-                employeeMaster.getEmployeeSubType().getId());
-        if (ptFlag) {
-            double ptAmount = 0;
-            List<?> ptAmountList = payrollProfessionalTaxService.read();
-            PayrollProfessionalTax payrollProfessionalTax = new PayrollProfessionalTax();
-            for (Iterator<? extends Object> iterator = ptAmountList.iterator(); iterator.hasNext();) {
-                payrollProfessionalTax = (PayrollProfessionalTax) iterator.next();
-                double salaryForm = Double.parseDouble(payrollProfessionalTax.getSalaryFrom());
-                double salaryTo = Double.parseDouble(payrollProfessionalTax.getSalaryTo());
-
-                if (netSalary >= salaryForm && netSalary <= salaryTo) {
+                    if (netSalary >= salaryForm && netSalary <= salaryTo) {
 //                if (salaryForm >= netSalary && salaryTo <= netSalary) {
 
-                    break;
+                        break;
 
-                } else {
-                    iterator.remove();
+                    } else {
+                        iterator.remove();
+                    }
                 }
-            }
 
 //            List<?> ptAmountList = payrollProfessionalTaxService.readPT(netSalary);
-            if (!ptAmountList.isEmpty()) {
-                ptAmount = Double.parseDouble(payrollProfessionalTax.getAmount());
+                if (!ptAmountList.isEmpty()) {
+                    ptAmount = Double.parseDouble(payrollProfessionalTax.getAmount());
 
-                employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
-                employeeDeductionAmount.setDeductionType("Professional Tax");
-                employeeDeductionAmount.setDeductionAmount(ptAmount);
-                employeeDeductionAmountService.create(employeeDeductionAmount);
+                    employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                    employeeDeductionAmount.setDeductionType("Professional Tax");
+                    employeeDeductionAmount.setDeductionAmount(ptAmount);
+                    employeeDeductionAmountService.create(employeeDeductionAmount);
+                }
             }
         }
-
 //        TDs start here
 //        double tdsAmount = Double.parseDouble(employeeMaster1.getTdsAmount());
 //        if (tdsAmount != 0) {

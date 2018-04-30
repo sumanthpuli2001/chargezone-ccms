@@ -7,7 +7,7 @@
 <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
 <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
 <head>
-    <title>Kaizen List</title>
+    <title>Approver Kaizen List</title>
 </head>
 <script>
     function viewClick(id) {
@@ -23,10 +23,10 @@
         <div class="alert alert-info" role="alert">${successMessage}</div>
     </c:if>
     <section class="content-header">
-        <h1>Kaizen List</h1>
+        <h1>Approver Kaizen List</h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Kaizen List</li>
+            <li class="active">Approver Kaizen List</li>
         </ol>
     </section>
     <section class="content">

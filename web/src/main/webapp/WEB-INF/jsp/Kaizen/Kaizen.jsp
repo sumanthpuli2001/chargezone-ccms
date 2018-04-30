@@ -25,7 +25,6 @@
     </style>
     <script>
         function checkBlankField() {
-            alert("helooooooo")
             var flag = true;
             if ($('#teamLeader').val() == '') {
                 document.getElementById('teamLeaderError').innerHTML = '-It must not be empty or white space.';

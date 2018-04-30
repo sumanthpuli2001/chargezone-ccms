@@ -29,7 +29,6 @@
     
     <script>
         function checkBlankField() {
-            alert("helooooooo")
             var flag = true;
             if ($('#teamLeader').val() == '') {
                 document.getElementById('teamLeaderError').innerHTML = '-It must not be empty or white space.';
@@ -88,10 +87,10 @@
 
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>Kaizen</h1>
+            <h1>Edit Kaizen</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Kaizen</li>
+                <li class="active">Edit Kaizen</li>
             </ol>
         </section>
         <form:form action="kaizen.htm?act=editKaizenSubmit" method="post" commandName="kaizenMaster" enctype="multipart/form-data"
@@ -139,7 +138,7 @@
                                             <th colspan="5" rowspan="5" style="text-align: center;" >
                                                 Before Photo <br>
                                                 <input type="file" name="beforePhoto" class="form-control" id="beforePhoto"  accept="image/jpg,image/jpeg,image/png" onchange="checkFileSize();">
-                                                <img hight="400" width="500" src="StorageYard/Kaizen/beforePhoto/${list.beforePhoto}"  >
+                                                <img hight="300" width="400" src="StorageYard/Kaizen/beforePhoto/${list.beforePhoto}"  >
                                             </th>
                                             <!--<th colspan="2"><input name="teamMember" type="text"></th>-->
                                         </tr>
@@ -169,7 +168,7 @@
                                                 <br><br>  <span style="font-size: 14px; color: #dd4b39;" id="improvementDescriptionError"></span></th>
                                             <th colspan="5" rowspan="5" style="text-align: center;">After Photo<br>
                                                 <input type="file"   class="form-control" id="afterPhoto" name="afterPhoto" accept="image/jpg,image/jpeg,image/png" onchange="checkFileSize();">
-                                                <img hight="400" width="500" src="StorageYard/Kaizen/afterPhoto/${list.afterPhoto}">
+                                                <img hight="300" width="400" src="StorageYard/Kaizen/afterPhoto/${list.afterPhoto}">
                                             </th>
                                             <th colspan="2" rowspan="1">Tangible Benefit </th>
                                             <th colspan="2" rowspan="1"><input name="tangibleBenefit" id="tangibleBenefit" value="${list.tangibleBenefit}"type="text" onchange="kaizenOnchangeFunction('tangibleBenefitError');">
@@ -261,7 +260,7 @@
                                                     <div class="col-md-6 col-sm-6" style="text-align:right">
                                                         <c:if test="${list.cost eq 1}">
                                                             <input type="checkbox" name="cost" value="1" checked="true"/>  
-s                                                        </c:if>
+                                                        </c:if>
                                                         <c:if test="${list.cost ne 1}">
                                                             <input type="checkbox" name="cost" value="1" />  
                                                         </c:if>

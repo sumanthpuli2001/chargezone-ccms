@@ -98,8 +98,8 @@
                                                                     <!--<th>user id</th>-->
                                                                     <th>Employee ID</th>
                                                                     <th>Employee Name</th>
-                                                                    <th>Designation</th>
                                                                     <th>Department</th>
+                                                                    <th>Designation</th>
                                                                     <th>Year</th>
                                                                     <th>Status</th>
                                                                     <th>Action</th>

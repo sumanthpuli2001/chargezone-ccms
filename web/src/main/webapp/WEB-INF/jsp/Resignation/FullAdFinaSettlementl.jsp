@@ -50,26 +50,28 @@
                                     <div class="form-group">
                                         <div class="col-sm-5">
                                             <label class="control-label">Resignation Employee :<span style="color: red;font-size: 12px;"></span></label>
-                                                <!--<input type="text" name="empid" id="empid" class="form-control"/>-->
-                                                 <form:input type="text" path="employeeMaster" name="policyId1" id="policyId1" class="form-control"/>
-                                        </div>
-                                        <div class="col-sm-5">
-                                            <label class="control-label">Notice Period :<span style="color: red;font-size: 12px;"></span></label>
+                                            <!--<input type="text" name="empid" id="empid" class="form-control"/>-->
+                                            <form:input type="text" path="employeeMaster" name="policyId1" id="policyId1" class="form-control"/>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">Notice Period :<span style="color: red;font-size: 12px;"></span></label>
                                                 <form:input type="text" path="noticePeriod" name="noticePeriod" id="noticePeriod" class="form-control"/>
+                                                <form:errors path="noticePeriod" cssClass="errorDiv"></form:errors>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-5">
-                                            <label class="control-label">Given Notice :<span style="color: red;font-size: 12px;"></span></label>
+                                        <div class="form-group">
+                                            <div class="col-sm-5">
+                                                <label class="control-label">Given Notice :<span style="color: red;font-size: 12px;"></span></label>
                                                 <form:input type="text" path="givenNotice" name="givenNotice" id="givenNotice" class="form-control"/>
+                                                <form:errors path="givenNotice" cssClass="errorDiv"></form:errors>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6 col-sm-offset-5">
+                                                <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-6 col-sm-offset-5">
-                                            <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
-                                        </div>
-                                    </div>
-                                </div>
                             </form:form>
 
 
@@ -83,19 +85,19 @@
     </div>
 
     <script>
-    jQuery.noConflict();
-    jQuery(document).ready(function () {
+        jQuery.noConflict();
+        jQuery(document).ready(function () {
 
-        jQuery("#policyId1").tokenInput(${resignedEmployeelist}, {
-            preventDuplicates: true,
-            noResultsText: "No Result",
-            tokenLimit: "1",
-            searchingText: "Searching ... .. .",
-            prePopulate: ${preList}
+            jQuery("#policyId1").tokenInput(${resignedEmployeelist}, {
+                preventDuplicates: true,
+                noResultsText: "No Result",
+                tokenLimit: "1",
+                searchingText: "Searching ... .. .",
+                prePopulate: ${preList}
+            });
         });
-    });
 
-</script>
-    
+    </script>
+
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

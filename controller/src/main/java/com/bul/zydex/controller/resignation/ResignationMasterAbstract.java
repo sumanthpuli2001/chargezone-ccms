@@ -47,6 +47,7 @@ public abstract class ResignationMasterAbstract extends CustomAbstract {
     protected EmployeeCtcDetailService<EmployeeCtcDetail> employeeCtcDetailService; 
     protected EmployeeDeductionAmountService<EmployeeDeductionAmount> employeeDeductionAmountService; 
     protected FormateFullNdFinalLetterService<FormateFullNdFinalLetter> formateFullNdFinalLetterService; 
+    protected Validator fullAndFinalSettlementValidator;
 
     public UserRightMasterService<UserRightMaster> getUserRightMasterService() {
         return userRightMasterService;
@@ -128,6 +129,14 @@ public abstract class ResignationMasterAbstract extends CustomAbstract {
 
     public void setFormateFullNdFinalLetterService(FormateFullNdFinalLetterService<FormateFullNdFinalLetter> formateFullNdFinalLetterService) {
         this.formateFullNdFinalLetterService = formateFullNdFinalLetterService;
+    }
+
+    public Validator getFullAndFinalSettlementValidator() {
+        return fullAndFinalSettlementValidator;
+    }
+
+    public void setFullAndFinalSettlementValidator(Validator fullAndFinalSettlementValidator) {
+        this.fullAndFinalSettlementValidator = fullAndFinalSettlementValidator;
     }
     
     

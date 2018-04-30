@@ -1239,41 +1239,39 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         DesignationMaster designationMaster = new DesignationMaster();
         DepartmentMaster departmentMaster = new DepartmentMaster();
-        String empid = request.getParameter("employeeMaster");
-        employeeMaster1 = employeeMasterService.readById(Integer.parseInt(empid));
-        BindException errors = new BindException(fullAndFinalSettlement, "fullAndFinalSettlement");
-        bind(request, fullAndFinalSettlement);
-        departmentList(request);
+        if ("" != request.getParameter("employeeMaster")) {
+            String empid = request.getParameter("employeeMaster");
+            employeeMaster1 = employeeMasterService.readById(Integer.parseInt(empid));
+            BindException errors = new BindException(fullAndFinalSettlement, "fullAndFinalSettlement");
+            bind(request, fullAndFinalSettlement);
+            departmentList(request);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date cDate = new Date();
-        fullAndFinalSettlement.setEmployeeMaster(employeeMaster1);
-        fullAndFinalSettlement.setCreatedDate(sdf.format(cDate));
-        fullAndFinalSettlement.setCreatedBy(employeeMaster.getId());
-        fullAndFinalSettlement.setStatus(0);
+            fullAndFinalSettlementValidator.validate(fullAndFinalSettlement, errors);
+            if (errors.hasErrors()) {
+                request.setAttribute("failureMessage",
+                        " field are Required.Please Enter Valid data");
+                mv = fullAndfinalSettlement(request, response);
 
-        fullAndFinalSettlementService.create(fullAndFinalSettlement);
-        request.setAttribute("successMessage",
-                "Information : The Information is Updated Successfully.");
+            } else {
 
-//        employeeMaster = employeeMasterService.readById(fullAndFinalSettlement.getResignationEmpId());
-//        ResignationMaster rm = resignationMasterService.readByEmpId(fullAndFinalSettlement.getResignationEmpId());
-//
-//        int designation = employeeMaster.getDesignationMaster().getId();
-//        designationMaster = designationMasterService.readById(designation);
-//        String designationName = designationMaster.getDesignationName();
-//
-//        int department = employeeMaster.getDepartmentMaster().getId();
-//        departmentMaster = departmentMasterService.readById(department);
-//        String departmentName = departmentMaster.getDepartmentName();
-//
-//        mv.getModelMap().put("employeeMaster", employeeMaster);
-//        mv.getModelMap().put("rm", rm);
-//        mv.getModelMap().put("designationName", designationName);
-//        mv.getModelMap().put("departmentName", departmentName);
-//        mv.setViewName("Resignation/FullAndFinaSettlementReportShow");
-        mv = fullAndfinal(request, response);
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date cDate = new Date();
+                fullAndFinalSettlement.setEmployeeMaster(employeeMaster1);
+                fullAndFinalSettlement.setCreatedDate(sdf.format(cDate));
+                fullAndFinalSettlement.setCreatedBy(employeeMaster.getId());
+                fullAndFinalSettlement.setStatus(0);
 
+                fullAndFinalSettlementService.create(fullAndFinalSettlement);
+                request.setAttribute("successMessage",
+                        "Information : The Information is Updated Successfully.");
+
+                mv = fullAndfinal(request, response);
+                return mv;
+            }
+        }
+            request.setAttribute("failureMessage",
+                    " field are Required.Please Enter Valid data");
+            mv = fullAndfinalSettlement(request, response);
         return mv;
     }
 

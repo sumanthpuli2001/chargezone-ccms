@@ -39,7 +39,7 @@
                 </c:if>
                 <c:if test="${sessionScope.userRight.hr}">
                     <li class="active treeview">
-                        <a href="userMaster.htm?act=hrDashboard"  style="color: #fff;  background: #fff;">
+                        <a href="userMaster.htm?act=hrDashboard">
                             <i class="fa fa-dashboard fa-lg" style="color: #424242;"></i> <span style="color: #424242;">My Dashboard</span>
                         </a>
                     </li>
@@ -53,7 +53,7 @@
                 </c:if>
                 <c:if test="${sessionScope.userRight.hr}">
                     <li class="active treeview">
-                        <a href="homeController.htm?act=openHomePage" style="color: #fff;  background: #fff;">
+                        <a href="homeController.htm?act=openHomePage">
                             <i class="fa fa-home fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Homepage</span>
                         </a>
                     </li>
@@ -89,7 +89,9 @@
                             <ul class="treeview-menu">
                                 <li><a href="recruitment.htm?act=approvalMppCreate"><i class="fa fa-circle-o"></i>MPP Approval</a></li>
                                 <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>MPR Approval</a></li>
-                                <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
+                                    <c:if test="${sessionScope.userRight.candidateList}">
+                                    <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
+                                    </c:if>    
                                     <c:if test="${sessionScope.userRight.budget}">
                                     <li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP</a></li>
                                     </c:if>

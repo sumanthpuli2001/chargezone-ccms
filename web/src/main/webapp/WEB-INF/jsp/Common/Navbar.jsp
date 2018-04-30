@@ -33,7 +33,7 @@
                 <c:if test="${!sessionScope.userRight.hr}">
                     <li class="active treeview">
                         <a href="userMaster.htm?act=goToDashboard">
-                            <i class="fa fa-dashboard fa-lg"></i> <span>My Dashboard</span>
+                            <i class="fa fa-dashboard fa-lg" style="color: #424242;"></i> <span style="color: #424242;">My Dashboard</span>
                         </a>
                     </li>
                 </c:if>
@@ -47,7 +47,7 @@
                 <c:if test="${!sessionScope.userRight.hr}">
                     <li class="active treeview">
                         <a href="homeController.htm?act=openHomePage">
-                            <i class="fa fa-home fa-lg"></i> <span>Homepage</span>
+                            <i class="fa fa-home fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Homepage</span>
                         </a>
                     </li>
                 </c:if>

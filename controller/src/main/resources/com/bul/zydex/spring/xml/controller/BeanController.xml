@@ -1037,6 +1037,7 @@
         <property name="mprEmployeeCategoryService" ref="mprEmployeeCategoryService1" />
         <property name="questionPaperService" ref="questionPaperService1" />
         <property name="questionDetailsService" ref="questionDetailsService1" />
+        <property name="questionAnswerSubmitService" ref="questionAnswerSubmitService1" />
         
     </bean>
     <bean id="questionAnsController1" class="com.bul.zydex.controller.questionlibrary.QuestionAnsController" parent="controllerConfig" >

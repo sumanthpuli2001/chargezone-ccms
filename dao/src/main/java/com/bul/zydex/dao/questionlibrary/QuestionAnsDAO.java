@@ -19,4 +19,6 @@ public interface QuestionAnsDAO<T> extends GenericsDAO<T> {
     public void deleteByQlId(T object);
 
     public List<?> takeTestOnlineAssementCandidateAnswer(int questionLibraryID);
+
+    public List<?> deleteqlibryId(String libraryId);
 }

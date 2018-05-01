@@ -85,4 +85,16 @@ public class QuestionDetailsDAOImpl<T> extends GenericsDAOImpl<T> implements Que
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> deletelibraryid(String libraryId) {
+            String query = "";
+
+        query += "  "
+                + " select a"
+                + " FROM QuestionDetails a "
+                + " WHERE a.questionLibrary.id = " + libraryId;
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

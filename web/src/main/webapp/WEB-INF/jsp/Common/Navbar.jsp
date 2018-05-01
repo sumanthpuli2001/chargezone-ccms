@@ -233,7 +233,7 @@
 
                         </c:if>
                         <li><a href="employeeDatetimeData.htm?act=searchOddPunch"><i class="fa fa-circle-o"></i>Odd Punch Report</a></li>
-
+                        <li><a href="attendanceRegularizationMaster.htm?act=textReadModule"><i class="fa fa-circle-o"></i>Read TextFile For Monthly</a></li>
                     </ul>
                 </li>
 
@@ -676,7 +676,7 @@
                     <ul class="treeview-menu">
                         <c:if test="${sessionScope.userRight.attendanceReport}">
                             <li><a href="shiftRotationMaster.htm?act=employeeDataSearch"><i class="fa fa-circle-o"></i> Employee Master Report</a></li>
-                            <li><a href="shiftRotationMaster.htm?act=employeeDataSearch2"><i class="fa fa-circle-o"></i> Employee Leave Report</a></li>
+                            <li><a href="shiftRotationMaster.htm?act=employeeDataSearch2"><i class="fa fa-circle-o"></i> Employee Attendance Report</a></li>
                             <li><a href="shiftRotationMaster.htm?act=employeeAttandanceDataSearch"><i class="fa fa-circle-o"></i> Monthly Attendance Report  </a></li>
                             <li><a href="shiftRotationMaster.htm?act=employeePresentSearch"><i class="fa fa-circle-o"></i>Daily Present Report</a></li>
                             <li><a href="shiftRotationMaster.htm?act=attendanceExcelUpload"><i class="fa fa-circle-o"></i>Attendance Upload</a></li>
@@ -967,8 +967,8 @@
                     </li>
                 </c:if>
             </c:if>
-                    
-             <c:if test="${sessionScope.userRight.hr}">
+
+            <c:if test="${sessionScope.userRight.hr}">
                 <li>
                     <a href="#" style="background: #fff;">
                         <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
@@ -980,7 +980,7 @@
                     </ul>
                 </li>
             </c:if>
-                
+
             <c:if test="${sessionScope.userRight.training}">
                 <li>
                     <a href="#" style="background: #fff;">
@@ -1001,7 +1001,7 @@
                     </ul>
                 </li>
             </c:if>
-           
+
 
         </section>
         <!-- /.sidebar -->

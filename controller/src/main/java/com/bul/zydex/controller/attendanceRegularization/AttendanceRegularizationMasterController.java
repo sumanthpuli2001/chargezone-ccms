@@ -1,7 +1,6 @@
 package com.bul.zydex.controller.attendanceRegularization;
 
 import com.bul.zydex.model.AttendanceRegularization;
-import com.bul.zydex.model.AttendanceRegularizationMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
@@ -18,11 +17,13 @@ import com.bul.zydex.model.TimeAttandanceFlaxibleMaster;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
-import com.bul.zydex.model.support.User;
-import com.sun.javafx.scene.control.skin.VirtualFlow;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.text.DecimalFormat;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,7 +32,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -40,10 +40,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import static org.apache.commons.lang3.time.DateUtils.addDays;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.util.CellUtil;
 import org.springframework.validation.BindException;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 public class AttendanceRegularizationMasterController extends AttendanceRegularizationMasterAbstract {
@@ -3595,4 +3594,82 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("AttendanceRegularization/SubOrdinateAttendanceView");
         return mv;
     }
+    
+     public ModelAndView textReadModule(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("AttendanceRegularization/AttendanceReadTextFile");
+        return mv;
+    }
+
+    public ModelAndView readTextFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartFile readTextFile = multipartRequest.getFile("file1");
+        String readTextFile1 = readTextFile.getOriginalFilename();
+//        String textfile;
+//        File files = readTextFile.getInputStream();
+        File dir = new File(readTextFile.toString());
+
+        if (readTextFile.getSize() > 0) {
+            int count = 0;
+            BufferedReader inputStream = null;
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            List Finalarr = new ArrayList();
+            String EmpId = "";
+            String EmpId2 = "";
+            String date = "";
+            String dateTime = "";
+            String punchDateTime = "";
+
+            try {
+                InputStream file = readTextFile.getInputStream();
+                inputStream = new BufferedReader((new InputStreamReader(file, "UTF-8")));
+                String line;
+                String[] splitStr;
+                while ((line = inputStream.readLine()) != null) {
+                    if (count != 0) {
+                        List arr = new ArrayList();
+                        splitStr = line.split("\\s+");
+//                        if (splitStr[3] == "" || splitStr[1] == null || splitStr[1] == "" || splitStr[2] == null || splitStr[2] == "" || splitStr[0] == "I") {
+                        EmpId = splitStr[3];
+
+                        date = splitStr[1];
+                        String year = date.substring(0, 4);
+                        String month = date.substring(4, 6);
+                        String day = date.substring(6, 8);
+                        String yearMonthDay = day + "/" + month + "/" + year;
+
+                        dateTime = yearMonthDay + " " + splitStr[2];
+//                        List<EmployeeMaster> emplist = (List<EmployeeMaster>) employeeMasterService.readByEmployeeId((EmpId.substring(4)));
+                        List<EmployeeMaster> emplist = (List<EmployeeMaster>) employeeMasterService.readByEmployeeId((EmpId));
+                        if (!emplist.isEmpty()) {
+                            EmployeeMaster em = emplist.get(0);
+                            int employeemasterId = em.getId();
+                            EmployeeDatetimeData datetimeData = new EmployeeDatetimeData();
+                            datetimeData.setEmployeeMaster(em);
+                            datetimeData.setDateTime(dateTime);
+                            employeeDatetimeDataService.create(datetimeData);
+
+                        }
+
+//                        }
+                    }
+                    count++;
+
+                }
+            } catch (Exception e) {
+                request.setAttribute("failureMessage", "Information : The Excel Not Upload Successfully. Please Check Excel Data.");
+                mv = textReadModule(request, response);
+            } finally {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+            }
+        }
+        request.setAttribute("successMessage", "Information : The Excel Uploaded Successfully.");
+        mv = textReadModule(request, response);
+        return mv;
+    }
+
 }

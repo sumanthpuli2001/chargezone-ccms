@@ -10,7 +10,6 @@ import com.bul.zydex.model.EmployeeAdvanceSearch;
 import com.bul.zydex.model.EmployeeMaster;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 
 /**
  *
@@ -2111,6 +2110,16 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
             query += " Where  " + condition;
         }
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> getAllEmployeeId() {
+        String query = "";
+
+        query += "SELECT a.id FROM EmployeeMaster a ORDER BY a.id ASC";
+
+        return getHibernateTemplate().find(query);
+    
     }
 
 }

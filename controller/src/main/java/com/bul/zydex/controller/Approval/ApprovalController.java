@@ -143,7 +143,8 @@ public class ApprovalController extends ApprovalAbstract {
         int emid = 0;
         List<?> approvalUser1 = approvalUserService.reademyId(Integer.parseInt(id));
         ApprovalUser au = (ApprovalUser) approvalUser1.get(0);
-        List<?> approvalUserList = approvalUserService.readByApprovalId(Integer.parseInt(id));
+//        List<?> approvalUserList = approvalUserService.readByApprovalId(Integer.parseInt(id));
+        List<?> approvalUserList = approvalUserService.readByApprovalFetch(Integer.parseInt(id));
        
           for (int i = 0; i < approvalUser1.size(); i++) {
             ApprovalUser au1 = (ApprovalUser) approvalUser1.get(i);

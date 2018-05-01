@@ -357,7 +357,6 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                }
 //            }
             //End
-
             PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
             pmpFormStatusMaster.setEmployeeMaster(employeeMaster);
             pmpFormStatusMaster.setStartYearStatus(false);
@@ -2425,6 +2424,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         return mv;
     }
 
+    public ModelAndView excelUploadAllowance(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("Employee/EmployeeAllowanceUpload");
+        return mv;
+    }
+
     public void readEmployeeFile(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         String fileName = request.getParameter("fileName");
@@ -2620,13 +2625,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
                             basicSalary = "" + (null == row.getCell((short) 39) ? "" : row.getCell((short) 39));
 
-                            paymentType = "" + (null == row.getCell((short) 40) ? "" : row.getCell((short) 40));  
+                            paymentType = "" + (null == row.getCell((short) 40) ? "" : row.getCell((short) 40));
                             esicNo = "" + (null == row.getCell((short) 41) ? "" : row.getCell((short) 41));
                             pfNo = "" + (null == row.getCell((short) 42) ? "" : row.getCell((short) 42));
                             uanNo = "" + (null == row.getCell((short) 43) ? "" : row.getCell((short) 43));
-
-
-
 
                             conveysAmount = "" + (null == row.getCell((short) 44) ? "" : row.getCell((short) 44)); // Field Not Available
                             tdsAmount = "" + (null == row.getCell((short) 45) ? "" : row.getCell((short) 45));  // Field Not Available
@@ -4775,5 +4777,36 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.getModelMap().put("employeeMaster", employeeMaster);
         return mv;
 
+    }
+
+    public ModelAndView excelUploadAllowanceSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartFile multipartFile = multipartRequest.getFile("file1");
+        PolicyMaster policyMaster = new PolicyMaster();
+        EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
+        String employeeNo = "";
+        String employeeName = "";
+        
+        
+        if (multipartFile.getSize() > 0) {
+            InputStream file = multipartFile.getInputStream();
+            Workbook workbook = WorkbookFactory.create(file);
+            Sheet sheet = workbook.getSheetAt(0);
+            for (Row row : sheet) {
+                if (row.getRowNum() == 0) {
+                    try {
+                        employeeNo = new BigDecimal("" + (null == row.getCell((short) 0) ? "" : row.getCell((short) 0))).toPlainString();
+                        employeeNo = employeeNo.split("\\.", 2)[0];
+                    } catch (Exception e) {
+                        employeeNo = "" + (null == row.getCell((short) 0) ? "" : row.getCell((short) 0));
+                    }
+
+                }
+
+            }
+        }
+
+        return mv;
     }
 }

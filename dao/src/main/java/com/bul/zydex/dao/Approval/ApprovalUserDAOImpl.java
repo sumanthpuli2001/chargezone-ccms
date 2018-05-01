@@ -25,26 +25,26 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
     @Override
     public List<?> readByApprovalId(int id) {
 
-//        String query = "SELECT a"
-//                + " FROM ApprovalMaster a "
-//                + " left join ApprovalUser b"
-//                + " WHERE a.approvalMaster = " + id;
-//
-//        List<?> list = getHibernateTemplate().find(query);
-        Session s = getSessionFactory().openSession();
-        String sqlString = "SELECT"
-                + " b.id, b.approval_id, b.level, c.id"
-                + " from"
-                + " hr_power_astral.approval_master a"
-                + " left join"
-                + " hr_power_astral.approval_user b on a.id = b.approval_id"
-                + " left join"
-                + " hr_power_astral.employee_master c on b.employee_master_id = c.id"
-                + " where a.id =" + id;
+        String query = "SELECT a"
+                + " FROM ApprovalUser a "
+                + " left join a.approvalMaster b"
+                + " WHERE a.approvalMaster.id = " + id;
 
-        SQLQuery query = s.createSQLQuery(sqlString);
-        List<?> list = query.list();
-        s.close();
+        List<?> list = getHibernateTemplate().find(query);
+//        Session s = getSessionFactory().openSession();
+//        String sqlString = "SELECT"
+//                + " b.id, b.approval_id, b.level, c.id"
+//                + " from"
+//                + " hr_power_astral.approval_master a"
+//                + " left join"
+//                + " hr_power_astral.approval_user b on a.id = b.approval_id"
+//                + " left join"
+//                + " hr_power_astral.employee_master c on b.employee_master_id = c.id"
+//                + " where a.id =" + id;
+//
+//        SQLQuery query = s.createSQLQuery(sqlString);
+//        List<?> list = query.list();
+//        s.close();
 
         return list;
     }
@@ -64,14 +64,33 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
     @Override
     public List<?> reademyId(int emid) {
 
-              String query = "SELECT a"
+        String query = "SELECT a"
                 + " FROM ApprovalUser a "
                 + " left join a.employeeMaster b"
-                + " where a.approvalMaster.id =" +emid;     
+                + " where a.approvalMaster.id =" + emid;
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
-        
-    }
 
     }
+
+    @Override
+    public List<?> readByApprovalFetch(int apid) {
+        Session s = getSessionFactory().openSession();
+        String sqlString = "SELECT"
+                + " b.id, b.approval_id, b.level, c.id"
+                + " from"
+                + " hr_power_astral.approval_master a"
+                + " left join"
+                + " hr_power_astral.approval_user b on a.id = b.approval_id"
+                + " left join"
+                + " hr_power_astral.employee_master c on b.employee_master_id = c.id"
+                + " where a.id =" + apid;
+
+        SQLQuery query = s.createSQLQuery(sqlString);
+        List<?> list = query.list();
+        s.close();
+        return list;
+    }
+
+}

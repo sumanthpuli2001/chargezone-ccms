@@ -157,6 +157,7 @@
                             <li><a href="employeeMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Employee Registration</a></li>
                             <li><a href="employeeMaster.htm?act=formerEmployeeRecords"><i class="fa fa-circle-o"></i>Former Employee Details</a></li>
                             <li><a href="employeeMaster.htm?act=excelUploadRegistration"><i class="fa fa-circle-o"></i>Employee Registration By Excel</a></li>
+                            <li><a href="employeeMaster.htm?act=excelUploadAllowance"><i class="fa fa-circle-o"></i>Allowance By Excel</a></li>
                             <!--                        <li><a href="userMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>User Right</a></li>-->
                         </ul>
                     </li>

@@ -19,4 +19,6 @@ public interface ApprovalUserDAO<T> extends GenericsDAO<T> {
     public List<?> readapprovalempId();
     
     public List<?> reademyId(int emid);
+    
+    public List<?> readByApprovalFetch(int apid);
 }

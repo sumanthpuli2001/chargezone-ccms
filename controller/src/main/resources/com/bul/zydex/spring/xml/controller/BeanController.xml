@@ -393,6 +393,7 @@
         <property name="employeeCtcDetailService" ref="employeeCtcDetailService1" />
         <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
         <property name="formateFullNdFinalLetterService" ref="formateFullNdFinalLetterService1" />
+        <property name="fullAndFinalSettlementValidator" ref="fullAndFinalSettlementValidator1" />
 
     </bean>
     <!--ExitInterview-->
@@ -1222,6 +1223,7 @@
     </bean>
     <bean id="retirementAgeController1" class="com.bul.zydex.controller.Payroll.RetirementAgeController" parent="controllerConfig" >
         <property name="retirementAgeService" ref="retirementAgeService1"></property>
+        <property name="companyMasterValidator" ref="companyMasterValidator1"></property>
 
     </bean>
     

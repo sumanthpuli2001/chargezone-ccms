@@ -6,6 +6,7 @@
 package com.bul.zydex.validator.Company;
 
 import com.bul.zydex.model.Company;
+import com.bul.zydex.model.RetirementAge;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -14,19 +15,22 @@ import org.springframework.validation.Validator;
  *
  * @author Hussain
  */
-public class CompanyMasterValidator implements Validator {
+public class companyMasterValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> type) {
-        return Company.class.equals(type);
+        return RetirementAge.class.equals(type);
     }
 
     @Override
     public void validate(Object o, Errors errors) {
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"companyName",
-                "field.error1", "None");
-        Company company = (Company) o;
-
+        RetirementAge retirementAge = (RetirementAge)o;
+        
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "retireAge",
+                "field.error13", "None");
+        
     }
+
+  
 
 }

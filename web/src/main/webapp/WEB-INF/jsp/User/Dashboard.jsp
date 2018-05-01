@@ -138,13 +138,13 @@
                                                                                 <table cellpadding="0" cellspacing="0" border="0" width="105px">
                                                                                 </c:if>
                                                                                 <c:if test="${subordinateCount == 2}">
-                                                                                    <table cellpadding="0" cellspacing="0" border="0" width="200px">
+                                                                                    <table cellpadding="0" cellspacing="0" border="0" width="50px">
                                                                                     </c:if>
                                                                                     <c:if test="${subordinateCount == 3}">
-                                                                                        <table cellpadding="0" cellspacing="0" border="0" width="310px">
+                                                                                        <table cellpadding="0" cellspacing="0" border="0" width="50px">
                                                                                         </c:if>
                                                                                         <c:if test="${subordinateCount == 4}">
-                                                                                            <table cellpadding="0" cellspacing="0" border="0" width="315px">
+                                                                                            <table cellpadding="0" cellspacing="0" border="0" width="50px">
                                                                                             </c:if>
                                                                                             <tbody>
                                                                                                 <tr class="node-cells">
@@ -231,8 +231,8 @@
                                                                                                             </c:if>
                                                                                                         </tr>
                                                                                                         <tr>
-                                                                                                            <c:if test="${subordinateCount >= 1}">
-                                                                                                                <td class="node-container" colspan="2">
+                                                                                                            <%--<c:if test="${subordinateCount >= 1}">--%>
+<!--                                                                                                                <td class="node-container" colspan="2">
                                                                                                                     <table cellpadding="0" cellspacing="0" border="0">
                                                                                                                         <tbody>
                                                                                                                             <tr class="node-cells">
@@ -244,10 +244,10 @@
                                                                                                                                 </td></tr>
                                                                                                                         </tbody>
                                                                                                                     </table>
-                                                                                                                </td>
-                                                                                                            </c:if>
-                                                                                                            <c:if test="${subordinateCount >= 2}">
-                                                                                                                <td class="node-container" colspan="2">
+                                                                                                                </td>-->
+                                                                                                            <%--</c:if>--%>
+                                                                                                            <%--<c:if test="${subordinateCount >= 2}">--%>
+<!--                                                                                                                <td class="node-container" colspan="2">
                                                                                                                     <table cellpadding="0" cellspacing="0" border="0">
                                                                                                                         <tbody>
                                                                                                                             <tr class="node-cells">
@@ -260,10 +260,10 @@
                                                                                                                             </tr>
                                                                                                                         </tbody>
                                                                                                                     </table>
-                                                                                                                </td>
-                                                                                                            </c:if>
-                                                                                                            <c:if test="${subordinateCount >= 3}">
-                                                                                                                <td class="node-container" colspan="2">
+                                                                                                                </td>-->
+                                                                                                            <%--</c:if>--%>
+                                                                                                            <%--<c:if test="${subordinateCount >= 3}">--%>
+<!--                                                                                                                <td class="node-container" colspan="2">
                                                                                                                     <table cellpadding="0" cellspacing="0" border="0">
                                                                                                                         <tbody>
                                                                                                                             <tr class="node-cells">
@@ -276,10 +276,10 @@
                                                                                                                             </tr>
                                                                                                                         </tbody>
                                                                                                                     </table>
-                                                                                                                </td>
-                                                                                                            </c:if>
-                                                                                                            <c:if test="${subordinateCount >= 4}">
-                                                                                                                <td class="node-container" colspan="2">
+                                                                                                                </td>-->
+                                                                                                            <%--</c:if>--%>
+                                                                                                            <%--<c:if test="${subordinateCount >= 4}">--%>
+<!--                                                                                                                <td class="node-container" colspan="2">
                                                                                                                     <table cellpadding="0" cellspacing="0" border="0">
                                                                                                                         <tbody>
                                                                                                                             <tr class="node-cells">
@@ -292,8 +292,8 @@
                                                                                                                             </tr>
                                                                                                                         </tbody>
                                                                                                                     </table>
-                                                                                                                </td>
-                                                                                                            </c:if>
+                                                                                                                </td>-->
+                                                                                                            <%--</c:if>--%>
                                                                                                         </tr>
                                                                                                     </c:if>
 
@@ -410,9 +410,9 @@
 
 
 
-                                                                                <c:if test="${totalSubordinates > 4}">
-                                                                                    <div style="text-align: center;margin-left: 250px;"><a href="employeeMaster.htm?act=viewEmployeeSubordinate&id=${logedInEmpId}" class="uppercase">${subordinateAddiCount} more Subordinates...</a></div>
-                                                                                </c:if>
+                                                                                <%--<c:if test="${totalSubordinates > 4}">--%>
+                                                                                    <!--<div style="text-align: center;margin-left: 250px;"><a href="employeeMaster.htm?act=viewEmployeeSubordinate&id=${logedInEmpId}" class="uppercase">${subordinateAddiCount} more Subordinates...</a></div>-->
+                                                                                <%--</c:if>--%>
                                                                                 </div><!-- /.box-body -->
                                                                                 <div class="box-footer text-center">
                                                                                     <a href="employeeMaster.htm?act=viewEmployeeSubordinate&id=${logedInEmpId}" class="uppercase">View All Employees</a>

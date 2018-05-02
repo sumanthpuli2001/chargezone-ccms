@@ -649,6 +649,7 @@
     </bean>
     <bean id="taxDeductionDeclarationSavingStatusService1" class="com.bul.zydex.service.Payroll.TaxDeductionDeclarationSavingStatusServiceImpl">
         <property name="taxDeductionDeclarationSavingStatusDAO" ref="taxDeductionDeclarationSavingStatusDAO1" />
+    </bean>
 
     <bean id="fullAndFinalSettlementService1" class="com.bul.zydex.service.resignation.FullAndFinalSettlementServiceImpl">
         <property name="fullAndFinalSettlementDAO" ref="fullAndFinalSettlementDAO1"/>

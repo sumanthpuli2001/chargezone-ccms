@@ -2180,7 +2180,8 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         query += "SELECT a.id FROM EmployeeMaster a ORDER BY a.id ASC";
 
         return getHibernateTemplate().find(query);
-    
     }
 
-}
+    }
+
+    

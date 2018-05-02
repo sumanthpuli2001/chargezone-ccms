@@ -265,6 +265,14 @@ public class PayrollEmployeeFormSixteenAbstract extends CustomAbstract {
         this.payrollTaxDeductionComponentService = payrollTaxDeductionComponentService;
     }
 
+    public TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> getTaxDeductionDecarationSubmitService() {
+        return taxDeductionDecarationSubmitService;
+    }
+
+    public void setTaxDeductionDecarationSubmitService(TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> taxDeductionDecarationSubmitService) {
+        this.taxDeductionDecarationSubmitService = taxDeductionDecarationSubmitService;
+    }
+
     public TaxSavingSubmitService<TaxSavingSubmit> getTaxSavingSubmitService() {
         return taxSavingSubmitService;
     }

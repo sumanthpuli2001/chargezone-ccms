@@ -30,5 +30,10 @@ public class QuestionAnswerSubmitServiceImpl<T> extends GenericsServiceImpl<T> i
     public List<?> readByCandidateApplicationId(int appId) {
        return questionAnswerSubmitDAO.readByCandidateApplicationId(appId);
     }
+
+    @Override
+    public List<?> deletelibryId(String libraryId) {
+         return questionAnswerSubmitDAO.deletelibryId(libraryId);
+    }
     
 }

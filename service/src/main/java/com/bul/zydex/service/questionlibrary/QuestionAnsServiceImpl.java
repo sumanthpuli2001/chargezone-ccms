@@ -42,4 +42,9 @@ public class QuestionAnsServiceImpl<T> extends GenericsServiceImpl<T>
       return questionAnsDAO.takeTestOnlineAssementCandidateAnswer(questionLibraryID);
     }
 
+    @Override
+    public List<?> deleteqlibryId(String libraryId) {
+          return questionAnsDAO.deleteqlibryId(libraryId);
+    }
+
 }

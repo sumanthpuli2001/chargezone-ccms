@@ -18,13 +18,26 @@ public interface TaxDeductionDecarationSubmitService<T> extends GenericsService<
     public List readComponentByTaxSavingSubmitId(Integer taxSavingSubmitId, Integer tdmId);
 
     public List<?> readSectionByDeclarationId(Integer taxSavingSubmitId);
-    
+
     public List<?> readSectionBySubmitSectionId(Integer tddsId);
 
     public List<?> readSectionByDeclarationId(Integer tssId, Integer tdmId, Integer tdcId);
 
     public List<?> readPendingByEmployeeId(int empid);
-    
+
     public List<?> readApproveByTaxSavingId(int empid);
-    
+
+    public List<?> readTaxDeductionDecarationSubmit(int taxSavingSubmitID);
+
+    public List<?> readTaxDeductionDecarationSubmitAmount(int taxSavingSubmitID, int taxDeductionMaster, int taxDeductioncomponent);
+
+    public List<?> readByTaxDeductionDecarationDelete(int taxSavingSubmit);
+
+    public List<?> readByTaxDeductionDecarationFetchRead(int taxSavingSubmit, int taxDeductionMaster, int taxDeductioncomponent);
+
+    public List<?> readTaxDeductionDecarationSubmitSalaryGenerate(int taxSavingSubmitID);
+
+    public List<?> readTaxDeductionDecarationSubmitSalaryGenerateAfterDate(int taxSavingSubmitID);
+
+    public List<?> readTaxDeductionDecarationSubmitSalaryGenerateTaxSavingLimit(int taxSavingSubmitID);
 }

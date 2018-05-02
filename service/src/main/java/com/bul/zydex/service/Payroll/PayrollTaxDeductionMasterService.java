@@ -23,6 +23,10 @@ public interface PayrollTaxDeductionMasterService<T> extends GenericsService<T> 
 
     public List<?> readTaxDeductionForFormSixteen();
 
+    public List<?> readTaxDeductionForFormSixteenFetch(int taxMasterid);
+
     public List<?> readSectionByName(String sectionName);
+
+    public List readSectionAmount();
 
 }

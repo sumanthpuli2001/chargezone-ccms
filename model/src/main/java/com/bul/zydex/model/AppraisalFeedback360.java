@@ -26,6 +26,7 @@ public class AppraisalFeedback360 implements java.io.Serializable {
     private String wlb4Remark;
     private String wlb5Remark;
     private String feedbackYear;
+    private String cycleName;
 
     public AppraisalFeedback360() {
     }
@@ -223,6 +224,14 @@ public class AppraisalFeedback360 implements java.io.Serializable {
 
     public void setFeedbackYear(String feedbackYear) {
         this.feedbackYear = feedbackYear;
+    }
+
+    public String getCycleName() {
+        return cycleName;
+    }
+
+    public void setCycleName(String cycleName) {
+        this.cycleName = cycleName;
     }
 
 }

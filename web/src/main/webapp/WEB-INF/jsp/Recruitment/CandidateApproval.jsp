@@ -337,7 +337,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="col-sm-6">
-                                                                    <label>Experience Date Joining Month:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <label>Experience In Month:</label> &nbsp;&nbsp;&nbsp;
                                                                     <span>${candidateApplyJob.experianceDateJoiningMonth}</span>
                                                                 </div>
                                                                 <div class="col-sm-6">

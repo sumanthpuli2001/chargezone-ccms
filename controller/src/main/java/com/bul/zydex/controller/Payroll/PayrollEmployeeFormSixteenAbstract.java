@@ -27,6 +27,7 @@ import com.bul.zydex.model.PayrollSalaryType;
 import com.bul.zydex.model.PayrollTaxDeductionComponent;
 import com.bul.zydex.model.PayrollTaxDeductionMaster;
 import com.bul.zydex.model.TaxDeductionDecarationSubmit;
+import com.bul.zydex.model.TaxSavingSubmit;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.service.Payroll.AdditionalAmountCheckService;
 import com.bul.zydex.service.Payroll.EmployeeAdditionalSalaryService;
@@ -48,6 +49,7 @@ import com.bul.zydex.service.Payroll.PayrollSavingAmountService;
 import com.bul.zydex.service.Payroll.PayrollTaxDeductionComponentService;
 import com.bul.zydex.service.Payroll.PayrollTaxDeductionMasterService;
 import com.bul.zydex.service.Payroll.TaxDeductionDecarationSubmitService;
+import com.bul.zydex.service.Payroll.TaxSavingSubmitService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.emp.EmployeeTypeService;
 import com.bul.zydex.service.zydexLocation.ZydexLocationMasterService;
@@ -85,6 +87,7 @@ public class PayrollEmployeeFormSixteenAbstract extends CustomAbstract {
     protected PayrollTaxDeductionMasterService<PayrollTaxDeductionMaster> payrollTaxDeductionMasterService;
     protected PayrollTaxDeductionComponentService<PayrollTaxDeductionComponent> payrollTaxDeductionComponentService;
     protected TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> taxDeductionDecarationSubmitService;
+    protected TaxSavingSubmitService<TaxSavingSubmit> taxSavingSubmitService;
 
     public TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> getTaxDeductionDecarationSubmitService() {
         return taxDeductionDecarationSubmitService;
@@ -261,6 +264,15 @@ public class PayrollEmployeeFormSixteenAbstract extends CustomAbstract {
     public void setPayrollTaxDeductionComponentService(PayrollTaxDeductionComponentService<PayrollTaxDeductionComponent> payrollTaxDeductionComponentService) {
         this.payrollTaxDeductionComponentService = payrollTaxDeductionComponentService;
     }
+
+    public TaxSavingSubmitService<TaxSavingSubmit> getTaxSavingSubmitService() {
+        return taxSavingSubmitService;
+    }
+
+    public void setTaxSavingSubmitService(TaxSavingSubmitService<TaxSavingSubmit> taxSavingSubmitService) {
+        this.taxSavingSubmitService = taxSavingSubmitService;
+    }
+    
 
     protected void EmployeeTypeList(HttpServletRequest request) {
         List<?> EmployeeTypeList = employeeTypeService.read();

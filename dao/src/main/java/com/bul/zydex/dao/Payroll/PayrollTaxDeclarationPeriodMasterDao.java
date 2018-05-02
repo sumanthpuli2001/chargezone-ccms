@@ -15,5 +15,11 @@ import java.util.List;
 public interface PayrollTaxDeclarationPeriodMasterDao<T> extends GenericsDAO<T> {
 
     public List<?> readDeclarationPeriod();
-    
+
+    public List<?> readPayrollTaxDeclarationPeriodMaster(int finicialYearID, String month, String year);
+
+    public List<?> readPayrollTaxDeclarationPeriodMasterBefore(int finicialYearID, String month, String year);
+
+    public List<?> readPayrollTaxDeclarationPeriodMasterAfterProofDate(int finicialYearID, String month, String year);
+
 }

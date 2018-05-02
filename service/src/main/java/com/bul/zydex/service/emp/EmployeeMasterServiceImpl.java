@@ -374,12 +374,37 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
 
     @Override
     public List<?> searchEmployeeDetailForContactInfo(String searchString) {
-          return employeeMasterDAO.searchEmployeeDetailForContactInfo(searchString);
+        return employeeMasterDAO.searchEmployeeDetailForContactInfo(searchString);
     }
 
     @Override
-    public List<?> readEmployeeList(int id,int empid) {
-        return employeeMasterDAO.readEmployeeList(id,empid);
+    public List<?> readEmployeeList(int id, int empid) {
+        return employeeMasterDAO.readEmployeeList(id, empid);
+    }
+
+    @Override
+    public List<?> checkSubordinate(int empId, int managerEmpId) {
+        return employeeMasterDAO.checkSubordinate(empId, managerEmpId);
+    }
+
+    @Override
+    public List<?> checkSuprior(int empId, int managerEmpId) {
+        return employeeMasterDAO.checkSuprior(empId, managerEmpId);
+    }
+
+    @Override
+    public List<?> readByEmployeeNo1(String employeeNo) {
+        return employeeMasterDAO.readByEmployeeNo1(employeeNo);
+    }
+
+    @Override
+    public List<?> readEmId(String EmployeeId) {
+        return employeeMasterDAO.readEmId(EmployeeId);
+    }
+
+    @Override
+    public List<?> getByEmployeeNo(String employeeNo) {
+        return employeeMasterDAO.getByEmployeeNo(employeeNo);
     }
 
     @Override

@@ -261,5 +261,10 @@
     <bean id="taxSavingSubmitDAO1" class="com.bul.zydex.dao.Payroll.TaxSavingSubmitDAOImpl" parent="sessionFactoryConfig"/>
     <bean id="payrollTaxDeclarationPeriodMasterDao1" class="com.bul.zydex.dao.Payroll.PayrollTaxDeclarationPeriodMasterDaoImpl" parent="sessionFactoryConfig"></bean>
     <bean id="payrollTaxRateMasterDao1" class="com.bul.zydex.dao.Payroll.PayrollTaxRateMasterDaoImpl" parent="sessionFactoryConfig"/>
+    <bean id="fullAndFinalSettlementDAO1" class="com.bul.zydex.dao.resignation.FullAndFinalSettlementDAOImpl" parent="sessionFactoryConfig"/>
+    <bean id="formateFullNdFinalLetterDAO1" class="com.bul.zydex.dao.FullAndFinalSetllement.FormateFullNdFinalLetterDAOImpl" parent="sessionFactoryConfig"/>
+    <bean id="kaizenMasterDAO1" class="com.bul.zydex.dao.Kaizen.KaizenMasterDAOImpl" parent="sessionFactoryConfig"/>
+    <bean id="kaizenApprovalDAO1" class="com.bul.zydex.dao.Kaizen.KaizenApprovalDAOImpl" parent="sessionFactoryConfig"/>
+    <bean id="leaveEmployeeDetailsApprovalHistoryDAO1" class="com.bul.zydex.dao.leave.LeaveEmployeeDetailsApprovalHistoryDAOImpl" parent="sessionFactoryConfig"/>
     <bean id="taxDeductionDeclarationSavingStatusDAO1" class="com.bul.zydex.dao.Payroll.TaxDeductionDeclarationSavingStatusDAOImpl" parent="sessionFactoryConfig" />
 </beans>

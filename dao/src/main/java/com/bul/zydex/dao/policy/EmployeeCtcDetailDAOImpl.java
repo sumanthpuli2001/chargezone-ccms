@@ -9,6 +9,8 @@ import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.EmployeeCtcDetail;
 import com.bul.zydex.model.EmployeeMaster;
 import java.util.List;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 /**
  *
@@ -68,4 +70,60 @@ public class EmployeeCtcDetailDAOImpl<T> extends GenericsDAOImpl<T> implements E
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> empid(int employeeid) {
+
+//        String query = "SELECT b.id, b.ctcAllowance, b.employeeMaster, b.amount, b.monthly, b.yearly"
+//                + " FROM EmployeeCtcDetail a "
+//                + " INNER JOIN EmployeeCtcDetailSalary b ON  b.monthly = a.month "
+//                + " WHERE b.employeeMaster=" + employeeid 
+//                + " group by b.ctcAllowance";
+        Session s = getSessionFactory().openSession();
+        String sqlString = "SELECT"
+                + "  b.id, b.ctc_allowance_id, b.employee_master_id, b.amount, b.month , b.year"
+                + " FROM"
+                + " hr_power_astral.employee_ctc_detail a"
+                + " INNER JOIN"
+                + " hr_power_astral.employee_ctc_detail_salary b"
+                + " ON b.monthly  = a.month"
+                + " WHERE  b.employee_master_id =" + employeeid
+                + " group by b.ctc_allowance_id";
+        SQLQuery query = s.createSQLQuery(sqlString);
+        List<?> list = query.list();
+        s.close();
+//        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public List<?> CtcDetailempid(int employeeid) {
+        String query = "SELECT a"
+                + " FROM EmployeeCtcDetail a "
+                + " WHERE a.employeeMaster=" + employeeid;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public List<?> readctcRegistration(int employeeid) {
+        String query = "";
+        query += "select a"
+                + " FROM EmployeeCtcDetail a "
+                + " left join a.ctcAllowance b"
+                + " where a.employeeMaster.id=" + employeeid;
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> CtcDetailempidMasterSalary(int employeeid, int ctcAllowanceId) {
+        String query = " Select c.ctcName,a.amount"
+                + " From EmployeeCtcDetail a"
+                + " left join a.ctcAllowance c"
+                + " where a.employeeMaster.id=" + employeeid
+                + " and c.id=" + ctcAllowanceId;
+
+        return getHibernateTemplate().find(query);
+    }
 }

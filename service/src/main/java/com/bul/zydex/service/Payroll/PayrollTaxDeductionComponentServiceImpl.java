@@ -46,4 +46,9 @@ public class PayrollTaxDeductionComponentServiceImpl<T> extends GenericsServiceI
         return payrollTaxDeductionComponentDao.readComponent();
     }
 
+    @Override
+    public int getTaxMasterID(int componentID) {
+        return payrollTaxDeductionComponentDao.getTaxMasterID(componentID);
+    }
+
 }

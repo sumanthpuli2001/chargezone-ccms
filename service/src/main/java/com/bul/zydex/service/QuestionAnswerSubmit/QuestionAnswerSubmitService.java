@@ -15,4 +15,6 @@ import java.util.List;
 public interface QuestionAnswerSubmitService<T> extends GenericsService<T> {
 
     public List<?> readByCandidateApplicationId(int appId);
+
+    public List<?> deletelibryId(String libraryId);
 }

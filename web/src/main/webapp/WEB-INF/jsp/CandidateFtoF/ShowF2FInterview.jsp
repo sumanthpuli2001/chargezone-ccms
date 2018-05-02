@@ -324,11 +324,11 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Experience Date Joining Year:</label> &nbsp;&nbsp;&nbsp;
+                                                            <label>Experience In Year:</label> &nbsp;&nbsp;&nbsp;
                                                             <span>${candidateF2FRequest.candidateApplyJob.experianceDateJoiningYear}</span>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>Experience Date Joining Month:</label> &nbsp;&nbsp;&nbsp;
+                                                            <label>Experience In Month:</label> &nbsp;&nbsp;&nbsp;
                                                             <span>${candidateF2FRequest.candidateApplyJob.experianceDateJoiningMonth}</span>
                                                         </div>
                                                     </div>

@@ -33,4 +33,6 @@ public interface Appraisal360Service<T> extends GenericsService<T> {
     public int countEmployeeAppraisalFeedback(int id);
 
     public List<?> readByEmpIdAndYear(int empId, String Year);
+
+    public List<?> readByEmpIdAndCname(int empId, String cycleName);
 }

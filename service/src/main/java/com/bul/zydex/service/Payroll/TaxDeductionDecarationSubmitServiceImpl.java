@@ -28,6 +28,40 @@ public class TaxDeductionDecarationSubmitServiceImpl<T> extends GenericsServiceI
     }
 
     @Override
+    public List<?> readTaxDeductionDecarationSubmit(int taxSavingSubmitID) {
+        return taxDeductionDecarationSubmitDAO.readTaxDeductionDecarationSubmit(taxSavingSubmitID);
+    }
+
+    @Override
+    public List<?> readTaxDeductionDecarationSubmitAmount(int taxSavingSubmitID, int taxDeductionMaster, int taxDeductioncomponent) {
+        return taxDeductionDecarationSubmitDAO.readTaxDeductionDecarationSubmitAmount(taxSavingSubmitID, taxDeductionMaster, taxDeductioncomponent);
+    }
+
+    @Override
+    public List<?> readByTaxDeductionDecarationDelete(int taxSavingSubmit) {
+        return taxDeductionDecarationSubmitDAO.readByTaxDeductionDecarationDelete(taxSavingSubmit);
+    }
+
+    @Override
+    public List<?> readByTaxDeductionDecarationFetchRead(int taxSavingSubmit, int taxDeductionMaster, int taxDeductioncomponent) {
+        return taxDeductionDecarationSubmitDAO.readByTaxDeductionDecarationFetchRead(taxSavingSubmit, taxDeductionMaster, taxDeductioncomponent);
+    }
+
+    @Override
+    public List<?> readTaxDeductionDecarationSubmitSalaryGenerate(int taxSavingSubmitID) {
+        return taxDeductionDecarationSubmitDAO.readTaxDeductionDecarationSubmitSalaryGenerate(taxSavingSubmitID);
+    }
+
+    @Override
+    public List<?> readTaxDeductionDecarationSubmitSalaryGenerateAfterDate(int taxSavingSubmitID) {
+        return taxDeductionDecarationSubmitDAO.readTaxDeductionDecarationSubmitSalaryGenerateAfterDate(taxSavingSubmitID);
+    }
+
+    @Override
+    public List<?> readTaxDeductionDecarationSubmitSalaryGenerateTaxSavingLimit(int taxSavingSubmitID) {
+     return taxDeductionDecarationSubmitDAO.readTaxDeductionDecarationSubmitSalaryGenerateTaxSavingLimit(taxSavingSubmitID);
+    }
+
     public List<?> readSectionBySubmitSectionId(Integer tddsId) {
         return taxDeductionDecarationSubmitDAO.readSectionBySubmitSectionId(tddsId);
     }

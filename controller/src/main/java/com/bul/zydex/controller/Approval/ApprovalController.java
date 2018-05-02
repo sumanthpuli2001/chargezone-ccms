@@ -15,7 +15,6 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -112,7 +111,7 @@ public class ApprovalController extends ApprovalAbstract {
             }
         }
 
-        mv = createApprovalSetting(request, response);
+        mv = approvalList(request, response);
 
         return mv;
 
@@ -137,17 +136,26 @@ public class ApprovalController extends ApprovalAbstract {
         ModelAndView mv = new ModelAndView();
         ApprovalMaster approvalMaster = new ApprovalMaster();
         ApprovalMaster approvalMaster2 = new ApprovalMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
         ApprovalUser approvalUser = new ApprovalUser();
         String id = request.getParameter("id");
-        approvalUser = approvalUserService.readById(Integer.parseInt(id));
-        List<?> approvalUserList = approvalUserService.readByApprovalId(Integer.parseInt(id));
+        int emid = 0;
+        List<?> approvalUser1 = approvalUserService.reademyId(Integer.parseInt(id));
+        ApprovalUser au = (ApprovalUser) approvalUser1.get(0);
+//        List<?> approvalUserList = approvalUserService.readByApprovalId(Integer.parseInt(id));
+        List<?> approvalUserList = approvalUserService.readByApprovalFetch(Integer.parseInt(id));
        
+          for (int i = 0; i < approvalUser1.size(); i++) {
+            ApprovalUser au1 = (ApprovalUser) approvalUser1.get(i);
+            emid  = au1.getEmployeeMaster().getId();
+        }
+        
 //        approvalMaster = approvalMasterService.readById(approvalUser.getApprovalMaster().getId());
         approvalMaster = approvalMasterService.readById(Integer.parseInt(id));
         approvalUser = approvalUserService.readById(Integer.parseInt(id));
 
-        EmployeeMaster employeeMaster = new EmployeeMaster();
-        employeeMaster= approvalUser.getEmployeeMaster();
+        
+        employeeMaster = employeeMasterService.readById(emid);
         selectedEmployeeFor360Feedback(request, employeeMaster);
         selectEmployee(request, response);
 

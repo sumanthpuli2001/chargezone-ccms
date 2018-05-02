@@ -31,6 +31,9 @@ import com.bul.zydex.model.PayrollRecurringAdditionalAmount;
 import com.bul.zydex.model.PayrollRecurringDeduction;
 import com.bul.zydex.model.PayrollSalaryLock;
 import com.bul.zydex.model.PayrollSalaryType;
+import com.bul.zydex.model.PayrollTaxRateMaster;
+import com.bul.zydex.model.PolicyMaster;
+import com.bul.zydex.model.TaxSavingSubmit;
 import com.bul.zydex.util.DownloadFile;
 import java.io.File;
 import java.io.InputStream;
@@ -372,44 +375,55 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             employeeDeductionAmountService.create(employeeDeductionAmount);
         }
         ///////////////////////PF Start Here///////////////////////
+
         EmployeeMaster employeeMaster = new EmployeeMaster();
         employeeMaster = employeeMasterService.readById(employeeSalaryProcess.getEmployeeMaster().getId());
+        if (employeeMaster1.getPf() == true) {
+            boolean pfFlag = payrollPfCheckService.readForPfCheck(employeeMaster.getEmployeeTypeMaster().getId(),
+                    employeeMaster.getEmployeeSubType().getId());
 
-        boolean pfFlag = payrollPfCheckService.readForPfCheck(employeeMaster.getEmployeeTypeMaster().getId(),
-                employeeMaster.getEmployeeSubType().getId());
-
-        if (pfFlag) {
-            List<?> pfAmountList = payrollProvidentFundService.readPf(employeeMaster.getZydexLocationMaster().getId());
+            if (pfFlag) {
+                List<?> pfAmountList = payrollProvidentFundService.readPf(employeeMaster.getZydexLocationMaster().getId());
 //         for (Object oPf : pfAmountList) {
-            double maxiAmount = 0;
-            if (!pfAmountList.isEmpty()) {
-                PayrollProvidentFund payrollProvidentFund = (PayrollProvidentFund) pfAmountList.get(0);
-                double basicSalary = employeeSalaryProcess.getEmployeeBasicSalary();
-                double pf = Double.parseDouble(payrollProvidentFund.getPfPercentage());
-                maxiAmount = Double.parseDouble(employeeMaster.getPfAmount());
+                double maxiAmount = 0;
+                if (!pfAmountList.isEmpty()) {
+                    PayrollProvidentFund payrollProvidentFund = (PayrollProvidentFund) pfAmountList.get(0);
+                    double basicSalary = employeeSalaryProcess.getEmployeeBasicSalary();
+                    double pf = Double.parseDouble(payrollProvidentFund.getPfPercentage());
+                    maxiAmount = Double.parseDouble(employeeMaster.getPfAmount());
+                    double taxpf = 0;
+                    if (maxiAmount != 0) {
+                        if (maxiAmount <= basicSalary) {
 
-                double taxpf = 0;
-                if (maxiAmount <= basicSalary) {
+                            taxpf = (maxiAmount * pf / 100);
 
-                    taxpf = (maxiAmount * pf / 100);
+                            employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                            employeeDeductionAmount.setDeductionType("Provident Fund");
+                            employeeDeductionAmount.setDeductionAmount(taxpf);
+                            employeeDeductionAmountService.create(employeeDeductionAmount);
+                        } else {
+                            taxpf = basicSalary * pf / 100;
 
-                    employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
-                    employeeDeductionAmount.setDeductionType("Provident Fund");
-                    employeeDeductionAmount.setDeductionAmount(taxpf);
-                    employeeDeductionAmountService.create(employeeDeductionAmount);
-                } else {
-                    taxpf = basicSalary * pf / 100;
+                            employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                            employeeDeductionAmount.setDeductionType("Provident Fund");
+                            employeeDeductionAmount.setDeductionAmount(taxpf);
+                            employeeDeductionAmountService.create(employeeDeductionAmount);
+                        }
 
-                    employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
-                    employeeDeductionAmount.setDeductionType("Provident Fund");
-                    employeeDeductionAmount.setDeductionAmount(taxpf);
-                    employeeDeductionAmountService.create(employeeDeductionAmount);
+                    } else {
+                        taxpf = basicSalary * pf / 100;
+
+                        employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                        employeeDeductionAmount.setDeductionType("Provident Fund");
+                        employeeDeductionAmount.setDeductionAmount(taxpf);
+                        employeeDeductionAmountService.create(employeeDeductionAmount);
+
+                    }
+
                 }
 
             }
-
         }
-
         /////////////////PT Starts  here///////////
         double additionalAmt = 0;
         List<?> additionalAmount = employeeAdditionalSalaryService.readAdditionalAmount(employeeSalaryProcess.getId());
@@ -435,42 +449,41 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         double netSalary = (employeeSalaryProcess.getEmployeeBasicSalary() + additionalAmt);
         double netSalarywithOtamount = (employeeSalaryProcess.getEmployeeBasicSalary() + additionalAmtwithoutOtAmount);
         double netSalarywithOtamount1 = (Double.parseDouble(employeeMaster.getBasicSalary()) + additionalAmtwithoutOtAmount);
+        if (employeeMaster1.getPt() == true) {
+            boolean ptFlag = payrollPtCheckService.readForPTCheck(employeeMaster.getEmployeeTypeMaster().getId(),
+                    employeeMaster.getEmployeeSubType().getId());
+            if (ptFlag) {
+                double ptAmount = 0;
+                List<?> ptAmountList = payrollProfessionalTaxService.read();
+                PayrollProfessionalTax payrollProfessionalTax = new PayrollProfessionalTax();
+                for (Iterator<? extends Object> iterator = ptAmountList.iterator(); iterator.hasNext();) {
+                    payrollProfessionalTax = (PayrollProfessionalTax) iterator.next();
+                    double salaryForm = Double.parseDouble(payrollProfessionalTax.getSalaryFrom());
+                    double salaryTo = Double.parseDouble(payrollProfessionalTax.getSalaryTo());
 
-        boolean ptFlag = payrollPtCheckService.readForPTCheck(employeeMaster.getEmployeeTypeMaster().getId(),
-                employeeMaster.getEmployeeSubType().getId());
-        if (ptFlag) {
-            double ptAmount = 0;
-            List<?> ptAmountList = payrollProfessionalTaxService.read();
-            PayrollProfessionalTax payrollProfessionalTax = new PayrollProfessionalTax();
-            for (Iterator<? extends Object> iterator = ptAmountList.iterator(); iterator.hasNext();) {
-                payrollProfessionalTax = (PayrollProfessionalTax) iterator.next();
-                double salaryForm = Double.parseDouble(payrollProfessionalTax.getSalaryFrom());
-                double salaryTo = Double.parseDouble(payrollProfessionalTax.getSalaryTo());
-
-                if (netSalary >= salaryForm && netSalary <= salaryTo) {
+                    if (netSalary >= salaryForm && netSalary <= salaryTo) {
 //                if (salaryForm >= netSalary && salaryTo <= netSalary) {
 
-                    break;
+                        break;
 
-                } else {
-                    iterator.remove();
+                    } else {
+                        iterator.remove();
+                    }
                 }
-            }
 
 //            List<?> ptAmountList = payrollProfessionalTaxService.readPT(netSalary);
-            if (!ptAmountList.isEmpty()) {
-                ptAmount = Double.parseDouble(payrollProfessionalTax.getAmount());
+                if (!ptAmountList.isEmpty()) {
+                    ptAmount = Double.parseDouble(payrollProfessionalTax.getAmount());
 
-                employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
-                employeeDeductionAmount.setDeductionType("Professional Tax");
-                employeeDeductionAmount.setDeductionAmount(ptAmount);
-                employeeDeductionAmountService.create(employeeDeductionAmount);
+                    employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                    employeeDeductionAmount.setDeductionType("Professional Tax");
+                    employeeDeductionAmount.setDeductionAmount(ptAmount);
+                    employeeDeductionAmountService.create(employeeDeductionAmount);
+                }
             }
         }
-
 //        TDs start here
 //        double tdsAmount = Double.parseDouble(employeeMaster1.getTdsAmount());
-
 //        if (tdsAmount != 0) {
 //
 //            employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
@@ -478,7 +491,6 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //            employeeDeductionAmount.setDeductionAmount(tdsAmount);
 //            employeeDeductionAmountService.create(employeeDeductionAmount);
 //        }
-
         /// tds end here  
         ////////////////////// PT Ends Here ///////////////////////////
         /////////////////////ESIC Start Here///////////////////////
@@ -725,6 +737,503 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         employeeSalaryProcess.setGrossTotal(netSalary);
         employeeSalaryProcessService.update(employeeSalaryProcess);
 
+        ///// tax deduction ///////
+        /// curent Salary attional with taaxable 
+        Double totalGrosswithTaxable = 0.0;
+        Double employeeSalary154 = employeeSalaryProcess.getEmployeeBasicSalary();
+        double allowanceWithtaxable = 0;
+
+        List<?> cureentSalaryWithTaxation = employeePolicyDetailService.readBypolicyAmountWithTaxable(employeeSalaryProcess.getEmployeeMaster().getId());
+        if (!cureentSalaryWithTaxation.isEmpty()) {
+            allowanceWithtaxable = (Double) cureentSalaryWithTaxation.get(0);
+        }
+        /// payroll taxdeduction amount 
+        Double payrollTaxDeductionAamount = 0.0;
+        List<?> payrolltaxdeductioonAmountList = payrollTaxDeductionMasterService.readSectionAmount();
+        if (!payrolltaxdeductioonAmountList.isEmpty()) {
+            for (Object payrolltaxdeductioonAmountList1 : payrolltaxdeductioonAmountList) {
+                Object[] o5 = (Object[]) payrolltaxdeductioonAmountList1;
+                Integer finicailyearID15 = (Integer) o5[0];
+                payrollTaxDeductionAamount += finicailyearID15;
+            }
+//            payrollTaxDeductionAamount = (Double) payrolltaxdeductioonAmountList.get(0);
+        }
+
+        Integer locationId = employeeMaster.getZydexLocationMaster().getId();
+        String month = employeeSalaryProcess.getMonth();
+        String year = employeeSalaryProcess.getYear();
+        Integer emplID3 = employeeSalaryProcess.getEmployeeMaster().getId();
+        Double additionalAmount5 = 0.0;
+        Double basicSlaryTotal21 = 0.0;
+        Double totalGrossBasicAllowance = 0.0;
+        Double grossTotalAssumeSalary = 0.0;
+        Double yearSalaryGrossTotal = 0.0;
+        List<?> finicailyear = payrollFinancialYearService.readDayFinancialYear(locationId, month, year);
+        if (!finicailyear.isEmpty()) {
+            for (Object finicialyearList : finicailyear) {
+                Object[] o = (Object[]) finicialyearList;
+
+                Integer finicailyearID = (Integer) o[0];
+                String startDate = (String) o[1];
+                String endateDate = (String) o[2];
+                String[] endDateSplited = endateDate.split("/");
+                Integer currentMonth = Integer.parseInt(endDateSplited[1]) - Integer.parseInt(month);
+                if (currentMonth < 0) {
+                    currentMonth = 12 + currentMonth + 1;
+                }
+
+                List<?> basicSalaryTotal = employeeSalaryProcessService.readEmployeeGrossTotalTaxable(emplID3, startDate, endateDate);
+                if (!basicSalaryTotal.isEmpty()) {
+                    for (Object basicSalaryTotalList : basicSalaryTotal) {
+                        Object[] o1 = (Object[]) basicSalaryTotalList;
+                        Integer empBasicSalaryId = (Integer) o1[0];
+                        Double emplSalary = (Double) o1[1];
+                        basicSlaryTotal21 += emplSalary;
+                        List<?> allowanceGrossWithTaxableTotal = employeeAdditionalSalaryService.readEmployeeAllowanceGrossTotalTaxable(empBasicSalaryId);
+                        if (!allowanceGrossWithTaxableTotal.isEmpty()) {
+                            for (Object allowanceGrossWithTaxableTotalList : allowanceGrossWithTaxableTotal) {
+                                Object[] o2 = (Object[]) allowanceGrossWithTaxableTotalList;
+                                String SalaryType = (String) o2[0];
+                                Double additionalAmount1 = (Double) o2[1];
+
+                                List<?> aloowancereadByID = policyMasterService.readBySalaryTypeID(SalaryType);
+                                if (!aloowancereadByID.isEmpty()) {
+//                                    PolicyMaster policyMasterID = (PolicyMaster) aloowancereadByID.get(0);
+                                    Integer policyId = (Integer) aloowancereadByID.get(0);
+                                    boolean isExist = employeePolicyDetailService.readBypolicyAmountTaxableAmount(employeeSalaryProcess.getEmployeeMaster().getId(), policyId);
+                                    if (isExist) {
+                                        additionalAmount5 += additionalAmount1;
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                    totalGrossBasicAllowance = basicSlaryTotal21 + additionalAmount5;
+
+                    // gap assume salary remaining
+                    totalGrosswithTaxable = employeeSalary154 + allowanceWithtaxable;
+                    //remaining salary Assume 
+                    grossTotalAssumeSalary = totalGrosswithTaxable * currentMonth - 1;
+
+                    // year salary
+                    yearSalaryGrossTotal = totalGrossBasicAllowance + grossTotalAssumeSalary;
+
+                    //// TDs Amount 
+                    double tdsAmount1 = 0;
+                    List<?> tdsAmounttList1 = employeeDeductionAmountService.readEmployeeTdsAmount(employeeSalaryProcess.getEmployeeMaster().getId(), startDate, endateDate);
+                    if (!tdsAmounttList1.isEmpty()) {
+                        for (Object tdsAmounttList1List : tdsAmounttList1) {
+                            Object[] o22 = (Object[]) tdsAmounttList1List;
+                            String dedutionType = (String) o22[0];
+                            Double dedutionTypeAmount1 = (Double) o22[1];
+                            tdsAmount1 += dedutionTypeAmount1;
+
+                        }
+                    }
+                    String dayofbirth = employeeMaster.getDateOfBirth();
+                    String birthyear = dayofbirth.substring(6, 10);
+                    Calendar cal = Calendar.getInstance();
+                    int year2 = cal.get(cal.YEAR);
+                    int diffYear = year2 - Integer.parseInt(birthyear);
+
+                    //// Decaralation Amount between thresholdDate
+                    List<?> threadMasterList = payrollTaxDeclarationPeriodMasterService.readPayrollTaxDeclarationPeriodMaster(finicailyearID, month, year);
+                    if (!threadMasterList.isEmpty()) {
+                        for (Object threadMasterList1 : threadMasterList) {
+                            Object[] o15 = (Object[]) threadMasterList1;
+                            Integer threadMasterID = (Integer) o15[0];
+                            String declarationThresholdDate = (String) o15[1];
+                            String proofThresholdDate = (String) o15[2];
+                            List<?> taxSavingAmount = taxSavingSubmitService.readTaxSavingSubmitSalaryGenerate(employeeSalaryProcess.getEmployeeMaster().getId(), finicailyearID);
+                            if (!taxSavingAmount.isEmpty()) {
+                                TaxSavingSubmit taxSavingSubmit = new TaxSavingSubmit();
+                                for (Object o13 : taxSavingAmount) {
+                                    taxSavingSubmit = (TaxSavingSubmit) o13;
+                                    Integer taxSavingsubmitId = taxSavingSubmit.getId();
+                                    double taxDeductionDecartionAmount = 0;
+                                    double SavingAmountRemain = 0;
+                                    List<?> taxDeductionDecarationSubmit = taxDeductionDecarationSubmitService.readTaxDeductionDecarationSubmitSalaryGenerate(taxSavingsubmitId);
+                                    if (!taxDeductionDecarationSubmit.isEmpty()) {
+                                        taxDeductionDecartionAmount = (Double) taxDeductionDecarationSubmit.get(0);
+                                    }
+                                    Double TotalRemainingAmount1 = 0.0;
+                                    TotalRemainingAmount1 = yearSalaryGrossTotal - taxDeductionDecartionAmount;
+                                    List<?> taxDeductionDecarationSubmitSavingLimit = taxDeductionDecarationSubmitService.readTaxDeductionDecarationSubmitSalaryGenerateTaxSavingLimit(taxSavingsubmitId);
+                                    if (!taxDeductionDecarationSubmitSavingLimit.isEmpty()) {
+                                        for (Object taxDeductionDecarationSubmitSavingLimitList : taxDeductionDecarationSubmitSavingLimit) {
+                                            Object[] o2265 = (Object[]) taxDeductionDecarationSubmitSavingLimitList;
+                                            Double taxDeclartionAmountTotal = (Double) o2265[0];
+                                            Integer taxsavingLimitamountTotal = (Integer) o2265[2];
+                                            Integer addittionalAmounttTotal = (Integer) o2265[3];
+                                            if (taxDeclartionAmountTotal >= taxsavingLimitamountTotal) {
+                                                TotalRemainingAmount1 = TotalRemainingAmount1 - addittionalAmounttTotal;
+
+                                            }
+
+                                        }
+                                    }
+//                                    int year1Fake = 2000000;
+//                                    Double TotalRemainingAmount1 = yearSalaryGrossTotal - taxDeductionDecartionAmount;
+//                                    int i = TotalRemainingAmount1.intValue();
+//                                    SavingAmountRemain=
+                                    Double ftax = 0.0;
+                                    List<PayrollTaxRateMaster> list = (List<PayrollTaxRateMaster>) payrollTaxRateMasterService.getAgeValuesFOrSalaryGenerate(diffYear);
+                                    if (!list.isEmpty()) {
+                                        Double TotalRemainingAmount12 = 0.0;
+                                        Double additionalAmount56 = 0.0;
+                                        Double tax = 0.0;
+                                        Double RemainTdsToPay = 0.0;
+                                        Double monthlyTDs = 0.0;
+                                        boolean flag = false;
+                                        PayrollTaxRateMaster payrollTaxRateMaster = new PayrollTaxRateMaster();
+                                        for (int j = 0; j <= list.size(); j++) {
+                                            if (!flag) {
+                                                payrollTaxRateMaster = (PayrollTaxRateMaster) list.get(j);
+                                                String taxRate = payrollTaxRateMaster.getTaxRate();
+                                                String incomeFrom = payrollTaxRateMaster.getIncomeFrom();
+                                                String incomeTo = payrollTaxRateMaster.getIncomeTo();
+//                                            if(j==0){
+                                                Double range1 = 0.0;
+                                                Double range = 0.0;
+                                                if (list.size() != j) {
+                                                    range1 = Double.parseDouble(incomeTo) - Double.parseDouble(incomeFrom);
+                                                    DecimalFormat df1 = new DecimalFormat("#.##");
+                                                    range = Double.parseDouble(df1.format(range1));
+                                                } else if (list.size() == j) {
+                                                    range1 = Double.parseDouble(incomeFrom);
+                                                    DecimalFormat df1 = new DecimalFormat("#.##");
+                                                    range = Double.parseDouble(df1.format(range1));
+                                                }
+//                                                DecimalFormat df1 = new DecimalFormat("#.##");
+//                                                System.out.println(df1.format(range));
+//                                            }
+//                                            if (Integer.parseInt(incomeFrom) == 0) {
+//                                                TotalRemainingAmount1 = TotalRemainingAmount1 - Double.parseDouble(incomeTo);
+//                                            }
+//                                            if (Integer.parseInt(incomeFrom) != 0) {
+//                                                TotalRemainingAmount1 = TotalRemainingAmount1 - Double.parseDouble(incomeFrom);
+//                                            }
+
+                                                if (TotalRemainingAmount1 != 0.0 && range <= TotalRemainingAmount1) {
+                                                    TotalRemainingAmount1 = TotalRemainingAmount1 - range;
+                                                } else if (TotalRemainingAmount1 != 0.0 && range >= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                    TotalRemainingAmount1 = 0.0;
+                                                    flag = true;
+                                                } else if ((list.size() == (j + 1)) && TotalRemainingAmount1 != 0.0 && range >= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                    TotalRemainingAmount1 = 0.0;
+                                                    flag = true;
+                                                } else if ((list.size() != (j + 1)) && TotalRemainingAmount1 != 0.0 && range >= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                    TotalRemainingAmount1 = 0.0;
+                                                    flag = true;
+                                                } else if ((list.size() != (j + 1)) && TotalRemainingAmount1 != 0.0 && range <= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                    TotalRemainingAmount1 = 0.0;
+                                                    flag = true;
+                                                } else if ((list.size() == (j + 1)) && TotalRemainingAmount1 != 0.0 && range <= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                    TotalRemainingAmount1 = 0.0;
+                                                    flag = true;
+                                                }
+
+                                                if (range <= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+//                                                TotalRemainingAmount1 = 0.0;
+                                                }
+//                                            if (range >= TotalRemainingAmount1) {
+//                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+//                                                TotalRemainingAmount1 = 0.0;
+//                                            }
+//                                            if (range >= TotalRemainingAmount1) {
+//                                            }
+
+                                                ftax += tax;
+                                            }
+//                                            TotalRemainingAmount12 = TotalRemainingAmount12 - Double.parseDouble(incomeFrom);
+
+                                        }
+
+                                        RemainTdsToPay = tdsAmount1 - ftax;
+                                        monthlyTDs = RemainTdsToPay / currentMonth + 1;
+                                        employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                        employeeDeductionAmount.setDeductionType("TDS");
+                                        employeeDeductionAmount.setDeductionAmount(monthlyTDs);
+                                        employeeDeductionAmountService.create(employeeDeductionAmount);
+//                                        additionalAmount56 += TotalRemainingAmount12;
+                                    }
+
+                                }
+                            }
+                        }
+
+                    }
+                    /// tax declaration before threaHoldDate
+                    List<?> threadMasterBeforeList = payrollTaxDeclarationPeriodMasterService.readPayrollTaxDeclarationPeriodMasterBefore(finicailyearID, month, year);
+                    if (!threadMasterBeforeList.isEmpty()) {
+                        for (Object threadMasterList2 : threadMasterBeforeList) {
+                            Object[] o16 = (Object[]) threadMasterList2;
+                            Integer threadMasterID = (Integer) o16[0];
+                            String declarationThresholdDate = (String) o16[1];
+                            String proofThresholdDate = (String) o16[2];
+//                            Double TotalRemainingAmount = yearSalaryGrossTotal - payrollTaxDeductionAamount;
+//                            Double TotalRemainingAmount1 = yearSalaryGrossTotal - payrollTaxDeductionAamount;
+                            List<?> taxSavingAmount = taxSavingSubmitService.readTaxSavingSubmitSalaryGenerate(employeeSalaryProcess.getEmployeeMaster().getId(), finicailyearID);
+                            if (!taxSavingAmount.isEmpty()) {
+
+                                TaxSavingSubmit taxSavingSubmit = new TaxSavingSubmit();
+                                for (Object o13 : taxSavingAmount) {
+                                    taxSavingSubmit = (TaxSavingSubmit) o13;
+                                    Integer taxSavingsubmitId = taxSavingSubmit.getId();
+                                    Double TotalRemainingAmount1 = 0.0;
+                                    TotalRemainingAmount1 = yearSalaryGrossTotal - payrollTaxDeductionAamount;
+                                    List<?> taxDeductionDecarationSubmitSavingLimit = taxDeductionDecarationSubmitService.readTaxDeductionDecarationSubmitSalaryGenerateTaxSavingLimit(taxSavingsubmitId);
+                                    if (!taxDeductionDecarationSubmitSavingLimit.isEmpty()) {
+                                        for (Object taxDeductionDecarationSubmitSavingLimitList : taxDeductionDecarationSubmitSavingLimit) {
+                                            Object[] o2265 = (Object[]) taxDeductionDecarationSubmitSavingLimitList;
+                                            Double taxDeclartionAmountTotal = (Double) o2265[0];
+                                            Integer taxsavingLimitamountTotal = (Integer) o2265[2];
+                                            Integer addittionalAmounttTotal = (Integer) o2265[3];
+                                            if (taxDeclartionAmountTotal >= taxsavingLimitamountTotal) {
+                                                TotalRemainingAmount1 = TotalRemainingAmount1 - addittionalAmounttTotal;
+
+                                            }
+
+                                        }
+                                    }
+
+                                    Double ftax = 0.0;
+                                    List<PayrollTaxRateMaster> list = (List<PayrollTaxRateMaster>) payrollTaxRateMasterService.getAgeValuesFOrSalaryGenerate(diffYear);
+                                    if (!list.isEmpty()) {
+                                        Double TotalRemainingAmount12 = 0.0;
+                                        Double additionalAmount56 = 0.0;
+                                        Double tax = 0.0;
+                                        Double RemainTdsToPay = 0.0;
+                                        Double monthlyTDs = 0.0;
+                                        boolean flag = false;
+                                        PayrollTaxRateMaster payrollTaxRateMaster = new PayrollTaxRateMaster();
+                                        for (int j = 0; j <= list.size(); j++) {
+                                            if (!flag) {
+                                                payrollTaxRateMaster = (PayrollTaxRateMaster) list.get(j);
+                                                String taxRate = payrollTaxRateMaster.getTaxRate();
+                                                String incomeFrom = payrollTaxRateMaster.getIncomeFrom();
+                                                String incomeTo = payrollTaxRateMaster.getIncomeTo();
+//                                            if(j==0){
+                                                Double range1 = 0.0;
+                                                Double range = 0.0;
+                                                if (list.size() != j) {
+                                                    range1 = Double.parseDouble(incomeTo) - Double.parseDouble(incomeFrom);
+                                                    DecimalFormat df1 = new DecimalFormat("#.##");
+                                                    range = Double.parseDouble(df1.format(range1));
+                                                } else if (list.size() == j) {
+                                                    range1 = Double.parseDouble(incomeFrom);
+                                                    DecimalFormat df1 = new DecimalFormat("#.##");
+                                                    range = Double.parseDouble(df1.format(range1));
+                                                }
+//                                                DecimalFormat df1 = new DecimalFormat("#.##");
+//                                                System.out.println(df1.format(range));
+//                                            }
+//                                            if (Integer.parseInt(incomeFrom) == 0) {
+//                                                TotalRemainingAmount1 = TotalRemainingAmount1 - Double.parseDouble(incomeTo);
+//                                            }
+//                                            if (Integer.parseInt(incomeFrom) != 0) {
+//                                                TotalRemainingAmount1 = TotalRemainingAmount1 - Double.parseDouble(incomeFrom);
+//                                            }
+
+                                                if (TotalRemainingAmount1 != 0.0 && range <= TotalRemainingAmount1) {
+                                                    TotalRemainingAmount1 = TotalRemainingAmount1 - range;
+                                                } else if (TotalRemainingAmount1 != 0.0 && range >= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                    TotalRemainingAmount1 = 0.0;
+                                                    flag = true;
+                                                } else if ((list.size() == (j + 1)) && TotalRemainingAmount1 != 0.0 && range >= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                    TotalRemainingAmount1 = 0.0;
+                                                    flag = true;
+                                                } else if ((list.size() != (j + 1)) && TotalRemainingAmount1 != 0.0 && range >= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                    TotalRemainingAmount1 = 0.0;
+                                                    flag = true;
+                                                } else if ((list.size() != (j + 1)) && TotalRemainingAmount1 != 0.0 && range <= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                    TotalRemainingAmount1 = 0.0;
+                                                    flag = true;
+                                                } else if ((list.size() == (j + 1)) && TotalRemainingAmount1 != 0.0 && range <= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                    TotalRemainingAmount1 = 0.0;
+                                                    flag = true;
+                                                }
+
+                                                if (range <= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+//                                                TotalRemainingAmount1 = 0.0;
+                                                }
+//                                            if (range >= TotalRemainingAmount1) {
+//                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+//                                                TotalRemainingAmount1 = 0.0;
+//                                            }
+//                                            if (range >= TotalRemainingAmount1) {
+//                                            }
+
+                                                ftax += tax;
+                                            }
+//                                            TotalRemainingAmount12 = TotalRemainingAmount12 - Double.parseDouble(incomeFrom);
+
+                                        }
+
+                                        RemainTdsToPay = tdsAmount1 - ftax;
+                                        monthlyTDs = RemainTdsToPay / currentMonth + 1;
+                                        employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                        employeeDeductionAmount.setDeductionType("TDS");
+                                        employeeDeductionAmount.setDeductionAmount(monthlyTDs);
+                                        employeeDeductionAmountService.create(employeeDeductionAmount);
+//                                        additionalAmount56 += TotalRemainingAmount12;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    /// tax declaration afteer Proff date
+                    List<?> threadMasterafterProffList = payrollTaxDeclarationPeriodMasterService.readPayrollTaxDeclarationPeriodMasterAfterProofDate(finicailyearID, month, year);
+                    if (!threadMasterafterProffList.isEmpty()) {
+                        for (Object threadMasterList3 : threadMasterafterProffList) {
+                            Object[] o17 = (Object[]) threadMasterList3;
+                            Integer threadMasterID = (Integer) o17[0];
+                            String declarationThresholdDate = (String) o17[1];
+                            String proofThresholdDate = (String) o17[2];
+                            List<?> taxSavingAmountafterDate = taxSavingSubmitService.readTaxSavingSubmitSalaryGenerateAfterDate(employeeSalaryProcess.getEmployeeMaster().getId(), finicailyearID);
+                            if (!taxSavingAmountafterDate.isEmpty()) {
+                                TaxSavingSubmit taxSavingSubmit = new TaxSavingSubmit();
+                                for (Object o19 : taxSavingAmountafterDate) {
+                                    taxSavingSubmit = (TaxSavingSubmit) o19;
+                                    Integer taxSavingsubmitId = taxSavingSubmit.getId();
+                                    double taxDeductionDecartionAmount156 = 0;
+                                    double SavingAmountRemain = 0;
+                                    List<?> taxDeductionDecarationSubmit15 = taxDeductionDecarationSubmitService.readTaxDeductionDecarationSubmitSalaryGenerateAfterDate(taxSavingsubmitId);
+                                    if (!taxDeductionDecarationSubmit15.isEmpty()) {
+                                        taxDeductionDecartionAmount156 = (Double) taxDeductionDecarationSubmit15.get(0);
+                                    }
+                                    Double TotalRemainingAmount1 = 0.0;
+//                                            = yearSalaryGrossTotal - taxDeductionDecartionAmount156;
+
+                                    TotalRemainingAmount1 = yearSalaryGrossTotal - taxDeductionDecartionAmount156;
+                                    List<?> taxDeductionDecarationSubmitSavingLimit = taxDeductionDecarationSubmitService.readTaxDeductionDecarationSubmitSalaryGenerateTaxSavingLimit(taxSavingsubmitId);
+                                    if (!taxDeductionDecarationSubmitSavingLimit.isEmpty()) {
+                                        for (Object taxDeductionDecarationSubmitSavingLimitList : taxDeductionDecarationSubmitSavingLimit) {
+                                            Object[] o2265 = (Object[]) taxDeductionDecarationSubmitSavingLimitList;
+                                            Double taxDeclartionAmountTotal = (Double) o2265[0];
+                                            Integer taxsavingLimitamountTotal = (Integer) o2265[2];
+                                            Integer addittionalAmounttTotal = (Integer) o2265[3];
+                                            if (taxDeclartionAmountTotal >= taxsavingLimitamountTotal) {
+                                                TotalRemainingAmount1 = TotalRemainingAmount1 - addittionalAmounttTotal;
+
+                                            }
+
+                                        }
+                                    }
+
+//                                    SavingAmountRemain=
+                                    Double ftax = 0.0;
+                                    List<PayrollTaxRateMaster> list = (List<PayrollTaxRateMaster>) payrollTaxRateMasterService.getAgeValuesFOrSalaryGenerate(diffYear);
+                                    if (!list.isEmpty()) {
+                                        Double TotalRemainingAmount12 = 0.0;
+                                        Double additionalAmount56 = 0.0;
+                                        Double tax = 0.0;
+                                        Double RemainTdsToPay = 0.0;
+                                        Double monthlyTDs = 0.0;
+                                        boolean flag = false;
+                                        PayrollTaxRateMaster payrollTaxRateMaster = new PayrollTaxRateMaster();
+                                        for (int j = 0; j <= list.size(); j++) {
+                                            if (!flag) {
+                                                payrollTaxRateMaster = (PayrollTaxRateMaster) list.get(j);
+                                                String taxRate = payrollTaxRateMaster.getTaxRate();
+                                                String incomeFrom = payrollTaxRateMaster.getIncomeFrom();
+                                                String incomeTo = payrollTaxRateMaster.getIncomeTo();
+//                                            if(j==0){
+                                                Double range1 = 0.0;
+                                                Double range = 0.0;
+                                                if (list.size() != j) {
+                                                    range1 = Double.parseDouble(incomeTo) - Double.parseDouble(incomeFrom);
+                                                    DecimalFormat df1 = new DecimalFormat("#.##");
+                                                    range = Double.parseDouble(df1.format(range1));
+                                                } else if (list.size() == j) {
+                                                    range1 = Double.parseDouble(incomeFrom);
+                                                    DecimalFormat df1 = new DecimalFormat("#.##");
+                                                    range = Double.parseDouble(df1.format(range1));
+                                                }
+//                                                DecimalFormat df1 = new DecimalFormat("#.##");
+//                                                System.out.println(df1.format(range));
+//                                            }
+//                                            if (Integer.parseInt(incomeFrom) == 0) {
+//                                                TotalRemainingAmount1 = TotalRemainingAmount1 - Double.parseDouble(incomeTo);
+//                                            }
+//                                            if (Integer.parseInt(incomeFrom) != 0) {
+//                                                TotalRemainingAmount1 = TotalRemainingAmount1 - Double.parseDouble(incomeFrom);
+//                                            }
+
+                                                if (TotalRemainingAmount1 != 0.0 && range <= TotalRemainingAmount1) {
+                                                    TotalRemainingAmount1 = TotalRemainingAmount1 - range;
+                                                } else if (TotalRemainingAmount1 != 0.0 && range >= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                    TotalRemainingAmount1 = 0.0;
+                                                    flag = true;
+                                                } else if ((list.size() == (j + 1)) && TotalRemainingAmount1 != 0.0 && range >= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                    TotalRemainingAmount1 = 0.0;
+                                                    flag = true;
+                                                } else if ((list.size() != (j + 1)) && TotalRemainingAmount1 != 0.0 && range >= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                    TotalRemainingAmount1 = 0.0;
+                                                    flag = true;
+                                                } else if ((list.size() != (j + 1)) && TotalRemainingAmount1 != 0.0 && range <= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                    TotalRemainingAmount1 = 0.0;
+                                                    flag = true;
+                                                } else if ((list.size() == (j + 1)) && TotalRemainingAmount1 != 0.0 && range <= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                    TotalRemainingAmount1 = 0.0;
+                                                    flag = true;
+                                                }
+
+                                                if (range <= TotalRemainingAmount1) {
+                                                    tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+//                                                TotalRemainingAmount1 = 0.0;
+                                                }
+//                                            if (range >= TotalRemainingAmount1) {
+//                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+//                                                TotalRemainingAmount1 = 0.0;
+//                                            }
+//                                            if (range >= TotalRemainingAmount1) {
+//                                            }
+
+                                                ftax += tax;
+                                            }
+//                                            TotalRemainingAmount12 = TotalRemainingAmount12 - Double.parseDouble(incomeFrom);
+
+                                        }
+
+                                        RemainTdsToPay = tdsAmount1 - ftax;
+                                        monthlyTDs = RemainTdsToPay / currentMonth + 1;
+                                        employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                        employeeDeductionAmount.setDeductionType("TDS");
+                                        employeeDeductionAmount.setDeductionAmount(monthlyTDs);
+                                        employeeDeductionAmountService.create(employeeDeductionAmount);
+//                                        additionalAmount56 += TotalRemainingAmount12;
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+            }
+
+        }
     }
 
     public ModelAndView searchSalaryDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -972,10 +1481,15 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         headerList.add("Employee Name");
         headerList.add("Basic Salary");
 
-        List<?> salaryTypeList = payrollSalaryTypeService.read();
-        for (Object o1 : salaryTypeList) {
-            PayrollSalaryType payrollSalaryType = (PayrollSalaryType) o1;
-            headerList.add(payrollSalaryType.getText());
+//        List<?> salaryTypeList = payrollSalaryTypeService.read();
+//        for (Object o1 : salaryTypeList) {
+//            PayrollSalaryType payrollSalaryType = (PayrollSalaryType) o1;
+//            headerList.add(payrollSalaryType.getText());
+//        }
+        List<?> policyMasterList = policyMasterService.read();
+        for (Object o1 : policyMasterList) {
+            PolicyMaster policyMaster = (PolicyMaster) o1;
+            headerList.add(policyMaster.getPolicyName());
         }
 
         headerList.add("PF");
@@ -983,6 +1497,16 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         headerList.add("Total Gross Salary");
         headerList.add("Deductional Amount");
         headerList.add("NetSalary Amount");
+
+        List<?> list6 = ctcAllowanceService.read();
+        CtcAllowance ctcAllowance = new CtcAllowance();
+//        Map<Integer, String> leaveTypemap = new HashMap();
+        for (Object o : list6) {
+            ctcAllowance = (CtcAllowance) o;
+            headerList.add("" + ctcAllowance.getCtcName());
+        }
+        headerList.add("Total");
+        headerList.add("CTCPerMonth");
         List<EmployeeMaster> empList = (List<EmployeeMaster>) employeeSalaryProcessService.readEmpMasterSalary(employeeMaster);
 
         for (EmployeeMaster employeeMaster1 : empList) {
@@ -991,35 +1515,25 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             finalList.add(employeeMaster1.getEmployeeId());
             finalList.add(employeeMaster1.getEmployeeName());
             finalList.add(employeeMaster1.getBasicSalary());
-
+//    Map<String, String> empMap = new HashMap<String, String>();
             double basicSalary1 = Double.parseDouble(employeeMaster1.getBasicSalary());
             double grossSalary = 0;
             double deductionAmount = 0;
-
-            List<?> salaryTypeList1 = payrollSalaryTypeService.read();
+            double total = 0.0;
+            List<?> salaryTypeList1 = policyMasterService.read();
             for (Object o1 : salaryTypeList1) {
-                PayrollSalaryType payrollSalaryType = (PayrollSalaryType) o1;
+                PolicyMaster policyMaster = (PolicyMaster) o1;
 
-                List<?> list = employeeTypeWiseSalaryService.readForMasterAdditionalAmount(employeeMaster1.getEmployeeTypeMaster().getId(),
-                        employeeMaster1.getEmployeeSubType().getId(), payrollSalaryType.getId());
+                List<?> list = employeePolicyDetailService.readForMasterAdditionalAmount(employeeMaster1.getId(), policyMaster.getId());
+
                 if (!list.isEmpty()) {
                     Iterator itr = list.iterator();
                     if (itr.hasNext()) {
                         Object[] next = (Object[]) itr.next();
-                        int salaryTypeId = (Integer) next[0];
-                        String amountType = next[2].toString();
-                        double salaryAmount = (Double) next[3];
+                        String amountType = next[0].toString();
+                        double salaryAmount = (Double) next[1];
 
-                        if (amountType.equals("value")) {
-
-                            finalList.add(df.format(salaryAmount));
-                            grossSalary += salaryAmount;
-                        } else {
-                            double basicSalary = Double.parseDouble(employeeMaster1.getBasicSalary());
-                            double additionalAmount = (salaryAmount / 100) * basicSalary;
-                            finalList.add(df.format(additionalAmount));
-                            grossSalary += additionalAmount;
-                        }
+                        finalList.add(df.format(salaryAmount));
 
                     }
                 } else {
@@ -1099,6 +1613,29 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             finalList.add(df.format(deductionAmount));
             double finalAmount = (basicSalary1 + grossSalary) - deductionAmount;
             finalList.add(df.format(finalAmount));
+            List<?> ctcAllowanceList = ctcAllowanceService.read();
+            for (Object o165 : ctcAllowanceList) {
+                CtcAllowance ctcAllowance2 = (CtcAllowance) o165;
+
+                List<?> list2 = employeeCtcDetailService.CtcDetailempidMasterSalary(employeeMaster1.getId(), ctcAllowance2.getId());
+
+                if (!list2.isEmpty()) {
+                    Iterator itr = list2.iterator();
+                    if (itr.hasNext()) {
+                        Object[] next = (Object[]) itr.next();
+                        String amountType = next[0].toString();
+                        double salaryAmount = (Double) next[1];
+                        total += (Double) next[1];
+                        finalList.add(df.format(salaryAmount));
+
+                    }
+                } else {
+                    finalList.add("-");
+                }
+            }
+
+            finalList.add("" + df.format((int) Math.round(total)));
+            finalList.add("" + df.format((int) Math.round(total + (basicSalary1 + grossSalary - deductionAmount))));
 
             empMap.put(employeeMaster1.getId(), finalList);
 
@@ -1280,8 +1817,10 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 bonusExcel1 = Double.parseDouble(bonusExcel);
                             }
                             EmployeeMaster employeeMaster = new EmployeeMaster();
-                            int empNo = Integer.parseInt(employeeNo);
-                            List<?> list = employeeMasterService.readByEmployeeNo(empNo);
+//                            int empNo = Integer.parseInt(employeeNo);
+//                            int empNo = Integer.parseInt(employeeNo);
+
+                            List<?> list = employeeMasterService.readByEmployeeNo1(employeeNo);
                             if (!list.isEmpty()) {
                                 employeeMaster = (EmployeeMaster) list.get(0);
                                 int empId = employeeMaster.getId();
@@ -1376,7 +1915,6 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                                employeeAdditionalSalary.setAdditionalAmount(conveyAmount1);
 //                                employeeAdditionalSalaryService.create(employeeAdditionalSalary);
 //                            OT Amount Create in ADDitionalSalary
-
                                 employeeAdditionalSalary.setEmployeeSalaryProcess(employeeSalaryProcess);
                                 employeeAdditionalSalary.setPayrollSalaryType("OT Amount");
                                 employeeAdditionalSalary.setAdditionalAmount(Overtimepay);

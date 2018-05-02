@@ -29,6 +29,24 @@ public class TaxSavingSubmitServiceImpl<T> extends GenericsServiceImpl<T> implem
     }
 
     @Override
+    public boolean isExist(Integer empID, Integer finicailyear) {
+        return taxSavingSubmitDAO.isExist(empID, finicailyear);
+    }
+
+    @Override
+    public List<?> readTaxSavingSubmit(int EmplID, int finicailyear) {
+      return taxSavingSubmitDAO.readTaxSavingSubmit(EmplID, finicailyear);
+    }
+
+    @Override
+    public List<?> readTaxSavingSubmitSalaryGenerate(int EmplID, int finicailyear) {
+       return taxSavingSubmitDAO.readTaxSavingSubmitSalaryGenerate(EmplID, finicailyear);
+    }
+
+    @Override
+    public List<?> readTaxSavingSubmitSalaryGenerateAfterDate(int EmplID, int finicailyear) {
+        return taxSavingSubmitDAO.readTaxSavingSubmitSalaryGenerateAfterDate(EmplID, finicailyear);
+    }
     public List<?> readTaxSavingSubmitForEmployee(EmployeeMaster employeeMaster) {
         return taxSavingSubmitDAO.readTaxSavingSubmitForEmployee(employeeMaster);
     }

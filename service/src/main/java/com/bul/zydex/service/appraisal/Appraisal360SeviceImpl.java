@@ -72,4 +72,9 @@ public class Appraisal360SeviceImpl<T> extends GenericsServiceImpl<T> implements
            return  appraisal360DAO.readByEmpIdAndYear(empId,Year);
     }
 
+    @Override
+    public List<?> readByEmpIdAndCname(int empId, String cycleName) {
+         return  appraisal360DAO.readByEmpIdAndCname(empId,cycleName);
+    }
+
 }   

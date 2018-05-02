@@ -62,6 +62,13 @@ public class EmployeeAdditionalSalaryServiceImpl<T> extends GenericsServiceImpl<
       return employeeAdditionalSalaryDAO.readEmployeeForSalaryAdditionalinfoSearch(employeeSalaryProcess);
     }
 
+    @Override
+    public List<?> readEmployeeAllowanceGrossTotalTaxable(int EmpSalaryProcessId) {
+      return employeeAdditionalSalaryDAO.readEmployeeAllowanceGrossTotalTaxable(EmpSalaryProcessId);
+    }
+
+   
+
    
 
     

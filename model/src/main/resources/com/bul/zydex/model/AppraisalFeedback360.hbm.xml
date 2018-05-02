@@ -65,5 +65,8 @@
         <property name="feedbackYear" type="string">
             <column name="year" />
         </property>
+        <property name="cycleName" type="string">
+            <column name="cycle_name" />
+        </property>
     </class>
 </hibernate-mapping>

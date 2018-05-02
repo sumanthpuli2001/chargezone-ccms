@@ -113,5 +113,8 @@
         <property name="training" type="java.lang.Boolean">
             <column name="training" />
         </property>
+        <property name="kaizenApproval" type="java.lang.Boolean">
+            <column name="kaizen_approval" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -12920,6 +12920,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     List<?> empShiftList = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftData(shiftGenerateMonthlySchedule, Integer.parseInt(currentDays));
                     if (!empShiftList.isEmpty()) {
                         shiftId = "" + empShiftList.get(0);
+                    } else {
+                        shiftId = "" + 1;
                     }
                     TempShiftAssignMaster tempShiftAssignMaster = new TempShiftAssignMaster();
                     TempShiftAssignMaster tempShiftAssignMaster1 = new TempShiftAssignMaster();
@@ -12930,12 +12932,14 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     String shiftName = "";
                     String daynamicShiftName = "";
                     String shiftTime = "";
-                    if (null != tempShiftAssignMaster1) {
-                        shiftMaster.setId(tempShiftAssignMaster1.getShiftMaster().getId());
-                        shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
-                        shiftName = shiftMaster1.getShiftName();
-                        shiftTime = shiftMaster1.getEndTime();
-                    } else if (empShiftList.size() > 0) {
+//                    if (null != tempShiftAssignMaster1) {
+//                        shiftMaster.setId(tempShiftAssignMaster1.getShiftMaster().getId());
+//                        shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
+//                        shiftName = shiftMaster1.getShiftName();
+//                        shiftTime = shiftMaster1.getEndTime();
+//                    } else 
+                    
+//                        if (empShiftList.size() > 0) {
                         if (!shiftId.equals("-1")) {
                             shiftMaster.setId(Integer.parseInt(shiftId));
                             shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
@@ -12943,7 +12947,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             shiftTime = shiftMaster1.getEndTime();
 
                         }
-                    }
+//                    }
 
                     //////////////////////////// new code///////////////////////////////////////////
                     EmployeeMaster employeeMaster1 = employeeMasterService.readById(employeeMaster.getId());

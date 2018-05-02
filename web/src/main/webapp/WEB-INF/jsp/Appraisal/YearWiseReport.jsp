@@ -39,8 +39,8 @@
                     <tr  ></tr>
                     <tr  >
                         <th></th>
-                        <th  colspan="2" style="border: 1px solid black;">${employeeMaster.employeeId}</th>
-                        <th colspan="6" style="border: 1px solid black;">${employeeMaster.employeeName}</th>
+                        <th  colspan="2" style="border: 1px solid black;">Employee ID : ${employeeMaster.employeeId}</th>
+                        <th colspan="6" style="border: 1px solid black;">Employee Name : ${employeeMaster.employeeName}</th>
 
                     </tr>
                     <tr  >
@@ -50,10 +50,10 @@
                     <tr>
                         <th></th>
                         <th  style="border: 1px solid black;">Cycle</th>
-                        <th  style="border: 1px solid black;">Unlock</th>
-                        <th style="border: 1px solid black;">Lock</th>
-                        <th style="border: 1px solid black;">Unlock</th>
-                        <th  style="border: 1px solid black;">Lock</th>
+                        <th  style="border: 1px solid black;">Cycle Start Unlock</th>
+                        <th style="border: 1px solid black;">Cycle Start Lock</th>
+                        <th style="border: 1px solid black;">Cycle End Unlock</th>
+                        <th  style="border: 1px solid black;">Cycle End Lock</th>
                         <th  style="border: 1px solid black;">KRA Rating Out Of</th>
                         <th  style="border: 1px solid black;">Self Rating</th>
                         <th style="border: 1px solid black;">Management Rating</th>
@@ -102,14 +102,20 @@
             <tr  border: 1px solid black;></tr>
             <tr  >
                 <th></th>
-                <th colspan="${fn:length(dataList)+2}" style="border: 1px solid black; text-align: left;">360 Feedback Rating</th>
+                <th colspan="7" style="border: 1px solid black; text-align: left;">360 Feedback Rating</th>
             </tr>
             <tr>
                 <th></th>
+                <th  style="border: 1px solid black;">Cycle</th>
                 <th  style="border: 1px solid black;">360 Rating Out Of</th>
-                    <c:forEach var="dataList" items="${dataList}">
-                    <th  style="border: 1px solid black;">${dataList[0]}</th>
-                    </c:forEach>
+                <th  style="border: 1px solid black;">Connected Department</th>
+                <th  style="border: 1px solid black;">Superior</th>
+                <th  style="border: 1px solid black;">Subordinate</th>
+                <th  style="border: 1px solid black;">Peer</th>
+                <!--<th  style="border: 1px solid black;">360 Rating Out Of</th>-->
+                <%--<c:forEach var="dataList" items="${dataList}">--%>
+                <!--<th  style="border: 1px solid black;">${dataList[0]}</th>-->
+                <%--</c:forEach>--%>
                 <th  style="border: 1px solid black;">Average Score</th>
 
 
@@ -119,16 +125,23 @@
 
 
         <tbody>
+            <c:forEach var="cyclewiseFeedBack" items="${cyclewiseFeedBackList}">
+                <tr>
+                    <td></td>
+                    <td style="border: 1px solid black; text-align: center">${cyclewiseFeedBack[0]}</td>
+                    <td style="border: 1px solid black; text-align: center">25</td>
+                    <td style="border: 1px solid black; text-align: center">${cyclewiseFeedBack[3]}</td>
+                    <td style="border: 1px solid black; text-align: center">${cyclewiseFeedBack[1]}</td>
+                    <td style="border: 1px solid black; text-align: center">${cyclewiseFeedBack[2]}</td>
+                    <td style="border: 1px solid black; text-align: center">${cyclewiseFeedBack[4]}</td>
+                    <!--<td style="border: 1px solid black;">25</td>-->
+                    <%--<c:forEach var="dataList" items="${dataList}">--%>
+                        <!--<th  style="border: 1px solid black;">${dataList[5]}</th>-->
+                    <%--</c:forEach>--%>
+                    <td style="border: 1px solid black;  text-align: center">${cyclewiseFeedBack[5]}</td>
 
-            <tr>
-                <td></td>
-                <td style="border: 1px solid black;">25</td>
-                <c:forEach var="dataList" items="${dataList}">
-                    <th  style="border: 1px solid black;">${dataList[1]}</th>
-                    </c:forEach>
-                <td style="border: 1px solid black;">${avgWbs}</td>
-
-            </tr>
+                </tr>
+            </c:forEach>
 
 
 

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -197,10 +198,19 @@ public class HomeController extends HomeAbstract {
         mv.setViewName("Common/RewardAndRecognition");
         return mv;
     }
+
     public ModelAndView kaizen(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("Common/Kaizen");
+        List<?> kaizenlist = kaizenMasterService.readKaizenList();
+            int inc = kaizenlist.size();
+            int inc1 = inc + 1;
+             request.setAttribute("randomNumber", inc1);
+        mv.setViewName( "Kaizen/Kaizen");
         return mv;
+//        int index = 0;
+//        int srNo = (index + 1);
+//        Random random=new Random();   
+//        int randomNumber=random.nextInt(10000000);
     }
 
 }

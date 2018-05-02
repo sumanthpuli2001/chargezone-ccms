@@ -36,7 +36,7 @@ public class RetirementAgeController extends RetirementAgeAbstract {
         BindException errors = new BindException(retirementAge, "retirementAge");
         bind(request, retirementAge);
         ModelAndView mv = new ModelAndView();
-//        CompanyMasterValidator.validate(companyMaster, errors);
+        companyMasterValidator.validate(retirementAge, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage", "Error : Information Is Not Valid.");
             mv.addAllObjects(errors.getModel());

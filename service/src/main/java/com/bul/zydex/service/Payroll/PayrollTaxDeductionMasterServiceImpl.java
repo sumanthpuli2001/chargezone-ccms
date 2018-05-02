@@ -14,9 +14,9 @@ import java.util.List;
  * @author DELL3
  */
 public class PayrollTaxDeductionMasterServiceImpl<T> extends GenericsServiceImpl<T> implements PayrollTaxDeductionMasterService<T> {
-    
+
     private PayrollTaxDeductionMasterDao<T> payrollTaxDeductionMasterDao;
- 
+
     public PayrollTaxDeductionMasterDao<T> getPayrollTaxDeductionMasterDao() {
         return payrollTaxDeductionMasterDao;
     }
@@ -24,7 +24,7 @@ public class PayrollTaxDeductionMasterServiceImpl<T> extends GenericsServiceImpl
     public void setPayrollTaxDeductionMasterDao(PayrollTaxDeductionMasterDao<T> payrollTaxDeductionMasterDao) {
         this.payrollTaxDeductionMasterDao = payrollTaxDeductionMasterDao;
         setGenericsDAO(payrollTaxDeductionMasterDao);
-    }   
+    }
 
     @Override
     public List<?> readTaxDeduction() {
@@ -43,12 +43,22 @@ public class PayrollTaxDeductionMasterServiceImpl<T> extends GenericsServiceImpl
 
     @Override
     public List<?> readTaxDeductionForFormSixteen() {
-       return payrollTaxDeductionMasterDao.readTaxDeductionForFormSixteen();
+        return payrollTaxDeductionMasterDao.readTaxDeductionForFormSixteen();
     }
 
     @Override
     public List<?> readByComponentId(int parseInt) {
-      return payrollTaxDeductionMasterDao.readByComponentId(parseInt);
+        return payrollTaxDeductionMasterDao.readByComponentId(parseInt);
     }
-    
+
+    @Override
+    public List<?> readTaxDeductionForFormSixteenFetch(int taxMasterid) {
+        return payrollTaxDeductionMasterDao.readTaxDeductionForFormSixteenFetch(taxMasterid);
+    }
+
+    @Override
+    public List readSectionAmount() {
+      return payrollTaxDeductionMasterDao.readSectionAmount();
+    }
+
 }

@@ -649,5 +649,20 @@
     </bean>
     <bean id="taxDeductionDeclarationSavingStatusService1" class="com.bul.zydex.service.Payroll.TaxDeductionDeclarationSavingStatusServiceImpl">
         <property name="taxDeductionDeclarationSavingStatusDAO" ref="taxDeductionDeclarationSavingStatusDAO1" />
+
+    <bean id="fullAndFinalSettlementService1" class="com.bul.zydex.service.resignation.FullAndFinalSettlementServiceImpl">
+        <property name="fullAndFinalSettlementDAO" ref="fullAndFinalSettlementDAO1"/>
+    </bean>
+    <bean id="formateFullNdFinalLetterService1" class="com.bul.zydex.service.FormateFullNdFinalLetter.FormateFullNdFinalLetterServiceImpl">
+        <property name="formateFullNdFinalLetterDAO" ref="formateFullNdFinalLetterDAO1"/>
+    </bean>
+    <bean id="kaizenMasterService1" class="com.bul.zydex.service.Kaizen.KaizenMasterServiceImpl">
+        <property name="kaizenMasterDAO" ref="kaizenMasterDAO1"/>
+    </bean>
+    <bean id="kaizenApprovalService1" class="com.bul.zydex.service.Kaizen.KaizenApprovalServiceImpl">
+        <property name="kaizenApprovalDAO" ref="kaizenApprovalDAO1"/>
+    </bean>
+    <bean id="leaveEmployeeDetailsApprovalHistoryService1" class="com.bul.zydex.service.leave.LeaveEmployeeDetailsApprovalHistoryServiceImpl">
+        <property name="leaveEmployeeDetailsApprovalHistoryDAO" ref="leaveEmployeeDetailsApprovalHistoryDAO1"/>
     </bean>
 </beans>

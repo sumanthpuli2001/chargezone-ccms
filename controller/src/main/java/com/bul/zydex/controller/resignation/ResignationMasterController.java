@@ -5,15 +5,27 @@
  */
 package com.bul.zydex.controller.resignation;
 
+import com.bul.zydex.model.ApprovalMaster;
+import com.bul.zydex.model.ApprovalUser;
+import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
+import com.bul.zydex.model.EmployeeCtcDetail;
+import com.bul.zydex.model.EmployeeCtcDetailSalary;
+import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.EmployeeSalaryProcess;
+import com.bul.zydex.model.FormateFullNdFinalLetter;
+import com.bul.zydex.model.FullAndFinalSettlement;
+import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.NoDueMaster;
 import com.bul.zydex.model.ResignationMaster;
 import com.bul.zydex.model.UserMaster;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -1188,4 +1200,253 @@ public class ResignationMasterController extends ResignationMasterAbstract {
 
     }
 
+    public ModelAndView fullAndfinal(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+
+        FullAndFinalSettlement fullAndFinalSettlement = new FullAndFinalSettlement();
+
+        List<?> fullAndFinalSettlementList = fullAndFinalSettlementService.readFAndFData();
+
+        mv.getModelMap().put("list", fullAndFinalSettlementList);
+        mv.getModelMap().put("fullAndFinalSettlement", fullAndFinalSettlement);
+        mv.setViewName("Resignation/ListFullAndFinal");
+        return mv;
+    }
+
+    public ModelAndView fullAndfinalSettlement(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        FullAndFinalSettlement fullAndFinalSettlement = new FullAndFinalSettlement();
+        bind(request, fullAndFinalSettlement);
+
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        selectResignedEmployee(request, response);
+        selectedEmployeeFor360Feedback(request, employeeMaster);
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.getModelMap().put("fullAndFinalSettlement", fullAndFinalSettlement);
+        mv.setViewName("Resignation/FullAdFinaSettlementl");
+        return mv;
+    }
+
+    public ModelAndView fullAndFinalSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        FullAndFinalSettlement fullAndFinalSettlement = new FullAndFinalSettlement();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        DesignationMaster designationMaster = new DesignationMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        if ("" != request.getParameter("employeeMaster")) {
+            String empid = request.getParameter("employeeMaster");
+            employeeMaster1 = employeeMasterService.readById(Integer.parseInt(empid));
+            BindException errors = new BindException(fullAndFinalSettlement, "fullAndFinalSettlement");
+            bind(request, fullAndFinalSettlement);
+            departmentList(request);
+
+            fullAndFinalSettlementValidator.validate(fullAndFinalSettlement, errors);
+            if (errors.hasErrors()) {
+                request.setAttribute("failureMessage",
+                        " field are Required.Please Enter Valid data");
+                mv = fullAndfinalSettlement(request, response);
+
+            } else {
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date cDate = new Date();
+                fullAndFinalSettlement.setEmployeeMaster(employeeMaster1);
+                fullAndFinalSettlement.setCreatedDate(sdf.format(cDate));
+                fullAndFinalSettlement.setCreatedBy(employeeMaster.getId());
+                fullAndFinalSettlement.setStatus(0);
+
+                fullAndFinalSettlementService.create(fullAndFinalSettlement);
+                request.setAttribute("successMessage",
+                        "Information : The Information is Updated Successfully.");
+
+                mv = fullAndfinal(request, response);
+                return mv;
+            }
+        }
+            request.setAttribute("failureMessage",
+                    " field are Required.Please Enter Valid data");
+            mv = fullAndfinalSettlement(request, response);
+        return mv;
+    }
+
+    public ModelAndView ViewfullAndfinalSettlement(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        FullAndFinalSettlement fullAndFinalSettlement = new FullAndFinalSettlement();
+        DesignationMaster designationMaster = new DesignationMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+
+        String id = request.getParameter("id");
+        fullAndFinalSettlement = fullAndFinalSettlementService.readById(Integer.parseInt(id));
+
+        employeeMaster = employeeMasterService.readById(fullAndFinalSettlement.getEmployeeMaster().getId());
+        ResignationMaster rm = resignationMasterService.readByEmpId(fullAndFinalSettlement.getEmployeeMaster().getId());
+        List<?> ListBW = resignationMasterService.fetchBWdate(rm.getEmployeeMaster().getId(), rm.getEffectiveDatetime(), rm.getRelievingDate());
+        List<?> esp = employeeSalaryProcessService.readEmpId(rm.getEmployeeMaster().getId());
+        List<?> ctcDetail = employeeCtcDetailService.empid(fullAndFinalSettlement.getEmployeeMaster().getId());
+//        List<?> ctcDetail1 = employeeCtcDetailService.CtcDetailempid(fullAndFinalSettlement.getEmployeeMaster().getId());
+        List<?> fNfList = formateFullNdFinalLetterService.fetchFnFDate();
+//        EmployeeCtcDetail ecd = (EmployeeCtcDetail) ctcDetail1.get(0);
+//        EmployeeSalaryProcess em = (EmployeeSalaryProcess) esp.get(0);
+        List<?> list = employeeDeductionAmountService.readByedaId(rm.getEmployeeMaster().getId(), rm.getEffectiveDatetime(), rm.getRelievingDate());
+        Double netPayable = 0.00;
+        Double totalMonthlyAmount2 = 0.00;
+        Double totalMonthlyAmount3 = 0.00;
+        Double totalMonthlyAmount4 = 0.00;
+        Double totalMonthlyAmount5 = 0.00;
+        Double totalMonthlyAmount6 = 0.00;
+        Double deductionAmount = 0.00;
+        Double mmmm = 0.00;
+
+        for (int i = 0; i < ctcDetail.size(); i++) {
+            Object[] o = (Object[]) ctcDetail.get(i);
+            if ((Integer.parseInt(o[1].toString()) == 2)) {
+                Double amount1 = (Double) o[3];
+                totalMonthlyAmount2 += Double.valueOf(amount1);
+            }
+            if ((Integer.parseInt(o[1].toString()) == 3)) {
+                Double amount1 = (Double) o[3];
+                totalMonthlyAmount3 += Double.valueOf(amount1);
+            }
+            if ((Integer.parseInt(o[1].toString()) == 4)) {
+                Double amount1 = (Double) o[3];
+                totalMonthlyAmount4 += Double.valueOf(amount1);
+            }
+            if ((Integer.parseInt(o[1].toString()) == 5)) {
+                Double amount1 = (Double) o[3];
+                totalMonthlyAmount5 += Double.valueOf(amount1);
+            }
+            if ((Integer.parseInt(o[1].toString()) == 6)) {
+                Double amount1 = (Double) o[3];
+                totalMonthlyAmount6 += Double.valueOf(amount1);
+            }
+        }
+
+        for (int i = 0; i < ListBW.size(); i++) {
+            Object[] o = (Object[]) ListBW.get(i);
+            Double reafmowise = (Double) o[1];
+            mmmm += Double.valueOf(reafmowise);
+        }
+
+//       ///// --------   For Salary For The Month of -------//////
+//        for (int i = 0; i < esp.size(); i++) {
+//            EmployeeSalaryProcess em1 = (EmployeeSalaryProcess) esp.get(i);
+//            netPayable += em1.getGrossTotal();
+//        }
+//        //////  ------ ctc_allowance for monthvise ------------ //////
+        Double monthAmountTotal = totalMonthlyAmount2 + totalMonthlyAmount3 + totalMonthlyAmount4 + totalMonthlyAmount5 + totalMonthlyAmount6;
+//        /////// -------- DEDUCTIONS -----------------//////
+        for (int i = 0; i < list.size(); i++) {
+            Object[] o = (Object[]) list.get(i);
+            Double aaam = (Double) o[4];
+            deductionAmount += aaam.valueOf(aaam);
+        }
+
+//        --------  (B) TOTAL PAYABLES ------------   //////
+        Double totalpayable = mmmm + monthAmountTotal;
+//        ------  TOTAL NET PAYABLE ( B - D ) -----  ///////
+        Double finaltotalBD = totalpayable - deductionAmount;
+
+        int designation = employeeMaster.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(designation);
+        String designationName = designationMaster.getDesignationName();
+
+        int department = employeeMaster.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        String departmentName = departmentMaster.getDepartmentName();
+
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.getModelMap().put("rm", rm);
+//        mv.getModelMap().put("esp", esp);
+        mv.getModelMap().put("ListBW", ListBW);
+        mv.getModelMap().put("ctcDetail", ctcDetail);
+        mv.getModelMap().put("list", list);
+        mv.getModelMap().put("totalpayable", totalpayable);
+        mv.getModelMap().put("deductionAmount", deductionAmount);
+        mv.getModelMap().put("finaltotalBD", finaltotalBD);
+        mv.getModelMap().put("fNfList", fNfList);
+//        mv.getModelMap().put("ctcDetail1", ctcDetail1);
+        mv.getModelMap().put("totalMonthlyAmount2", totalMonthlyAmount2);
+        mv.getModelMap().put("totalMonthlyAmount3", totalMonthlyAmount3);
+        mv.getModelMap().put("totalMonthlyAmount4", totalMonthlyAmount4);
+        mv.getModelMap().put("designationName", designationName);
+        mv.getModelMap().put("departmentName", departmentName);
+        mv.getModelMap().put("fullAndFinalSettlement", fullAndFinalSettlement);
+        mv.setViewName("Resignation/FullAndFinaSettlementReportShow");
+
+        return mv;
+    }
+
+    public ModelAndView fullandfcreateClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        FormateFullNdFinalLetter formateFullNdFinalLetter = new FormateFullNdFinalLetter();
+        List<?> list = formateFullNdFinalLetterService.fetchFnFDate();
+        mv.getModelMap().put("list", list);
+        mv.getModelMap().put("formateFullNdFinalLetter", formateFullNdFinalLetter);
+        mv.setViewName("FullAndFinal/FullAndFinalFetchList");
+        return mv;
+    }
+
+    public ModelAndView newFormatCreate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        FormateFullNdFinalLetter formateFullNdFinalLetter = new FormateFullNdFinalLetter();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        selectEmployee(request, response);
+//          EmployeeMaster employeeMaster= new EmployeeMaster();
+        selectedEmployeeFor360Feedback(request, employeeMaster);
+//        selectEmployeeForParticularManager(request, response);
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.getModelMap().put("formateFullNdFinalLetter", formateFullNdFinalLetter);
+        mv.setViewName("FullAndFinal/NewFormatCraeteFndF");
+        return mv;
+    }
+
+    public ModelAndView submitCraeteFormat(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        FormateFullNdFinalLetter formateFullNdFinalLetter = new FormateFullNdFinalLetter();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        BindException errors = new BindException(formateFullNdFinalLetter, "formateFullNdFinalLetter");
+        bind(request, formateFullNdFinalLetter);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+
+        formateFullNdFinalLetter.setCreateDate(sdf.format(cDate));
+        formateFullNdFinalLetter.setCreatedBy(employeeMaster.getId());
+        formateFullNdFinalLetter.setStatus(0);
+        formateFullNdFinalLetterService.create(formateFullNdFinalLetter);
+
+        request.setAttribute("successMessage",
+                "Information: The Format Full And Final Settlement Create successfully");
+
+        mv = fullandfcreateClick(request, response);
+
+        return mv;
+    }
+
+    public ModelAndView resignationDeleteList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String empId[] = request.getParameterValues("checkId");
+        for (String z : empId) {
+            try {
+                fullAndFinalSettlementService.delete(Integer.parseInt(z));
+                request.setAttribute("successMessage",
+                        "Info : One or more records are deleted successfully.");
+            } catch (Exception e) {
+
+            }
+        }
+        mv = fullAndfinal(request, response);
+        return mv;
+    }
 }

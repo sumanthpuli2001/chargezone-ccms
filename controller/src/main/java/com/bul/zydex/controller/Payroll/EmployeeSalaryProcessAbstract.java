@@ -22,6 +22,7 @@ import com.bul.zydex.model.PayrollAdditionalAmount;
 import com.bul.zydex.model.PayrollBonus;
 import com.bul.zydex.model.PayrollDeduction;
 import com.bul.zydex.model.PayrollEsicDeduction;
+import com.bul.zydex.model.PayrollFinancialYear;
 import com.bul.zydex.model.PayrollLoanDetail;
 import com.bul.zydex.model.PayrollLoanRemainingAmount;
 import com.bul.zydex.model.PayrollLoanType;
@@ -33,7 +34,13 @@ import com.bul.zydex.model.PayrollRecurringAdditionalAmount;
 import com.bul.zydex.model.PayrollRecurringDeduction;
 import com.bul.zydex.model.PayrollSalaryLock;
 import com.bul.zydex.model.PayrollSalaryType;
+import com.bul.zydex.model.PayrollTaxDeclarationPeriodMaster;
+import com.bul.zydex.model.PayrollTaxDeductionComponent;
+import com.bul.zydex.model.PayrollTaxDeductionMaster;
+import com.bul.zydex.model.PayrollTaxRateMaster;
 import com.bul.zydex.model.PolicyMaster;
+import com.bul.zydex.model.TaxDeductionDecarationSubmit;
+import com.bul.zydex.model.TaxSavingSubmit;
 import com.bul.zydex.service.EmployeeCtcDetailSalary.EmployeeCtcDetailSalaryService;
 import com.bul.zydex.service.EmployeePolicyDetail.EmployeePolicyDetailService;
 import com.bul.zydex.service.Payroll.AdditionalAmountCheckService;
@@ -46,6 +53,7 @@ import com.bul.zydex.service.Payroll.PayrollAdditionalAmountService;
 import com.bul.zydex.service.Payroll.PayrollBonusService;
 import com.bul.zydex.service.Payroll.PayrollDeductionService;
 import com.bul.zydex.service.Payroll.PayrollEsicDeductionService;
+import com.bul.zydex.service.Payroll.PayrollFinancialYearService;
 import com.bul.zydex.service.Payroll.PayrollLoanDetailService;
 import com.bul.zydex.service.Payroll.PayrollLoanRemainingAmountService;
 import com.bul.zydex.service.Payroll.PayrollLoanTypeService;
@@ -57,6 +65,12 @@ import com.bul.zydex.service.Payroll.PayrollRecurringAdditionalAmountService;
 import com.bul.zydex.service.Payroll.PayrollRecurringDeductionService;
 import com.bul.zydex.service.Payroll.PayrollSalaryLockService;
 import com.bul.zydex.service.Payroll.PayrollSalaryTypeService;
+import com.bul.zydex.service.Payroll.PayrollTaxDeclarationPeriodMasterService;
+import com.bul.zydex.service.Payroll.PayrollTaxDeductionComponentService;
+import com.bul.zydex.service.Payroll.PayrollTaxDeductionMasterService;
+import com.bul.zydex.service.Payroll.PayrollTaxRateMasterService;
+import com.bul.zydex.service.Payroll.TaxDeductionDecarationSubmitService;
+import com.bul.zydex.service.Payroll.TaxSavingSubmitService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.emp.EmployeeTypeService;
 import com.bul.zydex.service.policy.CtcAllowanceService;
@@ -102,6 +116,13 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     protected CtcAllowanceService<CtcAllowance> ctcAllowanceService;
     protected EmployeeCtcDetailService<EmployeeCtcDetail> employeeCtcDetailService;
     protected EmployeeCtcDetailSalaryService<EmployeeCtcDetailSalary> employeeCtcDetailSalaryService;
+    protected PayrollFinancialYearService<PayrollFinancialYear> payrollFinancialYearService;
+    protected TaxSavingSubmitService<TaxSavingSubmit> taxSavingSubmitService;
+    protected TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> taxDeductionDecarationSubmitService;
+    protected PayrollTaxDeductionComponentService<PayrollTaxDeductionComponent> payrollTaxDeductionComponentService;
+    protected PayrollTaxDeductionMasterService<PayrollTaxDeductionMaster> payrollTaxDeductionMasterService;
+    protected PayrollTaxDeclarationPeriodMasterService<PayrollTaxDeclarationPeriodMaster> payrollTaxDeclarationPeriodMasterService;
+    protected PayrollTaxRateMasterService<PayrollTaxRateMaster> payrollTaxRateMasterService;
 
     Validator employeeSalaryProcessValidator;
 
@@ -336,6 +357,64 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     public void setEmployeeCtcDetailSalaryService(EmployeeCtcDetailSalaryService<EmployeeCtcDetailSalary> employeeCtcDetailSalaryService) {
         this.employeeCtcDetailSalaryService = employeeCtcDetailSalaryService;
     }
+
+    public PayrollFinancialYearService<PayrollFinancialYear> getPayrollFinancialYearService() {
+        return payrollFinancialYearService;
+    }
+
+    public void setPayrollFinancialYearService(PayrollFinancialYearService<PayrollFinancialYear> payrollFinancialYearService) {
+        this.payrollFinancialYearService = payrollFinancialYearService;
+    }
+
+    public TaxSavingSubmitService<TaxSavingSubmit> getTaxSavingSubmitService() {
+        return taxSavingSubmitService;
+    }
+
+    public void setTaxSavingSubmitService(TaxSavingSubmitService<TaxSavingSubmit> taxSavingSubmitService) {
+        this.taxSavingSubmitService = taxSavingSubmitService;
+    }
+
+    public TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> getTaxDeductionDecarationSubmitService() {
+        return taxDeductionDecarationSubmitService;
+    }
+
+    public void setTaxDeductionDecarationSubmitService(TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> taxDeductionDecarationSubmitService) {
+        this.taxDeductionDecarationSubmitService = taxDeductionDecarationSubmitService;
+    }
+
+    public PayrollTaxDeductionComponentService<PayrollTaxDeductionComponent> getPayrollTaxDeductionComponentService() {
+        return payrollTaxDeductionComponentService;
+    }
+
+    public void setPayrollTaxDeductionComponentService(PayrollTaxDeductionComponentService<PayrollTaxDeductionComponent> payrollTaxDeductionComponentService) {
+        this.payrollTaxDeductionComponentService = payrollTaxDeductionComponentService;
+    }
+
+    public PayrollTaxDeductionMasterService<PayrollTaxDeductionMaster> getPayrollTaxDeductionMasterService() {
+        return payrollTaxDeductionMasterService;
+    }
+
+    public void setPayrollTaxDeductionMasterService(PayrollTaxDeductionMasterService<PayrollTaxDeductionMaster> payrollTaxDeductionMasterService) {
+        this.payrollTaxDeductionMasterService = payrollTaxDeductionMasterService;
+    }
+
+    public PayrollTaxDeclarationPeriodMasterService<PayrollTaxDeclarationPeriodMaster> getPayrollTaxDeclarationPeriodMasterService() {
+        return payrollTaxDeclarationPeriodMasterService;
+    }
+
+    public void setPayrollTaxDeclarationPeriodMasterService(PayrollTaxDeclarationPeriodMasterService<PayrollTaxDeclarationPeriodMaster> payrollTaxDeclarationPeriodMasterService) {
+        this.payrollTaxDeclarationPeriodMasterService = payrollTaxDeclarationPeriodMasterService;
+    }
+
+    public PayrollTaxRateMasterService<PayrollTaxRateMaster> getPayrollTaxRateMasterService() {
+        return payrollTaxRateMasterService;
+    }
+
+    public void setPayrollTaxRateMasterService(PayrollTaxRateMasterService<PayrollTaxRateMaster> payrollTaxRateMasterService) {
+        this.payrollTaxRateMasterService = payrollTaxRateMasterService;
+    }
+    
+    
     
     
     

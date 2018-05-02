@@ -7,13 +7,16 @@ package com.bul.zydex.service.Payroll;
 
 import com.bul.zydex.model.PayrollFinancialYear;
 import com.bul.zydex.service.GenericsService;
+import java.util.List;
 
 /**
  *
  * @author Irfan <irfanbhindawala@gmail.com>
  */
-public interface PayrollFinancialYearService<T> extends GenericsService<T>{
+public interface PayrollFinancialYearService<T> extends GenericsService<T> {
 
     public boolean isExist(PayrollFinancialYear payrollFinancialYear);
-   
+
+    public List<?> readDayFinancialYear(int locationId, String month, String year);
+
 }

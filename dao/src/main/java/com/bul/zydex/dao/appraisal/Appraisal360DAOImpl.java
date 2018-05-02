@@ -196,5 +196,16 @@ public class Appraisal360DAOImpl<T> extends GenericsDAOImpl<T> implements Apprai
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+    @Override
+    public List<?> readByEmpIdAndCname(int empId, String CycleName) {
+        String query = "";
+        query += " "
+                + " FROM AppraisalFeedback360 a "
+                + " Where a.employeeMasterByRefForEmpId =" + empId
+                + " And a.cycleName = '" + CycleName + "'";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
 
 }

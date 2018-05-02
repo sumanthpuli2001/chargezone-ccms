@@ -27,4 +27,11 @@ public interface EmployeePolicyDetailDAO<T> extends GenericsDAO<T> {
 
     public List<?> readBypolicyAmount(int empId);
 
+//    public List<?> readBypolicyAmountTaxableAmount(int empId);
+    public boolean readBypolicyAmountTaxableAmount(Integer empID, Integer salaryType);
+
+    public List<?> readBypolicyAmountWithTaxable(int empId);
+
+    public List<?> readForMasterAdditionalAmount(int empTypeId,int policyMasterId);
+
 }

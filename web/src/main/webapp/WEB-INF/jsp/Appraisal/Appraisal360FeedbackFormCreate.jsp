@@ -128,16 +128,26 @@
                                                         <form:input path="employeeMasterByRefForEmpId"  class="form-control" onchange="return valEmp()"></form:input>
                                                         <form:errors path="employeeMasterByRefForEmpId" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                        <div class="col-sm-3" id="yearid" >
+
+                                                    </div><!-- /.col -->
+                                                    <div class="form-group">
+                                                        <div class="col-sm-4" id="yearid" >
                                                             <label>Year:</label>
-                                                            <select name="cycleYear" id="cycleYear" class="form-control"/>
+                                                            <select name="cycleYear" id="cycleYear" class="form-control" onchange="selectcycleName(this.value);"/>
                                                             <!--<option value="">--SELECT--</option>-->
                                                         <c:forEach var="cycleYear" items="${cycleYear}">
                                                             <option value="${cycleYear}">${cycleYear}</option>
                                                         </c:forEach>
                                                         </select>
                                                     </div>
-                                                </div><!-- /.col -->
+                                                    <div class="col-sm-4" id="nameCycle">
+                                                        <%--<form:input path="id" id="id" class="form-control" type="hidden"></form:input>--%>
+                                                        <label>Cycle Name :<span style="color: red;font-size: 12px;"></span></label>
+                                                        <select name="cyclename" class="form-control" id="cyclename"  required="true">
+                                                            <option value="">--Select--</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
 
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
@@ -364,4 +374,29 @@
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>
+<script>
+    function selectcycleName(typeId) {
 
+        var empSubTypeId = document.getElementById("cyclename").value;
+//            document.getElementById('EmployeeId').innerHTML = "Fetching ... .. .";
+        $.post("appraisalFillingData.htm?act=readCycleNameAjax",
+                {
+                    typeId: typeId,
+                    empSubTypeId: empSubTypeId
+                }, function (responseTxt, statusTxt, xhr) {
+            if (statusTxt === "success") {
+                ("responseTxt" + responseTxt);
+                document.getElementById('nameCycle').innerHTML = responseTxt;
+            }
+            if (statusTxt === "error")
+                ("Error: " + xhr.status + ": " + xhr.statusText);
+        });
+    }
+
+    $(document).ready(function () {
+        var empTypeId = document.getElementById("cycleYear").value;
+        selectcycleName(empTypeId);
+    });
+
+
+</script>

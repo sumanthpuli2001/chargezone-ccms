@@ -316,7 +316,9 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-
+        <c:if test="${!empty successMessage}">
+            <div class="alert alert-info" role="alert">${successMessage}</div>
+        </c:if>
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>Homepage</h1>
@@ -595,7 +597,7 @@
                                     </a>
                                 </div>
                                 <div  class="col-xs-4 col-sm-4 col-md-4">
-                                    <a class="label label-primary" style="font-size: 20px" >
+                                    <a class="label label-primary" style="font-size: 20px" href="homeController.htm?act=kaizen">
                                         <i class="fa fa-twitch"></i>
                                         <strong>Kaizen</strong>
                                     </a>
@@ -642,7 +644,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                         <!--<span class="product-title">  ${thoughtMaster}</span>-->
-                                    <marquee style="font-size:26px !important;"><strong style="color: mediumseagreen">Today's Thought:</strong> <span style="color: #006fad">${thoughtMaster.thought}</span></marquee>
+                                    <marquee style="font-size:26px !important;"><strong style="color: #00BFFF;">Today's Thought:</strong> <span style="color: #006fad">${thoughtMaster.thought}</span></marquee>
                                 </div>
                             </div>
 

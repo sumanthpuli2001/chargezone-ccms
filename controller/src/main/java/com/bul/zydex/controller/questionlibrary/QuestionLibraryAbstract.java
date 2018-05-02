@@ -8,9 +8,11 @@ package com.bul.zydex.controller.questionlibrary;
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.QuestionAns;
+import com.bul.zydex.model.QuestionAnswerSubmit;
 import com.bul.zydex.model.QuestionDetails;
 import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.QuestionPaper;
+import com.bul.zydex.service.QuestionAnswerSubmit.QuestionAnswerSubmitService;
 import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
 import com.bul.zydex.service.questionlibrary.QuestionAnsService;
 import com.bul.zydex.service.questionlibrary.QuestionDetailsService;
@@ -32,6 +34,7 @@ public abstract class QuestionLibraryAbstract extends CustomAbstract {
     protected MprEmployeeCategoryService<MprEmployeeCategory> mprEmployeeCategoryService;
     protected QuestionPaperService<QuestionPaper> questionPaperService;
     protected QuestionDetailsService<QuestionDetails> questionDetailsService;
+    protected QuestionAnswerSubmitService<QuestionAnswerSubmit> questionAnswerSubmitService;
 
     public QuestionLibraryService<QuestionLibrary> getQuestionLibraryService() {
         return questionLibraryService;
@@ -72,8 +75,17 @@ public abstract class QuestionLibraryAbstract extends CustomAbstract {
     public void setQuestionDetailsService(QuestionDetailsService<QuestionDetails> questionDetailsService) {
         this.questionDetailsService = questionDetailsService;
     }
+
+    public QuestionAnswerSubmitService<QuestionAnswerSubmit> getQuestionAnswerSubmitService() {
+        return questionAnswerSubmitService;
+    }
+
+    public void setQuestionAnswerSubmitService(QuestionAnswerSubmitService<QuestionAnswerSubmit> questionAnswerSubmitService) {
+        this.questionAnswerSubmitService = questionAnswerSubmitService;
+    }
     
 
+    
     protected void employeecategoryList(HttpServletRequest request) {
         MprEmployeeCategory mprEmployeeCategory = new MprEmployeeCategory();
         List<?> categoryList = mprEmployeeCategoryService.read();

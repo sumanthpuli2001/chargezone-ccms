@@ -44,7 +44,27 @@ public class EmployeeCtcDetailServiceImpl<T> extends GenericsServiceImpl<T> impl
 
     @Override
     public List<?> readByEmployeCtcReport(int employeeid, String month, String year) {
-       return employeeCtcDetailDAO.readByEmployeCtcReport(employeeid, month, year);
+        return employeeCtcDetailDAO.readByEmployeCtcReport(employeeid, month, year);
+    }
+
+    @Override
+    public List<?> empid(int employeeid) {
+        return employeeCtcDetailDAO.empid(employeeid);
+    }
+
+    @Override
+    public List<?> CtcDetailempid(int employeeid) {
+         return employeeCtcDetailDAO.CtcDetailempid(employeeid);
+    }
+
+    @Override
+    public List<?> readctcRegistration(int employeeid) {
+       return employeeCtcDetailDAO.readctcRegistration(employeeid);
+    }
+
+    @Override
+    public List<?> CtcDetailempidMasterSalary(int employeeid, int ctcAllowanceId) {
+     return employeeCtcDetailDAO.CtcDetailempidMasterSalary(employeeid, ctcAllowanceId);
     }
 
 }

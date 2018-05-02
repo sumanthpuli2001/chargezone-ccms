@@ -9,6 +9,7 @@ import com.bul.zydex.model.MprEmployeeCategory;
 import com.bul.zydex.model.MprEmployeeTypeMaster;
 import com.bul.zydex.model.PolicyMaster;
 import com.bul.zydex.model.QuestionAns;
+import com.bul.zydex.model.QuestionAnswerSubmit;
 import com.bul.zydex.model.QuestionDetails;
 import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.QuestionPaper;
@@ -473,4 +474,41 @@ public class QuestionLibraryController extends QuestionLibraryAbstract {
         return mv;
 
     }
+
+    public ModelAndView questionLibrarydelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String savingList[] = request.getParameterValues("checkId");
+        for (String z : savingList) {
+            try {
+
+                QuestionDetails questionDetails = new QuestionDetails();
+                List<?> list = questionDetailsService.deletelibraryid(z);
+                for (Object object : list) {
+                    questionDetails = (QuestionDetails) object;
+                    questionDetailsService.delete(questionDetails.getId());
+                }
+                QuestionAns questionAns = new QuestionAns();
+                List<?> list1 = questionAnsService.deleteqlibryId(z);
+                for (Object object : list1) {
+                    questionAns = (QuestionAns) object;
+                    questionAnsService.delete(questionAns.getId());
+                }
+                QuestionAnswerSubmit answerSubmit = new QuestionAnswerSubmit();
+                List<?> list2 = questionAnswerSubmitService.deletelibryId(z);
+                for (Object object : list2) {
+                    answerSubmit = (QuestionAnswerSubmit) object;
+                    questionAnswerSubmitService.delete(answerSubmit.getId());
+                }
+
+                questionLibraryService.delete(Integer.parseInt(z));
+                request.setAttribute("successMessage",
+                        "Info :Records are deleted successfully.");
+            } catch (Exception e) {
+
+            }
+        }
+        mv = QuestionLibraryCreate(request, response);
+        return mv;
+    }
+
 }

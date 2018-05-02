@@ -57,4 +57,15 @@ public class EmployeeLeaveBalanceDAOImpl<T> extends GenericsDAOImpl<T> implement
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readByEmpIdAndLeaveTypeId(int empId, int levtyId) {
+
+        String query = "";
+        query += ""
+                + " From EmployeeLeaveBalance a "
+                + " WHERE a.leaveTypeMaster.id = " + levtyId
+                + " and a.employeeMaster.id = " + empId;
+        return getHibernateTemplate().find(query);
+    }
+
 }

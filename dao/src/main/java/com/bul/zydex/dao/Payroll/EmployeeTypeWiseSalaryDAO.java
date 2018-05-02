@@ -12,9 +12,10 @@ import java.util.List;
  *
  * @author Irfan <irfanbhindawala@gmail.com>
  */
-public interface EmployeeTypeWiseSalaryDAO<T> extends GenericsDAO<T>{
-    
-     public List<?> readForAdditionalAmount(int empTypeId, int empSubTypeId);
-     public List<?> readForMasterAdditionalAmount(int empTypeId, int empSubTypeId,int payrollSalaryId);
-    
+public interface EmployeeTypeWiseSalaryDAO<T> extends GenericsDAO<T> {
+
+    public List<?> readForAdditionalAmount(int empTypeId, int empSubTypeId);
+
+    public List<?> readForMasterAdditionalAmount(int empTypeId, int empSubTypeId, int payrollSalaryId);
+
 }

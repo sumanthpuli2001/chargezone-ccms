@@ -29,11 +29,23 @@ public class LeaveTypeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Lea
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+
     @Override
-     public List<?> readLeaveType(String type){
+    public List<?> readLeaveType(String type) {
         String query = "";
-        query += " Select id FROM LeaveTypeMaster a "
-                + " WHERE a.leaveType='"+type+"'";
+        query += " Select a FROM LeaveTypeMaster a "
+                + " WHERE a.leaveType='" + type + "'";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public List<?> readLeaveTypeEditRegistration(String type) {
+        String query = "";
+        query += " Select a.id"
+                + " FROM LeaveTypeMaster a "
+                + " WHERE a.leaveType='" + type + "'";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

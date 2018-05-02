@@ -33,4 +33,16 @@ public class QuestionAnswerSubmitDAOImpl<T> extends GenericsDAOImpl<T> implement
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> deletelibryId(String libraryId) {
+        String query = "";
+
+        query += "  "
+                + " select a"
+                + " FROM QuestionAnswerSubmit a "
+                + " WHERE a.questionLibraryId.id = " + libraryId;
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

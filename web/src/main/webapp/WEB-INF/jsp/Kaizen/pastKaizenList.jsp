@@ -9,7 +9,7 @@
 <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
 <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
 <head>
-    <title>Kaizen List</title>
+    <title>Past Kaizen List</title>
 </head>
 <html>
     <div class="content-wrapper">

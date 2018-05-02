@@ -33,13 +33,13 @@
                 <c:if test="${!sessionScope.userRight.hr}">
                     <li class="active treeview">
                         <a href="userMaster.htm?act=goToDashboard">
-                            <i class="fa fa-dashboard fa-lg"></i> <span>My Dashboard</span>
+                            <i class="fa fa-dashboard fa-lg" style="color: #424242;"></i> <span style="color: #424242;">My Dashboard</span>
                         </a>
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.userRight.hr}">
                     <li class="active treeview">
-                        <a href="userMaster.htm?act=hrDashboard"  style="color: #fff;  background: #fff;">
+                        <a href="userMaster.htm?act=hrDashboard">
                             <i class="fa fa-dashboard fa-lg" style="color: #424242;"></i> <span style="color: #424242;">My Dashboard</span>
                         </a>
                     </li>
@@ -47,13 +47,13 @@
                 <c:if test="${!sessionScope.userRight.hr}">
                     <li class="active treeview">
                         <a href="homeController.htm?act=openHomePage">
-                            <i class="fa fa-home fa-lg"></i> <span>Homepage</span>
+                            <i class="fa fa-home fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Homepage</span>
                         </a>
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.userRight.hr}">
                     <li class="active treeview">
-                        <a href="homeController.htm?act=openHomePage" style="color: #fff;  background: #fff;">
+                        <a href="homeController.htm?act=openHomePage">
                             <i class="fa fa-home fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Homepage</span>
                         </a>
                     </li>
@@ -89,7 +89,9 @@
                             <ul class="treeview-menu">
                                 <li><a href="recruitment.htm?act=approvalMppCreate"><i class="fa fa-circle-o"></i>MPP Approval</a></li>
                                 <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>MPR Approval</a></li>
-                                <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
+                                    <c:if test="${sessionScope.userRight.candidateList}">
+                                    <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
+                                    </c:if>    
                                     <c:if test="${sessionScope.userRight.budget}">
                                     <li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP</a></li>
                                     </c:if>
@@ -155,6 +157,7 @@
                             <li><a href="employeeMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Employee Registration</a></li>
                             <li><a href="employeeMaster.htm?act=formerEmployeeRecords"><i class="fa fa-circle-o"></i>Former Employee Details</a></li>
                             <li><a href="employeeMaster.htm?act=excelUploadRegistration"><i class="fa fa-circle-o"></i>Employee Registration By Excel</a></li>
+                            <li><a href="employeeMaster.htm?act=excelUploadAllowance"><i class="fa fa-circle-o"></i>Allowance By Excel</a></li>
                             <!--                        <li><a href="userMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>User Right</a></li>-->
                         </ul>
                     </li>

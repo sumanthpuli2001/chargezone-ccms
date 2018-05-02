@@ -213,6 +213,7 @@
 
                                                             <div class="col-md-12 col-sm-12">
                                                                 <div class="table table-bordered">
+                                                                     <div class=" table table-bordered table-responsive">
                                                                     <table id="tableid" class="table table-bordered table-striped table-hover" style="" align="Center"  >
 
                                                                         <thead>
@@ -238,7 +239,7 @@
                                                                 </tbody>                                           
                                                             </table>
                                                         </div>
-
+                                                                </div>
 
                                                     </div>  
                                                 </div>

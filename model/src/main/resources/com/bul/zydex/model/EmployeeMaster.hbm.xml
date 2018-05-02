@@ -239,6 +239,12 @@
         <property name="ot" type="java.lang.Boolean">
             <column name="ot"></column>
         </property>
+        <property name="pf" type="java.lang.Boolean">
+            <column name="pf"></column>
+        </property>
+        <property name="pt" type="java.lang.Boolean">
+            <column name="pt"></column>
+        </property>
         <property name="oddPunch" type="java.lang.Boolean">
             <column name="odd_punch"></column>
         </property>

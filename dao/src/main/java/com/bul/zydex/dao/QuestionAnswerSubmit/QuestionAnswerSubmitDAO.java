@@ -16,4 +16,5 @@ public interface QuestionAnswerSubmitDAO<T> extends GenericsDAO<T> {
 
     public List<?> readByCandidateApplicationId(int appId);
 
+    public List<?> deletelibryId(String libraryId);
 }

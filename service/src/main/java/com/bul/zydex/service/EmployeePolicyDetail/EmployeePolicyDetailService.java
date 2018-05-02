@@ -31,4 +31,6 @@ public interface EmployeePolicyDetailService<T> extends GenericsService<T> {
 
     public List<?> readBypolicyAmountWithTaxable(int empId);
 
+    public List<?> readForMasterAdditionalAmount(int empTypeId, int policyMasterId);
+
 }

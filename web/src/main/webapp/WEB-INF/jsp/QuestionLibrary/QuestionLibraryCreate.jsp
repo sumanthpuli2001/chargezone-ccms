@@ -33,17 +33,6 @@
                 window.location = 'employeeMaster.htm?act=inActiveEmployeeClick&id=' + id;
             }
 
-            function deleteCheck11() {
-                var checkboxes = "";
-                checkboxes = document.getElementsByName('checkId');
-                for (var i = 0, n = checkboxes.length; i < n; i++) {
-                    if (checkboxes[i].checked) {
-                        return true;
-                    }
-                }
-                alert("Please, Select one or more record(s).");
-                return false;
-            }
         </script>
         <script>
             function editClick(id, eprId) {
@@ -55,7 +44,8 @@
 
 
             function deleteCheck11() {
-                var checkboxes = "";
+                var checkboxes = confirm("Are you sure you want to delete?");
+                if (checkboxes) {
                 checkboxes = document.getElementsByName('checkId');
                 for (var i = 0, n = checkboxes.length; i < n; i++) {
                     if (checkboxes[i].checked) {
@@ -63,6 +53,7 @@
                     }
                 }
                 alert("Please, Select one or more record(s).");
+            }
                 return false;
             }
         </script>
@@ -86,7 +77,7 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form action="employeeMaster.htm?act=deleteSubmit" method="post" commandName="employeeMaster"
+        <form:form action="questionLibrary.htm?act=questionLibrarydelete" method="post" commandName="employeeMaster"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">
@@ -164,12 +155,12 @@
                                                                                     &nbsp;&nbsp;View/Edit
                                                                                 </a>
                                                                             </li>
-                                                                            <li style="width: 100px;">
+<!--                                                                            <li style="width: 100px;">
                                                                                 <a href="#"
                                                                                    onclick="deleteClick(${list[0]},${list[6]});">
                                                                                     &nbsp;&nbsp;Delete
                                                                                 </a>
-                                                                            </li>
+                                                                            </li>-->
                                                                             <%--</c:if>--%>
 
                                                                             <!--                                                                            <li>

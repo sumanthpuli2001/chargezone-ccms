@@ -361,7 +361,7 @@
             selectsubtype(empTypeId);
         });
     </script>
-     <script>
+    <script>
         var tempCount4 = 1;
         $(function () {
             $("#ctcCloneid").on("click", function () {
@@ -406,11 +406,11 @@
                 function init() {
                     document.form1.month.options[new Date().getMonth()].selected = true;
                 }
-                var start = 1990;
+                var start = new Date().getFullYear();
                 var end = 2050;
                 var options11 = "";
-
-                for (var year1 = end; year1 >= start; year1--) {
+//        var objSelect = document.getElementById("yearBase").value;
+                for (var year1 = start; year1 <= end; year1++) {
                     options11 += "<option>" + year1 + "</option>";
                 }
 //                alert(tempCount4);
@@ -504,7 +504,7 @@
         }
 
     </script>
-   
+
 
     <script>
         function setDesignation() {
@@ -1139,20 +1139,20 @@
                                                         <div class="col-sm-4">
                                                             <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset>
-                                                                <input type="radio" name="pf" id="pf" value="false" checked>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <input type="radio" name="pf" id="pf" value="true">YES
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <label>Provident Tax:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <fieldset>
-                                                                <input type="radio" name="pt" id="pt" value="false" checked>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <input type="radio" name="pt" id="pt" value="true">YES
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <label>ESIC:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
-                                                            <fieldset>
+                                                            <form:radiobutton path="pf"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="pf" value="true"/>YES
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>Provident Tax:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <fieldset>
+                                                            <form:radiobutton path="pt"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="pt" value="true"/>YES
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>ESIC:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                        <fieldset>
                                                             <form:radiobutton path="esic" value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <form:radiobutton path="esic" value="true"/>YES
                                                         </fieldset>
@@ -1349,43 +1349,43 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>PF No.:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:input path="pfNo" id="pfNo" class="form-control"></form:input>
-                                                        <%--<form:errors path="pfNo" cssClass="errorDiv"></form:errors>--%>
-                                                        </div> 
+                                                            <form:input path="pfNo" id="pfNo" class="form-control"></form:input>
+                                                            <%--<form:errors path="pfNo" cssClass="errorDiv"></form:errors>--%>
+                                                    </div> 
 
-                                                        <div class="col-sm-6">
-                                                            <label>UAN No.:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:input path="uanNo" id="uanNo"  class="form-control"></form:input>
-                                                        <%--<form:errors path="uanNo" cssClass="errorDiv"></form:errors>--%>
-                                                        </div>  
+                                                    <div class="col-sm-6">
+                                                        <label>UAN No.:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="uanNo" id="uanNo"  class="form-control"></form:input>
+                                                            <%--<form:errors path="uanNo" cssClass="errorDiv"></form:errors>--%>
                                                     </div>  
+                                                </div>  
 
 
-                                                </div>
-                                            </div><!-- /.col -->
-                                        </div><!-- /.row -->
-                                    </div><!-- /.box-body -->
-                                    <!--bank detail complete-->
-                                    <div class="box box-info collapsed-box" id="reporting_level_id">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Reporting Detail:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
-                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <!--<label class="col-sm-2 control-label" style="float: left;">Reporting Manager:</label>-->
-                                                        <!--                                                        <div class="col-sm-12">
-                                                                                                                    <label>Reporting Manager:</label>
-                                                                                                                </div>-->
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6" id="levelIdDiv1">
-                                                            <label>Reporting Manager:<span style="color: red;font-size: 12px;">*</span></label>
+                                        </div><!-- /.col -->
+                                    </div><!-- /.row -->
+                                </div><!-- /.box-body -->
+                                <!--bank detail complete-->
+                                <div class="box box-info collapsed-box" id="reporting_level_id">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Reporting Detail:</h3>
+                                        <div class="box-tools pull-right">
+                                            <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
+                                            <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                        </div>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <!--<label class="col-sm-2 control-label" style="float: left;">Reporting Manager:</label>-->
+                                                    <!--                                                        <div class="col-sm-12">
+                                                                                                                <label>Reporting Manager:</label>
+                                                                                                            </div>-->
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6" id="levelIdDiv1">
+                                                        <label>Reporting Manager:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="reportingManagerLevel1" class="form-control" onchange="reportingLevelSet();"></form:input>
                                                         <form:errors path="reportingManagerLevel1" cssClass="errorDiv"></form:errors>
                                                         </div>
@@ -2138,11 +2138,11 @@
         function init() {
             document.form1.month.options[new Date().getMonth()].selected = true;
         }
-        var start = 1990;
+        var start = new Date().getFullYear();
         var end = 2050;
         var options11 = "";
-
-        for (var year1 = end; year1 >= start; year1--) {
+//        var objSelect = document.getElementById("yearBase").value;
+        for (var year1 = start; year1 <= end; year1++) {
             options11 += "<option>" + year1 + "</option>";
         }
         document.getElementById('year1').innerHTML = options11;

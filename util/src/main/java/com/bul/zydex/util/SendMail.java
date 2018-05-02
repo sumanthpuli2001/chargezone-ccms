@@ -23,10 +23,10 @@ public class SendMail {
 //		SimpleMailMessage message = new SimpleMailMessage();
         mimeMessage.setContent(msg, "text/html");
 
-        if(to.contains("zydexindustries.com")){
+        if(to.contains("spcls.co.in")){
             
 //        helper.setFrom(from);
-        helper.setFrom("ecafe@zydexindustries.com");
+        helper.setFrom("hrms@spcls.co.in");
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(msg, true);

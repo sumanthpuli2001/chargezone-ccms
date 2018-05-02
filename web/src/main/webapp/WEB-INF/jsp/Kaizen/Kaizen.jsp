@@ -25,7 +25,6 @@
     </style>
     <script>
         function checkBlankField() {
-            alert("helooooooo")
             var flag = true;
             if ($('#teamLeader').val() == '') {
                 document.getElementById('teamLeaderError').innerHTML = '-It must not be empty or white space.';
@@ -128,7 +127,7 @@
                                         </tr>
                                         <tr style="vertical-align: top;">
                                             <th colspan="3" rowspan="5">
-                                                Problem Description: ): <br>Electricity Consumption is more  <br>
+                                                Problem Description :   <br>
                                                 <textarea style="resize: none" id="problemDescription" name="problemDescription" rows="12" cols="35" onchange="kaizenOnchangeFunction('problemDescriptionError');"></textarea><br>
                                                 <span style="font-size: 14px; color: #dd4b39;" id="problemDescriptionError"></span></th>
                                             <th colspan="5" rowspan="5" style="text-align: center;" >
@@ -160,7 +159,7 @@
                                             </th>
                                         </tr>
                                         <tr style="vertical-align: top;">
-                                            <th colspan="3" rowspan="5">Improvement Description :<br>We can remove the unnecessary lights<br>
+                                            <th colspan="3" rowspan="5">Improvement Description :<br>
                                                 <textarea name="improvementDescription" id="improvementDescription" style="resize: none" rows="12" cols="35" onchange="kaizenOnchangeFunction('improvementDescriptionError');"></textarea>
                                                 <br>  <span style="font-size: 14px; color: #dd4b39;" id="improvementDescriptionError"></span>
                                             </th>

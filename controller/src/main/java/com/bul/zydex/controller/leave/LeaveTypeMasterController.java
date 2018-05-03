@@ -165,25 +165,30 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
         String sickLeave = "";
         String privilegeLeave = "";
         String paternityLeave = "";
+        String shortLeave = "";
         int count = 0;
         String cl = "Casual Leave";
         String sl = "Sick Leave";
         String pl = "Privilege Leave";
         String ptl = "Paternity Leave";
+        String shrtl = "Short Leave";
         float cLeave = 0;
         float sLeave = 0;
         float pLeave = 0;
         float ptLeave = 0;
+        float shrtLeave = 0;
         String countEmpId = "";
 
         LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
         LeaveTypeMaster leaveTypeMaster1 = new LeaveTypeMaster();
         LeaveTypeMaster leaveTypeMaster2 = new LeaveTypeMaster();
         LeaveTypeMaster leaveTypeMaster3 = new LeaveTypeMaster();
+        LeaveTypeMaster leaveTypeMaster4 = new LeaveTypeMaster();
         List<?> clList = leaveTypeMasterService.readLeaveType(cl);
         List<?> slList = leaveTypeMasterService.readLeaveType(sl);
         List<?> plList = leaveTypeMasterService.readLeaveType(pl);
         List<?> ptlList = leaveTypeMasterService.readLeaveType(ptl);
+        List<?> shrtlList = leaveTypeMasterService.readLeaveType(shrtl);
         if (!clList.isEmpty()) {
 //            Integer id = (Integer) clList.get(0);
 //            leaveTypeMaster = leaveTypeMasterService.readById(id);
@@ -204,6 +209,11 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
 //            leaveTypeMaster3 = leaveTypeMasterService.readById(id3);
             leaveTypeMaster3 = (LeaveTypeMaster) ptlList.get(0);
         }
+        if (!shrtlList.isEmpty()) {
+//            Integer id3 = (Integer) ptlList.get(0);
+//            leaveTypeMaster3 = leaveTypeMasterService.readById(id3);
+            leaveTypeMaster4 = (LeaveTypeMaster) shrtlList.get(0);
+        }
 
         try {
             if (multipartFile.getSize() > 0) {
@@ -222,6 +232,7 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
                         sickLeave = "" + (null == row.getCell((short) 2) ? "" : row.getCell((short) 2));
                         privilegeLeave = "" + (null == row.getCell((short) 3) ? "" : row.getCell((short) 3));
                         paternityLeave = "" + (null == row.getCell((short) 4) ? "" : row.getCell((short) 4));
+                        shortLeave = "" + (null == row.getCell((short) 5) ? "" : row.getCell((short) 5));
 
                         if (!casualLeave.equals("")) {
                             cLeave = Float.parseFloat(casualLeave);
@@ -235,6 +246,9 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
                         if (!paternityLeave.equals("")) {
                             ptLeave = Float.parseFloat(paternityLeave);
                         }
+                        if (!shortLeave.equals("")) {
+                            shrtLeave = Float.parseFloat(shortLeave);
+                        }
 
                         EmployeeMaster employeeMaster = new EmployeeMaster();
 //                        int empNo = Integer.parseInt(employeeNo);
@@ -246,6 +260,7 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
                             EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
                             EmployeeLeaveBalance employeeLeaveBalance2 = new EmployeeLeaveBalance();
                             EmployeeLeaveBalance employeeLeaveBalance4 = new EmployeeLeaveBalance();
+                            EmployeeLeaveBalance employeeLeaveBalance5 = new EmployeeLeaveBalance();
                             if (!casualLeave.equals("")) {
                                 employeeLeaveBalance.setEmployeeMaster(employeeMaster);
                                 employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
@@ -266,6 +281,11 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
                                 employeeLeaveBalance4.setEmployeeMaster(employeeMaster);
                                 employeeLeaveBalance4.setLeaveTypeMaster(leaveTypeMaster3);
                                 employeeLeaveBalance4.setNoOfLeaveRemain(Float.parseFloat(paternityLeave));
+                            }
+                            if (!shortLeave.equals("")) {
+                                employeeLeaveBalance5.setEmployeeMaster(employeeMaster);
+                                employeeLeaveBalance5.setLeaveTypeMaster(leaveTypeMaster4);
+                                employeeLeaveBalance5.setNoOfLeaveRemain(Float.parseFloat(shortLeave));
                             }
                             if (!casualLeave.equals("")) {
                                 if (cLeave <= 7) {
@@ -320,6 +340,20 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
                                         employeeLeaveBalance3 = null;
                                     } else {
                                         employeeLeaveBalanceService.create(employeeLeaveBalance4);
+                                    }
+                                }
+                            }
+                            if (!shortLeave.equals("")) {
+                                if (shrtLeave <= 3) {
+
+                                    List<?> list5 = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance5);
+                                    if (!list5.isEmpty()) {
+                                        EmployeeLeaveBalance employeeLeaveBalance12 = (EmployeeLeaveBalance) list5.get(0);
+                                        employeeLeaveBalance5.setId(employeeLeaveBalance12.getId());
+                                        employeeLeaveBalanceService.update(employeeLeaveBalance5);
+                                        employeeLeaveBalance12 = null;
+                                    } else {
+                                        employeeLeaveBalanceService.create(employeeLeaveBalance5);
                                     }
                                 }
                             }

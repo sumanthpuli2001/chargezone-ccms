@@ -17,4 +17,6 @@ public interface PolicyMasterDAO<T> extends GenericsDAO<T> {
     public boolean isExist(T object);
 
     public List<?> readBySalaryTypeID(String salaryTpe);
+
+    public List<?> readPolicyName();
 }

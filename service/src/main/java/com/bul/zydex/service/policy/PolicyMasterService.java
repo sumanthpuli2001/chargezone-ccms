@@ -17,4 +17,6 @@ public interface PolicyMasterService<T> extends GenericsService<T> {
     public boolean isExist(T object);
 
     public List<?> readBySalaryTypeID(String salaryTpe);
+
+    public List<?> readPolicyName();
 }

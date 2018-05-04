@@ -4821,12 +4821,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         i += 2;
                     }
                 } else {
-                    // row greter than Zero(0).
 
                     List<PolicyMaster> list1 = (List<PolicyMaster>) policyMasterService.read();
-                    //convert list to map and take  policy name as key and id is value.
                     Map<String, Integer> result = list1.stream().collect(Collectors.toMap(PolicyMaster::getPolicyName, PolicyMaster::getId));
-                  //to convert map's key value in uppercase
                     Map<String, Integer> result1 = result.entrySet().stream()
                             .collect(Collectors.toMap(entry -> entry.getKey().toUpperCase(), entry -> entry.getValue()));
                     Row firstHeaderRow = sheet.getRow(0);
@@ -4835,24 +4832,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
                     if (null != row.getCell(0) && " " != row.getCell(0).toString() && !row.getCell(0).toString().replace(" ", "").isEmpty()) {
 
-                        // User Master Name - user Id of login Credi.
                         String empNo = row.getCell(0).toString();
 
-                        // Employee Name.
                         XSSFCell empName = (XSSFCell) row.getCell(1);
 
                         UserMaster um = new UserMaster();
-                        // set empNo into UserMaster to pass in Query.
                         String[] abc = empNo.split("\\.");
                         um.setUserName(abc[0]);
 
-                        // Return Full Details User Masster Based on Passed User Master with Name
                         List<?> empId = userMasterService.readByUserName(um);
 
-                        // To take Data from List We must check List is empty or not 
                         if (!empId.isEmpty() && 0 != empId.size() && null != empId) {
 
-                            // list is not empty so we get Data on Zero(0) index.
                             um = (UserMaster) empId.get(0);
                             empMaster.setUserMaster(um);
                             List<?> emp = employeeMasterService.readByUserName(empMaster);
@@ -4862,26 +4853,17 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
                         }
 
-                        // 1st 2 data are static so we are start to fetch dynamic data from column 2 of excle.
                         int y = 2;
 
                         while (null != row.getCell(y) && " " != row.getCell(y).toString() && !row.getCell(y).toString().replace(" ", "").isEmpty()) {
 
                             EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
 
-                            // get data of policy amount and it is taxable or not
                             XSSFCell cell = (XSSFCell) row.getCell(y); // amount
                             XSSFCell cell1 = (XSSFCell) row.getCell(y + 1); // yes or no
 
-                            // !list.stream().anyMatch(cell.toString()::equalsIgnoreCase)
-                            // this condition is for check list contain cell value or not with ingoring Case.
-//                            if (!list.stream().anyMatch(cell.toString()::equalsIgnoreCase)) {
-
-                                //cell.toString().replaceAll(",", "") - replaceall for , value because we want to convert string into Double 
-                                //after parsing set value to model in which we want to insert data.
                                 employeePolicyDetail.setAmount(Double.parseDouble(cell.toString().replaceAll(",", "")));
 
-                                //this condition for amount is taxable or not.
                                 if (cell1.toString().equalsIgnoreCase("yes")) {
                                     employeePolicyDetail.setStatus(1);
                                 } else if (cell1.toString().equalsIgnoreCase("no")) {
@@ -4889,7 +4871,6 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 } else {
 
                                 }
-                                //To get appropriate policy name from excel.
                                 String policyName = (String) firstHeaderRow.getCell(y).toString();
                                 policyMaster.setId(result1.get(policyName.toUpperCase()));
                                 employeePolicyDetail.setPolicyMaster(policyMaster);

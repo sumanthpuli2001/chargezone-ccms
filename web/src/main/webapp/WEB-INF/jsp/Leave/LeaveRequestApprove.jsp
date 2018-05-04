@@ -318,9 +318,10 @@
                                         </div><!-- /.row -->
                                     </div><!-- /.box-body -->
                                 </div>
+
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
-                                        <h3 class="box-title">Approver History:</h3>
+                                        <h3 class="box-title">Same Day Leave:</h3>
                                         <div class="box-tools pull-right">
                                             <span id="spanId6">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun6()"><i class="fa fa-plus" id="minusId6"></i></button>
                                         </div>
@@ -333,7 +334,7 @@
                                                 <div class="table table-bordered">
                                                     <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                         <c:choose>
-                                                            <c:when test="${empty approvalHistoryList}">
+                                                            <c:when test="${empty sameDateCheck}">
                                                                 <tr>
                                                                     <td align="center">
                                                                         <c:out value="There is no record found."></c:out>
@@ -344,21 +345,23 @@
                                                                 <thead>
 
                                                                     <tr>
-                                                                        <th>Approver Name</th>
-                                                                        <th>Approver Comment</th>
-                                                                        <th>Approved Date</th>
+                                                                        <th>Employee Name</th>
+                                                                        <th>No of Day</th>
+                                                                        <th>Start Date</th>
+                                                                        <th>End Date</th>
                                                                         <th>Status</th>
                                                                     </tr>
                                                                 </thead>
                                                             </c:otherwise>
                                                         </c:choose>
                                                         <tbody>
-                                                            <c:forEach var="list" items="${approvalHistoryList}">
+                                                            <c:forEach var="list" items="${sameDateCheck}">
                                                                 <tr>
-                                                                    <td>${list[1]}</td>
-                                                                    <td>${list[2]}</td>
+                                                                    <td>${list[5]}</td>
                                                                     <td>${list[4]}</td>
-                                                                    <td>${list[3]}</td>
+                                                                    <td>${list[0]}</td>
+                                                                    <td>${list[2]}</td>
+                                                                    <td>Approved</td>
 
                                                                 </tr>
                                                             </c:forEach>
@@ -386,6 +389,57 @@
                                                     <div class="col-sm-7">
                                                         <textarea id="hrRemark" name="hrRemark" class="form-control" rows="6"></textarea>
                                                     </div>
+                                                </div>
+                                            </div><!-- /.col -->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                </div>
+                                <div class="box box-info collapsed-box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Approval History:</h3>
+                                        <div class="box-tools pull-right">
+                                            <span id="spanId6">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun6()"><i class="fa fa-plus" id="minusId6"></i></button>
+                                        </div>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="row">
+
+                                            <div class="col-md-12 col-sm-12">
+
+                                                <div class="table table-bordered">
+                                                    <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                        <c:choose>
+                                                            <c:when test="${empty approvalHistoryList}">
+                                                                <tr>
+                                                                    <td align="center">
+                                                                        <c:out value="There is no record found."></c:out>
+                                                                        </td>
+                                                                    </tr>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <thead>
+
+                                                                    <tr>
+                                                                        <th>Approval Name</th>
+                                                                        <th>Approval Comment</th>
+                                                                        <th>Approved Date</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
+                                                                </thead>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <tbody>
+                                                            <c:forEach var="list" items="${approvalHistoryList}">
+                                                                <tr>
+                                                                    <td>${list[1]}</td>
+                                                                    <td>${list[2]}</td>
+                                                                    <td>${list[4]}</td>
+                                                                    <td>${list[3]}</td>
+
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->

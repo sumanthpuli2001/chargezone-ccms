@@ -185,4 +185,9 @@ public class LeaveEmployeeDetailServiceImpl<T> extends GenericsServiceImpl<T> im
         return leaveEmployeeDetailDAO.getEmployeeLeaveDetail(empId, prevDate);
     }
 
+    @Override
+    public List<?> getEmployeeLeaveDetailByDate(String currentDate, int approverId) {
+        return leaveEmployeeDetailDAO.getEmployeeLeaveDetailByDate(currentDate, approverId);
+    }
+
 }

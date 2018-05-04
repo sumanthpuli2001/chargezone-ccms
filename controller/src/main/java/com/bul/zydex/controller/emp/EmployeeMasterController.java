@@ -56,13 +56,18 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import javafx.scene.control.Cell;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.springframework.validation.BindException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -4784,16 +4789,19 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile multipartFile = multipartRequest.getFile("file1");
         PolicyMaster policyMaster = new PolicyMaster();
-        EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
+
         String employeeNo = "";
         String employeeName = "";
-        
-        
+
+        List<String> list = (List<String>) policyMasterService.readPolicyName();
+
         if (multipartFile.getSize() > 0) {
             InputStream file = multipartFile.getInputStream();
             Workbook workbook = WorkbookFactory.create(file);
             Sheet sheet = workbook.getSheetAt(0);
+
             for (Row row : sheet) {
+                int i = 2;
                 if (row.getRowNum() == 0) {
                     try {
                         employeeNo = new BigDecimal("" + (null == row.getCell((short) 0) ? "" : row.getCell((short) 0))).toPlainString();
@@ -4801,11 +4809,114 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     } catch (Exception e) {
                         employeeNo = "" + (null == row.getCell((short) 0) ? "" : row.getCell((short) 0));
                     }
+                    employeeName = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
 
+                    while (null != row.getCell(i) && " " != row.getCell(i).toString() && !row.getCell(i).toString().replace(" ", "").isEmpty()) {
+                        XSSFCell cell = (XSSFCell) row.getCell(i);
+                        XSSFCell cell1 = (XSSFCell) row.getCell(i + 1);
+                        if (!list.stream().anyMatch(cell.toString()::equalsIgnoreCase)) {
+                            policyMaster.setPolicyName(cell.toString());
+                            policyMasterService.create(policyMaster);
+                        }
+                        i += 2;
+                    }
+                } else {
+                    // row greter than Zero(0).
+
+                    List<PolicyMaster> list1 = (List<PolicyMaster>) policyMasterService.read();
+                    //convert list to map and take  policy name as key and id is value.
+                    Map<String, Integer> result = list1.stream().collect(Collectors.toMap(PolicyMaster::getPolicyName, PolicyMaster::getId));
+                  //to convert map's key value in uppercase
+                    Map<String, Integer> result1 = result.entrySet().stream()
+                            .collect(Collectors.toMap(entry -> entry.getKey().toUpperCase(), entry -> entry.getValue()));
+                    Row firstHeaderRow = sheet.getRow(0);
+
+                    EmployeeMaster empMaster = new EmployeeMaster();
+
+                    if (null != row.getCell(0) && " " != row.getCell(0).toString() && !row.getCell(0).toString().replace(" ", "").isEmpty()) {
+
+                        // User Master Name - user Id of login Credi.
+                        String empNo = row.getCell(0).toString();
+
+                        // Employee Name.
+                        XSSFCell empName = (XSSFCell) row.getCell(1);
+
+                        UserMaster um = new UserMaster();
+                        // set empNo into UserMaster to pass in Query.
+                        String[] abc = empNo.split("\\.");
+                        um.setUserName(abc[0]);
+
+                        // Return Full Details User Masster Based on Passed User Master with Name
+                        List<?> empId = userMasterService.readByUserName(um);
+
+                        // To take Data from List We must check List is empty or not 
+                        if (!empId.isEmpty() && 0 != empId.size() && null != empId) {
+
+                            // list is not empty so we get Data on Zero(0) index.
+                            um = (UserMaster) empId.get(0);
+                            empMaster.setUserMaster(um);
+                            List<?> emp = employeeMasterService.readByUserName(empMaster);
+                            if (!emp.isEmpty() && 0 != emp.size() && null != emp) {
+                                empMaster = (EmployeeMaster) emp.get(0);
+                            }
+
+                        }
+
+                        // 1st 2 data are static so we are start to fetch dynamic data from column 2 of excle.
+                        int y = 2;
+
+                        while (null != row.getCell(y) && " " != row.getCell(y).toString() && !row.getCell(y).toString().replace(" ", "").isEmpty()) {
+
+                            EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
+
+                            // get data of policy amount and it is taxable or not
+                            XSSFCell cell = (XSSFCell) row.getCell(y); // amount
+                            XSSFCell cell1 = (XSSFCell) row.getCell(y + 1); // yes or no
+
+                            // !list.stream().anyMatch(cell.toString()::equalsIgnoreCase)
+                            // this condition is for check list contain cell value or not with ingoring Case.
+//                            if (!list.stream().anyMatch(cell.toString()::equalsIgnoreCase)) {
+
+                                //cell.toString().replaceAll(",", "") - replaceall for , value because we want to convert string into Double 
+                                //after parsing set value to model in which we want to insert data.
+                                employeePolicyDetail.setAmount(Double.parseDouble(cell.toString().replaceAll(",", "")));
+
+                                //this condition for amount is taxable or not.
+                                if (cell1.toString().equalsIgnoreCase("yes")) {
+                                    employeePolicyDetail.setStatus(1);
+                                } else if (cell1.toString().equalsIgnoreCase("no")) {
+                                    employeePolicyDetail.setStatus(0);
+                                } else {
+
+                                }
+                                //To get appropriate policy name from excel.
+                                String policyName = (String) firstHeaderRow.getCell(y).toString();
+                                policyMaster.setId(result1.get(policyName.toUpperCase()));
+                                employeePolicyDetail.setPolicyMaster(policyMaster);
+                                employeePolicyDetail.setEmployeeMaster(empMaster);
+
+                                List<?> l = employeePolicyDetailService.readForMasterAdditionalAmount(empMaster.getId(), policyMaster.getId());
+                                Integer id = 0;
+                                if (!l.isEmpty() && 0 != l.size() && null != l) {
+                                    Object[] a = (Object[]) l.get(0);
+                                    id = (Integer) a[2];
+                                }
+                                if (id != 0) {
+                                    employeePolicyDetail.setId(id);
+                                }
+                                employeePolicyDetailService.createOrUpdate(employeePolicyDetail);
+                            y += 2;
+                            }
+//                        }
+                    }
                 }
 
             }
         }
+        request.setAttribute(
+                "successMessage",
+                "Information : The Information is saved Successfully.");
+        mv = excelUploadAllowance(request, response);
 
         return mv;
     }

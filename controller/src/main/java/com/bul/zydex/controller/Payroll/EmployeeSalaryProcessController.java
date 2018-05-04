@@ -1541,7 +1541,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                         Object[] next = (Object[]) itr.next();
                         String amountType = next[0].toString();
                         double salaryAmount = (Double) next[1];
-
+                        grossSalary += salaryAmount;
                         finalList.add(df.format(salaryAmount));
 
                     }
@@ -1586,14 +1586,18 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             if (ptFlag) {
 
                 double ptAmount = 0;
+                double grossSalary1 = 0;
+                double amountpt = 0;
                 List<?> ptAmountList = payrollProfessionalTaxService.read();
                 PayrollProfessionalTax payrollProfessionalTax = new PayrollProfessionalTax();
                 for (Iterator<? extends Object> iterator = ptAmountList.iterator(); iterator.hasNext();) {
                     payrollProfessionalTax = (PayrollProfessionalTax) iterator.next();
                     double salaryForm = Double.parseDouble(payrollProfessionalTax.getSalaryFrom());
                     double salaryTo = Double.parseDouble(payrollProfessionalTax.getSalaryTo());
+                     amountpt = Double.parseDouble(payrollProfessionalTax.getAmount());
+                    grossSalary1 = Double.parseDouble(df.format(basicSalary1 + grossSalary));
 
-                    if (salaryForm >= grossSalary && salaryTo <= grossSalary) {
+                    if (grossSalary1 >= salaryForm && grossSalary1 <= salaryTo) {
 
                         break;
 
@@ -1602,10 +1606,10 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                     }
                 }
 
-//            List<?> ptAmountList = payrollProfessionalTaxService.readPT(grossSalary);
+//                List<?> ptAmountList = payrollProfessionalTaxService.readPT(grossSalary1);
                 if (!ptAmountList.isEmpty()) {
-                    ptAmount = (Double) ptAmountList.get(0);
-                    finalList.add(df.format(ptAmount));
+//                    ptAmount = (Double) ptAmountList.get(0);
+                    finalList.add(df.format(amountpt));
 
                 } else {
 

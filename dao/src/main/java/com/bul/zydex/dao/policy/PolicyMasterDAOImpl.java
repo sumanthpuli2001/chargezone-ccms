@@ -7,6 +7,7 @@ package com.bul.zydex.dao.policy;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.PolicyMaster;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import java.util.List;
 
 /**
@@ -39,5 +40,15 @@ public class PolicyMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Policy
                 + " WHERE a.policyName = '" + salaryTpe + "'";
         List<?> list = getHibernateTemplate().find(query);
         return list;
+    }
+
+    @Override
+    public List<?> readPolicyName() {
+        String query = "";
+        query += " Select a.policyName "
+                + " FROM PolicyMaster a ";
+        List<?> list=getHibernateTemplate().find(query);
+        return list;
+        
     }
 }

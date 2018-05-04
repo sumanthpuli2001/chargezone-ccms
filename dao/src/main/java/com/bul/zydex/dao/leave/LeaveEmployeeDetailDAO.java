@@ -77,4 +77,6 @@ public interface LeaveEmployeeDetailDAO<T> extends GenericsDAO<T> {
     public List<?> casualleaveCheck(T object);
 
     public List<?> getEmployeeLeaveDetail(int empId, String prevDate);
+
+    public List<?> getEmployeeLeaveDetailByDate(String currentDate, int approverId);
 }

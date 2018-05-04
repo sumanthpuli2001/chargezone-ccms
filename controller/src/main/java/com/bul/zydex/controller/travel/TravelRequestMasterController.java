@@ -101,11 +101,11 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
         readcurrencyList(request);
 //        int month = now.get(Calendar.MONTH) + 1;
         String name = monthName[now.get(Calendar.MONTH)];
-        if ((empCompany.equals("Zydex Industries") || empCompany.equalsIgnoreCase("ZydexIndustries")) && !empCompany.equals("")) {
-            empCompany = "ZI";
-        } else {
-            empCompany = "ZIPL";
-        }
+        //if ((empCompany.equals("Zydex Industries") || empCompany.equalsIgnoreCase("ZydexIndustries")) && !empCompany.equals("")) {
+            empCompany = "SPCL";
+        //} else {
+        //    empCompany = "ZIPL";
+        //}
 
         String requestNo = empCompany + "/" + year + "/" + name + "/" + empNo + "/" + count + "";
         request.setAttribute("requestNo", requestNo);

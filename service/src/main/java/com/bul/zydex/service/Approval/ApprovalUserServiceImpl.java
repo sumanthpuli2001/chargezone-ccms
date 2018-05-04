@@ -41,4 +41,9 @@ public class ApprovalUserServiceImpl<T> extends GenericsServiceImpl<T> implement
         return approvalUserDAO.reademyId(emid);
     }
 
+    @Override
+    public List<?> readByApprovalFetch(int apid) {
+         return approvalUserDAO.readByApprovalFetch(apid);
+    }
+
 }

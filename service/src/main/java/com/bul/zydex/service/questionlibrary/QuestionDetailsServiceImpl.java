@@ -51,4 +51,9 @@ public class QuestionDetailsServiceImpl<T> extends GenericsServiceImpl<T> implem
         return questionDetailsDAO.takeTestOnlineAssementCandidate(questionpaperID);
     }
 
+    @Override
+    public List<?> deletelibraryid(String libraryId) {
+        return questionDetailsDAO.deletelibraryid(libraryId);
+    }
+
 }

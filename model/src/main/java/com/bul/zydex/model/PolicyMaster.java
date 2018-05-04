@@ -16,7 +16,7 @@ public class PolicyMaster implements java.io.Serializable {
     public PolicyMaster() {
     }
 
-    public PolicyMaster(String policyName,Set employeePolicyDetail) {
+    public PolicyMaster(String policyName, Set employeePolicyDetail) {
         this.policyName = policyName;
     }
 
@@ -35,7 +35,7 @@ public class PolicyMaster implements java.io.Serializable {
     public void setPolicyName(String policyName) {
         this.policyName = policyName;
     }
-    
+
     public Set getEmployeePolicyDetail() {
         return this.employeePolicyDetail;
     }
@@ -44,5 +44,9 @@ public class PolicyMaster implements java.io.Serializable {
         this.employeePolicyDetail = employeePolicyDetail;
     }
 
+    @Override
+    public String toString() {
+        return "PolicyMaster{" + "id=" + id + ", policyName=" + policyName + ", employeePolicyDetail=" + employeePolicyDetail + '}';
+    }
 
 }

@@ -50,7 +50,7 @@ public class QuestionAnsDAOImpl<T> extends GenericsDAOImpl<T> implements Questio
 
     @Override
     public List<?> takeTestOnlineAssementCandidateAnswer(int questionLibraryID) {
-         String query = "";
+        String query = "";
         String condition = "";
         query += "Select a.id,b.id,a.ans"
                 + " From QuestionAns a"
@@ -58,6 +58,18 @@ public class QuestionAnsDAOImpl<T> extends GenericsDAOImpl<T> implements Questio
                 + " Where b.id=" + questionLibraryID;
 
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> deleteqlibryId(String libraryId) {
+        String query = "";
+
+        query += "  "
+                + " select a"
+                + " FROM QuestionAns a "
+                + " WHERE a.questionLibrary.id = " + libraryId;
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
     }
 
 }

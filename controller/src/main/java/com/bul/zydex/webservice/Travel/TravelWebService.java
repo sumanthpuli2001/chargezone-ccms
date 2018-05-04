@@ -90,11 +90,11 @@ public class TravelWebService extends TravelWebServiceAbstract {
                 "December"};
             int year = now.get(Calendar.YEAR);
             String name = monthName[now.get(Calendar.MONTH)];
-            if ((empCompany.equals("Zydex Industries") || empCompany.equalsIgnoreCase("ZydexIndustries")) && !empCompany.equals("")) {
-                empCompany = "ZI";
-            } else {
-                empCompany = "ZIPL";
-            }
+//            if ((empCompany.equals("Zydex Industries") || empCompany.equalsIgnoreCase("ZydexIndustries")) && !empCompany.equals("")) {
+                empCompany = "SPCL";
+//            } else {
+//                empCompany = "ZIPL";
+//            }
             String requestNo = empCompany + "/" + year + "/" + name + "/" + empNo + "/" + count + "";
             data.put("requestNo", requestNo);
             List<?> list = policyDeviationForAirService.readlevelWise(empLevel);

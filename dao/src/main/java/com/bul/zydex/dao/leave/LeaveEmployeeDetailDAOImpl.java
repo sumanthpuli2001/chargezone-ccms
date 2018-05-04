@@ -296,7 +296,7 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         if (null != leaveEmployeeDetail.getEndDate() && !"".equals(leaveEmployeeDetail.getEndDate())) {
             condition += " AND STR_TO_DATE(a.endDate,'%d/%m/%Y') <= STR_TO_DATE('" + leaveEmployeeDetail.getEndDate() + "','%d/%m/%Y')";
         }
-                //                      0               1           2           3           4       5       6       7       8           9
+        //                      0               1           2           3           4       5       6       7       8           9
         String hqlQuery = "SELECT b.employeeName, c.leaveType, a.startDate, a.endDate, a.noOfDays, a.id, a.status, d.id,a.dateOfSubmit,a.empRemark "
                 + "  From LeaveEmployeeDetail a"
                 + " LEFT JOIN a.employeeMaster b "
@@ -766,6 +766,23 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " where a.employeeMaster.id = " + empId + " and "
                 + " STR_TO_DATE('" + prevDate + "','%d/%m/%Y') >= STR_TO_DATE(a.startDate,'%d/%m/%Y') AND "
                 + " STR_TO_DATE('" + prevDate + "','%d/%m/%Y') <= STR_TO_DATE(a.endDate,'%d/%m/%Y') ";
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> getEmployeeLeaveDetailByDate(String currentDate,int approverId) {
+        String query = "";
+                        //  0               1               2       3               4           5               6           
+        query = " select a.startDate,a.startDateStatus,a.endDate,a.endDateStatus,a.noOfDays,b.employeeName,c.leaveType "
+                + " from LeaveEmployeeDetail a  "
+                + " left join a.employeeMaster b "
+                + " left join a.leaveTypeMaster c "
+                + " where STR_TO_DATE('" + currentDate + "','%d/%m/%Y') "
+                + " between STR_TO_DATE(a.startDate, '%d/%m/%Y') "
+                + " and STR_TO_DATE(a.endDate, '%d/%m/%Y') "
+                + " and a.approverId ="+approverId
+                + " and a.status=3 group by a.id";
 
         return getHibernateTemplate().find(query);
     }

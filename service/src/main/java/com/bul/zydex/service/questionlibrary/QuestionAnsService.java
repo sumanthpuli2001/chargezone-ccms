@@ -20,4 +20,6 @@ public interface QuestionAnsService<T> extends GenericsService<T> {
 
     public List<?> takeTestOnlineAssementCandidateAnswer(int questionLibraryID);
 
+    public List<?> deleteqlibryId(String libraryId);
+
 }

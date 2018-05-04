@@ -37,18 +37,27 @@ public class HolidayMasterServiceImpl<T> extends GenericsServiceImpl<T> implemen
     public boolean isExist(T object) {
         return holidayMasterDAO.isExist(object);
     }
+
     @Override
-    public List<?> checkHoliday(String date,String locationId) {
-        return holidayMasterDAO.checkHoliday(date,locationId);
+    public List<?> checkHoliday(String date, String locationId) {
+        return holidayMasterDAO.checkHoliday(date, locationId);
     }
+
     @Override
-  public int searchMonthWiseHoliday(T object) {
+    public int searchMonthWiseHoliday(T object) {
         return holidayMasterDAO.searchMonthWiseHoliday(object);
     }
-  
+
     @Override
-    public List<?> readHolidaysLocationWise(String locationId){
+    public List<?> readHolidaysLocationWise(String locationId) {
         return holidayMasterDAO.readHolidaysLocationWise(locationId);
     }
+
+    @Override
+    public List<?> readHolidaysDateLocationWise(String holidayFrom, String holidayTo, int locationId) {
+       return holidayMasterDAO.readHolidaysDateLocationWise(holidayFrom,holidayTo,locationId);
+    }
+
+   
 
 }

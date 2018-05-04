@@ -5626,7 +5626,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             employeeInfoList.add("" + o[3]);
             employeeInfoList.add("" + o[4]);
             recordToAdd.add(employeeInfoList);
-            recordToAdd3.add(employeeInfoList);
+            recordToAdd3.add(employeeInfoList); 
         }
         for (int j = 0; j < recordToAdd.size(); j++) {
 
@@ -14454,13 +14454,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         firstHalfList.add("AB");
                                         abcounter = abcounter + 1;
                                     }
+                                    else if (firstHalf.contains("AR") && userTimeInStr[0].contains("0.5")) {
+                                        firstHalfList.add("Half AR/P");
+                                        ar = ar + 0.5;
+                                          prcounter = prcounter + 0.5;
+                                    }
                                     
                                 } else if (firstHalf.equals("WO")) {
                                     firstHalfList.add("WO");
                                     wo = wo + 1;
                                 } else if (firstHalf.contains("AR")) {
                                     firstHalfList.add("AR/P");
-                                    ar = ar + 0.5;
+                                    ar = ar + 1;
                                 } else if (firstHalf.equals("AB")) {
                                     firstHalfList.add("AB");
                                     abcounter = abcounter + 1;

@@ -267,4 +267,5 @@
     <bean id="kaizenApprovalDAO1" class="com.bul.zydex.dao.Kaizen.KaizenApprovalDAOImpl" parent="sessionFactoryConfig"/>
     <bean id="leaveEmployeeDetailsApprovalHistoryDAO1" class="com.bul.zydex.dao.leave.LeaveEmployeeDetailsApprovalHistoryDAOImpl" parent="sessionFactoryConfig"/>
     <bean id="taxDeductionDeclarationSavingStatusDAO1" class="com.bul.zydex.dao.Payroll.TaxDeductionDeclarationSavingStatusDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="emergencyContactDAO1" class="com.bul.zydex.dao.EmergencyContactDAOImpl" parent="sessionFactoryConfig" />
 </beans>

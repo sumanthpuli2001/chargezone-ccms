@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.holiday;
 
 import com.bul.zydex.dao.GenericsDAO;
+import com.bul.zydex.model.HolidayMaster;
 import java.util.List;
 
 /**
@@ -15,12 +16,14 @@ import java.util.List;
 public interface HolidayMasterDAO<T> extends GenericsDAO<T> {
 
     public List<?> readWithLocation();
-    
+
     public boolean isExist(T object);
-    
-    public List<?> checkHoliday(String date,String locationId);
-    
-      public int searchMonthWiseHoliday(T object);
-      
-        public List<?> readHolidaysLocationWise(String locationId);
+
+    public List<?> checkHoliday(String date, String locationId);
+
+    public int searchMonthWiseHoliday(T object);
+
+    public List<?> readHolidaysLocationWise(String locationId);
+
+    public List<?> readHolidaysDateLocationWise(String holidayFrom, String holidayTo, int locationId);
 }

@@ -636,6 +636,7 @@
                             <li><a href="classifiedBox.htm?act=showResult"><i class="fa fa-circle-o"></i>Classified Setting</a></li>
                             <li><a href="ctcAllowance.htm?act=showList"><i class="fa fa-circle-o"></i>CTC Master</a></li>
                             <li><a href="retirementAge.htm?act=showList"><i class="fa fa-circle-o"></i>Retirement Ages</a></li>
+                            <li><a href="emergencyContact.htm?act=createContact"><i class="fa fa-circle-o"></i>Emergency Contacts</a></li>
                         </ul>
                     </li>
                 </c:if>
@@ -989,8 +990,6 @@
                         </c:if>
                 </ul>
             </li>   
-
-            <li class="treeview">
 
         </section>
         <!-- /.sidebar -->

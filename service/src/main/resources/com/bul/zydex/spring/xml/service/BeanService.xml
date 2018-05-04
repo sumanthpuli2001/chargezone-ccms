@@ -666,4 +666,7 @@
     <bean id="leaveEmployeeDetailsApprovalHistoryService1" class="com.bul.zydex.service.leave.LeaveEmployeeDetailsApprovalHistoryServiceImpl">
         <property name="leaveEmployeeDetailsApprovalHistoryDAO" ref="leaveEmployeeDetailsApprovalHistoryDAO1"/>
     </bean>
+    <bean id="emergencyContactService1" class="com.bul.zydex.service.EmergencyContactServiceImpl">
+        <property name="emergencyContactDAO" ref="emergencyContactDAO1" />
+    </bean>
 </beans>

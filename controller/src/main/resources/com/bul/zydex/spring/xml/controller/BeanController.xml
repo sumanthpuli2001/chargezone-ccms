@@ -800,6 +800,7 @@
         <property name="payrollTaxDeductionMasterService" ref="payrollTaxDeductionMasterService1" />
         <property name="payrollTaxDeclarationPeriodMasterService" ref="payrollTaxDeclarationPeriodMasterService1" />
         <property name="payrollTaxRateMasterService" ref="payrollTaxRateMasterService1" />
+        <property name="employeeShiftDataService" ref="employeeShiftDataService1" />
     </bean>
     <bean id="additionalAmountCheckController1" class="com.bul.zydex.controller.Payroll.AdditionalAmountCheckController" parent="controllerConfig" >
         <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
@@ -1252,6 +1253,17 @@
     </bean>
     <bean id="leaveEmployeeDetailsApprovalHistoryController1" class="com.bul.zydex.controller.leave.LeaveEmployeeDetailsApprovalHistoryController" parent="controllerConfig">
         <property name="leaveEmployeeDetailsApprovalHistoryService" ref="leaveEmployeeDetailsApprovalHistoryService1" />
+    </bean>
+    <bean id="taxSavingSubmitController1" class="com.bul.zydex.controller.Payroll.TaxSavingSubmitController" parent="controllerConfig">
+        <property name="taxSavingSubmitService" ref="taxSavingSubmitService1" />
+        <property name="payrollFinancialYearService" ref="payrollFinancialYearService1" />
+        <property name="taxDeductionDecarationSubmitService" ref="taxDeductionDecarationSubmitService1" />
+        <property name="payrollTaxDeductionMasterService" ref="payrollTaxDeductionMasterService1"/>
+        <property name="payrollTaxDeductionComponentService" ref="payrollTaxDeductionComponentService1"/>
+        <property name="taxDeductionDeclarationSavingStatusService" ref="taxDeductionDeclarationSavingStatusService1"/>
+    </bean>
+    <bean id="emergencyContactController1" class="com.bul.zydex.controller.EmergencyContactController" parent="controllerConfig">
+        <property name="emergencyContactService" ref="emergencyContactService1" />
     </bean>
 </beans>
  

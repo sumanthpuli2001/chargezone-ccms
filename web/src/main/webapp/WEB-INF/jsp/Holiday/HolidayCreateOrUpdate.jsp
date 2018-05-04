@@ -72,7 +72,7 @@
                                             <div class="col-sm-3">
                                             <form:label class="control-label" path="title">Enter Title:<span style="color: red;font-size: 12px;">*</span></form:label>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-7">
                                             <form:input path="title" class="form-control"/>
                                             <form:errors path="title" cssClass="errorDiv"/>
                                         </div>
@@ -80,8 +80,8 @@
                                     <div class="form-group">
                                         <div class="col-sm-3">
                                             <form:label class="control-label" path="holidayFromDate">Start Date:<span style="color: red;font-size: 12px;">*</span></form:label>
-                                            </div>
-                                            <div class="form-group">
+                                            </div> 
+                                            <div class="col-sm-7">
                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                 <form:input path="holidayFromDate" class="form-control" size="16" type="text" readonly="true" onchange="dateValidator(0);"></form:input>
                                                 <form:errors path="holidayFromDate" cssClass="errorDiv"></form:errors>
@@ -89,41 +89,39 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="form-group">
                                             <div class="col-sm-3">
                                             <form:label class="control-label" path="holidayToDate">End Date:<span style="color: red;font-size: 12px;">*</span></form:label>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="col-sm-7">
                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                 <form:input path="holidayToDate" class="form-control" size="16" type="text" readonly="true" onchange="dateValidator(1);"></form:input>
                                                 <form:errors path="holidayToDate" cssClass="errorDiv"></form:errors>
                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>   
+
                                         <div class="form-group">
                                             <div class="col-sm-3">
-                                                <label class="control-label">Location:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <form:label class="control-label" path="locationMaster.id">Location:<span style="color: red;font-size: 12px;">*</span></form:label>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="col-sm-7">
                                             <form:select path="locationMaster.id" class="form-control">
                                                 <form:option value="" label="-- Select --" />
                                                 <form:options items="${locationMap}"/>
                                             </form:select>
                                             <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
                                             </div>
-                                        </div>
-
-
+                                        </div>    
                                         <br/>
                                         <div class="form-group">
                                             <div class="col-sm-6 col-sm-offset-5">
                                                 <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
                                             </div>
-                                            <!--                                        <div class=" col-sm-offset-2 col-sm-3 ">
-                                                                                        <button type="button" class="btn btn-danger" data-original-title="" title="" onclick="window.location = 'departmentMaster.htm?act=showList'">Cancel</button>
-                                                                                    </div>-->
                                         </div>
+
                                 </form:form>
                             </div>
 

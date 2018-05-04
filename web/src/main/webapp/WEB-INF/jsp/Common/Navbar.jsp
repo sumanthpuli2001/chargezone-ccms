@@ -904,6 +904,7 @@
                         <li><a href="classifiedBox.htm?act=showResult"><i class="fa fa-circle-o"></i>Classified Setting</a></li>
                         <li><a href="ctcAllowance.htm?act=showList"><i class="fa fa-circle-o"></i>CTC Master</a></li>
                         <li><a href="retirementAge.htm?act=showList"><i class="fa fa-circle-o"></i>Retirement Ages</a></li>
+                        <li><a href="emergencyContact.htm?act=createContact"><i class="fa fa-circle-o"></i>Add / Update Contacts</a></li>
                     </ul>
                 </li>
             </c:if>
@@ -923,7 +924,7 @@
 
 
 
-           
+
             <%--<c:if test="${sessionScope.userRight.payroll}">--%>
             <!--                    <li>
                                     <a href="#">

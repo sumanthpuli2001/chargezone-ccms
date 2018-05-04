@@ -603,7 +603,8 @@
                                     </a>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-3">
-                                    <a class="label label-primary" style="font-size: 20px" href="hrServiceRequest.htm?act=searchSubmit">
+                                    <!--<a class="label label-primary" style="font-size: 20px" href="hrServiceRequest.htm?act=searchSubmit">-->
+                                    <a class="label label-primary" style="font-size: 20px" href="emergencyContact.htm?act=viewContact">
                                         <i class="fa fa-book"></i> &nbsp<strong>Emergency Contact</strong>
                                     </a>
                                 </div>

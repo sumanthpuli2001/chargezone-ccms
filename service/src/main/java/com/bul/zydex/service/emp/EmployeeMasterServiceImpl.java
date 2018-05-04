@@ -406,4 +406,14 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> getByEmployeeNo(String employeeNo) {
         return employeeMasterDAO.getByEmployeeNo(employeeNo);
     }
+
+    @Override
+    public List<?> empOrDateWiseSearchforActiveSecond(EmployeeAdvanceSearch employeeAdvanceSearch) {
+        return employeeMasterDAO.empOrDateWiseSearchforActiveSecond(employeeAdvanceSearch);
+    }
+
+    @Override
+    public List<?> getAllEmployeeId() {
+        return employeeMasterDAO.getAllEmployeeId();
+    }
 }

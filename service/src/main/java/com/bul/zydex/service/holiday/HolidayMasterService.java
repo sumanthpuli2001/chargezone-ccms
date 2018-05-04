@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.service.holiday;
 
+import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.service.GenericsService;
 import java.util.List;
 
@@ -15,12 +16,14 @@ import java.util.List;
 public interface HolidayMasterService<T> extends GenericsService<T> {
 
     public List<?> readWithLocation();
-    
+
     public boolean isExist(T object);
+
+    public List<?> checkHoliday(String date, String locationId);
+
+    public int searchMonthWiseHoliday(T object);
+
+    public List<?> readHolidaysLocationWise(String locationId);
     
-    public List<?> checkHoliday(String date,String locationId);
-    
-     public int searchMonthWiseHoliday(T object);
-     
-       public List<?> readHolidaysLocationWise(String locationId);
+    public List<?> readHolidaysDateLocationWise(String holidayFrom, String holidayTo, int locationId);
 }

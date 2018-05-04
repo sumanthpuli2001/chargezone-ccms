@@ -17,7 +17,7 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Tax Rate New</title>
+        <title>Tax Rate Edit</title>
     </head>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -26,7 +26,7 @@
             <h1>Create New Tax Rate:</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Create New Tax Rate</li>
+                <li class="active">Edit Tax Rate</li>
             </ol>
         </section>
 
@@ -54,19 +54,19 @@
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label>Taxable Income From:<span style="color: red;font-size: 12px;">*</span></label>
-                                                <form:input path="incomeFrom" type="number" step="any" placeholder="Enter Income From" class="form-control"></form:input>
+                                                <form:input path="incomeFrom" min="0" type="number" step="any" placeholder="Enter Income From" class="form-control"></form:input>
                                                 <form:errors path="incomeFrom" cssClass="errorDiv"></form:errors>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Taxable Income To:<span style="color: red;font-size: 12px;">*</span></label>
-                                                <form:input path="incomeTo"  type="number" step="any" placeholder="Enter Income To"  min="0" class="form-control"></form:input>
+                                                <form:input path="incomeTo" type="number" step="any" min="0" placeholder="Enter Income To" class="form-control"></form:input>
                                                 <form:errors path="incomeTo" cssClass="errorDiv"></form:errors> 
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label>Tax Rate(%) :<span style="color: red;font-size: 12px;">*</span></label>
-                                                <form:input path="taxRate" type="number" step="any" placeholder="Enter Tax Rate" class="form-control"></form:input>
+                                                <form:input path="taxRate" min="0" type="number" step="any" placeholder="Enter Tax Rate" class="form-control"></form:input>
                                                 <form:errors path="taxRate" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>    

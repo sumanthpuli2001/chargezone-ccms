@@ -125,6 +125,7 @@ public class EmployeePolicyDetailDAOImpl<T> extends GenericsDAOImpl<T> implement
     @Override
     public List<?> readBypolicyAmountWithTaxable(int empId) {
         String query = "";
+        
         query += " select SUM(a.amount)"
                 + " From EmployeePolicyDetail a "
                 + " where a.employeeMaster = " + empId

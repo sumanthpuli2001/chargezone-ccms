@@ -45,7 +45,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label>Taxable Income From:<span style="color: red;font-size: 12px;">*</span></label>
-                                                <form:input path="incomeFrom" type="number" step="any" placeholder="Enter Income From" class="form-control"></form:input>
+                                                <form:input path="incomeFrom" type="number" step="any" min="0" placeholder="Enter Income From" class="form-control"></form:input>
                                                 <form:errors path="incomeFrom" cssClass="errorDiv"></form:errors>
                                             </div>
                                             <div class="col-sm-6">
@@ -57,7 +57,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label>Tax Rate(%) :<span style="color: red;font-size: 12px;">*</span></label>
-                                                <form:input path="taxRate" type="number" step="any" placeholder="Enter Tax Rate" class="form-control"></form:input>
+                                                <form:input path="taxRate" type="number" step="any" min="0" placeholder="Enter Tax Rate" class="form-control"></form:input>
                                                 <form:errors path="taxRate" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>    

@@ -226,6 +226,7 @@
                             <ul class="treeview-menu">
                                 <c:if test="${sessionScope.userRight.attendanceReport}">
                                     <li><a href="shiftRotationMaster.htm?act=employeeDataSearch"><i class="fa fa-circle-o"></i> Employee Master Report</a></li>
+                                    <li><a href="shiftRotationMaster.htm?act=employeeDataSearch2"><i class="fa fa-circle-o"></i> Employee Attendance Report</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=employeeAttandanceDataSearch"><i class="fa fa-circle-o"></i> Monthly Attendance Report  </a></li>
                                     <li><a href="shiftRotationMaster.htm?act=employeePresentSearch"><i class="fa fa-circle-o"></i>Daily Present Report</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=attendanceExcelUpload"><i class="fa fa-circle-o"></i>Attendance Upload</a></li>
@@ -858,7 +859,7 @@
                         <li><a href="classifiedBox.htm?act=showResult"><i class="fa fa-circle-o"></i>Classified Setting</a></li>
                         <li><a href="ctcAllowance.htm?act=showList"><i class="fa fa-circle-o"></i>CTC Master</a></li>
                         <li><a href="retirementAge.htm?act=showList"><i class="fa fa-circle-o"></i>Retirement Ages</a></li>
-                        <li><a href="emergencyContact.htm?act=createContact"><i class="fa fa-circle-o"></i>Add / Update Contacts</a></li>
+                        <li><a href="emergencyContact.htm?act=createContact"><i class="fa fa-circle-o"></i>Emergency Contacts</a></li>
                         <c:if test="${sessionScope.userRight.hr}">
                             <li class="treeview" style="color: #585858;">
                                 <a href="#">

@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.Payroll;
 
 import com.bul.zydex.dao.GenericsDAO;
+import com.bul.zydex.model.EmployeeMaster;
 import java.util.List;
 
 /**
@@ -21,5 +22,11 @@ public interface TaxSavingSubmitDAO<T> extends GenericsDAO<T> {
     public List<?> readTaxSavingSubmitSalaryGenerate(int EmplID, int finicailyear);
 
     public List<?> readTaxSavingSubmitSalaryGenerateAfterDate(int EmplID, int finicailyear);
+
+    public List<?> readTaxSavingSubmitForEmployee(EmployeeMaster employeeMaster);
+
+    public List taxSubmitSearchIdCheck(T object);
+
+    public List<?> readDataForSaving(int employeeId, int financialId);
 
 }

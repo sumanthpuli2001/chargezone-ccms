@@ -647,6 +647,10 @@
     <bean id="payrollTaxRateMasterService1" class="com.bul.zydex.service.Payroll.PayrollTaxRateMasterServiceImpl">
         <property name="payrollTaxRateMasterDao" ref="payrollTaxRateMasterDao1" />
     </bean>
+    <bean id="taxDeductionDeclarationSavingStatusService1" class="com.bul.zydex.service.Payroll.TaxDeductionDeclarationSavingStatusServiceImpl">
+        <property name="taxDeductionDeclarationSavingStatusDAO" ref="taxDeductionDeclarationSavingStatusDAO1" />
+    </bean>
+
     <bean id="fullAndFinalSettlementService1" class="com.bul.zydex.service.resignation.FullAndFinalSettlementServiceImpl">
         <property name="fullAndFinalSettlementDAO" ref="fullAndFinalSettlementDAO1"/>
     </bean>
@@ -661,5 +665,8 @@
     </bean>
     <bean id="leaveEmployeeDetailsApprovalHistoryService1" class="com.bul.zydex.service.leave.LeaveEmployeeDetailsApprovalHistoryServiceImpl">
         <property name="leaveEmployeeDetailsApprovalHistoryDAO" ref="leaveEmployeeDetailsApprovalHistoryDAO1"/>
+    </bean>
+    <bean id="emergencyContactService1" class="com.bul.zydex.service.EmergencyContactServiceImpl">
+        <property name="emergencyContactDAO" ref="emergencyContactDAO1" />
     </bean>
 </beans>

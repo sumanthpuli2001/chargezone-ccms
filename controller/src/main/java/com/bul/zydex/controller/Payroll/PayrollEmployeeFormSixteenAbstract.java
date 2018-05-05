@@ -89,6 +89,14 @@ public class PayrollEmployeeFormSixteenAbstract extends CustomAbstract {
     protected TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> taxDeductionDecarationSubmitService;
     protected TaxSavingSubmitService<TaxSavingSubmit> taxSavingSubmitService;
 
+    public TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> getTaxDeductionDecarationSubmitService() {
+        return taxDeductionDecarationSubmitService;
+    }
+
+    public void setTaxDeductionDecarationSubmitService(TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> taxDeductionDecarationSubmitService) {
+        this.taxDeductionDecarationSubmitService = taxDeductionDecarationSubmitService;
+    }
+    
     public PayrollSavingAmountService<ZydexLocationMaster> getPayrollSavingAmountService() {
         return payrollSavingAmountService;
     }
@@ -255,14 +263,6 @@ public class PayrollEmployeeFormSixteenAbstract extends CustomAbstract {
 
     public void setPayrollTaxDeductionComponentService(PayrollTaxDeductionComponentService<PayrollTaxDeductionComponent> payrollTaxDeductionComponentService) {
         this.payrollTaxDeductionComponentService = payrollTaxDeductionComponentService;
-    }
-
-    public TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> getTaxDeductionDecarationSubmitService() {
-        return taxDeductionDecarationSubmitService;
-    }
-
-    public void setTaxDeductionDecarationSubmitService(TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> taxDeductionDecarationSubmitService) {
-        this.taxDeductionDecarationSubmitService = taxDeductionDecarationSubmitService;
     }
 
     public TaxSavingSubmitService<TaxSavingSubmit> getTaxSavingSubmitService() {

@@ -114,7 +114,8 @@
                                         <div class="col-sm-6" id="excelDiv">
                                             <input type="file" name="file1" id="file11" value="" onchange="checkfile(this);"/>
                                             <input type="hidden" id="fileName" name="fileName" value=""/>
-                                            <span>[ <a href="employeeSalaryProcess.htm?act=readSalaryUploadFile&amp;fileName=SalaryExcelUpload1.xlsx">Sample Excel</a> ]</span>
+                                            <span>[ <a href="#" onclick="redirectToDownloadFile();">Attendance Excel</a> ]</span>
+                                            <!--<span>[ <a href="employeeSalaryProcess.htm?act=readSalaryUploadFile&amp;fileName=SalaryExcelUpload1.xlsx">Sample Excel</a> ]</span>-->
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -144,9 +145,20 @@
         var options11 = "";
 
         for (var year1 = end; year1 >= start; year1--) {
-            options11 += "<option>" + year1 + "</option>";
+            options11 += "<option value='"+year1+"'>" + year1 + "</option>";
         }
         document.getElementById('year11').innerHTML = options11;
+        
+        function redirectToDownloadFile()
+        {
+            alert("ok");
+            var month = $('#month').val();
+            alert("month------"+month);
+            var year = $('#year11').val();
+            alert("ok----"+year);
+            
+            window.location = 'employeeSalaryProcess.htm?act=downloadAttendanceGeneratedFile&month='+month+'&year11='+year;
+        }
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 

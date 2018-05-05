@@ -67,8 +67,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Sr. No.</th>
-                                                            <th>Saving Type
-                                                            </th>
+                                                            <th>Saving Type</th>
                                                             <th>Amount</th>
                                                             <th>Proof submission </th>
                                                             <th></th>

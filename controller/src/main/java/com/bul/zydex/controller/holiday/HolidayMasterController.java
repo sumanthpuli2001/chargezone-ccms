@@ -64,14 +64,18 @@ public class HolidayMasterController extends HolidayMasterAbstract {
         ModelAndView mv = new ModelAndView();
         Map<Integer, String> locationMap = readLocations();
         mv.addObject("locationMap", locationMap);
+        
+        List<?> holidayMasterList = holidayMasterService.readHolidaysDateLocationWise(request.getParameter("holidayFromDate"),request.getParameter("holidayToDate"),Integer.parseInt(request.getParameter("locationMaster.id")));
+        
         holidayMasterValidator.validate(holidayMaster, errors);
+        
         if (errors.hasFieldErrors()) {
             mv.addObject("failureMessage", "Error : Information Is Not Valid.");
             mv.addAllObjects(errors.getModel());
             mv.setViewName("Holiday/HolidayCreateOrUpdate");
 
         } else {
-            if (null == holidayMaster.getId() && !holidayMasterService.isExist(holidayMaster)) {
+            if (null == holidayMaster.getId() && !holidayMasterList.isEmpty()) {
                 mv.setViewName("Holiday/HolidayCreateOrUpdate");
                 mv.addObject("failureMessage", "Error : Information Is Already Exist. ");
             } else {

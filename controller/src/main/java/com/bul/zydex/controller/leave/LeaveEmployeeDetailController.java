@@ -2069,9 +2069,13 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             }
 
         }
-       List<?> sameDateCheck= leaveEmployeeDetailService.readLeaveDetails(leaveEmployeeDetail);
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
+        String currentDate = dateFormat1.format(new Date());
+        EmployeeMaster employeeMasterFromSession = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        List<?> sameDateCheck = leaveEmployeeDetailService.getEmployeeLeaveDetailByDate(currentDate, employeeMasterFromSession.getId());
         List<?> approvalHistoryList = leaveEmployeeDetailsApprovalHistoryService.getByLeaveEmpDetailId(Integer.parseInt(id));
 
+        request.setAttribute("sameDateCheck", sameDateCheck);
         request.setAttribute("approvalHistoryList", approvalHistoryList);
         request.setAttribute("listRemain", listRemain);
         request.setAttribute("empReqMap", empReqMap);

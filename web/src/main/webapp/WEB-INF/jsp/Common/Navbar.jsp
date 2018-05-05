@@ -59,6 +59,7 @@
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.userRight.employeeManagement}">
+
                     <li class="treeview" style="color: #585858;">
                         <a href="#" style="background: #fff;">
                             <i class="fa fa-user fa-lg" style="color: #585858;"></i>
@@ -66,83 +67,36 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-
-                            <!--<li><a href="employeeMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>Employee Registration</a></li>-->
-                            <li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP</a></li>
-                            <li><a href="recruitment.htm?act=createMpr"><i class="fa fa-circle-o"></i>MPR</a></li>
-                            <li><a href="vacancy.htm?act=vacancyDetailList"><i class="fa fa-circle-o"></i>Vacancy</a></li>
-                            <li><a href="candidateF2FApproval.htm?act=candidateF2FReqListForInterviewer"><i class="fa fa-circle-o"></i>Candidate F2F  Request</a></li>
-
-                            <!--<li><a href="vacancy.htm?act=applyJobRegistration"><i class="fa fa-circle-o"></i>Apply Job</a></li>-->
-                            <!--                        <li><a href="userMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>User Right</a></li>-->
+                            <c:if test="${sessionScope.userRight.mppApproval}">
+                                <li><a href="recruitment.htm?act=approvalMppCreate"><i class="fa fa-circle-o"></i>MPP Approval</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.userRight.mprApproval}">
+                                <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>MPR Approval</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.userRight.candidateList}">
+                                <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.userRight.vacancy}">
+                                <li><a href="vacancy.htm?act=vacancyDetailList"><i class="fa fa-circle-o"></i>Vacancy</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.userRight.faceTofaceInterview}">
+                                <li><a href="candidateF2FApproval.htm?act=candidateF2FReqListForInterviewer"><i class="fa fa-circle-o"></i>Candidate F2F  Request</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.userRight.faceTofaceApproval}">
+                                <li><a href="candidateF2FApproval.htm?act=candidateF2FReqListForInterviewer"><i class="fa fa-circle-o"></i>Candidate F2F  Approval</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.userRight.budget}">
+                                <li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.userRight.mpr}">
+                                <li><a href="recruitment.htm?act=createMpr"><i class="fa fa-circle-o"></i>MPR</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.userRight.itAdmin}">
+                                <li><a href="candidateF2FApproval.htm?act=candidateF2FInterviewList"><i class="fa fa-circle-o"></i>All Candidate F2F Request</a></li>
+                                </c:if>
                         </ul>
                     </li>
-                </c:if>
-                <c:if test="${!sessionScope.userRight.employeeManagement}">
-                    <c:if test="${sessionScope.userRight.hr}">
-                        <li class="treeview" style="color: #585858;">
-                            <a href="#" style="background: #fff;">
-                                <i class="fa fa-user fa-lg" style="color: #585858;"></i>
-                                <span style="color: #585858;">Recruitment</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="recruitment.htm?act=approvalMppCreate"><i class="fa fa-circle-o"></i>MPP Approval</a></li>
-                                <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>MPR Approval</a></li>
-                                    <c:if test="${sessionScope.userRight.candidateList}">
-                                    <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
-                                    </c:if>    
-                                    <c:if test="${sessionScope.userRight.budget}">
-                                    <li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.userRight.mpr}">
-                                    <li><a href="recruitment.htm?act=createMpr"><i class="fa fa-circle-o"></i>MPR</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.userRight.vacancy}">
-                                    <li><a href="vacancy.htm?act=vacancyDetailList"><i class="fa fa-circle-o"></i>Vacancy</a></li>
-                                    </c:if>
-                                <li><a href="candidateF2FApproval.htm?act=candidateF2FInterviewList"><i class="fa fa-circle-o"></i>All Candidate F2F Request</a></li>
-                            </ul>
-                        </li>
-                    </c:if>
-                </c:if>
-                <c:if test="${sessionScope.userRight.employeeManagement}">
-                    <c:if test="${!sessionScope.userRight.employeeManagement}">
-                        <li class="treeview" style="color: #585858;">
-                            <a href="#" style="background: #fff;">
-                                <i class="fa fa-user fa-lg" style="color: #585858;"></i>
-                                <span style="color: #585858;">Recruitment</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <c:if test="${sessionScope.userRight.mppApproval}">
-                                    <li><a href="recruitment.htm?act=approvalMppCreate"><i class="fa fa-circle-o"></i>MPP Approval</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.userRight.mprApproval}">
-                                    <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>MPR Approval</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.userRight.candidateList}">
-                                    <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.userRight.vacancy}">
-                                    <li><a href="vacancy.htm?act=vacancyDetailList"><i class="fa fa-circle-o"></i>Vacancy</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.userRight.faceTofaceInterview}">
-                                    <li><a href="candidateF2FApproval.htm?act=candidateF2FReqListForInterviewer"><i class="fa fa-circle-o"></i>Candidate F2F  Request</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.userRight.faceTofaceApproval}">
-                                    <li><a href="candidateF2FApproval.htm?act=candidateF2FReqListForInterviewer"><i class="fa fa-circle-o"></i>Candidate F2F  Request</a></li>
-                                    </c:if>
 
-                                <c:if test="${sessionScope.userRight.budget}">
-                                    <li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.userRight.mpr}">
-                                    <li><a href="recruitment.htm?act=createMpr"><i class="fa fa-circle-o"></i>MPR</a></li>
-                                    </c:if>
-                            </ul>
-                        </li>
-                    </c:if>
                 </c:if>
                 <c:if test="${sessionScope.userRight.employeeManagement}">
                     <li class="treeview" style="color: #585858;">

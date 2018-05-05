@@ -128,6 +128,7 @@ public class QuestionLibraryController extends QuestionLibraryAbstract {
                     questionLibrary.setMarks(Integer.parseInt(request.getParameter("marks")));
                     questionLibrary.setSatatus(Integer.parseInt(request.getParameter("satatus")));
                     questionLibrary.setMprEmployeeCategory(mprEmployeeCategory);
+                    questionLibrary.setQuestion(request.getParameter("question"));
 //                otherDetailCount = Integer.parseInt(request.getParameter("questionCount"));
                 } catch (Exception e) {
                 }
@@ -464,7 +465,7 @@ public class QuestionLibraryController extends QuestionLibraryAbstract {
                 }
                 questionPaperService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
-                        "Info : One or more records are add successfully.");
+                        "Info : Records are deleted successfully.");
             } catch (Exception e) {
             }
         }

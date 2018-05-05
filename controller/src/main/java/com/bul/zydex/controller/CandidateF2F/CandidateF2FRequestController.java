@@ -119,6 +119,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mprApprovalHistory.setCreateDate(sdf.format(cDate));
         mprApprovalHistory.setCreatedBy(employeeMaster.getId());
         mprApprovalHistory.setStatus(8);
+        mprApprovalHistory.setComment("Face To Face Interview");
         mprApprovalHistory.setStatusMessage("Face To Face Interview");
         mprApprovalHistory.setMprMaster(vm.getMprMaster());
         mprApprovalHistoryService.create(mprApprovalHistory);
@@ -174,6 +175,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
         mprApprovalHistory.setMprMaster(vm.getMprMaster());
         mprApprovalHistory.setStatus(2);
+        mprApprovalHistory.setComment("ShortListed");
         mprApprovalHistory.setStatusMessage("ShortListed");
         mprApprovalHistory.setCreateDate(sdf.format(cDate));
         mprApprovalHistory.setCreatedBy(employeeMaster.getId());
@@ -226,7 +228,8 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
         mprApprovalHistory.setMprMaster(vm.getMprMaster());
         mprApprovalHistory.setStatus(3);
-        mprApprovalHistory.setStatusMessage("Rejected");
+        mprApprovalHistory.setComment("Candidate Rejected");
+        mprApprovalHistory.setStatusMessage("Candidate Rejected");
         mprApprovalHistory.setCreateDate(sdf.format(cDate));
         mprApprovalHistory.setCreatedBy(employeeMaster.getId());
         mprApprovalHistoryService.create(mprApprovalHistory);
@@ -277,6 +280,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
         mprApprovalHistory.setMprMaster(vm.getMprMaster());
         mprApprovalHistory.setStatus(14);
+        mprApprovalHistory.setComment("Send Offer Laters");
         mprApprovalHistory.setStatusMessage("Send Offer Laters");
         mprApprovalHistory.setCreateDate(sdf.format(cDate));
         mprApprovalHistory.setCreatedBy(employeeMaster.getId());

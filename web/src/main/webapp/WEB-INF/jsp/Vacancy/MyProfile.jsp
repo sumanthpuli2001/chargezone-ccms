@@ -353,7 +353,7 @@
                                                                 <!--<span><img src="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}" width="50px; !important" height="50px; !important">&nbsp;&nbsp;${candidateApplyJob.certificateAttach}</span>-->
                                                                  <!--<a href="${candidateApplyJob.certificateAttach}/StorageYard/CertificateAttach">Download</a>-->
                                 <%--<form:input path="certificateAttach" type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png" onchange="checkCertificateFileSize(1);"></form:input>--%>
-                                / <span style="color: red;font-size: 12px;"><form:errors path="certificateAttach" cssClass="errorDiv"></form:errors></span>
+                                <span style="color: red;font-size: 12px;"><form:errors path="certificateAttach" cssClass="errorDiv"></form:errors></span>
                                 </div>
 
 
@@ -407,7 +407,7 @@
         {
             var fup = document.getElementById('certificateId1');
             var certificateId1 = fup.value;
-            alert(certificateId1);
+//            alert(certificateId1);
             var ext = certificateId1.substring(certificateId1.lastIndexOf('.') + 1);
             if (ext == "pdf")
             {

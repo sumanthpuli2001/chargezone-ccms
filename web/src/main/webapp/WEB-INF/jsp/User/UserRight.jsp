@@ -66,7 +66,7 @@
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <div class=" col-sm-6">
-                                                        <label>User Right Management:</label>
+                                                        <label>User Role Management:</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -213,6 +213,19 @@
                                                         <label  style="font-weight: normal">Department Wise Attendance</label>
 
                                                     </div>
+                                                </div>
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
+                                    </div><!-- /.tab-content -->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class=" col-sm-6">
+                                                        <label>User Rights Management:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
                                                     <div class="col-sm-3">
                                                     <form:checkbox path="faceTofaceInterview"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;

@@ -1195,6 +1195,7 @@
         <property name="jobtypeMasterService" ref="jobtypeMasterService1"/>
         <property name="mprMasterService" ref="mprMasterService1"/>
         <property name="recruitmentService" ref="recruitmentService1"/>
+        <property name="mprApprovalHistoryService" ref="mprApprovalHistoryService1"/>
     </bean>
     <bean id="trainingAssessmentController1" class="com.bul.zydex.controller.Training.TrainingAssessmentController" parent="controllerConfig" >
         <property name="trainingAssessmentService" ref="trainingAssessmentService1"></property>

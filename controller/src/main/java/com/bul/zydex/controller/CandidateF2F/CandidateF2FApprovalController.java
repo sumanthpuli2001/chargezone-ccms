@@ -14,10 +14,13 @@ import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.JobtypeMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.MprApprovalHistory;
 import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.VacancyMaster;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -129,7 +132,9 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
 
         int numberOfPositionMpp = rm.getNumberOfPosition();
         int Mppbudget = rm.getBudget();
+        int mprid = mm.getId();
         String MppExperience = rm.getExperiance();
+        List<?> list = mprApprovalHistoryService.getByMprId(mprid);
 
         request.setAttribute("jobtypeNAme2", jobtypeNAme2);
         request.setAttribute("departmentName2", departmentName2);
@@ -195,7 +200,8 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         request.setAttribute("MprExperience", MprExperience);
         request.setAttribute("Mprdescription", Mprdescription);
         request.setAttribute("applicationId", applicationId);
-
+        request.setAttribute("list", list);
+        request.setAttribute("mprid", mprid);
         candidateF2FRequest.setCandidateApplyJob(candidateApplyJob);
         candidateF2FRequest.setVacancyMaster(vm);
         request.setAttribute("commentlist", approverCommentList);
@@ -239,13 +245,17 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
+        MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
         CandidateF2FRequest candidateF2FRequest = new CandidateF2FRequest();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         bind(request, candidateF2FRequest);
         String btnType = request.getParameter("btnType");
         String applicationId = request.getParameter("applicationId");
+        String mprid = request.getParameter("mprid");
         String message = request.getParameter("message");
-
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+        MprMaster mprmaster = mprMasterService.readById(Integer.parseInt(mprid));
         candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
         CandidateJobApplication cja = candidateJobApplicationService.readById(candidateF2FRequest.getCandidateJobApplication().getId());
 
@@ -261,6 +271,16 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             /////////approve
             cja.setStatus(11);
             candidateJobApplicationService.update(cja);
+
+            mprApprovalHistory.setMprMaster(mprmaster);
+            mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+            mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+            mprApprovalHistory.setComment(candidateF2FRequest.getMessage());
+            mprApprovalHistory.setStatusMessage("Face To Face Approve");
+            mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+            mprApprovalHistory.setCreateDate(sdf.format(cDate));
+            mprApprovalHistoryService.create(mprApprovalHistory);
+
             request.setAttribute("successMessage",
                     "Information : The Request is Approved successfully.");
 
@@ -277,6 +297,16 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             ///hold
             cja.setStatus(9);
             candidateJobApplicationService.update(cja);
+
+            mprApprovalHistory.setMprMaster(mprmaster);
+            mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+            mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+            mprApprovalHistory.setComment(candidateF2FRequest.getMessage());
+            mprApprovalHistory.setStatusMessage("Face To Face ON HOLD");
+            mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+            mprApprovalHistory.setCreateDate(sdf.format(cDate));
+            mprApprovalHistoryService.create(mprApprovalHistory);
+
             request.setAttribute("successMessage",
                     "Information : The Request is Hold successfully.");
         }
@@ -292,6 +322,16 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             ///////reject
             cja.setStatus(10);
             candidateJobApplicationService.update(cja);
+
+            mprApprovalHistory.setMprMaster(mprmaster);
+            mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+            mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+            mprApprovalHistory.setComment(candidateF2FRequest.getMessage());
+            mprApprovalHistory.setStatusMessage("Face To Face REJECT");
+            mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+            mprApprovalHistory.setCreateDate(sdf.format(cDate));
+            mprApprovalHistoryService.create(mprApprovalHistory);
+
             request.setAttribute("successMessage",
                     "Information : The Request is Rejected successfully.");
 
@@ -375,9 +415,10 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         String MprName = mm.getName();
         int numberOfPositionMpr = mm.getNumberOfPosition();
         int Mprbudget = mm.getBudget();
+        int mprId = mm.getId();
         String MprExperience = mm.getExperience();
         String Mprdescription = mm.getDescription();
-
+        List<?> list = mprApprovalHistoryService.getByMprId(mprId);
         request.setAttribute("applicationId", applicationId);
 
         candidateF2FRequest.setCandidateApplyJob(candidateApplyJob);
@@ -410,7 +451,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         request.setAttribute("Mprbudget", Mprbudget);
         request.setAttribute("MprExperience", MprExperience);
         request.setAttribute("Mprdescription", Mprdescription);
-
+        request.setAttribute("list", list);
         mv.setViewName("CandidateFtoF/ShowF2FInterview");
         return mv;
     }

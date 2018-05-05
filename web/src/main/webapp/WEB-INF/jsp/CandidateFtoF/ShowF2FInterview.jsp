@@ -393,12 +393,60 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="box box-info collapsed-box ">
+                                        <div class="box-header">
+                                            <h3 class="box-title">History:</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <label><h4></h4></label>
+                                                    <table style="width: 100%;" align="center">
+                                                        <c:choose>
+                                                            <c:when test="${empty list}">
+                                                                <tr>
+                                                                    <td align="center">
+                                                                        <c:out value="There is no record found."></c:out>
+                                                                        </td>
+                                                                    </tr>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <thead>
+                                                                <th colspan="4" style="text-align:center">History Detail </th>
+                                                                <tr>
+                                                                    <th style="width: 50px;">Name</th>
+                                                                    <th style="width: 50px;">Date</th>
+                                                                    <th style="width: 50px;">Comment</th>
+                                                                    <th style="width: 50px;">Status</th>
+                                                                </tr>
+                                                                </thead>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <tbody>
+                                                            <c:forEach var="list" items="${list}">
+                                                                <tr>
+                                                                    <td>${list[1]}</td>
+                                                                    <td>${list[6]}</td>
+                                                                    <td>${list[3]}</td>
+                                                                    <td>${list[5]} By&nbsp${list[1]}</td>
+                                                                </c:forEach>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.col -->
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </form:form>
                 </div><!-- /.tab-pane -->
             </div><!-- /.tab-content -->
+
     </div><!-- nav-tabs-custom -->
 </div><!-- /.col -->
 </div>
@@ -490,6 +538,11 @@
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 </html>
+<style>
+    table,tr,td,th{
+        border: 1px black solid;
+    }
+</style>
 <script>
     $(document).ready(function () {
         $('#datetimepicker2').datepicker({

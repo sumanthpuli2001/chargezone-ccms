@@ -905,22 +905,24 @@
                         <li><a href="ctcAllowance.htm?act=showList"><i class="fa fa-circle-o"></i>CTC Master</a></li>
                         <li><a href="retirementAge.htm?act=showList"><i class="fa fa-circle-o"></i>Retirement Ages</a></li>
                         <li><a href="emergencyContact.htm?act=createContact"><i class="fa fa-circle-o"></i>Add / Update Contacts</a></li>
+                        <c:if test="${sessionScope.userRight.hr}">
+                            <li class="treeview" style="color: #585858;">
+                                <a href="#">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>Email Template Master</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="emailTemplate.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Email Template Result</a></li>
+                                    <li><a href="emailAddMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Email Add Master</a></li>
+                                </ul>
+                            </li>
+                        </c:if>
+
                     </ul>
                 </li>
             </c:if>
-            <c:if test="${sessionScope.userRight.hr}">
-                <li class="treeview" style="color: #585858;">
-                    <a href="#" style="background: #fff;">
-                        <i class="fa fa-laptop fa-lg" style="color: #585858;"></i>
-                        <span style="color: #585858;">Email Template Master</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="emailTemplate.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Email Template Result</a></li>
-                        <li><a href="emailAddMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Email Add Master</a></li>
-                    </ul>
-                </li>
-            </c:if>
+         
 
 
 

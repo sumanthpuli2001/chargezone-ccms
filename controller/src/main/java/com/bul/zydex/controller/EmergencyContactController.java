@@ -64,14 +64,18 @@ public class EmergencyContactController extends EmergencyContactAbstract {
         mv = createContact(request, response);
         return mv;
     }
-    
+
     public ModelAndView viewContact(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mv = new ModelAndView();
         EmergencyContact emergencyContact = new EmergencyContact();
-        
-        List<EmergencyContact> list = (List<EmergencyContact>) emergencyContactService.read();
 
-        request.setAttribute("list", list.get(0).getContactDescription());
+        List<EmergencyContact> list = (List<EmergencyContact>) emergencyContactService.read();
+        
+        if (!list.isEmpty() && list.size() != 0 && null != list.get(0)) {
+            request.setAttribute("list", list.get(0).getContactDescription());
+        } else {
+            request.setAttribute("list", " No Emergency Records Found..!!");
+        }
         mv.getModelMap().put("emergencyContact", emergencyContact);
         mv.setViewName("Emergency/EmergencyContactView");
         return mv;

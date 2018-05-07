@@ -217,6 +217,7 @@
 
                             </li>
                         </c:if>
+                        <c:if test="${sessionScope.userRight.employeeManagement}">
                         <li class="treeview" style="color: #585858;">
                             <a href="#">
                                 <i class="fa fa-circle-o"></i>
@@ -241,6 +242,7 @@
                             </ul>
 
                         </li>
+                        </c:if>
                     </ul>
                 </li>
                 <li class="treeview" style="color: #585858;">
@@ -297,7 +299,7 @@
                         <li class="treeview" style="color: #585858;">
                             <a href="#">
                                 <i class="fa fa-circle-o"></i>
-                                <span>Expense Report</span>
+                                <span>Expense Request</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
@@ -485,14 +487,14 @@
                         <!--<li><a href="appraisalPerformance.htm?act=createClick"><i class="fa fa-circle-o"></i>Performance Appraisal </a></li>-->
                         <%--<c:if test="${sessionScope.checkReportingManager}">--%>
                         <li><a href="appraisalPerformance.htm?act=searchOwnappraisalPerformanceSubmit"><i class="fa fa-circle-o"></i>PMP Form</a></li>
-                        <li><a href="performanceImprovementPlanMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>PIP Form</a></li>
+                        <!--<li><a href="performanceImprovementPlanMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>PIP Form</a></li>-->
                             <%--</c:if>--%>
                         <li><a href="appraisalPerformance.htm?act=searchClick"><i class="fa fa-circle-o"></i>Subordinates PMP</a></li>
                         <!--<li><a href="appraisalPerformance.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Subordinates PMP</a></li>-->
-                        <li><a href="performanceImprovementPlanMaster.htm?act=viewPipListByManager"><i class="fa fa-circle-o"></i>Subordinates PIP</a></li>
+                        <!--<li><a href="performanceImprovementPlanMaster.htm?act=viewPipListByManager"><i class="fa fa-circle-o"></i>Subordinates PIP</a></li>-->
                             <c:if test="${sessionScope.userRight.appraisalPmp}">
                             <li><a href="appraisalPerformance.htm?act=searchAppraisalPerformanceReoprtStageWise"><i class="fa fa-circle-o"></i>PMP-Report</a></li>
-                            <li><a href="performanceImprovementPlanMaster.htm?act=viewPipListByAdmin"><i class="fa fa-circle-o"></i>View All PIP </a></li>
+                            <!--<li><a href="performanceImprovementPlanMaster.htm?act=viewPipListByAdmin"><i class="fa fa-circle-o"></i>View All PIP </a></li>-->
                             <li><a href="kraCategory.htm?act=createClick"><i class="fa fa-circle-o"></i>KRA Category</a></li>
                             <!--<li><a href="appraisalFillingData.htm?act=createClick"><i class="fa fa-circle-o"></i>Appraisal Filling Data </a></li>-->
                             <li><a href="appraisalFillingData.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Cycle Time-Line Setting</a></li>
@@ -830,8 +832,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="resignationMaster.htm?act=newFormatCreate"><i class="fa fa-circle-o"></i>F&F Settlement Letter Formate</a></li>
-                        <li><a href="modulesMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Modules Master</a></li>
-                        <li><a href="componentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Component Master</a></li>
+                        <!--<li><a href="modulesMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Modules Master</a></li>-->
+                        <!--<li><a href="componentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Component Master</a></li>-->
                         <li><a href="approval.htm?act=approvalList"><i class="fa fa-circle-o"></i>Approval Setting</a></li>
                         <li><a href="deviceMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Device Management</a></li>
                         <li><a href="departmentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Department List</a></li>
@@ -847,7 +849,7 @@
                         <li><a href="visitorVisitedLocation.htm?act=createClick"><i class="fa fa-circle-o"></i>Visitor Visited Location</a></li>
                         <li><a href="timeAttandanceFlaxibleMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Time Attendance Flexible</a></li>
                         <li><a href="urlMaster.htm?act=viewUrlResult"><i class="fa fa-pie-chart fa-lg"></i>Web Service URL</a></li>
-                        <li><a href="appraisalPerformance.htm?act=trasferCompatencyEvaluationInEmployeeMaster"><i class="fa fa-pie-chart fa-lg"></i>Competency Evaluation Transfer</a></li>
+                        <!--<li><a href="appraisalPerformance.htm?act=trasferCompatencyEvaluationInEmployeeMaster"><i class="fa fa-pie-chart fa-lg"></i>Competency Evaluation Transfer</a></li>-->
                         <li><a href="companyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Company Master</a></li>
                             <%--<c:if test="${!sessionScope.userRight.employeeManagement}">--%>
                             <c:if test="${sessionScope.userRight.hr}">
@@ -860,7 +862,7 @@
                         <li><a href="ctcAllowance.htm?act=showList"><i class="fa fa-circle-o"></i>CTC Master</a></li>
                         <li><a href="retirementAge.htm?act=showList"><i class="fa fa-circle-o"></i>Retirement Ages</a></li>
                         <li><a href="emergencyContact.htm?act=createContact"><i class="fa fa-circle-o"></i>Emergency Contacts</a></li>
-                        <c:if test="${sessionScope.userRight.hr}">
+                            <c:if test="${sessionScope.userRight.hr}">
                             <li class="treeview" style="color: #585858;">
                                 <a href="#">
                                     <i class="fa fa-circle-o"></i>
@@ -877,7 +879,7 @@
                     </ul>
                 </li>
             </c:if>
-         
+
 
 
 
@@ -942,6 +944,11 @@
                         </c:if>
                 </ul>
             </li>   
+            <li class="active treeview">
+                <a href="homeController.htm?act=report">
+                    <i class="fa fa-archive fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Report</span>
+                </a>
+            </li> 
 
             </ul>
 

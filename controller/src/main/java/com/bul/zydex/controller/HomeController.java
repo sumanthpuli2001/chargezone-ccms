@@ -212,5 +212,10 @@ public class HomeController extends HomeAbstract {
 //        Random random=new Random();   
 //        int randomNumber=random.nextInt(10000000);
     }
+      public ModelAndView report(HttpServletRequest request, HttpServletResponse response) throws Exception {
+          ModelAndView mv = new ModelAndView();
+          mv.setViewName("Common/reports");
+          return mv;
+      }
 
 }

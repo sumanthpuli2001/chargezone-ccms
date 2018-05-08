@@ -2441,7 +2441,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
         String filePath = File.separator + "StorageYard" + File.separator
                 + "Other" + File.separator + "UserDoc" + File.separator
-                + "EmployeeRegistration" + File.separator + fileName;
+                + "Payroll" + File.separator + fileName;
 
         String appPath = request.getServletContext().getRealPath("");
 

@@ -136,7 +136,7 @@
                                                                                                         </div>-->
                                                     <div class="col-sm-2">
 
-                                                            <input type="number" name="givenMarks2" class="form-control" id="givenMarks3${status.count}"  max="${employeeAdditional[5]}"
+                                                        <input type="number" name="givenMarks2" class="form-control" id="givenMarks3${status.count}"  max="${employeeAdditional[5]}"
                                                                oninput="maxLengthCheck(this)" onkeypress="return isNumeric(event)" required>
                                                         <label>/Out Of <input type="hidden" value="${employeeAdditional[5]}" id="outOf${status.count}" ><input type="hidden" id="counter" value="${status.count}">
                                                             ${employeeAdditional[5]}</label>

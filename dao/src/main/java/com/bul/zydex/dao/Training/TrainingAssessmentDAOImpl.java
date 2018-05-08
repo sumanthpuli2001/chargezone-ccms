@@ -42,7 +42,7 @@ public class TrainingAssessmentDAOImpl<T> extends GenericsDAOImpl<T> implements 
     @Override
     public List<?> readTrainingAssementList(int trainingMasterId, int empId) {
         String query = "";
-        //0   1    2      3    4                   5               6           7           8           9           10          11          12
+                          //0   1    2      3    4                   5               6           7           8           9           10          11          12
         query += "Select a.id,b.id,c.id,d.id,a.passingPercentage,a.validityFrom,a.validityTo,a.duration,a.noOfAttampt,a.noOfQue,a.totalMarks,c.paperName,a.assessmentResultStatus"
                 + " From TrainingAssessment a"
                 + " LEFT JOIN a.employeeMaster b"

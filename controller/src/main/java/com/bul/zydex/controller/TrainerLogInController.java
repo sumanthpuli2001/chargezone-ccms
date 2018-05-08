@@ -277,7 +277,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
         Date startdate = formatter1.parse(trainingMaster1.getStartDate());
         Date enddate = formatter1.parse(trainingMaster1.getEndDate());
-        if ((currenstarttdate.compareTo(startdate) >= 0 && currenstarttdate.compareTo(enddate) <= 0 || currentenddate.compareTo(startdate) >= 0 && currentenddate.compareTo(enddate) <= 0) ) {
+        if ((currenstarttdate.compareTo(startdate) >= 0 && currenstarttdate.compareTo(enddate) <= 0 || currentenddate.compareTo(startdate) >= 0 && currentenddate.compareTo(enddate) <= 0)) {
             assflage = true;
         }
 
@@ -622,6 +622,9 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         BindException errors = new BindException(trainingAssessment, "trainingAssessment");
         bind(request, trainingAssessment);
         TrainingMaster trainingMaster = trainingMasterService.readById(trainingMasterId);
+        int NoOfQue = Integer.parseInt(request.getParameter("NoOfQue"));
+        String totalMarks = request.getParameter("totalMarks");
+
         trainingAssessment.setTrainingMaster(trainingMaster);
         trainingAssessment.setCreatedBy(trnMaster.getId());
         trainingAssessment.setCreatedDate(dtf.format(localDate));
@@ -648,6 +651,8 @@ public class TrainerLogInController extends TrainerLogInAbstract {
             EmployeeMaster employeeMaster = new EmployeeMaster();
             employeeMaster.setId(Integer.parseInt(string));
             trainingAssessment.setEmployeeMaster(employeeMaster);
+            trainingAssessment.setNoOfQue(NoOfQue);
+            trainingAssessment.setTotalMarks(Double.parseDouble(totalMarks));
             trainingAssessment.setAssessmentResultStatus(3);  // assessment Submit 
             trainingAssessmentService.create(trainingAssessment);
         }

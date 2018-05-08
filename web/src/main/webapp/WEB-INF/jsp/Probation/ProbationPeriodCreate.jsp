@@ -68,12 +68,12 @@
                                             <form:errors path="period" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
-                                        <br/>
-                                        <div class="form-group">
-                                            <div class="col-sm-6 col-sm-offset-5 ">
-                                                <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
-                                            </div>
+                                    <br/>
+                                    <div class="form-group">
+                                        <div class="col-sm-6 col-sm-offset-5 ">
+                                            <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
                                         </div>
+                                    </div>
                                 </form:form>
                             </div><!-- /.tab-pane -->
                         </div><!-- /.tab-content -->

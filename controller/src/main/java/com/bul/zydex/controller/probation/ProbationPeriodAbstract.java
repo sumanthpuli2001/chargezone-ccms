@@ -6,7 +6,9 @@
 package com.bul.zydex.controller.probation;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.ProbationPeriod;
+import com.bul.zydex.service.leave.LeaveTypeMasterService;
 import com.bul.zydex.service.probation.ProbationPeriodService;
 import org.springframework.validation.Validator;
 
@@ -18,6 +20,7 @@ public class ProbationPeriodAbstract extends CustomAbstract {
 
     protected ProbationPeriodService<ProbationPeriod> probationPeriodService;
     protected Validator probationPeriodValidator;
+    protected LeaveTypeMasterService<LeaveTypeMaster> leaveTypeMasterService;
 
     public ProbationPeriodService<ProbationPeriod> getProbationPeriodService() {
         return probationPeriodService;
@@ -33,6 +36,14 @@ public class ProbationPeriodAbstract extends CustomAbstract {
 
     public void setProbationPeriodValidator(Validator probationPeriodValidator) {
         this.probationPeriodValidator = probationPeriodValidator;
+    }
+
+    public LeaveTypeMasterService<LeaveTypeMaster> getLeaveTypeMasterService() {
+        return leaveTypeMasterService;
+    }
+
+    public void setLeaveTypeMasterService(LeaveTypeMasterService<LeaveTypeMaster> leaveTypeMasterService) {
+        this.leaveTypeMasterService = leaveTypeMasterService;
     }
 
 }

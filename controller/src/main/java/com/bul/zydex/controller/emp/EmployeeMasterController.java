@@ -56,13 +56,18 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import javafx.scene.control.Cell;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.springframework.validation.BindException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -4784,16 +4789,19 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile multipartFile = multipartRequest.getFile("file1");
         PolicyMaster policyMaster = new PolicyMaster();
-        EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
+
         String employeeNo = "";
         String employeeName = "";
-        
-        
+
+        List<String> list = (List<String>) policyMasterService.readPolicyName();
+
         if (multipartFile.getSize() > 0) {
             InputStream file = multipartFile.getInputStream();
             Workbook workbook = WorkbookFactory.create(file);
             Sheet sheet = workbook.getSheetAt(0);
+
             for (Row row : sheet) {
+                int i = 2;
                 if (row.getRowNum() == 0) {
                     try {
                         employeeNo = new BigDecimal("" + (null == row.getCell((short) 0) ? "" : row.getCell((short) 0))).toPlainString();
@@ -4801,11 +4809,95 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     } catch (Exception e) {
                         employeeNo = "" + (null == row.getCell((short) 0) ? "" : row.getCell((short) 0));
                     }
+                    employeeName = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
 
+                    while (null != row.getCell(i) && " " != row.getCell(i).toString() && !row.getCell(i).toString().replace(" ", "").isEmpty()) {
+                        XSSFCell cell = (XSSFCell) row.getCell(i);
+                        XSSFCell cell1 = (XSSFCell) row.getCell(i + 1);
+                        if (!list.stream().anyMatch(cell.toString()::equalsIgnoreCase)) {
+                            policyMaster.setPolicyName(cell.toString());
+                            policyMasterService.create(policyMaster);
+                        }
+                        i += 2;
+                    }
+                } else {
+
+                    List<PolicyMaster> list1 = (List<PolicyMaster>) policyMasterService.read();
+                    Map<String, Integer> result = list1.stream().collect(Collectors.toMap(PolicyMaster::getPolicyName, PolicyMaster::getId));
+                    Map<String, Integer> result1 = result.entrySet().stream()
+                            .collect(Collectors.toMap(entry -> entry.getKey().toUpperCase(), entry -> entry.getValue()));
+                    Row firstHeaderRow = sheet.getRow(0);
+
+                    EmployeeMaster empMaster = new EmployeeMaster();
+
+                    if (null != row.getCell(0) && " " != row.getCell(0).toString() && !row.getCell(0).toString().replace(" ", "").isEmpty()) {
+
+                        String empNo = row.getCell(0).toString();
+
+                        XSSFCell empName = (XSSFCell) row.getCell(1);
+
+                        UserMaster um = new UserMaster();
+                        String[] abc = empNo.split("\\.");
+                        um.setUserName(abc[0]);
+
+                        List<?> empId = userMasterService.readByUserName(um);
+
+                        if (!empId.isEmpty() && 0 != empId.size() && null != empId) {
+
+                            um = (UserMaster) empId.get(0);
+                            empMaster.setUserMaster(um);
+                            List<?> emp = employeeMasterService.readByUserName(empMaster);
+                            if (!emp.isEmpty() && 0 != emp.size() && null != emp) {
+                                empMaster = (EmployeeMaster) emp.get(0);
+                            }
+
+                        }
+
+                        int y = 2;
+
+                        while (null != row.getCell(y) && " " != row.getCell(y).toString() && !row.getCell(y).toString().replace(" ", "").isEmpty()) {
+
+                            EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
+
+                            XSSFCell cell = (XSSFCell) row.getCell(y); // amount
+                            XSSFCell cell1 = (XSSFCell) row.getCell(y + 1); // yes or no
+
+                                employeePolicyDetail.setAmount(Double.parseDouble(cell.toString().replaceAll(",", "")));
+
+                                if (cell1.toString().equalsIgnoreCase("yes")) {
+                                    employeePolicyDetail.setStatus(1);
+                                } else if (cell1.toString().equalsIgnoreCase("no")) {
+                                    employeePolicyDetail.setStatus(0);
+                                } else {
+
+                                }
+                                String policyName = (String) firstHeaderRow.getCell(y).toString();
+                                policyMaster.setId(result1.get(policyName.toUpperCase()));
+                                employeePolicyDetail.setPolicyMaster(policyMaster);
+                                employeePolicyDetail.setEmployeeMaster(empMaster);
+
+                                List<?> l = employeePolicyDetailService.readForMasterAdditionalAmount(empMaster.getId(), policyMaster.getId());
+                                Integer id = 0;
+                                if (!l.isEmpty() && 0 != l.size() && null != l) {
+                                    Object[] a = (Object[]) l.get(0);
+                                    id = (Integer) a[2];
+                                }
+                                if (id != 0) {
+                                    employeePolicyDetail.setId(id);
+                                }
+                                employeePolicyDetailService.createOrUpdate(employeePolicyDetail);
+                            y += 2;
+                            }
+//                        }
+                    }
                 }
 
             }
         }
+        request.setAttribute(
+                "successMessage",
+                "Information : The Information is saved Successfully.");
+        mv = excelUploadAllowance(request, response);
 
         return mv;
     }

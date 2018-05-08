@@ -10,7 +10,6 @@ import com.bul.zydex.model.EmployeeAdvanceSearch;
 import com.bul.zydex.model.EmployeeMaster;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 
 /**
  *
@@ -1992,5 +1991,197 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " Where a.employeeId = '" + employeeNo + "'";
         return getHibernateTemplate().find(query);
     }
+    
+    @Override
+    public List<?> empOrDateWiseSearchforActiveSecond(EmployeeAdvanceSearch employeeAdvanceSearch) {
+        String query = "";
+        String condition = "";
 
-}
+        if (null != employeeAdvanceSearch.getId() && !employeeAdvanceSearch.getId().equals("")) {
+            condition += " a.id = " + employeeAdvanceSearch.getId();
+        } else {
+            // single condition
+            if (null != employeeAdvanceSearch.getDepartmentId() && !employeeAdvanceSearch.getDepartmentId().equals("")) {
+                condition += "  a.departmentMaster.id = " + employeeAdvanceSearch.getDepartmentId();
+            } else {
+                condition += " 1= 1";
+            }
+            // two condition
+            if (null != employeeAdvanceSearch.getZydexLocationId() && !employeeAdvanceSearch.getZydexLocationId().equals("")) {
+                condition += " and a.zydexLocationMaster.id = " + employeeAdvanceSearch.getZydexLocationId();
+            } else {
+                condition += " and 1 = 1";
+            }
+            // three condition
+            if (null != employeeAdvanceSearch.getLevelID() && !employeeAdvanceSearch.getLevelID().equals("")) {
+                condition += " and a.levelMaster.id = " + employeeAdvanceSearch.getLevelID();
+            } else {
+                condition += " and 1 = 1";
+            }
+        }
+
+        if (null != employeeAdvanceSearch.getDojStartDate() && !employeeAdvanceSearch.getDojStartDate().equals("")
+                && null != employeeAdvanceSearch.getDojEndDate() && !employeeAdvanceSearch.getDojEndDate().equals("")) {
+            condition += " and STR_TO_DATE(a.dateOfJoining,'%d/%m/%Y') BETWEEN "
+                    + "STR_TO_DATE('" + employeeAdvanceSearch.getDojStartDate() + "','%d/%m/%Y') "
+                    + "AND STR_TO_DATE('" + employeeAdvanceSearch.getDojEndDate() + "','%d/%m/%Y')";
+        } else {
+            condition += " and 1 = 1";
+        }
+        ///// Create Employee Advance search Query
+        query += " Select ";
+        if (employeeAdvanceSearch.getEmployeeId()) {
+            query += " a.employeeId ,";
+        } else {
+            query += " '' as nonval ,";
+
+        }
+        if (employeeAdvanceSearch.getEmployeeName()) {
+            query += " a.employeeName,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        
+        if (employeeAdvanceSearch.getZydexLocation()) {
+            query += " e.zydexLocation,";
+        } else {
+            query += " '' as nonval ,";
+        }
+
+        if (employeeAdvanceSearch.getDepartment()) {
+            query += " b.departmentName,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        
+        if (employeeAdvanceSearch.getDesignation()) {
+            query += " c.designationName,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        
+        if (employeeAdvanceSearch.getDateOfJoining()) {
+            query += " a.dateOfJoining,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        
+        if (employeeAdvanceSearch.getEmployeeType()) {
+            query += " a.employeeType,";
+        } else {
+            query += " '' as nonval ,";
+        }
+
+        query += " '' as nonval1,a.id From  EmployeeMaster  a "
+                + " LEFT JOIN a.departmentMaster b "
+                + " LEFT JOIN a.designationMaster c "
+                + " LEFT JOIN a.levelMaster d "
+                + " LEFT JOIN a.zydexLocationMaster e "
+                + " Where ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) ";
+        if (null != condition && !"".equals(condition)) {
+            query += " and" + condition;
+        }
+        return getHibernateTemplate().find(query);
+    }
+    
+      public List<?> empOrDateWiseSearch2(EmployeeAdvanceSearch employeeAdvanceSearch) {
+        String query = "";
+        String condition = "";
+
+        if (null != employeeAdvanceSearch.getId() && !employeeAdvanceSearch.getId().equals("")) {
+            condition += " a.id = " + employeeAdvanceSearch.getId();
+        } else {
+            // single condition
+            if (null != employeeAdvanceSearch.getDepartmentId() && !employeeAdvanceSearch.getDepartmentId().equals("")) {
+                condition += "  a.departmentMaster.id = " + employeeAdvanceSearch.getDepartmentId();
+            } else {
+                condition += " 1= 1";
+            }
+            // two condition
+            if (null != employeeAdvanceSearch.getZydexLocationId() && !employeeAdvanceSearch.getZydexLocationId().equals("")) {
+                condition += " and a.zydexLocationMaster.id = " + employeeAdvanceSearch.getZydexLocationId();
+            } else {
+                condition += " and 1 = 1";
+            }
+            // three condition
+            if (null != employeeAdvanceSearch.getLevelID() && !employeeAdvanceSearch.getLevelID().equals("")) {
+                condition += " and a.levelMaster.id = " + employeeAdvanceSearch.getLevelID();
+            } else {
+                condition += " and 1 = 1";
+            }
+        }
+        if (null != employeeAdvanceSearch.getDojStartDate() && !employeeAdvanceSearch.getDojStartDate().equals("")
+                && null != employeeAdvanceSearch.getDojEndDate() && !employeeAdvanceSearch.getDojEndDate().equals("")) {
+            condition += " and STR_TO_DATE(a.dateOfJoining,'%d/%m/%Y') BETWEEN "
+                    + "STR_TO_DATE('" + employeeAdvanceSearch.getDojStartDate() + "','%d/%m/%Y') "
+                    + "AND STR_TO_DATE('" + employeeAdvanceSearch.getDojEndDate() + "','%d/%m/%Y')";
+        } else {
+            condition += " and 1 = 1";
+        }
+
+        ///// Create Employee Advance search Query
+        query += " Select ";
+        if (employeeAdvanceSearch.getEmployeeId()) {
+            query += " a.employeeId ,";
+        } else {
+            query += " '' as nonval ,";
+
+        }
+        if (employeeAdvanceSearch.getEmployeeName()) {
+            query += " a.employeeName,";
+        } else {
+            query += " '' as nonval ,";
+        }
+       
+        if (employeeAdvanceSearch.getZydexLocation()) {
+            query += " e.zydexLocation,";
+        } else {
+            query += " '' as nonval ,";
+        }
+
+        if (employeeAdvanceSearch.getDepartment()) {
+            query += " b.departmentName,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDesignation()) {
+            query += " c.designationName,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getDateOfJoining()) {
+            query += " a.dateOfJoining,";
+        } else {
+            query += " '' as nonval ,";
+        }
+        if (employeeAdvanceSearch.getEmployeeType()) {
+            query += " a.employeeType,";
+        } else {
+            query += " '' as nonval ,";
+        }
+
+        query += " '' as nonval1,a.id From  EmployeeMaster  a "
+                + " LEFT JOIN a.departmentMaster b "
+                + " LEFT JOIN a.designationMaster c "
+                + " LEFT JOIN a.levelMaster d "
+                + " LEFT JOIN a.zydexLocationMaster e ";
+        if (condition != "") {
+//            query += " Where 1=1 AND " + condition;
+            query += " Where  " + condition;
+        }
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> getAllEmployeeId() {
+        String query = "";
+
+        query += "SELECT a.id FROM EmployeeMaster a ORDER BY a.id ASC";
+
+        return getHibernateTemplate().find(query);
+    }
+
+    }
+
+    

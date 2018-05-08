@@ -53,12 +53,12 @@
                             <!-- Custom Tabs -->
                             <div class="nav-tabs-custom">
                                 <div class="tab-content">
-                                <c:if test="${sessionScope.userRight.employeeManagement}">
-                                    <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
-                                    <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
+                                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
+                                <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
 
-                                    <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'recruitment.htm?act=newCreateBudget'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
-                                </c:if>
+                                <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'recruitment.htm?act=newCreateBudget'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
+                                <%--</c:if>--%>
                                 <div class="box-header">
                                 </div>
                                 <div class="box-body no-padding">
@@ -98,7 +98,7 @@
                                                     </c:choose>
                                                     <tbody>
                                                         <c:forEach var="list" items="${list}">
-                                                            <c:set var="string2" value="${fn:split(list[6], '~')}" />
+                                                            <%--<c:set var="string2" value="${fn:split(list[6], '~')}" />--%>
                                                             <tr>
                                                                 <c:if test="${sessionScope.userRight.employeeManagement}">
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
@@ -110,229 +110,16 @@
                                                                 <td>${list[2]}</td>
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[7]}</td>
-                                                                <%--<c:if test="${list[6] == 0}"><td><span class="badge">Pending</span></td></c:if>--%>
-                                                                <c:if test="${list[6] == 0}"> <td>
+                                                                <c:if test="${list[6] == 0}"><td><span class="badge">Pending</span></td></c:if>
+                                                                <c:if test="${list[6] == 2}"><td><span class="badge">Pending</span></td></c:if>
 
-                                                                        <span class="badge" rel="tooltip" data-html="true" data-toggle="tooltip" data-placement="top"
-                                                                              data-title="<table bgcolor='#000000' style='border: none'>
-                                                                              <tr bgcolor='#000000'><th bgcolor='#000000'>Approver</th><th bgcolor='#000000'>Status</th><th bgcolor='#000000'>DateTime</th>
-                                                                              <c:forEach var="qq" items="${string2}"> <c:set var="string3" value="${fn:split(qq, '_')}" /><tr bgcolor='#000000'><th bgcolor='#000000'>${string3[0]}</th>
-                                                                                  <c:if test="${string3[1] eq 'Pending'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Pending</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '0'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Pending</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '1'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Reworked</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '2'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Rejected</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '3'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Approved</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '4'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      WithDraw</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '5'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Final Approved</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '6'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Approved</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '8'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Approved</th>
-                                                                                  </c:if>
-                                                                                  <th bgcolor='#000000'>${string3[2]}</th></tr></c:forEach>
-                                                                              </table>">Pending</span></td></c:if>
-                                                                    <%--<c:if test="${list[6] == 2}"><td><span class="badge">Pending</span></td></c:if>--%>
-                                                                    <c:if test="${list[6] == 2}">  <td><span class="badge" rel="tooltip" data-html="true" data-toggle="tooltip" data-placement="top"
-                                                                              data-title="<table bgcolor='#000000' style='border: none'>
-                                                                              <tr bgcolor='#000000'><th bgcolor='#000000'>Approver</th><th bgcolor='#000000'>Status</th><th bgcolor='#000000'>DateTime</th>
-                                                                              <c:forEach var="qq" items="${string2}"> <c:set var="string3" value="${fn:split(qq, '_')}" /><tr bgcolor='#000000'><th bgcolor='#000000'>${string3[0]}</th><th bgcolor='#000000'> ${string3[1]}</th><th bgcolor='#000000'>${string3[2]}</th></tr></c:forEach>
-                                                                              </table>">Pending</span></td></c:if>
-                                                                    <%--<c:if test="${list[6] == 1}"><td><span class="label label-warning">Recycled</span></td></c:if>--%>
-                                                                    <c:if test="${list[6] == 1}"><td><span class="label label-warning" rel="tooltip" data-html="true" data-toggle="tooltip" data-placement="top"
-                                                                              data-title="<table bgcolor='#000000' style='border: none'>
-                                                                              <tr bgcolor='#000000'><th bgcolor='#000000'>Approver</th><th bgcolor='#000000'>Status</th><th bgcolor='#000000'>DateTime</th>
-                                                                              <c:forEach var="qq" items="${string2}"> <c:set var="string3" value="${fn:split(qq, '_')}" /><tr bgcolor='#000000'><th bgcolor='#000000'>${string3[0]}</th>
-                                                                                  <c:if test="${string3[1] eq 'Pending'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Pending</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '0'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Pending</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '1'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Reworked</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '2'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Rejected</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '3'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Approved</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '4'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      WithDraw</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '5'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Final Approved</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '6'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Approved</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '8'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Approved</th>
-                                                                                  </c:if>
-                                                                                  <th bgcolor='#000000'>${string3[2]}</th></tr></c:forEach>
-                                                                              </table>">Recycled</span></td></c:if>
-                                                                    <%--<c:if test="${list[6] == 3}"><td><span class="label label-danger">Rejected</span></td></c:if>--%>
-                                                                    <c:if test="${list[6] == 3}">  <td><span class="label label-danger" rel="tooltip" data-html="true" data-toggle="tooltip" data-placement="top"
-                                                                              data-title="<table bgcolor='#000000' style='border: none'>
-                                                                              <tr bgcolor='#000000'><th bgcolor='#000000'>Approver</th><th bgcolor='#000000'>Status</th><th bgcolor='#000000'>DateTime</th>
-                                                                              <c:forEach var="qq" items="${string2}"> <c:set var="string3" value="${fn:split(qq, '_')}" /><tr bgcolor='#000000'><th bgcolor='#000000'>${string3[0]}</th>
-                                                                                  <c:if test="${string3[1] eq 'Pending'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Pending</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '0'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Pending</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '1'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Reworked</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '2'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Rejected</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '3'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Approved</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '4'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      WithDraw</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '5'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Final Approved</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '6'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Approved</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '8'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Approved</th>
-                                                                                  </c:if>
-                                                                                  <th bgcolor='#000000'>${string3[2]}</th></tr></c:forEach>
-                                                                              </table>">Rejected</span></td></c:if>
-                                                                    <%--<c:if test="${list[6] == 4}"><td><span class="label label-success">Approved</span></td></c:if>--%>
-                                                                    <c:if test="${list[6] == 4}"> <td><span class="label label-success" rel="tooltip" data-html="true" data-toggle="tooltip" data-placement="top"
-                                                                              data-title="<table bgcolor='#000000' style='border: none'>
-                                                                              <tr bgcolor='#000000'><th bgcolor='#000000'>Approver</th><th bgcolor='#000000'>Status</th><th bgcolor='#000000'>DateTime</th>
-                                                                              <c:forEach var="qq" items="${string2}"> <c:set var="string3" value="${fn:split(qq, '_')}" /><tr bgcolor='#000000'><th bgcolor='#000000'>${string3[0]}</th>
-                                                                                  <c:if test="${string3[1] eq 'Pending'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Pending</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '0'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Pending</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '1'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Reworked</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '2'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Rejected</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '3'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Approved</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '4'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      WithDraw</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '5'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Final Approved</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '6'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Approved</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '8'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Approved</th>
-                                                                                  </c:if>
-                                                                                  <th bgcolor='#000000'>${string3[2]}</th></tr></c:forEach>
-                                                                              </table>">Approved</span></td></c:if>
-                                                                    <%--<c:if test="${list[6] == 5 || list[6] == 21}"><td><span class="label label-success">Final Approved</span></td></c:if>--%>
-                                                                    <c:if test="${list[6] == 5 || list[6] == 21}"><td><span class="label label-success" rel="tooltip" data-html="true" data-toggle="tooltip" data-placement="top"
-                                                                              data-title="<table bgcolor='#000000' style='border: none'>
-                                                                              <tr bgcolor='#000000'><th bgcolor='#000000'>Approver</th><th bgcolor='#000000'>Status</th><th bgcolor='#000000'>DateTime</th>
-                                                                              <c:forEach var="qq" items="${string2}"> <c:set var="string3" value="${fn:split(qq, '_')}" /><tr bgcolor='#000000'><th bgcolor='#000000'>${string3[0]}</th>
-                                                                                  <c:if test="${string3[1] eq 'Pending'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Pending</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '0'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Pending</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '1'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Reworked</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '2'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Rejected</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '3'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Approved</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '4'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      WithDraw</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '5'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Final Approved</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '6'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Approved</th>
-                                                                                  </c:if>
-                                                                                  <c:if test="${string3[1] eq '8'}">
-                                                                                      <th bgcolor='#000000'>
-                                                                                      Approved</th>
-                                                                                  </c:if>
-                                                                                  <th bgcolor='#000000'>${string3[2]}</th></tr></c:forEach>
-                                                                              </table>">Final Approved</span></td></c:if>
+                                                                <c:if test="${list[6] == 1}"><td><span class="label label-warning">Recycled</span></td></c:if>
+
+                                                                <c:if test="${list[6] == 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
+
+                                                                <c:if test="${list[6] == 4}"><td><span class="label label-success">Approved</span></td></c:if>
+
+                                                                <c:if test="${list[6] == 5 || list[6] == 21}"><td><span class="label label-success">Final Approved</span></td></c:if>
 
                                                                     <td>
                                                                         <div class="btn-group">

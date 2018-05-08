@@ -7,7 +7,6 @@ package com.bul.zydex.dao.holiday;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.HolidayMaster;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
@@ -152,5 +151,20 @@ public class HolidayMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Holid
 
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> readHolidaysDateLocationWise(String holidayFrom, String holidayTo, int locationId) {
+        
+        String query = " SELECT a "
+                + " FROM HolidayMaster a "
+                + " left join a.locationMaster b "
+                + " where a.holidayFromDate = '"+ holidayFrom +"'"
+                + " and a.holidayToDate = '" + holidayTo +"'"
+                + " and b.location.id = " + locationId ;
+        
+        List list = getHibernateTemplate().find(query);
+        return list;
+    }
+
     
 }

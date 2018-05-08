@@ -603,7 +603,8 @@
                                     </a>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-3">
-                                    <a class="label label-primary" style="font-size: 20px" href="hrServiceRequest.htm?act=searchSubmit">
+                                    <!--<a class="label label-primary" style="font-size: 20px" href="hrServiceRequest.htm?act=searchSubmit">-->
+                                    <a class="label label-primary" style="font-size: 20px" href="emergencyContact.htm?act=viewContact">
                                         <i class="fa fa-book"></i> &nbsp<strong>Emergency Contact</strong>
                                     </a>
                                 </div>
@@ -630,9 +631,15 @@
                                         <i class="fa fa-pencil-square-o"></i> &nbsp<strong>CSR</strong>
                                     </a>
                                 </div>
-                                <div class="col-xs-4 col-sm-4 col-md-3">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
                                     <a class="label label-primary" style="font-size: 20px"  href="http://www.spcls.co.in/news-events.aspx" target="_blank">
                                         <i class="fa fa-newspaper-o"></i> &nbsp<strong>News & Event</strong>
+                                    </a>
+                                </div>
+                                <div  class="col-xs-4 col-sm-4 col-md-3">
+                                    <a class="label label-primary" style="font-size: 20px" href="holidayMaster.htm?act=viewHolidaysLocationWise">
+                                        <i class="fa fa-twitch"></i>
+                                        <strong>Holiday List</strong>
                                     </a>
                                 </div>
 

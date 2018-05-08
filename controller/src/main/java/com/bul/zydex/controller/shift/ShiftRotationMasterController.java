@@ -14,7 +14,6 @@ import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LeaveTypeMaster;
-import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.OverTimeMaster;
 import com.bul.zydex.model.RotationMaster;
 import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
@@ -27,8 +26,6 @@ import com.bul.zydex.model.TravelRequestMaster;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.util.DownloadFile;
-import com.sun.org.apache.bcel.internal.generic.DADD;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -1382,467 +1379,6 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
     }
 
-//    public ModelAndView overTimeEntry(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//
-////    private synchronized void overTimeEntry() throws Exception {
-//        ModelAndView mv = new ModelAndView();
-//        List<?> list = employeeShiftDataService.checkEmpDailyData();
-//        if (!list.isEmpty()) {
-//            for (Object o : list) {
-//                try {
-//                    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/YYYY");
-//                    EmployeeShiftData employeeShiftData = (EmployeeShiftData) o;
-//                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-//                    String InTime = employeeShiftData.getInDateTime();
-//                    String OutTime = employeeShiftData.getOutDateTime();
-//                    int shiftId = employeeShiftData.getShiftMaster().getId();
-//                    ShiftMaster shiftMaster1 = shiftMasterService.readById(shiftId);
-//                    String flexiInTime = shiftMaster1.getLateHours().trim() + ":00";
-//
-//                    Date flexibleInTime = sdf.parse(flexiInTime);
-//
-//                    Date date = new Date();
-//                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
-//                    Date dateBefore = new Date(date.getTime() - 24 * 60 * 60 * 1000);
-//                    String dateBeforeDay = formatter.format(dateBefore);
-//
-//                    String[] userTimeInStr = InTime.split(" ");
-//                    String[] userTimeOUTStr = OutTime.split(" ");
-//
-//                    Date userTimeIn = sdf.parse(userTimeInStr[1]);
-//                    Date userTimeOut = sdf.parse(userTimeOUTStr[1]);
-//
-//                    Date userMidEnd = sdf.parse("24:00:00");
-//                    Date userMidStart = sdf.parse("00:00:00");
-//                    int empId = employeeShiftData.getEmployeeMaster().getId();
-//                    EmployeeMaster employeeMaster = employeeMasterService.readById(empId);
-//                    ZydexLocationMaster zydexLocationMaster = employeeMaster.getZydexLocationMaster();
-//
-//                    long diff1 = 0;
-//                    long diff2 = 0;
-//                    long totalDayTime = 0;
-//                    long totalDayTime1 = 0;
-//                    String time = "";
-//                    String time2 = "";
-//
-//                    EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
-//                    EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
-//
-//                    String coff = "C Off Leave";
-//                    LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
-//                    List<?> coffList = leaveTypeMasterService.readLeaveType(coff);
-//                    if (!coffList.isEmpty()) {
-////                        Object[] coffListObject= (Object[])coffList.get(0);
-//                        leaveTypeMaster.setId(Integer.parseInt(coffList.get(0).toString()));
-////                        leaveTypeMaster = (LeaveTypeMaster) coffList.get(0);
-//                    }
-//
-//                    employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
-//                    employeeLeaveBalance.setEmployeeMaster(employeeMaster);
-//                    int levelId = employeeMaster.getLevelMaster().getId();
-//                    LevelMaster levelMaster = levelMasterService.readById(levelId);
-//
-//                    if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5") || levelMaster.getLevel().contains("6")) {
-//                        if (zydexLocationMaster.getId() == 1 || zydexLocationMaster.getId() == 6) {
-//                            String startTime = "";
-//                            String endTime = "";
-//                            long lunchTime = 0;
-//                            long outTime = 0;
-//                            long totalTime = 0;
-//                            int i = 1;
-//                            int j = 2;
-//                            SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-//                            List listPunch = employeeDatetimeDataService.readPuchDataDateWise(dateBeforeDay, empId);
-//                            if (listPunch.size() > 2) {
-//                                while (listPunch.size() > i && listPunch.size() > j) {
-//
-//                                    Object[] startLunchTime = (Object[]) listPunch.get(i);
-//                                    Object[] endLunchTime = (Object[]) listPunch.get(j);
-//                                    startTime = (String) startLunchTime[0];
-//                                    endTime = (String) endLunchTime[0];
-//                                    Date launchStrTime = sdf3.parse(startTime);
-//                                    Date launchEndTime = sdf3.parse(endTime);
-//                                    long diff = launchEndTime.getTime() - launchStrTime.getTime();
-//                                    lunchTime = diff / (60 * 1000);
-//                                    outTime = outTime + lunchTime;
-//                                    i = i + 2;
-//                                    j = j + 2;
-//                                }
-//                            }
-//
-//                            if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
-//                                if (userTimeOut.before(userTimeIn)) {
-//                                    diff1 = userMidEnd.getTime() - userTimeIn.getTime();
-//                                } else {
-//                                    diff1 = userTimeOut.getTime() - userTimeIn.getTime();
-//                                }
-//
-//                            } else if (userTimeOut.before(userTimeIn)) {
-//                                diff1 = userMidEnd.getTime() - flexibleInTime.getTime();
-//                            } else {
-//                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
-//                            }
-//
-//                            totalDayTime = diff1 / (60 * 1000);
-//
-//                            if (userTimeOut.before(userTimeIn)) {
-//                                diff2 = userMidEnd.getTime() - userTimeIn.getTime();
-//                            } else {
-//                                diff2 = userTimeOut.getTime() - userTimeIn.getTime();
-//                            }
-//
-//                            totalDayTime1 = diff2 / (60 * 1000);
-////                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-////                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-////                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
-//                            long outTime1 = outTime;
-//                            outTime = outTime - 30;
-////                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
-//                            double empHour = 0;
-//                            if (outTime > 0 && outTime1 != totalDayTime1) {
-//                                totalTime = totalDayTime - outTime;
-//                                empHour = (double) totalTime / 60;
-//
-//                            } else {
-//                                empHour = (double) totalDayTime / 60;
-//
-//                            }
-//                            if (empHour >= 4 && empHour <= 7.9) {
-//                                time2 = "0.5";
-//                            } else if (empHour >= 8 && empHour <= 11.9) {
-//                                time2 = "1.0";
-//                            } else if (empHour >= 12) {
-//                                time2 = "1.5";
-//                            }
-//
-//                            if (!time2.equals("")) {
-//                                List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
-//                                if (!empBalList.isEmpty()) {
-//                                    employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
-//                                    float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
-//                                    time1 = time1 + Float.parseFloat(time2);
-//                                    employeeLeaveBalance1.setNoOfLeaveRemain(time1);
-//                                    employeeLeaveBalanceService.update(employeeLeaveBalance1);
-//                                } else {
-//                                    employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
-//                                    employeeLeaveBalance1.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-//                                    employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time2));
-//                                    employeeLeaveBalanceService.create(employeeLeaveBalance1);
-//                                }
-//
-////                                Date date5 = new Date();
-////                                String todayDate = formatter.format(date5);
-////                                OverTimeMaster overTimeMaster = new OverTimeMaster();
-////                                overTimeMaster.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-////                                overTimeMaster.setDate(todayDate);
-////                                overTimeMaster.setTime(time2);
-////                                overTimeMasterService.create(overTimeMaster);
-//                            }
-//
-//                        } else {
-//                            if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
-//                                if (userTimeOut.before(userTimeIn)) {
-//                                    diff1 = userMidEnd.getTime() - userTimeIn.getTime();
-//                                } else {
-//                                    diff1 = userTimeOut.getTime() - userTimeIn.getTime();
-//                                }
-//
-//                            } else if (userTimeOut.before(userTimeIn)) {
-//                                diff1 = userMidEnd.getTime() - flexibleInTime.getTime();
-//                            } else {
-//                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
-//                            }
-//
-//                            totalDayTime = diff1 / (60 * 1000);
-//
-//                            if (userTimeOut.before(userTimeIn)) {
-//
-//                                diff2 = userTimeOut.getTime() - userMidStart.getTime();
-////                                diff2 = userTimeOut1.getTime() - userTimeIn.getTime();
-//                            } else {
-////                                diff2 = userTimeOut.getTime() - userTimeIn.getTime();
-//                            }
-//
-//                            totalDayTime1 = diff2 / (60 * 1000);
-//
-//                            totalDayTime = totalDayTime + totalDayTime1;
-//
-//                            double empHour = (double) totalDayTime / 60;
-//                            if (empHour >= 3 && empHour <= 3.9) {
-//                                time2 = "0.3";
-//                            } else if (empHour >= 4 && empHour <= 5.9) {
-//                                time2 = "0.5";
-//                            } else if (empHour >= 6 && empHour <= 7.9) {
-//                                time2 = "0.6";
-//                            } else if (empHour >= 8) {
-//                                time2 = "1.0";
-//                            }
-//
-//                            if (!time2.equals("")) {
-//                                List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
-//                                if (!empBalList.isEmpty()) {
-//                                    employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
-//                                    float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
-//                                    time1 = time1 + Float.parseFloat(time2);
-//                                    employeeLeaveBalance1.setNoOfLeaveRemain(time1);
-//                                    employeeLeaveBalanceService.update(employeeLeaveBalance1);
-//                                } else {
-//                                    employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
-//                                    employeeLeaveBalance1.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-//                                    employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time2));
-//                                    employeeLeaveBalanceService.create(employeeLeaveBalance1);
-//                                }
-//
-////                                Date date5 = new Date();
-////                                String todayDate = formatter.format(date5);
-////                                OverTimeMaster overTimeMaster = new OverTimeMaster();
-////                                overTimeMaster.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-////                                overTimeMaster.setDate(todayDate);
-////                                overTimeMaster.setTime(time2);
-////                                overTimeMasterService.create(overTimeMaster);
-//                            }
-//                        }
-//
-//                    }
-//                } catch (Exception e) {
-//
-//                }
-//
-//            }
-//
-//        }
-//        return mv;
-//    }
-    //                    ShiftMaster shiftMaster = new ShiftMaster();
-    //                    employeeShiftData.getEmployeeMaster();
-    //                    int id = employeeShiftData.getShiftMaster().getId();
-    //                    shiftMaster = shiftMasterService.readById(id);
-    //                    String shiftStartDate = shiftMaster.getStartTime().trim();
-    //                    String shiftEndDate = shiftMaster.getEndTime().trim();
-    //                    String firstHalfEndDate = shiftMaster.getHalfEndTime1().trim();
-    //                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-    //
-    //                    Calendar cal1 = Calendar.getInstance();
-    //                    Calendar cal2 = Calendar.getInstance();
-    //                    Calendar cal7 = Calendar.getInstance();
-    //                    Date date1 = new Date();
-    //                    String s = formatter.format(date1);
-    //                    Date date = formatter.parse(s);
-    //                    int hour = Integer.parseInt(shiftStartDate.split(":")[0]);
-    //                    int minute = Integer.parseInt(shiftStartDate.split(":")[1]);
-    //                    int hour1 = Integer.parseInt(shiftEndDate.split(":")[0]);
-    //                    int minute1 = Integer.parseInt(shiftEndDate.split(":")[1]);
-    //                    int hour2 = Integer.parseInt(firstHalfEndDate.split(":")[0]);
-    //                    int minute2 = Integer.parseInt(firstHalfEndDate.split(":")[1]);
-    //                    cal1.setTime(date);
-    //                    cal2.setTime(date);
-    //                    cal7.setTime(date);
-    //
-    //                    cal1.set(Calendar.HOUR, hour);
-    //                    cal1.set(Calendar.MINUTE, minute);
-    //                    cal2.set(Calendar.HOUR, hour1);
-    //                    cal2.set(Calendar.MINUTE, minute1);
-    //
-    //                    cal7.set(Calendar.HOUR, hour2);
-    //                    cal7.set(Calendar.MINUTE, minute2);
-    //
-    //                    long difference = cal2.getTime().getTime() - cal1.getTime().getTime();
-    //                    String empStartTime = employeeShiftData.getInDateTime();
-    //                    String empEndTime = employeeShiftData.getOutDateTime();
-    //
-    //                    Date date3 = format.parse(empStartTime);
-    //                    Date date4 = format.parse(empEndTime);
-    //                    Calendar cal3 = Calendar.getInstance();
-    //                    Calendar cal4 = Calendar.getInstance();
-    //                    cal3.setTime(date3);
-    //                    cal4.setTime(date4);
-    //
-    //                    Calendar cal5 = Calendar.getInstance();
-    //                    Date satdate = format.parse(empStartTime);
-    //                    cal5.setTime(satdate);
-    //                    SimpleDateFormat format2 = new SimpleDateFormat("EEEE");
-    //                    String dayName = format2.format(date);
-    //                    int dayOfWeek = cal5.get(Calendar.WEEK_OF_MONTH);
-    //
-    //                    employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
-    //                    employeeLeaveBalance.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-    //                    EmployeeMaster employeeMaster = new EmployeeMaster();
-    //                    employeeMaster = employeeMasterService.readById(employeeShiftData.getEmployeeMaster().getId());
-    //                    int levelId = employeeMaster.getLevelMaster().getId();
-    //                    LevelMaster levelMaster = new LevelMaster();
-    //                    levelMaster = levelMasterService.readById(levelId);
-    //
-    //                    int zydexLocationId = employeeMaster.getZydexLocationMaster().getId();
-    //                    ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
-    //                    zydexLocationMaster = zydexLocationMasterService.readById(zydexLocationId);
-    //                    String zydexLocationName = zydexLocationMaster.getZydexLocation();
-    //
-    //                    if (zydexLocationName.equals("HO") || zydexLocationName.equals("R&D")) {
-    //                        if (dayName.equals("Saturday") && dayOfWeek == 2) {
-    //                            difference = cal2.getTime().getTime() - cal7.getTime().getTime();
-    //                        }
-    //                    }
-    //
-    //                    long difference2 = cal4.getTime().getTime() - cal3.getTime().getTime();
-    //                    long mainDiff = difference2 - difference;
-    //                    long diffMin1 = ((mainDiff / 1000) / 60) / 60;
-    //                    String time = "";
-    //                    String time2 = "";
-    //                    if (!zydexLocationName.equals("HO") && !zydexLocationName.equals("R&D")) {
-    //                        if (diffMin1 >= 3 && diffMin1 <= 5.9) {
-    //                            time = "0.3";
-    //                        } else if (diffMin1 >= 6 && diffMin1 <= 8.9) {
-    //                            time = "0.5";
-    //                        } else if (diffMin1 >= 9) {
-    //                            time = "0.8";
-    //                        }
-    //                    } else if (diffMin1 >= 3.6 && diffMin1 <= 7.9) {
-    //                        time2 = "0.4";
-    //                    } else if (diffMin1 >= 8) {
-    //                        time2 = "0.8";
-    //                    }
-    //
-    //                    if (!zydexLocationName.equals("HO") && !zydexLocationName.equals("R&D")) {
-    ////                        if (!time.equals("")) {
-    ////                            if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
-    ////                                List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
-    ////                                if (!empBalList.isEmpty()) {
-    ////                                    employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
-    ////                                    float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
-    ////                                    time1 = time1 + Float.parseFloat(time);
-    ////                                    employeeLeaveBalance1.setNoOfLeaveRemain(time1);
-    ////                                    employeeLeaveBalanceService.update(employeeLeaveBalance1);
-    ////                                } else {
-    ////                                    employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
-    ////                                    employeeLeaveBalance1.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-    ////                                    employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time));
-    ////                                    employeeLeaveBalanceService.create(employeeLeaveBalance1);
-    ////                                }
-    ////                                Date date5 = new Date();
-    ////                                String todayDate = formatter.format(date5);
-    ////                                OverTimeMaster overTimeMaster = new OverTimeMaster();
-    ////                                overTimeMaster.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-    ////                                overTimeMaster.setDate(todayDate);
-    ////                                overTimeMaster.setTime(time);
-    ////                                overTimeMasterService.create(overTimeMaster);
-    ////                            }
-    ////
-    ////                        }
-    //                    } else if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
-    //                        if (!time2.equals("")) {
-    //                            List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
-    //                            if (!empBalList.isEmpty()) {
-    //                                employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
-    //                                float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
-    //                                time1 = time1 + Float.parseFloat(time2);
-    //                                employeeLeaveBalance1.setNoOfLeaveRemain(time1);
-    //                                employeeLeaveBalanceService.update(employeeLeaveBalance1);
-    //                            } else {
-    //                                employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
-    //                                employeeLeaveBalance1.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-    //                                employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time2));
-    //                                employeeLeaveBalanceService.create(employeeLeaveBalance1);
-    //                            }
-    //
-    //                            Date date5 = new Date();
-    //                            String todayDate = formatter.format(date5);
-    //                            OverTimeMaster overTimeMaster = new OverTimeMaster();
-    //                            overTimeMaster.setEmployeeMaster(employeeShiftData.getEmployeeMaster());
-    //                            overTimeMaster.setDate(todayDate);
-    //                            overTimeMaster.setTime(time2);
-    //                            overTimeMasterService.create(overTimeMaster);
-    //                        }
-    //
-    //                    }
-    //
-    //                } catch (Exception e) {
-    //
-    //                }
-    //            }
-    //        }
-    //        else {
-    //            List<?> empList = employeeMasterService.read();
-    //
-    //            EmployeeMaster employeeMaster = new EmployeeMaster();
-    //            for (Object zz : empList) {
-    //                try {
-    //                    employeeMaster = (EmployeeMaster) zz;
-    //                    List<?> list1 = employeeDatetimeDataService.todaysData(employeeMaster.getId());
-    //                    SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-    //                    String startTime1 = "";
-    //                    String endTime1 = "";
-    //                    if (list1.size() > 2) {
-    //                        Object[] startTime = (Object[]) list1.get(0);
-    //                        Object[] endTime = (Object[]) list1.get(list1.size() - 1);
-    //                        startTime1 = (String) startTime[0];
-    //                        endTime1 = (String) endTime[0];
-    //                        Date dateStrTime = sdf3.parse(startTime1);
-    //                        Date dateEndTime = sdf3.parse(endTime1);
-    //                        long diff = dateEndTime.getTime() - dateStrTime.getTime();
-    //                        long mainDiff = diff / (60 * 1000);
-    //                        long diffMin1 = ((mainDiff / 1000) / 60) / 60;
-    //                        String time2 = "";
-    //                        if (diffMin1 >= 3.6 && diffMin1 <= 5.5) {
-    //                            time2 = "0.4";
-    //                        } else if (diffMin1 >= 8) {
-    //                            time2 = "0.8";
-    //                        }
-    //                        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
-    //                        EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
-    //                        String coff = "C Off Leave";
-    //                        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
-    //                        List<?> coffList = leaveTypeMasterService.readLeaveType(coff);
-    //                        if (!coffList.isEmpty()) {
-    //                            leaveTypeMaster = (LeaveTypeMaster) coffList.get(0);
-    //                        }
-    //                        employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
-    //                        employeeLeaveBalance.setEmployeeMaster(employeeMaster);
-    //                        int levelId = employeeMaster.getLevelMaster().getId();
-    //                        LevelMaster levelMaster = new LevelMaster();
-    //                        levelMaster = levelMasterService.readById(levelId);
-    //
-    //                        int zydexLocationId = employeeMaster.getZydexLocationMaster().getId();
-    //                        ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
-    //                        zydexLocationMaster = zydexLocationMasterService.readById(zydexLocationId);
-    //                        String zydexLocationName = zydexLocationMaster.getZydexLocation();
-    //                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
-    //                        if (zydexLocationName.equals("HO") || zydexLocationName.equals("R&D")) {
-    //                            if (levelMaster.getLevel().contains("4") || levelMaster.getLevel().contains("5")) {
-    //                                if (!time2.equals("")) {
-    //                                    List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
-    //                                    if (!empBalList.isEmpty()) {
-    //                                        employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
-    //                                        float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
-    //                                        time1 = time1 + Float.parseFloat(time2);
-    //                                        employeeLeaveBalance1.setNoOfLeaveRemain(time1);
-    //                                        employeeLeaveBalanceService.update(employeeLeaveBalance1);
-    //                                    } else {
-    //                                        employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
-    //                                        employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
-    //                                        employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time2));
-    //                                        employeeLeaveBalanceService.create(employeeLeaveBalance1);
-    //                                    }
-    //
-    //                                    Date date5 = new Date();
-    //                                    String todayDate = formatter.format(date5);
-    //                                    OverTimeMaster overTimeMaster = new OverTimeMaster();
-    //                                    overTimeMaster.setEmployeeMaster(employeeMaster);
-    //                                    overTimeMaster.setDate(todayDate);
-    //                                    overTimeMaster.setTime(time2);
-    //                                    overTimeMasterService.create(overTimeMaster);
-    //                                }
-    //
-    //                            }
-    //                        }
-    //
-    //                    }
-    //                } catch (Exception e) {
-    //
-    //                }
-    //
-    //            }
-    //
-    //        }
     private synchronized void coffDelete() throws Exception {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -5494,287 +5030,294 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
     public ModelAndView employeePresentSearchSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
-        String zydexLocationId = request.getParameter("zydexLocationId");
-        String levelId = request.getParameter("levelId");
-        String departmentId = request.getParameter("departmentId");
-        String startDate = request.getParameter("inDateTime");
+        if ("" != request.getParameter("inDateTime")) {
+            String zydexLocationId = request.getParameter("zydexLocationId");
+            String levelId = request.getParameter("levelId");
+            String departmentId = request.getParameter("departmentId");
+            String startDate = request.getParameter("inDateTime");
 
-        EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
-        employeeAdvanceSearch.setZydexLocationId(zydexLocationId);
-        employeeAdvanceSearch.setLevelID(levelId);
-        employeeAdvanceSearch.setDepartmentId(departmentId);
-        employeeAdvanceSearch.setEmployeeId(Boolean.TRUE);
-        employeeAdvanceSearch.setEmployeeName(Boolean.TRUE);
-        employeeAdvanceSearch.setFatherName(Boolean.FALSE);
-        employeeAdvanceSearch.setMotherName(Boolean.FALSE);
-        employeeAdvanceSearch.setGender(Boolean.FALSE);
-        employeeAdvanceSearch.setMaritalStatus(Boolean.FALSE);
-        employeeAdvanceSearch.setSpouseName(Boolean.FALSE);
-        employeeAdvanceSearch.setDateOfBirth(Boolean.FALSE);
-        employeeAdvanceSearch.setPresentAddress(Boolean.FALSE);
-        employeeAdvanceSearch.setPermanentAddress(Boolean.FALSE);
-        employeeAdvanceSearch.setBloodGroups(Boolean.FALSE);
-        employeeAdvanceSearch.setEmailAddress(Boolean.FALSE);
-        employeeAdvanceSearch.setContactNo1(Boolean.FALSE);
-        employeeAdvanceSearch.setContactNo2(Boolean.FALSE);
-        employeeAdvanceSearch.setEmergencyContactPerson(Boolean.FALSE);
-        employeeAdvanceSearch.setEmergencyContactNo(Boolean.FALSE);
-        employeeAdvanceSearch.setPanCard(Boolean.FALSE);
-        employeeAdvanceSearch.setPassportNo(Boolean.FALSE);
-        employeeAdvanceSearch.setPassportIssueDate(Boolean.FALSE);
-        employeeAdvanceSearch.setPassportExpiryDate(Boolean.FALSE);
-        employeeAdvanceSearch.setAdharCard(Boolean.FALSE);
-        employeeAdvanceSearch.setOfficeEmailId(Boolean.FALSE);
-        employeeAdvanceSearch.setHighestEducationDetails(Boolean.FALSE);
-        employeeAdvanceSearch.setExperienceYearOnDoj(Boolean.FALSE);
-        employeeAdvanceSearch.setExperienceMonthOnDoj(Boolean.FALSE);
-        employeeAdvanceSearch.setCompany(Boolean.FALSE);
-        employeeAdvanceSearch.setZydexLocation(Boolean.FALSE);
-        employeeAdvanceSearch.setWorkLocation(Boolean.FALSE);
-        employeeAdvanceSearch.setLevel(Boolean.FALSE);
-        employeeAdvanceSearch.setDepartment(Boolean.FALSE);
-        employeeAdvanceSearch.setDesignation(Boolean.FALSE);
-        employeeAdvanceSearch.setRole(Boolean.FALSE);
-        employeeAdvanceSearch.setDateOfJoining(Boolean.FALSE);
-        employeeAdvanceSearch.setEmployeeType(Boolean.FALSE);
-        employeeAdvanceSearch.setBankName(Boolean.FALSE);
-        employeeAdvanceSearch.setBankAccountNo(Boolean.FALSE);
-        employeeAdvanceSearch.setBankIfscCode(Boolean.FALSE);
-        employeeAdvanceSearch.setReportingManager(Boolean.FALSE);
-        employeeAdvanceSearch.setCityOfEmployee(Boolean.FALSE);
-        employeeAdvanceSearch.setChild1(Boolean.FALSE);
-        employeeAdvanceSearch.setChild2(Boolean.FALSE);
-        employeeAdvanceSearch.setDateOfBirthOfEmpFather(Boolean.FALSE);
-        employeeAdvanceSearch.setDateOfBirthOfEmpMother(Boolean.FALSE);
-        employeeAdvanceSearch.setDateOfBirthOfEmpSpous(Boolean.FALSE);
-        employeeAdvanceSearch.setDateOfBirthOfEmpChilld1(Boolean.FALSE);
-        employeeAdvanceSearch.setDateOfBirthOfEmpChild2(Boolean.FALSE);
-        employeeAdvanceSearch.setDateOfTransferOfEntity(Boolean.FALSE);
+            EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
+            employeeAdvanceSearch.setZydexLocationId(zydexLocationId);
+            employeeAdvanceSearch.setLevelID(levelId);
+            employeeAdvanceSearch.setDepartmentId(departmentId);
+            employeeAdvanceSearch.setEmployeeId(Boolean.TRUE);
+            employeeAdvanceSearch.setEmployeeName(Boolean.TRUE);
+            employeeAdvanceSearch.setFatherName(Boolean.FALSE);
+            employeeAdvanceSearch.setMotherName(Boolean.FALSE);
+            employeeAdvanceSearch.setGender(Boolean.FALSE);
+            employeeAdvanceSearch.setMaritalStatus(Boolean.FALSE);
+            employeeAdvanceSearch.setSpouseName(Boolean.FALSE);
+            employeeAdvanceSearch.setDateOfBirth(Boolean.FALSE);
+            employeeAdvanceSearch.setPresentAddress(Boolean.FALSE);
+            employeeAdvanceSearch.setPermanentAddress(Boolean.FALSE);
+            employeeAdvanceSearch.setBloodGroups(Boolean.FALSE);
+            employeeAdvanceSearch.setEmailAddress(Boolean.FALSE);
+            employeeAdvanceSearch.setContactNo1(Boolean.FALSE);
+            employeeAdvanceSearch.setContactNo2(Boolean.FALSE);
+            employeeAdvanceSearch.setEmergencyContactPerson(Boolean.FALSE);
+            employeeAdvanceSearch.setEmergencyContactNo(Boolean.FALSE);
+            employeeAdvanceSearch.setPanCard(Boolean.FALSE);
+            employeeAdvanceSearch.setPassportNo(Boolean.FALSE);
+            employeeAdvanceSearch.setPassportIssueDate(Boolean.FALSE);
+            employeeAdvanceSearch.setPassportExpiryDate(Boolean.FALSE);
+            employeeAdvanceSearch.setAdharCard(Boolean.FALSE);
+            employeeAdvanceSearch.setOfficeEmailId(Boolean.FALSE);
+            employeeAdvanceSearch.setHighestEducationDetails(Boolean.FALSE);
+            employeeAdvanceSearch.setExperienceYearOnDoj(Boolean.FALSE);
+            employeeAdvanceSearch.setExperienceMonthOnDoj(Boolean.FALSE);
+            employeeAdvanceSearch.setCompany(Boolean.FALSE);
+            employeeAdvanceSearch.setZydexLocation(Boolean.FALSE);
+            employeeAdvanceSearch.setWorkLocation(Boolean.FALSE);
+            employeeAdvanceSearch.setLevel(Boolean.FALSE);
+            employeeAdvanceSearch.setDepartment(Boolean.FALSE);
+            employeeAdvanceSearch.setDesignation(Boolean.FALSE);
+            employeeAdvanceSearch.setRole(Boolean.FALSE);
+            employeeAdvanceSearch.setDateOfJoining(Boolean.FALSE);
+            employeeAdvanceSearch.setEmployeeType(Boolean.FALSE);
+            employeeAdvanceSearch.setBankName(Boolean.FALSE);
+            employeeAdvanceSearch.setBankAccountNo(Boolean.FALSE);
+            employeeAdvanceSearch.setBankIfscCode(Boolean.FALSE);
+            employeeAdvanceSearch.setReportingManager(Boolean.FALSE);
+            employeeAdvanceSearch.setCityOfEmployee(Boolean.FALSE);
+            employeeAdvanceSearch.setChild1(Boolean.FALSE);
+            employeeAdvanceSearch.setChild2(Boolean.FALSE);
+            employeeAdvanceSearch.setDateOfBirthOfEmpFather(Boolean.FALSE);
+            employeeAdvanceSearch.setDateOfBirthOfEmpMother(Boolean.FALSE);
+            employeeAdvanceSearch.setDateOfBirthOfEmpSpous(Boolean.FALSE);
+            employeeAdvanceSearch.setDateOfBirthOfEmpChilld1(Boolean.FALSE);
+            employeeAdvanceSearch.setDateOfBirthOfEmpChild2(Boolean.FALSE);
+            employeeAdvanceSearch.setDateOfTransferOfEntity(Boolean.FALSE);
 
-        int rownum = 0;
-        HSSFWorkbook firstFWorkbook = new HSSFWorkbook();
-        HSSFSheet firstSheet = firstFWorkbook.createSheet("FIRST SHEET");
-        Row headerRow = firstSheet.createRow(rownum);
-        headerRow.setHeightInPoints(40);
-        HSSFFont redFont = firstFWorkbook.createFont();
-        redFont.setColor(HSSFColor.RED.index);
-        HSSFCellStyle stylered = firstFWorkbook.createCellStyle();
-        stylered.setFont(redFont);
+            int rownum = 0;
+            HSSFWorkbook firstFWorkbook = new HSSFWorkbook();
+            HSSFSheet firstSheet = firstFWorkbook.createSheet("FIRST SHEET");
+            Row headerRow = firstSheet.createRow(rownum);
+            headerRow.setHeightInPoints(40);
+            HSSFFont redFont = firstFWorkbook.createFont();
+            redFont.setColor(HSSFColor.RED.index);
+            HSSFCellStyle stylered = firstFWorkbook.createCellStyle();
+            stylered.setFont(redFont);
 
-        HSSFFont greenFont = firstFWorkbook.createFont();
-        greenFont.setColor(HSSFColor.GREEN.index);
-        HSSFCellStyle stylegreen = firstFWorkbook.createCellStyle();
-        stylegreen.setFont(greenFont);
+            HSSFFont greenFont = firstFWorkbook.createFont();
+            greenFont.setColor(HSSFColor.GREEN.index);
+            HSSFCellStyle stylegreen = firstFWorkbook.createCellStyle();
+            stylegreen.setFont(greenFont);
 
-        HSSFFont blueFont = firstFWorkbook.createFont();
-        blueFont.setColor(HSSFColor.BLUE.index);
-        HSSFCellStyle styleblue = firstFWorkbook.createCellStyle();
-        styleblue.setFont(blueFont);
+            HSSFFont blueFont = firstFWorkbook.createFont();
+            blueFont.setColor(HSSFColor.BLUE.index);
+            HSSFCellStyle styleblue = firstFWorkbook.createCellStyle();
+            styleblue.setFont(blueFont);
 
-        HSSFFont boldFont = firstFWorkbook.createFont();
-        boldFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
-        HSSFCellStyle styleBold = firstFWorkbook.createCellStyle();
-        styleBold.setFont(boldFont);
-        List<List<String>> recordToAdd = new ArrayList();
-        List<List<String>> recordToAdd1 = new ArrayList();
-        List<String> headerRow1 = new ArrayList();
-        List<String> headerRow2 = new ArrayList();
-        headerRow1.add("Employee ID");
-        headerRow1.add("Employee Name");
-        headerRow1.add("Shift Name");
-        headerRow1.add("In Punch");
-        headerRow1.add("Out Punch");
-        headerRow1.add("In Punch");
-        headerRow1.add("Out Punch");
-        headerRow1.add("First Half");
-        headerRow1.add("Second Half");
-        headerRow1.add("Working Hour");
-        recordToAdd.add(headerRow1);
-        List<?> empDetail = employeeMasterService.empOrDateWiseSearchforActive(employeeAdvanceSearch);
-        Iterator it = empDetail.iterator();
-        int presentCounter = 0;
-        while (it.hasNext()) {
-            EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
-            List<String> employeeInfoList = new ArrayList();
-            Object[] next = (Object[]) it.next();
-            int id = (int) next[48];
-            EmployeeMaster employeeMaster1 = new EmployeeMaster();
-            employeeMaster1.setId(id);
-            ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
-            String[] s1 = startDate.split("/");
-            String currentDays = s1[0];
-            String currentMonth = s1[1];
-            String currentyear = s1[2];
-            shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster1);
-            shiftGenerateMonthlySchedule.setShiftMonth(currentMonth);
-            shiftGenerateMonthlySchedule.setShiftYear(currentyear);
-            String shiftId = "";
-            List<?> empShiftList = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftData(shiftGenerateMonthlySchedule, Integer.parseInt(currentDays));
-            ShiftMaster shiftMaster = new ShiftMaster();
-            ShiftMaster shiftMaster1 = new ShiftMaster();
-            String shiftName = "";
-            String shiftFirstHalfEndTime = "";
-            String shiftEndTime = "";
-            String empEndTime = "";
-            String[] empEndTime1 = null;
-            SimpleDateFormat sdf3 = new SimpleDateFormat("HH:mm");
-            if (!empShiftList.isEmpty()) {
-                shiftId = "" + empShiftList.get(0);
-            }
-            if (empShiftList.size() > 0) {
-                shiftMaster.setId(Integer.parseInt(shiftId));
-                shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
-                shiftName = shiftMaster1.getShiftName();
-                shiftFirstHalfEndTime = shiftMaster1.getHalfEndTime1();
-                shiftEndTime = shiftMaster1.getEndTime();
-            }
-            employeeInfoList.add("" + next[0]);
-            employeeInfoList.add("" + next[1]);
-            employeeInfoList.add(shiftName);
-            List listPunch = employeeDatetimeDataService.readPuchDataDateWise(startDate, id);
-            Iterator it1 = listPunch.iterator();
-            Iterator it2 = listPunch.iterator();
-            int numAttempts = 0;
-            while (it1.hasNext() && numAttempts < 4) {
-                Object[] next1 = (Object[]) it1.next();
-                String str = "" + next1[0];
-                String[] str1 = str.split(" ");
-                employeeInfoList.add("" + str1[1]);
-                numAttempts++;
-            }
+            HSSFFont boldFont = firstFWorkbook.createFont();
+            boldFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+            HSSFCellStyle styleBold = firstFWorkbook.createCellStyle();
+            styleBold.setFont(boldFont);
+            List<List<String>> recordToAdd = new ArrayList();
+            List<List<String>> recordToAdd1 = new ArrayList();
+            List<String> headerRow1 = new ArrayList();
+            List<String> headerRow2 = new ArrayList();
+            headerRow1.add("Employee ID");
+            headerRow1.add("Employee Name");
+            headerRow1.add("Shift Name");
+            headerRow1.add("In Punch");
+            headerRow1.add("Out Punch");
+            headerRow1.add("In Punch");
+            headerRow1.add("Out Punch");
+            headerRow1.add("First Half");
+            headerRow1.add("Second Half");
+            headerRow1.add("Working Hour");
+            recordToAdd.add(headerRow1);
+            List<?> empDetail = employeeMasterService.empOrDateWiseSearchforActive(employeeAdvanceSearch);
+            Iterator it = empDetail.iterator();
+            int presentCounter = 0;
+            while (it.hasNext()) {
+                EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
+                List<String> employeeInfoList = new ArrayList();
+                Object[] next = (Object[]) it.next();
+                int id = (int) next[48];
+                EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                employeeMaster1.setId(id);
+                ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
+                String[] s1 = startDate.split("/");
+                String currentDays = s1[0];
+                String currentMonth = s1[1];
+                String currentyear = s1[2];
+                shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster1);
+                shiftGenerateMonthlySchedule.setShiftMonth(currentMonth);
+                shiftGenerateMonthlySchedule.setShiftYear(currentyear);
+                String shiftId = "";
+                List<?> empShiftList = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftData(shiftGenerateMonthlySchedule, Integer.parseInt(currentDays));
+                ShiftMaster shiftMaster = new ShiftMaster();
+                ShiftMaster shiftMaster1 = new ShiftMaster();
+                String shiftName = "";
+                String shiftFirstHalfEndTime = "";
+                String shiftEndTime = "";
+                String empEndTime = "";
+                String[] empEndTime1 = null;
+                SimpleDateFormat sdf3 = new SimpleDateFormat("HH:mm");
+                if (!empShiftList.isEmpty()) {
+                    shiftId = "" + empShiftList.get(0);
+                }
+                if (empShiftList.size() > 0) {
+                    shiftMaster.setId(Integer.parseInt(shiftId));
+                    shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
+                    shiftName = shiftMaster1.getShiftName();
+                    shiftFirstHalfEndTime = shiftMaster1.getHalfEndTime1();
+                    shiftEndTime = shiftMaster1.getEndTime();
+                }
+                employeeInfoList.add("" + next[0]);
+                employeeInfoList.add("" + next[1]);
+                employeeInfoList.add(shiftName);
+                List listPunch = employeeDatetimeDataService.readPuchDataDateWise(startDate, id);
+                Iterator it1 = listPunch.iterator();
+                Iterator it2 = listPunch.iterator();
+                int numAttempts = 0;
+                while (it1.hasNext() && numAttempts < 4) {
+                    Object[] next1 = (Object[]) it1.next();
+                    String str = "" + next1[0];
+                    String[] str1 = str.split(" ");
+                    employeeInfoList.add("" + str1[1]);
+                    numAttempts++;
+                }
 
-            while (listPunch.size() >= 2) {
+                while (listPunch.size() >= 2) {
 
-                Object[] startTimeListEnd = (Object[]) listPunch.get(listPunch.size() - 1);
+                    Object[] startTimeListEnd = (Object[]) listPunch.get(listPunch.size() - 1);
 
-                empEndTime = (String) startTimeListEnd[0];
-                empEndTime1 = empEndTime.split(" ");
-                break;
+                    empEndTime = (String) startTimeListEnd[0];
+                    empEndTime1 = empEndTime.split(" ");
+                    break;
 
-            }
+                }
 
-            if (listPunch.isEmpty()) {
-                employeeInfoList.add("");
-                employeeInfoList.add("");
-                employeeInfoList.add("");
-                employeeInfoList.add("");
-                employeeInfoList.add("AB");
-                employeeInfoList.add("AB");
-            }
-            if (listPunch.size() == 1) {
-                employeeInfoList.add("");
-                employeeInfoList.add("");
-                employeeInfoList.add("");
-                employeeInfoList.add("PR");
-                employeeInfoList.add("PR");
-                presentCounter++;
-            }
-            if (listPunch.size() == 2) {
-                employeeInfoList.add("");
-                employeeInfoList.add("");
-                employeeInfoList.add("PR");
-                Date empEndDate = sdf3.parse(empEndTime1[1]);
-                Date shiftEndDate = sdf3.parse(shiftEndTime);
-                if (empEndDate.before(shiftEndDate)) {
+                if (listPunch.isEmpty()) {
+                    employeeInfoList.add("");
+                    employeeInfoList.add("");
+                    employeeInfoList.add("");
+                    employeeInfoList.add("");
                     employeeInfoList.add("AB");
-                } else {
+                    employeeInfoList.add("AB");
+                }
+                if (listPunch.size() == 1) {
+                    employeeInfoList.add("");
+                    employeeInfoList.add("");
+                    employeeInfoList.add("");
+                    employeeInfoList.add("PR");
                     employeeInfoList.add("PR");
                     presentCounter++;
                 }
-            }
-            if (listPunch.size() == 3) {
-                employeeInfoList.add("");
-                employeeInfoList.add("PR");
-                Date empEndDate = sdf3.parse(empEndTime1[1]);
-                Date shiftEndDate = sdf3.parse(shiftEndTime);
-                if (empEndDate.before(shiftEndDate)) {
-                    employeeInfoList.add("AB");
-                } else {
+                if (listPunch.size() == 2) {
+                    employeeInfoList.add("");
+                    employeeInfoList.add("");
                     employeeInfoList.add("PR");
-                    presentCounter++;
+                    Date empEndDate = sdf3.parse(empEndTime1[1]);
+                    Date shiftEndDate = sdf3.parse(shiftEndTime);
+                    if (empEndDate.before(shiftEndDate)) {
+                        employeeInfoList.add("AB");
+                    } else {
+                        employeeInfoList.add("PR");
+                        presentCounter++;
+                    }
                 }
-            }
-            if (listPunch.size() > 3) {
-                employeeInfoList.add("PR");
-                Date empEndDate = sdf3.parse(empEndTime1[1]);
-                Date shiftEndDate = sdf3.parse(shiftEndTime);
-                if (empEndDate.before(shiftEndDate)) {
-                    employeeInfoList.add("AB");
-                } else {
+                if (listPunch.size() == 3) {
+                    employeeInfoList.add("");
                     employeeInfoList.add("PR");
-                    presentCounter++;
+                    Date empEndDate = sdf3.parse(empEndTime1[1]);
+                    Date shiftEndDate = sdf3.parse(shiftEndTime);
+                    if (empEndDate.before(shiftEndDate)) {
+                        employeeInfoList.add("AB");
+                    } else {
+                        employeeInfoList.add("PR");
+                        presentCounter++;
+                    }
                 }
-            }
-            while (listPunch.size() >= 2) {
-                Object[] startTimeListStart = (Object[]) listPunch.get(0);
-                Object[] startTimeListEnd = (Object[]) listPunch.get(listPunch.size() - 1);
-                String startTime = (String) startTimeListStart[0];
-                String endTime = (String) startTimeListEnd[0];
-                SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                Date strDate = sdf2.parse(startTime);
-                Date endDate = sdf2.parse(endTime);
-                long diff = endDate.getTime() - strDate.getTime();
-                long diffHours = diff / (60 * 1000);
-                double empHour = (double) diffHours / 60;
-                employeeInfoList.add("" + new DecimalFormat("##.##").format(empHour));
-                break;
-            }
-
-            recordToAdd.add(employeeInfoList);
-
-        }
-
-        headerRow2.add("Total Present");
-        headerRow2.add("" + presentCounter);
-        recordToAdd1.add(headerRow2);
-
-        for (int j = 0; j < recordToAdd.size(); j++) {
-            List<String> l2 = recordToAdd.get(j);
-            Row row = firstSheet.createRow(rownum);
-            for (int k = 0; k < l2.size(); k++) {
-                Cell cell = row.createCell(k);
-                cell.setCellValue(l2.get(k));
-                if (j == 0) {
-                    cell.setCellStyle(styleBold);
+                if (listPunch.size() > 3) {
+                    employeeInfoList.add("PR");
+                    Date empEndDate = sdf3.parse(empEndTime1[1]);
+                    Date shiftEndDate = sdf3.parse(shiftEndTime);
+                    if (empEndDate.before(shiftEndDate)) {
+                        employeeInfoList.add("AB");
+                    } else {
+                        employeeInfoList.add("PR");
+                        presentCounter++;
+                    }
                 }
+                while (listPunch.size() >= 2) {
+                    Object[] startTimeListStart = (Object[]) listPunch.get(0);
+                    Object[] startTimeListEnd = (Object[]) listPunch.get(listPunch.size() - 1);
+                    String startTime = (String) startTimeListStart[0];
+                    String endTime = (String) startTimeListEnd[0];
+                    SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    Date strDate = sdf2.parse(startTime);
+                    Date endDate = sdf2.parse(endTime);
+                    long diff = endDate.getTime() - strDate.getTime();
+                    long diffHours = diff / (60 * 1000);
+                    double empHour = (double) diffHours / 60;
+                    employeeInfoList.add("" + new DecimalFormat("##.##").format(empHour));
+                    break;
+                }
+
+                recordToAdd.add(employeeInfoList);
+
             }
+
+            headerRow2.add("Total Present");
+            headerRow2.add("" + presentCounter);
+            recordToAdd1.add(headerRow2);
+
+            for (int j = 0; j < recordToAdd.size(); j++) {
+                List<String> l2 = recordToAdd.get(j);
+                Row row = firstSheet.createRow(rownum);
+                for (int k = 0; k < l2.size(); k++) {
+                    Cell cell = row.createCell(k);
+                    cell.setCellValue(l2.get(k));
+                    if (j == 0) {
+                        cell.setCellStyle(styleBold);
+                    }
+                }
+                rownum++;
+            }
+            List<String> l2 = recordToAdd1.get(0);
             rownum++;
-        }
-        List<String> l2 = recordToAdd1.get(0);
-        rownum++;
-        Row row = firstSheet.createRow(rownum);
-        for (int l = 0; l < l2.size(); l++) {
-            Cell cell = row.createCell(l);
-            cell.setCellValue(l2.get(l));
-            cell.setCellStyle(styleBold);
-        }
-        String appPath = request.getServletContext().getRealPath("");
-        try {
-            String filePath = appPath + File.separator + "StorageYard" + File.separator
+            Row row = firstSheet.createRow(rownum);
+            for (int l = 0; l < l2.size(); l++) {
+                Cell cell = row.createCell(l);
+                cell.setCellValue(l2.get(l));
+                cell.setCellStyle(styleBold);
+            }
+            String appPath = request.getServletContext().getRealPath("");
+            try {
+                String filePath = appPath + File.separator + "StorageYard" + File.separator
+                        + "Other" + File.separator + "UserDoc" + File.separator
+                        + "EmployeeDailyPunch" + File.separator + "EmployeeDailyPunch.xls";
+                FileOutputStream fos = new FileOutputStream(new File(filePath));
+                HSSFCellStyle hsfstyle = firstFWorkbook.createCellStyle();
+                hsfstyle.setBorderBottom((short) 1);
+                hsfstyle.setFillBackgroundColor((short) 245);
+                firstFWorkbook.write(fos);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            String filePath = File.separator + "StorageYard" + File.separator
                     + "Other" + File.separator + "UserDoc" + File.separator
                     + "EmployeeDailyPunch" + File.separator + "EmployeeDailyPunch.xls";
-            FileOutputStream fos = new FileOutputStream(new File(filePath));
-            HSSFCellStyle hsfstyle = firstFWorkbook.createCellStyle();
-            hsfstyle.setBorderBottom((short) 1);
-            hsfstyle.setFillBackgroundColor((short) 245);
-            firstFWorkbook.write(fos);
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            appPath = request.getServletContext().getRealPath("");
+
+            String fullPath = appPath + filePath;
+
+            request.setAttribute("filePath", fullPath);
+
+            DownloadFile downloadFile = new DownloadFile();
+            downloadFile.doDownload(request, response);
+            return mv;
+        } else {
+            request.setAttribute("failureMessage",
+                    "Error : Please Enter The Date.");
+            mv = employeePresentSearch(request, response);
+            return mv;
         }
-
-        String filePath = File.separator + "StorageYard" + File.separator
-                + "Other" + File.separator + "UserDoc" + File.separator
-                + "EmployeeDailyPunch" + File.separator + "EmployeeDailyPunch.xls";
-
-        appPath = request.getServletContext().getRealPath("");
-
-        String fullPath = appPath + filePath;
-
-        request.setAttribute("filePath", fullPath);
-
-        DownloadFile downloadFile = new DownloadFile();
-        downloadFile.doDownload(request, response);
-        return mv;
     }
 
     public ModelAndView employeeMonthlyPayrollReport(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -6090,7 +5633,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             employeeInfoList.add("" + o[3]);
             employeeInfoList.add("" + o[4]);
             recordToAdd.add(employeeInfoList);
-            recordToAdd3.add(employeeInfoList);
+            recordToAdd3.add(employeeInfoList); 
         }
         for (int j = 0; j < recordToAdd.size(); j++) {
 
@@ -13402,15 +12945,15 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //                        shiftName = shiftMaster1.getShiftName();
 //                        shiftTime = shiftMaster1.getEndTime();
 //                    } else 
-                    
-//                        if (empShiftList.size() > 0) {
-                        if (!shiftId.equals("-1")) {
-                            shiftMaster.setId(Integer.parseInt(shiftId));
-                            shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
-                            shiftName = shiftMaster1.getShiftName();
-                            shiftTime = shiftMaster1.getEndTime();
 
-                        }
+//                        if (empShiftList.size() > 0) {
+                    if (!shiftId.equals("-1")) {
+                        shiftMaster.setId(Integer.parseInt(shiftId));
+                        shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
+                        shiftName = shiftMaster1.getShiftName();
+                        shiftTime = shiftMaster1.getEndTime();
+
+                    }
 //                    }
 
                     //////////////////////////// new code///////////////////////////////////////////
@@ -14602,7 +14145,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         totalDayTime1 = diff2 / (60 * 1000);
                         totalDayTime = totalDayTime + totalDayTime1;
                         empHour = (double) totalDayTime / 60;
-                         ////End
+                        ////End
 
                         ////Calculation of total office working hours
                         long nightDiff = userMidEnd.getTime() - decidedStartTime.getTime();
@@ -14686,6 +14229,353 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
         }
 //        return mv;
+    }
+
+    public ModelAndView employeeDataSearch2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
+        selectEmployee1(request, response);
+        selectZydexLocation(request, response);
+        selectLevel(request, response);
+        department(request, response);
+        mv.getModelMap().put("employeeAdvanceSearch", employeeAdvanceSearch);
+        mv.setViewName("Shift/EmployeeDateWiseShiftSearch");
+
+        return mv;
+    }
+
+    public ModelAndView employeeSelectedDataExcelSheet(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+
+        String empId = request.getParameter("employeeMasterId");
+//        String zydexLocationId = request.getParameter("zydexLocationId");
+//        String levelId = request.getParameter("levelId");
+//        String departmentId = request.getParameter("departmentId");
+        String startDate = request.getParameter("inDateTime");
+        String endDate = request.getParameter("outDateTime");
+//        String searchval = request.getParameter("vallist");
+
+        EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
+        bind(request, employeeAdvanceSearch);
+//        if (null != searchval && request.getParameter("vallist").toString().equals("other")) {
+//            employeeAdvanceSearch.setId(null);
+//            employeeAdvanceSearch.setZydexLocationId(zydexLocationId);
+//            employeeAdvanceSearch.setLevelID(levelId);
+//            employeeAdvanceSearch.setDepartmentId(departmentId);
+//        } else {
+        employeeAdvanceSearch.setId(empId);
+        employeeAdvanceSearch.setZydexLocationId(null);
+        employeeAdvanceSearch.setLevelID(null);
+        employeeAdvanceSearch.setDepartmentId(null);
+//        }
+
+        int rownum = 0;
+        HSSFWorkbook firstFWorkbook = new HSSFWorkbook();
+        HSSFSheet firstSheet = firstFWorkbook.createSheet("FIRST SHEET");
+        Row headerRow = firstSheet.createRow(rownum);
+        headerRow.setHeightInPoints(40);
+        HSSFFont redFont = firstFWorkbook.createFont();
+        redFont.setColor(HSSFColor.RED.index);
+        HSSFCellStyle stylered = firstFWorkbook.createCellStyle();
+        stylered.setFont(redFont);
+
+        HSSFFont greenFont = firstFWorkbook.createFont();
+        greenFont.setColor(HSSFColor.GREEN.index);
+        HSSFCellStyle stylegreen = firstFWorkbook.createCellStyle();
+        stylegreen.setFont(greenFont);
+
+        HSSFFont blueFont = firstFWorkbook.createFont();
+        blueFont.setColor(HSSFColor.BLUE.index);
+        HSSFCellStyle styleblue = firstFWorkbook.createCellStyle();
+        styleblue.setFont(blueFont);
+
+        HSSFFont boldFont = firstFWorkbook.createFont();
+        boldFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        HSSFCellStyle styleBold = firstFWorkbook.createCellStyle();
+        styleBold.setFont(boldFont);
+
+        EmployeeShiftData employeeShiftData = new EmployeeShiftData();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar calForFlexiNotSupport1 = Calendar.getInstance();
+        Calendar calForFlexiNotSupport2 = Calendar.getInstance();
+        if (!startDate.equals("")) {
+            Date notflexibleSupportDate = sdf.parse(startDate);
+            String FixedFlexibleDate = "01/04/2016";
+            Date notflexibleSupportDate1 = sdf.parse(FixedFlexibleDate);
+            calForFlexiNotSupport1.setTime(notflexibleSupportDate);
+            calForFlexiNotSupport2.setTime(notflexibleSupportDate1);
+        }
+
+        try {
+            
+            List allEmpId = new ArrayList();
+            if (null == empId || "" == empId || empId.isEmpty()) {
+                allEmpId.addAll(employeeMasterService.getAllEmployeeId());
+            } else {
+                allEmpId.add(empId);
+            }
+            int earlyMinute = 0;
+            int lateMinute = 0;
+            for (int j = 0; j < allEmpId.size() + 1; j++) {
+                Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
+                Row row = firstSheet.createRow(rownum);
+                int id = 0;
+                if (null != startDate && !startDate.equals("") && null != endDate && !endDate.equals("")) {
+                    
+                    Date sDate = sdf.parse(startDate);
+                    employeeShiftData.setInDateTime(new SimpleDateFormat("yyyy-MM-dd").format(sDate));
+
+                    Date eDate = sdf.parse(endDate);
+                    employeeShiftData.setOutDateTime(new SimpleDateFormat("yyyy-MM-dd").format(eDate));
+ 
+                    if (j == 0) {
+                        List<String> headerRow1 = new ArrayList();
+                        
+                            headerRow1.add("Employee ID");       
+                            headerRow1.add("Employee Name");
+                       
+                        List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
+                        map.put(id, list);
+                        
+                        for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
+                            Iterator itr1 = entry.getValue().iterator();
+                            while (itr1.hasNext()) {
+                                Object[] next1 = (Object[]) itr1.next();
+                                headerRow1.add("" + next1[0]);
+                            }
+                        }
+                        headerRow1.add("Total Days");
+                        headerRow1.add("PR");
+                        headerRow1.add("AB");
+                        headerRow1.add("Half AB");
+                        headerRow1.add("AR/P");
+                        headerRow1.add("WO");
+                        headerRow1.add("Holiday");
+                        headerRow1.add("SHL/P");
+                        headerRow1.add("CL");
+                        headerRow1.add("PL");
+                        headerRow1.add("SL");
+                        headerRow1.add("ML");
+                        headerRow1.add("PTRL");
+                        headerRow1.add("COL");
+                        headerRow1.add("LWP");
+
+                        for (int k1 = 0; k1 < headerRow1.size(); k1++) {
+                            Cell cell = row.createCell(k1);
+
+                            cell.setCellValue(headerRow1.get(k1));
+
+                            cell.setCellStyle(styleBold);
+                        }
+                        rownum++;
+                    }
+                    if (j != 0) {
+                        id = Integer.parseInt("" + allEmpId.get(j - 1));
+                        employeeShiftData.setId(id);
+                        List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
+                        map.put(id, list);
+
+                        List<String> firstHalfList = new ArrayList<String>();
+                        EmployeeMaster empMaster = employeeMasterService.readById(id);
+                        firstHalfList.add("" + empMaster.getEmployeeId());
+                        firstHalfList.add("" + empMaster.getEmployeeName());
+                        
+                        double prcounter = 0;
+                        double abcounter = 0;
+                        double halfabcounter = 0;
+                        double wo = 0;
+                        double shl = 0;
+                        double cl = 0;
+                        double sl = 0;
+                        double pl = 0;
+                        double holiday = 0;
+                        double ar = 0;
+                        double ml = 0;
+                        double ptrl = 0;
+                        double col = 0;
+                        double lwp = 0;
+                        
+                         for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
+                            Iterator itr5 = entry.getValue().iterator();
+                            
+                            while (itr5.hasNext()) {
+                                Object[] next2 = (Object[]) itr5.next();
+
+                                String firstHalf = "" + next2[1];
+                                int firstHalfVal = 0;
+                                int counter = 0;
+
+                                Date date = sdf.parse("" + next2[0]);
+                                Calendar c = Calendar.getInstance();
+                                c.setTime(date);
+                                int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
+                                SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                                String dayName = format.format(date);
+
+                                int n = 1;
+
+                                SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
+                                if (firstHalf.contains("fullday")) {
+                                    firstHalfList.add("PR");
+                                    prcounter = prcounter + 1;
+
+                                } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
+                                        && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                        && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                                    String[] userTimeInStr = firstHalf.split("`");
+                                    String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                    String[] userTimeOutStr = firstHalf.split("!");
+                                    String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                    String[] leave = firstHalf.split("@");
+                                    String[] leave1 = leave[1].split("#");
+                                    String[] LateHoursStr = firstHalf.split("\\$");
+                                    String[] LateHoursStr1 = LateHoursStr[1].split("%");
+                                    String[] endHoursStr = firstHalf.split("%");
+                                    String[] endHoursStr1 = endHoursStr[1].split("\\^");
+                                    String[] firstStartHoursStr = endHoursStr[1].split("\\+");
+                                    Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
+                                    Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
+                                    Date endHours = sdf1.parse(endHoursStr1[0]);
+                                    Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
+                                    Calendar cal = Calendar.getInstance();
+                                    Calendar cal1 = Calendar.getInstance();
+                                    cal.setTime(firstStartHours);
+                                    cal1.setTime(firstStartHours);
+                                    cal1.add(Calendar.MINUTE, -earlyMinute);
+                                    cal.add(Calendar.MINUTE, lateMinute);
+                                    String newTime = sdf1.format(cal.getTime());
+                                    Date flexibleEndTime = sdf1.parse(newTime);
+                                    Date LateHours = sdf1.parse(LateHoursStr1[0]);
+                                    String newTime1 = sdf1.format(cal1.getTime());
+                                    Date flexibleStartTime = sdf1.parse(newTime1);
+                                    long diff = endHours.getTime() - firstStartHours.getTime();
+                                    long diffMinutes = diff / (60 * 1000);
+                                    long diff1 = 0;
+                                    if (userTimeInStr[0].contains("0.5")) {
+                                        firstHalfList.add("Half AB");
+                                        halfabcounter = halfabcounter + 0.5;
+                                        prcounter = prcounter + 0.5;
+                                    }
+                                    else if(userTimeInStr[0].contains("0")){
+                                        firstHalfList.add("AB");
+                                        abcounter = abcounter + 1;
+                                    }
+                                    else if (firstHalf.contains("AR") && userTimeInStr[0].contains("0.5")) {
+                                        firstHalfList.add("Half AR/P");
+                                        ar = ar + 0.5;
+                                          prcounter = prcounter + 0.5;
+                                    }
+                                    
+                                } else if (firstHalf.equals("WO")) {
+                                    firstHalfList.add("WO");
+                                    wo = wo + 1;
+                                } else if (firstHalf.contains("AR")) {
+                                    firstHalfList.add("AR/P");
+                                    ar = ar + 1;
+                                } else if (firstHalf.equals("AB")) {
+                                    firstHalfList.add("AB");
+                                    abcounter = abcounter + 1;
+                                }
+                                else {
+                                    if (firstHalf.equals("Casual Leave")) {
+                                        cl = cl + 1;
+                                    }
+                                    if (firstHalf.equals("Privilege Leave")) {
+                                        pl = pl + 1;
+                                    }
+                                    if (firstHalf.equals("Sick Leave")) {
+                                        sl = sl + 1;
+                                    }
+                                    if (firstHalf.equals("Maternity Leave")) {
+                                        ml = ml + 1;
+                                    }
+                                    if (firstHalf.equals("Paternity Leave")) {
+                                        pl = pl + 1;
+                                    }
+                                    if (firstHalf.equals("C Off Leave")) {
+                                        col = col + 1;
+                                    }
+                                    if (firstHalf.equals("Leave Without Pay")) {
+                                        lwp = lwp + 1;
+                                    }
+                                    firstHalfList.add(" " + firstHalf);
+                                }
+                                n++;
+                            }
+
+                        }
+                        
+                        firstHalfList.add(""+ list.size());
+                        firstHalfList.add(""+ prcounter);
+                        firstHalfList.add(""+ abcounter);
+                        firstHalfList.add(""+ halfabcounter);
+                        firstHalfList.add(""+ ar);
+                        firstHalfList.add(""+ wo);
+                        firstHalfList.add(""+ holiday);
+                        firstHalfList.add(""+ shl);
+                        firstHalfList.add(""+ cl);
+                        firstHalfList.add(""+ pl);
+                        firstHalfList.add(""+ sl);
+                        firstHalfList.add(""+ ml);
+                        firstHalfList.add(""+ ptrl);
+                        firstHalfList.add(""+ col);
+                        firstHalfList.add(""+ lwp);
+                        
+                        Row row1 = firstSheet.createRow(rownum);
+                        for (int k1 = 0; k1 < firstHalfList.size(); k1++) {
+                            Cell cell = row1.createCell(k1);
+
+                            cell.setCellValue(firstHalfList.get(k1));
+
+                            cell.setCellStyle(styleBold);
+                        }
+                        
+                        
+                    }
+
+                }
+
+                rownum++;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        finally {
+        }
+
+        String appPath = request.getServletContext().getRealPath("");
+
+        try {
+            String filePath = appPath + File.separator + "StorageYard" + File.separator
+                    + "Other" + File.separator + "UserDoc" + File.separator
+                    + "EmployeeShiftData" + File.separator + "EmployeeAdvanceSearch.xls";
+            FileOutputStream fos = new FileOutputStream(new File(filePath));
+            HSSFCellStyle hsfstyle = firstFWorkbook.createCellStyle();
+            hsfstyle.setBorderBottom((short) 1);
+            hsfstyle.setFillBackgroundColor((short) 245);
+            firstFWorkbook.write(fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    
+        String filePath = File.separator + "StorageYard" + File.separator
+                + "Other" + File.separator + "UserDoc" + File.separator
+                + "EmployeeShiftData" + File.separator + "EmployeeAdvanceSearch.xls";
+
+        appPath = request.getServletContext().getRealPath("");
+
+        String fullPath = appPath + filePath;
+
+        request.setAttribute(
+                "filePath", fullPath);
+
+        DownloadFile downloadFile = new DownloadFile();
+
+        downloadFile.doDownload(request, response);
+        mv = employeeDataSearch(request, response);
+        return mv;
     }
 
 }

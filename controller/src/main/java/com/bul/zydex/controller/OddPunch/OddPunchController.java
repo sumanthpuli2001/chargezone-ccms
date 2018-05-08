@@ -29,28 +29,35 @@ public class OddPunchController extends OddPunchAbstract {
         ModelAndView mv = new ModelAndView();
 
         List oddPunchList = new ArrayList();
-        String enteredDate = request.getParameter("enteredDate");
-        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-        Date convertedDate = formater.parse(enteredDate);
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-        String date = dateFormatter.format(convertedDate);
+        if ("" != request.getParameter("enteredDate")) {
+            String enteredDate = request.getParameter("enteredDate");
+            SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+            Date convertedDate = formater.parse(enteredDate);
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+            String date = dateFormatter.format(convertedDate);
 
-        List<?> employeeDateTimeDataList = employeeDatetimeDataService.readOddPunchedEmployeeData(date);
+            List<?> employeeDateTimeDataList = employeeDatetimeDataService.readOddPunchedEmployeeData(date);
 
-        for (Object list : employeeDateTimeDataList) {
-            Object[] o = (Object[]) list;
-            if (!(Integer.parseInt(o[3].toString()) % 2 == 0)) {
-                List tempPunchList = new ArrayList();
-                tempPunchList.add(o[0]);
-                tempPunchList.add(o[1]);
-                oddPunchList.add(tempPunchList);
+            for (Object list : employeeDateTimeDataList) {
+                Object[] o = (Object[]) list;
+                if (!(Integer.parseInt(o[3].toString()) % 2 == 0)) {
+                    List tempPunchList = new ArrayList();
+                    tempPunchList.add(o[0]);
+                    tempPunchList.add(o[1]);
+                    oddPunchList.add(tempPunchList);
+                }
+
             }
+            request.setAttribute("oddPunchList", oddPunchList);
+            request.setAttribute("date", date);
+            mv = searchOddPunch(request, response);
 
+            return mv;
+        } else {
+            request.setAttribute("failureMessage",
+                    "Error : Please Enter The Date.");
+            mv = searchOddPunch(request,response);
+            return mv;
         }
-        request.setAttribute("oddPunchList", oddPunchList);
-        request.setAttribute("date", date);
-        mv = searchOddPunch(request, response);
-
-        return mv;
     }
 }

@@ -166,4 +166,8 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
 
     public List<?> getByEmployeeNo(String employeeNo);
 
+    public List<?> empOrDateWiseSearchforActiveSecond(EmployeeAdvanceSearch employeeAdvanceSearch);
+
+    public List<?> getAllEmployeeId();
+
 }

@@ -12,6 +12,7 @@ import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.JobtypeMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.MprApprovalHistory;
 import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.VacancyMaster;
@@ -22,6 +23,7 @@ import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
 import com.bul.zydex.service.Recruitment.MprMasterService;
 import com.bul.zydex.service.Recruitment.RecruitmentService;
+import com.bul.zydex.service.RecruitmentApprovalHistory.MprApprovalHistoryService;
 import com.bul.zydex.service.Vacancy.VacancyMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
 
@@ -40,6 +42,7 @@ public class CandidateF2FApprovalAbstract extends CustomAbstract {
     protected LocationMasterService<LocationMaster> locationMasterService;
     protected MprMasterService<MprMaster> mprMasterService;
     protected RecruitmentService<RecruitmentMaster> recruitmentService;
+    protected MprApprovalHistoryService<MprApprovalHistory> mprApprovalHistoryService;
 
     public RecruitmentService<RecruitmentMaster> getRecruitmentService() {
         return recruitmentService;
@@ -113,4 +116,13 @@ public class CandidateF2FApprovalAbstract extends CustomAbstract {
         this.mprMasterService = mprMasterService;
     }
 
+    public MprApprovalHistoryService<MprApprovalHistory> getMprApprovalHistoryService() {
+        return mprApprovalHistoryService;
+    }
+
+    public void setMprApprovalHistoryService(MprApprovalHistoryService<MprApprovalHistory> mprApprovalHistoryService) {
+        this.mprApprovalHistoryService = mprApprovalHistoryService;
+    }
+
+    
 }

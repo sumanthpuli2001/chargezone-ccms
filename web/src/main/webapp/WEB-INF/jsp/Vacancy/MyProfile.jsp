@@ -137,7 +137,7 @@
                                 </div>
 
                                 <div class="col-sm-2" style="text-align: left" >
-                                    <label>D.O.B :<span style="color: red;font-size: 12px;">*</span></label>
+                                    <label>D.O.B :</label>
                                 </div>
                                 <div class="col-sm-3">
                                 <form:input path="dob" class="form-control" id="datepicker" placeholder="Enter D.O.B" readonly="true"></form:input>
@@ -150,7 +150,7 @@
 
                                 </div>
                                 <div class="col-sm-2" style="text-align: left">
-                                    <label>Father Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                    <label>Father Name:</label>
                                 </div>
                                 <div class="col-sm-3">
                                 <form:input path="fatherName" class="form-control" placeholder="Enter Father Name"></form:input>
@@ -158,7 +158,7 @@
                                 </div>
 
                                 <div class="col-sm-2" style="text-align: left">
-                                    <label>Mother Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                    <label>Mother Name:</label>
                                 </div>
                                 <div class="col-sm-3">
                                 <form:input path="motherName" class="form-control" placeholder="Enter Mother Name"></form:input>
@@ -171,7 +171,7 @@
 
                                 </div>
                                 <div class="col-sm-2" style="text-align: left">
-                                    <label>Father D.O.B :<span style="color: red;font-size: 12px;">*</span></label>
+                                    <label>Father D.O.B :</label>
                                 </div>
                                 <div class="col-sm-3">
                                 <form:input path="fatherDob" id="datepicker1" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" ></form:input>
@@ -179,7 +179,7 @@
                                 </div>
 
                                 <div class="col-sm-2" style="text-align: left">
-                                    <label>Mother D.O.B :<span style="color: red;font-size: 12px;">*</span></label>
+                                    <label>Mother D.O.B :</label>
                                 </div>
                                 <div class="col-sm-3">
                                 <form:input path="motherDob" id="datepicker2"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
@@ -216,11 +216,11 @@
 
                             </div>
                             <div class="col-sm-2" style="text-align: left">
-                                <label>Photograph<span style="color: red;font-size: 12px;">*</span></label>
+                                <label>Photograph</label>
                             </div>
                             <div class="col-sm-3" style="text-align: left;">
                                 <form:input type="file" path="photograph" class="form-control" id="photograph" name="photograph" accept="image/jpg,image/jpeg,image/png"></form:input>
-                                <span><img src="StorageYard/candidateimage/${candidateApplyJob.photograph}" width="50px; !important" height="50px; !important">&nbsp;&nbsp;${candidateApplyJob.photograph}</span>
+<!--                                <span><img src="StorageYard/candidateimage/${candidateApplyJob.photograph}" width="50px; !important" height="50px; !important">&nbsp;&nbsp;${candidateApplyJob.photograph}</span>-->
                                     <%--<form:errors path="photograph" cssClass="errorDiv"></form:errors>--%>
                             </div>
 
@@ -247,7 +247,7 @@
                             <div class="col-sm-1">
                             </div>
                             <div class="col-sm-2" style="text-align: left">
-                                <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
+                                <label>Present Address:</label>
                             </div>
                             <div class="col-sm-3" style="text-align: left;">
                                 <form:textarea path="presentAddress" class="form-control" placeholder="Enter Present Address"></form:textarea>
@@ -293,7 +293,7 @@
                                 <span style="color: red;font-size: 12px;"><form:errors path="contactNo" cssClass="errorDiv"></form:errors></span>
                                 </div>
                                 <div class="col-sm-2" style="text-align: left">
-                                    <label>Emergency Contact Person:<span style="color: red;font-size: 12px;">*</span></label>
+                                    <label>Emergency Contact Person:</label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
                                 <form:input path="emergencyContactPerson" class="form-control" placeholder="Enter Emergency contact Person"></form:input>
@@ -305,14 +305,14 @@
                                 <div class="col-sm-1">
                                 </div>
                                 <div class="col-sm-2" style="text-align: left">
-                                    <label>Emergency Contact Number:<span style="color: red;font-size: 12px;">*</span></label>
+                                    <label>Emergency Contact Number:</label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
                                 <form:input path="emergencyContactNo" placeholder="Enter Emergency Contact No"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                 <span style="color: red;font-size: 12px;"><form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors></span>
                                 </div>
                                 <div class="col-sm-2" style="text-align: left">
-                                    <label>Highest Education Qualification<span style="color: red;font-size: 12px;">*</span></label>
+                                    <label>Highest Education Qualification:</label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
                                 <form:input path="highestEducationQualification" placeholder="Enter Highest Education" class="form-control"></form:input>
@@ -324,14 +324,14 @@
                                 <div class="col-sm-1">
                                 </div>
                                 <div class="col-sm-2" style="text-align: left">
-                                    <label>Total Experience Year:<span style="color: red;font-size: 12px;">*</span></label>
+                                    <label>Total Experience Year:</label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
                                 <form:input path="experianceDateJoiningYear" placeholder="Total Experience (Year)" class="form-control"></form:input>
                                 <span style="color: red;font-size: 12px;"><form:errors path="experianceDateJoiningYear" cssClass="errorDiv"></form:errors></span>
                                 </div>
                                 <div class="col-sm-2" style="text-align: left">
-                                    <label>Total Experience Month:<span style="color: red;font-size: 12px;">*</span></label>
+                                    <label>Total Experience Month:</label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
                                 <form:input path="experianceDateJoiningMonth" placeholder="Total Experience (Month)" class="form-control"></form:input>
@@ -343,7 +343,7 @@
                                 <div class="col-sm-1">
                                 </div>
                                 <div class="col-sm-2" style="text-align: left">
-                                    <label>Resume Attach :<span style="color: red;font-size: 12px;">*</span></label>
+                                    <label>Resume Attach :</label>
                                 </div>
                                 <div class="col-sm-3" style="text-align: left;">
                                     <input type="file" class="form-control" id="certificateId1"  size = "5000"  name="certificateId1"  onchange="checkFilecertificate();">
@@ -353,7 +353,7 @@
                                                                 <!--<span><img src="StorageYard/CertificateAttach/${candidateApplyJob.certificateAttach}" width="50px; !important" height="50px; !important">&nbsp;&nbsp;${candidateApplyJob.certificateAttach}</span>-->
                                                                  <!--<a href="${candidateApplyJob.certificateAttach}/StorageYard/CertificateAttach">Download</a>-->
                                 <%--<form:input path="certificateAttach" type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png" onchange="checkCertificateFileSize(1);"></form:input>--%>
-                                / <span style="color: red;font-size: 12px;"><form:errors path="certificateAttach" cssClass="errorDiv"></form:errors></span>
+                                <span style="color: red;font-size: 12px;"><form:errors path="certificateAttach" cssClass="errorDiv"></form:errors></span>
                                 </div>
 
 
@@ -407,7 +407,7 @@
         {
             var fup = document.getElementById('certificateId1');
             var certificateId1 = fup.value;
-            alert(certificateId1);
+//            alert(certificateId1);
             var ext = certificateId1.substring(certificateId1.lastIndexOf('.') + 1);
             if (ext == "pdf")
             {

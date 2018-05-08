@@ -15,6 +15,7 @@ import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeExcelRecord;
 import com.bul.zydex.model.EmployeePolicyDetail;
 import com.bul.zydex.model.EmployeeSalaryProcess;
+import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.EmployeeTypeWiseSalary;
@@ -76,6 +77,7 @@ import com.bul.zydex.service.emp.EmployeeTypeService;
 import com.bul.zydex.service.policy.CtcAllowanceService;
 import com.bul.zydex.service.policy.EmployeeCtcDetailService;
 import com.bul.zydex.service.policy.PolicyMasterService;
+import com.bul.zydex.service.shift.EmployeeShiftDataService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -123,8 +125,17 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     protected PayrollTaxDeductionMasterService<PayrollTaxDeductionMaster> payrollTaxDeductionMasterService;
     protected PayrollTaxDeclarationPeriodMasterService<PayrollTaxDeclarationPeriodMaster> payrollTaxDeclarationPeriodMasterService;
     protected PayrollTaxRateMasterService<PayrollTaxRateMaster> payrollTaxRateMasterService;
+    protected EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService;
 
     Validator employeeSalaryProcessValidator;
+
+    public EmployeeShiftDataService<EmployeeShiftData> getEmployeeShiftDataService() {
+        return employeeShiftDataService;
+    }
+
+    public void setEmployeeShiftDataService(EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService) {
+        this.employeeShiftDataService = employeeShiftDataService;
+    }
 
     public PayrollSalaryLockService<PayrollSalaryLock> getPayrollSalaryLockService() {
         return payrollSalaryLockService;

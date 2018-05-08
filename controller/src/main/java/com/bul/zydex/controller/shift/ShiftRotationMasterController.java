@@ -13918,8 +13918,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         EmployeeMaster employeeMaster = new EmployeeMaster();
                         ShiftGenerateMonthlySchedule monthlySchedule = new ShiftGenerateMonthlySchedule();
                         ShiftRotationMaster rotationMaster = new ShiftRotationMaster();
-                        int empNo = Integer.parseInt(employeeNo);
-                        List<?> list = employeeMasterService.readByEmployeeNo(empNo);
+//                        int empNo = Integer.parseInt(employeeNo);
+                        List<?> list = employeeMasterService.readByEmployeeNo1(employeeNo);
                         if (!list.isEmpty()) {
                             employeeMaster = (EmployeeMaster) list.get(0);
 //                            int month = 7;

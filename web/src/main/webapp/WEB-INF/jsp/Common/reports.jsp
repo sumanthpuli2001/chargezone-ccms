@@ -35,58 +35,178 @@
                 <div class="col-md-12">
                     <!-- Custom Tabs -->
                     <div class="nav-tabs-custom">
-
+                        <h3 style="text-align: center;"> Attendance Report</h3>
                         <div class="tab-content">
-                            <br>
                             <div class="row">
-
                                 <div class="col-xs-4 col-sm-4 col-md-4">
-                                    <a class="label label-primary" style="font-size: 20px"  href="hrServiceRequest.htm?act=searchSubmit">
-                                        <i class="fa fa-envelope"></i><strong> HR Help Desk </strong>
+                                    <a  style="font-size: 20px" href="shiftRotationMaster.htm?act=employeeDataSearch">
+                                        <strong>Employee Master Report</strong>
                                     </a>
                                 </div>
                                 <div  class="col-xs-4 col-sm-4 col-md-4">
-                                    <a class="label label-primary" style="font-size: 20px" href="homeController.htm?act=kaizen">
-                                        <i class="fa fa-twitch"></i>
-                                        <strong>Kaizen</strong>
+                                    <a  style="font-size: 20px"  href="shiftRotationMaster.htm?act=employeeDataSearch2">
+                                        <strong>Employee Attendance Report</strong>
                                     </a>
                                 </div>
-                                <div class="col-xs-4 col-sm-4 col-md-3">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
                                     <!--<a class="label label-primary" style="font-size: 20px" href="hrServiceRequest.htm?act=searchSubmit">-->
-                                    <a class="label label-primary" style="font-size: 20px" href="emergencyContact.htm?act=viewContact">
-                                        <i class="fa fa-book"></i> &nbsp<strong>Emergency Contact</strong>
+                                    <a  style="font-size: 20px" href="shiftRotationMaster.htm?act=employeeAttandanceDataSearch">
+                                        &nbsp<strong>Monthly Attendance Report</strong>
                                     </a>
                                 </div>
-                                <!--                                <div  class="col-xs-4 col-sm-4 col-md-3">
-                                                                    <a class="label label-info" style="font-size: 20px"  href="classifiedBox.htm?act=searchSubmit" >
-                                                                        <i class="fa fa-weixin"></i>
-                                                                        <strong>Classified</strong>
-                                                                    </a>
-                                                                </div>-->
-
-
                             </div>
-                            <br><br>
                             <div class="row">
-
                                 <div class="col-xs-4 col-sm-4 col-md-4">
-                                    <a class="label label-primary" style="font-size: 20px"  href="http://www.spcls.co.in/csr.aspx" target="_blank">
-                                        <i class="fa fa-pencil-square-o"></i> &nbsp<strong>CSR</strong>
+                                    <a  style="font-size: 20px"  href="shiftRotationMaster.htm?act=employeePresentSearch" target="_blank">
+                                        &nbsp<strong>Daily Present Report</strong>
+                                    </a>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="nav-tabs-custom">
+                        <h3 style="text-align: center;"> Payroll Report</h3>
+                        <div class="tab-content">
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px" href="payrollEmployeeFormSixteen.htm?act=redirectToFormSexteen&search=none">
+                                        <strong>Form Sixteen</strong>
+                                    </a>
+                                </div>
+                                <div  class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px"  href="employeePfCheck.htm?act=searchSalaryPfDetail&search=none">
+                                        <strong>PF</strong>
                                     </a>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-4">
-                                    <a class="label label-primary" style="font-size: 20px"  href="http://www.spcls.co.in/news-events.aspx" target="_blank">
-                                        <i class="fa fa-newspaper-o"></i> &nbsp<strong>News & Event</strong>
+                                    <!--<a class="label label-primary" style="font-size: 20px" href="hrServiceRequest.htm?act=searchSubmit">-->
+                                    <a  style="font-size: 20px" href="employeePtCheck.htm?act=searchSalaryPtDetail&search=none">
+                                        &nbsp<strong>PT</strong>
                                     </a>
                                 </div>
-                                <div  class="col-xs-4 col-sm-4 col-md-3">
-                                    <a class="label label-primary" style="font-size: 20px" href="holidayMaster.htm?act=viewHolidaysLocationWise">
-                                        <i class="fa fa-twitch"></i>
-                                        <strong>Holiday List</strong>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px"  href="employeeSalarySlip.htm?act=searchSalarySlipDetail&search=none">
+                                        &nbsp<strong>Salary Slip </strong>
                                     </a>
                                 </div>
-
-
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px"  href="policyMaster.htm?act=searchPolicyDetail&search=none">
+                                        &nbsp<strong>Policy</strong>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px"  href="companyMonthlyReport.htm?act=searchCompanyMonthlyReport&search=none">
+                                        &nbsp<strong>Company Monthly Report</strong>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px"  href="companyPTReport.htm?act=searchCompanyPTReport&search=none">
+                                        &nbsp<strong>PT Statement </strong>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px"  href="bankStatement.htm?act=searchBankStatementDetail&search=none">
+                                        &nbsp<strong>Bank Statement </strong>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px" href="esicDeductionStatement.htm?act=searchEsicDetail&search=none">
+                                        &nbsp<strong>ESIC Deduction Statement </strong>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px"  href="overTime.htm?act=searchOTDetail&search=none">
+                                        &nbsp<strong>Over Time Report</strong>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px"  href="pFChallen.htm?act=searchPfChallenDetail&search=none">
+                                        &nbsp<strong>PF Challen  </strong>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px" href="loanReport.htm?act=searchLoanData&search=none">
+                                        &nbsp<strong>Loan </strong>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px"  href="attendanceReport.htm?act=searchAttendanceData&search=none">
+                                        &nbsp<strong>Attendance</strong>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px"  href="employeeSalarySlip.htm?act=searchSalaryYearDetail&search=none">
+                                        &nbsp<strong>Employee Salary Yearly  </strong>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px" href="employeePfCheck.htm?act=searchSalaryPfGovDetail&search=none">
+                                        &nbsp<strong>Govt. Format PF </strong>
+                                    </a>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="nav-tabs-custom">
+                        <h3 style="text-align: center;"> Leave Management</h3>
+                        <div class="tab-content">
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px" href="leaveEmployeeDetail.htm?act=searchEmpLeaveDetail">
+                                        <strong>Search Employee Leave Detail</strong>
+                                    </a>
+                                </div>
+                                <div  class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px" href="leaveEmployeeDetail.htm?act=searchEmployeeLeaveBalance">
+                                        <strong>Search Employee Leave Balance</strong>
+                                    </a>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="nav-tabs-custom">
+                        <h3 style="text-align: center;">Employee Service</h3>
+                        <div class="tab-content">
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px" href="travelRequestMaster.htm?act=viewRequestAdminSubmit">
+                                        <strong>Search Travel Request </strong>
+                                    </a>
+                                </div>
+                                <div  class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px" href="expenseMaster.htm?act=searchExpenseRequest">
+                                        <strong>Search Expense Request</strong>
+                                    </a>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="nav-tabs-custom">
+                        <h3 style="text-align: center;">Performance Management</h3>
+                        <div class="tab-content">
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px" href="appraisalPerformance.htm?act=searchAppraisalPerformanceReoprtStageWise">
+                                        <strong>PMP-Report</strong>
+                                    </a>
+                                </div>
+                                <div  class="col-xs-4 col-sm-4 col-md-4">
+                                    <a  style="font-size: 20px" href="appraisal360.htm?act=searchAppraisalPerformance360Reoprt">
+                                        <strong>360 Appraisal Report</strong>
+                                    </a>
+                                </div>
                             </div>
                             <br>
                         </div>

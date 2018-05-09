@@ -83,7 +83,7 @@
                                         <div class="col-sm-6" id="excelDiv">
                                             <input type="file" name="file1" id="file11" value="" onchange="checkfile(this);"/>
                                             <input type="hidden" id="fileName" name="fileName" value=""/>
-                                            <span>[ <a href="employeeMaster.htm?act=readEmployeeFile&amp;fileName=Employee.xlsx">Sample Excel</a> ]</span>
+                                            <span>[ <a href="employeeMaster.htm?act=readEmployeeFile&amp;fileName=Employee Registration.xlsx">Sample Excel</a> ]</span>
                                         </div>
                                     </div>
                                 </div>

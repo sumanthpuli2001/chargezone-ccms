@@ -116,7 +116,7 @@
                                                     </div>
                                                     <div class="col-sm-2">
 
-                                                        <input type="number" name="givenMarks2" class="form-control" id="givenMarks3${status.count}" max="${employeeAdditional[5]}"
+                                                        <input type="text" name="givenMarks2" class="form-control" id="givenMarks3${status.count}" max="${employeeAdditional[5]}"
                                                                required="true" class="form-control" oninput="maxLengthCheck(this)" onkeypress="return isNumeric(event)">
   <!--                                                        <input type="number" name="givenMarks2" class="form-control" id="givenMarks3${status.count}" max="${employeeAdditional[5]}"
                                                                  onchange="enterValueCheck()" required="true" class="form-control" onkeypress="return isNumberKey(event)">-->

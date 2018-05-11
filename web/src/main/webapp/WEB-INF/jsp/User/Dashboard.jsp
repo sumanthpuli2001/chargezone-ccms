@@ -92,7 +92,8 @@
                                                                                                     <span class="product-title">  ${employeeMaster.locationMaster.location}</span>
                                                                                                 </li><!-- /.item -->
                                                                                                 <li class="item">
-                                                                                                    <span class="product-title" onclick="printdis(${employeeMaster.id});">Print Job Description</span>
+                                                                                                    <span class="product-title">Print Job Description:</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                    <a href="#"><span class="product-title" onclick="printdis(${employeeMaster.id});" class="uppercase">Click Here</span></a> 
                                                                                                 </li><!-- /.item -->
                                                                                             </ul>
                                                                                         </div><!-- /.box-body -->

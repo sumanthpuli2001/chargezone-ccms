@@ -387,7 +387,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         String btnType = request.getParameter("btnType");
         String comment = request.getParameter("comment");
         KaizenMaster kaizenMaster = kaizenMasterService.readById(Integer.parseInt(id));
-        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(5);
+        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(3);
 
 //        KaizenApproval kaizenApproval = kaizenApprovalService.readByIdAndEmp(kaizenMaster.getId(), employeeMaster.getId());
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

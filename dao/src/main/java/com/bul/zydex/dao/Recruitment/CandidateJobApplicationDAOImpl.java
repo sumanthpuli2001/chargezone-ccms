@@ -36,10 +36,11 @@ public class CandidateJobApplicationDAOImpl<T> extends GenericsDAOImpl<T> implem
     @Override
     public List<?> readCandidateApplyForJob() {
         String query = " SELECT a.id as cjaId,b.id as cajId,c.id as vmId,b.name as candidatename, "
-                + " b.highestEducationQualification,b.emailId,b.experianceDateJoiningYear,c.name as vacancyName,a.status "
+                + " b.highestEducationQualification,b.emailId,b.experianceDateJoiningYear,c.name as vacancyName,a.status,a.createdDate,de.departmentName "
                 + " FROM CandidateJobApplication a "
                 + " LEFT JOIN a.candidateApplyJob b "
                 + " LEFT JOIN a.vacancyMaster c "
+                + " LEFT JOIN c.departmentMaster de "
                 + " Where a.status!=0 "
                 + " order by a.id desc";
 

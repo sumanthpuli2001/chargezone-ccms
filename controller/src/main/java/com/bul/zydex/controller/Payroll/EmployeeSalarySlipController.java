@@ -18,6 +18,7 @@ import com.bul.zydex.model.PayrollLoanDetail;
 import com.bul.zydex.model.PayrollLoanRemainingAmount;
 import com.bul.zydex.model.PayrollLoanType;
 import com.bul.zydex.model.PayrollSalaryType;
+import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -60,6 +61,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
     public ModelAndView searchFormEmployeeSlipDetailSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeSalaryProcess employeeSalaryProcess = new EmployeeSalaryProcess();
+        EmployeeMaster employeeMaster2 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeType employeeType = new EmployeeType();
         EmployeeSubType employeeSubType = new EmployeeSubType();
@@ -70,6 +72,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         String Payment_Type = request.getParameter("paymentType");
         String month = request.getParameter("month");
         String year = request.getParameter("year11");
+        Integer id = employeeMaster2.getId();
 
         HttpSession session = request.getSession();
 //       
@@ -97,53 +100,135 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         }
 
         List listForMonthAndYear = new ArrayList();
-        List<?> list = employeeSalaryProcessService.readEmployeeForSlip(employeeMaster);
-        if (!list.isEmpty()) {
+        boolean emright = false;
+        boolean emrightHR = false;
+        EmployeeMaster employeeMaster1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        String usermId = (String) employeeMaster1.getUserMaster().getId().toString();
+        List<UserRightMaster> userRightMasterList = (List<UserRightMaster>) userRightMasterService.readByUserId(usermId);
+        for (int i = 0; i < userRightMasterList.size(); i++) {
+            UserRightMaster au1 = (UserRightMaster) userRightMasterList.get(i);
+            emright = au1.isPayroll();
+        }
+        for (int i = 0; i < userRightMasterList.size(); i++) {
+            UserRightMaster au1 = (UserRightMaster) userRightMasterList.get(i);
+            emrightHR = au1.isHr();
+        }
 
-            for (Object dedSalaryList1 : list) {
-                List finalList = new ArrayList();
-                DecimalFormat df = new DecimalFormat("####0.00");
-                Object[] o = (Object[]) dedSalaryList1;
-                double basicSalary = 0;
-                int empid = 0;
-                int empid2 = 0;
-                basicSalary += (Double) o[6];
-                empid += (Integer) o[5];
-                String employeeId = (String) o[0];
-                String employeeName = (String) o[1];
-                String month1 = (String) o[2];
-                String year1 = (String) o[3];
-                empid2 += (Integer) o[4];
+        if (emrightHR || emright) {
+            List<?> list = employeeSalaryProcessService.readEmployeeForSlip(employeeMaster);
+            if (!list.isEmpty()) {
 
-                finalList.add(employeeId);
-                finalList.add(employeeName);
-                finalList.add(month1);
-                finalList.add(year1);
-                finalList.add(empid2);
-                finalList.add(empid);
+                for (Object dedSalaryList1 : list) {
+                    List finalList = new ArrayList();
+                    DecimalFormat df = new DecimalFormat("####0.00");
+                    Object[] o = (Object[]) dedSalaryList1;
+                    double basicSalary = 0;
+                    int empid = 0;
+                    int empid2 = 0;
+                    basicSalary += (Double) o[6];
+                    empid += (Integer) o[5];
+                    String employeeId = (String) o[0];
+                    String employeeName = (String) o[1];
+                    String month1 = (String) o[2];
+                    String year1 = (String) o[3];
+                    empid2 += (Integer) o[4];
 
-                double additionalAmt = 0;
-                List<?> additionalAmount = employeeAdditionalSalaryService.readAdditionalAmount(empid);
-                if (!additionalAmount.isEmpty()) {
-                    additionalAmt = (Double) additionalAmount.get(0);
+                    finalList.add(employeeId);
+                    finalList.add(employeeName);
+                    finalList.add(month1);
+                    finalList.add(year1);
+                    finalList.add(empid2);
+                    finalList.add(empid);
+
+                    double additionalAmt = 0;
+                    List<?> additionalAmount = employeeAdditionalSalaryService.readAdditionalAmount(empid);
+                    if (!additionalAmount.isEmpty()) {
+                        additionalAmt = (Double) additionalAmount.get(0);
+                    }
+                    double netSalary = (int) Math.round(basicSalary + additionalAmt);
+
+                    double deductionAmt1 = 0;
+                    List<?> deductionAmountList1 = employeeDeductionAmountService.readDeductionAmount(empid);
+                    if (!deductionAmountList1.isEmpty()) {
+                        deductionAmt1 = (Double) deductionAmountList1.get(0);
+                    }
+                    double netpayable = netSalary - deductionAmt1;
+                    int netpayable1 = (int) Math.round(netpayable);
+                    finalList.add(netpayable1);
+                    listForMonthAndYear.add(finalList);
+
+                    request.setAttribute("employeelist", listForMonthAndYear);
+                    session.setAttribute("employeePfcheckList", list);
                 }
-                double netSalary = (int) Math.round(basicSalary + additionalAmt);
 
-                double deductionAmt1 = 0;
-                List<?> deductionAmountList1 = employeeDeductionAmountService.readDeductionAmount(empid);
-                if (!deductionAmountList1.isEmpty()) {
-                    deductionAmt1 = (Double) deductionAmountList1.get(0);
+            }
+
+        } else {
+
+            if (!type_of_employee.equals("")) {
+                employeeMaster.setEmployeeType(type_of_employee);
+            }
+            if (!"".equals(month)) {
+                employeeMaster.setBankAccountNo(month);
+            }
+            if (!"".equals(year)) {
+                employeeMaster.setPanCard(year);
+            }
+            if (!id.equals("")) {
+                employeeMaster.setId(id);
+            }
+            List<?> list = employeeSalaryProcessService.readEmployeeForSlip1(employeeMaster);
+            if (!list.isEmpty()) {
+
+                for (Object dedSalaryList1 : list) {
+                    List finalList = new ArrayList();
+                    DecimalFormat df = new DecimalFormat("####0.00");
+                    Object[] o = (Object[]) dedSalaryList1;
+                    double basicSalary = 0;
+                    int empid = 0;
+                    int empid2 = 0;
+                    basicSalary += (Double) o[6];
+                    empid += (Integer) o[5];
+                    String employeeId = (String) o[0];
+                    String employeeName = (String) o[1];
+                    String month1 = (String) o[2];
+                    String year1 = (String) o[3];
+                    empid2 += (Integer) o[4];
+
+                    finalList.add(employeeId);
+                    finalList.add(employeeName);
+                    finalList.add(month1);
+                    finalList.add(year1);
+                    finalList.add(empid2);
+                    finalList.add(empid);
+
+                    double additionalAmt = 0;
+                    List<?> additionalAmount = employeeAdditionalSalaryService.readAdditionalAmount(empid);
+                    if (!additionalAmount.isEmpty()) {
+                        additionalAmt = (Double) additionalAmount.get(0);
+                    }
+                    double netSalary = (int) Math.round(basicSalary + additionalAmt);
+
+                    double deductionAmt1 = 0;
+                    List<?> deductionAmountList1 = employeeDeductionAmountService.readDeductionAmount(empid);
+                    if (!deductionAmountList1.isEmpty()) {
+                        deductionAmt1 = (Double) deductionAmountList1.get(0);
+                    }
+                    double netpayable = netSalary - deductionAmt1;
+                    int netpayable1 = (int) Math.round(netpayable);
+                    finalList.add(netpayable1);
+                    listForMonthAndYear.add(finalList);
+
+                    request.setAttribute("employeelist", listForMonthAndYear);
+                    session.setAttribute("employeePfcheckList", list);
                 }
-                double netpayable = netSalary - deductionAmt1;
-                int netpayable1 = (int) Math.round(netpayable);
-                finalList.add(netpayable1);
-                listForMonthAndYear.add(finalList);
+
             }
 
         }
 
-        request.setAttribute("employeelist", listForMonthAndYear);
-        session.setAttribute("employeePfcheckList", list);
+//        request.setAttribute("employeelist", listForMonthAndYear);
+//        session.setAttribute("employeePfcheckList", list);
         mv = searchSalarySlipDetail(request, response);
         return mv;
     }
@@ -353,10 +438,10 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
 //                empMap.put("Gross Salary Amount", "" + df.format(additionalAmount));
 //                empMap.put("Deductional Amount", "" + df.format(deductionAmount));
 //                empMap.put("NetProfit Amount", "" + df.format(additionalAmount - deductionAmount));
-                  empMap.put("Gross Salary", "" +  df.format((int) Math.round(additionalAmount)));
+                empMap.put("Gross Salary", "" + df.format((int) Math.round(additionalAmount)));
 //            empMap.put("Deduction Amount", "" + df.format(deductionAmount));
-            empMap.put("Deduction Amount", "" + df.format((int) Math.round(deductionAmount)));
-            empMap.put("Net Amount", "" + df.format((int) Math.round(additionalAmount - deductionAmount)));
+                empMap.put("Deduction Amount", "" + df.format((int) Math.round(deductionAmount)));
+                empMap.put("Net Amount", "" + df.format((int) Math.round(additionalAmount - deductionAmount)));
                 finalList.add(empMap);
             }
         }

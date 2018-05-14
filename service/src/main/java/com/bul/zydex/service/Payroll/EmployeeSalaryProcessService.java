@@ -30,6 +30,8 @@ public interface EmployeeSalaryProcessService<T> extends GenericsService<T> {
 
     public List<?> readEmployeeForSlip(EmployeeMaster object);
 
+    public List<?> readEmployeeForSlip1(EmployeeMaster object);
+
     public List<?> readEmployeeForSalaryinfo(T object);
 
     public List<?> readsalDeduction(EmployeeMaster object);

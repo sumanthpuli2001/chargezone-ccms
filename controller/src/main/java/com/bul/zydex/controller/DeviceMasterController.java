@@ -242,7 +242,7 @@ public class DeviceMasterController extends DeviceMasterAbstract {
 
                                     EmployeeMaster employeeMaster2 = new EmployeeMaster();
                                     EmailTemplate emailTemplate = new EmailTemplate();
-                                    employeeMaster2 = employeeMasterService.readById(Integer.parseInt(empId));
+                                    employeeMaster2 = (EmployeeMaster) employeeMasterService.readEmId(empId);
                                     String To = employeeMaster2.getOfficeEmailId();
                                     emailTemplate = emailTemplateService.readById(141);
                                     String Subject = emailTemplate.getSubject();
@@ -338,7 +338,7 @@ public class DeviceMasterController extends DeviceMasterAbstract {
 
                                                 EmployeeMaster employeeMaster2 = new EmployeeMaster();
                                                 EmailTemplate emailTemplate = new EmailTemplate();
-                                                employeeMaster2 = employeeMasterService.readById(Integer.parseInt(empId));
+                                                employeeMaster2 = (EmployeeMaster) employeeMasterService.readEmId(empId);
                                                 String To = employeeMaster2.getOfficeEmailId();
                                                 emailTemplate = emailTemplateService.readById(141);
                                                 String Subject = emailTemplate.getSubject();

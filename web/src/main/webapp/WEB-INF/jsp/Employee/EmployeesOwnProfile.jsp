@@ -609,35 +609,14 @@
                                                         </div>
  
                                                         <div class="col-sm-6">
-                                                            <label>Company:<span style="color: red;font-size: 12px;">*</span></label>
-
-
-                                                            <select id="companyId" name="companyId" class="form-control " style="pointer-events: none;">
-                                                            <c:choose>
-                                                                <c:when test="${company.contains('Zydex Industries')}">
-
-                                                                    <option value="Zydex Industries" selected="" >Zydex Industries</option>
-                                                                </c:when>
-                                                                <c:otherwise>
-
-                                                                    <option value="Zydex Industries">Zydex Industries</option>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                            <c:choose>
-                                                                <c:when test="${company.contains('Zydex Industries Pvt. Ltd.')}">
-
-                                                                    <option value="Zydex Industries Pvt. Ltd." selected="">Zydex Industries Pvt. Ltd.</option>
-                                                                </c:when>
-                                                                <c:otherwise>
-
-                                                                    <option value="Zydex Industries Pvt. Ltd.">Zydex Industries Pvt. Ltd.</option>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </select>
-
+                                                             <!--<div class="col-sm-6">-->
+                                                            <label >Company:</label>
+                                                        <form:input path="company" class=" form-control" cssStyle="pointer-events: none;"></form:input>
                                                         <form:errors path="company" cssClass="errorDiv"></form:errors>
-                                                        </div>
+                                                        <!--</div>-->
+                                                           
                                                     </div>
+                                                        </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
@@ -918,7 +897,8 @@
         </div>-->
 
 
-                            <c:if test="${!(employeeMaster.employeeName eq  'Admin')}">
+                            <%--<c:if test="${!(employeeMaster.employeeName eq  'Admin')}">--%>
+                             <c:if test="${sessionScope.userRight.itAdmin}">
                                 <div class="form-group">
                                     <div class=" col-sm-12" style="text-align: center;">
                                         <button type="submit" class="btn btn-primary" data-original-title="" title="" style="width: 100px;">SUBMIT</button>

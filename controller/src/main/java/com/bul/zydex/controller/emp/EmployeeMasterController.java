@@ -4010,6 +4010,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         locationList(request);
         shiftRotaionList(request);
         setZydexLocationList(request);
+        companyList(request);
 //        shiftList(request);
         hoursBasisList(request);
         //getLastYearPerformance Ratings Of Employee For ReadOnly.s

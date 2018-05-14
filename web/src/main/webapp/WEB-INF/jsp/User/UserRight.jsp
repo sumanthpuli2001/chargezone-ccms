@@ -316,6 +316,202 @@
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div><!-- /.tab-content -->
+
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class=" col-sm-6">
+                                                        <label>Report Rights:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="employeeMasterReport"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label style="font-weight: normal">employee Master Report</label>
+
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="employeeAttendanceReport"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">employee Attendance Report</label>
+
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="monthlyAttendanceReport"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">monthly Attendance Report</label>
+
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="dailyPresentReport"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">daily Present Report</label>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="searchEmployeeLeaveDetail"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label style="font-weight: normal">Search Employee Leave Detail</label>
+
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="searchEmployeeLeaveBalance"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Employee Leave Balance</label>
+
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="searchTravelReques"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">search Travel Request</label>
+
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="searchExpenseRequest"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Search Expense Request</label>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="formSixteen"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label style="font-weight: normal">Form Sixteen</label>
+
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="pf"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">PF</label>
+
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="pt"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">PT</label>
+
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="salarySlip"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Salary Slip</label>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="policy"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label style="font-weight: normal">Policy</label>
+
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="companyMonthlyReport"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Company Monthly Report</label>
+
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="ptStatement"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">PT Statement</label>
+
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="bankStatement"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Bank Statement</label>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="eSICDeductionStatement"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label style="font-weight: normal">ESIC Deduction Statement</label>
+
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="overTimeReport"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Over Time Report</label>
+
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="pfChallen"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">PF Challen</label>
+
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="loan"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Loan</label>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="attendance"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label style="font-weight: normal">Attendance</label>
+
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="employeeSalaryYearly"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">Employee Salary Yearly</label>
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="pMPReport"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label style="font-weight: normal">PMP Report</label>
+
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="appraisalReport360"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label  style="font-weight: normal">360 Appraisal Report</label>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                    <form:checkbox path="govtFormatPF"></form:checkbox>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <label style="font-weight: normal">Govt. Format PF</label>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     <br/>
                                     <button type="submit" class="btn btn-primary" id="saveSubmit1" >Submit</button>
                                 </div><!-- nav-tabs-custom -->

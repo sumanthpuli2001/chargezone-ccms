@@ -6,7 +6,6 @@
 package com.bul.zydex.service.Training;
 
 import com.bul.zydex.dao.Training.TrainingAssessmentDAO;
-import com.bul.zydex.model.TrainingAssessment;
 import com.bul.zydex.service.GenericsServiceImpl;
 import java.util.List;
 

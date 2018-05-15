@@ -88,15 +88,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Searching Criteria:</label>
-                                                        <select name="vallist" name="vallist" class="form-control" onchange="selectDropsDown11(this.value);">
-                                                            <option value="emp">Employee wise Search</option>
-<!--                                                        <option value="other">Other</option>-->
-                                                        </select>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
 

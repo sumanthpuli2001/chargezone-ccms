@@ -151,12 +151,8 @@
         
         function redirectToDownloadFile()
         {
-            alert("ok");
             var month = $('#month').val();
-            alert("month------"+month);
             var year = $('#year11').val();
-            alert("ok----"+year);
-            
             window.location = 'employeeSalaryProcess.htm?act=downloadAttendanceGeneratedFile&month='+month+'&year11='+year;
         }
     </script>

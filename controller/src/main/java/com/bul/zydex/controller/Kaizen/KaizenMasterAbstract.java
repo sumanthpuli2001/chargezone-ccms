@@ -7,11 +7,13 @@ package com.bul.zydex.controller.Kaizen;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.ApprovalUser;
+import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.KaizenApproval;
 import com.bul.zydex.model.KaizenMaster;
 import com.bul.zydex.service.Approval.ApprovalUserService;
 import com.bul.zydex.service.Kaizen.KaizenApprovalService;
 import com.bul.zydex.service.Kaizen.KaizenMasterService;
+import com.bul.zydex.service.emp.DesignationMasterService;
 
 /**
  *
@@ -22,7 +24,7 @@ public class KaizenMasterAbstract extends CustomAbstract {
     protected KaizenMasterService<KaizenMaster> kaizenMasterService;
     protected ApprovalUserService<ApprovalUser> approvalUserService;
     protected KaizenApprovalService<KaizenApproval> kaizenApprovalService;
-    
+    protected DesignationMasterService<DesignationMaster> designationMasterService;
 
     public KaizenMasterService<KaizenMaster> getKaizenMasterService() {
         return kaizenMasterService;
@@ -48,5 +50,12 @@ public class KaizenMasterAbstract extends CustomAbstract {
         this.kaizenApprovalService = kaizenApprovalService;
     }
 
-    
+    public void setDesignationMasterService(DesignationMasterService<DesignationMaster> designationMasterService) {
+        this.designationMasterService = designationMasterService;
+    }
+
+    public DesignationMasterService<DesignationMaster> getDesignationMasterService() {
+        return designationMasterService;
+    }
+
 }

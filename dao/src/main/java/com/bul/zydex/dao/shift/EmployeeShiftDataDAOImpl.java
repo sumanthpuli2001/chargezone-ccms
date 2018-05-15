@@ -1130,4 +1130,14 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
         return false;
     }
 
+    @Override
+    public List<?> getShiftDayOff(EmployeeShiftData employeeShiftData) {
+        String query = "";
+            query += " SELECT b.weekof "
+                   + " FROM EmployeeShiftData a "
+                   + " LEFT JOIN a.shiftMaster b "
+                   + " WHERE a.employeeMaster.id = '" + employeeShiftData.getEmployeeMaster().getId();
+            return getHibernateTemplate().find(query);
+    }
+
 }

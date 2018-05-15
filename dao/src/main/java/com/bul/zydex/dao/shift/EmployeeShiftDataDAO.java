@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.shift;
 
 import com.bul.zydex.dao.GenericsDAO;
+import com.bul.zydex.model.EmployeeShiftData;
 import java.util.List;
 
 /**
@@ -45,5 +46,7 @@ public interface EmployeeShiftDataDAO<T> extends GenericsDAO<T> {
     public List<?> checkEmpDateWiseInOutData(String date);
     
     public Boolean checkDailyEntry(T object);
+    
+    public List<?> getShiftDayOff(EmployeeShiftData employeeShiftData);
 
 }

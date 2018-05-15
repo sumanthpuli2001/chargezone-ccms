@@ -7,7 +7,6 @@ package com.bul.zydex.dao.policy;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.PolicyMaster;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import java.util.List;
 
 /**

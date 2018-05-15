@@ -5633,7 +5633,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             employeeInfoList.add("" + o[3]);
             employeeInfoList.add("" + o[4]);
             recordToAdd.add(employeeInfoList);
-            recordToAdd3.add(employeeInfoList); 
+            recordToAdd3.add(employeeInfoList);
         }
         for (int j = 0; j < recordToAdd.size(); j++) {
 
@@ -14249,26 +14249,15 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         EmployeeMaster employeeMaster = new EmployeeMaster();
 
         String empId = request.getParameter("employeeMasterId");
-//        String zydexLocationId = request.getParameter("zydexLocationId");
-//        String levelId = request.getParameter("levelId");
-//        String departmentId = request.getParameter("departmentId");
         String startDate = request.getParameter("inDateTime");
         String endDate = request.getParameter("outDateTime");
-//        String searchval = request.getParameter("vallist");
 
         EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
         bind(request, employeeAdvanceSearch);
-//        if (null != searchval && request.getParameter("vallist").toString().equals("other")) {
-//            employeeAdvanceSearch.setId(null);
-//            employeeAdvanceSearch.setZydexLocationId(zydexLocationId);
-//            employeeAdvanceSearch.setLevelID(levelId);
-//            employeeAdvanceSearch.setDepartmentId(departmentId);
-//        } else {
         employeeAdvanceSearch.setId(empId);
         employeeAdvanceSearch.setZydexLocationId(null);
         employeeAdvanceSearch.setLevelID(null);
         employeeAdvanceSearch.setDepartmentId(null);
-//        }
 
         int rownum = 0;
         HSSFWorkbook firstFWorkbook = new HSSFWorkbook();
@@ -14308,7 +14297,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         }
 
         try {
-            
+
             List allEmpId = new ArrayList();
             if (null == empId || "" == empId || empId.isEmpty()) {
                 allEmpId.addAll(employeeMasterService.getAllEmployeeId());
@@ -14322,22 +14311,22 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 Row row = firstSheet.createRow(rownum);
                 int id = 0;
                 if (null != startDate && !startDate.equals("") && null != endDate && !endDate.equals("")) {
-                    
+
                     Date sDate = sdf.parse(startDate);
                     employeeShiftData.setInDateTime(new SimpleDateFormat("yyyy-MM-dd").format(sDate));
 
                     Date eDate = sdf.parse(endDate);
                     employeeShiftData.setOutDateTime(new SimpleDateFormat("yyyy-MM-dd").format(eDate));
- 
+
                     if (j == 0) {
                         List<String> headerRow1 = new ArrayList();
-                        
-                            headerRow1.add("Employee ID");       
-                            headerRow1.add("Employee Name");
-                       
+
+                        headerRow1.add("Employee ID");
+                        headerRow1.add("Employee Name");
+
                         List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
                         map.put(id, list);
-                        
+
                         for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
                             Iterator itr1 = entry.getValue().iterator();
                             while (itr1.hasNext()) {
@@ -14348,7 +14337,6 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         headerRow1.add("Total Days");
                         headerRow1.add("PR");
                         headerRow1.add("AB");
-                        headerRow1.add("Half AB");
                         headerRow1.add("AR/P");
                         headerRow1.add("WO");
                         headerRow1.add("Holiday");
@@ -14376,14 +14364,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
                         map.put(id, list);
 
+//                        List<String> listDailyPunch = (List<String>) employeeDatetimeDataService.readDailyPunchWithStartEndDate(id, startDate, endDate);
+//                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+//                        List<?> localDates = listDailyPunch.stream().map(date -> LocalDate.parse(date, formatter)).collect(Collectors.toList());
+//                        localDates.get(0);
+// java 8 concept stream() with  map
                         List<String> firstHalfList = new ArrayList<String>();
                         EmployeeMaster empMaster = employeeMasterService.readById(id);
                         firstHalfList.add("" + empMaster.getEmployeeId());
                         firstHalfList.add("" + empMaster.getEmployeeName());
-                        
+
                         double prcounter = 0;
                         double abcounter = 0;
-                        double halfabcounter = 0;
                         double wo = 0;
                         double shl = 0;
                         double cl = 0;
@@ -14395,16 +14387,14 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         double ptrl = 0;
                         double col = 0;
                         double lwp = 0;
-                        
-                         for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
+
+                        for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
                             Iterator itr5 = entry.getValue().iterator();
-                            
+
                             while (itr5.hasNext()) {
                                 Object[] next2 = (Object[]) itr5.next();
 
                                 String firstHalf = "" + next2[1];
-                                int firstHalfVal = 0;
-                                int counter = 0;
 
                                 Date date = sdf.parse("" + next2[0]);
                                 Calendar c = Calendar.getInstance();
@@ -14413,6 +14403,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 SimpleDateFormat format = new SimpleDateFormat("EEEE");
                                 String dayName = format.format(date);
 
+                                // List<EmployeeShiftData> shiftDayOffList = (List<EmployeeShiftData>) employeeShiftDataService.getShiftDayOff(employeeShiftData);
                                 int n = 1;
 
                                 SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
@@ -14453,20 +14444,19 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                     long diffMinutes = diff / (60 * 1000);
                                     long diff1 = 0;
                                     if (userTimeInStr[0].contains("0.5")) {
-                                        firstHalfList.add("Half AB");
-                                        halfabcounter = halfabcounter + 0.5;
-                                        prcounter = prcounter + 0.5;
-                                    }
-                                    else if(userTimeInStr[0].contains("0")){
+                                        firstHalfList.add("PR");
+//                                      halfabcounter = halfabcounter + 0.5;
+//                                      prcounter = prcounter + 0.5;
+                                        prcounter = prcounter + 1;
+                                    } else if (userTimeInStr[0].contains("0")) {
                                         firstHalfList.add("AB");
                                         abcounter = abcounter + 1;
-                                    }
-                                    else if (firstHalf.contains("AR") && userTimeInStr[0].contains("0.5")) {
+                                    } else if (firstHalf.contains("AR") && userTimeInStr[0].contains("0.5")) {
                                         firstHalfList.add("Half AR/P");
                                         ar = ar + 0.5;
-                                          prcounter = prcounter + 0.5;
+                                        prcounter = prcounter + 0.5;
                                     }
-                                    
+
                                 } else if (firstHalf.equals("WO")) {
                                     firstHalfList.add("WO");
                                     wo = wo + 1;
@@ -14476,8 +14466,9 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 } else if (firstHalf.equals("AB")) {
                                     firstHalfList.add("AB");
                                     abcounter = abcounter + 1;
-                                }
-                                else {
+                                } else if (firstHalf.equals("Casual Leave") || firstHalf.equals("Privilege Leave") || firstHalf.equals("Sick Leave")
+                                        || firstHalf.equals("Maternity Leave") || firstHalf.equals("Paternity Leave") || firstHalf.equals("C Off Leave")
+                                        || firstHalf.equals("Leave Without Pay")) {
                                     if (firstHalf.equals("Casual Leave")) {
                                         cl = cl + 1;
                                     }
@@ -14500,28 +14491,37 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                         lwp = lwp + 1;
                                     }
                                     firstHalfList.add(" " + firstHalf);
+                                } else {
+//                                    firstHalfList.add(" " + firstHalf);
+//                                    if (shiftDayOffList.get(0).equals(dayName)) {
+//                                        firstHalfList.add("WO");
+//                                        wo = wo + 1;
+//                                    } else {
+//                                    firstHalfList.add(""+firstHalf);
+                                    firstHalfList.add("Holiday");
+                                    holiday = holiday + 1;
+                                    //}
                                 }
                                 n++;
                             }
 
                         }
-                        
-                        firstHalfList.add(""+ list.size());
-                        firstHalfList.add(""+ prcounter);
-                        firstHalfList.add(""+ abcounter);
-                        firstHalfList.add(""+ halfabcounter);
-                        firstHalfList.add(""+ ar);
-                        firstHalfList.add(""+ wo);
-                        firstHalfList.add(""+ holiday);
-                        firstHalfList.add(""+ shl);
-                        firstHalfList.add(""+ cl);
-                        firstHalfList.add(""+ pl);
-                        firstHalfList.add(""+ sl);
-                        firstHalfList.add(""+ ml);
-                        firstHalfList.add(""+ ptrl);
-                        firstHalfList.add(""+ col);
-                        firstHalfList.add(""+ lwp);
-                        
+
+                        firstHalfList.add("" + list.size());
+                        firstHalfList.add("" + prcounter);
+                        firstHalfList.add("" + abcounter);
+                        firstHalfList.add("" + ar);
+                        firstHalfList.add("" + wo);
+                        firstHalfList.add("" + holiday);
+                        firstHalfList.add("" + shl);
+                        firstHalfList.add("" + cl);
+                        firstHalfList.add("" + pl);
+                        firstHalfList.add("" + sl);
+                        firstHalfList.add("" + ml);
+                        firstHalfList.add("" + ptrl);
+                        firstHalfList.add("" + col);
+                        firstHalfList.add("" + lwp);
+
                         Row row1 = firstSheet.createRow(rownum);
                         for (int k1 = 0; k1 < firstHalfList.size(); k1++) {
                             Cell cell = row1.createCell(k1);
@@ -14530,8 +14530,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
                             cell.setCellStyle(styleBold);
                         }
-                        
-                        
+
                     }
 
                 }
@@ -14541,8 +14540,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } 
-        finally {
+        } finally {
         }
 
         String appPath = request.getServletContext().getRealPath("");
@@ -14559,7 +14557,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    
+
         String filePath = File.separator + "StorageYard" + File.separator
                 + "Other" + File.separator + "UserDoc" + File.separator
                 + "EmployeeShiftData" + File.separator + "EmployeeAdvanceSearch.xls";

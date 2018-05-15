@@ -552,6 +552,7 @@
     <bean id="probationPeriodController1" class="com.bul.zydex.controller.probation.ProbationPeriodController" parent="controllerConfig" >
         <property name="probationPeriodService" ref="probationPeriodService1" />
         <property name="probationPeriodValidator" ref="probationPeriodValidator1" />
+        <property name="leaveTypeMasterService" ref="leaveTypeMasterService1" />
     </bean>
     <bean id="webService1" class="com.bul.zydex.webservice.WebService" parent="controllerConfig" >
         <property name="employeeLeaveBalanceService" ref="employeeLeaveBalanceService1" />
@@ -901,6 +902,7 @@
         <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
         <property name="payrollLoanRemainingAmountService" ref="payrollLoanRemainingAmountService1" />
         <property name="payrollLoanTypeService" ref="payrollLoanTypeService1" />
+        <property name="userRightMasterService" ref="userRightMasterService1" />
     </bean>
     <bean id="certificateTemplateController1" class="com.bul.zydex.controller.Payroll.CertificateTemplateController" parent="controllerConfig" >
         <property name="certificateTemplateService" ref="certificateTemplateService1" />
@@ -1196,6 +1198,7 @@
         <property name="jobtypeMasterService" ref="jobtypeMasterService1"/>
         <property name="mprMasterService" ref="mprMasterService1"/>
         <property name="recruitmentService" ref="recruitmentService1"/>
+        <property name="mprApprovalHistoryService" ref="mprApprovalHistoryService1"/>
     </bean>
     <bean id="trainingAssessmentController1" class="com.bul.zydex.controller.Training.TrainingAssessmentController" parent="controllerConfig" >
         <property name="trainingAssessmentService" ref="trainingAssessmentService1"></property>

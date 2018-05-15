@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.Kaizen;
 
 import com.bul.zydex.model.ApprovalUser;
+import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.KaizenApproval;
 import com.bul.zydex.model.KaizenMaster;
@@ -386,7 +387,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         String btnType = request.getParameter("btnType");
         String comment = request.getParameter("comment");
         KaizenMaster kaizenMaster = kaizenMasterService.readById(Integer.parseInt(id));
-        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(5);
+        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(3);
 
 //        KaizenApproval kaizenApproval = kaizenApprovalService.readByIdAndEmp(kaizenMaster.getId(), employeeMaster.getId());
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -412,6 +413,19 @@ public class KaizenMasterController extends KaizenMasterAbstract {
             }
             request.setAttribute("successMessage",
                     "Information : The request is Approved Successfully.");
+            
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                // id ( Not created id 138) is for Approved User....
+                emailTemplate = emailTemplateService.readById(144);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
         }
         if (btnType.equals("Recycle")) {
 
@@ -429,6 +443,19 @@ public class KaizenMasterController extends KaizenMasterAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The request is Recycled Successfully.");
+            
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                // id ( Not created id 138) is for Approved User....
+                emailTemplate = emailTemplateService.readById(145);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
 
         }
         if (btnType.equals("Reject")) {
@@ -447,6 +474,19 @@ public class KaizenMasterController extends KaizenMasterAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The request is Reject Successfully.");
+            
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                // id ( Not created id 138) is for Approved User....
+                emailTemplate = emailTemplateService.readById(146);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
         }
 
         mv = kaizenList(request, response);
@@ -481,6 +521,19 @@ public class KaizenMasterController extends KaizenMasterAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The request is Approved Successfully.");
+            
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                // id ( Not created id 138) is for Approved User....
+                emailTemplate = emailTemplateService.readById(144);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
         }
 
         if (btnType.equals("Recycle")) {
@@ -499,6 +552,18 @@ public class KaizenMasterController extends KaizenMasterAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The request is Recycled Successfully.");
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                // id ( Not created id 138) is for Approved User....
+                emailTemplate = emailTemplateService.readById(145);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
         }
 
         if (btnType.equals("Reject")) {
@@ -510,6 +575,19 @@ public class KaizenMasterController extends KaizenMasterAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The request is Reject Successfully.");
+            
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                // id ( Not created id 138) is for Approved User....
+                emailTemplate = emailTemplateService.readById(146);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
         }
 
         mv = kaizenApproverList(request, response);

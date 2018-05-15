@@ -969,25 +969,25 @@
                                                                                                         </div><!--/.box -->
                                                                                                     </div>
 
-                                                                                                    <div class="col-md-4">
-                                                                                                        <!-- Nature of Business Pane -->
+<!--                                                                                                    <div class="col-md-4">
+                                                                                                         Nature of Business Pane 
                                                                                                         <div class="box box-primary">
                                                                                                             <div class="box-header">
                                                                                                                 <h3 class="box-title">Travel expense report</h3>
                                                                                                                 <div class="box-tools pull-right">
                                                                                                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                                                                                                 </div>
-                                                                                                            </div><!-- /.box-header -->
+                                                                                                            </div> /.box-header 
                                                                                                             <div class="box-body" id="piechart11Id">
                                                                                                                 <div id="piechart11" style="width: 300px; height: 300px;"></div>
 
-                                                                                                                <!--<div id="dual_x_div" style="width: 900px; height: 500px;"></div>-->
-                                                                                                            </div><!-- /.box-body -->
-                                                                                                            <!--                                                    <div class="box-footer text-center">
+                                                                                                                <div id="dual_x_div" style="width: 900px; height: 500px;"></div>
+                                                                                                            </div> /.box-body 
+                                                                                                                                                                <div class="box-footer text-center">
                                                                                                                                                                     <a href="javascript::" class="uppercase">View All Business Areas</a>
-                                                                                                                                                                </div> /.box-footer -->
-                                                                                                        </div><!-- /.box -->
-                                                                                                    </div><!-- /.col -->
+                                                                                                                                                                </div> /.box-footer 
+                                                                                                        </div> /.box 
+                                                                                                    </div> /.col -->
                                                                                                     <div class="col-md-4">
                                                                                                         <!-- Nature of Business Pane -->
                                                                                                         <div class="box box-info">

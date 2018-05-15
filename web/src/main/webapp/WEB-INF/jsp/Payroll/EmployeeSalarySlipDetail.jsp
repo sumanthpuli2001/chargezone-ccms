@@ -121,7 +121,7 @@
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-6">${list[4]}
                                                     <label>Location:<span style="color: red;font-size: 12px;"></span></label>
                                                     <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control ">
                                                         <option value="" label="-- Select --" ></option>
@@ -214,6 +214,7 @@
             <c:if test="${search ne 'none'}">
                 <input type="hidden" name="month" value="${month}">
                 <input type="hidden" name="year" value="${year}">
+                <input type="hidden" name="year" value="${list[4]}">
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12">

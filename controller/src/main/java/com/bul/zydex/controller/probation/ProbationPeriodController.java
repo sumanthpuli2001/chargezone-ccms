@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.probation;
 
 import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.ProbationPeriod;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;

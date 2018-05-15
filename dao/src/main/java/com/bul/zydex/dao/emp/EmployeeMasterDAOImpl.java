@@ -493,15 +493,30 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
     @Override
     public List<?> readEmployeeDataForexportToExcel(final String searchEmployeeString) {
+        //                             0   1                   2               3               4
         String hqlString = " SELECT a.id, a.employeeId, a.employeeName, c.departmentName, b.designationName,"
-                + " lm.level, a.company, zlm.zydexLocation, locm.location,"
+                   //   5           6           7                   8
+                + " lm.level, a.company, zlm.zydexLocation, locm.location, "
+                                    //          9        
                 + " (select CASE WHEN apm.behaviorsFinalscore = NULL then '' else apm.behaviorsFinalscore End from EmployeeMaster em"
                 + " left join em.appraisalPerformanceMasters apm"
+                //          
                 + " where apm.behaviorsYear = YEAR(CURRENT_DATE())-1 AND em.id= "
                 + " a.id),"
+                //          10           11
                 + " a.emailAddress, a.contactNo1,"
-                + " CASE WHEN a.gender = 1 then 'Female' else 'Male' End,"
-                + " a.maritalStatus, a.presentAddress, a.permanentAddress, d.id"
+                    //12
+                + " CASE WHEN a.gender = 1 then 'Female' else 'Male' End, "
+                    //      13              14              15              16
+                + " a.maritalStatus, a.presentAddress, a.permanentAddress, d.id, "
+                //         17           18          19          20          21          22              23          24
+                + " etm.typeOfEmployee,est.subType,a.role, a.contactNo2,a.fatherName,a.motherName,a.dateOfBirth,a.spouseName, "
+                //          25                      26              27          28          29                30            31  
+                + " a.emergencyContactPerson,a.emergencyContactNo,a.panCard,a.passportNo,a.employeeType,a.shiftType,a.officeEmailId, "
+                //      32      33              34                  35              36          37          38          39
+                + " a.child1,a.child2,a.highestEducationDetails,a.adharCard,a.bloodGroups,a.bankName,a.bankAccountNo,a.bankIfscCode, "
+                //      40              41            42     43         44           45         46        
+                + " a.cityOfEmployee,a.paymentType,a.pfNo,a.uanNo,a.basicSalary ,a.esicNo,a.pfAmount"
                 + " FROM EmployeeMaster a "
                 + " LEFT JOIN a.designationMaster b "
                 + " LEFT JOIN a.departmentMaster c "
@@ -509,7 +524,9 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " LEFT JOIN a.levelMaster lm "
                 + " LEFT JOIN a.zydexLocationMaster zlm "
                 + " LEFT JOIN a.locationMaster locm "
-                + " where"
+                + " LEFT JOIN a.employeeTypeMaster etm "
+                + " LEFT JOIN a.employeeSubType est "
+                + " where "
                 + " (a.employeeName like '%" + searchEmployeeString + "%'"
                 + " OR"
                 + " b.designationName like '%" + searchEmployeeString + "%'"
@@ -517,7 +534,7 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " c.departmentName like '%" + searchEmployeeString + "%'"
                 + " OR"
                 + " d.userName like '%" + searchEmployeeString + "%'"
-                + ")"
+                + " )"
                 + " and (a.dateOfLeaving is null or a.dateOfLeaving = '') "
                 + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()";
 

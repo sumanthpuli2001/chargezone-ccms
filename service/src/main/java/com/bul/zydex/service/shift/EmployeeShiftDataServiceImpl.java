@@ -7,6 +7,7 @@ package com.bul.zydex.service.shift;
 
 import com.bul.zydex.dao.shift.EmployeeShiftDataDAO;
 import com.bul.zydex.dao.shift.TemporaryShiftAssignDAO;
+import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.service.GenericsServiceImpl;
 import java.util.List;
 
@@ -105,5 +106,10 @@ public class EmployeeShiftDataServiceImpl<T> extends GenericsServiceImpl<T> impl
     @Override
     public Boolean checkDailyEntry(T object) {
        return employeeShiftDataDAO.checkDailyEntry(object);
+    }
+
+    @Override
+    public List<?> getShiftDayOff(EmployeeShiftData employeeShiftData) {
+          return employeeShiftDataDAO.getShiftDayOff(employeeShiftData);
     }
 }

@@ -1,5 +1,6 @@
 package com.bul.zydex.service.shift;
 
+import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.service.GenericsService;
 import java.util.List;
 
@@ -36,4 +37,6 @@ public interface EmployeeShiftDataService<T> extends GenericsService<T> {
     public List<?> checkEmpDateWiseInOutData(String date);
 
     public Boolean checkDailyEntry(T object);
+
+    public List<?> getShiftDayOff(EmployeeShiftData employeeShiftData);
 }

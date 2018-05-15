@@ -902,6 +902,7 @@
         <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
         <property name="payrollLoanRemainingAmountService" ref="payrollLoanRemainingAmountService1" />
         <property name="payrollLoanTypeService" ref="payrollLoanTypeService1" />
+        <property name="userRightMasterService" ref="userRightMasterService1" />
     </bean>
     <bean id="certificateTemplateController1" class="com.bul.zydex.controller.Payroll.CertificateTemplateController" parent="controllerConfig" >
         <property name="certificateTemplateService" ref="certificateTemplateService1" />

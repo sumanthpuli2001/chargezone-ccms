@@ -26,6 +26,7 @@ import com.bul.zydex.model.PayrollPtCheck;
 import com.bul.zydex.model.PayrollRecurringAdditionalAmount;
 import com.bul.zydex.model.PayrollRecurringDeduction;
 import com.bul.zydex.model.PayrollSalaryType;
+import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.service.Payroll.AdditionalAmountCheckService;
 import com.bul.zydex.service.Payroll.EmployeeAdditionalSalaryService;
 import com.bul.zydex.service.Payroll.EmployeeDeductionAmountService;
@@ -44,6 +45,7 @@ import com.bul.zydex.service.Payroll.PayrollPtCheckService;
 import com.bul.zydex.service.Payroll.PayrollRecurringAdditionalAmountService;
 import com.bul.zydex.service.Payroll.PayrollRecurringDeductionService;
 import com.bul.zydex.service.Payroll.PayrollSalaryTypeService;
+import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.emp.EmployeeTypeService;
 import java.util.HashMap;
@@ -77,6 +79,7 @@ public class EmployeeSalarySlipAbstract extends CustomAbstract{
     protected PayrollLoanDetailService<PayrollLoanDetail> payrollLoanDetailService;
     protected PayrollLoanRemainingAmountService<PayrollLoanRemainingAmount> payrollLoanRemainingAmountService;
     protected PayrollLoanTypeService<PayrollLoanType> payrollLoanTypeService;
+    protected UserRightMasterService<UserRightMaster> userRightMasterService;
 
     public EmployeeSalaryProcessService<EmployeeSalaryProcess> getEmployeeSalaryProcessService() {
         return employeeSalaryProcessService;
@@ -236,6 +239,14 @@ public class EmployeeSalarySlipAbstract extends CustomAbstract{
 
     public void setPayrollLoanTypeService(PayrollLoanTypeService<PayrollLoanType> payrollLoanTypeService) {
         this.payrollLoanTypeService = payrollLoanTypeService;
+    }
+
+    public UserRightMasterService<UserRightMaster> getUserRightMasterService() {
+        return userRightMasterService;
+    }
+
+    public void setUserRightMasterService(UserRightMasterService<UserRightMaster> userRightMasterService) {
+        this.userRightMasterService = userRightMasterService;
     }
     
     

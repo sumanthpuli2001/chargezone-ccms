@@ -42,4 +42,5 @@ public interface EmployeeDatetimeDataDAO<T> extends GenericsDAO<T> {
 
     public List<?> readOddPunchedEmployeeData(String date);
 
+
 }

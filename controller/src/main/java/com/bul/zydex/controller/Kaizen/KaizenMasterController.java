@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.Kaizen;
 
 import com.bul.zydex.model.ApprovalUser;
+import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.KaizenApproval;
@@ -47,6 +48,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         mv.setViewName("Kaizen/kaizenMasterList");
         return mv;
     }
+
     public ModelAndView pastKaizenMasterList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
@@ -197,10 +199,10 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         kaizenMaster.setTotalLevel(0);
         kaizenMaster.setCurrentLevel(0);
         kaizenMasterService.create(kaizenMaster);
-        
-          request.setAttribute("successMessage",
+
+        request.setAttribute("successMessage",
                 "Information : The Information is saved Successfully.");
-          
+
         mv.setViewName("forward:homeController.htm?act=openHomePage");
         return mv;
     }
@@ -324,7 +326,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
 
         request.setAttribute("successMessage",
                 "Information : The Information is Updated Successfully.");
-        mv = kaizenMasterList(request,response);
+        mv = kaizenMasterList(request, response);
 //        mv.setViewName("forward:homeController.htm?act=kaizenMasterList");
 
         return mv;
@@ -413,16 +415,21 @@ public class KaizenMasterController extends KaizenMasterAbstract {
             }
             request.setAttribute("successMessage",
                     "Information : The request is Approved Successfully.");
-            
+
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
-                // id ( Not created id 138) is for Approved User....
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+// id ( Not created id 138) is for Approved User....
                 emailTemplate = emailTemplateService.readById(144);
                 String To = employeeMaster.getEmailAddress();
                 String from = "";
                 String Subject = emailTemplate.getSubject();
                 String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
             }
@@ -443,16 +450,21 @@ public class KaizenMasterController extends KaizenMasterAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The request is Recycled Successfully.");
-            
+
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 // id ( Not created id 138) is for Approved User....
                 emailTemplate = emailTemplateService.readById(145);
                 String To = employeeMaster.getEmailAddress();
                 String from = "";
                 String Subject = emailTemplate.getSubject();
                 String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
             }
@@ -474,16 +486,21 @@ public class KaizenMasterController extends KaizenMasterAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The request is Reject Successfully.");
-            
+
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 // id ( Not created id 138) is for Approved User....
                 emailTemplate = emailTemplateService.readById(146);
                 String To = employeeMaster.getEmailAddress();
                 String from = "";
                 String Subject = emailTemplate.getSubject();
                 String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
             }
@@ -521,16 +538,21 @@ public class KaizenMasterController extends KaizenMasterAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The request is Approved Successfully.");
-            
+
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 // id ( Not created id 138) is for Approved User....
                 emailTemplate = emailTemplateService.readById(144);
                 String To = employeeMaster.getEmailAddress();
                 String from = "";
                 String Subject = emailTemplate.getSubject();
                 String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
             }
@@ -554,13 +576,18 @@ public class KaizenMasterController extends KaizenMasterAbstract {
                     "Information : The request is Recycled Successfully.");
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 // id ( Not created id 138) is for Approved User....
                 emailTemplate = emailTemplateService.readById(145);
                 String To = employeeMaster.getEmailAddress();
                 String from = "";
                 String Subject = emailTemplate.getSubject();
                 String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
             }
@@ -575,16 +602,21 @@ public class KaizenMasterController extends KaizenMasterAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The request is Reject Successfully.");
-            
+
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 // id ( Not created id 138) is for Approved User....
                 emailTemplate = emailTemplateService.readById(146);
                 String To = employeeMaster.getEmailAddress();
                 String from = "";
                 String Subject = emailTemplate.getSubject();
                 String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
             }

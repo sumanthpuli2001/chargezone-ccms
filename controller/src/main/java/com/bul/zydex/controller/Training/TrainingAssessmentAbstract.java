@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.Training;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.QuestionAns;
 import com.bul.zydex.model.QuestionDetails;
 import com.bul.zydex.model.QuestionLibrary;
@@ -28,6 +29,7 @@ import com.bul.zydex.service.Training.TrainingQuestionAnswerSubmitService;
 import com.bul.zydex.service.Training.TrainingResultStatusService;
 import com.bul.zydex.service.Training.TrainingSubTypeService;
 import com.bul.zydex.service.Training.TrainingTypeService;
+import com.bul.zydex.service.emp.DesignationMasterService;
 import com.bul.zydex.service.questionlibrary.QuestionAnsService;
 import com.bul.zydex.service.questionlibrary.QuestionDetailsService;
 import com.bul.zydex.service.questionlibrary.QuestionLibraryService;
@@ -52,6 +54,7 @@ public class TrainingAssessmentAbstract extends CustomAbstract {
     protected TrainingTypeService<TrainingType> trainingTypeService;
     protected TrainingSubTypeService<TrainingSubType> trainingSubTypeService;
     protected TrainerService<Trainer> trainerService;
+    protected DesignationMasterService<DesignationMaster> designationMasterService;
 
     public TrainingAssessmentService<TrainingAssessment> getTrainingAssessmentService() {
         return trainingAssessmentService;
@@ -155,6 +158,13 @@ public class TrainingAssessmentAbstract extends CustomAbstract {
 
     public void setTrainerService(TrainerService<Trainer> trainerService) {
         this.trainerService = trainerService;
+    }
+    public void setDesignationMasterService(DesignationMasterService<DesignationMaster> designationMasterService) {
+        this.designationMasterService = designationMasterService;
+    }
+
+    public DesignationMasterService<DesignationMaster> getDesignationMasterService() {
+        return designationMasterService;
     }
 
     

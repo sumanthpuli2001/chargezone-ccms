@@ -23,7 +23,7 @@ public class SendMail {
 //		SimpleMailMessage message = new SimpleMailMessage();
         mimeMessage.setContent(msg, "text/html");
 
-        if(to.contains("spcls.co.in")){
+//        if(to.contains("spcls.co.in")){
             
 //        helper.setFrom(from);
         helper.setFrom("hrms@spcls.co.in");
@@ -38,9 +38,9 @@ public class SendMail {
             System.out.println("Mail Exception :-" + e);
 
         }
-        }else{
+//        }else{
             
-        }
+//        }
     }
 
     public void setMailSender(JavaMailSender mailSender) {

@@ -1160,6 +1160,7 @@
         <property name="trainingAttendanceService" ref="trainingAttendanceService1"></property>
         <property name="employeeMasterService" ref="employeeMasterService1"></property>
         <property name="trainingFeedbackService" ref="trainingFeedbackService1"></property>
+        <property name="designationMasterService" ref="designationMasterService1"></property>
     </bean>
     <bean id="classifiedBoxController1" class="com.bul.zydex.controller.ClassifiedBox.ClassifiedBoxController" parent="controllerConfig" >
         <property name="classifiedBoxService" ref="classifiedBoxService1" />
@@ -1186,6 +1187,7 @@
         <property name="vacancyMasterService" ref="vacancyMasterService1"/>
         <property name="certificateTemplateService" ref="certificateTemplateService1" />
         <property name="mprApprovalHistoryService" ref="mprApprovalHistoryService1" />
+        <property name="designationMasterService" ref="designationMasterService1"></property>
     </bean>
     <bean id="candidateF2FApprovalController1" class="com.bul.zydex.controller.CandidateF2F.CandidateF2FApprovalController" parent="controllerConfig" >
         <property name="candidateF2FApprovalService" ref="candidateF2FApprovalService1"></property>
@@ -1213,6 +1215,7 @@
         <property name="trainingTypeService" ref="trainingTypeService1"/>
         <property name="trainingSubTypeService" ref="trainingSubTypeService1"/>
         <property name="trainerService" ref="trainerService1"/>
+        <property name="designationMasterService" ref="designationMasterService1"></property>
     </bean>
     <bean id="trainingQuestionAnswerSubmitController1" class="com.bul.zydex.controller.Training.TrainingQuestionAnswerSubmitController" parent="controllerConfig" >
         <property name="trainingQuestionAnswerSubmitService" ref="trainingQuestionAnswerSubmitService1"></property>
@@ -1252,6 +1255,7 @@
         <property name="kaizenMasterService" ref="kaizenMasterService1"></property>
         <property name="kaizenApprovalService" ref="kaizenApprovalService1"></property>
         <property name="approvalUserService" ref="approvalUserService1"></property>
+        <property name="designationMasterService" ref="designationMasterService1"></property>
     </bean>
     <bean id="leaveEmployeeDetailsApprovalHistoryController1" class="com.bul.zydex.controller.leave.LeaveEmployeeDetailsApprovalHistoryController" parent="controllerConfig">
         <property name="leaveEmployeeDetailsApprovalHistoryService" ref="leaveEmployeeDetailsApprovalHistoryService1" />

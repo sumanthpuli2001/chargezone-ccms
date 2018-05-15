@@ -488,35 +488,28 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         String eventdate = request.getParameter("eventdate");
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
         int id = Integer.parseInt(request.getParameter("id"));
         TrainingMaster trainingMaster = (TrainingMaster) trainingMasterService.readById(id);
         trainingMaster.setStatus(1);
         trainingMasterService.update(trainingMaster);
-//        try {
-//            EmailTemplate emailTemplate = new EmailTemplate();
-//            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-//            DesignationMaster designationMaster = new DesignationMaster();
-//            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-//                emailTemplate = emailTemplateService.readById(143);
-//                 List attenlist = new LinkedList();
-//        attenlist = trainingAttendanceService.gettrainerTasks(eventdate,id);
-//            for (Object attenlist1 : attenlist) {
-//                Object[] o = (Object[]) attenlist1;
-//                EmployeeMaster employeeMaster1 = new EmployeeMaster();
-//                employeeMaster1 = employeeMasterService.readById(Integer.parseInt(""+o[0]));
-//                String To = employeeMaster1.getEmailAddress();
-//                String from = employeeMasterModel.getOfficeEmailId();
-//                String Subject = emailTemplate.getSubject();
-//                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-//                String msg = emailTemplate.getBodytext();
-//                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-//                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-//                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-//                sendMail.sendMail(from, To, Subject, msg);
-//            }
-//        } catch (Exception e) {
-//
-//        }
+        try {
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+            DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+            // id ( Not created id 138) is for Returned User....
+            emailTemplate = emailTemplateService.readById(158);
+            String To = employeeMaster.getEmailAddress();
+            String from = "";
+            String Subject = emailTemplate.getSubject();
+            String msg = emailTemplate.getBodytext();
+            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+            sendMail.sendMail(from, To, Subject, msg);
+        } catch (Exception e) {
+        }
         mv = viewProfile1(request, response, "" + id, eventdate);
 //        request.setAttribute("id", id);
 //        request.setAttribute("eventdate", eventdate);
@@ -613,6 +606,7 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         HttpSession session = request.getSession();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.now();
+        EmployeeMaster employeeMaster2 = (EmployeeMaster) session.getAttribute("employeeInfo");
         TrainingAssessment trainingAssessment = new TrainingAssessment();
 //        TrainingAssessment trainingAssessment1 = new TrainingAssessment();
         Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
@@ -656,28 +650,23 @@ public class TrainerLogInController extends TrainerLogInAbstract {
             trainingAssessment.setAssessmentResultStatus(3);  // assessment Submit 
             trainingAssessmentService.create(trainingAssessment);
         }
-//        try {
-//            EmailTemplate emailTemplate = new EmailTemplate();
-//            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-//            DesignationMaster designationMaster = new DesignationMaster();
-//            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-//                emailTemplate = emailTemplateService.readById(143);
-//            for (String string : checkId) {
-//                EmployeeMaster employeeMaster1 = new EmployeeMaster();
-//                employeeMaster1 = employeeMasterService.readById(Integer.parseInt(string));
-//                String To = employeeMaster1.getEmailAddress();
-//                String from = employeeMasterModel.getOfficeEmailId();
-//                String Subject = emailTemplate.getSubject();
-//                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-//                String msg = emailTemplate.getBodytext();
-//                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-//                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-//                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-//                sendMail.sendMail(from, To, Subject, msg);
-//            }
-//        } catch (Exception e) {
-//
-//        }
+        try {
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster2.getReportingManagerLevel1()));
+            DesignationMaster designationMaster = designationMasterService.readById(employeeMaster2.getDesignationMaster().getId());
+            // id ( Not created id 138) is for Returned User....
+            emailTemplate = emailTemplateService.readById(157);
+            String To = employeeMaster2.getEmailAddress();
+            String from = "";
+            String Subject = emailTemplate.getSubject();
+            String msg = emailTemplate.getBodytext();
+            Subject = Subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+            msg = msg.replaceAll("\\{from_user\\}", employeeMaster2.getEmployeeName());
+            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+            sendMail.sendMail(from, To, Subject, msg);
+        } catch (Exception e) {
+        }
         ModelAndView mv = new ModelAndView();
         request.setAttribute(
                 "successMessage",

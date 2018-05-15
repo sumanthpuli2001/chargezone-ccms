@@ -10,6 +10,7 @@ import com.bul.zydex.model.CandidateF2FApproval;
 import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.CertificateTemplate;
+import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.MprApprovalHistory;
@@ -61,21 +62,26 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.getModelMap().put("candidateApplyJob1", candidateApplyJob1);
         mv.setViewName("CandidateFtoF/candidateF2FInvitation");
         request.setAttribute("successMessage",
-                    "Information : The Candidate Face To Face Invitation successfully.");
-        
-                try {
-                EmailTemplate emailTemplate = new EmailTemplate();
-                // id ( Not created id 138) is for Face To Face Invitation User....
-                emailTemplate = emailTemplateService.readById(138);
-                String To = cja.getCandidateApplyJob().getEmailId();
-                String from = "";
-                String Subject = emailTemplate.getSubject();
-                String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{user\\}", cja.getCandidateApplyJob().getName());
-                sendMail.sendMail(from, To, Subject, msg);
-            } catch (Exception e) {
-            }
-        
+                "Information : The Candidate Face To Face Invitation successfully.");
+
+        try {
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+            DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+            // id ( Not created id 138) is for Face To Face Invitation User....
+            emailTemplate = emailTemplateService.readById(155);
+            String To = cja.getCandidateApplyJob().getEmailId();
+            String from = "";
+            String Subject = emailTemplate.getSubject();
+            String msg = emailTemplate.getBodytext();
+            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+            sendMail.sendMail(from, To, Subject, msg);
+        } catch (Exception e) {
+        }
+
         return mv;
     }
 
@@ -190,20 +196,25 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.setViewName("Recruitment/CandidateRequestList");
         request.setAttribute("successMessage",
                 "Information : The Candidate Shortlisted successfully.");
-        
-               try {
-                EmailTemplate emailTemplate = new EmailTemplate();
-                // id ( Not created id 138) is for Shortlisted User....
-                emailTemplate = emailTemplateService.readById(138);
-                String To = cja.getCandidateApplyJob().getEmailId();
-                String from = "";
-                String Subject = emailTemplate.getSubject();
-                String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{user\\}", cja.getCandidateApplyJob().getName());
-                sendMail.sendMail(from, To, Subject, msg);
-            } catch (Exception e) {
-            }
-        
+
+        try {
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+            DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+            // id ( Not created id 138) is for Shortlisted User....
+            emailTemplate = emailTemplateService.readById(153);
+            String To = cja.getCandidateApplyJob().getEmailId();
+            String from = "";
+            String Subject = emailTemplate.getSubject();
+            String msg = emailTemplate.getBodytext();
+            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+            sendMail.sendMail(from, To, Subject, msg);
+        } catch (Exception e) {
+        }
+
         return mv;
     }
 
@@ -240,6 +251,24 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         questionList(request);
         mv.getModelMap().put("onlineAssessment", onlineAssessment);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+
+        try {
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+            DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+            // id ( Not created id 138) is for Shortlisted User....
+            emailTemplate = emailTemplateService.readById(154);
+            String To = cja.getCandidateApplyJob().getEmailId();
+            String from = "";
+            String Subject = emailTemplate.getSubject();
+            String msg = emailTemplate.getBodytext();
+            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+            sendMail.sendMail(from, To, Subject, msg);
+        } catch (Exception e) {
+        }
         mv.setViewName("Recruitment/CandidateRequestList");
         return mv;
     }
@@ -267,6 +296,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
             String To = candidateApplyJob.getEmailId();
             String Subject = certificateTemplate.getCertificateType();
             String msg = certificateTemplate.getCertificateBody();
+            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
             msg = msg.replaceAll("\\{to_user\\}", candidateApplyJob.getName());
             msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
             sendMail.sendMail(from, To, Subject, msg);

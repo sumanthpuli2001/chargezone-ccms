@@ -118,7 +118,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
         BindException errors = new BindException(recruitmentMaster, "recruitmentMaster");
         bind(request, recruitmentMaster);
-        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(3);
+        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(1);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
@@ -280,7 +280,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         MprEmployeeTypeMaster employeeTypeMaster = new MprEmployeeTypeMaster();
         BindException errors = new BindException(mprMaster, "mprMaster");
         bind(request, mprMaster);
-        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(3);
+        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(2);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
@@ -732,13 +732,18 @@ public class RecruitmentController extends RecruitmentAbstract {
 
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 // id ( Not created id 138) is for Approved User....
-                emailTemplate = emailTemplateService.readById(138);
+                emailTemplate = emailTemplateService.readById(150);
                 String To = employeeMaster.getEmailAddress();
                 String from = "";
                 String Subject = emailTemplate.getSubject();
                 String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
             }
@@ -776,13 +781,18 @@ public class RecruitmentController extends RecruitmentAbstract {
 
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 // id ( Not created id 138) is for Returned User....
-                emailTemplate = emailTemplateService.readById(138);
+                emailTemplate = emailTemplateService.readById(151);
                 String To = employeeMaster.getEmailAddress();
                 String from = "";
                 String Subject = emailTemplate.getSubject();
                 String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
             }
@@ -810,13 +820,18 @@ public class RecruitmentController extends RecruitmentAbstract {
 
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 // id ( Not created id 138) is for Rejectd User....
-                emailTemplate = emailTemplateService.readById(138);
+                emailTemplate = emailTemplateService.readById(152);
                 String To = employeeMaster.getEmailAddress();
                 String from = "";
                 String Subject = emailTemplate.getSubject();
                 String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
             }
@@ -1139,14 +1154,19 @@ public class RecruitmentController extends RecruitmentAbstract {
                     "Information : The Request is Approved successfully.");
 
             try {
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 EmailTemplate emailTemplate = new EmailTemplate();
                 // id ( Not created id 138) is for Approved User....
-                emailTemplate = emailTemplateService.readById(138);
+                emailTemplate = emailTemplateService.readById(147);
                 String To = employeeMaster.getEmailAddress();
                 String from = "";
                 String Subject = emailTemplate.getSubject();
                 String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
             }
@@ -1182,13 +1202,18 @@ public class RecruitmentController extends RecruitmentAbstract {
 
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 // id ( Not created id 138) is for Returned User....
-                emailTemplate = emailTemplateService.readById(138);
+                emailTemplate = emailTemplateService.readById(148);
                 String To = employeeMaster.getEmailAddress();
                 String from = "";
                 String Subject = emailTemplate.getSubject();
                 String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
             }
@@ -1216,13 +1241,18 @@ public class RecruitmentController extends RecruitmentAbstract {
 
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 // id ( Not created id 138) is for Rejectd User....
-                emailTemplate = emailTemplateService.readById(138);
+                emailTemplate = emailTemplateService.readById(149);
                 String To = employeeMaster.getEmailAddress();
                 String from = "";
                 String Subject = emailTemplate.getSubject();
                 String msg = emailTemplate.getBodytext();
-                msg = msg.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
             }

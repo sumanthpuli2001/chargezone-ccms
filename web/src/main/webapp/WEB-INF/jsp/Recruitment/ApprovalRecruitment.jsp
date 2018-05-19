@@ -49,8 +49,8 @@
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
                                 <c:if test="${sessionScope.userRight.employeeManagement}">
-                                    <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
-                                    <button type="button" class="btn btn-facebook" style="float: right; width: 100px;" onclick="window.location = 'recruitment.htm?act=searchForCreatedBudget'"><i class="fa fa-search"></i>&nbsp&nbsp;SEARCH</button>
+                                    <!--<button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>-->
+                                    <!--<button type="button" class="btn btn-facebook" style="float: right; width: 100px;" onclick="window.location = 'recruitment.htm?act=searchForCreatedBudget'"><i class="fa fa-search"></i>&nbsp&nbsp;SEARCH</button>-->
 
                                     <!--<button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'recruitment.htm?act=requestForManPower'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>-->
                                 </c:if>
@@ -73,7 +73,7 @@
                                                             <thead>
                                                                 <tr>
                                                                     <c:if test="${sessionScope.userRight.employeeManagement}">
-                                                                        <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
+                                                                        <!--<th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>-->
                                                                         </c:if>
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">Name</th>
@@ -92,7 +92,7 @@
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
                                                                 <c:if test="${sessionScope.userRight.employeeManagement}">
-                                                                    <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
+                                                                    <!--<td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>-->
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
                                                                 <td>${list[1]}</td>

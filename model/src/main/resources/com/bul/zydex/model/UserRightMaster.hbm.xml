@@ -116,5 +116,80 @@
         <property name="kaizenApproval" type="java.lang.Boolean">
             <column name="kaizen_approval" />
         </property>
+        <property name="employeeMasterReport" type="java.lang.Boolean">
+            <column name="employee_master_report" />
+        </property>
+        <property name="employeeAttendanceReport" type="java.lang.Boolean">
+            <column name="employee_attendance_report" />
+        </property>
+        <property name="monthlyAttendanceReport" type="java.lang.Boolean">
+            <column name="monthly_attendance_report" />
+        </property>
+        <property name="dailyPresentReport" type="java.lang.Boolean">
+            <column name="daily_present_report" />
+        </property>
+        <property name="searchEmployeeLeaveDetail" type="java.lang.Boolean">
+            <column name="search_employee_leave_detail" />
+        </property>
+        <property name="searchEmployeeLeaveBalance" type="java.lang.Boolean">
+            <column name="search_employee_leave_balance" />
+        </property>
+        <property name="searchTravelReques" type="java.lang.Boolean">
+            <column name="search_travel_request" />
+        </property>
+        <property name="searchExpenseRequest" type="java.lang.Boolean">
+            <column name="search_expense_request" />
+        </property>
+        <property name="pMPReport" type="java.lang.Boolean">
+            <column name="pmp_report" />
+        </property>
+        <property name="appraisalReport360" type="java.lang.Boolean">
+            <column name="360_appraisal_report" />
+        </property>
+        <property name="pf" type="java.lang.Boolean">
+            <column name="pf" />
+        </property>
+        <property name="pt" type="java.lang.Boolean">
+            <column name="pt" />
+        </property>
+        <property name="salarySlip" type="java.lang.Boolean">
+            <column name="salary_slip" />
+        </property>
+        <property name="policy" type="java.lang.Boolean">
+            <column name="policy" />
+        </property>
+        <property name="companyMonthlyReport" type="java.lang.Boolean">
+            <column name="company_monthly_report" />
+        </property>
+        <property name="ptStatement" type="java.lang.Boolean">
+            <column name="pt_statement" />
+        </property>
+        <property name="bankStatement" type="java.lang.Boolean">
+            <column name="bank_statement" />
+        </property>
+        <property name="eSICDeductionStatement" type="java.lang.Boolean">
+            <column name="esic_deduction_statement" />
+        </property>
+        <property name="overTimeReport" type="java.lang.Boolean">
+            <column name="over_time_report" />
+        </property>
+        <property name="pfChallen" type="java.lang.Boolean">
+            <column name="pf_challen" />
+        </property>
+        <property name="loan" type="java.lang.Boolean">
+            <column name="loan" />
+        </property>
+        <property name="attendance" type="java.lang.Boolean">
+            <column name="attendance" />
+        </property>
+        <property name="employeeSalaryYearly" type="java.lang.Boolean">
+            <column name="employee_salary_yearly" />
+        </property>
+        <property name="govtFormatPF" type="java.lang.Boolean">
+            <column name="govt_format_pf" />
+        </property>
+        <property name="formSixteen" type="java.lang.Boolean">
+            <column name="form_sixteen" />
+        </property>
     </class>
 </hibernate-mapping>

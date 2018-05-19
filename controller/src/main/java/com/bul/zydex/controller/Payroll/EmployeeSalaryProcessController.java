@@ -2234,8 +2234,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                         firstHalfList.add("" + cl);
 //                        firstHalfList.add("" + sl);
                         firstHalfList.add("" + pl);
-                        firstHalfList.add("" + abcounter);
-                        firstHalfList.add("" + abcounter);//where lwp = ab
+                        firstHalfList.add("" + (abcounter-wo));
+                        firstHalfList.add("" + (abcounter-wo));//where lwp = ab
                         firstHalfList.add("" + otHrs);
                         firstHalfList.add("" + otherDeduction);
                         firstHalfList.add("" + tds);

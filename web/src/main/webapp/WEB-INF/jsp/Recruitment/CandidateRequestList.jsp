@@ -57,12 +57,12 @@
                                     <!--<button type="button" class="btn btn-default " data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>-->
                                 </div>
 
-                                <c:if test="${sessionScope.userRight.employeeManagement}">
-                                    <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
+                                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                    <!--<button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>-->
                                     <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
 
-                                    <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'recruitment.htm?act=newCreateBudget'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
-                                </c:if>
+                                    <!--<button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'recruitment.htm?act=newCreateBudget'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>-->
+                                <%--</c:if>--%>
                                 <div class="box-header">
                                 </div>
                                 <div class="box-body no-padding">
@@ -85,12 +85,14 @@
                                                                         <!--<th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>-->
                                                                         <%--</c:if>--%>
                                                                     <!--<th>user id</th>-->
-                                                                    <th style="width: 50px;">Candidate Name</th>
-                                                                    <th style="width: 50px;">Qualification</th>
-                                                                    <th style="width: 50px;">Email Address</th>
-                                                                    <th style="width: 50px;">Experience Joining Year</th>
-                                                                    <th style="width: 50px;">Vacancy Name</th>
-                                                                    <th style="width: 50px;">Status</th>
+                                                                    <th style="width: 50px;">Name of Candidate</th>
+                                                                    <!--<th style="width: 50px;">Qualification</th>-->
+                                                                    <!--<th style="width: 50px;">Email Address</th>-->
+                                                                    <!--<th style="width: 50px;">Experience Joining Year</th>-->
+                                                                    <th style="width: 50px;">Position Applied For</th>
+                                                                    <th style="width: 50px;">Department</th>
+                                                                    <th style="width: 50px;">Date Of Application</th>
+                                                                    <th style="width: 50px;">Application Status</th>
                                                                         <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <th style="width: 50px;">Action</th>
                                                                         <%--</c:if>--%>
@@ -107,10 +109,12 @@
                                                                     <%--</c:if>--%>
                                                                 <!--<td>/</td>-->
                                                                 <td>${list[3]}</td>
-                                                                <td>${list[4]}</td>
-                                                                <td>${list[5]}</td>
-                                                                <td>${list[6]}</td>
+                                                                <!--<td>${list[4]}</td>-->
+                                                                <!--<td>${list[5]}</td>-->
+                                                                <!--<td>${list[6]}</td>-->
+                                                                <td>${list[9]}</td>
                                                                 <td>${list[7]}</td>
+                                                                <td>${list[10]}</td>
                                                                 <td>
                                                                     <c:if test="${list[8] eq 1}"><span class="label label-default">New Applicant</span></c:if>
                                                                     <c:if test="${list[8] eq 2}"><span class="label label-default">Shortlisted</span></c:if>

@@ -48,6 +48,31 @@ public class UserRightMaster  implements java.io.Serializable {
      private boolean payroll;
      private boolean training;
      private boolean kaizenApproval;
+     private boolean employeeMasterReport;
+     private boolean employeeAttendanceReport;
+     private boolean monthlyAttendanceReport;
+     private boolean dailyPresentReport;
+     private boolean searchEmployeeLeaveDetail;
+     private boolean searchEmployeeLeaveBalance;
+     private boolean searchTravelReques;
+     private boolean searchExpenseRequest;
+     private boolean pMPReport;
+     private boolean appraisalReport360;
+     private boolean formSixteen;
+     private boolean pf;
+     private boolean pt;
+     private boolean salarySlip;
+     private boolean policy;
+     private boolean companyMonthlyReport;
+     private boolean ptStatement;
+     private boolean bankStatement;
+     private boolean eSICDeductionStatement;
+     private boolean overTimeReport;
+     private boolean pfChallen;
+     private boolean loan;
+     private boolean attendance;
+     private boolean employeeSalaryYearly;
+     private boolean govtFormatPF;
     public UserRightMaster() {
     }
 
@@ -403,6 +428,206 @@ public class UserRightMaster  implements java.io.Serializable {
 
     public void setKaizenApproval(boolean kaizenApproval) {
         this.kaizenApproval = kaizenApproval;
+    }
+
+    public boolean isEmployeeMasterReport() {
+        return employeeMasterReport;
+    }
+
+    public void setEmployeeMasterReport(boolean employeeMasterReport) {
+        this.employeeMasterReport = employeeMasterReport;
+    }
+
+    public boolean isEmployeeAttendanceReport() {
+        return employeeAttendanceReport;
+    }
+
+    public void setEmployeeAttendanceReport(boolean employeeAttendanceReport) {
+        this.employeeAttendanceReport = employeeAttendanceReport;
+    }
+
+    public boolean isMonthlyAttendanceReport() {
+        return monthlyAttendanceReport;
+    }
+
+    public void setMonthlyAttendanceReport(boolean monthlyAttendanceReport) {
+        this.monthlyAttendanceReport = monthlyAttendanceReport;
+    }
+
+    public boolean isDailyPresentReport() {
+        return dailyPresentReport;
+    }
+
+    public void setDailyPresentReport(boolean dailyPresentReport) {
+        this.dailyPresentReport = dailyPresentReport;
+    }
+
+    public boolean isSearchEmployeeLeaveDetail() {
+        return searchEmployeeLeaveDetail;
+    }
+
+    public void setSearchEmployeeLeaveDetail(boolean searchEmployeeLeaveDetail) {
+        this.searchEmployeeLeaveDetail = searchEmployeeLeaveDetail;
+    }
+
+    public boolean isSearchEmployeeLeaveBalance() {
+        return searchEmployeeLeaveBalance;
+    }
+
+    public void setSearchEmployeeLeaveBalance(boolean searchEmployeeLeaveBalance) {
+        this.searchEmployeeLeaveBalance = searchEmployeeLeaveBalance;
+    }
+
+    public boolean isSearchTravelReques() {
+        return searchTravelReques;
+    }
+
+    public void setSearchTravelReques(boolean searchTravelReques) {
+        this.searchTravelReques = searchTravelReques;
+    }
+
+    public boolean isSearchExpenseRequest() {
+        return searchExpenseRequest;
+    }
+
+    public void setSearchExpenseRequest(boolean searchExpenseRequest) {
+        this.searchExpenseRequest = searchExpenseRequest;
+    }
+
+    public boolean ispMPReport() {
+        return pMPReport;
+    }
+
+    public void setpMPReport(boolean pMPReport) {
+        this.pMPReport = pMPReport;
+    }
+
+    public boolean isAppraisalReport360() {
+        return appraisalReport360;
+    }
+
+    public void setAppraisalReport360(boolean appraisalReport360) {
+        this.appraisalReport360 = appraisalReport360;
+    }
+
+    public boolean isPf() {
+        return pf;
+    }
+
+    public void setPf(boolean pf) {
+        this.pf = pf;
+    }
+
+    public boolean isPt() {
+        return pt;
+    }
+
+    public void setPt(boolean pt) {
+        this.pt = pt;
+    }
+
+    public boolean isSalarySlip() {
+        return salarySlip;
+    }
+
+    public void setSalarySlip(boolean salarySlip) {
+        this.salarySlip = salarySlip;
+    }
+
+    public boolean isPolicy() {
+        return policy;
+    }
+
+    public void setPolicy(boolean policy) {
+        this.policy = policy;
+    }
+
+    public boolean isCompanyMonthlyReport() {
+        return companyMonthlyReport;
+    }
+
+    public void setCompanyMonthlyReport(boolean companyMonthlyReport) {
+        this.companyMonthlyReport = companyMonthlyReport;
+    }
+
+    public boolean isPtStatement() {
+        return ptStatement;
+    }
+
+    public void setPtStatement(boolean ptStatement) {
+        this.ptStatement = ptStatement;
+    }
+
+    public boolean isBankStatement() {
+        return bankStatement;
+    }
+
+    public void setBankStatement(boolean bankStatement) {
+        this.bankStatement = bankStatement;
+    }
+
+    public boolean iseSICDeductionStatement() {
+        return eSICDeductionStatement;
+    }
+
+    public void seteSICDeductionStatement(boolean eSICDeductionStatement) {
+        this.eSICDeductionStatement = eSICDeductionStatement;
+    }
+
+    public boolean isOverTimeReport() {
+        return overTimeReport;
+    }
+
+    public void setOverTimeReport(boolean overTimeReport) {
+        this.overTimeReport = overTimeReport;
+    }
+
+    public boolean isPfChallen() {
+        return pfChallen;
+    }
+
+    public void setPfChallen(boolean pfChallen) {
+        this.pfChallen = pfChallen;
+    }
+
+    public boolean isLoan() {
+        return loan;
+    }
+
+    public void setLoan(boolean loan) {
+        this.loan = loan;
+    }
+
+    public boolean isAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(boolean attendance) {
+        this.attendance = attendance;
+    }
+
+    public boolean isEmployeeSalaryYearly() {
+        return employeeSalaryYearly;
+    }
+
+    public void setEmployeeSalaryYearly(boolean employeeSalaryYearly) {
+        this.employeeSalaryYearly = employeeSalaryYearly;
+    }
+
+    public boolean isGovtFormatPF() {
+        return govtFormatPF;
+    }
+
+    public void setGovtFormatPF(boolean govtFormatPF) {
+        this.govtFormatPF = govtFormatPF;
+    }
+
+    public boolean isFormSixteen() {
+        return formSixteen;
+    }
+
+    public void setFormSixteen(boolean formSixteen) {
+        this.formSixteen = formSixteen;
     }
     
     

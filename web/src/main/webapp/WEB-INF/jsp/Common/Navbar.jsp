@@ -67,7 +67,13 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <c:if test="${sessionScope.userRight.mppApproval}">
+                            <c:if test="${sessionScope.userRight.budget}">
+                                <li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP Create</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.userRight.mpr}">
+                                <li><a href="recruitment.htm?act=createMpr"><i class="fa fa-circle-o"></i>MPR Create</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.userRight.mppApproval}">
                                 <li><a href="recruitment.htm?act=approvalMppCreate"><i class="fa fa-circle-o"></i>MPP Approval</a></li>
                                 </c:if>
                                 <c:if test="${sessionScope.userRight.mprApproval}">
@@ -84,12 +90,6 @@
                                 </c:if>
                                 <c:if test="${sessionScope.userRight.faceTofaceApproval}">
                                 <li><a href="candidateF2FApproval.htm?act=candidateF2FReqListForInterviewer"><i class="fa fa-circle-o"></i>Candidate F2F  Approval</a></li>
-                                </c:if>
-                                <c:if test="${sessionScope.userRight.budget}">
-                                <li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP</a></li>
-                                </c:if>
-                                <c:if test="${sessionScope.userRight.mpr}">
-                                <li><a href="recruitment.htm?act=createMpr"><i class="fa fa-circle-o"></i>MPR</a></li>
                                 </c:if>
                                 <c:if test="${sessionScope.userRight.itAdmin}">
                                 <li><a href="candidateF2FApproval.htm?act=candidateF2FInterviewList"><i class="fa fa-circle-o"></i>All Candidate F2F Request</a></li>
@@ -218,30 +218,30 @@
                             </li>
                         </c:if>
                         <c:if test="${sessionScope.userRight.employeeManagement}">
-                        <li class="treeview" style="color: #585858;">
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i>
-                                <span>Attendance Report</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <c:if test="${sessionScope.userRight.attendanceReport}">
-                                    <li><a href="shiftRotationMaster.htm?act=employeeDataSearch"><i class="fa fa-circle-o"></i> Employee Master Report</a></li>
-                                    <li><a href="shiftRotationMaster.htm?act=employeeDataSearch2"><i class="fa fa-circle-o"></i> Employee Attendance Report</a></li>
-                                    <li><a href="shiftRotationMaster.htm?act=employeeAttandanceDataSearch"><i class="fa fa-circle-o"></i> Monthly Attendance Report  </a></li>
-                                    <li><a href="shiftRotationMaster.htm?act=employeePresentSearch"><i class="fa fa-circle-o"></i>Daily Present Report</a></li>
-                                    <li><a href="shiftRotationMaster.htm?act=attendanceExcelUpload"><i class="fa fa-circle-o"></i>Attendance Upload</a></li>
-                                    <!--<li><a href="shiftRotationMaster.htm?act=employeeManualPunch"><i class="fa fa-circle-o"></i>Manual Punch</a></li>-->
-                                </c:if>
-                                <%--<c:if test="${sessionScope.userRight.lunaPlantAttendanceMgnt}">--%>
-                                <!--<li><a href="shiftRotationMaster.htm?act=employeeAttendanceForLuna"><i class="fa fa-circle-o"></i>Luna Attendance Download</a></li>-->
-                                <%--</c:if>--%>
-                                <c:if test="${sessionScope.userRight.gavasatPlantAttendanceMgnt}">
-                                    <li><a href="shiftRotationMaster.htm?act=employeeAttendanceForGavasat"><i class="fa fa-circle-o"></i>Gavasat Attendance Download</a></li>
+                            <li class="treeview" style="color: #585858;">
+                                <a href="#">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>Attendance Report</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <c:if test="${sessionScope.userRight.attendanceReport}">
+                                        <li><a href="shiftRotationMaster.htm?act=employeeDataSearch"><i class="fa fa-circle-o"></i> Employee Master Report</a></li>
+                                        <li><a href="shiftRotationMaster.htm?act=employeeDataSearch2"><i class="fa fa-circle-o"></i> Employee Attendance Report</a></li>
+                                        <li><a href="shiftRotationMaster.htm?act=employeeAttandanceDataSearch"><i class="fa fa-circle-o"></i> Monthly Attendance Report  </a></li>
+                                        <li><a href="shiftRotationMaster.htm?act=employeePresentSearch"><i class="fa fa-circle-o"></i>Daily Present Report</a></li>
+                                        <li><a href="shiftRotationMaster.htm?act=attendanceExcelUpload"><i class="fa fa-circle-o"></i>Attendance Upload</a></li>
+                                        <!--<li><a href="shiftRotationMaster.htm?act=employeeManualPunch"><i class="fa fa-circle-o"></i>Manual Punch</a></li>-->
                                     </c:if>
-                            </ul>
+                                    <%--<c:if test="${sessionScope.userRight.lunaPlantAttendanceMgnt}">--%>
+                                    <!--<li><a href="shiftRotationMaster.htm?act=employeeAttendanceForLuna"><i class="fa fa-circle-o"></i>Luna Attendance Download</a></li>-->
+                                    <%--</c:if>--%>
+                                    <c:if test="${sessionScope.userRight.gavasatPlantAttendanceMgnt}">
+                                        <li><a href="shiftRotationMaster.htm?act=employeeAttendanceForGavasat"><i class="fa fa-circle-o"></i>Gavasat Attendance Download</a></li>
+                                        </c:if>
+                                </ul>
 
-                        </li>
+                            </li>
                         </c:if>
                     </ul>
                 </li>
@@ -488,11 +488,11 @@
                         <%--<c:if test="${sessionScope.checkReportingManager}">--%>
                         <li><a href="appraisalPerformance.htm?act=searchOwnappraisalPerformanceSubmit"><i class="fa fa-circle-o"></i>PMP Form</a></li>
                         <!--<li><a href="performanceImprovementPlanMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>PIP Form</a></li>-->
-                            <%--</c:if>--%>
+                        <%--</c:if>--%>
                         <li><a href="appraisalPerformance.htm?act=searchClick"><i class="fa fa-circle-o"></i>Subordinates PMP</a></li>
                         <!--<li><a href="appraisalPerformance.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Subordinates PMP</a></li>-->
                         <!--<li><a href="performanceImprovementPlanMaster.htm?act=viewPipListByManager"><i class="fa fa-circle-o"></i>Subordinates PIP</a></li>-->
-                            <c:if test="${sessionScope.userRight.appraisalPmp}">
+                        <c:if test="${sessionScope.userRight.appraisalPmp}">
                             <li><a href="appraisalPerformance.htm?act=searchAppraisalPerformanceReoprtStageWise"><i class="fa fa-circle-o"></i>PMP-Report</a></li>
                             <!--<li><a href="performanceImprovementPlanMaster.htm?act=viewPipListByAdmin"><i class="fa fa-circle-o"></i>View All PIP </a></li>-->
                             <li><a href="kraCategory.htm?act=createClick"><i class="fa fa-circle-o"></i>KRA Category</a></li>

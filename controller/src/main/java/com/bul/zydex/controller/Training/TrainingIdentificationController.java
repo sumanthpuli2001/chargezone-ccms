@@ -130,7 +130,7 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
 
         ModelAndView mv = new ModelAndView();
         TrainingIdentification trainingIdentification = new TrainingIdentification();
-
+        EmployeeMaster employeeMaster1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         BindException errors = new BindException(trainingIdentification, "trainingIdentification");
         bind(request, trainingIdentification);
         String id = request.getParameter("id");
@@ -178,28 +178,23 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
                 }
                 record += z + ",";
             }
-//             try {
-//            EmailTemplate emailTemplate = new EmailTemplate();
-//            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-//            DesignationMaster designationMaster = new DesignationMaster();
-//            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-//                emailTemplate = emailTemplateService.readById(143);
-//            for (String string : savingList) {
-//                EmployeeMaster employeeMaster1 = new EmployeeMaster();
-//                employeeMaster1 = employeeMasterService.readById(Integer.parseInt(string));
-//                String To = employeeMaster1.getEmailAddress();
-//                String from = employeeMasterModel.getOfficeEmailId();
-//                String Subject = emailTemplate.getSubject();
-//                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-//                String msg = emailTemplate.getBodytext();
-//                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-//                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-//                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-//                sendMail.sendMail(from, To, Subject, msg);
-//            }
-//        } catch (Exception e) {
-//
-//        }
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMaster2 = employeeMasterService.readById(Integer.parseInt(employeeMaster1.getReportingManagerLevel1()));
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMaster1.getDesignationMaster().getId());
+// id ( Not created id 138) is for Approved User....
+                emailTemplate = emailTemplateService.readById(156);
+                String To = employeeMaster1.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
             request.setAttribute("successMessage",
                     "Info :Training Assign successfully. With ID" + record);
         } else {
@@ -252,26 +247,24 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         employeeFeedback.setDateTime(sdf.format(cDate));
         employeeFeedback.setEventDate(eventdate);
         employeeFeedbackService.create(employeeFeedback);
-//        try {
-//                    EmailTemplate emailTemplate = new EmailTemplate();
-//                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-//                    DesignationMaster designationMaster = new DesignationMaster();
-//                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-//                    Trainer trainer = new Trainer();
-//                    trainer = trainerService.readById(employeeFeedback.getTrainingMaster().getTrainer().getId());
-//                    emailTemplate = emailTemplateService.readById(143);
-//                    String To = trainer.getEmailId();
-//                    String from = employeeMasterModel.getOfficeEmailId();
-//                    String Subject = emailTemplate.getSubject();
-//                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-//                    String msg = emailTemplate.getBodytext();
-//                    msg = msg.replaceAll("\\{to_user\\}", trainer.getTrainerName());
-//                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-//                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-//                    sendMail.sendMail(from, To, Subject, msg);
-//                } catch (Exception e) {
-//
-//                }
+        try {
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+            DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+            // id ( Not created id 138) is for Returned User....
+            emailTemplate = emailTemplateService.readById(158);
+            String To = employeeMaster.getEmailAddress();
+            String from = "";
+            String Subject = emailTemplate.getSubject();
+            String msg = emailTemplate.getBodytext();
+            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+            sendMail.sendMail(from, To, Subject, msg);
+        } catch (Exception e) {
+        }
+
         request.setAttribute(
                 "successMessage",
                 "Information : The Information is saved Successfully.");

@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.Training;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmployeeFeedback;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.Trainer;
@@ -23,6 +24,7 @@ import com.bul.zydex.service.Training.TrainingIdentificationService;
 import com.bul.zydex.service.Training.TrainingMasterService;
 import com.bul.zydex.service.Training.TrainingSubTypeService;
 import com.bul.zydex.service.Training.TrainingTypeService;
+import com.bul.zydex.service.emp.DesignationMasterService;
 import com.bul.zydex.service.emp.EmployeeMasterService;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -47,13 +49,13 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
     protected TrainingIdentificationService<TrainingIdentification> trainingIdentificationService;
     protected TrainingMasterService<TrainingMaster> trainingMasterService;
     protected EmployeeFeedbackService<EmployeeFeedback> employeeFeedbackService;
-     protected TrainerService<Trainer> trainerService;
+    protected TrainerService<Trainer> trainerService;
     protected TrainingSubTypeService<TrainingSubType> trainingSubTypeService;
     protected TrainingTypeService<TrainingType> trainingTypeService;
     protected TrainingAttendanceService<TrainingAttendance> trainingAttendanceService;
     protected EmployeeMasterService<EmployeeMaster> employeeMasterService;
     protected TrainingFeedbackService<TrainingFeedback> trainingFeedbackService;
-
+    protected DesignationMasterService<DesignationMaster> designationMasterService;
 
     public TrainingIdentificationService<TrainingIdentification> getTrainingIdentificationService() {
         return trainingIdentificationService;
@@ -86,8 +88,6 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
     public void setTrainingFeedbackService(TrainingFeedbackService<TrainingFeedback> trainingFeedbackService) {
         this.trainingFeedbackService = trainingFeedbackService;
     }
-    
-    
 
 //    protected void readEmployeeMaster(HttpServletRequest request, int id) {
 //        EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -100,7 +100,6 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
 //
 //        request.setAttribute("list", employeelist);
 //    }
-
     protected void readTrainingMaster(HttpServletRequest request) {
         TrainingMaster trainingMaster = new TrainingMaster();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -111,24 +110,26 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
         Map<Integer, String> trainingMastername = new HashMap<>();
         for (Object o : traininglist) {
             trainingMaster = (TrainingMaster) o;
-            String trainingDetails=trainingMaster.getTrainingTitle()+" "+trainingMaster.getStartDate()+" "+trainingMaster.getTrainingTimeForm();
+            String trainingDetails = trainingMaster.getTrainingTitle() + " " + trainingMaster.getStartDate() + " " + trainingMaster.getTrainingTimeForm();
             trainingMastername.put(trainingMaster.getId(), trainingDetails);
 //            trainingMastername.put(trainingMaster.getId(), trainingMaster.getTrainingTitle());
         }
 
         request.setAttribute("tlist", trainingMastername);
     }
+
     protected void readTrainingFeedback(HttpServletRequest request) {
         TrainingFeedback trainingFeedback = new TrainingFeedback();
         List<?> trainingFeedbacklist = trainingIdentificationService.readTraingFeedback();
         Map<Integer, String> trainingFeedbackname = new HashMap<>();
         for (Object o : trainingFeedbacklist) {
             trainingFeedback = (TrainingFeedback) o;
-            trainingFeedbackname.put(trainingFeedback.getId(),trainingFeedback.getFeedaback());
+            trainingFeedbackname.put(trainingFeedback.getId(), trainingFeedback.getFeedaback());
         }
 
         request.setAttribute("list", trainingFeedbackname);
     }
+
     public EmployeeMasterService<EmployeeMaster> getEmployeeMasterService() {
         return employeeMasterService;
     }
@@ -136,8 +137,6 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
     public void setEmployeeMasterService(EmployeeMasterService<EmployeeMaster> employeeMasterService) {
         this.employeeMasterService = employeeMasterService;
     }
-    
-
 
     public TrainingSubTypeService<TrainingSubType> getTrainingSubTypeService() {
         return trainingSubTypeService;
@@ -163,7 +162,6 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
         this.trainingAttendanceService = trainingAttendanceService;
     }
 
-
     public TrainerService<Trainer> getTrainerService() {
         return trainerService;
     }
@@ -171,10 +169,16 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
     public void setTrainerService(TrainerService<Trainer> trainerService) {
         this.trainerService = trainerService;
     }
-    
-    
 
-     public void auditgetCalDate(HttpServletRequest request,String monthAndYear, Calendar now,int userId) throws ParseException, JSONException {
+    public void setDesignationMasterService(DesignationMasterService<DesignationMaster> designationMasterService) {
+        this.designationMasterService = designationMasterService;
+    }
+
+    public DesignationMasterService<DesignationMaster> getDesignationMasterService() {
+        return designationMasterService;
+    }
+
+    public void auditgetCalDate(HttpServletRequest request, String monthAndYear, Calendar now, int userId) throws ParseException, JSONException {
         List<List<JSONObject>> finalList = new ArrayList<>();
 
         String monthName = new SimpleDateFormat("MMM-yyyy").format(now.getTime());
@@ -218,7 +222,7 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
                         dateObject.add(counter);
                         dateObject.add(format.format(preDate).split("/")[0]);
                         dateObject.add(format.format(preDate));
-                         List<?> list = trainingIdentificationService.readTrainingList(format.format(preDate),userId);
+                        List<?> list = trainingIdentificationService.readTrainingList(format.format(preDate), userId);
                         if (!list.isEmpty()) {
                             dateObject.add(list);
                         } else {
@@ -249,11 +253,11 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
         List object = new LinkedList();
         object.add(monthName);
         object.add(finalList);
-        
+
         request.setAttribute("list", object);
     }
 
-      protected void trainingsList(HttpServletRequest request) {
+    protected void trainingsList(HttpServletRequest request) {
         TrainingMaster trainMaster = new TrainingMaster();
         List<?> trainingList = trainingMasterService.read();
         Map<Integer, String> trainingsMap = new HashMap<>();
@@ -264,5 +268,5 @@ public class TrainingIdentificationAbstract extends CustomAbstract {
 
         request.setAttribute("trainingsMaps", trainingsMap);
     }
-       
+
 }

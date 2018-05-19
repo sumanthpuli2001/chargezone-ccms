@@ -170,7 +170,7 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
-
+         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         TrainingAssessment trainingAssessment = new TrainingAssessment();
 
         String candidateiD = request.getParameter("candidateId");
@@ -209,26 +209,24 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
             trainingQuestionAnswerSubmitService.create(trainingQuestionAnswerSubmit);
 //             mv.setViewName("Vacancy/AssementOnline");
         }
-//          try {
-//                    EmailTemplate emailTemplate = new EmailTemplate();
-//                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-//                    DesignationMaster designationMaster = new DesignationMaster();
-//                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-//                    TrainingAssessment trainingAssessment1 = new TrainingAssessment();
-//                    trainingAssessment1 = trainingAssessmentService.readById(Integer.parseInt(candidateiD));
-//                    emailTemplate = emailTemplateService.readById(143);
-//                    String To = trainingAssessment1.getTrainingMaster().getTrainer().getEmailId();
-//                    String from = employeeMasterModel.getOfficeEmailId();
-//                    String Subject = emailTemplate.getSubject();
-//                    Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-//                    String msg = emailTemplate.getBodytext();
-//                    msg = msg.replaceAll("\\{to_user\\}", trainingAssessment1.getTrainingMaster().getTrainer().getTrainerName());
-//                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-//                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-//                    sendMail.sendMail(from, To, Subject, msg);
-//                } catch (Exception e) {
-//
-//                }
+           try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+// id ( Not created id 138) is for Approved User....
+                emailTemplate = emailTemplateService.readById(156);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } 
+           catch (Exception e) {
+            }
         trainingAssessment = trainingAssessmentService.readById(Integer.parseInt(candidateiD));
         trainingAssessment.setStatus(1);
         trainingAssessment.setAssessmentResultStatus(2);   // 2 for assessment submit by user

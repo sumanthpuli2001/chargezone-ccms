@@ -35,7 +35,6 @@ import com.bul.zydex.util.DownloadFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.YearMonth;
@@ -331,12 +330,17 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                 if (!employeeCtcList.isEmpty()) {
                     for (Object employeeCtcList1 : employeeCtcList) {
                         Object[] o1 = (Object[]) employeeCtcList1;
-                        String ctcName1 = (String) o1[1];
-                        Double ctcAmount1 = (Double) o[0];
+                        if(null != o1[1] && null != o1[0]){
+                         String ctcName1 = (String) o1[1];
+                        Double ctcAmount1 = (Double) o1[0];
                         employeeAdditionalSalary.setEmployeeSalaryProcess(employeeSalaryProcess);
                         employeeAdditionalSalary.setPayrollSalaryType(ctcName1);
                         employeeAdditionalSalary.setAdditionalAmount(ctcAmount1);
                         employeeAdditionalSalaryService.create(employeeAdditionalSalary);
+                        
+                        }
+                        
+                       
                     }
 
                 }
@@ -1594,7 +1598,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                     payrollProfessionalTax = (PayrollProfessionalTax) iterator.next();
                     double salaryForm = Double.parseDouble(payrollProfessionalTax.getSalaryFrom());
                     double salaryTo = Double.parseDouble(payrollProfessionalTax.getSalaryTo());
-                     amountpt = Double.parseDouble(payrollProfessionalTax.getAmount());
+                    amountpt = Double.parseDouble(payrollProfessionalTax.getAmount());
                     grossSalary1 = Double.parseDouble(df.format(basicSalary1 + grossSalary));
 
                     if (grossSalary1 >= salaryForm && grossSalary1 <= salaryTo) {
@@ -2096,7 +2100,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                         }
                         rownum++;
                     }
-                    if (j != 0) {
+                    if (j > 0) {
                         id = Integer.parseInt("" + allEmpId.get(j - 1));
                         employeeShiftData.setId(id);
                         List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
@@ -2234,8 +2238,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                         firstHalfList.add("" + cl);
 //                        firstHalfList.add("" + sl);
                         firstHalfList.add("" + pl);
-                        firstHalfList.add("" + (abcounter-wo));
-                        firstHalfList.add("" + (abcounter-wo));//where lwp = ab
+                        firstHalfList.add("" + (abcounter - wo));
+                        firstHalfList.add("" + (abcounter - wo));//where lwp = ab
                         firstHalfList.add("" + otHrs);
                         firstHalfList.add("" + otherDeduction);
                         firstHalfList.add("" + tds);

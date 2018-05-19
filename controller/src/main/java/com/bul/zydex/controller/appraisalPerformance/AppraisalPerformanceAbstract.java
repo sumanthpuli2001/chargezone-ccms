@@ -23,6 +23,8 @@ import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.KraCategory;
+import com.bul.zydex.model.LevelMaster;
+import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.PmpFormStatusMaster;
 import com.bul.zydex.model.UpdateAppraisalPerformanceActivities;
 import com.bul.zydex.model.UpdateAppraisalPerformanceKra;
@@ -42,6 +44,8 @@ import com.bul.zydex.service.appraisalPerformance.CompetencyEvaluationTextmaster
 import com.bul.zydex.service.appraisalPerformance.KraCategoryService;
 import com.bul.zydex.service.appraisalPerformance.UpdateAppraisalPerformanceActivitiesService;
 import com.bul.zydex.service.appraisalPerformance.UpdateAppraisalPerformanceKraService;
+import com.bul.zydex.service.level.LevelMasterService;
+import com.bul.zydex.service.location.LocationMasterService;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -76,6 +80,8 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
     protected AppraisalkraActivityService<AppraisalKraActivity> appraisalkraActivityService;
     protected PmpFormStatusMasterService<PmpFormStatusMaster> pmpFormStatusMasterService;
     protected Appraisal360Service<AppraisalFeedback360> appraisal360Service;
+    protected LevelMasterService<LevelMaster> levelMasterService;
+    protected LocationMasterService<LocationMaster> locationMasterService;
 
     public UpdateAppraisalPerformanceKraService<UpdateAppraisalPerformanceKra> getUpdateAppraisalPerformanceKraService() {
         return updateAppraisalPerformanceKraService;
@@ -203,6 +209,22 @@ public class AppraisalPerformanceAbstract extends CustomAbstract {
 
     public void setAppraisal360Service(Appraisal360Service<AppraisalFeedback360> appraisal360Service) {
         this.appraisal360Service = appraisal360Service;
+    }
+
+    public LevelMasterService<LevelMaster> getLevelMasterService() {
+        return levelMasterService;
+    }
+
+    public void setLevelMasterService(LevelMasterService<LevelMaster> levelMasterService) {
+        this.levelMasterService = levelMasterService;
+    }
+
+    public LocationMasterService<LocationMaster> getLocationMasterService() {
+        return locationMasterService;
+    }
+
+    public void setLocationMasterService(LocationMasterService<LocationMaster> locationMasterService) {
+        this.locationMasterService = locationMasterService;
     }
 
     public void selectedEmployeeDate(HttpServletRequest request,

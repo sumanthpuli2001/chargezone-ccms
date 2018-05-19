@@ -88,8 +88,9 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " LEFT JOIN a.designationMaster b "
                 + " LEFT JOIN a.departmentMaster c "
                 + " LEFT JOIN a.userMaster d "
-                + " where (a.dateOfLeaving is null or a.dateOfLeaving = '') "
-                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()";
+                + " where ((a.dateOfLeaving is null or a.dateOfLeaving = '') "
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())"
+                + " AND a.employeeId not in ('admin')";
 //                + " or STR_TO_DATE(,'%d/%m/%Y - %h:%i') > now()";
 //                + " or a.dateOfLeaving > DATE_FORMAT(now(),'%d/%m/%Y - %h:%i')";
 //        STR_TO_DATE(,'%d/%m/%Y - %h:%i') < now()
@@ -495,9 +496,9 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
     public List<?> readEmployeeDataForexportToExcel(final String searchEmployeeString) {
         //                             0   1                   2               3               4
         String hqlString = " SELECT a.id, a.employeeId, a.employeeName, c.departmentName, b.designationName,"
-                   //   5           6           7                   8
+                //   5           6           7                   8
                 + " lm.level, a.company, zlm.zydexLocation, locm.location, "
-                                    //          9        
+                //          9        
                 + " (select CASE WHEN apm.behaviorsFinalscore = NULL then '' else apm.behaviorsFinalscore End from EmployeeMaster em"
                 + " left join em.appraisalPerformanceMasters apm"
                 //          
@@ -505,9 +506,9 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " a.id),"
                 //          10           11
                 + " a.emailAddress, a.contactNo1,"
-                    //12
+                //12
                 + " CASE WHEN a.gender = 1 then 'Female' else 'Male' End, "
-                    //      13              14              15              16
+                //      13              14              15              16
                 + " a.maritalStatus, a.presentAddress, a.permanentAddress, d.id, "
                 //         17           18          19          20          21          22              23          24
                 + " etm.typeOfEmployee,est.subType,a.role, a.contactNo2,a.fatherName,a.motherName,a.dateOfBirth,a.spouseName, "
@@ -948,7 +949,7 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
     public List<?> readEmployeesDetail1() {
         String query = "";
         query += " "
-                + " SELECT a.id, a.employeeId, a.employeeName, c.departmentName, b.designationName, a.role, d.id"
+                + " SELECT a.id, a.employeeId, a.employeeName, c.departmentName, b.designationName, a.role, d.id, a.dateOfLeaving "
                 + " FROM EmployeeMaster a "
                 + " LEFT JOIN a.designationMaster b "
                 + " LEFT JOIN a.departmentMaster c "
@@ -2008,7 +2009,7 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " Where a.employeeId = '" + employeeNo + "'";
         return getHibernateTemplate().find(query);
     }
-    
+
     @Override
     public List<?> empOrDateWiseSearchforActiveSecond(EmployeeAdvanceSearch employeeAdvanceSearch) {
         String query = "";
@@ -2058,7 +2059,7 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         } else {
             query += " '' as nonval ,";
         }
-        
+
         if (employeeAdvanceSearch.getZydexLocation()) {
             query += " e.zydexLocation,";
         } else {
@@ -2070,19 +2071,19 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         } else {
             query += " '' as nonval ,";
         }
-        
+
         if (employeeAdvanceSearch.getDesignation()) {
             query += " c.designationName,";
         } else {
             query += " '' as nonval ,";
         }
-        
+
         if (employeeAdvanceSearch.getDateOfJoining()) {
             query += " a.dateOfJoining,";
         } else {
             query += " '' as nonval ,";
         }
-        
+
         if (employeeAdvanceSearch.getEmployeeType()) {
             query += " a.employeeType,";
         } else {
@@ -2101,8 +2102,8 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         }
         return getHibernateTemplate().find(query);
     }
-    
-      public List<?> empOrDateWiseSearch2(EmployeeAdvanceSearch employeeAdvanceSearch) {
+
+    public List<?> empOrDateWiseSearch2(EmployeeAdvanceSearch employeeAdvanceSearch) {
         String query = "";
         String condition = "";
 
@@ -2150,7 +2151,7 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         } else {
             query += " '' as nonval ,";
         }
-       
+
         if (employeeAdvanceSearch.getZydexLocation()) {
             query += " e.zydexLocation,";
         } else {
@@ -2199,6 +2200,14 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readEmpLastMnth(String month, Integer year) {
+        String query = " ";
+        query += " SELECT a.id, um.id, a.employeeName , a.fatherName , a.dateOfBirth, a.gender,a.dateOfJoining "
+                + " FROM EmployeeMaster a"
+                + " LEFT JOIN a.userMaster um "
+                + " WHERE a.dateOfJoining like '%/" + month + "/" + year + "'";
+        return getHibernateTemplate().find(query);
     }
 
-    
+}

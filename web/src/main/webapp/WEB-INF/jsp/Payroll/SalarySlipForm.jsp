@@ -38,7 +38,7 @@
 
 
 
-                <div class="col-md-12">
+                <div class="col-md-6" style="text-align: center;">
                     <!-- Custom Tabs -->
                     <div class="nav-tabs-custom">
                         <div class="tab-content">

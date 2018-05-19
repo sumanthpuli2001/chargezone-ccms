@@ -941,13 +941,21 @@
                                                     <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Type of Employee :<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Employee Location Code:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="employeeLocation"  class="form-control"></form:input>
+                                                        <form:errors path="employeeLocation" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Type of Employee :<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
                                                             <form:option value="" label="-- Select --" ></form:option>
                                                             <form:options items="${EmployeeTypeList}"></form:options>
                                                         </form:select>
                                                         <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
+
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6" id="employeeSubTypeId">
                                                             <label>Employee SubType:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="hidden" name="subTypeId" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
@@ -958,8 +966,6 @@
 
 
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="zydexLocationMaster.id" class="form-control ">
@@ -968,6 +974,9 @@
                                                         </form:select>
                                                         <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
+
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Work Location:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="locationMaster.id" class="form-control ">
@@ -976,8 +985,6 @@
                                                         </form:select>
                                                         <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();">
@@ -986,6 +993,9 @@
                                                         </form:select>
                                                         <form:errors path="levelMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
+
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="departmentMaster.id" class="form-control">
@@ -994,8 +1004,6 @@
                                                         </form:select>
                                                         <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Designation:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="designationMasterByLevelId" id="designationMasterByLevelId" class="form-control" onchange="setDesignation()">
@@ -1005,12 +1013,13 @@
                                                         <form:hidden path="designationMaster.id" class="form-control"></form:hidden>
                                                         <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
+
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Role:</label>
                                                         <form:input path="role" class="form-control"></form:input>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Date Of Joining:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
@@ -1025,6 +1034,9 @@
                                                                                                                     <label>Last Year's Performance Rating:</label>
                                                     <%--<form:input path="lastYearPerformanceRating" class="form-control"></form:input>--%>
                                                     </div>-->
+
+                                                </div>
+                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Employee Type:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="employeeType" id="employeeType" class="form-control ">
@@ -1032,25 +1044,15 @@
                                                             <form:option value="Confirmed" label="Confirmed"></form:option>
                                                         </form:select>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label >Contact No.:</label>
                                                         <form:input path="contactNo2" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                         <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Work Type:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="shiftType" class="form-control">
-                                                            <!--<option value="">--SELECT--</option>-->
-                                                            <form:option value="" label="-- Select --" ></form:option>
-                                                            <form:option value="HourlyBase" label="Hourly Base"></form:option>
-                                                            <form:option value="ShiftBase" label="Shift Base"></form:option>
-                                                        </form:select>
-                                                        <form:errors path="shiftType" cssClass="errorDiv"></form:errors>
-                                                        </div>
+
                                                     </div>
                                                     <div class="form-group">
+
                                                         <div class="col-sm-6" id="hourlyBaseTitleDiv" style="display: none">
                                                             <label>Hourly Base Title:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="shiftHoursId" id="shiftHoursId" class="form-control">
@@ -1107,6 +1109,16 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
+                                                            <label>Work Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:select path="shiftType" class="form-control">
+                                                            <!--<option value="">--SELECT--</option>-->
+                                                            <form:option value="" label="-- Select --" ></form:option>
+                                                            <form:option value="HourlyBase" label="Hourly Base"></form:option>
+                                                            <form:option value="ShiftBase" label="Shift Base"></form:option>
+                                                        </form:select>
+                                                        <form:errors path="shiftType" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
                                                             <label>Competency Evaluation:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="competencyEvaluationId" id="competencyEvaluationId" class="form-control">
                                                                 <option value="">--SELECT--</option>
@@ -1115,23 +1127,31 @@
                                                             </c:forEach>
                                                         </select>
                                                     </div>
+
+                                                </div>
+                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="basicSalary" class="form-control"  placeholder="Enter Basic Salary"/>
                                                         <form:errors path="basicSalary" cssClass="errorDiv"/>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
 
                                                     <div class="col-sm-6">
                                                         <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
                                                             <form:input path="esicNo" class="form-control"  placeholder="Enter ESIC No"/>
                                                             <form:errors path="esicNo" cssClass="errorDiv"/>
                                                     </div>
+                                                </div>
+                                                <div  class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>PF Amount:</label>
+                                                        <label>PF Amount(By Employee):</label>
                                                         <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
                                                         <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>PF Amount(By Employer):</label>
+                                                        <form:input path="pfAmountEmployer" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
+                                                        <form:errors path="pfAmountEmployer" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
 

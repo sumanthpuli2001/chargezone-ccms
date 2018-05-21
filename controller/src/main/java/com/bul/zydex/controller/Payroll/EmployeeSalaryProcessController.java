@@ -1337,6 +1337,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             }
 
         }
+         headerList.add("Gross Salary");
 //        List<?> list2 = employeeSalaryProcessService.readsalDeduction(employeeMaster);
         List<?> list2 = employeeSalaryProcessService.readsalDeductionSearch(employeeMaster);
         for (Object o1 : list2) {
@@ -1345,7 +1346,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                 headerList.add("" + str1[2]);
             }
         }
-        headerList.add("Gross Salary");
+       
         headerList.add("Tot.Dedn");
         headerList.add("Net Pay");
         List<?> list6 = ctcAllowanceService.read();
@@ -1386,6 +1387,9 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                  int netpayable1 = (int) Math.round(additionalAmount);
                 additionalAmount += (Double) o[1];
             }
+              additionalAmount += employeeSalaryProcess1.getEmployeeBasicSalary();
+//            empMap.put("Gross Salary", "" + df.format(additionalAmount));
+            empMap.put("Gross Salary", "" + df.format((int) Math.round(additionalAmount)));
 //            List dedSalaryList = employeeDeductionAmountService.readEmployeeForSalaryDeductioninfo(employeeSalaryProcess1);
             List dedSalaryList = employeeDeductionAmountService.readEmployeeForSalaryDeductioninfoSearch(employeeSalaryProcess1);
             for (Object dedSalaryList1 : dedSalaryList) {
@@ -1394,9 +1398,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                 empMap.put("" + o[0], "" + df.format((int) Math.round((double) o[1])));
                 deductionAmount += (Double) o[1];
             }
-            additionalAmount += employeeSalaryProcess1.getEmployeeBasicSalary();
-//            empMap.put("Gross Salary", "" + df.format(additionalAmount));
-            empMap.put("Gross Salary", "" + df.format((int) Math.round(additionalAmount)));
+          
 //            empMap.put("Deduction Amount", "" + df.format(deductionAmount));
             empMap.put("Tot.Dedn", "" + df.format((int) Math.round(deductionAmount)));
             empMap.put("Net Pay", "" + df.format((int) Math.round(additionalAmount - deductionAmount)));

@@ -797,13 +797,21 @@
                                                     <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Type of Employee :<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Employee Location Code:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="employeeLocation"  class="form-control"></form:input>
+                                                        <form:errors path="employeeLocation" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Type of Employee :<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="employeeTypeMaster.id"  onchange="selectsubtype(this.value);" class="form-control">
                                                             <form:option value="" label="-- Select --" ></form:option>
                                                             <form:options items="${EmployeeTypeList}"></form:options>
                                                         </form:select>
                                                         <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
+
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6" id="employeeSubTypeId">
                                                             <label>Employee SubType:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="subTypeId" id="subTypeId"class="form-control ">
@@ -813,8 +821,6 @@
 
 
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
 
@@ -825,6 +831,9 @@
                                                         <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
 
+
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Work Location:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="locationMaster.id" class="form-control">
@@ -834,8 +843,6 @@
 
                                                         <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();">
@@ -844,6 +851,10 @@
                                                         <form:errors path="levelMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
 
+
+                                                    </div>
+
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="departmentMaster.id" class="form-control">
@@ -853,9 +864,6 @@
                                                         <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
 
                                                         </div>
-                                                    </div>
-
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Designation:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="designationMasterByLevelId" id="designationMasterByLevelId" class="form-control" onchange="setDesignation()">
@@ -872,12 +880,13 @@
 
                                                         </div>
 
+
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Role:</label>
                                                         <form:input path="role" class="form-control"></form:input>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Date Of Joining:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
@@ -887,6 +896,9 @@
                                                             </div>
                                                         <form:errors path="dateOfJoining" cssClass="errorDiv"></form:errors>
                                                         </div>
+
+                                                    </div>
+                                                    <div class="form-group">
                                                     <c:if test="${sessionScope.userRight.hr == true}" >
                                                         <div class="col-sm-6">
                                                             <label>Last Year's Performance Rating:</label>
@@ -894,8 +906,6 @@
                                                             <%--<form:hidden path="lastYearPerformanceRating" class="form-control"></form:input>--%>
                                                         </div>
                                                     </c:if>
-                                                </div>
-                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Employee Type:<span style="color: red;font-size: 12px;">*</span></label>
 
@@ -926,13 +936,14 @@
 
 
                                                     </div>
+
+                                                </div><!-- /.col -->
+                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label >Contact No.:</label>
                                                         <form:input path="contactNo2" id="contactNo2" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                         <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div><!-- /.col -->
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Date Of Transfer Of Entity:</label>
                                                             <div class="input-group date date_of_transfer"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
@@ -941,6 +952,10 @@
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                         </div>
+
+                                                    </div><!-- /.col -->
+
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Competency Evaluation:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="competencyEvaluationId" id="competencyEvaluationId" class="form-control">
@@ -955,20 +970,6 @@
                                                             </c:forEach>
                                                         </select>
                                                     </div>
-                                                </div><!-- /.col -->
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>PF Amount:</label>
-                                                        <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
-                                                        <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="esicNo" class="form-control"    placeholder="Enter ESIC No"/>
-                                                            <form:errors path="esicNo" cssClass="errorDiv"/>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
 
                                                     <div class="col-sm-6">
                                                         <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
@@ -976,13 +977,32 @@
                                                         <form:errors path="basicSalary" cssClass="errorDiv"/>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>PF Amount(By Employee):</label>
+                                                        <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
+                                                        <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>PF Amount(By Employer):</label>
+                                                        <form:input path="pfAmountEmployer" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
+                                                        <form:errors path="pfAmountEmployer" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="esicNo" class="form-control"    placeholder="Enter ESIC No"/>
+                                                            <form:errors path="esicNo" cssClass="errorDiv"/>
+                                                    </div>
+                                                </div>
 
 
                                                 <!--</div>-->
                                                 <div class="form-group">
                                                     <div class="col-sm-4">
-                                                            <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <fieldset>
+                                                        <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <fieldset>
                                                             <form:radiobutton path="pf"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <form:radiobutton path="pf" value="true"/>YES
                                                         </fieldset>
@@ -2143,7 +2163,7 @@
         for (var year1 = start; year1 <= end; year1++) {
             options11 += "<option>" + year1 + "</option>";
         }
-        
+
 //         if (objSelect == 2050) {
 //            options11.selected = true;
 //        }

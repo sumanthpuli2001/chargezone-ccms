@@ -557,9 +557,7 @@
                                                             </div>
                                                             <div>
                                                                 <c:forEach var="newJoining" items="${newJoiningList}">
-
-
-                                                                    <label class="test">${newJoining[1]}</label>
+                                                                    <label class="test"><a style="color: black;" onclick="window.open('homeController.htm?act=newJoineDetail&id='+${newJoining[0]}, 'popUpWindow', 'height=300,width=500,left=500%,top=100%,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no')">${newJoining[1]}</a></label>
                                                                     &nbsp;
                                                                     &nbsp;
                                                                     &nbsp;
@@ -570,8 +568,8 @@
                                                                     &nbsp;
                                                                     &nbsp;
                                                                     &nbsp;
-
                                                                 </c:forEach>
+                                                            </div>
                                                             </div>
                                                         </div>
                                                 </marquee>
@@ -805,7 +803,41 @@
 
     </div>
 </div>
+<!-- //////////////// New Joinee Detail view    -->                   
+<!--<div class="modal fade" id="myModalOnline" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+         Modal content
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Hello1</h1>
 
+            </div>
+            <div class="modal-body">
+
+                <h1>Hello</h1>
+            </div>
+        </div>
+    </div>
+</div>-->
+<div class="modal fade" id="myModalOnline" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 
 
@@ -937,6 +969,19 @@
 
         setTimeout(rrshowSlides, 5000); // Change image every 2 seconds
     }
+</script>
+<script>
+    function viewClick(id) {
+        alert(id);
+    }
+    function showPunchData(id) {
+        alert(id);
+//        var path = 'attendanceRegularizationMaster.htm?act=showDateWisePunch  DataOfSubordinate&id=' + id;
+        popupWindow = window.open("path", 'popUpWindow', 'height=300,width=500,left=500%,top=100%,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no');
+
+//             window.location = 'attendanceRegularizationMaster.htm?act=showDateWisePunchData&date=' + date;
+    }
+
 </script>
 
 

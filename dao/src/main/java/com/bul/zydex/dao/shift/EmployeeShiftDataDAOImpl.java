@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 /**
  *
@@ -665,9 +667,11 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
                     + "        (select 0 t0 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0, (select 0 t1 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1, (select 0 t2 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2, (select 0 t3 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3, (select 0 t4 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v"
                     + " where selected_date between '" + employeeShiftData.getInDateTime() + "' and '" + employeeShiftData.getOutDateTime() + "'";
         }
-        Query query1 = getSession().createSQLQuery(query);
-//        List results = query1.list();
-        return query1.list();
+        Session s = getSessionFactory().openSession();
+        SQLQuery query1 = s.createSQLQuery(query);
+        List<?> list = query1.list();
+        s.close();
+        return list;
     }
 
     @Override
@@ -1133,11 +1137,11 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
     @Override
     public List<?> getShiftDayOff(EmployeeShiftData employeeShiftData) {
         String query = "";
-            query += " SELECT b.weekof "
-                   + " FROM EmployeeShiftData a "
-                   + " LEFT JOIN a.shiftMaster b "
-                   + " WHERE a.employeeMaster.id = '" + employeeShiftData.getEmployeeMaster().getId();
-            return getHibernateTemplate().find(query);
+        query += " SELECT b.weekof "
+                + " FROM EmployeeShiftData a "
+                + " LEFT JOIN a.shiftMaster b "
+                + " WHERE a.employeeMaster.id = '" + employeeShiftData.getEmployeeMaster().getId();
+        return getHibernateTemplate().find(query);
     }
 
 }

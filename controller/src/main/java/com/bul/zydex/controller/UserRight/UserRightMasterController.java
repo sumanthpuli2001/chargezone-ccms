@@ -25,7 +25,7 @@ public class UserRightMasterController extends UserRightMasterAbstract {
         String userId = request.getParameter("id");
         UserMaster userMaster = new UserMaster();
         userMaster.setId(Integer.parseInt(userId));
-
+        
         userRightMaster.setUserMaster(userMaster);
         List<?> list = userRightMasterService.readByUserId(userId);
         if (!list.isEmpty()) {
@@ -33,7 +33,7 @@ public class UserRightMasterController extends UserRightMasterAbstract {
             userRightMaster.getId();
             userRightMaster = userRightMasterService.readById(userRightMaster.getId());
         }
-        mv.getModelMap().put("userRightMaster", userRightMaster);
+         mv.getModelMap().put("userRightMaster", userRightMaster);
         mv.setViewName("User/UserRight");
         return mv;
     }

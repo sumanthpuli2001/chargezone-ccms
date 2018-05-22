@@ -448,6 +448,8 @@
         <property name="appraisalkraActivityService" ref="appraisalkraActivityService1" />
         <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1" />
         <property name="appraisal360Service" ref="appraisal360Service1" />
+        <property name="levelMasterService" ref="levelMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
         
     </bean>
     <!--Appraisal Filling Data-->

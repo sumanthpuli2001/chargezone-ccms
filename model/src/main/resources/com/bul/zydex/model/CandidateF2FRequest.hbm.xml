@@ -55,5 +55,38 @@
         <property name="hrName" type="string">
             <column name="hr_name" />
         </property>
+        <property name="technicalKnowledge" type="int">
+            <column name="technical_knowledge" not-null="true" />
+        </property>
+        <property name="experience" type="int">
+            <column name="experience" not-null="true" />
+        </property>
+        <property name="commSkill" type="int">
+            <column name="comm_skill" not-null="true" />
+        </property>
+        <property name="interPerSkill" type="int">
+            <column name="inter_per_skill" not-null="true" />
+        </property>
+        <property name="leaderSkill" type="int">
+            <column name="leader_skill" not-null="true" />
+        </property>
+        <property name="strengths" type="string">
+            <column name="strengths" />
+        </property>
+        <property name="weaknesses" type="string">
+            <column name="weaknesses" />
+        </property>
+        <property name="typeOfTraining" type="string">
+            <column name="type_of_training" />
+        </property>
+        <property name="technicalareas" type="string">
+            <column name="technical_areas" />
+        </property>
+        <property name="otherSkills" type="string">
+            <column name="other_skills" />
+        </property>
+        <property name="excellent" type="int">
+            <column name="excellent" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

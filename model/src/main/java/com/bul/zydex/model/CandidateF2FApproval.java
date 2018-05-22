@@ -108,7 +108,4 @@ public class CandidateF2FApproval {
     public void setUpdatedDate(String updatedDate) {
         this.updatedDate = updatedDate;
     }
-    
-    
-
 }

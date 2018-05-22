@@ -1470,4 +1470,20 @@ public class RecruitmentController extends RecruitmentAbstract {
         return mv;
     }
 
+    public ModelAndView searchDateWise(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+
+        List<?> vacancylist = vacancyMasterService.fetchDateWiseData(startDate, endDate);
+        mv.getModelMap().put("list", vacancylist);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        questionList(request);
+        mv.setViewName("Recruitment/SearchDateWiseEmployeeVacancy");
+
+        return mv;
+    }
+
 }

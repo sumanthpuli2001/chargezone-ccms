@@ -77,30 +77,32 @@
                                 <div class="box-body no-padding">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
-                                            <div class="form-group">
+                                             <input type="hidden" name="employeeTypeMasterId" value=""/>
+                                            <input type="hidden" name="employeeSubTypeId" value=""/>
+<!--                                            <div class="form-group">
                                                 <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
                                                 <div class="col-sm-6">
                                                     <label>Type of Employee :<span style="color: red;font-size: 12px;"></span></label>
                                                     <select name="employeeTypeMasterId" id="employeeTypeMasterId" onchange="selectsubtype(this.value);" class="form-control">
                                                         <option value="" label="" >--Select--</option>
-                                                        <c:forEach var="EmpType" items="${EmployeeTypeList}">
+                                                        <%--<c:forEach var="EmpType" items="${EmployeeTypeList}">--%>
                                                             <option value="${EmpType.key}" label="${EmpType.value}" >${EmpType.value}</option>
-                                                        </c:forEach>
+                                                        <%--</c:forEach>--%>
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Employee SubType:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <!--                                                    <select name="employeeSubTypeId" id="employeeSubTypeId" class="form-control">
+                                                                                                        <select name="employeeSubTypeId" id="employeeSubTypeId" class="form-control">
                                                                                                             <option value="" label="-- Select --" ></option> 
-                                                                                                        </select>-->
+                                                                                                        </select>
                                                     <select name="employeeSubTypeId" id="employeeSubTypeId"  class="form-control">
                                                         <option value="" label="" >--Select--</option>
-                                                        <c:forEach var="EmpSubType" items="${EmployeeSubTypeList}">
+                                                        <%--<c:forEach var="EmpSubType" items="${EmployeeSubTypeList}">--%>
                                                             <option value="${EmpSubType.key}" label="${EmpSubType.value}" >${EmpSubType.value}</option>
-                                                        </c:forEach>
+                                                        <%--</c:forEach>--%>
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Months:<span style="color: red;font-size: 12px;">*</span></label>
@@ -133,8 +135,10 @@
                                 </div><!-- /.row -->
                             </div><!-- /.box-body -->
                             <div class="form-group">
-                                <div class=" col-sm-2">
-                                    <button type="submit" class="btn btn-primary" data-original-title="" title="" >Search</button>
+                                <div class=" col-sm-12">
+                                    <center>
+                                        <button type="submit" class="btn btn-primary" data-original-title="" title="" >Search</button><br><br>
+                                    </center>
                                 </div>
                             </div>
 

@@ -135,7 +135,7 @@
                                 <div class="col-xs-4 col-sm-4 col-md-4">
                                     <c:if test="${sessionScope.userRight.ptStatement}">
                                         <a  style="font-size: 15px"  href="companyPTReport.htm?act=searchCompanyPTReport&search=none">
-                                            &nbsp<strong>PT Statement </strong>
+                                            &nbsp<strong>PT Slab by Summary</strong>
                                         </a>
                                     </c:if>
                                 </div>

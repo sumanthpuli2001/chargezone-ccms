@@ -669,4 +669,7 @@
     <bean id="emergencyContactService1" class="com.bul.zydex.service.EmergencyContactServiceImpl">
         <property name="emergencyContactDAO" ref="emergencyContactDAO1" />
     </bean>
+    <bean id="userRightDescriptionService1" class="com.bul.zydex.service.UserRight.UserRightDescriptionServiceImpl">
+        <property name="userRightDescriptionDAO" ref="userRightDescriptionDAO1" />
+    </bean>
 </beans>

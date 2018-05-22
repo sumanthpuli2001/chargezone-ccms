@@ -160,7 +160,6 @@
     <mapping resource="com/bul/zydex/model/LeaveEmployeeDetailsApprovalHistory.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/TaxDeductionDeclarationSavingStatus.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/EmergencyContact.hbm.xml"/>
-    <mapping/>
     <mapping resource="com/bul/zydex/model/UserRightDescription.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/Candidatef2fInterviewRating.hbm.xml"/>
   </session-factory>

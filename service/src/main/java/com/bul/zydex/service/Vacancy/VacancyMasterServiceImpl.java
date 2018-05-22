@@ -41,4 +41,9 @@ public class VacancyMasterServiceImpl<T> extends GenericsServiceImpl<T> implemen
            return vacancyMasterDAO.fetchVacancyBydate(date);
     }
 
+    @Override
+    public List<?> fetchDateWiseData(String startDate, String endDate) {
+        return vacancyMasterDAO.fetchDateWiseData(startDate, endDate);
+    }
+
 }

@@ -73,7 +73,7 @@
                                                     <div class="col-sm-3">
                                                     <form:checkbox path="hr"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
-                                                        <label style="font-weight: normal">HR</label>
+                                                        <label style="font-weight: normal">HR Head</label>
 
 
                                                     </div>

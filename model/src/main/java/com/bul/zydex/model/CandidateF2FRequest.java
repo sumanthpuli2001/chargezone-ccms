@@ -27,6 +27,17 @@ public class CandidateF2FRequest {
     private CandidateApplyJob candidateApplyJob;
     private Integer hrEmpId;
     private String hrName;
+    private int technicalKnowledge;
+    private int experience;
+    private int commSkill;
+    private int interPerSkill;
+    private int leaderSkill;
+    private String strengths;
+    private String weaknesses;
+    private String typeOfTraining;
+    private String technicalareas;
+    private String otherSkills;
+    private int excellent;
 
     public CandidateF2FRequest() {
 
@@ -176,7 +187,99 @@ public class CandidateF2FRequest {
     public void setHrName(String hrName) {
         this.hrName = hrName;
     }
-    
-    
 
+    public int getTechnicalKnowledge() {
+        return technicalKnowledge;
+    }
+
+    public void setTechnicalKnowledge(int technicalKnowledge) {
+        this.technicalKnowledge = technicalKnowledge;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    public int getCommSkill() {
+        return commSkill;
+    }
+
+    public void setCommSkill(int commSkill) {
+        this.commSkill = commSkill;
+    }
+
+    public int getInterPerSkill() {
+        return interPerSkill;
+    }
+
+    public void setInterPerSkill(int interPerSkill) {
+        this.interPerSkill = interPerSkill;
+    }
+
+    public int getLeaderSkill() {
+        return leaderSkill;
+    }
+
+    public void setLeaderSkill(int leaderSkill) {
+        this.leaderSkill = leaderSkill;
+    }
+
+
+    public String getStrengths() {
+        return strengths;
+    }
+
+    public void setStrengths(String strengths) {
+        this.strengths = strengths;
+    }
+
+    public String getWeaknesses() {
+        return weaknesses;
+    }
+
+    public void setWeaknesses(String weaknesses) {
+        this.weaknesses = weaknesses;
+    }
+
+    public String getTypeOfTraining() {
+        return typeOfTraining;
+    }
+
+    public void setTypeOfTraining(String typeOfTraining) {
+        this.typeOfTraining = typeOfTraining;
+    }
+
+    public String getTechnicalareas() {
+        return technicalareas;
+    }
+
+    public void setTechnicalareas(String technicalareas) {
+        this.technicalareas = technicalareas;
+    }
+
+    public String getOtherSkills() {
+        return otherSkills;
+    }
+
+    public void setOtherSkills(String otherSkills) {
+        this.otherSkills = otherSkills;
+    }
+
+    public int getExcellent() {
+        return excellent;
+    }
+
+    public void setExcellent(int excellent) {
+        this.excellent = excellent;
+    }
+
+
+
+
+
+    
 }

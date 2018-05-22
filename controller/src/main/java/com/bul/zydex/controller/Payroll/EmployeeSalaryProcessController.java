@@ -330,17 +330,16 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                 if (!employeeCtcList.isEmpty()) {
                     for (Object employeeCtcList1 : employeeCtcList) {
                         Object[] o1 = (Object[]) employeeCtcList1;
-                        if(null != o1[1] && null != o1[0]){
-                         String ctcName1 = (String) o1[1];
-                        Double ctcAmount1 = (Double) o1[0];
-                        employeeAdditionalSalary.setEmployeeSalaryProcess(employeeSalaryProcess);
-                        employeeAdditionalSalary.setPayrollSalaryType(ctcName1);
-                        employeeAdditionalSalary.setAdditionalAmount(ctcAmount1);
-                        employeeAdditionalSalaryService.create(employeeAdditionalSalary);
-                        
+                        if (null != o1[1] && null != o1[0]) {
+                            String ctcName1 = (String) o1[1];
+                            Double ctcAmount1 = (Double) o1[0];
+                            employeeAdditionalSalary.setEmployeeSalaryProcess(employeeSalaryProcess);
+                            employeeAdditionalSalary.setPayrollSalaryType(ctcName1);
+                            employeeAdditionalSalary.setAdditionalAmount(ctcAmount1);
+                            employeeAdditionalSalaryService.create(employeeAdditionalSalary);
+
                         }
-                        
-                       
+
                     }
 
                 }
@@ -399,17 +398,22 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                 List<?> pfAmountList = payrollProvidentFundService.readPf(employeeMaster.getZydexLocationMaster().getId());
 //         for (Object oPf : pfAmountList) {
                 double maxiAmount = 0;
+                double maxiAmountConbrutionEmployer = 0;
                 if (!pfAmountList.isEmpty()) {
                     PayrollProvidentFund payrollProvidentFund = (PayrollProvidentFund) pfAmountList.get(0);
                     double basicSalary = employeeSalaryProcess.getEmployeeBasicSalary();
                     double pf = Double.parseDouble(payrollProvidentFund.getPfPercentage());
+                    double pfEmployeer = Double.parseDouble(payrollProvidentFund.getEpfPercentage());
                     maxiAmount = Double.parseDouble(employeeMaster.getPfAmount());
+                    maxiAmountConbrutionEmployer = Double.parseDouble(employeeMaster.getPfAmountEmployer());
                     double taxpf = 0;
+                    double taxpfConbrutionEmployer = 0;
                     if (maxiAmount != 0) {
                         if (maxiAmount <= basicSalary) {
 
                             taxpf = (maxiAmount * pf / 100);
-
+                            taxpfConbrutionEmployer = (maxiAmountConbrutionEmployer * pfEmployeer / 100);
+                            
                             employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
                             employeeDeductionAmount.setDeductionType("Provident Fund");
                             employeeDeductionAmount.setDeductionAmount(taxpf);
@@ -1318,6 +1322,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         DecimalFormat df = new DecimalFormat("####0.00");
 
         List<String> headerList = new ArrayList<String>();
+        headerList.add("Emp Company Code");
         headerList.add("Emp Id");
         headerList.add("Emp Name");
         headerList.add("P.Day");
@@ -1332,6 +1337,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             }
 
         }
+         headerList.add("Gross Salary");
 //        List<?> list2 = employeeSalaryProcessService.readsalDeduction(employeeMaster);
         List<?> list2 = employeeSalaryProcessService.readsalDeductionSearch(employeeMaster);
         for (Object o1 : list2) {
@@ -1340,7 +1346,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                 headerList.add("" + str1[2]);
             }
         }
-        headerList.add("Gross Salary");
+       
         headerList.add("Tot.Dedn");
         headerList.add("Net Pay");
         List<?> list6 = ctcAllowanceService.read();
@@ -1364,6 +1370,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             EmployeeMaster employeeMaster1 = employeeMasterService.readById(employeeSalaryProcess1.getEmployeeMaster().getId());
             List<?> list = employeeExcelRecordService.readByEmployeExcelReportSearch(employeeSalaryProcess1);
 //            List tempList = (List) list.get(0);
+            empMap.put("Emp Company Code", "" + employeeMaster1.getEmployeeLocation());
             empMap.put("Emp Id", "" + employeeMaster1.getEmployeeId());
             empMap.put("Emp Name", employeeMaster1.getEmployeeName());
             empMap.put("P.Day", "" + list.get(0));
@@ -1380,6 +1387,9 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                  int netpayable1 = (int) Math.round(additionalAmount);
                 additionalAmount += (Double) o[1];
             }
+              additionalAmount += employeeSalaryProcess1.getEmployeeBasicSalary();
+//            empMap.put("Gross Salary", "" + df.format(additionalAmount));
+            empMap.put("Gross Salary", "" + df.format((int) Math.round(additionalAmount)));
 //            List dedSalaryList = employeeDeductionAmountService.readEmployeeForSalaryDeductioninfo(employeeSalaryProcess1);
             List dedSalaryList = employeeDeductionAmountService.readEmployeeForSalaryDeductioninfoSearch(employeeSalaryProcess1);
             for (Object dedSalaryList1 : dedSalaryList) {
@@ -1388,9 +1398,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                 empMap.put("" + o[0], "" + df.format((int) Math.round((double) o[1])));
                 deductionAmount += (Double) o[1];
             }
-            additionalAmount += employeeSalaryProcess1.getEmployeeBasicSalary();
-//            empMap.put("Gross Salary", "" + df.format(additionalAmount));
-            empMap.put("Gross Salary", "" + df.format((int) Math.round(additionalAmount)));
+          
 //            empMap.put("Deduction Amount", "" + df.format(deductionAmount));
             empMap.put("Tot.Dedn", "" + df.format((int) Math.round(deductionAmount)));
             empMap.put("Net Pay", "" + df.format((int) Math.round(additionalAmount - deductionAmount)));

@@ -12,13 +12,14 @@ import java.util.List;
  *
  * @author Vikas
  */
-public interface VacancyMasterDAO<T> extends GenericsDAO<T>{
-    
+public interface VacancyMasterDAO<T> extends GenericsDAO<T> {
+
     public List<?> fetchVacancyDetail();
-    
+
     public List<?> fetchCreatedVacancy(int empId);
-    
+
     public List<?> fetchVacancyBydate(String date);
-    
-    
+
+    public List<?> fetchDateWiseData(String startDate, String endDate);
+
 }

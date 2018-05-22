@@ -369,6 +369,71 @@
                                                     <div class="box-body no-padding">
                                                         <div class="form-group">
                                                             <div class="col-sm-6">
+                                                                <label>Position:</label> &nbsp;&nbsp;&nbsp;
+                                                                <span>${vacancyName}</span>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label>Name Of the candidate :</label> &nbsp;&nbsp;&nbsp;
+                                                                <span>${candidateF2FRequest.candidateApplyJob.name}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Technical Knowledge:</label> &nbsp;&nbsp;&nbsp;
+                                                                <span><c:if test="${candidateF2FRequest.technicalKnowledge == 1}">Excellent</c:if></span>
+                                                                <span><c:if test="${candidateF2FRequest.technicalKnowledge == 2}">Very Good</c:if></span>
+                                                                <span><c:if test="${candidateF2FRequest.technicalKnowledge == 3}">Acceptable</c:if></span>
+                                                                <span><c:if test="${candidateF2FRequest.technicalKnowledge == 4}">Not Suitable</c:if></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Experience:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span><c:if test="${candidateF2FRequest.experience == 1}">Excellent</c:if></span>
+                                                                <span><c:if test="${candidateF2FRequest.experience == 2}">Very Good</c:if></span>
+                                                                <span><c:if test="${candidateF2FRequest.experience == 3}">Acceptable</c:if></span>
+                                                                <span><c:if test="${candidateF2FRequest.experience == 4}">Not Suitable</c:if></span>
+                                                            </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Communication Skill:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span><c:if test="${candidateF2FRequest.commSkill == 1}">Excellent</c:if></span>
+                                                                <span><c:if test="${candidateF2FRequest.commSkill == 2}">Very Good</c:if></span>
+                                                                <span><c:if test="${candidateF2FRequest.commSkill == 3}">Acceptable</c:if></span>
+                                                                <span><c:if test="${candidateF2FRequest.commSkill == 4}">Not Suitable</c:if></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Inter-Personal Skill:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span><c:if test="${candidateF2FRequest.interPerSkill == 1}">Excellent</c:if></span>
+                                                                <span><c:if test="${candidateF2FRequest.interPerSkill == 2}">Very Good</c:if></span>
+                                                                <span><c:if test="${candidateF2FRequest.interPerSkill == 3}">Acceptable</c:if></span>
+                                                                <span><c:if test="${candidateF2FRequest.interPerSkill == 4}">Not Suitable</c:if></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>leadership Skill:</label> &nbsp;&nbsp;&nbsp;
+                                                                 <span><c:if test="${candidateF2FRequest.leaderSkill == 1}">Excellent</c:if></span>
+                                                                <span><c:if test="${candidateF2FRequest.leaderSkill == 2}">Very Good</c:if></span>
+                                                                <span><c:if test="${candidateF2FRequest.leaderSkill == 3}">Acceptable</c:if></span>
+                                                                <span><c:if test="${candidateF2FRequest.leaderSkill == 4}">Not Suitable</c:if></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Strengths:</label> &nbsp;&nbsp;&nbsp;
+                                                                <span>${candidateF2FRequest.strengths}</span>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label>Weaknesses :</label> &nbsp;&nbsp;&nbsp;
+                                                                <span>${candidateF2FRequest.weaknesses}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
                                                                 <table>
                                                                     <tr>
                                                                         <td><label>Interview Comittee:</label></td>

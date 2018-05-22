@@ -567,7 +567,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                         <!--<span class="product-title">  ${thoughtMaster}</span>-->
-                                    <marquee style="font-size:26px !important;"><strong style="color: #00BFFF;">Today's Thought:</strong> <span style="color: #006fad">${thoughtMaster.thought}</span></marquee>
+                                    <marquee style="font-size:18px !important;"><strong style="color: #00BFFF;">Today's Thought:</strong> <span style="color: #006fad">${thoughtMaster.thought}</span></marquee>
                                 </div>
                             </div>
 

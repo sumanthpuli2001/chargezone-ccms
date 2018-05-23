@@ -58,7 +58,7 @@
                         </a>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.userRight.employeeManagement}">
+                <c:if test="${sessionScope.userRight.budget || sessionScope.userRight.mpr || sessionScope.userRight.mppApproval || sessionScope.userRight.mprApproval || sessionScope.userRight.candidateList || sessionScope.userRight.vacancy || sessionScope.userRight.faceTofaceInterview || sessionScope.userRight.faceTofaceApproval}">
 
                     <li class="treeview" style="color: #585858;">
                         <a href="#" style="background: #fff;">
@@ -391,7 +391,7 @@
                                 </c:if>
                                 <c:if test="${!sessionScope.userRight.cafeteriaAdmin}">
                                     <c:if test="${sessionScope.checkReportingManager}">
-                                        <li><a href="cafeteriaRequest.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Cafeteria Request</a></li>
+                                        <li><a href="cafeteriaRequest.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Cafeteria Booking</a></li>
                                         <!--<li><a href="cafeteriaRequest.htm?act=searchEmpClick"><i class="fa fa-circle-o"></i>Search Cafeteria Request</a></li>-->
                                     </c:if>
                                 </c:if>
@@ -514,7 +514,7 @@
                     </ul>
                 </li>
 
-                <c:if test="${sessionScope.userRight.hr}">
+                <c:if test="${sessionScope.userRight.payroll}">
                     <li class="treeview" style="color: #585858;">
                         <a href="#" style="background: #fff;">
                             <i class="fa fa-rupee fa-lg" style="color: #585858;"></i>
@@ -546,7 +546,7 @@
                                     <li><a href="payrollPtCheck.htm?act=showResult"><i class="fa fa-circle-o"></i>PT Check</a></li>
                                     <li><a href="employeeTypeWiseSalary.htm?act=showResult"><i class="fa fa-circle-o"></i>Assign Salary</a></li>
                                     <li><a href="additionalAmountCheck.htm?act=showResult"><i class="fa fa-circle-o"></i>Additional Amount Check</a></li>
-                                    <li><a href="payrollEmployeeFormSixteen.htm?act=redirectToFormEmployeeSaving&search=none"><i class="fa fa-circle-o"></i>Employee Saving</a></li>
+                                    <!--                                   <li><a href="payrollEmployeeFormSixteen.htm?act=redirectToFormEmployeeSaving&search=none"><i class="fa fa-circle-o"></i>Tax Declaration</a></li>-->
                                     <li>
                                         <a href="payrollTaxDeduction.htm?act=taxDeductionCreate"><i class="fa fa-circle-o"></i>Tax Deduction Master</a>
                                     </li>
@@ -657,7 +657,7 @@
                                     <li><a href="employeeSalarySlip.htm?act=searchSalarySlipDetail&search=none"><i class="fa fa-circle-o"></i>Salary Slip </a></li>
                                     <li><a href="policyMaster.htm?act=searchPolicyDetail&search=none"><i class="fa fa-circle-o"></i>Policy  </a></li>
                                     <li><a href="companyMonthlyReport.htm?act=searchCompanyMonthlyReport&search=none"><i class="fa fa-circle-o"></i>Company Monthly Report</a></li>
-                                    <li><a href="companyPTReport.htm?act=searchCompanyPTReport&search=none"><i class="fa fa-circle-o"></i>PT Statement</a></li>
+                                    <li><a href="companyPTReport.htm?act=searchCompanyPTReport&search=none"><i class="fa fa-circle-o"></i>PT Slab by Summary</a></li>
                                     <li><a href="bankStatement.htm?act=searchBankStatementDetail&search=none"><i class="fa fa-circle-o"></i>Bank Statement </a></li>
                                     <li><a href="esicDeductionStatement.htm?act=searchEsicDetail&search=none"><i class="fa fa-circle-o"></i>ESIC Deduction Statement </a></li>
                                     <li><a href="overTime.htm?act=searchOTDetail&search=none"><i class="fa fa-circle-o"></i>Over Time Report </a></li>
@@ -949,7 +949,23 @@
                     <i class="fa fa-archive fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Report</span>
                 </a>
             </li> 
+            <li>
+                <a href="#" style="background: #fff;">
+                    <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
+                    <span style="color: #585858;">Tax</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
 
+
+                    <c:if test="${sessionScope.userRight.employee}">
+                        <li><a href="payrollEmployeeFormSixteen.htm?act=redirectToFormEmployeeSaving&search=none"><i class="fa fa-circle-o"></i>Tax Declaration</a></li>
+                        <c:if test="${sessionScope.userRight.travelExpenseAdmin}">
+                        <li><a href="taxSavingSubmit.htm?act=viewFilledForms"><i class="fa fa-circle-o"></i>Tax Deduction Approve</a></li>
+                        </c:if>
+                        </c:if>
+                </ul>
+            </li>
             </ul>
 
         </section>

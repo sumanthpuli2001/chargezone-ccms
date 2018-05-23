@@ -95,64 +95,36 @@
                                 <div class="row">
 
                                     <div class="col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <div class="col-sm-2">
-                                                <label>Employee No.:</label>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <input type="Text" class="form-control" readonly value="${employeeMaster[0]}">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <label>Employee Name:</label>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <input type="Text" id="employeeName" name="employeeName"  class="form-control" readonly value="${employeeMaster[1]}">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="col-sm-2">
-                                                <label>Designation:</label>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <input type="Text" class="form-control" readonly value="${employeeMaster[2]}">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <label>Level:</label>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <input type="Text" class="form-control" readonly value="${employeeMaster[3]}">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="col-sm-2">
-                                                <label>Department:</label>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <input type="Text" class="form-control" readonly value="${employeeMaster[4]}">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <label>Work Location:</label>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <input type="Text" class="form-control" readonly value="${employeeMaster[5]}">
-                                            </div>
-                                        </div>
-
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td style="width: 20%;">Employee No.:</td>
+                                                <td style="width: 20%;">${employeeMaster.employeeId}</td>
+                                                <td style="width: 10%;">&nbsp;</td>
+                                                <td style="width: 20%;">Employee Name:</td>
+                                                <td style="width: 30%;"> ${employeeMaster.employeeName}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 20%;">Designation:</td>
+                                                <td style="width: 20%;">${designationMaster.designationName}</td>
+                                                <td style="width: 10%;">&nbsp;</td>
+                                                <td style="width: 20%;">Level:</td>
+                                                <td style="width: 30%;"> ${levelMaster.level}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 20%;">Department:</td>
+                                                <td style="width: 20%;">${departmentMaster.departmentName}</td>
+                                                <td style="width: 10%;">&nbsp;</td>
+                                                <td style="width: 20%;">Work Location:</td>
+                                                <td style="width: 30%;"> ${locationMaster.location}</td>
+                                            </tr>
+                                        </table>
                                         <div class="form-group">
                                             <div class="col-sm-2">
                                                 <label>Reporting Manager:</label>
                                             </div>
 
                                             <div class="col-sm-4">
-                                                <input type="Text" class="form-control" readonly value="${reportingManager}">
-                                                <select id="kraCategoryMapHiddenMap" name="kraCategoryMapHiddenMap" class="form-control" style="display: none;" >
-                                                    <option value="">--SELECT--</option>
-                                                    <c:forEach var="kraCategory" items="${kraCategoryMap}">
-                                                        <option value="${kraCategory.key}">${kraCategory.value}</option>
-                                                    </c:forEach>
-                                                </select>
+                                                ${reportingManager}
                                             </div>
                                         </div>
                                     </div><!-- /.col -->
@@ -176,7 +148,7 @@
                                                 <input type="hidden" name="year" id="year" value="${year}">
                                                 <th style="text-align: center">Sr. No.</th>
                                                 <th style="text-align: center" id="kraGoalid1">High Impact Goal / KRA</th>
-                                                <th style="text-align: center" id="metricid1">Metric</th>
+                                                <th style="text-align: center" id="metricid1">Time Space</th>
                                                 <th style="text-align: center" id="metricid1">KRA Category</th>
 
                                                 <th style="margin: 0px;width: 100px;text-align: center" id="weightageid12">Weightage Out Of 75</th>

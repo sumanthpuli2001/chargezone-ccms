@@ -13,6 +13,37 @@
         <title>Vacancy Detail List Report</title>
     </head>
     <script>
+        function checkBlankField() {
+            var flag = true;
+            if ($('#strengths').val().replace(/\s/g, "") == '') {
+                document.getElementById('strengthsError').innerHTML = '-It must not be empty or white space.';
+                flag = false;
+            }
+            if ($('#weaknesses').val().replace(/\s/g, "") == '') {
+                document.getElementById('weaknessesError').innerHTML = '-It must not be empty or white space.';
+                flag = false;
+            }
+            if ($('#typeOfTraining').val().replace(/\s/g, "") == '') {
+                document.getElementById('typeOfTrainingError').innerHTML = '-It must not be empty or white space.';
+                flag = false;
+            }
+            if ($('#technicalareas').val().replace(/\s/g, "") == '') {
+                document.getElementById('technicalareasError').innerHTML = '-It must not be empty or white space.';
+                flag = false;
+            }
+            if ($('#otherSkills').val().replace(/\s/g, "") == '') {
+                document.getElementById('otherSkillsError').innerHTML = '-It must not be empty or white space.';
+                flag = false;
+            }
+            return flag;
+        }
+        function trainerOnchangeFunction(idString) {
+            if (document.getElementById(idString).innerHTML != null) {
+                document.getElementById(idString).innerHTML = '';
+            }
+        }
+    </script>
+    <script>
         var tempCount3 = 1;
         $(function () {
             $("#policyCloneid").on("click", function () {
@@ -97,133 +128,284 @@
                                     <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
                                 </c:if>
                                 <form:form class="form-horizontal" method="post"
-                                           commandName="candidateF2FRequest" action="candidateF2FApproval.htm?act=submitByApprover" onsubmit="return saveSubmit()" >
+                                           commandName="candidateF2FRequest" action="candidateF2FApproval.htm?act=submitByApprover" onsubmit="return checkBlankField();" >
                                     <input type="hidden" id="applicationId" name="applicationId" value="${applicationId}">   
                                     <div class="form-group">
                                         <div class="col-sm-6">
-                                            <label>Candidate Name:</label> &nbsp;&nbsp;&nbsp;
-                                            <span>${candidateF2FRequest.candidateApplyJob.name}</span>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>Vacancy Name:</label> &nbsp;&nbsp;&nbsp;
+                                            <label>Position:</label> &nbsp;&nbsp;&nbsp;
                                             <span>${candidateF2FRequest.vacancyMaster.name}</span>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
                                         <div class="col-sm-6">
                                             <label>Date Of Interview  :</label> &nbsp;&nbsp;&nbsp;
                                             <span>${candidateF2FRequest.dateOfInterview}</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <div class="col-sm-6">
+                                            <label>Name of the candidate:</label> &nbsp;&nbsp;&nbsp;
+                                            <span>${candidateF2FRequest.candidateApplyJob.name}</span>
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Venue :</label> &nbsp;&nbsp;&nbsp;
                                             <span>${candidateF2FRequest.location}</span>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
+                                        <table>
+                                            <tr>
+                                                <td><label>&nbsp;&nbsp;&nbsp;&nbsp; Interview Panel Member:</label></td>
+                                                <td>
+                                                    <c:forEach  var="test" items="${comitteeList}">
+
+                                                        &nbsp;&nbsp;&nbsp; &nbsp;<span>${test.employeeMaster.employeeName}</span>
+                                                        <br>
+                                                    </c:forEach>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                    <div class="form-group">
+
                                         <div class="col-sm-6">
-                                            <table>
-                                                <tr>
-                                                    <td><label>Interview Comittee:</label></td>
-                                                    <td>
-                                                        <c:forEach  var="test" items="${comitteeList}">
-
-                                                            &nbsp;&nbsp;&nbsp; &nbsp;<span>${test.employeeMaster.employeeName}</span>
-                                                            <br>
-                                                        </c:forEach>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <label></label> &nbsp;&nbsp;&nbsp;
-
+                                            <label>Interview Evaluation &nbsp;&nbsp;-:-</label> &nbsp;&nbsp;&nbsp;
                                         </div>
                                     </div>
-                                         <div class="form-group">
+                                    <div class="col-md-12 col-sm-12">
+                                        <!--<div class="table-responsive">-->
+                                        <table id="questionTable" class="table" style="" align="Center"  >
+                                            <tr>
+                                                <th style="text-align: center; vertical-align: middle">Rating</th>
+                                                <th style="text-align: center; vertical-align: middle">Excellent</th>
+                                                <th style="text-align: center; vertical-align: middle">Very Good</th>
+                                                <th style="text-align: center; vertical-align: middle">Acceptable</th>
+                                                <th style="text-align: center; vertical-align: middle">Not Suitable</th>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">Technical knowledge<span style="color: red;font-size: 20px;">*</span></td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="technicalKnowledge" required="required"  value="1" />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="technicalKnowledge" required="required"  value="2" />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="technicalKnowledge" required="required"  value="3" />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="technicalKnowledge" required="required"  value="4" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">Experience<span style="color: red;font-size: 20px;">*</span></td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="experience" required="required"  value="1"  />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="experience" required="required"  value="2"  />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="experience" required="required"  value="3" />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="experience" required="required"  value="4"  />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">Communication Skills<span style="color: red;font-size: 20px;">*</span></td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="commSkill" required="required"  value="1"  />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="commSkill" required="required"  value="2"  />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="commSkill" required="required"  value="3" />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="commSkill" required="required"  value="4"  />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">Inter-Personal Skills<span style="color: red;font-size: 20px;">*</span></td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="interPerSkill" required="required"  value="1"  />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="interPerSkill" required="required"  value="2" />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="interPerSkill" required="required"  value="3" />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="interPerSkill" required="required"  value="4"  />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">Leadership Skills<span style="color: red;font-size: 20px;">*</span></td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="leaderSkill" required="required"  value="1"  />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="leaderSkill" required="required"  value="2"  />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="leaderSkill" required="required"  value="3" />
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <form:radiobutton path="leaderSkill" required="required"  value="4"  />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <!--</div>-->
+                                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    <div class="form-group">
+
+                                        <div class="col-sm-6">
+                                            <label>Area for Training Required &nbsp;&nbsp;-:-</label> &nbsp;&nbsp;&nbsp;
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label>Strengths :<span style="color: red;font-size: 15px;">*</span></label>
+                                            <form:textarea path="strengths" id="strengths" class="form-control" placeholder="Employee Strengths" onchange="trainerOnchangeFunction('strengthsError');"></form:textarea>
+                                            <form:errors path="strengths" cssClass="errorDiv"></form:errors>
+                                                <span style="font-size: 14px; color: #dd4b39;" id="strengthsError"></span>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label>Weaknesses :<span style="color: red;font-size: 15px;">*</span></label>
+                                            <form:textarea path="weaknesses" id="weaknesses" class="form-control" placeholder="Employee Weaknesses" onchange="trainerOnchangeFunction('weaknessesError');"></form:textarea>
+                                            <form:errors path="weaknesses" cssClass="errorDiv"></form:errors>
+                                                <span style="font-size: 14px; color: #dd4b39;" id="weaknessesError"></span>
+                                            </div>
+                                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <div class="form-group">
+                                            <div class="col-sm-8">
+                                                <label>Type Of Training :<span style="color: red;font-size: 15px;">*</span></label>
+                                            <form:input path="typeOfTraining" id="typeOfTraining" class="form-control" placeholder="typeOfTraining" onchange="trainerOnchangeFunction('typeOfTrainingError');"></form:input>
+                                            <form:errors path="typeOfTraining" cssClass="errorDiv"></form:errors>
+                                                <span style="font-size: 14px; color: #dd4b39;" id="typeOfTrainingError"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-8">
+                                                <label>Technical Areas :<span style="color: red;font-size: 15px;">*</span></label>
+                                            <form:input path="technicalareas" id="technicalareas" class="form-control" placeholder="technicalareas" onchange="trainerOnchangeFunction('technicalareasError');"></form:input>
+                                            <form:errors path="technicalareas" cssClass="errorDiv"></form:errors>
+                                                <span style="font-size: 14px; color: #dd4b39;" id="technicalareasError"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-8">
+                                                <label>Other Areas(Soft Skills/behavioral) :<span style="color: red;font-size: 15px;">*</span></label>
+                                            <form:input path="otherSkills" id="otherSkills" class="form-control" placeholder="otherSkills" onchange="trainerOnchangeFunction('otherSkillsError');"></form:input>
+                                            <form:errors path="otherSkills" cssClass="errorDiv"></form:errors>
+                                                <span style="font-size: 14px; color: #dd4b39;" id="otherSkillsError"></span>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <div class="col-sm-6">
+                                                <label>Overall Rating <span style="color: red;font-size: 15px;">*</span>&nbsp;&nbsp;-:-</label> &nbsp;&nbsp;&nbsp;
+                                            </div>
+                                        </div>
+                                        <table id="questionTable" class="table" style="" align="Center"  >
+                                            <tr>
+                                                <td style="text-align: center"> <label>Excellent:</label>
+                                                <form:radiobutton path="excellent" required="required"  value="1" />
+                                            </td>
+                                            <td style="text-align: center"><label>Very Good:</label>
+                                                <form:radiobutton path="excellent" required="required"  value="2" />
+                                            </td>
+                                            <td style="text-align: center"><label>Acceptable:</label>
+                                                <form:radiobutton path="excellent" required="required"  value="3" />
+                                            </td>
+                                            <td style="text-align: center"><label>Not Suitable:</label>
+                                                <form:radiobutton path="excellent" required="required"  value="4" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="form-group">
 
                                         <div class="col-sm-2">
-                                            <label>Interviewer Comment:</label> &nbsp;&nbsp;&nbsp;
+                                            <label>Observations and Comments:</label> &nbsp;&nbsp;&nbsp;
                                         </div>
                                         <div class="col-sm-8">
 
                                             <textarea class="form-control"
-                                                      id="interviewerRemark" name="interviewerRemark" ></textarea>
+                                                      id="interviewerRemark" placeholder="comments" name="interviewerRemark" ></textarea>
                                         </div>
                                     </div>
-<!--                                    <div class="form-group">
-
-
-
-                                        <div class="col-sm-12">
-                                            <label></label> &nbsp;&nbsp;&nbsp;
-                                            <textarea class="form-control"
-                                                      id="interviewerRemark" name="interviewerRemark"  ></textarea>
-                                        </div>
-
-                                    </div>-->
                                     <div class="form-group">
                                         <div class="col-sm-6 col-sm-offset-5">
                                             <input type="submit" class="btn btn-primary" style="width: 100px;"   title="" value="SUBMIT">
                                         </div>
 
                                     </div>
-                                </form:form>
-                            </div><!-- /.tab-pane -->
-                        </div><!-- /.tab-content -->
-                    </div><!-- nav-tabs-custom -->
-                </div><!-- /.col -->
-            </div>
+                                </div>
+                            </form:form>
+                        </div><!-- /.tab-pane -->
+                    </div><!-- /.tab-content -->
+                </div><!-- nav-tabs-custom -->
+            </div><!-- /.col -->
     </div>
+</div>
 
-    <script>
-        jQuery.noConflict();
-        jQuery(document).ready(function () {
+<script>
+    jQuery.noConflict();
+    jQuery(document).ready(function () {
 
-            jQuery("#policyId1").tokenInput(${list}, {
-                preventDuplicates: true,
-                noResultsText: "No Result",
-                tokenLimit: "1",
-                searchingText: "Searching ... .. .",
-                prePopulate: ${preList}
-            });
+        jQuery("#policyId1").tokenInput(${list}, {
+            preventDuplicates: true,
+            noResultsText: "No Result",
+            tokenLimit: "1",
+            searchingText: "Searching ... .. .",
+            prePopulate: ${preList}
         });
+    });
 
-    </script>
-    <script>
-        var flag3 = true;
-        function saveSubmit() {
-            //        if (document.getElementById("name").value === "") {
-            //
-            //            document.getElementById("monthError").innerHTML = "- It must be filled.";
-            //            flag3 = false;
-            //        }
-            //            alert(document.getElementById("month").value);
-            if (document.getElementById("policyId1").value === "") {
+</script>
+<script>
+    var flag3 = true;
+    function saveSubmit() {
+        //        if (document.getElementById("name").value === "") {
+        //
+        //            document.getElementById("monthError").innerHTML = "- It must be filled.";
+        //            flag3 = false;
+        //        }
+        //            alert(document.getElementById("month").value);
+        if (document.getElementById("policyId1").value === "") {
 
-                document.getElementById("policyerror").innerHTML = "- It must be filled.";
-                flag3 = false;
-            }
-            else {
-                return true;
-            }
-            return false;
+            document.getElementById("policyerror").innerHTML = "- It must be filled.";
+            flag3 = false;
         }
-    </script>
+        else {
+            return true;
+        }
+        return false;
+    }
+</script>
 
-    <!--<script type="text/javascript">
-        $('.form_datetime').datetimepicker({
-            //language:  'fr',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 0
-        });
-    
-    </script>-->
+<!--<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
 
-    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+</script>-->
+
+<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 </html>
 <script>
     $(document).ready(function () {

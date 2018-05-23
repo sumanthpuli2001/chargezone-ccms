@@ -251,6 +251,12 @@
         <property name="jobDescription" type="string">
             <column name="job_description" />
         </property>
+        <property name="pfAmountEmployer" type="string">
+            <column name="pf_amount_employer" />
+        </property>
+        <property name="employeeLocation" type="string">
+            <column name="employee_location" />
+        </property>
         <set name="employeeDatetimeDatas" inverse="true">
             <key>
                 <column name="employee_master_id" />

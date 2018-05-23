@@ -38,7 +38,7 @@
 
 
 
-                <div class="col-md-12">
+                <div class="col-md-8" >
                     <!-- Custom Tabs -->
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
@@ -78,7 +78,11 @@
 
 
                                             <table style=" width: 90%; height: 0px !important;" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">
-
+                                                <tr>
+                                                    <td ><!--style="border:0px"-->
+                                                    <b>Company Code</b>
+                                                    <b>:</b>&nbsp;&nbsp;${employeeMaster.employeeLocation} </td>
+                                                </tr>
                                                 <tr>
                                                     <td style="border:0px; width: 30%;  height: 0px !important">
                                                         <b>Emp ID</b>

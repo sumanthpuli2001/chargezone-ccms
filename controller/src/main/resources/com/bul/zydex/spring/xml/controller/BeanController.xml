@@ -43,6 +43,7 @@
         <property name="noDueMasterService" ref="noDueMasterService1" />
         <property name="levelMasterService" ref="levelMasterService1" />
         <property name="probationToConfirmationService" ref="probationToConfirmationService1" />
+       
 
     </bean>
     <bean id="logInController1" class="com.bul.zydex.controller.LogInController" parent="controllerConfig" >
@@ -316,6 +317,7 @@
     <bean id="userRightMasterController1" class="com.bul.zydex.controller.UserRight.UserRightMasterController" parent="controllerConfig" >
         <property name="userRightMasterService" ref="userRightMasterService1" />
         <property name="userRightMasterValidator" ref="userRightMasterValidator1" />
+        <property name="userRightDescriptionService" ref="userRightDescriptionService1" />
     </bean>
 
     <!--Visitor Visited List-->
@@ -448,6 +450,8 @@
         <property name="appraisalkraActivityService" ref="appraisalkraActivityService1" />
         <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1" />
         <property name="appraisal360Service" ref="appraisal360Service1" />
+        <property name="levelMasterService" ref="levelMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
         
     </bean>
     <!--Appraisal Filling Data-->

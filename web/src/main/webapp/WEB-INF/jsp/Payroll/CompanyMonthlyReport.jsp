@@ -110,8 +110,10 @@
                                 </div><!-- /.row -->
                             </div><!-- /.box-body -->
                             <div class="form-group">
-                                <div class=" col-sm-2">
-                                    <button type="submit" class="btn btn-primary" data-original-title="" title="" >Search</button>
+                                 <div class=" col-sm-12">
+                                    <center>
+                                        <button type="submit" class="btn btn-primary" data-original-title="" title="" >Search</button><br><br>
+                                    </center>
                                 </div>
                             </div>
 

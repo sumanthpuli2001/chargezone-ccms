@@ -44,8 +44,8 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form action="recruitment.htm?act=budgetdeleteSubmit" method="post" commandName="candidateApplyJob"
-                   name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
+        <form:form action="recruitment.htm?act=searchDateWise" method="post" commandName="candidateApplyJob"
+                   name='form1' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
@@ -53,16 +53,39 @@
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
                                 <div>
-<!--                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">&nbsp; F To F</button>-->
+                                    <!--                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">&nbsp; F To F</button>-->
                                     <!--<button type="button" class="btn btn-default " data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>-->
                                 </div>
+                                <div class="box-body no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="col-sm-4">
+                                                    <label>From Date:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                        <input type="text" id="startDate" name="startDate" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" />
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label>To Date<span style="color: red;font-size: 12px;"></span></label>
+                                                    <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                        <input id="endDate" name="endDate" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" />
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label>SEARCH<span style="color: red;font-size: 5px;"></span></label>
+                                                    <button type="submit" class="btn btn-primary" style="width: 10px;" data-original-title="" title="" >SEARCH</button>
+                                                </div>
 
-                                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                    <!--<button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>-->
-                                    <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
+                                            </div>
 
-                                    <!--<button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'recruitment.htm?act=newCreateBudget'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>-->
-                                <%--</c:if>--%>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="box-header">
                                 </div>
                                 <div class="box-body no-padding">
@@ -82,8 +105,8 @@
                                                             <thead>
                                                                 <tr>
                                                                     <%--<c:if test="${sessionScope.userRight.hr}">--%>
-                                                                        <!--<th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>-->
-                                                                        <%--</c:if>--%>
+                                                                    <!--<th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>-->
+                                                                    <%--</c:if>--%>
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">Name of Candidate</th>
                                                                     <!--<th style="width: 50px;">Qualification</th>-->
@@ -106,15 +129,15 @@
                                                             <tr>
                                                                 <%--<c:if test="${sessionScope.userRight.hr}">--%>
                                                                     <!--<td align="center" style="width: 1px;"><input type="checkbox" id="checkId" name="checkId"  value="${list[0]}"  /></td>-->
-                                                                    <%--</c:if>--%>
+                                                                <%--</c:if>--%>
                                                                 <!--<td>/</td>-->
                                                                 <td>${list[3]}</td>
                                                                 <!--<td>${list[4]}</td>-->
                                                                 <!--<td>${list[5]}</td>-->
                                                                 <!--<td>${list[6]}</td>-->
-                                                                <td>${list[9]}</td>
                                                                 <td>${list[7]}</td>
                                                                 <td>${list[10]}</td>
+                                                                <td>${list[9]}</td>
                                                                 <td>
                                                                     <c:if test="${list[8] eq 1}"><span class="label label-default">New Applicant</span></c:if>
                                                                     <c:if test="${list[8] eq 2}"><span class="label label-default">Shortlisted</span></c:if>
@@ -161,7 +184,7 @@
         <div class="tab-pane" id="tab_3"></div><!-- /.tab-pane -->
         <!-- /.content -->
     </div>
-    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+
     <script>
         function ViewClick(id) {
             window.location = 'recruitment.htm?act=CandidateViewClick&id=' + id;
@@ -301,22 +324,22 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+    <script type="text/javascript">
+        $('.form_datetime').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
 
-
+    </script>
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>
-<script type="text/javascript">
-    $('.form_datetime').datetimepicker({
-        //language:  'fr',
-        weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        forceParse: 0
-    });
 
-</script>
 <script>
     $(document).ready(function () {
         $('#datetimepicker1').datepicker({

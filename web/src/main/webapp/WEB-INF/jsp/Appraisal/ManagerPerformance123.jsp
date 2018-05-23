@@ -416,7 +416,7 @@
                                                                 <%--<c:if test="${flag eq true}">--%>
 
                                                             <th style="text-align: center" id="kraGoalid1">High Impact Goal / KRA</th>
-                                                            <th style="text-align: center" id="metricid1">Metric</th>
+                                                            <th style="text-align: center" id="metricid1">Time Space</th>
                                                                 <%--</c:if>--%>
                                                                 <%--<c:if test="${flag ne true}">--%>
                                                             <th style="margin: 0px;width: 100px;text-align: center" id="weightageid1">Weightage Out Of 75</th>

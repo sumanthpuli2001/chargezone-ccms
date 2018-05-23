@@ -26,7 +26,7 @@
             }
         }
     </script>
-
+    
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -73,7 +73,7 @@
                                                     <div class="col-sm-3">
                                                     <form:checkbox path="hr"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
-                                                        <label style="font-weight: normal">HR</label>
+                                                        <label style="font-weight: normal">HR Head</label>
 
 
                                                     </div>
@@ -430,7 +430,7 @@
                                                     <div class="col-sm-3">
                                                     <form:checkbox path="ptStatement"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal">PT Statement</label>
+                                                        <label  style="font-weight: normal">PT Slab By Summary</label>
 
                                                     </div>
 
@@ -524,24 +524,8 @@
         <!--Employee detail completes here-->
         <!--read only entries ends here-->
 
-        <!--form horizontal ends here-->
-        <div class="tab-pane" id="tab_3"></div><!-- /.tab-pane -->
-        <!-- /.content -->
-    </div>
+            </div>
 
-    <script type="text/javascript">
-        $('.form_datetime').datetimepicker({
-            //            language: 'fr',
-            weekStart: 1,
-            //            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 1,
-            minView: 0,
-            maxView: 1,
-            forceParse: 0
-        });
-    </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>
 

@@ -1,4 +1,4 @@
-<%-- 
+   <%-- 
     Document   : newJoinee
     Created on : May 18, 2018, 3:03:09 PM
     Author     : Aman
@@ -16,30 +16,37 @@
     </head>
     <body>
         <section class="content-header">
-            <h1>Employee Detail</h1>
+            <h1 style="text-align: center;">Employee Detail</h1>
         </section>
-
+        <br/>
         <form:form class="form-horizontal" role="form" action="" commandName=""  method="post" name='form'>
 
             <div class="box-body no-padding">
                 <div class="row">
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-md-6 col-sm-6" style="text-align: center;">
                         <img src="${profilePicturePath}">
-
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="table table-bordered">
                             <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                 <tr>
-                                    <td>Employee Name: ${empDetail.employeeName}</td>
-                                    <td>Department:  ${department.departmentName}</td>
+                                    <th>Employee Name:</th>
+                                    <td>${empDetail.employeeName}</td>
+                                    <td>&nbsp;</td>
+                                    <th>Department: </th>
+                                    <td> ${department.departmentName}</td>
                                 </tr>
                                 <tr>
-                                    <td>Designation  ${designation.designationName}</td>
-                                    <td>Email:  ${empDetail.emailAddress}</td>
+                                    <th>Designation :</th>
+                                    <td> ${designation.designationName}</td>
+                                    <td>&nbsp;</td>
+                                    <th>Email: </th>
+                                    <td> ${empDetail.emailAddress}</td>
                                 </tr>
                                 <tr>
-                                    <td>Contact:  ${empDetail.contactNo1}</td>
+                                    <th>Contact: </th>
+                                    <td> ${empDetail.contactNo1}</td>
+                                    <td>&nbsp;</td>
                                 </tr>
                             </table>
                         </div>

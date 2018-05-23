@@ -317,7 +317,7 @@
 
 
                                                             <th style="text-align: center" id="kraGoalid1">High Impact Goal / KRA</th>
-                                                            <th style="text-align: center" id="metricid1">Metric</th>
+                                                            <th style="text-align: center" id="metricid1">Time Space</th>
                                                             <th style="text-align: center" id="metricid1">KRA Category</th>
 
                                                             <th style="margin: 0px;width: 25px;text-align: center;" id="weightageid12">Weightage Out Of 75</th>
@@ -709,7 +709,7 @@
 
 
                                                             <th style="text-align: center" id="kraGoalid1">Additional Activities / Projects</th>
-                                                            <th style="text-align: center" id="metricid1">Metric</th>
+                                                            <th style="text-align: center" id="metricid1">Time Space</th>
                                                             <th style="text-align: center" id="metricid1">Project Category</th>
 
                                                             <th style="margin: 0px;width: 25px;text-align: center;" id="">Priority</th>

@@ -466,6 +466,17 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         String btnType = request.getParameter("btnType");
         String applicationId = request.getParameter("applicationId");
         String message = request.getParameter("interviewerRemark");
+        String technicalKnowledge = request.getParameter("technicalKnowledge");
+        String experience = request.getParameter("experience");
+        String commSkill = request.getParameter("commSkill");
+        String interPerSkill = request.getParameter("interPerSkill");
+        String leaderSkill = request.getParameter("leaderSkill");
+        String excellent = request.getParameter("excellent");
+        String strengths = request.getParameter("strengths");
+        String weaknesses = request.getParameter("weaknesses");
+        String typeOfTraining = request.getParameter("typeOfTraining");
+        String technicalareas = request.getParameter("technicalareas");
+        String otherSkills = request.getParameter("otherSkills");
 
         candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
         CandidateJobApplication cja = candidateJobApplicationService.readById(candidateF2FRequest.getCandidateJobApplication().getId());
@@ -478,6 +489,17 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
 
         candidateF2FRequest.setStatus(1);
         candidateF2FRequest.setUserStatus(1);
+        candidateF2FRequest.setTechnicalKnowledge(Integer.parseInt(technicalKnowledge));
+        candidateF2FRequest.setExperience(Integer.parseInt(experience));
+        candidateF2FRequest.setCommSkill(Integer.parseInt(commSkill));
+        candidateF2FRequest.setInterPerSkill(Integer.parseInt(interPerSkill));
+        candidateF2FRequest.setLeaderSkill(Integer.parseInt(leaderSkill));
+        candidateF2FRequest.setExcellent(Integer.parseInt(excellent));
+        candidateF2FRequest.setStrengths(strengths);
+        candidateF2FRequest.setWeaknesses(weaknesses);
+        candidateF2FRequest.setTypeOfTraining(typeOfTraining);
+        candidateF2FRequest.setTechnicalareas(technicalareas);
+        candidateF2FRequest.setOtherSkills(otherSkills);
         candidateF2FRequestService.update(candidateF2FRequest);
 
         List<?> f2flist = new ArrayList<>();

@@ -6,7 +6,9 @@
 package com.bul.zydex.controller.UserRight;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.UserRightDescription;
 import com.bul.zydex.model.UserRightMaster;
+import com.bul.zydex.service.UserRight.UserRightDescriptionService;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
 import org.springframework.validation.Validator;
 
@@ -18,6 +20,7 @@ public class UserRightMasterAbstract extends CustomAbstract{
    
     protected Validator userRightMasterValidator;
     protected UserRightMasterService<UserRightMaster> userRightMasterService;
+    protected UserRightDescriptionService<UserRightDescription> userRightDescriptionService; 
 
     public Validator getUserRightMasterValidator() {
         return userRightMasterValidator;
@@ -34,4 +37,15 @@ public class UserRightMasterAbstract extends CustomAbstract{
     public void setUserRightMasterService(UserRightMasterService<UserRightMaster> userRightMasterService) {
         this.userRightMasterService = userRightMasterService;
     }
+
+    public UserRightDescriptionService<UserRightDescription> getUserRightDescriptionService() {
+        return userRightDescriptionService;
+    }
+
+    public void setUserRightDescriptionService(UserRightDescriptionService<UserRightDescription> userRightDescriptionService) {
+        this.userRightDescriptionService = userRightDescriptionService;
+    }
+
+   
+    
 }

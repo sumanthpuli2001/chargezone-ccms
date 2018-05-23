@@ -963,7 +963,7 @@
                                                                                                 </c:if>
                                                                                                 <c:if test="${pendingAtEmployeeListForManager gt 0}">
                                                                                                     <li class="item">
-                                                                                                        <a href="appraisalPerformance.htm?act=searchSubmit">
+                                                                                                        <a href="appraisalPerformance.htm?act=searchClick">
                                                                                                             <span class="product-title" href="javascript::;">PMP<span class="badge" style="float: right">${pendingAtEmployeeListForManager}</span></span>
                                                                                                         </a>
                                                                                                     </li>

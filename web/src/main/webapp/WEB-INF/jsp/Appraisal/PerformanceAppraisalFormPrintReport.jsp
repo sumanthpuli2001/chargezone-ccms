@@ -148,7 +148,7 @@
                                                 <input type="hidden" name="year" id="year" value="${year}">
                                                 <th style="text-align: center">Sr. No.</th>
                                                 <th style="text-align: center" id="kraGoalid1">High Impact Goal / KRA</th>
-                                                <th style="text-align: center" id="metricid1">Metric</th>
+                                                <th style="text-align: center" id="metricid1">Time Space</th>
                                                 <th style="text-align: center" id="metricid1">KRA Category</th>
 
                                                 <th style="margin: 0px;width: 100px;text-align: center" id="weightageid12">Weightage Out Of 75</th>

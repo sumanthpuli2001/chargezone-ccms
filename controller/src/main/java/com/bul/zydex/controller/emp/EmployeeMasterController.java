@@ -2385,6 +2385,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             locationList(request);
             shiftRotaionList(request);
             setZydexLocationList(request);
+            policyList(request);
+            ctcList(request);
 //        shiftList(request);
             hoursBasisList(request);
             //set user master id//
@@ -2393,6 +2395,34 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             employeeMaster.setUserMaster(userMaster);
             //set Employee master id//
             selectedEmployeeLevel1(request, employeeMaster);
+            List finalPolicyList = new ArrayList();
+            PolicyMaster policyMaster = new PolicyMaster();
+            List<?> policyData = (List<?>) employeePolicyDetailService.fetchPolicyData(employeeMaster.getId());
+            for (Object policyDataObject : policyData) {
+                List policyList = new ArrayList();
+                Object[] policyDetail = (Object[]) policyDataObject;
+                policyList.add(policyDetail[0]);
+                policyList.add(policyDetail[1]);
+                policyList.add(policyDetail[2]);
+                policyList.add(policyDetail[3]);
+                policyList.add(policyDetail[4]);
+                finalPolicyList.add(policyList);
+            }
+            List finalctcList = new ArrayList();
+            CtcAllowance ctcAllowance = new CtcAllowance();
+            List<?> ctcData = (List<?>) employeeCtcDetailService.fetchctcData(employeeMaster.getId());
+            for (Object ctcDataObject : ctcData) {
+                List ctcList = new ArrayList();
+                Object[] policyDetail1 = (Object[]) ctcDataObject;
+                ctcList.add(policyDetail1[0]);
+                ctcList.add(policyDetail1[1]);
+                ctcList.add(policyDetail1[2]);
+                ctcList.add(policyDetail1[3]);
+                ctcList.add(policyDetail1[4]);
+                ctcList.add(policyDetail1[5]);
+//            ctcList.add(policyDetail1[3]);
+                finalctcList.add(ctcList);
+            }
 //        selectedEmployeeLevel2(request, employeeMaster);
 //        selectedEmployeeLevel3(request, employeeMaster);
 //        selectedEmployeeLevel4(request, employeeMaster);
@@ -2402,6 +2432,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             request.setAttribute("company", employeeMaster.getCompany());
             request.setAttribute("employeeType", employeeMaster.getEmployeeType());
             request.setAttribute("shiftType", employeeMaster.getShiftType());
+            request.setAttribute("finalPolicyList", finalPolicyList);
+            request.setAttribute("finalctcList", finalctcList);
         } catch (Exception e) {
         }
         mv.getModelMap().put("employeeMaster", employeeMaster);
@@ -4868,19 +4900,19 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             XSSFCell cell1 = (XSSFCell) row.getCell(y + 1); // yes or no
 
                             employeePolicyDetail.setAmount(Double.parseDouble(cell.toString().replaceAll(",", "")));
-                            
+
                             if (cell1.toString().equalsIgnoreCase("yes")) {
                                 employeePolicyDetail.setStatus(1);
                             } else if (cell1.toString().equalsIgnoreCase("no")) {
                                 employeePolicyDetail.setStatus(0);
                             } else {
-                                
+
                             }
                             String policyName = (String) firstHeaderRow.getCell(y).toString();
                             policyMaster.setId(result1.get(policyName.toUpperCase()));
                             employeePolicyDetail.setPolicyMaster(policyMaster);
                             employeePolicyDetail.setEmployeeMaster(empMaster);
-                            
+
                             List<?> l = employeePolicyDetailService.readForMasterAdditionalAmount(empMaster.getId(), policyMaster.getId());
                             Integer id = 0;
                             if (!l.isEmpty() && 0 != l.size() && null != l) {

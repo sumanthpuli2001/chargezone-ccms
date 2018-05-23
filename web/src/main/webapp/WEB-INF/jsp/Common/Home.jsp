@@ -166,11 +166,11 @@
             .mySlides {
                 display: none;
                 width: 100% !important;
-                height: 150px !important;
+                height: 350px !important;
             }
             div.mySlides img{
                 width: 100% !important;
-                height: 150px !important;
+                height: 350px !important;
             }
 
             /* Add a pointer when hovering over the thumbnail images */
@@ -183,7 +183,7 @@
             .next1 {
                 cursor: pointer;
                 position: absolute;
-                top: 38%;
+                top: 50%;
                 width: auto;
                 margin-top: -50px;
                 color: white;
@@ -302,12 +302,31 @@
 
             .test {
                 width:60px;
-                margin-bottom: 20px;
+                margin-bottom: 0px !important;
                 white-space: normal;
                 text-align: center;
 
             }
+            .vertical-menu {
+                width: 250px;
+            }
 
+            .vertical-menu a {
+                background-color: white;
+                color: black;
+                display: block;
+                padding: 12px;
+                text-decoration: none;
+            }
+
+            .vertical-menu a:hover {
+                background-color: #ccc;
+            }
+
+            .vertical-menu a.active {
+                background-color: #3c8dbc;
+                color: white;
+            }
         </style>
 
 
@@ -346,310 +365,209 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
+                                    <div class="col-md-3">
+                                        <h3 class="box-title" style="text-align: center;"> Quick Links</h3>
 
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h3 class="box-title" style="text-align: center;">Life @ Spc</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
 
+                                        <div class="vertical-menu">
+                                            <a style="font-size: 20px;text-align: left;"  href="hrServiceRequest.htm?act=searchSubmit">
+                                                <i class="fa fa-envelope"></i><strong> HR Help Desk </strong>
+                                            </a>
+                                            <a style="font-size: 20px;text-align: left;" href="homeController.htm?act=kaizen">
+                                                <i class="fa fa-twitch"></i>
+                                                <strong>Kaizen</strong>
+                                            </a>
+                                            <a style="font-size: 20px;text-align: left;" href="emergencyContact.htm?act=viewContact">
+                                                <i class="fa fa-book"></i> &nbsp<strong>Emergency Contact</strong>
+                                            </a>
 
-
-                                    <div class="col-md-5">
-                                        <div class="box box-primary">
-                                            <div class="box-header">
-                                                <h3 class="box-title" id="gallery">Life @ Spc</h3>
-                                            </div>
+                                            <a style="font-size: 20px;text-align: left;"  href="http://www.spcls.co.in/csr.aspx" target="_blank">
+                                                <i class="fa fa-pencil-square-o"></i> &nbsp<strong>CSR</strong>
+                                            </a>
+                                            <a style="font-size: 20px;text-align: left;"  href="http://www.spcls.co.in/news-events.aspx" target="_blank">
+                                                <i class="fa fa-newspaper-o"></i> &nbsp<strong>News & Event</strong>
+                                            </a>
+                                            <a style="font-size: 20px;text-align: left;" href="holidayMaster.htm?act=viewHolidaysLocationWise">
+                                                <i class="fa fa-twitch"></i>
+                                                <strong>Holiday List</strong>
+                                            </a>
                                         </div>
-                                        <div class="box-body">
-                                            <div>
-                                                <c:forEach var="gallery" items="${galleryList}">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <c:forEach var="gallery" items="${galleryList}">
 
-                                                    <a href="homeController.htm?act=opanGallery">
-                                                        <div  class="mySlides">
+                                            <a href="homeController.htm?act=opanGallery">
+                                                <div  class="mySlides">
 
-                                                            <img hight="400" width="500" src="StorageYard/galleryimage/${gallery.imagesPath}"  >
-                                                        </div>
-                                                    </a>
-                                                </c:forEach>
-
-
-
-                                                <a class="prev1" onclick="plusSlides(-1)">❮</a>
-                                                <a class="next1" onclick="plusSlides(1)">❯</a>
-
-                                                <div >
-                                                    <p id="caption"></p>
+                                                    <img src="StorageYard/galleryimage/${gallery.imagesPath}"  >
                                                 </div>
+                                            </a>
+                                        </c:forEach>
 
 
-                                            </div>
+
+                                        <a class="prev1" onclick="plusSlides(-1)">❮</a>
+                                        <a class="next1" onclick="plusSlides(1)">❯</a>
+                                        <div>
+                                            <p id="caption"></p>
                                         </div>
-
-
-
-
-
                                     </div>           
-
-                                    <div class="col-md-1">
-                                    </div>
-                                    <div class="col-md-5">
-
-                                        <div class="box box-primary">
-                                            <div class="box-header">
-                                                <h3 class="box-title" id="rAndR">Rewards And Recognition</h3>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div  style="border: 1px #3c8dbc solid;border-radius: 5px;">
+                                            <div class="box-header" style="background-color: #006fad !important;">
+                                                <h3 class="box-title" id="rAndR" style="color:white;">Rewards And Recognition</h3>
                                             </div>
-                                        </div>
-                                        <div class="box-body">
-                                            <div>
-                                                <c:forEach var="rr" items="${RRList}">
+                                            <div class="box-body">
+                                                <div>
+                                                    <c:forEach var="rr" items="${RRList}">
 
-                                                    <a href="homeController.htm?act=opanRR">
-                                                        <div  class="rrmySlides">
+                                                        <a href="homeController.htm?act=opanRR">
+                                                            <div  class="rrmySlides">
 
-                                                            <img hight="400" width="500" src="StorageYard/RandRimage/${rr.imagesPath}"  >
-                                                        </div>
-                                                    </a>
-                                                </c:forEach>
-
+                                                                <img hight="400" width="500" src="StorageYard/RandRimage/${rr.imagesPath}"  >
+                                                            </div>
+                                                        </a>
+                                                    </c:forEach>
 
 
-                                                <a class="prev2" onclick="rrplusSlides(-1)">❮</a>
-                                                <a class="next2" onclick="rrplusSlides(1)">❯</a>
 
-                                                <div >
-                                                    <p id="caption"></p>
+                                                    <a class="prev2" onclick="rrplusSlides(-1)">❮</a>
+                                                    <a class="next2" onclick="rrplusSlides(1)">❯</a>
+
+                                                    <div >
+                                                        <p id="caption"></p>
+                                                    </div>
+
+
                                                 </div>
-
-
                                             </div>
                                         </div>
-
                                     </div>
-                                    <!--                                    <div class="col-md-6">
-                                                                            <div class="box box-primary">
-                                                                                <div class="box-header">
-                                                                                    <h3 class="box-title">Video Detail</h3>
-                                                                                    <div class="box-tools pull-right">
-                                                                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="box-body">
-                                                                                    <div class="col-xs-12 col-sm-12">
-                                    <c:forEach var="video" items="${videoList}">
-
-                                        <video controls style="width: 100%" height="367px;">
-                                            <source src="${video[1]}" type="video/mp4">
-                                        </video>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="box box-primary">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Todays Birthday</h3>
-                                            <!--                                            <div class="box-tools pull-right">
-                                                                                            <button class="btn btn-box-tool" data-widget="collapse"></button>
-                                                                                        </div>-->
+                                    <div class="col-md-4">
+                                        <div  style="border: 1px #3c8dbc solid;border-radius: 5px;">
+                                            <div class="box-header" style="background-color: #006fad !important;">
+                                                <h3 class="box-title" id="rAndR" style="color:white;">Today's Birthday</h3>
+                                            </div>
                                             <div class="box-body">
-
-
-                                                <marquee>
+                                                <br/>
+                                                <br/>
+                                                <marquee scrollamount="1">
                                                     <div class="node-cell">
                                                         <div class="node ui-draggable ui-droppable"> 
                                                             <div >
                                                                 <c:forEach var="todayBirthday" items="${TodaysBirthdays}">
-
-                                                                    <img src="${todayBirthday[2]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                </c:forEach>
-                                                            </div>
-                                                            <div>
-                                                                <c:forEach var="todayBirthday" items="${TodaysBirthdays}">
-
-
-                                                                    <label class="test">${todayBirthday[1]}</label>
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-
+                                                                    <div style="float: left;display: inline-block;margin-left:10px; ">
+                                                                        <img src="${todayBirthday[2]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                                        <br/>
+                                                                        <label class="test">${todayBirthday[1]}</label>
+                                                                        <br/>
+                                                                        &nbsp;
+                                                                        &nbsp;
+                                                                        &nbsp;
+                                                                        &nbsp;
+                                                                        <a style="font-size: 9px;" onclick="window.open('homeController.htm?act=newJoineDetail&id=' +${todayBirthday[0]}, 'popUpWindow', 'height=400,width=600,left=500%,top=100%,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no')">View</a>
+                                                                    </div>
                                                                 </c:forEach>
                                                             </div>
                                                         </div>
                                                 </marquee>
-
-
-                                                <!--                                                <marquee>
-                                                                                                    <div class="node-cell">
-                                                                                                        <div class="node ui-draggable ui-droppable">
-                                                
-                                                <%--<c:forEach var="" items="">--%>
-
-                                                    <img src="" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
-                                                    <br>
-
-                                                    <span style="font-size: 105%;color: black"></span>
-
-
-                                                <%--</c:forEach>--%>
                                             </div>
                                         </div>
-
-
-
-
-                                    </marquee>-->
-
-
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div  style="border: 1px #3c8dbc solid;border-radius: 5px;">
+                                            <div class="box-header" style="background-color: #006fad !important;">
+                                                <h3 class="box-title" id="rAndR" style="color:white;">New Joinee</h3>
+                                            </div>
+                                            <div class="box-body">
+                                                <br/>
+                                                <br/>
+                                                <marquee scrollamount="1">
+                                                    <div class="node-cell">
+                                                        <div class="node ui-draggable ui-droppable"> 
+                                                            <div >
+                                                                <c:forEach var="newJoining" items="${newJoiningList}">
+                                                                    <div style="float: left;display: inline-block;margin-left:10px; ">
+                                                                        <img src="${newJoining[2]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
+                                                                        <br/>
+                                                                        <label class="test">${newJoining[1]}</label>
+                                                                        <br/>
+                                                                        &nbsp;
+                                                                        &nbsp;
+                                                                        &nbsp;
+                                                                        &nbsp;
+                                                                        <a style="font-size: 9px;" onclick="window.open('homeController.htm?act=newJoineDetail&id=' +${newJoining[0]}, 'popUpWindow', 'height=400,width=600,left=500%,top=100%,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no')">View</a>
+                                                                    </div>
+                                                                </c:forEach>
+                                                            </div>
+                                                        </div>
+                                                </marquee>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-1">
                                 </div>
-                                <div class="col-md-5">
-                                    <div class="box box-primary">
-                                        <div class="box-header">
-                                            <h3 class="box-title">New Joinee</h3>
-                                            <!--                                            <div class="box-tools pull-right">
-                                                                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                                                        </div>-->
-                                            <div class="box-body">
-
-
-                                                <marquee>
-                                                    <div class="node-cell">
-                                                        <div class="node ui-draggable ui-droppable"> 
-                                                            <div >
-                                                                <c:forEach var="newJoining" items="${newJoiningList}">
-
-                                                                    <img src="${newJoining[2]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                </c:forEach>
-                                                            </div>
-                                                            <div>
-                                                                <c:forEach var="newJoining" items="${newJoiningList}">
-                                                                    <label class="test"><a style="color: black;" onclick="window.open('homeController.htm?act=newJoineDetail&id='+${newJoining[0]}, 'popUpWindow', 'height=300,width=500,left=500%,top=100%,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no')">${newJoining[1]}</a></label>
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                    &nbsp;
-                                                                </c:forEach>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                </marquee>
-
-
-
-
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
-                            <div class="row">
-                                <div class="col-md-1">
-                                </div>
-
-                                <div class="col-xs-4 col-sm-4 col-md-4">
-                                    <a class="label label-primary" style="font-size: 20px"  href="hrServiceRequest.htm?act=searchSubmit">
-                                        <i class="fa fa-envelope"></i><strong> HR Help Desk </strong>
-                                    </a>
-                                </div>
-                                <div  class="col-xs-4 col-sm-4 col-md-4">
-                                    <a class="label label-primary" style="font-size: 20px" href="homeController.htm?act=kaizen">
-                                        <i class="fa fa-twitch"></i>
-                                        <strong>Kaizen</strong>
-                                    </a>
-                                </div>
-                                <div class="col-xs-4 col-sm-4 col-md-3">
-                                    <!--<a class="label label-primary" style="font-size: 20px" href="hrServiceRequest.htm?act=searchSubmit">-->
-                                    <a class="label label-primary" style="font-size: 20px" href="emergencyContact.htm?act=viewContact">
-                                        <i class="fa fa-book"></i> &nbsp<strong>Emergency Contact</strong>
-                                    </a>
-                                </div>
-                                <!--                                <div  class="col-xs-4 col-sm-4 col-md-3">
-                                                                    <a class="label label-info" style="font-size: 20px"  href="classifiedBox.htm?act=searchSubmit" >
-                                                                        <i class="fa fa-weixin"></i>
-                                                                        <strong>Classified</strong>
+                            <!--                                <div class="row">
+                                                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                                                    <a class="label label-primary" style="font-size: 20px"  href="hrServiceRequest.htm?act=searchSubmit">
+                                                                        <i class="fa fa-envelope"></i><strong> HR Help Desk </strong>
                                                                     </a>
-                                                                </div>-->
-
-
-                            </div>
-                            <br>
-                            <br>
-                            <div class="row">
-                            </div>
-                            <div class="row">
-                                <div class="col-md-1">
-
-                                </div>
-
-                                <div class="col-xs-4 col-sm-4 col-md-4">
-                                    <a class="label label-primary" style="font-size: 20px"  href="http://www.spcls.co.in/csr.aspx" target="_blank">
-                                        <i class="fa fa-pencil-square-o"></i> &nbsp<strong>CSR</strong>
-                                    </a>
-                                </div>
-                                <div class="col-xs-4 col-sm-4 col-md-4">
-                                    <a class="label label-primary" style="font-size: 20px"  href="http://www.spcls.co.in/news-events.aspx" target="_blank">
-                                        <i class="fa fa-newspaper-o"></i> &nbsp<strong>News & Event</strong>
-                                    </a>
-                                </div>
-                                <div  class="col-xs-4 col-sm-4 col-md-3">
-                                    <a class="label label-primary" style="font-size: 20px" href="holidayMaster.htm?act=viewHolidaysLocationWise">
-                                        <i class="fa fa-twitch"></i>
-                                        <strong>Holiday List</strong>
-                                    </a>
-                                </div>
-
-
-                            </div>
+                                                                </div>
+                                                                <div  class="col-xs-4 col-sm-4 col-md-4">
+                                                                    <a class="label label-primary" style="font-size: 20px" href="homeController.htm?act=kaizen">
+                                                                        <i class="fa fa-twitch"></i>
+                                                                        <strong>Kaizen</strong>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-4 col-sm-4 col-md-3">
+                                                                    <a class="label label-primary" style="font-size: 20px" href="hrServiceRequest.htm?act=searchSubmit">
+                                                                    <a class="label label-primary" style="font-size: 20px" href="emergencyContact.htm?act=viewContact">
+                                                                        <i class="fa fa-book"></i> &nbsp<strong>Emergency Contact</strong>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <br>
+                                                            <div class="row">
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                                                    <a class="label label-primary" style="font-size: 20px"  href="http://www.spcls.co.in/csr.aspx" target="_blank">
+                                                                        <i class="fa fa-pencil-square-o"></i> &nbsp<strong>CSR</strong>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                                                    <a class="label label-primary" style="font-size: 20px"  href="http://www.spcls.co.in/news-events.aspx" target="_blank">
+                                                                        <i class="fa fa-newspaper-o"></i> &nbsp<strong>News & Event</strong>
+                                                                    </a>
+                                                                </div>
+                                                                <div  class="col-xs-4 col-sm-4 col-md-3">
+                                                                    <a class="label label-primary" style="font-size: 20px" href="holidayMaster.htm?act=viewHolidaysLocationWise">
+                                                                        <i class="fa fa-twitch"></i>
+                                                                        <strong>Holiday List</strong>
+                                                                    </a>
+                                                                </div>
+                                                            </div>-->
                             <br>
                             <br>
 
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                         <!--<span class="product-title">  ${thoughtMaster}</span>-->
-                                    <marquee style="font-size:26px !important;"><strong style="color: #00BFFF;">Today's Thought:</strong> <span style="color: #006fad">${thoughtMaster.thought}</span></marquee>
+                                    <marquee style="font-size:18px !important;"><strong style="color: #00BFFF;">Today's Thought:</strong> <span style="color: #006fad">${thoughtMaster.thought}</span></marquee>
                                 </div>
                             </div>
 

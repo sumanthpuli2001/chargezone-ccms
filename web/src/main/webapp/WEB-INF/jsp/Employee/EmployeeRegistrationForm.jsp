@@ -13,7 +13,13 @@
         <title>Employee Create</title>
     </head>
 
+    <script>
+        $(document).ready(function () {
+            window.onload = changetotalButton();
+            window.onload = changetotalButtonCTC();
+        });
 
+    </script>
     <script>
         function buttonFun1() {
             var className = $('#minusId1').attr('class');
@@ -245,6 +251,86 @@
 //        }
     </script>
     <script>
+        function changetotalButton() {
+//            alert("hii");
+            var total = 0;
+            var Ctctotal = 0;
+            var element = document.getElementById('amount1').value;
+//            var conyance = parseInt(document.getElementById("conveysAmount").value);
+            var basicSalary = parseInt(document.getElementById("basicSalary").value);
+            if (parseInt(element) > 0) {
+                total = total + parseInt(element);
+            }
+//            if (parseInt(conyance) > 0) {
+//                total = total + parseInt(conyance);
+//            }
+            if (parseInt(basicSalary) > 0) {
+                total = total + parseInt(basicSalary);
+
+            }
+            document.getElementById("txtresult").value = total;
+            document.getElementById("txtresultCTC").value = total;
+
+
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+        function totalValueChange(ele, oldvalue) {
+
+            var element = document.getElementById('txtresult').value;
+            var element1 = document.getElementById('txtresultCTC').value;
+            document.getElementById('txtresult').value = '';
+            document.getElementById('txtresult').value = parseInt(ele.value) + parseInt(element) - oldvalue;
+            document.getElementById('txtresultCTC').value = '';
+            document.getElementById('txtresultCTC').value = parseInt(ele.value) + parseInt(element1) - oldvalue;
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+//        function totalValueChange1(ele) {
+//            alert(parseInt(ele.value));
+//            var element = document.getElementById('txtresult').value;
+//            alert(parseInt(element);
+//                    document.getElementById('txtresult').value = '';
+//            document.getElementById('txtresult').value = parseInt(element) - parseInt(ele.value);
+////            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+//        }
+    </script>
+    <script>
+        function changetotalButtonCTC() {
+            var total = 0;
+            var element = document.getElementById('ctcamount1').value;
+//            var conyance = parseInt(document.getElementById("conveysAmount").value);
+            var basicSalary = parseInt(document.getElementById("txtresult").value);
+            if (parseInt(element) > 0) {
+                total = total + parseInt(element);
+            }
+//            if (parseInt(conyance) > 0) {
+//                total = total + parseInt(conyance);
+//            }
+            if (parseInt(basicSalary) > 0) {
+                total = total + parseInt(basicSalary);
+
+            }
+            document.getElementById("txtresultCTC").value = total;
+
+
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+        function totalValueChangeCTC(ele, oldvalue) {
+
+            var element = document.getElementById('txtresultCTC').value;
+            document.getElementById('txtresultCTC').value = '';
+            document.getElementById('txtresultCTC').value = parseInt(ele.value) + parseInt(element) - oldvalue;
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+//        function totalValueChange1(ele) {
+//            alert(parseInt(ele.value));
+//            var element = document.getElementById('txtresult').value;
+//            alert(parseInt(element);
+//                    document.getElementById('txtresult').value = '';
+//            document.getElementById('txtresult').value = parseInt(element) - parseInt(ele.value);
+////            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+//        }
+    </script>
+    <script>
         function selectShift(rotationId) {
 //            alert('Call Ajax');
             var shiftMasterId = document.getElementById("shiftName").value;
@@ -373,8 +459,8 @@
                         + "</select>"
                         + "</div><span id=\"ctcError" + tempCount4 + "\" style=\"color: red;\"></span></td>"
                         //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'  min=\"0\" class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'   onFocus=\"(this.name=this.value)\" onchange=\"totalValueChangeCTC(this,this.name);\" min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount4 + "' id='taxable" + tempCount4 + "'</td>"
                         + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='month" + tempCount4 + "' name='month" + tempCount4 + "' class=\"form-control\">"
                         + "<option value=\"\">--SELECT--</option>"
                         + "<option value=\"01\">January</option>"
@@ -437,16 +523,38 @@
         }
 
         function removectc(ctcDiv1) {
+//            try {
+//                tempCount4--;
+//                var val = document.getElementById("ctcCount").value;
+//                val = val - 1;
+//                document.getElementById("ctcCount").value = val;
+//                var element1 = document.getElementById(ctcDiv1);
+//                element1.parentNode.removeChild(element1);
+//            } catch (e) {
+//
+//            }
+//            
+
             try {
                 tempCount4--;
+
                 var val = document.getElementById("ctcCount").value;
+                var element = document.getElementById("ctcamount" + val).value;
+
                 val = val - 1;
+
+                var element2 = document.getElementById('txtresultCTC').value;
+                document.getElementById('txtresultCTC').value = '';
+                document.getElementById('txtresultCTC').value = parseInt(element2) - parseInt(element);
+
                 document.getElementById("ctcCount").value = val;
-                var element1 = document.getElementById(ctcDiv1);
+                element1 = document.getElementById(ctcDiv1);
+
                 element1.parentNode.removeChild(element1);
             } catch (e) {
 
             }
+
         }
 
     </script>
@@ -462,7 +570,7 @@
                         + "</select>"
                         + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
 //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "'  min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "' onFocus=\"(this.name=this.value)\" onchange=\"totalValueChange(this,this.name);\" min=\"0\" class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
@@ -491,12 +599,36 @@
         }
 
         function removePolicy(policyDiv) {
+
+//            try {
+//                tempCount3--;
+//                var val = document.getElementById("policyCount").value;
+//                val = val - 1;
+//                document.getElementById("policyCount").value = val;
+//                var element1 = document.getElementById(policyDiv);
+//                element1.parentNode.removeChild(element1);
+//            } catch (e) {
+//
+//            }
             try {
                 tempCount3--;
+               
                 var val = document.getElementById("policyCount").value;
+
+                var element = document.getElementById("amount" + val).value;
+
                 val = val - 1;
+
+                var element2 = document.getElementById('txtresult').value;
+                document.getElementById('txtresult').value = '';
+                document.getElementById('txtresult').value = parseInt(element2) - parseInt(element);
+                var element21 = document.getElementById('txtresultCTC').value;
+                document.getElementById('txtresultCTC').value = '';
+                document.getElementById('txtresultCTC').value = parseInt(element21) - parseInt(element);
+
                 document.getElementById("policyCount").value = val;
-                var element1 = document.getElementById(policyDiv);
+                element1 = document.getElementById(policyDiv);
+
                 element1.parentNode.removeChild(element1);
             } catch (e) {
 
@@ -1132,7 +1264,7 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="basicSalary" class="form-control"  placeholder="Enter Basic Salary"/>
+                                                        <form:input path="basicSalary"  id="basicSalary" class="form-control"  placeholder="Enter Basic Salary" onchange="changetotalButton();" />
                                                         <form:errors path="basicSalary" cssClass="errorDiv"/>
                                                     </div>
 
@@ -1233,7 +1365,7 @@
                                                                                                                                     <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control">
                                                                                                                                 </td>-->
                                                                 <td style="text-align: center">
-                                                                    <input type="number" name="amount1" id="amount1" min="0" class="form-control">
+                                                                    <input name="amount1" id="amount1" min="0" onchange="changetotalButton();"class="form-control" >
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <input type="checkbox" name="taxable1" id="taxable1" >
@@ -1245,6 +1377,19 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+
+                                                    </div>
+                                                    <div class="col-sm-2">
+
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>Gross Total:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <input  id="txtresult" name="txtresult" class="form-control" readonly="true"  />
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 col-sm-12">
@@ -1277,7 +1422,7 @@
                                                                                                                                     <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control">
                                                                                                                                 </td>-->
                                                                 <td style="text-align: center">
-                                                                    <input type="number" name="ctcamount1" id="ctcamount1" min="0" class="form-control">
+                                                                    <input type="number" name="ctcamount1" id="ctcamount1" min="0" onchange="changetotalButtonCTC();"class="form-control" >
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <input type="checkbox" name="taxable1" id="taxable1" >
@@ -1317,6 +1462,19 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+
+                                                    </div>
+                                                    <div class="col-sm-2">
+
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>CTC Total:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <input id="txtresultCTC" name="txtresultCTC" class="form-control" readonly="true"  />
+
                                                     </div>
                                                 </div>
 

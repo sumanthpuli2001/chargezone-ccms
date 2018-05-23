@@ -6,7 +6,9 @@
 package com.bul.zydex.controller.Payroll;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.DisplaymorNotes;
 import com.bul.zydex.model.RetirementAge;
+import com.bul.zydex.service.Payroll.DisplaymorNotesService;
 import com.bul.zydex.service.Payroll.RetirementAgeService;
 import org.springframework.validation.Validator;
 
@@ -18,6 +20,7 @@ public class RetirementAgeAbstract extends CustomAbstract {
 
     protected RetirementAgeService<RetirementAge> retirementAgeService;
     protected Validator companyMasterValidator;
+       protected DisplaymorNotesService<DisplaymorNotes> displaymorNotesService;
 
     public RetirementAgeService<RetirementAge> getRetirementAgeService() {
         return retirementAgeService;
@@ -34,6 +37,15 @@ public class RetirementAgeAbstract extends CustomAbstract {
     public void setCompanyMasterValidator(Validator companyMasterValidator) {
         this.companyMasterValidator = companyMasterValidator;
     }
+
+    public DisplaymorNotesService<DisplaymorNotes> getDisplaymorNotesService() {
+        return displaymorNotesService;
+    }
+
+    public void setDisplaymorNotesService(DisplaymorNotesService<DisplaymorNotes> displaymorNotesService) {
+        this.displaymorNotesService = displaymorNotesService;
+    }
+    
 
     
     

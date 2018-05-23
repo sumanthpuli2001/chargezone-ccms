@@ -287,6 +287,11 @@
 
                                                     </tr>
                                                 </c:if>
+                                                    
+                                                     <tr>
+                                                    <th align="left">Notes: ${notes}</th>
+
+                                                </tr>
 
                                             </thead>
 

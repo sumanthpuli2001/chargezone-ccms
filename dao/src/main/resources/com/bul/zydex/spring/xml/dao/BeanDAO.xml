@@ -268,4 +268,5 @@
     <bean id="leaveEmployeeDetailsApprovalHistoryDAO1" class="com.bul.zydex.dao.leave.LeaveEmployeeDetailsApprovalHistoryDAOImpl" parent="sessionFactoryConfig"/>
     <bean id="taxDeductionDeclarationSavingStatusDAO1" class="com.bul.zydex.dao.Payroll.TaxDeductionDeclarationSavingStatusDAOImpl" parent="sessionFactoryConfig" />
     <bean id="emergencyContactDAO1" class="com.bul.zydex.dao.EmergencyContactDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="displaymorNotesDAO1" class="com.bul.zydex.dao.Payroll.DisplaymorNotesDAOImpl" parent="sessionFactoryConfig" />
 </beans>

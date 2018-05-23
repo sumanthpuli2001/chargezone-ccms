@@ -905,6 +905,7 @@
         <property name="payrollLoanRemainingAmountService" ref="payrollLoanRemainingAmountService1" />
         <property name="payrollLoanTypeService" ref="payrollLoanTypeService1" />
         <property name="userRightMasterService" ref="userRightMasterService1" />
+        <property name="displaymorNotesService" ref="displaymorNotesService1" />
     </bean>
     <bean id="certificateTemplateController1" class="com.bul.zydex.controller.Payroll.CertificateTemplateController" parent="controllerConfig" >
         <property name="certificateTemplateService" ref="certificateTemplateService1" />
@@ -1234,6 +1235,7 @@
     <bean id="retirementAgeController1" class="com.bul.zydex.controller.Payroll.RetirementAgeController" parent="controllerConfig" >
         <property name="retirementAgeService" ref="retirementAgeService1"></property>
         <property name="companyMasterValidator" ref="companyMasterValidator1"></property>
+        <property name="displaymorNotesService" ref="displaymorNotesService1"></property>
 
     </bean>
     

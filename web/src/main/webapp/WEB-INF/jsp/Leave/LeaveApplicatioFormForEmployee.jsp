@@ -1498,6 +1498,8 @@
         var newstrDate = leaveTypes.options[leaveTypes.selectedIndex].text;
         strUser1 = newstrDate.split('(');
         strUser = strUser1[1].split(')');
+        if (selectedText == 'Short Leave') {
+        } else{
         if (parseFloat(strUser[0]) >= 0) {
         var now = new Date();
         var Enddate1 = Enddate.split(' - ');
@@ -1511,7 +1513,9 @@
 
         var d2 = new Date(parts1[0], (parts[1] - 1), parts[0], parts2[0], parts2[1]);
         if (selectedText == 'Short Leave') {
-        d2.setTime(d2.getTime() + ('${shortLeaveHoursNo}' * 60 * 60 * 1000));
+
+//        d2.setTime(d2.getTime() + ('${shortLeaveHoursNo}' * 60 * 60 * 1000));    // This line for add 3 hr short leave
+        d2.setTime(d2.getTime() + (01 * 60 * 60 * 1000)); // This line for add 1 hr short leave
         }
         var aDate = d2.getDate();
         var aMonth = d2.getMonth() + 1;
@@ -1542,8 +1546,69 @@
         document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
         }
         }
+        }
 
     </script>
+    <script>
+        function   shortLeaveEndCount(Enddate){
+        document.getElementById('shortleaveendDateError').innerHTML = '';
+        var startDate = document.getElementById('startDateShort').value;
+        var Strdate1 = startDate.split(' - ');
+        var s_date = Strdate1[0];
+        s_date = s_date.split("/");
+        var strmonth = s_date[1];
+        var strDate = s_date[0];
+        s_date = s_date[1] + "/" + s_date[0] + "/" + s_date[2];
+        var strts = startDate.split('/');
+        var strts1 = strts[2].split(' - ');
+        var strts2 = strts1[1].split(':');
+        var strHr = strts2[0];
+        var hrCal = strHr * 60 * 60;
+        var strMin = strts2[1];
+        var minCal = strMin * 60;
+        var strTotal = hrCal + minCal;
+        //..................................// 
+
+        var Enddate1 = Enddate.split(' - ');
+        var n_date = Enddate1[0];
+        n_date = n_date.split("/");
+        var EndMonth = n_date[1];
+        var EndDate = n_date[0];
+        n_date = n_date[1] + "/" + n_date[0] + "/" + n_date[2];
+        var parts = Enddate.split('/');
+        var parts1 = parts[2].split(' - ');
+        var parts2 = parts1[1].split(':');
+        var endHr = parts2[0];
+        var endHrCal = endHr * 60 * 60;
+        var endMin = parts2[1];
+        var EndMinCal = endMin * 60;
+        var EndTotal = endHrCal + EndMinCal;
+        //...............................//
+        if (strmonth == EndMonth && strDate == EndDate){
+        var checkTime = strTotal + 10800;
+        if (checkTime >= EndTotal && strTotal <= EndTotal){
+        if ((EndTotal - strTotal) <= 3600){
+        document.getElementById('noOfDayLeave').value = '1';
+        }
+        if (((EndTotal - strTotal) >= 3601) && ((EndTotal - strTotal) <= 7200)){
+        document.getElementById('noOfDayLeave').value = '2';
+        }
+        if ((EndTotal - strTotal) >= 7201 && ((EndTotal - strTotal) <= 10800)){
+        document.getElementById('noOfDayLeave').value = '3';
+        }
+        }
+        else{
+        document.getElementById('endDateShort').value = '';
+        document.getElementById('shortleaveendDateError').innerHTML = 'Maximum 3 Hour Short Leave Allow';
+        }
+
+        } else{
+
+        document.getElementById('shortleaveendDateError').innerHTML = 'Please Select Valid Date';
+        }
+        }
+    </script>
+
     <script>
         function buttonFun1() {
         var className = $('#minusId1').attr('class');
@@ -1886,7 +1951,7 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-12">
                                                         <label>Leave Type:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="leaveTypeMaster.id" class="form-control" onchange="modelopenpopup();leaveSetting(); daysCount();  calculateDayByAjax();">
+                                                        <form:select path="leaveTypeMaster.id" class="form-control" onchange="modelopenpopup();daysCount();leaveSetting();calculateDayByAjax();">
                                                             <form:option value="" label="-- Select --"/>
                                                             <form:options items="${leaveTypemap}" />
                                                         </form:select>
@@ -2032,10 +2097,11 @@
                                                             <label>Leave End Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date" id="shortLeaveEndDate"   data-date-format="dd/mm/yyyy - hh:ii " data-link-field="dtp_input1">
                                                                 <%--<form:input id="leaveEndDateId" class="form-control" size="16" type="text" value="" onchange="leaveSetting(); daysCount();" readonly="true"></form:input>--%>
-                                                                <input type="text"  name="endDateShort" id="endDateShort" class="form-control" size="16" type="text" value=""  readonly="true"/>
+                                                                <input type="text"  name="endDateShort" id="endDateShort" class="form-control" size="16" onchange="shortLeaveEndCount(this.value);" type="text" value=""  readonly="true"/>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                             <span id="shortleaveendDateError" style="color: red;"></span>
+                                                            <input type="hidden" name="noOfDayLeave" id="noOfDayLeave" >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2182,6 +2248,17 @@
 
     <script type="text/javascript">
         $('#shortLeaveStartDate').datetimepicker({
+        //        language:  'fr',
+        weekStart: 1,
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                forceParse: 0,
+                showMeridian: 1
+        });</script>
+    <script type="text/javascript">
+        $('#shortLeaveEndDate').datetimepicker({
         //        language:  'fr',
         weekStart: 1,
                 todayBtn: 1,

@@ -269,4 +269,5 @@
     <bean id="taxDeductionDeclarationSavingStatusDAO1" class="com.bul.zydex.dao.Payroll.TaxDeductionDeclarationSavingStatusDAOImpl" parent="sessionFactoryConfig" />
     <bean id="emergencyContactDAO1" class="com.bul.zydex.dao.EmergencyContactDAOImpl" parent="sessionFactoryConfig" />
     <bean id="userRightDescriptionDAO1" class="com.bul.zydex.dao.UserRight.UserRightDescriptionDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="displaymorNotesDAO1" class="com.bul.zydex.dao.Payroll.DisplaymorNotesDAOImpl" parent="sessionFactoryConfig" />
 </beans>

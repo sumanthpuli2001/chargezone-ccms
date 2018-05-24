@@ -4045,6 +4045,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         companyList(request);
 //        shiftList(request);
         hoursBasisList(request);
+        policyList(request);
+        ctcList(request);
         //getLastYearPerformance Ratings Of Employee For ReadOnly.s
         List<?> lastYearPerformanceRatingsOfEmployeeList = employeeMasterService.getLastYearPerformanceRatingOfEmployee(id);
 
@@ -4060,6 +4062,35 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        selectedEmployeeLevel4(request, employeeMaster);
 //        selectedEmployeeLevel5(request, employeeMaster);
 //        selectedEmployeeLevel6(request, employeeMaster);
+
+        List finalPolicyList = new ArrayList();
+        PolicyMaster policyMaster = new PolicyMaster();
+        List<?> policyData = (List<?>) employeePolicyDetailService.fetchPolicyData(employeeMaster.getId());
+        for (Object policyDataObject : policyData) {
+            List policyList = new ArrayList();
+            Object[] policyDetail = (Object[]) policyDataObject;
+            policyList.add(policyDetail[0]);
+            policyList.add(policyDetail[1]);
+            policyList.add(policyDetail[2]);
+            policyList.add(policyDetail[3]);
+            policyList.add(policyDetail[4]);
+            finalPolicyList.add(policyList);
+        }
+        List finalctcList = new ArrayList();
+        CtcAllowance ctcAllowance = new CtcAllowance();
+        List<?> ctcData = (List<?>) employeeCtcDetailService.fetchctcData(employeeMaster.getId());
+        for (Object ctcDataObject : ctcData) {
+            List ctcList = new ArrayList();
+            Object[] policyDetail1 = (Object[]) ctcDataObject;
+            ctcList.add(policyDetail1[0]);
+            ctcList.add(policyDetail1[1]);
+            ctcList.add(policyDetail1[2]);
+            ctcList.add(policyDetail1[3]);
+            ctcList.add(policyDetail1[4]);
+            ctcList.add(policyDetail1[5]);
+//            ctcList.add(policyDetail1[3]);
+            finalctcList.add(ctcList);
+        }
 
         List<String> certificatesList = new ArrayList();
         UserMaster userMaster1 = new UserMaster();
@@ -4089,6 +4120,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         request.setAttribute("employeeType", employeeMaster.getEmployeeType());
         request.setAttribute("shiftType", employeeMaster.getShiftType());
         request.setAttribute("certificatesList", certificatesList);
+        request.setAttribute("finalPolicyList", finalPolicyList);
+        request.setAttribute("finalctcList", finalctcList);
 
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Employee/EmployeesOwnProfile");

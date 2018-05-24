@@ -162,5 +162,6 @@
     <mapping resource="com/bul/zydex/model/EmergencyContact.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/UserRightDescription.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/Candidatef2fInterviewRating.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/EmailMetaTag.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
